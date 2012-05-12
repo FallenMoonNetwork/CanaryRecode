@@ -19,6 +19,7 @@ public class Main {
         } catch (Throwable t) {
             log.log(Level.SEVERE, null, t);
         }
+        new DeadLockDetector();
     }
 
 }
