@@ -1,15 +1,15 @@
 package net.canarymod.api.world;
 
+import net.canarymod.api.entity.IPlayer;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldServer;
 
 public class World implements IWorld {
    
     private Dimension[] dimensions;
-    
     private OWorldServer[] oDimensions;
-    
     public long[][] nanoTicks;
+    private boolean enabled;
     
     /**
      * The world name
@@ -24,7 +24,7 @@ public class World implements IWorld {
     }
     
     public OWorldServer[] getWorldArray() {
-        return oDimensions;
+        return this.oDimensions;
     }
     /**
      * Return the name of this World (WorldContainer)
@@ -32,7 +32,7 @@ public class World implements IWorld {
      */
     @Override
     public String getName() {
-        return name;
+        return this.name;
     }
     
     /**
@@ -41,7 +41,7 @@ public class World implements IWorld {
      */
     @Override
     public Dimension getNormal() {
-        return dimensions[0];
+        return this.dimensions[0];
     }
     
     /**
@@ -50,7 +50,7 @@ public class World implements IWorld {
      */
     @Override
     public Dimension getNether() {
-        return dimensions[1];
+        return this.dimensions[1];
     }
     
     /**
@@ -59,12 +59,36 @@ public class World implements IWorld {
      */
     @Override
     public Dimension getEnd() {
-        return dimensions[2];
+        return this.dimensions[2];
     }
     
     @Override
-    public void setNanoTick(int dimensionIndex, int tickIndex, long tick) {
-        nanoTicks[dimensionIndex][tickIndex] = tick;
-        
+    public IDimension getDimension(DimensionType dimension) {
+    	return this.dimensions[dimension.getIntValue()];
+    }
+    
+    @Override
+    public void setNanoTick(DimensionType dimension, int tickIndex, long tick) {
+        nanoTicks[dimension.getIntValue()][tickIndex] = tick;
+    }
+
+    @Override
+	public void setEnabled(boolean enabled) {
+    	this.enabled = enabled; // TODO: implement
+    }
+	
+    @Override
+	public boolean isEnabled() {
+    	return this.enabled;
+    }
+	
+    @Override
+	public boolean canEnterWorld(IPlayer player) {
+    	return true; // TODO: implement
+    }
+	
+    @Override
+	public boolean canLeaveWorld(IPlayer player) {
+    	return true; // TODO: implement
     }
 }

@@ -68,13 +68,13 @@ public class Block implements IBlock {
     }
 
     @Override
-    public IDimension getWorld() {
-        return dimension;
+    public IDimension getDimension() {
+        return this.dimension;
     }
 
     @Override
-    public void setWorld(IDimension world) {
-        dimension = world;
+    public void setDimension(IDimension dimension_) {
+        this.dimension = dimension_;
     }
 
     @Override

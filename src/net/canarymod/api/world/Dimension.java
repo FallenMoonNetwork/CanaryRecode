@@ -34,6 +34,12 @@ public class Dimension implements IDimension {
         chunkProvider = this.world.G.getHandler(); //get the chunk provider wrapper
         this.parent = parent;
     }
+
+    @Override
+    public IWorld getWorld() {
+    	return parent;
+    }
+    
     @Override
     public IEntityItem dropItem(int x, int y, int z, int itemId, int amount, int damage) {
         double d1 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
@@ -158,7 +164,7 @@ public class Dimension implements IDimension {
     }
 
     @Override
-    public int getMaxYHeightAt(int x, int z) {
+    public int getYHeighestBlockAt(int x, int z) {
         // TODO Auto-generated method stub
         return 0;
     }
