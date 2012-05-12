@@ -4,18 +4,14 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import net.canarymod.api.world.World;
 import net.minecraft.server.OAnvilSaveConverter;
 import net.minecraft.server.OAnvilSaveHandler;
 import net.minecraft.server.OAxisAlignedBB;
@@ -89,8 +85,6 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
    public long[] x = new long[100];
    private ORConThreadQuery I;
    private ORConThreadMain J;
-   
-   ArrayList<World> worlds = new ArrayList<World>(1);
 
 
    public OMinecraftServer() {
@@ -98,7 +92,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
       new OThreadSleepForever(this);
    }
 
-   private boolean s() throws UnknownHostException, IOException {
+   private boolean s() {
       this.A = new OConsoleCommandHandler(this);
       OThreadCommandReader var1 = new OThreadCommandReader(this);
       var1.setDaemon(true);
@@ -127,7 +121,14 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
       this.z = this.d.a("server-port", 25565);
       a.info("Starting Minecraft server on " + (this.y.length() == 0?"*":this.y) + ":" + this.z);
 
-      this.c = new ONetworkListenThread(this, var2, this.z);
+      try {
+         this.c = new ONetworkListenThread(this, var2, this.z);
+      } catch (IOException var18) {
+         a.warning("**** FAILED TO BIND TO PORT!");
+         a.log(Level.WARNING, "The exception was: " + var18.toString());
+         a.warning("Perhaps a server is already running on that port?");
+         return false;
+      }
 
       if(!this.n) {
          a.warning("**** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!");
@@ -191,21 +192,16 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
          var1.a(var2, new OConvertProgressUpdater(this));
       }
 
-      //CanaryMod do our multiworld stuff!
-//      this.e = new OWorldServer[3];
-//      this.g = new long[this.e.length][100];
-      OWorldServer[] toLoad = new OWorldServer[3];
-//      WorldContainer worldContainer = new WorldContainer(name, dimensions)
-      //CanaryMod End
+      this.e = new OWorldServer[3];
+      this.g = new long[this.e.length][100];
       int var6 = this.d.a("gamemode", 0);
       var6 = OWorldSettings.a(var6);
-      
       a.info("Default game type: " + var6);
       boolean var7 = this.d.a("generate-structures", true);
       OWorldSettings var8 = new OWorldSettings(var3, var6, var7, false, var5);
       OAnvilSaveHandler var9 = new OAnvilSaveHandler(new File("."), var2, true);
 
-      for(int var10 = 0; var10 < toLoad.length; ++var10) {
+      for(int var10 = 0; var10 < this.e.length; ++var10) {
          byte var11 = 0;
          if(var10 == 1) {
             var11 = -1;
@@ -221,15 +217,13 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             this.e[var10] = new OWorldServerMulti(this, var9, var2, var11, var8, this.e[0]);
          }
 
-         toLoad[var10].a(new OWorldManager(this, this.e[var10]));
-         toLoad[var10].q = this.d.a("difficulty", 1);
-         toLoad[var10].a(this.d.a("spawn-monsters", true), this.o);
-         toLoad[var10].s().d(var6);
-         this.h.a(toLoad);
+         this.e[var10].a(new OWorldManager(this, this.e[var10]));
+         this.e[var10].q = this.d.a("difficulty", 1);
+         this.e[var10].a(this.d.a("spawn-monsters", true), this.o);
+         this.e[var10].s().d(var6);
+         this.h.a(this.e);
       }
-      //CanaryMod put into world
-      worlds.add(new World(var2, toLoad));
-      //CanaryMod end
+
       short var23 = 196;
       long var12 = System.currentTimeMillis();
 
@@ -479,61 +473,26 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
       OVec3D.a();
       ++this.j;
 
-      /*
-       * for (Map.Entry<String, OWorldServer[]> entry : this.worlds.entrySet()) {
-            OWorldServer[] level = entry.getValue();
-
-            for (var11 = 0; var11 < level.length; ++var11) {
-                long var7 = System.nanoTime();
-
-                if (var11 == 0 || this.d.a("allow-nether", true)) {
-                    OWorldServer var9 = level[var11];
-
-                    if (this.j % 20 == 0) {
-                        this.h.a((OPacket) (new OPacket4UpdateTime(var9.o())), var9.t.g);
-                    }
-
-                    var9.h();
-
-                    while (true) {
-                        if (!var9.z()) {
-                            var9.f();
-                            break;
-                        }
-                    }
-                }
-
-                this.worldTickNanos.get(entry.getKey())[var11][this.j % 100] = System.nanoTime() - var7;
+      for(var11 = 0; var11 < this.e.length; ++var11) {
+         long var7 = System.nanoTime();
+         if(var11 == 0 || this.d.a("allow-nether", true)) {
+            OWorldServer var9 = this.e[var11];
+            if(this.j % 20 == 0) {
+               this.h.a((OPacket)(new OPacket4UpdateTime(var9.o())), var9.t.g);
             }
-        }
-       */
-      
-      for(World entry : worlds) {
-          OWorldServer[]world = entry.getWorldArray();
-          
-          for(var11 = 0; var11 < this.e.length; ++var11) {
-              long var7 = System.nanoTime();
-              if(var11 == 0 || this.d.a("allow-nether", true)) {
-                 OWorldServer var9 = world[var11];
-                 if(this.j % 20 == 0) {
-                    this.h.a((OPacket)(new OPacket4UpdateTime(var9.o())), var9.t.g);
-                 }
 
-                 var9.h();
+            var9.h();
 
-                 while(true) {
-                    if(!var9.z()) {
-                       var9.f();
-                       break;
-                    }
-                 }
-              }
-              entry.setNanoTick(var11, this.j % 100, System.nanoTime() - var7);
+            while(true) {
+               if(!var9.z()) {
+                  var9.f();
+                  break;
+               }
+            }
+         }
 
-//              this.g[var11][this.j % 100] = System.nanoTime() - var7;
-           }
+         this.g[var11][this.j % 100] = System.nanoTime() - var7;
       }
-      
 
       this.c.a();
       this.h.b();
