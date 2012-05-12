@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.canarymod.api.world.World;
+import net.canarymod.api.world.IWorld.DimensionType;
 import net.minecraft.server.OAnvilSaveConverter;
 import net.minecraft.server.OAnvilSaveHandler;
 import net.minecraft.server.OAxisAlignedBB;
@@ -528,7 +529,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                     }
                  }
               }
-              entry.setNanoTick(var11, this.j % 100, System.nanoTime() - var7);
+              entry.setNanoTick(DimensionType.getFromIntValue(var11), this.j % 100, System.nanoTime() - var7);
 
 //              this.g[var11][this.j % 100] = System.nanoTime() - var7;
            }

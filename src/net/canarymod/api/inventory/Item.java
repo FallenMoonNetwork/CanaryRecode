@@ -42,9 +42,19 @@ public class Item implements IItem {
         _damage = damage;
 
     }
+    
+    @Override
+    public int getMaxAmount() {
+    	return -1;
+    }
+    
+    @Override
+    public void setMaxAmount(int amount) {
+    	
+    }
 
     @Override
-    public void sertSlot(int slot) {
+    public void setSlot(int slot) {
         _slot = slot;
 
     }

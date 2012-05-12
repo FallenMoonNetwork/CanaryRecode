@@ -28,10 +28,25 @@ public class Chunk implements IChunk {
     }
 
     @Override
+    public void setBlockTypeAt(int x, int y, int z, int type) {
+    	// TODO Auto-generated method stub
+    }
+    
+    @Override
     public int getBlockDataAt(int x, int y, int z) {
         return _handle.c(x, y, z);
     }
 
+    @Override
+    public void setBlockDataAt(int x, int y, int z, int data) {
+    	// TODO Auto-generated method stub
+    }
+    
+    @Override
+    public int getMaxHeigth() {
+    	return 256; // TODO: configurable
+    }
+    
     @Override
     public boolean isLoaded() {
         // TODO Auto-generated method stub
@@ -39,13 +54,31 @@ public class Chunk implements IChunk {
     }
 
     @Override
-    public void regenerateChunk() {
+    public boolean load() {
         // TODO Auto-generated method stub
-
+        return false;
     }
 
     @Override
-    public IDimension getWorld() {
+    public boolean reload() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean unload() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean regenerateChunk() {
+        // TODO Auto-generated method stub
+    	return false;
+    }
+
+    @Override
+    public IDimension getDimension() {
         // TODO Auto-generated method stub
         return null;
     }
