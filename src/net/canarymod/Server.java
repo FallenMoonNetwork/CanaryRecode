@@ -1,5 +1,7 @@
 package net.canarymod;
 
+import java.util.logging.Logger;
+
 import net.canarymod.api.IServer;
 import net.canarymod.api.world.IWorldManager;
 import net.minecraft.server.OMinecraftServer;
@@ -45,10 +47,17 @@ public class Server implements IServer {
     }
     
     public IWorldManager getWorldManager() {
+        return null;
     	
     }
     
     public String handleRemoteCommand(String command) { //TODO: Rly?
     	return null;
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        
     }
 }

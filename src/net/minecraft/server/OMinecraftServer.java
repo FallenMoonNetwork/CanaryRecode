@@ -4,6 +4,7 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -92,7 +93,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
       new OThreadSleepForever(this);
    }
 
-   private boolean s() {
+   private boolean s() throws UnknownHostException {
       this.A = new OConsoleCommandHandler(this);
       OThreadCommandReader var1 = new OThreadCommandReader(this);
       var1.setDaemon(true);
