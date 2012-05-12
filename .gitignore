@@ -1,0 +1,7 @@
+*.class
+*.svn
+.svn
+.project
+.classpath
+*.jardesc
+*.jar
