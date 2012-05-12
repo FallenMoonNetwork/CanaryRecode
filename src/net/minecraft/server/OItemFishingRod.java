@@ -1,0 +1,34 @@
+package net.minecraft.server;
+
+import net.minecraft.server.OEntity;
+import net.minecraft.server.OEntityFishHook;
+import net.minecraft.server.OEntityPlayer;
+import net.minecraft.server.OItem;
+import net.minecraft.server.OItemStack;
+import net.minecraft.server.OWorld;
+
+public class OItemFishingRod extends OItem {
+
+   public OItemFishingRod(int var1) {
+      super(var1);
+      this.f(64);
+      this.e(1);
+   }
+
+   public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
+      if(var3.R != null) {
+         int var4 = var3.R.k();
+         var1.a(var4, var3);
+         var3.C_();
+      } else {
+         var2.a(var3, "random.bow", 0.5F, 0.4F / (c.nextFloat() * 0.4F + 0.8F));
+         if(!var2.F) {
+            var2.b((OEntity)(new OEntityFishHook(var2, var3)));
+         }
+
+         var3.C_();
+      }
+
+      return var1;
+   }
+}
