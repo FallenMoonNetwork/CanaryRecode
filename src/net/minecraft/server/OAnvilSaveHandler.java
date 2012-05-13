@@ -40,9 +40,7 @@ public class OAnvilSaveHandler extends OPlayerNBTManager {
       super.a(var1, var2);
    }
 
-   public void e() {
-	   System.out.println("HERE IN E, start threded file io base finish waiting");
-	   
+   public void e() {	   
 	   try {
 		   // wait for the threaded IO instance to finish
 		   OThreadedFileIOBase.a.a(); 

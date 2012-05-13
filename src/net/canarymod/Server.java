@@ -3,6 +3,7 @@ package net.canarymod;
 import java.util.logging.Logger;
 
 import net.canarymod.api.IServer;
+import net.canarymod.api.entity.IPlayer;
 import net.canarymod.api.world.IWorldManager;
 import net.minecraft.server.OMinecraftServer;
 
@@ -56,8 +57,26 @@ public class Server implements IServer {
     }
 
     @Override
-    public void run() {
+    public void consoleCommand(String command) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public void consoleCommand(String command, IPlayer player) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTimer(String uniqueName, int time) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public boolean isTimerExpired(String uniqueName) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }
