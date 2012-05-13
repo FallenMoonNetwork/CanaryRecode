@@ -34,14 +34,24 @@ public class OAnvilSaveHandler extends OPlayerNBTManager {
       }
    }
 
+   // save world info and the player
    public void a(OWorldInfo var1, List var2) {
       var1.a(19133);
       super.a(var1, var2);
    }
 
    public void e() {
-      OThreadedFileIOBase.a.a();
-
+	   System.out.println("HERE IN E, start threded file io base finish waiting");
+	   
+	   try {
+		   // wait for the threaded IO instance to finish
+		   OThreadedFileIOBase.a.a(); 
+	   }
+	   catch(InterruptedException e) {
+		   e.printStackTrace();
+	   }
+	   
+     // clear the region file references
       ORegionFileCache.a();
    }
 }

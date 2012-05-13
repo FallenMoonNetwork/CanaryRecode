@@ -36,7 +36,7 @@ public class ORegionFile {
             this.h = var1.lastModified();
          }
 
-         this.c = new RandomAccessFile(var1, "net/minecraft/server/OBlockSilverfish");
+         this.c = new RandomAccessFile(var1, "rw");
          int var2;
          if(this.c.length() < 4096L) {
             for(var2 = 0; var2 < 1024; ++var2) {

@@ -187,6 +187,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
       return true;
    }
 
+   // CanaryMod desc: initWorld
    private void a(OISaveFormat var1, String var2, long var3, OEnumWorldType var5) {
       if(var1.a(var2)) {
          a.info("Converting map!");
@@ -195,10 +196,10 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
       this.e = new OWorldServer[3];
       this.g = new long[this.e.length][100];
-      int var6 = this.d.a("gamemode", 0);
+      int var6 = this.d.a("gamemode", 0); // get int property
       var6 = OWorldSettings.a(var6);
       a.info("Default game type: " + var6);
-      boolean var7 = this.d.a("generate-structures", true);
+      boolean var7 = this.d.a("generate-structures", true); // get boolean property
       OWorldSettings var8 = new OWorldSettings(var3, var6, var7, false, var5);
       OAnvilSaveHandler var9 = new OAnvilSaveHandler(new File("."), var2, true);
 
@@ -219,8 +220,8 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
          }
 
          this.e[var10].a(new OWorldManager(this, this.e[var10]));
-         this.e[var10].q = this.d.a("difficulty", 1);
-         this.e[var10].a(this.d.a("spawn-monsters", true), this.o);
+         this.e[var10].q = this.d.a("difficulty", 1); // get int property
+         this.e[var10].a(this.d.a("spawn-monsters", true), this.o); // get boolean property
          this.e[var10].s().d(var6);
          this.h.a(this.e);
       }
@@ -228,6 +229,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
       short var23 = 196;
       long var12 = System.currentTimeMillis();
 
+      // var14 is level: dimension. 0 = overworld.
       for(int var14 = 0; var14 < 1; ++var14) {
          a.info("Preparing start region for level " + var14);
          OWorldServer var15 = this.e[var14];
@@ -243,15 +245,15 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                if(var19 > var12 + 1000L) {
                   int var21 = (var23 * 2 + 1) * (var23 * 2 + 1);
                   int var22 = (var17 + var23) * (var23 * 2 + 1) + var18 + 1;
-                  this.b("Preparing spawn area", var22 * 100 / var21);
+                  this.b("Preparing spawn area", var22 * 100 / var21); // print the percentage
                   var12 = var19;
                }
 
+               // loads the spawn chunk
                var15.G.c(var16.a + var17 >> 4, var16.c + var18 >> 4);
 
-               while(var15.z() && this.B) {
-                  ;
-               }
+               // updates all lighting, unless the server stops
+               while(var15.z() && this.B);
             }
          }
       }
@@ -275,25 +277,27 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
       for(int var1 = 0; var1 < this.e.length; ++var1) {
          OWorldServer var2 = this.e[var1];
+
+         // saves the world
          var2.a(true, (OIProgressUpdate)null);
          var2.A();
       }
-
    }
 
    private void v() {
       a.info("Stopping server");
       if(this.h != null) {
+    	  // save the player states
          this.h.g();
       }
 
+      // for each world
       for(int var1 = 0; var1 < this.e.length; ++var1) {
          OWorldServer var2 = this.e[var1];
          if(var2 != null) {
-            this.u();
+            this.u(); // save server world
          }
       }
-
    }
 
    public void a() {

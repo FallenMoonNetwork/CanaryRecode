@@ -145,17 +145,23 @@ public class OChunkProvider implements OIChunkProvider {
       for(int var4 = 0; var4 < this.f.size(); ++var4) {
          OChunk var5 = (OChunk)this.f.get(var4);
          if(var1) {
+        	 // also save extra chunk data
             this.a(var5);
          }
 
-         if(var5.a(var1)) {
-            this.b(var5);
-            var5.l = false;
-            ++var3;
-            if(var3 == 24 && !var1) {
-               return false;
-            }
-         }
+         // no extra saving needed
+         if(!var5.a(var1))
+        	 continue;
+         
+         // save chunk data
+        this.b(var5);
+
+        var5.l = false;
+        ++var3;
+        if(var3 == 24 && !var1) {
+           return false;
+        }
+         
       }
 
       if(var1) {
@@ -163,6 +169,7 @@ public class OChunkProvider implements OIChunkProvider {
             return true;
          }
 
+         // save extra data
          this.d.b();
       }
 

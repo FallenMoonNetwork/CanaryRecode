@@ -218,20 +218,29 @@ public class OWorld implements OIBlockAccess {
    }
 
    public void a(boolean var1, OIProgressUpdate var2) {
-      if(this.v.b()) {
-         if(var2 != null) {
-            var2.a("Saving level");
-         }
-
-         this.A();
-         if(var2 != null) {
-            var2.b("Saving chunks");
-         }
-
-         this.v.a(var1, var2);
+	   // chunkprovider can't save
+      if(!this.v.b()) {
+    	  return;
       }
+      
+      // update the progress updater if available
+     if(var2 != null) {
+        var2.a("Saving level");
+     }
+
+     // save the level
+     this.A();
+     
+     // update the progress updater if available
+     if(var2 != null) {
+        var2.b("Saving chunks");
+     }
+
+     // save the chunks using the chunk provider
+     this.v.a(var1, var2);
    }
 
+   // save level (is dimension)
    private void A() {
       this.m();
       this.w.a(this.x, this.d);
