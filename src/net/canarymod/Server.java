@@ -56,25 +56,21 @@ public class Server implements IServer {
     	return null;
     }
 
-    @Override
     public void consoleCommand(String command) {
         // TODO Auto-generated method stub
         
     }
 
-    @Override
     public void consoleCommand(String command, IPlayer player) {
         // TODO Auto-generated method stub
         
     }
 
-    @Override
     public void setTimer(String uniqueName, int time) {
         // TODO Auto-generated method stub
         
     }
 
-    @Override
     public boolean isTimerExpired(String uniqueName) {
         // TODO Auto-generated method stub
         return false;

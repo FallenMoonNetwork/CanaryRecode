@@ -91,4 +91,16 @@ public class World implements IWorld {
 	public boolean canLeaveWorld(IPlayer player) {
     	return true; // TODO: implement
     }
+
+	@Override
+	public IPlayer matchPlayer(String player) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IPlayer getPlayer(String player) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
