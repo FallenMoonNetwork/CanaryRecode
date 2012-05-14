@@ -13,7 +13,6 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         try {
             OMinecraftServer.main(args);
         } catch (Throwable t) {
