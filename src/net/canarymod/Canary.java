@@ -2,17 +2,18 @@ package net.canarymod;
 
 import net.canarymod.backbone.IBackbone;
 import net.canarymod.backbone.IBackbone.System;
+import net.canarymod.config.Configuration;
 public class Canary extends ICanary {
 
     private static Canary instance;
     
     /**
      * Private Canary Constructor to prevent more than once instance
-     * TODO: This needs Configuration information in order to load 
-     * the respective backbones
+     * TODO: add subsystem inits
+     * and the respective backbones
      */
     private Canary() {
-        //this.banManager = new BanManager(bone, type) <- see here. Needs the backbone
+        this.configuration = new Configuration();
     }
     /**
      * Get a Canary which contains access to all relevant subsystems
