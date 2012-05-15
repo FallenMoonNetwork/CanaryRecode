@@ -53,6 +53,9 @@ public class DatabaseFlatfile implements IDatabase {
 	
 	public void save() {
 		
+		// Write out the files... just save all tables
+		for(DatabaseTableFlatfile t : this.tables.values())
+			t.save();
 	}
 	
 	/**
@@ -84,9 +87,16 @@ public class DatabaseFlatfile implements IDatabase {
 	}
 
 	@Override
-	public void addTable(IDatabaseTable table) {
-		// TODO wut?
+	public boolean addTable(IDatabaseTable table) {
+		if(this.tables.containsKey(table.getName()))
+			return false;
+
+		// Just add the table, and save it
 		this.tables.put(table.getName().toLowerCase(), (DatabaseTableFlatfile)table);
+		
+		this.save();
+		
+		return true;
 	}
 
 	@Override
@@ -127,10 +137,10 @@ public class DatabaseFlatfile implements IDatabase {
 	
 	@Override
 	public String getStringValue(String path) {
-		String[] components = path.split(".");
+		String[] components = path.split("\\.");
 		if(components.length != 3)
 			return null;
-		
+
 		String[] values = this.resolvePath(components);
 		int index;
 		try {
@@ -141,10 +151,10 @@ public class DatabaseFlatfile implements IDatabase {
 			return null;
 		}
 		
-		if(index >= values.length)
+		if(index < 1 || index > values.length)
 			return null;
 		
-		return values[index];
+		return values[index-1];
 	}
 
 	@Override
@@ -158,74 +168,209 @@ public class DatabaseFlatfile implements IDatabase {
 
 	@Override
 	public int getIntValue(String path) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sval = this.getStringValue(path);
+		if(sval == null)
+			return Integer.MAX_VALUE;
+		
+		try {
+			return Integer.parseInt(sval);
+		}
+		catch(NumberFormatException e) {
+			log.warning("A NumberFormatException occurred in database-path: "+path);
+			return Integer.MAX_VALUE;
+		}
 	}
 
 	@Override
 	public int[] getIntValues(String path) {
-		// TODO Auto-generated method stub
-		return null;
+		String[] svals = this.getStringValues(path);
+		if(svals == null)
+			return null;
+		
+		int[] ret = new int[svals.length];
+		try {
+			
+			for(int i = 0; i < svals.length; i++)
+				ret[i] = Integer.parseInt(svals[i]);
+		}
+		catch(NumberFormatException e) {
+			log.warning("A NumberFormatException occurred in database-path: "+path);
+			return null;
+		}
+		
+		return ret;
 	}
 
 	@Override
 	public float getFloatValue(String path) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sval = this.getStringValue(path);
+		if(sval == null)
+			return Float.MAX_VALUE;
+		
+		try {
+			return Float.parseFloat(sval);
+		}
+		catch(NumberFormatException e) {
+			log.warning("A NumberFormatException occurred in database-path: "+path);
+			return Float.MAX_VALUE;
+		}
 	}
 
 	@Override
 	public float[] getFloatValues(String path) {
-		// TODO Auto-generated method stub
-		return null;
+		String[] svals = this.getStringValues(path);
+		if(svals == null)
+			return null;
+		
+		float[] ret = new float[svals.length];
+		try {
+			
+			for(int i = 0; i < svals.length; i++)
+				ret[i] = Float.parseFloat(svals[i]);
+		}
+		catch(NumberFormatException e) {
+			log.warning("A NumberFormatException occurred in database-path: "+path);
+			return null;
+		}
+		
+		return ret;
 	}
 
 	@Override
 	public double getDoubleValue(String path) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sval = this.getStringValue(path);
+		if(sval == null)
+			return Double.MAX_VALUE;
+		
+		try {
+			return Double.parseDouble(sval);
+		}
+		catch(NumberFormatException e) {
+			log.warning("A NumberFormatException occurred in database-path: "+path);
+			return Double.MAX_VALUE;
+		}
 	}
 
 	@Override
 	public double[] getDoubleValues(String path) {
-		// TODO Auto-generated method stub
-		return null;
+		String[] svals = this.getStringValues(path);
+		if(svals == null)
+			return null;
+		
+		double[] ret = new double[svals.length];
+		try {
+			
+			for(int i = 0; i < svals.length; i++)
+				ret[i] = Double.parseDouble(svals[i]);
+		}
+		catch(NumberFormatException e) {
+			log.warning("A NumberFormatException occurred in database-path: "+path);
+			return null;
+		}
+		
+		return ret;
 	}
 
 	@Override
 	public boolean getBooleanValue(String path) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getBooleanValue(path, false);
+	}
+	
+	@Override
+	public boolean getBooleanValue(String path, boolean defaults) {
+		String sval = this.getStringValue(path);
+		if(sval == null)
+			return defaults;
+		
+		try {
+			return Boolean.parseBoolean(sval);
+		}
+		catch(NumberFormatException e) {
+			log.warning("A NumberFormatException occurred in database-path: "+path);
+			return defaults;
+		}
 	}
 
 	@Override
 	public boolean[] getBooleanValues(String path) {
-		// TODO Auto-generated method stub
-		return null;
+		String[] svals = this.getStringValues(path);
+		if(svals == null)
+			return null;
+		
+		boolean[] ret = new boolean[svals.length];
+		try {
+			
+			for(int i = 0; i < svals.length; i++)
+				ret[i] = Boolean.parseBoolean(svals[i]);
+		}
+		catch(NumberFormatException e) {
+			log.warning("A NumberFormatException occurred in database-path: "+path);
+			return null;
+		}
+		
+		return ret;
 	}
 
 	@Override
 	public long getLongValue(String path) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sval = this.getStringValue(path);
+		if(sval == null)
+			return Long.MAX_VALUE;
+		
+		try {
+			return Long.parseLong(sval);
+		}
+		catch(NumberFormatException e) {
+			log.warning("A NumberFormatException occurred in database-path: "+path);
+			return Long.MAX_VALUE;
+		}
 	}
 
 	@Override
 	public long[] getLongValues(String path) {
-		// TODO Auto-generated method stub
-		return null;
+		String[] svals = this.getStringValues(path);
+		if(svals == null)
+			return null;
+		
+		long[] ret = new long[svals.length];
+		try {
+			
+			for(int i = 0; i < svals.length; i++)
+				ret[i] = Long.parseLong(svals[i]);
+		}
+		catch(NumberFormatException e) {
+			log.warning("A NumberFormatException occurred in database-path: "+path);
+			return null;
+		}
+		
+		return ret;
 	}
 
 	@Override
 	public Character getCharacterValue(String path) {
-		// TODO Auto-generated method stub
+		String sval = this.getStringValue(path);
+		if(sval != null && sval.length() > 0){
+            return sval.charAt(0);
+        }
 		return null;
 	}
 
 	@Override
 	public Character[] getCharacterValues(String path) {
-		// TODO Auto-generated method stub
-		return null;
+		String[] svals = this.getStringValues(path);
+		if(svals == null)
+			return null;
+		
+		Character[] ret = new Character[svals.length];
+		
+		for(int i = 0; i < svals.length; i++) {
+			if(svals[i].length() > 0)
+				ret[i] = svals[i].charAt(0);
+			else
+				return null;
+		}
+	
+		return ret;
 	}
 
 }
