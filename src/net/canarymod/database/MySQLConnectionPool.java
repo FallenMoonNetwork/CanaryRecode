@@ -61,7 +61,7 @@ public class MySQLConnectionPool {
     public static MySQLConnectionPool getInstance() {
         if(instance == null) {
             ConfigurationFile sql = Canary.get().getConfiguration().getServerConfig(); //TODO: Add mysql connection cfg
-            instance = new MysqlConnectionPool(sql.getString("db", "jdbc:mysql://localhost:3306/minecraft"), sql.getString("user", "root"), sql.getString("pass", "root"), 5);
+            instance = new MySQLConnectionPool(sql.getString("db", "jdbc:mysql://localhost:3306/minecraft"), sql.getString("user", "root"), sql.getString("pass", "root"), 5);
         }
         return instance;
     }

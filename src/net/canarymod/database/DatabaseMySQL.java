@@ -8,7 +8,7 @@ public class DatabaseMySQL implements IDatabase {
     private MySQLConnectionPool connectionPool;
     
     public DatabaseMySQL() {
-        connectionPool = MysqlConnectionPool.getInstance();
+        connectionPool = MySQLConnectionPool.getInstance();
     }
     @Override
     public int getNumTables() {
