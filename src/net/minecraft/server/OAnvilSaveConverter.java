@@ -49,6 +49,7 @@ public class OAnvilSaveConverter extends OSaveFormatOld {
       ArrayList var3 = new ArrayList();
       ArrayList var4 = new ArrayList();
       ArrayList var5 = new ArrayList();
+      // CanaryMod note: var6 is the parent, the world folder.
       File var6 = new File(this.a, var1);
       File var7 = new File(var6, "DIM-1");
       File var8 = new File(var6, "DIM1");

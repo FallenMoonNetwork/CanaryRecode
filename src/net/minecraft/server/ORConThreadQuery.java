@@ -41,7 +41,7 @@ public class ORConThreadQuery extends ORConThreadBase {
 
    public ORConThreadQuery(OIServer var1) {
       super(var1);
-      this.h = var1.a("query.port", 0);
+      this.h = var1.a("query.port", 0); // CanaryMod note: gets query.port from properties
       this.r = var1.f();
       this.i = var1.g();
       this.k = var1.h();

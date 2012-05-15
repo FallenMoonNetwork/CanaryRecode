@@ -35,6 +35,7 @@ public class OConsoleCommandHandler {
       String var5 = var2.substring(var4.length()).trim();
       OICommandListener var6 = var1.b;
       String var7 = var6.d();
+      // CanaryMod note: reference to configuration manager
       OServerConfigurationManager var8 = this.b.h;
       if(!var4.equalsIgnoreCase("help") && !var4.equalsIgnoreCase("?")) {
          if(var4.equalsIgnoreCase("list")) {
@@ -295,10 +296,10 @@ public class OConsoleCommandHandler {
          String var5 = var4[1].toLowerCase();
          if("net/minecraft/server/OEnchantment".equals(var5)) {
             this.a(var1, "Turned on white-listing");
-            this.b.d.b("white-list", true);
+            this.b.d.b("white-list", true); // CanaryMod note: sets the white-list property to false
          } else if("off".equals(var5)) {
             this.a(var1, "Turned off white-listing");
-            this.b.d.b("white-list", false);
+            this.b.d.b("white-list", false); // CanaryMod note: sets the white-list property to false
          } else if("list".equals(var5)) {
             Set var6 = this.b.h.h();
             String var7 = "";

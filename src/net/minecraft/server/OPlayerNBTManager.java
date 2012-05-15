@@ -33,6 +33,8 @@ public class OPlayerNBTManager implements OIPlayerFileData, OISaveHandler {
 
    public OPlayerNBTManager(File var1, String var2, boolean var3) {
       super();
+      // CanaryMod note: this.b is world folder
+      // In vanilla, var2 = world name?, var1 = root folder?
       this.b = new File(var1, var2);
       this.b.mkdirs();
       this.c = new File(this.b, "players");
@@ -69,6 +71,7 @@ public class OPlayerNBTManager implements OIPlayerFileData, OISaveHandler {
       }
    }
 
+   // CanaryMod note: returns the world folder as File
    protected File a() {
       return this.b;
    }

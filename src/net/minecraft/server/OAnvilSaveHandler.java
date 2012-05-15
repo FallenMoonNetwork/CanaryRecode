@@ -19,6 +19,7 @@ public class OAnvilSaveHandler extends OPlayerNBTManager {
    }
 
    public OIChunkLoader a(OWorldProvider var1) {
+	   // CanaryMod note: this.a() is world folder as File
       File var2 = this.a();
       File var3;
       if(var1 instanceof OWorldProviderHell) {
