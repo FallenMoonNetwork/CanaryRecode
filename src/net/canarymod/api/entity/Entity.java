@@ -4,6 +4,8 @@ import net.canarymod.api.world.IDimension;
 import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.position.Location;
 import net.minecraft.server.OEntity;
+import net.minecraft.server.OEntityItem;
+import net.minecraft.server.OEntityLiving;
 
 public class Entity implements IEntity {
 
@@ -57,35 +59,35 @@ public class Entity implements IEntity {
 
     @Override
     public void setX(double x) {
-        teleportTo(x, getY(), getZ(), getPitch(), getRotation());
+        this.entity.bm = x;
     }
 
     @Override
     public void setX(int x) {
-        setX((double)x);
+        this.entity.bm = x;
 
     }
 
     @Override
     public void setY(double y) {
-        teleportTo(getX(), y, getZ(), getPitch(), getRotation());
+        this.entity.bn = y;
 
     }
 
     @Override
     public void setY(int y) {
-        setY((double)y);
+        this.entity.bn = y;
 
     }
 
     @Override
     public void setZ(double z) {
-        teleportTo(getX(), getY(), z, getPitch(), getRotation());
+        this.entity.bo = z;
     }
 
     @Override
     public void setZ(int z) {
-        setZ((double)z);
+        this.entity.bo = z;
     }
 
     @Override
@@ -108,13 +110,13 @@ public class Entity implements IEntity {
 
     @Override
     public void setPitch(float pitch) {
-        teleportTo(getX(), getY(), getZ(), pitch, getRotation());
+        entity.br = pitch;
 
     }
 
     @Override
     public void setRotation(float rotation) {
-        teleportTo(getX(), getY(), getZ(), getPitch(), rotation);
+        entity.bt = rotation;
 
     }
 
@@ -130,76 +132,49 @@ public class Entity implements IEntity {
     }
 
     @Override
-    public boolean isSprinting() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public void setAirTicks(int ticks) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public int getAirTicks() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
     public void setFireTicks(int ticks) {
-        // TODO Auto-generated method stub
+        this.entity.c = ticks;
 
+    }
+    
+    @Override
+    public int getFireTicks() {
+        return this.entity.c;
     }
 
     @Override
     public boolean isLiving() {
-        // TODO Auto-generated method stub
-        return false;
+        return entity instanceof OEntityLiving;
     }
 
     @Override
     public boolean isItem() {
-        // TODO Auto-generated method stub
-        return false;
+        return entity instanceof OEntityItem;
     }
 
     @Override
-    public void dropLoot() {
-        // TODO Auto-generated method stub
-
+    public EntityItem dropLoot(int itemId, int amount) {
+        return new EntityItem(entity.b(itemId, amount));
     }
 
     @Override
-    public void teleportTo(double x, double y, double z) {
-        // TODO Auto-generated method stub
-        
+    public boolean isSprinting() {
+        return entity.aZ();
     }
 
     @Override
-    public void teleportTo(double x, double y, double z, IDimension dim) {
-        // TODO Auto-generated method stub
-        
+    public void setSprinting(boolean sprinting) {
+        entity.h(sprinting);
     }
 
     @Override
-    public void teleportTo(double x, double y, double z, float pitch,
-            float rotation, IDimension dim) {
-        // TODO Auto-generated method stub
-        
+    public boolean isSneaking() {
+        return entity.aY();
     }
 
     @Override
-    public void teleportTo(double x, double y, double z, float pitch,
-            float rotation) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void teleportTo(Location location) {
-        // TODO Auto-generated method stub
+    public void setSneaking(boolean sneaking) {
+        entity.g(sneaking);
         
     }
 

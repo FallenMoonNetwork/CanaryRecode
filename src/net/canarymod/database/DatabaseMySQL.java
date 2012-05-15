@@ -1,15 +1,6 @@
 package net.canarymod.database;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 public class DatabaseMySQL implements IDatabase {
 
-    private MySQLConnectionPool connectionPool;
-    
-    public DatabaseMySQL() {
-        connectionPool = MySQLConnectionPool.getInstance();
-    }
     @Override
     public int getNumTables() {
         // TODO Auto-generated method stub
@@ -31,13 +22,13 @@ public class DatabaseMySQL implements IDatabase {
     @Override
     public boolean addTable(IDatabaseTable table) {
         // TODO Auto-generated method stub
-    	return false;
+        return false;
     }
 
     @Override
     public void removeTable(String name) {
         // TODO Auto-generated method stub
-
+        
     }
 
     @Override
@@ -89,13 +80,13 @@ public class DatabaseMySQL implements IDatabase {
     }
 
     @Override
-    public boolean getBooleanValue(String path) {
+    public boolean getBooleanValue(String path, boolean defaults) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean getBooleanValue(String path, boolean defaults) {
+    public boolean getBooleanValue(String path) {
         // TODO Auto-generated method stub
         return false;
     }
@@ -130,15 +121,4 @@ public class DatabaseMySQL implements IDatabase {
         return null;
     }
     
-    private PreparedStatement convertPathToSelectQuery(String path) throws SQLException {
-        //XXX convert any column name to uppercase and tablename to lowercase
-        String[] elements = path.split(".");
-        //Syntaxexceptio here
-        PreparedStatement ps = connectionPool.getConnection().prepareStatement("SELECT ? FROM ?");
-        ps.setString(2, elements[0].toLowerCase());
-        ps.setString(1, elements[1].toUpperCase());
-        return ps;
-        
-    }
-
 }

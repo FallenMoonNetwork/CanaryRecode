@@ -38,14 +38,30 @@ public abstract class OEntity {
    public double bj;
    public double bk;
    public double bl;
-   public double bm;
-   public double bn;
-   public double bo;
+   /**
+    * X pos
+    */
+   public double bm; //X
+   /**
+    * Y pos
+    */
+   public double bn; //Y
+   /**
+    * Z pos
+    */
+   public double bo; //Z
    public double bp;
    public double bq;
    public double br;
+   /**
+    * Pitch
+    */
    public float bs;
+   /**
+    * Rotation
+    */
    public float bt;
+   
    public float bu;
    public float bv;
    public final OAxisAlignedBB bw;
@@ -74,7 +90,7 @@ public abstract class OEntity {
    protected Random bS;
    public int bT;
    public int bU;
-   private int c;
+   public int c; //CanaryMod protected -> public
    protected boolean bV;
    public int bW;
    private boolean d;
@@ -890,6 +906,12 @@ public abstract class OEntity {
       return var2;
    }
 
+   /**
+    * CanaryMod: This method makes the entity drop the specified item with amount
+    * @param var1 item id
+    * @param var2 amount
+    * @return
+    */
    public OEntityItem b(int var1, int var2) {
       return this.a(var1, var2, 0.0F);
    }
