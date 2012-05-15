@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
 import java.util.Random;
+
+import net.canarymod.api.entity.BaseItem;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityLiving;
@@ -211,6 +213,7 @@ public class OItem {
    private OItem b = null;
    private String bU = null;
    private String bV;
+   private BaseItem baseItem;
 
 
    protected OItem(int var1) {
@@ -221,8 +224,16 @@ public class OItem {
       }
 
       d[256 + var1] = this;
+      this.baseItem = new BaseItem(this);
    }
 
+   /**
+    * CanaryMod: Get BaseItem handler
+    * @return
+    */
+   public BaseItem getBaseItem() {
+       return this.baseItem;
+   }
    public OItem d(int var1) {
       this.bR = var1;
       return this;
@@ -275,7 +286,8 @@ public class OItem {
       return this.a;
    }
 
-   protected OItem f(int var1) {
+   //CanaryMod protected -> Public
+   public OItem f(int var1) {
       this.a = var1;
       return this;
    }

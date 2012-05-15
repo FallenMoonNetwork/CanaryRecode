@@ -1,51 +1,52 @@
 package net.canarymod.api.inventory;
 
 import net.canarymod.api.IEnchantment;
-
+import net.minecraft.server.OItemStack;
+//TODO Correctly implement this
 public class Item implements IItem {
 
-    private ItemType _type;
+    private ItemType type;
+    private int slot = -1;
+    private OItemStack item;
     
-    private int _damage;
-    
-    private int _amount;
-    
-    private int _slot;
-    
+    public Item(OItemStack oItemStack) {
+        type = ItemType.fromId(oItemStack.c);
+    }
+
     @Override
     public int getId() {
-        return _type.getId();
+        return type.getId();
     }
 
     @Override
     public int getDamage() {
-        return _damage;
+        return item.g();
     }
 
     @Override
     public int getAmount() {
-        return _amount;
+        return item.a;
     }
 
     @Override
     public int getSlot() {
-        return _slot;
+        return slot;
     }
 
     @Override
     public void setAmount(int amount) {
-        _amount = amount;
+        item.a = amount;
     }
 
     @Override
     public void setDamage(int damage) {
-        _damage = damage;
+        item.b(damage);
 
     }
     
     @Override
     public int getMaxAmount() {
-    	return -1;
+    	return item.getBaseItem().getMaxStackSize();
     }
     
     @Override
@@ -55,7 +56,7 @@ public class Item implements IItem {
 
     @Override
     public void setSlot(int slot) {
-        _slot = slot;
+        this.slot = slot;
 
     }
 
@@ -117,6 +118,11 @@ public class Item implements IItem {
     public void removeAllEnchantments() {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public IBaseItem getBaseItem() {
+        return item.getBaseItem();
     }
 
 }

@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.BaseItem;
+import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEnchantment;
 import net.minecraft.server.OEnchantmentHelper;
@@ -16,11 +18,27 @@ import net.minecraft.server.OWorld;
 
 public final class OItemStack {
 
+    /**
+     * Stack size
+     */
    public int a;
+   /**
+    * Animation ticks to go
+    */
    public int b;
+   /**
+    * Item ID
+    */
    public int c;
    public ONBTTagCompound d;
+   
+   /**
+    * DamageValue
+    */
    private int e;
+   
+   //CanaryMod itemstack Handler
+   private Item itemStack;
 
 
    public OItemStack(OBlock var1) {
@@ -53,6 +71,7 @@ public final class OItemStack {
       this.c = var1;
       this.a = var2;
       this.e = var3;
+      this.itemStack = new Item(this);
    }
 
    public static OItemStack a(ONBTTagCompound var0) {
@@ -76,6 +95,20 @@ public final class OItemStack {
       return var2;
    }
 
+   //CanaryMod start
+   /**
+    * Get the CanaryMod item handler
+    * @return
+    */
+   public Item getItem() {
+       return itemStack;
+   }
+   
+   public BaseItem getBaseItem() {
+      return this.a().getBaseItem();
+   }
+   //CanaryMod end
+   
    public OItem a() {
       return OItem.d[this.c];
    }

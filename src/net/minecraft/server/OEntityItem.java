@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.EntityItem;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
@@ -18,9 +19,14 @@ public class OEntityItem extends OEntity {
 
    public OItemStack a;
    public int b = 0;
+   /**
+    * Items age
+    */
    public int c;
    private int e = 5;
    public float d = (float)(Math.random() * 3.141592653589793D * 2.0D);
+   //CanaryMod Item handler
+   private EntityItem item;
 
 
    public OEntityItem(OWorld var1, double var2, double var4, double var6, OItemStack var8) {
@@ -33,8 +39,27 @@ public class OEntityItem extends OEntity {
       this.bp = (double)((float)(Math.random() * 0.20000000298023224D - 0.10000000149011612D));
       this.bq = 0.20000000298023224D;
       this.br = (double)((float)(Math.random() * 0.20000000298023224D - 0.10000000149011612D));
+      this.item = new EntityItem(this);
    }
 
+   // CanaryMod start
+   /**
+    * Return the CanaryMod handler for this item
+    * @return
+    */
+   public EntityItem getItem() {
+       return item;
+   }
+   
+   /**
+    * Get this itemStack
+    * @return
+    */
+   public OItemStack getItemStack() {
+       return a;
+   }
+   //CanaryMod end
+   
    protected boolean g_() {
       return false;
    }

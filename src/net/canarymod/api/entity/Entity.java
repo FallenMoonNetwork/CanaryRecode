@@ -9,8 +9,8 @@ import net.minecraft.server.OEntityLiving;
 
 public class Entity implements IEntity {
 
-    private OEntity entity;
-    private Dimension world;
+    protected OEntity entity;
+    protected Dimension world;
     
     public Entity(OEntity entity) {
         this.entity = entity;

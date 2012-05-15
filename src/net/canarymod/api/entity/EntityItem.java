@@ -1,24 +1,28 @@
 package net.canarymod.api.entity;
 
+import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OEntity;
+import net.minecraft.server.OEntityItem;
 
 public class EntityItem extends Entity implements IEntityItem {
 
     public EntityItem(OEntity entity) {
         super(entity);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public void setAge(int age) {
-        // TODO Auto-generated method stub
-        
+        ((OEntityItem)entity).c = age;
     }
 
     @Override
     public int getAge() {
-        // TODO Auto-generated method stub
-        return 0;
+        return ((OEntityItem)entity).c;
+    }
+
+    @Override
+    public Item getItem() {
+        return ((OEntityItem)entity).getItemStack().getItem();
     }
 
 }
