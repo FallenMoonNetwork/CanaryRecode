@@ -1,11 +1,12 @@
 package net.canarymod.database;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.logging.Logger;
 
 /**
@@ -121,8 +122,54 @@ public class DatabaseTableFlatfile implements IDatabaseTable {
 		// TODO implement
 	}
 	
+	// TODO optimize saving rows by finding the line (desc-lines + 2 + row) and overwriting it
+	public void saveRow(DatabaseRowFlatfile row) {
+		this.save();
+	}
+	
 	public void save() {
-		// TODO implement
+		
+		try {
+			// Trash the files
+			this.tableFile.delete();
+			this.tableFile = new File("db/"+this.name+".txt");
+			
+			BufferedWriter out = new BufferedWriter(new FileWriter(this.tableFile, true));
+			
+			// Write the description
+			out.write("# "+this.description);
+			out.newLine();
+			
+			// Write table column names
+			out.write("##");
+			for(int i = 0; i < this.columnNames.size(); i++) {
+				String cn = this.columnNames.get(i);
+				out.write(((i == 0)?"":"::")+cn);
+			}
+			out.newLine();
+			
+			// Write table column types
+			out.write("##");
+			for(int i = 0; i < this.columnTypes.size(); i++) {
+				String cn = this.columnTypes.get(i);
+				out.write(((i == 0)?"":"::")+cn);
+			}
+			out.newLine();
+			
+			// Write rows
+			for(DatabaseRowFlatfile r : this.rows) {
+				for(int i = 0; i < r.cells.size(); i++) {
+					String cn = r.cells.get(i);
+					out.write(((i == 0)?"":"::")+cn);
+				}
+				out.newLine();
+			}
+			
+			out.close();
+		}
+		catch(IOException e) {
+			log.warning("An IOException occurred in table-file: '"+this.tableFile.getPath()+"'");
+		}
 	}
 	
 	@Override
@@ -133,6 +180,7 @@ public class DatabaseTableFlatfile implements IDatabaseTable {
 	@Override
 	public void setName(String name) {
 		this.tableFile.renameTo(new File("db/"+name+".txt"));
+		this.database.tableRenamed(this.name, name);
 		this.name = name;
 	}
 
@@ -141,33 +189,56 @@ public class DatabaseTableFlatfile implements IDatabaseTable {
 		return this.description;
 	}
 
+	
 	@Override
 	public void setDescription(String description) {
 		this.description = description;
 		this.save();
 	}
 
+	
 	@Override
 	public int getNumRows() {
 		return this.rows.size();
 	}
 
+	
 	@Override
 	public IDatabaseRow getRow(int row) {
 		return this.rows.get(row-1);
 	}
+	
 
 	@Override
 	public IDatabaseRow[] getAllRows() {
 		IDatabaseRow[] t = {};
 		return this.rows.toArray(t);
 	}
+	
 
 	@Override
 	public IDatabaseRow[] getFilteredRows(String column, String value) {
-		// TODO Auto-generated method stub
-		return null;
+		// Find the column to check
+		int position = this.getColumnPosition(column);
+		if(position == -1)
+			return null;
+		
+		// Find and store the rows
+		ArrayList<IDatabaseRow> ret = new ArrayList<IDatabaseRow>();
+		IDatabaseRow[] retType = {};
+		
+		for(DatabaseRowFlatfile row : this.rows) {
+			if(row.cells.get(position).equals(value))
+				ret.add(row);
+		}
+		
+		// With no items, return no empty array but return null
+		if(ret.size() == 0)
+			return null;
+		
+		return ret.toArray(retType);
 	}
+	
 
 	@Override
 	public IDatabaseRow addRow() {
@@ -175,47 +246,93 @@ public class DatabaseTableFlatfile implements IDatabaseTable {
 		this.rows.add(newRow);
 		return newRow;
 	}
+	
 
 	@Override
 	public void removeRow(IDatabaseRow row) {
 		if(this.rows.remove(row))
 			this.save();
 	}
+	
 
 	@Override
 	public void removeRow(int row) {
-		// TODO Auto-generated method stub
-		if(row >= this.rows.size())
+		if(row < 1 || row > this.rows.size())
 			return;
-		this.rows.remove(row);
+		this.rows.remove(row-1);
 		this.save();
 	}
+	
 
 	public int getColumnPosition(String column) {
 		return this.columnNames.indexOf(column.toUpperCase());
 	}
+	
 	
 	@Override
 	public int getNumColumns() {
 		return this.columnNames.size();
 	}
 
+	
 	@Override
-	public void appendColumn(String name, ColumnType type) {
-		// TODO Auto-generated method stub
-
+	public void appendColumn(String name, ColumnType type) { // TODO: throw invalid argument instead of return? or return bool?
+		if(this.columnNames.contains(name.toUpperCase()))
+			return;
+		
+		// Add headers
+		this.columnNames.add(name.toUpperCase());
+		this.columnTypes.add(type.name());
+		
+		// Add to all rows
+		for(DatabaseRowFlatfile r : this.rows)
+			r.cells.add("");
+		
+		this.save();
 	}
 
 	@Override
 	public void removeColumn(String name) {
-		// TODO Auto-generated method stub
-
+		int position = this.getColumnPosition(name);
+		if(position == -1)
+			return;
+		
+		// Remove the column for all rows
+		for(DatabaseRowFlatfile r : this.rows)
+			r.cells.remove(position);
+		
+		// Remove from headers
+		this.columnNames.remove(position);
+		this.columnTypes.remove(position);
+		
+		this.save();
 	}
 
 	@Override
 	public void insertColumn(String name, ColumnType type, String after) {
-		// TODO Auto-generated method stub
-
+		if(this.columnNames.contains(name.toUpperCase()))
+			return;
+		
+		int position = this.getColumnPosition(after);
+		// position is -1 or position of the column. We add it after
+		position++;
+		// Now position is 0 or the one after the given column :D
+		
+		// Quicker to append
+		if(position == this.columnNames.size()) {
+			this.appendColumn(name, type);
+			return;
+		}
+		
+		// Insert headers
+		this.columnNames.add(position,name.toUpperCase());
+		this.columnTypes.add(position,type.name());
+		
+		// Add to all rows
+		for(DatabaseRowFlatfile r : this.rows)
+			r.cells.add(position,"");
+		
+		this.save();
 	}
 	
 	@Override
@@ -223,6 +340,7 @@ public class DatabaseTableFlatfile implements IDatabaseTable {
 		String[] ar = {};
 		return this.columnNames.toArray(ar);
 	}
+
 
 	@Override
 	public void truncateTable() {

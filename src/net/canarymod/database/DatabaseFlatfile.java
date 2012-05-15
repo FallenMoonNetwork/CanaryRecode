@@ -28,6 +28,8 @@ public class DatabaseFlatfile implements IDatabase {
 		
 		// Extract the tablename and verify the extension
 		for(String file : dbFiles) {
+			if((new File("db/"+file)).isDirectory()) // TODO inefficient
+				continue;
 			if(!file.endsWith(".txt")) {
 				log.warning("Invalid file '"+file+"' found in db/");
 				continue;
@@ -48,7 +50,9 @@ public class DatabaseFlatfile implements IDatabase {
 	}
 	
 	public void reload() {
-		
+		// TODO implement database reload
+		// look for removed files and remove them in our list
+		// reload all tables
 	}
 	
 	public void save() {
@@ -298,14 +302,15 @@ public class DatabaseFlatfile implements IDatabase {
 			return null;
 		
 		boolean[] ret = new boolean[svals.length];
-		try {
-			
-			for(int i = 0; i < svals.length; i++)
-				ret[i] = Boolean.parseBoolean(svals[i]);
-		}
-		catch(NumberFormatException e) {
-			log.warning("A NumberFormatException occurred in database-path: "+path);
-			return null;
+		for(int i = 0; i < svals.length; i++) {
+			if(svals[i].equalsIgnoreCase("true") || svals[i].equalsIgnoreCase("yes") || svals[i].equals("1"))
+				ret[i] = true;
+			else if(svals[i].equalsIgnoreCase("false") || svals[i].equalsIgnoreCase("no") || svals[i].equals("0"))
+				ret[i] = false;
+			else {
+				log.warning("A NumberFormatException occurred in database-path: "+path);
+				return null;
+			}
 		}
 		
 		return ret;

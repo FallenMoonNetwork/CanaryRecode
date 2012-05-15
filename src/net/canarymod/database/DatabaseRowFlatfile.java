@@ -12,7 +12,7 @@ public class DatabaseRowFlatfile implements IDatabaseRow {
 
 	private Logger log = Logger.getLogger("Minecraft");
 	
-	private ArrayList<String> cells; 
+	public ArrayList<String> cells; 
 	private DatabaseTableFlatfile table;
 	
 	/**
@@ -27,8 +27,9 @@ public class DatabaseRowFlatfile implements IDatabaseRow {
 		this.cells = new ArrayList<String>();
 		
 		if(cells == null) { // new row
-			for(int i = 0; i < table.getNumColumns(); i++);
+			for(int i = 0; i < table.getNumColumns(); i++)
 				this.cells.add("");
+			return;
 		}
 		
 		for(String c : cells)
@@ -69,7 +70,7 @@ public class DatabaseRowFlatfile implements IDatabaseRow {
 			return;
 		
 		this.cells.set(index, value);
-		this.table.save();
+		this.table.saveRow(this);
 	}
 
 	@Override
