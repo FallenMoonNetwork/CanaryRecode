@@ -19,13 +19,12 @@ public class Server implements IServer {
 	private OMinecraftServer server;
 	
 	/**
-	 * Create the server
-	 * 
+	 * Create a new Server Wrapper
 	 * @param server
 	 */
 	public Server(OMinecraftServer server) {
-		this.server = server;
-	}
+        this.server = server;
+    }
 	
     public String getHostname() {
     	return "localhost";

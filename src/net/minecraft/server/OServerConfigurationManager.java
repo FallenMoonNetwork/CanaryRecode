@@ -11,6 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
+
+import net.canarymod.Canary;
+import net.canarymod.Server;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
@@ -53,6 +56,8 @@ public class OServerConfigurationManager {
 
    public OServerConfigurationManager(OMinecraftServer var1) {
       super();
+      //CanaryMod initialize
+      Canary.get().setServer(new Server(var1));
       this.c = var1;
       this.j = var1.a("banned-players.txt");
       this.k = var1.a("banned-ips.txt");
