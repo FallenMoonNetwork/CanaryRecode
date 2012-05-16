@@ -14,7 +14,7 @@ public class OPath {
 
    public OPathPoint a(OPathPoint var1) {
       if(var1.d >= 0) {
-         throw new IllegalStateException("OW KNOWS!");
+         throw new IllegalStateException("OW KNOWS!");  //Shouldn't this so OH NOES! ???
       } else {
          if(this.b == this.a.length) {
             OPathPoint[] var2 = new OPathPoint[this.b << 1];

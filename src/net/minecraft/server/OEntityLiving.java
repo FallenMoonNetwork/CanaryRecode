@@ -1011,7 +1011,7 @@ public abstract class OEntityLiving extends OEntity {
          }
       }
 
-      OProfiler.a("net/minecraft/server/OServerGuiCommandListener");
+      OProfiler.a("ai");
       if(this.Q()) {
          this.aZ = false;
          this.aW = 0.0F;

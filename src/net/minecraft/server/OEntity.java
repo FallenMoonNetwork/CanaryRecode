@@ -820,7 +820,7 @@ public abstract class OEntity {
    public boolean c(ONBTTagCompound var1) {
       String var2 = this.aX();
       if(!this.bE && var2 != null) {
-         var1.a("net/minecraft/server/OItem", var2);
+         var1.a("id", var2);
          this.d(var1);
          return true;
       } else {

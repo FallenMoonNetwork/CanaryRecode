@@ -15,13 +15,13 @@ import net.minecraft.server.OMapGenCaves;
 import net.minecraft.server.OMapGenMineshaft;
 import net.minecraft.server.OMapGenStronghold;
 import net.minecraft.server.OMapGenVillage;
-import net.minecraft.server.OMapGenWaterlily;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONoiseGeneratorOctaves;
 import net.minecraft.server.OSpawnerAnimals;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenDungeons;
 import net.minecraft.server.OWorldGenLakes;
+import net.minecraft.server.OWorldGenRavine;
 
 public class OChunkProviderGenerate implements OIChunkProvider {
 
@@ -41,7 +41,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
    private OMapGenStronghold u = new OMapGenStronghold();
    private OMapGenVillage v = new OMapGenVillage(0);
    private OMapGenMineshaft w = new OMapGenMineshaft();
-   private OMapGenBase x = new OMapGenWaterlily();
+   private OMapGenBase x = new OWorldGenRavine();
    private OBiomeGenBase[] y;
    double[] d;
    double[] e;

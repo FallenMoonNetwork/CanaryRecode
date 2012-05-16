@@ -75,7 +75,7 @@ public class OConsoleCommandHandler {
                   var10 = this.b.e[var9];
                   var10.I = false;
                }
-            } else if(var4.equalsIgnoreCase("net/minecraft/server/OStringTranslate")) {
+            } else if(var4.equalsIgnoreCase("op")) {
                var8.e(var5);
                this.a(var7, "Opping " + var5);
                var8.a(var5, "\u00a7eYou are now op!");
@@ -121,7 +121,7 @@ public class OConsoleCommandHandler {
                      } else {
                         var6.b("Can\'t find user " + var19 + ". No kick.");
                      }
-                  } else if(var4.equalsIgnoreCase("net/minecraft/server/OContainerDispenser")) {
+                  } else if(var4.equalsIgnoreCase("tp")) {
                      if(var3.length == 3) {
                         OEntityPlayerMP var20 = var8.i(var3[1]);
                         var18 = var8.i(var3[2]);
@@ -178,7 +178,7 @@ public class OConsoleCommandHandler {
                      } else {
                         var6.b("Can\'t find user " + var19);
                      }
-                  } else if(var4.equalsIgnoreCase("net/minecraft/server/OEntityAITaskEntry")) {
+                  } else if(var4.equalsIgnoreCase("xp")) {
                      if(var3.length != 3) {
                         return;
                      }
@@ -294,7 +294,7 @@ public class OConsoleCommandHandler {
       String[] var4 = var2.split(" ");
       if(var4.length >= 2) {
          String var5 = var4[1].toLowerCase();
-         if("net/minecraft/server/OEnchantment".equals(var5)) {
+         if("on".equals(var5)) {
             this.a(var1, "Turned on white-listing");
             this.b.d.b("white-list", true); // CanaryMod note: sets the white-list property to false
          } else if("off".equals(var5)) {

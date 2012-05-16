@@ -96,7 +96,7 @@ public class OEntityList {
       OEntity var2 = null;
 
       try {
-         Class var3 = (Class)b.get(var0.j("net/minecraft/server/OItem"));
+         Class var3 = (Class)b.get(var0.j("id"));
          if(var3 != null) {
             var2 = (OEntity)var3.getConstructor(new Class[]{OWorld.class}).newInstance(new Object[]{var1});
          }
@@ -107,7 +107,7 @@ public class OEntityList {
       if(var2 != null) {
          var2.e(var0);
       } else {
-         System.out.println("Skipping Entity with id " + var0.j("net/minecraft/server/OItem"));
+         System.out.println("Skipping Entity with id " + var0.j("id"));
       }
 
       return var2;

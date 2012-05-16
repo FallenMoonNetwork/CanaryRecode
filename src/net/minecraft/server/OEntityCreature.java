@@ -25,7 +25,7 @@ public abstract class OEntityCreature extends OEntityLiving {
    }
 
    protected void d_() {
-      OProfiler.a("net/minecraft/server/OServerGuiCommandListener");
+      OProfiler.a("ai");
       if(this.f > 0) {
          --this.f;
       }

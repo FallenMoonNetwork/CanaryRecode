@@ -41,7 +41,7 @@ public class OEnchantmentHelper {
             return 0;
          } else {
             for(int var3 = 0; var3 < var2.d(); ++var3) {
-               short var4 = ((ONBTTagCompound)var2.a(var3)).e("net/minecraft/server/OItem");
+               short var4 = ((ONBTTagCompound)var2.a(var3)).e("id");
                short var5 = ((ONBTTagCompound)var2.a(var3)).e("lvl");
                if(var4 == var0) {
                   return var5;
@@ -74,7 +74,7 @@ public class OEnchantmentHelper {
          ONBTTagList var2 = var1.p();
          if(var2 != null) {
             for(int var3 = 0; var3 < var2.d(); ++var3) {
-               short var4 = ((ONBTTagCompound)var2.a(var3)).e("net/minecraft/server/OItem");
+               short var4 = ((ONBTTagCompound)var2.a(var3)).e("id");
                short var5 = ((ONBTTagCompound)var2.a(var3)).e("lvl");
                if(OEnchantment.b[var4] != null) {
                   var0.a(OEnchantment.b[var4], var5);

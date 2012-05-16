@@ -45,9 +45,9 @@ public class OTileEntity {
    }
 
    public void a(ONBTTagCompound var1) {
-      this.l = var1.f("net/minecraft/server/OBiomeGenHell");
-      this.m = var1.f("net/minecraft/server/OMapGenStrongholdStairs2");
-      this.n = var1.f("net/minecraft/server/OSlotEnchantmentTable");
+      this.l = var1.f("x");
+      this.m = var1.f("y");
+      this.n = var1.f("z");
    }
 
    public void b(ONBTTagCompound var1) {
@@ -55,10 +55,10 @@ public class OTileEntity {
       if(var2 == null) {
          throw new RuntimeException(this.getClass() + " is missing a mapping! This is a bug!");
       } else {
-         var1.a("net/minecraft/server/OItem", var2);
-         var1.a("net/minecraft/server/OBiomeGenHell", this.l);
-         var1.a("net/minecraft/server/OMapGenStrongholdStairs2", this.m);
-         var1.a("net/minecraft/server/OSlotEnchantmentTable", this.n);
+         var1.a("id", var2);
+         var1.a("x", this.l);
+         var1.a("y", this.m);
+         var1.a("z", this.n);
       }
    }
 
@@ -68,7 +68,7 @@ public class OTileEntity {
       OTileEntity var1 = null;
 
       try {
-         Class var2 = (Class)a.get(var0.j("net/minecraft/server/OItem"));
+         Class var2 = (Class)a.get(var0.j("id"));
          if(var2 != null) {
             var1 = (OTileEntity)var2.newInstance();
          }
@@ -79,7 +79,7 @@ public class OTileEntity {
       if(var1 != null) {
          var1.a(var0);
       } else {
-         System.out.println("Skipping TileEntity with id " + var0.j("net/minecraft/server/OItem"));
+         System.out.println("Skipping TileEntity with id " + var0.j("id"));
       }
 
       return var1;

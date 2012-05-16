@@ -135,7 +135,7 @@ public final class OItemStack {
    }
 
    public ONBTTagCompound b(ONBTTagCompound var1) {
-      var1.a("net/minecraft/server/OItem", (short)this.c);
+      var1.a("id", (short)this.c);
       var1.a("Count", (byte)this.a);
       var1.a("Damage", (short)this.e);
       if(this.d != null) {
@@ -146,7 +146,7 @@ public final class OItemStack {
    }
 
    public void c(ONBTTagCompound var1) {
-      this.c = var1.e("net/minecraft/server/OItem");
+      this.c = var1.e("id");
       this.a = var1.d("Count");
       this.e = var1.e("Damage");
       if(var1.c("tag")) {
@@ -285,7 +285,7 @@ public final class OItemStack {
    }
 
    public String toString() {
-      return this.a + "net/minecraft/server/OBiomeGenHell" + OItem.d[this.c].b() + "@" + this.e;
+      return this.a + "x" + OItem.d[this.c].b() + "@" + this.e;
    }
 
    public void a(OWorld var1, OEntity var2, int var3, boolean var4) {
@@ -348,7 +348,7 @@ public final class OItemStack {
 
       ONBTTagList var3 = (ONBTTagList)this.d.b("ench");
       ONBTTagCompound var4 = new ONBTTagCompound();
-      var4.a("net/minecraft/server/OItem", (short)var1.x);
+      var4.a("id", (short)var1.x);
       var4.a("lvl", (short)((byte)var2));
       var3.a((ONBTBase)var4);
    }
