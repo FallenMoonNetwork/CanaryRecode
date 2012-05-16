@@ -1,7 +1,10 @@
 package net.canarymod.api.inventory;
 
+import net.canarymod.api.Enchantment;
 import net.canarymod.api.IEnchantment;
+import net.minecraft.server.OEnchantment;
 import net.minecraft.server.OItemStack;
+import net.minecraft.server.ONBTTagCompound;
 //TODO Correctly implement this
 public class Item implements IItem {
 
@@ -62,50 +65,63 @@ public class Item implements IItem {
 
     @Override
     public boolean isEnchanted() {
-        // TODO Auto-generated method stub
-        return false;
+        return item.r();
     }
 
     @Override
     public IEnchantment getEnchantment() {
-        // TODO Auto-generated method stub
-        return null;
+    	return getEnchantment(0);
     }
 
     @Override
     public IEnchantment getEnchantment(int index) {
-        // TODO Auto-generated method stub
+    	if (this.isEnchanted() && index < item.p().d() && index > -1) {
+            ONBTTagCompound tag = (ONBTTagCompound) item.p().a(index);
+            return new Enchantment(IEnchantment.Type.fromId(tag.e("id")), tag.e("lvl"));
+        }
         return null;
     }
 
     @Override
     public IEnchantment[] getEnchantments() {
-        // TODO Auto-generated method stub
-        return null;
+    	Enchantment[] enchantments = null;
+        if (this.isEnchanted()) {
+            enchantments = new Enchantment[item.p().d()];
+            for (int index = 0; index < item.p().d(); index++) {
+                ONBTTagCompound tag = (ONBTTagCompound) item.p().a(index);
+                enchantments[index] = new Enchantment(IEnchantment.Type.fromId(tag.e("id")), tag.e("lvl"));
+            }
+        }
+        return enchantments;
     }
 
     @Override
     public void addEnchantment(IEnchantment enchantment) {
-        // TODO Auto-generated method stub
-
+    	addEnchantments(new IEnchantment[]{ enchantment });
     }
 
     @Override
     public void addEnchantments(IEnchantment[] enchantments) {
-        // TODO Auto-generated method stub
-
+    	for(IEnchantment enchantment : enchantments){
+    		if (enchantment != null && enchantment.getType().getType() >= 0 && enchantment.getType().getType() < OEnchantment.b.length) {
+    			OEnchantment enchantmentType = OEnchantment.b[enchantment.getType().getType()];
+    			if (enchantmentType != null){
+    				item.a(enchantmentType, enchantment.getLevel());
+                }
+        	}
+    	}
     }
 
     @Override
     public void setEnchantment(IEnchantment enchantment) {
-        // TODO Auto-generated method stub
-
+        removeAllEnchantments();
+        addEnchantment(enchantment);
     }
 
     @Override
-    public void setEnchantments(IEnchantment[] enchantment) {
-        // TODO Auto-generated method stub
-
+    public void setEnchantments(IEnchantment[] enchantments) {
+        removeAllEnchantments();
+        addEnchantments(enchantments);
     }
 
     @Override
@@ -116,13 +132,11 @@ public class Item implements IItem {
 
     @Override
     public void removeAllEnchantments() {
-        // TODO Auto-generated method stub
-
+        item.d(null);
     }
 
     @Override
     public IBaseItem getBaseItem() {
         return item.getBaseItem();
     }
-
 }

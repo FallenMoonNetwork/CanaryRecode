@@ -21,218 +21,221 @@ public final class OItemStack {
     /**
      * Stack size
      */
-   public int a;
-   /**
-    * Animation ticks to go
-    */
-   public int b;
-   /**
-    * Item ID
-    */
-   public int c;
-   public ONBTTagCompound d;
+	public int a;
+	
+	/**
+	 * Animation ticks to go
+	 */
+	public int b;
+	
+	/**
+	 * Item ID
+	 */
+	public int c;
+	
+	/**
+	 * Enchantment tag
+	 */
+	public ONBTTagCompound d;
    
-   /**
-    * DamageValue
-    */
-   private int e;
+	/**
+	 * DamageValue
+	 */
+	private int e;
    
-   //CanaryMod itemstack Handler
-   private Item itemStack;
+	//CanaryMod itemstack Handler
+	private Item itemStack;
+	
+	public OItemStack(OBlock var1) {
+		this(var1, 1);
+	}
 
+	public OItemStack(OBlock var1, int var2) {
+		this(var1.bO, var2, 0);
+	}
 
-   public OItemStack(OBlock var1) {
-      this(var1, 1);
-   }
+	public OItemStack(OBlock var1, int var2, int var3) {
+		this(var1.bO, var2, var3);
+	}
 
-   public OItemStack(OBlock var1, int var2) {
-      this(var1.bO, var2, 0);
-   }
+	public OItemStack(OItem var1) {
+		this(var1.bP, 1, 0);
+	}
 
-   public OItemStack(OBlock var1, int var2, int var3) {
-      this(var1.bO, var2, var3);
-   }
+	public OItemStack(OItem var1, int var2) {
+		this(var1.bP, var2, 0);
+	}
 
-   public OItemStack(OItem var1) {
-      this(var1.bP, 1, 0);
-   }
+	public OItemStack(OItem var1, int var2, int var3) {
+		this(var1.bP, var2, var3);
+	}
 
-   public OItemStack(OItem var1, int var2) {
-      this(var1.bP, var2, 0);
-   }
+	public OItemStack(int var1, int var2, int var3) {
+		super();
+		this.a = 0;
+		this.c = var1;
+		this.a = var2;
+		this.e = var3;
+		this.itemStack = new Item(this);
+	}
 
-   public OItemStack(OItem var1, int var2, int var3) {
-      this(var1.bP, var2, var3);
-   }
+	public static OItemStack a(ONBTTagCompound var0) {
+		OItemStack var1 = new OItemStack();
+		var1.c(var0);
+		return var1.a() != null?var1:null;
+	}
 
-   public OItemStack(int var1, int var2, int var3) {
-      super();
-      this.a = 0;
-      this.c = var1;
-      this.a = var2;
-      this.e = var3;
-      this.itemStack = new Item(this);
-   }
+	private OItemStack() {
+		super();
+		this.a = 0;
+	}
 
-   public static OItemStack a(ONBTTagCompound var0) {
-      OItemStack var1 = new OItemStack();
-      var1.c(var0);
-      return var1.a() != null?var1:null;
-   }
+	public OItemStack a(int var1) {
+		OItemStack var2 = new OItemStack(this.c, var1, this.e);
+		if(this.d != null) {
+			var2.d = (ONBTTagCompound)this.d.b();
+		}
 
-   private OItemStack() {
-      super();
-      this.a = 0;
-   }
+		this.a -= var1;
+		return var2;
+	}
 
-   public OItemStack a(int var1) {
-      OItemStack var2 = new OItemStack(this.c, var1, this.e);
-      if(this.d != null) {
-         var2.d = (ONBTTagCompound)this.d.b();
-      }
-
-      this.a -= var1;
-      return var2;
-   }
-
-   //CanaryMod start
-   /**
-    * Get the CanaryMod item handler
-    * @return
-    */
-   public Item getItem() {
-       return itemStack;
-   }
+	//CanaryMod start
+	/**
+	 * Get the CanaryMod item handler
+	 * @return
+	 */
+	public Item getItem() {
+		return itemStack;
+	}
    
-   public BaseItem getBaseItem() {
-      return this.a().getBaseItem();
-   }
-   //CanaryMod end
+	public BaseItem getBaseItem() {
+		return this.a().getBaseItem();
+	}
+	//CanaryMod end
    
-   public OItem a() {
-      return OItem.d[this.c];
-   }
+	public OItem a() {
+		return OItem.d[this.c];
+	}
 
-   public boolean a(OEntityPlayer var1, OWorld var2, int var3, int var4, int var5, int var6) {
-      boolean var7 = this.a().a(this, var1, var2, var3, var4, var5, var6);
-      if(var7) {
-         var1.a(OStatList.E[this.c], 1);
-      }
+	public boolean a(OEntityPlayer var1, OWorld var2, int var3, int var4, int var5, int var6) {
+		boolean var7 = this.a().a(this, var1, var2, var3, var4, var5, var6);
+		if(var7) {
+			var1.a(OStatList.E[this.c], 1);
+		}
 
-      return var7;
-   }
+		return var7;
+	}
 
-   public float a(OBlock var1) {
-      return this.a().a(this, var1);
-   }
+	public float a(OBlock var1) {
+		return this.a().a(this, var1);
+	}
 
-   public OItemStack a(OWorld var1, OEntityPlayer var2) {
-      return this.a().a(this, var1, var2);
-   }
+	public OItemStack a(OWorld var1, OEntityPlayer var2) {
+		return this.a().a(this, var1, var2);
+	}
 
-   public OItemStack b(OWorld var1, OEntityPlayer var2) {
-      return this.a().b(this, var1, var2);
-   }
+	public OItemStack b(OWorld var1, OEntityPlayer var2) {
+		return this.a().b(this, var1, var2);
+	}
 
-   public ONBTTagCompound b(ONBTTagCompound var1) {
-      var1.a("id", (short)this.c);
-      var1.a("Count", (byte)this.a);
-      var1.a("Damage", (short)this.e);
-      if(this.d != null) {
-         var1.a("tag", (ONBTBase)this.d);
-      }
+	public ONBTTagCompound b(ONBTTagCompound var1) {
+		var1.a("id", (short)this.c);
+		var1.a("Count", (byte)this.a);
+		var1.a("Damage", (short)this.e);
+		if(this.d != null) {
+			var1.a("tag", (ONBTBase)this.d);
+		}
 
-      return var1;
-   }
+		return var1;
+	}
 
-   public void c(ONBTTagCompound var1) {
-      this.c = var1.e("id");
-      this.a = var1.d("Count");
-      this.e = var1.e("Damage");
-      if(var1.c("tag")) {
-         this.d = var1.m("tag");
-      }
+	public void c(ONBTTagCompound var1) {
+		this.c = var1.e("id");
+		this.a = var1.d("Count");
+		this.e = var1.e("Damage");
+		if(var1.c("tag")) {
+			this.d = var1.m("tag");
+		}
 
-   }
+	}
 
-   public int b() {
-      return this.a().d();
-   }
+	public int b() {
+		return this.a().d();
+	}
 
-   public boolean c() {
-      return this.b() > 1 && (!this.d() || !this.f());
-   }
+	public boolean c() {
+		return this.b() > 1 && (!this.d() || !this.f());
+	}
 
-   public boolean d() {
-      return OItem.d[this.c].f() > 0;
-   }
+	public boolean d() {
+		return OItem.d[this.c].f() > 0;
+	}
 
-   public boolean e() {
-      return OItem.d[this.c].e();
-   }
+	public boolean e() {
+		return OItem.d[this.c].e();
+  	}
 
-   public boolean f() {
-      return this.d() && this.e > 0;
-   }
+	public boolean f() {
+		return this.d() && this.e > 0;
+	}
 
-   public int g() {
-      return this.e;
-   }
+	public int g() {
+		return this.e;
+	}
 
-   public int h() {
-      return this.e;
-   }
+	public int h() {
+		return this.e;
+	}
 
-   public void b(int var1) {
-      this.e = var1;
-   }
+	public void b(int var1) {
+		this.e = var1;
+	}
 
-   public int i() {
-      return OItem.d[this.c].f();
-   }
+	public int i() {
+		return OItem.d[this.c].f();
+	}
 
-   public void a(int var1, OEntityLiving var2) {
-      if(this.d()) {
-         if(var1 > 0 && var2 instanceof OEntityPlayer) {
-            int var3 = OEnchantmentHelper.c(((OEntityPlayer)var2).k);
-            if(var3 > 0 && var2.bi.r.nextInt(var3 + 1) > 0) {
-               return;
-            }
-         }
+	public void a(int var1, OEntityLiving var2) {
+  	   if(this.d()) {
+  		   if(var1 > 0 && var2 instanceof OEntityPlayer) {
+  			   int var3 = OEnchantmentHelper.c(((OEntityPlayer)var2).k);
+  			   if(var3 > 0 && var2.bi.r.nextInt(var3 + 1) > 0) {
+  				   return;
+  			   }
+  		   }
 
-         this.e += var1;
-         if(this.e > this.i()) {
-            var2.c(this);
-            if(var2 instanceof OEntityPlayer) {
-               ((OEntityPlayer)var2).a(OStatList.F[this.c], 1);
-            }
+  		   this.e += var1;
+  		   if(this.e > this.i()) {
+  			   var2.c(this);
+  			   if(var2 instanceof OEntityPlayer) {
+  				   ((OEntityPlayer)var2).a(OStatList.F[this.c], 1);
+  			   }
 
-            --this.a;
-            if(this.a < 0) {
-               this.a = 0;
-            }
+  			   --this.a;
+  			   if(this.a < 0) {
+  				   this.a = 0;
+  			   }
+  			   
+  			   this.e = 0;
+  		   }
+  		   
+  	   }
+	}
 
-            this.e = 0;
-         }
+	public void a(OEntityLiving var1, OEntityPlayer var2) {
+		boolean var3 = OItem.d[this.c].a(this, var1, (OEntityLiving)var2);
+		if(var3) {
+			var2.a(OStatList.E[this.c], 1);
+		}
+	}
 
-      }
-   }
-
-   public void a(OEntityLiving var1, OEntityPlayer var2) {
-      boolean var3 = OItem.d[this.c].a(this, var1, (OEntityLiving)var2);
-      if(var3) {
-         var2.a(OStatList.E[this.c], 1);
-      }
-
-   }
-
-   public void a(int var1, int var2, int var3, int var4, OEntityPlayer var5) {
-      boolean var6 = OItem.d[this.c].a(this, var1, var2, var3, var4, var5);
-      if(var6) {
-         var5.a(OStatList.E[this.c], 1);
-      }
-
-   }
+	public void a(int var1, int var2, int var3, int var4, OEntityPlayer var5) {
+		boolean var6 = OItem.d[this.c].a(this, var1, var2, var3, var4, var5);
+		if(var6) {
+			var5.a(OStatList.E[this.c], 1);
+		}
+	}
 
    public int a(OEntity var1) {
       return OItem.d[this.c].a(var1);
