@@ -1,6 +1,9 @@
 package net.canarymod.api.world;
 
+import java.util.List;
+
 import net.canarymod.api.entity.IPlayer;
+import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldServer;
 
@@ -84,18 +87,41 @@ public class World implements IWorld {
 	
     @Override
 	public boolean canEnterWorld(IPlayer player) {
-    	return true; // TODO: implement
+    	return player.hasPermission("world.traveling."+name+".enter") && isEnabled();
     }
 	
     @Override
 	public boolean canLeaveWorld(IPlayer player) {
-    	return true; // TODO: implement
+    	return player.hasPermission("world.traveling."+name+".leave");
     }
 
 	@Override
 	public IPlayer matchPlayer(String player) {
-		// TODO Auto-generated method stub
-		return null;
+	    IPlayer lastPlayer = null;
+
+        name = name.toLowerCase();
+        for(OWorldServer world : oDimensions) {
+            for (OEntityPlayerMP player : (List<OEntityPlayerMP>) world.getServer().get) {
+                String playerName = player.v;
+
+                if (playerName.toLowerCase().equals(name)) {
+                    // Perfect match found
+                    lastPlayer = player.getPlayer();
+                    break;
+                }
+                if (playerName.toLowerCase().indexOf(name.toLowerCase()) != -1) {
+                    // Partial match
+                    if (lastPlayer != null) {
+                        // Found multiple
+                        return null;
+                    }
+                    lastPlayer = player.getPlayer();
+                }
+            }
+        }
+        
+
+        return lastPlayer;
 	}
 
 	@Override
