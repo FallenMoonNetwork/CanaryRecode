@@ -64,7 +64,13 @@ public class OWorld implements OIBlockAccess {
    public List c = new ArrayList();
    private List J = new ArrayList();
    private List K = new ArrayList();
+   /**
+    * OPlayerList
+    */
    public List d = new ArrayList();
+   /**
+    * Lightning entities
+    */
    public List e = new ArrayList();
    private long L = 16777215L;
    public int f = 0;

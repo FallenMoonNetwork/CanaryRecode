@@ -1,7 +1,6 @@
 package net.canarymod.api.world;
 
 import java.util.ArrayList;
-
 import net.canarymod.api.entity.IEntityAnimal;
 import net.canarymod.api.entity.IEntityItem;
 import net.canarymod.api.entity.IEntityLiving;
@@ -72,9 +71,14 @@ public class Dimension implements IDimension {
         return null;
     }
 
+    //TODO: FInish
     @Override
     public ArrayList<IPlayer> getPlayerList() {
-        // TODO Auto-generated method stub
+//        List<OEntityPlayer> players = world.d;
+//        List<IPlayer> newPlayers = new ArrayList<IPlayer>(players.size());
+//        for(OEntityPlayer player : players) {
+//            newPlayers.add(new Player());
+//        }
         return null;
     }
 
@@ -167,24 +171,6 @@ public class Dimension implements IDimension {
     public int getYHeighestBlockAt(int x, int z) {
         // TODO Auto-generated method stub
         return 0;
-    }
-
-    @Override
-    public void addPlayer(IPlayer player) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void removePlayer(IPlayer player) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void swapPlayer(IPlayer player, IDimension world) {
-        // TODO Auto-generated method stub
-        
     }
 
     @Override

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import net.canarymod.Server;
 import net.minecraft.server.OAnvilSaveConverter;
 import net.minecraft.server.OAnvilSaveHandler;
 import net.minecraft.server.OAxisAlignedBB;
@@ -86,13 +88,21 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
    public long[] x = new long[100];
    private ORConThreadQuery I;
    private ORConThreadMain J;
-
+   private Server server;
 
    public OMinecraftServer() {
       super();
+      this.server = new Server(this);
       new OThreadSleepForever(this);
    }
 
+   /**
+    * Get the CanaryMod server handler
+    * @return
+    */
+   public Server getServer() {
+       return server;
+   }
    private boolean s() throws UnknownHostException {
       this.A = new OConsoleCommandHandler(this);
       OThreadCommandReader var1 = new OThreadCommandReader(this);

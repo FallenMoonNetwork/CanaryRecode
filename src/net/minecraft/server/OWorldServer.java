@@ -3,6 +3,7 @@ package net.minecraft.server;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.canarymod.Server;
 import net.canarymod.api.world.Dimension;
 import net.minecraft.server.OChunkProviderServer;
 import net.minecraft.server.OEntity;
@@ -45,7 +46,9 @@ public class OWorldServer extends OWorld {
       }
 
    }
-
+   public Server getServer() {
+       return J.getServer();
+   }
    public void a(OEntity var1, boolean var2) {
       if(!this.J.o && (var1 instanceof OEntityAnimal || var1 instanceof OEntityWaterMob)) {
          var1.X();
