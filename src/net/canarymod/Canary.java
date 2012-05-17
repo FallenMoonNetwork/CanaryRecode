@@ -1,16 +1,22 @@
 package net.canarymod;
 
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
 import net.canarymod.backbone.IBackbone;
 import net.canarymod.backbone.IBackbone.System;
 import net.canarymod.config.Configuration;
 import net.canarymod.plugin.PluginLoader;
+
+/**
+ * The implementation of ICanary, a singleton used for everything.
+ * 
+ * @author Chris Ksoll
+ * @author Jos Kuijpers
+ */
 public class Canary extends ICanary {
 
     private static Canary instance;
-    private PluginLoader loader;
-    private static final Logger log = Logger.getLogger("Minecraft");
+//    private static final Logger log = Logger.getLogger("Minecraft");
     
     /**
      * Private Canary Constructor to prevent more than once instance
@@ -19,9 +25,14 @@ public class Canary extends ICanary {
      */
     private Canary() {
         this.configuration = new Configuration();
+        
+        // Initialize the loader and scan for plugins
         this.loader = new PluginLoader();
-        this.loader.loadPlugins();
+        this.loader.scanPlugins();
+        
+        // Determine the back-end and create a database instance for it.
     }
+    
     /**
      * Get a Canary which contains access to all relevant subsystems
      * @return
@@ -36,7 +47,6 @@ public class Canary extends ICanary {
     public void setServer(Server server) {
         this.server = server;
     }
-
 
     @Override
     public IBackbone getBackbone(System system) {
