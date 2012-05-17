@@ -3,7 +3,10 @@ package net.canarymod.api.entity;
 import net.canarymod.api.IDamageSource;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OChunkCoordinates;
+import net.minecraft.server.OEntityAnimal;
+import net.minecraft.server.OEntityList;
 import net.minecraft.server.OEntityLiving;
+import net.minecraft.server.OEntityMob;
 import net.minecraft.server.OIAnimals;
 import net.minecraft.server.OIMob;
 
@@ -41,9 +44,9 @@ public class EntityLiving extends Entity implements IEntityLiving{
 
 	@Override
 	public IEntityAnimal getAnimal() {
-		//if(isAnimal()){
-		//	return new EntityAnimal(this);
-		//}
+		if(isAnimal()){
+			return this instanceof EntityAnimal ? (EntityAnimal) this : new EntityAnimal((OEntityAnimal)entity);
+		}
 		return null;
 	}
 
@@ -73,16 +76,15 @@ public class EntityLiving extends Entity implements IEntityLiving{
 
 	@Override
 	public IEntityMob getMob() {
-		//if(isMob()){
-		//	return new EntityMob(this);
-		//}
+		if(isMob()){
+			return this instanceof EntityMob ? (EntityMob) this : new EntityMob((OEntityMob)entity);
+		}
 		return null;
 	}
 
 	@Override
 	public String getName() {
-		//No way to getName from just an OEntityLiving
-		return null;
+		return OEntityList.b(entity);
 	}
 
 	@Override

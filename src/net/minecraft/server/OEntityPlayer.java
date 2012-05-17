@@ -1144,7 +1144,8 @@ public abstract class OEntityPlayer extends OEntityLiving {
       return var2 > 100?100:var2;
    }
 
-   protected boolean ah() {
+   //CanaryMod protected -> Public
+   public boolean ah() {
       return true;
    }
 

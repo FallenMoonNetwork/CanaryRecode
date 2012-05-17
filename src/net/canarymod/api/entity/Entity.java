@@ -2,7 +2,6 @@ package net.canarymod.api.entity;
 
 import net.canarymod.api.world.IDimension;
 import net.canarymod.api.world.Dimension;
-import net.canarymod.api.world.position.Location;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityItem;
 import net.minecraft.server.OEntityLiving;
