@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import net.canarymod.api.entity.EntityLiving;
+import net.canarymod.api.entity.IEntityLiving;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
@@ -111,7 +114,7 @@ public abstract class OEntityLiving extends OEntity {
    protected double aS;
    float aT = 0.0F;
    protected int aU = 0;
-   protected int aV = 0;
+   public int aV = 0;  //CanaryMod protected -> public
    protected float aW;
    protected float aX;
    protected float aY;
@@ -121,7 +124,10 @@ public abstract class OEntityLiving extends OEntity {
    private int q = 0;
    private OEntity r;
    protected int bc = 0;
-
+   
+   //CanaryMod Start
+   private EntityLiving entityliving;
+   //CanaryMod End
 
    public OEntityLiving(OWorld var1) {
       super(var1);
@@ -138,6 +144,10 @@ public abstract class OEntityLiving extends OEntity {
       this.bs = (float)(Math.random() * 3.1415927410125732D * 2.0D);
       this.X = this.bs;
       this.bP = 0.5F;
+      
+      //CanaryMod Start
+      entityliving = new EntityLiving(this);
+      //CanaryMod End
    }
 
    public OEntityLookHelper ai() {
@@ -399,7 +409,7 @@ public abstract class OEntityLiving extends OEntity {
       return this.aA;
    }
 
-   protected boolean ah() {
+   public boolean ah() {
       return false;
    }
 
@@ -1420,4 +1430,10 @@ public abstract class OEntityLiving extends OEntity {
       }
 
    }
+   
+   //CanaryMod Start
+   public IEntityLiving getEntity(){
+	   return entityliving;
+   }
+   //CanaryMod End
 }

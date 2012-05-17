@@ -153,7 +153,7 @@ public class Entity implements IEntity {
     }
 
     @Override
-    public EntityItem dropLoot(int itemId, int amount) {
+    public IEntityItem dropLoot(int itemId, int amount) {
         return new EntityItem(entity.b(itemId, amount));
     }
 
