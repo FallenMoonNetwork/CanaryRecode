@@ -23,9 +23,9 @@ public class ODamageSource {
     public static ODamageSource k = (new ODamageSource("generic")).h();
     public static ODamageSource l = new ODamageSource("explosion");
     public static ODamageSource m = (new ODamageSource("magic")).h();
-    private boolean a = false;
+    public boolean a = false; //CanaryMod private -> public
     private boolean o = false;
-    private float p = 0.3F;
+    public float p = 0.3F; //CanaryMod private -> public
     private boolean q;
     private boolean r;
     public String n;
@@ -115,5 +115,4 @@ public class ODamageSource {
     public String l() {
         return this.n;
     }
-
 }

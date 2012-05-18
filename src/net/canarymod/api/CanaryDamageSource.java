@@ -1,5 +1,6 @@
 package net.canarymod.api;
 
+import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.Player;
 import net.minecraft.server.ODamageSource;
@@ -16,68 +17,58 @@ public class CanaryDamageSource implements DamageSource {
     }
     @Override
     public Entity getDamageDealer() {
-        // TODO Auto-generated method stub
-        return null;
+        return new CanaryEntity(handle.b());
     }
 
     @Override
     public String getDamagetype() {
-        // TODO Auto-generated method stub
-        return null;
+        return handle.l();
     }
 
     @Override
-    public String getDeathMessage(Player arg0) {
-        // TODO Auto-generated method stub
+    public String getDeathMessage(Player player) {
+        //return handle.a(((CanaryPlayer)player).getHandle()); // <- need some OEntity here
         return null;
     }
 
     @Override
     public float getHungerDamage() {
-        // TODO Auto-generated method stub
-        return 0;
+        return handle.f();
     }
 
     @Override
     public boolean isFireDamage() {
-        // TODO Auto-generated method stub
-        return false;
+        return handle.k();
     }
 
     @Override
     public boolean isProjectile() {
-        // TODO Auto-generated method stub
-        return false;
+        return handle.c();
     }
 
     @Override
     public boolean isUnblockable() {
-        // TODO Auto-generated method stub
-        return false;
+        return handle.e();
     }
 
     @Override
-    public void setCustomDeathMessage(String arg0) {
-        // TODO Auto-generated method stub
-
+    public void setCustomDeathMessage(String message) {
+        //Not real sure how this should be implemented at this time
     }
 
     @Override
-    public void setHungerDamage(float arg0) {
-        // TODO Auto-generated method stub
-
+    public void setHungerDamage(float value) {
+        handle.p = value;
     }
 
     @Override
-    public void setUnblockable(boolean arg0) {
-        // TODO Auto-generated method stub
-
+    public void setUnblockable(boolean set) {
+        handle.a = set;
     }
 
     @Override
     public boolean validInCreativeMode() {
-        // TODO Auto-generated method stub
-        return false;
+        return handle.g();
     }
 
 }
