@@ -97,18 +97,18 @@ public class Item implements IItem {
 
     @Override
     public void addEnchantment(IEnchantment enchantment) {
-    	addEnchantments(new IEnchantment[]{ enchantment });
+        if (enchantment != null && enchantment.getType().getType() >= 0 && enchantment.getType().getType() < OEnchantment.b.length) {
+            OEnchantment enchantmentType = OEnchantment.b[enchantment.getType().getType()];
+            if (enchantmentType != null){
+                item.a(enchantmentType, enchantment.getLevel());
+            }
+        }
     }
 
     @Override
     public void addEnchantments(IEnchantment[] enchantments) {
     	for(IEnchantment enchantment : enchantments){
-    		if (enchantment != null && enchantment.getType().getType() >= 0 && enchantment.getType().getType() < OEnchantment.b.length) {
-    			OEnchantment enchantmentType = OEnchantment.b[enchantment.getType().getType()];
-    			if (enchantmentType != null){
-    				item.a(enchantmentType, enchantment.getLevel());
-                }
-        	}
+    		addEnchantment(enchantment);
     	}
     }
 
@@ -126,8 +126,13 @@ public class Item implements IItem {
 
     @Override
     public void removeEnchantment(IEnchantment enchantment) {
-        // TODO Auto-generated method stub
-
+        IEnchantment[] enchants = getEnchantments();
+        removeAllEnchantments();
+        for(IEnchantment ench : enchants){
+            if(!ench.getType().equals(enchantment.getType())){
+                addEnchantment(ench);
+            }
+        }
     }
 
     @Override
