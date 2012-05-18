@@ -88,7 +88,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         if (var5 == null) {
         	// CanaryMod start: load preload plugins
         	if(loadStage < 1) {
-        		CanaryMod.get().getLoader().loadPlugins(true);
+        		CanaryMod.get().getPluginLoader().loadPlugins(true);
         		loadStage = 1;
         	}
         	// CanaryMod end
@@ -173,7 +173,7 @@ public class OChunkProviderServer implements OIChunkProvider {
 
         // CanaryMod start: load plugins
         if(loadStage < 2) {
-        	CanaryMod.get().getLoader().loadPlugins(false);
+        	CanaryMod.get().getPluginLoader().loadPlugins(false);
         	loadStage = 2;
         }
         // CanaryMod end
