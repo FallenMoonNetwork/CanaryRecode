@@ -1,13 +1,13 @@
 package net.canarymod.api.world;
 
 import java.util.ArrayList;
-import net.canarymod.api.entity.IEntityAnimal;
-import net.canarymod.api.entity.IEntityItem;
-import net.canarymod.api.entity.IEntityLiving;
-import net.canarymod.api.entity.IEntityMob;
-import net.canarymod.api.entity.IPlayer;
-import net.canarymod.api.inventory.IItem;
-import net.canarymod.api.world.blocks.IBlock;
+import net.canarymod.api.entity.EntityAnimal;
+import net.canarymod.api.entity.EntityItem;
+import net.canarymod.api.entity.EntityLiving;
+import net.canarymod.api.entity.EntityMob;
+import net.canarymod.api.entity.Player;
+import net.canarymod.api.inventory.Item;
+import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OEntityItem;
@@ -23,13 +23,13 @@ import net.minecraft.server.OWorldServer;
  * @author Chris
  * 
  */
-public class Dimension implements IDimension {
+public class CanaryDimension implements Dimension {
 
     private OWorldServer world;
-    private ChunkProviderServer chunkProvider;
-    World parent;
+    private CanaryChunkProviderServer chunkProvider;
+    CanaryWorld parent;
 
-    public Dimension(OWorld world, World parent) {
+    public CanaryDimension(OWorld world, CanaryWorld parent) {
         this.world = (OWorldServer) world; // We're not getting any other world
                                            // types, right?
         chunkProvider = this.world.G.getHandler(); // get the chunk provider
@@ -38,13 +38,12 @@ public class Dimension implements IDimension {
     }
 
     @Override
-    public IWorld getWorld() {
+    public World getWorld() {
         return parent;
     }
 
     @Override
-    public IEntityItem dropItem(int x, int y, int z, int itemId, int amount,
-            int damage) {
+    public EntityItem dropItem(int x, int y, int z, int itemId, int amount, int damage) {
         double d1 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
         double d2 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
         double d3 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
@@ -59,26 +58,26 @@ public class Dimension implements IDimension {
     }
 
     @Override
-    public IEntityItem dropItem(int x, int y, int z, IItem item) {
+    public EntityItem dropItem(int x, int y, int z, Item item) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ArrayList<IEntityAnimal> getAnimalList() {
+    public ArrayList<EntityAnimal> getAnimalList() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ArrayList<IEntityMob> getMobList() {
+    public ArrayList<EntityMob> getMobList() {
         // TODO Auto-generated method stub
         return null;
     }
 
     // TODO: FInish
     @Override
-    public ArrayList<IPlayer> getPlayerList() {
+    public ArrayList<Player> getPlayerList() {
         // List<OEntityPlayer> players = world.d;
         // List<IPlayer> newPlayers = new ArrayList<IPlayer>(players.size());
         // for(OEntityPlayer player : players) {
@@ -88,10 +87,10 @@ public class Dimension implements IDimension {
     }
 
     @Override
-    public IBlock getBlockAt(int x, int y, int z) {
+    public Block getBlockAt(int x, int y, int z) {
         short id = (short) world.a(x, y, z);
         byte data = getDataAt(x, y, z);
-        return new Block(id, data);
+        return new CanaryBlock(id, data);
     }
 
     @Override
@@ -100,9 +99,8 @@ public class Dimension implements IDimension {
     }
 
     @Override
-    public void setBlock(IBlock block) {
-        setBlockAt(block.getX(), block.getY(), block.getZ(), block.getType(),
-                block.getData());
+    public void setBlock(Block block) {
+        setBlockAt(block.getX(), block.getY(), block.getZ(), block.getType(), block.getData());
         // _handle.b(block.getX(), block.getY(), block.getZ(), block.getType(),
         // block.getData());
 
@@ -133,25 +131,25 @@ public class Dimension implements IDimension {
     }
 
     @Override
-    public IPlayer getClosestPlayer(int x, int y, int z, int distance) {
+    public Player getClosestPlayer(int x, int y, int z, int distance) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IPlayer getClosestPlayer(IEntityLiving entity, int distance) {
+    public Player getClosestPlayer(EntityLiving entity, int distance) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IChunkProviderServer getChunkProvider() {
+    public ChunkProviderServer getChunkProvider() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public boolean isChunkLoaded(IBlock block) {
+    public boolean isChunkLoaded(Block block) {
         chunkProvider.chunkExists(block.getX(), block.getZ());
         return false;
     }
@@ -217,19 +215,19 @@ public class Dimension implements IDimension {
     }
 
     @Override
-    public IChunk loadChunk(int x, int z) {
+    public Chunk loadChunk(int x, int z) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IChunk loadChunk(Location location) {
+    public Chunk loadChunk(Location location) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IChunk loadChunk(Vector3D vec3d) {
+    public Chunk loadChunk(Vector3D vec3d) {
         // TODO Auto-generated method stub
         return null;
     }

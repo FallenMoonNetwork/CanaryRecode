@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import net.canarymod.api.entity.BaseItem;
-import net.canarymod.api.inventory.Item;
+import net.canarymod.api.entity.CanaryBaseItem;
+import net.canarymod.api.inventory.CanaryItem;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEnchantment;
 import net.minecraft.server.OEnchantmentHelper;
@@ -25,7 +25,7 @@ public final class OItemStack {
     private int e; //damage
     
     //CanaryMod itemstack Handler
-    private Item item;
+    private CanaryItem item;
 
     public OItemStack(OBlock var1) {
         this(var1, 1);
@@ -75,11 +75,11 @@ public final class OItemStack {
      * Get the CanaryMod item handler
      * @return
      */
-    public Item getItem() {
+    public CanaryItem getItem() {
         return item;
     }
    
-    public BaseItem getBaseItem() {
+    public CanaryBaseItem getBaseItem() {
         return this.a().getBaseItem();
     }
     //CanaryMod end

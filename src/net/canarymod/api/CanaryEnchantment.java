@@ -1,29 +1,29 @@
 package net.canarymod.api;
 
-import net.canarymod.api.entity.IEntityLiving;
+import net.canarymod.api.entity.EntityLiving;
 import net.minecraft.server.OEnchantment;
 
-public class Enchantment implements IEnchantment{
+public class CanaryEnchantment implements Enchantment{
 	private Type type;
 	private int level;
 	
-	public Enchantment(Type type, int level) {
+	public CanaryEnchantment(Type type, int level) {
 		this.type = type;
 		this.level = level;
 	}
 	
-	public Enchantment(OEnchantment oEnchantment){
+	public CanaryEnchantment(OEnchantment oEnchantment){
 		// TODO Auto-generated method stub
 	}
 	
 	@Override
-	public boolean canStack(IEnchantment arg0) {
+	public boolean canStack(Enchantment arg0) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public int getDamageDone(IEntityLiving arg0) {
+	public int getDamageDone(EntityLiving arg0) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -35,7 +35,7 @@ public class Enchantment implements IEnchantment{
 	}
 
 	@Override
-	public IEnchantment getEnchantment(Type arg0) {
+	public Enchantment getEnchantment(Type arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}

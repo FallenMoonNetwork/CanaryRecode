@@ -1,11 +1,11 @@
 package net.canarymod.backbone;
 
-public class Backbone implements IBackbone {
+public class CanaryBackbone implements Backbone {
 
     protected System system;
     protected Type type;
     
-    public Backbone(System system, Type type) {
+    public CanaryBackbone(System system, Type type) {
         this.system = system;
         this.type = type;
     }
@@ -21,13 +21,13 @@ public class Backbone implements IBackbone {
     }
 
     @Override
-    public IBackbone getBackbone(System system, Type type) {
+    public Backbone getBackbone(System system, Type type) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IBackbone getBackbone(System system) {
+    public Backbone getBackbone(System system) {
         // TODO Auto-generated method stub
         return null;
     }

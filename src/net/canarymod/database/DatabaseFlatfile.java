@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 /**
  * @author Jos Kuijpers
  */
-public class DatabaseFlatfile implements IDatabase {
+public class DatabaseFlatfile implements Database {
 
 	private Logger log = Logger.getLogger("Minecraft");
 	private HashMap<String, DatabaseTableFlatfile> tables;
@@ -84,14 +84,14 @@ public class DatabaseFlatfile implements IDatabase {
 	}
 
 	@Override
-	public IDatabaseTable getTable(String name) {
+	public DatabaseTable getTable(String name) {
 		if(!this.tables.containsKey(name.toLowerCase()))
 			return null;
 		return this.tables.get(name.toLowerCase());
 	}
 
 	@Override
-	public boolean addTable(IDatabaseTable table) {
+	public boolean addTable(DatabaseTable table) {
 		if(this.tables.containsKey(table.getName()))
 			return false;
 
@@ -129,7 +129,7 @@ public class DatabaseFlatfile implements IDatabase {
 		if(index == -1)
 			return null;
 
-		for(IDatabaseRow row : table.getAllRows()) {
+		for(DatabaseRow row : table.getAllRows()) {
 			data.add(row.getStringCell(columnName));
 		}
 		

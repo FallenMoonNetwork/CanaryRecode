@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import net.canarymod.api.entity.EntityItem;
+import net.canarymod.api.entity.CanaryEntityItem;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
@@ -24,7 +24,7 @@ public class OEntityItem extends OEntity {
     public float d = (float) (Math.random() * 3.141592653589793D * 2.0D);
     
     //CanaryMod Item handler
-    private EntityItem item;
+    private CanaryEntityItem item;
 
     public OEntityItem(OWorld var1, double var2, double var4, double var6, OItemStack var8) {
         super(var1);
@@ -43,7 +43,7 @@ public class OEntityItem extends OEntity {
      * Return the CanaryMod handler for this item
      * @return item
      */
-    public EntityItem getItem() {
+    public CanaryEntityItem getItem() {
         return item;
     }
     

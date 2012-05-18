@@ -2,29 +2,29 @@ package net.canarymod.api.world;
 
 import net.minecraft.server.OChunk;
 
-public class Chunk implements IChunk {
-    OChunk _handle;
+public class CanaryChunk implements Chunk {
+    OChunk handle;
     
-    public Chunk(OChunk chunk) {
-        _handle = chunk;
+    public CanaryChunk(OChunk chunk) {
+        this.handle = chunk;
     }
     
     public OChunk getHandle() {
-        return _handle;
+        return handle;
     }
     @Override
     public int getX() {
-        return _handle.g;
+        return handle.g;
     }
 
     @Override
     public int getZ() {
-        return _handle.h;
+        return handle.h;
     }
 
     @Override
     public int getBlockTypeAt(int x, int y, int z) {
-        return _handle.b(x, y, z);
+        return handle.b(x, y, z);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Chunk implements IChunk {
     
     @Override
     public int getBlockDataAt(int x, int y, int z) {
-        return _handle.c(x, y, z);
+        return handle.c(x, y, z);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class Chunk implements IChunk {
     }
 
     @Override
-    public IDimension getDimension() {
+    public Dimension getDimension() {
         // TODO Auto-generated method stub
         return null;
     }

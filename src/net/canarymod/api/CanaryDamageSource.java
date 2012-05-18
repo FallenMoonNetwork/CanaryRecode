@@ -1,13 +1,13 @@
 package net.canarymod.api;
 
-import net.canarymod.api.entity.IEntity;
-import net.canarymod.api.entity.IPlayer;
+import net.canarymod.api.entity.Entity;
+import net.canarymod.api.entity.Player;
 import net.minecraft.server.ODamageSource;
 
-public class DamageSource implements IDamageSource {
+public class CanaryDamageSource implements DamageSource {
     ODamageSource handle;
     
-    public DamageSource(ODamageSource handle) {
+    public CanaryDamageSource(ODamageSource handle) {
         this.handle = handle;
     }
     
@@ -15,7 +15,7 @@ public class DamageSource implements IDamageSource {
         return handle;
     }
     @Override
-    public IEntity getDamageDealer() {
+    public Entity getDamageDealer() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -27,7 +27,7 @@ public class DamageSource implements IDamageSource {
     }
 
     @Override
-    public String getDeathMessage(IPlayer arg0) {
+    public String getDeathMessage(Player arg0) {
         // TODO Auto-generated method stub
         return null;
     }

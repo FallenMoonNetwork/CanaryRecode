@@ -2,9 +2,9 @@ package net.canarymod;
 
 import java.util.logging.Logger;
 
-import net.canarymod.api.IServer;
-import net.canarymod.api.entity.IPlayer;
-import net.canarymod.api.world.IWorldManager;
+import net.canarymod.api.Server;
+import net.canarymod.api.entity.Player;
+import net.canarymod.api.world.WorldManager;
 import net.minecraft.server.OMinecraftServer;
 
 /**
@@ -13,7 +13,7 @@ import net.minecraft.server.OMinecraftServer;
  * @author Jos Kuijpers
  *
  */
-public class Server implements IServer {
+public class CanaryServer implements Server {
 
 	public static final Logger log = Logger.getLogger("Minecraft");
 	private OMinecraftServer server;
@@ -22,7 +22,7 @@ public class Server implements IServer {
 	 * Create a new Server Wrapper
 	 * @param server
 	 */
-	public Server(OMinecraftServer server) {
+	public CanaryServer(OMinecraftServer server) {
         this.server = server;
     }
 	
@@ -46,7 +46,7 @@ public class Server implements IServer {
     	return "default";
     }
     
-    public IWorldManager getWorldManager() {
+    public WorldManager getWorldManager() {
         return null;
     	
     }
@@ -60,7 +60,7 @@ public class Server implements IServer {
         
     }
 
-    public void consoleCommand(String command, IPlayer player) {
+    public void consoleCommand(String command, Player player) {
         // TODO Auto-generated method stub
         
     }

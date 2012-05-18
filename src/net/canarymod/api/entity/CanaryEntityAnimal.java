@@ -8,9 +8,9 @@ import net.minecraft.server.OEntityLiving;
  * 
  * @author Jason
  */
-public class EntityAnimal extends EntityLiving implements IEntityAnimal {
+public class CanaryEntityAnimal extends CanaryEntityLiving implements EntityAnimal {
 
-    public EntityAnimal(OEntityAnimal entity) {
+    public CanaryEntityAnimal(OEntityAnimal entity) {
         super(entity);
     }
 
@@ -25,7 +25,7 @@ public class EntityAnimal extends EntityLiving implements IEntityAnimal {
     }
 
     @Override
-    public void attackEntity(IEntityLiving arg0) {
+    public void attackEntity(EntityLiving arg0) {
         // TODO Auto-generated method stub
         //Also looking at IEntityMob  this is missing IDamageSource param  intentional or just oversight?
 
@@ -39,13 +39,13 @@ public class EntityAnimal extends EntityLiving implements IEntityAnimal {
     }
 
     @Override
-    public IEntityLiving getTarget() {
-        return new EntityLiving(((OEntityLiving) entity).at());
+    public EntityLiving getTarget() {
+        return new CanaryEntityLiving(((OEntityLiving) entity).at());
     }
 
     @Override
-    public void setTarget(IEntityLiving entityliving) {
-        ((OEntityLiving) entity).b((OEntityLiving) ((Entity) entityliving).entity);
+    public void setTarget(EntityLiving entityliving) {
+        ((OEntityLiving) entity).b((OEntityLiving) ((CanaryEntity) entityliving).entity);
     }
 
 }

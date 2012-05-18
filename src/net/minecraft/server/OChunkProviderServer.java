@@ -7,8 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import net.canarymod.Canary;
-import net.canarymod.api.world.ChunkProviderServer;
+import net.canarymod.CanaryMod;
+import net.canarymod.api.world.CanaryChunkProviderServer;
 import net.minecraft.server.OChunk;
 import net.minecraft.server.OChunkCoordIntPair;
 import net.minecraft.server.OChunkCoordinates;
@@ -34,7 +34,7 @@ public class OChunkProviderServer implements OIChunkProvider {
     private OWorldServer h;
     
     //CanaryMod start
-    private ChunkProviderServer handler;
+    private CanaryChunkProviderServer handler;
     private int loadStage = 0;
     //CanaryMod end
 
@@ -47,7 +47,7 @@ public class OChunkProviderServer implements OIChunkProvider {
     }
     
     //CanaryMod start
-    public ChunkProviderServer getHandler() {
+    public CanaryChunkProviderServer getHandler() {
         return handler;
     }
     //CanaryMod end
@@ -88,7 +88,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         if (var5 == null) {
         	// CanaryMod start: load preload plugins
         	if(loadStage < 1) {
-        		Canary.get().getLoader().loadPlugins(true);
+        		CanaryMod.get().getLoader().loadPlugins(true);
         		loadStage = 1;
         	}
         	// CanaryMod end
@@ -173,7 +173,7 @@ public class OChunkProviderServer implements OIChunkProvider {
 
         // CanaryMod start: load plugins
         if(loadStage < 2) {
-        	Canary.get().getLoader().loadPlugins(false);
+        	CanaryMod.get().getLoader().loadPlugins(false);
         	loadStage = 2;
         }
         // CanaryMod end

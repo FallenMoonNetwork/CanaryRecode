@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import net.canarymod.api.world.Chunk;
+import net.canarymod.api.world.CanaryChunk;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OBlock;
@@ -50,7 +50,7 @@ public class OChunk {
     boolean p;
     
     //CanaryMod Chunk handler
-    private Chunk handler;
+    private CanaryChunk handler;
 
     public OChunk(OWorld var1, int var2, int var3) {
         super();
@@ -104,7 +104,7 @@ public class OChunk {
     }
     
     //CanaryMod start
-    public Chunk getHandler() {
+    public CanaryChunk getHandler() {
         return handler;
     }
     //CanaryMod end

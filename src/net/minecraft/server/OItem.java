@@ -2,7 +2,7 @@ package net.minecraft.server;
 
 import java.util.Random;
 
-import net.canarymod.api.entity.BaseItem;
+import net.canarymod.api.entity.CanaryBaseItem;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityLiving;
@@ -215,7 +215,7 @@ public class OItem {
     private String bV;
     
     //CanaryMod Start
-    private BaseItem baseItem;
+    private CanaryBaseItem baseItem;
     //CanaryMod End
 
     protected OItem(int var1) {
@@ -263,7 +263,7 @@ public class OItem {
      * CanaryMod: Get BaseItem handler
      * @return
      */
-    public BaseItem getBaseItem() {
+    public CanaryBaseItem getBaseItem() {
         return this.baseItem;
     }
 

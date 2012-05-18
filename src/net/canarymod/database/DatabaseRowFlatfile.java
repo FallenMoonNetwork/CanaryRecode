@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 /**
  * @author Jos Kuijpers
  */
-public class DatabaseRowFlatfile implements IDatabaseRow {
+public class DatabaseRowFlatfile implements DatabaseRow {
 
 	private Logger log = Logger.getLogger("Minecraft");
 	
@@ -42,7 +42,7 @@ public class DatabaseRowFlatfile implements IDatabaseRow {
 	}
 
 	@Override
-	public IDatabaseTable getTable() {
+	public DatabaseTable getTable() {
 		return this.table;
 	}
 

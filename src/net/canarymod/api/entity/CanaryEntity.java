@@ -1,17 +1,17 @@
 package net.canarymod.api.entity;
 
-import net.canarymod.api.world.IDimension;
+import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.Dimension;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityItem;
 import net.minecraft.server.OEntityLiving;
 
-public class Entity implements IEntity {
+public class CanaryEntity implements Entity {
 
     protected OEntity entity;
-    protected Dimension world;
+    protected CanaryDimension world;
     
-    public Entity(OEntity entity) {
+    public CanaryEntity(OEntity entity) {
         this.entity = entity;
         world = entity.bi.getWorldHandler();
     }
@@ -120,13 +120,13 @@ public class Entity implements IEntity {
     }
 
     @Override
-    public void setWorld(IDimension dim) {
-        this.world = (Dimension) dim;
+    public void setWorld(Dimension dim) {
+        this.world = (CanaryDimension) dim;
         this.entity.bi = world.getHandle();
     }
 
     @Override
-    public IDimension getWorld() {
+    public Dimension getWorld() {
         return this.world;
     }
 
@@ -152,8 +152,8 @@ public class Entity implements IEntity {
     }
 
     @Override
-    public IEntityItem dropLoot(int itemId, int amount) {
-        return new EntityItem(entity.b(itemId, amount));
+    public EntityItem dropLoot(int itemId, int amount) {
+        return new CanaryEntityItem(entity.b(itemId, amount));
     }
 
     @Override

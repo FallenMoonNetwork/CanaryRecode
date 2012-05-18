@@ -1,5 +1,5 @@
 package net.canarymod.database;
-public class DatabaseMySQL implements IDatabase {
+public class DatabaseMySQL implements Database {
 
     @Override
     public int getNumTables() {
@@ -14,13 +14,13 @@ public class DatabaseMySQL implements IDatabase {
     }
 
     @Override
-    public IDatabaseTable getTable(String name) {
+    public DatabaseTable getTable(String name) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public boolean addTable(IDatabaseTable table) {
+    public boolean addTable(DatabaseTable table) {
         // TODO Auto-generated method stub
         return false;
     }

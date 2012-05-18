@@ -1,18 +1,18 @@
 package net.canarymod.api.inventory;
 
+import net.canarymod.api.CanaryEnchantment;
 import net.canarymod.api.Enchantment;
-import net.canarymod.api.IEnchantment;
 import net.minecraft.server.OEnchantment;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.ONBTTagCompound;
 //TODO Correctly implement this
-public class Item implements IItem {
+public class CanaryItem implements Item {
 
     private ItemType type;
     private int slot = -1;
     private OItemStack item;
     
-    public Item(OItemStack oItemStack) {
+    public CanaryItem(OItemStack oItemStack) {
         type = ItemType.fromId(oItemStack.c);
     }
 
@@ -69,34 +69,34 @@ public class Item implements IItem {
     }
 
     @Override
-    public IEnchantment getEnchantment() {
+    public Enchantment getEnchantment() {
     	return getEnchantment(0);
     }
 
     @Override
-    public IEnchantment getEnchantment(int index) {
+    public Enchantment getEnchantment(int index) {
     	if (this.isEnchanted() && index < item.p().d() && index > -1) {
             ONBTTagCompound tag = (ONBTTagCompound) item.p().a(index);
-            return new Enchantment(IEnchantment.Type.fromId(tag.e("id")), tag.e("lvl"));
+            return new CanaryEnchantment(Enchantment.Type.fromId(tag.e("id")), tag.e("lvl"));
         }
         return null;
     }
 
     @Override
-    public IEnchantment[] getEnchantments() {
-    	Enchantment[] enchantments = null;
+    public Enchantment[] getEnchantments() {
+    	CanaryEnchantment[] enchantments = null;
         if (this.isEnchanted()) {
-            enchantments = new Enchantment[item.p().d()];
+            enchantments = new CanaryEnchantment[item.p().d()];
             for (int index = 0; index < item.p().d(); index++) {
                 ONBTTagCompound tag = (ONBTTagCompound) item.p().a(index);
-                enchantments[index] = new Enchantment(IEnchantment.Type.fromId(tag.e("id")), tag.e("lvl"));
+                enchantments[index] = new CanaryEnchantment(Enchantment.Type.fromId(tag.e("id")), tag.e("lvl"));
             }
         }
         return enchantments;
     }
 
     @Override
-    public void addEnchantment(IEnchantment enchantment) {
+    public void addEnchantment(Enchantment enchantment) {
         if (enchantment != null && enchantment.getType().getType() >= 0 && enchantment.getType().getType() < OEnchantment.b.length) {
             OEnchantment enchantmentType = OEnchantment.b[enchantment.getType().getType()];
             if (enchantmentType != null){
@@ -106,29 +106,29 @@ public class Item implements IItem {
     }
 
     @Override
-    public void addEnchantments(IEnchantment[] enchantments) {
-    	for(IEnchantment enchantment : enchantments){
+    public void addEnchantments(Enchantment[] enchantments) {
+    	for(Enchantment enchantment : enchantments){
     		addEnchantment(enchantment);
     	}
     }
 
     @Override
-    public void setEnchantment(IEnchantment enchantment) {
+    public void setEnchantment(Enchantment enchantment) {
         removeAllEnchantments();
         addEnchantment(enchantment);
     }
 
     @Override
-    public void setEnchantments(IEnchantment[] enchantments) {
+    public void setEnchantments(Enchantment[] enchantments) {
         removeAllEnchantments();
         addEnchantments(enchantments);
     }
 
     @Override
-    public void removeEnchantment(IEnchantment enchantment) {
-        IEnchantment[] enchants = getEnchantments();
+    public void removeEnchantment(Enchantment enchantment) {
+        Enchantment[] enchants = getEnchantments();
         removeAllEnchantments();
-        for(IEnchantment ench : enchants){
+        for(Enchantment ench : enchants){
             if(!ench.getType().equals(enchantment.getType())){
                 addEnchantment(ench);
             }
@@ -141,7 +141,7 @@ public class Item implements IItem {
     }
 
     @Override
-    public IBaseItem getBaseItem() {
+    public BaseItem getBaseItem() {
         return item.getBaseItem();
     }
 }

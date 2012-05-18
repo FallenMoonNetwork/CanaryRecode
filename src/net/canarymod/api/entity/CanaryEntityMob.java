@@ -1,6 +1,6 @@
 package net.canarymod.api.entity;
 
-import net.canarymod.api.IDamageSource;
+import net.canarymod.api.DamageSource;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityMob;
 
@@ -9,14 +9,14 @@ import net.minecraft.server.OEntityMob;
  * 
  * @author Jason
  */
-public class EntityMob extends EntityLiving implements IEntityMob {
+public class CanaryEntityMob extends CanaryEntityLiving implements EntityMob {
 
-    public EntityMob(OEntityMob entity) {
+    public CanaryEntityMob(OEntityMob entity) {
         super(entity);
     }
 
     @Override
-    public void attackEntity(IEntityLiving arg0, IDamageSource arg1) {
+    public void attackEntity(EntityLiving arg0, DamageSource arg1) {
         // TODO Auto-generated method stub
         // pending damage source implementations
     }
@@ -29,12 +29,12 @@ public class EntityMob extends EntityLiving implements IEntityMob {
     }
 
     @Override
-    public IEntityLiving getTarget() {
-        return new EntityLiving(((OEntityLiving) entity).at());
+    public EntityLiving getTarget() {
+        return new CanaryEntityLiving(((OEntityLiving) entity).at());
     }
 
     @Override
-    public void setTarget(IEntityLiving entityliving) {
-        ((OEntityLiving) entity).b(((Entity) entityliving).entity);
+    public void setTarget(EntityLiving entityliving) {
+        ((OEntityLiving) entity).b(((CanaryEntity) entityliving).entity);
     }
 }

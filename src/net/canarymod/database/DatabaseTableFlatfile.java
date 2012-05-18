@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * @author Jos Kuijpers
  */
-public class DatabaseTableFlatfile implements IDatabaseTable {
+public class DatabaseTableFlatfile implements DatabaseTable {
 
 	private Logger log = Logger.getLogger("Minecraft");
 	private File tableFile;
@@ -204,28 +204,28 @@ public class DatabaseTableFlatfile implements IDatabaseTable {
 
 	
 	@Override
-	public IDatabaseRow getRow(int row) {
+	public DatabaseRow getRow(int row) {
 		return this.rows.get(row-1);
 	}
 	
 
 	@Override
-	public IDatabaseRow[] getAllRows() {
-		IDatabaseRow[] t = {};
+	public DatabaseRow[] getAllRows() {
+		DatabaseRow[] t = {};
 		return this.rows.toArray(t);
 	}
 	
 
 	@Override
-	public IDatabaseRow[] getFilteredRows(String column, String value) {
+	public DatabaseRow[] getFilteredRows(String column, String value) {
 		// Find the column to check
 		int position = this.getColumnPosition(column);
 		if(position == -1)
 			return null;
 		
 		// Find and store the rows
-		ArrayList<IDatabaseRow> ret = new ArrayList<IDatabaseRow>();
-		IDatabaseRow[] retType = {};
+		ArrayList<DatabaseRow> ret = new ArrayList<DatabaseRow>();
+		DatabaseRow[] retType = {};
 		
 		for(DatabaseRowFlatfile row : this.rows) {
 			if(row.cells.get(position).equals(value))
@@ -241,7 +241,7 @@ public class DatabaseTableFlatfile implements IDatabaseTable {
 	
 
 	@Override
-	public IDatabaseRow addRow() {
+	public DatabaseRow addRow() {
 		DatabaseRowFlatfile newRow = new DatabaseRowFlatfile(this, null);
 		this.rows.add(newRow);
 		return newRow;
@@ -249,7 +249,7 @@ public class DatabaseTableFlatfile implements IDatabaseTable {
 	
 
 	@Override
-	public void removeRow(IDatabaseRow row) {
+	public void removeRow(DatabaseRow row) {
 		if(this.rows.remove(row))
 			this.save();
 	}

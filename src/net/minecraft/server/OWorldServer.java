@@ -3,7 +3,7 @@ package net.minecraft.server;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.CanaryDimension;
 import net.minecraft.server.OChunkProviderServer;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAnimal;
@@ -39,7 +39,7 @@ public class OWorldServer extends OWorld {
     /**
      * CanaryMod Dimension (OWorldWrapper)
      */
-    private Dimension canaryWorld;
+    private CanaryDimension canaryWorld;
 
     /**
      * Get the CanaryMod Server wrapper
@@ -49,11 +49,11 @@ public class OWorldServer extends OWorld {
         return J.getServer();
     }
     
-    public Dimension getCanaryWorld() {
+    public CanaryDimension getCanaryWorld() {
         return canaryWorld;
     }
     
-    public void setCanaryWorld(Dimension dim) {
+    public void setCanaryWorld(CanaryDimension dim) {
         canaryWorld = dim;
     }
     public OWorldServer(OMinecraftServer var1, OISaveHandler var2, String var3, int var4, OWorldSettings var5) {

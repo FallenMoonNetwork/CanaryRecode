@@ -5,15 +5,15 @@ package net.canarymod.api.world;
  * @author Jos Kuijpers
  *
  */
-public class WorldManager implements IWorldManager {
+public class CanaryWorldManager implements WorldManager {
    
-    private World[] worlds;
+    private CanaryWorld[] worlds;
     
-    public WorldManager() {
+    public CanaryWorldManager() {
         //this.worlds = 
     }
     
-    public IWorld getWorld(String name) {
+    public World getWorld(String name) {
     	return null;
     }
 	
@@ -25,7 +25,7 @@ public class WorldManager implements IWorldManager {
     	return false;
     }
 	
-    public IDimension getDimension(String world, int dimension) {
+    public Dimension getDimension(String world, int dimension) {
     	return null;
     }
     
@@ -33,7 +33,7 @@ public class WorldManager implements IWorldManager {
 
 	}
 	    
-    public IWorld[] getAllWorlds() {
+    public World[] getAllWorlds() {
         return this.worlds;
     }
 }

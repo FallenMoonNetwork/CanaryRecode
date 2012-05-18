@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import net.minecraft.server.OChunkProviderServer;
 
-public class ChunkProviderServer implements IChunkProviderServer {
+public class CanaryChunkProviderServer implements ChunkProviderServer {
 
     private OChunkProviderServer handle;
     
-    public ChunkProviderServer(OChunkProviderServer handle) {
+    public CanaryChunkProviderServer(OChunkProviderServer handle) {
         this.handle = handle;
     }
 
@@ -23,12 +23,12 @@ public class ChunkProviderServer implements IChunkProviderServer {
     }
 
     @Override
-    public IChunk loadChunk(int x, int z) {
+    public Chunk loadChunk(int x, int z) {
         return this.handle.c(x >> 4, z >> 4).getHandler();
     }
 
     @Override
-    public IChunk provideChunk(int x, int z) {
+    public Chunk provideChunk(int x, int z) {
         return this.handle.b(x, z).getHandler();
     }
 

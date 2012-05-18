@@ -1,12 +1,12 @@
 package net.canarymod.api.entity;
 
-import net.canarymod.api.inventory.Item;
+import net.canarymod.api.inventory.CanaryItem;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityItem;
 
-public class EntityItem extends Entity implements IEntityItem {
+public class CanaryEntityItem extends CanaryEntity implements EntityItem {
 
-    public EntityItem(OEntity entity) {
+    public CanaryEntityItem(OEntity entity) {
         super(entity);
     }
 
@@ -21,7 +21,7 @@ public class EntityItem extends Entity implements IEntityItem {
     }
 
     @Override
-    public Item getItem() {
+    public CanaryItem getItem() {
         return ((OEntityItem)entity).getItemStack().getItem();
     }
 

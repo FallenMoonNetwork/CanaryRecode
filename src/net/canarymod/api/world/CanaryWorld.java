@@ -2,14 +2,14 @@ package net.canarymod.api.world;
 
 import java.util.List;
 
-import net.canarymod.api.entity.IPlayer;
+import net.canarymod.api.entity.Player;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldServer;
 
-public class World implements IWorld {
+public class CanaryWorld implements World {
    
-    private Dimension[] dimensions;
+    private CanaryDimension[] dimensions;
     private OWorldServer[] oDimensions;
     public long[][] nanoTicks;
     private boolean enabled;
@@ -19,9 +19,9 @@ public class World implements IWorld {
      */
     private String name;
     
-    public World(String name, OWorld[] dimensions) {
+    public CanaryWorld(String name, OWorld[] dimensions) {
         this.name = name;
-        this.dimensions = new Dimension[] {new Dimension(dimensions[0], this), new Dimension(dimensions[1],this), new Dimension(dimensions[2],this)};
+        this.dimensions = new CanaryDimension[] {new CanaryDimension(dimensions[0], this), new CanaryDimension(dimensions[1],this), new CanaryDimension(dimensions[2],this)};
         nanoTicks = new long[dimensions.length][100]; //TODO: Find out what the hell this does
         oDimensions = (OWorldServer[]) dimensions;
     }
@@ -43,7 +43,7 @@ public class World implements IWorld {
      * @return
      */
     @Override
-    public Dimension getNormal() {
+    public CanaryDimension getNormal() {
         return this.dimensions[0];
     }
     
@@ -52,7 +52,7 @@ public class World implements IWorld {
      * @return
      */
     @Override
-    public Dimension getNether() {
+    public CanaryDimension getNether() {
         return this.dimensions[1];
     }
     
@@ -61,12 +61,12 @@ public class World implements IWorld {
      * @return
      */
     @Override
-    public Dimension getEnd() {
+    public CanaryDimension getEnd() {
         return this.dimensions[2];
     }
     
     @Override
-    public IDimension getDimension(DimensionType dimension) {
+    public Dimension getDimension(DimensionType dimension) {
     	return this.dimensions[dimension.getIntValue()];
     }
     
@@ -86,17 +86,17 @@ public class World implements IWorld {
     }
 	
     @Override
-	public boolean canEnterWorld(IPlayer player) {
+	public boolean canEnterWorld(Player player) {
     	return player.hasPermission("world.traveling."+name+".enter") && isEnabled();
     }
 	
     @Override
-	public boolean canLeaveWorld(IPlayer player) {
+	public boolean canLeaveWorld(Player player) {
     	return player.hasPermission("world.traveling."+name+".leave");
     }
 
 	@Override
-	public IPlayer matchPlayer(String playerName) {
+	public Player matchPlayer(String playerName) {
 //	    IPlayer lastPlayer = null;
 //
 //        name = name.toLowerCase();
@@ -126,7 +126,7 @@ public class World implements IWorld {
 	}
 
 	@Override
-	public IPlayer getPlayer(String player) {
+	public Player getPlayer(String player) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
+import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.Dimension;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBiomeGenBase;
@@ -104,14 +105,14 @@ public class OWorld implements OIBlockAccess {
     public boolean F;
     
     //CanaryMod World handler
-    private Dimension worldHandler;
+    private CanaryDimension worldHandler;
     
     //CanaryMod Start
-    public void setWorldHandler(Dimension world) {
+    public void setWorldHandler(CanaryDimension world) {
         this.worldHandler = world;
     }
     
-    public Dimension getWorldHandler() {
+    public CanaryDimension getWorldHandler() {
         return worldHandler;
     }
     //CanaryMod End

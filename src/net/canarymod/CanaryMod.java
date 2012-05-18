@@ -2,8 +2,8 @@ package net.canarymod;
 
 //import java.util.logging.Logger;
 
-import net.canarymod.backbone.IBackbone;
-import net.canarymod.backbone.IBackbone.System;
+import net.canarymod.backbone.Backbone;
+import net.canarymod.backbone.Backbone.System;
 import net.canarymod.config.Configuration;
 import net.canarymod.plugin.PluginLoader;
 
@@ -13,7 +13,7 @@ import net.canarymod.plugin.PluginLoader;
  * @author Chris Ksoll
  * @author Jos Kuijpers
  */
-public class Canary extends ICanary {
+public class CanaryMod extends Canary {
 
 //    private static final Logger log = Logger.getLogger("Minecraft");
     
@@ -25,7 +25,7 @@ public class Canary extends ICanary {
      * TODO: add subsystem inits
      * and the respective backbones
      */
-    public Canary() {
+    public CanaryMod() {
         //We already have an instance if this is not null
         if(instance != null) {
             return;
@@ -39,12 +39,12 @@ public class Canary extends ICanary {
         // Determine the back-end and create a database instance for it.
     }
     
-    public void setServer(Server server) {
+    public void setServer(CanaryServer server) {
         this.server = server;
     }
 
     @Override
-    public IBackbone getBackbone(System system) {
+    public Backbone getBackbone(Backbone.System arg0) {
         // TODO Auto-generated method stub
         return null;
     }

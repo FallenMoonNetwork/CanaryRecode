@@ -1,7 +1,7 @@
 package net.canarymod.api.entity;
 
+import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.DamageSource;
-import net.canarymod.api.IDamageSource;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityAnimal;
@@ -16,15 +16,15 @@ import net.minecraft.server.OIMob;
  * 
  * @author Jason
  */
-public class EntityLiving extends Entity implements IEntityLiving {
+public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
-    public EntityLiving(OEntityLiving entity) {
+    public CanaryEntityLiving(OEntityLiving entity) {
         super(entity);
     }
 
     @Override
-    public boolean canSee(IEntityLiving entityliving) {
-        return ((OEntityLiving) entity).h(((Entity) entityliving).entity);
+    public boolean canSee(EntityLiving entityliving) {
+        return ((OEntityLiving) entity).h(((CanaryEntity) entityliving).entity);
     }
 
     @Override
@@ -33,10 +33,10 @@ public class EntityLiving extends Entity implements IEntityLiving {
     }
 
     @Override
-    public void dealDamage(IDamageSource damagesource, int amount) {
+    public void dealDamage(DamageSource damagesource, int amount) {
         // TODO ODamageSource matching for null handle (cause someone didn't truely think out the API library)
-        if (damagesource instanceof DamageSource && ((DamageSource) damagesource).getHandle() != null) {
-            ((OEntityLiving) entity).a(((DamageSource) damagesource).getHandle(), amount);
+        if (damagesource instanceof CanaryDamageSource && ((CanaryDamageSource) damagesource).getHandle() != null) {
+            ((OEntityLiving) entity).a(((CanaryDamageSource) damagesource).getHandle(), amount);
         }
 
     }
@@ -47,9 +47,9 @@ public class EntityLiving extends Entity implements IEntityLiving {
     }
 
     @Override
-    public IEntityAnimal getAnimal() {
+    public EntityAnimal getAnimal() {
         if (isAnimal()) {
-            return this instanceof EntityAnimal ? (EntityAnimal) this : new EntityAnimal((OEntityAnimal) entity);
+            return this instanceof CanaryEntityAnimal ? (CanaryEntityAnimal) this : new CanaryEntityAnimal((OEntityAnimal) entity);
         }
         return null;
     }
@@ -79,9 +79,9 @@ public class EntityLiving extends Entity implements IEntityLiving {
     }
 
     @Override
-    public IEntityMob getMob() {
+    public EntityMob getMob() {
         if (isMob()) {
-            return this instanceof EntityMob ? (EntityMob) this : new EntityMob((OEntityMob) entity);
+            return this instanceof CanaryEntityMob ? (CanaryEntityMob) this : new CanaryEntityMob((OEntityMob) entity);
         }
         return null;
     }
@@ -92,7 +92,7 @@ public class EntityLiving extends Entity implements IEntityLiving {
     }
 
     @Override
-    public IPlayer getPlayer() {
+    public Player getPlayer() {
         //if(isPlayer()){
         //	return somefancywaytogetaplayerfromanentityliving();
         //}

@@ -1,6 +1,6 @@
 package net.canarymod.api.entity;
 
-import net.canarymod.api.inventory.IBaseItem;
+import net.canarymod.api.inventory.BaseItem;
 import net.minecraft.server.OItem;
 
 /**
@@ -8,10 +8,10 @@ import net.minecraft.server.OItem;
  * @author Chris
  *
  */
-public class BaseItem implements IBaseItem{
+public class CanaryBaseItem implements BaseItem{
 
     private OItem item;
-    public BaseItem(OItem item) {
+    public CanaryBaseItem(OItem item) {
         this.item = item;
     }
     @Override
