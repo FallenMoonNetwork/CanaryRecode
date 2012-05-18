@@ -2,6 +2,8 @@ package net.minecraft.server;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.canarymod.api.world.Dimension;
 import net.minecraft.server.OChunkProviderServer;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAnimal;
@@ -33,14 +35,33 @@ public class OWorldServer extends OWorld {
     public boolean I;
     private OMinecraftServer J;
     private OIntHashMap K;
+    
+    /**
+     * CanaryMod Dimension (OWorldWrapper)
+     */
+    private Dimension canaryWorld;
 
+    /**
+     * Get the CanaryMod Server wrapper
+     * @return
+     */
+    public Object getServer() {
+        return J.getServer();
+    }
+    
+    public Dimension getCanaryWorld() {
+        return canaryWorld;
+    }
+    
+    public void setCanaryWorld(Dimension dim) {
+        canaryWorld = dim;
+    }
     public OWorldServer(OMinecraftServer var1, OISaveHandler var2, String var3, int var4, OWorldSettings var5) {
         super(var2, var3, var5, OWorldProvider.a(var4));
         this.J = var1;
         if (this.K == null) {
             this.K = new OIntHashMap();
         }
-
     }
 
     public void a(OEntity var1, boolean var2) {

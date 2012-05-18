@@ -88,6 +88,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     public long[] x = new long[100];
     private ORConThreadQuery I;
     private ORConThreadMain J;
+    //CanaryMod Server reference
     private Server server;
 
     public OMinecraftServer() {

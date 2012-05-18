@@ -96,32 +96,33 @@ public class World implements IWorld {
     }
 
 	@Override
-	public IPlayer matchPlayer(String player) {
-	    IPlayer lastPlayer = null;
-
-        name = name.toLowerCase();
-        for(OWorldServer world : oDimensions) {
-            for (OEntityPlayerMP player : (List<OEntityPlayerMP>) world.getServer().get) {
-                String playerName = player.v;
-
-                if (playerName.toLowerCase().equals(name)) {
-                    // Perfect match found
-                    lastPlayer = player.getPlayer();
-                    break;
-                }
-                if (playerName.toLowerCase().indexOf(name.toLowerCase()) != -1) {
-                    // Partial match
-                    if (lastPlayer != null) {
-                        // Found multiple
-                        return null;
-                    }
-                    lastPlayer = player.getPlayer();
-                }
-            }
-        }
-        
-
-        return lastPlayer;
+	public IPlayer matchPlayer(String playerName) {
+//	    IPlayer lastPlayer = null;
+//
+//        name = name.toLowerCase();
+//        for(OWorldServer world : oDimensions) {
+//            for (OEntityPlayerMP player : (List<OEntityPlayerMP>) world.getServer().get) {
+//                String playerName = player.v;
+//
+//                if (playerName.toLowerCase().equals(name)) {
+//                    // Perfect match found
+//                    lastPlayer = player.getPlayer();
+//                    break;
+//                }
+//                if (playerName.toLowerCase().indexOf(name.toLowerCase()) != -1) {
+//                    // Partial match
+//                    if (lastPlayer != null) {
+//                        // Found multiple
+//                        return null;
+//                    }
+//                    lastPlayer = player.getPlayer();
+//                }
+//            }
+//        }
+//        
+//
+//        return lastPlayer;
+	    return null;
 	}
 
 	@Override
