@@ -16,173 +16,173 @@ import net.minecraft.server.OIMob;
  * 
  * @author Jason
  */
-public class EntityLiving extends Entity implements IEntityLiving{
-	
-	public EntityLiving(OEntityLiving entity){
-		super(entity);
-	}
+public class EntityLiving extends Entity implements IEntityLiving {
 
-	@Override
-	public boolean canSee(IEntityLiving entityliving) {
-		return ((OEntityLiving)entity).h(((Entity)entityliving).entity);
-	}
+    public EntityLiving(OEntityLiving entity) {
+        super(entity);
+    }
 
-	@Override
-	public boolean canSpawn() {
-		return ((OEntityLiving)entity).l();
-	}
+    @Override
+    public boolean canSee(IEntityLiving entityliving) {
+        return ((OEntityLiving) entity).h(((Entity) entityliving).entity);
+    }
 
-	@Override
-	public void dealDamage(IDamageSource damagesource, int amount) {
-		// TODO ODamageSource matching for null handle (cause someone didn't truely think out the API library)
-		if(damagesource instanceof DamageSource && ((DamageSource) damagesource).getHandle() != null){
-			((OEntityLiving)entity).a(((DamageSource) damagesource).getHandle(), amount);
-		}
-		
-	}
+    @Override
+    public boolean canSpawn() {
+        return ((OEntityLiving) entity).l();
+    }
 
-	@Override
-	public int getAge() {
-		return ((OEntityLiving)entity).aq();
-	}
+    @Override
+    public void dealDamage(IDamageSource damagesource, int amount) {
+        // TODO ODamageSource matching for null handle (cause someone didn't truely think out the API library)
+        if (damagesource instanceof DamageSource && ((DamageSource) damagesource).getHandle() != null) {
+            ((OEntityLiving) entity).a(((DamageSource) damagesource).getHandle(), amount);
+        }
 
-	@Override
-	public IEntityAnimal getAnimal() {
-		if(isAnimal()){
-			return this instanceof EntityAnimal ? (EntityAnimal) this : new EntityAnimal((OEntityAnimal)entity);
-		}
-		return null;
-	}
+    }
 
-	@Override
-	public int getDeathTicks() {
-		return ((OEntityLiving)entity).av;
-	}
+    @Override
+    public int getAge() {
+        return ((OEntityLiving) entity).aq();
+    }
 
-	@Override
-	public int getHealth() {
-		return ((OEntityLiving)entity).aD();
-	}
+    @Override
+    public IEntityAnimal getAnimal() {
+        if (isAnimal()) {
+            return this instanceof EntityAnimal ? (EntityAnimal) this : new EntityAnimal((OEntityAnimal) entity);
+        }
+        return null;
+    }
 
-	@Override
-	public Vector3D getHome() {
-		if(hasHome()){
-			OChunkCoordinates home = ((OEntityLiving)entity).av();
-			return new Vector3D(home.a, home.b, home.c);
-		}
-		return null;
-	}
+    @Override
+    public int getDeathTicks() {
+        return ((OEntityLiving) entity).av;
+    }
 
-	@Override
-	public int getMaxHealth() {
-		return ((OEntityLiving)entity).d();
-	}
+    @Override
+    public int getHealth() {
+        return ((OEntityLiving) entity).aD();
+    }
 
-	@Override
-	public IEntityMob getMob() {
-		if(isMob()){
-			return this instanceof EntityMob ? (EntityMob) this : new EntityMob((OEntityMob)entity);
-		}
-		return null;
-	}
+    @Override
+    public Vector3D getHome() {
+        if (hasHome()) {
+            OChunkCoordinates home = ((OEntityLiving) entity).av();
+            return new Vector3D(home.a, home.b, home.c);
+        }
+        return null;
+    }
 
-	@Override
-	public String getName() {
-		return OEntityList.b(entity);
-	}
+    @Override
+    public int getMaxHealth() {
+        return ((OEntityLiving) entity).d();
+    }
 
-	@Override
-	public IPlayer getPlayer() {
-		//if(isPlayer()){
-		//	return somefancywaytogetaplayerfromanentityliving();
-		//}
-		return null;
-	}
+    @Override
+    public IEntityMob getMob() {
+        if (isMob()) {
+            return this instanceof EntityMob ? (EntityMob) this : new EntityMob((OEntityMob) entity);
+        }
+        return null;
+    }
 
-	@Override
-	public boolean hasHome() {
-		return ((OEntityLiving)entity).ay();
-	}
+    @Override
+    public String getName() {
+        return OEntityList.b(entity);
+    }
 
-	@Override
-	public void increaseHealth(int increase) {
-		((OEntityLiving)entity).d(increase);
-	}
+    @Override
+    public IPlayer getPlayer() {
+        //if(isPlayer()){
+        //	return somefancywaytogetaplayerfromanentityliving();
+        //}
+        return null;
+    }
 
-	@Override
-	public boolean isAnimal() {
-		return entity instanceof OIAnimals;
-	}
+    @Override
+    public boolean hasHome() {
+        return ((OEntityLiving) entity).ay();
+    }
 
-	@Override
-	public boolean isMob() {
-		return entity instanceof OIMob;
-	}
+    @Override
+    public void increaseHealth(int increase) {
+        ((OEntityLiving) entity).d(increase);
+    }
 
-	@Override
-	public boolean isPlayer() {
-		return ((OEntityLiving)entity).ah();
-	}
+    @Override
+    public boolean isAnimal() {
+        return entity instanceof OIAnimals;
+    }
 
-	@Override
-	public void kill() {
-		//Kill as in setHealth(0) or entity.destroy();  (currently set as destroy)
-		entity.X();
-	}
+    @Override
+    public boolean isMob() {
+        return entity instanceof OIMob;
+    }
 
-	@Override
-	public void knockBack(double x, double z) {
-		((OEntityLiving)entity).a(entity, 0, x, z); //NOTE: There may be something more needed in the arguments
-	}
+    @Override
+    public boolean isPlayer() {
+        return ((OEntityLiving) entity).ah();
+    }
 
-	@Override
-	public void moveEntity(double arg0, double arg1, double arg2) {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public void kill() {
+        //Kill as in setHealth(0) or entity.destroy();  (currently set as destroy)
+        entity.X();
+    }
 
-	@Override
-	public void playLivingSound() {
-		((OEntityLiving)entity).az();
-	}
+    @Override
+    public void knockBack(double x, double z) {
+        ((OEntityLiving) entity).a(entity, 0, x, z); //NOTE: There may be something more needed in the arguments
+    }
 
-	@Override
-	public void removeHome() {
-		((OEntityLiving)entity).ax();
-	}
+    @Override
+    public void moveEntity(double arg0, double arg1, double arg2) {
+        // TODO Auto-generated method stub
+    }
 
-	@Override
-	public void setAge(int age) {
-		((OEntityLiving)entity).aV = age;
-	}
+    @Override
+    public void playLivingSound() {
+        ((OEntityLiving) entity).az();
+    }
 
-	@Override
-	public void setDeathTicks(int ticks) {
-		((OEntityLiving)entity).av = ticks;
-	}
+    @Override
+    public void removeHome() {
+        ((OEntityLiving) entity).ax();
+    }
 
-	@Override
-	public void setHealth(int newHealth) {
-		((OEntityLiving)entity).h(newHealth);
-	}
+    @Override
+    public void setAge(int age) {
+        ((OEntityLiving) entity).aV = age;
+    }
 
-	@Override
-	public void setHome(Vector3D vector) {
-		setHomeArea((int)Math.floor(vector.getX()), (int)Math.floor(vector.getY()), (int)Math.floor(vector.getZ()), 25); //TODO what should default be for maxHomeDistance?
-		
-	}
+    @Override
+    public void setDeathTicks(int ticks) {
+        ((OEntityLiving) entity).av = ticks;
+    }
 
-	@Override
-	public void setHomeArea(Vector3D vector, int dist) {
-		setHomeArea((int)Math.floor(vector.getX()), (int)Math.floor(vector.getY()), (int)Math.floor(vector.getZ()), dist);
-	}
+    @Override
+    public void setHealth(int newHealth) {
+        ((OEntityLiving) entity).h(newHealth);
+    }
 
-	@Override
-	public void setHomeArea(int x, int y, int z, int dist) {
-		((OEntityLiving)entity).b(x, y, z, dist);
-	}
+    @Override
+    public void setHome(Vector3D vector) {
+        setHomeArea((int) Math.floor(vector.getX()), (int) Math.floor(vector.getY()), (int) Math.floor(vector.getZ()), 25); //TODO what should default be for maxHomeDistance?
 
-	@Override
-	public void setHomeRadius(int arg0) { //What is this?
-		// TODO Auto-generated method stub
-	}
+    }
+
+    @Override
+    public void setHomeArea(Vector3D vector, int dist) {
+        setHomeArea((int) Math.floor(vector.getX()), (int) Math.floor(vector.getY()), (int) Math.floor(vector.getZ()), dist);
+    }
+
+    @Override
+    public void setHomeArea(int x, int y, int z, int dist) {
+        ((OEntityLiving) entity).b(x, y, z, dist);
+    }
+
+    @Override
+    public void setHomeRadius(int arg0) { //What is this?
+        // TODO Auto-generated method stub
+    }
 }
