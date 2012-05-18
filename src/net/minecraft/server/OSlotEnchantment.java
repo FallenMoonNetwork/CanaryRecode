@@ -7,16 +7,15 @@ import net.minecraft.server.OSlot;
 
 class OSlotEnchantment extends OSlot {
 
-   // $FF: synthetic field
-   final OContainerEnchantment a;
+    // $FF: synthetic field
+    final OContainerEnchantment a;
 
+    OSlotEnchantment(OContainerEnchantment var1, OIInventory var2, int var3, int var4, int var5) {
+        super(var2, var3, var4, var5);
+        this.a = var1;
+    }
 
-   OSlotEnchantment(OContainerEnchantment var1, OIInventory var2, int var3, int var4, int var5) {
-      super(var2, var3, var4, var5);
-      this.a = var1;
-   }
-
-   public boolean a(OItemStack var1) {
-      return true;
-   }
+    public boolean a(OItemStack var1) {
+        return true;
+    }
 }

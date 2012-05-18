@@ -6,27 +6,29 @@ import net.minecraft.server.ONBTBase;
 
 public class ONBTTagEnd extends ONBTBase {
 
-   public ONBTTagEnd() {
-      super((String)null);
-   }
+    public ONBTTagEnd() {
+        super((String) null);
+    }
 
-   void a(DataInput var1) {}
+    void a(DataInput var1) {
+    }
 
-   void a(DataOutput var1) {}
+    void a(DataOutput var1) {
+    }
 
-   public byte a() {
-      return (byte)0;
-   }
+    public byte a() {
+        return (byte) 0;
+    }
 
-   public String toString() {
-      return "END";
-   }
+    public String toString() {
+        return "END";
+    }
 
-   public ONBTBase b() {
-      return new ONBTTagEnd();
-   }
+    public ONBTBase b() {
+        return new ONBTTagEnd();
+    }
 
-   public boolean equals(Object var1) {
-      return super.equals(var1);
-   }
+    public boolean equals(Object var1) {
+        return super.equals(var1);
+    }
 }

@@ -8,14 +8,14 @@ import net.minecraft.server.OSpawnListEntry;
 
 public class OBiomeGenEnd extends OBiomeGenBase {
 
-   public OBiomeGenEnd(int var1) {
-      super(var1);
-      this.J.clear();
-      this.K.clear();
-      this.L.clear();
-      this.J.add(new OSpawnListEntry(OEntityEnderman.class, 10, 4, 4));
-      this.A = (byte)OBlock.v.bO;
-      this.B = (byte)OBlock.v.bO;
-      this.I = new OBiomeEndDecorator(this);
-   }
+    public OBiomeGenEnd(int var1) {
+        super(var1);
+        this.J.clear();
+        this.K.clear();
+        this.L.clear();
+        this.J.add(new OSpawnListEntry(OEntityEnderman.class, 10, 4, 4));
+        this.A = (byte) OBlock.v.bO;
+        this.B = (byte) OBlock.v.bO;
+        this.I = new OBiomeEndDecorator(this);
+    }
 }

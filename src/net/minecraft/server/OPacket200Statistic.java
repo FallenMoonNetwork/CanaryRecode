@@ -9,35 +9,34 @@ import net.minecraft.server.OPacket;
 
 public class OPacket200Statistic extends OPacket {
 
-   public int a;
-   public int b;
+    public int a;
+    public int b;
 
+    public OPacket200Statistic() {
+        super();
+    }
 
-   public OPacket200Statistic() {
-      super();
-   }
+    public OPacket200Statistic(int var1, int var2) {
+        super();
+        this.a = var1;
+        this.b = var2;
+    }
 
-   public OPacket200Statistic(int var1, int var2) {
-      super();
-      this.a = var1;
-      this.b = var2;
-   }
+    public void a(ONetHandler var1) {
+        var1.a(this);
+    }
 
-   public void a(ONetHandler var1) {
-      var1.a(this);
-   }
+    public void a(DataInputStream var1) throws IOException {
+        this.a = var1.readInt();
+        this.b = var1.readByte();
+    }
 
-   public void a(DataInputStream var1) throws IOException {
-      this.a = var1.readInt();
-      this.b = var1.readByte();
-   }
+    public void a(DataOutputStream var1) throws IOException {
+        var1.writeInt(this.a);
+        var1.writeByte(this.b);
+    }
 
-   public void a(DataOutputStream var1) throws IOException {
-      var1.writeInt(this.a);
-      var1.writeByte(this.b);
-   }
-
-   public int a() {
-      return 6;
-   }
+    public int a() {
+        return 6;
+    }
 }

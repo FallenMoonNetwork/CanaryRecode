@@ -1,9 +1,8 @@
 package net.minecraft.server;
 
-
 public interface OICommandListener {
 
-   void b(String var1);
+    void b(String var1);
 
-   String d();
+    String d();
 }

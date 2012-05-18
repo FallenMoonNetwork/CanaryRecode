@@ -9,39 +9,38 @@ import net.minecraft.server.OPacket;
 
 public class OPacket106Transaction extends OPacket {
 
-   public int a;
-   public short b;
-   public boolean c;
+    public int a;
+    public short b;
+    public boolean c;
 
+    public OPacket106Transaction() {
+        super();
+    }
 
-   public OPacket106Transaction() {
-      super();
-   }
+    public OPacket106Transaction(int var1, short var2, boolean var3) {
+        super();
+        this.a = var1;
+        this.b = var2;
+        this.c = var3;
+    }
 
-   public OPacket106Transaction(int var1, short var2, boolean var3) {
-      super();
-      this.a = var1;
-      this.b = var2;
-      this.c = var3;
-   }
+    public void a(ONetHandler var1) {
+        var1.a(this);
+    }
 
-   public void a(ONetHandler var1) {
-      var1.a(this);
-   }
+    public void a(DataInputStream var1) throws IOException {
+        this.a = var1.readByte();
+        this.b = var1.readShort();
+        this.c = var1.readByte() != 0;
+    }
 
-   public void a(DataInputStream var1) throws IOException {
-      this.a = var1.readByte();
-      this.b = var1.readShort();
-      this.c = var1.readByte() != 0;
-   }
+    public void a(DataOutputStream var1) throws IOException {
+        var1.writeByte(this.a);
+        var1.writeShort(this.b);
+        var1.writeByte(this.c ? 1 : 0);
+    }
 
-   public void a(DataOutputStream var1) throws IOException {
-      var1.writeByte(this.a);
-      var1.writeShort(this.b);
-      var1.writeByte(this.c?1:0);
-   }
-
-   public int a() {
-      return 4;
-   }
+    public int a() {
+        return 4;
+    }
 }

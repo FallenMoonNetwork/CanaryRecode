@@ -1,39 +1,45 @@
 package net.canarymod.api.world;
 
+import java.io.IOException;
+
 import net.minecraft.server.OChunkProviderServer;
 
 public class ChunkProviderServer implements IChunkProviderServer {
 
-    private OChunkProviderServer _handle;
+    private OChunkProviderServer handle;
     
     public ChunkProviderServer(OChunkProviderServer handle) {
-        _handle = handle;
+        this.handle = handle;
     }
 
     @Override
     public boolean canSave() {
-        return _handle.b();
+        return this.handle.b();
     }
 
     @Override
     public boolean chunkExists(int x, int z) {
-        return _handle.a(x, z);
+        return this.handle.a(x, z);
     }
 
     @Override
     public IChunk loadChunk(int x, int z) {
-        return _handle.c(x >> 4, z >> 4).getHandler();
+        return this.handle.c(x >> 4, z >> 4).getHandler();
     }
 
     @Override
     public IChunk provideChunk(int x, int z) {
-        return _handle.b(x, z).getHandler();
+        return this.handle.b(x, z).getHandler();
     }
 
     @Override
     public boolean saveChunk(boolean saveAll) {
         //The chunk saver doesn't touch the progress object thingy
-        return _handle.a(saveAll, null);
+        try {
+            return this.handle.a(saveAll, null);
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     /**
@@ -41,7 +47,11 @@ public class ChunkProviderServer implements IChunkProviderServer {
      */
     @Override
     public void unloadAllChunks() {
-        _handle.a();
+        try {
+            this.handle.a();
+        } catch (IOException e) {
+            
+        }
     }
 
 }

@@ -8,30 +8,30 @@ import net.minecraft.server.OWorld;
 
 public class OItemBucketMilk extends OItem {
 
-   public OItemBucketMilk(int var1) {
-      super(var1);
-      this.e(1);
-   }
+    public OItemBucketMilk(int var1) {
+        super(var1);
+        this.e(1);
+    }
 
-   public OItemStack b(OItemStack var1, OWorld var2, OEntityPlayer var3) {
-      --var1.a;
-      if(!var2.F) {
-         var3.aL();
-      }
+    public OItemStack b(OItemStack var1, OWorld var2, OEntityPlayer var3) {
+        --var1.a;
+        if (!var2.F) {
+            var3.aL();
+        }
 
-      return var1.a <= 0?new OItemStack(OItem.av):var1;
-   }
+        return var1.a <= 0 ? new OItemStack(OItem.av) : var1;
+    }
 
-   public int c(OItemStack var1) {
-      return 32;
-   }
+    public int c(OItemStack var1) {
+        return 32;
+    }
 
-   public OEnumAction d(OItemStack var1) {
-      return OEnumAction.c;
-   }
+    public OEnumAction d(OItemStack var1) {
+        return OEnumAction.c;
+    }
 
-   public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
-      var3.a(var1, this.c(var1));
-      return var1;
-   }
+    public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
+        var3.a(var1, this.c(var1));
+        return var1;
+    }
 }

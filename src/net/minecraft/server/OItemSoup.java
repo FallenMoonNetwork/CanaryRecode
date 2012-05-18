@@ -8,13 +8,13 @@ import net.minecraft.server.OWorld;
 
 public class OItemSoup extends OItemFood {
 
-   public OItemSoup(int var1, int var2) {
-      super(var1, var2, false);
-      this.e(1);
-   }
+    public OItemSoup(int var1, int var2) {
+        super(var1, var2, false);
+        this.e(1);
+    }
 
-   public OItemStack b(OItemStack var1, OWorld var2, OEntityPlayer var3) {
-      super.b(var1, var2, var3);
-      return new OItemStack(OItem.D);
-   }
+    public OItemStack b(OItemStack var1, OWorld var2, OEntityPlayer var3) {
+        super.b(var1, var2, var3);
+        return new OItemStack(OItem.D);
+    }
 }

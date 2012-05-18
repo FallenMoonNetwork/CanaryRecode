@@ -1,5 +1,6 @@
 package net.canarymod.api.entity;
 
+import net.canarymod.api.DamageSource;
 import net.canarymod.api.IDamageSource;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OChunkCoordinates;
@@ -23,8 +24,7 @@ public class EntityLiving extends Entity implements IEntityLiving{
 
 	@Override
 	public boolean canSee(IEntityLiving entityliving) {
-		// TODO Auto-generated method stub
-		return false;
+		return ((OEntityLiving)entity).h(((Entity)entityliving).entity);
 	}
 
 	@Override
@@ -34,7 +34,11 @@ public class EntityLiving extends Entity implements IEntityLiving{
 
 	@Override
 	public void dealDamage(IDamageSource damagesource, int amount) {
-		// TODO Auto-generated method stub
+		// TODO ODamageSource matching for null handle (cause someone didn't truely think out the API library)
+		if(damagesource instanceof DamageSource && ((DamageSource) damagesource).getHandle() != null){
+			((OEntityLiving)entity).a(((DamageSource) damagesource).getHandle(), amount);
+		}
+		
 	}
 
 	@Override
@@ -168,17 +172,17 @@ public class EntityLiving extends Entity implements IEntityLiving{
 	}
 
 	@Override
-	public void setHomeArea(Vector3D vector, int arg1) {
-		setHomeArea((int)Math.floor(vector.getX()), (int)Math.floor(vector.getY()), (int)Math.floor(vector.getZ()), arg1);
+	public void setHomeArea(Vector3D vector, int dist) {
+		setHomeArea((int)Math.floor(vector.getX()), (int)Math.floor(vector.getY()), (int)Math.floor(vector.getZ()), dist);
 	}
 
 	@Override
-	public void setHomeArea(int x, int y, int z, int arg3) {
-		((OEntityLiving)entity).b(x, y, z, arg3);
+	public void setHomeArea(int x, int y, int z, int dist) {
+		((OEntityLiving)entity).b(x, y, z, dist);
 	}
 
 	@Override
-	public void setHomeRadius(int arg0) {
+	public void setHomeRadius(int arg0) { //What is this?
 		// TODO Auto-generated method stub
 	}
 }

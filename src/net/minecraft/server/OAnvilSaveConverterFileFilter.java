@@ -6,16 +6,15 @@ import net.minecraft.server.OAnvilSaveConverter;
 
 class OAnvilSaveConverterFileFilter implements FilenameFilter {
 
-   // $FF: synthetic field
-   final OAnvilSaveConverter a;
+    // $FF: synthetic field
+    final OAnvilSaveConverter a;
 
+    OAnvilSaveConverterFileFilter(OAnvilSaveConverter var1) {
+        super();
+        this.a = var1;
+    }
 
-   OAnvilSaveConverterFileFilter(OAnvilSaveConverter var1) {
-      super();
-      this.a = var1;
-   }
-
-   public boolean accept(File var1, String var2) {
-      return var2.endsWith(".mcr");
-   }
+    public boolean accept(File var1, String var2) {
+        return var2.endsWith(".mcr");
+    }
 }

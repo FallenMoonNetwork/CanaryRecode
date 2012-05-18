@@ -1,47 +1,46 @@
 package net.minecraft.server;
 
-
 public interface OIServer {
 
-   int a(String var1, int var2);
+    int a(String var1, int var2);
 
-   String a(String var1, String var2);
+    String a(String var1, String var2);
 
-   void a(String var1, Object var2);
+    void a(String var1, Object var2);
 
-   void c();
+    void c();
 
-   String e();
+    String e();
 
-   String f();
+    String f();
 
-   int g();
+    int g();
 
-   String h();
+    String h();
 
-   String i();
+    String i();
 
-   int j();
+    int j();
 
-   int k();
+    int k();
 
-   String[] l();
+    String[] l();
 
-   String m();
+    String m();
 
-   String n();
+    String n();
 
-   void o();
+    void o();
 
-   String d(String var1);
+    String d(String var1);
 
-   boolean p();
+    boolean p();
 
-   void b(String var1);
+    void b(String var1);
 
-   void c(String var1);
+    void c(String var1);
 
-   void e(String var1);
+    void e(String var1);
 
-   void f(String var1);
+    void f(String var1);
 }

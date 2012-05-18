@@ -6,14 +6,14 @@ import net.minecraft.server.OServerGUI;
 
 class OServerGuiFocusAdapter extends FocusAdapter {
 
-   // $FF: synthetic field
-   final OServerGUI a;
+    // $FF: synthetic field
+    final OServerGUI a;
 
+    OServerGuiFocusAdapter(OServerGUI var1) {
+        super();
+        this.a = var1;
+    }
 
-   OServerGuiFocusAdapter(OServerGUI var1) {
-      super();
-      this.a = var1;
-   }
-
-   public void focusGained(FocusEvent var1) {}
+    public void focusGained(FocusEvent var1) {
+    }
 }

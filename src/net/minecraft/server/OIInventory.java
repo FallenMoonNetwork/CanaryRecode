@@ -5,25 +5,25 @@ import net.minecraft.server.OItemStack;
 
 public interface OIInventory {
 
-   int c();
+    int c();
 
-   OItemStack g_(int var1);
+    OItemStack g_(int var1);
 
-   OItemStack a(int var1, int var2);
+    OItemStack a(int var1, int var2);
 
-   OItemStack b(int var1);
+    OItemStack b(int var1);
 
-   void a(int var1, OItemStack var2);
+    void a(int var1, OItemStack var2);
 
-   String e();
+    String e();
 
-   int a();
+    int a();
 
-   void G_();
+    void G_();
 
-   boolean a(OEntityPlayer var1);
+    boolean a(OEntityPlayer var1);
 
-   void f();
+    void f();
 
-   void g();
+    void g();
 }

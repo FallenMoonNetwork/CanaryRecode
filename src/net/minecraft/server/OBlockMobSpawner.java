@@ -8,23 +8,23 @@ import net.minecraft.server.OTileEntityMobSpawner;
 
 public class OBlockMobSpawner extends OBlockContainer {
 
-   protected OBlockMobSpawner(int var1, int var2) {
-      super(var1, var2, OMaterial.e);
-   }
+    protected OBlockMobSpawner(int var1, int var2) {
+        super(var1, var2, OMaterial.e);
+    }
 
-   public OTileEntity a_() {
-      return new OTileEntityMobSpawner();
-   }
+    public OTileEntity a_() {
+        return new OTileEntityMobSpawner();
+    }
 
-   public int a(int var1, Random var2, int var3) {
-      return 0;
-   }
+    public int a(int var1, Random var2, int var3) {
+        return 0;
+    }
 
-   public int a(Random var1) {
-      return 0;
-   }
+    public int a(Random var1) {
+        return 0;
+    }
 
-   public boolean a() {
-      return false;
-   }
+    public boolean a() {
+        return false;
+    }
 }

@@ -4,7 +4,7 @@ import net.minecraft.server.OIStatType;
 
 final class OStatTypeSimple implements OIStatType {
 
-   OStatTypeSimple() {
-      super();
-   }
+    OStatTypeSimple() {
+        super();
+    }
 }

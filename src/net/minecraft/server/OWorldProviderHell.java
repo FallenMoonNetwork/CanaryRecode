@@ -8,44 +8,44 @@ import net.minecraft.server.OWorldProvider;
 
 public class OWorldProviderHell extends OWorldProvider {
 
-   public OWorldProviderHell() {
-      super();
-   }
+    public OWorldProviderHell() {
+        super();
+    }
 
-   public void a() {
-      this.c = new OWorldChunkManagerHell(OBiomeGenBase.j, 1.0F, 0.0F);
-      this.d = true;
-      this.e = true;
-      this.g = -1;
-   }
+    public void a() {
+        this.c = new OWorldChunkManagerHell(OBiomeGenBase.j, 1.0F, 0.0F);
+        this.d = true;
+        this.e = true;
+        this.g = -1;
+    }
 
-   protected void g() {
-      float var1 = 0.1F;
+    protected void g() {
+        float var1 = 0.1F;
 
-      for(int var2 = 0; var2 <= 15; ++var2) {
-         float var3 = 1.0F - (float)var2 / 15.0F;
-         this.f[var2] = (1.0F - var3) / (var3 * 3.0F + 1.0F) * (1.0F - var1) + var1;
-      }
+        for (int var2 = 0; var2 <= 15; ++var2) {
+            float var3 = 1.0F - var2 / 15.0F;
+            this.f[var2] = (1.0F - var3) / (var3 * 3.0F + 1.0F) * (1.0F - var1) + var1;
+        }
 
-   }
+    }
 
-   public OIChunkProvider b() {
-      return new OChunkProviderHell(this.a, this.a.n());
-   }
+    public OIChunkProvider b() {
+        return new OChunkProviderHell(this.a, this.a.n());
+    }
 
-   public boolean d() {
-      return false;
-   }
+    public boolean d() {
+        return false;
+    }
 
-   public boolean a(int var1, int var2) {
-      return false;
-   }
+    public boolean a(int var1, int var2) {
+        return false;
+    }
 
-   public float a(long var1, float var3) {
-      return 0.5F;
-   }
+    public float a(long var1, float var3) {
+        return 0.5F;
+    }
 
-   public boolean c() {
-      return false;
-   }
+    public boolean c() {
+        return false;
+    }
 }

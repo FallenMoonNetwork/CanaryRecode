@@ -10,41 +10,40 @@ import net.minecraft.server.OPacket;
 
 public class OPacket102WindowClick extends OPacket {
 
-   public int a;
-   public int b;
-   public int c;
-   public short d;
-   public OItemStack e;
-   public boolean f;
+    public int a;
+    public int b;
+    public int c;
+    public short d;
+    public OItemStack e;
+    public boolean f;
 
+    public OPacket102WindowClick() {
+        super();
+    }
 
-   public OPacket102WindowClick() {
-      super();
-   }
+    public void a(ONetHandler var1) {
+        var1.a(this);
+    }
 
-   public void a(ONetHandler var1) {
-      var1.a(this);
-   }
+    public void a(DataInputStream var1) throws IOException {
+        this.a = var1.readByte();
+        this.b = var1.readShort();
+        this.c = var1.readByte();
+        this.d = var1.readShort();
+        this.f = var1.readBoolean();
+        this.e = this.b(var1);
+    }
 
-   public void a(DataInputStream var1) throws IOException {
-      this.a = var1.readByte();
-      this.b = var1.readShort();
-      this.c = var1.readByte();
-      this.d = var1.readShort();
-      this.f = var1.readBoolean();
-      this.e = this.b(var1);
-   }
+    public void a(DataOutputStream var1) throws IOException {
+        var1.writeByte(this.a);
+        var1.writeShort(this.b);
+        var1.writeByte(this.c);
+        var1.writeShort(this.d);
+        var1.writeBoolean(this.f);
+        this.a(this.e, var1);
+    }
 
-   public void a(DataOutputStream var1) throws IOException {
-      var1.writeByte(this.a);
-      var1.writeShort(this.b);
-      var1.writeByte(this.c);
-      var1.writeShort(this.d);
-      var1.writeBoolean(this.f);
-      this.a(this.e, var1);
-   }
-
-   public int a() {
-      return 11;
-   }
+    public int a() {
+        return 11;
+    }
 }

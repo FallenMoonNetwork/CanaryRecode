@@ -5,7 +5,7 @@ import net.minecraft.server.OWorld;
 
 public abstract class OEntityWeatherEffect extends OEntity {
 
-   public OEntityWeatherEffect(OWorld var1) {
-      super(var1);
-   }
+    public OEntityWeatherEffect(OWorld var1) {
+        super(var1);
+    }
 }

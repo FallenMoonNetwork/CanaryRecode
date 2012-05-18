@@ -5,13 +5,12 @@ import net.minecraft.server.OWeightedRandomChoice;
 
 public class OEnchantmentData extends OWeightedRandomChoice {
 
-   public final OEnchantment a;
-   public final int b;
+    public final OEnchantment a;
+    public final int b;
 
-
-   public OEnchantmentData(OEnchantment var1, int var2) {
-      super(var1.b());
-      this.a = var1;
-      this.b = var2;
-   }
+    public OEnchantmentData(OEnchantment var1, int var2) {
+        super(var1.b());
+        this.a = var1;
+        this.b = var2;
+    }
 }

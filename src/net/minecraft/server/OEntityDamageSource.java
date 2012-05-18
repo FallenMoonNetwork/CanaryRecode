@@ -7,19 +7,18 @@ import net.minecraft.server.OStatCollector;
 
 public class OEntityDamageSource extends ODamageSource {
 
-   protected OEntity a;
+    protected OEntity a;
 
+    public OEntityDamageSource(String var1, OEntity var2) {
+        super(var1);
+        this.a = var2;
+    }
 
-   public OEntityDamageSource(String var1, OEntity var2) {
-      super(var1);
-      this.a = var2;
-   }
+    public OEntity a() {
+        return this.a;
+    }
 
-   public OEntity a() {
-      return this.a;
-   }
-
-   public String a(OEntityPlayer var1) {
-      return OStatCollector.a("death." + this.n, new Object[]{var1.v, this.a.s()});
-   }
+    public String a(OEntityPlayer var1) {
+        return OStatCollector.a("death." + this.n, new Object[] { var1.v, this.a.s() });
+    }
 }

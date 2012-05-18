@@ -14,152 +14,153 @@ import net.minecraft.server.OWorld;
 
 public class OBlockPistonMoving extends OBlockContainer {
 
-   public OBlockPistonMoving(int var1) {
-      super(var1, OMaterial.E);
-      this.c(-1.0F);
-   }
+    public OBlockPistonMoving(int var1) {
+        super(var1, OMaterial.E);
+        this.c(-1.0F);
+    }
 
-   public OTileEntity a_() {
-      return null;
-   }
+    public OTileEntity a_() {
+        return null;
+    }
 
-   public void a(OWorld var1, int var2, int var3, int var4) {}
+    public void a(OWorld var1, int var2, int var3, int var4) {
+    }
 
-   public void d(OWorld var1, int var2, int var3, int var4) {
-      OTileEntity var5 = var1.b(var2, var3, var4);
-      if(var5 != null && var5 instanceof OTileEntityPiston) {
-         ((OTileEntityPiston)var5).g();
-      } else {
-         super.d(var1, var2, var3, var4);
-      }
+    public void d(OWorld var1, int var2, int var3, int var4) {
+        OTileEntity var5 = var1.b(var2, var3, var4);
+        if (var5 != null && var5 instanceof OTileEntityPiston) {
+            ((OTileEntityPiston) var5).g();
+        } else {
+            super.d(var1, var2, var3, var4);
+        }
 
-   }
+    }
 
-   public boolean c(OWorld var1, int var2, int var3, int var4) {
-      return false;
-   }
+    public boolean c(OWorld var1, int var2, int var3, int var4) {
+        return false;
+    }
 
-   public boolean b(OWorld var1, int var2, int var3, int var4, int var5) {
-      return false;
-   }
+    public boolean b(OWorld var1, int var2, int var3, int var4, int var5) {
+        return false;
+    }
 
-   public int c() {
-      return -1;
-   }
+    public int c() {
+        return -1;
+    }
 
-   public boolean a() {
-      return false;
-   }
+    public boolean a() {
+        return false;
+    }
 
-   public boolean b() {
-      return false;
-   }
+    public boolean b() {
+        return false;
+    }
 
-   public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
-      if(!var1.F && var1.b(var2, var3, var4) == null) {
-         var1.e(var2, var3, var4, 0);
-         return true;
-      } else {
-         return false;
-      }
-   }
+    public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
+        if (!var1.F && var1.b(var2, var3, var4) == null) {
+            var1.e(var2, var3, var4, 0);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-   public int a(int var1, Random var2, int var3) {
-      return 0;
-   }
+    public int a(int var1, Random var2, int var3) {
+        return 0;
+    }
 
-   public void a(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
-      if(!var1.F) {
-         OTileEntityPiston var8 = this.c((OIBlockAccess)var1, var2, var3, var4);
-         if(var8 != null) {
-            OBlock.m[var8.c()].b(var1, var2, var3, var4, var8.k(), 0);
-         }
-      }
-   }
+    public void a(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
+        if (!var1.F) {
+            OTileEntityPiston var8 = this.c((OIBlockAccess) var1, var2, var3, var4);
+            if (var8 != null) {
+                OBlock.m[var8.c()].b(var1, var2, var3, var4, var8.k(), 0);
+            }
+        }
+    }
 
-   public void a(OWorld var1, int var2, int var3, int var4, int var5) {
-      if(!var1.F && var1.b(var2, var3, var4) == null) {
-         ;
-      }
+    public void a(OWorld var1, int var2, int var3, int var4, int var5) {
+        if (!var1.F && var1.b(var2, var3, var4) == null) {
+            ;
+        }
 
-   }
+    }
 
-   public static OTileEntity a(int var0, int var1, int var2, boolean var3, boolean var4) {
-      return new OTileEntityPiston(var0, var1, var2, var3, var4);
-   }
+    public static OTileEntity a(int var0, int var1, int var2, boolean var3, boolean var4) {
+        return new OTileEntityPiston(var0, var1, var2, var3, var4);
+    }
 
-   public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
-      OTileEntityPiston var5 = this.c((OIBlockAccess)var1, var2, var3, var4);
-      if(var5 == null) {
-         return null;
-      } else {
-         float var6 = var5.a(0.0F);
-         if(var5.e()) {
-            var6 = 1.0F - var6;
-         }
-
-         return this.b(var1, var2, var3, var4, var5.c(), var6, var5.f());
-      }
-   }
-
-   public void a(OIBlockAccess var1, int var2, int var3, int var4) {
-      OTileEntityPiston var5 = this.c(var1, var2, var3, var4);
-      if(var5 != null) {
-         OBlock var6 = OBlock.m[var5.c()];
-         if(var6 == null || var6 == this) {
-            return;
-         }
-
-         var6.a(var1, var2, var3, var4);
-         float var7 = var5.a(0.0F);
-         if(var5.e()) {
-            var7 = 1.0F - var7;
-         }
-
-         int var8 = var5.f();
-         this.bV = var6.bV - (double)((float)OFacing.b[var8] * var7);
-         this.bW = var6.bW - (double)((float)OFacing.c[var8] * var7);
-         this.bX = var6.bX - (double)((float)OFacing.d[var8] * var7);
-         this.bY = var6.bY - (double)((float)OFacing.b[var8] * var7);
-         this.bZ = var6.bZ - (double)((float)OFacing.c[var8] * var7);
-         this.ca = var6.ca - (double)((float)OFacing.d[var8] * var7);
-      }
-
-   }
-
-   public OAxisAlignedBB b(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
-      if(var5 != 0 && var5 != this.bO) {
-         OAxisAlignedBB var8 = OBlock.m[var5].e(var1, var2, var3, var4);
-         if(var8 == null) {
+    public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
+        OTileEntityPiston var5 = this.c((OIBlockAccess) var1, var2, var3, var4);
+        if (var5 == null) {
             return null;
-         } else {
-            if(OFacing.b[var7] < 0) {
-               var8.a -= (double)((float)OFacing.b[var7] * var6);
-            } else {
-               var8.d -= (double)((float)OFacing.b[var7] * var6);
+        } else {
+            float var6 = var5.a(0.0F);
+            if (var5.e()) {
+                var6 = 1.0F - var6;
             }
 
-            if(OFacing.c[var7] < 0) {
-               var8.b -= (double)((float)OFacing.c[var7] * var6);
-            } else {
-               var8.e -= (double)((float)OFacing.c[var7] * var6);
+            return this.b(var1, var2, var3, var4, var5.c(), var6, var5.f());
+        }
+    }
+
+    public void a(OIBlockAccess var1, int var2, int var3, int var4) {
+        OTileEntityPiston var5 = this.c(var1, var2, var3, var4);
+        if (var5 != null) {
+            OBlock var6 = OBlock.m[var5.c()];
+            if (var6 == null || var6 == this) {
+                return;
             }
 
-            if(OFacing.d[var7] < 0) {
-               var8.c -= (double)((float)OFacing.d[var7] * var6);
-            } else {
-               var8.f -= (double)((float)OFacing.d[var7] * var6);
+            var6.a(var1, var2, var3, var4);
+            float var7 = var5.a(0.0F);
+            if (var5.e()) {
+                var7 = 1.0F - var7;
             }
 
-            return var8;
-         }
-      } else {
-         return null;
-      }
-   }
+            int var8 = var5.f();
+            this.bV = var6.bV - (OFacing.b[var8] * var7);
+            this.bW = var6.bW - (OFacing.c[var8] * var7);
+            this.bX = var6.bX - (OFacing.d[var8] * var7);
+            this.bY = var6.bY - (OFacing.b[var8] * var7);
+            this.bZ = var6.bZ - (OFacing.c[var8] * var7);
+            this.ca = var6.ca - (OFacing.d[var8] * var7);
+        }
 
-   private OTileEntityPiston c(OIBlockAccess var1, int var2, int var3, int var4) {
-      OTileEntity var5 = var1.b(var2, var3, var4);
-      return var5 != null && var5 instanceof OTileEntityPiston?(OTileEntityPiston)var5:null;
-   }
+    }
+
+    public OAxisAlignedBB b(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
+        if (var5 != 0 && var5 != this.bO) {
+            OAxisAlignedBB var8 = OBlock.m[var5].e(var1, var2, var3, var4);
+            if (var8 == null) {
+                return null;
+            } else {
+                if (OFacing.b[var7] < 0) {
+                    var8.a -= (OFacing.b[var7] * var6);
+                } else {
+                    var8.d -= (OFacing.b[var7] * var6);
+                }
+
+                if (OFacing.c[var7] < 0) {
+                    var8.b -= (OFacing.c[var7] * var6);
+                } else {
+                    var8.e -= (OFacing.c[var7] * var6);
+                }
+
+                if (OFacing.d[var7] < 0) {
+                    var8.c -= (OFacing.d[var7] * var6);
+                } else {
+                    var8.f -= (OFacing.d[var7] * var6);
+                }
+
+                return var8;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    private OTileEntityPiston c(OIBlockAccess var1, int var2, int var3, int var4) {
+        OTileEntity var5 = var1.b(var2, var3, var4);
+        return var5 != null && var5 instanceof OTileEntityPiston ? (OTileEntityPiston) var5 : null;
+    }
 }

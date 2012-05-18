@@ -9,39 +9,38 @@ import net.minecraft.server.OPacket;
 
 public class OPacket105UpdateProgressbar extends OPacket {
 
-   public int a;
-   public int b;
-   public int c;
+    public int a;
+    public int b;
+    public int c;
 
+    public OPacket105UpdateProgressbar() {
+        super();
+    }
 
-   public OPacket105UpdateProgressbar() {
-      super();
-   }
+    public OPacket105UpdateProgressbar(int var1, int var2, int var3) {
+        super();
+        this.a = var1;
+        this.b = var2;
+        this.c = var3;
+    }
 
-   public OPacket105UpdateProgressbar(int var1, int var2, int var3) {
-      super();
-      this.a = var1;
-      this.b = var2;
-      this.c = var3;
-   }
+    public void a(ONetHandler var1) {
+        var1.a(this);
+    }
 
-   public void a(ONetHandler var1) {
-      var1.a(this);
-   }
+    public void a(DataInputStream var1) throws IOException {
+        this.a = var1.readByte();
+        this.b = var1.readShort();
+        this.c = var1.readShort();
+    }
 
-   public void a(DataInputStream var1) throws IOException {
-      this.a = var1.readByte();
-      this.b = var1.readShort();
-      this.c = var1.readShort();
-   }
+    public void a(DataOutputStream var1) throws IOException {
+        var1.writeByte(this.a);
+        var1.writeShort(this.b);
+        var1.writeShort(this.c);
+    }
 
-   public void a(DataOutputStream var1) throws IOException {
-      var1.writeByte(this.a);
-      var1.writeShort(this.b);
-      var1.writeShort(this.c);
-   }
-
-   public int a() {
-      return 5;
-   }
+    public int a() {
+        return 5;
+    }
 }

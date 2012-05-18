@@ -5,26 +5,27 @@ import net.minecraft.server.OMinecraftServer;
 
 public class OConvertProgressUpdater implements OIProgressUpdate {
 
-   private long b;
-   // $FF: synthetic field
-   final OMinecraftServer a;
+    private long b;
+    // $FF: synthetic field
+    final OMinecraftServer a;
 
+    public OConvertProgressUpdater(OMinecraftServer var1) {
+        super();
+        this.a = var1;
+        this.b = System.currentTimeMillis();
+    }
 
-   public OConvertProgressUpdater(OMinecraftServer var1) {
-      super();
-      this.a = var1;
-      this.b = System.currentTimeMillis();
-   }
+    public void a(String var1) {
+    }
 
-   public void a(String var1) {}
+    public void a(int var1) {
+        if (System.currentTimeMillis() - this.b >= 1000L) {
+            this.b = System.currentTimeMillis();
+            OMinecraftServer.a.info("Converting... " + var1 + "%");
+        }
 
-   public void a(int var1) {
-      if(System.currentTimeMillis() - this.b >= 1000L) {
-         this.b = System.currentTimeMillis();
-         OMinecraftServer.a.info("Converting... " + var1 + "%");
-      }
+    }
 
-   }
-
-   public void b(String var1) {}
+    public void b(String var1) {
+    }
 }

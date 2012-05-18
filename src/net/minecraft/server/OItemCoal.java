@@ -5,13 +5,13 @@ import net.minecraft.server.OItemStack;
 
 public class OItemCoal extends OItem {
 
-   public OItemCoal(int var1) {
-      super(var1);
-      this.a(true);
-      this.f(0);
-   }
+    public OItemCoal(int var1) {
+        super(var1);
+        this.a(true);
+        this.f(0);
+    }
 
-   public String a(OItemStack var1) {
-      return var1.h() == 1?"item.charcoal":"item.coal";
-   }
+    public String a(OItemStack var1) {
+        return var1.h() == 1 ? "item.charcoal" : "item.coal";
+    }
 }

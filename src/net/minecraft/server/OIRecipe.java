@@ -5,11 +5,11 @@ import net.minecraft.server.OItemStack;
 
 public interface OIRecipe {
 
-   boolean a(OInventoryCrafting var1);
+    boolean a(OInventoryCrafting var1);
 
-   OItemStack b(OInventoryCrafting var1);
+    OItemStack b(OInventoryCrafting var1);
 
-   int a();
+    int a();
 
-   OItemStack b();
+    OItemStack b();
 }

@@ -4,7 +4,7 @@ import net.minecraft.server.OIStatType;
 
 final class OStatTypeTime implements OIStatType {
 
-   OStatTypeTime() {
-      super();
-   }
+    OStatTypeTime() {
+        super();
+    }
 }

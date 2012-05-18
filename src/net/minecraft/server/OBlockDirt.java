@@ -5,7 +5,7 @@ import net.minecraft.server.OMaterial;
 
 public class OBlockDirt extends OBlock {
 
-   protected OBlockDirt(int var1, int var2) {
-      super(var1, var2, OMaterial.c);
-   }
+    protected OBlockDirt(int var1, int var2) {
+        super(var1, var2, OMaterial.c);
+    }
 }

@@ -8,28 +8,27 @@ import net.minecraft.server.OConsoleLogFormatter;
 
 public class OConsoleLogManager {
 
-   public static Logger a = Logger.getLogger("Minecraft");
+    public static Logger a = Logger.getLogger("Minecraft");
 
+    public OConsoleLogManager() {
+        super();
+    }
 
-   public OConsoleLogManager() {
-      super();
-   }
+    public static void a() {
+        OConsoleLogFormatter var0 = new OConsoleLogFormatter();
+        a.setUseParentHandlers(false);
+        ConsoleHandler var1 = new ConsoleHandler();
+        var1.setFormatter(var0);
+        a.addHandler(var1);
 
-   public static void a() {
-      OConsoleLogFormatter var0 = new OConsoleLogFormatter();
-      a.setUseParentHandlers(false);
-      ConsoleHandler var1 = new ConsoleHandler();
-      var1.setFormatter(var0);
-      a.addHandler(var1);
+        try {
+            FileHandler var2 = new FileHandler("server.log", true);
+            var2.setFormatter(var0);
+            a.addHandler(var2);
+        } catch (Exception var3) {
+            a.log(Level.WARNING, "Failed to log to server.log", var3);
+        }
 
-      try {
-         FileHandler var2 = new FileHandler("server.log", true);
-         var2.setFormatter(var0);
-         a.addHandler(var2);
-      } catch (Exception var3) {
-         a.log(Level.WARNING, "Failed to log to server.log", var3);
-      }
-
-   }
+    }
 
 }

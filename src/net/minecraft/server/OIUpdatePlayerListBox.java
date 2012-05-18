@@ -1,7 +1,6 @@
 package net.minecraft.server;
 
-
 public interface OIUpdatePlayerListBox {
 
-   void a();
+    void a();
 }

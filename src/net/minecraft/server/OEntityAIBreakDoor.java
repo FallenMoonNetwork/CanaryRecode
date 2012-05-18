@@ -5,38 +5,37 @@ import net.minecraft.server.OEntityLiving;
 
 public class OEntityAIBreakDoor extends OEntityAIDoorInteract {
 
-   private int i;
+    private int i;
 
+    public OEntityAIBreakDoor(OEntityLiving var1) {
+        super(var1);
+    }
 
-   public OEntityAIBreakDoor(OEntityLiving var1) {
-      super(var1);
-   }
+    public boolean a() {
+        return !super.a() ? false : !this.e.d((OIBlockAccess)this.a.bi, this.b, this.c, this.d);
+    }
 
-   public boolean a() {
-      return !super.a()?false:!this.e.d((OIBlockAccess)this.a.bi, this.b, this.c, this.d);
-   }
+    public void c() {
+        super.c();
+        this.i = 240;
+    }
 
-   public void c() {
-      super.c();
-      this.i = 240;
-   }
+    public boolean b() {
+        double var1 = this.a.e((double) this.b, (double) this.c, (double) this.d);
+        return this.i >= 0 && !this.e.d((OIBlockAccess)this.a.bi, this.b, this.c, this.d) && var1 < 4.0D;
+    }
 
-   public boolean b() {
-      double var1 = this.a.e((double)this.b, (double)this.c, (double)this.d);
-      return this.i >= 0 && !(this.e.d((OIBlockAccess)this.a.bi, this.b, this.c, this.d)) && (var1 < 4.0D);
-   }
+    public void e() {
+        super.e();
+        if (this.a.an().nextInt(20) == 0) {
+            this.a.bi.f(1010, this.b, this.c, this.d, 0);
+        }
 
-   public void e() {
-      super.e();
-      if(this.a.an().nextInt(20) == 0) {
-         this.a.bi.f(1010, this.b, this.c, this.d, 0);
-      }
+        if (--this.i == 0 && this.a.bi.q == 3) {
+            this.a.bi.e(this.b, this.c, this.d, 0);
+            this.a.bi.f(1012, this.b, this.c, this.d, 0);
+            this.a.bi.f(2001, this.b, this.c, this.d, this.e.bO);
+        }
 
-      if(--this.i == 0 && this.a.bi.q == 3) {
-         this.a.bi.e(this.b, this.c, this.d, 0);
-         this.a.bi.f(1012, this.b, this.c, this.d, 0);
-         this.a.bi.f(2001, this.b, this.c, this.d, this.e.bO);
-      }
-
-   }
+    }
 }

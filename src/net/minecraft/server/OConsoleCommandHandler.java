@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -56,7 +57,12 @@ public class OConsoleCommandHandler {
                   var10 = this.b.e[var9];
                   boolean var11 = var10.I;
                   var10.I = false;
-                  var10.a(true, (OIProgressUpdate)null);
+                  try {
+                    var10.a(true, (OIProgressUpdate)null);
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block -- come back to this
+                    e1.printStackTrace();
+                }
                   var10.I = var11;
                }
 

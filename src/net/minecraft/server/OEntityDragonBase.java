@@ -7,26 +7,25 @@ import net.minecraft.server.OWorld;
 
 public class OEntityDragonBase extends OEntityLiving {
 
-   protected int t = 100;
+    protected int t = 100;
 
+    public OEntityDragonBase(OWorld var1) {
+        super(var1);
+    }
 
-   public OEntityDragonBase(OWorld var1) {
-      super(var1);
-   }
+    public int d() {
+        return this.t;
+    }
 
-   public int d() {
-      return this.t;
-   }
+    public boolean a(OEntityDragonPart var1, ODamageSource var2, int var3) {
+        return this.a(var2, var3);
+    }
 
-   public boolean a(OEntityDragonPart var1, ODamageSource var2, int var3) {
-      return this.a(var2, var3);
-   }
+    public boolean a(ODamageSource var1, int var2) {
+        return false;
+    }
 
-   public boolean a(ODamageSource var1, int var2) {
-      return false;
-   }
-
-   protected boolean e(ODamageSource var1, int var2) {
-      return super.a(var1, var2);
-   }
+    protected boolean e(ODamageSource var1, int var2) {
+        return super.a(var1, var2);
+    }
 }

@@ -7,17 +7,17 @@ import net.minecraft.server.OItemStack;
 
 public class OItemCloth extends OItemBlock {
 
-   public OItemCloth(int var1) {
-      super(var1);
-      this.f(0);
-      this.a(true);
-   }
+    public OItemCloth(int var1) {
+        super(var1);
+        this.f(0);
+        this.a(true);
+    }
 
-   public int a(int var1) {
-      return var1;
-   }
+    public int a(int var1) {
+        return var1;
+    }
 
-   public String a(OItemStack var1) {
-      return super.b() + "." + OItemDye.a[OBlockCloth.d(var1.h())];
-   }
+    public String a(OItemStack var1) {
+        return super.b() + "." + OItemDye.a[OBlockCloth.d(var1.h())];
+    }
 }

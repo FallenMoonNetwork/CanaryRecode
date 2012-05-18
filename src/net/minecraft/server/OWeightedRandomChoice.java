@@ -1,13 +1,11 @@
 package net.minecraft.server;
 
-
 public class OWeightedRandomChoice {
 
-   protected int d;
+    protected int d;
 
-
-   public OWeightedRandomChoice(int var1) {
-      super();
-      this.d = var1;
-   }
+    public OWeightedRandomChoice(int var1) {
+        super();
+        this.d = var1;
+    }
 }

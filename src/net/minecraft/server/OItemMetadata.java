@@ -5,17 +5,16 @@ import net.minecraft.server.OItemBlock;
 
 public class OItemMetadata extends OItemBlock {
 
-   private OBlock a;
+    private OBlock a;
 
+    public OItemMetadata(int var1, OBlock var2) {
+        super(var1);
+        this.a = var2;
+        this.f(0);
+        this.a(true);
+    }
 
-   public OItemMetadata(int var1, OBlock var2) {
-      super(var1);
-      this.a = var2;
-      this.f(0);
-      this.a(true);
-   }
-
-   public int a(int var1) {
-      return var1;
-   }
+    public int a(int var1) {
+        return var1;
+    }
 }

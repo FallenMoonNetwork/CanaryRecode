@@ -5,15 +5,14 @@ import net.minecraft.server.OMaterial;
 
 public class OBlockBreakable extends OBlock {
 
-   private boolean a;
+    private boolean a;
 
+    protected OBlockBreakable(int var1, int var2, OMaterial var3, boolean var4) {
+        super(var1, var2, var3);
+        this.a = var4;
+    }
 
-   protected OBlockBreakable(int var1, int var2, OMaterial var3, boolean var4) {
-      super(var1, var2, var3);
-      this.a = var4;
-   }
-
-   public boolean a() {
-      return false;
-   }
+    public boolean a() {
+        return false;
+    }
 }

@@ -6,26 +6,25 @@ import net.minecraft.server.OMinecraftServer;
 
 final class OServerWindowAdapter extends WindowAdapter {
 
-   // $FF: synthetic field
-   final OMinecraftServer a;
+    // $FF: synthetic field
+    final OMinecraftServer a;
 
+    OServerWindowAdapter(OMinecraftServer var1) {
+        super();
+        this.a = var1;
+    }
 
-   OServerWindowAdapter(OMinecraftServer var1) {
-      super();
-      this.a = var1;
-   }
+    public void windowClosing(WindowEvent var1) {
+        this.a.a();
 
-   public void windowClosing(WindowEvent var1) {
-      this.a.a();
+        while (!this.a.i) {
+            try {
+                Thread.sleep(100L);
+            } catch (InterruptedException var3) {
+                var3.printStackTrace();
+            }
+        }
 
-      while(!this.a.i) {
-         try {
-            Thread.sleep(100L);
-         } catch (InterruptedException var3) {
-            var3.printStackTrace();
-         }
-      }
-
-      System.exit(0);
-   }
+        System.exit(0);
+    }
 }

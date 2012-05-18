@@ -5,14 +5,14 @@ import net.canarymod.api.entity.IPlayer;
 import net.minecraft.server.ODamageSource;
 
 public class DamageSource implements IDamageSource {
-    ODamageSource _handle;
+    ODamageSource handle;
     
     public DamageSource(ODamageSource handle) {
-        _handle = handle;
+        this.handle = handle;
     }
     
     public ODamageSource getHandle() {
-        return _handle;
+        return handle;
     }
     @Override
     public IEntity getDamageDealer() {

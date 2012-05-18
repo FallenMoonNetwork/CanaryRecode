@@ -9,19 +9,19 @@ import net.minecraft.server.OWorldProvider;
 
 public interface OISaveHandler {
 
-   OWorldInfo c();
+    OWorldInfo c();
 
-   void b();
+    void b();
 
-   OIChunkLoader a(OWorldProvider var1);
+    OIChunkLoader a(OWorldProvider var1);
 
-   void a(OWorldInfo var1, List var2);
+    void a(OWorldInfo var1, List var2);
 
-   void a(OWorldInfo var1);
+    void a(OWorldInfo var1);
 
-   OIPlayerFileData d();
+    OIPlayerFileData d();
 
-   void e();
+    void e();
 
-   File b(String var1);
+    File b(String var1);
 }

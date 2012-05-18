@@ -22,119 +22,118 @@ import net.minecraft.server.OWorld;
 
 public class OEntityCreeper extends OEntityMob {
 
-   int a;
-   int b;
+    int a;
+    int b;
 
+    public OEntityCreeper(OWorld var1) {
+        super(var1);
+        this.ae = "/mob/creeper.png";
+        this.aL.a(1, new OEntityAISwimming(this));
+        this.aL.a(2, new OEntityAICreeperSwell(this));
+        this.aL.a(3, new OEntityAIAvoidEntity(this, OEntityOcelot.class, 6.0F, 0.25F, 0.3F));
+        this.aL.a(4, new OEntityAIAttackOnCollide(this, 0.25F, false));
+        this.aL.a(5, new OEntityAIWander(this, 0.2F));
+        this.aL.a(6, new OEntityAIWatchClosest(this, OEntityPlayer.class, 8.0F));
+        this.aL.a(6, new OEntityAILookIdle(this));
+        this.aM.a(1, new OEntityAINearestAttackableTarget(this, OEntityPlayer.class, 16.0F, 0, true));
+        this.aM.a(2, new OEntityAIHurtByTarget(this, false));
+    }
 
-   public OEntityCreeper(OWorld var1) {
-      super(var1);
-      this.ae = "/mob/creeper.png";
-      this.aL.a(1, new OEntityAISwimming(this));
-      this.aL.a(2, new OEntityAICreeperSwell(this));
-      this.aL.a(3, new OEntityAIAvoidEntity(this, OEntityOcelot.class, 6.0F, 0.25F, 0.3F));
-      this.aL.a(4, new OEntityAIAttackOnCollide(this, 0.25F, false));
-      this.aL.a(5, new OEntityAIWander(this, 0.2F));
-      this.aL.a(6, new OEntityAIWatchClosest(this, OEntityPlayer.class, 8.0F));
-      this.aL.a(6, new OEntityAILookIdle(this));
-      this.aM.a(1, new OEntityAINearestAttackableTarget(this, OEntityPlayer.class, 16.0F, 0, true));
-      this.aM.a(2, new OEntityAIHurtByTarget(this, false));
-   }
+    public boolean c_() {
+        return true;
+    }
 
-   public boolean c_() {
-      return true;
-   }
+    public int d() {
+        return 20;
+    }
 
-   public int d() {
-      return 20;
-   }
+    protected void b() {
+        super.b();
+        this.bY.a(16, Byte.valueOf((byte) -1));
+        this.bY.a(17, Byte.valueOf((byte) 0));
+    }
 
-   protected void b() {
-      super.b();
-      this.bY.a(16, Byte.valueOf((byte)-1));
-      this.bY.a(17, Byte.valueOf((byte)0));
-   }
+    public void b(ONBTTagCompound var1) {
+        super.b(var1);
+        if (this.bY.a(17) == 1) {
+            var1.a("powered", true);
+        }
 
-   public void b(ONBTTagCompound var1) {
-      super.b(var1);
-      if(this.bY.a(17) == 1) {
-         var1.a("powered", true);
-      }
+    }
 
-   }
+    public void a(ONBTTagCompound var1) {
+        super.a(var1);
+        this.bY.b(17, Byte.valueOf((byte) (var1.o("powered") ? 1 : 0)));
+    }
 
-   public void a(ONBTTagCompound var1) {
-      super.a(var1);
-      this.bY.b(17, Byte.valueOf((byte)(var1.o("powered")?1:0)));
-   }
-
-   public void F_() {
-      if(this.aE()) {
-         this.b = this.a;
-         int var1 = this.A();
-         if(var1 > 0 && this.a == 0) {
-            this.bi.a(this, "random.fuse", 1.0F, 0.5F);
-         }
-
-         this.a += var1;
-         if(this.a < 0) {
-            this.a = 0;
-         }
-
-         if(this.a >= 30) {
-            this.a = 30;
-            if(!this.bi.F) {
-               if(this.x()) {
-                  this.bi.a(this, this.bm, this.bn, this.bo, 6.0F);
-               } else {
-                  this.bi.a(this, this.bm, this.bn, this.bo, 3.0F);
-               }
-
-               this.X();
+    public void F_() {
+        if (this.aE()) {
+            this.b = this.a;
+            int var1 = this.A();
+            if (var1 > 0 && this.a == 0) {
+                this.bi.a(this, "random.fuse", 1.0F, 0.5F);
             }
-         }
-      }
 
-      super.F_();
-   }
+            this.a += var1;
+            if (this.a < 0) {
+                this.a = 0;
+            }
 
-   protected String j() {
-      return "mob.creeper";
-   }
+            if (this.a >= 30) {
+                this.a = 30;
+                if (!this.bi.F) {
+                    if (this.x()) {
+                        this.bi.a(this, this.bm, this.bn, this.bo, 6.0F);
+                    } else {
+                        this.bi.a(this, this.bm, this.bn, this.bo, 3.0F);
+                    }
 
-   protected String k() {
-      return "mob.creeperdeath";
-   }
+                    this.X();
+                }
+            }
+        }
 
-   public void a(ODamageSource var1) {
-      super.a(var1);
-      if(var1.a() instanceof OEntitySkeleton) {
-         this.b(OItem.bE.bP + this.bS.nextInt(10), 1);
-      }
+        super.F_();
+    }
 
-   }
+    protected String j() {
+        return "mob.creeper";
+    }
 
-   public boolean a(OEntity var1) {
-      return true;
-   }
+    protected String k() {
+        return "mob.creeperdeath";
+    }
 
-   public boolean x() {
-      return this.bY.a(17) == 1;
-   }
+    public void a(ODamageSource var1) {
+        super.a(var1);
+        if (var1.a() instanceof OEntitySkeleton) {
+            this.b(OItem.bE.bP + this.bS.nextInt(10), 1);
+        }
 
-   protected int f() {
-      return OItem.L.bP;
-   }
+    }
 
-   public int A() {
-      return this.bY.a(16);
-   }
+    public boolean a(OEntity var1) {
+        return true;
+    }
 
-   public void c(int var1) {
-      this.bY.b(16, Byte.valueOf((byte)var1));
-   }
+    public boolean x() {
+        return this.bY.a(17) == 1;
+    }
 
-   public void a(OEntityLightningBolt var1) {
-      super.a(var1);
-      this.bY.b(17, Byte.valueOf((byte)1));
-   }
+    protected int f() {
+        return OItem.L.bP;
+    }
+
+    public int A() {
+        return this.bY.a(16);
+    }
+
+    public void c(int var1) {
+        this.bY.b(16, Byte.valueOf((byte) var1));
+    }
+
+    public void a(OEntityLightningBolt var1) {
+        super.a(var1);
+        this.bY.b(17, Byte.valueOf((byte) 1));
+    }
 }

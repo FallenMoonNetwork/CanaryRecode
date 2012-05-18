@@ -5,20 +5,20 @@ import net.minecraft.server.OMaterial;
 
 public class OMaterialTransparent extends OMaterial {
 
-   public OMaterialTransparent(OMapColor var1) {
-      super(var1);
-      this.h();
-   }
+    public OMaterialTransparent(OMapColor var1) {
+        super(var1);
+        this.h();
+    }
 
-   public boolean a() {
-      return false;
-   }
+    public boolean a() {
+        return false;
+    }
 
-   public boolean b() {
-      return false;
-   }
+    public boolean b() {
+        return false;
+    }
 
-   public boolean c() {
-      return false;
-   }
+    public boolean c() {
+        return false;
+    }
 }

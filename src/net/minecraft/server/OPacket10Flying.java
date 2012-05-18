@@ -9,34 +9,33 @@ import net.minecraft.server.OPacket;
 
 public class OPacket10Flying extends OPacket {
 
-   public double a;
-   public double b;
-   public double c;
-   public double d;
-   public float e;
-   public float f;
-   public boolean g;
-   public boolean h;
-   public boolean i;
+    public double a;
+    public double b;
+    public double c;
+    public double d;
+    public float e;
+    public float f;
+    public boolean g;
+    public boolean h;
+    public boolean i;
 
+    public OPacket10Flying() {
+        super();
+    }
 
-   public OPacket10Flying() {
-      super();
-   }
+    public void a(ONetHandler var1) {
+        var1.a(this);
+    }
 
-   public void a(ONetHandler var1) {
-      var1.a(this);
-   }
+    public void a(DataInputStream var1) throws IOException {
+        this.g = var1.read() != 0;
+    }
 
-   public void a(DataInputStream var1) throws IOException {
-      this.g = var1.read() != 0;
-   }
+    public void a(DataOutputStream var1) throws IOException {
+        var1.write(this.g ? 1 : 0);
+    }
 
-   public void a(DataOutputStream var1) throws IOException {
-      var1.write(this.g?1:0);
-   }
-
-   public int a() {
-      return 1;
-   }
+    public int a() {
+        return 1;
+    }
 }

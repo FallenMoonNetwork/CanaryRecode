@@ -8,8 +8,8 @@ import net.minecraft.server.OStatBase;
 
 public class OAchievement extends OStatBase {
 
-   public  int a;
-   public  int b;
+   public final int a;
+   public final int b;
    public final OAchievement c;
    private final String k;
    public final OItemStack d;
@@ -31,11 +31,11 @@ public class OAchievement extends OStatBase {
       this.a = var3;
       this.b = var4;
       if(var3 < OAchievementList.a) {
-         a = var3;
+          OAchievementList.a = var3;
       }
 
       if(var4 < OAchievementList.b) {
-         b = var4;
+          OAchievementList.b = var4;
       }
 
       if(var3 > OAchievementList.c) {

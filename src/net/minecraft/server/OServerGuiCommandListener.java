@@ -8,24 +8,23 @@ import net.minecraft.server.OServerGUI;
 
 class OServerGuiCommandListener implements ActionListener {
 
-   // $FF: synthetic field
-   final JTextField a;
-   // $FF: synthetic field
-   final OServerGUI b;
+    // $FF: synthetic field
+    final JTextField a;
+    // $FF: synthetic field
+    final OServerGUI b;
 
+    OServerGuiCommandListener(OServerGUI var1, JTextField var2) {
+        super();
+        this.b = var1;
+        this.a = var2;
+    }
 
-   OServerGuiCommandListener(OServerGUI var1, JTextField var2) {
-      super();
-      this.b = var1;
-      this.a = var2;
-   }
+    public void actionPerformed(ActionEvent var1) {
+        String var2 = this.a.getText().trim();
+        if (var2.length() > 0) {
+            OServerGUI.a(this.b).a(var2, this.b);
+        }
 
-   public void actionPerformed(ActionEvent var1) {
-      String var2 = this.a.getText().trim();
-      if(var2.length() > 0) {
-         OServerGUI.a(this.b).a(var2, (OICommandListener)this.b);
-      }
-
-      this.a.setText("");
-   }
+        this.a.setText("");
+    }
 }

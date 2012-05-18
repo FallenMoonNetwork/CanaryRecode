@@ -8,15 +8,15 @@ import net.minecraft.server.OWorld;
 
 public class OItemMapBase extends OItem {
 
-   protected OItemMapBase(int var1) {
-      super(var1);
-   }
+    protected OItemMapBase(int var1) {
+        super(var1);
+    }
 
-   public boolean t_() {
-      return true;
-   }
+    public boolean t_() {
+        return true;
+    }
 
-   public OPacket c(OItemStack var1, OWorld var2, OEntityPlayer var3) {
-      return null;
-   }
+    public OPacket c(OItemStack var1, OWorld var2, OEntityPlayer var3) {
+        return null;
+    }
 }

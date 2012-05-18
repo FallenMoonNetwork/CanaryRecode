@@ -9,37 +9,36 @@ import net.minecraft.server.OPacket;
 
 public class OPacket30Entity extends OPacket {
 
-   public int a;
-   public byte b;
-   public byte c;
-   public byte d;
-   public byte e;
-   public byte f;
-   public boolean g = false;
+    public int a;
+    public byte b;
+    public byte c;
+    public byte d;
+    public byte e;
+    public byte f;
+    public boolean g = false;
 
+    public OPacket30Entity() {
+        super();
+    }
 
-   public OPacket30Entity() {
-      super();
-   }
+    public OPacket30Entity(int var1) {
+        super();
+        this.a = var1;
+    }
 
-   public OPacket30Entity(int var1) {
-      super();
-      this.a = var1;
-   }
+    public void a(DataInputStream var1) throws IOException {
+        this.a = var1.readInt();
+    }
 
-   public void a(DataInputStream var1) throws IOException {
-      this.a = var1.readInt();
-   }
+    public void a(DataOutputStream var1) throws IOException {
+        var1.writeInt(this.a);
+    }
 
-   public void a(DataOutputStream var1) throws IOException {
-      var1.writeInt(this.a);
-   }
+    public void a(ONetHandler var1) {
+        var1.a(this);
+    }
 
-   public void a(ONetHandler var1) {
-      var1.a(this);
-   }
-
-   public int a() {
-      return 4;
-   }
+    public int a() {
+        return 4;
+    }
 }

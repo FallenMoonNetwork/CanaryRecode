@@ -6,47 +6,47 @@ import net.minecraft.server.OWorld;
 
 public abstract class OEntityAgeable extends OEntityCreature {
 
-   public OEntityAgeable(OWorld var1) {
-      super(var1);
-   }
+    public OEntityAgeable(OWorld var1) {
+        super(var1);
+    }
 
-   protected void b() {
-      super.b();
-      this.bY.a(12, new Integer(0));
-   }
+    protected void b() {
+        super.b();
+        this.bY.a(12, new Integer(0));
+    }
 
-   public int K() {
-      return this.bY.c(12);
-   }
+    public int K() {
+        return this.bY.c(12);
+    }
 
-   public void c(int var1) {
-      this.bY.b(12, Integer.valueOf(var1));
-   }
+    public void c(int var1) {
+        this.bY.b(12, Integer.valueOf(var1));
+    }
 
-   public void b(ONBTTagCompound var1) {
-      super.b(var1);
-      var1.a("Age", this.K());
-   }
+    public void b(ONBTTagCompound var1) {
+        super.b(var1);
+        var1.a("Age", this.K());
+    }
 
-   public void a(ONBTTagCompound var1) {
-      super.a(var1);
-      this.c(var1.f("Age"));
-   }
+    public void a(ONBTTagCompound var1) {
+        super.a(var1);
+        this.c(var1.f("Age"));
+    }
 
-   public void e() {
-      super.e();
-      int var1 = this.K();
-      if(var1 < 0) {
-         ++var1;
-         this.c(var1);
-      } else if(var1 > 0) {
-         --var1;
-         this.c(var1);
-      }
+    public void e() {
+        super.e();
+        int var1 = this.K();
+        if (var1 < 0) {
+            ++var1;
+            this.c(var1);
+        } else if (var1 > 0) {
+            --var1;
+            this.c(var1);
+        }
 
-   }
+    }
 
-   public boolean aO() {
-      return this.K() < 0;
-   }
+    public boolean aO() {
+        return this.K() < 0;
+    }
 }

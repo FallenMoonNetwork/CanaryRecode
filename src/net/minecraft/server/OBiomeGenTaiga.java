@@ -10,14 +10,14 @@ import net.minecraft.server.OWorldGenerator;
 
 public class OBiomeGenTaiga extends OBiomeGenBase {
 
-   public OBiomeGenTaiga(int var1) {
-      super(var1);
-      this.K.add(new OSpawnListEntry(OEntityWolf.class, 8, 4, 4));
-      this.I.z = 10;
-      this.I.B = 1;
-   }
+    public OBiomeGenTaiga(int var1) {
+        super(var1);
+        this.K.add(new OSpawnListEntry(OEntityWolf.class, 8, 4, 4));
+        this.I.z = 10;
+        this.I.B = 1;
+    }
 
-   public OWorldGenerator a(Random var1) {
-      return (OWorldGenerator)(var1.nextInt(3) == 0?new OWorldGenTaiga1():new OWorldGenTaiga2(false));
-   }
+    public OWorldGenerator a(Random var1) {
+        return (var1.nextInt(3) == 0 ? new OWorldGenTaiga1() : new OWorldGenTaiga2(false));
+    }
 }
