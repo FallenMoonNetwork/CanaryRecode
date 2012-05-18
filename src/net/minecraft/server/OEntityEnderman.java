@@ -165,7 +165,11 @@ public class OEntityEnderman extends OEntityMob {
         super.e();
     }
 
-    protected boolean x() {
+    /**
+     * Teleport randomly
+     * @return
+     */
+    public boolean x() { // CanaryMod: Changed visibility from protected to public
         double var1 = this.bm + (this.bS.nextDouble() - 0.5D) * 64.0D;
         double var3 = this.bn + (this.bS.nextInt(64) - 32);
         double var5 = this.bo + (this.bS.nextDouble() - 0.5D) * 64.0D;
@@ -297,6 +301,7 @@ public class OEntityEnderman extends OEntityMob {
     }
 
     static {
+    	// Sets the blocks that can be carried
         b[OBlock.u.bO] = true;
         b[OBlock.v.bO] = true;
         b[OBlock.E.bO] = true;

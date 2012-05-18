@@ -1,13 +1,12 @@
 package net.canarymod.api.entity;
 
 import net.minecraft.server.OEntityCreeper;
-import net.minecraft.server.OEntityMob;
 
 public class CanaryCreeper extends CanaryEntityMob implements Creeper {
 
     private boolean damageEntities = true;
     private boolean damageWorld = true;
-    public CanaryCreeper(OEntityMob entity) {
+    public CanaryCreeper(OEntityCreeper entity) {
         super(entity);
     }
 

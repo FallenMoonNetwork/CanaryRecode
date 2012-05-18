@@ -32,6 +32,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         this.bY.a(16, new Byte((byte) 1));
     }
 
+    // Sets the slime-size
     public void c(int var1) {
         this.bY.b(16, new Byte((byte) var1));
         this.b(0.6F * var1, 0.6F * var1);
@@ -40,11 +41,13 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         this.aA = var1;
     }
 
+    // Get the health (relative to the size)
     public int d() {
         int var1 = this.L();
         return var1 * var1;
     }
 
+    // Get the slime-size
     public int L() {
         return this.bY.a(16);
     }
