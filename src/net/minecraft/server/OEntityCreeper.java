@@ -116,8 +116,21 @@ public class OEntityCreeper extends OEntityMob {
         return true;
     }
 
+    /**
+     * Is powered?
+     * Returns true is creeper is powered (datawatcher byte is 1)
+     * @return
+     */
     public boolean x() {
         return this.bY.a(17) == 1;
+    }
+    
+    /**
+     * CanaryMod added method to manually set this creeper charged or make it de-charged
+     * @param charged True to charge, false to decharge (set uncharged)
+     */
+    public void setCharged(boolean charged) {
+        this.bY.b(1, charged);
     }
 
     protected int f() {
