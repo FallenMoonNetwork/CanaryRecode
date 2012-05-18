@@ -37,7 +37,7 @@ import net.minecraft.server.OWorldServer;
 public class OServerConfigurationManager {
 
     public static Logger a = Logger.getLogger("Minecraft");
-    public List b = new ArrayList();
+    public List<OEntityPlayerMP> b = new ArrayList<OEntityPlayerMP>(); //CanaryMod parameterized
     private OMinecraftServer c;
     private OPlayerManager[] d = new OPlayerManager[3];
     private int e;

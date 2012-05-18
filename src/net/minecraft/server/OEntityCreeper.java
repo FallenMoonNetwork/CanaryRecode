@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryCreeper;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIAttackOnCollide;
@@ -24,6 +25,7 @@ public class OEntityCreeper extends OEntityMob {
 
     int a;
     int b;
+    private CanaryCreeper canaryCreeper;
 
     public OEntityCreeper(OWorld var1) {
         super(var1);
@@ -37,6 +39,15 @@ public class OEntityCreeper extends OEntityMob {
         this.aL.a(6, new OEntityAILookIdle(this));
         this.aM.a(1, new OEntityAINearestAttackableTarget(this, OEntityPlayer.class, 16.0F, 0, true));
         this.aM.a(2, new OEntityAIHurtByTarget(this, false));
+        canaryCreeper = new CanaryCreeper(this);
+    }
+    
+    /**
+     * CanaryMod Get CanaryCreeper handler
+     * @return
+     */
+    public CanaryCreeper getCanaryCreeper() {
+        return canaryCreeper;
     }
 
     public boolean c_() {

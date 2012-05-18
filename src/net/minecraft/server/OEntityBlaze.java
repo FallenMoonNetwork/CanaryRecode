@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryBlaze;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityMob;
@@ -15,6 +16,8 @@ public class OEntityBlaze extends OEntityMob {
     private float a = 0.5F;
     private int b;
     private int g;
+    //CanaMod blaze handler
+    private CanaryBlaze canaryBlaze;
 
     public OEntityBlaze(OWorld var1) {
         super(var1);
@@ -22,8 +25,16 @@ public class OEntityBlaze extends OEntityMob {
         this.bX = true;
         this.c = 6;
         this.aA = 10;
+        canaryBlaze = new CanaryBlaze(this);
     }
 
+    /**
+     * CanaryMod Get Blaze handleer
+     * @return
+     */
+    public CanaryBlaze getCanaryBlaze() {
+        return canaryBlaze;
+    }
     public int d() {
         return 20;
     }

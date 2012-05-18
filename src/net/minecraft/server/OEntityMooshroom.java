@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryMushroomCow;
 import net.minecraft.server.OBlock;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAnimal;
 import net.minecraft.server.OEntityCow;
 import net.minecraft.server.OEntityItem;
@@ -12,10 +12,20 @@ import net.minecraft.server.OWorld;
 
 public class OEntityMooshroom extends OEntityCow {
 
+    private CanaryMushroomCow canaryMushroomCow;
     public OEntityMooshroom(OWorld var1) {
         super(var1);
         this.ae = "/mob/redcow.png";
         this.b(0.9F, 1.3F);
+        canaryMushroomCow = new CanaryMushroomCow(this);
+    }
+
+    /**
+     * CanaryMod Get the MushroomCow handler
+     * @return the canaryMushroomCow
+     */
+    public CanaryMushroomCow getCanaryMushroomCow() {
+        return canaryMushroomCow;
     }
 
     public boolean b(OEntityPlayer var1) {

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryCow;
 import net.minecraft.server.OEntityAIFollowParent;
 import net.minecraft.server.OEntityAILookIdle;
 import net.minecraft.server.OEntityAIMate;
@@ -17,6 +18,8 @@ import net.minecraft.server.OWorld;
 
 public class OEntityCow extends OEntityAnimal {
 
+    //CanaryMod cow handler
+    private CanaryCow canaryCow;
     public OEntityCow(OWorld var1) {
         super(var1);
         this.ae = "/mob/cow.png";
@@ -30,8 +33,16 @@ public class OEntityCow extends OEntityAnimal {
         this.aL.a(5, new OEntityAIWander(this, 0.2F));
         this.aL.a(6, new OEntityAIWatchClosest(this, OEntityPlayer.class, 6.0F));
         this.aL.a(7, new OEntityAILookIdle(this));
+        canaryCow = new CanaryCow(this);
     }
 
+    /**
+     * CanaryMod get the handler for this cow
+     * @return
+     */
+    public CanaryCow getCanaryCow() {
+        return canaryCow;
+    }
     public boolean c_() {
         return true;
     }

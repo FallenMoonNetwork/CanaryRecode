@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import net.canarymod.api.entity.CanaryEntityLiving;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
@@ -121,7 +123,7 @@ public abstract class OEntityLiving extends OEntity {
     private int q = 0;
     private OEntity r;
     protected int bc = 0;
-
+    private CanaryEntityLiving canaryEntityLiving;
     public OEntityLiving(OWorld var1) {
         super(var1);
         this.bf = true;
@@ -137,6 +139,15 @@ public abstract class OEntityLiving extends OEntity {
         this.bs = (float) (Math.random() * 3.1415927410125732D * 2.0D);
         this.X = this.bs;
         this.bP = 0.5F;
+        canaryEntityLiving = new CanaryEntityLiving(this);
+    }
+
+    /**
+     * CanaryMod Get entity living wrapper
+     * @return the canaryEntityLiving
+     */
+    public CanaryEntityLiving getCanaryEntityLiving() {
+        return canaryEntityLiving;
     }
 
     public OEntityLookHelper ai() {

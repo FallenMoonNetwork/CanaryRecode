@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryIronGolem;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.ODamageSource;
@@ -31,6 +32,8 @@ public class OEntityIronGolem extends OEntityGolem {
     OVillage a = null;
     private int c;
     private int g;
+    //CanaryMod golem handler
+    private CanaryIronGolem canaryIronGolem;
 
     public OEntityIronGolem(OWorld var1) {
         super(var1);
@@ -48,6 +51,15 @@ public class OEntityIronGolem extends OEntityGolem {
         this.aM.a(1, new OEntityAIDefendVillage(this));
         this.aM.a(2, new OEntityAIHurtByTarget(this, false));
         this.aM.a(3, new OEntityAINearestAttackableTarget(this, OEntityMob.class, 16.0F, 0, false, true));
+        canaryIronGolem = new CanaryIronGolem(this);
+    }
+
+    /**
+     * CanaryMod Get canary golem handler
+     * @return the canaryIronGolem
+     */
+    public CanaryIronGolem getCanaryIronGolem() {
+        return canaryIronGolem;
     }
 
     protected void b() {

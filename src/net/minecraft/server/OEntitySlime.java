@@ -1,8 +1,8 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanarySlime;
 import net.minecraft.server.OChunk;
 import net.minecraft.server.ODamageSource;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIMob;
@@ -17,6 +17,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
     public float b;
     public float c;
     private int d = 0;
+    private CanarySlime canarySlime;
 
     public OEntitySlime(OWorld var1) {
         super(var1);
@@ -25,6 +26,15 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         this.bF = 0.0F;
         this.d = this.bS.nextInt(20) + 10;
         this.c(var2);
+        canarySlime = new CanarySlime(this);
+    }
+
+    /**
+     * CanaryMod get the CanarySlime handler
+     * @return the canarySlime
+     */
+    public CanarySlime getCanarySlime() {
+        return canarySlime;
     }
 
     protected void b() {

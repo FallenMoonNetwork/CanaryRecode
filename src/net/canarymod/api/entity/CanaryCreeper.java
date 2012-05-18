@@ -2,6 +2,11 @@ package net.canarymod.api.entity;
 
 import net.minecraft.server.OEntityCreeper;
 
+/**
+ * CanaryCreeper - Wrapper for a creeper.
+ * @author Chris
+ *
+ */
 public class CanaryCreeper extends CanaryEntityMob implements Creeper {
 
     private boolean damageEntities = true;
@@ -28,16 +33,6 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
     @Override
     public boolean canDamageEntities() {
         return damageEntities;
-    }
-
-    @Override
-    public void setCanCauseFire(boolean canCause) {
-        //Do nothing. Creeper explosions to not cause fire
-    }
-
-    @Override
-    public boolean canCauseFire() {
-        return false;
     }
 
     @Override

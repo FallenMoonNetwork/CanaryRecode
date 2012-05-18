@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import net.canarymod.api.CanaryDataWatcher;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OPacket;
@@ -18,11 +20,21 @@ public class ODataWatcher {
     private static final HashMap a = new HashMap();
     private final Map b = new HashMap();
     private boolean c;
+    //CanaryMod datawatcher handler
+    private CanaryDataWatcher canaryDataWatcher;
 
     public ODataWatcher() {
         super();
+        canaryDataWatcher = new CanaryDataWatcher(this);
     }
 
+    /**
+     * CanaryMod get data watcher handler
+     * @return
+     */
+    public CanaryDataWatcher getCanaryDataWatcher() {
+        return canaryDataWatcher;
+    }
     public void a(int var1, Object var2) {
         Integer var3 = (Integer) a.get(var2.getClass());
         if (var3 == null) {

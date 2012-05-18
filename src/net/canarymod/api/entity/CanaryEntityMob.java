@@ -1,7 +1,9 @@
 package net.canarymod.api.entity;
 
+import net.minecraft.server.OEntityFlying;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityMob;
+import net.minecraft.server.OEntitySlime;
 
 /**
  * basic mob entity wrapper class
@@ -11,6 +13,16 @@ import net.minecraft.server.OEntityMob;
 public class CanaryEntityMob extends CanaryEntityLiving implements EntityMob {
 
     public CanaryEntityMob(OEntityMob entity) {
+        super(entity);
+    }
+    
+    //Workaround because notchies inconsistencies
+    public CanaryEntityMob(OEntitySlime entity) {
+        super(entity);
+    }
+    
+    //Workaround because notchies inconsistencies
+    public CanaryEntityMob(OEntityFlying entity) {
         super(entity);
     }
 

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryGhast;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.ODamageSource;
@@ -10,7 +11,6 @@ import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIMob;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OMathHelper;
-import net.minecraft.server.OStatBase;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
 
@@ -24,6 +24,8 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
     private int h = 0;
     public int e = 0;
     public int f = 0;
+    
+    private CanaryGhast canaryGhast;
 
     public OEntityGhast(OWorld var1) {
         super(var1);
@@ -31,6 +33,14 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
         this.b(4.0F, 4.0F);
         this.bX = true;
         this.aA = 5;
+        canaryGhast = new CanaryGhast(this);
+    }
+
+    /**
+     * @return the canaryGhast
+     */
+    public CanaryGhast getCanaryGhast() {
+        return canaryGhast;
     }
 
     public boolean a(ODamageSource var1, int var2) {

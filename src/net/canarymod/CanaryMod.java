@@ -3,7 +3,6 @@ package net.canarymod;
 //import java.util.logging.Logger;
 
 import net.canarymod.backbone.Backbone;
-import net.canarymod.backbone.Backbone.System;
 import net.canarymod.config.Configuration;
 import net.canarymod.plugin.PluginLoader;
 

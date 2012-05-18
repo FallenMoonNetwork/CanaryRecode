@@ -1,16 +1,20 @@
 package net.canarymod;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import net.canarymod.api.Server;
+import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.WorldManager;
+import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OMinecraftServer;
 
 /**
  * Main entry point of the software
  * 
  * @author Jos Kuijpers
+ * @author Chris
  *
  */
 public class CanaryServer implements Server {
@@ -76,14 +80,35 @@ public class CanaryServer implements Server {
     }
 
     @Override
-    public Player matchPlayer(String player) {
-        // TODO Auto-generated method stub
-        return null;
+    public Player matchPlayer(String name) {
+        Player lastPlayer = null;
+
+        name = name.toLowerCase();
+
+        for (OEntityPlayerMP player : (List<OEntityPlayerMP>) server.h.b) {
+            CanaryPlayer cPlayer = player.getPlayer();
+            if (cPlayer.getName().toLowerCase().equals(name)) {
+                // Perfect match found
+                lastPlayer = cPlayer;
+                break;
+            }
+            if (cPlayer.getName().toLowerCase().indexOf(name) != -1) {
+                // Partial match
+                if (lastPlayer != null) {
+                    // Found multiple
+                    return null;
+                }
+                lastPlayer = cPlayer;
+            }
+        }
+
+        return lastPlayer;
     }
 
     @Override
-    public Player getPlayer(String player) {
-        // TODO Auto-generated method stub
-        return null;
+    public Player getPlayer(String name) {
+        OEntityPlayerMP user = server.h.i(name); //So ugly :S
+
+        return user == null ? null : user.getPlayer();
     }
 }

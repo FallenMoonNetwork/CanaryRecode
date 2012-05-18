@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryEnderman;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
@@ -19,6 +20,9 @@ public class OEntityEnderman extends OEntityMob {
     public boolean a = false;
     private int g = 0;
     private int h = 0;
+    
+    //CanaryMod the enderman handler
+    private CanaryEnderman canaryEnderman;
 
     public OEntityEnderman(OWorld var1) {
         super(var1);
@@ -27,8 +31,16 @@ public class OEntityEnderman extends OEntityMob {
         this.c = 7;
         this.b(0.6F, 2.9F);
         this.bP = 1.0F;
+        canaryEnderman = new CanaryEnderman(this);
     }
 
+    /**
+     * CanaryMod Get the enderman handler
+     * @return
+     */
+    public CanaryEnderman getCanaryEnderman() {
+        return canaryEnderman;
+    }
     public int d() {
         return 40;
     }
