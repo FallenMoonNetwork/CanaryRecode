@@ -38,10 +38,6 @@ public class CanaryMod extends Canary {
         
         // Determine the back-end and create a database instance for it.
     }
-    
-    public void setServer(CanaryServer server) {
-        this.server = server;
-    }
 
     @Override
     public Backbone getBackbone(Backbone.System arg0) {
