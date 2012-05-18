@@ -8,6 +8,7 @@ import net.minecraft.server.OEntityAnimal;
 import net.minecraft.server.OEntityList;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityMob;
+import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OIAnimals;
 import net.minecraft.server.OIMob;
 
@@ -28,17 +29,8 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     }
 
     @Override
-    public boolean canSpawn() {
-        return ((OEntityLiving) entity).l();
-    }
-
-    @Override
     public void dealDamage(DamageSource damagesource, int amount) {
-        // TODO ODamageSource matching for null handle (cause someone didn't truely think out the API library)
-        if (damagesource instanceof CanaryDamageSource && ((CanaryDamageSource) damagesource).getHandle() != null) {
-            ((OEntityLiving) entity).a(((CanaryDamageSource) damagesource).getHandle(), amount);
-        }
-
+        ((OEntityLiving) entity).a(((CanaryDamageSource) damagesource).getHandle(), amount);
     }
 
     @Override
@@ -93,9 +85,9 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
     @Override
     public Player getPlayer() {
-        //if(isPlayer()){
-        //	return somefancywaytogetaplayerfromanentityliving();
-        //}
+        if(entity instanceof OEntityPlayerMP) {
+            return ((OEntityPlayerMP)entity).getPlayer();
+        }
         return null;
     }
 
@@ -136,8 +128,8 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     }
 
     @Override
-    public void moveEntity(double arg0, double arg1, double arg2) {
-        // TODO Auto-generated method stub
+    public void moveEntity(double x, double y, double z) {
+        entity.a(x, y, z);
     }
 
     @Override

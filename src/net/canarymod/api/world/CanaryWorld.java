@@ -1,9 +1,6 @@
 package net.canarymod.api.world;
 
-import java.util.List;
-
 import net.canarymod.api.entity.Player;
-import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldServer;
 
@@ -94,40 +91,4 @@ public class CanaryWorld implements World {
 	public boolean canLeaveWorld(Player player) {
     	return player.hasPermission("world.traveling."+name+".leave");
     }
-
-	@Override
-	public Player matchPlayer(String playerName) {
-//	    IPlayer lastPlayer = null;
-//
-//        name = name.toLowerCase();
-//        for(OWorldServer world : oDimensions) {
-//            for (OEntityPlayerMP player : (List<OEntityPlayerMP>) world.getServer().get) {
-//                String playerName = player.v;
-//
-//                if (playerName.toLowerCase().equals(name)) {
-//                    // Perfect match found
-//                    lastPlayer = player.getPlayer();
-//                    break;
-//                }
-//                if (playerName.toLowerCase().indexOf(name.toLowerCase()) != -1) {
-//                    // Partial match
-//                    if (lastPlayer != null) {
-//                        // Found multiple
-//                        return null;
-//                    }
-//                    lastPlayer = player.getPlayer();
-//                }
-//            }
-//        }
-//        
-//
-//        return lastPlayer;
-	    return null;
-	}
-
-	@Override
-	public Player getPlayer(String player) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

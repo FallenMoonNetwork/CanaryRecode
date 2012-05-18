@@ -59,8 +59,15 @@ public class CanaryDimension implements Dimension {
 
     @Override
     public EntityItem dropItem(int x, int y, int z, Item item) {
-        // TODO Auto-generated method stub
-        return null;
+        double d1 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
+        double d2 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
+        double d3 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
+
+        OEntityItem oei = new OEntityItem(world, x + d1, y + d2, z + d3, new OItemStack(item.getId(), item.getAmount(), item.getDamage()));
+
+        oei.c = 10;
+        world.b(oei);
+        return oei.getItem();
     }
 
     @Override

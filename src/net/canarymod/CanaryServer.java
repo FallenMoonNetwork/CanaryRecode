@@ -74,4 +74,16 @@ public class CanaryServer implements Server {
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public Player matchPlayer(String player) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Player getPlayer(String player) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

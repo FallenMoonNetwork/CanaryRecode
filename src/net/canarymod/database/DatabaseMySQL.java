@@ -1,5 +1,5 @@
 package net.canarymod.database;
-public class DatabaseMySQL implements Database {
+public class DatabaseMySql implements Database {
 
     @Override
     public int getNumTables() {

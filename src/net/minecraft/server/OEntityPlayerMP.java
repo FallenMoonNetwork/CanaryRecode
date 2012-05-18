@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
+import net.canarymod.api.entity.CanaryPlayer;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OChunk;
 import net.minecraft.server.OChunkCoordIntPair;
@@ -85,6 +87,8 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public boolean h;
     public int i;
     public boolean j = false;
+    //CanaryMod player handler
+    private CanaryPlayer canaryPlayer;
 
     public OEntityPlayerMP(OMinecraftServer var1, OWorld var2, String var3, OItemInWorldManager var4) {
         super(var2);
@@ -105,6 +109,15 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.bP = 0.0F;
         this.v = var3;
         this.bF = 0.0F;
+        canaryPlayer = new CanaryPlayer(this);
+    }
+    
+    /**
+     * CanaryMod get player handler
+     * @return
+     */
+    public CanaryPlayer getPlayer() {
+        return canaryPlayer;
     }
 
     public void a(ONBTTagCompound var1) {

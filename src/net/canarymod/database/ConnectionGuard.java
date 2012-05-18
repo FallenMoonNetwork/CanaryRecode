@@ -12,10 +12,10 @@ import java.util.logging.Logger;
  */
 public class ConnectionGuard implements Runnable {
 
-    private MySQLConnectionPool cp;
+    private MySqlConnectionPool cp;
     private static final Logger log = Logger.getLogger("Minecraft");
 
-    public ConnectionGuard(MySQLConnectionPool cp) {
+    public ConnectionGuard(MySqlConnectionPool cp) {
         log.info("CanaryMod: Starting connection cleanup thread.");
         this.cp = cp;
     }

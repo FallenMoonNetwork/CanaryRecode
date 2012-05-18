@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import net.canarymod.CanaryMod;
 import net.canarymod.config.ConfigurationFile;
 
-public class MySQLConnectionPool {
+public class MySqlConnectionPool {
     /**
      * Connection information
      */
@@ -36,7 +36,7 @@ public class MySQLConnectionPool {
      */
     private ScheduledExecutorService ses;
 
-    private static MySQLConnectionPool instance = null;
+    private static MySqlConnectionPool instance = null;
     /**
      * Create a new connection service with the given objects.
      *
@@ -46,7 +46,7 @@ public class MySQLConnectionPool {
      * @param poolsize the initial connection pool size. 10 is a suitable value
      * most of the time
      */
-    private MySQLConnectionPool(String url, String user, String passwd, int poolsize) {
+    private MySqlConnectionPool(String url, String user, String passwd, int poolsize) {
         this.url = url;
         this.user = user;
         this.passwd = passwd;
@@ -58,10 +58,10 @@ public class MySQLConnectionPool {
                 timeout / 2, timeout / 2, TimeUnit.MILLISECONDS); //start cleanup thread
     }
     
-    public static MySQLConnectionPool getInstance() {
+    public static MySqlConnectionPool getInstance() {
         if(instance == null) {
             ConfigurationFile sql = CanaryMod.get().getConfiguration().getServerConfig(); //TODO: Add mysql connection cfg
-            instance = new MySQLConnectionPool(sql.getString("db", "jdbc:mysql://localhost:3306/minecraft"), sql.getString("user", "root"), sql.getString("pass", "root"), 5);
+            instance = new MySqlConnectionPool(sql.getString("db", "jdbc:mysql://localhost:3306/minecraft"), sql.getString("user", "root"), sql.getString("pass", "root"), 5);
         }
         return instance;
     }

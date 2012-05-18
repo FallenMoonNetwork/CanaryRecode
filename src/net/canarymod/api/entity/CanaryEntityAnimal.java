@@ -25,20 +25,6 @@ public class CanaryEntityAnimal extends CanaryEntityLiving implements EntityAnim
     }
 
     @Override
-    public void attackEntity(EntityLiving arg0) {
-        // TODO Auto-generated method stub
-        //Also looking at IEntityMob  this is missing IDamageSource param  intentional or just oversight?
-
-    }
-
-    @Override
-    public int getAttackStrenght() {
-        // TODO Auto-generated method stub
-        // not sure where to get this from at this time
-        return 0;
-    }
-
-    @Override
     public EntityLiving getTarget() {
         return new CanaryEntityLiving(((OEntityLiving) entity).at());
     }
