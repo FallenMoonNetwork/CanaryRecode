@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
 import java.util.Random;
+
+import net.canarymod.api.entity.CanarySheep;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityAIEatGrass;
 import net.minecraft.server.OEntityAIFollowParent;
@@ -18,13 +20,15 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
-
 public class OEntitySheep extends OEntityAnimal {
 
     public static final float[][] a = new float[][] { { 1.0F, 1.0F, 1.0F }, { 0.95F, 0.7F, 0.2F }, { 0.9F, 0.5F, 0.85F }, { 0.6F, 0.7F, 0.95F }, { 0.9F, 0.9F, 0.2F }, { 0.5F, 0.8F, 0.1F }, { 0.95F, 0.7F, 0.8F }, { 0.3F, 0.3F, 0.3F }, { 0.6F, 0.6F, 0.6F }, { 0.3F, 0.6F, 0.7F }, { 0.7F, 0.4F, 0.9F }, { 0.2F, 0.4F, 0.8F }, { 0.5F, 0.4F, 0.3F }, { 0.4F, 0.5F, 0.2F }, { 0.8F, 0.3F, 0.3F }, { 0.1F, 0.1F, 0.1F } };
     private int b;
     private OEntityAIEatGrass c = new OEntityAIEatGrass(this);
 
+    //CanarMod sheep handler
+    private CanarySheep canarySheep;
+    
     public OEntitySheep(OWorld var1) {
         super(var1);
         this.ae = "/mob/sheep.png";
@@ -40,7 +44,18 @@ public class OEntitySheep extends OEntityAnimal {
         this.aL.a(6, new OEntityAIWander(this, var2));
         this.aL.a(7, new OEntityAIWatchClosest(this, OEntityPlayer.class, 6.0F));
         this.aL.a(8, new OEntityAILookIdle(this));
+        
+        canarySheep = new CanarySheep(this);
     }
+
+    /**
+     * CanaryMod Get Sheep handler
+     * @return the canarySheep
+     */
+    public CanarySheep getCanarySheep() {
+        return canarySheep;
+    }
+
 
     protected boolean c_() {
         return true;
