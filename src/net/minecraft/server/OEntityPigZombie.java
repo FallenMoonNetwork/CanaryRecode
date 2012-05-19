@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
 import java.util.List;
+
+import net.canarymod.api.entity.CanaryPigZombie;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEnchantmentHelper;
 import net.minecraft.server.OEntity;
@@ -16,6 +18,8 @@ public class OEntityPigZombie extends OEntityZombie {
     private int a = 0;
     private int b = 0;
     private static final OItemStack g = new OItemStack(OItem.F, 1);
+    
+    private CanaryPigZombie canaryPigZombie;
 
     public OEntityPigZombie(OWorld var1) {
         super(var1);
@@ -23,6 +27,16 @@ public class OEntityPigZombie extends OEntityZombie {
         this.bb = 0.5F;
         this.c = 5;
         this.bX = true;
+        
+        canaryPigZombie = new CanaryPigZombie(this);
+    }
+
+    /**
+     * CanaryMod get PigZombie handler
+     * @return the canaryPigZombie
+     */
+    public CanaryPigZombie getCanaryPigZombie() {
+        return canaryPigZombie;
     }
 
     protected boolean c_() {

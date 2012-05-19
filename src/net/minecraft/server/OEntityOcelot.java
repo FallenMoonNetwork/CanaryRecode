@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryOcelot;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
@@ -16,7 +17,6 @@ import net.minecraft.server.OEntityAIWander;
 import net.minecraft.server.OEntityAIWatchClosest;
 import net.minecraft.server.OEntityAnimal;
 import net.minecraft.server.OEntityChicken;
-import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityTameable;
 import net.minecraft.server.OItem;
@@ -28,6 +28,8 @@ import net.minecraft.server.OWorld;
 public class OEntityOcelot extends OEntityTameable {
 
     private OEntityAITempt b;
+    //CanaryMod ocelot handler
+    private CanaryOcelot canaryOcelot;
 
     public OEntityOcelot(OWorld var1) {
         super(var1);
@@ -46,6 +48,16 @@ public class OEntityOcelot extends OEntityTameable {
         this.aL.a(10, new OEntityAIWander(this, 0.23F));
         this.aL.a(11, new OEntityAIWatchClosest(this, OEntityPlayer.class, 10.0F));
         this.aM.a(1, new OEntityAITargetNonTamed(this, OEntityChicken.class, 14.0F, 750, false));
+        
+        canaryOcelot = new CanaryOcelot(this);
+    }
+
+    /**
+     * CanaryMod get the Ocelot handler
+     * @return the canaryOcelot
+     */
+    public CanaryOcelot getCanaryOcelot() {
+        return canaryOcelot;
     }
 
     protected void b() {

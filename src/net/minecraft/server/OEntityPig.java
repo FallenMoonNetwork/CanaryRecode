@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryPig;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIFollowParent;
@@ -21,6 +22,9 @@ import net.minecraft.server.OWorld;
 
 public class OEntityPig extends OEntityAnimal {
 
+    //CanaryMod pig handler
+    private CanaryPig canaryPig;
+    
     public OEntityPig(OWorld var1) {
         super(var1);
         this.ae = "/mob/pig.png";
@@ -35,6 +39,15 @@ public class OEntityPig extends OEntityAnimal {
         this.aL.a(5, new OEntityAIWander(this, var2));
         this.aL.a(6, new OEntityAIWatchClosest(this, OEntityPlayer.class, 6.0F));
         this.aL.a(7, new OEntityAILookIdle(this));
+        
+        canaryPig = new CanaryPig(this);
+    }
+    /**
+     * CanaryMod get the Pig handler
+     * @return the canaryPig
+     */
+    public CanaryPig getCanaryPig() {
+        return canaryPig;
     }
 
     public boolean c_() {

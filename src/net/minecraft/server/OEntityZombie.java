@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryZombie;
 import net.minecraft.server.OEntityAIAttackOnCollide;
 import net.minecraft.server.OEntityAIBreakDoor;
 import net.minecraft.server.OEntityAIHurtByTarget;
@@ -20,6 +21,8 @@ import net.minecraft.server.OWorld;
 
 public class OEntityZombie extends OEntityMob {
 
+    private CanaryZombie canaryZombie;
+    
     public OEntityZombie(OWorld var1) {
         super(var1);
         this.ae = "/mob/zombie.png";
@@ -38,6 +41,16 @@ public class OEntityZombie extends OEntityMob {
         this.aM.a(1, new OEntityAIHurtByTarget(this, false));
         this.aM.a(2, new OEntityAINearestAttackableTarget(this, OEntityPlayer.class, 16.0F, 0, true));
         this.aM.a(2, new OEntityAINearestAttackableTarget(this, OEntityVillager.class, 16.0F, 0, false));
+        
+        canaryZombie = new CanaryZombie(this);
+    }
+
+    /**
+     * CanaryMod Get zombie handler
+     * @return the canaryZombie
+     */
+    public CanaryZombie getCanaryZombie() {
+        return canaryZombie;
     }
 
     public int d() {
