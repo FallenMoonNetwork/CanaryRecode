@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryWolf;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIAttackOnCollide;
@@ -39,6 +40,9 @@ public class OEntityWolf extends OEntityTameable {
     private float j;
     private float k;
 
+    //CanaryMod wolf handler
+    private CanaryWolf canaryWolf;
+    
     public OEntityWolf(OWorld var1) {
         super(var1);
         this.ae = "/mob/wolf.png";
@@ -59,6 +63,15 @@ public class OEntityWolf extends OEntityTameable {
         this.aM.a(2, new OEntityAIOwnerHurtTarget(this));
         this.aM.a(3, new OEntityAIHurtByTarget(this, true));
         this.aM.a(4, new OEntityAITargetNonTamed(this, OEntitySheep.class, 16.0F, 200, false));
+        canaryWolf = new CanaryWolf(this);
+    }
+
+    /**
+     * CanaryMod Get Wolf handler
+     * @return the canaryWolf
+     */
+    public CanaryWolf getCanaryWolf() {
+        return canaryWolf;
     }
 
     public boolean c_() {
