@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryVillager;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityAIAvoidEntity;
 import net.minecraft.server.OEntityAIFollowGolem;
@@ -29,10 +30,13 @@ public class OEntityVillager extends OEntityAgeable implements OINpc {
     private boolean c;
     private boolean g;
     OVillage a;
+    //CanaryMod
+    private CanaryVillager canaryVillager;
 
     public OEntityVillager(OWorld var1) {
         this(var1, 0);
     }
+
 
     public OEntityVillager(OWorld var1, int var2) {
         super(var1);
@@ -58,8 +62,18 @@ public class OEntityVillager extends OEntityAgeable implements OINpc {
         this.aL.a(9, new OEntityAIWatchClosest2(this, OEntityVillager.class, 5.0F, 0.02F));
         this.aL.a(9, new OEntityAIWander(this, 0.3F));
         this.aL.a(10, new OEntityAIWatchClosest(this, OEntityLiving.class, 8.0F));
+        
+        canaryVillager = new CanaryVillager(this);
     }
 
+    /**
+     * CanaryMod Get the villager handler
+     * @return the canaryVillager
+     */
+    public CanaryVillager getCanaryVillager() {
+        return canaryVillager;
+    }
+    
     public boolean c_() {
         return true;
     }

@@ -16,6 +16,10 @@ public class CanaryEntity implements Entity {
         world = entity.bi.getWorldHandler();
     }
     
+    public OEntity getHandle() {
+        return entity;
+    }
+    
     @Override
     public double getX() {
         return entity.bm;

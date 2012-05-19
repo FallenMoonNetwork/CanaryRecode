@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanarySkeleton;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEnchantmentHelper;
@@ -25,6 +26,7 @@ import net.minecraft.server.OWorld;
 public class OEntitySkeleton extends OEntityMob {
 
     private static final OItemStack a = new OItemStack(OItem.j, 1);
+    private CanarySkeleton canarySkeleton; 
 
     public OEntitySkeleton(OWorld var1) {
         super(var1);
@@ -39,8 +41,16 @@ public class OEntitySkeleton extends OEntityMob {
         this.aL.a(6, new OEntityAILookIdle(this));
         this.aM.a(1, new OEntityAIHurtByTarget(this, false));
         this.aM.a(2, new OEntityAINearestAttackableTarget(this, OEntityPlayer.class, 16.0F, 0, true));
+        canarySkeleton = new CanarySkeleton(this);
     }
 
+    /**
+     * CanaryMod Get skeleton handler
+     * @return the canarySkeleton
+     */
+    public CanarySkeleton getCanarySkeleton() {
+        return canarySkeleton;
+    }
     public boolean c_() {
         return true;
     }

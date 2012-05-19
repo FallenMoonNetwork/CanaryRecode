@@ -1,11 +1,11 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanarySilverfish;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockSilverfish;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityDamageSource;
-import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityMob;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEnumCreatureAttribute;
@@ -17,6 +17,7 @@ import net.minecraft.server.OWorld;
 public class OEntitySilverfish extends OEntityMob {
 
     private int a;
+    private CanarySilverfish canarySilverfish;
 
     public OEntitySilverfish(OWorld var1) {
         super(var1);
@@ -24,7 +25,17 @@ public class OEntitySilverfish extends OEntityMob {
         this.b(0.3F, 0.7F);
         this.bb = 0.6F;
         this.c = 1;
+        canarySilverfish = new CanarySilverfish(this);
     }
+
+    /**
+     * CanaryMod Get silverfish handler
+     * @return the canarySilverfish
+     */
+    public CanarySilverfish getCanarySilverfish() {
+        return canarySilverfish;
+    }
+
 
     public int d() {
         return 8;

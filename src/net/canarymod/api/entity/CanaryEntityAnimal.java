@@ -2,6 +2,9 @@ package net.canarymod.api.entity;
 
 import net.minecraft.server.OEntityAnimal;
 import net.minecraft.server.OEntityLiving;
+import net.minecraft.server.OEntitySquid;
+import net.minecraft.server.OEntityVillager;
+import net.minecraft.server.OEntityWaterMob;
 
 /**
  * basic animal entity wrapper class
@@ -11,6 +14,20 @@ import net.minecraft.server.OEntityLiving;
 public class CanaryEntityAnimal extends CanaryEntityLiving implements EntityAnimal {
 
     public CanaryEntityAnimal(OEntityAnimal entity) {
+        super(entity);
+    }
+    
+    //For them squids ...
+    public CanaryEntityAnimal(OEntitySquid entity) {
+        super(entity);
+    }
+
+    /**
+     * Villagers need the getters and setters from Ageable.
+     * That's why villagers inherit from animals 
+     * @param entity
+     */
+    public CanaryEntityAnimal(OEntityVillager entity) {
         super(entity);
     }
 
