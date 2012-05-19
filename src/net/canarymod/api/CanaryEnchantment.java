@@ -6,20 +6,20 @@ import net.minecraft.server.OEnchantment;
 public class CanaryEnchantment implements Enchantment{
 	private Type type;
 	private int level;
+	OEnchantment handle;
 	
 	public CanaryEnchantment(Type type, int level) {
 		this.type = type;
 		this.level = level;
 	}
 	
-	public CanaryEnchantment(OEnchantment oEnchantment){
-		// TODO Auto-generated method stub
+	public CanaryEnchantment(OEnchantment handle){
+		this.handle = handle;
 	}
 	
 	@Override
-	public boolean canStack(Enchantment arg0) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean canStack(Enchantment ench) {
+		return handle.a(((CanaryEnchantment)ench).handle);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class CanaryEnchantment implements Enchantment{
 	}
 
 	@Override
-	public Enchantment getEnchantment(Type arg0) {
+	public Enchantment getEnchantment(Type type) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -47,14 +47,12 @@ public class CanaryEnchantment implements Enchantment{
 
 	@Override
 	public int getMaxEnchantmentLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+		return handle.a();
 	}
 
 	@Override
 	public int getMinEnchantmentLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+		return handle.c();
 	}
 
 	@Override
@@ -64,8 +62,7 @@ public class CanaryEnchantment implements Enchantment{
 
 	@Override
 	public int getWeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return handle.b();
 	}
 
 	@Override
