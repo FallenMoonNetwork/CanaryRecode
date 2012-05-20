@@ -175,6 +175,9 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
     @Override
     public void setHomeArea(Vector3D vector, int dist) {
+        if(vector == null) {
+            throw new IllegalArgumentException("Could not set EntityLivings home. Vector was null!");
+        }
         setHomeArea((int) Math.floor(vector.getX()), (int) Math.floor(vector.getY()), (int) Math.floor(vector.getZ()), dist);
     }
 
