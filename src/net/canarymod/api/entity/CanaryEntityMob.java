@@ -38,6 +38,6 @@ public class CanaryEntityMob extends CanaryEntityLiving implements EntityMob {
 
     @Override
     public boolean canSpawn() {
-        return ((OEntityMob)entity).l();
+        return ((OEntityLiving)entity).l();
     }
 }

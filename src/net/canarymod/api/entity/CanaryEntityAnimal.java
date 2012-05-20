@@ -1,10 +1,12 @@
 package net.canarymod.api.entity;
 
+import net.minecraft.server.OEntityAgeable;
 import net.minecraft.server.OEntityAnimal;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntitySquid;
 import net.minecraft.server.OEntityVillager;
 import net.minecraft.server.OEntityWaterMob;
+import net.minecraft.server.OIAnimals;
 
 /**
  * basic animal entity wrapper class
@@ -32,13 +34,14 @@ public class CanaryEntityAnimal extends CanaryEntityLiving implements EntityAnim
     }
 
     @Override
-    public int getGrowingAge() {
-        return ((OEntityAnimal) entity).K();
+    public int getGrowingAge() { //Squid has no age
+        return entity instanceof OEntitySquid ? 0 : ((OEntityAgeable) entity).K();
     }
 
     @Override
     public void setGrowingAge(int age) {
-        ((OEntityAnimal) entity).c(age);
+        if(entity instanceof OEntitySquid) return; //Squid has no age
+        ((OEntityAgeable) entity).c(age);
     }
 
     @Override

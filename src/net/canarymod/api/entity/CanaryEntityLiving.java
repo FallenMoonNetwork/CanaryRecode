@@ -5,10 +5,14 @@ import net.canarymod.api.DamageSource;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityAnimal;
+import net.minecraft.server.OEntityFlying;
 import net.minecraft.server.OEntityList;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityMob;
 import net.minecraft.server.OEntityPlayerMP;
+import net.minecraft.server.OEntitySlime;
+import net.minecraft.server.OEntitySquid;
+import net.minecraft.server.OEntityVillager;
 import net.minecraft.server.OIAnimals;
 import net.minecraft.server.OIMob;
 
@@ -41,9 +45,12 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     @Override
     public EntityAnimal getAnimal() {
         if (isAnimal()) {
-            return this instanceof CanaryEntityAnimal ? (CanaryEntityAnimal) this : new CanaryEntityAnimal((OEntityAnimal) entity);
+            return this instanceof CanaryEntityAnimal ? (CanaryEntityAnimal) this :
+                   entity instanceof OEntitySquid ? new CanaryEntityAnimal((OEntitySquid) entity) : //Since squid isn't an OEntityAnimal instance
+                   entity instanceof OEntityVillager ? new CanaryEntityAnimal((OEntityVillager) entity) : //Since Villager isn't an OEntityAnimal instance
+                   new CanaryEntityAnimal((OEntityAnimal) entity);
         }
-        return null;
+        return null; //Not a valid animal type
     }
 
     @Override
@@ -73,9 +80,12 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     @Override
     public EntityMob getMob() {
         if (isMob()) {
-            return this instanceof CanaryEntityMob ? (CanaryEntityMob) this : new CanaryEntityMob((OEntityMob) entity);
+            return this instanceof CanaryEntityMob ? (CanaryEntityMob) this : 
+                   entity instanceof OEntityFlying ? new CanaryEntityMob((OEntityFlying) entity) : //Since OEntityFlying isn't an OEntityMob instance
+                   entity instanceof OEntitySlime ? new CanaryEntityMob((OEntitySlime) entity) : //Since OEntitySlime isn't an OEntityMob instance
+                   new CanaryEntityMob((OEntityMob) entity);
         }
-        return null;
+        return null; //Not a valid mob type
     }
 
     @Override
@@ -103,7 +113,7 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
     @Override
     public boolean isAnimal() {
-        return entity instanceof OIAnimals;
+        return entity instanceof OIAnimals && !(entity instanceof OIMob); //Just noticed OIMob extends OIAnimals which could cause derpiness
     }
 
     @Override
