@@ -45,10 +45,10 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     @Override
     public EntityAnimal getAnimal() {
         if (isAnimal()) {
-            return this instanceof CanaryEntityAnimal ? (CanaryEntityAnimal) this :
-                   entity instanceof OEntitySquid ? new CanaryEntityAnimal((OEntitySquid) entity) : //Since squid isn't an OEntityAnimal instance
-                   entity instanceof OEntityVillager ? new CanaryEntityAnimal((OEntityVillager) entity) : //Since Villager isn't an OEntityAnimal instance
-                   new CanaryEntityAnimal((OEntityAnimal) entity);
+            return (this instanceof CanaryEntityAnimal ? (CanaryEntityAnimal) this :
+                    entity instanceof OEntitySquid ? ((OEntitySquid)entity).getCanarySquid() :
+                    entity instanceof OEntityVillager ? ((OEntityVillager)entity).getCanaryVillager() :
+                    (CanaryEntityAnimal)((OEntityAnimal)entity).getCanaryEntityLiving());
         }
         return null; //Not a valid animal type
     }
@@ -169,7 +169,7 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
     @Override
     public void setHome(Vector3D vector) {
-        setHomeArea((int) Math.floor(vector.getX()), (int) Math.floor(vector.getY()), (int) Math.floor(vector.getZ()), 25); //TODO what should default be for maxHomeDistance?
+        setHomeArea((int) Math.floor(vector.getX()), (int) Math.floor(vector.getY()), (int) Math.floor(vector.getZ()), 25); 
 
     }
 
@@ -184,7 +184,7 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     }
 
     @Override
-    public void setHomeRadius(int arg0) { //What is this?
-        // TODO Auto-generated method stub
+    public void setHomeRadius(int newRadius) { 
+        setHomeArea(getHome(), newRadius);
     }
 }

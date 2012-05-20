@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanarySquid;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityWaterMob;
 import net.minecraft.server.OItem;
@@ -25,14 +26,25 @@ public class OEntitySquid extends OEntityWaterMob {
     private float o = 0.0F;
     private float p = 0.0F;
     private float q = 0.0F;
+    
+    //CanaryMod squid handler
+    private CanarySquid canarySquid;
 
     public OEntitySquid(OWorld var1) {
         super(var1);
         this.ae = "/mob/squid.png";
         this.b(0.95F, 0.95F);
         this.m = 1.0F / (this.bS.nextFloat() + 1.0F) * 0.2F;
+        canarySquid = new CanarySquid(this);
     }
 
+    /**
+     * CanaryMod Get the squid handler
+     * @return the canarySquid
+     */
+    public CanarySquid getCanarySquid() {
+        return canarySquid;
+    }
     public int d() {
         return 10;
     }
