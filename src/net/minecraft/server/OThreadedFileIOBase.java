@@ -21,7 +21,8 @@ public class OThreadedFileIOBase implements Runnable {
     }
 
     public void run() {
-        this.b();
+    	while(true)
+    		this.b();
     }
 
     private void b() {

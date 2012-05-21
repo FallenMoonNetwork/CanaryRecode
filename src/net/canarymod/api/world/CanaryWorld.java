@@ -1,7 +1,6 @@
 package net.canarymod.api.world;
 
 import net.canarymod.api.entity.Player;
-import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldServer;
 
 public class CanaryWorld implements World {
@@ -16,16 +15,17 @@ public class CanaryWorld implements World {
      */
     private String name;
     
-    public CanaryWorld(String name, OWorld[] dimensions) {
+    public CanaryWorld(String name, OWorldServer[] dimensions) {
         this.name = name;
-        this.dimensions = new CanaryDimension[] {new CanaryDimension(dimensions[0], this), new CanaryDimension(dimensions[1],this), new CanaryDimension(dimensions[2],this)};
+        this.dimensions = new CanaryDimension[] {new CanaryDimension(dimensions[0], this),new CanaryDimension(dimensions[1],this),new CanaryDimension(dimensions[2],this)};
         nanoTicks = new long[dimensions.length][100]; //TODO: Find out what the hell this does
-        oDimensions = (OWorldServer[]) dimensions;
+        oDimensions = dimensions;
     }
     
-    public OWorldServer[] getWorldArray() {
+    public OWorldServer[] getDimensionArray() {
         return this.oDimensions;
     }
+
     /**
      * Return the name of this World (WorldContainer)
      * @return

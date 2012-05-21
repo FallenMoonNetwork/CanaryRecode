@@ -17,7 +17,7 @@ import net.minecraft.server.OWorldServer;
 
 /**
  * Wraps an OWorldServer object for world access. In OWorldServer there is no
- * _handler instance as we need the WorldContainer for instanciating a new World
+ * _handler instance as we need the WorldContainer for instantiating a new World
  * wrapper. This is an exceptional thing
  * 
  * @author Chris
@@ -29,12 +29,11 @@ public class CanaryDimension implements Dimension {
     private CanaryChunkProviderServer chunkProvider;
     CanaryWorld parent;
 
-    public CanaryDimension(OWorld world, CanaryWorld parent) {
-        this.world = (OWorldServer) world; // We're not getting any other world
-                                           // types, right?
-        chunkProvider = this.world.G.getHandler(); // get the chunk provider
-                                                   // wrapper
+    public CanaryDimension(OWorldServer world, CanaryWorld parent) {
+        this.world = world; // We're not getting any other world types, right?
+        chunkProvider = this.world.G.getHandler(); // get the chunk provider wrapper
         this.parent = parent;
+        world.setCanaryDimension(this);
     }
 
     @Override

@@ -103,20 +103,19 @@ public class OWorld implements OIBlockAccess {
     int[] E;
     private List S;
     public boolean F;
-    
-    //CanaryMod World handler
-    private CanaryDimension worldHandler;
-    
-    //CanaryMod Start
-    public void setWorldHandler(CanaryDimension world) {
-        this.worldHandler = world;
-    }
-    
-    public CanaryDimension getWorldHandler() {
-        return worldHandler;
-    }
-    //CanaryMod End
 
+    // CanaryMod start: multiworld
+    protected CanaryDimension canaryDimension;
+    
+    public CanaryDimension getCanaryDimension() {
+        return canaryDimension;
+    }
+
+    public void setCanaryDimension(CanaryDimension dim) {
+        this.canaryDimension = dim;
+    }
+    // CanaryMod end
+    
     public OBiomeGenBase a(int var1, int var2) {
         if (this.i(var1, 0, var2)) {
             OChunk var3 = this.c(var1, var2);

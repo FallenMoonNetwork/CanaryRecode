@@ -36,26 +36,13 @@ public class OWorldServer extends OWorld {
     private OMinecraftServer J;
     private OIntHashMap K;
     
-    /**
-     * CanaryMod Dimension (OWorldWrapper)
-     */
-    private CanaryDimension canaryWorld;
-
-    /**
-     * Get the CanaryMod Server wrapper
-     * @return
-     */
+   
+    // CanaryMod start
     public Object getServer() {
         return J.getServer();
     }
-    
-    public CanaryDimension getCanaryWorld() {
-        return canaryWorld;
-    }
-    
-    public void setCanaryWorld(CanaryDimension dim) {
-        canaryWorld = dim;
-    }
+    // CanaryMod end
+
     public OWorldServer(OMinecraftServer var1, OISaveHandler var2, String var3, int var4, OWorldSettings var5) {
         super(var2, var3, var5, OWorldProvider.a(var4));
         this.J = var1;

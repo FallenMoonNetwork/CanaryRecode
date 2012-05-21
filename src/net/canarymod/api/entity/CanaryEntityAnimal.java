@@ -5,8 +5,6 @@ import net.minecraft.server.OEntityAnimal;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntitySquid;
 import net.minecraft.server.OEntityVillager;
-import net.minecraft.server.OEntityWaterMob;
-import net.minecraft.server.OIAnimals;
 
 /**
  * basic animal entity wrapper class

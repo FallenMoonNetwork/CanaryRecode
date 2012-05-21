@@ -298,7 +298,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-            //var2.A();   Causes stopping the server to hang for an unknown reason (could be due to this being the second call to this method)
+            var2.A();
         }
     }
 

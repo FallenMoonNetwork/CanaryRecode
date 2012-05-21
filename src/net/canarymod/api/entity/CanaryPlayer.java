@@ -7,7 +7,7 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
 import net.canarymod.group.Group;
 import net.canarymod.permissionsystem.PermissionProvider;
-import net.minecraft.server.OEntityLiving;
+import net.minecraft.server.OEntityPlayerMP;
 
 /**
  * Canary Player wrapper.
@@ -16,15 +16,18 @@ import net.minecraft.server.OEntityLiving;
  */
 public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
-    public CanaryPlayer(OEntityLiving entity) {
+    public CanaryPlayer(OEntityPlayerMP entity) {
         super(entity);
         // TODO Auto-generated constructor stub
     }
 
     @Override
+    public String getName() {
+    	return ((OEntityPlayerMP)entity).v;
+    }
+    
+    @Override
     public void chat(String message) {
-        // TODO Auto-generated method stub
-        
     }
 
     @Override
