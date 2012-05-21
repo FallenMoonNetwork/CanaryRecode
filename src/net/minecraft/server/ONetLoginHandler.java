@@ -23,7 +23,6 @@ import net.minecraft.server.OPacket4UpdateTime;
 import net.minecraft.server.OPacket6SpawnPosition;
 import net.minecraft.server.OPotionEffect;
 import net.minecraft.server.OThreadLoginVerifier;
-import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldServer;
 
 public class ONetLoginHandler extends ONetHandler {

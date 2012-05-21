@@ -3,7 +3,6 @@ package net.minecraft.server;
 import net.minecraft.server.OBiomeDecorator;
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OBlock;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityDragon;
 import net.minecraft.server.OWorldGenSpikes;
 import net.minecraft.server.OWorldGenerator;

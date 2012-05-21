@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlockContainer;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityItem;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;

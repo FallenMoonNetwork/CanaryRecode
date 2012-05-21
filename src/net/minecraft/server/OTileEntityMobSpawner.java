@@ -1,7 +1,6 @@
 package net.minecraft.server;
 
 import net.minecraft.server.OAxisAlignedBB;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityList;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.ONBTTagCompound;

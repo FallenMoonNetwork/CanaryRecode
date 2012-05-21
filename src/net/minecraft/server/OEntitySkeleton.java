@@ -20,7 +20,6 @@ import net.minecraft.server.OEnumCreatureAttribute;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMathHelper;
-import net.minecraft.server.OStatBase;
 import net.minecraft.server.OWorld;
 
 public class OEntitySkeleton extends OEntityMob {

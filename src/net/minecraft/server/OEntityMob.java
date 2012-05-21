@@ -3,7 +3,6 @@ package net.minecraft.server;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityCreature;
-import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEnumSkyBlock;
 import net.minecraft.server.OIMob;

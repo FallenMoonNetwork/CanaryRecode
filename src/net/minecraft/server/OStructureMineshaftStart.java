@@ -1,9 +1,7 @@
 package net.minecraft.server;
 
-import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OComponentMineshaftRoom;
-import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructureStart;
 import net.minecraft.server.OWorld;
 

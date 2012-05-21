@@ -1,7 +1,6 @@
 package net.minecraft.server;
 
 import net.minecraft.server.OAnvilConverterData;
-import net.minecraft.server.ONBTBase;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.ONBTTagList;
 import net.minecraft.server.ONibbleArray;

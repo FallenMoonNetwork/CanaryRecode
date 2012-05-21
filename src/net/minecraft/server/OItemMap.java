@@ -13,7 +13,6 @@ import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OPacket;
 import net.minecraft.server.OPacket131MapData;
 import net.minecraft.server.OWorld;
-import net.minecraft.server.OWorldSavedData;
 
 public class OItemMap extends OItemMapBase {
 

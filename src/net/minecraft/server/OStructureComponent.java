@@ -13,7 +13,6 @@ import net.minecraft.server.OStructurePieceBlockSelector;
 import net.minecraft.server.OStructurePieceTreasure;
 import net.minecraft.server.OTileEntityChest;
 import net.minecraft.server.OWeightedRandom;
-import net.minecraft.server.OWeightedRandomChoice;
 import net.minecraft.server.OWorld;
 
 public abstract class OStructureComponent {

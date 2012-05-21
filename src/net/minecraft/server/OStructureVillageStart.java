@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OComponentVillageRoadPiece;
 import net.minecraft.server.OComponentVillageStartPiece;

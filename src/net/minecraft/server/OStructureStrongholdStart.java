@@ -1,7 +1,6 @@
 package net.minecraft.server;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OComponentStrongholdStairs2;
 import net.minecraft.server.OStructureComponent;

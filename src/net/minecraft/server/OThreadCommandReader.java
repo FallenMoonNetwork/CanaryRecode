@@ -3,7 +3,6 @@ package net.minecraft.server;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import net.minecraft.server.OICommandListener;
 import net.minecraft.server.OMinecraftServer;
 
 public class OThreadCommandReader extends Thread {

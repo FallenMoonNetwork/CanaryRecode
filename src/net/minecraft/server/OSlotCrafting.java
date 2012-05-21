@@ -7,7 +7,6 @@ import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OSlot;
-import net.minecraft.server.OStatBase;
 
 public class OSlotCrafting extends OSlot {
 

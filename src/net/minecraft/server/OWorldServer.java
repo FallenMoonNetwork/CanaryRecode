@@ -3,7 +3,6 @@ package net.minecraft.server;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.canarymod.api.world.CanaryDimension;
 import net.minecraft.server.OChunkProviderServer;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAnimal;
@@ -17,7 +16,6 @@ import net.minecraft.server.OISaveHandler;
 import net.minecraft.server.OIntHashMap;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OMinecraftServer;
-import net.minecraft.server.OPacket;
 import net.minecraft.server.OPacket38EntityStatus;
 import net.minecraft.server.OPacket54PlayNoteBlock;
 import net.minecraft.server.OPacket60Explosion;

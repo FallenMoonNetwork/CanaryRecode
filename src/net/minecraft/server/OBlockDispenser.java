@@ -3,7 +3,6 @@ package net.minecraft.server;
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockContainer;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityArrow;
 import net.minecraft.server.OEntityEgg;
 import net.minecraft.server.OEntityExpBottle;

@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityAnimal;
-import net.minecraft.server.OEntityLiving;
 
 public class OEntityAIFollowParent extends OEntityAIBase {
 

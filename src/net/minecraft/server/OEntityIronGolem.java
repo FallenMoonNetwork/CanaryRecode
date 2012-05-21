@@ -17,7 +17,6 @@ import net.minecraft.server.OEntityAINearestAttackableTarget;
 import net.minecraft.server.OEntityAIWander;
 import net.minecraft.server.OEntityAIWatchClosest;
 import net.minecraft.server.OEntityGolem;
-import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityMob;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;

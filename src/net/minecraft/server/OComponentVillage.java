@@ -3,7 +3,6 @@ package net.minecraft.server;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OComponentVillageStartPiece;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityVillager;
 import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;

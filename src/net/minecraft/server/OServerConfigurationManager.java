@@ -31,7 +31,6 @@ import net.minecraft.server.OPlayerManager;
 import net.minecraft.server.OPlayerUsageSnooper;
 import net.minecraft.server.OTeleporter;
 import net.minecraft.server.OTileEntity;
-import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldServer;
 
 public class OServerConfigurationManager {

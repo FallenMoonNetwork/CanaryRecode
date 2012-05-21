@@ -4,7 +4,6 @@ import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OItemStack;
-import net.minecraft.server.OPacket;
 import net.minecraft.server.OPacket53BlockChange;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldServer;

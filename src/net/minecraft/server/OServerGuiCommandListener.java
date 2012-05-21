@@ -3,7 +3,6 @@ package net.minecraft.server;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
-import net.minecraft.server.OICommandListener;
 import net.minecraft.server.OServerGUI;
 
 class OServerGuiCommandListener implements ActionListener {

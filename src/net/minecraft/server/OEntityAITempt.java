@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityCreature;
-import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItemStack;
 

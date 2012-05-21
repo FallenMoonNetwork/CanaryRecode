@@ -4,7 +4,6 @@ import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockEndPortalFrame;
 import net.minecraft.server.OChunkPosition;
 import net.minecraft.server.ODirection;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityEnderEye;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEnumMovingObjectType;

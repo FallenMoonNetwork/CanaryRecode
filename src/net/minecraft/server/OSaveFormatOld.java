@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import net.minecraft.server.OCompressedStreamTools;
 import net.minecraft.server.OIProgressUpdate;
 import net.minecraft.server.OISaveFormat;

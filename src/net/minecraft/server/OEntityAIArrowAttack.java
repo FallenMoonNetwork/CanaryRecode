@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityArrow;
 import net.minecraft.server.OEntityLiving;

@@ -17,7 +17,6 @@ import net.minecraft.server.OEntityPigZombie;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;
 import net.minecraft.server.ONBTTagCompound;
-import net.minecraft.server.OStatBase;
 import net.minecraft.server.OWorld;
 
 public class OEntityPig extends OEntityAnimal {

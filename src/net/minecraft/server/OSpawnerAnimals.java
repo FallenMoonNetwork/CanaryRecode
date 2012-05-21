@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +10,6 @@ import net.minecraft.server.OChunk;
 import net.minecraft.server.OChunkCoordIntPair;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OChunkPosition;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityOcelot;
 import net.minecraft.server.OEntityPlayer;

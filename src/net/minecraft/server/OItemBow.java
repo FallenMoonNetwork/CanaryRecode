@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import net.minecraft.server.OEnchantment;
 import net.minecraft.server.OEnchantmentHelper;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityArrow;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEnumAction;

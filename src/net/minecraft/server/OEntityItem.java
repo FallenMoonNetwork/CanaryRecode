@@ -11,7 +11,6 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
-import net.minecraft.server.OStatBase;
 import net.minecraft.server.OStatCollector;
 import net.minecraft.server.OWorld;
 

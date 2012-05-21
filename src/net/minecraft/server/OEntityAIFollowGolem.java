@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityIronGolem;
-import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityVillager;
 
 public class OEntityAIFollowGolem extends OEntityAIBase {

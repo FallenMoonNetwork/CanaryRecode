@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.List;
 import net.minecraft.server.ODataWatcher;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityList;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OMathHelper;

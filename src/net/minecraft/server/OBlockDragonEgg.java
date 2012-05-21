@@ -3,7 +3,6 @@ package net.minecraft.server;
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockSand;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityFallingSand;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OMaterial;

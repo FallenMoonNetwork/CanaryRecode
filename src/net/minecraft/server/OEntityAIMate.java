@@ -6,7 +6,6 @@ import java.util.Random;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityAnimal;
-import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OWorld;
 
 public class OEntityAIMate extends OEntityAIBase {

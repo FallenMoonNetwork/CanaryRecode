@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockDirectional;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityIronGolem;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntitySnowman;

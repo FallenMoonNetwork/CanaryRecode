@@ -1,7 +1,6 @@
 package net.minecraft.server;
 
 import net.minecraft.server.ODamageSource;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityThrowable;
 import net.minecraft.server.OMovingObjectPosition;

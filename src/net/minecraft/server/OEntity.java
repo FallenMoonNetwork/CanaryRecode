@@ -15,7 +15,6 @@ import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OMathHelper;
-import net.minecraft.server.ONBTBase;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.ONBTTagDouble;
 import net.minecraft.server.ONBTTagFloat;

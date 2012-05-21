@@ -4,7 +4,6 @@ import java.util.Random;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItemStack;
-import net.minecraft.server.ONBTBase;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.ONBTTagList;
 import net.minecraft.server.OTileEntity;

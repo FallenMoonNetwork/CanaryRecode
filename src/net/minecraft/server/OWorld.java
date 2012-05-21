@@ -11,7 +11,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.Dimension;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OBlock;

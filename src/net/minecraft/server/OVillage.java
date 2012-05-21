@@ -6,7 +6,6 @@ import java.util.List;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityIronGolem;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityVillager;

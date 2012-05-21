@@ -3,7 +3,6 @@ package net.minecraft.server;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPotion;
 import net.minecraft.server.OEnumAction;

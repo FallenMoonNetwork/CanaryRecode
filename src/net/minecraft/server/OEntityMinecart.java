@@ -14,7 +14,6 @@ import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMathHelper;
-import net.minecraft.server.ONBTBase;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.ONBTTagList;
 import net.minecraft.server.OVec3D;
