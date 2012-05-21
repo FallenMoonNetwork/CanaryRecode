@@ -14,6 +14,7 @@ public class CanaryItem implements Item {
     
     public CanaryItem(OItemStack oItemStack) {
         type = ItemType.fromId(oItemStack.c);
+        item = oItemStack;
     }
 
     @Override

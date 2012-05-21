@@ -35,9 +35,12 @@ public class CanaryEnchantment implements Enchantment{
 	}
 
 	@Override
-	public Enchantment getEnchantment(Type type) {
-		// TODO Auto-generated method stub
-		return null;
+	public Enchantment getEnchantment(Type type) {  //You know, this seems kind of pointless actually
+	    OEnchantment ench = OEnchantment.b[type.getType()];
+	    if(ench != null){
+	        return new CanaryEnchantment(ench);
+	    }
+	    return null;
 	}
 
 	@Override
@@ -67,19 +70,22 @@ public class CanaryEnchantment implements Enchantment{
 
 	@Override
 	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
+	    return level >= getMinEnchantmentLevel() && level <= getMaxEnchantmentLevel();
 	}
 
 	@Override
 	public void setType(Type type) {
-		this.type = type;
-		
+	    OEnchantment ench = OEnchantment.b[type.getType()];
+	    this.type = type;
+	    this.handle = ench;
 	}
 
 	@Override
-	public void setType(int arg0) {
-		// TODO Auto-generated method stub
-		
+	public void setType(int type) {
+	    if(type > OEnchantment.b.length || type < 0) return;
+	    OEnchantment ench = OEnchantment.b[type];
+        if(ench != null){
+            handle = ench;
+        }
 	}
 }
