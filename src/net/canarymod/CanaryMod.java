@@ -29,7 +29,6 @@ public class CanaryMod extends Canary {
         if(instance != null) {
             return;
         }
-        this.configuration = new Configuration();
         
         // Initialize the loader and scan for plugins
         this.loader = new PluginLoader();
