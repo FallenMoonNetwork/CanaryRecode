@@ -3,7 +3,9 @@ package net.canarymod;
 //import java.util.logging.Logger;
 
 import net.canarymod.backbone.Backbone;
-import net.canarymod.config.Configuration;
+import net.canarymod.hook.Hook;
+import net.canarymod.hook.HookExecutor;
+import net.canarymod.hook.player.ChatDelegate;
 import net.canarymod.plugin.PluginLoader;
 
 /**
@@ -25,16 +27,15 @@ public class CanaryMod extends Canary {
      * and the respective backbones
      */
     public CanaryMod() {
-        //We already have an instance if this is not null
-        if(instance != null) {
-            return;
-        }
-        
         // Initialize the loader and scan for plugins
         this.loader = new PluginLoader();
         this.loader.scanPlugins();
-        
-        // Determine the back-end and create a database instance for it.
+        this.hookExecutor = new HookExecutor();
+        /*
+         * TODO: Due to its dynamic nature, each hook requires a delegate.
+         * We would need a place where all the canary native hooks are registered along with their delegates
+         */
+        hookExecutor.registerHook(Hook.Type.CHAT, new ChatDelegate());
     }
 
     @Override

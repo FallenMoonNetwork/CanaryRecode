@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OChunk;
@@ -89,6 +90,8 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public boolean j = false;
     //CanaryMod player handler
     private CanaryPlayer canaryPlayer;
+    //CanaryMod net server handler - is set when ONetServerHandler is instantiated
+    private CanaryNetServerHandler serverHandler;
 
     public OEntityPlayerMP(OMinecraftServer var1, OWorld var2, String var3, OItemInWorldManager var4) {
         super(var2);
@@ -112,6 +115,22 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         canaryPlayer = new CanaryPlayer(this);
     }
     
+    /**
+     * CanaryMod get the ServerHandler handle
+     * @return the serverHandler
+     */
+    public CanaryNetServerHandler getServerHandler() {
+        return serverHandler;
+    }
+
+    /**
+     * CanaryMod set the ServerHandler handle
+     * @param serverHandler the serverHandler to set
+     */
+    public void setServerHandler(CanaryNetServerHandler serverHandler) {
+        this.serverHandler = serverHandler;
+    }
+
     /**
      * CanaryMod get player handler
      * @return

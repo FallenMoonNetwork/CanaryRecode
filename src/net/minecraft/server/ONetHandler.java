@@ -141,7 +141,7 @@ public abstract class ONetHandler {
         this.a((OPacket) var1);
     }
 
-    public void a(OPacket3Chat var1) {
+    public void playerChat(OPacket3Chat var1) {
         this.a((OPacket) var1);
     }
 

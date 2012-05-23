@@ -3,6 +3,9 @@ package net.minecraft.server;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Logger;
+
+import net.canarymod.api.CanaryNetServerHandler;
+import net.canarymod.api.entity.CanaryPlayer;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OChatAllowedCharacters;
 import net.minecraft.server.OChunkCoordinates;
@@ -67,6 +70,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     private double q;
     private boolean r = true;
     private OIntHashMap s = new OIntHashMap();
+    private CanaryPlayer player;
 
     public ONetServerHandler(OMinecraftServer var1, ONetworkManager var2, OEntityPlayerMP var3) {
         super();
@@ -75,8 +79,14 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         var2.a(this);
         this.e = var3;
         var3.a = this;
+        player = e.getPlayer();
+        //CanaryMod set the serverhandler wrapper for this playerMP
+        e.setServerHandler(new CanaryNetServerHandler(this));
     }
 
+    public CanaryPlayer getUser() {
+        return player;
+    }
     public void a() {
         this.h = false;
         ++this.f;
@@ -468,67 +478,64 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         }
     }
 
-    public void a(OPacket3Chat var1) {
-        String var2 = var1.a;
-        if (var2.length() > 100) {
-            this.a("Chat message too long");
+    /**
+     * Makes player chat
+     */
+    public void playerChat(OPacket3Chat var1) {
+        //Re-route to Canary chat
+        player.chat(var1.a);
+    }
+    
+    /**
+     * Sends a message to the player
+     * 
+     * @param msg
+     */
+    public void sendMessage(String msg) {
+        if (msg.length() >= 119) {
+            String cutMsg = msg.substring(0, 118);
+            int finalCut = cutMsg.lastIndexOf(" ");
+            String subCut = cutMsg.substring(0, finalCut);
+            String newMsg = msg.substring(finalCut + 1);
+
+            b(new OPacket3Chat(subCut));
+            sendMessage(newMsg);
         } else {
-            var2 = var2.trim();
-
-            for (int var3 = 0; var3 < var2.length(); ++var3) {
-                if (!OChatAllowedCharacters.a(var2.charAt(var3))) {
-                    this.a("Illegal characters in chat");
-                    return;
-                }
-            }
-
-            if (var2.startsWith("/")) {
-                this.c(var2);
-            } else {
-                var2 = "<" + this.e.v + "> " + var2;
-                a.info(var2);
-                this.d.h.a((new OPacket3Chat(var2)));
-            }
-
-            this.m += 20;
-            if (this.m > 200) {
-                this.a("disconnect.spam");
-            }
-
+            b(new OPacket3Chat(msg));
         }
     }
 
-    private void c(String var1) {
-        if (var1.toLowerCase().startsWith("/me ")) {
-            var1 = "* " + this.e.v + " " + var1.substring(var1.indexOf(" ")).trim();
-            a.info(var1);
-            this.d.h.a((new OPacket3Chat(var1)));
-        } else if (var1.toLowerCase().startsWith("/kill")) {
-            this.e.a(ODamageSource.k, 1000);
-        } else if (var1.toLowerCase().startsWith("/tell ")) {
-            String[] var2 = var1.split(" ");
-            if (var2.length >= 3) {
-                var1 = var1.substring(var1.indexOf(" ")).trim();
-                var1 = var1.substring(var1.indexOf(" ")).trim();
-                var1 = "\u00a77" + this.e.v + " whispers " + var1;
-                a.info(var1 + " to " + var2[1]);
-                if (!this.d.h.a(var2[1], (new OPacket3Chat(var1)))) {
-                    this.b((new OPacket3Chat("\u00a7cThere\'s no player by that name online.")));
-                }
-            }
-        } else {
-            String var3;
-            if (this.d.h.h(this.e.v)) {
-                var3 = var1.substring(1);
-                a.info(this.e.v + " issued server command: " + var3);
-                this.d.a(var3, this);
-            } else {
-                var3 = var1.substring(1);
-                a.info(this.e.v + " tried command: " + var3);
-            }
-        }
-
-    }
+//    private void c(String var1) {
+//        if (var1.toLowerCase().startsWith("/me ")) {
+//            var1 = "* " + this.e.v + " " + var1.substring(var1.indexOf(" ")).trim();
+//            a.info(var1);
+//            this.d.h.a((new OPacket3Chat(var1)));
+//        } else if (var1.toLowerCase().startsWith("/kill")) {
+//            this.e.a(ODamageSource.k, 1000);
+//        } else if (var1.toLowerCase().startsWith("/tell ")) {
+//            String[] var2 = var1.split(" ");
+//            if (var2.length >= 3) {
+//                var1 = var1.substring(var1.indexOf(" ")).trim();
+//                var1 = var1.substring(var1.indexOf(" ")).trim();
+//                var1 = "\u00a77" + this.e.v + " whispers " + var1;
+//                a.info(var1 + " to " + var2[1]);
+//                if (!this.d.h.a(var2[1], (new OPacket3Chat(var1)))) {
+//                    this.b((new OPacket3Chat("\u00a7cThere\'s no player by that name online.")));
+//                }
+//            }
+//        } else {
+//            String var3;
+//            if (this.d.h.h(this.e.v)) {
+//                var3 = var1.substring(1);
+//                a.info(this.e.v + " issued server command: " + var3);
+//                this.d.a(var3, this);
+//            } else {
+//                var3 = var1.substring(1);
+//                a.info(this.e.v + " tried command: " + var3);
+//            }
+//        }
+//
+//    }
 
     public void a(OPacket18Animation var1) {
         if (var1.b == 1) {

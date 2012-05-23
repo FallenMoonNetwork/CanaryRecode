@@ -34,7 +34,7 @@ public class OPacket3Chat extends OPacket {
     }
 
     public void a(ONetHandler var1) {
-        var1.a(this);
+        var1.playerChat(this);
     }
 
     public int a() {

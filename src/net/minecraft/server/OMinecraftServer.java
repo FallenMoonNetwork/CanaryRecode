@@ -14,6 +14,8 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import net.canarymod.Canary;
+import net.canarymod.CanaryMod;
 import net.canarymod.CanaryServer;
 import net.minecraft.server.OAnvilSaveConverter;
 import net.minecraft.server.OAnvilSaveHandler;
@@ -93,8 +95,9 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
     public OMinecraftServer() {
         super();
-        this.server = new CanaryServer(this);
         new OThreadSleepForever(this);
+        this.server = new CanaryServer(this);
+        Canary.get().setServer(server);
     }
 
     /**

@@ -1,5 +1,6 @@
 package net.canarymod;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -7,6 +8,8 @@ import net.canarymod.api.Server;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.WorldManager;
+import net.canarymod.hook.command.ConsoleCommandHook;
+import net.canarymod.hook.command.PlayerCommandHook;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OMinecraftServer;
 
@@ -54,9 +57,13 @@ public class CanaryServer implements Server {
         return null;
     	
     }
-    
-    public String handleRemoteCommand(String command) { //TODO: Rly?
-    	return null;
+    @Override
+    public void handleRemoteCommand(String command) {
+        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.get().getHookExecutor().callCancelableHook(new ConsoleCommandHook(command));
+        if(hook.isCancelled()) {
+            return; //Command has been parsed, no need to go on
+        }
+        server.d(command);
     }
 
     public void consoleCommand(String command) {
@@ -110,5 +117,15 @@ public class CanaryServer implements Server {
         OEntityPlayerMP user = server.h.i(name); //So ugly :S
 
         return user == null ? null : user.getPlayer();
+    }
+
+    @Override
+    public ArrayList<Player> getPlayerList() {
+        ArrayList<Player> toRet = new ArrayList<Player>();
+
+        for (OEntityPlayerMP oepmp : (List<OEntityPlayerMP>) server.h.b) {
+            toRet.add(oepmp.getPlayer());
+        }
+        return toRet;
     }
 }
