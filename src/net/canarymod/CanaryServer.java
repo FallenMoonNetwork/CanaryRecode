@@ -9,7 +9,6 @@ import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.WorldManager;
 import net.canarymod.hook.command.ConsoleCommandHook;
-import net.canarymod.hook.command.PlayerCommandHook;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OMinecraftServer;
 
@@ -34,56 +33,62 @@ public class CanaryServer implements Server {
     }
 	
     public String getHostname() {
-    	return "localhost";
+    	return "localhost"; //Is that really localhost?
     }
     
     public int getNumPlayersOnline() {
-    	return 0;
+    	return 0; //TODO Get from server
     }
     
     public int getMaxPlayers() {
-    	return 20;
+    	return 20; //TODO retrieve from configuration!
     }
     
     public String[] getPlayerNameList() {
-    	return null;
+    	ArrayList<Player> players = getPlayerList();
+    	String[] names = new String[players.size()];
+    	for(int i = 0; i < players.size(); i++) {
+    	    names[i] = players.get(i).getName();
+    	}
+    	return names;
     }
     
     public String getDefaultWorldName() {
-    	return "default";
+    	return "default"; //TODO: Retrieve default world name from config!
     }
     
     public WorldManager getWorldManager() {
         return null;
     	
     }
+
     @Override
-    public void handleRemoteCommand(String command) {
-        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.get().getHookExecutor().callCancelableHook(new ConsoleCommandHook(command));
-        if(hook.isCancelled()) {
-            return; //Command has been parsed, no need to go on
-        }
-        server.d(command);
-    }
-
     public void consoleCommand(String command) {
-        // TODO Auto-generated method stub
-        
+        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks().callCancelableHook(new ConsoleCommandHook(null, command));
+        if(hook.isCancelled()) {
+            return; 
+        }
+        server.a(command, server);
     }
 
+    @Override
     public void consoleCommand(String command, Player player) {
-        // TODO Auto-generated method stub
-        
+        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks().callCancelableHook(new ConsoleCommandHook(player, command));
+        if(hook.isCancelled()) {
+            return; 
+        }
+        server.a(command, player);
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
     public void setTimer(String uniqueName, int time) {
-        // TODO Auto-generated method stub
-        
+        OMinecraftServer.b.put(uniqueName, time);
     }
 
+    @Override
     public boolean isTimerExpired(String uniqueName) {
-        // TODO Auto-generated method stub
-        return false;
+        return OMinecraftServer.b.containsKey(uniqueName);
     }
 
     @Override

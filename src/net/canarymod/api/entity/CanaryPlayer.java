@@ -61,8 +61,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             else {
                 String prefix = "<" + getColor() + getName() + TextFormat.White + "> ";
                 StringBuilder msg = new StringBuilder(message);
-                ArrayList<Player> receivers = (ArrayList<Player>) Canary.get().getServer().getPlayerList();
-                ChatHook hook = (ChatHook) Canary.get().getHookExecutor().callCancelableHook(new ChatHook(this, prefix, msg, receivers));
+                ArrayList<Player> receivers = (ArrayList<Player>) Canary.getServer().getPlayerList();
+                ChatHook hook = (ChatHook) Canary.hooks().callCancelableHook(new ChatHook(this, prefix, msg, receivers));
                 if(hook.isCancelled()) {
                     return;
                 }
@@ -186,7 +186,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         try {
             String[] split = command;
             String cmd = split[0];
-            PlayerCommandHook hook = (PlayerCommandHook) Canary.get().getHookExecutor().callCancelableHook(new PlayerCommandHook(this, split));
+            PlayerCommandHook hook = (PlayerCommandHook) Canary.hooks().callCancelableHook(new PlayerCommandHook(this, split));
             if (hook.isCancelled()) {
                 return true;
             } // No need to go on, commands were parsed.
@@ -198,7 +198,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             if (cmd.startsWith("/#") && hasPermission("canary.commands.vanilla."+cmd.replace("/#", ""))) {
 
                 Logman.logInfo(getName() + " issued server command: " + cmd);
-                Canary.get().getServer().handleRemoteCommand(Canary.glueString(command, 1, " "));
+                Canary.getServer().consoleCommand(Canary.glueString(command, 1, " "), this);
                 return true;
             }
 

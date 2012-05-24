@@ -13,8 +13,7 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        //Set implementation for later use with Canary.get()
-        Canary.setCanary(new CanaryMod());
+        Bootstrapper.init(new CanaryMod());
         
         try {
             OMinecraftServer.main(args);

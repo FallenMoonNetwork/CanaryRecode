@@ -53,8 +53,8 @@ public class OServerConfigurationManager {
     private int p = 0;
 
     public OServerConfigurationManager(OMinecraftServer var1) {
+        //CanaryMod NOTE: Canary.setServer() has been called during construction of OMCS which is being passed along here
         super();
-        Canary.get().setServer(new CanaryServer(var1));
         this.c = var1;
         this.j = var1.a("banned-players.txt");
         this.k = var1.a("banned-ips.txt");

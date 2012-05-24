@@ -97,7 +97,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         super();
         new OThreadSleepForever(this);
         this.server = new CanaryServer(this);
-        Canary.get().setServer(server);
+        Canary.setServer(server);
     }
 
     /**
