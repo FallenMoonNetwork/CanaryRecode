@@ -241,4 +241,10 @@ public class CanaryDimension implements Dimension {
     public OWorld getHandle() {
         return world;
     }
+
+    @Override
+    public Type getType() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
