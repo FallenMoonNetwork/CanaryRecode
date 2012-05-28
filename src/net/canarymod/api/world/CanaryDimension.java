@@ -28,12 +28,14 @@ public class CanaryDimension implements Dimension {
     private OWorldServer world;
     private CanaryChunkProviderServer chunkProvider;
     CanaryWorld parent;
+    Type type;
 
-    public CanaryDimension(OWorldServer world, CanaryWorld parent) {
+    public CanaryDimension(OWorldServer world, CanaryWorld parent, Type type) {
         this.world = world; // We're not getting any other world types, right?
         chunkProvider = this.world.G.getHandler(); // get the chunk provider wrapper
         this.parent = parent;
         world.setCanaryDimension(this);
+        this.type = type;
     }
 
     @Override
@@ -244,7 +246,6 @@ public class CanaryDimension implements Dimension {
 
     @Override
     public Type getType() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.type;
     }
 }

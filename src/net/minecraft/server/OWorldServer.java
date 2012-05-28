@@ -3,6 +3,7 @@ package net.minecraft.server;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.canarymod.CanaryServer;
 import net.minecraft.server.OChunkProviderServer;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAnimal;
@@ -36,7 +37,7 @@ public class OWorldServer extends OWorld {
     
    
     // CanaryMod start
-    public Object getServer() {
+    public CanaryServer getServer() {
         return J.getServer();
     }
     // CanaryMod end
