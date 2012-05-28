@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import net.canarymod.Canary;
+import net.canarymod.CanaryServer;
 import net.canarymod.Logman;
 
 /**
@@ -59,14 +61,13 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public World loadWorld(String name) {
-        // TODO Auto-generated method stub
+        ((CanaryServer) Canary.getServer()).getHandle(); //TODO: loadWorld in OMCS to wrap up private a(OISaveFormat, String, long, OEnumWorldType)
         return null;
     }
 
     @Override
     public void unloadWorld(String name) {
-        // TODO Auto-generated method stub
-        
+        loadedWorlds.remove(name);
     }
 
     @Override

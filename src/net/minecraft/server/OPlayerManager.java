@@ -13,7 +13,7 @@ import net.minecraft.server.OWorldServer;
 
 public class OPlayerManager {
 
-    public List a = new ArrayList();
+    public List<OEntityPlayerMP> a = new ArrayList<OEntityPlayerMP>();
     private OLongHashMap b = new OLongHashMap();
     private List c = new ArrayList();
     private OMinecraftServer d;

@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
+import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.world.CanaryDimension;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBiomeGenBase;
@@ -105,13 +106,38 @@ public class OWorld implements OIBlockAccess {
 
     // CanaryMod start: multiworld
     protected CanaryDimension canaryDimension;
+    protected CanaryPlayerManager playerManager;
     
+    /**
+     * Get the canary dimension wrapper
+     * @return
+     */
     public CanaryDimension getCanaryDimension() {
         return canaryDimension;
     }
 
+    /**
+     * Set the canary dimension wrapper
+     * @param dim
+     */
     public void setCanaryDimension(CanaryDimension dim) {
         this.canaryDimension = dim;
+    }
+    
+    /**
+     * Get the canary player manager wrapper for this dimension
+     * @return
+     */
+    public CanaryPlayerManager getPlayerManager() {
+        return playerManager;
+    }
+    
+    /**
+     * Set the player manager for this dimension
+     * @param manager
+     */
+    public void setPlayerManager(CanaryPlayerManager manager) {
+        this.playerManager = manager;
     }
     // CanaryMod end
     

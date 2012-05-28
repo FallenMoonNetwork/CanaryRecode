@@ -1,6 +1,8 @@
 package net.canarymod.api.world;
 
 import java.util.ArrayList;
+
+import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.entity.EntityAnimal;
 import net.canarymod.api.entity.EntityItem;
 import net.canarymod.api.entity.EntityLiving;
@@ -27,7 +29,8 @@ public class CanaryDimension implements Dimension {
 
     private OWorldServer world;
     private CanaryChunkProviderServer chunkProvider;
-    CanaryWorld parent;
+    private CanaryWorld parent;
+    private CanaryPlayerManager playerManager;
     Type type;
 
     public CanaryDimension(OWorldServer world, CanaryWorld parent, Type type) {
@@ -35,6 +38,7 @@ public class CanaryDimension implements Dimension {
         chunkProvider = this.world.G.getHandler(); // get the chunk provider wrapper
         this.parent = parent;
         world.setCanaryDimension(this);
+        playerManager = world.getPlayerManager();
         this.type = type;
     }
 
@@ -54,8 +58,7 @@ public class CanaryDimension implements Dimension {
 
         oei.c = 10;
         world.b(oei);
-        // return oei.item;
-        return null;
+        return oei.getItem();
     }
 
     @Override
@@ -83,15 +86,9 @@ public class CanaryDimension implements Dimension {
         return null;
     }
 
-    // TODO: FInish
     @Override
     public ArrayList<Player> getPlayerList() {
-        // List<OEntityPlayer> players = world.d;
-        // List<IPlayer> newPlayers = new ArrayList<IPlayer>(players.size());
-        // for(OEntityPlayer player : players) {
-        // newPlayers.add(new Player());
-        // }
-        return null;
+        return playerManager.getManagedPlayers();
     }
 
     @Override

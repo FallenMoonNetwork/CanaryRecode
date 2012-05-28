@@ -1,5 +1,7 @@
 package net.canarymod.api;
 
+import java.util.ArrayList;
+
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
 import net.minecraft.server.OEntityPlayerMP;
@@ -33,6 +35,15 @@ public class CanaryPlayerManager implements PlayerManager {
     @Override
     public void markBlockNeedsUpdate(int x, int y, int z) {
         pm.a(x, y, z);
+    }
+
+    @Override
+    public ArrayList<Player> getManagedPlayers() {
+        ArrayList<Player> players = new ArrayList<Player>();
+        for(OEntityPlayerMP player : pm.a) {
+            players.add(player.getPlayer());
+        }
+        return players;
     }
 
 }
