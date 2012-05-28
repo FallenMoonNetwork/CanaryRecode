@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import net.canarymod.Canary;
 import net.canarymod.CanaryServer;
+import net.canarymod.api.CanaryConfigurationManager;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
@@ -51,9 +52,11 @@ public class OServerConfigurationManager {
     private OIPlayerFileData n;
     private boolean o;
     private int p = 0;
+    private CanaryConfigurationManager canaryCfgManager;
 
     public OServerConfigurationManager(OMinecraftServer var1) {
         //CanaryMod NOTE: Canary.setServer() has been called during construction of OMCS which is being passed along here
+        //Just for the records
         super();
         this.c = var1;
         this.j = var1.a("banned-players.txt");
@@ -74,6 +77,15 @@ public class OServerConfigurationManager {
         this.o();
         this.q();
         this.s();
+        canaryCfgManager = new CanaryConfigurationManager(this);
+    }
+
+    /**
+     * CanaryMod: Return the cfg manager wrapper
+     * @return the canaryCfgManager
+     */
+    public CanaryConfigurationManager getCanaryConfigurationManager() {
+        return canaryCfgManager;
     }
 
     public void a(OWorldServer[] var1) {
