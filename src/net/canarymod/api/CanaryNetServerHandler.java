@@ -5,6 +5,11 @@ import net.minecraft.server.ONetServerHandler;
 import net.minecraft.server.OPacket3Chat;
 import net.minecraft.server.OPacket9Respawn;
 
+/**
+ * Wrap up NetServerHandler to minimize entry point to notch code
+ * @author Chris Ksoll
+ *
+ */
 public class CanaryNetServerHandler implements NetServerHandler {
     
     private ONetServerHandler handler;

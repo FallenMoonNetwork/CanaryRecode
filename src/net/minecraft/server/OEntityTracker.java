@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import net.canarymod.api.CanaryEntityTracker;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityArrow;
 import net.minecraft.server.OEntityBoat;
@@ -39,13 +41,24 @@ public class OEntityTracker {
     private OMinecraftServer c;
     private int d;
     private int e;
+    
+    private CanaryEntityTracker canaryTracker;
 
     public OEntityTracker(OMinecraftServer var1, int var2) {
         super();
         this.c = var1;
         this.e = var2;
         this.d = var1.h.a();
+        canaryTracker = new CanaryEntityTracker(this);
     }
+
+    /**
+     * @return the canaryTracker
+     */
+    public CanaryEntityTracker getCanaryTracker() {
+        return canaryTracker;
+    }
+
 
     public void a(OEntity var1) {
         if (var1 instanceof OEntityPlayerMP) {

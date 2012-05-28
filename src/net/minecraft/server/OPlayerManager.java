@@ -2,6 +2,8 @@ package net.minecraft.server;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.canarymod.api.CanaryPlayerManager;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OLongHashMap;
 import net.minecraft.server.OMinecraftServer;
@@ -18,6 +20,7 @@ public class OPlayerManager {
     private int e;
     private int f;
     private final int[][] g = new int[][] { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
+    private CanaryPlayerManager canaryPlayerManager;
 
     public OPlayerManager(OMinecraftServer var1, int var2, int var3) {
         super();
@@ -30,6 +33,14 @@ public class OPlayerManager {
             this.d = var1;
             this.e = var2;
         }
+        canaryPlayerManager = new CanaryPlayerManager(this);
+    }
+
+    /**
+     * @return the canaryPlayerManager
+     */
+    public CanaryPlayerManager getCanaryPlayerManager() {
+        return canaryPlayerManager;
     }
 
     public OWorldServer a() {
