@@ -128,7 +128,6 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
     @Override
     public void kill() {
-        //Kill as in setHealth(0) or entity.destroy();  (currently set as destroy)
         entity.X();
     }
 
@@ -169,8 +168,7 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
     @Override
     public void setHome(Vector3D vector) {
-        setHomeArea((int) Math.floor(vector.getX()), (int) Math.floor(vector.getY()), (int) Math.floor(vector.getZ()), 25); 
-
+        setHomeArea((int) Math.floor(vector.getX()), (int) Math.floor(vector.getY()), (int) Math.floor(vector.getZ()), 25);
     }
 
     @Override

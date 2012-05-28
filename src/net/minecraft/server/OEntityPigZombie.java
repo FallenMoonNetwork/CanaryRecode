@@ -15,7 +15,7 @@ import net.minecraft.server.OWorld;
 
 public class OEntityPigZombie extends OEntityZombie {
 
-    private int a = 0;
+    public int a = 0; //CanaryMod private -> public
     private int b = 0;
     private static final OItemStack g = new OItemStack(OItem.F, 1);
     

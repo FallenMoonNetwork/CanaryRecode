@@ -133,4 +133,8 @@ public class CanaryServer implements Server {
         }
         return toRet;
     }
+    
+    public OMinecraftServer getHandle(){
+        return server;
+    }
 }
