@@ -9,11 +9,9 @@ import net.minecraft.server.OEntityLiving;
 public class CanaryEntity implements Entity {
 
     protected OEntity entity;
-    protected CanaryDimension dimension;
     
     public CanaryEntity(OEntity entity) {
         this.entity = entity;
-        dimension = entity.bi.getCanaryDimension();
     }
     
     public OEntity getHandle() {
@@ -125,13 +123,12 @@ public class CanaryEntity implements Entity {
 
     @Override
     public void setDimension(Dimension dim) {
-        this.dimension = (CanaryDimension) dim;
-        this.entity.bi = dimension.getHandle();
+        this.entity.setDimension((CanaryDimension) dim);
     }
 
     @Override
     public Dimension getDimension() {
-        return this.dimension;
+        return entity.getDimension();
     }
 
     @Override

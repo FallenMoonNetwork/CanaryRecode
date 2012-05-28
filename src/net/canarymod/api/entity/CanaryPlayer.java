@@ -26,8 +26,15 @@ import net.minecraft.server.OEntityPlayerMP;
  */
 public class CanaryPlayer extends CanaryEntityLiving implements Player {
     private Pattern badChatPattern = Pattern.compile("[\u00a7\u2302\u00D7\u00AA\u00BA\u00AE\u00AC\u00BD\u00BC\u00A1\u00AB\u00BB]");
+    private Group group; 
+    private PermissionProvider permissions;
+    private String prefix = null;
+    
+    private boolean muted;
     public CanaryPlayer(OEntityPlayerMP entity) {
         super(entity);
+        group = Canary.groups().getGroup("something"); //TODO: add proper player to group
+        permissions = null; //TODO: get permissions specifically for this player
     }
 
     @Override
@@ -276,62 +283,64 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean hasPermission(String permission) {
-        // TODO Auto-generated method stub
-        return false;
+        if(!group.hasPermission(permission)) {
+            return permissions.queryPermission(permission);
+        }
+        return true;
     }
 
     @Override
     public boolean isAdmin() {
-        // TODO Auto-generated method stub
-        return false;
+        if(!group.isAdministratorGroup()) {
+            return permissions.queryPermission("canary.player.administrator");
+        }
+        return true;
     }
 
     @Override
     public boolean canModifyWorld() {
-        // TODO Auto-generated method stub
-        return false;
+        if(!group.canModifyWorld()) {
+            return permissions.queryPermission("canary.player.canModifyWorld");
+        }
+        return true;
     }
 
     @Override
     public void setCanModifyWorld(boolean canModify) {
-        // TODO Auto-generated method stub
-        
+        permissions.addPermission("canary.player.canModifyWorld", canModify, canModify);
     }
 
     @Override
     public boolean canIgnoreRestrictions() {
-        // TODO Auto-generated method stub
-        return false;
+        if(!group.canIgnorerestrictions()) {
+            return permissions.queryPermission("canary.player.canIgnoreRestrictions");
+        }
+        return true;
     }
 
     @Override
     public void setCanIgnoreRestrictions(boolean canIgnore) {
-        // TODO Auto-generated method stub
-        
+        permissions.addPermission("canary.player.canIgnoreRestrictions", canIgnore, canIgnore);
     }
 
     @Override
     public boolean isMuted() {
-        // TODO Auto-generated method stub
-        return false;
+        return muted;
     }
 
     @Override
     public void setMuted(boolean muted) {
-        // TODO Auto-generated method stub
-        
+         this.muted = muted;
     }
 
     @Override
     public PermissionProvider getPermissionProvider() {
-        // TODO Auto-generated method stub
-        return null;
+        return permissions;
     }
 
     @Override
     public Location getLocation() {
-        // TODO Auto-generated method stub
-        return null;
+        return new Location(entity.bi.getCanaryDimension(), getX(), getY(), getZ(), getPitch(), getRotation());
     }
 
     @Override
@@ -398,12 +407,33 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public String getColor() {
-        return TextFormat.LightGreen;
+        if(prefix != null) {
+            return TextFormat.Marker+prefix;
+        }
+        return TextFormat.Marker+group.prefix;
     }
 
     @Override
     public NetServerHandler getNetServerHandler() {
         return ((OEntityPlayerMP)entity).getServerHandler();
+    }
+
+    @Override
+    public boolean isInGroup(String group, boolean parents) {
+        if(parents) {
+            ArrayList<Group> groups = this.group.parentsToList();
+            for(Group g : groups) {
+                if(g.name.equals(group)) {
+                    return true;
+                }
+            }
+        }
+        else {
+            if(this.group.name.equals(group)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

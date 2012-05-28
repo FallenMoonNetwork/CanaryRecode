@@ -2,6 +2,8 @@ package net.minecraft.server;
 
 import java.util.List;
 import java.util.Random;
+
+import net.canarymod.api.world.CanaryDimension;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockFluid;
@@ -126,7 +128,18 @@ public abstract class OEntity {
         this.bY.a(1, Short.valueOf((short) 300));
         this.b();
     }
-
+    /**
+     * CanaryMod Get this entities current World (dimension)
+     * @return
+     */
+    public CanaryDimension getDimension() {
+       return bi.getCanaryDimension();
+    }
+    
+    public void setDimension(CanaryDimension dim) {
+        this.bi = dim.getHandle();
+    }
+    
     protected abstract void b();
 
     public ODataWatcher aP() {
