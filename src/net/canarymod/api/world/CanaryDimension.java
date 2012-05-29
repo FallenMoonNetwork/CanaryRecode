@@ -2,7 +2,9 @@ package net.canarymod.api.world;
 
 import java.util.ArrayList;
 
+import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
+import net.canarymod.api.EntityTracker;
 import net.canarymod.api.entity.EntityAnimal;
 import net.canarymod.api.entity.EntityItem;
 import net.canarymod.api.entity.EntityLiving;
@@ -31,6 +33,7 @@ public class CanaryDimension implements Dimension {
     private CanaryChunkProviderServer chunkProvider;
     private CanaryWorld parent;
     private CanaryPlayerManager playerManager;
+    private CanaryEntityTracker entityTracker;
     Type type;
 
     public CanaryDimension(OWorldServer world, CanaryWorld parent, Type type) {
@@ -40,6 +43,16 @@ public class CanaryDimension implements Dimension {
         world.setCanaryDimension(this);
         playerManager = world.getPlayerManager();
         this.type = type;
+    }
+
+    @Override
+    public CanaryEntityTracker getEntityTracker() {
+        return entityTracker;
+    }
+
+    @Override
+    public void setEntityTracker(EntityTracker entityTracker) {
+        this.entityTracker = (CanaryEntityTracker) entityTracker;
     }
 
     @Override
@@ -106,9 +119,11 @@ public class CanaryDimension implements Dimension {
     @Override
     public void setBlock(Block block) {
         setBlockAt(block.getX(), block.getY(), block.getZ(), block.getType(), block.getData());
-        // _handle.b(block.getX(), block.getY(), block.getZ(), block.getType(),
-        // block.getData());
-
+    }
+    
+    @Override
+    public void setBlockAt(Vector3D vector, Block block) {
+        setBlockAt((int)vector.getX(), (int)vector.getY(), (int)vector.getZ(), block.getType(), block.getData());
     }
 
     @Override

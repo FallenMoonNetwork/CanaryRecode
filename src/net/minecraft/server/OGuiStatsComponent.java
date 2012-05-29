@@ -36,11 +36,11 @@ public class OGuiStatsComponent extends JComponent {
         this.d[2] = "Avg tick: " + a.format(this.a(this.e.f) * 1.0E-6D) + " ms";
         this.d[3] = "Avg sent: " + (int) this.a(this.e.u) + ", Avg size: " + (int) this.a(this.e.v);
         this.d[4] = "Avg rec: " + (int) this.a(this.e.w) + ", Avg size: " + (int) this.a(this.e.x);
-        if (this.e.e != null) {
-            for (int var3 = 0; var3 < this.e.e.length; ++var3) {
+        if (this.e.worldServer != null) {
+            for (int var3 = 0; var3 < this.e.worldServer.length; ++var3) {
                 this.d[5 + var3] = "Lvl " + var3 + " tick: " + a.format(this.a(this.e.g[var3]) * 1.0E-6D) + " ms";
-                if (this.e.e[var3] != null && this.e.e[var3].G != null) {
-                    this.d[5 + var3] = this.d[5 + var3] + ", " + this.e.e[var3].G.d();
+                if (this.e.worldServer[var3] != null && this.e.worldServer[var3].G != null) {
+                    this.d[5 + var3] = this.d[5 + var3] + ", " + this.e.worldServer[var3].G.d();
                 }
             }
         }

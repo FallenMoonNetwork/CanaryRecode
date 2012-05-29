@@ -629,7 +629,7 @@ public class OServerConfigurationManager {
     }
 
     public String[] t() {
-        return this.c.e[0].r().d().g();
+        return this.c.worldServer[0].r().d().g();
     }
 
     private void u() {

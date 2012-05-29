@@ -67,9 +67,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             }
             else {
                 String prefix = "<" + getColor() + getName() + TextFormat.White + "> ";
-                StringBuilder msg = new StringBuilder(message);
                 ArrayList<Player> receivers = (ArrayList<Player>) Canary.getServer().getPlayerList();
-                ChatHook hook = (ChatHook) Canary.hooks().callCancelableHook(new ChatHook(this, prefix, msg, receivers));
+                ChatHook hook = (ChatHook) Canary.hooks().callCancelableHook(new ChatHook(this, prefix, message, receivers));
                 if(hook.isCancelled()) {
                     return;
                 }

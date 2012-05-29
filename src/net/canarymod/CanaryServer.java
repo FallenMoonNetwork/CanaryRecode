@@ -1,7 +1,6 @@
 package net.canarymod;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import net.canarymod.api.Server;
@@ -37,7 +36,7 @@ public class CanaryServer implements Server {
     }
     
     public int getNumPlayersOnline() {
-    	return 0; //TODO Get from server
+    	return server.getCanaryConfigurationManager().getNumPlayersOnline();
     }
     
     public int getMaxPlayers() {
@@ -97,8 +96,8 @@ public class CanaryServer implements Server {
 
         name = name.toLowerCase();
 
-        for (OEntityPlayerMP player : (List<OEntityPlayerMP>) server.h.b) {
-            CanaryPlayer cPlayer = player.getPlayer();
+        for (Player player : server.getCanaryConfigurationManager().getAllPlayers()) {
+            CanaryPlayer cPlayer = (CanaryPlayer) player;
             if (cPlayer.getName().toLowerCase().equals(name)) {
                 // Perfect match found
                 lastPlayer = cPlayer;
@@ -126,15 +125,18 @@ public class CanaryServer implements Server {
 
     @Override
     public ArrayList<Player> getPlayerList() {
-        ArrayList<Player> toRet = new ArrayList<Player>();
-
-        for (OEntityPlayerMP oepmp : (List<OEntityPlayerMP>) server.h.b) {
-            toRet.add(oepmp.getPlayer());
-        }
-        return toRet;
+        return server.getCanaryConfigurationManager().getAllPlayers();
     }
     
     public OMinecraftServer getHandle(){
         return server;
+    }
+
+    @Override
+    public void broadcastMessage(String message) {
+        for(Player player : getPlayerList()) {
+            player.sendMessage(message);
+        }
+        
     }
 }

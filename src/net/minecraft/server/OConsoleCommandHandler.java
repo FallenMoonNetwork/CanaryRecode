@@ -53,8 +53,8 @@ public class OConsoleCommandHandler {
                   var8.g();
                }
 
-               for(var9 = 0; var9 < this.b.e.length; ++var9) {
-                  var10 = this.b.e[var9];
+               for(var9 = 0; var9 < this.b.worldServer.length; ++var9) {
+                  var10 = this.b.worldServer[var9];
                   boolean var11 = var10.I;
                   var10.I = false;
                   try {
@@ -70,15 +70,15 @@ public class OConsoleCommandHandler {
             } else if(var4.equalsIgnoreCase("save-off")) {
                this.a(var7, "Disabling level saving..");
 
-               for(var9 = 0; var9 < this.b.e.length; ++var9) {
-                  var10 = this.b.e[var9];
+               for(var9 = 0; var9 < this.b.worldServer.length; ++var9) {
+                  var10 = this.b.worldServer[var9];
                   var10.I = true;
                }
             } else if(var4.equalsIgnoreCase("save-on")) {
                this.a(var7, "Enabling level saving..");
 
-               for(var9 = 0; var9 < this.b.e.length; ++var9) {
-                  var10 = this.b.e[var9];
+               for(var9 = 0; var9 < this.b.worldServer.length; ++var9) {
+                  var10 = this.b.worldServer[var9];
                   var10.I = false;
                }
             } else if(var4.equalsIgnoreCase("op")) {
@@ -238,15 +238,15 @@ public class OConsoleCommandHandler {
                         int var23 = Integer.parseInt(var3[2]);
                         OWorldServer var24;
                         if("add".equalsIgnoreCase(var19)) {
-                           for(var21 = 0; var21 < this.b.e.length; ++var21) {
-                              var24 = this.b.e[var21];
+                           for(var21 = 0; var21 < this.b.worldServer.length; ++var21) {
+                              var24 = this.b.worldServer[var21];
                               var24.b(var24.o() + (long)var23);
                            }
 
                            this.a(var7, "Added " + var23 + " to time");
                         } else if("set".equalsIgnoreCase(var19)) {
-                           for(var21 = 0; var21 < this.b.e.length; ++var21) {
-                              var24 = this.b.e[var21];
+                           for(var21 = 0; var21 < this.b.worldServer.length; ++var21) {
+                              var24 = this.b.worldServer[var21];
                               var24.b((long)var23);
                            }
 
@@ -274,7 +274,7 @@ public class OConsoleCommandHandler {
                   } else if(var4.equalsIgnoreCase("whitelist")) {
                      this.a(var7, var2, var6);
                   } else if(var4.equalsIgnoreCase("toggledownfall")) {
-                     this.b.e[0].j();
+                     this.b.worldServer[0].j();
                      var6.b("Toggling rain and snow, hold on...");
                   } else if(var4.equalsIgnoreCase("banlist")) {
                      if(var3.length == 2) {
