@@ -18,6 +18,13 @@ import net.canarymod.Canary;
 import net.canarymod.CanaryMod;
 import net.canarymod.CanaryServer;
 import net.canarymod.api.CanaryConfigurationManager;
+import net.canarymod.api.entity.CanaryPlayer;
+import net.canarymod.api.entity.Player;
+import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.CanaryWorldManager;
+import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.Dimension.Type;
 import net.canarymod.api.world.World;
 import net.minecraft.server.OAnvilSaveConverter;
 import net.minecraft.server.OAnvilSaveHandler;
@@ -62,7 +69,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     private int z;
     public ONetworkListenThread c;
     public OPropertyManager d;
-    public OWorldServer[] worldServer;
+//    public OWorldServer[] worldServer;
     public long[] f = new long[100];
     public long[][] g;
     public OServerConfigurationManager h;
@@ -76,6 +83,8 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     private List D = Collections.synchronizedList(new ArrayList());
     
 //    public OEntityTracker[] entityTrackerArray = new OEntityTracker[3]; //CanaryMod -> removed
+    //CanaryMod WorldManager - your worlds here
+    CanaryWorldManager worldManager;
     
     public boolean n;
     public boolean o;
@@ -105,8 +114,16 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         this.server = new CanaryServer(this);
         Canary.setServer(server);
         cfgManager = h.getCanaryConfigurationManager();
+        worldManager = new CanaryWorldManager();
     }
 
+    /**
+     * Returns the canary world manager for this server instance
+     * @return
+     */
+    public CanaryWorldManager getWorldManager() {
+        return worldManager;
+    }
     /**
      * CanaryMod get configuration manager
      * @return the cfgManager
@@ -170,7 +187,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         }
 
         this.h = new OServerConfigurationManager(this);
-        //CanaryMod start
+        //CanaryMod start - moved those to per-world
 //        this.entityTrackerArray[0] = new OEntityTracker(this, 0);
 //        this.entityTrackerArray[1] = new OEntityTracker(this, -1);
 //        this.entityTrackerArray[2] = new OEntityTracker(this, 1);
@@ -226,14 +243,14 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     }
     // CanaryMod desc: initWorld
     private void initWorld(OISaveFormat var1, String var2, long var3, OWorldType var5) {
-        //TODO: Add EntityTrackers here
         if (var1.a(var2)) {
             a.info("Converting map!");
             var1.a(var2, new OConvertProgressUpdater(this));
         }
         OWorldServer[] toLoad = new OWorldServer[3];
+        
 //        this.worldServer = new OWorldServer[3];
-        this.g = new long[this.worldServer.length][100];
+//        this.g = new long[this.worldServer.length][100]; //CanaryMod Moved to CanaryWorld<init>
         int var6 = this.d.a("gamemode", 0); // get int property
         var6 = OWorldSettings.a(var6);
         a.info("Default game type: " + var6);
@@ -241,7 +258,8 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         OWorldSettings var8 = new OWorldSettings(var3, var6, var7, false, var5);
         OAnvilSaveHandler var9 = new OAnvilSaveHandler(new File("."), var2, true);
 
-        for (int var10 = 0; var10 < this.worldServer.length; ++var10) {
+//        for (int var10 = 0; var10 < this.worldServer.length; ++var10) {
+        for (int var10 = 0; var10 < toLoad.length; ++var10) {
             byte var11 = 0;
             if (var10 == 1) {
                 var11 = -1;
@@ -252,16 +270,18 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             }
 
             if (var10 == 0) {
-                this.worldServer[var10] = new OWorldServer(this, var9, var2, var11, var8);
+                toLoad[var10] = new OWorldServer(this, var9, var2, var11, var8);
             } else {
-                this.worldServer[var10] = new OWorldServerMulti(this, var9, var2, var11, var8, this.worldServer[0]);
+                toLoad[var10] = new OWorldServerMulti(this, var9, var2, var11, var8, toLoad[0]);
             }
 
-            this.worldServer[var10].a(new OWorldManager(this, this.worldServer[var10]));
-            this.worldServer[var10].q = this.d.a("difficulty", 1); // get int property
-            this.worldServer[var10].a(this.d.a("spawn-monsters", true), this.o); // get boolean property
-            this.worldServer[var10].s().d(var6);
-            this.h.a(this.worldServer);
+            toLoad[var10].a(new OWorldManager(this, toLoad[var10]));
+            toLoad[var10].q = this.d.a("difficulty", 1); // get int property
+            toLoad[var10].a(this.d.a("spawn-monsters", true), this.o); // get boolean property
+            toLoad[var10].s().d(var6);
+            CanaryWorld world = new CanaryWorld(var2, toLoad);
+            worldManager.addWorld(world);
+            this.h.a(toLoad);
         }
 
         short var23 = 196;
@@ -270,7 +290,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         // var14 is level: dimension. 0 = overworld.
         for (int var14 = 0; var14 < 1; ++var14) {
             a.info("Preparing start region for level " + var14);
-            OWorldServer var15 = this.worldServer[var14];
+            OWorldServer var15 = toLoad[var14];
             OChunkCoordinates var16 = var15.p();
 
             for (int var17 = -var23; var17 <= var23 && this.B; var17 += 16) {
@@ -312,18 +332,20 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
     private void u() {
         a.info("Saving chunks");
-
-        for (int var1 = 0; var1 < this.worldServer.length; ++var1) {
-            OWorldServer var2 = this.worldServer[var1];
-
-            // saves the world
-            try {
-                var2.a(true, (OIProgressUpdate) null);
-            } catch (IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+        //CanaryMod refactored for multiworld purposes
+        for (World w : worldManager.getAllWorlds()) {
+            for(Dimension dim : w.getDimensions()) {
+                OWorldServer var2 = (OWorldServer) ((CanaryDimension)dim).getHandle();
+             // saves the world
+                try {
+                    var2.a(true, (OIProgressUpdate) null);
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                var2.A();
             }
-            var2.A();
+            
         }
     }
 
@@ -335,12 +357,14 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         }
 
         // for each world
-        for (int var1 = 0; var1 < this.worldServer.length; ++var1) {
-            OWorldServer var2 = this.worldServer[var1];
-            if (var2 != null) {
-                this.u(); // save server world
-            }
-        }
+//        for (int var1 = 0; var1 < this.worldServer.length; ++var1) {
+//            OWorldServer var2 = this.worldServer[var1];
+//            if (var2 != null) {
+//                this.u(); // save server world
+//            }
+//        }
+        //CanaryMod just call private u() once here, the worlds are iterated over there
+        this.u();
     }
 
     public void a() {
@@ -371,7 +395,17 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
                         var3 += var7;
                         var1 = var5;
-                        if (this.worldServer[0].v()) {
+                        
+                        //CanaryMod multiworld sleeping checks
+                        boolean allSleeping = true;
+                        for(World canaryWorld : worldManager.getAllWorlds()) {
+                            Dimension[] level = canaryWorld.getDimensions();
+                            allSleeping &= ((CanaryDimension)level[0]).getHandle().v();
+
+                        }
+                        
+                        
+                        if (allSleeping) { //CanaryMultiworld check if all worlds are not loaded
                             this.w();
                             var3 = 0L;
                         } else {
@@ -520,31 +554,42 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         OAxisAlignedBB.a();
         OVec3D.a();
         ++this.j;
+        //XXX
+        //CanaryMod tick all worlds
+        for(World canaryWorld : worldManager.getAllWorlds()) {
+            
 
-        for (var11 = 0; var11 < this.worldServer.length; ++var11) {
+        }
+//        for (var11 = 0; var11 < this.worldServer.length; ++var11) {
+        for(World canaryWorld : worldManager.getAllWorlds()) {
             long var7 = System.nanoTime();
-            if (var11 == 0 || this.d.a("allow-nether", true)) {
-                OWorldServer var9 = this.worldServer[var11];
-                if (this.j % 20 == 0) {
-                    this.h.a((new OPacket4UpdateTime(var9.o())), var9.t.g);
-                }
+            Dimension[] level = canaryWorld.getDimensions();
+            for(var11 = 0; var11 < level.length; ++var11) {
+                if (var11 == 0 || this.d.a("allow-nether", true)) {
+                    OWorldServer var9 = (OWorldServer) ((CanaryDimension)level[var11]).getHandle();
+                    if (this.j % 20 == 0) {
+                        for(Player p : cfgManager.getAllPlayers()) {
+                            ((CanaryPlayer)p).getHandle().getServerHandler().sendPacket(new OPacket4UpdateTime(var9.o()) );
+                        }
+                    }
 
-                try {
-                    var9.h();
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
+                    try {
+                        var9.h();
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
 
-                while (true) {
-                    if (!var9.z()) {
-                        var9.f();
-                        break;
+                    while (true) {
+                        if (!var9.z()) {
+                            var9.f();
+                            break;
+                        }
                     }
                 }
+                level[0].getWorld().setNanoTick(Type.fromId(var11), this.j % 100, System.nanoTime() - var7);
             }
-
-            this.g[var11][this.j % 100] = System.nanoTime() - var7;
+//            this.g[var11][this.j % 100] = System.nanoTime() - var7; //CanaryMod look up!
         }
 
         this.c.a();

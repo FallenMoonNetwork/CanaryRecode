@@ -260,4 +260,9 @@ public class CanaryDimension implements Dimension {
     public Type getType() {
         return this.type;
     }
+
+    @Override
+    public String getName() {
+        return parent.getName();
+    }
 }

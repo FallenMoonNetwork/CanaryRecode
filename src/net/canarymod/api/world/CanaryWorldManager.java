@@ -30,22 +30,36 @@ public class CanaryWorldManager implements WorldManager {
         }
     }
 
+    /**
+     * Implementation specific, do not call outside of OMCS!
+     * Adds an already prepared world to the world manager
+     * @param world
+     */
+    public void addWorld(CanaryWorld world) {
+        loadedWorlds.put(world.getName(), world);
+    }
+    @Override
     public World getWorld(String name) {
-        return null;
+        return loadedWorlds.get(name);
     }
 
+    @Override
     public boolean createWorld(String name, long seed) {
-        return false;
+        ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, seed);
+        return true;
     }
 
+    @Override
     public boolean createWorld(String name) {
         return false;
     }
 
+    @Override
     public Dimension getDimension(String world, int dimension) {
         return null;
     }
 
+    @Override
     public void destroyWorld(String name) {
         File file = new File("worlds/"+name);
         File dir = new File("worldsbackups/"+name);
@@ -55,13 +69,13 @@ public class CanaryWorldManager implements WorldManager {
         }
     }
 
+    @Override
     public World[] getAllWorlds() {
-        return this.loadedWorlds.values().toArray(new CanaryWorld[3]);
+        return this.loadedWorlds.values().toArray(new CanaryWorld[loadedWorlds.size()]);
     }
 
     @Override
     public World loadWorld(String name) {
-        ((CanaryServer) Canary.getServer()).getHandle(); //TODO: loadWorld in OMCS to wrap up private a(OISaveFormat, String, long, OEnumWorldType)
         return null;
     }
 

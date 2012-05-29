@@ -2,6 +2,7 @@ package net.canarymod.api;
 
 import net.canarymod.api.entity.Player;
 import net.minecraft.server.ONetServerHandler;
+import net.minecraft.server.OPacket;
 import net.minecraft.server.OPacket3Chat;
 import net.minecraft.server.OPacket9Respawn;
 
@@ -22,6 +23,10 @@ public class CanaryNetServerHandler implements NetServerHandler {
     public void sendPacket(Packet packet) {
         handler.b(((CanaryPacket)packet).getPacket());
 
+    }
+    
+    public void sendPacket(OPacket packet) {
+        handler.b(packet);
     }
 
     @Override

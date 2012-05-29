@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -15,6 +16,11 @@ import java.util.logging.Logger;
 import net.canarymod.Canary;
 import net.canarymod.CanaryServer;
 import net.canarymod.api.CanaryConfigurationManager;
+import net.canarymod.api.entity.CanaryPlayer;
+import net.canarymod.api.entity.Player;
+import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.World;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
@@ -49,7 +55,8 @@ public class OServerConfigurationManager {
     private File k;
     private File l;
     private File m;
-    private OIPlayerFileData n;
+//    private OIPlayerFileData n;
+    private HashMap<String, OIPlayerFileData> playerFileDataSet;
     private boolean o;
     private int p = 0;
     private CanaryConfigurationManager canaryCfgManager;
@@ -89,7 +96,12 @@ public class OServerConfigurationManager {
     }
 
     public void a(OWorldServer[] var1) {
-        this.n = var1[0].r().d();
+//        this.n = var1[0].r().d();
+        //CanaryMod modified section to contain a per-world player info set
+        if(this.playerFileDataSet == null) {
+            this.playerFileDataSet = new HashMap<String, OIPlayerFileData>();
+        }
+        this.playerFileDataSet.put(var1[0].getCanaryDimension().getName(), var1[0].r().d());
     }
 
     public void a(OEntityPlayerMP var1) {
@@ -110,7 +122,8 @@ public class OServerConfigurationManager {
     }
 
     public void b(OEntityPlayerMP var1) {
-        this.n.b(var1);
+//      this.n.b(var1); //CanaryMod refactored
+        this.playerFileDataSet.get(var1.getPlayer().getDimension().getName()).b(var1);
     }
 
     public void c(OEntityPlayerMP var1) {
@@ -139,7 +152,8 @@ public class OServerConfigurationManager {
     }
 
     public void e(OEntityPlayerMP var1) {
-        this.n.a(var1);
+//        this.n.a(var1); //CanaryMod refactored
+        this.playerFileDataSet.get(var1.getPlayer().getDimension().getName()).a(var1);
         this.c.a(var1.w).e(var1);
         this.b.remove(var1);
         this.a(var1.w).b(var1);
@@ -580,9 +594,14 @@ public class OServerConfigurationManager {
     }
 
     public void g() {
-        for (int var1 = 0; var1 < this.b.size(); ++var1) {
-            this.n.a((OEntityPlayer) this.b.get(var1));
+        //CanaryMod refactored for multiworld purposes
+//        for (int var1 = 0; var1 < this.b.size(); ++var1) {
+//            this.n.a((OEntityPlayer) this.b.get(var1));
+//        }
+        for(Player player : getCanaryConfigurationManager().getAllPlayers()) {
+            this.playerFileDataSet.get(player.getDimension().getName()).a((OEntityPlayer) ((CanaryPlayer)player).getHandle());
         }
+        //CanaryMod end
 
     }
 
@@ -629,7 +648,15 @@ public class OServerConfigurationManager {
     }
 
     public String[] t() {
-        return this.c.worldServer[0].r().d().g();
+        //CanaryMod refactored to incorporate everythign from anywhere
+        ArrayList<String> playersSeen = new ArrayList<String>();
+        for(World w : this.c.getWorldManager().getAllWorlds()) {
+            CanaryDimension dim = (CanaryDimension) ((CanaryWorld)w).getDimensions()[0];
+            for(String s : dim.getHandle().r().d().g()) {
+                playersSeen.add(s);
+            }
+        }
+        return playersSeen.toArray(new String[playersSeen.size()]);
     }
 
     private void u() {

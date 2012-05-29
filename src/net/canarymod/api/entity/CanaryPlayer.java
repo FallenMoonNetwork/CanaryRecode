@@ -37,6 +37,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         permissions = null; //TODO: get permissions specifically for this player
     }
 
+    /**
+     * CanaryMod: Get player handle
+     */
+    public OEntityPlayerMP getHandle() {
+        return (OEntityPlayerMP) entity;
+    }
     @Override
     public String getName() {
     	return ((OEntityPlayerMP)entity).v;

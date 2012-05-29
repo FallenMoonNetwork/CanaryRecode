@@ -3,7 +3,10 @@ package net.canarymod.api.world;
 import java.util.ArrayList;
 
 import net.canarymod.Canary;
+import net.canarymod.CanaryServer;
+import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.entity.Player;
+import net.minecraft.server.OEntityTracker;
 import net.minecraft.server.OWorldServer;
 
 public class CanaryWorld implements World {
@@ -21,9 +24,17 @@ public class CanaryWorld implements World {
     public CanaryWorld(String name, OWorldServer[] dimensions) {
         this.name = name;
         
+        //Create new dimensions for this world
         normal = new CanaryDimension(dimensions[0], this, Dimension.Type.NORMAL);
         nether = new CanaryDimension(dimensions[1], this, Dimension.Type.NETHER);
         end = new CanaryDimension(dimensions[2], this, Dimension.Type.END);
+        
+        //Manually set new entity trackers
+        normal.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), 0 )));
+        nether.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), -1 )));
+        end.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), 1 )));
+        
+        //Init nanotick sizes
         nanoTicks = new long[dimensions.length][100];
         
         //set worlds. That needs to be done here because the moment of world creation,
@@ -135,5 +146,10 @@ public class CanaryWorld implements World {
         players.addAll(nether.getPlayerList());
         players.addAll(end.getPlayerList());
         return players;
+    }
+
+    @Override
+    public Dimension[] getDimensions() {
+        return new Dimension[] {normal, nether, end};
     }
 }
