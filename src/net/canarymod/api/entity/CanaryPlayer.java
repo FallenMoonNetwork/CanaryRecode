@@ -33,7 +33,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     private boolean muted;
     public CanaryPlayer(OEntityPlayerMP entity) {
         super(entity);
-        group = Canary.groups().getGroup("something"); //TODO: add proper player to group
+//        group = Canary.groups().getGroup("something"); //TODO: add proper player to group
         permissions = null; //TODO: get permissions specifically for this player
     }
 

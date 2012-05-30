@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
+import net.canarymod.api.world.CanaryDimension;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OChatAllowedCharacters;
 import net.minecraft.server.OChunkCoordinates;
@@ -120,7 +121,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     }
 
     public void a(OPacket10Flying var1) {
-        OWorldServer var2 = this.d.a(this.e.w);
+        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
         this.h = true;
         if (!this.e.j) {
             double var3;
@@ -307,7 +308,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     }
 
     public void a(OPacket14BlockDig var1) {
-        OWorldServer var2 = this.d.a(this.e.w);
+        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
         if (var1.e == 4) {
             this.e.S();
         } else if (var1.e == 5) {
@@ -373,7 +374,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     }
 
     public void a(OPacket15Place var1) {
-        OWorldServer var2 = this.d.a(this.e.w);
+        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
         OItemStack var3 = this.e.k.d();
         boolean var4 = false;
         int var5 = var1.a;
@@ -577,7 +578,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     }
 
     public void a(OPacket7UseEntity var1) {
-        OWorldServer var2 = this.d.a(this.e.w);
+        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
         OEntity var3 = var2.a(var1.b);
         if (var3 != null) {
             boolean var4 = this.e.h(var3);
@@ -682,7 +683,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     }
 
     public void a(OPacket130UpdateSign var1) {
-        OWorldServer var2 = this.d.a(this.e.w);
+        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
         if (var2.i(var1.a, var1.b, var1.c)) {
             OTileEntity var3 = var2.b(var1.a, var1.b, var1.c);
             if (var3 instanceof OTileEntitySign) {

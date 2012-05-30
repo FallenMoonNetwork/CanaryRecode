@@ -5,7 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryNetServerHandler;
+import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OChunk;
@@ -185,7 +187,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         for (int var1 = 0; var1 < 5; ++var1) {
             OItemStack var2 = this.c(var1);
             if (var2 != this.ck[var1]) {
-                this.b.b(this.w).a(this, new OPacket5PlayerInventory(this.bd, var1, var2));
+                getDimension().getEntityTracker().sendPacketToTrackedPlayer(this.getPlayer(), new CanaryPacket(new OPacket5PlayerInventory(this.bd, var1, var2)));//.a(this, new OPacket5PlayerInventory(this.bd, var1, var2));
                 this.ck[var1] = var2;
             }
         }
@@ -264,7 +266,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                 }
 
                 if (var17) {
-                    OWorldServer var18 = this.b.a(this.w);
+                    OWorldServer var18 = (OWorldServer) getDimension().getHandle();//this.b.a(this.w);
                     if (var18.i(var14.a << 4, 0, var14.b << 4)) {
                         OChunk var11 = var18.d(var14.a, var14.b);
                         if (var11.k) {
@@ -348,7 +350,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             this.a.b((new OPacket70Bed(4, 0)));
         } else {
             this.a(OAchievementList.B);
-            OChunkCoordinates var2 = this.b.a(var1).d();
+            OChunkCoordinates var2 = getDimension().getHandle().d();//this.b.a(var1).d();
             if (var2 != null) {
                 this.a.a(var2.a, var2.b, var2.c, 0.0F, 0.0F);
             }
@@ -373,7 +375,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     public void a(OEntity var1, int var2) {
         if (!var1.bE) {
-            OEntityTracker var3 = this.b.b(this.w);
+            OEntityTracker var3 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
             if (var1 instanceof OEntityItem) {
                 var3.a(var1, new OPacket22Collect(var1.bd, this.bd));
             }
@@ -395,7 +397,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         if (!this.t) {
             this.u = -1;
             this.t = true;
-            OEntityTracker var1 = this.b.b(this.w);
+            OEntityTracker var1 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
             var1.a(this, new OPacket18Animation(this, 1));
         }
 
@@ -407,7 +409,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public OEnumStatus a(int var1, int var2, int var3) {
         OEnumStatus var4 = super.a(var1, var2, var3);
         if (var4 == OEnumStatus.a) {
-            OEntityTracker var5 = this.b.b(this.w);
+            OEntityTracker var5 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
             OPacket17Sleep var6 = new OPacket17Sleep(this, 0, var1, var2, var3);
             var5.a(this, var6);
             this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt);
@@ -419,7 +421,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     public void a(boolean var1, boolean var2, boolean var3) {
         if (this.Z()) {
-            OEntityTracker var4 = this.b.b(this.w);
+            OEntityTracker var4 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
             var4.b(this, new OPacket18Animation(this, 3));
         }
 
@@ -610,12 +612,12 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     }
 
     public void c(OEntity var1) {
-        OEntityTracker var2 = this.b.b(this.w);
+        OEntityTracker var2 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
         var2.b(this, new OPacket18Animation(var1, 6));
     }
 
     public void d(OEntity var1) {
-        OEntityTracker var2 = this.b.b(this.w);
+        OEntityTracker var2 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
         var2.b(this, new OPacket18Animation(var1, 7));
     }
 

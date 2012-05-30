@@ -124,12 +124,18 @@ public class OServerConfigurationManager {
         var2.G.c((int) var1.bm >> 4, (int) var1.bo >> 4);
     }
 
+    @Deprecated
     public int a() {
         throw new UnsupportedOperationException("OServerConfigurationManager"
                 + ".a() has been replaced by OServerConfigurationManager"
                 + ".getMaxTrackingDistance(String).");
     }
     
+    /**
+     * Do not call this before the world isn't saved in the world manager!
+     * @param world
+     * @return
+     */
     public int getMaxTrackingDistance(String world) {
        return Canary.getServer().getWorld(world).getNormal().getPlayerManager().getMaxTrackingDistance();
     }
@@ -148,7 +154,7 @@ public class OServerConfigurationManager {
     public void c(OEntityPlayerMP var1) {
         this.sendPacketToAll((new OPacket201PlayerInfo(var1.v, true, 1000)));
         this.b.add(var1);
-        OWorldServer var2 = this.c.a(var1.w);
+        OWorldServer var2 = (OWorldServer) ((CanaryDimension)var1.getDimension()).getHandle();
         var2.G.c((int) var1.bm >> 4, (int) var1.bo >> 4);
 
         while (var2.a(var1, var1.bw).size() != 0) {
@@ -177,7 +183,8 @@ public class OServerConfigurationManager {
     public void e(OEntityPlayerMP var1) {
 //        this.n.a(var1); //CanaryMod refactored
         this.playerFileDataSet.get(var1.getPlayer().getDimension().getName()).a(var1);
-        this.c.a(var1.w).e(var1);
+        //CanaryMod refactored
+        ((CanaryDimension)var1.getDimension()).getHandle().e(var1);
         this.b.remove(var1);
         var1.getDimension().getPlayerManager().removePlayer(var1.getPlayer());
 //        this.a(var1.w).b(var1);
@@ -208,8 +215,8 @@ public class OServerConfigurationManager {
                         var5.a.a("You logged in from another location");
                     }
                 }
-
-                return new OEntityPlayerMP(this.c, this.c.a(0), var2, new OItemInWorldManager(this.c.a(0)));
+                OWorldServer dimension = (OWorldServer) ((CanaryDimension) Canary.getServer().getDefaultWorld().getNormal()).getHandle();
+                return new OEntityPlayerMP(this.c, dimension, var2, new OItemInWorldManager(dimension));
             }
         }
     }
@@ -221,9 +228,10 @@ public class OServerConfigurationManager {
 //        this.c.b(var1.w).a(var1);
 //        this.c.b(var1.w).b(var1);
 //        this.a(var1.w).b(var1);
+        //TODO: Eventually also remove OEntityPlayer from OWorldServer.d
         this.b.remove(var1);
         //remove player, release skin etc
-        this.c.a(var1.w).f(var1);
+        ((CanaryDimension)var1.getDimension()).getHandle().f(var1);
         OChunkCoordinates var4 = var1.ab();
         var1.w = var2;
         OEntityPlayerMP var5 = new OEntityPlayerMP(this.c, var1.getDimension().getHandle(), var1.v, new OItemInWorldManager(var1.getDimension().getHandle()));
@@ -239,7 +247,7 @@ public class OServerConfigurationManager {
         var5.c.a(var1.c.a());
         var5.c.b(var6.s().m());
         if (var4 != null) {
-            OChunkCoordinates var7 = OEntityPlayer.a(this.c.a(var1.w), var4);
+            OChunkCoordinates var7 = OEntityPlayer.a(((CanaryDimension)var1.getDimension()).getHandle(), var4);
             if (var7 != null) {
                 var5.c((var7.a + 0.5F), (var7.b + 0.1F), (var7.c + 0.5F), 0.0F, 0.0F);
                 var5.a(var4);
@@ -274,9 +282,9 @@ public class OServerConfigurationManager {
 
     public void a(OEntityPlayerMP var1, int var2) {
         int var3 = var1.w;
-        OWorldServer var4 = this.c.a(var1.w);
+        OWorldServer var4 = (OWorldServer) ((CanaryDimension)var1.getDimension()).getHandle();
         var1.w = var2;
-        OWorldServer var5 = this.c.a(var1.w);
+        OWorldServer var5 = (OWorldServer) ((CanaryDimension)var1.getDimension()).getHandle();
         var1.a.b((new OPacket9Respawn(var1.w, (byte) var1.bi.q, var5.s().p(), var5.y(), var1.c.a())));
         var4.f(var1);
         var1.bE = false;

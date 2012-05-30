@@ -46,12 +46,12 @@ public class OEntityTracker {
     
     private CanaryEntityTracker canaryTracker;
 
-    public OEntityTracker(OMinecraftServer var1, int var2) {
+    public OEntityTracker(OMinecraftServer var1, int var2, CanaryDimension dim) {
         super();
         this.c = var1;
         this.e = var2;
-        this.d = var1.h.a();
-        canaryTracker = new CanaryEntityTracker(this);
+        this.d = dim.getPlayerManager().getMaxTrackingDistance();
+        canaryTracker = new CanaryEntityTracker(this, dim);
     }
 
     /**
@@ -166,7 +166,9 @@ public class OEntityTracker {
 
         while (var2.hasNext()) {
             OEntityTrackerEntry var3 = (OEntityTrackerEntry) var2.next();
-            var3.a(this.c.a(this.e).d);
+            //Canarymod get playerlist from this dimension instead
+            var3.a(((CanaryDimension)canaryTracker.getAttachedDimension()).getHandle().d); //XXX
+            
             if (var3.n && var3.a instanceof OEntityPlayerMP) {
                 var1.add(var3.a);
             }

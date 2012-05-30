@@ -32,17 +32,17 @@ public class CanaryWorld implements World {
         nether = new CanaryDimension(dimensions[1], this, Dimension.Type.NETHER);
         end = new CanaryDimension(dimensions[2], this, Dimension.Type.END);
         
-        //Manually set new entity trackers
-        normal.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), 0 )));
-        nether.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), -1 )));
-        end.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), 1 )));
-        
-        //manually set player managers
+      //manually set player managers
         int viewDistance = 10; //TODO: Add config for view distance!
         normal.setPlayerManager(new CanaryPlayerManager(new OPlayerManager(((CanaryServer)Canary.getServer()).getHandle(), 0, viewDistance, normal), normal));
         nether.setPlayerManager(new CanaryPlayerManager(new OPlayerManager(((CanaryServer)Canary.getServer()).getHandle(), -1, viewDistance, nether), nether));
         end.setPlayerManager(new CanaryPlayerManager(new OPlayerManager(((CanaryServer)Canary.getServer()).getHandle(), 1, viewDistance, end), end));
         
+        //Manually set new entity trackers
+        normal.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), 0, normal), normal) );
+        nether.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), -1, nether), nether) );
+        end.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), 1, end), end) );
+
         //Init nanotick sizes
         nanoTicks = new long[dimensions.length][100];
         

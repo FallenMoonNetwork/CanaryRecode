@@ -45,8 +45,8 @@ public class OPlayerManager {
     }
 
     public OWorldServer a() {
-        
-        return this.d.a(this.e);
+        //CanaryMod changes
+        return (OWorldServer) ((CanaryDimension)canaryPlayerManager.getAttachedDimension()).getHandle();
     }
 
     public void b() {
@@ -56,7 +56,7 @@ public class OPlayerManager {
 
         this.c.clear();
         if (this.a.isEmpty()) {
-            OWorldServer var3 = this.d.a(this.e);
+            OWorldServer var3 =(OWorldServer) ((CanaryDimension)canaryPlayerManager.getAttachedDimension()).getHandle();
             OWorldProvider var2 = var3.t;
             if (!var2.c()) {
                 var3.G.c();

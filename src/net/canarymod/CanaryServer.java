@@ -154,4 +154,9 @@ public class CanaryServer implements Server {
     public World getWorld(String name) {
         return server.getWorldManager().getWorld(name);
     }
+
+    @Override
+    public World getDefaultWorld() {
+        return getWorldManager().getWorld(getDefaultWorldName());
+    }
 }
