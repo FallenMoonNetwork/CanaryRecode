@@ -158,21 +158,23 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         }
 
         a.info("Loading properties");
+        // CanaryMod start: Change configurations
         this.d = new OPropertyManager(new File("server.properties"));
-        this.y = this.d.a("server-ip", "");
-        this.n = this.d.a("online-mode", true);
-        this.o = this.d.a("spawn-animals", true);
-        this.p = this.d.a("spawn-npcs", true);
-        this.q = this.d.a("pvp", true);
-        this.r = this.d.a("allow-flight", false);
-        this.s = this.d.a("motd", "A Minecraft Server");
+        this.y = Configuration.getNetConfig().getBindIp();
+        this.n = Configuration.getNetConfig().isOnlineMode();
+        this.o = this.d.a("spawn-animals", true); // MW
+        this.p = this.d.a("spawn-npcs", true); // MW
+        this.q = this.d.a("pvp", true); // MW
+        this.r = this.d.a("allow-flight", false); // MW
+        this.s = Configuration.getServerConfig().getMotd();
         this.s.replace('\u00a7', '$');
         InetAddress var2 = null;
         if (this.y.length() > 0) {
             var2 = InetAddress.getByName(this.y);
         }
 
-        this.z = this.d.a("server-port", 25565);
+        this.z = Configuration.getNetConfig().getPort();
+        // CanaryMod end
         a.info("Starting Minecraft server on " + (this.y.length() == 0 ? "*" : this.y) + ":" + this.z);
 
         try {
@@ -199,9 +201,9 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
       //CanaryMod end
         
         long var4 = System.nanoTime();
-        String var6 = this.d.a("level-name", "world");
-        String var7 = this.d.a("level-seed", "");
-        String var8 = this.d.a("level-type", "DEFAULT");
+        String var6 = this.d.a("level-name", "world"); // MW
+        String var7 = this.d.a("level-seed", ""); // MW
+        String var8 = this.d.a("level-type", "DEFAULT"); // MW
         long var9 = (new Random()).nextLong();
         if (var7.length() > 0) {
             try {
@@ -219,22 +221,25 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             var13 = OWorldType.b;
         }
 
-        this.t = this.d.a("max-build-height", 256);
+        this.t = this.d.a("max-build-height", 256); // MW
         this.t = (this.t + 8) / 16 * 16;
         this.t = OMathHelper.a(this.t, 64, 256);
-        this.d.a("max-build-height", Integer.valueOf(this.t));
+        this.d.a("max-build-height", Integer.valueOf(this.t)); // MW
         a.info("Preparing level \"" + var6 + "\"");
         this.initWorld(new OAnvilSaveConverter(new File(".")), var6, var9, var13);
         long var14 = System.nanoTime() - var4;
         String var16 = String.format("%.3fs", new Object[] { Double.valueOf(var14 / 1.0E9D) });
         a.info("Done (" + var16 + ")! For help, type \"help\" or \"?\"");
-        if (this.d.a("enable-query", false)) {
+
+        // CanaryMod: Change configuration
+        if (Configuration.getNetConfig().isQueryEnabled()) {
             a.info("Starting GS4 status listener");
             this.I = new ORConThreadQuery(this);
             this.I.a();
         }
 
-        if (this.d.a("enable-rcon", false)) {
+        // CanaryMod: Change configuration
+        if (Configuration.getNetConfig().isRconEnabled()) {
             a.info("Starting remote control listener");
             this.J = new ORConThreadMain(this);
             this.J.a();
@@ -261,10 +266,10 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         
 //        this.worldServer = new OWorldServer[3];
 //        this.g = new long[this.worldServer.length][100]; //CanaryMod Moved to CanaryWorld<init>
-        int var6 = this.d.a("gamemode", 0); // get int property
+        int var6 = this.d.a("gamemode", 0); // MW
         var6 = OWorldSettings.a(var6);
         a.info("Default game type: " + var6);
-        boolean var7 = this.d.a("generate-structures", true); // get boolean property
+        boolean var7 = this.d.a("generate-structures", true); // MW
         OWorldSettings var8 = new OWorldSettings(var3, var6, var7, false, var5);
         OAnvilSaveHandler var9 = new OAnvilSaveHandler(new File("."), var2, true);
 
@@ -747,7 +752,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     }
 
     public String m() {
-        return this.d.a("level-name", "world");
+        return this.d.a("level-name", "world"); // MW
     }
 
     public String n() {
@@ -787,7 +792,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     }
 
     public String getServerModName() {
-        return "vanilla";
+        return "canarymod";
     }
 
     // $FF: synthetic method

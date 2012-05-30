@@ -22,7 +22,7 @@ public class OConsoleLogManager {
         a.addHandler(var1);
 
         try {
-            FileHandler var2 = new FileHandler("server.log", true);
+            FileHandler var2 = new FileHandler("logs/server.log", true);
             var2.setFormatter(var0);
             a.addHandler(var2);
         } catch (Exception var3) {

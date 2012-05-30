@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+
+import net.canarymod.config.Configuration;
 import net.minecraft.server.OIServer;
 import net.minecraft.server.ORConOutputStream;
 import net.minecraft.server.ORConThreadBase;
@@ -40,7 +42,8 @@ public class ORConThreadQuery extends ORConThreadBase {
 
     public ORConThreadQuery(OIServer var1) {
         super(var1);
-        this.h = var1.a("query.port", 0);
+        // CanaryMod: changing configuration
+        this.h = Configuration.getNetConfig().getQueryPort();
         this.r = var1.f();
         this.i = var1.g();
         this.k = var1.h();
@@ -64,9 +67,15 @@ public class ORConThreadQuery extends ORConThreadBase {
         if (0 == this.h) {
             this.h = this.i;
             this.b("Setting default query port to " + this.h);
-            var1.a("query.port", Integer.valueOf(this.h));
-            var1.a("debug", Boolean.valueOf(false));
-            var1.c();
+            // CanaryMod: changing configuration
+            try {
+            	Configuration.getNetConfig().getFile().setInt("query.port", Integer.valueOf(this.h));
+            	Configuration.getNetConfig().getFile().save();
+            	Configuration.getServerConfig().getFile().setBoolean("debug", false);
+            	Configuration.getServerConfig().getFile().save();
+            } catch(IOException ioe) {
+            	this.b("Failed to save configuration.");
+            }
         }
 
         this.p = new HashMap();

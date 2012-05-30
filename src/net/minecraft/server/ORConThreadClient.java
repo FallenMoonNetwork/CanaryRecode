@@ -6,6 +6,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+
+import net.canarymod.config.Configuration;
 import net.minecraft.server.OIServer;
 import net.minecraft.server.ORConThreadBase;
 import net.minecraft.server.ORConUtils;
@@ -20,7 +22,7 @@ public class ORConThreadClient extends ORConThreadBase {
     ORConThreadClient(OIServer var1, Socket var2) {
         super(var1);
         this.h = var2;
-        this.j = var1.a("rcon.password", "");
+        this.j = Configuration.getNetConfig().getRconPassword();
         this.b("Rcon connection from: " + var2.getInetAddress());
     }
 

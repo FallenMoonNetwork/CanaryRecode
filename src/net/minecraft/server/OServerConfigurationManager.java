@@ -68,24 +68,28 @@ public class OServerConfigurationManager {
         //Just for the records
         super();
         this.c = var1;
-        this.j = var1.a("banned-players.txt");
-        this.k = var1.a("banned-ips.txt");
-        this.l = var1.a("ops.txt");
-        this.m = var1.a("white-list.txt");
-        int var2 = var1.d.a("view-distance", 10);
+        // CanaryMod start: changing configurations
+        //this.j = var1.a("banned-players.txt");
+        //this.k = var1.a("banned-ips.txt");
+        //this.l = var1.a("ops.txt");
+        //this.m = var1.a("white-list.txt");
+        int var2 = Configuration.getNetConfig().getViewDistance();
+        // Creates player managers per dimension (MW: create one per dimension per world)
 //        this.d[0] = new OPlayerManager(var1, 0, var2);
 //        this.d[1] = new OPlayerManager(var1, -1, var2);
 //        this.d[2] = new OPlayerManager(var1, 1, var2);
-        this.e = var1.d.a("max-players", 20);
-        this.o = var1.d.a("white-list", false);
-        this.l();
-        this.n();
-        this.p();
-        this.r();
-        this.m();
-        this.o();
-        this.q();
-        this.s();
+        this.e = Configuration.getNetConfig().getMaxPlayers();
+        // CanaryMod: disable vanilla whitelisting
+        this.o = false;
+        // CanaryMod: don't load the default whitelists and bans
+        //this.l();
+        //this.n();
+        //this.p();
+        //this.r();
+        //this.m();
+        //this.o();
+        //this.q();
+        //this.s();
         canaryCfgManager = new CanaryConfigurationManager(this);
         var1.setCanaryConfigurationmanager(canaryCfgManager);
     }
