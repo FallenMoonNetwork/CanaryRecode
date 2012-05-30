@@ -8,6 +8,8 @@ import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+
+import net.canarymod.config.Configuration;
 import net.minecraft.server.OIServer;
 import net.minecraft.server.ORConThreadBase;
 import net.minecraft.server.ORConThreadClient;
@@ -23,19 +25,24 @@ public class ORConThreadMain extends ORConThreadBase {
 
     public ORConThreadMain(OIServer var1) {
         super(var1);
-        this.g = var1.a("rcon.port", 0);
-        this.k = var1.a("rcon.password", "");
+        // CanaryMod: Change configuration
+        this.g = Configuration.getNetConfig().getRconPort();
+        this.k = Configuration.getNetConfig().getRconPassword();
         this.i = var1.f();
         this.h = var1.g();
         if (0 == this.g) {
             this.g = this.h + 10;
             this.b("Setting default rcon port to " + this.g);
-            var1.a("rcon.port", Integer.valueOf(this.g));
+            // CanaryMod: changing configuration
+            Configuration.getNetConfig().getFile().setInt("rcon.port",Integer.valueOf(this.g));
             if (0 == this.k.length()) {
-                var1.a("rcon.password", (Object) "");
+            	Configuration.getNetConfig().getFile().setString("rcon.password","");
             }
-
-            var1.c();
+            try {
+            	Configuration.getNetConfig().getFile().save();
+            } catch(IOException ioe) {
+            	this.b("Failed to save configuration.");
+            }
         }
 
         if (0 == this.i.length()) {

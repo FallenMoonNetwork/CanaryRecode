@@ -3,6 +3,7 @@ package net.canarymod;
 //import java.util.logging.Logger;
 
 import net.canarymod.backbone.Backbone;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.HookExecutor;
 import net.canarymod.plugin.PluginLoader;
 
@@ -20,6 +21,8 @@ public class CanaryMod extends Canary {
      * Creates a new CanaryMod
      */
     public CanaryMod() {
+    	this.config = new Configuration(); 
+    	
         // Initialize the loader and scan for plugins
         this.hookExecutor = new HookExecutor();
         this.loader = new PluginLoader();
