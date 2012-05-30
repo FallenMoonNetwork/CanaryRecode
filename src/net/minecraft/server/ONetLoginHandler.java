@@ -114,7 +114,7 @@ public class ONetLoginHandler extends ONetHandler {
             var5.b((new OPacket6SpawnPosition(var4.a, var4.b, var4.c)));
             var5.b((new OPacket202PlayerAbilities(var2.L)));
             this.e.h.a(var2, var3);
-            this.e.h.a((new OPacket3Chat("\u00a7e" + var2.v + " joined the game.")));
+            this.e.h.sendPacketToAll((new OPacket3Chat("\u00a7e" + var2.v + " joined the game.")));
             this.e.h.c(var2);
             var5.a(var2.bm, var2.bn, var2.bo, var2.bs, var2.bt);
             this.e.c.a(var5);

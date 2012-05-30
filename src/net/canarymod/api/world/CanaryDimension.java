@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.EntityTracker;
+import net.canarymod.api.PlayerManager;
 import net.canarymod.api.entity.EntityAnimal;
 import net.canarymod.api.entity.EntityItem;
 import net.canarymod.api.entity.EntityLiving;
@@ -38,7 +39,7 @@ public class CanaryDimension implements Dimension {
 
     public CanaryDimension(OWorldServer world, CanaryWorld parent, Type type) {
         this.world = world; // We're not getting any other world types, right?
-        chunkProvider = this.world.G.getHandler(); // get the chunk provider wrapper
+        chunkProvider = this.world.G.getCanaryChunkProvider(); // get the chunk provider wrapper
         this.parent = parent;
         world.setCanaryDimension(this);
         playerManager = world.getPlayerManager();
@@ -264,5 +265,15 @@ public class CanaryDimension implements Dimension {
     @Override
     public String getName() {
         return parent.getName();
+    }
+
+    @Override
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
+
+    @Override
+    public void setPlayerManager(PlayerManager pm) {
+        this.playerManager = (CanaryPlayerManager) pm;
     }
 }

@@ -4,14 +4,17 @@ import java.util.ArrayList;
 
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
+import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.Dimension;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OPlayerManager;
 
 public class CanaryPlayerManager implements PlayerManager {
     private OPlayerManager pm;
-    
-    public CanaryPlayerManager(OPlayerManager pm) {
+    private CanaryDimension dim;
+    public CanaryPlayerManager(OPlayerManager pm, CanaryDimension dimension) {
         this.pm = pm;
+        this.dim = dimension;
     }
 
     @Override
@@ -44,6 +47,20 @@ public class CanaryPlayerManager implements PlayerManager {
             players.add(player.getPlayer());
         }
         return players;
+    }
+
+    @Override
+    public Dimension getAttachedDimension() {
+        return dim;
+    }
+
+    @Override
+    public int getMaxTrackingDistance() {
+        return pm.c();
+    }
+
+    public OPlayerManager getHandle() {
+        return pm;
     }
 
 }

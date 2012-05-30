@@ -113,7 +113,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             this.e.I();
             this.b((new OPacket255KickDisconnect(var1)));
             this.b.d();
-            this.d.h.a((new OPacket3Chat("\u00a7e" + this.e.v + " left the game.")));
+            this.d.h.sendPacketToAll((new OPacket3Chat("\u00a7e" + this.e.v + " left the game.")));
             this.d.h.e(this.e);
             this.c = true;
         }
@@ -456,7 +456,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     public void a(String var1, Object[] var2) {
         a.info(this.e.v + " lost connection: " + var1);
-        this.d.h.a((new OPacket3Chat("\u00a7e" + this.e.v + " left the game.")));
+        this.d.h.sendPacketToAll((new OPacket3Chat("\u00a7e" + this.e.v + " left the game.")));
         this.d.h.e(this.e);
         this.c = true;
     }

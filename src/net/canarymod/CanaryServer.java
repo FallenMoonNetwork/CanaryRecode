@@ -6,9 +6,9 @@ import java.util.logging.Logger;
 import net.canarymod.api.Server;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
+import net.canarymod.api.world.World;
 import net.canarymod.api.world.WorldManager;
 import net.canarymod.hook.command.ConsoleCommandHook;
-import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OMinecraftServer;
 
 /**
@@ -16,65 +16,67 @@ import net.minecraft.server.OMinecraftServer;
  * 
  * @author Jos Kuijpers
  * @author Chris
- *
+ * 
  */
 public class CanaryServer implements Server {
 
-	public static final Logger log = Logger.getLogger("Minecraft");
-	private OMinecraftServer server;
-	
-	/**
-	 * Create a new Server Wrapper
-	 * @param server
-	 */
-	public CanaryServer(OMinecraftServer server) {
+    public static final Logger log = Logger.getLogger("Minecraft");
+    private OMinecraftServer server;
+
+    /**
+     * Create a new Server Wrapper
+     * 
+     * @param server
+     */
+    public CanaryServer(OMinecraftServer server) {
         this.server = server;
     }
-	
+
     public String getHostname() {
-    	return "localhost"; //Is that really localhost?
+        return "localhost"; // Is that really localhost?
     }
-    
+
     public int getNumPlayersOnline() {
-    	return server.getCanaryConfigurationManager().getNumPlayersOnline();
+        return server.getCanaryConfigurationManager().getNumPlayersOnline();
     }
-    
+
     public int getMaxPlayers() {
-    	return 20; //TODO retrieve from configuration!
+        return server.getCanaryConfigurationManager().getMaxPlayers();
     }
-    
+
     public String[] getPlayerNameList() {
-    	ArrayList<Player> players = getPlayerList();
-    	String[] names = new String[players.size()];
-    	for(int i = 0; i < players.size(); i++) {
-    	    names[i] = players.get(i).getName();
-    	}
-    	return names;
+        ArrayList<Player> players = getPlayerList();
+        String[] names = new String[players.size()];
+        for (int i = 0; i < players.size(); i++) {
+            names[i] = players.get(i).getName();
+        }
+        return names;
     }
-    
+
     public String getDefaultWorldName() {
-    	return "default"; //TODO: Retrieve default world name from config!
+        return "world"; // TODO: Retrieve default world name from config! - it's world by default in mc cfg
     }
-    
+
     public WorldManager getWorldManager() {
-        return null;
-    	
+        return server.getWorldManager();
     }
 
     @Override
     public void consoleCommand(String command) {
-        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks().callCancelableHook(new ConsoleCommandHook(null, command));
-        if(hook.isCancelled()) {
-            return; 
+        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks()
+                .callCancelableHook(new ConsoleCommandHook(null, command));
+        if (hook.isCancelled()) {
+            return;
         }
         server.a(command, server);
     }
 
     @Override
     public void consoleCommand(String command, Player player) {
-        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks().callCancelableHook(new ConsoleCommandHook(player, command));
-        if(hook.isCancelled()) {
-            return; 
+        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks()
+                .callCancelableHook(new ConsoleCommandHook(player, command));
+        if (hook.isCancelled()) {
+            return;
         }
         server.a(command, player);
     }
@@ -96,7 +98,8 @@ public class CanaryServer implements Server {
 
         name = name.toLowerCase();
 
-        for (Player player : server.getCanaryConfigurationManager().getAllPlayers()) {
+        for (Player player : server.getCanaryConfigurationManager()
+                .getAllPlayers()) {
             CanaryPlayer cPlayer = (CanaryPlayer) player;
             if (cPlayer.getName().toLowerCase().equals(name)) {
                 // Perfect match found
@@ -118,25 +121,37 @@ public class CanaryServer implements Server {
 
     @Override
     public Player getPlayer(String name) {
-        OEntityPlayerMP user = server.h.i(name); //So ugly :S
-
-        return user == null ? null : user.getPlayer();
+        return server.getCanaryConfigurationManager().getPlayerByName(name);
     }
 
     @Override
     public ArrayList<Player> getPlayerList() {
         return server.getCanaryConfigurationManager().getAllPlayers();
     }
-    
-    public OMinecraftServer getHandle(){
+
+    public OMinecraftServer getHandle() {
         return server;
     }
 
     @Override
     public void broadcastMessage(String message) {
-        for(Player player : getPlayerList()) {
+        for (Player player : getPlayerList()) {
             player.sendMessage(message);
         }
-        
+
+    }
+
+    @Override
+    public boolean loadWorld(String name, long seed) {
+        server.loadWorld(name, seed);
+        if(server.getWorldManager().worldIsLoaded(name)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public World getWorld(String name) {
+        return server.getWorldManager().getWorld(name);
     }
 }

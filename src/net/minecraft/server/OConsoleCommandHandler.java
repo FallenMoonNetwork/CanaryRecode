@@ -4,6 +4,13 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Logger;
+
+import net.canarymod.Canary;
+import net.canarymod.Logman;
+import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.World;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OICommandListener;
 import net.minecraft.server.OIProgressUpdate;
@@ -53,34 +60,46 @@ public class OConsoleCommandHandler {
                   var8.g();
                }
 
-               for(var9 = 0; var9 < this.b.worldServer.length; ++var9) {
-                  var10 = this.b.worldServer[var9];
-                  boolean var11 = var10.I;
-                  var10.I = false;
-                  try {
-                      var10.a(true, (OIProgressUpdate)null);
-                  } catch (IOException e1) {
-                      // TODO Auto-generated catch block -- come back to this
-                      e1.printStackTrace();
-                  }
-                  var10.I = var11;
+               //CanaryMod Changes to process multiple worlds
+               for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
+                   for(Dimension dim : w.getDimensions()) {
+                       var10 = (OWorldServer) ((CanaryDimension)dim).getHandle();
+                       boolean var11 = var10.I;
+                       var10.I = false;
+                       try {
+                           var10.a(true, (OIProgressUpdate)null);
+                       } catch (IOException e1) {
+                           Logman.logStackTrace("Failed to save Dimension" + dim.getType().name() + " in World " +dim.getName(), e1);
+                       }
+                       var10.I = var11;
+                   }
                }
+               //CanaryMod end
 
                this.a(var7, "Save complete.");
             } else if(var4.equalsIgnoreCase("save-off")) {
                this.a(var7, "Disabling level saving..");
 
-               for(var9 = 0; var9 < this.b.worldServer.length; ++var9) {
-                  var10 = this.b.worldServer[var9];
-                  var10.I = true;
+               //CanaryMod Changes to process multiple worlds
+               
+               for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
+                   for(Dimension dim : w.getDimensions()) {
+                       var10 = (OWorldServer) ((CanaryDimension)dim).getHandle();
+                       var10.I = true;
+                   }
                }
+               //CanaryMod end
             } else if(var4.equalsIgnoreCase("save-on")) {
                this.a(var7, "Enabling level saving..");
-
-               for(var9 = 0; var9 < this.b.worldServer.length; ++var9) {
-                  var10 = this.b.worldServer[var9];
-                  var10.I = false;
+               
+             //CanaryMod Changes to process multiple worlds
+               for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
+                   for(Dimension dim : w.getDimensions()) {
+                       var10 = (OWorldServer) ((CanaryDimension)dim).getHandle();
+                       var10.I = false;
+                   }
                }
+             //CanaryMod end
             } else if(var4.equalsIgnoreCase("op")) {
                var8.e(var5);
                this.a(var7, "Opping " + var5);
@@ -238,16 +257,23 @@ public class OConsoleCommandHandler {
                         int var23 = Integer.parseInt(var3[2]);
                         OWorldServer var24;
                         if("add".equalsIgnoreCase(var19)) {
-                           for(var21 = 0; var21 < this.b.worldServer.length; ++var21) {
-                              var24 = this.b.worldServer[var21];
-                              var24.b(var24.o() + (long)var23);
+                            //CanaryMod Changes for multiworld
+                            for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
+                                for(Dimension dim : w.getDimensions()) {
+                                    var24 = (OWorldServer) ((CanaryDimension)dim).getHandle();
+                                    var24.b(var24.o() + (long)var23);
+                                }
                            }
+                            //CanaryMod end
 
                            this.a(var7, "Added " + var23 + " to time");
                         } else if("set".equalsIgnoreCase(var19)) {
-                           for(var21 = 0; var21 < this.b.worldServer.length; ++var21) {
-                              var24 = this.b.worldServer[var21];
-                              var24.b((long)var23);
+                            //CanaryMod changes for mutiworld
+                            for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
+                                for(Dimension dim : w.getDimensions()) {
+                                    var24 = (OWorldServer) ((CanaryDimension)dim).getHandle();
+                                    var24.b((long)var23);
+                                }
                            }
 
                            this.a(var7, "Set time to " + var23);
@@ -259,7 +285,7 @@ public class OConsoleCommandHandler {
                      }
                   } else if(var4.equalsIgnoreCase("say") && var5.length() > 0) {
                      a.info("[" + var7 + "] " + var5);
-                     var8.a((OPacket)(new OPacket3Chat("\u00a7d[Server] " + var5)));
+                     var8.sendPacketToAll((OPacket)(new OPacket3Chat("\u00a7d[Server] " + var5)));
                   } else if(var4.equalsIgnoreCase("tell")) {
                      if(var3.length >= 3) {
                         var2 = var2.substring(var2.indexOf(" ")).trim();
@@ -274,7 +300,11 @@ public class OConsoleCommandHandler {
                   } else if(var4.equalsIgnoreCase("whitelist")) {
                      this.a(var7, var2, var6);
                   } else if(var4.equalsIgnoreCase("toggledownfall")) {
-                     this.b.worldServer[0].j();
+                      //CanaryMod changes to switch weather in all worlds //TODO: Chris: Must be disabled I would say
+                      for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
+                          ((CanaryDimension)w.getNormal()).getHandle().j(); //sets a property...
+                      }
+//                     this.b.worldServer[0].j();
                      var6.b("Toggling rain and snow, hold on...");
                   } else if(var4.equalsIgnoreCase("banlist")) {
                      if(var3.length == 2) {

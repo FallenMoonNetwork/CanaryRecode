@@ -18,6 +18,8 @@ import net.canarymod.Canary;
 import net.canarymod.CanaryMod;
 import net.canarymod.CanaryServer;
 import net.canarymod.api.CanaryConfigurationManager;
+import net.canarymod.api.CanaryEntityTracker;
+import net.canarymod.api.EntityTracker;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.CanaryDimension;
@@ -105,7 +107,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     private ORConThreadMain J;
     //CanaryMod Server reference
     private CanaryServer server;
-    //CanaryMod ConfigurationManager reference
+    //CanaryMod ConfigurationManager reference - this is instantiated in OServerConfigurationManager
     private CanaryConfigurationManager cfgManager;
 
     public OMinecraftServer() {
@@ -113,7 +115,6 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         new OThreadSleepForever(this);
         this.server = new CanaryServer(this);
         Canary.setServer(server);
-        cfgManager = h.getCanaryConfigurationManager();
         worldManager = new CanaryWorldManager();
     }
 
@@ -130,6 +131,10 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
      */
     public CanaryConfigurationManager getCanaryConfigurationManager() {
         return cfgManager;
+    }
+    
+    public void setCanaryConfigurationmanager(CanaryConfigurationManager man) {
+        cfgManager = man;
     }
 
     /**
@@ -238,6 +243,11 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         return true;
     }
     
+    /**
+     * Creates a new world with given name and seed
+     * @param name
+     * @param seed
+     */
     public void loadWorld(String name, long seed) {
         this.initWorld((new OAnvilSaveConverter(new File("."))), name, seed, OWorldType.b);
     }
@@ -279,10 +289,10 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             toLoad[var10].q = this.d.a("difficulty", 1); // get int property
             toLoad[var10].a(this.d.a("spawn-monsters", true), this.o); // get boolean property
             toLoad[var10].s().d(var6);
-            CanaryWorld world = new CanaryWorld(var2, toLoad);
-            worldManager.addWorld(world);
-            this.h.a(toLoad);
         }
+        CanaryWorld world = new CanaryWorld(var2, toLoad);
+        worldManager.addWorld(world);
+        this.h.a(toLoad);
 
         short var23 = 196;
         long var12 = System.currentTimeMillis();
@@ -595,10 +605,17 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         this.c.a();
         this.h.b();
 
-        for (var11 = 0; var11 < this.entityTrackerArray.length; ++var11) {
-            this.entityTrackerArray[var11].a();
+        //CanaryMod: Changes for multiworld stuff
+//        for (var11 = 0; var11 < this.entityTrackerArray.length; ++var11) {
+//            this.entityTrackerArray[var11].a();
+//        }
+        
+        for(World w : worldManager.getAllWorlds()) {
+            for(EntityTracker tracker : w.getAllEntityTrackers()) {
+                tracker.updateTrackedEntities();
+            }
         }
-
+        //CanaryMod end
         for (var11 = 0; var11 < this.C.size(); ++var11) {
             ((OIUpdatePlayerListBox) this.C.get(var11)).a();
         }
@@ -668,12 +685,16 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         return "CONSOLE";
     }
 
+    @Deprecated
     public OWorldServer a(int var1) {
-        return var1 == -1 ? this.worldServer[1] : (var1 == 1 ? this.worldServer[2] : this.worldServer[0]);
+        throw new UnsupportedOperationException("OMinecraftServer.a(int) has"
+                + " been replaced by WorldManager.getDimension(String, int).");
     }
 
+    @Deprecated
     public OEntityTracker b(int var1) {
-        return var1 == -1 ? this.entityTrackerArray[1] : (var1 == 1 ? this.entityTrackerArray[2] : this.entityTrackerArray[0]);
+        throw new UnsupportedOperationException("OMinecraftServer.b(int) has"
+                + " been replaced by Dimension.getEntityTracker()");
     }
 
     public int a(String var1, int var2) {

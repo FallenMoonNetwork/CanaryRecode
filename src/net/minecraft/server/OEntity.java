@@ -3,6 +3,7 @@ package net.minecraft.server;
 import java.util.List;
 import java.util.Random;
 
+import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.world.CanaryDimension;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -89,7 +90,8 @@ public abstract class OEntity {
     public int cc;
     public boolean cd;
     public boolean ce;
-
+    //CanaryMod entity
+    CanaryEntity entity;
     public OEntity(OWorld var1) {
         super();
         this.bd = a++;
@@ -127,6 +129,7 @@ public abstract class OEntity {
         this.bY.a(0, Byte.valueOf((byte) 0));
         this.bY.a(1, Short.valueOf((short) 300));
         this.b();
+        this.entity = new CanaryEntity(this);
     }
     /**
      * CanaryMod Get this entities current World (dimension)
@@ -140,6 +143,9 @@ public abstract class OEntity {
         this.bi = dim.getHandle();
     }
     
+    public CanaryEntity getHandle() {
+        return entity;
+    }
     protected abstract void b();
 
     public ODataWatcher aP() {

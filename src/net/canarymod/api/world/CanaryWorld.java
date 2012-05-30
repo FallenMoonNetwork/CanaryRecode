@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import net.canarymod.Canary;
 import net.canarymod.CanaryServer;
 import net.canarymod.api.CanaryEntityTracker;
+import net.canarymod.api.CanaryPlayerManager;
+import net.canarymod.api.EntityTracker;
 import net.canarymod.api.entity.Player;
 import net.minecraft.server.OEntityTracker;
+import net.minecraft.server.OPlayerManager;
 import net.minecraft.server.OWorldServer;
 
 public class CanaryWorld implements World {
@@ -33,6 +36,12 @@ public class CanaryWorld implements World {
         normal.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), 0 )));
         nether.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), -1 )));
         end.setEntityTracker(new CanaryEntityTracker(new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), 1 )));
+        
+        //manually set player managers
+        int viewDistance = 10; //TODO: Add config for view distance!
+        normal.setPlayerManager(new CanaryPlayerManager(new OPlayerManager(((CanaryServer)Canary.getServer()).getHandle(), 0, viewDistance, normal), normal));
+        nether.setPlayerManager(new CanaryPlayerManager(new OPlayerManager(((CanaryServer)Canary.getServer()).getHandle(), -1, viewDistance, nether), nether));
+        end.setPlayerManager(new CanaryPlayerManager(new OPlayerManager(((CanaryServer)Canary.getServer()).getHandle(), 1, viewDistance, end), end));
         
         //Init nanotick sizes
         nanoTicks = new long[dimensions.length][100];
@@ -151,5 +160,14 @@ public class CanaryWorld implements World {
     @Override
     public Dimension[] getDimensions() {
         return new Dimension[] {normal, nether, end};
+    }
+
+    @Override
+    public EntityTracker[] getAllEntityTrackers() {
+        EntityTracker[] toReturn = new EntityTracker[3];
+        toReturn[0] = normal.getEntityTracker();
+        toReturn[1] = nether.getEntityTracker();
+        toReturn[2] = end.getEntityTracker();
+        return toReturn;
     }
 }

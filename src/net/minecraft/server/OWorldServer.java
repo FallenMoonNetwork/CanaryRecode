@@ -35,7 +35,7 @@ public class OWorldServer extends OWorld {
     private OMinecraftServer J;
     private OIntHashMap K;
     
-   
+    
     // CanaryMod start
     public CanaryServer getServer() {
         return J.getServer();
@@ -48,6 +48,8 @@ public class OWorldServer extends OWorld {
         if (this.K == null) {
             this.K = new OIntHashMap();
         }
+        //CanaryMod: Remove if something derps!
+//        this.b();
     }
 
     public void a(OEntity var1, boolean var2) {
@@ -145,7 +147,9 @@ public class OWorldServer extends OWorld {
 
     public void a(OEntity var1, byte var2) {
         OPacket38EntityStatus var3 = new OPacket38EntityStatus(var1.bd, var2);
-        this.J.b(this.t.g).b(var1, var3);
+        //CanaryMod use the real entity tracker
+        this.getCanaryDimension().getEntityTracker().getHandle().b(var1, var3);
+//        this.J.b(this.t.g).b(var1, var3);
     }
 
     public OExplosion a(OEntity var1, double var2, double var4, double var6, float var8, boolean var9) {
@@ -171,9 +175,9 @@ public class OWorldServer extends OWorld {
         super.i();
         if (var1 != this.x()) {
             if (var1) {
-                this.J.h.a((new OPacket70Bed(2, 0)));
+                this.J.h.sendPacketToAll((new OPacket70Bed(2, 0)));
             } else {
-                this.J.h.a((new OPacket70Bed(1, 0)));
+                this.J.h.sendPacketToAll((new OPacket70Bed(1, 0)));
             }
         }
 

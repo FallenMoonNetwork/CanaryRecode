@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
+import net.canarymod.api.world.CanaryDimension;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityArrow;
 import net.minecraft.server.OEntityBoat;
@@ -133,7 +135,9 @@ public class OEntityTracker {
             OEntityTrackerEntry var5 = new OEntityTrackerEntry(var1, var2, var3, var4);
             this.a.add(var5);
             this.b.a(var1.bd, var5);
-            var5.b(this.c.a(this.e).d);
+            CanaryDimension dim = var1.getDimension();
+//            var5.b(this.c.a(this.e).d);
+            var5.b(dim.getHandle().d);
         }
     }
 

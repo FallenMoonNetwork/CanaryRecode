@@ -197,7 +197,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     }
 
     public void a(ODamageSource var1) {
-        this.b.h.a((new OPacket3Chat(var1.a(this))));
+        this.b.h.sendPacketToAll((new OPacket3Chat(var1.a(this))));
         this.k.k();
     }
 
@@ -582,7 +582,9 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public void a(OItemStack var1, int var2) {
         super.a(var1, var2);
         if (var1 != null && var1.a() != null && var1.a().d(var1) == OEnumAction.b) {
-            OEntityTracker var3 = this.b.b(this.w);
+//            OEntityTracker var3 = this.b.b(this.w);
+            //CanaryMod get the real entity tracker
+            OEntityTracker var3 = this.getDimension().getEntityTracker().getHandle();
             var3.b(this, new OPacket18Animation(this, 5));
         }
 

@@ -34,7 +34,7 @@ public class OChunkProviderServer implements OIChunkProvider {
     private OWorldServer h;
     
     //CanaryMod start
-    private CanaryChunkProviderServer handler;
+    private CanaryChunkProviderServer canaryChunkProvider;
     private int loadStage = 0;
     //CanaryMod end
 
@@ -47,8 +47,8 @@ public class OChunkProviderServer implements OIChunkProvider {
     }
     
     //CanaryMod start
-    public CanaryChunkProviderServer getHandler() {
-        return handler;
+    public CanaryChunkProviderServer getCanaryChunkProvider() {
+        return canaryChunkProvider;
     }
     //CanaryMod end
 

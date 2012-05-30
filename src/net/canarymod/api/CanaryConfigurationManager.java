@@ -3,6 +3,7 @@ package net.canarymod.api;
 
 import java.util.ArrayList;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.Player;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OServerConfigurationManager;
@@ -44,6 +45,11 @@ public class CanaryConfigurationManager implements ConfigurationManager{
     @Override
     public int getMaxPlayers() {
         return manager.k();
+    }
+    @Override
+    public void markBlockNeedsUpdate(int x, int y, int z, int dimension, String world) {
+        Canary.getServer().getWorldManager().getDimension(world, dimension).getPlayerManager().markBlockNeedsUpdate(x, y, z);
+        
     }
 
 }

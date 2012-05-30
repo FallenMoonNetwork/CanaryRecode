@@ -12,6 +12,10 @@ public class CanaryEntityTracker implements EntityTracker {
     public CanaryEntityTracker(OEntityTracker tracker) {
         this.tracker = tracker;
     }
+    
+    public OEntityTracker getHandle() {
+        return tracker;
+    }
 
     @Override
     public void trackEntity(Entity entity) {
@@ -28,6 +32,11 @@ public class CanaryEntityTracker implements EntityTracker {
     @Override
     public void untrackPlayerSymmetrics(Player player) {
         tracker.a((((CanaryPlayer)player).getHandle()));
+    }
+
+    @Override
+    public void updateTrackedEntities() {
+        tracker.a();
     }
 
 }

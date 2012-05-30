@@ -23,11 +23,13 @@ public class OWorldManager implements OIWorldAccess {
     }
 
     public void a(OEntity var1) {
-        this.a.b(this.b.t.g).a(var1);
+      //CanaryMod refactored to use our tracker wrapper
+        this.b.getCanaryDimension().getEntityTracker().trackEntity(var1.getHandle());
     }
 
     public void b(OEntity var1) {
-        this.a.b(this.b.t.g).b(var1);
+      //CanaryMod refactored to use our tracker wrapper
+        this.b.getCanaryDimension().getEntityTracker().untrackEntity(var1.getHandle());
     }
 
     public void a(String var1, double var2, double var4, double var6, float var8, float var9) {
@@ -37,7 +39,9 @@ public class OWorldManager implements OIWorldAccess {
     }
 
     public void a(int var1, int var2, int var3) {
-        this.a.h.a(var1, var2, var3, this.b.t.g);
+        //CanaryMod: Refactored to get around updated blocks per world
+        this.a.getCanaryConfigurationManager().markBlockNeedsUpdate(var1, var2, var3, this.b.t.g, this.b.getCanaryDimension().getName());
+//        this.a.h.a(var1, var2, var3, this.b.t.g);
     }
 
     public void b(int var1, int var2, int var3) {

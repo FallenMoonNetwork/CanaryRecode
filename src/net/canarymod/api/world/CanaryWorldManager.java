@@ -22,7 +22,13 @@ public class CanaryWorldManager implements WorldManager {
 
     public CanaryWorldManager() {
         File worlds = new File("worlds");
+        if(!worlds.exists()) {
+            worlds.mkdirs();
+        }
         int worldNum = worlds.listFiles().length;
+        if(worldNum == 0) {
+            worldNum = 1;
+        }
         existingWorlds = new ArrayList<String>(worldNum);
         loadedWorlds = new HashMap<String, CanaryWorld>(worldNum);
         for(String f : worlds.list()) {
@@ -56,7 +62,7 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public Dimension getDimension(String world, int dimension) {
-        return null;
+        return loadedWorlds.get(world).getDimension(Dimension.Type.fromId(dimension));
     }
 
     @Override
