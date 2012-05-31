@@ -2,6 +2,9 @@ package net.canarymod.api.world;
 
 import java.io.IOException;
 
+import net.canarymod.Logman;
+import net.minecraft.server.OChunk;
+import net.minecraft.server.OChunkCoordIntPair;
 import net.minecraft.server.OChunkProviderServer;
 
 public class CanaryChunkProviderServer implements ChunkProviderServer {
@@ -41,18 +44,54 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
             return false;
         }
     }
-
-    /**
-     * Unload 100 oldest chunks
-     */
+    
     @Override
-    public void unloadAllChunks() {
-        try {
-            this.handle.a();
-        } catch (IOException e) {
+    public Chunk regenerateChunk(int x, int z) {
+        Long chunkCoordIntPair = OChunkCoordIntPair.a(x, z);
+        // Unloading the chunk
+        OChunk unloadedChunk = (OChunk)handle.f.a(chunkCoordIntPair.longValue());
+        if (unloadedChunk != null)
+        {
+            unloadedChunk.e();
+            try {
+                handle.b(unloadedChunk);
+            } catch(IOException e) {
+                Logman.logStackTrace("Exception while unloading a chunk!", e);
+            }
             
+            handle.a(unloadedChunk);
+            handle.b.remove(chunkCoordIntPair);
+            handle.f.d(chunkCoordIntPair.longValue());
+            handle.g.remove(unloadedChunk);
         }
+         
+        // Generating the new chunk
+        OChunk newChunk = handle.d.b(x, z);
+        handle.f.a(chunkCoordIntPair, newChunk);
+        handle.g.add(newChunk);
+        if(newChunk != null)
+        {
+            newChunk.c();
+            newChunk.d();
+        }
+        newChunk.a(handle, handle, x, z);
+        
+        // Save the new chunk, overriding the old one
+        handle.a(newChunk);
+        try {
+            handle.b(newChunk);
+        } catch (IOException e) {
+            Logman.logStackTrace("Exception while regenerating a chunk!", e);
+        }
+        newChunk.k = false;
+        if(handle.e != null)
+        {
+            handle.e.b();
+        }
+        
+        return newChunk.getCanaryChunk();
     }
+
 
     @Override
     public void reloadChunk(int x, int z) {
@@ -63,6 +102,11 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
     @Override
     public void dropChunk(int x, int z) {
         handle.d(x >> 4, z >> 4);
+    }
+
+    @Override
+    public boolean isChunkLoaded(int x, int z) {
+        return handle.a(x, z);
     }
 
 }

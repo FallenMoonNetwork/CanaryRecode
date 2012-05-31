@@ -1,5 +1,7 @@
 package net.canarymod.api;
 
+import java.util.ArrayList;
+
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Entity;
@@ -7,6 +9,7 @@ import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.Dimension;
 import net.minecraft.server.OEntityTracker;
+import net.minecraft.server.OEntityTrackerEntry;
 
 public class CanaryEntityTracker implements EntityTracker {
     private OEntityTracker tracker;
@@ -52,6 +55,15 @@ public class CanaryEntityTracker implements EntityTracker {
     @Override
     public void sendPacketToTrackedPlayer(Entity entity, Packet packet) {
         tracker.a(((CanaryEntity)entity).getHandle(), ((CanaryPacket)packet).getPacket());
+    }
+
+    @Override
+    public ArrayList<Entity> getTrackedEntities() {
+        ArrayList<Entity> entities = new ArrayList<Entity>();
+        for(OEntityTrackerEntry e : tracker.getTrackedEntities()) {
+            entities.add(e.getCanaryTrackerEntry().getEntity());
+        }
+        return entities;
     }
 
 }

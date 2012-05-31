@@ -38,7 +38,7 @@ import net.minecraft.server.OPacket;
 
 public class OEntityTracker {
 
-    private Set a = new HashSet();
+    private Set<OEntityTrackerEntry> a = new HashSet<OEntityTrackerEntry>(); //CanaryMod parameterized
     private OIntHashMap b = new OIntHashMap();
     private OMinecraftServer c;
     private int d;
@@ -60,16 +60,24 @@ public class OEntityTracker {
     public CanaryEntityTracker getCanaryTracker() {
         return canaryTracker;
     }
+    
+    /**
+     * CanaryMod get all tracked entities for this tracker as tracker entries
+     * @return
+     */
+    public Set<OEntityTrackerEntry> getTrackedEntities() {
+        return a;
+    }
 
 
     public void a(OEntity var1) {
         if (var1 instanceof OEntityPlayerMP) {
             this.a(var1, 512, 2);
             OEntityPlayerMP var2 = (OEntityPlayerMP) var1;
-            Iterator var3 = this.a.iterator();
+            Iterator<OEntityTrackerEntry> var3 = this.a.iterator();
 
             while (var3.hasNext()) {
-                OEntityTrackerEntry var4 = (OEntityTrackerEntry) var3.next();
+                OEntityTrackerEntry var4 = var3.next();
                 if (var4.a != var2) {
                     var4.b(var2);
                 }
@@ -144,10 +152,10 @@ public class OEntityTracker {
     public void b(OEntity var1) {
         if (var1 instanceof OEntityPlayerMP) {
             OEntityPlayerMP var2 = (OEntityPlayerMP) var1;
-            Iterator var3 = this.a.iterator();
+            Iterator<OEntityTrackerEntry> var3 = this.a.iterator();
 
             while (var3.hasNext()) {
-                OEntityTrackerEntry var4 = (OEntityTrackerEntry) var3.next();
+                OEntityTrackerEntry var4 = var3.next();
                 var4.a(var2);
             }
         }
@@ -161,11 +169,11 @@ public class OEntityTracker {
     }
 
     public void a() {
-        ArrayList var1 = new ArrayList();
-        Iterator var2 = this.a.iterator();
+        ArrayList<OEntity> var1 = new ArrayList<OEntity>();
+        Iterator<OEntityTrackerEntry> var2 = this.a.iterator();
 
         while (var2.hasNext()) {
-            OEntityTrackerEntry var3 = (OEntityTrackerEntry) var2.next();
+            OEntityTrackerEntry var3 = var2.next();
             //Canarymod get playerlist from this dimension instead
             var3.a(((CanaryDimension)canaryTracker.getAttachedDimension()).getHandle().d); //XXX
             
@@ -176,10 +184,10 @@ public class OEntityTracker {
 
         for (int var6 = 0; var6 < var1.size(); ++var6) {
             OEntityPlayerMP var7 = (OEntityPlayerMP) var1.get(var6);
-            Iterator var4 = this.a.iterator();
+            Iterator<OEntityTrackerEntry> var4 = this.a.iterator();
 
             while (var4.hasNext()) {
-                OEntityTrackerEntry var5 = (OEntityTrackerEntry) var4.next();
+                OEntityTrackerEntry var5 = var4.next();
                 if (var5.a != var7) {
                     var5.b(var7);
                 }
@@ -205,10 +213,10 @@ public class OEntityTracker {
     }
 
     public void a(OEntityPlayerMP var1) {
-        Iterator var2 = this.a.iterator();
+        Iterator<OEntityTrackerEntry> var2 = this.a.iterator();
 
         while (var2.hasNext()) {
-            OEntityTrackerEntry var3 = (OEntityTrackerEntry) var2.next();
+            OEntityTrackerEntry var3 = var2.next();
             var3.c(var1);
         }
 

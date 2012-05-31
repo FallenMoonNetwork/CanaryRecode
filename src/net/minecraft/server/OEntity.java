@@ -143,7 +143,7 @@ public abstract class OEntity {
         this.bi = dim.getHandle();
     }
     
-    public CanaryEntity getHandle() {
+    public CanaryEntity getCanaryEntity() {
         return entity;
     }
     protected abstract void b();

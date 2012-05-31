@@ -7,7 +7,7 @@ import net.canarymod.api.world.blocks.Block;
 public class CanaryBlock implements Block {
     protected short type;
     protected byte data;
-    protected int x,y,z;
+    protected int x,y,z, status;
     protected Dimension dimension;
     protected BlockFace faceClicked;
     
@@ -17,6 +17,7 @@ public class CanaryBlock implements Block {
         this.z = z;
         this.type=0;
         this.data=0;
+        status = 0;
         dimension= Canary.getServer().getDefaultWorld().getNormal();
     }
     
@@ -26,6 +27,7 @@ public class CanaryBlock implements Block {
         this.z = 0;
         this.type = type;
         this.data = data;
+        status = 0;
         dimension = Canary.getServer().getDefaultWorld().getNormal();
     }
     
@@ -35,6 +37,7 @@ public class CanaryBlock implements Block {
         this.z = z;
         this.type = type;
         this.data = data;
+        status = 0;
         dimension = Canary.getServer().getDefaultWorld().getNormal();
     }
     
@@ -44,6 +47,7 @@ public class CanaryBlock implements Block {
         this.z = z;
         this.type = type;
         this.data = data;
+        status = 0;
         this.dimension = dimension;
     }
     
@@ -91,8 +95,7 @@ public class CanaryBlock implements Block {
 
     @Override
     public void update() {
-        dimension.updateBlockAt(x, y, z);
-
+        dimension.markBlockNeedsUpdate(x, y, z);
     }
 
     @Override
@@ -123,6 +126,16 @@ public class CanaryBlock implements Block {
     @Override
     public void setZ(int z) {
         this.z = z;
+    }
+
+    @Override
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    @Override
+    public int getStatus() {
+        return status;
     }
 
 }

@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import net.canarymod.api.CanaryEntityTrackerEntry;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODataWatcher;
 import net.minecraft.server.OEntity;
@@ -75,7 +77,7 @@ public class OEntityTrackerEntry {
     private int u = 0;
     public boolean n = false;
     public Set o = new HashSet();
-
+    private CanaryEntityTrackerEntry canaryEntry;
     public OEntityTrackerEntry(OEntity var1, int var2, int var3, boolean var4) {
         super();
         this.a = var1;
@@ -88,6 +90,15 @@ public class OEntityTrackerEntry {
         this.g = OMathHelper.d(var1.bs * 256.0F / 360.0F);
         this.h = OMathHelper.d(var1.bt * 256.0F / 360.0F);
         this.i = OMathHelper.d(var1.ar() * 256.0F / 360.0F);
+        this.canaryEntry = new CanaryEntityTrackerEntry(this);
+    }
+
+    /**
+     * CanaryMod get the entity tracker entry
+     * @return the canaryEntry
+     */
+    public CanaryEntityTrackerEntry getCanaryTrackerEntry() {
+        return canaryEntry;
     }
 
     public boolean equals(Object var1) {

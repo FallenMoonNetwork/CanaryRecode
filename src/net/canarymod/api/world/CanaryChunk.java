@@ -3,8 +3,7 @@ package net.canarymod.api.world;
 import net.minecraft.server.OChunk;
 
 public class CanaryChunk implements Chunk {
-    OChunk handle;
-    CanaryChunkProviderServer chunkProvider;
+    private OChunk handle;
 
     public CanaryChunk(OChunk chunk) {
         this.handle = chunk;
@@ -31,7 +30,7 @@ public class CanaryChunk implements Chunk {
 
     @Override
     public void setBlockTypeAt(int x, int y, int z, int type) {
-        // TODO Auto-generated method stub
+        handle.a(x, y, z, type);
     }
 
     @Override
@@ -55,15 +54,8 @@ public class CanaryChunk implements Chunk {
     }
 
     @Override
-    public boolean regenerateChunk() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
     public Dimension getDimension() {
-        // TODO Auto-generated method stub
-        return null;
+        return handle.e.getCanaryDimension();
     }
 
     @Override

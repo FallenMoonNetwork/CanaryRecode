@@ -24,12 +24,12 @@ public class OWorldManager implements OIWorldAccess {
 
     public void a(OEntity var1) {
       //CanaryMod refactored to use our tracker wrapper
-        this.b.getCanaryDimension().getEntityTracker().trackEntity(var1.getHandle());
+        this.b.getCanaryDimension().getEntityTracker().trackEntity(var1.getCanaryEntity());
     }
 
     public void b(OEntity var1) {
       //CanaryMod refactored to use our tracker wrapper
-        this.b.getCanaryDimension().getEntityTracker().untrackEntity(var1.getHandle());
+        this.b.getCanaryDimension().getEntityTracker().untrackEntity(var1.getCanaryEntity());
     }
 
     public void a(String var1, double var2, double var4, double var6, float var8, float var9) {

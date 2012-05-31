@@ -24,13 +24,13 @@ import net.minecraft.server.OWorldServer;
 
 public class OChunkProviderServer implements OIChunkProvider {
 
-    private Set b = new HashSet();
+    public Set<Long> b = new HashSet<Long>(); //CanaryMod private -> public, parameterized
     private OChunk c;
-    private OIChunkProvider d;
-    private OIChunkLoader e;
+    public OIChunkProvider d; //CanaryMod private -> public
+    public OIChunkLoader e; //CanaryMod private -> public
     public boolean a = false;
-    private OLongHashMap f = new OLongHashMap();
-    private List g = new ArrayList();
+    public OLongHashMap f = new OLongHashMap(); //CanaryMod private -> public
+    public List<OChunk> g = new ArrayList<OChunk>(); //CanaryMod private -> public, parameterized
     private OWorldServer h;
     
     //CanaryMod start
@@ -72,10 +72,10 @@ public class OChunkProviderServer implements OIChunkProvider {
     }
 
     public void c() {
-        Iterator var1 = this.g.iterator();
+        Iterator<OChunk> var1 = this.g.iterator();
 
         while (var1.hasNext()) {
-            OChunk var2 = (OChunk) var1.next();
+            OChunk var2 = var1.next();
             this.d(var2.g, var2.h);
         }
 
@@ -137,7 +137,8 @@ public class OChunkProviderServer implements OIChunkProvider {
         }
     }
 
-    private void a(OChunk var1) {
+    //CanaryMod private -> public
+    public void a(OChunk var1) {
         if (this.e != null) {
             try {
                 this.e.b(this.h, var1);
@@ -148,7 +149,8 @@ public class OChunkProviderServer implements OIChunkProvider {
         }
     }
 
-    private void b(OChunk var1) throws IOException {
+    //CanaryMod private -> public
+    public void b(OChunk var1) throws IOException {
         if (this.e != null) {
             var1.n = this.h.o();
             this.e.a(this.h, var1);
@@ -179,7 +181,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         // CanaryMod end
         
         for (int var4 = 0; var4 < this.g.size(); ++var4) {
-            OChunk var5 = (OChunk) this.g.get(var4);
+            OChunk var5 = this.g.get(var4);
             if (var1) {
                 this.a(var5);
             }
@@ -209,7 +211,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         if (!this.h.I) {
             for (int var1 = 0; var1 < 100; ++var1) {
                 if (!this.b.isEmpty()) {
-                    Long var2 = (Long) this.b.iterator().next();
+                    Long var2 = this.b.iterator().next();
                     OChunk var3 = (OChunk) this.f.a(var2.longValue());
                     var3.d();
                     this.b(var3);
