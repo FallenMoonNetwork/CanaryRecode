@@ -108,7 +108,7 @@ public class ORConThreadMain extends ORConThreadBase {
 
     public void a() {
         if (0 == this.k.length()) {
-            this.c("No rcon password set in \'" + this.b.e() + "\', rcon disabled!");
+            this.c("No rcon password set in \'" + Configuration.getNetConfig().getFile().getPath() + "\', rcon disabled!");
         } else if (0 < this.g && '\uffff' >= this.g) {
             if (!this.a) {
                 try {

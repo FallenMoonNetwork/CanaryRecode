@@ -76,9 +76,9 @@ public class OServerConfigurationManager {
         //this.m = var1.a("white-list.txt");
         int var2 = Configuration.getNetConfig().getViewDistance();
         // Creates player managers per dimension (MW: create one per dimension per world)
-//        this.d[0] = new OPlayerManager(var1, 0, var2);
-//        this.d[1] = new OPlayerManager(var1, -1, var2);
-//        this.d[2] = new OPlayerManager(var1, 1, var2);
+        // this.d[0] = new OPlayerManager(var1, 0, var2);
+        // this.d[1] = new OPlayerManager(var1, -1, var2);
+        // this.d[2] = new OPlayerManager(var1, 1, var2);
         this.e = Configuration.getNetConfig().getMaxPlayers();
         // CanaryMod: disable vanilla whitelisting
         this.o = false;

@@ -8,6 +8,7 @@ import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.WorldManager;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.ConsoleCommandHook;
 import net.minecraft.server.OMinecraftServer;
 
@@ -33,7 +34,7 @@ public class CanaryServer implements Server {
     }
 
     public String getHostname() {
-        return "localhost"; // Is that really localhost?
+        return "localhost"; // Is that really localhost? Jos: no, just had to put something there
     }
 
     public int getNumPlayersOnline() {
@@ -41,7 +42,7 @@ public class CanaryServer implements Server {
     }
 
     public int getMaxPlayers() {
-        return server.getCanaryConfigurationManager().getMaxPlayers();
+        return Configuration.getNetConfig().getMaxPlayers();
     }
 
     public String[] getPlayerNameList() {
@@ -54,7 +55,7 @@ public class CanaryServer implements Server {
     }
 
     public String getDefaultWorldName() {
-        return "world"; // TODO: Retrieve default world name from config! - it's world by default in mc cfg
+        return Configuration.getServerConfig().getDefaultWorldName();
     }
 
     public WorldManager getWorldManager() {
