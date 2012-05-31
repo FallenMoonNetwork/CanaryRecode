@@ -28,6 +28,8 @@ import net.canarymod.api.world.CanaryWorldManager;
 import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.Dimension.Type;
 import net.canarymod.api.world.World;
+import net.canarymod.config.Configuration;
+import net.canarymod.config.WorldConfiguration;
 import net.minecraft.server.OAnvilSaveConverter;
 import net.minecraft.server.OAnvilSaveHandler;
 import net.minecraft.server.OAxisAlignedBB;
@@ -154,18 +156,19 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         OConsoleLogManager.a();
         a.info("Starting minecraft server version 1.2.5");
         if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
-            a.warning("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
+            a.warning("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar CanaryMod.jar\"");
         }
 
         a.info("Loading properties");
         // CanaryMod start: Change configurations
-        this.d = new OPropertyManager(new File("server.properties"));
+        WorldConfiguration defWorld = Configuration.getWorldConfig(Configuration.getServerConfig().getDefaultWorldName());
+        //this.d = new OPropertyManager(new File("server.properties"));
         this.y = Configuration.getNetConfig().getBindIp();
         this.n = Configuration.getNetConfig().isOnlineMode();
-        this.o = this.d.a("spawn-animals", true); // MW
-        this.p = this.d.a("spawn-npcs", true); // MW
-        this.q = this.d.a("pvp", true); // MW
-        this.r = this.d.a("allow-flight", false); // MW
+        this.o = defWorld.canSpawnAnimals();
+        this.p = defWorld.canSpawnNpcs();
+        this.q = defWorld.isPvpEnabled();
+        this.r = defWorld.isFlightAllowed();
         this.s = Configuration.getServerConfig().getMotd();
         this.s.replace('\u00a7', '$');
         InetAddress var2 = null;
@@ -190,7 +193,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             a.warning("**** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!");
             a.warning("The server will make no attempt to authenticate usernames. Beware.");
             a.warning("While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.");
-            a.warning("To change this, set \"online-mode\" to \"true\" in the server.settings file.");
+            a.warning("To change this, set \"online-mode\" to \"true\" in the config/server.cfg file.");
         }
 
         this.h = new OServerConfigurationManager(this);
@@ -201,9 +204,9 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
       //CanaryMod end
         
         long var4 = System.nanoTime();
-        String var6 = this.d.a("level-name", "world"); // MW
-        String var7 = this.d.a("level-seed", ""); // MW
-        String var8 = this.d.a("level-type", "DEFAULT"); // MW
+        String var6 = defWorld.getWorldName();
+        String var7 = defWorld.getWorldSeed();
+        String var8 = defWorld.getWorldType();
         long var9 = (new Random()).nextLong();
         if (var7.length() > 0) {
             try {
@@ -221,10 +224,11 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             var13 = OWorldType.b;
         }
 
-        this.t = this.d.a("max-build-height", 256); // MW
+        this.t = defWorld.getMaxBuildHeight();
         this.t = (this.t + 8) / 16 * 16;
         this.t = OMathHelper.a(this.t, 64, 256);
-        this.d.a("max-build-height", Integer.valueOf(this.t)); // MW
+        defWorld.getFile().setInt("max-build-height",this.t);
+
         a.info("Preparing level \"" + var6 + "\"");
         this.initWorld(new OAnvilSaveConverter(new File(".")), var6, var9, var13);
         long var14 = System.nanoTime() - var4;
@@ -264,12 +268,15 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         }
         OWorldServer[] toLoad = new OWorldServer[3];
         
+        // CanaryMod: custom world configuration
+        WorldConfiguration config = Configuration.getWorldConfig(var2);
+        
 //        this.worldServer = new OWorldServer[3];
 //        this.g = new long[this.worldServer.length][100]; //CanaryMod Moved to CanaryWorld<init>
-        int var6 = this.d.a("gamemode", 0); // MW
+        int var6 = config.getGameMode();
         var6 = OWorldSettings.a(var6);
         a.info("Default game type: " + var6);
-        boolean var7 = this.d.a("generate-structures", true); // MW
+        boolean var7 = config.generatesStructures();
         OWorldSettings var8 = new OWorldSettings(var3, var6, var7, false, var5);
         OAnvilSaveHandler var9 = new OAnvilSaveHandler(new File("."), var2, true);
 
@@ -291,8 +298,8 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             }
 
             toLoad[var10].a(new OWorldManager(this, toLoad[var10]));
-            toLoad[var10].q = this.d.a("difficulty", 1); // get int property
-            toLoad[var10].a(this.d.a("spawn-monsters", true), this.o); // get boolean property
+            toLoad[var10].q = config.getDifficulty();
+            toLoad[var10].a(config.canSpawnMonsters(), this.o);
             toLoad[var10].s().d(var6);
         }
         CanaryWorld world = new CanaryWorld(var2, toLoad);
@@ -580,7 +587,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             long var7 = System.nanoTime();
             Dimension[] level = canaryWorld.getDimensions();
             for(var11 = 0; var11 < level.length; ++var11) {
-                if (var11 == 0 || this.d.a("allow-nether", true)) {
+                if (var11 == 0 || Configuration.getWorldConfig(canaryWorld.getName()).isNetherAllowed()) {
                     OWorldServer var9 = (OWorldServer) ((CanaryDimension)level[var11]).getHandle();
                     if (this.j % 20 == 0) {
                         for(Player p : cfgManager.getAllPlayers()) {
@@ -752,7 +759,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     }
 
     public String m() {
-        return this.d.a("level-name", "world"); // MW
+        return Configuration.getServerConfig().getDefaultWorldName();
     }
 
     public String n() {

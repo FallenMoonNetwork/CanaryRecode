@@ -60,7 +60,7 @@ public class ORConThreadQuery extends ORConThreadBase {
                 InetAddress var2 = InetAddress.getLocalHost();
                 this.q = var2.getHostAddress();
             } catch (UnknownHostException var3) {
-                this.c("Unable to determine local host IP, please set server-ip in \'" + var1.e() + "\' : " + var3.getMessage());
+                this.c("Unable to determine local host IP, please set server-ip in \'" + Configuration.getNetConfig().getFile().getPath() + "\' : " + var3.getMessage());
             }
         }
 
@@ -266,7 +266,7 @@ public class ORConThreadQuery extends ORConThreadBase {
                 }
 
             } else {
-                this.c("Invalid query port " + this.h + " found in \'" + this.b.e() + "\' (queries disabled)");
+                this.c("Invalid query port " + this.h + " found in \'" + Configuration.getNetConfig().getFile().getPath() + "\' (queries disabled)");
             }
         }
     }

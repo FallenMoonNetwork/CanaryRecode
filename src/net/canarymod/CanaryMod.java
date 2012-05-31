@@ -1,7 +1,5 @@
 package net.canarymod;
 
-//import java.util.logging.Logger;
-
 import net.canarymod.backbone.Backbone;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.HookExecutor;
@@ -14,8 +12,6 @@ import net.canarymod.plugin.PluginLoader;
  * @author Jos Kuijpers
  */
 public class CanaryMod extends Canary {
-
-//    private static final Logger log = Logger.getLogger("Minecraft");
     
     /**
      * Creates a new CanaryMod
