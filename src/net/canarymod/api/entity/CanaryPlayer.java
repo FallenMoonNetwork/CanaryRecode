@@ -34,7 +34,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public CanaryPlayer(OEntityPlayerMP entity) {
         super(entity);
 //        group = Canary.groups().getGroup("something"); //TODO: add proper player to group
-        permissions = null; //TODO: get permissions specifically for this player
+        permissions = null; //TODO: get permissions specifically for this player CanaryServer
     }
 
     /**
@@ -196,9 +196,13 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public boolean executeCommand(String[] command) {
         try {
-            String[] split = command;
-            String cmd = split[0];
-            PlayerCommandHook hook = (PlayerCommandHook) Canary.hooks().callCancelableHook(new PlayerCommandHook(this, split));
+            String cmd = command[0];
+            if (cmd.startsWith("/#") && hasPermission("canary.commands.vanilla."+cmd.replace("/#", ""))) {
+                Canary.getServer().consoleCommand(Canary.glueString(command, 0, " ").replace("/#", ""), this);
+                return true;
+            }
+            
+            PlayerCommandHook hook = (PlayerCommandHook) Canary.hooks().callCancelableHook(new PlayerCommandHook(this, command));
             if (hook.isCancelled()) {
                 return true;
             } // No need to go on, commands were parsed.
@@ -207,13 +211,6 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 sendMessage(TextFormat.Rose + "Unknown command.");
                 return false;
             }
-            if (cmd.startsWith("/#") && hasPermission("canary.commands.vanilla."+cmd.replace("/#", ""))) {
-
-                Logman.logInfo(getName() + " issued server command: " + cmd);
-                Canary.getServer().consoleCommand(Canary.glueString(command, 1, " "), this);
-                return true;
-            }
-
             //TODO: Add native Canary Commands here!
             return true;
             
@@ -246,8 +243,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void sendPacket(Packet packet) {
-        // TODO Auto-generated method stub
-        
+        getDimension().getEntityTracker().sendPacketToTrackedPlayer(this, packet);
     }
 
     @Override
@@ -288,44 +284,44 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean hasPermission(String permission) {
-        if(!group.hasPermission(permission)) {
-            return permissions.queryPermission(permission);
-        }
+//        if(!group.hasPermission(permission)) {
+//            return permissions.queryPermission(permission);
+//        }
         return true;
     }
 
     @Override
     public boolean isAdmin() {
-        if(!group.isAdministratorGroup()) {
-            return permissions.queryPermission("canary.player.administrator");
+//        if(!group.isAdministratorGroup()) {
+//            return permissions.queryPermission("canary.player.administrator");
+//        }
+        return true;
+    }
+
+    @Override
+    public boolean canBuild() {
+        if(!group.canBuild()) {
+            return permissions.queryPermission("canary.world.build");
         }
         return true;
     }
 
     @Override
-    public boolean canModifyWorld() {
-        if(!group.canModifyWorld()) {
-            return permissions.queryPermission("canary.player.canModifyWorld");
-        }
-        return true;
-    }
-
-    @Override
-    public void setCanModifyWorld(boolean canModify) {
-        permissions.addPermission("canary.player.canModifyWorld", canModify, canModify);
+    public void setCanBuild(boolean canModify) {
+        permissions.addPermission("canary.world.build", canModify, canModify);
     }
 
     @Override
     public boolean canIgnoreRestrictions() {
         if(!group.canIgnorerestrictions()) {
-            return permissions.queryPermission("canary.player.canIgnoreRestrictions");
+            return permissions.queryPermission("canary.player.ignoreRestrictions");
         }
         return true;
     }
 
     @Override
     public void setCanIgnoreRestrictions(boolean canIgnore) {
-        permissions.addPermission("canary.player.canIgnoreRestrictions", canIgnore, canIgnore);
+        permissions.addPermission("canary.player.ignoreRestrictions", canIgnore, canIgnore);
     }
 
     @Override

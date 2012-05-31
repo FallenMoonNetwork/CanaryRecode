@@ -4,14 +4,16 @@ import net.minecraft.server.OChunk;
 
 public class CanaryChunk implements Chunk {
     OChunk handle;
-    
+    CanaryChunkProviderServer chunkProvider;
+
     public CanaryChunk(OChunk chunk) {
         this.handle = chunk;
     }
-    
+
     public OChunk getHandle() {
         return handle;
     }
+
     @Override
     public int getX() {
         return handle.g;
@@ -29,9 +31,9 @@ public class CanaryChunk implements Chunk {
 
     @Override
     public void setBlockTypeAt(int x, int y, int z, int type) {
-    	// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
     }
-    
+
     @Override
     public int getBlockDataAt(int x, int y, int z) {
         return handle.c(x, y, z);
@@ -39,42 +41,23 @@ public class CanaryChunk implements Chunk {
 
     @Override
     public void setBlockDataAt(int x, int y, int z, int data) {
-    	// TODO Auto-generated method stub
+        handle.b(x, y, z, data);
     }
-    
+
     @Override
     public int getMaxHeigth() {
-    	return 256; // TODO: configurable
+        return 256; // TODO: configurable //Chris: Really?
     }
-    
+
     @Override
     public boolean isLoaded() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean load() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean reload() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean unload() {
-        // TODO Auto-generated method stub
-        return false;
+        return handle.d;
     }
 
     @Override
     public boolean regenerateChunk() {
         // TODO Auto-generated method stub
-    	return false;
+        return false;
     }
 
     @Override
@@ -92,8 +75,8 @@ public class CanaryChunk implements Chunk {
     public BiomeType[] getBiomeData() {
         byte[] data = handle.l();
         BiomeType[] typedata = new BiomeType[256];
-        for(int index = 0; index < 256; index++){
-            if(data[index] < 0 || data[index] > 22){
+        for (int index = 0; index < 256; index++) {
+            if (data[index] < 0 || data[index] > 22) {
                 typedata[index] = BiomeType.OCEAN;
                 continue;
             }
@@ -104,13 +87,13 @@ public class CanaryChunk implements Chunk {
 
     @Override
     public void setBiomeData(BiomeType[] type) {
-        if(type.length != 256){
+        if (type.length != 256) {
             return;
         }
         byte[] data = new byte[256];
-        for(int index = 0; index < 256; index++){
-            if(type[index] == null){
-                data[index] = (byte)0;
+        for (int index = 0; index < 256; index++) {
+            if (type[index] == null) {
+                data[index] = (byte) 0;
                 continue;
             }
             data[index] = type[index].getId();
@@ -120,12 +103,12 @@ public class CanaryChunk implements Chunk {
 
     @Override
     public void setBiomeData(byte[] data) {
-        if(data.length != 256){
+        if (data.length != 256) {
             return;
         }
-        for(byte check : data){
-            if(check < 0 || check > 22){
-                check = (byte)0;
+        for (byte check : data) {
+            if (check < 0 || check > 22) {
+                check = (byte) 0;
             }
         }
         handle.a(data);

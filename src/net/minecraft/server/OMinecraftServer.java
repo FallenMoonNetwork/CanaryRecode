@@ -15,10 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.canarymod.Canary;
-import net.canarymod.CanaryMod;
 import net.canarymod.CanaryServer;
 import net.canarymod.api.CanaryConfigurationManager;
-import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.EntityTracker;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
@@ -28,6 +26,7 @@ import net.canarymod.api.world.CanaryWorldManager;
 import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.Dimension.Type;
 import net.canarymod.api.world.World;
+import net.canarymod.config.Configuration;
 import net.minecraft.server.OAnvilSaveConverter;
 import net.minecraft.server.OAnvilSaveHandler;
 import net.minecraft.server.OAxisAlignedBB;

@@ -23,6 +23,7 @@ import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.World;
+import net.canarymod.config.Configuration;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;

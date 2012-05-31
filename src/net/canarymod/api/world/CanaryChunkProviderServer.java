@@ -24,12 +24,12 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
 
     @Override
     public Chunk loadChunk(int x, int z) {
-        return this.handle.c(x >> 4, z >> 4).getHandler();
+        return this.handle.c(x >> 4, z >> 4).getCanaryChunk();
     }
 
     @Override
     public Chunk provideChunk(int x, int z) {
-        return this.handle.b(x, z).getHandler();
+        return this.handle.b(x, z).getCanaryChunk();
     }
 
     @Override
@@ -52,6 +52,17 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
         } catch (IOException e) {
             
         }
+    }
+
+    @Override
+    public void reloadChunk(int x, int z) {
+        dropChunk(x,z);
+        loadChunk(x, z);
+    }
+
+    @Override
+    public void dropChunk(int x, int z) {
+        handle.d(x >> 4, z >> 4);
     }
 
 }

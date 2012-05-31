@@ -68,6 +68,7 @@ public class CanaryServer implements Server {
         if (hook.isCancelled()) {
             return;
         }
+        Logman.logInfo("Console issued server command: " + command);
         server.a(command, server);
     }
 
@@ -78,7 +79,8 @@ public class CanaryServer implements Server {
         if (hook.isCancelled()) {
             return;
         }
-        server.a(command, player);
+        Logman.logInfo(player.getName() + " issued server command: " + command);
+        server.a(command, ((CanaryPlayer) player).getHandle().a);
     }
 
     @SuppressWarnings("unchecked")

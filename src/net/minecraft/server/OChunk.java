@@ -50,7 +50,7 @@ public class OChunk {
     boolean p;
     
     //CanaryMod Chunk handler
-    private CanaryChunk handler;
+    private CanaryChunk canaryChunk;
 
     public OChunk(OWorld var1, int var2, int var3) {
         super();
@@ -104,8 +104,8 @@ public class OChunk {
     }
     
     //CanaryMod start
-    public CanaryChunk getHandler() {
-        return handler;
+    public CanaryChunk getCanaryChunk() {
+        return canaryChunk;
     }
     //CanaryMod end
 

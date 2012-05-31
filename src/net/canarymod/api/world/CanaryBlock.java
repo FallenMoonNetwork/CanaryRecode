@@ -1,5 +1,6 @@
 package net.canarymod.api.world;
 
+import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.Block;
 
@@ -8,6 +9,7 @@ public class CanaryBlock implements Block {
     protected byte data;
     protected int x,y,z;
     protected Dimension dimension;
+    protected BlockFace faceClicked;
     
     public CanaryBlock(int x, int y, int z) {
         this.x = x;
@@ -15,7 +17,7 @@ public class CanaryBlock implements Block {
         this.z = z;
         this.type=0;
         this.data=0;
-        dimension=null; //TODO: get default world
+        dimension= Canary.getServer().getDefaultWorld().getNormal();
     }
     
     public CanaryBlock(short type, byte data) {
@@ -24,7 +26,7 @@ public class CanaryBlock implements Block {
         this.z = 0;
         this.type = type;
         this.data = data;
-        dimension = null; //TODO: get default world
+        dimension = Canary.getServer().getDefaultWorld().getNormal();
     }
     
     public CanaryBlock(short type, byte data, int x, int y, int z) {
@@ -33,7 +35,7 @@ public class CanaryBlock implements Block {
         this.z = z;
         this.type = type;
         this.data = data;
-        dimension = null; //TODO: get default world
+        dimension = Canary.getServer().getDefaultWorld().getNormal();
     }
     
     public CanaryBlock(short type, byte data, int x, int y, int z, Dimension dimension) {
@@ -79,13 +81,12 @@ public class CanaryBlock implements Block {
 
     @Override
     public BlockFace getFaceClicked() {
-        // TODO Auto-generated method stub
-        return null;
+        return faceClicked;
     }
 
     @Override
     public void setFaceClicked(BlockFace face) {
-        // TODO Auto-generated method stub
+        faceClicked = face;
     }
 
     @Override
@@ -107,6 +108,21 @@ public class CanaryBlock implements Block {
     @Override
     public int getZ() {
         return z;
+    }
+
+    @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    @Override
+    public void setZ(int z) {
+        this.z = z;
     }
 
 }
