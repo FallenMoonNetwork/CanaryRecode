@@ -1,7 +1,5 @@
 package net.canarymod;
 
-
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.minecraft.server.OMinecraftServer;
@@ -13,12 +11,13 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        Bootstrapper.init(new CanaryMod());
+        //Initialize the bird
+        Canary.setCanary(new CanaryMod());
         
         try {
             OMinecraftServer.main(args);
         } catch (Throwable t) {
-            log.log(Level.SEVERE, null, t);
+            Logman.logStackTrace("Exception while starting the server: ", t);
         }
         new DeadLockDetector();
     }
