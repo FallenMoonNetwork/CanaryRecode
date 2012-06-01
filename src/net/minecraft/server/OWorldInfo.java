@@ -20,10 +20,10 @@ public class OWorldInfo {
     private int j;
     private String k;
     private int l;
-    private boolean m;
-    private int n;
-    private boolean o;
-    private int p;
+    private boolean isRaining;
+    private int rainTimeTicks;
+    private boolean isThundering;
+    private int thunderTimeTicks;
     private int q;
     private boolean r;
     private boolean s;
@@ -63,10 +63,10 @@ public class OWorldInfo {
         this.h = var1.g("SizeOnDisk");
         this.k = var1.j("LevelName");
         this.l = var1.f("version");
-        this.n = var1.f("rainTime");
-        this.m = var1.o("raining");
-        this.p = var1.f("thunderTime");
-        this.o = var1.o("thundering");
+        this.rainTimeTicks = var1.f("rainTime");
+        this.isRaining = var1.o("raining");
+        this.thunderTimeTicks = var1.f("thunderTime");
+        this.isThundering = var1.o("thundering");
         this.s = var1.o("hardcore");
         if (var1.c("Player")) {
             this.i = var1.m("Player");
@@ -105,10 +105,10 @@ public class OWorldInfo {
         this.j = var1.j;
         this.k = var1.k;
         this.l = var1.l;
-        this.n = var1.n;
-        this.m = var1.m;
-        this.p = var1.p;
-        this.o = var1.o;
+        this.rainTimeTicks = var1.rainTimeTicks;
+        this.isRaining = var1.isRaining;
+        this.thunderTimeTicks = var1.thunderTimeTicks;
+        this.isThundering = var1.isThundering;
         this.s = var1.s;
     }
 
@@ -149,10 +149,10 @@ public class OWorldInfo {
         var1.a("LastPlayed", System.currentTimeMillis());
         var1.a("LevelName", this.k);
         var1.a("version", this.l);
-        var1.a("rainTime", this.n);
-        var1.a("raining", this.m);
-        var1.a("thunderTime", this.p);
-        var1.a("thundering", this.o);
+        var1.a("rainTime", this.rainTimeTicks);
+        var1.a("raining", this.isRaining);
+        var1.a("thunderTime", this.thunderTimeTicks);
+        var1.a("thundering", this.isThundering);
         var1.a("hardcore", this.s);
         if (var2 != null) {
             var1.a("Player", var2);
@@ -206,36 +206,36 @@ public class OWorldInfo {
         this.l = var1;
     }
 
-    public boolean i() {
-        return this.o;
+    public boolean isThundering() {
+        return this.isThundering;
     }
 
-    public void a(boolean var1) {
-        this.o = var1;
+    public void setThundering(boolean var1) {
+        this.isThundering = var1;
     }
 
-    public int j() {
-        return this.p;
+    public int getThunderTimeTicks() {
+        return this.thunderTimeTicks;
     }
 
-    public void b(int var1) {
-        this.p = var1;
+    public void setThunderTimeTicks(int var1) {
+        this.thunderTimeTicks = var1;
     }
 
-    public boolean k() {
-        return this.m;
+    public boolean isRaining() {
+        return this.isRaining;
     }
 
-    public void b(boolean var1) {
-        this.m = var1;
+    public void setRaining(boolean var1) {
+        this.isRaining = var1;
     }
 
-    public int l() {
-        return this.n;
+    public int getRainTimeTicks() {
+        return this.rainTimeTicks;
     }
 
-    public void c(int var1) {
-        this.n = var1;
+    public void setRainTimeTicks(int var1) {
+        this.rainTimeTicks = var1;
     }
 
     public int m() {

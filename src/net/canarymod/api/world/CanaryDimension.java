@@ -7,19 +7,44 @@ import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.EntityTracker;
 import net.canarymod.api.Particle;
 import net.canarymod.api.PlayerManager;
+import net.canarymod.api.entity.CanaryBlaze;
+import net.canarymod.api.entity.CanaryCreeper;
+import net.canarymod.api.entity.CanaryEnderman;
 import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.CanaryGhast;
+import net.canarymod.api.entity.CanaryGiantZombie;
+import net.canarymod.api.entity.CanaryLavaSlime;
+import net.canarymod.api.entity.CanaryPigZombie;
+import net.canarymod.api.entity.CanarySilverfish;
+import net.canarymod.api.entity.CanarySkeleton;
+import net.canarymod.api.entity.CanarySlime;
+import net.canarymod.api.entity.CanarySpider;
+import net.canarymod.api.entity.CanaryZombie;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityAnimal;
 import net.canarymod.api.entity.EntityItem;
 import net.canarymod.api.entity.EntityMob;
+import net.canarymod.api.entity.EntityMob.MobType;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
+import net.minecraft.server.OEntityBlaze;
+import net.minecraft.server.OEntityCreeper;
+import net.minecraft.server.OEntityEnderman;
+import net.minecraft.server.OEntityGhast;
+import net.minecraft.server.OEntityGiantZombie;
 import net.minecraft.server.OEntityItem;
+import net.minecraft.server.OEntityLavaSlime;
+import net.minecraft.server.OEntityPigZombie;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
+import net.minecraft.server.OEntitySilverfish;
+import net.minecraft.server.OEntitySkeleton;
+import net.minecraft.server.OEntitySlime;
+import net.minecraft.server.OEntitySpider;
+import net.minecraft.server.OEntityZombie;
 import net.minecraft.server.OEnumSkyBlock;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
@@ -194,12 +219,12 @@ public class CanaryDimension implements Dimension {
     }
 
     @Override
-    public boolean isChunkLoaded(int x, int y, int z) {
+    public boolean isChunkLoaded(int x, int y, int z) { //TODO: remove?
         return chunkProvider.isChunkLoaded(x, z);
     }
 
     @Override
-    public boolean isChunkLoaded(int x, int z) { //TODO: remove?
+    public boolean isChunkLoaded(int x, int z) { 
         return chunkProvider.isChunkLoaded(x, z);
     }
 
@@ -279,6 +304,16 @@ public class CanaryDimension implements Dimension {
     public Chunk loadChunk(Vector3D vec3d) {
         return chunkProvider.loadChunk((int)vec3d.getX(), (int)vec3d.getZ());
     }
+    
+    @Override
+    public Chunk getChunk(int x, int z) {
+        if (isChunkLoaded(x, z)) {
+            return chunkProvider.provideChunk(x, z);
+        } 
+        else {
+            return null;
+        }
+    }
 
     public OWorld getHandle() {
         return world;
@@ -307,5 +342,128 @@ public class CanaryDimension implements Dimension {
     @Override
     public void spawnParticle(Particle particle) {
         world.a(particle.type.getMcName(), particle.x, particle.y, particle.z, particle.velocityX, particle.velocityY, particle.velocityZ);
+    }
+
+    @Override
+    public EntityMob createMob(MobType mobtype) {
+        switch(mobtype) {
+        case BLAZE:
+            return new CanaryBlaze(new OEntityBlaze(getHandle()));
+        case CREEPER:
+            return new CanaryCreeper(new OEntityCreeper(getHandle()));
+        case ENDERMAN:
+            return new CanaryEnderman(new OEntityEnderman(getHandle()));
+        case GHAST:
+            return new CanaryGhast(new OEntityGhast(getHandle()));
+        case GIANTZOMBIE:
+            return new CanaryGiantZombie(new OEntityGiantZombie(getHandle()));
+        case LAVASLIME:
+            return new CanaryLavaSlime(new OEntityLavaSlime(getHandle()));
+        case PIGZOMBIE:
+            return new CanaryPigZombie(new OEntityPigZombie(getHandle()));
+        case SILVERFISH:
+            return new CanarySilverfish(new OEntitySilverfish(getHandle()));
+        case SKELETON:
+            return new CanarySkeleton(new OEntitySkeleton(getHandle()));
+        case SLIME:
+            return new CanarySlime(new OEntitySlime(getHandle()));
+        case SPIDER:
+            return new CanarySpider(new OEntitySpider(getHandle()));
+        case ZOMBIE:
+            return new CanaryZombie(new OEntityZombie   (getHandle()));
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isBlockPowered(Block block) {
+        return isBlockPowered(block.getX(), block.getY(), block.getZ());
+    }
+
+    @Override
+    public boolean isBlockPowered(Vector3D position) {
+        return isBlockPowered((int)position.getX(), (int)position.getY(), (int)position.getZ());
+    }
+
+    @Override
+    public boolean isBlockPowered(int x, int y, int z) {
+        return world.w(x, y, z);
+    }
+
+    @Override
+    public boolean isBlockIndirectlyPowered(Block block) {
+        return isBlockIndirectlyPowered(block.getX(), block.getY(), block.getZ());
+    }
+
+    @Override
+    public boolean isBlockIndirectlyPowered(Vector3D position) {
+        return isBlockIndirectlyPowered((int)position.getX(), (int)position.getY(), (int)position.getZ());
+    }
+
+    @Override
+    public boolean isBlockIndirectlyPowered(int x, int y, int z) {
+        return world.x(x, y, z);
+    }
+
+    @Override
+    public void setThundering(boolean thundering) {
+        //TODO: add thunder_change hook here?
+        world.worldInfo.setThundering(thundering);
+
+        // Thanks to Bukkit for figuring out these numbers
+        if (thundering) {
+            setThunderTime(world.r.nextInt(12000) + 3600);
+        } else {
+            setThunderTime(world.r.nextInt(168000) + 12000);
+        }
+        
+    }
+
+    @Override
+    public void setThunderTime(int ticks) {
+        world.worldInfo.setThunderTimeTicks(ticks);
+    }
+
+    @Override
+    public void setRaining(boolean downfall) {
+        //TODO: Add weather change hook
+        world.worldInfo.setRaining(downfall);
+
+        // Thanks to Bukkit for figuring out these numbers
+        if (downfall) {
+            setRainTime(world.r.nextInt(12000) + 3600);
+        } else {
+            setRainTime(world.r.nextInt(168000) + 12000);
+        }
+    }
+
+    @Override
+    public void setRainTime(int ticks) {
+        world.worldInfo.setRainTimeTicks(ticks);
+    }
+
+    @Override
+    public boolean isRaining() {
+        return world.worldInfo.isRaining();
+    }
+
+    @Override
+    public boolean isThundering() {
+        return world.worldInfo.isThundering();
+    }
+
+    @Override
+    public int getRainTicks() {
+        return world.worldInfo.getRainTimeTicks();
+    }
+
+    @Override
+    public int getThunderTicks() {
+        return world.worldInfo.getThunderTimeTicks();
+    }
+
+    @Override
+    public long getWorldSeed() {
+        return world.n();
     }
 }

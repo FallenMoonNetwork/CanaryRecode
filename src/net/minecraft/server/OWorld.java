@@ -88,7 +88,7 @@ public class OWorld implements OIBlockAccess {
     protected List u = new ArrayList();
     protected OIChunkProvider v;
     protected final OISaveHandler w;
-    protected OWorldInfo x;
+    public OWorldInfo worldInfo; //CanaryMod protected -> public, renamed x -> worldInfo
     public boolean y;
     private boolean N;
     public OMapStorage z;
@@ -164,22 +164,22 @@ public class OWorld implements OIBlockAccess {
         this.F = false;
         this.w = var1;
         this.z = new OMapStorage(var1);
-        this.x = var1.c();
-        this.s = this.x == null;
+        this.worldInfo = var1.c();
+        this.s = this.worldInfo == null;
         if (var4 != null) {
             this.t = var4;
-        } else if (this.x != null && this.x.g() != 0) {
-            this.t = OWorldProvider.a(this.x.g());
+        } else if (this.worldInfo != null && this.worldInfo.g() != 0) {
+            this.t = OWorldProvider.a(this.worldInfo.g());
         } else {
             this.t = OWorldProvider.a(0);
         }
 
         boolean var5 = false;
-        if (this.x == null) {
-            this.x = new OWorldInfo(var3, var2);
+        if (this.worldInfo == null) {
+            this.worldInfo = new OWorldInfo(var3, var2);
             var5 = true;
         } else {
-            this.x.a(var2);
+            this.worldInfo.a(var2);
         }
 
         this.t.a(this);
@@ -199,7 +199,7 @@ public class OWorld implements OIBlockAccess {
 
     protected void c() {
         if (!this.t.c()) {
-            this.x.a(0, this.t.f(), 0);
+            this.worldInfo.a(0, this.t.f(), 0);
         } else {
             this.y = true;
             OWorldChunkManager var1 = this.t.c;
@@ -227,7 +227,7 @@ public class OWorld implements OIBlockAccess {
                 }
             }
 
-            this.x.a(var5, var6, var7);
+            this.worldInfo.a(var5, var6, var7);
             this.y = false;
         }
     }
@@ -262,7 +262,7 @@ public class OWorld implements OIBlockAccess {
 
     private void A() {
         this.m();
-        this.w.a(this.x, this.d);
+        this.w.a(this.worldInfo, this.d);
         this.z.a();
     }
 
@@ -956,7 +956,7 @@ public class OWorld implements OIBlockAccess {
     }
 
     public float b(float var1) {
-        return this.t.a(this.x.f(), var1);
+        return this.t.a(this.worldInfo.f(), var1);
     }
 
     public int f(int var1, int var2) {
@@ -992,7 +992,7 @@ public class OWorld implements OIBlockAccess {
         } else {
             if (this.a(var1 - var7, var2 - var7, var3 - var7, var1 + var7, var2 + var7, var3 + var7)) {
                 if (var4 > 0) {
-                    var6.a(var5 + this.x.f());
+                    var6.a(var5 + this.worldInfo.f());
                 }
 
                 if (!this.I.contains(var6)) {
@@ -1007,7 +1007,7 @@ public class OWorld implements OIBlockAccess {
     public void d(int var1, int var2, int var3, int var4, int var5) {
         ONextTickListEntry var6 = new ONextTickListEntry(var1, var2, var3, var4);
         if (var4 > 0) {
-            var6.a(var5 + this.x.f());
+            var6.a(var5 + this.worldInfo.f());
         }
 
         if (!this.I.contains(var6)) {
@@ -1602,14 +1602,14 @@ public class OWorld implements OIBlockAccess {
             }
 
             if (!var1) {
-                var2 = this.x.f() + 24000L;
-                this.x.a(var2 - var2 % 24000L);
+                var2 = this.worldInfo.f() + 24000L;
+                this.worldInfo.a(var2 - var2 % 24000L);
                 this.u();
             }
         }
 
         OProfiler.a("mobSpawner");
-        OSpawnerAnimals.a(this, this.B, this.C && this.x.f() % 400L == 0L);
+        OSpawnerAnimals.a(this, this.B, this.C && this.worldInfo.f() % 400L == 0L);
         OProfiler.b("chunkSource");
         this.v.a();
         int var4 = this.a(1.0F);
@@ -1617,13 +1617,13 @@ public class OWorld implements OIBlockAccess {
             this.f = var4;
         }
 
-        var2 = this.x.f() + 1L;
+        var2 = this.worldInfo.f() + 1L;
         if (var2 % this.p == 0L) {
             OProfiler.b("save");
             this.a(false, (OIProgressUpdate) null);
         }
 
-        this.x.a(var2);
+        this.worldInfo.a(var2);
         OProfiler.b("tickPending");
         this.a(false);
         OProfiler.b("tickTiles");
@@ -1635,9 +1635,9 @@ public class OWorld implements OIBlockAccess {
     }
 
     private void B() {
-        if (this.x.k()) {
+        if (this.worldInfo.isRaining()) {
             this.j = 1.0F;
-            if (this.x.i()) {
+            if (this.worldInfo.isThundering()) {
                 this.l = 1.0F;
             }
         }
@@ -1650,38 +1650,38 @@ public class OWorld implements OIBlockAccess {
                 --this.m;
             }
 
-            int var1 = this.x.j();
+            int var1 = this.worldInfo.getThunderTimeTicks();
             if (var1 <= 0) {
-                if (this.x.i()) {
-                    this.x.b(this.r.nextInt(12000) + 3600);
+                if (this.worldInfo.isThundering()) {
+                    this.worldInfo.setThunderTimeTicks(this.r.nextInt(12000) + 3600);
                 } else {
-                    this.x.b(this.r.nextInt(168000) + 12000);
+                    this.worldInfo.setThunderTimeTicks(this.r.nextInt(168000) + 12000);
                 }
             } else {
                 --var1;
-                this.x.b(var1);
+                this.worldInfo.setThunderTimeTicks(var1);
                 if (var1 <= 0) {
-                    this.x.a(!this.x.i());
+                    this.worldInfo.setThundering(!this.worldInfo.isThundering());
                 }
             }
 
-            int var2 = this.x.l();
+            int var2 = this.worldInfo.getRainTimeTicks();
             if (var2 <= 0) {
-                if (this.x.k()) {
-                    this.x.c(this.r.nextInt(12000) + 12000);
+                if (this.worldInfo.isRaining()) {
+                    this.worldInfo.setRainTimeTicks(this.r.nextInt(12000) + 12000);
                 } else {
-                    this.x.c(this.r.nextInt(168000) + 12000);
+                    this.worldInfo.setRainTimeTicks(this.r.nextInt(168000) + 12000);
                 }
             } else {
                 --var2;
-                this.x.c(var2);
+                this.worldInfo.setRainTimeTicks(var2);
                 if (var2 <= 0) {
-                    this.x.b(!this.x.k());
+                    this.worldInfo.setRaining(!this.worldInfo.isRaining());
                 }
             }
 
             this.i = this.j;
-            if (this.x.k()) {
+            if (this.worldInfo.isRaining()) {
                 this.j = (float) (this.j + 0.01D);
             } else {
                 this.j = (float) (this.j - 0.01D);
@@ -1696,7 +1696,7 @@ public class OWorld implements OIBlockAccess {
             }
 
             this.k = this.l;
-            if (this.x.i()) {
+            if (this.worldInfo.isThundering()) {
                 this.l = (float) (this.l + 0.01D);
             } else {
                 this.l = (float) (this.l - 0.01D);
@@ -1714,14 +1714,14 @@ public class OWorld implements OIBlockAccess {
     }
 
     private void C() {
-        this.x.c(0);
-        this.x.b(false);
-        this.x.b(0);
-        this.x.a(false);
+        this.worldInfo.setRainTimeTicks(0);
+        this.worldInfo.setRaining(false);
+        this.worldInfo.setThunderTimeTicks(0);
+        this.worldInfo.setThundering(false);
     }
 
     public void j() {
-        this.x.c(1);
+        this.worldInfo.setRainTimeTicks(1);
     }
 
     protected void k() {
@@ -2185,7 +2185,7 @@ public class OWorld implements OIBlockAccess {
 
             for (int var3 = 0; var3 < var2; ++var3) {
                 ONextTickListEntry var4 = (ONextTickListEntry) this.H.first();
-                if (!var1 && var4.e > this.x.f()) {
+                if (!var1 && var4.e > this.worldInfo.f()) {
                     break;
                 }
 
@@ -2476,11 +2476,11 @@ public class OWorld implements OIBlockAccess {
     }
 
     public void a(long var1) {
-        this.x.a(var1);
+        this.worldInfo.a(var1);
     }
 
     public void b(long var1) {
-        long var3 = var1 - this.x.f();
+        long var3 = var1 - this.worldInfo.f();
 
         ONextTickListEntry var6;
         for (Iterator var5 = this.I.iterator(); var5.hasNext(); var6.e += var3) {
@@ -2491,15 +2491,15 @@ public class OWorld implements OIBlockAccess {
     }
 
     public long n() {
-        return this.x.b();
+        return this.worldInfo.b();
     }
 
     public long o() {
-        return this.x.f();
+        return this.worldInfo.f();
     }
 
     public OChunkCoordinates p() {
-        return new OChunkCoordinates(this.x.c(), this.x.d(), this.x.e());
+        return new OChunkCoordinates(this.worldInfo.c(), this.worldInfo.d(), this.worldInfo.e());
     }
 
     public boolean a(OEntityPlayer var1, int var2, int var3, int var4) {
@@ -2526,7 +2526,7 @@ public class OWorld implements OIBlockAccess {
     }
 
     public OWorldInfo s() {
-        return this.x;
+        return this.worldInfo;
     }
 
     public void t() {

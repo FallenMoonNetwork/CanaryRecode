@@ -91,8 +91,8 @@ public class OWorldServer extends OWorld {
     }
 
     public boolean a(OEntityPlayer var1, int var2, int var3, int var4) {
-        int var5 = OMathHelper.a(var2 - this.x.c());
-        int var6 = OMathHelper.a(var4 - this.x.e());
+        int var5 = OMathHelper.a(var2 - this.worldInfo.c());
+        int var6 = OMathHelper.a(var4 - this.worldInfo.e());
         if (var5 > var6) {
             var6 = var5;
         }

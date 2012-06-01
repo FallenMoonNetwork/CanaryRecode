@@ -2,6 +2,7 @@ package net.canarymod.api.entity;
 
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.DamageSource;
+import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityAnimal;
@@ -15,6 +16,7 @@ import net.minecraft.server.OEntitySquid;
 import net.minecraft.server.OEntityVillager;
 import net.minecraft.server.OIAnimals;
 import net.minecraft.server.OIMob;
+import net.minecraft.server.OWorld;
 
 /**
  * basic living entity wrapper class
@@ -187,5 +189,27 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     @Override
     public void setHomeRadius(int newRadius) { 
         setHomeArea(getHome(), newRadius);
+    }
+
+    @Override
+    public void spawn() {
+        spawn(null);
+    }
+
+    @Override
+    public void spawn(EntityLiving rider) {
+        OWorld world = ((CanaryDimension) getDimension()).getHandle();
+
+        entity.c(getX() + 0.5d, getY(), getZ() + 0.5d, getRotation(), 0f);
+        world.b(entity);
+
+        if (rider != null) {
+            OEntityLiving mob2 = (OEntityLiving) ((CanaryEntityLiving) rider).getHandle();
+
+            mob2.c(getX(), getY(), getZ(), getRotation(), 0f);
+            world.b(mob2);
+            mob2.b(entity);
+        }
+        
     }
 }
