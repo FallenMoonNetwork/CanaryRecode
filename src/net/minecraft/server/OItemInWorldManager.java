@@ -1,5 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.api.world.blocks.Block;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.player.LeftClickHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
@@ -140,6 +144,14 @@ public class OItemInWorldManager {
     }
 
     public boolean c(int var1, int var2, int var3) {
+        // CanaryMod - Cancel block breaking.
+        Block block = ((OEntityPlayerMP)b).getDimension().getBlockAt(var1, var2, var3);
+        block.setStatus(1);// Block break status.
+        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new LeftClickHook(((OEntityPlayerMP)b).getPlayer(), block));
+        if (hook.isCancelled()) {
+            return true;
+        }
+        // CanaryMod - end.
         int var4 = this.a.a(var1, var2, var3);
         int var5 = this.a.c(var1, var2, var3);
         this.a.a(this.b, 2001, var1, var2, var3, var4 + (this.a.c(var1, var2, var3) << 12));

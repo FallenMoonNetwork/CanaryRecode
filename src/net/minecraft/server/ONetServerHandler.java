@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import net.canarymod.Canary;
+import net.canarymod.TextFormat;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.hook.player.ConnectionHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OChatAllowedCharacters;
 import net.minecraft.server.OChunkCoordinates;
@@ -114,7 +117,10 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             this.e.I();
             this.b((new OPacket255KickDisconnect(var1)));
             this.b.d();
-            this.d.h.sendPacketToAll((new OPacket3Chat("\u00a7e" + this.e.v + " left the game.")));
+            ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), var1, TextFormat.Yellow + getUser().getName() + " left the game."));
+            if (!hook.isHidden()) {
+                this.d.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
+            }
             this.d.h.e(this.e);
             this.c = true;
         }
@@ -457,7 +463,10 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     public void a(String var1, Object[] var2) {
         a.info(this.e.v + " lost connection: " + var1);
-        this.d.h.sendPacketToAll((new OPacket3Chat("\u00a7e" + this.e.v + " left the game.")));
+        ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), var1, TextFormat.Yellow + getUser().getName() + " left the game."));
+        if (!hook.isHidden()) {
+            this.d.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
+        }
         this.d.h.e(this.e);
         this.c = true;
     }
