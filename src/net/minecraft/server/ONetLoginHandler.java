@@ -6,7 +6,10 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import net.canarymod.Canary;
+import net.canarymod.TextFormat;
 import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.hook.player.ConnectionHook;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OMinecraftServer;
@@ -116,7 +119,10 @@ public class ONetLoginHandler extends ONetHandler {
             var5.b((new OPacket6SpawnPosition(var4.a, var4.b, var4.c)));
             var5.b((new OPacket202PlayerAbilities(var2.L)));
             this.e.h.a(var2, var3);
-            this.e.h.sendPacketToAll((new OPacket3Chat("\u00a7e" + var2.v + " joined the game.")));
+            ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(var2.getPlayer(), TextFormat.Yellow + var2.getPlayer().getName() + " joined the game.", null));
+            if (!hook.isHidden()) {
+                this.e.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
+            }
             this.e.h.c(var2);
             var5.a(var2.bm, var2.bn, var2.bo, var2.bs, var2.bt);
             this.e.c.a(var5);
