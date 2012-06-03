@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Main-Class: net.canarymod.Main
-Class-Path: lib/CanaryAPI.jar
+Class-Path: lib/CanaryLib.jar
 
