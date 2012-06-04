@@ -7,6 +7,7 @@ import net.canarymod.database.Database.Type;
 import net.canarymod.database.DatabaseFlatfile;
 import net.canarymod.database.DatabaseMySql;
 import net.canarymod.group.GroupsProvider;
+import net.canarymod.help.HelpManager;
 import net.canarymod.hook.HookExecutor;
 import net.canarymod.plugin.PluginLoader;
 
@@ -38,6 +39,7 @@ public class CanaryMod extends Canary {
 
         // Initialize the loader and scan for plugins
         this.hookExecutor = new HookExecutor();
+        this.helpManager = new HelpManager();
         this.banManager = new BanManager(database);
         this.groupsProvider = new GroupsProvider(database);
         
