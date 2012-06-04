@@ -214,7 +214,7 @@ public class OServerConfigurationManager {
             // CanaryMod - LoginChecks.
             // CanaryMod - Called before a player is kicked for already being on the server or the server being full.
             LoginChecksHook hook = (LoginChecksHook) Canary.hooks().callHook(new LoginChecksHook(var3, var2));
-            if (hook.getKickReason() != null || !hook.getKickReason().trim().equals("")) {
+            if (hook.getKickReason() != null && !hook.getKickReason().trim().equals("")) {
                 var1.a(hook.getKickReason());
             }
             // CanaryMod - end
