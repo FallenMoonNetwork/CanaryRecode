@@ -3,6 +3,7 @@ package net.canarymod;
 import net.canarymod.backbone.Backbone;
 import net.canarymod.config.Configuration;
 import net.canarymod.database.DatabaseFlatfile;
+import net.canarymod.help.HelpManager;
 import net.canarymod.hook.HookExecutor;
 import net.canarymod.plugin.PluginLoader;
 
@@ -23,6 +24,7 @@ public class CanaryMod extends Canary {
 
         // Initialize the loader and scan for plugins
         this.hookExecutor = new HookExecutor();
+        this.helpManager = new HelpManager();
         this.loader = new PluginLoader();
         this.loader.scanPlugins();
     }
