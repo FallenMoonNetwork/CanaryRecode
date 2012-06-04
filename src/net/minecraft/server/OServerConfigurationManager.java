@@ -24,6 +24,7 @@ import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.World;
 import net.canarymod.config.Configuration;
+import net.canarymod.hook.player.LoginChecksHook;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
@@ -197,20 +198,27 @@ public class OServerConfigurationManager {
     }
 
     public OEntityPlayerMP a(ONetLoginHandler var1, String var2) {
+        String var3 = var1.b.c().toString();
+        var3 = var3.substring(var3.indexOf("/") + 1);
+        var3 = var3.substring(0, var3.indexOf(":"));
         if (this.f.contains(var2.trim().toLowerCase())) {
             var1.a("You are banned from this server!");
             return null;
         } else if (!this.g(var2)) {
             var1.a("You are not white-listed on this server!");
             return null;
+        } else if (this.g.contains(var3)) {// CanaryMod - Move ban check out of else block below to allow login check to be called before kicking
+            var1.a("Your IP address is banned from this server!");
+            return null;
         } else {
-            String var3 = var1.b.c().toString();
-            var3 = var3.substring(var3.indexOf("/") + 1);
-            var3 = var3.substring(0, var3.indexOf(":"));
-            if (this.g.contains(var3)) {
-                var1.a("Your IP address is banned from this server!");
-                return null;
-            } else if (this.b.size() >= this.e) {
+            // CanaryMod - LoginChecks.
+            // CanaryMod - Called before a player is kicked for already being on the server or the server being full.
+            LoginChecksHook hook = (LoginChecksHook) Canary.hooks().callHook(new LoginChecksHook(var3, var2));
+            if (hook.getKickReason() != null || !hook.getKickReason().trim().equals("")) {
+                var1.a(hook.getKickReason());
+            }
+            // CanaryMod - end
+            if (this.b.size() >= this.e) {
                 var1.a("The server is full!");
                 return null;
             } else {
