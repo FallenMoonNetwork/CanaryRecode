@@ -12,7 +12,7 @@ import net.canarymod.hook.HookExecutor;
 import net.canarymod.plugin.PluginLoader;
 
 /**
- * The implementation of ICanary, a singleton used for everything.
+ * The implementation of Canary, the new catch-all etc replacement, only much better :P
  * 
  * @author Chris Ksoll
  * @author Jos Kuijpers
