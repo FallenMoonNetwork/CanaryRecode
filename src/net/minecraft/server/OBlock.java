@@ -403,7 +403,7 @@ public class OBlock {
         return this.bN;
     }
 
-    public void a(OWorld var1, int var2, int var3, int var4, OAxisAlignedBB var5, ArrayList var6) {
+    public void a(OWorld var1, int var2, int var3, int var4, OAxisAlignedBB var5, ArrayList<OAxisAlignedBB> var6) {
         OAxisAlignedBB var7 = this.e(var1, var2, var3, var4);
         if (var7 != null && var5.a(var7)) {
             var6.add(var7);

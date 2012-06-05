@@ -13,7 +13,6 @@ import net.canarymod.hook.player.ConnectionHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OChatAllowedCharacters;
 import net.minecraft.server.OChunkCoordinates;
-import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityItem;
 import net.minecraft.server.OEntityPlayerMP;

@@ -8,7 +8,7 @@ import java.util.Map;
 public class OAchievementMap {
 
     public static OAchievementMap a = new OAchievementMap();
-    private Map b = new HashMap();
+    private Map<Integer,String> b = new HashMap<Integer,String>();
 
     private OAchievementMap() {
         super();

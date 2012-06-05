@@ -14,7 +14,6 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import net.canarymod.Canary;
-import net.canarymod.CanaryServer;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.entity.CanaryPlayer;
@@ -38,7 +37,6 @@ import net.minecraft.server.OPacket3Chat;
 import net.minecraft.server.OPacket4UpdateTime;
 import net.minecraft.server.OPacket70Bed;
 import net.minecraft.server.OPacket9Respawn;
-import net.minecraft.server.OPlayerManager;
 import net.minecraft.server.OPlayerUsageSnooper;
 import net.minecraft.server.OTeleporter;
 import net.minecraft.server.OTileEntity;

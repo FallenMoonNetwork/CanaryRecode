@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.world.CanaryDimension;
 import net.minecraft.server.OEntity;

@@ -7,7 +7,7 @@ import net.minecraft.server.OVec3D;
 
 public class OAxisAlignedBB {
 
-    private static List g = new ArrayList();
+    private static List<OAxisAlignedBB> g = new ArrayList<OAxisAlignedBB>();
     private static int h = 0;
     public double a;
     public double b;

@@ -14,14 +14,14 @@ class ORailLogic {
     private int d;
     private int e;
     private final boolean f;
-    private List g;
+    private List<OChunkPosition> g;
     // $FF: synthetic field
     final OBlockRail a;
 
     public ORailLogic(OBlockRail var1, OWorld var2, int var3, int var4, int var5) {
         super();
         this.a = var1;
-        this.g = new ArrayList();
+        this.g = new ArrayList<OChunkPosition>();
         this.b = var2;
         this.c = var3;
         this.d = var4;

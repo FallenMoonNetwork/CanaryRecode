@@ -11,7 +11,8 @@ public class OAchievement extends OStatBase {
    public final int a;
    public final int b;
    public final OAchievement c;
-   private final String k;
+   @SuppressWarnings("unused")
+private final String k;
    public final OItemStack d;
    private boolean l;
 

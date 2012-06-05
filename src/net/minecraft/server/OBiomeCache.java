@@ -12,7 +12,7 @@ public class OBiomeCache {
     private final OWorldChunkManager a;
     private long b = 0L;
     private OLongHashMap c = new OLongHashMap();
-    private List d = new ArrayList();
+    private List<OBiomeCacheBlock> d = new ArrayList<OBiomeCacheBlock>();
 
     public OBiomeCache(OWorldChunkManager var1) {
         super();

@@ -77,9 +77,9 @@ public abstract class OBiomeGenBase {
     public float G;
     public int H;
     public OBiomeDecorator I;
-    protected List J;
-    protected List K;
-    protected List L;
+    protected List<OSpawnListEntry> J;
+    protected List<OSpawnListEntry> K;
+    protected List<OSpawnListEntry> L;
     private boolean R;
     private boolean S;
     public final int M;
@@ -98,9 +98,9 @@ public abstract class OBiomeGenBase {
         this.F = 0.5F;
         this.G = 0.5F;
         this.H = 16777215;
-        this.J = new ArrayList();
-        this.K = new ArrayList();
-        this.L = new ArrayList();
+        this.J = new ArrayList<OSpawnListEntry>();
+        this.K = new ArrayList<OSpawnListEntry>();
+        this.L = new ArrayList<OSpawnListEntry>();
         this.S = true;
         this.N = new OWorldGenTrees(false);
         this.O = new OWorldGenBigTree(false);
@@ -175,7 +175,7 @@ public abstract class OBiomeGenBase {
         return this;
     }
 
-    public List a(OEnumCreatureType var1) {
+    public List<OSpawnListEntry> a(OEnumCreatureType var1) {
         return var1 == OEnumCreatureType.a ? this.J : (var1 == OEnumCreatureType.b ? this.K : (var1 == OEnumCreatureType.c ? this.L : null));
     }
 

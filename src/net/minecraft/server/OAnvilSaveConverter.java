@@ -46,9 +46,9 @@ public class OAnvilSaveConverter extends OSaveFormatOld {
 
     public boolean a(String var1, OIProgressUpdate var2) {
         var2.a(0);
-        ArrayList var3 = new ArrayList();
-        ArrayList var4 = new ArrayList();
-        ArrayList var5 = new ArrayList();
+        ArrayList<File> var3 = new ArrayList<File>();
+        ArrayList<File> var4 = new ArrayList<File>();
+        ArrayList<File> var5 = new ArrayList<File>();
         File var6 = new File(this.a, var1);
         File var7 = new File(var6, "DIM-1");
         File var8 = new File(var6, "DIM1");
@@ -104,8 +104,8 @@ public class OAnvilSaveConverter extends OSaveFormatOld {
         }
     }
 
-    private void a(File var1, ArrayList var2, OWorldChunkManager var3, int var4, int var5, OIProgressUpdate var6) {
-        Iterator var7 = var2.iterator();
+    private void a(File var1, ArrayList<File> var2, OWorldChunkManager var3, int var4, int var5, OIProgressUpdate var6) {
+        Iterator<File> var7 = var2.iterator();
 
         while (var7.hasNext()) {
             File var8 = (File) var7.next();
@@ -161,7 +161,7 @@ public class OAnvilSaveConverter extends OSaveFormatOld {
 
     }
 
-    private void a(File var1, ArrayList var2) {
+    private void a(File var1, ArrayList<File> var2) {
         File var3 = new File(var1, "region");
         File[] var4 = var3.listFiles(new OAnvilSaveConverterFileFilter(this));
         if (var4 != null) {
