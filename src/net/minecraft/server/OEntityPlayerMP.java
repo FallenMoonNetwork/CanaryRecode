@@ -284,36 +284,34 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         }
 
         if (this.J) {
-            if (this.b.d.a("allow-nether", true)) {
-                if (this.m != this.l) {
-                    this.F();
-                }
-
-                if (this.bh != null) {
-                    this.b(this.bh);
-                } else {
-                    this.K += 0.0125F;
-                    if (this.K >= 1.0F) {
-                        this.K = 1.0F;
-                        this.I = 10;
-                        boolean var15 = false;
-                        byte var16;
-                        if (this.w == -1) {
-                            var16 = 0;
-                        } else {
-                            var16 = -1;
-                        }
-
-                        this.b.h.a(this, var16);
-                        this.ci = -1;
-                        this.cf = -1;
-                        this.cg = -1;
-                        this.a(OAchievementList.x);
-                    }
-                }
-
-                this.J = false;
+            if (this.m != this.l) {
+                this.F();
             }
+
+            if (this.bh != null) {
+                this.b(this.bh);
+            } else {
+                this.K += 0.0125F;
+                if (this.K >= 1.0F) {
+                    this.K = 1.0F;
+                    this.I = 10;
+                    boolean var15 = false;
+                    byte var16;
+                    if (this.w == -1) {
+                        var16 = 0;
+                    } else {
+                        var16 = -1;
+                    }
+
+                    this.b.h.a(this, var16);
+                    this.ci = -1;
+                    this.cf = -1;
+                    this.cg = -1;
+                    this.a(OAchievementList.x);
+                }
+            }
+
+            this.J = false;
         } else {
             if (this.K > 0.0F) {
                 this.K -= 0.05F;
