@@ -14,8 +14,8 @@ public abstract class ORConThreadBase implements Runnable {
     protected OIServer b;
     protected Thread c;
     protected int d = 5;
-    protected List e = new ArrayList();
-    protected List f = new ArrayList();
+    protected List<DatagramSocket> e = new ArrayList<DatagramSocket>();
+    protected List<ServerSocket> f = new ArrayList<ServerSocket>();
 
     ORConThreadBase(OIServer var1) {
         super();

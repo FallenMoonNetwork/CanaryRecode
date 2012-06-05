@@ -32,8 +32,8 @@ import net.minecraft.server.OWorld;
 
 public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
 
-    private List a = new ArrayList();
-    private Set b = new HashSet();
+    private List<OAnvilChunkLoaderPending> a = new ArrayList<OAnvilChunkLoaderPending>();
+    private Set<OChunkCoordIntPair> b = new HashSet<OChunkCoordIntPair>();
     private Object c = new Object();
     private final File d;
 
@@ -45,7 +45,6 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
     public OChunk a(OWorld var1, int var2, int var3) throws IOException {
         ONBTTagCompound var4 = null;
         OChunkCoordIntPair var5 = new OChunkCoordIntPair(var2, var3);
-        Object var6 = this.c;
         synchronized (this.c) {
             if (this.b.contains(var5)) {
                 for (int var7 = 0; var7 < this.a.size(); ++var7) {
@@ -106,7 +105,6 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
     }
 
     protected void a(OChunkCoordIntPair var1, ONBTTagCompound var2) {
-        Object var3 = this.c;
         synchronized (this.c) {
             if (this.b.contains(var1)) {
                 for (int var4 = 0; var4 < this.a.size(); ++var4) {
@@ -125,7 +123,6 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
 
     public boolean c() {
         OAnvilChunkLoaderPending var1 = null;
-        Object var2 = this.c;
         synchronized (this.c) {
             if (this.a.size() <= 0) {
                 return false;

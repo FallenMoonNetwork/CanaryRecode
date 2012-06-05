@@ -8,9 +8,7 @@ import javax.swing.JComponent;
 import javax.swing.Timer;
 
 import net.canarymod.Canary;
-import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.CanaryWorld;
-import net.canarymod.api.world.World;
 import net.minecraft.server.OGuiStatsListener;
 import net.minecraft.server.OMinecraftServer;
 import net.minecraft.server.ONetworkManager;

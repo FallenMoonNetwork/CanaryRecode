@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import net.canarymod.Canary;
 import net.canarymod.Logman;
 import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.World;
 import net.minecraft.server.OEntityPlayerMP;
