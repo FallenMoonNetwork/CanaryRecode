@@ -44,6 +44,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         this.h = var1;
         this.e = var2;
         this.d = var3;
+        this.canaryChunkProvider = new CanaryChunkProviderServer(this);
     }
     
     //CanaryMod start

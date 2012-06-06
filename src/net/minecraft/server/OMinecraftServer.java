@@ -574,12 +574,6 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         OAxisAlignedBB.a();
         OVec3D.a();
         ++this.j;
-        //XXX
-        //CanaryMod tick all worlds
-        for(World canaryWorld : worldManager.getAllWorlds()) {
-            
-
-        }
 //        for (var11 = 0; var11 < this.worldServer.length; ++var11) {
         for(World canaryWorld : worldManager.getAllWorlds()) {
             long var7 = System.nanoTime();

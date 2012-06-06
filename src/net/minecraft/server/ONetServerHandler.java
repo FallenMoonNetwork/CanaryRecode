@@ -74,6 +74,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     private boolean r = true;
     private OIntHashMap s = new OIntHashMap();
     private CanaryPlayer player;
+    private CanaryNetServerHandler nsh;
 
     public ONetServerHandler(OMinecraftServer var1, ONetworkManager var2, OEntityPlayerMP var3) {
         super();
@@ -83,10 +84,17 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         this.e = var3;
         var3.a = this;
         player = e.getPlayer();
-        //CanaryMod set the serverhandler wrapper for this playerMP
-        e.setServerHandler(new CanaryNetServerHandler(this));
+        nsh = new CanaryNetServerHandler(this);
+        e.setServerHandler(nsh);
     }
 
+    /**
+     * CanaryMod return the NSH wrapper 
+     * @return
+     */
+    public CanaryNetServerHandler getCanaryNetServerHandler() {
+        return nsh;
+    }
     public CanaryPlayer getUser() {
         return player;
     }

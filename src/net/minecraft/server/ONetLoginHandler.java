@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import net.canarymod.Canary;
 import net.canarymod.TextFormat;
 import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.Dimension.Type;
 import net.canarymod.hook.player.ConnectionHook;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayerMP;
@@ -108,7 +109,7 @@ public class ONetLoginHandler extends ONetHandler {
         OEntityPlayerMP var2 = this.e.h.a(this, var1.b);
         if (var2 != null) {
             this.e.h.b(var2);
-            var2.a((OWorldServer) ((CanaryDimension)var2.getDimension()).getHandle());
+            var2.a((OWorldServer) ((CanaryDimension)var2.getDimension().getWorld().getDimension(Type.fromId(var2.w))).getHandle());
             var2.c.a((OWorldServer) var2.bi);
             a.info(this.b() + " logged in with entity id " + var2.bd + " at (" + var2.bm + ", " + var2.bn + ", " + var2.bo + ")");
             OWorldServer var3 = (OWorldServer) ((CanaryDimension)var2.getDimension()).getHandle();

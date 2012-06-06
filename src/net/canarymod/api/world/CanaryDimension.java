@@ -15,6 +15,7 @@ import net.canarymod.api.entity.CanaryGhast;
 import net.canarymod.api.entity.CanaryGiantZombie;
 import net.canarymod.api.entity.CanaryLavaSlime;
 import net.canarymod.api.entity.CanaryPigZombie;
+import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.CanarySilverfish;
 import net.canarymod.api.entity.CanarySkeleton;
 import net.canarymod.api.entity.CanarySlime;
@@ -465,5 +466,18 @@ public class CanaryDimension implements Dimension {
     @Override
     public long getWorldSeed() {
         return world.n();
+    }
+
+    @Override
+    public void removePlayerFromWorld(Player player) {
+        world.b.remove(((CanaryPlayer) player).getHandle());
+        world.d.remove(((CanaryPlayer) player).getHandle());
+        
+    }
+
+    @Override
+    public void addPlayerToWorld(Player player) {
+        world.b.add(((CanaryPlayer) player).getHandle());
+        world.d.add(((CanaryPlayer) player).getHandle());
     }
 }

@@ -17,10 +17,12 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.entity.CanaryPlayer;
+import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.Dimension.Type;
 import net.canarymod.api.world.World;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.player.LoginChecksHook;
@@ -158,7 +160,8 @@ public class OServerConfigurationManager {
     public void c(OEntityPlayerMP var1) {
         this.sendPacketToAll((new OPacket201PlayerInfo(var1.v, true, 1000)));
         this.b.add(var1);
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)var1.getDimension()).getHandle();
+        OWorldServer var2 = (OWorldServer) ((CanaryDimension)var1.getDimension().getWorld().getDimension(Type.fromId(var1.w))).getHandle();
+        var1.bi = var2; //re-set world
         var2.G.c((int) var1.bm >> 4, (int) var1.bo >> 4);
 
         while (var2.a(var1, var1.bw).size() != 0) {
@@ -232,10 +235,12 @@ public class OServerConfigurationManager {
         }
     }
 
+    //Respawn player
     public OEntityPlayerMP a(OEntityPlayerMP var1, int var2, boolean var3) {
         var1.getDimension().getEntityTracker().untrackPlayerSymmetrics(var1.getPlayer());
         var1.getDimension().getEntityTracker().untrackEntity(var1.getPlayer());
         var1.getDimension().getPlayerManager().removePlayer(var1.getPlayer());
+        var1.getDimension().removePlayerFromWorld(var1.getPlayer());
 //        this.c.b(var1.w).a(var1);
 //        this.c.b(var1.w).b(var1);
 //        this.a(var1.w).b(var1);
@@ -244,8 +249,10 @@ public class OServerConfigurationManager {
         //remove player, release skin etc
         ((CanaryDimension)var1.getDimension()).getHandle().f(var1);
         OChunkCoordinates var4 = var1.ab();
-        var1.w = var2;
-        OEntityPlayerMP var5 = new OEntityPlayerMP(this.c, var1.getDimension().getHandle(), var1.v, new OItemInWorldManager(var1.getDimension().getHandle()));
+        var1.w = var2; //Set new dimension
+        CanaryWorld cworld = (CanaryWorld) var1.getDimension().getWorld();
+        CanaryDimension dim = (CanaryDimension) cworld.getDimension(Type.fromId(var2));
+        OEntityPlayerMP var5 = new OEntityPlayerMP(this.c, dim.getHandle(), var1.v, new OItemInWorldManager(var1.getDimension().getHandle()));
         
         if (var3) {
             //copy player
@@ -253,7 +260,9 @@ public class OServerConfigurationManager {
         }
 
         var5.bd = var1.bd;
+        //Set NetServerHandler
         var5.a = var1.a;
+        var5.setServerHandler(var5.a.getCanaryNetServerHandler());
         OWorldServer var6 = (OWorldServer) var5.getDimension().getHandle();
         var5.c.a(var1.c.a());
         var5.c.b(var6.s().m());
@@ -279,11 +288,11 @@ public class OServerConfigurationManager {
         var5.a.a(var5.bm, var5.bn, var5.bo, var5.bs, var5.bt);
         //something
         this.a(var5, var6);
-        //Re-add player to player manager
-        var5.getDimension().getPlayerManager().addPlayer(var5.getPlayer());
+//        //Re-add player to player manager
+//        var5.getDimension().getPlayerManager().addPlayer(var5.getPlayer());
+        var5.getDimension().getEntityTracker().trackEntity(var5.getPlayer());
+        var5.getDimension().addPlayerToWorld(var5.getPlayer());
 //        this.a(var5.w).a(var5);
-        //spawn player
-        var6.b(var5);
         //Add back player to global player list
         this.b.add(var5);
         var5.x();
@@ -291,11 +300,12 @@ public class OServerConfigurationManager {
         return var5;
     }
 
+    //send to other dimension
     public void a(OEntityPlayerMP var1, int var2) {
-        int var3 = var1.w;
+        int var3 = var1.w; //current dimension
         OWorldServer var4 = (OWorldServer) ((CanaryDimension)var1.getDimension()).getHandle();
-        var1.w = var2;
-        OWorldServer var5 = (OWorldServer) ((CanaryDimension)var1.getDimension()).getHandle();
+        var1.w = var2; //set new dimension
+        OWorldServer var5 = (OWorldServer) ((CanaryDimension)var1.getDimension().getWorld().getDimension(Type.fromId(var2))).getHandle();
         var1.a.b((new OPacket9Respawn(var1.w, (byte) var1.bi.q, var5.s().p(), var5.y(), var1.c.a())));
         var4.f(var1);
         var1.bE = false;

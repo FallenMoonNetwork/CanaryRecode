@@ -59,15 +59,16 @@ import net.minecraft.server.OWorldSettings;
 public class OWorld implements OIBlockAccess {
 
     public boolean a = false;
-    public List b = new ArrayList();
+    //CanaryMod parameterized lotsa stuff
+    public List<OEntity> b = new ArrayList<OEntity>();
     private List G = new ArrayList();
-    private TreeSet H = new TreeSet();
-    private Set I = new HashSet();
-    public List c = new ArrayList();
-    private List J = new ArrayList();
-    private List K = new ArrayList();
-    public List d = new ArrayList(); // OPlayerList
-    public List e = new ArrayList(); // lightning entities
+    private TreeSet<ONextTickListEntry> H = new TreeSet<ONextTickListEntry>();
+    private Set<ONextTickListEntry> I = new HashSet<ONextTickListEntry>();
+    public List<OTileEntity> c = new ArrayList<OTileEntity>();
+    private List<OTileEntity> J = new ArrayList<OTileEntity>();
+    private List<OTileEntity> K = new ArrayList<OTileEntity>();
+    public List<OEntityPlayer> d = new ArrayList<OEntityPlayer>(); // OPlayerList
+    public List<OEntity> e = new ArrayList<OEntity>(); // lightning entities
     private long L = 16777215L;
     public int f = 0;
     protected int g = (new Random()).nextInt();
@@ -85,7 +86,7 @@ public class OWorld implements OIBlockAccess {
     public Random r = new Random();
     public boolean s = false;
     public final OWorldProvider t;
-    protected List u = new ArrayList();
+    protected List<OIWorldAccess> u = new ArrayList<OIWorldAccess>();
     protected OIChunkProvider v;
     protected final OISaveHandler w;
     public OWorldInfo worldInfo; //CanaryMod protected -> public, renamed x -> worldInfo
@@ -94,11 +95,11 @@ public class OWorld implements OIBlockAccess {
     public OMapStorage z;
     public final OVillageCollection A = new OVillageCollection(this);
     private final OVillageSiege O = new OVillageSiege(this);
-    private ArrayList P = new ArrayList();
+    private ArrayList<OAxisAlignedBB> P = new ArrayList<OAxisAlignedBB>();
     private boolean Q;
     protected boolean B = true;
     protected boolean C = true;
-    protected Set D = new HashSet();
+    protected Set<OChunkCoordIntPair> D = new HashSet<OChunkCoordIntPair>();
     private int R;
     int[] E;
     private List S;
@@ -433,7 +434,7 @@ public class OWorld implements OIBlockAccess {
 
     public void j(int var1, int var2, int var3) {
         for (int var4 = 0; var4 < this.u.size(); ++var4) {
-            ((OIWorldAccess) this.u.get(var4)).a(var1, var2, var3);
+            this.u.get(var4).a(var1, var2, var3);
         }
 
     }
@@ -462,14 +463,14 @@ public class OWorld implements OIBlockAccess {
 
     public void k(int var1, int var2, int var3) {
         for (int var4 = 0; var4 < this.u.size(); ++var4) {
-            ((OIWorldAccess) this.u.get(var4)).a(var1, var2, var3, var1, var2, var3);
+            this.u.get(var4).a(var1, var2, var3, var1, var2, var3);
         }
 
     }
 
     public void b(int var1, int var2, int var3, int var4, int var5, int var6) {
         for (int var7 = 0; var7 < this.u.size(); ++var7) {
-            ((OIWorldAccess) this.u.get(var7)).a(var1, var2, var3, var4, var5, var6);
+            this.u.get(var7).a(var1, var2, var3, var4, var5, var6);
         }
 
     }
@@ -605,7 +606,7 @@ public class OWorld implements OIBlockAccess {
                         var6.a(var1, var2 & 15, var3, var4 & 15, var5);
 
                         for (int var7 = 0; var7 < this.u.size(); ++var7) {
-                            ((OIWorldAccess) this.u.get(var7)).b(var2, var3, var4);
+                            this.u.get(var7).b(var2, var3, var4);
                         }
 
                     }
@@ -616,7 +617,7 @@ public class OWorld implements OIBlockAccess {
 
     public void o(int var1, int var2, int var3) {
         for (int var4 = 0; var4 < this.u.size(); ++var4) {
-            ((OIWorldAccess) this.u.get(var4)).b(var1, var2, var3);
+            this.u.get(var4).b(var1, var2, var3);
         }
 
     }
@@ -790,28 +791,28 @@ public class OWorld implements OIBlockAccess {
 
     public void a(OEntity var1, String var2, float var3, float var4) {
         for (int var5 = 0; var5 < this.u.size(); ++var5) {
-            ((OIWorldAccess) this.u.get(var5)).a(var2, var1.bm, var1.bn - var1.bF, var1.bo, var3, var4);
+            this.u.get(var5).a(var2, var1.bm, var1.bn - var1.bF, var1.bo, var3, var4);
         }
 
     }
 
     public void a(double var1, double var3, double var5, String var7, float var8, float var9) {
         for (int var10 = 0; var10 < this.u.size(); ++var10) {
-            ((OIWorldAccess) this.u.get(var10)).a(var7, var1, var3, var5, var8, var9);
+            this.u.get(var10).a(var7, var1, var3, var5, var8, var9);
         }
 
     }
 
     public void a(String var1, int var2, int var3, int var4) {
         for (int var5 = 0; var5 < this.u.size(); ++var5) {
-            ((OIWorldAccess) this.u.get(var5)).a(var1, var2, var3, var4);
+            this.u.get(var5).a(var1, var2, var3, var4);
         }
 
     }
 
     public void a(String var1, double var2, double var4, double var6, double var8, double var10, double var12) {
         for (int var14 = 0; var14 < this.u.size(); ++var14) {
-            ((OIWorldAccess) this.u.get(var14)).a(var1, var2, var4, var6, var8, var10, var12);
+            this.u.get(var14).a(var1, var2, var4, var6, var8, var10, var12);
         }
 
     }
@@ -847,14 +848,14 @@ public class OWorld implements OIBlockAccess {
 
     protected void c(OEntity var1) {
         for (int var2 = 0; var2 < this.u.size(); ++var2) {
-            ((OIWorldAccess) this.u.get(var2)).a(var1);
+            this.u.get(var2).a(var1);
         }
 
     }
 
     protected void d(OEntity var1) {
         for (int var2 = 0; var2 < this.u.size(); ++var2) {
-            ((OIWorldAccess) this.u.get(var2)).b(var1);
+            this.u.get(var2).b(var1);
         }
 
     }
@@ -897,7 +898,7 @@ public class OWorld implements OIBlockAccess {
         this.u.add(var1);
     }
 
-    public List a(OEntity var1, OAxisAlignedBB var2) {
+    public List<OAxisAlignedBB> a(OEntity var1, OAxisAlignedBB var2) {
         this.P.clear();
         int var3 = OMathHelper.b(var2.a);
         int var4 = OMathHelper.b(var2.d + 1.0D);
@@ -1024,7 +1025,7 @@ public class OWorld implements OIBlockAccess {
         int var1;
         OEntity var2;
         for (var1 = 0; var1 < this.e.size(); ++var1) {
-            var2 = (OEntity) this.e.get(var1);
+            var2 = this.e.get(var1);
             var2.F_();
             if (var2.bE) {
                 this.e.remove(var1--);
@@ -1053,7 +1054,7 @@ public class OWorld implements OIBlockAccess {
         OProfiler.b("regular");
 
         for (var1 = 0; var1 < this.b.size(); ++var1) {
-            var2 = (OEntity) this.b.get(var1);
+            var2 = this.b.get(var1);
             if (var2.bh != null) {
                 if (!var2.bh.bE && var2.bh.bg == var2) {
                     continue;
@@ -1084,10 +1085,10 @@ public class OWorld implements OIBlockAccess {
 
         OProfiler.b("tileEntities");
         this.Q = true;
-        Iterator var10 = this.c.iterator();
+        Iterator<OTileEntity> var10 = this.c.iterator();
 
         while (var10.hasNext()) {
-            OTileEntity var5 = (OTileEntity) var10.next();
+            OTileEntity var5 = var10.next();
             if (!var5.l() && var5.k != null && this.i(var5.l, var5.m, var5.n)) {
                 var5.q_();
             }
@@ -1111,10 +1112,10 @@ public class OWorld implements OIBlockAccess {
 
         OProfiler.b("pendingTileEntities");
         if (!this.J.isEmpty()) {
-            Iterator var6 = this.J.iterator();
+            Iterator<OTileEntity> var6 = this.J.iterator();
 
             while (var6.hasNext()) {
-                OTileEntity var8 = (OTileEntity) var6.next();
+                OTileEntity var8 = var6.next();
                 if (!var8.l()) {
                     if (!this.c.contains(var8)) {
                         this.c.add(var8);
@@ -1494,10 +1495,10 @@ public class OWorld implements OIBlockAccess {
             } else {
                 OTileEntity var5 = var4.e(var1 & 15, var2, var3 & 15);
                 if (var5 == null) {
-                    Iterator var6 = this.J.iterator();
+                    Iterator<OTileEntity> var6 = this.J.iterator();
 
                     while (var6.hasNext()) {
-                        OTileEntity var7 = (OTileEntity) var6.next();
+                        OTileEntity var7 = var6.next();
                         if (!var7.l() && var7.l == var1 && var7.m == var2 && var7.n == var3) {
                             var5 = var7;
                             break;
@@ -1733,7 +1734,7 @@ public class OWorld implements OIBlockAccess {
         int var3;
         int var4;
         for (var1 = 0; var1 < this.d.size(); ++var1) {
-            var2 = (OEntityPlayer) this.d.get(var1);
+            var2 = this.d.get(var1);
             var3 = OMathHelper.b(var2.bm / 16.0D);
             var4 = OMathHelper.b(var2.bo / 16.0D);
             byte var5 = 7;
@@ -1753,7 +1754,7 @@ public class OWorld implements OIBlockAccess {
         OProfiler.a("playerCheckLight");
         if (!this.d.isEmpty()) {
             var1 = this.r.nextInt(this.d.size());
-            var2 = (OEntityPlayer) this.d.get(var1);
+            var2 = this.d.get(var1);
             var3 = OMathHelper.b(var2.bm) + this.r.nextInt(11) - 5;
             var4 = OMathHelper.b(var2.bn) + this.r.nextInt(11) - 5;
             int var8 = OMathHelper.b(var2.bo) + this.r.nextInt(11) - 5;
@@ -1793,10 +1794,10 @@ public class OWorld implements OIBlockAccess {
         this.k();
         int var1 = 0;
         int var2 = 0;
-        Iterator var3 = this.D.iterator();
+        Iterator<OChunkCoordIntPair> var3 = this.D.iterator();
 
         while (var3.hasNext()) {
-            OChunkCoordIntPair var4 = (OChunkCoordIntPair) var3.next();
+            OChunkCoordIntPair var4 = var3.next();
             int var5 = var4.a * 16;
             int var6 = var4.b * 16;
             OProfiler.a("getChunk");
@@ -2184,7 +2185,7 @@ public class OWorld implements OIBlockAccess {
             }
 
             for (int var3 = 0; var3 < var2; ++var3) {
-                ONextTickListEntry var4 = (ONextTickListEntry) this.H.first();
+                ONextTickListEntry var4 = this.H.first();
                 if (!var1 && var4.e > this.worldInfo.f()) {
                     break;
                 }
@@ -2204,17 +2205,17 @@ public class OWorld implements OIBlockAccess {
         }
     }
 
-    public List a(OChunk var1, boolean var2) {
-        ArrayList var3 = null;
+    public List<ONextTickListEntry> a(OChunk var1, boolean var2) {
+        ArrayList<ONextTickListEntry> var3 = null;
         OChunkCoordIntPair var4 = var1.k();
         int var5 = var4.a << 4;
         int var6 = var5 + 16;
         int var7 = var4.b << 4;
         int var8 = var7 + 16;
-        Iterator var9 = this.I.iterator();
+        Iterator<ONextTickListEntry> var9 = this.I.iterator();
 
         while (var9.hasNext()) {
-            ONextTickListEntry var10 = (ONextTickListEntry) var9.next();
+            ONextTickListEntry var10 = var9.next();
             if (var10.a >= var5 && var10.a < var6 && var10.c >= var7 && var10.c < var8) {
                 if (var2) {
                     this.H.remove(var10);
@@ -2222,7 +2223,7 @@ public class OWorld implements OIBlockAccess {
                 }
 
                 if (var3 == null) {
-                    var3 = new ArrayList();
+                    var3 = new ArrayList<ONextTickListEntry>();
                 }
 
                 var3.add(var10);
@@ -2294,7 +2295,7 @@ public class OWorld implements OIBlockAccess {
         }
 
         for (int var5 = 0; var5 < this.u.size(); ++var5) {
-            ((OIWorldAccess) this.u.get(var5)).a(var1, var2, var3, var4);
+            this.u.get(var5).a(var1, var2, var3, var4);
         }
 
     }
@@ -2303,7 +2304,7 @@ public class OWorld implements OIBlockAccess {
         int var2 = 0;
 
         for (int var3 = 0; var3 < this.b.size(); ++var3) {
-            OEntity var4 = (OEntity) this.b.get(var3);
+            OEntity var4 = this.b.get(var3);
             if (var1.isAssignableFrom(var4.getClass())) {
                 ++var2;
             }
@@ -2412,7 +2413,7 @@ public class OWorld implements OIBlockAccess {
         OEntityPlayer var11 = null;
 
         for (int var12 = 0; var12 < this.d.size(); ++var12) {
-            OEntityPlayer var13 = (OEntityPlayer) this.d.get(var12);
+            OEntityPlayer var13 = this.d.get(var12);
             double var14 = var13.e(var1, var3, var5);
             if ((var7 < 0.0D || var14 < var7 * var7) && (var9 == -1.0D || var14 < var9)) {
                 var9 = var14;
@@ -2428,7 +2429,7 @@ public class OWorld implements OIBlockAccess {
         OEntityPlayer var9 = null;
 
         for (int var10 = 0; var10 < this.d.size(); ++var10) {
-            OEntityPlayer var11 = (OEntityPlayer) this.d.get(var10);
+            OEntityPlayer var11 = this.d.get(var10);
             double var12 = var11.e(var1, var11.bn, var3);
             if ((var5 < 0.0D || var12 < var5 * var5) && (var7 == -1.0D || var12 < var7)) {
                 var7 = var12;
@@ -2448,7 +2449,7 @@ public class OWorld implements OIBlockAccess {
         OEntityPlayer var11 = null;
 
         for (int var12 = 0; var12 < this.d.size(); ++var12) {
-            OEntityPlayer var13 = (OEntityPlayer) this.d.get(var12);
+            OEntityPlayer var13 = this.d.get(var12);
             if (!var13.L.a) {
                 double var14 = var13.e(var1, var3, var5);
                 if ((var7 < 0.0D || var14 < var7 * var7) && (var9 == -1.0D || var14 < var9)) {
@@ -2463,8 +2464,8 @@ public class OWorld implements OIBlockAccess {
 
     public OEntityPlayer a(String var1) {
         for (int var2 = 0; var2 < this.d.size(); ++var2) {
-            if (var1.equals(((OEntityPlayer) this.d.get(var2)).v)) {
-                return (OEntityPlayer) this.d.get(var2);
+            if (var1.equals(this.d.get(var2).v)) {
+                return this.d.get(var2);
             }
         }
 
@@ -2483,8 +2484,8 @@ public class OWorld implements OIBlockAccess {
         long var3 = var1 - this.worldInfo.f();
 
         ONextTickListEntry var6;
-        for (Iterator var5 = this.I.iterator(); var5.hasNext(); var6.e += var3) {
-            var6 = (ONextTickListEntry) var5.next();
+        for (Iterator<ONextTickListEntry> var5 = this.I.iterator(); var5.hasNext(); var6.e += var3) {
+            var6 = var5.next();
         }
 
         this.a(var1);
@@ -2531,10 +2532,10 @@ public class OWorld implements OIBlockAccess {
 
     public void t() {
         this.N = !this.d.isEmpty();
-        Iterator var1 = this.d.iterator();
+        Iterator<OEntityPlayer> var1 = this.d.iterator();
 
         while (var1.hasNext()) {
-            OEntityPlayer var2 = (OEntityPlayer) var1.next();
+            OEntityPlayer var2 = var1.next();
             if (!var2.Z()) {
                 this.N = false;
                 break;
@@ -2545,10 +2546,10 @@ public class OWorld implements OIBlockAccess {
 
     protected void u() {
         this.N = false;
-        Iterator var1 = this.d.iterator();
+        Iterator<OEntityPlayer> var1 = this.d.iterator();
 
         while (var1.hasNext()) {
-            OEntityPlayer var2 = (OEntityPlayer) var1.next();
+            OEntityPlayer var2 = var1.next();
             if (var2.Z()) {
                 var2.a(false, false, true);
             }
@@ -2559,7 +2560,7 @@ public class OWorld implements OIBlockAccess {
 
     public boolean v() {
         if (this.N && !this.F) {
-            Iterator var1 = this.d.iterator();
+            Iterator<OEntityPlayer> var1 = this.d.iterator();
 
             OEntityPlayer var2;
             do {
@@ -2567,7 +2568,7 @@ public class OWorld implements OIBlockAccess {
                     return true;
                 }
 
-                var2 = (OEntityPlayer) var1.next();
+                var2 = var1.next();
             } while (var2.aa());
 
             return false;
@@ -2628,7 +2629,7 @@ public class OWorld implements OIBlockAccess {
 
     public void a(OEntityPlayer var1, int var2, int var3, int var4, int var5, int var6) {
         for (int var7 = 0; var7 < this.u.size(); ++var7) {
-            ((OIWorldAccess) this.u.get(var7)).a(var1, var2, var3, var4, var5, var6);
+            this.u.get(var7).a(var1, var2, var3, var4, var5, var6);
         }
 
     }

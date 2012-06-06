@@ -308,7 +308,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setCanBuild(boolean canModify) {
-        permissions.addPermission("canary.world.build", canModify, canModify);
+        permissions.addPermission("canary.world.build", canModify, canModify, -1);
     }
 
     @Override
@@ -321,7 +321,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setCanIgnoreRestrictions(boolean canIgnore) {
-        permissions.addPermission("canary.player.ignoreRestrictions", canIgnore, canIgnore);
+        permissions.addPermission("canary.player.ignoreRestrictions", canIgnore, canIgnore, -1);
     }
 
     @Override
