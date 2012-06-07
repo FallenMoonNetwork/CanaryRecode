@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 import net.canarymod.Canary;
 import net.canarymod.Colors;
 import net.canarymod.Logman;
-import net.canarymod.TextFormat;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
 import net.canarymod.api.inventory.Inventory;
