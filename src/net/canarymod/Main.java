@@ -12,7 +12,10 @@ public class Main {
      */
     public static void main(String[] args) {
         //Initialize the bird
-        Canary.setCanary(new CanaryMod());
+        CanaryMod mod = new CanaryMod();
+        Canary.setCanary(mod);
+        mod.initUserAndGroupsManager();
+        
         
         try {
             OMinecraftServer.main(args);

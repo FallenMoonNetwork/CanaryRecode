@@ -13,10 +13,10 @@ import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.position.Location;
-import net.canarymod.group.Group;
 import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
+import net.canarymod.user.Group;
 import net.minecraft.server.OEntityPlayerMP;
 
 /**
@@ -29,12 +29,22 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     private Group group; 
     private PermissionProvider permissions;
     private String prefix = null;
-    
     private boolean muted;
+    private String[] allowedIPs;
+    
     public CanaryPlayer(OEntityPlayerMP entity) {
         super(entity);
-//        group = Canary.groups().getGroup("something"); //TODO: add proper player to group
-        permissions = null; //TODO: get permissions specifically for this player CanaryServer
+        String[] data = Canary.usersAndGroups().getPlayerData(getName());
+        group = Canary.usersAndGroups().getGroup(data[1]); 
+        permissions = Canary.permissionManager().getPlayerProvider(getName());
+        
+        if(data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
+            prefix = data[0];
+        }
+        
+        if(data[2] != null && !data[2].isEmpty()) {
+            allowedIPs = data[2].split(",");
+        }
     }
 
     /**
@@ -208,11 +218,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 return true;
             } // No need to go on, commands were parsed.
             
+            //Check for canary permissions
             if (!hasPermission("canary.commands."+cmd.replace("/", "")) && !cmd.startsWith("/#")) {
-                sendMessage(Colors.Rose + "Unknown command.");
+                sendMessage(Colors.Rose + "Permission denied.");
                 return false;
             }
-            //TODO: Add native Canary Commands here!
+            //TODO: Parse Canary Commands here!
             return true;
             
         } catch (Throwable ex) {
@@ -285,9 +296,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean hasPermission(String permission) {
-//        if(!group.hasPermission(permission)) {
-//            return permissions.queryPermission(permission);
-//        }
+        if(!group.hasPermission(permission)) {
+            return permissions.queryPermission(permission);
+        }
         return true;
     }
 
@@ -309,7 +320,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setCanBuild(boolean canModify) {
-        permissions.addPermission("canary.world.build", canModify, canModify, -1);
+        permissions.addPermission("canary.world.build", canModify, -1);
     }
 
     @Override
@@ -322,7 +333,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setCanIgnoreRestrictions(boolean canIgnore) {
-        permissions.addPermission("canary.player.ignoreRestrictions", canIgnore, canIgnore, -1);
+        permissions.addPermission("canary.player.ignoreRestrictions", canIgnore, -1);
     }
 
     @Override
@@ -436,6 +447,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             }
         }
         return false;
+    }
+
+    @Override
+    public String[] getAllowedIPs() {
+        return allowedIPs;
     }
 
 }

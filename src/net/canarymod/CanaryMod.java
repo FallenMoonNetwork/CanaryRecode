@@ -1,15 +1,15 @@
 package net.canarymod;
 
-import net.canarymod.backbone.Backbone;
 import net.canarymod.bansystem.BanManager;
 import net.canarymod.config.Configuration;
 import net.canarymod.database.Database.Type;
 import net.canarymod.database.DatabaseFlatfile;
 import net.canarymod.database.DatabaseMySql;
-import net.canarymod.group.GroupsProvider;
 import net.canarymod.help.HelpManager;
 import net.canarymod.hook.HookExecutor;
+import net.canarymod.permissionsystem.PermissionManager;
 import net.canarymod.plugin.PluginLoader;
+import net.canarymod.user.UserAndGroupsProvider;
 
 /**
  * The implementation of Canary, the new catch-all etc replacement, only much better :P
@@ -37,19 +37,17 @@ public class CanaryMod extends Canary {
             this.database = new DatabaseFlatfile();
         }
 
-        // Initialize the loader and scan for plugins
+        // Initialize the subsystems
+        this.permissionLoader = new PermissionManager();
         this.hookExecutor = new HookExecutor();
         this.helpManager = new HelpManager();
         this.banManager = new BanManager(database);
-        this.groupsProvider = new GroupsProvider(database);
-        
+        //Initialize the plugin loader and scan for plugins
         this.loader = new PluginLoader();
         this.loader.scanPlugins();
     }
-
-    @Override
-    public Backbone getBackbone(Backbone.System system) {
-        // TODO Auto-generated method stub
-        return null;
+    
+    public void initUserAndGroupsManager() {
+        this.userAndGroupsProvider = new UserAndGroupsProvider(database);
     }
 }
