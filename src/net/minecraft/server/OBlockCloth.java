@@ -9,6 +9,7 @@ public class OBlockCloth extends OBlock {
         super(35, 64, OMaterial.m);
     }
 
+    @Override
     public int a(int var1, int var2) {
         if (var2 == 0) {
             return this.bN;
@@ -18,6 +19,7 @@ public class OBlockCloth extends OBlock {
         }
     }
 
+    @Override
     protected int c(int var1) {
         return var1;
     }

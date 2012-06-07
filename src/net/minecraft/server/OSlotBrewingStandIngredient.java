@@ -16,10 +16,12 @@ class OSlotBrewingStandIngredient extends OSlot {
         this.a = var1;
     }
 
+    @Override
     public boolean a(OItemStack var1) {
         return var1 != null ? OItem.d[var1.c].n() : false;
     }
 
+    @Override
     public int a() {
         return 64;
     }

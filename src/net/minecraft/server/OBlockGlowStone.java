@@ -12,14 +12,17 @@ public class OBlockGlowStone extends OBlock {
         super(var1, var2, var3);
     }
 
+    @Override
     public int a(int var1, Random var2) {
         return OMathHelper.a(this.a(var2) + var2.nextInt(var1 + 1), 1, 4);
     }
 
+    @Override
     public int a(Random var1) {
         return 2 + var1.nextInt(3);
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OItem.aS.bP;
     }

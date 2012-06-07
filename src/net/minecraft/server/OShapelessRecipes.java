@@ -18,10 +18,12 @@ public class OShapelessRecipes implements OIRecipe {
         this.b = var2;
     }
 
+    @Override
     public OItemStack b() {
         return this.a;
     }
 
+    @Override
     public boolean a(OInventoryCrafting var1) {
         ArrayList var2 = new ArrayList(this.b);
 
@@ -51,10 +53,12 @@ public class OShapelessRecipes implements OIRecipe {
         return var2.isEmpty();
     }
 
+    @Override
     public OItemStack b(OInventoryCrafting var1) {
         return this.a.j();
     }
 
+    @Override
     public int a() {
         return this.b.size();
     }

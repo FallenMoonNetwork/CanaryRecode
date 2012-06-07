@@ -29,14 +29,17 @@ public class OEntitySnowman extends OEntityGolem {
         this.aM.a(1, new OEntityAINearestAttackableTarget(this, OEntityMob.class, 16.0F, 0, true));
     }
 
+    @Override
     public boolean c_() {
         return true;
     }
 
+    @Override
     public int d() {
         return 4;
     }
 
+    @Override
     public void e() {
         super.e();
         if (this.aT()) {
@@ -60,18 +63,22 @@ public class OEntitySnowman extends OEntityGolem {
 
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
     }
 
+    @Override
     protected int f() {
         return OItem.aC.bP;
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         int var3 = this.bS.nextInt(16);
 

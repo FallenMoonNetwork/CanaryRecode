@@ -13,6 +13,7 @@ public class OEntityDragonBase extends OEntityLiving {
         super(var1);
     }
 
+    @Override
     public int d() {
         return this.t;
     }
@@ -21,6 +22,7 @@ public class OEntityDragonBase extends OEntityLiving {
         return this.a(var2, var3);
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         return false;
     }

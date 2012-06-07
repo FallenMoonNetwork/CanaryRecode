@@ -22,6 +22,7 @@ public class OComponentVillagePathGen extends OComponentVillageRoadPiece {
         this.a = Math.max(var3.b(), var3.d());
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
         boolean var4 = false;
 
@@ -88,6 +89,7 @@ public class OComponentVillagePathGen extends OComponentVillageRoadPiece {
         return null;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         for (int var4 = this.g.a; var4 <= this.g.d; ++var4) {
             for (int var5 = this.g.c; var5 <= this.g.f; ++var5) {

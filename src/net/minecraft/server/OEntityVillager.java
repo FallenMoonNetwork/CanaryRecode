@@ -74,10 +74,12 @@ public class OEntityVillager extends OEntityAgeable implements OINpc {
         return canaryVillager;
     }
     
+    @Override
     public boolean c_() {
         return true;
     }
 
+    @Override
     protected void g() {
         if (--this.b <= 0) {
             this.bi.A.a(OMathHelper.b(this.bm), OMathHelper.b(this.bn), OMathHelper.b(this.bo));
@@ -94,41 +96,50 @@ public class OEntityVillager extends OEntityAgeable implements OINpc {
         super.g();
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, Integer.valueOf(0));
     }
 
+    @Override
     public int d() {
         return 20;
     }
 
+    @Override
     public void e() {
         super.e();
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("Profession", this.x());
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.f_(var1.f("Profession"));
     }
 
+    @Override
     protected boolean n() {
         return false;
     }
 
+    @Override
     protected String i() {
         return "mob.villager.default";
     }
 
+    @Override
     protected String j() {
         return "mob.villager.defaulthurt";
     }
 
+    @Override
     protected String k() {
         return "mob.villager.defaultdeath";
     }
@@ -157,6 +168,7 @@ public class OEntityVillager extends OEntityAgeable implements OINpc {
         return this.g;
     }
 
+    @Override
     public void a(OEntityLiving var1) {
         super.a(var1);
         if (this.a != null && var1 != null) {

@@ -39,6 +39,7 @@ public class OChunkCache implements OIBlockAccess {
 
     }
 
+    @Override
     public int a(int var1, int var2, int var3) {
         if (var2 < 0) {
             return 0;
@@ -56,12 +57,14 @@ public class OChunkCache implements OIBlockAccess {
         }
     }
 
+    @Override
     public OTileEntity b(int var1, int var2, int var3) {
         int var4 = (var1 >> 4) - this.a;
         int var5 = (var3 >> 4) - this.b;
         return this.c[var4][var5].e(var1 & 15, var2, var3 & 15);
     }
 
+    @Override
     public int c(int var1, int var2, int var3) {
         if (var2 < 0) {
             return 0;
@@ -74,11 +77,13 @@ public class OChunkCache implements OIBlockAccess {
         }
     }
 
+    @Override
     public OMaterial d(int var1, int var2, int var3) {
         int var4 = this.a(var1, var2, var3);
         return var4 == 0 ? OMaterial.a : OBlock.m[var4].cd;
     }
 
+    @Override
     public boolean e(int var1, int var2, int var3) {
         OBlock var4 = OBlock.m[this.a(var1, var2, var3)];
         return var4 == null ? false : var4.cd.c() && var4.b();

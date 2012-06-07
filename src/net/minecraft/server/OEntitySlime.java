@@ -37,6 +37,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         return canarySlime;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, new Byte((byte) 1));
@@ -52,6 +53,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
     }
 
     // Get the health (relative to the size)
+    @Override
     public int d() {
         int var1 = this.L();
         return var1 * var1;
@@ -62,11 +64,13 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         return this.bY.a(16);
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("Size", this.L() - 1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.c(var1.f("Size") + 1);
@@ -80,6 +84,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         return "mob.slime";
     }
 
+    @Override
     public void F_() {
         if (!this.bi.F && this.bi.q == 0 && this.L() > 0) {
             this.bE = true;
@@ -110,6 +115,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         this.F();
     }
 
+    @Override
     protected void d_() {
         this.aG();
         OEntityPlayer var1 = this.bi.b(this, 16.0D);
@@ -152,6 +158,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         return new OEntitySlime(this.bi);
     }
 
+    @Override
     public void X() {
         int var1 = this.L();
         if (!this.bi.F && var1 > 1 && this.aD() <= 0) {
@@ -170,6 +177,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         super.X();
     }
 
+    @Override
     public void a_(OEntityPlayer var1) {
         if (this.G()) {
             int var2 = this.L();
@@ -188,27 +196,33 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         return this.L();
     }
 
+    @Override
     protected String j() {
         return "mob.slime";
     }
 
+    @Override
     protected String k() {
         return "mob.slime";
     }
 
+    @Override
     protected int f() {
         return this.L() == 1 ? OItem.aL.bP : 0;
     }
 
+    @Override
     public boolean l() {
         OChunk var1 = this.bi.c(OMathHelper.b(this.bm), OMathHelper.b(this.bo));
         return (this.L() == 1 || this.bi.q > 0) && this.bS.nextInt(10) == 0 && var1.a(987234911L).nextInt(10) == 0 && this.bn < 40.0D ? super.l() : false;
     }
 
+    @Override
     protected float p() {
         return 0.4F * this.L();
     }
 
+    @Override
     public int D() {
         return 0;
     }

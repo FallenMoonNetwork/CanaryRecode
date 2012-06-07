@@ -25,18 +25,22 @@ public class OPacket3Chat extends OPacket {
         this.a = var1;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = a(var1, b);
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         a(this.a, var1);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.playerChat(this);
     }
 
+    @Override
     public int a() {
         return 2 + this.a.length() * 2;
     }

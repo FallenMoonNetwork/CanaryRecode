@@ -19,35 +19,42 @@ public class ONBTTagByteArray extends ONBTBase {
         this.a = var2;
     }
 
+    @Override
     void a(DataOutput var1) throws IOException {
         var1.writeInt(this.a.length);
         var1.write(this.a);
     }
 
+    @Override
     void a(DataInput var1) throws IOException {
         int var2 = var1.readInt();
         this.a = new byte[var2];
         var1.readFully(this.a);
     }
 
+    @Override
     public byte a() {
         return (byte) 7;
     }
 
+    @Override
     public String toString() {
         return "[" + this.a.length + " bytes]";
     }
 
+    @Override
     public ONBTBase b() {
         byte[] var1 = new byte[this.a.length];
         System.arraycopy(this.a, 0, var1, 0, this.a.length);
         return new ONBTTagByteArray(this.c(), var1);
     }
 
+    @Override
     public boolean equals(Object var1) {
         return super.equals(var1) ? Arrays.equals(this.a, ((ONBTTagByteArray) var1).a) : false;
     }
 
+    @Override
     public int hashCode() {
         return super.hashCode() ^ Arrays.hashCode(this.a);
     }

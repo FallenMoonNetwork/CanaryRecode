@@ -21,6 +21,7 @@ public class OEntitySnowball extends OEntityThrowable {
         super(var1, var2, var4, var6);
     }
 
+    @Override
     protected void a(OMovingObjectPosition var1) {
         if (var1.g != null) {
             byte var2 = 0;

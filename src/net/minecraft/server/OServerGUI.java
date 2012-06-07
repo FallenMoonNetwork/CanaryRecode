@@ -88,10 +88,12 @@ public class OServerGUI extends JComponent implements OICommandListener {
         return var1;
     }
 
+    @Override
     public void b(String var1) {
         a.info(var1);
     }
 
+    @Override
     public String d() {
         return "CONSOLE";
     }

@@ -15,6 +15,7 @@ public class OEntityAISit extends OEntityAIBase {
         this.a(5);
     }
 
+    @Override
     public boolean a() {
         if (!this.a.u_()) {
             return false;
@@ -28,11 +29,13 @@ public class OEntityAISit extends OEntityAIBase {
         }
     }
 
+    @Override
     public void c() {
         this.a.al().f();
         this.a.c(true);
     }
 
+    @Override
     public void d() {
         this.a.c(false);
     }

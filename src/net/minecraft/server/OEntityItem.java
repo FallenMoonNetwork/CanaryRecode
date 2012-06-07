@@ -55,6 +55,7 @@ public class OEntityItem extends OEntity {
     }
     //CanaryMod end
 
+    @Override
     protected boolean g_() {
         return false;
     }
@@ -65,9 +66,11 @@ public class OEntityItem extends OEntity {
         this.bF = this.bH / 2.0F;
     }
 
+    @Override
     protected void b() {
     }
 
+    @Override
     public void F_() {
         super.F_();
         if (this.c > 0) {
@@ -114,14 +117,17 @@ public class OEntityItem extends OEntity {
         this.b = 4800;
     }
 
+    @Override
     public boolean h_() {
         return this.bi.a(this.bw, OMaterial.g, this);
     }
 
+    @Override
     protected void a(int var1) {
         this.a(ODamageSource.b, var1);
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         this.aW();
         this.e -= var2;
@@ -132,12 +138,14 @@ public class OEntityItem extends OEntity {
         return false;
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         var1.a("Health", (short) ((byte) this.e));
         var1.a("Age", (short) this.b);
         var1.a("Item", this.a.b(new ONBTTagCompound()));
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         this.e = var1.e("Health") & 255;
         this.b = var1.e("Age");
@@ -149,6 +157,7 @@ public class OEntityItem extends OEntity {
 
     }
 
+    @Override
     public void a_(OEntityPlayer var1) {
         if (!this.bi.F) {
             int var2 = this.a.a;
@@ -179,10 +188,12 @@ public class OEntityItem extends OEntity {
         }
     }
 
+    @Override
     public String s() {
         return OStatCollector.a("item." + this.a.k());
     }
 
+    @Override
     public boolean k_() {
         return false;
     }

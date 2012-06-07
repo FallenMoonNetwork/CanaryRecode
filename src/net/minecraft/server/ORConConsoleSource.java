@@ -19,10 +19,12 @@ public class ORConConsoleSource implements OICommandListener {
         return this.b.toString();
     }
 
+    @Override
     public void b(String var1) {
         this.b.append(var1);
     }
 
+    @Override
     public String d() {
         return "Rcon";
     }

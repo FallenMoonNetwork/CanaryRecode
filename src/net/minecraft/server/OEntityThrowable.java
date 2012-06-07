@@ -28,6 +28,7 @@ public abstract class OEntityThrowable extends OEntity {
         this.b(0.25F, 0.25F);
     }
 
+    @Override
     protected void b() {
     }
 
@@ -84,6 +85,7 @@ public abstract class OEntityThrowable extends OEntity {
         this.h = 0;
     }
 
+    @Override
     public void F_() {
         this.bL = this.bm;
         this.bM = this.bn;
@@ -201,6 +203,7 @@ public abstract class OEntityThrowable extends OEntity {
 
     protected abstract void a(OMovingObjectPosition var1);
 
+    @Override
     public void b(ONBTTagCompound var1) {
         var1.a("xTile", (short) this.d);
         var1.a("yTile", (short) this.e);
@@ -210,6 +213,7 @@ public abstract class OEntityThrowable extends OEntity {
         var1.a("inGround", (byte) (this.a ? 1 : 0));
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         this.d = var1.e("xTile");
         this.e = var1.e("yTile");
@@ -219,6 +223,7 @@ public abstract class OEntityThrowable extends OEntity {
         this.a = var1.d("inGround") == 1;
     }
 
+    @Override
     public void a_(OEntityPlayer var1) {
     }
 }

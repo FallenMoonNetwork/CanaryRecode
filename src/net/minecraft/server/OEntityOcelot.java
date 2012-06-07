@@ -60,11 +60,13 @@ public class OEntityOcelot extends OEntityTameable {
         return canaryOcelot;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(18, Byte.valueOf((byte) 0));
     }
 
+    @Override
     public void g() {
         if (!this.aj().a()) {
             this.g(false);
@@ -85,63 +87,78 @@ public class OEntityOcelot extends OEntityTameable {
 
     }
 
+    @Override
     protected boolean n() {
         return !this.u_();
     }
 
+    @Override
     public boolean c_() {
         return true;
     }
 
+    @Override
     public int d() {
         return 10;
     }
 
+    @Override
     protected void a(float var1) {
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("CatType", this.r());
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.c_(var1.f("CatType"));
     }
 
+    @Override
     protected String i() {
         return this.u_() ? (this.r_() ? "mob.cat.purr" : (this.bS.nextInt(4) == 0 ? "mob.cat.purreow" : "mob.cat.meow")) : "";
     }
 
+    @Override
     protected String j() {
         return "mob.cat.hitt";
     }
 
+    @Override
     protected String k() {
         return "mob.cat.hitt";
     }
 
+    @Override
     protected float p() {
         return 0.4F;
     }
 
+    @Override
     protected int f() {
         return OItem.aE.bP;
     }
 
+    @Override
     public boolean a(OEntity var1) {
         return var1.a(ODamageSource.a(this), 3);
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         this.a.a(false);
         return super.a(var1, var2);
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
         if (!this.u_()) {
@@ -176,6 +193,7 @@ public class OEntityOcelot extends OEntityTameable {
         }
     }
 
+    @Override
     public OEntityAnimal a(OEntityAnimal var1) {
         OEntityOcelot var2 = new OEntityOcelot(this.bi);
         if (this.u_()) {
@@ -187,10 +205,12 @@ public class OEntityOcelot extends OEntityTameable {
         return var2;
     }
 
+    @Override
     public boolean a(OItemStack var1) {
         return var1 != null && var1.c == OItem.aT.bP;
     }
 
+    @Override
     public boolean b(OEntityAnimal var1) {
         if (var1 == this) {
             return false;
@@ -212,6 +232,7 @@ public class OEntityOcelot extends OEntityTameable {
         this.bY.b(18, Byte.valueOf((byte) var1));
     }
 
+    @Override
     public boolean l() {
         if (this.bi.r.nextInt(3) == 0) {
             return false;
@@ -234,6 +255,7 @@ public class OEntityOcelot extends OEntityTameable {
         }
     }
 
+    @Override
     public String s() {
         return this.u_() ? "entity.Cat.name" : super.s();
     }

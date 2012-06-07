@@ -16,14 +16,17 @@ public class OEntityAILookIdle extends OEntityAIBase {
         this.a(3);
     }
 
+    @Override
     public boolean a() {
         return this.a.an().nextFloat() < 0.02F;
     }
 
+    @Override
     public boolean b() {
         return this.d >= 0;
     }
 
+    @Override
     public void c() {
         double var1 = 6.283185307179586D * this.a.an().nextDouble();
         this.b = Math.cos(var1);
@@ -31,6 +34,7 @@ public class OEntityAILookIdle extends OEntityAIBase {
         this.d = 20 + this.a.an().nextInt(20);
     }
 
+    @Override
     public void e() {
         --this.d;
         this.a.ai().a(this.a.bm + this.b, this.a.bn + this.a.B(), this.a.bo + this.c, 10.0F, this.a.D());

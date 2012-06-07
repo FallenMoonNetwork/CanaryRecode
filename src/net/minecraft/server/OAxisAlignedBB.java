@@ -322,6 +322,7 @@ public class OAxisAlignedBB {
         this.f = var1.f;
     }
 
+    @Override
     public String toString() {
         return "box[" + this.a + ", " + this.b + ", " + this.c + " -> " + this.d + ", " + this.e + ", " + this.f + "]";
     }

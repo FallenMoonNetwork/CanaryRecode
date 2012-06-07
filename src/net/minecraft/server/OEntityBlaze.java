@@ -35,39 +35,48 @@ public class OEntityBlaze extends OEntityMob {
     public CanaryBlaze getCanaryBlaze() {
         return canaryBlaze;
     }
+    @Override
     public int d() {
         return 20;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, new Byte((byte) 0));
     }
 
+    @Override
     protected String i() {
         return "mob.blaze.breathe";
     }
 
+    @Override
     protected String j() {
         return "mob.blaze.hit";
     }
 
+    @Override
     protected String k() {
         return "mob.blaze.death";
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         return super.a(var1, var2);
     }
 
+    @Override
     public void a(ODamageSource var1) {
         super.a(var1);
     }
 
+    @Override
     public float b(float var1) {
         return 1.0F;
     }
 
+    @Override
     public void e() {
         if (!this.bi.F) {
             if (this.aT()) {
@@ -100,6 +109,7 @@ public class OEntityBlaze extends OEntityMob {
         super.e();
     }
 
+    @Override
     protected void a(OEntity var1, float var2) {
         if (this.aw <= 0 && var2 < 2.0F && var1.bw.e > this.bw.b && var1.bw.b < this.bw.e) {
             this.aw = 20;
@@ -139,25 +149,31 @@ public class OEntityBlaze extends OEntityMob {
 
     }
 
+    @Override
     protected void a(float var1) {
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
     }
 
+    @Override
     protected int f() {
         return OItem.bn.bP;
     }
 
+    @Override
     public boolean B_() {
         return this.A();
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         if (var1) {
             int var3 = this.bS.nextInt(2 + var2);
@@ -184,6 +200,7 @@ public class OEntityBlaze extends OEntityMob {
         this.bY.b(16, Byte.valueOf(var2));
     }
 
+    @Override
     protected boolean C() {
         return true;
     }

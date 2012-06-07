@@ -18,6 +18,7 @@ public class OBlockFire extends OBlock {
         this.a(true);
     }
 
+    @Override
     public void k() {
         this.a(OBlock.x.bO, 5, 20);
         this.a(OBlock.aZ.bO, 5, 20);
@@ -36,30 +37,37 @@ public class OBlockFire extends OBlock {
         this.b[var1] = var3;
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         return null;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 3;
     }
 
+    @Override
     public int a(Random var1) {
         return 0;
     }
 
+    @Override
     public int d() {
         return 30;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         boolean var6 = var1.a(var2, var3 - 1, var4) == OBlock.bb.bO;
         if (var1.t instanceof OWorldProviderEnd && var1.a(var2, var3 - 1, var4) == OBlock.z.bO) {
@@ -175,6 +183,7 @@ public class OBlockFire extends OBlock {
         }
     }
 
+    @Override
     public boolean E_() {
         return false;
     }
@@ -188,16 +197,19 @@ public class OBlockFire extends OBlock {
         return var6 > var5 ? var6 : var5;
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return var1.e(var2, var3 - 1, var4) || this.g(var1, var2, var3, var4);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (!var1.e(var2, var3 - 1, var4) && !this.g(var1, var2, var3, var4)) {
             var1.e(var2, var3, var4, 0);
         }
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         if (var1.t.g > 0 || var1.a(var2, var3 - 1, var4) != OBlock.ap.bO || !OBlock.be.b_(var1, var2, var3, var4)) {
             if (!var1.e(var2, var3 - 1, var4) && !this.g(var1, var2, var3, var4)) {

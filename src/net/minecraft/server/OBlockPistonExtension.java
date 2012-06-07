@@ -20,6 +20,7 @@ public class OBlockPistonExtension extends OBlock {
         this.c(0.5F);
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         super.d(var1, var2, var3, var4);
         int var5 = var1.c(var2, var3, var4);
@@ -38,35 +39,43 @@ public class OBlockPistonExtension extends OBlock {
 
     }
 
+    @Override
     public int a(int var1, int var2) {
         int var3 = b(var2);
         return var1 == var3 ? (this.a >= 0 ? this.a : ((var2 & 8) != 0 ? this.bN - 1 : this.bN)) : (var1 == OFacing.a[var3] ? 107 : 108);
     }
 
+    @Override
     public int c() {
         return 17;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return false;
     }
 
+    @Override
     public boolean b(OWorld var1, int var2, int var3, int var4, int var5) {
         return false;
     }
 
+    @Override
     public int a(Random var1) {
         return 0;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OAxisAlignedBB var5, ArrayList var6) {
         int var7 = var1.c(var2, var3, var4);
         switch (b(var7)) {
@@ -110,6 +119,7 @@ public class OBlockPistonExtension extends OBlock {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
         switch (b(var5)) {
@@ -134,6 +144,7 @@ public class OBlockPistonExtension extends OBlock {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = b(var1.c(var2, var3, var4));
         int var7 = var1.a(var2 - OFacing.b[var6], var3 - OFacing.c[var6], var4 - OFacing.d[var6]);

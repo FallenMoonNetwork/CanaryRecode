@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.canarymod.Canary;
+import net.canarymod.Colors;
 import net.canarymod.Logman;
 import net.canarymod.TextFormat;
 import net.canarymod.api.NetServerHandler;
@@ -40,6 +41,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     /**
      * CanaryMod: Get player handle
      */
+    @Override
     public OEntityPlayerMP getHandle() {
         return (OEntityPlayerMP) entity;
     }
@@ -72,7 +74,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 notify("You are currently muted!");
             }
             else {
-                String prefix = "<" + getColor() + getName() + TextFormat.White + "> ";
+                String prefix = "<" + getColor() + getName() + Colors.White + "> ";
                 ArrayList<Player> receivers = (ArrayList<Player>) Canary.getServer().getPlayerList();
                 ChatHook hook = (ChatHook) Canary.hooks().callCancelableHook(new ChatHook(this, prefix, message, receivers));
                 if(hook.isCancelled()) {
@@ -208,7 +210,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             } // No need to go on, commands were parsed.
             
             if (!hasPermission("canary.commands."+cmd.replace("/", "")) && !cmd.startsWith("/#")) {
-                sendMessage(TextFormat.Rose + "Unknown command.");
+                sendMessage(Colors.Rose + "Unknown command.");
                 return false;
             }
             //TODO: Add native Canary Commands here!
@@ -217,7 +219,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         } catch (Throwable ex) {
             Logman.logStackTrace("Exception in command handler: ", ex);
             if (isAdmin()) {
-                sendMessage(TextFormat.Rose + "Exception occured. "+ex.getMessage());
+                sendMessage(Colors.Rose + "Exception occured. "+ex.getMessage());
             }
             return false;
         }
@@ -402,16 +404,16 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void notify(String message) {
-        sendMessage(TextFormat.Rose+message);
+        sendMessage(Colors.Rose+message);
         
     }
 
     @Override
     public String getColor() {
         if(prefix != null) {
-            return TextFormat.Marker+prefix;
+            return Colors.Marker+prefix;
         }
-        return TextFormat.Marker+group.prefix;
+        return Colors.Marker+group.prefix;
     }
 
     @Override

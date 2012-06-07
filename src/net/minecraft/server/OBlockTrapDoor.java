@@ -23,31 +23,38 @@ public class OBlockTrapDoor extends OBlock {
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var4, 0.5F + var3);
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public boolean b(OIBlockAccess var1, int var2, int var3, int var4) {
         return !e(var1.c(var2, var3, var4));
     }
 
+    @Override
     public int c() {
         return 0;
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         this.a(var1, var2, var3, var4);
         return super.e(var1, var2, var3, var4);
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         this.d(var1.c(var2, var3, var4));
     }
 
+    @Override
     public void f() {
         float var1 = 0.1875F;
         this.a(0.0F, 0.5F - var1 / 2.0F, 0.0F, 1.0F, 0.5F + var1 / 2.0F, 1.0F);
@@ -76,10 +83,12 @@ public class OBlockTrapDoor extends OBlock {
 
     }
 
+    @Override
     public void b(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         this.a(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (this.cd == OMaterial.f) {
             return true;
@@ -100,6 +109,7 @@ public class OBlockTrapDoor extends OBlock {
         }
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (!var1.F) {
             int var6 = var1.c(var2, var3, var4);
@@ -134,11 +144,13 @@ public class OBlockTrapDoor extends OBlock {
         }
     }
 
+    @Override
     public OMovingObjectPosition a(OWorld var1, int var2, int var3, int var4, OVec3D var5, OVec3D var6) {
         this.a(var1, var2, var3, var4);
         return super.a(var1, var2, var3, var4, var5, var6);
     }
 
+    @Override
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         byte var6 = 0;
         if (var5 == 2) {
@@ -160,6 +172,7 @@ public class OBlockTrapDoor extends OBlock {
         var1.c(var2, var3, var4, var6);
     }
 
+    @Override
     public boolean b(OWorld var1, int var2, int var3, int var4, int var5) {
         if (var5 == 0) {
             return false;

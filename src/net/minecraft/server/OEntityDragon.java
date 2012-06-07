@@ -53,6 +53,7 @@ public class OEntityDragon extends OEntityDragonBase {
         this.cd = true;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, new Integer(this.t));
@@ -86,6 +87,7 @@ public class OEntityDragon extends OEntityDragonBase {
         return var5;
     }
 
+    @Override
     public void e() {
         this.n = this.o;
         if (!this.bi.F) {
@@ -459,6 +461,7 @@ public class OEntityDragon extends OEntityDragonBase {
         return var8;
     }
 
+    @Override
     public boolean a(OEntityDragonPart var1, ODamageSource var2, int var3) {
         if (var1 != this.g) {
             var3 = var3 / 4 + 1;
@@ -478,6 +481,7 @@ public class OEntityDragon extends OEntityDragonBase {
         return true;
     }
 
+    @Override
     protected void aB() {
         ++this.r;
         if (this.r >= 180 && this.r <= 200) {
@@ -557,13 +561,16 @@ public class OEntityDragon extends OEntityDragonBase {
         OBlockEndPortal.a = false;
     }
 
+    @Override
     protected void aG() {
     }
 
+    @Override
     public OEntity[] bb() {
         return this.f;
     }
 
+    @Override
     public boolean o_() {
         return false;
     }

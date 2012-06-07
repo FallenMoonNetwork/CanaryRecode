@@ -10,6 +10,7 @@ public class OGenLayerSmooth extends OGenLayer {
         super.a = var3;
     }
 
+    @Override
     public int[] a(int var1, int var2, int var3, int var4) {
         int var5 = var1 - 1;
         int var6 = var2 - 1;

@@ -10,14 +10,17 @@ public class OEnchantmentArrowKnockback extends OEnchantment {
         this.a("arrowKnockback");
     }
 
+    @Override
     public int a(int var1) {
         return 12 + (var1 - 1) * 20;
     }
 
+    @Override
     public int b(int var1) {
         return this.a(var1) + 25;
     }
 
+    @Override
     public int a() {
         return 2;
     }

@@ -83,6 +83,7 @@ public class OEntityArrow extends OEntity {
         this.a(this.bp, this.bq, this.br, var3 * 1.5F, 1.0F);
     }
 
+    @Override
     protected void b() {
     }
 
@@ -106,6 +107,7 @@ public class OEntityArrow extends OEntity {
         this.k = 0;
     }
 
+    @Override
     public void F_() {
         super.F_();
         if (this.bv == 0.0F && this.bu == 0.0F) {
@@ -291,6 +293,7 @@ public class OEntityArrow extends OEntity {
         }
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         var1.a("xTile", (short) this.e);
         var1.a("yTile", (short) this.f);
@@ -303,6 +306,7 @@ public class OEntityArrow extends OEntity {
         var1.a("damage", this.m);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         this.e = var1.e("xTile");
         this.f = var1.e("yTile");
@@ -318,6 +322,7 @@ public class OEntityArrow extends OEntity {
 
     }
 
+    @Override
     public void a_(OEntityPlayer var1) {
         if (!this.bi.F) {
             if (this.j && this.a && this.b <= 0 && var1.k.a(new OItemStack(OItem.k, 1))) {
@@ -341,6 +346,7 @@ public class OEntityArrow extends OEntity {
         this.n = var1;
     }
 
+    @Override
     public boolean k_() {
         return false;
     }

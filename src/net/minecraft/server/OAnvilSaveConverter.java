@@ -35,15 +35,18 @@ public class OAnvilSaveConverter extends OSaveFormatOld {
         return 19133;
     }
 
+    @Override
     public OISaveHandler a(String var1, boolean var2) {
         return new OAnvilSaveHandler(this.a, var1, var2);
     }
 
+    @Override
     public boolean a(String var1) {
         OWorldInfo var2 = this.b(var1);
         return var2 != null && var2.h() != this.a();
     }
 
+    @Override
     public boolean a(String var1, OIProgressUpdate var2) {
         var2.a(0);
         ArrayList<File> var3 = new ArrayList<File>();

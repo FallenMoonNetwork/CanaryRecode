@@ -222,6 +222,7 @@ public class ORConThreadQuery extends ORConThreadBase {
         }
     }
 
+    @Override
     public void run() {
         this.b("Query running on " + this.r + ":" + this.h);
         this.g = System.currentTimeMillis();
@@ -258,6 +259,7 @@ public class ORConThreadQuery extends ORConThreadBase {
         this.d();
     }
 
+    @Override
     public void a() {
         if (!this.a) {
             if (0 < this.h && '\uffff' >= this.h) {

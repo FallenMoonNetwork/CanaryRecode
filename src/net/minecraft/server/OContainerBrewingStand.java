@@ -36,11 +36,13 @@ public class OContainerBrewingStand extends OContainer {
 
     }
 
+    @Override
     public void a(OICrafting var1) {
         super.a(var1);
         var1.a(this, 0, this.a.i());
     }
 
+    @Override
     public void a() {
         super.a();
 
@@ -54,10 +56,12 @@ public class OContainerBrewingStand extends OContainer {
         this.b = this.a.i();
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         return this.a.a(var1);
     }
 
+    @Override
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);

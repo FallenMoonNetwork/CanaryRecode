@@ -27,6 +27,7 @@ public class OPacket202PlayerAbilities extends OPacket {
         this.d = var1.d;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readBoolean();
         this.b = var1.readBoolean();
@@ -34,6 +35,7 @@ public class OPacket202PlayerAbilities extends OPacket {
         this.d = var1.readBoolean();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeBoolean(this.a);
         var1.writeBoolean(this.b);
@@ -41,10 +43,12 @@ public class OPacket202PlayerAbilities extends OPacket {
         var1.writeBoolean(this.d);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 1;
     }

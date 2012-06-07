@@ -16,18 +16,22 @@ public class OBlockTorch extends OBlock {
         this.a(true);
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         return null;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 2;
     }
@@ -52,10 +56,12 @@ public class OBlockTorch extends OBlock {
         }
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return var1.b(var2 - 1, var3, var4, true) ? true : (var1.b(var2 + 1, var3, var4, true) ? true : (var1.b(var2, var3, var4 - 1, true) ? true : (var1.b(var2, var3, var4 + 1, true) ? true : this.g(var1, var2, var3 - 1, var4))));
     }
 
+    @Override
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
         if (var5 == 1 && this.g(var1, var2, var3 - 1, var4)) {
@@ -81,6 +87,7 @@ public class OBlockTorch extends OBlock {
         var1.c(var2, var3, var4, var6);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         super.a(var1, var2, var3, var4, var5);
         if (var1.c(var2, var3, var4) == 0) {
@@ -89,6 +96,7 @@ public class OBlockTorch extends OBlock {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         if (var1.b(var2 - 1, var3, var4, true)) {
             var1.c(var2, var3, var4, 1);
@@ -105,6 +113,7 @@ public class OBlockTorch extends OBlock {
         this.h(var1, var2, var3, var4);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (this.h(var1, var2, var3, var4)) {
             int var6 = var1.c(var2, var3, var4);
@@ -150,6 +159,7 @@ public class OBlockTorch extends OBlock {
         }
     }
 
+    @Override
     public OMovingObjectPosition a(OWorld var1, int var2, int var3, int var4, OVec3D var5, OVec3D var6) {
         int var7 = var1.c(var2, var3, var4) & 7;
         float var8 = 0.15F;

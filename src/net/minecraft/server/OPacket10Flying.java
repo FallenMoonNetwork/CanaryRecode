@@ -23,18 +23,22 @@ public class OPacket10Flying extends OPacket {
         super();
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.g = var1.read() != 0;
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.write(this.g ? 1 : 0);
     }
 
+    @Override
     public int a() {
         return 1;
     }

@@ -17,10 +17,12 @@ public class OSlotFurnace extends OSlot {
         this.a = var1;
     }
 
+    @Override
     public boolean a(OItemStack var1) {
         return false;
     }
 
+    @Override
     public OItemStack a(int var1) {
         if (this.c()) {
             this.f += Math.min(var1, this.b().a);
@@ -29,16 +31,19 @@ public class OSlotFurnace extends OSlot {
         return super.a(var1);
     }
 
+    @Override
     public void c(OItemStack var1) {
         this.b(var1);
         super.c(var1);
     }
 
+    @Override
     protected void a(OItemStack var1, int var2) {
         this.f += var2;
         this.b(var1);
     }
 
+    @Override
     protected void b(OItemStack var1) {
         var1.a(this.a.bi, this.a, this.f);
         this.f = 0;

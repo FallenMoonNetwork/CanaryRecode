@@ -40,14 +40,17 @@ public class OEntityChicken extends OEntityAnimal {
         this.aL.a(7, new OEntityAILookIdle(this));
     }
 
+    @Override
     public boolean c_() {
         return true;
     }
 
+    @Override
     public int d() {
         return 4;
     }
 
+    @Override
     public void e() {
         super.e();
         this.h = this.b;
@@ -79,33 +82,41 @@ public class OEntityChicken extends OEntityAnimal {
 
     }
 
+    @Override
     protected void a(float var1) {
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
     }
 
+    @Override
     protected String i() {
         return "mob.chicken";
     }
 
+    @Override
     protected String j() {
         return "mob.chickenhurt";
     }
 
+    @Override
     protected String k() {
         return "mob.chickenhurt";
     }
 
+    @Override
     protected int f() {
         return OItem.K.bP;
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         int var3 = this.bS.nextInt(3) + this.bS.nextInt(1 + var2);
 
@@ -121,6 +132,7 @@ public class OEntityChicken extends OEntityAnimal {
 
     }
 
+    @Override
     public OEntityAnimal a(OEntityAnimal var1) {
         return new OEntityChicken(this.bi);
     }

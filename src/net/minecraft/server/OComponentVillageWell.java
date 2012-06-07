@@ -29,6 +29,7 @@ public class OComponentVillageWell extends OComponentVillage {
 
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
         OStructureVillagePieces.b((OComponentVillageStartPiece) var1, var2, var3, this.g.a - 1, this.g.e - 4, this.g.c + 1, 1, this.c());
         OStructureVillagePieces.b((OComponentVillageStartPiece) var1, var2, var3, this.g.d + 1, this.g.e - 4, this.g.c + 1, 3, this.c());
@@ -36,6 +37,7 @@ public class OComponentVillageWell extends OComponentVillage {
         OStructureVillagePieces.b((OComponentVillageStartPiece) var1, var2, var3, this.g.a + 1, this.g.e - 4, this.g.f + 1, 0, this.c());
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         if (this.b < 0) {
             this.b = this.b(var1, var3);

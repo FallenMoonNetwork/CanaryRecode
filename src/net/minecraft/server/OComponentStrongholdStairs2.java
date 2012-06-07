@@ -17,6 +17,7 @@ public class OComponentStrongholdStairs2 extends OComponentStrongholdStairs {
         super(0, var2, var3, var4);
     }
 
+    @Override
     public OChunkPosition b_() {
         return this.b != null ? this.b.b_() : super.b_();
     }

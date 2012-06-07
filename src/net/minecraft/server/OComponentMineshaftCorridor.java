@@ -62,6 +62,7 @@ public class OComponentMineshaftCorridor extends OStructureComponent {
         return var7 > 0 ? var6 : null;
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
         int var4 = this.c();
         int var5 = var3.nextInt(4);
@@ -129,6 +130,7 @@ public class OComponentMineshaftCorridor extends OStructureComponent {
 
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         if (this.a(var1, var3)) {
             return false;

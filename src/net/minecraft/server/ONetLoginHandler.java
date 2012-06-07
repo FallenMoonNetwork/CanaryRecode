@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import net.canarymod.Canary;
+import net.canarymod.Colors;
 import net.canarymod.TextFormat;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.Dimension.Type;
@@ -76,6 +77,7 @@ public class ONetLoginHandler extends ONetHandler {
 
     }
 
+    @Override
     public void a(OPacket2Handshake var1) {
         if (this.e.n) {
             this.i = Long.toString(d.nextLong(), 16);
@@ -86,6 +88,7 @@ public class ONetLoginHandler extends ONetHandler {
 
     }
 
+    @Override
     public void a(OPacket1Login var1) {
         this.g = var1.b;
         if (var1.a != 29) {
@@ -120,7 +123,7 @@ public class ONetLoginHandler extends ONetHandler {
             var5.b((new OPacket6SpawnPosition(var4.a, var4.b, var4.c)));
             var5.b((new OPacket202PlayerAbilities(var2.L)));
             this.e.h.a(var2, var3);
-            ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(var2.getPlayer(), TextFormat.Yellow + var2.getPlayer().getName() + " joined the game.", null));
+            ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(var2.getPlayer(), Colors.Yellow + var2.getPlayer().getName() + " joined the game.", null));
             if (!hook.isHidden()) {
                 this.e.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
             }
@@ -141,11 +144,13 @@ public class ONetLoginHandler extends ONetHandler {
         this.c = true;
     }
 
+    @Override
     public void a(String var1, Object[] var2) {
         a.info(this.b() + " lost connection");
         this.c = true;
     }
 
+    @Override
     public void a(OPacket254ServerPing var1) {
         try {
             String var2 = this.e.s + "\u00a7" + this.e.h.j() + "\u00a7" + this.e.h.k();
@@ -159,6 +164,7 @@ public class ONetLoginHandler extends ONetHandler {
 
     }
 
+    @Override
     public void a(OPacket var1) {
         this.a("Protocol error");
     }
@@ -167,6 +173,7 @@ public class ONetLoginHandler extends ONetHandler {
         return this.g != null ? this.g + " [" + this.b.c().toString() + "]" : this.b.c().toString();
     }
 
+    @Override
     public boolean c() {
         return true;
     }

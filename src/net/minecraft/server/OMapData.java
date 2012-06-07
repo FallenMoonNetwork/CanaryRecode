@@ -28,6 +28,7 @@ public class OMapData extends OWorldSavedData {
         super(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         this.d = var1.d("dimension");
         this.b = var1.f("xCenter");
@@ -66,6 +67,7 @@ public class OMapData extends OWorldSavedData {
 
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         var1.a("dimension", this.d);
         var1.a("xCenter", this.b);

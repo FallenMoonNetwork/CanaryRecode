@@ -12,6 +12,7 @@ public class OItemRedstone extends OItem {
         super(var1);
     }
 
+    @Override
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
         if (var3.a(var4, var5, var6) != OBlock.aS.bO) {
             if (var7 == 0) {

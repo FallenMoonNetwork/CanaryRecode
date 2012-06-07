@@ -24,22 +24,26 @@ public class OPacket105UpdateProgressbar extends OPacket {
         this.c = var3;
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readByte();
         this.b = var1.readShort();
         this.c = var1.readShort();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeByte(this.a);
         var1.writeShort(this.b);
         var1.writeShort(this.c);
     }
 
+    @Override
     public int a() {
         return 5;
     }

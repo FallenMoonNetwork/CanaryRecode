@@ -16,10 +16,12 @@ public class OBlockFence extends OBlock {
         super(var1, var2, var3);
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return super.c(var1, var2, var3, var4);
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         boolean var5 = this.c((OIBlockAccess) var1, var2, var3, var4 - 1);
         boolean var6 = this.c((OIBlockAccess) var1, var2, var3, var4 + 1);
@@ -48,6 +50,7 @@ public class OBlockFence extends OBlock {
         return OAxisAlignedBB.b((var2 + var9), var3, (var4 + var11), (var2 + var10), (var3 + 1.5F), (var4 + var12));
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         boolean var5 = this.c(var1, var2, var3, var4 - 1);
         boolean var6 = this.c(var1, var2, var3, var4 + 1);
@@ -76,18 +79,22 @@ public class OBlockFence extends OBlock {
         this.a(var9, 0.0F, var11, var10, 1.0F, var12);
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public boolean b(OIBlockAccess var1, int var2, int var3, int var4) {
         return false;
     }
 
+    @Override
     public int c() {
         return 11;
     }

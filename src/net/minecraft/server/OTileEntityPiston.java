@@ -38,6 +38,7 @@ public class OTileEntityPiston extends OTileEntity {
         return this.a;
     }
 
+    @Override
     public int k() {
         return this.b;
     }
@@ -95,6 +96,7 @@ public class OTileEntityPiston extends OTileEntity {
 
     }
 
+    @Override
     public void q_() {
         this.g = this.f;
         if (this.g >= 1.0F) {
@@ -118,6 +120,7 @@ public class OTileEntityPiston extends OTileEntity {
         }
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.a = var1.f("blockId");
@@ -127,6 +130,7 @@ public class OTileEntityPiston extends OTileEntity {
         this.d = var1.o("extending");
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("blockId", this.a);

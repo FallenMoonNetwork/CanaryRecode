@@ -16,6 +16,7 @@ public class OEntityAILookAtVillager extends OEntityAIBase {
         this.a(3);
     }
 
+    @Override
     public boolean a() {
         if (!this.a.bi.e()) {
             return false;
@@ -27,20 +28,24 @@ public class OEntityAILookAtVillager extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return this.c > 0;
     }
 
+    @Override
     public void c() {
         this.c = 400;
         this.a.a(true);
     }
 
+    @Override
     public void d() {
         this.a.a(false);
         this.b = null;
     }
 
+    @Override
     public void e() {
         this.a.ai().a(this.b, 30.0F, 30.0F);
         --this.c;

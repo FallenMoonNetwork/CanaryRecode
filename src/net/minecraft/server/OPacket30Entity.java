@@ -26,18 +26,22 @@ public class OPacket30Entity extends OPacket {
         this.a = var1;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 4;
     }

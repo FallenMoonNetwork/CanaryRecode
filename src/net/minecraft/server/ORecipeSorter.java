@@ -22,6 +22,7 @@ class ORecipeSorter implements Comparator {
 
     // $FF: synthetic method
     // $FF: bridge method
+    @Override
     public int compare(Object var1, Object var2) {
         return this.a((OIRecipe) var1, (OIRecipe) var2);
     }

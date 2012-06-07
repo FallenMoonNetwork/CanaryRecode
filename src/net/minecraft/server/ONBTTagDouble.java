@@ -19,26 +19,32 @@ public class ONBTTagDouble extends ONBTBase {
         this.a = var2;
     }
 
+    @Override
     void a(DataOutput var1) throws IOException {
         var1.writeDouble(this.a);
     }
 
+    @Override
     void a(DataInput var1) throws IOException {
         this.a = var1.readDouble();
     }
 
+    @Override
     public byte a() {
         return (byte) 6;
     }
 
+    @Override
     public String toString() {
         return "" + this.a;
     }
 
+    @Override
     public ONBTBase b() {
         return new ONBTTagDouble(this.c(), this.a);
     }
 
+    @Override
     public boolean equals(Object var1) {
         if (super.equals(var1)) {
             ONBTTagDouble var2 = (ONBTTagDouble) var1;
@@ -48,6 +54,7 @@ public class ONBTTagDouble extends ONBTBase {
         }
     }
 
+    @Override
     public int hashCode() {
         long var1 = Double.doubleToLongBits(this.a);
         return super.hashCode() ^ (int) (var1 ^ var1 >>> 32);

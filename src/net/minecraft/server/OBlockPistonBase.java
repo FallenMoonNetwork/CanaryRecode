@@ -27,23 +27,28 @@ public class OBlockPistonBase extends OBlock {
         this.c(0.5F);
     }
 
+    @Override
     public int a(int var1, int var2) {
         int var3 = d(var2);
         return var3 > 5 ? this.bN : (var1 == var3 ? (!e(var2) && this.bV <= 0.0D && this.bW <= 0.0D && this.bX <= 0.0D && this.bY >= 1.0D && this.bZ >= 1.0D && this.ca >= 1.0D ? this.bN : 110) : (var1 == OFacing.a[var3] ? 109 : 108));
     }
 
+    @Override
     public int c() {
         return 16;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         return false;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = c(var1, var2, var3, var4, (OEntityPlayer) var5);
         var1.c(var2, var3, var4, var6);
@@ -53,6 +58,7 @@ public class OBlockPistonBase extends OBlock {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (!var1.F && !b) {
             this.g(var1, var2, var3, var4);
@@ -60,6 +66,7 @@ public class OBlockPistonBase extends OBlock {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         if (!var1.F && var1.b(var2, var3, var4) == null && !b) {
             this.g(var1, var2, var3, var4);
@@ -89,6 +96,7 @@ public class OBlockPistonBase extends OBlock {
         return var5 != 0 && var1.j(var2, var3 - 1, var4, 0) ? true : (var5 != 1 && var1.j(var2, var3 + 1, var4, 1) ? true : (var5 != 2 && var1.j(var2, var3, var4 - 1, 2) ? true : (var5 != 3 && var1.j(var2, var3, var4 + 1, 3) ? true : (var5 != 5 && var1.j(var2 + 1, var3, var4, 5) ? true : (var5 != 4 && var1.j(var2 - 1, var3, var4, 4) ? true : (var1.j(var2, var3, var4, 0) ? true : (var1.j(var2, var3 + 2, var4, 1) ? true : (var1.j(var2, var3 + 1, var4 - 1, 2) ? true : (var1.j(var2, var3 + 1, var4 + 1, 3) ? true : (var1.j(var2 - 1, var3 + 1, var4, 4) ? true : var1.j(var2 + 1, var3 + 1, var4, 5)))))))))));
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5, int var6) {
         b = true;
         if (var5 == 0) {
@@ -152,6 +160,7 @@ public class OBlockPistonBase extends OBlock {
         b = false;
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
         if (e(var5)) {
@@ -180,20 +189,24 @@ public class OBlockPistonBase extends OBlock {
 
     }
 
+    @Override
     public void f() {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OAxisAlignedBB var5, ArrayList var6) {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         super.a(var1, var2, var3, var4, var5, var6);
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         this.a((OIBlockAccess) var1, var2, var3, var4);
         return super.e(var1, var2, var3, var4);
     }
 
+    @Override
     public boolean b() {
         return false;
     }

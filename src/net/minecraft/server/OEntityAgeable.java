@@ -10,6 +10,7 @@ public abstract class OEntityAgeable extends OEntityCreature {
         super(var1);
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(12, new Integer(0));
@@ -23,16 +24,19 @@ public abstract class OEntityAgeable extends OEntityCreature {
         this.bY.b(12, Integer.valueOf(var1));
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("Age", this.K());
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.c(var1.f("Age"));
     }
 
+    @Override
     public void e() {
         super.e();
         int var1 = this.K();
@@ -46,6 +50,7 @@ public abstract class OEntityAgeable extends OEntityCreature {
 
     }
 
+    @Override
     public boolean aO() {
         return this.K() < 0;
     }

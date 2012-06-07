@@ -17,6 +17,7 @@ public class OPlayerListBox extends JList implements OIUpdatePlayerListBox {
         var1.a(this);
     }
 
+    @Override
     public void a() {
         if (this.b++ % 20 == 0) {
             Vector var1 = new Vector();

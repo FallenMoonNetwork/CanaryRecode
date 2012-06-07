@@ -23,26 +23,32 @@ public class OBlockRedstoneWire extends OBlock {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
     }
 
+    @Override
     public int a(int var1, int var2) {
         return this.bN;
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         return null;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 5;
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return var1.e(var2, var3 - 1, var4) || var1.a(var2, var3 - 1, var4) == OBlock.bd.bO;
     }
@@ -187,6 +193,7 @@ public class OBlockRedstoneWire extends OBlock {
         }
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         super.a(var1, var2, var3, var4);
         if (!var1.F) {
@@ -224,6 +231,7 @@ public class OBlockRedstoneWire extends OBlock {
         }
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         super.d(var1, var2, var3, var4);
         if (!var1.F) {
@@ -274,6 +282,7 @@ public class OBlockRedstoneWire extends OBlock {
         }
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (!var1.F) {
             int var6 = var1.c(var2, var3, var4);
@@ -289,14 +298,17 @@ public class OBlockRedstoneWire extends OBlock {
         }
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OItem.aB.bP;
     }
 
+    @Override
     public boolean d(OWorld var1, int var2, int var3, int var4, int var5) {
         return !this.a ? false : this.a((OIBlockAccess) var1, var2, var3, var4, var5);
     }
 
+    @Override
     public boolean a(OIBlockAccess var1, int var2, int var3, int var4, int var5) {
         if (!this.a) {
             return false;
@@ -331,6 +343,7 @@ public class OBlockRedstoneWire extends OBlock {
         }
     }
 
+    @Override
     public boolean e() {
         return this.a;
     }

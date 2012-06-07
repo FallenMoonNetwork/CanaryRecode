@@ -31,6 +31,7 @@ public class OItemFood extends OItem {
         this(var1, var2, 0.6F, var3);
     }
 
+    @Override
     public OItemStack b(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         --var1.a;
         var3.af().a(this);
@@ -42,14 +43,17 @@ public class OItemFood extends OItem {
         return var1;
     }
 
+    @Override
     public int c(OItemStack var1) {
         return 32;
     }
 
+    @Override
     public OEnumAction d(OItemStack var1) {
         return OEnumAction.b;
     }
 
+    @Override
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         if (var3.b(this.bW)) {
             var3.a(var1, this.c(var1));
@@ -83,6 +87,7 @@ public class OItemFood extends OItem {
         return this;
     }
 
+    @Override
     public OItem a(String var1) {
         return super.a(var1);
     }

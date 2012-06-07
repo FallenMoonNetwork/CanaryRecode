@@ -20,6 +20,7 @@ public class OEntityAIPanic extends OEntityAIBase {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         if (this.a.ao() == null) {
             return false;
@@ -36,10 +37,12 @@ public class OEntityAIPanic extends OEntityAIBase {
         }
     }
 
+    @Override
     public void c() {
         this.a.al().a(this.c, this.d, this.e, this.b);
     }
 
+    @Override
     public boolean b() {
         return !this.a.al().e();
     }

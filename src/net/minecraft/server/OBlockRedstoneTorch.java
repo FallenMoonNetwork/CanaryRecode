@@ -14,6 +14,7 @@ public class OBlockRedstoneTorch extends OBlockTorch {
     private boolean a = false;
     private static List b = new ArrayList();
 
+    @Override
     public int a(int var1, int var2) {
         return var1 == 1 ? OBlock.av.a(var1, var2) : super.a(var1, var2);
     }
@@ -44,10 +45,12 @@ public class OBlockRedstoneTorch extends OBlockTorch {
         this.a(true);
     }
 
+    @Override
     public int d() {
         return 2;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         if (var1.c(var2, var3, var4) == 0) {
             super.a(var1, var2, var3, var4);
@@ -64,6 +67,7 @@ public class OBlockRedstoneTorch extends OBlockTorch {
 
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         if (this.a) {
             var1.h(var2, var3 - 1, var4, this.bO);
@@ -76,6 +80,7 @@ public class OBlockRedstoneTorch extends OBlockTorch {
 
     }
 
+    @Override
     public boolean a(OIBlockAccess var1, int var2, int var3, int var4, int var5) {
         if (!this.a) {
             return false;
@@ -90,6 +95,7 @@ public class OBlockRedstoneTorch extends OBlockTorch {
         return var5 == 5 && var1.j(var2, var3 - 1, var4, 0) ? true : (var5 == 3 && var1.j(var2, var3, var4 - 1, 2) ? true : (var5 == 4 && var1.j(var2, var3, var4 + 1, 3) ? true : (var5 == 1 && var1.j(var2 - 1, var3, var4, 4) ? true : var5 == 2 && var1.j(var2 + 1, var3, var4, 5))));
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         boolean var6 = this.g(var1, var2, var3, var4);
 
@@ -117,19 +123,23 @@ public class OBlockRedstoneTorch extends OBlockTorch {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         super.a(var1, var2, var3, var4, var5);
         var1.c(var2, var3, var4, this.bO, this.d());
     }
 
+    @Override
     public boolean d(OWorld var1, int var2, int var3, int var4, int var5) {
         return var5 == 0 ? this.a((OIBlockAccess) var1, var2, var3, var4, var5) : false;
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OBlock.aQ.bO;
     }
 
+    @Override
     public boolean e() {
         return true;
     }

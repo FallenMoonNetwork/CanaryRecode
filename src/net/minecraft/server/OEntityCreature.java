@@ -23,6 +23,7 @@ public abstract class OEntityCreature extends OEntityLiving {
         return false;
     }
 
+    @Override
     protected void d_() {
         OProfiler.a("ai");
         if (this.f > 0) {
@@ -175,6 +176,7 @@ public abstract class OEntityCreature extends OEntityLiving {
         return null;
     }
 
+    @Override
     public boolean l() {
         int var1 = OMathHelper.b(this.bm);
         int var2 = OMathHelper.b(this.bw.b);
@@ -198,6 +200,7 @@ public abstract class OEntityCreature extends OEntityLiving {
         this.d = var1;
     }
 
+    @Override
     protected float J() {
         if (this.c_()) {
             return 1.0F;

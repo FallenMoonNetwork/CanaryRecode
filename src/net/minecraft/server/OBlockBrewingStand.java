@@ -22,22 +22,27 @@ public class OBlockBrewingStand extends OBlockContainer {
         this.bN = 157;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public int c() {
         return 25;
     }
 
+    @Override
     public OTileEntity a_() {
         return new OTileEntityBrewingStand();
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OAxisAlignedBB var5, ArrayList var6) {
         this.a(0.4375F, 0.0F, 0.4375F, 0.5625F, 0.875F, 0.5625F);
         super.a(var1, var2, var3, var4, var5, var6);
@@ -45,10 +50,12 @@ public class OBlockBrewingStand extends OBlockContainer {
         super.a(var1, var2, var3, var4, var5, var6);
     }
 
+    @Override
     public void f() {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (var1.F) {
             return true;
@@ -62,6 +69,7 @@ public class OBlockBrewingStand extends OBlockContainer {
         }
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         OTileEntity var5 = var1.b(var2, var3, var4);
         if (var5 != null && var5 instanceof OTileEntityBrewingStand) {
@@ -95,6 +103,7 @@ public class OBlockBrewingStand extends OBlockContainer {
         super.d(var1, var2, var3, var4);
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OItem.bx.bP;
     }

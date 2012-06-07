@@ -19,12 +19,15 @@ public class OGuiLogOutputHandler extends Handler {
         this.d = var1;
     }
 
+    @Override
     public void close() {
     }
 
+    @Override
     public void flush() {
     }
 
+    @Override
     public void publish(LogRecord var1) {
         int var2 = this.d.getDocument().getLength();
         this.d.append(this.a.format(var1));

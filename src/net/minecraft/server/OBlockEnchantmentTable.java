@@ -15,26 +15,32 @@ public class OBlockEnchantmentTable extends OBlockContainer {
         this.f(0);
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public int a(int var1, int var2) {
         return this.a(var1);
     }
 
+    @Override
     public int a(int var1) {
         return var1 == 0 ? this.bN + 17 : (var1 == 1 ? this.bN : this.bN + 16);
     }
 
+    @Override
     public OTileEntity a_() {
         return new OTileEntityEnchantmentTable();
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (var1.F) {
             return true;

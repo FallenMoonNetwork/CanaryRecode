@@ -10,14 +10,17 @@ public class OEnchantmentArrowInfinite extends OEnchantment {
         this.a("arrowInfinite");
     }
 
+    @Override
     public int a(int var1) {
         return 20;
     }
 
+    @Override
     public int b(int var1) {
         return 50;
     }
 
+    @Override
     public int a() {
         return 1;
     }

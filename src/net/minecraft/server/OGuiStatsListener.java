@@ -14,6 +14,7 @@ class OGuiStatsListener implements ActionListener {
         this.a = var1;
     }
 
+    @Override
     public void actionPerformed(ActionEvent var1) {
         OGuiStatsComponent.a(this.a);
     }

@@ -55,6 +55,7 @@ public class OEntityPainting extends OEntity {
         this.b(var5);
     }
 
+    @Override
     protected void b() {
     }
 
@@ -119,6 +120,7 @@ public class OEntityPainting extends OEntity {
         return var1 == 32 ? 0.5F : (var1 == 64 ? 0.5F : 0.0F);
     }
 
+    @Override
     public void F_() {
         if (this.f++ == 100 && !this.bi.F) {
             this.f = 0;
@@ -185,10 +187,12 @@ public class OEntityPainting extends OEntity {
         }
     }
 
+    @Override
     public boolean o_() {
         return true;
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         if (!this.bE && !this.bi.F) {
             this.X();
@@ -199,6 +203,7 @@ public class OEntityPainting extends OEntity {
         return true;
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         var1.a("Dir", (byte) this.a);
         var1.a("Motive", this.e.A);
@@ -207,6 +212,7 @@ public class OEntityPainting extends OEntity {
         var1.a("TileZ", this.d);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         this.a = var1.d("Dir");
         this.b = var1.f("TileX");
@@ -230,6 +236,7 @@ public class OEntityPainting extends OEntity {
         this.b(this.a);
     }
 
+    @Override
     public void a(double var1, double var3, double var5) {
         if (!this.bi.F && !this.bE && var1 * var1 + var3 * var3 + var5 * var5 > 0.0D) {
             this.X();
@@ -238,6 +245,7 @@ public class OEntityPainting extends OEntity {
 
     }
 
+    @Override
     public void b_(double var1, double var3, double var5) {
         if (!this.bi.F && !this.bE && var1 * var1 + var3 * var3 + var5 * var5 > 0.0D) {
             this.X();

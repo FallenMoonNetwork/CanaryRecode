@@ -11,6 +11,7 @@ public class OWorldGenTaiga2 extends OWorldGenerator {
         super(var1);
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         int var6 = var2.nextInt(4) + 6;
         int var7 = 1 + var2.nextInt(2);

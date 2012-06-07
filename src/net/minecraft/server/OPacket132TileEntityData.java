@@ -32,6 +32,7 @@ public class OPacket132TileEntityData extends OPacket {
         this.e = var5;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = var1.readShort();
@@ -42,6 +43,7 @@ public class OPacket132TileEntityData extends OPacket {
         this.g = var1.readInt();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeShort(this.b);
@@ -52,10 +54,12 @@ public class OPacket132TileEntityData extends OPacket {
         var1.writeInt(this.g);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 25;
     }

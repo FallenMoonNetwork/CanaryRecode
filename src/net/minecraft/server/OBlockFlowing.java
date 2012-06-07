@@ -24,10 +24,12 @@ public class OBlockFlowing extends OBlockFluid {
         var1.j(var2, var3, var4);
     }
 
+    @Override
     public boolean b(OIBlockAccess var1, int var2, int var3, int var4) {
         return this.cd != OMaterial.h;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         int var6 = this.g(var1, var2, var3, var4);
         byte var7 = 1;
@@ -269,6 +271,7 @@ public class OBlockFlowing extends OBlockFluid {
         return var5 == this.cd ? false : (var5 == OMaterial.h ? false : !this.k(var1, var2, var3, var4));
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         super.a(var1, var2, var3, var4);
         if (var1.a(var2, var3, var4) == this.bO) {

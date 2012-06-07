@@ -10,14 +10,17 @@ public class OEnchantmentWaterWorker extends OEnchantment {
         this.a("waterWorker");
     }
 
+    @Override
     public int a(int var1) {
         return 1;
     }
 
+    @Override
     public int b(int var1) {
         return this.a(var1) + 40;
     }
 
+    @Override
     public int a() {
         return 1;
     }

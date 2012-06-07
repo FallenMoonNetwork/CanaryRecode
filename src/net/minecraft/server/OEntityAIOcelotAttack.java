@@ -19,6 +19,7 @@ public class OEntityAIOcelotAttack extends OEntityAIBase {
         this.a(3);
     }
 
+    @Override
     public boolean a() {
         OEntityLiving var1 = this.b.at();
         if (var1 == null) {
@@ -29,15 +30,18 @@ public class OEntityAIOcelotAttack extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return !this.c.aE() ? false : (this.b.j(this.c) > 225.0D ? false : !this.b.al().e() || this.a());
     }
 
+    @Override
     public void d() {
         this.c = null;
         this.b.al().f();
     }
 
+    @Override
     public void e() {
         this.b.ai().a(this.c, 30.0F, 30.0F);
         double var1 = (this.b.bG * 2.0F * this.b.bG * 2.0F);

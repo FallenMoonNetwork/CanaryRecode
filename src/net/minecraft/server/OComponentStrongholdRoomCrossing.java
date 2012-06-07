@@ -27,6 +27,7 @@ public class OComponentStrongholdRoomCrossing extends OComponentStronghold {
         this.b = var2.nextInt(5);
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
         this.a((OComponentStrongholdStairs2) var1, var2, var3, 4, 1);
         this.b((OComponentStrongholdStairs2) var1, var2, var3, 1, 4);
@@ -38,6 +39,7 @@ public class OComponentStrongholdRoomCrossing extends OComponentStronghold {
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentStrongholdRoomCrossing(var6, var1, var7, var5) : null;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         if (this.a(var1, var3)) {
             return false;

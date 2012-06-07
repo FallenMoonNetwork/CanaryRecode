@@ -76,10 +76,12 @@ public class OPotionEffect {
         return OPotion.a[this.a].c();
     }
 
+    @Override
     public int hashCode() {
         return this.a;
     }
 
+    @Override
     public String toString() {
         String var1 = "";
         if (this.c() > 0) {
@@ -91,6 +93,7 @@ public class OPotionEffect {
         return OPotion.a[this.a].f() ? "(" + var1 + ")" : var1;
     }
 
+    @Override
     public boolean equals(Object var1) {
         if (!(var1 instanceof OPotionEffect)) {
             return false;

@@ -73,6 +73,7 @@ public class OPacket23VehicleSpawn extends OPacket {
 
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.h = var1.readByte();
@@ -88,6 +89,7 @@ public class OPacket23VehicleSpawn extends OPacket {
 
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeByte(this.h);
@@ -103,10 +105,12 @@ public class OPacket23VehicleSpawn extends OPacket {
 
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 21 + this.i > 0 ? 6 : 0;
     }

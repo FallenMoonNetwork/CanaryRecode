@@ -51,6 +51,7 @@ class OStructureVillageStart extends OStructureStart {
         this.c = var11 > 2;
     }
 
+    @Override
     public boolean a() {
         return this.c;
     }

@@ -11,33 +11,41 @@ public abstract class OEntityGolem extends OEntityCreature implements OIAnimals 
         super(var1);
     }
 
+    @Override
     protected void a(float var1) {
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
     }
 
+    @Override
     protected String i() {
         return "none";
     }
 
+    @Override
     protected String j() {
         return "none";
     }
 
+    @Override
     protected String k() {
         return "none";
     }
 
+    @Override
     public int m() {
         return 120;
     }
 
+    @Override
     protected boolean n() {
         return false;
     }

@@ -18,6 +18,7 @@ public class OMapGenVillage extends OMapGenStructure {
         this.f = var1;
     }
 
+    @Override
     protected boolean a(int var1, int var2) {
         byte var3 = 32;
         byte var4 = 8;
@@ -48,6 +49,7 @@ public class OMapGenVillage extends OMapGenStructure {
         return false;
     }
 
+    @Override
     protected OStructureStart b(int var1, int var2) {
         return new OStructureVillageStart(this.d, this.c, var1, var2, this.f);
     }

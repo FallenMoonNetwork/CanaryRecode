@@ -15,6 +15,7 @@ public class OEntityAIOwnerHurtTarget extends OEntityAITarget {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         if (!this.a.u_()) {
             return false;
@@ -29,6 +30,7 @@ public class OEntityAIOwnerHurtTarget extends OEntityAITarget {
         }
     }
 
+    @Override
     public void c() {
         this.c.b(this.b);
         super.c();

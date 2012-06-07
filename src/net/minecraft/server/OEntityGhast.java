@@ -43,6 +43,7 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
         return canaryGhast;
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         if ("fireball".equals(var1.l()) && var1.a() instanceof OEntityPlayer) {
             super.a(var1, 1000);
@@ -53,21 +54,25 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
         }
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, Byte.valueOf((byte) 0));
     }
 
+    @Override
     public int d() {
         return 10;
     }
 
+    @Override
     public void F_() {
         super.F_();
         byte var1 = this.bY.a(16);
         this.ae = var1 == 1 ? "/mob/ghast_fire.png" : "/mob/ghast.png";
     }
 
+    @Override
     protected void d_() {
         if (!this.bi.F && this.bi.q == 0) {
             this.X();
@@ -168,22 +173,27 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
         return true;
     }
 
+    @Override
     protected String i() {
         return "mob.ghast.moan";
     }
 
+    @Override
     protected String j() {
         return "mob.ghast.scream";
     }
 
+    @Override
     protected String k() {
         return "mob.ghast.death";
     }
 
+    @Override
     protected int f() {
         return OItem.L.bP;
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         int var3 = this.bS.nextInt(2) + this.bS.nextInt(1 + var2);
 
@@ -200,14 +210,17 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
 
     }
 
+    @Override
     protected float p() {
         return 10.0F;
     }
 
+    @Override
     public boolean l() {
         return this.bS.nextInt(20) == 0 && super.l() && this.bi.q > 0;
     }
 
+    @Override
     public int q() {
         return 1;
     }

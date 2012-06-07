@@ -8,6 +8,7 @@ public class OItemPiston extends OItemBlock {
         super(var1);
     }
 
+    @Override
     public int a(int var1) {
         return 7;
     }

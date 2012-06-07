@@ -51,10 +51,12 @@ public class OContainerWorkbench extends OContainer {
         this.a(this.a);
     }
 
+    @Override
     public void a(OIInventory var1) {
         this.b.a(0, OCraftingManager.a().a(this.a));
     }
 
+    @Override
     public void a(OEntityPlayer var1) {
         super.a(var1);
         if (!this.c.F) {
@@ -68,10 +70,12 @@ public class OContainerWorkbench extends OContainer {
         }
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         return this.c.a(this.h, this.i, this.j) != OBlock.ay.bO ? false : var1.e(this.h + 0.5D, this.i + 0.5D, this.j + 0.5D) <= 64.0D;
     }
 
+    @Override
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);

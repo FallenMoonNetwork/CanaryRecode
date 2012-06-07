@@ -25,6 +25,7 @@ class OIntHashMapEntry {
         return this.b;
     }
 
+    @Override
     public final boolean equals(Object var1) {
         if (!(var1 instanceof OIntHashMapEntry)) {
             return false;
@@ -44,10 +45,12 @@ class OIntHashMapEntry {
         }
     }
 
+    @Override
     public final int hashCode() {
         return OIntHashMap.f(this.a);
     }
 
+    @Override
     public final String toString() {
         return this.a() + "=" + this.b();
     }

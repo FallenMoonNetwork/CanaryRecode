@@ -10,14 +10,17 @@ public class OEnchantmentFireAspect extends OEnchantment {
         this.a("fire");
     }
 
+    @Override
     public int a(int var1) {
         return 10 + 20 * (var1 - 1);
     }
 
+    @Override
     public int b(int var1) {
         return super.a(var1) + 50;
     }
 
+    @Override
     public int a() {
         return 2;
     }

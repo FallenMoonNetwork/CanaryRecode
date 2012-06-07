@@ -32,6 +32,7 @@ public class OPacket25EntityPainting extends OPacket {
         this.f = var1.e.A;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.f = a(var1, OEnumArt.z);
@@ -41,6 +42,7 @@ public class OPacket25EntityPainting extends OPacket {
         this.e = var1.readInt();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         a(this.f, var1);
@@ -50,10 +52,12 @@ public class OPacket25EntityPainting extends OPacket {
         var1.writeInt(this.e);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 24;
     }

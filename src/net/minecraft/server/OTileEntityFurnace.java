@@ -23,14 +23,17 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
         super();
     }
 
+    @Override
     public int c() {
         return this.d.length;
     }
 
+    @Override
     public OItemStack g_(int var1) {
         return this.d[var1];
     }
 
+    @Override
     public OItemStack a(int var1, int var2) {
         if (this.d[var1] != null) {
             OItemStack var3;
@@ -51,6 +54,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
         }
     }
 
+    @Override
     public OItemStack b(int var1) {
         if (this.d[var1] != null) {
             OItemStack var2 = this.d[var1];
@@ -61,6 +65,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
         }
     }
 
+    @Override
     public void a(int var1, OItemStack var2) {
         this.d[var1] = var2;
         if (var2 != null && var2.a > this.a()) {
@@ -69,10 +74,12 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
 
     }
 
+    @Override
     public String e() {
         return "container.furnace";
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         ONBTTagList var2 = var1.n("Items");
@@ -91,6 +98,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
         this.b = a(this.d[1]);
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("BurnTime", (short) this.a);
@@ -109,6 +117,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
         var1.a("Items", var2);
     }
 
+    @Override
     public int a() {
         return 64;
     }
@@ -117,6 +126,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
         return this.a > 0;
     }
 
+    @Override
     public void q_() {
         boolean var1 = this.a > 0;
         boolean var2 = false;
@@ -200,13 +210,16 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
         return a(var0) > 0;
     }
 
+    @Override
     public boolean a(OEntityPlayer var1) {
         return this.k.b(this.l, this.m, this.n) != this ? false : var1.e(this.l + 0.5D, this.m + 0.5D, this.n + 0.5D) <= 64.0D;
     }
 
+    @Override
     public void f() {
     }
 
+    @Override
     public void g() {
     }
 }

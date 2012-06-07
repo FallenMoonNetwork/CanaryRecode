@@ -17,6 +17,7 @@ class OGuiLogFormatter extends Formatter {
         this.a = var1;
     }
 
+    @Override
     public String format(LogRecord var1) {
         StringBuilder var2 = new StringBuilder();
         Level var3 = var1.getLevel();

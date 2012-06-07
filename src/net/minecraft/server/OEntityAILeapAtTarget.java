@@ -17,6 +17,7 @@ public class OEntityAILeapAtTarget extends OEntityAIBase {
         this.a(5);
     }
 
+    @Override
     public boolean a() {
         this.b = this.a.at();
         if (this.b == null) {
@@ -27,10 +28,12 @@ public class OEntityAILeapAtTarget extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return !this.a.bx;
     }
 
+    @Override
     public void c() {
         double var1 = this.b.bm - this.a.bm;
         double var3 = this.b.bo - this.a.bo;

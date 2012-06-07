@@ -15,6 +15,7 @@ public class OBlockMushroom extends OBlockFlower {
         this.a(true);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (var5.nextInt(25) == 0) {
             byte var6 = 4;
@@ -59,14 +60,17 @@ public class OBlockMushroom extends OBlockFlower {
 
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return super.c(var1, var2, var3, var4) && this.f(var1, var2, var3, var4);
     }
 
+    @Override
     protected boolean d(int var1) {
         return OBlock.n[var1];
     }
 
+    @Override
     public boolean f(OWorld var1, int var2, int var3, int var4) {
         if (var3 >= 0 && var3 < 256) {
             int var5 = var1.a(var2, var3 - 1, var4);

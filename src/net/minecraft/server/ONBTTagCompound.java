@@ -31,6 +31,7 @@ public class ONBTTagCompound extends ONBTBase {
         super(var1);
     }
 
+    @Override
     void a(DataOutput var1) throws IOException {
         Iterator var2 = this.a.values().iterator();
 
@@ -42,6 +43,7 @@ public class ONBTTagCompound extends ONBTBase {
         var1.writeByte(0);
     }
 
+    @Override
     void a(DataInput var1) throws IOException {
         this.a.clear();
 
@@ -56,6 +58,7 @@ public class ONBTTagCompound extends ONBTBase {
         return this.a.values();
     }
 
+    @Override
     public byte a() {
         return (byte) 10;
     }
@@ -164,10 +167,12 @@ public class ONBTTagCompound extends ONBTBase {
         return this.d(var1) != 0;
     }
 
+    @Override
     public String toString() {
         return "" + this.a.size() + " entries";
     }
 
+    @Override
     public ONBTBase b() {
         ONBTTagCompound var1 = new ONBTTagCompound(this.c());
         Iterator var2 = this.a.keySet().iterator();
@@ -180,6 +185,7 @@ public class ONBTTagCompound extends ONBTBase {
         return var1;
     }
 
+    @Override
     public boolean equals(Object var1) {
         if (super.equals(var1)) {
             ONBTTagCompound var2 = (ONBTTagCompound) var1;
@@ -189,6 +195,7 @@ public class ONBTTagCompound extends ONBTBase {
         }
     }
 
+    @Override
     public int hashCode() {
         return super.hashCode() ^ this.a.hashCode();
     }

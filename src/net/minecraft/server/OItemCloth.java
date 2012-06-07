@@ -13,10 +13,12 @@ public class OItemCloth extends OItemBlock {
         this.a(true);
     }
 
+    @Override
     public int a(int var1) {
         return var1;
     }
 
+    @Override
     public String a(OItemStack var1) {
         return super.b() + "." + OItemDye.a[OBlockCloth.d(var1.h())];
     }

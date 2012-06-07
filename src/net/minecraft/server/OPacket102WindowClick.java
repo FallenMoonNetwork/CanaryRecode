@@ -21,10 +21,12 @@ public class OPacket102WindowClick extends OPacket {
         super();
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readByte();
         this.b = var1.readShort();
@@ -34,6 +36,7 @@ public class OPacket102WindowClick extends OPacket {
         this.e = this.b(var1);
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeByte(this.a);
         var1.writeShort(this.b);
@@ -43,6 +46,7 @@ public class OPacket102WindowClick extends OPacket {
         this.a(this.e, var1);
     }
 
+    @Override
     public int a() {
         return 11;
     }

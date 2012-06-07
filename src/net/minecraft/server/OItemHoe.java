@@ -15,6 +15,7 @@ public class OItemHoe extends OItem {
         this.f(var2.a());
     }
 
+    @Override
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
         if (!var2.d(var4, var5, var6)) {
             return false;

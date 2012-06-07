@@ -57,15 +57,18 @@ public class OEntitySheep extends OEntityAnimal {
     }
 
 
+    @Override
     protected boolean c_() {
         return true;
     }
 
+    @Override
     protected void z_() {
         this.b = this.c.f();
         super.z_();
     }
 
+    @Override
     public void e() {
         if (this.bi.F) {
             this.b = Math.max(0, this.b - 1);
@@ -74,15 +77,18 @@ public class OEntitySheep extends OEntityAnimal {
         super.e();
     }
 
+    @Override
     public int d() {
         return 8;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, new Byte((byte) 0));
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         if (!this.A_()) {
             this.a(new OItemStack(OBlock.ab.bO, 1, this.x()), 0.0F);
@@ -90,10 +96,12 @@ public class OEntitySheep extends OEntityAnimal {
 
     }
 
+    @Override
     protected int f() {
         return OBlock.ab.bO;
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
         if (var2 != null && var2.c == OItem.bd.bP && !this.A_() && !this.aO()) {
@@ -115,26 +123,31 @@ public class OEntitySheep extends OEntityAnimal {
         return super.b(var1);
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("Sheared", this.A_());
         var1.a("Color", (byte) this.x());
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.a(var1.o("Sheared"));
         this.d_(var1.d("Color"));
     }
 
+    @Override
     protected String i() {
         return "mob.sheep";
     }
 
+    @Override
     protected String j() {
         return "mob.sheep";
     }
 
+    @Override
     protected String k() {
         return "mob.sheep";
     }
@@ -167,6 +180,7 @@ public class OEntitySheep extends OEntityAnimal {
         return var1 < 5 ? 15 : (var1 < 10 ? 7 : (var1 < 15 ? 8 : (var1 < 18 ? 12 : (var0.nextInt(500) == 0 ? 6 : 0))));
     }
 
+    @Override
     public OEntityAnimal a(OEntityAnimal var1) {
         OEntitySheep var2 = (OEntitySheep) var1;
         OEntitySheep var3 = new OEntitySheep(this.bi);
@@ -179,6 +193,7 @@ public class OEntitySheep extends OEntityAnimal {
         return var3;
     }
 
+    @Override
     public void z() {
         this.a(false);
         if (this.aO()) {

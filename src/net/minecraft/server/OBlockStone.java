@@ -10,6 +10,7 @@ public class OBlockStone extends OBlock {
         super(var1, var2, OMaterial.e);
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OBlock.w.bO;
     }

@@ -25,6 +25,7 @@ class OLongHashMapEntry {
         return this.b;
     }
 
+    @Override
     public final boolean equals(Object var1) {
         if (!(var1 instanceof OLongHashMapEntry)) {
             return false;
@@ -44,10 +45,12 @@ class OLongHashMapEntry {
         }
     }
 
+    @Override
     public final int hashCode() {
         return OLongHashMap.f(this.a);
     }
 
+    @Override
     public final String toString() {
         return this.a() + "=" + this.b();
     }

@@ -18,6 +18,7 @@ public class OAnvilSaveHandler extends OSaveHandler {
         super(var1, var2, var3);
     }
 
+    @Override
     public OIChunkLoader a(OWorldProvider var1) {
         File var2 = this.a();
         File var3;
@@ -34,11 +35,13 @@ public class OAnvilSaveHandler extends OSaveHandler {
         }
     }
 
+    @Override
     public void a(OWorldInfo var1, List var2) {
         var1.a(19133);
         super.a(var1, var2);
     }
 
+    @Override
     public void e() {
         try {
             OThreadedFileIOBase.a.a();

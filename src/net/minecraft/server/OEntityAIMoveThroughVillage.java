@@ -29,6 +29,7 @@ public class OEntityAIMoveThroughVillage extends OEntityAIBase {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         this.f();
         if (this.e && this.a.bi.e()) {
@@ -64,6 +65,7 @@ public class OEntityAIMoveThroughVillage extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         if (this.a.al().e()) {
             return false;
@@ -73,10 +75,12 @@ public class OEntityAIMoveThroughVillage extends OEntityAIBase {
         }
     }
 
+    @Override
     public void c() {
         this.a.al().a(this.c, this.b);
     }
 
+    @Override
     public void d() {
         if (this.a.al().e() || this.a.e((double) this.d.a, (double) this.d.b, (double) this.d.c) < 16.0D) {
             this.f.add(this.d);

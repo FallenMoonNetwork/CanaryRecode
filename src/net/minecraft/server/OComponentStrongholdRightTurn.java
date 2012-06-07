@@ -15,6 +15,7 @@ public class OComponentStrongholdRightTurn extends OComponentStrongholdLeftTurn 
         super(var1, var2, var3, var4);
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
         if (this.h != 2 && this.h != 3) {
             this.b((OComponentStrongholdStairs2) var1, var2, var3, 1, 1);
@@ -24,6 +25,7 @@ public class OComponentStrongholdRightTurn extends OComponentStrongholdLeftTurn 
 
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         if (this.a(var1, var3)) {
             return false;

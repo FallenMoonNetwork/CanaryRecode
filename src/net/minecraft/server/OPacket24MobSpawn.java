@@ -41,6 +41,7 @@ public class OPacket24MobSpawn extends OPacket {
         this.i = var1.aP();
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = var1.readByte() & 255;
@@ -53,6 +54,7 @@ public class OPacket24MobSpawn extends OPacket {
         this.q = ODataWatcher.a(var1);
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeByte(this.b & 255);
@@ -65,10 +67,12 @@ public class OPacket24MobSpawn extends OPacket {
         this.i.a(var1);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 20;
     }

@@ -19,6 +19,7 @@ public class OEntityAIFollowParent extends OEntityAIBase {
         this.c = var2;
     }
 
+    @Override
     public boolean a() {
         if (this.a.K() >= 0) {
             return false;
@@ -51,6 +52,7 @@ public class OEntityAIFollowParent extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         if (!this.b.aE()) {
             return false;
@@ -60,14 +62,17 @@ public class OEntityAIFollowParent extends OEntityAIBase {
         }
     }
 
+    @Override
     public void c() {
         this.d = 0;
     }
 
+    @Override
     public void d() {
         this.b = null;
     }
 
+    @Override
     public void e() {
         if (--this.d <= 0) {
             this.d = 10;

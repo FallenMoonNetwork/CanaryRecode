@@ -20,6 +20,7 @@ public class OEntityAIWander extends OEntityAIBase {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         if (this.a.aq() >= 100) {
             return false;
@@ -38,10 +39,12 @@ public class OEntityAIWander extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return !this.a.al().e();
     }
 
+    @Override
     public void c() {
         this.a.al().a(this.b, this.c, this.d, this.e);
     }

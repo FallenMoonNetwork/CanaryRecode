@@ -37,6 +37,7 @@ public class OContainerFurnace extends OContainer {
 
     }
 
+    @Override
     public void a(OICrafting var1) {
         super.a(var1);
         var1.a(this, 0, this.a.c);
@@ -44,6 +45,7 @@ public class OContainerFurnace extends OContainer {
         var1.a(this, 2, this.a.b);
     }
 
+    @Override
     public void a() {
         super.a();
 
@@ -67,10 +69,12 @@ public class OContainerFurnace extends OContainer {
         this.h = this.a.b;
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         return this.a.a(var1);
     }
 
+    @Override
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);

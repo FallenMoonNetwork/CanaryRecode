@@ -11,6 +11,7 @@ class OStructureStrongholdStones extends OStructurePieceBlockSelector {
         super();
     }
 
+    @Override
     public void a(Random var1, int var2, int var3, int var4, boolean var5) {
         if (!var5) {
             this.a = 0;

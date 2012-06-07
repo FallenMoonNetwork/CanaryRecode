@@ -14,12 +14,14 @@ public abstract class OEntityTameable extends OEntityAnimal {
         super(var1);
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, Byte.valueOf((byte) 0));
         this.bY.a(17, "");
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         if (this.A() == null) {
@@ -31,6 +33,7 @@ public abstract class OEntityTameable extends OEntityAnimal {
         var1.a("Sitting", this.v_());
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         String var2 = var1.j("Owner");

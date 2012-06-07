@@ -50,30 +50,37 @@ public class OEntitySkeleton extends OEntityMob {
     public CanarySkeleton getCanarySkeleton() {
         return canarySkeleton;
     }
+    @Override
     public boolean c_() {
         return true;
     }
 
+    @Override
     public int d() {
         return 20;
     }
 
+    @Override
     protected String i() {
         return "mob.skeleton";
     }
 
+    @Override
     protected String j() {
         return "mob.skeletonhurt";
     }
 
+    @Override
     protected String k() {
         return "mob.skeletonhurt";
     }
 
+    @Override
     public OEnumCreatureAttribute v() {
         return OEnumCreatureAttribute.b;
     }
 
+    @Override
     public void e() {
         if (this.bi.e() && !this.bi.F) {
             float var1 = this.b(1.0F);
@@ -85,6 +92,7 @@ public class OEntitySkeleton extends OEntityMob {
         super.e();
     }
 
+    @Override
     public void a(ODamageSource var1) {
         super.a(var1);
         if (var1.b() instanceof OEntityArrow && var1.a() instanceof OEntityPlayer) {
@@ -98,10 +106,12 @@ public class OEntitySkeleton extends OEntityMob {
 
     }
 
+    @Override
     protected int f() {
         return OItem.k.bP;
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         int var3 = this.bS.nextInt(3 + var2);
 
@@ -118,6 +128,7 @@ public class OEntitySkeleton extends OEntityMob {
 
     }
 
+    @Override
     protected void b(int var1) {
         if (var1 > 0) {
             OItemStack var2 = new OItemStack(OItem.j);

@@ -17,6 +17,7 @@ public class OWorldGenMinable extends OWorldGenerator {
         this.b = var2;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         float var6 = var2.nextFloat() * 3.1415927F;
         double var7 = ((var3 + 8) + OMathHelper.a(var6) * this.b / 8.0F);

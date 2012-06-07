@@ -19,6 +19,7 @@ public class OComponentNetherBridgeThrone extends OComponentNetherBridgePiece {
         this.g = var3;
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
     }
 
@@ -27,6 +28,7 @@ public class OComponentNetherBridgeThrone extends OComponentNetherBridgePiece {
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentNetherBridgeThrone(var6, var1, var7, var5) : null;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         this.a(var1, var3, 0, 2, 0, 6, 7, 7, 0, 0, false);
         this.a(var1, var3, 1, 0, 0, 5, 1, 7, OBlock.bA.bO, OBlock.bA.bO, false);

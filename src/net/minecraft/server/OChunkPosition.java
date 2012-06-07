@@ -20,6 +20,7 @@ public class OChunkPosition {
         this(OMathHelper.b(var1.a), OMathHelper.b(var1.b), OMathHelper.b(var1.c));
     }
 
+    @Override
     public boolean equals(Object var1) {
         if (!(var1 instanceof OChunkPosition)) {
             return false;
@@ -29,6 +30,7 @@ public class OChunkPosition {
         }
     }
 
+    @Override
     public int hashCode() {
         return this.a * 8976890 + this.b * 981131 + this.c;
     }

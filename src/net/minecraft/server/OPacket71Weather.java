@@ -34,6 +34,7 @@ public class OPacket71Weather extends OPacket {
 
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.e = var1.readByte();
@@ -42,6 +43,7 @@ public class OPacket71Weather extends OPacket {
         this.d = var1.readInt();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeByte(this.e);
@@ -50,10 +52,12 @@ public class OPacket71Weather extends OPacket {
         var1.writeInt(this.d);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 17;
     }

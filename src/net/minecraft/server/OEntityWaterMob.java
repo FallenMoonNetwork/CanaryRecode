@@ -12,30 +12,37 @@ public abstract class OEntityWaterMob extends OEntityCreature implements OIAnima
         super(var1);
     }
 
+    @Override
     public boolean f_() {
         return true;
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
     }
 
+    @Override
     public boolean l() {
         return this.bi.a(this.bw);
     }
 
+    @Override
     public int m() {
         return 120;
     }
 
+    @Override
     protected boolean n() {
         return true;
     }
 
+    @Override
     protected int a(OEntityPlayer var1) {
         return 1 + this.bi.r.nextInt(3);
     }

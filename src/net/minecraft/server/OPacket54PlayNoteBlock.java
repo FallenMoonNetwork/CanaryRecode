@@ -28,6 +28,7 @@ public class OPacket54PlayNoteBlock extends OPacket {
         this.e = var5;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = var1.readShort();
@@ -36,6 +37,7 @@ public class OPacket54PlayNoteBlock extends OPacket {
         this.e = var1.read();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeShort(this.b);
@@ -44,10 +46,12 @@ public class OPacket54PlayNoteBlock extends OPacket {
         var1.write(this.e);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 12;
     }

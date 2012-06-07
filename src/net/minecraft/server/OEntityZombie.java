@@ -53,18 +53,22 @@ public class OEntityZombie extends OEntityMob {
         return canaryZombie;
     }
 
+    @Override
     public int d() {
         return 20;
     }
 
+    @Override
     public int T() {
         return 2;
     }
 
+    @Override
     protected boolean c_() {
         return true;
     }
 
+    @Override
     public void e() {
         if (this.bi.e() && !this.bi.F) {
             float var1 = this.b(1.0F);
@@ -76,26 +80,32 @@ public class OEntityZombie extends OEntityMob {
         super.e();
     }
 
+    @Override
     protected String i() {
         return "mob.zombie";
     }
 
+    @Override
     protected String j() {
         return "mob.zombiehurt";
     }
 
+    @Override
     protected String k() {
         return "mob.zombiedeath";
     }
 
+    @Override
     protected int f() {
         return OItem.bl.bP;
     }
 
+    @Override
     public OEnumCreatureAttribute v() {
         return OEnumCreatureAttribute.b;
     }
 
+    @Override
     protected void b(int var1) {
         switch (this.bS.nextInt(4)) {
         case 0:

@@ -15,10 +15,12 @@ public class OBlockPortal extends OBlockBreakable {
         super(var1, var2, OMaterial.B, false);
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         return null;
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         float var5;
         float var6;
@@ -34,10 +36,12 @@ public class OBlockPortal extends OBlockBreakable {
 
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
@@ -92,6 +96,7 @@ public class OBlockPortal extends OBlockBreakable {
         }
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         byte var6 = 0;
         byte var7 = 1;
@@ -127,10 +132,12 @@ public class OBlockPortal extends OBlockBreakable {
         }
     }
 
+    @Override
     public int a(Random var1) {
         return 0;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntity var5) {
         if (var5.bh == null && var5.bg == null) {
             var5.ad();

@@ -17,6 +17,7 @@ public class OComponentNetherBridgeCorridor4 extends OComponentNetherBridgePiece
         this.g = var3;
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
         byte var4 = 1;
         if (this.h == 1 || this.h == 2) {
@@ -32,6 +33,7 @@ public class OComponentNetherBridgeCorridor4 extends OComponentNetherBridgePiece
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentNetherBridgeCorridor4(var6, var1, var7, var5) : null;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         this.a(var1, var3, 0, 0, 0, 8, 1, 8, OBlock.bA.bO, OBlock.bA.bO, false);
         this.a(var1, var3, 0, 2, 0, 8, 5, 8, 0, 0, false);

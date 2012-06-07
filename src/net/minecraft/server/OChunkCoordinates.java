@@ -24,6 +24,7 @@ public class OChunkCoordinates implements Comparable {
         this.c = var1.c;
     }
 
+    @Override
     public boolean equals(Object var1) {
         if (!(var1 instanceof OChunkCoordinates)) {
             return false;
@@ -33,6 +34,7 @@ public class OChunkCoordinates implements Comparable {
         }
     }
 
+    @Override
     public int hashCode() {
         return this.a + this.c << 8 + this.b << 16;
     }
@@ -63,6 +65,7 @@ public class OChunkCoordinates implements Comparable {
 
     // $FF: synthetic method
     // $FF: bridge method
+    @Override
     public int compareTo(Object var1) {
         return this.a((OChunkCoordinates) var1);
     }

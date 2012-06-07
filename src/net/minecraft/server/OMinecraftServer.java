@@ -391,6 +391,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         this.B = false;
     }
 
+    @Override
     public void run() {
         boolean var59 = false;
 
@@ -677,14 +678,17 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         return new File(var1);
     }
 
+    @Override
     public void b(String var1) {
         a.info(var1);
     }
 
+    @Override
     public void c(String var1) {
         a.warning(var1);
     }
 
+    @Override
     public String d() {
         return "CONSOLE";
     }
@@ -701,80 +705,99 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                 + " been replaced by Dimension.getEntityTracker()");
     }
 
+    @Override
     public int a(String var1, int var2) {
         return this.d.a(var1, var2);
     }
 
+    @Override
     public String a(String var1, String var2) {
         return this.d.a(var1, var2);
     }
 
+    @Override
     public void a(String var1, Object var2) {
         this.d.a(var1, var2);
     }
 
+    @Override
     public void c() {
         this.d.b();
     }
 
+    @Override
     public String e() {
         File var1 = this.d.c();
         return var1 != null ? var1.getAbsolutePath() : "No settings file";
     }
 
+    @Override
     public String f() {
         return this.y;
     }
 
+    @Override
     public int g() {
         return this.z;
     }
 
+    @Override
     public String h() {
         return this.s;
     }
 
+    @Override
     public String i() {
         return "1.2.5";
     }
 
+    @Override
     public int j() {
         return this.h.j();
     }
 
+    @Override
     public int k() {
         return this.h.k();
     }
 
+    @Override
     public String[] l() {
         return this.h.d();
     }
 
+    @Override
     public String m() {
         return Configuration.getServerConfig().getDefaultWorldName();
     }
 
+    @Override
     public String n() {
         return "";
     }
 
+    @Override
     public void o() {
     }
 
+    @Override
     public String d(String var1) {
         ORConConsoleSource.a.a();
         this.A.a(new OServerCommand(var1, ORConConsoleSource.a));
         return ORConConsoleSource.a.b();
     }
 
+    @Override
     public boolean p() {
         return false;
     }
 
+    @Override
     public void e(String var1) {
         a.log(Level.SEVERE, var1);
     }
 
+    @Override
     public void f(String var1) {
         if (this.p()) {
             a.log(Level.INFO, var1);

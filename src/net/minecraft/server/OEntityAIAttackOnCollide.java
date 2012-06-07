@@ -34,6 +34,7 @@ public class OEntityAIAttackOnCollide extends OEntityAIBase {
         this.a(3);
     }
 
+    @Override
     public boolean a() {
         OEntityLiving var1 = this.b.at();
         if (var1 == null) {
@@ -47,21 +48,25 @@ public class OEntityAIAttackOnCollide extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         OEntityLiving var1 = this.b.at();
         return var1 == null ? false : (!this.c.aE() ? false : (!this.f ? !this.b.al().e() : this.b.e(OMathHelper.b(this.c.bm), OMathHelper.b(this.c.bn), OMathHelper.b(this.c.bo))));
     }
 
+    @Override
     public void c() {
         this.b.al().a(this.g, this.e);
         this.i = 0;
     }
 
+    @Override
     public void d() {
         this.c = null;
         this.b.al().f();
     }
 
+    @Override
     public void e() {
         this.b.ai().a(this.c, 30.0F, 30.0F);
         if ((this.f || this.b.am().a(this.c)) && --this.i <= 0) {

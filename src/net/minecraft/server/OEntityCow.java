@@ -43,42 +43,52 @@ public class OEntityCow extends OEntityAnimal {
     public CanaryCow getCanaryCow() {
         return canaryCow;
     }
+    @Override
     public boolean c_() {
         return true;
     }
 
+    @Override
     public int d() {
         return 10;
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
     }
 
+    @Override
     protected String i() {
         return "mob.cow";
     }
 
+    @Override
     protected String j() {
         return "mob.cowhurt";
     }
 
+    @Override
     protected String k() {
         return "mob.cowhurt";
     }
 
+    @Override
     protected float p() {
         return 0.4F;
     }
 
+    @Override
     protected int f() {
         return OItem.aE.bP;
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         int var3 = this.bS.nextInt(3) + this.bS.nextInt(1 + var2);
 
@@ -99,6 +109,7 @@ public class OEntityCow extends OEntityAnimal {
 
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
         if (var2 != null && var2.c == OItem.av.bP) {
@@ -109,6 +120,7 @@ public class OEntityCow extends OEntityAnimal {
         }
     }
 
+    @Override
     public OEntityAnimal a(OEntityAnimal var1) {
         return new OEntityCow(this.bi);
     }

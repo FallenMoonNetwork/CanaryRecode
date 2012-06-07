@@ -24,6 +24,7 @@ public class OItemTool extends OItem {
         this.bV = var2 + var3.c();
     }
 
+    @Override
     public float a(OItemStack var1, OBlock var2) {
         for (int var3 = 0; var3 < this.bU.length; ++var3) {
             if (this.bU[var3] == var2) {
@@ -34,20 +35,24 @@ public class OItemTool extends OItem {
         return 1.0F;
     }
 
+    @Override
     public boolean a(OItemStack var1, OEntityLiving var2, OEntityLiving var3) {
         var1.a(2, var3);
         return true;
     }
 
+    @Override
     public boolean a(OItemStack var1, int var2, int var3, int var4, int var5, OEntityLiving var6) {
         var1.a(1, var6);
         return true;
     }
 
+    @Override
     public int a(OEntity var1) {
         return this.bV;
     }
 
+    @Override
     public int c() {
         return this.b.e();
     }

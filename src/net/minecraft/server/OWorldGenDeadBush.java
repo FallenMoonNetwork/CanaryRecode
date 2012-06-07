@@ -15,6 +15,7 @@ public class OWorldGenDeadBush extends OWorldGenerator {
         this.a = var1;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         int var11;
         for (boolean var6 = false; ((var11 = var1.a(var3, var4, var5)) == 0 || var11 == OBlock.K.bO) && var4 > 0; --var4) {

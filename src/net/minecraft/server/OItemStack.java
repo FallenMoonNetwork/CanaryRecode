@@ -270,6 +270,7 @@ public final class OItemStack {
         return var0 == null ? null : var0.j();
     }
 
+    @Override
     public String toString() {
         return this.a + "x" + OItem.d[this.c].b() + "@" + this.e;
     }

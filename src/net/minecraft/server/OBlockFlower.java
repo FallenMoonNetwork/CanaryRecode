@@ -20,6 +20,7 @@ public class OBlockFlower extends OBlock {
         this(var1, var2, OMaterial.j);
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return super.c(var1, var2, var3, var4) && this.d(var1.a(var2, var3 - 1, var4));
     }
@@ -28,11 +29,13 @@ public class OBlockFlower extends OBlock {
         return var1 == OBlock.u.bO || var1 == OBlock.v.bO || var1 == OBlock.aA.bO;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         super.a(var1, var2, var3, var4, var5);
         this.h(var1, var2, var3, var4);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         this.h(var1, var2, var3, var4);
     }
@@ -45,22 +48,27 @@ public class OBlockFlower extends OBlock {
 
     }
 
+    @Override
     public boolean f(OWorld var1, int var2, int var3, int var4) {
         return (var1.m(var2, var3, var4) >= 8 || var1.l(var2, var3, var4)) && this.d(var1.a(var2, var3 - 1, var4));
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         return null;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 1;
     }

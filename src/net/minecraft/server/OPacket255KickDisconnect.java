@@ -20,18 +20,22 @@ public class OPacket255KickDisconnect extends OPacket {
         this.a = var1;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = a(var1, 256);
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         a(this.a, var1);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return this.a.length();
     }

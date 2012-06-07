@@ -20,10 +20,12 @@ class OSlotArmor extends OSlot {
         this.a = var6;
     }
 
+    @Override
     public int a() {
         return 1;
     }
 
+    @Override
     public boolean a(OItemStack var1) {
         return var1.a() instanceof OItemArmor ? ((OItemArmor) var1.a()).a == this.a : (var1.a().bP == OBlock.ba.bO ? this.a == 0 : false);
     }

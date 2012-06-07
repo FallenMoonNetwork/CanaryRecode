@@ -18,6 +18,7 @@ public class OBiomeGenSwamp extends OBiomeGenBase {
         this.H = 14745518;
     }
 
+    @Override
     public OWorldGenerator a(Random var1) {
         return this.Q;
     }

@@ -202,6 +202,7 @@ public class OItemMap extends OItemMapBase {
         }
     }
 
+    @Override
     public void a(OItemStack var1, OWorld var2, OEntity var3, int var4, boolean var5) {
         if (!var2.F) {
             OMapData var6 = this.a(var1, var2);
@@ -217,6 +218,7 @@ public class OItemMap extends OItemMapBase {
         }
     }
 
+    @Override
     public void d(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         var1.b(var2.b("map"));
         String var4 = "map_" + var1.h();
@@ -229,6 +231,7 @@ public class OItemMap extends OItemMapBase {
         var5.a();
     }
 
+    @Override
     public OPacket c(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         byte[] var4 = this.a(var1, var2).a(var1, var2, var3);
         return var4 == null ? null : new OPacket131MapData((short) OItem.bc.bP, (short) var1.h(), var4);

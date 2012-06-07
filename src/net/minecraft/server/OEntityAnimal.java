@@ -22,6 +22,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
         super(var1);
     }
 
+    @Override
     protected void g() {
         if (this.K() != 0) {
             this.a = 0;
@@ -30,6 +31,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
         super.g();
     }
 
+    @Override
     public void e() {
         super.e();
         if (this.K() != 0) {
@@ -51,6 +53,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
 
     }
 
+    @Override
     protected void a(OEntity var1, float var2) {
         if (var1 instanceof OEntityPlayer) {
             if (var2 < 3.0F) {
@@ -125,9 +128,11 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
 
     public abstract OEntityAnimal a(OEntityAnimal var1);
 
+    @Override
     protected void b(OEntity var1, float var2) {
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         this.f = 60;
         this.d = null;
@@ -135,20 +140,24 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
         return super.a(var1, var2);
     }
 
+    @Override
     public float a(int var1, int var2, int var3) {
         return this.bi.a(var1, var2 - 1, var3) == OBlock.u.bO ? 10.0F : this.bi.p(var1, var2, var3) - 0.5F;
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("InLove", this.a);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.a = var1.f("InLove");
     }
 
+    @Override
     protected OEntity o() {
         if (this.f > 0) {
             return null;
@@ -190,6 +199,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
         }
     }
 
+    @Override
     public boolean l() {
         int var1 = OMathHelper.b(this.bm);
         int var2 = OMathHelper.b(this.bw.b);
@@ -197,14 +207,17 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
         return this.bi.a(var1, var2 - 1, var3) == OBlock.u.bO && this.bi.m(var1, var2, var3) > 8 && super.l();
     }
 
+    @Override
     public int m() {
         return 120;
     }
 
+    @Override
     protected boolean n() {
         return false;
     }
 
+    @Override
     protected int a(OEntityPlayer var1) {
         return 1 + this.bi.r.nextInt(3);
     }
@@ -213,6 +226,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
         return var1.c == OItem.S.bP;
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
         if (var2 != null && this.a(var2) && this.K() == 0) {

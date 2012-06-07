@@ -37,6 +37,7 @@ public class OChunkProvider implements OIChunkProvider {
         this.c = var3;
     }
 
+    @Override
     public boolean a(int var1, int var2) {
         return this.e.b(OChunkCoordIntPair.a(var1, var2));
     }
@@ -52,6 +53,7 @@ public class OChunkProvider implements OIChunkProvider {
 
     }
 
+    @Override
     public OChunk c(int var1, int var2) {
         long var3 = OChunkCoordIntPair.a(var1, var2);
         this.a.remove(Long.valueOf(var3));
@@ -84,6 +86,7 @@ public class OChunkProvider implements OIChunkProvider {
         return var5;
     }
 
+    @Override
     public OChunk b(int var1, int var2) {
         OChunk var3 = (OChunk) this.e.a(OChunkCoordIntPair.a(var1, var2));
         return var3 == null ? this.c(var1, var2) : var3;
@@ -126,6 +129,7 @@ public class OChunkProvider implements OIChunkProvider {
         }
     }
 
+    @Override
     public void a(OIChunkProvider var1, int var2, int var3) {
         OChunk var4 = this.b(var2, var3);
         if (!var4.k) {
@@ -138,6 +142,7 @@ public class OChunkProvider implements OIChunkProvider {
 
     }
 
+    @Override
     public boolean a(boolean var1, OIProgressUpdate var2) throws IOException {
         int var3 = 0;
 
@@ -168,6 +173,7 @@ public class OChunkProvider implements OIChunkProvider {
         return true;
     }
 
+    @Override
     public boolean a() throws IOException {
         int var1;
         for (var1 = 0; var1 < 100; ++var1) {
@@ -203,14 +209,17 @@ public class OChunkProvider implements OIChunkProvider {
         return this.c.a();
     }
 
+    @Override
     public boolean b() {
         return true;
     }
 
+    @Override
     public List a(OEnumCreatureType var1, int var2, int var3, int var4) {
         return this.c.a(var1, var2, var3, var4);
     }
 
+    @Override
     public OChunkPosition a(OWorld var1, String var2, int var3, int var4, int var5) {
         return this.c.a(var1, var2, var3, var4, var5);
     }

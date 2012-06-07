@@ -18,14 +18,17 @@ public class OBlockNetherStalk extends OBlockFlower {
         this.a(0.5F - var2, 0.0F, 0.5F - var2, 0.5F + var2, 0.25F, 0.5F + var2);
     }
 
+    @Override
     protected boolean d(int var1) {
         return var1 == OBlock.bc.bO;
     }
 
+    @Override
     public boolean f(OWorld var1, int var2, int var3, int var4) {
         return this.d(var1.a(var2, var3 - 1, var4));
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         int var6 = var1.c(var2, var3, var4);
         if (var6 < 3) {
@@ -39,14 +42,17 @@ public class OBlockNetherStalk extends OBlockFlower {
         super.a(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public int a(int var1, int var2) {
         return var2 >= 3 ? this.bN + 2 : (var2 > 0 ? this.bN + 1 : this.bN);
     }
 
+    @Override
     public int c() {
         return 6;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         if (!var1.F) {
             int var8 = 1;
@@ -64,10 +70,12 @@ public class OBlockNetherStalk extends OBlockFlower {
         }
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return 0;
     }
 
+    @Override
     public int a(Random var1) {
         return 0;
     }

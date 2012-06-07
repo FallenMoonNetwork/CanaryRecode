@@ -18,18 +18,22 @@ public class OBlockDeadBush extends OBlockFlower {
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.8F, 0.5F + var3);
     }
 
+    @Override
     protected boolean d(int var1) {
         return var1 == OBlock.E.bO;
     }
 
+    @Override
     public int a(int var1, int var2) {
         return this.bN;
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return -1;
     }
 
+    @Override
     public void a(OWorld var1, OEntityPlayer var2, int var3, int var4, int var5, int var6) {
         if (!var1.F && var2.U() != null && var2.U().c == OItem.bd.bP) {
             var2.a(OStatList.C[this.bO], 1);

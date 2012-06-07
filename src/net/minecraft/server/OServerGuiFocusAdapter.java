@@ -14,6 +14,7 @@ class OServerGuiFocusAdapter extends FocusAdapter {
         this.a = var1;
     }
 
+    @Override
     public void focusGained(FocusEvent var1) {
     }
 }

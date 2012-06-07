@@ -21,6 +21,7 @@ public class OItemArmor extends OItem {
         this.bQ = 1;
     }
 
+    @Override
     public int c() {
         return this.bW.a();
     }

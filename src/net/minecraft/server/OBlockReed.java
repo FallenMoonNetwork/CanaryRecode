@@ -17,6 +17,7 @@ public class OBlockReed extends OBlock {
         this.a(true);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (var1.g(var2, var3 + 1, var4)) {
             int var6;
@@ -37,11 +38,13 @@ public class OBlockReed extends OBlock {
 
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.a(var2, var3 - 1, var4);
         return var5 == this.bO ? true : (var5 != OBlock.u.bO && var5 != OBlock.v.bO && var5 != OBlock.E.bO ? false : (var1.d(var2 - 1, var3 - 1, var4) == OMaterial.g ? true : (var1.d(var2 + 1, var3 - 1, var4) == OMaterial.g ? true : (var1.d(var2, var3 - 1, var4 - 1) == OMaterial.g ? true : var1.d(var2, var3 - 1, var4 + 1) == OMaterial.g))));
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         this.g(var1, var2, var3, var4);
     }
@@ -54,26 +57,32 @@ public class OBlockReed extends OBlock {
 
     }
 
+    @Override
     public boolean f(OWorld var1, int var2, int var3, int var4) {
         return this.c(var1, var2, var3, var4);
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         return null;
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OItem.aI.bP;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 1;
     }

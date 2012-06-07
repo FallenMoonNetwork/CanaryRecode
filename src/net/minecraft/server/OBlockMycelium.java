@@ -13,10 +13,12 @@ public class OBlockMycelium extends OBlock {
         this.a(true);
     }
 
+    @Override
     public int a(int var1, int var2) {
         return var1 == 1 ? 78 : (var1 == 0 ? 2 : 77);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (!var1.F) {
             if (var1.n(var2, var3 + 1, var4) < 4 && OBlock.o[var1.a(var2, var3 + 1, var4)] > 2) {
@@ -36,6 +38,7 @@ public class OBlockMycelium extends OBlock {
         }
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OBlock.v.a(0, var2, var3);
     }

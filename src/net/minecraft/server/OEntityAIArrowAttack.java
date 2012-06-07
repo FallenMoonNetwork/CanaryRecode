@@ -28,6 +28,7 @@ public class OEntityAIArrowAttack extends OEntityAIBase {
         this.a(3);
     }
 
+    @Override
     public boolean a() {
         OEntityLiving var1 = this.b.at();
         if (var1 == null) {
@@ -38,14 +39,17 @@ public class OEntityAIArrowAttack extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return this.a() || !this.b.al().e();
     }
 
+    @Override
     public void d() {
         this.c = null;
     }
 
+    @Override
     public void e() {
         double var1 = 100.0D;
         double var3 = this.b.e(this.c.bm, this.c.bw.b, this.c.bo);

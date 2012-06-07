@@ -13,6 +13,7 @@ public class OItemEgg extends OItem {
         this.bQ = 16;
     }
 
+    @Override
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         if (!var3.L.d) {
             --var1.a;

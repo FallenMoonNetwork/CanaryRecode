@@ -41,6 +41,7 @@ public class OEntityLightningBolt extends OEntityWeatherEffect {
 
     }
 
+    @Override
     public void F_() {
         super.F_();
         if (this.b == 2) {
@@ -81,12 +82,15 @@ public class OEntityLightningBolt extends OEntityWeatherEffect {
 
     }
 
+    @Override
     protected void b() {
     }
 
+    @Override
     protected void a(ONBTTagCompound var1) {
     }
 
+    @Override
     protected void b(ONBTTagCompound var1) {
     }
 }

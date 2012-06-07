@@ -33,6 +33,7 @@ public class OEntityAIAvoidEntity extends OEntityAIBase {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         if (this.h == OEntityPlayer.class) {
             if (this.a instanceof OEntityTameable && ((OEntityTameable) this.a).u_()) {
@@ -67,18 +68,22 @@ public class OEntityAIAvoidEntity extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return !this.g.e();
     }
 
+    @Override
     public void c() {
         this.g.a(this.f, this.b);
     }
 
+    @Override
     public void d() {
         this.d = null;
     }
 
+    @Override
     public void e() {
         if (this.a.j(this.d) < 49.0D) {
             this.a.al().a(this.c);

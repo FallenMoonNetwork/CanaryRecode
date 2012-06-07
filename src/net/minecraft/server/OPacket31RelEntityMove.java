@@ -19,6 +19,7 @@ public class OPacket31RelEntityMove extends OPacket30Entity {
         this.d = var4;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         super.a(var1);
         this.b = var1.readByte();
@@ -26,6 +27,7 @@ public class OPacket31RelEntityMove extends OPacket30Entity {
         this.d = var1.readByte();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         super.a(var1);
         var1.writeByte(this.b);
@@ -33,6 +35,7 @@ public class OPacket31RelEntityMove extends OPacket30Entity {
         var1.writeByte(this.d);
     }
 
+    @Override
     public int a() {
         return 7;
     }

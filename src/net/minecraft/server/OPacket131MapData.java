@@ -26,6 +26,7 @@ public class OPacket131MapData extends OPacket {
         this.c = var3;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readShort();
         this.b = var1.readShort();
@@ -33,6 +34,7 @@ public class OPacket131MapData extends OPacket {
         var1.readFully(this.c);
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeShort(this.a);
         var1.writeShort(this.b);
@@ -40,10 +42,12 @@ public class OPacket131MapData extends OPacket {
         var1.write(this.c);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 4 + this.c.length;
     }

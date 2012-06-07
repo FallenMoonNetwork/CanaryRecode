@@ -20,6 +20,7 @@ public class OBlockPumpkin extends OBlockDirectional {
         this.a = var3;
     }
 
+    @Override
     public int a(int var1, int var2) {
         if (var1 == 1) {
             return this.bN;
@@ -35,10 +36,12 @@ public class OBlockPumpkin extends OBlockDirectional {
         }
     }
 
+    @Override
     public int a(int var1) {
         return var1 == 1 ? this.bN : (var1 == 0 ? this.bN : (var1 == 3 ? this.bN + 1 + 16 : this.bN + 16));
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         super.a(var1, var2, var3, var4);
         if (var1.a(var2, var3 - 1, var4) == OBlock.aU.bO && var1.a(var2, var3 - 2, var4) == OBlock.aU.bO) {
@@ -96,11 +99,13 @@ public class OBlockPumpkin extends OBlockDirectional {
 
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.a(var2, var3, var4);
         return (var5 == 0 || OBlock.m[var5].cd.i()) && var1.e(var2, var3 - 1, var4);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = OMathHelper.b((var5.bs * 4.0F / 360.0F) + 2.5D) & 3;
         var1.c(var2, var3, var4, var6);

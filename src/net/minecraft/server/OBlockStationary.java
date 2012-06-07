@@ -18,10 +18,12 @@ public class OBlockStationary extends OBlockFluid {
 
     }
 
+    @Override
     public boolean b(OIBlockAccess var1, int var2, int var3, int var4) {
         return this.cd != OMaterial.h;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         super.a(var1, var2, var3, var4, var5);
         if (var1.a(var2, var3, var4) == this.bO) {
@@ -39,6 +41,7 @@ public class OBlockStationary extends OBlockFluid {
         var1.o = false;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (this.cd == OMaterial.h) {
             int var6 = var5.nextInt(3);

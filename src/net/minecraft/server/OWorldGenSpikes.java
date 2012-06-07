@@ -15,6 +15,7 @@ public class OWorldGenSpikes extends OWorldGenerator {
         this.a = var1;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         if (var1.g(var3, var4, var5) && var1.a(var3, var4 - 1, var5) == this.a) {
             int var6 = var2.nextInt(32) + 6;

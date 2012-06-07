@@ -25,14 +25,17 @@ public class OEntityAIOcelotSit extends OEntityAIBase {
         this.a(5);
     }
 
+    @Override
     public boolean a() {
         return this.a.u_() && !this.a.v_() && this.a.an().nextDouble() <= 0.006500000134110451D && this.f();
     }
 
+    @Override
     public boolean b() {
         return this.c <= this.d && this.h <= 60 && this.a(this.a.bi, this.e, this.f, this.g);
     }
 
+    @Override
     public void c() {
       this.a.al().a(this.e + 0.5D, (this.f + 1), this.g + 0.5D, this.b);
       this.c = 0;
@@ -41,10 +44,12 @@ public class OEntityAIOcelotSit extends OEntityAIBase {
       this.a.C().a(false);
    }
 
+    @Override
     public void d() {
         this.a.c(false);
     }
 
+    @Override
     public void e() {
       ++this.c;
       this.a.C().a(false);

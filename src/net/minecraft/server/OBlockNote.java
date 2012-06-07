@@ -13,10 +13,12 @@ public class OBlockNote extends OBlockContainer {
         super(var1, 74, OMaterial.d);
     }
 
+    @Override
     public int a(int var1) {
         return this.bN;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (var5 > 0) {
             boolean var6 = var1.x(var2, var3, var4);
@@ -32,6 +34,7 @@ public class OBlockNote extends OBlockContainer {
 
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (var1.F) {
             return true;
@@ -46,6 +49,7 @@ public class OBlockNote extends OBlockContainer {
         }
     }
 
+    @Override
     public void b(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (!var1.F) {
             OTileEntityNote var6 = (OTileEntityNote) var1.b(var2, var3, var4);
@@ -56,10 +60,12 @@ public class OBlockNote extends OBlockContainer {
         }
     }
 
+    @Override
     public OTileEntity a_() {
         return new OTileEntityNote();
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5, int var6) {
         float var7 = (float) Math.pow(2.0D, (var6 - 12) / 12.0D);
         String var8 = "harp";

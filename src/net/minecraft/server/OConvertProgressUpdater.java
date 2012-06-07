@@ -15,9 +15,11 @@ public class OConvertProgressUpdater implements OIProgressUpdate {
         this.b = System.currentTimeMillis();
     }
 
+    @Override
     public void a(String var1) {
     }
 
+    @Override
     public void a(int var1) {
         if (System.currentTimeMillis() - this.b >= 1000L) {
             this.b = System.currentTimeMillis();
@@ -26,6 +28,7 @@ public class OConvertProgressUpdater implements OIProgressUpdate {
 
     }
 
+    @Override
     public void b(String var1) {
     }
 }

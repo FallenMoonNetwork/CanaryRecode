@@ -39,10 +39,12 @@ public class OEntityPigZombie extends OEntityZombie {
         return canaryPigZombie;
     }
 
+    @Override
     protected boolean c_() {
         return false;
     }
 
+    @Override
     public void F_() {
         this.bb = this.d != null ? 0.95F : 0.5F;
         if (this.b > 0 && --this.b == 0) {
@@ -52,28 +54,34 @@ public class OEntityPigZombie extends OEntityZombie {
         super.F_();
     }
 
+    @Override
     public boolean l() {
         return this.bi.q > 0 && this.bi.a(this.bw) && this.bi.a(this, this.bw).size() == 0 && !this.bi.c(this.bw);
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("Anger", (short) this.a);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.a = var1.e("Anger");
     }
 
+    @Override
     protected OEntity o() {
         return this.a == 0 ? null : super.o();
     }
 
+    @Override
     public void e() {
         super.e();
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         OEntity var3 = var1.a();
         if (var3 instanceof OEntityPlayer) {
@@ -99,18 +107,22 @@ public class OEntityPigZombie extends OEntityZombie {
         this.b = this.bS.nextInt(40);
     }
 
+    @Override
     protected String i() {
         return "mob.zombiepig.zpig";
     }
 
+    @Override
     protected String j() {
         return "mob.zombiepig.zpighurt";
     }
 
+    @Override
     protected String k() {
         return "mob.zombiepig.zpigdeath";
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         int var3 = this.bS.nextInt(2 + var2);
 
@@ -127,6 +139,7 @@ public class OEntityPigZombie extends OEntityZombie {
 
     }
 
+    @Override
     protected void b(int var1) {
         if (var1 > 0) {
             OItemStack var2 = new OItemStack(OItem.F);
@@ -145,6 +158,7 @@ public class OEntityPigZombie extends OEntityZombie {
 
     }
 
+    @Override
     protected int f() {
         return OItem.bl.bP;
     }

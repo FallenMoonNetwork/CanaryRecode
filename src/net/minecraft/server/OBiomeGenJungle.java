@@ -25,14 +25,17 @@ public class OBiomeGenJungle extends OBiomeGenBase {
         this.K.add(new OSpawnListEntry(OEntityChicken.class, 10, 4, 4));
     }
 
+    @Override
     public OWorldGenerator a(Random var1) {
         return (var1.nextInt(10) == 0 ? this.O : (var1.nextInt(2) == 0 ? new OWorldGenShrub(3, 0) : (var1.nextInt(3) == 0 ? new OWorldGenHugeTrees(false, 10 + var1.nextInt(20), 3, 3) : new OWorldGenTrees(false, 4 + var1.nextInt(7), 3, 3, true))));
     }
 
+    @Override
     public OWorldGenerator b(Random var1) {
         return var1.nextInt(4) == 0 ? new OWorldGenTallGrass(OBlock.X.bO, 2) : new OWorldGenTallGrass(OBlock.X.bO, 1);
     }
 
+    @Override
     public void a(OWorld var1, Random var2, int var3, int var4) {
         super.a(var1, var2, var3, var4);
         OWorldGenVines var5 = new OWorldGenVines();

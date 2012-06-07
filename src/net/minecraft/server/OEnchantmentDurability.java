@@ -10,14 +10,17 @@ public class OEnchantmentDurability extends OEnchantment {
         this.a("durability");
     }
 
+    @Override
     public int a(int var1) {
         return 5 + (var1 - 1) * 10;
     }
 
+    @Override
     public int b(int var1) {
         return super.a(var1) + 50;
     }
 
+    @Override
     public int a() {
         return 3;
     }

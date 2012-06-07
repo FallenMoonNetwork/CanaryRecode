@@ -18,6 +18,7 @@ public class OWorldGenBigMushroom extends OWorldGenerator {
         super(false);
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         int var6 = var2.nextInt(2);
         if (this.a >= 0) {

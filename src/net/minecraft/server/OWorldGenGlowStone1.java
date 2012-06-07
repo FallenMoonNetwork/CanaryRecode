@@ -11,6 +11,7 @@ public class OWorldGenGlowStone1 extends OWorldGenerator {
         super();
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         if (!var1.g(var3, var4, var5)) {
             return false;

@@ -14,6 +14,7 @@ public class OItemFishingRod extends OItem {
         this.e(1);
     }
 
+    @Override
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         if (var3.R != null) {
             int var4 = var3.R.k();

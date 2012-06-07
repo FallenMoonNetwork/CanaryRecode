@@ -41,28 +41,33 @@ public class OEntityEnderman extends OEntityMob {
     public CanaryEnderman getCanaryEnderman() {
         return canaryEnderman;
     }
+    @Override
     public int d() {
         return 40;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, new Byte((byte) 0));
         this.bY.a(17, new Byte((byte) 0));
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("carried", (short) this.A());
         var1.a("carriedData", (short) this.E());
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.c(var1.e("carried"));
         this.e(var1.e("carriedData"));
     }
 
+    @Override
     protected OEntity o() {
         OEntityPlayer var1 = this.bi.b(this, 64.0D);
         if (var1 != null) {
@@ -79,6 +84,7 @@ public class OEntityEnderman extends OEntityMob {
         return null;
     }
 
+    @Override
     public float b(float var1) {
         return super.b(var1);
     }
@@ -97,6 +103,7 @@ public class OEntityEnderman extends OEntityMob {
         }
     }
 
+    @Override
     public void e() {
         if (this.aT()) {
             this.a(ODamageSource.f, 1);
@@ -254,22 +261,27 @@ public class OEntityEnderman extends OEntityMob {
         }
     }
 
+    @Override
     protected String i() {
         return "mob.endermen.idle";
     }
 
+    @Override
     protected String j() {
         return "mob.endermen.hit";
     }
 
+    @Override
     protected String k() {
         return "mob.endermen.death";
     }
 
+    @Override
     protected int f() {
         return OItem.bm.bP;
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         int var3 = this.f();
         if (var3 > 0) {
@@ -298,6 +310,7 @@ public class OEntityEnderman extends OEntityMob {
         return this.bY.a(17);
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         if (var1 instanceof OEntityDamageSourceIndirect) {
             for (int var3 = 0; var3 < 64; ++var3) {

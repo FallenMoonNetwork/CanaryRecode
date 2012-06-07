@@ -21,10 +21,12 @@ public abstract class OMapGenStructure extends OMapGenBase {
         super();
     }
 
+    @Override
     public void a(OIChunkProvider var1, OWorld var2, int var3, int var4, byte[] var5) {
         super.a(var1, var2, var3, var4, var5);
     }
 
+    @Override
     protected void a(OWorld var1, int var2, int var3, int var4, int var5, byte[] var6) {
         if (!this.e.containsKey(Long.valueOf(OChunkCoordIntPair.a(var2, var3)))) {
             this.c.nextInt();

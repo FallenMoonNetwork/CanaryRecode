@@ -21,6 +21,7 @@ public class ONBTTagList extends ONBTBase {
         super(var1);
     }
 
+    @Override
     void a(DataOutput var1) throws IOException {
         if (this.a.size() > 0) {
             this.b = ((ONBTBase) this.a.get(0)).a();
@@ -37,6 +38,7 @@ public class ONBTTagList extends ONBTBase {
 
     }
 
+    @Override
     void a(DataInput var1) throws IOException {
         this.b = var1.readByte();
         int var2 = var1.readInt();
@@ -50,10 +52,12 @@ public class ONBTTagList extends ONBTBase {
 
     }
 
+    @Override
     public byte a() {
         return (byte) 9;
     }
 
+    @Override
     public String toString() {
         return "" + this.a.size() + " entries of type " + ONBTBase.a(this.b);
     }
@@ -71,6 +75,7 @@ public class ONBTTagList extends ONBTBase {
         return this.a.size();
     }
 
+    @Override
     public ONBTBase b() {
         ONBTTagList var1 = new ONBTTagList(this.c());
         var1.b = this.b;
@@ -85,6 +90,7 @@ public class ONBTTagList extends ONBTBase {
         return var1;
     }
 
+    @Override
     public boolean equals(Object var1) {
         if (super.equals(var1)) {
             ONBTTagList var2 = (ONBTTagList) var1;
@@ -96,6 +102,7 @@ public class ONBTTagList extends ONBTBase {
         return false;
     }
 
+    @Override
     public int hashCode() {
         return super.hashCode() ^ this.a.hashCode();
     }

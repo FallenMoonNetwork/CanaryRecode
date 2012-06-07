@@ -20,6 +20,7 @@ public class OChunkCoordIntPair {
         return var2 & 4294967295L | (var4 & 4294967295L) << 32;
     }
 
+    @Override
     public int hashCode() {
         long var1 = a(this.a, this.b);
         int var3 = (int) var1;
@@ -27,6 +28,7 @@ public class OChunkCoordIntPair {
         return var3 ^ var4;
     }
 
+    @Override
     public boolean equals(Object var1) {
         OChunkCoordIntPair var2 = (OChunkCoordIntPair) var1;
         return var2.a == this.a && var2.b == this.b;
@@ -52,6 +54,7 @@ public class OChunkCoordIntPair {
         return new OChunkPosition(this.a(), var1, this.b());
     }
 
+    @Override
     public String toString() {
         return "[" + this.a + ", " + this.b + "]";
     }

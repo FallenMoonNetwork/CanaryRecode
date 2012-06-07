@@ -17,6 +17,7 @@ public class OWorldGenClay extends OWorldGenerator {
         this.b = var1;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         if (var1.d(var3, var4, var5) != OMaterial.g) {
             return false;

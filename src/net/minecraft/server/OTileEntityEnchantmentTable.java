@@ -22,6 +22,7 @@ public class OTileEntityEnchantmentTable extends OTileEntity {
         super();
     }
 
+    @Override
     public void q_() {
         super.q_();
         this.g = this.f;

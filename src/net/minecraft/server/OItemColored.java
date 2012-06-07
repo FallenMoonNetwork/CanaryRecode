@@ -19,6 +19,7 @@ public class OItemColored extends OItemBlock {
 
     }
 
+    @Override
     public int a(int var1) {
         return var1;
     }
@@ -28,6 +29,7 @@ public class OItemColored extends OItemBlock {
         return this;
     }
 
+    @Override
     public String a(OItemStack var1) {
         if (this.b == null) {
             return super.a(var1);

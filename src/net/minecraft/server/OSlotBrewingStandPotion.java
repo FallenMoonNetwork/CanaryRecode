@@ -20,14 +20,17 @@ class OSlotBrewingStandPotion extends OSlot {
         this.f = var2;
     }
 
+    @Override
     public boolean a(OItemStack var1) {
         return var1 != null && (var1.c == OItem.br.bP || var1.c == OItem.bs.bP);
     }
 
+    @Override
     public int a() {
         return 1;
     }
 
+    @Override
     public void c(OItemStack var1) {
         if (var1.c == OItem.br.bP && var1.h() > 0) {
             this.f.a(OAchievementList.A, 1);

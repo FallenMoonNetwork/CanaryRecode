@@ -16,20 +16,24 @@ public class OPacket108EnchantItem extends OPacket {
         super();
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readByte();
         this.b = var1.readByte();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeByte(this.a);
         var1.writeByte(this.b);
     }
 
+    @Override
     public int a() {
         return 2;
     }

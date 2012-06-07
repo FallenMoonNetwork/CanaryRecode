@@ -18,18 +18,22 @@ public class OBlockTallGrass extends OBlockFlower {
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.8F, 0.5F + var3);
     }
 
+    @Override
     public int a(int var1, int var2) {
         return var2 == 1 ? this.bN : (var2 == 2 ? this.bN + 16 + 1 : (var2 == 0 ? this.bN + 16 : this.bN));
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return var2.nextInt(8) == 0 ? OItem.R.bP : -1;
     }
 
+    @Override
     public int a(int var1, Random var2) {
         return 1 + var2.nextInt(var1 * 2 + 1);
     }
 
+    @Override
     public void a(OWorld var1, OEntityPlayer var2, int var3, int var4, int var5, int var6) {
         if (!var1.F && var2.U() != null && var2.U().c == OItem.bd.bP) {
             var2.a(OStatList.C[this.bO], 1);

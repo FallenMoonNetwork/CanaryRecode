@@ -10,18 +10,22 @@ public class OBlockGlass extends OBlockBreakable {
         super(var1, var2, var3, var4);
     }
 
+    @Override
     public int a(Random var1) {
         return 0;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     protected boolean h() {
         return true;
     }

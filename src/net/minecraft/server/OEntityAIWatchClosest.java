@@ -32,6 +32,7 @@ public class OEntityAIWatchClosest extends OEntityAIBase {
         this.a(2);
     }
 
+    @Override
     public boolean a() {
         if (this.a.an().nextFloat() >= this.e) {
             return false;
@@ -46,18 +47,22 @@ public class OEntityAIWatchClosest extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return !this.b.aE() ? false : (this.a.j(this.b) > (this.c * this.c) ? false : this.d > 0);
     }
 
+    @Override
     public void c() {
         this.d = 40 + this.a.an().nextInt(40);
     }
 
+    @Override
     public void d() {
         this.b = null;
     }
 
+    @Override
     public void e() {
         this.a.ai().a(this.b.bm, this.b.bn + this.b.B(), this.b.bo, 10.0F, this.a.D());
         --this.d;

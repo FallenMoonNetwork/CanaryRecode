@@ -24,6 +24,7 @@ public class OEntityAIMoveTowardsTarget extends OEntityAIBase {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         this.b = this.a.at();
         if (this.b == null) {
@@ -43,14 +44,17 @@ public class OEntityAIMoveTowardsTarget extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return !this.a.al().e() && this.b.aE() && this.b.j(this.a) < (this.g * this.g);
     }
 
+    @Override
     public void d() {
         this.b = null;
     }
 
+    @Override
     public void c() {
         this.a.al().a(this.c, this.d, this.e, this.f);
     }

@@ -11,10 +11,12 @@ public class OBlockClay extends OBlock {
         super(var1, var2, OMaterial.y);
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OItem.aH.bP;
     }
 
+    @Override
     public int a(Random var1) {
         return 4;
     }

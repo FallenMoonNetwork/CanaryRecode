@@ -29,6 +29,7 @@ public class OPacket104WindowItems extends OPacket {
 
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readByte();
         short var2 = var1.readShort();
@@ -40,6 +41,7 @@ public class OPacket104WindowItems extends OPacket {
 
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeByte(this.a);
         var1.writeShort(this.b.length);
@@ -50,10 +52,12 @@ public class OPacket104WindowItems extends OPacket {
 
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 3 + this.b.length * 5;
     }
