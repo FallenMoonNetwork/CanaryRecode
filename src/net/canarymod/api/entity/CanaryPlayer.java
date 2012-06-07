@@ -13,6 +13,7 @@ import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.position.Location;
+import net.canarymod.commands.CanaryCommand;
 import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
@@ -219,12 +220,19 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             } // No need to go on, commands were parsed.
             
             //Check for canary permissions
-            if (!hasPermission("canary.commands."+cmd.replace("/", "")) && !cmd.startsWith("/#")) {
-                sendMessage(Colors.Rose + "Permission denied.");
+            
+            CanaryCommand toExecute = CanaryCommand.fromString(cmd.replace("/", ""));
+            if(toExecute == null) {
+                sendMessage(Colors.Rose + "Unknown command!");
                 return false;
             }
-            //TODO: Parse Canary Commands here!
-            return true;
+            else {
+                if(!toExecute.execute(this, command)) {
+                    sendMessage(Colors.Rose + "Permission denied!");
+                    return false;
+                }
+                return true;
+            }
             
         } catch (Throwable ex) {
             Logman.logStackTrace("Exception in command handler: ", ex);
