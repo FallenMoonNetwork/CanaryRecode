@@ -38,6 +38,7 @@ public class CanaryNetServerHandler implements NetServerHandler {
 
     }
     
+    @Override
     public void sendMessage(String messgage) {
         handler.sendMessage(messgage);
     }
