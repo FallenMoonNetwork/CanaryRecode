@@ -17,7 +17,8 @@ public class OInventoryPlayer implements OIInventory {
     public OEntityPlayer d;
     private OItemStack f;
     public boolean e = false;
-
+    private String name = "container.inventory"; //CanaryMod
+    
     public OInventoryPlayer(OEntityPlayer var1) {
         super();
         this.d = var1;
@@ -297,7 +298,7 @@ public class OInventoryPlayer implements OIInventory {
 
     @Override
     public String e() {
-        return "container.inventory";
+        return name;
     }
 
     @Override
@@ -423,4 +424,46 @@ public class OInventoryPlayer implements OIInventory {
         }
 
     }
+
+    //CanaryMod start container
+    @Override
+    public OItemStack[] getContents() {
+        return a;
+    }
+   
+    @Override
+    public void setContents(OItemStack[] values) {
+        a = values;
+    }
+
+    @Override
+    public OItemStack getSlot(int index) {
+        return g_(index);
+    }
+
+    @Override
+    public void setSlot(int index, OItemStack value) {
+        a(index, value);
+    }
+
+    @Override
+    public int getSize() {
+        return c();
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String value) {
+        name = value;
+    }
+    
+    @Override
+    public void update(){
+        G_(); 
+    }
+    //CanaryMod end container
 }

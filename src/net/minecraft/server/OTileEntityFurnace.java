@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import java.util.Arrays;
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockFurnace;
 import net.minecraft.server.OEntityPlayer;
@@ -18,6 +20,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
     public int a = 0;
     public int b = 0;
     public int c = 0;
+    private String name = "container.furnace"; //CanaryMod
 
     public OTileEntityFurnace() {
         super();
@@ -76,7 +79,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
 
     @Override
     public String e() {
-        return "container.furnace";
+        return name;
     }
 
     @Override
@@ -222,4 +225,46 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
     @Override
     public void g() {
     }
+
+    //CanaryMod start container
+    @Override
+    public OItemStack[] getContents() {
+        return Arrays.copyOf(d, getSize());
+    }
+
+    @Override
+    public void setContents(OItemStack[] values) {
+        d = Arrays.copyOf(values, getSize());
+    }
+
+    @Override
+    public OItemStack getSlot(int index) {
+        return g_(index);
+    }
+
+    @Override
+    public void setSlot(int index, OItemStack value) {
+        a(index, value);
+    }
+
+    @Override
+    public int getSize() {
+        return c();
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String value) {
+        name = value;
+    }
+
+    @Override
+    public void update() {
+        G_();
+    }
+    //CanaryMod end container
 }

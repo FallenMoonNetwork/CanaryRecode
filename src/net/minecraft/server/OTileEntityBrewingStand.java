@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import java.util.Arrays;
 import java.util.List;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
@@ -17,6 +18,7 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
     private int b;
     private int c;
     private int d;
+    private String name = "container.brewing"; // CanaryMod
 
     public OTileEntityBrewingStand() {
         super();
@@ -24,7 +26,7 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
 
     @Override
     public String e() {
-        return "container.brewing";
+        return name;
     }
 
     @Override
@@ -232,4 +234,46 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
 
         return var1;
     }
+
+    //CanaryMod start container
+    @Override
+    public OItemStack[] getContents() {
+        return Arrays.copyOf(a, getSize());
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public int getSize() {
+        return c();
+    }
+
+    @Override
+    public OItemStack getSlot(int index) {
+        return g_(index);
+    }
+
+    @Override
+    public void setContents(OItemStack[] values) {
+        a = Arrays.copyOf(values, getSize());
+    }
+
+    @Override
+    public void setName(String value) {
+        name = value;
+    }
+
+    @Override
+    public void setSlot(int index, OItemStack value) {
+        a(index, value);
+    }
+
+    @Override
+    public void update() {
+        G_();
+    }
+    //CanaryMod end container
 }

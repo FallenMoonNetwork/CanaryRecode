@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import java.util.Arrays;
 import java.util.Random;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
@@ -12,6 +13,7 @@ public class OTileEntityDispenser extends OTileEntity implements OIInventory {
 
     private OItemStack[] a = new OItemStack[9];
     private Random b = new Random();
+    private String name = "container.dispenser"; //CanaryMod
 
     public OTileEntityDispenser() {
         super();
@@ -90,7 +92,7 @@ public class OTileEntityDispenser extends OTileEntity implements OIInventory {
 
     @Override
     public String e() {
-        return "container.dispenser";
+        return name;
     }
 
     @Override
@@ -143,4 +145,46 @@ public class OTileEntityDispenser extends OTileEntity implements OIInventory {
     @Override
     public void g() {
     }
+
+    //CanaryMod start container
+    @Override
+    public OItemStack[] getContents() {
+        return Arrays.copyOf(a, getSize());
+    }
+
+    @Override
+    public void setContents(OItemStack[] values) {
+        a = Arrays.copyOf(values, getSize());
+    }
+
+    @Override
+    public OItemStack getSlot(int index) {
+        return g_(index);
+    }
+
+    @Override
+    public void setSlot(int index, OItemStack value) {
+        a(index, value);
+    }
+
+    @Override
+    public int getSize() {
+        return c();
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String value) {
+        name = value;
+    }
+    
+    @Override
+    public void update(){
+        G_();
+    }
+    //CanaryMod end container
 }

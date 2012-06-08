@@ -18,6 +18,7 @@ import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
+import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
 
 /**
@@ -366,8 +367,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public Inventory getInventory() {
-        // TODO Auto-generated method stub
-        return null;
+        return ((OEntityPlayer)entity).getInventory();
     }
 
     @Override
