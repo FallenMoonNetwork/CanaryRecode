@@ -145,4 +145,8 @@ public class CanaryItem implements Item {
     public BaseItem getBaseItem() {
         return item.getBaseItem();
     }
+    
+    public OItemStack getItemStack(){
+        return item;
+    }
 }

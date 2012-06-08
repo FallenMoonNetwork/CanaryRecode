@@ -5,6 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import net.canarymod.Canary;
+import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.api.entity.EntityLiving;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.DamageHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkPosition;
@@ -107,7 +113,13 @@ public class OExplosion {
                 var19 /= var35;
                 double var37 = this.i.a(var30, var32.bw);
                 double var39 = (1.0D - var33) * var37;
-                var32.a(ODamageSource.l, (int) ((var39 * var39 + var39) / 2.0D * 8.0D * this.f + 1.0D));
+                // CanaryMod - explosion damage.
+                int damage = (int) ((var39 * var39 + var39) / 2.0D * 8.0D * f + 1.0D);
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook((EntityLiving) e.getCanaryEntity(), (EntityLiving) var32.getCanaryEntity(), new CanaryDamageSource(ODamageSource.l), damage));
+                if (!hook.isCancelled()) {
+                    var32.a(ODamageSource.l, damage);
+                }
+                // CanaryMod - end.
                 var32.bp += var15 * var39;
                 var32.bq += var17 * var39;
                 var32.br += var19 * var39;

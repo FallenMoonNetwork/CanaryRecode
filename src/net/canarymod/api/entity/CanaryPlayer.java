@@ -361,8 +361,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public Inventory getInventory() {
-        // TODO Auto-generated method stub
-        return null;
+        return ((OEntityPlayer)entity).getInventory();
     }
 
     @Override
