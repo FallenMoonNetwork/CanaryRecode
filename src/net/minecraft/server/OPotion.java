@@ -1,5 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.DamageHook;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityPlayer;
@@ -78,13 +82,23 @@ public class OPotion {
             }
         } else if (this.H == u.H) {
             if (var1.aD() > 1) {
-                var1.a(ODamageSource.m, 1);
+                // CanaryMod - potion damage.
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, var1.getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.m), 1));
+                if (!hook.isCancelled()) {
+                    var1.a(ODamageSource.m, 1);
+                }
+                // CanaryMod - end.
             }
         } else if (this.H == s.H && var1 instanceof OEntityPlayer) {
             ((OEntityPlayer) var1).c(0.025F * (var2 + 1));
         } else if ((this.H != h.H || var1.aN()) && (this.H != i.H || !var1.aN())) {
             if (this.H == i.H && !var1.aN() || this.H == h.H && var1.aN()) {
-                var1.a(ODamageSource.m, 6 << var2);
+                // CanaryMod - potion damage
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, var1.getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.g), 1));
+                if (!hook.isCancelled()) {
+                    var1.a(ODamageSource.m, 6 << var2);
+                }
+                // CanaryMod - end.
             }
         } else {
             var1.d(6 << var2);

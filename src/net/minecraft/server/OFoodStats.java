@@ -1,5 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.DamageHook;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItemFood;
@@ -48,7 +52,12 @@ public class OFoodStats {
             ++this.d;
             if (this.d >= 80) {
                 if (var1.aD() > 10 || var2 >= 3 || var1.aD() > 1 && var2 >= 2) {
-                    var1.a(ODamageSource.g, 1);
+                    // CanaryMod - starving damage.
+                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, var1.getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.g), 1));
+                    if (!hook.isCancelled()) {
+                        var1.a(ODamageSource.g, 1);
+                    }
+                    // CanaryMod - end.
                 }
 
                 this.d = 0;

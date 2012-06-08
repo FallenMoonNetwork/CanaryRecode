@@ -6,7 +6,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.canarymod.Canary;
+import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntityLiving;
+import net.canarymod.api.entity.EntityLiving;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.DamageHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
@@ -300,8 +305,14 @@ public abstract class OEntityLiving extends OEntity {
             this.az();
         }
 
-        if (this.aE() && this.Y() && this.a(ODamageSource.e, 1)) {
-            ;
+        if (this.aE() && this.Y()) {
+            // CanaryMod - suffocation damage.  
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, (EntityLiving) getCanaryEntity(), new CanaryDamageSource(ODamageSource.e), 1));
+            if (!hook.isCancelled()) {
+                this.a(ODamageSource.e, 1);
+            }
+            // CanaryMod - end.
+            
         }
 
         if (this.aS() || this.bi.F) {
@@ -312,15 +323,18 @@ public abstract class OEntityLiving extends OEntity {
             this.k(this.b_(this.ba()));
             if (this.ba() == -20) {
                 this.k(0);
-
-                for (int var1 = 0; var1 < 8; ++var1) {
-                    float var2 = this.bS.nextFloat() - this.bS.nextFloat();
-                    float var3 = this.bS.nextFloat() - this.bS.nextFloat();
-                    float var4 = this.bS.nextFloat() - this.bS.nextFloat();
-                    this.bi.a("bubble", this.bm + var2, this.bn + var3, this.bo + var4, this.bp, this.bq, this.br);
+                // CanaryMod - drowning damage.  
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, (EntityLiving) getCanaryEntity(), new CanaryDamageSource(ODamageSource.f), 2));
+                if (!hook.isCancelled()) {
+                    for (int var1 = 0; var1 < 8; ++var1) {
+                        float var2 = this.bS.nextFloat() - this.bS.nextFloat();
+                        float var3 = this.bS.nextFloat() - this.bS.nextFloat();
+                        float var4 = this.bS.nextFloat() - this.bS.nextFloat();
+                        this.bi.a("bubble", this.bm + var2, this.bn + var3, this.bo + var4, this.bp, this.bq, this.br);
+                    }
+                    this.a(ODamageSource.f, 2);
                 }
-
-                this.a(ODamageSource.f, 2);
+                // CanaryMod - end.
             }
 
             this.aR();
@@ -585,16 +599,38 @@ public abstract class OEntityLiving extends OEntity {
                 return false;
             } else {
                 this.aE = 1.5F;
+                // CanaryMod - Entity damage. Needed?
+                if (var1 != null && var1 instanceof OEntityDamageSource && ((OEntityDamageSource) var1).a() instanceof OEntityLiving) {
+                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook((EntityLiving) ((OEntityDamageSource) var1).a().getCanaryEntity(), getCanaryEntityLiving(), new CanaryDamageSource(new OEntityDamageSource("entity", this)), var2));
+                    if (this instanceof OEntityCreature) {
+                        ((OEntityCreature) this).f = 0; // flee timer.
+                    }
+                    if (hook.isCancelled()) {
+                        return false;
+                    }
+                }
+                // CanaryMod - end.
                 boolean var3 = true;
                 if (this.bW > this.S / 2.0F) {
                     if (var2 <= this.aU) {
                         return false;
                     }
-
+                    // CanaryMod - Partial damage.
+                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook((EntityLiving) ((OEntityDamageSource) var1).a().getCanaryEntity(), getCanaryEntityLiving(), new CanaryDamageSource(new OEntityDamageSource("entity", this)), var2 - bW));
+                    if (hook.isCancelled()) {
+                        return false;
+                    }
+                    // CanaryMod - end.
                     this.c(var1, var2 - this.aU);
                     this.aU = var2;
                     var3 = false;
                 } else {
+                    // CanaryMod - full damage.
+                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook((EntityLiving) ((OEntityDamageSource) var1).a().getCanaryEntity(), getCanaryEntityLiving(), new CanaryDamageSource(new OEntityDamageSource("entity", this)), var2 - bW));
+                    if (hook.isCancelled()) {
+                        return false;
+                    }
+                    // CanaryMod - end.
                     this.aU = var2;
                     this.aq = this.ap;
                     this.bW = this.S;
@@ -784,13 +820,17 @@ public abstract class OEntityLiving extends OEntity {
         super.a(var1);
         int var2 = (int) Math.ceil((var1 - 3.0F));
         if (var2 > 0) {
-            if (var2 > 4) {
-                this.bi.a(this, "damage.fallbig", 1.0F, 1.0F);
-            } else {
-                this.bi.a(this, "damage.fallsmall", 1.0F, 1.0F);
-            }
+            // CanaryMod - fall damage.
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook((EntityLiving) null, getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.i), var2));
+            if (!hook.isCancelled()) {
+                if (var2 > 4) {
+                    this.bi.a(this, "damage.fallbig", 1.0F, 1.0F);
+                } else {
+                    this.bi.a(this, "damage.fallsmall", 1.0F, 1.0F);
+                }
 
-            this.a(ODamageSource.i, var2);
+                this.a(ODamageSource.i, var2);
+            }// CanaryMod - end.
             int var3 = this.bi.a(OMathHelper.b(this.bm), OMathHelper.b(this.bn - 0.20000000298023224D - this.bF), OMathHelper.b(this.bo));
             if (var3 > 0) {
                 OStepSound var4 = OBlock.m[var3].cb;

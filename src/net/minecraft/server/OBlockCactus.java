@@ -1,6 +1,11 @@
 package net.minecraft.server;
 
 import java.util.Random;
+
+import net.canarymod.Canary;
+import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.DamageHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
@@ -84,6 +89,14 @@ public class OBlockCactus extends OBlock {
     }
 
     public void a(OWorld var1, int var2, int var3, int var4, OEntity var5) {
+        // CanaryMod - cactus damage.
+        if (var5 instanceof OEntityLiving) { 
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) var5).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.h), 1));
+            if (hook.isCancelled()) {
+                return;
+            }
+        }
+        // CanaryMod - end.
         var5.a(ODamageSource.h, 1);
     }
 }
