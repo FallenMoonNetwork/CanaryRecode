@@ -38,6 +38,7 @@ public class OPacket20NamedEntitySpawn extends OPacket {
         this.h = var2 == null ? 0 : var2.c;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = a(var1, 16);
@@ -49,6 +50,7 @@ public class OPacket20NamedEntitySpawn extends OPacket {
         this.h = var1.readShort();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         a(this.b, var1);
@@ -60,10 +62,12 @@ public class OPacket20NamedEntitySpawn extends OPacket {
         var1.writeShort(this.h);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 28;
     }

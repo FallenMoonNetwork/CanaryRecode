@@ -167,6 +167,7 @@ public class OMapGenCaves extends OMapGenBase {
 
     }
 
+    @Override
     protected void a(OWorld var1, int var2, int var3, int var4, int var5, byte[] var6) {
         int var7 = this.c.nextInt(this.c.nextInt(this.c.nextInt(40) + 1) + 1);
         if (this.c.nextInt(15) != 0) {

@@ -23,6 +23,7 @@ public class OBlockBed extends OBlockDirectional {
         this.t();
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (var1.F) {
             return true;
@@ -96,6 +97,7 @@ public class OBlockBed extends OBlockDirectional {
         }
     }
 
+    @Override
     public int a(int var1, int var2) {
         if (var1 == 0) {
             return OBlock.x.bN;
@@ -106,22 +108,27 @@ public class OBlockBed extends OBlockDirectional {
         }
     }
 
+    @Override
     public int c() {
         return 14;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         this.t();
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
         int var7 = b(var6);
@@ -138,6 +145,7 @@ public class OBlockBed extends OBlockDirectional {
 
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return d(var1) ? 0 : OItem.aZ.bP;
     }
@@ -191,6 +199,7 @@ public class OBlockBed extends OBlockDirectional {
         return null;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         if (!d(var5)) {
             super.a(var1, var2, var3, var4, var5, var6, 0);
@@ -198,6 +207,7 @@ public class OBlockBed extends OBlockDirectional {
 
     }
 
+    @Override
     public int g() {
         return 1;
     }

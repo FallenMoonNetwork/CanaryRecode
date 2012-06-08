@@ -15,6 +15,7 @@ final class OConsoleLogFormatter extends Formatter {
         super();
     }
 
+    @Override
     public String format(LogRecord var1) {
         StringBuilder var2 = new StringBuilder();
         var2.append(this.a.format(Long.valueOf(var1.getMillis())));

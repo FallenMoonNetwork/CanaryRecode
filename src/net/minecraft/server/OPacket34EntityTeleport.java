@@ -42,6 +42,7 @@ public class OPacket34EntityTeleport extends OPacket {
         this.f = var6;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = var1.readInt();
@@ -51,6 +52,7 @@ public class OPacket34EntityTeleport extends OPacket {
         this.f = (byte) var1.read();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeInt(this.b);
@@ -60,10 +62,12 @@ public class OPacket34EntityTeleport extends OPacket {
         var1.write(this.f);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 34;
     }

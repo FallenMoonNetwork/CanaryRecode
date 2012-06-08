@@ -15,6 +15,7 @@ public class OTileEntitySign extends OTileEntity {
         super();
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("Text1", this.a[0]);
@@ -23,6 +24,7 @@ public class OTileEntitySign extends OTileEntity {
         var1.a("Text4", this.a[3]);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         this.c = false;
         super.a(var1);
@@ -36,6 +38,7 @@ public class OTileEntitySign extends OTileEntity {
 
     }
 
+    @Override
     public OPacket d() {
         String[] var1 = new String[4];
 

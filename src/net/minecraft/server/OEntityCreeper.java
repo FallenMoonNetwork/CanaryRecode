@@ -50,20 +50,24 @@ public class OEntityCreeper extends OEntityMob {
         return canaryCreeper;
     }
 
+    @Override
     public boolean c_() {
         return true;
     }
 
+    @Override
     public int d() {
         return 20;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, Byte.valueOf((byte) -1));
         this.bY.a(17, Byte.valueOf((byte) 0));
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         if (this.bY.a(17) == 1) {
@@ -72,11 +76,13 @@ public class OEntityCreeper extends OEntityMob {
 
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.bY.b(17, Byte.valueOf((byte) (var1.o("powered") ? 1 : 0)));
     }
 
+    @Override
     public void F_() {
         if (this.aE()) {
             this.b = this.a;
@@ -107,14 +113,17 @@ public class OEntityCreeper extends OEntityMob {
         super.F_();
     }
 
+    @Override
     protected String j() {
         return "mob.creeper";
     }
 
+    @Override
     protected String k() {
         return "mob.creeperdeath";
     }
 
+    @Override
     public void a(ODamageSource var1) {
         super.a(var1);
         if (var1.a() instanceof OEntitySkeleton) {
@@ -123,6 +132,7 @@ public class OEntityCreeper extends OEntityMob {
 
     }
 
+    @Override
     public boolean a(OEntity var1) {
         return true;
     }
@@ -144,6 +154,7 @@ public class OEntityCreeper extends OEntityMob {
         this.bY.b(1, charged);
     }
 
+    @Override
     protected int f() {
         return OItem.L.bP;
     }
@@ -156,6 +167,7 @@ public class OEntityCreeper extends OEntityMob {
         this.bY.b(16, Byte.valueOf((byte) var1));
     }
 
+    @Override
     public void a(OEntityLightningBolt var1) {
         super.a(var1);
         this.bY.b(17, Byte.valueOf((byte) 1));

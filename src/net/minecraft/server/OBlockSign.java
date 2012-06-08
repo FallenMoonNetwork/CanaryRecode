@@ -24,10 +24,12 @@ public class OBlockSign extends OBlockContainer {
         this.a(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var5, 0.5F + var4);
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         return null;
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         if (!this.b) {
             int var5 = var1.c(var2, var3, var4);
@@ -56,22 +58,27 @@ public class OBlockSign extends OBlockContainer {
         }
     }
 
+    @Override
     public int c() {
         return -1;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public boolean b(OIBlockAccess var1, int var2, int var3, int var4) {
         return true;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public OTileEntity a_() {
         try {
             return (OTileEntity) this.a.newInstance();
@@ -80,10 +87,12 @@ public class OBlockSign extends OBlockContainer {
         }
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OItem.at.bP;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         boolean var6 = false;
         if (this.b) {

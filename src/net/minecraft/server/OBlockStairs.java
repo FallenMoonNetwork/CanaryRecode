@@ -25,26 +25,32 @@ public class OBlockStairs extends OBlock {
         this.f(255);
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         return super.e(var1, var2, var3, var4);
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 10;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OAxisAlignedBB var5, ArrayList var6) {
         int var7 = var1.c(var2, var3, var4);
         int var8 = var7 & 3;
@@ -78,71 +84,88 @@ public class OBlockStairs extends OBlock {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
+    @Override
     public void b(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         this.a.b(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public void c(OWorld var1, int var2, int var3, int var4, int var5) {
         this.a.c(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public float a(OEntity var1) {
         return this.a.a(var1);
     }
 
+    @Override
     public int a(int var1, int var2) {
         return this.a.a(var1, 0);
     }
 
+    @Override
     public int a(int var1) {
         return this.a.a(var1, 0);
     }
 
+    @Override
     public int d() {
         return this.a.d();
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntity var5, OVec3D var6) {
         this.a.a(var1, var2, var3, var4, var5, var6);
     }
 
+    @Override
     public boolean E_() {
         return this.a.E_();
     }
 
+    @Override
     public boolean a(int var1, boolean var2) {
         return this.a.a(var1, var2);
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return this.a.c(var1, var2, var3, var4);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         this.a(var1, var2, var3, var4, 0);
         this.a.a(var1, var2, var3, var4);
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         this.a.d(var1, var2, var3, var4);
     }
 
+    @Override
     public void b(OWorld var1, int var2, int var3, int var4, OEntity var5) {
         this.a.b(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         this.a.a(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         return this.a.a(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public void a_(OWorld var1, int var2, int var3, int var4) {
         this.a.a_(var1, var2, var3, var4);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = OMathHelper.b((var5.bs * 4.0F / 360.0F) + 0.5D) & 3;
         int var7 = var1.c(var2, var3, var4) & 4;
@@ -164,6 +187,7 @@ public class OBlockStairs extends OBlock {
 
     }
 
+    @Override
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         if (var5 == 0) {
             int var6 = var1.c(var2, var3, var4);

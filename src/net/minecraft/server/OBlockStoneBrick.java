@@ -9,6 +9,7 @@ public class OBlockStoneBrick extends OBlock {
         super(var1, 54, OMaterial.e);
     }
 
+    @Override
     public int a(int var1, int var2) {
         switch (var2) {
         case 1:
@@ -22,6 +23,7 @@ public class OBlockStoneBrick extends OBlock {
         }
     }
 
+    @Override
     protected int c(int var1) {
         return var1;
     }

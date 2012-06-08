@@ -14,6 +14,7 @@ public class OItemMetadata extends OItemBlock {
         this.a(true);
     }
 
+    @Override
     public int a(int var1) {
         return var1;
     }

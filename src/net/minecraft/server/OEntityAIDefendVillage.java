@@ -16,6 +16,7 @@ public class OEntityAIDefendVillage extends OEntityAITarget {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         OVillage var1 = this.a.l_();
         if (var1 == null) {
@@ -26,6 +27,7 @@ public class OEntityAIDefendVillage extends OEntityAITarget {
         }
     }
 
+    @Override
     public void c() {
         this.a.b(this.b);
         super.c();

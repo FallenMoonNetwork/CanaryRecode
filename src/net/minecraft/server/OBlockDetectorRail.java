@@ -16,14 +16,17 @@ public class OBlockDetectorRail extends OBlockRail {
         this.a(true);
     }
 
+    @Override
     public int d() {
         return 20;
     }
 
+    @Override
     public boolean e() {
         return true;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntity var5) {
         if (!var1.F) {
             int var6 = var1.c(var2, var3, var4);
@@ -33,6 +36,7 @@ public class OBlockDetectorRail extends OBlockRail {
         }
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (!var1.F) {
             int var6 = var1.c(var2, var3, var4);
@@ -42,10 +46,12 @@ public class OBlockDetectorRail extends OBlockRail {
         }
     }
 
+    @Override
     public boolean a(OIBlockAccess var1, int var2, int var3, int var4, int var5) {
         return (var1.c(var2, var3, var4) & 8) != 0;
     }
 
+    @Override
     public boolean d(OWorld var1, int var2, int var3, int var4, int var5) {
         return (var1.c(var2, var3, var4) & 8) == 0 ? false : var5 == 1;
     }

@@ -41,6 +41,7 @@ public class OComponentStrongholdStairs extends OComponentStronghold {
         this.g = var3;
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
         if (this.a) {
             OStructureStrongholdPieces.a(OComponentStrongholdCrossing.class);
@@ -54,6 +55,7 @@ public class OComponentStrongholdStairs extends OComponentStronghold {
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentStrongholdStairs(var6, var1, var7, var5) : null;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         if (this.a(var1, var3)) {
             return false;

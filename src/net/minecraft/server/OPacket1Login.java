@@ -35,6 +35,7 @@ public class OPacket1Login extends OPacket {
         this.h = var8;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = a(var1, 16);
@@ -51,6 +52,7 @@ public class OPacket1Login extends OPacket {
         this.h = var1.readByte();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         a(this.b, var1);
@@ -67,10 +69,12 @@ public class OPacket1Login extends OPacket {
         var1.writeByte(this.h);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         int var1 = 0;
         if (this.c != null) {

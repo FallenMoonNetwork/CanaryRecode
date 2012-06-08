@@ -12,6 +12,7 @@ public final class OThreadServerApplication extends Thread {
         this.a = var2;
     }
 
+    @Override
     public void run() {
         this.a.run();
     }

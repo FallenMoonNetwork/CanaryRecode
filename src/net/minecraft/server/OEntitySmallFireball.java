@@ -24,6 +24,7 @@ public class OEntitySmallFireball extends OEntityFireball {
         this.b(0.3125F, 0.3125F);
     }
 
+    @Override
     protected void a(OMovingObjectPosition var1) {
         if (!this.bi.F) {
             if (var1.g != null) {
@@ -64,10 +65,12 @@ public class OEntitySmallFireball extends OEntityFireball {
 
     }
 
+    @Override
     public boolean o_() {
         return false;
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         return false;
     }

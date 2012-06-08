@@ -19,6 +19,7 @@ public class ONextTickListEntry implements Comparable {
         this.d = var4;
     }
 
+    @Override
     public boolean equals(Object var1) {
         if (!(var1 instanceof ONextTickListEntry)) {
             return false;
@@ -28,6 +29,7 @@ public class ONextTickListEntry implements Comparable {
         }
     }
 
+    @Override
     public int hashCode() {
         return (this.a * 1024 * 1024 + this.c * 1024 + this.b) * 256 + this.d;
     }
@@ -43,6 +45,7 @@ public class ONextTickListEntry implements Comparable {
 
     // $FF: synthetic method
     // $FF: bridge method
+    @Override
     public int compareTo(Object var1) {
         return this.a((ONextTickListEntry) var1);
     }

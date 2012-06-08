@@ -28,6 +28,7 @@ public class OEntityMooshroom extends OEntityCow {
         return canaryMushroomCow;
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
         if (var2 != null && var2.c == OItem.D.bP && this.K() >= 0) {
@@ -63,6 +64,7 @@ public class OEntityMooshroom extends OEntityCow {
         }
     }
 
+    @Override
     public OEntityAnimal a(OEntityAnimal var1) {
         return new OEntityMooshroom(this.bi);
     }

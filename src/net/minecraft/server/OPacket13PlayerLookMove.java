@@ -27,6 +27,7 @@ public class OPacket13PlayerLookMove extends OPacket10Flying {
         this.h = true;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readDouble();
         this.b = var1.readDouble();
@@ -37,6 +38,7 @@ public class OPacket13PlayerLookMove extends OPacket10Flying {
         super.a(var1);
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeDouble(this.a);
         var1.writeDouble(this.b);
@@ -47,6 +49,7 @@ public class OPacket13PlayerLookMove extends OPacket10Flying {
         super.a(var1);
     }
 
+    @Override
     public int a() {
         return 41;
     }

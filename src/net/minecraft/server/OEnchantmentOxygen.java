@@ -10,14 +10,17 @@ public class OEnchantmentOxygen extends OEnchantment {
         this.a("oxygen");
     }
 
+    @Override
     public int a(int var1) {
         return 10 * var1;
     }
 
+    @Override
     public int b(int var1) {
         return this.a(var1) + 30;
     }
 
+    @Override
     public int a() {
         return 3;
     }

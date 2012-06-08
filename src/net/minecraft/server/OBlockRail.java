@@ -33,19 +33,23 @@ public class OBlockRail extends OBlock {
         return this.a;
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         return null;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public OMovingObjectPosition a(OWorld var1, int var2, int var3, int var4, OVec3D var5, OVec3D var6) {
         this.a((OIBlockAccess) var1, var2, var3, var4);
         return super.a(var1, var2, var3, var4, var5, var6);
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
         if (var5 >= 2 && var5 <= 5) {
@@ -56,6 +60,7 @@ public class OBlockRail extends OBlock {
 
     }
 
+    @Override
     public int a(int var1, int var2) {
         if (this.a) {
             if (this.bO == OBlock.T.bO && (var2 & 8) == 0) {
@@ -68,22 +73,27 @@ public class OBlockRail extends OBlock {
         return this.bN;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 9;
     }
 
+    @Override
     public int a(Random var1) {
         return 1;
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return var1.e(var2, var3 - 1, var4);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         if (!var1.F) {
             this.a(var1, var2, var3, var4, true);
@@ -94,6 +104,7 @@ public class OBlockRail extends OBlock {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (!var1.F) {
             int var6 = var1.c(var2, var3, var4);
@@ -252,6 +263,7 @@ public class OBlockRail extends OBlock {
         return false;
     }
 
+    @Override
     public int g() {
         return 0;
     }

@@ -116,6 +116,7 @@ public class OStructureBoundingBox {
         return this.c + (this.f - this.c + 1) / 2;
     }
 
+    @Override
     public String toString() {
         return "(" + this.a + ", " + this.b + ", " + this.c + "; " + this.d + ", " + this.e + ", " + this.f + ")";
     }

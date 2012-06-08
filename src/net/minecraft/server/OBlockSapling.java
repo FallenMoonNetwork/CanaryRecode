@@ -18,6 +18,7 @@ public class OBlockSapling extends OBlockFlower {
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (!var1.F) {
             super.a(var1, var2, var3, var4, var5);
@@ -33,6 +34,7 @@ public class OBlockSapling extends OBlockFlower {
         }
     }
 
+    @Override
     public int a(int var1, int var2) {
         var2 &= 3;
         return var2 == 1 ? 63 : (var2 == 2 ? 79 : (var2 == 3 ? 30 : super.a(var1, var2)));
@@ -101,6 +103,7 @@ public class OBlockSapling extends OBlockFlower {
         return var1.a(var2, var3, var4) == this.bO && (var1.c(var2, var3, var4) & 3) == var5;
     }
 
+    @Override
     protected int c(int var1) {
         return var1 & 3;
     }

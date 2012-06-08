@@ -13,6 +13,7 @@ public class OItemSoup extends OItemFood {
         this.e(1);
     }
 
+    @Override
     public OItemStack b(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         super.b(var1, var2, var3);
         return new OItemStack(OItem.D);

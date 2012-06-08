@@ -10,10 +10,12 @@ public class OBlockObsidian extends OBlockStone {
         super(var1, var2);
     }
 
+    @Override
     public int a(Random var1) {
         return 1;
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OBlock.ap.bO;
     }

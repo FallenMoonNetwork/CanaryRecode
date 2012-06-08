@@ -14,6 +14,7 @@ final class OServerWindowAdapter extends WindowAdapter {
         this.a = var1;
     }
 
+    @Override
     public void windowClosing(WindowEvent var1) {
         this.a.a();
 

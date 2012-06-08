@@ -14,14 +14,17 @@ public class OBlockSand extends OBlock {
         super(var1, var2, OMaterial.o);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         var1.c(var2, var3, var4, this.bO, this.d());
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         var1.c(var2, var3, var4, this.bO, this.d());
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         this.h(var1, var2, var3, var4);
     }
@@ -49,6 +52,7 @@ public class OBlockSand extends OBlock {
 
     }
 
+    @Override
     public int d() {
         return 3;
     }

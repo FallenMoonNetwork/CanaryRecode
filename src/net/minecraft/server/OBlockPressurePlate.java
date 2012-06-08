@@ -24,33 +24,41 @@ public class OBlockPressurePlate extends OBlock {
         this.a(var5, 0.0F, var5, 1.0F - var5, 0.03125F, 1.0F - var5);
     }
 
+    @Override
     public int d() {
         return 20;
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         return null;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public boolean b(OIBlockAccess var1, int var2, int var3, int var4) {
         return true;
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return var1.e(var2, var3 - 1, var4) || var1.a(var2, var3 - 1, var4) == OBlock.aZ.bO;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         boolean var6 = false;
         if (!var1.e(var2, var3 - 1, var4) && var1.a(var2, var3 - 1, var4) != OBlock.aZ.bO) {
@@ -64,6 +72,7 @@ public class OBlockPressurePlate extends OBlock {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (!var1.F) {
             if (var1.c(var2, var3, var4) != 0) {
@@ -72,6 +81,7 @@ public class OBlockPressurePlate extends OBlock {
         }
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntity var5) {
         if (!var1.F) {
             if (var1.c(var2, var3, var4) != 1) {
@@ -123,6 +133,7 @@ public class OBlockPressurePlate extends OBlock {
 
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
         if (var5 > 0) {
@@ -133,6 +144,7 @@ public class OBlockPressurePlate extends OBlock {
         super.d(var1, var2, var3, var4);
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         boolean var5 = var1.c(var2, var3, var4) == 1;
         float var6 = 0.0625F;
@@ -144,18 +156,22 @@ public class OBlockPressurePlate extends OBlock {
 
     }
 
+    @Override
     public boolean a(OIBlockAccess var1, int var2, int var3, int var4, int var5) {
         return var1.c(var2, var3, var4) > 0;
     }
 
+    @Override
     public boolean d(OWorld var1, int var2, int var3, int var4, int var5) {
         return var1.c(var2, var3, var4) == 0 ? false : var5 == 1;
     }
 
+    @Override
     public boolean e() {
         return true;
     }
 
+    @Override
     public void f() {
         float var1 = 0.5F;
         float var2 = 0.125F;
@@ -163,6 +179,7 @@ public class OBlockPressurePlate extends OBlock {
         this.a(0.5F - var1, 0.5F - var2, 0.5F - var3, 0.5F + var1, 0.5F + var2, 0.5F + var3);
     }
 
+    @Override
     public int g() {
         return 1;
     }

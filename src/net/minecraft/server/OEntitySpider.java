@@ -19,15 +19,18 @@ public class OEntitySpider extends OEntityMob {
         this.bb = 0.8F;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, new Byte((byte) 0));
     }
 
+    @Override
     public void e() {
         super.e();
     }
 
+    @Override
     public void F_() {
         super.F_();
         if (!this.bi.F) {
@@ -36,18 +39,22 @@ public class OEntitySpider extends OEntityMob {
 
     }
 
+    @Override
     public int d() {
         return 16;
     }
 
+    @Override
     public double x_() {
         return this.bH * 0.75D - 0.5D;
     }
 
+    @Override
     protected boolean g_() {
         return false;
     }
 
+    @Override
     protected OEntity o() {
         float var1 = this.b(1.0F);
         if (var1 < 0.5F) {
@@ -58,18 +65,22 @@ public class OEntitySpider extends OEntityMob {
         }
     }
 
+    @Override
     protected String i() {
         return "mob.spider";
     }
 
+    @Override
     protected String j() {
         return "mob.spider";
     }
 
+    @Override
     protected String k() {
         return "mob.spiderdeath";
     }
 
+    @Override
     protected void a(OEntity var1, float var2) {
         float var3 = this.b(1.0F);
         if (var3 > 0.5F && this.bS.nextInt(100) == 0) {
@@ -91,18 +102,22 @@ public class OEntitySpider extends OEntityMob {
         }
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
     }
 
+    @Override
     protected int f() {
         return OItem.J.bP;
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         super.a(var1, var2);
         if (var1 && (this.bS.nextInt(3) == 0 || this.bS.nextInt(1 + var2) > 0)) {
@@ -111,17 +126,21 @@ public class OEntitySpider extends OEntityMob {
 
     }
 
+    @Override
     public boolean t() {
         return this.w();
     }
 
+    @Override
     public void u() {
     }
 
+    @Override
     public OEnumCreatureAttribute v() {
         return OEnumCreatureAttribute.c;
     }
 
+    @Override
     public boolean a(OPotionEffect var1) {
         return var1.a() == OPotion.u.H ? false : super.a(var1);
     }

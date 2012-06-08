@@ -19,6 +19,7 @@ public class OPacket14BlockDig extends OPacket {
         super();
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.e = var1.read();
         this.a = var1.readInt();
@@ -27,6 +28,7 @@ public class OPacket14BlockDig extends OPacket {
         this.d = var1.read();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.write(this.e);
         var1.writeInt(this.a);
@@ -35,10 +37,12 @@ public class OPacket14BlockDig extends OPacket {
         var1.write(this.d);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 11;
     }

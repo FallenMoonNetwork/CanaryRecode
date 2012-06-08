@@ -74,10 +74,12 @@ public class OEntityWolf extends OEntityTameable {
         return canaryWolf;
     }
 
+    @Override
     public boolean c_() {
         return true;
     }
 
+    @Override
     public void b(OEntityLiving var1) {
         super.b(var1);
         if (var1 instanceof OEntityPlayer) {
@@ -86,57 +88,70 @@ public class OEntityWolf extends OEntityTameable {
 
     }
 
+    @Override
     protected void g() {
         this.bY.b(18, Integer.valueOf(this.aD()));
     }
 
+    @Override
     public int d() {
         return this.u_() ? 20 : 8;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(18, new Integer(this.aD()));
     }
 
+    @Override
     protected boolean g_() {
         return false;
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("Angry", this.E());
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.d(var1.o("Angry"));
     }
 
+    @Override
     protected boolean n() {
         return this.E();
     }
 
+    @Override
     protected String i() {
         return this.E() ? "mob.wolf.growl" : (this.bS.nextInt(3) == 0 ? (this.u_() && this.bY.c(18) < 10 ? "mob.wolf.whine" : "mob.wolf.panting") : "mob.wolf.bark");
     }
 
+    @Override
     protected String j() {
         return "mob.wolf.hurt";
     }
 
+    @Override
     protected String k() {
         return "mob.wolf.death";
     }
 
+    @Override
     protected float p() {
         return 0.4F;
     }
 
+    @Override
     protected int f() {
         return -1;
     }
 
+    @Override
     public void e() {
         super.e();
         if (!this.bi.F && this.h && !this.i && !this.H() && this.bx) {
@@ -148,6 +163,7 @@ public class OEntityWolf extends OEntityTameable {
 
     }
 
+    @Override
     public void F_() {
         super.F_();
         this.g = this.c;
@@ -194,14 +210,17 @@ public class OEntityWolf extends OEntityTameable {
 
     }
 
+    @Override
     public float B() {
         return this.bH * 0.8F;
     }
 
+    @Override
     public int D() {
         return this.v_() ? 20 : super.D();
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         OEntity var3 = var1.a();
         this.a.a(false);
@@ -212,11 +231,13 @@ public class OEntityWolf extends OEntityTameable {
         return super.a(var1, var2);
     }
 
+    @Override
     public boolean a(OEntity var1) {
         int var2 = this.u_() ? 4 : 2;
         return var1.a(ODamageSource.a(this), var2);
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
         if (!this.u_()) {
@@ -274,10 +295,12 @@ public class OEntityWolf extends OEntityTameable {
         return super.b(var1);
     }
 
+    @Override
     public boolean a(OItemStack var1) {
         return var1 == null ? false : (!(OItem.d[var1.c] instanceof OItemFood) ? false : ((OItemFood) OItem.d[var1.c]).q());
     }
 
+    @Override
     public int q() {
         return 8;
     }
@@ -296,6 +319,7 @@ public class OEntityWolf extends OEntityTameable {
 
     }
 
+    @Override
     public OEntityAnimal a(OEntityAnimal var1) {
         OEntityWolf var2 = new OEntityWolf(this.bi);
         var2.a(this.A());
@@ -307,6 +331,7 @@ public class OEntityWolf extends OEntityTameable {
         this.b = var1;
     }
 
+    @Override
     public boolean b(OEntityAnimal var1) {
         if (var1 == this) {
             return false;

@@ -18,10 +18,12 @@ public class OBlockCauldron extends OBlock {
         this.bN = 154;
     }
 
+    @Override
     public int a(int var1, int var2) {
         return var1 == 1 ? 138 : (var1 == 0 ? 155 : 154);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OAxisAlignedBB var5, ArrayList var6) {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.3125F, 1.0F);
         super.a(var1, var2, var3, var4, var5, var6);
@@ -37,22 +39,27 @@ public class OBlockCauldron extends OBlock {
         this.f();
     }
 
+    @Override
     public void f() {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public int c() {
         return 24;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (var1.F) {
             return true;
@@ -93,6 +100,7 @@ public class OBlockCauldron extends OBlock {
         }
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OItem.by.bP;
     }

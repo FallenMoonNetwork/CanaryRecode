@@ -25,6 +25,7 @@ public abstract class OEntityAIDoorInteract extends OEntityAIBase {
         this.a = var1;
     }
 
+    @Override
     public boolean a() {
         if (!this.a.by) {
             return false;
@@ -56,16 +57,19 @@ public abstract class OEntityAIDoorInteract extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return !this.f;
     }
 
+    @Override
     public void c() {
         this.f = false;
         this.g = (float) ((this.b + 0.5F) - this.a.bm);
         this.h = (float) ((this.d + 0.5F) - this.a.bo);
     }
 
+    @Override
     public void e() {
         float var1 = (float) ((this.b + 0.5F) - this.a.bm);
         float var2 = (float) ((this.d + 0.5F) - this.a.bo);

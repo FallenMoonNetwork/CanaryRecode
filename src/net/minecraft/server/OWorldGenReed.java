@@ -12,6 +12,7 @@ public class OWorldGenReed extends OWorldGenerator {
         super();
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         for (int var6 = 0; var6 < 20; ++var6) {
             int var7 = var3 + var2.nextInt(4) - var2.nextInt(4);

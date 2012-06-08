@@ -18,22 +18,27 @@ public class OEnchantmentDamage extends OEnchantment {
         this.a = var3;
     }
 
+    @Override
     public int a(int var1) {
         return B[this.a] + (var1 - 1) * C[this.a];
     }
 
+    @Override
     public int b(int var1) {
         return this.a(var1) + D[this.a];
     }
 
+    @Override
     public int a() {
         return 5;
     }
 
+    @Override
     public int a(int var1, OEntityLiving var2) {
         return this.a == 0 ? var1 * 3 : (this.a == 1 && var2.v() == OEnumCreatureAttribute.b ? var1 * 4 : (this.a == 2 && var2.v() == OEnumCreatureAttribute.c ? var1 * 4 : 0));
     }
 
+    @Override
     public boolean a(OEnchantment var1) {
         return !(var1 instanceof OEnchantmentDamage);
     }

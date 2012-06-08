@@ -19,6 +19,7 @@ public class OBlockRedstoneLight extends OBlock {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         if (!var1.F) {
             if (this.a && !var1.x(var2, var3, var4)) {
@@ -30,6 +31,7 @@ public class OBlockRedstoneLight extends OBlock {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (!var1.F) {
             if (this.a && !var1.x(var2, var3, var4)) {
@@ -41,6 +43,7 @@ public class OBlockRedstoneLight extends OBlock {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (!var1.F && this.a && !var1.x(var2, var3, var4)) {
             var1.e(var2, var3, var4, OBlock.bL.bO);
@@ -48,6 +51,7 @@ public class OBlockRedstoneLight extends OBlock {
 
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OBlock.bL.bO;
     }

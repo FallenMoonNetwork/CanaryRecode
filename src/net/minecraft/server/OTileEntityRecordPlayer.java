@@ -11,11 +11,13 @@ public class OTileEntityRecordPlayer extends OTileEntity {
         super();
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.a = var1.f("Record");
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         if (this.a > 0) {

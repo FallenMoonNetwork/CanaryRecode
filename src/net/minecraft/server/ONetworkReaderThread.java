@@ -12,6 +12,7 @@ class ONetworkReaderThread extends Thread {
         this.a = var1;
     }
 
+    @Override
     public void run() {
         Object var1 = ONetworkManager.a;
         synchronized (ONetworkManager.a) {

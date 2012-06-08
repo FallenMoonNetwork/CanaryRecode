@@ -190,10 +190,12 @@ public class OChunkProviderGenerate implements OIChunkProvider {
 
     }
 
+    @Override
     public OChunk c(int var1, int var2) {
         return this.b(var1, var2);
     }
 
+    @Override
     public OChunk b(int var1, int var2) {
         this.k.setSeed(var1 * 341873128712L + var2 * 132897987541L);
         byte[] var3 = new byte['\u8000'];
@@ -335,10 +337,12 @@ public class OChunkProviderGenerate implements OIChunkProvider {
         return var1;
     }
 
+    @Override
     public boolean a(int var1, int var2) {
         return true;
     }
 
+    @Override
     public void a(OIChunkProvider var1, int var2, int var3) {
         OBlockSand.a = true;
         int var4 = var2 * 16;
@@ -404,23 +408,28 @@ public class OChunkProviderGenerate implements OIChunkProvider {
         OBlockSand.a = false;
     }
 
+    @Override
     public boolean a(boolean var1, OIProgressUpdate var2) {
         return true;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return true;
     }
 
+    @Override
     public List a(OEnumCreatureType var1, int var2, int var3, int var4) {
         OBiomeGenBase var5 = this.p.a(var2, var4);
         return var5 == null ? null : var5.a(var1);
     }
 
+    @Override
     public OChunkPosition a(OWorld var1, String var2, int var3, int var4, int var5) {
         return "Stronghold".equals(var2) && this.u != null ? this.u.a(var1, var3, var4, var5) : null;
     }

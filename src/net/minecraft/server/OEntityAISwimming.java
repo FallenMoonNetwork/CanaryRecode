@@ -14,10 +14,12 @@ public class OEntityAISwimming extends OEntityAIBase {
         var1.al().e(true);
     }
 
+    @Override
     public boolean a() {
         return this.a.aU() || this.a.aV();
     }
 
+    @Override
     public void e() {
         if (this.a.an().nextFloat() < 0.8F) {
             this.a.ak().a();

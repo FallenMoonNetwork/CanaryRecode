@@ -49,6 +49,7 @@ public class OContainerEnchantment extends OContainer {
 
     }
 
+    @Override
     public void a(OICrafting var1) {
         super.a(var1);
         var1.a(this, 0, this.c[0]);
@@ -56,6 +57,7 @@ public class OContainerEnchantment extends OContainer {
         var1.a(this, 2, this.c[2]);
     }
 
+    @Override
     public void a() {
         super.a();
 
@@ -68,6 +70,7 @@ public class OContainerEnchantment extends OContainer {
 
     }
 
+    @Override
     public void a(OIInventory var1) {
         if (var1 == this.a) {
             OItemStack var2 = var1.g_(0);
@@ -125,6 +128,7 @@ public class OContainerEnchantment extends OContainer {
 
     }
 
+    @Override
     public boolean a(OEntityPlayer var1, int var2) {
         OItemStack var3 = this.a.g_(0);
         if (this.c[var2] > 0 && var3 != null && (var1.M >= this.c[var2] || var1.L.d)) {
@@ -149,6 +153,7 @@ public class OContainerEnchantment extends OContainer {
         }
     }
 
+    @Override
     public void a(OEntityPlayer var1) {
         super.a(var1);
         if (!this.h.F) {
@@ -160,10 +165,12 @@ public class OContainerEnchantment extends OContainer {
         }
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         return this.h.a(this.i, this.j, this.k) != OBlock.bE.bO ? false : var1.e(this.i + 0.5D, this.j + 0.5D, this.k + 0.5D) <= 64.0D;
     }
 
+    @Override
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);

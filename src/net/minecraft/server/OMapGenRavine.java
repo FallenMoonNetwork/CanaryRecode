@@ -164,6 +164,7 @@ public class OMapGenRavine extends OMapGenBase {
 
     }
 
+    @Override
     protected void a(OWorld var1, int var2, int var3, int var4, int var5, byte[] var6) {
         if (this.c.nextInt(50) == 0) {
             double var7 = (var2 * 16 + this.c.nextInt(16));

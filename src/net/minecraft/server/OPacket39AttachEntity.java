@@ -23,20 +23,24 @@ public class OPacket39AttachEntity extends OPacket {
         this.b = var2 != null ? var2.bd : -1;
     }
 
+    @Override
     public int a() {
         return 8;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = var1.readInt();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeInt(this.b);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }

@@ -10,6 +10,7 @@ public class OBlockOreStorage extends OBlock {
         this.bN = var2;
     }
 
+    @Override
     public int a(int var1) {
         return this.bN;
     }

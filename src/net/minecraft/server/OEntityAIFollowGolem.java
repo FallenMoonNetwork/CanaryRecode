@@ -20,6 +20,7 @@ public class OEntityAIFollowGolem extends OEntityAIBase {
         this.a(3);
     }
 
+    @Override
     public boolean a() {
         if (this.a.K() >= 0) {
             return false;
@@ -46,21 +47,25 @@ public class OEntityAIFollowGolem extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return this.b.m_() > 0;
     }
 
+    @Override
     public void c() {
         this.c = this.a.an().nextInt(320);
         this.d = false;
         this.b.al().f();
     }
 
+    @Override
     public void d() {
         this.b = null;
         this.a.al().f();
     }
 
+    @Override
     public void e() {
         this.a.ai().a(this.b, 30.0F, 30.0F);
         if (this.b.m_() == this.c) {

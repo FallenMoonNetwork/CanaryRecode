@@ -312,6 +312,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
         }
     }
 
+    @Override
     public void a(double var1, double var3, double var5) {
         this.m = (int) (var1 * 12.0D);
         if (var1 > 0.5D) {
@@ -322,6 +323,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
         this.k = var5;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         this.c = var1;
         long var6 = var2.nextLong();

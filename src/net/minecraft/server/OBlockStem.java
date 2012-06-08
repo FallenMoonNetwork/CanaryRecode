@@ -21,10 +21,12 @@ public class OBlockStem extends OBlockFlower {
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.25F, 0.5F + var3);
     }
 
+    @Override
     protected boolean d(int var1) {
         return var1 == OBlock.aA.bO;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         super.a(var1, var2, var3, var4, var5);
         if (var1.n(var2, var3 + 1, var4) >= 9) {
@@ -124,25 +126,30 @@ public class OBlockStem extends OBlockFlower {
         return var5;
     }
 
+    @Override
     public int a(int var1, int var2) {
         return this.bN;
     }
 
+    @Override
     public void f() {
         float var1 = 0.125F;
         this.a(0.5F - var1, 0.0F, 0.5F - var1, 0.5F + var1, 0.25F, 0.5F + var1);
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         this.bZ = ((var1.c(var2, var3, var4) * 2 + 2) / 16.0F);
         float var5 = 0.125F;
         this.a(0.5F - var5, 0.0F, 0.5F - var5, 0.5F + var5, (float) this.bZ, 0.5F + var5);
     }
 
+    @Override
     public int c() {
         return 19;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         super.a(var1, var2, var3, var4, var5, var6, var7);
         if (!var1.F) {
@@ -170,6 +177,7 @@ public class OBlockStem extends OBlockFlower {
         }
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         if (var1 == 7) {
             ;
@@ -178,6 +186,7 @@ public class OBlockStem extends OBlockFlower {
         return -1;
     }
 
+    @Override
     public int a(Random var1) {
         return 1;
     }

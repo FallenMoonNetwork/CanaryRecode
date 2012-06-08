@@ -12,6 +12,7 @@ public class OItemMapBase extends OItem {
         super(var1);
     }
 
+    @Override
     public boolean t_() {
         return true;
     }

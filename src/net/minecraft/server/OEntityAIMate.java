@@ -24,6 +24,7 @@ public class OEntityAIMate extends OEntityAIBase {
         this.a(3);
     }
 
+    @Override
     public boolean a() {
         if (!this.d.r_()) {
             return false;
@@ -33,15 +34,18 @@ public class OEntityAIMate extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return this.e.aE() && this.e.r_() && this.b < 60;
     }
 
+    @Override
     public void d() {
         this.e = null;
         this.b = 0;
     }
 
+    @Override
     public void e() {
         this.d.ai().a(this.e, 10.0F, this.d.D());
         this.d.al().a(this.e, this.c);

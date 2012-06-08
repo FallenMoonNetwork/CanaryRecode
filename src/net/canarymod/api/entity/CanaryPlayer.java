@@ -5,18 +5,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.canarymod.Canary;
+import net.canarymod.Colors;
 import net.canarymod.Logman;
-import net.canarymod.TextFormat;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.position.Location;
-import net.canarymod.group.Group;
+import net.canarymod.commands.CanaryCommand;
 import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
+import net.canarymod.user.Group;
 import net.minecraft.server.OEntityPlayerMP;
 
 /**
@@ -29,17 +30,28 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     private Group group; 
     private PermissionProvider permissions;
     private String prefix = null;
-    
     private boolean muted;
+    private String[] allowedIPs;
+    
     public CanaryPlayer(OEntityPlayerMP entity) {
         super(entity);
-//        group = Canary.groups().getGroup("something"); //TODO: add proper player to group
-        permissions = null; //TODO: get permissions specifically for this player CanaryServer
+        String[] data = Canary.usersAndGroups().getPlayerData(getName());
+        group = Canary.usersAndGroups().getGroup(data[1]); 
+        permissions = Canary.permissionManager().getPlayerProvider(getName());
+        
+        if(data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
+            prefix = data[0];
+        }
+        
+        if(data[2] != null && !data[2].isEmpty()) {
+            allowedIPs = data[2].split(",");
+        }
     }
 
     /**
      * CanaryMod: Get player handle
      */
+    @Override
     public OEntityPlayerMP getHandle() {
         return (OEntityPlayerMP) entity;
     }
@@ -72,7 +84,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 notify("You are currently muted!");
             }
             else {
-                String prefix = "<" + getColor() + getName() + TextFormat.White + "> ";
+                String prefix = "<" + getColor() + getName() + Colors.White + "> ";
                 ArrayList<Player> receivers = (ArrayList<Player>) Canary.getServer().getPlayerList();
                 ChatHook hook = (ChatHook) Canary.hooks().callCancelableHook(new ChatHook(this, prefix, message, receivers));
                 if(hook.isCancelled()) {
@@ -207,17 +219,25 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 return true;
             } // No need to go on, commands were parsed.
             
-            if (!hasPermission("canary.commands."+cmd.replace("/", "")) && !cmd.startsWith("/#")) {
-                sendMessage(TextFormat.Rose + "Unknown command.");
+            //Check for canary permissions
+            
+            CanaryCommand toExecute = CanaryCommand.fromString(cmd.replace("/", ""));
+            if(toExecute == null) {
+                sendMessage(Colors.Rose + "Unknown command!");
                 return false;
             }
-            //TODO: Add native Canary Commands here!
-            return true;
+            else {
+                if(!toExecute.execute(this, command)) {
+                    sendMessage(Colors.Rose + "Permission denied!");
+                    return false;
+                }
+                return true;
+            }
             
         } catch (Throwable ex) {
             Logman.logStackTrace("Exception in command handler: ", ex);
             if (isAdmin()) {
-                sendMessage(TextFormat.Rose + "Exception occured. "+ex.getMessage());
+                sendMessage(Colors.Rose + "Exception occured. "+ex.getMessage());
             }
             return false;
         }
@@ -284,9 +304,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean hasPermission(String permission) {
-//        if(!group.hasPermission(permission)) {
-//            return permissions.queryPermission(permission);
-//        }
+        if(!group.hasPermission(permission)) {
+            return permissions.queryPermission(permission);
+        }
         return true;
     }
 
@@ -308,7 +328,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setCanBuild(boolean canModify) {
-        permissions.addPermission("canary.world.build", canModify, canModify, -1);
+        permissions.addPermission("canary.world.build", canModify, -1);
     }
 
     @Override
@@ -321,7 +341,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setCanIgnoreRestrictions(boolean canIgnore) {
-        permissions.addPermission("canary.player.ignoreRestrictions", canIgnore, canIgnore, -1);
+        permissions.addPermission("canary.player.ignoreRestrictions", canIgnore, -1);
     }
 
     @Override
@@ -402,16 +422,16 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void notify(String message) {
-        sendMessage(TextFormat.Rose+message);
+        sendMessage(Colors.Rose+message);
         
     }
 
     @Override
     public String getColor() {
         if(prefix != null) {
-            return TextFormat.Marker+prefix;
+            return Colors.Marker+prefix;
         }
-        return TextFormat.Marker+group.prefix;
+        return Colors.Marker+group.prefix;
     }
 
     @Override
@@ -435,6 +455,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             }
         }
         return false;
+    }
+
+    @Override
+    public String[] getAllowedIPs() {
+        return allowedIPs;
     }
 
 }

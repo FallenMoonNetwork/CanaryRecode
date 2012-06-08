@@ -22,14 +22,17 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
         super();
     }
 
+    @Override
     public String e() {
         return "container.brewing";
     }
 
+    @Override
     public int c() {
         return this.a.length;
     }
 
+    @Override
     public void q_() {
         if (this.b > 0) {
             --this.b;
@@ -130,6 +133,7 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
         return var2 == null ? var1 : (OItem.d[var2.c].n() ? OPotionHelper.a(var1, OItem.d[var2.c].m()) : var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         ONBTTagList var2 = var1.n("Items");
@@ -146,6 +150,7 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
         this.b = var1.e("BrewTime");
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("BrewTime", (short) this.b);
@@ -163,10 +168,12 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
         var1.a("Items", var2);
     }
 
+    @Override
     public OItemStack g_(int var1) {
         return var1 >= 0 && var1 < this.a.length ? this.a[var1] : null;
     }
 
+    @Override
     public OItemStack a(int var1, int var2) {
         if (var1 >= 0 && var1 < this.a.length) {
             OItemStack var3 = this.a[var1];
@@ -177,6 +184,7 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
         }
     }
 
+    @Override
     public OItemStack b(int var1) {
         if (var1 >= 0 && var1 < this.a.length) {
             OItemStack var2 = this.a[var1];
@@ -187,6 +195,7 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
         }
     }
 
+    @Override
     public void a(int var1, OItemStack var2) {
         if (var1 >= 0 && var1 < this.a.length) {
             this.a[var1] = var2;
@@ -194,17 +203,21 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
 
     }
 
+    @Override
     public int a() {
         return 1;
     }
 
+    @Override
     public boolean a(OEntityPlayer var1) {
         return this.k.b(this.l, this.m, this.n) != this ? false : var1.e(this.l + 0.5D, this.m + 0.5D, this.n + 0.5D) <= 64.0D;
     }
 
+    @Override
     public void f() {
     }
 
+    @Override
     public void g() {
     }
 

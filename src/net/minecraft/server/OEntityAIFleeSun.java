@@ -24,6 +24,7 @@ public class OEntityAIFleeSun extends OEntityAIBase {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         if (!this.f.e()) {
             return false;
@@ -44,10 +45,12 @@ public class OEntityAIFleeSun extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return !this.a.al().e();
     }
 
+    @Override
     public void c() {
         this.a.al().a(this.b, this.c, this.d, this.e);
     }

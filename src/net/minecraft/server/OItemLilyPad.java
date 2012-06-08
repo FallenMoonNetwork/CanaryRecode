@@ -15,6 +15,7 @@ public class OItemLilyPad extends OItemColored {
         super(var1, false);
     }
 
+    @Override
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         OMovingObjectPosition var4 = this.a(var2, var3, true);
         if (var4 == null) {

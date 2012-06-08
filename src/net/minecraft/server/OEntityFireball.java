@@ -30,6 +30,7 @@ public class OEntityFireball extends OEntity {
         this.b(1.0F, 1.0F);
     }
 
+    @Override
     protected void b() {
     }
 
@@ -61,6 +62,7 @@ public class OEntityFireball extends OEntity {
         this.d = var7 / var9 * 0.1D;
     }
 
+    @Override
     public void F_() {
         if (!this.bi.F && (this.a != null && this.a.bE || !this.bi.i((int) this.bm, (int) this.bn, (int) this.bo))) {
             this.X();
@@ -182,6 +184,7 @@ public class OEntityFireball extends OEntity {
 
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         var1.a("xTile", (short) this.e);
         var1.a("yTile", (short) this.f);
@@ -190,6 +193,7 @@ public class OEntityFireball extends OEntity {
         var1.a("inGround", (byte) (this.i ? 1 : 0));
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         this.e = var1.e("xTile");
         this.f = var1.e("yTile");
@@ -198,14 +202,17 @@ public class OEntityFireball extends OEntity {
         this.i = var1.d("inGround") == 1;
     }
 
+    @Override
     public boolean o_() {
         return true;
     }
 
+    @Override
     public float j_() {
         return 1.0F;
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         this.aW();
         if (var1.a() != null) {
@@ -229,6 +236,7 @@ public class OEntityFireball extends OEntity {
         }
     }
 
+    @Override
     public float b(float var1) {
         return 1.0F;
     }

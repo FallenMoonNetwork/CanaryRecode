@@ -23,18 +23,22 @@ public class OBlockRedstoneRepeater extends OBlockDirectional {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return !var1.e(var2, var3 - 1, var4) ? false : super.c(var1, var2, var3, var4);
     }
 
+    @Override
     public boolean f(OWorld var1, int var2, int var3, int var4) {
         return !var1.e(var2, var3 - 1, var4) ? false : super.f(var1, var2, var3, var4);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         int var6 = var1.c(var2, var3, var4);
         boolean var7 = this.f(var1, var2, var3, var4, var6);
@@ -50,22 +54,27 @@ public class OBlockRedstoneRepeater extends OBlockDirectional {
 
     }
 
+    @Override
     public int a(int var1, int var2) {
         return var1 == 0 ? (this.c ? 99 : 115) : (var1 == 1 ? (this.c ? 147 : 131) : 5);
     }
 
+    @Override
     public int c() {
         return 15;
     }
 
+    @Override
     public int a(int var1) {
         return this.a(var1, 0);
     }
 
+    @Override
     public boolean d(OWorld var1, int var2, int var3, int var4, int var5) {
         return this.a((OIBlockAccess) var1, var2, var3, var4, var5);
     }
 
+    @Override
     public boolean a(OIBlockAccess var1, int var2, int var3, int var4, int var5) {
         if (!this.c) {
             return false;
@@ -75,6 +84,7 @@ public class OBlockRedstoneRepeater extends OBlockDirectional {
         }
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (!this.f(var1, var2, var3, var4)) {
             this.b(var1, var2, var3, var4, var1.c(var2, var3, var4), 0);
@@ -114,6 +124,7 @@ public class OBlockRedstoneRepeater extends OBlockDirectional {
         }
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         int var6 = var1.c(var2, var3, var4);
         int var7 = (var6 & 12) >> 2;
@@ -122,10 +133,12 @@ public class OBlockRedstoneRepeater extends OBlockDirectional {
         return true;
     }
 
+    @Override
     public boolean e() {
         return true;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = ((OMathHelper.b((var5.bs * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
         var1.c(var2, var3, var4, var6);
@@ -136,6 +149,7 @@ public class OBlockRedstoneRepeater extends OBlockDirectional {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         var1.h(var2 + 1, var3, var4, this.bO);
         var1.h(var2 - 1, var3, var4, this.bO);
@@ -145,6 +159,7 @@ public class OBlockRedstoneRepeater extends OBlockDirectional {
         var1.h(var2, var3 + 1, var4, this.bO);
     }
 
+    @Override
     public void c(OWorld var1, int var2, int var3, int var4, int var5) {
         if (this.c) {
             var1.h(var2 + 1, var3, var4, this.bO);
@@ -158,10 +173,12 @@ public class OBlockRedstoneRepeater extends OBlockDirectional {
         super.c(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OItem.ba.bP;
     }

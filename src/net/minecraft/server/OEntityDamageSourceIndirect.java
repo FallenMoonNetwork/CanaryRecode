@@ -14,14 +14,17 @@ public class OEntityDamageSourceIndirect extends OEntityDamageSource {
         this.o = var3;
     }
 
+    @Override
     public OEntity b() {
         return this.a;
     }
 
+    @Override
     public OEntity a() {
         return this.o;
     }
 
+    @Override
     public String a(OEntityPlayer var1) {
         return OStatCollector.a("death." + this.n, new Object[] { var1.v, this.o.s() });
     }

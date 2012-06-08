@@ -15,12 +15,14 @@ public class OGenLayerRiverMix extends OGenLayer {
         this.c = var4;
     }
 
+    @Override
     public void a(long var1) {
         this.b.a(var1);
         this.c.a(var1);
         super.a(var1);
     }
 
+    @Override
     public int[] a(int var1, int var2, int var3, int var4) {
         int[] var5 = this.b.a(var1, var2, var3, var4);
         int[] var6 = this.c.a(var1, var2, var3, var4);

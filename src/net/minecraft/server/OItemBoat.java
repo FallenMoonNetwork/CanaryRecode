@@ -21,6 +21,7 @@ public class OItemBoat extends OItem {
         this.bQ = 1;
     }
 
+    @Override
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         float var4 = 1.0F;
         float var5 = var3.bv + (var3.bt - var3.bv) * var4;

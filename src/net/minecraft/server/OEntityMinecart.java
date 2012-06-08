@@ -45,10 +45,12 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         this.bF = this.bH / 2.0F;
     }
 
+    @Override
     protected boolean g_() {
         return false;
     }
 
+    @Override
     protected void b() {
         this.bY.a(16, new Byte((byte) 0));
         this.bY.a(17, new Integer(0));
@@ -56,14 +58,17 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         this.bY.a(19, new Integer(0));
     }
 
+    @Override
     public OAxisAlignedBB b_(OEntity var1) {
         return var1.bw;
     }
 
+    @Override
     public OAxisAlignedBB h() {
         return null;
     }
 
+    @Override
     public boolean e_() {
         return true;
     }
@@ -80,10 +85,12 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         this.a = var8;
     }
 
+    @Override
     public double x_() {
         return this.bH * 0.0D - 0.30000001192092896D;
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         if (!this.bi.F && !this.bE) {
             this.e(-this.n());
@@ -136,10 +143,12 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         }
     }
 
+    @Override
     public boolean o_() {
         return !this.bE;
     }
 
+    @Override
     public void X() {
         for (int var1 = 0; var1 < this.c(); ++var1) {
             OItemStack var2 = this.g_(var1);
@@ -172,6 +181,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         super.X();
     }
 
+    @Override
     public void F_() {
         if (this.m() > 0) {
             this.d(this.m() - 1);
@@ -578,6 +588,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         }
     }
 
+    @Override
     protected void b(ONBTTagCompound var1) {
         var1.a("Type", this.a);
         if (this.a == 2) {
@@ -601,6 +612,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
     }
 
+    @Override
     protected void a(ONBTTagCompound var1) {
         this.a = var1.f("Type");
         if (this.a == 2) {
@@ -622,6 +634,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
     }
 
+    @Override
     public void k(OEntity var1) {
         if (!this.bi.F) {
             if (var1 != this.bg) {
@@ -693,14 +706,17 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         }
     }
 
+    @Override
     public int c() {
         return 27;
     }
 
+    @Override
     public OItemStack g_(int var1) {
         return this.d[var1];
     }
 
+    @Override
     public OItemStack a(int var1, int var2) {
         if (this.d[var1] != null) {
             OItemStack var3;
@@ -721,6 +737,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         }
     }
 
+    @Override
     public OItemStack b(int var1) {
         if (this.d[var1] != null) {
             OItemStack var2 = this.d[var1];
@@ -731,6 +748,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         }
     }
 
+    @Override
     public void a(int var1, OItemStack var2) {
         this.d[var1] = var2;
         if (var2 != null && var2.a > this.a()) {
@@ -739,17 +757,21 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
     }
 
+    @Override
     public String e() {
         return "container.minecart";
     }
 
+    @Override
     public int a() {
         return 64;
     }
 
+    @Override
     public void G_() {
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         if (this.a == 0) {
             if (this.bg != null && this.bg instanceof OEntityPlayer && this.bg != var1) {
@@ -780,6 +802,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         return true;
     }
 
+    @Override
     public boolean a(OEntityPlayer var1) {
         return this.bE ? false : var1.j(this) <= 64.0D;
     }
@@ -797,9 +820,11 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
     }
 
+    @Override
     public void f() {
     }
 
+    @Override
     public void g() {
     }
 

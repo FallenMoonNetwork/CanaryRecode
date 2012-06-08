@@ -21,6 +21,7 @@ public class OEntityAIMoveIndoors extends OEntityAIBase {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         if ((!this.a.bi.e() || this.a.bi.x()) && !this.a.bi.t.e) {
             if (this.a.an().nextInt(50) != 0) {
@@ -41,10 +42,12 @@ public class OEntityAIMoveIndoors extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return !this.a.al().e();
     }
 
+    @Override
     public void c() {
         this.c = -1;
         if (this.a.e((double) this.b.a(), (double) this.b.b, (double) this.b.c()) > 256.0D) {
@@ -58,6 +61,7 @@ public class OEntityAIMoveIndoors extends OEntityAIBase {
 
     }
 
+    @Override
     public void d() {
         this.c = this.b.a();
         this.d = this.b.c();

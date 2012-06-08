@@ -23,20 +23,24 @@ public class OPacket40EntityMetadata extends OPacket {
         this.b = var2.b();
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = ODataWatcher.a(var1);
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         ODataWatcher.a(this.b, var1);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 5;
     }

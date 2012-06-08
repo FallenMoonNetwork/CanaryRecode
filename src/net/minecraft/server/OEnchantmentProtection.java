@@ -21,18 +21,22 @@ public class OEnchantmentProtection extends OEnchantment {
 
     }
 
+    @Override
     public int a(int var1) {
         return B[this.a] + (var1 - 1) * C[this.a];
     }
 
+    @Override
     public int b(int var1) {
         return this.a(var1) + D[this.a];
     }
 
+    @Override
     public int a() {
         return 4;
     }
 
+    @Override
     public int a(int var1, ODamageSource var2) {
         if (var2.g()) {
             return 0;
@@ -42,6 +46,7 @@ public class OEnchantmentProtection extends OEnchantment {
         }
     }
 
+    @Override
     public boolean a(OEnchantment var1) {
         if (var1 instanceof OEnchantmentProtection) {
             OEnchantmentProtection var2 = (OEnchantmentProtection) var1;

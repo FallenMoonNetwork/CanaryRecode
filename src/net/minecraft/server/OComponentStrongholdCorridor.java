@@ -19,6 +19,7 @@ public class OComponentStrongholdCorridor extends OComponentStronghold {
         this.a = var4 != 2 && var4 != 0 ? var3.b() : var3.d();
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
     }
 
@@ -41,6 +42,7 @@ public class OComponentStrongholdCorridor extends OComponentStronghold {
         }
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         if (this.a(var1, var3)) {
             return false;

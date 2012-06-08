@@ -29,18 +29,22 @@ public class OBlockChest extends OBlockContainer {
         this.bN = 26;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 22;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         super.a(var1, var2, var3, var4);
         this.b(var1, var2, var3, var4);
@@ -66,6 +70,7 @@ public class OBlockChest extends OBlockContainer {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = var1.a(var2, var3, var4 - 1);
         int var7 = var1.a(var2, var3, var4 + 1);
@@ -196,10 +201,12 @@ public class OBlockChest extends OBlockContainer {
         }
     }
 
+    @Override
     public int a(int var1) {
         return var1 == 1 ? this.bN - 1 : (var1 == 0 ? this.bN - 1 : (var1 == 3 ? this.bN + 1 : this.bN));
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         int var5 = 0;
         if (var1.a(var2 - 1, var3, var4) == this.bO) {
@@ -225,6 +232,7 @@ public class OBlockChest extends OBlockContainer {
         return var1.a(var2, var3, var4) != this.bO ? false : (var1.a(var2 - 1, var3, var4) == this.bO ? true : (var1.a(var2 + 1, var3, var4) == this.bO ? true : (var1.a(var2, var3, var4 - 1) == this.bO ? true : var1.a(var2, var3, var4 + 1) == this.bO)));
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         super.a(var1, var2, var3, var4, var5);
         OTileEntityChest var6 = (OTileEntityChest) var1.b(var2, var3, var4);
@@ -234,6 +242,7 @@ public class OBlockChest extends OBlockContainer {
 
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         OTileEntityChest var5 = (OTileEntityChest) var1.b(var2, var3, var4);
         if (var5 != null) {
@@ -267,6 +276,7 @@ public class OBlockChest extends OBlockContainer {
         super.d(var1, var2, var3, var4);
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         Object var6 = var1.b(var2, var3, var4);
         if (var6 == null) {
@@ -309,6 +319,7 @@ public class OBlockChest extends OBlockContainer {
         }
     }
 
+    @Override
     public OTileEntity a_() {
         return new OTileEntityChest();
     }

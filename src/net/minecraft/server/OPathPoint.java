@@ -34,6 +34,7 @@ public class OPathPoint {
         return OMathHelper.c(var2 * var2 + var3 * var3 + var4 * var4);
     }
 
+    @Override
     public boolean equals(Object var1) {
         if (!(var1 instanceof OPathPoint)) {
             return false;
@@ -43,6 +44,7 @@ public class OPathPoint {
         }
     }
 
+    @Override
     public int hashCode() {
         return this.j;
     }
@@ -51,6 +53,7 @@ public class OPathPoint {
         return this.d >= 0;
     }
 
+    @Override
     public String toString() {
         return this.a + ", " + this.b + ", " + this.c;
     }

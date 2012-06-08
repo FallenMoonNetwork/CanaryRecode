@@ -17,6 +17,7 @@ class ORegionFileChunkBuffer extends ByteArrayOutputStream {
         this.c = var3;
     }
 
+    @Override
     public void close() {
         this.a.a(this.b, this.c, this.buf, this.count);
     }

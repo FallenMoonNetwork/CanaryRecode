@@ -20,18 +20,21 @@ public class OPacket32EntityLook extends OPacket30Entity {
         this.g = true;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         super.a(var1);
         this.e = var1.readByte();
         this.f = var1.readByte();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         super.a(var1);
         var1.writeByte(this.e);
         var1.writeByte(this.f);
     }
 
+    @Override
     public int a() {
         return 6;
     }

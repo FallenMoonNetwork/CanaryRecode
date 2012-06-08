@@ -20,18 +20,22 @@ public class OPacket101CloseWindow extends OPacket {
         this.a = var1;
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readByte();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeByte(this.a);
     }
 
+    @Override
     public int a() {
         return 1;
     }

@@ -267,6 +267,7 @@ public class OWorld implements OIBlockAccess {
         this.z.a();
     }
 
+    @Override
     public int a(int var1, int var2, int var3) {
         return var1 >= -30000000 && var3 >= -30000000 && var1 < 30000000 && var3 < 30000000 ? (var2 < 0 ? 0 : (var2 >= 256 ? 0 : this.d(var1 >> 4, var3 >> 4).a(var1 & 15, var2, var3 & 15))) : 0;
     }
@@ -363,11 +364,13 @@ public class OWorld implements OIBlockAccess {
         }
     }
 
+    @Override
     public OMaterial d(int var1, int var2, int var3) {
         int var4 = this.a(var1, var2, var3);
         return var4 == 0 ? OMaterial.a : OBlock.m[var4].cd;
     }
 
+    @Override
     public int c(int var1, int var2, int var3) {
         if (var1 >= -30000000 && var3 >= -30000000 && var1 < 30000000 && var3 < 30000000) {
             if (var2 < 0) {
@@ -1485,6 +1488,7 @@ public class OWorld implements OIBlockAccess {
         }
     }
 
+    @Override
     public OTileEntity b(int var1, int var2, int var3) {
         if (var2 >= 256) {
             return null;
@@ -1557,6 +1561,7 @@ public class OWorld implements OIBlockAccess {
         return var4 == null ? false : var4.a();
     }
 
+    @Override
     public boolean e(int var1, int var2, int var3) {
         return OBlock.g(this.a(var1, var2, var3));
     }

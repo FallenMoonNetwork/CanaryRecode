@@ -23,6 +23,7 @@ public class OMapGenStronghold extends OMapGenStructure {
         this.g = new OChunkCoordIntPair[3];
     }
 
+    @Override
     protected boolean a(int var1, int var2) {
         if (!this.f) {
             Random var3 = new Random();
@@ -71,6 +72,7 @@ public class OMapGenStronghold extends OMapGenStructure {
         return false;
     }
 
+    @Override
     protected List a() {
         ArrayList var1 = new ArrayList();
         OChunkCoordIntPair[] var2 = this.g;
@@ -86,6 +88,7 @@ public class OMapGenStronghold extends OMapGenStructure {
         return var1;
     }
 
+    @Override
     protected OStructureStart b(int var1, int var2) {
         OStructureStrongholdStart var3;
         for (var3 = new OStructureStrongholdStart(this.d, this.c, var1, var2); var3.c().isEmpty() || ((OComponentStrongholdStairs2) var3.c().get(0)).b == null; var3 = new OStructureStrongholdStart(this.d, this.c, var1, var2)) {

@@ -17,6 +17,7 @@ public class OItemMonsterPlacer extends OItem {
         this.a(true);
     }
 
+    @Override
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
         if (var3.F) {
             return true;

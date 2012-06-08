@@ -28,6 +28,7 @@ public class OPacket130UpdateSign extends OPacket {
         this.d = var4;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = var1.readShort();
@@ -40,6 +41,7 @@ public class OPacket130UpdateSign extends OPacket {
 
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeShort(this.b);
@@ -51,10 +53,12 @@ public class OPacket130UpdateSign extends OPacket {
 
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         int var1 = 0;
 

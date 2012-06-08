@@ -30,6 +30,7 @@ public class OEntityAITempt extends OEntityAIBase {
         this.a(3);
     }
 
+    @Override
     public boolean a() {
         if (this.i > 0) {
             --this.i;
@@ -45,6 +46,7 @@ public class OEntityAITempt extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         if (this.l) {
             if (this.a.j(this.h) < 36.0D) {
@@ -68,6 +70,7 @@ public class OEntityAITempt extends OEntityAIBase {
         return this.a();
     }
 
+    @Override
     public void c() {
         this.c = this.h.bm;
         this.d = this.h.bn;
@@ -77,6 +80,7 @@ public class OEntityAITempt extends OEntityAIBase {
         this.a.al().a(false);
     }
 
+    @Override
     public void d() {
         this.h = null;
         this.a.al().f();
@@ -85,6 +89,7 @@ public class OEntityAITempt extends OEntityAIBase {
         this.a.al().a(this.m);
     }
 
+    @Override
     public void e() {
         this.a.ai().a(this.h, 30.0F, this.a.D());
         if (this.a.j(this.h) < 6.25D) {

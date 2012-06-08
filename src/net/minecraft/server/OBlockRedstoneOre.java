@@ -22,20 +22,24 @@ public class OBlockRedstoneOre extends OBlock {
         this.a = var3;
     }
 
+    @Override
     public int d() {
         return 30;
     }
 
+    @Override
     public void b(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         this.g(var1, var2, var3, var4);
         super.b(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public void b(OWorld var1, int var2, int var3, int var4, OEntity var5) {
         this.g(var1, var2, var3, var4);
         super.b(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         this.g(var1, var2, var3, var4);
         return super.a(var1, var2, var3, var4, var5);
@@ -49,6 +53,7 @@ public class OBlockRedstoneOre extends OBlock {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (this.bO == OBlock.aO.bO) {
             var1.e(var2, var3, var4, OBlock.aN.bO);
@@ -56,14 +61,17 @@ public class OBlockRedstoneOre extends OBlock {
 
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OItem.aB.bP;
     }
 
+    @Override
     public int a(int var1, Random var2) {
         return this.a(var2) + var2.nextInt(var1 + 1);
     }
 
+    @Override
     public int a(Random var1) {
         return 4 + var1.nextInt(2);
     }
@@ -107,6 +115,7 @@ public class OBlockRedstoneOre extends OBlock {
 
     }
 
+    @Override
     protected OItemStack a_(int var1) {
         return new OItemStack(OBlock.aN);
     }

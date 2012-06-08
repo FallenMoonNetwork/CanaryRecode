@@ -27,10 +27,12 @@ public class OEntityGiantZombie extends OEntityMob {
         return canaryGiantZombie;
     }
     
+    @Override
     public int d() {
         return 100;
     }
 
+    @Override
     public float a(int var1, int var2, int var3) {
         return this.bi.p(var1, var2, var3) - 0.5F;
     }

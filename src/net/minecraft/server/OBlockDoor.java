@@ -25,28 +25,36 @@ public class OBlockDoor extends OBlock {
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var4, 0.5F + var3);
     }
 
-    public boolean a() {
+    @Override
+    public boolean a() { // is opaque cube
         return false;
     }
 
+    // get block movement
+    @Override
     public boolean b(OIBlockAccess var1, int var2, int var3, int var4) {
         int var5 = this.e(var1, var2, var3, var4);
         return (var5 & 4) != 0;
     }
 
-    public boolean b() {
+    @Override
+    public boolean b() { // render as normal
         return false;
     }
 
-    public int c() {
+    @Override
+    public int c() { // get render type
         return 7;
     }
 
+    // collision BB from pool
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         this.a(var1, var2, var3, var4);
         return super.e(var1, var2, var3, var4);
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         this.d(this.e(var1, var2, var3, var4));
     }
@@ -101,10 +109,12 @@ public class OBlockDoor extends OBlock {
 
     }
 
+    @Override
     public void b(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         this.a(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (this.cd == OMaterial.f) {
             return true;
@@ -143,6 +153,7 @@ public class OBlockDoor extends OBlock {
         }
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
         if ((var6 & 8) != 0) {
@@ -182,19 +193,23 @@ public class OBlockDoor extends OBlock {
 
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return (var1 & 8) != 0 ? 0 : (this.cd == OMaterial.f ? OItem.aA.bP : OItem.au.bP);
     }
 
+    @Override
     public OMovingObjectPosition a(OWorld var1, int var2, int var3, int var4, OVec3D var5, OVec3D var6) {
         this.a(var1, var2, var3, var4);
         return super.a(var1, var2, var3, var4, var5, var6);
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return var3 >= 255 ? false : var1.e(var2, var3 - 1, var4) && super.c(var1, var2, var3, var4) && super.c(var1, var2, var3 + 1, var4);
     }
 
+    @Override
     public int g() {
         return 1;
     }

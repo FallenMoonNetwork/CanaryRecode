@@ -13,18 +13,22 @@ public class OBlockLog extends OBlock {
         this.bN = 20;
     }
 
+    @Override
     public int a(Random var1) {
         return 1;
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OBlock.J.bO;
     }
 
+    @Override
     public void a(OWorld var1, OEntityPlayer var2, int var3, int var4, int var5, int var6) {
         super.a(var1, var2, var3, var4, var5, var6);
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         byte var5 = 4;
         int var6 = var5 + 1;
@@ -46,10 +50,12 @@ public class OBlockLog extends OBlock {
 
     }
 
+    @Override
     public int a(int var1, int var2) {
         return var1 == 1 ? 21 : (var1 == 0 ? 21 : (var2 == 1 ? 116 : (var2 == 2 ? 117 : (var2 == 3 ? 153 : 20))));
     }
 
+    @Override
     protected int c(int var1) {
         return var1;
     }

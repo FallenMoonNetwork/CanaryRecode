@@ -14,11 +14,13 @@ public class OTileEntityNote extends OTileEntity {
         super();
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("note", this.a);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.a = var1.d("note");

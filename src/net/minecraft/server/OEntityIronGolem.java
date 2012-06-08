@@ -61,15 +61,18 @@ public class OEntityIronGolem extends OEntityGolem {
         return canaryIronGolem;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, Byte.valueOf((byte) 0));
     }
 
+    @Override
     public boolean c_() {
         return true;
     }
 
+    @Override
     protected void g() {
         if (--this.b <= 0) {
             this.b = 70 + this.bS.nextInt(50);
@@ -85,14 +88,17 @@ public class OEntityIronGolem extends OEntityGolem {
         super.g();
     }
 
+    @Override
     public int d() {
         return 100;
     }
 
+    @Override
     protected int b_(int var1) {
         return var1;
     }
 
+    @Override
     public void e() {
         super.e();
         if (this.c > 0) {
@@ -115,20 +121,24 @@ public class OEntityIronGolem extends OEntityGolem {
 
     }
 
+    @Override
     public boolean a(Class var1) {
         return this.n_() && OEntityPlayer.class.isAssignableFrom(var1) ? false : super.a(var1);
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("PlayerCreated", this.n_());
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.b(var1.o("PlayerCreated"));
     }
 
+    @Override
     public boolean a(OEntity var1) {
         this.c = 10;
         this.bi.a(this, (byte) 4);
@@ -150,22 +160,27 @@ public class OEntityIronGolem extends OEntityGolem {
         this.bi.a(this, (byte) 11);
     }
 
+    @Override
     protected String i() {
         return "none";
     }
 
+    @Override
     protected String j() {
         return "mob.irongolem.hit";
     }
 
+    @Override
     protected String k() {
         return "mob.irongolem.death";
     }
 
+    @Override
     protected void a(int var1, int var2, int var3, int var4) {
         this.bi.a(this, "mob.irongolem.walk", 1.0F, 1.0F);
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         int var3 = this.bS.nextInt(3);
 

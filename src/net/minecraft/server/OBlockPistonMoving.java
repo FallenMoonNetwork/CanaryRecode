@@ -19,13 +19,16 @@ public class OBlockPistonMoving extends OBlockContainer {
         this.c(-1.0F);
     }
 
+    @Override
     public OTileEntity a_() {
         return null;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         OTileEntity var5 = var1.b(var2, var3, var4);
         if (var5 != null && var5 instanceof OTileEntityPiston) {
@@ -36,26 +39,32 @@ public class OBlockPistonMoving extends OBlockContainer {
 
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return false;
     }
 
+    @Override
     public boolean b(OWorld var1, int var2, int var3, int var4, int var5) {
         return false;
     }
 
+    @Override
     public int c() {
         return -1;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (!var1.F && var1.b(var2, var3, var4) == null) {
             var1.e(var2, var3, var4, 0);
@@ -65,10 +74,12 @@ public class OBlockPistonMoving extends OBlockContainer {
         }
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return 0;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         if (!var1.F) {
             OTileEntityPiston var8 = this.c((OIBlockAccess) var1, var2, var3, var4);
@@ -78,6 +89,7 @@ public class OBlockPistonMoving extends OBlockContainer {
         }
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (!var1.F && var1.b(var2, var3, var4) == null) {
             ;
@@ -89,6 +101,7 @@ public class OBlockPistonMoving extends OBlockContainer {
         return new OTileEntityPiston(var0, var1, var2, var3, var4);
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         OTileEntityPiston var5 = this.c((OIBlockAccess) var1, var2, var3, var4);
         if (var5 == null) {
@@ -103,6 +116,7 @@ public class OBlockPistonMoving extends OBlockContainer {
         }
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         OTileEntityPiston var5 = this.c(var1, var2, var3, var4);
         if (var5 != null) {

@@ -37,31 +37,38 @@ public class OEntitySilverfish extends OEntityMob {
     }
 
 
+    @Override
     public int d() {
         return 8;
     }
 
+    @Override
     protected boolean g_() {
         return false;
     }
 
+    @Override
     protected OEntity o() {
         double var1 = 8.0D;
         return this.bi.b(this, var1);
     }
 
+    @Override
     protected String i() {
         return "mob.silverfish.say";
     }
 
+    @Override
     protected String j() {
         return "mob.silverfish.hit";
     }
 
+    @Override
     protected String k() {
         return "mob.silverfish.kill";
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         if (this.a <= 0 && var1 instanceof OEntityDamageSource) {
             this.a = 20;
@@ -70,6 +77,7 @@ public class OEntitySilverfish extends OEntityMob {
         return super.a(var1, var2);
     }
 
+    @Override
     protected void a(OEntity var1, float var2) {
         if (this.aw <= 0 && var2 < 1.2F && var1.bw.e > this.bw.b && var1.bw.b < this.bw.e) {
             this.aw = 20;
@@ -78,27 +86,33 @@ public class OEntitySilverfish extends OEntityMob {
 
     }
 
+    @Override
     protected void a(int var1, int var2, int var3, int var4) {
         this.bi.a(this, "mob.silverfish.step", 1.0F, 1.0F);
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
     }
 
+    @Override
     protected int f() {
         return 0;
     }
 
+    @Override
     public void F_() {
         this.V = this.bs;
         super.F_();
     }
 
+    @Override
     protected void d_() {
         super.d_();
         if (!this.bi.F) {
@@ -153,14 +167,17 @@ public class OEntitySilverfish extends OEntityMob {
         }
     }
 
+    @Override
     public float a(int var1, int var2, int var3) {
         return this.bi.a(var1, var2 - 1, var3) == OBlock.t.bO ? 10.0F : super.a(var1, var2, var3);
     }
 
+    @Override
     protected boolean C() {
         return true;
     }
 
+    @Override
     public boolean l() {
         if (super.l()) {
             OEntityPlayer var1 = this.bi.a(this, 5.0D);
@@ -170,6 +187,7 @@ public class OEntitySilverfish extends OEntityMob {
         }
     }
 
+    @Override
     public OEnumCreatureAttribute v() {
         return OEnumCreatureAttribute.c;
     }

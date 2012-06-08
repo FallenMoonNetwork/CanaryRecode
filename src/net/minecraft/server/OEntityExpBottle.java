@@ -20,18 +20,22 @@ public class OEntityExpBottle extends OEntityThrowable {
         super(var1, var2, var4, var6);
     }
 
+    @Override
     protected float e() {
         return 0.07F;
     }
 
+    @Override
     protected float c() {
         return 0.7F;
     }
 
+    @Override
     protected float d() {
         return -20.0F;
     }
 
+    @Override
     protected void a(OMovingObjectPosition var1) {
         if (!this.bi.F) {
             this.bi.f(2002, (int) Math.round(this.bm), (int) Math.round(this.bn), (int) Math.round(this.bo), 0);

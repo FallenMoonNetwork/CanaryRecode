@@ -19,6 +19,7 @@ public class OBiomeGenDesert extends OBiomeGenBase {
         this.I.F = 10;
     }
 
+    @Override
     public void a(OWorld var1, Random var2, int var3, int var4) {
         super.a(var1, var2, var3, var4);
         if (var2.nextInt(1000) == 0) {

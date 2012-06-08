@@ -13,10 +13,12 @@ class OSlotEnchantmentTable extends OInventoryBasic {
         this.a = var1;
     }
 
+    @Override
     public int a() {
         return 1;
     }
 
+    @Override
     public void G_() {
         super.G_();
         this.a.a(this);

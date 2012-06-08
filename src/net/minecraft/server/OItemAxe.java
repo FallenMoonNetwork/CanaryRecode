@@ -14,6 +14,7 @@ public class OItemAxe extends OItemTool {
         super(var1, 3, var2, bU);
     }
 
+    @Override
     public float a(OItemStack var1, OBlock var2) {
         return var2 != null && var2.cd == OMaterial.d ? this.a : super.a(var1, var2);
     }

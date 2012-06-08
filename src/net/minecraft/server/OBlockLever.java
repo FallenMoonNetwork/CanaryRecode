@@ -13,30 +13,37 @@ public class OBlockLever extends OBlock {
         super(var1, var2, OMaterial.p);
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         return null;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 12;
     }
 
+    @Override
     public boolean b(OWorld var1, int var2, int var3, int var4, int var5) {
         return var5 == 1 && var1.e(var2, var3 - 1, var4) ? true : (var5 == 2 && var1.e(var2, var3, var4 + 1) ? true : (var5 == 3 && var1.e(var2, var3, var4 - 1) ? true : (var5 == 4 && var1.e(var2 + 1, var3, var4) ? true : var5 == 5 && var1.e(var2 - 1, var3, var4))));
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return var1.e(var2 - 1, var3, var4) ? true : (var1.e(var2 + 1, var3, var4) ? true : (var1.e(var2, var3, var4 - 1) ? true : (var1.e(var2, var3, var4 + 1) ? true : var1.e(var2, var3 - 1, var4))));
     }
 
+    @Override
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
         int var7 = var6 & 8;
@@ -70,6 +77,7 @@ public class OBlockLever extends OBlock {
         }
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (this.g(var1, var2, var3, var4)) {
             int var6 = var1.c(var2, var3, var4) & 7;
@@ -116,6 +124,7 @@ public class OBlockLever extends OBlock {
         }
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4) & 7;
         float var6 = 0.1875F;
@@ -134,10 +143,12 @@ public class OBlockLever extends OBlock {
 
     }
 
+    @Override
     public void b(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         this.a(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (var1.F) {
             return true;
@@ -165,6 +176,7 @@ public class OBlockLever extends OBlock {
         }
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
         if ((var5 & 8) > 0) {
@@ -186,10 +198,12 @@ public class OBlockLever extends OBlock {
         super.d(var1, var2, var3, var4);
     }
 
+    @Override
     public boolean a(OIBlockAccess var1, int var2, int var3, int var4, int var5) {
         return (var1.c(var2, var3, var4) & 8) > 0;
     }
 
+    @Override
     public boolean d(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
         if ((var6 & 8) == 0) {
@@ -200,6 +214,7 @@ public class OBlockLever extends OBlock {
         }
     }
 
+    @Override
     public boolean e() {
         return true;
     }

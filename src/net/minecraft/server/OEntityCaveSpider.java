@@ -28,10 +28,12 @@ public class OEntityCaveSpider extends OEntitySpider {
         return canaryCaveSpider;
     }
     
+    @Override
     public int d() {
         return 12;
     }
 
+    @Override
     public boolean a(OEntity var1) {
         if (super.a(var1)) {
             if (var1 instanceof OEntityLiving) {

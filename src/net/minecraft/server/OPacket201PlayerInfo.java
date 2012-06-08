@@ -24,22 +24,26 @@ public class OPacket201PlayerInfo extends OPacket {
         this.c = var3;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = a(var1, 16);
         this.b = var1.readByte() != 0;
         this.c = var1.readShort();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         a(this.a, var1);
         var1.writeByte(this.b ? 1 : 0);
         var1.writeShort(this.c);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return this.a.length() + 2 + 1 + 2;
     }

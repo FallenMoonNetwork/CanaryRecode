@@ -195,10 +195,12 @@ public class OChunkProviderHell implements OIChunkProvider {
 
     }
 
+    @Override
     public OChunk c(int var1, int var2) {
         return this.b(var1, var2);
     }
 
+    @Override
     public OChunk b(int var1, int var2) {
         this.i.setSeed(var1 * 341873128712L + var2 * 132897987541L);
         byte[] var3 = new byte['\u8000'];
@@ -326,10 +328,12 @@ public class OChunkProviderHell implements OIChunkProvider {
         return var1;
     }
 
+    @Override
     public boolean a(int var1, int var2) {
         return true;
     }
 
+    @Override
     public void a(OIChunkProvider var1, int var2, int var3) {
         OBlockSand.a = true;
         int var4 = var2 * 16;
@@ -390,18 +394,22 @@ public class OChunkProviderHell implements OIChunkProvider {
         OBlockSand.a = false;
     }
 
+    @Override
     public boolean a(boolean var1, OIProgressUpdate var2) {
         return true;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return true;
     }
 
+    @Override
     public List a(OEnumCreatureType var1, int var2, int var3, int var4) {
         if (var1 == OEnumCreatureType.a && this.c.a(var2, var3, var4)) {
             return this.c.b();
@@ -411,6 +419,7 @@ public class OChunkProviderHell implements OIChunkProvider {
         }
     }
 
+    @Override
     public OChunkPosition a(OWorld var1, String var2, int var3, int var4, int var5) {
         return null;
     }

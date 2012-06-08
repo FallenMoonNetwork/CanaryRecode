@@ -18,10 +18,12 @@ public class OBlockCrops extends OBlockFlower {
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.25F, 0.5F + var3);
     }
 
+    @Override
     protected boolean d(int var1) {
         return var1 == OBlock.aA.bO;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         super.a(var1, var2, var3, var4, var5);
         if (var1.n(var2, var3 + 1, var4) >= 9) {
@@ -81,6 +83,7 @@ public class OBlockCrops extends OBlockFlower {
         return var5;
     }
 
+    @Override
     public int a(int var1, int var2) {
         if (var2 < 0) {
             var2 = 7;
@@ -89,10 +92,12 @@ public class OBlockCrops extends OBlockFlower {
         return this.bN + var2;
     }
 
+    @Override
     public int c() {
         return 6;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         super.a(var1, var2, var3, var4, var5, var6, 0);
         if (!var1.F) {
@@ -113,10 +118,12 @@ public class OBlockCrops extends OBlockFlower {
         }
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return var1 == 7 ? OItem.S.bP : -1;
     }
 
+    @Override
     public int a(Random var1) {
         return 1;
     }

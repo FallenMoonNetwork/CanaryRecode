@@ -12,6 +12,7 @@ public class OItemSpade extends OItemTool {
         super(var1, 1, var2, bU);
     }
 
+    @Override
     public boolean a(OBlock var1) {
         return var1 == OBlock.aS ? true : var1 == OBlock.aU;
     }

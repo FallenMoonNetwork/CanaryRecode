@@ -23,6 +23,7 @@ public class OEntityAIPlay extends OEntityAIBase {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         if (this.a.K() >= 0) {
             return false;
@@ -58,10 +59,12 @@ public class OEntityAIPlay extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return this.d > 0;
     }
 
+    @Override
     public void c() {
         if (this.b != null) {
             this.a.b(true);
@@ -70,11 +73,13 @@ public class OEntityAIPlay extends OEntityAIBase {
         this.d = 1000;
     }
 
+    @Override
     public void d() {
         this.a.b(false);
         this.b = null;
     }
 
+    @Override
     public void e() {
         --this.d;
         if (this.b != null) {

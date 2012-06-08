@@ -135,6 +135,7 @@ public abstract class ONBTBase {
 
     public abstract ONBTBase b();
 
+    @Override
     public boolean equals(Object var1) {
         if (var1 != null && var1 instanceof ONBTBase) {
             ONBTBase var2 = (ONBTBase) var1;
@@ -144,6 +145,7 @@ public abstract class ONBTBase {
         }
     }
 
+    @Override
     public int hashCode() {
         return this.a.hashCode() ^ this.a();
     }

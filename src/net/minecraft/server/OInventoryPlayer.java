@@ -170,6 +170,7 @@ public class OInventoryPlayer implements OIInventory {
         }
     }
 
+    @Override
     public OItemStack a(int var1, int var2) {
         OItemStack[] var3 = this.a;
         if (var1 >= this.a.length) {
@@ -196,6 +197,7 @@ public class OInventoryPlayer implements OIInventory {
         }
     }
 
+    @Override
     public OItemStack b(int var1) {
         OItemStack[] var2 = this.a;
         if (var1 >= this.a.length) {
@@ -212,6 +214,7 @@ public class OInventoryPlayer implements OIInventory {
         }
     }
 
+    @Override
     public void a(int var1, OItemStack var2) {
         OItemStack[] var3 = this.a;
         if (var1 >= var3.length) {
@@ -276,10 +279,12 @@ public class OInventoryPlayer implements OIInventory {
 
     }
 
+    @Override
     public int c() {
         return this.a.length + 4;
     }
 
+    @Override
     public OItemStack g_(int var1) {
         OItemStack[] var2 = this.a;
         if (var1 >= var2.length) {
@@ -290,10 +295,12 @@ public class OInventoryPlayer implements OIInventory {
         return var2[var1];
     }
 
+    @Override
     public String e() {
         return "container.inventory";
     }
 
+    @Override
     public int a() {
         return 64;
     }
@@ -361,6 +368,7 @@ public class OInventoryPlayer implements OIInventory {
 
     }
 
+    @Override
     public void G_() {
         this.e = true;
     }
@@ -374,6 +382,7 @@ public class OInventoryPlayer implements OIInventory {
         return this.f;
     }
 
+    @Override
     public boolean a(OEntityPlayer var1) {
         return this.d.bE ? false : var1.j(this.d) <= 64.0D;
     }
@@ -395,9 +404,11 @@ public class OInventoryPlayer implements OIInventory {
         return false;
     }
 
+    @Override
     public void f() {
     }
 
+    @Override
     public void g() {
     }
 

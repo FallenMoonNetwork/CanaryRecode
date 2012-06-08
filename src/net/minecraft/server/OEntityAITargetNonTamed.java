@@ -12,6 +12,7 @@ public class OEntityAITargetNonTamed extends OEntityAINearestAttackableTarget {
         this.g = var1;
     }
 
+    @Override
     public boolean a() {
         return this.g.u_() ? false : super.a();
     }

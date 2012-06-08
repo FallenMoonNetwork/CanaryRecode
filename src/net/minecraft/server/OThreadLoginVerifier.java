@@ -20,6 +20,7 @@ class OThreadLoginVerifier extends Thread {
         this.a = var2;
     }
 
+    @Override
     public void run() {
         try {
             String var1 = ONetLoginHandler.a(this.b);

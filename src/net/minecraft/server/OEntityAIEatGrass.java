@@ -19,6 +19,7 @@ public class OEntityAIEatGrass extends OEntityAIBase {
         this.a(7);
     }
 
+    @Override
     public boolean a() {
         if (this.b.an().nextInt(this.b.aO() ? 50 : 1000) != 0) {
             return false;
@@ -30,16 +31,19 @@ public class OEntityAIEatGrass extends OEntityAIBase {
         }
     }
 
+    @Override
     public void c() {
         this.a = 40;
         this.c.a(this.b, (byte) 10);
         this.b.al().f();
     }
 
+    @Override
     public void d() {
         this.a = 0;
     }
 
+    @Override
     public boolean b() {
         return this.a > 0;
     }
@@ -48,6 +52,7 @@ public class OEntityAIEatGrass extends OEntityAIBase {
         return this.a;
     }
 
+    @Override
     public void e() {
         this.a = Math.max(0, this.a - 1);
         if (this.a == 4) {

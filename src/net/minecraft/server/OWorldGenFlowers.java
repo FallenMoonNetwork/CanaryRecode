@@ -15,6 +15,7 @@ public class OWorldGenFlowers extends OWorldGenerator {
         this.a = var1;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         for (int var6 = 0; var6 < 64; ++var6) {
             int var7 = var3 + var2.nextInt(8) - var2.nextInt(8);

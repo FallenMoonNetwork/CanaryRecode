@@ -19,6 +19,7 @@ public class OComponentMineshaftRoom extends OStructureComponent {
         this.g = new OStructureBoundingBox(var3, 50, var4, var3 + 7 + var2.nextInt(6), 54 + var2.nextInt(6), var4 + 7 + var2.nextInt(6));
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
         int var4 = this.c();
         int var5 = this.g.c() - 3 - 1;
@@ -83,6 +84,7 @@ public class OComponentMineshaftRoom extends OStructureComponent {
 
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         if (this.a(var1, var3)) {
             return false;

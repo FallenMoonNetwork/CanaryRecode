@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import net.canarymod.Canary;
 import net.canarymod.CanaryMod;
 import net.canarymod.api.world.CanaryChunkProviderServer;
 import net.minecraft.server.OChunk;
@@ -53,6 +54,7 @@ public class OChunkProviderServer implements OIChunkProvider {
     }
     //CanaryMod end
 
+    @Override
     public boolean a(int var1, int var2) {
         return this.f.b(OChunkCoordIntPair.a(var1, var2));
     }
@@ -82,6 +84,7 @@ public class OChunkProviderServer implements OIChunkProvider {
 
     }
 
+    @Override
     public OChunk c(int var1, int var2) {
         long var3 = OChunkCoordIntPair.a(var1, var2);
         this.b.remove(Long.valueOf(var3));
@@ -89,7 +92,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         if (var5 == null) {
             // CanaryMod start: load preload plugins XXX
             if (loadStage < 1) {
-                CanaryMod.loader().loadPlugins(true);
+                Canary.loader().loadPlugins(true);
                 loadStage = 1;
             }
             // CanaryMod end
@@ -115,6 +118,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         return var5;
     }
 
+    @Override
     public OChunk b(int var1, int var2) {
         OChunk var3 = (OChunk) this.f.a(OChunkCoordIntPair.a(var1, var2));
         return var3 == null ? (!this.h.y && !this.a ? this.c : this.c(var1, var2)) : var3;
@@ -159,6 +163,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         }
     }
 
+    @Override
     public void a(OIChunkProvider var1, int var2, int var3) {
         OChunk var4 = this.b(var2, var3);
         if (!var4.k) {
@@ -171,12 +176,13 @@ public class OChunkProviderServer implements OIChunkProvider {
 
     }
 
+    @Override
     public boolean a(boolean var1, OIProgressUpdate var2) throws IOException {
         int var3 = 0;
 
         // CanaryMod start: load plugins XXX
         if (loadStage < 2) {
-            CanaryMod.loader().loadPlugins(false);
+            Canary.loader().loadPlugins(false);
             loadStage = 2;
         }
         // CanaryMod end
@@ -208,6 +214,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         return true;
     }
 
+    @Override
     public boolean a() throws IOException {
         if (!this.h.I) {
             for (int var1 = 0; var1 < 100; ++var1) {
@@ -231,6 +238,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         return this.d.a();
     }
 
+    @Override
     public boolean b() {
         return !this.h.I;
     }
@@ -239,10 +247,12 @@ public class OChunkProviderServer implements OIChunkProvider {
         return "ServerChunkCache: " + this.f.a() + " Drop: " + this.b.size();
     }
 
+    @Override
     public List a(OEnumCreatureType var1, int var2, int var3, int var4) {
         return this.d.a(var1, var2, var3, var4);
     }
 
+    @Override
     public OChunkPosition a(OWorld var1, String var2, int var3, int var4, int var5) {
         return this.d.a(var1, var2, var3, var4, var5);
     }

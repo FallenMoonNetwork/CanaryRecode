@@ -14,6 +14,7 @@ public class OItemGlassBottle extends OItem {
         super(var1);
     }
 
+    @Override
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         OMovingObjectPosition var4 = this.a(var2, var3, true);
         if (var4 == null) {

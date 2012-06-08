@@ -12,18 +12,22 @@ public class OInventoryCraftResult implements OIInventory {
         super();
     }
 
+    @Override
     public int c() {
         return 1;
     }
 
+    @Override
     public OItemStack g_(int var1) {
         return this.a[var1];
     }
 
+    @Override
     public String e() {
         return "Result";
     }
 
+    @Override
     public OItemStack a(int var1, int var2) {
         if (this.a[var1] != null) {
             OItemStack var3 = this.a[var1];
@@ -34,6 +38,7 @@ public class OInventoryCraftResult implements OIInventory {
         }
     }
 
+    @Override
     public OItemStack b(int var1) {
         if (this.a[var1] != null) {
             OItemStack var2 = this.a[var1];
@@ -44,24 +49,30 @@ public class OInventoryCraftResult implements OIInventory {
         }
     }
 
+    @Override
     public void a(int var1, OItemStack var2) {
         this.a[var1] = var2;
     }
 
+    @Override
     public int a() {
         return 64;
     }
 
+    @Override
     public void G_() {
     }
 
+    @Override
     public boolean a(OEntityPlayer var1) {
         return true;
     }
 
+    @Override
     public void f() {
     }
 
+    @Override
     public void g() {
     }
 }

@@ -141,6 +141,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         return canaryPlayer;
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         if (var1.c("playerGameType")) {
@@ -149,15 +150,18 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("playerGameType", this.c.a());
     }
 
+    @Override
     public void a(OWorld var1) {
         super.a(var1);
     }
 
+    @Override
     public void e_(int var1) {
         super.e_(var1);
         this.ci = -1;
@@ -167,18 +171,22 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.m.a((OICrafting) this);
     }
 
+    @Override
     public OItemStack[] y() {
         return this.ck;
     }
 
+    @Override
     protected void A() {
         this.bF = 0.0F;
     }
 
+    @Override
     public float B() {
         return 1.62F;
     }
 
+    @Override
     public void F_() {
         this.c.c();
         --this.cj;
@@ -198,11 +206,13 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         return var1 == 0 ? this.k.d() : this.k.b[var1 - 1];
     }
 
+    @Override
     public void a(ODamageSource var1) {
         this.b.h.sendPacketToAll((new OPacket3Chat(var1.a(this))));
         this.k.k();
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         if (this.cj > 0) {
             return false;
@@ -225,10 +235,12 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         }
     }
 
+    @Override
     protected boolean C() {
         return this.b.q;
     }
 
+    @Override
     public void d(int var1) {
         super.d(var1);
     }
@@ -340,6 +352,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     }
 
+    @Override
     public void e(int var1) {
         if (this.w == 1 && var1 == 1) {
             this.a(OAchievementList.C);
@@ -371,6 +384,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     }
 
+    @Override
     public void a(OEntity var1, int var2) {
         if (!var1.bE) {
             OEntityTracker var3 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
@@ -391,6 +405,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.m.a();
     }
 
+    @Override
     public void C_() {
         if (!this.t) {
             this.u = -1;
@@ -404,6 +419,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public void E() {
     }
 
+    @Override
     public OEnumStatus a(int var1, int var2, int var3) {
         OEnumStatus var4 = super.a(var1, var2, var3);
         if (var4 == OEnumStatus.a) {
@@ -417,6 +433,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         return var4;
     }
 
+    @Override
     public void a(boolean var1, boolean var2, boolean var3) {
         if (this.Z()) {
             OEntityTracker var4 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
@@ -430,12 +447,14 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     }
 
+    @Override
     public void b(OEntity var1) {
         super.b(var1);
         this.a.b((new OPacket39AttachEntity(this, this.bh)));
         this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt);
     }
 
+    @Override
     protected void a(double var1, boolean var3) {
     }
 
@@ -447,6 +466,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.cl = this.cl % 100 + 1;
     }
 
+    @Override
     public void b(int var1, int var2, int var3) {
         this.bc();
         this.a.b((new OPacket100OpenWindow(this.cl, 1, "Crafting", 9)));
@@ -455,6 +475,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.m.a((OICrafting) this);
     }
 
+    @Override
     public void c(int var1, int var2, int var3) {
         this.bc();
         this.a.b((new OPacket100OpenWindow(this.cl, 4, "Enchanting", 9)));
@@ -463,6 +484,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.m.a((OICrafting) this);
     }
 
+    @Override
     public void a(OIInventory var1) {
         this.bc();
         this.a.b((new OPacket100OpenWindow(this.cl, 0, var1.e(), var1.c())));
@@ -471,6 +493,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.m.a((OICrafting) this);
     }
 
+    @Override
     public void a(OTileEntityFurnace var1) {
         this.bc();
         this.a.b((new OPacket100OpenWindow(this.cl, 2, var1.e(), var1.c())));
@@ -479,6 +502,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.m.a((OICrafting) this);
     }
 
+    @Override
     public void a(OTileEntityDispenser var1) {
         this.bc();
         this.a.b((new OPacket100OpenWindow(this.cl, 3, var1.e(), var1.c())));
@@ -487,6 +511,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.m.a((OICrafting) this);
     }
 
+    @Override
     public void a(OTileEntityBrewingStand var1) {
         this.bc();
         this.a.b((new OPacket100OpenWindow(this.cl, 5, var1.e(), var1.c())));
@@ -495,6 +520,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.m.a((OICrafting) this);
     }
 
+    @Override
     public void a(OContainer var1, int var2, OItemStack var3) {
         if (!(var1.b(var2) instanceof OSlotCrafting)) {
             if (!this.h) {
@@ -507,18 +533,22 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.a(var1, var1.b());
     }
 
+    @Override
     public void a(OContainer var1, List var2) {
         this.a.b((new OPacket104WindowItems(var1.f, var2)));
         this.a.b((new OPacket103SetSlot(-1, -1, this.k.l())));
     }
 
+    @Override
     public void a(OContainer var1, int var2, int var3) {
         this.a.b((new OPacket105UpdateProgressbar(var1.f, var2, var3)));
     }
 
+    @Override
     public void a(OItemStack var1) {
     }
 
+    @Override
     public void F() {
         this.a.b((new OPacket101CloseWindow(this.m.f)));
         this.H();
@@ -535,6 +565,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.m = this.l;
     }
 
+    @Override
     public void a(OStatBase var1, int var2) {
         if (var1 != null) {
             if (!var1.f) {
@@ -568,17 +599,20 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.cf = -99999999;
     }
 
+    @Override
     public void a(String var1) {
         OStringTranslate var2 = OStringTranslate.a();
         String var3 = var2.b(var1);
         this.a.b((new OPacket3Chat(var3)));
     }
 
+    @Override
     protected void K() {
         this.a.b((new OPacket38EntityStatus(this.bd, (byte) 9)));
         super.K();
     }
 
+    @Override
     public void a(OItemStack var1, int var2) {
         super.a(var1, var2);
         if (var1 != null && var1.a() != null && var1.a().d(var1) == OEnumAction.b) {
@@ -590,35 +624,42 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     }
 
+    @Override
     protected void b(OPotionEffect var1) {
         super.b(var1);
         this.a.b((new OPacket41EntityEffect(this.bd, var1)));
     }
 
+    @Override
     protected void c(OPotionEffect var1) {
         super.c(var1);
         this.a.b((new OPacket41EntityEffect(this.bd, var1)));
     }
 
+    @Override
     protected void d(OPotionEffect var1) {
         super.d(var1);
         this.a.b((new OPacket42RemoveEntityEffect(this.bd, var1)));
     }
 
+    @Override
     public void a_(double var1, double var3, double var5) {
         this.a.a(var1, var3, var5, this.bs, this.bt);
     }
 
+    @Override
     public void c(OEntity var1) {
         OEntityTracker var2 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
         var2.b(this, new OPacket18Animation(var1, 6));
     }
 
+    @Override
     public void d(OEntity var1) {
         OEntityTracker var2 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
         var2.b(this, new OPacket18Animation(var1, 7));
     }
 
+    @Override
     public void L() {
         if (this.a != null) {
             this.a.b((new OPacket202PlayerAbilities(this.L)));

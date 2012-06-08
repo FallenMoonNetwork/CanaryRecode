@@ -10,6 +10,7 @@ public class OBlockGravel extends OBlockSand {
         super(var1, var2);
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return var2.nextInt(10 - var3 * 3) == 0 ? OItem.ao.bP : this.bO;
     }

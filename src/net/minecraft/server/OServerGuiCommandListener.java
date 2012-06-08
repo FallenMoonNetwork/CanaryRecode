@@ -18,6 +18,7 @@ class OServerGuiCommandListener implements ActionListener {
         this.a = var2;
     }
 
+    @Override
     public void actionPerformed(ActionEvent var1) {
         String var2 = this.a.getText().trim();
         if (var2.length() > 0) {

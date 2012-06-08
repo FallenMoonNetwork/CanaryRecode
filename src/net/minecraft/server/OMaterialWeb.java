@@ -9,6 +9,7 @@ final class OMaterialWeb extends OMaterial {
         super(var1);
     }
 
+    @Override
     public boolean c() {
         return false;
     }

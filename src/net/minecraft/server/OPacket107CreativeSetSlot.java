@@ -17,20 +17,24 @@ public class OPacket107CreativeSetSlot extends OPacket {
         super();
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readShort();
         this.b = this.b(var1);
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeShort(this.a);
         this.a(this.b, var1);
     }
 
+    @Override
     public int a() {
         return 8;
     }

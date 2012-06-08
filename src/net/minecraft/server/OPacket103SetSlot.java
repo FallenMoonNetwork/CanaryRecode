@@ -25,22 +25,26 @@ public class OPacket103SetSlot extends OPacket {
         this.c = var3 == null ? var3 : var3.j();
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readByte();
         this.b = var1.readShort();
         this.c = this.b(var1);
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeByte(this.a);
         var1.writeShort(this.b);
         this.a(this.c, var1);
     }
 
+    @Override
     public int a() {
         return 8;
     }

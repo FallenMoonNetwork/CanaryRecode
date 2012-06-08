@@ -11,9 +11,11 @@ public abstract class OEntityFlying extends OEntityLiving {
         super(var1);
     }
 
+    @Override
     protected void a(float var1) {
     }
 
+    @Override
     public void a(float var1, float var2) {
         if (this.aU()) {
             this.a(var1, var2, 0.02F);
@@ -66,6 +68,7 @@ public abstract class OEntityFlying extends OEntityLiving {
         this.aF += this.aE;
     }
 
+    @Override
     public boolean t() {
         return false;
     }

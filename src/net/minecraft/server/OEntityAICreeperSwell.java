@@ -15,20 +15,24 @@ public class OEntityAICreeperSwell extends OEntityAIBase {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         OEntityLiving var1 = this.a.at();
         return this.a.A() > 0 || var1 != null && this.a.j(var1) < 9.0D;
     }
 
+    @Override
     public void c() {
         this.a.al().f();
         this.b = this.a.at();
     }
 
+    @Override
     public void d() {
         this.b = null;
     }
 
+    @Override
     public void e() {
         if (this.b == null) {
             this.a.c(-1);

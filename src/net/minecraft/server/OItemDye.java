@@ -25,11 +25,13 @@ public class OItemDye extends OItem {
         this.f(0);
     }
 
+    @Override
     public String a(OItemStack var1) {
         int var2 = OMathHelper.a(var1.h(), 0, 15);
         return super.b() + "." + a[var2];
     }
 
+    @Override
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
         if (!var2.d(var4, var5, var6)) {
             return false;
@@ -109,6 +111,7 @@ public class OItemDye extends OItem {
         }
     }
 
+    @Override
     public void a(OItemStack var1, OEntityLiving var2) {
         if (var2 instanceof OEntitySheep) {
             OEntitySheep var3 = (OEntitySheep) var2;

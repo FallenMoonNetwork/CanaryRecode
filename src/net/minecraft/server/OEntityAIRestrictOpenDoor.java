@@ -16,6 +16,7 @@ public class OEntityAIRestrictOpenDoor extends OEntityAIBase {
         this.a = var1;
     }
 
+    @Override
     public boolean a() {
         if (this.a.bi.e()) {
             return false;
@@ -30,21 +31,25 @@ public class OEntityAIRestrictOpenDoor extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return this.a.bi.e() ? false : !this.b.g && this.b.a(OMathHelper.b(this.a.bm), OMathHelper.b(this.a.bo));
     }
 
+    @Override
     public void c() {
         this.a.al().b(false);
         this.a.al().c(false);
     }
 
+    @Override
     public void d() {
         this.a.al().b(true);
         this.a.al().c(true);
         this.b = null;
     }
 
+    @Override
     public void e() {
         this.b.e();
     }

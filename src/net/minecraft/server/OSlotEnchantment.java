@@ -15,6 +15,7 @@ class OSlotEnchantment extends OSlot {
         this.a = var1;
     }
 
+    @Override
     public boolean a(OItemStack var1) {
         return true;
     }

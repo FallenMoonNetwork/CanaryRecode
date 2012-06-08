@@ -45,38 +45,47 @@ public class OEntitySquid extends OEntityWaterMob {
     public CanarySquid getCanarySquid() {
         return canarySquid;
     }
+    @Override
     public int d() {
         return 10;
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
     }
 
+    @Override
     protected String i() {
         return null;
     }
 
+    @Override
     protected String j() {
         return null;
     }
 
+    @Override
     protected String k() {
         return null;
     }
 
+    @Override
     protected float p() {
         return 0.4F;
     }
 
+    @Override
     protected int f() {
         return 0;
     }
 
+    @Override
     protected void a(boolean var1, int var2) {
         int var3 = this.bS.nextInt(3 + var2) + 1;
 
@@ -86,14 +95,17 @@ public class OEntitySquid extends OEntityWaterMob {
 
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         return super.b(var1);
     }
 
+    @Override
     public boolean aU() {
         return this.bi.a(this.bw.b(0.0D, -0.6000000238418579D, 0.0D), OMaterial.g, this);
     }
 
+    @Override
     public void e() {
         super.e();
         this.b = this.a;
@@ -150,10 +162,12 @@ public class OEntitySquid extends OEntityWaterMob {
 
     }
 
+    @Override
     public void a(float var1, float var2) {
         this.a(this.bp, this.bq, this.br);
     }
 
+    @Override
     protected void d_() {
         ++this.aV;
         if (this.aV > 100) {
@@ -168,6 +182,7 @@ public class OEntitySquid extends OEntityWaterMob {
         this.aG();
     }
 
+    @Override
     public boolean l() {
         return this.bn > 45.0D && this.bn < 63.0D && super.l();
     }

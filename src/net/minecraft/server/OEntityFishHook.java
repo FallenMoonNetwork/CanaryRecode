@@ -61,6 +61,7 @@ public class OEntityFishHook extends OEntity {
         this.a(this.bp, this.bq, this.br, 1.5F, 1.0F);
     }
 
+    @Override
     protected void b() {
     }
 
@@ -84,6 +85,7 @@ public class OEntityFishHook extends OEntity {
         this.i = 0;
     }
 
+    @Override
     public void F_() {
         super.F_();
         if (this.l > 0) {
@@ -287,6 +289,7 @@ public class OEntityFishHook extends OEntity {
         }
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         var1.a("xTile", (short) this.d);
         var1.a("yTile", (short) this.e);
@@ -296,6 +299,7 @@ public class OEntityFishHook extends OEntity {
         var1.a("inGround", (byte) (this.h ? 1 : 0));
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         this.d = var1.e("xTile");
         this.e = var1.e("yTile");

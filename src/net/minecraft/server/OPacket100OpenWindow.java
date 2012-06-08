@@ -26,10 +26,12 @@ public class OPacket100OpenWindow extends OPacket {
         this.d = var4;
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readByte() & 255;
         this.b = var1.readByte() & 255;
@@ -37,6 +39,7 @@ public class OPacket100OpenWindow extends OPacket {
         this.d = var1.readByte() & 255;
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeByte(this.a & 255);
         var1.writeByte(this.b & 255);
@@ -44,6 +47,7 @@ public class OPacket100OpenWindow extends OPacket {
         var1.writeByte(this.d & 255);
     }
 
+    @Override
     public int a() {
         return 3 + this.c.length();
     }

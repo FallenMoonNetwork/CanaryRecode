@@ -30,6 +30,7 @@ public class OEntityAIFollowOwner extends OEntityAIBase {
         this.a(3);
     }
 
+    @Override
     public boolean a() {
         OEntityLiving var1 = this.d.w_();
         if (var1 == null) {
@@ -44,22 +45,26 @@ public class OEntityAIFollowOwner extends OEntityAIBase {
         }
     }
 
+    @Override
     public boolean b() {
         return !this.g.e() && this.d.j(this.e) > (this.b * this.b) && !this.d.v_();
     }
 
+    @Override
     public void c() {
         this.h = 0;
         this.i = this.d.al().a();
         this.d.al().a(false);
     }
 
+    @Override
     public void d() {
         this.e = null;
         this.g.f();
         this.d.al().a(this.i);
     }
 
+    @Override
     public void e() {
         this.d.ai().a(this.e, 10.0F, this.d.D());
         if (!this.d.v_()) {

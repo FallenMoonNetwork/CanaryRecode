@@ -22,6 +22,7 @@ public class OBlockLeaves extends OBlockLeavesBase {
         this.a(true);
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         byte var5 = 1;
         int var6 = var5 + 1;
@@ -41,6 +42,7 @@ public class OBlockLeaves extends OBlockLeavesBase {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (!var1.F) {
             int var6 = var1.c(var2, var3, var4);
@@ -125,14 +127,17 @@ public class OBlockLeaves extends OBlockLeavesBase {
         var1.e(var2, var3, var4, 0);
     }
 
+    @Override
     public int a(Random var1) {
         return var1.nextInt(20) == 0 ? 1 : 0;
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OBlock.y.bO;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         if (!var1.F) {
             byte var8 = 20;
@@ -152,6 +157,7 @@ public class OBlockLeaves extends OBlockLeavesBase {
 
     }
 
+    @Override
     public void a(OWorld var1, OEntityPlayer var2, int var3, int var4, int var5, int var6) {
         if (!var1.F && var2.U() != null && var2.U().c == OItem.bd.bP) {
             var2.a(OStatList.C[this.bO], 1);
@@ -162,18 +168,22 @@ public class OBlockLeaves extends OBlockLeavesBase {
 
     }
 
+    @Override
     protected int c(int var1) {
         return var1 & 3;
     }
 
+    @Override
     public boolean a() {
         return !this.b;
     }
 
+    @Override
     public int a(int var1, int var2) {
         return (var2 & 3) == 1 ? this.bN + 80 : ((var2 & 3) == 3 ? this.bN + 144 : this.bN);
     }
 
+    @Override
     public void b(OWorld var1, int var2, int var3, int var4, OEntity var5) {
         super.b(var1, var2, var3, var4, var5);
     }

@@ -35,10 +35,12 @@ public class OContainerDispenser extends OContainer {
 
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         return this.a.a(var1);
     }
 
+    @Override
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);

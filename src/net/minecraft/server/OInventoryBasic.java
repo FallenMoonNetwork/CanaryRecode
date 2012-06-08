@@ -20,10 +20,12 @@ public class OInventoryBasic implements OIInventory {
         this.c = new OItemStack[var2];
     }
 
+    @Override
     public OItemStack g_(int var1) {
         return this.c[var1];
     }
 
+    @Override
     public OItemStack a(int var1, int var2) {
         if (this.c[var1] != null) {
             OItemStack var3;
@@ -46,6 +48,7 @@ public class OInventoryBasic implements OIInventory {
         }
     }
 
+    @Override
     public OItemStack b(int var1) {
         if (this.c[var1] != null) {
             OItemStack var2 = this.c[var1];
@@ -56,6 +59,7 @@ public class OInventoryBasic implements OIInventory {
         }
     }
 
+    @Override
     public void a(int var1, OItemStack var2) {
         this.c[var1] = var2;
         if (var2 != null && var2.a > this.a()) {
@@ -65,18 +69,22 @@ public class OInventoryBasic implements OIInventory {
         this.G_();
     }
 
+    @Override
     public int c() {
         return this.b;
     }
 
+    @Override
     public String e() {
         return this.a;
     }
 
+    @Override
     public int a() {
         return 64;
     }
 
+    @Override
     public void G_() {
         if (this.d != null) {
             for (int var1 = 0; var1 < this.d.size(); ++var1) {
@@ -86,13 +94,16 @@ public class OInventoryBasic implements OIInventory {
 
     }
 
+    @Override
     public boolean a(OEntityPlayer var1) {
         return true;
     }
 
+    @Override
     public void f() {
     }
 
+    @Override
     public void g() {
     }
 }

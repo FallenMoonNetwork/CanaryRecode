@@ -31,17 +31,21 @@ public class OEntityFallingSand extends OEntity {
         this.bl = var6;
     }
 
+    @Override
     protected boolean g_() {
         return false;
     }
 
+    @Override
     protected void b() {
     }
 
+    @Override
     public boolean o_() {
         return !this.bE;
     }
 
+    @Override
     public void F_() {
         if (this.a == 0) {
             this.X();
@@ -82,10 +86,12 @@ public class OEntityFallingSand extends OEntity {
         }
     }
 
+    @Override
     protected void b(ONBTTagCompound var1) {
         var1.a("Tile", (byte) this.a);
     }
 
+    @Override
     protected void a(ONBTTagCompound var1) {
         this.a = var1.d("Tile") & 255;
     }

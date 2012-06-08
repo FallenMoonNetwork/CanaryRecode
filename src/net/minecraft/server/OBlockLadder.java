@@ -12,6 +12,7 @@ public class OBlockLadder extends OBlock {
         super(var1, var2, OMaterial.p);
     }
 
+    @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
         float var6 = 0.125F;
@@ -34,22 +35,27 @@ public class OBlockLadder extends OBlock {
         return super.e(var1, var2, var3, var4);
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 8;
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return var1.e(var2 - 1, var3, var4) ? true : (var1.e(var2 + 1, var3, var4) ? true : (var1.e(var2, var3, var4 - 1) ? true : var1.e(var2, var3, var4 + 1)));
     }
 
+    @Override
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
         if ((var6 == 0 || var5 == 2) && var1.e(var2, var3, var4 + 1)) {
@@ -71,6 +77,7 @@ public class OBlockLadder extends OBlock {
         var1.c(var2, var3, var4, var6);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
         boolean var7 = false;
@@ -98,6 +105,7 @@ public class OBlockLadder extends OBlock {
         super.a(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public int a(Random var1) {
         return 1;
     }

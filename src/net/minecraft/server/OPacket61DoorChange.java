@@ -28,6 +28,7 @@ public class OPacket61DoorChange extends OPacket {
         this.b = var5;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.c = var1.readInt();
@@ -36,6 +37,7 @@ public class OPacket61DoorChange extends OPacket {
         this.b = var1.readInt();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeInt(this.c);
@@ -44,10 +46,12 @@ public class OPacket61DoorChange extends OPacket {
         var1.writeInt(this.b);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 20;
     }

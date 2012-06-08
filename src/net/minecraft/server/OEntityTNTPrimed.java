@@ -29,17 +29,21 @@ public class OEntityTNTPrimed extends OEntity {
         this.bl = var6;
     }
 
+    @Override
     protected void b() {
     }
 
+    @Override
     protected boolean g_() {
         return false;
     }
 
+    @Override
     public boolean o_() {
         return !this.bE;
     }
 
+    @Override
     public void F_() {
         this.bj = this.bm;
         this.bk = this.bn;
@@ -73,10 +77,12 @@ public class OEntityTNTPrimed extends OEntity {
         this.bi.a((OEntity) null, this.bm, this.bn, this.bo, var1);
     }
 
+    @Override
     protected void b(ONBTTagCompound var1) {
         var1.a("Fuse", (byte) this.a);
     }
 
+    @Override
     protected void a(ONBTTagCompound var1) {
         this.a = var1.d("Fuse");
     }

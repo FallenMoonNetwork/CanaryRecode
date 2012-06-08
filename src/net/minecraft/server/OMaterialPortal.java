@@ -9,14 +9,17 @@ public class OMaterialPortal extends OMaterial {
         super(var1);
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public boolean c() {
         return false;
     }

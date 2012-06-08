@@ -17,6 +17,7 @@ public class OComponentNetherBridgeNetherStalkRoom extends OComponentNetherBridg
         this.g = var3;
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
         this.a((OComponentNetherBridgeStartPiece) var1, var2, var3, 5, 3, true);
         this.a((OComponentNetherBridgeStartPiece) var1, var2, var3, 5, 11, true);
@@ -27,6 +28,7 @@ public class OComponentNetherBridgeNetherStalkRoom extends OComponentNetherBridg
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentNetherBridgeNetherStalkRoom(var6, var1, var7, var5) : null;
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         this.a(var1, var3, 0, 3, 0, 12, 4, 12, OBlock.bA.bO, OBlock.bA.bO, false);
         this.a(var1, var3, 0, 5, 0, 12, 13, 12, 0, 0, false);

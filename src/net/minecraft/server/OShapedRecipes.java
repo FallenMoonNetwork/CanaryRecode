@@ -21,10 +21,12 @@ public class OShapedRecipes implements OIRecipe {
         this.e = var4;
     }
 
+    @Override
     public OItemStack b() {
         return this.e;
     }
 
+    @Override
     public boolean a(OInventoryCrafting var1) {
         for (int var2 = 0; var2 <= 3 - this.b; ++var2) {
             for (int var3 = 0; var3 <= 3 - this.c; ++var3) {
@@ -75,10 +77,12 @@ public class OShapedRecipes implements OIRecipe {
         return true;
     }
 
+    @Override
     public OItemStack b(OInventoryCrafting var1) {
         return new OItemStack(this.e.c, this.e.a, this.e.h());
     }
 
+    @Override
     public int a() {
         return this.b * this.c;
     }

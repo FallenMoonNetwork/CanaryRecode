@@ -16,6 +16,7 @@ public class OWorldGenDungeons extends OWorldGenerator {
         super();
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         byte var6 = 3;
         int var7 = var2.nextInt(2) + 2;

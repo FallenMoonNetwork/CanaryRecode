@@ -20,6 +20,7 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
         this.aA = 5;
     }
 
+    @Override
     public void e() {
         float var1 = this.b(1.0F);
         if (var1 > 0.5F) {
@@ -29,6 +30,7 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
         super.e();
     }
 
+    @Override
     public void F_() {
         super.F_();
         if (!this.bi.F && this.bi.q == 0) {
@@ -37,11 +39,13 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
 
     }
 
+    @Override
     protected OEntity o() {
         OEntityPlayer var1 = this.bi.b(this, 16.0D);
         return var1 != null && this.h(var1) ? var1 : null;
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         if (super.a(var1, var2)) {
             OEntity var3 = var1.a();
@@ -59,6 +63,7 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
         }
     }
 
+    @Override
     public boolean a(OEntity var1) {
         int var2 = this.c;
         if (this.a(OPotion.g)) {
@@ -72,6 +77,7 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
         return var1.a(ODamageSource.a(this), var2);
     }
 
+    @Override
     protected void a(OEntity var1, float var2) {
         if (this.aw <= 0 && var2 < 2.0F && var1.bw.e > this.bw.b && var1.bw.b < this.bw.e) {
             this.aw = 20;
@@ -80,14 +86,17 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
 
     }
 
+    @Override
     public float a(int var1, int var2, int var3) {
         return 0.5F - this.bi.p(var1, var2, var3);
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
     }
@@ -111,6 +120,7 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
         }
     }
 
+    @Override
     public boolean l() {
         return this.C() && super.l();
     }

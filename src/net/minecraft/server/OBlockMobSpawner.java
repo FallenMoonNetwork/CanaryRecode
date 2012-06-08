@@ -12,18 +12,22 @@ public class OBlockMobSpawner extends OBlockContainer {
         super(var1, var2, OMaterial.e);
     }
 
+    @Override
     public OTileEntity a_() {
         return new OTileEntityMobSpawner();
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return 0;
     }
 
+    @Override
     public int a(Random var1) {
         return 0;
     }
 
+    @Override
     public boolean a() {
         return false;
     }

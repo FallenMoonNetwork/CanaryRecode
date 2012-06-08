@@ -14,14 +14,17 @@ public class OBlockDragonEgg extends OBlock {
         super(var1, var2, OMaterial.A);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         var1.c(var2, var3, var4, this.bO, this.d());
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         var1.c(var2, var3, var4, this.bO, this.d());
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         this.g(var1, var2, var3, var4);
     }
@@ -47,11 +50,13 @@ public class OBlockDragonEgg extends OBlock {
 
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         this.h(var1, var2, var3, var4);
         return true;
     }
 
+    @Override
     public void b(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         this.h(var1, var2, var3, var4);
     }
@@ -87,22 +92,27 @@ public class OBlockDragonEgg extends OBlock {
         }
     }
 
+    @Override
     public int d() {
         return 3;
     }
 
+    @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         return super.c(var1, var2, var3, var4);
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 27;
     }

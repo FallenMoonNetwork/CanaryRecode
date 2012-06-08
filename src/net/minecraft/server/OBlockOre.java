@@ -11,14 +11,17 @@ public class OBlockOre extends OBlock {
         super(var1, var2, OMaterial.e);
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return this.bO == OBlock.I.bO ? OItem.l.bP : (this.bO == OBlock.aw.bO ? OItem.m.bP : (this.bO == OBlock.N.bO ? OItem.aV.bP : this.bO));
     }
 
+    @Override
     public int a(Random var1) {
         return this.bO == OBlock.N.bO ? 4 + var1.nextInt(5) : 1;
     }
 
+    @Override
     public int a(int var1, Random var2) {
         if (var1 > 0 && this.bO != this.a(0, var2, var1)) {
             int var3 = var2.nextInt(var1 + 2) - 1;
@@ -32,6 +35,7 @@ public class OBlockOre extends OBlock {
         }
     }
 
+    @Override
     protected int c(int var1) {
         return this.bO == OBlock.N.bO ? 4 : 0;
     }

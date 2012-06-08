@@ -11,6 +11,7 @@ public class OItemCoal extends OItem {
         this.f(0);
     }
 
+    @Override
     public String a(OItemStack var1) {
         return var1.h() == 1 ? "item.charcoal" : "item.coal";
     }

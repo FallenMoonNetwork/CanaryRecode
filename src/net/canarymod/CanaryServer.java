@@ -33,18 +33,22 @@ public class CanaryServer implements Server {
         this.server = server;
     }
 
+    @Override
     public String getHostname() {
         return "localhost"; // Is that really localhost? Jos: no, just had to put something there
     }
 
+    @Override
     public int getNumPlayersOnline() {
         return server.getCanaryConfigurationManager().getNumPlayersOnline();
     }
 
+    @Override
     public int getMaxPlayers() {
         return Configuration.getNetConfig().getMaxPlayers();
     }
 
+    @Override
     public String[] getPlayerNameList() {
         ArrayList<Player> players = getPlayerList();
         String[] names = new String[players.size()];
@@ -54,10 +58,12 @@ public class CanaryServer implements Server {
         return names;
     }
 
+    @Override
     public String getDefaultWorldName() {
         return Configuration.getServerConfig().getDefaultWorldName();
     }
 
+    @Override
     public WorldManager getWorldManager() {
         return server.getWorldManager();
     }

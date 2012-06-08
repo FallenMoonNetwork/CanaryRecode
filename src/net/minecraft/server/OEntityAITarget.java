@@ -33,6 +33,7 @@ public abstract class OEntityAITarget extends OEntityAIBase {
         this.a = var4;
     }
 
+    @Override
     public boolean b() {
         OEntityLiving var1 = this.c.at();
         if (var1 == null) {
@@ -56,12 +57,14 @@ public abstract class OEntityAITarget extends OEntityAIBase {
         }
     }
 
+    @Override
     public void c() {
         this.b = 0;
         this.f = 0;
         this.g = 0;
     }
 
+    @Override
     public void d() {
         this.c.b((OEntityLiving) null);
     }

@@ -13,18 +13,21 @@ public class OPacket12PlayerLook extends OPacket10Flying {
         this.i = true;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.e = var1.readFloat();
         this.f = var1.readFloat();
         super.a(var1);
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeFloat(this.e);
         var1.writeFloat(this.f);
         super.a(var1);
     }
 
+    @Override
     public int a() {
         return 9;
     }

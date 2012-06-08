@@ -11,20 +11,24 @@ public class OEntityAIBreakDoor extends OEntityAIDoorInteract {
         super(var1);
     }
 
+    @Override
     public boolean a() {
         return !super.a() ? false : !this.e.d((OIBlockAccess)this.a.bi, this.b, this.c, this.d);
     }
 
+    @Override
     public void c() {
         super.c();
         this.i = 240;
     }
 
+    @Override
     public boolean b() {
         double var1 = this.a.e((double) this.b, (double) this.c, (double) this.d);
         return this.i >= 0 && !this.e.d((OIBlockAccess)this.a.bi, this.b, this.c, this.d) && var1 < 4.0D;
     }
 
+    @Override
     public void e() {
         super.e();
         if (this.a.an().nextInt(20) == 0) {

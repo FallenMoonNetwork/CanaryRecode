@@ -69,6 +69,7 @@ public class ORConThreadMain extends ORConThreadBase {
 
     }
 
+    @Override
     public void run() {
         this.b("RCON running on " + this.i + ":" + this.g);
 
@@ -106,6 +107,7 @@ public class ORConThreadMain extends ORConThreadBase {
         this.a(this.j);
     }
 
+    @Override
     public void a() {
         if (0 == this.k.length()) {
             this.c("No rcon password set in \'" + Configuration.getNetConfig().getFile().getPath() + "\', rcon disabled!");

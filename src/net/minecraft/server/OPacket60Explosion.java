@@ -31,6 +31,7 @@ public class OPacket60Explosion extends OPacket {
         this.e = new HashSet(var8);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readDouble();
         this.b = var1.readDouble();
@@ -51,6 +52,7 @@ public class OPacket60Explosion extends OPacket {
 
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeDouble(this.a);
         var1.writeDouble(this.b);
@@ -74,10 +76,12 @@ public class OPacket60Explosion extends OPacket {
 
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 32 + this.e.size() * 3;
     }

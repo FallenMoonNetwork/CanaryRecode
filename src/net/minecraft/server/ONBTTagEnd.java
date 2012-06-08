@@ -10,24 +10,30 @@ public class ONBTTagEnd extends ONBTBase {
         super((String) null);
     }
 
+    @Override
     void a(DataInput var1) {
     }
 
+    @Override
     void a(DataOutput var1) {
     }
 
+    @Override
     public byte a() {
         return (byte) 0;
     }
 
+    @Override
     public String toString() {
         return "END";
     }
 
+    @Override
     public ONBTBase b() {
         return new ONBTTagEnd();
     }
 
+    @Override
     public boolean equals(Object var1) {
         return super.equals(var1);
     }

@@ -15,10 +15,12 @@ public class OItemSlab extends OItemBlock {
         this.a(true);
     }
 
+    @Override
     public int a(int var1) {
         return var1;
     }
 
+    @Override
     public String a(OItemStack var1) {
         int var2 = var1.h();
         if (var2 < 0 || var2 >= OBlockStep.a.length) {
@@ -28,6 +30,7 @@ public class OItemSlab extends OItemBlock {
         return super.b() + "." + OBlockStep.a[var2];
     }
 
+    @Override
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
         if (var1.a == 0) {
             return false;

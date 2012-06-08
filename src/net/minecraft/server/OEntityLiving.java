@@ -197,6 +197,7 @@ public abstract class OEntityLiving extends OEntity {
         return this.aV;
     }
 
+    @Override
     public float ar() {
         return this.X;
     }
@@ -264,6 +265,7 @@ public abstract class OEntityLiving extends OEntity {
         this.c = this.b != null ? 60 : 0;
     }
 
+    @Override
     protected void b() {
         this.bY.a(8, Integer.valueOf(this.f));
     }
@@ -272,14 +274,17 @@ public abstract class OEntityLiving extends OEntity {
         return this.bi.a(OVec3D.b(this.bm, this.bn + this.B(), this.bo), OVec3D.b(var1.bm, var1.bn + var1.B(), var1.bo)) == null;
     }
 
+    @Override
     public boolean o_() {
         return !this.bE;
     }
 
+    @Override
     public boolean e_() {
         return !this.bE;
     }
 
+    @Override
     public float B() {
         return this.bH * 0.85F;
     }
@@ -296,6 +301,7 @@ public abstract class OEntityLiving extends OEntity {
 
     }
 
+    @Override
     public void aA() {
         this.an = this.ao;
         super.aA();
@@ -439,6 +445,7 @@ public abstract class OEntityLiving extends OEntity {
 
     }
 
+    @Override
     public void R() {
         super.R();
         this.Z = this.aa;
@@ -446,6 +453,7 @@ public abstract class OEntityLiving extends OEntity {
         this.bK = 0.0F;
     }
 
+    @Override
     public void F_() {
         super.F_();
         if (this.aI > 0) {
@@ -559,6 +567,7 @@ public abstract class OEntityLiving extends OEntity {
         this.ab += var7;
     }
 
+    @Override
     protected void b(float var1, float var2) {
         super.b(var1, var2);
     }
@@ -588,6 +597,7 @@ public abstract class OEntityLiving extends OEntity {
 
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         if (this.bi.F) {
             return false;
@@ -816,6 +826,7 @@ public abstract class OEntityLiving extends OEntity {
         return 0;
     }
 
+    @Override
     protected void a(float var1) {
         super.a(var1);
         int var2 = (int) Math.ceil((var1 - 3.0F));
@@ -958,6 +969,7 @@ public abstract class OEntityLiving extends OEntity {
         return var4 == OBlock.aF.bO || var4 == OBlock.bu.bO;
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         var1.a("Health", (short) this.ap);
         var1.a("HurtTime", (short) this.as);
@@ -981,6 +993,7 @@ public abstract class OEntityLiving extends OEntity {
 
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         if (this.ap < -32768) {
             this.ap = -32768;
@@ -1008,6 +1021,7 @@ public abstract class OEntityLiving extends OEntity {
 
     }
 
+    @Override
     public boolean aE() {
         return !this.bE && this.ap > 0;
     }
@@ -1293,10 +1307,12 @@ public abstract class OEntityLiving extends OEntity {
         return this.bi.a(this.bw) && this.bi.a(this, this.bw).size() == 0 && !this.bi.c(this.bw);
     }
 
+    @Override
     protected void aI() {
         this.a(ODamageSource.j, 4);
     }
 
+    @Override
     public OVec3D aJ() {
         return this.f(1.0F);
     }

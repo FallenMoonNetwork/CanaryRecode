@@ -56,6 +56,7 @@ public class OPacket28EntityVelocity extends OPacket {
         this.d = (int) (var6 * 8000.0D);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = var1.readShort();
@@ -63,6 +64,7 @@ public class OPacket28EntityVelocity extends OPacket {
         this.d = var1.readShort();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeShort(this.b);
@@ -70,10 +72,12 @@ public class OPacket28EntityVelocity extends OPacket {
         var1.writeShort(this.d);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 10;
     }

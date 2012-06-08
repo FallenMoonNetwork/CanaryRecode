@@ -10,14 +10,17 @@ public class OEnchantmentDigging extends OEnchantment {
         this.a("digging");
     }
 
+    @Override
     public int a(int var1) {
         return 1 + 15 * (var1 - 1);
     }
 
+    @Override
     public int b(int var1) {
         return super.a(var1) + 50;
     }
 
+    @Override
     public int a() {
         return 5;
     }

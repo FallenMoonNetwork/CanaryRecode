@@ -20,10 +20,12 @@ public class OSlotCrafting extends OSlot {
         this.a = var2;
     }
 
+    @Override
     public boolean a(OItemStack var1) {
         return false;
     }
 
+    @Override
     public OItemStack a(int var1) {
         if (this.c()) {
             this.g += Math.min(var1, this.b().a);
@@ -32,11 +34,13 @@ public class OSlotCrafting extends OSlot {
         return super.a(var1);
     }
 
+    @Override
     protected void a(OItemStack var1, int var2) {
         this.g += var2;
         this.b(var1);
     }
 
+    @Override
     protected void b(OItemStack var1) {
         var1.a(this.f.bi, this.f, this.g);
         this.g = 0;
@@ -64,6 +68,7 @@ public class OSlotCrafting extends OSlot {
 
     }
 
+    @Override
     public void c(OItemStack var1) {
         this.b(var1);
 

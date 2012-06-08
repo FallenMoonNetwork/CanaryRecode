@@ -14,10 +14,12 @@ public class OItemPickaxe extends OItemTool {
         super(var1, 2, var2, bU);
     }
 
+    @Override
     public boolean a(OBlock var1) {
         return var1 == OBlock.ap ? this.b.d() == 3 : (var1 != OBlock.ax && var1 != OBlock.aw ? (var1 != OBlock.ah && var1 != OBlock.G ? (var1 != OBlock.ai && var1 != OBlock.H ? (var1 != OBlock.O && var1 != OBlock.N ? (var1 != OBlock.aN && var1 != OBlock.aO ? (var1.cd == OMaterial.e ? true : var1.cd == OMaterial.f) : this.b.d() >= 2) : this.b.d() >= 1) : this.b.d() >= 1) : this.b.d() >= 2) : this.b.d() >= 2);
     }
 
+    @Override
     public float a(OItemStack var1, OBlock var2) {
         return var2 != null && (var2.cd == OMaterial.f || var2.cd == OMaterial.e) ? this.a : super.a(var1, var2);
     }

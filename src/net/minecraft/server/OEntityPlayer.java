@@ -101,10 +101,12 @@ public abstract class OEntityPlayer extends OEntityLiving {
         this.ae = "/mob/char.png";
     }
 
+    @Override
     public int d() {
         return 20;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, Byte.valueOf((byte) 0));
@@ -132,10 +134,12 @@ public abstract class OEntityPlayer extends OEntityLiving {
 
     }
 
+    @Override
     public boolean P() {
         return this.M() && OItem.d[this.d.c].d(this.d) == OEnumAction.d;
     }
 
+    @Override
     public void F_() {
         if (this.d != null) {
             OItemStack var1 = this.k.d();
@@ -276,6 +280,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
 
     }
 
+    @Override
     protected boolean Q() {
         return this.aD() <= 0 || this.Z();
     }
@@ -284,6 +289,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         this.m = this.l;
     }
 
+    @Override
     public void R() {
         double var1 = this.bm;
         double var3 = this.bn;
@@ -298,6 +304,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         return this.a(OPotion.e) ? 6 - (1 + this.b(OPotion.e).c()) * 1 : (this.a(OPotion.f) ? 6 + (1 + this.b(OPotion.f).c()) * 2 : 6);
     }
 
+    @Override
     protected void d_() {
         int var1 = this.E();
         if (this.t) {
@@ -313,6 +320,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         this.ao = (float) this.u / (float) var1;
     }
 
+    @Override
     public void e() {
         if (this.o > 0) {
             --this.o;
@@ -366,6 +374,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         var1.a_(this);
     }
 
+    @Override
     public void a(ODamageSource var1) {
         super.a(var1);
         this.b(0.2F, 0.2F);
@@ -387,6 +396,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         this.a(OStatList.y, 1);
     }
 
+    @Override
     public void b(OEntity var1, int var2) {
         this.q += var2;
         if (var1 instanceof OEntityPlayer) {
@@ -397,6 +407,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
 
     }
 
+    @Override
     protected int b_(int var1) {
         int var2 = OEnchantmentHelper.a(this.k);
         return var2 > 0 && this.bS.nextInt(var2 + 1) > 0 ? var1 : super.b_(var1);
@@ -478,6 +489,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         return this.k.b(var1);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         ONBTTagList var2 = var1.n("Inventory");
@@ -501,6 +513,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         this.L.b(var1);
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("Inventory", this.k.a(new ONBTTagList()));
@@ -532,6 +545,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
     public void a(OEntity var1, int var2) {
     }
 
+    @Override
     public float B() {
         return 0.12F;
     }
@@ -540,6 +554,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         this.bF = 1.62F;
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         if (this.L.a && !var1.g()) {
             return false;
@@ -586,6 +601,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         }
     }
 
+    @Override
     protected int b(ODamageSource var1, int var2) {
         int var3 = super.b(var1, var2);
         if (var3 <= 0) {
@@ -637,14 +653,17 @@ public abstract class OEntityPlayer extends OEntityLiving {
         }
     }
 
+    @Override
     protected void f(int var1) {
         this.k.e(var1);
     }
 
+    @Override
     public int T() {
         return this.k.j();
     }
 
+    @Override
     protected void c(ODamageSource var1, int var2) {
         if (!var1.e() && this.P()) {
             var2 = 1 + var2 >> 1;
@@ -690,6 +709,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         this.k.a(this.k.c, (OItemStack) null);
     }
 
+    @Override
     public double W() {
         return (this.bF - 0.5F);
     }
@@ -791,6 +811,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
     public void a(OItemStack var1) {
     }
 
+    @Override
     public void X() {
         super.X();
         this.l.a(this);
@@ -800,6 +821,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
 
     }
 
+    @Override
     public boolean Y() {
         return !this.E && super.Y();
     }
@@ -937,6 +959,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         }
     }
 
+    @Override
     public boolean Z() {
         return this.E;
     }
@@ -968,6 +991,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
     public void a(OStatBase var1, int var2) {
     }
 
+    @Override
     protected void ac() {
         super.ac();
         this.a(OStatList.u, 1);
@@ -979,6 +1003,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
 
     }
 
+    @Override
     public void a(float var1, float var2) {
         double var3 = this.bm;
         double var5 = this.bn;
@@ -1057,6 +1082,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
 
     }
 
+    @Override
     protected void a(float var1) {
         if (!this.L.c) {
             if (var1 >= 2.0F) {
@@ -1067,6 +1093,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         }
     }
 
+    @Override
     public void c(OEntityLiving var1) {
         if (var1 instanceof OEntityMob) {
             this.a(OAchievementList.s);
@@ -1074,6 +1101,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
 
     }
 
+    @Override
     public void ad() {
         if (this.I > 0) {
             this.I = 10;
@@ -1150,16 +1178,19 @@ public abstract class OEntityPlayer extends OEntityLiving {
         return true;
     }
 
+    @Override
     protected int a(OEntityPlayer var1) {
         int var2 = this.M * 7;
         return var2 > 100 ? 100 : var2;
     }
 
     //CanaryMod protected -> public
+    @Override
     public boolean ah() {
         return true;
     }
 
+    @Override
     public String s() {
         return this.v;
     }
@@ -1177,6 +1208,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         this.q = var1.q;
     }
 
+    @Override
     protected boolean g_() {
         return !this.L.b;
     }

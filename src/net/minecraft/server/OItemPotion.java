@@ -37,6 +37,7 @@ public class OItemPotion extends OItem {
         return var2;
     }
 
+    @Override
     public OItemStack b(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         --var1.a;
         if (!var2.F) {
@@ -59,14 +60,17 @@ public class OItemPotion extends OItem {
         }
     }
 
+    @Override
     public int c(OItemStack var1) {
         return 32;
     }
 
+    @Override
     public OEnumAction d(OItemStack var1) {
         return OEnumAction.c;
     }
 
+    @Override
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         if (c(var1.h())) {
             --var1.a;
@@ -82,6 +86,7 @@ public class OItemPotion extends OItem {
         }
     }
 
+    @Override
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
         return false;
     }

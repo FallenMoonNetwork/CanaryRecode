@@ -40,6 +40,7 @@ public class OPacket21PickupSpawn extends OPacket {
         this.g = (byte) ((int) (var1.br * 128.0D));
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.h = var1.readShort();
@@ -53,6 +54,7 @@ public class OPacket21PickupSpawn extends OPacket {
         this.g = var1.readByte();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeShort(this.h);
@@ -66,10 +68,12 @@ public class OPacket21PickupSpawn extends OPacket {
         var1.writeByte(this.g);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 24;
     }

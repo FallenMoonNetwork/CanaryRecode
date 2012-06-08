@@ -28,6 +28,7 @@ public class OTileEntityMobSpawner extends OTileEntity {
         return this.k.a(this.l + 0.5D, this.m + 0.5D, this.n + 0.5D, 16.0D) != null;
     }
 
+    @Override
     public void q_() {
         this.c = this.b;
         if (this.c()) {
@@ -88,18 +89,21 @@ public class OTileEntityMobSpawner extends OTileEntity {
         this.a = 200 + this.k.r.nextInt(600);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.d = var1.j("EntityId");
         this.a = var1.e("Delay");
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("EntityId", this.d);
         var1.a("Delay", (short) this.a);
     }
 
+    @Override
     public OPacket d() {
         int var1 = OEntityList.a(this.d);
         return new OPacket132TileEntityData(this.l, this.m, this.n, 1, var1);

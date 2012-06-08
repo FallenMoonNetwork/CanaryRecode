@@ -60,10 +60,12 @@ public class OSaveFormatOld implements OISaveFormat {
         return new OSaveHandler(this.a, var1, var2);
     }
 
+    @Override
     public boolean a(String var1) {
         return false;
     }
 
+    @Override
     public boolean a(String var1, OIProgressUpdate var2) {
         return false;
     }

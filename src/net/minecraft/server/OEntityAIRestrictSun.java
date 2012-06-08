@@ -12,14 +12,17 @@ public class OEntityAIRestrictSun extends OEntityAIBase {
         this.a = var1;
     }
 
+    @Override
     public boolean a() {
         return this.a.bi.e();
     }
 
+    @Override
     public void c() {
         this.a.al().d(true);
     }
 
+    @Override
     public void d() {
         this.a.al().d(false);
     }

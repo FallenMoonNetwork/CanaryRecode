@@ -29,10 +29,12 @@ public class OPacket9Respawn extends OPacket {
         this.e = var3;
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = var1.readByte();
@@ -46,6 +48,7 @@ public class OPacket9Respawn extends OPacket {
 
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.writeByte(this.b);
@@ -54,6 +57,7 @@ public class OPacket9Respawn extends OPacket {
         a(this.e.a(), var1);
     }
 
+    @Override
     public int a() {
         return 8 + this.e.a().length();
     }

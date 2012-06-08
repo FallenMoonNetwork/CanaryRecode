@@ -19,6 +19,7 @@ public class OGenLayerBiome extends OGenLayer {
 
     }
 
+    @Override
     public int[] a(int var1, int var2, int var3, int var4) {
         int[] var5 = this.a.a(var1, var2, var3, var4);
         int[] var6 = OIntCache.a(var3 * var4);

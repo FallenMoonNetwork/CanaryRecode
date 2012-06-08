@@ -38,10 +38,12 @@ public class OContainerChest extends OContainer {
 
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         return this.a.a(var1);
     }
 
+    @Override
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);
@@ -66,6 +68,7 @@ public class OContainerChest extends OContainer {
         return var2;
     }
 
+    @Override
     public void a(OEntityPlayer var1) {
         super.a(var1);
         this.a.g();

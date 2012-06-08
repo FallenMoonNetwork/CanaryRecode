@@ -22,26 +22,32 @@ public class ONBTTagString extends ONBTBase {
         }
     }
 
+    @Override
     void a(DataOutput var1) throws IOException {
         var1.writeUTF(this.a);
     }
 
+    @Override
     void a(DataInput var1) throws IOException {
         this.a = var1.readUTF();
     }
 
+    @Override
     public byte a() {
         return (byte) 8;
     }
 
+    @Override
     public String toString() {
         return "" + this.a;
     }
 
+    @Override
     public ONBTBase b() {
         return new ONBTTagString(this.c(), this.a);
     }
 
+    @Override
     public boolean equals(Object var1) {
         if (!super.equals(var1)) {
             return false;
@@ -51,6 +57,7 @@ public class ONBTTagString extends ONBTBase {
         }
     }
 
+    @Override
     public int hashCode() {
         return super.hashCode() ^ this.a.hashCode();
     }

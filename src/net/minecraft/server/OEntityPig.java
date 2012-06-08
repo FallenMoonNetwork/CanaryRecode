@@ -49,41 +49,50 @@ public class OEntityPig extends OEntityAnimal {
         return canaryPig;
     }
 
+    @Override
     public boolean c_() {
         return true;
     }
 
+    @Override
     public int d() {
         return 10;
     }
 
+    @Override
     protected void b() {
         super.b();
         this.bY.a(16, Byte.valueOf((byte) 0));
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         super.b(var1);
         var1.a("Saddle", this.A());
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         this.a(var1.o("Saddle"));
     }
 
+    @Override
     protected String i() {
         return "mob.pig";
     }
 
+    @Override
     protected String j() {
         return "mob.pig";
     }
 
+    @Override
     protected String k() {
         return "mob.pigdeath";
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         if (super.b(var1)) {
             return true;
@@ -95,6 +104,7 @@ public class OEntityPig extends OEntityAnimal {
         }
     }
 
+    @Override
     protected int f() {
         return this.B_() ? OItem.aq.bP : OItem.ap.bP;
     }
@@ -112,6 +122,7 @@ public class OEntityPig extends OEntityAnimal {
 
     }
 
+    @Override
     public void a(OEntityLightningBolt var1) {
         if (!this.bi.F) {
             OEntityPigZombie var2 = new OEntityPigZombie(this.bi);
@@ -121,6 +132,7 @@ public class OEntityPig extends OEntityAnimal {
         }
     }
 
+    @Override
     protected void a(float var1) {
         super.a(var1);
         if (var1 > 5.0F && this.bg instanceof OEntityPlayer) {
@@ -129,6 +141,7 @@ public class OEntityPig extends OEntityAnimal {
 
     }
 
+    @Override
     public OEntityAnimal a(OEntityAnimal var1) {
         return new OEntityPig(this.bi);
     }

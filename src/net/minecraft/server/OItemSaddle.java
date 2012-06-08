@@ -12,6 +12,7 @@ public class OItemSaddle extends OItem {
         this.bQ = 1;
     }
 
+    @Override
     public void a(OItemStack var1, OEntityLiving var2) {
         if (var2 instanceof OEntityPig) {
             OEntityPig var3 = (OEntityPig) var2;
@@ -23,6 +24,7 @@ public class OItemSaddle extends OItem {
 
     }
 
+    @Override
     public boolean a(OItemStack var1, OEntityLiving var2, OEntityLiving var3) {
         this.a(var1, var2);
         return true;

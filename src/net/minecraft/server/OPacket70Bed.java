@@ -23,20 +23,24 @@ public class OPacket70Bed extends OPacket {
         this.c = var2;
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.b = var1.readByte();
         this.c = var1.readByte();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeByte(this.b);
         var1.writeByte(this.c);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 2;
     }

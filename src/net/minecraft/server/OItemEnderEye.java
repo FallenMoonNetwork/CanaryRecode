@@ -18,6 +18,7 @@ public class OItemEnderEye extends OItem {
         super(var1);
     }
 
+    @Override
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
         int var8 = var3.a(var4, var5, var6);
         int var9 = var3.c(var4, var5, var6);
@@ -121,6 +122,7 @@ public class OItemEnderEye extends OItem {
         }
     }
 
+    @Override
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         OMovingObjectPosition var4 = this.a(var2, var3, false);
         if (var4 != null && var4.a == OEnumMovingObjectType.a) {

@@ -10,6 +10,7 @@ public class OGenLayerVoronoiZoom extends OGenLayer {
         super.a = var3;
     }
 
+    @Override
     public int[] a(int var1, int var2, int var3, int var4) {
         var1 -= 2;
         var2 -= 2;

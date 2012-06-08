@@ -15,10 +15,12 @@ public class OBlockTNT extends OBlock {
         super(var1, var2, OMaterial.s);
     }
 
+    @Override
     public int a(int var1) {
         return var1 == 0 ? this.bN + 2 : (var1 == 1 ? this.bN + 1 : this.bN);
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         super.a(var1, var2, var3, var4);
         if (var1.x(var2, var3, var4)) {
@@ -28,6 +30,7 @@ public class OBlockTNT extends OBlock {
 
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (var5 > 0 && OBlock.m[var5].e() && var1.x(var2, var3, var4)) {
             this.c(var1, var2, var3, var4, 1);
@@ -36,10 +39,12 @@ public class OBlockTNT extends OBlock {
 
     }
 
+    @Override
     public int a(Random var1) {
         return 0;
     }
 
+    @Override
     public void a_(OWorld var1, int var2, int var3, int var4) {
         if (!var1.F) {
             OEntityTNTPrimed var5 = new OEntityTNTPrimed(var1, (var2 + 0.5F), (var3 + 0.5F), (var4 + 0.5F));
@@ -48,6 +53,7 @@ public class OBlockTNT extends OBlock {
         }
     }
 
+    @Override
     public void c(OWorld var1, int var2, int var3, int var4, int var5) {
         if (!var1.F) {
             if ((var5 & 1) == 0) {
@@ -61,10 +67,12 @@ public class OBlockTNT extends OBlock {
         }
     }
 
+    @Override
     public void b(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         super.b(var1, var2, var3, var4, var5);
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (var5.U() != null && var5.U().c == OItem.h.bP) {
             this.c(var1, var2, var3, var4, 1);
@@ -75,6 +83,7 @@ public class OBlockTNT extends OBlock {
         }
     }
 
+    @Override
     protected OItemStack a_(int var1) {
         return null;
     }

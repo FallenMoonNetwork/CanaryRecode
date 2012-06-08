@@ -31,6 +31,7 @@ public class OPacket53BlockChange extends OPacket {
         this.e = var4.c(var1, var2, var3);
     }
 
+    @Override
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readInt();
         this.b = var1.read();
@@ -39,6 +40,7 @@ public class OPacket53BlockChange extends OPacket {
         this.e = var1.read();
     }
 
+    @Override
     public void a(DataOutputStream var1) throws IOException {
         var1.writeInt(this.a);
         var1.write(this.b);
@@ -47,10 +49,12 @@ public class OPacket53BlockChange extends OPacket {
         var1.write(this.e);
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 11;
     }

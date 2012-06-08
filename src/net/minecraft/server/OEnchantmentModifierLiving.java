@@ -14,6 +14,7 @@ final class OEnchantmentModifierLiving implements OIEnchantmentModifier {
         super();
     }
 
+    @Override
     public void a(OEnchantment var1, int var2) {
         this.a += var1.a(var2, this.b);
     }

@@ -12,6 +12,7 @@ public class OBlockLeavesBase extends OBlock {
         this.b = var4;
     }
 
+    @Override
     public boolean a() {
         return false;
     }

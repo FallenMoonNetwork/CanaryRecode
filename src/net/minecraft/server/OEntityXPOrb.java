@@ -29,6 +29,7 @@ public class OEntityXPOrb extends OEntity {
         this.e = var8;
     }
 
+    @Override
     protected boolean g_() {
         return false;
     }
@@ -39,9 +40,11 @@ public class OEntityXPOrb extends OEntity {
         this.bF = this.bH / 2.0F;
     }
 
+    @Override
     protected void b() {
     }
 
+    @Override
     public void F_() {
         super.F_();
         if (this.c > 0) {
@@ -101,14 +104,17 @@ public class OEntityXPOrb extends OEntity {
 
     }
 
+    @Override
     public boolean h_() {
         return this.bi.a(this.bw, OMaterial.g, this);
     }
 
+    @Override
     protected void a(int var1) {
         this.a(ODamageSource.b, var1);
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         this.aW();
         this.d -= var2;
@@ -119,18 +125,21 @@ public class OEntityXPOrb extends OEntity {
         return false;
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
         var1.a("Health", (short) ((byte) this.d));
         var1.a("Age", (short) this.b);
         var1.a("Value", (short) this.e);
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
         this.d = var1.e("Health") & 255;
         this.b = var1.e("Age");
         this.e = var1.e("Value");
     }
 
+    @Override
     public void a_(OEntityPlayer var1) {
         if (!this.bi.F) {
             if (this.c == 0 && var1.x == 0) {
@@ -152,6 +161,7 @@ public class OEntityXPOrb extends OEntity {
         return var0 >= 2477 ? 2477 : (var0 >= 1237 ? 1237 : (var0 >= 617 ? 617 : (var0 >= 307 ? 307 : (var0 >= 149 ? 149 : (var0 >= 73 ? 73 : (var0 >= 37 ? 37 : (var0 >= 17 ? 17 : (var0 >= 7 ? 7 : (var0 >= 3 ? 3 : 1)))))))));
     }
 
+    @Override
     public boolean k_() {
         return false;
     }

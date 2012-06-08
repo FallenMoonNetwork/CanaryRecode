@@ -26,10 +26,12 @@ public class OBlockFurnace extends OBlockContainer {
         this.bN = 45;
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return OBlock.aB.bO;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
         super.a(var1, var2, var3, var4);
         this.g(var1, var2, var3, var4);
@@ -62,10 +64,12 @@ public class OBlockFurnace extends OBlockContainer {
         }
     }
 
+    @Override
     public int a(int var1) {
         return var1 == 1 ? this.bN + 17 : (var1 == 0 ? this.bN + 17 : (var1 == 3 ? this.bN - 1 : this.bN));
     }
 
+    @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (var1.F) {
             return true;
@@ -98,10 +102,12 @@ public class OBlockFurnace extends OBlockContainer {
 
     }
 
+    @Override
     public OTileEntity a_() {
         return new OTileEntityFurnace();
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = OMathHelper.b((var5.bs * 4.0F / 360.0F) + 0.5D) & 3;
         if (var6 == 0) {
@@ -122,6 +128,7 @@ public class OBlockFurnace extends OBlockContainer {
 
     }
 
+    @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         if (!c) {
             OTileEntityFurnace var5 = (OTileEntityFurnace) var1.b(var2, var3, var4);

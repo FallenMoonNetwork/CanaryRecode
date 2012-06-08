@@ -14,6 +14,7 @@ public class OStatBasic extends OStatBase {
         super(var1, var2);
     }
 
+    @Override
     public OStatBase d() {
         super.d();
         OStatList.c.add(this);

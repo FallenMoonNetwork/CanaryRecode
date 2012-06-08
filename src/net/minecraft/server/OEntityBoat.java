@@ -28,24 +28,29 @@ public class OEntityBoat extends OEntity {
         this.bF = this.bH / 2.0F;
     }
 
+    @Override
     protected boolean g_() {
         return false;
     }
 
+    @Override
     protected void b() {
         this.bY.a(17, new Integer(0));
         this.bY.a(18, new Integer(1));
         this.bY.a(19, new Integer(0));
     }
 
+    @Override
     public OAxisAlignedBB b_(OEntity var1) {
         return var1.bw;
     }
 
+    @Override
     public OAxisAlignedBB h() {
         return this.bw;
     }
 
+    @Override
     public boolean e_() {
         return true;
     }
@@ -61,10 +66,12 @@ public class OEntityBoat extends OEntity {
         this.bl = var6;
     }
 
+    @Override
     public double x_() {
         return this.bH * 0.0D - 0.30000001192092896D;
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         if (!this.bi.F && !this.bE) {
             this.d(-this.m());
@@ -94,10 +101,12 @@ public class OEntityBoat extends OEntity {
         }
     }
 
+    @Override
     public boolean o_() {
         return !this.bE;
     }
 
+    @Override
     public void F_() {
         super.F_();
         if (this.l() > 0) {
@@ -298,6 +307,7 @@ public class OEntityBoat extends OEntity {
         }
     }
 
+    @Override
     public void i_() {
         if (this.bg != null) {
             double var1 = Math.cos(this.bs * 3.141592653589793D / 180.0D) * 0.4D;
@@ -306,12 +316,15 @@ public class OEntityBoat extends OEntity {
         }
     }
 
+    @Override
     protected void b(ONBTTagCompound var1) {
     }
 
+    @Override
     protected void a(ONBTTagCompound var1) {
     }
 
+    @Override
     public boolean b(OEntityPlayer var1) {
         if (this.bg != null && this.bg instanceof OEntityPlayer && this.bg != var1) {
             return true;

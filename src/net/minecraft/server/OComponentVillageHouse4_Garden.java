@@ -20,6 +20,7 @@ public class OComponentVillageHouse4_Garden extends OComponentVillage {
         this.b = var2.nextBoolean();
     }
 
+    @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
     }
 
@@ -28,6 +29,7 @@ public class OComponentVillageHouse4_Garden extends OComponentVillage {
         return OStructureComponent.a(var0, var7) != null ? null : new OComponentVillageHouse4_Garden(var6, var1, var7, var5);
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, OStructureBoundingBox var3) {
         if (this.a < 0) {
             this.a = this.b(var1, var3);

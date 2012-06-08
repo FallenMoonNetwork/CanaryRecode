@@ -101,10 +101,12 @@ public class OEntityTrackerEntry {
         return canaryEntry;
     }
 
+    @Override
     public boolean equals(Object var1) {
         return var1 instanceof OEntityTrackerEntry ? ((OEntityTrackerEntry) var1).a.bd == this.a.bd : false;
     }
 
+    @Override
     public int hashCode() {
         return this.a.bd;
     }

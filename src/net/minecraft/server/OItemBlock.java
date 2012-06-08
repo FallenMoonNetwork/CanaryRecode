@@ -26,6 +26,7 @@ public class OItemBlock extends OItem {
         return this.a;
     }
 
+    @Override
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
         int var8 = var3.a(var4, var5, var6);
         if (var8 == OBlock.aS.bO) {
@@ -86,10 +87,12 @@ public class OItemBlock extends OItem {
         }
     }
 
+    @Override
     public String a(OItemStack var1) {
         return OBlock.m[this.a].q();
     }
 
+    @Override
     public String b() {
         return OBlock.m[this.a].q();
     }

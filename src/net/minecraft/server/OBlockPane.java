@@ -19,22 +19,27 @@ public class OBlockPane extends OBlock {
         this.b = var5;
     }
 
+    @Override
     public int a(int var1, Random var2, int var3) {
         return !this.b ? 0 : super.a(var1, var2, var3);
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return false;
     }
 
+    @Override
     public int c() {
         return 18;
     }
 
+    @Override
     public void a(OWorld var1, int var2, int var3, int var4, OAxisAlignedBB var5, ArrayList var6) {
         boolean var7 = this.d(var1.a(var2, var3, var4 - 1));
         boolean var8 = this.d(var1.a(var2, var3, var4 + 1));
@@ -68,10 +73,12 @@ public class OBlockPane extends OBlock {
 
     }
 
+    @Override
     public void f() {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
+    @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         float var5 = 0.4375F;
         float var6 = 0.5625F;

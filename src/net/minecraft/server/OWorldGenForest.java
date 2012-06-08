@@ -11,6 +11,7 @@ public class OWorldGenForest extends OWorldGenerator {
         super(var1);
     }
 
+    @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         int var6 = var2.nextInt(3) + 5;
         boolean var7 = true;

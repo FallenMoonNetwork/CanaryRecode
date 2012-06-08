@@ -17,10 +17,12 @@ public class OEntityAIHurtByTarget extends OEntityAITarget {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         return this.a(this.c.ao(), true);
     }
 
+    @Override
     public void c() {
         this.c.b(this.c.ao());
         if (this.a) {

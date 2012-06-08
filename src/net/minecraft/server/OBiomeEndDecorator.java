@@ -16,6 +16,7 @@ public class OBiomeEndDecorator extends OBiomeDecorator {
         this.L = new OWorldGenSpikes(OBlock.bJ.bO);
     }
 
+    @Override
     protected void a() {
         this.b();
         if (this.b.nextInt(5) == 0) {

@@ -9,6 +9,7 @@ public class OBlockWood extends OBlock {
         super(var1, 4, OMaterial.d);
     }
 
+    @Override
     public int a(int var1, int var2) {
         switch (var2) {
         case 1:
@@ -22,6 +23,7 @@ public class OBlockWood extends OBlock {
         }
     }
 
+    @Override
     protected int c(int var1) {
         return var1;
     }

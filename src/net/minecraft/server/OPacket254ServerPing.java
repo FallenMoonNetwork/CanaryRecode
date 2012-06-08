@@ -11,16 +11,20 @@ public class OPacket254ServerPing extends OPacket {
         super();
     }
 
+    @Override
     public void a(DataInputStream var1) {
     }
 
+    @Override
     public void a(DataOutputStream var1) {
     }
 
+    @Override
     public void a(ONetHandler var1) {
         var1.a(this);
     }
 
+    @Override
     public int a() {
         return 0;
     }

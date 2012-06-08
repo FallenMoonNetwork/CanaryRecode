@@ -48,10 +48,12 @@ public class OChunkProviderFlat implements OIChunkProvider {
 
     }
 
+    @Override
     public OChunk c(int var1, int var2) {
         return this.b(var1, var2);
     }
 
+    @Override
     public OChunk b(int var1, int var2) {
         byte[] var3 = new byte['\u8000'];
         this.a(var3);
@@ -71,10 +73,12 @@ public class OChunkProviderFlat implements OIChunkProvider {
         return var4;
     }
 
+    @Override
     public boolean a(int var1, int var2) {
         return true;
     }
 
+    @Override
     public void a(OIChunkProvider var1, int var2, int var3) {
         this.b.setSeed(this.a.n());
         long var4 = this.b.nextLong() / 2L * 2L + 1L;
@@ -86,23 +90,28 @@ public class OChunkProviderFlat implements OIChunkProvider {
 
     }
 
+    @Override
     public boolean a(boolean var1, OIProgressUpdate var2) {
         return true;
     }
 
+    @Override
     public boolean a() {
         return false;
     }
 
+    @Override
     public boolean b() {
         return true;
     }
 
+    @Override
     public List a(OEnumCreatureType var1, int var2, int var3, int var4) {
         OBiomeGenBase var5 = this.a.a(var2, var4);
         return var5 == null ? null : var5.a(var1);
     }
 
+    @Override
     public OChunkPosition a(OWorld var1, String var2, int var3, int var4, int var5) {
         return null;
     }

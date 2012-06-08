@@ -68,13 +68,15 @@ private final String k;
 
    // $FF: synthetic method
    // $FF: bridge method
-   public OStatBase d() {
+   @Override
+public OStatBase d() {
       return this.c();
    }
 
    // $FF: synthetic method
    // $FF: bridge method
-   public OStatBase e() {
+   @Override
+public OStatBase e() {
       return this.a();
    }
 }

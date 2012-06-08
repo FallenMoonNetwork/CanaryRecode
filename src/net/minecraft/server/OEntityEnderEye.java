@@ -23,6 +23,7 @@ public class OEntityEnderEye extends OEntity {
         this.b(0.25F, 0.25F);
     }
 
+    @Override
     protected void b() {
     }
 
@@ -52,6 +53,7 @@ public class OEntityEnderEye extends OEntity {
         this.f = this.bS.nextInt(5) > 0;
     }
 
+    @Override
     public void F_() {
         this.bL = this.bm;
         this.bM = this.bn;
@@ -125,19 +127,24 @@ public class OEntityEnderEye extends OEntity {
 
     }
 
+    @Override
     public void b(ONBTTagCompound var1) {
     }
 
+    @Override
     public void a(ONBTTagCompound var1) {
     }
 
+    @Override
     public void a_(OEntityPlayer var1) {
     }
 
+    @Override
     public float b(float var1) {
         return 1.0F;
     }
 
+    @Override
     public boolean k_() {
         return false;
     }

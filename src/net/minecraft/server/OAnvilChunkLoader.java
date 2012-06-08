@@ -42,6 +42,7 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
         this.d = var1;
     }
 
+    @Override
     public OChunk a(OWorld var1, int var2, int var3) throws IOException {
         ONBTTagCompound var4 = null;
         OChunkCoordIntPair var5 = new OChunkCoordIntPair(var2, var3);
@@ -89,6 +90,7 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
         }
     }
 
+    @Override
     public void a(OWorld var1, OChunk var2) {
         var1.m();
 
@@ -121,6 +123,7 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
         }
     }
 
+    @Override
     public boolean c() {
         OAnvilChunkLoaderPending var1 = null;
         synchronized (this.c) {
@@ -149,12 +152,15 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
         var2.close();
     }
 
+    @Override
     public void b(OWorld var1, OChunk var2) {
     }
 
+    @Override
     public void a() {
     }
 
+    @Override
     public void b() {
     }
 

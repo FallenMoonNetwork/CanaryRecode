@@ -17,6 +17,7 @@ public class OItemBow extends OItem {
         this.f(384);
     }
 
+    @Override
     public void a(OItemStack var1, OWorld var2, OEntityPlayer var3, int var4) {
         boolean var5 = var3.L.d || OEnchantmentHelper.a(OEnchantment.w.x, var1) > 0;
         if (var5 || var3.k.d(OItem.k.bP)) {
@@ -65,18 +66,22 @@ public class OItemBow extends OItem {
 
     }
 
+    @Override
     public OItemStack b(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         return var1;
     }
 
+    @Override
     public int c(OItemStack var1) {
         return 72000;
     }
 
+    @Override
     public OEnumAction d(OItemStack var1) {
         return OEnumAction.e;
     }
 
+    @Override
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         if (var3.L.d || var3.k.d(OItem.k.bP)) {
             var3.a(var1, this.c(var1));
@@ -85,6 +90,7 @@ public class OItemBow extends OItem {
         return var1;
     }
 
+    @Override
     public int c() {
         return 1;
     }

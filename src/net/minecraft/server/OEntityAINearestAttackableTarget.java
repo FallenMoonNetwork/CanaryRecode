@@ -29,6 +29,7 @@ public class OEntityAINearestAttackableTarget extends OEntityAITarget {
         this.a(1);
     }
 
+    @Override
     public boolean a() {
         if (this.f > 0 && this.c.an().nextInt(this.f) != 0) {
             return false;
@@ -58,6 +59,7 @@ public class OEntityAINearestAttackableTarget extends OEntityAITarget {
         }
     }
 
+    @Override
     public void c() {
         this.c.b(this.a);
         super.c();

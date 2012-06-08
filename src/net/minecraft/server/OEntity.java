@@ -157,10 +157,12 @@ public abstract class OEntity {
         return this.bY;
     }
 
+    @Override
     public boolean equals(Object var1) {
         return var1 instanceof OEntity ? ((OEntity) var1).bd == this.bd : false;
     }
 
+    @Override
     public int hashCode() {
         return this.bd;
     }

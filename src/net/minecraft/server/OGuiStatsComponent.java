@@ -63,6 +63,7 @@ public class OGuiStatsComponent extends JComponent {
         return (double) var2 / (double) var1.length;
     }
 
+    @Override
     public void paint(Graphics var1) {
         var1.setColor(new Color(16777215));
         var1.fillRect(0, 0, 356, 246);

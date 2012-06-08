@@ -24,6 +24,7 @@ public class OEntityAIVillagerMate extends OEntityAIBase {
         this.a(3);
     }
 
+    @Override
     public boolean a() {
         if (this.b.K() != 0) {
             return false;
@@ -47,21 +48,25 @@ public class OEntityAIVillagerMate extends OEntityAIBase {
         }
     }
 
+    @Override
     public void c() {
         this.e = 300;
         this.b.a(true);
     }
 
+    @Override
     public void d() {
         this.a = null;
         this.c = null;
         this.b.a(false);
     }
 
+    @Override
     public boolean b() {
         return this.e >= 0 && this.f() && this.b.K() == 0;
     }
 
+    @Override
     public void e() {
         --this.e;
         this.b.ai().a(this.c, 10.0F, 30.0F);

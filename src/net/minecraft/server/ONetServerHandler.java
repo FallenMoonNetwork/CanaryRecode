@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import net.canarymod.Canary;
+import net.canarymod.Colors;
 import net.canarymod.TextFormat;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
@@ -124,7 +125,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             this.e.I();
             this.b((new OPacket255KickDisconnect(var1)));
             this.b.d();
-            ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), var1, TextFormat.Yellow + getUser().getName() + " left the game."));
+            ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), var1, Colors.Yellow + getUser().getName() + " left the game."));
             if (!hook.isHidden()) {
                 this.d.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
             }
@@ -133,6 +134,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         }
     }
 
+    @Override
     public void a(OPacket10Flying var1) {
         OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
         this.h = true;
@@ -284,6 +286,8 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
                 this.e.b(var7, var9, var11, var17, var18);
                 boolean var30 = var2.a(this.e, this.e.bw.b().e(var25, var25, var25)).size() == 0;
+                // 30 // true if not collides AFTER
+                // 26 // true if not collides BEFORE
                 if (var26 && (var29 || !var30) && !this.e.Z()) {
                     this.a(this.o, this.p, this.q, var17, var18);
                     return;
@@ -320,6 +324,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         this.e.a.b((new OPacket13PlayerLookMove(var1, var3 + 1.6200000047683716D, var3, var5, var7, var8, false)));
     }
 
+    @Override
     public void a(OPacket14BlockDig var1) {
         OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
         if (var1.e == 4) {
@@ -386,6 +391,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         }
     }
 
+    @Override
     public void a(OPacket15Place var1) {
         OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
         OItemStack var3 = this.e.k.d();
@@ -468,9 +474,10 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         var2.H = false;
     }
 
+    @Override
     public void a(String var1, Object[] var2) {
         a.info(this.e.v + " lost connection: " + var1);
-        ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), var1, TextFormat.Yellow + getUser().getName() + " left the game."));
+        ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), var1, Colors.Yellow + getUser().getName() + " left the game."));
         if (!hook.isHidden()) {
             this.d.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
         }
@@ -478,6 +485,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         this.c = true;
     }
 
+    @Override
     public void a(OPacket var1) {
         a.warning(this.getClass() + " wasn\'t prepared to deal with a " + var1.getClass());
         this.a("Protocol error, unexpected packet");
@@ -487,6 +495,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         this.b.a(var1);
     }
 
+    @Override
     public void a(OPacket16BlockItemSwitch var1) {
         if (var1.a >= 0 && var1.a < OInventoryPlayer.h()) {
             this.e.k.c = var1.a;
@@ -498,6 +507,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     /**
      * Makes player chat
      */
+    @Override
     public void playerChat(OPacket3Chat var1) {
         //Re-route to Canary chat
         player.chat(var1.a);
@@ -554,6 +564,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 //
 //    }
 
+    @Override
     public void a(OPacket18Animation var1) {
         if (var1.b == 1) {
             this.e.C_();
@@ -561,6 +572,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     }
 
+    @Override
     public void a(OPacket19EntityAction var1) {
         if (var1.b == 1) {
             this.e.g(true);
@@ -577,6 +589,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     }
 
+    @Override
     public void a(OPacket255KickDisconnect var1) {
         this.b.a("disconnect.quitting", new Object[0]);
     }
@@ -585,14 +598,17 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         return this.b.e();
     }
 
+    @Override
     public void b(String var1) {
         this.b((new OPacket3Chat("\u00a77" + var1)));
     }
 
+    @Override
     public String d() {
         return this.e.v;
     }
 
+    @Override
     public void a(OPacket7UseEntity var1) {
         OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
         OEntity var3 = var2.a(var1.b);
@@ -614,6 +630,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     }
 
+    @Override
     public void a(OPacket9Respawn var1) {
         if (this.e.j) {
             this.e = this.d.h.a(this.e, 0, true);
@@ -627,10 +644,12 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     }
 
+    @Override
     public void a(OPacket101CloseWindow var1) {
         this.e.H();
     }
 
+    @Override
     public void a(OPacket102WindowClick var1) {
         if (this.e.m.f == var1.a && this.e.m.c(this.e)) {
             OItemStack var2 = this.e.m.a(var1.b, var1.c, var1.f, this.e);
@@ -656,6 +675,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     }
 
+    @Override
     public void a(OPacket108EnchantItem var1) {
         if (this.e.m.f == var1.a && this.e.m.c(this.e)) {
             this.e.m.a(this.e, var1.b);
@@ -664,6 +684,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     }
 
+    @Override
     public void a(OPacket107CreativeSetSlot var1) {
         if (this.e.c.b()) {
             boolean var2 = var1.a < 0;
@@ -690,6 +711,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     }
 
+    @Override
     public void a(OPacket106Transaction var1) {
         Short var2 = (Short) this.s.a(this.e.m.f);
         if (var2 != null && var1.b == var2.shortValue() && this.e.m.f == var1.a && !this.e.m.c(this.e)) {
@@ -698,6 +720,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     }
 
+    @Override
     public void a(OPacket130UpdateSign var1) {
         OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
         if (var2.i(var1.a, var1.b, var1.c)) {
@@ -746,6 +769,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     }
 
+    @Override
     public void a(OPacket0KeepAlive var1) {
         if (var1.a == this.i) {
             int var2 = (int) (System.nanoTime() / 1000000L - this.j);
@@ -754,10 +778,12 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     }
 
+    @Override
     public boolean c() {
         return true;
     }
 
+    @Override
     public void a(OPacket202PlayerAbilities var1) {
         this.e.L.b = var1.b && this.e.L.c;
     }

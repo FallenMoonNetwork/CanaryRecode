@@ -20,6 +20,7 @@ public class OItemBucket extends OItem {
         this.a = var2;
     }
 
+    @Override
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         float var4 = 1.0F;
         double var5 = var3.bj + (var3.bm - var3.bj) * var4;

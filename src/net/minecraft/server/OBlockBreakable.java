@@ -12,6 +12,7 @@ public class OBlockBreakable extends OBlock {
         this.a = var4;
     }
 
+    @Override
     public boolean a() {
         return false;
     }

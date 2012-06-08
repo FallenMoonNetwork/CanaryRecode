@@ -21,14 +21,17 @@ public class OEntityEnderCrystal extends OEntity {
         this.a = this.bS.nextInt(100000);
     }
 
+    @Override
     protected boolean g_() {
         return false;
     }
 
+    @Override
     protected void b() {
         this.bY.a(8, Integer.valueOf(this.b));
     }
 
+    @Override
     public void F_() {
         this.bj = this.bm;
         this.bk = this.bn;
@@ -44,16 +47,20 @@ public class OEntityEnderCrystal extends OEntity {
 
     }
 
+    @Override
     protected void b(ONBTTagCompound var1) {
     }
 
+    @Override
     protected void a(ONBTTagCompound var1) {
     }
 
+    @Override
     public boolean o_() {
         return true;
     }
 
+    @Override
     public boolean a(ODamageSource var1, int var2) {
         if (!this.bE && !this.bi.F) {
             this.b = 0;

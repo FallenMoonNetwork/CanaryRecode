@@ -15,6 +15,7 @@ public class OBiomeGenForest extends OBiomeGenBase {
         this.I.B = 2;
     }
 
+    @Override
     public OWorldGenerator a(Random var1) {
         return (var1.nextInt(5) == 0 ? this.P : (var1.nextInt(10) == 0 ? this.O : this.N));
     }

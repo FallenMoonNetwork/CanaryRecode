@@ -24,6 +24,7 @@ public class OEntityAINearestAttackableTargetSorter implements Comparator {
 
     // $FF: synthetic method
     // $FF: bridge method
+    @Override
     public int compare(Object var1, Object var2) {
         return this.a((OEntity) var1, (OEntity) var2);
     }

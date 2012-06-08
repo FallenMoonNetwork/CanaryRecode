@@ -52,6 +52,7 @@ public class OWorldServer extends OWorld {
 //        this.b();
     }
 
+    @Override
     public void a(OEntity var1, boolean var2) {
         if (!this.J.o && (var1 instanceof OEntityAnimal || var1 instanceof OEntityWaterMob)) {
             var1.X();
@@ -71,6 +72,7 @@ public class OWorldServer extends OWorld {
         super.a(var1, var2);
     }
 
+    @Override
     protected OIChunkProvider b() {
         OIChunkLoader var1 = this.w.a(this.t);
         this.G = new OChunkProviderServer(this, var1, this.t.b());
@@ -90,6 +92,7 @@ public class OWorldServer extends OWorld {
         return var7;
     }
 
+    @Override
     public boolean a(OEntityPlayer var1, int var2, int var3, int var4) {
         int var5 = OMathHelper.a(var2 - this.worldInfo.c());
         int var6 = OMathHelper.a(var4 - this.worldInfo.e());
@@ -100,6 +103,7 @@ public class OWorldServer extends OWorld {
         return var6 > 16 || this.J.h.h(var1.v);
     }
 
+    @Override
     protected void c() {
         if (this.K == null) {
             this.K = new OIntHashMap();
@@ -108,6 +112,7 @@ public class OWorldServer extends OWorld {
         super.c();
     }
 
+    @Override
     protected void c(OEntity var1) {
         super.c(var1);
         this.K.a(var1.bd, var1);
@@ -120,6 +125,7 @@ public class OWorldServer extends OWorld {
 
     }
 
+    @Override
     protected void d(OEntity var1) {
         super.d(var1);
         this.K.d(var1.bd);
@@ -136,6 +142,7 @@ public class OWorldServer extends OWorld {
         return (OEntity) this.K.a(var1);
     }
 
+    @Override
     public boolean a(OEntity var1) {
         if (super.a(var1)) {
             this.J.h.a(var1.bm, var1.bn, var1.bo, 512.0D, this.t.g, new OPacket71Weather(var1));
@@ -145,6 +152,7 @@ public class OWorldServer extends OWorld {
         }
     }
 
+    @Override
     public void a(OEntity var1, byte var2) {
         OPacket38EntityStatus var3 = new OPacket38EntityStatus(var1.bd, var2);
         //CanaryMod use the real entity tracker
@@ -152,6 +160,7 @@ public class OWorldServer extends OWorld {
 //        this.J.b(this.t.g).b(var1, var3);
     }
 
+    @Override
     public OExplosion a(OEntity var1, double var2, double var4, double var6, float var8, boolean var9) {
         OExplosion var10 = new OExplosion(this, var1, var2, var4, var6, var8);
         var10.a = var9;
@@ -161,6 +170,7 @@ public class OWorldServer extends OWorld {
         return var10;
     }
 
+    @Override
     public void e(int var1, int var2, int var3, int var4, int var5) {
         super.e(var1, var2, var3, var4, var5);
         this.J.h.a(var1, var2, var3, 64.0D, this.t.g, new OPacket54PlayNoteBlock(var1, var2, var3, var4, var5));
@@ -170,6 +180,7 @@ public class OWorldServer extends OWorld {
         this.w.e();
     }
 
+    @Override
     protected void i() {
         boolean var1 = this.x();
         super.i();

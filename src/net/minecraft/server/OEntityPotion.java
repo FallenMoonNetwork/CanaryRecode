@@ -30,14 +30,17 @@ public class OEntityPotion extends OEntityThrowable {
         this.d = var8;
     }
 
+    @Override
     protected float e() {
         return 0.05F;
     }
 
+    @Override
     protected float c() {
         return 0.5F;
     }
 
+    @Override
     protected float d() {
         return -20.0F;
     }
@@ -46,6 +49,7 @@ public class OEntityPotion extends OEntityThrowable {
         return this.d;
     }
 
+    @Override
     protected void a(OMovingObjectPosition var1) {
         if (!this.bi.F) {
             List var2 = OItem.br.b(this.d);

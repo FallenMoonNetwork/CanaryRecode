@@ -17,6 +17,7 @@ public class OBiomeGenTaiga extends OBiomeGenBase {
         this.I.B = 1;
     }
 
+    @Override
     public OWorldGenerator a(Random var1) {
         return (var1.nextInt(3) == 0 ? new OWorldGenTaiga1() : new OWorldGenTaiga2(false));
     }
