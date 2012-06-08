@@ -315,7 +315,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                         var16 = -1;
                     }
 
-                    this.b.h.a(this, var16);
+                    this.b.h.switchDimension(this, var16, true);
                     this.ci = -1;
                     this.cf = -1;
                     this.cg = -1;
@@ -366,7 +366,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                 this.a.a(var2.a, var2.b, var2.c, 0.0F, 0.0F);
             }
 
-            this.b.h.a(this, 1);
+            this.b.h.switchDimension(this, 1, true);
             this.ci = -1;
             this.cf = -1;
             this.cg = -1;

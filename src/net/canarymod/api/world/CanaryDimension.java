@@ -49,6 +49,7 @@ import net.minecraft.server.OEntityZombie;
 import net.minecraft.server.OEnumSkyBlock;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+import net.minecraft.server.OWorldInfo;
 import net.minecraft.server.OWorldServer;
 
 /**
@@ -479,5 +480,26 @@ public class CanaryDimension implements Dimension {
     public void addPlayerToWorld(Player player) {
         world.b.add(((CanaryPlayer) player).getHandle());
         world.d.add(((CanaryPlayer) player).getHandle());
+    }
+
+    @Override
+    public Location getSpawnLocation() {
+     // More structure ftw
+        OWorldInfo info = world.worldInfo;
+        Location spawn = new Location(0,0,0);
+
+        spawn.setX(info.c() + 0.5D);
+        spawn.setY(world.f(info.c(), info.e()) + 1.5D);
+        spawn.setZ(info.e() + 0.5D);
+        spawn.setRotation(0.0F);
+        spawn.setPitch(0.0F);
+        spawn.setDimension(0);
+        spawn.setWorld(world.getCanaryDimension().getName());
+        return spawn;
+    }
+
+    @Override
+    public void setSpawnLocation(Location p) {
+        world.worldInfo.a((int)p.getX(), (int)p.getY(), (int)p.getZ());
     }
 }

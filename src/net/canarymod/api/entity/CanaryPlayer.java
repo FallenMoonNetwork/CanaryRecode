@@ -5,20 +5,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.canarymod.Canary;
+import net.canarymod.CanaryServer;
 import net.canarymod.Colors;
 import net.canarymod.Logman;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
+import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.position.Direction;
 import net.canarymod.api.world.position.Location;
+import net.canarymod.api.world.position.Vector3D;
 import net.canarymod.commands.CanaryCommand;
 import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
+import net.minecraft.server.OAchievementList;
+import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayerMP;
+import net.minecraft.server.OMinecraftServer;
+import net.minecraft.server.OStatBase;
 
 /**
  * Canary Player wrapper.
@@ -141,20 +149,19 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void addExperience(int experience) {
-        // TODO Auto-generated method stub
+      //TODO: Requires work in OEntityPlayer about experience management
         
     }
 
     @Override
     public void removeExperience(int experience) {
-        // TODO Auto-generated method stub
+        //TODO: Requires work in OEntityPlayer about experience management
         
     }
 
     @Override
     public int getExperience() {
-        // TODO Auto-generated method stub
-        return 0;
+        return ((OEntityPlayerMP)entity).N;
     }
 
     @Override
@@ -183,26 +190,29 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void dropItem(Item item) {
-        // TODO Auto-generated method stub
-        
+        getDimension().dropItem((int)getX(), (int)getY(), (int)getZ(), item);
     }
 
     @Override
     public Location getSpawnPosition() {
-        // TODO Auto-generated method stub
-        return null;
+        Location spawn = Canary.getServer().getDefaultWorld().getNormal().getSpawnLocation();
+        OChunkCoordinates loc = ((OEntityPlayerMP)entity).ab();
+        if (loc != null) {
+            spawn = new Location(Canary.getServer().getDefaultWorld().getNormal(), loc.a, loc.b, loc.c, 0.0F, 0.0F);
+        }
+        return spawn;
     }
 
     @Override
     public void setSpawnPosition(Location spawn) {
-        // TODO Auto-generated method stub
-        
+        OChunkCoordinates loc = new OChunkCoordinates((int)spawn.getX(), (int)spawn.getY(), (int)spawn.getZ());
+        ((OEntityPlayerMP)entity).a(loc);
     }
 
     @Override
     public String getIP() {
-        // TODO Auto-generated method stub
-        return null;
+        String ip = ((OEntityPlayerMP)entity).a.b.c().toString();
+        return ip.substring(1,ip.lastIndexOf(":"));
     }
 
     @Override
@@ -222,6 +232,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             //Check for canary permissions
             
             CanaryCommand toExecute = CanaryCommand.fromString(cmd.replace("/", ""));
+            if(hasPermission("canary.command.tphere")) {
+                sendMessage(Colors.LightGreen + "You can do it!");
+            }
             if(toExecute == null) {
                 sendMessage(Colors.Rose + "Unknown command!");
                 return false;
@@ -245,20 +258,17 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean canFly() {
-        // TODO Auto-generated method stub
-        return false;
+        return hasPermission("canary.player.canFly");
     }
 
     @Override
     public boolean isFlying() {
-        // TODO Auto-generated method stub
-        return false;
+        return ((OEntityPlayerMP)entity).L.b;
     }
 
     @Override
     public void setFlying(boolean flying) {
-        // TODO Auto-generated method stub
-        
+        ((OEntityPlayerMP)entity).L.b = flying;
     }
 
     @Override
@@ -268,38 +278,18 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public Group getGroup() {
-        // TODO Auto-generated method stub
-        return null;
+        return group;
     }
 
     @Override
     public Group[] getPlayerGroups() {
-        // TODO Auto-generated method stub
-        return null;
+        return group.parentsToList().toArray(new Group[]{});
     }
 
     @Override
-    public void addToGroup(String group) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void addToGroup(Group group) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void removeFromGroup(String group) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void removeFromGroup(Group group) {
-        // TODO Auto-generated method stub
-        
+    public void setGroup(Group group) {
+         this.group = group;
+         Canary.usersAndGroups().addOrUpdatePlayerData(this);
     }
 
     @Override
@@ -312,9 +302,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean isAdmin() {
-//        if(!group.isAdministratorGroup()) {
-//            return permissions.queryPermission("canary.player.administrator");
-//        }
+        if(!permissions.queryPermission("canary.player.administrator")) {
+            return group.isAdministratorGroup();
+        }
         return true;
     }
 
@@ -363,6 +353,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public Location getLocation() {
         return new Location(entity.bi.getCanaryDimension(), getX(), getY(), getZ(), getPitch(), getRotation());
     }
+    
+    @Override
+    public Vector3D getPosition() {
+        return new Vector3D(getX(), getY(), getZ());
+    }
 
     @Override
     public Inventory getInventory() {
@@ -373,51 +368,68 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void giveItem(Item item) {
         // TODO Auto-generated method stub
-        
     }
 
     @Override
-    public boolean isInGroup(Group group, boolean includeChilds) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean isInGroup(Group group, boolean parents) {
+        if(this.group.name.equals(group.name)) {
+            return true;
+        }
+        else {
+            if(parents) {
+                return this.group.parentsToList().contains(group);
+            }
+            return false;
+        }
     }
 
     @Override
     public void teleportTo(double x, double y, double z) {
-        // TODO Auto-generated method stub
-        
+        teleportTo(x, y, z, 0.0F, 0.0F);
     }
 
+    public void teleportTo(Vector3D position) {
+        teleportTo(position.getX(), position.getY(), position.getZ(), 0.0f, 0.0f);
+    }
     @Override
     public void teleportTo(double x, double y, double z, Dimension dim) {
-        // TODO Auto-generated method stub
+        if (!(getDimension().hashCode() == dim.hashCode())) {
+            switchWorlds(dim);
+        }
+        teleportTo(x, y, z, 0.0F, 0.0F);
         
     }
 
     @Override
-    public void teleportTo(double x, double y, double z, float pitch,
-            float rotation, Dimension dim) {
-        // TODO Auto-generated method stub
-        
+    public void teleportTo(double x, double y, double z, float pitch, float rotation, Dimension dim) {
+        if (!(getDimension().hashCode() == dim.hashCode())) {
+            switchWorlds(dim);
+        }
+        teleportTo(x, y, z, pitch, rotation);
     }
 
     @Override
-    public void teleportTo(double x, double y, double z, float pitch,
-            float rotation) {
-        // TODO Auto-generated method stub
+    public void teleportTo(double x, double y, double z, float pitch, float rotation) {
+        OEntityPlayerMP player = (OEntityPlayerMP) entity;
+        // If player is in vehicle - eject them before they are teleported.
+        if (player.bh != null) {
+            player.b(player.bh);
+        }
+        player.a.a(x, y, z, rotation, pitch);
         
     }
 
     @Override
     public void teleportTo(Location location) {
-        // TODO Auto-generated method stub
-        
+        if (!(getDimension().hashCode() == location.getCanaryDimension().hashCode())) {
+            switchWorlds(location.getCanaryDimension());
+        }
+        teleportTo(location.getX(),location.getY(), location.getZ(),location.getPitch(), location.getRotation());
     }
 
     @Override
     public void kick(String reason) {
-        // TODO Auto-generated method stub
-        
+        ((OEntityPlayerMP)entity).a.a(reason);
     }
 
     @Override
@@ -461,5 +473,95 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public String[] getAllowedIPs() {
         return allowedIPs;
     }
+
+    @Override
+    public Direction getCardinalDirection() {
+        double degrees = ((getRotation() - 90) % 360);
+
+        if (degrees < 0) {
+            degrees += 360.0;
+        }
+        
+        if (0 <= degrees && degrees < 22.5) {
+            return Direction.EAST;
+        } else if (22.5 <= degrees && degrees < 67.5) {
+            return Direction.SOUTHEAST;
+        } else if (67.5 <= degrees && degrees < 112.5) {
+            return Direction.SOUTH;
+        } else if (112.5 <= degrees && degrees < 157.5) {
+            return Direction.SOUTHWEST;
+        } else if (157.5 <= degrees && degrees < 202.5) {
+            return Direction.WEST;
+        } else if (202.5 <= degrees && degrees < 247.5) {
+            return Direction.NORTHWEST;
+        } else if (247.5 <= degrees && degrees < 292.5) {
+            return Direction.NORTH;
+        } else if (292.5 <= degrees && degrees < 337.5) {
+            return Direction.NORTHEAST;
+        } else if (337.5 <= degrees && degrees < 360.0) {
+            return Direction.EAST;
+        } else {
+            return Direction.ERROR;
+        }
+    }
+    
+    public void switchWorlds(Dimension dim) {
+        OMinecraftServer mcServer = ((CanaryServer) Canary.getServer()).getHandle();
+        OEntityPlayerMP ent = (OEntityPlayerMP) entity;
+        
+        // Nether is not allowed, so shush
+        if (dim.getType() == Dimension.Type.NETHER && !mcServer.d.a("allow-nether", true)) {
+            return;
+        }
+        // The End is not allowed, so shush
+        if (dim.getType() == Dimension.Type.END && !mcServer.d.a("allow-end", true)) {
+            return;
+        }
+        // Dismount first or get buggy
+        if (ent.bh != null) {
+            ent.b(ent.bh);
+        }
+
+        //Collect world switch achievement ?
+        ent.a((OStatBase) OAchievementList.B);
+        
+        //switch world if needed
+        if(!(dim.hashCode() == ent.bi.getCanaryDimension().hashCode())) {
+            Dimension oldWorld = ent.bi.getCanaryDimension();
+            //remove player from entity tracker
+            oldWorld.getEntityTracker().untrackPlayerSymmetrics(this);
+            oldWorld.getEntityTracker().untrackEntity(this);
+            //remove player from old worlds entity list
+            oldWorld.removePlayerFromWorld(this);
+            
+            //Remove player from player manager for the old world
+            oldWorld.getPlayerManager().removePlayer(this);
+            
+            //Change players world reference
+            ent.bi = ((CanaryDimension) dim).getHandle();
+            //Add player back to the new world
+            dim.addPlayerToWorld(this);
+            dim.getEntityTracker().trackEntity(this);
+        }
+        //Get chunk coordinates...
+//        OChunkCoordinates var2 = mcServer.getWorld(ent.bi.getCanaryDimension().getName(), dim.getType().getId()).d();
+        OChunkCoordinates var2 = ent.bi.d();
+
+        if (var2 != null) {
+            ent.a.a((double) var2.a, (double) var2.b, (double) var2.c, 0.0F, 0.0F);
+        }
+
+        mcServer.h.switchDimension(ent, dim.getType().getId(), false);
+        
+//        refreshCreativeMode();
+    }
+    
+//    public void refreshCreativeMode() {
+//        if (getMode() || etc.getMCServer().d.a("gamemode", 0) == 1) {
+//            getEntity().c.a(1);
+//        } else {
+//            getEntity().c.a(0);
+//        }
+//    }
 
 }
