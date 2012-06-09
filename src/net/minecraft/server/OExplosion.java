@@ -8,6 +8,7 @@ import java.util.Set;
 
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.api.entity.CanaryEntityLiving;
 import net.canarymod.api.entity.EntityLiving;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DamageHook;
@@ -115,7 +116,11 @@ public class OExplosion {
                 double var39 = (1.0D - var33) * var37;
                 // CanaryMod - explosion damage.
                 int damage = (int) ((var39 * var39 + var39) / 2.0D * 8.0D * f + 1.0D);
-                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook((EntityLiving) e.getCanaryEntity(), (EntityLiving) var32.getCanaryEntity(), new CanaryDamageSource(ODamageSource.l), damage));
+                EntityLiving attacker = null;
+                if (e instanceof OEntityCreeper) {
+                    attacker = new CanaryEntityLiving((OEntityLiving) e);
+                }
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(attacker, new CanaryEntityLiving((OEntityLiving) var32.getCanaryEntity().getHandle()), new CanaryDamageSource(ODamageSource.l), damage));
                 if (!hook.isCancelled()) {
                     var32.a(ODamageSource.l, damage);
                 }
