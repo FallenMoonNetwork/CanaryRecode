@@ -34,6 +34,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     private double k;
     private double l;
     private double m;
+    private String name = "container.minecart"; //CanaryMod
 
     public OEntityMinecart(OWorld var1) {
         super(var1);
@@ -759,7 +760,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
     @Override
     public String e() {
-        return "container.minecart";
+        return name;
     }
 
     @Override
@@ -851,5 +852,47 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     public int n() {
         return this.bY.c(18);
     }
+
+    //CanaryMod start container
+    @Override
+    public OItemStack[] getContents() {
+        return d;
+    }
+
+    @Override
+    public void setContents(OItemStack[] values) {
+        d = values;
+    }
+
+    @Override
+    public OItemStack getSlot(int index) {
+        return g_(index);
+    }
+
+    @Override
+    public void setSlot(int index, OItemStack value) {
+        a(index, value);
+    }
+
+    @Override
+    public int getSize() {
+        return c();
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String value) {
+        name = value;
+    }
+
+    @Override
+    public void update() {
+        G_();
+    }
+    //CanaryMod end container
 
 }

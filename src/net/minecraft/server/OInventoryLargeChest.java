@@ -87,4 +87,56 @@ public class OInventoryLargeChest implements OIInventory {
         this.b.g();
         this.c.g();
     }
+
+    //CanaryMod start container
+    @Override
+    public OItemStack[] getContents() {
+        int size = getSize();
+        OItemStack[] result = new OItemStack[size];
+
+        for (int i = 0; i < size; i++) {
+            result[i] = getSlot(i);
+        }
+        return result;
+    }
+
+    @Override
+    public void setContents(OItemStack[] values) {
+        int size = getSize();
+
+        for (int i = 0; i < size; i++) {
+            setSlot(i, values[i]);
+        }
+    }
+
+    @Override
+    public OItemStack getSlot(int index) {
+        return g_(index);
+    }
+
+    @Override
+    public void setSlot(int index, OItemStack value) {
+        a(index, value);
+    }
+
+    @Override
+    public int getSize() {
+        return c();
+    }
+
+    @Override
+    public String getName() {
+        return a;
+    }
+
+    @Override
+    public void setName(String value) {
+        a = value;
+    }
+
+    @Override
+    public void update() {
+        G_();
+    }
+    //CanaryMod end container
 }

@@ -299,8 +299,13 @@ public class OServerConfigurationManager {
         return var5;
     }
 
-    //send to other dimension
-    public void a(OEntityPlayerMP var1, int var2) {
+    /**
+     * Send player to another dimension. Was a(OEntityPlayerMP var1, int var2) before
+     * @param var1 Player
+     * @param var2 Dimension ID
+     * @param createPortal true if a portal needs to be created
+     */
+    public void switchDimension(OEntityPlayerMP var1, int var2, boolean createPortal) {
         int var3 = var1.w; //current dimension
         OWorldServer var4 = (OWorldServer) ((CanaryDimension)var1.getDimension()).getHandle();
         var1.w = var2; //set new dimension
@@ -340,9 +345,12 @@ public class OServerConfigurationManager {
             var5.b(var1);
             var1.c(var6, var1.bn, var8, var1.bs, var1.bt);
             var5.a(var1, false);
-            var5.G.a = true;
-            (new OTeleporter()).a(var5, var1);
-            var5.G.a = false;
+         // CanaryMod - don't create portal if we are not using a portal to teleport.
+            if(createPortal) {
+                var5.G.a = true;
+                (new OTeleporter()).a(var5, var1);
+                var5.G.a = false;
+            }
         }
 
         this.a(var1);

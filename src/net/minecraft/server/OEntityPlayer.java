@@ -2,6 +2,9 @@ package net.minecraft.server;
 
 import java.util.Iterator;
 import java.util.List;
+
+import net.canarymod.api.inventory.CanaryInventory;
+import net.canarymod.api.inventory.Inventory;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -87,6 +90,8 @@ public abstract class OEntityPlayer extends OEntityLiving {
     protected float P = 0.1F;
     protected float Q = 0.02F;
     public OEntityFishHook R = null;
+    
+    private Inventory inventory = new CanaryInventory(k); //CanaryMod
 
     public OEntityPlayer(OWorld var1) {
         super(var1);
@@ -1215,4 +1220,10 @@ public abstract class OEntityPlayer extends OEntityLiving {
 
     public void L() {
     }
+    
+    //CanaryMod start
+    public Inventory getInventory(){
+        return inventory;
+    }
+    //CanaryMod end
 }

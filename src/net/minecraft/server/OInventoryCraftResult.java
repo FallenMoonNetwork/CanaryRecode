@@ -7,6 +7,7 @@ import net.minecraft.server.OItemStack;
 public class OInventoryCraftResult implements OIInventory {
 
     private OItemStack[] a = new OItemStack[1];
+    private String name = "Result";
 
     public OInventoryCraftResult() {
         super();
@@ -24,7 +25,7 @@ public class OInventoryCraftResult implements OIInventory {
 
     @Override
     public String e() {
-        return "Result";
+        return name;
     }
 
     @Override
@@ -75,4 +76,56 @@ public class OInventoryCraftResult implements OIInventory {
     @Override
     public void g() {
     }
+
+    //CanaryMod start container
+    @Override
+    public OItemStack[] getContents() {
+        int size = getSize();
+        OItemStack[] result = new OItemStack[size];
+
+        for (int i = 0; i < size; i++) {
+            result[i] = getSlot(i);
+        }
+        return result;
+    }
+
+    @Override
+    public void setContents(OItemStack[] values) {
+        int size = getSize();
+
+        for (int i = 0; i < size; i++) {
+            setSlot(i, values[i]);
+        }
+    }
+
+    @Override
+    public OItemStack getSlot(int index) {
+        return this.g_(index);
+    }
+
+    @Override
+    public void setSlot(int index, OItemStack value) {
+        this.a(index, value);
+    }
+
+    @Override
+    public int getSize() {
+        return this.c();
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public void setName(String value) {
+        this.name = value;
+    }
+
+    @Override
+    public void update() {
+        G_();
+    }
+    //CanaryMod end container
 }

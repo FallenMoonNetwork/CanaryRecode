@@ -10,6 +10,7 @@ public class OInventoryCrafting implements OIInventory {
     private OItemStack[] a;
     private int b;
     private OContainer c;
+    private String name = "container.crafting"; //CanaryMod
 
     public OInventoryCrafting(OContainer var1, int var2, int var3) {
         super();
@@ -40,7 +41,7 @@ public class OInventoryCrafting implements OIInventory {
 
     @Override
     public String e() {
-        return "container.crafting";
+        return name;
     }
 
     @Override
@@ -104,4 +105,56 @@ public class OInventoryCrafting implements OIInventory {
     @Override
     public void g() {
     }
+
+    //CanaryMod start container
+    @Override
+    public OItemStack[] getContents() {
+        int size = getSize();
+        OItemStack[] result = new OItemStack[size];
+
+        for (int i = 0; i < size; i++) {
+            result[i] = getSlot(i);
+        }
+        return result;
+    }
+
+    @Override
+    public void setContents(OItemStack[] values) {
+        int size = getSize();
+
+        for (int i = 0; i < size; i++) {
+            setSlot(i, values[i]);
+        }
+    }
+
+    @Override
+    public OItemStack getSlot(int index) {
+        return this.g_(index);
+    }
+
+    @Override
+    public void setSlot(int index, OItemStack value) {
+        this.a(index, value);
+    }
+
+    @Override
+    public int getSize() {
+        return this.c();
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public void setName(String value) {
+        this.name = value;
+    }
+
+    @Override
+    public void update() {
+        G_();
+    }
+    //CanaryMod end container
 }

@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+import java.util.Arrays;
 import java.util.List;
+
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInvBasic;
 import net.minecraft.server.OIInventory;
@@ -106,4 +108,46 @@ public class OInventoryBasic implements OIInventory {
     @Override
     public void g() {
     }
+
+    //CanaryMod start container
+    @Override
+    public OItemStack[] getContents() {
+        return Arrays.copyOf(this.c, getSize());
+    }
+
+    @Override
+    public void setContents(OItemStack[] values) {
+        this.c = Arrays.copyOf(values, getSize());
+    }
+
+    @Override
+    public OItemStack getSlot(int index) {
+        return this.g_(index);
+    }
+
+    @Override
+    public void setSlot(int index, OItemStack value) {
+        this.a(b, value);
+    }
+
+    @Override
+    public int getSize() {
+        return this.c();
+    }
+
+    @Override
+    public String getName() {
+        return this.a;
+    }
+
+    @Override
+    public void setName(String value) {
+        this.a = value;
+    }
+
+    @Override
+    public void update() {
+        G_();
+    }
+    //CanaryMod end container
 }

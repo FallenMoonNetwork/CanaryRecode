@@ -1,5 +1,8 @@
 package net.minecraft.server;
 
+import java.util.Arrays;
+
+import net.canarymod.api.inventory.Container;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
@@ -8,7 +11,7 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.ONBTTagList;
 import net.minecraft.server.OTileEntity;
 
-public class OTileEntityChest extends OTileEntity implements OIInventory {
+public class OTileEntityChest extends OTileEntity implements OIInventory, Container<OItemStack> {
 
     private OItemStack[] i = new OItemStack[36];
     public boolean a = false;
@@ -20,6 +23,7 @@ public class OTileEntityChest extends OTileEntity implements OIInventory {
     public float g;
     public int h;
     private int j;
+    private String name = "container.chest"; //CanaryMod
 
     public OTileEntityChest() {
         super();
@@ -81,7 +85,7 @@ public class OTileEntityChest extends OTileEntity implements OIInventory {
 
     @Override
     public String e() {
-        return "container.chest";
+        return name;
     }
 
     @Override
@@ -260,4 +264,46 @@ public class OTileEntityChest extends OTileEntity implements OIInventory {
         this.i();
         super.j();
     }
+
+    //CanaryMod Start
+    @Override
+    public OItemStack[] getContents() {
+        return Arrays.copyOf(i, getSize());
+    }
+
+    @Override
+    public void setContents(OItemStack[] values) {
+        i = Arrays.copyOf(values, getSize());
+    }
+
+    @Override
+    public OItemStack getSlot(int index) {
+        return g_(index);
+    }
+
+    @Override
+    public void setSlot(int index, OItemStack value) {
+        a(index, value);
+    }
+
+    @Override
+    public int getSize() {
+        return c();
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String value) {
+        name = value;
+    }
+
+    @Override
+    public void update() {
+        G_();
+    }
+    //CanaryMod end
 }
