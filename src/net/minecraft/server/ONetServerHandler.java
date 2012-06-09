@@ -10,7 +10,10 @@ import net.canarymod.TextFormat;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.position.Location;
+import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.player.ConnectionHook;
+import net.canarymod.hook.player.TeleportHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OChatAllowedCharacters;
 import net.minecraft.server.OChunkCoordinates;
@@ -316,6 +319,13 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     }
 
     public void a(double var1, double var3, double var5, float var7, float var8) {
+        // CanaryMod - Teleport hook.
+        Location location = new Location(getUser().getDimension(), var1, var3, var5, var8, var7);
+        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new TeleportHook(getUser(), location, false));
+        if (hook.isCancelled()) {
+            return;
+        }
+        // CanaryMod - end.
         this.r = false;
         this.o = var1;
         this.p = var3;
