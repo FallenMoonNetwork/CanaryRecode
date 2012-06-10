@@ -31,6 +31,7 @@ import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
+import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityBlaze;
 import net.minecraft.server.OEntityCreeper;
 import net.minecraft.server.OEntityEnderman;
@@ -473,13 +474,14 @@ public class CanaryDimension implements Dimension {
     public void removePlayerFromWorld(Player player) {
         world.b.remove(((CanaryPlayer) player).getHandle());
         world.d.remove(((CanaryPlayer) player).getHandle());
+        world.b.remove((OEntity)((CanaryPlayer) player).getHandle());
+        world.f(((CanaryPlayer) player).getHandle());
         
     }
 
     @Override
     public void addPlayerToWorld(Player player) {
-        world.b.add(((CanaryPlayer) player).getHandle());
-        world.d.add(((CanaryPlayer) player).getHandle());
+        world.b.add((OEntity)((CanaryPlayer) player).getHandle());
     }
 
     @Override

@@ -787,5 +787,13 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     public void a(OPacket202PlayerAbilities var1) {
         this.e.L.b = var1.b && this.e.L.c;
     }
+    
+    
+    public int getItemInHand() {
+        if (e.k.d() != null) {
+            return e.k.d().c;
+        }
+        return -1;
+    }
 
 }
