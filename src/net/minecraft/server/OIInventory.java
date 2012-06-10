@@ -6,19 +6,19 @@ import net.minecraft.server.OItemStack;
 
 public interface OIInventory extends Container<OItemStack> { //CanaryMod extension added
 
-    int c();
+    int getInventorySize();
 
-    OItemStack g_(int var1);
+    OItemStack getStackFromSlot(int var1);
 
-    OItemStack a(int var1, int var2);
+    OItemStack decreaseItemStackSize(int var1, int var2);
 
     OItemStack b(int var1);
 
-    void a(int var1, OItemStack var2);
+    void setItemStackToSlot(int var1, OItemStack var2);
 
-    String e();
+    String getInventoryName();
 
-    int a();
+    int getInventoryStackLimit();
 
     void G_();
 

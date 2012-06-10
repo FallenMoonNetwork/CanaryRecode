@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItemStack;
@@ -26,43 +27,43 @@ public class OInventoryLargeChest implements OIInventory {
     }
 
     @Override
-    public int c() {
-        return this.b.c() + this.c.c();
+    public int getInventorySize() {
+        return this.b.getInventorySize() + this.c.getInventorySize();
     }
 
     @Override
-    public String e() {
+    public String getInventoryName() {
         return this.a;
     }
 
     @Override
-    public OItemStack g_(int var1) {
-        return var1 >= this.b.c() ? this.c.g_(var1 - this.b.c()) : this.b.g_(var1);
+    public OItemStack getStackFromSlot(int var1) {
+        return var1 >= this.b.getInventorySize() ? this.c.getStackFromSlot(var1 - this.b.getInventorySize()) : this.b.getStackFromSlot(var1);
     }
 
     @Override
-    public OItemStack a(int var1, int var2) {
-        return var1 >= this.b.c() ? this.c.a(var1 - this.b.c(), var2) : this.b.a(var1, var2);
+    public OItemStack decreaseItemStackSize(int var1, int var2) {
+        return var1 >= this.b.getInventorySize() ? this.c.decreaseItemStackSize(var1 - this.b.getInventorySize(), var2) : this.b.decreaseItemStackSize(var1, var2);
     }
 
     @Override
     public OItemStack b(int var1) {
-        return var1 >= this.b.c() ? this.c.b(var1 - this.b.c()) : this.b.b(var1);
+        return var1 >= this.b.getInventorySize() ? this.c.b(var1 - this.b.getInventorySize()) : this.b.b(var1);
     }
 
     @Override
-    public void a(int var1, OItemStack var2) {
-        if (var1 >= this.b.c()) {
-            this.c.a(var1 - this.b.c(), var2);
+    public void setItemStackToSlot(int var1, OItemStack var2) {
+        if (var1 >= this.b.getInventorySize()) {
+            this.c.setItemStackToSlot(var1 - this.b.getInventorySize(), var2);
         } else {
-            this.b.a(var1, var2);
+            this.b.setItemStackToSlot(var1, var2);
         }
 
     }
 
     @Override
-    public int a() {
-        return this.b.a();
+    public int getInventoryStackLimit() {
+        return this.b.getInventoryStackLimit();
     }
 
     @Override
@@ -111,17 +112,17 @@ public class OInventoryLargeChest implements OIInventory {
 
     @Override
     public OItemStack getSlot(int index) {
-        return g_(index);
+        return getStackFromSlot(index);
     }
 
     @Override
     public void setSlot(int index, OItemStack value) {
-        a(index, value);
+        setItemStackToSlot(index, value);
     }
 
     @Override
     public int getSize() {
-        return c();
+        return getInventorySize();
     }
 
     @Override
@@ -139,4 +140,34 @@ public class OInventoryLargeChest implements OIInventory {
         G_();
     }
     //CanaryMod end container
+
+    @Override
+    public void clearContents() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Item getItem(int id, int amount) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item getItem(int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item removeItem(Item item) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item removeItem(int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

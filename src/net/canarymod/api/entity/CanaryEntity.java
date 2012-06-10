@@ -2,6 +2,7 @@ package net.canarymod.api.entity;
 
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.World;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityItem;
 import net.minecraft.server.OEntityLiving;
@@ -129,6 +130,11 @@ public class CanaryEntity implements Entity {
     @Override
     public Dimension getDimension() {
         return entity.getDimension();
+    }
+    
+    @Override
+    public World getWorld() {
+        return entity.getDimension().getWorld();
     }
 
     @Override

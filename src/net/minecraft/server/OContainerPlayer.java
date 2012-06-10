@@ -39,7 +39,7 @@ public class OContainerPlayer extends OContainer {
         }
 
         for (var3 = 0; var3 < 4; ++var3) {
-            this.a((new OSlotArmor(this, var1, var1.c() - 1 - var3, 8, 8 + var3 * 18, var3)));
+            this.a((new OSlotArmor(this, var1, var1.getInventorySize() - 1 - var3, 8, 8 + var3 * 18, var3)));
         }
 
         for (var3 = 0; var3 < 3; ++var3) {
@@ -57,7 +57,7 @@ public class OContainerPlayer extends OContainer {
 
     @Override
     public void a(OIInventory var1) {
-        this.b.a(0, OCraftingManager.a().a(this.a));
+        this.b.setItemStackToSlot(0, OCraftingManager.a().a(this.a));
     }
 
     @Override
@@ -71,7 +71,7 @@ public class OContainerPlayer extends OContainer {
             }
         }
 
-        this.b.a(0, (OItemStack) null);
+        this.b.setItemStackToSlot(0, (OItemStack) null);
     }
 
     @Override

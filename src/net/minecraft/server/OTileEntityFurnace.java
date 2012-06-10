@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import java.util.Arrays;
 
+import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockFurnace;
 import net.minecraft.server.OEntityPlayer;
@@ -27,17 +28,17 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
     }
 
     @Override
-    public int c() {
+    public int getInventorySize() {
         return this.d.length;
     }
 
     @Override
-    public OItemStack g_(int var1) {
+    public OItemStack getStackFromSlot(int var1) {
         return this.d[var1];
     }
 
     @Override
-    public OItemStack a(int var1, int var2) {
+    public OItemStack decreaseItemStackSize(int var1, int var2) {
         if (this.d[var1] != null) {
             OItemStack var3;
             if (this.d[var1].a <= var2) {
@@ -69,16 +70,16 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
     }
 
     @Override
-    public void a(int var1, OItemStack var2) {
+    public void setItemStackToSlot(int var1, OItemStack var2) {
         this.d[var1] = var2;
-        if (var2 != null && var2.a > this.a()) {
-            var2.a = this.a();
+        if (var2 != null && var2.a > this.getInventoryStackLimit()) {
+            var2.a = this.getInventoryStackLimit();
         }
 
     }
 
     @Override
-    public String e() {
+    public String getInventoryName() {
         return name;
     }
 
@@ -86,7 +87,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         ONBTTagList var2 = var1.n("Items");
-        this.d = new OItemStack[this.c()];
+        this.d = new OItemStack[this.getInventorySize()];
 
         for (int var3 = 0; var3 < var2.d(); ++var3) {
             ONBTTagCompound var4 = (ONBTTagCompound) var2.a(var3);
@@ -121,7 +122,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
     }
 
     @Override
-    public int a() {
+    public int getInventoryStackLimit() {
         return 64;
     }
 
@@ -179,7 +180,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
             return false;
         } else {
             OItemStack var1 = OFurnaceRecipes.a().a(this.d[0].a().bP);
-            return var1 == null ? false : (this.d[2] == null ? true : (!this.d[2].a(var1) ? false : (this.d[2].a < this.a() && this.d[2].a < this.d[2].b() ? true : this.d[2].a < var1.b())));
+            return var1 == null ? false : (this.d[2] == null ? true : (!this.d[2].a(var1) ? false : (this.d[2].a < this.getInventoryStackLimit() && this.d[2].a < this.d[2].b() ? true : this.d[2].a < var1.b())));
         }
     }
 
@@ -239,17 +240,17 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
 
     @Override
     public OItemStack getSlot(int index) {
-        return g_(index);
+        return getStackFromSlot(index);
     }
 
     @Override
     public void setSlot(int index, OItemStack value) {
-        a(index, value);
+        setItemStackToSlot(index, value);
     }
 
     @Override
     public int getSize() {
-        return c();
+        return getInventorySize();
     }
 
     @Override
@@ -267,4 +268,34 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
         G_();
     }
     //CanaryMod end container
+
+    @Override
+    public void clearContents() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Item getItem(int id, int amount) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item getItem(int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item removeItem(Item item) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item removeItem(int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

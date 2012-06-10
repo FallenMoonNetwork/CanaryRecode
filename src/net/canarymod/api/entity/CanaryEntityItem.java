@@ -22,7 +22,7 @@ public class CanaryEntityItem extends CanaryEntity implements EntityItem {
 
     @Override
     public CanaryItem getItem() {
-        return ((OEntityItem)entity).getItemStack().getItem();
+        return ((OEntityItem)entity).getItemStack().getCanaryItem();
     }
 
 }

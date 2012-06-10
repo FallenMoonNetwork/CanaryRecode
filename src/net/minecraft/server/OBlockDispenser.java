@@ -218,8 +218,8 @@ public class OBlockDispenser extends OBlockContainer {
     public void d(OWorld var1, int var2, int var3, int var4) {
         OTileEntityDispenser var5 = (OTileEntityDispenser) var1.b(var2, var3, var4);
         if (var5 != null) {
-            for (int var6 = 0; var6 < var5.c(); ++var6) {
-                OItemStack var7 = var5.g_(var6);
+            for (int var6 = 0; var6 < var5.getInventorySize(); ++var6) {
+                OItemStack var7 = var5.getStackFromSlot(var6);
                 if (var7 != null) {
                     float var8 = this.a.nextFloat() * 0.8F + 0.1F;
                     float var9 = this.a.nextFloat() * 0.8F + 0.1F;

@@ -111,9 +111,9 @@ public class OEntityCow extends OEntityAnimal {
 
     @Override
     public boolean b(OEntityPlayer var1) {
-        OItemStack var2 = var1.k.d();
+        OItemStack var2 = var1.k.getItemInHand();
         if (var2 != null && var2.c == OItem.av.bP) {
-            var1.k.a(var1.k.c, new OItemStack(OItem.aF));
+            var1.k.setItemStackToSlot(var1.k.c, new OItemStack(OItem.aF));
             return true;
         } else {
             return super.b(var1);

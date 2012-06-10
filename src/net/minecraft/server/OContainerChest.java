@@ -14,7 +14,7 @@ public class OContainerChest extends OContainer {
     public OContainerChest(OIInventory var1, OIInventory var2) {
         super();
         this.a = var2;
-        this.b = var2.c() / 9;
+        this.b = var2.getInventorySize() / 9;
         var2.f();
         int var3 = (this.b - 4) * 18;
 

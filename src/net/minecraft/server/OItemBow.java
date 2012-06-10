@@ -20,7 +20,7 @@ public class OItemBow extends OItem {
     @Override
     public void a(OItemStack var1, OWorld var2, OEntityPlayer var3, int var4) {
         boolean var5 = var3.L.d || OEnchantmentHelper.a(OEnchantment.w.x, var1) > 0;
-        if (var5 || var3.k.d(OItem.k.bP)) {
+        if (var5 || var3.k.hasItem(OItem.k.bP)) {
             int var6 = this.c(var1) - var4;
             float var7 = var6 / 20.0F;
             var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
@@ -83,7 +83,7 @@ public class OItemBow extends OItem {
 
     @Override
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
-        if (var3.L.d || var3.k.d(OItem.k.bP)) {
+        if (var3.L.d || var3.k.hasItem(OItem.k.bP)) {
             var3.a(var1, this.c(var1));
         }
 

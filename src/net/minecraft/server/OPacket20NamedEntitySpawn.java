@@ -34,7 +34,7 @@ public class OPacket20NamedEntitySpawn extends OPacket {
         this.e = OMathHelper.b(var1.bo * 32.0D);
         this.f = (byte) ((int) (var1.bs * 256.0F / 360.0F));
         this.g = (byte) ((int) (var1.bt * 256.0F / 360.0F));
-        OItemStack var2 = var1.k.d();
+        OItemStack var2 = var1.k.getItemInHand();
         this.h = var2 == null ? 0 : var2.c;
     }
 

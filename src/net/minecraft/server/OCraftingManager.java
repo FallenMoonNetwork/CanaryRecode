@@ -197,8 +197,8 @@ public class OCraftingManager {
         OItemStack var4 = null;
 
         int var5;
-        for (var5 = 0; var5 < var1.c(); ++var5) {
-            OItemStack var6 = var1.g_(var5);
+        for (var5 = 0; var5 < var1.getInventorySize(); ++var5) {
+            OItemStack var6 = var1.getStackFromSlot(var5);
             if (var6 != null) {
                 if (var2 == 0) {
                     var3 = var6;

@@ -23,6 +23,12 @@ public class CanaryItem implements Item {
     }
 
     @Override
+    public void setId(int id) {
+        type = ItemType.fromId(id);
+        item.c = type.getId();
+    }
+    
+    @Override
     public int getDamage() {
         return item.g();
     }
@@ -146,7 +152,7 @@ public class CanaryItem implements Item {
         return item.getBaseItem();
     }
     
-    public OItemStack getItemStack(){
+    public OItemStack getHandle(){
         return item;
     }
 }

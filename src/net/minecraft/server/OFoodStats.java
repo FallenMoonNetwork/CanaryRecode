@@ -11,46 +11,48 @@ import net.minecraft.server.ONBTTagCompound;
 
 public class OFoodStats {
 
-    private int a = 20;
-    private float b = 5.0F;
-    private float c;
-    private int d = 0;
-    private int e = 20;
+    // CanaryMod Refactored names
+    private int foodLevel = 20;
+    private float foodSaturationLevel = 5.0F;
+    private float foodExhaustionLevel;
+    private int foodTimer = 0;
+    private int previousFoodLevel = 20; //Thafuq?
+    //CanaryMod end
 
     public OFoodStats() {
         super();
     }
 
-    public void a(int var1, float var2) {
-        this.a = Math.min(var1 + this.a, 20);
-        this.b = Math.min(this.b + var1 * var2 * 2.0F, this.a);
+    public void addStats(int var1, float var2) {
+        this.foodLevel = Math.min(var1 + this.foodLevel, 20);
+        this.foodSaturationLevel = Math.min(this.foodSaturationLevel + var1 * var2 * 2.0F, this.foodLevel);
     }
 
-    public void a(OItemFood var1) {
-        this.a(var1.o(), var1.p());
+    public void addStats(OItemFood var1) {
+        this.addStats(var1.o(), var1.p());
     }
 
-    public void a(OEntityPlayer var1) {
+    public void onUpdate(OEntityPlayer var1) {
         int var2 = var1.bi.q;
-        this.e = this.a;
-        if (this.c > 4.0F) {
-            this.c -= 4.0F;
-            if (this.b > 0.0F) {
-                this.b = Math.max(this.b - 1.0F, 0.0F);
+        this.previousFoodLevel = this.foodLevel;
+        if (this.foodExhaustionLevel > 4.0F) {
+            this.foodExhaustionLevel -= 4.0F;
+            if (this.foodSaturationLevel > 0.0F) {
+                this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
             } else if (var2 > 0) {
-                this.a = Math.max(this.a - 1, 0);
+                this.foodLevel = Math.max(this.foodLevel - 1, 0);
             }
         }
 
-        if (this.a >= 18 && var1.ag()) {
-            ++this.d;
-            if (this.d >= 80) {
+        if (this.foodLevel >= 18 && var1.ag()) {
+            ++this.foodTimer;
+            if (this.foodTimer >= 80) {
                 var1.d(1);
-                this.d = 0;
+                this.foodTimer = 0;
             }
-        } else if (this.a <= 0) {
-            ++this.d;
-            if (this.d >= 80) {
+        } else if (this.foodLevel <= 0) {
+            ++this.foodTimer;
+            if (this.foodTimer >= 80) {
                 if (var1.aD() > 10 || var2 >= 3 || var1.aD() > 1 && var2 >= 2) {
                     // CanaryMod - starving damage.
                     CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, var1.getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.g), 1));
@@ -60,44 +62,60 @@ public class OFoodStats {
                     // CanaryMod - end.
                 }
 
-                this.d = 0;
+                this.foodTimer = 0;
             }
         } else {
-            this.d = 0;
+            this.foodTimer = 0;
         }
 
     }
 
-    public void a(ONBTTagCompound var1) {
+    //CanaryMod start: Refactored method names
+    public void readNbt(ONBTTagCompound var1) {
         if (var1.c("foodLevel")) {
-            this.a = var1.f("foodLevel");
-            this.d = var1.f("foodTickTimer");
-            this.b = var1.h("foodSaturationLevel");
-            this.c = var1.h("foodExhaustionLevel");
+            this.foodLevel = var1.f("foodLevel");
+            this.foodTimer = var1.f("foodTickTimer");
+            this.foodSaturationLevel = var1.h("foodSaturationLevel");
+            this.foodExhaustionLevel = var1.h("foodExhaustionLevel");
         }
 
     }
 
-    public void b(ONBTTagCompound var1) {
-        var1.a("foodLevel", this.a);
-        var1.a("foodTickTimer", this.d);
-        var1.a("foodSaturationLevel", this.b);
-        var1.a("foodExhaustionLevel", this.c);
+    public void writeNbt(ONBTTagCompound var1) {
+        var1.a("foodLevel", this.foodLevel);
+        var1.a("foodTickTimer", this.foodTimer);
+        var1.a("foodSaturationLevel", this.foodSaturationLevel);
+        var1.a("foodExhaustionLevel", this.foodExhaustionLevel);
     }
 
-    public int a() {
-        return this.a;
+    public int getFoodLevel() {
+        return this.foodLevel;
     }
 
-    public boolean b() {
-        return this.a < 20;
+    public boolean needsFood() {
+        return this.foodLevel < 20;
     }
 
-    public void a(float var1) {
-        this.c = Math.min(this.c + var1, 40.0F);
+    public void addExhaustion(float var1) {
+        this.foodExhaustionLevel = Math.min(this.foodExhaustionLevel + var1, 40.0F);
     }
 
-    public float c() {
-        return this.b;
+    public float getFoodSaturationLevel() {
+        return this.foodSaturationLevel;
     }
+    //CanaryMod End
+    
+    //CanaryMod added set saturation
+    public void setFoodSaturationLevel(float food) {
+        this.foodSaturationLevel = food;
+    }
+    
+    public void setFoodExhaustionLevel(float level) {
+        this.foodExhaustionLevel = level;
+    }
+    //CanaryMod added set food level
+    public void setFoodLevel(int level) {
+        this.foodLevel = level;
+    }
+    
 }

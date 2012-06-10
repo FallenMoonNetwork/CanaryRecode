@@ -448,10 +448,10 @@ public abstract class OStructureComponent {
             OStructurePieceTreasure var5 = (OStructurePieceTreasure) OWeightedRandom.a(var0, var1);
             int var6 = var5.c + var0.nextInt(var5.e - var5.c + 1);
             if (OItem.d[var5.a].d() >= var6) {
-                var2.a(var0.nextInt(var2.c()), new OItemStack(var5.a, var6, var5.b));
+                var2.setItemStackToSlot(var0.nextInt(var2.getInventorySize()), new OItemStack(var5.a, var6, var5.b));
             } else {
                 for (int var7 = 0; var7 < var6; ++var7) {
-                    var2.a(var0.nextInt(var2.c()), new OItemStack(var5.a, 1, var5.b));
+                    var2.setItemStackToSlot(var0.nextInt(var2.getInventorySize()), new OItemStack(var5.a, 1, var5.b));
                 }
             }
         }

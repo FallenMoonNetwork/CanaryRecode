@@ -95,6 +95,11 @@ public class CanaryDimension implements Dimension {
     }
 
     @Override
+    public EntityItem dropItem(Vector3D position, Item item) {
+        return dropItem((int)position.getX(), (int)position.getY(), (int)position.getZ(), item);
+    }
+    
+    @Override
     public EntityItem dropItem(int x, int y, int z, int itemId, int amount, int damage) {
         double d1 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
         double d2 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
@@ -504,4 +509,5 @@ public class CanaryDimension implements Dimension {
     public void setSpawnLocation(Location p) {
         world.worldInfo.a((int)p.getX(), (int)p.getY(), (int)p.getZ());
     }
+
 }

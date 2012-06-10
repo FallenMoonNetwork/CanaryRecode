@@ -3,6 +3,7 @@ package net.minecraft.server;
 import java.util.Arrays;
 import java.util.List;
 
+import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInvBasic;
 import net.minecraft.server.OIInventory;
@@ -23,12 +24,12 @@ public class OInventoryBasic implements OIInventory {
     }
 
     @Override
-    public OItemStack g_(int var1) {
+    public OItemStack getStackFromSlot(int var1) {
         return this.c[var1];
     }
 
     @Override
-    public OItemStack a(int var1, int var2) {
+    public OItemStack decreaseItemStackSize(int var1, int var2) {
         if (this.c[var1] != null) {
             OItemStack var3;
             if (this.c[var1].a <= var2) {
@@ -62,27 +63,27 @@ public class OInventoryBasic implements OIInventory {
     }
 
     @Override
-    public void a(int var1, OItemStack var2) {
+    public void setItemStackToSlot(int var1, OItemStack var2) {
         this.c[var1] = var2;
-        if (var2 != null && var2.a > this.a()) {
-            var2.a = this.a();
+        if (var2 != null && var2.a > this.getInventoryStackLimit()) {
+            var2.a = this.getInventoryStackLimit();
         }
 
         this.G_();
     }
 
     @Override
-    public int c() {
+    public int getInventorySize() {
         return this.b;
     }
 
     @Override
-    public String e() {
+    public String getInventoryName() {
         return this.a;
     }
 
     @Override
-    public int a() {
+    public int getInventoryStackLimit() {
         return 64;
     }
 
@@ -122,17 +123,17 @@ public class OInventoryBasic implements OIInventory {
 
     @Override
     public OItemStack getSlot(int index) {
-        return this.g_(index);
+        return this.getStackFromSlot(index);
     }
 
     @Override
     public void setSlot(int index, OItemStack value) {
-        this.a(b, value);
+        this.setItemStackToSlot(b, value);
     }
 
     @Override
     public int getSize() {
-        return this.c();
+        return this.getInventorySize();
     }
 
     @Override
@@ -150,4 +151,34 @@ public class OInventoryBasic implements OIInventory {
         G_();
     }
     //CanaryMod end container
+
+    @Override
+    public void clearContents() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Item getItem(int id, int amount) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item getItem(int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item removeItem(Item item) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item removeItem(int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

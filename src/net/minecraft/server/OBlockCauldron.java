@@ -64,7 +64,7 @@ public class OBlockCauldron extends OBlock {
         if (var1.F) {
             return true;
         } else {
-            OItemStack var6 = var5.k.d();
+            OItemStack var6 = var5.k.getItemInHand();
             if (var6 == null) {
                 return true;
             } else {
@@ -72,7 +72,7 @@ public class OBlockCauldron extends OBlock {
                 if (var6.c == OItem.aw.bP) {
                     if (var7 < 3) {
                         if (!var5.L.d) {
-                            var5.k.a(var5.k.c, new OItemStack(OItem.av));
+                            var5.k.setItemStackToSlot(var5.k.c, new OItemStack(OItem.av));
                         }
 
                         var1.c(var2, var3, var4, 3);
@@ -82,13 +82,13 @@ public class OBlockCauldron extends OBlock {
                 } else {
                     if (var6.c == OItem.bs.bP && var7 > 0) {
                         OItemStack var8 = new OItemStack(OItem.br, 1, 0);
-                        if (!var5.k.a(var8)) {
+                        if (!var5.k.addItemToBackPack(var8)) {
                             var1.b((new OEntityItem(var1, var2 + 0.5D, var3 + 1.5D, var4 + 0.5D, var8)));
                         }
 
                         --var6.a;
                         if (var6.a <= 0) {
-                            var5.k.a(var5.k.c, (OItemStack) null);
+                            var5.k.setItemStackToSlot(var5.k.c, (OItemStack) null);
                         }
 
                         var1.c(var2, var3, var4, var7 - 1);

@@ -2,6 +2,8 @@ package net.minecraft.server;
 
 import java.util.Arrays;
 import java.util.List;
+
+import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItem;
@@ -25,12 +27,12 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
     }
 
     @Override
-    public String e() {
+    public String getInventoryName() {
         return name;
     }
 
     @Override
-    public int c() {
+    public int getInventorySize() {
         return this.a.length;
     }
 
@@ -139,7 +141,7 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         ONBTTagList var2 = var1.n("Items");
-        this.a = new OItemStack[this.c()];
+        this.a = new OItemStack[this.getInventorySize()];
 
         for (int var3 = 0; var3 < var2.d(); ++var3) {
             ONBTTagCompound var4 = (ONBTTagCompound) var2.a(var3);
@@ -171,12 +173,12 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
     }
 
     @Override
-    public OItemStack g_(int var1) {
+    public OItemStack getStackFromSlot(int var1) {
         return var1 >= 0 && var1 < this.a.length ? this.a[var1] : null;
     }
 
     @Override
-    public OItemStack a(int var1, int var2) {
+    public OItemStack decreaseItemStackSize(int var1, int var2) {
         if (var1 >= 0 && var1 < this.a.length) {
             OItemStack var3 = this.a[var1];
             this.a[var1] = null;
@@ -198,7 +200,7 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
     }
 
     @Override
-    public void a(int var1, OItemStack var2) {
+    public void setItemStackToSlot(int var1, OItemStack var2) {
         if (var1 >= 0 && var1 < this.a.length) {
             this.a[var1] = var2;
         }
@@ -206,7 +208,7 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
     }
 
     @Override
-    public int a() {
+    public int getInventoryStackLimit() {
         return 1;
     }
 
@@ -248,12 +250,12 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
 
     @Override
     public int getSize() {
-        return c();
+        return getInventorySize();
     }
 
     @Override
     public OItemStack getSlot(int index) {
-        return g_(index);
+        return getStackFromSlot(index);
     }
 
     @Override
@@ -268,7 +270,7 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
 
     @Override
     public void setSlot(int index, OItemStack value) {
-        a(index, value);
+        setItemStackToSlot(index, value);
     }
 
     @Override
@@ -276,4 +278,34 @@ public class OTileEntityBrewingStand extends OTileEntity implements OIInventory 
         G_();
     }
     //CanaryMod end container
+
+    @Override
+    public void clearContents() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Item getItem(int id, int amount) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item getItem(int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item removeItem(Item item) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item removeItem(int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

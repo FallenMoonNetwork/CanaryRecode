@@ -57,6 +57,7 @@ public final class OItemStack {
         this.c = var1;
         this.a = var2;
         this.e = var3;
+        item = new CanaryItem(this);
     }
 
     public static OItemStack a(ONBTTagCompound var0) {
@@ -75,7 +76,7 @@ public final class OItemStack {
      * Get the CanaryMod item handler
      * @return
      */
-    public CanaryItem getItem() {
+    public CanaryItem getCanaryItem() {
         return item;
     }
    

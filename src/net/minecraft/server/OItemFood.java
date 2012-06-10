@@ -34,7 +34,7 @@ public class OItemFood extends OItem {
     @Override
     public OItemStack b(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         --var1.a;
-        var3.af().a(this);
+        var3.getFoodStats().addStats(this);
         var2.a(var3, "random.burp", 0.5F, var2.r.nextFloat() * 0.1F + 0.9F);
         if (!var2.F && this.bX > 0 && var2.r.nextFloat() < this.ca) {
             var3.e(new OPotionEffect(this.bX, this.bY * 20, this.bZ));

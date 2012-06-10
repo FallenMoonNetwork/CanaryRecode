@@ -184,14 +184,14 @@ public class OItemInWorldManager {
         if (var6 == var3 && (var6 == null || var6.a == var4) && (var6 == null || var6.l() <= 0)) {
             return false;
         } else {
-            var1.k.a[var1.k.c] = var6;
+            var1.k.backpack[var1.k.c] = var6;
             if (this.b()) {
                 var6.a = var4;
                 var6.b(var5);
             }
 
             if (var6.a == 0) {
-                var1.k.a[var1.k.c] = null;
+                var1.k.backpack[var1.k.c] = null;
             }
 
             return true;

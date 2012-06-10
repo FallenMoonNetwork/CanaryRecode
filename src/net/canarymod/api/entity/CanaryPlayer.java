@@ -116,7 +116,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void kill(){
         super.kill();
-        //TODO  dropInventory();
+        dropInventory();
     }
 
     @Override
@@ -126,44 +126,37 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void addExhaustion(float exhaustion) {
-        // TODO Auto-generated method stub
-        
+        ((OEntityPlayerMP)entity).getFoodStats().addExhaustion(exhaustion);
     }
 
     @Override
-    public void removeExhaustion(float exhaustion) {
-        // TODO Auto-generated method stub
-        
+    public void setExhaustion(float exhaustion) {
+        ((OEntityPlayerMP)entity).getFoodStats().setFoodExhaustionLevel(exhaustion);
     }
 
     @Override
     public float getExhaustionLevel() {
-        // TODO Auto-generated method stub
-        return 0;
+        return ((OEntityPlayerMP)entity).getFoodStats().getFoodSaturationLevel();
     }
 
     @Override
     public void setHunger(int hunger) {
-        // TODO Auto-generated method stub
-        
+        ((OEntityPlayerMP)entity).getFoodStats().setFoodLevel(hunger);
     }
 
     @Override
     public int getHunger() {
-        // TODO Auto-generated method stub
-        return 0;
+        return ((OEntityPlayerMP)entity).getFoodStats().getFoodLevel();
     }
 
     @Override
     public void addExperience(int experience) {
-      //TODO: Requires work in OEntityPlayer about experience management
-        
+        ((OEntityPlayerMP)entity).g(experience);
     }
 
     @Override
     public void removeExperience(int experience) {
-        //TODO: Requires work in OEntityPlayer about experience management
-        
+        ((OEntityPlayerMP)entity).e_(experience);
     }
 
     @Override
@@ -173,26 +166,28 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean isSleeping() {
-        // TODO Auto-generated method stub
-        return false;
+        return ((OEntityPlayerMP)entity).Z();
     }
-
+    
     @Override
-    public void setSleeping(boolean sleeping) {
-        // TODO Auto-generated method stub
-        
+    public boolean isDeeplySleeping() {
+        return ((OEntityPlayerMP)entity).aa();
     }
 
     @Override
     public void destroyItemHeld() {
-        // TODO Auto-generated method stub
-        
+        OEntityPlayerMP player = (OEntityPlayerMP) entity;
+        if(player.k.getItemInHand() != null) {
+            player.k.getItemInHand().getCanaryItem().setId(0);
+        }
     }
 
     @Override
     public Item getItemHeld() {
         OEntityPlayerMP player = (OEntityPlayerMP) entity;
-        if(player.k.d() != null)
+        if(player.k.getItemInHand() != null) {
+            return player.k.getItemInHand().getCanaryItem();
+        }
         return null;
     }
 
@@ -374,7 +369,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void giveItem(Item item) {
-        // TODO Auto-generated method stub
+        ((OEntityPlayer)entity).getInventory().addItem(item);
     }
 
     @Override
@@ -456,6 +451,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public NetServerHandler getNetServerHandler() {
         return ((OEntityPlayerMP)entity).getServerHandler();
+    }
+    
+    @Override
+    public int damageVsEntity(Entity entity) {
+        return ((OEntityPlayerMP)entity).k.getDamageVsEntity(((CanaryEntity) entity).getHandle());
     }
 
     @Override
@@ -561,6 +561,21 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         mcServer.h.switchDimension(ent, dim.getType().getId(), false);
         
 //        refreshCreativeMode();
+    }
+
+    @Override
+    public EntityItem[] dropInventory() {
+        Item[] items = getInventory().getContents();
+        EntityItem[] drops = new EntityItem[items.length];
+        for(int i = 0; i < items.length; i++) {
+            if(items[i] == null) {
+                continue;
+            }
+            drops[i] = getDimension().dropItem(getPosition(), items[i]);
+            
+        }
+        getInventory().clearContents();
+        return drops;
     }
     
 //    public void refreshCreativeMode() {

@@ -80,7 +80,7 @@ public class CanaryNpc extends CanaryEntityLiving implements Npc{
     
     @Override
     public Item getItemInHand() {
-        return ((OEntityPlayerMP)entity).k.a[0] != null ? new CanaryItem(((OEntityPlayerMP)entity).y()[0]) : null;
+        return ((OEntityPlayerMP)entity).k.backpack[0] != null ? new CanaryItem(((OEntityPlayerMP)entity).y()[0]) : null;
     }
     
     @Override

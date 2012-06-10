@@ -73,7 +73,7 @@ public class OBlockCake extends OBlock {
 
     private void c(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         if (var5.b(false)) {
-            var5.af().a(2, 0.1F);
+            var5.getFoodStats().addStats(2, 0.1F);
             int var6 = var1.c(var2, var3, var4) + 1;
             if (var6 >= 6) {
                 var1.e(var2, var3, var4, 0);

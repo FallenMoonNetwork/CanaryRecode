@@ -90,7 +90,7 @@ public class OEntityEnderman extends OEntityMob {
     }
 
     private boolean c(OEntityPlayer var1) {
-        OItemStack var2 = var1.k.b[3];
+        OItemStack var2 = var1.k.armorySlots[3];
         if (var2 != null && var2.c == OBlock.ba.bO) {
             return false;
         } else {

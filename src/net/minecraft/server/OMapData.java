@@ -89,7 +89,7 @@ public class OMapData extends OWorldSavedData {
 
         for (int var14 = 0; var14 < this.h.size(); ++var14) {
             OMapInfo var4 = (OMapInfo) this.h.get(var14);
-            if (!var4.a.bE && var4.a.k.c(var2)) {
+            if (!var4.a.bE && var4.a.k.hasItemStack(var2)) {
                 float var5 = (float) (var4.a.bm - this.b) / (1 << this.e);
                 float var6 = (float) (var4.a.bo - this.c) / (1 << this.e);
                 byte var7 = 64;

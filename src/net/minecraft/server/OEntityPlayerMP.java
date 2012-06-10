@@ -147,13 +147,13 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     }
 
     public OItemStack c(int var1) {
-        return var1 == 0 ? this.k.d() : this.k.b[var1 - 1];
+        return var1 == 0 ? this.k.getItemInHand() : this.k.armorySlots[var1 - 1];
     }
 
     @Override
     public void a(ODamageSource var1) {
         this.b.h.sendPacketToAll((new OPacket3Chat(var1.a(this))));
-        this.k.k();
+        this.k.dropAllItems();
     }
 
     @Override
@@ -192,8 +192,8 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public void a(boolean var1) {
         super.F_();
 
-        for (int var2 = 0; var2 < this.k.c(); ++var2) {
-            OItemStack var3 = this.k.g_(var2);
+        for (int var2 = 0; var2 < this.k.getInventorySize(); ++var2) {
+            OItemStack var3 = this.k.getStackFromSlot(var2);
             if (var3 != null && OItem.d[var3.c].t_() && this.a.b() <= 2) {
                 OPacket var4 = ((OItemMapBase) OItem.d[var3.c]).c(var3, this.bi, this);
                 if (var4 != null) {
@@ -287,11 +287,11 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             --this.I;
         }
 
-        if (this.aD() != this.cf || this.cg != this.n.a() || this.n.c() == 0.0F != this.ch) {
-            this.a.b((new OPacket8UpdateHealth(this.aD(), this.n.a(), this.n.c())));
+        if (this.aD() != this.cf || this.cg != this.foodStats.getFoodLevel() || this.foodStats.getFoodSaturationLevel() == 0.0F != this.ch) {
+            this.a.b((new OPacket8UpdateHealth(this.aD(), this.foodStats.getFoodLevel(), this.foodStats.getFoodSaturationLevel())));
             this.cf = this.aD();
-            this.cg = this.n.a();
-            this.ch = this.n.c() == 0.0F;
+            this.cg = this.foodStats.getFoodLevel();
+            this.ch = this.foodStats.getFoodSaturationLevel() == 0.0F;
         }
 
         if (this.N != this.ci) {
@@ -436,7 +436,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     @Override
     public void a(OIInventory var1) {
         this.bc();
-        this.a.b((new OPacket100OpenWindow(this.cl, 0, var1.e(), var1.c())));
+        this.a.b((new OPacket100OpenWindow(this.cl, 0, var1.getInventoryName(), var1.getInventorySize())));
         this.m = new OContainerChest(this.k, var1);
         this.m.f = this.cl;
         this.m.a((OICrafting) this);
@@ -445,7 +445,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     @Override
     public void a(OTileEntityFurnace var1) {
         this.bc();
-        this.a.b((new OPacket100OpenWindow(this.cl, 2, var1.e(), var1.c())));
+        this.a.b((new OPacket100OpenWindow(this.cl, 2, var1.getInventoryName(), var1.getInventorySize())));
         this.m = new OContainerFurnace(this.k, var1);
         this.m.f = this.cl;
         this.m.a((OICrafting) this);
@@ -454,7 +454,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     @Override
     public void a(OTileEntityDispenser var1) {
         this.bc();
-        this.a.b((new OPacket100OpenWindow(this.cl, 3, var1.e(), var1.c())));
+        this.a.b((new OPacket100OpenWindow(this.cl, 3, var1.getInventoryName(), var1.getInventorySize())));
         this.m = new OContainerDispenser(this.k, var1);
         this.m.f = this.cl;
         this.m.a((OICrafting) this);
@@ -463,7 +463,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     @Override
     public void a(OTileEntityBrewingStand var1) {
         this.bc();
-        this.a.b((new OPacket100OpenWindow(this.cl, 5, var1.e(), var1.c())));
+        this.a.b((new OPacket100OpenWindow(this.cl, 5, var1.getInventoryName(), var1.getInventorySize())));
         this.m = new OContainerBrewingStand(this.k, var1);
         this.m.f = this.cl;
         this.m.a((OICrafting) this);
@@ -485,7 +485,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     @Override
     public void a(OContainer var1, List var2) {
         this.a.b((new OPacket104WindowItems(var1.f, var2)));
-        this.a.b((new OPacket103SetSlot(-1, -1, this.k.l())));
+        this.a.b((new OPacket103SetSlot(-1, -1, this.k.getItemStack())));
     }
 
     @Override
@@ -505,7 +505,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     public void G() {
         if (!this.h) {
-            this.a.b((new OPacket103SetSlot(-1, -1, this.k.l())));
+            this.a.b((new OPacket103SetSlot(-1, -1, this.k.getItemStack())));
         }
     }
 

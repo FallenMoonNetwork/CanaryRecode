@@ -228,12 +228,12 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
 
     @Override
     public boolean b(OEntityPlayer var1) {
-        OItemStack var2 = var1.k.d();
+        OItemStack var2 = var1.k.getItemInHand();
         if (var2 != null && this.a(var2) && this.K() == 0) {
             if (!var1.L.d) {
                 --var2.a;
                 if (var2.a <= 0) {
-                    var1.k.a(var1.k.c, (OItemStack) null);
+                    var1.k.setItemStackToSlot(var1.k.c, (OItemStack) null);
                 }
             }
 

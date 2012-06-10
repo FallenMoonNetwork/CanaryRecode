@@ -38,7 +38,7 @@ public class OItemGlassBottle extends OItem {
                         return new OItemStack(OItem.br);
                     }
 
-                    if (!var3.k.a(new OItemStack(OItem.br))) {
+                    if (!var3.k.addItemToBackPack(new OItemStack(OItem.br))) {
                         var3.b(new OItemStack(OItem.br.bP, 1, 0));
                     }
                 }

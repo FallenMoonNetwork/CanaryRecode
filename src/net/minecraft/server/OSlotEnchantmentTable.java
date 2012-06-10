@@ -14,7 +14,7 @@ class OSlotEnchantmentTable extends OInventoryBasic {
     }
 
     @Override
-    public int a() {
+    public int getInventoryStackLimit() {
         return 1;
     }
 
