@@ -6,6 +6,7 @@ import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.CanaryEntityLiving;
 import net.canarymod.api.entity.EntityLiving;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.hook.CancelableHook;
@@ -141,13 +142,13 @@ public abstract class OEntity {
      * @return
      */
     public CanaryDimension getDimension() {
-       return bi.getCanaryDimension();
+        return bi.getCanaryDimension();
     }
-    
+
     public void setDimension(CanaryDimension dim) {
         this.bi = dim.getHandle();
     }
-    
+
     public CanaryEntity getCanaryEntity() {
         return entity;
     }
@@ -261,9 +262,11 @@ public abstract class OEntity {
             } else {
                 if (this.c % 20 == 0) {
                     // CanaryMod - fire tick damage. 
-                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, (EntityLiving) getCanaryEntity(), new CanaryDamageSource(ODamageSource.c), 1));
-                    if (!hook.isCancelled()) {
-                        this.a(ODamageSource.c, 1);
+                    if (this instanceof OEntityLiving) {
+                        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.c), 1));
+                        if (!hook.isCancelled()) {
+                            this.a(ODamageSource.c, 1);
+                        }
                     }
                     // CanaryMod - end.
                 }
@@ -294,7 +297,7 @@ public abstract class OEntity {
         if (!this.bX) {
             // CanaryMod - lava damage.
             if (this instanceof OEntityLiving) { 
-                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, (EntityLiving) getCanaryEntity(), new CanaryDamageSource(ODamageSource.d), 4));
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.d), 4));
                 if (hook.isCancelled()) {
                     return;
                 }
@@ -643,12 +646,14 @@ public abstract class OEntity {
     protected void a(int var1) {
         if (!this.bX) {
             // CanaryMod - fire damage. 
-            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, (EntityLiving) getCanaryEntity(), new CanaryDamageSource(ODamageSource.b), var1));
-            if (!hook.isCancelled()) {
-                this.a(ODamageSource.b, var1);
+            if (this instanceof OEntityLiving) {
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.b), var1));
+                if (!hook.isCancelled()) {
+                    this.a(ODamageSource.b, var1);
+                }
             }
             // CanaryMod - end.
-            
+
         }
 
     }
@@ -1137,9 +1142,11 @@ public abstract class OEntity {
     public void a(OEntityLightningBolt var1) {
         // CanaryMod - lightning damage. 
         // Note: At the moment this damage is counted as fire damage. 
-        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, (EntityLiving) getCanaryEntity(), new CanaryDamageSource(ODamageSource.b), 5));
-        if (hook.isCancelled()) {
-            return;
+        if (this instanceof OEntityLiving) {
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.b), 5));
+            if (hook.isCancelled()) {
+                return;
+            }
         }
         // CanaryMod - end.
         this.a(5);

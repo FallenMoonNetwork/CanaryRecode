@@ -2,6 +2,7 @@ package net.canarymod.api.entity;
 
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.DamageSource;
+import net.canarymod.api.DamageType;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OChunkCoordinates;
@@ -35,8 +36,11 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     }
 
     @Override
-    public void dealDamage(DamageSource damagesource, int amount) {
-        ((OEntityLiving) entity).a(((CanaryDamageSource) damagesource).getHandle(), amount);
+    public void dealDamage(DamageType damagetype, int amount) {
+        DamageSource theSource = CanaryDamageSource.getDamageSourceFromType(damagetype);
+        if(theSource != null){
+            ((OEntityLiving) entity).a(((CanaryDamageSource) theSource).getHandle(), amount);
+        }
     }
 
     @Override
@@ -130,6 +134,11 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
     @Override
     public void kill() {
+        setHealth(0);
+    }
+    
+    @Override
+    public void destroy() {
         entity.X();
     }
 

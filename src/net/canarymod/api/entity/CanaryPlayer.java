@@ -112,6 +112,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
 
     }
+    
+    @Override
+    public void kill(){
+        super.kill();
+        //TODO  dropInventory();
+    }
 
     @Override
     public void sendMessage(String message) {

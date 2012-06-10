@@ -5,71 +5,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.CanaryPlayer;
-import net.minecraft.server.OAchievementList;
-import net.minecraft.server.OChunk;
-import net.minecraft.server.OChunkCoordIntPair;
-import net.minecraft.server.OChunkCoordinates;
-import net.minecraft.server.OContainer;
-import net.minecraft.server.OContainerBrewingStand;
-import net.minecraft.server.OContainerChest;
-import net.minecraft.server.OContainerDispenser;
-import net.minecraft.server.OContainerEnchantment;
-import net.minecraft.server.OContainerFurnace;
-import net.minecraft.server.OContainerWorkbench;
-import net.minecraft.server.ODamageSource;
-import net.minecraft.server.OEntity;
-import net.minecraft.server.OEntityArrow;
-import net.minecraft.server.OEntityDamageSource;
-import net.minecraft.server.OEntityItem;
-import net.minecraft.server.OEntityPlayer;
-import net.minecraft.server.OEntityTracker;
-import net.minecraft.server.OEntityXPOrb;
-import net.minecraft.server.OEnumAction;
-import net.minecraft.server.OEnumStatus;
-import net.minecraft.server.OICrafting;
-import net.minecraft.server.OIInventory;
-import net.minecraft.server.OItem;
-import net.minecraft.server.OItemInWorldManager;
-import net.minecraft.server.OItemMapBase;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OMinecraftServer;
-import net.minecraft.server.ONBTTagCompound;
-import net.minecraft.server.ONetServerHandler;
-import net.minecraft.server.OPacket;
-import net.minecraft.server.OPacket100OpenWindow;
-import net.minecraft.server.OPacket101CloseWindow;
-import net.minecraft.server.OPacket103SetSlot;
-import net.minecraft.server.OPacket104WindowItems;
-import net.minecraft.server.OPacket105UpdateProgressbar;
-import net.minecraft.server.OPacket17Sleep;
-import net.minecraft.server.OPacket18Animation;
-import net.minecraft.server.OPacket200Statistic;
-import net.minecraft.server.OPacket202PlayerAbilities;
-import net.minecraft.server.OPacket22Collect;
-import net.minecraft.server.OPacket38EntityStatus;
-import net.minecraft.server.OPacket39AttachEntity;
-import net.minecraft.server.OPacket3Chat;
-import net.minecraft.server.OPacket41EntityEffect;
-import net.minecraft.server.OPacket42RemoveEntityEffect;
-import net.minecraft.server.OPacket43Experience;
-import net.minecraft.server.OPacket51MapChunk;
-import net.minecraft.server.OPacket5PlayerInventory;
-import net.minecraft.server.OPacket70Bed;
-import net.minecraft.server.OPacket8UpdateHealth;
-import net.minecraft.server.OPotionEffect;
-import net.minecraft.server.OSlotCrafting;
-import net.minecraft.server.OStatBase;
-import net.minecraft.server.OStringTranslate;
-import net.minecraft.server.OTileEntity;
-import net.minecraft.server.OTileEntityBrewingStand;
-import net.minecraft.server.OTileEntityDispenser;
-import net.minecraft.server.OTileEntityFurnace;
-import net.minecraft.server.OWorld;
-import net.minecraft.server.OWorldServer;
+import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.position.Location;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.player.TeleportHook;
 
 public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
@@ -314,12 +258,17 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                     } else {
                         var16 = -1;
                     }
-
-                    this.b.h.switchDimension(this, var16, true);
-                    this.ci = -1;
-                    this.cf = -1;
-                    this.cg = -1;
-                    this.a(OAchievementList.x);
+                    Location location = getPlayer().getLocation();
+                    int currDim = getPlayer().getDimension().getType().getId();
+                    location.setDimension(currDim == 0 ? -1 : 0);
+                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new TeleportHook(getPlayer(), location, true));
+                    if (!hook.isCancelled()) {
+                        this.b.h.switchDimension(this, var16, true);
+                        this.ci = -1;
+                        this.cf = -1;
+                        this.cg = -1;
+                        this.a(OAchievementList.x);
+                    }
                 }
             }
 
