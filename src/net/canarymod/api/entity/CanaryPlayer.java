@@ -24,6 +24,7 @@ import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OChunkCoordinates;
+import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OMinecraftServer;
 import net.minecraft.server.OStatBase;
@@ -110,6 +111,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             }
         }
 
+    }
+    
+    @Override
+    public void kill(){
+        super.kill();
+        //TODO  dropInventory();
     }
 
     @Override

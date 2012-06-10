@@ -130,6 +130,11 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
     @Override
     public void kill() {
+        setHealth(0);
+    }
+    
+    @Override
+    public void destroy() {
         entity.X();
     }
 
