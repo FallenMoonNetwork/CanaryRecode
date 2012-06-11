@@ -3,9 +3,9 @@ package net.minecraft.server;
 import java.util.ArrayList;
 
 import net.canarymod.Canary;
-import net.canarymod.api.world.CanaryBlock;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockType;
+import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.player.TeleportHook;
 import net.canarymod.hook.world.PistonHook;

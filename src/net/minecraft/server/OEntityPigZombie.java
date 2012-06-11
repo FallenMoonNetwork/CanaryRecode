@@ -2,7 +2,10 @@ package net.minecraft.server;
 
 import java.util.List;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryPigZombie;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEnchantmentHelper;
 import net.minecraft.server.OEntity;
@@ -85,17 +88,21 @@ public class OEntityPigZombie extends OEntityZombie {
     public boolean a(ODamageSource var1, int var2) {
         OEntity var3 = var1.a();
         if (var3 instanceof OEntityPlayer) {
-            List var4 = this.bi.b(this, this.bw.b(32.0D, 32.0D, 32.0D));
-
-            for (int var5 = 0; var5 < var4.size(); ++var5) {
-                OEntity var6 = (OEntity) var4.get(var5);
-                if (var6 instanceof OEntityPigZombie) {
-                    OEntityPigZombie var7 = (OEntityPigZombie) var6;
-                    var7.e(var3);
+            //CanaryMod - onMobTarget
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(getCanaryEntityLiving(), ((OEntityLiving)var3).getCanaryEntityLiving().getPlayer()));
+            if(!hook.isCancelled()){
+                List var4 = this.bi.b(this, this.bw.b(32.0D, 32.0D, 32.0D));
+    
+                for (int var5 = 0; var5 < var4.size(); ++var5) {
+                    OEntity var6 = (OEntity) var4.get(var5);
+                    if (var6 instanceof OEntityPigZombie) {
+                        OEntityPigZombie var7 = (OEntityPigZombie) var6;
+                        var7.e(var3);
+                    }
                 }
+    
+                this.e(var3);
             }
-
-            this.e(var3);
         }
 
         return super.a(var1, var2);

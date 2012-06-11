@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -10,10 +11,14 @@ import net.canarymod.TextFormat;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.blocks.CanarySignBlock;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.player.ConnectionHook;
+import net.canarymod.hook.player.PlayerMoveHook;
+import net.canarymod.hook.player.PlayerRespawnHook;
 import net.canarymod.hook.player.TeleportHook;
+import net.canarymod.hook.world.SignHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OChatAllowedCharacters;
 import net.minecraft.server.OChunkCoordinates;
@@ -149,6 +154,13 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                     this.r = true;
                 }
             }
+            
+            //CanaryMod start - onPlayerMove
+            if(Math.floor(o) != Math.floor(player.getX()) && Math.floor(p) != Math.floor(player.getY()) && Math.floor(q) != Math.floor(player.getZ())){
+                Location from = new Location(player.getDimension(), o, p, q, player.getRotation(), player.getPitch());
+                Canary.hooks().callHook(new PlayerMoveHook(player, from, player.getLocation()));
+            }
+            //CanaryMod end
 
             if (this.r) {
                 double var7;
@@ -642,14 +654,17 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     @Override
     public void a(OPacket9Respawn var1) {
+        // CanaryMod: onPlayerRespawn
+        Location respawnLocation = e.bi.getCanaryDimension().getSpawnLocation();
         if (this.e.j) {
-            this.e = this.d.h.a(this.e, 0, true);
+            PlayerRespawnHook hook = (PlayerRespawnHook) Canary.hooks().callHook(new PlayerRespawnHook(e.getPlayer(), respawnLocation));
+            this.e = this.d.h.a(this.e, 0, true, hook.getRespawnLocation());
         } else {
             if (this.e.aD() > 0) {
                 return;
             }
-
-            this.e = this.d.h.a(this.e, 0, false);
+            PlayerRespawnHook hook = (PlayerRespawnHook) Canary.hooks().callHook(new PlayerRespawnHook(e.getPlayer(), respawnLocation));
+            this.e = this.d.h.a(this.e, 0, false, hook.getRespawnLocation());
         }
 
     }
@@ -762,14 +777,25 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                 }
             }
 
+                    
             if (var3 instanceof OTileEntitySign) {
                 var9 = var1.a;
                 int var10 = var1.b;
                 var6 = var1.c;
                 OTileEntitySign var7 = (OTileEntitySign) var3;
 
+
+                // CanaryMod: Copy the old line text
+                String[] old = Arrays.copyOf(var7.a, var7.a.length);
+                           
                 for (int var8 = 0; var8 < 4; ++var8) {
                     var7.a[var8] = var1.d[var8];
+                }
+                
+                CanarySignBlock sign = new CanarySignBlock(var7);
+                CancelableHook hook = (CancelableHook) Canary.hooks().callHook(new SignHook(getUser(), sign, true));
+                if(hook.isCancelled()){
+                    var7.a = Arrays.copyOf(old, old.length);
                 }
 
                 var7.G_();

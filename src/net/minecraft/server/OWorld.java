@@ -10,8 +10,11 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
+import net.canarymod.Canary;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.EntitySpawnHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OBlock;
@@ -826,6 +829,20 @@ public class OWorld implements OIBlockAccess {
     }
 
     public boolean b(OEntity var1) {
+        
+        //CanaryMod start - EntitySpawnHook
+        if(!(var1 instanceof OEntityPlayer)){
+            CancelableHook hook = null;
+            if(var1 instanceof OEntityLiving){
+                //implement MobSpawnRate Here!
+            }
+            hook = (CancelableHook) Canary.hooks().callCancelableHook(new EntitySpawnHook(var1.getCanaryEntity(), true, (var1 instanceof OEntityLiving)));
+            if(hook.isCancelled()){
+                return false;
+            }
+        }
+        //CanaryMod end - EntitySpawnHook
+        
         int var2 = OMathHelper.b(var1.bm / 16.0D);
         int var3 = OMathHelper.b(var1.bo / 16.0D);
         boolean var4 = false;

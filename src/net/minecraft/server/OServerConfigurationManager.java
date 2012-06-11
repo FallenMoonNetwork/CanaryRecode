@@ -23,6 +23,7 @@ import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.Dimension.Type;
 import net.canarymod.api.world.World;
+import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.player.LoginChecksHook;
 import net.minecraft.server.OChunkCoordinates;
@@ -234,8 +235,13 @@ public class OServerConfigurationManager {
         }
     }
 
-    //Respawn player
+    // CanaryMod alias to set location when respawning.
     public OEntityPlayerMP a(OEntityPlayerMP var1, int var2, boolean var3) {
+        return a(var1, var2, var3, null);
+    }
+    
+    //Respawn player
+    public OEntityPlayerMP a(OEntityPlayerMP var1, int var2, boolean var3, Location spawnLocation) {
         var1.getDimension().getEntityTracker().untrackPlayerSymmetrics(var1.getPlayer());
         var1.getDimension().getEntityTracker().untrackEntity(var1.getPlayer());
         var1.getDimension().getPlayerManager().removePlayer(var1.getPlayer());
@@ -275,9 +281,14 @@ public class OServerConfigurationManager {
             }
         }
 
+        // CanaryMod set player location and angle if a spawn location is defined
+        if (spawnLocation != null){
+            var5.c(spawnLocation.getX(), spawnLocation.getY(), spawnLocation.getZ(), spawnLocation.getRotation(), spawnLocation.getPitch());
+        }
+        
         var6.G.c((int) var5.bm >> 4, (int) var5.bo >> 4);
 
-        while (var6.a(var5, var5.bw).size() != 0) {
+        while (var6.a(var5, var5.bw).size() != 0) {  //This is the checks for canSpawnHere  should we do something with this so players don't end up on roofs?
             var5.c(var5.bm, var5.bn + 1.0D, var5.bo);
         }
 

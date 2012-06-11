@@ -1,5 +1,8 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityPlayer;
@@ -110,6 +113,15 @@ public abstract class OEntityAITarget extends OEntityAIBase {
                             return false;
                         }
                     }
+                    
+                    //CanaryMod - MOB_TARGET
+                    if (var1.getCanaryEntityLiving().isPlayer()) {
+                        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(this.c.getCanaryEntityLiving(), var1.getCanaryEntityLiving().getPlayer()));
+                        if (hook.isCancelled()) {
+                            return false;
+                        }
+                    }
+                    //CanaryMod end
 
                     return true;
                 }

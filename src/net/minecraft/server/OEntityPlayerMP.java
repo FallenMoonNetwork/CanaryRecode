@@ -11,9 +11,11 @@ import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.blocks.CanarySignBlock;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.player.TeleportHook;
+import net.canarymod.hook.world.SignHook;
 
 public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
@@ -325,6 +327,14 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     private void a(OTileEntity var1) {
         if (var1 != null) {
+            
+            //CanaryMod start - onSignShow
+            if (var1 instanceof OTileEntitySign) {
+                CanarySignBlock sign = new CanarySignBlock((OTileEntitySign) var1);
+                Canary.hooks().callHook(new SignHook(canaryPlayer, sign, false));
+            }
+            //CanaryMod end
+            
             OPacket var2 = var1.d();
             if (var2 != null) {
                 this.a.b(var2);

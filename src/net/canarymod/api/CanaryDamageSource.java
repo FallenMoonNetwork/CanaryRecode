@@ -79,14 +79,37 @@ public class CanaryDamageSource implements DamageSource {
     
 
     /**
-     * Gets a damage source from a damage type
+     * Gets a damage source from a damage type<br>
+     * Note: This will not work with Entity Damage Sources due to
+     * the extra Entity Arguments.
      * @param type
      */
     public static DamageSource getDamageSourceFromType(DamageType type){
         switch(type){
         case CACTUS:
             return new CanaryDamageSource(ODamageSource.h);
-        //case FallingAsleepHere: return going_to_bed_will_finish_later;
+        case EXPLOSION:
+            return new CanaryDamageSource(ODamageSource.l);
+        case FALL:
+            return new CanaryDamageSource(ODamageSource.i);
+        case FIRE:
+            return new CanaryDamageSource(ODamageSource.b);
+        case FIRE_TICK:
+            return new CanaryDamageSource(ODamageSource.c);
+        case GENERIC:
+            return new CanaryDamageSource(ODamageSource.k);
+        case LAVA:
+            return new CanaryDamageSource(ODamageSource.d);
+        case POTION:
+            return new CanaryDamageSource(ODamageSource.m);
+        case STARVATION:
+            return new CanaryDamageSource(ODamageSource.g);
+        case SUFFOCATION:
+            return new CanaryDamageSource(ODamageSource.e);
+        case VOID:
+            return new CanaryDamageSource(ODamageSource.j);
+        case WATER:
+            return new CanaryDamageSource(ODamageSource.f);
         default: 
             return null;
         }

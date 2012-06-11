@@ -584,6 +584,28 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         getInventory().clearContents();
         return drops;
     }
+
+    @Override
+    public boolean isDamageDisabled() {
+        return ((OEntityPlayerMP)entity).L.a;
+    }
+    
+    @Override
+    public void setDamageDisabled(boolean disabled) {
+        ((OEntityPlayerMP)entity).L.a = disabled;
+    }
+
+    @Override
+    public boolean isInCreative() {
+        return ((OEntityPlayerMP)entity).c.b();
+    }
+
+    @Override
+    public void setMode(int mode) {
+        if(mode == 0 || mode == 1){
+            ((OEntityPlayerMP)entity).c.a(mode);
+        }
+    }
     
 //    public void refreshCreativeMode() {
 //        if (getMode() || etc.getMCServer().d.a("gamemode", 0) == 1) {

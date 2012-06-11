@@ -1,5 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.CanaryTNTPrimed;
+import net.canarymod.api.entity.Entity;
+import net.canarymod.api.entity.TNTPrimed;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
@@ -7,6 +11,7 @@ import net.minecraft.server.OWorld;
 public class OEntityTNTPrimed extends OEntity {
 
     public int a;
+    private TNTPrimed tntprimed;
 
     public OEntityTNTPrimed(OWorld var1) {
         super(var1);
@@ -27,6 +32,7 @@ public class OEntityTNTPrimed extends OEntity {
         this.bj = var2;
         this.bk = var4;
         this.bl = var6;
+        tntprimed = new CanaryTNTPrimed(this);
     }
 
     @Override
@@ -74,7 +80,7 @@ public class OEntityTNTPrimed extends OEntity {
 
     private void k() {
         float var1 = 4.0F;
-        this.bi.a((OEntity) null, this.bm, this.bn, this.bo, var1);
+        this.bi.a(this, this.bm, this.bn, this.bo, var1); //CanaryMod added 'this' as entity param
     }
 
     @Override
@@ -85,5 +91,10 @@ public class OEntityTNTPrimed extends OEntity {
     @Override
     protected void a(ONBTTagCompound var1) {
         this.a = var1.d("Fuse");
+    }
+    
+    @Override
+    public CanaryEntity getCanaryEntity(){
+        return (CanaryEntity) tntprimed;
     }
 }

@@ -1,5 +1,8 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityMob;
 import net.minecraft.server.OEnumCreatureAttribute;
@@ -57,9 +60,11 @@ public class OEntitySpider extends OEntityMob {
     @Override
     protected OEntity o() {
         float var1 = this.b(1.0F);
-        if (var1 < 0.5F) {
-            double var2 = 16.0D;
-            return this.bi.b(this, var2);
+        double var2 = 16.0D;
+        OEntityPlayer entityplayer = this.bi.b(this, var2);
+        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(getCanaryEntityLiving(), entityplayer.getCanaryEntityLiving().getPlayer()));
+        if (var1 < 0.5F && !hook.isCancelled()) {
+           return entityplayer;
         } else {
             return null;
         }
