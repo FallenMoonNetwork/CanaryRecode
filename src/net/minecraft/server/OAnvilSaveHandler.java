@@ -37,7 +37,7 @@ public class OAnvilSaveHandler extends OSaveHandler {
 
     @Override
     public void a(OWorldInfo var1, List var2) {
-        var1.a(19133);
+        var1.setVersion(19133);
         super.a(var1, var2);
     }
 

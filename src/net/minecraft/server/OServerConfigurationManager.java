@@ -270,7 +270,7 @@ public class OServerConfigurationManager {
         var5.setServerHandler(var5.a.getCanaryNetServerHandler());
         OWorldServer var6 = (OWorldServer) var5.getDimension().getHandle();
         var5.c.a(var1.c.a());
-        var5.c.b(var6.s().m());
+        var5.c.b(var6.s().getGameMode());
         if (var4 != null) {
             OChunkCoordinates var7 = OEntityPlayer.a(((CanaryDimension)var1.getDimension()).getHandle(), var4);
             if (var7 != null) {
@@ -293,7 +293,7 @@ public class OServerConfigurationManager {
         }
 
         //respawn packet
-        var5.a.b((new OPacket9Respawn(var5.w, (byte) var5.bi.q, var5.bi.s().p(), var5.bi.y(), var5.c.a())));
+        var5.a.b((new OPacket9Respawn(var5.w, (byte) var5.bi.q, var5.bi.s().getWorldType(), var5.bi.y(), var5.c.a())));
         //teleport to spawn location
         var5.a.a(var5.bm, var5.bn, var5.bo, var5.bs, var5.bt);
         //something
@@ -321,7 +321,7 @@ public class OServerConfigurationManager {
         OWorldServer var4 = (OWorldServer) ((CanaryDimension)var1.getDimension()).getHandle();
         var1.w = var2; //set new dimension
         OWorldServer var5 = (OWorldServer) ((CanaryDimension)var1.getDimension().getWorld().getDimension(Type.fromId(var2))).getHandle();
-        var1.a.b((new OPacket9Respawn(var1.w, (byte) var1.bi.q, var5.s().p(), var5.y(), var1.c.a())));
+        var1.a.b((new OPacket9Respawn(var1.w, (byte) var1.bi.q, var5.s().getWorldType(), var5.y(), var1.c.a())));
         var4.f(var1);
         var1.bE = false;
         double var6 = var1.bm;

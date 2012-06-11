@@ -43,7 +43,7 @@ public class OAnvilSaveConverter extends OSaveFormatOld {
     @Override
     public boolean a(String var1) {
         OWorldInfo var2 = this.b(var1);
-        return var2 != null && var2.h() != this.a();
+        return var2 != null && var2.getVersion() != this.a();
     }
 
     @Override
@@ -69,18 +69,18 @@ public class OAnvilSaveConverter extends OSaveFormatOld {
         System.out.println("Total conversion count is " + var9);
         OWorldInfo var10 = this.b(var1);
         Object var11 = null;
-        if (var10.p() == OWorldType.c) {
+        if (var10.getWorldType() == OWorldType.c) {
             var11 = new OWorldChunkManagerHell(OBiomeGenBase.c, 0.5F, 0.5F);
         } else {
-            var11 = new OWorldChunkManager(var10.b(), var10.p());
+            var11 = new OWorldChunkManager(var10.getRandomSeed(), var10.getWorldType());
         }
 
         this.a(new File(var6, "region"), var3, (OWorldChunkManager) var11, 0, var9, var2);
         this.a(new File(var7, "region"), var4, new OWorldChunkManagerHell(OBiomeGenBase.j, 1.0F, 0.0F), var3.size(), var9, var2);
         this.a(new File(var8, "region"), var5, new OWorldChunkManagerHell(OBiomeGenBase.k, 0.5F, 0.0F), var3.size() + var4.size(), var9, var2);
-        var10.a(19133);
-        if (var10.p() == OWorldType.d) {
-            var10.a(OWorldType.b);
+        var10.setVersion(19133);
+        if (var10.getWorldType() == OWorldType.d) {
+            var10.setWorldType(OWorldType.b);
         }
 
         this.c(var1);

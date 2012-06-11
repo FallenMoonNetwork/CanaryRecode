@@ -117,9 +117,9 @@ public class ONetLoginHandler extends ONetHandler {
             a.info(this.b() + " logged in with entity id " + var2.bd + " at (" + var2.bm + ", " + var2.bn + ", " + var2.bo + ")");
             OWorldServer var3 = (OWorldServer) ((CanaryDimension)var2.getDimension()).getHandle();
             OChunkCoordinates var4 = var3.p();
-            var2.c.b(var3.s().m());
+            var2.c.b(var3.s().getGameMode());
             ONetServerHandler var5 = new ONetServerHandler(this.e, this.b, var2);
-            var5.b((new OPacket1Login("", var2.bd, var3.s().p(), var2.c.a(), var3.t.g, (byte) var3.q, (byte) var3.y(), (byte) this.e.h.k())));
+            var5.b((new OPacket1Login("", var2.bd, var3.s().getWorldType(), var2.c.a(), var3.t.g, (byte) var3.q, (byte) var3.y(), (byte) this.e.h.k())));
             var5.b((new OPacket6SpawnPosition(var4.a, var4.b, var4.c)));
             var5.b((new OPacket202PlayerAbilities(var2.L)));
             this.e.h.a(var2, var3);

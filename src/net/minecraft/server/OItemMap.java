@@ -28,8 +28,8 @@ public class OItemMap extends OItemMapBase {
          var1.b(var2.b("map"));
          String var3 = "map_" + var1.h();
          var4 = new OMapData(var3);
-         var4.b = var2.s().c();
-         var4.c = var2.s().e();
+         var4.b = var2.s().getSpawnX();
+         var4.c = var2.s().getSpawnZ();
          var4.e = 3;
          var4.d = (byte)var2.t.g;
          var4.a();

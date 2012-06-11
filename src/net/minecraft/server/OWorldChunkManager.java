@@ -39,7 +39,7 @@ public class OWorldChunkManager {
     }
 
     public OWorldChunkManager(OWorld var1) {
-        this(var1.n(), var1.s().p());
+        this(var1.n(), var1.s().getWorldType());
     }
 
     public List a() {

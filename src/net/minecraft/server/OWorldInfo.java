@@ -8,108 +8,108 @@ import net.minecraft.server.OWorldType;
 
 public class OWorldInfo {
 
-    private long a;
-    private OWorldType b;
-    private int c;
-    private int d;
-    private int e;
-    private long f;
+    private long randomSeed;
+    private OWorldType worldType;
+    private int spawnX;
+    private int spawnY;
+    private int spawnZ;
+    private long time;
     private long g;
-    private long h;
+    private long sizeOnDisk;
     private ONBTTagCompound i;
-    private int j;
-    private String k;
-    private int l;
+    private int dimension;
+    private String worldName;
+    private int version;
     private boolean isRaining;
     private int rainTimeTicks;
     private boolean isThundering;
     private int thunderTimeTicks;
-    private int q;
-    private boolean r;
-    private boolean s;
+    private int gameMode;
+    private boolean structures;
+    private boolean hardcore;
 
     public OWorldInfo(ONBTTagCompound var1) {
         super();
-        this.b = OWorldType.b;
-        this.s = false;
-        this.a = var1.g("RandomSeed");
+        this.worldType = OWorldType.b;
+        this.hardcore = false;
+        this.randomSeed = var1.g("RandomSeed");
         if (var1.c("generatorName")) {
             String var2 = var1.j("generatorName");
-            this.b = OWorldType.a(var2);
-            if (this.b == null) {
-                this.b = OWorldType.b;
-            } else if (this.b.c()) {
+            this.worldType = OWorldType.a(var2);
+            if (this.worldType == null) {
+                this.worldType = OWorldType.b;
+            } else if (this.worldType.c()) {
                 int var3 = 0;
                 if (var1.c("generatorVersion")) {
                     var3 = var1.f("generatorVersion");
                 }
 
-                this.b = this.b.a(var3);
+                this.worldType = this.worldType.a(var3);
             }
         }
 
-        this.q = var1.f("GameType");
+        this.gameMode = var1.f("GameType");
         if (var1.c("MapFeatures")) {
-            this.r = var1.o("MapFeatures");
+            this.structures = var1.o("MapFeatures");
         } else {
-            this.r = true;
+            this.structures = true;
         }
 
-        this.c = var1.f("SpawnX");
-        this.d = var1.f("SpawnY");
-        this.e = var1.f("SpawnZ");
-        this.f = var1.g("Time");
+        this.spawnX = var1.f("SpawnX");
+        this.spawnY = var1.f("SpawnY");
+        this.spawnZ = var1.f("SpawnZ");
+        this.time = var1.g("Time");
         this.g = var1.g("LastPlayed");
-        this.h = var1.g("SizeOnDisk");
-        this.k = var1.j("LevelName");
-        this.l = var1.f("version");
+        this.sizeOnDisk = var1.g("SizeOnDisk");
+        this.worldName = var1.j("LevelName");
+        this.version = var1.f("version");
         this.rainTimeTicks = var1.f("rainTime");
         this.isRaining = var1.o("raining");
         this.thunderTimeTicks = var1.f("thunderTime");
         this.isThundering = var1.o("thundering");
-        this.s = var1.o("hardcore");
+        this.hardcore = var1.o("hardcore");
         if (var1.c("Player")) {
             this.i = var1.m("Player");
-            this.j = this.i.f("Dimension");
+            this.dimension = this.i.f("Dimension");
         }
 
     }
 
     public OWorldInfo(OWorldSettings var1, String var2) {
         super();
-        this.b = OWorldType.b;
-        this.s = false;
-        this.a = var1.a();
-        this.q = var1.b();
-        this.r = var1.d();
-        this.k = var2;
-        this.s = var1.c();
-        this.b = var1.e();
+        this.worldType = OWorldType.b;
+        this.hardcore = false;
+        this.randomSeed = var1.getSeed();
+        this.gameMode = var1.getGameMode();
+        this.structures = var1.areStructuresEnabled();
+        this.worldName = var2;
+        this.hardcore = var1.isHardcoreEnabled();
+        this.worldType = var1.getWorldType();
     }
 
     public OWorldInfo(OWorldInfo var1) {
         super();
-        this.b = OWorldType.b;
-        this.s = false;
-        this.a = var1.a;
-        this.b = var1.b;
-        this.q = var1.q;
-        this.r = var1.r;
-        this.c = var1.c;
-        this.d = var1.d;
-        this.e = var1.e;
-        this.f = var1.f;
+        this.worldType = OWorldType.b;
+        this.hardcore = false;
+        this.randomSeed = var1.randomSeed;
+        this.worldType = var1.worldType;
+        this.gameMode = var1.gameMode;
+        this.structures = var1.structures;
+        this.spawnX = var1.spawnX;
+        this.spawnY = var1.spawnY;
+        this.spawnZ = var1.spawnZ;
+        this.time = var1.time;
         this.g = var1.g;
-        this.h = var1.h;
+        this.sizeOnDisk = var1.sizeOnDisk;
         this.i = var1.i;
-        this.j = var1.j;
-        this.k = var1.k;
-        this.l = var1.l;
+        this.dimension = var1.dimension;
+        this.worldName = var1.worldName;
+        this.version = var1.version;
         this.rainTimeTicks = var1.rainTimeTicks;
         this.isRaining = var1.isRaining;
         this.thunderTimeTicks = var1.thunderTimeTicks;
         this.isThundering = var1.isThundering;
-        this.s = var1.s;
+        this.hardcore = var1.hardcore;
     }
 
     public ONBTTagCompound a() {
@@ -136,74 +136,74 @@ public class OWorldInfo {
     }
 
     private void a(ONBTTagCompound var1, ONBTTagCompound var2) {
-        var1.a("RandomSeed", this.a);
-        var1.a("generatorName", this.b.a());
-        var1.a("generatorVersion", this.b.b());
-        var1.a("GameType", this.q);
-        var1.a("MapFeatures", this.r);
-        var1.a("SpawnX", this.c);
-        var1.a("SpawnY", this.d);
-        var1.a("SpawnZ", this.e);
-        var1.a("Time", this.f);
-        var1.a("SizeOnDisk", this.h);
+        var1.a("RandomSeed", this.randomSeed);
+        var1.a("generatorName", this.worldType.a());
+        var1.a("generatorVersion", this.worldType.b());
+        var1.a("GameType", this.gameMode);
+        var1.a("MapFeatures", this.structures);
+        var1.a("SpawnX", this.spawnX);
+        var1.a("SpawnY", this.spawnY);
+        var1.a("SpawnZ", this.spawnZ);
+        var1.a("Time", this.time);
+        var1.a("SizeOnDisk", this.sizeOnDisk);
         var1.a("LastPlayed", System.currentTimeMillis());
-        var1.a("LevelName", this.k);
-        var1.a("version", this.l);
+        var1.a("LevelName", this.worldName);
+        var1.a("version", this.version);
         var1.a("rainTime", this.rainTimeTicks);
         var1.a("raining", this.isRaining);
         var1.a("thunderTime", this.thunderTimeTicks);
         var1.a("thundering", this.isThundering);
-        var1.a("hardcore", this.s);
+        var1.a("hardcore", this.hardcore);
         if (var2 != null) {
             var1.a("Player", var2);
         }
 
     }
 
-    public long b() {
-        return this.a;
+    public long getRandomSeed() {
+        return this.randomSeed;
     }
 
-    public int c() {
-        return this.c;
+    public int getSpawnX() {
+        return this.spawnX;
     }
 
-    public int d() {
-        return this.d;
+    public int getSpawnY() {
+        return this.spawnY;
     }
 
-    public int e() {
-        return this.e;
+    public int getSpawnZ() {
+        return this.spawnZ;
     }
 
-    public long f() {
-        return this.f;
+    public long getTime() {
+        return this.time;
     }
 
-    public int g() {
-        return this.j;
+    public int getDimension() {
+        return this.dimension;
     }
 
-    public void a(long var1) {
-        this.f = var1;
+    public void setTime(long var1) {
+        this.time = var1;
     }
 
-    public void a(int var1, int var2, int var3) {
-        this.c = var1;
-        this.d = var2;
-        this.e = var3;
+    public void setSpawn(int var1, int var2, int var3) {
+        this.spawnX = var1;
+        this.spawnY = var2;
+        this.spawnZ = var3;
     }
 
     public void a(String var1) {
-        this.k = var1;
+        this.worldName = var1;
     }
 
-    public int h() {
-        return this.l;
+    public int getVersion() {
+        return this.version;
     }
 
-    public void a(int var1) {
-        this.l = var1;
+    public void setVersion(int var1) {
+        this.version = var1;
     }
 
     public boolean isThundering() {
@@ -238,27 +238,27 @@ public class OWorldInfo {
         this.rainTimeTicks = var1;
     }
 
-    public int m() {
-        return this.q;
+    public int getGameMode() {
+        return this.gameMode;
     }
 
-    public boolean n() {
-        return this.r;
+    public boolean getStructuresEnabled() {
+        return this.structures;
     }
 
-    public void d(int var1) {
-        this.q = var1;
+    public void setGameMode(int var1) {
+        this.gameMode = var1;
     }
 
-    public boolean o() {
-        return this.s;
+    public boolean getHardcodeEnabled() {
+        return this.hardcore;
     }
 
-    public OWorldType p() {
-        return this.b;
+    public OWorldType getWorldType() {
+        return this.worldType;
     }
 
-    public void a(OWorldType var1) {
-        this.b = var1;
+    public void setWorldType(OWorldType var1) {
+        this.worldType = var1;
     }
 }

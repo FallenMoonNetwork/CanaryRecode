@@ -496,9 +496,9 @@ public class CanaryDimension implements Dimension {
         OWorldInfo info = world.worldInfo;
         Location spawn = new Location(0,0,0);
 
-        spawn.setX(info.c() + 0.5D);
-        spawn.setY(world.f(info.c(), info.e()) + 1.5D);
-        spawn.setZ(info.e() + 0.5D);
+        spawn.setX(info.getSpawnX() + 0.5D);
+        spawn.setY(world.f(info.getSpawnX(), info.getSpawnZ()) + 1.5D);
+        spawn.setZ(info.getSpawnZ() + 0.5D);
         spawn.setRotation(0.0F);
         spawn.setPitch(0.0F);
         spawn.setDimension(0);
@@ -508,7 +508,7 @@ public class CanaryDimension implements Dimension {
 
     @Override
     public void setSpawnLocation(Location p) {
-        world.worldInfo.a((int)p.getX(), (int)p.getY(), (int)p.getZ());
+        world.worldInfo.setSpawn((int)p.getX(), (int)p.getY(), (int)p.getZ());
     }
 
 }

@@ -298,7 +298,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             toLoad[var10].a(new OWorldManager(this, toLoad[var10]));
             toLoad[var10].q = config.getDifficulty();
             toLoad[var10].a(config.canSpawnMonsters(), this.o);
-            toLoad[var10].s().d(var6);
+            toLoad[var10].s().setGameMode(var6);
         }
         CanaryWorld world = new CanaryWorld(var2, toLoad);
         worldManager.addWorld(world);

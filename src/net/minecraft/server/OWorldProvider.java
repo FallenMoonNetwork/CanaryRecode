@@ -31,7 +31,7 @@ public abstract class OWorldProvider {
 
     public final void a(OWorld var1) {
         this.a = var1;
-        this.b = var1.s().p();
+        this.b = var1.s().getWorldType();
         this.a();
         this.g();
     }
@@ -47,7 +47,7 @@ public abstract class OWorldProvider {
     }
 
     protected void a() {
-        if (this.a.s().p() == OWorldType.c) {
+        if (this.a.s().getWorldType() == OWorldType.c) {
             this.c = new OWorldChunkManagerHell(OBiomeGenBase.c, 0.5F, 0.5F);
         } else {
             this.c = new OWorldChunkManager(this.a);
@@ -56,7 +56,7 @@ public abstract class OWorldProvider {
     }
 
     public OIChunkProvider b() {
-        return (this.b == OWorldType.c ? new OChunkProviderFlat(this.a, this.a.n(), this.a.s().n()) : new OChunkProviderGenerate(this.a, this.a.n(), this.a.s().n()));
+        return (this.b == OWorldType.c ? new OChunkProviderFlat(this.a, this.a.n(), this.a.s().getStructuresEnabled()) : new OChunkProviderGenerate(this.a, this.a.n(), this.a.s().getStructuresEnabled()));
     }
 
     public boolean a(int var1, int var2) {
