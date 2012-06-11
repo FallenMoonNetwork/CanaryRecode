@@ -4,12 +4,12 @@ import net.minecraft.server.ONBTTagCompound;
 
 public abstract class OWorldSavedData {
 
-    public final String a;
+    public final String mapName;
     private boolean b;
 
     public OWorldSavedData(String var1) {
         super();
-        this.a = var1;
+        this.mapName = var1;
     }
 
     public abstract void a(ONBTTagCompound var1);

@@ -93,7 +93,7 @@ public class OMapStorage {
     private void a(OWorldSavedData var1) {
         if (this.a != null) {
             try {
-                File var2 = this.a.b(var1.a);
+                File var2 = this.a.b(var1.mapName);
                 if (var2 != null) {
                     ONBTTagCompound var3 = new ONBTTagCompound();
                     var1.b(var3);

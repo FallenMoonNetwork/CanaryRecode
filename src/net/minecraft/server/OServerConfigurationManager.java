@@ -53,7 +53,7 @@ public class OServerConfigurationManager {
     private int e;
     private Set f = new HashSet();
     private Set g = new HashSet();
-    private Set h = new HashSet();
+    private Set operators = new HashSet();
     private Set i = new HashSet();
     private File j;
     private File k;
@@ -540,24 +540,31 @@ public class OServerConfigurationManager {
 
     }
 
-    public void e(String var1) {
-        this.h.add(var1.toLowerCase());
-        this.q();
+    public void op(String var1) {
+        this.operators.add(var1.toLowerCase());
+        // CanaryMod start
+        //this.saveOperatorList();
+        //Canary.getServer().getPlayer(var1).gi
+        // TODO: add canary.vanilla.op to the user
+        // CanaryMod end
     }
 
-    public void f(String var1) {
-        this.h.remove(var1.toLowerCase());
-        this.q();
+    public void deop(String var1) {
+        this.operators.remove(var1.toLowerCase());
+        // CanaryMod start
+        //this.saveOperatorList();
+        // TODO: remove canary.vanilla.op from the user
+        // CanaryMod end
     }
 
     private void p() {
         try {
-            this.h.clear();
+            this.operators.clear();
             BufferedReader var1 = new BufferedReader(new FileReader(this.l));
             String var2 = "";
 
             while ((var2 = var1.readLine()) != null) {
-                this.h.add(var2.trim().toLowerCase());
+                this.operators.add(var2.trim().toLowerCase());
             }
 
             var1.close();
@@ -567,10 +574,10 @@ public class OServerConfigurationManager {
 
     }
 
-    private void q() {
+    private void saveOperatorList() {
         try {
             PrintWriter var1 = new PrintWriter(new FileWriter(this.l, false));
-            Iterator var2 = this.h.iterator();
+            Iterator var2 = this.operators.iterator();
 
             while (var2.hasNext()) {
                 String var3 = (String) var2.next();
@@ -620,11 +627,11 @@ public class OServerConfigurationManager {
 
     public boolean g(String var1) {
         var1 = var1.trim().toLowerCase();
-        return !this.o || this.h.contains(var1) || this.i.contains(var1);
+        return !this.o || this.operators.contains(var1) || this.i.contains(var1);
     }
 
     public boolean h(String var1) {
-        return this.h.contains(var1.trim().toLowerCase());
+        return this.operators.contains(var1.trim().toLowerCase());
     }
 
     public OEntityPlayerMP i(String var1) {

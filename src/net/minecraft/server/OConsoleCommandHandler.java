@@ -100,11 +100,11 @@ public class OConsoleCommandHandler {
                }
              //CanaryMod end
             } else if(var4.equalsIgnoreCase("op")) {
-               var8.e(var5);
+               var8.op(var5);
                this.a(var7, "Opping " + var5);
                var8.a(var5, "\u00a7eYou are now op!");
             } else if(var4.equalsIgnoreCase("deop")) {
-               var8.f(var5);
+               var8.deop(var5);
                var8.a(var5, "\u00a7eYou are no longer op!");
                this.a(var7, "De-opping " + var5);
             } else if(var4.equalsIgnoreCase("ban-ip")) {
