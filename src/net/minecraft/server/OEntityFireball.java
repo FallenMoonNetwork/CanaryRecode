@@ -1,6 +1,10 @@
 package net.minecraft.server;
 
 import java.util.List;
+
+import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.CanaryFireball;
+import net.canarymod.api.entity.Fireball;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
@@ -24,10 +28,12 @@ public class OEntityFireball extends OEntity {
     public double b;
     public double c;
     public double d;
+    private Fireball fireball; //CanaryMob
 
     public OEntityFireball(OWorld var1) {
         super(var1);
         this.b(1.0F, 1.0F);
+        fireball = new CanaryFireball(this);
     }
 
     @Override
@@ -178,7 +184,7 @@ public class OEntityFireball extends OEntity {
                 ;
             }
 
-            this.bi.a((OEntity) null, this.bm, this.bn, this.bo, 1.0F, true);
+            this.bi.a(this, this.bm, this.bn, this.bo, 1.0F, true); //CanaryMod  added 'this' as entity param
             this.X();
         }
 
@@ -239,5 +245,10 @@ public class OEntityFireball extends OEntity {
     @Override
     public float b(float var1) {
         return 1.0F;
+    }
+    
+    @Override
+    public CanaryEntity getCanaryEntity(){ //Probably not needed to do this but just in case castings fail
+        return (CanaryEntity) this.fireball;
     }
 }

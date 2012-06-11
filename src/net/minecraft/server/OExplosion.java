@@ -9,9 +9,13 @@ import java.util.Set;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntityLiving;
+import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityLiving;
+import net.canarymod.api.world.blocks.Block;
 import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.Hook;
 import net.canarymod.hook.entity.DamageHook;
+import net.canarymod.hook.world.ExplosionHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkPosition;
@@ -32,6 +36,11 @@ public class OExplosion {
     public OEntity e;
     public float f;
     public Set g = new HashSet();
+    
+    //CanaryMod Start
+    protected boolean toRet;
+    protected List<Block> blocks;
+    //CanaryMod End
 
     public OExplosion(OWorld var1, OEntity var2, double var3, double var5, double var7, float var9) {
         super();
@@ -44,6 +53,7 @@ public class OExplosion {
     }
 
     public void a() {
+        Block base = i.getCanaryDimension().getBlockAt((int) Math.floor(b), (int) Math.floor(c), (int) Math.floor(d));
         float var1 = this.f;
         byte var2 = 16;
 
@@ -80,6 +90,14 @@ public class OExplosion {
 
                             if (var14 > 0.0F) {
                                 this.g.add(new OChunkPosition(var22, var23, var24));
+                                
+                                //CanaryMod - Build blocks list
+                                Block block = i.getCanaryDimension().getBlockAt(var22, var23, var24);
+                                if(var25 != 0 && !blocks.contains(block)){
+                                    blocks.add(block);
+                                }
+                                //CanaryMod end
+                                
                             }
 
                             var15 += var6 * var21;
@@ -91,6 +109,8 @@ public class OExplosion {
             }
         }
 
+        CancelableHook explodehook = (CancelableHook) Canary.hooks().callCancelableHook(new ExplosionHook(base, e.getCanaryEntity(), blocks));
+        toRet = explodehook.isCancelled();
         this.f *= 2.0F;
         var3 = OMathHelper.b(this.b - this.f - 1.0D);
         var4 = OMathHelper.b(this.b + this.f + 1.0D);
@@ -118,9 +138,9 @@ public class OExplosion {
                 int damage = (int) ((var39 * var39 + var39) / 2.0D * 8.0D * f + 1.0D);
                 EntityLiving attacker = null;
                 if (e instanceof OEntityCreeper) {
-                    attacker = new CanaryEntityLiving((OEntityLiving) e);
+                    attacker = ((OEntityLiving) e).getCanaryEntityLiving();
                 }
-                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(attacker, new CanaryEntityLiving((OEntityLiving) var32.getCanaryEntity().getHandle()), new CanaryDamageSource(ODamageSource.l), damage));
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(attacker, ((OEntityLiving) var32).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.l), damage));
                 if (!hook.isCancelled()) {
                     var32.a(ODamageSource.l, damage);
                 }
@@ -142,6 +162,12 @@ public class OExplosion {
         ArrayList var2 = new ArrayList();
         var2.addAll(this.g);
 
+        //CanaryMod - cancel explosions
+        if (this.toRet) {
+            this.g = new HashSet();
+            return;
+        }
+        
         int var3;
         OChunkPosition var4;
         int var5;
