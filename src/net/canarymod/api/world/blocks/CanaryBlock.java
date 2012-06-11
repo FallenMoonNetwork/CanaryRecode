@@ -1,6 +1,7 @@
-package net.canarymod.api.world;
+package net.canarymod.api.world.blocks;
 
 import net.canarymod.Canary;
+import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.Block;
 

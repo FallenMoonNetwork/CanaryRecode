@@ -29,6 +29,7 @@ import net.canarymod.api.entity.EntityMob.MobType;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.blocks.Block;
+import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OEntity;
