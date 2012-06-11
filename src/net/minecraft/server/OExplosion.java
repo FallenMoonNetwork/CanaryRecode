@@ -134,17 +134,21 @@ public class OExplosion {
                 var19 /= var35;
                 double var37 = this.i.a(var30, var32.bw);
                 double var39 = (1.0D - var33) * var37;
-                // CanaryMod - explosion damage.
+                
+                // CanaryMod start - onDamage Explosion
                 int damage = (int) ((var39 * var39 + var39) / 2.0D * 8.0D * f + 1.0D);
-                EntityLiving attacker = null;
-                if (e instanceof OEntityCreeper) {
-                    attacker = ((OEntityLiving) e).getCanaryEntityLiving();
+                if(var32 instanceof OEntityLiving){
+                    EntityLiving attacker = null;
+                    if (e instanceof OEntityCreeper) {
+                        attacker = ((OEntityLiving) e).getCanaryEntityLiving();
+                    }
+                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(attacker, ((OEntityLiving) var32).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.l), damage));
+                    if (!hook.isCancelled()) {
+                        var32.a(ODamageSource.l, damage);
+                    }
                 }
-                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(attacker, ((OEntityLiving) var32).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.l), damage));
-                if (!hook.isCancelled()) {
-                    var32.a(ODamageSource.l, damage);
-                }
-                // CanaryMod - end.
+                // CanaryMod end
+                
                 var32.bp += var15 * var39;
                 var32.bq += var17 * var39;
                 var32.br += var19 * var39;
