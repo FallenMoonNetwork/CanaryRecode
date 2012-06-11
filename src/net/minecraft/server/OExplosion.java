@@ -39,7 +39,7 @@ public class OExplosion {
     
     //CanaryMod Start
     protected boolean toRet;
-    protected List<Block> blocks;
+    protected List<Block> blocks = new ArrayList<Block>();
     //CanaryMod End
 
     public OExplosion(OWorld var1, OEntity var2, double var3, double var5, double var7, float var9) {
