@@ -36,6 +36,9 @@ public class ONetworkListenThread {
     }
 
     public void a(Socket var1) {
+        if(var1 == null) {
+            return;
+        }
         InetAddress var2 = var1.getInetAddress();
         HashMap var3 = this.i;
         synchronized (this.i) {
