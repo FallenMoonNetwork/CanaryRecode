@@ -1,6 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntityItem;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.EntitySpawnHook;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
@@ -108,7 +111,13 @@ public class OEntityItem extends OEntity {
 
         ++this.b;
         if (this.b >= 6000) {
-            this.X();
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new EntitySpawnHook(this.getCanaryEntity(), false, false)); //CanaryMod - EntityDespawn
+            if(!hook.isCancelled()){
+                this.X();
+            }
+            else{
+                this.b = 0;
+            }
         }
 
     }

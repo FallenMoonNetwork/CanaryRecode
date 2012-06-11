@@ -12,6 +12,7 @@ import net.canarymod.api.entity.CanaryEntityLiving;
 import net.canarymod.api.entity.EntityLiving;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DamageHook;
+import net.canarymod.hook.entity.EntitySpawnHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
@@ -1185,11 +1186,20 @@ public abstract class OEntityLiving extends OEntity {
             double var6 = var1.bo - this.bo;
             double var8 = var2 * var2 + var4 * var4 + var6 * var6;
             if (this.n() && var8 > 16384.0D) {
-                this.X();
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new EntitySpawnHook(this.getCanaryEntityLiving(), false, true)); //CanaryMod - MobDespawn
+                if(!hook.isCancelled()){
+                    this.X();
+                }
             }
 
             if (this.aV > 600 && this.bS.nextInt(800) == 0 && var8 > 1024.0D && this.n()) {
-                this.X();
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new EntitySpawnHook(this.getCanaryEntityLiving(), false, true)); //CanaryMod - MobDespawn
+                if(!hook.isCancelled()){
+                    this.X();
+                }
+                else{
+                    this.aV = 0;
+                }
             } else if (var8 < 1024.0D) {
                 this.aV = 0;
             }
