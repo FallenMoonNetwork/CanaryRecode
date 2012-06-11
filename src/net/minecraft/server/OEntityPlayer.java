@@ -3,7 +3,7 @@ package net.minecraft.server;
 import java.util.Iterator;
 import java.util.List;
 
-import net.canarymod.api.inventory.CanaryInventoryPlayer;
+import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OAxisAlignedBB;
@@ -91,7 +91,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
     protected float Q = 0.02F;
     public OEntityFishHook R = null;
     
-    private Inventory inventory = new CanaryInventoryPlayer(k); //CanaryMod
+    private Inventory inventory = new CanaryPlayerInventory(k); //CanaryMod
 
     public OEntityPlayer(OWorld var1) {
         super(var1);
@@ -147,7 +147,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
     @Override
     public void F_() {
         if (this.d != null) {
-            OItemStack var1 = this.k.getItemInHand();
+            OItemStack var1 = this.k.d();
             if (var1 != this.d) {
                 this.O();
             } else {
@@ -274,9 +274,9 @@ public abstract class OEntityPlayer extends OEntityLiving {
             int var1 = this.d.a;
             OItemStack var2 = this.d.b(this.bi, this);
             if (var2 != this.d || var2 != null && var2.a != var1) {
-                this.k.backpack[this.k.c] = var2;
+                this.k.a[this.k.c] = var2;
                 if (var2.a == 0) {
-                    this.k.backpack[this.k.c] = null;
+                    this.k.a[this.k.c] = null;
                 }
             }
 
@@ -389,7 +389,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
             this.a(new OItemStack(OItem.i, 1), true);
         }
 
-        this.k.dropAllItems();
+        this.k.k();
         if (var1 != null) {
             this.bp = (-OMathHelper.b((this.au + this.bs) * 3.1415927F / 180.0F) * 0.1F);
             this.br = (-OMathHelper.a((this.au + this.bs) * 3.1415927F / 180.0F) * 0.1F);
@@ -464,10 +464,10 @@ public abstract class OEntityPlayer extends OEntityLiving {
     }
 
     public float a(OBlock var1) {
-        float var2 = this.k.getDamageVsBlock(var1);
+        float var2 = this.k.a(var1);
         float var3 = var2;
         int var4 = OEnchantmentHelper.b(this.k);
-        if (var4 > 0 && this.k.canHarvestBlock(var1)) {
+        if (var4 > 0 && this.k.b(var1)) {
             var3 = var2 + (var4 * var4 + 1);
         }
 
@@ -491,7 +491,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
     }
 
     public boolean b(OBlock var1) {
-        return this.k.canHarvestBlock(var1);
+        return this.k.b(var1);
     }
 
     @Override
@@ -707,11 +707,11 @@ public abstract class OEntityPlayer extends OEntityLiving {
     }
 
     public OItemStack U() {
-        return this.k.getItemInHand();
+        return this.k.d();
     }
 
     public void V() {
-        this.k.setItemStackToSlot(this.k.c, (OItemStack) null);
+        this.k.a(this.k.c, (OItemStack) null);
     }
 
     @Override
@@ -729,7 +729,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
 
     public void f(OEntity var1) {
         if (var1.k_()) {
-            int var2 = this.k.getDamageVsEntity(var1);
+            int var2 = this.k.a(var1);
             if (this.a(OPotion.g)) {
                 var2 += 3 << this.b(OPotion.g).c();
             }
@@ -1204,7 +1204,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
     }
 
     public void c(OEntityPlayer var1) {
-        this.k.copyInventory(var1.k);
+        this.k.a(var1.k);
         this.ap = var1.ap;
         this.foodStats = var1.foodStats;
         this.M = var1.M;

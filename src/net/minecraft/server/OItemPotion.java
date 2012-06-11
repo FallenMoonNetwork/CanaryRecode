@@ -55,7 +55,7 @@ public class OItemPotion extends OItem {
         if (var1.a <= 0) {
             return new OItemStack(OItem.bs);
         } else {
-            var3.k.addItemToBackPack(new OItemStack(OItem.bs));
+            var3.k.a(new OItemStack(OItem.bs));
             return var1;
         }
     }

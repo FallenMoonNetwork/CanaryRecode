@@ -149,13 +149,13 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     }
 
     public OItemStack c(int var1) {
-        return var1 == 0 ? this.k.getItemInHand() : this.k.armorySlots[var1 - 1];
+        return var1 == 0 ? this.k.d() : this.k.b[var1 - 1];
     }
 
     @Override
     public void a(ODamageSource var1) {
         this.b.h.sendPacketToAll((new OPacket3Chat(var1.a(this))));
-        this.k.dropAllItems();
+        this.k.k();
     }
 
     @Override
@@ -195,7 +195,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         super.F_();
 
         for (int var2 = 0; var2 < this.k.getInventorySize(); ++var2) {
-            OItemStack var3 = this.k.getStackFromSlot(var2);
+            OItemStack var3 = this.k.b(var2);
             if (var3 != null && OItem.d[var3.c].t_() && this.a.b() <= 2) {
                 OPacket var4 = ((OItemMapBase) OItem.d[var3.c]).c(var3, this.bi, this);
                 if (var4 != null) {
@@ -495,7 +495,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     @Override
     public void a(OContainer var1, List var2) {
         this.a.b((new OPacket104WindowItems(var1.f, var2)));
-        this.a.b((new OPacket103SetSlot(-1, -1, this.k.getItemStack())));
+        this.a.b((new OPacket103SetSlot(-1, -1, this.k.d())));
     }
 
     @Override
@@ -515,7 +515,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     public void G() {
         if (!this.h) {
-            this.a.b((new OPacket103SetSlot(-1, -1, this.k.getItemStack())));
+            this.a.b((new OPacket103SetSlot(-1, -1, this.k.d())));
         }
     }
 

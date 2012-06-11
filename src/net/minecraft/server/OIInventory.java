@@ -4,21 +4,21 @@ import net.canarymod.api.inventory.Container;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItemStack;
 
-public interface OIInventory extends Container<OItemStack> { //CanaryMod extension added
+public interface OIInventory extends Container<OItemStack> { //CanaryMod extends added
 
-    int getInventorySize();
+    public int c();
 
-    OItemStack getStackFromSlot(int var1);
-
-    OItemStack decreaseItemStackSize(int var1, int var2);
+    OItemStack g_(int var1);
+    
+    OItemStack a(int var1, int var2);
 
     OItemStack b(int var1);
 
-    void setItemStackToSlot(int var1, OItemStack var2);
+    void a(int var1, OItemStack var2);
 
-    String getInventoryName();
+    String e();
 
-    int getInventoryStackLimit();
+    int a();
 
     void G_();
 
@@ -27,4 +27,5 @@ public interface OIInventory extends Container<OItemStack> { //CanaryMod extensi
     void f();
 
     void g();
+
 }

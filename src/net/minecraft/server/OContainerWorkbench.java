@@ -53,7 +53,7 @@ public class OContainerWorkbench extends OContainer {
 
     @Override
     public void a(OIInventory var1) {
-        this.b.setItemStackToSlot(0, OCraftingManager.a().a(this.a));
+        this.b.a(0, OCraftingManager.a().a(this.a));
     }
 
     @Override

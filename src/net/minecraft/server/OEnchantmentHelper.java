@@ -98,7 +98,7 @@ public class OEnchantmentHelper {
     public static int a(OInventoryPlayer var0, ODamageSource var1) {
         b.a = 0;
         b.b = var1;
-        a(b, var0.armorySlots);
+        a(b, var0.b);
         if (b.a > 25) {
             b.a = 25;
         }
@@ -109,44 +109,44 @@ public class OEnchantmentHelper {
     public static int a(OInventoryPlayer var0, OEntityLiving var1) {
         c.a = 0;
         c.b = var1;
-        a(c, var0.getItemInHand());
+        a(c, var0.d());
         return c.a > 0 ? 1 + a.nextInt(c.a) : 0;
     }
 
     public static int b(OInventoryPlayer var0, OEntityLiving var1) {
-        return a(OEnchantment.m.x, var0.getItemInHand());
+        return a(OEnchantment.m.x, var0.d());
     }
 
     public static int c(OInventoryPlayer var0, OEntityLiving var1) {
-        return a(OEnchantment.n.x, var0.getItemInHand());
+        return a(OEnchantment.n.x, var0.d());
     }
 
     public static int a(OInventoryPlayer var0) {
-        return a(OEnchantment.h.x, var0.armorySlots);
+        return a(OEnchantment.h.x, var0.b);
     }
 
     public static int b(OInventoryPlayer var0) {
-        return a(OEnchantment.p.x, var0.getItemInHand());
+        return a(OEnchantment.p.x, var0.d());
     }
 
     public static int c(OInventoryPlayer var0) {
-        return a(OEnchantment.r.x, var0.getItemInHand());
+        return a(OEnchantment.r.x, var0.d());
     }
 
     public static boolean d(OInventoryPlayer var0) {
-        return a(OEnchantment.q.x, var0.getItemInHand()) > 0;
+        return a(OEnchantment.q.x, var0.d()) > 0;
     }
 
     public static int e(OInventoryPlayer var0) {
-        return a(OEnchantment.s.x, var0.getItemInHand());
+        return a(OEnchantment.s.x, var0.d());
     }
 
     public static int f(OInventoryPlayer var0) {
-        return a(OEnchantment.o.x, var0.getItemInHand());
+        return a(OEnchantment.o.x, var0.d());
     }
 
     public static boolean g(OInventoryPlayer var0) {
-        return a(OEnchantment.i.x, var0.armorySlots) > 0;
+        return a(OEnchantment.i.x, var0.b) > 0;
     }
 
     public static int a(Random var0, int var1, int var2, OItemStack var3) {

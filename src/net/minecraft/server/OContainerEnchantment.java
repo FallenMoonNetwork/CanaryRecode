@@ -73,7 +73,7 @@ public class OContainerEnchantment extends OContainer {
     @Override
     public void a(OIInventory var1) {
         if (var1 == this.a) {
-            OItemStack var2 = var1.getStackFromSlot(0);
+            OItemStack var2 = var1.b(0);
             int var3;
             if (var2 != null && var2.q()) {
                 this.b = this.l.nextLong();
@@ -130,7 +130,7 @@ public class OContainerEnchantment extends OContainer {
 
     @Override
     public boolean a(OEntityPlayer var1, int var2) {
-        OItemStack var3 = this.a.getStackFromSlot(0);
+        OItemStack var3 = this.a.b(0);
         if (this.c[var2] > 0 && var3 != null && (var1.M >= this.c[var2] || var1.L.d)) {
             if (!this.h.F) {
                 List var4 = OEnchantmentHelper.b(this.l, var3, this.c[var2]);

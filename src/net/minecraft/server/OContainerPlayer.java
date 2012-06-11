@@ -57,7 +57,7 @@ public class OContainerPlayer extends OContainer {
 
     @Override
     public void a(OIInventory var1) {
-        this.b.setItemStackToSlot(0, OCraftingManager.a().a(this.a));
+        this.b.a(0, OCraftingManager.a().a(this.a));
     }
 
     @Override
@@ -71,7 +71,7 @@ public class OContainerPlayer extends OContainer {
             }
         }
 
-        this.b.setItemStackToSlot(0, (OItemStack) null);
+        this.b.a(0, (OItemStack) null);
     }
 
     @Override

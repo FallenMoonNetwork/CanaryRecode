@@ -325,7 +325,7 @@ public class OEntityArrow extends OEntity {
     @Override
     public void a_(OEntityPlayer var1) {
         if (!this.bi.F) {
-            if (this.j && this.a && this.b <= 0 && var1.k.addItemToBackPack(new OItemStack(OItem.k, 1))) {
+            if (this.j && this.a && this.b <= 0 && var1.k.a(new OItemStack(OItem.k, 1))) {
                 this.bi.a(this, "random.pop", 0.2F, ((this.bS.nextFloat() - this.bS.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                 var1.a(this, 1);
                 this.X();

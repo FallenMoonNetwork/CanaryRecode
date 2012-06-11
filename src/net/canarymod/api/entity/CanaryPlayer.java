@@ -179,16 +179,16 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void destroyItemHeld() {
         OEntityPlayerMP player = (OEntityPlayerMP) entity;
-        if(player.k.getItemInHand() != null) {
-            player.k.getItemInHand().getCanaryItem().setId(0);
+        if(player.k.d() != null) {
+            player.k.d().getCanaryItem().setId(0);
         }
     }
 
     @Override
     public Item getItemHeld() {
         OEntityPlayerMP player = (OEntityPlayerMP) entity;
-        if(player.k.getItemInHand() != null) {
-            return player.k.getItemInHand().getCanaryItem();
+        if(player.k.d() != null) {
+            return player.k.d().getCanaryItem();
         }
         return null;
     }
@@ -457,12 +457,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     
     @Override
     public int damageVsEntity(Entity entity) {
-        return ((OEntityPlayerMP)entity).k.getDamageVsEntity(((CanaryEntity) entity).getHandle());
+        return ((OEntityPlayerMP)entity).k.a(((CanaryEntity) entity).getHandle());
     }
     
     @Override
     public float damageVsBlock(Block block) {
-        return ((OEntityPlayerMP)entity).k.getDamageVsBlock(OBlock.m[block.getType()]);
+        return ((OEntityPlayerMP)entity).k.a(OBlock.m[block.getType()]);
     }
 
     @Override

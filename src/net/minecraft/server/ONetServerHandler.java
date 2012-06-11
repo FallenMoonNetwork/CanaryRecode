@@ -416,7 +416,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     @Override
     public void a(OPacket15Place var1) {
         OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
-        OItemStack var3 = this.e.k.getItemInHand();
+        OItemStack var3 = this.e.k.d();
         boolean var4 = false;
         int var5 = var1.a;
         int var6 = var1.b;
@@ -476,20 +476,20 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             this.e.a.b((new OPacket53BlockChange(var5, var6, var7, var2)));
         }
 
-        var3 = this.e.k.getItemInHand();
+        var3 = this.e.k.d();
         if (var3 != null && var3.a == 0) {
-            this.e.k.backpack[this.e.k.c] = null;
+            this.e.k.a[this.e.k.c] = null;
             var3 = null;
         }
 
         if (var3 == null || var3.l() == 0) {
             this.e.h = true;
-            this.e.k.backpack[this.e.k.c] = OItemStack.b(this.e.k.backpack[this.e.k.c]);
+            this.e.k.a[this.e.k.c] = OItemStack.b(this.e.k.a[this.e.k.c]);
             OSlot var13 = this.e.m.a(this.e.k, this.e.k.c);
             this.e.m.a();
             this.e.h = false;
-            if (!OItemStack.b(this.e.k.getItemInHand(), var1.e)) {
-                this.b((new OPacket103SetSlot(this.e.m.f, var13.c, this.e.k.getItemInHand())));
+            if (!OItemStack.b(this.e.k.d(), var1.e)) {
+                this.b((new OPacket103SetSlot(this.e.m.f, var13.c, this.e.k.d())));
             }
         }
 

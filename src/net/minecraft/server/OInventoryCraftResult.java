@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import java.util.Arrays;
+
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
@@ -8,30 +10,26 @@ import net.minecraft.server.OItemStack;
 public class OInventoryCraftResult implements OIInventory {
 
     private OItemStack[] a = new OItemStack[1];
-    private String name = "Result";
-
+    private String name = "Result"; //CanaryMod
+    
     public OInventoryCraftResult() {
         super();
     }
 
-    @Override
-    public int getInventorySize() {
+    public int c() {
         return 1;
     }
 
-    @Override
-    public OItemStack getStackFromSlot(int var1) {
+    public OItemStack g_(int var1) {
         return this.a[var1];
     }
 
-    @Override
-    public String getInventoryName() {
+    public String e() {
         return name;
     }
 
-    @Override
-    public OItemStack decreaseItemStackSize(int var1, int var2) {
-        if (this.a[var1] != null) {
+    public OItemStack a(int var1, int var2) {
+        if(this.a[var1] != null) {
             OItemStack var3 = this.a[var1];
             this.a[var1] = null;
             return var3;
@@ -40,9 +38,8 @@ public class OInventoryCraftResult implements OIInventory {
         }
     }
 
-    @Override
     public OItemStack b(int var1) {
-        if (this.a[var1] != null) {
+        if(this.a[var1] != null) {
             OItemStack var2 = this.a[var1];
             this.a[var1] = null;
             return var2;
@@ -51,112 +48,140 @@ public class OInventoryCraftResult implements OIInventory {
         }
     }
 
-    @Override
-    public void setItemStackToSlot(int var1, OItemStack var2) {
+    public void a(int var1, OItemStack var2) {
         this.a[var1] = var2;
     }
 
-    @Override
-    public int getInventoryStackLimit() {
+    public int a() {
         return 64;
     }
 
-    @Override
-    public void G_() {
-    }
+     public void G_() {}
 
-    @Override
-    public boolean a(OEntityPlayer var1) {
-        return true;
-    }
+     public boolean a(OEntityPlayer var1) {
+         return true;
+     }
 
-    @Override
-    public void f() {
-    }
+     public void f() {}
 
-    @Override
-    public void g() {
-    }
+     public void g() {}
 
-    //CanaryMod start container
-    @Override
-    public OItemStack[] getContents() {
-        int size = getSize();
-        OItemStack[] result = new OItemStack[size];
+     //CanaryMod start - Container
+     @Override
+     public OItemStack[] getContents() {
+         return Arrays.copyOf(this.a, c());
+     }
 
-        for (int i = 0; i < size; i++) {
-            result[i] = getSlot(i);
-        }
-        return result;
-    }
+     @Override
+     public void setContents(OItemStack[] values) {
+         this.a = Arrays.copyOf(values, c());
+     }
 
-    @Override
-    public void setContents(OItemStack[] values) {
-        int size = getSize();
+     @Override
+     public OItemStack getSlot(int index) {
+         return this.b(index);
+     }
 
-        for (int i = 0; i < size; i++) {
-            setSlot(i, values[i]);
-        }
-    }
+     @Override
+     public void setSlot(int index, OItemStack value) {
+         this.a(index, value);
+     }
 
-    @Override
-    public OItemStack getSlot(int index) {
-        return this.getStackFromSlot(index);
-    }
+     @Override
+     public int getInventorySize() {
+         return this.c();
+     }
 
-    @Override
-    public void setSlot(int index, OItemStack value) {
-        this.setItemStackToSlot(index, value);
-    }
+     @Override
+     public String getInventoryName() {
+         return name;
+     }
 
-    @Override
-    public int getSize() {
-        return this.getInventorySize();
-    }
+     @Override
+     public void setInventoryName(String value) {
+         this.name = value;
+     }
 
-    @Override
-    public String getName() {
-        return this.name;
-    }
+     @Override
+     public void update() {
+         G_();
+     }
 
-    @Override
-    public void setName(String value) {
-        this.name = value;
-    }
+     @Override
+     public void clearContents() {
+         Arrays.fill(a, (OItemStack)null);
+     }
 
-    @Override
-    public void update() {
-        G_();
-    }
-    //CanaryMod end container
+     @Override
+     public Item getItem(int id, int amount) {
+         for(OItemStack stack : getContents()) {
+             if(stack.c == id && stack.a == amount) {
+                 return stack.getCanaryItem();
+             }
+         }
+         return null;
+     }
 
-    @Override
-    public void clearContents() {
-        // TODO Auto-generated method stub
-        
-    }
+     @Override
+     public Item getItem(int id) {
+         for(OItemStack stack : getContents()) {
+             if(stack.c == id) {
+                 return stack.getCanaryItem();
+             }
+         }
+         return null;
+     }
 
-    @Override
-    public Item getItem(int id, int amount) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+     @Override
+     public Item removeItem(Item item) {
+         if(a[item.getSlot()] != null && a[item.getSlot()].c == item.getId()) {
+             Item toRet = a[item.getSlot()].getCanaryItem();
+             a[item.getSlot()] = null;
+             return toRet;
+         }
+         return null;
+     }
 
-    @Override
-    public Item getItem(int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+     @Override
+     public Item removeItem(int id) {
+         for(int index = 0; index < a.length; index++) {
+             if(a[index].c == id) {
+                 Item toRet = a[index].getCanaryItem();
+                 a[index] = null;
+                 return toRet;
+             }
+         }
+         return null;
+     }
 
-    @Override
-    public Item removeItem(Item item) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+     @Override
+     public boolean hasItemStack(OItemStack oItemStack) {
+         for (int index = 0; index < this.a.length; ++index) {
+             if (this.a[index] != null && this.a[index].c(oItemStack)) {
+                 return true;
+             }
+         }
+         return false;
+     }
 
-    @Override
-    public Item removeItem(int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+     @Override
+     public boolean hasItem(int itemId) {
+         for (int var2 = 0; var2 < this.a.length; ++var2) {
+             if (this.a[var2] != null && this.a[var2].c == itemId) {
+                 return true;
+             }
+         }
+         return false;
+     }
+
+     @Override
+     public OItemStack decreaseItemStackSize(int arg0, int arg1) {
+         return a(arg0, arg1);
+     }
+
+     @Override
+     public int getInventoryStackLimit() {
+         return a();
+     }
+     //CanaryMod end - Container
 }

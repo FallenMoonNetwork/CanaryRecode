@@ -103,7 +103,7 @@ public class OEntitySheep extends OEntityAnimal {
 
     @Override
     public boolean b(OEntityPlayer var1) {
-        OItemStack var2 = var1.k.getItemInHand();
+        OItemStack var2 = var1.k.d();
         if (var2 != null && var2.c == OItem.bd.bP && !this.A_() && !this.aO()) {
             if (!this.bi.F) {
                 this.a(true);

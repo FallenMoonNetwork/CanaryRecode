@@ -170,7 +170,7 @@ public class OEntityItem extends OEntity {
     public void a_(OEntityPlayer var1) {
         if (!this.bi.F) {
             int var2 = this.a.a;
-            if (this.c == 0 && var1.k.addItemToBackPack(this.a)) {
+            if (this.c == 0 && var1.k.a(this.a)) {
                 if (this.a.c == OBlock.J.bO) {
                     var1.a(OAchievementList.g);
                 }

@@ -53,7 +53,7 @@ public class OEntityAIBeg extends OEntityAIBase {
     }
 
     private boolean a(OEntityPlayer var1) {
-        OItemStack var2 = var1.k.getItemInHand();
+        OItemStack var2 = var1.k.d();
         return var2 == null ? false : (!this.a.u_() && var2.c == OItem.aW.bP ? true : this.a.a(var2));
     }
 }

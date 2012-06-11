@@ -98,16 +98,16 @@ public abstract class OContainer {
             if (var2 == 0 || var2 == 1) {
                 OInventoryPlayer var6 = var4.k;
                 if (var1 == -999) {
-                    if (var6.getItemStack() != null && var1 == -999) {
+                    if (var6.l() != null && var1 == -999) {
                         if (var2 == 0) {
-                            var4.b(var6.getItemStack());
-                            var6.setItemStack((OItemStack) null);
+                            var4.b(var6.l());
+                            var6.b((OItemStack) null);
                         }
 
                         if (var2 == 1) {
-                            var4.b(var6.getItemStack().a(1));
-                            if (var6.getItemStack().a == 0) {
-                                var6.setItemStack((OItemStack) null);
+                            var4.b(var6.l().a(1));
+                            if (var6.l().a == 0) {
+                                var6.b((OItemStack) null);
                             }
                         }
                     }
@@ -130,7 +130,7 @@ public abstract class OContainer {
                     if (var12 != null) {
                         var12.d();
                         OItemStack var13 = var12.b();
-                        OItemStack var14 = var6.getItemStack();
+                        OItemStack var14 = var6.l();
                         if (var13 != null) {
                             var5 = var13.j();
                         }
@@ -145,18 +145,18 @@ public abstract class OContainer {
 
                                 var12.d(var14.a(var10));
                                 if (var14.a == 0) {
-                                    var6.setItemStack((OItemStack) null);
+                                    var6.b((OItemStack) null);
                                 }
                             }
                         } else if (var14 == null) {
                             var10 = var2 == 0 ? var13.a : (var13.a + 1) / 2;
                             OItemStack var11 = var12.a(var10);
-                            var6.setItemStack(var11);
+                            var6.b(var11);
                             if (var13.a == 0) {
                                 var12.d((OItemStack) null);
                             }
 
-                            var12.c(var6.getItemStack());
+                            var12.c(var6.l());
                         } else if (var12.a(var14)) {
                             if (var13.c == var14.c && (!var13.e() || var13.h() == var14.h()) && OItemStack.a(var13, var14)) {
                                 var10 = var2 == 0 ? var14.a : 1;
@@ -170,13 +170,13 @@ public abstract class OContainer {
 
                                 var14.a(var10);
                                 if (var14.a == 0) {
-                                    var6.setItemStack((OItemStack) null);
+                                    var6.b((OItemStack) null);
                                 }
 
                                 var13.a += var10;
                             } else if (var14.a <= var12.a()) {
                                 var12.d(var14);
-                                var6.setItemStack(var13);
+                                var6.b(var13);
                             }
                         } else if (var13.c == var14.c && var14.b() > 1 && (!var13.e() || var13.h() == var14.h()) && OItemStack.a(var13, var14)) {
                             var10 = var13.a;
@@ -187,7 +187,7 @@ public abstract class OContainer {
                                     var12.d((OItemStack) null);
                                 }
 
-                                var12.c(var6.getItemStack());
+                                var12.c(var6.l());
                             }
                         }
                     }
@@ -204,9 +204,9 @@ public abstract class OContainer {
 
     public void a(OEntityPlayer var1) {
         OInventoryPlayer var2 = var1.k;
-        if (var2.getItemStack() != null) {
-            var1.b(var2.getItemStack());
-            var2.setItemStack((OItemStack) null);
+        if (var2.l() != null) {
+            var1.b(var2.l());
+            var2.b((OItemStack) null);
         }
 
     }

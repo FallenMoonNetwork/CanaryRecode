@@ -239,7 +239,7 @@ public class OEntityWolf extends OEntityTameable {
 
     @Override
     public boolean b(OEntityPlayer var1) {
-        OItemStack var2 = var1.k.getItemInHand();
+        OItemStack var2 = var1.k.d();
         if (!this.u_()) {
             if (var2 != null && var2.c == OItem.aW.bP && !this.E()) {
                 if (!var1.L.d) {
@@ -247,7 +247,7 @@ public class OEntityWolf extends OEntityTameable {
                 }
 
                 if (var2.a <= 0) {
-                    var1.k.setItemStackToSlot(var1.k.c, (OItemStack) null);
+                    var1.k.a(var1.k.c, (OItemStack) null);
                 }
 
                 if (!this.bi.F) {
@@ -278,7 +278,7 @@ public class OEntityWolf extends OEntityTameable {
 
                     this.d(var3.o());
                     if (var2.a <= 0) {
-                        var1.k.setItemStackToSlot(var1.k.c, (OItemStack) null);
+                        var1.k.a(var1.k.c, (OItemStack) null);
                     }
 
                     return true;

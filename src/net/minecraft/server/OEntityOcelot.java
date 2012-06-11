@@ -160,12 +160,12 @@ public class OEntityOcelot extends OEntityTameable {
 
     @Override
     public boolean b(OEntityPlayer var1) {
-        OItemStack var2 = var1.k.getItemInHand();
+        OItemStack var2 = var1.k.d();
         if (!this.u_()) {
             if (this.b.f() && var2 != null && var2.c == OItem.aT.bP && var1.j(this) < 9.0D) {
                 --var2.a;
                 if (var2.a <= 0) {
-                    var1.k.setItemStackToSlot(var1.k.c, (OItemStack) null);
+                    var1.k.a(var1.k.c, (OItemStack) null);
                 }
 
                 if (!this.bi.F) {

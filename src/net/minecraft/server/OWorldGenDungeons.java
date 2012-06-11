@@ -99,7 +99,7 @@ public class OWorldGenDungeons extends OWorldGenerator {
                                         for (int var17 = 0; var17 < 8; ++var17) {
                                             OItemStack var18 = this.a(var2);
                                             if (var18 != null) {
-                                                var16.setItemStackToSlot(var2.nextInt(var16.getInventorySize()), var18);
+                                                var16.a(var2.nextInt(var16.getInventorySize()), var18);
                                             }
                                         }
                                     }

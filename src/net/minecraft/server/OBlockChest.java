@@ -247,7 +247,7 @@ public class OBlockChest extends OBlockContainer {
         OTileEntityChest var5 = (OTileEntityChest) var1.b(var2, var3, var4);
         if (var5 != null) {
             for (int var6 = 0; var6 < var5.getInventorySize(); ++var6) {
-                OItemStack var7 = var5.getStackFromSlot(var6);
+                OItemStack var7 = var5.b(var6);
                 if (var7 != null) {
                     float var8 = this.a.nextFloat() * 0.8F + 0.1F;
                     float var9 = this.a.nextFloat() * 0.8F + 0.1F;

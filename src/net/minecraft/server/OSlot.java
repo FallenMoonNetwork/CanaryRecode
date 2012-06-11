@@ -46,7 +46,7 @@ public class OSlot {
     }
 
     public OItemStack b() {
-        return this.b.getStackFromSlot(this.a);
+        return this.b.b(this.a);
     }
 
     public boolean c() {
@@ -54,7 +54,7 @@ public class OSlot {
     }
 
     public void d(OItemStack var1) {
-        this.b.setItemStackToSlot(this.a, var1);
+        this.b.a(this.a, var1);
         this.d();
     }
 
