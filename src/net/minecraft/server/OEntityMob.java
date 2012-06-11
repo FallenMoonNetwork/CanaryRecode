@@ -1,5 +1,8 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityCreature;
@@ -51,6 +54,12 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
             OEntity var3 = var1.a();
             if (this.bg != var3 && this.bh != var3) {
                 if (var3 != this) {
+                    if(var3 instanceof OEntityPlayer){
+                        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(this.getCanaryEntityLiving(), ((OEntityLiving)var3).getCanaryEntityLiving().getPlayer()));
+                        if(hook.isCancelled()){
+                            return true;
+                        }
+                    }
                     this.d = var3;
                 }
 
