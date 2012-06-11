@@ -2,6 +2,12 @@ package net.minecraft.server;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.canarymod.Canary;
+import net.canarymod.api.entity.CanaryPainting;
+import net.canarymod.api.entity.Player;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.PaintingHook;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityItem;
@@ -21,6 +27,7 @@ public class OEntityPainting extends OEntity {
     public int c;
     public int d;
     public OEnumArt e;
+    private CanaryPainting painting; //CanaryMod
 
     public OEntityPainting(OWorld var1) {
         super(var1);
@@ -28,6 +35,7 @@ public class OEntityPainting extends OEntity {
         this.a = 0;
         this.bF = 0.0F;
         this.b(0.5F, 0.5F);
+        painting = new CanaryPainting(this);
     }
 
     public OEntityPainting(OWorld var1, int var2, int var3, int var4, int var5) {
@@ -195,9 +203,21 @@ public class OEntityPainting extends OEntity {
     @Override
     public boolean a(ODamageSource var1, int var2) {
         if (!this.bE && !this.bi.F) {
+            //CanaryMod onPaintingDestory
+            Player player = null;
+            if (var1 != null && var1 instanceof OEntityDamageSource && ((OEntityDamageSource) var1).a() instanceof OEntityPlayerMP) {
+                player = ((OEntityPlayerMP) ((OEntityDamageSource) var1).a()).getPlayer();
+            }
+            if(player != null){
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new PaintingHook(painting, player));
+                if(hook.isCancelled()){
+                    return false;
+                }
+            }
+            //CanaryMod end
             this.X();
             this.aW();
-            this.bi.b((new OEntityItem(this.bi, this.bm, this.bn, this.bo, new OItemStack(OItem.ar))));
+            this.bi.b(new OEntityItem(this.bi, this.bm, this.bn, this.bo, new OItemStack(OItem.ar)));
         }
 
         return true;
