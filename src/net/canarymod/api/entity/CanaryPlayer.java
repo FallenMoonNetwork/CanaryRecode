@@ -14,6 +14,7 @@ import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.position.Direction;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
@@ -23,6 +24,7 @@ import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
 import net.minecraft.server.OAchievementList;
+import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
@@ -456,6 +458,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public int damageVsEntity(Entity entity) {
         return ((OEntityPlayerMP)entity).k.getDamageVsEntity(((CanaryEntity) entity).getHandle());
+    }
+    
+    @Override
+    public float damageVsBlock(Block block) {
+        return ((OEntityPlayerMP)entity).k.getDamageVsBlock(OBlock.m[block.getType()]);
     }
 
     @Override

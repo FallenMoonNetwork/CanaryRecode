@@ -51,12 +51,12 @@ public final class OItemStack {
         this(var1.bP, var2, var3);
     }
 
-    public OItemStack(int var1, int var2, int var3) {
+    public OItemStack(int itemId, int amount, int damage) {
         super();
         this.a = 0;
-        this.c = var1;
-        this.a = var2;
-        this.e = var3;
+        this.c = itemId;
+        this.a = amount;
+        this.e = damage;
         item = new CanaryItem(this);
     }
 
