@@ -147,6 +147,9 @@ public class OExplosion {
                         var32.a(ODamageSource.l, damage);
                     }
                 }
+                else{
+                    var32.a(ODamageSource.l, damage);
+                }
                 // CanaryMod end
                 
                 var32.bp += var15 * var39;
