@@ -61,10 +61,19 @@ public class OEntitySpider extends OEntityMob {
     protected OEntity o() {
         float var1 = this.b(1.0F);
         double var2 = 16.0D;
+        
+        //CanaryMod start - onMobTarget
         OEntityPlayer entityplayer = this.bi.b(this, var2);
-        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(getCanaryEntityLiving(), entityplayer.getCanaryEntityLiving().getPlayer()));
-        if (var1 < 0.5F && !hook.isCancelled()) {
-           return entityplayer;
+        if(entityplayer != null){
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(getCanaryEntityLiving(), ((OEntityPlayerMP) entityplayer).getPlayer()));
+            if(hook.isCancelled()){
+                return null;
+            }
+        }
+        //CanaryMod end
+        
+        if (var1 < 0.5F) {
+            return entityplayer;
         } else {
             return null;
         }
