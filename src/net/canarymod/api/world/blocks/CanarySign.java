@@ -2,9 +2,9 @@ package net.canarymod.api.world.blocks;
 
 import net.minecraft.server.OTileEntitySign;
 
-public class CanarySignBlock extends CanaryComplexBlock implements SignBlock{
+public class CanarySign extends CanaryComplexBlock implements Sign{
 
-    public CanarySignBlock(OTileEntitySign sign){
+    public CanarySign(OTileEntitySign sign){
         super(sign);
     }
 
@@ -31,5 +31,15 @@ public class CanarySignBlock extends CanaryComplexBlock implements SignBlock{
         if(line > 0 && line < 3){
             ((OTileEntitySign)tileentity).a[line] = text;
         }
+    }
+    
+    /**
+     * Returns a String value representing this Block
+     * 
+     * @return String representation of this block
+     */
+    @Override
+    public String toString() {
+        return String.format("Sign [x=%d, y=%d, z=%d]", getX(), getY(), getZ());
     }
 }

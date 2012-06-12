@@ -30,7 +30,7 @@ public class OInventoryPlayer implements OIInventory {
    }
 
    public OItemStack d() {
-      return this.c < 9 && this.c >= 0?this.a[this.c]:null;
+      return this.c < 9 && this.c >= 0 ? this.a[this.c] : null;
    }
 
    public static int h() {

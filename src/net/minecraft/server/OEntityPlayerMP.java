@@ -11,7 +11,7 @@ import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.blocks.CanarySignBlock;
+import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.player.TeleportHook;
@@ -194,8 +194,8 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public void a(boolean var1) {
         super.F_();
 
-        for (int var2 = 0; var2 < this.k.getInventorySize(); ++var2) {
-            OItemStack var3 = this.k.b(var2);
+        for (int var2 = 0; var2 < this.k.c(); ++var2) {
+            OItemStack var3 = this.k.g_(var2);
             if (var3 != null && OItem.d[var3.c].t_() && this.a.b() <= 2) {
                 OPacket var4 = ((OItemMapBase) OItem.d[var3.c]).c(var3, this.bi, this);
                 if (var4 != null) {
@@ -330,7 +330,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             
             //CanaryMod start - onSignShow
             if (var1 instanceof OTileEntitySign) {
-                CanarySignBlock sign = new CanarySignBlock((OTileEntitySign) var1);
+                CanarySign sign = new CanarySign((OTileEntitySign) var1);
                 Canary.hooks().callHook(new SignHook(canaryPlayer, sign, false));
             }
             //CanaryMod end
@@ -495,7 +495,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     @Override
     public void a(OContainer var1, List var2) {
         this.a.b((new OPacket104WindowItems(var1.f, var2)));
-        this.a.b((new OPacket103SetSlot(-1, -1, this.k.d())));
+        this.a.b((new OPacket103SetSlot(-1, -1, this.k.l())));
     }
 
     @Override
@@ -515,7 +515,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     public void G() {
         if (!this.h) {
-            this.a.b((new OPacket103SetSlot(-1, -1, this.k.d())));
+            this.a.b((new OPacket103SetSlot(-1, -1, this.k.l())));
         }
     }
 

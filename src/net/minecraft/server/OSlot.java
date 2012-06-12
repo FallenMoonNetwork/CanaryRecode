@@ -46,7 +46,7 @@ public class OSlot {
     }
 
     public OItemStack b() {
-        return this.b.b(this.a);
+        return this.b.g_(this.a);
     }
 
     public boolean c() {
@@ -63,11 +63,11 @@ public class OSlot {
     }
 
     public int a() {
-        return this.b.getInventoryStackLimit();
+        return this.b.a();
     }
 
     public OItemStack a(int var1) {
-        return this.b.decreaseItemStackSize(this.a, var1);
+        return this.b.a(this.a, var1);
     }
 
     public boolean a(OIInventory var1, int var2) {

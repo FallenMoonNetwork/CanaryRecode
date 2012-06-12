@@ -11,7 +11,7 @@ import net.canarymod.TextFormat;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.blocks.CanarySignBlock;
+import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.player.ConnectionHook;
@@ -485,7 +485,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         if (var3 == null || var3.l() == 0) {
             this.e.h = true;
             this.e.k.a[this.e.k.c] = OItemStack.b(this.e.k.a[this.e.k.c]);
-            OSlot var13 = this.e.m.a(this.e.k, this.e.k.c);
+            OSlot var13 = this.e.m.a((OIInventory)this.e.k, this.e.k.c);
             this.e.m.a();
             this.e.h = false;
             if (!OItemStack.b(this.e.k.d(), var1.e)) {
@@ -792,7 +792,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                     var7.a[var8] = var1.d[var8];
                 }
                 
-                CanarySignBlock sign = new CanarySignBlock(var7);
+                CanarySign sign = new CanarySign(var7);
                 CancelableHook hook = (CancelableHook) Canary.hooks().callHook(new SignHook(getUser(), sign, true));
                 if(hook.isCancelled()){
                     var7.a = Arrays.copyOf(old, old.length);

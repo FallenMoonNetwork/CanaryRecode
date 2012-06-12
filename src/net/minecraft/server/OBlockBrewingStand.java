@@ -76,7 +76,7 @@ public class OBlockBrewingStand extends OBlockContainer {
             OTileEntityBrewingStand var6 = (OTileEntityBrewingStand) var5;
 
             for (int var7 = 0; var7 < var6.getInventorySize(); ++var7) {
-                OItemStack var8 = var6.b(var7);
+                OItemStack var8 = var6.g_(var7);
                 if (var8 != null) {
                     float var9 = this.a.nextFloat() * 0.8F + 0.1F;
                     float var10 = this.a.nextFloat() * 0.8F + 0.1F;

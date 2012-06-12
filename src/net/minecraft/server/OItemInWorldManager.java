@@ -181,20 +181,20 @@ public class OItemInWorldManager {
         int var4 = var3.a;
         int var5 = var3.h();
         OItemStack var6 = var3.a(var2, var1);
-        if (var6 == var3 && (var6 == null || var6.a == var4) && (var6 == null || var6.l() <= 0)) {
-            return false;
+        if(var6 == var3 && (var6 == null || var6.a == var4) && (var6 == null || var6.l() <= 0)) {
+           return false;
         } else {
-            var1.k.a[var1.k.c] = var6;
-            if (this.b()) {
-                var6.a = var4;
-                var6.b(var5);
-            }
+           var1.k.a[var1.k.c] = var6;
+           if(this.b()) {
+              var6.a = var4;
+              var6.b(var5);
+           }
 
-            if (var6.a == 0) {
-                var1.k.a[var1.k.c] = null;
-            }
+           if(var6.a == 0) {
+              var1.k.a[var1.k.c] = null;
+           }
 
-            return true;
+           return true;
         }
     }
 

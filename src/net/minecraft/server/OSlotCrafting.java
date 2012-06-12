@@ -75,7 +75,7 @@ public class OSlotCrafting extends OSlot {
         for (int var2 = 0; var2 < this.a.getInventorySize(); ++var2) {
             OItemStack var3 = this.a.b(var2);
             if (var3 != null) {
-                this.a.decreaseItemStackSize(var2, 1);
+                this.a.a(var2, 1);
                 if (var3.a().k()) {
                     OItemStack var4 = new OItemStack(var3.a().j());
                     if (!var3.a().e(var3) || !this.f.k.a(var4)) {
