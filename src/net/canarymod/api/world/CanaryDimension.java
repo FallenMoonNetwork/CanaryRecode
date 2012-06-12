@@ -30,6 +30,16 @@ import net.canarymod.api.entity.Player;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.CanaryBlock;
+import net.canarymod.api.world.blocks.CanaryBrewingStand;
+import net.canarymod.api.world.blocks.CanaryChest;
+import net.canarymod.api.world.blocks.CanaryDispenser;
+import net.canarymod.api.world.blocks.CanaryFurnace;
+import net.canarymod.api.world.blocks.CanaryJukebox;
+import net.canarymod.api.world.blocks.CanaryMobSpawner;
+import net.canarymod.api.world.blocks.CanaryNoteBlock;
+import net.canarymod.api.world.blocks.CanarySign;
+import net.canarymod.api.world.blocks.Chest;
+import net.canarymod.api.world.blocks.ComplexBlock;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OEntity;
@@ -50,6 +60,15 @@ import net.minecraft.server.OEntitySpider;
 import net.minecraft.server.OEntityZombie;
 import net.minecraft.server.OEnumSkyBlock;
 import net.minecraft.server.OItemStack;
+import net.minecraft.server.OTileEntity;
+import net.minecraft.server.OTileEntityBrewingStand;
+import net.minecraft.server.OTileEntityChest;
+import net.minecraft.server.OTileEntityDispenser;
+import net.minecraft.server.OTileEntityFurnace;
+import net.minecraft.server.OTileEntityMobSpawner;
+import net.minecraft.server.OTileEntityNote;
+import net.minecraft.server.OTileEntityRecordPlayer;
+import net.minecraft.server.OTileEntitySign;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldInfo;
 import net.minecraft.server.OWorldServer;
@@ -509,6 +528,59 @@ public class CanaryDimension implements Dimension {
     @Override
     public void setSpawnLocation(Location p) {
         world.worldInfo.setSpawn((int)p.getX(), (int)p.getY(), (int)p.getZ());
+    }
+
+    @Override
+    public ComplexBlock getComplexBlock(Block block) {
+        return getComplexBlockAt(block.getX(), block.getY(), block.getZ());
+    }
+
+    @Override
+    public ComplexBlock getComplexBlockAt(int x, int y, int z) {
+        ComplexBlock result = getOnlyComplexBlockAt(x, y, z);
+
+        if (result != null) {
+            if (result instanceof Chest) {
+                Chest chest = (Chest) result;
+
+                if(chest.hasAttachedChest()){
+                    //return new CanaryDoubleChest(chest); TODO
+                }
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public ComplexBlock getOnlyComplexBlock(Block block) {
+        return getOnlyComplexBlockAt(block.getX(), block.getY(), block.getZ());
+    }
+
+    @Override
+    public ComplexBlock getOnlyComplexBlockAt(int x, int y, int z) {
+        OTileEntity tileentity = world.b(x, y, z);
+
+        if (tileentity != null) {
+            if (tileentity instanceof OTileEntityChest) {
+                return new CanaryChest((OTileEntityChest) tileentity);
+            } else if (tileentity instanceof OTileEntitySign) {
+                return new CanarySign((OTileEntitySign) tileentity);
+            } else if (tileentity instanceof OTileEntityFurnace) {
+                return new CanaryFurnace((OTileEntityFurnace) tileentity);
+            } else if (tileentity instanceof OTileEntityMobSpawner) {
+                return new CanaryMobSpawner((OTileEntityMobSpawner) tileentity);
+            } else if (tileentity instanceof OTileEntityDispenser) {
+                return new CanaryDispenser((OTileEntityDispenser) tileentity);
+            } else if (tileentity instanceof OTileEntityNote) {
+                return new CanaryNoteBlock((OTileEntityNote) tileentity);
+            } else if (tileentity instanceof OTileEntityBrewingStand) {
+                return new CanaryBrewingStand((OTileEntityBrewingStand) tileentity);
+            } else if (tileentity instanceof OTileEntityRecordPlayer) {
+                return new CanaryJukebox((OTileEntityRecordPlayer) tileentity);
+            }
+        }
+        return null;
     }
 
 }

@@ -32,6 +32,50 @@ public class CanaryComplexBlock implements ComplexBlock {
     }
     
     public void update(){
-        tileentity.q_();
+        tileentity.k.j(getX(), getY(), getZ());
+    }
+    
+    /**
+     * Returns a semi-unique hashcode for this block
+     * 
+     * @return hashcode
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+
+        hash = 97 * hash + getX();
+        hash = 97 * hash + getY();
+        hash = 97 * hash + getZ();
+        return hash;
+    }
+    
+    /**
+     * Tests the given object to see if it equals this object
+     * 
+     * @param obj
+     *            the object to test
+     * @return true if the two objects match
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof ComplexBlock)) {
+            return false;
+        }
+        final ComplexBlock other = (ComplexBlock) obj;
+
+        if (getX() != other.getX()) {
+            return false;
+        }
+        if (getY() != other.getY()) {
+            return false;
+        }
+        if (getZ() != other.getZ()) {
+            return false;
+        }
+        return true;
     }
 }

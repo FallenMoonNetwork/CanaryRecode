@@ -11,9 +11,10 @@ import net.minecraft.server.OTileEntity;
 public class OTileEntityMobSpawner extends OTileEntity {
 
     public int a = -1;
-    private String d = "Pig";
+    public String d = "Pig"; //CanaryMod private -> public
     public double b;
     public double c = 0.0D;
+    public int reset = 600;
 
     public OTileEntityMobSpawner() {
         super();
@@ -85,8 +86,9 @@ public class OTileEntityMobSpawner extends OTileEntity {
         }
     }
 
-    private void e() {
-        this.a = 200 + this.k.r.nextInt(600);
+    private void e() { //CanaryMod  de-randomized the delay
+        //this.a = 200 + this.k.r.nextInt(600);
+        this.a = reset;
     }
 
     @Override
@@ -94,6 +96,10 @@ public class OTileEntityMobSpawner extends OTileEntity {
         super.a(var1);
         this.d = var1.j("EntityId");
         this.a = var1.e("Delay");
+        this.reset = var1.e("Reset"); //CanaryMod - retrieve delay from tag
+        if(this.reset < 600){
+            reset = (short) 600;
+        }
     }
 
     @Override
@@ -101,6 +107,7 @@ public class OTileEntityMobSpawner extends OTileEntity {
         super.b(var1);
         var1.a("EntityId", this.d);
         var1.a("Delay", (short) this.a);
+        var1.a("Reset", (short) this.reset); //CanaryMod - store delay in the tag
     }
 
     @Override
