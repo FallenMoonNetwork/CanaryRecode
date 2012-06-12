@@ -141,7 +141,6 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         for (int var1 = 0; var1 < 5; ++var1) {
             OItemStack var2 = this.c(var1);
             if (var2 != this.ck[var1]) {
-                System.out.println("Checking F_"+(var2 != null ? var2.a : "null"));
                 getDimension().getEntityTracker().sendPacketToTrackedPlayer(this.getPlayer(), new CanaryPacket(new OPacket5PlayerInventory(this.bd, var1, var2)));//.a(this, new OPacket5PlayerInventory(this.bd, var1, var2));
                 this.ck[var1] = var2;
             }
