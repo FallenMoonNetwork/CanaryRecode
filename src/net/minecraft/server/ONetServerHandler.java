@@ -354,7 +354,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         } else if (var1.e == 5) {
             this.e.N();
         } else {
-            boolean var3 = var2.H = var2.t.g != 0 || this.d.h.h(this.e.v);
+            boolean var3 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v);
             boolean var4 = false;
             if (var1.e == 0) {
                 var4 = true;
@@ -422,7 +422,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         int var6 = var1.b;
         int var7 = var1.c;
         int var8 = var1.d;
-        boolean var9 = var2.H = var2.t.g != 0 || this.d.h.h(this.e.v);
+        boolean var9 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v);
         if (var1.d == 255) {
             if (var3 == null) {
                 return;
