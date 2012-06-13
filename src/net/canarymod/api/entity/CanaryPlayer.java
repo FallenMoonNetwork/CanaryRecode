@@ -241,16 +241,13 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             //Check for canary permissions
             
             CanaryCommand toExecute = CanaryCommand.fromString(cmd.replace("/", ""));
-            if(hasPermission("canary.command.tphere")) {
-                sendMessage(Colors.LightGreen + "You can do it!");
-            }
             if(toExecute == null) {
                 sendMessage(Colors.Rose + "Unknown command!");
                 return false;
             }
             else {
                 if(!toExecute.execute(this, command)) {
-                    sendMessage(Colors.Rose + "Permission denied!");
+                    sendMessage(Colors.Rose + "Unknown command!");
                     return false;
                 }
                 return true;
