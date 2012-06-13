@@ -11,10 +11,12 @@ import net.canarymod.TextFormat;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.player.ConnectionHook;
+import net.canarymod.hook.player.LeftClickHook;
 import net.canarymod.hook.player.PlayerMoveHook;
 import net.canarymod.hook.player.PlayerRespawnHook;
 import net.canarymod.hook.player.TeleportHook;
@@ -345,7 +347,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         this.e.b(var1, var3, var5, var7, var8);
         this.e.a.b((new OPacket13PlayerLookMove(var1, var3 + 1.6200000047683716D, var3, var5, var7, var8, false)));
     }
-
+    
     @Override
     public void a(OPacket14BlockDig var1) {
         OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
@@ -354,7 +356,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         } else if (var1.e == 5) {
             this.e.N();
         } else {
-            boolean var3 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v);
+            boolean var3 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v);// || getUser().isAdmin(); //CanaryMod allowing admin dig rights. TODO: Who did this? (asked by Jos)
             boolean var4 = false;
             if (var1.e == 0) {
                 var4 = true;
@@ -389,10 +391,26 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             }
 
             if (var1.e == 0) {
-                if (var18 <= 16 && !var3) {
+                
+                if(!getUser().canBuild()){ //CanaryMod - no build rights, no digging
+                    return;
+                }
+                
+                //CanaryMod start - onBlockLeftClick
+                Block block = var2.getCanaryDimension().getBlockAt(var5, var6, var7);
+                
+                if (var18 <= 16 && !var3) { //Spawn Protection size
                     this.e.a.b((new OPacket53BlockChange(var5, var6, var7, var2)));
                 } else {
-                    this.e.c.a(var5, var6, var7, var1.d);
+                    //Call hook
+                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new LeftClickHook(getUser(), block));
+                    if(hook.isCancelled()){
+                        this.e.a.b((OPacket) (new OPacket53BlockChange(var5, var6, var7, var2)));
+                        //CanaryMod end - onBlockLeftClick
+                    }
+                    else{
+                        this.e.c.a(var5, var6, var7, var1.d);
+                    }
                 }
             } else if (var1.e == 2) {
                 this.e.c.a(var5, var6, var7);
@@ -422,7 +440,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         int var6 = var1.b;
         int var7 = var1.c;
         int var8 = var1.d;
-        boolean var9 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v);
+        boolean var9 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v);//  || getUser().isAdmin(); //CanaryMod allowing admin build rights TODO: Who did this? (asked by Jos)
         if (var1.d == 255) {
             if (var3 == null) {
                 return;
@@ -499,10 +517,12 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     @Override
     public void a(String var1, Object[] var2) {
         a.info(this.e.v + " lost connection: " + var1);
+        //CanaryMod start - onPlayerDisconnect
         ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), var1, Colors.Yellow + getUser().getName() + " left the game."));
         if (!hook.isHidden()) {
             this.d.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
         }
+        //CanaryMod end
         this.d.h.e(this.e);
         this.c = true;
     }
