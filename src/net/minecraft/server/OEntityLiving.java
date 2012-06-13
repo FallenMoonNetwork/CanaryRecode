@@ -850,7 +850,8 @@ public abstract class OEntityLiving extends OEntity {
                 }
 
                 this.a(ODamageSource.i, var2);
-            }// CanaryMod - end.
+            }
+            // CanaryMod - end.
             int var3 = this.bi.a(OMathHelper.b(this.bm), OMathHelper.b(this.bn - 0.20000000298023224D - this.bF), OMathHelper.b(this.bo));
             if (var3 > 0) {
                 OStepSound var4 = OBlock.m[var3].cb;

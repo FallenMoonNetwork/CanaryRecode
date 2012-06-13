@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import net.canarymod.Canary;
 import net.canarymod.Colors;
 import net.canarymod.TextFormat;
+import net.canarymod.config.Configuration; 
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.world.CanaryDimension;
@@ -356,7 +357,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         } else if (var1.e == 5) {
             this.e.N();
         } else {
-            boolean var3 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v);// || getUser().isAdmin(); //CanaryMod allowing admin dig rights. TODO: Who did this? (asked by Jos)
+            boolean var3 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v) || getUser().isAdmin(); //CanaryMod - Allow admins to dig
             boolean var4 = false;
             if (var1.e == 0) {
                 var4 = true;
@@ -398,8 +399,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                 
                 //CanaryMod start - onBlockLeftClick
                 Block block = var2.getCanaryDimension().getBlockAt(var5, var6, var7);
-                
-                if (var18 <= 16 && !var3) { //Spawn Protection size
+                if (var18 <= 16 /*Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize()*/ && (!var3 || getUser().hasPermission("canary.world.spawnbuild"))) { //Spawn Protection size TODO!
                     this.e.a.b((new OPacket53BlockChange(var5, var6, var7, var2)));
                 } else {
                     //Call hook
@@ -440,7 +440,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         int var6 = var1.b;
         int var7 = var1.c;
         int var8 = var1.d;
-        boolean var9 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v);//  || getUser().isAdmin(); //CanaryMod allowing admin build rights TODO: Who did this? (asked by Jos)
+        boolean var9 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v) || getUser().isAdmin(); //CanaryMod - Allow admins to build
         if (var1.d == 255) {
             if (var3 == null) {
                 return;
@@ -675,7 +675,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     @Override
     public void a(OPacket9Respawn var1) {
         // CanaryMod: onPlayerRespawn
-        Location respawnLocation = e.bi.getCanaryDimension().getSpawnLocation();
+        Location respawnLocation = getUser().getDimension().getSpawnLocation();
         if (this.e.j) {
             PlayerRespawnHook hook = (PlayerRespawnHook) Canary.hooks().callHook(new PlayerRespawnHook(e.getPlayer(), respawnLocation));
             this.e = this.d.h.a(this.e, 0, true, hook.getRespawnLocation());
@@ -812,12 +812,14 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                     var7.a[var8] = var1.d[var8];
                 }
                 
+                //CanaryMod start - onSignChange
                 CanarySign sign = new CanarySign(var7);
                 CancelableHook hook = (CancelableHook) Canary.hooks().callHook(new SignHook(getUser(), sign, true));
                 if(hook.isCancelled()){
                     var7.a = Arrays.copyOf(old, old.length);
                 }
-
+                //CanaryMod end - onSignChange
+                
                 var7.G_();
                 var2.j(var9, var10, var6);
             }

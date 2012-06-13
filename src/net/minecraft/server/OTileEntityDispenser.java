@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import net.canarymod.api.inventory.Item;
+import net.canarymod.api.world.blocks.CanaryDispenser;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItemStack;
@@ -16,9 +17,11 @@ public class OTileEntityDispenser extends OTileEntity implements OIInventory {
     private OItemStack[] a = new OItemStack[9];
     private Random b = new Random();
     private String name = "container.dispenser"; //CanaryMod
+    private CanaryDispenser dispenser;
 
     public OTileEntityDispenser() {
         super();
+        dispenser = new CanaryDispenser(this);
      }
 
      public int c() {
@@ -252,4 +255,8 @@ public class OTileEntityDispenser extends OTileEntity implements OIInventory {
          return a();
      }
      //CanaryMod end - Container
+     
+     public CanaryDispenser getDispener(){
+         return dispenser;
+     }
 }
