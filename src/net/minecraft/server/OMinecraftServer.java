@@ -768,7 +768,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     }
 
     @Override
-    public String m() {
+    public String getDefaultWorld() {
         return Configuration.getServerConfig().getDefaultWorldName();
     }
 
