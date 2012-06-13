@@ -26,7 +26,7 @@ public interface OIServer {
 
     String[] l();
 
-    String m();
+    String getDefaultWorld();
 
     String n();
 

@@ -50,7 +50,7 @@ public class OBlockDoor extends OBlock {
     // collision BB from pool
     @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
-        this.a(var1, var2, var3, var4);
+        this.a((OIBlockAccess) var1, var2, var3, var4);
         return super.e(var1, var2, var3, var4);
     }
 

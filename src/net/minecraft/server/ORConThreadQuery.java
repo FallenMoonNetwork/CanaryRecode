@@ -48,7 +48,7 @@ public class ORConThreadQuery extends ORConThreadBase {
         this.i = var1.g();
         this.k = var1.h();
         this.j = var1.k();
-        this.l = var1.m();
+        this.l = var1.getDefaultWorld();
         this.v = 0L;
         this.q = "0.0.0.0";
         if (0 != this.r.length() && !this.q.equals(this.r)) {
