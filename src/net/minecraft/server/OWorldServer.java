@@ -100,7 +100,7 @@ public class OWorldServer extends OWorld {
             var6 = var5;
         }
 
-        return var6 > 16 || this.J.h.h(var1.v);
+        return var6 > 16 || this.J.h.isOperator(var1.v);
     }
 
     @Override

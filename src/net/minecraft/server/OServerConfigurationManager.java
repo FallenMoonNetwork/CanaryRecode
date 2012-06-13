@@ -26,6 +26,8 @@ import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.player.LoginChecksHook;
+import net.canarymod.permissionsystem.PermissionNode;
+import net.canarymod.permissionsystem.PermissionProvider;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
@@ -53,7 +55,7 @@ public class OServerConfigurationManager {
     private int e;
     private Set f = new HashSet();
     private Set g = new HashSet();
-    private Set operators = new HashSet();
+    //private Set<String> operators = new HashSet<String>();
     private Set i = new HashSet();
     private File j;
     private File k;
@@ -86,7 +88,7 @@ public class OServerConfigurationManager {
         // CanaryMod: don't load the default whitelists and bans
         //this.l();
         //this.n();
-        //this.p();
+        //this.loadOperatorList();
         //this.r();
         //this.m();
         //this.o();
@@ -205,7 +207,7 @@ public class OServerConfigurationManager {
         if (this.f.contains(var2.trim().toLowerCase())) {
             var1.a("You are banned from this server!");
             return null;
-        } else if (!this.g(var2)) {
+        } else if (!this.isAllowedToLogin(var2)) {
             var1.a("You are not white-listed on this server!");
             return null;
         } else if (this.g.contains(var3)) {// CanaryMod - Move ban check out of else block below to allow login check to be called before kicking
@@ -541,23 +543,25 @@ public class OServerConfigurationManager {
     }
 
     public void op(String var1) {
-        this.operators.add(var1.toLowerCase());
+        //this.operators.add(var1.toLowerCase());
         // CanaryMod start
         //this.saveOperatorList();
-        //Canary.getServer().getPlayer(var1).gi
+        //Player p = Canary.getServer().getPlayer(var1);
+        //p.getPermissionProvider().addPermission("canary.vanilla.op", true, id)
         // TODO: add canary.vanilla.op to the user
         // CanaryMod end
     }
 
     public void deop(String var1) {
-        this.operators.remove(var1.toLowerCase());
+        //this.operators.remove(var1.toLowerCase());
         // CanaryMod start
         //this.saveOperatorList();
         // TODO: remove canary.vanilla.op from the user
         // CanaryMod end
     }
 
-    private void p() {
+    private void loadOperatorList() {
+        /*
         try {
             this.operators.clear();
             BufferedReader var1 = new BufferedReader(new FileReader(this.l));
@@ -571,11 +575,11 @@ public class OServerConfigurationManager {
         } catch (Exception var3) {
             a.warning("Failed to load operators list: " + var3);
         }
-
+        */
     }
 
     private void saveOperatorList() {
-        try {
+        /*try {
             PrintWriter var1 = new PrintWriter(new FileWriter(this.l, false));
             Iterator var2 = this.operators.iterator();
 
@@ -587,7 +591,7 @@ public class OServerConfigurationManager {
             var1.close();
         } catch (Exception var4) {
             a.warning("Failed to save operators list: " + var4);
-        }
+        }*/
 
     }
 
@@ -608,7 +612,7 @@ public class OServerConfigurationManager {
 
     }
 
-    private void s() {
+    private void saveWhiteList() {
         try {
             PrintWriter var1 = new PrintWriter(new FileWriter(this.m, false));
             Iterator var2 = this.i.iterator();
@@ -625,13 +629,15 @@ public class OServerConfigurationManager {
 
     }
 
-    public boolean g(String var1) {
+    public boolean isAllowedToLogin(String var1) {
         var1 = var1.trim().toLowerCase();
-        return !this.o || this.operators.contains(var1) || this.i.contains(var1);
+        return !this.o || isOperator(var1) || this.i.contains(var1);
     }
 
-    public boolean h(String var1) {
-        return this.operators.contains(var1.trim().toLowerCase());
+    public boolean isOperator(String var1) {
+        //return this.operators.contains(var1.trim().toLowerCase());
+        // CanaryMod: use permission system instead
+        return Canary.getServer().getPlayer(var1).hasPermission("canary.vanilla.op");
     }
 
     public OEntityPlayerMP i(String var1) {
@@ -677,7 +683,7 @@ public class OServerConfigurationManager {
 
         for (int var3 = 0; var3 < this.b.size(); ++var3) {
             OEntityPlayerMP var4 = (OEntityPlayerMP) this.b.get(var3);
-            if (this.h(var4.v)) {
+            if (this.isOperator(var4.v)) {
                 var4.a.b(var2);
             }
         }
@@ -711,12 +717,12 @@ public class OServerConfigurationManager {
 
     public void k(String var1) {
         this.i.add(var1);
-        this.s();
+        this.saveWhiteList();
     }
 
     public void l(String var1) {
         this.i.remove(var1);
-        this.s();
+        this.saveWhiteList();
     }
 
     public Set h() {

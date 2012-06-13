@@ -97,7 +97,7 @@ public class OTileEntityMobSpawner extends OTileEntity {
         this.d = var1.j("EntityId");
         this.a = var1.e("Delay");
         this.reset = var1.e("Reset"); //CanaryMod - retrieve delay from tag
-        if(this.reset < 600){
+        if(this.reset == 0){
             reset = (short) 600;
         }
     }
