@@ -637,10 +637,6 @@ public class OServerConfigurationManager {
     public boolean isOperator(String var1) {
         //return this.operators.contains(var1.trim().toLowerCase());
         // CanaryMod: use permission system instead
-        HashMap<String,PermissionNode> m = Canary.getServer().getPlayer(var1).getPermissionProvider().getPermissionMap();
-        for(String k : m.keySet()) {
-            System.out.println(m.get(k).toString());
-        }
         return Canary.getServer().getPlayer(var1).hasPermission("canary.vanilla.op");
     }
 
