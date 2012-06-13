@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 
 import net.canarymod.Canary;
 import net.canarymod.CanaryServer;
+import net.canarymod.Logman;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.EntityTracker;
 import net.canarymod.api.entity.CanaryPlayer;
@@ -228,7 +229,9 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         defWorld.getFile().setInt("max-build-height",this.t);
 
         a.info("Preparing level \"" + var6 + "\"");
-        this.initWorld(new OAnvilSaveConverter(new File(".")), var6, var9, var13);
+        
+        this.initWorld(new OAnvilSaveConverter(new File("worlds/")), var6, var9, var13);
+        
         long var14 = System.nanoTime() - var4;
         String var16 = String.format("%.3fs", new Object[] { Double.valueOf(var14 / 1.0E9D) });
         a.info("Done (" + var16 + ")! For help, type \"help\" or \"?\"");
@@ -256,7 +259,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
      * @param seed
      */
     public void loadWorld(String name, long seed) {
-        this.initWorld((new OAnvilSaveConverter(new File("."))), name, seed, OWorldType.b);
+        this.initWorld((new OAnvilSaveConverter(new File("worlds/"))), name, seed, OWorldType.b);
     }
     // CanaryMod desc: initWorld
     private void initWorld(OISaveFormat var1, String var2, long var3, OWorldType var5) {
@@ -276,7 +279,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         a.info("Default game type: " + var6);
         boolean var7 = config.generatesStructures();
         OWorldSettings var8 = new OWorldSettings(var3, var6, var7, false, var5);
-        OAnvilSaveHandler var9 = new OAnvilSaveHandler(new File("."), var2, true);
+        OAnvilSaveHandler var9 = new OAnvilSaveHandler(new File("worlds/"), var2, true);
 
 //        for (int var10 = 0; var10 < this.worldServer.length; ++var10) {
         for (int var10 = 0; var10 < toLoad.length; ++var10) {
@@ -360,8 +363,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                 try {
                     var2.a(true, (OIProgressUpdate) null);
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
+                    Logman.logStackTrace("IOException while saving "+w.getName()+" in Dimension "+dim.getType().name(), e1);
                 }
                 var2.A();
             }
@@ -426,7 +428,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                         }
                         
                         
-                        if (allSleeping) { //CanaryMultiworld check if all worlds are not loaded
+                        if (allSleeping) { //CanaryMultiworld check if all players are deeply sleeping
                             this.w();
                             var3 = 0L;
                         } else {
@@ -591,8 +593,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                     try {
                         var9.h();
                     } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        Logman.logStackTrace("IOException while doing OWorldServer.h()", e1);
                     }
 
                     while (true) {

@@ -1,5 +1,6 @@
 package net.canarymod.api.entity;
 
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +30,10 @@ import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OMinecraftServer;
+import net.minecraft.server.OPacket;
+import net.minecraft.server.OPacket70Bed;
 import net.minecraft.server.OStatBase;
+import net.minecraft.server.OWorldSettings;
 
 /**
  * Canary Player wrapper.
@@ -602,8 +606,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setMode(int mode) {
-        if(mode == 0 || mode == 1){
-            ((OEntityPlayerMP)entity).c.a(mode);
+        //Adjust mode, make it null if number is invalid
+        mode = OWorldSettings.a(mode);
+        OEntityPlayerMP ent = ((OEntityPlayerMP)entity);
+        if (ent.c.a() != mode) {
+            ent.c.a(mode);
+            ent.a.b((OPacket) (new OPacket70Bed(3, mode)));
         }
     }
     
