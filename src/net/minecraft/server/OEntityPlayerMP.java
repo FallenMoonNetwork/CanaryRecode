@@ -14,6 +14,7 @@ import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.player.LeftClickHook;
 import net.canarymod.hook.player.TeleportHook;
 import net.canarymod.hook.world.SignHook;
 
@@ -367,6 +368,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     @Override
     public void C_() {
         if (!this.t) {
+            Canary.hooks().callHook(new LeftClickHook(getPlayer(), null)); //CanaryMod - onArmSwing
             this.u = -1;
             this.t = true;
             OEntityTracker var1 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
