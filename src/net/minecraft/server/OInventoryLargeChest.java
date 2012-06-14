@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OEntityPlayer;
@@ -10,8 +12,8 @@ import net.minecraft.server.OItemStack;
 public class OInventoryLargeChest implements OIInventory {
 
     private String a;
-    private OIInventory b;
-    private OIInventory c;
+    public OIInventory b; //CanaryMod private -> public
+    public OIInventory c; //CanaryMod private -> public
 
 
     public OInventoryLargeChest(String var1, OIInventory var2, OIInventory var3) {
@@ -81,16 +83,26 @@ public class OInventoryLargeChest implements OIInventory {
         this.c.g();
     }
     
-    //TODO 
     //CanaryMod start - Container
     @Override
     public OItemStack[] getContents() {
-        return null;
+        ArrayList<OItemStack> fullinv = new ArrayList<OItemStack>();
+        Collections.addAll(fullinv, b.getContents());
+        Collections.addAll(fullinv, c.getContents());
+        OItemStack[] toRet = new OItemStack[fullinv.size()];
+        toRet = fullinv.toArray(toRet);
+        return toRet;
     }
 
     @Override
     public void setContents(OItemStack[] values) {
-        
+        OItemStack[] contentsA = new OItemStack[b.getInventorySize()];
+        OItemStack[] contentsB = new OItemStack[c.getInventorySize()];
+        System.arraycopy(values, 0, contentsA, 0, contentsA.length);
+        System.arraycopy(values, contentsA.length, contentsB, 0, contentsB.length);
+
+        b.setContents(contentsA);
+        c.setContents(contentsB);
     }
 
     @Override
@@ -125,69 +137,61 @@ public class OInventoryLargeChest implements OIInventory {
 
     @Override
     public void clearContents() {
-        //Arrays.fill(b, (OItemStack)null);
-        
+        b.clearContents();
+        c.clearContents();
     }
 
     @Override
     public Item getItem(int id, int amount) {
-        for(OItemStack stack : getContents()) {
-            if(stack.c == id && stack.a == amount) {
-                return stack.getCanaryItem();
-            }
+        Item toRet = b.getItem(id, amount);
+        if(toRet == null){
+            toRet = c.getItem(id, amount);
         }
-        return null;
+        return toRet;
     }
 
     @Override
     public Item getItem(int id) {
-        for(OItemStack stack : getContents()) {
-            if(stack.c == id) {
-                return stack.getCanaryItem();
-            }
+        Item toRet = b.getItem(id);
+        if(toRet == null){
+            toRet = c.getItem(id);
         }
-        return null;
+        return toRet;
     }
 
     @Override
     public Item removeItem(Item item) {
-     //   if(c[item.getSlot()] != null && c[item.getSlot()].c == item.getId()) {
-     //       Item toRet = c[item.getSlot()].getCanaryItem();
-     //       c[item.getSlot()] = null;
-     //       return toRet;
-     //   }
-        return null;
+        Item toRet = b.removeItem(item);
+        if(toRet == null){
+            toRet = c.removeItem(item);
+        }
+        return toRet;
     }
 
     @Override
     public Item removeItem(int id) {
-    //    for(int index = 0; index < c.length; index++) {
-    //        if(c[index].c == id) {
-    //            Item toRet = c[index].getCanaryItem();
-    //            c[index] = null;
-    //            return toRet;
-    //        }
-    //    }
-        return null;
+        Item toRet = b.removeItem(id);
+        if(toRet == null){
+            toRet = c.removeItem(id);
+        }
+        return toRet;
     }
 
     @Override
     public boolean hasItemStack(OItemStack oItemStack) {
-    //    for (int index = 0; index < this.c.length; ++index) {
-    //        if (this.c[index] != null && this.c[index].c(oItemStack)) {
-    //            return true;
-    //        }
-    //    }
+        boolean toRet = b.hasItemStack(oItemStack);
+        if(!toRet){
+            toRet = c.hasItemStack(oItemStack);
+        }
         return false;
     }
 
     @Override
     public boolean hasItem(int itemId) {
-    //    for (int var2 = 0; var2 < this.c.length; ++var2) {
-    //        if (this.c[var2] != null && this.c[var2].c == itemId) {
-    //            return true;
-    //        }
-    //    }
+        boolean toRet = b.hasItem(itemId);
+        if(!toRet){
+            toRet = c.hasItem(itemId);
+        }
         return false;
     }
 

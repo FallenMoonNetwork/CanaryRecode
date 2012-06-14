@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import net.canarymod.api.inventory.Container;
 import net.canarymod.api.inventory.Item;
+import net.canarymod.api.world.blocks.CanaryChest;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
@@ -25,9 +26,11 @@ public class OTileEntityChest extends OTileEntity implements OIInventory {
     public int h;
     private int j;
     private String name = "container.chest"; //CanaryMod
+    private CanaryChest chest;
 
     public OTileEntityChest() {
         super();
+        this.chest = new CanaryChest(this);
      }
 
      public int c() {
@@ -368,4 +371,8 @@ public class OTileEntityChest extends OTileEntity implements OIInventory {
         return a();
     }
     //CanaryMod end - Container
+    
+    public CanaryChest getChest(){
+        return chest;
+    }
 }

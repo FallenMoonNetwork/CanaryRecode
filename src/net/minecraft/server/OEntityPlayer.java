@@ -3,8 +3,12 @@ package net.minecraft.server;
 import java.util.Iterator;
 import java.util.List;
 
+import net.canarymod.Canary;
 import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.Inventory;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.Hook;
+import net.canarymod.hook.player.RightClickHook;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -696,13 +700,15 @@ public abstract class OEntityPlayer extends OEntityLiving {
         if (!var1.b(this)) {
             OItemStack var2 = this.U();
             if (var2 != null && var1 instanceof OEntityLiving) {
-                var2.a((OEntityLiving) var1);
-                if (var2.a <= 0) {
-                    var2.a(this);
-                    this.V();
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(((OEntityPlayerMP)this).getPlayer(), null, null, var2.getCanaryItem(),((OEntityLiving) var1).getCanaryEntityLiving(), Hook.Type.ENTITY_RIGHTCLICKED));
+                if(!hook.isCancelled()){
+                    var2.a((OEntityLiving) var1);
+                    if (var2.a <= 0) {
+                        var2.a(this);
+                        this.V();
+                    }
                 }
             }
-
         }
     }
 

@@ -14,15 +14,18 @@ import net.canarymod.api.inventory.CanaryInventory;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.blocks.CanaryChest;
 import net.canarymod.api.world.blocks.CanaryDispenser;
+import net.canarymod.api.world.blocks.CanaryDoubleChest;
 import net.canarymod.api.world.blocks.CanaryFurnace;
 import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.ExperienceHook;
 import net.canarymod.hook.player.InventoryHook;
 import net.canarymod.hook.player.LeftClickHook;
+import net.canarymod.hook.player.RightClickHook;
 import net.canarymod.hook.player.TeleportHook;
 import net.canarymod.hook.world.SignHook;
 
@@ -491,13 +494,16 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public void a(OIInventory var1) {
         //CanaryMod - onOpenInventory - Chest/DoubleChest
         CanaryInventory inv = null;
+        CancelableHook hook = new CancelableHook();
         if(var1 instanceof OTileEntityChest){
-            inv = (CanaryInventory) new CanaryChest((OTileEntityChest)var1).getInventory();
+            inv = (CanaryInventory) ((OTileEntityChest)var1).getChest().getInventory();
         }
         else if (var1 instanceof OInventoryLargeChest){
-            inv = new CanaryInventory(var1); //TODO DoubleChest needs added
+            inv = (CanaryInventory) new CanaryDoubleChest((OInventoryLargeChest)var1).getInventory();
         }
-        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new InventoryHook(canaryPlayer, inv, false));
+        if(inv != null){
+            hook = (CancelableHook) Canary.hooks().callCancelableHook(new InventoryHook(canaryPlayer, inv, false));
+        }
         if(!hook.isCancelled()){
             this.bc();
             this.a.b((new OPacket100OpenWindow(this.cl, 0, var1.getInventoryName(), var1.getInventorySize())));
@@ -638,14 +644,24 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     @Override
     public void a(OItemStack var1, int var2) {
-        super.a(var1, var2);
+        //super.a(var1, var2);
         if (var1 != null && var1.a() != null && var1.a().d(var1) == OEnumAction.b) {
-//            OEntityTracker var3 = this.b.b(this.w);
-            //CanaryMod get the real entity tracker
-            OEntityTracker var3 = this.getDimension().getEntityTracker().getHandle();
-            var3.b(this, new OPacket18Animation(this, 5));
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(getPlayer(), null, null, var1.getCanaryItem(), null, Hook.Type.EAT));
+            if(!hook.isCancelled()){
+                super.a(var1, var2);
+                //OEntityTracker var3 = this.b.b(this.w);
+                //CanaryMod get the real entity tracker
+                OEntityTracker var3 = this.getDimension().getEntityTracker().getHandle();
+                var3.b(this, new OPacket18Animation(this, 5));
+            }
+            else{
+                this.a.b((OPacket) (new OPacket38EntityStatus(this.S, (byte) 9)));
+                this.a.b((new OPacket8UpdateHealth(this.aD(), this.foodStats.getFoodLevel(), this.foodStats.getFoodSaturationLevel())));
+            }
         }
-
+        else{
+            super.a(var1, var2);
+        }
     }
 
     @Override
