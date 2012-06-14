@@ -1,10 +1,13 @@
 package net.canarymod.api.world.blocks;
 
 import net.canarymod.api.inventory.CanaryInventory;
+import net.canarymod.api.inventory.Container;
 import net.canarymod.api.inventory.Inventory;
+import net.canarymod.api.inventory.Item;
+import net.minecraft.server.OItemStack;
 import net.minecraft.server.OTileEntityChest;
 
-public class CanaryChest extends CanaryComplexBlock implements Chest{
+public class CanaryChest extends CanaryComplexBlock implements Chest, Container<OItemStack>{
 
     public CanaryChest(OTileEntityChest tileentity) {
         super(tileentity);
@@ -12,7 +15,7 @@ public class CanaryChest extends CanaryComplexBlock implements Chest{
 
     @Override
     public Inventory getInventory() {
-        return new CanaryInventory((OTileEntityChest)tileentity);
+        return new CanaryInventory(this);
     }
 
     @Override
@@ -43,7 +46,7 @@ public class CanaryChest extends CanaryComplexBlock implements Chest{
 //          return result != null;
         return false;
     }
-
+    
 //    private DoubleChest tryAttachedChest(Block origin, BlockFace face) {
 //        Block block = origin.getFace(face);
 //
@@ -59,4 +62,99 @@ public class CanaryChest extends CanaryComplexBlock implements Chest{
 //
 //        return null;
 //    }
+    
+    @Override
+    public void clearContents() {
+        ((OTileEntityChest)tileentity).clearContents();
+    }
+
+    @Override
+    public OItemStack decreaseItemStackSize(int arg0, int arg1) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public OItemStack[] getContents() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getInventoryName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int getInventorySize() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public Item getItem(int arg0) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item getItem(int arg0, int arg1) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public OItemStack getSlot(int arg0) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean hasItem(int arg0) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean hasItemStack(OItemStack arg0) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public Item removeItem(Item arg0) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Item removeItem(int arg0) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setContents(OItemStack[] arg0) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setInventoryName(String arg0) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setSlot(int arg0, OItemStack arg1) {
+        // TODO Auto-generated method stub
+        
+    }
 }

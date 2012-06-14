@@ -122,7 +122,7 @@ public class OBlockDispenser extends OBlockContainer {
             double var15 = var4 + var8 * 0.6D + 0.5D;
             
             CancelableHook hook;
-            Dispenser dispenser = var9.getDispener();
+            Dispenser dispenser = var9.getDispenser();
             if (var10 == null) {
                 //CanaryMod - onDispense
                 hook = (CancelableHook) Canary.hooks().callCancelableHook(new DispenseHook(dispenser, null));

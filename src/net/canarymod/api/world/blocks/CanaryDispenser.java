@@ -4,7 +4,9 @@ import java.util.Random;
 
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.inventory.CanaryInventory;
+import net.canarymod.api.inventory.Container;
 import net.canarymod.api.inventory.Inventory;
+import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityArrow;
 import net.minecraft.server.OEntityEgg;
@@ -18,8 +20,9 @@ import net.minecraft.server.OItemMonsterPlacer;
 import net.minecraft.server.OItemPotion;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OTileEntityDispenser;
+import net.minecraft.server.OTileEntityFurnace;
 
-public class CanaryDispenser extends CanaryComplexBlock implements Dispenser{
+public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Container<OItemStack>{
     private Random random = new Random();
 
     public CanaryDispenser(OTileEntityDispenser tileentity) {
@@ -28,7 +31,7 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser{
 
     @Override
     public Inventory getInventory() {
-        return new CanaryInventory((OTileEntityDispenser)tileentity);
+        return new CanaryInventory(this);
     }
     
     public Entity activate(){
@@ -132,5 +135,89 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser{
             tileentity.k.f(2000, this.getX(), this.getY(), this.getZ(), offsetX + 1 + (offsetZ + 1) * 3);
         }
         return entity != null ? entity.getCanaryEntity() : null;
+    }
+
+    @Override
+    public void clearContents() {
+        ((OTileEntityDispenser)tileentity).clearContents();
+    }
+
+    @Override
+    public OItemStack decreaseItemStackSize(int arg0, int arg1) {
+        return ((OTileEntityDispenser)tileentity).decreaseItemStackSize(arg0, arg1);
+    }
+
+    @Override
+    public OItemStack[] getContents() {
+        return ((OTileEntityDispenser)tileentity).getContents();
+    }
+
+    @Override
+    public String getInventoryName() {
+        return ((OTileEntityDispenser)tileentity).getInventoryName();
+    }
+
+    @Override
+    public int getInventorySize() {
+        return ((OTileEntityDispenser)tileentity).getInventorySize();
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+        return ((OTileEntityDispenser)tileentity).getInventoryStackLimit();
+    }
+
+    @Override
+    public Item getItem(int id) {
+        return ((OTileEntityDispenser)tileentity).getItem(id);
+    }
+
+    @Override
+    public Item getItem(int id, int amount) {
+       return ((OTileEntityDispenser)tileentity).getItem(id, amount);
+    }
+
+    @Override
+    public OItemStack getSlot(int index) {
+        return ((OTileEntityDispenser)tileentity).getSlot(index);
+    }
+
+    @Override
+    public boolean hasItem(int itemId) {
+        return ((OTileEntityDispenser)tileentity).hasItem(itemId);
+    }
+
+    @Override
+    public boolean hasItemStack(OItemStack oItemStack) {
+       return ((OTileEntityDispenser)tileentity).hasItemStack(oItemStack);
+    }
+
+    @Override
+    public Item removeItem(Item item) {
+        return ((OTileEntityDispenser)tileentity).removeItem(item);
+    }
+
+    @Override
+    public Item removeItem(int id) {
+        return ((OTileEntityDispenser)tileentity).removeItem(id);
+    }
+
+    @Override
+    public void setContents(OItemStack[] values) {
+        ((OTileEntityDispenser)tileentity).setContents(values);
+    }
+
+    @Override
+    public void setInventoryName(String value) {
+        ((OTileEntityDispenser)tileentity).setInventoryName(value);
+    }
+
+    @Override
+    public void setSlot(int index, OItemStack value) {
+        ((OTileEntityDispenser)tileentity).setSlot(index, value);
+    }
+    
+    public OTileEntityDispenser getHandle(){
+        return (OTileEntityDispenser)tileentity;
     }
 }

@@ -256,7 +256,7 @@ public class OTileEntityDispenser extends OTileEntity implements OIInventory {
      }
      //CanaryMod end - Container
      
-     public CanaryDispenser getDispener(){
+     public CanaryDispenser getDispenser(){
          return dispenser;
      }
 }

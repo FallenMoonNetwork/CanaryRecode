@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import net.canarymod.api.entity.Player;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OICrafting;
 import net.minecraft.server.OIInventory;
@@ -144,7 +146,7 @@ public abstract class OContainer {
                            var10 = var12.a();
                         }
 
-                        var12.d(var14.a(var10));
+                        var12.craftCheck(var14.a(var10), ((OEntityPlayerMP)var4).getPlayer());
                         if(var14.a == 0) {
                            var6.b((OItemStack)null);
                         }
@@ -299,4 +301,8 @@ public abstract class OContainer {
 
       return var5;
    }
+
+   public void getCraftResult(OIInventory oiInventory, Player player) {
+       a(oiInventory);
+    }
 }

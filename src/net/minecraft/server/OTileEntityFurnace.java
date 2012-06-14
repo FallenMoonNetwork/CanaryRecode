@@ -3,6 +3,7 @@ package net.minecraft.server;
 import java.util.Arrays;
 
 import net.canarymod.api.inventory.Item;
+import net.canarymod.api.world.blocks.CanaryFurnace;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockFurnace;
 import net.minecraft.server.OEntityPlayer;
@@ -22,9 +23,11 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
     public int b = 0;
     public int c = 0;
     private String name = "container.furnace"; //CanaryMod
+    private CanaryFurnace furnace;
 
     public OTileEntityFurnace() {
         super();
+        furnace = new CanaryFurnace(this);
      }
 
      public int c() {
@@ -212,7 +215,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
 
      public void g() {}
      
-   //CanaryMod start - Container
+     //CanaryMod start - Container
      @Override
      public OItemStack[] getContents() {
          return Arrays.copyOf(this.d, c());
@@ -330,4 +333,8 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
          return a();
      }
      //CanaryMod end - Container
+     
+     public CanaryFurnace getFurnace(){
+         return furnace;
+     }
 }

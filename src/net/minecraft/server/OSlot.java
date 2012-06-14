@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.Player;
 import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItemStack;
 
@@ -52,9 +53,19 @@ public class OSlot {
     public boolean c() {
         return this.b() != null;
     }
-
+    
     public void d(OItemStack var1) {
         this.b.a(this.a, var1);
+        this.d();
+    }
+    
+    public void craftCheck(OItemStack var1, Player player) {
+        if (this.b instanceof OInventoryCrafting){
+            ((OInventoryCrafting)this.b).setResult(this.a, var1, player);
+        }
+        else{
+            this.b.a(this.a, var1);
+        }
         this.d();
     }
 

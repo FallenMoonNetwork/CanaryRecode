@@ -1,5 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.api.entity.Player;
+import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.hook.player.CraftHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OContainer;
 import net.minecraft.server.OCraftingManager;
@@ -17,10 +21,10 @@ public class OContainerWorkbench extends OContainer {
 
     public OInventoryCrafting a = new OInventoryCrafting(this, 3, 3);
     public OIInventory b = new OInventoryCraftResult();
-    private OWorld c;
-    private int h;
-    private int i;
-    private int j;
+    public OWorld c;
+    public int h;
+    public int i;
+    public int j;
 
     public OContainerWorkbench(OInventoryPlayer var1, OWorld var2, int var3, int var4, int var5) {
         super();
@@ -54,6 +58,15 @@ public class OContainerWorkbench extends OContainer {
     @Override
     public void a(OIInventory var1) {
         this.b.a(0, OCraftingManager.a().a(this.a));
+    }
+    
+    public void getCraftResult(OIInventory var1, Player player){
+        OItemStack result = OCraftingManager.a().a(this.a);
+        if(result != null){
+            CraftHook hook = (CraftHook) Canary.hooks().callHook(new CraftHook(player, result.getCanaryItem(), false));
+            result = hook.getCraftResult() != null ? ((CanaryItem)hook.getCraftResult()).getHandle() : null;
+        }
+        this.b.a(0, result);
     }
 
     @Override

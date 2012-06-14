@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import java.util.Arrays;
 
+import net.canarymod.api.entity.Player;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
@@ -47,8 +48,8 @@ public class OInventoryCraftResult implements OIInventory {
             return null;
         }
     }
-
-    public void a(int var1, OItemStack var2) {
+    
+    public void a(int var1, OItemStack var2){
         this.a[var1] = var2;
     }
 
