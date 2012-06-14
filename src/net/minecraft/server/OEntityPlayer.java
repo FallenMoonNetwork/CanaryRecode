@@ -4,10 +4,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.canarymod.Canary;
+import net.canarymod.api.entity.EntityItem;
 import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.Inventory;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.Hook;
+import net.canarymod.hook.player.ItemHook;
 import net.canarymod.hook.player.RightClickHook;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OAxisAlignedBB;
@@ -335,8 +338,10 @@ public abstract class OEntityPlayer extends OEntityLiving {
             --this.o;
         }
 
-        if (this.bi.q == 0 && this.aD() < this.d() && this.bT % 20 * 12 == 0) {
-            this.d(1);
+        if (this.bi.q == 0 && Configuration.getWorldConfig(bi.getCanaryDimension().getName()).isAutoHealEnabled()){ //CanaryMod AutoHeal setting
+            if(this.aD() < this.d() && this.bT % 20 * 12 == 0) {
+                this.d(1);
+            }
         }
 
         this.k.i();
@@ -457,6 +462,10 @@ public abstract class OEntityPlayer extends OEntityLiving {
                 var3.br += Math.sin(var5) * var4;
             }
 
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new ItemHook(((OEntityPlayerMP)this).getPlayer(), (EntityItem) var3.getCanaryEntity(), true)); //ITEM_DROP
+            if(hook.isCancelled()){
+                return null;
+            }
             this.a(var3);
             this.a(OStatList.v, 1);
             return var3;
