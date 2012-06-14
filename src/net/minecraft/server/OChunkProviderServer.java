@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -10,6 +11,9 @@ import java.util.Set;
 import net.canarymod.Canary;
 import net.canarymod.CanaryMod;
 import net.canarymod.api.world.CanaryChunkProviderServer;
+import net.canarymod.hook.Hook;
+import net.canarymod.hook.world.ChunkCreationHook;
+import net.canarymod.hook.world.ChunkHook;
 import net.minecraft.server.OChunk;
 import net.minecraft.server.OChunkCoordIntPair;
 import net.minecraft.server.OChunkCoordinates;
@@ -96,13 +100,29 @@ public class OChunkProviderServer implements OIChunkProvider {
                 loadStage = 1;
             }
             // CanaryMod end
+            
+            
             var5 = this.e(var1, var2);
             if (var5 == null) {
-                if (this.d == null) {
+                //CanaryMod start - onChunkCreation
+                ChunkCreationHook hook = (ChunkCreationHook) Canary.hooks().callHook(new ChunkCreationHook(var1, var2, h.getCanaryDimension()));
+                byte[] blocks = hook.getBlockData();
+                
+                if(blocks != null){
+                    var5 = new OChunk(h, blocks, var1, var2); //Make a new chunk with our new block data
+                    if(hook.getBiomeData() != null){
+                        var5.a(hook.getBiomeData()); //Set the biomedata
+                    }
+                    var5.k = true; //isPopulated
+                    //CanaryMod end
+                }
+                else if (this.d == null) {
                     var5 = this.c;
                 } else {
                     var5 = this.d.b(var1, var2);
                 }
+                //CanaryMod - onChunkCreated
+                Canary.hooks().callHook(new ChunkHook(var5.getCanaryChunk(), Hook.Type.CHUNK_CREATED));
             }
 
             this.f.a(var3, var5);
@@ -110,6 +130,8 @@ public class OChunkProviderServer implements OIChunkProvider {
             if (var5 != null) {
                 var5.b();
                 var5.c();
+                //CanaryMod onChunkLoad
+                Canary.hooks().callHook(new ChunkHook(var5.getCanaryChunk(), Hook.Type.CHUNK_LOADED));
             }
 
             var5.a(this, this, var1, var2);
@@ -221,6 +243,9 @@ public class OChunkProviderServer implements OIChunkProvider {
                 if (!this.b.isEmpty()) {
                     Long var2 = this.b.iterator().next();
                     OChunk var3 = (OChunk) this.f.a(var2.longValue());
+                    
+                    //CanaryMod onChunkUnloaded
+                    Canary.hooks().callHook(new ChunkHook(var3.getCanaryChunk(), Hook.Type.CHUNK_UNLOADED));
                     var3.d();
                     this.b(var3);
                     this.a(var3);

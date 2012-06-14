@@ -2,6 +2,8 @@ package net.canarymod.api.entity;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -100,7 +102,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             }
             else {
                 String prefix = "<" + getColor() + getName() + Colors.White + "> ";
-                ArrayList<Player> receivers = (ArrayList<Player>) Canary.getServer().getPlayerList();
+                
+                //Preventing ConcurrentModification Issues by full making a copy of the list before giving it to plugins
+                ArrayList<Player> receivers = new ArrayList<Player>(Canary.getServer().getPlayerList()); // shadow copy the list for size matching
+                Collections.copy(receivers, Canary.getServer().getPlayerList()); //Fully copy the list
+                
                 ChatHook hook = (ChatHook) Canary.hooks().callCancelableHook(new ChatHook(this, prefix, message, receivers));
                 if(hook.isCancelled()) {
                     return;

@@ -45,7 +45,7 @@ public class CanaryChunk implements Chunk {
 
     @Override
     public int getMaxHeigth() {
-        return 256; // TODO: configurable //Chris: Really?
+        return 256; // TODO: configurable //Chris: Really? //Jason: how about HELL TO THE NO, I am not implementing per chunk build heights :P That is crazy stupid...
     }
 
     @Override

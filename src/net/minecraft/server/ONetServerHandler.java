@@ -363,7 +363,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         } else if (var1.e == 5) {
             this.e.N();
         } else {
-            boolean var3 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v) || getUser().isAdmin(); //CanaryMod - Allow admins to dig
+            boolean spawnBuild = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v) || getUser().isAdmin() || getUser().hasPermission("canary.world.spawnbuild"); //CanaryMod - Check Spawn Build permissions
             boolean var4 = false;
             if (var1.e == 0) {
                 var4 = true;
@@ -398,25 +398,18 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             }
 
             if (var1.e == 0) {
-                
                 if(!getUser().canBuild()){ //CanaryMod - no build rights, no digging
                     return;
                 }
                 
                 //CanaryMod start - onBlockLeftClick
                 Block block = var2.getCanaryDimension().getBlockAt(var5, var6, var7);
-                if (var18 <= 16 /*Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize()*/ && (!var3 || getUser().hasPermission("canary.world.spawnbuild"))) { //Spawn Protection size TODO!
+                //Call hook
+                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new LeftClickHook(getUser(), block));
+                if (var18 <= Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() && !spawnBuild && !hook.isCancelled()) {
                     this.e.a.b((new OPacket53BlockChange(var5, var6, var7, var2)));
                 } else {
-                    //Call hook
-                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new LeftClickHook(getUser(), block));
-                    if(hook.isCancelled()){
-                        this.e.a.b((OPacket) (new OPacket53BlockChange(var5, var6, var7, var2)));
-                        //CanaryMod end - onBlockLeftClick
-                    }
-                    else{
-                        this.e.c.a(var5, var6, var7, var1.d);
-                    }
+                    this.e.c.a(var5, var6, var7, var1.d);
                 }
             } else if (var1.e == 2) {
                 this.e.c.a(var5, var6, var7);
@@ -449,7 +442,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         int var6 = var1.b;
         int var7 = var1.c;
         int var8 = var1.d;
-        boolean var9 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v) || getUser().isAdmin(); //CanaryMod - Allow admins to build
+        boolean spawnBuild = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v) || getUser().isAdmin() || getUser().hasPermission("canary.world.spawnbuild"); //CanaryMod - Check spawn build permission
         
         // CanaryMod: Store block data to call hooks
         // CanaryMod START
@@ -506,7 +499,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                 return;
             }
 
-            this.e.c.itemUsed(this.e, var2, var3, blockPlaced, blockPlaced);
+            this.e.c.itemUsed(this.e, var2, var3, blockPlaced, blockPlaced); //CanaryMod redirected to our itemUsed
         } else if (var1.b >= this.d.t - 1 && (var1.d == 1 || var1.b >= this.d.t)) {
             this.e.a.b((new OPacket3Chat("\u00a77Height limit for building is " + this.d.t)));
             var4 = true;
@@ -521,7 +514,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             // CanaryMod - onBlockRightClicked
             Item item = (var3 != null) ? var3.getCanaryItem() : new CanaryItem(new OItemStack(0, 0, 0));
             CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(getUser(), blockPlaced, blockClicked, item, null, Hook.Type.BLOCK_RIGHTCLICKED));
-            if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > 16 /*spawnprotection*/ || var9) && getUser().canBuild() && !hook.isCancelled()) {
+            if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() || spawnBuild) && getUser().canBuild() && !hook.isCancelled()) {
                 this.e.c.a(this.e, var2, var3, var5, var6, var7, var8);
             }
             else {
