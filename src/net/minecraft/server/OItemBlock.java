@@ -2,6 +2,8 @@ package net.minecraft.server;
 
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.Block;
+import net.canarymod.api.world.blocks.BlockFace;
+import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.RightClickHook;
@@ -28,6 +30,14 @@ public class OItemBlock extends OItem {
 
     @Override
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
+        // CanaryMod: Bail if we have nothing of the items in hand
+        if (var1.a == 0) {
+            return false;
+        }
+        
+        // CanaryMod: Store blockInfo of the one we clicked
+        Block blockClicked = var3.getCanaryDimension().getBlockAt(var4, var5, var6);
+        
         int var8 = var3.a(var4, var5, var6);
         if (var8 == OBlock.aS.bO) {
             var7 = 1;
@@ -57,6 +67,8 @@ public class OItemBlock extends OItem {
             }
         }
 
+        blockClicked.setFaceClicked(BlockFace.fromByte((byte)var7));
+        
         if (var1.a == 0) {
             return false;
         } else if (!var2.d(var4, var5, var6)) {
@@ -65,11 +77,12 @@ public class OItemBlock extends OItem {
             return false;
         } else if (var3.a(this.a, var4, var5, var6, false, var7)) {
             // CanaryMod - Stop block place
-            Block block = var3.getCanaryDimension().getBlockAt(var4, var5, var6);
-            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(((OEntityPlayerMP)var2).getPlayer(), null, block, ((OEntityPlayerMP)var2).getPlayer().getItemHeld(), null, Hook.Type.BLOCK_PLACE));
+            Block blockplace = new CanaryBlock((short)this.a, (byte)var1.h(), var4, var5, var6);
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(((OEntityPlayerMP)var2).getPlayer(), blockClicked, blockplace, var1.getCanaryItem(), null, Hook.Type.BLOCK_PLACE));
             if (hook.isCancelled()) {
                 return false;
-            }// CanaryMod - end
+            }
+            // CanaryMod - end
             OBlock var9 = OBlock.m[this.a];
             if (var3.b(var4, var5, var6, this.a, this.a(var1.h()))) {
                 if (var3.a(var4, var5, var6) == this.a) {

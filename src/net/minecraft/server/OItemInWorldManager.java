@@ -1,9 +1,12 @@
 package net.minecraft.server;
 
 import net.canarymod.Canary;
+import net.canarymod.api.inventory.ItemType;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.LeftClickHook;
+import net.canarymod.hook.player.RightClickHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
@@ -177,6 +180,21 @@ public class OItemInWorldManager {
         return var6;
     }
 
+    public boolean itemUsed(OEntityPlayer player, OWorld world, OItemStack item, Block blockplaced, Block blockclicked) {
+        // CanaryMod: only call this hook if we're not using buckets/signs
+        if (item != null) {
+            if (item.a > 0 && item.c != ItemType.Sign.getId() && item.c != ItemType.Bucket.getId() && item.c != ItemType.WaterBucket.getId() && item.c != ItemType.LavaBucket.getId() && item.c != ItemType.MilkBucket.getId()) {
+                if (player instanceof OEntityPlayerMP){
+                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(((OEntityPlayerMP) player).getPlayer(), blockplaced, blockclicked, item.getCanaryItem(), null, Hook.Type.ITEM_USE));
+                    if(hook.isCancelled()){
+                        return false;
+                    }
+                }
+            }
+        }
+        return this.a(player, world, item);
+    }
+    
     public boolean a(OEntityPlayer var1, OWorld var2, OItemStack var3) {
         int var4 = var3.a;
         int var5 = var3.h();

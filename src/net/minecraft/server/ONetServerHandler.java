@@ -11,15 +11,21 @@ import net.canarymod.TextFormat;
 import net.canarymod.config.Configuration; 
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
+import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.blocks.Block;
+import net.canarymod.api.world.blocks.BlockFace;
+import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.hook.player.LeftClickHook;
 import net.canarymod.hook.player.PlayerMoveHook;
 import net.canarymod.hook.player.PlayerRespawnHook;
+import net.canarymod.hook.player.RightClickHook;
 import net.canarymod.hook.player.TeleportHook;
 import net.canarymod.hook.world.SignHook;
 import net.minecraft.server.OAxisAlignedBB;
@@ -431,6 +437,9 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         }
     }
 
+    // CanaryMod: Store the blocks between blockPlaced packets
+    private Block lastRightClicked;
+    
     @Override
     public void a(OPacket15Place var1) {
         OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
@@ -441,12 +450,63 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         int var7 = var1.c;
         int var8 = var1.d;
         boolean var9 = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v) || getUser().isAdmin(); //CanaryMod - Allow admins to build
+        
+        // CanaryMod: Store block data to call hooks
+        // CanaryMod START
+        Block blockClicked;
+        Block blockPlaced = null;
+        
+        if (var1.d == 255) {
+            // ITEM_USE -- if we have a lastRightClicked then it could be a
+            // usable location
+            blockClicked = lastRightClicked;
+            lastRightClicked = null;
+        } else {
+            // RIGHTCLICK or BLOCK_PLACE .. or nothing
+            blockClicked = var2.getCanaryDimension().getBlockAt(var1.a, var1.b, var1.c);
+            blockClicked.setFaceClicked(BlockFace.fromByte((byte) var1.d));
+            
+            lastRightClicked = blockClicked;
+        }
+        
+         // If we clicked on something then we also have a location to place the block
+        if (blockClicked != null && var3 != null) {
+            blockPlaced = new CanaryBlock((short)var1.d, (byte)0, blockClicked.getX(), blockClicked.getY(), blockClicked.getZ());
+            switch (var1.d) {
+                case 0:
+                    blockPlaced.setY(blockPlaced.getY() - 1);
+                    break;
+
+                case 1:
+                    blockPlaced.setY(blockPlaced.getY() + 1);
+                    break;
+
+                case 2:
+                    blockPlaced.setZ(blockPlaced.getZ() - 1);
+                    break;
+
+                case 3:
+                    blockPlaced.setZ(blockPlaced.getZ() + 1);
+                    break;
+
+                case 4:
+                    blockPlaced.setX(blockPlaced.getX() - 1);
+                    break;
+
+                case 5:
+                    blockPlaced.setX(blockPlaced.getX() + 1);
+                    break;
+            }
+        }
+
+        // CanaryMod: END
+        
         if (var1.d == 255) {
             if (var3 == null) {
                 return;
             }
 
-            this.e.c.a(this.e, var2, var3);
+            this.e.c.itemUsed(this.e, var2, var3, blockPlaced, blockPlaced);
         } else if (var1.b >= this.d.t - 1 && (var1.d == 1 || var1.b >= this.d.t)) {
             this.e.a.b((new OPacket3Chat("\u00a77Height limit for building is " + this.d.t)));
             var4 = true;
@@ -457,9 +517,18 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             if (var11 > var12) {
                 var12 = var11;
             }
-
-            if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > 16 || var9)) {
+            
+            // CanaryMod - onBlockRightClicked
+            Item item = (var3 != null) ? var3.getCanaryItem() : new CanaryItem(new OItemStack(0, 0, 0));
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(getUser(), blockPlaced, blockClicked, item, null, Hook.Type.BLOCK_RIGHTCLICKED));
+            if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > 16 /*spawnprotection*/ || var9) && getUser().canBuild() && !hook.isCancelled()) {
                 this.e.c.a(this.e, var2, var3, var5, var6, var7, var8);
+            }
+            else {
+                // CanaryMod: No point sending the client to update the blocks, you weren't allowed to place!
+                this.e.a.b((OPacket) (new OPacket53BlockChange(var5, var6, var7, var2)));
+                var2.y = false;
+                return;
             }
 
             var4 = true;
