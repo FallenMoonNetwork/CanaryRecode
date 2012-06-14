@@ -2,7 +2,6 @@ package net.canarymod.api.entity;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -314,31 +313,22 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean isAdmin() {
-        if(!permissions.queryPermission("canary.player.administrator")) {
-            return group.isAdministratorGroup();
-        }
-        return true;
+        return hasPermission("canary.super.administrator");
     }
 
     @Override
     public boolean canBuild() {
-        if(!group.canBuild()) {
-            return permissions.queryPermission("canary.world.build");
-        }
-        return true;
+        return hasPermission("canary.world.build");
     }
 
     @Override
     public void setCanBuild(boolean canModify) {
-        permissions.addPermission("canary.world.build", canModify, -1);
+        permissions.addPermission("canary.world.build", canModify);
     }
 
     @Override
     public boolean canIgnoreRestrictions() {
-        if(!group.canIgnorerestrictions()) {
-            return permissions.queryPermission("canary.player.ignoreRestrictions");
-        }
-        return true;
+        return hasPermission("canary.super.ignoreRestrictions");
     }
 
     @Override
