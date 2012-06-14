@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import java.io.File;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -22,6 +23,10 @@ public class OConsoleLogManager {
         a.addHandler(var1);
 
         try {
+            File folder = new File("logs/");
+            if(!folder.exists()) {
+                folder.mkdirs();
+            }
             FileHandler var2 = new FileHandler("logs/server.log", true);
             var2.setFormatter(var0);
             a.addHandler(var2);

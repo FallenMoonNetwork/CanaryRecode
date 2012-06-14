@@ -1,12 +1,9 @@
 package net.canarymod;
 
-import java.util.logging.Logger;
-
 import net.minecraft.server.OMinecraftServer;
 
 public class Main {
 
-    public static final Logger log = Logger.getLogger("Minecraft");
     /**
      * @param args
      */

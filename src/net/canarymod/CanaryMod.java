@@ -23,6 +23,8 @@ public class CanaryMod extends Canary {
      * Creates a new CanaryMod
      */
     public CanaryMod() {
+        Canary.instance = this;
+        
         this.config = new Configuration();
         Type backend = Configuration.getServerConfig().getDatasourceType();
         if (backend == Type.FLATFILE) {
@@ -41,13 +43,13 @@ public class CanaryMod extends Canary {
         this.permissionLoader = new PermissionManager();
         this.hookExecutor = new HookExecutor();
         this.helpManager = new HelpManager();
-        this.banManager = new BanManager(database);
+        this.banManager = new BanManager();
         //Initialize the plugin loader and scan for plugins
         this.loader = new PluginLoader();
         this.loader.scanPlugins();
     }
     
     public void initUserAndGroupsManager() {
-        this.userAndGroupsProvider = new UserAndGroupsProvider(database);
+        this.userAndGroupsProvider = new UserAndGroupsProvider();
     }
 }
