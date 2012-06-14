@@ -20,7 +20,6 @@ import net.minecraft.server.OItemMonsterPlacer;
 import net.minecraft.server.OItemPotion;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OTileEntityDispenser;
-import net.minecraft.server.OTileEntityFurnace;
 
 public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Container<OItemStack>{
     private Random random = new Random();
