@@ -318,7 +318,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean canBuild() {
-        return hasPermission("canary.world.build");
+        return hasPermission("canary.world.build") || hasPermission("canary.canilla.op") || isAdmin();
     }
 
     @Override

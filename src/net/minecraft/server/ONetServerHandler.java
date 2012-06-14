@@ -399,7 +399,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
             if (var1.e == 0) {
                 if(!getUser().canBuild()){ //CanaryMod - no build rights, no digging
-                    //return; TempDisable
+                    return; //TempDisable XXX
                 }
                 
                 //CanaryMod start - onBlockLeftClick
@@ -514,7 +514,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             // CanaryMod - onBlockRightClicked
             Item item = (var3 != null) ? var3.getCanaryItem() : new CanaryItem(new OItemStack(0, 0, 0));
             CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(getUser(), blockPlaced, blockClicked, item, null, Hook.Type.BLOCK_RIGHTCLICKED));
-            if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() || spawnBuild) && /*getUser().canBuild() &&*/ !hook.isCancelled()) {
+            if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() || spawnBuild) && getUser().canBuild() && !hook.isCancelled()) { //XXX
                 this.e.c.a(this.e, var2, var3, var5, var6, var7, var8);
             }
             else {
