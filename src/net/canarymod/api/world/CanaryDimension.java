@@ -518,8 +518,8 @@ public class CanaryDimension implements Dimension {
         spawn.setZ(info.getSpawnZ() + 0.5D);
         spawn.setRotation(0.0F);
         spawn.setPitch(0.0F);
-        spawn.setDimension(0);
-        spawn.setWorld(world.getCanaryDimension().getName());
+        spawn.setDimensionId(0);
+        spawn.setWorldName(world.getCanaryDimension().getName());
         return spawn;
     }
 

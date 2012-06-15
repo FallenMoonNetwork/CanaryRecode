@@ -432,8 +432,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void teleportTo(Location location) {
-        if (!(getDimension().hashCode() == location.getCanaryDimension().hashCode())) {
-            switchWorlds(location.getCanaryDimension());
+        if (!(getDimension().hashCode() == location.getDimension().hashCode())) {
+            switchWorlds(location.getDimension());
         }
         teleportTo(location.getX(),location.getY(), location.getZ(),location.getPitch(), location.getRotation());
     }
