@@ -239,7 +239,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             }
             
             String cmd = command[0];
-            if (cmd.startsWith("/#") && hasPermission("canary.commands.vanilla."+cmd.replace("/#", ""))) {
+            if (cmd.startsWith("/#") && (hasPermission("canary.commands.vanilla."+cmd.replace("/#", "")) || hasPermission("canary.vanilla.op"))) {
                 Canary.getServer().consoleCommand(Canary.glueString(command, 0, " ").replace("/#", ""), this);
                 return true;
             }
