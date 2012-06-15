@@ -205,7 +205,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         long var4 = System.nanoTime();
         String var6 = defWorld.getWorldName();
         String var7 = defWorld.getWorldSeed();
-        String var8 = defWorld.getWorldType();
+        String var8 = defWorld.getWorldType().name();
         long var9 = (new Random()).nextLong();
         if (var7.length() > 0) {
             try {
@@ -274,7 +274,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         
 //        this.worldServer = new OWorldServer[3];
 //        this.g = new long[this.worldServer.length][100]; //CanaryMod Moved to CanaryWorld<init>
-        int var6 = config.getGameMode();
+        int var6 = config.getGameMode().getId();
         var6 = OWorldSettings.a(var6);
         a.info("Default game type: " + var6);
         boolean var7 = config.generatesStructures();
@@ -299,7 +299,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             }
 
             toLoad[var10].a(new OWorldManager(this, toLoad[var10]));
-            toLoad[var10].q = config.getDifficulty();
+            toLoad[var10].q = config.getDifficulty().getId();
             toLoad[var10].a(config.canSpawnMonsters(), this.o);
             toLoad[var10].s().setGameMode(var6);
         }
