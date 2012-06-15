@@ -205,7 +205,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         long var4 = System.nanoTime();
         String var6 = defWorld.getWorldName();
         String var7 = defWorld.getWorldSeed();
-        String var8 = defWorld.getWorldType().name();
+        String var8 = defWorld.getWorldType().toString();
         long var9 = (new Random()).nextLong();
         if (var7.length() > 0) {
             try {

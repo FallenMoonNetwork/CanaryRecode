@@ -384,6 +384,7 @@ public class OServerConfigurationManager {
     }
     
     public void b() {
+        // TODO: Something with Configuration.getServerConfig().getPlayerlistTicks() and Configuration.getServerConfig().getPlayerlistAutoUpdate() here
         if (++this.p > 200) {
             this.p = 0;
         }

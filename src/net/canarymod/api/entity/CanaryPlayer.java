@@ -2,6 +2,7 @@ package net.canarymod.api.entity;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +22,7 @@ import net.canarymod.api.world.position.Direction;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
 import net.canarymod.commands.CanaryCommand;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
@@ -232,6 +234,10 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public boolean executeCommand(String[] command) {
         try {
+            if(Configuration.getServerConfig().isLogging()) {
+                Logman.logInfo("Command used by " + getName() + ": " + Canary.glueString(command, 0, " "));
+            }
+            
             String cmd = command[0];
             if (cmd.startsWith("/#") && hasPermission("canary.commands.vanilla."+cmd.replace("/#", ""))) {
                 Canary.getServer().consoleCommand(Canary.glueString(command, 0, " ").replace("/#", ""), this);
@@ -247,12 +253,16 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             
             CanaryCommand toExecute = CanaryCommand.fromString(cmd.replace("/", ""));
             if(toExecute == null) {
-                sendMessage(Colors.Rose + "Unknown command!");
+                if(Configuration.getServerConfig().getShowUnkownCommand()) {
+                    sendMessage(Colors.Rose + "Unknown command");
+                }
                 return false;
             }
             else {
                 if(!toExecute.execute(this, command)) {
-                    sendMessage(Colors.Rose + "Unknown command!");
+                    if(Configuration.getServerConfig().getShowUnkownCommand()) {
+                        sendMessage(Colors.Rose + "Unknown command");
+                    }
                     return false;
                 }
                 return true;
