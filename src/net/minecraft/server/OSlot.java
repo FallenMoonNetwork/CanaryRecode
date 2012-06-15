@@ -62,11 +62,12 @@ public class OSlot {
     public void craftCheck(OItemStack var1, Player player) {
         if (this.b instanceof OInventoryCrafting){
             ((OInventoryCrafting)this.b).setResult(this.a, var1, player);
+            this.d();
         }
         else{
             this.b.a(this.a, var1);
+            this.d();
         }
-        this.d();
     }
 
     public void d() {

@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.canarymod.Canary;
-import net.canarymod.api.entity.EntityItem;
+import net.canarymod.api.entity.CanaryEntityItem;
 import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.config.Configuration;
@@ -462,7 +462,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
                 var3.br += Math.sin(var5) * var4;
             }
 
-            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new ItemHook(((OEntityPlayerMP)this).getPlayer(), (EntityItem) var3.getCanaryEntity(), true)); //ITEM_DROP
+            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new ItemHook(((OEntityPlayerMP)this).getPlayer(), new CanaryEntityItem(var3), true)); //ITEM_DROP
             if(hook.isCancelled()){
                 return null;
             }

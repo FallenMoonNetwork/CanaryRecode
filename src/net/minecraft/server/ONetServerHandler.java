@@ -165,7 +165,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             }
             
             //CanaryMod start - onPlayerMove
-            if(Math.floor(o) != Math.floor(player.getX()) && Math.floor(p) != Math.floor(player.getY()) && Math.floor(q) != Math.floor(player.getZ())){
+            if(Math.floor(o) != Math.floor(player.getX()) || Math.floor(p) != Math.floor(player.getY()) || Math.floor(q) != Math.floor(player.getZ())){
                 Location from = new Location(player.getDimension(), o, p, q, player.getRotation(), player.getPitch());
                 Canary.hooks().callHook(new PlayerMoveHook(player, from, player.getLocation()));
             }
