@@ -274,7 +274,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                     }
                     Location location = getPlayer().getLocation();
                     int currDim = getPlayer().getDimension().getType().getId();
-                    location.setDimension(currDim == 0 ? -1 : 0);
+                    location.setDimensionId(currDim == 0 ? -1 : 0);
                     CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new TeleportHook(getPlayer(), location, true));
                     if (!hook.isCancelled()) {
                         this.b.h.switchDimension(this, var16, true);
