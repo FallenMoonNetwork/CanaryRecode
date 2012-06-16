@@ -8,6 +8,7 @@ import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.WorldManager;
+import net.canarymod.commands.CanaryCommand;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.ConsoleCommandHook;
 import net.minecraft.server.OMinecraftServer;
@@ -75,8 +76,15 @@ public class CanaryServer implements Server {
         if (hook.isCancelled()) {
             return;
         }
+        String[] args = command.split(" ");
+        CanaryCommand toExecute = CanaryCommand.fromString(args[0].replace("/", ""));
+        if(toExecute != null) {
+            toExecute.execute(null, args);
+        }
+        else{
+            server.a(command, server);
+        }
         Logman.logInfo("Console issued server command: " + command);
-        server.a(command, server);
     }
 
     @Override
@@ -86,8 +94,15 @@ public class CanaryServer implements Server {
         if (hook.isCancelled()) {
             return;
         }
+        String[] args = command.split(" ");
+        CanaryCommand toExecute = CanaryCommand.fromString(args[0].replace("/", ""));
+        if(toExecute != null) {
+            toExecute.execute(null, args);
+        }
+        else{
+            server.a(command, ((CanaryPlayer) player).getHandle().a);
+        }
         Logman.logInfo(player.getName() + " issued server command: " + command);
-        server.a(command, ((CanaryPlayer) player).getHandle().a);
     }
 
     @SuppressWarnings("unchecked")
