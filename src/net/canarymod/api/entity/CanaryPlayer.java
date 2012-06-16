@@ -548,7 +548,6 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         
         //switch world if needed
         if(!(dim.getName().equals(ent.bi.getCanaryDimension().getName()))) {
-            System.out.println("New world, switching");
             Dimension oldWorld = ent.bi.getCanaryDimension();
             //remove player from entity tracker
             oldWorld.getEntityTracker().untrackPlayerSymmetrics(ent.getPlayer());

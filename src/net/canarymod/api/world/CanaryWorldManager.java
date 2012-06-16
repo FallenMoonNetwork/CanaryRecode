@@ -22,7 +22,6 @@ public class CanaryWorldManager implements WorldManager {
     private ArrayList<String> existingWorlds;
 
     public CanaryWorldManager() {
-        Logman.logInfo("Loading WorldManager");
         File worlds = new File("worlds");
         if(!worlds.exists()) {
             worlds.mkdirs();
@@ -34,7 +33,6 @@ public class CanaryWorldManager implements WorldManager {
         existingWorlds = new ArrayList<String>(worldNum);
         loadedWorlds = new HashMap<String, CanaryWorld>(worldNum);
         for(String f : worlds.list()) {
-            Logman.logInfo("Adding existing world "+f);
             existingWorlds.add(f);
         }
     }
