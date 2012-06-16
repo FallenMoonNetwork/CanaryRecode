@@ -504,23 +504,23 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
         
         if (0 <= degrees && degrees < 22.5) {
-            return Direction.EAST;
-        } else if (22.5 <= degrees && degrees < 67.5) {
-            return Direction.SOUTHEAST;
-        } else if (67.5 <= degrees && degrees < 112.5) {
-            return Direction.SOUTH;
-        } else if (112.5 <= degrees && degrees < 157.5) {
-            return Direction.SOUTHWEST;
-        } else if (157.5 <= degrees && degrees < 202.5) {
             return Direction.WEST;
-        } else if (202.5 <= degrees && degrees < 247.5) {
+        } else if (22.5 <= degrees && degrees < 67.5) {
             return Direction.NORTHWEST;
-        } else if (247.5 <= degrees && degrees < 292.5) {
+        } else if (67.5 <= degrees && degrees < 112.5) {
             return Direction.NORTH;
-        } else if (292.5 <= degrees && degrees < 337.5) {
+        } else if (112.5 <= degrees && degrees < 157.5) {
             return Direction.NORTHEAST;
-        } else if (337.5 <= degrees && degrees < 360.0) {
+        } else if (157.5 <= degrees && degrees < 202.5) {
             return Direction.EAST;
+        } else if (202.5 <= degrees && degrees < 247.5) {
+            return Direction.SOUTHEAST;
+        } else if (247.5 <= degrees && degrees < 292.5) {
+            return Direction.SOUTH;
+        } else if (292.5 <= degrees && degrees < 337.5) {
+            return Direction.SOUTHWEST;
+        } else if (337.5 <= degrees && degrees < 360.0) {
+            return Direction.WEST;
         } else {
             return Direction.ERROR;
         }
