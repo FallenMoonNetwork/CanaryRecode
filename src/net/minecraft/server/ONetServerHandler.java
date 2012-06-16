@@ -406,7 +406,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                 Block block = var2.getCanaryDimension().getBlockAt(var5, var6, var7);
                 //Call hook
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new LeftClickHook(getUser(), block));
-                if (var18 <= Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() && !spawnBuild && !hook.isCancelled()) {
+                if ((var18 <= Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() && !spawnBuild) || hook.isCancelled()) {
                     this.e.a.b((new OPacket53BlockChange(var5, var6, var7, var2)));
                 } else {
                     this.e.c.a(var5, var6, var7, var1.d);
