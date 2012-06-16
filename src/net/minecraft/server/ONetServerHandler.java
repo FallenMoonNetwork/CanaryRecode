@@ -116,6 +116,10 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     public CanaryPlayer getUser() {
         return player;
     }
+    public void setUser(CanaryPlayer newPlayer) {
+        this.player = newPlayer;
+        this.e = player.getHandle();
+    }
     public void a() {
         this.h = false;
         ++this.f;

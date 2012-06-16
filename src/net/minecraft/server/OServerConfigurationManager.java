@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
+import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Entity;
@@ -248,16 +249,16 @@ public class OServerConfigurationManager {
     public OEntityPlayerMP a(OEntityPlayerMP var1, int var2, boolean var3, Location spawnLocation) {
         var1.getDimension().getEntityTracker().untrackPlayerSymmetrics(var1.getPlayer());
         var1.getDimension().getEntityTracker().untrackEntity(var1.getCanaryEntity());
+        var1.getDimension().getPlayerManager().removePlayer(var1.getPlayer());
         this.b.remove(var1);
         var1.getDimension().removePlayerFromWorld(var1.getPlayer()); //This calls the despawn method in world!
-        var1.getDimension().getPlayerManager().removePlayer(var1.getPlayer());
         
         OChunkCoordinates var4 = var1.ab();
         var1.w = var2; //Set new dimension
         CanaryWorld cworld = (CanaryWorld) var1.getDimension().getWorld();
         CanaryDimension dim = (CanaryDimension) cworld.getDimension(Type.fromId(var2));
-        OEntityPlayerMP var5 = new OEntityPlayerMP(this.c, dim.getHandle(), var1.v, new OItemInWorldManager(var1.getDimension().getHandle()));
-        
+        OEntityPlayerMP var5 = new OEntityPlayerMP(this.c, dim.getHandle(), var1.v, new OItemInWorldManager(dim.getHandle()));
+        var5.w = var2;
         if (var3) {
             //copy player
             var5.c((OEntityPlayer)var1);
@@ -267,9 +268,9 @@ public class OServerConfigurationManager {
         //Set NetServerHandler
         var5.a = var1.a;
         var5.setServerHandler(var5.a.getCanaryNetServerHandler());
+        var5.a.setUser(var5.getPlayer());
         
-        OWorldServer var6 = (OWorldServer) var1.getDimension().getHandle();
-        
+        OWorldServer var6 = (OWorldServer) dim.getHandle();
         var5.c.a(var1.c.a());
         var5.c.b(var6.s().getGameMode());
         if (var4 != null) {
@@ -302,7 +303,6 @@ public class OServerConfigurationManager {
         var5.getDimension().getPlayerManager().addPlayer((Player)var5.getPlayer());
         var5.getDimension().addPlayerToWorld(var5.getPlayer()); //This also calls the spawn method in world!
         this.b.add(var5);
-        var5.getPlayer().refreshCreativeMode();
         var5.x();
         var5.E();
         return var5;
