@@ -247,9 +247,9 @@ public class OServerConfigurationManager {
     //Respawn player
     public OEntityPlayerMP a(OEntityPlayerMP var1, int var2, boolean var3, Location spawnLocation) {
         var1.getDimension().getEntityTracker().untrackPlayerSymmetrics(var1.getPlayer());
-        var1.getDimension().getEntityTracker().untrackEntity(var1.getPlayer());
+        var1.getDimension().getEntityTracker().untrackEntity(var1.getCanaryEntity());
         this.b.remove(var1);
-        var1.getDimension().removePlayerFromWorld(var1.getPlayer());
+        var1.getDimension().removePlayerFromWorld(var1.getPlayer()); //This calls the despawn method in world!
         var1.getDimension().getPlayerManager().removePlayer(var1.getPlayer());
         
         OChunkCoordinates var4 = var1.ab();
@@ -299,14 +299,12 @@ public class OServerConfigurationManager {
         var5.a.a(var5.bm, var5.bn, var5.bo, var5.bs, var5.bt);
         //something
         this.a(var5, var6);
-        //Add back player to global player list
-        this.b.add(var5);
         var5.getDimension().getPlayerManager().addPlayer((Player)var5.getPlayer());
-        var5.getDimension().addPlayerToWorld(var5.getPlayer());
-        
+        var5.getDimension().addPlayerToWorld(var5.getPlayer()); //This also calls the spawn method in world!
+        this.b.add(var5);
+        var5.getPlayer().refreshCreativeMode();
         var5.x();
         var5.E();
-        var5.getPlayer().refreshCreativeMode();
         return var5;
     }
 

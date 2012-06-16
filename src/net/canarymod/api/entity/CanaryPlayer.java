@@ -16,6 +16,7 @@ import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.World.GameMode;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.position.Direction;
 import net.canarymod.api.world.position.Location;
@@ -618,7 +619,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
     
     public void refreshCreativeMode() {
-        if (isInCreative() || Configuration.getServerConfig().getGameMode() == 1) {
+        if (isInCreative() || Configuration.getWorldConfig(getWorld().getName()).getGameMode() == GameMode.CREATIVE) {
             ((OEntityPlayerMP)entity).c.a(1);
         } else {
             ((OEntityPlayerMP)entity).c.a(0);
