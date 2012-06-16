@@ -14,7 +14,7 @@ import net.minecraft.server.OWorldServer;
 
 public class OPlayerManager {
 
-    public List<OEntityPlayerMP> a = new ArrayList<OEntityPlayerMP>();
+    public List<OEntityPlayerMP> managedPlayers = new ArrayList<OEntityPlayerMP>(); //CanaryMod a -> managedPlayers
     private OLongHashMap b = new OLongHashMap();
     private List c = new ArrayList();
     private OMinecraftServer d;
@@ -55,7 +55,7 @@ public class OPlayerManager {
         }
 
         this.c.clear();
-        if (this.a.isEmpty()) {
+        if (this.managedPlayers.isEmpty()) {
             OWorldServer var3 =(OWorldServer) ((CanaryDimension)canaryPlayerManager.getAttachedDimension()).getHandle();
             OWorldProvider var2 = var3.t;
             if (!var2.c()) {
@@ -118,7 +118,7 @@ public class OPlayerManager {
             this.a(var2 + var6, var3 + var7, true).a(var1);
         }
 
-        this.a.add(var1);
+        this.managedPlayers.add(var1);
     }
 
     public void b(OEntityPlayerMP var1) {
@@ -134,7 +134,7 @@ public class OPlayerManager {
             }
         }
 
-        this.a.remove(var1);
+        this.managedPlayers.remove(var1);
     }
 
     private boolean a(int var1, int var2, int var3, int var4) {

@@ -184,4 +184,9 @@ public class CanaryEntity implements Entity {
         
     }
 
+    @Override
+    public String getName() {
+        return "entity";
+    }
+
 }

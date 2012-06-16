@@ -573,7 +573,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
         mcServer.h.switchDimension(ent, dim.getType().getId(), false);
         
-//        refreshCreativeMode();
+        refreshCreativeMode();
     }
 
     @Override
@@ -617,12 +617,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
     }
     
-//    public void refreshCreativeMode() {
-//        if (getMode() || etc.getMCServer().d.a("gamemode", 0) == 1) {
-//            getEntity().c.a(1);
-//        } else {
-//            getEntity().c.a(0);
-//        }
-//    }
+    public void refreshCreativeMode() {
+        if (isInCreative() || Configuration.getServerConfig().getGameMode() == 1) {
+            ((OEntityPlayerMP)entity).c.a(1);
+        } else {
+            ((OEntityPlayerMP)entity).c.a(0);
+        }
+    }
 
 }

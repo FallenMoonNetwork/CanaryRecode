@@ -498,7 +498,7 @@ public class CanaryDimension implements Dimension {
     @Override
     public void removePlayerFromWorld(Player player) {
         world.b.remove((OEntity)((CanaryPlayer) player).getHandle());
-        world.f(((CanaryPlayer) player).getHandle());
+        world.f((OEntity)((CanaryPlayer) player).getHandle());
         
     }
 
