@@ -586,7 +586,10 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                     OWorldServer var9 = (OWorldServer) ((CanaryDimension)level[var11]).getHandle();
                     if (this.j % 20 == 0) {
                         for(Player p : cfgManager.getAllPlayers()) {
-                            ((CanaryPlayer)p).getHandle().getServerHandler().sendPacket(new OPacket4UpdateTime(var9.o()) );
+                            OEntityPlayerMP player = ((CanaryPlayer)p).getHandle();
+                            if(player.bi.hashCode() == var9.hashCode()) {
+                                ((CanaryPlayer)p).getHandle().getServerHandler().sendPacket(new OPacket4UpdateTime(var9.o()) );
+                            }
                         }
                     }
 

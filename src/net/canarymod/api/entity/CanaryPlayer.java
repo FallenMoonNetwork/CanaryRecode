@@ -547,22 +547,22 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         ent.a((OStatBase) OAchievementList.B);
         
         //switch world if needed
-        if(!(dim.hashCode() == ent.bi.getCanaryDimension().hashCode())) {
+        if(!(dim.getName().equals(ent.bi.getCanaryDimension().getName()))) {
+            System.out.println("New world, switching");
             Dimension oldWorld = ent.bi.getCanaryDimension();
             //remove player from entity tracker
-            oldWorld.getEntityTracker().untrackPlayerSymmetrics(this);
-            oldWorld.getEntityTracker().untrackEntity(this);
+            oldWorld.getEntityTracker().untrackPlayerSymmetrics(ent.getPlayer());
+            oldWorld.getEntityTracker().untrackEntity(ent.getPlayer());
             //remove player from old worlds entity list
-            oldWorld.removePlayerFromWorld(this);
-            
+            oldWorld.removePlayerFromWorld(ent.getPlayer());
             //Remove player from player manager for the old world
-            oldWorld.getPlayerManager().removePlayer(this);
+            oldWorld.getPlayerManager().removePlayer(ent.getPlayer());
             
             //Change players world reference
             ent.bi = ((CanaryDimension) dim).getHandle();
             //Add player back to the new world
-            dim.addPlayerToWorld(this);
-            dim.getEntityTracker().trackEntity(this);
+//            dim.addPlayerToWorld(this);
+//            dim.getPlayerManager().addPlayer(this);
         }
         //Get chunk coordinates...
 //        OChunkCoordinates var2 = mcServer.getWorld(ent.bi.getCanaryDimension().getName(), dim.getType().getId()).d();

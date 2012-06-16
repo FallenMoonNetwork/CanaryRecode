@@ -65,6 +65,6 @@ public class OWorldManager implements OIWorldAccess {
 
     @Override
     public void a(OEntityPlayer var1, int var2, int var3, int var4, int var5, int var6) {
-        this.a.h.a(var1, var3, var4, var5, 64.0D, this.b.t.g, new OPacket61DoorChange(var2, var3, var4, var5, var6));
+        this.a.h.a(var1, var3, var4, var5, 64.0D, this.b.t.g, new OPacket61DoorChange(var2, var3, var4, var5, var6), b.getCanaryDimension().getName());
     }
 }

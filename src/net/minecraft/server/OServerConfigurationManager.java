@@ -317,20 +317,9 @@ public class OServerConfigurationManager {
     public void switchDimension(OEntityPlayerMP var1, int var2, boolean createPortal) {
         int var3 = var1.w; //current dimension
         OWorldServer var4 = (OWorldServer) ((CanaryDimension)var1.getDimension()).getHandle();
+        
         var1.w = var2; //set new dimension
-        //remove from old dimension
-        var1.getDimension().getEntityTracker().untrackPlayerSymmetrics(var1.getPlayer());
-        var1.getDimension().getEntityTracker().untrackEntity(var1.getPlayer());
-        var1.getDimension().removePlayerFromWorld(var1.getPlayer());
-        var1.getDimension().getPlayerManager().removePlayer(var1.getPlayer());
-        //Add to new dimension
-        CanaryDimension dim = (CanaryDimension)var1.getDimension().getWorld().getDimension(Type.fromId(var2));
-        dim.getEntityTracker().trackEntity(var1.getPlayer());
-        dim.getPlayerManager().addPlayer(var1.getPlayer());
-        dim.addPlayerToWorld(var1.getPlayer());
-        
-        
-        OWorldServer var5 = (OWorldServer) dim.getHandle();
+        OWorldServer var5 = (OWorldServer) ((CanaryDimension) this.c.getWorldManager().getDimension(var1.bi.getCanaryDimension().getName(), var1.w)).getHandle();
         var1.a.b((new OPacket9Respawn(var1.w, (byte) var1.bi.q, var5.s().getWorldType(), var5.y(), var1.c.a())));
 //        var4.f(var1);
         
@@ -670,21 +659,39 @@ public class OServerConfigurationManager {
     }
 
     public void a(double var1, double var3, double var5, double var7, int var9, OPacket var10) {
-        this.a((OEntityPlayer) null, var1, var3, var5, var7, var9, var10);
+        this.a((OEntityPlayer) null, var1, var3, var5, var7, var9, var10, null);
     }
 
-    public void a(OEntityPlayer var1, double var2, double var4, double var6, double var8, int var10, OPacket var11) {
-        for (int var12 = 0; var12 < this.b.size(); ++var12) {
-            OEntityPlayerMP var13 = (OEntityPlayerMP) this.b.get(var12);
-            if (var13 != var1 && var13.w == var10) {
-                double var14 = var2 - var13.bm;
-                double var16 = var4 - var13.bn;
-                double var18 = var6 - var13.bo;
-                if (var14 * var14 + var16 * var16 + var18 * var18 < var8 * var8) {
-                    var13.a.b(var11);
+    //CanaryMod changed signature, added String
+    public void a(OEntityPlayer var1, double var2, double var4, double var6, double var8, int var10, OPacket var11, String worldName) {
+        //CanaryMod start - Refactored
+        if(worldName == null) {
+            for (int var12 = 0; var12 < this.b.size(); ++var12) {
+                OEntityPlayerMP var13 = (OEntityPlayerMP) this.b.get(var12);
+                if (var13 != var1 && var13.w == var10) {
+                    double var14 = var2 - var13.bm;
+                    double var16 = var4 - var13.bn;
+                    double var18 = var6 - var13.bo;
+                    if (var14 * var14 + var16 * var16 + var18 * var18 < var8 * var8) {
+                        var13.a.b(var11);
+                    }
                 }
             }
         }
+        else {
+            for (int var12 = 0; var12 < this.b.size(); ++var12) {
+                OEntityPlayerMP var13 = (OEntityPlayerMP) this.b.get(var12);
+                if (var13 != var1 && var13.w == var10 && worldName.equals(var13.bi.getCanaryDimension().getName())) {
+                    double var14 = var2 - var13.bm;
+                    double var16 = var4 - var13.bn;
+                    double var18 = var6 - var13.bo;
+                    if (var14 * var14 + var16 * var16 + var18 * var18 < var8 * var8) {
+                        var13.a.b(var11);
+                    }
+                }
+            }
+        }
+        
 
     }
 

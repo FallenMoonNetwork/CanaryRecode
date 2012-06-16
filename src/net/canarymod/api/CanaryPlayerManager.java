@@ -25,12 +25,6 @@ public class CanaryPlayerManager implements PlayerManager {
 
     @Override
     public void addPlayer(Player player) {
-        OEntityPlayerMP ent = (OEntityPlayerMP) ((CanaryPlayer)player).getHandle();
-        if(pm.managedPlayers.contains(ent)) {
-            //remove again
-            //TODO: this or better cancel this?
-            pm.managedPlayers.remove(ent);
-        }
         pm.a((OEntityPlayerMP) ((CanaryPlayer)player).getHandle());
 
     }

@@ -3,6 +3,7 @@ package net.canarymod.api.world;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import net.canarymod.Canary;
 import net.canarymod.CanaryServer;
@@ -21,6 +22,7 @@ public class CanaryWorldManager implements WorldManager {
     private ArrayList<String> existingWorlds;
 
     public CanaryWorldManager() {
+        Logman.logInfo("Loading WorldManager");
         File worlds = new File("worlds");
         if(!worlds.exists()) {
             worlds.mkdirs();
@@ -32,6 +34,7 @@ public class CanaryWorldManager implements WorldManager {
         existingWorlds = new ArrayList<String>(worldNum);
         loadedWorlds = new HashMap<String, CanaryWorld>(worldNum);
         for(String f : worlds.list()) {
+            Logman.logInfo("Adding existing world "+f);
             existingWorlds.add(f);
         }
     }
@@ -57,7 +60,8 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public boolean createWorld(String name) {
-        return false;
+        ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, new Random().nextLong());
+        return true;
     }
 
     @Override
@@ -82,7 +86,13 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public World loadWorld(String name) {
-        return null;
+        if(!worldIsLoaded(name)) {
+            ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, new Random().nextLong());
+            return loadedWorlds.get(name);
+        }
+        else {
+            return loadedWorlds.get(name);
+        }
     }
 
     @Override
@@ -98,5 +108,10 @@ public class CanaryWorldManager implements WorldManager {
     @Override
     public boolean worldExists(String name) {
         return existingWorlds.contains(name);
+    }
+
+    @Override
+    public ArrayList<String> getExistingWorlds() {
+        return existingWorlds;
     }
 }

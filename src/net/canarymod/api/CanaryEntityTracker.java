@@ -8,6 +8,7 @@ import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.Dimension;
+import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityTracker;
 import net.minecraft.server.OEntityTrackerEntry;
 
@@ -27,13 +28,13 @@ public class CanaryEntityTracker implements EntityTracker {
 
     @Override
     public void trackEntity(Entity entity) {
-        tracker.a(((CanaryEntity)entity).getHandle());
+        tracker.a((OEntity)((CanaryEntity)entity).getHandle());
 
     }
 
     @Override
     public void untrackEntity(Entity entity) {
-        tracker.b(((CanaryEntity)entity).getHandle());
+        tracker.b((OEntity)((CanaryEntity)entity).getHandle());
 
     }
 
