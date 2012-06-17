@@ -478,6 +478,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             this.m = container.getHandle();
             this.m.f = this.cl;
             this.m.a((OICrafting) this);
+            this.m.setInventory(container.getInventory());
         }
     }
 
@@ -510,6 +511,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             this.m = new OContainerChest(this.k, var1);
             this.m.f = this.cl;
             this.m.a((OICrafting) this);
+            this.m.setInventory(inv);
         }
     }
 
@@ -524,6 +526,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             this.m = new OContainerFurnace(this.k, var1);
             this.m.f = this.cl;
             this.m.a((OICrafting) this);
+            this.m.setInventory(furnace.getInventory());
         }
     }
 
@@ -538,6 +541,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             this.m = new OContainerDispenser(this.k, var1);
             this.m.f = this.cl;
             this.m.a((OICrafting) this);
+            this.m.setInventory(dispenser.getInventory());
         }
     }
 
