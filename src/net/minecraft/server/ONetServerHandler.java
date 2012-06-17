@@ -584,7 +584,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     public void a(String var1, Object[] var2) {
         a.info(this.e.v + " lost connection: " + var1);
         //CanaryMod start - onPlayerDisconnect
-        ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), var1, Colors.Yellow + getUser().getName() + " left the game."));
+        ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), Colors.Yellow + getUser().getName() + " left the game.", var1));
         if (!hook.isHidden()) {
             this.d.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
         }
@@ -761,7 +761,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     }
 
     @Override
-    public void a(OPacket102WindowClick var1) { //onCraft point... but comes long before the result is shown...
+    public void a(OPacket102WindowClick var1) {
         if (this.e.m.f == var1.a && this.e.m.c(this.e)) {
             OItemStack var2 = this.e.m.a(var1.b, var1.c, var1.f, this.e);
             if (OItemStack.b(var1.e, var2)) {
