@@ -178,6 +178,17 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
+    public void setExperience(int xp) {
+        if(xp < 0) return;
+        ((OEntityPlayerMP)entity).N = xp;
+    }
+
+    @Override
+    public int getLevel() {
+        return ((OEntityPlayerMP)entity).M;
+    }
+
+    @Override
     public boolean isSleeping() {
         return ((OEntityPlayerMP)entity).Z();
     }
