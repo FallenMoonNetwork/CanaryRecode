@@ -602,8 +602,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
-    public boolean isInCreative() {
-        return ((OEntityPlayerMP)entity).c.b();
+    public int getMode() {
+        return ((OEntityPlayerMP)entity).c.a();
     }
 
     @Override
@@ -618,7 +618,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
     
     public void refreshCreativeMode() {
-        if (isInCreative() || Configuration.getWorldConfig(getWorld().getName()).getGameMode() == GameMode.CREATIVE) {
+        if (getMode() == 1 || Configuration.getWorldConfig(getWorld().getName()).getGameMode() == GameMode.CREATIVE) {
             ((OEntityPlayerMP)entity).c.a(1);
         } else {
             ((OEntityPlayerMP)entity).c.a(0);
