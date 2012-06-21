@@ -162,6 +162,11 @@ public class CanaryInventory implements Inventory{
         item.setSlot(slot);
         setSlot(item);
     }
+    
+    @Override
+    public Item getSlot(int slot) {
+        return new CanaryItem(container.getSlot(slot));
+    }
 
     @Override
     public void updateInventory() {
