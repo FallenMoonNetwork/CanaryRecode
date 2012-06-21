@@ -50,6 +50,7 @@ import net.minecraft.server.OEntityGhast;
 import net.minecraft.server.OEntityGiantZombie;
 import net.minecraft.server.OEntityItem;
 import net.minecraft.server.OEntityLavaSlime;
+import net.minecraft.server.OEntityLightningBolt;
 import net.minecraft.server.OEntityPigZombie;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
@@ -490,6 +491,21 @@ public class CanaryDimension implements Dimension {
         return world.worldInfo.getThunderTimeTicks();
     }
 
+    @Override
+    public void makeLightningBolt(int x, int y, int z) {
+        world.a(new OEntityLightningBolt(world, x, y, z));
+    }
+    
+    @Override
+    public void makeExplosion(Entity exploder, double x, double y, double z, float power) {
+        world.a(((CanaryEntity)exploder).getHandle(), x, y, z, power);
+    }
+    
+    @Override
+    public void makeExplosion(Entity exploder, Vector3D position, float power) {
+        world.a(((CanaryEntity)exploder).getHandle(), position.getX(), position.getY(), position.getZ(), power);
+    }
+    
     @Override
     public long getWorldSeed() {
         return world.n();

@@ -1434,12 +1434,12 @@ public class OWorld implements OIBlockAccess {
         return false;
     }
 
-    public OExplosion a(OEntity var1, double var2, double var4, double var6, float var8) {
-        return this.a(var1, var2, var4, var6, var8, false);
+    public OExplosion a(OEntity exploder, double x, double y, double z, float power) {
+        return this.a(exploder, x, y, z, power, false);
     }
 
-    public OExplosion a(OEntity var1, double var2, double var4, double var6, float var8, boolean var9) {
-        OExplosion var10 = new OExplosion(this, var1, var2, var4, var6, var8);
+    public OExplosion a(OEntity exploder, double x, double y, double z, float power, boolean var9) {
+        OExplosion var10 = new OExplosion(this, exploder, x, y, z, power);
         var10.a = var9;
         var10.a();
         var10.a(true);
