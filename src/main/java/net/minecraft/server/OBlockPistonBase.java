@@ -95,7 +95,7 @@ public class OBlockPistonBase extends OBlock {
                     Block piston = new CanaryBlock((this.a ? (short)29 : (short)33), (byte)0, var2, var3, var4, var1.getCanaryDimension());
                     Block moving = new CanaryBlock((short)var1.a(var2 + OFacing.b[var6], var3 + OFacing.c[var6], var4 + OFacing.d[var6]), (byte)0, (var2 + OFacing.b[var6]), (var3 + OFacing.c[var6]), (var4 + OFacing.d[var6]), var1.getCanaryDimension());
                     CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new PistonHook(piston, moving, true));
-                    if (hook.isCancelled()) {
+                    if (hook.isCanceled()) {
                         return;
                     }
                     //CanaryMod onPistonExtend end
@@ -109,7 +109,7 @@ public class OBlockPistonBase extends OBlock {
                 Block piston = new CanaryBlock((this.a ? (short)29 : (short)33), (byte)0, var2, var3, var4, var1.getCanaryDimension());
                 Block moving = new CanaryBlock((short)var1.a(var2 + OFacing.b[var6] * 2, var3 + OFacing.c[var6] * 2, var4 + OFacing.d[var6] * 2), (byte)0, (var2 + OFacing.b[var6]), (var3 + OFacing.c[var6]), (var4 + OFacing.d[var6]), var1.getCanaryDimension());
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new PistonHook(piston, moving, false));
-                attemptRetractBlock = !hook.isCancelled();
+                attemptRetractBlock = !hook.isCanceled();
                 //CanaryMod onPistonRetract end
                 
                 var1.d(var2, var3, var4, var6);

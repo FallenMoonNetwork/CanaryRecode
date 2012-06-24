@@ -22,6 +22,8 @@
       <groupId>net.canarymod</groupId>
       <artifactId>CanaryLib</artifactId>
       <version>0.2-SNAPSHOT</version>
+      <systemPath>lib</systemPath>
+      <scope>system</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

@@ -84,7 +84,7 @@ public class OPotion {
             if (var1.aD() > 1) {
                 // CanaryMod - potion damage.
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, var1.getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.m), 1));
-                if (!hook.isCancelled()) {
+                if (!hook.isCanceled()) {
                     var1.a(ODamageSource.m, 1);
                 }
                 // CanaryMod - end.
@@ -95,7 +95,7 @@ public class OPotion {
             if (this.H == i.H && !var1.aN() || this.H == h.H && var1.aN()) {
                 // CanaryMod - potion damage
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, var1.getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.g), 1));
-                if (!hook.isCancelled()) {
+                if (!hook.isCanceled()) {
                     var1.a(ODamageSource.m, 6 << var2);
                 }
                 // CanaryMod - end.

@@ -264,7 +264,7 @@ public abstract class OEntity {
                     // CanaryMod - fire tick damage. 
                     if (this instanceof OEntityLiving) {
                         CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.c), 1));
-                        if (!hook.isCancelled()) {
+                        if (!hook.isCanceled()) {
                             this.a(ODamageSource.c, 1);
                         }
                     }
@@ -298,7 +298,7 @@ public abstract class OEntity {
             // CanaryMod - lava damage.
             if (this instanceof OEntityLiving) { 
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.d), 4));
-                if (hook.isCancelled()) {
+                if (hook.isCanceled()) {
                     return;
                 }
             }
@@ -648,7 +648,7 @@ public abstract class OEntity {
             // CanaryMod - fire damage. 
             if (this instanceof OEntityLiving) {
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.b), var1));
-                if (!hook.isCancelled()) {
+                if (!hook.isCanceled()) {
                     this.a(ODamageSource.b, var1);
                 }
             }
@@ -1144,7 +1144,7 @@ public abstract class OEntity {
         // Note: At the moment this damage is counted as fire damage. 
         if (this instanceof OEntityLiving) {
             CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.b), 5));
-            if (hook.isCancelled()) {
+            if (hook.isCanceled()) {
                 return;
             }
         }

@@ -463,7 +463,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
             }
 
             CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new ItemHook(((OEntityPlayerMP)this).getPlayer(), new CanaryEntityItem(var3), true)); //ITEM_DROP
-            if(hook.isCancelled()){
+            if(hook.isCanceled()){
                 return null;
             }
             this.a(var3);
@@ -710,7 +710,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
             OItemStack var2 = this.U();
             if (var2 != null && var1 instanceof OEntityLiving) {
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(((OEntityPlayerMP)this).getPlayer(), null, null, var2.getCanaryItem(),((OEntityLiving) var1).getCanaryEntityLiving(), Hook.Type.ENTITY_RIGHTCLICKED));
-                if(!hook.isCancelled()){
+                if(!hook.isCanceled()){
                     var2.a((OEntityLiving) var1);
                     if (var2.a <= 0) {
                         var2.a(this);

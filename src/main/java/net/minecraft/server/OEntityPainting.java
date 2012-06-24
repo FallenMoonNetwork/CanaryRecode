@@ -210,7 +210,7 @@ public class OEntityPainting extends OEntity {
             }
             if(player != null){
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new PaintingHook(painting, player));
-                if(hook.isCancelled()){
+                if(hook.isCanceled()){
                     return false;
                 }
             }

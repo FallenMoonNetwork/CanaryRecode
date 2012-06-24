@@ -347,7 +347,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         // CanaryMod - Teleport hook.
         Location location = new Location(getUser().getDimension(), var1, var3, var5, var8, var7);
         CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new TeleportHook(getUser(), location, false));
-        if (hook.isCancelled()) {
+        if (hook.isCanceled()) {
             return;
         }
         // CanaryMod - end.
@@ -410,7 +410,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                 Block block = var2.getCanaryDimension().getBlockAt(var5, var6, var7);
                 //Call hook
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new LeftClickHook(getUser(), block));
-                if ((var18 <= Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() && !spawnBuild) || hook.isCancelled()) {
+                if ((var18 <= Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() && !spawnBuild) || hook.isCanceled()) {
                     this.e.a.b((new OPacket53BlockChange(var5, var6, var7, var2)));
                 } else {
                     this.e.c.a(var5, var6, var7, var1.d);
@@ -518,7 +518,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             // CanaryMod - onBlockRightClicked
             Item item = (var3 != null) ? var3.getCanaryItem() : new CanaryItem(new OItemStack(0, 0, 0));
             CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(getUser(), blockPlaced, blockClicked, item, null, Hook.Type.BLOCK_RIGHTCLICKED));
-            if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() || spawnBuild) && getUser().canBuild() && !hook.isCancelled()) { //XXX
+            if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() || spawnBuild) && getUser().canBuild() && !hook.isCanceled()) { //XXX
                 this.e.c.a(this.e, var2, var3, var5, var6, var7, var8);
             }
             else {
@@ -881,7 +881,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                 //CanaryMod start - onSignChange
                 CanarySign sign = new CanarySign(var7);
                 CancelableHook hook = (CancelableHook) Canary.hooks().callHook(new SignHook(getUser(), sign, true));
-                if(hook.isCancelled()){
+                if(hook.isCanceled()){
                     var7.a = Arrays.copyOf(old, old.length);
                 }
                 //CanaryMod end - onSignChange

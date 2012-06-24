@@ -109,7 +109,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 Collections.copy(receivers, Canary.getServer().getPlayerList()); //Fully copy the list
                 
                 ChatHook hook = (ChatHook) Canary.hooks().callCancelableHook(new ChatHook(this, prefix, message, receivers));
-                if(hook.isCancelled()) {
+                if(hook.isCanceled()) {
                     return;
                 }
                 receivers = hook.getReceiverList();
@@ -256,7 +256,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             }
             
             PlayerCommandHook hook = (PlayerCommandHook) Canary.hooks().callCancelableHook(new PlayerCommandHook(this, command));
-            if (hook.isCancelled()) {
+            if (hook.isCanceled()) {
                 return true;
             } // No need to go on, commands were parsed.
             

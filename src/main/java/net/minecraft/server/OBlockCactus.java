@@ -102,7 +102,7 @@ public class OBlockCactus extends OBlock {
         // CanaryMod - cactus damage.
         if (var5 instanceof OEntityLiving) { 
             CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) var5).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.h), 1));
-            if (hook.isCancelled()) {
+            if (hook.isCanceled()) {
                 return;
             }
         }

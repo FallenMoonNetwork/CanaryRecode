@@ -79,7 +79,7 @@ public class OItemBlock extends OItem {
             // CanaryMod - Stop block place
             Block blockplace = new CanaryBlock((short)this.a, (byte)var1.h(), var4, var5, var6);
             CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(((OEntityPlayerMP)var2).getPlayer(), blockClicked, blockplace, var1.getCanaryItem(), null, Hook.Type.BLOCK_PLACE));
-            if (hook.isCancelled()) {
+            if (hook.isCanceled()) {
                 return false;
             }
             // CanaryMod - end

@@ -315,7 +315,7 @@ public abstract class OEntityLiving extends OEntity {
         if (this.aE() && this.Y()) {
             // CanaryMod - suffocation damage.  
             CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, this.canaryEntityLiving, new CanaryDamageSource(ODamageSource.e), 1));
-            if (!hook.isCancelled()) {
+            if (!hook.isCanceled()) {
                 this.a(ODamageSource.e, 1);
             }
             // CanaryMod - end.
@@ -332,7 +332,7 @@ public abstract class OEntityLiving extends OEntity {
                 this.k(0);
                 // CanaryMod - drowning damage.  
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, this.canaryEntityLiving, new CanaryDamageSource(ODamageSource.f), 2));
-                if (!hook.isCancelled()) {
+                if (!hook.isCanceled()) {
                     for (int var1 = 0; var1 < 8; ++var1) {
                         float var2 = this.bS.nextFloat() - this.bS.nextFloat();
                         float var3 = this.bS.nextFloat() - this.bS.nextFloat();
@@ -620,7 +620,7 @@ public abstract class OEntityLiving extends OEntity {
                     if (this instanceof OEntityCreature) {
                         ((OEntityCreature) this).f = 0; // flee timer.
                     }
-                    if (hook.isCancelled()) {
+                    if (hook.isCanceled()) {
                         return false;
                     }
                 }
@@ -633,7 +633,7 @@ public abstract class OEntityLiving extends OEntity {
                     // CanaryMod - Partial damage.
                     if (attacker != null) {
                         CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(attacker, this.canaryEntityLiving, new CanaryDamageSource(var1), var2 - bW));
-                        if (hook.isCancelled()) {
+                        if (hook.isCanceled()) {
                             return false;
                         }
                     }
@@ -645,7 +645,7 @@ public abstract class OEntityLiving extends OEntity {
                     // CanaryMod - full damage.
                     if (attacker != null) {
                         CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(attacker, this.canaryEntityLiving, new CanaryDamageSource(var1), var2));
-                        if (hook.isCancelled()) {
+                        if (hook.isCanceled()) {
                             return false;
                         }
                     }
@@ -842,7 +842,7 @@ public abstract class OEntityLiving extends OEntity {
         if (var2 > 0) {
             // CanaryMod - fall damage.
             CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, this.canaryEntityLiving, new CanaryDamageSource(ODamageSource.i), var2));
-            if (!hook.isCancelled()) {
+            if (!hook.isCanceled()) {
                 if (var2 > 4) {
                     this.bi.a(this, "damage.fallbig", 1.0F, 1.0F);
                 } else {
@@ -1188,14 +1188,14 @@ public abstract class OEntityLiving extends OEntity {
             double var8 = var2 * var2 + var4 * var4 + var6 * var6;
             if (this.n() && var8 > 16384.0D) {
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new EntitySpawnHook(this.getCanaryEntityLiving(), false, true)); //CanaryMod - MobDespawn
-                if(!hook.isCancelled()){
+                if(!hook.isCanceled()){
                     this.X();
                 }
             }
 
             if (this.aV > 600 && this.bS.nextInt(800) == 0 && var8 > 1024.0D && this.n()) {
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new EntitySpawnHook(this.getCanaryEntityLiving(), false, true)); //CanaryMod - MobDespawn
-                if(!hook.isCancelled()){
+                if(!hook.isCanceled()){
                     this.X();
                 }
                 else{

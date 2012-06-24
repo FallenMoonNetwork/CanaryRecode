@@ -276,7 +276,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                     int currDim = getPlayer().getDimension().getType().getId();
                     location.setDimensionId(currDim == 0 ? -1 : 0);
                     CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new TeleportHook(getPlayer(), location, true));
-                    if (!hook.isCancelled()) {
+                    if (!hook.isCanceled()) {
                         this.b.h.switchDimension(this, var16, true);
                         this.ci = -1;
                         this.cf = -1;
@@ -331,7 +331,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             }
             else{ //Call hook
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new ExperienceHook(canaryPlayer, ci, N));
-                if(hook.isCancelled()){
+                if(hook.isCanceled()){
                     N = ci;
                 }
             }
@@ -472,7 +472,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         //CanaryMod - onInventoryOpen - Workbench
         CanaryWorkbench container = new CanaryWorkbench(new OContainerWorkbench(this.k, this.bi, var1, var2, var3));
         CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new InventoryHook(canaryPlayer, container.getInventory(), false));
-        if(!hook.isCancelled()){
+        if(!hook.isCanceled()){
             this.bc();
             this.a.b((new OPacket100OpenWindow(this.cl, 1, container.getInventoryName(), container.getInventorySize())));
             this.m = container.getHandle();
@@ -505,7 +505,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         if(inv != null){
             hook = (CancelableHook) Canary.hooks().callCancelableHook(new InventoryHook(canaryPlayer, inv, false));
         }
-        if(!hook.isCancelled()){
+        if(!hook.isCanceled()){
             this.bc();
             this.a.b((new OPacket100OpenWindow(this.cl, 0, var1.getInventoryName(), var1.getInventorySize())));
             this.m = new OContainerChest(this.k, var1);
@@ -520,7 +520,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         //CanaryMod - onOpenInventory - Furnace
         CanaryFurnace furnace = var1.getFurnace();
         CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new InventoryHook(canaryPlayer, furnace.getInventory(), false));
-        if(!hook.isCancelled()){
+        if(!hook.isCanceled()){
             this.bc();
             this.a.b((new OPacket100OpenWindow(this.cl, 2, var1.getInventoryName(), var1.getInventorySize())));
             this.m = new OContainerFurnace(this.k, var1);
@@ -535,7 +535,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
       //CanaryMod - onOpenInventory - Dispenser
         CanaryDispenser dispenser = var1.getDispenser();
         CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new InventoryHook(canaryPlayer, dispenser.getInventory(), false));
-        if(!hook.isCancelled()){
+        if(!hook.isCanceled()){
             this.bc();
             this.a.b((new OPacket100OpenWindow(this.cl, 3, var1.getInventoryName(), var1.getInventorySize())));
             this.m = new OContainerDispenser(this.k, var1);
@@ -651,7 +651,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         //super.a(var1, var2);
         if (var1 != null && var1.a() != null && var1.a().d(var1) == OEnumAction.b) {
             CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(getPlayer(), null, null, var1.getCanaryItem(), null, Hook.Type.EAT));
-            if(!hook.isCancelled()){
+            if(!hook.isCanceled()){
                 super.a(var1, var2);
                 //OEntityTracker var3 = this.b.b(this.w);
                 //CanaryMod get the real entity tracker

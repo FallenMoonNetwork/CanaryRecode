@@ -124,7 +124,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         OEntityPlayer var1 = this.bi.b(this, 16.0D);
         if(var1 != null){
             CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(getCanaryEntityLiving(), var1.getCanaryEntityLiving().getPlayer()));
-            if (!hook.isCancelled()) {
+            if (!hook.isCanceled()) {
                 this.a(var1, 10.0F, 20.0F);
             }
         }

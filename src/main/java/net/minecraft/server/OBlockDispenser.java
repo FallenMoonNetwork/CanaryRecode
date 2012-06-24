@@ -126,7 +126,7 @@ public class OBlockDispenser extends OBlockContainer {
             if (var10 == null) {
                 //CanaryMod - onDispense
                 hook = (CancelableHook) Canary.hooks().callCancelableHook(new DispenseHook(dispenser, null));
-                if(!hook.isCancelled()){
+                if(!hook.isCanceled()){
                     var1.f(1001, var2, var3, var4, 0);
                 }
             } else {
@@ -136,7 +136,7 @@ public class OBlockDispenser extends OBlockContainer {
                     var17.a = true;
                     //CanaryMod - onDispense
                     hook = (CancelableHook) Canary.hooks().callCancelableHook(new DispenseHook(dispenser, var17.getCanaryEntity()));
-                    if(!hook.isCancelled()){
+                    if(!hook.isCanceled()){
                         var1.b(var17);
                         var1.f(1002, var2, var3, var4, 0);
                     }
@@ -145,7 +145,7 @@ public class OBlockDispenser extends OBlockContainer {
                     var22.a(var7, 0.10000000149011612D, var8, 1.1F, 6.0F);
                     //CanaryMod start - onDispense
                     hook = (CancelableHook) Canary.hooks().callCancelableHook(new DispenseHook(dispenser, var22.getCanaryEntity()));
-                    if(!hook.isCancelled()){
+                    if(!hook.isCanceled()){
                         var1.b(var22);
                         var1.f(1002, var2, var3, var4, 0);
                     }
@@ -154,7 +154,7 @@ public class OBlockDispenser extends OBlockContainer {
                     var21.a(var7, 0.10000000149011612D, var8, 1.1F, 6.0F);
                     //CanaryMod start - onDispense
                     hook = (CancelableHook) Canary.hooks().callCancelableHook(new DispenseHook(dispenser, var21.getCanaryEntity()));
-                    if(!hook.isCancelled()){
+                    if(!hook.isCanceled()){
                         var1.b(var21);
                         var1.f(1002, var2, var3, var4, 0);
                     }
@@ -163,7 +163,7 @@ public class OBlockDispenser extends OBlockContainer {
                     var23.a(var7, 0.10000000149011612D, var8, 1.375F, 3.0F);
                     //CanaryMod start - onDispense
                     hook = (CancelableHook) Canary.hooks().callCancelableHook(new DispenseHook(dispenser, var23.getCanaryEntity()));
-                    if(!hook.isCancelled()){
+                    if(!hook.isCanceled()){
                         var1.b(var23);
                         var1.f(1002, var2, var3, var4, 0);
                     }
@@ -172,7 +172,7 @@ public class OBlockDispenser extends OBlockContainer {
                     var20.a(var7, 0.10000000149011612D, var8, 1.375F, 3.0F);
                     //CanaryMod start - onDispense
                     hook = (CancelableHook) Canary.hooks().callCancelableHook(new DispenseHook(dispenser, var20.getCanaryEntity()));
-                    if(!hook.isCancelled()){
+                    if(!hook.isCanceled()){
                         var1.b(var20);
                         var1.f(1002, var2, var3, var4, 0);
                     }
@@ -184,7 +184,7 @@ public class OBlockDispenser extends OBlockContainer {
                         mob = OEntityList.a(var10.h(), var1);
                     }
                     hook = (CancelableHook) Canary.hooks().callCancelableHook(new DispenseHook(dispenser, mob.getCanaryEntity()));
-                    if(!hook.isCancelled()){
+                    if(!hook.isCanceled()){
                         OItemMonsterPlacer.a(var1, var10.h(), var11 + var7 * 0.3D, var13 - 0.3D, var15 + var8 * 0.3D);
                         var1.f(1002, var2, var3, var4, 0);
                     }
@@ -192,7 +192,7 @@ public class OBlockDispenser extends OBlockContainer {
                     OEntitySmallFireball var25 = new OEntitySmallFireball(var1, var11 + var7 * 0.3D, var13, var15 + var8 * 0.3D, var7 + var5.nextGaussian() * 0.05D, var5.nextGaussian() * 0.05D, var8 + var5.nextGaussian() * 0.05D);
                   //CanaryMod start - onDispense
                     hook = (CancelableHook) Canary.hooks().callCancelableHook(new DispenseHook(dispenser, var25.getCanaryEntity()));
-                    if(!hook.isCancelled()){
+                    if(!hook.isCanceled()){
                         var1.b(var25);
                         var1.f(1009, var2, var3, var4, 0);
                     }
@@ -207,7 +207,7 @@ public class OBlockDispenser extends OBlockContainer {
                     var24.br += var5.nextGaussian() * 0.007499999832361937D * 6.0D;
                     //CanaryMod start - onDispense
                     hook = (CancelableHook) Canary.hooks().callCancelableHook(new DispenseHook(dispenser, var24.getCanaryEntity()));
-                    if(!hook.isCancelled()){
+                    if(!hook.isCanceled()){
                         var1.b(var24);
                         var1.f(1000, var2, var3, var4, 0);
                     }

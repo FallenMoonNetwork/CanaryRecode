@@ -5,7 +5,7 @@ import net.canarymod.api.Enchantment;
 import net.minecraft.server.OEnchantment;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.ONBTTagCompound;
-//TODO Correctly implement this
+
 public class CanaryItem implements Item {
 
     private ItemType type;
@@ -154,5 +154,10 @@ public class CanaryItem implements Item {
     
     public OItemStack getHandle(){
         return item;
+    }
+
+    @Override
+    public ItemType getType() {
+        return type;
     }
 }

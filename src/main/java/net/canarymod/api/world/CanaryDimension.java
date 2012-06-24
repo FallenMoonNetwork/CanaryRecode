@@ -8,26 +8,38 @@ import net.canarymod.api.EntityTracker;
 import net.canarymod.api.Particle;
 import net.canarymod.api.PlayerManager;
 import net.canarymod.api.entity.CanaryBlaze;
+import net.canarymod.api.entity.CanaryChicken;
+import net.canarymod.api.entity.CanaryCow;
 import net.canarymod.api.entity.CanaryCreeper;
 import net.canarymod.api.entity.CanaryEnderman;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.CanaryGhast;
 import net.canarymod.api.entity.CanaryGiantZombie;
 import net.canarymod.api.entity.CanaryLavaSlime;
+import net.canarymod.api.entity.CanaryMushroomCow;
+import net.canarymod.api.entity.CanaryOcelot;
+import net.canarymod.api.entity.CanaryPig;
 import net.canarymod.api.entity.CanaryPigZombie;
 import net.canarymod.api.entity.CanaryPlayer;
+import net.canarymod.api.entity.CanarySheep;
 import net.canarymod.api.entity.CanarySilverfish;
 import net.canarymod.api.entity.CanarySkeleton;
 import net.canarymod.api.entity.CanarySlime;
 import net.canarymod.api.entity.CanarySpider;
+import net.canarymod.api.entity.CanarySquid;
+import net.canarymod.api.entity.CanaryVillager;
+import net.canarymod.api.entity.CanaryWolf;
 import net.canarymod.api.entity.CanaryZombie;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityAnimal;
+import net.canarymod.api.entity.EntityAnimal.AnimalType;
 import net.canarymod.api.entity.EntityItem;
 import net.canarymod.api.entity.EntityMob;
 import net.canarymod.api.entity.EntityMob.MobType;
 import net.canarymod.api.entity.Player;
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
+import net.canarymod.api.inventory.ItemType;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.blocks.CanaryBrewingStand;
@@ -44,6 +56,8 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityBlaze;
+import net.minecraft.server.OEntityChicken;
+import net.minecraft.server.OEntityCow;
 import net.minecraft.server.OEntityCreeper;
 import net.minecraft.server.OEntityEnderman;
 import net.minecraft.server.OEntityGhast;
@@ -51,13 +65,20 @@ import net.minecraft.server.OEntityGiantZombie;
 import net.minecraft.server.OEntityItem;
 import net.minecraft.server.OEntityLavaSlime;
 import net.minecraft.server.OEntityLightningBolt;
+import net.minecraft.server.OEntityMooshroom;
+import net.minecraft.server.OEntityOcelot;
+import net.minecraft.server.OEntityPig;
 import net.minecraft.server.OEntityPigZombie;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
+import net.minecraft.server.OEntitySheep;
 import net.minecraft.server.OEntitySilverfish;
 import net.minecraft.server.OEntitySkeleton;
 import net.minecraft.server.OEntitySlime;
 import net.minecraft.server.OEntitySpider;
+import net.minecraft.server.OEntitySquid;
+import net.minecraft.server.OEntityVillager;
+import net.minecraft.server.OEntityWolf;
 import net.minecraft.server.OEntityZombie;
 import net.minecraft.server.OEnumSkyBlock;
 import net.minecraft.server.OItemStack;
@@ -399,7 +420,7 @@ public class CanaryDimension implements Dimension {
         case SPIDER:
             return new CanarySpider(new OEntitySpider(getHandle()));
         case ZOMBIE:
-            return new CanaryZombie(new OEntityZombie   (getHandle()));
+            return new CanaryZombie(new OEntityZombie(getHandle()));
         }
         return null;
     }
@@ -494,6 +515,11 @@ public class CanaryDimension implements Dimension {
     @Override
     public void makeLightningBolt(int x, int y, int z) {
         world.a(new OEntityLightningBolt(world, x, y, z));
+    }
+    
+    @Override
+    public void makeLightningBolt(Vector3D position) {
+        world.a(new OEntityLightningBolt(world, (int)position.getX(), (int)position.getY(), (int)position.getZ()));
     }
     
     @Override
@@ -596,4 +622,44 @@ public class CanaryDimension implements Dimension {
         return null;
     }
 
+    @Override
+    public EntityAnimal createAnimal(AnimalType animalType) {
+        switch(animalType) {
+            case CHICKEN:
+                return new CanaryChicken(new OEntityChicken(getHandle()));
+            case COW:
+                return new CanaryCow(new OEntityCow(getHandle()));
+            case MUSHROOMCOW:
+                return new CanaryMushroomCow(new OEntityMooshroom(getHandle()));
+            case OCELOT:
+                return new CanaryOcelot(new OEntityOcelot(getHandle()));
+            case PIG:
+                return new CanaryPig(new OEntityPig(getHandle()));
+            case SHEEP:
+                return new CanarySheep(new OEntitySheep(getHandle()));
+            case SQUID:
+                return new CanarySquid(new OEntitySquid(getHandle()));
+            case VILLAGER:
+                return new CanaryVillager(new OEntityVillager(getHandle()));
+            case WOLF:
+                return new CanaryWolf(new OEntityWolf(getHandle()));
+        }
+        return null;
+    }
+
+    @Override
+    public Item createItem(ItemType itemType) {
+        return new CanaryItem(new OItemStack(itemType.getId(), 1, 0));
+    }
+
+    @Override
+    public Item createItem(ItemType itemType, int amount, int data) {
+        return new CanaryItem(new OItemStack(itemType.getId(), amount, data));
+    }
+
+    @Override
+    public Item createItem(int itemId, int amount, int data) {
+        
+        return new CanaryItem(new OItemStack(itemId, amount, data));
+    }
 }

@@ -73,7 +73,7 @@ public class CanaryServer implements Server {
     public void consoleCommand(String command) {
         ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks()
                 .callCancelableHook(new ConsoleCommandHook(null, command));
-        if (hook.isCancelled()) {
+        if (hook.isCanceled()) {
             return;
         }
         String[] args = command.split(" ");
@@ -91,7 +91,7 @@ public class CanaryServer implements Server {
     public void consoleCommand(String command, Player player) {
         ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks()
                 .callCancelableHook(new ConsoleCommandHook(player, command));
-        if (hook.isCancelled()) {
+        if (hook.isCanceled()) {
             return;
         }
         String[] args = command.split(" ");

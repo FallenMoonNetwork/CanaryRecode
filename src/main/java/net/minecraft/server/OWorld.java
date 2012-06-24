@@ -837,7 +837,7 @@ public class OWorld implements OIBlockAccess {
                 //implement MobSpawnRate Here!
             }
             hook = (CancelableHook) Canary.hooks().callCancelableHook(new EntitySpawnHook(var1.getCanaryEntity(), true, (var1 instanceof OEntityLiving)));
-            if(hook.isCancelled()){
+            if(hook.isCanceled()){
                 return false;
             }
         }

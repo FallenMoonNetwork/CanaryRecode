@@ -114,7 +114,7 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
             OEntityPlayer entityplayer = this.bi.b(this, 100.0D);
             if(entityplayer != null){
                 CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(getCanaryEntityLiving(), entityplayer.getCanaryEntityLiving().getPlayer()));
-                if(!hook.isCancelled()){
+                if(!hook.isCanceled()){
                     this.g = entityplayer;
                 }
             }

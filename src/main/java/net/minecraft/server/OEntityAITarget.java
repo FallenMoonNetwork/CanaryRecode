@@ -117,7 +117,7 @@ public abstract class OEntityAITarget extends OEntityAIBase {
                     //CanaryMod - MOB_TARGET
                     if (var1.getCanaryEntityLiving().isPlayer()) {
                         CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(this.c.getCanaryEntityLiving(), var1.getCanaryEntityLiving().getPlayer()));
-                        if (hook.isCancelled()) {
+                        if (hook.isCanceled()) {
                             return false;
                         }
                     }
