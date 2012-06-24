@@ -94,6 +94,7 @@
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
             <manifestEntries>
+              <Main-Class>net.canarymod.Main</Main-Class>
               <Class-Path>lib/CanaryLib.jar</Class-Path>
             </manifestEntries>
           </archive>
