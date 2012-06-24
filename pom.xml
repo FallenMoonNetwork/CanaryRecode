@@ -120,5 +120,6 @@
           <tagNameFormat>@{project.version}</tagNameFormat>
         </configuration>
       </plugin>
+    </plugins>
   </build>
 </project>

@@ -6,6 +6,4 @@
 *.jardesc
 *.jar
 bin/*
-/nbproject/private/
-/build/
-/dist/
+/target/
