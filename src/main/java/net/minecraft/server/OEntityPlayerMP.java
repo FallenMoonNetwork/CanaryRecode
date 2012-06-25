@@ -355,7 +355,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             this.a(OAchievementList.B);
             OChunkCoordinates var2 = getDimension().getHandle().d();//this.b.a(var1).d();
             if (var2 != null) {
-                this.a.a(var2.a, var2.b, var2.c, 0.0F, 0.0F);
+                this.a.a(var2.a, var2.b, var2.c, 0.0F, 0.0F, this.w, this.bi.getCanaryDimension().getName());
             }
 
             this.b.h.switchDimension(this, 1, true);
@@ -427,7 +427,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             OEntityTracker var5 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
             OPacket17Sleep var6 = new OPacket17Sleep(this, 0, var1, var2, var3);
             var5.a(this, var6);
-            this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt);
+            this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt, this.w, this.bi.getCanaryDimension().getName());
             this.a.b(var6);
         }
 
@@ -443,7 +443,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
         super.a(var1, var2, var3);
         if (this.a != null) {
-            this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt);
+            this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt, this.w, this.bi.getCanaryDimension().getName());
         }
 
     }
@@ -452,7 +452,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public void b(OEntity var1) {
         super.b(var1);
         this.a.b((new OPacket39AttachEntity(this, this.bh)));
-        this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt);
+        this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt, this.w, this.bi.getCanaryDimension().getName());
     }
 
     @Override
@@ -688,7 +688,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     @Override
     public void a_(double var1, double var3, double var5) {
-        this.a.a(var1, var3, var5, this.bs, this.bt);
+        this.a.a(var1, var3, var5, this.bs, this.bt, this.w, this.bi.getCanaryDimension().getName());
     }
 
     @Override

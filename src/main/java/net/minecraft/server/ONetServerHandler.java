@@ -14,6 +14,7 @@ import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
@@ -146,6 +147,11 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             this.e.I();
             this.b((new OPacket255KickDisconnect(var1)));
             this.b.d();
+          //CanaryMod handle disconnect world stuff
+            this.e.bi.getCanaryDimension().getEntityTracker().untrackPlayerSymmetrics(this.e.getPlayer());
+            this.e.bi.getCanaryDimension().getEntityTracker().untrackEntity(this.e.getPlayer());
+            this.e.bi.getCanaryDimension().getPlayerManager().removePlayer(this.e.getPlayer());
+            //            etc.getServer().getPlayerManager(this.e.bi.world).removePlayer(this.e);
             ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), var1, Colors.Yellow + getUser().getName() + " left the game."));
             if (!hook.isHidden()) {
                 this.d.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
@@ -317,7 +323,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                 // 30 // true if not collides AFTER
                 // 26 // true if not collides BEFORE
                 if (var26 && (var29 || !var30) && !this.e.Z()) {
-                    this.a(this.o, this.p, this.q, var17, var18);
+                    this.a(this.o, this.p, this.q, var17, var18, this.e.w, this.e.bi.getCanaryDimension().getName());
                     return;
                 }
 
@@ -343,9 +349,11 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         }
     }
 
-    public void a(double var1, double var3, double var5, float var7, float var8) {
+    //CanaryMod changed signature to additionally define world destination
+    public void a(double var1, double var3, double var5, float var7, float var8, int dimension, String world) {
         // CanaryMod - Teleport hook.
-        Location location = new Location(getUser().getDimension(), var1, var3, var5, var8, var7);
+        Dimension dim = Canary.getServer().getWorld(world).getDimension(Dimension.Type.fromId(dimension));
+        Location location = new Location(dim, var1, var3, var5, var8, var7);
         CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new TeleportHook(getUser(), location, false));
         if (hook.isCanceled()) {
             return;

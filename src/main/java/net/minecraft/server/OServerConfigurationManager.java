@@ -205,25 +205,27 @@ public class OServerConfigurationManager {
 
     public OEntityPlayerMP a(ONetLoginHandler var1, String var2) {
         String var3 = var1.b.c().toString();
+        //IP
         var3 = var3.substring(var3.indexOf("/") + 1);
         var3 = var3.substring(0, var3.indexOf(":"));
+        Dimension dim = Canary.getServer().getDefaultWorld().getNormal();
+        LoginChecksHook hook = (LoginChecksHook) Canary.hooks().callHook(new LoginChecksHook(var3, var2, dim.getType(), dim.getName()));
+        if (hook.getKickReason() != null && !hook.getKickReason().trim().equals("")) {
+            var1.a(hook.getKickReason());
+        }
+        // CanaryMod - end
+        //TODO: Refactor to use canary white listing, banning etc etc
+        
         if (this.f.contains(var2.trim().toLowerCase())) {
             var1.a("You are banned from this server!");
             return null;
         } else if (!this.isAllowedToLogin(var2)) {
             var1.a("You are not white-listed on this server!");
             return null;
-        } else if (this.g.contains(var3)) {// CanaryMod - Move ban check out of else block below to allow login check to be called before kicking
+        } else if (this.g.contains(var3)) {
             var1.a("Your IP address is banned from this server!");
             return null;
         } else {
-            // CanaryMod - LoginChecks.
-            // CanaryMod - Called before a player is kicked for already being on the server or the server being full.
-            LoginChecksHook hook = (LoginChecksHook) Canary.hooks().callHook(new LoginChecksHook(var3, var2));
-            if (hook.getKickReason() != null && !hook.getKickReason().trim().equals("")) {
-                var1.a(hook.getKickReason());
-            }
-            // CanaryMod - end
             if (this.b.size() >= this.e) {
                 var1.a("The server is full!");
                 return null;
@@ -234,7 +236,7 @@ public class OServerConfigurationManager {
                         var5.a.a("You logged in from another location");
                     }
                 }
-                OWorldServer dimension = (OWorldServer) ((CanaryDimension) Canary.getServer().getDefaultWorld().getNormal()).getHandle();
+                OWorldServer dimension = (OWorldServer) ((CanaryDimension) Canary.getServer().getWorld(hook.getWorld()).getDimension(hook.getDimensionType())).getHandle();
                 return new OEntityPlayerMP(this.c, dimension, var2, new OItemInWorldManager(dimension));
             }
         }
@@ -297,7 +299,7 @@ public class OServerConfigurationManager {
         //respawn packet
         var5.a.b((new OPacket9Respawn(var5.w, (byte) var5.bi.q, var5.bi.s().getWorldType(), var5.bi.y(), var5.c.a())));
         //teleport to spawn location
-        var5.a.a(var5.bm, var5.bn, var5.bo, var5.bs, var5.bt);
+        var5.a.a(var5.bm, var5.bn, var5.bo, var5.bs, var5.bt, var5.w, var5.bi.getCanaryDimension().getName());
         //something
         this.a(var5, var6);
         var5.getDimension().getPlayerManager().addPlayer((Player)var5.getPlayer());
@@ -365,7 +367,7 @@ public class OServerConfigurationManager {
         }
 
         this.a(var1);
-        var1.a.a(var1.bm, var1.bn, var1.bo, var1.bs, var1.bt);
+        var1.a.a(var1.bm, var1.bn, var1.bo, var1.bs, var1.bt, var1.w, var1.bi.getCanaryDimension().getName());
         var1.a(var5);
         var1.c.a(var5);
         this.a(var1, var5);

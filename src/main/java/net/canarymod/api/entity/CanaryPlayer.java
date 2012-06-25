@@ -437,7 +437,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         if (player.bh != null) {
             player.b(player.bh);
         }
-        player.a.a(x, y, z, rotation, pitch);
+        player.a.a(x, y, z, rotation, pitch, getDimension().getType().getId(), getDimension().getName());
         
     }
 
@@ -579,7 +579,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         OChunkCoordinates var2 = ent.bi.d();
 
         if (var2 != null) {
-            ent.a.a((double) var2.a, (double) var2.b, (double) var2.c, 0.0F, 0.0F);
+            ent.a.a((double) var2.a, (double) var2.b, (double) var2.c, 0.0F, 0.0F, dim.getType().getId(), ent.bi.getCanaryDimension().getName());
         }
 
         mcServer.h.switchDimension(ent, dim.getType().getId(), false);

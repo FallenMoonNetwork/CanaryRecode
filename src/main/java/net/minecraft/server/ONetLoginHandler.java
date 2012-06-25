@@ -119,7 +119,8 @@ public class ONetLoginHandler extends ONetHandler {
         OEntityPlayerMP var2 = this.e.h.a(this, var1.b);
         if (var2 != null) {
             this.e.h.b(var2);
-            var2.a((OWorldServer) ((CanaryDimension)var2.getDimension().getWorld().getDimension(Type.fromId(var2.w))).getHandle());
+            //CanaryMod the world has been set when handling the login packet already (by plugin or default)!
+//            var2.a((OWorldServer) ((CanaryDimension)var2.getDimension().getWorld().getDimension(Type.fromId(var2.w))).getHandle());
             var2.c.a((OWorldServer) var2.bi);
             a.info(this.b() + " logged in with entity id " + var2.bd + " at (" + var2.bm + ", " + var2.bn + ", " + var2.bo + ")");
             OWorldServer var3 = (OWorldServer) ((CanaryDimension)var2.getDimension()).getHandle();
@@ -130,12 +131,13 @@ public class ONetLoginHandler extends ONetHandler {
             var5.b((new OPacket6SpawnPosition(var4.a, var4.b, var4.c)));
             var5.b((new OPacket202PlayerAbilities(var2.L)));
             this.e.h.a(var2, var3);
+            
             ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(var2.getPlayer(), Colors.Yellow + var2.getPlayer().getName() + " joined the game.", null));
             if (!hook.isHidden()) {
                 this.e.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
             }
             this.e.h.c(var2);
-            var5.a(var2.bm, var2.bn, var2.bo, var2.bs, var2.bt);
+            var5.a(var2.bm, var2.bn, var2.bo, var2.bs, var2.bt, var2.w, var2.bi.getCanaryDimension().getName());
             this.e.c.a(var5);
             var5.b((new OPacket4UpdateTime(var3.o())));
             Iterator var6 = var2.aM().iterator();

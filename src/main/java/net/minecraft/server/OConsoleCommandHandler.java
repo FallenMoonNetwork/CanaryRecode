@@ -156,7 +156,7 @@ public class OConsoleCommandHandler {
                         } else if(var20.w != var18.w) {
                            var6.b("User " + var3[1] + " and " + var3[2] + " are in different dimensions. No tp.");
                         } else {
-                           var20.a.a(var18.bm, var18.bn, var18.bo, var18.bs, var18.bt);
+                           var20.a.a(var18.bm, var18.bn, var18.bo, var18.bs, var18.bt, var18.w, var18.bi.getCanaryDimension().getName());
                            this.a(var7, "Teleporting " + var3[1] + " to " + var3[2] + ".");
                         }
                      } else {
