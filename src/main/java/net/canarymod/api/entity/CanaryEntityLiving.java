@@ -4,6 +4,7 @@ import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.DamageSource;
 import net.canarymod.api.DamageType;
 import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityAnimal;
@@ -70,10 +71,10 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     }
 
     @Override
-    public Vector3D getHome() {
+    public Location getHome() {
         if (hasHome()) {
             OChunkCoordinates home = ((OEntityLiving) entity).av();
-            return new Vector3D(home.a, home.b, home.c);
+            return new Location(home.a, home.b, home.c);
         }
         return null;
     }
@@ -178,14 +179,14 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     }
 
     @Override
-    public void setHome(Vector3D vector) {
-        setHomeArea((int) Math.floor(vector.getX()), (int) Math.floor(vector.getY()), (int) Math.floor(vector.getZ()), 25);
+    public void setHome(Location location) {
+        setHomeArea((int) Math.floor(location.getX()), (int) Math.floor(location.getY()), (int) Math.floor(location.getZ()), 25);
     }
 
     @Override
     public void setHomeArea(Vector3D vector, int dist) {
         if(vector == null) {
-            throw new IllegalArgumentException("Could not set EntityLivings home. Vector was null!");
+            throw new IllegalArgumentException("Could not set EntityLivings home. Location was null!");
         }
         setHomeArea((int) Math.floor(vector.getX()), (int) Math.floor(vector.getY()), (int) Math.floor(vector.getZ()), dist);
     }
