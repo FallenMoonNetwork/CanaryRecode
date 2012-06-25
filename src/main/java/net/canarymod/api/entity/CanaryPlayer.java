@@ -27,6 +27,7 @@ import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
+import net.canarymod.warp.Warp;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
@@ -228,6 +229,29 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             spawn = new Location(Canary.getServer().getDefaultWorld().getNormal(), loc.a, loc.b, loc.c, 0.0F, 0.0F);
         }
         return spawn;
+    }
+    
+    @Override
+    public Location getHome() {
+        Warp home = Canary.warps().getHome(this);
+        if(home != null) {
+            return home.getLocation();
+        }
+        return getSpawnPosition();
+    }
+    
+    @Override
+    public void setHome(Location home) {
+        Canary.warps().setHome(this, home);
+    }
+    
+    @Override
+    public boolean hasHome() {
+        Warp home = Canary.warps().getHome(this);
+        if(home != null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
