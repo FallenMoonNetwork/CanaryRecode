@@ -11,7 +11,10 @@ public class Main {
         //Initialize the bird
         CanaryMod mod = new CanaryMod();
         Canary.setCanary(mod);
+        
+        //Initialize providers that require Canary to be set already
         mod.initUserAndGroupsManager();
+        mod.initWarps();
         
         
         try {

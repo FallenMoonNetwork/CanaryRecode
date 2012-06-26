@@ -40,18 +40,27 @@ public class CanaryMod extends Canary {
             this.database = new DatabaseFlatfile();
         }
 
-        // Initialize the subsystems
+        // Initialize the subsystems that do not rely on others
         this.permissionLoader = new PermissionManager();
         this.hookExecutor = new HookExecutor();
         this.helpManager = new HelpManager();
         this.banManager = new BanManager();
-        this.warpProvider = new WarpProvider();
         //Initialize the plugin loader and scan for plugins
         this.loader = new PluginLoader();
         this.loader.scanPlugins();
     }
     
+    /**
+     * Separately set users and groups provider
+     */
     public void initUserAndGroupsManager() {
         this.userAndGroupsProvider = new UserAndGroupsProvider();
+    }
+    
+    /**
+     * Separately set the warps provider
+     */
+    public void initWarps() {
+        this.warpProvider = new WarpProvider();
     }
 }
