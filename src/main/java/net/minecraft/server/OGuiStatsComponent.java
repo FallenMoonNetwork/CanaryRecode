@@ -9,6 +9,7 @@ import javax.swing.Timer;
 
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.World;
 import net.minecraft.server.OGuiStatsListener;
 import net.minecraft.server.OMinecraftServer;
 import net.minecraft.server.ONetworkManager;
@@ -39,16 +40,23 @@ public class OGuiStatsComponent extends JComponent {
         this.d[2] = "Avg tick: " + a.format(this.a(this.e.f) * 1.0E-6D) + " ms";
         this.d[3] = "Avg sent: " + (int) this.a(this.e.u) + ", Avg size: " + (int) this.a(this.e.v);
         this.d[4] = "Avg rec: " + (int) this.a(this.e.w) + ", Avg size: " + (int) this.a(this.e.x);
-        OWorldServer[] level = ((CanaryWorld)Canary.getServer().getWorldManager().getWorld(Canary.getServer().getDefaultWorldName())).getDimensionArray();
-        if (level != null) {
-            for (int var3 = 0; var3 < level.length; ++var3) {
-                this.d[5 + var3] = "Lvl " + var3 + " tick: " + a.format(this.a(this.e.g[var3]) * 1.0E-6D) + " ms";
-                if (level[var3] != null && level[var3].G != null) {
-                    this.d[5 + var3] = this.d[5 + var3] + ", " + level[var3].G.d();
+        
+        //CanaryMod Multiworld:
+        World[] worlds = Canary.getServer().getWorldManager().getAllWorlds();
+        if(worlds != null) {
+            for(World w : worlds) {
+                String worldName = w.getName();
+                OWorldServer[] level = ((CanaryWorld)w).getDimensionArray();
+                for (int i = 0; i < level.length; i++) {
+                    net.canarymod.api.world.Dimension dim = w.getDimensions()[i];
+                    this.d[5 + i] = "World " + worldName + " lvl " + i + " tick " + a.format(w.getNanoTick(dim.getType(), i) * 1.0E-6D) + " ms";
+                    if(level[i] != null && level[i].G != null) {
+                        this.d[5 + i] += ", " + level[i].G.d();
+                    }
                 }
             }
         }
-
+        //CanaryMod end
         this.b[this.c++ & 255] = (int) (this.a(this.e.v) * 100.0D / 12500.0D);
         this.repaint();
     }

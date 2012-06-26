@@ -126,6 +126,20 @@ public class CanaryWorld implements World {
                 break;
         }
     }
+    
+    @Override
+    public long getNanoTick(Dimension.Type dimension, int tickIndex) {
+        switch(dimension) {
+            case NORMAL:
+                return nanoTicks[0][tickIndex];
+            case NETHER:
+                return nanoTicks[1][tickIndex];
+            case END:
+                return nanoTicks[2][tickIndex];
+            default:
+                return 0L;
+        }
+    }
 
     @Override
     public void setEnabled(boolean enabled) {

@@ -3,6 +3,8 @@ package net.minecraft.server;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
+
+import net.canarymod.Canary;
 import net.minecraft.server.OServerGUI;
 
 class OServerGuiCommandListener implements ActionListener {
@@ -21,9 +23,13 @@ class OServerGuiCommandListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent var1) {
         String var2 = this.a.getText().trim();
-        if (var2.length() > 0) {
-            OServerGUI.a(this.b).a(var2, this.b);
+        //CanaryMod: Parse console commands from GUI
+        if (var2.length() > 0 && Canary.instance() != null) {
+            //CanaryMod we parse that command instead
+            Canary.getServer().consoleCommand(var2);
+//            OServerGUI.a(this.b).a(var2, this.b);
         }
+        //CanaryMod end
 
         this.a.setText("");
     }

@@ -70,39 +70,39 @@ public class CanaryServer implements Server {
     }
 
     @Override
-    public void consoleCommand(String command) {
+    public boolean consoleCommand(String command) {
         ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks()
                 .callCancelableHook(new ConsoleCommandHook(null, command));
         if (hook.isCanceled()) {
-            return;
+            return true;
         }
         String[] args = command.split(" ");
         CanaryCommand toExecute = CanaryCommand.fromString(args[0].replace("/", ""));
         if(toExecute != null) {
-            toExecute.execute(null, args);
+            return toExecute.execute(null, args);
         }
         else{
             server.a(command, server);
+            return false;
         }
-        Logman.logInfo("Console issued server command: " + command);
     }
 
     @Override
-    public void consoleCommand(String command, Player player) {
+    public boolean consoleCommand(String command, Player player) {
         ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks()
                 .callCancelableHook(new ConsoleCommandHook(player, command));
         if (hook.isCanceled()) {
-            return;
+            return true;
         }
         String[] args = command.split(" ");
         CanaryCommand toExecute = CanaryCommand.fromString(args[0].replace("/", ""));
         if(toExecute != null) {
-            toExecute.execute(null, args);
+            return toExecute.execute(null, args);
         }
         else{
             server.a(command, ((CanaryPlayer) player).getHandle().a);
+            return false;
         }
-        Logman.logInfo(player.getName() + " issued server command: " + command);
     }
 
     @SuppressWarnings("unchecked")
