@@ -10,6 +10,7 @@ import net.canarymod.hook.HookExecutor;
 import net.canarymod.permissionsystem.PermissionManager;
 import net.canarymod.plugin.PluginLoader;
 import net.canarymod.user.UserAndGroupsProvider;
+import net.canarymod.warp.WarpProvider;
 
 /**
  * The implementation of Canary, the new catch-all etc replacement, only much better :P
@@ -44,6 +45,7 @@ public class CanaryMod extends Canary {
         this.hookExecutor = new HookExecutor();
         this.helpManager = new HelpManager();
         this.banManager = new BanManager();
+        this.warpProvider = new WarpProvider();
         //Initialize the plugin loader and scan for plugins
         this.loader = new PluginLoader();
         this.loader.scanPlugins();
