@@ -17,6 +17,11 @@ public class CanaryItem implements Item {
         item = oItemStack;
     }
 
+    public CanaryItem(int id, int amount) {
+        this.type = ItemType.fromId(id);
+        item = new OItemStack(id, amount, 0);
+    }
+
     @Override
     public int getId() {
         return type.getId();
@@ -104,8 +109,8 @@ public class CanaryItem implements Item {
 
     @Override
     public void addEnchantment(Enchantment enchantment) {
-        if (enchantment != null && enchantment.getType().getType() >= 0 && enchantment.getType().getType() < OEnchantment.b.length) {
-            OEnchantment enchantmentType = OEnchantment.b[enchantment.getType().getType()];
+        if (enchantment != null && enchantment.getType().getId() >= 0 && enchantment.getType().getId() < OEnchantment.b.length) {
+            OEnchantment enchantmentType = OEnchantment.b[enchantment.getType().getId()];
             if (enchantmentType != null){
                 item.a(enchantmentType, enchantment.getLevel());
             }

@@ -36,7 +36,7 @@ public class CanaryEnchantment implements Enchantment{
 
 	@Override
 	public Enchantment getEnchantment(Type type) {  //You know, this seems kind of pointless actually
-	    OEnchantment ench = OEnchantment.b[type.getType()];
+	    OEnchantment ench = OEnchantment.b[type.getId()];
 	    if(ench != null){
 	        return new CanaryEnchantment(ench);
 	    }
@@ -75,7 +75,7 @@ public class CanaryEnchantment implements Enchantment{
 
 	@Override
 	public void setType(Type type) {
-	    OEnchantment ench = OEnchantment.b[type.getType()];
+	    OEnchantment ench = OEnchantment.b[type.getId()];
 	    this.type = type;
 	    this.handle = ench;
 	}

@@ -7,6 +7,7 @@ import net.canarymod.database.flatfile.DatabaseFlatfile;
 import net.canarymod.database.mysql.DatabaseMySql;
 import net.canarymod.help.HelpManager;
 import net.canarymod.hook.HookExecutor;
+import net.canarymod.kit.KitProvider;
 import net.canarymod.permissionsystem.PermissionManager;
 import net.canarymod.plugin.PluginLoader;
 import net.canarymod.user.UserAndGroupsProvider;
@@ -62,5 +63,9 @@ public class CanaryMod extends Canary {
      */
     public void initWarps() {
         this.warpProvider = new WarpProvider();
+    }
+    
+    public void initKits() {
+        this.kitProvider = new KitProvider();
     }
 }
