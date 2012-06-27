@@ -143,8 +143,9 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
     }
 
     @Override
-    public CanaryItem decreaseItemStackSize(int arg0, int arg1) {
-        return ((OTileEntityDispenser)tileentity).decreaseItemStackSize(arg0, arg1).getCanaryItem();
+    public CanaryItem decreaseItemStackSize(int itemId, int amount) {
+        OItemStack item = ((OTileEntityDispenser)tileentity).decreaseItemStackSize(itemId, amount);
+        return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
@@ -185,7 +186,8 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
 
     @Override
     public Item getSlot(int index) {
-        return ((OTileEntityDispenser)tileentity).getSlot(index).getCanaryItem();
+        OItemStack item = ((OTileEntityDispenser)tileentity).getSlot(index);
+        return item != null ? item.getCanaryItem() : null;
     }
 
     @Override

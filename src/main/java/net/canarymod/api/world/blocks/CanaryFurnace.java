@@ -24,8 +24,9 @@ public class CanaryFurnace extends CanaryComplexBlock implements Furnace{
     }
 
     @Override
-    public CanaryItem decreaseItemStackSize(int arg0, int arg1) {
-        return ((OTileEntityFurnace)tileentity).decreaseItemStackSize(arg0, arg1).getCanaryItem();
+    public CanaryItem decreaseItemStackSize(int itemId, int amount) {
+        OItemStack item = ((OTileEntityFurnace)tileentity).decreaseItemStackSize(itemId, amount);
+        return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
@@ -66,7 +67,8 @@ public class CanaryFurnace extends CanaryComplexBlock implements Furnace{
 
     @Override
     public CanaryItem getSlot(int index) {
-        return ((OTileEntityFurnace)tileentity).getSlot(index).getCanaryItem();
+        OItemStack item = ((OTileEntityFurnace)tileentity).getSlot(index);
+        return item != null ? item.getCanaryItem() : null;
     }
 
     @Override

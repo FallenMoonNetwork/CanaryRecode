@@ -58,7 +58,8 @@ public class CanaryWorkbench implements Workbench{
 
     @Override
     public CanaryItem decreaseItemStackSize(int itemId, int amount) {
-        return container.a.decreaseItemStackSize(itemId, amount).getCanaryItem();
+        OItemStack item = container.a.decreaseItemStackSize(itemId, amount);
+        return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
@@ -99,7 +100,8 @@ public class CanaryWorkbench implements Workbench{
 
     @Override
     public CanaryItem getSlot(int index) {
-        return container.a.getSlot(index).getCanaryItem();
+        OItemStack item = container.a.getSlot(index);
+        return item != null ? item.getCanaryItem() : null;
     }
 
     @Override

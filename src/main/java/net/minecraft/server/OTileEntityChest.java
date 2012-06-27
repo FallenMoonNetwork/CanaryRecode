@@ -267,10 +267,11 @@ public class OTileEntityChest extends OTileEntity implements OIInventory {
 
     @Override
     public OItemStack getSlot(int index) {
-        if(this.b(index) != null) {
-            return this.b(index);
+        OItemStack stack = this.b(index);
+        if (stack != null) {
+            return stack;
         }
-        return new OItemStack(0,0,0);
+        return null;
     }
 
     @Override
@@ -371,7 +372,7 @@ public class OTileEntityChest extends OTileEntity implements OIInventory {
         if(stack != null) {
             return stack;
         }
-        return new OItemStack(0,0,0);
+        return null;
     }
 
     @Override
@@ -477,10 +478,9 @@ public class OTileEntityChest extends OTileEntity implements OIInventory {
 
     @Override
     public int getEmptySlot() {
-        int size = getInventorySize();
-
-        for (int i = 0; size > i; i++) {
-            if (getSlot(i) != null) {
+        OItemStack[] contents = getContents();
+        for (int i = 0; contents.length > i; i++) {
+            if (contents[i] != null) {
                 continue;
             }
             return i;

@@ -74,8 +74,9 @@ public class CanaryChest extends CanaryComplexBlock implements Chest{
     }
 
     @Override
-    public CanaryItem decreaseItemStackSize(int item, int amount) {
-        return new CanaryItem(((OTileEntityChest)tileentity).decreaseItemStackSize(item, amount));
+    public CanaryItem decreaseItemStackSize(int itemId, int amount) {
+        OItemStack item = ((OTileEntityChest)tileentity).decreaseItemStackSize(itemId, amount);
+        return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
@@ -116,7 +117,8 @@ public class CanaryChest extends CanaryComplexBlock implements Chest{
 
     @Override
     public CanaryItem getSlot(int index) {
-        return ((OTileEntityChest)tileentity).getSlot(index).getCanaryItem();
+        OItemStack item = ((OTileEntityChest)tileentity).getSlot(index);
+        return item != null ? item.getCanaryItem() : null;
     }
 
     @Override

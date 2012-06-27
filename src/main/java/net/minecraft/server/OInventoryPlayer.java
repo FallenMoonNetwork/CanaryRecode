@@ -536,7 +536,7 @@ public OItemStack d() {
         if(stack != null) {
             return stack;
         }
-        return new OItemStack(0,0,0);
+        return null;
     }
 
     @Override
@@ -648,8 +648,6 @@ public OItemStack d() {
                     
                     if (targetSlot == -1) {
                         // Drop whatever is left
-//                        ((OEntityPlayerMP) d).getPlayer().giveItemDrop(itemId, remaining);
-                        Logman.println("Inventory full, dropping items");
                         ((OEntityPlayerMP) d).getPlayer().dropLoot(itemId, remaining);
                         remaining = 0;
                     } else {

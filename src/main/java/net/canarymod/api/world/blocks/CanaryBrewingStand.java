@@ -42,12 +42,7 @@ public class CanaryBrewingStand extends CanaryComplexBlock implements BrewingSta
         }
         ((OTileEntityBrewingStand)tileentity).setContents(oStacks);
     }
-
-    @Override
-    public Item getSlot(int index) {
-        return ((OTileEntityBrewingStand)tileentity).getSlot(index).getCanaryItem();
-    }
-
+    
     @Override
     public void addItem(int itemId, int amount) {
         ((OTileEntityBrewingStand)tileentity).addItem(itemId, amount);
@@ -110,7 +105,14 @@ public class CanaryBrewingStand extends CanaryComplexBlock implements BrewingSta
 
     @Override
     public Item decreaseItemStackSize(int itemId, int amount) {
-        return ((OTileEntityBrewingStand)tileentity).decreaseItemStackSize(itemId, amount).getCanaryItem();
+        OItemStack item = ((OTileEntityBrewingStand)tileentity).decreaseItemStackSize(itemId, amount);
+        return item != null ? item.getCanaryItem() : null;
+    }
+    
+    @Override
+    public Item getSlot(int index) {
+        OItemStack item = ((OTileEntityBrewingStand)tileentity).getSlot(index);
+        return item != null ? item.getCanaryItem() : null;
     }
 
     @Override

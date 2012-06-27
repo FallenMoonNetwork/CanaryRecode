@@ -27,8 +27,9 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest{
     }
 
     @Override
-    public CanaryItem decreaseItemStackSize(int arg0, int arg1) {
-        return largechest.decreaseItemStackSize(arg0, arg1).getCanaryItem();
+    public CanaryItem decreaseItemStackSize(int itemId, int amount) {
+        OItemStack item = largechest.decreaseItemStackSize(itemId, amount);
+        return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
@@ -69,7 +70,8 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest{
 
     @Override
     public CanaryItem getSlot(int index) {
-        return largechest.getSlot(index).getCanaryItem();
+        OItemStack item = largechest.getSlot(index);
+        return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
