@@ -11,6 +11,10 @@ public class CanaryComplexBlock implements ComplexBlock {
         this.tileentity = tileentity;
     }
     
+    public OTileEntity getHandle() {
+        return tileentity;
+    }
+    
     public Block getBlock(){
         return getDimension().getBlockAt(getX(), getY(), getZ());
     }

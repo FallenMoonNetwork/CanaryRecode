@@ -2,7 +2,14 @@ package net.minecraft.server;
 
 import java.util.Random;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryBaseItem;
+import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.world.blocks.BlockFace;
+import net.canarymod.api.world.blocks.CanaryBlock;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.Hook;
+import net.canarymod.hook.player.RightClickHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityLiving;
@@ -226,6 +233,7 @@ public class OItem {
         }
 
         d[256 + var1] = this;
+        baseItem = new CanaryBaseItem(this);
     }
 
     public OItem d(int var1) {
@@ -244,6 +252,13 @@ public class OItem {
     }
 
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
+        //CanaryMod call item use hook
+        CanaryBlock block = (CanaryBlock) var2.bi.getCanaryDimension().getBlockAt(var4, var5, var6);
+        block.setFaceClicked(BlockFace.fromByte((byte)var7));
+        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(((OEntityPlayerMP)var2).getPlayer(), null, block, new CanaryItem(var1), null, Hook.Type.ITEM_USE));
+        if(hook.isCanceled()) {
+            return true;
+        }
         return false;
     }
 

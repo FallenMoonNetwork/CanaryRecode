@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
+import net.canarymod.api.inventory.ItemType;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItemStack;
@@ -107,7 +108,10 @@ public class OInventoryLargeChest implements OIInventory {
 
     @Override
     public OItemStack getSlot(int index) {
-        return this.b(index);
+        if(this.b(index) != null) {
+            return this.b(index);
+        }
+        return new OItemStack(0,0,0);
     }
 
     @Override
@@ -197,12 +201,124 @@ public class OInventoryLargeChest implements OIInventory {
 
     @Override
     public OItemStack decreaseItemStackSize(int arg0, int arg1) {
-        return a(arg0, arg1);
+        OItemStack stack = a(arg0, arg1);
+        if(stack != null) {
+            return stack;
+        }
+        return new OItemStack(0,0,0);
     }
 
     @Override
     public int getInventoryStackLimit() {
         return a();
+    }
+
+    @Override
+    public void addItem(int itemId, int amount) {
+        int remaining = amount;
+
+        do {
+            if (((itemId >= 256 && itemId <= 258) || 
+                 (itemId >= 267 && itemId <= 279) || 
+                 (itemId >= 283 && itemId <= 286) ||
+                 (itemId >= 298 && itemId <= 317) ||
+                 (itemId == 261))) {
+                int targetSlot = getEmptySlot();
+                
+                if (targetSlot == -1) {
+                    OTileEntity chest = ((OTileEntity)b);
+                    chest.k.getCanaryDimension().dropItem(chest.l, chest.m, chest.n, itemId, amount, 0);
+                    remaining = 0;
+                } else {
+                    addItem(new CanaryItem(itemId, 1, targetSlot));
+                    remaining--;
+                }
+            } else {
+                if (hasItemStack(itemId, 1, 63)) {
+                    Item i = getItem(itemId, 63);
+                    
+                    if (i != null) {
+                        int freeSpace = 64 - i.getAmount();
+                        int toAdd = 0;
+                        if (remaining > freeSpace) {
+                            toAdd = freeSpace;
+                            remaining -= freeSpace;
+                        } else {
+                            toAdd = remaining;
+                            remaining = 0;
+                        }
+                        i.setAmount(i.getAmount() + toAdd);
+                        addItem(i);
+                    }
+                } else {
+                    int targetSlot = getEmptySlot();
+                    
+                    if (targetSlot == -1) {
+                        OTileEntity chest = ((OTileEntity)b);
+                        chest.k.getCanaryDimension().dropItem(chest.l, chest.m, chest.n, itemId, amount, 0);
+                        remaining = 0;
+                    } else {
+                        if (remaining > 64) {
+                            addItem(new CanaryItem(itemId, 64, targetSlot));
+                            remaining -= 64;
+                        } else {
+                            addItem(new CanaryItem(itemId, remaining, targetSlot));
+                            remaining = 0;
+                        }
+                    }
+                }
+            }
+            
+        } while (remaining > 0);
+    }
+
+    @Override
+    public void addItem(Item item) {
+        if (item == null) {
+            return;
+        }
+
+        int slot = item.getSlot();
+        int size = getInventorySize();
+
+        if (slot < size && slot >= 0) {
+            if (item.getAmount() <= 0) {
+                removeItem(slot);
+            } else if (ItemType.fromId(item.getId()) != null) {
+                setSlot(slot, new OItemStack(item.getId(), item.getAmount(), item.getDamage()));
+            }
+        } else if (slot == -1) {
+            int newSlot = getEmptySlot();
+
+            if (newSlot != -1) {
+                setSlot(newSlot, new OItemStack(item.getId(), item.getAmount(), item.getDamage()));
+                item.setSlot(newSlot);
+            }
+        }
+    }
+
+    @Override
+    public int getEmptySlot() {
+        int size = getInventorySize();
+
+        for (int i = 0; size > i; i++) {
+            if (getSlot(i) != null) {
+                continue;
+            }
+            return i;
+        }
+
+        return -1;
+    }
+
+    @Override
+    public boolean hasItemStack(int itemId, int amount) {
+        return b.hasItemStack(itemId, amount) || c.hasItemStack(itemId, amount);
+    }
+
+    @Override
+    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
+        return b.hasItemStack(itemId, minAmount, maxAmount) || c.hasItemStack(itemId, minAmount, maxAmount);
     }
     //CanaryMod end - Container
 }

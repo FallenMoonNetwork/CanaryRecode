@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.inventory.CanaryInventory;
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Container;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
@@ -21,7 +22,7 @@ import net.minecraft.server.OItemPotion;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OTileEntityDispenser;
 
-public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Container<OItemStack>{
+public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Container<Item>{
     private Random random = new Random();
 
     public CanaryDispenser(OTileEntityDispenser tileentity) {
@@ -30,7 +31,7 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
 
     @Override
     public Inventory getInventory() {
-        return new CanaryInventory(this);
+        return new CanaryInventory(((OTileEntityDispenser)tileentity));
     }
     
     public Entity activate(){
@@ -142,13 +143,19 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
     }
 
     @Override
-    public OItemStack decreaseItemStackSize(int arg0, int arg1) {
-        return ((OTileEntityDispenser)tileentity).decreaseItemStackSize(arg0, arg1);
+    public CanaryItem decreaseItemStackSize(int arg0, int arg1) {
+        return ((OTileEntityDispenser)tileentity).decreaseItemStackSize(arg0, arg1).getCanaryItem();
     }
 
     @Override
-    public OItemStack[] getContents() {
-        return ((OTileEntityDispenser)tileentity).getContents();
+    public CanaryItem[] getContents() {
+        OItemStack[] oStacks = ((OTileEntityDispenser)tileentity).getContents();
+        CanaryItem[] items = new CanaryItem[oStacks.length];
+        for(int i = 0; i < oStacks.length; i++) {
+            items[i] = new CanaryItem(oStacks[i]);
+        }
+        
+        return items;
     }
 
     @Override
@@ -177,8 +184,8 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
     }
 
     @Override
-    public OItemStack getSlot(int index) {
-        return ((OTileEntityDispenser)tileentity).getSlot(index);
+    public Item getSlot(int index) {
+        return ((OTileEntityDispenser)tileentity).getSlot(index).getCanaryItem();
     }
 
     @Override
@@ -187,8 +194,8 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
     }
 
     @Override
-    public boolean hasItemStack(OItemStack oItemStack) {
-       return ((OTileEntityDispenser)tileentity).hasItemStack(oItemStack);
+    public boolean hasItemStack(Item item) {
+       return ((OTileEntityDispenser)tileentity).hasItemStack(((CanaryItem)item).getHandle());
     }
 
     @Override
@@ -202,8 +209,17 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
     }
 
     @Override
-    public void setContents(OItemStack[] values) {
-        ((OTileEntityDispenser)tileentity).setContents(values);
+    public void setContents(Item[] items) {
+        OItemStack[] oStacks = new OItemStack[items.length];
+        for(int i = 0; i < items.length; i++) {
+            if(items[i] != null) {
+                oStacks[i] = ((CanaryItem)items[i]).getHandle();
+            }
+            else {
+                oStacks[i] = null;
+            }
+        }
+        ((OTileEntityDispenser)tileentity).setContents(oStacks);
     }
 
     @Override
@@ -212,11 +228,36 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
     }
 
     @Override
-    public void setSlot(int index, OItemStack value) {
-        ((OTileEntityDispenser)tileentity).setSlot(index, value);
+    public void setSlot(int index, Item value) {
+        ((OTileEntityDispenser)tileentity).setSlot(index, ((CanaryItem)value).getHandle());
     }
     
     public OTileEntityDispenser getHandle(){
         return (OTileEntityDispenser)tileentity;
+    }
+
+    @Override
+    public void addItem(int itemId, int amount) {
+        ((OTileEntityDispenser)tileentity).addItem(itemId, amount);
+    }
+
+    @Override
+    public void addItem(Item item) {
+        ((OTileEntityDispenser)tileentity).addItem(item);
+    }
+
+    @Override
+    public int getEmptySlot() {
+        return ((OTileEntityDispenser)tileentity).getEmptySlot();
+    }
+
+    @Override
+    public boolean hasItemStack(int itemId, int amount) {
+        return ((OTileEntityDispenser)tileentity).hasItemStack(itemId, amount);
+    }
+
+    @Override
+    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
+        return ((OTileEntityDispenser)tileentity).hasItemStack(itemId, minAmount, maxAmount);
     }
 }

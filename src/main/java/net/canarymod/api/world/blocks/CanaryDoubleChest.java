@@ -1,6 +1,7 @@
 package net.canarymod.api.world.blocks;
 
 import net.canarymod.api.inventory.CanaryInventory;
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OInventoryLargeChest;
@@ -17,7 +18,7 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest{
     
     @Override
     public Inventory getInventory(){
-        return new CanaryInventory(this);
+        return new CanaryInventory((OTileEntityChest)tileentity);
     }
     
     @Override
@@ -26,13 +27,19 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest{
     }
 
     @Override
-    public OItemStack decreaseItemStackSize(int arg0, int arg1) {
-        return largechest.decreaseItemStackSize(arg0, arg1);
+    public CanaryItem decreaseItemStackSize(int arg0, int arg1) {
+        return largechest.decreaseItemStackSize(arg0, arg1).getCanaryItem();
     }
 
     @Override
-    public OItemStack[] getContents() {
-        return largechest.getContents();
+    public CanaryItem[] getContents() {
+        OItemStack[] oStacks = largechest.getContents();
+        CanaryItem[] items = new CanaryItem[oStacks.length];
+        for(int i = 0; i < oStacks.length; i++) {
+            items[i] = new CanaryItem(oStacks[i]);
+        }
+        
+        return items;
     }
 
     @Override
@@ -61,8 +68,8 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest{
     }
 
     @Override
-    public OItemStack getSlot(int index) {
-        return largechest.getSlot(index);
+    public CanaryItem getSlot(int index) {
+        return largechest.getSlot(index).getCanaryItem();
     }
 
     @Override
@@ -71,8 +78,8 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest{
     }
 
     @Override
-    public boolean hasItemStack(OItemStack oItemStack) {
-       return largechest.hasItemStack(oItemStack);
+    public boolean hasItemStack(Item item) {
+       return largechest.hasItemStack(((CanaryItem) item).getHandle());
     }
 
     @Override
@@ -86,8 +93,17 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest{
     }
 
     @Override
-    public void setContents(OItemStack[] values) {
-        largechest.setContents(values);
+    public void setContents(Item[] items) {
+        OItemStack[] oStacks = new OItemStack[items.length];
+        for(int i = 0; i < items.length; i++) {
+            if(items[i] != null) {
+                oStacks[i] = ((CanaryItem)items[i]).getHandle();
+            }
+            else {
+                oStacks[i] = null;
+            }
+        }
+        largechest.setContents(oStacks);
     }
 
     @Override
@@ -96,12 +112,8 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest{
     }
 
     @Override
-    public void setSlot(int index, OItemStack value) {
-        largechest.setSlot(index, value);
-    }
-    
-    public OInventoryLargeChest getHandle(){
-        return largechest;
+    public void setSlot(int index, Item value) {
+        largechest.setSlot(index, ((CanaryItem)value).getHandle());
     }
     
     public OTileEntityChest getHandleA(){

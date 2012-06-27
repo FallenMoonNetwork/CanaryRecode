@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import net.canarymod.api.entity.Player;
 import net.canarymod.api.inventory.Container;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItemStack;

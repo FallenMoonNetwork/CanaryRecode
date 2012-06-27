@@ -1,6 +1,7 @@
 package net.canarymod.serialize;
 
 import net.canarymod.CanaryDeserializeException;
+import net.canarymod.Logman;
 import net.canarymod.api.CanaryEnchantment;
 import net.canarymod.api.Enchantment;
 import net.canarymod.api.inventory.CanaryItem;
@@ -22,10 +23,10 @@ public class ItemSerializer implements Serializer<CanaryItem> {
         if(item.length < 4) {
             throw new CanaryDeserializeException("Could not deserialize Item. Expected fields 4. Found: "+item.length, getVendor());
         }
-        id = parseInt(split[0]);
-        meta = parseInt(split[1]);
-        amount = parseInt(split[2]);
-        slot = parseInt(split[3]);
+        id = parseInt(item[0]);
+        meta = parseInt(item[1]);
+        amount = parseInt(item[2]);
+        slot = parseInt(item[3]);
         CanaryItem citem = new CanaryItem(new OItemStack(id, amount, meta));
         citem.setSlot(slot);
         if(enchantments != null) {
@@ -40,6 +41,7 @@ public class ItemSerializer implements Serializer<CanaryItem> {
     @Override
     public String serialize(Object obje) {
         if(!(obje instanceof CanaryItem)) {
+            Logman.logInfo("Received object type does not match. Expected CanaryItem. Found: "+obje.getClass().getSimpleName());
             return null;
         }
         CanaryItem obj = (CanaryItem) obje;

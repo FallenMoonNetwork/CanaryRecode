@@ -1,5 +1,8 @@
 package net.canarymod.api.inventory;
 
+import java.util.ArrayList;
+
+import net.canarymod.Logman;
 import net.minecraft.server.OItemStack;
 
 public class CanaryInventory implements Inventory{
@@ -22,6 +25,7 @@ public class CanaryInventory implements Inventory{
     @Override
     public void addItem(Item item) {
         if (item == null) {
+            Logman.logInfo("Given item was null");
             return;
         }
         int slot = item.getSlot();
@@ -57,11 +61,20 @@ public class CanaryInventory implements Inventory{
     @Override
     public Item[] getContents() {
         OItemStack[] oStacks = container.getContents();
-        Item[] items = new Item[oStacks.length];
+        ArrayList<Item> items = new ArrayList<Item>(oStacks.length);
         for(int i = 0; i < oStacks.length; i++) {
-            items[i] = oStacks[i].getCanaryItem();
+            if(oStacks[i] != null) {
+                items.add(new CanaryItem(oStacks[i]));
+            }
         }
-        return items;
+        Item[] itemStacks = new Item[items.size()];
+        for(int i = 0; i < items.size(); i++) {
+            Logman.println("Item ID: "+items.get(i).getId());
+            Logman.println("Item Amount: "+items.get(i).getAmount());
+            Logman.println("Item Data: "+items.get(i).getDamage());
+            itemStacks[i] = items.get(i);
+        }
+        return itemStacks;
     }
 
     @Override
@@ -130,10 +143,11 @@ public class CanaryInventory implements Inventory{
     }
 
     @Override
-    public void removeItem(Item item) {
+    public Item removeItem(Item item) {
         if(container.hasItem(item.getId())) {
-            container.removeItem(item);
+            return container.removeItem(item);
         }
+        return null;
     }
 
     @Override
@@ -176,6 +190,67 @@ public class CanaryInventory implements Inventory{
     @Override
     public void clearContents() {
         container.clearContents();
+    }
+
+    @Override
+    public void setContents(Item[] items) {
+        OItemStack[] oStacks = new OItemStack[items.length];
+        for(int i = 0; i < items.length; i++) {
+            oStacks[i] = ((CanaryItem)items[i]).getHandle();
+        }
+        container.setContents(oStacks);
+        
+    }
+
+    @Override
+    public void setSlot(int index, Item value) {
+        container.setSlot(index, ((CanaryItem)value).getHandle());
+    }
+
+    @Override
+    public int getInventorySize() {
+        return container.getInventorySize();
+    }
+
+    @Override
+    public String getInventoryName() {
+        return container.getInventoryName();
+    }
+
+    @Override
+    public void setInventoryName(String value) {
+        container.setInventoryName(value);
+    }
+
+    @Override
+    public Item decreaseItemStackSize(int itemId, int amount) {
+        OItemStack oStack = container.decreaseItemStackSize(itemId, amount);
+        return new CanaryItem(oStack);
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+        return container.getInventoryStackLimit();
+    }
+
+    @Override
+    public boolean hasItemStack(Item item) {
+        return hasItemStack(item.getId(), item.getAmount());
+    }
+
+    @Override
+    public boolean hasItemStack(int itemId, int amount) {
+        return container.hasItemStack(itemId, amount);
+    }
+
+    @Override
+    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
+        return container.hasItemStack(itemId, minAmount, maxAmount);
+    }
+
+    @Override
+    public void update() {
+        container.update();
     }
 
 }

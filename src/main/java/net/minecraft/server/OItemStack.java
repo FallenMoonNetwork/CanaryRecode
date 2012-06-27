@@ -25,7 +25,7 @@ public final class OItemStack {
     private int e; //damage
     
     //CanaryMod itemstack Handler
-    private CanaryItem item;
+    private CanaryItem item = new CanaryItem(this);
 
     public OItemStack(OBlock var1) {
         this(var1, 1);
@@ -53,7 +53,6 @@ public final class OItemStack {
 
     public OItemStack(int itemId, int amount, int damage) {
         super();
-        this.a = 0;
         this.c = itemId;
         this.a = amount;
         this.e = damage;
@@ -69,6 +68,7 @@ public final class OItemStack {
     private OItemStack() {
         super();
         this.a = 0;
+        item = new CanaryItem(this);
     }
     
     //CanaryMod start

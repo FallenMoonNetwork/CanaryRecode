@@ -2,7 +2,9 @@ package net.minecraft.server;
 
 import java.util.Arrays;
 
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
+import net.canarymod.api.inventory.ItemType;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityPlayer;
@@ -493,7 +495,7 @@ public class OInventoryPlayer implements OIInventory {
     
     @Override
     public void update(){
-        //G_(); this is wrong for Player...
+        d.F_();
     }
     
     public boolean hasItemStack(OItemStack var1) {
@@ -547,4 +549,144 @@ public class OInventoryPlayer implements OIInventory {
         }
         return false;
     }
+    
+    @Override
+    public boolean hasItemStack(int itemId, int amount) {
+        int var2;
+        for (var2 = 0; var2 < this.a.length; ++var2) {
+            if (this.a[var2] != null && this.a[var2].c == itemId && this.a[var2].a == amount) {
+                return true;
+            }
+        }
+        for (var2 = 0; var2 < this.b.length; ++var2) {
+            if (this.b[var2] != null && this.b[var2].c == itemId && this.b[var2].a == amount) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
+        int var2;
+        for (var2 = 0; var2 < this.a.length; ++var2) {
+            if (this.a[var2] != null && this.a[var2].c == itemId && (this.a[var2].a >= minAmount || this.a[var2].a <= maxAmount)) {
+                return true;
+            }
+        }
+        for (var2 = 0; var2 < this.b.length; ++var2) {
+            if (this.b[var2] != null && this.b[var2].c == itemId && (this.b[var2].a >= minAmount || this.b[var2].a <= maxAmount)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void addItem(int itemId, int amount) {
+        int remaining = amount;
+
+        do {
+            // Do not allow stacking of enchantable items,
+            // this is to prevent enchantment duping.
+            //
+            // Could do with a cleanup into a single function, 
+            // but this works for now.
+            if (((itemId >= 256 && itemId <= 258) || 
+                 (itemId >= 267 && itemId <= 279) || 
+                 (itemId >= 283 && itemId <= 286) ||
+                 (itemId >= 298 && itemId <= 317) ||
+                 (itemId == 261))) {
+                int targetSlot = getEmptySlot();
+                
+                if (targetSlot == -1) {
+                    // Drop whatever is left
+                    ((OEntityPlayerMP) d).getPlayer().dropLoot(itemId, remaining);
+                    remaining = 0;
+                } else {
+                    addItem(new CanaryItem(itemId, 1, targetSlot));
+                    remaining--;
+                }
+            } else {
+                if (hasItemStack(itemId, 1, 63)) {
+                    Item i = getItem(itemId, 63);
+                    
+                    if (i != null) {
+                        int freeSpace = 64 - i.getAmount();
+                        int toAdd = 0;
+                        if (remaining > freeSpace) {
+                            toAdd = freeSpace;
+                            remaining -= freeSpace;
+                        } else {
+                            toAdd = remaining;
+                            remaining = 0;
+                        }
+                        i.setAmount(i.getAmount() + toAdd);
+                        addItem(i);
+                    }
+                } else {
+                    int targetSlot = getEmptySlot();
+                    
+                    if (targetSlot == -1) {
+                        // Drop whatever is left
+//                        ((OEntityPlayerMP) d).getPlayer().giveItemDrop(itemId, remaining);
+                        ((OEntityPlayerMP) d).getPlayer().dropLoot(itemId, remaining);
+                        remaining = 0;
+                    } else {
+                        if (remaining > 64) {
+                            addItem(new CanaryItem(itemId, 64, targetSlot));
+                            remaining -= 64;
+                        } else {
+                            addItem(new CanaryItem(itemId, remaining, targetSlot));
+                            remaining = 0;
+                        }
+                    }
+                }
+            }
+            
+        } while (remaining > 0);
+    }
+
+    @Override
+    public void addItem(Item item) {
+        if (item == null) {
+            return;
+        }
+
+        int slot = item.getSlot();
+        int size = getInventorySize();
+
+        if (slot < size && slot >= 0) {
+            if (item.getAmount() <= 0) {
+                removeItem(slot);
+            } else if (ItemType.fromId(item.getId()) != null) {
+                setSlot(slot, new OItemStack(item.getId(), item.getAmount(), item.getDamage()));
+            }
+        } else if (slot == -1) {
+            int newSlot = getEmptySlot();
+
+            if (newSlot != -1) {
+                setSlot(newSlot, new OItemStack(item.getId(), item.getAmount(), item.getDamage()));
+                item.setSlot(newSlot);
+            }
+        }
+    }
+
+    @Override
+    public int getEmptySlot() {
+        int size = getInventorySize();
+
+        for (int i = 0; size > i; i++) {
+            if (getSlot(i) != null) {
+                continue;
+            }
+            return i;
+        }
+
+        return -1;
+    }
+    
+    
+    //CanaryMod Container End
+
 }

@@ -22,6 +22,12 @@ public class CanaryItem implements Item {
         item = new OItemStack(id, amount, 0);
     }
 
+    public CanaryItem(int itemId, int amount, int targetSlot) {
+        item = new OItemStack(itemId, amount, 0);
+        slot = targetSlot;
+        type = ItemType.fromId(itemId);
+    }
+
     @Override
     public int getId() {
         return type.getId();
@@ -72,7 +78,6 @@ public class CanaryItem implements Item {
     @Override
     public void setSlot(int slot) {
         this.slot = slot;
-
     }
 
     @Override
