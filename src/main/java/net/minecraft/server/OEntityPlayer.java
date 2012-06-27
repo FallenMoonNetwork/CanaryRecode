@@ -97,8 +97,6 @@ public abstract class OEntityPlayer extends OEntityLiving {
     protected float P = 0.1F;
     protected float Q = 0.02F;
     public OEntityFishHook R = null;
-    
-    private Inventory inventory = new CanaryPlayerInventory(k); //CanaryMod
 
     public OEntityPlayer(OWorld var1) {
         super(var1);
@@ -1238,7 +1236,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
     
     //CanaryMod start
     public Inventory getInventory(){
-        return inventory;
+        return k.getInventory();
     }
     //CanaryMod end
 }

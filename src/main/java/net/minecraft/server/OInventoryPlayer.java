@@ -2,7 +2,9 @@ package net.minecraft.server;
 
 import java.util.Arrays;
 
+import net.canarymod.Logman;
 import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
 import net.minecraft.server.OBlock;
@@ -24,14 +26,20 @@ public class OInventoryPlayer implements OIInventory {
    private OItemStack f;
    public boolean e = false;
    private String name = "container.inventory"; //CanaryMod
+   private CanaryPlayerInventory inventory;
 
 
-   public OInventoryPlayer(OEntityPlayer var1) {
-      super();
-      this.d = var1;
-   }
+    public OInventoryPlayer(OEntityPlayer var1) {
+        super();
+        this.d = var1;
+        inventory = new CanaryPlayerInventory(this);
+    }
 
-   public OItemStack d() {
+    public CanaryPlayerInventory getInventory() {
+        return inventory;
+    }
+
+public OItemStack d() {
       return this.c < 9 && this.c >= 0 ? this.a[this.c] : null;
    }
 
@@ -226,10 +234,10 @@ public class OInventoryPlayer implements OIInventory {
          var1 -= var3.length;
          var3 = this.b;
       }
-
+      Logman.println("Setting slot "+var1 + " with "+var2);
       var3[var1] = var2;
+      Logman.println("=============================================");
    }
-
    public float a(OBlock var1) {
       float var2 = 1.0F;
       if(this.a[this.c] != null) {
@@ -432,7 +440,11 @@ public class OInventoryPlayer implements OIInventory {
     
     @Override
     public OItemStack getSlot(int index) {
-        return b(index);
+        OItemStack stack = this.b(index);
+        if(stack != null) {
+            return stack;
+        }
+        return null;
     }
 
     @Override
@@ -470,6 +482,9 @@ public class OInventoryPlayer implements OIInventory {
     @Override
     public Item getItem(int id, int amount) {
         for(OItemStack stack : getContents()) {
+            if(stack == null) {
+                continue;
+            }
             if(stack.c == id && stack.a == amount) {
                 return stack.getCanaryItem();
             }
@@ -517,7 +532,11 @@ public class OInventoryPlayer implements OIInventory {
 
     @Override
     public OItemStack decreaseItemStackSize(int arg0, int arg1) {
-        return a(arg0, arg1);
+        OItemStack stack = a(arg0, arg1);
+        if(stack != null) {
+            return stack;
+        }
+        return new OItemStack(0,0,0);
     }
 
     @Override
@@ -570,12 +589,12 @@ public class OInventoryPlayer implements OIInventory {
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
         int var2;
         for (var2 = 0; var2 < this.a.length; ++var2) {
-            if (this.a[var2] != null && this.a[var2].c == itemId && (this.a[var2].a >= minAmount || this.a[var2].a <= maxAmount)) {
+            if (this.a[var2] != null && this.a[var2].c == itemId && (this.a[var2].a >= minAmount && this.a[var2].a <= maxAmount)) {
                 return true;
             }
         }
         for (var2 = 0; var2 < this.b.length; ++var2) {
-            if (this.b[var2] != null && this.b[var2].c == itemId && (this.b[var2].a >= minAmount || this.b[var2].a <= maxAmount)) {
+            if (this.b[var2] != null && this.b[var2].c == itemId && (this.b[var2].a >= minAmount && this.b[var2].a <= maxAmount)) {
                 return true;
             }
         }
@@ -585,13 +604,8 @@ public class OInventoryPlayer implements OIInventory {
     @Override
     public void addItem(int itemId, int amount) {
         int remaining = amount;
-
+        Logman.println("Adding Item: "+itemId+"x"+amount);
         do {
-            // Do not allow stacking of enchantable items,
-            // this is to prevent enchantment duping.
-            //
-            // Could do with a cleanup into a single function, 
-            // but this works for now.
             if (((itemId >= 256 && itemId <= 258) || 
                  (itemId >= 267 && itemId <= 279) || 
                  (itemId >= 283 && itemId <= 286) ||
@@ -604,32 +618,38 @@ public class OInventoryPlayer implements OIInventory {
                     ((OEntityPlayerMP) d).getPlayer().dropLoot(itemId, remaining);
                     remaining = 0;
                 } else {
-                    addItem(new CanaryItem(itemId, 1, targetSlot));
+                    addItem(new CanaryItem(itemId, amount, targetSlot));
                     remaining--;
                 }
-            } else {
+            } 
+            else {
                 if (hasItemStack(itemId, 1, 63)) {
                     Item i = getItem(itemId, 63);
-                    
+                    Logman.println("Running");
                     if (i != null) {
+                        Logman.println("Item not null");
                         int freeSpace = 64 - i.getAmount();
                         int toAdd = 0;
                         if (remaining > freeSpace) {
                             toAdd = freeSpace;
                             remaining -= freeSpace;
-                        } else {
+                        } 
+                        else {
                             toAdd = remaining;
                             remaining = 0;
                         }
                         i.setAmount(i.getAmount() + toAdd);
                         addItem(i);
                     }
-                } else {
+                } 
+                else {
+                    
                     int targetSlot = getEmptySlot();
                     
                     if (targetSlot == -1) {
                         // Drop whatever is left
 //                        ((OEntityPlayerMP) d).getPlayer().giveItemDrop(itemId, remaining);
+                        Logman.println("Inventory full, dropping items");
                         ((OEntityPlayerMP) d).getPlayer().dropLoot(itemId, remaining);
                         remaining = 0;
                     } else {
@@ -642,8 +662,8 @@ public class OInventoryPlayer implements OIInventory {
                         }
                     }
                 }
+                
             }
-            
         } while (remaining > 0);
     }
 
@@ -652,7 +672,6 @@ public class OInventoryPlayer implements OIInventory {
         if (item == null) {
             return;
         }
-
         int slot = item.getSlot();
         int size = getInventorySize();
 
@@ -674,10 +693,9 @@ public class OInventoryPlayer implements OIInventory {
 
     @Override
     public int getEmptySlot() {
-        int size = getInventorySize();
-
-        for (int i = 0; size > i; i++) {
-            if (getSlot(i) != null) {
+        OItemStack[] contents = getContents();
+        for (int i = 0; contents.length > i; i++) {
+            if (contents[i] != null) {
                 continue;
             }
             return i;

@@ -19,32 +19,12 @@ public class CanaryInventory implements Inventory{
     
     @Override
     public void addItem(int id, int amount) {
-        addItem(new CanaryItem(new OItemStack(id, amount, 0)));
+        container.addItem(id, amount);
     }
 
     @Override
     public void addItem(Item item) {
-        if (item == null) {
-            Logman.logInfo("Given item was null");
-            return;
-        }
-        int slot = item.getSlot();
-        int size = getSize();
-
-        if (slot < size && slot >= 0) {
-            if (item.getAmount() <= 0) {
-                removeItem(slot);
-            } else {
-                setSlot(item);
-            }
-        } else if (slot == -1) {
-            int newSlot = getEmptySlot();
-
-            if (newSlot != -1) {
-                item.setSlot(newSlot);
-                setSlot(item);
-            }
-        }
+        container.addItem(item);
     }
 
     @Override
@@ -79,16 +59,7 @@ public class CanaryInventory implements Inventory{
 
     @Override
     public int getEmptySlot() {
-        int size = getSize();
-
-        for (int index = 0; size > index; index++) {
-            if (container.getSlot(index) != null){
-                continue;
-            }
-            return index;
-        }
-
-        return -1;
+        return container.getEmptySlot();
     }
 
     @Override
@@ -138,24 +109,18 @@ public class CanaryInventory implements Inventory{
 
     @Override
     public boolean insertItem(Item item) {
-        
-        return false;
+        container.addItem(item);
+        return true;
     }
 
     @Override
     public Item removeItem(Item item) {
-        if(container.hasItem(item.getId())) {
-            return container.removeItem(item);
-        }
-        return null;
+        return container.removeItem(item);
     }
 
     @Override
     public Item removeItem(int itemId) {
-        if(container.hasItem(itemId)) {
-            return container.removeItem(itemId);
-        }
-        return null;
+        return container.removeItem(itemId);
     }
 
     @Override
@@ -182,11 +147,6 @@ public class CanaryInventory implements Inventory{
         return new CanaryItem(container.getSlot(slot));
     }
 
-    @Override
-    public void updateInventory() {
-        container.update();
-    }
-    
     @Override
     public void clearContents() {
         container.clearContents();
