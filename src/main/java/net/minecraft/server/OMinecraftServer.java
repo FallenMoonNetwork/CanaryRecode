@@ -29,6 +29,7 @@ import net.canarymod.api.world.Dimension.Type;
 import net.canarymod.api.world.World;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.WorldConfiguration;
+import net.canarymod.gui.CanaryGUI;
 import net.minecraft.server.OAnvilSaveConverter;
 import net.minecraft.server.OAnvilSaveHandler;
 import net.minecraft.server.OAxisAlignedBB;
@@ -668,7 +669,9 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         try {
             OMinecraftServer var1 = new OMinecraftServer();
             if (!GraphicsEnvironment.isHeadless() && (var0.length <= 0 || !var0[0].equals("nogui"))) {
-                OServerGUI.a(var1);
+                //OServerGUI.a(var1);
+                // CanaryMod: replace VanillaGUI with CanaryGUI
+                CanaryGUI.init();
             }
 
             (new OThreadServerApplication("Server thread", var1)).start();
