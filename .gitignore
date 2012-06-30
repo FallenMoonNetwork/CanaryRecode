@@ -7,3 +7,4 @@
 *.jar
 bin/*
 /target/
+*.prefs
