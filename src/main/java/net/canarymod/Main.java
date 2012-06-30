@@ -12,8 +12,7 @@ public class Main {
      */
     public static void main(String[] args) {
         //Initialize the deadlock detector
-        new DeadLockDetector();
-        
+
         //Initialize the bird
         CanaryMod mod = new CanaryMod();
         Canary.setCanary(mod);
