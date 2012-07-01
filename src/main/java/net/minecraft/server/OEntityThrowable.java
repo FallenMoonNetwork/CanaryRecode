@@ -56,7 +56,9 @@ public abstract class OEntityThrowable extends OEntity {
         this.c(var2, var4, var6);
         this.bF = 0.0F;
     }
-
+    public OEntityLiving getSource(){
+        return this.c;
+    }
     protected float c() {
         return 1.5F;
     }
