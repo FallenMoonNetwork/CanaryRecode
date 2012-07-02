@@ -23,7 +23,7 @@ OEntityThrowable thrown;
         CanaryEntityLiving entity = sourcenotchian.getCanaryEntityLiving();
         return entity;
     }
-    public OEntityThrowable getHandle(){
+    public OEntityThrowable getEntity(){
         return thrown;
     }
     @Override

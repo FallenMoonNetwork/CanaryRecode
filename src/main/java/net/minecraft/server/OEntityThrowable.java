@@ -29,7 +29,7 @@ public abstract class OEntityThrowable extends OEntity {
         super(var1);
         this.b(0.25F, 0.25F);
     }
-    public CanaryEntityThrowable getHandler(){
+    public CanaryEntityThrowable getCanaryClass(){
         return handler;
     }
 
