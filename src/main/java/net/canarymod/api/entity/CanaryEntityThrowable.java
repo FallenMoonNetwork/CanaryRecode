@@ -9,9 +9,9 @@ import net.minecraft.server.OEntitySnowball;
 import net.minecraft.server.OEntityThrowable;
 import net.minecraft.server.OWorld;
 
-public class CanaryThrowable extends CanaryEntity implements EntityThrowable{
+public class CanaryEntityThrowable extends CanaryEntity implements EntityThrowable{
 OEntityThrowable thrown;
-    public CanaryThrowable(OEntityThrowable entity) {
+    public CanaryEntityThrowable(OEntityThrowable entity) {
         super(entity);
         thrown = entity;
         // TODO Auto-generated constructor stub
