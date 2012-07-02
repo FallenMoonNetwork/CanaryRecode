@@ -18,24 +18,28 @@ OEntityThrowable thrown;
     }
 
     @Override
-    public CanaryEntityLiving getSource() {
+    public EntityLiving getSource() {
         OEntityLiving sourcenotchian = thrown.getSource();
         CanaryEntityLiving entity = sourcenotchian.getCanaryEntityLiving();
         return entity;
     }
-
+    public OEntityThrowable getHandle(){
+        return thrown;
+    }
     @Override
-    public String getType() {
+    public ThrowableType getType() {
         if (entity instanceof OEntitySnowball){
-            return "snowball";
+            return ThrowableType.SNOWBALL;
         }
         if (entity instanceof OEntityEgg){
-            return "egg";
+            return ThrowableType.EGG;
         }
         if (entity instanceof OEntityThrowable){
-            return "enderpearl";
+            return ThrowableType.ENDERPEARL;
         }
-        return null;
+        else{
+            return null;
+        }
     }
 
 

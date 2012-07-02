@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
 import java.util.List;
+
+import net.canarymod.api.entity.CanaryThrowable;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityLiving;
@@ -22,10 +24,13 @@ public abstract class OEntityThrowable extends OEntity {
     protected OEntityLiving c;
     private int h;
     private int i = 0;
-
+    CanaryThrowable handler;
     public OEntityThrowable(OWorld var1) {
         super(var1);
         this.b(0.25F, 0.25F);
+    }
+    public CanaryThrowable getHandler(){
+        return handler;
     }
 
     @Override
