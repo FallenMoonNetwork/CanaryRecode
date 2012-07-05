@@ -263,7 +263,8 @@ public abstract class OEntity {
                 if (this.c % 20 == 0) {
                     // CanaryMod - fire tick damage. 
                     if (this instanceof OEntityLiving) {
-                        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.c), 1));
+                        DamageHook hook = new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.c), 1);
+                        Canary.hooks().callHook(hook);
                         if (!hook.isCanceled()) {
                             this.a(ODamageSource.c, 1);
                         }
@@ -297,7 +298,8 @@ public abstract class OEntity {
         if (!this.bX) {
             // CanaryMod - lava damage.
             if (this instanceof OEntityLiving) { 
-                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.d), 4));
+                DamageHook hook = new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.d), 4);
+                Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
                     return;
                 }
@@ -647,7 +649,8 @@ public abstract class OEntity {
         if (!this.bX) {
             // CanaryMod - fire damage. 
             if (this instanceof OEntityLiving) {
-                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.b), var1));
+                DamageHook hook = new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.b), var1);
+                Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     this.a(ODamageSource.b, var1);
                 }
@@ -1143,7 +1146,8 @@ public abstract class OEntity {
         // CanaryMod - lightning damage. 
         // Note: At the moment this damage is counted as fire damage. 
         if (this instanceof OEntityLiving) {
-            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.b), 5));
+            DamageHook hook = new DamageHook(null, ((OEntityLiving) this).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.b), 5);
+            Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return;
             }

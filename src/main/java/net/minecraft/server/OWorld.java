@@ -832,12 +832,13 @@ public class OWorld implements OIBlockAccess {
         
         //CanaryMod start - EntitySpawnHook
         if(!(var1 instanceof OEntityPlayer)){
-            CancelableHook hook = null;
+            EntitySpawnHook hook = null;
             if(var1 instanceof OEntityLiving){
                 //implement MobSpawnRate Here!
             }
-            hook = (CancelableHook) Canary.hooks().callCancelableHook(new EntitySpawnHook(var1.getCanaryEntity(), true, (var1 instanceof OEntityLiving)));
-            if(hook.isCanceled()){
+            hook = new EntitySpawnHook(var1.getCanaryEntity(), true);
+            Canary.hooks().callHook(hook);
+            if(hook.isCanceled()) {
                 return false;
             }
         }

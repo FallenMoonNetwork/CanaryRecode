@@ -132,7 +132,8 @@ public class ONetLoginHandler extends ONetHandler {
             var5.b((new OPacket202PlayerAbilities(var2.L)));
             this.e.h.a(var2, var3);
             
-            ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(var2.getPlayer(), Colors.Yellow + var2.getPlayer().getName() + " joined the game.", null));
+            ConnectionHook hook = new ConnectionHook(var2.getPlayer(), Colors.Yellow + var2.getPlayer().getName() + " joined the game.", null);
+            Canary.hooks().callHook(hook);
             if (!hook.isHidden()) {
                 this.e.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
             }

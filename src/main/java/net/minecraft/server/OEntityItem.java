@@ -111,7 +111,8 @@ public class OEntityItem extends OEntity {
 
         ++this.b;
         if (this.b >= 6000) {
-            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new EntitySpawnHook(this.getCanaryEntity(), false, false)); //CanaryMod - EntityDespawn
+            EntitySpawnHook hook = new EntitySpawnHook(this.getCanaryEntity(), false);
+            Canary.hooks().callHook(hook); //CanaryMod - EntityDespawn
             if(!hook.isCanceled()){
                 this.X();
             }

@@ -56,7 +56,8 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
                 if (var3 != this) {
                     //CanaryMod start - onDamage
                     if(var3 instanceof OEntityPlayer){
-                        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(this.getCanaryEntityLiving(), ((OEntityLiving)var3).getCanaryEntityLiving().getPlayer()));
+                        MobTargetHook hook = new MobTargetHook(this.getCanaryEntityLiving(), ((OEntityLiving)var3).getCanaryEntityLiving().getPlayer());
+                        Canary.hooks().callHook(hook);
                         if(hook.isCanceled()){
                             return true;
                         }

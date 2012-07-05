@@ -63,7 +63,8 @@ public class OContainerWorkbench extends OContainer {
     public void getCraftResult(OIInventory var1, Player player){
         OItemStack result = OCraftingManager.a().a(this.a);
         if(result != null){
-            CraftHook hook = (CraftHook) Canary.hooks().callHook(new CraftHook(player, result.getCanaryItem(), false));
+            CraftHook hook = new CraftHook(player, result.getCanaryItem(), false);
+            Canary.hooks().callHook(hook);
             result = hook.getCraftResult() != null ? ((CanaryItem)hook.getCraftResult()).getHandle() : null;
         }
         this.b.a(0, result);

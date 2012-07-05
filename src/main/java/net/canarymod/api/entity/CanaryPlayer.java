@@ -109,7 +109,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 ArrayList<Player> receivers = new ArrayList<Player>(Canary.getServer().getPlayerList()); // shadow copy the list for size matching
                 Collections.copy(receivers, Canary.getServer().getPlayerList()); //Fully copy the list
                 
-                ChatHook hook = (ChatHook) Canary.hooks().callCancelableHook(new ChatHook(this, prefix, message, receivers));
+                ChatHook hook = new ChatHook(this, prefix, message, receivers);
+                Canary.hooks().callHook(hook);
                 if(hook.isCanceled()) {
                     return;
                 }
@@ -279,7 +280,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 return true;
             }
             
-            PlayerCommandHook hook = (PlayerCommandHook) Canary.hooks().callCancelableHook(new PlayerCommandHook(this, command));
+            PlayerCommandHook hook = new PlayerCommandHook(this, command);
+            Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return true;
             } // No need to go on, commands were parsed.

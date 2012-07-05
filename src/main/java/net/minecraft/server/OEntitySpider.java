@@ -65,7 +65,8 @@ public class OEntitySpider extends OEntityMob {
         //CanaryMod start - onMobTarget
         OEntityPlayer entityplayer = this.bi.b(this, var2);
         if(entityplayer != null){
-            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(getCanaryEntityLiving(), ((OEntityPlayerMP) entityplayer).getPlayer()));
+            MobTargetHook hook = new MobTargetHook(getCanaryEntityLiving(), ((OEntityPlayerMP) entityplayer).getPlayer());
+            Canary.hooks().callHook(hook);
             if(hook.isCanceled()){
                 return null;
             }

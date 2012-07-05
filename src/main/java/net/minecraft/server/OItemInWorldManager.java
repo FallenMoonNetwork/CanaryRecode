@@ -150,7 +150,8 @@ public class OItemInWorldManager {
         // CanaryMod - Cancel block breaking.
         Block block = ((OEntityPlayerMP)b).getDimension().getBlockAt(var1, var2, var3);
         block.setStatus(1);// Block break status.
-        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new LeftClickHook(((OEntityPlayerMP)b).getPlayer(), block));
+        LeftClickHook hook = new LeftClickHook(((OEntityPlayerMP)b).getPlayer(), block);
+        Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return true;
         }
@@ -185,8 +186,9 @@ public class OItemInWorldManager {
         if (item != null) {
             if (item.a > 0 && item.c != ItemType.Sign.getId() && item.c != ItemType.Bucket.getId() && item.c != ItemType.WaterBucket.getId() && item.c != ItemType.LavaBucket.getId() && item.c != ItemType.MilkBucket.getId()) {
                 if (player instanceof OEntityPlayerMP){
-                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(((OEntityPlayerMP) player).getPlayer(), blockplaced, blockclicked, item.getCanaryItem(), null, Hook.Type.ITEM_USE));
-                    if(hook.isCanceled()){
+                    RightClickHook hook = new RightClickHook(((OEntityPlayerMP) player).getPlayer(), blockplaced, blockclicked, item.getCanaryItem(), null, Hook.Type.ITEM_USE);
+                    Canary.hooks().callHook(hook);
+                    if(hook.isCanceled()) {
                         return false;
                     }
                 }
