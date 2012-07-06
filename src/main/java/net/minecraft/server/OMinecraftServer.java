@@ -139,6 +139,31 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     }
 
     /**
+     * Reload configurations
+     */
+    public void reload() {
+        
+        WorldConfiguration defWorld = Configuration.getWorldConfig(Configuration.getServerConfig().getDefaultWorldName());
+        //this.d = new OPropertyManager(new File("server.properties"));
+        this.y = Configuration.getNetConfig().getBindIp();
+        this.n = Configuration.getNetConfig().isOnlineMode();
+        this.o = defWorld.canSpawnAnimals();
+        this.p = defWorld.canSpawnNpcs();
+        this.q = defWorld.isPvpEnabled();
+        this.r = defWorld.isFlightAllowed();
+        this.s = Configuration.getServerConfig().getMotd();
+        this.s.replace('\u00a7', '$');
+        this.z = Configuration.getNetConfig().getPort();
+        
+        this.t = defWorld.getMaxBuildHeight();
+        this.t = (this.t + 8) / 16 * 16;
+        this.t = OMathHelper.a(this.t, 64, 256);
+        
+        // TODO Update worlds (??)
+        
+    }
+    
+    /**
      * Get the CanaryMod server handler
      * 
      * @return

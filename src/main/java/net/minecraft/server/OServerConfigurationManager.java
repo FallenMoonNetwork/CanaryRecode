@@ -80,7 +80,7 @@ public class OServerConfigurationManager {
         //this.k = var1.a("banned-ips.txt");
         //this.l = var1.a("ops.txt");
         //this.m = var1.a("white-list.txt");
-        int var2 = Configuration.getNetConfig().getViewDistance();
+        //int var2 = Configuration.getNetConfig().getViewDistance();
         // Creates player managers per dimension (MW: create one per dimension per world)
         // this.d[0] = new OPlayerManager(var1, 0, var2);
         // this.d[1] = new OPlayerManager(var1, -1, var2);
@@ -99,6 +99,10 @@ public class OServerConfigurationManager {
         //this.s();
         canaryCfgManager = new CanaryConfigurationManager(this);
         var1.setCanaryConfigurationmanager(canaryCfgManager);
+    }
+    
+    public void reload() {
+        this.e = Configuration.getNetConfig().getMaxPlayers();
     }
 
     /**

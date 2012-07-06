@@ -14,6 +14,11 @@ public class CanaryConfigurationManager implements ConfigurationManager{
     public CanaryConfigurationManager(OServerConfigurationManager man) {
         manager =  man;
     }
+    
+    public OServerConfigurationManager getHandle() {
+        return manager;
+    }
+    
     @Override
     public void sendPacketToAllInWorld(String world, Packet packet) {
         for(OEntityPlayerMP p : manager.b) {

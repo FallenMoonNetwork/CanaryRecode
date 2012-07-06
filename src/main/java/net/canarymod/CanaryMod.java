@@ -12,6 +12,8 @@ import net.canarymod.permissionsystem.PermissionManager;
 import net.canarymod.plugin.PluginLoader;
 import net.canarymod.user.UserAndGroupsProvider;
 import net.canarymod.warp.WarpProvider;
+import net.canarymod.api.CanaryConfigurationManager;
+import net.canarymod.api.CanaryServer;
 
 /**
  * The implementation of Canary, the new catch-all etc replacement, only much better :P
@@ -67,5 +69,15 @@ public class CanaryMod extends Canary {
     
     public void initKits() {
         this.kitProvider = new KitProvider();
+    }
+    
+    @Override
+    public void reload() {
+        super.reload();
+        
+        // Reload minecraft variables
+        ((CanaryConfigurationManager)instance.server.getConfigurationManager()).getHandle().reload();
+        // TODO RCON + QUERY?
+        ((CanaryServer)instance.server).getHandle().reload();
     }
 }

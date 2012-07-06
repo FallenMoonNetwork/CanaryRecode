@@ -1,7 +1,6 @@
 package net.canarymod.api;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import net.canarymod.Canary;
 import net.canarymod.api.ConfigurationManager;
@@ -24,7 +23,6 @@ import net.minecraft.server.OMinecraftServer;
  */
 public class CanaryServer implements Server {
 
-    public static final Logger log = Logger.getLogger("Minecraft");
     private OMinecraftServer server;
 
     /**
@@ -38,7 +36,7 @@ public class CanaryServer implements Server {
 
     @Override
     public String getHostname() {
-        return "localhost"; // Is that really localhost? Jos: no, just had to put something there
+        return "localhost"; // TODO put real hostname here
     }
 
     @Override
