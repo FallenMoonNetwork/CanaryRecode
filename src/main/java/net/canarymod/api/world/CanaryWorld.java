@@ -3,9 +3,9 @@ package net.canarymod.api.world;
 import java.util.ArrayList;
 
 import net.canarymod.Canary;
-import net.canarymod.CanaryServer;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
+import net.canarymod.api.CanaryServer;
 import net.canarymod.api.EntityTracker;
 import net.canarymod.api.entity.Player;
 import net.minecraft.server.OEntityTracker;

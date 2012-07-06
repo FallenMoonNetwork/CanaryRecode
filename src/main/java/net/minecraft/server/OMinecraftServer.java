@@ -15,9 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.canarymod.Canary;
-import net.canarymod.CanaryServer;
 import net.canarymod.Logman;
 import net.canarymod.api.CanaryConfigurationManager;
+import net.canarymod.api.CanaryServer;
 import net.canarymod.api.EntityTracker;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;

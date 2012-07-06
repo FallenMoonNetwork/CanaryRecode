@@ -7,16 +7,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.canarymod.Canary;
-import net.canarymod.CanaryServer;
 import net.canarymod.Colors;
 import net.canarymod.Logman;
+import net.canarymod.api.CanaryServer;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.Dimension;
-import net.canarymod.api.world.World.GameMode;
+import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.position.Direction;
 import net.canarymod.api.world.position.Location;
@@ -654,7 +654,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
     
     public void refreshCreativeMode() {
-        if (getMode() == 1 || Configuration.getWorldConfig(getWorld().getName()).getGameMode() == GameMode.CREATIVE) {
+        if (getMode() == 1 || Configuration.getWorldConfig(getWorld().getName()).getGameMode() == World.GameMode.CREATIVE) {
             ((OEntityPlayerMP)entity).c.a(1);
         } else {
             ((OEntityPlayerMP)entity).c.a(0);

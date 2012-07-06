@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.canarymod.CanaryMod;
-import net.canarymod.CanaryServer;
+import net.canarymod.api.CanaryServer;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryWorld;

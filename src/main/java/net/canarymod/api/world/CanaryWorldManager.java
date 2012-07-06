@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Random;
 
 import net.canarymod.Canary;
-import net.canarymod.CanaryServer;
 import net.canarymod.Logman;
+import net.canarymod.api.CanaryServer;
 
 /**
  * This is a container for all of the worlds.

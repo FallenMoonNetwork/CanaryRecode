@@ -3,7 +3,7 @@ package net.minecraft.server;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.canarymod.CanaryServer;
+import net.canarymod.api.CanaryServer;
 import net.minecraft.server.OChunkProviderServer;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAnimal;
