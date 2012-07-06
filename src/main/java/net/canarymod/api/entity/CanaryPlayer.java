@@ -490,7 +490,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         if(prefix != null) {
             return Colors.Marker+prefix;
         }
-        return Colors.Marker+group.prefix;
+        else if(group.prefix != null) {
+            return Colors.Marker+group.prefix;
+        }
+        else {
+            return Colors.Marker+Colors.White;
+        }
     }
 
     @Override
