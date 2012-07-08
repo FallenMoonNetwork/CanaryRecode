@@ -1,6 +1,8 @@
 package net.canarymod;
 
 import net.canarymod.bansystem.BanManager;
+import net.canarymod.commandsys.CommandList;
+import net.canarymod.commandsys.CommandManager;
 import net.canarymod.config.Configuration;
 import net.canarymod.database.Database.Type;
 import net.canarymod.database.flatfile.DatabaseFlatfile;
@@ -44,6 +46,7 @@ public class CanaryMod extends Canary {
         }
 
         // Initialize the subsystems that do not rely on others
+        this.commandManager = new CommandManager();
         this.permissionLoader = new PermissionManager();
         this.hookExecutor = new HookExecutor();
         this.helpManager = new HelpManager();
@@ -69,6 +72,10 @@ public class CanaryMod extends Canary {
     
     public void initKits() {
         this.kitProvider = new KitProvider();
+    }
+    
+    public void initCommands() {
+        this.commandManager.registerAll(CommandList.class);
     }
     
     @Override

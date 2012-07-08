@@ -24,6 +24,7 @@ public class Main {
         mod.initUserAndGroupsManager();
         mod.initWarps();
         mod.initKits();
+        mod.initCommands();
         try {
             OMinecraftServer.main(args);
         } catch (Throwable t) {
