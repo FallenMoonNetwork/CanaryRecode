@@ -273,36 +273,27 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 Logman.logInfo("Command used by " + getName() + ": " + Canary.glueString(command, 0, " "));
             }
             
-            String cmd = command[0];
-            if (cmd.startsWith("/#") && (hasPermission("canary.commands.vanilla."+cmd.replace("/#", "")) || hasPermission("canary.vanilla.op"))) {
-                Canary.getServer().consoleCommand(Canary.glueString(command, 0, " ").replace("/#", ""), this);
-                return true;
+            String commandName = command[0];
+            //It's a vanilla command, forward it to the server
+            if (commandName.startsWith("/#") && (hasPermission("canary.commands.vanilla."+commandName.replace("/#", "")) || hasPermission("canary.vanilla.op"))) {
+                return Canary.getServer().consoleCommand(Canary.glueString(command, 0, " ").replace("/#", ""), this);
             }
-            
+            commandName = commandName.replace("/", "");
             PlayerCommandHook hook = (PlayerCommandHook) Canary.hooks().callCancelableHook(new PlayerCommandHook(this, command));
             if (hook.isCanceled()) {
                 return true;
-            } // No need to go on, commands were parsed.
+            } // someone wants us not to execute the command. So lets do them the favor
             
-            //Check for canary permissions
-            
-            CanaryCommand toExecute = CanaryCommand.fromString(cmd.replace("/", ""));
-            if(toExecute == null) {
-                if(Configuration.getServerConfig().getShowUnkownCommand()) {
-                    sendMessage(Colors.Rose + "Unknown command");
+            CanaryCommand com = Canary.commands().getCommand(commandName);
+            if(com != null) {
+                return com.parseCommand(this, command);
+            }
+            else {
+                if (Configuration.getServerConfig().getShowUnkownCommand()) {
+                    notify("Unknown command");
                 }
                 return false;
             }
-            else {
-                if(!toExecute.execute(this, command)) {
-                    if(Configuration.getServerConfig().getShowUnkownCommand()) {
-                        sendMessage(Colors.Rose + "Unknown command");
-                    }
-                    return false;
-                }
-                return true;
-            }
-            
         } catch (Throwable ex) {
             Logman.logStackTrace("Exception in command handler: ", ex);
             if (isAdmin()) {

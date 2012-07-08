@@ -201,6 +201,16 @@ public class CanaryDimension implements Dimension {
         byte data = getDataAt(x, y, z);
         return new CanaryBlock(id, data, x, y, z, this);
     }
+    
+    @Override
+    public byte getDataAt(Vector3D position) {
+        return getDataAt((int)position.getX(), (int)position.getY(), (int)position.getZ());
+    }
+    
+    @Override
+    public Block getBlockAt(Vector3D position) {
+        return getBlockAt((int)position.getX(), (int)position.getY(), (int)position.getZ());
+    }
 
     @Override
     public byte getDataAt(int x, int y, int z) {
@@ -224,13 +234,22 @@ public class CanaryDimension implements Dimension {
     }
 
     @Override
-    public void setBlockAt(int x, int y, int z, short type, byte data) {
-        world.b(x, y, z, type, data);
-
+    public void setBlockAt(Vector3D position, short type) {
+        setBlockAt((int)position.getX(), (int)position.getY(), (int)position.getZ(), (short)type);
     }
 
     @Override
-    public void setDataAt(byte data, int x, int y, int z) {
+    public void setBlockAt(Vector3D position, short type, byte data) {
+        setBlockAt((int)position.getX(), (int)position.getY(), (int)position.getZ(), type, data);
+    }
+
+    @Override
+    public void setBlockAt(int x, int y, int z, short type, byte data) {
+        world.b(x, y, z, type, data);
+    }
+
+    @Override
+    public void setDataAt(int x, int y, int z, byte data) {
         world.d(x, y, z, data);
     }
 

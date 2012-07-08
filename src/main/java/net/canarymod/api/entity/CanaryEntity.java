@@ -3,6 +3,8 @@ package net.canarymod.api.entity;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.World;
+import net.canarymod.api.world.position.Location;
+import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityItem;
 import net.minecraft.server.OEntityLiving;
@@ -186,7 +188,17 @@ public class CanaryEntity implements Entity {
 
     @Override
     public String getName() {
-        return "entity";
+        return getClass().getSimpleName();
+    }
+
+    @Override
+    public Vector3D getPosition() {
+        return new Vector3D(getX(), getY(), getZ());
+    }
+
+    @Override
+    public Location getLocation() {
+        return new Location(getDimension(), getX(), getY(), getZ(), getPitch(), getRotation());
     }
 
 }

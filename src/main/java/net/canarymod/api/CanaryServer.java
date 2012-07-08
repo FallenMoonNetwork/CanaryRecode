@@ -3,6 +3,7 @@ package net.canarymod.api;
 import java.util.ArrayList;
 
 import net.canarymod.Canary;
+import net.canarymod.Logman;
 import net.canarymod.api.ConfigurationManager;
 import net.canarymod.api.Server;
 import net.canarymod.api.entity.CanaryPlayer;
@@ -71,17 +72,16 @@ public class CanaryServer implements Server {
 
     @Override
     public boolean consoleCommand(String command) {
-        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks()
-                .callCancelableHook(new ConsoleCommandHook(null, command));
-        if (hook.isCanceled()) {
+        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks().callCancelableHook(new ConsoleCommandHook(this, command));
+        if(hook.isCanceled()) {
+            //plugin parsed command. Return
             return true;
         }
-        String[] args = command.split(" ");
-        CanaryCommand toExecute = CanaryCommand.fromString(args[0].replace("/", ""));
-        if(toExecute != null) {
-            return toExecute.execute(null, args);
+        CanaryCommand cmd = Canary.commands().getCommand(command.split(" ")[0]);
+        if(cmd != null) {
+            return cmd.parseCommand(this, command.split(" "));
         }
-        else{
+        else {
             server.a(command, server);
             return false;
         }
@@ -89,17 +89,16 @@ public class CanaryServer implements Server {
 
     @Override
     public boolean consoleCommand(String command, Player player) {
-        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks()
-                .callCancelableHook(new ConsoleCommandHook(player, command));
-        if (hook.isCanceled()) {
+        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks().callCancelableHook(new ConsoleCommandHook(player, command));
+        if(hook.isCanceled()) {
+            //plugin parsed command. Return
             return true;
         }
-        String[] args = command.split(" ");
-        CanaryCommand toExecute = CanaryCommand.fromString(args[0].replace("/", ""));
-        if(toExecute != null) {
-            return toExecute.execute(null, args);
+        CanaryCommand cmd = Canary.commands().getCommand(command.split(" ")[0].replace("/", ""));
+        if(cmd != null) {
+            return cmd.parseCommand(player, command.split(" "));
         }
-        else{
+        else {
             server.a(command, ((CanaryPlayer) player).getHandle().a);
             return false;
         }
@@ -187,5 +186,20 @@ public class CanaryServer implements Server {
     @Override
     public ConfigurationManager getConfigurationManager() {
         return server.h.getCanaryConfigurationManager();
+    }
+
+    @Override
+    public String getName() {
+        return "CanaryMod Server";
+    }
+
+    @Override
+    public void notify(String message) {
+        Logman.logInfo(message);
+    }
+
+    @Override
+    public boolean hasPermission(String node) {
+        return true;
     }
 }
