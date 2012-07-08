@@ -10,7 +10,6 @@ import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.WorldManager;
-import net.canarymod.commands.CanaryCommand;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.ConsoleCommandHook;
 import net.minecraft.server.OMinecraftServer;
@@ -74,34 +73,20 @@ public class CanaryServer implements Server {
     public boolean consoleCommand(String command) {
         ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks().callCancelableHook(new ConsoleCommandHook(this, command));
         if(hook.isCanceled()) {
-            //plugin parsed command. Return
+            // Do not execute this. Okay ...
             return true;
         }
-        CanaryCommand cmd = Canary.commands().getCommand(command.split(" ")[0]);
-        if(cmd != null) {
-            return cmd.parseCommand(this, command.split(" "));
-        }
-        else {
-            server.a(command, server);
-            return false;
-        }
+        return Canary.commands().parseCommand(this, command.split(" ")[0], command.split(" "));
     }
 
     @Override
     public boolean consoleCommand(String command, Player player) {
         ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks().callCancelableHook(new ConsoleCommandHook(player, command));
         if(hook.isCanceled()) {
-            //plugin parsed command. Return
+            // Do not execute this. Okay ...
             return true;
         }
-        CanaryCommand cmd = Canary.commands().getCommand(command.split(" ")[0].replace("/", ""));
-        if(cmd != null) {
-            return cmd.parseCommand(player, command.split(" "));
-        }
-        else {
-            server.a(command, ((CanaryPlayer) player).getHandle().a);
-            return false;
-        }
+        return Canary.commands().parseCommand(player, command.split(" ")[0], command.split(" "));
     }
 
     @SuppressWarnings("unchecked")
@@ -190,7 +175,7 @@ public class CanaryServer implements Server {
 
     @Override
     public String getName() {
-        return "CanaryMod Server";
+        return "Console";
     }
 
     @Override

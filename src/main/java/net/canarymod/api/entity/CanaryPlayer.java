@@ -21,7 +21,7 @@ import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.position.Direction;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
-import net.canarymod.commands.CanaryCommand;
+import net.canarymod.commandsys.CanaryCommand;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
