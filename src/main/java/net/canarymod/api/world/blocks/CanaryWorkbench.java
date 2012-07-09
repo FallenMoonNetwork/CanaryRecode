@@ -8,7 +8,7 @@ import net.canarymod.api.world.Dimension;
 import net.minecraft.server.OContainerWorkbench;
 import net.minecraft.server.OItemStack;
 
-public class CanaryWorkbench implements Workbench{
+public class CanaryWorkbench implements Workbench {
     
     private OContainerWorkbench container;
 

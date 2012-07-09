@@ -2,7 +2,7 @@ package net.canarymod.api.world.blocks;
 
 import net.minecraft.server.OTileEntityRecordPlayer;
 
-public class CanaryJukebox extends CanaryComplexBlock implements JukeboxBlock{
+public class CanaryJukebox extends CanaryComplexBlock implements Jukebox {
 
     public CanaryJukebox(OTileEntityRecordPlayer tileentity) {
         super(tileentity);
