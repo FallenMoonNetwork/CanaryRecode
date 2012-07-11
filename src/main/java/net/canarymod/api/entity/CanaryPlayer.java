@@ -12,6 +12,7 @@ import net.canarymod.Logman;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
+import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryDimension;
@@ -33,6 +34,7 @@ import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
+import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMinecraftServer;
 import net.minecraft.server.OPacket;
 import net.minecraft.server.OPacket70Bed;
@@ -209,9 +211,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public Item getItemHeld() {
-        OEntityPlayerMP player = (OEntityPlayerMP) entity;
-        if(player.k.d() != null) {
-            return player.k.d().getCanaryItem();
+        OItemStack item = ((CanaryPlayerInventory) getInventory()).getItemInHand();
+        if(item != null) {
+            return item.getCanaryItem();
         }
         return null;
     }

@@ -144,7 +144,11 @@ public class CanaryInventory implements Inventory{
     
     @Override
     public Item getSlot(int slot) {
-        return new CanaryItem(container.getSlot(slot));
+        OItemStack tmp = container.getSlot(slot);
+        if(tmp != null) {
+            return tmp.getCanaryItem();
+        }
+        return null;
     }
 
     @Override
