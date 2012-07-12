@@ -23,9 +23,6 @@ public final class OItemStack {
     public int c; //item id
     public ONBTTagCompound d; //enchantment tag
     private int e; //damage
-    
-    //CanaryMod itemstack Handler
-    private CanaryItem item = new CanaryItem(this);
 
     public OItemStack(OBlock var1) {
         this(var1, 1);
@@ -56,7 +53,6 @@ public final class OItemStack {
         this.c = itemId;
         this.a = amount;
         this.e = damage;
-        item = new CanaryItem(this);
     }
 
     public static OItemStack a(ONBTTagCompound var0) {
@@ -68,7 +64,6 @@ public final class OItemStack {
     private OItemStack() {
         super();
         this.a = 0;
-        item = new CanaryItem(this);
     }
     
     //CanaryMod start
@@ -77,7 +72,7 @@ public final class OItemStack {
      * @return
      */
     public CanaryItem getCanaryItem() {
-        return item;
+        return new CanaryItem(this);
     }
    
     public CanaryBaseItem getBaseItem() {
