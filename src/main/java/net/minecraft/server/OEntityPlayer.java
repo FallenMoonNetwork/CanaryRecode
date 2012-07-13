@@ -5,12 +5,12 @@ import java.util.List;
 
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntityItem;
-import net.canarymod.api.inventory.CanaryPlayerInventory;
+import net.canarymod.api.entity.Player;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.config.Configuration;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.ItemHook;
+import net.canarymod.hook.player.LevelUpHook;
 import net.canarymod.hook.player.RightClickHook;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OAxisAlignedBB;
@@ -1240,5 +1240,41 @@ public abstract class OEntityPlayer extends OEntityLiving {
     public Inventory getInventory(){
         return k.getInventory();
     }
+    
+    public void addXP(int var1) {
+        int var2 = Integer.MAX_VALUE - this.N;
+        if (var1 > var2) {
+            var1 = var2;
+        }
+        
+        this.q += var1;
+        this.O += (float) var1 / (float) this.ae();
+        this.N += var1;
+        levelUp();
+    }
+
+    public void removeXP(int var1) {
+        this.q -= var1;
+        this.O -= (float) var1 / (float) this.ae();
+        this.N -= var1;
+        levelUp();
+    }
+
+    public void setXP(int var1) {
+        this.q = var1;
+        this.O = (float) var1 / (float) this.ae();
+        this.N = var1;
+        levelUp();
+    }
+    
+    public void levelUp() {
+        for (; this.O >= 1.0F; this.O /= (float) this.ae()) {
+            this.O = (this.O - 1.0F) * (float) this.ae();
+            this.H();
+            LevelUpHook hook = new LevelUpHook((Player) getCanaryEntity());
+            Canary.hooks().callHook(hook);
+        }
+    }
+    
     //CanaryMod end
 }
