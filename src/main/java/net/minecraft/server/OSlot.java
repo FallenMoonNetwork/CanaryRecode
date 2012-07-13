@@ -58,17 +58,6 @@ public class OSlot {
         this.b.a(this.a, var1);
         this.d();
     }
-    
-    public void craftCheck(OItemStack var1, Player player) {
-        if (this.b instanceof OInventoryCrafting){
-            ((OInventoryCrafting)this.b).setResult(this.a, var1, player);
-            this.d();
-        }
-        else{
-            this.b.a(this.a, var1);
-            this.d();
-        }
-    }
 
     public void d() {
         this.b.G_();

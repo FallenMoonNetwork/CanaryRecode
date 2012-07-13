@@ -151,7 +151,7 @@ public abstract class OContainer {
                                     var10 = var12.a();
                                 }
 
-                                var12.craftCheck(var14.a(var10), ((OEntityPlayerMP) var4).getPlayer());
+                                var12.d(var14.a(var10));
                                 if (var14.a == 0) {
                                     var6.b((OItemStack) null);
                                 }
@@ -306,10 +306,6 @@ public abstract class OContainer {
         }
 
         return var5;
-    }
-
-    public void getCraftResult(OIInventory oiInventory, Player player) {
-        a(oiInventory);
     }
     
     // CanaryMod: get and set inventory passed to the GUI.

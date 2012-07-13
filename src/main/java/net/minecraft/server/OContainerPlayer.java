@@ -1,10 +1,5 @@
 package net.minecraft.server;
 
-import net.canarymod.Canary;
-import net.canarymod.api.CanaryPacket;
-import net.canarymod.api.entity.Player;
-import net.canarymod.api.inventory.CanaryItem;
-import net.canarymod.hook.player.CraftHook;
 import net.minecraft.server.OContainer;
 import net.minecraft.server.OCraftingManager;
 import net.minecraft.server.OEntityPlayer;
@@ -22,6 +17,7 @@ public class OContainerPlayer extends OContainer {
     public OInventoryCrafting a;
     public OIInventory b;
     public boolean c;
+    public OInventoryPlayer playerInventory; // CanaryMod
 
     public OContainerPlayer(OInventoryPlayer var1) {
         this(var1, true);
@@ -29,6 +25,7 @@ public class OContainerPlayer extends OContainer {
 
     public OContainerPlayer(OInventoryPlayer var1, boolean var2) {
         super();
+        this.playerInventory = var1; // CanaryMod
         this.a = new OInventoryCrafting(this, 2, 2);
         this.b = new OInventoryCraftResult();
         this.c = false;
@@ -63,18 +60,8 @@ public class OContainerPlayer extends OContainer {
     @Override
     public void a(OIInventory var1) {
         this.b.a(0, OCraftingManager.a().a(this.a));
+        this.a.update(); // CanaryMod
     }
-    
-    public void getCraftResult(OIInventory var1, Player player){
-        OItemStack result = OCraftingManager.a().a(this.a);
-        if(result != null){
-            CraftHook hook = new CraftHook(player, result.getCanaryItem(), false);
-            Canary.hooks().callHook(hook);
-            result = hook.getCraftResult() != null ? ((CanaryItem)hook.getCraftResult()).getHandle() : null;
-        }
-        this.b.a(0, result);
-    }
-
     @Override
     public void a(OEntityPlayer var1) {
         super.a(var1);

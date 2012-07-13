@@ -71,7 +71,7 @@ public class CanaryServer implements Server {
 
     @Override
     public boolean consoleCommand(String command) {
-        ConsoleCommandHook hook = new ConsoleCommandHook(null, command);
+        ConsoleCommandHook hook = new ConsoleCommandHook(this, command);
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return true;

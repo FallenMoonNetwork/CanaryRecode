@@ -25,9 +25,11 @@ class OServerGuiCommandListener implements ActionListener {
         String var2 = this.a.getText().trim();
         //CanaryMod: Parse console commands from GUI
         if (var2.length() > 0 && Canary.instance() != null) {
-            //CanaryMod we parse that command instead
-            Canary.getServer().consoleCommand(var2);
-//            OServerGUI.a(this.b).a(var2, this.b);
+            // CanaryMod start - onConsoleCommand
+            if (!Canary.getServer().consoleCommand(var2)) {
+                OServerGUI.a(this.b).a(var2, this.b);
+            }
+            // CanaryMod end - onConsoleCommand
         }
         //CanaryMod end
 

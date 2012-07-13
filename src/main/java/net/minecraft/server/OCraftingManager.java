@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
+import net.canarymod.Canary;
+import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.hook.player.RecipeMatchHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OIRecipe;
 import net.minecraft.server.OInventoryCrafting;
@@ -221,13 +225,60 @@ public class OCraftingManager {
             if (var9 < 0) {
                 var9 = 0;
             }
-
-            return new OItemStack(var3.c, 1, var9);
+            // CanaryMod start - onRecipeMatch
+            OInventoryPlayer playerInventory = null;
+            if (var1.c instanceof OContainerPlayer) {
+                playerInventory = ((OContainerPlayer)var1.c).playerInventory;
+            } else if (var1.c instanceof OContainerWorkbench) {
+                playerInventory = ((OContainerWorkbench)var1.c).playerInventory;
+            }
+            if (playerInventory != null) {
+                RecipeMatchHook hook = new RecipeMatchHook(((OEntityPlayerMP)playerInventory.d).getPlayer(), var1.c.getInventory(), new CanaryItem(new OItemStack(var3.c, 1, var9)));
+                Canary.hooks().callHook(hook);
+                if (!hook.isCanceled()) {
+                    CanaryItem result = (CanaryItem)hook.getRecipeResult();
+                    if (result != null) {
+                        return result.getHandle();
+                    } else {
+                        return null;
+                    }
+                }
+                else {
+                    return null;
+                }
+            } else {
+                return new OItemStack(var3.c, 1, var9);
+            }
+            // CanaryMod end - onRecipeMatch
         } else {
             for (var5 = 0; var5 < this.b.size(); ++var5) {
                 OIRecipe var12 = (OIRecipe) this.b.get(var5);
                 if (var12.a(var1)) {
-                    return var12.b(var1);
+                    // CanaryMod start - onRecipeMatch
+                    OItemStack recipeItemStack = var12.b(var1);
+                    OInventoryPlayer playerInventory = null;
+                    if (var1.c instanceof OContainerPlayer) {
+                        playerInventory = ((OContainerPlayer)var1.c).playerInventory;
+                    } else if (var1.c instanceof OContainerWorkbench) {
+                        playerInventory = ((OContainerWorkbench)var1.c).playerInventory;
+                    }
+                    if (playerInventory != null) {
+                        RecipeMatchHook hook = new RecipeMatchHook(((OEntityPlayerMP)playerInventory.d).getPlayer(), var1.c.getInventory(), new CanaryItem(recipeItemStack));
+                        Canary.hooks().callHook(hook);
+                        if (!hook.isCanceled()) {
+                            CanaryItem result = (CanaryItem)hook.getRecipeResult();
+                            if (result != null) {
+                                return result.getHandle();
+                            } else {
+                                return null;
+                            }
+                        } else {
+                            return null;
+                        }
+                    } else {
+                        return recipeItemStack;
+                    }
+                    // CanaryMod end - onRecipeMatch
                 }
             }
 

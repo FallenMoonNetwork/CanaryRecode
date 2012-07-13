@@ -15,7 +15,7 @@ public class OInventoryCrafting implements OIInventory {
 
     private OItemStack[] a;
     private int b;
-    private OContainer c;
+    public OContainer c; // CanaryMod private -> public
     private String name = "container.crafting"; //CanaryMod
 
 
@@ -83,11 +83,6 @@ public class OInventoryCrafting implements OIInventory {
     public void a(int var1, OItemStack var2) {
         this.a[var1] = var2;
         this.c.a((OIInventory)this);
-    }
-    
-    public void setResult(int var1, OItemStack var2, Player player) {
-        this.a[var1] = var2;
-        this.c.getCraftResult((OIInventory)this, player);
     }
     
     public int a() {

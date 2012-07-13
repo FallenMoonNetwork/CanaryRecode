@@ -27,8 +27,11 @@ public class OThreadCommandReader extends Thread {
         try {
             while (!this.a.i && OMinecraftServer.a(this.a) && (var2 = var1.readLine()) != null) {
                 try{
-                    //this.a.a(var2, this.a); //CanaryMod redirected
-                    Canary.getServer().consoleCommand(var2);
+                    // CanaryMod start - onConsoleCommand
+                    if (!Canary.getServer().consoleCommand(var2)) {
+                        this.a.a(var2, this.a);
+                    }
+                    // CanaryMod end - onConsoleCommand
                 }
                 catch(Throwable t){ //So if something goes wrong the console will still respond to commands
                     Logman.logStackTrace("Unhandled Exception in OThreadCommandReader: ", t);
