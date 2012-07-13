@@ -151,7 +151,8 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             this.e.bi.getCanaryDimension().getEntityTracker().untrackEntity(this.e.getPlayer());
             this.e.bi.getCanaryDimension().getPlayerManager().removePlayer(this.e.getPlayer());
             //            etc.getServer().getPlayerManager(this.e.bi.world).removePlayer(this.e);
-            ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), var1, Colors.Yellow + getUser().getName() + " left the game."));
+            ConnectionHook hook = new ConnectionHook(getUser(), var1, Colors.Yellow + getUser().getName() + " left the game.");
+            Canary.hooks().callHook(hook);
             if (!hook.isHidden()) {
                 this.d.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
             }
@@ -353,7 +354,8 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         // CanaryMod - Teleport hook.
         Dimension dim = Canary.getServer().getWorld(world).getDimension(Dimension.Type.fromId(dimension));
         Location location = new Location(dim, var1, var3, var5, var8, var7);
-        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new TeleportHook(getUser(), location, false));
+        TeleportHook hook = new TeleportHook(getUser(), location, false);
+        Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return;
         }
@@ -416,7 +418,8 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                 //CanaryMod start - onBlockLeftClick
                 Block block = var2.getCanaryDimension().getBlockAt(var5, var6, var7);
                 //Call hook
-                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new LeftClickHook(getUser(), block));
+                LeftClickHook hook = new LeftClickHook(getUser(), block);
+                Canary.hooks().callHook(hook);
                 if ((var18 <= Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() && !spawnBuild) || hook.isCanceled()) {
                     this.e.a.b((new OPacket53BlockChange(var5, var6, var7, var2)));
                 } else {
@@ -524,7 +527,8 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             
             // CanaryMod - onBlockRightClicked
             Item item = (var3 != null) ? var3.getCanaryItem() : new CanaryItem(new OItemStack(0, 0, 0));
-            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(getUser(), blockPlaced, blockClicked, item, null, Hook.Type.BLOCK_RIGHTCLICKED));
+            RightClickHook hook = new RightClickHook(getUser(), blockPlaced, blockClicked, item, null, Hook.Type.BLOCK_RIGHTCLICKED);
+            Canary.hooks().callHook(hook);
             if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() || spawnBuild) && getUser().canBuild() && !hook.isCanceled()) { //XXX
                 this.e.c.a(this.e, var2, var3, var5, var6, var7, var8);
             }
@@ -591,7 +595,8 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     public void a(String var1, Object[] var2) {
         a.info(this.e.v + " lost connection: " + var1);
         //CanaryMod start - onPlayerDisconnect
-        ConnectionHook hook = (ConnectionHook) Canary.hooks().callHook(new ConnectionHook(getUser(), Colors.Yellow + getUser().getName() + " left the game.", var1));
+        ConnectionHook hook = new ConnectionHook(getUser(), Colors.Yellow + getUser().getName() + " left the game.", var1);
+        Canary.hooks().callHook(hook);
         if (!hook.isHidden()) {
             this.d.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
         }
@@ -750,13 +755,15 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         // CanaryMod: onPlayerRespawn
         Location respawnLocation = getUser().getDimension().getSpawnLocation();
         if (this.e.j) {
-            PlayerRespawnHook hook = (PlayerRespawnHook) Canary.hooks().callHook(new PlayerRespawnHook(e.getPlayer(), respawnLocation));
+            PlayerRespawnHook hook = new PlayerRespawnHook(e.getPlayer(), respawnLocation);
+            Canary.hooks().callHook(hook);
             this.e = this.d.h.a(this.e, 0, true, hook.getRespawnLocation());
         } else {
             if (this.e.aD() > 0) {
                 return;
             }
-            PlayerRespawnHook hook = (PlayerRespawnHook) Canary.hooks().callHook(new PlayerRespawnHook(e.getPlayer(), respawnLocation));
+            PlayerRespawnHook hook = new PlayerRespawnHook(e.getPlayer(), respawnLocation);
+            Canary.hooks().callHook(hook);
             this.e = this.d.h.a(this.e, 0, false, hook.getRespawnLocation());
         }
 
@@ -887,7 +894,8 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                 
                 //CanaryMod start - onSignChange
                 CanarySign sign = new CanarySign(var7);
-                CancelableHook hook = (CancelableHook) Canary.hooks().callHook(new SignHook(getUser(), sign, true));
+                SignHook hook = new SignHook(getUser(), sign, true);
+                Canary.hooks().callHook(hook);
                 if(hook.isCanceled()){
                     var7.a = Arrays.copyOf(old, old.length);
                 }

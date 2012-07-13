@@ -89,7 +89,8 @@ public class OEntityPigZombie extends OEntityZombie {
         OEntity var3 = var1.a();
         if (var3 instanceof OEntityPlayer) {
             //CanaryMod - onMobTarget
-            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new MobTargetHook(getCanaryEntityLiving(), ((OEntityLiving)var3).getCanaryEntityLiving().getPlayer()));
+            MobTargetHook hook = new MobTargetHook(getCanaryEntityLiving(), ((OEntityLiving)var3).getCanaryEntityLiving().getPlayer());
+            Canary.hooks().callHook(hook);
             if(!hook.isCanceled()){
                 List var4 = this.bi.b(this, this.bw.b(32.0D, 32.0D, 32.0D));
     

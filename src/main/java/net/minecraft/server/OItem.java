@@ -255,7 +255,8 @@ public class OItem {
         //CanaryMod call item use hook
         CanaryBlock block = (CanaryBlock) var2.bi.getCanaryDimension().getBlockAt(var4, var5, var6);
         block.setFaceClicked(BlockFace.fromByte((byte)var7));
-        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(((OEntityPlayerMP)var2).getPlayer(), null, block, new CanaryItem(var1), null, Hook.Type.ITEM_USE));
+        RightClickHook hook = new RightClickHook(((OEntityPlayerMP)var2).getPlayer(), null, block, new CanaryItem(var1), null, Hook.Type.ITEM_USE);
+        Canary.hooks().callHook(hook);
         if(hook.isCanceled()) {
             return true;
         }

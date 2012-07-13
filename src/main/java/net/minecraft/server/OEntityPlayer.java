@@ -460,7 +460,8 @@ public abstract class OEntityPlayer extends OEntityLiving {
                 var3.br += Math.sin(var5) * var4;
             }
 
-            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new ItemHook(((OEntityPlayerMP)this).getPlayer(), new CanaryEntityItem(var3), true)); //ITEM_DROP
+            ItemHook hook = new ItemHook(((OEntityPlayerMP)this).getPlayer(), new CanaryEntityItem(var3), true);
+            Canary.hooks().callHook(hook); //ITEM_DROP
             if(hook.isCanceled()){
                 return null;
             }
@@ -707,7 +708,8 @@ public abstract class OEntityPlayer extends OEntityLiving {
         if (!var1.b(this)) {
             OItemStack var2 = this.U();
             if (var2 != null && var1 instanceof OEntityLiving) {
-                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new RightClickHook(((OEntityPlayerMP)this).getPlayer(), null, null, var2.getCanaryItem(),((OEntityLiving) var1).getCanaryEntityLiving(), Hook.Type.ENTITY_RIGHTCLICKED));
+                RightClickHook hook = new RightClickHook(((OEntityPlayerMP)this).getPlayer(), null, null, var2.getCanaryItem(),((OEntityLiving) var1).getCanaryEntityLiving(), Hook.Type.ENTITY_RIGHTCLICKED);
+                Canary.hooks().callHook(hook);
                 if(!hook.isCanceled()){
                     var2.a((OEntityLiving) var1);
                     if (var2.a <= 0) {

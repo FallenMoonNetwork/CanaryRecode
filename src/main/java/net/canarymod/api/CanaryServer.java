@@ -71,9 +71,9 @@ public class CanaryServer implements Server {
 
     @Override
     public boolean consoleCommand(String command) {
-        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks().callCancelableHook(new ConsoleCommandHook(this, command));
-        if(hook.isCanceled()) {
-            // Do not execute this. Okay ...
+        ConsoleCommandHook hook = new ConsoleCommandHook(null, command);
+        Canary.hooks().callHook(hook);
+        if (hook.isCanceled()) {
             return true;
         }
         return Canary.commands().parseCommand(this, command.split(" ")[0], command.split(" "));
@@ -81,9 +81,9 @@ public class CanaryServer implements Server {
 
     @Override
     public boolean consoleCommand(String command, Player player) {
-        ConsoleCommandHook hook = (ConsoleCommandHook) Canary.hooks().callCancelableHook(new ConsoleCommandHook(player, command));
-        if(hook.isCanceled()) {
-            // Do not execute this. Okay ...
+        ConsoleCommandHook hook = new ConsoleCommandHook(player, command);
+        Canary.hooks().callHook(hook);
+        if (hook.isCanceled()) {
             return true;
         }
         return Canary.commands().parseCommand(player, command.split(" ")[0], command.split(" "));

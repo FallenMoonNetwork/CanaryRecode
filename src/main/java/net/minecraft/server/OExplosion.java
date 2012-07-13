@@ -106,7 +106,8 @@ public class OExplosion {
             }
         }
 
-        CancelableHook explodehook = (CancelableHook) Canary.hooks().callCancelableHook(new ExplosionHook(base, e.getCanaryEntity(), blocks));
+        ExplosionHook explodehook = new ExplosionHook(base, e.getCanaryEntity(), blocks);
+        Canary.hooks().callHook(explodehook);
         toRet = explodehook.isCanceled();
         this.power *= 2.0F;
         var3 = OMathHelper.b(this.explosionX - this.power - 1.0D);
@@ -139,7 +140,8 @@ public class OExplosion {
                     if (e instanceof OEntityCreeper) {
                         attacker = ((OEntityLiving) e).getCanaryEntityLiving();
                     }
-                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(attacker, ((OEntityLiving) var32).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.l), damage));
+                    DamageHook hook = new DamageHook(attacker, ((OEntityLiving) var32).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.l), damage);
+                    Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
                         var32.a(ODamageSource.l, damage);
                     }

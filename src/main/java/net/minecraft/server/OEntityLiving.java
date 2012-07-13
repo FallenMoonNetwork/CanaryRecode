@@ -314,7 +314,8 @@ public abstract class OEntityLiving extends OEntity {
 
         if (this.aE() && this.Y()) {
             // CanaryMod - suffocation damage.  
-            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, this.canaryEntityLiving, new CanaryDamageSource(ODamageSource.e), 1));
+            DamageHook hook = new DamageHook(null, this.canaryEntityLiving, new CanaryDamageSource(ODamageSource.e), 1);
+            Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
                 this.a(ODamageSource.e, 1);
             }
@@ -331,7 +332,8 @@ public abstract class OEntityLiving extends OEntity {
             if (this.ba() == -20) {
                 this.k(0);
                 // CanaryMod - drowning damage.  
-                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, this.canaryEntityLiving, new CanaryDamageSource(ODamageSource.f), 2));
+                DamageHook hook = new DamageHook(null, this.canaryEntityLiving, new CanaryDamageSource(ODamageSource.f), 2);
+                Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     for (int var1 = 0; var1 < 8; ++var1) {
                         float var2 = this.bS.nextFloat() - this.bS.nextFloat();
@@ -616,7 +618,8 @@ public abstract class OEntityLiving extends OEntity {
                 }
                 // CanaryMod - Entity damage. Needed?
                 if (attacker != null) {
-                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(attacker, this.canaryEntityLiving, new CanaryDamageSource(var1), var2));
+                    DamageHook hook = new DamageHook(attacker, this.canaryEntityLiving, new CanaryDamageSource(var1), var2);
+                    Canary.hooks().callHook(hook);
                     if (this instanceof OEntityCreature) {
                         ((OEntityCreature) this).f = 0; // flee timer.
                     }
@@ -632,7 +635,8 @@ public abstract class OEntityLiving extends OEntity {
                     }
                     // CanaryMod - Partial damage.
                     if (attacker != null) {
-                        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(attacker, this.canaryEntityLiving, new CanaryDamageSource(var1), var2 - bW));
+                        DamageHook hook = new DamageHook(attacker, this.canaryEntityLiving, new CanaryDamageSource(var1), var2 - bW);
+                        Canary.hooks().callHook(hook);
                         if (hook.isCanceled()) {
                             return false;
                         }
@@ -644,7 +648,8 @@ public abstract class OEntityLiving extends OEntity {
                 } else {
                     // CanaryMod - full damage.
                     if (attacker != null) {
-                        CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(attacker, this.canaryEntityLiving, new CanaryDamageSource(var1), var2));
+                        DamageHook hook = new DamageHook(attacker, this.canaryEntityLiving, new CanaryDamageSource(var1), var2);
+                        Canary.hooks().callHook(hook);
                         if (hook.isCanceled()) {
                             return false;
                         }
@@ -841,7 +846,8 @@ public abstract class OEntityLiving extends OEntity {
         int var2 = (int) Math.ceil((var1 - 3.0F));
         if (var2 > 0) {
             // CanaryMod - fall damage.
-            CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, this.canaryEntityLiving, new CanaryDamageSource(ODamageSource.i), var2));
+            DamageHook hook = new DamageHook(null, this.canaryEntityLiving, new CanaryDamageSource(ODamageSource.i), var2);
+            Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
                 if (var2 > 4) {
                     this.bi.a(this, "damage.fallbig", 1.0F, 1.0F);
@@ -1187,14 +1193,16 @@ public abstract class OEntityLiving extends OEntity {
             double var6 = var1.bo - this.bo;
             double var8 = var2 * var2 + var4 * var4 + var6 * var6;
             if (this.n() && var8 > 16384.0D) {
-                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new EntitySpawnHook(this.getCanaryEntityLiving(), false, true)); //CanaryMod - MobDespawn
+                EntitySpawnHook hook = new EntitySpawnHook(this.getCanaryEntityLiving(), false);
+                Canary.hooks().callHook(hook); //CanaryMod - MobDespawn
                 if(!hook.isCanceled()){
                     this.X();
                 }
             }
 
             if (this.aV > 600 && this.bS.nextInt(800) == 0 && var8 > 1024.0D && this.n()) {
-                CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new EntitySpawnHook(this.getCanaryEntityLiving(), false, true)); //CanaryMod - MobDespawn
+                EntitySpawnHook hook = new EntitySpawnHook(this.getCanaryEntityLiving(), false);
+                Canary.hooks().callHook(hook); //CanaryMod - MobDespawn
                 if(!hook.isCanceled()){
                     this.X();
                 }

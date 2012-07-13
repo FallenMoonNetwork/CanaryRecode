@@ -105,7 +105,8 @@ public class OChunkProviderServer implements OIChunkProvider {
             var5 = this.e(var1, var2);
             if (var5 == null) {
                 //CanaryMod start - onChunkCreation
-                ChunkCreationHook hook = (ChunkCreationHook) Canary.hooks().callHook(new ChunkCreationHook(var1, var2, h.getCanaryDimension()));
+                ChunkCreationHook hook = new ChunkCreationHook(var1, var2, h.getCanaryDimension());
+                Canary.hooks().callHook(hook);
                 byte[] blocks = hook.getBlockData();
                 
                 if(blocks != null){

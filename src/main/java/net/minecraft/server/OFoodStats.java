@@ -55,7 +55,8 @@ public class OFoodStats {
             if (this.foodTimer >= 80) {
                 if (var1.aD() > 10 || var2 >= 3 || var1.aD() > 1 && var2 >= 2) {
                     // CanaryMod - starving damage.
-                    CancelableHook hook = (CancelableHook) Canary.hooks().callCancelableHook(new DamageHook(null, var1.getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.g), 1));
+                    DamageHook hook = new DamageHook(null, var1.getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.g), 1);
+                    Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
                         var1.a(ODamageSource.g, 1);
                     }

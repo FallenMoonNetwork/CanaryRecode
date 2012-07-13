@@ -213,7 +213,8 @@ public class OServerConfigurationManager {
         var3 = var3.substring(var3.indexOf("/") + 1);
         var3 = var3.substring(0, var3.indexOf(":"));
         Dimension dim = Canary.getServer().getDefaultWorld().getNormal();
-        LoginChecksHook hook = (LoginChecksHook) Canary.hooks().callHook(new LoginChecksHook(var3, var2, dim.getType(), dim.getName()));
+        LoginChecksHook hook = new LoginChecksHook(var3, var2, dim.getType(), dim.getName());
+        Canary.hooks().callHook(hook);
         if (hook.getKickReason() != null && !hook.getKickReason().trim().equals("")) {
             var1.a(hook.getKickReason());
         }
