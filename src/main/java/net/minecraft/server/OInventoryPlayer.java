@@ -556,8 +556,8 @@ public OItemStack d() {
 
     @Override
     public boolean hasItem(int itemId) {
-        for (int var2 = 0; var2 < this.b.length; ++var2) {
-            if (this.b[var2] != null && this.b[var2].c == itemId) {
+        for (int var2 = 0; var2 < this.a.length; ++var2) {
+            if (this.a[var2] != null && this.a[var2].c == itemId) {
                 return true;
             }
         }

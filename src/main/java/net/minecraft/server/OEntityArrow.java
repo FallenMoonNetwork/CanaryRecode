@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
 import java.util.List;
+
+import net.canarymod.Logman;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
@@ -81,6 +83,7 @@ public class OEntityArrow extends OEntity {
         this.br = (OMathHelper.b(this.bs / 180.0F * 3.1415927F) * OMathHelper.b(this.bt / 180.0F * 3.1415927F));
         this.bq = (-OMathHelper.a(this.bt / 180.0F * 3.1415927F));
         this.a(this.bp, this.bq, this.br, var3 * 1.5F, 1.0F);
+        Logman.println("EntityArrow created");
     }
 
     @Override
