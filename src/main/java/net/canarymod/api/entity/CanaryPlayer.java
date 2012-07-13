@@ -168,12 +168,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void addExperience(int experience) {
-        ((OEntityPlayerMP)entity).g(experience);
+        ((OEntityPlayerMP)entity).addXP(experience);
     }
 
     @Override
     public void removeExperience(int experience) {
-        ((OEntityPlayerMP)entity).e_(experience);
+        ((OEntityPlayerMP)entity).removeXP(experience);
     }
 
     @Override
@@ -184,7 +184,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void setExperience(int xp) {
         if(xp < 0) return;
-        ((OEntityPlayerMP)entity).N = xp;
+        ((OEntityPlayerMP)entity).setXP(xp);
     }
 
     @Override
