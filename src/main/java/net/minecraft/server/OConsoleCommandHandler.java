@@ -49,7 +49,7 @@ public class OConsoleCommandHandler {
             var6.b("Connected players: " + var8.c());
          } else if(var4.equalsIgnoreCase("stop")) {
             this.a(var7, "Stopping the server..");
-            this.b.a();
+            this.b.initiateShutdown();
          } else {
             int var9;
             OWorldServer var10;

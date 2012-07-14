@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.canarymod.Canary;
 import net.canarymod.Logman;
+import net.canarymod.Main;
 import net.canarymod.api.ConfigurationManager;
 import net.canarymod.api.Server;
 import net.canarymod.api.entity.CanaryPlayer;
@@ -186,5 +187,27 @@ public class CanaryServer implements Server {
     @Override
     public boolean hasPermission(String node) {
         return true;
+    }
+
+    @Override
+    public void initiateShutdown() {
+        server.initiateShutdown();
+    }
+
+    @Override
+    public void restart(boolean reloadCanary) {
+        Main.restart(reloadCanary);
+    }
+
+    @Override
+    public boolean isRunning() {
+        return server.isRunning();
+    }
+    
+    /**
+     * Null the server reference
+     */
+    public void nullServer() {
+        server = null;
     }
 }

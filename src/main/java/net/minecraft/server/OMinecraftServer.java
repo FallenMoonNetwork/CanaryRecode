@@ -414,8 +414,16 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         this.u();
     }
 
-    public void a() {
+    public void initiateShutdown() {
         this.B = false;
+    }
+    
+    /**
+     * CanaryMod: Check if this server is running
+     * @return
+     */
+    public boolean isRunning() {
+        return !this.B;
     }
 
     @Override
@@ -695,8 +703,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             if (!GraphicsEnvironment.isHeadless() && (var0.length <= 0 || !var0[0].equals("nogui"))) {
                 OServerGUI.a(var1);
             }
-
-            (new OThreadServerApplication("Server thread", var1)).start();
+            ((new OThreadServerApplication("Server thread", var1))).start();
         } catch (Exception var2) {
             a.log(Level.SEVERE, "Failed to start the minecraft server", var2);
         }

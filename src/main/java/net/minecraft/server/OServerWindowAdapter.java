@@ -16,7 +16,7 @@ final class OServerWindowAdapter extends WindowAdapter {
 
     @Override
     public void windowClosing(WindowEvent var1) {
-        this.a.a();
+        this.a.initiateShutdown();
 
         while (!this.a.i) {
             try {
