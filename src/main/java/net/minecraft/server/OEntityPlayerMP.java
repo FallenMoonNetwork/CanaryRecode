@@ -598,7 +598,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     }
 
     public void H() {
-        this.m.a((OEntityPlayer) this);
+        this.m.onInventoryClose((OEntityPlayer) this);
         this.m = this.l;
     }
 

@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import java.util.Arrays;
 
-import net.canarymod.Logman;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.Item;
@@ -234,9 +233,7 @@ public OItemStack d() {
          var1 -= var3.length;
          var3 = this.b;
       }
-      Logman.println("Setting slot "+var1 + " with "+var2);
       var3[var1] = var2;
-      Logman.println("=============================================");
    }
    public float a(OBlock var1) {
       float var2 = 1.0F;
@@ -604,7 +601,6 @@ public OItemStack d() {
     @Override
     public void addItem(int itemId, int amount) {
         int remaining = amount;
-        Logman.println("Adding Item: "+itemId+"x"+amount);
         do {
             if (((itemId >= 256 && itemId <= 258) || 
                  (itemId >= 267 && itemId <= 279) || 
@@ -625,9 +621,7 @@ public OItemStack d() {
             else {
                 if (hasItemStack(itemId, 1, 63)) {
                     Item i = getItem(itemId, 63);
-                    Logman.println("Running");
                     if (i != null) {
-                        Logman.println("Item not null");
                         int freeSpace = 64 - i.getAmount();
                         int toAdd = 0;
                         if (remaining > freeSpace) {

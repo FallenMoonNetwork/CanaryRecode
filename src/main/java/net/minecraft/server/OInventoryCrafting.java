@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import java.util.Arrays;
 
+import net.canarymod.Logman;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
@@ -48,6 +49,9 @@ public class OInventoryCrafting implements OIInventory {
         return name;
     }
 
+    /**
+     * Get stack from slot
+     */
     public OItemStack b(int var1) {
         if(this.a[var1] != null) {
             OItemStack var2 = this.a[var1];
@@ -58,6 +62,10 @@ public class OInventoryCrafting implements OIInventory {
         }
     }
 
+
+    /**
+     * decrease item stack size
+     */
     public OItemStack a(int var1, int var2) {
         if(this.a[var1] != null) {
             OItemStack var3;
@@ -114,7 +122,8 @@ public class OInventoryCrafting implements OIInventory {
 
     @Override
     public OItemStack getSlot(int index) {
-        OItemStack stack = this.b(index);
+//        OItemStack stack = this.b(index);
+        OItemStack stack = a[index];
         if (stack != null) {
             return stack;
         }
@@ -164,7 +173,7 @@ public class OInventoryCrafting implements OIInventory {
     @Override
     public Item getItem(int id) {
         for(OItemStack stack : getContents()) {
-            if(stack.c == id) {
+            if(stack != null && stack.c == id) {
                 return stack.getCanaryItem();
             }
         }

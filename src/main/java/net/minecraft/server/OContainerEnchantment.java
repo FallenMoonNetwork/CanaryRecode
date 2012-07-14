@@ -154,8 +154,8 @@ public class OContainerEnchantment extends OContainer {
     }
 
     @Override
-    public void a(OEntityPlayer var1) {
-        super.a(var1);
+    public void onInventoryClose(OEntityPlayer var1) {
+        super.onInventoryClose(var1);
         if (!this.h.F) {
             OItemStack var2 = this.a.b(0);
             if (var2 != null) {

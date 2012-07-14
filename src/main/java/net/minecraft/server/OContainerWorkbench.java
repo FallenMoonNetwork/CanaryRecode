@@ -15,8 +15,8 @@ import net.minecraft.server.OWorld;
 
 public class OContainerWorkbench extends OContainer {
 
-    public OInventoryCrafting a = new OInventoryCrafting(this, 3, 3);
-    public OIInventory b = new OInventoryCraftResult();
+    public OInventoryCrafting craftingGrid = new OInventoryCrafting(this, 3, 3); //CanaryMod renamed a -> craftingGrid
+    public OIInventory craftResultInventory = new OInventoryCraftResult(); //CanaryMod renamed b -> craftResultInventory
     public OWorld c;
     public int h;
     public int i;
@@ -30,13 +30,13 @@ public class OContainerWorkbench extends OContainer {
         this.h = var3;
         this.i = var4;
         this.j = var5;
-        this.a((new OSlotCrafting(var1.d, this.a, this.b, 0, 124, 35)));
+        this.a((new OSlotCrafting(var1.d, this.craftingGrid, this.craftResultInventory, 0, 124, 35)));
 
         int var6;
         int var7;
         for (var6 = 0; var6 < 3; ++var6) {
             for (var7 = 0; var7 < 3; ++var7) {
-                this.a(new OSlot(this.a, var7 + var6 * 3, 30 + var7 * 18, 17 + var6 * 18));
+                this.a(new OSlot(this.craftingGrid, var7 + var6 * 3, 30 + var7 * 18, 17 + var6 * 18));
             }
         }
 
@@ -50,21 +50,22 @@ public class OContainerWorkbench extends OContainer {
             this.a(new OSlot(var1, var6, 8 + var6 * 18, 142));
         }
 
-        this.a(this.a);
+        this.a(this.craftingGrid);
     }
 
     @Override
     public void a(OIInventory var1) {
-        this.b.a(0, OCraftingManager.a().a(this.a));
-        this.a.update(); // CanaryMod
+        this.craftResultInventory.a(0, OCraftingManager.a().a(this.craftingGrid));
+        this.craftingGrid.update(); // CanaryMod
     }
 
+    //CanaryMod renamed a -> onInventoryClose
     @Override
-    public void a(OEntityPlayer var1) {
-        super.a(var1);
+    public void onInventoryClose(OEntityPlayer var1) {
+        super.onInventoryClose(var1);
         if (!this.c.F) {
             for (int var2 = 0; var2 < 9; ++var2) {
-                OItemStack var3 = this.a.b(var2);
+                OItemStack var3 = this.craftingGrid.b(var2);
                 if (var3 != null) {
                     var1.b(var3);
                 }

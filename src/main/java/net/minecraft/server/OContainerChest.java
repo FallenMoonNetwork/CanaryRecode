@@ -69,8 +69,8 @@ public class OContainerChest extends OContainer {
     }
 
     @Override
-    public void a(OEntityPlayer var1) {
-        super.a(var1);
+    public void onInventoryClose(OEntityPlayer var1) {
+        super.onInventoryClose(var1);
         this.a.g();
     }
 }

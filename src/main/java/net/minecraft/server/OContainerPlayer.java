@@ -63,8 +63,8 @@ public class OContainerPlayer extends OContainer {
         this.a.update(); // CanaryMod
     }
     @Override
-    public void a(OEntityPlayer var1) {
-        super.a(var1);
+    public void onInventoryClose(OEntityPlayer var1) {
+        super.onInventoryClose(var1);
 
         for (int var2 = 0; var2 < 4; ++var2) {
             OItemStack var3 = this.a.b(var2);

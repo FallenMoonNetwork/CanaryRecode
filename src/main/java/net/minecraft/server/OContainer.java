@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import net.canarymod.Canary;
-import net.canarymod.api.entity.Player;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.hook.player.InventoryHook;
 import net.minecraft.server.OEntityPlayer;
@@ -210,7 +209,7 @@ public abstract class OContainer {
         this.a(var1, var2, var3, var4);
     }
 
-    public void a(OEntityPlayer var1) {
+    public void onInventoryClose(OEntityPlayer var1) {
         Canary.hooks().callHook(new InventoryHook(((OEntityPlayerMP)var1).getPlayer(), this.inventory, true)); //CanaryMod - onCloseInventory
         OInventoryPlayer var2 = var1.k;
         if (var2.l() != null) {

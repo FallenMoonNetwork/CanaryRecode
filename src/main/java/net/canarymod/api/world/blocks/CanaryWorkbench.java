@@ -18,7 +18,7 @@ public class CanaryWorkbench implements Workbench {
 
     @Override
     public Inventory getInventory() {
-        return new CanaryInventory(container.a);
+        return new CanaryInventory(container.craftingGrid);
     }
     
     @Override
@@ -48,23 +48,23 @@ public class CanaryWorkbench implements Workbench {
     
     @Override
     public void update(){
-        container.b.update();
+        container.craftResultInventory.update();
     }
 
     @Override
     public void clearContents() {
-        container.a.clearContents();
+        container.craftingGrid.clearContents();
     }
 
     @Override
     public CanaryItem decreaseItemStackSize(int itemId, int amount) {
-        OItemStack item = container.a.decreaseItemStackSize(itemId, amount);
+        OItemStack item = container.craftingGrid.decreaseItemStackSize(itemId, amount);
         return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
     public CanaryItem[] getContents() {
-        OItemStack[] oStacks = container.a.getContents();
+        OItemStack[] oStacks = container.craftingGrid.getContents();
         CanaryItem[] items = new CanaryItem[oStacks.length];
         for(int i = 0; i < oStacks.length; i++) {
             items[i] = new CanaryItem(oStacks[i]);
@@ -75,53 +75,53 @@ public class CanaryWorkbench implements Workbench {
 
     @Override
     public String getInventoryName() {
-        return container.a.getInventoryName();
+        return container.craftingGrid.getInventoryName();
     }
 
     @Override
     public int getInventorySize() {
-        return container.a.getInventorySize();
+        return container.craftingGrid.getInventorySize();
     }
 
     @Override
     public int getInventoryStackLimit() {
-        return container.a.getInventoryStackLimit();
+        return container.craftingGrid.getInventoryStackLimit();
     }
 
     @Override
     public Item getItem(int id) {
-        return container.a.getItem(id);
+        return container.craftingGrid.getItem(id);
     }
 
     @Override
     public Item getItem(int id, int amount) {
-       return container.a.getItem(id, amount);
+       return container.craftingGrid.getItem(id, amount);
     }
 
     @Override
     public CanaryItem getSlot(int index) {
-        OItemStack item = container.a.getSlot(index);
+        OItemStack item = container.craftingGrid.getSlot(index);
         return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
     public boolean hasItem(int itemId) {
-        return container.a.hasItem(itemId);
+        return container.craftingGrid.hasItem(itemId);
     }
 
     @Override
     public boolean hasItemStack(Item item) {
-       return container.a.hasItemStack(((CanaryItem) item).getHandle());
+       return container.craftingGrid.hasItemStack(((CanaryItem) item).getHandle());
     }
 
     @Override
     public Item removeItem(Item item) {
-        return container.a.removeItem(item);
+        return container.craftingGrid.removeItem(item);
     }
 
     @Override
     public Item removeItem(int id) {
-        return container.a.removeItem(id);
+        return container.craftingGrid.removeItem(id);
     }
 
     @Override
@@ -135,17 +135,17 @@ public class CanaryWorkbench implements Workbench {
                 oStacks[i] = null;
             }
         }
-        container.a.setContents(oStacks);
+        container.craftingGrid.setContents(oStacks);
     }
 
     @Override
     public void setInventoryName(String value) {
-        container.a.setInventoryName(value);
+        container.craftingGrid.setInventoryName(value);
     }
 
     @Override
     public void setSlot(int index, Item item) {
-        container.a.setSlot(index, ((CanaryItem) item).getHandle());
+        container.craftingGrid.setSlot(index, ((CanaryItem) item).getHandle());
     }
     
     public OContainerWorkbench getHandle(){
@@ -154,26 +154,26 @@ public class CanaryWorkbench implements Workbench {
 
     @Override
     public void addItem(int itemId, int amount) {
-        container.a.addItem(itemId, amount);
+        container.craftingGrid.addItem(itemId, amount);
     }
 
     @Override
     public void addItem(Item item) {
-        container.a.addItem(item);
+        container.craftingGrid.addItem(item);
     }
 
     @Override
     public int getEmptySlot() {
-        return container.a.getEmptySlot();
+        return container.craftingGrid.getEmptySlot();
     }
 
     @Override
     public boolean hasItemStack(int itemId, int amount) {
-        return container.a.hasItemStack(itemId, amount);
+        return container.craftingGrid.hasItemStack(itemId, amount);
     }
 
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        return container.a.hasItemStack(itemId, minAmount, maxAmount);
+        return container.craftingGrid.hasItemStack(itemId, minAmount, maxAmount);
     }
 }

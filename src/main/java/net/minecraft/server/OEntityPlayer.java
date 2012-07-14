@@ -834,9 +834,9 @@ public abstract class OEntityPlayer extends OEntityLiving {
     @Override
     public void X() {
         super.X();
-        this.l.a(this);
+        this.l.onInventoryClose(this);
         if (this.m != null) {
-            this.m.a(this);
+            this.m.onInventoryClose(this);
         }
 
     }
