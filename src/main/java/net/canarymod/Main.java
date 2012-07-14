@@ -1,18 +1,11 @@
 package net.canarymod;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.SocketException;
-
-import net.canarymod.api.CanaryServer;
 import net.canarymod.serialize.EnchantmentSerializer;
 import net.canarymod.serialize.ItemSerializer;
 import net.minecraft.server.OMinecraftServer;  
-import net.minecraft.server.ONetworkAcceptThread;
 
 public class Main {
 
-    private static String[] args; //Save the arguments for if we want to go and reload
     
     private static void initBird() {
       //Initialize the bird
@@ -34,7 +27,6 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        Main.args = args;
         initBird();
         try {
             OMinecraftServer.main(args);
