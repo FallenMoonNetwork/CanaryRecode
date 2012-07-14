@@ -1,8 +1,15 @@
 package net.minecraft.server;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import net.canarymod.Canary;
+import net.canarymod.Logman;
+import net.canarymod.api.CanaryEnchantment;
+import net.canarymod.api.Enchantment;
+import net.canarymod.hook.player.EnchantHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OContainer;
 import net.minecraft.server.OEnchantmentData;
@@ -133,13 +140,40 @@ public class OContainerEnchantment extends OContainer {
         OItemStack var3 = this.a.b(0);
         if (this.c[var2] > 0 && var3 != null && (var1.M >= this.c[var2] || var1.L.d)) {
             if (!this.h.F) {
-                List var4 = OEnchantmentHelper.b(this.l, var3, this.c[var2]);
+                List<OEnchantmentData> var4 = OEnchantmentHelper.b(this.l, var3, this.c[var2]);
                 if (var4 != null) {
+                    //CanaryMod enchantment hook
+                    List<Enchantment> enchantments = new ArrayList<Enchantment>(3);
+                    //Create the canary enchantments for the hook
+                    for(Object obj : var4) {
+                        if(obj instanceof OEnchantmentData) {
+                            enchantments.add(new CanaryEnchantment(((OEnchantmentData)obj).a));
+                        }
+                    }
+                    //Fire hook and check if everything is well and valid
+                    EnchantHook hook = new EnchantHook(((OEntityPlayerMP) var1).getPlayer(), var3.getCanaryItem(), enchantments);
+                    Canary.hooks().callHook(hook);
+                    if(hook.isCanceled()) {
+                        return false;
+                    }
+                    if(!hook.isValid(false)) {
+                        hook.getPlayer().notify("Got invalid set of enchantments for the your item");
+                        Logman.logWarning("Got invalid set of enchantments for an Item: " + hook.getItem().getType().name() + " caused by " + hook.getPlayer().getName());
+                        return false;
+                    }
+                    
+                    //CanaryMod override the enchantments!
+                    List<Enchantment> newList = hook.getEnchantmentList();
+                    var4 = new ArrayList<OEnchantmentData>(newList.size());
+                    for (Enchantment enchantment : newList)
+                    {
+                        var4.add(new OEnchantmentData(((CanaryEnchantment)enchantment).getHandle(), enchantment.getLevel()));
+                    }
                     var1.e_(this.c[var2]);
-                    Iterator var5 = var4.iterator();
+                    Iterator<OEnchantmentData> var5 = var4.iterator(); //CanaryMod inferred type arguments
 
                     while (var5.hasNext()) {
-                        OEnchantmentData var6 = (OEnchantmentData) var5.next();
+                        OEnchantmentData var6 = var5.next();
                         var3.a(var6.a, var6.b);
                     }
 

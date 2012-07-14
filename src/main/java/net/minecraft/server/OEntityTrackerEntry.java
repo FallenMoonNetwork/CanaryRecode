@@ -297,15 +297,15 @@ public class OEntityTrackerEntry {
         } else {
             if (this.a instanceof OEntityMinecart) {
                 OEntityMinecart var1 = (OEntityMinecart) this.a;
-                if (var1.a == 0) {
+                if (var1.minecartType == 0) {
                     return new OPacket23VehicleSpawn(this.a, 10);
                 }
 
-                if (var1.a == 1) {
+                if (var1.minecartType == 1) {
                     return new OPacket23VehicleSpawn(this.a, 11);
                 }
 
-                if (var1.a == 2) {
+                if (var1.minecartType == 2) {
                     return new OPacket23VehicleSpawn(this.a, 12);
                 }
             }

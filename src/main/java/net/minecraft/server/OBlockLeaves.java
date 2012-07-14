@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
 import java.util.Random;
+
+import net.canarymod.hook.world.LeafDecayHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockLeavesBase;
 import net.minecraft.server.OEntity;
@@ -123,8 +125,11 @@ public class OBlockLeaves extends OBlockLeavesBase {
     }
 
     private void g(OWorld var1, int var2, int var3, int var4) {
-        this.b(var1, var2, var3, var4, var1.c(var2, var3, var4), 0);
-        var1.e(var2, var3, var4, 0);
+        LeafDecayHook hook = new LeafDecayHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4));
+        if(!hook.isCanceled()) {
+            this.b(var1, var2, var3, var4, var1.c(var2, var3, var4), 0);
+            var1.e(var2, var3, var4, 0);
+        }
     }
 
     @Override

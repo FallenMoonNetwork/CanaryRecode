@@ -1,6 +1,9 @@
 package net.minecraft.server;
 
 import java.util.Random;
+
+import net.canarymod.Canary;
+import net.canarymod.hook.world.BlockPhysicsHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityFallingSand;
 import net.minecraft.server.OMaterial;
@@ -16,11 +19,21 @@ public class OBlockSand extends OBlock {
 
     @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
+        BlockPhysicsHook hook = new BlockPhysicsHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), true);
+        Canary.hooks().callHook(hook);
+        if(hook.isCanceled()) {
+            return;
+        }
         var1.c(var2, var3, var4, this.bO, this.d());
     }
 
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
+        BlockPhysicsHook hook = new BlockPhysicsHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), false);
+        Canary.hooks().callHook(hook);
+        if(hook.isCanceled()) {
+            return;
+        }
         var1.c(var2, var3, var4, this.bO, this.d());
     }
 

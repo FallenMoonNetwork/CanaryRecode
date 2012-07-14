@@ -1,6 +1,10 @@
 package net.minecraft.server;
 
 import java.util.Random;
+
+import net.canarymod.Canary;
+import net.canarymod.api.world.blocks.Block;
+import net.canarymod.hook.world.PortalCreateHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockBreakable;
@@ -81,6 +85,20 @@ public class OBlockPortal extends OBlockBreakable {
                         }
                     }
                 }
+            }
+            
+            //CanaryMod Portal controlling - Create portal
+            Block[][] portalBlocks = new Block[3][2];
+            for (var8 = 0; var8 < 3; ++var8) {
+                for (var7 = 0; var7 < 2; ++var7) {
+//                    portalBlocks[var8][var7] = new Block(var1.world, Block.Type.Portal.getType(), var2 + var5 * var7, var3 + 2 - var8, var4 + var6 * var7);
+                    portalBlocks[var8][var7] = var1.getCanaryDimension().getBlockAt(var2 + var5 * var7, var3 + 2 - var8, var4 + var6 * var7);
+                }
+            }
+            PortalCreateHook hook = new PortalCreateHook(portalBlocks);
+            Canary.hooks().callHook(hook);
+            if(hook.isCanceled()) {
+                return false;
             }
 
             var1.o = true;

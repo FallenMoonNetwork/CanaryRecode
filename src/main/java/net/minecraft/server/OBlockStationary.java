@@ -1,6 +1,9 @@
 package net.minecraft.server;
 
 import java.util.Random;
+
+import net.canarymod.Canary;
+import net.canarymod.hook.world.IgnitionHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockFluid;
 import net.minecraft.server.OIBlockAccess;
@@ -46,6 +49,12 @@ public class OBlockStationary extends OBlockFluid {
         if (this.cd == OMaterial.h) {
             int var6 = var5.nextInt(3);
 
+            //CanaryMod allow prevention of firespread
+            IgnitionHook hook = new IgnitionHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), 1);
+            Canary.hooks().callHook(hook);
+            if(hook.isCanceled()) {
+                return;
+            }
             int var7;
             int var8;
             for (var7 = 0; var7 < var6; ++var7) {

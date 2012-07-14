@@ -3,6 +3,9 @@ package net.minecraft.server;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import net.canarymod.Canary;
+import net.canarymod.hook.world.RedstoneChangeHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockTorch;
 import net.minecraft.server.OIBlockAccess;
@@ -106,14 +109,22 @@ public class OBlockRedstoneTorch extends OBlockTorch {
         if (this.a) {
             if (var6) {
                 var1.b(var2, var3, var4, OBlock.aP.bO, var1.c(var2, var3, var4));
-                if (this.a(var1, var2, var3, var4, true)) {
-                    var1.a((var2 + 0.5F), (var3 + 0.5F), (var4 + 0.5F), "random.fizz", 0.5F, 2.6F + (var1.r.nextFloat() - var1.r.nextFloat()) * 0.8F);
+                //CanaryMod - Control redstone lamp power
+                RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), 1, 0);
+                Canary.hooks().callHook(hook);
+                if(hook.isCanceled()) {
+                    return;
+                }
+                if(hook.getNewLevel() == 0) {
+                    if (this.a(var1, var2, var3, var4, true)) {
+                        var1.a((var2 + 0.5F), (var3 + 0.5F), (var4 + 0.5F), "random.fizz", 0.5F, 2.6F + (var1.r.nextFloat() - var1.r.nextFloat()) * 0.8F);
 
-                    for (int var7 = 0; var7 < 5; ++var7) {
-                        double var8 = var2 + var5.nextDouble() * 0.6D + 0.2D;
-                        double var10 = var3 + var5.nextDouble() * 0.6D + 0.2D;
-                        double var12 = var4 + var5.nextDouble() * 0.6D + 0.2D;
-                        var1.a("smoke", var8, var10, var12, 0.0D, 0.0D, 0.0D);
+                        for (int var7 = 0; var7 < 5; ++var7) {
+                            double var8 = var2 + var5.nextDouble() * 0.6D + 0.2D;
+                            double var10 = var3 + var5.nextDouble() * 0.6D + 0.2D;
+                            double var12 = var4 + var5.nextDouble() * 0.6D + 0.2D;
+                            var1.a("smoke", var8, var10, var12, 0.0D, 0.0D, 0.0D);
+                        }
                     }
                 }
             }

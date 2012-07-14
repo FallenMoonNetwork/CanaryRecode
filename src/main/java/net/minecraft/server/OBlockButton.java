@@ -1,6 +1,9 @@
 package net.minecraft.server;
 
 import java.util.Random;
+
+import net.canarymod.Canary;
+import net.canarymod.hook.world.RedstoneChangeHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
@@ -143,7 +146,10 @@ public class OBlockButton extends OBlock {
         int var6 = var1.c(var2, var3, var4);
         int var7 = var6 & 7;
         int var8 = 8 - (var6 & 8);
-        if (var8 == 0) {
+        
+        RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), var7, var8);
+        Canary.hooks().callHook(hook);
+        if (var8 == 0 || hook.isCanceled()) {
             return true;
         } else {
             var1.c(var2, var3, var4, var7 + var8);

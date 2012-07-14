@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+
+import net.canarymod.Canary;
+import net.canarymod.hook.world.RedstoneChangeHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkPosition;
@@ -117,6 +120,17 @@ public class OBlockRedstoneWire extends OBlock {
         }
 
         if (var8 != var9) {
+            RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), var8, var9);
+            Canary.hooks().callHook(hook);
+            if(hook.isCanceled()) {
+                return;
+            }
+            var8 = hook.getNewLevel();
+            
+            if(var8 == var9) {
+                return;
+            }
+            
             var1.o = true;
             var1.c(var2, var3, var4, var9);
             var1.b(var2, var3, var4, var2, var3, var4);

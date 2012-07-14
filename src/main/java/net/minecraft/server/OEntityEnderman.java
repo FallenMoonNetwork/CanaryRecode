@@ -1,6 +1,10 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEnderman;
+import net.canarymod.api.entity.CanaryPlayer;
+import net.canarymod.hook.entity.EndermanHook;
+import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
@@ -70,6 +74,12 @@ public class OEntityEnderman extends OEntityMob {
     @Override
     protected OEntity o() {
         OEntityPlayer var1 = this.bi.b(this, 64.0D);
+        MobTargetHook hook = new MobTargetHook(canaryEnderman, ((OEntityPlayerMP) var1).getPlayer());
+        Canary.hooks().callHook(hook);
+        if(hook.isCanceled()) {
+            return null;
+        }
+        var1 = ((CanaryPlayer) hook.getPlayer()).getHandle();
         if (var1 != null) {
             if (this.c(var1)) {
                 if (this.h++ == 5) {
@@ -123,6 +133,12 @@ public class OEntityEnderman extends OEntityMob {
                     var3 = OMathHelper.b(this.bo - 2.0D + this.bS.nextDouble() * 4.0D);
                     var4 = this.bi.a(var1, var2, var3);
                     if (b[var4]) {
+                        //CanaryMod enderman pickup
+                        EndermanHook hook = new EndermanHook(canaryEnderman, canaryEnderman.getDimension().getBlockAt(var1, var2, var3), false);
+                        Canary.hooks().callHook(hook);
+                        if(hook.isCanceled()) {
+                            return;
+                        }
                         this.c(this.bi.a(var1, var2, var3));
                         this.e(this.bi.c(var1, var2, var3));
                         this.bi.e(var1, var2, var3, 0);
@@ -135,6 +151,12 @@ public class OEntityEnderman extends OEntityMob {
                 var4 = this.bi.a(var1, var2, var3);
                 int var5 = this.bi.a(var1, var2 - 1, var3);
                 if (var4 == 0 && var5 > 0 && OBlock.m[var5].b()) {
+                  //CanaryMod enderman drop
+                    EndermanHook hook = new EndermanHook(canaryEnderman, canaryEnderman.getDimension().getBlockAt(var1, var2, var3), true);
+                    Canary.hooks().callHook(hook);
+                    if(hook.isCanceled()) {
+                        return;
+                    }
                     this.bi.b(var1, var2, var3, this.A(), this.E());
                     this.c(0);
                 }

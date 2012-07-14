@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
 import java.util.List;
+
+import net.canarymod.api.entity.vehicle.CanaryBoat;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
@@ -20,12 +22,22 @@ public class OEntityBoat extends OEntity {
     private double d;
     private double e;
     private double f;
+    
+    private CanaryBoat canaryBoat; //CanaryMod
 
     public OEntityBoat(OWorld var1) {
         super(var1);
         this.bf = true;
         this.b(1.5F, 0.6F);
         this.bF = this.bH / 2.0F;
+        canaryBoat = new CanaryBoat(this);
+    }
+    
+    /**
+     * CanaryMod get the canary boat handler
+     */
+    public CanaryBoat getCanaryBoat() {
+        return canaryBoat;
     }
 
     @Override

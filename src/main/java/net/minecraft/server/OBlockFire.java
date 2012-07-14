@@ -1,6 +1,9 @@
 package net.minecraft.server;
 
 import java.util.Random;
+
+import net.canarymod.Canary;
+import net.canarymod.hook.world.IgnitionHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OIBlockAccess;
@@ -130,7 +133,12 @@ public class OBlockFire extends OBlock {
                                             var16 = 15;
                                         }
 
-                                        var1.b(var10, var12, var11, this.bO, var16);
+                                        //CanaryMod Ignite hook. Warning, that thing spams like mad! 
+                                        IgnitionHook hook = new IgnitionHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), 3);
+                                        Canary.hooks().callHook(hook);
+                                        if(!hook.isCanceled()) {
+                                            var1.b(var10, var12, var11, this.bO, var16);
+                                        }
                                     }
                                 }
                             }

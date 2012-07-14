@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import net.canarymod.Logman;
 import net.canarymod.api.world.CanaryChunk;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBiomeGenBase;
@@ -287,6 +288,14 @@ public class OChunk {
                     }
                 } else {
                     for (var8 = var4; var8 < var5; ++var8) {
+                     // CanaryMod start: Catch corrupt index info
+                        if (var8 >> 4 < 0 || var8 >> 4 >= 16) {
+                            Logman.logWarning("Invalid chunk info array index: " + (var8 >> 4));
+                            Logman.logWarning("var4: " + var4 + ", var5: " + var5);
+                            Logman.logWarning("Chunk location: " + var6 + ", " + var7);
+                            var8 = 0;
+                        }
+                        // CanaryMod end
                         var9 = this.q[var8 >> 4];
                         if (var9 != null) {
                             var9.c(var1, var8 & 15, var3, 0);
@@ -520,8 +529,11 @@ public class OChunk {
         int var2 = OMathHelper.b(var1.bm / 16.0D);
         int var3 = OMathHelper.b(var1.bo / 16.0D);
         if (var2 != this.g || var3 != this.h) {
-            System.out.println("Wrong location! " + var1);
-            Thread.dumpStack();
+            Logman.logWarning("Wrong location for " + var1.getCanaryEntity().getName() + " - Destroying entity.");
+//            Thread.dumpStack(); //CanaryMod do not dump the stack
+            //Remove the offending entity.
+            var1.X();
+            return;
         }
 
         int var4 = OMathHelper.b(var1.bn / 16.0D);

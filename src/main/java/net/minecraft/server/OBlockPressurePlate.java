@@ -2,6 +2,8 @@ package net.minecraft.server;
 
 import java.util.List;
 import java.util.Random;
+
+import net.canarymod.hook.world.RedstoneChangeHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
@@ -109,6 +111,15 @@ public class OBlockPressurePlate extends OBlock {
 
         if (var8.size() > 0) {
             var6 = true;
+        }
+        
+        //CanaryMod controll pressure plate redstone change
+        if (var6 != var5) {
+            RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), var5 ? 1 : 0, var6 ? 1 : 0);
+            if(hook.isCanceled()) {
+                return; //do nothing
+            }
+            var6 = hook.getNewLevel() > 0;
         }
 
         if (var6 && !var5) {

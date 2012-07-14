@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.hook.world.RedstoneChangeHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
@@ -156,6 +158,19 @@ public class OBlockLever extends OBlock {
             int var6 = var1.c(var2, var3, var4);
             int var7 = var6 & 7;
             int var8 = 8 - (var6 & 8);
+            
+            // CanaryMod: Allow the lever to change the current first 3 bits are for postion 4th bit is for power. (on / off)
+            int old = (var8 != 8) ? 1 : 0;
+            int current = (var8 == 8) ? 1 : 0;
+            
+            RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), old, current);
+            Canary.hooks().callHook(hook);
+            if(hook.isCanceled()) {
+                return true;
+            }
+            current = hook.getNewLevel();
+            var8 = (current > 0) ? 8 : 0;
+            
             var1.c(var2, var3, var4, var7 + var8);
             var1.b(var2, var3, var4, var2, var3, var4);
             var1.a(var2 + 0.5D, var3 + 0.5D, var4 + 0.5D, "random.click", 0.3F, var8 > 0 ? 0.6F : 0.5F);
