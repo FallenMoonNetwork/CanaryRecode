@@ -661,4 +661,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
     }
 
+    @Override
+    public boolean isBlocking() {
+        return ((OEntityPlayerMP) entity).P();
+    }
+
 }

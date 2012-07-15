@@ -169,5 +169,11 @@ public class OPotion {
     public int g() {
         return this.N;
     }
+    
+    // CanaryMod - acces to private feild
+    public boolean isBad() {
+        return K;
+    }
+    //CanaryMod - end
 
 }
