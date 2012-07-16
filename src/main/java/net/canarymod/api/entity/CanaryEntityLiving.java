@@ -11,6 +11,7 @@ import net.canarymod.api.entity.potion.CanaryPotion;
 import net.canarymod.api.entity.potion.CanaryPotionEffect;
 import net.canarymod.api.entity.potion.Potion;
 import net.canarymod.api.entity.potion.PotionEffect;
+import net.canarymod.api.entity.potion.PotionType;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
@@ -236,6 +237,12 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     @Override
     public void addPotionEffect(PotionEffect effect) {
         OPotionEffect oEffect = ((CanaryPotionEffect) effect).getHandle();
+        ((OEntityLiving) entity).e(oEffect);
+    }
+    
+    @Override
+    public void addPotionEffect(PotionType type, int duration, int amplifier) {
+        OPotionEffect oEffect = new OPotionEffect(type.getID(), duration, amplifier);
         ((OEntityLiving) entity).e(oEffect);
     }
     

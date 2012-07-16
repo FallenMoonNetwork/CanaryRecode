@@ -5,6 +5,7 @@ import net.minecraft.server.OPotion;
 public class CanaryPotion implements Potion {
 
     OPotion potion;
+
     public CanaryPotion(OPotion potion) {
         this.potion = potion;
     }
