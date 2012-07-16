@@ -1,8 +1,17 @@
 package net.canarymod.api.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.DamageSource;
 import net.canarymod.api.DamageType;
+import net.canarymod.api.entity.potion.CanaryPotion;
+import net.canarymod.api.entity.potion.CanaryPotionEffect;
+import net.canarymod.api.entity.potion.Potion;
+import net.canarymod.api.entity.potion.PotionEffect;
+import net.canarymod.api.entity.potion.PotionType;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
@@ -18,6 +27,8 @@ import net.minecraft.server.OEntitySquid;
 import net.minecraft.server.OEntityVillager;
 import net.minecraft.server.OIAnimals;
 import net.minecraft.server.OIMob;
+import net.minecraft.server.OPotion;
+import net.minecraft.server.OPotionEffect;
 import net.minecraft.server.OWorld;
 
 /**
@@ -222,4 +233,44 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
         }
         
     }
+
+    @Override
+    public void addPotionEffect(PotionEffect effect) {
+        OPotionEffect oEffect = ((CanaryPotionEffect) effect).getHandle();
+        ((OEntityLiving) entity).e(oEffect);
+    }
+    
+    @Override
+    public void addPotionEffect(PotionType type, int duration, int amplifier) {
+        OPotionEffect oEffect = new OPotionEffect(type.getID(), duration, amplifier);
+        ((OEntityLiving) entity).e(oEffect);
+    }
+    
+    @Override
+    public boolean isPotionActive(Potion potion) {
+        OPotion oPotion = ((CanaryPotion) potion).getHandle();
+        return ((OEntityLiving) entity).a(oPotion);
+    }
+    
+    @Override
+    public PotionEffect getActivePotionEffect(Potion potion) {
+        OPotion oPotion = ((CanaryPotion) potion).getHandle();
+        OPotionEffect oPotionEffect = ((OEntityLiving) entity).b(oPotion);
+        return new CanaryPotionEffect(oPotionEffect);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<PotionEffect> getAllActivePotionEffects() {
+        Collection<OPotionEffect> collection = ((OEntityLiving) entity).aM();
+        List<PotionEffect> list = new ArrayList<PotionEffect>();
+        for (int i = 0; i < collection.size(); i++) {
+            //OPotionEffect oEffect = collection
+        }
+        for (OPotionEffect oEffect : collection) {
+            list.add(new CanaryPotionEffect(oEffect));
+        }
+        return list;
+    }
+
 }

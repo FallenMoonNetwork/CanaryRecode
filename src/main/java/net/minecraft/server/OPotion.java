@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.api.entity.potion.CanaryPotion;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DamageHook;
 import net.minecraft.server.ODamageSource;
@@ -51,6 +52,8 @@ public class OPotion {
     private double L;
     private boolean M;
     private final int N;
+    
+    private CanaryPotion canaryPotion; // CanaryMod - potion instance
 
     protected OPotion(int var1, boolean var2, int var3) {
         super();
@@ -64,6 +67,8 @@ public class OPotion {
         }
 
         this.N = var3;
+        
+        canaryPotion = new CanaryPotion(this); // CanaryMod
     }
 
     protected OPotion a(int var1, int var2) {
@@ -169,5 +174,16 @@ public class OPotion {
     public int g() {
         return this.N;
     }
+    
+    // CanaryMod - start
+    public boolean isBad() { // Access private field
+        return K;
+    }
+    
+    public CanaryPotion getCanaryPotion() {
+        return canaryPotion;
+    }
+    
+    //CanaryMod - end
 
 }
