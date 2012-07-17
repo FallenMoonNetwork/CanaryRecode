@@ -74,6 +74,9 @@ public class OEntityEnderman extends OEntityMob {
     @Override
     protected OEntity o() {
         OEntityPlayer var1 = this.bi.b(this, 64.0D);
+        if (var1 == null) {
+            return null;
+        }
         MobTargetHook hook = new MobTargetHook(canaryEnderman, ((OEntityPlayerMP) var1).getPlayer());
         Canary.hooks().callHook(hook);
         if(hook.isCanceled()) {
