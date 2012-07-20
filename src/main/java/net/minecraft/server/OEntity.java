@@ -983,8 +983,9 @@ public abstract class OEntity {
 
     public boolean interact(OEntityPlayer var1) {
         //CanaryMod interact hook
-        Player tmp = ((OEntityPlayerMP) var1).getPlayer();
-        RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryEntity(), Hook.Type.ENTITY_RIGHTCLICK);
+        //TODO: what's cooking with this?
+//        Player tmp = ((OEntityPlayerMP) var1).getPlayer();
+//        RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryEntity(), Hook.Type.ENTITY_RIGHTCLICK);
         return false;
     }
 

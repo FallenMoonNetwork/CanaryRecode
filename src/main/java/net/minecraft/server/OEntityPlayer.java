@@ -708,7 +708,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         if (!var1.interact(this)) {
             OItemStack var2 = this.U();
             if (var2 != null && var1 instanceof OEntityLiving) {
-                RightClickHook hook = new RightClickHook(((OEntityPlayerMP)this).getPlayer(), null, null, var2.getCanaryItem(),((OEntityLiving) var1).getCanaryEntityLiving(), Hook.Type.ENTITY_RIGHTCLICKED);
+                RightClickHook hook = new RightClickHook(((OEntityPlayerMP)this).getPlayer(), null, null, var2.getCanaryItem(),((OEntityLiving) var1).getCanaryEntityLiving(), Hook.Type.ENTITY_RIGHTCLICK);
                 Canary.hooks().callHook(hook);
                 if(!hook.isCanceled()){
                     var2.a((OEntityLiving) var1);
