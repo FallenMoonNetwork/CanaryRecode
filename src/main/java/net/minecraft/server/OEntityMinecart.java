@@ -790,7 +790,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     }
 
     @Override
-    public boolean b(OEntityPlayer var1) {
+    public boolean interact(OEntityPlayer var1) {
         if (this.minecartType == 0) {
             if (this.bg != null && this.bg instanceof OEntityPlayer && this.bg != var1) {
                 return true;

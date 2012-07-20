@@ -1,6 +1,11 @@
 package net.minecraft.server;
 
 import java.util.List;
+
+import net.canarymod.Canary;
+import net.canarymod.api.entity.Player;
+import net.canarymod.hook.Hook;
+import net.canarymod.hook.player.RightClickHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
@@ -227,9 +232,16 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
     }
 
     @Override
-    public boolean b(OEntityPlayer var1) {
+    public boolean interact(OEntityPlayer var1) {
         OItemStack var2 = var1.k.l();
         if (var2 != null && this.a(var2) && this.K() == 0) {
+            //CanaryMod Breed hook
+            Player tmp = ((OEntityPlayerMP) var1).getPlayer();
+            RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryEntityLiving(), Hook.Type.BREED);
+            Canary.hooks().callHook(hook);
+            if(hook.isCanceled()) {
+                return false;
+            }
             if (!var1.L.d) {
                 --var2.a;
                 if (var2.a <= 0) {
@@ -249,7 +261,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
 
             return true;
         } else {
-            return super.b(var1);
+            return super.interact(var1);
         }
     }
 

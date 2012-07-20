@@ -337,7 +337,7 @@ public class OEntityBoat extends OEntity {
     }
 
     @Override
-    public boolean b(OEntityPlayer var1) {
+    public boolean interact(OEntityPlayer var1) {
         if (this.bg != null && this.bg instanceof OEntityPlayer && this.bg != var1) {
             return true;
         } else {

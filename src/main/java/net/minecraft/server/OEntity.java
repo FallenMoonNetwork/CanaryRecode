@@ -8,9 +8,12 @@ import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.CanaryEntityLiving;
 import net.canarymod.api.entity.EntityLiving;
+import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.Hook;
 import net.canarymod.hook.entity.DamageHook;
+import net.canarymod.hook.player.RightClickHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockFluid;
@@ -978,7 +981,10 @@ public abstract class OEntity {
         return false;
     }
 
-    public boolean b(OEntityPlayer var1) {
+    public boolean interact(OEntityPlayer var1) {
+        //CanaryMod interact hook
+        Player tmp = ((OEntityPlayerMP) var1).getPlayer();
+        RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryEntity(), Hook.Type.ENTITY_RIGHTCLICK);
         return false;
     }
 

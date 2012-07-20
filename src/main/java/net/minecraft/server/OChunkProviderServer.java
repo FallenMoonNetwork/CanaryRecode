@@ -94,7 +94,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         this.b.remove(Long.valueOf(var3));
         OChunk var5 = (OChunk) this.f.a(var3);
         if (var5 == null) {
-            // CanaryMod start: load preload plugins XXX
+            // CanaryMod start: load preload plugins 
             if (loadStage < 1) {
                 Canary.loader().loadPlugins(true);
                 loadStage = 1;
@@ -203,7 +203,7 @@ public class OChunkProviderServer implements OIChunkProvider {
     public boolean a(boolean var1, OIProgressUpdate var2) throws IOException {
         int var3 = 0;
 
-        // CanaryMod start: load plugins XXX
+        // CanaryMod start: load plugins 
         if (loadStage < 2) {
             Canary.loader().loadPlugins(false);
             loadStage = 2;

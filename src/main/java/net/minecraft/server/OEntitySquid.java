@@ -96,8 +96,8 @@ public class OEntitySquid extends OEntityWaterMob {
     }
 
     @Override
-    public boolean b(OEntityPlayer var1) {
-        return super.b(var1);
+    public boolean interact(OEntityPlayer var1) {
+        return super.interact(var1);
     }
 
     @Override

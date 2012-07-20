@@ -159,7 +159,7 @@ public class OEntityOcelot extends OEntityTameable {
     }
 
     @Override
-    public boolean b(OEntityPlayer var1) {
+    public boolean interact(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
         if (!this.u_()) {
             if (this.b.f() && var2 != null && var2.c == OItem.aT.bP && var1.j(this) < 9.0D) {
@@ -189,7 +189,7 @@ public class OEntityOcelot extends OEntityTameable {
                 this.a.a(!this.v_());
             }
 
-            return super.b(var1);
+            return super.interact(var1);
         }
     }
 

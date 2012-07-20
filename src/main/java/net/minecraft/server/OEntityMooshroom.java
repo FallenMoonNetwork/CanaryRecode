@@ -29,7 +29,7 @@ public class OEntityMooshroom extends OEntityCow {
     }
 
     @Override
-    public boolean b(OEntityPlayer var1) {
+    public boolean interact(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
         if (var2 != null && var2.c == OItem.D.bP && this.K() >= 0) {
             if (var2.a == 1) {
@@ -60,7 +60,7 @@ public class OEntityMooshroom extends OEntityCow {
 
             return true;
         } else {
-            return super.b(var1);
+            return super.interact(var1);
         }
     }
 
