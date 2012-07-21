@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+import net.canarymod.api.CanaryDamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityArrow;
 import net.minecraft.server.OEntityDamageSource;
@@ -29,6 +30,7 @@ public class ODamageSource {
     private boolean q;
     private boolean r;
     public String n;
+    private CanaryDamageSource damageSource;
 
     public static ODamageSource a(OEntityLiving var0) {
         return new OEntityDamageSource("mob", var0);
@@ -78,6 +80,13 @@ public class ODamageSource {
     protected ODamageSource(String var1) {
         super();
         this.n = var1;
+        //CanaryMod ...
+        this.damageSource = new CanaryDamageSource(this);
+    }
+    
+    //CanaryMod get handler
+    public CanaryDamageSource getCanaryDamageSource() {
+        return this.damageSource;
     }
 
     public OEntity b() {

@@ -77,6 +77,7 @@ public class OEntityEnderman extends OEntityMob {
         if (var1 == null) {
             return null;
         }
+        //CanaryMod Mob Target hook
         MobTargetHook hook = new MobTargetHook(canaryEnderman, ((OEntityPlayerMP) var1).getPlayer());
         Canary.hooks().callHook(hook);
         if(hook.isCanceled()) {

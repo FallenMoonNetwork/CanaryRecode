@@ -1,6 +1,9 @@
 package net.minecraft.server;
 
 import java.util.List;
+
+import net.canarymod.Canary;
+import net.canarymod.hook.world.IgnitionHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
@@ -26,7 +29,12 @@ public class OEntityLightningBolt extends OEntityWeatherEffect {
             int var9 = OMathHelper.b(var4);
             int var10 = OMathHelper.b(var6);
             if (var1.a(var8, var9, var10) == 0 && OBlock.ar.c(var1, var8, var9, var10)) {
-                var1.e(var8, var9, var10, OBlock.ar.bO);
+                
+                IgnitionHook hook = new IgnitionHook(this.getDimension().getBlockAt(var8, var9, var10), 5);
+                Canary.hooks().callHook(hook);
+                if(!hook.isCanceled()) {
+                    var1.e(var8, var9, var10, OBlock.ar.bO);
+                }
             }
 
             for (var8 = 0; var8 < 4; ++var8) {
