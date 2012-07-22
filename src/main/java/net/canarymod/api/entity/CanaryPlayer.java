@@ -666,4 +666,10 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         return ((OEntityPlayerMP) entity).P();
     }
 
+    @Override
+    public boolean isInVehicle() {
+        // player.bh != null
+        return ((OEntityPlayerMP) entity).bh != null;
+    }
+
 }
