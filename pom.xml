@@ -20,7 +20,11 @@
     <dependency>
       <groupId>net.canarymod</groupId>
       <artifactId>CanaryLib</artifactId>
-      <version>0.4-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.21</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -70,6 +74,12 @@
                   <artifactId>CanaryLib</artifactId>
                   <overWrite>false</overWrite>
                   <destFileName>CanaryLib.jar</destFileName>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>mysql</groupId>
+                  <artifactId>mysql-connector-java</artifactId>
+                  <overWrite>false</overWrite>
+                  <destFileName>mysql-connector-java.jar</destFileName>
                 </artifactItem>
               </artifactItems>
               <outputDirectory>${project.build.directory}/lib</outputDirectory>
@@ -122,4 +132,13 @@
       </plugin>
     </plugins>
   </build>
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>net.canarymod</groupId>
+  			<artifactId>CanaryLib</artifactId>
+  			<version>0.4-SNAPSHOT</version>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
 </project>
