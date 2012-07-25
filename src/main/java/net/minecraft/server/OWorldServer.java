@@ -156,7 +156,7 @@ public class OWorldServer extends OWorld {
     public void a(OEntity var1, byte var2) {
         OPacket38EntityStatus var3 = new OPacket38EntityStatus(var1.bd, var2);
         //CanaryMod use the real entity tracker
-        this.getCanaryDimension().getEntityTracker().getHandle().b(var1, var3);
+        this.getCanaryWorld().getEntityTracker().getHandle().b(var1, var3);
 //        this.J.b(this.t.g).b(var1, var3);
     }
 

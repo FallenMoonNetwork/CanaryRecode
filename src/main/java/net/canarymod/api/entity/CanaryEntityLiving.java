@@ -12,7 +12,7 @@ import net.canarymod.api.entity.potion.CanaryPotionEffect;
 import net.canarymod.api.entity.potion.Potion;
 import net.canarymod.api.entity.potion.PotionEffect;
 import net.canarymod.api.entity.potion.PotionType;
-import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.OChunkCoordinates;
@@ -219,7 +219,7 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
     @Override
     public void spawn(EntityLiving rider) {
-        OWorld world = ((CanaryDimension) getDimension()).getHandle();
+        OWorld world = ((CanaryWorld) getWorld()).getHandle();
 
         entity.c(getX() + 0.5d, getY(), getZ() + 0.5d, getRotation(), 0f);
         world.b(entity);

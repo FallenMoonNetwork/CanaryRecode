@@ -121,7 +121,7 @@ public class ONetLoginHandler extends ONetHandler {
 //            var2.a((OWorldServer) ((CanaryDimension)var2.getDimension().getWorld().getDimension(Type.fromId(var2.w))).getHandle());
             var2.c.a((OWorldServer) var2.bi);
             a.info(this.b() + " logged in with entity id " + var2.bd + " at (" + var2.bm + ", " + var2.bn + ", " + var2.bo + ")");
-            OWorldServer var3 = (OWorldServer) ((CanaryDimension)var2.getDimension()).getHandle();
+            OWorldServer var3 = (OWorldServer) ((CanaryDimension)var2.getCanaryWorld()).getHandle();
             OChunkCoordinates var4 = var3.p();
             var2.c.b(var3.s().getGameMode());
             ONetServerHandler var5 = new ONetServerHandler(this.e, this.b, var2);
@@ -136,7 +136,7 @@ public class ONetLoginHandler extends ONetHandler {
                 this.e.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
             }
             this.e.h.c(var2);
-            var5.a(var2.bm, var2.bn, var2.bo, var2.bs, var2.bt, var2.w, var2.bi.getCanaryDimension().getName());
+            var5.a(var2.bm, var2.bn, var2.bo, var2.bs, var2.bt, var2.w, var2.bi.getCanaryWorld().getName());
             this.e.c.a(var5);
             var5.b((new OPacket4UpdateTime(var3.o())));
             Iterator var6 = var2.aM().iterator();

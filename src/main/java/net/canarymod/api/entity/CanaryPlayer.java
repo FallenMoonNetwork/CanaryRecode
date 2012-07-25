@@ -16,8 +16,7 @@ import net.canarymod.api.Packet;
 import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
-import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.position.Direction;
@@ -224,15 +223,15 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void dropItem(Item item) {
-        getDimension().dropItem((int)getX(), (int)getY(), (int)getZ(), item);
+        getWorld().dropItem((int)getX(), (int)getY(), (int)getZ(), item);
     }
 
     @Override
     public Location getSpawnPosition() {
-        Location spawn = Canary.getServer().getDefaultWorld().getNormal().getSpawnLocation();
+        Location spawn = Canary.getServer().getDefaultWorld().getSpawnLocation();
         OChunkCoordinates loc = ((OEntityPlayerMP)entity).ab();
         if (loc != null) {
-            spawn = new Location(Canary.getServer().getDefaultWorld().getNormal(), loc.a, loc.b, loc.c, 0.0F, 0.0F);
+            spawn = new Location(Canary.getServer().getDefaultWorld(), loc.a, loc.b, loc.c, 0.0F, 0.0F);
         }
         return spawn;
     }
@@ -327,7 +326,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void sendPacket(Packet packet) {
-        getDimension().getEntityTracker().sendPacketToTrackedPlayer(this, packet);
+        getWorld().getEntityTracker().sendPacketToTrackedPlayer(this, packet);
     }
 
     @Override
@@ -396,7 +395,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public Location getLocation() {
-        return new Location(entity.bi.getCanaryDimension(), getX(), getY(), getZ(), getPitch(), getRotation());
+        return new Location(entity.bi.getCanaryWorld(), getX(), getY(), getZ(), getPitch(), getRotation());
     }
     
     @Override
@@ -437,8 +436,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         teleportTo(position.getX(), position.getY(), position.getZ(), 0.0f, 0.0f);
     }
     @Override
-    public void teleportTo(double x, double y, double z, Dimension dim) {
-        if (!(getDimension().hashCode() == dim.hashCode())) {
+    public void teleportTo(double x, double y, double z, World dim) {
+        if (!(getWorld().hashCode() == dim.hashCode())) {
             switchWorlds(dim);
         }
         teleportTo(x, y, z, 0.0F, 0.0F);
@@ -446,8 +445,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
-    public void teleportTo(double x, double y, double z, float pitch, float rotation, Dimension dim) {
-        if (!(getDimension().hashCode() == dim.hashCode())) {
+    public void teleportTo(double x, double y, double z, float pitch, float rotation, World dim) {
+        if (!(getWorld().hashCode() == dim.hashCode())) {
             switchWorlds(dim);
         }
         teleportTo(x, y, z, pitch, rotation);
@@ -460,14 +459,14 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         if (player.bh != null) {
             player.b(player.bh);
         }
-        player.a.a(x, y, z, rotation, pitch, getDimension().getType().getId(), getDimension().getName());
+        player.a.a(x, y, z, rotation, pitch, getWorld().getType().getId(), getWorld().getName());
         
     }
 
     @Override
     public void teleportTo(Location location) {
-        if (!(getDimension().hashCode() == location.getDimension().hashCode())) {
-            switchWorlds(location.getDimension());
+        if (!(getWorld().hashCode() == location.getWorld().hashCode())) {
+            switchWorlds(location.getWorld());
         }
         teleportTo(location.getX(),location.getY(), location.getZ(),location.getPitch(), location.getRotation());
     }
@@ -565,18 +564,18 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
     }
     
-    public void switchWorlds(Dimension dim) {
+    public void switchWorlds(World dim) {
         OMinecraftServer mcServer = ((CanaryServer) Canary.getServer()).getHandle();
         OEntityPlayerMP ent = (OEntityPlayerMP) entity;
-        
-        // Nether is not allowed, so shush
-        if (dim.getType() == Dimension.Type.NETHER && !mcServer.d.a("allow-nether", true)) {
-            return;
-        }
-        // The End is not allowed, so shush
-        if (dim.getType() == Dimension.Type.END && !mcServer.d.a("allow-end", true)) {
-            return;
-        }
+        //Do not check for worlds. let plugins handle restrictions!
+//        // Nether is not allowed, so shush
+//        if (dim.getType().equals(WorldType.fromName("NETHER")) && !mcServer.d.a("allow-nether", true)) {
+//            return;
+//        }
+//        // The End is not allowed, so shush
+//        if (dim.getType().equals(WorldType.fromName("END")) && !mcServer.d.a("allow-end", true)) {
+//            return;
+//        }
         // Dismount first or get buggy
         if (ent.bh != null) {
             ent.b(ent.bh);
@@ -586,8 +585,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         ent.a((OStatBase) OAchievementList.B);
         
         //switch world if needed
-        if(!(dim.getName().equals(ent.bi.getCanaryDimension().getName()))) {
-            Dimension oldWorld = ent.bi.getCanaryDimension();
+        if(!(dim.getName().equals(ent.bi.getCanaryWorld().getName()))) {
+            World oldWorld = ent.bi.getCanaryWorld();
             //remove player from entity tracker
             oldWorld.getEntityTracker().untrackPlayerSymmetrics(ent.getPlayer());
             oldWorld.getEntityTracker().untrackEntity(ent.getPlayer());
@@ -597,7 +596,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             oldWorld.getPlayerManager().removePlayer(ent.getPlayer());
             
             //Change players world reference
-            ent.bi = ((CanaryDimension) dim).getHandle();
+            ent.bi = ((CanaryWorld) dim).getHandle();
             //Add player back to the new world
 //            dim.addPlayerToWorld(this);
 //            dim.getPlayerManager().addPlayer(this);
@@ -607,7 +606,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         OChunkCoordinates var2 = ent.bi.d();
 
         if (var2 != null) {
-            ent.a.a((double) var2.a, (double) var2.b, (double) var2.c, 0.0F, 0.0F, dim.getType().getId(), ent.bi.getCanaryDimension().getName());
+            ent.a.a((double) var2.a, (double) var2.b, (double) var2.c, 0.0F, 0.0F, dim.getType().getId(), ent.bi.getCanaryWorld().getName());
         }
 
         mcServer.h.switchDimension(ent, dim.getType().getId(), false);
@@ -623,7 +622,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             if(items[i] == null) {
                 continue;
             }
-            drops[i] = getDimension().dropItem(getPosition(), items[i]);
+            drops[i] = getWorld().dropItem(getPosition(), items[i]);
             
         }
         getInventory().clearContents();

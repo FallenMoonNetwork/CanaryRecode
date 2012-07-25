@@ -35,7 +35,7 @@ public class OItemBlock extends OItem {
         }
         
         // CanaryMod: Store blockInfo of the one we clicked
-        Block blockClicked = var3.getCanaryDimension().getBlockAt(var4, var5, var6);
+        Block blockClicked = var3.getCanaryWorld().getBlockAt(var4, var5, var6);
         
         int var8 = var3.a(var4, var5, var6);
         if (var8 == OBlock.aS.bO) {

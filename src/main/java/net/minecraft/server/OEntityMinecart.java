@@ -1022,7 +1022,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                 int targetSlot = getEmptySlot();
                 
                 if (targetSlot == -1) {
-                    this.bi.getCanaryDimension().dropItem((int)getCanaryEntity().getX(), (int)getCanaryEntity().getY(), (int)getCanaryEntity().getZ(), itemId, amount, 0);
+                    this.bi.getCanaryWorld().dropItem((int)getCanaryEntity().getX(), (int)getCanaryEntity().getY(), (int)getCanaryEntity().getZ(), itemId, amount, 0);
                     remaining = 0;
                 } else {
                     addItem(new CanaryItem(itemId, 1, targetSlot));
@@ -1049,7 +1049,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                     int targetSlot = getEmptySlot();
                     
                     if (targetSlot == -1) {
-                        this.bi.getCanaryDimension().dropItem((int)getCanaryEntity().getX(), (int)getCanaryEntity().getY(), (int)getCanaryEntity().getZ(), itemId, amount, 0);
+                        this.bi.getCanaryWorld().dropItem((int)getCanaryEntity().getX(), (int)getCanaryEntity().getY(), (int)getCanaryEntity().getZ(), itemId, amount, 0);
                         remaining = 0;
                     } else {
                         if (remaining > 64) {

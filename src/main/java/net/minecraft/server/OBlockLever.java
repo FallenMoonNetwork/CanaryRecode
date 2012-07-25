@@ -163,7 +163,7 @@ public class OBlockLever extends OBlock {
             int old = (var8 != 8) ? 1 : 0;
             int current = (var8 == 8) ? 1 : 0;
             
-            RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), old, current);
+            RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), old, current);
             Canary.hooks().callHook(hook);
             if(hook.isCanceled()) {
                 return true;

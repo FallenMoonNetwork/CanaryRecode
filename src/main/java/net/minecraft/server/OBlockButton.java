@@ -147,7 +147,7 @@ public class OBlockButton extends OBlock {
         int var7 = var6 & 7;
         int var8 = 8 - (var6 & 8);
         
-        RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), var7, var8);
+        RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), var7, var8);
         Canary.hooks().callHook(hook);
         if (var8 == 0 || hook.isCanceled()) {
             return true;

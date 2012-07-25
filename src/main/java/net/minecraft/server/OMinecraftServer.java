@@ -21,11 +21,8 @@ import net.canarymod.api.CanaryServer;
 import net.canarymod.api.EntityTracker;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
-import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.CanaryWorldManager;
-import net.canarymod.api.world.Dimension;
-import net.canarymod.api.world.Dimension.Type;
 import net.canarymod.api.world.World;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.WorldConfiguration;
@@ -383,7 +380,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         //CanaryMod refactored for multiworld purposes
         for (World w : worldManager.getAllWorlds()) {
             for(Dimension dim : w.getDimensions()) {
-                OWorldServer var2 = (OWorldServer) ((CanaryDimension)dim).getHandle();
+                OWorldServer var2 = (OWorldServer) ((CanaryWorld)dim).getHandle();
              // saves the world
                 try {
                     var2.a(true, (OIProgressUpdate) null);
@@ -456,7 +453,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                         boolean allSleeping = true;
                         for(World canaryWorld : worldManager.getAllWorlds()) {
                             Dimension[] level = canaryWorld.getDimensions();
-                            allSleeping &= ((CanaryDimension)level[0]).getHandle().v();
+                            allSleeping &= ((CanaryWorld)level[0]).getHandle().v();
 
                         }
                         
@@ -616,7 +613,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             Dimension[] level = canaryWorld.getDimensions();
             for(var11 = 0; var11 < level.length; ++var11) {
                 if (var11 == 0 || Configuration.getWorldConfig(canaryWorld.getName()).isNetherAllowed()) {
-                    OWorldServer var9 = (OWorldServer) ((CanaryDimension)level[var11]).getHandle();
+                    OWorldServer var9 = (OWorldServer) ((CanaryWorld)level[var11]).getHandle();
                     if (this.j % 20 == 0) {
                         for(Player p : cfgManager.getAllPlayers()) {
                             OEntityPlayerMP player = ((CanaryPlayer)p).getHandle();

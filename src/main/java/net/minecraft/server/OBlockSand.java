@@ -19,7 +19,7 @@ public class OBlockSand extends OBlock {
 
     @Override
     public void a(OWorld var1, int var2, int var3, int var4) {
-        BlockPhysicsHook hook = new BlockPhysicsHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), true);
+        BlockPhysicsHook hook = new BlockPhysicsHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), true);
         Canary.hooks().callHook(hook);
         if(hook.isCanceled()) {
             return;
@@ -29,7 +29,7 @@ public class OBlockSand extends OBlock {
 
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
-        BlockPhysicsHook hook = new BlockPhysicsHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), false);
+        BlockPhysicsHook hook = new BlockPhysicsHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), false);
         Canary.hooks().callHook(hook);
         if(hook.isCanceled()) {
             return;

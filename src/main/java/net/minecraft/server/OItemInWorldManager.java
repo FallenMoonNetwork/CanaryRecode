@@ -147,7 +147,7 @@ public class OItemInWorldManager {
 
     public boolean c(int var1, int var2, int var3) {
         // CanaryMod - Cancel block breaking.
-        Block block = ((OEntityPlayerMP)b).getDimension().getBlockAt(var1, var2, var3);
+        Block block = ((OEntityPlayerMP)b).getCanaryWorld().getBlockAt(var1, var2, var3);
         block.setStatus(1);// Block break status.
         LeftClickHook hook = new LeftClickHook(((OEntityPlayerMP)b).getPlayer(), block);
         Canary.hooks().callHook(hook);

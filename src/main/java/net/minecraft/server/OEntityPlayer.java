@@ -336,7 +336,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
             --this.o;
         }
 
-        if (this.bi.q == 0 && Configuration.getWorldConfig(bi.getCanaryDimension().getName()).isAutoHealEnabled()){ //CanaryMod AutoHeal setting
+        if (this.bi.q == 0 && Configuration.getWorldConfig(bi.getCanaryWorld().getName()).isAutoHealEnabled()){ //CanaryMod AutoHeal setting
             if(this.aD() < this.d() && this.bT % 20 * 12 == 0) {
                 this.d(1);
             }

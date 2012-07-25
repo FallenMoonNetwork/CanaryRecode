@@ -252,7 +252,7 @@ public class OItem {
 
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
         //CanaryMod call item use hook
-        CanaryBlock block = (CanaryBlock) var2.bi.getCanaryDimension().getBlockAt(var4, var5, var6);
+        CanaryBlock block = (CanaryBlock) var2.bi.getCanaryWorld().getBlockAt(var4, var5, var6);
         block.setFaceClicked(BlockFace.fromByte((byte)var7));
         RightClickHook hook = new RightClickHook(((OEntityPlayerMP)var2).getPlayer(), null, block, new CanaryItem(var1), null, Hook.Type.ITEM_USE);
         Canary.hooks().callHook(hook);

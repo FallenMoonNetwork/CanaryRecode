@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
-import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.World;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OPlayerManager;
 
 public class CanaryPlayerManager implements PlayerManager {
     private OPlayerManager pm;
-    private CanaryDimension dim;
-    public CanaryPlayerManager(OPlayerManager pm, CanaryDimension dimension) {
+    private CanaryWorld dim;
+    public CanaryPlayerManager(OPlayerManager pm, CanaryWorld dimension) {
         this.pm = pm;
         this.dim = dimension;
     }
@@ -50,7 +50,7 @@ public class CanaryPlayerManager implements PlayerManager {
     }
 
     @Override
-    public Dimension getAttachedDimension() {
+    public World getAttachedDimension() {
         return dim;
     }
 

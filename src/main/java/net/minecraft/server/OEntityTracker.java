@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import net.canarymod.api.CanaryEntityTracker;
-import net.canarymod.api.world.CanaryDimension;
+import net.canarymod.api.world.CanaryWorld;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityArrow;
 import net.minecraft.server.OEntityBoat;
@@ -45,7 +45,7 @@ public class OEntityTracker {
     
     private CanaryEntityTracker canaryTracker;
 
-    public OEntityTracker(OMinecraftServer var1, int var2, CanaryDimension dim) {
+    public OEntityTracker(OMinecraftServer var1, int var2, CanaryWorld dim) {
         super();
         this.c = var1;
         this.e = var2;
@@ -142,7 +142,7 @@ public class OEntityTracker {
             OEntityTrackerEntry var5 = new OEntityTrackerEntry(var1, var2, var3, var4);
             this.a.add(var5);
             this.b.a(var1.bd, var5);
-            CanaryDimension dim = var1.getDimension();
+            CanaryWorld dim = var1.getCanaryWorld();
 //            var5.b(this.c.a(this.e).d);
             var5.b(dim.getHandle().d);
         }
@@ -174,7 +174,7 @@ public class OEntityTracker {
         while (var2.hasNext()) {
             OEntityTrackerEntry var3 = var2.next();
             //Canarymod get playerlist from this dimension instead
-            var3.a(((CanaryDimension)canaryTracker.getAttachedDimension()).getHandle().d); //XXX
+            var3.a(((CanaryWorld)canaryTracker.getAttachedDimension()).getHandle().d); //XXX
             
             if (var3.n && var3.a instanceof OEntityPlayerMP) {
                 var1.add(var3.a);

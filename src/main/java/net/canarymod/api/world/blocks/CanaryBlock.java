@@ -1,7 +1,8 @@
 package net.canarymod.api.world.blocks;
 
 import net.canarymod.Canary;
-import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.Block;
 
@@ -9,7 +10,7 @@ public class CanaryBlock implements Block {
     protected short type;
     protected byte data;
     protected int x,y,z, status;
-    protected Dimension dimension;
+    protected World dimension;
     protected BlockFace faceClicked;
     
     public CanaryBlock(int x, int y, int z) {
@@ -19,7 +20,7 @@ public class CanaryBlock implements Block {
         this.type=0;
         this.data=0;
         status = 0;
-        dimension= Canary.getServer().getDefaultWorld().getNormal();
+        dimension= Canary.getServer().getDefaultWorld();
     }
     
     public CanaryBlock(short type, byte data) {
@@ -29,7 +30,7 @@ public class CanaryBlock implements Block {
         this.type = type;
         this.data = data;
         status = 0;
-        dimension = Canary.getServer().getDefaultWorld().getNormal();
+        dimension = Canary.getServer().getDefaultWorld();
     }
     
     public CanaryBlock(short type, byte data, int x, int y, int z) {
@@ -39,17 +40,17 @@ public class CanaryBlock implements Block {
         this.type = type;
         this.data = data;
         status = 0;
-        dimension = Canary.getServer().getDefaultWorld().getNormal();
+        dimension = Canary.getServer().getDefaultWorld();
     }
     
-    public CanaryBlock(short type, byte data, int x, int y, int z, Dimension dimension) {
+    public CanaryBlock(short type, byte data, int x, int y, int z, CanaryWorld canaryWorld) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.type = type;
         this.data = data;
         status = 0;
-        this.dimension = dimension;
+        this.dimension = canaryWorld;
     }
     
     @Override
@@ -75,12 +76,12 @@ public class CanaryBlock implements Block {
     }
 
     @Override
-    public Dimension getDimension() {
+    public World getDimension() {
         return this.dimension;
     }
 
     @Override
-    public void setDimension(Dimension dimension) {
+    public void setDimension(World dimension) {
         this.dimension = dimension;
     }
 

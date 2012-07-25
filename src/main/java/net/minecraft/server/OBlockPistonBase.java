@@ -89,8 +89,8 @@ public class OBlockPistonBase extends OBlock {
                 if (g(var1, var2, var3, var4, var6)) {
                     
                     //CanaryMod onPistonExtend start
-                    Block piston = new CanaryBlock((this.a ? (short)29 : (short)33), (byte)0, var2, var3, var4, var1.getCanaryDimension());
-                    Block moving = new CanaryBlock((short)var1.a(var2 + OFacing.b[var6], var3 + OFacing.c[var6], var4 + OFacing.d[var6]), (byte)0, (var2 + OFacing.b[var6]), (var3 + OFacing.c[var6]), (var4 + OFacing.d[var6]), var1.getCanaryDimension());
+                    Block piston = new CanaryBlock((this.a ? (short)29 : (short)33), (byte)0, var2, var3, var4, var1.getCanaryWorld());
+                    Block moving = new CanaryBlock((short)var1.a(var2 + OFacing.b[var6], var3 + OFacing.c[var6], var4 + OFacing.d[var6]), (byte)0, (var2 + OFacing.b[var6]), (var3 + OFacing.c[var6]), (var4 + OFacing.d[var6]), var1.getCanaryWorld());
                     PistonHook hook = new PistonHook(piston, moving, true);
                     Canary.hooks().callHook(hook);
                     if (hook.isCanceled()) {
@@ -104,8 +104,8 @@ public class OBlockPistonBase extends OBlock {
             } else if (!var7 && e(var5)) {
                 
                 //CanaryMod onPistonRetract start
-                Block piston = new CanaryBlock((this.a ? (short)29 : (short)33), (byte)0, var2, var3, var4, var1.getCanaryDimension());
-                Block moving = new CanaryBlock((short)var1.a(var2 + OFacing.b[var6] * 2, var3 + OFacing.c[var6] * 2, var4 + OFacing.d[var6] * 2), (byte)0, (var2 + OFacing.b[var6]), (var3 + OFacing.c[var6]), (var4 + OFacing.d[var6]), var1.getCanaryDimension());
+                Block piston = new CanaryBlock((this.a ? (short)29 : (short)33), (byte)0, var2, var3, var4, var1.getCanaryWorld());
+                Block moving = new CanaryBlock((short)var1.a(var2 + OFacing.b[var6] * 2, var3 + OFacing.c[var6] * 2, var4 + OFacing.d[var6] * 2), (byte)0, (var2 + OFacing.b[var6]), (var3 + OFacing.c[var6]), (var4 + OFacing.d[var6]), var1.getCanaryWorld());
                 PistonHook hook = new PistonHook(piston, moving, false);
                 Canary.hooks().callHook(hook);
                 attemptRetractBlock = !hook.isCanceled();

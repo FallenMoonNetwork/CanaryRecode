@@ -29,7 +29,7 @@ public class CanaryNpc extends CanaryEntityLiving implements Npc{
     }
     
     public CanaryNpc(String name, World world, int dim, double x, double y, double z, float rotation, float pitch, Item itemInHand) {
-        super(new OEntityPlayerMP(mcserv, ((CanaryWorld)world).getDimensionArray()[dim], name, new OItemInWorldManager(((CanaryWorld)world).getDimensionArray()[dim])));
+        super(new OEntityPlayerMP(mcserv, ((CanaryWorld)world).getHandle(), name, new OItemInWorldManager(((CanaryWorld)world).getHandle())));
         handler = new OEntityTrackerEntry(entity, 512, 1, true);
         teleportTo((int)Math.floor(x), (int)Math.floor(y), (int)Math.floor(z));
         setItemInHand(itemInHand);

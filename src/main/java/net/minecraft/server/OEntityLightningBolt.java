@@ -30,7 +30,7 @@ public class OEntityLightningBolt extends OEntityWeatherEffect {
             int var10 = OMathHelper.b(var6);
             if (var1.a(var8, var9, var10) == 0 && OBlock.ar.c(var1, var8, var9, var10)) {
                 
-                IgnitionHook hook = new IgnitionHook(this.getDimension().getBlockAt(var8, var9, var10), 5);
+                IgnitionHook hook = new IgnitionHook(this.getCanaryWorld().getBlockAt(var8, var9, var10), 5);
                 Canary.hooks().callHook(hook);
                 if(!hook.isCanceled()) {
                     var1.e(var8, var9, var10, OBlock.ar.bO);

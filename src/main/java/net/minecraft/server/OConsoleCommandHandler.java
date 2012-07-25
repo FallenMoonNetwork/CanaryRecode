@@ -7,9 +7,8 @@ import java.util.logging.Logger;
 
 import net.canarymod.Canary;
 import net.canarymod.Logman;
-import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.Dimension;
 import net.canarymod.api.world.World;
+import net.canarymod.api.world.CanaryWorld;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OICommandListener;
 import net.minecraft.server.OIProgressUpdate;
@@ -61,17 +60,15 @@ public class OConsoleCommandHandler {
 
                //CanaryMod Changes to process multiple worlds
                for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
-                   for(Dimension dim : w.getDimensions()) {
-                       var10 = (OWorldServer) ((CanaryDimension)dim).getHandle();
-                       boolean var11 = var10.I;
-                       var10.I = false;
-                       try {
-                           var10.a(true, (OIProgressUpdate)null);
-                       } catch (IOException e1) {
-                           Logman.logStackTrace("Failed to save Dimension" + dim.getType().name() + " in World " +dim.getName(), e1);
-                       }
-                       var10.I = var11;
+                   var10 = (OWorldServer) ((CanaryWorld)w).getHandle();
+                   boolean var11 = var10.I;
+                   var10.I = false;
+                   try {
+                       var10.a(true, (OIProgressUpdate)null);
+                   } catch (IOException e1) {
+                       Logman.logStackTrace("Failed to save Dimension" + w.getType().getName() + " in World " +w.getName(), e1);
                    }
+                   var10.I = var11;
                }
                //CanaryMod end
 
@@ -81,22 +78,18 @@ public class OConsoleCommandHandler {
 
                //CanaryMod Changes to process multiple worlds
                
-               for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
-                   for(Dimension dim : w.getDimensions()) {
-                       var10 = (OWorldServer) ((CanaryDimension)dim).getHandle();
-                       var10.I = true;
-                   }
+               for(World dim : Canary.getServer().getWorldManager().getAllWorlds()) {
+                   var10 = (OWorldServer) ((CanaryWorld)dim).getHandle();
+                   var10.I = true;
                }
                //CanaryMod end
             } else if(var4.equalsIgnoreCase("save-on")) {
                this.a(var7, "Enabling level saving..");
                
              //CanaryMod Changes to process multiple worlds
-               for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
-                   for(Dimension dim : w.getDimensions()) {
-                       var10 = (OWorldServer) ((CanaryDimension)dim).getHandle();
-                       var10.I = false;
-                   }
+               for(World dim : Canary.getServer().getWorldManager().getAllWorlds()) {
+                   var10 = (OWorldServer) ((CanaryWorld)dim).getHandle();
+                   var10.I = false;
                }
              //CanaryMod end
             } else if(var4.equalsIgnoreCase("op")) {
@@ -156,7 +149,7 @@ public class OConsoleCommandHandler {
                         } else if(var20.w != var18.w) {
                            var6.b("User " + var3[1] + " and " + var3[2] + " are in different dimensions. No tp.");
                         } else {
-                           var20.a.a(var18.bm, var18.bn, var18.bo, var18.bs, var18.bt, var18.w, var18.bi.getCanaryDimension().getName());
+                           var20.a.a(var18.bm, var18.bn, var18.bo, var18.bs, var18.bt, var18.w, var18.bi.getCanaryWorld().getName());
                            this.a(var7, "Teleporting " + var3[1] + " to " + var3[2] + ".");
                         }
                      } else {
@@ -257,22 +250,18 @@ public class OConsoleCommandHandler {
                         OWorldServer var24;
                         if("add".equalsIgnoreCase(var19)) {
                             //CanaryMod Changes for multiworld
-                            for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
-                                for(Dimension dim : w.getDimensions()) {
-                                    var24 = (OWorldServer) ((CanaryDimension)dim).getHandle();
-                                    var24.b(var24.o() + (long)var23);
-                                }
+                            for(World dim : Canary.getServer().getWorldManager().getAllWorlds()) {
+                                var24 = (OWorldServer) ((CanaryWorld)dim).getHandle();
+                                var24.b(var24.o() + (long)var23);
                            }
                             //CanaryMod end
 
                            this.a(var7, "Added " + var23 + " to time");
                         } else if("set".equalsIgnoreCase(var19)) {
                             //CanaryMod changes for mutiworld
-                            for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
-                                for(Dimension dim : w.getDimensions()) {
-                                    var24 = (OWorldServer) ((CanaryDimension)dim).getHandle();
-                                    var24.b((long)var23);
-                                }
+                            for(World dim : Canary.getServer().getWorldManager().getAllWorlds()) {
+                                var24 = (OWorldServer) ((CanaryWorld)dim).getHandle();
+                                var24.b((long)var23);
                            }
 
                            this.a(var7, "Set time to " + var23);
@@ -301,7 +290,7 @@ public class OConsoleCommandHandler {
                   } else if(var4.equalsIgnoreCase("toggledownfall")) {
                       //CanaryMod changes to switch weather in all worlds //TODO: Chris: Must be disabled I would say
                       for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
-                          ((CanaryDimension)w.getNormal()).getHandle().j(); //sets a property...
+                          ((CanaryWorld)w).getHandle().j(); //sets a property...
                       }
 //                     this.b.worldServer[0].j();
                      var6.b("Toggling rain and snow, hold on...");
