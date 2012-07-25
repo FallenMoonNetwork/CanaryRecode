@@ -44,15 +44,11 @@ public class OGuiStatsComponent extends JComponent {
         //CanaryMod Multiworld:
         World[] worlds = Canary.getServer().getWorldManager().getAllWorlds();
         if(worlds != null) {
-            for(World w : worlds) {
-                String worldName = w.getName();
-                OWorldServer[] level = ((CanaryWorld)w).getDimensionArray();
-                for (int i = 0; i < level.length; i++) {
-                    net.canarymod.api.world.Dimension dim = w.getDimensions()[i];
-                    this.d[5 + i] = "World " + worldName + " lvl " + i + " tick " + a.format(w.getNanoTick(dim.getType(), i) * 1.0E-6D) + " ms";
-                    if(level[i] != null && level[i].G != null) {
-                        this.d[5 + i] += ", " + level[i].G.d();
-                    }
+            for(int i = 0; i < worlds.length; i++) {
+                OWorldServer level = (OWorldServer) (((CanaryWorld) worlds[i]).getHandle());
+                this.d[5 + i] = "World " + worlds[i].getName() + " lvl " + i + " tick " + a.format(worlds[i].getNanoTick(i) * 1.0E-6D) + " ms";
+                if(worlds[i] != null && level.G != null) {
+                    this.d[5 + i] += ", " + level.G.d();
                 }
             }
         }

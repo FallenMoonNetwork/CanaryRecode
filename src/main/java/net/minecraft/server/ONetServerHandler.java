@@ -12,8 +12,8 @@ import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
-import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
@@ -162,7 +162,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     @Override
     public void a(OPacket10Flying var1) {
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getCanaryWorld()).getHandle();
+        OWorldServer var2 = (OWorldServer) ((CanaryWorld)this.e.getCanaryWorld()).getHandle();
         this.h = true;
         if (!this.e.j) {
             double var3;
@@ -351,7 +351,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     //CanaryMod changed signature to additionally define world destination
     public void a(double var1, double var3, double var5, float var7, float var8, int dimension, String world) {
         // CanaryMod - Teleport hook.
-        Dimension dim = Canary.getServer().getWorld(world).getDimension(Dimension.Type.fromId(dimension));
+        World dim = Canary.getServer().getWorld(world);
         Location location = new Location(dim, var1, var3, var5, var8, var7);
         TeleportHook hook = new TeleportHook(getUser(), location, false);
         Canary.hooks().callHook(hook);
@@ -369,7 +369,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     
     @Override
     public void a(OPacket14BlockDig var1) {
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getCanaryWorld()).getHandle();
+        OWorldServer var2 = (OWorldServer) ((CanaryWorld)this.e.getCanaryWorld()).getHandle();
         if (var1.e == 4) {
             this.e.S();
         } else if (var1.e == 5) {
@@ -448,7 +448,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     
     @Override
     public void a(OPacket15Place var1) {
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getCanaryWorld()).getHandle();
+        OWorldServer var2 = (OWorldServer) ((CanaryWorld)this.e.getCanaryWorld()).getHandle();
         OItemStack var3 = this.e.k.d();
         boolean var4 = false;
         int var5 = var1.a;
@@ -729,7 +729,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     @Override
     public void a(OPacket7UseEntity var1) {
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getCanaryWorld()).getHandle();
+        OWorldServer var2 = (OWorldServer) ((CanaryWorld)this.e.getCanaryWorld()).getHandle();
         OEntity var3 = var2.a(var1.b);
         if (var3 != null) {
             boolean var4 = this.e.h(var3);
@@ -846,7 +846,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     @Override
     public void a(OPacket130UpdateSign var1) {
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getCanaryWorld()).getHandle();
+        OWorldServer var2 = (OWorldServer) ((CanaryWorld)this.e.getCanaryWorld()).getHandle();
         if (var2.i(var1.a, var1.b, var1.c)) {
             OTileEntity var3 = var2.b(var1.a, var1.b, var1.c);
             if (var3 instanceof OTileEntitySign) {

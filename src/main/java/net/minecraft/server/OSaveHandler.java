@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
+
 import net.minecraft.server.OCompressedStreamTools;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIChunkLoader;
@@ -23,6 +24,7 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
 
     private static final Logger a = Logger.getLogger("Minecraft");
     private final File b;
+    private final File worldbaseDir; //CanaryMod
     private final File c;
     private final File d;
     private final long e = System.currentTimeMillis();
@@ -30,17 +32,36 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
 
     public OSaveHandler(File var1, String var2, boolean var3) {
         super();
-        this.b = new File(var1, var2);
+        //CanaryMod refactored for more flexible folder structure
+        File tmp = new File(var1, var2);
+        tmp.mkdirs();
+        this.b = new File(var1, var2+"/"+var2+"_NORMAL");
         this.b.mkdirs();
-        this.c = new File(this.b, "players");
-        this.d = new File(this.b, "data");
+        this.c = new File(tmp, "players");
+        this.d = new File(tmp, "data");
         this.d.mkdirs();
         this.f = var2;
+        this.worldbaseDir = var1;
         if (var3) {
             this.c.mkdirs();
         }
-
         this.f();
+    }
+    //CanaryMod added getname
+    /**
+     * get the base name of this world saver (only world name, without dimension appendix)
+     * @return
+     */
+    public String getBaseName() {
+        return this.f;
+    }
+    //CanaryMod
+    /**
+     * get the dir folder (worlds/)
+     * @return
+     */
+    public File getWorldBaseDir() {
+        return worldbaseDir;
     }
 
     private void f() {

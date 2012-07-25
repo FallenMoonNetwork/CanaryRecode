@@ -120,22 +120,22 @@ public class CanaryWorld implements World {
         int viewDistance = 10; //TODO: Add config for view distance!
         playerManager = new CanaryPlayerManager(new OPlayerManager(((CanaryServer)Canary.getServer()).getHandle(), 0, viewDistance, this), this);
         entityTracker = new CanaryEntityTracker((new OEntityTracker( ((CanaryServer)Canary.getServer()).getHandle(), 0, this)), this);
-        dimension.setCanaryWorld(this);
         world = dimension;
         this.type = type;
         //Init nanotick size
         nanoTicks = new long[100];
     }
 
-    /**
-     * Return the name of this World (WorldContainer)
-     * 
-     * @return
-     */
     @Override
     public String getName() {
         return this.name;
     }
+    
+    @Override
+    public String getFqName() {
+        return this.name + "_" +this.type.getName();
+    }
+    
     @Override
     public void setNanoTick(int tickIndex, long tick) {
         nanoTicks[tickIndex] = tick;

@@ -46,7 +46,7 @@ public class OWorldManager implements OIWorldAccess {
     @Override
     public void a(int var1, int var2, int var3) {
         //CanaryMod: Refactored to get around updated blocks per world
-        this.a.getCanaryConfigurationManager().markBlockNeedsUpdate(var1, var2, var3, this.b.t.g, this.b.getCanaryWorld().getName());
+        this.a.getCanaryConfigurationManager().markBlockNeedsUpdate(var1, var2, var3, this.b.getCanaryWorld().getType(), this.b.getCanaryWorld().getName());
 //        this.a.h.a(var1, var2, var3, this.b.t.g);
     }
 

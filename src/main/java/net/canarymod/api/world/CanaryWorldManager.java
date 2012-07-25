@@ -47,11 +47,11 @@ public class CanaryWorldManager implements WorldManager {
      * @param world
      */
     public void addWorld(CanaryWorld world) {
-        loadedWorlds.put(world.getName(), world);
+        loadedWorlds.put(world.getName()+"_"+world.getType().getName(), world);
     }
     @Override
     public World getWorld(String name) {
-        return loadedWorlds.get(name);
+        return loadedWorlds.get(name+"_NORMAL");
     }
 
     @Override
@@ -68,7 +68,7 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public World getWorld(String world, WorldType type) {
-        return loadedWorlds.get(world+type.getName());
+        return loadedWorlds.get(world+"_"+type.getName());
     }
 
     @Override

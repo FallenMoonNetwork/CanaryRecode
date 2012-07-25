@@ -59,7 +59,6 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         String[] data = Canary.usersAndGroups().getPlayerData(getName());
         group = Canary.usersAndGroups().getGroup(data[1]); 
         permissions = Canary.permissionManager().getPlayerProvider(getName());
-        
         if(data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
             prefix = data[0];
         }

@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import java.io.File;
 import java.util.List;
+
 import net.minecraft.server.OAnvilChunkLoader;
 import net.minecraft.server.OIChunkLoader;
 import net.minecraft.server.ORegionFileCache;
@@ -22,12 +23,13 @@ public class OAnvilSaveHandler extends OSaveHandler {
     public OIChunkLoader a(OWorldProvider var1) {
         File var2 = this.a();
         File var3;
+        //TODO: Support for custom world providers (ChunkGenerators)
         if (var1 instanceof OWorldProviderHell) {
-            var3 = new File(var2, "DIM-1");
+            var3 = new File(getWorldBaseDir(), getBaseName()+"_NETHER"); //CanaryMod changed to our own custom folder
             var3.mkdirs();
             return new OAnvilChunkLoader(var3);
         } else if (var1 instanceof OWorldProviderEnd) {
-            var3 = new File(var2, "DIM1");
+            var3 = new File(getWorldBaseDir(), getBaseName()+"_END"); //CanaryMod changed to our own custom folder
             var3.mkdirs();
             return new OAnvilChunkLoader(var3);
         } else {
