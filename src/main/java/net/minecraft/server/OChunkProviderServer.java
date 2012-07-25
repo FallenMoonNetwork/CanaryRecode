@@ -2,14 +2,12 @@ package net.minecraft.server;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import net.canarymod.Canary;
-import net.canarymod.CanaryMod;
 import net.canarymod.api.world.CanaryChunkProviderServer;
 import net.canarymod.hook.Hook;
 import net.canarymod.hook.world.ChunkCreationHook;

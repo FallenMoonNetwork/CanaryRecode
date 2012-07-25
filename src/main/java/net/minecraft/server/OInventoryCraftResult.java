@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import java.util.Arrays;
 
-import net.canarymod.api.entity.Player;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;

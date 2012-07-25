@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntityItem;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.EntitySpawnHook;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OBlock;

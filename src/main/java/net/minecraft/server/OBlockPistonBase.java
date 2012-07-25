@@ -4,10 +4,7 @@ import java.util.ArrayList;
 
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.Block;
-import net.canarymod.api.world.blocks.BlockType;
 import net.canarymod.api.world.blocks.CanaryBlock;
-import net.canarymod.hook.CancelableHook;
-import net.canarymod.hook.player.TeleportHook;
 import net.canarymod.hook.world.PistonHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;

@@ -19,7 +19,6 @@ import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.position.Location;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.hook.player.LeftClickHook;

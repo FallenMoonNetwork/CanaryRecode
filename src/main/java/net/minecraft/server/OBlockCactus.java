@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DamageHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;

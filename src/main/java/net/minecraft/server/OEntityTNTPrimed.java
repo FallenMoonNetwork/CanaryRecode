@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.CanaryTNTPrimed;
-import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.TNTPrimed;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.ONBTTagCompound;

@@ -7,7 +7,6 @@ import net.canarymod.api.entity.CanaryBaseItem;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.RightClickHook;
 import net.minecraft.server.OBlock;

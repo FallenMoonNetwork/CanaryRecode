@@ -3,7 +3,6 @@ package net.minecraft.server;
 import net.canarymod.Canary;
 import net.canarymod.api.inventory.ItemType;
 import net.canarymod.api.world.blocks.Block;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.LeftClickHook;
 import net.canarymod.hook.player.RightClickHook;

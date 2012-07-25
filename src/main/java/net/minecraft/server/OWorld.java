@@ -13,7 +13,6 @@ import java.util.TreeSet;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.EntitySpawnHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBiomeGenBase;

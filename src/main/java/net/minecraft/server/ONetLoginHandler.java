@@ -8,9 +8,7 @@ import java.util.logging.Logger;
 
 import net.canarymod.Canary;
 import net.canarymod.Colors;
-import net.canarymod.TextFormat;
 import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.Dimension.Type;
 import net.canarymod.hook.player.ConnectionHook;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayerMP;

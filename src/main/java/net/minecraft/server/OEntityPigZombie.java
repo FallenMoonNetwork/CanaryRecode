@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryPigZombie;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEnchantmentHelper;

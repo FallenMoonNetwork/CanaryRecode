@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import net.canarymod.Canary;
 import net.canarymod.Colors;
 import net.canarymod.Logman;
+import net.canarymod.TextFormat;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
@@ -107,9 +108,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             else {
                 String prefix = "<" + getColor() + getName() + Colors.White + "> ";
                 
-                //Preventing ConcurrentModification Issues by full making a copy of the list before giving it to plugins
-                ArrayList<Player> receivers = new ArrayList<Player>(Canary.getServer().getPlayerList()); // shadow copy the list for size matching
-                Collections.copy(receivers, Canary.getServer().getPlayerList()); //Fully copy the list
+                ArrayList<Player> receivers = new ArrayList<Player>(Configuration.getNetConfig().getMaxPlayers());
+                Collections.copy(receivers, Canary.getServer().getPlayerList()); //Fully copy the list because plugins should not meddle with the real player list
                 
                 ChatHook hook = new ChatHook(this, prefix, message, receivers);
                 Canary.hooks().callHook(hook);
@@ -117,12 +117,13 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                     return;
                 }
                 receivers = hook.getReceiverList();
+                String toSend = hook.getPrefix()+hook.getMessage();
                 for(Player player : receivers) {
                     if (hook.getPrefix().length() + hook.getMessage().length() >= 100) {
                         player.sendMessage(hook.getPrefix());
-                        player.sendMessage(hook.getMessage().toString());
+                        player.sendMessage(hook.getMessage());
                     } else {
-                        player.sendMessage(hook.getPrefix()+hook.getMessage().toString());
+                        player.sendMessage(toSend);
                     }
                 }
             }
@@ -139,6 +140,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void sendMessage(String message) {
         getNetServerHandler().sendMessage(message);
+        //Should cover all chat logging
+        Logman.logInfo(TextFormat.removeFormatting(message));
     }
 
     @Override

@@ -6,7 +6,6 @@ import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryPainting;
 import net.canarymod.api.entity.Player;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.PaintingHook;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;

@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
 import net.canarymod.Canary;
-import net.canarymod.api.entity.EntityLiving;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
