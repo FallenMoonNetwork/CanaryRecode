@@ -2,7 +2,6 @@ package net.canarymod.api.entity;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -106,8 +105,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             else {
                 String prefix = "<" + getColor() + getName() + Colors.White + "> ";
                 
-                ArrayList<Player> receivers = new ArrayList<Player>(Configuration.getNetConfig().getMaxPlayers());
-                Collections.copy(receivers, Canary.getServer().getPlayerList()); //Fully copy the list because plugins should not meddle with the real player list
+                //This is a copy of the real player list already, no need to copy again (re: Collections.copy())
+                ArrayList<Player> receivers = Canary.getServer().getPlayerList();
                 
                 ChatHook hook = new ChatHook(this, prefix, message, receivers);
                 Canary.hooks().callHook(hook);
