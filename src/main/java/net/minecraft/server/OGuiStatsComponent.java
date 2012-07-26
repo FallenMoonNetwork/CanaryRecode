@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.text.DecimalFormat;
+import java.util.Collection;
+
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
@@ -42,14 +44,16 @@ public class OGuiStatsComponent extends JComponent {
         this.d[4] = "Avg rec: " + (int) this.a(this.e.w) + ", Avg size: " + (int) this.a(this.e.x);
         
         //CanaryMod Multiworld:
-        World[] worlds = Canary.getServer().getWorldManager().getAllWorlds();
+        Collection<World> worlds = Canary.getServer().getWorldManager().getAllWorlds();
         if(worlds != null) {
-            for(int i = 0; i < worlds.length; i++) {
-                OWorldServer level = (OWorldServer) (((CanaryWorld) worlds[i]).getHandle());
-                this.d[5 + i] = "World " + worlds[i].getName() + " lvl " + i + " tick " + a.format(worlds[i].getNanoTick(i) * 1.0E-6D) + " ms";
-                if(worlds[i] != null && level.G != null) {
+            int i = 0;
+            for(World world : worlds) {
+                OWorldServer level = (OWorldServer) (((CanaryWorld) world).getHandle());
+                this.d[5 + i] = "World " + world.getName() + " lvl " + i + " tick " + a.format(world.getNanoTick(i) * 1.0E-6D) + " ms";
+                if(world != null && level.G != null) {
                     this.d[5 + i] += ", " + level.G.d();
                 }
+                i++;
             }
         }
         //CanaryMod end

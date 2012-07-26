@@ -161,7 +161,7 @@ public class OServerConfigurationManager {
     public void c(OEntityPlayerMP var1) {
         this.sendPacketToAll((new OPacket201PlayerInfo(var1.v, true, 1000)));
         this.b.add(var1);
-        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(var1.getCanaryWorld().getName(), WorldType.fromId(var1.w));
+        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(var1.getCanaryWorld().getName(), WorldType.fromId(var1.w), true);
         OWorldServer var2 = (OWorldServer) w.getHandle();
         var1.bi = var2; //re-set world
         var2.G.c((int) var1.bm >> 4, (int) var1.bo >> 4);
@@ -255,7 +255,7 @@ public class OServerConfigurationManager {
         
         OChunkCoordinates var4 = var1.ab();
         var1.w = var2; //Set new dimension
-        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(var1.getCanaryWorld().getName(), WorldType.fromId(var2));
+        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(var1.getCanaryWorld().getName(), WorldType.fromId(var2), true);
         OEntityPlayerMP var5 = new OEntityPlayerMP(this.c, w.getHandle(), var1.v, new OItemInWorldManager(w.getHandle()));
         var5.w = var2;
         if (var3) {
@@ -318,7 +318,7 @@ public class OServerConfigurationManager {
         OWorldServer var4 = (OWorldServer) ((CanaryWorld)var1.getCanaryWorld()).getHandle();
         
         var1.w = var2; //set new dimension
-        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(var1.getCanaryWorld().getName(), WorldType.fromId(var1.w));
+        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(var1.getCanaryWorld().getName(), WorldType.fromId(var1.w), true);
         OWorldServer var5 = (OWorldServer) w.getHandle();
         var1.a.b((new OPacket9Respawn(var1.w, (byte) var1.bi.q, var5.s().getWorldType(), var5.y(), var1.c.a())));
 //        var4.f(var1);
@@ -407,7 +407,7 @@ public class OServerConfigurationManager {
     }
     
     public void markBlockNeedsUpdate(int var1, int var2, int var3, int var4, String var5) {
-        World w = Canary.getServer().getWorldManager().getWorld(var5, WorldType.fromId(var4));
+        World w = Canary.getServer().getWorldManager().getWorld(var5, WorldType.fromId(var4), true);
         w.getPlayerManager().markBlockNeedsUpdate(var1, var2, var3);
     }
 

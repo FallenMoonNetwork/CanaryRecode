@@ -54,7 +54,7 @@ public class CanaryConfigurationManager implements ConfigurationManager{
     }
     @Override
     public void markBlockNeedsUpdate(int x, int y, int z, WorldType dimension, String world) {
-        Canary.getServer().getWorldManager().getWorld(world, dimension).getPlayerManager().markBlockNeedsUpdate(x, y, z);
+        Canary.getServer().getWorldManager().getWorld(world, dimension, true).getPlayerManager().markBlockNeedsUpdate(x, y, z);
         
     }
 

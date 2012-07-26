@@ -2,6 +2,7 @@ package net.canarymod.api.world;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -19,7 +20,7 @@ import net.canarymod.api.world.World.GeneratorType;
  */
 public class CanaryWorldManager implements WorldManager {
 
-    private HashMap<String, CanaryWorld> loadedWorlds;
+    private HashMap<String, World> loadedWorlds;
     private ArrayList<String> existingWorlds;
 
     public CanaryWorldManager() {
@@ -35,7 +36,7 @@ public class CanaryWorldManager implements WorldManager {
             worldNum = 1;
         }
         existingWorlds = new ArrayList<String>(worldNum);
-        loadedWorlds = new HashMap<String, CanaryWorld>(worldNum);
+        loadedWorlds = new HashMap<String, World>(worldNum);
         for(String f : worlds.list()) {
             existingWorlds.add(f);
         }
@@ -55,6 +56,19 @@ public class CanaryWorldManager implements WorldManager {
     }
 
     @Override
+    public World getWorld(String world, WorldType type, boolean autoload) {
+        if((!worldIsLoaded(world+"_"+type.getName()) && autoload)) {
+            if(worldExists(world+"_"+type.getName())) {
+                return loadWorld(world, type);
+            }
+            else {
+                createWorld(world, type);
+            }
+        }
+        return loadedWorlds.get(world+"_"+type.getName());
+    }
+
+    @Override
     public boolean createWorld(String name, long seed, WorldType type) {
         ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, seed);
         return true;
@@ -67,8 +81,20 @@ public class CanaryWorldManager implements WorldManager {
     }
 
     @Override
-    public World getWorld(String world, WorldType type) {
-        return loadedWorlds.get(world+"_"+type.getName());
+    public boolean createWorld(String name, long seed, WorldType worldType, GeneratorType genType) {
+        ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name+worldType.getName(), new Random().nextLong(), worldType, genType);
+        return true;
+    }
+
+    @Override
+    public World loadWorld(String name, WorldType type) {
+        if(!worldIsLoaded(name+type.getName())) {
+            ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name+type.getName(), new Random().nextLong(), type);
+            return loadedWorlds.get(name+type.getName());
+        }
+        else {
+            return loadedWorlds.get(name+type.getName());
+        }
     }
 
     @Override
@@ -82,24 +108,13 @@ public class CanaryWorldManager implements WorldManager {
     }
 
     @Override
-    public World[] getAllWorlds() {
-        return this.loadedWorlds.values().toArray(new CanaryWorld[loadedWorlds.size()]);
-    }
-
-    @Override
-    public World loadWorld(String name, WorldType type) {
-        if(!worldIsLoaded(name+type.getName())) {
-            ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name+type.getName(), new Random().nextLong()); //TODO process world type!
-            return loadedWorlds.get(name+type.getName());
-        }
-        else {
-            return loadedWorlds.get(name+type.getName());
-        }
+    public Collection<World> getAllWorlds() {
+        return this.loadedWorlds.values();
     }
 
     @Override
     public void unloadWorld(String name, WorldType type) {
-        loadedWorlds.remove(name+type.getName());
+        loadedWorlds.remove(name+"_"+type.getName());
     }
 
     @Override
@@ -109,18 +124,11 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public boolean worldExists(String name) {
-        return existingWorlds.contains(name);
+        return new File("worlds/"+name.split("_")[0]+"/"+name).isDirectory();
     }
 
     @Override
     public ArrayList<String> getExistingWorlds() {
-        return existingWorlds;
-    }
-
-    @Override
-    public boolean createWorld(String name, long seed, WorldType worldType,
-            GeneratorType genType) {
-        // TODO Auto-generated method stub
-        return false;
+        return existingWorlds; //TODO: This only reads base folders not the real dimension folders!
     }
 }

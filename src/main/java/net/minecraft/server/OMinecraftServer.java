@@ -70,7 +70,6 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     private int z;
     public ONetworkListenThread c;
     public OPropertyManager d;
-//    public OWorldServer[] worldServer;
     public long[] f = new long[100];
     public long[][] g;
     public OServerConfigurationManager h;
@@ -284,15 +283,13 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
      */
     public void loadWorld(String name, long seed) {
         loadWorld(name, seed, WorldType.fromName("NORMAL"));
-        
     }
     
     public void loadWorld(String name, long seed, WorldType type) {
-        this.initWorld((new OAnvilSaveConverter(new File("worlds/"))), name, seed, OWorldType.b, type);
+        this.loadWorld(name, seed, type, World.GeneratorType.DEFAULT);
     }
     
     public void loadWorld(String name, long seed, WorldType type, World.GeneratorType typeGen) {
-        
         this.initWorld(new OAnvilSaveConverter(new File("worlds/")), name, seed, OWorldType.a(typeGen.name()), type);
     }
     // CanaryMod desc: initWorld also changed signature
@@ -305,7 +302,6 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         
         // CanaryMod: custom world configuration
         WorldConfiguration config = Configuration.getWorldConfig(var2);
-        
 //        this.worldServer = new OWorldServer[3];
 //        this.g = new long[this.worldServer.length][100]; //CanaryMod Moved to CanaryWorld<init>
         int var6 = config.getGameMode().getId();
@@ -315,13 +311,12 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         OWorldSettings var8 = new OWorldSettings(var3, var6, var7, false, var5);
         OAnvilSaveHandler var9 = new OAnvilSaveHandler(new File("worlds/"), var2, true);
 
-//        for (int var10 = 0; var10 < this.worldServer.length; ++var10) {
-            int var11 = type.getId();
-            if (var11 == 0) {
-                toLoad = new OWorldServer(this, var9, var2, var11, var8);
-            } else {
-                toLoad = new OWorldServerMulti(this, var9, var2, var11, var8, toLoad);
-            }
+        int var11 = type.getId();
+        if (var11 == 0) {
+            toLoad = new OWorldServer(this, var9, var2, var11, var8);
+        } else {
+            toLoad = new OWorldServerMulti(this, var9, var2, var11, var8, toLoad);
+        }
 
             toLoad.a(new OWorldManager(this, toLoad));
             toLoad.q = config.getDifficulty().getId();
