@@ -411,7 +411,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
             if (var1.e == 0) {
                 if(!getUser().canBuild()){ //CanaryMod - no build rights, no digging
-                    return; //TempDisable XXX
+                    return; //TempDisable
                 }
                 
                 //CanaryMod start - onBlockLeftClick

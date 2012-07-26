@@ -25,6 +25,7 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.player.LoginChecksHook;
 import net.canarymod.hook.player.LoginHook;
+import net.canarymod.hook.world.DimensionSwitchHook;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
@@ -316,9 +317,15 @@ public class OServerConfigurationManager {
     public void switchDimension(OEntityPlayerMP var1, int var2, boolean createPortal) {
         int var3 = var1.w; //current dimension
         OWorldServer var4 = (OWorldServer) ((CanaryWorld)var1.getCanaryWorld()).getHandle();
+        DimensionSwitchHook hook = new DimensionSwitchHook(var1.getPlayer(), (CanaryWorld) Canary.getServer().getWorldManager().getWorld(var1.getCanaryWorld().getName(), WorldType.fromId(var2), true));
+        Canary.hooks().callHook(hook);
+        if(hook.isCanceled()) {
+            return;
+        }
         
+        CanaryWorld w = (CanaryWorld) hook.getWorld();
         var1.w = var2; //set new dimension
-        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(var1.getCanaryWorld().getName(), WorldType.fromId(var1.w), true);
+        
         OWorldServer var5 = (OWorldServer) w.getHandle();
         var1.a.b((new OPacket9Respawn(var1.w, (byte) var1.bi.q, var5.s().getWorldType(), var5.y(), var1.c.a())));
 //        var4.f(var1);
