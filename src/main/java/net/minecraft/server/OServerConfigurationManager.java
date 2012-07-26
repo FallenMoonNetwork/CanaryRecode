@@ -730,7 +730,7 @@ public class OServerConfigurationManager {
 //            this.n.a((OEntityPlayer) this.b.get(var1));
 //        }
         for(Player player : getCanaryConfigurationManager().getAllPlayers()) {
-            this.playerFileDataSet.get(player.getWorld().getName()).a((OEntityPlayer) ((CanaryPlayer)player).getHandle());
+            this.playerFileDataSet.get(player.getWorld().getFqName()).a((OEntityPlayer) ((CanaryPlayer)player).getHandle());
         }
         //CanaryMod end
 
