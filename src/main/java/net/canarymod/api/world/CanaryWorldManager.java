@@ -57,15 +57,20 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public World getWorld(String world, WorldType type, boolean autoload) {
-        if((!worldIsLoaded(world+"_"+type.getName()) && autoload)) {
+        
+        if(worldIsLoaded(world+"_"+type.getName())) {
+            return loadedWorlds.get(world+"_"+type.getName());
+        }
+        else {
             if(worldExists(world+"_"+type.getName())) {
                 return loadWorld(world, type);
             }
             else {
                 createWorld(world, type);
+                return loadedWorlds.get(world+"_"+type.getName());
             }
         }
-        return loadedWorlds.get(world+"_"+type.getName());
+        
     }
 
     @Override
