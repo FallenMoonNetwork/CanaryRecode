@@ -11,7 +11,7 @@ import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
-import net.canarymod.api.world.position.Vector3D;
+import net.canarymod.api.world.position.Position;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OEntityTrackerEntry;
 import net.minecraft.server.OItemInWorldManager;
@@ -55,7 +55,7 @@ public class CanaryNpc extends CanaryEntityLiving implements Npc{
     }
 
     @Override
-    public void teleportTo(Vector3D arg0) {
+    public void teleportTo(Position arg0) {
         // TODO Auto-generated method stub
         
     }

@@ -17,7 +17,7 @@ import net.canarymod.api.entity.potion.PotionEffect;
 import net.canarymod.api.entity.potion.PotionType;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
-import net.canarymod.api.world.position.Vector3D;
+import net.canarymod.api.world.position.Position;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityAnimal;
 import net.minecraft.server.OEntityFlying;
@@ -201,7 +201,7 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     }
 
     @Override
-    public void setHomeArea(Vector3D vector, int dist) {
+    public void setHomeArea(Position vector, int dist) {
         if(vector == null) {
             throw new IllegalArgumentException("Could not set EntityLivings home. Location was null!");
         }

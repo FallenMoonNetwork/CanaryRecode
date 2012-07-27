@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import net.canarymod.Canary;
 import net.canarymod.Colors;
+import net.canarymod.Logman;
 import net.canarymod.config.Configuration; 
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
@@ -14,6 +15,7 @@ import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
+import net.canarymod.api.world.WorldType;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
@@ -351,12 +353,15 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     //CanaryMod changed signature to additionally define world destination
     public void a(double var1, double var3, double var5, float var7, float var8, int dimension, String world) {
         // CanaryMod - Teleport hook.
-        World dim = Canary.getServer().getWorld(world);
+        World dim = Canary.getServer().getWorldManager().getWorld(world, WorldType.fromId(dimension), false);
         Location location = new Location(dim, var1, var3, var5, var8, var7);
         TeleportHook hook = new TeleportHook(getUser(), location, false);
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return;
+        }
+        if(!dim.equals(this.e.getCanaryWorld())) {
+            this.e.getPlayer().switchWorlds(dim);
         }
         // CanaryMod - end.
         this.r = false;

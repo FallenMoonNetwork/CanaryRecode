@@ -55,7 +55,7 @@ import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.blocks.Chest;
 import net.canarymod.api.world.blocks.ComplexBlock;
 import net.canarymod.api.world.position.Location;
-import net.canarymod.api.world.position.Vector3D;
+import net.canarymod.api.world.position.Position;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityBlaze;
 import net.minecraft.server.OEntityChicken;
@@ -186,7 +186,7 @@ public class CanaryWorld implements World {
 
 
         @Override
-        public EntityItem dropItem(Vector3D position, Item item) {
+        public EntityItem dropItem(Position position, Item item) {
             return dropItem((int)position.getX(), (int)position.getY(), (int)position.getZ(), item);
         }
         
@@ -252,12 +252,12 @@ public class CanaryWorld implements World {
         }
         
         @Override
-        public byte getDataAt(Vector3D position) {
+        public byte getDataAt(Position position) {
             return getDataAt((int)position.getX(), (int)position.getY(), (int)position.getZ());
         }
         
         @Override
-        public Block getBlockAt(Vector3D position) {
+        public Block getBlockAt(Position position) {
             return getBlockAt((int)position.getX(), (int)position.getY(), (int)position.getZ());
         }
 
@@ -272,7 +272,7 @@ public class CanaryWorld implements World {
         }
         
         @Override
-        public void setBlockAt(Vector3D vector, Block block) {
+        public void setBlockAt(Position vector, Block block) {
             setBlockAt((int)vector.getX(), (int)vector.getY(), (int)vector.getZ(), block.getType(), block.getData());
         }
 
@@ -283,12 +283,12 @@ public class CanaryWorld implements World {
         }
 
         @Override
-        public void setBlockAt(Vector3D position, short type) {
+        public void setBlockAt(Position position, short type) {
             setBlockAt((int)position.getX(), (int)position.getY(), (int)position.getZ(), (short)type);
         }
 
         @Override
-        public void setBlockAt(Vector3D position, short type, byte data) {
+        public void setBlockAt(Position position, short type, byte data) {
             setBlockAt((int)position.getX(), (int)position.getY(), (int)position.getZ(), type, data);
         }
 
@@ -415,7 +415,7 @@ public class CanaryWorld implements World {
         }
 
         @Override
-        public Chunk loadChunk(Vector3D vec3d) {
+        public Chunk loadChunk(Position vec3d) {
             return chunkProvider.loadChunk((int)vec3d.getX(), (int)vec3d.getZ());
         }
         
@@ -490,7 +490,7 @@ public class CanaryWorld implements World {
         }
 
         @Override
-        public boolean isBlockPowered(Vector3D position) {
+        public boolean isBlockPowered(Position position) {
             return isBlockPowered((int)position.getX(), (int)position.getY(), (int)position.getZ());
         }
 
@@ -505,7 +505,7 @@ public class CanaryWorld implements World {
         }
 
         @Override
-        public boolean isBlockIndirectlyPowered(Vector3D position) {
+        public boolean isBlockIndirectlyPowered(Position position) {
             return isBlockIndirectlyPowered((int)position.getX(), (int)position.getY(), (int)position.getZ());
         }
 
@@ -577,7 +577,7 @@ public class CanaryWorld implements World {
         }
         
         @Override
-        public void makeLightningBolt(Vector3D position) {
+        public void makeLightningBolt(Position position) {
             world.a(new OEntityLightningBolt(world, (int)position.getX(), (int)position.getY(), (int)position.getZ()));
         }
         
@@ -587,7 +587,7 @@ public class CanaryWorld implements World {
         }
         
         @Override
-        public void makeExplosion(Entity exploder, Vector3D position, float power) {
+        public void makeExplosion(Entity exploder, Position position, float power) {
             world.a(((CanaryEntity)exploder).getHandle(), position.getX(), position.getY(), position.getZ(), power);
         }
         
@@ -618,7 +618,7 @@ public class CanaryWorld implements World {
             spawn.setZ(info.getSpawnZ() + 0.5D);
             spawn.setRotation(0.0F);
             spawn.setPitch(0.0F);
-            spawn.setDimensionId(type.getId());
+            spawn.setType(type);
             spawn.setWorldName(world.getCanaryWorld().getName());
             return spawn;
         }
@@ -720,5 +720,15 @@ public class CanaryWorld implements World {
         public Item createItem(int itemId, int amount, int data) {
             
             return new CanaryItem(new OItemStack(itemId, amount, data));
+        }
+        
+        @Override
+        public boolean equals(Object ob) {
+            
+            if(!(ob instanceof CanaryWorld)) {
+                return false;
+            }
+            CanaryWorld test = (CanaryWorld) ob;
+            return test.equals(name) && test.getType().equals(type);
         }
 }

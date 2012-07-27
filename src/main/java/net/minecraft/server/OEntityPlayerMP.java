@@ -11,6 +11,7 @@ import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.inventory.CanaryInventory;
+import net.canarymod.api.world.WorldType;
 import net.canarymod.api.world.blocks.CanaryDispenser;
 import net.canarymod.api.world.blocks.CanaryDoubleChest;
 import net.canarymod.api.world.blocks.CanaryFurnace;
@@ -271,7 +272,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                     }
                     Location location = getPlayer().getLocation();
                     int currDim = getPlayer().getWorld().getType().getId();
-                    location.setDimensionId(currDim == 0 ? -1 : 0);
+                    location.setType(WorldType.fromId(currDim == 0 ? -1 : 0));
                     TeleportHook hook = new TeleportHook(getPlayer(), location, true);
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {

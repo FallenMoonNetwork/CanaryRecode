@@ -20,7 +20,7 @@ import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.position.Direction;
 import net.canarymod.api.world.position.Location;
-import net.canarymod.api.world.position.Vector3D;
+import net.canarymod.api.world.position.Position;
 import net.canarymod.commandsys.CanaryCommand;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.PlayerCommandHook;
@@ -397,8 +397,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
     
     @Override
-    public Vector3D getPosition() {
-        return new Vector3D(getX(), getY(), getZ());
+    public Position getPosition() {
+        return new Position(getX(), getY(), getZ());
     }
 
     @Override
@@ -430,12 +430,13 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         teleportTo(x, y, z, 0.0F, 0.0F);
     }
 
-    public void teleportTo(Vector3D position) {
+    public void teleportTo(Position position) {
         teleportTo(position.getX(), position.getY(), position.getZ(), 0.0f, 0.0f);
     }
     @Override
     public void teleportTo(double x, double y, double z, World dim) {
-        if (!(getWorld().hashCode() == dim.hashCode())) {
+        if (!(getWorld().getType().equals(dim.getType()))) {
+            Logman.println("Switching world from "+getWorld().getFqName() + " to " + dim.getFqName());
             switchWorlds(dim);
         }
         teleportTo(x, y, z, 0.0F, 0.0F);
@@ -444,7 +445,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void teleportTo(double x, double y, double z, float pitch, float rotation, World dim) {
-        if (!(getWorld().hashCode() == dim.hashCode())) {
+        if (!(getWorld().getType().equals(dim.getType()))) {
+            Logman.println("Switching world from "+getWorld().getFqName() + " to " + dim.getFqName());
             switchWorlds(dim);
         }
         teleportTo(x, y, z, pitch, rotation);
@@ -463,7 +465,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void teleportTo(Location location) {
-        if (!(getWorld().hashCode() == location.getWorld().hashCode())) {
+        if (!(getWorld().getType().equals(location.getWorld().getType()))) {
+            Logman.println("Switching world from "+getWorld().getFqName() + " to " + location.getWorld().getFqName());
             switchWorlds(location.getWorld());
         }
         teleportTo(location.getX(),location.getY(), location.getZ(),location.getPitch(), location.getRotation());
@@ -606,7 +609,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         if (var2 != null) {
             ent.a.a((double) var2.a, (double) var2.b, (double) var2.c, 0.0F, 0.0F, dim.getType().getId(), ent.bi.getCanaryWorld().getName());
         }
-
+        Logman.logInfo("Prepared to switch worlds.");
         mcServer.h.switchDimension(ent, dim.getType().getId(), false);
         
         refreshCreativeMode();

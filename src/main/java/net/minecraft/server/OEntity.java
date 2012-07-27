@@ -144,6 +144,7 @@ public abstract class OEntity {
 
     public void setDimension(CanaryWorld dim) {
         this.bi = dim.getHandle();
+        this.bi.setCanaryWorld(dim);
     }
 
     public CanaryEntity getCanaryEntity() {
