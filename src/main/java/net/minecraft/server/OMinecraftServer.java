@@ -251,7 +251,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
         a.info("Preparing level \"" + var6 + "\"");
         
-        this.initWorld(new OAnvilSaveConverter(new File("worlds/")), var6, var9, var13, WorldType.fromName("NORMAL"));
+        this.initWorld(new OAnvilSaveConverter(new File("worlds/"), WorldType.fromName("NORMAL")), var6, var9, var13, WorldType.fromName("NORMAL"));
         
         long var14 = System.nanoTime() - var4;
         String var16 = String.format("%.3fs", new Object[] { Double.valueOf(var14 / 1.0E9D) });
@@ -289,7 +289,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     }
     
     public void loadWorld(String name, long seed, WorldType type, World.GeneratorType typeGen) {
-        this.initWorld(new OAnvilSaveConverter(new File("worlds/")), name, seed, OWorldType.a(typeGen.name()), type);
+        this.initWorld(new OAnvilSaveConverter(new File("worlds/"), type), name, seed, OWorldType.a(typeGen.name()), type);
     }
     // CanaryMod desc: initWorld also changed signature
     private void initWorld(OISaveFormat var1, String var2, long var3, OWorldType var5, WorldType type) {
@@ -308,13 +308,14 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         a.info("Default game type: " + var6);
         boolean var7 = config.generatesStructures();
         OWorldSettings var8 = new OWorldSettings(var3, var6, var7, false, var5);
-        OAnvilSaveHandler var9 = new OAnvilSaveHandler(new File("worlds/"), var2, true);
+        OAnvilSaveHandler var9 = new OAnvilSaveHandler(new File("worlds/"), var2, true, type);
 
         int var11 = type.getId();
         if (var11 == 0) {
             toLoad = new OWorldServer(this, var9, var2, var11, var8);
+            
         } else {
-            toLoad = new OWorldServerMulti(this, var9, var2, var11, var8, toLoad);
+            toLoad = new OWorldServerMulti(this, var9, var2, var11, var8, new OMapStorage(var9));
         }
 
             toLoad.a(new OWorldManager(this, toLoad));

@@ -726,9 +726,6 @@ public class OServerConfigurationManager {
 
     public void g() {
         //CanaryMod refactored for multiworld purposes
-//        for (int var1 = 0; var1 < this.b.size(); ++var1) {
-//            this.n.a((OEntityPlayer) this.b.get(var1));
-//        }
         for(Player player : getCanaryConfigurationManager().getAllPlayers()) {
             this.playerFileDataSet.get(player.getWorld().getFqName()).a((OEntityPlayer) ((CanaryPlayer)player).getHandle());
         }

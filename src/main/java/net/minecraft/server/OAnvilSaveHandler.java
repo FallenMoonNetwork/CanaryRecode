@@ -3,6 +3,7 @@ package net.minecraft.server;
 import java.io.File;
 import java.util.List;
 
+import net.canarymod.api.world.WorldType;
 import net.minecraft.server.OAnvilChunkLoader;
 import net.minecraft.server.OIChunkLoader;
 import net.minecraft.server.ORegionFileCache;
@@ -15,26 +16,14 @@ import net.minecraft.server.OWorldProviderHell;
 
 public class OAnvilSaveHandler extends OSaveHandler {
 
-    public OAnvilSaveHandler(File var1, String var2, boolean var3) {
-        super(var1, var2, var3);
+    public OAnvilSaveHandler(File var1, String var2, boolean var3, WorldType type) {
+        super(var1, var2, var3, type);
     }
 
     @Override
     public OIChunkLoader a(OWorldProvider var1) {
-        File var2 = this.a();
-        File var3;
-        //TODO: Support for custom world providers (ChunkGenerators)
-        if (var1 instanceof OWorldProviderHell) {
-            var3 = new File(getWorldBaseDir(), getBaseName()+"_NETHER"); //CanaryMod changed to our own custom folder
-            var3.mkdirs();
-            return new OAnvilChunkLoader(var3);
-        } else if (var1 instanceof OWorldProviderEnd) {
-            var3 = new File(getWorldBaseDir(), getBaseName()+"_END"); //CanaryMod changed to our own custom folder
-            var3.mkdirs();
-            return new OAnvilChunkLoader(var3);
-        } else {
-            return new OAnvilChunkLoader(var2);
-        }
+        //CanaryMod changed the whole thing since we have recollection of the world type we're serving!
+        return new OAnvilChunkLoader(new File(getWorldBaseDir(), getBaseName()+"/"+getBaseName()+"_"+this.type.getName()));
     }
 
     @Override

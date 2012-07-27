@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import net.canarymod.api.world.WorldType;
 import net.minecraft.server.OCompressedStreamTools;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIChunkLoader;
@@ -29,13 +30,14 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
     private final File d;
     private final long e = System.currentTimeMillis();
     private final String f;
+    protected final WorldType type;
 
-    public OSaveHandler(File var1, String var2, boolean var3) {
+    public OSaveHandler(File var1, String var2, boolean var3, WorldType type) {
         super();
         //CanaryMod refactored for more flexible folder structure
         File tmp = new File(var1, var2);
         tmp.mkdirs();
-        this.b = new File(var1, var2+"/"+var2+"_NORMAL");
+        this.b = new File(var1, var2+"/"+var2+"_"+type.getName());
         this.b.mkdirs();
         this.c = new File(tmp, "players");
         this.d = new File(tmp, "data");
@@ -46,6 +48,7 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
             this.c.mkdirs();
         }
         this.f();
+        this.type = type;
     }
     //CanaryMod added getname
     /**

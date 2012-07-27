@@ -57,17 +57,27 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public World getWorld(String world, WorldType type, boolean autoload) {
-        
+//        Logman.println("Trying to load: "+world+"_"+type.getName());
         if(worldIsLoaded(world+"_"+type.getName())) {
+//            Logman.println("Is loaded, returning world");
             return loadedWorlds.get(world+"_"+type.getName());
         }
         else {
             if(worldExists(world+"_"+type.getName())) {
+                Logman.println("World exists but is not loaded. Loading ...");
                 return loadWorld(world, type);
             }
             else {
-                createWorld(world, type);
-                return loadedWorlds.get(world+"_"+type.getName());
+                if(autoload) {
+                    Logman.println("World does not exist, we can autoload, will load!");
+                    createWorld(world, type);
+                    return loadedWorlds.get(world+"_"+type.getName());
+                }
+                else {
+                    Logman.logSevere("Tried to get a non-existing world: "+world+" - you must create it before you can load it or pass autoload = true");
+                    return null;
+                }
+                
             }
         }
         
@@ -81,7 +91,8 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public boolean createWorld(String name, WorldType type) {
-        ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, new Random().nextLong());
+        Logman.println("Creating a new world! " + name+"_"+type.getName());
+        ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, new Random().nextLong(), type);
         return true;
     }
 

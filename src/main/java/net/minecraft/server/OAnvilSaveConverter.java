@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import net.canarymod.api.world.WorldType;
 import net.minecraft.server.OAnvilConverterData;
 import net.minecraft.server.OAnvilSaveConverterFileFilter;
 import net.minecraft.server.OAnvilSaveHandler;
@@ -27,8 +29,8 @@ import net.minecraft.server.OWorldType;
 
 public class OAnvilSaveConverter extends OSaveFormatOld {
 
-    public OAnvilSaveConverter(File var1) {
-        super(var1);
+    public OAnvilSaveConverter(File var1, WorldType type) {
+        super(var1, type);
     }
 
     protected int a() {
@@ -37,7 +39,7 @@ public class OAnvilSaveConverter extends OSaveFormatOld {
 
     @Override
     public OISaveHandler a(String var1, boolean var2) {
-        return new OAnvilSaveHandler(this.a, var1, var2);
+        return new OAnvilSaveHandler(this.a, var1, var2, this.type);
     }
 
     @Override

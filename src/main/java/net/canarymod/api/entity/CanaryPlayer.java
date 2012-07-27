@@ -489,7 +489,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             return Colors.Marker+group.prefix;
         }
         else {
-            return Colors.Marker+Colors.White;
+            return Colors.White;
         }
     }
 
