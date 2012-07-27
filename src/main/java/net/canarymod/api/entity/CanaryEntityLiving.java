@@ -304,10 +304,6 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
         } else {
             double rotation2 = Math.floor((rotation * 256F) / 360F);
             double pitch2 = Math.floor((pitch * 256F) / 360F);
-            Logman.logInfo("Rotation3: " + (byte) rotation2);
-            Logman.logInfo("Pitch3: " + (byte) pitch2);
-            Logman.logInfo("Set Rotation: " + getRotation());
-            Logman.logInfo("Set Pitch: " + getPitch());
             toSend = new OPacket32EntityLook(entity.bd, (byte) rotation2, (byte) pitch2);
             Canary.getServer().getConfigurationManager().sendPacketToAllInWorld(getWorld().getName(), new CanaryPacket(toSend));
         }
