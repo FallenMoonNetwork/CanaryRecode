@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryGhast;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OAxisAlignedBB;
@@ -113,6 +112,7 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
         if (this.g == null || this.h-- <= 0) {
             OEntityPlayer entityplayer = this.bi.b(this, 100.0D);
             if(entityplayer != null){
+                //CanaryMod Mob target hook
                 MobTargetHook hook = new MobTargetHook(getCanaryEntityLiving(), entityplayer.getCanaryEntityLiving().getPlayer());
                 Canary.hooks().callHook(hook);
                 if(!hook.isCanceled()){

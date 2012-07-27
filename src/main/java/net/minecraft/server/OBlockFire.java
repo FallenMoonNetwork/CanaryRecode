@@ -134,7 +134,7 @@ public class OBlockFire extends OBlock {
                                         }
 
                                         //CanaryMod Ignite hook. Warning, that thing spams like mad! 
-                                        IgnitionHook hook = new IgnitionHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), 3);
+                                        IgnitionHook hook = new IgnitionHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), 3);
                                         Canary.hooks().callHook(hook);
                                         if(!hook.isCanceled()) {
                                             var1.b(var10, var12, var11, this.bO, var16);

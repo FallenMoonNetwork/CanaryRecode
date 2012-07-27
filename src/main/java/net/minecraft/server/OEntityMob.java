@@ -1,7 +1,6 @@
 package net.minecraft.server;
 
 import net.canarymod.Canary;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
@@ -45,7 +44,9 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
     @Override
     protected OEntity o() {
         OEntityPlayer var1 = this.bi.b(this, 16.0D);
-        return var1 != null && this.h(var1) ? var1 : null;
+        MobTargetHook hook = new MobTargetHook(getCanaryEntityLiving(), ((OEntityPlayerMP) var1).getPlayer());
+        Canary.hooks().callHook(hook);
+        return var1 != null && this.h(var1) && !hook.isCanceled() ? var1 : null;
     }
 
     @Override
@@ -54,7 +55,7 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
             OEntity var3 = var1.a();
             if (this.bg != var3 && this.bh != var3) {
                 if (var3 != this) {
-                    //CanaryMod start - onDamage
+                    //CanaryMod start - mob target hook
                     if(var3 instanceof OEntityPlayer){
                         MobTargetHook hook = new MobTargetHook(this.getCanaryEntityLiving(), ((OEntityLiving)var3).getCanaryEntityLiving().getPlayer());
                         Canary.hooks().callHook(hook);
@@ -62,7 +63,7 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
                             return true;
                         }
                     }
-                    //CanaryMod end - onDamage
+                    //CanaryMod end -mob target hook
                     this.d = var3;
                 }
 

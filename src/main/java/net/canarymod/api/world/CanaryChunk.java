@@ -54,8 +54,8 @@ public class CanaryChunk implements Chunk {
     }
 
     @Override
-    public Dimension getDimension() {
-        return handle.e.getCanaryDimension();
+    public World getDimension() {
+        return handle.e.getCanaryWorld();
     }
 
     @Override

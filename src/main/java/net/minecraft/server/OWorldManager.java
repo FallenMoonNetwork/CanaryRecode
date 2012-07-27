@@ -26,13 +26,13 @@ public class OWorldManager implements OIWorldAccess {
     @Override
     public void a(OEntity var1) {
       //CanaryMod refactored to use our tracker wrapper
-        this.b.getCanaryDimension().getEntityTracker().trackEntity(var1.getCanaryEntity());
+        this.b.getCanaryWorld().getEntityTracker().trackEntity(var1.getCanaryEntity());
     }
 
     @Override
     public void b(OEntity var1) {
       //CanaryMod refactored to use our tracker wrapper
-        this.b.getCanaryDimension().getEntityTracker().untrackEntity(var1.getCanaryEntity());
+        this.b.getCanaryWorld().getEntityTracker().untrackEntity(var1.getCanaryEntity());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class OWorldManager implements OIWorldAccess {
     @Override
     public void a(int var1, int var2, int var3) {
         //CanaryMod: Refactored to get around updated blocks per world
-        this.a.getCanaryConfigurationManager().markBlockNeedsUpdate(var1, var2, var3, this.b.t.g, this.b.getCanaryDimension().getName());
+        this.a.getCanaryConfigurationManager().markBlockNeedsUpdate(var1, var2, var3, this.b.getCanaryWorld().getType(), this.b.getCanaryWorld().getName());
 //        this.a.h.a(var1, var2, var3, this.b.t.g);
     }
 
@@ -65,6 +65,6 @@ public class OWorldManager implements OIWorldAccess {
 
     @Override
     public void a(OEntityPlayer var1, int var2, int var3, int var4, int var5, int var6) {
-        this.a.h.a(var1, var3, var4, var5, 64.0D, this.b.t.g, new OPacket61DoorChange(var2, var3, var4, var5, var6), b.getCanaryDimension().getName());
+        this.a.h.a(var1, var3, var4, var5, 64.0D, this.b.t.g, new OPacket61DoorChange(var2, var3, var4, var5, var6), b.getCanaryWorld().getName());
     }
 }

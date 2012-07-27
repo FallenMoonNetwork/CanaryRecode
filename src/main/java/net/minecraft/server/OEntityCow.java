@@ -1,6 +1,10 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryCow;
+import net.canarymod.api.entity.Player;
+import net.canarymod.hook.Hook;
+import net.canarymod.hook.player.RightClickHook;
 import net.minecraft.server.OEntityAIFollowParent;
 import net.minecraft.server.OEntityAILookIdle;
 import net.minecraft.server.OEntityAIMate;
@@ -110,14 +114,20 @@ public class OEntityCow extends OEntityAnimal {
     }
 
     @Override
-    public boolean b(OEntityPlayer var1) {
+    public boolean interact(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
         if (var2 != null && var2.c == OItem.av.bP) {
+            //CanaryMod cow milk hook
+            Player tmp = ((OEntityPlayerMP) var1).getPlayer();
+            RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryCow(), Hook.Type.COW_MILK);
+            Canary.hooks().callHook(hook);
+            if(hook.isCanceled()) {
+                return false;
+            }
             var1.k.a(var1.k.c, new OItemStack(OItem.aF));
             return true;
-        } else {
-            return super.b(var1);
         }
+        return super.interact(var1);
     }
 
     @Override

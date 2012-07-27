@@ -12,8 +12,7 @@ import java.util.TreeSet;
 
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPlayerManager;
-import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.hook.CancelableHook;
+import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.hook.entity.EntitySpawnHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBiomeGenBase;
@@ -109,14 +108,14 @@ public class OWorld implements OIBlockAccess {
     public boolean F;
 
     // CanaryMod start: multiworld
-    protected CanaryDimension canaryDimension;
+    protected CanaryWorld canaryDimension;
     protected CanaryPlayerManager playerManager;
     
     /**
      * Get the canary dimension wrapper
      * @return
      */
-    public CanaryDimension getCanaryDimension() {
+    public CanaryWorld getCanaryWorld() {
         return canaryDimension;
     }
 
@@ -124,7 +123,7 @@ public class OWorld implements OIBlockAccess {
      * Set the canary dimension wrapper
      * @param dim
      */
-    public void setCanaryDimension(CanaryDimension dim) {
+    public void setCanaryWorld(CanaryWorld dim) {
         this.canaryDimension = dim;
     }
     

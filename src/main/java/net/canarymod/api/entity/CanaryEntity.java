@@ -1,7 +1,6 @@
 package net.canarymod.api.entity;
 
-import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Vector3D;
@@ -125,18 +124,13 @@ public class CanaryEntity implements Entity {
     }
 
     @Override
-    public void setDimension(Dimension dim) {
-        this.entity.setDimension((CanaryDimension) dim);
+    public void setDimension(World dim) {
+        this.entity.setDimension((CanaryWorld) dim);
     }
 
     @Override
-    public Dimension getDimension() {
-        return entity.getDimension();
-    }
-    
-    @Override
     public World getWorld() {
-        return entity.getDimension().getWorld();
+        return entity.getCanaryWorld();
     }
 
     @Override
@@ -198,7 +192,7 @@ public class CanaryEntity implements Entity {
 
     @Override
     public Location getLocation() {
-        return new Location(getDimension(), getX(), getY(), getZ(), getPitch(), getRotation());
+        return new Location(getWorld(), getX(), getY(), getZ(), getPitch(), getRotation());
     }
 
 }

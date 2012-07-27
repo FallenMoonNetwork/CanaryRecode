@@ -93,8 +93,8 @@ public class OEntityPig extends OEntityAnimal {
     }
 
     @Override
-    public boolean b(OEntityPlayer var1) {
-        if (super.b(var1)) {
+    public boolean interact(OEntityPlayer var1) {
+        if (super.interact(var1)) {
             return true;
         } else if (this.A() && !this.bi.F && (this.bg == null || this.bg == var1)) {
             var1.b((OEntity) this);

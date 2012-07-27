@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryOcelot;
+import net.canarymod.hook.entity.EntityTameHook;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
@@ -159,7 +161,7 @@ public class OEntityOcelot extends OEntityTameable {
     }
 
     @Override
-    public boolean b(OEntityPlayer var1) {
+    public boolean interact(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
         if (!this.u_()) {
             if (this.b.f() && var2 != null && var2.c == OItem.aT.bP && var1.j(this) < 9.0D) {
@@ -169,7 +171,11 @@ public class OEntityOcelot extends OEntityTameable {
                 }
 
                 if (!this.bi.F) {
-                    if (this.bS.nextInt(3) == 0) {
+                    
+                    //CanaryMod tame hook start
+                    EntityTameHook hook = new EntityTameHook(canaryOcelot, ((OEntityPlayerMP) var1).getPlayer(), this.bS.nextInt(3) == 0);
+                    Canary.hooks().callHook(hook);
+                    if (!hook.isCanceled() && hook.isTamed()) { //Changed the query here to use hook results -- CanaryMod end
                         this.b(true);
                         this.c_(1 + this.bi.r.nextInt(3));
                         this.a(var1.v);
@@ -189,7 +195,7 @@ public class OEntityOcelot extends OEntityTameable {
                 this.a.a(!this.v_());
             }
 
-            return super.b(var1);
+            return super.interact(var1);
         }
     }
 

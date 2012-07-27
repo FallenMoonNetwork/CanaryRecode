@@ -4,7 +4,6 @@ import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.RightClickHook;
 import net.minecraft.server.OBlock;
@@ -36,7 +35,7 @@ public class OItemBlock extends OItem {
         }
         
         // CanaryMod: Store blockInfo of the one we clicked
-        Block blockClicked = var3.getCanaryDimension().getBlockAt(var4, var5, var6);
+        Block blockClicked = var3.getCanaryWorld().getBlockAt(var4, var5, var6);
         
         int var8 = var3.a(var4, var5, var6);
         if (var8 == OBlock.aS.bO) {

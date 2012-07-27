@@ -366,7 +366,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
                 int targetSlot = getEmptySlot();
                 
                 if (targetSlot == -1) {
-                    this.k.getCanaryDimension().dropItem(l, m, n, itemId, amount, 0);
+                    this.k.getCanaryWorld().dropItem(l, m, n, itemId, amount, 0);
                     remaining = 0;
                 } else {
                     addItem(new CanaryItem(itemId, 1, targetSlot));
@@ -393,7 +393,7 @@ public class OTileEntityFurnace extends OTileEntity implements OIInventory {
                     int targetSlot = getEmptySlot();
                     
                     if (targetSlot == -1) {
-                        this.k.getCanaryDimension().dropItem(l, m, n, itemId, amount, 0);
+                        this.k.getCanaryWorld().dropItem(l, m, n, itemId, amount, 0);
                         remaining = 0;
                     } else {
                         if (remaining > 64) {

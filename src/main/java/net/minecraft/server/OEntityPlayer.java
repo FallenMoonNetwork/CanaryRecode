@@ -336,7 +336,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
             --this.o;
         }
 
-        if (this.bi.q == 0 && Configuration.getWorldConfig(bi.getCanaryDimension().getName()).isAutoHealEnabled()){ //CanaryMod AutoHeal setting
+        if (this.bi.q == 0 && Configuration.getWorldConfig(bi.getCanaryWorld().getName()).isAutoHealEnabled()){ //CanaryMod AutoHeal setting
             if(this.aD() < this.d() && this.bT % 20 * 12 == 0) {
                 this.d(1);
             }
@@ -705,10 +705,10 @@ public abstract class OEntityPlayer extends OEntityLiving {
     }
 
     public void e(OEntity var1) {
-        if (!var1.b(this)) {
+        if (!var1.interact(this)) {
             OItemStack var2 = this.U();
             if (var2 != null && var1 instanceof OEntityLiving) {
-                RightClickHook hook = new RightClickHook(((OEntityPlayerMP)this).getPlayer(), null, null, var2.getCanaryItem(),((OEntityLiving) var1).getCanaryEntityLiving(), Hook.Type.ENTITY_RIGHTCLICKED);
+                RightClickHook hook = new RightClickHook(((OEntityPlayerMP)this).getPlayer(), null, null, var2.getCanaryItem(),((OEntityLiving) var1).getCanaryEntityLiving(), Hook.Type.ENTITY_RIGHTCLICK);
                 Canary.hooks().callHook(hook);
                 if(!hook.isCanceled()){
                     var2.a((OEntityLiving) var1);

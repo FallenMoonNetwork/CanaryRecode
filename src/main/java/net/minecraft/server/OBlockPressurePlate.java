@@ -115,7 +115,7 @@ public class OBlockPressurePlate extends OBlock {
         
         //CanaryMod controll pressure plate redstone change
         if (var6 != var5) {
-            RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), var5 ? 1 : 0, var6 ? 1 : 0);
+            RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), var5 ? 1 : 0, var6 ? 1 : 0);
             if(hook.isCanceled()) {
                 return; //do nothing
             }

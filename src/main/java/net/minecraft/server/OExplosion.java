@@ -10,7 +10,6 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.EntityLiving;
 import net.canarymod.api.world.blocks.Block;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.world.ExplosionHook;
 import net.minecraft.server.OAxisAlignedBB;
@@ -50,7 +49,7 @@ public class OExplosion {
     }
 
     public void a() {
-        Block base = world.getCanaryDimension().getBlockAt((int) Math.floor(explosionX), (int) Math.floor(explosionY), (int) Math.floor(explosionZ));
+        Block base = world.getCanaryWorld().getBlockAt((int) Math.floor(explosionX), (int) Math.floor(explosionY), (int) Math.floor(explosionZ));
         float var1 = this.power;
         byte var2 = 16;
 
@@ -89,7 +88,7 @@ public class OExplosion {
                                 this.g.add(new OChunkPosition(var22, var23, var24));
                                 
                                 //CanaryMod - Build blocks list
-                                Block block = world.getCanaryDimension().getBlockAt(var22, var23, var24);
+                                Block block = world.getCanaryWorld().getBlockAt(var22, var23, var24);
                                 if(var25 != 0 && !blocks.contains(block)){
                                     blocks.add(block);
                                 }

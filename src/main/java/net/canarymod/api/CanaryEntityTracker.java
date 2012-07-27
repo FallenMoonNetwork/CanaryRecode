@@ -6,8 +6,8 @@ import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.Player;
-import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.World;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityTracker;
 import net.minecraft.server.OEntityTrackerEntry;
@@ -15,9 +15,9 @@ import net.minecraft.server.OEntityTrackerEntry;
 public class CanaryEntityTracker implements EntityTracker {
     private OEntityTracker tracker;
     
-    private CanaryDimension dim;
+    private CanaryWorld dim;
     
-    public CanaryEntityTracker(OEntityTracker tracker, CanaryDimension dim) {
+    public CanaryEntityTracker(OEntityTracker tracker, CanaryWorld dim) {
         this.tracker = tracker;
         this.dim = dim;
     }
@@ -49,7 +49,7 @@ public class CanaryEntityTracker implements EntityTracker {
     }
 
     @Override
-    public Dimension getAttachedDimension() {
+    public World getAttachedDimension() {
         return dim;
     }
 

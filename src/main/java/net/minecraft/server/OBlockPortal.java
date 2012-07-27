@@ -92,7 +92,7 @@ public class OBlockPortal extends OBlockBreakable {
             for (var8 = 0; var8 < 3; ++var8) {
                 for (var7 = 0; var7 < 2; ++var7) {
 //                    portalBlocks[var8][var7] = new Block(var1.world, Block.Type.Portal.getType(), var2 + var5 * var7, var3 + 2 - var8, var4 + var6 * var7);
-                    portalBlocks[var8][var7] = var1.getCanaryDimension().getBlockAt(var2 + var5 * var7, var3 + 2 - var8, var4 + var6 * var7);
+                    portalBlocks[var8][var7] = var1.getCanaryWorld().getBlockAt(var2 + var5 * var7, var3 + 2 - var8, var4 + var6 * var7);
                 }
             }
             PortalCreateHook hook = new PortalCreateHook(portalBlocks);

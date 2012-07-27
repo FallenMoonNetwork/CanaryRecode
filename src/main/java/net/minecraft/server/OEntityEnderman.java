@@ -77,6 +77,7 @@ public class OEntityEnderman extends OEntityMob {
         if (var1 == null) {
             return null;
         }
+        //CanaryMod Mob Target hook
         MobTargetHook hook = new MobTargetHook(canaryEnderman, ((OEntityPlayerMP) var1).getPlayer());
         Canary.hooks().callHook(hook);
         if(hook.isCanceled()) {
@@ -137,7 +138,7 @@ public class OEntityEnderman extends OEntityMob {
                     var4 = this.bi.a(var1, var2, var3);
                     if (b[var4]) {
                         //CanaryMod enderman pickup
-                        EndermanHook hook = new EndermanHook(canaryEnderman, canaryEnderman.getDimension().getBlockAt(var1, var2, var3), false);
+                        EndermanHook hook = new EndermanHook(canaryEnderman, canaryEnderman.getWorld().getBlockAt(var1, var2, var3), false);
                         Canary.hooks().callHook(hook);
                         if(hook.isCanceled()) {
                             return;
@@ -155,7 +156,7 @@ public class OEntityEnderman extends OEntityMob {
                 int var5 = this.bi.a(var1, var2 - 1, var3);
                 if (var4 == 0 && var5 > 0 && OBlock.m[var5].b()) {
                   //CanaryMod enderman drop
-                    EndermanHook hook = new EndermanHook(canaryEnderman, canaryEnderman.getDimension().getBlockAt(var1, var2, var3), true);
+                    EndermanHook hook = new EndermanHook(canaryEnderman, canaryEnderman.getWorld().getBlockAt(var1, var2, var3), true);
                     Canary.hooks().callHook(hook);
                     if(hook.isCanceled()) {
                         return;

@@ -6,10 +6,7 @@ import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
-import net.canarymod.api.entity.CanaryEntityLiving;
-import net.canarymod.api.entity.EntityLiving;
-import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.hook.CancelableHook;
+import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.hook.entity.DamageHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -141,11 +138,11 @@ public abstract class OEntity {
      * CanaryMod Get this entities current World (dimension)
      * @return
      */
-    public CanaryDimension getDimension() {
-        return bi.getCanaryDimension();
+    public CanaryWorld getCanaryWorld() {
+        return bi.getCanaryWorld();
     }
 
-    public void setDimension(CanaryDimension dim) {
+    public void setDimension(CanaryWorld dim) {
         this.bi = dim.getHandle();
     }
 
@@ -978,7 +975,11 @@ public abstract class OEntity {
         return false;
     }
 
-    public boolean b(OEntityPlayer var1) {
+    public boolean interact(OEntityPlayer var1) {
+        //CanaryMod interact hook
+        //TODO: what's cooking with this?
+//        Player tmp = ((OEntityPlayerMP) var1).getPlayer();
+//        RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryEntity(), Hook.Type.ENTITY_RIGHTCLICK);
         return false;
     }
 

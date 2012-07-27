@@ -150,7 +150,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         for (int var1 = 0; var1 < 5; ++var1) {
             OItemStack var2 = this.c(var1);
             if (var2 != this.ck[var1]) {
-                getDimension().getEntityTracker().sendPacketToTrackedPlayer(this.getPlayer(), new CanaryPacket(new OPacket5PlayerInventory(this.bd, var1, var2)));//.a(this, new OPacket5PlayerInventory(this.bd, var1, var2));
+                getCanaryWorld().getEntityTracker().sendPacketToTrackedPlayer(this.getPlayer(), new CanaryPacket(new OPacket5PlayerInventory(this.bd, var1, var2)));//.a(this, new OPacket5PlayerInventory(this.bd, var1, var2));
                 this.ck[var1] = var2;
             }
         }
@@ -233,7 +233,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                 }
 
                 if (var17) {
-                    OWorldServer var18 = (OWorldServer) getDimension().getHandle();//this.b.a(this.w);
+                    OWorldServer var18 = (OWorldServer) getCanaryWorld().getHandle();//this.b.a(this.w);
                     if (var18.i(var14.a << 4, 0, var14.b << 4)) {
                         OChunk var11 = var18.d(var14.a, var14.b);
                         if (var11.k) {
@@ -270,7 +270,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                         var16 = -1;
                     }
                     Location location = getPlayer().getLocation();
-                    int currDim = getPlayer().getDimension().getType().getId();
+                    int currDim = getPlayer().getWorld().getType().getId();
                     location.setDimensionId(currDim == 0 ? -1 : 0);
                     TeleportHook hook = new TeleportHook(getPlayer(), location, true);
                     Canary.hooks().callHook(hook);
@@ -301,7 +301,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
         if(this.ap != this.cf){
             //Check if health is enabled
-            if(!Configuration.getWorldConfig(bi.getCanaryDimension().getName()).isHealthEnabled()){
+            if(!Configuration.getWorldConfig(bi.getCanaryWorld().getName()).isHealthEnabled()){
                 ap = 20;
                 az = false;
             }
@@ -323,7 +323,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
         //CanaryMod start - Experience Update
         if (this.N != this.ci) {
-            if(!Configuration.getWorldConfig(bi.getCanaryDimension().getName()).isExperienceEnabled()){ //CanaryMod - check if Experience is enabled
+            if(!Configuration.getWorldConfig(bi.getCanaryWorld().getName()).isExperienceEnabled()){ //CanaryMod - check if Experience is enabled
                 N = 0;
                 M = 0;
             }
@@ -352,9 +352,9 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             this.a.b((new OPacket70Bed(4, 0)));
         } else {
             this.a(OAchievementList.B);
-            OChunkCoordinates var2 = getDimension().getHandle().d();//this.b.a(var1).d();
+            OChunkCoordinates var2 = getCanaryWorld().getHandle().d();//this.b.a(var1).d();
             if (var2 != null) {
-                this.a.a(var2.a, var2.b, var2.c, 0.0F, 0.0F, this.w, this.bi.getCanaryDimension().getName());
+                this.a.a(var2.a, var2.b, var2.c, 0.0F, 0.0F, this.w, this.bi.getCanaryWorld().getName());
             }
 
             this.b.h.switchDimension(this, 1, true);
@@ -386,7 +386,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     @Override
     public void a(OEntity var1, int var2) {
         if (!var1.bE) {
-            OEntityTracker var3 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
+            OEntityTracker var3 = ((CanaryEntityTracker)getCanaryWorld().getEntityTracker()).getHandle();
             if (var1 instanceof OEntityItem) {
                 var3.a(var1, new OPacket22Collect(var1.bd, this.bd));
             }
@@ -410,7 +410,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
             Canary.hooks().callHook(new LeftClickHook(getPlayer(), null)); //CanaryMod - onArmSwing
             this.u = -1;
             this.t = true;
-            OEntityTracker var1 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
+            OEntityTracker var1 = ((CanaryEntityTracker)getCanaryWorld().getEntityTracker()).getHandle();
             var1.a(this, new OPacket18Animation(this, 1));
         }
 
@@ -423,10 +423,10 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public OEnumStatus a(int var1, int var2, int var3) {
         OEnumStatus var4 = super.a(var1, var2, var3);
         if (var4 == OEnumStatus.a) {
-            OEntityTracker var5 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
+            OEntityTracker var5 = ((CanaryEntityTracker)getCanaryWorld().getEntityTracker()).getHandle();
             OPacket17Sleep var6 = new OPacket17Sleep(this, 0, var1, var2, var3);
             var5.a(this, var6);
-            this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt, this.w, this.bi.getCanaryDimension().getName());
+            this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt, this.w, this.bi.getCanaryWorld().getName());
             this.a.b(var6);
         }
 
@@ -436,13 +436,13 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     @Override
     public void a(boolean var1, boolean var2, boolean var3) {
         if (this.Z()) {
-            OEntityTracker var4 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
+            OEntityTracker var4 = ((CanaryEntityTracker)getCanaryWorld().getEntityTracker()).getHandle();
             var4.b(this, new OPacket18Animation(this, 3));
         }
 
         super.a(var1, var2, var3);
         if (this.a != null) {
-            this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt, this.w, this.bi.getCanaryDimension().getName());
+            this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt, this.w, this.bi.getCanaryWorld().getName());
         }
 
     }
@@ -451,7 +451,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public void b(OEntity var1) {
         super.b(var1);
         this.a.b((new OPacket39AttachEntity(this, this.bh)));
-        this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt, this.w, this.bi.getCanaryDimension().getName());
+        this.a.a(this.bm, this.bn, this.bo, this.bs, this.bt, this.w, this.bi.getCanaryWorld().getName());
     }
 
     @Override
@@ -659,7 +659,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                 super.a(var1, var2);
                 //OEntityTracker var3 = this.b.b(this.w);
                 //CanaryMod get the real entity tracker
-                OEntityTracker var3 = this.getDimension().getEntityTracker().getHandle();
+                OEntityTracker var3 = this.getCanaryWorld().getEntityTracker().getHandle();
                 var3.b(this, new OPacket18Animation(this, 5));
             }
             else{
@@ -692,18 +692,18 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     @Override
     public void a_(double var1, double var3, double var5) {
-        this.a.a(var1, var3, var5, this.bs, this.bt, this.w, this.bi.getCanaryDimension().getName());
+        this.a.a(var1, var3, var5, this.bs, this.bt, this.w, this.bi.getCanaryWorld().getName());
     }
 
     @Override
     public void c(OEntity var1) {
-        OEntityTracker var2 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
+        OEntityTracker var2 = ((CanaryEntityTracker)getCanaryWorld().getEntityTracker()).getHandle();
         var2.b(this, new OPacket18Animation(var1, 6));
     }
 
     @Override
     public void d(OEntity var1) {
-        OEntityTracker var2 = ((CanaryEntityTracker)getDimension().getEntityTracker()).getHandle();
+        OEntityTracker var2 = ((CanaryEntityTracker)getCanaryWorld().getEntityTracker()).getHandle();
         var2.b(this, new OPacket18Animation(var1, 7));
     }
 

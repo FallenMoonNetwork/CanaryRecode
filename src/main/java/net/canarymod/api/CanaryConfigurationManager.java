@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import net.canarymod.Canary;
 import net.canarymod.api.entity.Player;
+import net.canarymod.api.world.WorldType;
 import net.minecraft.server.OEntityPlayerMP;
 import net.minecraft.server.OServerConfigurationManager;
 
@@ -22,7 +23,7 @@ public class CanaryConfigurationManager implements ConfigurationManager{
     @Override
     public void sendPacketToAllInWorld(String world, Packet packet) {
         for(OEntityPlayerMP p : manager.b) {
-            if(p.getDimension().getWorld().getName().equals(world)) {
+            if(p.getCanaryWorld().getName().equals(world)) {
                 manager.a(p.getPlayer().getName(), ((CanaryPacket)packet).getPacket());
             }
         }
@@ -52,8 +53,8 @@ public class CanaryConfigurationManager implements ConfigurationManager{
         return manager.k();
     }
     @Override
-    public void markBlockNeedsUpdate(int x, int y, int z, int dimension, String world) {
-        Canary.getServer().getWorldManager().getDimension(world, dimension).getPlayerManager().markBlockNeedsUpdate(x, y, z);
+    public void markBlockNeedsUpdate(int x, int y, int z, WorldType dimension, String world) {
+        Canary.getServer().getWorldManager().getWorld(world, dimension, true).getPlayerManager().markBlockNeedsUpdate(x, y, z);
         
     }
 

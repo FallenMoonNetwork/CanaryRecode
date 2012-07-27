@@ -12,14 +12,13 @@ import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
-import net.canarymod.api.world.CanaryDimension;
-import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.position.Location;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.hook.player.LeftClickHook;
@@ -147,9 +146,9 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             this.b((new OPacket255KickDisconnect(var1)));
             this.b.d();
           //CanaryMod handle disconnect world stuff
-            this.e.bi.getCanaryDimension().getEntityTracker().untrackPlayerSymmetrics(this.e.getPlayer());
-            this.e.bi.getCanaryDimension().getEntityTracker().untrackEntity(this.e.getPlayer());
-            this.e.bi.getCanaryDimension().getPlayerManager().removePlayer(this.e.getPlayer());
+            this.e.bi.getCanaryWorld().getEntityTracker().untrackPlayerSymmetrics(this.e.getPlayer());
+            this.e.bi.getCanaryWorld().getEntityTracker().untrackEntity(this.e.getPlayer());
+            this.e.bi.getCanaryWorld().getPlayerManager().removePlayer(this.e.getPlayer());
             //            etc.getServer().getPlayerManager(this.e.bi.world).removePlayer(this.e);
             ConnectionHook hook = new ConnectionHook(getUser(), var1, Colors.Yellow + getUser().getName() + " left the game.");
             Canary.hooks().callHook(hook);
@@ -163,7 +162,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     @Override
     public void a(OPacket10Flying var1) {
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
+        OWorldServer var2 = (OWorldServer) ((CanaryWorld)this.e.getCanaryWorld()).getHandle();
         this.h = true;
         if (!this.e.j) {
             double var3;
@@ -176,7 +175,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             
             //CanaryMod start - onPlayerMove
             if(Math.floor(o) != Math.floor(player.getX()) || Math.floor(p) != Math.floor(player.getY()) || Math.floor(q) != Math.floor(player.getZ())){
-                Location from = new Location(player.getDimension(), o, p, q, player.getRotation(), player.getPitch());
+                Location from = new Location(player.getWorld(), o, p, q, player.getRotation(), player.getPitch());
                 Canary.hooks().callHook(new PlayerMoveHook(player, from, player.getLocation()));
             }
             //CanaryMod end
@@ -323,7 +322,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                 // 30 // true if not collides AFTER
                 // 26 // true if not collides BEFORE
                 if (var26 && (var29 || !var30) && !this.e.Z()) {
-                    this.a(this.o, this.p, this.q, var17, var18, this.e.w, this.e.bi.getCanaryDimension().getName());
+                    this.a(this.o, this.p, this.q, var17, var18, this.e.w, this.e.bi.getCanaryWorld().getName());
                     return;
                 }
 
@@ -352,7 +351,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     //CanaryMod changed signature to additionally define world destination
     public void a(double var1, double var3, double var5, float var7, float var8, int dimension, String world) {
         // CanaryMod - Teleport hook.
-        Dimension dim = Canary.getServer().getWorld(world).getDimension(Dimension.Type.fromId(dimension));
+        World dim = Canary.getServer().getWorld(world);
         Location location = new Location(dim, var1, var3, var5, var8, var7);
         TeleportHook hook = new TeleportHook(getUser(), location, false);
         Canary.hooks().callHook(hook);
@@ -370,7 +369,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     
     @Override
     public void a(OPacket14BlockDig var1) {
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
+        OWorldServer var2 = (OWorldServer) ((CanaryWorld)this.e.getCanaryWorld()).getHandle();
         if (var1.e == 4) {
             this.e.S();
         } else if (var1.e == 5) {
@@ -412,15 +411,15 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
             if (var1.e == 0) {
                 if(!getUser().canBuild()){ //CanaryMod - no build rights, no digging
-                    return; //TempDisable XXX
+                    return; //TempDisable
                 }
                 
                 //CanaryMod start - onBlockLeftClick
-                Block block = var2.getCanaryDimension().getBlockAt(var5, var6, var7);
+                Block block = var2.getCanaryWorld().getBlockAt(var5, var6, var7);
                 //Call hook
                 LeftClickHook hook = new LeftClickHook(getUser(), block);
                 Canary.hooks().callHook(hook);
-                if ((var18 <= Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() && !spawnBuild) || hook.isCanceled()) {
+                if ((var18 <= Configuration.getWorldConfig(var2.getCanaryWorld().getName()).getSpawnProtectionSize() && !spawnBuild) || hook.isCanceled()) {
                     this.e.a.b((new OPacket53BlockChange(var5, var6, var7, var2)));
                 } else {
                     this.e.c.a(var5, var6, var7, var1.d);
@@ -449,7 +448,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     
     @Override
     public void a(OPacket15Place var1) {
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
+        OWorldServer var2 = (OWorldServer) ((CanaryWorld)this.e.getCanaryWorld()).getHandle();
         OItemStack var3 = this.e.k.d();
         boolean var4 = false;
         int var5 = var1.a;
@@ -470,7 +469,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             lastRightClicked = null;
         } else {
             // RIGHTCLICK or BLOCK_PLACE .. or nothing
-            blockClicked = var2.getCanaryDimension().getBlockAt(var1.a, var1.b, var1.c);
+            blockClicked = var2.getCanaryWorld().getBlockAt(var1.a, var1.b, var1.c);
             blockClicked.setFaceClicked(BlockFace.fromByte((byte) var1.d));
             
             lastRightClicked = blockClicked;
@@ -529,7 +528,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             Item item = (var3 != null) ? var3.getCanaryItem() : new CanaryItem(new OItemStack(0, 0, 0));
             RightClickHook hook = new RightClickHook(getUser(), blockPlaced, blockClicked, item, null, Hook.Type.BLOCK_RIGHTCLICKED);
             Canary.hooks().callHook(hook);
-            if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > Configuration.getWorldConfig(var2.getCanaryDimension().getName()).getSpawnProtectionSize() || spawnBuild) && getUser().canBuild() && !hook.isCanceled()) { //XXX
+            if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > Configuration.getWorldConfig(var2.getCanaryWorld().getName()).getSpawnProtectionSize() || spawnBuild) && getUser().canBuild() && !hook.isCanceled()) { //XXX
                 this.e.c.a(this.e, var2, var3, var5, var6, var7, var8);
             }
             else {
@@ -730,7 +729,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     @Override
     public void a(OPacket7UseEntity var1) {
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
+        OWorldServer var2 = (OWorldServer) ((CanaryWorld)this.e.getCanaryWorld()).getHandle();
         OEntity var3 = var2.a(var1.b);
         if (var3 != null) {
             boolean var4 = this.e.h(var3);
@@ -753,7 +752,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     @Override
     public void a(OPacket9Respawn var1) {
         // CanaryMod: onPlayerRespawn
-        Location respawnLocation = getUser().getDimension().getSpawnLocation();
+        Location respawnLocation = getUser().getWorld().getSpawnLocation();
         if (this.e.j) {
             PlayerRespawnHook hook = new PlayerRespawnHook(e.getPlayer(), respawnLocation);
             Canary.hooks().callHook(hook);
@@ -847,7 +846,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     @Override
     public void a(OPacket130UpdateSign var1) {
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)this.e.getDimension()).getHandle();
+        OWorldServer var2 = (OWorldServer) ((CanaryWorld)this.e.getCanaryWorld()).getHandle();
         if (var2.i(var1.a, var1.b, var1.c)) {
             OTileEntity var3 = var2.b(var1.a, var1.b, var1.c);
             if (var3 instanceof OTileEntitySign) {

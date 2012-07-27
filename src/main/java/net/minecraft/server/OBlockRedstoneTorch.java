@@ -110,7 +110,7 @@ public class OBlockRedstoneTorch extends OBlockTorch {
             if (var6) {
                 var1.b(var2, var3, var4, OBlock.aP.bO, var1.c(var2, var3, var4));
                 //CanaryMod - Control redstone lamp power
-                RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), 1, 0);
+                RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), 1, 0);
                 Canary.hooks().callHook(hook);
                 if(hook.isCanceled()) {
                     return;

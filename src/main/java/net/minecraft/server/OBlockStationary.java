@@ -50,7 +50,7 @@ public class OBlockStationary extends OBlockFluid {
             int var6 = var5.nextInt(3);
 
             //CanaryMod allow prevention of firespread
-            IgnitionHook hook = new IgnitionHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), 1);
+            IgnitionHook hook = new IgnitionHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), 1);
             Canary.hooks().callHook(hook);
             if(hook.isCanceled()) {
                 return;

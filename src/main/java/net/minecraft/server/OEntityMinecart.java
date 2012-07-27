@@ -1,12 +1,16 @@
 package net.minecraft.server;
 
+
 import java.util.Arrays;
 import java.util.List;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryMinecart;
+import net.canarymod.api.entity.Entity;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
+import net.canarymod.hook.entity.VehicleDamageHook;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockRail;
@@ -110,6 +114,19 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
     @Override
     public boolean a(ODamageSource var1, int var2) {
+        //CanaryMod Vehicle damage hook start
+        Entity entity = null;
+
+        if(var1 != null) {
+            entity = var1.getCanaryDamageSource().getDamageDealer();
+        }
+        VehicleDamageHook hook = new VehicleDamageHook(minecart, entity, var1.getCanaryDamageSource(), var2);
+        Canary.hooks().callHook(hook);
+        if(hook.isCanceled()) {
+            return true;
+        }
+        //CanaryMod end
+        
         if (!this.bi.F && !this.bE) {
             this.e(-this.n());
             this.d(10);
@@ -790,7 +807,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     }
 
     @Override
-    public boolean b(OEntityPlayer var1) {
+    public boolean interact(OEntityPlayer var1) {
         if (this.minecartType == 0) {
             if (this.bg != null && this.bg instanceof OEntityPlayer && this.bg != var1) {
                 return true;
@@ -1005,7 +1022,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                 int targetSlot = getEmptySlot();
                 
                 if (targetSlot == -1) {
-                    this.bi.getCanaryDimension().dropItem((int)getCanaryEntity().getX(), (int)getCanaryEntity().getY(), (int)getCanaryEntity().getZ(), itemId, amount, 0);
+                    this.bi.getCanaryWorld().dropItem((int)getCanaryEntity().getX(), (int)getCanaryEntity().getY(), (int)getCanaryEntity().getZ(), itemId, amount, 0);
                     remaining = 0;
                 } else {
                     addItem(new CanaryItem(itemId, 1, targetSlot));
@@ -1032,7 +1049,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                     int targetSlot = getEmptySlot();
                     
                     if (targetSlot == -1) {
-                        this.bi.getCanaryDimension().dropItem((int)getCanaryEntity().getX(), (int)getCanaryEntity().getY(), (int)getCanaryEntity().getZ(), itemId, amount, 0);
+                        this.bi.getCanaryWorld().dropItem((int)getCanaryEntity().getX(), (int)getCanaryEntity().getY(), (int)getCanaryEntity().getZ(), itemId, amount, 0);
                         remaining = 0;
                     } else {
                         if (remaining > 64) {

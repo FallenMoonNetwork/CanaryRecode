@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import net.canarymod.Canary;
-import net.canarymod.CanaryMod;
 import net.canarymod.Logman;
 import net.minecraft.server.OMinecraftServer;
 

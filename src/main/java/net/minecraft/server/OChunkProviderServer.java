@@ -2,14 +2,12 @@ package net.minecraft.server;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import net.canarymod.Canary;
-import net.canarymod.CanaryMod;
 import net.canarymod.api.world.CanaryChunkProviderServer;
 import net.canarymod.hook.Hook;
 import net.canarymod.hook.world.ChunkCreationHook;
@@ -94,7 +92,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         this.b.remove(Long.valueOf(var3));
         OChunk var5 = (OChunk) this.f.a(var3);
         if (var5 == null) {
-            // CanaryMod start: load preload plugins XXX
+            // CanaryMod start: load preload plugins 
             if (loadStage < 1) {
                 Canary.loader().loadPlugins(true);
                 loadStage = 1;
@@ -105,7 +103,7 @@ public class OChunkProviderServer implements OIChunkProvider {
             var5 = this.e(var1, var2);
             if (var5 == null) {
                 //CanaryMod start - onChunkCreation
-                ChunkCreationHook hook = new ChunkCreationHook(var1, var2, h.getCanaryDimension());
+                ChunkCreationHook hook = new ChunkCreationHook(var1, var2, h.getCanaryWorld());
                 Canary.hooks().callHook(hook);
                 byte[] blocks = hook.getBlockData();
                 
@@ -203,7 +201,7 @@ public class OChunkProviderServer implements OIChunkProvider {
     public boolean a(boolean var1, OIProgressUpdate var2) throws IOException {
         int var3 = 0;
 
-        // CanaryMod start: load plugins XXX
+        // CanaryMod start: load plugins 
         if (loadStage < 2) {
             Canary.loader().loadPlugins(false);
             loadStage = 2;

@@ -4,7 +4,7 @@ import net.canarymod.api.inventory.CanaryInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
-import net.canarymod.api.world.Dimension;
+import net.canarymod.api.world.World;
 import net.minecraft.server.OContainerWorkbench;
 import net.minecraft.server.OItemStack;
 
@@ -23,7 +23,7 @@ public class CanaryWorkbench implements Workbench {
     
     @Override
     public Block getBlock() {
-        return getDimension().getBlockAt(getX(), getY(), getZ());
+        return getWorld().getBlockAt(getX(), getY(), getZ());
     }
 
     @Override
@@ -42,8 +42,8 @@ public class CanaryWorkbench implements Workbench {
     }
     
     @Override
-    public Dimension getDimension(){
-        return container.c.getCanaryDimension();
+    public World getWorld(){
+        return container.c.getCanaryWorld();
     }
     
     @Override

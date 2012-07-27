@@ -15,22 +15,17 @@ import java.util.logging.Logger;
 
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
-import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.entity.CanaryPlayer;
-import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.Player;
-import net.canarymod.api.world.CanaryDimension;
 import net.canarymod.api.world.CanaryWorld;
-import net.canarymod.api.world.Dimension;
-import net.canarymod.api.world.Dimension.Type;
+import net.canarymod.api.world.WorldType;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.player.LoginChecksHook;
 import net.canarymod.hook.player.LoginHook;
-import net.canarymod.permissionsystem.PermissionNode;
-import net.canarymod.permissionsystem.PermissionProvider;
+import net.canarymod.hook.world.DimensionSwitchHook;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityPlayerMP;
@@ -113,13 +108,13 @@ public class OServerConfigurationManager {
         return canaryCfgManager;
     }
 
-    public void a(OWorldServer[] var1) {
+    public void a(OWorldServer var1) {
 //        this.n = var1[0].r().d();
-        //CanaryMod modified section to contain a per-world player info set
+        //CanaryMod Multiworld modified section to contain a per-world player info set 
         if(this.playerFileDataSet == null) {
             this.playerFileDataSet = new HashMap<String, OIPlayerFileData>();
         }
-        this.playerFileDataSet.put(var1[0].getCanaryDimension().getName(), var1[0].r().d());
+        this.playerFileDataSet.put(var1.getCanaryWorld().getFqName(), var1.r().d());
     }
 
     public void a(OEntityPlayerMP var1) {
@@ -127,15 +122,13 @@ public class OServerConfigurationManager {
 //        this.d[1].b(var1);
 //        this.d[2].b(var1);
         for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
-            for(Dimension dim : w.getDimensions()) {
-                dim.getPlayerManager().removePlayer(var1.getPlayer());
-            }
+            w.getPlayerManager().removePlayer(var1.getPlayer());
         }
 //        this.a(var1.w).a(var1); //remove again? rly?
         
 //        OWorldServer var2 = this.c.a(var1.w);
-        var1.getDimension().getPlayerManager().addPlayer(var1.getPlayer());
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)var1.getDimension()).getHandle();
+        var1.getCanaryWorld().getPlayerManager().addPlayer(var1.getPlayer());
+        OWorldServer var2 = (OWorldServer) ((CanaryWorld)var1.getCanaryWorld()).getHandle();
         var2.G.c((int) var1.bm >> 4, (int) var1.bo >> 4);
     }
 
@@ -152,7 +145,7 @@ public class OServerConfigurationManager {
      * @return
      */
     public int getMaxTrackingDistance(String world) {
-       return Canary.getServer().getWorld(world).getNormal().getPlayerManager().getMaxTrackingDistance();
+       return Canary.getServer().getWorld(world).getPlayerManager().getMaxTrackingDistance();
     }
 //CanaryMod playermanagers are now stored per world, this isn't needed
 //    private OPlayerManager a(int var1) {
@@ -163,13 +156,14 @@ public class OServerConfigurationManager {
 
     public void b(OEntityPlayerMP var1) {
 //      this.n.b(var1); //CanaryMod refactored
-        this.playerFileDataSet.get(var1.getPlayer().getDimension().getName()).b(var1);
+        this.playerFileDataSet.get(var1.getPlayer().getWorld().getFqName()).b(var1);
     }
 
     public void c(OEntityPlayerMP var1) {
         this.sendPacketToAll((new OPacket201PlayerInfo(var1.v, true, 1000)));
         this.b.add(var1);
-        OWorldServer var2 = (OWorldServer) ((CanaryDimension)var1.getDimension().getWorld().getDimension(Type.fromId(var1.w))).getHandle();
+        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(var1.getCanaryWorld().getName(), WorldType.fromId(var1.w), true);
+        OWorldServer var2 = (OWorldServer) w.getHandle();
         var1.bi = var2; //re-set world
         var2.G.c((int) var1.bm >> 4, (int) var1.bo >> 4);
 
@@ -179,7 +173,7 @@ public class OServerConfigurationManager {
 
         var2.b(var1);
         //CanaryMod
-        var1.getDimension().getPlayerManager().addPlayer(var1.getPlayer());
+        var1.getCanaryWorld().getPlayerManager().addPlayer(var1.getPlayer());
         this.u();
 
         for (int var3 = 0; var3 < this.b.size(); ++var3) {
@@ -193,16 +187,16 @@ public class OServerConfigurationManager {
 
     public void d(OEntityPlayerMP var1) {
         //Canary
-        var1.getDimension().getPlayerManager().updateMountedMovingPlayer(var1.getPlayer());
+        var1.getCanaryWorld().getPlayerManager().updateMountedMovingPlayer(var1.getPlayer());
     }
 
     public void e(OEntityPlayerMP var1) {
 //        this.n.a(var1); //CanaryMod refactored
-        this.playerFileDataSet.get(var1.getPlayer().getDimension().getName()).a(var1);
+        this.playerFileDataSet.get(var1.getPlayer().getWorld().getFqName()).a(var1);
         //CanaryMod refactored
-        ((CanaryDimension)var1.getDimension()).getHandle().e(var1);
+        ((CanaryWorld)var1.getCanaryWorld()).getHandle().e(var1);
         this.b.remove(var1);
-        var1.getDimension().getPlayerManager().removePlayer(var1.getPlayer());
+        var1.getCanaryWorld().getPlayerManager().removePlayer(var1.getPlayer());
 //        this.a(var1.w).b(var1);
         this.sendPacketToAll((new OPacket201PlayerInfo(var1.v, false, 9999)));
     }
@@ -212,7 +206,7 @@ public class OServerConfigurationManager {
         //IP
         var3 = var3.substring(var3.indexOf("/") + 1);
         var3 = var3.substring(0, var3.indexOf(":"));
-        Dimension dim = Canary.getServer().getDefaultWorld().getNormal();
+        World dim = Canary.getServer().getDefaultWorld();
         LoginChecksHook hook = new LoginChecksHook(var3, var2, dim.getType(), dim.getName());
         Canary.hooks().callHook(hook);
         if (hook.getKickReason() != null && !hook.getKickReason().trim().equals("")) {
@@ -241,7 +235,7 @@ public class OServerConfigurationManager {
                         var5.a.a("You logged in from another location");
                     }
                 }
-                OWorldServer dimension = (OWorldServer) ((CanaryDimension) Canary.getServer().getWorld(hook.getWorld()).getDimension(hook.getDimensionType())).getHandle();
+                OWorldServer dimension = (OWorldServer) ((CanaryWorld) Canary.getServer().getWorld(hook.getWorld())).getHandle();
                 return new OEntityPlayerMP(this.c, dimension, var2, new OItemInWorldManager(dimension));
             }
         }
@@ -254,17 +248,16 @@ public class OServerConfigurationManager {
     
     //Respawn player
     public OEntityPlayerMP a(OEntityPlayerMP var1, int var2, boolean var3, Location spawnLocation) {
-        var1.getDimension().getEntityTracker().untrackPlayerSymmetrics(var1.getPlayer());
-        var1.getDimension().getEntityTracker().untrackEntity(var1.getCanaryEntity());
-        var1.getDimension().getPlayerManager().removePlayer(var1.getPlayer());
+        var1.getCanaryWorld().getEntityTracker().untrackPlayerSymmetrics(var1.getPlayer());
+        var1.getCanaryWorld().getEntityTracker().untrackEntity(var1.getCanaryEntity());
+        var1.getCanaryWorld().getPlayerManager().removePlayer(var1.getPlayer());
         this.b.remove(var1);
-        var1.getDimension().removePlayerFromWorld(var1.getPlayer()); //This calls the despawn method in world!
+        var1.getCanaryWorld().removePlayerFromWorld(var1.getPlayer()); //This calls the despawn method in world!
         
         OChunkCoordinates var4 = var1.ab();
         var1.w = var2; //Set new dimension
-        CanaryWorld cworld = (CanaryWorld) var1.getDimension().getWorld();
-        CanaryDimension dim = (CanaryDimension) cworld.getDimension(Type.fromId(var2));
-        OEntityPlayerMP var5 = new OEntityPlayerMP(this.c, dim.getHandle(), var1.v, new OItemInWorldManager(dim.getHandle()));
+        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(var1.getCanaryWorld().getName(), WorldType.fromId(var2), true);
+        OEntityPlayerMP var5 = new OEntityPlayerMP(this.c, w.getHandle(), var1.v, new OItemInWorldManager(w.getHandle()));
         var5.w = var2;
         if (var3) {
             //copy player
@@ -277,11 +270,11 @@ public class OServerConfigurationManager {
         var5.setServerHandler(var5.a.getCanaryNetServerHandler());
         var5.a.setUser(var5.getPlayer());
         
-        OWorldServer var6 = (OWorldServer) dim.getHandle();
+        OWorldServer var6 = (OWorldServer) w.getHandle();
         var5.c.a(var1.c.a());
         var5.c.b(var6.s().getGameMode());
         if (var4 != null) {
-            OChunkCoordinates var7 = OEntityPlayer.a(((CanaryDimension)var1.getDimension()).getHandle(), var4);
+            OChunkCoordinates var7 = OEntityPlayer.a(((CanaryWorld)var1.getCanaryWorld()).getHandle(), var4);
             if (var7 != null) {
                 var5.c((var7.a + 0.5F), (var7.b + 0.1F), (var7.c + 0.5F), 0.0F, 0.0F);
                 var5.a(var4);
@@ -304,11 +297,11 @@ public class OServerConfigurationManager {
         //respawn packet
         var5.a.b((new OPacket9Respawn(var5.w, (byte) var5.bi.q, var5.bi.s().getWorldType(), var5.bi.y(), var5.c.a())));
         //teleport to spawn location
-        var5.a.a(var5.bm, var5.bn, var5.bo, var5.bs, var5.bt, var5.w, var5.bi.getCanaryDimension().getName());
+        var5.a.a(var5.bm, var5.bn, var5.bo, var5.bs, var5.bt, var5.w, var5.bi.getCanaryWorld().getName());
         //something
         this.a(var5, var6);
-        var5.getDimension().getPlayerManager().addPlayer((Player)var5.getPlayer());
-        var5.getDimension().addPlayerToWorld(var5.getPlayer()); //This also calls the spawn method in world!
+        var5.getCanaryWorld().getPlayerManager().addPlayer((Player)var5.getPlayer());
+        var5.getCanaryWorld().addPlayerToWorld(var5.getPlayer()); //This also calls the spawn method in world!
         this.b.add(var5);
         var5.x();
         var5.E();
@@ -323,10 +316,17 @@ public class OServerConfigurationManager {
      */
     public void switchDimension(OEntityPlayerMP var1, int var2, boolean createPortal) {
         int var3 = var1.w; //current dimension
-        OWorldServer var4 = (OWorldServer) ((CanaryDimension)var1.getDimension()).getHandle();
+        OWorldServer var4 = (OWorldServer) ((CanaryWorld)var1.getCanaryWorld()).getHandle();
+        DimensionSwitchHook hook = new DimensionSwitchHook(var1.getPlayer(), (CanaryWorld) Canary.getServer().getWorldManager().getWorld(var1.getCanaryWorld().getName(), WorldType.fromId(var2), true));
+        Canary.hooks().callHook(hook);
+        if(hook.isCanceled()) {
+            return;
+        }
         
+        CanaryWorld w = (CanaryWorld) hook.getWorld();
         var1.w = var2; //set new dimension
-        OWorldServer var5 = (OWorldServer) ((CanaryDimension) this.c.getWorldManager().getDimension(var1.bi.getCanaryDimension().getName(), var1.w)).getHandle();
+        
+        OWorldServer var5 = (OWorldServer) w.getHandle();
         var1.a.b((new OPacket9Respawn(var1.w, (byte) var1.bi.q, var5.s().getWorldType(), var5.y(), var1.c.a())));
 //        var4.f(var1);
         
@@ -372,7 +372,7 @@ public class OServerConfigurationManager {
         }
 
         this.a(var1);
-        var1.a.a(var1.bm, var1.bn, var1.bo, var1.bs, var1.bt, var1.w, var1.bi.getCanaryDimension().getName());
+        var1.a.a(var1.bm, var1.bn, var1.bo, var1.bs, var1.bt, var1.w, var1.bi.getCanaryWorld().getName());
         var1.a(var5);
         var1.c.a(var5);
         this.a(var1, var5);
@@ -399,10 +399,9 @@ public class OServerConfigurationManager {
             this.sendPacketToAll((new OPacket201PlayerInfo(var1.v, true, var1.i)));
         }
 
+        //CanaryMod Multiworld
         for(World w : Canary.getServer().getWorldManager().getAllWorlds()) {
-            for(Dimension dim : w.getDimensions()) {
-                ((CanaryPlayerManager)dim.getPlayerManager()).getHandle().b();
-            }
+            ((CanaryPlayerManager)w.getPlayerManager()).getHandle().b();
         }
     }
 
@@ -415,7 +414,8 @@ public class OServerConfigurationManager {
     }
     
     public void markBlockNeedsUpdate(int var1, int var2, int var3, int var4, String var5) {
-        Canary.getServer().getWorld(var5).getDimension(Dimension.Type.fromId(var4)).getPlayerManager().markBlockNeedsUpdate(var1, var2, var3);
+        World w = Canary.getServer().getWorldManager().getWorld(var5, WorldType.fromId(var4), true);
+        w.getPlayerManager().markBlockNeedsUpdate(var1, var2, var3);
     }
 
     public void a(OPacket var1, int var2) {
@@ -688,7 +688,7 @@ public class OServerConfigurationManager {
         else {
             for (int var12 = 0; var12 < this.b.size(); ++var12) {
                 OEntityPlayerMP var13 = (OEntityPlayerMP) this.b.get(var12);
-                if (var13 != var1 && var13.w == var10 && worldName.equals(var13.bi.getCanaryDimension().getName())) {
+                if (var13 != var1 && var13.w == var10 && worldName.equals(var13.bi.getCanaryWorld().getName())) {
                     double var14 = var2 - var13.bm;
                     double var16 = var4 - var13.bn;
                     double var18 = var6 - var13.bo;
@@ -730,7 +730,7 @@ public class OServerConfigurationManager {
 //            this.n.a((OEntityPlayer) this.b.get(var1));
 //        }
         for(Player player : getCanaryConfigurationManager().getAllPlayers()) {
-            this.playerFileDataSet.get(player.getDimension().getName()).a((OEntityPlayer) ((CanaryPlayer)player).getHandle());
+            this.playerFileDataSet.get(player.getWorld().getFqName()).a((OEntityPlayer) ((CanaryPlayer)player).getHandle());
         }
         //CanaryMod end
 
@@ -780,9 +780,10 @@ public class OServerConfigurationManager {
 
     public String[] t() {
         //CanaryMod refactored to incorporate everythign from anywhere
+        //Multiworld
         ArrayList<String> playersSeen = new ArrayList<String>();
         for(World w : this.c.getWorldManager().getAllWorlds()) {
-            CanaryDimension dim = (CanaryDimension) ((CanaryWorld)w).getDimensions()[0];
+            CanaryWorld dim = (CanaryWorld) w;
             for(String s : dim.getHandle().r().d().g()) {
                 playersSeen.add(s);
             }

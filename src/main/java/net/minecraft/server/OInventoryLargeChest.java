@@ -228,7 +228,7 @@ public class OInventoryLargeChest implements OIInventory {
                 
                 if (targetSlot == -1) {
                     OTileEntity chest = ((OTileEntity)b);
-                    chest.k.getCanaryDimension().dropItem(chest.l, chest.m, chest.n, itemId, amount, 0);
+                    chest.k.getCanaryWorld().dropItem(chest.l, chest.m, chest.n, itemId, amount, 0);
                     remaining = 0;
                 } else {
                     addItem(new CanaryItem(itemId, 1, targetSlot));
@@ -256,7 +256,7 @@ public class OInventoryLargeChest implements OIInventory {
                     
                     if (targetSlot == -1) {
                         OTileEntity chest = ((OTileEntity)b);
-                        chest.k.getCanaryDimension().dropItem(chest.l, chest.m, chest.n, itemId, amount, 0);
+                        chest.k.getCanaryWorld().dropItem(chest.l, chest.m, chest.n, itemId, amount, 0);
                         remaining = 0;
                     } else {
                         if (remaining > 64) {

@@ -120,7 +120,7 @@ public class OBlockRedstoneWire extends OBlock {
         }
 
         if (var8 != var9) {
-            RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryDimension().getBlockAt(var2, var3, var4), var8, var9);
+            RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), var8, var9);
             Canary.hooks().callHook(hook);
             if(hook.isCanceled()) {
                 return;
