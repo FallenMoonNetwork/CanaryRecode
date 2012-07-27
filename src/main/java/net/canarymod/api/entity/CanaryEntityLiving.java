@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.canarymod.Canary;
+import net.canarymod.Logman;
 import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.DamageSource;
 import net.canarymod.api.DamageType;
 import net.canarymod.api.entity.potion.CanaryPotion;
@@ -27,6 +30,9 @@ import net.minecraft.server.OEntitySquid;
 import net.minecraft.server.OEntityVillager;
 import net.minecraft.server.OIAnimals;
 import net.minecraft.server.OIMob;
+import net.minecraft.server.OPacket;
+import net.minecraft.server.OPacket12PlayerLook;
+import net.minecraft.server.OPacket32EntityLook;
 import net.minecraft.server.OPotion;
 import net.minecraft.server.OPotionEffect;
 import net.minecraft.server.OWorld;
@@ -264,13 +270,54 @@ public class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
     public List<PotionEffect> getAllActivePotionEffects() {
         Collection<OPotionEffect> collection = ((OEntityLiving) entity).aM();
         List<PotionEffect> list = new ArrayList<PotionEffect>();
-        for (int i = 0; i < collection.size(); i++) {
-            //OPotionEffect oEffect = collection
-        }
         for (OPotionEffect oEffect : collection) {
             list.add(new CanaryPotionEffect(oEffect));
         }
         return list;
     }
+    
+    @Override
+    public void lookAt(double x, double y, double z) {
+        double xDiff = x - getX();
+        double yDiff = y - getY();
+        double zDiff = z - getZ();
+
+        double pitch = -Math.atan2(yDiff, Math.sqrt(Math.pow(xDiff, 2) + Math.pow(zDiff, 2)));
+        double rotation = Math.atan2(-xDiff, zDiff);
+        Logman.logInfo("Rotation: " + rotation);
+        Logman.logInfo("Pitch: " + pitch);
+        pitch = Math.toDegrees(pitch);
+        rotation = Math.toDegrees(rotation);
+        Logman.logInfo("Rotation2: " + rotation);
+        Logman.logInfo("Pitch2: " + pitch);
+        
+        setRotation((float) rotation);
+        setPitch((float) pitch);
+        
+        OPacket toSend;
+        if (isPlayer()) {
+            toSend = new OPacket12PlayerLook();
+            OPacket12PlayerLook toSend2 = (OPacket12PlayerLook) toSend;
+            toSend2.e = (float) rotation;
+            toSend2.f = (float) pitch;
+            getPlayer().sendPacket(new CanaryPacket(toSend));
+        } else {
+            double rotation2 = Math.floor((rotation * 256F) / 360F);
+            double pitch2 = Math.floor((pitch * 256F) / 360F);
+            Logman.logInfo("Rotation3: " + (byte) rotation2);
+            Logman.logInfo("Pitch3: " + (byte) pitch2);
+            Logman.logInfo("Set Rotation: " + getRotation());
+            Logman.logInfo("Set Pitch: " + getPitch());
+            toSend = new OPacket32EntityLook(entity.bd, (byte) rotation2, (byte) pitch2);
+            Canary.getServer().getConfigurationManager().sendPacketToAllInWorld(getWorld().getName(), new CanaryPacket(toSend));
+        }
+    }
+
+    @Override
+    public void lookAt(Location location) {
+        lookAt(location.getX(), location.getY(), location.getZ());
+    }
 
 }
+
+
