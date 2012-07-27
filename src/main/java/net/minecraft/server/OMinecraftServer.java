@@ -18,7 +18,6 @@ import net.canarymod.Canary;
 import net.canarymod.Logman;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
-import net.canarymod.api.EntityTracker;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.CanaryWorld;
@@ -65,7 +64,7 @@ import net.minecraft.server.OWorldType;
 public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
     public static Logger a = Logger.getLogger("Minecraft");
-    public static HashMap b = new HashMap();
+    public static HashMap<String, Integer> b = new HashMap<String, Integer>();
     private String y;
     private int z;
     public ONetworkListenThread c;
@@ -79,8 +78,8 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     int j = 0;
     public String k;
     public int l;
-    private List C = new ArrayList();
-    private List D = Collections.synchronizedList(new ArrayList());
+    private List<OIUpdatePlayerListBox> C = new ArrayList<OIUpdatePlayerListBox>();
+    private List<OServerCommand> D = Collections.synchronizedList(new ArrayList<OServerCommand>());
     
 //    public OEntityTracker[] entityTrackerArray = new OEntityTracker[3]; //CanaryMod -> removed
     //CanaryMod WorldManager - your worlds here
@@ -570,12 +569,12 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
     private void w() {
         long var1 = System.nanoTime();
-        ArrayList var3 = new ArrayList();
-        Iterator var4 = b.keySet().iterator();
+        ArrayList<String> var3 = new ArrayList<String>();
+        Iterator<String> var4 = b.keySet().iterator();
 
         while (var4.hasNext()) {
-            String var5 = (String) var4.next();
-            int var6 = ((Integer) b.get(var5)).intValue();
+            String var5 = var4.next();
+            int var6 = b.get(var5).intValue();
             if (var6 > 0) {
                 b.put(var5, Integer.valueOf(var6 - 1));
             } else {
@@ -635,7 +634,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         }
         //CanaryMod end
         for (var11 = 0; var11 < this.C.size(); ++var11) {
-            ((OIUpdatePlayerListBox) this.C.get(var11)).a();
+            this.C.get(var11).a();
         }
 
         try {
@@ -661,7 +660,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
     public void b() {
         while (this.D.size() > 0) {
-            OServerCommand var1 = (OServerCommand) this.D.remove(0);
+            OServerCommand var1 = this.D.remove(0);
             this.A.a(var1);
         }
 

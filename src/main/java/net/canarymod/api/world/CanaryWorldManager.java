@@ -88,12 +88,12 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public World loadWorld(String name, WorldType type) {
-        if(!worldIsLoaded(name+type.getName())) {
-            ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name+type.getName(), new Random().nextLong(), type);
-            return loadedWorlds.get(name+type.getName());
+        if(!worldIsLoaded(name+"_"+type.getName())) {
+            ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, new Random().nextLong(), type);
+            return loadedWorlds.get(name+"_"+type.getName());
         }
         else {
-            return loadedWorlds.get(name+type.getName());
+            return loadedWorlds.get(name+"_"+type.getName());
         }
     }
 
