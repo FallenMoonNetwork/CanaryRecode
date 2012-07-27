@@ -44,6 +44,9 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
     @Override
     protected OEntity o() {
         OEntityPlayer var1 = this.bi.b(this, 16.0D);
+        if (var1 == null) {
+            return null;
+        }
         MobTargetHook hook = new MobTargetHook(getCanaryEntityLiving(), ((OEntityPlayerMP) var1).getPlayer());
         Canary.hooks().callHook(hook);
         return var1 != null && this.h(var1) && !hook.isCanceled() ? var1 : null;
