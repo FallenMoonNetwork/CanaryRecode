@@ -13,6 +13,7 @@ import net.canarymod.api.CanaryServer;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
 import net.canarymod.api.inventory.CanaryPlayerInventory;
+import net.canarymod.api.inventory.EnderChestInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryWorld;
@@ -404,6 +405,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public Inventory getInventory() {
         return ((OEntityPlayer)entity).getInventory();
+    }
+    
+    @Override
+    public EnderChestInventory getEnderChestInventory() {
+        // 1.2.5 has no ender chests
+        return null;
     }
 
     @Override
