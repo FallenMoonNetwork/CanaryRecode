@@ -90,7 +90,6 @@ public class CanaryServer implements Server {
         return Canary.commands().parseCommand(player, command.split(" ")[0], command.split(" "));
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void setTimer(String uniqueName, int time) {
         OMinecraftServer.b.put(uniqueName, time);
