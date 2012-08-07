@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 
@@ -12,12 +13,13 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OSaveHandler;
 import net.minecraft.server.OWorldInfo;
 
+
 public class OSaveFormatOld implements OISaveFormat {
 
     protected final File a;
-    //Added WorldType
+    // Added WorldType
     protected WorldType type;
-    //CanaryMod: Changed signature
+    // CanaryMod: Changed signature
     public OSaveFormatOld(File var1, WorldType type) {
         super();
         if (!var1.exists()) {
@@ -29,12 +31,14 @@ public class OSaveFormatOld implements OISaveFormat {
 
     public OWorldInfo b(String var1) {
         File var2 = new File(this.a, var1);
+
         if (!var2.exists()) {
             return null;
         } else {
             File var3 = new File(var2, "level.dat");
             ONBTTagCompound var4;
             ONBTTagCompound var5;
+
             if (var3.exists()) {
                 try {
                     var4 = OCompressedStreamTools.a((new FileInputStream(var3)));
@@ -61,7 +65,7 @@ public class OSaveFormatOld implements OISaveFormat {
     }
 
     public OISaveHandler a(String var1, boolean var2) {
-        //CanaryMod updated signature
+        // CanaryMod updated signature
         return new OSaveHandler(this.a, var1, var2, this.type);
     }
 

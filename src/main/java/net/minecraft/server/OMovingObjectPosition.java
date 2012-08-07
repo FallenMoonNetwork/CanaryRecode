@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEnumMovingObjectType;
 import net.minecraft.server.OVec3D;
+
 
 public class OMovingObjectPosition {
 

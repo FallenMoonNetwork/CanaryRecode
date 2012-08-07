@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAISit;
 import net.minecraft.server.OEntityAnimal;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public abstract class OEntityTameable extends OEntityAnimal {
 
@@ -37,6 +39,7 @@ public abstract class OEntityTameable extends OEntityAnimal {
     public void a(ONBTTagCompound var1) {
         super.a(var1);
         String var2 = var1.j("Owner");
+
         if (var2.length() > 0) {
             this.a(var2);
             this.b(true);
@@ -47,6 +50,7 @@ public abstract class OEntityTameable extends OEntityAnimal {
 
     protected void a(boolean var1) {
         String var2 = "heart";
+
         if (!var1) {
             var2 = "smoke";
         }
@@ -55,6 +59,7 @@ public abstract class OEntityTameable extends OEntityAnimal {
             double var4 = this.bS.nextGaussian() * 0.02D;
             double var6 = this.bS.nextGaussian() * 0.02D;
             double var8 = this.bS.nextGaussian() * 0.02D;
+
             this.bi.a(var2, this.bm + (this.bS.nextFloat() * this.bG * 2.0F) - this.bG, this.bn + 0.5D + (this.bS.nextFloat() * this.bH), this.bo + (this.bS.nextFloat() * this.bG * 2.0F) - this.bG, var4, var6, var8);
         }
 
@@ -66,6 +71,7 @@ public abstract class OEntityTameable extends OEntityAnimal {
 
     public void b(boolean var1) {
         byte var2 = this.bY.a(16);
+
         if (var1) {
             this.bY.b(16, Byte.valueOf((byte) (var2 | 4)));
         } else {
@@ -80,6 +86,7 @@ public abstract class OEntityTameable extends OEntityAnimal {
 
     public void c(boolean var1) {
         byte var2 = this.bY.a(16);
+
         if (var1) {
             this.bY.b(16, Byte.valueOf((byte) (var2 | 1)));
         } else {

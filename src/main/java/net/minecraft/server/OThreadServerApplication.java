@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OMinecraftServer;
+
 
 public final class OThreadServerApplication extends Thread {
 

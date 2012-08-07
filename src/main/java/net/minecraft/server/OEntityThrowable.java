@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OEntity;
@@ -10,6 +11,7 @@ import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public abstract class OEntityThrowable extends OEntity {
 
@@ -29,8 +31,7 @@ public abstract class OEntityThrowable extends OEntity {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     public OEntityThrowable(OWorld var1, OEntityLiving var2) {
         super(var1);
@@ -43,6 +44,7 @@ public abstract class OEntityThrowable extends OEntity {
         this.c(this.bm, this.bn, this.bo);
         this.bF = 0.0F;
         float var3 = 0.4F;
+
         this.bp = (-OMathHelper.a(this.bs / 180.0F * 3.1415927F) * OMathHelper.b(this.bt / 180.0F * 3.1415927F) * var3);
         this.br = (OMathHelper.b(this.bs / 180.0F * 3.1415927F) * OMathHelper.b(this.bt / 180.0F * 3.1415927F) * var3);
         this.bq = (-OMathHelper.a((this.bt + this.d()) / 180.0F * 3.1415927F) * var3);
@@ -67,6 +69,7 @@ public abstract class OEntityThrowable extends OEntity {
 
     public void a(double var1, double var3, double var5, float var7, float var8) {
         float var9 = OMathHelper.a(var1 * var1 + var3 * var3 + var5 * var5);
+
         var1 /= var9;
         var3 /= var9;
         var5 /= var9;
@@ -80,6 +83,7 @@ public abstract class OEntityThrowable extends OEntity {
         this.bq = var3;
         this.br = var5;
         float var10 = OMathHelper.a(var1 * var1 + var5 * var5);
+
         this.bu = this.bs = (float) (Math.atan2(var1, var5) * 180.0D / 3.1415927410125732D);
         this.bv = this.bt = (float) (Math.atan2(var3, var10) * 180.0D / 3.1415927410125732D);
         this.h = 0;
@@ -97,6 +101,7 @@ public abstract class OEntityThrowable extends OEntity {
 
         if (this.a) {
             int var1 = this.bi.a(this.d, this.e, this.f);
+
             if (var1 == this.g) {
                 ++this.h;
                 if (this.h == 1200) {
@@ -119,6 +124,7 @@ public abstract class OEntityThrowable extends OEntity {
         OVec3D var17 = OVec3D.b(this.bm, this.bn, this.bo);
         OVec3D var2 = OVec3D.b(this.bm + this.bp, this.bn + this.bq, this.bo + this.br);
         OMovingObjectPosition var3 = this.bi.a(var17, var2);
+
         var17 = OVec3D.b(this.bm, this.bn, this.bo);
         var2 = OVec3D.b(this.bm + this.bp, this.bn + this.bq, this.bo + this.br);
         if (var3 != null) {
@@ -132,12 +138,15 @@ public abstract class OEntityThrowable extends OEntity {
 
             for (int var8 = 0; var8 < var5.size(); ++var8) {
                 OEntity var9 = (OEntity) var5.get(var8);
+
                 if (var9.o_() && (var9 != this.c || this.i >= 5)) {
                     float var10 = 0.3F;
                     OAxisAlignedBB var11 = var9.bw.b(var10, var10, var10);
                     OMovingObjectPosition var12 = var11.a(var17, var2);
+
                     if (var12 != null) {
                         double var13 = var17.b(var12.f);
+
                         if (var13 < var6 || var6 == 0.0D) {
                             var4 = var9;
                             var6 = var13;
@@ -159,6 +168,7 @@ public abstract class OEntityThrowable extends OEntity {
         this.bn += this.bq;
         this.bo += this.br;
         float var18 = OMathHelper.a(this.bp * this.bp + this.br * this.br);
+
         this.bs = (float) (Math.atan2(this.bp, this.br) * 180.0D / 3.1415927410125732D);
 
         for (this.bt = (float) (Math.atan2(this.bq, var18) * 180.0D / 3.1415927410125732D); this.bt - this.bv < -180.0F; this.bv -= 360.0F) {
@@ -181,9 +191,11 @@ public abstract class OEntityThrowable extends OEntity {
         this.bs = this.bu + (this.bs - this.bu) * 0.2F;
         float var19 = 0.99F;
         float var15 = this.e();
+
         if (this.aU()) {
             for (int var16 = 0; var16 < 4; ++var16) {
                 float var20 = 0.25F;
+
                 this.bi.a("bubble", this.bm - this.bp * var20, this.bn - this.bq * var20, this.bo - this.br * var20, this.bp, this.bq, this.br);
             }
 
@@ -224,6 +236,5 @@ public abstract class OEntityThrowable extends OEntity {
     }
 
     @Override
-    public void a_(OEntityPlayer var1) {
-    }
+    public void a_(OEntityPlayer var1) {}
 }

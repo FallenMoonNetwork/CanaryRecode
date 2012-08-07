@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityThrowable;
 import net.minecraft.server.OEntityXPOrb;
 import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityExpBottle extends OEntityThrowable {
 
@@ -43,6 +45,7 @@ public class OEntityExpBottle extends OEntityThrowable {
 
             while (var2 > 0) {
                 int var3 = OEntityXPOrb.b(var2);
+
                 var2 -= var3;
                 this.bi.b((new OEntityXPOrb(this.bi, this.bm, this.bn, this.bo, var3)));
             }

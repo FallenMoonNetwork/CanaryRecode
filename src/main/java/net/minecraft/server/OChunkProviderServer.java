@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,21 +26,22 @@ import net.minecraft.server.OLongHashMap;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldServer;
 
+
 public class OChunkProviderServer implements OIChunkProvider {
 
-    public Set<Long> b = new HashSet<Long>(); //CanaryMod private -> public, parameterized
+    public Set<Long> b = new HashSet<Long>(); // CanaryMod private -> public, parameterized
     private OChunk c;
-    public OIChunkProvider d; //CanaryMod private -> public
-    public OIChunkLoader e; //CanaryMod private -> public
+    public OIChunkProvider d; // CanaryMod private -> public
+    public OIChunkLoader e; // CanaryMod private -> public
     public boolean a = false;
-    public OLongHashMap f = new OLongHashMap(); //CanaryMod private -> public
-    public List<OChunk> g = new ArrayList<OChunk>(); //CanaryMod private -> public, parameterized
+    public OLongHashMap f = new OLongHashMap(); // CanaryMod private -> public
+    public List<OChunk> g = new ArrayList<OChunk>(); // CanaryMod private -> public, parameterized
     private OWorldServer h;
     
-    //CanaryMod start
+    // CanaryMod start
     private CanaryChunkProviderServer canaryChunkProvider;
     private int loadStage = 0;
-    //CanaryMod end
+    // CanaryMod end
 
     public OChunkProviderServer(OWorldServer var1, OIChunkLoader var2, OIChunkProvider var3) {
         super();
@@ -50,11 +52,12 @@ public class OChunkProviderServer implements OIChunkProvider {
         this.canaryChunkProvider = new CanaryChunkProviderServer(this);
     }
     
-    //CanaryMod start
+    // CanaryMod start
     public CanaryChunkProviderServer getCanaryChunkProvider() {
         return canaryChunkProvider;
     }
-    //CanaryMod end
+
+    // CanaryMod end
 
     @Override
     public boolean a(int var1, int var2) {
@@ -67,6 +70,7 @@ public class OChunkProviderServer implements OIChunkProvider {
             int var4 = var1 * 16 + 8 - var3.a;
             int var5 = var2 * 16 + 8 - var3.c;
             short var6 = 128;
+
             if (var4 < -var6 || var4 > var6 || var5 < -var6 || var5 > var6) {
                 this.b.add(Long.valueOf(OChunkCoordIntPair.a(var1, var2)));
             }
@@ -81,6 +85,7 @@ public class OChunkProviderServer implements OIChunkProvider {
 
         while (var1.hasNext()) {
             OChunk var2 = var1.next();
+
             this.d(var2.g, var2.h);
         }
 
@@ -89,8 +94,10 @@ public class OChunkProviderServer implements OIChunkProvider {
     @Override
     public OChunk c(int var1, int var2) {
         long var3 = OChunkCoordIntPair.a(var1, var2);
+
         this.b.remove(Long.valueOf(var3));
         OChunk var5 = (OChunk) this.f.a(var3);
+
         if (var5 == null) {
             // CanaryMod start: load preload plugins 
             if (loadStage < 1) {
@@ -102,25 +109,25 @@ public class OChunkProviderServer implements OIChunkProvider {
             
             var5 = this.e(var1, var2);
             if (var5 == null) {
-                //CanaryMod start - onChunkCreation
+                // CanaryMod start - onChunkCreation
                 ChunkCreationHook hook = new ChunkCreationHook(var1, var2, h.getCanaryWorld());
+
                 Canary.hooks().callHook(hook);
                 byte[] blocks = hook.getBlockData();
                 
-                if(blocks != null){
-                    var5 = new OChunk(h, blocks, var1, var2); //Make a new chunk with our new block data
-                    if(hook.getBiomeData() != null){
-                        var5.a(hook.getBiomeData()); //Set the biomedata
+                if (blocks != null) {
+                    var5 = new OChunk(h, blocks, var1, var2); // Make a new chunk with our new block data
+                    if (hook.getBiomeData() != null) {
+                        var5.a(hook.getBiomeData()); // Set the biomedata
                     }
-                    var5.k = true; //isPopulated
-                    //CanaryMod end
-                }
-                else if (this.d == null) {
+                    var5.k = true; // isPopulated
+                    // CanaryMod end
+                } else if (this.d == null) {
                     var5 = this.c;
                 } else {
                     var5 = this.d.b(var1, var2);
                 }
-                //CanaryMod - onChunkCreated
+                // CanaryMod - onChunkCreated
                 Canary.hooks().callHook(new ChunkHook(var5.getCanaryChunk(), Hook.Type.CHUNK_CREATED));
             }
 
@@ -129,7 +136,7 @@ public class OChunkProviderServer implements OIChunkProvider {
             if (var5 != null) {
                 var5.b();
                 var5.c();
-                //CanaryMod onChunkLoad
+                // CanaryMod onChunkLoad
                 Canary.hooks().callHook(new ChunkHook(var5.getCanaryChunk(), Hook.Type.CHUNK_LOADED));
             }
 
@@ -142,6 +149,7 @@ public class OChunkProviderServer implements OIChunkProvider {
     @Override
     public OChunk b(int var1, int var2) {
         OChunk var3 = (OChunk) this.f.a(OChunkCoordIntPair.a(var1, var2));
+
         return var3 == null ? (!this.h.y && !this.a ? this.c : this.c(var1, var2)) : var3;
     }
 
@@ -151,6 +159,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         } else {
             try {
                 OChunk var3 = this.e.a(this.h, var1, var2);
+
                 if (var3 != null) {
                     var3.n = this.h.o();
                 }
@@ -163,7 +172,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         }
     }
 
-    //CanaryMod private -> public
+    // CanaryMod private -> public
     public void a(OChunk var1) {
         if (this.e != null) {
             try {
@@ -175,7 +184,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         }
     }
 
-    //CanaryMod private -> public
+    // CanaryMod private -> public
     public void b(OChunk var1) throws IOException {
         if (this.e != null) {
             var1.n = this.h.o();
@@ -187,6 +196,7 @@ public class OChunkProviderServer implements OIChunkProvider {
     @Override
     public void a(OIChunkProvider var1, int var2, int var3) {
         OChunk var4 = this.b(var2, var3);
+
         if (!var4.k) {
             var4.k = true;
             if (this.d != null) {
@@ -210,6 +220,7 @@ public class OChunkProviderServer implements OIChunkProvider {
         
         for (int var4 = 0; var4 < this.g.size(); ++var4) {
             OChunk var5 = this.g.get(var4);
+
             if (var1) {
                 this.a(var5);
             }
@@ -243,7 +254,7 @@ public class OChunkProviderServer implements OIChunkProvider {
                     Long var2 = this.b.iterator().next();
                     OChunk var3 = (OChunk) this.f.a(var2.longValue());
                     
-                    //CanaryMod onChunkUnloaded
+                    // CanaryMod onChunkUnloaded
                     Canary.hooks().callHook(new ChunkHook(var3.getCanaryChunk(), Hook.Type.CHUNK_UNLOADED));
                     var3.d();
                     this.b(var3);

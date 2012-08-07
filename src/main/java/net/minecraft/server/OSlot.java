@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItemStack;
+
 
 public class OSlot {
 
@@ -23,6 +25,7 @@ public class OSlot {
         if (var1 != null && var2 != null) {
             if (var1.c == var2.c) {
                 int var3 = var2.a - var1.a;
+
                 if (var3 > 0) {
                     this.a(var1, var3);
                 }
@@ -31,11 +34,9 @@ public class OSlot {
         }
     }
 
-    protected void a(OItemStack var1, int var2) {
-    }
+    protected void a(OItemStack var1, int var2) {}
 
-    protected void b(OItemStack var1) {
-    }
+    protected void b(OItemStack var1) {}
 
     public void c(OItemStack var1) {
         this.d();

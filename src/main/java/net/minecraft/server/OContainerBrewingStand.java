@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OContainer;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OICrafting;
@@ -9,6 +10,7 @@ import net.minecraft.server.OSlot;
 import net.minecraft.server.OSlotBrewingStandIngredient;
 import net.minecraft.server.OSlotBrewingStandPotion;
 import net.minecraft.server.OTileEntityBrewingStand;
+
 
 public class OContainerBrewingStand extends OContainer {
 
@@ -24,6 +26,7 @@ public class OContainerBrewingStand extends OContainer {
         this.a(new OSlotBrewingStandIngredient(this, var2, 3, 79, 17));
 
         int var3;
+
         for (var3 = 0; var3 < 3; ++var3) {
             for (int var4 = 0; var4 < 9; ++var4) {
                 this.a(new OSlot(var1, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
@@ -48,6 +51,7 @@ public class OContainerBrewingStand extends OContainer {
 
         for (int var1 = 0; var1 < this.g.size(); ++var1) {
             OICrafting var2 = (OICrafting) this.g.get(var1);
+
             if (this.b != this.a.i()) {
                 var2.a(this, 0, this.a.i());
             }
@@ -65,8 +69,10 @@ public class OContainerBrewingStand extends OContainer {
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);
+
         if (var3 != null && var3.c()) {
             OItemStack var4 = var3.b();
+
             var2 = var4.j();
             if ((var1 < 0 || var1 > 2) && var1 != 3) {
                 if (var1 >= 4 && var1 < 31) {

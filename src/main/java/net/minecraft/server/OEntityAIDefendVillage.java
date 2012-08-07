@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAITarget;
 import net.minecraft.server.OEntityIronGolem;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OVillage;
+
 
 public class OEntityAIDefendVillage extends OEntityAITarget {
 
@@ -19,6 +21,7 @@ public class OEntityAIDefendVillage extends OEntityAITarget {
     @Override
     public boolean a() {
         OVillage var1 = this.a.l_();
+
         if (var1 == null) {
             return false;
         } else {

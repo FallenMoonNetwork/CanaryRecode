@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -11,6 +12,7 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OTileEntityPiston;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockPistonMoving extends OBlockContainer {
 
@@ -25,12 +27,12 @@ public class OBlockPistonMoving extends OBlockContainer {
     }
 
     @Override
-    public void a(OWorld var1, int var2, int var3, int var4) {
-    }
+    public void a(OWorld var1, int var2, int var3, int var4) {}
 
     @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         OTileEntity var5 = var1.b(var2, var3, var4);
+
         if (var5 != null && var5 instanceof OTileEntityPiston) {
             ((OTileEntityPiston) var5).g();
         } else {
@@ -83,6 +85,7 @@ public class OBlockPistonMoving extends OBlockContainer {
     public void a(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         if (!var1.F) {
             OTileEntityPiston var8 = this.c((OIBlockAccess) var1, var2, var3, var4);
+
             if (var8 != null) {
                 OBlock.m[var8.c()].b(var1, var2, var3, var4, var8.k(), 0);
             }
@@ -104,10 +107,12 @@ public class OBlockPistonMoving extends OBlockContainer {
     @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         OTileEntityPiston var5 = this.c((OIBlockAccess) var1, var2, var3, var4);
+
         if (var5 == null) {
             return null;
         } else {
             float var6 = var5.a(0.0F);
+
             if (var5.e()) {
                 var6 = 1.0F - var6;
             }
@@ -119,19 +124,23 @@ public class OBlockPistonMoving extends OBlockContainer {
     @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         OTileEntityPiston var5 = this.c(var1, var2, var3, var4);
+
         if (var5 != null) {
             OBlock var6 = OBlock.m[var5.c()];
+
             if (var6 == null || var6 == this) {
                 return;
             }
 
             var6.a(var1, var2, var3, var4);
             float var7 = var5.a(0.0F);
+
             if (var5.e()) {
                 var7 = 1.0F - var7;
             }
 
             int var8 = var5.f();
+
             this.bV = var6.bV - (OFacing.b[var8] * var7);
             this.bW = var6.bW - (OFacing.c[var8] * var7);
             this.bX = var6.bX - (OFacing.d[var8] * var7);
@@ -145,6 +154,7 @@ public class OBlockPistonMoving extends OBlockContainer {
     public OAxisAlignedBB b(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         if (var5 != 0 && var5 != this.bO) {
             OAxisAlignedBB var8 = OBlock.m[var5].e(var1, var2, var3, var4);
+
             if (var8 == null) {
                 return null;
             } else {
@@ -175,6 +185,7 @@ public class OBlockPistonMoving extends OBlockContainer {
 
     private OTileEntityPiston c(OIBlockAccess var1, int var2, int var3, int var4) {
         OTileEntity var5 = var1.b(var2, var3, var4);
+
         return var5 != null && var5 instanceof OTileEntityPiston ? (OTileEntityPiston) var5 : null;
     }
 }

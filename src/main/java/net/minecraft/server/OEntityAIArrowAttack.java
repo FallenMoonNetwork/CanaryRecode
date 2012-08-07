@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityArrow;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntitySnowball;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityAIArrowAttack extends OEntityAIBase {
 
@@ -31,6 +33,7 @@ public class OEntityAIArrowAttack extends OEntityAIBase {
     @Override
     public boolean a() {
         OEntityLiving var1 = this.b.at();
+
         if (var1 == null) {
             return false;
         } else {
@@ -54,6 +57,7 @@ public class OEntityAIArrowAttack extends OEntityAIBase {
         double var1 = 100.0D;
         double var3 = this.b.e(this.c.bm, this.c.bw.b, this.c.bo);
         boolean var5 = this.b.am().a(this.c);
+
         if (var5) {
             ++this.f;
         } else {
@@ -79,6 +83,7 @@ public class OEntityAIArrowAttack extends OEntityAIBase {
     private void f() {
         if (this.g == 1) {
             OEntityArrow var1 = new OEntityArrow(this.a, this.b, this.c, 1.6F, 12.0F);
+
             this.a.a(this.b, "random.bow", 1.0F, 1.0F / (this.b.an().nextFloat() * 0.4F + 0.8F));
             this.a.b(var1);
         } else if (this.g == 2) {
@@ -87,6 +92,7 @@ public class OEntityAIArrowAttack extends OEntityAIBase {
             double var4 = this.c.bn + this.c.B() - 1.100000023841858D - var9.bn;
             double var6 = this.c.bo - this.b.bo;
             float var8 = OMathHelper.a(var2 * var2 + var6 * var6) * 0.2F;
+
             var9.a(var2, var4 + var8, var6, 1.6F, 12.0F);
             this.a.a(this.b, "random.bow", 1.0F, 1.0F / (this.b.an().nextFloat() * 0.4F + 0.8F));
             this.a.b(var9);

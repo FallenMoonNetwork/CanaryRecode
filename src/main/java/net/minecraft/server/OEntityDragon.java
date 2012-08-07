@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.server.OAxisAlignedBB;
@@ -16,6 +17,7 @@ import net.minecraft.server.OEntityXPOrb;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityDragon extends OEntityDragonBase {
 
@@ -71,6 +73,7 @@ public class OEntityDragon extends OEntityDragonBase {
         double var6 = this.d[var3][0];
 
         double var8;
+
         for (var8 = this.d[var4][0] - var6; var8 < -180.0D; var8 += 360.0D) {
             ;
         }
@@ -97,6 +100,7 @@ public class OEntityDragon extends OEntityDragonBase {
         float var1;
         float var3;
         float var45;
+
         if (this.ap <= 0) {
             var1 = (this.bS.nextFloat() - 0.5F) * 8.0F;
             var45 = (this.bS.nextFloat() - 0.5F) * 4.0F;
@@ -138,6 +142,7 @@ public class OEntityDragon extends OEntityDragonBase {
             double var8;
             double var10;
             float var20;
+
             if (this.bi.F) {
                 if (this.aN > 0) {
                     var4 = this.bm + (this.aO - this.bm) / this.aN;
@@ -170,6 +175,7 @@ public class OEntityDragon extends OEntityDragonBase {
                     double var14 = this.c - this.bo;
                     double var16 = Math.sqrt(var12 * var12 + var14 * var14);
                     double var18 = 0.4000000059604645D + var16 / 80.0D - 1.0D;
+
                     if (var18 > 10.0D) {
                         var18 = 10.0D;
                     }
@@ -205,6 +211,7 @@ public class OEntityDragon extends OEntityDragonBase {
                 double var21 = 180.0D - Math.atan2(var4, var8) * 180.0D / 3.1415927410125732D;
 
                 double var23;
+
                 for (var23 = var21 - this.bs; var23 < -180.0D; var23 += 360.0D) {
                     ;
                 }
@@ -224,6 +231,7 @@ public class OEntityDragon extends OEntityDragonBase {
                 OVec3D var25 = OVec3D.b(this.a - this.bm, this.b - this.bn, this.c - this.bo).b();
                 OVec3D var26 = OVec3D.b(OMathHelper.a(this.bs * 3.1415927F / 180.0F), this.bq, (-OMathHelper.b(this.bs * 3.1415927F / 180.0F))).b();
                 float var27 = (float) (var26.a(var25) + 0.5D) / 1.5F;
+
                 if (var27 < 0.0F) {
                     var27 = 0.0F;
                 }
@@ -231,6 +239,7 @@ public class OEntityDragon extends OEntityDragonBase {
                 this.aY *= 0.8F;
                 float var28 = OMathHelper.a(this.bp * this.bp + this.br * this.br) * 1.0F + 1.0F;
                 double var29 = Math.sqrt(this.bp * this.bp + this.br * this.br) * 1.0D + 1.0D;
+
                 if (var29 > 40.0D) {
                     var29 = 40.0D;
                 }
@@ -239,6 +248,7 @@ public class OEntityDragon extends OEntityDragonBase {
                 this.bs += this.aY * 0.1F;
                 float var31 = (float) (2.0D / (var29 + 1.0D));
                 float var32 = 0.06F;
+
                 this.a(0.0F, -1.0F, var32 * (var27 * var31 + (1.0F - var31)));
                 if (this.q) {
                     this.a(this.bp * 0.800000011920929D, this.bq * 0.800000011920929D, this.br * 0.800000011920929D);
@@ -248,6 +258,7 @@ public class OEntityDragon extends OEntityDragonBase {
 
                 OVec3D var33 = OVec3D.b(this.bp, this.bq, this.br).b();
                 float var34 = (float) (var33.a(var26) + 1.0D) / 2.0F;
+
                 var34 = 0.8F + 0.15F * var34;
                 this.bp *= var34;
                 this.br *= var34;
@@ -271,6 +282,7 @@ public class OEntityDragon extends OEntityDragonBase {
             float var36 = this.bs * 3.1415927F / 180.0F;
             float var37 = OMathHelper.a(var36);
             float var38 = OMathHelper.b(var36);
+
             this.h.F_();
             this.h.c(this.bm + (var37 * 0.5F), this.bn, this.bo - (var38 * 0.5F), 0.0F, 0.0F);
             this.l.F_();
@@ -289,13 +301,16 @@ public class OEntityDragon extends OEntityDragonBase {
 
             double[] var39 = this.a(5, 1.0F);
             double[] var40 = this.a(0, 1.0F);
+
             var20 = OMathHelper.a(this.bs * 3.1415927F / 180.0F - this.aY * 0.01F);
             float var41 = OMathHelper.b(this.bs * 3.1415927F / 180.0F - this.aY * 0.01F);
+
             this.g.F_();
             this.g.c(this.bm + (var20 * 5.5F * var3), this.bn + (var40[1] - var39[1]) * 1.0D + (var35 * 5.5F), this.bo - (var41 * 5.5F * var3), 0.0F, 0.0F);
 
             for (int var50 = 0; var50 < 3; ++var50) {
                 OEntityDragonPart var46 = null;
+
                 if (var50 == 0) {
                     var46 = this.i;
                 }
@@ -314,6 +329,7 @@ public class OEntityDragon extends OEntityDragonBase {
                 float var44 = OMathHelper.b(var42);
                 float var47 = 1.5F;
                 float var48 = (var50 + 1) * 2.0F;
+
                 var46.F_();
                 var46.c(this.bm - ((var37 * var47 + var43 * var48) * var3), this.bn + (var49[1] - var39[1]) * 1.0D - ((var48 + var47) * var35) + 1.5D, this.bo + ((var38 * var47 + var44 * var48) * var3), 0.0F, 0.0F);
             }
@@ -348,6 +364,7 @@ public class OEntityDragon extends OEntityDragonBase {
             while (var6.hasNext()) {
                 OEntity var7 = (OEntity) var6.next();
                 double var8 = var7.j(this);
+
                 if (var8 < var4) {
                     var4 = var8;
                     var3 = (OEntityEnderCrystal) var7;
@@ -359,8 +376,7 @@ public class OEntityDragon extends OEntityDragonBase {
 
     }
 
-    private void C() {
-    }
+    private void C() {}
 
     private void a(List var1) {
         double var2 = (this.h.bw.a + this.h.bw.d) / 2.0D;
@@ -369,10 +385,12 @@ public class OEntityDragon extends OEntityDragonBase {
 
         while (var6.hasNext()) {
             OEntity var7 = (OEntity) var6.next();
+
             if (var7 instanceof OEntityLiving) {
                 double var8 = var7.bm - var2;
                 double var10 = var7.bo - var4;
                 double var12 = var8 * var8 + var10 * var10;
+
                 var7.b_(var8 / var12 * 4.0D, 0.20000000298023224D, var10 / var12 * 4.0D);
             }
         }
@@ -382,6 +400,7 @@ public class OEntityDragon extends OEntityDragonBase {
     private void b(List var1) {
         for (int var2 = 0; var2 < var1.size(); ++var2) {
             OEntity var3 = (OEntity) var1.get(var2);
+
             if (var3 instanceof OEntityLiving) {
                 var3.a(ODamageSource.a(this), 10);
             }
@@ -405,6 +424,7 @@ public class OEntityDragon extends OEntityDragonBase {
                 double var2 = this.bm - this.a;
                 double var4 = this.bn - this.b;
                 double var6 = this.bo - this.c;
+
                 var1 = var2 * var2 + var4 * var4 + var6 * var6 > 100.0D;
             } while (!var1);
 
@@ -439,6 +459,7 @@ public class OEntityDragon extends OEntityDragonBase {
             for (int var11 = var3; var11 <= var6; ++var11) {
                 for (int var12 = var4; var12 <= var7; ++var12) {
                     int var13 = this.bi.a(var10, var11, var12);
+
                     if (var13 != 0) {
                         if (var13 != OBlock.ap.bO && var13 != OBlock.bJ.bO && var13 != OBlock.z.bO) {
                             var9 = true;
@@ -455,6 +476,7 @@ public class OEntityDragon extends OEntityDragonBase {
             double var14 = var1.a + (var1.d - var1.a) * this.bS.nextFloat();
             double var16 = var1.b + (var1.e - var1.b) * this.bS.nextFloat();
             double var18 = var1.c + (var1.f - var1.c) * this.bS.nextFloat();
+
             this.bi.a("largeexplode", var14, var16, var18, 0.0D, 0.0D, 0.0D);
         }
 
@@ -470,6 +492,7 @@ public class OEntityDragon extends OEntityDragonBase {
         float var4 = this.bs * 3.1415927F / 180.0F;
         float var5 = OMathHelper.a(var4);
         float var6 = OMathHelper.b(var4);
+
         this.a = this.bm + (var5 * 5.0F) + ((this.bS.nextFloat() - 0.5F) * 2.0F);
         this.b = this.bn + (this.bS.nextFloat() * 3.0F) + 1.0D;
         this.c = this.bo - (var6 * 5.0F) + ((this.bS.nextFloat() - 0.5F) * 2.0F);
@@ -488,11 +511,13 @@ public class OEntityDragon extends OEntityDragonBase {
             float var1 = (this.bS.nextFloat() - 0.5F) * 8.0F;
             float var2 = (this.bS.nextFloat() - 0.5F) * 4.0F;
             float var3 = (this.bS.nextFloat() - 0.5F) * 8.0F;
+
             this.bi.a("hugeexplosion", this.bm + var1, this.bn + 2.0D + var2, this.bo + var3, 0.0D, 0.0D, 0.0D);
         }
 
         int var4;
         int var5;
+
         if (!this.bi.F && this.r > 150 && this.r % 5 == 0) {
             var4 = 1000;
 
@@ -523,6 +548,7 @@ public class OEntityDragon extends OEntityDragonBase {
 
     private void a(int var1, int var2) {
         byte var3 = 64;
+
         OBlockEndPortal.a = true;
         byte var4 = 4;
 
@@ -532,6 +558,7 @@ public class OEntityDragon extends OEntityDragonBase {
                     double var8 = (var6 - var1);
                     double var10 = (var7 - var2);
                     double var12 = OMathHelper.a(var8 * var8 + var10 * var10);
+
                     if (var12 <= var4 - 0.5D) {
                         if (var5 < var3) {
                             if (var12 <= (var4 - 1) - 0.5D) {
@@ -562,8 +589,7 @@ public class OEntityDragon extends OEntityDragonBase {
     }
 
     @Override
-    protected void aG() {
-    }
+    protected void aG() {}
 
     @Override
     public OEntity[] bb() {

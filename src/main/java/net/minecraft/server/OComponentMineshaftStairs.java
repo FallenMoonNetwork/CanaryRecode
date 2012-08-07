@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructureMineshaftPieces;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentMineshaftStairs extends OStructureComponent {
 
@@ -17,19 +19,23 @@ public class OComponentMineshaftStairs extends OStructureComponent {
 
     public static OStructureBoundingBox a(List var0, Random var1, int var2, int var3, int var4, int var5) {
         OStructureBoundingBox var6 = new OStructureBoundingBox(var2, var3 - 5, var4, var2, var3 + 2, var4);
+
         switch (var5) {
         case 0:
             var6.d = var2 + 2;
             var6.f = var4 + 8;
             break;
+
         case 1:
             var6.a = var2 - 8;
             var6.f = var4 + 2;
             break;
+
         case 2:
             var6.d = var2 + 2;
             var6.c = var4 - 8;
             break;
+
         case 3:
             var6.d = var2 + 8;
             var6.f = var4 + 2;
@@ -41,16 +47,20 @@ public class OComponentMineshaftStairs extends OStructureComponent {
     @Override
     public void a(OStructureComponent var1, List var2, Random var3) {
         int var4 = this.c();
+
         switch (this.h) {
         case 0:
             OStructureMineshaftPieces.a(var1, var2, var3, this.g.a, this.g.b, this.g.f + 1, 0, var4);
             break;
+
         case 1:
             OStructureMineshaftPieces.a(var1, var2, var3, this.g.a - 1, this.g.b, this.g.c, 1, var4);
             break;
+
         case 2:
             OStructureMineshaftPieces.a(var1, var2, var3, this.g.a, this.g.b, this.g.c - 1, 2, var4);
             break;
+
         case 3:
             OStructureMineshaftPieces.a(var1, var2, var3, this.g.d + 1, this.g.b, this.g.c, 3, var4);
         }

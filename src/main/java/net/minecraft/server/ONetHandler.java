@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OPacket;
 import net.minecraft.server.OPacket0KeepAlive;
 import net.minecraft.server.OPacket100OpenWindow;
@@ -64,6 +65,7 @@ import net.minecraft.server.OPacket7UseEntity;
 import net.minecraft.server.OPacket8UpdateHealth;
 import net.minecraft.server.OPacket9Respawn;
 
+
 public abstract class ONetHandler {
 
     public ONetHandler() {
@@ -72,14 +74,11 @@ public abstract class ONetHandler {
 
     public abstract boolean c();
 
-    public void a(OPacket51MapChunk var1) {
-    }
+    public void a(OPacket51MapChunk var1) {}
 
-    public void a(OPacket var1) {
-    }
+    public void a(OPacket var1) {}
 
-    public void a(String var1, Object[] var2) {
-    }
+    public void a(String var1, Object[] var2) {}
 
     public void a(OPacket255KickDisconnect var1) {
         this.a((OPacket) var1);
@@ -305,11 +304,9 @@ public abstract class ONetHandler {
         this.a((OPacket) var1);
     }
 
-    public void a(OPacket108EnchantItem var1) {
-    }
+    public void a(OPacket108EnchantItem var1) {}
 
-    public void a(OPacket250CustomPayload var1) {
-    }
+    public void a(OPacket250CustomPayload var1) {}
 
     public void a(OPacket35EntityHeadRotation var1) {
         this.a((OPacket) var1);

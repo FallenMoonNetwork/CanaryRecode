@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -8,6 +9,7 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockTorch extends OBlock {
 
@@ -41,9 +43,11 @@ public class OBlockTorch extends OBlock {
             return true;
         } else {
             int var5 = var1.a(var2, var3, var4);
+
             if (var5 != OBlock.aZ.bO && var5 != OBlock.bB.bO && var5 != OBlock.M.bO) {
                 if (OBlock.m[var5] != null && OBlock.m[var5] instanceof OBlockStairs) {
                     int var6 = var1.c(var2, var3, var4);
+
                     if ((4 & var6) != 0) {
                         return true;
                     }
@@ -64,6 +68,7 @@ public class OBlockTorch extends OBlock {
     @Override
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
+
         if (var5 == 1 && this.g(var1, var2, var3 - 1, var4)) {
             var6 = 5;
         }
@@ -118,6 +123,7 @@ public class OBlockTorch extends OBlock {
         if (this.h(var1, var2, var3, var4)) {
             int var6 = var1.c(var2, var3, var4);
             boolean var7 = false;
+
             if (!var1.b(var2 - 1, var3, var4, true) && var6 == 1) {
                 var7 = true;
             }
@@ -163,6 +169,7 @@ public class OBlockTorch extends OBlock {
     public OMovingObjectPosition a(OWorld var1, int var2, int var3, int var4, OVec3D var5, OVec3D var6) {
         int var7 = var1.c(var2, var3, var4) & 7;
         float var8 = 0.15F;
+
         if (var7 == 1) {
             this.a(0.0F, 0.2F, 0.5F - var8, var8 * 2.0F, 0.8F, 0.5F + var8);
         } else if (var7 == 2) {

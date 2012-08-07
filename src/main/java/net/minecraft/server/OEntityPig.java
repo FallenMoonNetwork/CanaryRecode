@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryPig;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OEntity;
@@ -19,9 +20,10 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityPig extends OEntityAnimal {
 
-    //CanaryMod pig handler
+    // CanaryMod pig handler
     private CanaryPig canaryPig;
     
     public OEntityPig(OWorld var1) {
@@ -30,6 +32,7 @@ public class OEntityPig extends OEntityAnimal {
         this.b(0.9F, 0.9F);
         this.al().a(true);
         float var2 = 0.25F;
+
         this.aL.a(0, new OEntityAISwimming(this));
         this.aL.a(1, new OEntityAIPanic(this, 0.38F));
         this.aL.a(2, new OEntityAIMate(this, var2));
@@ -41,6 +44,7 @@ public class OEntityPig extends OEntityAnimal {
         
         canaryPig = new CanaryPig(this);
     }
+
     /**
      * CanaryMod get the Pig handler
      * @return the canaryPig
@@ -126,6 +130,7 @@ public class OEntityPig extends OEntityAnimal {
     public void a(OEntityLightningBolt var1) {
         if (!this.bi.F) {
             OEntityPigZombie var2 = new OEntityPigZombie(this.bi);
+
             var2.c(this.bm, this.bn, this.bo, this.bs, this.bt);
             this.bi.b(var2);
             this.X();

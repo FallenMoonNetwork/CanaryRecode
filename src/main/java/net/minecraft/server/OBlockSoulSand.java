@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockSoulSand extends OBlock {
 
@@ -15,6 +17,7 @@ public class OBlockSoulSand extends OBlock {
     @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         float var5 = 0.125F;
+
         return OAxisAlignedBB.b(var2, var3, var4, (var2 + 1), ((var3 + 1) - var5), (var4 + 1));
     }
 

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryGhast;
 import net.canarymod.hook.entity.MobTargetHook;
@@ -15,6 +16,7 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityGhast extends OEntityFlying implements OIMob {
 
@@ -71,6 +73,7 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
     public void F_() {
         super.F_();
         byte var1 = this.bY.a(16);
+
         this.ae = var1 == 1 ? "/mob/ghast_fire.png" : "/mob/ghast.png";
     }
 
@@ -86,6 +89,7 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
         double var3 = this.c - this.bn;
         double var5 = this.d - this.bo;
         double var7 = OMathHelper.a(var1 * var1 + var3 * var3 + var5 * var5);
+
         if (var7 < 1.0D || var7 > 60.0D) {
             this.b = this.bm + ((this.bS.nextFloat() * 2.0F - 1.0F) * 16.0F);
             this.c = this.bn + ((this.bS.nextFloat() * 2.0F - 1.0F) * 16.0F);
@@ -111,11 +115,13 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
 
         if (this.g == null || this.h-- <= 0) {
             OEntityPlayer entityplayer = this.bi.b(this, 100.0D);
-            if(entityplayer != null){
-                //CanaryMod Mob target hook
+
+            if (entityplayer != null) {
+                // CanaryMod Mob target hook
                 MobTargetHook hook = new MobTargetHook(getCanaryEntityLiving(), entityplayer.getCanaryEntityLiving().getPlayer());
+
                 Canary.hooks().callHook(hook);
-                if(!hook.isCanceled()){
+                if (!hook.isCanceled()) {
                     this.g = entityplayer;
                 }
             }
@@ -125,10 +131,12 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
         }
 
         double var9 = 64.0D;
+
         if (this.g != null && this.g.j(this) < var9 * var9) {
             double var11 = this.g.bm - this.bm;
             double var13 = this.g.bw.b + (this.g.bH / 2.0F) - (this.bn + (this.bH / 2.0F));
             double var15 = this.g.bo - this.bo;
+
             this.V = this.bs = -((float) Math.atan2(var11, var15)) * 180.0F / 3.1415927F;
             if (this.h(this.g)) {
                 if (this.f == 10) {
@@ -141,6 +149,7 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
                     OEntityFireball var17 = new OEntityFireball(this.bi, this, var11, var13, var15);
                     double var18 = 4.0D;
                     OVec3D var20 = this.f(1.0F);
+
                     var17.bm = this.bm + var20.a * var18;
                     var17.bn = this.bn + (this.bH / 2.0F) + 0.5D;
                     var17.bo = this.bo + var20.c * var18;
@@ -160,6 +169,7 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
         if (!this.bi.F) {
             byte var21 = this.bY.a(16);
             byte var22 = (byte) (this.f > 10 ? 1 : 0);
+
             if (var21 != var22) {
                 this.bY.b(16, Byte.valueOf(var22));
             }
@@ -208,6 +218,7 @@ public class OEntityGhast extends OEntityFlying implements OIMob {
         int var3 = this.bS.nextInt(2) + this.bS.nextInt(1 + var2);
 
         int var4;
+
         for (var4 = 0; var4 < var3; ++var4) {
             this.b(OItem.bo.bP, 1);
         }

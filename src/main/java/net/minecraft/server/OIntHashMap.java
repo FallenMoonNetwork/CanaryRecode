@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.util.HashSet;
 import java.util.Set;
 import net.minecraft.server.OIntHashMapEntry;
+
 
 public class OIntHashMap {
 
@@ -72,10 +74,12 @@ public class OIntHashMap {
     private void h(int var1) {
         OIntHashMapEntry[] var2 = this.a;
         int var3 = var2.length;
+
         if (var3 == 1073741824) {
             this.c = Integer.MAX_VALUE;
         } else {
             OIntHashMapEntry[] var4 = new OIntHashMapEntry[var1];
+
             this.a(var4);
             this.a = var4;
             this.c = (int) (var1 * this.d);
@@ -88,13 +92,16 @@ public class OIntHashMap {
 
         for (int var4 = 0; var4 < var2.length; ++var4) {
             OIntHashMapEntry var5 = var2[var4];
+
             if (var5 != null) {
                 var2[var4] = null;
 
                 OIntHashMapEntry var6;
+
                 do {
                     var6 = var5.c;
                     int var7 = a(var5.d, var3);
+
                     var5.c = var1[var7];
                     var1[var7] = var5;
                     var5 = var6;
@@ -107,6 +114,7 @@ public class OIntHashMap {
     public Object d(int var1) {
         this.f.remove(Integer.valueOf(var1));
         OIntHashMapEntry var2 = this.e(var1);
+
         return var2 == null ? null : var2.b;
     }
 
@@ -117,6 +125,7 @@ public class OIntHashMap {
 
         OIntHashMapEntry var5;
         OIntHashMapEntry var6;
+
         for (var5 = var4; var5 != null; var5 = var6) {
             var6 = var5.c;
             if (var5.a == var1) {
@@ -150,6 +159,7 @@ public class OIntHashMap {
 
     private void a(int var1, int var2, Object var3, int var4) {
         OIntHashMapEntry var5 = this.a[var4];
+
         this.a[var4] = new OIntHashMapEntry(var1, var2, var3, var5);
         if (this.b++ >= this.c) {
             this.h(2 * this.a.length);

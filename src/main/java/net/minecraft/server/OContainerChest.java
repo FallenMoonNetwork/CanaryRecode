@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OContainer;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OSlot;
+
 
 public class OContainerChest extends OContainer {
 
@@ -20,6 +22,7 @@ public class OContainerChest extends OContainer {
 
         int var4;
         int var5;
+
         for (var4 = 0; var4 < this.b; ++var4) {
             for (var5 = 0; var5 < 9; ++var5) {
                 this.a(new OSlot(var2, var5 + var4 * 9, 8 + var5 * 18, 18 + var4 * 18));
@@ -47,8 +50,10 @@ public class OContainerChest extends OContainer {
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);
+
         if (var3 != null && var3.c()) {
             OItemStack var4 = var3.b();
+
             var2 = var4.j();
             if (var1 < this.b * 9) {
                 if (!this.a(var4, this.b * 9, this.e.size(), true)) {

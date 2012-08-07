@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OTileEntity;
+
 
 public interface OIBlockAccess {
 

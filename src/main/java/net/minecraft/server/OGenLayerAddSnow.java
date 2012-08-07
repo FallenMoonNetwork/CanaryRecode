@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OGenLayer;
 import net.minecraft.server.OIntCache;
+
 
 public class OGenLayerAddSnow extends OGenLayer {
 
@@ -23,11 +25,13 @@ public class OGenLayerAddSnow extends OGenLayer {
         for (int var11 = 0; var11 < var4; ++var11) {
             for (int var12 = 0; var12 < var3; ++var12) {
                 int var13 = var9[var12 + 1 + (var11 + 1) * var7];
+
                 this.a((var12 + var1), (var11 + var2));
                 if (var13 == 0) {
                     var10[var12 + var11 * var3] = 0;
                 } else {
                     int var14 = this.a(5);
+
                     if (var14 == 0) {
                         var14 = OBiomeGenBase.n.M;
                     } else {

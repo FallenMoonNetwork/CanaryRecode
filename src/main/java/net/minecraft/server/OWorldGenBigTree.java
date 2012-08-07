@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OWorldGenBigTree extends OWorldGenerator {
 
@@ -34,6 +36,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
         }
 
         int var1 = (int) (1.382D + Math.pow(this.k * this.e / 13.0D, 2.0D));
+
         if (var1 < 1) {
             var1 = 1;
         }
@@ -43,6 +46,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
         int var4 = 1;
         int var5 = this.d[1] + this.f;
         int var6 = var3 - this.d[1];
+
         var2[0][0] = this.d[0];
         var2[0][1] = var3;
         var2[0][2] = this.d[2];
@@ -52,6 +56,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
         while (var6 >= 0) {
             int var7 = 0;
             float var8 = this.a(var6);
+
             if (var8 < 0.0F) {
                 --var3;
                 --var6;
@@ -63,10 +68,12 @@ public class OWorldGenBigTree extends OWorldGenerator {
                     int var16 = OMathHelper.b(var11 * Math.cos(var13) + this.d[2] + var9);
                     int[] var17 = new int[] { var15, var3, var16 };
                     int[] var18 = new int[] { var15, var3 + this.n, var16 };
+
                     if (this.a(var17, var18) == -1) {
                         int[] var19 = new int[] { this.d[0], this.d[1], this.d[2] };
                         double var20 = Math.sqrt(Math.pow(Math.abs(this.d[0] - var17[0]), 2.0D) + Math.pow(Math.abs(this.d[2] - var17[2]), 2.0D));
                         double var22 = var20 * this.i;
+
                         if (var17[1] - var22 > var5) {
                             var19[1] = var5;
                         } else {
@@ -107,11 +114,13 @@ public class OWorldGenBigTree extends OWorldGenerator {
 
             while (var13 <= var7) {
                 double var14 = Math.sqrt(Math.pow(Math.abs(var12) + 0.5D, 2.0D) + Math.pow(Math.abs(var13) + 0.5D, 2.0D));
+
                 if (var14 > var4) {
                     ++var13;
                 } else {
                     var11[var9] = var10[var9] + var13;
                     int var16 = this.c.a(var11[0], var11[1], var11[2]);
+
                     if (var16 != 0 && var16 != 18) {
                         ++var13;
                     } else {
@@ -125,24 +134,25 @@ public class OWorldGenBigTree extends OWorldGenerator {
     }
 
     float a(int var1) {
-        if((double)var1 < (double)((float)this.e) * 0.3D) {
-         return -1.618F;
-      } else {
-         float var2 = this.e / 2.0F;
-         float var3 = this.e / 2.0F - var1;
-         float var4;
-         if(var3 == 0.0F) {
-            var4 = var2;
-         } else if(Math.abs(var3) >= var2) {
-            var4 = 0.0F;
-         } else {
-            var4 = (float)Math.sqrt(Math.pow(Math.abs(var2), 2.0D) - Math.pow(Math.abs(var3), 2.0D));
-         }
+        if ((double) var1 < (double) ((float) this.e) * 0.3D) {
+            return -1.618F;
+        } else {
+            float var2 = this.e / 2.0F;
+            float var3 = this.e / 2.0F - var1;
+            float var4;
 
-         var4 *= 0.5F;
-         return var4;
-      }
-   }
+            if (var3 == 0.0F) {
+                var4 = var2;
+            } else if (Math.abs(var3) >= var2) {
+                var4 = 0.0F;
+            } else {
+                var4 = (float) Math.sqrt(Math.pow(Math.abs(var2), 2.0D) - Math.pow(Math.abs(var3), 2.0D));
+            }
+
+            var4 *= 0.5F;
+            return var4;
+        }
+    }
 
     float b(int var1) {
         return var1 >= 0 && var1 < this.n ? (var1 != 0 && var1 != this.n - 1 ? 3.0F : 2.0F) : -1.0F;
@@ -153,6 +163,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
 
         for (int var5 = var2 + this.n; var4 < var5; ++var4) {
             float var6 = this.b(var4 - var2);
+
             this.a(var1, var4, var3, var6, (byte) 1, 18);
         }
 
@@ -163,6 +174,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
         byte var5 = 0;
 
         byte var6;
+
         for (var6 = 0; var5 < 3; ++var5) {
             var4[var5] = var2[var5] - var1[var5];
             if (Math.abs(var4[var5]) > Math.abs(var4[var6])) {
@@ -174,6 +186,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
             byte var7 = a[var6];
             byte var8 = a[var6 + 3];
             byte var9;
+
             if (var4[var6] > 0) {
                 var9 = 1;
             } else {
@@ -202,6 +215,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
             int var3 = this.o[var1][0];
             int var4 = this.o[var1][1];
             int var5 = this.o[var1][2];
+
             this.a(var3, var4, var5);
         }
 
@@ -218,6 +232,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
         int var4 = this.d[2];
         int[] var5 = new int[] { var1, var2, var4 };
         int[] var6 = new int[] { var1, var3, var4 };
+
         this.a(var5, var6, 17);
         if (this.l == 2) {
             ++var5[0];
@@ -240,8 +255,10 @@ public class OWorldGenBigTree extends OWorldGenerator {
         for (int[] var3 = new int[] { this.d[0], this.d[1], this.d[2] }; var1 < var2; ++var1) {
             int[] var4 = this.o[var1];
             int[] var5 = new int[] { var4[0], var4[1], var4[2] };
+
             var3[1] = var4[3];
             int var6 = var3[1] - this.d[1];
+
             if (this.c(var6)) {
                 this.a(var3, var5, 17);
             }
@@ -254,6 +271,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
         byte var4 = 0;
 
         byte var5;
+
         for (var5 = 0; var4 < 3; ++var4) {
             var3[var4] = var2[var4] - var1[var4];
             if (Math.abs(var3[var4]) > Math.abs(var3[var5])) {
@@ -267,6 +285,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
             byte var6 = a[var5];
             byte var7 = a[var5 + 3];
             byte var8;
+
             if (var3[var5] > 0) {
                 var8 = 1;
             } else {
@@ -279,11 +298,13 @@ public class OWorldGenBigTree extends OWorldGenerator {
             int var14 = 0;
 
             int var15;
+
             for (var15 = var3[var5] + var8; var14 != var15; var14 += var8) {
                 var13[var5] = var1[var5] + var14;
                 var13[var6] = OMathHelper.b(var1[var6] + var14 * var9);
                 var13[var7] = OMathHelper.b(var1[var7] + var14 * var11);
                 int var16 = this.c.a(var13[0], var13[1], var13[2]);
+
                 if (var16 != 0 && var16 != 18) {
                     break;
                 }
@@ -297,10 +318,12 @@ public class OWorldGenBigTree extends OWorldGenerator {
         int[] var1 = new int[] { this.d[0], this.d[1], this.d[2] };
         int[] var2 = new int[] { this.d[0], this.d[1] + this.e - 1, this.d[2] };
         int var3 = this.c.a(this.d[0], this.d[1] - 1, this.d[2]);
+
         if (var3 != 2 && var3 != 3) {
             return false;
         } else {
             int var4 = this.a(var1, var2);
+
             if (var4 == -1) {
                 return true;
             } else if (var4 < 6) {
@@ -327,6 +350,7 @@ public class OWorldGenBigTree extends OWorldGenerator {
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         this.c = var1;
         long var6 = var2.nextLong();
+
         this.b.setSeed(var6);
         this.d[0] = var3;
         this.d[1] = var4;

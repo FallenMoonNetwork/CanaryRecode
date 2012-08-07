@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OPathPoint;
 import net.minecraft.server.OVec3D;
+
 
 public class OPathEntity {
 
@@ -52,6 +54,7 @@ public class OPathEntity {
         double var3 = this.a[var2].a + ((int) (var1.bG + 1.0F)) * 0.5D;
         double var5 = this.a[var2].b;
         double var7 = this.a[var2].c + ((int) (var1.bG + 1.0F)) * 0.5D;
+
         return OVec3D.b(var3, var5, var7);
     }
 
@@ -77,6 +80,7 @@ public class OPathEntity {
 
     public boolean a(OVec3D var1) {
         OPathPoint var2 = this.c();
+
         return var2 == null ? false : var2.a == (int) var1.a && var2.c == (int) var1.c;
     }
 }

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -8,6 +9,7 @@ import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OTileEntityMobSpawner;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentNetherBridgeThrone extends OComponentNetherBridgePiece {
 
@@ -20,11 +22,11 @@ public class OComponentNetherBridgeThrone extends OComponentNetherBridgePiece {
     }
 
     @Override
-    public void a(OStructureComponent var1, List var2, Random var3) {
-    }
+    public void a(OStructureComponent var1, List var2, Random var3) {}
 
     public static OComponentNetherBridgeThrone a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, -2, 0, 0, 7, 8, 9, var5);
+
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentNetherBridgeThrone(var6, var1, var7, var5) : null;
     }
 
@@ -50,14 +52,17 @@ public class OComponentNetherBridgeThrone extends OComponentNetherBridgePiece {
         this.a(var1, var3, 2, 8, 8, 4, 8, 8, OBlock.bB.bO, OBlock.bB.bO, false);
         int var4;
         int var5;
+
         if (!this.a) {
             var4 = this.b(5);
             var5 = this.a(3, 5);
             int var6 = this.b(3, 5);
+
             if (var3.b(var5, var4, var6)) {
                 this.a = true;
                 var1.e(var5, var4, var6, OBlock.as.bO);
                 OTileEntityMobSpawner var7 = (OTileEntityMobSpawner) var1.b(var5, var4, var6);
+
                 if (var7 != null) {
                     var7.a("Blaze");
                 }

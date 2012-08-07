@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OEntityWolf;
@@ -7,6 +8,7 @@ import net.minecraft.server.OSpawnListEntry;
 import net.minecraft.server.OWorldGenTaiga1;
 import net.minecraft.server.OWorldGenTaiga2;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OBiomeGenTaiga extends OBiomeGenBase {
 

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 
 import net.canarymod.hook.world.LeafDecayHook;
@@ -12,6 +13,7 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OStatList;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockLeaves extends OBlockLeavesBase {
 
@@ -28,13 +30,16 @@ public class OBlockLeaves extends OBlockLeavesBase {
     public void d(OWorld var1, int var2, int var3, int var4) {
         byte var5 = 1;
         int var6 = var5 + 1;
+
         if (var1.a(var2 - var6, var3 - var6, var4 - var6, var2 + var6, var3 + var6, var4 + var6)) {
             for (int var7 = -var5; var7 <= var5; ++var7) {
                 for (int var8 = -var5; var8 <= var5; ++var8) {
                     for (int var9 = -var5; var9 <= var5; ++var9) {
                         int var10 = var1.a(var2 + var7, var3 + var8, var4 + var9);
+
                         if (var10 == OBlock.K.bO) {
                             int var11 = var1.c(var2 + var7, var3 + var8, var4 + var9);
+
                             var1.d(var2 + var7, var3 + var8, var4 + var9, var11 | 8);
                         }
                     }
@@ -48,21 +53,25 @@ public class OBlockLeaves extends OBlockLeavesBase {
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (!var1.F) {
             int var6 = var1.c(var2, var3, var4);
+
             if ((var6 & 8) != 0 && (var6 & 4) == 0) {
                 byte var7 = 4;
                 int var8 = var7 + 1;
                 byte var9 = 32;
                 int var10 = var9 * var9;
                 int var11 = var9 / 2;
+
                 if (this.a == null) {
                     this.a = new int[var9 * var9 * var9];
                 }
 
                 int var12;
+
                 if (var1.a(var2 - var8, var3 - var8, var4 - var8, var2 + var8, var3 + var8, var4 + var8)) {
                     int var13;
                     int var14;
                     int var15;
+
                     for (var12 = -var7; var12 <= var7; ++var12) {
                         for (var13 = -var7; var13 <= var7; ++var13) {
                             for (var14 = -var7; var14 <= var7; ++var14) {
@@ -126,7 +135,8 @@ public class OBlockLeaves extends OBlockLeavesBase {
 
     private void g(OWorld var1, int var2, int var3, int var4) {
         LeafDecayHook hook = new LeafDecayHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4));
-        if(!hook.isCanceled()) {
+
+        if (!hook.isCanceled()) {
             this.b(var1, var2, var3, var4, var1.c(var2, var3, var4), 0);
             var1.e(var2, var3, var4, 0);
         }
@@ -146,12 +156,14 @@ public class OBlockLeaves extends OBlockLeavesBase {
     public void a(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         if (!var1.F) {
             byte var8 = 20;
+
             if ((var5 & 3) == 3) {
                 var8 = 40;
             }
 
             if (var1.r.nextInt(var8) == 0) {
                 int var9 = this.a(var5, var1.r, var7);
+
                 this.a(var1, var2, var3, var4, new OItemStack(var9, 1, this.c(var5)));
             }
 

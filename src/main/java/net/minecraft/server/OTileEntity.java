@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.server.OBlock;
@@ -17,6 +18,7 @@ import net.minecraft.server.OTileEntityPiston;
 import net.minecraft.server.OTileEntityRecordPlayer;
 import net.minecraft.server.OTileEntitySign;
 import net.minecraft.server.OWorld;
+
 
 public class OTileEntity {
 
@@ -51,6 +53,7 @@ public class OTileEntity {
 
     public void b(ONBTTagCompound var1) {
         String var2 = (String) b.get(this.getClass());
+
         if (var2 == null) {
             throw new RuntimeException(this.getClass() + " is missing a mapping! This is a bug!");
         } else {
@@ -61,14 +64,14 @@ public class OTileEntity {
         }
     }
 
-    public void q_() {
-    }
+    public void q_() {}
 
     public static OTileEntity c(ONBTTagCompound var0) {
         OTileEntity var1 = null;
 
         try {
             Class var2 = (Class) a.get(var0.j("id"));
+
             if (var2 != null) {
                 var1 = (OTileEntity) var2.newInstance();
             }
@@ -117,8 +120,7 @@ public class OTileEntity {
         this.o = false;
     }
 
-    public void b(int var1, int var2) {
-    }
+    public void b(int var1, int var2) {}
 
     public void h() {
         this.q = null;

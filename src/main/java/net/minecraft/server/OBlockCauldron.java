@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
@@ -10,6 +11,7 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockCauldron extends OBlock {
 
@@ -28,6 +30,7 @@ public class OBlockCauldron extends OBlock {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.3125F, 1.0F);
         super.a(var1, var2, var3, var4, var5, var6);
         float var7 = 0.125F;
+
         this.a(0.0F, 0.0F, 0.0F, var7, 1.0F, 1.0F);
         super.a(var1, var2, var3, var4, var5, var6);
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, var7);
@@ -65,10 +68,12 @@ public class OBlockCauldron extends OBlock {
             return true;
         } else {
             OItemStack var6 = var5.k.d();
+
             if (var6 == null) {
                 return true;
             } else {
                 int var7 = var1.c(var2, var3, var4);
+
                 if (var6.c == OItem.aw.bP) {
                     if (var7 < 3) {
                         if (!var5.L.d) {
@@ -82,6 +87,7 @@ public class OBlockCauldron extends OBlock {
                 } else {
                     if (var6.c == OItem.bs.bP && var7 > 0) {
                         OItemStack var8 = new OItemStack(OItem.br, 1, 0);
+
                         if (!var5.k.a(var8)) {
                             var1.b((new OEntityItem(var1, var2 + 0.5D, var3 + 1.5D, var4 + 0.5D, var8)));
                         }

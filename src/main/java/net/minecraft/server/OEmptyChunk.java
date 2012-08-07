@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
@@ -8,6 +9,7 @@ import net.minecraft.server.OEntity;
 import net.minecraft.server.OEnumSkyBlock;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OWorld;
+
 
 public class OEmptyChunk extends OChunk {
 
@@ -26,12 +28,10 @@ public class OEmptyChunk extends OChunk {
     }
 
     @Override
-    public void a() {
-    }
+    public void a() {}
 
     @Override
-    public void b() {
-    }
+    public void b() {}
 
     @Override
     public int a(int var1, int var2, int var3) {
@@ -69,8 +69,7 @@ public class OEmptyChunk extends OChunk {
     }
 
     @Override
-    public void a(OEnumSkyBlock var1, int var2, int var3, int var4, int var5) {
-    }
+    public void a(OEnumSkyBlock var1, int var2, int var3, int var4, int var5) {}
 
     @Override
     public int c(int var1, int var2, int var3, int var4) {
@@ -78,16 +77,13 @@ public class OEmptyChunk extends OChunk {
     }
 
     @Override
-    public void a(OEntity var1) {
-    }
+    public void a(OEntity var1) {}
 
     @Override
-    public void b(OEntity var1) {
-    }
+    public void b(OEntity var1) {}
 
     @Override
-    public void a(OEntity var1, int var2) {
-    }
+    public void a(OEntity var1, int var2) {}
 
     @Override
     public boolean d(int var1, int var2, int var3) {
@@ -100,36 +96,28 @@ public class OEmptyChunk extends OChunk {
     }
 
     @Override
-    public void a(OTileEntity var1) {
-    }
+    public void a(OTileEntity var1) {}
 
     @Override
-    public void a(int var1, int var2, int var3, OTileEntity var4) {
-    }
+    public void a(int var1, int var2, int var3, OTileEntity var4) {}
 
     @Override
-    public void f(int var1, int var2, int var3) {
-    }
+    public void f(int var1, int var2, int var3) {}
 
     @Override
-    public void c() {
-    }
+    public void c() {}
 
     @Override
-    public void d() {
-    }
+    public void d() {}
 
     @Override
-    public void e() {
-    }
+    public void e() {}
 
     @Override
-    public void a(OEntity var1, OAxisAlignedBB var2, List var3) {
-    }
+    public void a(OEntity var1, OAxisAlignedBB var2, List var3) {}
 
     @Override
-    public void a(Class var1, OAxisAlignedBB var2, List var3) {
-    }
+    public void a(Class var1, OAxisAlignedBB var2, List var3) {}
 
     @Override
     public boolean a(boolean var1) {

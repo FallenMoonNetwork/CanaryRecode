@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 
 import net.canarymod.Canary;
@@ -11,6 +12,7 @@ import net.minecraft.server.OBlockFluid;
 import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockFlowing extends OBlockFluid {
 
@@ -24,6 +26,7 @@ public class OBlockFlowing extends OBlockFluid {
 
     private void i(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
+
         var1.a(var2, var3, var4, this.bO + 1, var5);
         var1.b(var2, var3, var4, var2, var3, var4);
         var1.j(var2, var3, var4);
@@ -36,21 +39,25 @@ public class OBlockFlowing extends OBlockFluid {
 
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
-        //CanaryMod block from:
+        // CanaryMod block from:
         Block blockFrom = var1.getCanaryWorld().getBlockAt(var2, var3, var4);
         
         int var6 = this.g(var1, var2, var3, var4);
         byte var7 = 1;
+
         if (this.cd == OMaterial.h && !var1.t.d) {
             var7 = 2;
         }
 
         boolean var8 = true;
         int var10;
+
         if (var6 > 0) {
             byte var9 = -100;
+
             this.a = 0;
             int var12 = this.f(var1, var2 - 1, var3, var4, var9);
+
             var12 = this.f(var1, var2 + 1, var3, var4, var12);
             var12 = this.f(var1, var2, var3, var4 - 1, var12);
             var12 = this.f(var1, var2, var3, var4 + 1, var12);
@@ -61,6 +68,7 @@ public class OBlockFlowing extends OBlockFluid {
 
             if (this.g(var1, var2, var3 + 1, var4) >= 0) {
                 int var11 = this.g(var1, var2, var3 + 1, var4);
+
                 if (var11 >= 8) {
                     var10 = var11;
                 } else {
@@ -104,11 +112,12 @@ public class OBlockFlowing extends OBlockFluid {
                 return;
             }
 
-            //CanaryMod - FLOW hook - downwards
-            Block blockTo = var1.getCanaryWorld().getBlockAt(var2, var3-1, var4);
+            // CanaryMod - FLOW hook - downwards
+            Block blockTo = var1.getCanaryWorld().getBlockAt(var2, var3 - 1, var4);
             FlowHook hook = new FlowHook(blockFrom, blockTo);
+
             Canary.hooks().callHook(hook);
-            if(!hook.isCanceled()) {
+            if (!hook.isCanceled()) {
                 if (var6 >= 8) {
                     var1.b(var2, var3 - 1, var4, this.bO, var6);
                 } else {
@@ -117,6 +126,7 @@ public class OBlockFlowing extends OBlockFluid {
             }
         } else if (var6 >= 0 && (var6 == 0 || this.k(var1, var2, var3 - 1, var4))) {
             boolean[] var13 = this.j(var1, var2, var3, var4);
+
             var10 = var6 + var7;
             if (var6 >= 8) {
                 var10 = 1;
@@ -127,41 +137,45 @@ public class OBlockFlowing extends OBlockFluid {
             }
 
             if (var13[0]) {
-                //CanaryMod - FLOW hook - sidewards
+                // CanaryMod - FLOW hook - sidewards
                 Block blockTo = var1.getCanaryWorld().getBlockAt(var2 - 1, var3, var4);
                 FlowHook hook = new FlowHook(blockFrom, blockTo);
+
                 Canary.hooks().callHook(hook);
-                if(!hook.isCanceled()) {
+                if (!hook.isCanceled()) {
                     this.g(var1, var2 - 1, var3, var4, var10);
                 }
             }
 
             if (var13[1]) {
-                //CanaryMod - FLOW hook - sidewards
+                // CanaryMod - FLOW hook - sidewards
                 Block blockTo = var1.getCanaryWorld().getBlockAt(var2 + 1, var3, var4);
                 FlowHook hook = new FlowHook(blockFrom, blockTo);
+
                 Canary.hooks().callHook(hook);
-                if(!hook.isCanceled()) {
+                if (!hook.isCanceled()) {
                     this.g(var1, var2 + 1, var3, var4, var10);
                 }
             }
 
             if (var13[2]) {
-                //CanaryMod - FLOW hook - sidewards
+                // CanaryMod - FLOW hook - sidewards
                 Block blockTo = var1.getCanaryWorld().getBlockAt(var2, var3, var4 - 1);
                 FlowHook hook = new FlowHook(blockFrom, blockTo);
+
                 Canary.hooks().callHook(hook);
-                if(!hook.isCanceled()) {
+                if (!hook.isCanceled()) {
                     this.g(var1, var2, var3, var4 - 1, var10);
                 }
             }
 
             if (var13[3]) {
-                //CanaryMod - FLOW hook - sidewards
+                // CanaryMod - FLOW hook - sidewards
                 Block blockTo = var1.getCanaryWorld().getBlockAt(var2, var3, var4 + 1);
                 FlowHook hook = new FlowHook(blockFrom, blockTo);
+
                 Canary.hooks().callHook(hook);
-                if(!hook.isCanceled()) {
+                if (!hook.isCanceled()) {
                     this.g(var1, var2, var3, var4 + 1, var10);
                 }
             }
@@ -172,6 +186,7 @@ public class OBlockFlowing extends OBlockFluid {
     private void g(OWorld var1, int var2, int var3, int var4, int var5) {
         if (this.l(var1, var2, var3, var4)) {
             int var6 = var1.a(var2, var3, var4);
+
             if (var6 > 0) {
                 if (this.cd == OMaterial.h) {
                     this.h(var1, var2, var3, var4);
@@ -192,6 +207,7 @@ public class OBlockFlowing extends OBlockFluid {
             if ((var8 != 0 || var6 != 1) && (var8 != 1 || var6 != 0) && (var8 != 2 || var6 != 3) && (var8 != 3 || var6 != 2)) {
                 int var9 = var2;
                 int var11 = var4;
+
                 if (var8 == 0) {
                     var9 = var2 - 1;
                 }
@@ -215,6 +231,7 @@ public class OBlockFlowing extends OBlockFluid {
 
                     if (var5 < 4) {
                         int var12 = this.c(var1, var9, var3, var11, var5 + 1, var8);
+
                         if (var12 < var7) {
                             var7 = var12;
                         }
@@ -229,10 +246,12 @@ public class OBlockFlowing extends OBlockFluid {
     private boolean[] j(OWorld var1, int var2, int var3, int var4) {
         int var5;
         int var6;
+
         for (var5 = 0; var5 < 4; ++var5) {
             this.c[var5] = 1000;
             var6 = var2;
             int var8 = var4;
+
             if (var5 == 0) {
                 var6 = var2 - 1;
             }
@@ -275,11 +294,13 @@ public class OBlockFlowing extends OBlockFluid {
 
     private boolean k(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.a(var2, var3, var4);
+
         if (var5 != OBlock.aE.bO && var5 != OBlock.aL.bO && var5 != OBlock.aD.bO && var5 != OBlock.aF.bO && var5 != OBlock.aX.bO) {
             if (var5 == 0) {
                 return false;
             } else {
                 OMaterial var6 = OBlock.m[var5].cd;
+
                 return var6 == OMaterial.B ? true : var6.c();
             }
         } else {
@@ -289,6 +310,7 @@ public class OBlockFlowing extends OBlockFluid {
 
     protected int f(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = this.g(var1, var2, var3, var4);
+
         if (var6 < 0) {
             return var5;
         } else {
@@ -307,13 +329,15 @@ public class OBlockFlowing extends OBlockFluid {
     private boolean l(OWorld var1, int var2, int var3, int var4) {
         Block block = var1.getCanaryWorld().getBlockAt(var2, var3, var4);
         LiquidDestroyHook hook = new LiquidDestroyHook(block);
+
         Canary.hooks().callHook(hook);
-        if(!hook.isCanceled()) {
-            if(hook.isForceDestroy()) {
+        if (!hook.isCanceled()) {
+            if (hook.isForceDestroy()) {
                 return true;
             }
-            //Not cancelled and no force, do whatever it usually does
+            // Not cancelled and no force, do whatever it usually does
             OMaterial var5 = var1.d(var2, var3, var4);
+
             return var5 == this.cd ? false : (var5 == OMaterial.h ? false : !this.k(var1, var2, var3, var4));
         }
         return false;

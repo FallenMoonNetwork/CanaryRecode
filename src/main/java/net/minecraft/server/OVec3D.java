@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.server.OMathHelper;
+
 
 public class OVec3D {
 
@@ -56,6 +58,7 @@ public class OVec3D {
 
     public OVec3D b() {
         double var1 = OMathHelper.a(this.a * this.a + this.b * this.b + this.c * this.c);
+
         return var1 < 1.0E-4D ? b(0.0D, 0.0D, 0.0D) : b(this.a / var1, this.b / var1, this.c / var1);
     }
 
@@ -71,6 +74,7 @@ public class OVec3D {
         double var2 = var1.a - this.a;
         double var4 = var1.b - this.b;
         double var6 = var1.c - this.c;
+
         return OMathHelper.a(var2 * var2 + var4 * var4 + var6 * var6);
     }
 
@@ -78,6 +82,7 @@ public class OVec3D {
         double var2 = var1.a - this.a;
         double var4 = var1.b - this.b;
         double var6 = var1.c - this.c;
+
         return var2 * var2 + var4 * var4 + var6 * var6;
     }
 
@@ -85,6 +90,7 @@ public class OVec3D {
         double var7 = var1 - this.a;
         double var9 = var3 - this.b;
         double var11 = var5 - this.c;
+
         return var7 * var7 + var9 * var9 + var11 * var11;
     }
 
@@ -96,10 +102,12 @@ public class OVec3D {
         double var4 = var1.a - this.a;
         double var6 = var1.b - this.b;
         double var8 = var1.c - this.c;
+
         if (var4 * var4 < 1.0000000116860974E-7D) {
             return null;
         } else {
             double var10 = (var2 - this.a) / var4;
+
             return var10 >= 0.0D && var10 <= 1.0D ? b(this.a + var4 * var10, this.b + var6 * var10, this.c + var8 * var10) : null;
         }
     }
@@ -108,10 +116,12 @@ public class OVec3D {
         double var4 = var1.a - this.a;
         double var6 = var1.b - this.b;
         double var8 = var1.c - this.c;
+
         if (var6 * var6 < 1.0000000116860974E-7D) {
             return null;
         } else {
             double var10 = (var2 - this.b) / var6;
+
             return var10 >= 0.0D && var10 <= 1.0D ? b(this.a + var4 * var10, this.b + var6 * var10, this.c + var8 * var10) : null;
         }
     }
@@ -120,10 +130,12 @@ public class OVec3D {
         double var4 = var1.a - this.a;
         double var6 = var1.b - this.b;
         double var8 = var1.c - this.c;
+
         if (var8 * var8 < 1.0000000116860974E-7D) {
             return null;
         } else {
             double var10 = (var2 - this.c) / var8;
+
             return var10 >= 0.0D && var10 <= 1.0D ? b(this.a + var4 * var10, this.b + var6 * var10, this.c + var8 * var10) : null;
         }
     }
@@ -139,6 +151,7 @@ public class OVec3D {
         double var4 = this.a;
         double var6 = this.b * var2 + this.c * var3;
         double var8 = this.c * var2 - this.b * var3;
+
         this.a = var4;
         this.b = var6;
         this.c = var8;
@@ -150,6 +163,7 @@ public class OVec3D {
         double var4 = this.a * var2 + this.c * var3;
         double var6 = this.b;
         double var8 = this.c * var2 - this.a * var3;
+
         this.a = var4;
         this.b = var6;
         this.c = var8;

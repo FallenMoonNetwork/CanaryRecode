@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OIProgressUpdate;
 import net.minecraft.server.OMinecraftServer;
+
 
 public class OConvertProgressUpdater implements OIProgressUpdate {
 
@@ -16,8 +18,7 @@ public class OConvertProgressUpdater implements OIProgressUpdate {
     }
 
     @Override
-    public void a(String var1) {
-    }
+    public void a(String var1) {}
 
     @Override
     public void a(int var1) {
@@ -29,6 +30,5 @@ public class OConvertProgressUpdater implements OIProgressUpdate {
     }
 
     @Override
-    public void b(String var1) {
-    }
+    public void b(String var1) {}
 }

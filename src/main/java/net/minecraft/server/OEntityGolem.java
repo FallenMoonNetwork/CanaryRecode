@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityCreature;
 import net.minecraft.server.OIAnimals;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public abstract class OEntityGolem extends OEntityCreature implements OIAnimals {
 
@@ -12,8 +14,7 @@ public abstract class OEntityGolem extends OEntityCreature implements OIAnimals 
     }
 
     @Override
-    protected void a(float var1) {
-    }
+    protected void a(float var1) {}
 
     @Override
     public void b(ONBTTagCompound var1) {

@@ -1,12 +1,14 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryGiantZombie;
 import net.minecraft.server.OEntityMob;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityGiantZombie extends OEntityMob {
 
-    //CanaryMod giant zombie handler
+    // CanaryMod giant zombie handler
     private CanaryGiantZombie canaryGiantZombie;
     
     public OEntityGiantZombie(OWorld var1) {

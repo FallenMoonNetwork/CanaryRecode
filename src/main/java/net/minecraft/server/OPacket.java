@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
@@ -84,6 +85,7 @@ import net.minecraft.server.OPacket8UpdateHealth;
 import net.minecraft.server.OPacket9Respawn;
 import net.minecraft.server.OPacketCount;
 
+
 public abstract class OPacket {
 
     public static OIntHashMap j = new OIntHashMap();
@@ -123,6 +125,7 @@ public abstract class OPacket {
     public static OPacket a(int var0) {
         try {
             Class var1 = (Class) j.a(var0);
+
             return var1 == null ? null : (OPacket) var1.newInstance();
         } catch (Exception var2) {
             var2.printStackTrace();
@@ -140,6 +143,7 @@ public abstract class OPacket {
         OPacket var3 = null;
 
         int var6;
+
         try {
             var6 = var0.read();
             if (var6 == -1) {
@@ -187,6 +191,7 @@ public abstract class OPacket {
 
     public static String a(DataInputStream var0, int var1) throws IOException {
         short var2 = var0.readShort();
+
         if (var2 > var1) {
             throw new IOException("Received string length longer than maximum allowed (" + var2 + " > " + var1 + ")");
         } else if (var2 < 0) {
@@ -213,9 +218,11 @@ public abstract class OPacket {
     protected OItemStack b(DataInputStream var1) throws IOException {
         OItemStack var2 = null;
         short var3 = var1.readShort();
+
         if (var3 >= 0) {
             byte var4 = var1.readByte();
             short var5 = var1.readShort();
+
             var2 = new OItemStack(var3, var4, var5);
             if (OItem.d[var3].g() || OItem.d[var3].i()) {
                 var2.d = this.c(var1);
@@ -241,10 +248,12 @@ public abstract class OPacket {
 
     protected ONBTTagCompound c(DataInputStream var1) throws IOException {
         short var2 = var1.readShort();
+
         if (var2 < 0) {
             return null;
         } else {
             byte[] var3 = new byte[var2];
+
             var1.readFully(var3);
             return OCompressedStreamTools.a(var3);
         }
@@ -255,6 +264,7 @@ public abstract class OPacket {
             var2.writeShort(-1);
         } else {
             byte[] var3 = OCompressedStreamTools.a(var1);
+
             var2.writeShort((short) var3.length);
             var2.write(var3);
         }

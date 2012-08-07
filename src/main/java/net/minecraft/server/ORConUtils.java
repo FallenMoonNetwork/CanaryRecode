@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class ORConUtils {
 
     public static char[] a = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
@@ -12,6 +13,7 @@ public class ORConUtils {
         int var3 = var2 - 1;
 
         int var4;
+
         for (var4 = var1 > var3 ? var3 : var1; 0 != var0[var4] && var4 < var3; ++var4) {
             ;
         }

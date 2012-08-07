@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEnchantment;
 import net.minecraft.server.OEnchantmentHelper;
 import net.minecraft.server.OEntityArrow;
@@ -8,6 +9,7 @@ import net.minecraft.server.OEnumAction;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+
 
 public class OItemBow extends OItem {
 
@@ -20,9 +22,11 @@ public class OItemBow extends OItem {
     @Override
     public void a(OItemStack var1, OWorld var2, OEntityPlayer var3, int var4) {
         boolean var5 = var3.L.d || OEnchantmentHelper.a(OEnchantment.w.x, var1) > 0;
+
         if (var5 || var3.k.hasItem(OItem.k.bP)) {
             int var6 = this.c(var1) - var4;
             float var7 = var6 / 20.0F;
+
             var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
             if (var7 < 0.1D) {
                 return;
@@ -33,16 +37,19 @@ public class OItemBow extends OItem {
             }
 
             OEntityArrow var8 = new OEntityArrow(var2, var3, var7 * 2.0F);
+
             if (var7 == 1.0F) {
                 var8.d = true;
             }
 
             int var9 = OEnchantmentHelper.a(OEnchantment.t.x, var1);
+
             if (var9 > 0) {
                 var8.a(var8.k() + var9 * 0.5D + 0.5D);
             }
 
             int var10 = OEnchantmentHelper.a(OEnchantment.u.x, var1);
+
             if (var10 > 0) {
                 var8.b(var10);
             }

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -11,6 +12,7 @@ import net.canarymod.config.Configuration;
 import net.minecraft.server.OIServer;
 import net.minecraft.server.ORConThreadBase;
 import net.minecraft.server.ORConUtils;
+
 
 public class ORConThreadClient extends ORConThreadBase {
 
@@ -40,6 +42,7 @@ public class ORConThreadClient extends ORConThreadBase {
                                 try {
                                     BufferedInputStream var1 = new BufferedInputStream(this.h.getInputStream());
                                     int var2 = var1.read(this.i, 0, 1460);
+
                                     if (10 > var2) {
                                         var16 = false;
                                         break label141;
@@ -47,6 +50,7 @@ public class ORConThreadClient extends ORConThreadBase {
 
                                     byte var3 = 0;
                                     int var4 = ORConUtils.b(this.i, 0, var2);
+
                                     if (var4 != var2 - 4) {
                                         var16 = false;
                                         break label151;
@@ -54,8 +58,10 @@ public class ORConThreadClient extends ORConThreadBase {
 
                                     int var22 = var3 + 4;
                                     int var5 = ORConUtils.b(this.i, var22, var2);
+
                                     var22 += 4;
                                     int var6 = ORConUtils.a(this.i, var22);
+
                                     var22 += 4;
                                     switch (var6) {
                                     case 2:
@@ -72,9 +78,11 @@ public class ORConThreadClient extends ORConThreadBase {
 
                                         this.e();
                                         continue;
+
                                     case 3:
                                         String var7 = ORConUtils.a(this.i, var22, var2);
                                         int var10000 = var22 + var7.length();
+
                                         if (0 != var7.length() && var7.equals(this.j)) {
                                             this.g = true;
                                             this.a(var5, 2, "");
@@ -84,6 +92,7 @@ public class ORConThreadClient extends ORConThreadBase {
                                         this.g = false;
                                         this.e();
                                         continue;
+
                                     default:
                                         this.a(var5, String.format("Unknown request %s", new Object[] { Integer.toHexString(var6) }));
                                     }
@@ -128,6 +137,7 @@ public class ORConThreadClient extends ORConThreadBase {
     private void a(int var1, int var2, String var3) throws IOException {
         ByteArrayOutputStream var4 = new ByteArrayOutputStream(1248);
         DataOutputStream var5 = new DataOutputStream(var4);
+
         var5.writeInt(Integer.reverseBytes(var3.length() + 10));
         var5.writeInt(Integer.reverseBytes(var1));
         var5.writeInt(Integer.reverseBytes(var2));
@@ -146,6 +156,7 @@ public class ORConThreadClient extends ORConThreadBase {
 
         do {
             int var4 = 4096 <= var3 ? 4096 : var3;
+
             this.a(var1, 0, var2.substring(0, var4));
             var2 = var2.substring(var4);
             var3 = var2.length();

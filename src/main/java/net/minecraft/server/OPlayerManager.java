@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +13,10 @@ import net.minecraft.server.OPlayerInstance;
 import net.minecraft.server.OWorldProvider;
 import net.minecraft.server.OWorldServer;
 
+
 public class OPlayerManager {
 
-    public List<OEntityPlayerMP> managedPlayers = new ArrayList<OEntityPlayerMP>(); //CanaryMod a -> managedPlayers
+    public List<OEntityPlayerMP> managedPlayers = new ArrayList<OEntityPlayerMP>(); // CanaryMod a -> managedPlayers
     private OLongHashMap b = new OLongHashMap();
     private List c = new ArrayList();
     private OMinecraftServer d;
@@ -45,8 +47,8 @@ public class OPlayerManager {
     }
 
     public OWorldServer a() {
-        //CanaryMod changes
-        return (OWorldServer) ((CanaryWorld)canaryPlayerManager.getAttachedDimension()).getHandle();
+        // CanaryMod changes
+        return (OWorldServer) ((CanaryWorld) canaryPlayerManager.getAttachedDimension()).getHandle();
     }
 
     public void b() {
@@ -56,8 +58,9 @@ public class OPlayerManager {
 
         this.c.clear();
         if (this.managedPlayers.isEmpty()) {
-            OWorldServer var3 =(OWorldServer) ((CanaryWorld)canaryPlayerManager.getAttachedDimension()).getHandle();
+            OWorldServer var3 = (OWorldServer) ((CanaryWorld) canaryPlayerManager.getAttachedDimension()).getHandle();
             OWorldProvider var2 = var3.t;
+
             if (!var2.c()) {
                 var3.G.c();
             }
@@ -68,6 +71,7 @@ public class OPlayerManager {
     private OPlayerInstance a(int var1, int var2, boolean var3) {
         long var4 = var1 + 2147483647L | var2 + 2147483647L << 32;
         OPlayerInstance var6 = (OPlayerInstance) this.b.a(var4);
+
         if (var6 == null && var3) {
             var6 = new OPlayerInstance(this, var1, var2);
             this.b.a(var4, var6);
@@ -80,6 +84,7 @@ public class OPlayerManager {
         int var4 = var1 >> 4;
         int var5 = var3 >> 4;
         OPlayerInstance var6 = this.a(var4, var5, false);
+
         if (var6 != null) {
             var6.a(var1 & 15, var2, var3 & 15);
         }
@@ -89,15 +94,18 @@ public class OPlayerManager {
     public void a(OEntityPlayerMP var1) {
         int var2 = (int) var1.bm >> 4;
         int var3 = (int) var1.bo >> 4;
+
         var1.d = var1.bm;
         var1.e = var1.bo;
         int var4 = 0;
         int var5 = this.f;
         int var6 = 0;
         int var7 = 0;
+
         this.a(var2, var3, true).a(var1);
 
         int var8;
+
         for (var8 = 1; var8 <= var5 * 2; ++var8) {
             for (int var9 = 0; var9 < 2; ++var9) {
                 int[] var10 = this.g[var4++ % 4];
@@ -128,6 +136,7 @@ public class OPlayerManager {
         for (int var4 = var2 - this.f; var4 <= var2 + this.f; ++var4) {
             for (int var5 = var3 - this.f; var5 <= var3 + this.f; ++var5) {
                 OPlayerInstance var6 = this.a(var4, var5, false);
+
                 if (var6 != null) {
                     var6.b(var1);
                 }
@@ -140,6 +149,7 @@ public class OPlayerManager {
     private boolean a(int var1, int var2, int var3, int var4) {
         int var5 = var1 - var3;
         int var6 = var2 - var4;
+
         return var5 >= -this.f && var5 <= this.f ? var6 >= -this.f && var6 <= this.f : false;
     }
 
@@ -149,11 +159,13 @@ public class OPlayerManager {
         double var4 = var1.d - var1.bm;
         double var6 = var1.e - var1.bo;
         double var8 = var4 * var4 + var6 * var6;
+
         if (var8 >= 64.0D) {
             int var10 = (int) var1.d >> 4;
             int var11 = (int) var1.e >> 4;
             int var12 = var2 - var10;
             int var13 = var3 - var11;
+
             if (var12 != 0 || var13 != 0) {
                 for (int var14 = var2 - this.f; var14 <= var2 + this.f; ++var14) {
                     for (int var15 = var3 - this.f; var15 <= var3 + this.f; ++var15) {
@@ -163,6 +175,7 @@ public class OPlayerManager {
 
                         if (!this.a(var14 - var12, var15 - var13, var2, var3)) {
                             OPlayerInstance var16 = this.a(var14 - var12, var15 - var13, false);
+
                             if (var16 != null) {
                                 var16.b(var1);
                             }

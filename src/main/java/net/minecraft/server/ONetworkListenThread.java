@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -12,6 +13,7 @@ import net.minecraft.server.OMinecraftServer;
 import net.minecraft.server.ONetLoginHandler;
 import net.minecraft.server.ONetServerHandler;
 import net.minecraft.server.ONetworkAcceptThread;
+
 
 public class ONetworkListenThread {
 
@@ -36,11 +38,12 @@ public class ONetworkListenThread {
     }
 
     public void a(Socket var1) {
-        if(var1 == null) {
+        if (var1 == null) {
             return;
         }
         InetAddress var2 = var1.getInetAddress();
         HashMap var3 = this.i;
+
         synchronized (this.i) {
             this.i.remove(var2);
         }
@@ -60,6 +63,7 @@ public class ONetworkListenThread {
 
     public void a() {
         int var1;
+
         for (var1 = 0; var1 < this.g.size(); ++var1) {
             ONetLoginHandler var2 = (ONetLoginHandler) this.g.get(var1);
 

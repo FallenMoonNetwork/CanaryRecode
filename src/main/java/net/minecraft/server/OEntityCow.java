@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryCow;
 import net.canarymod.api.entity.Player;
@@ -20,9 +21,10 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityCow extends OEntityAnimal {
 
-    //CanaryMod cow handler
+    // CanaryMod cow handler
     private CanaryCow canaryCow;
     public OEntityCow(OWorld var1) {
         super(var1);
@@ -47,6 +49,7 @@ public class OEntityCow extends OEntityAnimal {
     public CanaryCow getCanaryCow() {
         return canaryCow;
     }
+
     @Override
     public boolean c_() {
         return true;
@@ -97,6 +100,7 @@ public class OEntityCow extends OEntityAnimal {
         int var3 = this.bS.nextInt(3) + this.bS.nextInt(1 + var2);
 
         int var4;
+
         for (var4 = 0; var4 < var3; ++var4) {
             this.b(OItem.aE.bP, 1);
         }
@@ -116,12 +120,14 @@ public class OEntityCow extends OEntityAnimal {
     @Override
     public boolean interact(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
+
         if (var2 != null && var2.c == OItem.av.bP) {
-            //CanaryMod cow milk hook
+            // CanaryMod cow milk hook
             Player tmp = ((OEntityPlayerMP) var1).getPlayer();
             RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryCow(), Hook.Type.COW_MILK);
+
             Canary.hooks().callHook(hook);
-            if(hook.isCanceled()) {
+            if (hook.isCanceled()) {
                 return false;
             }
             var1.k.a(var1.k.c, new OItemStack(OItem.aF));

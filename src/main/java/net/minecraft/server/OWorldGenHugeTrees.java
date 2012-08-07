@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OWorldGenHugeTrees extends OWorldGenerator {
 
@@ -23,13 +25,16 @@ public class OWorldGenHugeTrees extends OWorldGenerator {
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         int var6 = var2.nextInt(3) + this.a;
         boolean var7 = true;
+
         if (var4 >= 1 && var4 + var6 + 1 <= 256) {
             int var8;
             int var10;
             int var11;
             int var12;
+
             for (var8 = var4; var8 <= var4 + 1 + var6; ++var8) {
                 byte var9 = 2;
+
                 if (var8 == var4) {
                     var9 = 1;
                 }
@@ -65,6 +70,7 @@ public class OWorldGenHugeTrees extends OWorldGenerator {
 
                     for (int var14 = var4 + var6 - 2 - var2.nextInt(4); var14 > var4 + var6 / 2; var14 -= 2 + var2.nextInt(4)) {
                         float var15 = var2.nextFloat() * 3.1415927F * 2.0F;
+
                         var11 = var3 + (int) (0.5F + OMathHelper.b(var15) * 4.0F);
                         var12 = var5 + (int) (0.5F + OMathHelper.a(var15) * 4.0F);
                         this.a(var1, var11, var12, var14, 0, var2);
@@ -158,6 +164,7 @@ public class OWorldGenHugeTrees extends OWorldGenerator {
 
                 for (int var13 = var3 - var10; var13 <= var3 + var10 + 1; ++var13) {
                     int var14 = var13 - var3;
+
                     if ((var12 >= 0 || var14 >= 0 || var12 * var12 + var14 * var14 <= var10 * var10) && (var12 <= 0 && var14 <= 0 || var12 * var12 + var14 * var14 <= (var10 + 1) * (var10 + 1)) && (var6.nextInt(4) != 0 || var12 * var12 + var14 * var14 <= (var10 - 1) * (var10 - 1)) && !OBlock.n[var1.a(var11, var8, var13)]) {
                         this.a(var1, var11, var8, var13, OBlock.K.bO, this.c);
                     }

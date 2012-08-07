@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityCreature;
 import net.minecraft.server.ORandomPositionGenerator;
 import net.minecraft.server.OVec3D;
+
 
 public class OEntityAIWander extends OEntityAIBase {
 
@@ -28,6 +30,7 @@ public class OEntityAIWander extends OEntityAIBase {
             return false;
         } else {
             OVec3D var1 = ORandomPositionGenerator.a(this.a, 10, 7);
+
             if (var1 == null) {
                 return false;
             } else {

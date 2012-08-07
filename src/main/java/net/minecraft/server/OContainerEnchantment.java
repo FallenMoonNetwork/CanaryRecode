@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +25,7 @@ import net.minecraft.server.OSlotEnchantment;
 import net.minecraft.server.OSlotEnchantmentTable;
 import net.minecraft.server.OWorld;
 
+
 public class OContainerEnchantment extends OContainer {
 
     public OIInventory a = new OSlotEnchantmentTable(this, "Enchant", 1);
@@ -44,6 +46,7 @@ public class OContainerEnchantment extends OContainer {
         this.a((new OSlotEnchantment(this, this.a, 0, 25, 47)));
 
         int var6;
+
         for (var6 = 0; var6 < 3; ++var6) {
             for (int var7 = 0; var7 < 9; ++var7) {
                 this.a(new OSlot(var1, var7 + var6 * 9 + 9, 8 + var7 * 18, 84 + var6 * 18));
@@ -70,6 +73,7 @@ public class OContainerEnchantment extends OContainer {
 
         for (int var1 = 0; var1 < this.g.size(); ++var1) {
             OICrafting var2 = (OICrafting) this.g.get(var1);
+
             var2.a(this, 0, this.c[0]);
             var2.a(this, 1, this.c[1]);
             var2.a(this, 2, this.c[2]);
@@ -82,12 +86,14 @@ public class OContainerEnchantment extends OContainer {
         if (var1 == this.a) {
             OItemStack var2 = var1.b(0);
             int var3;
+
             if (var2 != null && var2.q()) {
                 this.b = this.l.nextLong();
                 if (!this.h.F) {
                     var3 = 0;
 
                     int var4;
+
                     for (var4 = -1; var4 <= 1; ++var4) {
                         for (int var5 = -1; var5 <= 1; ++var5) {
                             if ((var4 != 0 || var5 != 0) && this.h.g(this.i + var5, this.j, this.k + var4) && this.h.g(this.i + var5, this.j + 1, this.k + var4)) {
@@ -138,42 +144,47 @@ public class OContainerEnchantment extends OContainer {
     @Override
     public boolean a(OEntityPlayer var1, int var2) {
         OItemStack var3 = this.a.b(0);
+
         if (this.c[var2] > 0 && var3 != null && (var1.M >= this.c[var2] || var1.L.d)) {
             if (!this.h.F) {
                 List<OEnchantmentData> var4 = OEnchantmentHelper.b(this.l, var3, this.c[var2]);
+
                 if (var4 != null) {
-                    //CanaryMod enchantment hook
+                    // CanaryMod enchantment hook
                     List<Enchantment> enchantments = new ArrayList<Enchantment>(3);
-                    //Create the canary enchantments for the hook
-                    for(Object obj : var4) {
-                        if(obj instanceof OEnchantmentData) {
-                            enchantments.add(new CanaryEnchantment(((OEnchantmentData)obj).a));
+
+                    // Create the canary enchantments for the hook
+                    for (Object obj : var4) {
+                        if (obj instanceof OEnchantmentData) {
+                            enchantments.add(new CanaryEnchantment(((OEnchantmentData) obj).a));
                         }
                     }
-                    //Fire hook and check if everything is well and valid
+                    // Fire hook and check if everything is well and valid
                     EnchantHook hook = new EnchantHook(((OEntityPlayerMP) var1).getPlayer(), var3.getCanaryItem(), enchantments);
+
                     Canary.hooks().callHook(hook);
-                    if(hook.isCanceled()) {
+                    if (hook.isCanceled()) {
                         return false;
                     }
-                    if(!hook.isValid(false)) {
+                    if (!hook.isValid(false)) {
                         hook.getPlayer().notify("Got invalid set of enchantments for the your item");
                         Logman.logWarning("Got invalid set of enchantments for an Item: " + hook.getItem().getType().name() + " caused by " + hook.getPlayer().getName());
                         return false;
                     }
                     
-                    //CanaryMod override the enchantments!
+                    // CanaryMod override the enchantments!
                     List<Enchantment> newList = hook.getEnchantmentList();
+
                     var4 = new ArrayList<OEnchantmentData>(newList.size());
-                    for (Enchantment enchantment : newList)
-                    {
-                        var4.add(new OEnchantmentData(((CanaryEnchantment)enchantment).getHandle(), enchantment.getLevel()));
+                    for (Enchantment enchantment : newList) {
+                        var4.add(new OEnchantmentData(((CanaryEnchantment) enchantment).getHandle(), enchantment.getLevel()));
                     }
                     var1.e_(this.c[var2]);
-                    Iterator<OEnchantmentData> var5 = var4.iterator(); //CanaryMod inferred type arguments
+                    Iterator<OEnchantmentData> var5 = var4.iterator(); // CanaryMod inferred type arguments
 
                     while (var5.hasNext()) {
                         OEnchantmentData var6 = var5.next();
+
                         var3.a(var6.a, var6.b);
                     }
 
@@ -192,6 +203,7 @@ public class OContainerEnchantment extends OContainer {
         super.onInventoryClose(var1);
         if (!this.h.F) {
             OItemStack var2 = this.a.b(0);
+
             if (var2 != null) {
                 var1.b(var2);
             }
@@ -208,8 +220,10 @@ public class OContainerEnchantment extends OContainer {
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);
+
         if (var3 != null && var3.c()) {
             OItemStack var4 = var3.b();
+
             var2 = var4.j();
             if (var1 != 0) {
                 return null;

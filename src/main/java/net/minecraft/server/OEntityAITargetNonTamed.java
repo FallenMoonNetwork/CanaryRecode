@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAINearestAttackableTarget;
 import net.minecraft.server.OEntityTameable;
+
 
 public class OEntityAITargetNonTamed extends OEntityAINearestAttackableTarget {
 

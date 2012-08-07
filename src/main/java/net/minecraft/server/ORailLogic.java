@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockRail;
 import net.minecraft.server.OChunkPosition;
 import net.minecraft.server.OWorld;
+
 
 class ORailLogic {
 
@@ -28,6 +30,7 @@ class ORailLogic {
         this.e = var5;
         int var6 = var2.a(var3, var4, var5);
         int var7 = var2.c(var3, var4, var5);
+
         if (OBlockRail.a((OBlockRail) OBlock.m[var6])) {
             this.f = true;
             var7 &= -9;
@@ -77,6 +80,7 @@ class ORailLogic {
     private void a() {
         for (int var1 = 0; var1 < this.g.size(); ++var1) {
             ORailLogic var2 = this.a((OChunkPosition) this.g.get(var1));
+
             if (var2 != null && var2.b(this)) {
                 this.g.set(var1, new OChunkPosition(var2.c, var2.d, var2.e));
             } else {
@@ -97,6 +101,7 @@ class ORailLogic {
     private boolean b(ORailLogic var1) {
         for (int var2 = 0; var2 < this.g.size(); ++var2) {
             OChunkPosition var3 = (OChunkPosition) this.g.get(var2);
+
             if (var3.a == var1.c && var3.c == var1.e) {
                 return true;
             }
@@ -108,6 +113,7 @@ class ORailLogic {
     private boolean b(int var1, int var2, int var3) {
         for (int var4 = 0; var4 < this.g.size(); ++var4) {
             OChunkPosition var5 = (OChunkPosition) this.g.get(var4);
+
             if (var5.a == var1 && var5.c == var3) {
                 return true;
             }
@@ -118,6 +124,7 @@ class ORailLogic {
 
     private int b() {
         int var1 = 0;
+
         if (this.a(this.c, this.d, this.e - 1)) {
             ++var1;
         }
@@ -146,6 +153,7 @@ class ORailLogic {
             return true;
         } else {
             OChunkPosition var2 = (OChunkPosition) this.g.get(0);
+
             return var1.d == this.d && var2.b == this.d ? true : true;
         }
     }
@@ -157,6 +165,7 @@ class ORailLogic {
         boolean var4 = this.b(this.c - 1, this.d, this.e);
         boolean var5 = this.b(this.c + 1, this.d, this.e);
         byte var6 = -1;
+
         if (var2 || var3) {
             var6 = 0;
         }
@@ -208,6 +217,7 @@ class ORailLogic {
         }
 
         int var7 = var6;
+
         if (this.f) {
             var7 = this.b.c(this.c, this.d, this.e) & 8 | var6;
         }
@@ -217,6 +227,7 @@ class ORailLogic {
 
     private boolean c(int var1, int var2, int var3) {
         ORailLogic var4 = this.a(new OChunkPosition(var1, var2, var3));
+
         if (var4 == null) {
             return false;
         } else {
@@ -231,6 +242,7 @@ class ORailLogic {
         boolean var5 = this.c(this.c - 1, this.d, this.e);
         boolean var6 = this.c(this.c + 1, this.d, this.e);
         byte var7 = -1;
+
         if ((var3 || var4) && !var5 && !var6) {
             var7 = 0;
         }
@@ -329,6 +341,7 @@ class ORailLogic {
 
         this.a(var7);
         int var8 = var7;
+
         if (this.f) {
             var8 = this.b.c(this.c, this.d, this.e) & 8 | var7;
         }
@@ -338,6 +351,7 @@ class ORailLogic {
 
             for (int var9 = 0; var9 < this.g.size(); ++var9) {
                 ORailLogic var10 = this.a((OChunkPosition) this.g.get(var9));
+
                 if (var10 != null) {
                     var10.a();
                     if (var10.c(this)) {

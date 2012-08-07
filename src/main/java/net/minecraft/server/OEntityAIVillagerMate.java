@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIBase;
@@ -8,6 +9,7 @@ import net.minecraft.server.OEntityVillager;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OVillage;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityAIVillagerMate extends OEntityAIBase {
 
@@ -38,6 +40,7 @@ public class OEntityAIVillagerMate extends OEntityAIBase {
                 return false;
             } else {
                 OEntity var1 = this.d.a(OEntityVillager.class, this.b.bw.b(8.0D, 3.0D, 8.0D), this.b);
+
                 if (var1 == null) {
                     return false;
                 } else {
@@ -83,12 +86,14 @@ public class OEntityAIVillagerMate extends OEntityAIBase {
     }
 
     private boolean f() {
-      int var1 = (int)((double)a.c() * 0.35D);
-      return this.a.e() < var1;
-   }
+        int var1 = (int) ((double) a.c() * 0.35D);
+
+        return this.a.e() < var1;
+    }
 
     private void i() {
         OEntityVillager var1 = new OEntityVillager(this.d);
+
         this.c.c(6000);
         this.b.c(6000);
         var1.c(-24000);
@@ -105,6 +110,7 @@ public class OEntityAIVillagerMate extends OEntityAIBase {
             double var4 = var2.nextGaussian() * 0.02D;
             double var6 = var2.nextGaussian() * 0.02D;
             double var8 = var2.nextGaussian() * 0.02D;
+
             this.d.a("heart", var1.bm + (var2.nextFloat() * var1.bG * 2.0F) - var1.bG, var1.bn + 1.0D + (var2.nextFloat() * var1.bH), var1.bo + (var2.nextFloat() * var1.bG * 2.0F) - var1.bG, var4, var6, var8);
         }
 

@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
 import net.minecraft.server.ONBTBase;
+
 
 public class ONBTTagInt extends ONBTBase {
 
@@ -48,6 +50,7 @@ public class ONBTTagInt extends ONBTBase {
     public boolean equals(Object var1) {
         if (super.equals(var1)) {
             ONBTTagInt var2 = (ONBTTagInt) var1;
+
             return this.a == var2.a;
         } else {
             return false;

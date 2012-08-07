@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockContainer;
@@ -13,6 +14,7 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OTileEntityFurnace;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockFurnace extends OBlockContainer {
 
@@ -44,6 +46,7 @@ public class OBlockFurnace extends OBlockContainer {
             int var7 = var1.a(var2 - 1, var3, var4);
             int var8 = var1.a(var2 + 1, var3, var4);
             byte var9 = 3;
+
             if (OBlock.n[var5] && !OBlock.n[var6]) {
                 var9 = 3;
             }
@@ -75,6 +78,7 @@ public class OBlockFurnace extends OBlockContainer {
             return true;
         } else {
             OTileEntityFurnace var6 = (OTileEntityFurnace) var1.b(var2, var3, var4);
+
             if (var6 != null) {
                 var5.a(var6);
             }
@@ -86,6 +90,7 @@ public class OBlockFurnace extends OBlockContainer {
     public static void a(boolean var0, OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
         OTileEntity var6 = var1.b(var2, var3, var4);
+
         c = true;
         if (var0) {
             var1.e(var2, var3, var4, OBlock.aC.bO);
@@ -110,6 +115,7 @@ public class OBlockFurnace extends OBlockContainer {
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = OMathHelper.b((var5.bs * 4.0F / 360.0F) + 0.5D) & 3;
+
         if (var6 == 0) {
             var1.c(var2, var3, var4, 2);
         }
@@ -132,9 +138,11 @@ public class OBlockFurnace extends OBlockContainer {
     public void d(OWorld var1, int var2, int var3, int var4) {
         if (!c) {
             OTileEntityFurnace var5 = (OTileEntityFurnace) var1.b(var2, var3, var4);
+
             if (var5 != null) {
                 for (int var6 = 0; var6 < var5.getInventorySize(); ++var6) {
                     OItemStack var7 = var5.g_(var6);
+
                     if (var7 != null) {
                         float var8 = this.a.nextFloat() * 0.8F + 0.1F;
                         float var9 = this.a.nextFloat() * 0.8F + 0.1F;
@@ -142,17 +150,20 @@ public class OBlockFurnace extends OBlockContainer {
 
                         while (var7.a > 0) {
                             int var11 = this.a.nextInt(21) + 10;
+
                             if (var11 > var7.a) {
                                 var11 = var7.a;
                             }
 
                             var7.a -= var11;
                             OEntityItem var12 = new OEntityItem(var1, (var2 + var8), (var3 + var9), (var4 + var10), new OItemStack(var7.c, var11, var7.h()));
+
                             if (var7.n()) {
                                 var12.a.d((ONBTTagCompound) var7.o().b());
                             }
 
                             float var13 = 0.05F;
+
                             var12.bp = ((float) this.a.nextGaussian() * var13);
                             var12.bq = ((float) this.a.nextGaussian() * var13 + 0.2F);
                             var12.br = ((float) this.a.nextGaussian() * var13);

@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.TreeMap;
+
 
 public class OStringTranslate {
 
@@ -33,6 +35,7 @@ public class OStringTranslate {
 
             for (String var3 = var2.readLine(); var3 != null; var3 = var2.readLine()) {
                 String[] var4 = var3.split("=");
+
                 if (var4 != null && var4.length == 2) {
                     var1.put(var4[0], var4[1]);
                 }
@@ -52,6 +55,7 @@ public class OStringTranslate {
             var4 = var4.trim();
             if (!var4.startsWith("#")) {
                 String[] var5 = var4.split("=");
+
                 if (var5 != null && var5.length == 2) {
                     var1.setProperty(var5[0], var5[1]);
                 }
@@ -79,6 +83,7 @@ public class OStringTranslate {
                     while (var3.hasMoreElements() && !this.e) {
                         Object var4 = var3.nextElement();
                         Object var5 = var2.get(var4);
+
                         if (var5 != null) {
                             String var6 = var5.toString();
 
@@ -107,6 +112,7 @@ public class OStringTranslate {
 
     public String a(String var1, Object... var2) {
         String var3 = this.b.getProperty(var1, var1);
+
         return String.format(var3, var2);
     }
 

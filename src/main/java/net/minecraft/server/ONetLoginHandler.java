@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Iterator;
@@ -30,6 +31,7 @@ import net.minecraft.server.OPacket6SpawnPosition;
 import net.minecraft.server.OPotionEffect;
 import net.minecraft.server.OThreadLoginVerifier;
 import net.minecraft.server.OWorldServer;
+
 
 public class ONetLoginHandler extends ONetHandler {
 
@@ -89,13 +91,13 @@ public class ONetLoginHandler extends ONetHandler {
 
     @Override
     public void a(OPacket1Login var1) {
-        //CanaryMod: Filter bad player names and remove them from the login process
-        if(!var1.b.toLowerCase().matches("[a-z0-9-_]+")) {
-            c = true; //finished processing
+        // CanaryMod: Filter bad player names and remove them from the login process
+        if (!var1.b.toLowerCase().matches("[a-z0-9-_]+")) {
+            c = true; // finished processing
             b.a("This name has been assimilated and you have been kicked.");
             return;
         }
-        //CanaryMod End
+        // CanaryMod End
         this.g = var1.b;
         if (var1.a != 29) {
             if (var1.a > 29) {
@@ -116,20 +118,24 @@ public class ONetLoginHandler extends ONetHandler {
 
     public void b(OPacket1Login var1) {
         OEntityPlayerMP var2 = this.e.h.a(this, var1.b);
+
         if (var2 != null) {
-//            this.e.h.b(var2); //has all been done by the login method already
-//            var2.a((OWorldServer) ((CanaryDimension)var2.getDimension().getWorld().getDimension(Type.fromId(var2.w))).getHandle());
+            // this.e.h.b(var2); //has all been done by the login method already
+            // var2.a((OWorldServer) ((CanaryDimension)var2.getDimension().getWorld().getDimension(Type.fromId(var2.w))).getHandle());
             var2.c.a((OWorldServer) var2.bi);
             a.info(this.b() + " logged in with entity id " + var2.bd + " at (" + var2.bm + ", " + var2.bn + ", " + var2.bo + ") in " + var2.getCanaryWorld().getFqName() + "DIM: " + var2.w);
-            OWorldServer var3 = (OWorldServer) ((CanaryWorld)var2.getCanaryWorld()).getHandle();
+            OWorldServer var3 = (OWorldServer) ((CanaryWorld) var2.getCanaryWorld()).getHandle();
             OChunkCoordinates var4 = var3.p();
+
             var2.c.b(var3.s().getGameMode());
             ONetServerHandler var5 = new ONetServerHandler(this.e, this.b, var2);
+
             var5.b((new OPacket1Login("", var2.bd, var3.s().getWorldType(), var2.c.a(), var3.t.g, (byte) var3.q, (byte) var3.y(), (byte) this.e.h.k())));
             var5.b((new OPacket6SpawnPosition(var4.a, var4.b, var4.c)));
             var5.b((new OPacket202PlayerAbilities(var2.L)));
             this.e.h.a(var2, var3);
             ConnectionHook hook = new ConnectionHook(var2.getPlayer(), Colors.Yellow + var2.getPlayer().getName() + " joined the game.", null);
+
             Canary.hooks().callHook(hook);
             if (!hook.isHidden()) {
                 this.e.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
@@ -143,6 +149,7 @@ public class ONetLoginHandler extends ONetHandler {
 
             while (var6.hasNext()) {
                 OPotionEffect var7 = (OPotionEffect) var6.next();
+
                 var5.b((new OPacket41EntityEffect(var2.bd, var7)));
             }
 
@@ -162,6 +169,7 @@ public class ONetLoginHandler extends ONetHandler {
     public void a(OPacket254ServerPing var1) {
         try {
             String var2 = this.e.s + "\u00a7" + this.e.h.j() + "\u00a7" + this.e.h.k();
+
             this.b.a((new OPacket255KickDisconnect(var2)));
             this.b.d();
             this.e.c.a(this.b.f());

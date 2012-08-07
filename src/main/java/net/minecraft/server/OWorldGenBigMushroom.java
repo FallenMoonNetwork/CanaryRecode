@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OWorldGenBigMushroom extends OWorldGenerator {
 
@@ -21,19 +23,23 @@ public class OWorldGenBigMushroom extends OWorldGenerator {
     @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         int var6 = var2.nextInt(2);
+
         if (this.a >= 0) {
             var6 = this.a;
         }
 
         int var7 = var2.nextInt(3) + 4;
         boolean var8 = true;
+
         if (var4 >= 1 && var4 + var7 + 1 < 256) {
             int var9;
             int var11;
             int var12;
             int var13;
+
             for (var9 = var4; var9 <= var4 + 1 + var7; ++var9) {
                 byte var10 = 3;
+
                 if (var9 == var4) {
                     var10 = 0;
                 }
@@ -63,6 +69,7 @@ public class OWorldGenBigMushroom extends OWorldGenerator {
                 } else {
                     this.a(var1, var3, var4 - 1, var5, OBlock.v.bO, 0);
                     int var16 = var4 + var7;
+
                     if (var6 == 1) {
                         var16 = var4 + var7 - 3;
                     }
@@ -80,6 +87,7 @@ public class OWorldGenBigMushroom extends OWorldGenerator {
                         for (var13 = var3 - var12; var13 <= var3 + var12; ++var13) {
                             for (int var14 = var5 - var12; var14 <= var5 + var12; ++var14) {
                                 int var15 = 5;
+
                                 if (var13 == var3 - var12) {
                                     --var15;
                                 }

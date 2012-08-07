@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OMathHelper;
+
 
 public class OPathPoint {
 
@@ -31,6 +33,7 @@ public class OPathPoint {
         float var2 = (var1.a - this.a);
         float var3 = (var1.b - this.b);
         float var4 = (var1.c - this.c);
+
         return OMathHelper.c(var2 * var2 + var3 * var3 + var4 * var4);
     }
 
@@ -40,6 +43,7 @@ public class OPathPoint {
             return false;
         } else {
             OPathPoint var2 = (OPathPoint) var1;
+
             return this.j == var2.j && this.a == var2.a && this.b == var2.b && this.c == var2.c;
         }
     }

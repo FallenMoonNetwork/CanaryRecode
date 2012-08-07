@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
@@ -12,6 +13,7 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OTileEntityBrewingStand;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockBrewingStand extends OBlockContainer {
 
@@ -61,6 +63,7 @@ public class OBlockBrewingStand extends OBlockContainer {
             return true;
         } else {
             OTileEntityBrewingStand var6 = (OTileEntityBrewingStand) var1.b(var2, var3, var4);
+
             if (var6 != null) {
                 var5.a(var6);
             }
@@ -72,11 +75,13 @@ public class OBlockBrewingStand extends OBlockContainer {
     @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         OTileEntity var5 = var1.b(var2, var3, var4);
+
         if (var5 != null && var5 instanceof OTileEntityBrewingStand) {
             OTileEntityBrewingStand var6 = (OTileEntityBrewingStand) var5;
 
             for (int var7 = 0; var7 < var6.getInventorySize(); ++var7) {
                 OItemStack var8 = var6.g_(var7);
+
                 if (var8 != null) {
                     float var9 = this.a.nextFloat() * 0.8F + 0.1F;
                     float var10 = this.a.nextFloat() * 0.8F + 0.1F;
@@ -84,6 +89,7 @@ public class OBlockBrewingStand extends OBlockContainer {
 
                     while (var8.a > 0) {
                         int var12 = this.a.nextInt(21) + 10;
+
                         if (var12 > var8.a) {
                             var12 = var8.a;
                         }
@@ -91,6 +97,7 @@ public class OBlockBrewingStand extends OBlockContainer {
                         var8.a -= var12;
                         OEntityItem var13 = new OEntityItem(var1, (var2 + var9), (var3 + var10), (var4 + var11), new OItemStack(var8.c, var12, var8.h()));
                         float var14 = 0.05F;
+
                         var13.bp = ((float) this.a.nextGaussian() * var14);
                         var13.bq = ((float) this.a.nextGaussian() * var14 + 0.2F);
                         var13.br = ((float) this.a.nextGaussian() * var14);

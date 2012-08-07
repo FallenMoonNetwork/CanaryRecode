@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityCreature;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItemStack;
+
 
 public class OEntityAITempt extends OEntityAIBase {
 
@@ -41,6 +43,7 @@ public class OEntityAITempt extends OEntityAIBase {
                 return false;
             } else {
                 OItemStack var1 = this.h.U();
+
                 return var1 == null ? false : var1.c == this.k;
             }
         }

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -10,6 +11,7 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructurePieceTreasure;
+
 
 public class OStructureMineshaftPieces {
 
@@ -22,6 +24,7 @@ public class OStructureMineshaftPieces {
     private static OStructureComponent a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         int var7 = var1.nextInt(100);
         OStructureBoundingBox var8;
+
         if (var7 >= 80) {
             var8 = OComponentMineshaftCross.a(var0, var1, var2, var3, var4, var5);
             if (var8 != null) {
@@ -47,6 +50,7 @@ public class OStructureMineshaftPieces {
             return null;
         } else if (Math.abs(var3 - var0.b().a) <= 80 && Math.abs(var5 - var0.b().c) <= 80) {
             OStructureComponent var8 = a(var1, var2, var3, var4, var5, var6, var7 + 1);
+
             if (var8 != null) {
                 var1.add(var8);
                 var8.a(var0, var1, var2);

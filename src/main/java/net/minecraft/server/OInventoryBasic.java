@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import net.minecraft.server.OIInvBasic;
 import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItemStack;
 
+
 public class OInventoryBasic implements OIInventory {
 
     private String a;
@@ -18,90 +20,89 @@ public class OInventoryBasic implements OIInventory {
     private OItemStack[] c;
     private List d;
 
+    public OInventoryBasic(String var1, int var2) {
+        super();
+        this.a = var1;
+        this.b = var2;
+        this.c = new OItemStack[var2];
+    }
 
-     public OInventoryBasic(String var1, int var2) {
-         super();
-         this.a = var1;
-         this.b = var2;
-         this.c = new OItemStack[var2];
-     }
+    public OItemStack g_(int var1) {
+        return this.c[var1];
+    }
 
-      public OItemStack g_(int var1) {
-          return this.c[var1];
-      }
+    public OItemStack a(int var1, int var2) {
+        if (this.c[var1] != null) {
+            OItemStack var3;
 
-      public OItemStack a(int var1, int var2) {
-          if(this.c[var1] != null) {
-              OItemStack var3;
-              if(this.c[var1].a <= var2) {
-                  var3 = this.c[var1];
-                  this.c[var1] = null;
-                  this.G_();
-                  return var3;
-              } else {
-                  var3 = this.c[var1].a(var2);
-                  if(this.c[var1].a == 0) {
-                      this.c[var1] = null;
-                  }
+            if (this.c[var1].a <= var2) {
+                var3 = this.c[var1];
+                this.c[var1] = null;
+                this.G_();
+                return var3;
+            } else {
+                var3 = this.c[var1].a(var2);
+                if (this.c[var1].a == 0) {
+                    this.c[var1] = null;
+                }
 
-                  this.G_();
-                  return var3;
-              }
-          } else {
-              return null;
-          }
-      }
+                this.G_();
+                return var3;
+            }
+        } else {
+            return null;
+        }
+    }
 
-      public OItemStack b(int var1) {
-          if(this.c[var1] != null) {
-              OItemStack var2 = this.c[var1];
-              this.c[var1] = null;
-                  return var2;
-          } else {
-              return null;
-          }
-      }
+    public OItemStack b(int var1) {
+        if (this.c[var1] != null) {
+            OItemStack var2 = this.c[var1];
 
-      public void a(int var1, OItemStack var2) {
-          this.c[var1] = var2;
-          if(var2 != null && var2.a > this.a()) {
-              var2.a = this.a();
-          }
+            this.c[var1] = null;
+            return var2;
+        } else {
+            return null;
+        }
+    }
 
-          this.G_();
-      }
+    public void a(int var1, OItemStack var2) {
+        this.c[var1] = var2;
+        if (var2 != null && var2.a > this.a()) {
+            var2.a = this.a();
+        }
 
-      public int c() {
-          return this.b;
-      }
+        this.G_();
+    }
 
-      public String e() {
-          return this.a;
-      }
+    public int c() {
+        return this.b;
+    }
 
-      public int a() {
-          return 64;
-      }
+    public String e() {
+        return this.a;
+    }
 
-      public void G_() {
-           if(this.d != null) {
-               for(int var1 = 0; var1 < this.d.size(); ++var1) {
-                   ((OIInvBasic)this.d.get(var1)).a(this);
-               }
-           }
-      }
+    public int a() {
+        return 64;
+    }
 
-      public boolean a(OEntityPlayer var1) {
-          return true;
-      }
+    public void G_() {
+        if (this.d != null) {
+            for (int var1 = 0; var1 < this.d.size(); ++var1) {
+                ((OIInvBasic) this.d.get(var1)).a(this);
+            }
+        }
+    }
 
-      public void f() {
-      }
+    public boolean a(OEntityPlayer var1) {
+        return true;
+    }
 
-      public void g() {
-      }
+    public void f() {}
+
+    public void g() {}
    
-    //CanaryMod start - Container
+    // CanaryMod start - Container
     @Override
     public OItemStack[] getContents() {
         return Arrays.copyOf(this.c, c());
@@ -144,13 +145,13 @@ public class OInventoryBasic implements OIInventory {
 
     @Override
     public void clearContents() {
-        Arrays.fill(c, (OItemStack)null);
+        Arrays.fill(c, (OItemStack) null);
     }
 
     @Override
     public Item getItem(int id, int amount) {
-        for(OItemStack stack : getContents()) {
-            if(stack.c == id && stack.a == amount) {
+        for (OItemStack stack : getContents()) {
+            if (stack.c == id && stack.a == amount) {
                 return stack.getCanaryItem();
             }
         }
@@ -159,8 +160,8 @@ public class OInventoryBasic implements OIInventory {
 
     @Override
     public Item getItem(int id) {
-        for(OItemStack stack : getContents()) {
-            if(stack.c == id) {
+        for (OItemStack stack : getContents()) {
+            if (stack.c == id) {
                 return stack.getCanaryItem();
             }
         }
@@ -169,8 +170,9 @@ public class OInventoryBasic implements OIInventory {
 
     @Override
     public Item removeItem(Item item) {
-        if(c[item.getSlot()] != null && c[item.getSlot()].c == item.getId()) {
+        if (c[item.getSlot()] != null && c[item.getSlot()].c == item.getId()) {
             Item toRet = c[item.getSlot()].getCanaryItem();
+
             c[item.getSlot()] = null;
             return toRet;
         }
@@ -179,9 +181,10 @@ public class OInventoryBasic implements OIInventory {
 
     @Override
     public Item removeItem(int id) {
-        for(int index = 0; index < c.length; index++) {
-            if(c[index].c == id) {
+        for (int index = 0; index < c.length; index++) {
+            if (c[index].c == id) {
                 Item toRet = c[index].getCanaryItem();
+
                 c[index] = null;
                 return toRet;
             }
@@ -218,6 +221,7 @@ public class OInventoryBasic implements OIInventory {
     public int getInventoryStackLimit() {
         return a();
     }
+
     @Override
     public void addItem(int itemId, int amount) {
         int remaining = amount;
@@ -228,11 +232,7 @@ public class OInventoryBasic implements OIInventory {
             //
             // Could do with a cleanup into a single function, 
             // but this works for now.
-            if (((itemId >= 256 && itemId <= 258) || 
-                 (itemId >= 267 && itemId <= 279) || 
-                 (itemId >= 283 && itemId <= 286) ||
-                 (itemId >= 298 && itemId <= 317) ||
-                 (itemId == 261))) {
+            if (((itemId >= 256 && itemId <= 258) || (itemId >= 267 && itemId <= 279) || (itemId >= 283 && itemId <= 286) || (itemId >= 298 && itemId <= 317) || (itemId == 261))) {
                 int targetSlot = getEmptySlot();
                 
                 if (targetSlot == -1) {
@@ -248,6 +248,7 @@ public class OInventoryBasic implements OIInventory {
                     if (i != null) {
                         int freeSpace = 64 - i.getAmount();
                         int toAdd = 0;
+
                         if (remaining > freeSpace) {
                             toAdd = freeSpace;
                             remaining -= freeSpace;
@@ -320,6 +321,7 @@ public class OInventoryBasic implements OIInventory {
     @Override
     public boolean hasItemStack(int itemId, int amount) {
         int var2;
+
         for (var2 = 0; var2 < this.c.length; ++var2) {
             if (this.c[var2] != null && this.c[var2].c == itemId && this.c[var2].a == amount) {
                 return true;
@@ -331,6 +333,7 @@ public class OInventoryBasic implements OIInventory {
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
         int var2;
+
         for (var2 = 0; var2 < this.c.length; ++var2) {
             if (this.c[var2] != null && this.c[var2].c == itemId && (this.c[var2].a >= minAmount || this.c[var2].a <= maxAmount)) {
                 return true;
@@ -338,5 +341,5 @@ public class OInventoryBasic implements OIInventory {
         }
         return false;
     }
-    //CanaryMod end - Container
+    // CanaryMod end - Container
 }

@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMapGenBase;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OMapGenCavesHell extends OMapGenBase {
 
@@ -22,12 +24,15 @@ public class OMapGenCavesHell extends OMapGenBase {
         float var21 = 0.0F;
         float var22 = 0.0F;
         Random var23 = new Random(this.c.nextLong());
+
         if (var14 <= 0) {
             int var24 = this.b * 16 - 16;
+
             var14 = var24 - var23.nextInt(var24 / 4);
         }
 
         boolean var61 = false;
+
         if (var13 == -1) {
             var13 = var14 / 2;
             var61 = true;
@@ -40,6 +45,7 @@ public class OMapGenCavesHell extends OMapGenBase {
             double var29 = var27 * var15;
             float var31 = OMathHelper.b(var12);
             float var32 = OMathHelper.a(var12);
+
             var4 += (OMathHelper.b(var11) * var31);
             var6 += var32;
             var8 += (OMathHelper.a(var11) * var31);
@@ -66,6 +72,7 @@ public class OMapGenCavesHell extends OMapGenBase {
                 double var35 = var8 - var19;
                 double var37 = (var14 - var13);
                 double var39 = (var10 + 2.0F + 16.0F);
+
                 if (var33 * var33 + var35 * var35 - var37 * var37 > var39 * var39) {
                     return;
                 }
@@ -77,6 +84,7 @@ public class OMapGenCavesHell extends OMapGenBase {
                     int var44 = OMathHelper.b(var6 + var29) + 1;
                     int var45 = OMathHelper.b(var8 - var27) - var2 * 16 - 1;
                     int var46 = OMathHelper.b(var8 + var27) - var2 * 16 + 1;
+
                     if (var41 < 0) {
                         var41 = 0;
                     }
@@ -105,6 +113,7 @@ public class OMapGenCavesHell extends OMapGenBase {
 
                     int var51;
                     int var48;
+
                     for (var48 = var41; !var47 && var48 < var42; ++var48) {
                         for (int var49 = var45; !var47 && var49 < var46; ++var49) {
                             for (int var50 = var44 + 1; !var47 && var50 >= var43 - 1; --var50) {
@@ -132,8 +141,10 @@ public class OMapGenCavesHell extends OMapGenBase {
 
                                 for (int var57 = var44 - 1; var57 >= var43; --var57) {
                                     double var58 = (var57 + 0.5D - var6) / var29;
+
                                     if (var58 > -0.7D && var52 * var52 + var58 * var58 + var54 * var54 < 1.0D) {
                                         byte var60 = var3[var56];
+
                                         if (var60 == OBlock.bb.bO || var60 == OBlock.v.bO || var60 == OBlock.u.bO) {
                                             var3[var56] = 0;
                                         }
@@ -157,6 +168,7 @@ public class OMapGenCavesHell extends OMapGenBase {
     @Override
     protected void a(OWorld var1, int var2, int var3, int var4, int var5, byte[] var6) {
         int var7 = this.c.nextInt(this.c.nextInt(this.c.nextInt(10) + 1) + 1);
+
         if (this.c.nextInt(5) != 0) {
             var7 = 0;
         }
@@ -166,6 +178,7 @@ public class OMapGenCavesHell extends OMapGenBase {
             double var11 = this.c.nextInt(128);
             double var13 = (var3 * 16 + this.c.nextInt(16));
             int var15 = 1;
+
             if (this.c.nextInt(4) == 0) {
                 this.a(var4, var5, var6, var9, var11, var13);
                 var15 += this.c.nextInt(4);
@@ -175,6 +188,7 @@ public class OMapGenCavesHell extends OMapGenBase {
                 float var17 = this.c.nextFloat() * 3.1415927F * 2.0F;
                 float var18 = (this.c.nextFloat() - 0.5F) * 2.0F / 8.0F;
                 float var19 = this.c.nextFloat() * 2.0F + this.c.nextFloat();
+
                 this.a(var4, var5, var6, var9, var11, var13, var19 * 2.0F, var17, var18, 0, 0, 0.5D);
             }
         }

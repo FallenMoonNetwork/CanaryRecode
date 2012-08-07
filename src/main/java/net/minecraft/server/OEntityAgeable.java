@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityCreature;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public abstract class OEntityAgeable extends OEntityCreature {
 
@@ -40,6 +42,7 @@ public abstract class OEntityAgeable extends OEntityCreature {
     public void e() {
         super.e();
         int var1 = this.K();
+
         if (var1 < 0) {
             ++var1;
             this.c(var1);

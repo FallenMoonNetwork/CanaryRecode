@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OGenLayer;
 import net.minecraft.server.OIntCache;
+
 
 public class OGenLayerFuzzyZoom extends OGenLayer {
 
@@ -21,6 +23,7 @@ public class OGenLayerFuzzyZoom extends OGenLayer {
         int var11 = var7 << 1;
 
         int var13;
+
         for (int var12 = 0; var12 < var8 - 1; ++var12) {
             var13 = var12 << 1;
             int var14 = var13 * var11;
@@ -31,6 +34,7 @@ public class OGenLayerFuzzyZoom extends OGenLayer {
                 this.a((long) (var17 + var5 << 1), (long) (var12 + var6 << 1));
                 int var18 = var9[var17 + 1 + (var12 + 0) * var7];
                 int var19 = var9[var17 + 1 + (var12 + 1) * var7];
+
                 var10[var14] = var15;
                 var10[var14++ + var11] = this.a(var15, var16);
                 var10[var14] = this.a(var15, var18);
@@ -55,6 +59,7 @@ public class OGenLayerFuzzyZoom extends OGenLayer {
 
     protected int b(int var1, int var2, int var3, int var4) {
         int var5 = this.a(4);
+
         return var5 == 0 ? var1 : (var5 == 1 ? var2 : (var5 == 2 ? var3 : var4));
     }
 }

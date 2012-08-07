@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
 import net.minecraft.server.ONBTBase;
+
 
 public class ONBTTagString extends ONBTBase {
 
@@ -53,6 +55,7 @@ public class ONBTTagString extends ONBTBase {
             return false;
         } else {
             ONBTTagString var2 = (ONBTTagString) var1;
+
             return this.a == null && var2.a == null || this.a != null && this.a.equals(var2.a);
         }
     }

@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.net.DatagramPacket;
 import java.util.Date;
 import java.util.Random;
 import net.minecraft.server.ORConThreadQuery;
+
 
 class ORConThreadQueryAuth {
 
@@ -20,6 +22,7 @@ class ORConThreadQueryAuth {
         this.a = var1;
         this.b = (new Date()).getTime();
         byte[] var3 = var2.getData();
+
         this.d = new byte[4];
         this.d[0] = var3[3];
         this.d[1] = var3[4];

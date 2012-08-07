@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OMapData;
+
 
 public class OMapCoord {
 

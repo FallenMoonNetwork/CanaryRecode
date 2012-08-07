@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
@@ -118,6 +119,7 @@ import net.minecraft.server.OStepSoundStone;
 import net.minecraft.server.OTileEntitySign;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OBlock {
 
@@ -306,8 +308,7 @@ public class OBlock {
         return this;
     }
 
-    protected void k() {
-    }
+    protected void k() {}
 
     protected OBlock(int var1, int var2, OMaterial var3) {
         this(var1, var3);
@@ -336,6 +337,7 @@ public class OBlock {
 
     public static boolean g(int var0) {
         OBlock var1 = m[var0];
+
         return var1 == null ? false : var1.cd.j() && var1.b();
     }
 
@@ -405,6 +407,7 @@ public class OBlock {
 
     public void a(OWorld var1, int var2, int var3, int var4, OAxisAlignedBB var5, ArrayList<OAxisAlignedBB> var6) {
         OAxisAlignedBB var7 = this.e(var1, var2, var3, var4);
+
         if (var7 != null && var5.a(var7)) {
             var6.add(var7);
         }
@@ -427,24 +430,19 @@ public class OBlock {
         return true;
     }
 
-    public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
-    }
+    public void a(OWorld var1, int var2, int var3, int var4, Random var5) {}
 
-    public void c(OWorld var1, int var2, int var3, int var4, int var5) {
-    }
+    public void c(OWorld var1, int var2, int var3, int var4, int var5) {}
 
-    public void a(OWorld var1, int var2, int var3, int var4, int var5) {
-    }
+    public void a(OWorld var1, int var2, int var3, int var4, int var5) {}
 
     public int d() {
         return 10;
     }
 
-    public void a(OWorld var1, int var2, int var3, int var4) {
-    }
+    public void a(OWorld var1, int var2, int var3, int var4) {}
 
-    public void d(OWorld var1, int var2, int var3, int var4) {
-    }
+    public void d(OWorld var1, int var2, int var3, int var4) {}
 
     public int a(Random var1) {
         return 1;
@@ -469,6 +467,7 @@ public class OBlock {
             for (int var9 = 0; var9 < var8; ++var9) {
                 if (var1.r.nextFloat() <= var6) {
                     int var10 = this.a(var5, var1.r, var7);
+
                     if (var10 > 0) {
                         this.a(var1, var2, var3, var4, new OItemStack(var10, 1, this.c(var5)));
                     }
@@ -485,6 +484,7 @@ public class OBlock {
             double var9 = (var1.r.nextFloat() * var6) + (1.0F - var6) * 0.5D;
             double var11 = (var1.r.nextFloat() * var6) + (1.0F - var6) * 0.5D;
             OEntityItem var13 = new OEntityItem(var1, var2 + var7, var3 + var9, var4 + var11, var5);
+
             var13.c = 10;
             var1.b(var13);
         }
@@ -508,6 +508,7 @@ public class OBlock {
         OVec3D var10 = var5.b(var6, this.bZ);
         OVec3D var11 = var5.c(var6, this.bX);
         OVec3D var12 = var5.c(var6, this.ca);
+
         if (!this.a(var7)) {
             var7 = null;
         }
@@ -533,6 +534,7 @@ public class OBlock {
         }
 
         OVec3D var13 = null;
+
         if (var7 != null && (var13 == null || var5.b(var7) < var5.b(var13))) {
             var13 = var7;
         }
@@ -561,6 +563,7 @@ public class OBlock {
             return null;
         } else {
             byte var14 = -1;
+
             if (var13 == var7) {
                 var14 = 4;
             }
@@ -601,8 +604,7 @@ public class OBlock {
         return var1 == null ? false : var1.a >= this.bV && var1.a <= this.bY && var1.b >= this.bW && var1.b <= this.bZ;
     }
 
-    public void a_(OWorld var1, int var2, int var3, int var4) {
-    }
+    public void a_(OWorld var1, int var2, int var3, int var4) {}
 
     public boolean b(OWorld var1, int var2, int var3, int var4, int var5) {
         return this.c(var1, var2, var3, var4);
@@ -610,6 +612,7 @@ public class OBlock {
 
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.a(var2, var3, var4);
+
         return var5 == 0 || m[var5].cd.i();
     }
 
@@ -617,20 +620,15 @@ public class OBlock {
         return false;
     }
 
-    public void b(OWorld var1, int var2, int var3, int var4, OEntity var5) {
-    }
+    public void b(OWorld var1, int var2, int var3, int var4, OEntity var5) {}
 
-    public void e(OWorld var1, int var2, int var3, int var4, int var5) {
-    }
+    public void e(OWorld var1, int var2, int var3, int var4, int var5) {}
 
-    public void b(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
-    }
+    public void b(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {}
 
-    public void a(OWorld var1, int var2, int var3, int var4, OEntity var5, OVec3D var6) {
-    }
+    public void a(OWorld var1, int var2, int var3, int var4, OEntity var5, OVec3D var6) {}
 
-    public void a(OIBlockAccess var1, int var2, int var3, int var4) {
-    }
+    public void a(OIBlockAccess var1, int var2, int var3, int var4) {}
 
     public boolean a(OIBlockAccess var1, int var2, int var3, int var4, int var5) {
         return false;
@@ -640,26 +638,26 @@ public class OBlock {
         return false;
     }
 
-    public void a(OWorld var1, int var2, int var3, int var4, OEntity var5) {
-    }
+    public void a(OWorld var1, int var2, int var3, int var4, OEntity var5) {}
 
     public boolean d(OWorld var1, int var2, int var3, int var4, int var5) {
         return false;
     }
 
-    public void f() {
-    }
+    public void f() {}
 
     public void a(OWorld var1, OEntityPlayer var2, int var3, int var4, int var5, int var6) {
         var2.a(OStatList.C[this.bO], 1);
         var2.c(0.025F);
         if (this.h() && OEnchantmentHelper.d(var2.k)) {
             OItemStack var8 = this.a_(var6);
+
             if (var8 != null) {
                 this.a(var1, var3, var4, var5, var8);
             }
         } else {
             int var7 = OEnchantmentHelper.e(var2.k);
+
             this.b(var1, var3, var4, var5, var6, var7);
         }
 
@@ -671,6 +669,7 @@ public class OBlock {
 
     protected OItemStack a_(int var1) {
         int var2 = 0;
+
         if (this.bO >= 0 && this.bO < OItem.d.length && OItem.d[this.bO].e()) {
             var2 = var1;
         }
@@ -686,8 +685,7 @@ public class OBlock {
         return true;
     }
 
-    public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
-    }
+    public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {}
 
     public OBlock a(String var1) {
         this.a = "tile." + var1;
@@ -702,8 +700,7 @@ public class OBlock {
         return this.a;
     }
 
-    public void a(OWorld var1, int var2, int var3, int var4, int var5, int var6) {
-    }
+    public void a(OWorld var1, int var2, int var3, int var4, int var5, int var6) {}
 
     public boolean r() {
         return this.bS;
@@ -718,8 +715,7 @@ public class OBlock {
         return this.cd.l();
     }
 
-    public void a(OWorld var1, int var2, int var3, int var4, OEntity var5, float var6) {
-    }
+    public void a(OWorld var1, int var2, int var3, int var4, OEntity var5, float var6) {}
 
     static {
         OItem.d[ab.bO] = (new OItemCloth(ab.bO - 256)).a("cloth");
@@ -744,6 +740,7 @@ public class OBlock {
                 }
 
                 boolean var1 = false;
+
                 if (var0 > 0 && m[var0].c() == 10) {
                     var1 = true;
                 }

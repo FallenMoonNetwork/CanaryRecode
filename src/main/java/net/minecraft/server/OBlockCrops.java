@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockFlower;
@@ -8,6 +9,7 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
 
+
 public class OBlockCrops extends OBlockFlower {
 
     protected OBlockCrops(int var1, int var2) {
@@ -15,6 +17,7 @@ public class OBlockCrops extends OBlockFlower {
         this.bN = var2;
         this.a(true);
         float var3 = 0.5F;
+
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.25F, 0.5F + var3);
     }
 
@@ -28,8 +31,10 @@ public class OBlockCrops extends OBlockFlower {
         super.a(var1, var2, var3, var4, var5);
         if (var1.n(var2, var3 + 1, var4) >= 9) {
             int var6 = var1.c(var2, var3, var4);
+
             if (var6 < 7) {
                 float var7 = this.i(var1, var2, var3, var4);
+
                 if (var5.nextInt((int) (25.0F / var7) + 1) == 0) {
                     ++var6;
                     var1.c(var2, var3, var4, var6);
@@ -61,6 +66,7 @@ public class OBlockCrops extends OBlockFlower {
             for (int var18 = var4 - 1; var18 <= var4 + 1; ++var18) {
                 int var19 = var1.a(var17, var3 - 1, var18);
                 float var20 = 0.0F;
+
                 if (var19 == OBlock.aA.bO) {
                     var20 = 1.0F;
                     if (var1.c(var17, var3 - 1, var18) > 0) {
@@ -110,6 +116,7 @@ public class OBlockCrops extends OBlockFlower {
                     float var12 = var1.r.nextFloat() * var10 + (1.0F - var10) * 0.5F;
                     float var13 = var1.r.nextFloat() * var10 + (1.0F - var10) * 0.5F;
                     OEntityItem var14 = new OEntityItem(var1, (var2 + var11), (var3 + var12), (var4 + var13), new OItemStack(OItem.R));
+
                     var14.c = 10;
                     var1.b(var14);
                 }

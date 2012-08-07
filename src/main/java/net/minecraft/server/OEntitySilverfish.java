@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanarySilverfish;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockSilverfish;
@@ -13,6 +14,7 @@ import net.minecraft.server.OFacing;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public class OEntitySilverfish extends OEntityMob {
 
@@ -36,7 +38,6 @@ public class OEntitySilverfish extends OEntityMob {
         return canarySilverfish;
     }
 
-
     @Override
     public int d() {
         return 8;
@@ -50,6 +51,7 @@ public class OEntitySilverfish extends OEntityMob {
     @Override
     protected OEntity o() {
         double var1 = 8.0D;
+
         return this.bi.b(this, var1);
     }
 
@@ -120,6 +122,7 @@ public class OEntitySilverfish extends OEntityMob {
             int var2;
             int var3;
             int var5;
+
             if (this.a > 0) {
                 --this.a;
                 if (this.a == 0) {
@@ -132,6 +135,7 @@ public class OEntitySilverfish extends OEntityMob {
                         for (int var6 = 0; !var4 && var6 <= 10 && var6 >= -10; var6 = var6 <= 0 ? 1 - var6 : 0 - var6) {
                             for (int var7 = 0; !var4 && var7 <= 10 && var7 >= -10; var7 = var7 <= 0 ? 1 - var7 : 0 - var7) {
                                 int var8 = this.bi.a(var1 + var6, var2 + var5, var3 + var7);
+
                                 if (var8 == OBlock.bl.bO) {
                                     this.bi.f(2001, var1 + var6, var2 + var5, var3 + var7, OBlock.bl.bO + (this.bi.c(var1 + var6, var2 + var5, var3 + var7) << 12));
                                     this.bi.e(var1 + var6, var2 + var5, var3 + var7, 0);
@@ -152,6 +156,7 @@ public class OEntitySilverfish extends OEntityMob {
                 var2 = OMathHelper.b(this.bn + 0.5D);
                 var3 = OMathHelper.b(this.bo);
                 int var9 = this.bS.nextInt(6);
+
                 var5 = this.bi.a(var1 + OFacing.b[var9], var2 + OFacing.c[var9], var3 + OFacing.d[var9]);
                 if (OBlockSilverfish.d(var5)) {
                     this.bi.b(var1 + OFacing.b[var9], var2 + OFacing.c[var9], var3 + OFacing.d[var9], OBlock.bl.bO, OBlockSilverfish.e(var5));
@@ -181,6 +186,7 @@ public class OEntitySilverfish extends OEntityMob {
     public boolean l() {
         if (super.l()) {
             OEntityPlayer var1 = this.bi.a(this, 5.0D);
+
             return var1 == null;
         } else {
             return false;

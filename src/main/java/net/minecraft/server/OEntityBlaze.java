@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryBlaze;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
@@ -11,12 +12,13 @@ import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityBlaze extends OEntityMob {
 
     private float a = 0.5F;
     private int b;
     private int g;
-    //CanaMod blaze handler
+    // CanaMod blaze handler
     private CanaryBlaze canaryBlaze;
 
     public OEntityBlaze(OWorld var1) {
@@ -35,6 +37,7 @@ public class OEntityBlaze extends OEntityMob {
     public CanaryBlaze getCanaryBlaze() {
         return canaryBlaze;
     }
+
     @Override
     public int d() {
         return 20;
@@ -118,6 +121,7 @@ public class OEntityBlaze extends OEntityMob {
             double var3 = var1.bm - this.bm;
             double var5 = var1.bw.b + (var1.bH / 2.0F) - (this.bn + (this.bH / 2.0F));
             double var7 = var1.bo - this.bo;
+
             if (this.aw == 0) {
                 ++this.g;
                 if (this.g == 1) {
@@ -133,10 +137,12 @@ public class OEntityBlaze extends OEntityMob {
 
                 if (this.g > 1) {
                     float var9 = OMathHelper.c(var2) * 0.5F;
+
                     this.bi.a((OEntityPlayer) null, 1009, (int) this.bm, (int) this.bn, (int) this.bo, 0);
 
                     for (int var10 = 0; var10 < 1; ++var10) {
                         OEntitySmallFireball var11 = new OEntitySmallFireball(this.bi, this, var3 + this.bS.nextGaussian() * var9, var5, var7 + this.bS.nextGaussian() * var9);
+
                         var11.bn = this.bn + (this.bH / 2.0F) + 0.5D;
                         this.bi.b(var11);
                     }
@@ -150,8 +156,7 @@ public class OEntityBlaze extends OEntityMob {
     }
 
     @Override
-    protected void a(float var1) {
-    }
+    protected void a(float var1) {}
 
     @Override
     public void b(ONBTTagCompound var1) {
@@ -191,6 +196,7 @@ public class OEntityBlaze extends OEntityMob {
 
     public void a(boolean var1) {
         byte var2 = this.bY.a(16);
+
         if (var1) {
             var2 = (byte) (var2 | 1);
         } else {

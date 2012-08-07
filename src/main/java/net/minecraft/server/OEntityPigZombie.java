@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 
 import net.canarymod.Canary;
@@ -15,9 +16,10 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityPigZombie extends OEntityZombie {
 
-    public int a = 0; //CanaryMod private -> public
+    public int a = 0; // CanaryMod private -> public
     private int b = 0;
     private static final OItemStack g = new OItemStack(OItem.F, 1);
     
@@ -86,17 +88,21 @@ public class OEntityPigZombie extends OEntityZombie {
     @Override
     public boolean a(ODamageSource var1, int var2) {
         OEntity var3 = var1.a();
+
         if (var3 instanceof OEntityPlayer) {
-            //CanaryMod - onMobTarget
-            MobTargetHook hook = new MobTargetHook(getCanaryEntityLiving(), ((OEntityLiving)var3).getCanaryEntityLiving().getPlayer());
+            // CanaryMod - onMobTarget
+            MobTargetHook hook = new MobTargetHook(getCanaryEntityLiving(), ((OEntityLiving) var3).getCanaryEntityLiving().getPlayer());
+
             Canary.hooks().callHook(hook);
-            if(!hook.isCanceled()){
+            if (!hook.isCanceled()) {
                 List var4 = this.bi.b(this, this.bw.b(32.0D, 32.0D, 32.0D));
     
                 for (int var5 = 0; var5 < var4.size(); ++var5) {
                     OEntity var6 = (OEntity) var4.get(var5);
+
                     if (var6 instanceof OEntityPigZombie) {
                         OEntityPigZombie var7 = (OEntityPigZombie) var6;
+
                         var7.e(var3);
                     }
                 }
@@ -134,6 +140,7 @@ public class OEntityPigZombie extends OEntityZombie {
         int var3 = this.bS.nextInt(2 + var2);
 
         int var4;
+
         for (var4 = 0; var4 < var3; ++var4) {
             this.b(OItem.bl.bP, 1);
         }
@@ -150,10 +157,12 @@ public class OEntityPigZombie extends OEntityZombie {
     protected void b(int var1) {
         if (var1 > 0) {
             OItemStack var2 = new OItemStack(OItem.F);
+
             OEnchantmentHelper.a(this.bS, var2, 5);
             this.a(var2, 0.0F);
         } else {
             int var3 = this.bS.nextInt(3);
+
             if (var3 == 0) {
                 this.b(OItem.o.bP, 1);
             } else if (var3 == 1) {

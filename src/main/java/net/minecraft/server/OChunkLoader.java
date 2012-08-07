@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OAnvilConverterData;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.ONBTTagList;
 import net.minecraft.server.ONibbleArray;
 import net.minecraft.server.ONibbleArrayReader;
 import net.minecraft.server.OWorldChunkManager;
+
 
 public class OChunkLoader {
 
@@ -17,6 +19,7 @@ public class OChunkLoader {
         int var1 = var0.f("xPos");
         int var2 = var0.f("zPos");
         OAnvilConverterData var3 = new OAnvilConverterData(var1, var2);
+
         var3.g = var0.k("Blocks");
         var3.f = new ONibbleArrayReader(var0.k("Data"), 7);
         var3.e = new ONibbleArrayReader(var0.k("SkyLight"), 7);
@@ -51,6 +54,7 @@ public class OChunkLoader {
         ONBTTagList var16 = new ONBTTagList("Sections");
 
         int var7;
+
         for (int var5 = 0; var5 < 8; ++var5) {
             boolean var6 = true;
 
@@ -64,6 +68,7 @@ public class OChunkLoader {
                         if (var9 < 16) {
                             int var10 = var7 << 11 | var9 << 7 | var8 + (var5 << 4);
                             byte var11 = var0.g[var10];
+
                             if (var11 == 0) {
                                 ++var9;
                                 continue;
@@ -89,6 +94,7 @@ public class OChunkLoader {
                         for (int var13 = 0; var13 < 16; ++var13) {
                             int var14 = var22 << 11 | var13 << 7 | var12 + (var5 << 4);
                             byte var15 = var0.g[var14];
+
                             var19[var12 << 8 | var13 << 4 | var22] = (byte) (var15 & 255);
                             var20.a(var22, var12, var13, var0.f.a(var22, var12 + (var5 << 4), var13));
                             var21.a(var22, var12, var13, var0.e.a(var22, var12 + (var5 << 4), var13));
@@ -98,6 +104,7 @@ public class OChunkLoader {
                 }
 
                 ONBTTagCompound var24 = new ONBTTagCompound();
+
                 var24.a("Y", (byte) (var5 & 255));
                 var24.a("Blocks", var19);
                 var24.a("Data", var20.a);

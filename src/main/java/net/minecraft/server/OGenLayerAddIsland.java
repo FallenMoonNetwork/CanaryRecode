@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OGenLayer;
 import net.minecraft.server.OIntCache;
+
 
 public class OGenLayerAddIsland extends OGenLayer {
 
@@ -27,10 +29,12 @@ public class OGenLayerAddIsland extends OGenLayer {
                 int var15 = var9[var12 + 0 + (var11 + 2) * var7];
                 int var16 = var9[var12 + 2 + (var11 + 2) * var7];
                 int var17 = var9[var12 + 1 + (var11 + 1) * var7];
+
                 this.a((var12 + var1), (var11 + var2));
                 if (var17 == 0 && (var13 != 0 || var14 != 0 || var15 != 0 || var16 != 0)) {
                     int var18 = 1;
                     int var19 = 1;
+
                     if (var13 != 0 && this.a(var18++) == 0) {
                         var19 = var13;
                     }

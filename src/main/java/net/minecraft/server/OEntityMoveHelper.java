@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OMathHelper;
+
 
 public class OEntityMoveHelper {
 
@@ -45,8 +47,10 @@ public class OEntityMoveHelper {
             double var4 = this.d - this.a.bo;
             double var6 = this.c - var1;
             double var8 = var2 * var2 + var6 * var6 + var4 * var4;
+
             if (var8 >= 2.500000277905201E-7D) {
                 float var10 = (float) (Math.atan2(var4, var2) * 180.0D / 3.1415927410125732D) - 90.0F;
+
                 this.a.bs = this.a(this.a.bs, var10, 30.0F);
                 this.a.d(this.e);
                 if (var6 > 0.0D && var2 * var2 + var4 * var4 < 1.0D) {
@@ -59,6 +63,7 @@ public class OEntityMoveHelper {
 
     private float a(float var1, float var2, float var3) {
         float var4;
+
         for (var4 = var2 - var1; var4 < -180.0F; var4 += 360.0F) {
             ;
         }

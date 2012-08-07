@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
@@ -8,6 +9,7 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockTrapDoor extends OBlock {
 
@@ -20,6 +22,7 @@ public class OBlockTrapDoor extends OBlock {
 
         float var3 = 0.5F;
         float var4 = 1.0F;
+
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var4, 0.5F + var3);
     }
 
@@ -57,11 +60,13 @@ public class OBlockTrapDoor extends OBlock {
     @Override
     public void f() {
         float var1 = 0.1875F;
+
         this.a(0.0F, 0.5F - var1 / 2.0F, 0.0F, 1.0F, 0.5F + var1 / 2.0F, 1.0F);
     }
 
     public void d(int var1) {
         float var2 = 0.1875F;
+
         this.a(0.0F, 0.0F, 0.0F, 1.0F, var2, 1.0F);
         if (e(var1)) {
             if ((var1 & 3) == 0) {
@@ -94,6 +99,7 @@ public class OBlockTrapDoor extends OBlock {
             return true;
         } else {
             int var6 = var1.c(var2, var3, var4);
+
             var1.c(var2, var3, var4, var6 ^ 4);
             var1.a(var5, 1003, var2, var3, var4, 0);
             return true;
@@ -103,6 +109,7 @@ public class OBlockTrapDoor extends OBlock {
     public void a(OWorld var1, int var2, int var3, int var4, boolean var5) {
         int var6 = var1.c(var2, var3, var4);
         boolean var7 = (var6 & 4) > 0;
+
         if (var7 != var5) {
             var1.c(var2, var3, var4, var6 ^ 4);
             var1.a((OEntityPlayer) null, 1003, var2, var3, var4, 0);
@@ -115,6 +122,7 @@ public class OBlockTrapDoor extends OBlock {
             int var6 = var1.c(var2, var3, var4);
             int var7 = var2;
             int var8 = var4;
+
             if ((var6 & 3) == 0) {
                 var8 = var4 + 1;
             }
@@ -137,6 +145,7 @@ public class OBlockTrapDoor extends OBlock {
             }
 
             boolean var9 = var1.x(var2, var3, var4);
+
             if (var9 || var5 > 0 && OBlock.m[var5].e() || var5 == 0) {
                 this.a(var1, var2, var3, var4, var9);
             }
@@ -153,6 +162,7 @@ public class OBlockTrapDoor extends OBlock {
     @Override
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         byte var6 = 0;
+
         if (var5 == 2) {
             var6 = 0;
         }
@@ -208,6 +218,7 @@ public class OBlockTrapDoor extends OBlock {
             return false;
         } else {
             OBlock var1 = OBlock.m[var0];
+
             return var1 != null && var1.cd.j() && var1.b() || var1 == OBlock.bd;
         }
     }

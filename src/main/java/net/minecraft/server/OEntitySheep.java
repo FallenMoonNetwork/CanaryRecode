@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 
 import net.canarymod.api.entity.CanarySheep;
@@ -20,13 +21,15 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
+
 public class OEntitySheep extends OEntityAnimal {
 
     public static final float[][] a = new float[][] { { 1.0F, 1.0F, 1.0F }, { 0.95F, 0.7F, 0.2F }, { 0.9F, 0.5F, 0.85F }, { 0.6F, 0.7F, 0.95F }, { 0.9F, 0.9F, 0.2F }, { 0.5F, 0.8F, 0.1F }, { 0.95F, 0.7F, 0.8F }, { 0.3F, 0.3F, 0.3F }, { 0.6F, 0.6F, 0.6F }, { 0.3F, 0.6F, 0.7F }, { 0.7F, 0.4F, 0.9F }, { 0.2F, 0.4F, 0.8F }, { 0.5F, 0.4F, 0.3F }, { 0.4F, 0.5F, 0.2F }, { 0.8F, 0.3F, 0.3F }, { 0.1F, 0.1F, 0.1F } };
     private int b;
     private OEntityAIEatGrass c = new OEntityAIEatGrass(this);
 
-    //CanarMod sheep handler
+    // CanarMod sheep handler
     private CanarySheep canarySheep;
     
     public OEntitySheep(OWorld var1) {
@@ -34,6 +37,7 @@ public class OEntitySheep extends OEntityAnimal {
         this.ae = "/mob/sheep.png";
         this.b(0.9F, 1.3F);
         float var2 = 0.23F;
+
         this.al().a(true);
         this.aL.a(0, new OEntityAISwimming(this));
         this.aL.a(1, new OEntityAIPanic(this, 0.38F));
@@ -55,7 +59,6 @@ public class OEntitySheep extends OEntityAnimal {
     public CanarySheep getCanarySheep() {
         return canarySheep;
     }
-
 
     @Override
     protected boolean c_() {
@@ -104,6 +107,7 @@ public class OEntitySheep extends OEntityAnimal {
     @Override
     public boolean interact(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
+
         if (var2 != null && var2.c == OItem.bd.bP && !this.A_() && !this.aO()) {
             if (!this.bi.F) {
                 this.a(true);
@@ -111,6 +115,7 @@ public class OEntitySheep extends OEntityAnimal {
 
                 for (int var4 = 0; var4 < var3; ++var4) {
                     OEntityItem var5 = this.a(new OItemStack(OBlock.ab.bO, 1, this.x()), 1.0F);
+
                     var5.bq += (this.bS.nextFloat() * 0.05F);
                     var5.bp += ((this.bS.nextFloat() - this.bS.nextFloat()) * 0.1F);
                     var5.br += ((this.bS.nextFloat() - this.bS.nextFloat()) * 0.1F);
@@ -158,6 +163,7 @@ public class OEntitySheep extends OEntityAnimal {
 
     public void d_(int var1) {
         byte var2 = this.bY.a(16);
+
         this.bY.b(16, Byte.valueOf((byte) (var2 & 240 | var1 & 15)));
     }
 
@@ -167,6 +173,7 @@ public class OEntitySheep extends OEntityAnimal {
 
     public void a(boolean var1) {
         byte var2 = this.bY.a(16);
+
         if (var1) {
             this.bY.b(16, Byte.valueOf((byte) (var2 | 16)));
         } else {
@@ -177,6 +184,7 @@ public class OEntitySheep extends OEntityAnimal {
 
     public static int a(Random var0) {
         int var1 = var0.nextInt(100);
+
         return var1 < 5 ? 15 : (var1 < 10 ? 7 : (var1 < 15 ? 8 : (var1 < 18 ? 12 : (var0.nextInt(500) == 0 ? 6 : 0))));
     }
 
@@ -184,6 +192,7 @@ public class OEntitySheep extends OEntityAnimal {
     public OEntityAnimal a(OEntityAnimal var1) {
         OEntitySheep var2 = (OEntitySheep) var1;
         OEntitySheep var3 = new OEntitySheep(this.bi);
+
         if (this.bS.nextBoolean()) {
             var3.d_(this.x());
         } else {
@@ -198,6 +207,7 @@ public class OEntitySheep extends OEntityAnimal {
         this.a(false);
         if (this.aO()) {
             int var1 = this.K() + 1200;
+
             if (var1 > 0) {
                 var1 = 0;
             }

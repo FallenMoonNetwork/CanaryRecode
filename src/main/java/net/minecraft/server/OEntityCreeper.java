@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryCreeper;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
@@ -20,6 +21,7 @@ import net.minecraft.server.OEntitySkeleton;
 import net.minecraft.server.OItem;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityCreeper extends OEntityMob {
 
@@ -87,6 +89,7 @@ public class OEntityCreeper extends OEntityMob {
         if (this.aE()) {
             this.b = this.a;
             int var1 = this.A();
+
             if (var1 > 0 && this.a == 0) {
                 this.bi.a(this, "random.fuse", 1.0F, 0.5F);
             }

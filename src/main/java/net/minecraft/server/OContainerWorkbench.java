@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OContainer;
 import net.minecraft.server.OCraftingManager;
@@ -13,10 +14,11 @@ import net.minecraft.server.OSlot;
 import net.minecraft.server.OSlotCrafting;
 import net.minecraft.server.OWorld;
 
+
 public class OContainerWorkbench extends OContainer {
 
-    public OInventoryCrafting craftingGrid = new OInventoryCrafting(this, 3, 3); //CanaryMod renamed a -> craftingGrid
-    public OIInventory craftResultInventory = new OInventoryCraftResult(); //CanaryMod renamed b -> craftResultInventory
+    public OInventoryCrafting craftingGrid = new OInventoryCrafting(this, 3, 3); // CanaryMod renamed a -> craftingGrid
+    public OIInventory craftResultInventory = new OInventoryCraftResult(); // CanaryMod renamed b -> craftResultInventory
     public OWorld c;
     public int h;
     public int i;
@@ -34,6 +36,7 @@ public class OContainerWorkbench extends OContainer {
 
         int var6;
         int var7;
+
         for (var6 = 0; var6 < 3; ++var6) {
             for (var7 = 0; var7 < 3; ++var7) {
                 this.a(new OSlot(this.craftingGrid, var7 + var6 * 3, 30 + var7 * 18, 17 + var6 * 18));
@@ -59,13 +62,14 @@ public class OContainerWorkbench extends OContainer {
         this.craftingGrid.update(); // CanaryMod
     }
 
-    //CanaryMod renamed a -> onInventoryClose
+    // CanaryMod renamed a -> onInventoryClose
     @Override
     public void onInventoryClose(OEntityPlayer var1) {
         super.onInventoryClose(var1);
         if (!this.c.F) {
             for (int var2 = 0; var2 < 9; ++var2) {
                 OItemStack var3 = this.craftingGrid.b(var2);
+
                 if (var3 != null) {
                     var1.b(var3);
                 }
@@ -83,8 +87,10 @@ public class OContainerWorkbench extends OContainer {
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);
+
         if (var3 != null && var3.c()) {
             OItemStack var4 = var3.b();
+
             var2 = var4.j();
             if (var1 == 0) {
                 if (!this.a(var4, 10, 46, true)) {

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 class ORedstoneUpdateInfo {
 
     int a;

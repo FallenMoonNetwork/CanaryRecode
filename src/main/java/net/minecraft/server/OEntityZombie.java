@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryZombie;
 import net.minecraft.server.OEntityAIAttackOnCollide;
 import net.minecraft.server.OEntityAIBreakDoor;
@@ -18,6 +19,7 @@ import net.minecraft.server.OEnumCreatureAttribute;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityZombie extends OEntityMob {
 
@@ -72,6 +74,7 @@ public class OEntityZombie extends OEntityMob {
     public void e() {
         if (this.bi.e() && !this.bi.F) {
             float var1 = this.b(1.0F);
+
             if (var1 > 0.5F && this.bi.l(OMathHelper.b(this.bm), OMathHelper.b(this.bn), OMathHelper.b(this.bo)) && this.bS.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F) {
                 this.i(8);
             }
@@ -111,12 +114,15 @@ public class OEntityZombie extends OEntityMob {
         case 0:
             this.b(OItem.p.bP, 1);
             break;
+
         case 1:
             this.b(OItem.ac.bP, 1);
             break;
+
         case 2:
             this.b(OItem.n.bP, 1);
             break;
+
         case 3:
             this.b(OItem.e.bP, 1);
         }

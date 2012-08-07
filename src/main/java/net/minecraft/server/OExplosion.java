@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
 
+
 public class OExplosion {
 
     public boolean a = false;
@@ -33,10 +35,10 @@ public class OExplosion {
     public float power;
     public Set<OChunkPosition> g = new HashSet<OChunkPosition>();
     
-    //CanaryMod Start
+    // CanaryMod Start
     protected boolean toRet;
     protected List<Block> blocks = new ArrayList<Block>();
-    //CanaryMod End
+    // CanaryMod End
 
     public OExplosion(OWorld world, OEntity entity, double x, double y, double z, float power) {
         super();
@@ -59,6 +61,7 @@ public class OExplosion {
         double var15;
         double var17;
         double var19;
+
         for (var3 = 0; var3 < var2; ++var3) {
             for (var4 = 0; var4 < var2; ++var4) {
                 for (var5 = 0; var5 < var2; ++var5) {
@@ -67,10 +70,12 @@ public class OExplosion {
                         double var8 = (var4 / (var2 - 1.0F) * 2.0F - 1.0F);
                         double var10 = (var5 / (var2 - 1.0F) * 2.0F - 1.0F);
                         double var12 = Math.sqrt(var6 * var6 + var8 * var8 + var10 * var10);
+
                         var6 /= var12;
                         var8 /= var12;
                         var10 /= var12;
                         float var14 = this.power * (0.7F + this.world.r.nextFloat() * 0.6F);
+
                         var15 = this.explosionX;
                         var17 = this.explosionY;
                         var19 = this.explosionZ;
@@ -80,6 +85,7 @@ public class OExplosion {
                             int var23 = OMathHelper.b(var17);
                             int var24 = OMathHelper.b(var19);
                             int var25 = this.world.a(var22, var23, var24);
+
                             if (var25 > 0) {
                                 var14 -= (OBlock.m[var25].a(this.e) + 0.3F) * var21;
                             }
@@ -87,12 +93,13 @@ public class OExplosion {
                             if (var14 > 0.0F) {
                                 this.g.add(new OChunkPosition(var22, var23, var24));
                                 
-                                //CanaryMod - Build blocks list
+                                // CanaryMod - Build blocks list
                                 Block block = world.getCanaryWorld().getBlockAt(var22, var23, var24);
-                                if(var25 != 0 && !blocks.contains(block)){
+
+                                if (var25 != 0 && !blocks.contains(block)) {
                                     blocks.add(block);
                                 }
-                                //CanaryMod end
+                                // CanaryMod end
                                 
                             }
 
@@ -106,6 +113,7 @@ public class OExplosion {
         }
 
         ExplosionHook explodehook = new ExplosionHook(base, e.getCanaryEntity(), blocks);
+
         Canary.hooks().callHook(explodehook);
         toRet = explodehook.isCanceled();
         this.power *= 2.0F;
@@ -121,11 +129,13 @@ public class OExplosion {
         for (int var31 = 0; var31 < var29.size(); ++var31) {
             OEntity var32 = (OEntity) var29.get(var31);
             double var33 = var32.f(this.explosionX, this.explosionY, this.explosionZ) / this.power;
+
             if (var33 <= 1.0D) {
                 var15 = var32.bm - this.explosionX;
                 var17 = var32.bn - this.explosionY;
                 var19 = var32.bo - this.explosionZ;
                 double var35 = OMathHelper.a(var15 * var15 + var17 * var17 + var19 * var19);
+
                 var15 /= var35;
                 var17 /= var35;
                 var19 /= var35;
@@ -134,18 +144,20 @@ public class OExplosion {
                 
                 // CanaryMod start - onDamage Explosion
                 int damage = (int) ((var39 * var39 + var39) / 2.0D * 8.0D * power + 1.0D);
-                if(var32 instanceof OEntityLiving){
+
+                if (var32 instanceof OEntityLiving) {
                     EntityLiving attacker = null;
+
                     if (e instanceof OEntityCreeper) {
                         attacker = ((OEntityLiving) e).getCanaryEntityLiving();
                     }
                     DamageHook hook = new DamageHook(attacker, ((OEntityLiving) var32).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.l), damage);
+
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
                         var32.a(ODamageSource.l, damage);
                     }
-                }
-                else{
+                } else {
                     var32.a(ODamageSource.l, damage);
                 }
                 // CanaryMod end
@@ -158,6 +170,7 @@ public class OExplosion {
 
         this.power = var1;
         ArrayList<OChunkPosition> var43 = new ArrayList<OChunkPosition>();
+
         var43.addAll(this.g);
     }
 
@@ -165,9 +178,10 @@ public class OExplosion {
         this.world.a(this.explosionX, this.explosionY, this.explosionZ, "random.explode", 4.0F, (1.0F + (this.world.r.nextFloat() - this.world.r.nextFloat()) * 0.2F) * 0.7F);
         this.world.a("hugeexplosion", this.explosionX, this.explosionY, this.explosionZ, 0.0D, 0.0D, 0.0D);
         ArrayList<OChunkPosition> var2 = new ArrayList<OChunkPosition>();
+
         var2.addAll(this.g);
 
-        //CanaryMod - cancel explosions
+        // CanaryMod - cancel explosions
         if (this.toRet) {
             this.g = new HashSet<OChunkPosition>();
             return;
@@ -179,6 +193,7 @@ public class OExplosion {
         int var6;
         int var7;
         int var8;
+
         for (var3 = var2.size() - 1; var3 >= 0; --var3) {
             var4 = (OChunkPosition) var2.get(var3);
             var5 = var4.a;
@@ -193,10 +208,12 @@ public class OExplosion {
                 double var17 = var11 - this.explosionY;
                 double var19 = var13 - this.explosionZ;
                 double var21 = OMathHelper.a(var15 * var15 + var17 * var17 + var19 * var19);
+
                 var15 /= var21;
                 var17 /= var21;
                 var19 /= var21;
                 double var23 = 0.5D / (var21 / this.power + 0.1D);
+
                 var23 *= (this.world.r.nextFloat() * this.world.r.nextFloat() + 0.3F);
                 var15 *= var23;
                 var17 *= var23;
@@ -220,6 +237,7 @@ public class OExplosion {
                 var7 = var4.c;
                 var8 = this.world.a(var5, var6, var7);
                 int var25 = this.world.a(var5, var6 - 1, var7);
+
                 if (var8 == 0 && OBlock.n[var25] && this.h.nextInt(3) == 0) {
                     this.world.e(var5, var6, var7, OBlock.ar.bO);
                 }

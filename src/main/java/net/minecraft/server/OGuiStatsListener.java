@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import net.minecraft.server.OGuiStatsComponent;
+
 
 class OGuiStatsListener implements ActionListener {
 

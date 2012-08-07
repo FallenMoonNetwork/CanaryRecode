@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunk;
 import net.minecraft.server.OEntity;
@@ -14,6 +15,7 @@ import net.minecraft.server.OPacket;
 import net.minecraft.server.OPacket131MapData;
 import net.minecraft.server.OWorld;
 
+
 public class OItemMap extends OItemMapBase {
 
     protected OItemMap(int var1) {
@@ -22,22 +24,24 @@ public class OItemMap extends OItemMapBase {
     }
 
     public OMapData a(OItemStack var1, OWorld var2) {
-      //"map_" + var1.h();
-      OMapData var4 = (OMapData)var2.a(OMapData.class, "map_" + var1.h());
-      if(var4 == null) {
-         var1.b(var2.b("map"));
-         String var3 = "map_" + var1.h();
-         var4 = new OMapData(var3);
-         var4.b = var2.s().getSpawnX();
-         var4.c = var2.s().getSpawnZ();
-         var4.e = 3;
-         var4.d = (byte)var2.t.g;
-         var4.a();
-         var2.a(var3, var4);
-      }
+        // "map_" + var1.h();
+        OMapData var4 = (OMapData) var2.a(OMapData.class, "map_" + var1.h());
 
-      return var4;
-   }
+        if (var4 == null) {
+            var1.b(var2.b("map"));
+            String var3 = "map_" + var1.h();
+
+            var4 = new OMapData(var3);
+            var4.b = var2.s().getSpawnX();
+            var4.c = var2.s().getSpawnZ();
+            var4.e = 3;
+            var4.d = (byte) var2.t.g;
+            var4.a();
+            var2.a(var3, var4);
+        }
+
+        return var4;
+    }
 
     public void a(OWorld var1, OEntity var2, OMapData var3) {
         if (var1.t.g == var3.d) {
@@ -49,6 +53,7 @@ public class OItemMap extends OItemMapBase {
             int var9 = OMathHelper.b(var2.bm - var7) / var6 + var4 / 2;
             int var10 = OMathHelper.b(var2.bo - var8) / var6 + var5 / 2;
             int var11 = 128 / var6;
+
             if (var1.t.e) {
                 var11 /= 2;
             }
@@ -81,6 +86,7 @@ public class OItemMap extends OItemMapBase {
                             int var35;
                             int var33;
                             int var38;
+
                             if (var1.t.e) {
                                 var33 = var21 + var22 * 231871;
                                 var33 = var33 * var33 * 31287121 + var33 * 11;
@@ -96,6 +102,7 @@ public class OItemMap extends OItemMapBase {
                                     for (var34 = 0; var34 < var6; ++var34) {
                                         var35 = var27.b(var33 + var28, var34 + var29) + 1;
                                         int var36 = 0;
+
                                         if (var35 > 1) {
                                             boolean var37 = false;
 
@@ -119,6 +126,7 @@ public class OItemMap extends OItemMapBase {
                                                 boolean var39 = false;
 
                                                 int var43;
+
                                                 do {
                                                     var43 = var27.a(var33 + var28, var38--, var34 + var29);
                                                     ++var30;
@@ -134,6 +142,7 @@ public class OItemMap extends OItemMapBase {
 
                             var30 /= var6 * var6;
                             int var10000 = var23 / (var6 * var6);
+
                             var10000 = var24 / (var6 * var6);
                             var10000 = var25 / (var6 * var6);
                             var33 = 0;
@@ -148,6 +157,7 @@ public class OItemMap extends OItemMapBase {
 
                             double var40 = (var31 - var15) * 4.0D / (var6 + 4) + ((var12 + var17 & 1) - 0.5D) * 0.4D;
                             byte var44 = 1;
+
                             if (var40 > 0.6D) {
                                 var44 = 2;
                             }
@@ -159,6 +169,7 @@ public class OItemMap extends OItemMapBase {
                             var38 = 0;
                             if (var34 > 0) {
                                 OMapColor var46 = OBlock.m[var34].cd.F;
+
                                 if (var46 == OMapColor.n) {
                                     var40 = var30 * 0.1D + (var12 + var17 & 1) * 0.2D;
                                     var44 = 1;
@@ -178,6 +189,7 @@ public class OItemMap extends OItemMapBase {
                             if (var17 >= 0 && var18 * var18 + var19 * var19 < var11 * var11 && (!var20 || (var12 + var17 & 1) != 0)) {
                                 byte var45 = var3.f[var12 + var17 * var4];
                                 byte var42 = (byte) (var38 * 4 + var44);
+
                                 if (var45 != var42) {
                                     if (var13 > var17) {
                                         var13 = var17;
@@ -206,8 +218,10 @@ public class OItemMap extends OItemMapBase {
     public void a(OItemStack var1, OWorld var2, OEntity var3, int var4, boolean var5) {
         if (!var2.F) {
             OMapData var6 = this.a(var1, var2);
+
             if (var3 instanceof OEntityPlayer) {
                 OEntityPlayer var7 = (OEntityPlayer) var3;
+
                 var6.a(var7, var1);
             }
 
@@ -223,6 +237,7 @@ public class OItemMap extends OItemMapBase {
         var1.b(var2.b("map"));
         String var4 = "map_" + var1.h();
         OMapData var5 = new OMapData(var4);
+
         var2.a(var4, var5);
         var5.b = OMathHelper.b(var3.bm);
         var5.c = OMathHelper.b(var3.bo);
@@ -234,6 +249,7 @@ public class OItemMap extends OItemMapBase {
     @Override
     public OPacket c(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         byte[] var4 = this.a(var1, var2).a(var1, var2, var3);
+
         return var4 == null ? null : new OPacket131MapData((short) OItem.bc.bP, (short) var1.h(), var4);
     }
 }

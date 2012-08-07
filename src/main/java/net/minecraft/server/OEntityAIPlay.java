@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.server.OEntity;
@@ -8,6 +9,7 @@ import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityVillager;
 import net.minecraft.server.ORandomPositionGenerator;
 import net.minecraft.server.OVec3D;
+
 
 public class OEntityAIPlay extends OEntityAIBase {
 
@@ -36,10 +38,13 @@ public class OEntityAIPlay extends OEntityAIBase {
 
             while (var4.hasNext()) {
                 OEntity var5 = (OEntity) var4.next();
+
                 if (var5 != this.a) {
                     OEntityVillager var6 = (OEntityVillager) var5;
+
                     if (!var6.C() && var6.K() < 0) {
                         double var7 = var6.j(this.a);
+
                         if (var7 <= var2) {
                             var2 = var7;
                             this.b = var6;
@@ -50,6 +55,7 @@ public class OEntityAIPlay extends OEntityAIBase {
 
             if (this.b == null) {
                 OVec3D var9 = ORandomPositionGenerator.a(this.a, 16, 3);
+
                 if (var9 == null) {
                     return false;
                 }
@@ -88,6 +94,7 @@ public class OEntityAIPlay extends OEntityAIBase {
             }
         } else if (this.a.al().e()) {
             OVec3D var1 = ORandomPositionGenerator.a(this.a, 16, 3);
+
             if (var1 == null) {
                 return;
             }

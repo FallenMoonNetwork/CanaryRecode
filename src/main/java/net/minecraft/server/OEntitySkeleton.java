@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanarySkeleton;
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.ODamageSource;
@@ -21,6 +22,7 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OEntitySkeleton extends OEntityMob {
 
@@ -50,6 +52,7 @@ public class OEntitySkeleton extends OEntityMob {
     public CanarySkeleton getCanarySkeleton() {
         return canarySkeleton;
     }
+
     @Override
     public boolean c_() {
         return true;
@@ -84,6 +87,7 @@ public class OEntitySkeleton extends OEntityMob {
     public void e() {
         if (this.bi.e() && !this.bi.F) {
             float var1 = this.b(1.0F);
+
             if (var1 > 0.5F && this.bi.l(OMathHelper.b(this.bm), OMathHelper.b(this.bn), OMathHelper.b(this.bo)) && this.bS.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F) {
                 this.i(8);
             }
@@ -99,6 +103,7 @@ public class OEntitySkeleton extends OEntityMob {
             OEntityPlayer var2 = (OEntityPlayer) var1.a();
             double var3 = var2.bm - this.bm;
             double var5 = var2.bo - this.bo;
+
             if (var3 * var3 + var5 * var5 >= 2500.0D) {
                 var2.a(OAchievementList.v);
             }
@@ -116,6 +121,7 @@ public class OEntitySkeleton extends OEntityMob {
         int var3 = this.bS.nextInt(3 + var2);
 
         int var4;
+
         for (var4 = 0; var4 < var3; ++var4) {
             this.b(OItem.k.bP, 1);
         }
@@ -132,6 +138,7 @@ public class OEntitySkeleton extends OEntityMob {
     protected void b(int var1) {
         if (var1 > 0) {
             OItemStack var2 = new OItemStack(OItem.j);
+
             OEnchantmentHelper.a(this.bS, var2, 5);
             this.a(var2, 0.0F);
         } else {

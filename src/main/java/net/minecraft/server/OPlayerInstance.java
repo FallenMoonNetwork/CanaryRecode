@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.server.OChunkCoordIntPair;
@@ -12,6 +13,7 @@ import net.minecraft.server.OPacket53BlockChange;
 import net.minecraft.server.OPlayerManager;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OWorldServer;
+
 
 class OPlayerInstance {
 
@@ -53,6 +55,7 @@ class OPlayerInstance {
             this.b.remove(var1);
             if (this.b.size() == 0) {
                 long var2 = this.c + 2147483647L | this.d + 2147483647L << 32;
+
                 OPlayerManager.a(this.a).d(var2);
                 if (this.g > 0) {
                     OPlayerManager.b(this.a).remove(this);
@@ -92,6 +95,7 @@ class OPlayerInstance {
     public void a(OPacket var1) {
         for (int var2 = 0; var2 < this.b.size(); ++var2) {
             OEntityPlayerMP var3 = (OEntityPlayerMP) this.b.get(var2);
+
             if (var3.g.contains(this.e) && !var3.f.contains(this.e)) {
                 var3.a.b(var1);
             }
@@ -101,10 +105,12 @@ class OPlayerInstance {
 
     public void a() {
         OWorldServer var1 = this.a.a();
+
         if (this.g != 0) {
             int var2;
             int var3;
             int var4;
+
             if (this.g == 1) {
                 var2 = this.c * 16 + (this.f[0] >> 12 & 15);
                 var3 = this.f[0] & 255;
@@ -115,6 +121,7 @@ class OPlayerInstance {
                 }
             } else {
                 int var5;
+
                 if (this.g == 64) {
                     var2 = this.c * 16;
                     var3 = this.d * 16;
@@ -152,6 +159,7 @@ class OPlayerInstance {
     private void a(OTileEntity var1) {
         if (var1 != null) {
             OPacket var2 = var1.d();
+
             if (var2 != null) {
                 this.a(var2);
             }

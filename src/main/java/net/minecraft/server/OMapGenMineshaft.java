@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OMapGenStructure;
 import net.minecraft.server.OStructureMineshaftStart;
 import net.minecraft.server.OStructureStart;
+
 
 public class OMapGenMineshaft extends OMapGenStructure {
 

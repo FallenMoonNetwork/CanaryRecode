@@ -1,19 +1,15 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAnimal;
 import net.minecraft.server.OEntityWaterMob;
 import net.minecraft.server.OIMob;
 import net.minecraft.server.OMaterial;
 
+
 public enum OEnumCreatureType {
 
-    a("monster", 0, OIMob.class, 70, OMaterial.a, false), b("creature", 1, OEntityAnimal.class, 15, OMaterial.a, true), c(
-            "waterCreature",
-            2,
-            OEntityWaterMob.class,
-            5,
-            OMaterial.g,
-            true);
+    a("monster", 0, OIMob.class, 70, OMaterial.a, false), b("creature", 1, OEntityAnimal.class, 15, OMaterial.a, true), c("waterCreature", 2, OEntityWaterMob.class, 5, OMaterial.g, true);
     private final Class d;
     private final int e;
     private final OMaterial f;

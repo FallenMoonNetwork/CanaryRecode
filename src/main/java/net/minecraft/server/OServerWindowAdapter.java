@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import net.minecraft.server.OMinecraftServer;
+
 
 final class OServerWindowAdapter extends WindowAdapter {
 

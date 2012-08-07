@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -53,6 +54,7 @@ import net.minecraft.server.OPacket40EntityMetadata;
 import net.minecraft.server.OPacket41EntityEffect;
 import net.minecraft.server.OPacket5PlayerInventory;
 import net.minecraft.server.OPotionEffect;
+
 
 public class OEntityTrackerEntry {
 
@@ -135,6 +137,7 @@ public class OEntityTrackerEntry {
             Object var10 = null;
             boolean var11 = Math.abs(var7) >= 4 || Math.abs(var8) >= 4 || Math.abs(var9) >= 4;
             boolean var12 = Math.abs(var5 - this.g) >= 4 || Math.abs(var6 - this.h) >= 4;
+
             if (var7 >= -128 && var7 < 128 && var8 >= -128 && var8 < 128 && var9 >= -128 && var9 < 128 && this.u <= 400) {
                 if (var11 && var12) {
                     var10 = new OPacket33RelEntityMoveLook(this.a.bd, (byte) var7, (byte) var8, (byte) var9, (byte) var5, (byte) var6);
@@ -157,6 +160,7 @@ public class OEntityTrackerEntry {
                 double var17 = this.a.br - this.l;
                 double var19 = 0.02D;
                 double var21 = var13 * var13 + var15 * var15 + var17 * var17;
+
                 if (var21 > var19 * var19 || var21 > 0.0D && this.a.bp == 0.0D && this.a.bq == 0.0D && this.a.br == 0.0D) {
                     this.j = this.a.bp;
                     this.k = this.a.bq;
@@ -170,11 +174,13 @@ public class OEntityTrackerEntry {
             }
 
             ODataWatcher var23 = this.a.aP();
+
             if (var23.a()) {
                 this.b((new OPacket40EntityMetadata(this.a.bd, var23)));
             }
 
             int var24 = OMathHelper.d(this.a.ar() * 256.0F / 360.0F);
+
             if (Math.abs(var24 - this.i) >= 4) {
                 this.a((new OPacket35EntityHeadRotation(this.a.bd, (byte) var24)));
                 this.i = var24;
@@ -205,6 +211,7 @@ public class OEntityTrackerEntry {
 
         while (var2.hasNext()) {
             OEntityPlayerMP var3 = (OEntityPlayerMP) var2.next();
+
             var3.a.b(var1);
         }
 
@@ -233,6 +240,7 @@ public class OEntityTrackerEntry {
         if (var1 != this.a) {
             double var2 = var1.bm - (this.d / 32);
             double var4 = var1.bo - (this.f / 32);
+
             if (var2 >= (-this.b) && var2 <= this.b && var4 >= (-this.b) && var4 <= this.b) {
                 if (!this.o.contains(var1)) {
                     this.o.add(var1);
@@ -242,6 +250,7 @@ public class OEntityTrackerEntry {
                     }
 
                     OItemStack[] var6 = this.a.y();
+
                     if (var6 != null) {
                         for (int var7 = 0; var7 < var6.length; ++var7) {
                             var1.a.b((new OPacket5PlayerInventory(this.a.bd, var7, var6[var7])));
@@ -250,6 +259,7 @@ public class OEntityTrackerEntry {
 
                     if (this.a instanceof OEntityPlayer) {
                         OEntityPlayer var11 = (OEntityPlayer) this.a;
+
                         if (var11.Z()) {
                             var1.a.b((new OPacket17Sleep(this.a, 0, OMathHelper.b(this.a.bm), OMathHelper.b(this.a.bn), OMathHelper.b(this.a.bo))));
                         }
@@ -261,6 +271,7 @@ public class OEntityTrackerEntry {
 
                         while (var8.hasNext()) {
                             OPotionEffect var9 = (OPotionEffect) var8.next();
+
                             var1.a.b((new OPacket41EntityEffect(this.a.bd, var9)));
                         }
                     }
@@ -288,6 +299,7 @@ public class OEntityTrackerEntry {
         if (this.a instanceof OEntityItem) {
             OEntityItem var7 = (OEntityItem) this.a;
             OPacket21PickupSpawn var8 = new OPacket21PickupSpawn(var7);
+
             var7.bm = var8.b / 32.0D;
             var7.bn = var8.c / 32.0D;
             var7.bo = var8.d / 32.0D;
@@ -297,6 +309,7 @@ public class OEntityTrackerEntry {
         } else {
             if (this.a instanceof OEntityMinecart) {
                 OEntityMinecart var1 = (OEntityMinecart) this.a;
+
                 if (var1.minecartType == 0) {
                     return new OPacket23VehicleSpawn(this.a, 10);
                 }
@@ -320,6 +333,7 @@ public class OEntityTrackerEntry {
                 return new OPacket23VehicleSpawn(this.a, 90);
             } else if (this.a instanceof OEntityArrow) {
                 OEntity var6 = ((OEntityArrow) this.a).c;
+
                 return new OPacket23VehicleSpawn(this.a, 60, var6 != null ? var6.bd : this.a.bd);
             } else if (this.a instanceof OEntitySnowball) {
                 return new OPacket23VehicleSpawn(this.a, 61);
@@ -333,8 +347,10 @@ public class OEntityTrackerEntry {
                 return new OPacket23VehicleSpawn(this.a, 72);
             } else {
                 OPacket23VehicleSpawn var2;
+
                 if (this.a instanceof OEntitySmallFireball) {
                     OEntitySmallFireball var5 = (OEntitySmallFireball) this.a;
+
                     var2 = null;
                     if (var5.a != null) {
                         var2 = new OPacket23VehicleSpawn(this.a, 64, var5.a.bd);
@@ -348,6 +364,7 @@ public class OEntityTrackerEntry {
                     return var2;
                 } else if (this.a instanceof OEntityFireball) {
                     OEntityFireball var4 = (OEntityFireball) this.a;
+
                     var2 = null;
                     if (var4.a != null) {
                         var2 = new OPacket23VehicleSpawn(this.a, 63, ((OEntityFireball) this.a).a.bd);
@@ -368,6 +385,7 @@ public class OEntityTrackerEntry {
                 } else {
                     if (this.a instanceof OEntityFallingSand) {
                         OEntityFallingSand var3 = (OEntityFallingSand) this.a;
+
                         if (var3.a == OBlock.E.bO) {
                             return new OPacket23VehicleSpawn(this.a, 70);
                         }

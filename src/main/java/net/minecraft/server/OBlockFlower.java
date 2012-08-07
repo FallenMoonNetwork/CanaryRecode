@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockFlower extends OBlock {
 
@@ -13,6 +15,7 @@ public class OBlockFlower extends OBlock {
         this.bN = var2;
         this.a(true);
         float var4 = 0.2F;
+
         this.a(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);
     }
 

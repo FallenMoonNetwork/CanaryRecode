@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockBed;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityOcelot;
 import net.minecraft.server.OTileEntityChest;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityAIOcelotSit extends OEntityAIBase {
 
@@ -37,12 +39,12 @@ public class OEntityAIOcelotSit extends OEntityAIBase {
 
     @Override
     public void c() {
-      this.a.al().a(this.e + 0.5D, (this.f + 1), this.g + 0.5D, this.b);
-      this.c = 0;
-      this.h = 0;
-      this.d = this.a.an().nextInt(this.a.an().nextInt(1200) + 1200) + 1200;
-      this.a.C().a(false);
-   }
+        this.a.al().a(this.e + 0.5D, (this.f + 1), this.g + 0.5D, this.b);
+        this.c = 0;
+        this.h = 0;
+        this.d = this.a.an().nextInt(this.a.an().nextInt(1200) + 1200) + 1200;
+        this.a.C().a(false);
+    }
 
     @Override
     public void d() {
@@ -51,19 +53,19 @@ public class OEntityAIOcelotSit extends OEntityAIBase {
 
     @Override
     public void e() {
-      ++this.c;
-      this.a.C().a(false);
-      if(this.a.e((double)this.e, (double)(this.f + 1), (double)this.g) > 1.0D) {
-         this.a.c(false);
-         this.a.al().a(((double)this.e) + 0.5D, (this.f + 1), ((double)this.g) + 0.5D, this.b);
-         ++this.h;
-      } else if(!this.a.v_()) {
-         this.a.c(true);
-      } else {
-         --this.h;
-      }
+        ++this.c;
+        this.a.C().a(false);
+        if (this.a.e((double) this.e, (double) (this.f + 1), (double) this.g) > 1.0D) {
+            this.a.c(false);
+            this.a.al().a(((double) this.e) + 0.5D, (this.f + 1), ((double) this.g) + 0.5D, this.b);
+            ++this.h;
+        } else if (!this.a.v_()) {
+            this.a.c(true);
+        } else {
+            --this.h;
+        }
 
-   }
+    }
 
     private boolean f() {
         int var1 = (int) this.a.bn;
@@ -73,6 +75,7 @@ public class OEntityAIOcelotSit extends OEntityAIBase {
             for (int var5 = (int) this.a.bo - 8; var5 < this.a.bo + 8.0D; ++var5) {
                 if (this.a(this.a.bi, var4, var1, var5) && this.a.bi.g(var4, var1 + 1, var5)) {
                     double var6 = this.a.e((double) var4, (double) var1, (double) var5);
+
                     if (var6 < var2) {
                         this.e = var4;
                         this.f = var1;
@@ -89,8 +92,10 @@ public class OEntityAIOcelotSit extends OEntityAIBase {
     private boolean a(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.a(var2, var3, var4);
         int var6 = var1.c(var2, var3, var4);
+
         if (var5 == OBlock.au.bO) {
             OTileEntityChest var7 = (OTileEntityChest) var1.b(var2, var3, var4);
+
             if (var7.h < 1) {
                 return true;
             }

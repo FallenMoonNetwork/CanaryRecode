@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class OStructureVillagePieceWeight {
 
     public Class a;

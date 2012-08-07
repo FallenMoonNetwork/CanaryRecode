@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -22,6 +23,7 @@ import net.minecraft.server.OServerGuiCommandListener;
 import net.minecraft.server.OServerGuiFocusAdapter;
 import net.minecraft.server.OServerWindowAdapter;
 
+
 public class OServerGUI extends JComponent implements OICommandListener {
 
     public static Logger a = Logger.getLogger("Minecraft");
@@ -36,6 +38,7 @@ public class OServerGUI extends JComponent implements OICommandListener {
 
         OServerGUI var1 = new OServerGUI(var0);
         JFrame var2 = new JFrame("Minecraft server");
+
         var2.add(var1);
         var2.pack();
         var2.setLocationRelativeTo((Component) null);
@@ -60,6 +63,7 @@ public class OServerGUI extends JComponent implements OICommandListener {
 
     private JComponent a() {
         JPanel var1 = new JPanel(new BorderLayout());
+
         var1.add(new OGuiStatsComponent(this.b), "North");
         var1.add(this.b(), "Center");
         var1.setBorder(new TitledBorder(new EtchedBorder(), "Stats"));
@@ -69,6 +73,7 @@ public class OServerGUI extends JComponent implements OICommandListener {
     private JComponent b() {
         OPlayerListBox var1 = new OPlayerListBox(this.b);
         JScrollPane var2 = new JScrollPane(var1, 22, 30);
+
         var2.setBorder(new TitledBorder(new EtchedBorder(), "Players"));
         return var2;
     }
@@ -76,10 +81,13 @@ public class OServerGUI extends JComponent implements OICommandListener {
     private JComponent c() {
         JPanel var1 = new JPanel(new BorderLayout());
         JTextArea var2 = new JTextArea();
+
         a.addHandler(new OGuiLogOutputHandler(var2));
         JScrollPane var3 = new JScrollPane(var2, 22, 30);
+
         var2.setEditable(false);
         JTextField var4 = new JTextField();
+
         var4.addActionListener(new OServerGuiCommandListener(this, var4));
         var2.addFocusListener(new OServerGuiFocusAdapter(this));
         var1.add(var3, "Center");

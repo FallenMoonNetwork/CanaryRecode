@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OGenLayer;
 import net.minecraft.server.OIntCache;
+
 
 public class OGenLayerHills extends OGenLayer {
 
@@ -20,8 +22,10 @@ public class OGenLayerHills extends OGenLayer {
             for (int var8 = 0; var8 < var3; ++var8) {
                 this.a((var8 + var1), (var7 + var2));
                 int var9 = var5[var8 + 1 + (var7 + 1) * (var3 + 2)];
+
                 if (this.a(3) == 0) {
                     int var10 = var9;
+
                     if (var9 == OBiomeGenBase.d.M) {
                         var10 = OBiomeGenBase.s.M;
                     } else if (var9 == OBiomeGenBase.f.M) {
@@ -41,6 +45,7 @@ public class OGenLayerHills extends OGenLayer {
                         int var12 = var5[var8 + 1 + 1 + (var7 + 1) * (var3 + 2)];
                         int var13 = var5[var8 + 1 - 1 + (var7 + 1) * (var3 + 2)];
                         int var14 = var5[var8 + 1 + (var7 + 1 + 1) * (var3 + 2)];
+
                         if (var11 == var9 && var12 == var9 && var13 == var9 && var14 == var9) {
                             var6[var8 + var7 * var3] = var10;
                         } else {

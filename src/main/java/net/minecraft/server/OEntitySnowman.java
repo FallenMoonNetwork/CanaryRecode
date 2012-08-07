@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntityAIArrowAttack;
@@ -14,6 +15,7 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public class OEntitySnowman extends OEntityGolem {
 
@@ -48,6 +50,7 @@ public class OEntitySnowman extends OEntityGolem {
 
         int var1 = OMathHelper.b(this.bm);
         int var2 = OMathHelper.b(this.bo);
+
         if (this.bi.a(var1, var2).i() > 1.0F) {
             this.a(ODamageSource.c, 1);
         }
@@ -56,6 +59,7 @@ public class OEntitySnowman extends OEntityGolem {
             var2 = OMathHelper.b(this.bm + ((var1 % 2 * 2 - 1) * 0.25F));
             int var3 = OMathHelper.b(this.bn);
             int var4 = OMathHelper.b(this.bo + ((var1 / 2 % 2 * 2 - 1) * 0.25F));
+
             if (this.bi.a(var2, var3, var4) == 0 && this.bi.a(var2, var4).i() < 0.8F && OBlock.aS.c(this.bi, var2, var3, var4)) {
                 this.bi.e(var2, var3, var4, OBlock.aS.bO);
             }

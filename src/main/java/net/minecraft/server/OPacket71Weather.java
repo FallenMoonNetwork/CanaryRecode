@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import net.minecraft.server.OEntityLightningBolt;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONetHandler;
 import net.minecraft.server.OPacket;
+
 
 public class OPacket71Weather extends OPacket {
 

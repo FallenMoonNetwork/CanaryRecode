@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class OPacketCount {
 
@@ -17,6 +19,7 @@ public class OPacketCount {
     public static void a(int var0, long var1) {
         if (a) {
             Object var3 = d;
+
             synchronized (d) {
                 if (b.containsKey(Integer.valueOf(var0))) {
                     b.put(Integer.valueOf(var0), Long.valueOf(((Long) b.get(Integer.valueOf(var0))).longValue() + 1L));

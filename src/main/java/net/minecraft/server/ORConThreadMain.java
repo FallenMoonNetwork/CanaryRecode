@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -13,6 +14,7 @@ import net.canarymod.config.Configuration;
 import net.minecraft.server.OIServer;
 import net.minecraft.server.ORConThreadBase;
 import net.minecraft.server.ORConThreadClient;
+
 
 public class ORConThreadMain extends ORConThreadBase {
 
@@ -34,14 +36,14 @@ public class ORConThreadMain extends ORConThreadBase {
             this.g = this.h + 10;
             this.b("Setting default rcon port to " + this.g);
             // CanaryMod: changing configuration
-            Configuration.getNetConfig().getFile().setInt("rcon.port",Integer.valueOf(this.g));
+            Configuration.getNetConfig().getFile().setInt("rcon.port", Integer.valueOf(this.g));
             if (0 == this.k.length()) {
-            	Configuration.getNetConfig().getFile().setString("rcon.password","");
+                Configuration.getNetConfig().getFile().setString("rcon.password", "");
             }
             try {
-            	Configuration.getNetConfig().getFile().save();
-            } catch(IOException ioe) {
-            	this.b("Failed to save configuration.");
+                Configuration.getNetConfig().getFile().save();
+            } catch (IOException ioe) {
+                this.b("Failed to save configuration.");
             }
         }
 
@@ -62,6 +64,7 @@ public class ORConThreadMain extends ORConThreadBase {
 
         while (var1.hasNext()) {
             Entry var2 = (Entry) var1.next();
+
             if (!((ORConThreadClient) var2.getValue()).b()) {
                 var1.remove();
             }
@@ -85,8 +88,10 @@ public class ORConThreadMain extends ORConThreadBase {
 
                 try {
                     Socket var1 = this.j.accept();
+
                     var1.setSoTimeout(500);
                     ORConThreadClient var2 = new ORConThreadClient(this.b, var1);
+
                     var2.a();
                     this.l.put(var1.getRemoteSocketAddress(), var2);
                     this.f();

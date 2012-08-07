@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,6 +10,7 @@ import net.minecraft.server.OEntity;
 import net.minecraft.server.OFacing;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OTileEntity;
+
 
 public class OTileEntityPiston extends OTileEntity {
 
@@ -67,14 +69,17 @@ public class OTileEntityPiston extends OTileEntity {
         }
 
         OAxisAlignedBB var3 = OBlock.ac.b(this.k, this.l, this.m, this.n, this.a, var1, this.c);
+
         if (var3 != null) {
             List var4 = this.k.b((OEntity) null, var3);
+
             if (!var4.isEmpty()) {
                 h.addAll(var4);
                 Iterator var5 = h.iterator();
 
                 while (var5.hasNext()) {
                     OEntity var6 = (OEntity) var5.next();
+
                     var6.a((double) (var2 * OFacing.b[this.c]), (double) (var2 * OFacing.c[this.c]), (double) (var2 * OFacing.d[this.c]));
                 }
 

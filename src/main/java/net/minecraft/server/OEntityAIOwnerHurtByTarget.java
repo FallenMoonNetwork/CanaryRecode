@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAITarget;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityTameable;
+
 
 public class OEntityAIOwnerHurtByTarget extends OEntityAITarget {
 
@@ -21,6 +23,7 @@ public class OEntityAIOwnerHurtByTarget extends OEntityAITarget {
             return false;
         } else {
             OEntityLiving var1 = this.a.w_();
+
             if (var1 == null) {
                 return false;
             } else {

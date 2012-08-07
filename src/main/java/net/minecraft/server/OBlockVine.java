@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -11,6 +12,7 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OStatList;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockVine extends OBlock {
 
@@ -49,6 +51,7 @@ public class OBlockVine extends OBlock {
         float var10 = 0.0F;
         float var11 = 0.0F;
         boolean var12 = var5 > 0;
+
         if ((var5 & 2) != 0) {
             var9 = Math.max(var9, 0.0625F);
             var6 = 0.0F;
@@ -111,14 +114,19 @@ public class OBlockVine extends OBlock {
         switch (var5) {
         case 1:
             return this.d(var1.a(var2, var3 + 1, var4));
+
         case 2:
             return this.d(var1.a(var2, var3, var4 + 1));
+
         case 3:
             return this.d(var1.a(var2, var3, var4 - 1));
+
         case 4:
             return this.d(var1.a(var2 + 1, var3, var4));
+
         case 5:
             return this.d(var1.a(var2 - 1, var3, var4));
+
         default:
             return false;
         }
@@ -129,6 +137,7 @@ public class OBlockVine extends OBlock {
             return false;
         } else {
             OBlock var2 = OBlock.m[var1];
+
             return var2.b() && var2.cd.c();
         }
     }
@@ -136,9 +145,11 @@ public class OBlockVine extends OBlock {
     private boolean g(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
         int var6 = var5;
+
         if (var5 > 0) {
             for (int var7 = 0; var7 <= 3; ++var7) {
                 int var8 = 1 << var7;
+
                 if ((var5 & var8) != 0 && !this.d(var1.a(var2 + ODirection.a[var7], var3, var4 + ODirection.b[var7])) && (var1.a(var2, var3 + 1, var4) != this.bO || (var1.c(var2, var3 + 1, var4) & var8) == 0)) {
                     var6 &= ~var8;
                 }
@@ -175,7 +186,9 @@ public class OBlockVine extends OBlock {
             int var9;
             int var10;
             int var11;
-            label138: for (var9 = var2 - var6; var9 <= var2 + var6; ++var9) {
+
+            label138:
+            for (var9 = var2 - var6; var9 <= var2 + var6; ++var9) {
                 for (var10 = var4 - var6; var10 <= var4 + var6; ++var10) {
                     for (var11 = var3 - 1; var11 <= var3 + 1; ++var11) {
                         if (var1.a(var9, var11, var10) == this.bO) {
@@ -194,6 +207,7 @@ public class OBlockVine extends OBlock {
             var11 = ODirection.d[var10];
             int var12;
             int var13;
+
             if (var10 == 1 && var3 < 255 && var1.g(var2, var3 + 1, var4)) {
                 if (var8) {
                     return;
@@ -213,6 +227,7 @@ public class OBlockVine extends OBlock {
                 }
             } else {
                 int var14;
+
                 if (var10 >= 2 && var10 <= 5 && (var9 & 1 << var11) == 0) {
                     if (var8) {
                         return;
@@ -261,16 +276,20 @@ public class OBlockVine extends OBlock {
     @Override
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         byte var6 = 0;
+
         switch (var5) {
         case 2:
             var6 = 1;
             break;
+
         case 3:
             var6 = 4;
             break;
+
         case 4:
             var6 = 8;
             break;
+
         case 5:
             var6 = 2;
         }

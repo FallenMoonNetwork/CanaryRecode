@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlockCloth;
 import net.minecraft.server.OItemBlock;
 import net.minecraft.server.OItemDye;
 import net.minecraft.server.OItemStack;
+
 
 public class OItemCloth extends OItemBlock {
 

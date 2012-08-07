@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -13,6 +14,7 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OStatList;
 import net.minecraft.server.OWorld;
 
+
 public class OBlockSnow extends OBlock {
 
     protected OBlockSnow(int var1, int var2) {
@@ -24,6 +26,7 @@ public class OBlockSnow extends OBlock {
     @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4) & 7;
+
         return var5 >= 3 ? OAxisAlignedBB.b(var2 + this.bV, var3 + this.bW, var4 + this.bX, var2 + this.bY, (var3 + 0.5F), var4 + this.ca) : null;
     }
 
@@ -41,12 +44,14 @@ public class OBlockSnow extends OBlock {
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4) & 7;
         float var6 = (2 * (1 + var5)) / 16.0F;
+
         this.a(0.0F, 0.0F, 0.0F, 1.0F, var6, 1.0F);
     }
 
     @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.a(var2, var3 - 1, var4);
+
         return var5 != 0 && (var5 == OBlock.K.bO || OBlock.m[var5].a()) ? var1.d(var2, var3 - 1, var4).c() : false;
     }
 
@@ -73,6 +78,7 @@ public class OBlockSnow extends OBlock {
         double var11 = (var1.r.nextFloat() * var8) + (1.0F - var8) * 0.5D;
         double var13 = (var1.r.nextFloat() * var8) + (1.0F - var8) * 0.5D;
         OEntityItem var15 = new OEntityItem(var1, var3 + var9, var4 + var11, var5 + var13, new OItemStack(var7, 1, 0));
+
         var15.c = 10;
         var1.b(var15);
         var1.e(var3, var4, var5, 0);

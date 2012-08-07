@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -15,6 +16,7 @@ import java.util.zip.GZIPOutputStream;
 import net.minecraft.server.ONBTBase;
 import net.minecraft.server.ONBTTagCompound;
 
+
 public class OCompressedStreamTools {
 
     public OCompressedStreamTools() {
@@ -26,6 +28,7 @@ public class OCompressedStreamTools {
         boolean var5 = false;
 
         ONBTTagCompound var2;
+
         try {
             var5 = true;
             var2 = a((DataInput) var1);
@@ -62,6 +65,7 @@ public class OCompressedStreamTools {
         boolean var5 = false;
 
         ONBTTagCompound var2;
+
         try {
             var5 = true;
             var2 = a((DataInput) var1);
@@ -97,6 +101,7 @@ public class OCompressedStreamTools {
 
     public static ONBTTagCompound a(DataInput var0) throws IOException {
         ONBTBase var1 = ONBTBase.b(var0);
+
         if (var1 instanceof ONBTTagCompound) {
             return (ONBTTagCompound) var1;
         } else {

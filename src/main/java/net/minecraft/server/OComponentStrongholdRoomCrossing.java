@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -12,6 +13,7 @@ import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructurePieceTreasure;
 import net.minecraft.server.OStructureStrongholdPieces;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentStrongholdRoomCrossing extends OComponentStronghold {
 
@@ -36,6 +38,7 @@ public class OComponentStrongholdRoomCrossing extends OComponentStronghold {
 
     public static OComponentStrongholdRoomCrossing a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, -4, -1, 0, 11, 7, 11, var5);
+
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentStrongholdRoomCrossing(var6, var1, var7, var5) : null;
     }
 
@@ -50,6 +53,7 @@ public class OComponentStrongholdRoomCrossing extends OComponentStronghold {
             this.a(var1, var3, 0, 1, 4, 0, 3, 6, 0, 0, false);
             this.a(var1, var3, 10, 1, 4, 10, 3, 6, 0, 0, false);
             int var4;
+
             switch (this.b) {
             case 0:
                 this.a(var1, OBlock.bm.bO, 0, 5, 1, 5, var3);
@@ -68,6 +72,7 @@ public class OComponentStrongholdRoomCrossing extends OComponentStronghold {
                 this.a(var1, OBlock.ak.bO, 0, 5, 1, 4, var3);
                 this.a(var1, OBlock.ak.bO, 0, 5, 1, 6, var3);
                 break;
+
             case 1:
                 for (var4 = 0; var4 < 5; ++var4) {
                     this.a(var1, OBlock.bm.bO, 0, 3, 1, 3 + var4, var3);
@@ -81,6 +86,7 @@ public class OComponentStrongholdRoomCrossing extends OComponentStronghold {
                 this.a(var1, OBlock.bm.bO, 0, 5, 3, 5, var3);
                 this.a(var1, OBlock.A.bO, 0, 5, 4, 5, var3);
                 break;
+
             case 2:
                 for (var4 = 1; var4 <= 9; ++var4) {
                     this.a(var1, OBlock.w.bO, 0, 1, 3, var4, var3);

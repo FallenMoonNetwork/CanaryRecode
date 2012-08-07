@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -8,6 +9,7 @@ import net.minecraft.server.OChunk;
 import net.minecraft.server.ONetHandler;
 import net.minecraft.server.OPacket;
 import net.minecraft.server.OWorld;
+
 
 public class OPacket52MultiBlockChange extends OPacket {
 
@@ -45,6 +47,7 @@ public class OPacket52MultiBlockChange extends OPacket {
                     int var11 = var3[var10] >> 12 & 15;
                     int var12 = var3[var10] >> 8 & 15;
                     int var13 = var3[var10] & 255;
+
                     var9.writeShort(var3[var10]);
                     var9.writeShort((short) ((var7.a(var11, var13, var12) & 4095) << 4 | var7.c(var11, var13, var12) & 15));
                 }
@@ -67,6 +70,7 @@ public class OPacket52MultiBlockChange extends OPacket {
         this.b = var1.readInt();
         this.d = var1.readShort() & '\uffff';
         int var2 = var1.readInt();
+
         if (var2 > 0) {
             this.c = new byte[var2];
             var1.readFully(this.c);

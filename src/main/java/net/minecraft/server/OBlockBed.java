@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -13,6 +14,7 @@ import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockBed extends OBlockDirectional {
 
@@ -29,8 +31,10 @@ public class OBlockBed extends OBlockDirectional {
             return true;
         } else {
             int var6 = var1.c(var2, var3, var4);
+
             if (!d(var6)) {
                 int var7 = b(var6);
+
                 var2 += a[var7][0];
                 var4 += a[var7][1];
                 if (var1.a(var2, var3, var4) != this.bO) {
@@ -44,8 +48,10 @@ public class OBlockBed extends OBlockDirectional {
                 double var8 = var2 + 0.5D;
                 double var10 = var3 + 0.5D;
                 double var12 = var4 + 0.5D;
+
                 var1.e(var2, var3, var4, 0);
                 int var14 = b(var6);
+
                 var2 += a[var14][0];
                 var4 += a[var14][1];
                 if (var1.a(var2, var3, var4) == this.bO) {
@@ -64,8 +70,10 @@ public class OBlockBed extends OBlockDirectional {
 
                     while (var15.hasNext()) {
                         OEntityPlayer var16 = (OEntityPlayer) var15.next();
+
                         if (var16.Z()) {
                             OChunkCoordinates var17 = var16.F;
+
                             if (var17.a == var2 && var17.b == var3 && var17.c == var4) {
                                 var18 = var16;
                             }
@@ -81,6 +89,7 @@ public class OBlockBed extends OBlockDirectional {
                 }
 
                 OEnumStatus var19 = var5.a(var2, var3, var4);
+
                 if (var19 == OEnumStatus.a) {
                     a(var1, var2, var3, var4, true);
                     return true;
@@ -104,6 +113,7 @@ public class OBlockBed extends OBlockDirectional {
         } else {
             int var3 = b(var2);
             int var4 = ODirection.h[var3][var1];
+
             return d(var2) ? (var4 == 2 ? this.bN + 2 + 16 : (var4 != 5 && var4 != 4 ? this.bN + 1 : this.bN + 1 + 16)) : (var4 == 3 ? this.bN - 1 + 16 : (var4 != 5 && var4 != 4 ? this.bN : this.bN + 16));
         }
     }
@@ -132,6 +142,7 @@ public class OBlockBed extends OBlockDirectional {
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
         int var7 = b(var6);
+
         if (d(var6)) {
             if (var1.a(var2 - a[var7][0], var3, var4 - a[var7][1]) != this.bO) {
                 var1.e(var2, var3, var4, 0);
@@ -164,6 +175,7 @@ public class OBlockBed extends OBlockDirectional {
 
     public static void a(OWorld var0, int var1, int var2, int var3, boolean var4) {
         int var5 = var0.c(var1, var2, var3);
+
         if (var4) {
             var5 |= 4;
         } else {

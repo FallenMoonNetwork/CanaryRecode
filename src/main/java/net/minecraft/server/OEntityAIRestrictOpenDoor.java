@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityCreature;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OVillage;
 import net.minecraft.server.OVillageDoorInfo;
+
 
 public class OEntityAIRestrictOpenDoor extends OEntityAIBase {
 
@@ -22,6 +24,7 @@ public class OEntityAIRestrictOpenDoor extends OEntityAIBase {
             return false;
         } else {
             OVillage var1 = this.a.bi.A.a(OMathHelper.b(this.a.bm), OMathHelper.b(this.a.bn), OMathHelper.b(this.a.bo), 16);
+
             if (var1 == null) {
                 return false;
             } else {

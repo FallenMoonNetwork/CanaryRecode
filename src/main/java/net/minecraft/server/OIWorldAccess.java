@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OTileEntity;
+
 
 public interface OIWorldAccess {
 

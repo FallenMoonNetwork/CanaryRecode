@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanarySlime;
 import net.canarymod.hook.entity.MobTargetHook;
@@ -13,6 +14,7 @@ import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
 
+
 public class OEntitySlime extends OEntityLiving implements OIMob {
 
     public float a;
@@ -25,6 +27,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         super(var1);
         this.ae = "/mob/slime.png";
         int var2 = 1 << this.bS.nextInt(3);
+
         this.bF = 0.0F;
         this.d = this.bS.nextInt(20) + 10;
         this.c(var2);
@@ -58,6 +61,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
     @Override
     public int d() {
         int var1 = this.L();
+
         return var1 * var1;
     }
 
@@ -95,6 +99,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
         this.b += (this.a - this.b) * 0.5F;
         this.c = this.b;
         boolean var1 = this.bx;
+
         super.F_();
         if (this.bx && !var1) {
             int var2 = this.L();
@@ -104,6 +109,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
                 float var5 = this.bS.nextFloat() * 0.5F + 0.5F;
                 float var6 = OMathHelper.a(var4) * var2 * 0.5F * var5;
                 float var7 = OMathHelper.b(var4) * var2 * 0.5F * var5;
+
                 this.bi.a(this.A(), this.bm + var6, this.bw.b, this.bo + var7, 0.0D, 0.0D, 0.0D);
             }
 
@@ -121,8 +127,10 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
     protected void d_() {
         this.aG();
         OEntityPlayer var1 = this.bi.b(this, 16.0D);
-        if(var1 != null){
+
+        if (var1 != null) {
             MobTargetHook hook = new MobTargetHook(getCanaryEntityLiving(), var1.getCanaryEntityLiving().getPlayer());
+
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
                 this.a(var1, 10.0F, 20.0F);
@@ -167,6 +175,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
     @Override
     public void X() {
         int var1 = this.L();
+
         if (!this.bi.F && var1 > 1 && this.aD() <= 0) {
             int var2 = 2 + this.bS.nextInt(3);
 
@@ -174,6 +183,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
                 float var4 = ((var3 % 2) - 0.5F) * var1 / 4.0F;
                 float var5 = ((var3 / 2) - 0.5F) * var1 / 4.0F;
                 OEntitySlime var6 = this.C();
+
                 var6.c(var1 / 2);
                 var6.c(this.bm + var4, this.bn + 0.5D, this.bo + var5, this.bS.nextFloat() * 360.0F, 0.0F);
                 this.bi.b(var6);
@@ -187,6 +197,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
     public void a_(OEntityPlayer var1) {
         if (this.G()) {
             int var2 = this.L();
+
             if (this.h(var1) && this.i(var1) < 0.6D * var2 && var1.a(ODamageSource.a(this), this.H())) {
                 this.bi.a(this, "mob.slimeattack", 1.0F, (this.bS.nextFloat() - this.bS.nextFloat()) * 0.2F + 1.0F);
             }
@@ -220,6 +231,7 @@ public class OEntitySlime extends OEntityLiving implements OIMob {
     @Override
     public boolean l() {
         OChunk var1 = this.bi.c(OMathHelper.b(this.bm), OMathHelper.b(this.bo));
+
         return (this.L() == 1 || this.bi.q > 0) && this.bS.nextInt(10) == 0 && var1.a(987234911L).nextInt(10) == 0 && this.bn < 40.0D ? super.l() : false;
     }
 

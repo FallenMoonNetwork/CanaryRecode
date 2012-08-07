@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Arrays;
 
 import net.canarymod.api.inventory.CanaryItem;
@@ -10,17 +11,18 @@ import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItemStack;
 
+
 public class OInventoryCrafting implements OIInventory {
 
     private OItemStack[] a;
     private int b;
     public OContainer c; // CanaryMod private -> public
-    private String name = "container.crafting"; //CanaryMod
-
+    private String name = "container.crafting"; // CanaryMod
 
     public OInventoryCrafting(OContainer var1, int var2, int var3) {
         super();
         int var4 = var2 * var3;
+
         this.a = new OItemStack[var4];
         this.c = var1;
         this.b = var2;
@@ -31,12 +33,13 @@ public class OInventoryCrafting implements OIInventory {
     }
     
     public OItemStack g_(int var1) {
-        return var1 >= this.c()?null:this.a[var1];
+        return var1 >= this.c() ? null : this.a[var1];
     }
 
     public OItemStack b(int var1, int var2) {
-        if(var1 >= 0 && var1 < this.b) {
+        if (var1 >= 0 && var1 < this.b) {
             int var3 = var1 + var2 * this.b;
+
             return this.g_(var3);
         } else {
             return null;
@@ -51,8 +54,9 @@ public class OInventoryCrafting implements OIInventory {
      * Get stack from slot
      */
     public OItemStack b(int var1) {
-        if(this.a[var1] != null) {
+        if (this.a[var1] != null) {
             OItemStack var2 = this.a[var1];
+
             this.a[var1] = null;
             return var2;
         } else {
@@ -60,25 +64,25 @@ public class OInventoryCrafting implements OIInventory {
         }
     }
 
-
     /**
      * decrease item stack size
      */
     public OItemStack a(int var1, int var2) {
-        if(this.a[var1] != null) {
+        if (this.a[var1] != null) {
             OItemStack var3;
-            if(this.a[var1].a <= var2) {
+
+            if (this.a[var1].a <= var2) {
                 var3 = this.a[var1];
                 this.a[var1] = null;
-                this.c.a((OIInventory)this);
+                this.c.a((OIInventory) this);
                 return var3;
             } else {
                 var3 = this.a[var1].a(var2);
-                if(this.a[var1].a == 0) {
+                if (this.a[var1].a == 0) {
                     this.a[var1] = null;
                 }
                 
-                this.c.a((OIInventory)this);
+                this.c.a((OIInventory) this);
                 return var3;
             }
         } else {
@@ -88,7 +92,7 @@ public class OInventoryCrafting implements OIInventory {
     
     public void a(int var1, OItemStack var2) {
         this.a[var1] = var2;
-        this.c.a((OIInventory)this);
+        this.c.a((OIInventory) this);
     }
     
     public int a() {
@@ -101,13 +105,11 @@ public class OInventoryCrafting implements OIInventory {
         return true;
     }
     
-    public void f() {
-    }
+    public void f() {}
     
-    public void g() {
-    }
+    public void g() {}
 
-  //CanaryMod start - Container
+    // CanaryMod start - Container
     @Override
     public OItemStack[] getContents() {
         return Arrays.copyOf(this.a, c());
@@ -120,8 +122,9 @@ public class OInventoryCrafting implements OIInventory {
 
     @Override
     public OItemStack getSlot(int index) {
-//        OItemStack stack = this.b(index);
+        // OItemStack stack = this.b(index);
         OItemStack stack = a[index];
+
         if (stack != null) {
             return stack;
         }
@@ -155,13 +158,13 @@ public class OInventoryCrafting implements OIInventory {
 
     @Override
     public void clearContents() {
-        Arrays.fill(a, (OItemStack)null);
+        Arrays.fill(a, (OItemStack) null);
     }
 
     @Override
     public Item getItem(int id, int amount) {
-        for(OItemStack stack : getContents()) {
-            if(stack.c == id && stack.a == amount) {
+        for (OItemStack stack : getContents()) {
+            if (stack.c == id && stack.a == amount) {
                 return stack.getCanaryItem();
             }
         }
@@ -170,8 +173,8 @@ public class OInventoryCrafting implements OIInventory {
 
     @Override
     public Item getItem(int id) {
-        for(OItemStack stack : getContents()) {
-            if(stack != null && stack.c == id) {
+        for (OItemStack stack : getContents()) {
+            if (stack != null && stack.c == id) {
                 return stack.getCanaryItem();
             }
         }
@@ -180,8 +183,9 @@ public class OInventoryCrafting implements OIInventory {
 
     @Override
     public Item removeItem(Item item) {
-        if(a[item.getSlot()] != null && a[item.getSlot()].c == item.getId()) {
+        if (a[item.getSlot()] != null && a[item.getSlot()].c == item.getId()) {
             Item toRet = a[item.getSlot()].getCanaryItem();
+
             a[item.getSlot()] = null;
             return toRet;
         }
@@ -190,9 +194,10 @@ public class OInventoryCrafting implements OIInventory {
 
     @Override
     public Item removeItem(int id) {
-        for(int index = 0; index < a.length; index++) {
-            if(a[index].c == id) {
+        for (int index = 0; index < a.length; index++) {
+            if (a[index].c == id) {
                 Item toRet = a[index].getCanaryItem();
+
                 a[index] = null;
                 return toRet;
             }
@@ -223,7 +228,8 @@ public class OInventoryCrafting implements OIInventory {
     @Override
     public OItemStack decreaseItemStackSize(int arg0, int arg1) {
         OItemStack stack = a(arg0, arg1);
-        if(stack != null) {
+
+        if (stack != null) {
             return stack;
         }
         return null;
@@ -233,6 +239,7 @@ public class OInventoryCrafting implements OIInventory {
     public int getInventoryStackLimit() {
         return a();
     }
+
     @Override
     public void addItem(int itemId, int amount) {
         int remaining = amount;
@@ -243,11 +250,7 @@ public class OInventoryCrafting implements OIInventory {
             //
             // Could do with a cleanup into a single function, 
             // but this works for now.
-            if (((itemId >= 256 && itemId <= 258) || 
-                 (itemId >= 267 && itemId <= 279) || 
-                 (itemId >= 283 && itemId <= 286) ||
-                 (itemId >= 298 && itemId <= 317) ||
-                 (itemId == 261))) {
+            if (((itemId >= 256 && itemId <= 258) || (itemId >= 267 && itemId <= 279) || (itemId >= 283 && itemId <= 286) || (itemId >= 298 && itemId <= 317) || (itemId == 261))) {
                 int targetSlot = getEmptySlot();
                 
                 if (targetSlot == -1) {
@@ -263,6 +266,7 @@ public class OInventoryCrafting implements OIInventory {
                     if (i != null) {
                         int freeSpace = 64 - i.getAmount();
                         int toAdd = 0;
+
                         if (remaining > freeSpace) {
                             toAdd = freeSpace;
                             remaining -= freeSpace;
@@ -321,6 +325,7 @@ public class OInventoryCrafting implements OIInventory {
     @Override
     public int getEmptySlot() {
         OItemStack[] contents = getContents();
+
         for (int i = 0; contents.length > i; i++) {
             if (contents[i] != null) {
                 continue;
@@ -334,6 +339,7 @@ public class OInventoryCrafting implements OIInventory {
     @Override
     public boolean hasItemStack(int itemId, int amount) {
         int var2;
+
         for (var2 = 0; var2 < this.a.length; ++var2) {
             if (this.a[var2] != null && this.a[var2].c == itemId && this.a[var2].a == amount) {
                 return true;
@@ -345,6 +351,7 @@ public class OInventoryCrafting implements OIInventory {
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
         int var2;
+
         for (var2 = 0; var2 < this.a.length; ++var2) {
             if (this.a[var2] != null && this.a[var2].c == itemId && (this.a[var2].a >= minAmount || this.a[var2].a <= maxAmount)) {
                 return true;
@@ -352,5 +359,5 @@ public class OInventoryCrafting implements OIInventory {
         }
         return false;
     }
-    //CanaryMod end - Container
+    // CanaryMod end - Container
 }

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.OEntity;
@@ -11,6 +12,7 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OPotion;
 import net.minecraft.server.OPotionEffect;
 import net.minecraft.server.OWorld;
+
 
 public class OEntitySpider extends OEntityMob {
 
@@ -61,16 +63,18 @@ public class OEntitySpider extends OEntityMob {
         float var1 = this.b(1.0F);
         double var2 = 16.0D;
         
-        //CanaryMod start - onMobTarget
+        // CanaryMod start - onMobTarget
         OEntityPlayer entityplayer = this.bi.b(this, var2);
-        if(entityplayer != null){
+
+        if (entityplayer != null) {
             MobTargetHook hook = new MobTargetHook(getCanaryEntityLiving(), ((OEntityPlayerMP) entityplayer).getPlayer());
+
             Canary.hooks().callHook(hook);
-            if(hook.isCanceled()){
+            if (hook.isCanceled()) {
                 return null;
             }
         }
-        //CanaryMod end
+        // CanaryMod end
         
         if (var1 < 0.5F) {
             return entityplayer;
@@ -97,6 +101,7 @@ public class OEntitySpider extends OEntityMob {
     @Override
     protected void a(OEntity var1, float var2) {
         float var3 = this.b(1.0F);
+
         if (var3 > 0.5F && this.bS.nextInt(100) == 0) {
             this.d = null;
         } else {
@@ -105,6 +110,7 @@ public class OEntitySpider extends OEntityMob {
                     double var4 = var1.bm - this.bm;
                     double var6 = var1.bo - this.bo;
                     float var8 = OMathHelper.a(var4 * var4 + var6 * var6);
+
                     this.bp = var4 / var8 * 0.5D * 0.800000011920929D + this.bp * 0.20000000298023224D;
                     this.br = var6 / var8 * 0.5D * 0.800000011920929D + this.br * 0.20000000298023224D;
                     this.bq = 0.4000000059604645D;
@@ -146,8 +152,7 @@ public class OEntitySpider extends OEntityMob {
     }
 
     @Override
-    public void u() {
-    }
+    public void u() {}
 
     @Override
     public OEnumCreatureAttribute v() {
@@ -165,6 +170,7 @@ public class OEntitySpider extends OEntityMob {
 
     public void a(boolean var1) {
         byte var2 = this.bY.a(16);
+
         if (var1) {
             var2 = (byte) (var2 | 1);
         } else {

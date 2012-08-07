@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEmpty3;
 import net.minecraft.server.OEnchantment;
 import net.minecraft.server.OIEnchantmentModifier;
+
 
 final class OEnchantmentModifierDamage implements OIEnchantmentModifier {
 

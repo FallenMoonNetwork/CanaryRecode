@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
+
 
 public class OItemCoal extends OItem {
 

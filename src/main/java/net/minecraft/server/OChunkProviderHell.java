@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBiomeGenBase;
@@ -20,6 +21,7 @@ import net.minecraft.server.OWorldGenFlowers;
 import net.minecraft.server.OWorldGenGlowStone1;
 import net.minecraft.server.OWorldGenGlowStone2;
 import net.minecraft.server.OWorldGenHellLava;
+
 
 public class OChunkProviderHell implements OIChunkProvider {
 
@@ -63,6 +65,7 @@ public class OChunkProviderHell implements OIChunkProvider {
         int var6 = var4 + 1;
         byte var7 = 17;
         int var8 = var4 + 1;
+
         this.p = this.a(this.p, var1 * var4, 0, var2 * var4, var6, var7, var8);
 
         for (int var9 = 0; var9 < var4; ++var9) {
@@ -94,6 +97,7 @@ public class OChunkProviderHell implements OIChunkProvider {
 
                             for (int var50 = 0; var50 < 4; ++var50) {
                                 int var51 = 0;
+
                                 if (var11 * 8 + var30 < var5) {
                                     var51 = OBlock.D.bO;
                                 }
@@ -125,6 +129,7 @@ public class OChunkProviderHell implements OIChunkProvider {
     public void b(int var1, int var2, byte[] var3) {
         byte var4 = 64;
         double var5 = 0.03125D;
+
         this.q = this.m.a(this.q, var1 * 16, var2 * 16, 0, 16, 16, 1, var5, var5, 1.0D);
         this.r = this.m.a(this.r, var1 * 16, 109, var2 * 16, 16, 1, 16, var5, 1.0D, var5);
         this.s = this.n.a(this.s, var1 * 16, var2 * 16, 0, 16, 16, 1, var5 * 2.0D, var5 * 2.0D, var5 * 2.0D);
@@ -140,12 +145,14 @@ public class OChunkProviderHell implements OIChunkProvider {
 
                 for (int var15 = 127; var15 >= 0; --var15) {
                     int var16 = (var8 * 16 + var7) * 128 + var15;
+
                     if (var15 >= 127 - this.i.nextInt(5)) {
                         var3[var16] = (byte) OBlock.z.bO;
                     } else if (var15 <= 0 + this.i.nextInt(5)) {
                         var3[var16] = (byte) OBlock.z.bO;
                     } else {
                         byte var17 = var3[var16];
+
                         if (var17 == 0) {
                             var12 = -1;
                         } else if (var17 == OBlock.bb.bO) {
@@ -204,6 +211,7 @@ public class OChunkProviderHell implements OIChunkProvider {
     public OChunk b(int var1, int var2) {
         this.i.setSeed(var1 * 341873128712L + var2 * 132897987541L);
         byte[] var3 = new byte['\u8000'];
+
         this.a(var1, var2, var3);
         this.b(var1, var2, var3);
         this.t.a(this, this.o, var1, var2, var3);
@@ -227,6 +235,7 @@ public class OChunkProviderHell implements OIChunkProvider {
 
         double var8 = 684.412D;
         double var10 = 2053.236D;
+
         this.g = this.a.a(this.g, var2, var3, var4, var5, 1, var7, 1.0D, 0.0D, 1.0D);
         this.h = this.b.a(this.h, var2, var3, var4, var5, 1, var7, 100.0D, 0.0D, 100.0D);
         this.d = this.l.a(this.d, var2, var3, var4, var5, var6, var7, var8 / 80.0D, var10 / 60.0D, var8 / 80.0D);
@@ -237,9 +246,11 @@ public class OChunkProviderHell implements OIChunkProvider {
         double[] var14 = new double[var6];
 
         int var15;
+
         for (var15 = 0; var15 < var6; ++var15) {
             var14[var15] = Math.cos(var15 * 3.141592653589793D * 6.0D / var6) * 2.0D;
             double var16 = var15;
+
             if (var15 > var6 / 2) {
                 var16 = (var6 - 1 - var15);
             }
@@ -253,12 +264,14 @@ public class OChunkProviderHell implements OIChunkProvider {
         for (var15 = 0; var15 < var5; ++var15) {
             for (int var18 = 0; var18 < var7; ++var18) {
                 double var19 = (this.g[var13] + 256.0D) / 512.0D;
+
                 if (var19 > 1.0D) {
                     var19 = 1.0D;
                 }
 
                 double var21 = 0.0D;
                 double var23 = this.h[var13] / 8000.0D;
+
                 if (var23 < 0.0D) {
                     var23 = -var23;
                 }
@@ -291,6 +304,7 @@ public class OChunkProviderHell implements OIChunkProvider {
                     double var30 = this.e[var12] / 512.0D;
                     double var32 = this.f[var12] / 512.0D;
                     double var34 = (this.d[var12] / 10.0D + 1.0D) / 2.0D;
+
                     if (var34 < 0.0D) {
                         var26 = var30;
                     } else if (var34 > 1.0D) {
@@ -301,6 +315,7 @@ public class OChunkProviderHell implements OIChunkProvider {
 
                     var26 -= var28;
                     double var36;
+
                     if (var25 > var6 - 4) {
                         var36 = ((var25 - (var6 - 4)) / 3.0F);
                         var26 = var26 * (1.0D - var36) + -10.0D * var36;
@@ -338,12 +353,14 @@ public class OChunkProviderHell implements OIChunkProvider {
         OBlockSand.a = true;
         int var4 = var2 * 16;
         int var5 = var3 * 16;
+
         this.c.a(this.o, this.i, var2, var3);
 
         int var6;
         int var7;
         int var8;
         int var9;
+
         for (var6 = 0; var6 < 8; ++var6) {
             var7 = var4 + this.i.nextInt(16) + 8;
             var8 = this.i.nextInt(120) + 4;
@@ -354,6 +371,7 @@ public class OChunkProviderHell implements OIChunkProvider {
         var6 = this.i.nextInt(this.i.nextInt(10) + 1) + 1;
 
         int var10;
+
         for (var7 = 0; var7 < var6; ++var7) {
             var8 = var4 + this.i.nextInt(16) + 8;
             var9 = this.i.nextInt(120) + 4;
@@ -415,6 +433,7 @@ public class OChunkProviderHell implements OIChunkProvider {
             return this.c.b();
         } else {
             OBiomeGenBase var5 = this.o.a(var2, var4);
+
             return var5 == null ? null : var5.a(var1);
         }
     }

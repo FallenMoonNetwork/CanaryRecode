@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,6 +8,7 @@ import java.util.List;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.ONetHandler;
 import net.minecraft.server.OPacket;
+
 
 public class OPacket104WindowItems extends OPacket {
 
@@ -24,6 +26,7 @@ public class OPacket104WindowItems extends OPacket {
 
         for (int var3 = 0; var3 < this.b.length; ++var3) {
             OItemStack var4 = (OItemStack) var2.get(var3);
+
             this.b[var3] = var4 == null ? null : var4.j();
         }
 
@@ -33,6 +36,7 @@ public class OPacket104WindowItems extends OPacket {
     public void a(DataInputStream var1) throws IOException {
         this.a = var1.readByte();
         short var2 = var1.readShort();
+
         this.b = new OItemStack[var2];
 
         for (int var3 = 0; var3 < var2; ++var3) {

@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OWorldGenSwamp extends OWorldGenerator {
 
@@ -15,18 +17,22 @@ public class OWorldGenSwamp extends OWorldGenerator {
     @Override
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         int var6;
+
         for (var6 = var2.nextInt(4) + 5; var1.d(var3, var4 - 1, var5) == OMaterial.g; --var4) {
             ;
         }
 
         boolean var7 = true;
+
         if (var4 >= 1 && var4 + var6 + 1 <= 128) {
             int var8;
             int var10;
             int var11;
             int var12;
+
             for (var8 = var4; var8 <= var4 + 1 + var6; ++var8) {
                 byte var9 = 1;
+
                 if (var8 == var4) {
                     var9 = 0;
                 }
@@ -62,6 +68,7 @@ public class OWorldGenSwamp extends OWorldGenerator {
 
                     int var13;
                     int var16;
+
                     for (var16 = var4 - 3 + var6; var16 <= var4 + var6; ++var16) {
                         var10 = var16 - (var4 + var6);
                         var11 = 2 - var10 / 2;
@@ -71,6 +78,7 @@ public class OWorldGenSwamp extends OWorldGenerator {
 
                             for (int var14 = var5 - var11; var14 <= var5 + var11; ++var14) {
                                 int var15 = var14 - var5;
+
                                 if ((Math.abs(var13) != var11 || Math.abs(var15) != var11 || var2.nextInt(2) != 0 && var10 != 0) && !OBlock.n[var1.a(var12, var16, var14)]) {
                                     this.a(var1, var12, var16, var14, OBlock.K.bO);
                                 }

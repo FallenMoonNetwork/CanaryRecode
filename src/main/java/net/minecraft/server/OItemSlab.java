@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockStep;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItemBlock;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+
 
 public class OItemSlab extends OItemBlock {
 
@@ -23,6 +25,7 @@ public class OItemSlab extends OItemBlock {
     @Override
     public String a(OItemStack var1) {
         int var2 = var1.h();
+
         if (var2 < 0 || var2 >= OBlockStep.a.length) {
             var2 = 0;
         }
@@ -41,6 +44,7 @@ public class OItemSlab extends OItemBlock {
             int var9 = var3.c(var4, var5, var6);
             int var10 = var9 & 7;
             boolean var11 = (var9 & 8) != 0;
+
             if ((var7 == 1 && !var11 || var7 == 0 && var11) && var8 == OBlock.ak.bO && var10 == var1.h()) {
                 if (var3.a(OBlock.aj.e(var3, var4, var5, var6)) && var3.b(var4, var5, var6, OBlock.aj.bO, var10)) {
                     var3.a((var4 + 0.5F), (var5 + 0.5F), (var6 + 0.5F), OBlock.aj.cb.c(), (OBlock.aj.cb.a() + 1.0F) / 2.0F, OBlock.aj.cb.b() * 0.8F);
@@ -82,6 +86,7 @@ public class OItemSlab extends OItemBlock {
         int var7 = var2.a(var3, var4, var5);
         int var8 = var2.c(var3, var4, var5);
         int var9 = var8 & 7;
+
         if (var7 == OBlock.ak.bO && var9 == var0.h()) {
             if (var2.a(OBlock.aj.e(var2, var3, var4, var5)) && var2.b(var3, var4, var5, OBlock.aj.bO, var9)) {
                 var2.a((var3 + 0.5F), (var4 + 0.5F), (var5 + 0.5F), OBlock.aj.cb.c(), (OBlock.aj.cb.a() + 1.0F) / 2.0F, OBlock.aj.cb.b() * 0.8F);

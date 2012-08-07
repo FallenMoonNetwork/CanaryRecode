@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OPotion;
+
 
 public class OPotionHealth extends OPotion {
 

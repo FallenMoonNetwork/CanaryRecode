@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMapCoord;
 import net.minecraft.server.OMapData;
+
 
 public class OMapInfo {
 
@@ -35,19 +37,23 @@ public class OMapInfo {
     public byte[] a(OItemStack var1) {
         int var3;
         int var10;
+
         if (--this.f < 0) {
             this.f = 4;
             byte[] var2 = new byte[this.d.i.size() * 3 + 1];
+
             var2[0] = 1;
 
             for (var3 = 0; var3 < this.d.i.size(); ++var3) {
                 OMapCoord var4 = (OMapCoord) this.d.i.get(var3);
+
                 var2[var3 * 3 + 1] = (byte) (var4.a + (var4.d & 15) * 16);
                 var2[var3 * 3 + 2] = var4.b;
                 var2[var3 * 3 + 3] = var4.c;
             }
 
             boolean var9 = true;
+
             if (this.g != null && this.g.length == var2.length) {
                 for (var10 = 0; var10 < var2.length; ++var10) {
                     if (var2[var10] != this.g[var10]) {
@@ -72,6 +78,7 @@ public class OMapInfo {
                 var10 = this.c[var3] - this.b[var3] + 1;
                 int var5 = this.b[var3];
                 byte[] var6 = new byte[var10 + 3];
+
                 var6[0] = 0;
                 var6[1] = (byte) var3;
                 var6[2] = (byte) var5;

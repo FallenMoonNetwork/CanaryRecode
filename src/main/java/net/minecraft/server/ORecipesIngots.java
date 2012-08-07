@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OCraftingManager;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
+
 
 public class ORecipesIngots {
 
@@ -18,6 +20,7 @@ public class ORecipesIngots {
         for (int var2 = 0; var2 < this.a.length; ++var2) {
             OBlock var3 = (OBlock) this.a[var2][0];
             OItemStack var4 = (OItemStack) this.a[var2][1];
+
             var1.a(new OItemStack(var3), new Object[] { "###", "###", "###", Character.valueOf('#'), var4 });
             var1.a(var4, new Object[] { "#", Character.valueOf('#'), var3 });
         }

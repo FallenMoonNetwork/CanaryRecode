@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,7 @@ import net.minecraft.server.OVec3D;
 import net.minecraft.server.OVillageAgressor;
 import net.minecraft.server.OVillageDoorInfo;
 import net.minecraft.server.OWorld;
+
 
 public class OVillage {
 
@@ -46,10 +48,13 @@ public class OVillage {
         }
 
         int var2 = this.h / 16;
+
         if (this.j < var2 && this.b.size() > 20 && this.a.r.nextInt(7000) == 0) {
             OVec3D var3 = this.a(OMathHelper.d(this.d.a), OMathHelper.d(this.d.b), OMathHelper.d(this.d.c), 2, 4, 2);
+
             if (var3 != null) {
                 OEntityIronGolem var4 = new OEntityIronGolem(this.a);
+
                 var4.c(var3.a, var3.b, var3.c);
                 this.a.b(var4);
                 ++this.j;
@@ -63,6 +68,7 @@ public class OVillage {
             int var8 = var1 + this.a.r.nextInt(16) - 8;
             int var9 = var2 + this.a.r.nextInt(6) - 3;
             int var10 = var3 + this.a.r.nextInt(16) - 8;
+
             if (this.a(var8, var9, var10) && this.b(var8, var9, var10, var4, var5, var6)) {
                 return OVec3D.b(var8, var9, var10);
             }
@@ -94,11 +100,13 @@ public class OVillage {
 
     private void h() {
         List var1 = this.a.a(OEntityIronGolem.class, OAxisAlignedBB.b((this.d.a - this.e), (this.d.b - 4), (this.d.c - this.e), (this.d.a + this.e), (this.d.b + 4), (this.d.c + this.e)));
+
         this.j = var1.size();
     }
 
     private void i() {
         List var1 = this.a.a(OEntityVillager.class, OAxisAlignedBB.b((this.d.a - this.e), (this.d.b - 4), (this.d.c - this.e), (this.d.a + this.e), (this.d.b + 4), (this.d.c + this.e)));
+
         this.h = var1.size();
     }
 
@@ -138,6 +146,7 @@ public class OVillage {
         while (var6.hasNext()) {
             OVillageDoorInfo var7 = (OVillageDoorInfo) var6.next();
             int var8 = var7.a(var1, var2, var3);
+
             if (var8 < var5) {
                 var4 = var7;
                 var5 = var8;
@@ -155,6 +164,7 @@ public class OVillage {
         while (var6.hasNext()) {
             OVillageDoorInfo var7 = (OVillageDoorInfo) var6.next();
             int var8 = var7.a(var1, var2, var3);
+
             if (var8 > 256) {
                 var8 *= 1000;
             } else {
@@ -177,6 +187,7 @@ public class OVillage {
             Iterator var4 = this.b.iterator();
 
             OVillageDoorInfo var5;
+
             do {
                 if (!var4.hasNext()) {
                     return null;
@@ -206,6 +217,7 @@ public class OVillage {
         Iterator var2 = this.i.iterator();
 
         OVillageAgressor var3;
+
         do {
             if (!var2.hasNext()) {
                 this.i.add(new OVillageAgressor(this, var1, this.g));
@@ -225,6 +237,7 @@ public class OVillage {
         for (int var5 = 0; var5 < this.i.size(); ++var5) {
             OVillageAgressor var6 = (OVillageAgressor) this.i.get(var5);
             double var7 = var6.a.j(var1);
+
             if (var7 <= var2) {
                 var4 = var6;
                 var2 = var7;
@@ -239,6 +252,7 @@ public class OVillage {
 
         while (var1.hasNext()) {
             OVillageAgressor var2 = (OVillageAgressor) var1.next();
+
             if (!var2.a.aE() || Math.abs(this.g - var2.b) > 300) {
                 var1.remove();
             }
@@ -253,6 +267,7 @@ public class OVillage {
 
         while (var3.hasNext()) {
             OVillageDoorInfo var4 = (OVillageDoorInfo) var3.next();
+
             if (var2) {
                 var4.d();
             }
@@ -275,11 +290,13 @@ public class OVillage {
 
     private boolean e(int var1, int var2, int var3) {
         int var4 = this.a.a(var1, var2, var3);
+
         return var4 <= 0 ? false : var4 == OBlock.aE.bO;
     }
 
     private void l() {
         int var1 = this.b.size();
+
         if (var1 == 0) {
             this.d.a(0, 0, 0);
             this.e = 0;
@@ -288,6 +305,7 @@ public class OVillage {
             int var2 = 0;
 
             OVillageDoorInfo var4;
+
             for (Iterator var3 = this.b.iterator(); var3.hasNext(); var2 = Math.max(var4.a(this.d.a, this.d.b, this.d.c), var2)) {
                 var4 = (OVillageDoorInfo) var3.next();
             }

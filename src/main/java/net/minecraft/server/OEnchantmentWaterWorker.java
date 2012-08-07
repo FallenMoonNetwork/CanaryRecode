@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEnchantment;
 import net.minecraft.server.OEnumEnchantmentType;
+
 
 public class OEnchantmentWaterWorker extends OEnchantment {
 

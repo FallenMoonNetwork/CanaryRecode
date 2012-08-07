@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 
 import net.canarymod.Logman;
@@ -17,6 +18,7 @@ import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityArrow extends OEntity {
 
@@ -56,14 +58,17 @@ public class OEntityArrow extends OEntity {
         double var8 = var3.bn + var3.B() - 0.699999988079071D - this.bn;
         double var10 = var3.bo - var2.bo;
         double var12 = OMathHelper.a(var6 * var6 + var10 * var10);
+
         if (var12 >= 1.0E-7D) {
             float var14 = (float) (Math.atan2(var10, var6) * 180.0D / 3.1415927410125732D) - 90.0F;
             float var15 = (float) (-(Math.atan2(var8, var12) * 180.0D / 3.1415927410125732D));
             double var16 = var6 / var12;
             double var18 = var10 / var12;
+
             this.c(var2.bm + var16, this.bn, var2.bo + var18, var14, var15);
             this.bF = 0.0F;
             float var20 = (float) var12 * 0.2F;
+
             this.a(var6, var8 + var20, var10, var4, var5);
         }
     }
@@ -87,11 +92,11 @@ public class OEntityArrow extends OEntity {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     public void a(double var1, double var3, double var5, float var7, float var8) {
         float var9 = OMathHelper.a(var1 * var1 + var3 * var3 + var5 * var5);
+
         var1 /= var9;
         var3 /= var9;
         var5 /= var9;
@@ -105,6 +110,7 @@ public class OEntityArrow extends OEntity {
         this.bq = var3;
         this.br = var5;
         float var10 = OMathHelper.a(var1 * var1 + var5 * var5);
+
         this.bu = this.bs = (float) (Math.atan2(var1, var5) * 180.0D / 3.1415927410125732D);
         this.bv = this.bt = (float) (Math.atan2(var3, var10) * 180.0D / 3.1415927410125732D);
         this.k = 0;
@@ -115,14 +121,17 @@ public class OEntityArrow extends OEntity {
         super.F_();
         if (this.bv == 0.0F && this.bu == 0.0F) {
             float var1 = OMathHelper.a(this.bp * this.bp + this.br * this.br);
+
             this.bu = this.bs = (float) (Math.atan2(this.bp, this.br) * 180.0D / 3.1415927410125732D);
             this.bv = this.bt = (float) (Math.atan2(this.bq, var1) * 180.0D / 3.1415927410125732D);
         }
 
         int var15 = this.bi.a(this.e, this.f, this.g);
+
         if (var15 > 0) {
             OBlock.m[var15].a((OIBlockAccess) this.bi, this.e, this.f, this.g);
             OAxisAlignedBB var2 = OBlock.m[var15].e(this.bi, this.e, this.f, this.g);
+
             if (var2 != null && var2.a(OVec3D.b(this.bm, this.bn, this.bo))) {
                 this.j = true;
             }
@@ -135,6 +144,7 @@ public class OEntityArrow extends OEntity {
         if (this.j) {
             var15 = this.bi.a(this.e, this.f, this.g);
             int var18 = this.bi.c(this.e, this.f, this.g);
+
             if (var15 == this.h && var18 == this.i) {
                 ++this.k;
                 if (this.k == 1200) {
@@ -154,6 +164,7 @@ public class OEntityArrow extends OEntity {
             OVec3D var16 = OVec3D.b(this.bm, this.bn, this.bo);
             OVec3D var17 = OVec3D.b(this.bm + this.bp, this.bn + this.bq, this.bo + this.br);
             OMovingObjectPosition var3 = this.bi.a(var16, var17, false, true);
+
             var16 = OVec3D.b(this.bm, this.bn, this.bo);
             var17 = OVec3D.b(this.bm + this.bp, this.bn + this.bq, this.bo + this.br);
             if (var3 != null) {
@@ -166,14 +177,18 @@ public class OEntityArrow extends OEntity {
 
             int var8;
             float var10;
+
             for (var8 = 0; var8 < var5.size(); ++var8) {
                 OEntity var9 = (OEntity) var5.get(var8);
+
                 if (var9.o_() && (var9 != this.c || this.l >= 5)) {
                     var10 = 0.3F;
                     OAxisAlignedBB var11 = var9.bw.b(var10, var10, var10);
                     OMovingObjectPosition var12 = var11.a(var16, var17);
+
                     if (var12 != null) {
                         double var13 = var16.b(var12.f);
+
                         if (var13 < var6 || var6 == 0.0D) {
                             var4 = var9;
                             var6 = var13;
@@ -187,15 +202,18 @@ public class OEntityArrow extends OEntity {
             }
 
             float var19;
+
             if (var3 != null) {
                 if (var3.g != null) {
                     var19 = OMathHelper.a(this.bp * this.bp + this.bq * this.bq + this.br * this.br);
                     int var20 = (int) Math.ceil(var19 * this.m);
+
                     if (this.d) {
                         var20 += this.bS.nextInt(var20 / 2 + 2);
                     }
 
                     ODamageSource var22 = null;
+
                     if (this.c == null) {
                         var22 = ODamageSource.a(this, this);
                     } else {
@@ -211,6 +229,7 @@ public class OEntityArrow extends OEntity {
                             ++((OEntityLiving) var3.g).aI;
                             if (this.n > 0) {
                                 float var21 = OMathHelper.a(this.bp * this.bp + this.br * this.br);
+
                                 if (var21 > 0.0F) {
                                     var3.g.b_(this.bp * this.n * 0.6000000238418579D / var21, 0.1D, this.br * this.n * 0.6000000238418579D / var21);
                                 }
@@ -278,10 +297,12 @@ public class OEntityArrow extends OEntity {
             this.bt = this.bv + (this.bt - this.bv) * 0.2F;
             this.bs = this.bu + (this.bs - this.bu) * 0.2F;
             float var23 = 0.99F;
+
             var10 = 0.05F;
             if (this.aU()) {
                 for (int var25 = 0; var25 < 4; ++var25) {
                     float var24 = 0.25F;
+
                     this.bi.a("bubble", this.bm - this.bp * var24, this.bn - this.bq * var24, this.bo - this.br * var24, this.bp, this.bq, this.br);
                 }
 

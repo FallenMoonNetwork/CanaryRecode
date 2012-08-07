@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntityFireball;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.OWorld;
+
 
 public class OEntitySmallFireball extends OEntityFireball {
 
@@ -35,22 +37,28 @@ public class OEntitySmallFireball extends OEntityFireball {
                 int var2 = var1.b;
                 int var3 = var1.c;
                 int var4 = var1.d;
+
                 switch (var1.e) {
                 case 0:
                     --var3;
                     break;
+
                 case 1:
                     ++var3;
                     break;
+
                 case 2:
                     --var4;
                     break;
+
                 case 3:
                     ++var4;
                     break;
+
                 case 4:
                     --var2;
                     break;
+
                 case 5:
                     ++var2;
                 }

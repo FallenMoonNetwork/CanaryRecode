@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,7 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OPotionEffect;
 import net.minecraft.server.OPotionHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OItemPotion extends OItem {
 
@@ -29,6 +31,7 @@ public class OItemPotion extends OItem {
 
     public List b(int var1) {
         List var2 = (List) this.a.get(Integer.valueOf(var1));
+
         if (var2 == null) {
             var2 = OPotionHelper.a(var1, false);
             this.a.put(Integer.valueOf(var1), var2);
@@ -42,11 +45,13 @@ public class OItemPotion extends OItem {
         --var1.a;
         if (!var2.F) {
             List var4 = this.b(var1);
+
             if (var4 != null) {
                 Iterator var5 = var4.iterator();
 
                 while (var5.hasNext()) {
                     OPotionEffect var6 = (OPotionEffect) var5.next();
+
                     var3.e(new OPotionEffect(var6));
                 }
             }

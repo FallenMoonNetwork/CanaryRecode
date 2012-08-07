@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAITarget;
 import net.minecraft.server.OEntityLiving;
+
 
 public class OEntityAIHurtByTarget extends OEntityAITarget {
 
@@ -32,6 +34,7 @@ public class OEntityAIHurtByTarget extends OEntityAITarget {
             while (var2.hasNext()) {
                 OEntity var3 = (OEntity) var2.next();
                 OEntityLiving var4 = (OEntityLiving) var3;
+
                 if (this.c != var4 && var4.at() == null) {
                     var4.b(this.c.ao());
                 }

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OBlock;
@@ -16,6 +17,7 @@ import net.minecraft.server.OWorldGenReed;
 import net.minecraft.server.OWorldGenSand;
 import net.minecraft.server.OWorldGenWaterlily;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OBiomeDecorator {
 
@@ -113,6 +115,7 @@ public class OBiomeDecorator {
         int var1;
         int var2;
         int var3;
+
         for (var1 = 0; var1 < this.H; ++var1) {
             var2 = this.c + this.b.nextInt(16) + 8;
             var3 = this.d + this.b.nextInt(16) + 8;
@@ -137,10 +140,12 @@ public class OBiomeDecorator {
         }
 
         int var4;
+
         for (var2 = 0; var2 < var1; ++var2) {
             var3 = this.c + this.b.nextInt(16) + 8;
             var4 = this.d + this.b.nextInt(16) + 8;
             OWorldGenerator var5 = this.e.a(this.b);
+
             var5.a(1.0D, 1.0D, 1.0D);
             var5.a(this.a, this.b, var3, this.a.e(var3, var4), var4);
         }
@@ -152,6 +157,7 @@ public class OBiomeDecorator {
         }
 
         int var7;
+
         for (var2 = 0; var2 < this.A; ++var2) {
             var3 = this.c + this.b.nextInt(16) + 8;
             var4 = this.b.nextInt(128);
@@ -170,6 +176,7 @@ public class OBiomeDecorator {
             var4 = this.b.nextInt(128);
             var7 = this.d + this.b.nextInt(16) + 8;
             OWorldGenerator var6 = this.e.b(this.b);
+
             var6.a(this.a, this.b, var3, var4, var7);
         }
 
@@ -272,6 +279,7 @@ public class OBiomeDecorator {
             int var6 = this.c + this.b.nextInt(16);
             int var7 = this.b.nextInt(var4 - var3) + var3;
             int var8 = this.d + this.b.nextInt(16);
+
             var2.a(this.a, this.b, var6, var7, var8);
         }
 
@@ -282,6 +290,7 @@ public class OBiomeDecorator {
             int var6 = this.c + this.b.nextInt(16);
             int var7 = this.b.nextInt(var4) + this.b.nextInt(var4) + (var3 - var4);
             int var8 = this.d + this.b.nextInt(16);
+
             var2.a(this.a, this.b, var6, var7, var8);
         }
 

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIBase;
@@ -10,6 +11,7 @@ import net.minecraft.server.OPathEntity;
 import net.minecraft.server.OPathNavigate;
 import net.minecraft.server.ORandomPositionGenerator;
 import net.minecraft.server.OVec3D;
+
 
 public class OEntityAIAvoidEntity extends OEntityAIBase {
 
@@ -46,6 +48,7 @@ public class OEntityAIAvoidEntity extends OEntityAIBase {
             }
         } else {
             List var1 = this.a.bi.a(this.h, this.a.bw.b(this.e, 3.0D, this.e));
+
             if (var1.size() == 0) {
                 return false;
             }
@@ -57,6 +60,7 @@ public class OEntityAIAvoidEntity extends OEntityAIBase {
             return false;
         } else {
             OVec3D var2 = ORandomPositionGenerator.b(this.a, 16, 7, OVec3D.b(this.d.bm, this.d.bn, this.d.bo));
+
             if (var2 == null) {
                 return false;
             } else if (this.d.e(var2.a, var2.b, var2.c) < this.d.j(this.a)) {

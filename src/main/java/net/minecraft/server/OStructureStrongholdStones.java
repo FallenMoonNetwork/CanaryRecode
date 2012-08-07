@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OStructurePieceBlockSelector;
 import net.minecraft.server.OStructureStrongholdPieceWeight2;
+
 
 class OStructureStrongholdStones extends OStructurePieceBlockSelector {
 
@@ -19,6 +21,7 @@ class OStructureStrongholdStones extends OStructurePieceBlockSelector {
         } else {
             this.a = OBlock.bm.bO;
             float var6 = var1.nextFloat();
+
             if (var6 < 0.2F) {
                 this.b = 2;
             } else if (var6 < 0.5F) {

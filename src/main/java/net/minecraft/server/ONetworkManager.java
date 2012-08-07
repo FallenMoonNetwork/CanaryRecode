@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -16,6 +17,7 @@ import net.minecraft.server.ONetworkReaderThread;
 import net.minecraft.server.ONetworkWriterThread;
 import net.minecraft.server.OPacket;
 import net.minecraft.server.OThreadMonitorConnection;
+
 
 public class ONetworkManager {
 
@@ -73,6 +75,7 @@ public class ONetworkManager {
     public void a(OPacket var1) {
         if (!this.q) {
             Object var2 = this.g;
+
             synchronized (this.g) {
                 this.x += var1.a() + 1;
                 if (var1.p) {
@@ -93,6 +96,7 @@ public class ONetworkManager {
             OPacket var3;
             int var10001;
             int[] var10000;
+
             if (!this.n.isEmpty() && (this.f == 0 || System.currentTimeMillis() - ((OPacket) this.n.get(0)).k >= this.f)) {
                 var2 = this.g;
                 synchronized (this.g) {
@@ -142,9 +146,11 @@ public class ONetworkManager {
 
         try {
             OPacket var2 = OPacket.a(this.j, this.p.c());
+
             if (var2 != null) {
                 int[] var10000 = d;
                 int var10001 = var2.b();
+
                 var10000[var10001] += var2.a() + 1;
                 if (!this.q) {
                     this.m.add(var2);
@@ -219,6 +225,7 @@ public class ONetworkManager {
 
         while (!this.m.isEmpty() && var1-- >= 0) {
             OPacket var2 = (OPacket) this.m.remove(0);
+
             var2.a(this.p);
         }
 

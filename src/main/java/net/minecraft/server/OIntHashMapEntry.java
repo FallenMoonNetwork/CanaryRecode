@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OIntHashMap;
+
 
 class OIntHashMapEntry {
 
@@ -33,9 +35,11 @@ class OIntHashMapEntry {
             OIntHashMapEntry var2 = (OIntHashMapEntry) var1;
             Integer var3 = Integer.valueOf(this.a());
             Integer var4 = Integer.valueOf(var2.a());
+
             if (var3 == var4 || var3 != null && var3.equals(var4)) {
                 Object var5 = this.b();
                 Object var6 = var2.b();
+
                 if (var5 == var6 || var5 != null && var5.equals(var6)) {
                     return true;
                 }

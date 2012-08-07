@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryCaveSpider;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityLiving;
@@ -8,9 +9,10 @@ import net.minecraft.server.OPotion;
 import net.minecraft.server.OPotionEffect;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityCaveSpider extends OEntitySpider {
 
-    //CanaryMod CaveSpider handler
+    // CanaryMod CaveSpider handler
     private CanaryCaveSpider canaryCaveSpider;
     
     public OEntityCaveSpider(OWorld var1) {
@@ -38,6 +40,7 @@ public class OEntityCaveSpider extends OEntitySpider {
         if (super.a(var1)) {
             if (var1 instanceof OEntityLiving) {
                 byte var2 = 0;
+
                 if (this.bi.q > 1) {
                     if (this.bi.q == 2) {
                         var2 = 7;

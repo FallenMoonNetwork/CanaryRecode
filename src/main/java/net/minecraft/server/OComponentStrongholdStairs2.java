@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OChunkPosition;
 import net.minecraft.server.OComponentStrongholdPortalRoom;
 import net.minecraft.server.OComponentStrongholdStairs;
 import net.minecraft.server.OStructureStrongholdPieceWeight;
+
 
 public class OComponentStrongholdStairs2 extends OComponentStrongholdStairs {
 

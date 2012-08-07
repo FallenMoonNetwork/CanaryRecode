@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -20,6 +21,7 @@ import net.minecraft.server.ORConOutputStream;
 import net.minecraft.server.ORConThreadBase;
 import net.minecraft.server.ORConThreadQueryAuth;
 import net.minecraft.server.ORConUtils;
+
 
 public class ORConThreadQuery extends ORConThreadBase {
 
@@ -58,6 +60,7 @@ public class ORConThreadQuery extends ORConThreadBase {
 
             try {
                 InetAddress var2 = InetAddress.getLocalHost();
+
                 this.q = var2.getHostAddress();
             } catch (UnknownHostException var3) {
                 this.c("Unable to determine local host IP, please set server-ip in \'" + Configuration.getNetConfig().getFile().getPath() + "\' : " + var3.getMessage());
@@ -69,12 +72,12 @@ public class ORConThreadQuery extends ORConThreadBase {
             this.b("Setting default query port to " + this.h);
             // CanaryMod: changing configuration
             try {
-            	Configuration.getNetConfig().getFile().setInt("query.port", Integer.valueOf(this.h));
-            	Configuration.getNetConfig().getFile().save();
-            	Configuration.getServerConfig().getFile().setBoolean("debug", false);
-            	Configuration.getServerConfig().getFile().save();
-            } catch(IOException ioe) {
-            	this.b("Failed to save configuration.");
+                Configuration.getNetConfig().getFile().setInt("query.port", Integer.valueOf(this.h));
+                Configuration.getNetConfig().getFile().save();
+                Configuration.getServerConfig().getFile().setBoolean("debug", false);
+                Configuration.getServerConfig().getFile().save();
+            } catch (IOException ioe) {
+                this.b("Failed to save configuration.");
             }
         }
 
@@ -92,6 +95,7 @@ public class ORConThreadQuery extends ORConThreadBase {
         byte[] var2 = var1.getData();
         int var3 = var1.getLength();
         SocketAddress var4 = var1.getSocketAddress();
+
         this.a("Packet len " + var3 + " [" + var4 + "]");
         if (3 <= var3 && -2 == var2[0] && -3 == var2[1]) {
             this.a("Packet \'" + ORConUtils.a(var2[2]) + "\' [" + var4 + "]");
@@ -102,6 +106,7 @@ public class ORConThreadQuery extends ORConThreadBase {
                     return false;
                 } else if (15 != var3) {
                     ORConOutputStream var5 = new ORConOutputStream(1460);
+
                     var5.a(0);
                     var5.a(this.a(var1.getSocketAddress()));
                     var5.a(this.k);
@@ -117,10 +122,12 @@ public class ORConThreadQuery extends ORConThreadBase {
                     this.a(this.b(var1), var1);
                     this.a("Rules [" + var4 + "]");
                 }
+
             case 9:
                 this.d(var1);
                 this.a("Challenge [" + var4 + "]");
                 return true;
+
             default:
                 return true;
             }
@@ -132,9 +139,11 @@ public class ORConThreadQuery extends ORConThreadBase {
 
     private byte[] b(DatagramPacket var1) throws IOException {
         long var2 = System.currentTimeMillis();
+
         if (var2 < this.v + 5000L) {
             byte[] var7 = this.u.a();
             byte[] var8 = this.a(var1.getSocketAddress());
+
             var7[1] = var8[0];
             var7[2] = var8[1];
             var7[3] = var8[2];
@@ -190,16 +199,19 @@ public class ORConThreadQuery extends ORConThreadBase {
 
     private Boolean c(DatagramPacket var1) {
         SocketAddress var2 = var1.getSocketAddress();
+
         if (!this.s.containsKey(var2)) {
             return Boolean.valueOf(false);
         } else {
             byte[] var3 = var1.getData();
+
             return ((ORConThreadQueryAuth) this.s.get(var2)).a() != ORConUtils.c(var3, 7, var1.getLength()) ? Boolean.valueOf(false) : Boolean.valueOf(true);
         }
     }
 
     private void d(DatagramPacket var1) throws SocketException, IOException {
         ORConThreadQueryAuth var2 = new ORConThreadQueryAuth(this, var1);
+
         this.s.put(var1.getSocketAddress(), var2);
         this.a(var2.b(), var1);
     }
@@ -207,12 +219,14 @@ public class ORConThreadQuery extends ORConThreadBase {
     private void e() {
         if (this.a) {
             long var1 = System.currentTimeMillis();
+
             if (var1 >= this.g + 30000L) {
                 this.g = var1;
                 Iterator var3 = this.s.entrySet().iterator();
 
                 while (var3.hasNext()) {
                     Entry var4 = (Entry) var3.next();
+
                     if (((ORConThreadQueryAuth) var4.getValue()).a(var1).booleanValue()) {
                         var3.remove();
                     }

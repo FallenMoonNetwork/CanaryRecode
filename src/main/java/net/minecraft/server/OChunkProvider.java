@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,6 +18,7 @@ import net.minecraft.server.OIChunkProvider;
 import net.minecraft.server.OIProgressUpdate;
 import net.minecraft.server.OLongHashMap;
 import net.minecraft.server.OWorld;
+
 
 public class OChunkProvider implements OIChunkProvider {
 
@@ -47,6 +49,7 @@ public class OChunkProvider implements OIChunkProvider {
         int var4 = var1 * 16 + 8 - var3.a;
         int var5 = var2 * 16 + 8 - var3.c;
         short var6 = 128;
+
         if (var4 < -var6 || var4 > var6 || var5 < -var6 || var5 > var6) {
             this.a.add(Long.valueOf(OChunkCoordIntPair.a(var1, var2)));
         }
@@ -56,10 +59,13 @@ public class OChunkProvider implements OIChunkProvider {
     @Override
     public OChunk c(int var1, int var2) {
         long var3 = OChunkCoordIntPair.a(var1, var2);
+
         this.a.remove(Long.valueOf(var3));
         OChunk var5 = (OChunk) this.e.a(var3);
+
         if (var5 == null) {
             int var6 = 1875004;
+
             if (var1 < -var6 || var2 < -var6 || var1 >= var6 || var2 >= var6) {
                 return this.b;
             }
@@ -89,6 +95,7 @@ public class OChunkProvider implements OIChunkProvider {
     @Override
     public OChunk b(int var1, int var2) {
         OChunk var3 = (OChunk) this.e.a(OChunkCoordIntPair.a(var1, var2));
+
         return var3 == null ? this.c(var1, var2) : var3;
     }
 
@@ -98,6 +105,7 @@ public class OChunkProvider implements OIChunkProvider {
         } else {
             try {
                 OChunk var3 = this.d.a(this.g, var1, var2);
+
                 if (var3 != null) {
                     var3.n = this.g.o();
                 }
@@ -132,6 +140,7 @@ public class OChunkProvider implements OIChunkProvider {
     @Override
     public void a(OIChunkProvider var1, int var2, int var3) {
         OChunk var4 = this.b(var2, var3);
+
         if (!var4.k) {
             var4.k = true;
             if (this.c != null) {
@@ -148,6 +157,7 @@ public class OChunkProvider implements OIChunkProvider {
 
         for (int var4 = 0; var4 < this.f.size(); ++var4) {
             OChunk var5 = (OChunk) this.f.get(var4);
+
             if (var1) {
                 this.a(var5);
             }
@@ -176,10 +186,12 @@ public class OChunkProvider implements OIChunkProvider {
     @Override
     public boolean a() throws IOException {
         int var1;
+
         for (var1 = 0; var1 < 100; ++var1) {
             if (!this.a.isEmpty()) {
                 Long var2 = (Long) this.a.iterator().next();
                 OChunk var3 = (OChunk) this.e.a(var2.longValue());
+
                 var3.d();
                 this.b(var3);
                 this.a(var3);
@@ -197,6 +209,7 @@ public class OChunkProvider implements OIChunkProvider {
 
             OChunk var4 = (OChunk) this.f.get(this.h++);
             OEntityPlayer var5 = this.g.a((var4.g << 4) + 8.0D, (var4.h << 4) + 8.0D, 288.0D);
+
             if (var5 == null) {
                 this.d(var4.g, var4.h);
             }

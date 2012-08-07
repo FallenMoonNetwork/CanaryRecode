@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OComponentNetherBridgeCorridor;
@@ -18,6 +19,7 @@ import net.minecraft.server.OComponentNetherBridgeStraight;
 import net.minecraft.server.OComponentNetherBridgeThrone;
 import net.minecraft.server.OStructureNetherBridgePieceWeight;
 
+
 public class OStructureNetherBridgePieces {
 
     private static final OStructureNetherBridgePieceWeight[] a = new OStructureNetherBridgePieceWeight[] { new OStructureNetherBridgePieceWeight(OComponentNetherBridgeStraight.class, 30, 0, true), new OStructureNetherBridgePieceWeight(OComponentNetherBridgeCrossing3.class, 10, 4), new OStructureNetherBridgePieceWeight(OComponentNetherBridgeCrossing.class, 10, 4), new OStructureNetherBridgePieceWeight(OComponentNetherBridgeStairs.class, 10, 3), new OStructureNetherBridgePieceWeight(OComponentNetherBridgeThrone.class, 5, 2), new OStructureNetherBridgePieceWeight(OComponentNetherBridgeEntrance.class, 5, 1) };
@@ -30,6 +32,7 @@ public class OStructureNetherBridgePieces {
     private static OComponentNetherBridgePiece b(OStructureNetherBridgePieceWeight var0, List var1, Random var2, int var3, int var4, int var5, int var6, int var7) {
         Class var8 = var0.a;
         Object var9 = null;
+
         if (var8 == OComponentNetherBridgeStraight.class) {
             var9 = OComponentNetherBridgeStraight.a(var1, var2, var3, var4, var5, var6, var7);
         } else if (var8 == OComponentNetherBridgeCrossing3.class) {

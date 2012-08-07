@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+
 
 public class OItemSeeds extends OItem {
 
@@ -22,6 +24,7 @@ public class OItemSeeds extends OItem {
             return false;
         } else if (var2.d(var4, var5, var6) && var2.d(var4, var5 + 1, var6)) {
             int var8 = var3.a(var4, var5, var6);
+
             if (var8 == this.b && var3.g(var4, var5 + 1, var6)) {
                 var3.e(var4, var5 + 1, var6, this.a);
                 --var1.a;

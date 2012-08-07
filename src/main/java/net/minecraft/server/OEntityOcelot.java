@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryOcelot;
 import net.canarymod.hook.entity.EntityTameHook;
@@ -27,10 +28,11 @@ import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityOcelot extends OEntityTameable {
 
     private OEntityAITempt b;
-    //CanaryMod ocelot handler
+    // CanaryMod ocelot handler
     private CanaryOcelot canaryOcelot;
 
     public OEntityOcelot(OWorld var1) {
@@ -75,6 +77,7 @@ public class OEntityOcelot extends OEntityTameable {
             this.h(false);
         } else {
             float var1 = this.aj().b();
+
             if (var1 == 0.18F) {
                 this.g(true);
                 this.h(false);
@@ -105,8 +108,7 @@ public class OEntityOcelot extends OEntityTameable {
     }
 
     @Override
-    protected void a(float var1) {
-    }
+    protected void a(float var1) {}
 
     @Override
     public void b(ONBTTagCompound var1) {
@@ -157,12 +159,12 @@ public class OEntityOcelot extends OEntityTameable {
     }
 
     @Override
-    protected void a(boolean var1, int var2) {
-    }
+    protected void a(boolean var1, int var2) {}
 
     @Override
     public boolean interact(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
+
         if (!this.u_()) {
             if (this.b.f() && var2 != null && var2.c == OItem.aT.bP && var1.j(this) < 9.0D) {
                 --var2.a;
@@ -172,10 +174,11 @@ public class OEntityOcelot extends OEntityTameable {
 
                 if (!this.bi.F) {
                     
-                    //CanaryMod tame hook start
+                    // CanaryMod tame hook start
                     EntityTameHook hook = new EntityTameHook(canaryOcelot, ((OEntityPlayerMP) var1).getPlayer(), this.bS.nextInt(3) == 0);
+
                     Canary.hooks().callHook(hook);
-                    if (!hook.isCanceled() && hook.isTamed()) { //Changed the query here to use hook results -- CanaryMod end
+                    if (!hook.isCanceled() && hook.isTamed()) { // Changed the query here to use hook results -- CanaryMod end
                         this.b(true);
                         this.c_(1 + this.bi.r.nextInt(3));
                         this.a(var1.v);
@@ -202,6 +205,7 @@ public class OEntityOcelot extends OEntityTameable {
     @Override
     public OEntityAnimal a(OEntityAnimal var1) {
         OEntityOcelot var2 = new OEntityOcelot(this.bi);
+
         if (this.u_()) {
             var2.a(this.A());
             var2.b(true);
@@ -226,6 +230,7 @@ public class OEntityOcelot extends OEntityTameable {
             return false;
         } else {
             OEntityOcelot var2 = (OEntityOcelot) var1;
+
             return !var2.u_() ? false : this.r_() && var2.r_();
         }
     }
@@ -247,11 +252,13 @@ public class OEntityOcelot extends OEntityTameable {
                 int var1 = OMathHelper.b(this.bm);
                 int var2 = OMathHelper.b(this.bw.b);
                 int var3 = OMathHelper.b(this.bo);
+
                 if (var2 < 63) {
                     return false;
                 }
 
                 int var4 = this.bi.a(var1, var2 - 1, var3);
+
                 if (var4 == OBlock.u.bO || var4 == OBlock.K.bO) {
                     return true;
                 }

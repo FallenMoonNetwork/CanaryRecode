@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.server.OIRecipe;
 import net.minecraft.server.OInventoryCrafting;
 import net.minecraft.server.OItemStack;
+
 
 public class OShapelessRecipes implements OIRecipe {
 
@@ -30,12 +32,14 @@ public class OShapelessRecipes implements OIRecipe {
         for (int var3 = 0; var3 < 3; ++var3) {
             for (int var4 = 0; var4 < 3; ++var4) {
                 OItemStack var5 = var1.b(var4, var3);
+
                 if (var5 != null) {
                     boolean var6 = false;
                     Iterator var7 = var2.iterator();
 
                     while (var7.hasNext()) {
                         OItemStack var8 = (OItemStack) var7.next();
+
                         if (var5.c == var8.c && (var8.h() == -1 || var5.h() == var8.h())) {
                             var6 = true;
                             var2.remove(var8);

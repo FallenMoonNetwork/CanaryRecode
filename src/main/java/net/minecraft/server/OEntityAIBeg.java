@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityWolf;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityAIBeg extends OEntityAIBase {
 
@@ -54,6 +56,7 @@ public class OEntityAIBeg extends OEntityAIBase {
 
     private boolean a(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
+
         return var2 == null ? false : (!this.a.u_() && var2.c == OItem.aW.bP ? true : this.a.a(var2));
     }
 }

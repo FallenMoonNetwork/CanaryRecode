@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -10,6 +11,7 @@ import net.minecraft.server.OStatList;
 import net.minecraft.server.OStatTypeDistance;
 import net.minecraft.server.OStatTypeSimple;
 import net.minecraft.server.OStatTypeTime;
+
 
 public class OStatBase {
 

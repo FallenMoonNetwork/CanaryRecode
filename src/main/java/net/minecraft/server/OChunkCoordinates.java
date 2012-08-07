@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class OChunkCoordinates implements Comparable {
 
     public int a;
@@ -30,6 +31,7 @@ public class OChunkCoordinates implements Comparable {
             return false;
         } else {
             OChunkCoordinates var2 = (OChunkCoordinates) var1;
+
             return this.a == var2.a && this.b == var2.b && this.c == var2.c;
         }
     }
@@ -53,6 +55,7 @@ public class OChunkCoordinates implements Comparable {
         int var4 = this.a - var1;
         int var5 = this.b - var2;
         int var6 = this.c - var3;
+
         return Math.sqrt((var4 * var4 + var5 * var5 + var6 * var6));
     }
 
@@ -60,6 +63,7 @@ public class OChunkCoordinates implements Comparable {
         int var4 = this.a - var1;
         int var5 = this.b - var2;
         int var6 = this.c - var3;
+
         return (var4 * var4 + var5 * var5 + var6 * var6);
     }
 

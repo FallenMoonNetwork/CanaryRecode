@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OLongHashMap;
+
 
 class OLongHashMapEntry {
 
@@ -33,9 +35,11 @@ class OLongHashMapEntry {
             OLongHashMapEntry var2 = (OLongHashMapEntry) var1;
             Long var3 = Long.valueOf(this.a());
             Long var4 = Long.valueOf(var2.a());
+
             if (var3 == var4 || var3 != null && var3.equals(var4)) {
                 Object var5 = this.b();
                 Object var6 = var2.b();
+
                 if (var5 == var6 || var5 != null && var5.equals(var6)) {
                     return true;
                 }

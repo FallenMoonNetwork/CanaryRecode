@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityAnimal;
+
 
 public class OEntityAIFollowParent extends OEntityAIBase {
 
@@ -32,8 +34,10 @@ public class OEntityAIFollowParent extends OEntityAIBase {
             while (var5.hasNext()) {
                 OEntity var6 = (OEntity) var5.next();
                 OEntityAnimal var7 = (OEntityAnimal) var6;
+
                 if (var7.K() >= 0) {
                     double var8 = this.a.j(var7);
+
                     if (var8 <= var3) {
                         var3 = var8;
                         var2 = var7;
@@ -58,6 +62,7 @@ public class OEntityAIFollowParent extends OEntityAIBase {
             return false;
         } else {
             double var1 = this.a.j(this.b);
+
             return var1 >= 9.0D && var1 <= 256.0D;
         }
     }

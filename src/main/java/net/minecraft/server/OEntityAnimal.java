@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 
 import net.canarymod.Canary;
@@ -17,6 +18,7 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals {
 
@@ -46,10 +48,12 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
         if (this.a > 0) {
             --this.a;
             String var1 = "heart";
+
             if (this.a % 10 == 0) {
                 double var2 = this.bS.nextGaussian() * 0.02D;
                 double var4 = this.bS.nextGaussian() * 0.02D;
                 double var6 = this.bS.nextGaussian() * 0.02D;
+
                 this.bi.a(var1, this.bm + (this.bS.nextFloat() * this.bG * 2.0F) - this.bG, this.bn + 0.5D + (this.bS.nextFloat() * this.bH), this.bo + (this.bS.nextFloat() * this.bG * 2.0F) - this.bG, var2, var4, var6);
             }
         } else {
@@ -64,16 +68,19 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
             if (var2 < 3.0F) {
                 double var3 = var1.bm - this.bm;
                 double var5 = var1.bo - this.bo;
+
                 this.bs = (float) (Math.atan2(var5, var3) * 180.0D / 3.1415927410125732D) - 90.0F;
                 this.e = true;
             }
 
             OEntityPlayer var7 = (OEntityPlayer) var1;
+
             if (var7.U() == null || !this.a(var7.U())) {
                 this.d = null;
             }
         } else if (var1 instanceof OEntityAnimal) {
             OEntityAnimal var8 = (OEntityAnimal) var1;
+
             if (this.K() > 0 && var8.K() < 0) {
                 if (var2 < 2.5D) {
                     this.e = true;
@@ -107,6 +114,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
 
     private void c(OEntityAnimal var1) {
         OEntityAnimal var2 = this.a(var1);
+
         if (var2 != null) {
             this.c(6000);
             var1.c(6000);
@@ -123,6 +131,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
                 double var4 = this.bS.nextGaussian() * 0.02D;
                 double var6 = this.bS.nextGaussian() * 0.02D;
                 double var8 = this.bS.nextGaussian() * 0.02D;
+
                 this.bi.a("heart", this.bm + (this.bS.nextFloat() * this.bG * 2.0F) - this.bG, this.bn + 0.5D + (this.bS.nextFloat() * this.bH), this.bo + (this.bS.nextFloat() * this.bG * 2.0F) - this.bG, var4, var6, var8);
             }
 
@@ -134,8 +143,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
     public abstract OEntityAnimal a(OEntityAnimal var1);
 
     @Override
-    protected void b(OEntity var1, float var2) {
-    }
+    protected void b(OEntity var1, float var2) {}
 
     @Override
     public boolean a(ODamageSource var1, int var2) {
@@ -171,6 +179,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
             List var2;
             int var3;
             OEntityAnimal var4;
+
             if (this.a > 0) {
                 var2 = this.bi.a(this.getClass(), this.bw.b(var1, var1, var1));
 
@@ -185,6 +194,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
 
                 for (var3 = 0; var3 < var2.size(); ++var3) {
                     OEntityPlayer var5 = (OEntityPlayer) var2.get(var3);
+
                     if (var5.U() != null && this.a(var5.U())) {
                         return var5;
                     }
@@ -209,6 +219,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
         int var1 = OMathHelper.b(this.bm);
         int var2 = OMathHelper.b(this.bw.b);
         int var3 = OMathHelper.b(this.bo);
+
         return this.bi.a(var1, var2 - 1, var3) == OBlock.u.bO && this.bi.m(var1, var2, var3) > 8 && super.l();
     }
 
@@ -234,12 +245,14 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
     @Override
     public boolean interact(OEntityPlayer var1) {
         OItemStack var2 = var1.k.l();
+
         if (var2 != null && this.a(var2) && this.K() == 0) {
-            //CanaryMod Breed hook
+            // CanaryMod Breed hook
             Player tmp = ((OEntityPlayerMP) var1).getPlayer();
             RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryEntityLiving(), Hook.Type.BREED);
+
             Canary.hooks().callHook(hook);
-            if(hook.isCanceled()) {
+            if (hook.isCanceled()) {
                 return false;
             }
             if (!var1.L.d) {
@@ -256,6 +269,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
                 double var4 = this.bS.nextGaussian() * 0.02D;
                 double var6 = this.bS.nextGaussian() * 0.02D;
                 double var8 = this.bS.nextGaussian() * 0.02D;
+
                 this.bi.a("heart", this.bm + (this.bS.nextFloat() * this.bG * 2.0F) - this.bG, this.bn + 0.5D + (this.bS.nextFloat() * this.bH), this.bo + (this.bS.nextFloat() * this.bG * 2.0F) - this.bG, var4, var6, var8);
             }
 

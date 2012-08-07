@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OBlock;
@@ -13,6 +14,7 @@ import net.minecraft.server.OWorldGenTallGrass;
 import net.minecraft.server.OWorldGenTrees;
 import net.minecraft.server.OWorldGenVines;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OBiomeGenJungle extends OBiomeGenBase {
 
@@ -44,6 +46,7 @@ public class OBiomeGenJungle extends OBiomeGenBase {
             int var7 = var3 + var2.nextInt(16) + 8;
             byte var8 = 64;
             int var9 = var4 + var2.nextInt(16) + 8;
+
             var5.a(var1, var2, var7, var8, var9);
         }
 

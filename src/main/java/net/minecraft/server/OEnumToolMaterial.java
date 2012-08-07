@@ -1,15 +1,9 @@
 package net.minecraft.server;
 
+
 public enum OEnumToolMaterial {
 
-    a("WOOD", 0, 0, 59, 2.0F, 0, 15), b("STONE", 1, 1, 131, 4.0F, 1, 5), c("IRON", 2, 2, 250, 6.0F, 2, 14), d("EMERALD", 3, 3, 1561, 8.0F, 3, 10), e(
-            "GOLD",
-            4,
-            0,
-            32,
-            12.0F,
-            0,
-            22);
+    a("WOOD", 0, 0, 59, 2.0F, 0, 15), b("STONE", 1, 1, 131, 4.0F, 1, 5), c("IRON", 2, 2, 250, 6.0F, 2, 14), d("EMERALD", 3, 3, 1561, 8.0F, 3, 10), e("GOLD", 4, 0, 32, 12.0F, 0, 22);
     private final int f;
     private final int g;
     private final float h;

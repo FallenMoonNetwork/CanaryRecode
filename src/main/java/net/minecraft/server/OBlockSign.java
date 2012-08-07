@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlockContainer;
@@ -8,6 +9,7 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockSign extends OBlockContainer {
 
@@ -21,6 +23,7 @@ public class OBlockSign extends OBlockContainer {
         this.a = var2;
         float var4 = 0.25F;
         float var5 = 1.0F;
+
         this.a(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var5, 0.5F + var4);
     }
 
@@ -38,6 +41,7 @@ public class OBlockSign extends OBlockContainer {
             float var8 = 0.0F;
             float var9 = 1.0F;
             float var10 = 0.125F;
+
             this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             if (var5 == 2) {
                 this.a(var8, var6, 1.0F - var10, var9, var7, 1.0F);
@@ -95,12 +99,14 @@ public class OBlockSign extends OBlockContainer {
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         boolean var6 = false;
+
         if (this.b) {
             if (!var1.d(var2, var3 - 1, var4).a()) {
                 var6 = true;
             }
         } else {
             int var7 = var1.c(var2, var3, var4);
+
             var6 = true;
             if (var7 == 2 && var1.d(var2, var3, var4 + 1).a()) {
                 var6 = false;

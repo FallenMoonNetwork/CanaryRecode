@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OCraftingManager;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
+
 
 public class ORecipesWeapons {
 
@@ -21,6 +23,7 @@ public class ORecipesWeapons {
 
             for (int var4 = 0; var4 < this.b.length - 1; ++var4) {
                 OItem var5 = (OItem) this.b[var4 + 1][var2];
+
                 var1.a(new OItemStack(var5), new Object[] { this.a[var4], Character.valueOf('#'), OItem.C, Character.valueOf('X'), var3 });
             }
         }

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -8,6 +9,7 @@ import net.minecraft.server.OComponentNetherBridgeStartPiece;
 import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentNetherBridgeEntrance extends OComponentNetherBridgePiece {
 
@@ -24,6 +26,7 @@ public class OComponentNetherBridgeEntrance extends OComponentNetherBridgePiece 
 
     public static OComponentNetherBridgeEntrance a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, -5, -3, 0, 13, 14, 13, var5);
+
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentNetherBridgeEntrance(var6, var1, var7, var5) : null;
     }
 
@@ -43,6 +46,7 @@ public class OComponentNetherBridgeEntrance extends OComponentNetherBridgePiece 
         this.a(var1, var3, 5, 8, 0, 7, 8, 0, OBlock.bB.bO, OBlock.bB.bO, false);
 
         int var4;
+
         for (var4 = 1; var4 <= 11; var4 += 2) {
             this.a(var1, var3, var4, 10, 0, var4, 11, 0, OBlock.bB.bO, OBlock.bB.bO, false);
             this.a(var1, var3, var4, 10, 12, var4, 11, 12, OBlock.bB.bO, OBlock.bB.bO, false);
@@ -76,6 +80,7 @@ public class OComponentNetherBridgeEntrance extends OComponentNetherBridgePiece 
         this.a(var1, var3, 9, 0, 4, 12, 1, 8, OBlock.bA.bO, OBlock.bA.bO, false);
 
         int var5;
+
         for (var4 = 4; var4 <= 8; ++var4) {
             for (var5 = 0; var5 <= 2; ++var5) {
                 this.b(var1, OBlock.bA.bO, 0, var4, -1, var5, var3);
@@ -97,6 +102,7 @@ public class OComponentNetherBridgeEntrance extends OComponentNetherBridgePiece 
         var4 = this.a(6, 6);
         var5 = this.b(5);
         int var6 = this.b(6, 6);
+
         if (var3.b(var4, var5, var6)) {
             var1.a = true;
             OBlock.m[OBlock.C.bO].a(var1, var4, var5, var6, var2);

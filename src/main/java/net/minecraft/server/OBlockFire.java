@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 
 import net.canarymod.Canary;
@@ -10,6 +11,7 @@ import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldProviderEnd;
+
 
 public class OBlockFire extends OBlock {
 
@@ -73,6 +75,7 @@ public class OBlockFire extends OBlock {
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         boolean var6 = var1.a(var2, var3 - 1, var4) == OBlock.bb.bO;
+
         if (var1.t instanceof OWorldProviderEnd && var1.a(var2, var3 - 1, var4) == OBlock.z.bO) {
             var6 = true;
         }
@@ -85,6 +88,7 @@ public class OBlockFire extends OBlock {
             var1.e(var2, var3, var4, 0);
         } else {
             int var7 = var1.c(var2, var3, var4);
+
             if (var7 < 15) {
                 var1.d(var2, var3, var4, var7 + var5.nextInt(3) / 2);
             }
@@ -100,6 +104,7 @@ public class OBlockFire extends OBlock {
             } else {
                 boolean var8 = var1.z(var2, var3, var4);
                 byte var9 = 0;
+
                 if (var8) {
                     var9 = -50;
                 }
@@ -116,27 +121,32 @@ public class OBlockFire extends OBlock {
                         for (int var12 = var3 - 1; var12 <= var3 + 4; ++var12) {
                             if (var10 != var2 || var12 != var3 || var11 != var4) {
                                 int var13 = 100;
+
                                 if (var12 > var3 + 1) {
                                     var13 += (var12 - (var3 + 1)) * 100;
                                 }
 
                                 int var14 = this.h(var1, var10, var12, var11);
+
                                 if (var14 > 0) {
                                     int var15 = (var14 + 40) / (var7 + 30);
+
                                     if (var8) {
                                         var15 /= 2;
                                     }
 
                                     if (var15 > 0 && var5.nextInt(var13) <= var15 && (!var1.x() || !var1.y(var10, var12, var11)) && !var1.y(var10 - 1, var12, var4) && !var1.y(var10 + 1, var12, var11) && !var1.y(var10, var12, var11 - 1) && !var1.y(var10, var12, var11 + 1)) {
                                         int var16 = var7 + var5.nextInt(5) / 4;
+
                                         if (var16 > 15) {
                                             var16 = 15;
                                         }
 
-                                        //CanaryMod Ignite hook. Warning, that thing spams like mad! 
+                                        // CanaryMod Ignite hook. Warning, that thing spams like mad! 
                                         IgnitionHook hook = new IgnitionHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), 3);
+
                                         Canary.hooks().callHook(hook);
-                                        if(!hook.isCanceled()) {
+                                        if (!hook.isCanceled()) {
                                             var1.b(var10, var12, var11, this.bO, var16);
                                         }
                                     }
@@ -152,10 +162,13 @@ public class OBlockFire extends OBlock {
 
     private void a(OWorld var1, int var2, int var3, int var4, int var5, Random var6, int var7) {
         int var8 = this.b[var1.a(var2, var3, var4)];
+
         if (var6.nextInt(var5) < var8) {
             boolean var9 = var1.a(var2, var3, var4) == OBlock.am.bO;
+
             if (var6.nextInt(var7 + 10) < 5 && !var1.y(var2, var3, var4)) {
                 int var10 = var7 + var6.nextInt(5) / 4;
+
                 if (var10 > 15) {
                     var10 = 15;
                 }
@@ -178,10 +191,12 @@ public class OBlockFire extends OBlock {
 
     private int h(OWorld var1, int var2, int var3, int var4) {
         byte var5 = 0;
+
         if (!var1.g(var2, var3, var4)) {
             return 0;
         } else {
             int var6 = this.f(var1, var2 + 1, var3, var4, var5);
+
             var6 = this.f(var1, var2 - 1, var3, var4, var6);
             var6 = this.f(var1, var2, var3 - 1, var4, var6);
             var6 = this.f(var1, var2, var3 + 1, var4, var6);
@@ -202,6 +217,7 @@ public class OBlockFire extends OBlock {
 
     public int f(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = this.a[var1.a(var2, var3, var4)];
+
         return var6 > var5 ? var6 : var5;
     }
 

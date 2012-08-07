@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorldSettings;
 import net.minecraft.server.OWorldType;
+
 
 public class OWorldInfo {
 
@@ -35,11 +37,13 @@ public class OWorldInfo {
         this.randomSeed = var1.g("RandomSeed");
         if (var1.c("generatorName")) {
             String var2 = var1.j("generatorName");
+
             this.worldType = OWorldType.a(var2);
             if (this.worldType == null) {
                 this.worldType = OWorldType.b;
             } else if (this.worldType.c()) {
                 int var3 = 0;
+
                 if (var1.c("generatorVersion")) {
                     var3 = var1.f("generatorVersion");
                 }
@@ -114,6 +118,7 @@ public class OWorldInfo {
 
     public ONBTTagCompound a() {
         ONBTTagCompound var1 = new ONBTTagCompound();
+
         this.a(var1, this.i);
         return var1;
     }
@@ -122,6 +127,7 @@ public class OWorldInfo {
         ONBTTagCompound var2 = new ONBTTagCompound();
         OEntityPlayer var3 = null;
         ONBTTagCompound var4 = null;
+
         if (var1.size() > 0) {
             var3 = (OEntityPlayer) var1.get(0);
         }

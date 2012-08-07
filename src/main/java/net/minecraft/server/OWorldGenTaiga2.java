@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OWorldGenTaiga2 extends OWorldGenerator {
 
@@ -18,13 +20,16 @@ public class OWorldGenTaiga2 extends OWorldGenerator {
         int var8 = var6 - var7;
         int var9 = 2 + var2.nextInt(2);
         boolean var10 = true;
+
         if (var4 >= 1 && var4 + var6 + 1 <= 256) {
             int var11;
             int var13;
             int var15;
             int var21;
+
             for (var11 = var4; var11 <= var4 + 1 + var6 && var10; ++var11) {
                 boolean var12 = true;
+
                 if (var11 - var4 < var7) {
                     var21 = 0;
                 } else {
@@ -57,6 +62,7 @@ public class OWorldGenTaiga2 extends OWorldGenerator {
 
                     int var17;
                     int var16;
+
                     for (var15 = 0; var15 <= var8; ++var15) {
                         var16 = var4 + var6 - var15;
 
@@ -65,6 +71,7 @@ public class OWorldGenTaiga2 extends OWorldGenerator {
 
                             for (int var19 = var5 - var21; var19 <= var5 + var21; ++var19) {
                                 int var20 = var19 - var5;
+
                                 if ((Math.abs(var18) != var21 || Math.abs(var20) != var21 || var21 <= 0) && !OBlock.n[var1.a(var17, var16, var19)]) {
                                     this.a(var1, var17, var16, var19, OBlock.K.bO, 1);
                                 }

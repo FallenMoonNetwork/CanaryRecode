@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.server.OAxisAlignedBB;
@@ -11,6 +12,7 @@ import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.OPotion;
 import net.minecraft.server.OPotionEffect;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityPotion extends OEntityThrowable {
 
@@ -53,17 +55,21 @@ public class OEntityPotion extends OEntityThrowable {
     protected void a(OMovingObjectPosition var1) {
         if (!this.bi.F) {
             List var2 = OItem.br.b(this.d);
+
             if (var2 != null && !var2.isEmpty()) {
                 OAxisAlignedBB var3 = this.bw.b(4.0D, 2.0D, 4.0D);
                 List var4 = this.bi.a(OEntityLiving.class, var3);
+
                 if (var4 != null && !var4.isEmpty()) {
                     Iterator var5 = var4.iterator();
 
                     while (var5.hasNext()) {
                         OEntity var6 = (OEntity) var5.next();
                         double var7 = this.j(var6);
+
                         if (var7 < 16.0D) {
                             double var9 = 1.0D - Math.sqrt(var7) / 4.0D;
+
                             if (var6 == var1.g) {
                                 var9 = 1.0D;
                             }
@@ -73,10 +79,12 @@ public class OEntityPotion extends OEntityThrowable {
                             while (var11.hasNext()) {
                                 OPotionEffect var12 = (OPotionEffect) var11.next();
                                 int var13 = var12.a();
+
                                 if (OPotion.a[var13].b()) {
                                     OPotion.a[var13].a(this.c, (OEntityLiving) var6, var12.c(), var9);
                                 } else {
                                     int var14 = (int) (var9 * var12.b() + 0.5D);
+
                                     if (var14 > 20) {
                                         ((OEntityLiving) var6).e(new OPotionEffect(var13, var14, var12.c()));
                                     }

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OBiomeGenHell;
@@ -9,12 +10,14 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
 
+
 public class OBlockNetherStalk extends OBlockFlower {
 
     protected OBlockNetherStalk(int var1) {
         super(var1, 226);
         this.a(true);
         float var2 = 0.5F;
+
         this.a(0.5F - var2, 0.0F, 0.5F - var2, 0.5F + var2, 0.25F, 0.5F + var2);
     }
 
@@ -31,8 +34,10 @@ public class OBlockNetherStalk extends OBlockFlower {
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         int var6 = var1.c(var2, var3, var4);
+
         if (var6 < 3) {
             OBiomeGenBase var7 = var1.a(var2, var4);
+
             if (var7 instanceof OBiomeGenHell && var5.nextInt(10) == 0) {
                 ++var6;
                 var1.c(var2, var3, var4, var6);
@@ -56,6 +61,7 @@ public class OBlockNetherStalk extends OBlockFlower {
     public void a(OWorld var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         if (!var1.F) {
             int var8 = 1;
+
             if (var5 >= 3) {
                 var8 = 2 + var1.r.nextInt(3);
                 if (var7 > 0) {

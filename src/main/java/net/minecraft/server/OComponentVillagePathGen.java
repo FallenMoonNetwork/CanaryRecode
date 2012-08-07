@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -10,6 +11,7 @@ import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructureVillagePieces;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentVillagePathGen extends OComponentVillageRoadPiece {
 
@@ -28,6 +30,7 @@ public class OComponentVillagePathGen extends OComponentVillageRoadPiece {
 
         int var5;
         OStructureComponent var6;
+
         for (var5 = var3.nextInt(5); var5 < this.a - 8; var5 += 2 + var3.nextInt(5)) {
             var6 = this.a((OComponentVillageStartPiece) var1, var2, var3, 0, var5);
             if (var6 != null) {
@@ -49,12 +52,15 @@ public class OComponentVillagePathGen extends OComponentVillageRoadPiece {
             case 0:
                 OStructureVillagePieces.b((OComponentVillageStartPiece) var1, var2, var3, this.g.a - 1, this.g.b, this.g.f - 2, 1, this.c());
                 break;
+
             case 1:
                 OStructureVillagePieces.b((OComponentVillageStartPiece) var1, var2, var3, this.g.a, this.g.b, this.g.c - 1, 2, this.c());
                 break;
+
             case 2:
                 OStructureVillagePieces.b((OComponentVillageStartPiece) var1, var2, var3, this.g.a - 1, this.g.b, this.g.c, 1, this.c());
                 break;
+
             case 3:
                 OStructureVillagePieces.b((OComponentVillageStartPiece) var1, var2, var3, this.g.d - 2, this.g.b, this.g.c - 1, 2, this.c());
             }
@@ -65,12 +71,15 @@ public class OComponentVillagePathGen extends OComponentVillageRoadPiece {
             case 0:
                 OStructureVillagePieces.b((OComponentVillageStartPiece) var1, var2, var3, this.g.d + 1, this.g.b, this.g.f - 2, 3, this.c());
                 break;
+
             case 1:
                 OStructureVillagePieces.b((OComponentVillageStartPiece) var1, var2, var3, this.g.a, this.g.b, this.g.f + 1, 0, this.c());
                 break;
+
             case 2:
                 OStructureVillagePieces.b((OComponentVillageStartPiece) var1, var2, var3, this.g.d + 1, this.g.b, this.g.c, 3, this.c());
                 break;
+
             case 3:
                 OStructureVillagePieces.b((OComponentVillageStartPiece) var1, var2, var3, this.g.d - 2, this.g.b, this.g.f + 1, 0, this.c());
             }
@@ -81,6 +90,7 @@ public class OComponentVillagePathGen extends OComponentVillageRoadPiece {
     public static OStructureBoundingBox a(OComponentVillageStartPiece var0, List var1, Random var2, int var3, int var4, int var5, int var6) {
         for (int var7 = 7 * OMathHelper.a(var2, 3, 5); var7 >= 7; var7 -= 7) {
             OStructureBoundingBox var8 = OStructureBoundingBox.a(var3, var4, var5, 0, 0, 0, 3, 3, var7, var6);
+
             if (OStructureComponent.a(var1, var8) == null) {
                 return var8;
             }
@@ -95,6 +105,7 @@ public class OComponentVillagePathGen extends OComponentVillageRoadPiece {
             for (int var5 = this.g.c; var5 <= this.g.f; ++var5) {
                 if (var3.b(var4, 64, var5)) {
                     int var6 = var1.g(var4, var5) - 1;
+
                     var1.b(var4, var6, var5, OBlock.F.bO);
                 }
             }

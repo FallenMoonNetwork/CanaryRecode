@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 
 import net.canarymod.api.entity.CanaryEntity;
@@ -15,6 +16,7 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityFireball extends OEntity {
 
     private int e = -1;
@@ -28,7 +30,7 @@ public class OEntityFireball extends OEntity {
     public double b;
     public double c;
     public double d;
-    private Fireball fireball; //CanaryMob
+    private Fireball fireball; // CanaryMob
 
     public OEntityFireball(OWorld var1) {
         super(var1);
@@ -37,8 +39,7 @@ public class OEntityFireball extends OEntity {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     public OEntityFireball(OWorld var1, double var2, double var4, double var6, double var8, double var10, double var12) {
         super(var1);
@@ -46,6 +47,7 @@ public class OEntityFireball extends OEntity {
         this.c(var2, var4, var6, this.bs, this.bt);
         this.c(var2, var4, var6);
         double var14 = OMathHelper.a(var8 * var8 + var10 * var10 + var12 * var12);
+
         this.b = var8 / var14 * 0.1D;
         this.c = var10 / var14 * 0.1D;
         this.d = var12 / var14 * 0.1D;
@@ -63,6 +65,7 @@ public class OEntityFireball extends OEntity {
         var5 += this.bS.nextGaussian() * 0.4D;
         var7 += this.bS.nextGaussian() * 0.4D;
         double var9 = OMathHelper.a(var3 * var3 + var5 * var5 + var7 * var7);
+
         this.b = var3 / var9 * 0.1D;
         this.c = var5 / var9 * 0.1D;
         this.d = var7 / var9 * 0.1D;
@@ -77,6 +80,7 @@ public class OEntityFireball extends OEntity {
             this.i(1);
             if (this.i) {
                 int var1 = this.bi.a(this.e, this.f, this.g);
+
                 if (var1 == this.h) {
                     ++this.j;
                     if (this.j == 600) {
@@ -99,6 +103,7 @@ public class OEntityFireball extends OEntity {
             OVec3D var15 = OVec3D.b(this.bm, this.bn, this.bo);
             OVec3D var2 = OVec3D.b(this.bm + this.bp, this.bn + this.bq, this.bo + this.br);
             OMovingObjectPosition var3 = this.bi.a(var15, var2);
+
             var15 = OVec3D.b(this.bm, this.bn, this.bo);
             var2 = OVec3D.b(this.bm + this.bp, this.bn + this.bq, this.bo + this.br);
             if (var3 != null) {
@@ -111,12 +116,15 @@ public class OEntityFireball extends OEntity {
 
             for (int var8 = 0; var8 < var5.size(); ++var8) {
                 OEntity var9 = (OEntity) var5.get(var8);
+
                 if (var9.o_() && (!var9.a_(this.a) || this.k >= 25)) {
                     float var10 = 0.3F;
                     OAxisAlignedBB var11 = var9.bw.b(var10, var10, var10);
                     OMovingObjectPosition var12 = var11.a(var15, var2);
+
                     if (var12 != null) {
                         double var13 = var15.b(var12.f);
+
                         if (var13 < var6 || var6 == 0.0D) {
                             var4 = var9;
                             var6 = var13;
@@ -137,6 +145,7 @@ public class OEntityFireball extends OEntity {
             this.bn += this.bq;
             this.bo += this.br;
             float var16 = OMathHelper.a(this.bp * this.bp + this.br * this.br);
+
             this.bs = (float) (Math.atan2(this.bp, this.br) * 180.0D / 3.1415927410125732D);
 
             for (this.bt = (float) (Math.atan2(this.bq, var16) * 180.0D / 3.1415927410125732D); this.bt - this.bv < -180.0F; this.bv -= 360.0F) {
@@ -158,9 +167,11 @@ public class OEntityFireball extends OEntity {
             this.bt = this.bv + (this.bt - this.bv) * 0.2F;
             this.bs = this.bu + (this.bs - this.bu) * 0.2F;
             float var17 = 0.95F;
+
             if (this.aU()) {
                 for (int var19 = 0; var19 < 4; ++var19) {
                     float var18 = 0.25F;
+
                     this.bi.a("bubble", this.bm - this.bp * var18, this.bn - this.bq * var18, this.bo - this.br * var18, this.bp, this.bq, this.br);
                 }
 
@@ -184,7 +195,7 @@ public class OEntityFireball extends OEntity {
                 ;
             }
 
-            this.bi.a(this, this.bm, this.bn, this.bo, 1.0F, true); //CanaryMod  added 'this' as entity param
+            this.bi.a(this, this.bm, this.bn, this.bo, 1.0F, true); // CanaryMod  added 'this' as entity param
             this.X();
         }
 
@@ -223,6 +234,7 @@ public class OEntityFireball extends OEntity {
         this.aW();
         if (var1.a() != null) {
             OVec3D var3 = var1.a().aJ();
+
             if (var3 != null) {
                 this.bp = var3.a;
                 this.bq = var3.b;
@@ -248,7 +260,7 @@ public class OEntityFireball extends OEntity {
     }
     
     @Override
-    public CanaryEntity getCanaryEntity(){ //Probably not needed to do this but just in case castings fail
+    public CanaryEntity getCanaryEntity() { // Probably not needed to do this but just in case castings fail
         return (CanaryEntity) this.fireball;
     }
 }

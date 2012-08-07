@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OProfiler;
+
 
 public class OEntitySenses {
 
@@ -29,6 +31,7 @@ public class OEntitySenses {
         } else {
             OProfiler.a("canSee");
             boolean var2 = this.a.h(var1);
+
             OProfiler.a();
             if (var2) {
                 this.b.add(var1);

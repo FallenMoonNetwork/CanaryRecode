@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OWorldGenHellLava extends OWorldGenerator {
 
@@ -22,6 +24,7 @@ public class OWorldGenHellLava extends OWorldGenerator {
             return false;
         } else {
             int var6 = 0;
+
             if (var1.a(var3 - 1, var4, var5) == OBlock.bb.bO) {
                 ++var6;
             }
@@ -43,6 +46,7 @@ public class OWorldGenHellLava extends OWorldGenerator {
             }
 
             int var7 = 0;
+
             if (var1.g(var3 - 1, var4, var5)) {
                 ++var7;
             }

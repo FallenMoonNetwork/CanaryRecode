@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIDoorInteract;
 import net.minecraft.server.OEntityLiving;
+
 
 public class OEntityAIBreakDoor extends OEntityAIDoorInteract {
 
@@ -13,7 +15,7 @@ public class OEntityAIBreakDoor extends OEntityAIDoorInteract {
 
     @Override
     public boolean a() {
-        return !super.a() ? false : !this.e.d((OIBlockAccess)this.a.bi, this.b, this.c, this.d);
+        return !super.a() ? false : !this.e.d((OIBlockAccess) this.a.bi, this.b, this.c, this.d);
     }
 
     @Override
@@ -25,7 +27,8 @@ public class OEntityAIBreakDoor extends OEntityAIDoorInteract {
     @Override
     public boolean b() {
         double var1 = this.a.e((double) this.b, (double) this.c, (double) this.d);
-        return this.i >= 0 && !this.e.d((OIBlockAccess)this.a.bi, this.b, this.c, this.d) && var1 < 4.0D;
+
+        return this.i >= 0 && !this.e.d((OIBlockAccess) this.a.bi, this.b, this.c, this.d) && var1 < 4.0D;
     }
 
     @Override

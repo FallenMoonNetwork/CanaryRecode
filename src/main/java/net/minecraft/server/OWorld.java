@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,10 +59,11 @@ import net.minecraft.server.OWorldProvider;
 import net.minecraft.server.OWorldSavedData;
 import net.minecraft.server.OWorldSettings;
 
+
 public class OWorld implements OIBlockAccess {
 
     public boolean a = false;
-    //CanaryMod parameterized lotsa stuff
+    // CanaryMod parameterized lotsa stuff
     public List<OEntity> b = new ArrayList<OEntity>();
     private List G = new ArrayList();
     private TreeSet<ONextTickListEntry> H = new TreeSet<ONextTickListEntry>();
@@ -91,7 +93,7 @@ public class OWorld implements OIBlockAccess {
     protected List<OIWorldAccess> u = new ArrayList<OIWorldAccess>();
     protected OIChunkProvider v;
     protected final OISaveHandler w;
-    public OWorldInfo worldInfo; //CanaryMod protected -> public, renamed x -> worldInfo
+    public OWorldInfo worldInfo; // CanaryMod protected -> public, renamed x -> worldInfo
     public boolean y;
     private boolean N;
     public OMapStorage z;
@@ -142,11 +144,13 @@ public class OWorld implements OIBlockAccess {
     public void setPlayerManager(CanaryPlayerManager manager) {
         this.playerManager = manager;
     }
+
     // CanaryMod end
     
     public OBiomeGenBase a(int var1, int var2) {
         if (this.i(var1, 0, var2)) {
             OChunk var3 = this.c(var1, var2);
+
             if (var3 != null) {
                 return var3.a(var1 & 15, var2 & 15, this.t.c);
             }
@@ -178,6 +182,7 @@ public class OWorld implements OIBlockAccess {
         }
 
         boolean var5 = false;
+
         if (this.worldInfo == null) {
             this.worldInfo = new OWorldInfo(var3, var2);
             var5 = true;
@@ -197,6 +202,7 @@ public class OWorld implements OIBlockAccess {
 
     protected OIChunkProvider b() {
         OIChunkLoader var1 = this.w.a(this.t);
+
         return new OChunkProvider(this, var1, this.t.b());
     }
 
@@ -212,6 +218,7 @@ public class OWorld implements OIBlockAccess {
             int var5 = 0;
             int var6 = this.t.f();
             int var7 = 0;
+
             if (var4 != null) {
                 var5 = var4.a;
                 var7 = var4.c;
@@ -241,6 +248,7 @@ public class OWorld implements OIBlockAccess {
 
     public int b(int var1, int var2) {
         int var3;
+
         for (var3 = 63; !this.g(var1, var3 + 1, var2); ++var3) {
             ;
         }
@@ -284,6 +292,7 @@ public class OWorld implements OIBlockAccess {
 
     public boolean h(int var1, int var2, int var3) {
         int var4 = this.a(var1, var2, var3);
+
         return OBlock.m[var4] != null && OBlock.m[var4].o();
     }
 
@@ -337,6 +346,7 @@ public class OWorld implements OIBlockAccess {
             } else {
                 OChunk var6 = this.d(var1 >> 4, var3 >> 4);
                 boolean var7 = var6.a(var1 & 15, var2, var3 & 15, var4, var5);
+
                 OProfiler.a("checkLight");
                 this.v(var1, var2, var3);
                 OProfiler.a();
@@ -356,6 +366,7 @@ public class OWorld implements OIBlockAccess {
             } else {
                 OChunk var5 = this.d(var1 >> 4, var3 >> 4);
                 boolean var6 = var5.a(var1 & 15, var2, var3 & 15, var4);
+
                 OProfiler.a("checkLight");
                 this.v(var1, var2, var3);
                 OProfiler.a();
@@ -369,6 +380,7 @@ public class OWorld implements OIBlockAccess {
     @Override
     public OMaterial d(int var1, int var2, int var3) {
         int var4 = this.a(var1, var2, var3);
+
         return var4 == 0 ? OMaterial.a : OBlock.m[var4].cd;
     }
 
@@ -381,6 +393,7 @@ public class OWorld implements OIBlockAccess {
                 return 0;
             } else {
                 OChunk var4 = this.d(var1 >> 4, var3 >> 4);
+
                 var1 &= 15;
                 var3 &= 15;
                 return var4.c(var1, var2, var3);
@@ -393,6 +406,7 @@ public class OWorld implements OIBlockAccess {
     public void c(int var1, int var2, int var3, int var4) {
         if (this.d(var1, var2, var3, var4)) {
             int var5 = this.a(var1, var2, var3);
+
             if (OBlock.r[var5 & 4095]) {
                 this.f(var1, var2, var3, var5);
             } else {
@@ -410,6 +424,7 @@ public class OWorld implements OIBlockAccess {
                 return false;
             } else {
                 OChunk var5 = this.d(var1 >> 4, var3 >> 4);
+
                 var1 &= 15;
                 var3 &= 15;
                 return var5.b(var1, var2, var3, var4);
@@ -451,6 +466,7 @@ public class OWorld implements OIBlockAccess {
 
     public void g(int var1, int var2, int var3, int var4) {
         int var5;
+
         if (var3 > var4) {
             var5 = var4;
             var4 = var3;
@@ -492,6 +508,7 @@ public class OWorld implements OIBlockAccess {
     private void k(int var1, int var2, int var3, int var4) {
         if (!this.o && !this.F) {
             OBlock var5 = OBlock.m[this.a(var1, var2, var3)];
+
             if (var5 != null) {
                 var5.a(this, var1, var2, var3, var4);
             }
@@ -523,12 +540,14 @@ public class OWorld implements OIBlockAccess {
         if (var1 >= -30000000 && var3 >= -30000000 && var1 < 30000000 && var3 < 30000000) {
             if (var4) {
                 int var5 = this.a(var1, var2, var3);
+
                 if (var5 == OBlock.ak.bO || var5 == OBlock.aA.bO || var5 == OBlock.aH.bO || var5 == OBlock.at.bO) {
                     int var6 = this.a(var1, var2 + 1, var3, false);
                     int var7 = this.a(var1 + 1, var2, var3, false);
                     int var8 = this.a(var1 - 1, var2, var3, false);
                     int var9 = this.a(var1, var2, var3 + 1, false);
                     int var10 = this.a(var1, var2, var3 - 1, false);
+
                     if (var7 > var6) {
                         var6 = var7;
                     }
@@ -557,6 +576,7 @@ public class OWorld implements OIBlockAccess {
                 }
 
                 OChunk var11 = this.d(var1 >> 4, var3 >> 4);
+
                 var1 &= 15;
                 var3 &= 15;
                 return var11.c(var1, var2, var3, this.f);
@@ -572,6 +592,7 @@ public class OWorld implements OIBlockAccess {
                 return 0;
             } else {
                 OChunk var3 = this.d(var1 >> 4, var2 >> 4);
+
                 return var3.b(var1 & 15, var2 & 15);
             }
         } else {
@@ -591,10 +612,12 @@ public class OWorld implements OIBlockAccess {
         if (var2 >= -30000000 && var4 >= -30000000 && var2 < 30000000 && var4 < 30000000) {
             int var5 = var2 >> 4;
             int var6 = var4 >> 4;
+
             if (!this.h(var5, var6)) {
                 return var1.c;
             } else {
                 OChunk var7 = this.d(var5, var6);
+
                 return var7.a(var1, var2 & 15, var3, var4 & 15);
             }
         } else {
@@ -608,6 +631,7 @@ public class OWorld implements OIBlockAccess {
                 if (var3 < 256) {
                     if (this.h(var2 >> 4, var4 >> 4)) {
                         OChunk var6 = this.d(var2 >> 4, var4 >> 4);
+
                         var6.a(var1, var2 & 15, var3, var4 & 15, var5);
 
                         for (int var7 = 0; var7 < this.u.size(); ++var7) {
@@ -655,8 +679,10 @@ public class OWorld implements OIBlockAccess {
                 int var11 = this.a(var8, var9, var10);
                 int var12 = this.c(var8, var9, var10);
                 OBlock var13 = OBlock.m[var11];
+
                 if ((!var4 || var13 == null || var13.e(this, var8, var9, var10) != null) && var11 > 0 && var13.a(var12, var3)) {
                     OMovingObjectPosition var14 = var13.a(this, var8, var9, var10, var1, var2);
+
                     if (var14 != null) {
                         return var14;
                     }
@@ -679,6 +705,7 @@ public class OWorld implements OIBlockAccess {
                     double var15 = 999.0D;
                     double var17 = 999.0D;
                     double var19 = 999.0D;
+
                     if (var5 > var8) {
                         var15 = var8 + 1.0D;
                     } else if (var5 < var8) {
@@ -709,6 +736,7 @@ public class OWorld implements OIBlockAccess {
                     double var27 = var2.a - var1.a;
                     double var29 = var2.b - var1.b;
                     double var31 = var2.c - var1.c;
+
                     if (var39) {
                         var21 = (var15 - var1.a) / var27;
                     }
@@ -723,6 +751,7 @@ public class OWorld implements OIBlockAccess {
 
                     boolean var33 = false;
                     byte var42;
+
                     if (var21 < var23 && var21 < var25) {
                         if (var5 > var8) {
                             var42 = 4;
@@ -756,6 +785,7 @@ public class OWorld implements OIBlockAccess {
                     }
 
                     OVec3D var34 = OVec3D.b(var1.a, var1.b, var1.c);
+
                     var8 = (int) (var34.a = OMathHelper.b(var1.a));
                     if (var42 == 5) {
                         --var8;
@@ -777,8 +807,10 @@ public class OWorld implements OIBlockAccess {
                     int var35 = this.a(var8, var9, var10);
                     int var36 = this.c(var8, var9, var10);
                     OBlock var37 = OBlock.m[var35];
+
                     if ((!var4 || var37 == null || var37.e(this, var8, var9, var10) != null) && var35 > 0 && var37.a(var36, var3)) {
                         OMovingObjectPosition var38 = var37.a(this, var8, var9, var10, var1, var2);
+
                         if (var38 != null) {
                             return var38;
                         }
@@ -829,23 +861,24 @@ public class OWorld implements OIBlockAccess {
 
     public boolean b(OEntity var1) {
         
-        //CanaryMod start - EntitySpawnHook
-        if(!(var1 instanceof OEntityPlayer)){
+        // CanaryMod start - EntitySpawnHook
+        if (!(var1 instanceof OEntityPlayer)) {
             EntitySpawnHook hook = null;
-            if(var1 instanceof OEntityLiving){
-                //implement MobSpawnRate Here!
+
+            if (var1 instanceof OEntityLiving) {// implement MobSpawnRate Here!
             }
             hook = new EntitySpawnHook(var1.getCanaryEntity(), true);
             Canary.hooks().callHook(hook);
-            if(hook.isCanceled()) {
+            if (hook.isCanceled()) {
                 return false;
             }
         }
-        //CanaryMod end - EntitySpawnHook
+        // CanaryMod end - EntitySpawnHook
         
         int var2 = OMathHelper.b(var1.bm / 16.0D);
         int var3 = OMathHelper.b(var1.bo / 16.0D);
         boolean var4 = false;
+
         if (var1 instanceof OEntityPlayer) {
             var4 = true;
         }
@@ -855,6 +888,7 @@ public class OWorld implements OIBlockAccess {
         } else {
             if (var1 instanceof OEntityPlayer) {
                 OEntityPlayer var5 = (OEntityPlayer) var1;
+
                 this.d.add(var5);
                 this.t();
             }
@@ -906,6 +940,7 @@ public class OWorld implements OIBlockAccess {
 
         int var2 = var1.ca;
         int var3 = var1.cc;
+
         if (var1.bZ && this.h(var2, var3)) {
             this.d(var2, var3).b(var1);
         }
@@ -932,6 +967,7 @@ public class OWorld implements OIBlockAccess {
                 if (this.i(var9, 64, var10)) {
                     for (int var11 = var5 - 1; var11 < var6; ++var11) {
                         OBlock var12 = OBlock.m[this.a(var9, var11, var10)];
+
                         if (var12 != null) {
                             var12.a(this, var9, var11, var10, var2, this.P);
                         }
@@ -945,6 +981,7 @@ public class OWorld implements OIBlockAccess {
 
         for (int var16 = 0; var16 < var17.size(); ++var16) {
             OAxisAlignedBB var15 = ((OEntity) var17.get(var16)).h();
+
             if (var15 != null && var15.a(var2)) {
                 this.P.add(var15);
             }
@@ -961,6 +998,7 @@ public class OWorld implements OIBlockAccess {
     public int a(float var1) {
         float var2 = this.b(var1);
         float var3 = 1.0F - (OMathHelper.b(var2 * 3.1415927F * 2.0F) * 2.0F + 0.5F);
+
         if (var3 < 0.0F) {
             var3 = 0.0F;
         }
@@ -987,10 +1025,12 @@ public class OWorld implements OIBlockAccess {
     public int g(int var1, int var2) {
         OChunk var3 = this.c(var1, var2);
         int var4 = var3.g() + 16;
+
         var1 &= 15;
 
         for (var2 &= 15; var4 > 0; --var4) {
             int var5 = var3.a(var1, var4, var2);
+
             if (var5 != 0 && OBlock.m[var5].cd.c() && OBlock.m[var5].cd != OMaterial.i) {
                 return var4 + 1;
             }
@@ -1002,9 +1042,11 @@ public class OWorld implements OIBlockAccess {
     public void c(int var1, int var2, int var3, int var4, int var5) {
         ONextTickListEntry var6 = new ONextTickListEntry(var1, var2, var3, var4);
         byte var7 = 8;
+
         if (this.a) {
             if (this.a(var6.a - var7, var6.b - var7, var6.c - var7, var6.a + var7, var6.b + var7, var6.c + var7)) {
                 int var8 = this.a(var6.a, var6.b, var6.c);
+
                 if (var8 == var6.d && var8 > 0) {
                     OBlock.m[var8].a(this, var6.a, var6.b, var6.c, this.r);
                 }
@@ -1027,6 +1069,7 @@ public class OWorld implements OIBlockAccess {
 
     public void d(int var1, int var2, int var3, int var4, int var5) {
         ONextTickListEntry var6 = new ONextTickListEntry(var1, var2, var3, var4);
+
         if (var4 > 0) {
             var6.a(var5 + this.worldInfo.getTime());
         }
@@ -1044,6 +1087,7 @@ public class OWorld implements OIBlockAccess {
 
         int var1;
         OEntity var2;
+
         for (var1 = 0; var1 < this.e.size(); ++var1) {
             var2 = this.e.get(var1);
             var2.F_();
@@ -1057,6 +1101,7 @@ public class OWorld implements OIBlockAccess {
 
         int var3;
         int var4;
+
         for (var1 = 0; var1 < this.G.size(); ++var1) {
             var2 = (OEntity) this.G.get(var1);
             var3 = var2.ca;
@@ -1109,6 +1154,7 @@ public class OWorld implements OIBlockAccess {
 
         while (var10.hasNext()) {
             OTileEntity var5 = var10.next();
+
             if (!var5.l() && var5.k != null && this.i(var5.l, var5.m, var5.n)) {
                 var5.q_();
             }
@@ -1117,6 +1163,7 @@ public class OWorld implements OIBlockAccess {
                 var10.remove();
                 if (this.h(var5.l >> 4, var5.n >> 4)) {
                     OChunk var7 = this.d(var5.l >> 4, var5.n >> 4);
+
                     if (var7 != null) {
                         var7.f(var5.l & 15, var5.m, var5.n & 15);
                     }
@@ -1136,6 +1183,7 @@ public class OWorld implements OIBlockAccess {
 
             while (var6.hasNext()) {
                 OTileEntity var8 = var6.next();
+
                 if (!var8.l()) {
                     if (!this.c.contains(var8)) {
                         this.c.add(var8);
@@ -1143,6 +1191,7 @@ public class OWorld implements OIBlockAccess {
 
                     if (this.h(var8.l >> 4, var8.n >> 4)) {
                         OChunk var9 = this.d(var8.l >> 4, var8.n >> 4);
+
                         if (var9 != null) {
                             var9.a(var8.l & 15, var8.m, var8.n & 15, var8);
                         }
@@ -1176,6 +1225,7 @@ public class OWorld implements OIBlockAccess {
         int var3 = OMathHelper.b(var1.bm);
         int var4 = OMathHelper.b(var1.bo);
         byte var5 = 32;
+
         if (!var2 || this.a(var3 - var5, 0, var4 - var5, var3 + var5, 0, var4 + var5)) {
             var1.bL = var1.bm;
             var1.bM = var1.bn;
@@ -1214,6 +1264,7 @@ public class OWorld implements OIBlockAccess {
             int var6 = OMathHelper.b(var1.bm / 16.0D);
             int var7 = OMathHelper.b(var1.bn / 16.0D);
             int var8 = OMathHelper.b(var1.bo / 16.0D);
+
             if (!var1.bZ || var1.ca != var6 || var1.cb != var7 || var1.cc != var8) {
                 if (var1.bZ && this.h(var1.ca, var1.cc)) {
                     this.d(var1.ca, var1.cc).a(var1, var1.cb);
@@ -1245,6 +1296,7 @@ public class OWorld implements OIBlockAccess {
 
         for (int var3 = 0; var3 < var2.size(); ++var3) {
             OEntity var4 = (OEntity) var2.get(var3);
+
             if (!var4.bE && var4.bf) {
                 return false;
             }
@@ -1260,6 +1312,7 @@ public class OWorld implements OIBlockAccess {
         int var5 = OMathHelper.b(var1.e + 1.0D);
         int var6 = OMathHelper.b(var1.c);
         int var7 = OMathHelper.b(var1.f + 1.0D);
+
         if (var1.a < 0.0D) {
             --var2;
         }
@@ -1276,6 +1329,7 @@ public class OWorld implements OIBlockAccess {
             for (int var9 = var4; var9 < var5; ++var9) {
                 for (int var10 = var6; var10 < var7; ++var10) {
                     OBlock var11 = OBlock.m[this.a(var8, var9, var10)];
+
                     if (var11 != null) {
                         return true;
                     }
@@ -1293,6 +1347,7 @@ public class OWorld implements OIBlockAccess {
         int var5 = OMathHelper.b(var1.e + 1.0D);
         int var6 = OMathHelper.b(var1.c);
         int var7 = OMathHelper.b(var1.f + 1.0D);
+
         if (var1.a < 0.0D) {
             --var2;
         }
@@ -1309,6 +1364,7 @@ public class OWorld implements OIBlockAccess {
             for (int var9 = var4; var9 < var5; ++var9) {
                 for (int var10 = var6; var10 < var7; ++var10) {
                     OBlock var11 = OBlock.m[this.a(var8, var9, var10)];
+
                     if (var11 != null && var11.cd.d()) {
                         return true;
                     }
@@ -1326,11 +1382,13 @@ public class OWorld implements OIBlockAccess {
         int var5 = OMathHelper.b(var1.e + 1.0D);
         int var6 = OMathHelper.b(var1.c);
         int var7 = OMathHelper.b(var1.f + 1.0D);
+
         if (this.a(var2, var4, var6, var3, var5, var7)) {
             for (int var8 = var2; var8 < var3; ++var8) {
                 for (int var9 = var4; var9 < var5; ++var9) {
                     for (int var10 = var6; var10 < var7; ++var10) {
                         int var11 = this.a(var8, var9, var10);
+
                         if (var11 == OBlock.ar.bO || var11 == OBlock.C.bO || var11 == OBlock.D.bO) {
                             return true;
                         }
@@ -1349,6 +1407,7 @@ public class OWorld implements OIBlockAccess {
         int var7 = OMathHelper.b(var1.e + 1.0D);
         int var8 = OMathHelper.b(var1.c);
         int var9 = OMathHelper.b(var1.f + 1.0D);
+
         if (!this.a(var4, var6, var8, var5, var7, var9)) {
             return false;
         } else {
@@ -1359,8 +1418,10 @@ public class OWorld implements OIBlockAccess {
                 for (int var13 = var6; var13 < var7; ++var13) {
                     for (int var14 = var8; var14 < var9; ++var14) {
                         OBlock var15 = OBlock.m[this.a(var12, var13, var14)];
+
                         if (var15 != null && var15.cd == var2) {
                             double var16 = ((var13 + 1) - OBlockFluid.d(this.c(var12, var13, var14)));
+
                             if (var7 >= var16) {
                                 var10 = true;
                                 var15.a(this, var12, var13, var14, var3, var11);
@@ -1373,6 +1434,7 @@ public class OWorld implements OIBlockAccess {
             if (var11.c() > 0.0D) {
                 var11 = var11.b();
                 double var18 = 0.014D;
+
                 var3.bp += var11.a * var18;
                 var3.bq += var11.b * var18;
                 var3.br += var11.c * var18;
@@ -1394,6 +1456,7 @@ public class OWorld implements OIBlockAccess {
             for (int var10 = var5; var10 < var6; ++var10) {
                 for (int var11 = var7; var11 < var8; ++var11) {
                     OBlock var12 = OBlock.m[this.a(var9, var10, var11)];
+
                     if (var12 != null && var12.cd == var2) {
                         return true;
                     }
@@ -1416,9 +1479,11 @@ public class OWorld implements OIBlockAccess {
             for (int var10 = var5; var10 < var6; ++var10) {
                 for (int var11 = var7; var11 < var8; ++var11) {
                     OBlock var12 = OBlock.m[this.a(var9, var10, var11)];
+
                     if (var12 != null && var12.cd == var2) {
                         int var13 = this.c(var9, var10, var11);
                         double var14 = (var10 + 1);
+
                         if (var13 < 8) {
                             var14 = (var10 + 1) - var13 / 8.0D;
                         }
@@ -1440,6 +1505,7 @@ public class OWorld implements OIBlockAccess {
 
     public OExplosion a(OEntity exploder, double x, double y, double z, float power, boolean var9) {
         OExplosion var10 = new OExplosion(this, exploder, x, y, z, power);
+
         var10.a = var9;
         var10.a();
         var10.a(true);
@@ -1459,6 +1525,7 @@ public class OWorld implements OIBlockAccess {
                     double var14 = var2.a + (var2.d - var2.a) * var11;
                     double var16 = var2.b + (var2.e - var2.b) * var12;
                     double var18 = var2.c + (var2.f - var2.c) * var13;
+
                     if (this.a(OVec3D.b(var14, var16, var18), var1) == null) {
                         ++var9;
                     }
@@ -1511,15 +1578,18 @@ public class OWorld implements OIBlockAccess {
             return null;
         } else {
             OChunk var4 = this.d(var1 >> 4, var3 >> 4);
+
             if (var4 == null) {
                 return null;
             } else {
                 OTileEntity var5 = var4.e(var1 & 15, var2, var3 & 15);
+
                 if (var5 == null) {
                     Iterator<OTileEntity> var6 = this.J.iterator();
 
                     while (var6.hasNext()) {
                         OTileEntity var7 = var6.next();
+
                         if (!var7.l() && var7.l == var1 && var7.m == var2 && var7.n == var3) {
                             var5 = var7;
                             break;
@@ -1542,6 +1612,7 @@ public class OWorld implements OIBlockAccess {
             } else {
                 this.c.add(var4);
                 OChunk var5 = this.d(var1 >> 4, var3 >> 4);
+
                 if (var5 != null) {
                     var5.a(var1 & 15, var2, var3 & 15, var4);
                 }
@@ -1552,6 +1623,7 @@ public class OWorld implements OIBlockAccess {
 
     public void q(int var1, int var2, int var3) {
         OTileEntity var4 = this.b(var1, var2, var3);
+
         if (var4 != null && this.Q) {
             var4.j();
             this.J.remove(var4);
@@ -1562,6 +1634,7 @@ public class OWorld implements OIBlockAccess {
             }
 
             OChunk var5 = this.d(var1 >> 4, var3 >> 4);
+
             if (var5 != null) {
                 var5.f(var1 & 15, var2, var3 & 15);
             }
@@ -1575,6 +1648,7 @@ public class OWorld implements OIBlockAccess {
 
     public boolean r(int var1, int var2, int var3) {
         OBlock var4 = OBlock.m[this.a(var1, var2, var3)];
+
         return var4 == null ? false : var4.a();
     }
 
@@ -1586,8 +1660,10 @@ public class OWorld implements OIBlockAccess {
     public boolean b(int var1, int var2, int var3, boolean var4) {
         if (var1 >= -30000000 && var3 >= -30000000 && var1 < 30000000 && var3 < 30000000) {
             OChunk var5 = this.v.b(var1 >> 4, var3 >> 4);
+
             if (var5 != null && !var5.f()) {
                 OBlock var6 = OBlock.m[this.a(var1, var2, var3)];
+
                 return var6 == null ? false : var6.cd.j() && var6.b();
             } else {
                 return var4;
@@ -1599,6 +1675,7 @@ public class OWorld implements OIBlockAccess {
 
     public void g() {
         int var1 = this.a(1.0F);
+
         if (var1 != this.f) {
             this.f = var1;
         }
@@ -1618,8 +1695,10 @@ public class OWorld implements OIBlockAccess {
         this.t.c.b();
         this.i();
         long var2;
+
         if (this.v()) {
             boolean var1 = false;
+
             if (this.B && this.q >= 1) {
                 ;
             }
@@ -1636,6 +1715,7 @@ public class OWorld implements OIBlockAccess {
         OProfiler.b("chunkSource");
         this.v.a();
         int var4 = this.a(1.0F);
+
         if (var4 != this.f) {
             this.f = var4;
         }
@@ -1674,6 +1754,7 @@ public class OWorld implements OIBlockAccess {
             }
 
             int var1 = this.worldInfo.getThunderTimeTicks();
+
             if (var1 <= 0) {
                 if (this.worldInfo.isThundering()) {
                     this.worldInfo.setThunderTimeTicks(this.r.nextInt(12000) + 3600);
@@ -1689,6 +1770,7 @@ public class OWorld implements OIBlockAccess {
             }
 
             int var2 = this.worldInfo.getRainTimeTicks();
+
             if (var2 <= 0) {
                 if (this.worldInfo.isRaining()) {
                     this.worldInfo.setRainTimeTicks(this.r.nextInt(12000) + 12000);
@@ -1755,6 +1837,7 @@ public class OWorld implements OIBlockAccess {
         OEntityPlayer var2;
         int var3;
         int var4;
+
         for (var1 = 0; var1 < this.d.size(); ++var1) {
             var2 = this.d.get(var1);
             var3 = OMathHelper.b(var2.bm / 16.0D);
@@ -1780,6 +1863,7 @@ public class OWorld implements OIBlockAccess {
             var3 = OMathHelper.b(var2.bm) + this.r.nextInt(11) - 5;
             var4 = OMathHelper.b(var2.bn) + this.r.nextInt(11) - 5;
             int var8 = OMathHelper.b(var2.bo) + this.r.nextInt(11) - 5;
+
             this.v(var3, var4, var8);
         }
 
@@ -1797,10 +1881,12 @@ public class OWorld implements OIBlockAccess {
             int var6 = var4 >> 8 & 15;
             int var7 = var4 >> 16 & 127;
             int var8 = var3.a(var5, var7, var6);
+
             var5 += var1;
             var6 += var2;
             if (var8 == 0 && this.m(var5, var7, var6) <= this.r.nextInt(8) && this.a(OEnumSkyBlock.a, var5, var7, var6) <= 0) {
                 OEntityPlayer var9 = this.a(var5 + 0.5D, var7 + 0.5D, var6 + 0.5D, 8.0D);
+
                 if (var9 != null && var9.e(var5 + 0.5D, var7 + 0.5D, var6 + 0.5D) > 4.0D) {
                     this.a(var5 + 0.5D, var7 + 0.5D, var6 + 0.5D, "ambient.cave.cave", 0.7F, 0.8F + this.r.nextFloat() * 0.2F);
                     this.R = this.r.nextInt(12000) + 6000;
@@ -1822,14 +1908,17 @@ public class OWorld implements OIBlockAccess {
             OChunkCoordIntPair var4 = var3.next();
             int var5 = var4.a * 16;
             int var6 = var4.b * 16;
+
             OProfiler.a("getChunk");
             OChunk var7 = this.d(var4.a, var4.b);
+
             this.a(var5, var6, var7);
             OProfiler.b("thunder");
             int var8;
             int var9;
             int var10;
             int var11;
+
             if (this.r.nextInt(100000) == 0 && this.x() && this.w()) {
                 this.g = this.g * 3 + 1013904223;
                 var8 = this.g >> 2;
@@ -1860,10 +1949,12 @@ public class OWorld implements OIBlockAccess {
 
             OProfiler.b("tickTiles");
             OExtendedBlockStorage[] var19 = var7.h();
+
             var9 = var19.length;
 
             for (var10 = 0; var10 < var9; ++var10) {
                 OExtendedBlockStorage var20 = var19[var10];
+
                 if (var20 != null && var20.b()) {
                     for (int var12 = 0; var12 < 3; ++var12) {
                         this.g = this.g * 3 + 1013904223;
@@ -1872,8 +1963,10 @@ public class OWorld implements OIBlockAccess {
                         int var15 = var13 >> 8 & 15;
                         int var16 = var13 >> 16 & 15;
                         int var17 = var20.a(var14, var16, var15);
+
                         ++var2;
                         OBlock var18 = OBlock.m[var17];
+
                         if (var18 != null && var18.n()) {
                             ++var1;
                             var18.a(this, var14 + var5, var16 + var20.c(), var15 + var6, this.r);
@@ -1898,17 +1991,20 @@ public class OWorld implements OIBlockAccess {
     public boolean c(int var1, int var2, int var3, boolean var4) {
         OBiomeGenBase var5 = this.a(var1, var3);
         float var6 = var5.i();
+
         if (var6 > 0.15F) {
             return false;
         } else {
             if (var2 >= 0 && var2 < 256 && this.a(OEnumSkyBlock.b, var1, var2, var3) < 10) {
                 int var7 = this.a(var1, var2, var3);
+
                 if ((var7 == OBlock.B.bO || var7 == OBlock.A.bO) && this.c(var1, var2, var3) == 0) {
                     if (!var4) {
                         return true;
                     }
 
                     boolean var8 = true;
+
                     if (var8 && this.d(var1 - 1, var2, var3) != OMaterial.g) {
                         var8 = false;
                     }
@@ -1938,12 +2034,14 @@ public class OWorld implements OIBlockAccess {
     public boolean u(int var1, int var2, int var3) {
         OBiomeGenBase var4 = this.a(var1, var3);
         float var5 = var4.i();
+
         if (var5 > 0.15F) {
             return false;
         } else {
             if (var2 >= 0 && var2 < 256 && this.a(OEnumSkyBlock.b, var1, var2, var3) < 10) {
                 int var6 = this.a(var1, var2 - 1, var3);
                 int var7 = this.a(var1, var2, var3);
+
                 if (var7 == 0 && OBlock.aS.c(this, var1, var2, var3) && var6 != 0 && var6 != OBlock.aT.bO && OBlock.m[var6].cd.c()) {
                     return true;
                 }
@@ -1963,6 +2061,7 @@ public class OWorld implements OIBlockAccess {
 
     private int c(int var1, int var2, int var3, int var4, int var5, int var6) {
         int var7 = 0;
+
         if (this.l(var2, var3, var4)) {
             var7 = 15;
         } else {
@@ -1976,6 +2075,7 @@ public class OWorld implements OIBlockAccess {
             int var11 = this.a(OEnumSkyBlock.a, var2, var3 + 1, var4) - var6;
             int var12 = this.a(OEnumSkyBlock.a, var2, var3, var4 - 1) - var6;
             int var13 = this.a(OEnumSkyBlock.a, var2, var3, var4 + 1) - var6;
+
             if (var8 > var7) {
                 var7 = var8;
             }
@@ -2012,6 +2112,7 @@ public class OWorld implements OIBlockAccess {
         int var11 = this.a(OEnumSkyBlock.b, var2, var3 + 1, var4) - var6;
         int var12 = this.a(OEnumSkyBlock.b, var2, var3, var4 - 1) - var6;
         int var13 = this.a(OEnumSkyBlock.b, var2, var3, var4 + 1) - var6;
+
         if (var8 > var7) {
             var7 = var8;
         }
@@ -2043,17 +2144,20 @@ public class OWorld implements OIBlockAccess {
         if (this.a(var2, var3, var4, 17)) {
             int var5 = 0;
             int var6 = 0;
+
             OProfiler.a("getBrightness");
             int var7 = this.a(var1, var2, var3, var4);
             boolean var8 = false;
             int var10 = this.a(var2, var3, var4);
             int var11 = this.f(var2, var3, var4);
+
             if (var11 == 0) {
                 var11 = 1;
             }
 
             boolean var12 = false;
             int var25;
+
             if (var1 == OEnumSkyBlock.a) {
                 var25 = this.c(var7, var2, var3, var4, var10, var11);
             } else {
@@ -2066,6 +2170,7 @@ public class OWorld implements OIBlockAccess {
             int var15;
             int var17;
             int var16;
+
             if (var25 > var7) {
                 this.E[var6++] = 133152;
             } else if (var25 < var7) {
@@ -2106,8 +2211,10 @@ public class OWorld implements OIBlockAccess {
                                     int var20 = var10 + var18 / 2 % 3 / 2 * var19;
                                     int var21 = var11 + (var18 / 2 + 1) % 3 / 2 * var19;
                                     int var22 = var25 + (var18 / 2 + 2) % 3 / 2 * var19;
+
                                     var14 = this.a(var1, var20, var21, var22);
                                     int var23 = OBlock.o[this.a(var20, var21, var22)];
+
                                     if (var23 == 0) {
                                         var23 = 1;
                                     }
@@ -2130,6 +2237,7 @@ public class OWorld implements OIBlockAccess {
             while (var5 < var6) {
                 var7 = this.E[var5++];
                 int var24 = (var7 & 63) - 32 + var2;
+
                 var9 = (var7 >> 6 & 63) - 32 + var3;
                 var10 = (var7 >> 12 & 63) - 32 + var4;
                 var11 = this.a(var1, var24, var9, var10);
@@ -2140,6 +2248,7 @@ public class OWorld implements OIBlockAccess {
                 }
 
                 boolean var26 = false;
+
                 if (var1 == OEnumSkyBlock.a) {
                     var14 = this.c(var11, var24, var9, var10, var25, var13);
                 } else {
@@ -2199,6 +2308,7 @@ public class OWorld implements OIBlockAccess {
 
     public boolean a(boolean var1) {
         int var2 = this.H.size();
+
         if (var2 != this.I.size()) {
             throw new IllegalStateException("TickNextTick list out of synch");
         } else {
@@ -2208,6 +2318,7 @@ public class OWorld implements OIBlockAccess {
 
             for (int var3 = 0; var3 < var2; ++var3) {
                 ONextTickListEntry var4 = this.H.first();
+
                 if (!var1 && var4.e > this.worldInfo.getTime()) {
                     break;
                 }
@@ -2215,8 +2326,10 @@ public class OWorld implements OIBlockAccess {
                 this.H.remove(var4);
                 this.I.remove(var4);
                 byte var5 = 8;
+
                 if (this.a(var4.a - var5, var4.b - var5, var4.c - var5, var4.a + var5, var4.b + var5, var4.c + var5)) {
                     int var6 = this.a(var4.a, var4.b, var4.c);
+
                     if (var6 == var4.d && var6 > 0) {
                         OBlock.m[var6].a(this, var4.a, var4.b, var4.c, this.r);
                     }
@@ -2238,6 +2351,7 @@ public class OWorld implements OIBlockAccess {
 
         while (var9.hasNext()) {
             ONextTickListEntry var10 = var9.next();
+
             if (var10.a >= var5 && var10.a < var6 && var10.c >= var7 && var10.c < var8) {
                 if (var2) {
                     this.H.remove(var10);
@@ -2299,8 +2413,10 @@ public class OWorld implements OIBlockAccess {
 
         while (var8.hasNext()) {
             OEntity var9 = (OEntity) var8.next();
+
             if (var9 != var3) {
                 double var10 = var3.j(var9);
+
                 if (var10 <= var6) {
                     var5 = var9;
                     var6 = var10;
@@ -2327,6 +2443,7 @@ public class OWorld implements OIBlockAccess {
 
         for (int var3 = 0; var3 < this.b.size(); ++var3) {
             OEntity var4 = this.b.get(var3);
+
             if (var1.isAssignableFrom(var4.getClass())) {
                 ++var2;
             }
@@ -2353,6 +2470,7 @@ public class OWorld implements OIBlockAccess {
         OBlock var8 = OBlock.m[var7];
         OBlock var9 = OBlock.m[var1];
         OAxisAlignedBB var10 = var9.e(this, var2, var3, var4);
+
         if (var5) {
             var10 = null;
         }
@@ -2382,6 +2500,7 @@ public class OWorld implements OIBlockAccess {
         int var17 = var10 + var11;
         OChunkCache var18 = new OChunkCache(this, var12, var13, var14, var15, var16, var17);
         OPathEntity var19 = (new OPathFinder(var18, var4, var5, var6, var7)).a(var1, var2, var3);
+
         OProfiler.a();
         return var19;
     }
@@ -2400,12 +2519,14 @@ public class OWorld implements OIBlockAccess {
         int var19 = var12 + var13;
         OChunkCache var20 = new OChunkCache(this, var14, var15, var16, var17, var18, var19);
         OPathEntity var21 = (new OPathFinder(var20, var6, var7, var8, var9)).a(var1, var2, var3, var4, var5);
+
         OProfiler.a();
         return var21;
     }
 
     public boolean i(int var1, int var2, int var3, int var4) {
         int var5 = this.a(var1, var2, var3);
+
         return var5 == 0 ? false : OBlock.m[var5].d(this, var1, var2, var3, var4);
     }
 
@@ -2418,6 +2539,7 @@ public class OWorld implements OIBlockAccess {
             return this.w(var1, var2, var3);
         } else {
             int var5 = this.a(var1, var2, var3);
+
             return var5 == 0 ? false : OBlock.m[var5].a((OIBlockAccess) this, var1, var2, var3, var4);
         }
     }
@@ -2437,6 +2559,7 @@ public class OWorld implements OIBlockAccess {
         for (int var12 = 0; var12 < this.d.size(); ++var12) {
             OEntityPlayer var13 = this.d.get(var12);
             double var14 = var13.e(var1, var3, var5);
+
             if ((var7 < 0.0D || var14 < var7 * var7) && (var9 == -1.0D || var14 < var9)) {
                 var9 = var14;
                 var11 = var13;
@@ -2453,6 +2576,7 @@ public class OWorld implements OIBlockAccess {
         for (int var10 = 0; var10 < this.d.size(); ++var10) {
             OEntityPlayer var11 = this.d.get(var10);
             double var12 = var11.e(var1, var11.bn, var3);
+
             if ((var5 < 0.0D || var12 < var5 * var5) && (var7 == -1.0D || var12 < var7)) {
                 var7 = var12;
                 var9 = var11;
@@ -2472,8 +2596,10 @@ public class OWorld implements OIBlockAccess {
 
         for (int var12 = 0; var12 < this.d.size(); ++var12) {
             OEntityPlayer var13 = this.d.get(var12);
+
             if (!var13.L.a) {
                 double var14 = var13.e(var1, var3, var5);
+
                 if ((var7 < 0.0D || var14 < var7 * var7) && (var9 == -1.0D || var14 < var9)) {
                     var9 = var14;
                     var11 = var13;
@@ -2506,6 +2632,7 @@ public class OWorld implements OIBlockAccess {
         long var3 = var1 - this.worldInfo.getTime();
 
         ONextTickListEntry var6;
+
         for (Iterator<ONextTickListEntry> var5 = this.I.iterator(); var5.hasNext(); var6.e += var3) {
             var6 = var5.next();
         }
@@ -2529,8 +2656,7 @@ public class OWorld implements OIBlockAccess {
         return true;
     }
 
-    public void a(OEntity var1, byte var2) {
-    }
+    public void a(OEntity var1, byte var2) {}
 
     public OIChunkProvider q() {
         return this.v;
@@ -2538,6 +2664,7 @@ public class OWorld implements OIBlockAccess {
 
     public void e(int var1, int var2, int var3, int var4, int var5) {
         int var6 = this.a(var1, var2, var3);
+
         if (var6 > 0) {
             OBlock.m[var6].a(this, var1, var2, var3, var4, var5);
         }
@@ -2558,6 +2685,7 @@ public class OWorld implements OIBlockAccess {
 
         while (var1.hasNext()) {
             OEntityPlayer var2 = var1.next();
+
             if (!var2.Z()) {
                 this.N = false;
                 break;
@@ -2572,6 +2700,7 @@ public class OWorld implements OIBlockAccess {
 
         while (var1.hasNext()) {
             OEntityPlayer var2 = var1.next();
+
             if (var2.Z()) {
                 var2.a(false, false, true);
             }
@@ -2585,6 +2714,7 @@ public class OWorld implements OIBlockAccess {
             Iterator<OEntityPlayer> var1 = this.d.iterator();
 
             OEntityPlayer var2;
+
             do {
                 if (!var1.hasNext()) {
                     return true;
@@ -2624,12 +2754,14 @@ public class OWorld implements OIBlockAccess {
             return false;
         } else {
             OBiomeGenBase var4 = this.a(var1, var3);
+
             return var4.c() ? false : var4.d();
         }
     }
 
     public boolean z(int var1, int var2, int var3) {
         OBiomeGenBase var4 = this.a(var1, var3);
+
         return var4.e();
     }
 
@@ -2662,6 +2794,7 @@ public class OWorld implements OIBlockAccess {
 
     public Random A(int var1, int var2, int var3) {
         long var4 = var1 * 341873128712L + var2 * 132897987541L + this.s().getRandomSeed() + var3;
+
         this.r.setSeed(var4);
         return this.r;
     }
@@ -2672,6 +2805,7 @@ public class OWorld implements OIBlockAccess {
 
     public OSpawnListEntry a(OEnumCreatureType var1, int var2, int var3, int var4) {
         List var5 = this.q().a(var1, var2, var3, var4);
+
         return var5 != null && !var5.isEmpty() ? (OSpawnListEntry) OWeightedRandom.a(this.r, var5) : null;
     }
 

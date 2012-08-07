@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,6 +8,7 @@ import java.io.IOException;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.ONetHandler;
 import net.minecraft.server.OPacket;
+
 
 public class OPacket28EntityVelocity extends OPacket {
 
@@ -27,6 +29,7 @@ public class OPacket28EntityVelocity extends OPacket {
         super();
         this.a = var1;
         double var8 = 3.9D;
+
         if (var2 < -var8) {
             var2 = -var8;
         }

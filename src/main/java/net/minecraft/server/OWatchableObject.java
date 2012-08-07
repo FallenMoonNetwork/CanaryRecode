@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class OWatchableObject {
 
     private final int a;

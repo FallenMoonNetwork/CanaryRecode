@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OVec3D;
+
 
 public class OChunkPosition {
 
@@ -26,6 +28,7 @@ public class OChunkPosition {
             return false;
         } else {
             OChunkPosition var2 = (OChunkPosition) var1;
+
             return var2.a == this.a && var2.b == this.b && var2.c == this.c;
         }
     }

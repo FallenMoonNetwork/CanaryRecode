@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMaterial;
+
 
 public class OBlockWood extends OBlock {
 
@@ -14,10 +16,13 @@ public class OBlockWood extends OBlock {
         switch (var2) {
         case 1:
             return 198;
+
         case 2:
             return 214;
+
         case 3:
             return 199;
+
         default:
             return 4;
         }

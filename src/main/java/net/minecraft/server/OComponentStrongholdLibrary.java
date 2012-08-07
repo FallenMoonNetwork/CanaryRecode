@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -11,6 +12,7 @@ import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructurePieceTreasure;
 import net.minecraft.server.OStructureStrongholdPieces;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentStrongholdLibrary extends OComponentStronghold {
 
@@ -27,11 +29,11 @@ public class OComponentStrongholdLibrary extends OComponentStronghold {
     }
 
     @Override
-    public void a(OStructureComponent var1, List var2, Random var3) {
-    }
+    public void a(OStructureComponent var1, List var2, Random var3) {}
 
     public static OComponentStrongholdLibrary a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, -4, -1, 0, 14, 11, 15, var5);
+
         if (!a(var7) || OStructureComponent.a(var0, var7) != null) {
             var7 = OStructureBoundingBox.a(var2, var3, var4, -4, -1, 0, 14, 6, 15, var5);
             if (!a(var7) || OStructureComponent.a(var0, var7) != null) {
@@ -48,6 +50,7 @@ public class OComponentStrongholdLibrary extends OComponentStronghold {
             return false;
         } else {
             byte var4 = 11;
+
             if (!this.c) {
                 var4 = 6;
             }
@@ -57,6 +60,7 @@ public class OComponentStrongholdLibrary extends OComponentStronghold {
             this.a(var1, var3, var2, 0.07F, 2, 1, 1, 11, 4, 13, OBlock.W.bO, OBlock.W.bO, false);
 
             int var5;
+
             for (var5 = 1; var5 <= 13; ++var5) {
                 if ((var5 - 1) % 4 == 0) {
                     this.a(var1, var3, 1, 1, var5, 1, 4, var5, OBlock.x.bO, OBlock.x.bO, false);
@@ -108,6 +112,7 @@ public class OComponentStrongholdLibrary extends OComponentStronghold {
                 this.a(var1, OBlock.aF.bO, var5, 10, 7, 13, var3);
                 byte var6 = 7;
                 byte var7 = 7;
+
                 this.a(var1, OBlock.aZ.bO, 0, var6 - 1, 9, var7, var3);
                 this.a(var1, OBlock.aZ.bO, 0, var6, 9, var7, var3);
                 this.a(var1, OBlock.aZ.bO, 0, var6 - 1, 8, var7, var3);

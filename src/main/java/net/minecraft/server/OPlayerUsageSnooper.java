@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.server.OPlayerUsageSnooperThread;
+
 
 public class OPlayerUsageSnooper {
 
@@ -27,6 +29,7 @@ public class OPlayerUsageSnooper {
 
     public void a() {
         OPlayerUsageSnooperThread var1 = new OPlayerUsageSnooperThread(this, "reporter");
+
         var1.setDaemon(true);
         var1.start();
     }

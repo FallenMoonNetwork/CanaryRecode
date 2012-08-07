@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntityChicken;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityThrowable;
 import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityEgg extends OEntityThrowable {
 
@@ -29,12 +31,14 @@ public class OEntityEgg extends OEntityThrowable {
 
         if (!this.bi.F && this.bS.nextInt(8) == 0) {
             byte var2 = 1;
+
             if (this.bS.nextInt(32) == 0) {
                 var2 = 4;
             }
 
             for (int var3 = 0; var3 < var2; ++var3) {
                 OEntityChicken var4 = new OEntityChicken(this.bi);
+
                 var4.c(-24000);
                 var4.c(this.bm, this.bn, this.bo, this.bs, 0.0F);
                 this.bi.b(var4);

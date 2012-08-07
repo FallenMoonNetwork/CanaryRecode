@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import java.io.IOException;
 import net.minecraft.server.ONetworkManager;
+
 
 class ONetworkWriterThread extends Thread {
 
@@ -16,6 +18,7 @@ class ONetworkWriterThread extends Thread {
     @Override
     public void run() {
         Object var1 = ONetworkManager.a;
+
         synchronized (ONetworkManager.a) {
             ++ONetworkManager.c;
         }
@@ -54,6 +57,7 @@ class ONetworkWriterThread extends Thread {
             } finally {
                 if (var13) {
                     Object var5 = ONetworkManager.a;
+
                     synchronized (ONetworkManager.a) {
                         --ONetworkManager.c;
                     }

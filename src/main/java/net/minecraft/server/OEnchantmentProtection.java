@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEnchantment;
 import net.minecraft.server.OEnumEnchantmentType;
+
 
 public class OEnchantmentProtection extends OEnchantment {
 
@@ -42,6 +44,7 @@ public class OEnchantmentProtection extends OEnchantment {
             return 0;
         } else {
             int var3 = (6 + var1 * var1) / 2;
+
             return this.a == 0 ? var3 : (this.a == 1 && var2.k() ? var3 : (this.a == 2 && var2 == ODamageSource.i ? var3 * 2 : (this.a == 3 && var2 == ODamageSource.l ? var3 : (this.a == 4 && var2.c() ? var3 : 0))));
         }
     }
@@ -50,6 +53,7 @@ public class OEnchantmentProtection extends OEnchantment {
     public boolean a(OEnchantment var1) {
         if (var1 instanceof OEnchantmentProtection) {
             OEnchantmentProtection var2 = (OEnchantmentProtection) var1;
+
             return var2.a == this.a ? false : this.a == 2 || var2.a == 2;
         } else {
             return super.a(var1);

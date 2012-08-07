@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +26,7 @@ import net.minecraft.server.OStructureStrongholdPieceWeight2;
 import net.minecraft.server.OStructureStrongholdPieceWeight3;
 import net.minecraft.server.OStructureStrongholdStones;
 
+
 public class OStructureStrongholdPieces {
 
     private static final OStructureStrongholdPieceWeight[] b = new OStructureStrongholdPieceWeight[] { new OStructureStrongholdPieceWeight(OComponentStrongholdStraight.class, 40, 0), new OStructureStrongholdPieceWeight(OComponentStrongholdPrison.class, 5, 5), new OStructureStrongholdPieceWeight(OComponentStrongholdLeftTurn.class, 20, 0), new OStructureStrongholdPieceWeight(OComponentStrongholdRightTurn.class, 20, 0), new OStructureStrongholdPieceWeight(OComponentStrongholdRoomCrossing.class, 10, 6), new OStructureStrongholdPieceWeight(OComponentStrongholdStairsStraight.class, 5, 5), new OStructureStrongholdPieceWeight(OComponentStrongholdStairs.class, 5, 5), new OStructureStrongholdPieceWeight(OComponentStrongholdCrossing.class, 5, 4), new OStructureStrongholdPieceWeight(OComponentStrongholdChestCorridor.class, 5, 4), new OStructureStrongholdPieceWeight2(OComponentStrongholdLibrary.class, 10, 2), new OStructureStrongholdPieceWeight3(OComponentStrongholdPortalRoom.class, 20, 1) };
@@ -44,6 +46,7 @@ public class OStructureStrongholdPieces {
 
         for (int var2 = 0; var2 < var1; ++var2) {
             OStructureStrongholdPieceWeight var3 = var0[var2];
+
             var3.c = 0;
             c.add(var3);
         }
@@ -53,9 +56,11 @@ public class OStructureStrongholdPieces {
 
     private static boolean c() {
         boolean var0 = false;
+
         a = 0;
 
         OStructureStrongholdPieceWeight var2;
+
         for (Iterator var1 = c.iterator(); var1.hasNext(); a += var2.b) {
             var2 = (OStructureStrongholdPieceWeight) var1.next();
             if (var2.d > 0 && var2.c < var2.d) {
@@ -68,6 +73,7 @@ public class OStructureStrongholdPieces {
 
     private static OComponentStronghold a(Class var0, List var1, Random var2, int var3, int var4, int var5, int var6, int var7) {
         Object var8 = null;
+
         if (var0 == OComponentStrongholdStraight.class) {
             var8 = OComponentStrongholdStraight.a(var1, var2, var3, var4, var5, var6, var7);
         } else if (var0 == OComponentStrongholdPrison.class) {
@@ -101,6 +107,7 @@ public class OStructureStrongholdPieces {
         } else {
             if (d != null) {
                 OComponentStronghold var8 = a(d, var1, var2, var3, var4, var5, var6, var7);
+
                 d = null;
                 if (var8 != null) {
                     return var8;
@@ -116,6 +123,7 @@ public class OStructureStrongholdPieces {
 
                 while (var10.hasNext()) {
                     OStructureStrongholdPieceWeight var11 = (OStructureStrongholdPieceWeight) var10.next();
+
                     var9 -= var11.b;
                     if (var9 < 0) {
                         if (!var11.a(var7) || var11 == var0.a) {
@@ -123,6 +131,7 @@ public class OStructureStrongholdPieces {
                         }
 
                         OComponentStronghold var12 = a(var11.a, var1, var2, var3, var4, var5, var6, var7);
+
                         if (var12 != null) {
                             ++var11.c;
                             var0.a = var11;
@@ -137,6 +146,7 @@ public class OStructureStrongholdPieces {
             }
 
             OStructureBoundingBox var14 = OComponentStrongholdCorridor.a(var1, var2, var3, var4, var5, var6);
+
             if (var14 != null && var14.b > 1) {
                 return new OComponentStrongholdCorridor(var7, var2, var14, var6);
             } else {
@@ -150,6 +160,7 @@ public class OStructureStrongholdPieces {
             return null;
         } else if (Math.abs(var3 - var0.b().a) <= 112 && Math.abs(var5 - var0.b().c) <= 112) {
             OComponentStronghold var8 = b(var0, var1, var2, var3, var4, var5, var6, var7 + 1);
+
             if (var8 != null) {
                 var1.add(var8);
                 var0.c.add(var8);

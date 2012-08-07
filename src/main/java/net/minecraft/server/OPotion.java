@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.potion.CanaryPotion;
@@ -8,6 +9,7 @@ import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OPotionHealth;
+
 
 public class OPotion {
 
@@ -88,6 +90,7 @@ public class OPotion {
             if (var1.aD() > 1) {
                 // CanaryMod - potion damage.
                 DamageHook hook = new DamageHook(null, var1.getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.m), 1);
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     var1.a(ODamageSource.m, 1);
@@ -100,6 +103,7 @@ public class OPotion {
             if (this.H == i.H && !var1.aN() || this.H == h.H && var1.aN()) {
                 // CanaryMod - potion damage
                 DamageHook hook = new DamageHook(null, var1.getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.g), 1);
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     var1.a(ODamageSource.m, 6 << var2);
@@ -114,6 +118,7 @@ public class OPotion {
 
     public void a(OEntityLiving var1, OEntityLiving var2, int var3, double var4) {
         int var6;
+
         if ((this.H != h.H || var2.aN()) && (this.H != i.H || !var2.aN())) {
             if (this.H == i.H && !var2.aN() || this.H == h.H && var2.aN()) {
                 var6 = (int) (var4 * (6 << var3) + 0.5D);
@@ -139,6 +144,7 @@ public class OPotion {
             return this.H == s.H;
         } else {
             int var3 = 25 >> var2;
+
             return var3 > 0 ? var1 % var3 == 0 : true;
         }
     }
@@ -183,6 +189,6 @@ public class OPotion {
         return canaryPotion;
     }
     
-    //CanaryMod - end
+    // CanaryMod - end
 
 }

@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import net.minecraft.server.OServerGUI;
+
 
 class OServerGuiFocusAdapter extends FocusAdapter {
 
@@ -15,6 +17,5 @@ class OServerGuiFocusAdapter extends FocusAdapter {
     }
 
     @Override
-    public void focusGained(FocusEvent var1) {
-    }
+    public void focusGained(FocusEvent var1) {}
 }

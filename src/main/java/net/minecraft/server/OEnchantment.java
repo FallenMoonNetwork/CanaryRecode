@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEnchantmentArrowDamage;
 import net.minecraft.server.OEnchantmentArrowFire;
@@ -17,6 +18,7 @@ import net.minecraft.server.OEnchantmentUntouching;
 import net.minecraft.server.OEnchantmentWaterWorker;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEnumEnchantmentType;
+
 
 public abstract class OEnchantment {
 

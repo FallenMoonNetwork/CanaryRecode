@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OItemBlock;
 import net.minecraft.server.OItemStack;
+
 
 public class OItemColored extends OItemBlock {
 
@@ -35,6 +37,7 @@ public class OItemColored extends OItemBlock {
             return super.a(var1);
         } else {
             int var2 = var1.h();
+
             return var2 >= 0 && var2 < this.b.length ? super.a(var1) + "." + this.b[var2] : super.a(var1);
         }
     }

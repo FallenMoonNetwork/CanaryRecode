@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.util.Set;
 import net.minecraft.server.OChunkPosition;
 import net.minecraft.server.ONetHandler;
 import net.minecraft.server.OPacket;
+
 
 public class OPacket60Explosion extends OPacket {
 
@@ -38,6 +40,7 @@ public class OPacket60Explosion extends OPacket {
         this.c = var1.readDouble();
         this.d = var1.readFloat();
         int var2 = var1.readInt();
+
         this.e = new HashSet();
         int var3 = (int) this.a;
         int var4 = (int) this.b;
@@ -47,6 +50,7 @@ public class OPacket60Explosion extends OPacket {
             int var7 = var1.readByte() + var3;
             int var8 = var1.readByte() + var4;
             int var9 = var1.readByte() + var5;
+
             this.e.add(new OChunkPosition(var7, var8, var9));
         }
 
@@ -69,6 +73,7 @@ public class OPacket60Explosion extends OPacket {
             int var7 = var6.a - var2;
             int var8 = var6.b - var3;
             int var9 = var6.c - var4;
+
             var1.writeByte(var7);
             var1.writeByte(var8);
             var1.writeByte(var9);

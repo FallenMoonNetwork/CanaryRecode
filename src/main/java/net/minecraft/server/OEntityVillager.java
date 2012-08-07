@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryVillager;
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityAIAvoidEntity;
@@ -24,19 +25,19 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OVillage;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityVillager extends OEntityAgeable implements OINpc {
 
     private int b;
     private boolean c;
     private boolean g;
     OVillage a;
-    //CanaryMod
+    // CanaryMod
     private CanaryVillager canaryVillager;
 
     public OEntityVillager(OWorld var1) {
         this(var1, 0);
     }
-
 
     public OEntityVillager(OWorld var1, int var2) {
         super(var1);
@@ -89,6 +90,7 @@ public class OEntityVillager extends OEntityAgeable implements OINpc {
                 this.ax();
             } else {
                 OChunkCoordinates var1 = this.a.a();
+
                 this.b(var1.a, var1.b, var1.c, this.a.b());
             }
         }

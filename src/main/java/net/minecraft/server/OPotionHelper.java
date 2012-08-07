@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import net.minecraft.server.OPotion;
 import net.minecraft.server.OPotionEffect;
+
 
 public class OPotionHelper {
 
@@ -44,6 +46,7 @@ public class OPotionHelper {
 
     public static int a(Collection var0) {
         int var1 = 3694022;
+
         if (var0 != null && !var0.isEmpty()) {
             float var2 = 0.0F;
             float var3 = 0.0F;
@@ -74,6 +77,7 @@ public class OPotionHelper {
 
     private static int a(boolean var0, boolean var1, boolean var2, int var3, int var4, int var5, int var6) {
         int var7 = 0;
+
         if (var0) {
             var7 = c(var6, var4);
         } else if (var3 != -1) {
@@ -101,6 +105,7 @@ public class OPotionHelper {
 
     private static int a(int var0) {
         int var1;
+
         for (var1 = 0; var0 > 0; ++var1) {
             var0 &= var0 - 1;
         }
@@ -113,6 +118,7 @@ public class OPotionHelper {
             int var4 = var0.indexOf(124, var1);
             int var5;
             int var17;
+
             if (var4 >= 0 && var4 < var2) {
                 var5 = a(var0, var1, var4 - 1, var3);
                 if (var5 > 0) {
@@ -129,6 +135,7 @@ public class OPotionHelper {
                         return 0;
                     } else {
                         int var18 = a(var0, var5 + 1, var2, var3);
+
                         return var18 <= 0 ? 0 : (var17 > var18 ? var17 : var18);
                     }
                 } else {
@@ -144,6 +151,7 @@ public class OPotionHelper {
 
                     for (int var15 = var1; var15 < var2; ++var15) {
                         char var16 = var0.charAt(var15);
+
                         if (var16 >= 48 && var16 <= 57) {
                             if (var6) {
                                 var13 = var16 - 48;
@@ -237,13 +245,17 @@ public class OPotionHelper {
 
         for (int var5 = 0; var5 < var4; ++var5) {
             OPotion var6 = var3[var5];
+
             if (var6 != null && (!var6.f() || var1)) {
                 String var7 = (String) l.get(Integer.valueOf(var6.a()));
+
                 if (var7 != null) {
                     int var8 = a(var7, 0, var7.length(), var0);
+
                     if (var8 > 0) {
                         int var9 = 0;
                         String var10 = (String) m.get(Integer.valueOf(var6.a()));
+
                         if (var10 != null) {
                             var9 = a(var10, 0, var10.length(), var0);
                             if (var9 < 0) {
@@ -306,6 +318,7 @@ public class OPotionHelper {
 
         for (int var9 = var2; var9 < var3; ++var9) {
             char var10 = var1.charAt(var9);
+
             if (var10 >= 48 && var10 <= 57) {
                 var8 *= 10;
                 var8 += var10 - 48;

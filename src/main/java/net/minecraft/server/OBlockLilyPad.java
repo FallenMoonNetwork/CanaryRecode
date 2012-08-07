@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockFlower;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockLilyPad extends OBlockFlower {
 
@@ -12,6 +14,7 @@ public class OBlockLilyPad extends OBlockFlower {
         super(var1, var2);
         float var3 = 0.5F;
         float var4 = 0.015625F;
+
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var4, 0.5F + var3);
     }
 

@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Random;
 import net.minecraft.server.OWeightedRandomChoice;
+
 
 public class OWeightedRandom {
 
@@ -15,6 +17,7 @@ public class OWeightedRandom {
         int var1 = 0;
 
         OWeightedRandomChoice var3;
+
         for (Iterator var2 = var0.iterator(); var2.hasNext(); var1 += var3.d) {
             var3 = (OWeightedRandomChoice) var2.next();
         }
@@ -30,6 +33,7 @@ public class OWeightedRandom {
             Iterator var4 = var1.iterator();
 
             OWeightedRandomChoice var5;
+
             do {
                 if (!var4.hasNext()) {
                     return null;
@@ -54,6 +58,7 @@ public class OWeightedRandom {
 
         for (int var4 = 0; var4 < var3; ++var4) {
             OWeightedRandomChoice var5 = var2[var4];
+
             var1 += var5.d;
         }
 
@@ -70,6 +75,7 @@ public class OWeightedRandom {
 
             for (int var6 = 0; var6 < var5; ++var6) {
                 OWeightedRandomChoice var7 = var4[var6];
+
                 var3 -= var7.d;
                 if (var3 < 0) {
                     return var7;

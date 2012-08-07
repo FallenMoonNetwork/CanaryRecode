@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;
@@ -7,6 +8,7 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OItemDoor extends OItem {
 
@@ -25,6 +27,7 @@ public class OItemDoor extends OItem {
         } else {
             ++var5;
             OBlock var8;
+
             if (this.a == OMaterial.d) {
                 var8 = OBlock.aE;
             } else {
@@ -36,6 +39,7 @@ public class OItemDoor extends OItem {
                     return false;
                 } else {
                     int var9 = OMathHelper.b(((var2.bs + 180.0F) * 4.0F / 360.0F) - 0.5D) & 3;
+
                     a(var3, var4, var5, var6, var9, var8);
                     --var1.a;
                     return true;
@@ -49,6 +53,7 @@ public class OItemDoor extends OItem {
     public static void a(OWorld var0, int var1, int var2, int var3, int var4, OBlock var5) {
         byte var6 = 0;
         byte var7 = 0;
+
         if (var4 == 0) {
             var7 = 1;
         }
@@ -70,6 +75,7 @@ public class OItemDoor extends OItem {
         boolean var10 = var0.a(var1 - var6, var2, var3 - var7) == var5.bO || var0.a(var1 - var6, var2 + 1, var3 - var7) == var5.bO;
         boolean var11 = var0.a(var1 + var6, var2, var3 + var7) == var5.bO || var0.a(var1 + var6, var2 + 1, var3 + var7) == var5.bO;
         boolean var12 = false;
+
         if (var10 && !var11) {
             var12 = true;
         } else if (var9 > var8) {

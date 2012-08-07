@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -8,6 +9,7 @@ import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructureMineshaftPieces;
 import net.minecraft.server.OTileEntityMobSpawner;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentMineshaftCorridor extends OStructureComponent {
 
@@ -34,21 +36,26 @@ public class OComponentMineshaftCorridor extends OStructureComponent {
         OStructureBoundingBox var6 = new OStructureBoundingBox(var2, var3, var4, var2, var3 + 2, var4);
 
         int var7;
+
         for (var7 = var1.nextInt(3) + 2; var7 > 0; --var7) {
             int var8 = var7 * 5;
+
             switch (var5) {
             case 0:
                 var6.d = var2 + 2;
                 var6.f = var4 + (var8 - 1);
                 break;
+
             case 1:
                 var6.a = var2 - (var8 - 1);
                 var6.f = var4 + 2;
                 break;
+
             case 2:
                 var6.d = var2 + 2;
                 var6.c = var4 - (var8 - 1);
                 break;
+
             case 3:
                 var6.d = var2 + (var8 - 1);
                 var6.f = var4 + 2;
@@ -66,6 +73,7 @@ public class OComponentMineshaftCorridor extends OStructureComponent {
     public void a(OStructureComponent var1, List var2, Random var3) {
         int var4 = this.c();
         int var5 = var3.nextInt(4);
+
         switch (this.h) {
         case 0:
             if (var5 <= 1) {
@@ -76,6 +84,7 @@ public class OComponentMineshaftCorridor extends OStructureComponent {
                 OStructureMineshaftPieces.a(var1, var2, var3, this.g.d + 1, this.g.b - 1 + var3.nextInt(3), this.g.f - 3, 3, var4);
             }
             break;
+
         case 1:
             if (var5 <= 1) {
                 OStructureMineshaftPieces.a(var1, var2, var3, this.g.a - 1, this.g.b - 1 + var3.nextInt(3), this.g.c, this.h, var4);
@@ -85,6 +94,7 @@ public class OComponentMineshaftCorridor extends OStructureComponent {
                 OStructureMineshaftPieces.a(var1, var2, var3, this.g.a, this.g.b - 1 + var3.nextInt(3), this.g.f + 1, 0, var4);
             }
             break;
+
         case 2:
             if (var5 <= 1) {
                 OStructureMineshaftPieces.a(var1, var2, var3, this.g.a, this.g.b - 1 + var3.nextInt(3), this.g.c - 1, this.h, var4);
@@ -94,6 +104,7 @@ public class OComponentMineshaftCorridor extends OStructureComponent {
                 OStructureMineshaftPieces.a(var1, var2, var3, this.g.d + 1, this.g.b - 1 + var3.nextInt(3), this.g.c, 3, var4);
             }
             break;
+
         case 3:
             if (var5 <= 1) {
                 OStructureMineshaftPieces.a(var1, var2, var3, this.g.d + 1, this.g.b - 1 + var3.nextInt(3), this.g.c, this.h, var4);
@@ -107,6 +118,7 @@ public class OComponentMineshaftCorridor extends OStructureComponent {
         if (var4 < 8) {
             int var6;
             int var7;
+
             if (this.h != 2 && this.h != 0) {
                 for (var6 = this.g.a + 3; var6 + 3 <= this.g.d; var6 += 5) {
                     var7 = var3.nextInt(5);
@@ -136,6 +148,7 @@ public class OComponentMineshaftCorridor extends OStructureComponent {
             return false;
         } else {
             int var4 = this.d * 5 - 1;
+
             this.a(var1, var3, 0, 0, 0, 2, 1, var4, 0, 0, false);
             this.a(var1, var3, var2, 0.8F, 0, 2, 0, 2, 2, var4, 0, 0, false);
             if (this.b) {
@@ -145,6 +158,7 @@ public class OComponentMineshaftCorridor extends OStructureComponent {
             int var5;
             int var6;
             int var7;
+
             for (var5 = 0; var5 < this.d; ++var5) {
                 var6 = 2 + var5 * 5;
                 this.a(var1, var3, 0, 0, var6, 0, 1, var6, OBlock.aZ.bO, 0, false);
@@ -178,11 +192,13 @@ public class OComponentMineshaftCorridor extends OStructureComponent {
                     var7 = this.b(0);
                     int var8 = var6 - 1 + var2.nextInt(3);
                     int var9 = this.a(1, var8);
+
                     var8 = this.b(1, var8);
                     if (var3.b(var9, var7, var8)) {
                         this.c = true;
                         var1.e(var9, var7, var8, OBlock.as.bO);
                         OTileEntityMobSpawner var10 = (OTileEntityMobSpawner) var1.b(var9, var7, var8);
+
                         if (var10 != null) {
                             var10.a("CaveSpider");
                         }

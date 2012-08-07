@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 
 import net.canarymod.Canary;
@@ -26,6 +27,7 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OTileEntityDispenser;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockDispenser extends OBlockContainer {
 
@@ -59,6 +61,7 @@ public class OBlockDispenser extends OBlockContainer {
             int var7 = var1.a(var2 - 1, var3, var4);
             int var8 = var1.a(var2 + 1, var3, var4);
             byte var9 = 3;
+
             if (OBlock.n[var5] && !OBlock.n[var6]) {
                 var9 = 3;
             }
@@ -90,6 +93,7 @@ public class OBlockDispenser extends OBlockContainer {
             return true;
         } else {
             OTileEntityDispenser var6 = (OTileEntityDispenser) var1.b(var2, var3, var4);
+
             if (var6 != null) {
                 var5.a(var6);
             }
@@ -102,6 +106,7 @@ public class OBlockDispenser extends OBlockContainer {
         int var6 = var1.c(var2, var3, var4);
         byte var7 = 0;
         byte var8 = 0;
+
         if (var6 == 3) {
             var8 = 1;
         } else if (var6 == 2) {
@@ -113,6 +118,7 @@ public class OBlockDispenser extends OBlockContainer {
         }
 
         OTileEntityDispenser var9 = (OTileEntityDispenser) var1.b(var2, var3, var4);
+
         if (var9 != null) {
             OItemStack var10 = var9.p_();
             double var11 = var2 + var7 * 0.6D + 0.5D;
@@ -121,100 +127,109 @@ public class OBlockDispenser extends OBlockContainer {
             
             DispenseHook hook;
             Dispenser dispenser = var9.getDispenser();
+
             if (var10 == null) {
-                //CanaryMod - onDispense
+                // CanaryMod - onDispense
                 hook = new DispenseHook(dispenser, null);
                 Canary.hooks().callHook(hook);
-                if(!hook.isCanceled()){
+                if (!hook.isCanceled()) {
                     var1.f(1001, var2, var3, var4, 0);
                 }
             } else {
                 if (var10.c == OItem.k.bP) {
                     OEntityArrow var17 = new OEntityArrow(var1, var11, var13, var15);
+
                     var17.a(var7, 0.10000000149011612D, var8, 1.1F, 6.0F);
                     var17.a = true;
-                    //CanaryMod - onDispense
+                    // CanaryMod - onDispense
                     hook = new DispenseHook(dispenser, var17.getCanaryEntity());
                     Canary.hooks().callHook(hook);
-                    if(!hook.isCanceled()){
+                    if (!hook.isCanceled()) {
                         var1.b(var17);
                         var1.f(1002, var2, var3, var4, 0);
                     }
                 } else if (var10.c == OItem.aO.bP) {
                     OEntityEgg var22 = new OEntityEgg(var1, var11, var13, var15);
+
                     var22.a(var7, 0.10000000149011612D, var8, 1.1F, 6.0F);
-                    //CanaryMod start - onDispense
+                    // CanaryMod start - onDispense
                     hook = new DispenseHook(dispenser, var22.getCanaryEntity());
                     Canary.hooks().callHook(hook);
-                    if(!hook.isCanceled()){
+                    if (!hook.isCanceled()) {
                         var1.b(var22);
                         var1.f(1002, var2, var3, var4, 0);
                     }
                 } else if (var10.c == OItem.aC.bP) {
                     OEntitySnowball var21 = new OEntitySnowball(var1, var11, var13, var15);
+
                     var21.a(var7, 0.10000000149011612D, var8, 1.1F, 6.0F);
-                    //CanaryMod start - onDispense
+                    // CanaryMod start - onDispense
                     hook = new DispenseHook(dispenser, var21.getCanaryEntity());
                     Canary.hooks().callHook(hook);
-                    if(!hook.isCanceled()){
+                    if (!hook.isCanceled()) {
                         var1.b(var21);
                         var1.f(1002, var2, var3, var4, 0);
                     }
                 } else if (var10.c == OItem.br.bP && OItemPotion.c(var10.h())) {
                     OEntityPotion var23 = new OEntityPotion(var1, var11, var13, var15, var10.h());
+
                     var23.a(var7, 0.10000000149011612D, var8, 1.375F, 3.0F);
-                    //CanaryMod start - onDispense
+                    // CanaryMod start - onDispense
                     hook = new DispenseHook(dispenser, var23.getCanaryEntity());
                     Canary.hooks().callHook(hook);
-                    if(!hook.isCanceled()){
+                    if (!hook.isCanceled()) {
                         var1.b(var23);
                         var1.f(1002, var2, var3, var4, 0);
                     }
                 } else if (var10.c == OItem.bC.bP) {
                     OEntityExpBottle var20 = new OEntityExpBottle(var1, var11, var13, var15);
+
                     var20.a(var7, 0.10000000149011612D, var8, 1.375F, 3.0F);
-                    //CanaryMod start - onDispense
+                    // CanaryMod start - onDispense
                     hook = new DispenseHook(dispenser, var20.getCanaryEntity());
                     Canary.hooks().callHook(hook);
-                    if(!hook.isCanceled()){
+                    if (!hook.isCanceled()) {
                         var1.b(var20);
                         var1.f(1002, var2, var3, var4, 0);
                     }
                 } else if (var10.c == OItem.bB.bP) {
-                    //CanaryMod start - onDispense
-                    //CanaryMod - get the entity being created
+                    // CanaryMod start - onDispense
+                    // CanaryMod - get the entity being created
                     OEntity mob = null;
-                    if(OEntityList.a.containsKey(Integer.valueOf(var10.h()))){
+
+                    if (OEntityList.a.containsKey(Integer.valueOf(var10.h()))) {
                         mob = OEntityList.a(var10.h(), var1);
                     }
                     hook = new DispenseHook(dispenser, mob.getCanaryEntity());
                     Canary.hooks().callHook(hook);
-                    if(!hook.isCanceled()){
+                    if (!hook.isCanceled()) {
                         OItemMonsterPlacer.a(var1, var10.h(), var11 + var7 * 0.3D, var13 - 0.3D, var15 + var8 * 0.3D);
                         var1.f(1002, var2, var3, var4, 0);
                     }
                 } else if (var10.c == OItem.bD.bP) {
                     OEntitySmallFireball var25 = new OEntitySmallFireball(var1, var11 + var7 * 0.3D, var13, var15 + var8 * 0.3D, var7 + var5.nextGaussian() * 0.05D, var5.nextGaussian() * 0.05D, var8 + var5.nextGaussian() * 0.05D);
-                  //CanaryMod start - onDispense
+
+                    // CanaryMod start - onDispense
                     hook = new DispenseHook(dispenser, var25.getCanaryEntity());
                     Canary.hooks().callHook(hook);
-                    if(!hook.isCanceled()){
+                    if (!hook.isCanceled()) {
                         var1.b(var25);
                         var1.f(1009, var2, var3, var4, 0);
                     }
                 } else {
                     OEntityItem var24 = new OEntityItem(var1, var11, var13 - 0.3D, var15, var10);
                     double var18 = var5.nextDouble() * 0.1D + 0.2D;
+
                     var24.bp = var7 * var18;
                     var24.bq = 0.20000000298023224D;
                     var24.br = var8 * var18;
                     var24.bp += var5.nextGaussian() * 0.007499999832361937D * 6.0D;
                     var24.bq += var5.nextGaussian() * 0.007499999832361937D * 6.0D;
                     var24.br += var5.nextGaussian() * 0.007499999832361937D * 6.0D;
-                    //CanaryMod start - onDispense
+                    // CanaryMod start - onDispense
                     hook = new DispenseHook(dispenser, var24.getCanaryEntity());
                     Canary.hooks().callHook(hook);
-                    if(!hook.isCanceled()){
+                    if (!hook.isCanceled()) {
                         var1.b(var24);
                         var1.f(1000, var2, var3, var4, 0);
                     }
@@ -230,6 +245,7 @@ public class OBlockDispenser extends OBlockContainer {
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         if (var5 > 0 && OBlock.m[var5].e()) {
             boolean var6 = var1.x(var2, var3, var4) || var1.x(var2, var3 + 1, var4);
+
             if (var6) {
                 var1.c(var2, var3, var4, this.bO, this.d());
             }
@@ -253,6 +269,7 @@ public class OBlockDispenser extends OBlockContainer {
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = OMathHelper.b((var5.bs * 4.0F / 360.0F) + 0.5D) & 3;
+
         if (var6 == 0) {
             var1.c(var2, var3, var4, 2);
         }
@@ -274,9 +291,11 @@ public class OBlockDispenser extends OBlockContainer {
     @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         OTileEntityDispenser var5 = (OTileEntityDispenser) var1.b(var2, var3, var4);
+
         if (var5 != null) {
             for (int var6 = 0; var6 < var5.getInventorySize(); ++var6) {
                 OItemStack var7 = var5.g_(var6);
+
                 if (var7 != null) {
                     float var8 = this.a.nextFloat() * 0.8F + 0.1F;
                     float var9 = this.a.nextFloat() * 0.8F + 0.1F;
@@ -284,17 +303,20 @@ public class OBlockDispenser extends OBlockContainer {
 
                     while (var7.a > 0) {
                         int var11 = this.a.nextInt(21) + 10;
+
                         if (var11 > var7.a) {
                             var11 = var7.a;
                         }
 
                         var7.a -= var11;
                         OEntityItem var12 = new OEntityItem(var1, (var2 + var8), (var3 + var9), (var4 + var10), new OItemStack(var7.c, var11, var7.h()));
+
                         if (var7.n()) {
                             var12.a.d((ONBTTagCompound) var7.o().b());
                         }
 
                         float var13 = 0.05F;
+
                         var12.bp = ((float) this.a.nextGaussian() * var13);
                         var12.bq = ((float) this.a.nextGaussian() * var13 + 0.2F);
                         var12.br = ((float) this.a.nextGaussian() * var13);

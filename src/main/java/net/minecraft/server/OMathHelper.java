@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
+
 
 public class OMathHelper {
 
@@ -28,16 +30,19 @@ public class OMathHelper {
 
     public static int d(float var0) {
         int var1 = (int) var0;
+
         return var0 < var1 ? var1 - 1 : var1;
     }
 
     public static int b(double var0) {
         int var2 = (int) var0;
+
         return var0 < var2 ? var2 - 1 : var2;
     }
 
     public static long c(double var0) {
         long var2 = (long) var0;
+
         return var0 < var2 ? var2 - 1L : var2;
     }
 

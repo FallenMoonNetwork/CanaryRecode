@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import net.minecraft.server.ORegionFile;
+
 
 public class ORegionFileCache {
 
@@ -24,6 +26,7 @@ public class ORegionFileCache {
         File var4 = new File(var3, "r." + (var1 >> 5) + "." + (var2 >> 5) + ".mca");
         Reference var5 = (Reference) a.get(var4);
         ORegionFile var6;
+
         if (var5 != null) {
             var6 = (ORegionFile) var5.get();
             if (var6 != null) {
@@ -52,6 +55,7 @@ public class ORegionFileCache {
 
             try {
                 ORegionFile var2 = (ORegionFile) var1.get();
+
                 if (var2 != null) {
                     var2.a();
                 }
@@ -65,11 +69,13 @@ public class ORegionFileCache {
 
     public static DataInputStream b(File var0, int var1, int var2) {
         ORegionFile var3 = a(var0, var1, var2);
+
         return var3.a(var1 & 31, var2 & 31);
     }
 
     public static DataOutputStream c(File var0, int var1, int var2) {
         ORegionFile var3 = a(var0, var1, var2);
+
         return var3.b(var1 & 31, var2 & 31);
     }
 

@@ -29,11 +29,13 @@ import net.minecraft.server.ONBTTagList;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityMinecart extends OEntity implements OIInventory {
 
     private OItemStack[] d;
     private int e;
     private boolean f;
+
     /** The type of this minecart. 1 = normal, 2 = storage*/
     public int minecartType;
     public double b;
@@ -45,8 +47,8 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     private double k;
     private double l;
     private double m;
-    private String name = "container.minecart"; //CanaryMod
-    private CanaryMinecart minecart; //CanaryMod
+    private String name = "container.minecart"; // CanaryMod
+    private CanaryMinecart minecart; // CanaryMod
 
     public OEntityMinecart(OWorld var1) {
         super(var1);
@@ -114,18 +116,19 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
     @Override
     public boolean a(ODamageSource var1, int var2) {
-        //CanaryMod Vehicle damage hook start
+        // CanaryMod Vehicle damage hook start
         Entity entity = null;
 
-        if(var1 != null) {
+        if (var1 != null) {
             entity = var1.getCanaryDamageSource().getDamageDealer();
         }
         VehicleDamageHook hook = new VehicleDamageHook(minecart, entity, var1.getCanaryDamageSource(), var2);
+
         Canary.hooks().callHook(hook);
-        if(hook.isCanceled()) {
+        if (hook.isCanceled()) {
             return true;
         }
-        //CanaryMod end
+        // CanaryMod end
         
         if (!this.bi.F && !this.bE) {
             this.e(-this.n());
@@ -144,6 +147,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
                     for (int var4 = 0; var4 < var3.c(); ++var4) {
                         OItemStack var5 = var3.b(var4);
+
                         if (var5 != null) {
                             float var6 = this.bS.nextFloat() * 0.8F + 0.1F;
                             float var7 = this.bS.nextFloat() * 0.8F + 0.1F;
@@ -151,6 +155,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
                             while (var5.a > 0) {
                                 int var9 = this.bS.nextInt(21) + 10;
+
                                 if (var9 > var5.a) {
                                     var9 = var5.a;
                                 }
@@ -158,6 +163,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                                 var5.a -= var9;
                                 OEntityItem var10 = new OEntityItem(this.bi, this.bm + var6, this.bn + var7, this.bo + var8, new OItemStack(var5.c, var9, var5.h()));
                                 float var11 = 0.05F;
+
                                 var10.bp = ((float) this.bS.nextGaussian() * var11);
                                 var10.bq = ((float) this.bS.nextGaussian() * var11 + 0.2F);
                                 var10.br = ((float) this.bS.nextGaussian() * var11);
@@ -187,6 +193,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     public void X() {
         for (int var1 = 0; var1 < this.c(); ++var1) {
             OItemStack var2 = this.b(var1);
+
             if (var2 != null) {
                 float var3 = this.bS.nextFloat() * 0.8F + 0.1F;
                 float var4 = this.bS.nextFloat() * 0.8F + 0.1F;
@@ -194,17 +201,20 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
                 while (var2.a > 0) {
                     int var6 = this.bS.nextInt(21) + 10;
+
                     if (var6 > var2.a) {
                         var6 = var2.a;
                     }
 
                     var2.a -= var6;
                     OEntityItem var7 = new OEntityItem(this.bi, this.bm + var3, this.bn + var4, this.bo + var5, new OItemStack(var2.c, var6, var2.h()));
+
                     if (var2.n()) {
                         var7.a.d((ONBTTagCompound) var2.o().b());
                     }
 
                     float var8 = 0.05F;
+
                     var7.bp = ((float) this.bS.nextGaussian() * var8);
                     var7.bq = ((float) this.bS.nextGaussian() * var8 + 0.2F);
                     var7.br = ((float) this.bS.nextGaussian() * var8);
@@ -241,6 +251,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                 double var5 = this.bo + (this.k - this.bo) / this.h;
 
                 double var7;
+
                 for (var7 = this.l - this.bs; var7 < -180.0D; var7 += 360.0D) {
                     ;
                 }
@@ -267,6 +278,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
             int var9 = OMathHelper.b(this.bm);
             int var10 = OMathHelper.b(this.bn);
             int var11 = OMathHelper.b(this.bo);
+
             if (OBlockRail.g(this.bi, var9, var10 - 1, var11)) {
                 --var10;
             }
@@ -274,12 +286,15 @@ public class OEntityMinecart extends OEntity implements OIInventory {
             double var12 = 0.4D;
             double var14 = 0.0078125D;
             int var16 = this.bi.a(var9, var10, var11);
+
             if (OBlockRail.d(var16)) {
                 OVec3D var17 = this.h(this.bm, this.bn, this.bo);
                 int var18 = this.bi.c(var9, var10, var11);
+
                 this.bn = var10;
                 boolean var19 = false;
                 boolean var20 = false;
+
                 if (var16 == OBlock.T.bO) {
                     var19 = (var18 & 8) != 0;
                     var20 = !var19;
@@ -314,15 +329,18 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                 double var24 = (var21[1][2] - var21[0][2]);
                 double var26 = Math.sqrt(var22 * var22 + var24 * var24);
                 double var28 = this.bp * var22 + this.br * var24;
+
                 if (var28 < 0.0D) {
                     var22 = -var22;
                     var24 = -var24;
                 }
 
                 double var30 = Math.sqrt(this.bp * this.bp + this.br * this.br);
+
                 this.bp = var30 * var22 / var26;
                 this.br = var30 * var24 / var26;
                 double var32;
+
                 if (var20) {
                     var32 = Math.sqrt(this.bp * this.bp + this.br * this.br);
                     if (var32 < 0.03D) {
@@ -341,11 +359,13 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                 double var36 = var11 + 0.5D + var21[0][2] * 0.5D;
                 double var38 = var9 + 0.5D + var21[1][0] * 0.5D;
                 double var40 = var11 + 0.5D + var21[1][2] * 0.5D;
+
                 var22 = var38 - var34;
                 var24 = var40 - var36;
                 double var42;
                 double var46;
                 double var44;
+
                 if (var22 == 0.0D) {
                     this.bm = var9 + 0.5D;
                     var32 = this.bo - var11;
@@ -403,6 +423,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                             this.b /= var46;
                             this.c /= var46;
                             double var48 = 0.04D;
+
                             this.bp *= 0.800000011920929D;
                             this.bq *= 0.0D;
                             this.br *= 0.800000011920929D;
@@ -421,8 +442,10 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                 }
 
                 OVec3D var50 = this.h(this.bm, this.bn, this.bo);
+
                 if (var50 != null && var17 != null) {
                     double var51 = (var17.b - var50.b) * 0.05D;
+
                     var30 = Math.sqrt(this.bp * this.bp + this.br * this.br);
                     if (var30 > 0.0D) {
                         this.bp = this.bp / var30 * (var30 + var51);
@@ -434,6 +457,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
                 int var53 = OMathHelper.b(this.bm);
                 int var54 = OMathHelper.b(this.bo);
+
                 if (var53 != var9 || var54 != var11) {
                     var30 = Math.sqrt(this.bp * this.bp + this.br * this.br);
                     this.bp = var30 * (var53 - var9);
@@ -441,6 +465,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                 }
 
                 double var55;
+
                 if (this.minecartType == 2) {
                     var55 = OMathHelper.a(this.b * this.b + this.c * this.c);
                     if (var55 > 0.01D && this.bp * this.bp + this.br * this.br > 0.0010D) {
@@ -460,6 +485,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                     var55 = Math.sqrt(this.bp * this.bp + this.br * this.br);
                     if (var55 > 0.01D) {
                         double var57 = 0.06D;
+
                         this.bp += this.bp / var55 * var57;
                         this.br += this.br / var55 * var57;
                     } else if (var18 == 1) {
@@ -510,6 +536,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
             this.bt = 0.0F;
             double var59 = this.bj - this.bm;
             double var61 = this.bl - this.bo;
+
             if (var59 * var59 + var61 * var61 > 0.0010D) {
                 this.bs = (float) (Math.atan2(var61, var59) * 180.0D / 3.141592653589793D);
                 if (this.f) {
@@ -518,6 +545,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
             }
 
             double var63;
+
             for (var63 = (this.bs - this.bu); var63 >= 180.0D; var63 -= 360.0D) {
                 ;
             }
@@ -533,9 +561,11 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
             this.c(this.bs, this.bt);
             List var65 = this.bi.b(this, this.bw.b(0.20000000298023224D, 0.0D, 0.20000000298023224D));
+
             if (var65 != null && var65.size() > 0) {
                 for (int var66 = 0; var66 < var65.size(); ++var66) {
                     OEntity var67 = (OEntity) var65.get(var66);
+
                     if (var67 != this.bg && var67.e_() && var67 instanceof OEntityMinecart) {
                         var67.k(this);
                     }
@@ -566,13 +596,16 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         int var7 = OMathHelper.b(var1);
         int var8 = OMathHelper.b(var3);
         int var9 = OMathHelper.b(var5);
+
         if (OBlockRail.g(this.bi, var7, var8 - 1, var9)) {
             --var8;
         }
 
         int var10 = this.bi.a(var7, var8, var9);
+
         if (OBlockRail.d(var10)) {
             int var11 = this.bi.c(var7, var8, var9);
+
             var3 = var8;
             if (((OBlockRail) OBlock.m[var10]).i()) {
                 var11 &= 7;
@@ -593,6 +626,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
             double var27 = var21 - var15;
             double var29 = (var23 - var17) * 2.0D;
             double var31 = var25 - var19;
+
             if (var27 == 0.0D) {
                 var1 = var7 + 0.5D;
                 var13 = var5 - var9;
@@ -603,6 +637,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                 double var33 = var1 - var15;
                 double var35 = var5 - var19;
                 double var37 = (var33 * var27 + var35 * var31) * 2.0D;
+
                 var13 = var37;
             }
 
@@ -636,6 +671,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
             for (int var3 = 0; var3 < this.d.length; ++var3) {
                 if (this.d[var3] != null) {
                     ONBTTagCompound var4 = new ONBTTagCompound();
+
                     var4.a("Slot", (byte) var3);
                     this.d[var3].b(var4);
                     var2.a(var4);
@@ -656,11 +692,13 @@ public class OEntityMinecart extends OEntity implements OIInventory {
             this.e = var1.e("Fuel");
         } else if (this.minecartType == 1) {
             ONBTTagList var2 = var1.n("Items");
+
             this.d = new OItemStack[this.c()];
 
             for (int var3 = 0; var3 < var2.d(); ++var3) {
                 ONBTTagCompound var4 = (ONBTTagCompound) var2.a(var3);
                 int var5 = var4.d("Slot") & 255;
+
                 if (var5 >= 0 && var5 < this.d.length) {
                     this.d[var5] = OItemStack.a(var4);
                 }
@@ -680,11 +718,13 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                 double var2 = var1.bm - this.bm;
                 double var4 = var1.bo - this.bo;
                 double var6 = var2 * var2 + var4 * var4;
+
                 if (var6 >= 9.999999747378752E-5D) {
                     var6 = OMathHelper.a(var6);
                     var2 /= var6;
                     var4 /= var6;
                     double var8 = 1.0D / var6;
+
                     if (var8 > 1.0D) {
                         var8 = 1.0D;
                     }
@@ -703,12 +743,14 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                         OVec3D var14 = OVec3D.b(var10, 0.0D, var12).b();
                         OVec3D var15 = OVec3D.b(OMathHelper.b(this.bs * 3.1415927F / 180.0F), 0.0D, OMathHelper.a(this.bs * 3.1415927F / 180.0F)).b();
                         double var16 = Math.abs(var14.a(var15));
+
                         if (var16 < 0.800000011920929D) {
                             return;
                         }
 
                         double var18 = var1.bp + this.bp;
                         double var20 = var1.br + this.br;
+
                         if (((OEntityMinecart) var1).minecartType == 2 && this.minecartType != 2) {
                             this.bp *= 0.20000000298023224D;
                             this.br *= 0.20000000298023224D;
@@ -755,6 +797,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     public OItemStack a(int var1, int var2) {
         if (this.d[var1] != null) {
             OItemStack var3;
+
             if (this.d[var1].a <= var2) {
                 var3 = this.d[var1];
                 this.d[var1] = null;
@@ -776,6 +819,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     public OItemStack b(int var1) {
         if (this.d[var1] != null) {
             OItemStack var2 = this.d[var1];
+
             this.d[var1] = null;
             return var2;
         } else {
@@ -803,8 +847,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     }
 
     @Override
-    public void G_() {
-    }
+    public void G_() {}
 
     @Override
     public boolean interact(OEntityPlayer var1) {
@@ -822,6 +865,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
             }
         } else if (this.minecartType == 2) {
             OItemStack var2 = var1.k.l();
+
             if (var2 != null && var2.c == OItem.l.bP) {
                 if (--var2.a == 0) {
                     var1.k.a(var1.k.c, (OItemStack) null);
@@ -856,12 +900,10 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     }
 
     @Override
-    public void f() {
-    }
+    public void f() {}
 
     @Override
-    public void g() {
-    }
+    public void g() {}
 
     public void c(int var1) {
         this.bY.b(19, Integer.valueOf(var1));
@@ -887,7 +929,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         return this.bY.c(18);
     }
 
-  //CanaryMod start - Container
+    // CanaryMod start - Container
     @Override
     public OItemStack[] getContents() {
         return Arrays.copyOf(this.d, c());
@@ -930,13 +972,13 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
     @Override
     public void clearContents() {
-        Arrays.fill(d, (OItemStack)null);
+        Arrays.fill(d, (OItemStack) null);
     }
 
     @Override
     public Item getItem(int id, int amount) {
-        for(OItemStack stack : getContents()) {
-            if(stack.c == id && stack.a == amount) {
+        for (OItemStack stack : getContents()) {
+            if (stack.c == id && stack.a == amount) {
                 return stack.getCanaryItem();
             }
         }
@@ -945,8 +987,8 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
     @Override
     public Item getItem(int id) {
-        for(OItemStack stack : getContents()) {
-            if(stack.c == id) {
+        for (OItemStack stack : getContents()) {
+            if (stack.c == id) {
                 return stack.getCanaryItem();
             }
         }
@@ -955,8 +997,9 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
     @Override
     public Item removeItem(Item item) {
-        if(d[item.getSlot()] != null && d[item.getSlot()].c == item.getId()) {
+        if (d[item.getSlot()] != null && d[item.getSlot()].c == item.getId()) {
             Item toRet = d[item.getSlot()].getCanaryItem();
+
             d[item.getSlot()] = null;
             return toRet;
         }
@@ -965,9 +1008,10 @@ public class OEntityMinecart extends OEntity implements OIInventory {
 
     @Override
     public Item removeItem(int id) {
-        for(int index = 0; index < d.length; index++) {
-            if(d[index].c == id) {
+        for (int index = 0; index < d.length; index++) {
+            if (d[index].c == id) {
                 Item toRet = d[index].getCanaryItem();
+
                 d[index] = null;
                 return toRet;
             }
@@ -1004,6 +1048,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     public int getInventoryStackLimit() {
         return a();
     }
+
     @Override
     public void addItem(int itemId, int amount) {
         int remaining = amount;
@@ -1014,15 +1059,11 @@ public class OEntityMinecart extends OEntity implements OIInventory {
             //
             // Could do with a cleanup into a single function, 
             // but this works for now.
-            if (((itemId >= 256 && itemId <= 258) || 
-                 (itemId >= 267 && itemId <= 279) || 
-                 (itemId >= 283 && itemId <= 286) ||
-                 (itemId >= 298 && itemId <= 317) ||
-                 (itemId == 261))) {
+            if (((itemId >= 256 && itemId <= 258) || (itemId >= 267 && itemId <= 279) || (itemId >= 283 && itemId <= 286) || (itemId >= 298 && itemId <= 317) || (itemId == 261))) {
                 int targetSlot = getEmptySlot();
                 
                 if (targetSlot == -1) {
-                    this.bi.getCanaryWorld().dropItem((int)getCanaryEntity().getX(), (int)getCanaryEntity().getY(), (int)getCanaryEntity().getZ(), itemId, amount, 0);
+                    this.bi.getCanaryWorld().dropItem((int) getCanaryEntity().getX(), (int) getCanaryEntity().getY(), (int) getCanaryEntity().getZ(), itemId, amount, 0);
                     remaining = 0;
                 } else {
                     addItem(new CanaryItem(itemId, 1, targetSlot));
@@ -1035,6 +1076,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                     if (i != null) {
                         int freeSpace = 64 - i.getAmount();
                         int toAdd = 0;
+
                         if (remaining > freeSpace) {
                             toAdd = freeSpace;
                             remaining -= freeSpace;
@@ -1049,7 +1091,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
                     int targetSlot = getEmptySlot();
                     
                     if (targetSlot == -1) {
-                        this.bi.getCanaryWorld().dropItem((int)getCanaryEntity().getX(), (int)getCanaryEntity().getY(), (int)getCanaryEntity().getZ(), itemId, amount, 0);
+                        this.bi.getCanaryWorld().dropItem((int) getCanaryEntity().getX(), (int) getCanaryEntity().getY(), (int) getCanaryEntity().getZ(), itemId, amount, 0);
                         remaining = 0;
                     } else {
                         if (remaining > 64) {
@@ -1108,6 +1150,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     @Override
     public boolean hasItemStack(int itemId, int amount) {
         int var2;
+
         for (var2 = 0; var2 < this.d.length; ++var2) {
             if (this.d[var2] != null && this.d[var2].c == itemId && this.d[var2].a == amount) {
                 return true;
@@ -1119,6 +1162,7 @@ public class OEntityMinecart extends OEntity implements OIInventory {
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
         int var2;
+
         for (var2 = 0; var2 < this.d.length; ++var2) {
             if (this.d[var2] != null && this.d[var2].c == itemId && (this.d[var2].a >= minAmount || this.d[var2].a <= maxAmount)) {
                 return true;
@@ -1126,5 +1170,5 @@ public class OEntityMinecart extends OEntity implements OIInventory {
         }
         return false;
     }
-    //CanaryMod end - Container
+    // CanaryMod end - Container
 }

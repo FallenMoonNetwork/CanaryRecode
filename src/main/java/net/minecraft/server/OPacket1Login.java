@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,6 +8,7 @@ import java.io.IOException;
 import net.minecraft.server.ONetHandler;
 import net.minecraft.server.OPacket;
 import net.minecraft.server.OWorldType;
+
 
 public class OPacket1Login extends OPacket {
 
@@ -40,6 +42,7 @@ public class OPacket1Login extends OPacket {
         this.a = var1.readInt();
         this.b = a(var1, 16);
         String var2 = a(var1, 16);
+
         this.c = OWorldType.a(var2);
         if (this.c == null) {
             this.c = OWorldType.b;
@@ -77,6 +80,7 @@ public class OPacket1Login extends OPacket {
     @Override
     public int a() {
         int var1 = 0;
+
         if (this.c != null) {
             var1 = this.c.a().length();
         }

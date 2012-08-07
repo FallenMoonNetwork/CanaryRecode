@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -15,6 +16,7 @@ import net.canarymod.api.world.World;
 import net.minecraft.server.OGuiStatsListener;
 import net.minecraft.server.OMinecraftServer;
 import net.minecraft.server.ONetworkManager;
+
 
 public class OGuiStatsComponent extends JComponent {
 
@@ -36,6 +38,7 @@ public class OGuiStatsComponent extends JComponent {
 
     private void a() {
         long var1 = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+
         System.gc();
         this.d[0] = "Memory use: " + var1 / 1024L / 1024L + " mb (" + Runtime.getRuntime().freeMemory() * 100L / Runtime.getRuntime().maxMemory() + "% free)";
         this.d[1] = "Threads: " + ONetworkManager.b + " + " + ONetworkManager.c;
@@ -43,20 +46,23 @@ public class OGuiStatsComponent extends JComponent {
         this.d[3] = "Avg sent: " + (int) this.a(this.e.u) + ", Avg size: " + (int) this.a(this.e.v);
         this.d[4] = "Avg rec: " + (int) this.a(this.e.w) + ", Avg size: " + (int) this.a(this.e.x);
         
-        //CanaryMod Multiworld:
+        // CanaryMod Multiworld:
         Collection<World> worlds = Canary.getServer().getWorldManager().getAllWorlds();
-        if(worlds != null) {
+
+        if (worlds != null) {
             int i = 0;
-            for(World world : worlds) {
+
+            for (World world : worlds) {
                 OWorldServer level = (OWorldServer) (((CanaryWorld) world).getHandle());
+
                 this.d[5 + i] = "World " + world.getName() + " lvl " + i + " tick " + a.format(world.getNanoTick(i) * 1.0E-6D) + " ms";
-                if(world != null && level.G != null) {
+                if (world != null && level.G != null) {
                     this.d[5 + i] += ", " + level.G.d();
                 }
                 i++;
             }
         }
-        //CanaryMod end
+        // CanaryMod end
         this.b[this.c++ & 255] = (int) (this.a(this.e.v) * 100.0D / 12500.0D);
         this.repaint();
     }
@@ -77,8 +83,10 @@ public class OGuiStatsComponent extends JComponent {
         var1.fillRect(0, 0, 356, 246);
 
         int var2;
+
         for (var2 = 0; var2 < 256; ++var2) {
             int var3 = this.b[var2 + this.c & 255];
+
             var1.setColor(new Color(var3 + 28 << 16));
             var1.fillRect(var2, 100 - var3, 1, var3);
         }
@@ -87,6 +95,7 @@ public class OGuiStatsComponent extends JComponent {
 
         for (var2 = 0; var2 < this.d.length; ++var2) {
             String var4 = this.d[var2];
+
             if (var4 != null) {
                 var1.drawString(var4, 32, 116 + var2 * 16);
             }

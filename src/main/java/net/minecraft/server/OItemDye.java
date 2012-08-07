@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockCloth;
 import net.minecraft.server.OBlockCrops;
@@ -13,6 +14,7 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OItemDye extends OItem {
 
@@ -28,6 +30,7 @@ public class OItemDye extends OItem {
     @Override
     public String a(OItemStack var1) {
         int var2 = OMathHelper.a(var1.h(), 0, 15);
+
         return super.b() + "." + a[var2];
     }
 
@@ -38,6 +41,7 @@ public class OItemDye extends OItem {
         } else {
             if (var1.h() == 15) {
                 int var8 = var3.a(var4, var5, var6);
+
                 if (var8 == OBlock.y.bO) {
                     if (!var3.F) {
                         ((OBlockSapling) OBlock.y).b(var3, var4, var5, var6, var3.r);
@@ -77,7 +81,8 @@ public class OItemDye extends OItem {
                     if (!var3.F) {
                         --var1.a;
 
-                        label73: for (int var9 = 0; var9 < 128; ++var9) {
+                        label73:
+                        for (int var9 = 0; var9 < 128; ++var9) {
                             int var10 = var4;
                             int var11 = var5 + 1;
                             int var12 = var6;
@@ -116,6 +121,7 @@ public class OItemDye extends OItem {
         if (var2 instanceof OEntitySheep) {
             OEntitySheep var3 = (OEntitySheep) var2;
             int var4 = OBlockCloth.d(var1.h());
+
             if (!var3.A_() && var3.x() != var4) {
                 var3.d_(var4);
                 --var1.a;

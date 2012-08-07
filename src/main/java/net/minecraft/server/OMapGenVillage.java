@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -7,6 +8,7 @@ import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OMapGenStructure;
 import net.minecraft.server.OStructureStart;
 import net.minecraft.server.OStructureVillageStart;
+
 
 public class OMapGenVillage extends OMapGenStructure {
 
@@ -24,6 +26,7 @@ public class OMapGenVillage extends OMapGenStructure {
         byte var4 = 8;
         int var5 = var1;
         int var6 = var2;
+
         if (var1 < 0) {
             var1 -= var3 - 1;
         }
@@ -35,12 +38,14 @@ public class OMapGenVillage extends OMapGenStructure {
         int var7 = var1 / var3;
         int var8 = var2 / var3;
         Random var9 = this.d.A(var7, var8, 10387312);
+
         var7 *= var3;
         var8 *= var3;
         var7 += var9.nextInt(var3 - var4);
         var8 += var9.nextInt(var3 - var4);
         if (var5 == var7 && var6 == var8) {
             boolean var10 = this.d.a().a(var5 * 16 + 8, var6 * 16 + 8, 0, a);
+
             if (var10) {
                 return true;
             }

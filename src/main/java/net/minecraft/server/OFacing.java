@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class OFacing {
 
     public static final int[] a = new int[] { 1, 0, 3, 2, 5, 4 };

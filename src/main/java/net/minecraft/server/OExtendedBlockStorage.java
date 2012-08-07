@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ONibbleArray;
+
 
 public class OExtendedBlockStorage {
 
@@ -25,11 +27,13 @@ public class OExtendedBlockStorage {
 
     public int a(int var1, int var2, int var3) {
         int var4 = this.d[var2 << 8 | var3 << 4 | var1] & 255;
+
         return this.e != null ? this.e.a(var1, var2, var3) << 8 | var4 : var4;
     }
 
     public void a(int var1, int var2, int var3, int var4) {
         int var5 = this.d[var2 << 8 | var3 << 4 | var1] & 255;
+
         if (this.e != null) {
             var5 |= this.e.a(var1, var2, var3) << 8;
         }
@@ -107,6 +111,7 @@ public class OExtendedBlockStorage {
             for (int var2 = 0; var2 < 16; ++var2) {
                 for (int var3 = 0; var3 < 16; ++var3) {
                     int var4 = this.a(var1, var2, var3);
+
                     if (var4 > 0) {
                         if (OBlock.m[var4] == null) {
                             this.d[var2 << 8 | var3 << 4 | var1] = 0;
@@ -126,8 +131,7 @@ public class OExtendedBlockStorage {
 
     }
 
-    public void e() {
-    }
+    public void e() {}
 
     public int f() {
         return this.b;

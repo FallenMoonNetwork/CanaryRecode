@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockLadder extends OBlock {
 
@@ -16,6 +18,7 @@ public class OBlockLadder extends OBlock {
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
         float var6 = 0.125F;
+
         if (var5 == 2) {
             this.a(0.0F, 0.0F, 1.0F - var6, 1.0F, 1.0F, 1.0F);
         }
@@ -58,6 +61,7 @@ public class OBlockLadder extends OBlock {
     @Override
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
+
         if ((var6 == 0 || var5 == 2) && var1.e(var2, var3, var4 + 1)) {
             var6 = 2;
         }
@@ -81,6 +85,7 @@ public class OBlockLadder extends OBlock {
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
         boolean var7 = false;
+
         if (var6 == 2 && var1.e(var2, var3, var4 + 1)) {
             var7 = true;
         }

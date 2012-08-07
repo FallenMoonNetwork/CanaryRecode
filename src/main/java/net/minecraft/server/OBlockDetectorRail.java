@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
@@ -8,6 +9,7 @@ import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityMinecart;
 import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockDetectorRail extends OBlockRail {
 
@@ -30,6 +32,7 @@ public class OBlockDetectorRail extends OBlockRail {
     public void a(OWorld var1, int var2, int var3, int var4, OEntity var5) {
         if (!var1.F) {
             int var6 = var1.c(var2, var3, var4);
+
             if ((var6 & 8) == 0) {
                 this.f(var1, var2, var3, var4, var6);
             }
@@ -40,6 +43,7 @@ public class OBlockDetectorRail extends OBlockRail {
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (!var1.F) {
             int var6 = var1.c(var2, var3, var4);
+
             if ((var6 & 8) != 0) {
                 this.f(var1, var2, var3, var4, var6);
             }
@@ -61,6 +65,7 @@ public class OBlockDetectorRail extends OBlockRail {
         boolean var7 = false;
         float var8 = 0.125F;
         List var9 = var1.a(OEntityMinecart.class, OAxisAlignedBB.b((var2 + var8), var3, (var4 + var8), ((var2 + 1) - var8), ((var3 + 1) - var8), ((var4 + 1) - var8)));
+
         if (var9.size() > 0) {
             var7 = true;
         }

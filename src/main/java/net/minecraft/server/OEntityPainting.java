@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityPainting extends OEntity {
 
     private int f;
@@ -26,7 +28,7 @@ public class OEntityPainting extends OEntity {
     public int c;
     public int d;
     public OEnumArt e;
-    private CanaryPainting painting; //CanaryMod
+    private CanaryPainting painting; // CanaryMod
 
     public OEntityPainting(OWorld var1) {
         super(var1);
@@ -48,6 +50,7 @@ public class OEntityPainting extends OEntity {
 
         for (int var9 = 0; var9 < var8; ++var9) {
             OEnumArt var10 = var7[var9];
+
             this.e = var10;
             this.b(var5);
             if (this.k()) {
@@ -63,8 +66,7 @@ public class OEntityPainting extends OEntity {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     public void b(int var1) {
         this.a = var1;
@@ -72,6 +74,7 @@ public class OEntityPainting extends OEntity {
         float var2 = this.e.B;
         float var3 = this.e.C;
         float var4 = this.e.B;
+
         if (var1 != 0 && var1 != 2) {
             var2 = 0.5F;
         } else {
@@ -85,6 +88,7 @@ public class OEntityPainting extends OEntity {
         float var6 = this.c + 0.5F;
         float var7 = this.d + 0.5F;
         float var8 = 0.5625F;
+
         if (var1 == 0) {
             var7 -= var8;
         }
@@ -120,6 +124,7 @@ public class OEntityPainting extends OEntity {
         var6 += this.c(this.e.C);
         this.c(var5, var6, var7);
         float var9 = -0.00625F;
+
         this.bw.c((var5 - var2 - var9), (var6 - var3 - var9), (var7 - var4 - var9), (var5 + var2 + var9), (var6 + var3 + var9), (var7 + var4 + var9));
     }
 
@@ -148,6 +153,7 @@ public class OEntityPainting extends OEntity {
             int var3 = this.b;
             int var4 = this.c;
             int var5 = this.d;
+
             if (this.a == 0) {
                 var3 = OMathHelper.b(this.bm - (this.e.B / 32.0F));
             }
@@ -167,9 +173,11 @@ public class OEntityPainting extends OEntity {
             var4 = OMathHelper.b(this.bn - (this.e.C / 32.0F));
 
             int var7;
+
             for (int var6 = 0; var6 < var1; ++var6) {
                 for (var7 = 0; var7 < var2; ++var7) {
                     OMaterial var8;
+
                     if (this.a != 0 && this.a != 2) {
                         var8 = this.bi.d(this.b, var4 + var7, var5 + var6);
                     } else {
@@ -202,19 +210,21 @@ public class OEntityPainting extends OEntity {
     @Override
     public boolean a(ODamageSource var1, int var2) {
         if (!this.bE && !this.bi.F) {
-            //CanaryMod onPaintingDestory
+            // CanaryMod onPaintingDestory
             Player player = null;
+
             if (var1 != null && var1 instanceof OEntityDamageSource && ((OEntityDamageSource) var1).a() instanceof OEntityPlayerMP) {
                 player = ((OEntityPlayerMP) ((OEntityDamageSource) var1).a()).getPlayer();
             }
-            if(player != null){
+            if (player != null) {
                 PaintingHook hook = new PaintingHook(painting, player);
+
                 Canary.hooks().callHook(hook);
-                if(hook.isCanceled()){
+                if (hook.isCanceled()) {
                     return false;
                 }
             }
-            //CanaryMod end
+            // CanaryMod end
             this.X();
             this.aW();
             this.bi.b(new OEntityItem(this.bi, this.bm, this.bn, this.bo, new OItemStack(OItem.ar)));
@@ -244,6 +254,7 @@ public class OEntityPainting extends OEntity {
 
         for (int var5 = 0; var5 < var4; ++var5) {
             OEnumArt var6 = var3[var5];
+
             if (var6.A.equals(var2)) {
                 this.e = var6;
             }

@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityEnderCrystal extends OEntity {
 
@@ -41,6 +43,7 @@ public class OEntityEnderCrystal extends OEntity {
         int var1 = OMathHelper.b(this.bm);
         int var2 = OMathHelper.b(this.bn);
         int var3 = OMathHelper.b(this.bo);
+
         if (this.bi.a(var1, var2, var3) != OBlock.ar.bO) {
             this.bi.e(var1, var2, var3, OBlock.ar.bO);
         }
@@ -48,12 +51,10 @@ public class OEntityEnderCrystal extends OEntity {
     }
 
     @Override
-    protected void b(ONBTTagCompound var1) {
-    }
+    protected void b(ONBTTagCompound var1) {}
 
     @Override
-    protected void a(ONBTTagCompound var1) {
-    }
+    protected void a(ONBTTagCompound var1) {}
 
     @Override
     public boolean o_() {

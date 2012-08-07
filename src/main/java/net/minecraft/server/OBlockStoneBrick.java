@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMaterial;
+
 
 public class OBlockStoneBrick extends OBlock {
 
@@ -14,10 +16,13 @@ public class OBlockStoneBrick extends OBlock {
         switch (var2) {
         case 1:
             return 100;
+
         case 2:
             return 101;
+
         case 3:
             return 213;
+
         default:
             return 54;
         }

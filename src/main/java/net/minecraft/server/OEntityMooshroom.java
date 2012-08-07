@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryMushroomCow;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityAnimal;
@@ -9,6 +10,7 @@ import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityMooshroom extends OEntityCow {
 
@@ -31,6 +33,7 @@ public class OEntityMooshroom extends OEntityCow {
     @Override
     public boolean interact(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
+
         if (var2 != null && var2.c == OItem.D.bP && this.K() >= 0) {
             if (var2.a == 1) {
                 var1.k.a(var1.k.c, new OItemStack(OItem.E));
@@ -48,6 +51,7 @@ public class OEntityMooshroom extends OEntityCow {
             this.bi.a("largeexplode", this.bm, this.bn + (this.bH / 2.0F), this.bo, 0.0D, 0.0D, 0.0D);
             if (!this.bi.F) {
                 OEntityCow var3 = new OEntityCow(this.bi);
+
                 var3.c(this.bm, this.bn, this.bo, this.bs, this.bt);
                 var3.h(this.aD());
                 var3.V = this.V;

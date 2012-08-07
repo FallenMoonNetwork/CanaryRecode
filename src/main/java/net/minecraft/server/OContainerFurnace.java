@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OContainer;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OFurnaceRecipes;
@@ -9,6 +10,7 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OSlot;
 import net.minecraft.server.OSlotFurnace;
 import net.minecraft.server.OTileEntityFurnace;
+
 
 public class OContainerFurnace extends OContainer {
 
@@ -25,6 +27,7 @@ public class OContainerFurnace extends OContainer {
         this.a(new OSlotFurnace(var1.d, var2, 2, 116, 35));
 
         int var3;
+
         for (var3 = 0; var3 < 3; ++var3) {
             for (int var4 = 0; var4 < 9; ++var4) {
                 this.a(new OSlot(var1, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
@@ -51,6 +54,7 @@ public class OContainerFurnace extends OContainer {
 
         for (int var1 = 0; var1 < this.g.size(); ++var1) {
             OICrafting var2 = (OICrafting) this.g.get(var1);
+
             if (this.b != this.a.c) {
                 var2.a(this, 0, this.a.c);
             }
@@ -78,8 +82,10 @@ public class OContainerFurnace extends OContainer {
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);
+
         if (var3 != null && var3.c()) {
             OItemStack var4 = var3.b();
+
             var2 = var4.j();
             if (var1 == 2) {
                 if (!this.a(var4, 3, 39, true)) {

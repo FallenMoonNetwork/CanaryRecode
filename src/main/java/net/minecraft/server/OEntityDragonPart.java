@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityDragonBase;
 import net.minecraft.server.ONBTTagCompound;
+
 
 public class OEntityDragonPart extends OEntity {
 
@@ -18,16 +20,13 @@ public class OEntityDragonPart extends OEntity {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     @Override
-    protected void a(ONBTTagCompound var1) {
-    }
+    protected void a(ONBTTagCompound var1) {}
 
     @Override
-    protected void b(ONBTTagCompound var1) {
-    }
+    protected void b(ONBTTagCompound var1) {}
 
     @Override
     public boolean o_() {

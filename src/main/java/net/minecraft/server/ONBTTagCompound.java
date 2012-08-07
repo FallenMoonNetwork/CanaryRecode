@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import net.minecraft.server.ONBTTagLong;
 import net.minecraft.server.ONBTTagShort;
 import net.minecraft.server.ONBTTagString;
 
+
 public class ONBTTagCompound extends ONBTBase {
 
     private Map a = new HashMap();
@@ -37,6 +39,7 @@ public class ONBTTagCompound extends ONBTBase {
 
         while (var2.hasNext()) {
             ONBTBase var3 = (ONBTBase) var2.next();
+
             ONBTBase.a(var3, var1);
         }
 
@@ -48,6 +51,7 @@ public class ONBTTagCompound extends ONBTBase {
         this.a.clear();
 
         ONBTBase var2;
+
         while ((var2 = ONBTBase.b(var1)).a() != 0) {
             this.a.put(var2.c(), var2);
         }
@@ -179,6 +183,7 @@ public class ONBTTagCompound extends ONBTBase {
 
         while (var2.hasNext()) {
             String var3 = (String) var2.next();
+
             var1.a(var3, ((ONBTBase) this.a.get(var3)).b());
         }
 
@@ -189,6 +194,7 @@ public class ONBTTagCompound extends ONBTBase {
     public boolean equals(Object var1) {
         if (super.equals(var1)) {
             ONBTTagCompound var2 = (ONBTTagCompound) var1;
+
             return this.a.entrySet().equals(var2.a.entrySet());
         } else {
             return false;

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class ONibbleArray {
 
     public final byte[] a;
@@ -24,6 +25,7 @@ public class ONibbleArray {
         int var4 = var2 << this.c | var3 << this.b | var1;
         int var5 = var4 >> 1;
         int var6 = var4 & 1;
+
         return var6 == 0 ? this.a[var5] & 15 : this.a[var5] >> 4 & 15;
     }
 
@@ -31,6 +33,7 @@ public class ONibbleArray {
         int var5 = var2 << this.c | var3 << this.b | var1;
         int var6 = var5 >> 1;
         int var7 = var5 & 1;
+
         if (var7 == 0) {
             this.a[var6] = (byte) (this.a[var6] & 240 | var4 & 15);
         } else {

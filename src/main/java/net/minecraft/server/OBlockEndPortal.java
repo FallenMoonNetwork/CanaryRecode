@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
@@ -11,6 +12,7 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OTileEntityEndPortal;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockEndPortal extends OBlockContainer {
 
@@ -29,12 +31,12 @@ public class OBlockEndPortal extends OBlockContainer {
     @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         float var5 = 0.0625F;
+
         this.a(0.0F, 0.0F, 0.0F, 1.0F, var5, 1.0F);
     }
 
     @Override
-    public void a(OWorld var1, int var2, int var3, int var4, OAxisAlignedBB var5, ArrayList var6) {
-    }
+    public void a(OWorld var1, int var2, int var3, int var4, OAxisAlignedBB var5, ArrayList var6) {}
 
     @Override
     public boolean a() {

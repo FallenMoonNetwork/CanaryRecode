@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OPathEntity;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityAIAttackOnCollide extends OEntityAIBase {
 
@@ -37,6 +39,7 @@ public class OEntityAIAttackOnCollide extends OEntityAIBase {
     @Override
     public boolean a() {
         OEntityLiving var1 = this.b.at();
+
         if (var1 == null) {
             return false;
         } else if (this.h != null && !this.h.isAssignableFrom(var1.getClass())) {
@@ -51,6 +54,7 @@ public class OEntityAIAttackOnCollide extends OEntityAIBase {
     @Override
     public boolean b() {
         OEntityLiving var1 = this.b.at();
+
         return var1 == null ? false : (!this.c.aE() ? false : (!this.f ? !this.b.al().e() : this.b.e(OMathHelper.b(this.c.bm), OMathHelper.b(this.c.bn), OMathHelper.b(this.c.bo))));
     }
 
@@ -76,6 +80,7 @@ public class OEntityAIAttackOnCollide extends OEntityAIBase {
 
         this.d = Math.max(this.d - 1, 0);
         double var1 = (this.b.bG * 2.0F * this.b.bG * 2.0F);
+
         if (this.b.e(this.c.bm, this.c.bw.b, this.c.bo) <= var1) {
             if (this.d <= 0) {
                 this.d = 20;

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
@@ -8,6 +9,7 @@ import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockEndPortalFrame extends OBlock {
 
@@ -40,6 +42,7 @@ public class OBlockEndPortalFrame extends OBlock {
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.8125F, 1.0F);
         super.a(var1, var2, var3, var4, var5, var6);
         int var7 = var1.c(var2, var3, var4);
+
         if (d(var7)) {
             this.a(0.3125F, 0.8125F, 0.3125F, 0.6875F, 1.0F, 0.6875F);
             super.a(var1, var2, var3, var4, var5, var6);
@@ -60,6 +63,7 @@ public class OBlockEndPortalFrame extends OBlock {
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = ((OMathHelper.b((var5.bs * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
+
         var1.c(var2, var3, var4, var6);
     }
 }

@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OWorldGenMinable extends OWorldGenerator {
 
@@ -43,12 +45,15 @@ public class OWorldGenMinable extends OWorldGenerator {
 
             for (int var38 = var32; var38 <= var35; ++var38) {
                 double var39 = (var38 + 0.5D - var20) / (var28 / 2.0D);
+
                 if (var39 * var39 < 1.0D) {
                     for (int var41 = var33; var41 <= var36; ++var41) {
                         double var42 = (var41 + 0.5D - var22) / (var30 / 2.0D);
+
                         if (var39 * var39 + var42 * var42 < 1.0D) {
                             for (int var44 = var34; var44 <= var37; ++var44) {
                                 double var45 = (var44 + 0.5D - var24) / (var28 / 2.0D);
+
                                 if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && var1.a(var38, var41, var44) == OBlock.t.bO) {
                                     var1.b(var38, var41, var44, this.a);
                                 }

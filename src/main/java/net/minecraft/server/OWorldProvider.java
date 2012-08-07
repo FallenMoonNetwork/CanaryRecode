@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
@@ -13,6 +14,7 @@ import net.minecraft.server.OWorldProviderEnd;
 import net.minecraft.server.OWorldProviderHell;
 import net.minecraft.server.OWorldProviderSurface;
 import net.minecraft.server.OWorldType;
+
 
 public abstract class OWorldProvider {
 
@@ -41,6 +43,7 @@ public abstract class OWorldProvider {
 
         for (int var2 = 0; var2 <= 15; ++var2) {
             float var3 = 1.0F - var2 / 15.0F;
+
             this.f[var2] = (1.0F - var3) / (var3 * 3.0F + 1.0F) * (1.0F - var1) + var1;
         }
 
@@ -61,12 +64,14 @@ public abstract class OWorldProvider {
 
     public boolean a(int var1, int var2) {
         int var3 = this.a.b(var1, var2);
+
         return var3 == OBlock.u.bO;
     }
 
     public float a(long var1, float var3) {
         int var4 = (int) (var1 % 24000L);
         float var5 = (var4 + var3) / 24000.0F - 0.25F;
+
         if (var5 < 0.0F) {
             ++var5;
         }
@@ -76,6 +81,7 @@ public abstract class OWorldProvider {
         }
 
         float var6 = var5;
+
         var5 = 1.0F - (float) ((Math.cos(var5 * 3.141592653589793D) + 1.0D) / 2.0D);
         var5 = var6 + (var5 - var6) / 3.0F;
         return var5;

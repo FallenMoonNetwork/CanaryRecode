@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
@@ -8,6 +9,7 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockRedstoneOre extends OBlock {
 
@@ -84,6 +86,7 @@ public class OBlockRedstoneOre extends OBlock {
             double var9 = (var2 + var5.nextFloat());
             double var11 = (var3 + var5.nextFloat());
             double var13 = (var4 + var5.nextFloat());
+
             if (var8 == 0 && !var1.r(var2, var3 + 1, var4)) {
                 var11 = (var3 + 1) + var6;
             }

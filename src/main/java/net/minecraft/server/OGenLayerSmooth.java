@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OGenLayer;
 import net.minecraft.server.OIntCache;
+
 
 public class OGenLayerSmooth extends OGenLayer {
 
@@ -26,6 +28,7 @@ public class OGenLayerSmooth extends OGenLayer {
                 int var15 = var9[var12 + 1 + (var11 + 0) * var7];
                 int var16 = var9[var12 + 1 + (var11 + 2) * var7];
                 int var17 = var9[var12 + 1 + (var11 + 1) * var7];
+
                 if (var13 == var14 && var15 == var16) {
                     this.a((var12 + var1), (var11 + var2));
                     if (this.a(2) == 0) {

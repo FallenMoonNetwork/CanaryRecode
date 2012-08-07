@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OEntityWolf;
 import net.minecraft.server.OSpawnListEntry;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OBiomeGenForest extends OBiomeGenBase {
 

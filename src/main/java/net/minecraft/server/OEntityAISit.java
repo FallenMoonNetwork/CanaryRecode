@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityTameable;
+
 
 public class OEntityAISit extends OEntityAIBase {
 
@@ -25,6 +27,7 @@ public class OEntityAISit extends OEntityAIBase {
             return false;
         } else {
             OEntityLiving var1 = this.a.w_();
+
             return var1 == null ? true : (this.a.j(var1) < 144.0D && var1.ao() != null ? false : this.b);
         }
     }

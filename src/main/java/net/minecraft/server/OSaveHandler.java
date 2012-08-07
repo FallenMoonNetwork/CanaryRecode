@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -21,11 +22,12 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorldInfo;
 import net.minecraft.server.OWorldProvider;
 
+
 public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
 
     private static final Logger a = Logger.getLogger("Minecraft");
     private final File b;
-    private final File worldbaseDir; //CanaryMod
+    private final File worldbaseDir; // CanaryMod
     private final File c;
     private final File d;
     private final long e = System.currentTimeMillis();
@@ -34,10 +36,11 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
 
     public OSaveHandler(File var1, String var2, boolean var3, WorldType type) {
         super();
-        //CanaryMod refactored for more flexible folder structure
+        // CanaryMod refactored for more flexible folder structure
         File tmp = new File(var1, var2);
+
         tmp.mkdirs();
-        this.b = new File(var1, var2+"/"+var2+"_"+type.getName());
+        this.b = new File(var1, var2 + "/" + var2 + "_" + type.getName());
         this.b.mkdirs();
         this.c = new File(tmp, "players");
         this.d = new File(tmp, "data");
@@ -50,7 +53,8 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
         this.f();
         this.type = type;
     }
-    //CanaryMod added getname
+
+    // CanaryMod added getname
     /**
      * get the base name of this world saver (only world name, without dimension appendix)
      * @return
@@ -58,7 +62,8 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
     public String getBaseName() {
         return this.f;
     }
-    //CanaryMod
+
+    // CanaryMod
     /**
      * get the dir folder (worlds/)
      * @return
@@ -130,6 +135,7 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
         File var1 = new File(this.b, "level.dat");
         ONBTTagCompound var2;
         ONBTTagCompound var3;
+
         if (var1.exists()) {
             try {
                 var2 = OCompressedStreamTools.a((new FileInputStream(var1)));
@@ -158,12 +164,14 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
     public void a(OWorldInfo var1, List var2) {
         ONBTTagCompound var3 = var1.a(var2);
         ONBTTagCompound var4 = new ONBTTagCompound();
+
         var4.a("Data", (ONBTBase) var3);
 
         try {
             File var5 = new File(this.b, "level.dat_new");
             File var6 = new File(this.b, "level.dat_old");
             File var7 = new File(this.b, "level.dat");
+
             OCompressedStreamTools.a(var4, (new FileOutputStream(var5)));
             if (var6.exists()) {
                 var6.delete();
@@ -188,12 +196,14 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
     public void a(OWorldInfo var1) {
         ONBTTagCompound var2 = var1.a();
         ONBTTagCompound var3 = new ONBTTagCompound();
+
         var3.a("Data", (ONBTBase) var2);
 
         try {
             File var4 = new File(this.b, "level.dat_new");
             File var5 = new File(this.b, "level.dat_old");
             File var6 = new File(this.b, "level.dat");
+
             OCompressedStreamTools.a(var3, (new FileOutputStream(var4)));
             if (var5.exists()) {
                 var5.delete();
@@ -218,9 +228,11 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
     public void a(OEntityPlayer var1) {
         try {
             ONBTTagCompound var2 = new ONBTTagCompound();
+
             var1.d(var2);
             File var3 = new File(this.c, "_tmp_.dat");
             File var4 = new File(this.c, var1.v + ".dat");
+
             OCompressedStreamTools.a(var2, (new FileOutputStream(var3)));
             if (var4.exists()) {
                 var4.delete();
@@ -236,6 +248,7 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
     @Override
     public void b(OEntityPlayer var1) {
         ONBTTagCompound var2 = this.a(var1.v);
+
         if (var2 != null) {
             var1.e(var2);
         }
@@ -245,6 +258,7 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
     public ONBTTagCompound a(String var1) {
         try {
             File var2 = new File(this.c, var1 + ".dat");
+
             if (var2.exists()) {
                 return OCompressedStreamTools.a((new FileInputStream(var2)));
             }
@@ -266,8 +280,7 @@ public class OSaveHandler implements OIPlayerFileData, OISaveHandler {
     }
 
     @Override
-    public void e() {
-    }
+    public void e() {}
 
     @Override
     public File b(String var1) {

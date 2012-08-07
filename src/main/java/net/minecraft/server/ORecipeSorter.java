@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Comparator;
 import net.minecraft.server.OCraftingManager;
 import net.minecraft.server.OIRecipe;
 import net.minecraft.server.OShapedRecipes;
 import net.minecraft.server.OShapelessRecipes;
+
 
 class ORecipeSorter implements Comparator {
 

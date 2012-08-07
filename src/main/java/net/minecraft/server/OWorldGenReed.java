@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OWorldGenReed extends OWorldGenerator {
 
@@ -18,6 +20,7 @@ public class OWorldGenReed extends OWorldGenerator {
             int var7 = var3 + var2.nextInt(4) - var2.nextInt(4);
             int var8 = var4;
             int var9 = var5 + var2.nextInt(4) - var2.nextInt(4);
+
             if (var1.g(var7, var4, var9) && (var1.d(var7 - 1, var4 - 1, var9) == OMaterial.g || var1.d(var7 + 1, var4 - 1, var9) == OMaterial.g || var1.d(var7, var4 - 1, var9 - 1) == OMaterial.g || var1.d(var7, var4 - 1, var9 + 1) == OMaterial.g)) {
                 int var10 = 2 + var2.nextInt(var2.nextInt(3) + 1);
 

@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.minecraft.server.OContainer;
 import net.minecraft.server.OItemStack;
+
 
 public interface OICrafting {
 

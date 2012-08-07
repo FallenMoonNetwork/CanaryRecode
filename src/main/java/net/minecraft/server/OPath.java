@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OPathPoint;
+
 
 public class OPath {
 
@@ -17,6 +19,7 @@ public class OPath {
         } else {
             if (this.b == this.a.length) {
                 OPathPoint[] var2 = new OPathPoint[this.b << 1];
+
                 System.arraycopy(this.a, 0, var2, 0, this.b);
                 this.a = var2;
             }
@@ -34,6 +37,7 @@ public class OPath {
 
     public OPathPoint b() {
         OPathPoint var1 = this.a[0];
+
         this.a[0] = this.a[--this.b];
         this.a[this.b] = null;
         if (this.b > 0) {
@@ -46,6 +50,7 @@ public class OPath {
 
     public void a(OPathPoint var1, float var2) {
         float var3 = var1.g;
+
         var1.g = var2;
         if (var2 < var3) {
             this.a(var1.d);
@@ -59,9 +64,11 @@ public class OPath {
         OPathPoint var2 = this.a[var1];
 
         int var4;
+
         for (float var3 = var2.g; var1 > 0; var1 = var4) {
             var4 = var1 - 1 >> 1;
             OPathPoint var5 = this.a[var4];
+
             if (var3 >= var5.g) {
                 break;
             }
@@ -81,6 +88,7 @@ public class OPath {
         while (true) {
             int var4 = 1 + (var1 << 1);
             int var5 = var4 + 1;
+
             if (var4 >= this.b) {
                 break;
             }
@@ -89,6 +97,7 @@ public class OPath {
             float var7 = var6.g;
             OPathPoint var8;
             float var9;
+
             if (var5 >= this.b) {
                 var8 = null;
                 var9 = Float.POSITIVE_INFINITY;

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.ODamageSource;
@@ -15,6 +16,7 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OStatList;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityFishHook extends OEntity {
 
@@ -55,6 +57,7 @@ public class OEntityFishHook extends OEntity {
         this.c(this.bm, this.bn, this.bo);
         this.bF = 0.0F;
         float var3 = 0.4F;
+
         this.bp = (-OMathHelper.a(this.bs / 180.0F * 3.1415927F) * OMathHelper.b(this.bt / 180.0F * 3.1415927F) * var3);
         this.br = (OMathHelper.b(this.bs / 180.0F * 3.1415927F) * OMathHelper.b(this.bt / 180.0F * 3.1415927F) * var3);
         this.bq = (-OMathHelper.a(this.bt / 180.0F * 3.1415927F) * var3);
@@ -62,11 +65,11 @@ public class OEntityFishHook extends OEntity {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     public void a(double var1, double var3, double var5, float var7, float var8) {
         float var9 = OMathHelper.a(var1 * var1 + var3 * var3 + var5 * var5);
+
         var1 /= var9;
         var3 /= var9;
         var5 /= var9;
@@ -80,6 +83,7 @@ public class OEntityFishHook extends OEntity {
         this.bq = var3;
         this.br = var5;
         float var10 = OMathHelper.a(var1 * var1 + var5 * var5);
+
         this.bu = this.bs = (float) (Math.atan2(var1, var5) * 180.0D / 3.1415927410125732D);
         this.bv = this.bt = (float) (Math.atan2(var3, var10) * 180.0D / 3.1415927410125732D);
         this.i = 0;
@@ -94,6 +98,7 @@ public class OEntityFishHook extends OEntity {
             double var5 = this.bo + (this.o - this.bo) / this.l;
 
             double var7;
+
             for (var7 = this.p - this.bs; var7 < -180.0D; var7 += 360.0D) {
                 ;
             }
@@ -110,6 +115,7 @@ public class OEntityFishHook extends OEntity {
         } else {
             if (!this.bi.F) {
                 OItemStack var9 = this.b.U();
+
                 if (this.b.bE || !this.b.aE() || var9 == null || var9.a() != OItem.aQ || this.j(this.b) > 1024.0D) {
                     this.X();
                     this.b.R = null;
@@ -134,6 +140,7 @@ public class OEntityFishHook extends OEntity {
 
             if (this.h) {
                 int var35 = this.bi.a(this.d, this.e, this.f);
+
                 if (var35 == this.g) {
                     ++this.i;
                     if (this.i == 1200) {
@@ -156,6 +163,7 @@ public class OEntityFishHook extends OEntity {
             OVec3D var36 = OVec3D.b(this.bm, this.bn, this.bo);
             OVec3D var10 = OVec3D.b(this.bm + this.bp, this.bn + this.bq, this.bo + this.br);
             OMovingObjectPosition var11 = this.bi.a(var36, var10);
+
             var36 = OVec3D.b(this.bm, this.bn, this.bo);
             var10 = OVec3D.b(this.bm + this.bp, this.bn + this.bq, this.bo + this.br);
             if (var11 != null) {
@@ -167,12 +175,15 @@ public class OEntityFishHook extends OEntity {
             double var14 = 0.0D;
 
             double var21;
+
             for (int var16 = 0; var16 < var13.size(); ++var16) {
                 OEntity var17 = (OEntity) var13.get(var16);
+
                 if (var17.o_() && (var17 != this.b || this.j >= 5)) {
                     float var18 = 0.3F;
                     OAxisAlignedBB var19 = var17.bw.b(var18, var18, var18);
                     OMovingObjectPosition var20 = var19.a(var36, var10);
+
                     if (var20 != null) {
                         var21 = var36.b(var20.f);
                         if (var21 < var14 || var14 == 0.0D) {
@@ -200,6 +211,7 @@ public class OEntityFishHook extends OEntity {
             if (!this.h) {
                 this.a(this.bp, this.bq, this.br);
                 float var37 = OMathHelper.a(this.bp * this.bp + this.br * this.br);
+
                 this.bs = (float) (Math.atan2(this.bp, this.br) * 180.0D / 3.1415927410125732D);
 
                 for (this.bt = (float) (Math.atan2(this.bq, var37) * 180.0D / 3.1415927410125732D); this.bt - this.bv < -180.0F; this.bv -= 360.0F) {
@@ -221,6 +233,7 @@ public class OEntityFishHook extends OEntity {
                 this.bt = this.bv + (this.bt - this.bv) * 0.2F;
                 this.bs = this.bu + (this.bs - this.bu) * 0.2F;
                 float var38 = 0.92F;
+
                 if (this.bx || this.by) {
                     var38 = 0.5F;
                 }
@@ -232,6 +245,7 @@ public class OEntityFishHook extends OEntity {
                     double var26 = this.bw.b + (this.bw.e - this.bw.b) * (var25 + 0) / var39 - 0.125D + 0.125D;
                     double var28 = this.bw.b + (this.bw.e - this.bw.b) * (var25 + 1) / var39 - 0.125D + 0.125D;
                     OAxisAlignedBB var30 = OAxisAlignedBB.b(this.bw.a, var26, this.bw.c, this.bw.d, var28, this.bw.f);
+
                     if (this.bi.b(var30, OMaterial.g)) {
                         var23 += 1.0D / var39;
                     }
@@ -242,6 +256,7 @@ public class OEntityFishHook extends OEntity {
                         --this.k;
                     } else {
                         short var40 = 500;
+
                         if (this.bi.y(OMathHelper.b(this.bm), OMathHelper.b(this.bn) + 1, OMathHelper.b(this.bo))) {
                             var40 = 300;
                         }
@@ -255,6 +270,7 @@ public class OEntityFishHook extends OEntity {
                             float var34;
                             int var32;
                             float var33;
+
                             for (var32 = 0; var32 < 1.0F + this.bG * 20.0F; ++var32) {
                                 var33 = (this.bS.nextFloat() * 2.0F - 1.0F) * this.bG;
                                 var34 = (this.bS.nextFloat() * 2.0F - 1.0F) * this.bG;
@@ -311,12 +327,14 @@ public class OEntityFishHook extends OEntity {
 
     public int k() {
         byte var1 = 0;
+
         if (this.c != null) {
             double var2 = this.b.bm - this.bm;
             double var4 = this.b.bn - this.bn;
             double var6 = this.b.bo - this.bo;
             double var8 = OMathHelper.a(var2 * var2 + var4 * var4 + var6 * var6);
             double var10 = 0.1D;
+
             this.c.bp += var2 * var10;
             this.c.bq += var4 * var10 + OMathHelper.a(var8) * 0.08D;
             this.c.br += var6 * var10;
@@ -328,6 +346,7 @@ public class OEntityFishHook extends OEntity {
             double var17 = this.b.bo - this.bo;
             double var19 = OMathHelper.a(var13 * var13 + var15 * var15 + var17 * var17);
             double var21 = 0.1D;
+
             var12.bp = var13 * var21;
             var12.bq = var15 * var21 + OMathHelper.a(var19) * 0.08D;
             var12.br = var17 * var21;

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
@@ -8,6 +9,7 @@ import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockStep extends OBlock {
 
@@ -32,6 +34,7 @@ public class OBlockStep extends OBlock {
             this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         } else {
             boolean var5 = (var1.c(var2, var3, var4) & 8) != 0;
+
             if (var5) {
                 this.a(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
             } else {
@@ -60,6 +63,7 @@ public class OBlockStep extends OBlock {
     @Override
     public int a(int var1, int var2) {
         int var3 = var2 & 7;
+
         return var3 == 0 ? (var1 <= 1 ? 6 : 5) : (var3 == 1 ? (var1 == 0 ? 208 : (var1 == 1 ? 176 : 192)) : (var3 == 2 ? 4 : (var3 == 3 ? 16 : (var3 == 4 ? OBlock.al.bN : (var3 == 5 ? OBlock.bm.bN : 6)))));
     }
 
@@ -77,6 +81,7 @@ public class OBlockStep extends OBlock {
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         if (var5 == 0 && !this.b) {
             int var6 = var1.c(var2, var3, var4) & 7;
+
             var1.c(var2, var3, var4, var6 | 8);
         }
 

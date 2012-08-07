@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class OWeightedRandomChoice {
 
     protected int d;

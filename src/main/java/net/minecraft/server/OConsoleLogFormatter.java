@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
+
 
 final class OConsoleLogFormatter extends Formatter {
 
@@ -18,8 +20,10 @@ final class OConsoleLogFormatter extends Formatter {
     @Override
     public String format(LogRecord var1) {
         StringBuilder var2 = new StringBuilder();
+
         var2.append(this.a.format(Long.valueOf(var1.getMillis())));
         Level var3 = var1.getLevel();
+
         if (var3 == Level.FINEST) {
             var2.append(" [FINEST] ");
         } else if (var3 == Level.FINER) {
@@ -39,8 +43,10 @@ final class OConsoleLogFormatter extends Formatter {
         var2.append(var1.getMessage());
         var2.append('\n');
         Throwable var4 = var1.getThrown();
+
         if (var4 != null) {
             StringWriter var5 = new StringWriter();
+
             var4.printStackTrace(new PrintWriter(var5));
             var2.append(var5.toString());
         }

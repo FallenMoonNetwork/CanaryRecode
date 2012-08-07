@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OMathHelper;
+
 
 public class OEntityLookHelper {
 
@@ -52,6 +54,7 @@ public class OEntityLookHelper {
             double var7 = OMathHelper.a(var1 * var1 + var5 * var5);
             float var9 = (float) (Math.atan2(var5, var1) * 180.0D / 3.1415927410125732D) - 90.0F;
             float var10 = (float) (-(Math.atan2(var3, var7) * 180.0D / 3.1415927410125732D));
+
             this.a.bt = this.a(this.a.bt, var10, this.c);
             this.a.X = this.a(this.a.X, var9, this.b);
         } else {
@@ -59,6 +62,7 @@ public class OEntityLookHelper {
         }
 
         float var11;
+
         for (var11 = this.a.X - this.a.V; var11 < -180.0F; var11 += 360.0F) {
             ;
         }
@@ -81,6 +85,7 @@ public class OEntityLookHelper {
 
     private float a(float var1, float var2, float var3) {
         float var4;
+
         for (var4 = var2 - var1; var4 < -180.0F; var4 += 360.0F) {
             ;
         }

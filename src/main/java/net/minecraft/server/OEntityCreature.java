@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OMathHelper;
@@ -7,6 +8,7 @@ import net.minecraft.server.OPathEntity;
 import net.minecraft.server.OProfiler;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public abstract class OEntityCreature extends OEntityLiving {
 
@@ -32,6 +34,7 @@ public abstract class OEntityCreature extends OEntityLiving {
 
         this.e = this.F();
         float var1 = 16.0F;
+
         if (this.d == null) {
             this.d = this.o();
             if (this.d != null) {
@@ -41,6 +44,7 @@ public abstract class OEntityCreature extends OEntityLiving {
             this.d = null;
         } else {
             float var2 = this.d.i(this);
+
             if (this.h(this.d)) {
                 this.a(this.d, var2);
             } else {
@@ -58,6 +62,7 @@ public abstract class OEntityCreature extends OEntityLiving {
         int var21 = OMathHelper.b(this.bw.b + 0.5D);
         boolean var3 = this.aU();
         boolean var4 = this.aV();
+
         this.bt = 0.0F;
         if (this.a != null && this.bS.nextInt(100) != 0) {
             OProfiler.a("followpath");
@@ -103,6 +108,7 @@ public abstract class OEntityCreature extends OEntityLiving {
                     double var16 = this.d.bm - this.bm;
                     double var18 = this.d.bo - this.bo;
                     float var20 = this.bs;
+
                     this.bs = (float) (Math.atan2(var18, var16) * 180.0D / 3.1415927410125732D) - 90.0F;
                     var15 = (var20 - this.bs + 90.0F) * 3.1415927F / 180.0F;
                     this.aW = -OMathHelper.a(var15) * this.aX * 1.0F;
@@ -146,6 +152,7 @@ public abstract class OEntityCreature extends OEntityLiving {
             int var8 = OMathHelper.b(this.bn + this.bS.nextInt(7) - 3.0D);
             int var9 = OMathHelper.b(this.bo + this.bS.nextInt(13) - 6.0D);
             float var10 = this.a(var7, var8, var9);
+
             if (var10 > var5) {
                 var5 = var10;
                 var2 = var7;
@@ -162,11 +169,9 @@ public abstract class OEntityCreature extends OEntityLiving {
         OProfiler.a();
     }
 
-    protected void a(OEntity var1, float var2) {
-    }
+    protected void a(OEntity var1, float var2) {}
 
-    protected void b(OEntity var1, float var2) {
-    }
+    protected void b(OEntity var1, float var2) {}
 
     public float a(int var1, int var2, int var3) {
         return 0.0F;
@@ -181,6 +186,7 @@ public abstract class OEntityCreature extends OEntityLiving {
         int var1 = OMathHelper.b(this.bm);
         int var2 = OMathHelper.b(this.bw.b);
         int var3 = OMathHelper.b(this.bo);
+
         return super.l() && this.a(var1, var2, var3) >= 0.0F;
     }
 
@@ -206,6 +212,7 @@ public abstract class OEntityCreature extends OEntityLiving {
             return 1.0F;
         } else {
             float var1 = super.J();
+
             if (this.f > 0) {
                 var1 *= 2.0F;
             }

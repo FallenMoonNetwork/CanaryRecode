@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OComponentVillageStartPiece;
@@ -8,6 +9,7 @@ import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructureVillagePieces;
 import net.minecraft.server.OWorld;
+
 
 abstract class OComponentVillage extends OStructureComponent {
 
@@ -21,12 +23,16 @@ abstract class OComponentVillage extends OStructureComponent {
         switch (this.h) {
         case 0:
             return OStructureVillagePieces.a(var1, var2, var3, this.g.a - 1, this.g.b + var4, this.g.c + var5, 1, this.c());
+
         case 1:
             return OStructureVillagePieces.a(var1, var2, var3, this.g.a + var5, this.g.b + var4, this.g.c - 1, 2, this.c());
+
         case 2:
             return OStructureVillagePieces.a(var1, var2, var3, this.g.a - 1, this.g.b + var4, this.g.c + var5, 1, this.c());
+
         case 3:
             return OStructureVillagePieces.a(var1, var2, var3, this.g.a + var5, this.g.b + var4, this.g.c - 1, 2, this.c());
+
         default:
             return null;
         }
@@ -36,12 +42,16 @@ abstract class OComponentVillage extends OStructureComponent {
         switch (this.h) {
         case 0:
             return OStructureVillagePieces.a(var1, var2, var3, this.g.d + 1, this.g.b + var4, this.g.c + var5, 3, this.c());
+
         case 1:
             return OStructureVillagePieces.a(var1, var2, var3, this.g.a + var5, this.g.b + var4, this.g.f + 1, 0, this.c());
+
         case 2:
             return OStructureVillagePieces.a(var1, var2, var3, this.g.d + 1, this.g.b + var4, this.g.c + var5, 3, this.c());
+
         case 3:
             return OStructureVillagePieces.a(var1, var2, var3, this.g.a + var5, this.g.b + var4, this.g.f + 1, 0, this.c());
+
         default:
             return null;
         }
@@ -77,12 +87,14 @@ abstract class OComponentVillage extends OStructureComponent {
                 int var8 = this.a(var3 + var7, var5);
                 int var9 = this.b(var4);
                 int var10 = this.b(var3 + var7, var5);
+
                 if (!var2.b(var8, var9, var10)) {
                     break;
                 }
 
                 ++this.a;
                 OEntityVillager var11 = new OEntityVillager(var1, this.a(var7));
+
                 var11.c(var8 + 0.5D, var9, var10 + 0.5D, 0.0F, 0.0F);
                 var1.b(var11);
             }

@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityCreature;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityAIFleeSun extends OEntityAIBase {
 
@@ -34,6 +36,7 @@ public class OEntityAIFleeSun extends OEntityAIBase {
             return false;
         } else {
             OVec3D var1 = this.f();
+
             if (var1 == null) {
                 return false;
             } else {
@@ -62,6 +65,7 @@ public class OEntityAIFleeSun extends OEntityAIBase {
             int var3 = OMathHelper.b(this.a.bm + var1.nextInt(20) - 10.0D);
             int var4 = OMathHelper.b(this.a.bw.b + var1.nextInt(6) - 3.0D);
             int var5 = OMathHelper.b(this.a.bo + var1.nextInt(20) - 10.0D);
+
             if (!this.f.l(var3, var4, var5) && this.a.a(var3, var4, var5) < 0.0F) {
                 return OVec3D.b(var3, var4, var5);
             }

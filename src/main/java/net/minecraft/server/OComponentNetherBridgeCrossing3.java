@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -8,6 +9,7 @@ import net.minecraft.server.OComponentNetherBridgeStartPiece;
 import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentNetherBridgeCrossing3 extends OComponentNetherBridgePiece {
 
@@ -25,6 +27,7 @@ public class OComponentNetherBridgeCrossing3 extends OComponentNetherBridgePiece
         case 2:
             this.g = new OStructureBoundingBox(var2, 64, var3, var2 + 19 - 1, 73, var3 + 19 - 1);
             break;
+
         default:
             this.g = new OStructureBoundingBox(var2, 64, var3, var2 + 19 - 1, 73, var3 + 19 - 1);
         }
@@ -40,6 +43,7 @@ public class OComponentNetherBridgeCrossing3 extends OComponentNetherBridgePiece
 
     public static OComponentNetherBridgeCrossing3 a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, -8, -3, 0, 19, 10, 19, var5);
+
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentNetherBridgeCrossing3(var6, var1, var7, var5) : null;
     }
 
@@ -64,6 +68,7 @@ public class OComponentNetherBridgeCrossing3 extends OComponentNetherBridgePiece
 
         int var4;
         int var5;
+
         for (var4 = 7; var4 <= 11; ++var4) {
             for (var5 = 0; var5 <= 2; ++var5) {
                 this.b(var1, OBlock.bA.bO, 0, var4, -1, var5, var3);

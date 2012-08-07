@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OPotion;
+
 
 public class OPotionEffect {
 
@@ -84,6 +86,7 @@ public class OPotionEffect {
     @Override
     public String toString() {
         String var1 = "";
+
         if (this.c() > 0) {
             var1 = this.d() + " x " + (this.c() + 1) + ", Duration: " + this.b();
         } else {
@@ -99,6 +102,7 @@ public class OPotionEffect {
             return false;
         } else {
             OPotionEffect var2 = (OPotionEffect) var1;
+
             return this.a == var2.a && this.c == var2.c && this.b == var2.b;
         }
     }

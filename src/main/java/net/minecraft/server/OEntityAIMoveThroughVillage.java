@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,7 @@ import net.minecraft.server.ORandomPositionGenerator;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OVillage;
 import net.minecraft.server.OVillageDoorInfo;
+
 
 public class OEntityAIMoveThroughVillage extends OEntityAIBase {
 
@@ -36,6 +38,7 @@ public class OEntityAIMoveThroughVillage extends OEntityAIBase {
             return false;
         } else {
             OVillage var1 = this.a.bi.A.a(OMathHelper.b(this.a.bm), OMathHelper.b(this.a.bn), OMathHelper.b(this.a.bo), 0);
+
             if (var1 == null) {
                 return false;
             } else {
@@ -44,6 +47,7 @@ public class OEntityAIMoveThroughVillage extends OEntityAIBase {
                     return false;
                 } else {
                     boolean var2 = this.a.al().b();
+
                     this.a.al().b(false);
                     this.c = this.a.al().a(this.d.a, this.d.b, this.d.c);
                     this.a.al().b(var2);
@@ -51,6 +55,7 @@ public class OEntityAIMoveThroughVillage extends OEntityAIBase {
                         return true;
                     } else {
                         OVec3D var3 = ORandomPositionGenerator.a(this.a, 10, 7, OVec3D.b(this.d.a, this.d.b, this.d.c));
+
                         if (var3 == null) {
                             return false;
                         } else {
@@ -71,6 +76,7 @@ public class OEntityAIMoveThroughVillage extends OEntityAIBase {
             return false;
         } else {
             float var1 = this.a.bG + 4.0F;
+
             return this.a.e((double) this.d.a, (double) this.d.b, (double) this.d.c) > (var1 * var1);
         }
     }
@@ -97,6 +103,7 @@ public class OEntityAIMoveThroughVillage extends OEntityAIBase {
         while (var5.hasNext()) {
             OVillageDoorInfo var6 = (OVillageDoorInfo) var5.next();
             int var7 = var6.a(OMathHelper.b(this.a.bm), OMathHelper.b(this.a.bn), OMathHelper.b(this.a.bo));
+
             if (var7 < var3 && !this.a(var6)) {
                 var2 = var6;
                 var3 = var7;
@@ -110,6 +117,7 @@ public class OEntityAIMoveThroughVillage extends OEntityAIBase {
         Iterator var2 = this.f.iterator();
 
         OVillageDoorInfo var3;
+
         do {
             if (!var2.hasNext()) {
                 return false;

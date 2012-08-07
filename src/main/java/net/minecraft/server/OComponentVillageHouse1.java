@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -7,6 +8,7 @@ import net.minecraft.server.OComponentVillage;
 import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentVillageHouse1 extends OComponentVillage {
 
@@ -19,11 +21,11 @@ public class OComponentVillageHouse1 extends OComponentVillage {
     }
 
     @Override
-    public void a(OStructureComponent var1, List var2, Random var3) {
-    }
+    public void a(OStructureComponent var1, List var2, Random var3) {}
 
     public static OComponentVillageHouse1 a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, 0, 0, 0, 9, 9, 6, var5);
+
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentVillageHouse1(var6, var1, var7, var5) : null;
     }
 
@@ -48,6 +50,7 @@ public class OComponentVillageHouse1 extends OComponentVillage {
 
         int var6;
         int var7;
+
         for (var6 = -1; var6 <= 2; ++var6) {
             for (var7 = 0; var7 <= 8; ++var7) {
                 this.a(var1, OBlock.at.bO, var4, var7, 6 + var6, var6, var3);

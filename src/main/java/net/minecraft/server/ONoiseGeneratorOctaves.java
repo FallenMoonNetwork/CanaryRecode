@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONoiseGenerator;
 import net.minecraft.server.ONoiseGeneratorPerlin;
+
 
 public class ONoiseGeneratorOctaves extends ONoiseGenerator {
 
@@ -38,6 +40,7 @@ public class ONoiseGeneratorOctaves extends ONoiseGenerator {
             double var22 = var4 * var15 * var12;
             long var24 = OMathHelper.c(var18);
             long var26 = OMathHelper.c(var22);
+
             var18 -= var24;
             var22 -= var26;
             var24 %= 16777216L;

@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import net.minecraft.server.OIThreadedFileIO;
+
 
 public class OThreadedFileIOBase implements Runnable {
 
@@ -16,20 +18,23 @@ public class OThreadedFileIOBase implements Runnable {
     private OThreadedFileIOBase() {
         super();
         Thread var1 = new Thread(this, "File IO Thread");
+
         var1.setPriority(1);
         var1.start();
     }
 
     @Override
     public void run() {
-    	while(true)
-    		this.b();
+        while (true) {
+            this.b();
+        }
     }
 
     private void b() {
         for (int var1 = 0; var1 < this.b.size(); ++var1) {
             OIThreadedFileIO var2 = (OIThreadedFileIO) this.b.get(var1);
             boolean var3 = var2.c();
+
             if (!var3) {
                 this.b.remove(var1--);
                 ++this.d;

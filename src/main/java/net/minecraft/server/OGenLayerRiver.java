@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OGenLayer;
 import net.minecraft.server.OIntCache;
+
 
 public class OGenLayerRiver extends OGenLayer {
 
@@ -27,6 +29,7 @@ public class OGenLayerRiver extends OGenLayer {
                 int var15 = var9[var12 + 1 + (var11 + 0) * var7];
                 int var16 = var9[var12 + 1 + (var11 + 2) * var7];
                 int var17 = var9[var12 + 1 + (var11 + 1) * var7];
+
                 if (var17 != 0 && var13 != 0 && var14 != 0 && var15 != 0 && var16 != 0) {
                     if (var17 == var13 && var17 == var15 && var17 == var14 && var17 == var16) {
                         var10[var12 + var11 * var3] = -1;

@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OChunkProviderHell;
 import net.minecraft.server.OIChunkProvider;
 import net.minecraft.server.OWorldChunkManagerHell;
 import net.minecraft.server.OWorldProvider;
+
 
 public class OWorldProviderHell extends OWorldProvider {
 
@@ -26,6 +28,7 @@ public class OWorldProviderHell extends OWorldProvider {
 
         for (int var2 = 0; var2 <= 15; ++var2) {
             float var3 = 1.0F - var2 / 15.0F;
+
             this.f[var2] = (1.0F - var3) / (var3 * 3.0F + 1.0F) * (1.0F - var1) + var1;
         }
 

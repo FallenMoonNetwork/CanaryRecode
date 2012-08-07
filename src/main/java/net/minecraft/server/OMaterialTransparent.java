@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OMapColor;
 import net.minecraft.server.OMaterial;
+
 
 public class OMaterialTransparent extends OMaterial {
 

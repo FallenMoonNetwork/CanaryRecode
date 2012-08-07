@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockFence extends OBlock {
 
@@ -31,6 +33,7 @@ public class OBlockFence extends OBlock {
         float var10 = 0.625F;
         float var11 = 0.375F;
         float var12 = 0.625F;
+
         if (var5) {
             var11 = 0.0F;
         }
@@ -60,6 +63,7 @@ public class OBlockFence extends OBlock {
         float var10 = 0.625F;
         float var11 = 0.375F;
         float var12 = 0.625F;
+
         if (var5) {
             var11 = 0.0F;
         }
@@ -101,8 +105,10 @@ public class OBlockFence extends OBlock {
 
     public boolean c(OIBlockAccess var1, int var2, int var3, int var4) {
         int var5 = var1.a(var2, var3, var4);
+
         if (var5 != this.bO && var5 != OBlock.bv.bO) {
             OBlock var6 = OBlock.m[var5];
+
             return var6 != null && var6.cd.j() && var6.b() ? var6.cd != OMaterial.z : false;
         } else {
             return true;

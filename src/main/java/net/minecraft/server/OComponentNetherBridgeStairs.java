@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -8,6 +9,7 @@ import net.minecraft.server.OComponentNetherBridgeStartPiece;
 import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentNetherBridgeStairs extends OComponentNetherBridgePiece {
 
@@ -24,6 +26,7 @@ public class OComponentNetherBridgeStairs extends OComponentNetherBridgePiece {
 
     public static OComponentNetherBridgeStairs a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, -2, 0, 0, 7, 11, 7, var5);
+
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentNetherBridgeStairs(var6, var1, var7, var5) : null;
     }
 

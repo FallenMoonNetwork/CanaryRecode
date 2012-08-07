@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 
 import net.canarymod.Canary;
@@ -12,6 +13,7 @@ import net.minecraft.server.OEntity;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
 
+
 public class OBlockCactus extends OBlock {
 
     protected OBlockCactus(int var1, int var2) {
@@ -23,12 +25,14 @@ public class OBlockCactus extends OBlock {
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (var1.g(var2, var3 + 1, var4)) {
             int var6;
+
             for (var6 = 1; var1.a(var2, var3 - var6, var4) == this.bO; ++var6) {
                 ;
             }
 
             if (var6 < 3) {
                 int var7 = var1.c(var2, var3, var4);
+
                 if (var7 == 15) {
                     var1.e(var2, var3 + 1, var4, this.bO);
                     var1.c(var2, var3, var4, 0);
@@ -43,6 +47,7 @@ public class OBlockCactus extends OBlock {
     @Override
     public OAxisAlignedBB e(OWorld var1, int var2, int var3, int var4) {
         float var5 = 0.0625F;
+
         return OAxisAlignedBB.b((var2 + var5), var3, (var4 + var5), ((var2 + 1) - var5), ((var3 + 1) - var5), ((var4 + 1) - var5));
     }
 
@@ -92,6 +97,7 @@ public class OBlockCactus extends OBlock {
             return false;
         } else {
             int var5 = var1.a(var2, var3 - 1, var4);
+
             return var5 == OBlock.aV.bO || var5 == OBlock.E.bO;
         }
     }
@@ -101,6 +107,7 @@ public class OBlockCactus extends OBlock {
         // CanaryMod - cactus damage.
         if (var5 instanceof OEntityLiving) { 
             DamageHook hook = new DamageHook(null, ((OEntityLiving) var5).getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.h), 1);
+
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return;

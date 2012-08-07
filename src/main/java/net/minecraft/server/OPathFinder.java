@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OIBlockAccess;
@@ -9,6 +10,7 @@ import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OPath;
 import net.minecraft.server.OPathEntity;
 import net.minecraft.server.OPathPoint;
+
 
 public class OPathFinder {
 
@@ -43,6 +45,7 @@ public class OPathFinder {
         this.c.a();
         boolean var9 = this.g;
         int var10 = OMathHelper.b(var1.bw.b + 0.5D);
+
         if (this.h && var1.aU()) {
             var10 = (int) var1.bw.b;
 
@@ -60,6 +63,7 @@ public class OPathFinder {
         OPathPoint var12 = this.a(OMathHelper.b(var2 - (var1.bG / 2.0F)), OMathHelper.b(var4), OMathHelper.b(var6 - (var1.bG / 2.0F)));
         OPathPoint var13 = new OPathPoint(OMathHelper.d(var1.bG + 1.0F), OMathHelper.d(var1.bH + 1.0F), OMathHelper.d(var1.bG + 1.0F));
         OPathEntity var14 = this.a(var1, var15, var12, var13, var8);
+
         this.g = var9;
         return var14;
     }
@@ -74,6 +78,7 @@ public class OPathFinder {
 
         while (!this.b.c()) {
             OPathPoint var7 = this.b.b();
+
             if (var7.equals(var3)) {
                 return this.a(var2, var3);
             }
@@ -88,6 +93,7 @@ public class OPathFinder {
             for (int var9 = 0; var9 < var8; ++var9) {
                 OPathPoint var10 = this.d[var9];
                 float var11 = var7.e + var7.a(var10);
+
                 if (!var10.a() || var11 < var10.e) {
                     var10.h = var7;
                     var10.e = var11;
@@ -112,6 +118,7 @@ public class OPathFinder {
     private int b(OEntity var1, OPathPoint var2, OPathPoint var3, OPathPoint var4, float var5) {
         int var6 = 0;
         byte var7 = 0;
+
         if (this.a(var1, var2.a, var2.b + 1, var2.c, var3) == 1) {
             var7 = 1;
         }
@@ -120,6 +127,7 @@ public class OPathFinder {
         OPathPoint var9 = this.a(var1, var2.a - 1, var2.b, var2.c, var3, var7);
         OPathPoint var10 = this.a(var1, var2.a + 1, var2.b, var2.c, var3, var7);
         OPathPoint var11 = this.a(var1, var2.a, var2.b, var2.c - 1, var3, var7);
+
         if (var8 != null && !var8.i && var8.a(var4) < var5) {
             this.d[var6++] = var8;
         }
@@ -142,6 +150,7 @@ public class OPathFinder {
     private OPathPoint a(OEntity var1, int var2, int var3, int var4, OPathPoint var5, int var6) {
         OPathPoint var7 = null;
         int var8 = this.a(var1, var2, var3, var4, var5);
+
         if (var8 == 2) {
             return this.a(var2, var3, var4);
         } else {
@@ -191,6 +200,7 @@ public class OPathFinder {
     private final OPathPoint a(int var1, int var2, int var3) {
         int var4 = OPathPoint.a(var1, var2, var3);
         OPathPoint var5 = (OPathPoint) this.c.a(var4);
+
         if (var5 == null) {
             var5 = new OPathPoint(var1, var2, var3);
             this.c.a(var4, var5);
@@ -206,6 +216,7 @@ public class OPathFinder {
             for (int var8 = var3; var8 < var3 + var5.b; ++var8) {
                 for (int var9 = var4; var9 < var4 + var5.c; ++var9) {
                     int var10 = this.a.a(var7, var8, var9);
+
                     if (var10 > 0) {
                         if (var10 == OBlock.bk.bO) {
                             var6 = true;
@@ -222,6 +233,7 @@ public class OPathFinder {
                         }
 
                         OBlock var11 = OBlock.m[var10];
+
                         if (!var11.b(this.a, var7, var8, var9) && (!this.f || var10 != OBlock.aE.bO)) {
                             if (var10 == OBlock.aZ.bO || var10 == OBlock.bv.bO) {
                                 return -3;
@@ -232,6 +244,7 @@ public class OPathFinder {
                             }
 
                             OMaterial var12 = var11.cd;
+
                             if (var12 != OMaterial.h) {
                                 return 0;
                             }
@@ -252,11 +265,13 @@ public class OPathFinder {
         int var3 = 1;
 
         OPathPoint var4;
+
         for (var4 = var2; var4.h != null; var4 = var4.h) {
             ++var3;
         }
 
         OPathPoint[] var5 = new OPathPoint[var3];
+
         var4 = var2;
         --var3;
 

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 class OStructureStrongholdPieceWeight {
 
     public Class a;

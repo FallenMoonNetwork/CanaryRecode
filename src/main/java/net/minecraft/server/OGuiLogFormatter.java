@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import net.minecraft.server.OGuiLogOutputHandler;
+
 
 class OGuiLogFormatter extends Formatter {
 
@@ -21,6 +23,7 @@ class OGuiLogFormatter extends Formatter {
     public String format(LogRecord var1) {
         StringBuilder var2 = new StringBuilder();
         Level var3 = var1.getLevel();
+
         if (var3 == Level.FINEST) {
             var2.append("[FINEST] ");
         } else if (var3 == Level.FINER) {
@@ -40,8 +43,10 @@ class OGuiLogFormatter extends Formatter {
         var2.append(var1.getMessage());
         var2.append('\n');
         Throwable var4 = var1.getThrown();
+
         if (var4 != null) {
             StringWriter var5 = new StringWriter();
+
             var4.printStackTrace(new PrintWriter(var5));
             var2.append(var5.toString());
         }

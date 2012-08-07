@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockBreakable;
@@ -8,6 +9,7 @@ import net.minecraft.server.OEnumSkyBlock;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockIce extends OBlockBreakable {
 
@@ -21,6 +23,7 @@ public class OBlockIce extends OBlockBreakable {
     public void a(OWorld var1, OEntityPlayer var2, int var3, int var4, int var5, int var6) {
         super.a(var1, var2, var3, var4, var5, var6);
         OMaterial var7 = var1.d(var3, var4 - 1, var5);
+
         if (var7.c() || var7.d()) {
             var1.e(var3, var4, var5, OBlock.A.bO);
         }

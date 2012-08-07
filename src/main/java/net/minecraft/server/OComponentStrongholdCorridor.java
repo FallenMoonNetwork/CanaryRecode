@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -7,6 +8,7 @@ import net.minecraft.server.OComponentStronghold;
 import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentStrongholdCorridor extends OComponentStronghold {
 
@@ -20,12 +22,12 @@ public class OComponentStrongholdCorridor extends OComponentStronghold {
     }
 
     @Override
-    public void a(OStructureComponent var1, List var2, Random var3) {
-    }
+    public void a(OStructureComponent var1, List var2, Random var3) {}
 
     public static OStructureBoundingBox a(List var0, Random var1, int var2, int var3, int var4, int var5) {
         OStructureBoundingBox var6 = OStructureBoundingBox.a(var2, var3, var4, -1, -1, 0, 5, 5, 4, var5);
         OStructureComponent var7 = OStructureComponent.a(var0, var6);
+
         if (var7 == null) {
             return null;
         } else {

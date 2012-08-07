@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockDirectional;
 import net.minecraft.server.OEntityIronGolem;
@@ -8,6 +9,7 @@ import net.minecraft.server.OEntitySnowman;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockPumpkin extends OBlockDirectional {
 
@@ -28,6 +30,7 @@ public class OBlockPumpkin extends OBlockDirectional {
             return this.bN;
         } else {
             int var3 = this.bN + 1 + 16;
+
             if (this.a) {
                 ++var3;
             }
@@ -50,6 +53,7 @@ public class OBlockPumpkin extends OBlockDirectional {
                 var1.b(var2, var3 - 1, var4, 0);
                 var1.b(var2, var3 - 2, var4, 0);
                 OEntitySnowman var9 = new OEntitySnowman(var1);
+
                 var9.c(var2 + 0.5D, var3 - 1.95D, var4 + 0.5D, 0.0F, 0.0F);
                 var1.b(var9);
                 var1.f(var2, var3, var4, 0);
@@ -63,6 +67,7 @@ public class OBlockPumpkin extends OBlockDirectional {
         } else if (var1.a(var2, var3 - 1, var4) == OBlock.ai.bO && var1.a(var2, var3 - 2, var4) == OBlock.ai.bO) {
             boolean var5 = var1.a(var2 - 1, var3 - 1, var4) == OBlock.ai.bO && var1.a(var2 + 1, var3 - 1, var4) == OBlock.ai.bO;
             boolean var6 = var1.a(var2, var3 - 1, var4 - 1) == OBlock.ai.bO && var1.a(var2, var3 - 1, var4 + 1) == OBlock.ai.bO;
+
             if (var5 || var6) {
                 var1.b(var2, var3, var4, 0);
                 var1.b(var2, var3 - 1, var4, 0);
@@ -76,6 +81,7 @@ public class OBlockPumpkin extends OBlockDirectional {
                 }
 
                 OEntityIronGolem var7 = new OEntityIronGolem(var1);
+
                 var7.b(true);
                 var7.c(var2 + 0.5D, var3 - 1.95D, var4 + 0.5D, 0.0F, 0.0F);
                 var1.b(var7);
@@ -102,12 +108,14 @@ public class OBlockPumpkin extends OBlockDirectional {
     @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.a(var2, var3, var4);
+
         return (var5 == 0 || OBlock.m[var5].cd.i()) && var1.e(var2, var3 - 1, var4);
     }
 
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = OMathHelper.b((var5.bs * 4.0F / 360.0F) + 2.5D) & 3;
+
         var1.c(var2, var3, var4, var6);
     }
 }

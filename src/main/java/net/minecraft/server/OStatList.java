@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +18,7 @@ import net.minecraft.server.OStatBase;
 import net.minecraft.server.OStatBasic;
 import net.minecraft.server.OStatCollector;
 import net.minecraft.server.OStatCrafting;
+
 
 public class OStatList {
 
@@ -59,8 +61,7 @@ public class OStatList {
         super();
     }
 
-    public static void a() {
-    }
+    public static void a() {}
 
     public static void b() {
         E = a(E, "stat.useItem", 16908288, 0, 256);
@@ -83,6 +84,7 @@ public class OStatList {
 
             while (var1.hasNext()) {
                 OIRecipe var2 = (OIRecipe) var1.next();
+
                 var0.add(Integer.valueOf(var2.b().c));
             }
 
@@ -90,6 +92,7 @@ public class OStatList {
 
             while (var1.hasNext()) {
                 OItemStack var4 = (OItemStack) var1.next();
+
                 var0.add(Integer.valueOf(var4.c));
             }
 
@@ -98,8 +101,10 @@ public class OStatList {
 
             while (var1.hasNext()) {
                 Integer var5 = (Integer) var1.next();
+
                 if (OItem.d[var5.intValue()] != null) {
                     String var3 = OStatCollector.a("stat.craftItem", new Object[] { OItem.d[var5.intValue()].l() });
+
                     D[var5.intValue()] = (new OStatCrafting(16842752 + var5.intValue(), var3, var5.intValue())).d();
                 }
             }
@@ -114,6 +119,7 @@ public class OStatList {
         for (int var3 = 0; var3 < 256; ++var3) {
             if (OBlock.m[var3] != null && OBlock.m[var3].r()) {
                 String var4 = OStatCollector.a(var0, new Object[] { OBlock.m[var3].p() });
+
                 var2[var3] = (new OStatCrafting(var1 + var3, var4, var3)).d();
                 e.add(var2[var3]);
             }
@@ -131,6 +137,7 @@ public class OStatList {
         for (int var5 = var3; var5 < var4; ++var5) {
             if (OItem.d[var5] != null) {
                 String var6 = OStatCollector.a(var1, new Object[] { OItem.d[var5].l() });
+
                 var0[var5] = (new OStatCrafting(var2 + var5, var6, var5)).d();
                 if (var5 >= 256) {
                     d.add(var0[var5]);
@@ -150,6 +157,7 @@ public class OStatList {
         for (int var5 = var3; var5 < var4; ++var5) {
             if (OItem.d[var5] != null && OItem.d[var5].g()) {
                 String var6 = OStatCollector.a(var1, new Object[] { OItem.d[var5].l() });
+
                 var0[var5] = (new OStatCrafting(var2 + var5, var6, var5)).d();
             }
         }

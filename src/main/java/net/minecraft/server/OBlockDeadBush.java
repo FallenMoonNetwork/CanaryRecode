@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockFlower;
@@ -10,11 +11,13 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OStatList;
 import net.minecraft.server.OWorld;
 
+
 public class OBlockDeadBush extends OBlockFlower {
 
     protected OBlockDeadBush(int var1, int var2) {
         super(var1, var2, OMaterial.k);
         float var3 = 0.4F;
+
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.8F, 0.5F + var3);
     }
 

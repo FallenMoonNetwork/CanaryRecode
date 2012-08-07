@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.server.OEntity;
@@ -50,6 +51,7 @@ import net.minecraft.server.OEntityZombie;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityList {
 
     private static Map b = new HashMap();
@@ -81,6 +83,7 @@ public class OEntityList {
 
         try {
             Class var3 = (Class) b.get(var0);
+
             if (var3 != null) {
                 var2 = (OEntity) var3.getConstructor(new Class[] { OWorld.class }).newInstance(new Object[] { var1 });
             }
@@ -96,6 +99,7 @@ public class OEntityList {
 
         try {
             Class var3 = (Class) b.get(var0.j("id"));
+
             if (var3 != null) {
                 var2 = (OEntity) var3.getConstructor(new Class[] { OWorld.class }).newInstance(new Object[] { var1 });
             }
@@ -117,6 +121,7 @@ public class OEntityList {
 
         try {
             Class var3 = (Class) d.get(Integer.valueOf(var0));
+
             if (var3 != null) {
                 var2 = (OEntity) var3.getConstructor(new Class[] { OWorld.class }).newInstance(new Object[] { var1 });
             }
@@ -141,6 +146,7 @@ public class OEntityList {
 
     public static int a(String var0) {
         Integer var1 = (Integer) f.get(var0);
+
         return var1 == null ? 90 : var1.intValue();
     }
 

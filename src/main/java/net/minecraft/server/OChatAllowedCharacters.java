@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+
 
 public class OChatAllowedCharacters {
 

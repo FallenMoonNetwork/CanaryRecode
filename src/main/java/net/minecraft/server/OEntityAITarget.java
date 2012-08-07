@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.OEntityAIBase;
@@ -9,6 +10,7 @@ import net.minecraft.server.OEntityTameable;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OPathEntity;
 import net.minecraft.server.OPathPoint;
+
 
 public abstract class OEntityAITarget extends OEntityAIBase {
 
@@ -38,6 +40,7 @@ public abstract class OEntityAITarget extends OEntityAIBase {
     @Override
     public boolean b() {
         OEntityLiving var1 = this.c.at();
+
         if (var1 == null) {
             return false;
         } else if (!var1.aE()) {
@@ -113,15 +116,16 @@ public abstract class OEntityAITarget extends OEntityAIBase {
                         }
                     }
                     
-                    //CanaryMod - MOB_TARGET
+                    // CanaryMod - MOB_TARGET
                     if (var1.getCanaryEntityLiving().isPlayer()) {
                         MobTargetHook hook = new MobTargetHook(this.c.getCanaryEntityLiving(), var1.getCanaryEntityLiving().getPlayer());
+
                         Canary.hooks().callHook(hook);
                         if (hook.isCanceled()) {
                             return false;
                         }
                     }
-                    //CanaryMod end
+                    // CanaryMod end
 
                     return true;
                 }
@@ -134,15 +138,18 @@ public abstract class OEntityAITarget extends OEntityAIBase {
     private boolean a(OEntityLiving var1) {
         this.f = 10 + this.c.an().nextInt(5);
         OPathEntity var2 = this.c.al().a(var1);
+
         if (var2 == null) {
             return false;
         } else {
             OPathPoint var3 = var2.c();
+
             if (var3 == null) {
                 return false;
             } else {
                 int var4 = var3.a - OMathHelper.b(var1.bm);
                 int var5 = var3.c - OMathHelper.b(var1.bo);
+
                 return (var4 * var4 + var5 * var5) <= 2.25D;
             }
         }

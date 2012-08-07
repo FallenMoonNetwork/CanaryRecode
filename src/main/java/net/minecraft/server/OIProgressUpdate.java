@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public interface OIProgressUpdate {
 
     void a(String var1);

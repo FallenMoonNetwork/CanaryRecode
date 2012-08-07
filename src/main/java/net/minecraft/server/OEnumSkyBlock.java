@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public enum OEnumSkyBlock {
 
     a("Sky", 0, 15), b("Block", 1, 0);

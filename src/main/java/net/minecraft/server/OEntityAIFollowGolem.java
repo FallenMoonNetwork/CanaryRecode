@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityIronGolem;
 import net.minecraft.server.OEntityVillager;
+
 
 public class OEntityAIFollowGolem extends OEntityAIBase {
 
@@ -28,6 +30,7 @@ public class OEntityAIFollowGolem extends OEntityAIBase {
             return false;
         } else {
             List var1 = this.a.bi.a(OEntityIronGolem.class, this.a.bw.b(6.0D, 2.0D, 6.0D));
+
             if (var1.size() == 0) {
                 return false;
             } else {
@@ -36,6 +39,7 @@ public class OEntityAIFollowGolem extends OEntityAIBase {
                 while (var2.hasNext()) {
                     OEntity var3 = (OEntity) var2.next();
                     OEntityIronGolem var4 = (OEntityIronGolem) var3;
+
                     if (var4.m_() > 0) {
                         this.b = var4;
                         break;

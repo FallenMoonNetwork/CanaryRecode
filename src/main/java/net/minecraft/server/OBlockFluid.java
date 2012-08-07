@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -9,12 +10,14 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
 
+
 public abstract class OBlockFluid extends OBlock {
 
     protected OBlockFluid(int var1, OMaterial var2) {
         super(var1, (var2 == OMaterial.h ? 14 : 12) * 16 + 13, var2);
         float var3 = 0.0F;
         float var4 = 0.0F;
+
         this.a(0.0F + var4, 0.0F + var3, 0.0F + var4, 1.0F + var4, 1.0F + var3, 1.0F + var4);
         this.a(true);
     }
@@ -30,6 +33,7 @@ public abstract class OBlockFluid extends OBlock {
         }
 
         float var1 = (var0 + 1) / 9.0F;
+
         return var1;
     }
 
@@ -47,6 +51,7 @@ public abstract class OBlockFluid extends OBlock {
             return -1;
         } else {
             int var5 = var1.c(var2, var3, var4);
+
             if (var5 >= 8) {
                 var5 = 0;
             }
@@ -73,6 +78,7 @@ public abstract class OBlockFluid extends OBlock {
     @Override
     public boolean b(OIBlockAccess var1, int var2, int var3, int var4, int var5) {
         OMaterial var6 = var1.d(var2, var3, var4);
+
         return var6 == this.cd ? false : (var5 == 1 ? true : (var6 == OMaterial.u ? false : super.b(var1, var2, var3, var4, var5)));
     }
 
@@ -103,6 +109,7 @@ public abstract class OBlockFluid extends OBlock {
         for (int var7 = 0; var7 < 4; ++var7) {
             int var8 = var2;
             int var10 = var4;
+
             if (var7 == 0) {
                 var8 = var2 - 1;
             }
@@ -121,6 +128,7 @@ public abstract class OBlockFluid extends OBlock {
 
             int var11 = this.c(var1, var8, var3, var10);
             int var12;
+
             if (var11 < 0) {
                 if (!var1.d(var8, var3, var10).c()) {
                     var11 = this.c(var1, var8, var3 - 1, var10);
@@ -137,6 +145,7 @@ public abstract class OBlockFluid extends OBlock {
 
         if (var1.c(var2, var3, var4) >= 8) {
             boolean var13 = false;
+
             if (var13 || this.b(var1, var2, var3, var4 - 1, 2)) {
                 var13 = true;
             }
@@ -180,7 +189,8 @@ public abstract class OBlockFluid extends OBlock {
 
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntity var5, OVec3D var6) {
-        OVec3D var7 = this.d((OIBlockAccess)var1, var2, var3, var4);
+        OVec3D var7 = this.d((OIBlockAccess) var1, var2, var3, var4);
+
         var6.a += var7.a;
         var6.b += var7.b;
         var6.c += var7.c;
@@ -210,6 +220,7 @@ public abstract class OBlockFluid extends OBlock {
         if (var1.a(var2, var3, var4) == this.bO) {
             if (this.cd == OMaterial.h) {
                 boolean var5 = false;
+
                 if (var5 || var1.d(var2, var3, var4 - 1) == OMaterial.g) {
                     var5 = true;
                 }
@@ -232,6 +243,7 @@ public abstract class OBlockFluid extends OBlock {
 
                 if (var5) {
                     int var6 = var1.c(var2, var3, var4);
+
                     if (var6 == 0) {
                         var1.e(var2, var3, var4, OBlock.ap.bO);
                     } else if (var6 <= 4) {

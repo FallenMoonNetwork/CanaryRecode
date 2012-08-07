@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 
 import net.canarymod.Canary;
@@ -64,6 +65,7 @@ import net.minecraft.server.OStatCollector;
 import net.minecraft.server.OStatList;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OItem {
 
@@ -220,9 +222,9 @@ public class OItem {
     private String bU = null;
     private String bV;
     
-    //CanaryMod Start
+    // CanaryMod Start
     private CanaryBaseItem baseItem;
-    //CanaryMod End
+    // CanaryMod End
 
     protected OItem(int var1) {
         super();
@@ -251,12 +253,14 @@ public class OItem {
     }
 
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
-        //CanaryMod call item use hook
+        // CanaryMod call item use hook
         CanaryBlock block = (CanaryBlock) var2.bi.getCanaryWorld().getBlockAt(var4, var5, var6);
-        block.setFaceClicked(BlockFace.fromByte((byte)var7));
-        RightClickHook hook = new RightClickHook(((OEntityPlayerMP)var2).getPlayer(), null, block, new CanaryItem(var1), null, Hook.Type.ITEM_USE);
+
+        block.setFaceClicked(BlockFace.fromByte((byte) var7));
+        RightClickHook hook = new RightClickHook(((OEntityPlayerMP) var2).getPlayer(), null, block, new CanaryItem(var1), null, Hook.Type.ITEM_USE);
+
         Canary.hooks().callHook(hook);
-        if(hook.isCanceled()) {
+        if (hook.isCanceled()) {
             return true;
         }
         return false;
@@ -303,7 +307,7 @@ public class OItem {
         return this.a;
     }
 
-    //CanaryMod protected -> public
+    // CanaryMod protected -> public
     public OItem f(int var1) {
         this.a = var1;
         return this;
@@ -329,8 +333,7 @@ public class OItem {
         return false;
     }
 
-    public void a(OItemStack var1, OEntityLiving var2) {
-    }
+    public void a(OItemStack var1, OEntityLiving var2) {}
 
     public OItem h() {
         this.bS = true;
@@ -375,11 +378,9 @@ public class OItem {
         return OStatCollector.a(this.b() + ".name");
     }
 
-    public void a(OItemStack var1, OWorld var2, OEntity var3, int var4, boolean var5) {
-    }
+    public void a(OItemStack var1, OWorld var2, OEntity var3, int var4, boolean var5) {}
 
-    public void d(OItemStack var1, OWorld var2, OEntityPlayer var3) {
-    }
+    public void d(OItemStack var1, OWorld var2, OEntityPlayer var3) {}
 
     public boolean t_() {
         return false;
@@ -393,8 +394,7 @@ public class OItem {
         return 0;
     }
 
-    public void a(OItemStack var1, OWorld var2, OEntityPlayer var3, int var4) {
-    }
+    public void a(OItemStack var1, OWorld var2, OEntityPlayer var3, int var4) {}
 
     protected OItem b(String var1) {
         this.bU = var1;
@@ -430,6 +430,7 @@ public class OItem {
         double var21 = 5.0D;
         OVec3D var23 = var13.c(var18 * var21, var17 * var21, var20 * var21);
         OMovingObjectPosition var24 = var1.a(var13, var23, var3, !var3);
+
         return var24;
     }
 

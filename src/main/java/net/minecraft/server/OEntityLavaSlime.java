@@ -1,13 +1,15 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryLavaSlime;
 import net.minecraft.server.OEntitySlime;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityLavaSlime extends OEntitySlime {
 
-    //CanaryMod slime handler
+    // CanaryMod slime handler
     private CanaryLavaSlime canaryLavaSlime;
     public OEntityLavaSlime(OWorld var1) {
         super(var1);
@@ -24,6 +26,7 @@ public class OEntityLavaSlime extends OEntitySlime {
     public CanaryLavaSlime getCanaryLavaSlime() {
         return canaryLavaSlime;
     }
+
     @Override
     public boolean l() {
         return this.bi.q > 0 && this.bi.a(this.bw) && this.bi.a(this, this.bw).size() == 0 && !this.bi.c(this.bw);
@@ -57,8 +60,10 @@ public class OEntityLavaSlime extends OEntitySlime {
     @Override
     protected void a(boolean var1, int var2) {
         int var3 = this.f();
+
         if (var3 > 0 && this.L() > 1) {
             int var4 = this.bS.nextInt(4) - 2;
+
             if (var2 > 0) {
                 var4 += this.bS.nextInt(var2 + 1);
             }
@@ -92,8 +97,7 @@ public class OEntityLavaSlime extends OEntitySlime {
     }
 
     @Override
-    protected void a(float var1) {
-    }
+    protected void a(float var1) {}
 
     @Override
     protected boolean G() {

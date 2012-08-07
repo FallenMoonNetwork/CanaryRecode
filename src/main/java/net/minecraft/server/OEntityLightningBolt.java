@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 
 import net.canarymod.Canary;
@@ -11,6 +12,7 @@ import net.minecraft.server.OEntityWeatherEffect;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityLightningBolt extends OEntityWeatherEffect {
 
@@ -28,11 +30,13 @@ public class OEntityLightningBolt extends OEntityWeatherEffect {
             int var8 = OMathHelper.b(var2);
             int var9 = OMathHelper.b(var4);
             int var10 = OMathHelper.b(var6);
+
             if (var1.a(var8, var9, var10) == 0 && OBlock.ar.c(var1, var8, var9, var10)) {
                 
                 IgnitionHook hook = new IgnitionHook(this.getCanaryWorld().getBlockAt(var8, var9, var10), 5);
+
                 Canary.hooks().callHook(hook);
-                if(!hook.isCanceled()) {
+                if (!hook.isCanceled()) {
                     var1.e(var8, var9, var10, OBlock.ar.bO);
                 }
             }
@@ -41,6 +45,7 @@ public class OEntityLightningBolt extends OEntityWeatherEffect {
                 var9 = OMathHelper.b(var2) + this.bS.nextInt(3) - 1;
                 var10 = OMathHelper.b(var4) + this.bS.nextInt(3) - 1;
                 int var11 = OMathHelper.b(var6) + this.bS.nextInt(3) - 1;
+
                 if (var1.a(var9, var10, var11) == 0 && OBlock.ar.c(var1, var9, var10, var11)) {
                     var1.e(var9, var10, var11, OBlock.ar.bO);
                 }
@@ -69,6 +74,7 @@ public class OEntityLightningBolt extends OEntityWeatherEffect {
                     int var1 = OMathHelper.b(this.bm);
                     int var2 = OMathHelper.b(this.bn);
                     int var3 = OMathHelper.b(this.bo);
+
                     if (this.bi.a(var1, var2, var3) == 0 && OBlock.ar.c(this.bi, var1, var2, var3)) {
                         this.bi.e(var1, var2, var3, OBlock.ar.bO);
                     }
@@ -82,6 +88,7 @@ public class OEntityLightningBolt extends OEntityWeatherEffect {
 
             for (int var6 = 0; var6 < var8.size(); ++var6) {
                 OEntity var7 = (OEntity) var8.get(var6);
+
                 var7.a(this);
             }
 
@@ -91,14 +98,11 @@ public class OEntityLightningBolt extends OEntityWeatherEffect {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     @Override
-    protected void a(ONBTTagCompound var1) {
-    }
+    protected void a(ONBTTagCompound var1) {}
 
     @Override
-    protected void b(ONBTTagCompound var1) {
-    }
+    protected void b(ONBTTagCompound var1) {}
 }

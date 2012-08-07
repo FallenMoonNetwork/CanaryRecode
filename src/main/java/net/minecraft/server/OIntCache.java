@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class OIntCache {
 
@@ -17,6 +19,7 @@ public class OIntCache {
 
     public static int[] a(int var0) {
         int[] var1;
+
         if (var0 <= 256) {
             if (b.size() == 0) {
                 var1 = new int[256];

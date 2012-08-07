@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OGenLayer;
 import net.minecraft.server.OIntCache;
+
 
 public class OGenLayerSwampRivers extends OGenLayer {
 
@@ -20,6 +22,7 @@ public class OGenLayerSwampRivers extends OGenLayer {
             for (int var8 = 0; var8 < var3; ++var8) {
                 this.a((var8 + var1), (var7 + var2));
                 int var9 = var5[var8 + 1 + (var7 + 1) * (var3 + 2)];
+
                 if (var9 == OBiomeGenBase.h.M && this.a(6) == 0) {
                     var6[var8 + var7 * var3] = OBiomeGenBase.i.M;
                 } else if ((var9 == OBiomeGenBase.w.M || var9 == OBiomeGenBase.x.M) && this.a(8) == 0) {

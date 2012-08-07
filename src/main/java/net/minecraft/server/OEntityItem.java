@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntityItem;
 import net.canarymod.hook.entity.EntitySpawnHook;
@@ -16,15 +17,16 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OStatCollector;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityItem extends OEntity {
 
     public OItemStack a;
     public int b = 0;
-    public int c; //item age
+    public int c; // item age
     private int e = 5;
     public float d = (float) (Math.random() * 3.141592653589793D * 2.0D);
     
-    //CanaryMod Item handler
+    // CanaryMod Item handler
     private CanaryEntityItem item;
 
     public OEntityItem(OWorld var1, double var2, double var4, double var6, OItemStack var8) {
@@ -55,7 +57,8 @@ public class OEntityItem extends OEntity {
     public OItemStack getItemStack() {
         return a;
     }
-    //CanaryMod end
+
+    // CanaryMod end
 
     @Override
     protected boolean g_() {
@@ -69,8 +72,7 @@ public class OEntityItem extends OEntity {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     @Override
     public void F_() {
@@ -93,9 +95,11 @@ public class OEntityItem extends OEntity {
         this.g(this.bm, (this.bw.b + this.bw.e) / 2.0D, this.bo);
         this.a(this.bp, this.bq, this.br);
         float var1 = 0.98F;
+
         if (this.bx) {
             var1 = 0.58800006F;
             int var2 = this.bi.a(OMathHelper.b(this.bm), OMathHelper.b(this.bw.b) - 1, OMathHelper.b(this.bo));
+
             if (var2 > 0) {
                 var1 = OBlock.m[var2].ce * 0.98F;
             }
@@ -111,11 +115,11 @@ public class OEntityItem extends OEntity {
         ++this.b;
         if (this.b >= 6000) {
             EntitySpawnHook hook = new EntitySpawnHook(this.getCanaryEntity(), false);
-            Canary.hooks().callHook(hook); //CanaryMod - EntityDespawn
-            if(!hook.isCanceled()){
+
+            Canary.hooks().callHook(hook); // CanaryMod - EntityDespawn
+            if (!hook.isCanceled()) {
                 this.X();
-            }
-            else{
+            } else {
                 this.b = 0;
             }
         }
@@ -159,6 +163,7 @@ public class OEntityItem extends OEntity {
         this.e = var1.e("Health") & 255;
         this.b = var1.e("Age");
         ONBTTagCompound var2 = var1.m("Item");
+
         this.a = OItemStack.a(var2);
         if (this.a == null) {
             this.X();
@@ -170,6 +175,7 @@ public class OEntityItem extends OEntity {
     public void a_(OEntityPlayer var1) {
         if (!this.bi.F) {
             int var2 = this.a.a;
+
             if (this.c == 0 && var1.k.a(this.a)) {
                 if (this.a.c == OBlock.J.bO) {
                     var1.a(OAchievementList.g);

@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OBlock;
+
 
 public class OBiomeGenBeach extends OBiomeGenBase {
 

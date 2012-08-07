@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemArmor;
 import net.minecraft.server.OItemBow;
 import net.minecraft.server.OItemSword;
 import net.minecraft.server.OItemTool;
+
 
 public enum OEnumEnchantmentType {
 
@@ -12,8 +14,7 @@ public enum OEnumEnchantmentType {
     // $FF: synthetic field
     private static final OEnumEnchantmentType[] j = new OEnumEnchantmentType[] { a, b, c, d, e, f, g, h, i };
 
-    private OEnumEnchantmentType(String var1, int var2) {
-    }
+    private OEnumEnchantmentType(String var1, int var2) {}
 
     public boolean a(OItem var1) {
         if (this == a) {
@@ -23,6 +24,7 @@ public enum OEnumEnchantmentType {
                 return true;
             } else {
                 OItemArmor var2 = (OItemArmor) var1;
+
                 return var2.a == 0 ? this == f : (var2.a == 2 ? this == d : (var2.a == 1 ? this == e : (var2.a == 3 ? this == c : false)));
             }
         } else {

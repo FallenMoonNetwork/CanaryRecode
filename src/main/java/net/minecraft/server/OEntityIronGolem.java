@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryIronGolem;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
@@ -25,13 +26,14 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OVillage;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityIronGolem extends OEntityGolem {
 
     private int b = 0;
     OVillage a = null;
     private int c;
     private int g;
-    //CanaryMod golem handler
+    // CanaryMod golem handler
     private CanaryIronGolem canaryIronGolem;
 
     public OEntityIronGolem(OWorld var1) {
@@ -81,6 +83,7 @@ public class OEntityIronGolem extends OEntityGolem {
                 this.ax();
             } else {
                 OChunkCoordinates var1 = this.a.a();
+
                 this.b(var1.a, var1.b, var1.c, this.a.b());
             }
         }
@@ -114,6 +117,7 @@ public class OEntityIronGolem extends OEntityGolem {
             int var2 = OMathHelper.b(this.bn - 0.20000000298023224D - this.bF);
             int var3 = OMathHelper.b(this.bo);
             int var4 = this.bi.a(var1, var2, var3);
+
             if (var4 > 0) {
                 this.bi.a("tilecrack_" + var4, this.bm + (this.bS.nextFloat() - 0.5D) * this.bG, this.bw.b + 0.1D, this.bo + (this.bS.nextFloat() - 0.5D) * this.bG, 4.0D * (this.bS.nextFloat() - 0.5D), 0.5D, (this.bS.nextFloat() - 0.5D) * 4.0D);
             }
@@ -143,6 +147,7 @@ public class OEntityIronGolem extends OEntityGolem {
         this.c = 10;
         this.bi.a(this, (byte) 4);
         boolean var2 = var1.a(ODamageSource.a(this), 7 + this.bS.nextInt(15));
+
         if (var2) {
             var1.bq += 0.4000000059604645D;
         }
@@ -185,6 +190,7 @@ public class OEntityIronGolem extends OEntityGolem {
         int var3 = this.bS.nextInt(3);
 
         int var4;
+
         for (var4 = 0; var4 < var3; ++var4) {
             this.b(OBlock.ae.bO, 1);
         }
@@ -207,6 +213,7 @@ public class OEntityIronGolem extends OEntityGolem {
 
     public void b(boolean var1) {
         byte var2 = this.bY.a(16);
+
         if (var1) {
             this.bY.b(16, Byte.valueOf((byte) (var2 | 1)));
         } else {

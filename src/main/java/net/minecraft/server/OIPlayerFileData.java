@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityPlayer;
+
 
 public interface OIPlayerFileData {
 

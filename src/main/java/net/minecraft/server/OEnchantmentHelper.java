@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,6 +22,7 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.ONBTTagList;
 import net.minecraft.server.OWeightedRandom;
 
+
 public class OEnchantmentHelper {
 
     private static final Random a = new Random();
@@ -36,12 +38,14 @@ public class OEnchantmentHelper {
             return 0;
         } else {
             ONBTTagList var2 = var1.p();
+
             if (var2 == null) {
                 return 0;
             } else {
                 for (int var3 = 0; var3 < var2.d(); ++var3) {
                     short var4 = ((ONBTTagCompound) var2.a(var3)).e("id");
                     short var5 = ((ONBTTagCompound) var2.a(var3)).e("lvl");
+
                     if (var4 == var0) {
                         return var5;
                     }
@@ -60,6 +64,7 @@ public class OEnchantmentHelper {
         for (int var5 = 0; var5 < var4; ++var5) {
             OItemStack var6 = var3[var5];
             int var7 = a(var0, var6);
+
             if (var7 > var2) {
                 var2 = var7;
             }
@@ -71,10 +76,12 @@ public class OEnchantmentHelper {
     private static void a(OIEnchantmentModifier var0, OItemStack var1) {
         if (var1 != null) {
             ONBTTagList var2 = var1.p();
+
             if (var2 != null) {
                 for (int var3 = 0; var3 < var2.d(); ++var3) {
                     short var4 = ((ONBTTagCompound) var2.a(var3)).e("id");
                     short var5 = ((ONBTTagCompound) var2.a(var3)).e("lvl");
+
                     if (OEnchantment.b[var4] != null) {
                         var0.a(OEnchantment.b[var4], var5);
                     }
@@ -90,6 +97,7 @@ public class OEnchantmentHelper {
 
         for (int var4 = 0; var4 < var3; ++var4) {
             OItemStack var5 = var2[var4];
+
             a(var0, var5);
         }
 
@@ -152,6 +160,7 @@ public class OEnchantmentHelper {
     public static int a(Random var0, int var1, int var2, OItemStack var3) {
         OItem var4 = var3.a();
         int var5 = var4.c();
+
         if (var5 <= 0) {
             return 0;
         } else {
@@ -161,17 +170,20 @@ public class OEnchantmentHelper {
 
             var2 = 1 + (var2 >> 1) + var0.nextInt(var2 + 1);
             int var6 = var0.nextInt(5) + var2;
+
             return var1 == 0 ? (var6 >> 1) + 1 : (var1 == 1 ? var6 * 2 / 3 + 1 : var6);
         }
     }
 
     public static void a(Random var0, OItemStack var1, int var2) {
         List var3 = b(var0, var1, var2);
+
         if (var3 != null) {
             Iterator var4 = var3.iterator();
 
             while (var4.hasNext()) {
                 OEnchantmentData var5 = (OEnchantmentData) var4.next();
+
                 var1.a(var5.a, var5.b);
             }
         }
@@ -181,6 +193,7 @@ public class OEnchantmentHelper {
     public static List b(Random var0, OItemStack var1, int var2) {
         OItem var3 = var1.a();
         int var4 = var3.c();
+
         if (var4 <= 0) {
             return null;
         } else {
@@ -190,8 +203,10 @@ public class OEnchantmentHelper {
             int var7 = (int) (var5 * (1.0F + var6) + 0.5F);
             ArrayList var8 = null;
             Map var9 = b(var7, var1);
+
             if (var9 != null && !var9.isEmpty()) {
                 OEnchantmentData var10 = (OEnchantmentData) OWeightedRandom.a(var0, var9.values());
+
                 if (var10 != null) {
                     var8 = new ArrayList();
                     var8.add(var10);
@@ -207,6 +222,7 @@ public class OEnchantmentHelper {
                             while (true) {
                                 if (var15.hasNext()) {
                                     OEnchantmentData var16 = (OEnchantmentData) var15.next();
+
                                     if (var16.a.a(OEnchantment.b[var13.intValue()])) {
                                         continue;
                                     }
@@ -223,6 +239,7 @@ public class OEnchantmentHelper {
 
                         if (!var9.isEmpty()) {
                             OEnchantmentData var17 = (OEnchantmentData) OWeightedRandom.a(var0, var9.values());
+
                             var8.add(var17);
                         }
                     }
@@ -241,6 +258,7 @@ public class OEnchantmentHelper {
 
         for (int var6 = 0; var6 < var5; ++var6) {
             OEnchantment var7 = var4[var6];
+
             if (var7 != null && var7.y.a(var2)) {
                 for (int var8 = var7.c(); var8 <= var7.a(); ++var8) {
                     if (var0 >= var7.a(var8) && var0 <= var7.b(var8)) {

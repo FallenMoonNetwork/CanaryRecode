@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class OWorldType {
 
     public static final OWorldType[] a = new OWorldType[16];

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OMaterial;
@@ -8,6 +9,7 @@ import net.minecraft.server.OPathEntity;
 import net.minecraft.server.OPathPoint;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OPathNavigate {
 
@@ -70,6 +72,7 @@ public class OPathNavigate {
 
     public boolean a(double var1, double var3, double var5, float var7) {
         OPathEntity var8 = this.a(OMathHelper.b(var1), ((int) var3), OMathHelper.b(var5));
+
         return this.a(var8, var7);
     }
 
@@ -79,6 +82,7 @@ public class OPathNavigate {
 
     public boolean a(OEntityLiving var1, float var2) {
         OPathEntity var3 = this.a(var1);
+
         return var3 != null ? this.a(var3, var2) : false;
     }
 
@@ -100,6 +104,7 @@ public class OPathNavigate {
             } else {
                 this.d = var2;
                 OVec3D var3 = this.h();
+
                 this.h = this.g;
                 this.i.a = var3.a;
                 this.i.b = var3.b;
@@ -122,6 +127,7 @@ public class OPathNavigate {
 
             if (!this.e()) {
                 OVec3D var1 = this.c.a(this.a);
+
                 if (var1 != null) {
                     this.a.aj().a(var1.a, var1.b, var1.c, this.d);
                 }
@@ -143,6 +149,7 @@ public class OPathNavigate {
         float var8 = this.a.bG * this.a.bG;
 
         int var4;
+
         for (var4 = this.c.e(); var4 < var2; ++var4) {
             if (var1.c(this.c.a(this.a, var4)) < var8) {
                 this.c.c(var4 + 1);
@@ -219,6 +226,7 @@ public class OPathNavigate {
         if (!this.b.l(OMathHelper.b(this.a.bm), (int) (this.a.bw.b + 0.5D), OMathHelper.b(this.a.bo))) {
             for (int var1 = 0; var1 < this.c.d(); ++var1) {
                 OPathPoint var2 = this.c.a(var1);
+
                 if (this.b.l(var2.a, var2.b, var2.c)) {
                     this.c.b(var1 - 1);
                     return;
@@ -234,10 +242,12 @@ public class OPathNavigate {
         double var8 = var2.a - var1.a;
         double var10 = var2.c - var1.c;
         double var12 = var8 * var8 + var10 * var10;
+
         if (var12 < 1.0E-8D) {
             return false;
         } else {
             double var14 = 1.0D / Math.sqrt(var12);
+
             var8 *= var14;
             var10 *= var14;
             var3 += 2;
@@ -251,6 +261,7 @@ public class OPathNavigate {
                 double var18 = 1.0D / Math.abs(var10);
                 double var20 = (var6 * 1) - var1.a;
                 double var22 = (var7 * 1) - var1.c;
+
                 if (var8 >= 0.0D) {
                     ++var20;
                 }
@@ -292,6 +303,7 @@ public class OPathNavigate {
     private boolean a(int var1, int var2, int var3, int var4, int var5, int var6, OVec3D var7, double var8, double var10) {
         int var12 = var1 - var4 / 2;
         int var13 = var3 - var6 / 2;
+
         if (!this.b(var12, var2, var13, var4, var5, var6, var7, var8, var10)) {
             return false;
         } else {
@@ -299,13 +311,16 @@ public class OPathNavigate {
                 for (int var15 = var13; var15 < var13 + var6; ++var15) {
                     double var16 = var14 + 0.5D - var7.a;
                     double var18 = var15 + 0.5D - var7.c;
+
                     if (var16 * var8 + var18 * var10 >= 0.0D) {
                         int var20 = this.b.a(var14, var2 - 1, var15);
+
                         if (var20 <= 0) {
                             return false;
                         }
 
                         OMaterial var21 = OBlock.m[var20].cd;
+
                         if (var21 == OMaterial.g && !this.a.aU()) {
                             return false;
                         }
@@ -327,8 +342,10 @@ public class OPathNavigate {
                 for (int var14 = var3; var14 < var3 + var6; ++var14) {
                     double var15 = var12 + 0.5D - var7.a;
                     double var17 = var14 + 0.5D - var7.c;
+
                     if (var15 * var8 + var17 * var10 >= 0.0D) {
                         int var19 = this.b.a(var12, var13, var14);
+
                         if (var19 > 0 && !OBlock.m[var19].b(this.b, var12, var13, var14)) {
                             return false;
                         }

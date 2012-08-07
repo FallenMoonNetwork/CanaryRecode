@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.OVec3D;
+
 
 public class OAxisAlignedBB {
 
@@ -59,6 +61,7 @@ public class OAxisAlignedBB {
         double var13 = this.d;
         double var15 = this.e;
         double var17 = this.f;
+
         if (var1 < 0.0D) {
             var7 += var1;
         }
@@ -93,6 +96,7 @@ public class OAxisAlignedBB {
         double var13 = this.d + var1;
         double var15 = this.e + var3;
         double var17 = this.f + var5;
+
         return b(var7, var9, var11, var13, var15, var17);
     }
 
@@ -104,6 +108,7 @@ public class OAxisAlignedBB {
         if (var1.e > this.b && var1.b < this.e) {
             if (var1.f > this.c && var1.c < this.f) {
                 double var4;
+
                 if (var2 > 0.0D && var1.d <= this.a) {
                     var4 = this.a - var1.d;
                     if (var4 < var2) {
@@ -131,6 +136,7 @@ public class OAxisAlignedBB {
         if (var1.d > this.a && var1.a < this.d) {
             if (var1.f > this.c && var1.c < this.f) {
                 double var4;
+
                 if (var2 > 0.0D && var1.e <= this.b) {
                     var4 = this.b - var1.e;
                     if (var4 < var2) {
@@ -158,6 +164,7 @@ public class OAxisAlignedBB {
         if (var1.d > this.a && var1.a < this.d) {
             if (var1.e > this.b && var1.b < this.e) {
                 double var4;
+
                 if (var2 > 0.0D && var1.f <= this.c) {
                     var4 = this.c - var1.f;
                     if (var4 < var2) {
@@ -206,6 +213,7 @@ public class OAxisAlignedBB {
         double var13 = this.d - var1;
         double var15 = this.e - var3;
         double var17 = this.f - var5;
+
         return b(var7, var9, var11, var13, var15, var17);
     }
 
@@ -220,6 +228,7 @@ public class OAxisAlignedBB {
         OVec3D var6 = var1.b(var2, this.e);
         OVec3D var7 = var1.c(var2, this.c);
         OVec3D var8 = var1.c(var2, this.f);
+
         if (!this.b(var3)) {
             var3 = null;
         }
@@ -245,6 +254,7 @@ public class OAxisAlignedBB {
         }
 
         OVec3D var9 = null;
+
         if (var3 != null && (var9 == null || var1.c(var3) < var1.c(var9))) {
             var9 = var3;
         }
@@ -273,6 +283,7 @@ public class OAxisAlignedBB {
             return null;
         } else {
             byte var10 = -1;
+
             if (var9 == var3) {
                 var10 = 4;
             }

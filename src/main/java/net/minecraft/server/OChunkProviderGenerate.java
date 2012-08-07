@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBiomeGenBase;
@@ -22,6 +23,7 @@ import net.minecraft.server.OSpawnerAnimals;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenDungeons;
 import net.minecraft.server.OWorldGenLakes;
+
 
 public class OChunkProviderGenerate implements OIChunkProvider {
 
@@ -72,6 +74,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
         int var7 = var4 + 1;
         byte var8 = 17;
         int var9 = var4 + 1;
+
         this.y = this.p.a().a(this.y, var1 * 4 - 2, var2 * 4 - 2, var7 + 5, var9 + 5);
         this.r = this.a(this.r, var1 * var4, 0, var2 * var4, var7, var8, var9);
 
@@ -98,6 +101,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
                         for (int var42 = 0; var42 < 4; ++var42) {
                             int var43 = var42 + var10 * 4 << 11 | 0 + var11 * 4 << 7 | var12 * 8 + var31;
                             short var44 = 128;
+
                             var43 -= var44;
                             double var45 = 0.25D;
                             double var49 = (var36 - var34) * var45;
@@ -131,6 +135,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
     public void a(int var1, int var2, byte[] var3, OBiomeGenBase[] var4) {
         byte var5 = 63;
         double var6 = 0.03125D;
+
         this.s = this.o.a(this.s, var1 * 16, var2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 
         for (int var8 = 0; var8 < 16; ++var8) {
@@ -144,10 +149,12 @@ public class OChunkProviderGenerate implements OIChunkProvider {
 
                 for (int var16 = 127; var16 >= 0; --var16) {
                     int var17 = (var9 * 16 + var8) * 128 + var16;
+
                     if (var16 <= 0 + this.k.nextInt(5)) {
                         var3[var17] = (byte) OBlock.z.bO;
                     } else {
                         byte var18 = var3[var17];
+
                         if (var18 == 0) {
                             var13 = -1;
                         } else if (var18 == OBlock.t.bO) {
@@ -199,6 +206,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
     public OChunk b(int var1, int var2) {
         this.k.setSeed(var1 * 341873128712L + var2 * 132897987541L);
         byte[] var3 = new byte['\u8000'];
+
         this.a(var1, var2, var3);
         this.y = this.p.a().b(this.y, var1 * 16, var2 * 16, 16, 16);
         this.a(var1, var2, var3, this.y);
@@ -232,6 +240,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
             for (int var8 = -2; var8 <= 2; ++var8) {
                 for (int var9 = -2; var9 <= 2; ++var9) {
                     float var10 = 10.0F / OMathHelper.c((var8 * var8 + var9 * var9) + 0.2F);
+
                     this.i[var8 + 2 + (var9 + 2) * 5] = var10;
                 }
             }
@@ -239,6 +248,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
 
         double var11 = 684.412D;
         double var13 = 684.412D;
+
         this.g = this.a.a(this.g, var2, var4, var5, var7, 1.121D, 1.121D, 0.5D);
         this.h = this.b.a(this.h, var2, var4, var5, var7, 200.0D, 200.0D, 0.5D);
         this.d = this.n.a(this.d, var2, var3, var4, var5, var6, var7, var11 / 80.0D, var13 / 160.0D, var11 / 80.0D);
@@ -261,6 +271,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
                     for (int var25 = -var22; var25 <= var22; ++var25) {
                         OBiomeGenBase var26 = this.y[var17 + var24 + 2 + (var18 + var25 + 2) * (var5 + 5)];
                         float var27 = this.i[var24 + 2 + (var25 + 2) * 5] / (var26.D + 2.0F);
+
                         if (var26.D > var23.D) {
                             var27 /= 2.0F;
                         }
@@ -276,6 +287,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
                 var19 = var19 * 0.9F + 0.1F;
                 var20 = (var20 * 4.0F - 1.0F) / 8.0F;
                 double var28 = this.h[var16] / 8000.0D;
+
                 if (var28 < 0.0D) {
                     var28 = -var28 * 0.3D;
                 }
@@ -302,11 +314,13 @@ public class OChunkProviderGenerate implements OIChunkProvider {
                 for (int var50 = 0; var50 < var6; ++var50) {
                     double var30 = var20;
                     double var32 = var19;
+
                     var30 += var28 * 0.2D;
                     var30 = var30 * var6 / 16.0D;
                     double var34 = var6 / 2.0D + var30 * 4.0D;
                     double var36 = 0.0D;
                     double var38 = (var50 - var34) * 12.0D * 128.0D / 128.0D / var32;
+
                     if (var38 < 0.0D) {
                         var38 *= 4.0D;
                     }
@@ -314,6 +328,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
                     double var40 = this.e[var15] / 512.0D;
                     double var42 = this.f[var15] / 512.0D;
                     double var44 = (this.d[var15] / 10.0D + 1.0D) / 2.0D;
+
                     if (var44 < 0.0D) {
                         var36 = var40;
                     } else if (var44 > 1.0D) {
@@ -325,6 +340,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
                     var36 -= var38;
                     if (var50 > var6 - 4) {
                         double var46 = ((var50 - (var6 - 4)) / 3.0F);
+
                         var36 = var36 * (1.0D - var46) + -10.0D * var46;
                     }
 
@@ -348,11 +364,14 @@ public class OChunkProviderGenerate implements OIChunkProvider {
         int var4 = var2 * 16;
         int var5 = var3 * 16;
         OBiomeGenBase var6 = this.p.a(var4 + 16, var5 + 16);
+
         this.k.setSeed(this.p.n());
         long var7 = this.k.nextLong() / 2L * 2L + 1L;
         long var9 = this.k.nextLong() / 2L * 2L + 1L;
+
         this.k.setSeed(var2 * var7 + var3 * var9 ^ this.p.n());
         boolean var11 = false;
+
         if (this.q) {
             this.w.a(this.p, this.k, var2, var3);
             var11 = this.v.a(this.p, this.k, var2, var3);
@@ -362,6 +381,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
         int var12;
         int var13;
         int var14;
+
         if (!var11 && this.k.nextInt(4) == 0) {
             var12 = var4 + this.k.nextInt(16) + 8;
             var13 = this.k.nextInt(128);
@@ -382,6 +402,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
             var13 = var4 + this.k.nextInt(16) + 8;
             var14 = this.k.nextInt(128);
             int var15 = var5 + this.k.nextInt(16) + 8;
+
             if ((new OWorldGenDungeons()).a(this.p, this.k, var13, var14, var15)) {
                 ;
             }
@@ -426,6 +447,7 @@ public class OChunkProviderGenerate implements OIChunkProvider {
     @Override
     public List a(OEnumCreatureType var1, int var2, int var3, int var4) {
         OBiomeGenBase var5 = this.p.a(var2, var4);
+
         return var5 == null ? null : var5.a(var1);
     }
 

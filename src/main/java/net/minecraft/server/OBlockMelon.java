@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OMaterial;
+
 
 public class OBlockMelon extends OBlock {
 
@@ -35,6 +37,7 @@ public class OBlockMelon extends OBlock {
     @Override
     public int a(int var1, Random var2) {
         int var3 = this.a(var2) + var2.nextInt(1 + var1);
+
         if (var3 > 9) {
             var3 = 9;
         }

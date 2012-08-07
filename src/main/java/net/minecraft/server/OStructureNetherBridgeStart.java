@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OComponentNetherBridgeStartPiece;
@@ -7,11 +8,13 @@ import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructureStart;
 import net.minecraft.server.OWorld;
 
+
 class OStructureNetherBridgeStart extends OStructureStart {
 
     public OStructureNetherBridgeStart(OWorld var1, Random var2, int var3, int var4) {
         super();
         OComponentNetherBridgeStartPiece var5 = new OComponentNetherBridgeStartPiece(var2, (var3 << 4) + 2, (var4 << 4) + 2);
+
         this.a.add(var5);
         var5.a(var5, this.a, var2);
         ArrayList var6 = var5.d;
@@ -19,6 +22,7 @@ class OStructureNetherBridgeStart extends OStructureStart {
         while (!var6.isEmpty()) {
             int var7 = var2.nextInt(var6.size());
             OStructureComponent var8 = (OStructureComponent) var6.remove(var7);
+
             var8.a(var5, this.a, var2);
         }
 

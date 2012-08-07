@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockBed;
 import net.minecraft.server.OEntityPlayer;
@@ -7,6 +8,7 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OItemBed extends OItem {
 
@@ -24,6 +26,7 @@ public class OItemBed extends OItem {
             int var9 = OMathHelper.b((var2.bs * 4.0F / 360.0F) + 0.5D) & 3;
             byte var10 = 0;
             byte var11 = 0;
+
             if (var9 == 0) {
                 var11 = 1;
             }

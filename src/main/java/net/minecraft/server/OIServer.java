@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public interface OIServer {
 
     int a(String var1, int var2);

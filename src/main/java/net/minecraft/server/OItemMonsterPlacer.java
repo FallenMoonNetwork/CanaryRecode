@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityList;
@@ -9,6 +10,7 @@ import net.minecraft.server.OFacing;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+
 
 public class OItemMonsterPlacer extends OItem {
 
@@ -23,10 +25,12 @@ public class OItemMonsterPlacer extends OItem {
             return true;
         } else {
             int var8 = var3.a(var4, var5, var6);
+
             var4 += OFacing.b[var7];
             var5 += OFacing.c[var7];
             var6 += OFacing.d[var7];
             double var9 = 0.0D;
+
             if (var7 == 1 && var8 == OBlock.aZ.bO || var8 == OBlock.bB.bO) {
                 var9 = 0.5D;
             }
@@ -44,6 +48,7 @@ public class OItemMonsterPlacer extends OItem {
             return false;
         } else {
             OEntity var8 = OEntityList.a(var1, var0);
+
             if (var8 != null) {
                 var8.c(var2, var4, var6, var0.r.nextFloat() * 360.0F, 0.0F);
                 var0.b(var8);

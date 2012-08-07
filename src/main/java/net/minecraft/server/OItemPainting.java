@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityPainting;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+
 
 public class OItemPainting extends OItem {
 
@@ -20,6 +22,7 @@ public class OItemPainting extends OItem {
             return false;
         } else {
             byte var8 = 0;
+
             if (var7 == 4) {
                 var8 = 1;
             }
@@ -36,6 +39,7 @@ public class OItemPainting extends OItem {
                 return false;
             } else {
                 OEntityPainting var9 = new OEntityPainting(var3, var4, var5, var6, var8);
+
                 if (var9.k()) {
                     if (!var3.F) {
                         var3.b(var9);

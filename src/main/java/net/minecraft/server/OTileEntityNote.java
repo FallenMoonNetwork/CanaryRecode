@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OWorld;
+
 
 public class OTileEntityNote extends OTileEntity {
 
@@ -43,6 +45,7 @@ public class OTileEntityNote extends OTileEntity {
         if (var1.d(var2, var3 + 1, var4) == OMaterial.a) {
             OMaterial var5 = var1.d(var2, var3 - 1, var4);
             byte var6 = 0;
+
             if (var5 == OMaterial.e) {
                 var6 = 1;
             }

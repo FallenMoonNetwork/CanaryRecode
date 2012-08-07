@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
@@ -19,6 +20,7 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OTileEntityChest;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockChest extends OBlockContainer {
 
@@ -52,6 +54,7 @@ public class OBlockChest extends OBlockContainer {
         int var6 = var1.a(var2, var3, var4 + 1);
         int var7 = var1.a(var2 - 1, var3, var4);
         int var8 = var1.a(var2 + 1, var3, var4);
+
         if (var5 == this.bO) {
             this.b(var1, var2, var3, var4 - 1);
         }
@@ -78,6 +81,7 @@ public class OBlockChest extends OBlockContainer {
         int var9 = var1.a(var2 + 1, var3, var4);
         byte var10 = 0;
         int var11 = OMathHelper.b((var5.bs * 4.0F / 360.0F) + 0.5D) & 3;
+
         if (var11 == 0) {
             var10 = 2;
         }
@@ -132,6 +136,7 @@ public class OBlockChest extends OBlockContainer {
             boolean var12;
             byte var13;
             int var14;
+
             if (var5 != this.bO && var6 != this.bO) {
                 if (var7 != this.bO && var8 != this.bO) {
                     var13 = 3;
@@ -209,6 +214,7 @@ public class OBlockChest extends OBlockContainer {
     @Override
     public boolean c(OWorld var1, int var2, int var3, int var4) {
         int var5 = 0;
+
         if (var1.a(var2 - 1, var3, var4) == this.bO) {
             ++var5;
         }
@@ -236,6 +242,7 @@ public class OBlockChest extends OBlockContainer {
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         super.a(var1, var2, var3, var4, var5);
         OTileEntityChest var6 = (OTileEntityChest) var1.b(var2, var3, var4);
+
         if (var6 != null) {
             var6.h();
         }
@@ -245,16 +252,20 @@ public class OBlockChest extends OBlockContainer {
     @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         OTileEntityChest var5 = (OTileEntityChest) var1.b(var2, var3, var4);
+
         if (var5 != null) {
             for (int var6 = 0; var6 < var5.getInventorySize(); ++var6) {
                 OItemStack var7 = var5.g_(var6);
+
                 if (var7 != null) {
                     float var8 = this.a.nextFloat() * 0.8F + 0.1F;
                     float var9 = this.a.nextFloat() * 0.8F + 0.1F;
 
                     OEntityItem var12;
+
                     for (float var10 = this.a.nextFloat() * 0.8F + 0.1F; var7.a > 0; var1.b(var12)) {
                         int var11 = this.a.nextInt(21) + 10;
+
                         if (var11 > var7.a) {
                             var11 = var7.a;
                         }
@@ -262,6 +273,7 @@ public class OBlockChest extends OBlockContainer {
                         var7.a -= var11;
                         var12 = new OEntityItem(var1, (var2 + var8), (var3 + var9), (var4 + var10), new OItemStack(var7.c, var11, var7.h()));
                         float var13 = 0.05F;
+
                         var12.bp = ((float) this.a.nextGaussian() * var13);
                         var12.bq = ((float) this.a.nextGaussian() * var13 + 0.2F);
                         var12.br = ((float) this.a.nextGaussian() * var13);
@@ -279,6 +291,7 @@ public class OBlockChest extends OBlockContainer {
     @Override
     public boolean a(OWorld var1, int var2, int var3, int var4, OEntityPlayer var5) {
         Object var6 = var1.b(var2, var3, var4);
+
         if (var6 == null) {
             return true;
         } else if (var1.e(var2, var3 + 1, var4)) {
@@ -328,12 +341,14 @@ public class OBlockChest extends OBlockContainer {
         Iterator var4 = var0.a(OEntityOcelot.class, OAxisAlignedBB.b(var1, (var2 + 1), var3, (var1 + 1), (var2 + 2), (var3 + 1))).iterator();
 
         OEntityOcelot var6;
+
         do {
             if (!var4.hasNext()) {
                 return false;
             }
 
             OEntity var5 = (OEntity) var4.next();
+
             var6 = (OEntityOcelot) var5;
         } while (!var6.v_());
 

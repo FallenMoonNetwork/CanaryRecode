@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OComponentStrongholdLeftTurn;
@@ -8,6 +9,7 @@ import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructureStrongholdPieces;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentStrongholdRightTurn extends OComponentStrongholdLeftTurn {
 

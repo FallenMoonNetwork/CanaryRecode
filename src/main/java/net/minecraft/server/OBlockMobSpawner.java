@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlockContainer;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OTileEntityMobSpawner;
+
 
 public class OBlockMobSpawner extends OBlockContainer {
 

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -8,6 +9,7 @@ import net.minecraft.server.OComponentNetherBridgeStartPiece;
 import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentNetherBridgeNetherStalkRoom extends OComponentNetherBridgePiece {
 
@@ -25,6 +27,7 @@ public class OComponentNetherBridgeNetherStalkRoom extends OComponentNetherBridg
 
     public static OComponentNetherBridgeNetherStalkRoom a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, -5, -3, 0, 13, 14, 13, var5);
+
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentNetherBridgeNetherStalkRoom(var6, var1, var7, var5) : null;
     }
 
@@ -43,6 +46,7 @@ public class OComponentNetherBridgeNetherStalkRoom extends OComponentNetherBridg
         this.a(var1, var3, 2, 11, 2, 10, 12, 10, OBlock.bA.bO, OBlock.bA.bO, false);
 
         int var4;
+
         for (var4 = 1; var4 <= 11; var4 += 2) {
             this.a(var1, var3, var4, 10, 0, var4, 11, 0, OBlock.bB.bO, OBlock.bB.bO, false);
             this.a(var1, var3, var4, 10, 12, var4, 11, 12, OBlock.bB.bO, OBlock.bB.bO, false);
@@ -73,6 +77,7 @@ public class OComponentNetherBridgeNetherStalkRoom extends OComponentNetherBridg
         int var5;
         int var6;
         int var7;
+
         for (var5 = 0; var5 <= 6; ++var5) {
             var6 = var5 + 4;
 
@@ -126,6 +131,7 @@ public class OComponentNetherBridgeNetherStalkRoom extends OComponentNetherBridg
         this.a(var1, var3, 9, 0, 4, 12, 1, 8, OBlock.bA.bO, OBlock.bA.bO, false);
 
         int var8;
+
         for (var7 = 4; var7 <= 8; ++var7) {
             for (var8 = 0; var8 <= 2; ++var8) {
                 this.b(var1, OBlock.bA.bO, 0, var7, -1, var8, var3);

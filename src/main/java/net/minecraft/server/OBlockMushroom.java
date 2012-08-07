@@ -1,16 +1,19 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockFlower;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenBigMushroom;
 
+
 public class OBlockMushroom extends OBlockFlower {
 
     protected OBlockMushroom(int var1, int var2) {
         super(var1, var2);
         float var3 = 0.2F;
+
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
         this.a(true);
     }
@@ -24,6 +27,7 @@ public class OBlockMushroom extends OBlockFlower {
             int var8;
             int var9;
             int var10;
+
             for (var8 = var2 - var6; var8 <= var2 + var6; ++var8) {
                 for (var9 = var4 - var6; var9 <= var4 + var6; ++var9) {
                     for (var10 = var3 - 1; var10 <= var3 + 1; ++var10) {
@@ -74,6 +78,7 @@ public class OBlockMushroom extends OBlockFlower {
     public boolean f(OWorld var1, int var2, int var3, int var4) {
         if (var3 >= 0 && var3 < 256) {
             int var5 = var1.a(var2, var3 - 1, var4);
+
             return var5 == OBlock.by.bO || var1.m(var2, var3, var4) < 13 && this.d(var5);
         } else {
             return false;
@@ -82,8 +87,10 @@ public class OBlockMushroom extends OBlockFlower {
 
     public boolean b(OWorld var1, int var2, int var3, int var4, Random var5) {
         int var6 = var1.c(var2, var3, var4);
+
         var1.b(var2, var3, var4, 0);
         OWorldGenBigMushroom var7 = null;
+
         if (this.bO == OBlock.af.bO) {
             var7 = new OWorldGenBigMushroom(0);
         } else if (this.bO == OBlock.ag.bO) {

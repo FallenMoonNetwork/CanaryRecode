@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutput;
@@ -30,6 +31,7 @@ import net.minecraft.server.OThreadedFileIOBase;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OWorld;
 
+
 public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
 
     private List<OAnvilChunkLoaderPending> a = new ArrayList<OAnvilChunkLoaderPending>();
@@ -46,6 +48,7 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
     public OChunk a(OWorld var1, int var2, int var3) throws IOException {
         ONBTTagCompound var4 = null;
         OChunkCoordIntPair var5 = new OChunkCoordIntPair(var2, var3);
+
         synchronized (this.c) {
             if (this.b.contains(var5)) {
                 for (int var7 = 0; var7 < this.a.size(); ++var7) {
@@ -59,6 +62,7 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
 
         if (var4 == null) {
             DataInputStream var10 = ORegionFileCache.b(this.d, var2, var3);
+
             if (var10 == null) {
                 return null;
             }
@@ -78,6 +82,7 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
             return null;
         } else {
             OChunk var5 = this.a(var1, var4.m("Level"));
+
             if (!var5.a(var2, var3)) {
                 System.out.println("Chunk file at " + var2 + "," + var3 + " is in the wrong location; relocating. (Expected " + var2 + ", " + var3 + ", got " + var5.g + ", " + var5.h + ")");
                 var4.a("xPos", var2);
@@ -97,6 +102,7 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
         try {
             ONBTTagCompound var3 = new ONBTTagCompound();
             ONBTTagCompound var4 = new ONBTTagCompound();
+
             var3.a("Level", (ONBTBase) var4);
             this.a(var2, var1, var4);
             this.a(var2.k(), var3);
@@ -126,6 +132,7 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
     @Override
     public boolean c() {
         OAnvilChunkLoaderPending var1 = null;
+
         synchronized (this.c) {
             if (this.a.size() <= 0) {
                 return false;
@@ -148,21 +155,19 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
 
     private void a(OAnvilChunkLoaderPending var1) throws IOException {
         DataOutputStream var2 = ORegionFileCache.c(this.d, var1.a.a, var1.a.b);
+
         OCompressedStreamTools.a(var1.b, (DataOutput) var2);
         var2.close();
     }
 
     @Override
-    public void b(OWorld var1, OChunk var2) {
-    }
+    public void b(OWorld var1, OChunk var2) {}
 
     @Override
-    public void a() {
-    }
+    public void a() {}
 
     @Override
-    public void b() {
-    }
+    public void b() {}
 
     private void a(OChunk var1, OWorld var2, ONBTTagCompound var3) {
         var2.m();
@@ -177,8 +182,10 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
         int var7 = var4.length;
 
         ONBTTagCompound var10;
+
         for (int var8 = 0; var8 < var7; ++var8) {
             OExtendedBlockStorage var9 = var6[var8];
+
             if (var9 != null && var9.f() != 0) {
                 var10 = new ONBTTagCompound();
                 var10.a("Y", (byte) (var9.c() >> 4 & 255));
@@ -200,11 +207,13 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
         ONBTTagList var17 = new ONBTTagList();
 
         Iterator var19;
+
         for (var7 = 0; var7 < var1.j.length; ++var7) {
             var19 = var1.j[var7].iterator();
 
             while (var19.hasNext()) {
                 OEntity var21 = (OEntity) var19.next();
+
                 var1.m = true;
                 var10 = new ONBTTagCompound();
                 if (var21.c(var10)) {
@@ -215,10 +224,12 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
 
         var3.a("Entities", var17);
         ONBTTagList var18 = new ONBTTagList();
+
         var19 = var1.i.values().iterator();
 
         while (var19.hasNext()) {
             OTileEntity var22 = (OTileEntity) var19.next();
+
             var10 = new ONBTTagCompound();
             var22.b(var10);
             var18.a(var10);
@@ -226,6 +237,7 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
 
         var3.a("TileEntities", var18);
         List var20 = var2.a(var1, false);
+
         if (var20 != null) {
             long var11 = var2.o();
             ONBTTagList var13 = new ONBTTagList();
@@ -234,11 +246,12 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
             while (var14.hasNext()) {
                 ONextTickListEntry var15 = (ONextTickListEntry) var14.next();
                 ONBTTagCompound var16 = new ONBTTagCompound();
+
                 var16.a("i", var15.d);
                 var16.a("x", var15.a);
                 var16.a("y", var15.b);
                 var16.a("z", var15.c);
-                var16.a("t", (int)(var15.e - var11));
+                var16.a("t", (int) (var15.e - var11));
                 var13.a(var16);
             }
 
@@ -251,6 +264,7 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
         int var3 = var2.f("xPos");
         int var4 = var2.f("zPos");
         OChunk var5 = new OChunk(var1, var3, var4);
+
         var5.f = var2.l("HeightMap");
         var5.k = var2.o("TerrainPopulated");
         ONBTTagList var6 = var2.n("Sections");
@@ -261,6 +275,7 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
             ONBTTagCompound var10 = (ONBTTagCompound) var6.a(var9);
             byte var11 = var10.d("Y");
             OExtendedBlockStorage var12 = new OExtendedBlockStorage(var11 << 4);
+
             var12.a(var10.k("Blocks"));
             if (var10.c("Add")) {
                 var12.a(new ONibbleArray(var10.k("Add"), 4));
@@ -279,10 +294,12 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
         }
 
         ONBTTagList var14 = var2.n("Entities");
+
         if (var14 != null) {
             for (int var17 = 0; var17 < var14.d(); ++var17) {
                 ONBTTagCompound var16 = (ONBTTagCompound) var14.a(var17);
                 OEntity var18 = OEntityList.a(var16, var1);
+
                 var5.m = true;
                 if (var18 != null) {
                     var5.a(var18);
@@ -291,10 +308,12 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
         }
 
         ONBTTagList var15 = var2.n("TileEntities");
+
         if (var15 != null) {
             for (int var21 = 0; var21 < var15.d(); ++var21) {
                 ONBTTagCompound var20 = (ONBTTagCompound) var15.a(var21);
                 OTileEntity var13 = OTileEntity.c(var20);
+
                 if (var13 != null) {
                     var5.a(var13);
                 }
@@ -303,9 +322,11 @@ public class OAnvilChunkLoader implements OIChunkLoader, OIThreadedFileIO {
 
         if (var2.c("TileTicks")) {
             ONBTTagList var19 = var2.n("TileTicks");
+
             if (var19 != null) {
                 for (int var22 = 0; var22 < var19.d(); ++var22) {
                     ONBTTagCompound var23 = (ONBTTagCompound) var19.a(var22);
+
                     var1.d(var23.f("x"), var23.f("y"), var23.f("z"), var23.f("i"), var23.f("t"));
                 }
             }

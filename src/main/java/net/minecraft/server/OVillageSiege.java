@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.server.OChunkCoordinates;
@@ -11,6 +12,7 @@ import net.minecraft.server.OSpawnerAnimals;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OVillage;
 import net.minecraft.server.OWorld;
+
 
 public class OVillageSiege {
 
@@ -31,6 +33,7 @@ public class OVillageSiege {
 
     public void a() {
         boolean var1 = false;
+
         if (var1) {
             if (this.c == 2) {
                 this.d = 100;
@@ -48,6 +51,7 @@ public class OVillageSiege {
 
             if (this.c == 0) {
                 float var2 = this.a.b(0.0F);
+
                 if (var2 < 0.5D || var2 > 0.501D) {
                     return;
                 }
@@ -88,6 +92,7 @@ public class OVillageSiege {
 
         while (var2.hasNext()) {
             OEntityPlayer var3 = (OEntityPlayer) var2.next();
+
             this.f = this.a.A.a((int) var3.bm, (int) var3.bn, (int) var3.bo, 1);
             if (this.f != null && this.f.c() >= 10 && this.f.d() >= 20 && this.f.e() >= 20) {
                 OChunkCoordinates var4 = this.f.a();
@@ -105,6 +110,7 @@ public class OVillageSiege {
 
                         while (var8.hasNext()) {
                             OVillage var9 = (OVillage) var8.next();
+
                             if (var9 != this.f && var9.a(this.g, this.h, this.i)) {
                                 var6 = true;
                                 break;
@@ -122,6 +128,7 @@ public class OVillageSiege {
                     }
 
                     OVec3D var10 = this.a(this.g, this.h, this.i);
+
                     if (var10 != null) {
                         this.e = 0;
                         this.d = 20;
@@ -137,10 +144,12 @@ public class OVillageSiege {
 
     private boolean c() {
         OVec3D var1 = this.a(this.g, this.h, this.i);
+
         if (var1 == null) {
             return false;
         } else {
             OEntityZombie var2;
+
             try {
                 var2 = new OEntityZombie(this.a);
             } catch (Exception var4) {
@@ -151,6 +160,7 @@ public class OVillageSiege {
             var2.c(var1.a, var1.b, var1.c, this.a.r.nextFloat() * 360.0F, 0.0F);
             this.a.b(var2);
             OChunkCoordinates var3 = this.f.a();
+
             var2.b(var3.a, var3.b, var3.c, this.f.b());
             return true;
         }
@@ -161,6 +171,7 @@ public class OVillageSiege {
             int var5 = var1 + this.a.r.nextInt(16) - 8;
             int var6 = var2 + this.a.r.nextInt(6) - 3;
             int var7 = var3 + this.a.r.nextInt(16) - 8;
+
             if (this.f.a(var5, var6, var7) && OSpawnerAnimals.a(OEnumCreatureType.a, this.a, var5, var6, var7)) {
                 return OVec3D.b(var5, var6, var7);
             }

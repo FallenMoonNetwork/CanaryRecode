@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.ONetworkManager;
+
 
 class ONetworkReaderThread extends Thread {
 
@@ -15,6 +17,7 @@ class ONetworkReaderThread extends Thread {
     @Override
     public void run() {
         Object var1 = ONetworkManager.a;
+
         synchronized (ONetworkManager.a) {
             ++ONetworkManager.b;
         }
@@ -46,6 +49,7 @@ class ONetworkReaderThread extends Thread {
             } finally {
                 if (var12) {
                     Object var5 = ONetworkManager.a;
+
                     synchronized (ONetworkManager.a) {
                         --ONetworkManager.b;
                     }

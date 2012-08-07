@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -13,6 +14,7 @@ import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class OPostHttp {
 
     private OPostHttp() {
@@ -25,6 +27,7 @@ public class OPostHttp {
 
         while (var2.hasNext()) {
             Entry var3 = (Entry) var2.next();
+
             if (var1.length() > 0) {
                 var1.append('&');
             }
@@ -56,6 +59,7 @@ public class OPostHttp {
     public static String a(URL var0, String var1, boolean var2) {
         try {
             HttpURLConnection var4 = (HttpURLConnection) var0.openConnection();
+
             var4.setRequestMethod("POST");
             var4.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             var4.setRequestProperty("Content-Length", "" + var1.getBytes().length);
@@ -64,6 +68,7 @@ public class OPostHttp {
             var4.setDoInput(true);
             var4.setDoOutput(true);
             DataOutputStream var5 = new DataOutputStream(var4.getOutputStream());
+
             var5.writeBytes(var1);
             var5.flush();
             var5.close();
@@ -71,6 +76,7 @@ public class OPostHttp {
             StringBuffer var7 = new StringBuffer();
 
             String var8;
+
             while ((var8 = var6.readLine()) != null) {
                 var7.append(var8);
                 var7.append('\r');

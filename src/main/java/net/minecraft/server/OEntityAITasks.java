@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityAITaskEntry;
+
 
 public class OEntityAITasks {
 
@@ -25,6 +27,7 @@ public class OEntityAITasks {
         while (var2.hasNext()) {
             OEntityAITaskEntry var3 = (OEntityAITaskEntry) var2.next();
             boolean var4 = this.b.contains(var3);
+
             if (var4) {
                 if (this.a(var3) && var3.a.b()) {
                     continue;
@@ -41,12 +44,14 @@ public class OEntityAITasks {
         }
 
         boolean var5 = false;
+
         if (var5 && var1.size() > 0) {
             System.out.println("Starting: ");
         }
 
         Iterator var6;
         OEntityAITaskEntry var7;
+
         for (var6 = var1.iterator(); var6.hasNext(); var7.a.c()) {
             var7 = (OEntityAITaskEntry) var6.next();
             if (var5) {
@@ -72,6 +77,7 @@ public class OEntityAITasks {
 
         while (var2.hasNext()) {
             OEntityAITaskEntry var3 = (OEntityAITaskEntry) var2.next();
+
             if (var3 != var1) {
                 if (var1.b >= var3.b) {
                     if (this.b.contains(var3) && !this.a(var1, var3)) {

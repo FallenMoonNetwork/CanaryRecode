@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntityBlaze;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityThrowable;
 import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.OWorld;
+
 
 public class OEntitySnowball extends OEntityThrowable {
 
@@ -25,6 +27,7 @@ public class OEntitySnowball extends OEntityThrowable {
     protected void a(OMovingObjectPosition var1) {
         if (var1.g != null) {
             byte var2 = 0;
+
             if (var1.g instanceof OEntityBlaze) {
                 var2 = 3;
             }

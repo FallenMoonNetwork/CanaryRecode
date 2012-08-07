@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OGenLayerAddIsland;
 import net.minecraft.server.OGenLayerAddMushroomIsland;
 import net.minecraft.server.OGenLayerAddSnow;
@@ -17,6 +18,7 @@ import net.minecraft.server.OGenLayerVoronoiZoom;
 import net.minecraft.server.OGenLayerZoom;
 import net.minecraft.server.OWorldType;
 
+
 public abstract class OGenLayer {
 
     private long b;
@@ -29,8 +31,10 @@ public abstract class OGenLayer {
         OGenLayerFuzzyZoom var9 = new OGenLayerFuzzyZoom(2000L, var3);
         OGenLayerAddIsland var10 = new OGenLayerAddIsland(1L, var9);
         OGenLayerZoom var11 = new OGenLayerZoom(2001L, var10);
+
         var10 = new OGenLayerAddIsland(2L, var11);
         OGenLayerAddSnow var12 = new OGenLayerAddSnow(2L, var10);
+
         var11 = new OGenLayerZoom(2002L, var12);
         var10 = new OGenLayerAddIsland(3L, var11);
         var11 = new OGenLayerZoom(2003L, var10);
@@ -39,11 +43,13 @@ public abstract class OGenLayer {
         byte var4 = 4;
         OGenLayer var5 = OGenLayerZoom.a(1000L, var17, 0);
         OGenLayerRiverInit var13 = new OGenLayerRiverInit(100L, var5);
+
         var5 = OGenLayerZoom.a(1000L, var13, var4 + 2);
         OGenLayerRiver var14 = new OGenLayerRiver(1L, var5);
         OGenLayerSmooth var16 = new OGenLayerSmooth(1000L, var14);
         OGenLayer var6 = OGenLayerZoom.a(1000L, var17, 0);
         OGenLayerBiome var15 = new OGenLayerBiome(200L, var6, var2);
+
         var6 = OGenLayerZoom.a(1000L, var15, 2);
         Object var18 = new OGenLayerHills(1000L, var6);
 
@@ -65,6 +71,7 @@ public abstract class OGenLayer {
         OGenLayerSmooth var19 = new OGenLayerSmooth(1000L, (OGenLayer) var18);
         OGenLayerRiverMix var20 = new OGenLayerRiverMix(100L, var19, var16);
         OGenLayerVoronoiZoom var8 = new OGenLayerVoronoiZoom(10L, var20);
+
         var20.a(var0);
         var8.a(var0);
         return new OGenLayer[] { var20, var8, var20 };
@@ -109,6 +116,7 @@ public abstract class OGenLayer {
 
     protected int a(int var1) {
         int var2 = (int) ((this.c >> 24) % var1);
+
         if (var2 < 0) {
             var2 += var1;
         }

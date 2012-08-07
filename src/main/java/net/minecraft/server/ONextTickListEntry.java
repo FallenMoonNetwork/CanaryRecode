@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class ONextTickListEntry implements Comparable {
 
     private static long f = 0L;
@@ -25,6 +26,7 @@ public class ONextTickListEntry implements Comparable {
             return false;
         } else {
             ONextTickListEntry var2 = (ONextTickListEntry) var1;
+
             return this.a == var2.a && this.b == var2.b && this.c == var2.c && this.d == var2.d;
         }
     }

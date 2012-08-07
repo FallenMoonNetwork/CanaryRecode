@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockSand;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityFallingSand extends OEntity {
 
@@ -37,8 +39,7 @@ public class OEntityFallingSand extends OEntity {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     @Override
     public boolean o_() {
@@ -62,6 +63,7 @@ public class OEntityFallingSand extends OEntity {
             int var1 = OMathHelper.b(this.bm);
             int var2 = OMathHelper.b(this.bn);
             int var3 = OMathHelper.b(this.bo);
+
             if (this.b == 1 && this.bi.a(var1, var2, var3) == this.a) {
                 this.bi.e(var1, var2, var3, 0);
             } else if (!this.bi.F && this.b == 1) {

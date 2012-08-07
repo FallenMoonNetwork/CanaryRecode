@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OGenLayer;
 import net.minecraft.server.OIntCache;
+
 
 public class OGenLayerVoronoiZoom extends OGenLayer {
 
@@ -26,21 +28,26 @@ public class OGenLayerVoronoiZoom extends OGenLayer {
         int[] var14 = OIntCache.a(var12 * var13);
 
         int var16;
+
         for (int var15 = 0; var15 < var10 - 1; ++var15) {
             var16 = var11[0 + (var15 + 0) * var9];
             int var17 = var11[0 + (var15 + 1) * var9];
 
             for (int var18 = 0; var18 < var9 - 1; ++var18) {
                 double var19 = var6 * 0.9D;
+
                 this.a((var18 + var7 << var5), (var15 + var8 << var5));
                 double var21 = (this.a(1024) / 1024.0D - 0.5D) * var19;
                 double var23 = (this.a(1024) / 1024.0D - 0.5D) * var19;
+
                 this.a((var18 + var7 + 1 << var5), (var15 + var8 << var5));
                 double var25 = (this.a(1024) / 1024.0D - 0.5D) * var19 + var6;
                 double var27 = (this.a(1024) / 1024.0D - 0.5D) * var19;
+
                 this.a((var18 + var7 << var5), (var15 + var8 + 1 << var5));
                 double var29 = (this.a(1024) / 1024.0D - 0.5D) * var19;
                 double var31 = (this.a(1024) / 1024.0D - 0.5D) * var19 + var6;
+
                 this.a((var18 + var7 + 1 << var5), (var15 + var8 + 1 << var5));
                 double var33 = (this.a(1024) / 1024.0D - 0.5D) * var19 + var6;
                 double var35 = (this.a(1024) / 1024.0D - 0.5D) * var19 + var6;
@@ -55,6 +62,7 @@ public class OGenLayerVoronoiZoom extends OGenLayer {
                         double var44 = (var39 - var27) * (var39 - var27) + (var41 - var25) * (var41 - var25);
                         double var46 = (var39 - var31) * (var39 - var31) + (var41 - var29) * (var41 - var29);
                         double var48 = (var39 - var35) * (var39 - var35) + (var41 - var33) * (var41 - var33);
+
                         if (var42 < var44 && var42 < var46 && var42 < var48) {
                             var14[var40++] = var16;
                         } else if (var44 < var42 && var44 < var46 && var44 < var48) {

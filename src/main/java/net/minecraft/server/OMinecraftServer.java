@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
@@ -61,6 +62,7 @@ import net.minecraft.server.OWorldServerMulti;
 import net.minecraft.server.OWorldSettings;
 import net.minecraft.server.OWorldType;
 
+
 public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
     public static Logger a = Logger.getLogger("Minecraft");
@@ -81,8 +83,8 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     private List<OIUpdatePlayerListBox> C = new ArrayList<OIUpdatePlayerListBox>();
     private List<OServerCommand> D = Collections.synchronizedList(new ArrayList<OServerCommand>());
     
-//    public OEntityTracker[] entityTrackerArray = new OEntityTracker[3]; //CanaryMod -> removed
-    //CanaryMod WorldManager - your worlds here
+    // public OEntityTracker[] entityTrackerArray = new OEntityTracker[3]; //CanaryMod -> removed
+    // CanaryMod WorldManager - your worlds here
     CanaryWorldManager worldManager;
     
     public boolean n;
@@ -102,9 +104,9 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     public long[] x = new long[100];
     private ORConThreadQuery I;
     private ORConThreadMain J;
-    //CanaryMod Server reference
+    // CanaryMod Server reference
     private CanaryServer server;
-    //CanaryMod ConfigurationManager reference - this is instantiated in OServerConfigurationManager
+    // CanaryMod ConfigurationManager reference - this is instantiated in OServerConfigurationManager
     private CanaryConfigurationManager cfgManager;
 
     public OMinecraftServer() {
@@ -122,6 +124,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     public CanaryWorldManager getWorldManager() {
         return worldManager;
     }
+
     /**
      * CanaryMod get configuration manager
      * @return the cfgManager
@@ -140,7 +143,8 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     public void reload() {
         
         WorldConfiguration defWorld = Configuration.getWorldConfig(Configuration.getServerConfig().getDefaultWorldName());
-        //this.d = new OPropertyManager(new File("server.properties"));
+
+        // this.d = new OPropertyManager(new File("server.properties"));
         this.y = Configuration.getNetConfig().getBindIp();
         this.n = Configuration.getNetConfig().isOnlineMode();
         this.o = defWorld.canSpawnAnimals();
@@ -171,6 +175,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     private boolean s() throws UnknownHostException {
         this.A = new OConsoleCommandHandler(this);
         OThreadCommandReader var1 = new OThreadCommandReader(this);
+
         var1.setDaemon(true);
         var1.start();
         OConsoleLogManager.a();
@@ -182,7 +187,8 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         a.info("Loading properties");
         // CanaryMod start: Change configurations
         WorldConfiguration defWorld = Configuration.getWorldConfig(Configuration.getServerConfig().getDefaultWorldName());
-        //this.d = new OPropertyManager(new File("server.properties"));
+
+        // this.d = new OPropertyManager(new File("server.properties"));
         this.y = Configuration.getNetConfig().getBindIp();
         this.n = Configuration.getNetConfig().isOnlineMode();
         this.o = defWorld.canSpawnAnimals();
@@ -192,6 +198,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         this.s = Configuration.getServerConfig().getMotd();
         this.s.replace('\u00a7', '$');
         InetAddress var2 = null;
+
         if (this.y.length() > 0) {
             var2 = InetAddress.getByName(this.y);
         }
@@ -217,20 +224,22 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         }
 
         this.h = new OServerConfigurationManager(this);
-        //CanaryMod start - moved those to per-world
-//        this.entityTrackerArray[0] = new OEntityTracker(this, 0);
-//        this.entityTrackerArray[1] = new OEntityTracker(this, -1);
-//        this.entityTrackerArray[2] = new OEntityTracker(this, 1);
-      //CanaryMod end
+        // CanaryMod start - moved those to per-world
+        // this.entityTrackerArray[0] = new OEntityTracker(this, 0);
+        // this.entityTrackerArray[1] = new OEntityTracker(this, -1);
+        // this.entityTrackerArray[2] = new OEntityTracker(this, 1);
+        // CanaryMod end
         
         long var4 = System.nanoTime();
         String var6 = defWorld.getWorldName();
         String var7 = defWorld.getWorldSeed();
         String var8 = defWorld.getWorldType().toString();
         long var9 = (new Random()).nextLong();
+
         if (var7.length() > 0) {
             try {
                 long var11 = Long.parseLong(var7);
+
                 if (var11 != 0L) {
                     var9 = var11;
                 }
@@ -240,6 +249,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         }
 
         OWorldType var13 = OWorldType.a(var8);
+
         if (var13 == null) {
             var13 = OWorldType.b;
         }
@@ -247,7 +257,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         this.t = defWorld.getMaxBuildHeight();
         this.t = (this.t + 8) / 16 * 16;
         this.t = OMathHelper.a(this.t, 64, 256);
-        defWorld.getFile().setInt("max-build-height",this.t);
+        defWorld.getFile().setInt("max-build-height", this.t);
 
         a.info("Preparing level \"" + var6 + "\"");
         
@@ -255,6 +265,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         
         long var14 = System.nanoTime() - var4;
         String var16 = String.format("%.3fs", new Object[] { Double.valueOf(var14 / 1.0E9D) });
+
         a.info("Done (" + var16 + ")! For help, type \"help\" or \"?\"");
 
         // CanaryMod: Change configuration
@@ -291,6 +302,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     public void loadWorld(String name, long seed, WorldType type, World.GeneratorType typeGen) {
         this.initWorld(new OAnvilSaveConverter(new File("worlds/"), type), name, seed, OWorldType.a(typeGen.name()), type);
     }
+
     // CanaryMod desc: initWorld also changed signature
     private void initWorld(OISaveFormat var1, String var2, long var3, OWorldType var5, WorldType type) {
         if (var1.a(var2)) {
@@ -301,9 +313,10 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         
         // CanaryMod: custom world configuration
         WorldConfiguration config = Configuration.getWorldConfig(var2);
-//        this.worldServer = new OWorldServer[3];
-//        this.g = new long[this.worldServer.length][100]; //CanaryMod Moved to CanaryWorld<init>
+        // this.worldServer = new OWorldServer[3];
+        // this.g = new long[this.worldServer.length][100]; //CanaryMod Moved to CanaryWorld<init>
         int var6 = config.getGameMode().getId();
+
         var6 = OWorldSettings.a(var6);
         a.info("Default game type: " + var6);
         boolean var7 = config.generatesStructures();
@@ -311,6 +324,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         OAnvilSaveHandler var9 = new OAnvilSaveHandler(new File("worlds/"), var2, true, type);
 
         int var11 = type.getId();
+
         if (var11 == 0) {
             toLoad = new OWorldServer(this, var9, var2, var11, var8);
             
@@ -318,11 +332,12 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             toLoad = new OWorldServerMulti(this, var9, var2, var11, var8, new OMapStorage(var9));
         }
 
-            toLoad.a(new OWorldManager(this, toLoad));
-            toLoad.q = config.getDifficulty().getId();
-            toLoad.a(config.canSpawnMonsters(), this.o);
-            toLoad.s().setGameMode(var6);
+        toLoad.a(new OWorldManager(this, toLoad));
+        toLoad.q = config.getDifficulty().getId();
+        toLoad.a(config.canSpawnMonsters(), this.o);
+        toLoad.s().setGameMode(var6);
         CanaryWorld world = new CanaryWorld(var2, toLoad, type);
+
         toLoad.setCanaryWorld(world);
         worldManager.addWorld(world);
         this.h.a(toLoad);
@@ -331,31 +346,35 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         long var12 = System.currentTimeMillis();
 
         // var14 is level: dimension. 0 = overworld.
-            a.info("Preparing start region for level " + world.getFqName());
-            OWorldServer var15 = toLoad;
-            OChunkCoordinates var16 = var15.p();
+        a.info("Preparing start region for level " + world.getFqName());
+        OWorldServer var15 = toLoad;
+        OChunkCoordinates var16 = var15.p();
 
-            for (int var17 = -var23; var17 <= var23 && this.B; var17 += 16) {
-                for (int var18 = -var23; var18 <= var23 && this.B; var18 += 16) {
-                    long var19 = System.currentTimeMillis();
-                    if (var19 < var12) {
-                        var12 = var19;
-                    }
+        for (int var17 = -var23; var17 <= var23 && this.B; var17 += 16) {
+            for (int var18 = -var23; var18 <= var23 && this.B; var18 += 16) {
+                long var19 = System.currentTimeMillis();
 
-                    if (var19 > var12 + 1000L) {
-                        int var21 = (var23 * 2 + 1) * (var23 * 2 + 1);
-                        int var22 = (var17 + var23) * (var23 * 2 + 1) + var18 + 1;
-                        this.b("Preparing spawn area", var22 * 100 / var21); // print the percentage
-                        var12 = var19;
-                    }
+                if (var19 < var12) {
+                    var12 = var19;
+                }
 
-                    // loads the spawn chunk
-                    var15.G.c(var16.a + var17 >> 4, var16.c + var18 >> 4);
+                if (var19 > var12 + 1000L) {
+                    int var21 = (var23 * 2 + 1) * (var23 * 2 + 1);
+                    int var22 = (var17 + var23) * (var23 * 2 + 1) + var18 + 1;
 
-                    // updates all lighting, unless the server stops
-                    while (var15.z() && this.B);
+                    this.b("Preparing spawn area", var22 * 100 / var21); // print the percentage
+                    var12 = var19;
+                }
+
+                // loads the spawn chunk
+                var15.G.c(var16.a + var17 >> 4, var16.c + var18 >> 4);
+
+                // updates all lighting, unless the server stops
+                while (var15.z() && this.B) {
+                    ;
                 }
             }
+        }
 
         this.t();
     }
@@ -373,14 +392,15 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
     private void u() {
         a.info("Saving chunks");
-        //CanaryMod multiworld
+        // CanaryMod multiworld
         for (World w : worldManager.getAllWorlds()) {
-            OWorldServer var2 = (OWorldServer) ((CanaryWorld)w).getHandle();
-             // saves the world
+            OWorldServer var2 = (OWorldServer) ((CanaryWorld) w).getHandle();
+
+            // saves the world
             try {
                 var2.a(true, (OIProgressUpdate) null);
             } catch (IOException e1) {
-                Logman.logStackTrace("IOException while saving "+w.getName()+" in Dimension "+w.getType().getName(), e1);
+                Logman.logStackTrace("IOException while saving " + w.getName() + " in Dimension " + w.getType().getName(), e1);
             }
             var2.A();
         }
@@ -392,7 +412,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
             // save the player states
             this.h.g();
         }
-        //CanaryMod just call private u() once here, the worlds are iterated over there
+        // CanaryMod just call private u() once here, the worlds are iterated over there
         this.u();
     }
 
@@ -421,6 +441,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                     for (long var3 = 0L; this.B; Thread.sleep(1L)) {
                         long var5 = System.currentTimeMillis();
                         long var7 = var5 - var1;
+
                         if (var7 > 2000L) {
                             a.warning("Can\'t keep up! Did the system time change, or is the server overloaded?");
                             var7 = 2000L;
@@ -434,15 +455,15 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                         var3 += var7;
                         var1 = var5;
                         
-                        //CanaryMod multiworld sleeping checks
+                        // CanaryMod multiworld sleeping checks
                         boolean allSleeping = true;
-                        for(World canaryWorld : worldManager.getAllWorlds()) {
-                            allSleeping &= ((CanaryWorld)canaryWorld).getHandle().v();
+
+                        for (World canaryWorld : worldManager.getAllWorlds()) {
+                            allSleeping &= ((CanaryWorld) canaryWorld).getHandle().v();
 
                         }
                         
-                        
-                        if (allSleeping) { //CanaryMultiworld check if all players are deeply sleeping
+                        if (allSleeping) { // CanaryMultiworld check if all players are deeply sleeping
                             this.w();
                             var3 = 0L;
                         } else {
@@ -576,6 +597,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         while (var4.hasNext()) {
             String var5 = var4.next();
             int var6 = b.get(var5).intValue();
+
             if (var6 > 0) {
                 b.put(var5, Integer.valueOf(var6 - 1));
             } else {
@@ -584,6 +606,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         }
 
         int var11;
+
         for (var11 = 0; var11 < var3.size(); ++var11) {
             b.remove(var3.get(var11));
         }
@@ -591,16 +614,19 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
         OAxisAlignedBB.a();
         OVec3D.a();
         ++this.j;
-//        for (var11 = 0; var11 < this.worldServer.length; ++var11) {
-        for(World level : worldManager.getAllWorlds()) {
+        // for (var11 = 0; var11 < this.worldServer.length; ++var11) {
+        for (World level : worldManager.getAllWorlds()) {
             long var7 = System.nanoTime();
+
             if (var11 == 0 || Configuration.getWorldConfig(level.getName()).isNetherAllowed()) {
-                OWorldServer var9 = (OWorldServer) ((CanaryWorld)level).getHandle();
+                OWorldServer var9 = (OWorldServer) ((CanaryWorld) level).getHandle();
+
                 if (this.j % 20 == 0) {
-                    for(Player p : cfgManager.getAllPlayers()) {
-                        OEntityPlayerMP player = ((CanaryPlayer)p).getHandle();
-                        if(player.bi.hashCode() == var9.hashCode()) {
-                            ((CanaryPlayer)p).getHandle().getServerHandler().sendPacket(new OPacket4UpdateTime(var9.o()) );
+                    for (Player p : cfgManager.getAllPlayers()) {
+                        OEntityPlayerMP player = ((CanaryPlayer) p).getHandle();
+
+                        if (player.bi.hashCode() == var9.hashCode()) {
+                            ((CanaryPlayer) p).getHandle().getServerHandler().sendPacket(new OPacket4UpdateTime(var9.o()));
                         }
                     }
                 }
@@ -619,21 +645,21 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
                 }
             }
             level.setNanoTick(this.j % 100, System.nanoTime() - var7);
-//            this.g[var11][this.j % 100] = System.nanoTime() - var7; //CanaryMod look up!
+            // this.g[var11][this.j % 100] = System.nanoTime() - var7; //CanaryMod look up!
         }
 
         this.c.a();
         this.h.b();
 
-        //CanaryMod: Changes for multiworld stuff
-//        for (var11 = 0; var11 < this.entityTrackerArray.length; ++var11) {
-//            this.entityTrackerArray[var11].a();
-//        }
+        // CanaryMod: Changes for multiworld stuff
+        // for (var11 = 0; var11 < this.entityTrackerArray.length; ++var11) {
+        // this.entityTrackerArray[var11].a();
+        // }
         
-        for(World w : worldManager.getAllWorlds()) {
+        for (World w : worldManager.getAllWorlds()) {
             w.getEntityTracker().updateTrackedEntities();
         }
-        //CanaryMod end
+        // CanaryMod end
         for (var11 = 0; var11 < this.C.size(); ++var11) {
             this.C.get(var11).a();
         }
@@ -662,6 +688,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     public void b() {
         while (this.D.size() > 0) {
             OServerCommand var1 = this.D.remove(0);
+
             this.A.a(var1);
         }
 
@@ -676,6 +703,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
         try {
             OMinecraftServer var1 = new OMinecraftServer();
+
             if (!GraphicsEnvironment.isHeadless() && (var0.length <= 0 || !var0[0].equals("nogui"))) {
                 OServerGUI.a(var1);
             }
@@ -707,14 +735,12 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
 
     @Deprecated
     public OWorldServer a(int var1) {
-        throw new UnsupportedOperationException("OMinecraftServer.a(int) has"
-                + " been replaced by WorldManager.getDimension(String, int).");
+        throw new UnsupportedOperationException("OMinecraftServer.a(int) has" + " been replaced by WorldManager.getDimension(String, int).");
     }
 
     @Deprecated
     public OEntityTracker b(int var1) {
-        throw new UnsupportedOperationException("OMinecraftServer.b(int) has"
-                + " been replaced by Dimension.getEntityTracker()");
+        throw new UnsupportedOperationException("OMinecraftServer.b(int) has" + " been replaced by Dimension.getEntityTracker()");
     }
 
     @Override
@@ -740,6 +766,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     @Override
     public String e() {
         File var1 = this.d.c();
+
         return var1 != null ? var1.getAbsolutePath() : "No settings file";
     }
 
@@ -789,8 +816,7 @@ public class OMinecraftServer implements Runnable, OICommandListener, OIServer {
     }
 
     @Override
-    public void o() {
-    }
+    public void o() {}
 
     @Override
     public String d(String var1) {

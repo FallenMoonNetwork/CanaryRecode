@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.CanaryTNTPrimed;
 import net.canarymod.api.entity.TNTPrimed;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityTNTPrimed extends OEntity {
 
@@ -24,6 +26,7 @@ public class OEntityTNTPrimed extends OEntity {
         this(var1);
         this.c(var2, var4, var6);
         float var8 = (float) (Math.random() * 3.1415927410125732D * 2.0D);
+
         this.bp = (-((float) Math.sin(var8)) * 0.02F);
         this.bq = 0.20000000298023224D;
         this.br = (-((float) Math.cos(var8)) * 0.02F);
@@ -35,8 +38,7 @@ public class OEntityTNTPrimed extends OEntity {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     @Override
     protected boolean g_() {
@@ -79,7 +81,8 @@ public class OEntityTNTPrimed extends OEntity {
 
     private void k() {
         float var1 = 4.0F;
-        this.bi.a(this, this.bm, this.bn, this.bo, var1); //CanaryMod added 'this' as entity param
+
+        this.bi.a(this, this.bm, this.bn, this.bo, var1); // CanaryMod added 'this' as entity param
     }
 
     @Override
@@ -93,7 +96,7 @@ public class OEntityTNTPrimed extends OEntity {
     }
     
     @Override
-    public CanaryEntity getCanaryEntity(){
+    public CanaryEntity getCanaryEntity() {
         return (CanaryEntity) tntprimed;
     }
 }

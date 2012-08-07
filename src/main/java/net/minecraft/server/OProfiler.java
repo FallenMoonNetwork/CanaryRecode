@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class OProfiler {
 
@@ -33,8 +35,10 @@ public class OProfiler {
         if (a) {
             long var0 = System.nanoTime();
             long var2 = ((Long) c.remove(c.size() - 1)).longValue();
+
             b.remove(b.size() - 1);
             long var4 = var0 - var2;
+
             if (e.containsKey(d)) {
                 e.put(d, Long.valueOf(((Long) e.get(d)).longValue() + var4));
             } else {

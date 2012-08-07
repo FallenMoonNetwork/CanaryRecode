@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
@@ -8,6 +9,7 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityXPOrb extends OEntity {
 
@@ -41,8 +43,7 @@ public class OEntityXPOrb extends OEntity {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     @Override
     public void F_() {
@@ -65,12 +66,14 @@ public class OEntityXPOrb extends OEntity {
         this.g(this.bm, (this.bw.b + this.bw.e) / 2.0D, this.bo);
         double var1 = 8.0D;
         OEntityPlayer var3 = this.bi.a(this, var1);
+
         if (var3 != null) {
             double var4 = (var3.bm - this.bm) / var1;
             double var6 = (var3.bn + var3.B() - this.bn) / var1;
             double var8 = (var3.bo - this.bo) / var1;
             double var10 = Math.sqrt(var4 * var4 + var6 * var6 + var8 * var8);
             double var12 = 1.0D - var10;
+
             if (var12 > 0.0D) {
                 var12 *= var12;
                 this.bp += var4 / var10 * var12 * 0.1D;
@@ -81,9 +84,11 @@ public class OEntityXPOrb extends OEntity {
 
         this.a(this.bp, this.bq, this.br);
         float var14 = 0.98F;
+
         if (this.bx) {
             var14 = 0.58800006F;
             int var15 = this.bi.a(OMathHelper.b(this.bm), OMathHelper.b(this.bw.b) - 1, OMathHelper.b(this.bo));
+
             if (var15 > 0) {
                 var14 = OBlock.m[var15].ce * 0.98F;
             }

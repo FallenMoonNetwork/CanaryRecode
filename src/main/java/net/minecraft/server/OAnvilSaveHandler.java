@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.File;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import net.minecraft.server.OWorldProvider;
 import net.minecraft.server.OWorldProviderEnd;
 import net.minecraft.server.OWorldProviderHell;
 
+
 public class OAnvilSaveHandler extends OSaveHandler {
 
     public OAnvilSaveHandler(File var1, String var2, boolean var3, WorldType type) {
@@ -22,8 +24,8 @@ public class OAnvilSaveHandler extends OSaveHandler {
 
     @Override
     public OIChunkLoader a(OWorldProvider var1) {
-        //CanaryMod changed the whole thing since we have recollection of the world type we're serving!
-        return new OAnvilChunkLoader(new File(getWorldBaseDir(), getBaseName()+"/"+getBaseName()+"_"+this.type.getName()));
+        // CanaryMod changed the whole thing since we have recollection of the world type we're serving!
+        return new OAnvilChunkLoader(new File(getWorldBaseDir(), getBaseName() + "/" + getBaseName() + "_" + this.type.getName()));
     }
 
     @Override

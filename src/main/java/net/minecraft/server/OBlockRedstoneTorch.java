@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,6 +12,7 @@ import net.minecraft.server.OBlockTorch;
 import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.ORedstoneUpdateInfo;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockRedstoneTorch extends OBlockTorch {
 
@@ -31,6 +33,7 @@ public class OBlockRedstoneTorch extends OBlockTorch {
 
         for (int var7 = 0; var7 < b.size(); ++var7) {
             ORedstoneUpdateInfo var8 = (ORedstoneUpdateInfo) b.get(var7);
+
             if (var8.a == var2 && var8.b == var3 && var8.c == var4) {
                 ++var6;
                 if (var6 >= 8) {
@@ -89,12 +92,14 @@ public class OBlockRedstoneTorch extends OBlockTorch {
             return false;
         } else {
             int var6 = var1.c(var2, var3, var4);
+
             return var6 == 5 && var5 == 1 ? false : (var6 == 3 && var5 == 3 ? false : (var6 == 4 && var5 == 2 ? false : (var6 == 1 && var5 == 5 ? false : var6 != 2 || var5 != 4)));
         }
     }
 
     private boolean g(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
+
         return var5 == 5 && var1.j(var2, var3 - 1, var4, 0) ? true : (var5 == 3 && var1.j(var2, var3, var4 - 1, 2) ? true : (var5 == 4 && var1.j(var2, var3, var4 + 1, 3) ? true : (var5 == 1 && var1.j(var2 - 1, var3, var4, 4) ? true : var5 == 2 && var1.j(var2 + 1, var3, var4, 5))));
     }
 
@@ -109,13 +114,14 @@ public class OBlockRedstoneTorch extends OBlockTorch {
         if (this.a) {
             if (var6) {
                 var1.b(var2, var3, var4, OBlock.aP.bO, var1.c(var2, var3, var4));
-                //CanaryMod - Control redstone lamp power
+                // CanaryMod - Control redstone lamp power
                 RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), 1, 0);
+
                 Canary.hooks().callHook(hook);
-                if(hook.isCanceled()) {
+                if (hook.isCanceled()) {
                     return;
                 }
-                if(hook.getNewLevel() == 0) {
+                if (hook.getNewLevel() == 0) {
                     if (this.a(var1, var2, var3, var4, true)) {
                         var1.a((var2 + 0.5F), (var3 + 0.5F), (var4 + 0.5F), "random.fizz", 0.5F, 2.6F + (var1.r.nextFloat() - var1.r.nextFloat()) * 0.8F);
 
@@ -123,6 +129,7 @@ public class OBlockRedstoneTorch extends OBlockTorch {
                             double var8 = var2 + var5.nextDouble() * 0.6D + 0.2D;
                             double var10 = var3 + var5.nextDouble() * 0.6D + 0.2D;
                             double var12 = var4 + var5.nextDouble() * 0.6D + 0.2D;
+
                             var1.a("smoke", var8, var10, var12, 0.0D, 0.0D, 0.0D);
                         }
                     }

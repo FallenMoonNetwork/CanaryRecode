@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +9,7 @@ import net.minecraft.server.OEntityAINearestAttackableTargetSorter;
 import net.minecraft.server.OEntityAITarget;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityPlayer;
+
 
 public class OEntityAINearestAttackableTarget extends OEntityAITarget {
 
@@ -36,18 +38,21 @@ public class OEntityAINearestAttackableTarget extends OEntityAITarget {
         } else {
             if (this.b == OEntityPlayer.class) {
                 OEntityPlayer var1 = this.c.bi.b(this.c, this.d);
+
                 if (this.a(var1, false)) {
                     this.a = var1;
                     return true;
                 }
             } else {
                 List var5 = this.c.bi.a(this.b, this.c.bw.b(this.d, 4.0D, this.d));
+
                 Collections.sort(var5, this.g);
                 Iterator var2 = var5.iterator();
 
                 while (var2.hasNext()) {
                     OEntity var3 = (OEntity) var2.next();
                     OEntityLiving var4 = (OEntityLiving) var3;
+
                     if (this.a(var4, false)) {
                         this.a = var4;
                         return true;

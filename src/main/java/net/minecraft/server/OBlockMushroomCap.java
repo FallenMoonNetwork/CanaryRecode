@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMaterial;
+
 
 public class OBlockMushroomCap extends OBlock {
 
@@ -21,6 +23,7 @@ public class OBlockMushroomCap extends OBlock {
     @Override
     public int a(Random var1) {
         int var2 = var1.nextInt(10) - 7;
+
         if (var2 < 0) {
             var2 = 0;
         }

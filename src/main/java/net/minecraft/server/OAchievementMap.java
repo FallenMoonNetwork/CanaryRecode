@@ -1,14 +1,16 @@
 package net.minecraft.server;
 
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class OAchievementMap {
 
     public static OAchievementMap a = new OAchievementMap();
-    private Map<Integer,String> b = new HashMap<Integer,String>();
+    private Map<Integer, String> b = new HashMap<Integer, String>();
 
     private OAchievementMap() {
         super();
@@ -17,9 +19,11 @@ public class OAchievementMap {
             BufferedReader var1 = new BufferedReader(new InputStreamReader(OAchievementMap.class.getResourceAsStream("/achievement/map.txt")));
 
             String var2;
+
             while ((var2 = var1.readLine()) != null) {
                 String[] var3 = var2.split(",");
                 int var4 = Integer.parseInt(var3[0]);
+
                 this.b.put(Integer.valueOf(var4), var3[1]);
             }
 

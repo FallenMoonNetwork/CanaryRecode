@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutput;
@@ -19,6 +20,7 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.ONBTTagShort;
 import net.minecraft.server.OWorldSavedData;
 
+
 public class OMapStorage {
 
     private OISaveHandler a;
@@ -34,12 +36,14 @@ public class OMapStorage {
 
     public OWorldSavedData a(Class var1, String var2) {
         OWorldSavedData var3 = (OWorldSavedData) this.b.get(var2);
+
         if (var3 != null) {
             return var3;
         } else {
             if (this.a != null) {
                 try {
                     File var4 = this.a.b(var2);
+
                     if (var4 != null && var4.exists()) {
                         try {
                             var3 = (OWorldSavedData) var1.getConstructor(new Class[] { String.class }).newInstance(new Object[] { var2 });
@@ -49,6 +53,7 @@ public class OMapStorage {
 
                         FileInputStream var5 = new FileInputStream(var4);
                         ONBTTagCompound var6 = OCompressedStreamTools.a(var5);
+
                         var5.close();
                         var3.a(var6.m("data"));
                     }
@@ -82,6 +87,7 @@ public class OMapStorage {
     public void a() {
         for (int var1 = 0; var1 < this.c.size(); ++var1) {
             OWorldSavedData var2 = (OWorldSavedData) this.c.get(var1);
+
             if (var2.b()) {
                 this.a(var2);
                 var2.a(false);
@@ -94,12 +100,16 @@ public class OMapStorage {
         if (this.a != null) {
             try {
                 File var2 = this.a.b(var1.mapName);
+
                 if (var2 != null) {
                     ONBTTagCompound var3 = new ONBTTagCompound();
+
                     var1.b(var3);
                     ONBTTagCompound var4 = new ONBTTagCompound();
+
                     var4.a("data", var3);
                     FileOutputStream var5 = new FileOutputStream(var2);
+
                     OCompressedStreamTools.a(var4, var5);
                     var5.close();
                 }
@@ -118,18 +128,22 @@ public class OMapStorage {
             }
 
             File var1 = this.a.b("idcounts");
+
             if (var1 != null && var1.exists()) {
                 DataInputStream var2 = new DataInputStream(new FileInputStream(var1));
                 ONBTTagCompound var3 = OCompressedStreamTools.a((DataInput) var2);
+
                 var2.close();
                 Iterator var4 = var3.d().iterator();
 
                 while (var4.hasNext()) {
                     ONBTBase var5 = (ONBTBase) var4.next();
+
                     if (var5 instanceof ONBTTagShort) {
                         ONBTTagShort var6 = (ONBTTagShort) var5;
                         String var7 = var6.c();
                         short var8 = var6.a;
+
                         this.d.put(var7, Short.valueOf(var8));
                     }
                 }
@@ -142,6 +156,7 @@ public class OMapStorage {
 
     public int a(String var1) {
         Short var2 = (Short) this.d.get(var1);
+
         if (var2 == null) {
             var2 = Short.valueOf((short) 0);
         } else {
@@ -154,6 +169,7 @@ public class OMapStorage {
         } else {
             try {
                 File var3 = this.a.b("idcounts");
+
                 if (var3 != null) {
                     ONBTTagCompound var4 = new ONBTTagCompound();
                     Iterator var5 = this.d.keySet().iterator();
@@ -161,10 +177,12 @@ public class OMapStorage {
                     while (var5.hasNext()) {
                         String var6 = (String) var5.next();
                         short var7 = ((Short) this.d.get(var6)).shortValue();
+
                         var4.a(var6, var7);
                     }
 
                     DataOutputStream var9 = new DataOutputStream(new FileOutputStream(var3));
+
                     OCompressedStreamTools.a(var4, (DataOutput) var9);
                     var9.close();
                 }

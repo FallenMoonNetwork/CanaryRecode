@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -9,6 +10,7 @@ import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructurePieceTreasure;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentVillageHouse2 extends OComponentVillage {
 
@@ -23,11 +25,11 @@ public class OComponentVillageHouse2 extends OComponentVillage {
     }
 
     @Override
-    public void a(OStructureComponent var1, List var2, Random var3) {
-    }
+    public void a(OStructureComponent var1, List var2, Random var3) {}
 
     public static OComponentVillageHouse2 a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, 0, 0, 0, 10, 6, 7, var5);
+
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentVillageHouse2(var6, var1, var7, var5) : null;
     }
 
@@ -79,10 +81,12 @@ public class OComponentVillageHouse2 extends OComponentVillage {
         this.a(var1, OBlock.at.bO, this.c(OBlock.at.bO, 1), 1, 1, 4, var3);
         int var4;
         int var5;
+
         if (!this.c) {
             var4 = this.b(1);
             var5 = this.a(5, 5);
             int var6 = this.b(5, 5);
+
             if (var3.b(var5, var4, var6)) {
                 this.c = true;
                 this.a(var1, var3, var2, 5, 1, 5, a, 3 + var2.nextInt(6));

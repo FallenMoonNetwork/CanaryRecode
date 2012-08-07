@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryWolf;
 import net.minecraft.server.ODamageSource;
 import net.minecraft.server.OEntity;
@@ -30,6 +31,7 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OPathEntity;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityWolf extends OEntityTameable {
 
     private boolean b = false;
@@ -40,7 +42,7 @@ public class OEntityWolf extends OEntityTameable {
     private float j;
     private float k;
 
-    //CanaryMod wolf handler
+    // CanaryMod wolf handler
     private CanaryWolf canaryWolf;
     
     public OEntityWolf(OWorld var1) {
@@ -203,6 +205,7 @@ public class OEntityWolf extends OEntityTameable {
                 for (int var3 = 0; var3 < var2; ++var3) {
                     float var4 = (this.bS.nextFloat() * 2.0F - 1.0F) * this.bG * 0.5F;
                     float var5 = (this.bS.nextFloat() * 2.0F - 1.0F) * this.bG * 0.5F;
+
                     this.bi.a("splash", this.bm + var4, (var1 + 0.8F), this.bo + var5, this.bp, this.bq, this.br);
                 }
             }
@@ -223,6 +226,7 @@ public class OEntityWolf extends OEntityTameable {
     @Override
     public boolean a(ODamageSource var1, int var2) {
         OEntity var3 = var1.a();
+
         this.a.a(false);
         if (var3 != null && !(var3 instanceof OEntityPlayer) && !(var3 instanceof OEntityArrow)) {
             var2 = (var2 + 1) / 2;
@@ -234,12 +238,14 @@ public class OEntityWolf extends OEntityTameable {
     @Override
     public boolean a(OEntity var1) {
         int var2 = this.u_() ? 4 : 2;
+
         return var1.a(ODamageSource.a(this), var2);
     }
 
     @Override
     public boolean interact(OEntityPlayer var1) {
         OItemStack var2 = var1.k.d();
+
         if (!this.u_()) {
             if (var2 != null && var2.c == OItem.aW.bP && !this.E()) {
                 if (!var1.L.d) {
@@ -271,6 +277,7 @@ public class OEntityWolf extends OEntityTameable {
         } else {
             if (var2 != null && OItem.d[var2.c] instanceof OItemFood) {
                 OItemFood var3 = (OItemFood) OItem.d[var2.c];
+
                 if (var3.q() && this.bY.c(18) < 20) {
                     if (!var1.L.d) {
                         --var2.a;
@@ -311,6 +318,7 @@ public class OEntityWolf extends OEntityTameable {
 
     public void d(boolean var1) {
         byte var2 = this.bY.a(16);
+
         if (var1) {
             this.bY.b(16, Byte.valueOf((byte) (var2 | 2)));
         } else {
@@ -322,6 +330,7 @@ public class OEntityWolf extends OEntityTameable {
     @Override
     public OEntityAnimal a(OEntityAnimal var1) {
         OEntityWolf var2 = new OEntityWolf(this.bi);
+
         var2.a(this.A());
         var2.b(true);
         return var2;
@@ -341,6 +350,7 @@ public class OEntityWolf extends OEntityTameable {
             return false;
         } else {
             OEntityWolf var2 = (OEntityWolf) var1;
+
             return !var2.u_() ? false : (var2.v_() ? false : this.r_() && var2.r_());
         }
     }

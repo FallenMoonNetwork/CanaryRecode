@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIDoorInteract;
 import net.minecraft.server.OEntityLiving;
+
 
 public class OEntityAIOpenDoor extends OEntityAIDoorInteract {
 

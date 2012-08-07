@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.server.OAchievement;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OItem;
+
 
 public class OAchievementList {
 
@@ -45,8 +47,7 @@ public class OAchievementList {
         super();
     }
 
-    public static void a() {
-    }
+    public static void a() {}
 
     static {
         System.out.println(e.size() + " achievements");

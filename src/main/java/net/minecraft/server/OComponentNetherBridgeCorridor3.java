@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -8,6 +9,7 @@ import net.minecraft.server.OComponentNetherBridgeStartPiece;
 import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentNetherBridgeCorridor3 extends OComponentNetherBridgePiece {
 
@@ -24,6 +26,7 @@ public class OComponentNetherBridgeCorridor3 extends OComponentNetherBridgePiece
 
     public static OComponentNetherBridgeCorridor3 a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, -1, -7, 0, 5, 14, 10, var5);
+
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentNetherBridgeCorridor3(var6, var1, var7, var5) : null;
     }
 
@@ -35,6 +38,7 @@ public class OComponentNetherBridgeCorridor3 extends OComponentNetherBridgePiece
             int var6 = Math.max(1, 7 - var5);
             int var7 = Math.min(Math.max(var6 + 5, 14 - var5), 13);
             int var8 = var5;
+
             this.a(var1, var3, 0, 0, var5, 4, var6, var5, OBlock.bA.bO, OBlock.bA.bO, false);
             this.a(var1, var3, 1, var6 + 1, var5, 3, var7 - 1, var5, 0, 0, false);
             if (var5 <= 6) {

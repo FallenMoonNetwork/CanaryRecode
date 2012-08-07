@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import net.minecraft.server.ONetHandler;
 import net.minecraft.server.OPacket;
+
 
 public class OPacket254ServerPing extends OPacket {
 
@@ -12,12 +14,10 @@ public class OPacket254ServerPing extends OPacket {
     }
 
     @Override
-    public void a(DataInputStream var1) {
-    }
+    public void a(DataInputStream var1) {}
 
     @Override
-    public void a(DataOutputStream var1) {
-    }
+    public void a(DataOutputStream var1) {}
 
     @Override
     public void a(ONetHandler var1) {

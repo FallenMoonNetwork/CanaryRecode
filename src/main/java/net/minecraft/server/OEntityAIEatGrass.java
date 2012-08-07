@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityAIEatGrass extends OEntityAIBase {
 
@@ -27,6 +29,7 @@ public class OEntityAIEatGrass extends OEntityAIBase {
             int var1 = OMathHelper.b(this.b.bm);
             int var2 = OMathHelper.b(this.b.bn);
             int var3 = OMathHelper.b(this.b.bo);
+
             return this.c.a(var1, var2, var3) == OBlock.X.bO && this.c.c(var1, var2, var3) == 1 ? true : this.c.a(var1, var2 - 1, var3) == OBlock.u.bO;
         }
     }
@@ -59,6 +62,7 @@ public class OEntityAIEatGrass extends OEntityAIBase {
             int var1 = OMathHelper.b(this.b.bm);
             int var2 = OMathHelper.b(this.b.bn);
             int var3 = OMathHelper.b(this.b.bo);
+
             if (this.c.a(var1, var2, var3) == OBlock.X.bO) {
                 this.c.f(2001, var1, var2, var3, OBlock.X.bO + 4096);
                 this.c.e(var1, var2, var3, 0);

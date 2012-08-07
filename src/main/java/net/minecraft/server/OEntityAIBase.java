@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public abstract class OEntityAIBase {
 
     private int a = 0;
@@ -18,14 +19,11 @@ public abstract class OEntityAIBase {
         return true;
     }
 
-    public void c() {
-    }
+    public void c() {}
 
-    public void d() {
-    }
+    public void d() {}
 
-    public void e() {
-    }
+    public void e() {}
 
     public void a(int var1) {
         this.a = var1;

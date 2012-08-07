@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OAchievementList;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
@@ -7,6 +8,7 @@ import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OSlot;
+
 
 public class OSlotCrafting extends OSlot {
 
@@ -72,16 +74,18 @@ public class OSlotCrafting extends OSlot {
     public void c(OItemStack var1) {
         this.b(var1);
         for (int var2 = 0; var2 < this.a.getInventorySize(); ++var2) {
-            OItemStack var3 = this.a.getSlot(var2); //CanaryMod fixed deobfuscation failure
+            OItemStack var3 = this.a.getSlot(var2); // CanaryMod fixed deobfuscation failure
+
             if (var3 != null) {
                 
-                this.a.a(var2, 1); //Decrease item stack size
+                this.a.a(var2, 1); // Decrease item stack size
                 
                 if (var3.a().k()) {
                     OItemStack var4 = new OItemStack(var3.a().j());
+
                     if (!var3.a().e(var3) || !this.f.k.a(var4)) {
                         if (this.a.getSlot(var2) == null) {
-                            this.a.a(var2, var4); //CanaryMod fixed deobfuscation failure
+                            this.a.a(var2, var4); // CanaryMod fixed deobfuscation failure
                         } else {
                             this.f.b(var4);
                         }

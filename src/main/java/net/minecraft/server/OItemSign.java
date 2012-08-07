@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;
@@ -7,6 +8,7 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OTileEntitySign;
 import net.minecraft.server.OWorld;
+
 
 public class OItemSign extends OItem {
 
@@ -49,6 +51,7 @@ public class OItemSign extends OItem {
             } else {
                 if (var7 == 1) {
                     int var8 = OMathHelper.b(((var2.bs + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
+
                     var3.b(var4, var5, var6, OBlock.aD.bO, var8);
                 } else {
                     var3.b(var4, var5, var6, OBlock.aI.bO, var7);
@@ -56,6 +59,7 @@ public class OItemSign extends OItem {
 
                 --var1.a;
                 OTileEntitySign var9 = (OTileEntitySign) var3.b(var4, var5, var6);
+
                 if (var9 != null) {
                     var2.a(var9);
                 }

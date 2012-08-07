@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityCow;
 import net.minecraft.server.OEntityPlayer;
@@ -9,6 +10,7 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.OWorld;
+
 
 public class OItemBucket extends OItem {
 
@@ -28,6 +30,7 @@ public class OItemBucket extends OItem {
         double var9 = var3.bl + (var3.bo - var3.bl) * var4;
         boolean var11 = this.a == 0;
         OMovingObjectPosition var12 = this.a(var2, var3, var11);
+
         if (var12 == null) {
             return var1;
         } else {
@@ -35,6 +38,7 @@ public class OItemBucket extends OItem {
                 int var13 = var12.b;
                 int var14 = var12.c;
                 int var15 = var12.d;
+
                 if (!var2.a(var3, var13, var14, var15)) {
                     return var1;
                 }

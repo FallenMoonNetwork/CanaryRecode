@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import net.minecraft.server.ONBTBase;
+
 
 public class ONBTTagEnd extends ONBTBase {
 
@@ -11,12 +13,10 @@ public class ONBTTagEnd extends ONBTBase {
     }
 
     @Override
-    void a(DataInput var1) {
-    }
+    void a(DataInput var1) {}
 
     @Override
-    void a(DataOutput var1) {
-    }
+    void a(DataOutput var1) {}
 
     @Override
     public byte a() {

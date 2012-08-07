@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMapGenBase;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OMapGenRavine extends OMapGenBase {
 
@@ -20,12 +22,15 @@ public class OMapGenRavine extends OMapGenBase {
         double var22 = (var4 * 16 + 8);
         float var24 = 0.0F;
         float var25 = 0.0F;
+
         if (var16 <= 0) {
             int var26 = this.b * 16 - 16;
+
             var16 = var26 - var19.nextInt(var26 / 4);
         }
 
         boolean var64 = false;
+
         if (var15 == -1) {
             var15 = var16 / 2;
             var64 = true;
@@ -44,10 +49,12 @@ public class OMapGenRavine extends OMapGenBase {
         for (; var15 < var16; ++var15) {
             double var29 = 1.5D + (OMathHelper.a(var15 * 3.1415927F / var16) * var12 * 1.0F);
             double var31 = var29 * var17;
+
             var29 *= var19.nextFloat() * 0.25D + 0.75D;
             var31 *= var19.nextFloat() * 0.25D + 0.75D;
             float var33 = OMathHelper.b(var14);
             float var34 = OMathHelper.a(var14);
+
             var6 += (OMathHelper.b(var13) * var33);
             var8 += var34;
             var10 += (OMathHelper.a(var13) * var33);
@@ -63,6 +70,7 @@ public class OMapGenRavine extends OMapGenBase {
                 double var37 = var10 - var22;
                 double var39 = (var16 - var15);
                 double var41 = (var12 + 2.0F + 16.0F);
+
                 if (var35 * var35 + var37 * var37 - var39 * var39 > var41 * var41) {
                     return;
                 }
@@ -74,6 +82,7 @@ public class OMapGenRavine extends OMapGenBase {
                     int var46 = OMathHelper.b(var8 + var31) + 1;
                     int var47 = OMathHelper.b(var10 - var29) - var4 * 16 - 1;
                     int var48 = OMathHelper.b(var10 + var29) - var4 * 16 + 1;
+
                     if (var43 < 0) {
                         var43 = 0;
                     }
@@ -102,6 +111,7 @@ public class OMapGenRavine extends OMapGenBase {
 
                     int var50;
                     int var53;
+
                     for (var50 = var43; !var49 && var50 < var44; ++var50) {
                         for (int var51 = var47; !var49 && var51 < var48; ++var51) {
                             for (int var52 = var46 + 1; !var49 && var52 >= var45 - 1; --var52) {
@@ -127,11 +137,14 @@ public class OMapGenRavine extends OMapGenBase {
                                 double var56 = ((var53 + var4 * 16) + 0.5D - var10) / var29;
                                 int var58 = (var50 * 16 + var53) * 128 + var46;
                                 boolean var59 = false;
+
                                 if (var54 * var54 + var56 * var56 < 1.0D) {
                                     for (int var60 = var46 - 1; var60 >= var45; --var60) {
                                         double var61 = (var60 + 0.5D - var8) / var31;
+
                                         if ((var54 * var54 + var56 * var56) * this.a[var60] + var61 * var61 / 6.0D < 1.0D) {
                                             byte var63 = var5[var58];
+
                                             if (var63 == OBlock.u.bO) {
                                                 var59 = true;
                                             }
@@ -176,6 +189,7 @@ public class OMapGenRavine extends OMapGenBase {
                 float var15 = this.c.nextFloat() * 3.1415927F * 2.0F;
                 float var16 = (this.c.nextFloat() - 0.5F) * 2.0F / 8.0F;
                 float var17 = (this.c.nextFloat() * 2.0F + this.c.nextFloat()) * 2.0F;
+
                 this.a(this.c.nextLong(), var4, var5, var6, var7, var9, var11, var17, var15, var16, 0, 0, 3.0D);
             }
 

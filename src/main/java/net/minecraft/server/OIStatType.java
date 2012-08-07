@@ -1,4 +1,4 @@
 package net.minecraft.server;
 
-public interface OIStatType {
-}
+
+public interface OIStatType {}

@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OPacket;
 import net.minecraft.server.OPacket130UpdateSign;
 import net.minecraft.server.OTileEntity;
+
 
 public class OTileEntitySign extends OTileEntity {
 

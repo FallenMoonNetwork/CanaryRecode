@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -7,6 +8,7 @@ import net.minecraft.server.OComponentVillage;
 import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentVillageHouse3 extends OComponentVillage {
 
@@ -19,11 +21,11 @@ public class OComponentVillageHouse3 extends OComponentVillage {
     }
 
     @Override
-    public void a(OStructureComponent var1, List var2, Random var3) {
-    }
+    public void a(OStructureComponent var1, List var2, Random var3) {}
 
     public static OComponentVillageHouse3 a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, 0, 0, 0, 9, 7, 12, var5);
+
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentVillageHouse3(var6, var1, var7, var5) : null;
     }
 
@@ -63,6 +65,7 @@ public class OComponentVillageHouse3 extends OComponentVillage {
 
         int var6;
         int var7;
+
         for (var6 = -1; var6 <= 2; ++var6) {
             for (var7 = 0; var7 <= 8; ++var7) {
                 this.a(var1, OBlock.at.bO, var4, var7, 4 + var6, var6, var3);
@@ -80,6 +83,7 @@ public class OComponentVillageHouse3 extends OComponentVillage {
         var6 = this.c(OBlock.at.bO, 0);
 
         int var8;
+
         for (var7 = 4; var7 >= 1; --var7) {
             this.a(var1, OBlock.x.bO, 0, var7, 2 + var7, 7 - var7, var3);
 
@@ -94,6 +98,7 @@ public class OComponentVillageHouse3 extends OComponentVillage {
         this.a(var1, OBlock.at.bO, var7, 6, 6, 4, var3);
 
         int var9;
+
         for (var8 = 6; var8 <= 8; ++var8) {
             for (var9 = 5; var9 <= 10; ++var9) {
                 this.a(var1, OBlock.at.bO, var7, var8, 12 - var8, var9, var3);

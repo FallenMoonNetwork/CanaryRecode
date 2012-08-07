@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanarySquid;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OEntityWaterMob;
@@ -9,6 +10,7 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public class OEntitySquid extends OEntityWaterMob {
 
@@ -27,7 +29,7 @@ public class OEntitySquid extends OEntityWaterMob {
     private float p = 0.0F;
     private float q = 0.0F;
     
-    //CanaryMod squid handler
+    // CanaryMod squid handler
     private CanarySquid canarySquid;
 
     public OEntitySquid(OWorld var1) {
@@ -45,6 +47,7 @@ public class OEntitySquid extends OEntityWaterMob {
     public CanarySquid getCanarySquid() {
         return canarySquid;
     }
+
     @Override
     public int d() {
         return 10;
@@ -122,6 +125,7 @@ public class OEntitySquid extends OEntityWaterMob {
 
         if (this.aU()) {
             float var1;
+
             if (this.h < 3.1415927F) {
                 var1 = this.h / 3.1415927F;
                 this.j = OMathHelper.a(var1 * var1 * 3.1415927F) * 3.1415927F * 0.25F;
@@ -174,6 +178,7 @@ public class OEntitySquid extends OEntityWaterMob {
             this.o = this.p = this.q = 0.0F;
         } else if (this.bS.nextInt(50) == 0 || !this.bV || this.o == 0.0F && this.p == 0.0F && this.q == 0.0F) {
             float var1 = this.bS.nextFloat() * 3.1415927F * 2.0F;
+
             this.o = OMathHelper.b(var1) * 0.2F;
             this.p = -0.1F + this.bS.nextFloat() * 0.2F;
             this.q = OMathHelper.a(var1) * 0.2F;

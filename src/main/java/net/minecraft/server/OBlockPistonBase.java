@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 
 import net.canarymod.Canary;
@@ -20,11 +21,12 @@ import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OTileEntityPiston;
 import net.minecraft.server.OWorld;
 
+
 public class OBlockPistonBase extends OBlock {
 
     private boolean a;
     private static boolean b;
-    private boolean attemptRetractBlock; //CanaryMod
+    private boolean attemptRetractBlock; // CanaryMod
 
     public OBlockPistonBase(int var1, int var2, boolean var3) {
         super(var1, var2, OMaterial.E);
@@ -36,6 +38,7 @@ public class OBlockPistonBase extends OBlock {
     @Override
     public int a(int var1, int var2) {
         int var3 = d(var2);
+
         return var3 > 5 ? this.bN : (var1 == var3 ? (!e(var2) && this.bV <= 0.0D && this.bW <= 0.0D && this.bX <= 0.0D && this.bY >= 1.0D && this.bZ >= 1.0D && this.ca >= 1.0D ? this.bN : 110) : (var1 == OFacing.a[var3] ? 109 : 108));
     }
 
@@ -57,6 +60,7 @@ public class OBlockPistonBase extends OBlock {
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = c(var1, var2, var3, var4, (OEntityPlayer) var5);
+
         var1.c(var2, var3, var4, var6);
         if (!var1.F && !b) {
             this.g(var1, var2, var3, var4);
@@ -84,32 +88,35 @@ public class OBlockPistonBase extends OBlock {
         int var5 = var1.c(var2, var3, var4);
         int var6 = d(var5);
         boolean var7 = this.f(var1, var2, var3, var4, var6);
+
         if (var5 != 7) {
             if (var7 && !e(var5)) {
                 if (g(var1, var2, var3, var4, var6)) {
                     
-                    //CanaryMod onPistonExtend start
-                    Block piston = new CanaryBlock((this.a ? (short)29 : (short)33), (byte)0, var2, var3, var4, var1.getCanaryWorld());
-                    Block moving = new CanaryBlock((short)var1.a(var2 + OFacing.b[var6], var3 + OFacing.c[var6], var4 + OFacing.d[var6]), (byte)0, (var2 + OFacing.b[var6]), (var3 + OFacing.c[var6]), (var4 + OFacing.d[var6]), var1.getCanaryWorld());
+                    // CanaryMod onPistonExtend start
+                    Block piston = new CanaryBlock((this.a ? (short) 29 : (short) 33), (byte) 0, var2, var3, var4, var1.getCanaryWorld());
+                    Block moving = new CanaryBlock((short) var1.a(var2 + OFacing.b[var6], var3 + OFacing.c[var6], var4 + OFacing.d[var6]), (byte) 0, (var2 + OFacing.b[var6]), (var3 + OFacing.c[var6]), (var4 + OFacing.d[var6]), var1.getCanaryWorld());
                     PistonHook hook = new PistonHook(piston, moving, true);
+
                     Canary.hooks().callHook(hook);
                     if (hook.isCanceled()) {
                         return;
                     }
-                    //CanaryMod onPistonExtend end
+                    // CanaryMod onPistonExtend end
                     
                     var1.d(var2, var3, var4, var6 | 8);
                     var1.e(var2, var3, var4, 0, var6);
                 }
             } else if (!var7 && e(var5)) {
                 
-                //CanaryMod onPistonRetract start
-                Block piston = new CanaryBlock((this.a ? (short)29 : (short)33), (byte)0, var2, var3, var4, var1.getCanaryWorld());
-                Block moving = new CanaryBlock((short)var1.a(var2 + OFacing.b[var6] * 2, var3 + OFacing.c[var6] * 2, var4 + OFacing.d[var6] * 2), (byte)0, (var2 + OFacing.b[var6]), (var3 + OFacing.c[var6]), (var4 + OFacing.d[var6]), var1.getCanaryWorld());
+                // CanaryMod onPistonRetract start
+                Block piston = new CanaryBlock((this.a ? (short) 29 : (short) 33), (byte) 0, var2, var3, var4, var1.getCanaryWorld());
+                Block moving = new CanaryBlock((short) var1.a(var2 + OFacing.b[var6] * 2, var3 + OFacing.c[var6] * 2, var4 + OFacing.d[var6] * 2), (byte) 0, (var2 + OFacing.b[var6]), (var3 + OFacing.c[var6]), (var4 + OFacing.d[var6]), var1.getCanaryWorld());
                 PistonHook hook = new PistonHook(piston, moving, false);
+
                 Canary.hooks().callHook(hook);
                 attemptRetractBlock = !hook.isCanceled();
-                //CanaryMod onPistonRetract end
+                // CanaryMod onPistonRetract end
                 
                 var1.d(var2, var3, var4, var6);
                 var1.e(var2, var3, var4, 1, var6);
@@ -134,6 +141,7 @@ public class OBlockPistonBase extends OBlock {
             }
         } else if (var5 == 1) {
             OTileEntity var8 = var1.b(var2 + OFacing.b[var6], var3 + OFacing.c[var6], var4 + OFacing.d[var6]);
+
             if (var8 != null && var8 instanceof OTileEntityPiston) {
                 ((OTileEntityPiston) var8).g();
             }
@@ -147,10 +155,13 @@ public class OBlockPistonBase extends OBlock {
                 int var12 = var1.a(var9, var10, var11);
                 int var13 = var1.c(var9, var10, var11);
                 boolean var14 = false;
+
                 if (var12 == OBlock.ac.bO) {
                     OTileEntity var15 = var1.b(var9, var10, var11);
+
                     if (var15 != null && var15 instanceof OTileEntityPiston) {
                         OTileEntityPiston var16 = (OTileEntityPiston) var15;
+
                         if (var16.f() == var6 && var16.e()) {
                             var16.g();
                             var12 = var16.c();
@@ -189,23 +200,29 @@ public class OBlockPistonBase extends OBlock {
     @Override
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
+
         if (e(var5)) {
             switch (d(var5)) {
             case 0:
                 this.a(0.0F, 0.25F, 0.0F, 1.0F, 1.0F, 1.0F);
                 break;
+
             case 1:
                 this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
                 break;
+
             case 2:
                 this.a(0.0F, 0.0F, 0.25F, 1.0F, 1.0F, 1.0F);
                 break;
+
             case 3:
                 this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.75F);
                 break;
+
             case 4:
                 this.a(0.25F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
                 break;
+
             case 5:
                 this.a(0.0F, 0.0F, 0.0F, 0.75F, 1.0F, 1.0F);
             }
@@ -248,6 +265,7 @@ public class OBlockPistonBase extends OBlock {
     private static int c(OWorld var0, int var1, int var2, int var3, OEntityPlayer var4) {
         if (OMathHelper.e((float) var4.bm - var1) < 2.0F && OMathHelper.e((float) var4.bo - var3) < 2.0F) {
             double var5 = var4.bn + 1.82D - var4.bF;
+
             if (var5 - var2 > 2.0D) {
                 return 1;
             }
@@ -258,6 +276,7 @@ public class OBlockPistonBase extends OBlock {
         }
 
         int var7 = OMathHelper.b((var4.bs * 4.0F / 360.0F) + 0.5D) & 3;
+
         return var7 == 0 ? 2 : (var7 == 1 ? 5 : (var7 == 2 ? 3 : (var7 == 3 ? 4 : 0)));
     }
 
@@ -330,6 +349,7 @@ public class OBlockPistonBase extends OBlock {
 
         while (true) {
             int var10;
+
             if (var9 < 13) {
                 if (var7 <= 0 || var7 >= 255) {
                     return false;
@@ -365,6 +385,7 @@ public class OBlockPistonBase extends OBlock {
                 int var11 = var8 - OFacing.d[var5];
                 int var12 = var1.a(var9, var10, var11);
                 int var13 = var1.c(var9, var10, var11);
+
                 if (var12 == this.bO && var9 == var2 && var10 == var3 && var11 == var4) {
                     var1.a(var6, var7, var8, OBlock.ac.bO, var5 | (this.a ? 8 : 0));
                     var1.a(var6, var7, var8, OBlockPistonMoving.a(OBlock.aa.bO, var5 | (this.a ? 8 : 0), var5, true, false));

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
@@ -7,6 +8,7 @@ import net.minecraft.server.OBlock;
 import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockPane extends OBlock {
 
@@ -45,6 +47,7 @@ public class OBlockPane extends OBlock {
         boolean var8 = this.d(var1.a(var2, var3, var4 + 1));
         boolean var9 = this.d(var1.a(var2 - 1, var3, var4));
         boolean var10 = this.d(var1.a(var2 + 1, var3, var4));
+
         if ((!var9 || !var10) && (var9 || var10 || var7 || var8)) {
             if (var9 && !var10) {
                 this.a(0.0F, 0.0F, 0.4375F, 0.5F, 1.0F, 0.5625F);
@@ -88,6 +91,7 @@ public class OBlockPane extends OBlock {
         boolean var10 = this.d(var1.a(var2, var3, var4 + 1));
         boolean var11 = this.d(var1.a(var2 - 1, var3, var4));
         boolean var12 = this.d(var1.a(var2 + 1, var3, var4));
+
         if ((!var11 || !var12) && (var11 || var12 || var9 || var10)) {
             if (var11 && !var12) {
                 var5 = 0.0F;

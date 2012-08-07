@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.util.Comparator;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAINearestAttackableTarget;
+
 
 public class OEntityAINearestAttackableTargetSorter implements Comparator {
 
@@ -19,6 +21,7 @@ public class OEntityAINearestAttackableTargetSorter implements Comparator {
     public int a(OEntity var1, OEntity var2) {
         double var3 = this.b.j(var1);
         double var5 = this.b.j(var2);
+
         return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
     }
 

@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OGenLayer;
 import net.minecraft.server.OIntCache;
+
 
 public class OGenLayerShore extends OGenLayer {
 
@@ -24,6 +26,7 @@ public class OGenLayerShore extends OGenLayer {
                 int var11;
                 int var12;
                 int var13;
+
                 if (var9 == OBiomeGenBase.p.M) {
                     var10 = var5[var8 + 1 + (var7 + 1 - 1) * (var3 + 2)];
                     var11 = var5[var8 + 1 + 1 + (var7 + 1) * (var3 + 2)];

@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+
 
 public class OItemReed extends OItem {
 
@@ -19,6 +21,7 @@ public class OItemReed extends OItem {
     @Override
     public boolean a(OItemStack var1, OEntityPlayer var2, OWorld var3, int var4, int var5, int var6, int var7) {
         int var8 = var3.a(var4, var5, var6);
+
         if (var8 == OBlock.aS.bO) {
             var7 = 1;
         } else if (var8 != OBlock.bu.bO && var8 != OBlock.X.bO && var8 != OBlock.Y.bO) {
@@ -54,6 +57,7 @@ public class OItemReed extends OItem {
         } else {
             if (var3.a(this.a, var4, var5, var6, false, var7)) {
                 OBlock var9 = OBlock.m[this.a];
+
                 if (var3.e(var4, var5, var6, this.a)) {
                     if (var3.a(var4, var5, var6) == this.a) {
                         OBlock.m[this.a].e(var3, var4, var5, var6, var7);

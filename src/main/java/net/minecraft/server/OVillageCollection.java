@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,6 +11,7 @@ import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OVillage;
 import net.minecraft.server.OVillageDoorInfo;
 import net.minecraft.server.OWorld;
+
 
 public class OVillageCollection {
 
@@ -39,6 +41,7 @@ public class OVillageCollection {
 
         while (var1.hasNext()) {
             OVillage var2 = (OVillage) var1.next();
+
             var2.a(this.e);
         }
 
@@ -52,6 +55,7 @@ public class OVillageCollection {
 
         while (var1.hasNext()) {
             OVillage var2 = (OVillage) var1.next();
+
             if (var2.g()) {
                 var1.remove();
             }
@@ -71,8 +75,10 @@ public class OVillageCollection {
         while (var7.hasNext()) {
             OVillage var8 = (OVillage) var7.next();
             float var9 = var8.a().c(var1, var2, var3);
+
             if (var9 < var6) {
                 int var10 = var4 + var8.b();
+
                 if (var9 <= (var10 * var10)) {
                     var5 = var8;
                     var6 = var9;
@@ -101,6 +107,7 @@ public class OVillageCollection {
                 if (var4.hasNext()) {
                     OVillage var5 = (OVillage) var4.next();
                     int var6 = (int) var5.a().b(var2.a, var2.b, var2.c);
+
                     if (var6 > 32 + var5.b()) {
                         continue;
                     }
@@ -111,6 +118,7 @@ public class OVillageCollection {
 
                 if (!var3) {
                     OVillage var7 = new OVillage(this.a);
+
                     var7.a(var2);
                     this.d.add(var7);
                 }
@@ -133,6 +141,7 @@ public class OVillageCollection {
                 for (int var7 = var1.c - var4; var7 < var1.c + var4; ++var7) {
                     if (this.e(var5, var6, var7)) {
                         OVillageDoorInfo var8 = this.b(var5, var6, var7);
+
                         if (var8 == null) {
                             this.c(var5, var6, var7);
                         } else {
@@ -149,17 +158,20 @@ public class OVillageCollection {
         Iterator var4 = this.c.iterator();
 
         OVillageDoorInfo var5;
+
         do {
             if (!var4.hasNext()) {
                 var4 = this.d.iterator();
 
                 OVillageDoorInfo var6;
+
                 do {
                     if (!var4.hasNext()) {
                         return null;
                     }
 
                     OVillage var7 = (OVillage) var4.next();
+
                     var6 = var7.d(var1, var2, var3);
                 } while (var6 == null);
 
@@ -176,6 +188,7 @@ public class OVillageCollection {
         int var4 = ((OBlockDoor) OBlock.aE).c((OIBlockAccess) this.a, var1, var2, var3);
         int var5;
         int var6;
+
         if (var4 != 0 && var4 != 2) {
             var5 = 0;
 
@@ -220,6 +233,7 @@ public class OVillageCollection {
         Iterator var4 = this.b.iterator();
 
         OChunkCoordinates var5;
+
         do {
             if (!var4.hasNext()) {
                 return false;
@@ -233,6 +247,7 @@ public class OVillageCollection {
 
     private boolean e(int var1, int var2, int var3) {
         int var4 = this.a.a(var1, var2, var3);
+
         return var4 == OBlock.aE.bO;
     }
 }

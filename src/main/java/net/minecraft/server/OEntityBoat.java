@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 
 import net.canarymod.api.entity.vehicle.CanaryBoat;
@@ -14,6 +15,7 @@ import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
 
+
 public class OEntityBoat extends OEntity {
 
     private int a;
@@ -23,7 +25,7 @@ public class OEntityBoat extends OEntity {
     private double e;
     private double f;
     
-    private CanaryBoat canaryBoat; //CanaryMod
+    private CanaryBoat canaryBoat; // CanaryMod
 
     public OEntityBoat(OWorld var1) {
         super(var1);
@@ -96,6 +98,7 @@ public class OEntityBoat extends OEntity {
                 }
 
                 int var3;
+
                 for (var3 = 0; var3 < 3; ++var3) {
                     this.a(OBlock.x.bO, 1, 0.0F);
                 }
@@ -139,6 +142,7 @@ public class OEntityBoat extends OEntity {
             double var5 = this.bw.b + (this.bw.e - this.bw.b) * (var4 + 0) / var1 - 0.125D;
             double var7 = this.bw.b + (this.bw.e - this.bw.b) * (var4 + 1) / var1 - 0.125D;
             OAxisAlignedBB var9 = OAxisAlignedBB.b(this.bw.a, var5, this.bw.c, this.bw.d, var7, this.bw.f);
+
             if (this.bi.b(var9, OMaterial.g)) {
                 var2 += 1.0D / var1;
             }
@@ -147,6 +151,7 @@ public class OEntityBoat extends OEntity {
         double var10 = Math.sqrt(this.bp * this.bp + this.br * this.br);
         double var12;
         double var14;
+
         if (var10 > 0.15D) {
             var12 = Math.cos(this.bs * 3.141592653589793D / 180.0D);
             var14 = Math.sin(this.bs * 3.141592653589793D / 180.0D);
@@ -156,6 +161,7 @@ public class OEntityBoat extends OEntity {
                 double var19 = (this.bS.nextInt(2) * 2 - 1) * 0.7D;
                 double var21;
                 double var23;
+
                 if (this.bS.nextBoolean()) {
                     var21 = this.bm - var12 * var17 * 0.8D + var14 * var19;
                     var23 = this.bo - var14 * var17 * 0.8D - var12 * var19;
@@ -170,6 +176,7 @@ public class OEntityBoat extends OEntity {
 
         double var25;
         double var27;
+
         if (this.bi.F) {
             if (this.a > 0) {
                 var12 = this.bm + (this.b - this.bm) / this.a;
@@ -251,6 +258,7 @@ public class OEntityBoat extends OEntity {
                     this.X();
 
                     int var29;
+
                     for (var29 = 0; var29 < 3; ++var29) {
                         this.a(OBlock.x.bO, 1, 0.0F);
                     }
@@ -274,6 +282,7 @@ public class OEntityBoat extends OEntity {
             }
 
             double var30;
+
             for (var30 = var14 - this.bs; var30 >= 180.0D; var30 -= 360.0D) {
                 ;
             }
@@ -294,9 +303,11 @@ public class OEntityBoat extends OEntity {
             this.c(this.bs, this.bt);
             List var32 = this.bi.b(this, this.bw.b(0.20000000298023224D, 0.0D, 0.20000000298023224D));
             int var33;
+
             if (var32 != null && var32.size() > 0) {
                 for (var33 = 0; var33 < var32.size(); ++var33) {
                     OEntity var34 = (OEntity) var32.get(var33);
+
                     if (var34 != this.bg && var34.e_() && var34 instanceof OEntityBoat) {
                         var34.k(this);
                     }
@@ -307,6 +318,7 @@ public class OEntityBoat extends OEntity {
                 int var37 = OMathHelper.b(this.bm + ((var33 % 2) - 0.5D) * 0.8D);
                 int var35 = OMathHelper.b(this.bn);
                 int var36 = OMathHelper.b(this.bo + ((var33 / 2) - 0.5D) * 0.8D);
+
                 if (this.bi.a(var37, var35, var36) == OBlock.aS.bO) {
                     this.bi.e(var37, var35, var36, 0);
                 }
@@ -324,17 +336,16 @@ public class OEntityBoat extends OEntity {
         if (this.bg != null) {
             double var1 = Math.cos(this.bs * 3.141592653589793D / 180.0D) * 0.4D;
             double var3 = Math.sin(this.bs * 3.141592653589793D / 180.0D) * 0.4D;
+
             this.bg.c(this.bm + var1, this.bn + this.x_() + this.bg.W(), this.bo + var3);
         }
     }
 
     @Override
-    protected void b(ONBTTagCompound var1) {
-    }
+    protected void b(ONBTTagCompound var1) {}
 
     @Override
-    protected void a(ONBTTagCompound var1) {
-    }
+    protected void a(ONBTTagCompound var1) {}
 
     @Override
     public boolean interact(OEntityPlayer var1) {

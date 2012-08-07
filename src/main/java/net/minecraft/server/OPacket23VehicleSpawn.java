@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import net.minecraft.server.OEntity;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONetHandler;
 import net.minecraft.server.OPacket;
+
 
 public class OPacket23VehicleSpawn extends OPacket {
 
@@ -42,6 +44,7 @@ public class OPacket23VehicleSpawn extends OPacket {
             double var6 = var1.bq;
             double var8 = var1.br;
             double var10 = 3.9D;
+
             if (var4 < -var10) {
                 var4 = -var10;
             }

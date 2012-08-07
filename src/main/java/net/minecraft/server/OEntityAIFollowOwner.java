@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityTameable;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OPathNavigate;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityAIFollowOwner extends OEntityAIBase {
 
@@ -33,6 +35,7 @@ public class OEntityAIFollowOwner extends OEntityAIBase {
     @Override
     public boolean a() {
         OEntityLiving var1 = this.d.w_();
+
         if (var1 == null) {
             return false;
         } else if (this.d.v_()) {

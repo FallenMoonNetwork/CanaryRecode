@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
@@ -7,6 +8,7 @@ import net.minecraft.server.OEntitySilverfish;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockSilverfish extends OBlock {
 
@@ -29,6 +31,7 @@ public class OBlockSilverfish extends OBlock {
     public void c(OWorld var1, int var2, int var3, int var4, int var5) {
         if (!var1.F) {
             OEntitySilverfish var6 = new OEntitySilverfish(var1);
+
             var6.c(var2 + 0.5D, var3, var4 + 0.5D, 0.0F, 0.0F);
             var1.b(var6);
             var6.aC();
@@ -53,6 +56,7 @@ public class OBlockSilverfish extends OBlock {
     @Override
     protected OItemStack a_(int var1) {
         OBlock var2 = OBlock.t;
+
         if (var1 == 1) {
             var2 = OBlock.w;
         }

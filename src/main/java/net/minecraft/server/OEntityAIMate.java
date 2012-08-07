@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -7,6 +8,7 @@ import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityAnimal;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityAIMate extends OEntityAIBase {
 
@@ -62,12 +64,14 @@ public class OEntityAIMate extends OEntityAIBase {
         Iterator var3 = var2.iterator();
 
         OEntityAnimal var5;
+
         do {
             if (!var3.hasNext()) {
                 return null;
             }
 
             OEntity var4 = (OEntity) var3.next();
+
             var5 = (OEntityAnimal) var4;
         } while (!this.d.b(var5));
 
@@ -76,6 +80,7 @@ public class OEntityAIMate extends OEntityAIBase {
 
     private void i() {
         OEntityAnimal var1 = this.d.a(this.e);
+
         if (var1 != null) {
             this.d.c(6000);
             this.e.c(6000);
@@ -90,6 +95,7 @@ public class OEntityAIMate extends OEntityAIBase {
                 double var4 = var2.nextGaussian() * 0.02D;
                 double var6 = var2.nextGaussian() * 0.02D;
                 double var8 = var2.nextGaussian() * 0.02D;
+
                 this.a.a("heart", this.d.bm + (var2.nextFloat() * this.d.bG * 2.0F) - this.d.bG, this.d.bn + 0.5D + (var2.nextFloat() * this.d.bH), this.d.bo + (var2.nextFloat() * this.d.bG * 2.0F) - this.d.bG, var4, var6, var8);
             }
 

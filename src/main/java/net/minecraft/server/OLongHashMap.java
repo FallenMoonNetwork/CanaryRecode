@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OLongHashMapEntry;
+
 
 public class OLongHashMap {
 
@@ -76,10 +78,12 @@ public class OLongHashMap {
     private void b(int var1) {
         OLongHashMapEntry[] var2 = this.a;
         int var3 = var2.length;
+
         if (var3 == 1073741824) {
             this.c = Integer.MAX_VALUE;
         } else {
             OLongHashMapEntry[] var4 = new OLongHashMapEntry[var1];
+
             this.a(var4);
             this.a = var4;
             this.c = (int) (var1 * this.d);
@@ -92,13 +96,16 @@ public class OLongHashMap {
 
         for (int var4 = 0; var4 < var2.length; ++var4) {
             OLongHashMapEntry var5 = var2[var4];
+
             if (var5 != null) {
                 var2[var4] = null;
 
                 OLongHashMapEntry var6;
+
                 do {
                     var6 = var5.c;
                     int var7 = a(var5.d, var3);
+
                     var5.c = var1[var7];
                     var1[var7] = var5;
                     var5 = var6;
@@ -110,6 +117,7 @@ public class OLongHashMap {
 
     public Object d(long var1) {
         OLongHashMapEntry var3 = this.e(var1);
+
         return var3 == null ? null : var3.b;
     }
 
@@ -120,6 +128,7 @@ public class OLongHashMap {
 
         OLongHashMapEntry var6;
         OLongHashMapEntry var7;
+
         for (var6 = var5; var6 != null; var6 = var7) {
             var7 = var6.c;
             if (var6.a == var1) {
@@ -142,6 +151,7 @@ public class OLongHashMap {
 
     private void a(int var1, long var2, Object var4, int var5) {
         OLongHashMapEntry var6 = this.a[var5];
+
         this.a[var5] = new OLongHashMapEntry(var1, var2, var4, var6);
         if (this.b++ >= this.c) {
             this.b(2 * this.a.length);

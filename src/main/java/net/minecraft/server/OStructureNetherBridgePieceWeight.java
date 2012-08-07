@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 class OStructureNetherBridgePieceWeight {
 
     public Class a;

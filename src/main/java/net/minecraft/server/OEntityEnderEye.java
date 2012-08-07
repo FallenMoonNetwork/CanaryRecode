@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityItem;
 import net.minecraft.server.OEntityPlayer;
@@ -8,6 +9,7 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityEnderEye extends OEntity {
 
@@ -24,8 +26,7 @@ public class OEntityEnderEye extends OEntity {
     }
 
     @Override
-    protected void b() {
-    }
+    protected void b() {}
 
     public OEntityEnderEye(OWorld var1, double var2, double var4, double var6) {
         super(var1);
@@ -39,6 +40,7 @@ public class OEntityEnderEye extends OEntity {
         double var6 = var1 - this.bm;
         double var8 = var4 - this.bo;
         float var10 = OMathHelper.a(var6 * var6 + var8 * var8);
+
         if (var10 > 12.0F) {
             this.b = this.bm + var6 / var10 * 12.0D;
             this.d = this.bo + var8 / var10 * 12.0D;
@@ -63,6 +65,7 @@ public class OEntityEnderEye extends OEntity {
         this.bn += this.bq;
         this.bo += this.br;
         float var1 = OMathHelper.a(this.bp * this.bp + this.br * this.br);
+
         this.bs = (float) (Math.atan2(this.bp, this.br) * 180.0D / 3.1415927410125732D);
 
         for (this.bt = (float) (Math.atan2(this.bq, var1) * 180.0D / 3.1415927410125732D); this.bt - this.bv < -180.0F; this.bv -= 360.0F) {
@@ -89,6 +92,7 @@ public class OEntityEnderEye extends OEntity {
             float var6 = (float) Math.sqrt(var2 * var2 + var4 * var4);
             float var7 = (float) Math.atan2(var4, var2);
             double var8 = var1 + (var6 - var1) * 0.0025D;
+
             if (var6 < 1.0F) {
                 var8 *= 0.8D;
                 this.bq *= 0.8D;
@@ -104,6 +108,7 @@ public class OEntityEnderEye extends OEntity {
         }
 
         float var10 = 0.25F;
+
         if (this.aU()) {
             for (int var11 = 0; var11 < 4; ++var11) {
                 this.bi.a("bubble", this.bm - this.bp * var10, this.bn - this.bq * var10, this.bo - this.br * var10, this.bp, this.bq, this.br);
@@ -128,16 +133,13 @@ public class OEntityEnderEye extends OEntity {
     }
 
     @Override
-    public void b(ONBTTagCompound var1) {
-    }
+    public void b(ONBTTagCompound var1) {}
 
     @Override
-    public void a(ONBTTagCompound var1) {
-    }
+    public void a(ONBTTagCompound var1) {}
 
     @Override
-    public void a_(OEntityPlayer var1) {
-    }
+    public void a_(OEntityPlayer var1) {}
 
     @Override
     public float b(float var1) {

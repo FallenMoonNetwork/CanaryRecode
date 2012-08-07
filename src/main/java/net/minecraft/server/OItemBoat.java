@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -13,6 +14,7 @@ import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OItemBoat extends OItem {
 
@@ -39,6 +41,7 @@ public class OItemBoat extends OItem {
         double var21 = 5.0D;
         OVec3D var23 = var13.c(var18 * var21, var17 * var21, var20 * var21);
         OMovingObjectPosition var24 = var2.a(var13, var23, true);
+
         if (var24 == null) {
             return var1;
         } else {
@@ -49,9 +52,11 @@ public class OItemBoat extends OItem {
 
             for (int var29 = 0; var29 < var28.size(); ++var29) {
                 OEntity var30 = (OEntity) var28.get(var29);
+
                 if (var30.o_()) {
                     float var31 = var30.j_();
                     OAxisAlignedBB var32 = var30.bw.b(var31, var31, var31);
+
                     if (var32.a(var13)) {
                         var26 = true;
                     }
@@ -65,6 +70,7 @@ public class OItemBoat extends OItem {
                     int var33 = var24.b;
                     int var34 = var24.c;
                     int var35 = var24.d;
+
                     if (!var2.F) {
                         if (var2.a(var33, var34, var35) == OBlock.aS.bO) {
                             --var34;

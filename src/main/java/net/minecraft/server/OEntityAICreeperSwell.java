@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityCreeper;
 import net.minecraft.server.OEntityLiving;
+
 
 public class OEntityAICreeperSwell extends OEntityAIBase {
 
@@ -18,6 +20,7 @@ public class OEntityAICreeperSwell extends OEntityAIBase {
     @Override
     public boolean a() {
         OEntityLiving var1 = this.a.at();
+
         return this.a.A() > 0 || var1 != null && this.a.j(var1) < 9.0D;
     }
 

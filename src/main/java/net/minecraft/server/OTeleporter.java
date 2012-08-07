@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OWorld;
+
 
 public class OTeleporter {
 
@@ -34,6 +36,7 @@ public class OTeleporter {
                         int var12 = var4 + var10;
                         int var13 = var5 + var9 * var7 - var8 * var6;
                         boolean var14 = var10 < 0;
+
                         var1.e(var11, var12, var13, var14 ? OBlock.ap.bO : 0);
                     }
                 }
@@ -54,6 +57,7 @@ public class OTeleporter {
         int var10 = OMathHelper.b(var2.bo);
 
         double var18;
+
         for (int var11 = var9 - var3; var11 <= var9 + var3; ++var11) {
             double var12 = var11 + 0.5D - var2.bm;
 
@@ -68,6 +72,7 @@ public class OTeleporter {
 
                         var18 = var17 + 0.5D - var2.bn;
                         double var20 = var12 * var12 + var18 * var18 + var15 * var15;
+
                         if (var4 < 0.0D || var20 < var4) {
                             var4 = var20;
                             var6 = var11;
@@ -82,6 +87,7 @@ public class OTeleporter {
         if (var4 >= 0.0D) {
             double var24 = var6 + 0.5D;
             double var26 = var7 + 0.5D;
+
             var18 = var8 + 0.5D;
             if (var1.a(var6 - 1, var7, var8) == OBlock.be.bO) {
                 var24 -= 0.5D;
@@ -134,13 +140,15 @@ public class OTeleporter {
         int var28;
         double var30;
         double var32;
+
         for (var14 = var6 - var3; var14 <= var6 + var3; ++var14) {
             var15 = var14 + 0.5D - var2.bm;
 
             for (var17 = var8 - var3; var17 <= var8 + var3; ++var17) {
                 var18 = var17 + 0.5D - var2.bo;
 
-                label274: for (var20 = 127; var20 >= 0; --var20) {
+                label274:
+                for (var20 = 127; var20 >= 0; --var20) {
                     if (var1.g(var14, var20, var17)) {
                         while (var20 > 0 && var1.g(var14, var20 - 1, var17)) {
                             --var20;
@@ -160,6 +168,7 @@ public class OTeleporter {
                                         var27 = var14 + (var25 - 1) * var22 + var24 * var23;
                                         var28 = var20 + var26;
                                         int var29 = var17 + (var25 - 1) * var23 - var24 * var22;
+
                                         if (var26 < 0 && !var1.d(var27, var28, var29).a() || var26 >= 0 && !var1.g(var27, var28, var29)) {
                                             continue label274;
                                         }
@@ -189,7 +198,8 @@ public class OTeleporter {
                 for (var17 = var8 - var3; var17 <= var8 + var3; ++var17) {
                     var18 = var17 + 0.5D - var2.bo;
 
-                    label222: for (var20 = 127; var20 >= 0; --var20) {
+                    label222:
+                    for (var20 = 127; var20 >= 0; --var20) {
                         if (var1.g(var14, var20, var17)) {
                             while (var20 > 0 && var1.g(var14, var20 - 1, var17)) {
                                 --var20;
@@ -228,15 +238,18 @@ public class OTeleporter {
 
         int var34 = var9;
         int var35 = var10;
+
         var17 = var11;
         int var36 = var12 % 2;
         int var37 = 1 - var36;
+
         if (var12 % 4 >= 2) {
             var36 = -var36;
             var37 = -var37;
         }
 
         boolean var38;
+
         if (var4 < 0.0D) {
             if (var10 < 70) {
                 var10 = 70;

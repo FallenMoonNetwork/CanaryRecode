@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OChunkCoordinates;
@@ -7,6 +8,7 @@ import net.minecraft.server.OChunkProviderEnd;
 import net.minecraft.server.OIChunkProvider;
 import net.minecraft.server.OWorldChunkManagerHell;
 import net.minecraft.server.OWorldProvider;
+
 
 public class OWorldProviderEnd extends OWorldProvider {
 
@@ -44,6 +46,7 @@ public class OWorldProviderEnd extends OWorldProvider {
     @Override
     public boolean a(int var1, int var2) {
         int var3 = this.a.b(var1, var2);
+
         return var3 == 0 ? false : OBlock.m[var3].cd.c();
     }
 

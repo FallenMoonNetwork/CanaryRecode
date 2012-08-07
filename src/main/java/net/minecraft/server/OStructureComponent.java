@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -15,6 +16,7 @@ import net.minecraft.server.OTileEntityChest;
 import net.minecraft.server.OWeightedRandom;
 import net.minecraft.server.OWorld;
 
+
 public abstract class OStructureComponent {
 
     protected OStructureBoundingBox g;
@@ -27,8 +29,7 @@ public abstract class OStructureComponent {
         this.h = -1;
     }
 
-    public void a(OStructureComponent var1, List var2, Random var3) {
-    }
+    public void a(OStructureComponent var1, List var2, Random var3) {}
 
     public abstract boolean a(OWorld var1, Random var2, OStructureBoundingBox var3);
 
@@ -44,6 +45,7 @@ public abstract class OStructureComponent {
         Iterator var2 = var0.iterator();
 
         OStructureComponent var3;
+
         do {
             if (!var2.hasNext()) {
                 return null;
@@ -70,6 +72,7 @@ public abstract class OStructureComponent {
         int var9;
         int var10;
         int var11;
+
         for (var9 = var3; var9 <= var6; ++var9) {
             for (var10 = var5; var10 <= var8; ++var10) {
                 var11 = var1.a(var9, var4, var10);
@@ -120,10 +123,13 @@ public abstract class OStructureComponent {
         case 0:
         case 2:
             return this.g.a + var1;
+
         case 1:
             return this.g.d - var2;
+
         case 3:
             return this.g.a + var2;
+
         default:
             return var1;
         }
@@ -137,11 +143,14 @@ public abstract class OStructureComponent {
         switch (this.h) {
         case 0:
             return this.g.c + var2;
+
         case 1:
         case 3:
             return this.g.c + var1;
+
         case 2:
             return this.g.f - var2;
+
         default:
             return var2;
         }
@@ -309,6 +318,7 @@ public abstract class OStructureComponent {
         int var8 = this.a(var4, var6);
         int var9 = this.b(var5);
         int var10 = this.b(var4, var6);
+
         if (var7.b(var8, var9, var10)) {
             var1.a(var8, var9, var10, var2, var3);
         }
@@ -318,6 +328,7 @@ public abstract class OStructureComponent {
         int var6 = this.a(var2, var4);
         int var7 = this.b(var3);
         int var8 = this.b(var2, var4);
+
         return !var5.b(var6, var7, var8) ? 0 : var1.a(var6, var7, var8);
     }
 
@@ -391,8 +402,10 @@ public abstract class OStructureComponent {
 
                 for (int var20 = var5; var20 <= var8; ++var20) {
                     float var21 = (var20 - var15) / (var13 * 0.5F);
+
                     if (!var10 || this.a(var1, var18, var16, var20, var2) != 0) {
                         float var22 = var19 * var19 + var17 * var17 + var21 * var21;
+
                         if (var22 <= 1.05F) {
                             this.a(var1, var9, 0, var18, var16, var20, var2);
                         }
@@ -407,6 +420,7 @@ public abstract class OStructureComponent {
         int var6 = this.a(var2, var4);
         int var7 = this.b(var3);
         int var8 = this.b(var2, var4);
+
         if (var5.b(var6, var7, var8)) {
             while (!var1.g(var6, var7, var8) && var7 < 255) {
                 var1.a(var6, var7, var8, 0, 0);
@@ -420,6 +434,7 @@ public abstract class OStructureComponent {
         int var8 = this.a(var4, var6);
         int var9 = this.b(var5);
         int var10 = this.b(var4, var6);
+
         if (var7.b(var8, var9, var10)) {
             while ((var1.g(var8, var9, var10) || var1.d(var8, var9, var10).d()) && var9 > 1) {
                 var1.a(var8, var9, var10, var2, var3);
@@ -433,9 +448,11 @@ public abstract class OStructureComponent {
         int var9 = this.a(var4, var6);
         int var10 = this.b(var5);
         int var11 = this.b(var4, var6);
+
         if (var2.b(var9, var10, var11) && var1.a(var9, var10, var11) != OBlock.au.bO) {
             var1.e(var9, var10, var11, OBlock.au.bO);
             OTileEntityChest var12 = (OTileEntityChest) var1.b(var9, var10, var11);
+
             if (var12 != null) {
                 a(var3, var7, var12, var8);
             }
@@ -447,6 +464,7 @@ public abstract class OStructureComponent {
         for (int var4 = 0; var4 < var3; ++var4) {
             OStructurePieceTreasure var5 = (OStructurePieceTreasure) OWeightedRandom.a(var0, var1);
             int var6 = var5.c + var0.nextInt(var5.e - var5.c + 1);
+
             if (OItem.d[var5.a].d() >= var6) {
                 var2.a(var0.nextInt(var2.getInventorySize()), new OItemStack(var5.a, var6, var5.b));
             } else {
@@ -462,6 +480,7 @@ public abstract class OStructureComponent {
         int var8 = this.a(var4, var6);
         int var9 = this.b(var5);
         int var10 = this.b(var4, var6);
+
         if (var2.b(var8, var9, var10)) {
             OItemDoor.a(var1, var8, var9, var10, var7, OBlock.aE);
         }

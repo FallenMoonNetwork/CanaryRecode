@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIFollowParent;
 import net.minecraft.server.OEntityAILookIdle;
 import net.minecraft.server.OEntityAIMate;
@@ -13,6 +14,7 @@ import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;
 import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityChicken extends OEntityAnimal {
 
@@ -30,6 +32,7 @@ public class OEntityChicken extends OEntityAnimal {
         this.b(0.3F, 0.7F);
         this.j = this.bS.nextInt(6000) + 6000;
         float var2 = 0.25F;
+
         this.aL.a(0, new OEntityAISwimming(this));
         this.aL.a(1, new OEntityAIPanic(this, 0.38F));
         this.aL.a(2, new OEntityAIMate(this, var2));
@@ -83,8 +86,7 @@ public class OEntityChicken extends OEntityAnimal {
     }
 
     @Override
-    protected void a(float var1) {
-    }
+    protected void a(float var1) {}
 
     @Override
     public void b(ONBTTagCompound var1) {

@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+
 
 public class OItemFireball extends OItem {
 
@@ -45,6 +47,7 @@ public class OItemFireball extends OItem {
                 return false;
             } else {
                 int var8 = var3.a(var4, var5, var6);
+
                 if (var8 == 0) {
                     var3.a(var4 + 0.5D, var5 + 0.5D, var6 + 0.5D, "fire.ignite", 1.0F, c.nextFloat() * 0.4F + 0.8F);
                     var3.e(var4, var5, var6, OBlock.ar.bO);

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OBlockFlower;
@@ -8,6 +9,7 @@ import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockStem extends OBlockFlower {
 
@@ -18,6 +20,7 @@ public class OBlockStem extends OBlockFlower {
         this.a = var2;
         this.a(true);
         float var3 = 0.125F;
+
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.25F, 0.5F + var3);
     }
 
@@ -31,8 +34,10 @@ public class OBlockStem extends OBlockFlower {
         super.a(var1, var2, var3, var4, var5);
         if (var1.n(var2, var3 + 1, var4) >= 9) {
             float var6 = this.i(var1, var2, var3, var4);
+
             if (var5.nextInt((int) (25.0F / var6) + 1) == 0) {
                 int var7 = var1.c(var2, var3, var4);
+
                 if (var7 < 7) {
                     ++var7;
                     var1.c(var2, var3, var4, var7);
@@ -56,6 +61,7 @@ public class OBlockStem extends OBlockFlower {
                     int var8 = var5.nextInt(4);
                     int var9 = var2;
                     int var10 = var4;
+
                     if (var8 == 0) {
                         var9 = var2 - 1;
                     }
@@ -73,6 +79,7 @@ public class OBlockStem extends OBlockFlower {
                     }
 
                     int var11 = var1.a(var9, var3 - 1, var10);
+
                     if (var1.a(var9, var3, var10) == 0 && (var11 == OBlock.aA.bO || var11 == OBlock.v.bO || var11 == OBlock.u.bO)) {
                         var1.e(var9, var3, var10, this.a.bO);
                     }
@@ -104,6 +111,7 @@ public class OBlockStem extends OBlockFlower {
             for (int var18 = var4 - 1; var18 <= var4 + 1; ++var18) {
                 int var19 = var1.a(var17, var3 - 1, var18);
                 float var20 = 0.0F;
+
                 if (var19 == OBlock.aA.bO) {
                     var20 = 1.0F;
                     if (var1.c(var17, var3 - 1, var18) > 0) {
@@ -134,6 +142,7 @@ public class OBlockStem extends OBlockFlower {
     @Override
     public void f() {
         float var1 = 0.125F;
+
         this.a(0.5F - var1, 0.0F, 0.5F - var1, 0.5F + var1, 0.25F, 0.5F + var1);
     }
 
@@ -141,6 +150,7 @@ public class OBlockStem extends OBlockFlower {
     public void a(OIBlockAccess var1, int var2, int var3, int var4) {
         this.bZ = ((var1.c(var2, var3, var4) * 2 + 2) / 16.0F);
         float var5 = 0.125F;
+
         this.a(0.5F - var5, 0.0F, 0.5F - var5, 0.5F + var5, (float) this.bZ, 0.5F + var5);
     }
 
@@ -154,6 +164,7 @@ public class OBlockStem extends OBlockFlower {
         super.a(var1, var2, var3, var4, var5, var6, var7);
         if (!var1.F) {
             OItem var8 = null;
+
             if (this.a == OBlock.ba) {
                 var8 = OItem.bf;
             }
@@ -169,6 +180,7 @@ public class OBlockStem extends OBlockFlower {
                     float var12 = var1.r.nextFloat() * var10 + (1.0F - var10) * 0.5F;
                     float var13 = var1.r.nextFloat() * var10 + (1.0F - var10) * 0.5F;
                     OEntityItem var14 = new OEntityItem(var1, (var2 + var11), (var3 + var12), (var4 + var13), new OItemStack(var8));
+
                     var14.c = 10;
                     var1.b(var14);
                 }

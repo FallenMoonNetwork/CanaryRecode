@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
+
 
 public class OFurnaceRecipes {
 

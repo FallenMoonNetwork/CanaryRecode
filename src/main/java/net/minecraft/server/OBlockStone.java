@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OMaterial;
+
 
 public class OBlockStone extends OBlock {
 

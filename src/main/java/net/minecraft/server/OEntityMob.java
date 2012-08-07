@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.hook.entity.MobTargetHook;
 import net.minecraft.server.ODamageSource;
@@ -13,6 +14,7 @@ import net.minecraft.server.ONBTTagCompound;
 import net.minecraft.server.OPotion;
 import net.minecraft.server.OWorld;
 
+
 public abstract class OEntityMob extends OEntityCreature implements OIMob {
 
     protected int c = 2;
@@ -25,6 +27,7 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
     @Override
     public void e() {
         float var1 = this.b(1.0F);
+
         if (var1 > 0.5F) {
             this.aV += 2;
         }
@@ -44,10 +47,12 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
     @Override
     protected OEntity o() {
         OEntityPlayer var1 = this.bi.b(this, 16.0D);
+
         if (var1 == null) {
             return null;
         }
         MobTargetHook hook = new MobTargetHook(getCanaryEntityLiving(), ((OEntityPlayerMP) var1).getPlayer());
+
         Canary.hooks().callHook(hook);
         return var1 != null && this.h(var1) && !hook.isCanceled() ? var1 : null;
     }
@@ -56,17 +61,19 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
     public boolean a(ODamageSource var1, int var2) {
         if (super.a(var1, var2)) {
             OEntity var3 = var1.a();
+
             if (this.bg != var3 && this.bh != var3) {
                 if (var3 != this) {
-                    //CanaryMod start - mob target hook
-                    if(var3 instanceof OEntityPlayer){
-                        MobTargetHook hook = new MobTargetHook(this.getCanaryEntityLiving(), ((OEntityLiving)var3).getCanaryEntityLiving().getPlayer());
+                    // CanaryMod start - mob target hook
+                    if (var3 instanceof OEntityPlayer) {
+                        MobTargetHook hook = new MobTargetHook(this.getCanaryEntityLiving(), ((OEntityLiving) var3).getCanaryEntityLiving().getPlayer());
+
                         Canary.hooks().callHook(hook);
-                        if(hook.isCanceled()){
+                        if (hook.isCanceled()) {
                             return true;
                         }
                     }
-                    //CanaryMod end -mob target hook
+                    // CanaryMod end -mob target hook
                     this.d = var3;
                 }
 
@@ -82,6 +89,7 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
     @Override
     public boolean a(OEntity var1) {
         int var2 = this.c;
+
         if (this.a(OPotion.g)) {
             var2 += 3 << this.b(OPotion.g).c();
         }
@@ -121,12 +129,15 @@ public abstract class OEntityMob extends OEntityCreature implements OIMob {
         int var1 = OMathHelper.b(this.bm);
         int var2 = OMathHelper.b(this.bw.b);
         int var3 = OMathHelper.b(this.bo);
+
         if (this.bi.a(OEnumSkyBlock.a, var1, var2, var3) > this.bS.nextInt(32)) {
             return false;
         } else {
             int var4 = this.bi.n(var1, var2, var3);
+
             if (this.bi.w()) {
                 int var5 = this.bi.f;
+
                 this.bi.f = 10;
                 var4 = this.bi.n(var1, var2, var3);
                 this.bi.f = var5;

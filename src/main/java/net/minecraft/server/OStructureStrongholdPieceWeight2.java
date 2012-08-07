@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OStructureStrongholdPieceWeight;
+
 
 final class OStructureStrongholdPieceWeight2 extends OStructureStrongholdPieceWeight {
 

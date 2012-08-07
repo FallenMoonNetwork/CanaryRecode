@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
@@ -11,6 +12,7 @@ import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockStairs extends OBlock {
 
@@ -58,6 +60,7 @@ public class OBlockStairs extends OBlock {
         float var10 = 0.5F;
         float var11 = 0.5F;
         float var12 = 1.0F;
+
         if ((var7 & 4) != 0) {
             var9 = 0.5F;
             var10 = 1.0F;
@@ -169,6 +172,7 @@ public class OBlockStairs extends OBlock {
     public void a(OWorld var1, int var2, int var3, int var4, OEntityLiving var5) {
         int var6 = OMathHelper.b((var5.bs * 4.0F / 360.0F) + 0.5D) & 3;
         int var7 = var1.c(var2, var3, var4) & 4;
+
         if (var6 == 0) {
             var1.c(var2, var3, var4, 2 | var7);
         }
@@ -191,6 +195,7 @@ public class OBlockStairs extends OBlock {
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         if (var5 == 0) {
             int var6 = var1.c(var2, var3, var4);
+
             var1.c(var2, var3, var4, var6 | 4);
         }
 

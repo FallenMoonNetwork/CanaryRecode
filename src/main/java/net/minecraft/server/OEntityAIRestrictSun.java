@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityCreature;
+
 
 public class OEntityAIRestrictSun extends OEntityAIBase {
 

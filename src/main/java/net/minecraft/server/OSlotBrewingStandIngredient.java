@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OContainerBrewingStand;
 import net.minecraft.server.OIInventory;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OSlot;
+
 
 class OSlotBrewingStandIngredient extends OSlot {
 

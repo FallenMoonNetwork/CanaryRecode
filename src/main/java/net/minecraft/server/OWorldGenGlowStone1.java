@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OWorldGenGlowStone1 extends OWorldGenerator {
 
@@ -24,11 +26,13 @@ public class OWorldGenGlowStone1 extends OWorldGenerator {
                 int var7 = var3 + var2.nextInt(8) - var2.nextInt(8);
                 int var8 = var4 - var2.nextInt(12);
                 int var9 = var5 + var2.nextInt(8) - var2.nextInt(8);
+
                 if (var1.a(var7, var8, var9) == 0) {
                     int var10 = 0;
 
                     for (int var11 = 0; var11 < 6; ++var11) {
                         int var12 = 0;
+
                         if (var11 == 0) {
                             var12 = var1.a(var7 - 1, var8, var9);
                         }

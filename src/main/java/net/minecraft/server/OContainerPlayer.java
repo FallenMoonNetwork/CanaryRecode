@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OContainer;
 import net.minecraft.server.OCraftingManager;
 import net.minecraft.server.OEntityPlayer;
@@ -11,6 +12,7 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OSlot;
 import net.minecraft.server.OSlotArmor;
 import net.minecraft.server.OSlotCrafting;
+
 
 public class OContainerPlayer extends OContainer {
 
@@ -34,6 +36,7 @@ public class OContainerPlayer extends OContainer {
 
         int var3;
         int var4;
+
         for (var3 = 0; var3 < 2; ++var3) {
             for (var4 = 0; var4 < 2; ++var4) {
                 this.a(new OSlot(this.a, var4 + var3 * 2, 88 + var4 * 18, 26 + var3 * 18));
@@ -62,12 +65,14 @@ public class OContainerPlayer extends OContainer {
         this.b.a(0, OCraftingManager.a().a(this.a));
         this.a.update(); // CanaryMod
     }
+
     @Override
     public void onInventoryClose(OEntityPlayer var1) {
         super.onInventoryClose(var1);
 
         for (int var2 = 0; var2 < 4; ++var2) {
             OItemStack var3 = this.a.b(var2);
+
             if (var3 != null) {
                 var1.b(var3);
             }
@@ -85,8 +90,10 @@ public class OContainerPlayer extends OContainer {
     public OItemStack a(int var1) {
         OItemStack var2 = null;
         OSlot var3 = (OSlot) this.e.get(var1);
+
         if (var3 != null && var3.c()) {
             OItemStack var4 = var3.b();
+
             var2 = var4.j();
             if (var1 == 0) {
                 if (!this.a(var4, 9, 45, true)) {

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.hook.entity.DamageHook;
@@ -8,6 +9,7 @@ import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItemFood;
 import net.minecraft.server.ONBTTagCompound;
 
+
 public class OFoodStats {
 
     // CanaryMod Refactored names
@@ -15,8 +17,8 @@ public class OFoodStats {
     private float foodSaturationLevel = 5.0F;
     private float foodExhaustionLevel;
     private int foodTimer = 0;
-    private int previousFoodLevel = 20; //Thafuq?
-    //CanaryMod end
+    private int previousFoodLevel = 20; // Thafuq?
+    // CanaryMod end
 
     public OFoodStats() {
         super();
@@ -33,6 +35,7 @@ public class OFoodStats {
 
     public void onUpdate(OEntityPlayer var1) {
         int var2 = var1.bi.q;
+
         this.previousFoodLevel = this.foodLevel;
         if (this.foodExhaustionLevel > 4.0F) {
             this.foodExhaustionLevel -= 4.0F;
@@ -55,6 +58,7 @@ public class OFoodStats {
                 if (var1.aD() > 10 || var2 >= 3 || var1.aD() > 1 && var2 >= 2) {
                     // CanaryMod - starving damage.
                     DamageHook hook = new DamageHook(null, var1.getCanaryEntityLiving(), new CanaryDamageSource(ODamageSource.g), 1);
+
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
                         var1.a(ODamageSource.g, 1);
@@ -70,7 +74,7 @@ public class OFoodStats {
 
     }
 
-    //CanaryMod start: Refactored method names
+    // CanaryMod start: Refactored method names
     public void readNbt(ONBTTagCompound var1) {
         if (var1.c("foodLevel")) {
             this.foodLevel = var1.f("foodLevel");
@@ -103,9 +107,10 @@ public class OFoodStats {
     public float getFoodSaturationLevel() {
         return this.foodSaturationLevel;
     }
-    //CanaryMod End
+
+    // CanaryMod End
     
-    //CanaryMod added set saturation
+    // CanaryMod added set saturation
     public void setFoodSaturationLevel(float food) {
         this.foodSaturationLevel = food;
     }
@@ -113,7 +118,8 @@ public class OFoodStats {
     public void setFoodExhaustionLevel(float level) {
         this.foodExhaustionLevel = level;
     }
-    //CanaryMod added set food level
+
+    // CanaryMod added set food level
     public void setFoodLevel(int level) {
         this.foodLevel = level;
     }

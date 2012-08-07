@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityFishHook;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OWorld;
+
 
 public class OItemFishingRod extends OItem {
 
@@ -18,6 +20,7 @@ public class OItemFishingRod extends OItem {
     public OItemStack a(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         if (var3.R != null) {
             int var4 = var3.R.k();
+
             var1.a(var4, var3);
             var3.C_();
         } else {

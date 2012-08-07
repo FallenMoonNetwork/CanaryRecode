@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class OVillageDoorInfo {
 
     public final int a;
@@ -25,6 +26,7 @@ public class OVillageDoorInfo {
         int var4 = var1 - this.a;
         int var5 = var2 - this.b;
         int var6 = var3 - this.c;
+
         return var4 * var4 + var5 * var5 + var6 * var6;
     }
 
@@ -32,6 +34,7 @@ public class OVillageDoorInfo {
         int var4 = var1 - this.a - this.d;
         int var5 = var2 - this.b;
         int var6 = var3 - this.c - this.e;
+
         return var4 * var4 + var5 * var5 + var6 * var6;
     }
 
@@ -50,6 +53,7 @@ public class OVillageDoorInfo {
     public boolean a(int var1, int var2) {
         int var3 = var1 - this.a;
         int var4 = var2 - this.c;
+
         return var3 * this.d + var4 * this.e >= 0;
     }
 

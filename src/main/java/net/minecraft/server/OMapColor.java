@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class OMapColor {
 
     public static final OMapColor[] a = new OMapColor[16];

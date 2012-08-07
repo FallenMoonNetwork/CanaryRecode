@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMathHelper;
 import net.minecraft.server.ONetHandler;
 import net.minecraft.server.OPacket;
+
 
 public class OPacket20NamedEntitySpawn extends OPacket {
 
@@ -35,6 +37,7 @@ public class OPacket20NamedEntitySpawn extends OPacket {
         this.f = (byte) ((int) (var1.bs * 256.0F / 360.0F));
         this.g = (byte) ((int) (var1.bt * 256.0F / 360.0F));
         OItemStack var2 = var1.k.d();
+
         this.h = var2 == null ? 0 : var2.c;
     }
 

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.CanaryDamageSource;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityArrow;
@@ -9,6 +10,7 @@ import net.minecraft.server.OEntityFireball;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OStatCollector;
+
 
 public class ODamageSource {
 
@@ -24,9 +26,9 @@ public class ODamageSource {
     public static ODamageSource k = (new ODamageSource("generic")).h();
     public static ODamageSource l = new ODamageSource("explosion");
     public static ODamageSource m = (new ODamageSource("magic")).h();
-    public boolean a = false; //CanaryMod private -> public
+    public boolean a = false; // CanaryMod private -> public
     private boolean o = false;
-    public float p = 0.3F; //CanaryMod private -> public
+    public float p = 0.3F; // CanaryMod private -> public
     private boolean q;
     private boolean r;
     public String n;
@@ -80,11 +82,11 @@ public class ODamageSource {
     protected ODamageSource(String var1) {
         super();
         this.n = var1;
-        //CanaryMod ...
+        // CanaryMod ...
         this.damageSource = new CanaryDamageSource(this);
     }
     
-    //CanaryMod get handler
+    // CanaryMod get handler
     public CanaryDamageSource getCanaryDamageSource() {
         return this.damageSource;
     }

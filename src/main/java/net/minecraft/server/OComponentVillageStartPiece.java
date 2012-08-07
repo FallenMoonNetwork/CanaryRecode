@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.server.OComponentVillageWell;
 import net.minecraft.server.OStructureVillagePieceWeight;
 import net.minecraft.server.OWorldChunkManager;
+
 
 public class OComponentVillageStartPiece extends OComponentVillageWell {
 

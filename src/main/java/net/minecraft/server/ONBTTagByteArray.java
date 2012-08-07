@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Arrays;
 import net.minecraft.server.ONBTBase;
+
 
 public class ONBTTagByteArray extends ONBTBase {
 
@@ -28,6 +30,7 @@ public class ONBTTagByteArray extends ONBTBase {
     @Override
     void a(DataInput var1) throws IOException {
         int var2 = var1.readInt();
+
         this.a = new byte[var2];
         var1.readFully(this.a);
     }
@@ -45,6 +48,7 @@ public class ONBTTagByteArray extends ONBTBase {
     @Override
     public ONBTBase b() {
         byte[] var1 = new byte[this.a.length];
+
         System.arraycopy(this.a, 0, var1, 0, this.a.length);
         return new ONBTTagByteArray(this.c(), var1);
     }

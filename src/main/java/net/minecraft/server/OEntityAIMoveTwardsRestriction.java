@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OChunkCoordinates;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityCreature;
 import net.minecraft.server.ORandomPositionGenerator;
 import net.minecraft.server.OVec3D;
+
 
 public class OEntityAIMoveTwardsRestriction extends OEntityAIBase {
 
@@ -28,6 +30,7 @@ public class OEntityAIMoveTwardsRestriction extends OEntityAIBase {
         } else {
             OChunkCoordinates var1 = this.a.av();
             OVec3D var2 = ORandomPositionGenerator.a(this.a, 16, 7, OVec3D.b(var1.a, var1.b, var1.c));
+
             if (var2 == null) {
                 return false;
             } else {

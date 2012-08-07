@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeGenBase;
 import net.minecraft.server.OGenLayer;
 import net.minecraft.server.OIntCache;
 import net.minecraft.server.OWorldType;
+
 
 public class OGenLayerBiome extends OGenLayer {
 
@@ -28,6 +30,7 @@ public class OGenLayerBiome extends OGenLayer {
             for (int var8 = 0; var8 < var3; ++var8) {
                 this.a((var8 + var1), (var7 + var2));
                 int var9 = var5[var8 + var7 * var3];
+
                 if (var9 == 0) {
                     var6[var8 + var7 * var3] = 0;
                 } else if (var9 == OBiomeGenBase.p.M) {

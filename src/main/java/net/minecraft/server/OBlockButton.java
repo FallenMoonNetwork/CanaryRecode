@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 
 import net.canarymod.Canary;
@@ -10,6 +11,7 @@ import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockButton extends OBlock {
 
@@ -52,6 +54,7 @@ public class OBlockButton extends OBlock {
     public void e(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
         int var7 = var6 & 8;
+
         var6 &= 7;
         if (var5 == 2 && var1.e(var2, var3, var4 + 1)) {
             var6 = 4;
@@ -77,6 +80,7 @@ public class OBlockButton extends OBlock {
         if (this.h(var1, var2, var3, var4)) {
             int var6 = var1.c(var2, var3, var4) & 7;
             boolean var7 = false;
+
             if (!var1.e(var2 - 1, var3, var4) && var6 == 1) {
                 var7 = true;
             }
@@ -120,6 +124,7 @@ public class OBlockButton extends OBlock {
         float var9 = 0.625F;
         float var10 = 0.1875F;
         float var11 = 0.125F;
+
         if (var7) {
             var11 = 0.0625F;
         }
@@ -148,6 +153,7 @@ public class OBlockButton extends OBlock {
         int var8 = 8 - (var6 & 8);
         
         RedstoneChangeHook hook = new RedstoneChangeHook(var1.getCanaryWorld().getBlockAt(var2, var3, var4), var7, var8);
+
         Canary.hooks().callHook(hook);
         if (var8 == 0 || hook.isCanceled()) {
             return true;
@@ -176,9 +182,11 @@ public class OBlockButton extends OBlock {
     @Override
     public void d(OWorld var1, int var2, int var3, int var4) {
         int var5 = var1.c(var2, var3, var4);
+
         if ((var5 & 8) > 0) {
             var1.h(var2, var3, var4, this.bO);
             int var6 = var5 & 7;
+
             if (var6 == 1) {
                 var1.h(var2 - 1, var3, var4, this.bO);
             } else if (var6 == 2) {
@@ -203,10 +211,12 @@ public class OBlockButton extends OBlock {
     @Override
     public boolean d(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
+
         if ((var6 & 8) == 0) {
             return false;
         } else {
             int var7 = var6 & 7;
+
             return var7 == 5 && var5 == 1 ? true : (var7 == 4 && var5 == 2 ? true : (var7 == 3 && var5 == 3 ? true : (var7 == 2 && var5 == 4 ? true : var7 == 1 && var5 == 5)));
         }
     }
@@ -220,10 +230,12 @@ public class OBlockButton extends OBlock {
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (!var1.F) {
             int var6 = var1.c(var2, var3, var4);
+
             if ((var6 & 8) != 0) {
                 var1.c(var2, var3, var4, var6 & 7);
                 var1.h(var2, var3, var4, this.bO);
                 int var7 = var6 & 7;
+
                 if (var7 == 1) {
                     var1.h(var2 - 1, var3, var4, this.bO);
                 } else if (var7 == 2) {
@@ -247,6 +259,7 @@ public class OBlockButton extends OBlock {
         float var1 = 0.1875F;
         float var2 = 0.125F;
         float var3 = 0.125F;
+
         this.a(0.5F - var1, 0.5F - var2, 0.5F - var3, 0.5F + var1, 0.5F + var2, 0.5F + var3);
     }
 }

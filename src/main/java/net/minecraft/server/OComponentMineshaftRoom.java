@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,6 +10,7 @@ import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructureMineshaftPieces;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentMineshaftRoom extends OStructureComponent {
 
@@ -23,6 +25,7 @@ public class OComponentMineshaftRoom extends OStructureComponent {
     public void a(OStructureComponent var1, List var2, Random var3) {
         int var4 = this.c();
         int var5 = this.g.c() - 3 - 1;
+
         if (var5 <= 0) {
             var5 = 1;
         }
@@ -30,6 +33,7 @@ public class OComponentMineshaftRoom extends OStructureComponent {
         int var6;
         OStructureComponent var7;
         OStructureBoundingBox var8;
+
         for (var6 = 0; var6 < this.g.b(); var6 += 4) {
             var6 += var3.nextInt(this.g.b());
             if (var6 + 3 > this.g.b()) {
@@ -95,6 +99,7 @@ public class OComponentMineshaftRoom extends OStructureComponent {
 
             while (var4.hasNext()) {
                 OStructureBoundingBox var5 = (OStructureBoundingBox) var4.next();
+
                 this.a(var1, var3, var5.a, var5.e - 2, var5.c, var5.d, var5.e, var5.f, 0, 0, false);
             }
 

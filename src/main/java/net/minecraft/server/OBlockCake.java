@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -7,6 +8,7 @@ import net.minecraft.server.OEntityPlayer;
 import net.minecraft.server.OIBlockAccess;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockCake extends OBlock {
 
@@ -21,6 +23,7 @@ public class OBlockCake extends OBlock {
         float var6 = 0.0625F;
         float var7 = (1 + var5 * 2) / 16.0F;
         float var8 = 0.5F;
+
         this.a(var7, 0.0F, var6, 1.0F - var6, var8, 1.0F - var6);
     }
 
@@ -28,6 +31,7 @@ public class OBlockCake extends OBlock {
     public void f() {
         float var1 = 0.0625F;
         float var2 = 0.5F;
+
         this.a(var1, 0.0F, var1, 1.0F - var1, var2, 1.0F - var1);
     }
 
@@ -37,6 +41,7 @@ public class OBlockCake extends OBlock {
         float var6 = 0.0625F;
         float var7 = (1 + var5 * 2) / 16.0F;
         float var8 = 0.5F;
+
         return OAxisAlignedBB.b((var2 + var7), var3, (var4 + var6), ((var2 + 1) - var6), (var3 + var8 - var6), ((var4 + 1) - var6));
     }
 
@@ -75,6 +80,7 @@ public class OBlockCake extends OBlock {
         if (var5.b(false)) {
             var5.getFoodStats().addStats(2, 0.1F);
             int var6 = var1.c(var2, var3, var4) + 1;
+
             if (var6 >= 6) {
                 var1.e(var2, var3, var4, 0);
             } else {

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryBaseItem;
 import net.canarymod.api.inventory.CanaryItem;
 import net.minecraft.server.OBlock;
@@ -16,13 +17,14 @@ import net.minecraft.server.ONBTTagList;
 import net.minecraft.server.OStatList;
 import net.minecraft.server.OWorld;
 
+
 public final class OItemStack {
 
-    public int a; //stack size
-    public int b; //animation ticks
-    public int c; //item id
-    public ONBTTagCompound d; //enchantment tag
-    private int e; //damage
+    public int a; // stack size
+    public int b; // animation ticks
+    public int c; // item id
+    public ONBTTagCompound d; // enchantment tag
+    private int e; // damage
 
     public OItemStack(OBlock var1) {
         this(var1, 1);
@@ -57,6 +59,7 @@ public final class OItemStack {
 
     public static OItemStack a(ONBTTagCompound var0) {
         OItemStack var1 = new OItemStack();
+
         var1.c(var0);
         return var1.a() != null ? var1 : null;
     }
@@ -66,7 +69,7 @@ public final class OItemStack {
         this.a = 0;
     }
     
-    //CanaryMod start
+    // CanaryMod start
     /**
      * Get the CanaryMod item handler
      * @return
@@ -78,10 +81,12 @@ public final class OItemStack {
     public CanaryBaseItem getBaseItem() {
         return this.a().getBaseItem();
     }
-    //CanaryMod end
+
+    // CanaryMod end
 
     public OItemStack a(int var1) {
         OItemStack var2 = new OItemStack(this.c, var1, this.e);
+
         if (this.d != null) {
             var2.d = (ONBTTagCompound) this.d.b();
         }
@@ -96,6 +101,7 @@ public final class OItemStack {
 
     public boolean a(OEntityPlayer var1, OWorld var2, int var3, int var4, int var5, int var6) {
         boolean var7 = this.a().a(this, var1, var2, var3, var4, var5, var6);
+
         if (var7) {
             var1.a(OStatList.E[this.c], 1);
         }
@@ -176,6 +182,7 @@ public final class OItemStack {
         if (this.d()) {
             if (var1 > 0 && var2 instanceof OEntityPlayer) {
                 int var3 = OEnchantmentHelper.c(((OEntityPlayer) var2).k);
+
                 if (var3 > 0 && var2.bi.r.nextInt(var3 + 1) > 0) {
                     return;
                 }
@@ -201,6 +208,7 @@ public final class OItemStack {
 
     public void a(OEntityLiving var1, OEntityPlayer var2) {
         boolean var3 = OItem.d[this.c].a(this, var1, var2);
+
         if (var3) {
             var2.a(OStatList.E[this.c], 1);
         }
@@ -209,6 +217,7 @@ public final class OItemStack {
 
     public void a(int var1, int var2, int var3, int var4, OEntityPlayer var5) {
         boolean var6 = OItem.d[this.c].a(this, var1, var2, var3, var4, var5);
+
         if (var6) {
             var5.a(OStatList.E[this.c], 1);
         }
@@ -223,8 +232,7 @@ public final class OItemStack {
         return OItem.d[this.c].a(var1);
     }
 
-    public void a(OEntityPlayer var1) {
-    }
+    public void a(OEntityPlayer var1) {}
 
     public void a(OEntityLiving var1) {
         OItem.d[this.c].a(this, var1);
@@ -232,6 +240,7 @@ public final class OItemStack {
 
     public OItemStack j() {
         OItemStack var1 = new OItemStack(this.c, this.a, this.e);
+
         if (this.d != null) {
             var1.d = (ONBTTagCompound) this.d.b();
             if (!var1.d.equals(this.d)) {
@@ -331,6 +340,7 @@ public final class OItemStack {
 
         ONBTTagList var3 = (ONBTTagList) this.d.b("ench");
         ONBTTagCompound var4 = new ONBTTagCompound();
+
         var4.a("id", (short) var1.x);
         var4.a("lvl", (short) ((byte) var2));
         var3.a(var4);

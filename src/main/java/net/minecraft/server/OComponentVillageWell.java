@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -9,6 +10,7 @@ import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructureVillagePieces;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentVillageWell extends OComponentVillage {
 
@@ -23,6 +25,7 @@ public class OComponentVillageWell extends OComponentVillage {
         case 2:
             this.g = new OStructureBoundingBox(var3, 64, var4, var3 + 6 - 1, 78, var4 + 6 - 1);
             break;
+
         default:
             this.g = new OStructureBoundingBox(var3, 64, var4, var3 + 6 - 1, 78, var4 + 6 - 1);
         }

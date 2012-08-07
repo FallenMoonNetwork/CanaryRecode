@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlockFlower;
 import net.minecraft.server.OWorld;
@@ -10,11 +11,13 @@ import net.minecraft.server.OWorldGenTaiga2;
 import net.minecraft.server.OWorldGenTrees;
 import net.minecraft.server.OWorldGenerator;
 
+
 public class OBlockSapling extends OBlockFlower {
 
     protected OBlockSapling(int var1, int var2) {
         super(var1, var2);
         float var3 = 0.4F;
+
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
     }
 
@@ -24,6 +27,7 @@ public class OBlockSapling extends OBlockFlower {
             super.a(var1, var2, var3, var4, var5);
             if (var1.n(var2, var3 + 1, var4) >= 9 && var5.nextInt(7) == 0) {
                 int var6 = var1.c(var2, var3, var4);
+
                 if ((var6 & 8) == 0) {
                     var1.c(var2, var3, var4, var6 | 8);
                 } else {
@@ -46,6 +50,7 @@ public class OBlockSapling extends OBlockFlower {
         int var8 = 0;
         int var9 = 0;
         boolean var10 = false;
+
         if (var6 == 1) {
             var7 = new OWorldGenTaiga2(true);
         } else if (var6 == 2) {

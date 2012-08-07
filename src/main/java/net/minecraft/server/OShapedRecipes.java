@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OIRecipe;
 import net.minecraft.server.OInventoryCrafting;
 import net.minecraft.server.OItemStack;
+
 
 public class OShapedRecipes implements OIRecipe {
 
@@ -49,6 +51,7 @@ public class OShapedRecipes implements OIRecipe {
                 int var7 = var5 - var2;
                 int var8 = var6 - var3;
                 OItemStack var9 = null;
+
                 if (var7 >= 0 && var8 >= 0 && var7 < this.b && var8 < this.c) {
                     if (var4) {
                         var9 = this.d[this.b - var7 - 1 + var8 * this.b];
@@ -58,6 +61,7 @@ public class OShapedRecipes implements OIRecipe {
                 }
 
                 OItemStack var10 = var1.b(var5, var6);
+
                 if (var10 != null || var9 != null) {
                     if (var10 == null && var9 != null || var10 != null && var9 == null) {
                         return false;

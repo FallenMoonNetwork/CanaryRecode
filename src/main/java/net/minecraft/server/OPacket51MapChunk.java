@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import net.minecraft.server.OExtendedBlockStorage;
 import net.minecraft.server.ONetHandler;
 import net.minecraft.server.ONibbleArray;
 import net.minecraft.server.OPacket;
+
 
 public class OPacket51MapChunk extends OPacket {
 
@@ -45,6 +47,7 @@ public class OPacket51MapChunk extends OPacket {
         int var6 = 0;
 
         int var7;
+
         for (var7 = 0; var7 < var4.length; ++var7) {
             if (var4[var7] != null && (!var2 || !var4[var7].a()) && (var3 & 1 << var7) != 0) {
                 this.c |= 1 << var7;
@@ -69,15 +72,18 @@ public class OPacket51MapChunk extends OPacket {
         int var9 = 0;
 
         int var10;
+
         for (var10 = 0; var10 < var4.length; ++var10) {
             if (var4[var10] != null && (!var2 || !var4[var10].a()) && (var3 & 1 << var10) != 0) {
                 byte[] var11 = var4[var10].g();
+
                 System.arraycopy(var11, 0, var8, var9, var11.length);
                 var9 += var11.length;
             }
         }
 
         ONibbleArray var16;
+
         for (var10 = 0; var10 < var4.length; ++var10) {
             if (var4[var10] != null && (!var2 || !var4[var10].a()) && (var3 & 1 << var10) != 0) {
                 var16 = var4[var10].i();
@@ -114,6 +120,7 @@ public class OPacket51MapChunk extends OPacket {
 
         if (var2) {
             byte[] var18 = var1.l();
+
             System.arraycopy(var18, 0, var8, var9, var18.length);
             var9 += var18.length;
         }
@@ -154,6 +161,7 @@ public class OPacket51MapChunk extends OPacket {
         int var2 = 0;
 
         int var3;
+
         for (var3 = 0; var3 < 16; ++var3) {
             var2 += this.c >> var3 & 1;
         }
@@ -165,6 +173,7 @@ public class OPacket51MapChunk extends OPacket {
 
         this.e = new byte[var3];
         Inflater var4 = new Inflater();
+
         var4.setInput(i, 0, this.g);
         boolean var9 = false;
 

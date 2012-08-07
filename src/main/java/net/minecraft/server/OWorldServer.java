@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldProvider;
 import net.minecraft.server.OWorldSettings;
 
+
 public class OWorldServer extends OWorld {
 
     public OChunkProviderServer G;
@@ -35,11 +37,11 @@ public class OWorldServer extends OWorld {
     private OMinecraftServer J;
     private OIntHashMap K;
     
-    
     // CanaryMod start
     public CanaryServer getServer() {
         return J.getServer();
     }
+
     // CanaryMod end
 
     public OWorldServer(OMinecraftServer var1, OISaveHandler var2, String var3, int var4, OWorldSettings var5) {
@@ -48,8 +50,8 @@ public class OWorldServer extends OWorld {
         if (this.K == null) {
             this.K = new OIntHashMap();
         }
-        //CanaryMod: Remove if something derps!
-//        this.b();
+        // CanaryMod: Remove if something derps!
+        // this.b();
     }
 
     @Override
@@ -75,6 +77,7 @@ public class OWorldServer extends OWorld {
     @Override
     protected OIChunkProvider b() {
         OIChunkLoader var1 = this.w.a(this.t);
+
         this.G = new OChunkProviderServer(this, var1, this.t.b());
         return this.G;
     }
@@ -84,6 +87,7 @@ public class OWorldServer extends OWorld {
 
         for (int var8 = 0; var8 < this.c.size(); ++var8) {
             OTileEntity var9 = (OTileEntity) this.c.get(var8);
+
             if (var9.l >= var1 && var9.m >= var2 && var9.n >= var3 && var9.l < var4 && var9.m < var5 && var9.n < var6) {
                 var7.add(var9);
             }
@@ -96,6 +100,7 @@ public class OWorldServer extends OWorld {
     public boolean a(OEntityPlayer var1, int var2, int var3, int var4) {
         int var5 = OMathHelper.a(var2 - this.worldInfo.getSpawnX());
         int var6 = OMathHelper.a(var4 - this.worldInfo.getSpawnZ());
+
         if (var5 > var6) {
             var6 = var5;
         }
@@ -117,6 +122,7 @@ public class OWorldServer extends OWorld {
         super.c(var1);
         this.K.a(var1.bd, var1);
         OEntity[] var2 = var1.bb();
+
         if (var2 != null) {
             for (int var3 = 0; var3 < var2.length; ++var3) {
                 this.K.a(var2[var3].bd, var2[var3]);
@@ -130,6 +136,7 @@ public class OWorldServer extends OWorld {
         super.d(var1);
         this.K.d(var1.bd);
         OEntity[] var2 = var1.bb();
+
         if (var2 != null) {
             for (int var3 = 0; var3 < var2.length; ++var3) {
                 this.K.d(var2[var3].bd);
@@ -155,14 +162,16 @@ public class OWorldServer extends OWorld {
     @Override
     public void a(OEntity var1, byte var2) {
         OPacket38EntityStatus var3 = new OPacket38EntityStatus(var1.bd, var2);
-        //CanaryMod use the real entity tracker
+
+        // CanaryMod use the real entity tracker
         this.getCanaryWorld().getEntityTracker().getHandle().b(var1, var3);
-//        this.J.b(this.t.g).b(var1, var3);
+        // this.J.b(this.t.g).b(var1, var3);
     }
 
     @Override
     public OExplosion a(OEntity var1, double var2, double var4, double var6, float var8, boolean var9) {
         OExplosion var10 = new OExplosion(this, var1, var2, var4, var6, var8);
+
         var10.a = var9;
         var10.a();
         var10.a(false);
@@ -183,6 +192,7 @@ public class OWorldServer extends OWorld {
     @Override
     protected void i() {
         boolean var1 = this.x();
+
         super.i();
         if (var1 != this.x()) {
             if (var1) {

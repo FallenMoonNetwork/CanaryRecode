@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntityPlayer;
@@ -8,6 +9,7 @@ import net.minecraft.server.OItem;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockTNT extends OBlock {
 
@@ -48,6 +50,7 @@ public class OBlockTNT extends OBlock {
     public void a_(OWorld var1, int var2, int var3, int var4) {
         if (!var1.F) {
             OEntityTNTPrimed var5 = new OEntityTNTPrimed(var1, (var2 + 0.5F), (var3 + 0.5F), (var4 + 0.5F));
+
             var5.a = var1.r.nextInt(var5.a / 4) + var5.a / 8;
             var1.b(var5);
         }
@@ -60,6 +63,7 @@ public class OBlockTNT extends OBlock {
                 this.a(var1, var2, var3, var4, new OItemStack(OBlock.am.bO, 1, 0));
             } else {
                 OEntityTNTPrimed var6 = new OEntityTNTPrimed(var1, (var2 + 0.5F), (var3 + 0.5F), (var4 + 0.5F));
+
                 var1.b(var6);
                 var1.a(var6, "random.fuse", 1.0F, 1.0F);
             }

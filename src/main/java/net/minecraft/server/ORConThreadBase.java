@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.server.OIServer;
+
 
 public abstract class ORConThreadBase implements Runnable {
 
@@ -67,6 +69,7 @@ public abstract class ORConThreadBase implements Runnable {
             return false;
         } else {
             boolean var3 = false;
+
             if (!var1.isClosed()) {
                 var1.close();
                 var3 = true;
@@ -118,6 +121,7 @@ public abstract class ORConThreadBase implements Runnable {
 
         while (var3.hasNext()) {
             DatagramSocket var4 = (DatagramSocket) var3.next();
+
             if (this.a(var4, false)) {
                 ++var2;
             }
@@ -128,6 +132,7 @@ public abstract class ORConThreadBase implements Runnable {
 
         while (var3.hasNext()) {
             ServerSocket var5 = (ServerSocket) var3.next();
+
             if (this.a(var5, false)) {
                 ++var2;
             }

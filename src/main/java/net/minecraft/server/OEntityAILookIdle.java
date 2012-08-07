@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityLiving;
+
 
 public class OEntityAILookIdle extends OEntityAIBase {
 
@@ -29,6 +31,7 @@ public class OEntityAILookIdle extends OEntityAIBase {
     @Override
     public void c() {
         double var1 = 6.283185307179586D * this.a.an().nextDouble();
+
         this.b = Math.cos(var1);
         this.c = Math.sin(var1);
         this.d = 20 + this.a.an().nextInt(20);

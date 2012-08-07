@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OStatBase;
+
 
 public class OStatCrafting extends OStatBase {
 

@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntityLiving;
+
 
 public class OEntityBodyHelper {
 
@@ -16,6 +18,7 @@ public class OEntityBodyHelper {
     public void a() {
         double var1 = this.a.bm - this.a.bj;
         double var3 = this.a.bo - this.a.bl;
+
         if (var1 * var1 + var3 * var3 > 2.500000277905201E-7D) {
             this.a.V = this.a.bs;
             this.a.X = this.a(this.a.V, this.a.X, 75.0F);
@@ -23,6 +26,7 @@ public class OEntityBodyHelper {
             this.b = 0;
         } else {
             float var5 = 75.0F;
+
             if (Math.abs(this.a.X - this.c) > 15.0F) {
                 this.b = 0;
                 this.c = this.a.X;
@@ -39,6 +43,7 @@ public class OEntityBodyHelper {
 
     private float a(float var1, float var2, float var3) {
         float var4;
+
         for (var4 = var1 - var2; var4 < -180.0F; var4 += 360.0F) {
             ;
         }

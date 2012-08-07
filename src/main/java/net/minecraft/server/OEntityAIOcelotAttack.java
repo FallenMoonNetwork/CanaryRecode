@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OEntityAIBase;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OWorld;
+
 
 public class OEntityAIOcelotAttack extends OEntityAIBase {
 
@@ -22,6 +24,7 @@ public class OEntityAIOcelotAttack extends OEntityAIBase {
     @Override
     public boolean a() {
         OEntityLiving var1 = this.b.at();
+
         if (var1 == null) {
             return false;
         } else {
@@ -47,6 +50,7 @@ public class OEntityAIOcelotAttack extends OEntityAIBase {
         double var1 = (this.b.bG * 2.0F * this.b.bG * 2.0F);
         double var3 = this.b.e(this.c.bm, this.c.bw.b, this.c.bo);
         float var5 = 0.23F;
+
         if (var3 > var1 && var3 < 16.0D) {
             var5 = 0.4F;
         } else if (var3 < 225.0D) {

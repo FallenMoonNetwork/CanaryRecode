@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OItem;
 import net.minecraft.server.OMaterial;
+
 
 public class OBlockOre extends OBlock {
 
@@ -25,6 +27,7 @@ public class OBlockOre extends OBlock {
     public int a(int var1, Random var2) {
         if (var1 > 0 && this.bO != this.a(0, var2, var1)) {
             int var3 = var2.nextInt(var1 + 2) - 1;
+
             if (var3 < 0) {
                 var3 = 0;
             }

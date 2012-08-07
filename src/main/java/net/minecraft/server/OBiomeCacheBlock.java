@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBiomeCache;
 import net.minecraft.server.OBiomeGenBase;
+
 
 public class OBiomeCacheBlock {
 

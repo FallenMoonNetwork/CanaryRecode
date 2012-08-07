@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import net.minecraft.server.ORecipesTools;
 import net.minecraft.server.ORecipesWeapons;
 import net.minecraft.server.OShapedRecipes;
 import net.minecraft.server.OShapelessRecipes;
+
 
 public class OCraftingManager {
 
@@ -125,11 +127,13 @@ public class OCraftingManager {
         int var4 = 0;
         int var5 = 0;
         int var6 = 0;
+
         if (var2[var4] instanceof String[]) {
             String[] var7 = ((String[]) var2[var4++]);
 
             for (int var8 = 0; var8 < var7.length; ++var8) {
                 String var9 = var7[var8];
+
                 ++var6;
                 var5 = var9.length();
                 var3 = var3 + var9;
@@ -137,6 +141,7 @@ public class OCraftingManager {
         } else {
             while (var2[var4] instanceof String) {
                 String var11 = (String) var2[var4++];
+
                 ++var6;
                 var5 = var11.length();
                 var3 = var3 + var11;
@@ -144,9 +149,11 @@ public class OCraftingManager {
         }
 
         HashMap var12;
+
         for (var12 = new HashMap(); var4 < var2.length; var4 += 2) {
             Character var13 = (Character) var2[var4];
             OItemStack var14 = null;
+
             if (var2[var4 + 1] instanceof OItem) {
                 var14 = new OItemStack((OItem) var2[var4 + 1]);
             } else if (var2[var4 + 1] instanceof OBlock) {
@@ -162,6 +169,7 @@ public class OCraftingManager {
 
         for (int var16 = 0; var16 < var5 * var6; ++var16) {
             char var10 = var3.charAt(var16);
+
             if (var12.containsKey(Character.valueOf(var10))) {
                 var15[var16] = ((OItemStack) var12.get(Character.valueOf(var10))).j();
             } else {
@@ -179,6 +187,7 @@ public class OCraftingManager {
 
         for (int var6 = 0; var6 < var5; ++var6) {
             Object var7 = var4[var6];
+
             if (var7 instanceof OItemStack) {
                 var3.add(((OItemStack) var7).j());
             } else if (var7 instanceof OItem) {
@@ -201,8 +210,10 @@ public class OCraftingManager {
         OItemStack var4 = null;
 
         int var5;
+
         for (var5 = 0; var5 < var1.getInventorySize(); ++var5) {
             OItemStack var6 = var1.g_(var5);
+
             if (var6 != null) {
                 if (var2 == 0) {
                     var3 = var6;
@@ -222,28 +233,31 @@ public class OCraftingManager {
             int var7 = var11.f() - var4.g();
             int var8 = var10 + var7 + var11.f() * 10 / 100;
             int var9 = var11.f() - var8;
+
             if (var9 < 0) {
                 var9 = 0;
             }
             // CanaryMod start - onRecipeMatch
             OInventoryPlayer playerInventory = null;
+
             if (var1.c instanceof OContainerPlayer) {
-                playerInventory = ((OContainerPlayer)var1.c).playerInventory;
+                playerInventory = ((OContainerPlayer) var1.c).playerInventory;
             } else if (var1.c instanceof OContainerWorkbench) {
-                playerInventory = ((OContainerWorkbench)var1.c).playerInventory;
+                playerInventory = ((OContainerWorkbench) var1.c).playerInventory;
             }
             if (playerInventory != null) {
-                RecipeMatchHook hook = new RecipeMatchHook(((OEntityPlayerMP)playerInventory.d).getPlayer(), var1.c.getInventory(), new CanaryItem(new OItemStack(var3.c, 1, var9)));
+                RecipeMatchHook hook = new RecipeMatchHook(((OEntityPlayerMP) playerInventory.d).getPlayer(), var1.c.getInventory(), new CanaryItem(new OItemStack(var3.c, 1, var9)));
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
-                    CanaryItem result = (CanaryItem)hook.getRecipeResult();
+                    CanaryItem result = (CanaryItem) hook.getRecipeResult();
+
                     if (result != null) {
                         return result.getHandle();
                     } else {
                         return null;
                     }
-                }
-                else {
+                } else {
                     return null;
                 }
             } else {
@@ -253,20 +267,24 @@ public class OCraftingManager {
         } else {
             for (var5 = 0; var5 < this.b.size(); ++var5) {
                 OIRecipe var12 = (OIRecipe) this.b.get(var5);
+
                 if (var12.a(var1)) {
                     // CanaryMod start - onRecipeMatch
                     OItemStack recipeItemStack = var12.b(var1);
                     OInventoryPlayer playerInventory = null;
+
                     if (var1.c instanceof OContainerPlayer) {
-                        playerInventory = ((OContainerPlayer)var1.c).playerInventory;
+                        playerInventory = ((OContainerPlayer) var1.c).playerInventory;
                     } else if (var1.c instanceof OContainerWorkbench) {
-                        playerInventory = ((OContainerWorkbench)var1.c).playerInventory;
+                        playerInventory = ((OContainerWorkbench) var1.c).playerInventory;
                     }
                     if (playerInventory != null) {
-                        RecipeMatchHook hook = new RecipeMatchHook(((OEntityPlayerMP)playerInventory.d).getPlayer(), var1.c.getInventory(), new CanaryItem(recipeItemStack));
+                        RecipeMatchHook hook = new RecipeMatchHook(((OEntityPlayerMP) playerInventory.d).getPlayer(), var1.c.getInventory(), new CanaryItem(recipeItemStack));
+
                         Canary.hooks().callHook(hook);
                         if (!hook.isCanceled()) {
-                            CanaryItem result = (CanaryItem)hook.getRecipeResult();
+                            CanaryItem result = (CanaryItem) hook.getRecipeResult();
+
                             if (result != null) {
                                 return result.getHandle();
                             } else {

@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldGenerator;
+
 
 public class OWorldGenTrees extends OWorldGenerator {
 
@@ -28,11 +30,13 @@ public class OWorldGenTrees extends OWorldGenerator {
     public boolean a(OWorld var1, Random var2, int var3, int var4, int var5) {
         int var6 = var2.nextInt(3) + this.a;
         boolean var7 = true;
+
         if (var4 >= 1 && var4 + var6 + 1 <= 256) {
             int var8;
             byte var9;
             int var11;
             int var12;
+
             for (var8 = var4; var8 <= var4 + 1 + var6; ++var8) {
                 var9 = 1;
                 if (var8 == var4) {
@@ -69,6 +73,7 @@ public class OWorldGenTrees extends OWorldGenerator {
                     int var13;
                     int var14;
                     int var15;
+
                     for (var11 = var4 - var9 + var6; var11 <= var4 + var6; ++var11) {
                         var12 = var11 - (var4 + var6);
                         var13 = var18 + 1 - var12 / 2;
@@ -78,6 +83,7 @@ public class OWorldGenTrees extends OWorldGenerator {
 
                             for (int var16 = var5 - var13; var16 <= var5 + var13; ++var16) {
                                 int var17 = var16 - var5;
+
                                 if ((Math.abs(var15) != var13 || Math.abs(var17) != var13 || var2.nextInt(2) != 0 && var12 != 0) && !OBlock.n[var1.a(var14, var11, var16)]) {
                                     this.a(var1, var14, var11, var16, OBlock.K.bO, this.d);
                                 }

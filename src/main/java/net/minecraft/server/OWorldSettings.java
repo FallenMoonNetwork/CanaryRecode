@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OWorldType;
+
 
 public final class OWorldSettings {
 
@@ -44,6 +46,7 @@ public final class OWorldSettings {
         case 0:
         case 1:
             return var0;
+
         default:
             return 0;
         }

@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OEnchantment;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OEnumCreatureAttribute;
 import net.minecraft.server.OEnumEnchantmentType;
+
 
 public class OEnchantmentDamage extends OEnchantment {
 

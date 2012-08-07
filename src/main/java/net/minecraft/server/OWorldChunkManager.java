@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,6 +11,7 @@ import net.minecraft.server.OGenLayer;
 import net.minecraft.server.OIntCache;
 import net.minecraft.server.OWorld;
 import net.minecraft.server.OWorldType;
+
 
 public class OWorldChunkManager {
 
@@ -34,6 +36,7 @@ public class OWorldChunkManager {
     public OWorldChunkManager(long var1, OWorldType var3) {
         this();
         OGenLayer[] var4 = OGenLayer.a(var1, var3);
+
         this.a = var4[0];
         this.b = var4[1];
     }
@@ -60,6 +63,7 @@ public class OWorldChunkManager {
 
         for (int var7 = 0; var7 < var4 * var5; ++var7) {
             float var8 = OBiomeGenBase.a[var6[var7]].g() / 65536.0F;
+
             if (var8 > 1.0F) {
                 var8 = 1.0F;
             }
@@ -80,6 +84,7 @@ public class OWorldChunkManager {
 
         for (int var7 = 0; var7 < var4 * var5; ++var7) {
             float var8 = OBiomeGenBase.a[var6[var7]].h() / 65536.0F;
+
             if (var8 > 1.0F) {
                 var8 = 1.0F;
             }
@@ -117,6 +122,7 @@ public class OWorldChunkManager {
 
         if (var6 && var4 == 16 && var5 == 16 && (var2 & 15) == 0 && (var3 & 15) == 0) {
             OBiomeGenBase[] var9 = this.c.c(var2, var3);
+
             System.arraycopy(var9, 0, var1, 0, var4 * var5);
             return var1;
         } else {
@@ -141,6 +147,7 @@ public class OWorldChunkManager {
 
         for (int var12 = 0; var12 < var9 * var10; ++var12) {
             OBiomeGenBase var13 = OBiomeGenBase.a[var11[var12]];
+
             if (!var4.contains(var13)) {
                 return false;
             }
@@ -164,6 +171,7 @@ public class OWorldChunkManager {
             int var16 = var6 + var15 % var10 << 2;
             int var17 = var7 + var15 / var10 << 2;
             OBiomeGenBase var18 = OBiomeGenBase.a[var12[var15]];
+
             if (var4.contains(var18) && (var13 == null || var5.nextInt(var14 + 1) == 0)) {
                 var13 = new OChunkPosition(var16, 0, var17);
                 ++var14;

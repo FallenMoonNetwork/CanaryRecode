@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.minecraft.server.OBlockContainer;
 import net.minecraft.server.OEntityItem;
 import net.minecraft.server.OEntityPlayer;
@@ -8,6 +9,7 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OTileEntity;
 import net.minecraft.server.OTileEntityRecordPlayer;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockJukeBox extends OBlockContainer {
 
@@ -33,6 +35,7 @@ public class OBlockJukeBox extends OBlockContainer {
     public void f(OWorld var1, int var2, int var3, int var4, int var5) {
         if (!var1.F) {
             OTileEntityRecordPlayer var6 = (OTileEntityRecordPlayer) var1.b(var2, var3, var4);
+
             if (var6 != null) {
                 var6.a = var5;
                 var6.G_();
@@ -44,8 +47,10 @@ public class OBlockJukeBox extends OBlockContainer {
     public void c_(OWorld var1, int var2, int var3, int var4) {
         if (!var1.F) {
             OTileEntityRecordPlayer var5 = (OTileEntityRecordPlayer) var1.b(var2, var3, var4);
+
             if (var5 != null) {
                 int var6 = var5.a;
+
                 if (var6 != 0) {
                     var1.f(1005, var2, var3, var4, 0);
                     var1.a((String) null, var2, var3, var4);
@@ -57,6 +62,7 @@ public class OBlockJukeBox extends OBlockContainer {
                     double var11 = (var1.r.nextFloat() * var8) + (1.0F - var8) * 0.2D + 0.6D;
                     double var13 = (var1.r.nextFloat() * var8) + (1.0F - var8) * 0.5D;
                     OEntityItem var15 = new OEntityItem(var1, var2 + var9, var3 + var11, var4 + var13, new OItemStack(var6, 1, 0));
+
                     var15.c = 10;
                     var1.b(var15);
                 }

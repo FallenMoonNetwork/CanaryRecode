@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.server.OBlock;
@@ -10,6 +11,7 @@ import net.minecraft.server.OStructureBoundingBox;
 import net.minecraft.server.OStructureComponent;
 import net.minecraft.server.OStructureStrongholdPieces;
 import net.minecraft.server.OWorld;
+
 
 public class OComponentStrongholdStairsStraight extends OComponentStronghold {
 
@@ -29,6 +31,7 @@ public class OComponentStrongholdStairsStraight extends OComponentStronghold {
 
     public static OComponentStrongholdStairsStraight a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
         OStructureBoundingBox var7 = OStructureBoundingBox.a(var2, var3, var4, -1, -7, 0, 5, 11, 8, var5);
+
         return a(var7) && OStructureComponent.a(var0, var7) == null ? new OComponentStrongholdStairsStraight(var6, var1, var7, var5) : null;
     }
 

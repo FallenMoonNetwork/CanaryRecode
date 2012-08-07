@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
@@ -10,6 +11,7 @@ import net.minecraft.server.OMaterial;
 import net.minecraft.server.OMovingObjectPosition;
 import net.minecraft.server.OVec3D;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockDoor extends OBlock {
 
@@ -22,6 +24,7 @@ public class OBlockDoor extends OBlock {
 
         float var3 = 0.5F;
         float var4 = 1.0F;
+
         this.a(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var4, 0.5F + var3);
     }
 
@@ -34,6 +37,7 @@ public class OBlockDoor extends OBlock {
     @Override
     public boolean b(OIBlockAccess var1, int var2, int var3, int var4) {
         int var5 = this.e(var1, var2, var3, var4);
+
         return (var5 & 4) != 0;
     }
 
@@ -69,10 +73,12 @@ public class OBlockDoor extends OBlock {
 
     private void d(int var1) {
         float var2 = 0.1875F;
+
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 2.0F, 1.0F);
         int var3 = var1 & 3;
         boolean var4 = (var1 & 4) != 0;
         boolean var5 = (var1 & 16) != 0;
+
         if (var3 == 0) {
             if (!var4) {
                 this.a(0.0F, 0.0F, 0.0F, var2, 1.0F, 1.0F);
@@ -121,6 +127,7 @@ public class OBlockDoor extends OBlock {
         } else {
             int var6 = this.e((OIBlockAccess) var1, var2, var3, var4);
             int var7 = var6 & 7;
+
             var7 ^= 4;
             if ((var6 & 8) != 0) {
                 var1.c(var2, var3 - 1, var4, var7);
@@ -138,8 +145,10 @@ public class OBlockDoor extends OBlock {
     public void a(OWorld var1, int var2, int var3, int var4, boolean var5) {
         int var6 = this.e((OIBlockAccess) var1, var2, var3, var4);
         boolean var7 = (var6 & 4) != 0;
+
         if (var7 != var5) {
             int var8 = var6 & 7;
+
             var8 ^= 4;
             if ((var6 & 8) != 0) {
                 var1.c(var2, var3 - 1, var4, var8);
@@ -156,6 +165,7 @@ public class OBlockDoor extends OBlock {
     @Override
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         int var6 = var1.c(var2, var3, var4);
+
         if ((var6 & 8) != 0) {
             if (var1.a(var2, var3 - 1, var4) != this.bO) {
                 var1.e(var2, var3, var4, 0);
@@ -166,6 +176,7 @@ public class OBlockDoor extends OBlock {
             }
         } else {
             boolean var7 = false;
+
             if (var1.a(var2, var3 + 1, var4) != this.bO) {
                 var1.e(var2, var3, var4, 0);
                 var7 = true;
@@ -185,6 +196,7 @@ public class OBlockDoor extends OBlock {
                 }
             } else {
                 boolean var8 = var1.x(var2, var3, var4) || var1.x(var2, var3 + 1, var4);
+
                 if ((var8 || var5 > 0 && OBlock.m[var5].e() || var5 == 0) && var5 != this.bO) {
                     this.a(var1, var2, var3, var4, var8);
                 }
@@ -219,6 +231,7 @@ public class OBlockDoor extends OBlock {
         boolean var6 = (var5 & 8) != 0;
         int var7;
         int var8;
+
         if (var6) {
             var7 = var1.c(var2, var3 - 1, var4);
             var8 = var5;
@@ -229,6 +242,7 @@ public class OBlockDoor extends OBlock {
 
         boolean var9 = (var8 & 1) != 0;
         int var10 = var7 & 7 | (var6 ? 8 : 0) | (var9 ? 16 : 0);
+
         return var10;
     }
 }

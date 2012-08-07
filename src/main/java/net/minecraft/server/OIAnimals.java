@@ -1,4 +1,4 @@
 package net.minecraft.server;
 
-public interface OIAnimals {
-}
+
+public interface OIAnimals {}

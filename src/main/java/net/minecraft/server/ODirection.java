@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class ODirection {
 
     public static final int[] a = new int[] { 0, -1, 0, 1 };

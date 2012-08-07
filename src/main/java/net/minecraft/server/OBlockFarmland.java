@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.minecraft.server.OAxisAlignedBB;
 import net.minecraft.server.OBlock;
 import net.minecraft.server.OEntity;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OWorld;
+
 
 public class OBlockFarmland extends OBlock {
 
@@ -41,6 +43,7 @@ public class OBlockFarmland extends OBlock {
     public void a(OWorld var1, int var2, int var3, int var4, Random var5) {
         if (!this.h(var1, var2, var3, var4) && !var1.y(var2, var3 + 1, var4)) {
             int var6 = var1.c(var2, var3, var4);
+
             if (var6 > 0) {
                 var1.c(var2, var3, var4, var6 - 1);
             } else if (!this.g(var1, var2, var3, var4)) {
@@ -66,6 +69,7 @@ public class OBlockFarmland extends OBlock {
         for (int var6 = var2 - var5; var6 <= var2 + var5; ++var6) {
             for (int var7 = var4 - var5; var7 <= var4 + var5; ++var7) {
                 int var8 = var1.a(var6, var3 + 1, var7);
+
                 if (var8 == OBlock.az.bO || var8 == OBlock.bt.bO || var8 == OBlock.bs.bO) {
                     return true;
                 }
@@ -93,6 +97,7 @@ public class OBlockFarmland extends OBlock {
     public void a(OWorld var1, int var2, int var3, int var4, int var5) {
         super.a(var1, var2, var3, var4, var5);
         OMaterial var6 = var1.d(var2, var3 + 1, var4);
+
         if (var6.a()) {
             var1.e(var2, var3, var4, OBlock.v.bO);
         }
