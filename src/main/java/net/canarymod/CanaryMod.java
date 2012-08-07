@@ -1,5 +1,9 @@
 package net.canarymod;
 
+import net.canarymod.api.CanaryConfigurationManager;
+import net.canarymod.api.CanaryServer;
+import net.canarymod.api.factory.CanaryFactory;
+import net.canarymod.api.factory.Factory;
 import net.canarymod.bansystem.BanManager;
 import net.canarymod.commandsys.CommandList;
 import net.canarymod.commandsys.CommandManager;
@@ -14,14 +18,13 @@ import net.canarymod.permissionsystem.PermissionManager;
 import net.canarymod.plugin.PluginLoader;
 import net.canarymod.user.UserAndGroupsProvider;
 import net.canarymod.warp.WarpProvider;
-import net.canarymod.api.CanaryConfigurationManager;
-import net.canarymod.api.CanaryServer;
 
 /**
  * The implementation of Canary, the new catch-all etc replacement, only much better :P
  * 
  * @author Chris Ksoll
  * @author Jos Kuijpers
+ * @author Brian McCarthy
  */
 public class CanaryMod extends Canary {
 
@@ -51,6 +54,7 @@ public class CanaryMod extends Canary {
         this.hookExecutor = new HookExecutor();
         this.helpManager = new HelpManager();
         this.banManager = new BanManager();
+        this.factory = (Factory) new CanaryFactory();
         //Initialize the plugin loader and scan for plugins
         this.loader = new PluginLoader();
         this.loader.scanPlugins();
