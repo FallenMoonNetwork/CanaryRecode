@@ -8,3 +8,4 @@
 bin/*
 /target/
 *.prefs
+/src/main/java/net/minecraft/server/*.*
