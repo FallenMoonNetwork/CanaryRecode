@@ -8,29 +8,9 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import net.canarymod.Canary;
-import net.canarymod.Colors;
-import net.canarymod.Logman;
 import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.chat.Colors;
 import net.canarymod.hook.player.ConnectionHook;
-import net.minecraft.server.OChunkCoordinates;
-import net.minecraft.server.OEntityPlayerMP;
-import net.minecraft.server.OMinecraftServer;
-import net.minecraft.server.ONetHandler;
-import net.minecraft.server.ONetServerHandler;
-import net.minecraft.server.ONetworkManager;
-import net.minecraft.server.OPacket;
-import net.minecraft.server.OPacket1Login;
-import net.minecraft.server.OPacket202PlayerAbilities;
-import net.minecraft.server.OPacket254ServerPing;
-import net.minecraft.server.OPacket255KickDisconnect;
-import net.minecraft.server.OPacket2Handshake;
-import net.minecraft.server.OPacket3Chat;
-import net.minecraft.server.OPacket41EntityEffect;
-import net.minecraft.server.OPacket4UpdateTime;
-import net.minecraft.server.OPacket6SpawnPosition;
-import net.minecraft.server.OPotionEffect;
-import net.minecraft.server.OThreadLoginVerifier;
-import net.minecraft.server.OWorldServer;
 
 
 public class ONetLoginHandler extends ONetHandler {
@@ -134,14 +114,14 @@ public class ONetLoginHandler extends ONetHandler {
             var5.b((new OPacket6SpawnPosition(var4.a, var4.b, var4.c)));
             var5.b((new OPacket202PlayerAbilities(var2.L)));
             this.e.h.a(var2, var3);
-            ConnectionHook hook = new ConnectionHook(var2.getPlayer(), Colors.Yellow + var2.getPlayer().getName() + " joined the game.", null);
+            ConnectionHook hook = new ConnectionHook(var2.getPlayer(), Colors.YELLOW + var2.getPlayer().getName() + " joined the game.", null);
 
             Canary.hooks().callHook(hook);
             if (!hook.isHidden()) {
                 this.e.h.sendPacketToAll((new OPacket3Chat(hook.getMessage())));
             }
             this.e.h.c(var2);
-            
+
             var5.a(var2.bm, var2.bn, var2.bo, var2.bs, var2.bt, var2.w, var2.bi.getCanaryWorld().getName());
             this.e.c.a(var5);
             var5.b((new OPacket4UpdateTime(var3.o())));

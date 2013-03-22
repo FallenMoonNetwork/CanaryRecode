@@ -5,19 +5,7 @@ import java.util.List;
 
 import net.canarymod.Canary;
 import net.canarymod.api.entity.Player;
-import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.RightClickHook;
-import net.minecraft.server.OBlock;
-import net.minecraft.server.ODamageSource;
-import net.minecraft.server.OEntity;
-import net.minecraft.server.OEntityAgeable;
-import net.minecraft.server.OEntityPlayer;
-import net.minecraft.server.OIAnimals;
-import net.minecraft.server.OItem;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OMathHelper;
-import net.minecraft.server.ONBTTagCompound;
-import net.minecraft.server.OWorld;
 
 
 public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals {
@@ -249,7 +237,7 @@ public abstract class OEntityAnimal extends OEntityAgeable implements OIAnimals 
         if (var2 != null && this.a(var2) && this.K() == 0) {
             // CanaryMod Breed hook
             Player tmp = ((OEntityPlayerMP) var1).getPlayer();
-            RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryEntityLiving(), Hook.Type.BREED);
+            RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryEntityLiving());
 
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {

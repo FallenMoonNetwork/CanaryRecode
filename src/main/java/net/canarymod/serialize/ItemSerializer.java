@@ -39,7 +39,7 @@ public class ItemSerializer implements Serializer<CanaryItem> {
     }
 
     @Override
-    public String serialize(Object obje) {
+    public String serialize(CanaryItem obje) {
         if(!(obje instanceof CanaryItem)) {
             Logman.logInfo("Received object type does not match. Expected CanaryItem. Found: "+obje.getClass().getSimpleName());
             return null;

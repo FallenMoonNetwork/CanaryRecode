@@ -8,63 +8,7 @@ import net.canarymod.api.entity.CanaryBaseItem;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
-import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.RightClickHook;
-import net.minecraft.server.OBlock;
-import net.minecraft.server.OEntity;
-import net.minecraft.server.OEntityLiving;
-import net.minecraft.server.OEntityPlayer;
-import net.minecraft.server.OEnumAction;
-import net.minecraft.server.OEnumArmorMaterial;
-import net.minecraft.server.OEnumToolMaterial;
-import net.minecraft.server.OItemAppleGold;
-import net.minecraft.server.OItemArmor;
-import net.minecraft.server.OItemAxe;
-import net.minecraft.server.OItemBed;
-import net.minecraft.server.OItemBoat;
-import net.minecraft.server.OItemBow;
-import net.minecraft.server.OItemBucket;
-import net.minecraft.server.OItemBucketMilk;
-import net.minecraft.server.OItemCoal;
-import net.minecraft.server.OItemDoor;
-import net.minecraft.server.OItemDye;
-import net.minecraft.server.OItemEgg;
-import net.minecraft.server.OItemEnderEye;
-import net.minecraft.server.OItemEnderPearl;
-import net.minecraft.server.OItemExpBottle;
-import net.minecraft.server.OItemFireball;
-import net.minecraft.server.OItemFishingRod;
-import net.minecraft.server.OItemFlintAndSteel;
-import net.minecraft.server.OItemFood;
-import net.minecraft.server.OItemGlassBottle;
-import net.minecraft.server.OItemHoe;
-import net.minecraft.server.OItemMap;
-import net.minecraft.server.OItemMinecart;
-import net.minecraft.server.OItemMonsterPlacer;
-import net.minecraft.server.OItemPainting;
-import net.minecraft.server.OItemPickaxe;
-import net.minecraft.server.OItemPotion;
-import net.minecraft.server.OItemRecord;
-import net.minecraft.server.OItemRedstone;
-import net.minecraft.server.OItemReed;
-import net.minecraft.server.OItemSaddle;
-import net.minecraft.server.OItemSeeds;
-import net.minecraft.server.OItemShears;
-import net.minecraft.server.OItemSign;
-import net.minecraft.server.OItemSnowball;
-import net.minecraft.server.OItemSoup;
-import net.minecraft.server.OItemSpade;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OItemSword;
-import net.minecraft.server.OMaterial;
-import net.minecraft.server.OMathHelper;
-import net.minecraft.server.OMovingObjectPosition;
-import net.minecraft.server.OPotion;
-import net.minecraft.server.OPotionHelper;
-import net.minecraft.server.OStatCollector;
-import net.minecraft.server.OStatList;
-import net.minecraft.server.OVec3D;
-import net.minecraft.server.OWorld;
 
 
 public class OItem {
@@ -221,7 +165,7 @@ public class OItem {
     private OItem b = null;
     private String bU = null;
     private String bV;
-    
+
     // CanaryMod Start
     private CanaryBaseItem baseItem;
     // CanaryMod End
@@ -257,7 +201,8 @@ public class OItem {
         CanaryBlock block = (CanaryBlock) var2.bi.getCanaryWorld().getBlockAt(var4, var5, var6);
 
         block.setFaceClicked(BlockFace.fromByte((byte) var7));
-        RightClickHook hook = new RightClickHook(((OEntityPlayerMP) var2).getPlayer(), null, block, new CanaryItem(var1), null, Hook.Type.ITEM_USE);
+        //TODO: Differentiate hook item use
+        RightClickHook hook = new RightClickHook(((OEntityPlayerMP) var2).getPlayer(), null, block, new CanaryItem(var1), null);
 
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
@@ -277,7 +222,7 @@ public class OItem {
     public OItemStack b(OItemStack var1, OWorld var2, OEntityPlayer var3) {
         return var1;
     }
-    
+
     /**
      * CanaryMod: Get BaseItem handler
      * @return

@@ -4,22 +4,7 @@ package net.minecraft.server;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryCow;
 import net.canarymod.api.entity.Player;
-import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.RightClickHook;
-import net.minecraft.server.OEntityAIFollowParent;
-import net.minecraft.server.OEntityAILookIdle;
-import net.minecraft.server.OEntityAIMate;
-import net.minecraft.server.OEntityAIPanic;
-import net.minecraft.server.OEntityAISwimming;
-import net.minecraft.server.OEntityAITempt;
-import net.minecraft.server.OEntityAIWander;
-import net.minecraft.server.OEntityAIWatchClosest;
-import net.minecraft.server.OEntityAnimal;
-import net.minecraft.server.OEntityPlayer;
-import net.minecraft.server.OItem;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.ONBTTagCompound;
-import net.minecraft.server.OWorld;
 
 
 public class OEntityCow extends OEntityAnimal {
@@ -124,7 +109,8 @@ public class OEntityCow extends OEntityAnimal {
         if (var2 != null && var2.c == OItem.av.bP) {
             // CanaryMod cow milk hook
             Player tmp = ((OEntityPlayerMP) var1).getPlayer();
-            RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryCow(), Hook.Type.COW_MILK);
+            //TODO differentiate hook
+            RightClickHook hook = new RightClickHook(tmp, null, null, tmp.getItemHeld(), getCanaryCow());
 
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {

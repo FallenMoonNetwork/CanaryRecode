@@ -20,7 +20,6 @@ import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
-import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.ExperienceHook;
 import net.canarymod.hook.player.InventoryHook;
 import net.canarymod.hook.player.LeftClickHook;
@@ -75,7 +74,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
         this.bF = 0.0F;
         canaryPlayer = new CanaryPlayer(this);
     }
-    
+
     /**
      * CanaryMod get the ServerHandler handle
      * @return the serverHandler
@@ -327,7 +326,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                 // }
             }
         }
-        
+
         if (this.aD() != this.cf || this.cg != this.foodStats.getFoodLevel() || this.foodStats.getFoodSaturationLevel() == 0.0F != this.ch) {
             this.a.b((new OPacket8UpdateHealth(this.aD(), this.foodStats.getFoodLevel(), this.foodStats.getFoodSaturationLevel())));
             this.cf = this.aD();
@@ -349,7 +348,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                 }
             }
         }
-        
+
         if (this.N != this.ci) {
             this.ci = this.N;
             this.a.b((new OPacket43Experience(this.O, this.N, this.M)));
@@ -382,7 +381,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
 
     private void a(OTileEntity var1) {
         if (var1 != null) {
-            
+
             // CanaryMod start - onSignShow
             if (var1 instanceof OTileEntitySign) {
                 CanarySign sign = new CanarySign((OTileEntitySign) var1);
@@ -390,7 +389,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
                 Canary.hooks().callHook(new SignHook(canaryPlayer, sign, false));
             }
             // CanaryMod end
-            
+
             OPacket var2 = var1.d();
 
             if (var2 != null) {
@@ -594,7 +593,7 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     }
 
     @Override
-    public void a(OContainer var1, List var2) { 
+    public void a(OContainer var1, List var2) {
         this.a.b((new OPacket104WindowItems(var1.f, var2)));
         this.a.b((new OPacket103SetSlot(-1, -1, this.k.l())));
     }
@@ -676,7 +675,8 @@ public class OEntityPlayerMP extends OEntityPlayer implements OICrafting {
     public void a(OItemStack var1, int var2) {
         // super.a(var1, var2);
         if (var1 != null && var1.a() != null && var1.a().d(var1) == OEnumAction.b) {
-            RightClickHook hook = new RightClickHook(getPlayer(), null, null, var1.getCanaryItem(), null, Hook.Type.EAT);
+            //TODO: differentiate hook (eat)
+            RightClickHook hook = new RightClickHook(getPlayer(), null, null, var1.getCanaryItem(), null);
 
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {

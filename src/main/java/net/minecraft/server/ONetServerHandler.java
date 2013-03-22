@@ -7,9 +7,6 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import net.canarymod.Canary;
-import net.canarymod.Colors;
-import net.canarymod.Logman;
-import net.canarymod.config.Configuration; 
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.inventory.CanaryItem;
@@ -22,7 +19,8 @@ import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.position.Location;
-import net.canarymod.hook.Hook;
+import net.canarymod.chat.Colors;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.hook.player.LeftClickHook;
 import net.canarymod.hook.player.PlayerMoveHook;
@@ -30,47 +28,6 @@ import net.canarymod.hook.player.PlayerRespawnHook;
 import net.canarymod.hook.player.RightClickHook;
 import net.canarymod.hook.player.TeleportHook;
 import net.canarymod.hook.world.SignHook;
-import net.minecraft.server.OAxisAlignedBB;
-import net.minecraft.server.OChatAllowedCharacters;
-import net.minecraft.server.OChunkCoordinates;
-import net.minecraft.server.OEntity;
-import net.minecraft.server.OEntityItem;
-import net.minecraft.server.OEntityPlayerMP;
-import net.minecraft.server.OICommandListener;
-import net.minecraft.server.OIntHashMap;
-import net.minecraft.server.OInventoryPlayer;
-import net.minecraft.server.OItem;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OMathHelper;
-import net.minecraft.server.OMinecraftServer;
-import net.minecraft.server.ONetHandler;
-import net.minecraft.server.ONetworkManager;
-import net.minecraft.server.OPacket;
-import net.minecraft.server.OPacket0KeepAlive;
-import net.minecraft.server.OPacket101CloseWindow;
-import net.minecraft.server.OPacket102WindowClick;
-import net.minecraft.server.OPacket103SetSlot;
-import net.minecraft.server.OPacket106Transaction;
-import net.minecraft.server.OPacket107CreativeSetSlot;
-import net.minecraft.server.OPacket108EnchantItem;
-import net.minecraft.server.OPacket10Flying;
-import net.minecraft.server.OPacket130UpdateSign;
-import net.minecraft.server.OPacket13PlayerLookMove;
-import net.minecraft.server.OPacket14BlockDig;
-import net.minecraft.server.OPacket15Place;
-import net.minecraft.server.OPacket16BlockItemSwitch;
-import net.minecraft.server.OPacket18Animation;
-import net.minecraft.server.OPacket19EntityAction;
-import net.minecraft.server.OPacket202PlayerAbilities;
-import net.minecraft.server.OPacket255KickDisconnect;
-import net.minecraft.server.OPacket3Chat;
-import net.minecraft.server.OPacket53BlockChange;
-import net.minecraft.server.OPacket7UseEntity;
-import net.minecraft.server.OPacket9Respawn;
-import net.minecraft.server.OSlot;
-import net.minecraft.server.OTileEntity;
-import net.minecraft.server.OTileEntitySign;
-import net.minecraft.server.OWorldServer;
 
 
 public class ONetServerHandler extends ONetHandler implements OICommandListener {
@@ -110,7 +67,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     }
 
     /**
-     * CanaryMod return the NSH wrapper 
+     * CanaryMod return the NSH wrapper
      * @return
      */
     public CanaryNetServerHandler getCanaryNetServerHandler() {
@@ -157,7 +114,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             this.e.bi.getCanaryWorld().getEntityTracker().untrackEntity(this.e.getPlayer());
             this.e.bi.getCanaryWorld().getPlayerManager().removePlayer(this.e.getPlayer());
             // etc.getServer().getPlayerManager(this.e.bi.world).removePlayer(this.e);
-            ConnectionHook hook = new ConnectionHook(getUser(), var1, Colors.Yellow + getUser().getName() + " left the game.");
+            ConnectionHook hook = new ConnectionHook(getUser(), var1, Colors.YELLOW + getUser().getName() + " left the game.");
 
             Canary.hooks().callHook(hook);
             if (!hook.isHidden()) {
@@ -182,7 +139,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                     this.r = true;
                 }
             }
-            
+
             // CanaryMod start - onPlayerMove
             if (Math.floor(o) != Math.floor(player.getX()) || Math.floor(p) != Math.floor(player.getY()) || Math.floor(q) != Math.floor(player.getZ())) {
                 Location from = new Location(player.getWorld(), o, p, q, player.getRotation(), player.getPitch());
@@ -391,7 +348,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         this.e.b(var1, var3, var5, var7, var8);
         this.e.a.b((new OPacket13PlayerLookMove(var1, var3 + 1.6200000047683716D, var3, var5, var7, var8, false)));
     }
-    
+
     @Override
     public void a(OPacket14BlockDig var1) {
         OWorldServer var2 = (OWorldServer) ((CanaryWorld) this.e.getCanaryWorld()).getHandle();
@@ -443,7 +400,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                 if (!getUser().canBuild()) { // CanaryMod - no build rights, no digging
                     return; // TempDisable
                 }
-                
+
                 // CanaryMod start - onBlockLeftClick
                 Block block = var2.getCanaryWorld().getBlockAt(var5, var6, var7);
                 // Call hook
@@ -477,7 +434,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
     // CanaryMod: Store the blocks between blockPlaced packets
     private Block lastRightClicked;
-    
+
     @Override
     public void a(OPacket15Place var1) {
         OWorldServer var2 = (OWorldServer) ((CanaryWorld) this.e.getCanaryWorld()).getHandle();
@@ -488,12 +445,12 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         int var7 = var1.c;
         int var8 = var1.d;
         boolean spawnBuild = var2.H = var2.t.g != 0 || this.d.h.isOperator(this.e.v) || getUser().isAdmin() || getUser().hasPermission("canary.world.spawnbuild"); // CanaryMod - Check spawn build permission
-        
+
         // CanaryMod: Store block data to call hooks
         // CanaryMod START
         Block blockClicked;
         Block blockPlaced = null;
-        
+
         if (var1.d == 255) {
             // ITEM_USE -- if we have a lastRightClicked then it could be a
             // usable location
@@ -503,42 +460,42 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             // RIGHTCLICK or BLOCK_PLACE .. or nothing
             blockClicked = var2.getCanaryWorld().getBlockAt(var1.a, var1.b, var1.c);
             blockClicked.setFaceClicked(BlockFace.fromByte((byte) var1.d));
-            
+
             lastRightClicked = blockClicked;
         }
-        
+
         // If we clicked on something then we also have a location to place the block
         if (blockClicked != null && var3 != null) {
             blockPlaced = new CanaryBlock((short) var1.d, (byte) 0, blockClicked.getX(), blockClicked.getY(), blockClicked.getZ());
             switch (var1.d) {
-            case 0:
-                blockPlaced.setY(blockPlaced.getY() - 1);
-                break;
+                case 0:
+                    blockPlaced.setY(blockPlaced.getY() - 1);
+                    break;
 
-            case 1:
-                blockPlaced.setY(blockPlaced.getY() + 1);
-                break;
+                case 1:
+                    blockPlaced.setY(blockPlaced.getY() + 1);
+                    break;
 
-            case 2:
-                blockPlaced.setZ(blockPlaced.getZ() - 1);
-                break;
+                case 2:
+                    blockPlaced.setZ(blockPlaced.getZ() - 1);
+                    break;
 
-            case 3:
-                blockPlaced.setZ(blockPlaced.getZ() + 1);
-                break;
+                case 3:
+                    blockPlaced.setZ(blockPlaced.getZ() + 1);
+                    break;
 
-            case 4:
-                blockPlaced.setX(blockPlaced.getX() - 1);
-                break;
+                case 4:
+                    blockPlaced.setX(blockPlaced.getX() - 1);
+                    break;
 
-            case 5:
-                blockPlaced.setX(blockPlaced.getX() + 1);
-                break;
+                case 5:
+                    blockPlaced.setX(blockPlaced.getX() + 1);
+                    break;
             }
         }
 
         // CanaryMod: END
-        
+
         if (var1.d == 255) {
             if (var3 == null) {
                 return;
@@ -556,10 +513,10 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
             if (var11 > var12) {
                 var12 = var11;
             }
-            
+
             // CanaryMod - onBlockRightClicked
             Item item = (var3 != null) ? var3.getCanaryItem() : new CanaryItem(new OItemStack(0, 0, 0));
-            RightClickHook hook = new RightClickHook(getUser(), blockPlaced, blockClicked, item, null, Hook.Type.BLOCK_RIGHTCLICKED);
+            RightClickHook hook = new RightClickHook(getUser(), blockPlaced, blockClicked, item, null);
 
             Canary.hooks().callHook(hook);
             if (this.r && this.e.e(var5 + 0.5D, var6 + 0.5D, var7 + 0.5D) < 64.0D && (var12 > Configuration.getWorldConfig(var2.getCanaryWorld().getName()).getSpawnProtectionSize() || spawnBuild) && getUser().canBuild() && !hook.isCanceled()) { // XXX
@@ -628,7 +585,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
     public void a(String var1, Object[] var2) {
         a.info(this.e.v + " lost connection: " + var1);
         // CanaryMod start - onPlayerDisconnect
-        ConnectionHook hook = new ConnectionHook(getUser(), Colors.Yellow + getUser().getName() + " left the game.", var1);
+        ConnectionHook hook = new ConnectionHook(getUser(), Colors.YELLOW + getUser().getName() + " left the game.", var1);
 
         Canary.hooks().callHook(hook);
         if (!hook.isHidden()) {
@@ -666,7 +623,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
         // Re-route to Canary chat
         player.chat(var1.a);
     }
-    
+
     /**
      * Sends a message to the player
      * 
@@ -934,11 +891,11 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
 
                 // CanaryMod: Copy the old line text
                 String[] old = Arrays.copyOf(var7.a, var7.a.length);
-                           
+
                 for (int var8 = 0; var8 < 4; ++var8) {
                     var7.a[var8] = var1.d[var8];
                 }
-                
+
                 // CanaryMod start - onSignChange
                 CanarySign sign = new CanarySign(var7);
                 SignHook hook = new SignHook(getUser(), sign, true);
@@ -948,7 +905,7 @@ public class ONetServerHandler extends ONetHandler implements OICommandListener 
                     var7.a = Arrays.copyOf(old, old.length);
                 }
                 // CanaryMod end - onSignChange
-                
+
                 var7.G_();
                 var2.j(var9, var10, var6);
             }

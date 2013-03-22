@@ -23,7 +23,7 @@ public class EnchantmentSerializer implements Serializer<CanaryEnchantment> {
     }
 
     @Override
-    public String serialize(Object obje) {
+    public String serialize(CanaryEnchantment obje) {
         if(!(obje instanceof CanaryEnchantment)) {
             return null;
         }

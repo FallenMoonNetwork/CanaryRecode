@@ -11,19 +11,6 @@ import net.canarymod.Logman;
 import net.canarymod.api.CanaryEnchantment;
 import net.canarymod.api.Enchantment;
 import net.canarymod.hook.player.EnchantHook;
-import net.minecraft.server.OBlock;
-import net.minecraft.server.OContainer;
-import net.minecraft.server.OEnchantmentData;
-import net.minecraft.server.OEnchantmentHelper;
-import net.minecraft.server.OEntityPlayer;
-import net.minecraft.server.OICrafting;
-import net.minecraft.server.OIInventory;
-import net.minecraft.server.OInventoryPlayer;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OSlot;
-import net.minecraft.server.OSlotEnchantment;
-import net.minecraft.server.OSlotEnchantmentTable;
-import net.minecraft.server.OWorld;
 
 
 public class OContainerEnchantment extends OContainer {
@@ -167,11 +154,11 @@ public class OContainerEnchantment extends OContainer {
                         return false;
                     }
                     if (!hook.isValid(false)) {
-                        hook.getPlayer().notify("Got invalid set of enchantments for the your item");
+                        hook.getPlayer().notice("Got invalid set of enchantments for your item");
                         Logman.logWarning("Got invalid set of enchantments for an Item: " + hook.getItem().getType().name() + " caused by " + hook.getPlayer().getName());
                         return false;
                     }
-                    
+
                     // CanaryMod override the enchantments!
                     List<Enchantment> newList = hook.getEnchantmentList();
 

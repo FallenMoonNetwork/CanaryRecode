@@ -9,53 +9,9 @@ import net.canarymod.api.entity.CanaryEntityItem;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.config.Configuration;
-import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.ItemHook;
 import net.canarymod.hook.player.LevelUpHook;
 import net.canarymod.hook.player.RightClickHook;
-import net.minecraft.server.OAchievementList;
-import net.minecraft.server.OAxisAlignedBB;
-import net.minecraft.server.OBlock;
-import net.minecraft.server.OBlockBed;
-import net.minecraft.server.OChunkCoordinates;
-import net.minecraft.server.OContainer;
-import net.minecraft.server.OContainerPlayer;
-import net.minecraft.server.ODamageSource;
-import net.minecraft.server.OEnchantmentHelper;
-import net.minecraft.server.OEntity;
-import net.minecraft.server.OEntityArrow;
-import net.minecraft.server.OEntityBoat;
-import net.minecraft.server.OEntityCreeper;
-import net.minecraft.server.OEntityFishHook;
-import net.minecraft.server.OEntityGhast;
-import net.minecraft.server.OEntityItem;
-import net.minecraft.server.OEntityLiving;
-import net.minecraft.server.OEntityMinecart;
-import net.minecraft.server.OEntityMob;
-import net.minecraft.server.OEntityPig;
-import net.minecraft.server.OEntityWolf;
-import net.minecraft.server.OEnumAction;
-import net.minecraft.server.OEnumStatus;
-import net.minecraft.server.OFoodStats;
-import net.minecraft.server.OIChunkProvider;
-import net.minecraft.server.OIInventory;
-import net.minecraft.server.OInventoryPlayer;
-import net.minecraft.server.OItem;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OMaterial;
-import net.minecraft.server.OMathHelper;
-import net.minecraft.server.ONBTTagCompound;
-import net.minecraft.server.ONBTTagList;
-import net.minecraft.server.OPlayerCapabilities;
-import net.minecraft.server.OPotion;
-import net.minecraft.server.OStatBase;
-import net.minecraft.server.OStatList;
-import net.minecraft.server.OTileEntityBrewingStand;
-import net.minecraft.server.OTileEntityDispenser;
-import net.minecraft.server.OTileEntityFurnace;
-import net.minecraft.server.OTileEntitySign;
-import net.minecraft.server.OVec3D;
-import net.minecraft.server.OWorld;
 
 
 public abstract class OEntityPlayer extends OEntityLiving {
@@ -728,7 +684,8 @@ public abstract class OEntityPlayer extends OEntityLiving {
             OItemStack var2 = this.U();
 
             if (var2 != null && var1 instanceof OEntityLiving) {
-                RightClickHook hook = new RightClickHook(((OEntityPlayerMP) this).getPlayer(), null, null, var2.getCanaryItem(), ((OEntityLiving) var1).getCanaryEntityLiving(), Hook.Type.ENTITY_RIGHTCLICK);
+                //TODO: differentiate hook
+                RightClickHook hook = new RightClickHook(((OEntityPlayerMP) this).getPlayer(), null, null, var2.getCanaryItem(), ((OEntityLiving) var1).getCanaryEntityLiving());
 
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
@@ -906,20 +863,20 @@ public abstract class OEntityPlayer extends OEntityLiving {
             float var12 = 0.5F;
 
             switch (var10) {
-            case 0:
-                var12 = 0.9F;
-                break;
+                case 0:
+                    var12 = 0.9F;
+                    break;
 
-            case 1:
-                var11 = 0.1F;
-                break;
+                case 1:
+                    var11 = 0.1F;
+                    break;
 
-            case 2:
-                var12 = 0.1F;
-                break;
+                case 2:
+                    var12 = 0.1F;
+                    break;
 
-            case 3:
-                var11 = 0.9F;
+                case 3:
+                    var11 = 0.9F;
             }
 
             this.c(var10);
@@ -943,20 +900,20 @@ public abstract class OEntityPlayer extends OEntityLiving {
         this.G = 0.0F;
         this.H = 0.0F;
         switch (var1) {
-        case 0:
-            this.H = -1.8F;
-            break;
+            case 0:
+                this.H = -1.8F;
+                break;
 
-        case 1:
-            this.G = 1.8F;
-            break;
+            case 1:
+                this.G = 1.8F;
+                break;
 
-        case 2:
-            this.H = 1.8F;
-            break;
+            case 2:
+                this.H = 1.8F;
+                break;
 
-        case 3:
-            this.G = -1.8F;
+            case 3:
+                this.G = -1.8F;
         }
 
     }
@@ -1272,19 +1229,19 @@ public abstract class OEntityPlayer extends OEntityLiving {
     }
 
     public void L() {}
-    
+
     // CanaryMod start
     public Inventory getInventory() {
         return k.getInventory();
     }
-    
+
     public void addXP(int var1) {
         int var2 = Integer.MAX_VALUE - this.N;
 
         if (var1 > var2) {
             var1 = var2;
         }
-        
+
         this.q += var1;
         this.O += (float) var1 / (float) this.ae();
         this.N += var1;
@@ -1304,7 +1261,7 @@ public abstract class OEntityPlayer extends OEntityLiving {
         this.N = var1;
         levelUp();
     }
-    
+
     public void levelUp() {
         for (; this.O >= 1.0F; this.O /= (float) this.ae()) {
             this.O = (this.O - 1.0F) * (float) this.ae();
@@ -1314,6 +1271,6 @@ public abstract class OEntityPlayer extends OEntityLiving {
             Canary.hooks().callHook(hook);
         }
     }
-    
+
     // CanaryMod end
 }

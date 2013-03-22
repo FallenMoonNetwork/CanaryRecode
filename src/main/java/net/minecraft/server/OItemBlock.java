@@ -5,14 +5,7 @@ import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
-import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.RightClickHook;
-import net.minecraft.server.OBlock;
-import net.minecraft.server.OEntityLiving;
-import net.minecraft.server.OEntityPlayer;
-import net.minecraft.server.OItem;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OWorld;
 
 
 public class OItemBlock extends OItem {
@@ -35,10 +28,10 @@ public class OItemBlock extends OItem {
         if (var1.a == 0) {
             return false;
         }
-        
+
         // CanaryMod: Store blockInfo of the one we clicked
         Block blockClicked = var3.getCanaryWorld().getBlockAt(var4, var5, var6);
-        
+
         int var8 = var3.a(var4, var5, var6);
 
         if (var8 == OBlock.aS.bO) {
@@ -70,7 +63,7 @@ public class OItemBlock extends OItem {
         }
 
         blockClicked.setFaceClicked(BlockFace.fromByte((byte) var7));
-        
+
         if (var1.a == 0) {
             return false;
         } else if (!var2.d(var4, var5, var6)) {
@@ -80,7 +73,8 @@ public class OItemBlock extends OItem {
         } else if (var3.a(this.a, var4, var5, var6, false, var7)) {
             // CanaryMod - Stop block place
             Block blockplace = new CanaryBlock((short) this.a, (byte) var1.h(), var4, var5, var6);
-            RightClickHook hook = new RightClickHook(((OEntityPlayerMP) var2).getPlayer(), blockClicked, blockplace, var1.getCanaryItem(), null, Hook.Type.BLOCK_PLACE);
+            //TODO differentiate block place event
+            RightClickHook hook = new RightClickHook(((OEntityPlayerMP) var2).getPlayer(), blockClicked, blockplace, var1.getCanaryItem(), null);
 
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {

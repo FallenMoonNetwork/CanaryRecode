@@ -3,10 +3,7 @@ package net.canarymod.api;
 import java.util.ArrayList;
 
 import net.canarymod.Canary;
-import net.canarymod.Logman;
 import net.canarymod.Main;
-import net.canarymod.api.ConfigurationManager;
-import net.canarymod.api.Server;
 import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Player;
 import net.canarymod.api.world.World;
@@ -17,10 +14,10 @@ import net.minecraft.server.OMinecraftServer;
 
 /**
  * Main entry point of the software
- * 
+ *
  * @author Jos Kuijpers
  * @author Chris
- * 
+ *
  */
 public class CanaryServer implements Server {
 
@@ -28,7 +25,7 @@ public class CanaryServer implements Server {
 
     /**
      * Create a new Server Wrapper
-     * 
+     *
      * @param server
      */
     public CanaryServer(OMinecraftServer server) {
@@ -178,10 +175,6 @@ public class CanaryServer implements Server {
         return "Console";
     }
 
-    @Override
-    public void notify(String message) {
-        Logman.logInfo(message);
-    }
 
     @Override
     public boolean hasPermission(String node) {
@@ -202,11 +195,23 @@ public class CanaryServer implements Server {
     public boolean isRunning() {
         return server.isRunning();
     }
-    
+
     /**
      * Null the server reference
      */
     public void nullServer() {
         server = null;
+    }
+
+    @Override
+    public void message(String message) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void notice(String message) {
+        // TODO Auto-generated method stub
+
     }
 }

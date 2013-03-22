@@ -8,9 +8,6 @@ import net.canarymod.bansystem.BanManager;
 import net.canarymod.commandsys.CommandList;
 import net.canarymod.commandsys.CommandManager;
 import net.canarymod.config.Configuration;
-import net.canarymod.database.Database.Type;
-import net.canarymod.database.flatfile.DatabaseFlatfile;
-import net.canarymod.database.mysql.DatabaseMySql;
 import net.canarymod.help.HelpManager;
 import net.canarymod.hook.HookExecutor;
 import net.canarymod.kit.KitProvider;
@@ -35,19 +32,6 @@ public class CanaryMod extends Canary {
         Canary.instance = this;
         
         this.config = new Configuration();
-        Type backend = Configuration.getServerConfig().getDatasourceType();
-        if (backend == Type.FLATFILE) {
-            this.database = new DatabaseFlatfile();
-        } 
-        else if (backend == Type.MYSQL) {
-            this.database = new DatabaseMySql();
-        } 
-        else {
-            //Uh oh ...
-            Logman.logWarning("The specified datasource is invalid! Using Flatfile as default.");
-            this.database = new DatabaseFlatfile();
-        }
-
         // Initialize the subsystems that do not rely on others
         this.commandManager = new CommandManager();
         this.permissionLoader = new PermissionManager();

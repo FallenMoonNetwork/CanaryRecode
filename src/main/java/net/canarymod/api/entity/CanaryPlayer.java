@@ -6,9 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.canarymod.Canary;
-import net.canarymod.Colors;
 import net.canarymod.Logman;
-import net.canarymod.TextFormat;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
@@ -22,6 +20,8 @@ import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.position.Direction;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
+import net.canarymod.chat.Colors;
+import net.canarymod.chat.TextFormat;
 import net.canarymod.commandsys.CanaryCommand;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.PlayerCommandHook;
@@ -48,21 +48,21 @@ import net.minecraft.server.OWorldSettings;
  */
 public class CanaryPlayer extends CanaryEntityLiving implements Player {
     private Pattern badChatPattern = Pattern.compile("[\u00a7\u2302\u00D7\u00AA\u00BA\u00AE\u00AC\u00BD\u00BC\u00A1\u00AB\u00BB]");
-    private Group group; 
+    private Group group;
     private PermissionProvider permissions;
     private String prefix = null;
     private boolean muted;
     private String[] allowedIPs;
-    
+
     public CanaryPlayer(OEntityPlayerMP entity) {
         super(entity);
         String[] data = Canary.usersAndGroups().getPlayerData(getName());
-        group = Canary.usersAndGroups().getGroup(data[1]); 
+        group = Canary.usersAndGroups().getGroup(data[1]);
         permissions = Canary.permissionManager().getPlayerProvider(getName());
         if(data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
             prefix = data[0];
         }
-        
+
         if(data[2] != null && !data[2].isEmpty()) {
             allowedIPs = data[2].split(",");
         }
@@ -77,38 +77,38 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
     @Override
     public String getName() {
-    	return ((OEntityPlayerMP)entity).v;
+        return ((OEntityPlayerMP)entity).v;
     }
-    
+
     @Override
     public void chat(String message) {
         if (message.length() > 100) {
             kick("Message too long!");
-        } 
+        }
         message = message.trim();
         Matcher m = badChatPattern.matcher(message);
         String out = message;
-        
+
         if (m.find() && !this.canIgnoreRestrictions()) {
             out = message.replaceAll(m.group(), "");
         }
         message = out;
-        
+
         //TODO: Add configuration for spam protection?
-        
+
         if(message.startsWith("/")) {
             executeCommand(message.split(" "));
         }
         else {
             if(isMuted()) {
-                notify("You are currently muted!");
+                notice("You are currently muted!");
             }
             else {
-                String prefix = "<" + getColor() + getName() + Colors.White + "> ";
-                
+                String prefix = "<" + getColor() + getName() + Colors.WHITE + "> ";
+
                 //This is a copy of the real player list already, no need to copy again (re: Collections.copy())
                 ArrayList<Player> receivers = Canary.getServer().getPlayerList();
-                
+
                 ChatHook hook = new ChatHook(this, prefix, message, receivers);
                 Canary.hooks().callHook(hook);
                 if(hook.isCanceled()) {
@@ -128,7 +128,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
 
     }
-    
+
     @Override
     public void kill(){
         super.kill();
@@ -197,7 +197,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public boolean isSleeping() {
         return ((OEntityPlayerMP)entity).Z();
     }
-    
+
     @Override
     public boolean isDeeplySleeping() {
         return ((OEntityPlayerMP)entity).aa();
@@ -234,7 +234,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
         return spawn;
     }
-    
+
     @Override
     public Location getHome() {
         Warp home = Canary.warps().getHome(this);
@@ -243,12 +243,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
         return getSpawnPosition();
     }
-    
+
     @Override
     public void setHome(Location home) {
         Canary.warps().setHome(this, home);
     }
-    
+
     @Override
     public boolean hasHome() {
         Warp home = Canary.warps().getHome(this);
@@ -276,7 +276,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             if(Configuration.getServerConfig().isLogging()) {
                 Logman.logInfo("Command used by " + getName() + ": " + Canary.glueString(command, 0, " "));
             }
-            
+
             String commandName = command[0];
             //It's a vanilla command, forward it to the server
             if (commandName.startsWith("/#") && (hasPermission("canary.commands.vanilla."+commandName.replace("/#", "")) || hasPermission("canary.vanilla.op"))) {
@@ -288,21 +288,21 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             if (hook.isCanceled()) {
                 return true;
             } // someone wants us not to execute the command. So lets do them the favor
-            
+
             CanaryCommand com = Canary.commands().getCommand(commandName);
             if(com != null) {
                 return com.parseCommand(this, command);
             }
             else {
                 if (Configuration.getServerConfig().getShowUnkownCommand()) {
-                    notify("Unknown command");
+                    notice("Unknown command");
                 }
                 return false;
             }
         } catch (Throwable ex) {
             Logman.logStackTrace("Exception in command handler: ", ex);
             if (isAdmin()) {
-                sendMessage(Colors.Rose + "Exception occured. "+ex.getMessage());
+                sendMessage(Colors.LIGHT_RED + "Exception occured. "+ex.getMessage());
             }
             return false;
         }
@@ -340,8 +340,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setGroup(Group group) {
-         this.group = group;
-         Canary.usersAndGroups().addOrUpdatePlayerData(this);
+        this.group = group;
+        Canary.usersAndGroups().addOrUpdatePlayerData(this);
     }
 
     @Override
@@ -384,7 +384,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setMuted(boolean muted) {
-         this.muted = muted;
+        this.muted = muted;
     }
 
     @Override
@@ -396,7 +396,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public Location getLocation() {
         return new Location(entity.bi.getCanaryWorld(), getX(), getY(), getZ(), getPitch(), getRotation());
     }
-    
+
     @Override
     public Position getPosition() {
         return new Position(getX(), getY(), getZ());
@@ -406,7 +406,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public Inventory getInventory() {
         return ((OEntityPlayer)entity).getInventory();
     }
-    
+
     @Override
     public EnderChestInventory getEnderChestInventory() {
         // 1.2.5 has no ender chests
@@ -421,7 +421,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean isInGroup(Group group, boolean parents) {
-        if(this.group.name.equals(group.name)) {
+        if(this.group.getName().equals(group.getName())) {
             return true;
         }
         else {
@@ -437,6 +437,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         teleportTo(x, y, z, 0.0F, 0.0F);
     }
 
+    @Override
     public void teleportTo(Position position) {
         teleportTo(position.getX(), position.getY(), position.getZ(), 0.0f, 0.0f);
     }
@@ -447,7 +448,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             switchWorlds(dim);
         }
         teleportTo(x, y, z, 0.0F, 0.0F);
-        
+
     }
 
     @Override
@@ -467,7 +468,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             player.b(player.bh);
         }
         player.a.a(x, y, z, rotation, pitch, getWorld().getType().getId(), getWorld().getName());
-        
+
     }
 
     @Override
@@ -485,21 +486,21 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
-    public void notify(String message) {
-        sendMessage(Colors.Rose+message);
-        
+    public void notice(String message) {
+        sendMessage(Colors.LIGHT_RED+message);
+
     }
 
     @Override
     public String getColor() {
         if(prefix != null) {
-            return Colors.Marker+prefix;
+            return Colors.MARKER+prefix;
         }
-        else if(group.prefix != null) {
-            return Colors.Marker+group.prefix;
+        else if(group.getPrefix() != null) {
+            return Colors.MARKER+group.getPrefix();
         }
         else {
-            return Colors.White;
+            return Colors.WHITE;
         }
     }
 
@@ -507,12 +508,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public NetServerHandler getNetServerHandler() {
         return ((OEntityPlayerMP)entity).getServerHandler();
     }
-    
+
     @Override
     public int damageVsEntity(Entity entity) {
         return ((OEntityPlayerMP)entity).k.a(((CanaryEntity) entity).getHandle());
     }
-    
+
     @Override
     public float damageVsBlock(Block block) {
         return ((OEntityPlayerMP)entity).k.a(OBlock.m[block.getType()]);
@@ -523,13 +524,13 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         if(parents) {
             ArrayList<Group> groups = this.group.parentsToList();
             for(Group g : groups) {
-                if(g.name.equals(group)) {
+                if(g.getName().equals(group)) {
                     return true;
                 }
             }
         }
         else {
-            if(this.group.name.equals(group)) {
+            if(this.group.getName().equals(group)) {
                 return true;
             }
         }
@@ -548,7 +549,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         if (degrees < 0) {
             degrees += 360.0;
         }
-        
+
         if (0 <= degrees && degrees < 22.5) {
             return Direction.NORTH;
         } else if (22.5 <= degrees && degrees < 67.5) {
@@ -571,19 +572,19 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             return Direction.ERROR;
         }
     }
-    
+
     public void switchWorlds(World dim) {
         OMinecraftServer mcServer = ((CanaryServer) Canary.getServer()).getHandle();
         OEntityPlayerMP ent = (OEntityPlayerMP) entity;
         //Do not check for worlds. let plugins handle restrictions!
-//        // Nether is not allowed, so shush
-//        if (dim.getType().equals(WorldType.fromName("NETHER")) && !mcServer.d.a("allow-nether", true)) {
-//            return;
-//        }
-//        // The End is not allowed, so shush
-//        if (dim.getType().equals(WorldType.fromName("END")) && !mcServer.d.a("allow-end", true)) {
-//            return;
-//        }
+        //        // Nether is not allowed, so shush
+        //        if (dim.getType().equals(WorldType.fromName("NETHER")) && !mcServer.d.a("allow-nether", true)) {
+        //            return;
+        //        }
+        //        // The End is not allowed, so shush
+        //        if (dim.getType().equals(WorldType.fromName("END")) && !mcServer.d.a("allow-end", true)) {
+        //            return;
+        //        }
         // Dismount first or get buggy
         if (ent.bh != null) {
             ent.b(ent.bh);
@@ -591,7 +592,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
         //Collect world switch achievement ?
         ent.a((OStatBase) OAchievementList.B);
-        
+
         //switch world if needed
         if(!(dim.getName().equals(ent.bi.getCanaryWorld().getName()))) {
             World oldWorld = ent.bi.getCanaryWorld();
@@ -602,15 +603,15 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             oldWorld.removePlayerFromWorld(ent.getPlayer());
             //Remove player from player manager for the old world
             oldWorld.getPlayerManager().removePlayer(ent.getPlayer());
-            
+
             //Change players world reference
             ent.bi = ((CanaryWorld) dim).getHandle();
             //Add player back to the new world
-//            dim.addPlayerToWorld(this);
-//            dim.getPlayerManager().addPlayer(this);
+            //            dim.addPlayerToWorld(this);
+            //            dim.getPlayerManager().addPlayer(this);
         }
         //Get chunk coordinates...
-//        OChunkCoordinates var2 = mcServer.getWorld(ent.bi.getCanaryDimension().getName(), dim.getType().getId()).d();
+        //        OChunkCoordinates var2 = mcServer.getWorld(ent.bi.getCanaryDimension().getName(), dim.getType().getId()).d();
         OChunkCoordinates var2 = ent.bi.d();
 
         if (var2 != null) {
@@ -618,7 +619,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
         Logman.logInfo("Prepared to switch worlds.");
         mcServer.h.switchDimension(ent, dim.getType().getId(), false);
-        
+
         refreshCreativeMode();
     }
 
@@ -631,7 +632,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 continue;
             }
             drops[i] = getWorld().dropItem(getPosition(), items[i]);
-            
+
         }
         getInventory().clearContents();
         return drops;
@@ -641,7 +642,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public boolean isDamageDisabled() {
         return ((OEntityPlayerMP)entity).L.a;
     }
-    
+
     @Override
     public void setDamageDisabled(boolean disabled) {
         ((OEntityPlayerMP)entity).L.a = disabled;
@@ -662,7 +663,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             ent.a.b((OPacket) (new OPacket70Bed(3, mode)));
         }
     }
-    
+
     public void refreshCreativeMode() {
         if (getMode() == 1 || Configuration.getWorldConfig(getWorld().getName()).getGameMode() == World.GameMode.CREATIVE) {
             ((OEntityPlayerMP)entity).c.a(1);
@@ -680,6 +681,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public boolean isInVehicle() {
         // player.bh != null
         return ((OEntityPlayerMP) entity).bh != null;
+    }
+
+    @Override
+    public void message(String message) {
+        sendMessage(message);
     }
 
 }

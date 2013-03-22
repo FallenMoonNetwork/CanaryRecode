@@ -4,16 +4,8 @@ package net.minecraft.server;
 import net.canarymod.Canary;
 import net.canarymod.api.inventory.ItemType;
 import net.canarymod.api.world.blocks.Block;
-import net.canarymod.hook.Hook;
 import net.canarymod.hook.player.LeftClickHook;
 import net.canarymod.hook.player.RightClickHook;
-import net.minecraft.server.OBlock;
-import net.minecraft.server.OEntityPlayer;
-import net.minecraft.server.OEntityPlayerMP;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OPacket53BlockChange;
-import net.minecraft.server.OWorld;
-import net.minecraft.server.OWorldServer;
 
 
 public class OItemInWorldManager {
@@ -198,7 +190,8 @@ public class OItemInWorldManager {
         if (item != null) {
             if (item.a > 0 && item.c != ItemType.Sign.getId() && item.c != ItemType.Bucket.getId() && item.c != ItemType.WaterBucket.getId() && item.c != ItemType.LavaBucket.getId() && item.c != ItemType.MilkBucket.getId()) {
                 if (player instanceof OEntityPlayerMP) {
-                    RightClickHook hook = new RightClickHook(((OEntityPlayerMP) player).getPlayer(), blockplaced, blockclicked, item.getCanaryItem(), null, Hook.Type.ITEM_USE);
+                    //TODO differetiate
+                    RightClickHook hook = new RightClickHook(((OEntityPlayerMP) player).getPlayer(), blockplaced, blockclicked, item.getCanaryItem(), null);
 
                     Canary.hooks().callHook(hook);
                     if (hook.isCanceled()) {
@@ -209,7 +202,7 @@ public class OItemInWorldManager {
         }
         return this.a(player, world, item);
     }
-    
+
     public boolean a(OEntityPlayer var1, OWorld var2, OItemStack var3) {
         int var4 = var3.a;
         int var5 = var3.h();
