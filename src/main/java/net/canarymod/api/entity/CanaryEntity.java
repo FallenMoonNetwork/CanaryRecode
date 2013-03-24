@@ -4,195 +4,198 @@ import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
-import net.minecraft.server.OEntity;
-import net.minecraft.server.OEntityItem;
-import net.minecraft.server.OEntityLiving;
 
-public class CanaryEntity implements Entity {
+/**
+ * Entity Wrapper
+ * 
+ * @author Jason (darkdiplomat)
+ */
+public abstract class CanaryEntity implements Entity{
 
-    protected OEntity entity;
-    
-    public CanaryEntity(OEntity entity) {
+    protected net.minecraft.server.Entity entity;
+
+    public CanaryEntity(net.minecraft.server.Entity entity){
         this.entity = entity;
     }
-    
-    public OEntity getHandle() {
-        return entity;
-    }
-    
+
     @Override
-    public double getX() {
-        return entity.bm;
+    public double getX(){
+        return entity.u;
     }
 
     @Override
-    public double getY() {
-        return entity.bn;
+    public double getY(){
+        return entity.v;
     }
 
     @Override
-    public double getZ() {
-        return entity.bo;
+    public double getZ(){
+        return entity.w;
     }
 
     @Override
-    public double getMotionX() {
-        return entity.bp;
+    public double getMotionX(){
+        return entity.x;
     }
 
     @Override
-    public double getMotionY() {
-        return entity.bq;
+    public double getMotionY(){
+        return entity.y;
     }
 
     @Override
-    public double getMotionZ() {
-        return entity.br;
+    public double getMotionZ(){
+        return entity.z;
     }
 
     @Override
-    public float getPitch() {
-        return entity.bt;
+    public float getPitch(){
+        return entity.B;
     }
 
     @Override
-    public float getRotation() {
-        return entity.bs;
+    public float getRotation(){
+        return entity.A;
     }
 
     @Override
-    public void setX(double x) {
-        this.entity.bm = x;
+    public void setX(double x){
+        this.entity.u = x;
     }
 
     @Override
-    public void setX(int x) {
-        this.entity.bm = x;
+    public void setX(int x){
+        this.entity.u = x;
 
     }
 
     @Override
-    public void setY(double y) {
-        this.entity.bn = y;
+    public void setY(double y){
+        this.entity.v = y;
 
     }
 
     @Override
-    public void setY(int y) {
-        this.entity.bn = y;
+    public void setY(int y){
+        this.entity.v = y;
 
     }
 
     @Override
-    public void setZ(double z) {
-        this.entity.bo = z;
+    public void setZ(double z){
+        this.entity.w = z;
     }
 
     @Override
-    public void setZ(int z) {
-        this.entity.bo = z;
+    public void setZ(int z){
+        this.entity.w = z;
     }
 
     @Override
-    public void setMotionX(double motionX) {
-        entity.bp = motionX;
-        entity.bA = true;
+    public void setMotionX(double motionX){
+        entity.x = motionX;
+        entity.I = true;
     }
 
     @Override
-    public void setMotionY(double motionY) {
-        entity.bq = motionY;
-        entity.bA = true;
+    public void setMotionY(double motionY){
+        entity.y = motionY;
+        entity.I = true;
     }
 
     @Override
-    public void setMotionZ(double motionZ) {
-        entity.br = motionZ;
-        entity.bA = true;
+    public void setMotionZ(double motionZ){
+        entity.z = motionZ;
+        entity.I = true;
     }
 
     @Override
-    public void setPitch(float pitch) {
-        entity.br = pitch;
-
-    }
-
-    @Override
-    public void setRotation(float rotation) {
-        entity.bt = rotation;
+    public void setPitch(float pitch){
+        entity.B = pitch;
 
     }
 
     @Override
-    public void setDimension(World dim) {
+    public void setRotation(float rotation){
+        entity.A = rotation;
+
+    }
+
+    @Override
+    public void setDimension(World dim){
         this.entity.setDimension((CanaryWorld) dim);
     }
 
     @Override
-    public World getWorld() {
+    public World getWorld(){
         return entity.getCanaryWorld();
     }
 
     @Override
-    public void setFireTicks(int ticks) {
-        this.entity.c = ticks;
+    public void setFireTicks(int ticks){
+        this.entity.d = ticks;
 
-    }
-    
-    @Override
-    public int getFireTicks() {
-        return this.entity.c;
     }
 
     @Override
-    public boolean isLiving() {
-        return entity instanceof OEntityLiving;
+    public int getFireTicks(){
+        return this.entity.d;
     }
 
     @Override
-    public boolean isItem() {
-        return entity instanceof OEntityItem;
+    public boolean isLiving(){
+        return entity instanceof net.minecraft.server.EntityLiving;
     }
 
     @Override
-    public EntityItem dropLoot(int itemId, int amount) {
+    public boolean isItem(){
+        return entity instanceof net.minecraft.server.EntityItem;
+    }
+
+    @Override
+    public EntityItem dropLoot(int itemId, int amount){
         return new CanaryEntityItem(entity.b(itemId, amount));
     }
 
     @Override
-    public boolean isSprinting() {
-        return entity.aZ();
+    public boolean isSprinting(){
+        return entity.ah();
     }
 
     @Override
-    public void setSprinting(boolean sprinting) {
-        entity.h(sprinting);
+    public void setSprinting(boolean sprinting){
+        entity.c(sprinting);
     }
 
     @Override
-    public boolean isSneaking() {
-        return entity.aY();
+    public boolean isSneaking(){
+        return entity.ag();
     }
 
     @Override
-    public void setSneaking(boolean sneaking) {
-        entity.g(sneaking);
-        
+    public void setSneaking(boolean sneaking){
+        entity.b(sneaking);
     }
 
     @Override
-    public String getName() {
+    public String getName(){
         return getClass().getSimpleName();
     }
 
     @Override
-    public Position getPosition() {
+    public Position getPosition(){
         return new Position(getX(), getY(), getZ());
     }
 
     @Override
-    public Location getLocation() {
+    public Location getLocation(){
         return new Location(getWorld(), getX(), getY(), getZ(), getPitch(), getRotation());
     }
 
+    /**
+     * Gets the Minecraft entity being wrapped
+     * 
+     * @return entity
+     */
+    public abstract net.minecraft.server.Entity getHandle();
 }

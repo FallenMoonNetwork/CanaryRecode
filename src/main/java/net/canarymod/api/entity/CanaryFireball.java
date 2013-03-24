@@ -1,16 +1,17 @@
 package net.canarymod.api.entity;
 
-import net.minecraft.server.OEntityFireball;
+import net.canarymod.api.entity.living.EntityLiving;
+import net.minecraft.server.EntityFireball;
 
-public class CanaryFireball extends CanaryEntity implements Fireball{
+public abstract class CanaryFireball extends CanaryEntity implements Fireball{
 
-    public CanaryFireball(OEntityFireball entity) {
+    public CanaryFireball(EntityFireball entity){
         super(entity);
     }
 
     @Override
-    public EntityLiving getShootingEntity() {
-        return ((OEntityFireball)entity).a.getCanaryEntityLiving();
+    public EntityLiving getOwner(){
+        return ((EntityFireball) entity).a.getCanaryEntityLiving();
     }
 
 }

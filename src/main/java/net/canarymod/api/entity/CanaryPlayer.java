@@ -10,6 +10,8 @@ import net.canarymod.Logman;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
+import net.canarymod.api.entity.living.CanaryEntityLiving;
+import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.EnderChestInventory;
 import net.canarymod.api.inventory.Inventory;

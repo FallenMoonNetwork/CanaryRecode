@@ -1,7 +1,7 @@
 package net.canarymod.api.entity.potion;
 
-import net.canarymod.api.entity.CanaryEntityLiving;
-import net.canarymod.api.entity.EntityLiving;
+import net.canarymod.api.entity.living.CanaryEntityLiving;
+import net.canarymod.api.entity.living.EntityLiving;
 import net.minecraft.server.OEntityLiving;
 import net.minecraft.server.OPotionEffect;
 

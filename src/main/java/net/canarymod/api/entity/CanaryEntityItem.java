@@ -1,28 +1,31 @@
 package net.canarymod.api.entity;
 
 import net.canarymod.api.inventory.CanaryItem;
-import net.minecraft.server.OEntity;
-import net.minecraft.server.OEntityItem;
 
-public class CanaryEntityItem extends CanaryEntity implements EntityItem {
+public class CanaryEntityItem extends CanaryEntity implements EntityItem{
 
-    public CanaryEntityItem(OEntity entity) {
+    public CanaryEntityItem(net.minecraft.server.EntityItem entity){
         super(entity);
     }
 
     @Override
-    public void setAge(int age) {
-        ((OEntityItem)entity).c = age;
+    public void setAge(int age){
+        ((EntityItem) entity).c = age;
     }
 
     @Override
-    public int getAge() {
-        return ((OEntityItem)entity).c;
+    public int getAge(){
+        return ((EntityItem) entity).c;
     }
 
     @Override
-    public CanaryItem getItem() {
-        return ((OEntityItem)entity).getItemStack().getCanaryItem();
+    public CanaryItem getItem(){
+        return ((EntityItem) entity).getItemStack().getCanaryItem();
+    }
+
+    @Override
+    public net.minecraft.server.EntityItem getHandle(){
+        return (net.minecraft.server.EntityItem) entity;
     }
 
 }

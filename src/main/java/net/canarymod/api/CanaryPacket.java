@@ -1,26 +1,25 @@
 package net.canarymod.api;
 
-import net.minecraft.server.OPacket;
 
-public class CanaryPacket implements Packet {
+public class CanaryPacket implements Packet{
 
-    private OPacket packet;
-    
-    public CanaryPacket(OPacket p) {
+    private net.minecraft.server.Packet packet;
+
+    public CanaryPacket(net.minecraft.server.Packet p){
         packet = p;
     }
-    
+
     @Override
-    public int getPacketSize() {
+    public int getPacketSize(){
         return packet.a();
     }
 
     @Override
-    public int getPacketId() {
+    public int getPacketId(){
         return packet.b();
     }
-    
-    public OPacket getPacket() {
+
+    public net.minecraft.server.Packet getPacket(){
         return packet;
     }
 

@@ -1,51 +1,49 @@
 package net.canarymod.api.entity.potion;
 
-import net.minecraft.server.OPotion;
+public class CanaryPotion implements Potion{
 
-public class CanaryPotion implements Potion {
+    net.minecraft.server.Potion potion;
 
-    OPotion potion;
-
-    public CanaryPotion(OPotion potion) {
+    public CanaryPotion(net.minecraft.server.Potion potion){
         this.potion = potion;
     }
-    
+
     @Override
-    public int getID() {
+    public int getID(){
         return potion.a();
     }
 
     @Override
-    public String getName() {
+    public String getName(){
         return potion.c();
     }
 
     @Override
-    public PotionType getType() {
+    public PotionType getType(){
         return PotionType.fromName(getName());
     }
 
     @Override
-    public boolean isBad() {
+    public boolean isBad(){
         return potion.isBad();
     }
 
     @Override
-    public double getEffectiveness() {
+    public double getEffectiveness(){
         return potion.d();
     }
 
     @Override
-    public boolean isUsable() {
+    public boolean isUsable(){
         return potion.f();
     }
 
     @Override
-    public boolean isInstant() {
+    public boolean isInstant(){
         return potion.b();
     }
-    
-    public OPotion getHandle() {
+
+    public net.minecraft.server.Potion getHandle(){
         return potion;
     }
 

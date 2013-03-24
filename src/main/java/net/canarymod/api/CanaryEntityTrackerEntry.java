@@ -1,17 +1,16 @@
 package net.canarymod.api;
 
 import net.canarymod.api.entity.Entity;
-import net.minecraft.server.OEntityTrackerEntry;
 
-public class CanaryEntityTrackerEntry implements EntityTrackerEntry {
-    private OEntityTrackerEntry entry;
-    
-    public CanaryEntityTrackerEntry(OEntityTrackerEntry entry) {
+public class CanaryEntityTrackerEntry implements EntityTrackerEntry{
+    private net.minecraft.server.EntityTrackerEntry entry;
+
+    public CanaryEntityTrackerEntry(net.minecraft.server.EntityTrackerEntry entry){
         this.entry = entry;
     }
-    
+
     @Override
-    public Entity getEntity() {
+    public Entity getEntity(){
         return entry.a.getCanaryEntity();
     }
 
