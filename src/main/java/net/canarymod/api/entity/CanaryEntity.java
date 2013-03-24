@@ -4,6 +4,7 @@ import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
+import net.canarymod.api.world.position.Vector3D;
 
 /**
  * Entity Wrapper
@@ -119,6 +120,23 @@ public abstract class CanaryEntity implements Entity {
     public void setRotation(float rotation) {
         entity.A = rotation;
 
+    }
+
+    @Override
+    public Vector3D getMotion() {
+        return new Vector3D(getMotionX(), getMotionY(), getMotionZ());
+    }
+
+    @Override
+    public Vector3D getForwardVector() {
+        return new Vector3D(0,0,1);
+    }
+
+    @Override
+    public void translate(Vector3D factor) {
+        setX(getX() + factor.getX());
+        setY(getY() + factor.getY());
+        setZ(getZ() + factor.getZ());
     }
 
     @Override
