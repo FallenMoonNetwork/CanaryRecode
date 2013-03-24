@@ -6,7 +6,7 @@ public class CanaryFactory implements Factory {
     BlockFactory blocks = new CanaryBlockFactory();
     PotionFactory potions = new CanaryPotionFactory();
     EntityLivingFactory livingEntities = new CanaryEntityLivingFactory();
-    
+
     @Override
     public ItemFactory itemFactory() {
         return items;

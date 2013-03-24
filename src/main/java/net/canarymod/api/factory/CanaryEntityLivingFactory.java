@@ -69,31 +69,31 @@ public class CanaryEntityLivingFactory implements EntityLivingFactory {
 
     @Override
     public EntityMob newEntityMob(MobType type, World world) {
-        switch(type) {
-        case BLAZE:
-            return new CanaryBlaze(new OEntityBlaze(((CanaryWorld)world).getHandle()));
-        case CREEPER:
-            return new CanaryCreeper(new OEntityCreeper(((CanaryWorld)world).getHandle()));
-        case ENDERMAN:
-            return new CanaryEnderman(new OEntityEnderman(((CanaryWorld)world).getHandle()));
-        case GHAST:
-            return new CanaryGhast(new OEntityGhast(((CanaryWorld)world).getHandle()));
-        case GIANTZOMBIE:
-            return new CanaryGiantZombie(new OEntityGiantZombie(((CanaryWorld)world).getHandle()));
-        case LAVASLIME:
-            return new CanaryLavaSlime(new OEntityLavaSlime(((CanaryWorld)world).getHandle()));
-        case PIGZOMBIE:
-            return new CanaryPigZombie(new OEntityPigZombie(((CanaryWorld)world).getHandle()));
-        case SILVERFISH:
-            return new CanarySilverfish(new OEntitySilverfish(((CanaryWorld)world).getHandle()));
-        case SKELETON:
-            return new CanarySkeleton(new OEntitySkeleton(((CanaryWorld)world).getHandle()));
-        case SLIME:
-            return new CanarySlime(new OEntitySlime(((CanaryWorld)world).getHandle()));
-        case SPIDER:
-            return new CanarySpider(new OEntitySpider(((CanaryWorld)world).getHandle()));
-        case ZOMBIE:
-            return new CanaryZombie(new OEntityZombie(((CanaryWorld)world).getHandle()));
+        switch (type) {
+            case BLAZE:
+                return new CanaryBlaze(new OEntityBlaze(((CanaryWorld) world).getHandle()));
+            case CREEPER:
+                return new CanaryCreeper(new OEntityCreeper(((CanaryWorld) world).getHandle()));
+            case ENDERMAN:
+                return new CanaryEnderman(new OEntityEnderman(((CanaryWorld) world).getHandle()));
+            case GHAST:
+                return new CanaryGhast(new OEntityGhast(((CanaryWorld) world).getHandle()));
+            case GIANTZOMBIE:
+                return new CanaryGiantZombie(new OEntityGiantZombie(((CanaryWorld) world).getHandle()));
+            case LAVASLIME:
+                return new CanaryLavaSlime(new OEntityLavaSlime(((CanaryWorld) world).getHandle()));
+            case PIGZOMBIE:
+                return new CanaryPigZombie(new OEntityPigZombie(((CanaryWorld) world).getHandle()));
+            case SILVERFISH:
+                return new CanarySilverfish(new OEntitySilverfish(((CanaryWorld) world).getHandle()));
+            case SKELETON:
+                return new CanarySkeleton(new OEntitySkeleton(((CanaryWorld) world).getHandle()));
+            case SLIME:
+                return new CanarySlime(new OEntitySlime(((CanaryWorld) world).getHandle()));
+            case SPIDER:
+                return new CanarySpider(new OEntitySpider(((CanaryWorld) world).getHandle()));
+            case ZOMBIE:
+                return new CanaryZombie(new OEntityZombie(((CanaryWorld) world).getHandle()));
         }
         return null;
     }
@@ -115,25 +115,25 @@ public class CanaryEntityLivingFactory implements EntityLivingFactory {
 
     @Override
     public EntityAnimal newEntityAnimal(AnimalType type, World world) {
-        switch(type) {
-        case CHICKEN:
-            return new CanaryChicken(new OEntityChicken(((CanaryWorld) world).getHandle()));
-        case COW:
-            return new CanaryCow(new OEntityCow(((CanaryWorld) world).getHandle()));
-        case MUSHROOMCOW:
-            return new CanaryMushroomCow(new OEntityMooshroom(((CanaryWorld) world).getHandle()));
-        case OCELOT:
-            return new CanaryOcelot(new OEntityOcelot(((CanaryWorld) world).getHandle()));
-        case PIG:
-            return new CanaryPig(new OEntityPig(((CanaryWorld) world).getHandle()));
-        case SHEEP:
-            return new CanarySheep(new OEntitySheep(((CanaryWorld) world).getHandle()));
-        case SQUID:
-            return new CanarySquid(new OEntitySquid(((CanaryWorld) world).getHandle()));
-        case VILLAGER:
-            return new CanaryVillager(new OEntityVillager(((CanaryWorld) world).getHandle()));
-        case WOLF:
-            return new CanaryWolf(new OEntityWolf(((CanaryWorld) world).getHandle()));
+        switch (type) {
+            case CHICKEN:
+                return new CanaryChicken(new OEntityChicken(((CanaryWorld) world).getHandle()));
+            case COW:
+                return new CanaryCow(new OEntityCow(((CanaryWorld) world).getHandle()));
+            case MUSHROOMCOW:
+                return new CanaryMushroomCow(new OEntityMooshroom(((CanaryWorld) world).getHandle()));
+            case OCELOT:
+                return new CanaryOcelot(new OEntityOcelot(((CanaryWorld) world).getHandle()));
+            case PIG:
+                return new CanaryPig(new OEntityPig(((CanaryWorld) world).getHandle()));
+            case SHEEP:
+                return new CanarySheep(new OEntitySheep(((CanaryWorld) world).getHandle()));
+            case SQUID:
+                return new CanarySquid(new OEntitySquid(((CanaryWorld) world).getHandle()));
+            case VILLAGER:
+                return new CanaryVillager(new OEntityVillager(((CanaryWorld) world).getHandle()));
+            case WOLF:
+                return new CanaryWolf(new OEntityWolf(((CanaryWorld) world).getHandle()));
         }
         return null;
     }

@@ -30,7 +30,7 @@ public class CanaryMod extends Canary {
      */
     public CanaryMod() {
         Canary.instance = this;
-        
+
         this.config = new Configuration();
         // Initialize the subsystems that do not rely on others
         this.commandManager = new CommandManager();
@@ -39,40 +39,40 @@ public class CanaryMod extends Canary {
         this.helpManager = new HelpManager();
         this.banManager = new BanManager();
         this.factory = (Factory) new CanaryFactory();
-        //Initialize the plugin loader and scan for plugins
+        // Initialize the plugin loader and scan for plugins
         this.loader = new PluginLoader();
         this.loader.scanPlugins();
     }
-    
+
     /**
      * Separately set users and groups provider
      */
     public void initUserAndGroupsManager() {
         this.userAndGroupsProvider = new UserAndGroupsProvider();
     }
-    
+
     /**
      * Separately set the warps provider
      */
     public void initWarps() {
         this.warpProvider = new WarpProvider();
     }
-    
+
     public void initKits() {
         this.kitProvider = new KitProvider();
     }
-    
+
     public void initCommands() {
         this.commandManager.registerAll(CommandList.class);
     }
-    
+
     @Override
     public void reload() {
         super.reload();
-        
+
         // Reload minecraft variables
-        ((CanaryConfigurationManager)instance.server.getConfigurationManager()).getHandle().reload();
+        ((CanaryConfigurationManager) instance.server.getConfigurationManager()).getHandle().reload();
         // TODO RCON + QUERY?
-        ((CanaryServer)instance.server).getHandle().reload();
+        ((CanaryServer) instance.server).getHandle().reload();
     }
 }

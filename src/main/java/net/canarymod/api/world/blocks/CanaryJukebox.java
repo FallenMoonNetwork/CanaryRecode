@@ -10,12 +10,12 @@ public class CanaryJukebox extends CanaryComplexBlock implements Jukebox {
 
     @Override
     public int getDiscId() {
-        return ((OTileEntityRecordPlayer)tileentity).a;
+        return ((OTileEntityRecordPlayer) tileentity).a;
     }
 
     @Override
     public void setDiscId(int discid) {
-        ((OTileEntityRecordPlayer)tileentity).a = discid;
+        ((OTileEntityRecordPlayer) tileentity).a = discid;
     }
 
 }

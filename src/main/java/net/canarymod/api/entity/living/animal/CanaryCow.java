@@ -7,9 +7,9 @@ import net.minecraft.server.EntityCow;
  * 
  * @author Chris
  */
-public class CanaryCow extends CanaryEntityAnimal implements Cow{
+public class CanaryCow extends CanaryEntityAnimal implements Cow {
 
-    public CanaryCow(EntityCow entity){
+    public CanaryCow(EntityCow entity) {
         super(entity);
     }
 

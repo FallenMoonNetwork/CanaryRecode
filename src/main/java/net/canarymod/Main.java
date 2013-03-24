@@ -6,9 +6,9 @@ import net.canarymod.serialize.EnchantmentSerializer;
 import net.canarymod.serialize.ItemSerializer;
 import net.minecraft.server.MinecraftServer;
 
-public class Main{
+public class Main {
 
-    private static void initBird(){
+    private static void initBird() {
         // Initialize the bird
         CanaryMod mod = new CanaryMod();
         Canary.setCanary(mod);
@@ -28,7 +28,7 @@ public class Main{
      * 
      * @param args
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         initBird();
         try {
             MinecraftServer.main(args);
@@ -42,7 +42,7 @@ public class Main{
      * 
      * @param reloadCanary
      */
-    public static void restart(boolean reloadCanary){
+    public static void restart(boolean reloadCanary) {
         throw new UnsupportedOperationException("Restart is not implemented yet!");
     }
 

@@ -5,42 +5,42 @@ import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.hook.world.RedstoneChangeHook;
 
-public abstract class BlockButton extends Block{
+public abstract class BlockButton extends Block {
 
     private final boolean a;
 
-    protected BlockButton(int i0, boolean flag0){
+    protected BlockButton(int i0, boolean flag0) {
         super(i0, Material.q);
         this.b(true);
         this.a(CreativeTabs.d);
         this.a = flag0;
     }
 
-    public AxisAlignedBB b(World world, int i0, int i1, int i2){
+    public AxisAlignedBB b(World world, int i0, int i1, int i2) {
         return null;
     }
 
-    public int a(World world){
+    public int a(World world) {
         return this.a ? 30 : 20;
     }
 
-    public boolean c(){
+    public boolean c() {
         return false;
     }
 
-    public boolean b(){
+    public boolean b() {
         return false;
     }
 
-    public boolean c(World world, int i0, int i1, int i2, int i3){
+    public boolean c(World world, int i0, int i1, int i2, int i3) {
         return i3 == 2 && world.u(i0, i1, i2 + 1) ? true : (i3 == 3 && world.u(i0, i1, i2 - 1) ? true : (i3 == 4 && world.u(i0 + 1, i1, i2) ? true : i3 == 5 && world.u(i0 - 1, i1, i2)));
     }
 
-    public boolean c(World world, int i0, int i1, int i2){
+    public boolean c(World world, int i0, int i1, int i2) {
         return world.u(i0 - 1, i1, i2) ? true : (world.u(i0 + 1, i1, i2) ? true : (world.u(i0, i1, i2 - 1) ? true : world.u(i0, i1, i2 + 1)));
     }
 
-    public int a(World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2, int i4){
+    public int a(World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2, int i4) {
         int i5 = world.h(i0, i1, i2);
         int i6 = i5 & 8;
 
@@ -64,11 +64,11 @@ public abstract class BlockButton extends Block{
         return i5 + i6;
     }
 
-    private int k(World world, int i0, int i1, int i2){
+    private int k(World world, int i0, int i1, int i2) {
         return world.u(i0 - 1, i1, i2) ? 1 : (world.u(i0 + 1, i1, i2) ? 2 : (world.u(i0, i1, i2 - 1) ? 3 : (world.u(i0, i1, i2 + 1) ? 4 : 1)));
     }
 
-    public void a(World world, int i0, int i1, int i2, int i3){
+    public void a(World world, int i0, int i1, int i2, int i3) {
         if (this.m(world, i0, i1, i2)) {
             int i4 = world.h(i0, i1, i2) & 7;
             boolean flag0 = false;
@@ -96,7 +96,7 @@ public abstract class BlockButton extends Block{
         }
     }
 
-    private boolean m(World world, int i0, int i1, int i2){
+    private boolean m(World world, int i0, int i1, int i2) {
         if (!this.c(world, i0, i1, i2)) {
             this.c(world, i0, i1, i2, world.h(i0, i1, i2), 0);
             world.i(i0, i1, i2);
@@ -107,13 +107,13 @@ public abstract class BlockButton extends Block{
         }
     }
 
-    public void a(IBlockAccess iblockaccess, int i0, int i1, int i2){
+    public void a(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         int i3 = iblockaccess.h(i0, i1, i2);
 
         this.d(i3);
     }
 
-    private void d(int i0){
+    private void d(int i0) {
         int i1 = i0 & 7;
         boolean flag0 = (i0 & 8) > 0;
         float f0 = 0.375F;
@@ -139,9 +139,9 @@ public abstract class BlockButton extends Block{
         }
     }
 
-    public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer){}
+    public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {}
 
-    public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer, int i3, float f0, float f1, float f2){
+    public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer, int i3, float f0, float f1, float f2) {
         int i4 = world.h(i0, i1, i2);
         int i5 = i4 & 7;
         int i6 = 8 - (i4 & 8);
@@ -163,7 +163,7 @@ public abstract class BlockButton extends Block{
         }
     }
 
-    public void a(World world, int i0, int i1, int i2, int i3, int i4){
+    public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         if ((i4 & 8) > 0) {
             int i5 = i4 & 7;
 
@@ -173,11 +173,11 @@ public abstract class BlockButton extends Block{
         super.a(world, i0, i1, i2, i3, i4);
     }
 
-    public int b(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3){
+    public int b(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
         return (iblockaccess.h(i0, i1, i2) & 8) > 0 ? 15 : 0;
     }
 
-    public int c(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3){
+    public int c(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
         int i4 = iblockaccess.h(i0, i1, i2);
 
         if ((i4 & 8) == 0) {
@@ -190,11 +190,11 @@ public abstract class BlockButton extends Block{
         }
     }
 
-    public boolean f(){
+    public boolean f() {
         return true;
     }
 
-    public void a(World world, int i0, int i1, int i2, Random random){
+    public void a(World world, int i0, int i1, int i2, Random random) {
         if (!world.I) {
             int i3 = world.h(i0, i1, i2);
 
@@ -214,7 +214,7 @@ public abstract class BlockButton extends Block{
         }
     }
 
-    public void g(){
+    public void g() {
         float f0 = 0.1875F;
         float f1 = 0.125F;
         float f2 = 0.125F;
@@ -222,7 +222,7 @@ public abstract class BlockButton extends Block{
         this.a(0.5F - f0, 0.5F - f1, 0.5F - f2, 0.5F + f0, 0.5F + f1, 0.5F + f2);
     }
 
-    public void a(World world, int i0, int i1, int i2, Entity entity){
+    public void a(World world, int i0, int i1, int i2, Entity entity) {
         if (!world.I) {
             if (this.a) {
                 if ((world.h(i0, i1, i2) & 8) == 0) {
@@ -232,7 +232,7 @@ public abstract class BlockButton extends Block{
         }
     }
 
-    private void n(World world, int i0, int i1, int i2){
+    private void n(World world, int i0, int i1, int i2) {
         int i3 = world.h(i0, i1, i2);
         int i4 = i3 & 7;
         boolean flag0 = (i3 & 8) != 0;
@@ -260,7 +260,7 @@ public abstract class BlockButton extends Block{
         }
     }
 
-    private void d(World world, int i0, int i1, int i2, int i3){
+    private void d(World world, int i0, int i1, int i2, int i3) {
         world.f(i0, i1, i2, this.cz);
         if (i3 == 1) {
             world.f(i0 - 1, i1, i2, this.cz);

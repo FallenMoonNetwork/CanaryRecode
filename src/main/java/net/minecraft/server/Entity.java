@@ -11,7 +11,7 @@ import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.hook.entity.DamageHook;
 
-public abstract class Entity{
+public abstract class Entity {
 
     private static int b = 0;
     public int k;
@@ -89,7 +89,7 @@ public abstract class Entity{
 
     //
 
-    public Entity(World world){
+    public Entity(World world) {
         this.k = b++;
         this.l = 1.0D;
         this.m = false;
@@ -138,23 +138,23 @@ public abstract class Entity{
 
     protected abstract void a();
 
-    public DataWatcher u(){
+    public DataWatcher u() {
         return this.ah;
     }
 
-    public boolean equals(Object object){
+    public boolean equals(Object object) {
         return object instanceof Entity ? ((Entity) object).k == this.k : false;
     }
 
-    public int hashCode(){
+    public int hashCode() {
         return this.k;
     }
 
-    public void w(){
+    public void w() {
         this.M = true;
     }
 
-    protected void a(float f0, float f1){
+    protected void a(float f0, float f1) {
         if (f0 != this.O || f1 != this.P) {
             this.O = f0;
             this.P = f1;
@@ -180,12 +180,12 @@ public abstract class Entity{
         }
     }
 
-    protected void b(float f0, float f1){
+    protected void b(float f0, float f1) {
         this.A = f0 % 360.0F;
         this.B = f1 % 360.0F;
     }
 
-    public void b(double d0, double d1, double d2){
+    public void b(double d0, double d1, double d2) {
         this.u = d0;
         this.v = d1;
         this.w = d2;
@@ -195,11 +195,11 @@ public abstract class Entity{
         this.E.b(d0 - (double) f0, d1 - (double) this.N + (double) this.X, d2 - (double) f0, d0 + (double) f0, d1 - (double) this.N + (double) this.X + (double) f1, d2 + (double) f0);
     }
 
-    public void l_(){
+    public void l_() {
         this.x();
     }
 
-    public void x(){
+    public void x() {
         this.q.C.a("entityBaseTick");
         if (this.o != null && this.o.M) {
             this.o = null;
@@ -308,11 +308,11 @@ public abstract class Entity{
         this.q.C.b();
     }
 
-    public int y(){
+    public int y() {
         return 0;
     }
 
-    protected void z(){
+    protected void z() {
         if (!this.ag) {
             // CanaryMod: call DamageHook (Lava)
             DamageHook hook = new DamageHook(null, (CanaryEntityLiving) entity, new CanaryDamageSource(DamageSource.c), 4);
@@ -325,7 +325,7 @@ public abstract class Entity{
         }
     }
 
-    public void d(int i0){
+    public void d(int i0) {
         int i1 = i0 * 20;
 
         i1 = EnchantmentProtection.a(this, i1);
@@ -334,22 +334,22 @@ public abstract class Entity{
         }
     }
 
-    public void A(){
+    public void A() {
         this.d = 0;
     }
 
-    protected void B(){
+    protected void B() {
         this.w();
     }
 
-    public boolean c(double d0, double d1, double d2){
+    public boolean c(double d0, double d1, double d2) {
         AxisAlignedBB axisalignedbb = this.E.c(d0, d1, d2);
         List list = this.q.a(this, axisalignedbb);
 
         return !list.isEmpty() ? false : !this.q.d(axisalignedbb);
     }
 
-    public void d(double d0, double d1, double d2){
+    public void d(double d0, double d1, double d2) {
         if (this.Z) {
             this.E.d(d0, d1, d2);
             this.u = (this.E.a + this.E.d) / 2.0D;
@@ -621,7 +621,7 @@ public abstract class Entity{
         }
     }
 
-    protected void C(){
+    protected void C() {
         int i0 = MathHelper.c(this.E.a + 0.001D);
         int i1 = MathHelper.c(this.E.b + 0.001D);
         int i2 = MathHelper.c(this.E.c + 0.001D);
@@ -644,7 +644,7 @@ public abstract class Entity{
         }
     }
 
-    protected void a(int i0, int i1, int i2, int i3){
+    protected void a(int i0, int i1, int i2, int i3) {
         StepSound stepsound = Block.r[i3].cM;
 
         if (this.q.a(i0, i1 + 1, i2) == Block.aW.cz) {
@@ -655,15 +655,15 @@ public abstract class Entity{
         }
     }
 
-    public void a(String s0, float f0, float f1){
+    public void a(String s0, float f0, float f1) {
         this.q.a(this, s0, f0, f1);
     }
 
-    protected boolean f_(){
+    protected boolean f_() {
         return true;
     }
 
-    protected void a(double d0, boolean flag0){
+    protected void a(double d0, boolean flag0) {
         if (flag0) {
             if (this.T > 0.0F) {
                 this.a(this.T);
@@ -674,11 +674,11 @@ public abstract class Entity{
         }
     }
 
-    public AxisAlignedBB D(){
+    public AxisAlignedBB D() {
         return null;
     }
 
-    protected void e(int i0){
+    protected void e(int i0) {
         if (!this.ag) {
             // CanaryMod: call DamageHook (onfire)
             DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.a), i0);
@@ -690,25 +690,25 @@ public abstract class Entity{
         }
     }
 
-    public final boolean E(){
+    public final boolean E() {
         return this.ag;
     }
 
-    protected void a(float f0){
+    protected void a(float f0) {
         if (this.n != null) {
             this.n.a(f0);
         }
     }
 
-    public boolean F(){
+    public boolean F() {
         return this.ae || this.q.F(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w)) || this.q.F(MathHelper.c(this.u), MathHelper.c(this.v + (double) this.P), MathHelper.c(this.w));
     }
 
-    public boolean G(){
+    public boolean G() {
         return this.ae;
     }
 
-    public boolean H(){
+    public boolean H() {
         if (this.q.a(this.E.b(0.0D, -0.4000000059604645D, 0.0D).e(0.001D, 0.001D, 0.001D), Material.h, this)) {
             if (!this.ae && !this.e) {
                 float f0 = MathHelper.a(this.x * this.x * 0.20000000298023224D + this.y * this.y + this.z * this.z * 0.20000000298023224D) * 0.2F;
@@ -747,7 +747,7 @@ public abstract class Entity{
         return this.ae;
     }
 
-    public boolean a(Material material){
+    public boolean a(Material material) {
         double d0 = this.v + (double) this.e();
         int i0 = MathHelper.c(this.u);
         int i1 = MathHelper.d((float) MathHelper.c(d0));
@@ -764,15 +764,15 @@ public abstract class Entity{
         }
     }
 
-    public float e(){
+    public float e() {
         return 0.0F;
     }
 
-    public boolean I(){
+    public boolean I() {
         return this.q.a(this.E.b(-0.10000000149011612D, -0.4000000059604645D, -0.10000000149011612D), Material.i);
     }
 
-    public void a(float f0, float f1, float f2){
+    public void a(float f0, float f1, float f2) {
         float f3 = f0 * f0 + f1 * f1;
 
         if (f3 >= 1.0E-4F) {
@@ -792,7 +792,7 @@ public abstract class Entity{
         }
     }
 
-    public float c(float f0){
+    public float c(float f0) {
         int i0 = MathHelper.c(this.u);
         int i1 = MathHelper.c(this.w);
 
@@ -806,11 +806,11 @@ public abstract class Entity{
         }
     }
 
-    public void a(World world){
+    public void a(World world) {
         this.q = world;
     }
 
-    public void a(double d0, double d1, double d2, float f0, float f1){
+    public void a(double d0, double d1, double d2, float f0, float f1) {
         this.r = this.u = d0;
         this.s = this.v = d1;
         this.t = this.w = d2;
@@ -831,7 +831,7 @@ public abstract class Entity{
         this.b(f0, f1);
     }
 
-    public void b(double d0, double d1, double d2, float f0, float f1){
+    public void b(double d0, double d1, double d2, float f0, float f1) {
         this.U = this.r = this.u = d0;
         this.V = this.s = this.v = d1 + (double) this.N;
         this.W = this.t = this.w = d2;
@@ -840,7 +840,7 @@ public abstract class Entity{
         this.b(this.u, this.v, this.w);
     }
 
-    public float d(Entity entity){
+    public float d(Entity entity) {
         float f0 = (float) (this.u - entity.u);
         float f1 = (float) (this.v - entity.v);
         float f2 = (float) (this.w - entity.w);
@@ -848,7 +848,7 @@ public abstract class Entity{
         return MathHelper.c(f0 * f0 + f1 * f1 + f2 * f2);
     }
 
-    public double e(double d0, double d1, double d2){
+    public double e(double d0, double d1, double d2) {
         double d3 = this.u - d0;
         double d4 = this.v - d1;
         double d5 = this.w - d2;
@@ -856,7 +856,7 @@ public abstract class Entity{
         return d3 * d3 + d4 * d4 + d5 * d5;
     }
 
-    public double f(double d0, double d1, double d2){
+    public double f(double d0, double d1, double d2) {
         double d3 = this.u - d0;
         double d4 = this.v - d1;
         double d5 = this.w - d2;
@@ -864,7 +864,7 @@ public abstract class Entity{
         return (double) MathHelper.a(d3 * d3 + d4 * d4 + d5 * d5);
     }
 
-    public double e(Entity entity){
+    public double e(Entity entity) {
         double d0 = this.u - entity.u;
         double d1 = this.v - entity.v;
         double d2 = this.w - entity.w;
@@ -872,9 +872,9 @@ public abstract class Entity{
         return d0 * d0 + d1 * d1 + d2 * d2;
     }
 
-    public void b_(EntityPlayer entityplayer){}
+    public void b_(EntityPlayer entityplayer) {}
 
-    public void f(Entity entity){
+    public void f(Entity entity) {
         if (entity.n != this && entity.o != this) {
             double d0 = entity.u - this.u;
             double d1 = entity.w - this.w;
@@ -902,18 +902,18 @@ public abstract class Entity{
         }
     }
 
-    public void g(double d0, double d1, double d2){
+    public void g(double d0, double d1, double d2) {
         this.x += d0;
         this.y += d1;
         this.z += d2;
         this.an = true;
     }
 
-    protected void J(){
+    protected void J() {
         this.J = true;
     }
 
-    public boolean a(DamageSource damagesource, int i0){
+    public boolean a(DamageSource damagesource, int i0) {
         if (this.aq()) {
             return false;
         } else {
@@ -922,17 +922,17 @@ public abstract class Entity{
         }
     }
 
-    public boolean K(){
+    public boolean K() {
         return false;
     }
 
-    public boolean L(){
+    public boolean L() {
         return false;
     }
 
-    public void c(Entity entity, int i0){}
+    public void c(Entity entity, int i0) {}
 
-    public boolean c(NBTTagCompound nbttagcompound){
+    public boolean c(NBTTagCompound nbttagcompound) {
         String s0 = this.P();
 
         if (!this.M && s0 != null) {
@@ -944,7 +944,7 @@ public abstract class Entity{
         }
     }
 
-    public boolean d(NBTTagCompound nbttagcompound){
+    public boolean d(NBTTagCompound nbttagcompound) {
         String s0 = this.P();
 
         if (!this.M && s0 != null && this.n == null) {
@@ -956,7 +956,7 @@ public abstract class Entity{
         }
     }
 
-    public void e(NBTTagCompound nbttagcompound){
+    public void e(NBTTagCompound nbttagcompound) {
         try {
             nbttagcompound.a("Pos", (NBTBase) this.a(new double[] { this.u, this.v + (double) this.X, this.w }));
             nbttagcompound.a("Motion", (NBTBase) this.a(new double[] { this.x, this.y, this.z }));
@@ -987,7 +987,7 @@ public abstract class Entity{
         }
     }
 
-    public void f(NBTTagCompound nbttagcompound){
+    public void f(NBTTagCompound nbttagcompound) {
         try {
             NBTTagList nbttaglist = nbttagcompound.m("Pos");
             NBTTagList nbttaglist1 = nbttagcompound.m("Motion");
@@ -1036,7 +1036,7 @@ public abstract class Entity{
         }
     }
 
-    protected final String P(){
+    protected final String P() {
         return EntityList.b(this);
     }
 
@@ -1044,7 +1044,7 @@ public abstract class Entity{
 
     protected abstract void b(NBTTagCompound nbttagcompound);
 
-    protected NBTTagList a(double... adouble){
+    protected NBTTagList a(double... adouble) {
         NBTTagList nbttaglist = new NBTTagList();
         double[] adouble1 = adouble;
         int i0 = adouble.length;
@@ -1058,7 +1058,7 @@ public abstract class Entity{
         return nbttaglist;
     }
 
-    protected NBTTagList a(float... afloat){
+    protected NBTTagList a(float... afloat) {
         NBTTagList nbttaglist = new NBTTagList();
         float[] afloat1 = afloat;
         int i0 = afloat.length;
@@ -1072,15 +1072,15 @@ public abstract class Entity{
         return nbttaglist;
     }
 
-    public EntityItem b(int i0, int i1){
+    public EntityItem b(int i0, int i1) {
         return this.a(i0, i1, 0.0F);
     }
 
-    public EntityItem a(int i0, int i1, float f0){
+    public EntityItem a(int i0, int i1, float f0) {
         return this.a(new ItemStack(i0, i1, 0), f0);
     }
 
-    public EntityItem a(ItemStack itemstack, float f0){
+    public EntityItem a(ItemStack itemstack, float f0) {
         EntityItem entityitem = new EntityItem(this.q, this.u, this.v + (double) f0, this.w, itemstack);
 
         entityitem.b = 10;
@@ -1088,11 +1088,11 @@ public abstract class Entity{
         return entityitem;
     }
 
-    public boolean R(){
+    public boolean R() {
         return !this.M;
     }
 
-    public boolean S(){
+    public boolean S() {
         for (int i0 = 0; i0 < 8; ++i0) {
             float f0 = ((float) ((i0 >> 0) % 2) - 0.5F) * this.O * 0.8F;
             float f1 = ((float) ((i0 >> 1) % 2) - 0.5F) * 0.1F;
@@ -1109,15 +1109,15 @@ public abstract class Entity{
         return false;
     }
 
-    public boolean a_(EntityPlayer entityplayer){
+    public boolean a_(EntityPlayer entityplayer) {
         return false;
     }
 
-    public AxisAlignedBB g(Entity entity){
+    public AxisAlignedBB g(Entity entity) {
         return null;
     }
 
-    public void T(){
+    public void T() {
         if (this.o.M) {
             this.o = null;
         } else {
@@ -1173,7 +1173,7 @@ public abstract class Entity{
         }
     }
 
-    public void U(){
+    public void U() {
         if (this.n != null) {
             if (!(this.n instanceof EntityPlayer) || !((EntityPlayer) this.n).ce()) {
                 this.n.U = this.U;
@@ -1185,15 +1185,15 @@ public abstract class Entity{
         }
     }
 
-    public double V(){
+    public double V() {
         return (double) this.N;
     }
 
-    public double W(){
+    public double W() {
         return (double) this.P * 0.75D;
     }
 
-    public void a(Entity entity){
+    public void a(Entity entity) {
         this.f = 0.0D;
         this.g = 0.0D;
         if (entity == null) {
@@ -1213,7 +1213,7 @@ public abstract class Entity{
         }
     }
 
-    public void h(Entity entity){
+    public void h(Entity entity) {
         double d0 = this.u;
         double d1 = this.v;
         double d2 = this.w;
@@ -1250,15 +1250,15 @@ public abstract class Entity{
         this.b(d0, d1, d2, this.A, this.B);
     }
 
-    public float X(){
+    public float X() {
         return 0.1F;
     }
 
-    public Vec3 Y(){
+    public Vec3 Y() {
         return null;
     }
 
-    public void Z(){
+    public void Z() {
         if (this.ao > 0) {
             this.ao = this.aa();
         } else {
@@ -1273,57 +1273,57 @@ public abstract class Entity{
         }
     }
 
-    public int aa(){
+    public int aa() {
         return 900;
     }
 
-    public ItemStack[] ad(){
+    public ItemStack[] ad() {
         return null;
     }
 
-    public void c(int i0, ItemStack itemstack){}
+    public void c(int i0, ItemStack itemstack) {}
 
-    public boolean ae(){
+    public boolean ae() {
         return this.d > 0 || this.f(0);
     }
 
-    public boolean af(){
+    public boolean af() {
         return this.o != null || this.f(2);
     }
 
-    public boolean ag(){
+    public boolean ag() {
         return this.f(1);
     }
 
-    public void b(boolean flag0){
+    public void b(boolean flag0) {
         this.a(1, flag0);
     }
 
-    public boolean ah(){
+    public boolean ah() {
         return this.f(3);
     }
 
-    public void c(boolean flag0){
+    public void c(boolean flag0) {
         this.a(3, flag0);
     }
 
-    public boolean ai(){
+    public boolean ai() {
         return this.f(5);
     }
 
-    public void d(boolean flag0){
+    public void d(boolean flag0) {
         this.a(5, flag0);
     }
 
-    public void e(boolean flag0){
+    public void e(boolean flag0) {
         this.a(4, flag0);
     }
 
-    protected boolean f(int i0){
+    protected boolean f(int i0) {
         return (this.ah.a(0) & 1 << i0) != 0;
     }
 
-    protected void a(int i0, boolean flag0){
+    protected void a(int i0, boolean flag0) {
         byte b0 = this.ah.a(0);
 
         if (flag0) {
@@ -1333,15 +1333,15 @@ public abstract class Entity{
         }
     }
 
-    public int ak(){
+    public int ak() {
         return this.ah.b(1);
     }
 
-    public void g(int i0){
+    public void g(int i0) {
         this.ah.b(1, Short.valueOf((short) i0));
     }
 
-    public void a(EntityLightningBolt entitylightningbolt){
+    public void a(EntityLightningBolt entitylightningbolt) {
         this.e(5);
         ++this.d;
         if (this.d == 0) {
@@ -1349,9 +1349,9 @@ public abstract class Entity{
         }
     }
 
-    public void a(EntityLiving entityliving){}
+    public void a(EntityLiving entityliving) {}
 
-    protected boolean i(double d0, double d1, double d2){
+    protected boolean i(double d0, double d1, double d2) {
         int i0 = MathHelper.c(d0);
         int i1 = MathHelper.c(d1);
         int i2 = MathHelper.c(d2);
@@ -1427,12 +1427,12 @@ public abstract class Entity{
         }
     }
 
-    public void al(){
+    public void al() {
         this.K = true;
         this.T = 0.0F;
     }
 
-    public String am(){
+    public String am() {
         String s0 = EntityList.b(this);
 
         if (s0 == null) {
@@ -1442,39 +1442,39 @@ public abstract class Entity{
         return StatCollector.a("entity." + s0 + ".name");
     }
 
-    public Entity[] an(){
+    public Entity[] an() {
         return null;
     }
 
-    public boolean i(Entity entity){
+    public boolean i(Entity entity) {
         return this == entity;
     }
 
-    public float ao(){
+    public float ao() {
         return 0.0F;
     }
 
-    public boolean ap(){
+    public boolean ap() {
         return true;
     }
 
-    public boolean j(Entity entity){
+    public boolean j(Entity entity) {
         return false;
     }
 
-    public String toString(){
+    public String toString() {
         return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", new Object[] { this.getClass().getSimpleName(), this.am(), Integer.valueOf(this.k), this.q == null ? "~NULL~" : this.q.L().k(), Double.valueOf(this.u), Double.valueOf(this.v), Double.valueOf(this.w) });
     }
 
-    public boolean aq(){
+    public boolean aq() {
         return this.h;
     }
 
-    public void k(Entity entity){
+    public void k(Entity entity) {
         this.b(entity.u, entity.v, entity.w, entity.A, entity.B);
     }
 
-    public void a(Entity entity, boolean flag0){
+    public void a(Entity entity, boolean flag0) {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
 
         entity.e(nbttagcompound);
@@ -1483,7 +1483,7 @@ public abstract class Entity{
         this.as = entity.as;
     }
 
-    public void c(int i0){
+    public void c(int i0) {
         if (!this.q.I && !this.M) {
             this.q.C.a("changeDimension");
             MinecraftServer minecraftserver = MinecraftServer.D();
@@ -1512,27 +1512,27 @@ public abstract class Entity{
         }
     }
 
-    public float a(Explosion explosion, World world, int i0, int i1, int i2, Block block){
+    public float a(Explosion explosion, World world, int i0, int i1, int i2, Block block) {
         return block.a(this);
     }
 
-    public boolean a(Explosion explosion, World world, int i0, int i1, int i2, int i3, float f0){
+    public boolean a(Explosion explosion, World world, int i0, int i1, int i2, int i3, float f0) {
         return true;
     }
 
-    public int ar(){
+    public int ar() {
         return 3;
     }
 
-    public int as(){
+    public int as() {
         return this.as;
     }
 
-    public boolean at(){
+    public boolean at() {
         return false;
     }
 
-    public void a(CrashReportCategory crashreportcategory){
+    public void a(CrashReportCategory crashreportcategory) {
         crashreportcategory.a("Entity Type", (Callable) (new CallableEntityType(this)));
         crashreportcategory.a("Entity ID", Integer.valueOf(this.k));
         crashreportcategory.a("Entity Name", (Callable) (new CallableEntityName(this)));
@@ -1541,11 +1541,11 @@ public abstract class Entity{
         crashreportcategory.a("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", new Object[] { Double.valueOf(this.x), Double.valueOf(this.y), Double.valueOf(this.z) }));
     }
 
-    public boolean aw(){
+    public boolean aw() {
         return true;
     }
 
-    public String ax(){
+    public String ax() {
         return this.am();
     }
 
@@ -1554,16 +1554,16 @@ public abstract class Entity{
      * 
      * @return
      */
-    public CanaryWorld getCanaryWorld(){
+    public CanaryWorld getCanaryWorld() {
         return q.getCanaryWorld();
     }
 
-    public void setDimension(CanaryWorld dim){
+    public void setDimension(CanaryWorld dim) {
         this.q = dim.getHandle();
         this.q.setCanaryWorld(dim);
     }
 
-    public CanaryEntity getCanaryEntity(){
+    public CanaryEntity getCanaryEntity() {
         return entity;
     }
 }

@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-public class Achievement extends StatBase{
+public class Achievement extends StatBase {
 
     public final int a;
     public final int b;
@@ -9,15 +9,15 @@ public class Achievement extends StatBase{
     public final ItemStack d;
     private boolean m;
 
-    public Achievement(int i0, String s0, int i1, int i2, Item item, Achievement achievement){
+    public Achievement(int i0, String s0, int i1, int i2, Item item, Achievement achievement) {
         this(i0, s0, i1, i2, new ItemStack(item), achievement);
     }
 
-    public Achievement(int i0, String s0, int i1, int i2, Block block, Achievement achievement){
+    public Achievement(int i0, String s0, int i1, int i2, Block block, Achievement achievement) {
         this(i0, s0, i1, i2, new ItemStack(block), achievement);
     }
 
-    public Achievement(int i0, String s0, int i1, int i2, ItemStack itemstack, Achievement achievement){
+    public Achievement(int i0, String s0, int i1, int i2, ItemStack itemstack, Achievement achievement) {
         super(5242880 + i0, "achievement." + s0);
         this.d = itemstack;
         this.k = "achievement." + s0 + ".desc";
@@ -42,27 +42,27 @@ public class Achievement extends StatBase{
         this.c = achievement;
     }
 
-    public Achievement a(){
+    public Achievement a() {
         this.f = true;
         return this;
     }
 
-    public Achievement b(){
+    public Achievement b() {
         this.m = true;
         return this;
     }
 
-    public Achievement c(){
+    public Achievement c() {
         super.g();
         AchievementList.e.add(this);
         return this;
     }
 
-    public StatBase g(){
+    public StatBase g() {
         return this.c();
     }
 
-    public StatBase h(){
+    public StatBase h() {
         return this.a();
     }
 }

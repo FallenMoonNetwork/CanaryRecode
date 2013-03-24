@@ -12,7 +12,7 @@ import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.entity.EntitySpawnHook;
 
-public abstract class EntityLiving extends Entity{
+public abstract class EntityLiving extends Entity {
 
     private static final float[] b = new float[] { 0.0F, 0.0F, 0.1F, 0.2F };
     private static final float[] c = new float[] { 0.0F, 0.0F, 0.25F, 0.5F };
@@ -107,7 +107,7 @@ public abstract class EntityLiving extends Entity{
     private Entity bY;
     protected int bJ = 0;
 
-    public EntityLiving(World world){
+    public EntityLiving(World world) {
         super(world);
         this.m = true;
         this.bo = new EntityAITasks(world != null && world.C != null ? world.C : null);
@@ -131,85 +131,85 @@ public abstract class EntityLiving extends Entity{
         this.Y = 0.5F;
     }
 
-    protected int ay(){
+    protected int ay() {
         return 16;
     }
 
-    public EntityLookHelper az(){
+    public EntityLookHelper az() {
         return this.j;
     }
 
-    public EntityMoveHelper aA(){
+    public EntityMoveHelper aA() {
         return this.bK;
     }
 
-    public EntityJumpHelper aB(){
+    public EntityJumpHelper aB() {
         return this.bL;
     }
 
-    public PathNavigate aC(){
+    public PathNavigate aC() {
         return this.bN;
     }
 
-    public EntitySenses aD(){
+    public EntitySenses aD() {
         return this.bP;
     }
 
-    public Random aE(){
+    public Random aE() {
         return this.ab;
     }
 
-    public EntityLiving aF(){
+    public EntityLiving aF() {
         return this.e;
     }
 
-    public EntityLiving aG(){
+    public EntityLiving aG() {
         return this.g;
     }
 
-    public void l(Entity entity){
+    public void l(Entity entity) {
         if (entity instanceof EntityLiving) {
             this.g = (EntityLiving) entity;
         }
     }
 
-    public int aH(){
+    public int aH() {
         return this.bC;
     }
 
-    public float ao(){
+    public float ao() {
         return this.aA;
     }
 
-    public float aI(){
+    public float aI() {
         return this.bQ;
     }
 
-    public void e(float f0){
+    public void e(float f0) {
         this.bQ = f0;
         this.f(f0);
     }
 
-    public boolean m(Entity entity){
+    public boolean m(Entity entity) {
         this.l(entity);
         return false;
     }
 
-    public EntityLiving aJ(){
+    public EntityLiving aJ() {
         return this.bO;
     }
 
-    public void b(EntityLiving entityliving){
+    public void b(EntityLiving entityliving) {
         this.bO = entityliving;
     }
 
-    public boolean a(Class oclass0){
+    public boolean a(Class oclass0) {
         return EntityCreeper.class != oclass0 && EntityGhast.class != oclass0;
     }
 
-    public void aK(){}
+    public void aK() {}
 
-    protected void a(double d0, boolean flag0){
+    protected void a(double d0, boolean flag0) {
         if (!this.G()) {
             this.H();
         }
@@ -236,41 +236,41 @@ public abstract class EntityLiving extends Entity{
         super.a(d0, flag0);
     }
 
-    public boolean aL(){
+    public boolean aL() {
         return this.d(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w));
     }
 
-    public boolean d(int i0, int i1, int i2){
+    public boolean d(int i0, int i1, int i2) {
         return this.bS == -1.0F ? true : this.bR.e(i0, i1, i2) < this.bS * this.bS;
     }
 
-    public void b(int i0, int i1, int i2, int i3){
+    public void b(int i0, int i1, int i2, int i3) {
         this.bR.b(i0, i1, i2);
         this.bS = (float) i3;
     }
 
-    public ChunkCoordinates aM(){
+    public ChunkCoordinates aM() {
         return this.bR;
     }
 
-    public float aN(){
+    public float aN() {
         return this.bS;
     }
 
-    public void aO(){
+    public void aO() {
         this.bS = -1.0F;
     }
 
-    public boolean aP(){
+    public boolean aP() {
         return this.bS != -1.0F;
     }
 
-    public void c(EntityLiving entityliving){
+    public void c(EntityLiving entityliving) {
         this.e = entityliving;
         this.f = this.e != null ? 100 : 0;
     }
 
-    protected void a(){
+    protected void a() {
         this.ah.a(8, Integer.valueOf(this.i));
         this.ah.a(9, Byte.valueOf((byte) 0));
         this.ah.a(10, Byte.valueOf((byte) 0));
@@ -278,27 +278,27 @@ public abstract class EntityLiving extends Entity{
         this.ah.a(5, "");
     }
 
-    public boolean n(Entity entity){
+    public boolean n(Entity entity) {
         return this.q.a(this.q.T().a(this.u, this.v + (double) this.e(), this.w), this.q.T().a(entity.u, entity.v + (double) entity.e(), entity.w)) == null;
     }
 
-    public boolean K(){
+    public boolean K() {
         return !this.M;
     }
 
-    public boolean L(){
+    public boolean L() {
         return !this.M;
     }
 
-    public float e(){
+    public float e() {
         return this.P * 0.85F;
     }
 
-    public int aQ(){
+    public int aQ() {
         return 80;
     }
 
-    public void aR(){
+    public void aR() {
         String s0 = this.bb();
 
         if (s0 != null) {
@@ -306,7 +306,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public void x(){
+    public void x() {
         this.aQ = this.aR;
         super.x();
         this.q.C.a("mobBaseTick");
@@ -405,7 +405,7 @@ public abstract class EntityLiving extends Entity{
         this.q.C.b();
     }
 
-    protected void aS(){
+    protected void aS() {
         ++this.aZ;
         if (this.aZ == 20) {
             int i0;
@@ -433,13 +433,13 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected int h(int i0){
+    protected int h(int i0) {
         int i1 = EnchantmentHelper.b(this);
 
         return i1 > 0 && this.ab.nextInt(i1 + 1) > 0 ? i0 : i0 - 1;
     }
 
-    protected int d(EntityPlayer entityplayer){
+    protected int d(EntityPlayer entityplayer) {
         if (this.be > 0) {
             int i0 = this.be;
             ItemStack[] aitemstack = this.ad();
@@ -456,11 +456,11 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected boolean aT(){
+    protected boolean aT() {
         return false;
     }
 
-    public void aU(){
+    public void aU() {
         for (int i0 = 0; i0 < 20; ++i0) {
             double d0 = this.ab.nextGaussian() * 0.02D;
             double d1 = this.ab.nextGaussian() * 0.02D;
@@ -471,14 +471,14 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public void T(){
+    public void T() {
         super.T();
         this.aC = this.aD;
         this.aD = 0.0F;
         this.T = 0.0F;
     }
 
-    public void l_(){
+    public void l_() {
         super.l_();
         if (!this.q.I) {
             int i0;
@@ -597,7 +597,7 @@ public abstract class EntityLiving extends Entity{
         this.aE += f2;
     }
 
-    public void j(int i0){
+    public void j(int i0) {
         if (this.aS > 0) {
             this.b(this.aX() + i0);
             if (this.aS > this.aW()) {
@@ -610,18 +610,18 @@ public abstract class EntityLiving extends Entity{
 
     public abstract int aW();
 
-    public int aX(){
+    public int aX() {
         return this.aS;
     }
 
-    public void b(int i0){
+    public void b(int i0) {
         this.aS = i0;
         if (i0 > this.aW()) {
             i0 = this.aW();
         }
     }
 
-    public boolean a(DamageSource damagesource, int i0){
+    public boolean a(DamageSource damagesource, int i0) {
         if (this.aq()) {
             return false;
         } else if (this.q.I) {
@@ -743,11 +743,11 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected float aY(){
+    protected float aY() {
         return this.h_() ? (this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.5F : (this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F;
     }
 
-    public int aZ(){
+    public int aZ() {
         int i0 = 0;
         ItemStack[] aitemstack = this.ad();
         int i1 = aitemstack.length;
@@ -765,9 +765,9 @@ public abstract class EntityLiving extends Entity{
         return i0;
     }
 
-    protected void k(int i0){}
+    protected void k(int i0) {}
 
-    protected int b(DamageSource damagesource, int i0){
+    protected int b(DamageSource damagesource, int i0) {
         if (!damagesource.e()) {
             int i1 = 25 - this.aZ();
             int i2 = i0 * i1 + this.aU;
@@ -780,7 +780,7 @@ public abstract class EntityLiving extends Entity{
         return i0;
     }
 
-    protected int c(DamageSource damagesource, int i0){
+    protected int c(DamageSource damagesource, int i0) {
         int i1;
         int i2;
         int i3;
@@ -812,7 +812,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected void d(DamageSource damagesource, int i0){
+    protected void d(DamageSource damagesource, int i0) {
         if (!this.aq()) {
             i0 = this.b(damagesource, i0);
             i0 = this.c(damagesource, i0);
@@ -823,23 +823,23 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected float ba(){
+    protected float ba() {
         return 1.0F;
     }
 
-    protected String bb(){
+    protected String bb() {
         return null;
     }
 
-    protected String bc(){
+    protected String bc() {
         return "damage.hit";
     }
 
-    protected String bd(){
+    protected String bd() {
         return "damage.hit";
     }
 
-    public void a(Entity entity, int i0, double d0, double d1){
+    public void a(Entity entity, int i0, double d0, double d1) {
         this.an = true;
         float f0 = MathHelper.a(d0 * d0 + d1 * d1);
         float f1 = 0.4F;
@@ -855,7 +855,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public void a(DamageSource damagesource){
+    public void a(DamageSource damagesource) {
         Entity entity = damagesource.i();
         EntityLiving entityliving = this.bN();
 
@@ -891,9 +891,9 @@ public abstract class EntityLiving extends Entity{
         this.q.a((Entity) this, (byte) 3);
     }
 
-    protected void l(int i0){}
+    protected void l(int i0) {}
 
-    protected void a(boolean flag0, int i0){
+    protected void a(boolean flag0, int i0) {
         int i1 = this.be();
 
         if (i1 > 0) {
@@ -909,11 +909,11 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected int be(){
+    protected int be() {
         return 0;
     }
 
-    protected void a(float f0){
+    protected void a(float f0) {
         super.a(f0);
         int i0 = MathHelper.f(f0 - 3.0F);
 
@@ -943,7 +943,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public void e(float f0, float f1){
+    public void e(float f0, float f1) {
         double d0;
 
         if (this.G() && (!(this instanceof EntityPlayer) || !((EntityPlayer) this).ce.b)) {
@@ -1070,7 +1070,7 @@ public abstract class EntityLiving extends Entity{
         this.bj += this.bi;
     }
 
-    public boolean g_(){
+    public boolean g_() {
         int i0 = MathHelper.c(this.u);
         int i1 = MathHelper.c(this.E.b);
         int i2 = MathHelper.c(this.w);
@@ -1079,7 +1079,7 @@ public abstract class EntityLiving extends Entity{
         return i3 == Block.aJ.cz || i3 == Block.by.cz;
     }
 
-    public void b(NBTTagCompound nbttagcompound){
+    public void b(NBTTagCompound nbttagcompound) {
         if (this.aS < -32768) {
             this.aS = -32768;
         }
@@ -1129,7 +1129,7 @@ public abstract class EntityLiving extends Entity{
         nbttagcompound.a("CustomNameVisible", this.bQ());
     }
 
-    public void a(NBTTagCompound nbttagcompound){
+    public void a(NBTTagCompound nbttagcompound) {
         this.aS = nbttagcompound.d("Health");
         if (!nbttagcompound.b("Health")) {
             this.aS = this.aW();
@@ -1176,23 +1176,23 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public boolean R(){
+    public boolean R() {
         return !this.M && this.aS > 0;
     }
 
-    public boolean bf(){
+    public boolean bf() {
         return false;
     }
 
-    public void f(float f0){
+    public void f(float f0) {
         this.bE = f0;
     }
 
-    public void f(boolean flag0){
+    public void f(boolean flag0) {
         this.bG = flag0;
     }
 
-    public void c(){
+    public void c() {
         if (this.bX > 0) {
             --this.bX;
         }
@@ -1344,7 +1344,7 @@ public abstract class EntityLiving extends Entity{
         this.q.C.b();
     }
 
-    protected void bg(){
+    protected void bg() {
         List list = this.q.b((Entity) this, this.E.b(0.20000000298023224D, 0.0D, 0.20000000298023224D));
 
         if (list != null && !list.isEmpty()) {
@@ -1358,27 +1358,27 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected void o(Entity entity){
+    protected void o(Entity entity) {
         entity.f((Entity) this);
     }
 
-    protected boolean bh(){
+    protected boolean bh() {
         return false;
     }
 
-    protected boolean bi(){
+    protected boolean bi() {
         return !this.q.I;
     }
 
-    protected boolean bj(){
+    protected boolean bj() {
         return this.aS <= 0;
     }
 
-    public boolean bk(){
+    public boolean bk() {
         return false;
     }
 
-    protected void bl(){
+    protected void bl() {
         this.y = 0.41999998688697815D;
         if (this.a(Potion.j)) {
             this.y += (double) ((float) (this.b(Potion.j).c() + 1) * 0.1F);
@@ -1394,7 +1394,7 @@ public abstract class EntityLiving extends Entity{
         this.an = true;
     }
 
-    protected boolean bm(){
+    protected boolean bm() {
         // CanaryMod: call EntitySpawnHook (Despawn)
         EntitySpawnHook hook = new EntitySpawnHook(entity, false);
         Canary.hooks().callHook(hook);
@@ -1402,7 +1402,7 @@ public abstract class EntityLiving extends Entity{
         //
     }
 
-    protected void bn(){
+    protected void bn() {
         if (!this.bW) {
             EntityPlayer entityplayer = this.q.a(this, -1.0D);
 
@@ -1425,7 +1425,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected void bo(){
+    protected void bo() {
         ++this.bC;
         this.q.C.a("checkDespawn");
         this.bn();
@@ -1456,9 +1456,9 @@ public abstract class EntityLiving extends Entity{
         this.q.C.b();
     }
 
-    protected void bp(){}
+    protected void bp() {}
 
-    protected void bq(){
+    protected void bq() {
         ++this.bC;
         this.bn();
         this.bD = 0.0F;
@@ -1498,7 +1498,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected void br(){
+    protected void br() {
         int i0 = this.h();
 
         if (this.br) {
@@ -1514,11 +1514,11 @@ public abstract class EntityLiving extends Entity{
         this.aR = (float) this.bs / (float) i0;
     }
 
-    public int bs(){
+    public int bs() {
         return 40;
     }
 
-    public void a(Entity entity, float f0, float f1){
+    public void a(Entity entity, float f0, float f1) {
         double d0 = entity.u - this.u;
         double d1 = entity.w - this.w;
         double d2;
@@ -1539,7 +1539,7 @@ public abstract class EntityLiving extends Entity{
         this.A = this.b(this.A, f2, f0);
     }
 
-    private float b(float f0, float f1, float f2){
+    private float b(float f0, float f1, float f2) {
         float f3 = MathHelper.g(f1 - f0);
 
         if (f3 > f2) {
@@ -1553,19 +1553,19 @@ public abstract class EntityLiving extends Entity{
         return f0 + f3;
     }
 
-    public boolean bv(){
+    public boolean bv() {
         return this.q.b(this.E) && this.q.a((Entity) this, this.E).isEmpty() && !this.q.d(this.E);
     }
 
-    protected void B(){
+    protected void B() {
         this.a(DamageSource.i, 4);
     }
 
-    public Vec3 Y(){
+    public Vec3 Y() {
         return this.i(1.0F);
     }
 
-    public Vec3 i(float f0){
+    public Vec3 i(float f0) {
         float f1;
         float f2;
         float f3;
@@ -1589,15 +1589,15 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public int by(){
+    public int by() {
         return 4;
     }
 
-    public boolean bz(){
+    public boolean bz() {
         return false;
     }
 
-    protected void bA(){
+    protected void bA() {
         Iterator iterator = this.bn.keySet().iterator();
 
         while (iterator.hasNext()) {
@@ -1672,7 +1672,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public void bB(){
+    public void bB() {
         Iterator iterator = this.bn.keySet().iterator();
 
         while (iterator.hasNext()) {
@@ -1686,23 +1686,23 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public Collection bC(){
+    public Collection bC() {
         return this.bn.values();
     }
 
-    public boolean m(int i0){
+    public boolean m(int i0) {
         return this.bn.containsKey(Integer.valueOf(i0));
     }
 
-    public boolean a(Potion potion){
+    public boolean a(Potion potion) {
         return this.bn.containsKey(Integer.valueOf(potion.H));
     }
 
-    public PotionEffect b(Potion potion){
+    public PotionEffect b(Potion potion) {
         return (PotionEffect) this.bn.get(Integer.valueOf(potion.H));
     }
 
-    public void d(PotionEffect potioneffect){
+    public void d(PotionEffect potioneffect) {
         if (this.e(potioneffect)) {
             if (this.bn.containsKey(Integer.valueOf(potioneffect.a()))) {
                 ((PotionEffect) this.bn.get(Integer.valueOf(potioneffect.a()))).a(potioneffect);
@@ -1714,7 +1714,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public boolean e(PotionEffect potioneffect){
+    public boolean e(PotionEffect potioneffect) {
         if (this.bF() == EnumCreatureAttribute.b) {
             int i0 = potioneffect.a();
 
@@ -1726,11 +1726,11 @@ public abstract class EntityLiving extends Entity{
         return true;
     }
 
-    public boolean bD(){
+    public boolean bD() {
         return this.bF() == EnumCreatureAttribute.b;
     }
 
-    public void o(int i0){
+    public void o(int i0) {
         PotionEffect potioneffect = (PotionEffect) this.bn.remove(Integer.valueOf(i0));
 
         if (potioneffect != null) {
@@ -1738,19 +1738,19 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected void a(PotionEffect potioneffect){
+    protected void a(PotionEffect potioneffect) {
         this.h = true;
     }
 
-    protected void b(PotionEffect potioneffect){
+    protected void b(PotionEffect potioneffect) {
         this.h = true;
     }
 
-    protected void c(PotionEffect potioneffect){
+    protected void c(PotionEffect potioneffect) {
         this.h = true;
     }
 
-    public float bE(){
+    public float bE() {
         float f0 = 1.0F;
 
         if (this.a(Potion.c)) {
@@ -1768,19 +1768,19 @@ public abstract class EntityLiving extends Entity{
         return f0;
     }
 
-    public void a(double d0, double d1, double d2){
+    public void a(double d0, double d1, double d2) {
         this.b(d0, d1, d2, this.A, this.B);
     }
 
-    public boolean h_(){
+    public boolean h_() {
         return false;
     }
 
-    public EnumCreatureAttribute bF(){
+    public EnumCreatureAttribute bF() {
         return EnumCreatureAttribute.a;
     }
 
-    public void a(ItemStack itemstack){
+    public void a(ItemStack itemstack) {
         this.a("random.break", 0.8F, 0.8F + this.q.s.nextFloat() * 0.4F);
 
         for (int i0 = 0; i0 < 5; ++i0) {
@@ -1797,7 +1797,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public int ar(){
+    public int ar() {
         if (this.aJ() == null) {
             return 3;
         } else {
@@ -1812,27 +1812,27 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public ItemStack bG(){
+    public ItemStack bG() {
         return this.bT[0];
     }
 
-    public ItemStack p(int i0){
+    public ItemStack p(int i0) {
         return this.bT[i0];
     }
 
-    public ItemStack q(int i0){
+    public ItemStack q(int i0) {
         return this.bT[i0 + 1];
     }
 
-    public void c(int i0, ItemStack itemstack){
+    public void c(int i0, ItemStack itemstack) {
         this.bT[i0] = itemstack;
     }
 
-    public ItemStack[] ad(){
+    public ItemStack[] ad() {
         return this.bT;
     }
 
-    protected void b(boolean flag0, int i0){
+    protected void b(boolean flag0, int i0) {
         for (int i1 = 0; i1 < this.ad().length; ++i1) {
             ItemStack itemstack = this.p(i1);
             boolean flag1 = this.bq[i1] > 1.0F;
@@ -1858,7 +1858,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected void bH(){
+    protected void bH() {
         if (this.ab.nextFloat() < d[this.q.r]) {
             int i0 = this.ab.nextInt(2);
             float f0 = this.q.r == 3 ? 0.1F : 0.25F;
@@ -1893,7 +1893,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public void a(Entity entity, int i0){
+    public void a(Entity entity, int i0) {
         if (!entity.M && !this.q.I) {
             EntityTracker entitytracker = ((WorldServer) this.q).p();
 
@@ -1911,7 +1911,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public static int b(ItemStack itemstack){
+    public static int b(ItemStack itemstack) {
         if (itemstack.c != Block.be.cz && itemstack.c != Item.bR.cp) {
             if (itemstack.b() instanceof ItemArmor) {
                 switch (((ItemArmor) itemstack.b()).b) {
@@ -1935,7 +1935,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public static Item a(int i0, int i1){
+    public static Item a(int i0, int i1) {
         switch (i0) {
             case 4:
                 if (i1 == 0) {
@@ -1994,7 +1994,7 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    protected void bI(){
+    protected void bI() {
         if (this.bG() != null && this.ab.nextFloat() < b[this.q.r]) {
             EnchantmentHelper.a(this.ab, this.bG(), 5 + this.q.r * this.ab.nextInt(6));
         }
@@ -2008,13 +2008,13 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public void bJ(){}
+    public void bJ() {}
 
-    private int h(){
+    private int h() {
         return this.a(Potion.e) ? 6 - (1 + this.b(Potion.e).c()) * 1 : (this.a(Potion.f) ? 6 + (1 + this.b(Potion.f).c()) * 2 : 6);
     }
 
-    public void bK(){
+    public void bK() {
         if (!this.br || this.bs >= this.h() / 2 || this.bs < 0) {
             this.bs = -1;
             this.br = true;
@@ -2024,55 +2024,55 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public boolean bL(){
+    public boolean bL() {
         return false;
     }
 
-    public final int bM(){
+    public final int bM() {
         return this.ah.a(10);
     }
 
-    public final void r(int i0){
+    public final void r(int i0) {
         this.ah.b(10, Byte.valueOf((byte) i0));
     }
 
-    public EntityLiving bN(){
+    public EntityLiving bN() {
         return (EntityLiving) (this.bt.c() != null ? this.bt.c() : (this.bk != null ? this.bk : (this.e != null ? this.e : null)));
     }
 
-    public String am(){
+    public String am() {
         return this.bP() ? this.bO() : super.am();
     }
 
-    public void c(String s0){
+    public void c(String s0) {
         this.ah.b(5, s0);
     }
 
-    public String bO(){
+    public String bO() {
         return this.ah.e(5);
     }
 
-    public boolean bP(){
+    public boolean bP() {
         return this.ah.e(5).length() > 0;
     }
 
-    public void g(boolean flag0){
+    public void g(boolean flag0) {
         this.ah.b(6, Byte.valueOf((byte) (flag0 ? 1 : 0)));
     }
 
-    public boolean bQ(){
+    public boolean bQ() {
         return this.ah.a(6) == 1;
     }
 
-    public void a(int i0, float f0){
+    public void a(int i0, float f0) {
         this.bq[i0] = f0;
     }
 
-    public boolean bS(){
+    public boolean bS() {
         return this.bV;
     }
 
-    public void h(boolean flag0){
+    public void h(boolean flag0) {
         this.bV = flag0;
     }
 }

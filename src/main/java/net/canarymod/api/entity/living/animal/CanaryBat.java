@@ -8,9 +8,9 @@ import net.minecraft.server.EntityBat;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryBat extends CanaryEntityAnimal implements Bat{
+public class CanaryBat extends CanaryEntityAnimal implements Bat {
 
-    public CanaryBat(EntityBat entity){
+    public CanaryBat(EntityBat entity) {
         super(entity);
     }
 
@@ -18,7 +18,7 @@ public class CanaryBat extends CanaryEntityAnimal implements Bat{
      * {@inheritDoc}
      */
     @Override
-    public boolean isHanging(){
+    public boolean isHanging() {
         return ((EntityBat) entity).h();
     }
 
@@ -26,7 +26,7 @@ public class CanaryBat extends CanaryEntityAnimal implements Bat{
      * {@inheritDoc}
      */
     @Override
-    public void setHanging(boolean hanging){
+    public void setHanging(boolean hanging) {
         ((EntityBat) entity).a(hanging);
     }
 
@@ -34,7 +34,7 @@ public class CanaryBat extends CanaryEntityAnimal implements Bat{
      * {@inheritDoc}
      */
     @Override
-    public Entity getHandle(){
+    public Entity getHandle() {
         return (EntityBat) entity;
     }
 }

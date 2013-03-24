@@ -7,19 +7,19 @@ import net.minecraft.server.EntityBlaze;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryBlaze extends CanaryEntityMob implements Blaze{
+public class CanaryBlaze extends CanaryEntityMob implements Blaze {
 
-    public CanaryBlaze(EntityBlaze entity){
+    public CanaryBlaze(EntityBlaze entity) {
         super(entity);
     }
 
     @Override
-    public boolean isBurning(){
+    public boolean isBurning() {
         return ((EntityBlaze) entity).m();
     }
 
     @Override
-    public void setBurning(boolean isBurning){
+    public void setBurning(boolean isBurning) {
         ((EntityBlaze) entity).a(isBurning);
     }
 }

@@ -5,18 +5,18 @@ import net.canarymod.api.entity.Entity;
 import net.minecraft.server.EntityBoat;
 import net.minecraft.server.EntityMinecart;
 
-public class CanaryVehicle extends CanaryEntity implements Vehicle{
+public class CanaryVehicle extends CanaryEntity implements Vehicle {
 
-    public CanaryVehicle(EntityBoat entity){
+    public CanaryVehicle(EntityBoat entity) {
         super(entity);
     }
 
-    public CanaryVehicle(EntityMinecart entity){
+    public CanaryVehicle(EntityMinecart entity) {
         super(entity);
     }
 
     @Override
-    public Entity getPassenger(){
+    public Entity getPassenger() {
         if (entity.bg != null) {
             entity.bg.getEntity();
         }
@@ -24,17 +24,17 @@ public class CanaryVehicle extends CanaryEntity implements Vehicle{
     }
 
     @Override
-    public boolean isBoat(){
+    public boolean isBoat() {
         return (this instanceof CanaryBoat);
     }
 
     @Override
-    public boolean isMinecart(){
+    public boolean isMinecart() {
         return (this instanceof CanaryMinecart);
     }
 
     @Override
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         if (entity.bg == null) {
             return true;
         } else {

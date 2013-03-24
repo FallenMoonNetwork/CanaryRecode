@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
-public class DedicatedServer extends MinecraftServer implements IServer{
+public class DedicatedServer extends MinecraftServer implements IServer {
 
     private final List k = Collections.synchronizedList(new ArrayList());
     private final ILogAgent l;
@@ -22,13 +22,13 @@ public class DedicatedServer extends MinecraftServer implements IServer{
     private NetworkListenThread r;
     private boolean s = false;
 
-    public DedicatedServer(File file1){
+    public DedicatedServer(File file1) {
         super(file1);
         this.l = new LogAgent("Minecraft-Server", (String) null, (new File(file1, "server.log")).getAbsolutePath());
         new DedicatedServerSleepThread(this);
     }
 
-    protected boolean c(){
+    protected boolean c() {
         DedicatedServerCommandThread dedicatedservercommandthread = new DedicatedServerCommandThread(this);
 
         dedicatedservercommandthread.setDaemon(true);
@@ -156,23 +156,23 @@ public class DedicatedServer extends MinecraftServer implements IServer{
         return true;
     }
 
-    public boolean f(){
+    public boolean f() {
         return this.p;
     }
 
-    public EnumGameType g(){
+    public EnumGameType g() {
         return this.q;
     }
 
-    public int h(){
+    public int h() {
         return this.o.a("difficulty", 1);
     }
 
-    public boolean i(){
+    public boolean i() {
         return this.o.a("hardcore", false);
     }
 
-    protected void a(CrashReport crashreport){
+    protected void a(CrashReport crashreport) {
         while (this.m()) {
             this.am();
 
@@ -184,45 +184,45 @@ public class DedicatedServer extends MinecraftServer implements IServer{
         }
     }
 
-    public CrashReport b(CrashReport crashreport){
+    public CrashReport b(CrashReport crashreport) {
         crashreport = super.b(crashreport);
         crashreport.g().a("Is Modded", (Callable) (new CallableType(this)));
         crashreport.g().a("Type", (Callable) (new CallableServerType(this)));
         return crashreport;
     }
 
-    protected void p(){
+    protected void p() {
         System.exit(0);
     }
 
-    public void r(){ // CanaryMod: protected => public
+    public void r() { // CanaryMod: protected => public
         super.r();
         this.am();
     }
 
-    public boolean s(){
+    public boolean s() {
         return this.o.a("allow-nether", true);
     }
 
-    public boolean L(){
+    public boolean L() {
         return this.o.a("spawn-monsters", true);
     }
 
-    public void a(PlayerUsageSnooper playerusagesnooper){
+    public void a(PlayerUsageSnooper playerusagesnooper) {
         playerusagesnooper.a("whitelist_enabled", Boolean.valueOf(this.an().n()));
         playerusagesnooper.a("whitelist_count", Integer.valueOf(this.an().h().size()));
         super.a(playerusagesnooper);
     }
 
-    public boolean R(){
+    public boolean R() {
         return this.o.a("snooper-enabled", true);
     }
 
-    public void a(String s0, ICommandSender icommandsender){
+    public void a(String s0, ICommandSender icommandsender) {
         this.k.add(new ServerCommand(s0, icommandsender));
     }
 
-    public void am(){
+    public void am() {
         while (!this.k.isEmpty()) {
             ServerCommand servercommand = (ServerCommand) this.k.remove(0);
 
@@ -230,66 +230,66 @@ public class DedicatedServer extends MinecraftServer implements IServer{
         }
     }
 
-    public boolean T(){
+    public boolean T() {
         return true;
     }
 
-    public DedicatedPlayerList an(){
+    public DedicatedPlayerList an() {
         return (DedicatedPlayerList) super.ad();
     }
 
-    public NetworkListenThread ae(){
+    public NetworkListenThread ae() {
         return this.r;
     }
 
-    public int a(String s0, int i0){
+    public int a(String s0, int i0) {
         return this.o.a(s0, i0);
     }
 
-    public String a(String s0, String s1){
+    public String a(String s0, String s1) {
         return this.o.a(s0, s1);
     }
 
-    public boolean a(String s0, boolean flag0){
+    public boolean a(String s0, boolean flag0) {
         return this.o.a(s0, flag0);
     }
 
-    public void a(String s0, Object object){
+    public void a(String s0, Object object) {
         this.o.a(s0, object);
     }
 
-    public void a(){
+    public void a() {
         this.o.b();
     }
 
-    public String b_(){
+    public String b_() {
         File file1 = this.o.c();
 
         return file1 != null ? file1.getAbsolutePath() : "No settings file";
     }
 
-    public void ao(){
+    public void ao() {
         ServerGUI.a(this);
         this.s = true;
     }
 
-    public boolean ag(){
+    public boolean ag() {
         return this.s;
     }
 
-    public String a(EnumGameType enumgametype, boolean flag0){
+    public String a(EnumGameType enumgametype, boolean flag0) {
         return "";
     }
 
-    public boolean Z(){
+    public boolean Z() {
         return this.o.a("enable-command-block", false);
     }
 
-    public int ak(){
+    public int ak() {
         return this.o.a("spawn-protection", super.ak());
     }
 
-    public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer){
+    public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {
         if (world.t.h != 0) {
             return false;
         }
@@ -312,15 +312,15 @@ public class DedicatedServer extends MinecraftServer implements IServer{
         }
     }
 
-    public ILogAgent al(){
+    public ILogAgent al() {
         return this.l;
     }
 
-    public ServerConfigurationManager ad(){
+    public ServerConfigurationManager ad() {
         return this.an();
     }
 
-    public void reload(){
+    public void reload() {
         /* WorldConfiguration defWorld = Configuration.getWorldConfig(Configuration.getServerConfig().getDefaultWorldName());
          * // this.d = new OPropertyManager(new File("server.properties"));
          * this.y = Configuration.getNetConfig().getBindIp();

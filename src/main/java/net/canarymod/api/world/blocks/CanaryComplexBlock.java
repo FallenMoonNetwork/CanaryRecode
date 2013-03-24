@@ -7,7 +7,7 @@ public class CanaryComplexBlock implements ComplexBlock {
 
     protected OTileEntity tileentity;
 
-    public CanaryComplexBlock(OTileEntity tileentity){
+    public CanaryComplexBlock(OTileEntity tileentity) {
         this.tileentity = tileentity;
     }
 
@@ -16,38 +16,38 @@ public class CanaryComplexBlock implements ComplexBlock {
     }
 
     @Override
-    public Block getBlock(){
+    public Block getBlock() {
         return getWorld().getBlockAt(getX(), getY(), getZ());
     }
 
     @Override
-    public int getX(){
+    public int getX() {
         return tileentity.l;
     }
 
     @Override
-    public int getY(){
+    public int getY() {
         return tileentity.m;
     }
 
     @Override
-    public int getZ(){
+    public int getZ() {
         return tileentity.n;
     }
 
     @Override
-    public World getWorld(){
+    public World getWorld() {
         return tileentity.k.getCanaryWorld();
     }
 
     @Override
-    public void update(){
+    public void update() {
         tileentity.k.j(getX(), getY(), getZ());
     }
 
     /**
      * Returns a semi-unique hashcode for this block
-     *
+     * 
      * @return hashcode
      */
     @Override
@@ -62,7 +62,7 @@ public class CanaryComplexBlock implements ComplexBlock {
 
     /**
      * Tests the given object to see if it equals this object
-     *
+     * 
      * @param obj
      *            the object to test
      * @return true if the two objects match

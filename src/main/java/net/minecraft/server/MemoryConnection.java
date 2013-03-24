@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MemoryConnection implements INetworkManager{
+public class MemoryConnection implements INetworkManager {
 
     private static final SocketAddress a = new InetSocketAddress("127.0.0.1", 0);
     private final List b = Collections.synchronizedList(new ArrayList()); // CanaryMod: fix
@@ -18,26 +18,26 @@ public class MemoryConnection implements INetworkManager{
     private Object[] h;
 
     // CanaryMod: Add missing constructor
-    public MemoryConnection(ILogAgent ilogagent, NetHandler nethandler){
+    public MemoryConnection(ILogAgent ilogagent, NetHandler nethandler) {
         this.e = nethandler;
         this.c = ilogagent;
     }
 
     //
 
-    public void a(NetHandler nethandler){
+    public void a(NetHandler nethandler) {
         this.e = nethandler;
     }
 
-    public void a(Packet packet){
+    public void a(Packet packet) {
         if (!this.f) {
             this.d.b(packet);
         }
     }
 
-    public void a(){}
+    public void a() {}
 
-    public void b(){
+    public void b() {
         int i0 = 2500;
 
         while (i0-- >= 0 && !this.b.isEmpty()) {
@@ -55,25 +55,25 @@ public class MemoryConnection implements INetworkManager{
         }
     }
 
-    public SocketAddress c(){
+    public SocketAddress c() {
         return a;
     }
 
-    public void d(){
+    public void d() {
         this.f = true;
     }
 
-    public void a(String s0, Object... aobject){
+    public void a(String s0, Object... aobject) {
         this.f = true;
         this.g = s0;
         this.h = aobject;
     }
 
-    public int e(){
+    public int e() {
         return 0;
     }
 
-    public void b(Packet packet){
+    public void b(Packet packet) {
         if (packet.a_() && this.e.b()) {
             packet.a(this.e);
         }

@@ -11,19 +11,19 @@ import net.minecraft.server.EntitySquid;
  * 
  * @author Jason (darkdiplomat)
  */
-public abstract class CanaryEntityAnimal extends CanaryEntityLiving implements EntityAnimal{
+public abstract class CanaryEntityAnimal extends CanaryEntityLiving implements EntityAnimal {
 
-    public CanaryEntityAnimal(net.minecraft.server.EntityAnimal entity){
+    public CanaryEntityAnimal(net.minecraft.server.EntityAnimal entity) {
         super(entity);
     }
 
     // For them squids ...
-    public CanaryEntityAnimal(net.minecraft.server.EntitySquid entity){
+    public CanaryEntityAnimal(net.minecraft.server.EntitySquid entity) {
         super(entity);
     }
 
     // For them Bats...
-    public CanaryEntityAnimal(net.minecraft.server.EntityAmbientCreature entity){
+    public CanaryEntityAnimal(net.minecraft.server.EntityAmbientCreature entity) {
         super(entity);
     }
 
@@ -33,29 +33,29 @@ public abstract class CanaryEntityAnimal extends CanaryEntityLiving implements E
      * 
      * @param entity
      */
-    public CanaryEntityAnimal(net.minecraft.server.EntityVillager entity){
+    public CanaryEntityAnimal(net.minecraft.server.EntityVillager entity) {
         super(entity);
     }
 
     @Override
-    public int getGrowingAge(){ // Squid has no age
+    public int getGrowingAge() { // Squid has no age
         return entity instanceof net.minecraft.server.EntitySquid ? 0 : ((net.minecraft.server.EntityAgeable) entity).K();
     }
 
     @Override
-    public void setGrowingAge(int age){
+    public void setGrowingAge(int age) {
         if (entity instanceof EntitySquid)
             return; // Squid has no age
         ((EntityAgeable) entity).c(age);
     }
 
     @Override
-    public EntityLiving getTarget(){
+    public EntityLiving getTarget() {
         return new CanaryEntityLiving(((net.minecraft.server.EntityLiving) entity).at());
     }
 
     @Override
-    public void setTarget(EntityLiving entityliving){
+    public void setTarget(EntityLiving entityliving) {
         ((EntityLiving) entity).b((EntityLiving) ((CanaryEntity) entityliving).entity);
     }
 

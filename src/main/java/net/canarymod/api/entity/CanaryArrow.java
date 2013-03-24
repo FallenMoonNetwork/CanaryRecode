@@ -7,9 +7,9 @@ import net.minecraft.server.EntityArrow;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryArrow extends CanaryEntity implements Arrow{
+public class CanaryArrow extends CanaryEntity implements Arrow {
 
-    public CanaryArrow(EntityArrow entity){
+    public CanaryArrow(EntityArrow entity) {
         super(entity);
     }
 
@@ -17,7 +17,7 @@ public class CanaryArrow extends CanaryEntity implements Arrow{
      * {@inheritDoc}
      */
     @Override
-    public boolean canPickUp(){
+    public boolean canPickUp() {
         return ((EntityArrow) entity).a == 1;
     }
 
@@ -25,7 +25,7 @@ public class CanaryArrow extends CanaryEntity implements Arrow{
      * {@inheritDoc}
      */
     @Override
-    public void setCanPickUp(boolean canPickUp){
+    public void setCanPickUp(boolean canPickUp) {
         ((EntityArrow) entity).a = canPickUp ? 1 : 0;
     }
 
@@ -33,7 +33,7 @@ public class CanaryArrow extends CanaryEntity implements Arrow{
      * {@inheritDoc}
      */
     @Override
-    public Entity getOwner(){
+    public Entity getOwner() {
         return ((EntityArrow) entity).c != null ? ((EntityArrow) entity).c.getCanaryEntity() : null;
     }
 
@@ -41,7 +41,7 @@ public class CanaryArrow extends CanaryEntity implements Arrow{
      * {@inheritDoc}
      */
     @Override
-    public double getDamage(){
+    public double getDamage() {
         return ((EntityArrow) entity).c();
     }
 
@@ -49,7 +49,7 @@ public class CanaryArrow extends CanaryEntity implements Arrow{
      * {@inheritDoc}
      */
     @Override
-    public void setDamage(double damage){
+    public void setDamage(double damage) {
         ((EntityArrow) entity).b(damage);
     }
 
@@ -57,7 +57,7 @@ public class CanaryArrow extends CanaryEntity implements Arrow{
      * {@inheritDoc}
      */
     @Override
-    public boolean isCritical(){
+    public boolean isCritical() {
         return ((EntityArrow) entity).d();
     }
 
@@ -65,7 +65,7 @@ public class CanaryArrow extends CanaryEntity implements Arrow{
      * {@inheritDoc}
      */
     @Override
-    public void setIsCritical(boolean critical){
+    public void setIsCritical(boolean critical) {
         ((EntityArrow) entity).a(critical);
     }
 
@@ -73,7 +73,7 @@ public class CanaryArrow extends CanaryEntity implements Arrow{
      * {@inheritDoc}
      */
     @Override
-    public EntityArrow getHandle(){
+    public EntityArrow getHandle() {
         return (EntityArrow) entity;
     }
 }

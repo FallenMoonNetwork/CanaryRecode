@@ -6,40 +6,40 @@ import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 
-public class CanaryPlayerManager implements PlayerManager{
+public class CanaryPlayerManager implements PlayerManager {
     private net.minecraft.server.PlayerManager pm;
     private CanaryWorld dim;
 
-    public CanaryPlayerManager(net.minecraft.server.PlayerManager pm, CanaryWorld dimension){
+    public CanaryPlayerManager(net.minecraft.server.PlayerManager pm, CanaryWorld dimension) {
         this.pm = pm;
         this.dim = dimension;
     }
 
     @Override
-    public void updateMountedMovingPlayer(Player player){
+    public void updateMountedMovingPlayer(Player player) {
         pm.c((net.minecraft.server.EntityPlayerMP) ((CanaryPlayer) player).getHandle());
 
     }
 
     @Override
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
         pm.a((net.minecraft.server.EntityPlayerMP) ((CanaryPlayer) player).getHandle());
 
     }
 
     @Override
-    public void removePlayer(Player player){
+    public void removePlayer(Player player) {
         pm.b((net.minecraft.server.EntityPlayerMP) ((CanaryPlayer) player).getHandle());
 
     }
 
     @Override
-    public void markBlockNeedsUpdate(int x, int y, int z){
+    public void markBlockNeedsUpdate(int x, int y, int z) {
         pm.a(x, y, z);
     }
 
     @Override
-    public ArrayList<Player> getManagedPlayers(){
+    public ArrayList<Player> getManagedPlayers() {
         ArrayList<Player> players = new ArrayList<Player>();
         for (net.minecraft.server.EntityPlayerMP player : pm.managedPlayers) {
             players.add(player.getPlayer());
@@ -48,16 +48,16 @@ public class CanaryPlayerManager implements PlayerManager{
     }
 
     @Override
-    public World getAttachedDimension(){
+    public World getAttachedDimension() {
         return dim;
     }
 
     @Override
-    public int getMaxTrackingDistance(){
+    public int getMaxTrackingDistance() {
         return pm.c();
     }
 
-    public net.minecraft.server.PlayerManager getHandle(){
+    public net.minecraft.server.PlayerManager getHandle() {
         return pm;
     }
 

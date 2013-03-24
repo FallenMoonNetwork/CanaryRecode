@@ -11,7 +11,7 @@ public class CanaryItem implements Item {
     private ItemType type;
     private int slot = -1;
     private OItemStack item;
-    
+
     public CanaryItem(OItemStack oItemStack) {
         type = ItemType.fromId(oItemStack.c);
         item = oItemStack;
@@ -38,7 +38,7 @@ public class CanaryItem implements Item {
         type = ItemType.fromId(id);
         item.c = type.getId();
     }
-    
+
     @Override
     public int getDamage() {
         return item.g();
@@ -64,15 +64,15 @@ public class CanaryItem implements Item {
         item.b(damage);
 
     }
-    
+
     @Override
     public int getMaxAmount() {
-    	return item.getBaseItem().getMaxStackSize();
+        return item.getBaseItem().getMaxStackSize();
     }
-    
+
     @Override
     public void setMaxAmount(int amount) {
-    	
+
     }
 
     @Override
@@ -87,12 +87,12 @@ public class CanaryItem implements Item {
 
     @Override
     public Enchantment getEnchantment() {
-    	return getEnchantment(0);
+        return getEnchantment(0);
     }
 
     @Override
     public Enchantment getEnchantment(int index) {
-    	if (this.isEnchanted() && index < item.p().d() && index > -1) {
+        if (this.isEnchanted() && index < item.p().d() && index > -1) {
             ONBTTagCompound tag = (ONBTTagCompound) item.p().a(index);
             return new CanaryEnchantment(Enchantment.Type.fromId(tag.e("id")), tag.e("lvl"));
         }
@@ -101,7 +101,7 @@ public class CanaryItem implements Item {
 
     @Override
     public Enchantment[] getEnchantments() {
-    	CanaryEnchantment[] enchantments = null;
+        CanaryEnchantment[] enchantments = null;
         if (this.isEnchanted()) {
             enchantments = new CanaryEnchantment[item.p().d()];
             for (int index = 0; index < item.p().d(); index++) {
@@ -116,7 +116,7 @@ public class CanaryItem implements Item {
     public void addEnchantment(Enchantment enchantment) {
         if (enchantment != null && enchantment.getType().getId() >= 0 && enchantment.getType().getId() < OEnchantment.b.length) {
             OEnchantment enchantmentType = OEnchantment.b[enchantment.getType().getId()];
-            if (enchantmentType != null){
+            if (enchantmentType != null) {
                 item.a(enchantmentType, enchantment.getLevel());
             }
         }
@@ -124,9 +124,9 @@ public class CanaryItem implements Item {
 
     @Override
     public void addEnchantments(Enchantment[] enchantments) {
-    	for(Enchantment enchantment : enchantments){
-    		addEnchantment(enchantment);
-    	}
+        for (Enchantment enchantment : enchantments) {
+            addEnchantment(enchantment);
+        }
     }
 
     @Override
@@ -145,8 +145,8 @@ public class CanaryItem implements Item {
     public void removeEnchantment(Enchantment enchantment) {
         Enchantment[] enchants = getEnchantments();
         removeAllEnchantments();
-        for(Enchantment ench : enchants){
-            if(!ench.getType().equals(enchantment.getType())){
+        for (Enchantment ench : enchants) {
+            if (!ench.getType().equals(enchantment.getType())) {
                 addEnchantment(ench);
             }
         }
@@ -161,8 +161,8 @@ public class CanaryItem implements Item {
     public BaseItem getBaseItem() {
         return item.getBaseItem();
     }
-    
-    public OItemStack getHandle(){
+
+    public OItemStack getHandle() {
         return item;
     }
 

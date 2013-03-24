@@ -2,13 +2,13 @@ package net.minecraft.server;
 
 import net.canarymod.api.entity.living.monster.CanaryBlaze;
 
-public class EntityBlaze extends EntityMob{
+public class EntityBlaze extends EntityMob {
 
     private float d = 0.5F;
     private int e;
     private int f;
 
-    public EntityBlaze(World world){
+    public EntityBlaze(World world) {
         super(world);
         this.aH = "/mob/fire.png";
         this.ag = true;
@@ -16,32 +16,32 @@ public class EntityBlaze extends EntityMob{
         this.entity = new CanaryBlaze(this); // CanaryMod: Wrap Entity
     }
 
-    public int aW(){
+    public int aW() {
         return 20;
     }
 
-    protected void a(){
+    protected void a() {
         super.a();
         this.ah.a(16, new Byte((byte) 0));
     }
 
-    protected String bb(){
+    protected String bb() {
         return "mob.blaze.breathe";
     }
 
-    protected String bc(){
+    protected String bc() {
         return "mob.blaze.hit";
     }
 
-    protected String bd(){
+    protected String bd() {
         return "mob.blaze.death";
     }
 
-    public float c(float f0){
+    public float c(float f0) {
         return 1.0F;
     }
 
-    public void c(){
+    public void c() {
         if (!this.q.I) {
             if (this.F()) {
                 this.a(DamageSource.e, 1);
@@ -73,7 +73,7 @@ public class EntityBlaze extends EntityMob{
         super.c();
     }
 
-    protected void a(Entity entity, float f0){
+    protected void a(Entity entity, float f0) {
         if (this.ba <= 0 && f0 < 2.0F && entity.E.e > this.E.b && entity.E.b < this.E.e) {
             this.ba = 20;
             this.m(entity);
@@ -114,17 +114,17 @@ public class EntityBlaze extends EntityMob{
         }
     }
 
-    protected void a(float f0){}
+    protected void a(float f0) {}
 
-    protected int be(){
+    protected int be() {
         return Item.bp.cp;
     }
 
-    public boolean ae(){
+    public boolean ae() {
         return this.m();
     }
 
-    protected void a(boolean flag0, int i0){
+    protected void a(boolean flag0, int i0) {
         if (flag0) {
             int i1 = this.ab.nextInt(2 + i0);
 
@@ -134,11 +134,11 @@ public class EntityBlaze extends EntityMob{
         }
     }
 
-    public boolean m(){
+    public boolean m() {
         return (this.ah.a(16) & 1) != 0;
     }
 
-    public void a(boolean flag0){
+    public void a(boolean flag0) {
         byte b0 = this.ah.a(16);
 
         if (flag0) {
@@ -150,11 +150,11 @@ public class EntityBlaze extends EntityMob{
         this.ah.b(16, Byte.valueOf(b0));
     }
 
-    protected boolean i_(){
+    protected boolean i_() {
         return true;
     }
 
-    public int c(Entity entity){
+    public int c(Entity entity) {
         return 6;
     }
 }

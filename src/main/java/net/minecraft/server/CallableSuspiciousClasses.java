@@ -8,15 +8,15 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.concurrent.Callable;
 
-class CallableSuspiciousClasses implements Callable{
+class CallableSuspiciousClasses implements Callable {
 
     final CrashReport a;
 
-    CallableSuspiciousClasses(CrashReport crashreport){
+    CallableSuspiciousClasses(CrashReport crashreport) {
         this.a = crashreport;
     }
 
-    public String a() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException{ // CanaryMod: Throws Added
+    public String a() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException { // CanaryMod: Throws Added
         StringBuilder stringbuilder = new StringBuilder();
         Field field = ClassLoader.class.getDeclaredField("classes");
 
@@ -104,7 +104,7 @@ class CallableSuspiciousClasses implements Callable{
         return stringbuilder.toString();
     }
 
-    public Object call() throws SecurityException, IllegalArgumentException, NoSuchFieldException, IllegalAccessException{ // CanaryMod: Throws added
+    public Object call() throws SecurityException, IllegalArgumentException, NoSuchFieldException, IllegalAccessException { // CanaryMod: Throws added
         return this.a();
     }
 }

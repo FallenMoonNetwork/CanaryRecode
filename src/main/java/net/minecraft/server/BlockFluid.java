@@ -2,9 +2,9 @@ package net.minecraft.server;
 
 import java.util.Random;
 
-public abstract class BlockFluid extends Block{
+public abstract class BlockFluid extends Block {
 
-    protected BlockFluid(int i0, Material material){
+    protected BlockFluid(int i0, Material material) {
         super(i0, material);
         float f0 = 0.0F;
         float f1 = 0.0F;
@@ -13,11 +13,11 @@ public abstract class BlockFluid extends Block{
         this.b(true);
     }
 
-    public boolean b(IBlockAccess iblockaccess, int i0, int i1, int i2){
+    public boolean b(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         return this.cO != Material.i;
     }
 
-    public static float d(int i0){
+    public static float d(int i0) {
         if (i0 >= 8) {
             i0 = 0;
         }
@@ -25,11 +25,11 @@ public abstract class BlockFluid extends Block{
         return (float) (i0 + 1) / 9.0F;
     }
 
-    protected int k_(World world, int i0, int i1, int i2){
+    protected int k_(World world, int i0, int i1, int i2) {
         return world.g(i0, i1, i2) == this.cO ? world.h(i0, i1, i2) : -1;
     }
 
-    protected int d(IBlockAccess iblockaccess, int i0, int i1, int i2){
+    protected int d(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         if (iblockaccess.g(i0, i1, i2) != this.cO) {
             return -1;
         }
@@ -44,41 +44,41 @@ public abstract class BlockFluid extends Block{
         }
     }
 
-    public boolean b(){
+    public boolean b() {
         return false;
     }
 
-    public boolean c(){
+    public boolean c() {
         return false;
     }
 
-    public boolean a(int i0, boolean flag0){
+    public boolean a(int i0, boolean flag0) {
         return flag0 && i0 == 0;
     }
 
-    public boolean a_(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3){
+    public boolean a_(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
         Material material = iblockaccess.g(i0, i1, i2);
 
         return material == this.cO ? false : (i3 == 1 ? true : (material == Material.v ? false : super.a_(iblockaccess, i0, i1, i2, i3)));
     }
 
-    public AxisAlignedBB b(World world, int i0, int i1, int i2){
+    public AxisAlignedBB b(World world, int i0, int i1, int i2) {
         return null;
     }
 
-    public int d(){
+    public int d() {
         return 4;
     }
 
-    public int a(int i0, Random random, int i1){
+    public int a(int i0, Random random, int i1) {
         return 0;
     }
 
-    public int a(Random random){
+    public int a(Random random) {
         return 0;
     }
 
-    private Vec3 g(IBlockAccess iblockaccess, int i0, int i1, int i2){
+    private Vec3 g(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         Vec3 vec3 = iblockaccess.T().a(0.0D, 0.0D, 0.0D);
         int i3 = this.d(iblockaccess, i0, i1, i2);
 
@@ -164,7 +164,7 @@ public abstract class BlockFluid extends Block{
         return vec3;
     }
 
-    public void a(World world, int i0, int i1, int i2, Entity entity, Vec3 vec3){
+    public void a(World world, int i0, int i1, int i2, Entity entity, Vec3 vec3) {
         Vec3 vec31 = this.g((IBlockAccess) world, i0, i1, i2); // CanaryMod: Cast World to IBlockAccess for method g
 
         vec3.c += vec31.c;
@@ -172,19 +172,19 @@ public abstract class BlockFluid extends Block{
         vec3.e += vec31.e;
     }
 
-    public int a(World world){
+    public int a(World world) {
         return this.cO == Material.h ? 5 : (this.cO == Material.i ? (world.t.f ? 10 : 30) : 0);
     }
 
-    public void a(World world, int i0, int i1, int i2){
+    public void a(World world, int i0, int i1, int i2) {
         this.k(world, i0, i1, i2);
     }
 
-    public void a(World world, int i0, int i1, int i2, int i3){
+    public void a(World world, int i0, int i1, int i2, int i3) {
         this.k(world, i0, i1, i2);
     }
 
-    private void k(World world, int i0, int i1, int i2){
+    private void k(World world, int i0, int i1, int i2) {
         if (world.a(i0, i1, i2) == this.cz) {
             if (this.cO == Material.i) {
                 boolean flag0 = false;
@@ -225,7 +225,7 @@ public abstract class BlockFluid extends Block{
         }
     }
 
-    protected void j(World world, int i0, int i1, int i2){
+    protected void j(World world, int i0, int i1, int i2) {
         world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
 
         for (int i3 = 0; i3 < 8; ++i3) {

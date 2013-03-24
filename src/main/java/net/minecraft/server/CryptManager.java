@@ -31,11 +31,11 @@ import org.bouncycastle.crypto.params.KeyParameter;
 import org.bouncycastle.crypto.params.ParametersWithIV;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-public class CryptManager{
+public class CryptManager {
 
     public static final Charset a = Charset.forName("ISO_8859_1");
 
-    public static KeyPair b(){
+    public static KeyPair b() {
         try {
             KeyPairGenerator keypairgenerator = KeyPairGenerator.getInstance("RSA");
 
@@ -48,7 +48,7 @@ public class CryptManager{
         }
     }
 
-    public static byte[] a(String s0, PublicKey publickey, SecretKey secretkey){
+    public static byte[] a(String s0, PublicKey publickey, SecretKey secretkey) {
         try {
             return a("SHA-1", new byte[][] { s0.getBytes("ISO_8859_1"), secretkey.getEncoded(), publickey.getEncoded() });
         } catch (UnsupportedEncodingException unsupportedencodingexception) {
@@ -57,7 +57,7 @@ public class CryptManager{
         }
     }
 
-    private static byte[] a(String s0, byte[]... abyte){
+    private static byte[] a(String s0, byte[]... abyte) {
         try {
             MessageDigest messagedigest = MessageDigest.getInstance(s0);
             byte[][] abyte0 = abyte; // CanaryMod: Fix bad var name
@@ -76,7 +76,7 @@ public class CryptManager{
         }
     }
 
-    public static PublicKey a(byte[] abyte){
+    public static PublicKey a(byte[] abyte) {
         try {
             X509EncodedKeySpec x509encodedkeyspec = new X509EncodedKeySpec(abyte);
             KeyFactory keyfactory = KeyFactory.getInstance("RSA");
@@ -92,15 +92,15 @@ public class CryptManager{
         return null;
     }
 
-    public static SecretKey a(PrivateKey privatekey, byte[] abyte){
+    public static SecretKey a(PrivateKey privatekey, byte[] abyte) {
         return new SecretKeySpec(b(privatekey, abyte), "AES");
     }
 
-    public static byte[] b(Key key, byte[] abyte){
+    public static byte[] b(Key key, byte[] abyte) {
         return a(2, key, abyte);
     }
 
-    private static byte[] a(int i0, Key key, byte[] abyte){
+    private static byte[] a(int i0, Key key, byte[] abyte) {
         try {
             return a(i0, key.getAlgorithm(), key).doFinal(abyte);
         } catch (IllegalBlockSizeException illegalblocksizeexception) {
@@ -113,7 +113,7 @@ public class CryptManager{
         return null;
     }
 
-    private static Cipher a(int i0, String s0, Key key){
+    private static Cipher a(int i0, String s0, Key key) {
         try {
             Cipher cipher = Cipher.getInstance(s0);
 
@@ -131,18 +131,18 @@ public class CryptManager{
         return null;
     }
 
-    private static BufferedBlockCipher a(boolean flag0, Key key){
+    private static BufferedBlockCipher a(boolean flag0, Key key) {
         BufferedBlockCipher bufferedblockcipher = new BufferedBlockCipher(new CFBBlockCipher(new AESFastEngine(), 8));
 
         bufferedblockcipher.a(flag0, new ParametersWithIV(new KeyParameter(key.getEncoded()), key.getEncoded(), 0, 16));
         return bufferedblockcipher;
     }
 
-    public static OutputStream a(SecretKey secretkey, OutputStream outputstream){
+    public static OutputStream a(SecretKey secretkey, OutputStream outputstream) {
         return new CipherOutputStream(outputstream, a(true, secretkey));
     }
 
-    public static InputStream a(SecretKey secretkey, InputStream inputstream){
+    public static InputStream a(SecretKey secretkey, InputStream inputstream) {
         return new CipherInputStream(inputstream, a(false, secretkey));
     }
 

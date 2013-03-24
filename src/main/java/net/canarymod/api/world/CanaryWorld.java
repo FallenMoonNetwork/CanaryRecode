@@ -65,7 +65,7 @@ import net.minecraft.server.EntityVillager;
 import net.minecraft.server.EntityWolf;
 import net.minecraft.server.WorldServer;
 
-public class CanaryWorld implements World{
+public class CanaryWorld implements World {
     private WorldServer world;
     private WorldType type;
     private CanaryChunkProviderServer chunkProvider;
@@ -79,7 +79,7 @@ public class CanaryWorld implements World{
      */
     private String name;
 
-    public CanaryWorld(String name, WorldServer dimension, WorldType type){
+    public CanaryWorld(String name, WorldServer dimension, WorldType type) {
         this.name = name;
 
         // manually set player managers
@@ -93,70 +93,70 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
     @Override
-    public String getFqName(){
+    public String getFqName() {
         return this.name + "_" + this.type.getName();
     }
 
     @Override
-    public void setNanoTick(int tickIndex, long tick){
+    public void setNanoTick(int tickIndex, long tick) {
         nanoTicks[tickIndex] = tick;
     }
 
     @Override
-    public long getNanoTick(int tickIndex){
+    public long getNanoTick(int tickIndex) {
         return nanoTicks[tickIndex];
     }
 
     @Override
-    public void setEnabled(boolean enabled){
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled; // TODO: implement
     }
 
     @Override
-    public boolean isEnabled(){
+    public boolean isEnabled() {
         return this.enabled;
     }
 
     @Override
-    public boolean canEnterWorld(Player player){
+    public boolean canEnterWorld(Player player) {
         return player.hasPermission("canary.world.traveling." + name + ".enter")
                 && isEnabled();
     }
 
     @Override
-    public boolean canLeaveWorld(Player player){
+    public boolean canLeaveWorld(Player player) {
         return player.hasPermission("canary.world.traveling." + name + ".leave");
     }
 
     @Override
-    public ArrayList<Player> getPlayers(){
+    public ArrayList<Player> getPlayers() {
         ArrayList<Player> players = new ArrayList<Player>(Canary.getServer().getMaxPlayers());
         players.addAll(getPlayerList());
         return players;
     }
 
     @Override
-    public CanaryEntityTracker getEntityTracker(){
+    public CanaryEntityTracker getEntityTracker() {
         return entityTracker;
     }
 
     @Override
-    public void setEntityTracker(EntityTracker entityTracker){
+    public void setEntityTracker(EntityTracker entityTracker) {
         this.entityTracker = (CanaryEntityTracker) entityTracker;
     }
 
     @Override
-    public EntityItem dropItem(Position position, Item item){
+    public EntityItem dropItem(Position position, Item item) {
         return dropItem((int) position.getX(), (int) position.getY(), (int) position.getZ(), item);
     }
 
     @Override
-    public EntityItem dropItem(int x, int y, int z, int itemId, int amount, int damage){
+    public EntityItem dropItem(int x, int y, int z, int itemId, int amount, int damage) {
         double d1 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
         double d2 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
         double d3 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
@@ -170,7 +170,7 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public EntityItem dropItem(int x, int y, int z, Item item){
+    public EntityItem dropItem(int x, int y, int z, Item item) {
         double d1 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
         double d2 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
         double d3 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
@@ -183,7 +183,7 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public ArrayList<EntityAnimal> getAnimalList(){
+    public ArrayList<EntityAnimal> getAnimalList() {
         ArrayList<EntityAnimal> animals = new ArrayList<EntityAnimal>();
         for (Entity entity : getEntityTracker().getTrackedEntities()) {
             if (entity instanceof EntityAnimal) {
@@ -194,7 +194,7 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public ArrayList<EntityMob> getMobList(){
+    public ArrayList<EntityMob> getMobList() {
         ArrayList<EntityMob> mobs = new ArrayList<EntityMob>();
         for (Entity entity : getEntityTracker().getTrackedEntities()) {
             if (entity instanceof EntityMob) {
@@ -205,75 +205,75 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public ArrayList<Player> getPlayerList(){
+    public ArrayList<Player> getPlayerList() {
         return playerManager.getManagedPlayers();
     }
 
     @Override
-    public Block getBlockAt(int x, int y, int z){
+    public Block getBlockAt(int x, int y, int z) {
         short id = (short) world.a(x, y, z);
         byte data = getDataAt(x, y, z);
         return new CanaryBlock(id, data, x, y, z, this);
     }
 
     @Override
-    public byte getDataAt(Position position){
+    public byte getDataAt(Position position) {
         return getDataAt((int) position.getX(), (int) position.getY(), (int) position.getZ());
     }
 
     @Override
-    public Block getBlockAt(Position position){
+    public Block getBlockAt(Position position) {
         return getBlockAt((int) position.getX(), (int) position.getY(), (int) position.getZ());
     }
 
     @Override
-    public byte getDataAt(int x, int y, int z){
+    public byte getDataAt(int x, int y, int z) {
         return (byte) world.c(x, y, z);
     }
 
     @Override
-    public void setBlock(Block block){
+    public void setBlock(Block block) {
         setBlockAt(block.getX(), block.getY(), block.getZ(), block.getType(), block.getData());
     }
 
     @Override
-    public void setBlockAt(Position vector, Block block){
+    public void setBlockAt(Position vector, Block block) {
         setBlockAt((int) vector.getX(), (int) vector.getY(), (int) vector.getZ(), block.getType(), block.getData());
     }
 
     @Override
-    public void setBlockAt(int x, int y, int z, short type){
+    public void setBlockAt(int x, int y, int z, short type) {
         setBlockAt(x, y, z, type, (byte) 0);
 
     }
 
     @Override
-    public void setBlockAt(Position position, short type){
+    public void setBlockAt(Position position, short type) {
         setBlockAt((int) position.getX(), (int) position.getY(), (int) position.getZ(), (short) type);
     }
 
     @Override
-    public void setBlockAt(Position position, short type, byte data){
+    public void setBlockAt(Position position, short type, byte data) {
         setBlockAt((int) position.getX(), (int) position.getY(), (int) position.getZ(), type, data);
     }
 
     @Override
-    public void setBlockAt(int x, int y, int z, short type, byte data){
+    public void setBlockAt(int x, int y, int z, short type, byte data) {
         world.b(x, y, z, type, data);
     }
 
     @Override
-    public void setDataAt(int x, int y, int z, byte data){
+    public void setDataAt(int x, int y, int z, byte data) {
         world.d(x, y, z, data);
     }
 
     @Override
-    public void markBlockNeedsUpdate(int x, int y, int z){
+    public void markBlockNeedsUpdate(int x, int y, int z) {
         world.j(x, y, z);
     }
 
     @Override
-    public Player getClosestPlayer(double x, double y, double z, double distance){
+    public Player getClosestPlayer(double x, double y, double z, double distance) {
         OEntityPlayer user = world.a(x, y, z, distance);
         if ((user != null) && user instanceof OEntityPlayerMP) {
             return (Player) user.getCanaryEntity();
@@ -282,7 +282,7 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public Player getClosestPlayer(Entity entity, int distance){
+    public Player getClosestPlayer(Entity entity, int distance) {
         OEntityPlayer user = world.a(((CanaryEntity) entity).getHandle(), distance);
         if ((user != null) && user instanceof OEntityPlayerMP) {
             return (Player) user.getCanaryEntity();
@@ -291,43 +291,43 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public ChunkProviderServer getChunkProvider(){
+    public ChunkProviderServer getChunkProvider() {
         return chunkProvider;
     }
 
     @Override
-    public boolean isChunkLoaded(Block block){
+    public boolean isChunkLoaded(Block block) {
         chunkProvider.isChunkLoaded(block.getX(), block.getZ());
         return false;
     }
 
     @Override
-    public boolean isChunkLoaded(int x, int y, int z){ // TODO: remove?
+    public boolean isChunkLoaded(int x, int y, int z) { // TODO: remove?
         return chunkProvider.isChunkLoaded(x, z);
     }
 
     @Override
-    public boolean isChunkLoaded(int x, int z){
+    public boolean isChunkLoaded(int x, int z) {
         return chunkProvider.isChunkLoaded(x, z);
     }
 
     @Override
-    public int getHeight(){
+    public int getHeight() {
         return 256;
     }
 
     @Override
-    public int getYHeighestBlockAt(int x, int z){
+    public int getYHeighestBlockAt(int x, int z) {
         return world.e(x, z);
     }
 
     @Override
-    public void playNoteAt(int x, int y, int z, int instrument, byte notePitch){
+    public void playNoteAt(int x, int y, int z, int instrument, byte notePitch) {
         world.e(x, y, y, instrument, notePitch);
     }
 
     @Override
-    public void setTime(long time){
+    public void setTime(long time) {
         long margin = (time - getRawTime()) % 24000;
 
         // Java modulus is stupid.
@@ -339,7 +339,7 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public long getRelativeTime(){
+    public long getRelativeTime() {
         long time = (getRawTime() % 24000);
 
         // Java modulus is stupid.
@@ -350,42 +350,42 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public long getRawTime(){
+    public long getRawTime() {
         return world.o();
     }
 
     @Override
-    public int getLightLevelAt(int x, int y, int z){
+    public int getLightLevelAt(int x, int y, int z) {
         return world.n(x, y, z);
     }
 
     @Override
-    public void setLightLevelOnBlockMap(int x, int y, int z, int newLevel){
+    public void setLightLevelOnBlockMap(int x, int y, int z, int newLevel) {
         world.a(OEnumSkyBlock.b, x, y, z, newLevel);
     }
 
     @Override
-    public void setLightLevelOnSkyMap(int x, int y, int z, int newLevel){
+    public void setLightLevelOnSkyMap(int x, int y, int z, int newLevel) {
         world.a(OEnumSkyBlock.a, x, y, z, newLevel);
     }
 
     @Override
-    public Chunk loadChunk(int x, int z){
+    public Chunk loadChunk(int x, int z) {
         return chunkProvider.loadChunk(x, z);
     }
 
     @Override
-    public Chunk loadChunk(Location location){
+    public Chunk loadChunk(Location location) {
         return chunkProvider.loadChunk((int) location.getX(), (int) location.getZ());
     }
 
     @Override
-    public Chunk loadChunk(Position vec3d){
+    public Chunk loadChunk(Position vec3d) {
         return chunkProvider.loadChunk((int) vec3d.getX(), (int) vec3d.getZ());
     }
 
     @Override
-    public Chunk getChunk(int x, int z){
+    public Chunk getChunk(int x, int z) {
         if (isChunkLoaded(x, z)) {
             return chunkProvider.provideChunk(x, z);
         }
@@ -394,32 +394,32 @@ public class CanaryWorld implements World{
         }
     }
 
-    public net.minecraft.server.World getHandle(){
+    public net.minecraft.server.World getHandle() {
         return world;
     }
 
     @Override
-    public WorldType getType(){
+    public WorldType getType() {
         return this.type;
     }
 
     @Override
-    public PlayerManager getPlayerManager(){
+    public PlayerManager getPlayerManager() {
         return playerManager;
     }
 
     @Override
-    public void setPlayerManager(PlayerManager pm){
+    public void setPlayerManager(PlayerManager pm) {
         this.playerManager = (CanaryPlayerManager) pm;
     }
 
     @Override
-    public void spawnParticle(Particle particle){
+    public void spawnParticle(Particle particle) {
         world.a(particle.type.getMcName(), particle.x, particle.y, particle.z, particle.velocityX, particle.velocityY, particle.velocityZ);
     }
 
     @Override
-    public EntityMob createMob(MobType mobtype){
+    public EntityMob createMob(MobType mobtype) {
         switch (mobtype) {
             case BLAZE:
                 return new CanaryBlaze(new OEntityBlaze(getHandle()));
@@ -450,37 +450,37 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public boolean isBlockPowered(Block block){
+    public boolean isBlockPowered(Block block) {
         return isBlockPowered(block.getX(), block.getY(), block.getZ());
     }
 
     @Override
-    public boolean isBlockPowered(Position position){
+    public boolean isBlockPowered(Position position) {
         return isBlockPowered((int) position.getX(), (int) position.getY(), (int) position.getZ());
     }
 
     @Override
-    public boolean isBlockPowered(int x, int y, int z){
+    public boolean isBlockPowered(int x, int y, int z) {
         return world.w(x, y, z);
     }
 
     @Override
-    public boolean isBlockIndirectlyPowered(Block block){
+    public boolean isBlockIndirectlyPowered(Block block) {
         return isBlockIndirectlyPowered(block.getX(), block.getY(), block.getZ());
     }
 
     @Override
-    public boolean isBlockIndirectlyPowered(Position position){
+    public boolean isBlockIndirectlyPowered(Position position) {
         return isBlockIndirectlyPowered((int) position.getX(), (int) position.getY(), (int) position.getZ());
     }
 
     @Override
-    public boolean isBlockIndirectlyPowered(int x, int y, int z){
+    public boolean isBlockIndirectlyPowered(int x, int y, int z) {
         return world.x(x, y, z);
     }
 
     @Override
-    public void setThundering(boolean thundering){
+    public void setThundering(boolean thundering) {
         // TODO: add thunder_change hook here?
         world.worldInfo.setThundering(thundering);
 
@@ -494,12 +494,12 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public void setThunderTime(int ticks){
+    public void setThunderTime(int ticks) {
         world.worldInfo.setThunderTimeTicks(ticks);
     }
 
     @Override
-    public void setRaining(boolean downfall){
+    public void setRaining(boolean downfall) {
         // TODO: Add weather change hook
         world.worldInfo.setRaining(downfall);
 
@@ -512,68 +512,68 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public void setRainTime(int ticks){
+    public void setRainTime(int ticks) {
         world.worldInfo.setRainTimeTicks(ticks);
     }
 
     @Override
-    public boolean isRaining(){
+    public boolean isRaining() {
         return world.worldInfo.isRaining();
     }
 
     @Override
-    public boolean isThundering(){
+    public boolean isThundering() {
         return world.worldInfo.isThundering();
     }
 
     @Override
-    public int getRainTicks(){
+    public int getRainTicks() {
         return world.worldInfo.getRainTimeTicks();
     }
 
     @Override
-    public int getThunderTicks(){
+    public int getThunderTicks() {
         return world.worldInfo.getThunderTimeTicks();
     }
 
     @Override
-    public void makeLightningBolt(int x, int y, int z){
+    public void makeLightningBolt(int x, int y, int z) {
         world.a(new OEntityLightningBolt(world, x, y, z));
     }
 
     @Override
-    public void makeLightningBolt(Position position){
+    public void makeLightningBolt(Position position) {
         world.a(new OEntityLightningBolt(world, (int) position.getX(), (int) position.getY(), (int) position.getZ()));
     }
 
     @Override
-    public void makeExplosion(Entity exploder, double x, double y, double z, float power){
+    public void makeExplosion(Entity exploder, double x, double y, double z, float power) {
         world.a(((CanaryEntity) exploder).getHandle(), x, y, z, power);
     }
 
     @Override
-    public void makeExplosion(Entity exploder, Position position, float power){
+    public void makeExplosion(Entity exploder, Position position, float power) {
         world.a(((CanaryEntity) exploder).getHandle(), position.getX(), position.getY(), position.getZ(), power);
     }
 
     @Override
-    public long getWorldSeed(){
+    public long getWorldSeed() {
         return world.n();
     }
 
     @Override
-    public void removePlayerFromWorld(Player player){
+    public void removePlayerFromWorld(Player player) {
         world.f((OEntity) ((CanaryPlayer) player).getHandle());
 
     }
 
     @Override
-    public void addPlayerToWorld(Player player){
+    public void addPlayerToWorld(Player player) {
         world.b((OEntity) ((CanaryPlayer) player).getHandle());
     }
 
     @Override
-    public Location getSpawnLocation(){
+    public Location getSpawnLocation() {
         // More structure ftw
         OWorldInfo info = world.worldInfo;
         Location spawn = new Location(0, 0, 0);
@@ -589,17 +589,17 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public void setSpawnLocation(Location p){
+    public void setSpawnLocation(Location p) {
         world.worldInfo.setSpawn((int) p.getX(), (int) p.getY(), (int) p.getZ());
     }
 
     @Override
-    public ComplexBlock getComplexBlock(Block block){
+    public ComplexBlock getComplexBlock(Block block) {
         return getComplexBlockAt(block.getX(), block.getY(), block.getZ());
     }
 
     @Override
-    public ComplexBlock getComplexBlockAt(int x, int y, int z){
+    public ComplexBlock getComplexBlockAt(int x, int y, int z) {
         ComplexBlock result = getOnlyComplexBlockAt(x, y, z);
 
         if (result != null) {
@@ -616,12 +616,12 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public ComplexBlock getOnlyComplexBlock(Block block){
+    public ComplexBlock getOnlyComplexBlock(Block block) {
         return getOnlyComplexBlockAt(block.getX(), block.getY(), block.getZ());
     }
 
     @Override
-    public ComplexBlock getOnlyComplexBlockAt(int x, int y, int z){
+    public ComplexBlock getOnlyComplexBlockAt(int x, int y, int z) {
         OTileEntity tileentity = world.b(x, y, z);
 
         if (tileentity != null) {
@@ -647,7 +647,7 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public EntityAnimal createAnimal(AnimalType animalType){ // XXX <darkdiplomat> - I am removing this and redoing the factories.
+    public EntityAnimal createAnimal(AnimalType animalType) { // XXX <darkdiplomat> - I am removing this and redoing the factories.
         switch (animalType) {
             case CHICKEN:
                 return (EntityAnimal) new EntityChicken(getHandle()).getCanaryEntity();
@@ -672,23 +672,23 @@ public class CanaryWorld implements World{
     }
 
     @Override
-    public Item createItem(ItemType itemType){
+    public Item createItem(ItemType itemType) {
         return new CanaryItem(new OItemStack(itemType.getId(), 1, 0));
     }
 
     @Override
-    public Item createItem(ItemType itemType, int amount, int data){
+    public Item createItem(ItemType itemType, int amount, int data) {
         return new CanaryItem(new OItemStack(itemType.getId(), amount, data));
     }
 
     @Override
-    public Item createItem(int itemId, int amount, int data){
+    public Item createItem(int itemId, int amount, int data) {
 
         return new CanaryItem(new OItemStack(itemId, amount, data));
     }
 
     @Override
-    public boolean equals(Object ob){
+    public boolean equals(Object ob) {
 
         if (!(ob instanceof CanaryWorld)) {
             return false;

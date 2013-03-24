@@ -7,14 +7,14 @@ import net.minecraft.server.EntityChicken;
  * 
  * @author Chris
  */
-public class CanaryChicken extends CanaryEntityAnimal implements Chicken{
+public class CanaryChicken extends CanaryEntityAnimal implements Chicken {
 
-    public CanaryChicken(EntityChicken entity){
+    public CanaryChicken(EntityChicken entity) {
         super(entity);
     }
 
     @Override
-    public void setTimeUntilNextEgg(int timeTicks){
+    public void setTimeUntilNextEgg(int timeTicks) {
         ((EntityChicken) entity).j = timeTicks;
     }
 

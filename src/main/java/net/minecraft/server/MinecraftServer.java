@@ -16,7 +16,7 @@ import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.world.CanaryWorldManager;
 
-public abstract class MinecraftServer implements ICommandSender, Runnable, IPlayerUsage{
+public abstract class MinecraftServer implements ICommandSender, Runnable, IPlayerUsage {
 
     private static MinecraftServer k = null;
     private final ISaveFormat l;
@@ -70,7 +70,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     //
 
-    public MinecraftServer(File file1){
+    public MinecraftServer(File file1) {
         k = this;
         this.n = file1;
         this.p = new ServerCommandManager();
@@ -83,13 +83,13 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         //
     }
 
-    private void am(){
+    private void am() {
         DispenserBehaviors.a();
     }
 
     protected abstract boolean c();
 
-    protected void b(String s0){
+    protected void b(String s0) {
         if (this.N().b(s0)) {
             this.al().a("Converting map!");
             this.c("menu.convertingLevel");
@@ -97,11 +97,11 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
     }
 
-    protected synchronized void c(String s0){
+    protected synchronized void c(String s0) {
         this.R = s0;
     }
 
-    protected void a(String s0, String s1, long i0, WorldType worldtype, String s2){
+    protected void a(String s0, String s1, long i0, WorldType worldtype, String s2) {
         this.b(s0);
         this.c("menu.loadingLevel");
         this.b = new WorldServer[3];
@@ -154,7 +154,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.e();
     }
 
-    protected void e(){
+    protected void e() {
         int i0 = 0;
 
         this.c("menu.generatingTerrain");
@@ -190,18 +190,18 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     public abstract boolean i();
 
-    protected void a_(String s0, int i0){
+    protected void a_(String s0, int i0) {
         this.c = s0;
         this.d = i0;
         this.al().a(s0 + ": " + i0 + "%");
     }
 
-    protected void j(){
+    protected void j() {
         this.c = null;
         this.d = 0;
     }
 
-    protected void a(boolean flag0){
+    protected void a(boolean flag0) {
         if (!this.N) {
             WorldServer[] aworldserver = this.b;
             int i0 = aworldserver.length;
@@ -224,7 +224,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
     }
 
-    public void k(){
+    public void k() {
         if (!this.N) {
             this.al().a("Stopping server");
             if (this.ae() != null) {
@@ -252,23 +252,23 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
     }
 
-    public String l(){
+    public String l() {
         return this.q;
     }
 
-    public void d(String s0){
+    public void d(String s0) {
         this.q = s0;
     }
 
-    public boolean m(){
+    public boolean m() {
         return this.t;
     }
 
-    public void n(){
+    public void n() {
         this.t = false;
     }
 
-    public void run(){
+    public void run() {
         try {
             if (this.c()) {
                 long i0 = System.currentTimeMillis();
@@ -339,15 +339,15 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
     }
 
-    protected File o(){
+    protected File o() {
         return new File(".");
     }
 
-    protected void a(CrashReport crashreport){}
+    protected void a(CrashReport crashreport) {}
 
-    protected void p(){}
+    protected void p() {}
 
-    protected void q(){
+    protected void q() {
         long i0 = System.nanoTime();
 
         AxisAlignedBB.a().a();
@@ -391,7 +391,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.a.b();
     }
 
-    public void r(){
+    public void r() {
         this.a.a("levels");
 
         int i0;
@@ -455,15 +455,15 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.a.b();
     }
 
-    public boolean s(){
+    public boolean s() {
         return true;
     }
 
-    public void a(IUpdatePlayerListBox iupdateplayerlistbox){
+    public void a(IUpdatePlayerListBox iupdateplayerlistbox) {
         this.o.add(iupdateplayerlistbox);
     }
 
-    public static void main(String[] astring){
+    public static void main(String[] astring) {
         StatList.a();
         ILogAgent ilogagent = null;
 
@@ -551,83 +551,83 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
     }
 
-    public void t(){
+    public void t() {
         (new ThreadMinecraftServer(this, "Server thread")).start();
     }
 
-    public File e(String s0){
+    public File e(String s0) {
         return new File(this.o(), s0);
     }
 
-    public void f(String s0){
+    public void f(String s0) {
         this.al().a(s0);
     }
 
-    public void g(String s0){
+    public void g(String s0) {
         this.al().b(s0);
     }
 
-    public WorldServer a(int i0){
+    public WorldServer a(int i0) {
         return i0 == -1 ? this.b[1] : (i0 == 1 ? this.b[2] : this.b[0]);
     }
 
-    public String u(){
+    public String u() {
         return this.q;
     }
 
-    public int v(){
+    public int v() {
         return this.r;
     }
 
-    public String w(){
+    public String w() {
         return this.B;
     }
 
-    public String x(){
+    public String x() {
         return "1.5.1";
     }
 
-    public int y(){
+    public int y() {
         return this.s.k();
     }
 
-    public int z(){
+    public int z() {
         return this.s.l();
     }
 
-    public String[] A(){
+    public String[] A() {
         return this.s.d();
     }
 
-    public String B(){
+    public String B() {
         return "";
     }
 
-    public String h(String s0){
+    public String h(String s0) {
         RConConsoleSource.a.c();
         this.p.a(RConConsoleSource.a, s0);
         return RConConsoleSource.a.d();
     }
 
-    public boolean C(){
+    public boolean C() {
         return false;
     }
 
-    public void i(String s0){
+    public void i(String s0) {
         this.al().c(s0);
     }
 
-    public void j(String s0){
+    public void j(String s0) {
         if (this.C()) {
             this.al().a(s0);
         }
     }
 
-    public String getServerModName(){
+    public String getServerModName() {
         return "vanilla";
     }
 
-    public CrashReport b(CrashReport crashreport){
+    public CrashReport b(CrashReport crashreport) {
         crashreport.g().a("Profiler Position", (Callable) (new CallableIsServerModded(this)));
         if (this.b != null && this.b.length > 0 && this.b[0] != null) {
             crashreport.g().a("Vec3 Pool Size", (Callable) (new CallableServerProfiler(this)));
@@ -640,7 +640,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         return crashreport;
     }
 
-    public List a(ICommandSender icommandsender, String s0){
+    public List a(ICommandSender icommandsender, String s0) {
         ArrayList arraylist = new ArrayList();
 
         if (s0.startsWith("/")) {
@@ -681,67 +681,67 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
     }
 
-    public static MinecraftServer D(){
+    public static MinecraftServer D() {
         return k;
     }
 
-    public String c_(){
+    public String c_() {
         return "Server";
     }
 
-    public void a(String s0){
+    public void a(String s0) {
         this.al().a(StringUtils.a(s0));
     }
 
-    public boolean a(int i0, String s0){
+    public boolean a(int i0, String s0) {
         return true;
     }
 
-    public String a(String s0, Object... aobject){
+    public String a(String s0, Object... aobject) {
         return StringTranslate.a().a(s0, aobject);
     }
 
-    public ICommandManager E(){
+    public ICommandManager E() {
         return this.p;
     }
 
-    public KeyPair F(){
+    public KeyPair F() {
         return this.H;
     }
 
-    public int G(){
+    public int G() {
         return this.r;
     }
 
-    public void b(int i0){
+    public void b(int i0) {
         this.r = i0;
     }
 
-    public String H(){
+    public String H() {
         return this.I;
     }
 
-    public void k(String s0){
+    public void k(String s0) {
         this.I = s0;
     }
 
-    public boolean I(){
+    public boolean I() {
         return this.I != null;
     }
 
-    public String J(){
+    public String J() {
         return this.J;
     }
 
-    public void l(String s0){
+    public void l(String s0) {
         this.J = s0;
     }
 
-    public void a(KeyPair keypair){
+    public void a(KeyPair keypair) {
         this.H = keypair;
     }
 
-    public void c(int i0){
+    public void c(int i0) {
         for (int i1 = 0; i1 < this.b.length; ++i1) {
             WorldServer worldserver = this.b[i1];
 
@@ -760,27 +760,27 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
     }
 
-    protected boolean L(){
+    protected boolean L() {
         return true;
     }
 
-    public boolean M(){
+    public boolean M() {
         return this.L;
     }
 
-    public void b(boolean flag0){
+    public void b(boolean flag0) {
         this.L = flag0;
     }
 
-    public void c(boolean flag0){
+    public void c(boolean flag0) {
         this.M = flag0;
     }
 
-    public ISaveFormat N(){
+    public ISaveFormat N() {
         return this.l;
     }
 
-    public void P(){
+    public void P() {
         this.N = true;
         this.N().d();
 
@@ -796,15 +796,15 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.n();
     }
 
-    public String Q(){
+    public String Q() {
         return this.O;
     }
 
-    public void n(String s0){
+    public void n(String s0) {
         this.O = s0;
     }
 
-    public void a(PlayerUsageSnooper playerusagesnooper){
+    public void a(PlayerUsageSnooper playerusagesnooper) {
         playerusagesnooper.a("whitelist_enabled", Boolean.valueOf(false));
         playerusagesnooper.a("whitelist_count", Integer.valueOf(0));
         playerusagesnooper.a("players_current", Integer.valueOf(this.y()));
@@ -839,94 +839,94 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         playerusagesnooper.a("worlds", Integer.valueOf(i0));
     }
 
-    public void b(PlayerUsageSnooper playerusagesnooper){
+    public void b(PlayerUsageSnooper playerusagesnooper) {
         playerusagesnooper.a("singleplayer", Boolean.valueOf(this.I()));
         playerusagesnooper.a("server_brand", this.getServerModName());
         playerusagesnooper.a("gui_supported", GraphicsEnvironment.isHeadless() ? "headless" : "supported");
         playerusagesnooper.a("dedicated", Boolean.valueOf(this.T()));
     }
 
-    public boolean R(){
+    public boolean R() {
         return true;
     }
 
-    public int S(){
+    public int S() {
         return 16;
     }
 
     public abstract boolean T();
 
-    public boolean U(){
+    public boolean U() {
         return this.w;
     }
 
-    public void d(boolean flag0){
+    public void d(boolean flag0) {
         this.w = flag0;
     }
 
-    public boolean V(){
+    public boolean V() {
         return this.x;
     }
 
-    public void e(boolean flag0){
+    public void e(boolean flag0) {
         this.x = flag0;
     }
 
-    public boolean W(){
+    public boolean W() {
         return this.y;
     }
 
-    public void f(boolean flag0){
+    public void f(boolean flag0) {
         this.y = flag0;
     }
 
-    public boolean X(){
+    public boolean X() {
         return this.z;
     }
 
-    public void g(boolean flag0){
+    public void g(boolean flag0) {
         this.z = flag0;
     }
 
-    public boolean Y(){
+    public boolean Y() {
         return this.A;
     }
 
-    public void h(boolean flag0){
+    public void h(boolean flag0) {
         this.A = flag0;
     }
 
     public abstract boolean Z();
 
-    public String aa(){
+    public String aa() {
         return this.B;
     }
 
-    public void o(String s0){
+    public void o(String s0) {
         this.B = s0;
     }
 
-    public int ab(){
+    public int ab() {
         return this.C;
     }
 
-    public void d(int i0){
+    public void d(int i0) {
         this.C = i0;
     }
 
-    public boolean ac(){
+    public boolean ac() {
         return this.u;
     }
 
-    public ServerConfigurationManager ad(){
+    public ServerConfigurationManager ad() {
         return this.s;
     }
 
-    public void a(ServerConfigurationManager serverconfigurationmanager){
+    public void a(ServerConfigurationManager serverconfigurationmanager) {
         this.s = serverconfigurationmanager;
     }
 
-    public void a(EnumGameType enumgametype){
+    public void a(EnumGameType enumgametype) {
         for (int i0 = 0; i0 < this.b.length; ++i0) {
             D().b[i0].L().a(enumgametype);
         }
@@ -934,35 +934,35 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     public abstract NetworkListenThread ae();
 
-    public boolean ag(){
+    public boolean ag() {
         return false;
     }
 
     public abstract String a(EnumGameType enumgametype, boolean flag0);
 
-    public int ah(){
+    public int ah() {
         return this.v;
     }
 
-    public void ai(){
+    public void ai() {
         this.S = true;
     }
 
-    public ChunkCoordinates b(){
+    public ChunkCoordinates b() {
         return new ChunkCoordinates(0, 0, 0);
     }
 
-    public int ak(){
+    public int ak() {
         return 16;
     }
 
-    public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer){
+    public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {
         return false;
     }
 
     public abstract ILogAgent al();
 
-    public static ServerConfigurationManager a(MinecraftServer minecraftserver){
+    public static ServerConfigurationManager a(MinecraftServer minecraftserver) {
         return minecraftserver.s;
     }
 
@@ -971,7 +971,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      * 
      * @return
      */
-    public CanaryWorldManager getWorldManager(){
+    public CanaryWorldManager getWorldManager() {
         return worldManager;
     }
 
@@ -980,11 +980,11 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      * 
      * @return the cfgManager
      */
-    public CanaryConfigurationManager getCanaryConfigurationManager(){
+    public CanaryConfigurationManager getCanaryConfigurationManager() {
         return cfgManager;
     }
 
-    public void setCanaryConfigurationmanager(CanaryConfigurationManager man){
+    public void setCanaryConfigurationmanager(CanaryConfigurationManager man) {
         cfgManager = man;
     }
 
@@ -998,7 +998,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      * 
      * @return
      */
-    public CanaryServer getServer(){
+    public CanaryServer getServer() {
         return server;
     }
 }

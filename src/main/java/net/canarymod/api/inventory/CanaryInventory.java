@@ -1,14 +1,13 @@
 package net.canarymod.api.inventory;
 
 import java.util.ArrayList;
-
 import net.canarymod.Logman;
 import net.minecraft.server.OItemStack;
 
-public class CanaryInventory implements Inventory{
+public class CanaryInventory implements Inventory {
     protected Container<OItemStack> container;
-    
-    public CanaryInventory(Container<OItemStack> container){
+
+    public CanaryInventory(Container<OItemStack> container) {
         this.container = container;
     }
 
@@ -16,7 +15,7 @@ public class CanaryInventory implements Inventory{
     public void addItem(int id) {
         addItem(id, 0);
     }
-    
+
     @Override
     public void addItem(int id, int amount) {
         container.addItem(id, amount);
@@ -30,28 +29,28 @@ public class CanaryInventory implements Inventory{
     @Override
     public Item[] clearInventory() {
         Item[] items = getContents();
-        
-        for(int index = 0; index < getSize(); index++){
+
+        for (int index = 0; index < getSize(); index++) {
             container.setSlot(index, null);
         }
-        
+
         return items;
     }
-    
+
     @Override
     public Item[] getContents() {
         OItemStack[] oStacks = container.getContents();
         ArrayList<Item> items = new ArrayList<Item>(oStacks.length);
-        for(int i = 0; i < oStacks.length; i++) {
-            if(oStacks[i] != null) {
+        for (int i = 0; i < oStacks.length; i++) {
+            if (oStacks[i] != null) {
                 items.add(new CanaryItem(oStacks[i]));
             }
         }
         Item[] itemStacks = new Item[items.size()];
-        for(int i = 0; i < items.size(); i++) {
-            Logman.println("Item ID: "+items.get(i).getId());
-            Logman.println("Item Amount: "+items.get(i).getAmount());
-            Logman.println("Item Data: "+items.get(i).getDamage());
+        for (int i = 0; i < items.size(); i++) {
+            Logman.println("Item ID: " + items.get(i).getId());
+            Logman.println("Item Amount: " + items.get(i).getAmount());
+            Logman.println("Item Data: " + items.get(i).getDamage());
             itemStacks[i] = items.get(i);
         }
         return itemStacks;
@@ -141,11 +140,11 @@ public class CanaryInventory implements Inventory{
         item.setSlot(slot);
         setSlot(item);
     }
-    
+
     @Override
     public Item getSlot(int slot) {
         OItemStack tmp = container.getSlot(slot);
-        if(tmp != null) {
+        if (tmp != null) {
             return tmp.getCanaryItem();
         }
         return null;
@@ -159,16 +158,16 @@ public class CanaryInventory implements Inventory{
     @Override
     public void setContents(Item[] items) {
         OItemStack[] oStacks = new OItemStack[items.length];
-        for(int i = 0; i < items.length; i++) {
-            oStacks[i] = ((CanaryItem)items[i]).getHandle();
+        for (int i = 0; i < items.length; i++) {
+            oStacks[i] = ((CanaryItem) items[i]).getHandle();
         }
         container.setContents(oStacks);
-        
+
     }
 
     @Override
     public void setSlot(int index, Item value) {
-        container.setSlot(index, ((CanaryItem)value).getHandle());
+        container.setSlot(index, ((CanaryItem) value).getHandle());
     }
 
     @Override

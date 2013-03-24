@@ -8,42 +8,42 @@ import net.minecraft.server.EntityCreeper;
  * @author Chris (damagefilter)
  * @author Jason (darkdiplomat)
  */
-public class CanaryCreeper extends CanaryEntityMob implements Creeper{
+public class CanaryCreeper extends CanaryEntityMob implements Creeper {
 
     private boolean damageEntities = true;
     private boolean damageWorld = true;
 
-    public CanaryCreeper(EntityCreeper entity){
+    public CanaryCreeper(EntityCreeper entity) {
         super(entity);
     }
 
     @Override
-    public void setCanDamageWorld(boolean canDamage){
+    public void setCanDamageWorld(boolean canDamage) {
         damageWorld = canDamage;
     }
 
     @Override
-    public boolean canDamageWorld(){
+    public boolean canDamageWorld() {
         return damageWorld;
     }
 
     @Override
-    public void setCanDamageEntities(boolean canDamage){
+    public void setCanDamageEntities(boolean canDamage) {
         damageEntities = canDamage;
     }
 
     @Override
-    public boolean canDamageEntities(){
+    public boolean canDamageEntities() {
         return damageEntities;
     }
 
     @Override
-    public boolean isCharged(){
+    public boolean isCharged() {
         return ((EntityCreeper) entity).x();
     }
 
     @Override
-    public void setCharged(boolean charged){
+    public void setCharged(boolean charged) {
         ((EntityCreeper) entity).setCharged(charged);
     }
 

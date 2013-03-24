@@ -11,34 +11,34 @@ import net.minecraft.server.EntitySlime;
  * 
  * @author Jason
  */
-public class CanaryEntityMob extends CanaryEntityLiving implements EntityMob{
+public class CanaryEntityMob extends CanaryEntityLiving implements EntityMob {
 
-    public CanaryEntityMob(net.minecraft.server.EntityMob entity){
+    public CanaryEntityMob(net.minecraft.server.EntityMob entity) {
         super(entity);
     }
 
     // Workaround because notchies inconsistencies
-    public CanaryEntityMob(EntitySlime entity){
+    public CanaryEntityMob(EntitySlime entity) {
         super(entity);
     }
 
     // Workaround because notchies inconsistencies
-    public CanaryEntityMob(EntityFlying entity){
+    public CanaryEntityMob(EntityFlying entity) {
         super(entity);
     }
 
     @Override
-    public EntityLiving getTarget(){
+    public EntityLiving getTarget() {
         return new CanaryEntityLiving(((EntityLiving) entity).at());
     }
 
     @Override
-    public void setTarget(EntityLiving entityliving){
+    public void setTarget(EntityLiving entityliving) {
         ((net.minecraft.server.EntityLiving) entity).b(((CanaryEntity) entityliving).entity);
     }
 
     @Override
-    public boolean canSpawn(){
+    public boolean canSpawn() {
         return ((net.minecraft.server.EntityLiving) entity).l();
     }
 }

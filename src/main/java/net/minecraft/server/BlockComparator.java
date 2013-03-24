@@ -2,50 +2,50 @@ package net.minecraft.server;
 
 import java.util.Random;
 
-public class BlockComparator extends BlockRedstoneLogic implements ITileEntityProvider{
+public class BlockComparator extends BlockRedstoneLogic implements ITileEntityProvider {
 
-    public BlockComparator(int i0, boolean flag0){
+    public BlockComparator(int i0, boolean flag0) {
         super(i0, flag0);
         this.cF = true;
     }
 
-    public int a(int i0, Random random, int i1){
+    public int a(int i0, Random random, int i1) {
         return Item.bY.cp;
     }
 
-    protected int i_(int i0){
+    protected int i_(int i0) {
         return 2;
     }
 
-    protected BlockRedstoneLogic i(){
+    protected BlockRedstoneLogic i() {
         return Block.cq;
     }
 
-    protected BlockRedstoneLogic j(){
+    protected BlockRedstoneLogic j() {
         return Block.cp;
     }
 
-    public int d(){
+    public int d() {
         return 37;
     }
 
-    protected boolean c(int i0){
+    protected boolean c(int i0) {
         return this.a || (i0 & 8) != 0;
     }
 
-    protected int d(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3){
+    protected int d(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
         return this.a_(iblockaccess, i0, i1, i2).a();
     }
 
-    private int m(World world, int i0, int i1, int i2, int i3){
+    private int m(World world, int i0, int i1, int i2, int i3) {
         return !this.d(i3) ? this.e(world, i0, i1, i2, i3) : Math.max(this.e(world, i0, i1, i2, i3) - this.f((IBlockAccess) world, i0, i1, i2, i3), 0); // CanaryMod: Cast World to IBlockAccess for method f
     }
 
-    public boolean d(int i0){
+    public boolean d(int i0) {
         return (i0 & 4) == 4;
     }
 
-    protected boolean d(World world, int i0, int i1, int i2, int i3){
+    protected boolean d(World world, int i0, int i1, int i2, int i3) {
         int i4 = this.e(world, i0, i1, i2, i3);
 
         if (i4 >= 15) {
@@ -61,7 +61,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         }
     }
 
-    protected int e(World world, int i0, int i1, int i2, int i3){
+    protected int e(World world, int i0, int i1, int i2, int i3) {
         int i4 = super.e(world, i0, i1, i2, i3);
         int i5 = j(i3);
         int i6 = i0 + Direction.a[i5];
@@ -85,11 +85,11 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         return i4;
     }
 
-    public TileEntityComparator a_(IBlockAccess iblockaccess, int i0, int i1, int i2){
+    public TileEntityComparator a_(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         return (TileEntityComparator) iblockaccess.r(i0, i1, i2);
     }
 
-    public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer, int i3, float f0, float f1, float f2){
+    public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer, int i3, float f0, float f1, float f2) {
         int i4 = world.h(i0, i1, i2);
         boolean flag0 = this.a | (i4 & 8) != 0;
         boolean flag1 = !this.d(i4);
@@ -102,7 +102,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         return true;
     }
 
-    protected void f(World world, int i0, int i1, int i2, int i3){
+    protected void f(World world, int i0, int i1, int i2, int i3) {
         if (!world.a(i0, i1, i2, this.cz)) {
             int i4 = world.h(i0, i1, i2);
             int i5 = this.m(world, i0, i1, i2, i4);
@@ -119,7 +119,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         }
     }
 
-    private void c(World world, int i0, int i1, int i2, Random random){
+    private void c(World world, int i0, int i1, int i2, Random random) {
         int i3 = world.h(i0, i1, i2);
         int i4 = this.m(world, i0, i1, i2, i3);
         int i5 = this.a_(world, i0, i1, i2).a();
@@ -140,7 +140,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         }
     }
 
-    public void a(World world, int i0, int i1, int i2, Random random){
+    public void a(World world, int i0, int i1, int i2, Random random) {
         if (this.a) {
             int i3 = world.h(i0, i1, i2);
 
@@ -150,25 +150,25 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         this.c(world, i0, i1, i2, random);
     }
 
-    public void a(World world, int i0, int i1, int i2){
+    public void a(World world, int i0, int i1, int i2) {
         super.a(world, i0, i1, i2);
         world.a(i0, i1, i2, this.b(world));
     }
 
-    public void a(World world, int i0, int i1, int i2, int i3, int i4){
+    public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         super.a(world, i0, i1, i2, i3, i4);
         world.s(i0, i1, i2);
         this.h_(world, i0, i1, i2);
     }
 
-    public boolean b(World world, int i0, int i1, int i2, int i3, int i4){
+    public boolean b(World world, int i0, int i1, int i2, int i3, int i4) {
         super.b(world, i0, i1, i2, i3, i4);
         TileEntity tileentity = world.r(i0, i1, i2);
 
         return tileentity != null ? tileentity.b(i3, i4) : false;
     }
 
-    public TileEntity b(World world){
+    public TileEntity b(World world) {
         return new TileEntityComparator();
     }
 }

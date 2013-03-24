@@ -15,31 +15,31 @@ import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 
-public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements NonPlayableCharacter{
+public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements NonPlayableCharacter {
     private static CanaryServer server = (CanaryServer) CanaryMod.getServer();
     private static MinecraftServer mcserv = server.getHandle();
 
-    public CanaryNonPlayableCharacter(OEntityPlayerMP user){
+    public CanaryNonPlayableCharacter(OEntityPlayerMP user) {
         super(user);
     }
 
-    public CanaryNonPlayableCharacter(String name, World world, int dim, double x, double y, double z, float rotation, float pitch, Item itemInHand){
+    public CanaryNonPlayableCharacter(String name, World world, int dim, double x, double y, double z, float rotation, float pitch, Item itemInHand) {
         super(new OEntityPlayerMP(mcserv, ((CanaryWorld) world).getHandle(), name, new OItemInWorldManager(((CanaryWorld) world).getHandle())));
 
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return ((OEntityPlayerMP) entity).v;
     }
 
     @Override
-    public void setName(String name){
+    public void setName(String name) {
         ((OEntityPlayerMP) entity).v = name;
     }
 
     @Override
-    public NonPlayableCharacter despawn(){
+    public NonPlayableCharacter despawn() {
         for (Iterator<Player> playerit = ((List<Player>) server.getPlayerList()).iterator(); playerit.hasNext();) {
             Player player = playerit.next();
             this.handler.o.remove(player);
@@ -48,42 +48,42 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     }
 
     @Override
-    public void teleportTo(Position arg0){
+    public void teleportTo(Position arg0) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void teleportTo(Location arg0){
+    public void teleportTo(Location arg0) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void teleportTo(int arg0, int arg1, int arg2){
+    public void teleportTo(int arg0, int arg1, int arg2) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void tick(){
+    public void tick() {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public Item getItemInHand(){
+    public Item getItemInHand() {
         return ((OEntityPlayerMP) entity).k.a[0] != null ? new CanaryItem(((OEntityPlayerMP) entity).y()[0]) : null;
     }
 
     @Override
-    public void setItemInHand(Item item){
+    public void setItemInHand(Item item) {
         ((OEntityPlayerMP) entity).y()[0] = null;
 
     }
 
     @Override
-    public void ghost(Player arg0){
+    public void ghost(Player arg0) {
         for (Iterator<OEntityPlayerMP> playerit = ((List<OEntityPlayerMP>) mcserv.h.b).iterator(); playerit.hasNext();) {
             OEntityPlayerMP player = playerit.next();
             player.a.b(new OPacket29DestroyEntity(this.handler.a.bd));
@@ -91,7 +91,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     }
 
     @Override
-    public void haunt(Player player){
+    public void haunt(Player player) {
         ArrayList<OEntityPlayerMP> list = new ArrayList<OEntityPlayerMP>();
         list.add((OEntityPlayerMP) player.getPlayer());
         this.handler.b(list);
@@ -99,7 +99,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     }
 
     @Override
-    public void lookAt(Player player){
+    public void lookAt(Player player) {
         double myX = player.getX();
         double myY = player.getY();
         double myZ = player.getZ();
@@ -126,21 +126,21 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
         }
     }
 
-    private double distance(double x1, double z1, double x2, double z2){
+    private double distance(double x1, double z1, double x2, double z2) {
         return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((z1 - z2), 2));
     }
 
-    private double distance(double x1, double y1, double z1, double x2, double y2, double z2){
+    private double distance(double x1, double y1, double z1, double x2, double y2, double z2) {
         return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2) + Math.pow((z1 - z2), 2));
     }
 
     @Override
-    public void lookAtNearest(){
+    public void lookAtNearest() {
         // Find nearest player then call lookAt(player)
     }
 
     @Override
-    public void spawn(){
+    public void spawn() {
         this.handler.b(mcserv.h.b);
         this.handler.a(mcserv.h.b);
     }

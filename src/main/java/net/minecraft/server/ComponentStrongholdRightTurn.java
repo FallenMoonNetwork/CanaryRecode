@@ -3,16 +3,16 @@ package net.minecraft.server;
 import java.util.List;
 import java.util.Random;
 
-public class ComponentStrongholdRightTurn extends ComponentStrongholdLeftTurn{
+public class ComponentStrongholdRightTurn extends ComponentStrongholdLeftTurn {
 
     // CanaryMod: Add missing Constructor
-    public ComponentStrongholdRightTurn(int arg0, Random arg1, StructureBoundingBox arg2, int arg3){
+    public ComponentStrongholdRightTurn(int arg0, Random arg1, StructureBoundingBox arg2, int arg3) {
         super(arg0, arg1, arg2, arg3);
     }
 
     //
 
-    public void a(StructureComponent structurecomponent, List list, Random random){
+    public void a(StructureComponent structurecomponent, List list, Random random) {
         if (this.f != 2 && this.f != 3) {
             this.b((ComponentStrongholdStairs2) structurecomponent, list, random, 1, 1);
         }
@@ -21,7 +21,7 @@ public class ComponentStrongholdRightTurn extends ComponentStrongholdLeftTurn{
         }
     }
 
-    public boolean a(World world, Random random, StructureBoundingBox structureboundingbox){
+    public boolean a(World world, Random random, StructureBoundingBox structureboundingbox) {
         if (this.a(world, structureboundingbox)) {
             return false;
         }

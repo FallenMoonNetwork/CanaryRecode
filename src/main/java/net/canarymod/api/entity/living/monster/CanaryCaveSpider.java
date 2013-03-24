@@ -7,9 +7,9 @@ import net.minecraft.server.EntityCaveSpider;
  * 
  * @author Chris (damagefilter)
  */
-public class CanaryCaveSpider extends CanarySpider{
+public class CanaryCaveSpider extends CanarySpider {
 
-    public CanaryCaveSpider(EntityCaveSpider entity){
+    public CanaryCaveSpider(EntityCaveSpider entity) {
         super(entity);
     }
 

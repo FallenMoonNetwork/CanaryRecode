@@ -7,26 +7,26 @@ import net.canarymod.api.entity.living.humanoid.Player;
  * 
  * @author Chris Ksoll
  */
-public class CanaryNetServerHandler implements NetServerHandler{
+public class CanaryNetServerHandler implements NetServerHandler {
 
     private net.minecraft.server.NetServerHandler handler;
 
-    public CanaryNetServerHandler(net.minecraft.server.NetServerHandler handle){
+    public CanaryNetServerHandler(net.minecraft.server.NetServerHandler handle) {
         handler = handle;
     }
 
     @Override
-    public void sendPacket(Packet packet){
+    public void sendPacket(Packet packet) {
         handler.b(((CanaryPacket) packet).getPacket());
 
     }
 
-    public void sendPacket(net.minecraft.server.Packet packet){
+    public void sendPacket(net.minecraft.server.Packet packet) {
         handler.b(packet);
     }
 
     @Override
-    public void handleChat(Packet chatPacket){
+    public void handleChat(Packet chatPacket) {
         if (chatPacket.getPacketId() != 3) {
             return; // Not a chat packet :O
         }
@@ -35,18 +35,18 @@ public class CanaryNetServerHandler implements NetServerHandler{
     }
 
     @Override
-    public void sendMessage(String messgage){
+    public void sendMessage(String messgage) {
         handler.sendMessage(messgage);
     }
 
     @Override
-    public void handleCommand(String[] command){
+    public void handleCommand(String[] command) {
         handler.getUser().executeCommand(command);
 
     }
 
     @Override
-    public void handleRespawn(Packet respawnPacket){
+    public void handleRespawn(Packet respawnPacket) {
         if (respawnPacket.getPacketId() != 9) {
             return; // Not a respawning packet :O
         }
@@ -54,7 +54,7 @@ public class CanaryNetServerHandler implements NetServerHandler{
     }
 
     @Override
-    public Player getUser(){
+    public Player getUser() {
         return handler.getUser();
     }
 

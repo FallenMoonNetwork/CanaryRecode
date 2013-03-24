@@ -3,7 +3,7 @@ package net.minecraft.server;
 import java.util.List;
 import net.canarymod.api.entity.CanaryArrow;
 
-public class EntityArrow extends Entity implements IProjectile{
+public class EntityArrow extends Entity implements IProjectile {
 
     private int d = -1;
     private int e = -1;
@@ -19,14 +19,14 @@ public class EntityArrow extends Entity implements IProjectile{
     private double av = 2.0D;
     private int aw;
 
-    public EntityArrow(World world){
+    public EntityArrow(World world) {
         super(world);
         this.l = 10.0D;
         this.a(0.5F, 0.5F);
         this.entity = new CanaryArrow(this); // CanaryMod: Wrap Entity
     }
 
-    public EntityArrow(World world, double d0, double d1, double d2){
+    public EntityArrow(World world, double d0, double d1, double d2) {
         super(world);
         this.l = 10.0D;
         this.a(0.5F, 0.5F);
@@ -35,7 +35,7 @@ public class EntityArrow extends Entity implements IProjectile{
         this.entity = new CanaryArrow(this); // CanaryMod: Wrap Entity
     }
 
-    public EntityArrow(World world, EntityLiving entityliving, EntityLiving entityliving1, float f0, float f1){
+    public EntityArrow(World world, EntityLiving entityliving, EntityLiving entityliving1, float f0, float f1) {
         super(world);
         this.l = 10.0D;
         this.c = entityliving;
@@ -64,7 +64,7 @@ public class EntityArrow extends Entity implements IProjectile{
         }
     }
 
-    public EntityArrow(World world, EntityLiving entityliving, float f0){
+    public EntityArrow(World world, EntityLiving entityliving, float f0) {
         super(world);
         this.l = 10.0D;
         this.c = entityliving;
@@ -86,11 +86,11 @@ public class EntityArrow extends Entity implements IProjectile{
         this.c(this.x, this.y, this.z, f0 * 1.5F, 1.0F);
     }
 
-    protected void a(){
+    protected void a() {
         this.ah.a(16, Byte.valueOf((byte) 0));
     }
 
-    public void c(double d0, double d1, double d2, float f0, float f1){
+    public void c(double d0, double d1, double d2, float f0, float f1) {
         float f2 = MathHelper.a(d0 * d0 + d1 * d1 + d2 * d2);
 
         d0 /= (double) f2;
@@ -112,7 +112,7 @@ public class EntityArrow extends Entity implements IProjectile{
         this.j = 0;
     }
 
-    public void l_(){
+    public void l_() {
         super.l_();
         if (this.D == 0.0F && this.C == 0.0F) {
             float f0 = MathHelper.a(this.x * this.x + this.z * this.z);
@@ -337,7 +337,7 @@ public class EntityArrow extends Entity implements IProjectile{
         }
     }
 
-    public void b(NBTTagCompound nbttagcompound){
+    public void b(NBTTagCompound nbttagcompound) {
         nbttagcompound.a("xTile", (short) this.d);
         nbttagcompound.a("yTile", (short) this.e);
         nbttagcompound.a("zTile", (short) this.f);
@@ -349,7 +349,7 @@ public class EntityArrow extends Entity implements IProjectile{
         nbttagcompound.a("damage", this.av);
     }
 
-    public void a(NBTTagCompound nbttagcompound){
+    public void a(NBTTagCompound nbttagcompound) {
         this.d = nbttagcompound.d("xTile");
         this.e = nbttagcompound.d("yTile");
         this.f = nbttagcompound.d("zTile");
@@ -368,7 +368,7 @@ public class EntityArrow extends Entity implements IProjectile{
         }
     }
 
-    public void b_(EntityPlayer entityplayer){
+    public void b_(EntityPlayer entityplayer) {
         if (!this.q.I && this.i && this.b <= 0) {
             boolean flag0 = this.a == 1 || this.a == 2 && entityplayer.ce.d;
 
@@ -384,27 +384,27 @@ public class EntityArrow extends Entity implements IProjectile{
         }
     }
 
-    protected boolean f_(){
+    protected boolean f_() {
         return false;
     }
 
-    public void b(double d0){
+    public void b(double d0) {
         this.av = d0;
     }
 
-    public double c(){
+    public double c() {
         return this.av;
     }
 
-    public void a(int i0){
+    public void a(int i0) {
         this.aw = i0;
     }
 
-    public boolean ap(){
+    public boolean ap() {
         return false;
     }
 
-    public void a(boolean flag0){
+    public void a(boolean flag0) {
         byte b0 = this.ah.a(16);
 
         if (flag0) {
@@ -414,7 +414,7 @@ public class EntityArrow extends Entity implements IProjectile{
         }
     }
 
-    public boolean d(){
+    public boolean d() {
         byte b0 = this.ah.a(16);
 
         return (b0 & 1) != 0;

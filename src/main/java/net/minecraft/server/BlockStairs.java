@@ -3,7 +3,7 @@ package net.minecraft.server;
 import java.util.List;
 import java.util.Random;
 
-public class BlockStairs extends Block{
+public class BlockStairs extends Block {
 
     private static final int[][] a = new int[][] { { 2, 6 }, { 3, 7 }, { 2, 3 }, { 6, 7 }, { 0, 4 }, { 1, 5 }, { 0, 1 }, { 4, 5 } };
     private final Block b;
@@ -11,7 +11,7 @@ public class BlockStairs extends Block{
     private boolean d = false;
     private int e = 0;
 
-    protected BlockStairs(int i0, Block block, int i1){
+    protected BlockStairs(int i0, Block block, int i1) {
         super(i0, block.cO);
         this.b = block;
         this.c = i1;
@@ -22,7 +22,7 @@ public class BlockStairs extends Block{
         this.a(CreativeTabs.b);
     }
 
-    public void a(IBlockAccess iblockaccess, int i0, int i1, int i2){
+    public void a(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         if (this.d) {
             this.a(0.5F * (float) (this.e % 2), 0.5F * (float) (this.e / 2 % 2), 0.5F * (float) (this.e / 4 % 2), 0.5F + 0.5F * (float) (this.e % 2), 0.5F + 0.5F * (float) (this.e / 2 % 2), 0.5F + 0.5F * (float) (this.e / 4 % 2));
         }
@@ -31,19 +31,19 @@ public class BlockStairs extends Block{
         }
     }
 
-    public boolean c(){
+    public boolean c() {
         return false;
     }
 
-    public boolean b(){
+    public boolean b() {
         return false;
     }
 
-    public int d(){
+    public int d() {
         return 10;
     }
 
-    public void d(IBlockAccess iblockaccess, int i0, int i1, int i2){
+    public void d(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         int i3 = iblockaccess.h(i0, i1, i2);
 
         if ((i3 & 4) != 0) {
@@ -54,17 +54,17 @@ public class BlockStairs extends Block{
         }
     }
 
-    public static boolean d(int i0){
+    public static boolean d(int i0) {
         return i0 > 0 && Block.r[i0] instanceof BlockStairs;
     }
 
-    private boolean f(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3){
+    private boolean f(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
         int i4 = iblockaccess.a(i0, i1, i2);
 
         return d(i4) && iblockaccess.h(i0, i1, i2) == i3;
     }
 
-    public boolean g(IBlockAccess iblockaccess, int i0, int i1, int i2){
+    public boolean g(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         int i3 = iblockaccess.h(i0, i1, i2);
         int i4 = i3 & 3;
         float f0 = 0.5F;
@@ -155,7 +155,7 @@ public class BlockStairs extends Block{
         return flag0;
     }
 
-    public boolean h(IBlockAccess iblockaccess, int i0, int i1, int i2){
+    public boolean h(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         int i3 = iblockaccess.h(i0, i1, i2);
         int i4 = i3 & 3;
         float f0 = 0.5F;
@@ -251,7 +251,7 @@ public class BlockStairs extends Block{
         return flag0;
     }
 
-    public void a(World world, int i0, int i1, int i2, AxisAlignedBB axisalignedbb, List list, Entity entity){
+    public void a(World world, int i0, int i1, int i2, AxisAlignedBB axisalignedbb, List list, Entity entity) {
         this.d(world, i0, i1, i2);
         super.a(world, i0, i1, i2, axisalignedbb, list, entity);
         boolean flag0 = this.g((IBlockAccess) world, i0, i1, i2); // CanaryMod: Cast World to IBlockAccess for method g
@@ -264,64 +264,64 @@ public class BlockStairs extends Block{
         this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer){
+    public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {
         this.b.a(world, i0, i1, i2, entityplayer);
     }
 
-    public void g(World world, int i0, int i1, int i2, int i3){
+    public void g(World world, int i0, int i1, int i2, int i3) {
         this.b.g(world, i0, i1, i2, i3);
     }
 
-    public float a(Entity entity){
+    public float a(Entity entity) {
         return this.b.a(entity);
     }
 
-    public int a(World world){
+    public int a(World world) {
         return this.b.a(world);
     }
 
-    public void a(World world, int i0, int i1, int i2, Entity entity, Vec3 vec3){
+    public void a(World world, int i0, int i1, int i2, Entity entity, Vec3 vec3) {
         this.b.a(world, i0, i1, i2, entity, vec3);
     }
 
-    public boolean m(){
+    public boolean m() {
         return this.b.m();
     }
 
-    public boolean a(int i0, boolean flag0){
+    public boolean a(int i0, boolean flag0) {
         return this.b.a(i0, flag0);
     }
 
-    public boolean c(World world, int i0, int i1, int i2){
+    public boolean c(World world, int i0, int i1, int i2) {
         return this.b.c(world, i0, i1, i2);
     }
 
-    public void a(World world, int i0, int i1, int i2){
+    public void a(World world, int i0, int i1, int i2) {
         this.a(world, i0, i1, i2, 0);
         this.b.a(world, i0, i1, i2);
     }
 
-    public void a(World world, int i0, int i1, int i2, int i3, int i4){
+    public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         this.b.a(world, i0, i1, i2, i3, i4);
     }
 
-    public void b(World world, int i0, int i1, int i2, Entity entity){
+    public void b(World world, int i0, int i1, int i2, Entity entity) {
         this.b.b(world, i0, i1, i2, entity);
     }
 
-    public void a(World world, int i0, int i1, int i2, Random random){
+    public void a(World world, int i0, int i1, int i2, Random random) {
         this.b.a(world, i0, i1, i2, random);
     }
 
-    public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer, int i3, float f0, float f1, float f2){
+    public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer, int i3, float f0, float f1, float f2) {
         return this.b.a(world, i0, i1, i2, entityplayer, 0, 0.0F, 0.0F, 0.0F);
     }
 
-    public void a(World world, int i0, int i1, int i2, Explosion explosion){
+    public void a(World world, int i0, int i1, int i2, Explosion explosion) {
         this.b.a(world, i0, i1, i2, explosion);
     }
 
-    public void a(World world, int i0, int i1, int i2, EntityLiving entityliving, ItemStack itemstack){
+    public void a(World world, int i0, int i1, int i2, EntityLiving entityliving, ItemStack itemstack) {
         int i3 = MathHelper.c((double) (entityliving.A * 4.0F / 360.0F) + 0.5D) & 3;
         int i4 = world.h(i0, i1, i2) & 4;
 
@@ -342,11 +342,11 @@ public class BlockStairs extends Block{
         }
     }
 
-    public int a(World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2, int i4){
+    public int a(World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2, int i4) {
         return i3 != 0 && (i3 == 1 || (double) f1 <= 0.5D) ? i4 : i4 | 4;
     }
 
-    public MovingObjectPosition a(World world, int i0, int i1, int i2, Vec3 vec3, Vec3 vec31){
+    public MovingObjectPosition a(World world, int i0, int i1, int i2, Vec3 vec3, Vec3 vec31) {
         MovingObjectPosition[] amovingobjectposition = new MovingObjectPosition[8];
         int i3 = world.h(i0, i1, i2);
         int i4 = i3 & 3;

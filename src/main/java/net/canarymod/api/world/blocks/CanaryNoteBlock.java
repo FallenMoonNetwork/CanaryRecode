@@ -3,7 +3,7 @@ package net.canarymod.api.world.blocks;
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OTileEntityNote;
 
-public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock{
+public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
 
     public CanaryNoteBlock(OTileEntityNote tileentity) {
         super(tileentity);
@@ -30,24 +30,24 @@ public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock{
 
     @Override
     public byte getNote() {
-        return ((OTileEntityNote)tileentity).a;
+        return ((OTileEntityNote) tileentity).a;
     }
 
     @Override
     public void play() {
-        ((OTileEntityNote)tileentity).a(tileentity.k, getX(), getY(), getZ());
+        ((OTileEntityNote) tileentity).a(tileentity.k, getX(), getY(), getZ());
     }
 
     @Override
     public void setNote(byte note) {
-        if (note < 0){
+        if (note < 0) {
             note = 0;
         }
-        if (note > 24){
+        if (note > 24) {
             note = 24;
         }
-        
-        ((OTileEntityNote)tileentity).a = note;
+
+        ((OTileEntityNote) tileentity).a = note;
     }
 
 }

@@ -6,7 +6,7 @@ import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.vehicle.CanaryBoat;
 import net.canarymod.hook.entity.VehicleDamageHook;
 
-public class EntityBoat extends Entity{
+public class EntityBoat extends Entity {
 
     private boolean a;
     private double b;
@@ -17,7 +17,7 @@ public class EntityBoat extends Entity{
     private double g;
     private double h;
 
-    public EntityBoat(World world){
+    public EntityBoat(World world) {
         super(world);
         this.a = true;
         this.b = 0.07D;
@@ -27,29 +27,29 @@ public class EntityBoat extends Entity{
         this.entity = new CanaryBoat(this); // CanaryMod: Wrap Entity
     }
 
-    protected boolean f_(){
+    protected boolean f_() {
         return false;
     }
 
-    protected void a(){
+    protected void a() {
         this.ah.a(17, new Integer(0));
         this.ah.a(18, new Integer(1));
         this.ah.a(19, new Integer(0));
     }
 
-    public AxisAlignedBB g(Entity entity){
+    public AxisAlignedBB g(Entity entity) {
         return entity.E;
     }
 
-    public AxisAlignedBB D(){
+    public AxisAlignedBB D() {
         return this.E;
     }
 
-    public boolean L(){
+    public boolean L() {
         return true;
     }
 
-    public EntityBoat(World world, double d0, double d1, double d2){
+    public EntityBoat(World world, double d0, double d1, double d2) {
         this(world);
         this.b(d0, d1 + (double) this.N, d2);
         this.x = 0.0D;
@@ -61,11 +61,11 @@ public class EntityBoat extends Entity{
         this.entity = new CanaryBoat(this); // CanaryMod: Wrap Entity
     }
 
-    public double W(){
+    public double W() {
         return (double) this.P * 0.0D - 0.30000001192092896D;
     }
 
-    public boolean a(DamageSource damagesource, int i0){
+    public boolean a(DamageSource damagesource, int i0) {
 
         // CanaryMod: call VehicleDamageHook
         net.canarymod.api.entity.Entity attk = null;
@@ -107,11 +107,11 @@ public class EntityBoat extends Entity{
         }
     }
 
-    public boolean K(){
+    public boolean K() {
         return !this.M;
     }
 
-    public void l_(){
+    public void l_() {
         super.l_();
         if (this.g() > 0) {
             this.b(this.g() - 1);
@@ -313,7 +313,7 @@ public class EntityBoat extends Entity{
         }
     }
 
-    public void U(){
+    public void U() {
         if (this.n != null) {
             double d0 = Math.cos((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
             double d1 = Math.sin((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
@@ -322,11 +322,11 @@ public class EntityBoat extends Entity{
         }
     }
 
-    protected void b(NBTTagCompound nbttagcompound){}
+    protected void b(NBTTagCompound nbttagcompound) {}
 
-    protected void a(NBTTagCompound nbttagcompound){}
+    protected void a(NBTTagCompound nbttagcompound) {}
 
-    public boolean a_(EntityPlayer entityplayer){
+    public boolean a_(EntityPlayer entityplayer) {
         if (this.n != null && this.n instanceof EntityPlayer && this.n != entityplayer) {
             return true;
         } else {
@@ -338,27 +338,27 @@ public class EntityBoat extends Entity{
         }
     }
 
-    public void a(int i0){
+    public void a(int i0) {
         this.ah.b(19, Integer.valueOf(i0));
     }
 
-    public int d(){
+    public int d() {
         return this.ah.c(19);
     }
 
-    public void b(int i0){
+    public void b(int i0) {
         this.ah.b(17, Integer.valueOf(i0));
     }
 
-    public int g(){
+    public int g() {
         return this.ah.c(17);
     }
 
-    public void h(int i0){
+    public void h(int i0) {
         this.ah.b(18, Integer.valueOf(i0));
     }
 
-    public int h(){
+    public int h() {
         return this.ah.c(18);
     }
 }

@@ -1,10 +1,8 @@
 package net.canarymod.api.entity;
 
-
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import net.canarymod.Canary;
 import net.canarymod.Logman;
 import net.canarymod.api.CanaryServer;
@@ -45,8 +43,8 @@ import net.minecraft.server.OWorldSettings;
 
 /**
  * Canary Player wrapper.
+ * 
  * @author Chris
- *
  */
 public class CanaryPlayer extends CanaryEntityLiving implements Player {
     private Pattern badChatPattern = Pattern.compile("[\u00a7\u2302\u00D7\u00AA\u00BA\u00AE\u00AC\u00BD\u00BC\u00A1\u00AB\u00BB]");
@@ -61,11 +59,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         String[] data = Canary.usersAndGroups().getPlayerData(getName());
         group = Canary.usersAndGroups().getGroup(data[1]);
         permissions = Canary.permissionManager().getPlayerProvider(getName());
-        if(data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
+        if (data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
             prefix = data[0];
         }
 
-        if(data[2] != null && !data[2].isEmpty()) {
+        if (data[2] != null && !data[2].isEmpty()) {
             allowedIPs = data[2].split(",");
         }
     }
@@ -77,9 +75,10 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public OEntityPlayerMP getHandle() {
         return (OEntityPlayerMP) entity;
     }
+
     @Override
     public String getName() {
-        return ((OEntityPlayerMP)entity).v;
+        return ((OEntityPlayerMP) entity).v;
     }
 
     @Override
@@ -96,29 +95,29 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
         message = out;
 
-        //TODO: Add configuration for spam protection?
+        // TODO: Add configuration for spam protection?
 
-        if(message.startsWith("/")) {
+        if (message.startsWith("/")) {
             executeCommand(message.split(" "));
         }
         else {
-            if(isMuted()) {
+            if (isMuted()) {
                 notice("You are currently muted!");
             }
             else {
                 String prefix = "<" + getColor() + getName() + Colors.WHITE + "> ";
 
-                //This is a copy of the real player list already, no need to copy again (re: Collections.copy())
+                // This is a copy of the real player list already, no need to copy again (re: Collections.copy())
                 ArrayList<Player> receivers = Canary.getServer().getPlayerList();
 
                 ChatHook hook = new ChatHook(this, prefix, message, receivers);
                 Canary.hooks().callHook(hook);
-                if(hook.isCanceled()) {
+                if (hook.isCanceled()) {
                     return;
                 }
                 receivers = hook.getReceiverList();
-                String toSend = hook.getPrefix()+hook.getMessage();
-                for(Player player : receivers) {
+                String toSend = hook.getPrefix() + hook.getMessage();
+                for (Player player : receivers) {
                     if (hook.getPrefix().length() + hook.getMessage().length() >= 100) {
                         player.sendMessage(hook.getPrefix());
                         player.sendMessage(hook.getMessage());
@@ -132,7 +131,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
-    public void kill(){
+    public void kill() {
         super.kill();
         dropInventory();
     }
@@ -140,75 +139,76 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void sendMessage(String message) {
         getNetServerHandler().sendMessage(message);
-        //Should cover all chat logging
+        // Should cover all chat logging
         Logman.logInfo(TextFormat.removeFormatting(message));
     }
 
     @Override
     public void addExhaustion(float exhaustion) {
-        ((OEntityPlayerMP)entity).getFoodStats().addExhaustion(exhaustion);
+        ((OEntityPlayerMP) entity).getFoodStats().addExhaustion(exhaustion);
     }
 
     @Override
     public void setExhaustion(float exhaustion) {
-        ((OEntityPlayerMP)entity).getFoodStats().setFoodExhaustionLevel(exhaustion);
+        ((OEntityPlayerMP) entity).getFoodStats().setFoodExhaustionLevel(exhaustion);
     }
 
     @Override
     public float getExhaustionLevel() {
-        return ((OEntityPlayerMP)entity).getFoodStats().getFoodSaturationLevel();
+        return ((OEntityPlayerMP) entity).getFoodStats().getFoodSaturationLevel();
     }
 
     @Override
     public void setHunger(int hunger) {
-        ((OEntityPlayerMP)entity).getFoodStats().setFoodLevel(hunger);
+        ((OEntityPlayerMP) entity).getFoodStats().setFoodLevel(hunger);
     }
 
     @Override
     public int getHunger() {
-        return ((OEntityPlayerMP)entity).getFoodStats().getFoodLevel();
+        return ((OEntityPlayerMP) entity).getFoodStats().getFoodLevel();
     }
 
     @Override
     public void addExperience(int experience) {
-        ((OEntityPlayerMP)entity).addXP(experience);
+        ((OEntityPlayerMP) entity).addXP(experience);
     }
 
     @Override
     public void removeExperience(int experience) {
-        ((OEntityPlayerMP)entity).removeXP(experience);
+        ((OEntityPlayerMP) entity).removeXP(experience);
     }
 
     @Override
     public int getExperience() {
-        return ((OEntityPlayerMP)entity).N;
+        return ((OEntityPlayerMP) entity).N;
     }
 
     @Override
     public void setExperience(int xp) {
-        if(xp < 0) return;
-        ((OEntityPlayerMP)entity).setXP(xp);
+        if (xp < 0)
+            return;
+        ((OEntityPlayerMP) entity).setXP(xp);
     }
 
     @Override
     public int getLevel() {
-        return ((OEntityPlayerMP)entity).M;
+        return ((OEntityPlayerMP) entity).M;
     }
 
     @Override
     public boolean isSleeping() {
-        return ((OEntityPlayerMP)entity).Z();
+        return ((OEntityPlayerMP) entity).Z();
     }
 
     @Override
     public boolean isDeeplySleeping() {
-        return ((OEntityPlayerMP)entity).aa();
+        return ((OEntityPlayerMP) entity).aa();
     }
 
     @Override
     public void destroyItemHeld() {
         OEntityPlayerMP player = (OEntityPlayerMP) entity;
-        if(player.k.d() != null) {
+        if (player.k.d() != null) {
             player.k.d().getCanaryItem().setId(0);
         }
     }
@@ -216,7 +216,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public Item getItemHeld() {
         OItemStack item = ((CanaryPlayerInventory) getInventory()).getItemInHand();
-        if(item != null) {
+        if (item != null) {
             return item.getCanaryItem();
         }
         return null;
@@ -224,13 +224,13 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void dropItem(Item item) {
-        getWorld().dropItem((int)getX(), (int)getY(), (int)getZ(), item);
+        getWorld().dropItem((int) getX(), (int) getY(), (int) getZ(), item);
     }
 
     @Override
     public Location getSpawnPosition() {
         Location spawn = Canary.getServer().getDefaultWorld().getSpawnLocation();
-        OChunkCoordinates loc = ((OEntityPlayerMP)entity).ab();
+        OChunkCoordinates loc = ((OEntityPlayerMP) entity).ab();
         if (loc != null) {
             spawn = new Location(Canary.getServer().getDefaultWorld(), loc.a, loc.b, loc.c, 0.0F, 0.0F);
         }
@@ -240,7 +240,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public Location getHome() {
         Warp home = Canary.warps().getHome(this);
-        if(home != null) {
+        if (home != null) {
             return home.getLocation();
         }
         return getSpawnPosition();
@@ -254,7 +254,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public boolean hasHome() {
         Warp home = Canary.warps().getHome(this);
-        if(home != null) {
+        if (home != null) {
             return true;
         }
         return false;
@@ -262,26 +262,26 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setSpawnPosition(Location spawn) {
-        OChunkCoordinates loc = new OChunkCoordinates((int)spawn.getX(), (int)spawn.getY(), (int)spawn.getZ());
-        ((OEntityPlayerMP)entity).a(loc);
+        OChunkCoordinates loc = new OChunkCoordinates((int) spawn.getX(), (int) spawn.getY(), (int) spawn.getZ());
+        ((OEntityPlayerMP) entity).a(loc);
     }
 
     @Override
     public String getIP() {
-        String ip = ((OEntityPlayerMP)entity).a.b.c().toString();
-        return ip.substring(1,ip.lastIndexOf(":"));
+        String ip = ((OEntityPlayerMP) entity).a.b.c().toString();
+        return ip.substring(1, ip.lastIndexOf(":"));
     }
 
     @Override
     public boolean executeCommand(String[] command) {
         try {
-            if(Configuration.getServerConfig().isLogging()) {
+            if (Configuration.getServerConfig().isLogging()) {
                 Logman.logInfo("Command used by " + getName() + ": " + Canary.glueString(command, 0, " "));
             }
 
             String commandName = command[0];
-            //It's a vanilla command, forward it to the server
-            if (commandName.startsWith("/#") && (hasPermission("canary.commands.vanilla."+commandName.replace("/#", "")) || hasPermission("canary.vanilla.op"))) {
+            // It's a vanilla command, forward it to the server
+            if (commandName.startsWith("/#") && (hasPermission("canary.commands.vanilla." + commandName.replace("/#", "")) || hasPermission("canary.vanilla.op"))) {
                 return Canary.getServer().consoleCommand(Canary.glueString(command, 0, " ").replace("/#", ""), this);
             }
             commandName = commandName.replace("/", "");
@@ -292,7 +292,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             } // someone wants us not to execute the command. So lets do them the favor
 
             CanaryCommand com = Canary.commands().getCommand(commandName);
-            if(com != null) {
+            if (com != null) {
                 return com.parseCommand(this, command);
             }
             else {
@@ -304,7 +304,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         } catch (Throwable ex) {
             Logman.logStackTrace("Exception in command handler: ", ex);
             if (isAdmin()) {
-                sendMessage(Colors.LIGHT_RED + "Exception occured. "+ex.getMessage());
+                sendMessage(Colors.LIGHT_RED + "Exception occured. " + ex.getMessage());
             }
             return false;
         }
@@ -317,12 +317,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean isFlying() {
-        return ((OEntityPlayerMP)entity).L.b;
+        return ((OEntityPlayerMP) entity).L.b;
     }
 
     @Override
     public void setFlying(boolean flying) {
-        ((OEntityPlayerMP)entity).L.b = flying;
+        ((OEntityPlayerMP) entity).L.b = flying;
     }
 
     @Override
@@ -337,7 +337,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public Group[] getPlayerGroups() {
-        return group.parentsToList().toArray(new Group[]{});
+        return group.parentsToList().toArray(new Group[] {});
     }
 
     @Override
@@ -348,7 +348,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean hasPermission(String permission) {
-        if(!group.hasPermission(permission)) {
+        if (!group.hasPermission(permission)) {
             return permissions.queryPermission(permission);
         }
         return true;
@@ -406,7 +406,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public Inventory getInventory() {
-        return ((OEntityPlayer)entity).getInventory();
+        return ((OEntityPlayer) entity).getInventory();
     }
 
     @Override
@@ -417,17 +417,17 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void giveItem(Item item) {
-        ((OEntityPlayer)entity).getInventory().addItem(item.getId(), item.getAmount());
-        ((OEntityPlayer)entity).getInventory().update();
+        ((OEntityPlayer) entity).getInventory().addItem(item.getId(), item.getAmount());
+        ((OEntityPlayer) entity).getInventory().update();
     }
 
     @Override
     public boolean isInGroup(Group group, boolean parents) {
-        if(this.group.getName().equals(group.getName())) {
+        if (this.group.getName().equals(group.getName())) {
             return true;
         }
         else {
-            if(parents) {
+            if (parents) {
                 return this.group.parentsToList().contains(group);
             }
             return false;
@@ -443,10 +443,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public void teleportTo(Position position) {
         teleportTo(position.getX(), position.getY(), position.getZ(), 0.0f, 0.0f);
     }
+
     @Override
     public void teleportTo(double x, double y, double z, World dim) {
         if (!(getWorld().getType().equals(dim.getType()))) {
-            Logman.println("Switching world from "+getWorld().getFqName() + " to " + dim.getFqName());
+            Logman.println("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
             switchWorlds(dim);
         }
         teleportTo(x, y, z, 0.0F, 0.0F);
@@ -456,7 +457,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void teleportTo(double x, double y, double z, float pitch, float rotation, World dim) {
         if (!(getWorld().getType().equals(dim.getType()))) {
-            Logman.println("Switching world from "+getWorld().getFqName() + " to " + dim.getFqName());
+            Logman.println("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
             switchWorlds(dim);
         }
         teleportTo(x, y, z, pitch, rotation);
@@ -476,30 +477,30 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void teleportTo(Location location) {
         if (!(getWorld().getType().equals(location.getWorld().getType()))) {
-            Logman.println("Switching world from "+getWorld().getFqName() + " to " + location.getWorld().getFqName());
+            Logman.println("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
             switchWorlds(location.getWorld());
         }
-        teleportTo(location.getX(),location.getY(), location.getZ(),location.getPitch(), location.getRotation());
+        teleportTo(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getRotation());
     }
 
     @Override
     public void kick(String reason) {
-        ((OEntityPlayerMP)entity).a.a(reason);
+        ((OEntityPlayerMP) entity).a.a(reason);
     }
 
     @Override
     public void notice(String message) {
-        sendMessage(Colors.LIGHT_RED+message);
+        sendMessage(Colors.LIGHT_RED + message);
 
     }
 
     @Override
     public String getColor() {
-        if(prefix != null) {
-            return Colors.MARKER+prefix;
+        if (prefix != null) {
+            return Colors.MARKER + prefix;
         }
-        else if(group.getPrefix() != null) {
-            return Colors.MARKER+group.getPrefix();
+        else if (group.getPrefix() != null) {
+            return Colors.MARKER + group.getPrefix();
         }
         else {
             return Colors.WHITE;
@@ -508,31 +509,31 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public NetServerHandler getNetServerHandler() {
-        return ((OEntityPlayerMP)entity).getServerHandler();
+        return ((OEntityPlayerMP) entity).getServerHandler();
     }
 
     @Override
     public int damageVsEntity(Entity entity) {
-        return ((OEntityPlayerMP)entity).k.a(((CanaryEntity) entity).getHandle());
+        return ((OEntityPlayerMP) entity).k.a(((CanaryEntity) entity).getHandle());
     }
 
     @Override
     public float damageVsBlock(Block block) {
-        return ((OEntityPlayerMP)entity).k.a(OBlock.m[block.getType()]);
+        return ((OEntityPlayerMP) entity).k.a(OBlock.m[block.getType()]);
     }
 
     @Override
     public boolean isInGroup(String group, boolean parents) {
-        if(parents) {
+        if (parents) {
             ArrayList<Group> groups = this.group.parentsToList();
-            for(Group g : groups) {
-                if(g.getName().equals(group)) {
+            for (Group g : groups) {
+                if (g.getName().equals(group)) {
                     return true;
                 }
             }
         }
         else {
-            if(this.group.getName().equals(group)) {
+            if (this.group.getName().equals(group)) {
                 return true;
             }
         }
@@ -578,42 +579,42 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public void switchWorlds(World dim) {
         OMinecraftServer mcServer = ((CanaryServer) Canary.getServer()).getHandle();
         OEntityPlayerMP ent = (OEntityPlayerMP) entity;
-        //Do not check for worlds. let plugins handle restrictions!
-        //        // Nether is not allowed, so shush
-        //        if (dim.getType().equals(WorldType.fromName("NETHER")) && !mcServer.d.a("allow-nether", true)) {
-        //            return;
-        //        }
-        //        // The End is not allowed, so shush
-        //        if (dim.getType().equals(WorldType.fromName("END")) && !mcServer.d.a("allow-end", true)) {
-        //            return;
-        //        }
+        // Do not check for worlds. let plugins handle restrictions!
+        // // Nether is not allowed, so shush
+        // if (dim.getType().equals(WorldType.fromName("NETHER")) && !mcServer.d.a("allow-nether", true)) {
+        // return;
+        // }
+        // // The End is not allowed, so shush
+        // if (dim.getType().equals(WorldType.fromName("END")) && !mcServer.d.a("allow-end", true)) {
+        // return;
+        // }
         // Dismount first or get buggy
         if (ent.bh != null) {
             ent.b(ent.bh);
         }
 
-        //Collect world switch achievement ?
+        // Collect world switch achievement ?
         ent.a((OStatBase) OAchievementList.B);
 
-        //switch world if needed
-        if(!(dim.getName().equals(ent.bi.getCanaryWorld().getName()))) {
+        // switch world if needed
+        if (!(dim.getName().equals(ent.bi.getCanaryWorld().getName()))) {
             World oldWorld = ent.bi.getCanaryWorld();
-            //remove player from entity tracker
+            // remove player from entity tracker
             oldWorld.getEntityTracker().untrackPlayerSymmetrics(ent.getPlayer());
             oldWorld.getEntityTracker().untrackEntity(ent.getPlayer());
-            //remove player from old worlds entity list
+            // remove player from old worlds entity list
             oldWorld.removePlayerFromWorld(ent.getPlayer());
-            //Remove player from player manager for the old world
+            // Remove player from player manager for the old world
             oldWorld.getPlayerManager().removePlayer(ent.getPlayer());
 
-            //Change players world reference
+            // Change players world reference
             ent.bi = ((CanaryWorld) dim).getHandle();
-            //Add player back to the new world
-            //            dim.addPlayerToWorld(this);
-            //            dim.getPlayerManager().addPlayer(this);
+            // Add player back to the new world
+            // dim.addPlayerToWorld(this);
+            // dim.getPlayerManager().addPlayer(this);
         }
-        //Get chunk coordinates...
-        //        OChunkCoordinates var2 = mcServer.getWorld(ent.bi.getCanaryDimension().getName(), dim.getType().getId()).d();
+        // Get chunk coordinates...
+        // OChunkCoordinates var2 = mcServer.getWorld(ent.bi.getCanaryDimension().getName(), dim.getType().getId()).d();
         OChunkCoordinates var2 = ent.bi.d();
 
         if (var2 != null) {
@@ -629,8 +630,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public EntityItem[] dropInventory() {
         Item[] items = getInventory().getContents();
         EntityItem[] drops = new EntityItem[items.length];
-        for(int i = 0; i < items.length; i++) {
-            if(items[i] == null) {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
                 continue;
             }
             drops[i] = getWorld().dropItem(getPosition(), items[i]);
@@ -642,24 +643,24 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean isDamageDisabled() {
-        return ((OEntityPlayerMP)entity).L.a;
+        return ((OEntityPlayerMP) entity).L.a;
     }
 
     @Override
     public void setDamageDisabled(boolean disabled) {
-        ((OEntityPlayerMP)entity).L.a = disabled;
+        ((OEntityPlayerMP) entity).L.a = disabled;
     }
 
     @Override
     public int getMode() {
-        return ((OEntityPlayerMP)entity).c.a();
+        return ((OEntityPlayerMP) entity).c.a();
     }
 
     @Override
     public void setMode(int mode) {
-        //Adjust mode, make it null if number is invalid
+        // Adjust mode, make it null if number is invalid
         mode = OWorldSettings.a(mode);
-        OEntityPlayerMP ent = ((OEntityPlayerMP)entity);
+        OEntityPlayerMP ent = ((OEntityPlayerMP) entity);
         if (ent.c.a() != mode) {
             ent.c.a(mode);
             ent.a.b((OPacket) (new OPacket70Bed(3, mode)));
@@ -668,9 +669,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     public void refreshCreativeMode() {
         if (getMode() == 1 || Configuration.getWorldConfig(getWorld().getName()).getGameMode() == World.GameMode.CREATIVE) {
-            ((OEntityPlayerMP)entity).c.a(1);
+            ((OEntityPlayerMP) entity).c.a(1);
         } else {
-            ((OEntityPlayerMP)entity).c.a(0);
+            ((OEntityPlayerMP) entity).c.a(0);
         }
     }
 

@@ -9,20 +9,20 @@ import net.canarymod.api.world.blocks.Block;
 public class CanaryBlock implements Block {
     protected short type;
     protected byte data;
-    protected int x,y,z, status;
+    protected int x, y, z, status;
     protected World dimension;
     protected BlockFace faceClicked;
-    
+
     public CanaryBlock(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.type=0;
-        this.data=0;
+        this.type = 0;
+        this.data = 0;
         status = 0;
-        dimension= Canary.getServer().getDefaultWorld();
+        dimension = Canary.getServer().getDefaultWorld();
     }
-    
+
     public CanaryBlock(short type, byte data) {
         this.x = 0;
         this.y = 0;
@@ -32,7 +32,7 @@ public class CanaryBlock implements Block {
         status = 0;
         dimension = Canary.getServer().getDefaultWorld();
     }
-    
+
     public CanaryBlock(short type, byte data, int x, int y, int z) {
         this.x = x;
         this.y = y;
@@ -42,7 +42,7 @@ public class CanaryBlock implements Block {
         status = 0;
         dimension = Canary.getServer().getDefaultWorld();
     }
-    
+
     public CanaryBlock(short type, byte data, int x, int y, int z, CanaryWorld canaryWorld) {
         this.x = x;
         this.y = y;
@@ -52,7 +52,7 @@ public class CanaryBlock implements Block {
         status = 0;
         this.dimension = canaryWorld;
     }
-    
+
     @Override
     public short getType() {
         return type;
@@ -66,7 +66,7 @@ public class CanaryBlock implements Block {
 
     @Override
     public void setType(int type) {
-        this.type = (short)type;
+        this.type = (short) type;
 
     }
 

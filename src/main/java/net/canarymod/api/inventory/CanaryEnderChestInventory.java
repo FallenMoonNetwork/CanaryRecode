@@ -4,10 +4,10 @@ import net.canarymod.api.entity.living.humanoid.Player;
 
 public class CanaryEnderChestInventory implements EnderChestInventory {
 
-//    public CanaryEnderChestInventory(OInventoryEnderChest) {
-//
-//    }
-    
+    // public CanaryEnderChestInventory(OInventoryEnderChest) {
+    //
+    // }
+
     @Override
     public int getSize() {
         // TODO Auto-generated method stub

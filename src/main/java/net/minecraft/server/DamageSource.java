@@ -121,7 +121,7 @@ public class DamageSource {
         String s0 = "death.attack." + this.o;
         String s1 = s0 + ".player";
 
-        return entityliving1 != null && StatCollector.b(s1) ? StatCollector.a(s1, new Object[] { entityliving.ax(), entityliving1.ax()}) : StatCollector.a(s0, new Object[] { entityliving.ax()});
+        return entityliving1 != null && StatCollector.b(s1) ? StatCollector.a(s1, new Object[] { entityliving.ax(), entityliving1.ax() }) : StatCollector.a(s0, new Object[] { entityliving.ax() });
     }
 
     public boolean m() {

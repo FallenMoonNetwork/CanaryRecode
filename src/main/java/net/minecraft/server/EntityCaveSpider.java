@@ -2,20 +2,20 @@ package net.minecraft.server;
 
 import net.canarymod.api.entity.living.monster.CanaryCaveSpider;
 
-public class EntityCaveSpider extends EntitySpider{
+public class EntityCaveSpider extends EntitySpider {
 
-    public EntityCaveSpider(World world){
+    public EntityCaveSpider(World world) {
         super(world);
         this.aH = "/mob/cavespider.png";
         this.a(0.7F, 0.5F);
         this.entity = new CanaryCaveSpider(this); // CanaryMod: Wrap Entity
     }
 
-    public int aW(){
+    public int aW() {
         return 12;
     }
 
-    public boolean m(Entity entity){
+    public boolean m(Entity entity) {
         if (super.m(entity)) {
             if (entity instanceof EntityLiving) {
                 byte b0 = 0;
@@ -39,5 +39,5 @@ public class EntityCaveSpider extends EntitySpider{
         }
     }
 
-    public void bJ(){}
+    public void bJ() {}
 }

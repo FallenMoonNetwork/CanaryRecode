@@ -5,31 +5,31 @@ package net.canarymod.api.inventory;
  * 
  * @author Chris
  */
-public class CanaryBaseItem implements BaseItem{
+public class CanaryBaseItem implements BaseItem {
 
     private net.minecraft.server.Item item;
 
-    public CanaryBaseItem(net.minecraft.server.Item item){
+    public CanaryBaseItem(net.minecraft.server.Item item) {
         this.item = item;
     }
 
     @Override
-    public int getMaxStackSize(){
+    public int getMaxStackSize() {
         return item.d();
     }
 
     @Override
-    public int getMaxDamage(){
+    public int getMaxDamage() {
         return item.f();
     }
 
     @Override
-    public void setMaxDamage(int damage){
+    public void setMaxDamage(int damage) {
         item.f(damage);
     }
 
     @Override
-    public boolean isDamageable(){
+    public boolean isDamageable() {
         return item.g();
     }
 

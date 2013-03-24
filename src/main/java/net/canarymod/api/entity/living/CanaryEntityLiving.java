@@ -31,19 +31,19 @@ import net.minecraft.server.IMob;
  * 
  * @author Jason (darkdiplomat)
  */
-public abstract class CanaryEntityLiving extends CanaryEntity implements EntityLiving{
+public abstract class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
-    public CanaryEntityLiving(net.minecraft.server.EntityLiving entity){
+    public CanaryEntityLiving(net.minecraft.server.EntityLiving entity) {
         super(entity);
     }
 
     @Override
-    public boolean canSee(EntityLiving entityliving){
+    public boolean canSee(EntityLiving entityliving) {
         return ((net.minecraft.server.EntityLiving) entity).n(((CanaryEntity) entityliving).getHandle());
     }
 
     @Override
-    public void dealDamage(DamageType damagetype, int amount){
+    public void dealDamage(DamageType damagetype, int amount) {
         DamageSource theSource = CanaryDamageSource.getDamageSourceFromType(damagetype);
         if (theSource != null) {
             ((net.minecraft.server.EntityLiving) entity).a(((CanaryDamageSource) theSource).getHandle(), amount);
@@ -51,27 +51,27 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public int getAge(){
+    public int getAge() {
         return ((net.minecraft.server.EntityLiving) entity).aH();
     }
 
     @Override
-    public boolean isAnimal(){
+    public boolean isAnimal() {
         return entity instanceof IAnimals && !(entity instanceof IMob);
     }
 
     @Override
-    public boolean isMob(){
+    public boolean isMob() {
         return entity instanceof IMob;
     }
 
     @Override
-    public boolean isPlayer(){
+    public boolean isPlayer() {
         return entity instanceof EntityPlayerMP;
     }
 
     @Override
-    public EntityAnimal getAnimal(){
+    public EntityAnimal getAnimal() {
         if (isAnimal()) {
             return (EntityAnimal) this;
         }
@@ -79,7 +79,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public EntityMob getMob(){
+    public EntityMob getMob() {
         if (isMob()) {
             return (EntityMob) this;
         }
@@ -87,7 +87,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public Player getPlayer(){
+    public Player getPlayer() {
         if (isPlayer()) {
             return (Player) this;
         }
@@ -95,17 +95,17 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public int getDeathTicks(){
+    public int getDeathTicks() {
         return ((net.minecraft.server.EntityLiving) entity).aZ;
     }
 
     @Override
-    public int getHealth(){
+    public int getHealth() {
         return ((net.minecraft.server.EntityLiving) entity).aX();
     }
 
     @Override
-    public Location getHome(){
+    public Location getHome() {
         if (hasHome()) {
             net.minecraft.server.ChunkCoordinates home = ((net.minecraft.server.EntityLiving) entity).aM();
             return new Location(home.a, home.b, home.c);
@@ -114,77 +114,77 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public int getMaxHealth(){
+    public int getMaxHealth() {
         return ((net.minecraft.server.EntityLiving) entity).aW();
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return EntityList.b(entity);
     }
 
     @Override
-    public boolean hasHome(){
+    public boolean hasHome() {
         return ((net.minecraft.server.EntityLiving) entity).aP();
     }
 
     @Override
-    public void increaseHealth(int increase){
+    public void increaseHealth(int increase) {
         ((net.minecraft.server.EntityLiving) entity).j(increase);
     }
 
     @Override
-    public void kill(){
+    public void kill() {
         setHealth(0);
     }
 
     @Override
-    public void destroy(){
+    public void destroy() {
         entity.w();
     }
 
     @Override
-    public void knockBack(double x, double z){
+    public void knockBack(double x, double z) {
         ((net.minecraft.server.EntityLiving) entity).a(entity, 0, x, z);
     }
 
     @Override
-    public void moveEntity(double x, double y, double z){
+    public void moveEntity(double x, double y, double z) {
         entity.a(x, y, z);
     }
 
     @Override
-    public void playLivingSound(){
+    public void playLivingSound() {
         ((OEntityLiving) entity).az();
     }
 
     @Override
-    public void removeHome(){
+    public void removeHome() {
         ((OEntityLiving) entity).ax();
     }
 
     @Override
-    public void setAge(int age){
+    public void setAge(int age) {
         ((OEntityLiving) entity).aV = age;
     }
 
     @Override
-    public void setDeathTicks(int ticks){
+    public void setDeathTicks(int ticks) {
         ((OEntityLiving) entity).av = ticks;
     }
 
     @Override
-    public void setHealth(int newHealth){
+    public void setHealth(int newHealth) {
         ((OEntityLiving) entity).h(newHealth);
     }
 
     @Override
-    public void setHome(Location location){
+    public void setHome(Location location) {
         setHomeArea((int) Math.floor(location.getX()), (int) Math.floor(location.getY()), (int) Math.floor(location.getZ()), 25);
     }
 
     @Override
-    public void setHomeArea(Position vector, int dist){
+    public void setHomeArea(Position vector, int dist) {
         if (vector == null) {
             throw new IllegalArgumentException("Could not set EntityLivings home. Location was null!");
         }
@@ -192,22 +192,22 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public void setHomeArea(int x, int y, int z, int dist){
+    public void setHomeArea(int x, int y, int z, int dist) {
         ((OEntityLiving) entity).b(x, y, z, dist);
     }
 
     @Override
-    public void setHomeRadius(int newRadius){
+    public void setHomeRadius(int newRadius) {
         setHomeArea(getHome(), newRadius);
     }
 
     @Override
-    public void spawn(){
+    public void spawn() {
         spawn(null);
     }
 
     @Override
-    public void spawn(EntityLiving rider){
+    public void spawn(EntityLiving rider) {
         OWorld world = ((CanaryWorld) getWorld()).getHandle();
 
         entity.c(getX() + 0.5d, getY(), getZ() + 0.5d, getRotation(), 0f);
@@ -224,25 +224,25 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public void addPotionEffect(PotionEffect effect){
+    public void addPotionEffect(PotionEffect effect) {
         OPotionEffect oEffect = ((CanaryPotionEffect) effect).getHandle();
         ((OEntityLiving) entity).e(oEffect);
     }
 
     @Override
-    public void addPotionEffect(PotionType type, int duration, int amplifier){
+    public void addPotionEffect(PotionType type, int duration, int amplifier) {
         OPotionEffect oEffect = new OPotionEffect(type.getID(), duration, amplifier);
         ((OEntityLiving) entity).e(oEffect);
     }
 
     @Override
-    public boolean isPotionActive(Potion potion){
+    public boolean isPotionActive(Potion potion) {
         OPotion oPotion = ((CanaryPotion) potion).getHandle();
         return ((OEntityLiving) entity).a(oPotion);
     }
 
     @Override
-    public PotionEffect getActivePotionEffect(Potion potion){
+    public PotionEffect getActivePotionEffect(Potion potion) {
         OPotion oPotion = ((CanaryPotion) potion).getHandle();
         OPotionEffect oPotionEffect = ((OEntityLiving) entity).b(oPotion);
         return new CanaryPotionEffect(oPotionEffect);
@@ -250,7 +250,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<PotionEffect> getAllActivePotionEffects(){
+    public List<PotionEffect> getAllActivePotionEffects() {
         Collection<OPotionEffect> collection = ((OEntityLiving) entity).aM();
         List<PotionEffect> list = new ArrayList<PotionEffect>();
         for (OPotionEffect oEffect : collection) {
@@ -260,7 +260,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public void lookAt(double x, double y, double z){
+    public void lookAt(double x, double y, double z) {
         double xDiff = x - getX();
         double yDiff = y - getY();
         double zDiff = z - getZ();
@@ -293,7 +293,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public void lookAt(Location location){
+    public void lookAt(Location location) {
         lookAt(location.getX(), location.getY(), location.getZ());
     }
 }

@@ -3,11 +3,11 @@ package net.minecraft.server;
 import java.util.Calendar;
 import net.canarymod.api.entity.living.animal.CanaryBat;
 
-public class EntityBat extends EntityAmbientCreature{
+public class EntityBat extends EntityAmbientCreature {
 
     private ChunkCoordinates a;
 
-    public EntityBat(World world){
+    public EntityBat(World world) {
         super(world);
         this.aH = "/mob/bat.png";
         this.a(0.5F, 0.9F);
@@ -15,48 +15,48 @@ public class EntityBat extends EntityAmbientCreature{
         this.entity = new CanaryBat(this); // CanaryMod: Wrap Entity
     }
 
-    protected void a(){
+    protected void a() {
         super.a();
         this.ah.a(16, new Byte((byte) 0));
     }
 
-    protected float ba(){
+    protected float ba() {
         return 0.1F;
     }
 
-    protected float aY(){
+    protected float aY() {
         return super.aY() * 0.95F;
     }
 
-    protected String bb(){
+    protected String bb() {
         return this.h() && this.ab.nextInt(4) != 0 ? null : "mob.bat.idle";
     }
 
-    protected String bc(){
+    protected String bc() {
         return "mob.bat.hurt";
     }
 
-    protected String bd(){
+    protected String bd() {
         return "mob.bat.death";
     }
 
-    public boolean L(){
+    public boolean L() {
         return false;
     }
 
-    protected void o(Entity entity){}
+    protected void o(Entity entity) {}
 
-    protected void bg(){}
+    protected void bg() {}
 
-    public int aW(){
+    public int aW() {
         return 6;
     }
 
-    public boolean h(){
+    public boolean h() {
         return (this.ah.a(16) & 1) != 0;
     }
 
-    public void a(boolean flag0){
+    public void a(boolean flag0) {
         byte b0 = this.ah.a(16);
 
         if (flag0) {
@@ -66,11 +66,11 @@ public class EntityBat extends EntityAmbientCreature{
         }
     }
 
-    protected boolean bh(){
+    protected boolean bh() {
         return true;
     }
 
-    public void l_(){
+    public void l_() {
         super.l_();
         if (this.h()) {
             this.x = this.y = this.z = 0.0D;
@@ -80,7 +80,7 @@ public class EntityBat extends EntityAmbientCreature{
         }
     }
 
-    protected void bo(){
+    protected void bo() {
         super.bo();
         if (this.h()) {
             if (!this.q.u(MathHelper.c(this.u), (int) this.v + 1, MathHelper.c(this.w))) {
@@ -123,19 +123,19 @@ public class EntityBat extends EntityAmbientCreature{
         }
     }
 
-    protected boolean f_(){
+    protected boolean f_() {
         return false;
     }
 
-    protected void a(float f0){}
+    protected void a(float f0) {}
 
-    protected void a(double d0, boolean flag0){}
+    protected void a(double d0, boolean flag0) {}
 
-    public boolean at(){
+    public boolean at() {
         return true;
     }
 
-    public boolean a(DamageSource damagesource, int i0){
+    public boolean a(DamageSource damagesource, int i0) {
         if (this.aq()) {
             return false;
         } else {
@@ -147,17 +147,17 @@ public class EntityBat extends EntityAmbientCreature{
         }
     }
 
-    public void a(NBTTagCompound nbttagcompound){
+    public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
         this.ah.b(16, Byte.valueOf(nbttagcompound.c("BatFlags")));
     }
 
-    public void b(NBTTagCompound nbttagcompound){
+    public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
         nbttagcompound.a("BatFlags", this.ah.a(16));
     }
 
-    public boolean bv(){
+    public boolean bv() {
         int i0 = MathHelper.c(this.E.b);
 
         if (i0 >= 63) {
@@ -181,5 +181,5 @@ public class EntityBat extends EntityAmbientCreature{
         }
     }
 
-    public void bJ(){}
+    public void bJ() {}
 }

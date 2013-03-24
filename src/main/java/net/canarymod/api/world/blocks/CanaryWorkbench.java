@@ -9,7 +9,7 @@ import net.minecraft.server.OContainerWorkbench;
 import net.minecraft.server.OItemStack;
 
 public class CanaryWorkbench implements Workbench {
-    
+
     private OContainerWorkbench container;
 
     public CanaryWorkbench(OContainerWorkbench container) {
@@ -20,34 +20,34 @@ public class CanaryWorkbench implements Workbench {
     public Inventory getInventory() {
         return new CanaryInventory(container.craftingGrid);
     }
-    
+
     @Override
     public Block getBlock() {
         return getWorld().getBlockAt(getX(), getY(), getZ());
     }
 
     @Override
-    public int getX(){
+    public int getX() {
         return container.h;
     }
-    
+
     @Override
-    public int getY(){
+    public int getY() {
         return container.i;
     }
-    
+
     @Override
-    public int getZ(){
+    public int getZ() {
         return container.j;
     }
-    
+
     @Override
-    public World getWorld(){
+    public World getWorld() {
         return container.c.getCanaryWorld();
     }
-    
+
     @Override
-    public void update(){
+    public void update() {
         container.craftResultInventory.update();
     }
 
@@ -66,10 +66,10 @@ public class CanaryWorkbench implements Workbench {
     public CanaryItem[] getContents() {
         OItemStack[] oStacks = container.craftingGrid.getContents();
         CanaryItem[] items = new CanaryItem[oStacks.length];
-        for(int i = 0; i < oStacks.length; i++) {
+        for (int i = 0; i < oStacks.length; i++) {
             items[i] = new CanaryItem(oStacks[i]);
         }
-        
+
         return items;
     }
 
@@ -95,7 +95,7 @@ public class CanaryWorkbench implements Workbench {
 
     @Override
     public Item getItem(int id, int amount) {
-       return container.craftingGrid.getItem(id, amount);
+        return container.craftingGrid.getItem(id, amount);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class CanaryWorkbench implements Workbench {
 
     @Override
     public boolean hasItemStack(Item item) {
-       return container.craftingGrid.hasItemStack(((CanaryItem) item).getHandle());
+        return container.craftingGrid.hasItemStack(((CanaryItem) item).getHandle());
     }
 
     @Override
@@ -127,9 +127,9 @@ public class CanaryWorkbench implements Workbench {
     @Override
     public void setContents(Item[] items) {
         OItemStack[] oStacks = new OItemStack[items.length];
-        for(int i = 0; i < items.length; i++) {
-            if(items[i] != null) {
-                oStacks[i] = ((CanaryItem)items[i]).getHandle();
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
+                oStacks[i] = ((CanaryItem) items[i]).getHandle();
             }
             else {
                 oStacks[i] = null;
@@ -147,8 +147,8 @@ public class CanaryWorkbench implements Workbench {
     public void setSlot(int index, Item item) {
         container.craftingGrid.setSlot(index, ((CanaryItem) item).getHandle());
     }
-    
-    public OContainerWorkbench getHandle(){
+
+    public OContainerWorkbench getHandle() {
         return container;
     }
 

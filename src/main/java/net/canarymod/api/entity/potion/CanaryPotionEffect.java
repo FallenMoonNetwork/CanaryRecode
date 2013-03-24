@@ -8,11 +8,11 @@ import net.minecraft.server.OPotionEffect;
 public class CanaryPotionEffect implements PotionEffect {
 
     OPotionEffect effect;
-    
+
     public CanaryPotionEffect(OPotionEffect effect) {
         this.effect = effect;
     }
-    
+
     @Override
     public int getPotionID() {
         return effect.a();
@@ -38,7 +38,7 @@ public class CanaryPotionEffect implements PotionEffect {
         OEntityLiving oLiving = (OEntityLiving) ((CanaryEntityLiving) entity).getHandle();
         effect.b(oLiving);
     }
-    
+
     public OPotionEffect getHandle() {
         return effect;
     }
