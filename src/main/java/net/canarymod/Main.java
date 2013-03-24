@@ -33,7 +33,7 @@ public class Main {
         try {
             MinecraftServer.main(args);
         } catch (Throwable t) {
-            Logman.logStackTrace("Exception while starting the server: ", t);
+            Canary.logStackTrace("Exception while starting the server: ", t);
         }
     }
 

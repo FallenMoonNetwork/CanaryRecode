@@ -3,8 +3,8 @@ package net.canarymod.api.entity;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import net.canarymod.Canary;
-import net.canarymod.Logman;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
@@ -29,17 +29,6 @@ import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
 import net.canarymod.warp.Warp;
-import net.minecraft.server.OAchievementList;
-import net.minecraft.server.OBlock;
-import net.minecraft.server.OChunkCoordinates;
-import net.minecraft.server.OEntityPlayer;
-import net.minecraft.server.OEntityPlayerMP;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OMinecraftServer;
-import net.minecraft.server.OPacket;
-import net.minecraft.server.OPacket70Bed;
-import net.minecraft.server.OStatBase;
-import net.minecraft.server.OWorldSettings;
 
 /**
  * Canary Player wrapper.
@@ -140,7 +129,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public void sendMessage(String message) {
         getNetServerHandler().sendMessage(message);
         // Should cover all chat logging
-        Logman.logInfo(TextFormat.removeFormatting(message));
+        Canary.logInfo(TextFormat.removeFormatting(message));
     }
 
     @Override
@@ -276,7 +265,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public boolean executeCommand(String[] command) {
         try {
             if (Configuration.getServerConfig().isLogging()) {
-                Logman.logInfo("Command used by " + getName() + ": " + Canary.glueString(command, 0, " "));
+                Canary.logInfo("Command used by " + getName() + ": " + Canary.glueString(command, 0, " "));
             }
 
             String commandName = command[0];
@@ -302,7 +291,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 return false;
             }
         } catch (Throwable ex) {
-            Logman.logStackTrace("Exception in command handler: ", ex);
+            Canary.logStackTrace("Exception in command handler: ", ex);
             if (isAdmin()) {
                 sendMessage(Colors.LIGHT_RED + "Exception occured. " + ex.getMessage());
             }
@@ -447,7 +436,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void teleportTo(double x, double y, double z, World dim) {
         if (!(getWorld().getType().equals(dim.getType()))) {
-            Logman.println("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
+            Canary.println("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
             switchWorlds(dim);
         }
         teleportTo(x, y, z, 0.0F, 0.0F);
@@ -457,7 +446,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void teleportTo(double x, double y, double z, float pitch, float rotation, World dim) {
         if (!(getWorld().getType().equals(dim.getType()))) {
-            Logman.println("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
+            Canary.println("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
             switchWorlds(dim);
         }
         teleportTo(x, y, z, pitch, rotation);
@@ -477,7 +466,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void teleportTo(Location location) {
         if (!(getWorld().getType().equals(location.getWorld().getType()))) {
-            Logman.println("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
+            Canary.println("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
             switchWorlds(location.getWorld());
         }
         teleportTo(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getRotation());
@@ -620,7 +609,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         if (var2 != null) {
             ent.a.a((double) var2.a, (double) var2.b, (double) var2.c, 0.0F, 0.0F, dim.getType().getId(), ent.bi.getCanaryWorld().getName());
         }
-        Logman.logInfo("Prepared to switch worlds.");
+        Canary.logInfo("Prepared to switch worlds.");
         mcServer.h.switchDimension(ent, dim.getType().getId(), false);
 
         refreshCreativeMode();

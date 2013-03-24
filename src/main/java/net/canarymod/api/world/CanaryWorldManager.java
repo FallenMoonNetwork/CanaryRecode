@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
+
 import net.canarymod.Canary;
 import net.canarymod.Logman;
 import net.canarymod.api.CanaryServer;
@@ -64,17 +65,17 @@ public class CanaryWorldManager implements WorldManager {
         }
         else {
             if (worldExists(world + "_" + type.getName())) {
-                Logman.println("World exists but is not loaded. Loading ...");
+                Canary.println("World exists but is not loaded. Loading ...");
                 return loadWorld(world, type);
             }
             else {
                 if (autoload) {
-                    Logman.println("World does not exist, we can autoload, will load!");
+                    Canary.println("World does not exist, we can autoload, will load!");
                     createWorld(world, type);
                     return loadedWorlds.get(world + "_" + type.getName());
                 }
                 else {
-                    Logman.logSevere("Tried to get a non-existing world: " + world + " - you must create it before you can load it or pass autoload = true");
+                    Canary.logSevere("Tried to get a non-existing world: " + world + " - you must create it before you can load it or pass autoload = true");
                     return null;
                 }
 

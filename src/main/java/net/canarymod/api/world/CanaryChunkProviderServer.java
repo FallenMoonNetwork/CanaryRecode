@@ -1,10 +1,8 @@
 package net.canarymod.api.world;
 
 import java.io.IOException;
-import net.canarymod.Logman;
-import net.minecraft.server.OChunk;
-import net.minecraft.server.OChunkCoordIntPair;
-import net.minecraft.server.OChunkProviderServer;
+
+import net.canarymod.Canary;
 
 public class CanaryChunkProviderServer implements ChunkProviderServer {
 
@@ -55,7 +53,7 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
             try {
                 handle.b(unloadedChunk);
             } catch (IOException e) {
-                Logman.logStackTrace("Exception while unloading a chunk!", e);
+                Canary.logStackTrace("Exception while unloading a chunk!", e);
             }
 
             handle.a(unloadedChunk);
@@ -80,7 +78,7 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
         try {
             handle.b(newChunk);
         } catch (IOException e) {
-            Logman.logStackTrace("Exception while regenerating a chunk!", e);
+            Canary.logStackTrace("Exception while regenerating a chunk!", e);
         }
         newChunk.k = false;
         if (handle.e != null)

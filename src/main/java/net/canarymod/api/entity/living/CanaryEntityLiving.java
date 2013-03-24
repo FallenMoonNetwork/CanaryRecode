@@ -3,8 +3,8 @@ package net.canarymod.api.entity.living;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import net.canarymod.Canary;
-import net.canarymod.Logman;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.DamageSource;
@@ -21,10 +21,6 @@ import net.canarymod.api.entity.potion.PotionType;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
-import net.minecraft.server.EntityList;
-import net.minecraft.server.EntityPlayerMP;
-import net.minecraft.server.IAnimals;
-import net.minecraft.server.IMob;
 
 /**
  * Living Entity wrapper implementation
@@ -267,12 +263,12 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
         double pitch = -Math.atan2(yDiff, Math.sqrt(Math.pow(xDiff, 2) + Math.pow(zDiff, 2)));
         double rotation = Math.atan2(-xDiff, zDiff);
-        Logman.logInfo("Rotation: " + rotation);
-        Logman.logInfo("Pitch: " + pitch);
+        Canary.logInfo("Rotation: " + rotation);
+        Canary.logInfo("Pitch: " + pitch);
         pitch = Math.toDegrees(pitch);
         rotation = Math.toDegrees(rotation);
-        Logman.logInfo("Rotation2: " + rotation);
-        Logman.logInfo("Pitch2: " + pitch);
+        Canary.logInfo("Rotation2: " + rotation);
+        Canary.logInfo("Pitch2: " + pitch);
 
         setRotation((float) rotation);
         setPitch((float) pitch);
