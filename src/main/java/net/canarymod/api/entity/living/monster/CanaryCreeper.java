@@ -49,4 +49,9 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
         ((EntityCreeper) entity).setCharged(charged);
     }
 
+    @Override
+    public EntityCreeper getHandle() {
+        return (EntityCreeper) entity;
+    }
+
 }

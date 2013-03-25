@@ -37,4 +37,9 @@ public class CanaryGhast extends CanaryEntityMob implements Ghast {
     public boolean canDamageEntities() {
         return damageEntity;
     }
+
+    @Override
+    public EntityGhast getHandle() {
+        return (EntityGhast) entity;
+    }
 }

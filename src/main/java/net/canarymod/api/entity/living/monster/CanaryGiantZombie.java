@@ -14,4 +14,9 @@ public class CanaryGiantZombie extends CanaryEntityMob implements GiantZombie {
     public CanaryGiantZombie(EntityGiantZombie entity) {
         super(entity);
     }
+
+    @Override
+    public EntityGiantZombie getHandle() {
+        return (EntityGiantZombie) entity;
+    }
 }

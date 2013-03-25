@@ -3,6 +3,7 @@ package net.canarymod.api.entity.living.animal;
 
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.entity.living.EntityLiving;
+import net.canarymod.api.entity.living.humanoid.Villager;
 import net.minecraft.server.EntityVillager;
 
 

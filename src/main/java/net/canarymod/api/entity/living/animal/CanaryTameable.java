@@ -5,7 +5,7 @@ import net.canarymod.api.entity.living.EntityLiving;
 import net.minecraft.server.EntityTameable;
 
 
-public class CanaryTameable extends CanaryEntityAnimal implements Tameable {
+public abstract class CanaryTameable extends CanaryEntityAnimal implements Tameable {
 
     public CanaryTameable(EntityTameable entity) {
         super(entity);

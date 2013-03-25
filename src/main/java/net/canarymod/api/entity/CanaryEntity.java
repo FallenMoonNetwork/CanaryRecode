@@ -1,7 +1,6 @@
 package net.canarymod.api.entity;
 
 import java.util.UUID;
-
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
@@ -226,6 +225,13 @@ public abstract class CanaryEntity implements Entity {
     public void moveEntity(double motionX, double motionY, double motionZ) {
         // TODO This is NMS access
 
+    }
+
+    public boolean canSpawn() {
+        if (this.isLiving()) {
+            return ((net.minecraft.server.EntityLiving) entity).bv();
+        }
+        return true;
     }
 
     /**

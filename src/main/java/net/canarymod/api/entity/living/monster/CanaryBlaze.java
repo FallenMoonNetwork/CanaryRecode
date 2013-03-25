@@ -24,4 +24,9 @@ public class CanaryBlaze extends CanaryEntityMob implements Blaze {
     public void setBurning(boolean isBurning) {
         ((EntityBlaze) entity).a(isBurning);
     }
+
+    @Override
+    public EntityBlaze getHandle() {
+        return (EntityBlaze) entity;
+    }
 }

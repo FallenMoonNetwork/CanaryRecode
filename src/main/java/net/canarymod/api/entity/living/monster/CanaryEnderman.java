@@ -39,4 +39,9 @@ public class CanaryEnderman extends CanaryEntityMob implements Enderman {
     public boolean randomTeleport() {
         return ((EntityEnderman) entity).m();
     }
+
+    @Override
+    public EntityEnderman getHandle() {
+        return (EntityEnderman) entity;
+    }
 }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.monster.CanaryEnderman;
 import net.canarymod.hook.entity.EndermanDropBlockHook;
-import net.canarymod.hook.entity.EndermanPickuBlockpHook;
+import net.canarymod.hook.entity.EndermanPickupBlockHook;
 
 public class EntityEnderman extends EntityMob {
 
@@ -104,7 +104,7 @@ public class EntityEnderman extends EntityMob {
                     i3 = this.q.a(i0, i1, i2);
                     if (d[i3]) {
                         // CanaryMod: call EndermanPickupBlockHook
-                        EndermanPickuBlockpHook hook = new EndermanPickuBlockpHook((CanaryEnderman)entity, ((CanaryEnderman)entity).getWorld().getBlockAt(i0, i1, i2));
+                        EndermanPickupBlockHook hook = new EndermanPickupBlockHook((CanaryEnderman) entity, ((CanaryEnderman) entity).getWorld().getBlockAt(i0, i1, i2));
 
                         Canary.hooks().callHook(hook);
                         if (hook.isCanceled()) {

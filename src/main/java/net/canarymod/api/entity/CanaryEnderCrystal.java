@@ -11,38 +11,81 @@ import net.minecraft.server.EntityEnderCrystal;
  */
 public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
 
+    /**
+     * Constructs a new wrapper for EntityEnderCrystal
+     * 
+     * @param entity
+     *            the EntityEnderCrystal to be wrapped
+     */
     public CanaryEnderCrystal(EntityEnderCrystal entity) {
         super(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setCanDamageWorld(boolean canDamage) {// TODO Auto-generated method stub
+    public void setCanDamageWorld(boolean canDamage) {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canDamageWorld() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setCanDamageEntities(boolean canDamage) {// TODO Auto-generated method stub
+    public void setCanDamageEntities(boolean canDamage) {
     }
 
     @Override
     public boolean canDamageEntities() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public int getHealth() {
+        return 0;
+    }
+
+    @Override
+    public void setHealth(int health) {
+    }
+
+
+    @Override
+    public float getPower() {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public void setHealth(int health) {// TODO Auto-generated method stub
+    public void setPower(float power) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void detonate() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean isOneHitDetonate() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public void setOneHitDetonate(boolean oneHit) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
