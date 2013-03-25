@@ -2,6 +2,7 @@ package net.canarymod.api;
 
 
 import java.util.ArrayList;
+
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.WorldType;
@@ -23,9 +24,12 @@ public class CanaryConfigurationManager implements ConfigurationManager {
 
     @Override
     public void sendPacketToAllInWorld(String world, Packet packet) {
-        for (EntityPlayerMP p : manager.b) {
-            if (p.getCanaryWorld().getName().equals(world)) {
-                manager.a(p.getPlayer().getName(), ((CanaryPacket) packet).getPacket());
+        for (Object p : manager.a) {
+            if(!(p instanceof EntityPlayerMP)) {
+                continue;
+            }
+            if (((EntityPlayerMP)p).getCanaryWorld().getName().equals(world)) {
+                manager.a(((EntityPlayerMP)p).getPlayer().getName(), ((CanaryPacket) packet).getPacket());
             }
         }
 
@@ -33,20 +37,23 @@ public class CanaryConfigurationManager implements ConfigurationManager {
 
     @Override
     public int getNumPlayersOnline() {
-        return manager.b.size();
+        return manager.a.size();
     }
 
     @Override
     public Player getPlayerByName(String name) {
-        return manager.i(name).getPlayer();
+        return manager.f(name).getPlayer();
     }
 
     @Override
     public ArrayList<Player> getAllPlayers() {
-        ArrayList<Player> players = new ArrayList<Player>(manager.b.size());
+        ArrayList<Player> players = new ArrayList<Player>(manager.a.size());
 
-        for (EntityPlayerMP omp : manager.b) {
-            players.add(omp.getPlayer());
+        for (Object p : manager.a) {
+            if(!(p instanceof EntityPlayerMP)) {
+                continue;
+            }
+            players.add(((EntityPlayerMP)p).getPlayer());
         }
         return players;
     }

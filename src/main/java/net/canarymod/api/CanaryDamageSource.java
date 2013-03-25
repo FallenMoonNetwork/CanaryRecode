@@ -19,17 +19,17 @@ public class CanaryDamageSource implements DamageSource {
 
     @Override
     public Entity getDamageDealer() {
-        return handle.b().getCanaryEntity();
+        return handle.i().getCanaryEntity();
     }
 
     @Override
     public String getNotchianName() {
-        return handle.n();
+        return handle.o;
     }
-    
+
     @Override
     public String getDeathMessage(Player player) {
-        return handle.a(((CanaryPlayer) player).getHandle());
+        return handle.b(((CanaryPlayer) player).getHandle());
     }
 
     @Override
@@ -39,12 +39,12 @@ public class CanaryDamageSource implements DamageSource {
 
     @Override
     public boolean isFireDamage() {
-        return handle.k();
+        return handle.m();
     }
 
     @Override
     public boolean isProjectile() {
-        return handle.c();
+        return handle.a();
     }
 
     @Override
@@ -59,12 +59,12 @@ public class CanaryDamageSource implements DamageSource {
 
     @Override
     public void setHungerDamage(float value) {
-        handle.p = value;
+        setHungerDamage(value);
     }
 
     @Override
     public void setUnblockable(boolean set) {
-        handle.a = set;
+        setUnblockable(set);
     }
 
     @Override

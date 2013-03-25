@@ -38,7 +38,7 @@ public class CanaryDataWatcher implements DataWatcher {
 
     @Override
     public String getString(int index) {
-        return dataWatcher.d(index);
+        return dataWatcher.e(index);
     }
 
 }

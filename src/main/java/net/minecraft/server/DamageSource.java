@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import net.canarymod.api.CanaryDamageSource;
+
 
 public class DamageSource {
 
@@ -26,6 +28,9 @@ public class DamageSource {
     private boolean v = false;
     private boolean w = false;
     public String o;
+
+    //CanaryMod
+    protected CanaryDamageSource damageSource;
 
     public static DamageSource a(EntityLiving entityliving) {
         return new EntityDamageSource("mob", entityliving);
@@ -91,6 +96,7 @@ public class DamageSource {
 
     protected DamageSource(String s0) {
         this.o = s0;
+        damageSource = new CanaryDamageSource(this);
     }
 
     public Entity h() {
@@ -149,5 +155,32 @@ public class DamageSource {
     public DamageSource r() {
         this.v = true;
         return this;
+    }
+
+    /**
+     * Gets the CanaryMod damagesource wrapper
+     * @return
+     */
+    public CanaryDamageSource getCanaryDamageSource() {
+        return damageSource;
+    }
+
+    /**
+     * Set hunger damage
+     * @param f
+     */
+    public void setHungerDamage(float f) {
+        this.r = f;
+    }
+
+    /**
+     * Set unblockable
+     * @param b
+     */
+    public void setUnblockable(boolean b) {
+        this.p = b;
+        if(b == true) {
+            this.r = 0.0f;
+        }
     }
 }
