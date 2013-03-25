@@ -314,7 +314,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
             double rotation2 = Math.floor((yaw * 256F) / 360F);
             double pitch2 = Math.floor((pitch * 256F) / 360F);
 
-            toSend = new Packet32EntityLook(entity.k, (byte) rotation2, (byte) pitch2);
+            toSend = new Packet32EntityLook(getID(), (byte) rotation2, (byte) pitch2);
             Canary.getServer().getConfigurationManager().sendPacketToAllInWorld(getWorld().getName(), new CanaryPacket(toSend));
         }
     }

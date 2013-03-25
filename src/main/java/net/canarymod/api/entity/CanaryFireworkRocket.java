@@ -11,10 +11,19 @@ import net.minecraft.server.EntityFireworkRocket;
  */
 public class CanaryFireworkRocket extends CanaryEntity implements FireworkRocket {
 
+    /**
+     * Constructs a new wrapper for EntityFireworkRocket
+     * 
+     * @param entity
+     *            the EntityFireworkRocket to be wrapped
+     */
     public CanaryFireworkRocket(EntityFireworkRocket entity) {
         super(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EntityFireworkRocket getHandle() {
         return (EntityFireworkRocket) entity;

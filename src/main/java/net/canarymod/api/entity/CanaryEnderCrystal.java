@@ -10,6 +10,8 @@ import net.minecraft.server.EntityEnderCrystal;
  * @author Jason (darkdiplomat)
  */
 public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
+    private boolean damageWorld, damageEntity, oneHit;
+    private float explode = 6.0F;
 
     /**
      * Constructs a new wrapper for EntityEnderCrystal
@@ -26,6 +28,7 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
      */
     @Override
     public void setCanDamageWorld(boolean canDamage) {
+        damageWorld = canDamage;
     }
 
     /**
@@ -33,7 +36,7 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
      */
     @Override
     public boolean canDamageWorld() {
-        return false;
+        return damageWorld;
     }
 
     /**
@@ -41,53 +44,77 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
      */
     @Override
     public void setCanDamageEntities(boolean canDamage) {
+        damageEntity = canDamage;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canDamageEntities() {
-        return false;
+        return damageEntity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getHealth() {
-        return 0;
+        return getHandle().b;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setHealth(int health) {
+        getHandle().b = health;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public float getPower() {
-        // TODO Auto-generated method stub
-        return 0;
+        return explode;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPower(float power) {
-        // TODO Auto-generated method stub
-
+        explode = power;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void detonate() {
-        // TODO Auto-generated method stub
-
+        this.destroy();
+        getHandle().q.a(getHandle(), this.getX(), this.getY(), this.getZ(), explode, true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isOneHitDetonate() {
-        // TODO Auto-generated method stub
-        return false;
+        return oneHit;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setOneHitDetonate(boolean oneHit) {
-        // TODO Auto-generated method stub
-
+        this.oneHit = oneHit;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EntityEnderCrystal getHandle() {
         return (EntityEnderCrystal) entity;

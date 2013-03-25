@@ -13,40 +13,67 @@ import net.minecraft.server.EntityItemFrame;
  */
 public class CanaryItemFrame extends CanaryHangingEntity implements ItemFrame {
 
+    /**
+     * Constructs a new wrapper for EntityItemFrame
+     * 
+     * @param entity
+     *            the EntityItemFrame to be wrapped
+     */
     public CanaryItemFrame(EntityItemFrame entity) {
         super(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item getItemInFrame() {
         return ((EntityItemFrame) entity).i().getCanaryItem();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setItemInFrame(Item item) {
         ((EntityItemFrame) entity).a(((CanaryItem) item).getHandle());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getItemRotation() {
         return ((EntityItemFrame) entity).j();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setItemRotation(int rot) {
         ((EntityItemFrame) entity).b(rot);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public float getItemDropChance() {
         return ((EntityItemFrame) entity).e;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setItemDropChance(float chance) {
         ((EntityItemFrame) entity).e = chance;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EntityItemFrame getHandle() {
         return (EntityItemFrame) entity;

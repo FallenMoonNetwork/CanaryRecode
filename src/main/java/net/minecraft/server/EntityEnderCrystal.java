@@ -55,11 +55,18 @@ public class EntityEnderCrystal extends Entity {
             return false;
         } else {
             if (!this.M && !this.q.I) {
-                this.b = 0;
+                // CanaryMod: Check if one hit can kill this entity
+                if (((CanaryEnderCrystal) entity).isOneHitDetonate()) {
+                    this.b = 0;
+                }
+                else {
+                    this.b -= i0;
+                }
+                //
                 if (this.b <= 0) {
                     this.w();
                     if (!this.q.I) {
-                        this.q.a((Entity) null, this.u, this.v, this.w, 6.0F, true);
+                        this.q.a(this, this.u, this.v, this.w, ((CanaryEnderCrystal) entity).getPower(), true); // CanaryMod: configure Explosion power and set the entity properly
                     }
                 }
             }

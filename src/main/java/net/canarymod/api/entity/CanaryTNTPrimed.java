@@ -1,53 +1,105 @@
 package net.canarymod.api.entity;
 
 
-import net.minecraft.server.OEntityTNTPrimed;
+import net.minecraft.server.EntityTNTPrimed;
 
 
 /**
- * CanaryTNTPrimed - wrapper for OEntityTNTPrimed
+ * EntityTNTPrimed wrapper implementation
  * 
- * @author Jason Jones
+ * @author Jason (darkdiplomat)
  */
 public class CanaryTNTPrimed extends CanaryEntity implements TNTPrimed {
+    private boolean damageWorld, damageEntity;
+    private float power = 4.0F;
 
-    public CanaryTNTPrimed(OEntityTNTPrimed tntprimed) {
+    /**
+     * Constructs a new wrapper for EntityItemFrame
+     * 
+     * @param entity
+     *            the EntityItemFrame to be wrapped
+     */
+    public CanaryTNTPrimed(EntityTNTPrimed tntprimed) {
         super(tntprimed);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getFuse() {
-        return ((OEntityTNTPrimed) entity).a;
+        return getHandle().a;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFuse(int fuse) {
-        ((OEntityTNTPrimed) entity).a = fuse;
+        getHandle().a = fuse;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void detonate() {
-        ((OEntityTNTPrimed) entity).a = 0;
+        getHandle().a = 0;
     }
 
-    // Jason: Chris, not sure how this will work exactly so I'll leave these bits to you.
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canDamageEntities() {
-        // TODO Auto-generated method stub
-        return false;
+        return damageEntity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canDamageWorld() {
-        // TODO Auto-generated method stub
-        return false;
+        return damageWorld;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setCanDamageEntities(boolean arg0) {// TODO Auto-generated method stub
+    public void setCanDamageEntities(boolean canDamage) {
+        this.damageEntity = canDamage;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setCanDamageWorld(boolean arg0) {// TODO Auto-generated method stub
+    public void setCanDamageWorld(boolean canDamage) {
+        this.damageWorld = canDamage;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public float getPower() {
+        return power;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPower(float power) {
+        this.power = power;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityTNTPrimed getHandle() {
+        return (EntityTNTPrimed) entity;
     }
 }
