@@ -1,13 +1,11 @@
 package net.canarymod.api.entity;
 
-
 import java.util.UUID;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.canarymod.api.world.position.Vector3D;
-
 
 /**
  * Entity Wrapper
@@ -219,11 +217,15 @@ public abstract class CanaryEntity implements Entity {
     }
 
     @Override
-    public void translate(Vector3D factor) {// TODO Auto-generated method stub
+    public void translate(Vector3D factor) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
-    public void moveEntity(double motionX, double motionY, double motionZ) {// TODO Auto-generated method stub
+    public void moveEntity(double motionX, double motionY, double motionZ) {
+        // TODO Auto-generated method stub
+
     }
 
     /**
