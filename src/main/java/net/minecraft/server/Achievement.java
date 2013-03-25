@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class Achievement extends StatBase {
 
     public final int a;

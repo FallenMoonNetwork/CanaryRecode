@@ -1,11 +1,13 @@
 package net.canarymod.api.world.blocks;
 
+
 import net.canarymod.api.inventory.CanaryInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OTileEntityFurnace;
+
 
 public class CanaryFurnace extends CanaryComplexBlock implements Furnace {
 
@@ -26,6 +28,7 @@ public class CanaryFurnace extends CanaryComplexBlock implements Furnace {
     @Override
     public CanaryItem decreaseItemStackSize(int itemId, int amount) {
         OItemStack item = ((OTileEntityFurnace) tileentity).decreaseItemStackSize(itemId, amount);
+
         return item != null ? item.getCanaryItem() : null;
     }
 
@@ -33,6 +36,7 @@ public class CanaryFurnace extends CanaryComplexBlock implements Furnace {
     public CanaryItem[] getContents() {
         OItemStack[] oStacks = ((OTileEntityFurnace) tileentity).getContents();
         CanaryItem[] items = new CanaryItem[oStacks.length];
+
         for (int i = 0; i < oStacks.length; i++) {
             items[i] = new CanaryItem(oStacks[i]);
         }
@@ -68,6 +72,7 @@ public class CanaryFurnace extends CanaryComplexBlock implements Furnace {
     @Override
     public CanaryItem getSlot(int index) {
         OItemStack item = ((OTileEntityFurnace) tileentity).getSlot(index);
+
         return item != null ? item.getCanaryItem() : null;
     }
 
@@ -94,11 +99,11 @@ public class CanaryFurnace extends CanaryComplexBlock implements Furnace {
     @Override
     public void setContents(Item[] items) {
         OItemStack[] oStacks = new OItemStack[items.length];
+
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
                 oStacks[i] = ((CanaryItem) items[i]).getHandle();
-            }
-            else {
+            } else {
                 oStacks[i] = null;
             }
         }

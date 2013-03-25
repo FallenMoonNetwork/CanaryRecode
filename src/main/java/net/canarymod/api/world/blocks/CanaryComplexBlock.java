@@ -1,7 +1,9 @@
 package net.canarymod.api.world.blocks;
 
+
 import net.canarymod.api.world.World;
 import net.minecraft.server.OTileEntity;
+
 
 public class CanaryComplexBlock implements ComplexBlock {
 

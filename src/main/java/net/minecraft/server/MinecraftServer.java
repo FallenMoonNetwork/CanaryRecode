@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.security.KeyPair;
@@ -15,6 +16,7 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.world.CanaryWorldManager;
+
 
 public abstract class MinecraftServer implements ICommandSender, Runnable, IPlayerUsage {
 
@@ -325,15 +327,13 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             }
 
             this.a(crashreport);
-        }
-        finally {
+        } finally {
             try {
                 this.k();
                 this.u = true;
             } catch (Throwable throwable1) {
                 throwable1.printStackTrace();
-            }
-            finally {
+            } finally {
                 this.p();
             }
         }

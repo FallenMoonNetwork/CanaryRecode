@@ -1,5 +1,6 @@
 package net.canarymod;
 
+
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.factory.CanaryFactory;
@@ -15,6 +16,7 @@ import net.canarymod.permissionsystem.PermissionManager;
 import net.canarymod.plugin.PluginLoader;
 import net.canarymod.user.UserAndGroupsProvider;
 import net.canarymod.warp.WarpProvider;
+
 
 /**
  * The implementation of Canary, the new catch-all etc replacement, only much better :P

@@ -1,10 +1,12 @@
 package net.canarymod.api.world.blocks;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.Block;
+
 
 public class CanaryBlock implements Block {
     protected short type;

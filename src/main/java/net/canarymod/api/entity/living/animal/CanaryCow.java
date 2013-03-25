@@ -1,6 +1,8 @@
 package net.canarymod.api.entity.living.animal;
 
+
 import net.minecraft.server.EntityCow;
+
 
 /**
  * Cow Wrap - yummie
@@ -13,4 +15,8 @@ public class CanaryCow extends CanaryEntityAnimal implements Cow {
         super(entity);
     }
 
+    @Override
+    public EntityCow getHandle() {
+        return (EntityCow) entity;
+    }
 }

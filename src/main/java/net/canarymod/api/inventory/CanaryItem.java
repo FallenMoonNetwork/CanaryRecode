@@ -1,29 +1,29 @@
 package net.canarymod.api.inventory;
 
+
 import net.canarymod.api.CanaryEnchantment;
 import net.canarymod.api.Enchantment;
-import net.minecraft.server.OEnchantment;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.ONBTTagCompound;
+import net.minecraft.server.ItemStack;
+
 
 public class CanaryItem implements Item {
 
     private ItemType type;
     private int slot = -1;
-    private OItemStack item;
+    private ItemStack item;
 
-    public CanaryItem(OItemStack oItemStack) {
+    public CanaryItem(ItemStack oItemStack) {
         type = ItemType.fromId(oItemStack.c);
         item = oItemStack;
     }
 
     public CanaryItem(int id, int amount) {
         this.type = ItemType.fromId(id);
-        item = new OItemStack(id, amount, 0);
+        item = new ItemStack(id, amount, 0);
     }
 
     public CanaryItem(int itemId, int amount, int targetSlot) {
-        item = new OItemStack(itemId, amount, 0);
+        item = new ItemStack(itemId, amount, 0);
         slot = targetSlot;
         type = ItemType.fromId(itemId);
     }
@@ -71,9 +71,7 @@ public class CanaryItem implements Item {
     }
 
     @Override
-    public void setMaxAmount(int amount) {
-
-    }
+    public void setMaxAmount(int amount) {}
 
     @Override
     public void setSlot(int slot) {
@@ -94,6 +92,7 @@ public class CanaryItem implements Item {
     public Enchantment getEnchantment(int index) {
         if (this.isEnchanted() && index < item.p().d() && index > -1) {
             ONBTTagCompound tag = (ONBTTagCompound) item.p().a(index);
+
             return new CanaryEnchantment(Enchantment.Type.fromId(tag.e("id")), tag.e("lvl"));
         }
         return null;
@@ -102,10 +101,12 @@ public class CanaryItem implements Item {
     @Override
     public Enchantment[] getEnchantments() {
         CanaryEnchantment[] enchantments = null;
+
         if (this.isEnchanted()) {
             enchantments = new CanaryEnchantment[item.p().d()];
             for (int index = 0; index < item.p().d(); index++) {
                 ONBTTagCompound tag = (ONBTTagCompound) item.p().a(index);
+
                 enchantments[index] = new CanaryEnchantment(Enchantment.Type.fromId(tag.e("id")), tag.e("lvl"));
             }
         }
@@ -116,6 +117,7 @@ public class CanaryItem implements Item {
     public void addEnchantment(Enchantment enchantment) {
         if (enchantment != null && enchantment.getType().getId() >= 0 && enchantment.getType().getId() < OEnchantment.b.length) {
             OEnchantment enchantmentType = OEnchantment.b[enchantment.getType().getId()];
+
             if (enchantmentType != null) {
                 item.a(enchantmentType, enchantment.getLevel());
             }
@@ -144,6 +146,7 @@ public class CanaryItem implements Item {
     @Override
     public void removeEnchantment(Enchantment enchantment) {
         Enchantment[] enchants = getEnchantments();
+
         removeAllEnchantments();
         for (Enchantment ench : enchants) {
             if (!ench.getType().equals(enchantment.getType())) {

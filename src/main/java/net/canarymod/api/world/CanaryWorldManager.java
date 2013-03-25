@@ -1,5 +1,6 @@
 package net.canarymod.api.world;
 
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +11,7 @@ import net.canarymod.Canary;
 import net.canarymod.Logman;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.world.World.GeneratorType;
+
 
 /**
  * This is a container for all of the worlds.
@@ -27,10 +29,12 @@ public class CanaryWorldManager implements WorldManager {
         WorldType.addType("NETHER", -1);
         WorldType.addType("END", 1);
         File worlds = new File("worlds");
+
         if (!worlds.exists()) {
             worlds.mkdirs();
         }
         int worldNum = worlds.listFiles().length;
+
         if (worldNum == 0) {
             worldNum = 1;
         }
@@ -62,19 +66,16 @@ public class CanaryWorldManager implements WorldManager {
         if (worldIsLoaded(world + "_" + type.getName())) {
             // Logman.println("Is loaded, returning world");
             return loadedWorlds.get(world + "_" + type.getName());
-        }
-        else {
+        } else {
             if (worldExists(world + "_" + type.getName())) {
                 Canary.println("World exists but is not loaded. Loading ...");
                 return loadWorld(world, type);
-            }
-            else {
+            } else {
                 if (autoload) {
                     Canary.println("World does not exist, we can autoload, will load!");
                     createWorld(world, type);
                     return loadedWorlds.get(world + "_" + type.getName());
-                }
-                else {
+                } else {
                     Canary.logSevere("Tried to get a non-existing world: " + world + " - you must create it before you can load it or pass autoload = true");
                     return null;
                 }
@@ -108,8 +109,7 @@ public class CanaryWorldManager implements WorldManager {
         if (!worldIsLoaded(name + "_" + type.getName())) {
             ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, new Random().nextLong(), type);
             return loadedWorlds.get(name + "_" + type.getName());
-        }
-        else {
+        } else {
             return loadedWorlds.get(name + "_" + type.getName());
         }
     }
@@ -119,6 +119,7 @@ public class CanaryWorldManager implements WorldManager {
         File file = new File("worlds/" + name);
         File dir = new File("worldsbackups/" + name);
         boolean success = file.renameTo(new File(dir, file.getName()));
+
         if (!success) {
             Logman.logSevere("Attempted to move world " + name + " but it appeared to be still in use! Worlds should get unloaded before they are removed!");
         }

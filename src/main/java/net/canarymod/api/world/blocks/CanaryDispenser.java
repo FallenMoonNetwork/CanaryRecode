@@ -1,5 +1,6 @@
 package net.canarymod.api.world.blocks;
 
+
 import java.util.Random;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.inventory.CanaryInventory;
@@ -21,6 +22,7 @@ import net.minecraft.server.OItemPotion;
 import net.minecraft.server.OItemStack;
 import net.minecraft.server.OTileEntityDispenser;
 
+
 public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Container<Item> {
     private Random random = new Random();
 
@@ -39,10 +41,10 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
 
     public Entity dispenseFromSlot(int slot) {
         OItemStack stack = ((OTileEntityDispenser) tileentity).getSlot(slot);
+
         if (stack != null) {
             return dispense(stack);
-        }
-        else {
+        } else {
             tileentity.k.f(1001, this.getX(), this.getY(), this.getZ(), 0);
         }
         return null;
@@ -52,6 +54,7 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
         int data = tileentity.k.c(this.getX(), this.getY(), this.getZ());
         byte offsetX = 0;
         byte offsetZ = 0;
+
         if (data == 3) {
             offsetX = 1;
         } else if (data == 2) {
@@ -67,59 +70,59 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
         double x = this.getX() + offsetX * 0.6D + 0.5D;
         double y = this.getY() + 0.5D;
         double z = this.getZ() + offsetZ * 0.6D + 0.5D;
+
         if (stack == null) {
             tileentity.k.f(1001, this.getX(), this.getY(), this.getZ(), 0);
-        }
-        else {
+        } else {
             if (stack.c == OItem.k.bP) {
                 OEntityArrow arrow = new OEntityArrow(tileentity.k, x, y, z);
+
                 arrow.a(offsetX, 0.10000000149011612D, offsetZ, 1.1F, 6.0F);
                 arrow.a = true;
                 tileentity.k.b(arrow);
                 tileentity.k.f(1002, this.getX(), this.getY(), this.getZ(), 0);
                 entity = arrow;
-            }
-            else if (stack.c == OItem.aO.bP) {
+            } else if (stack.c == OItem.aO.bP) {
                 OEntityEgg egg = new OEntityEgg(tileentity.k, x, y, z);
+
                 egg.a(offsetX, 0.10000000149011612D, offsetZ, 1.1F, 6.0F);
                 tileentity.k.b(egg);
                 tileentity.k.f(1002, this.getX(), this.getY(), this.getZ(), 0);
                 entity = egg;
-            }
-            else if (stack.c == OItem.aC.bP) {
+            } else if (stack.c == OItem.aC.bP) {
                 OEntitySnowball snowball = new OEntitySnowball(tileentity.k, x, y, z);
+
                 snowball.a(offsetX, 0.10000000149011612D, offsetZ, 1.1F, 6.0F);
                 tileentity.k.b(snowball);
                 tileentity.k.f(1002, this.getX(), this.getY(), this.getZ(), 0);
                 entity = snowball;
-            }
-            else if (stack.c == OItem.br.bP && OItemPotion.c(stack.h())) {
+            } else if (stack.c == OItem.br.bP && OItemPotion.c(stack.h())) {
                 OEntityPotion potion = new OEntityPotion(tileentity.k, x, y, z, stack.h());
+
                 potion.a(offsetX, 0.10000000149011612D, offsetZ, 1.375F, 3.0F);
                 tileentity.k.b(potion);
                 tileentity.k.f(1002, this.getX(), this.getY(), this.getZ(), 0);
                 entity = potion;
-            }
-            else if (stack.c == OItem.bC.bP) {
+            } else if (stack.c == OItem.bC.bP) {
                 OEntityExpBottle expbottle = new OEntityExpBottle(tileentity.k, x, y, z);
+
                 expbottle.a(offsetX, 0.10000000149011612D, offsetZ, 1.375F, 3.0F);
                 tileentity.k.b(expbottle);
                 tileentity.k.f(1002, this.getX(), this.getY(), this.getZ(), 0);
                 entity = expbottle;
-            }
-            else if (stack.c == OItem.bB.bP) {
+            } else if (stack.c == OItem.bB.bP) {
                 OItemMonsterPlacer.a(tileentity.k, stack.h(), x + offsetX * 0.3D, y - 0.3D, z + offsetZ * 0.3D);
                 tileentity.k.f(1002, this.getX(), this.getY(), this.getZ(), 0);
-            }
-            else if (stack.c == OItem.bD.bP) {
+            } else if (stack.c == OItem.bD.bP) {
                 OEntitySmallFireball smallfireball = new OEntitySmallFireball(tileentity.k, x + offsetX * 0.3D, y, z + offsetZ * 0.3D, offsetX + random.nextGaussian() * 0.05D, random.nextGaussian() * 0.05D, offsetZ + random.nextGaussian() * 0.05D);
+
                 tileentity.k.b(smallfireball);
                 tileentity.k.f(1009, this.getX(), this.getY(), this.getZ(), 0);
                 entity = smallfireball;
-            }
-            else {
+            } else {
                 OEntityItem entityitem = new OEntityItem(tileentity.k, x, y - 0.3D, z, stack);
                 double rd = random.nextDouble() * 0.1D + 0.2D;
+
                 entityitem.bp = offsetX * rd;
                 entityitem.bq = 0.20000000298023224D;
                 entityitem.br = offsetZ * rd;
@@ -144,6 +147,7 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
     @Override
     public CanaryItem decreaseItemStackSize(int itemId, int amount) {
         OItemStack item = ((OTileEntityDispenser) tileentity).decreaseItemStackSize(itemId, amount);
+
         return item != null ? item.getCanaryItem() : null;
     }
 
@@ -151,6 +155,7 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
     public CanaryItem[] getContents() {
         OItemStack[] oStacks = ((OTileEntityDispenser) tileentity).getContents();
         CanaryItem[] items = new CanaryItem[oStacks.length];
+
         for (int i = 0; i < oStacks.length; i++) {
             items[i] = new CanaryItem(oStacks[i]);
         }
@@ -186,6 +191,7 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
     @Override
     public Item getSlot(int index) {
         OItemStack item = ((OTileEntityDispenser) tileentity).getSlot(index);
+
         return item != null ? item.getCanaryItem() : null;
     }
 
@@ -212,11 +218,11 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
     @Override
     public void setContents(Item[] items) {
         OItemStack[] oStacks = new OItemStack[items.length];
+
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
                 oStacks[i] = ((CanaryItem) items[i]).getHandle();
-            }
-            else {
+            } else {
                 oStacks[i] = null;
             }
         }

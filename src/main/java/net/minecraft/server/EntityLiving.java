@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,6 +12,7 @@ import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.entity.EntitySpawnHook;
+
 
 public abstract class EntityLiving extends Entity {
 
@@ -96,7 +98,7 @@ public abstract class EntityLiving extends Entity {
     protected double bz;
     float bA = 0.0F;
     protected int bB = 0;
-    protected int bC = 0;
+    public int bC = 0; // CanaryMod: protected => public
     protected float bD;
     protected float bE;
     protected float bF;
@@ -339,6 +341,7 @@ public abstract class EntityLiving extends Entity {
 
                 // CanaryMod - drowning damage.
                 DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.e), 2);
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     for (int i0 = 0; i0 < 8; ++i0) {
@@ -643,6 +646,7 @@ public abstract class EntityLiving extends Entity {
 
                 // CanaryMod: call DamageHook (Entity)
                 CanaryEntityLiving attacker = null;
+
                 if (damagesource instanceof EntityDamageSource && ((EntityDamageSource) damagesource).h() instanceof EntityLiving) {
                     attacker = (CanaryEntityLiving) ((EntityDamageSource) damagesource).h().getCanaryEntity();
                 }
@@ -1397,6 +1401,7 @@ public abstract class EntityLiving extends Entity {
     protected boolean bm() {
         // CanaryMod: call EntitySpawnHook (Despawn)
         EntitySpawnHook hook = new EntitySpawnHook(entity, false);
+
         Canary.hooks().callHook(hook);
         return !hook.isCanceled();
         //

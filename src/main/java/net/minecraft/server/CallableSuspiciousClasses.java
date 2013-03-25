@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.concurrent.Callable;
+
 
 class CallableSuspiciousClasses implements Callable {
 
@@ -41,14 +43,14 @@ class CallableSuspiciousClasses implements Callable {
                         if (s1.length() <= 3 || s1.equals("net.minecraft.client.MinecraftApplet") || s1.equals("net.minecraft.client.Minecraft") || s1.equals("net.minecraft.client.ClientBrandRetriever") || s1.equals("net.minecraft.server.MinecraftServer")) {
                             continue;
                         }
-                    }
-                    else if (s1.startsWith("net.minecraft")) {
+                    } else if (s1.startsWith("net.minecraft")) {
                         continue;
                     }
 
                     // CanaryMod: Keyword correction
                     Package package_ = oclass0.getPackage();
                     String s2 = package_ == null ? "" : package_.getName();
+
                     //
 
                     if (hashmap.containsKey(s2)) {
@@ -68,8 +70,7 @@ class CallableSuspiciousClasses implements Callable {
                         if (i0 > 3) {
                             continue;
                         }
-                    }
-                    else {
+                    } else {
                         hashmap.put(s2, Integer.valueOf(1));
                     }
 
@@ -96,8 +97,7 @@ class CallableSuspiciousClasses implements Callable {
 
         if (flag0) {
             stringbuilder.append("No suspicious classes found.");
-        }
-        else {
+        } else {
             stringbuilder.append("]");
         }
 

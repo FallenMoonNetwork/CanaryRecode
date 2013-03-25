@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
+
 
 public abstract class BlockFluid extends Block {
 
@@ -32,8 +34,7 @@ public abstract class BlockFluid extends Block {
     protected int d(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         if (iblockaccess.g(i0, i1, i2) != this.cO) {
             return -1;
-        }
-        else {
+        } else {
             int i3 = iblockaccess.h(i0, i1, i2);
 
             if (i3 >= 8) {
@@ -113,8 +114,7 @@ public abstract class BlockFluid extends Block {
                         vec3 = vec3.c((double) ((i5 - i0) * i8), (double) ((i1 - i1) * i8), (double) ((i6 - i2) * i8));
                     }
                 }
-            }
-            else if (i7 >= 0) {
+            } else if (i7 >= 0) {
                 i8 = i7 - i3;
                 vec3 = vec3.c((double) ((i5 - i0) * i8), (double) ((i1 - i1) * i8), (double) ((i6 - i2) * i8));
             }
@@ -214,8 +214,7 @@ public abstract class BlockFluid extends Block {
 
                     if (i3 == 0) {
                         world.c(i0, i1, i2, Block.at.cz);
-                    }
-                    else if (i3 <= 4) {
+                    } else if (i3 <= 4) {
                         world.c(i0, i1, i2, Block.A.cz);
                     }
 

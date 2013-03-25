@@ -1,8 +1,14 @@
 package net.canarymod.api.entity;
 
+
 import net.canarymod.api.entity.living.EntityLiving;
 import net.minecraft.server.EntityFireball;
 
+/**
+ * Fireball wrapper implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
 public abstract class CanaryFireball extends CanaryEntity implements Fireball {
 
     public CanaryFireball(EntityFireball entity) {
@@ -11,7 +17,7 @@ public abstract class CanaryFireball extends CanaryEntity implements Fireball {
 
     @Override
     public EntityLiving getOwner() {
-        return ((EntityFireball) entity).a.getCanaryEntityLiving();
+        return (EntityLiving) ((EntityFireball) entity).a.getCanaryEntity();
     }
 
 }

@@ -1,7 +1,10 @@
 package net.canarymod.api.entity.living.animal;
 
+
+import net.canarymod.api.entity.living.EntityLiving;
 import net.minecraft.server.Entity;
 import net.minecraft.server.EntityBat;
+
 
 /**
  * Bat wrapper implementation

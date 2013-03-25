@@ -1,6 +1,8 @@
 package net.canarymod.api;
 
+
 import net.canarymod.api.entity.living.EntityLiving;
+
 
 public class CanaryEnchantment implements Enchantment {
     private Type type;
@@ -44,8 +46,9 @@ public class CanaryEnchantment implements Enchantment {
 
     @Override
     public Enchantment getEnchantment(Type type) { // You know, this seems kind
-                                                   // of pointless actually
+        // of pointless actually
         net.minecraft.server.Enchantment ench = net.minecraft.server.Enchantment.b[type.getId()];
+
         if (ench != null) {
             return new CanaryEnchantment(ench);
         }
@@ -85,6 +88,7 @@ public class CanaryEnchantment implements Enchantment {
     @Override
     public void setType(Type type) {
         net.minecraft.server.Enchantment ench = net.minecraft.server.Enchantment.b[type.getId()];
+
         this.type = type;
         this.handle = ench;
     }
@@ -95,6 +99,7 @@ public class CanaryEnchantment implements Enchantment {
             return;
         }
         net.minecraft.server.Enchantment ench = net.minecraft.server.Enchantment.b[type];
+
         if (ench != null) {
             handle = ench;
         }

@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.living.monster.CanaryCaveSpider;
+
 
 public class EntityCaveSpider extends EntitySpider {
 

@@ -1,5 +1,6 @@
 package net.canarymod.api.entity.potion;
 
+
 public class CanaryPotion implements Potion {
 
     net.minecraft.server.Potion potion;

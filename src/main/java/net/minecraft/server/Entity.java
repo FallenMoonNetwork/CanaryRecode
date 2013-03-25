@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -10,6 +11,7 @@ import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.hook.entity.DamageHook;
+
 
 public abstract class Entity {
 
@@ -278,6 +280,7 @@ public abstract class Entity {
                 if (this.d % 20 == 0) {
                     // CanaryMod: call DamageHook (FireTick)
                     DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.b), 1);
+
                     Canary.hooks().callHook(hook);
 
                     if (!hook.isCanceled()) {
@@ -316,6 +319,7 @@ public abstract class Entity {
         if (!this.ag) {
             // CanaryMod: call DamageHook (Lava)
             DamageHook hook = new DamageHook(null, (CanaryEntityLiving) entity, new CanaryDamageSource(DamageSource.c), 4);
+
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
                 this.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(hook.getDamageSource().getDamagetype())).getHandle(), hook.getDamageDealt());
@@ -682,6 +686,7 @@ public abstract class Entity {
         if (!this.ag) {
             // CanaryMod: call DamageHook (onfire)
             DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.a), i0);
+
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
                 this.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(hook.getDamageSource().getDamagetype())).getHandle(), hook.getDamageDealt());
@@ -1565,5 +1570,9 @@ public abstract class Entity {
 
     public CanaryEntity getCanaryEntity() {
         return entity;
+    }
+
+    public UUID getEntityUUID() {
+        return this.i;
     }
 }

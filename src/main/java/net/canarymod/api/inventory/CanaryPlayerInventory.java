@@ -1,7 +1,9 @@
 package net.canarymod.api.inventory;
 
+
 import net.minecraft.server.OInventoryPlayer;
 import net.minecraft.server.OItemStack;
+
 
 public class CanaryPlayerInventory extends CanaryInventory implements PlayerInventory {
 
@@ -14,9 +16,7 @@ public class CanaryPlayerInventory extends CanaryInventory implements PlayerInve
         return null;
     }
 
-    public void setArmorSlot(Item item) {
-
-    }
+    public void setArmorSlot(Item item) {}
 
     public OItemStack getItemInHand() {
         return ((OInventoryPlayer) container).d();

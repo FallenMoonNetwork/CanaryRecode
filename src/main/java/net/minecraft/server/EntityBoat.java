@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.vehicle.CanaryBoat;
 import net.canarymod.hook.entity.VehicleDamageHook;
+
 
 public class EntityBoat extends Entity {
 
@@ -69,10 +71,12 @@ public class EntityBoat extends Entity {
 
         // CanaryMod: call VehicleDamageHook
         net.canarymod.api.entity.Entity attk = null;
+
         if (damagesource.h() != null) {
             attk = damagesource.h().getCanaryEntity();
         }
         VehicleDamageHook hook = new VehicleDamageHook((CanaryBoat) this.entity, attk, new CanaryDamageSource(damagesource), i0);
+
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return true;

@@ -1,5 +1,6 @@
 package net.canarymod.api;
 
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import net.canarymod.api.world.WorldManager;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.ConsoleCommandHook;
 import net.minecraft.server.MinecraftServer;
+
 
 /**
  * Main entry point of the software
@@ -67,6 +69,7 @@ public class CanaryServer implements Server {
     public String[] getPlayerNameList() {
         ArrayList<Player> players = getPlayerList();
         String[] names = new String[players.size()];
+
         for (int i = 0; i < players.size(); i++) {
             names[i] = players.get(i).getName();
         }
@@ -95,6 +98,7 @@ public class CanaryServer implements Server {
     @Override
     public boolean consoleCommand(String command) {
         ConsoleCommandHook hook = new ConsoleCommandHook(this, command);
+
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return true;
@@ -108,6 +112,7 @@ public class CanaryServer implements Server {
     @Override
     public boolean consoleCommand(String command, Player player) {
         ConsoleCommandHook hook = new ConsoleCommandHook(player, command);
+
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return true;
@@ -137,9 +142,9 @@ public class CanaryServer implements Server {
 
         name = name.toLowerCase();
 
-        for (Player player : server.getCanaryConfigurationManager()
-                .getAllPlayers()) {
+        for (Player player : server.getCanaryConfigurationManager().getAllPlayers()) {
             CanaryPlayer cPlayer = (CanaryPlayer) player;
+
             if (cPlayer.getName().toLowerCase().equals(name)) {
                 // Perfect match found
                 lastPlayer = cPlayer;

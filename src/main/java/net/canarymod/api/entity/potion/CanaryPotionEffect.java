@@ -1,15 +1,15 @@
 package net.canarymod.api.entity.potion;
 
+
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.entity.living.EntityLiving;
-import net.minecraft.server.OEntityLiving;
-import net.minecraft.server.OPotionEffect;
+
 
 public class CanaryPotionEffect implements PotionEffect {
 
-    OPotionEffect effect;
+    net.minecraft.server.PotionEffect effect;
 
-    public CanaryPotionEffect(OPotionEffect effect) {
+    public CanaryPotionEffect(net.minecraft.server.PotionEffect effect) {
         this.effect = effect;
     }
 
@@ -35,11 +35,12 @@ public class CanaryPotionEffect implements PotionEffect {
 
     @Override
     public void performEffect(EntityLiving entity) {
-        OEntityLiving oLiving = (OEntityLiving) ((CanaryEntityLiving) entity).getHandle();
+        net.minecraft.server.EntityLiving oLiving = (net.minecraft.server.EntityLiving) ((CanaryEntityLiving) entity).getHandle();
+
         effect.b(oLiving);
     }
 
-    public OPotionEffect getHandle() {
+    public net.minecraft.server.PotionEffect getHandle() {
         return effect;
     }
 

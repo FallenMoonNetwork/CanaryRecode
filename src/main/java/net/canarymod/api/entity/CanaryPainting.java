@@ -1,42 +1,52 @@
 package net.canarymod.api.entity;
 
-import net.minecraft.server.OEntityPainting;
-import net.minecraft.server.OEnumArt;
 
-public class CanaryPainting extends CanaryEntity implements Painting {
+import net.minecraft.server.EntityPainting;
 
-    public CanaryPainting(OEntityPainting entity) {
+/**
+ * Painting wrapper implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
+public class CanaryPainting extends CanaryHangingEntity implements Painting {
+
+    public CanaryPainting(EntityPainting entity) {
         super(entity);
     }
 
     @Override
     public ArtType getArtType() {
-        return ArtType.values()[((OEntityPainting) entity).e.ordinal()];
+        return ArtType.values()[((EntityPainting) entity).e.ordinal()];
     }
 
     @Override
     public void setArtType(ArtType type) {
-        ((OEntityPainting) entity).e = OEnumArt.values()[type.ordinal()];
+        ((EntityPainting) entity).e = net.minecraft.server.EnumArt.values()[type.ordinal()];
     }
 
     @Override
     public int getSizeX() {
-        return ((OEntityPainting) entity).e.B;
+        return ((EntityPainting) entity).d();
     }
 
     @Override
     public int getSizeY() {
-        return ((OEntityPainting) entity).e.C;
+        return ((EntityPainting) entity).g();
     }
 
     @Override
     public int getOffsetX() {
-        return ((OEntityPainting) entity).e.D;
+        return ((EntityPainting) entity).e.E;
     }
 
     @Override
     public int getOffsetY() {
-        return ((OEntityPainting) entity).e.E;
+        return ((EntityPainting) entity).e.F;
+    }
+
+    @Override
+    public EntityPainting getHandle() {
+        return (EntityPainting) entity;
     }
 
 }

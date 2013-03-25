@@ -1,9 +1,13 @@
 package net.canarymod.api.entity;
 
+
+import java.util.UUID;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
+import net.canarymod.api.world.position.Vector3D;
+
 
 /**
  * Entity Wrapper
@@ -190,6 +194,36 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public Location getLocation() {
         return new Location(getWorld(), getX(), getY(), getZ(), getPitch(), getRotation());
+    }
+
+    @Override
+    public int getID() {
+        return entity.k;
+    }
+
+    @Override
+    public UUID getUUID() {
+        return entity.getEntityUUID();
+    }
+
+    @Override
+    public Vector3D getMotion() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Vector3D getForwardVector() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void translate(Vector3D factor) {// TODO Auto-generated method stub
+    }
+
+    @Override
+    public void moveEntity(double motionX, double motionY, double motionZ) {// TODO Auto-generated method stub
     }
 
     /**

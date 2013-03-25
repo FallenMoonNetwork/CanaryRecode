@@ -1,7 +1,9 @@
 package net.canarymod.api.world.blocks;
 
+
 import net.minecraft.server.OMaterial;
 import net.minecraft.server.OTileEntityNote;
+
 
 public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
 
@@ -13,6 +15,7 @@ public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
     public byte getInstrument() {
         OMaterial material = tileentity.k.d(getX(), getY() - 1, getZ());
         byte instrument = 0;
+
         if (material == OMaterial.e) {
             instrument = 1;
         }

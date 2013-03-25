@@ -1,16 +1,19 @@
 package net.canarymod;
 
+
 import net.canarymod.api.Enchantment;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.serialize.EnchantmentSerializer;
 import net.canarymod.serialize.ItemSerializer;
 import net.minecraft.server.MinecraftServer;
 
+
 public class Main {
 
     private static void initBird() {
         // Initialize the bird
         CanaryMod mod = new CanaryMod();
+
         Canary.setCanary(mod);
         // Add system internal serializers
         Canary.addSerializer(new ItemSerializer(), Item.class);

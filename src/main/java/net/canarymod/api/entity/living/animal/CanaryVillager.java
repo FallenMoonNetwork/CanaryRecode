@@ -1,8 +1,10 @@
 package net.canarymod.api.entity.living.animal;
 
+
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.entity.living.EntityLiving;
 import net.minecraft.server.EntityVillager;
+
 
 public class CanaryVillager extends CanaryEntityAnimal implements Villager {
 

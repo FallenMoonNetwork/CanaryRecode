@@ -1,6 +1,8 @@
 package net.canarymod.api.entity.vehicle;
 
+
 import net.minecraft.server.EntityBoat;
+
 
 public class CanaryBoat extends CanaryVehicle implements Boat {
 

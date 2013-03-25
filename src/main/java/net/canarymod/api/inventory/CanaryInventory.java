@@ -1,8 +1,10 @@
 package net.canarymod.api.inventory;
 
+
 import java.util.ArrayList;
 import net.canarymod.Logman;
 import net.minecraft.server.OItemStack;
+
 
 public class CanaryInventory implements Inventory {
     protected Container<OItemStack> container;
@@ -41,12 +43,14 @@ public class CanaryInventory implements Inventory {
     public Item[] getContents() {
         OItemStack[] oStacks = container.getContents();
         ArrayList<Item> items = new ArrayList<Item>(oStacks.length);
+
         for (int i = 0; i < oStacks.length; i++) {
             if (oStacks[i] != null) {
                 items.add(new CanaryItem(oStacks[i]));
             }
         }
         Item[] itemStacks = new Item[items.size()];
+
         for (int i = 0; i < items.size(); i++) {
             Logman.println("Item ID: " + items.get(i).getId());
             Logman.println("Item Amount: " + items.get(i).getAmount());
@@ -130,6 +134,7 @@ public class CanaryInventory implements Inventory {
     @Override
     public void setSlot(int itemId, int slot) {
         CanaryItem item = new CanaryItem(new OItemStack(itemId, 1, 0));
+
         item.setSlot(slot);
         setSlot(item);
     }
@@ -137,6 +142,7 @@ public class CanaryInventory implements Inventory {
     @Override
     public void setSlot(int slot, int itemId, int amount) {
         CanaryItem item = new CanaryItem(new OItemStack(itemId, amount, 0));
+
         item.setSlot(slot);
         setSlot(item);
     }
@@ -144,6 +150,7 @@ public class CanaryInventory implements Inventory {
     @Override
     public Item getSlot(int slot) {
         OItemStack tmp = container.getSlot(slot);
+
         if (tmp != null) {
             return tmp.getCanaryItem();
         }
@@ -158,6 +165,7 @@ public class CanaryInventory implements Inventory {
     @Override
     public void setContents(Item[] items) {
         OItemStack[] oStacks = new OItemStack[items.length];
+
         for (int i = 0; i < items.length; i++) {
             oStacks[i] = ((CanaryItem) items[i]).getHandle();
         }
@@ -188,6 +196,7 @@ public class CanaryInventory implements Inventory {
     @Override
     public Item decreaseItemStackSize(int itemId, int amount) {
         OItemStack oStack = container.decreaseItemStackSize(itemId, amount);
+
         return new CanaryItem(oStack);
     }
 

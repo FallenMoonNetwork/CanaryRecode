@@ -1,6 +1,8 @@
 package net.canarymod.api.world;
 
+
 import net.minecraft.server.OChunk;
+
 
 public class CanaryChunk implements Chunk {
     private OChunk handle;
@@ -67,6 +69,7 @@ public class CanaryChunk implements Chunk {
     public BiomeType[] getBiomeData() {
         byte[] data = handle.l();
         BiomeType[] typedata = new BiomeType[256];
+
         for (int index = 0; index < 256; index++) {
             if (data[index] < 0 || data[index] > 22) {
                 typedata[index] = BiomeType.OCEAN;
@@ -83,6 +86,7 @@ public class CanaryChunk implements Chunk {
             return;
         }
         byte[] data = new byte[256];
+
         for (int index = 0; index < 256; index++) {
             if (type[index] == null) {
                 data[index] = (byte) 0;

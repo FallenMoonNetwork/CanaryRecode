@@ -1,7 +1,14 @@
 package net.canarymod.api.entity.living.monster;
 
+
 import net.minecraft.server.EntityEnderman;
 
+
+/**
+ * Enderman wrapper implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
 public class CanaryEnderman extends CanaryEntityMob implements Enderman {
 
     public CanaryEnderman(EntityEnderman entity) {
@@ -10,30 +17,26 @@ public class CanaryEnderman extends CanaryEntityMob implements Enderman {
 
     @Override
     public short getCarriedBlockID() {
-        // TODO Auto-generated method stub
-        return 0;
+        return (short) ((EntityEnderman) entity).o();
     }
 
     @Override
     public void setCarriedBlockID(short blockId) {
-        // TODO Auto-generated method stub
-
+        ((EntityEnderman) entity).a(blockId);
     }
 
     @Override
     public short getCarriedBlockMetaData() {
-        // TODO Auto-generated method stub
-        return 0;
+        return (short) ((EntityEnderman) entity).p();
     }
 
     @Override
     public void setCarriedBlockMetaData(short metadata) {
-        // TODO Auto-generated method stub
-
+        ((EntityEnderman) entity).s(metadata);
     }
 
     @Override
     public boolean randomTeleport() {
-        return ((EntityEnderman) entity).x();
+        return ((EntityEnderman) entity).m();
     }
 }

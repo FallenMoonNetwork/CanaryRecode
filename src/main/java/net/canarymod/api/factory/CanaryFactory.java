@@ -1,5 +1,6 @@
 package net.canarymod.api.factory;
 
+
 public class CanaryFactory implements Factory {
 
     ItemFactory items = new CanaryItemFactory();

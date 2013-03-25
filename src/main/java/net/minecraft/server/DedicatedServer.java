@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -9,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
+
 
 public class DedicatedServer extends MinecraftServer implements IServer {
 
@@ -42,8 +44,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.o = new PropertyManager(new File("server.properties"), this.al());
         if (this.I()) {
             this.d("127.0.0.1");
-        }
-        else {
+        } else {
             this.d(this.o.a("online-mode", true));
             this.d(this.o.a("server-ip", ""));
         }
@@ -56,8 +57,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.o(this.o.a("motd", "A Minecraft Server"));
         if (this.o.a("difficulty", 1) < 0) {
             this.o.a("difficulty", Integer.valueOf(0));
-        }
-        else if (this.o.a("difficulty", 1) > 3) {
+        } else if (this.o.a("difficulty", 1) > 3) {
             this.o.a("difficulty", Integer.valueOf(3));
         }
 
@@ -292,17 +292,13 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {
         if (world.t.h != 0) {
             return false;
-        }
-        else if (this.an().i().isEmpty()) {
+        } else if (this.an().i().isEmpty()) {
             return false;
-        }
-        else if (this.an().e(entityplayer.bS)) {
+        } else if (this.an().e(entityplayer.bS)) {
             return false;
-        }
-        else if (this.ak() <= 0) {
+        } else if (this.ak() <= 0) {
             return false;
-        }
-        else {
+        } else {
             ChunkCoordinates chunkcoordinates = world.I();
             int i3 = MathHelper.a(i0 - chunkcoordinates.a);
             int i4 = MathHelper.a(i2 - chunkcoordinates.c);
@@ -320,8 +316,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         return this.an();
     }
 
-    public void reload() {
-        /* WorldConfiguration defWorld = Configuration.getWorldConfig(Configuration.getServerConfig().getDefaultWorldName());
+    public void reload() {/* WorldConfiguration defWorld = Configuration.getWorldConfig(Configuration.getServerConfig().getDefaultWorldName());
          * // this.d = new OPropertyManager(new File("server.properties"));
          * this.y = Configuration.getNetConfig().getBindIp();
          * this.n = Configuration.getNetConfig().isOnlineMode();
@@ -334,6 +329,5 @@ public class DedicatedServer extends MinecraftServer implements IServer {
          * this.t = defWorld.getMaxBuildHeight();
          * this.t = (this.t + 8) / 16 * 16;
          * this.t = OMathHelper.a(this.t, 64, 256);
-         * // TODO Update worlds (??) */
-    }
+         * // TODO Update worlds (??) */}
 }

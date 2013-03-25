@@ -1,9 +1,11 @@
 package net.canarymod.api.entity.vehicle;
 
+
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.EntityMinecart;
 import net.minecraft.server.ItemStack;
+
 
 public class CanaryMinecart extends CanaryVehicle implements Minecart {
 
@@ -15,6 +17,7 @@ public class CanaryMinecart extends CanaryVehicle implements Minecart {
     public Item[] getContents() {
         ItemStack[] contents = ((EntityMinecart) entity).getContents();
         Item[] canaryItems = new CanaryItem[contents.length];
+
         for (int i = 0; i < contents.length; i++) {
             canaryItems[i] = contents[i].getCanaryItem();
         }
@@ -24,6 +27,7 @@ public class CanaryMinecart extends CanaryVehicle implements Minecart {
     @Override
     public void setContents(Item[] items) {
         ItemStack[] values = new ItemStack[getInventorySize()];
+
         clearContents();
         for (int i = 0; i < items.length; i++) {
             values[i] = ((CanaryItem) items[i]).getHandle();

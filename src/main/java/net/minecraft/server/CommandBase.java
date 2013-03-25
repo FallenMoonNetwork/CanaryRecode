@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
 
 public abstract class CommandBase implements ICommand {
 
@@ -48,11 +50,9 @@ public abstract class CommandBase implements ICommand {
 
         if (i2 < i0) {
             throw new NumberInvalidException("commands.generic.num.tooSmall", new Object[] { Integer.valueOf(i2), Integer.valueOf(i0) });
-        }
-        else if (i2 > i1) {
+        } else if (i2 > i1) {
             throw new NumberInvalidException("commands.generic.num.tooBig", new Object[] { Integer.valueOf(i2), Integer.valueOf(i1) });
-        }
-        else {
+        } else {
             return i2;
         }
     }
@@ -68,8 +68,7 @@ public abstract class CommandBase implements ICommand {
     public static EntityPlayerMP c(ICommandSender icommandsender) {
         if (icommandsender instanceof EntityPlayerMP) {
             return (EntityPlayerMP) icommandsender;
-        }
-        else {
+        } else {
             throw new PlayerNotFoundException("You must specify which player you wish to perform this action on.", new Object[0]);
         }
     }
@@ -79,13 +78,11 @@ public abstract class CommandBase implements ICommand {
 
         if (entityplayermp != null) {
             return entityplayermp;
-        }
-        else {
+        } else {
             entityplayermp = MinecraftServer.D().ad().f(s0);
             if (entityplayermp == null) {
                 throw new PlayerNotFoundException();
-            }
-            else {
+            } else {
                 return entityplayermp;
             }
         }
@@ -96,11 +93,9 @@ public abstract class CommandBase implements ICommand {
 
         if (entityplayermp != null) {
             return entityplayermp.am();
-        }
-        else if (PlayerSelector.b(s0)) {
+        } else if (PlayerSelector.b(s0)) {
             throw new PlayerNotFoundException();
-        }
-        else {
+        } else {
             return s0;
         }
     }
@@ -124,8 +119,7 @@ public abstract class CommandBase implements ICommand {
 
                 if (s1 != null) {
                     s0 = s1;
-                }
-                else if (PlayerSelector.b(s0)) {
+                } else if (PlayerSelector.b(s0)) {
                     throw new PlayerNotFoundException();
                 }
             }
@@ -145,8 +139,7 @@ public abstract class CommandBase implements ICommand {
             if (i0 > 0) {
                 if (i0 == aobject.length - 1) {
                     stringbuilder.append(" and ");
-                }
-                else {
+                } else {
                     stringbuilder.append(", ");
                 }
             }

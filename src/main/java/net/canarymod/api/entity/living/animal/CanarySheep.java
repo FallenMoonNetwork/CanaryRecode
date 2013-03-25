@@ -1,6 +1,8 @@
 package net.canarymod.api.entity.living.animal;
 
+
 import net.minecraft.server.EntitySheep;
+
 
 public class CanarySheep extends CanaryEntityAnimal implements Sheep {
 

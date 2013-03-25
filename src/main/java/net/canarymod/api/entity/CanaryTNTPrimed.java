@@ -1,6 +1,8 @@
 package net.canarymod.api.entity;
 
+
 import net.minecraft.server.OEntityTNTPrimed;
+
 
 /**
  * CanaryTNTPrimed - wrapper for OEntityTNTPrimed
@@ -42,14 +44,10 @@ public class CanaryTNTPrimed extends CanaryEntity implements TNTPrimed {
     }
 
     @Override
-    public void setCanDamageEntities(boolean arg0) {
-        // TODO Auto-generated method stub
-
+    public void setCanDamageEntities(boolean arg0) {// TODO Auto-generated method stub
     }
 
     @Override
-    public void setCanDamageWorld(boolean arg0) {
-        // TODO Auto-generated method stub
-
+    public void setCanDamageWorld(boolean arg0) {// TODO Auto-generated method stub
     }
 }

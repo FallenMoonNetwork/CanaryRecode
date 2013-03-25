@@ -1,6 +1,8 @@
 package net.canarymod.api.entity.living.monster;
 
+
 import net.minecraft.server.EntityPigZombie;
+
 
 public class CanaryPigZombie extends CanaryZombie implements PigZombie {
 

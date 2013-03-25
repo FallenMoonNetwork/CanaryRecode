@@ -1,13 +1,13 @@
 package net.canarymod.api.entity.living.animal;
 
-import net.canarymod.api.entity.CanaryEntity;
+
 import net.canarymod.api.entity.living.CanaryEntityLiving;
-import net.canarymod.api.entity.living.EntityLiving;
 import net.minecraft.server.EntityAgeable;
 import net.minecraft.server.EntitySquid;
 
+
 /**
- * basic animal entity wrapper class
+ * Animal wrapper implementation
  * 
  * @author Jason (darkdiplomat)
  */
@@ -39,24 +39,14 @@ public abstract class CanaryEntityAnimal extends CanaryEntityLiving implements E
 
     @Override
     public int getGrowingAge() { // Squid has no age
-        return entity instanceof net.minecraft.server.EntitySquid ? 0 : ((net.minecraft.server.EntityAgeable) entity).K();
+        return entity instanceof net.minecraft.server.EntitySquid ? 0 : ((net.minecraft.server.EntityAgeable) entity).b();
     }
 
     @Override
     public void setGrowingAge(int age) {
-        if (entity instanceof EntitySquid)
-            return; // Squid has no age
-        ((EntityAgeable) entity).c(age);
+        if (entity instanceof EntitySquid) {
+            return;
+        } // Squid has no age
+        ((EntityAgeable) entity).a(age);
     }
-
-    @Override
-    public EntityLiving getTarget() {
-        return new CanaryEntityLiving(((net.minecraft.server.EntityLiving) entity).at());
-    }
-
-    @Override
-    public void setTarget(EntityLiving entityliving) {
-        ((EntityLiving) entity).b((EntityLiving) ((CanaryEntity) entityliving).entity);
-    }
-
 }

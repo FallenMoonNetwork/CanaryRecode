@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
+
 
 public class BlockStairs extends Block {
 
@@ -25,8 +27,7 @@ public class BlockStairs extends Block {
     public void a(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         if (this.d) {
             this.a(0.5F * (float) (this.e % 2), 0.5F * (float) (this.e / 2 % 2), 0.5F * (float) (this.e / 4 % 2), 0.5F + 0.5F * (float) (this.e % 2), 0.5F + 0.5F * (float) (this.e / 2 % 2), 0.5F + 0.5F * (float) (this.e / 4 % 2));
-        }
-        else {
+        } else {
             this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         }
     }
@@ -48,8 +49,7 @@ public class BlockStairs extends Block {
 
         if ((i3 & 4) != 0) {
             this.a(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
-        }
-        else {
+        } else {
             this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
         }
     }
@@ -94,14 +94,12 @@ public class BlockStairs extends Block {
                 if (i7 == 3 && !this.f(iblockaccess, i0, i1, i2 + 1, i3)) {
                     f5 = 0.5F;
                     flag0 = false;
-                }
-                else if (i7 == 2 && !this.f(iblockaccess, i0, i1, i2 - 1, i3)) {
+                } else if (i7 == 2 && !this.f(iblockaccess, i0, i1, i2 - 1, i3)) {
                     f4 = 0.5F;
                     flag0 = false;
                 }
             }
-        }
-        else if (i4 == 1) {
+        } else if (i4 == 1) {
             f3 = 0.5F;
             f5 = 1.0F;
             i5 = iblockaccess.a(i0 - 1, i1, i2);
@@ -111,14 +109,12 @@ public class BlockStairs extends Block {
                 if (i7 == 3 && !this.f(iblockaccess, i0, i1, i2 + 1, i3)) {
                     f5 = 0.5F;
                     flag0 = false;
-                }
-                else if (i7 == 2 && !this.f(iblockaccess, i0, i1, i2 - 1, i3)) {
+                } else if (i7 == 2 && !this.f(iblockaccess, i0, i1, i2 - 1, i3)) {
                     f4 = 0.5F;
                     flag0 = false;
                 }
             }
-        }
-        else if (i4 == 2) {
+        } else if (i4 == 2) {
             f4 = 0.5F;
             f5 = 1.0F;
             i5 = iblockaccess.a(i0, i1, i2 + 1);
@@ -128,14 +124,12 @@ public class BlockStairs extends Block {
                 if (i7 == 1 && !this.f(iblockaccess, i0 + 1, i1, i2, i3)) {
                     f3 = 0.5F;
                     flag0 = false;
-                }
-                else if (i7 == 0 && !this.f(iblockaccess, i0 - 1, i1, i2, i3)) {
+                } else if (i7 == 0 && !this.f(iblockaccess, i0 - 1, i1, i2, i3)) {
                     f2 = 0.5F;
                     flag0 = false;
                 }
             }
-        }
-        else if (i4 == 3) {
+        } else if (i4 == 3) {
             i5 = iblockaccess.a(i0, i1, i2 - 1);
             i6 = iblockaccess.h(i0, i1, i2 - 1);
             if (d(i5) && (i3 & 4) == (i6 & 4)) {
@@ -143,8 +137,7 @@ public class BlockStairs extends Block {
                 if (i7 == 1 && !this.f(iblockaccess, i0 + 1, i1, i2, i3)) {
                     f3 = 0.5F;
                     flag0 = false;
-                }
-                else if (i7 == 0 && !this.f(iblockaccess, i0 - 1, i1, i2, i3)) {
+                } else if (i7 == 0 && !this.f(iblockaccess, i0 - 1, i1, i2, i3)) {
                     f2 = 0.5F;
                     flag0 = false;
                 }
@@ -184,15 +177,13 @@ public class BlockStairs extends Block {
                     f4 = 0.0F;
                     f5 = 0.5F;
                     flag0 = true;
-                }
-                else if (i7 == 2 && !this.f(iblockaccess, i0, i1, i2 + 1, i3)) {
+                } else if (i7 == 2 && !this.f(iblockaccess, i0, i1, i2 + 1, i3)) {
                     f4 = 0.5F;
                     f5 = 1.0F;
                     flag0 = true;
                 }
             }
-        }
-        else if (i4 == 1) {
+        } else if (i4 == 1) {
             i5 = iblockaccess.a(i0 + 1, i1, i2);
             i6 = iblockaccess.h(i0 + 1, i1, i2);
             if (d(i5) && (i3 & 4) == (i6 & 4)) {
@@ -203,15 +194,13 @@ public class BlockStairs extends Block {
                     f4 = 0.0F;
                     f5 = 0.5F;
                     flag0 = true;
-                }
-                else if (i7 == 2 && !this.f(iblockaccess, i0, i1, i2 + 1, i3)) {
+                } else if (i7 == 2 && !this.f(iblockaccess, i0, i1, i2 + 1, i3)) {
                     f4 = 0.5F;
                     f5 = 1.0F;
                     flag0 = true;
                 }
             }
-        }
-        else if (i4 == 2) {
+        } else if (i4 == 2) {
             i5 = iblockaccess.a(i0, i1, i2 - 1);
             i6 = iblockaccess.h(i0, i1, i2 - 1);
             if (d(i5) && (i3 & 4) == (i6 & 4)) {
@@ -220,23 +209,20 @@ public class BlockStairs extends Block {
                 i7 = i6 & 3;
                 if (i7 == 1 && !this.f(iblockaccess, i0 - 1, i1, i2, i3)) {
                     flag0 = true;
-                }
-                else if (i7 == 0 && !this.f(iblockaccess, i0 + 1, i1, i2, i3)) {
+                } else if (i7 == 0 && !this.f(iblockaccess, i0 + 1, i1, i2, i3)) {
                     f2 = 0.5F;
                     f3 = 1.0F;
                     flag0 = true;
                 }
             }
-        }
-        else if (i4 == 3) {
+        } else if (i4 == 3) {
             i5 = iblockaccess.a(i0, i1, i2 + 1);
             i6 = iblockaccess.h(i0, i1, i2 + 1);
             if (d(i5) && (i3 & 4) == (i6 & 4)) {
                 i7 = i6 & 3;
                 if (i7 == 1 && !this.f(iblockaccess, i0 - 1, i1, i2, i3)) {
                     flag0 = true;
-                }
-                else if (i7 == 0 && !this.f(iblockaccess, i0 + 1, i1, i2, i3)) {
+                } else if (i7 == 0 && !this.f(iblockaccess, i0 + 1, i1, i2, i3)) {
                     f2 = 0.5F;
                     f3 = 1.0F;
                     flag0 = true;

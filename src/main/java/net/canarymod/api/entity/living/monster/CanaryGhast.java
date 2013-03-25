@@ -1,7 +1,14 @@
 package net.canarymod.api.entity.living.monster;
 
+
 import net.minecraft.server.EntityGhast;
 
+
+/**
+ * Ghast wrapper implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
 public class CanaryGhast extends CanaryEntityMob implements Ghast {
 
     private boolean damageWorld = true;

@@ -1,5 +1,6 @@
 package net.canarymod.api.entity;
 
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,6 +31,7 @@ import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
 import net.canarymod.warp.Warp;
 
+
 /**
  * Canary Player wrapper.
  * 
@@ -46,6 +48,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public CanaryPlayer(OEntityPlayerMP entity) {
         super(entity);
         String[] data = Canary.usersAndGroups().getPlayerData(getName());
+
         group = Canary.usersAndGroups().getGroup(data[1]);
         permissions = Canary.permissionManager().getPlayerProvider(getName());
         if (data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
@@ -88,24 +91,24 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
         if (message.startsWith("/")) {
             executeCommand(message.split(" "));
-        }
-        else {
+        } else {
             if (isMuted()) {
                 notice("You are currently muted!");
-            }
-            else {
+            } else {
                 String prefix = "<" + getColor() + getName() + Colors.WHITE + "> ";
 
                 // This is a copy of the real player list already, no need to copy again (re: Collections.copy())
                 ArrayList<Player> receivers = Canary.getServer().getPlayerList();
 
                 ChatHook hook = new ChatHook(this, prefix, message, receivers);
+
                 Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
                     return;
                 }
                 receivers = hook.getReceiverList();
                 String toSend = hook.getPrefix() + hook.getMessage();
+
                 for (Player player : receivers) {
                     if (hook.getPrefix().length() + hook.getMessage().length() >= 100) {
                         player.sendMessage(hook.getPrefix());
@@ -174,8 +177,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setExperience(int xp) {
-        if (xp < 0)
+        if (xp < 0) {
             return;
+        }
         ((OEntityPlayerMP) entity).setXP(xp);
     }
 
@@ -197,6 +201,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void destroyItemHeld() {
         OEntityPlayerMP player = (OEntityPlayerMP) entity;
+
         if (player.k.d() != null) {
             player.k.d().getCanaryItem().setId(0);
         }
@@ -205,6 +210,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public Item getItemHeld() {
         OItemStack item = ((CanaryPlayerInventory) getInventory()).getItemInHand();
+
         if (item != null) {
             return item.getCanaryItem();
         }
@@ -220,6 +226,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public Location getSpawnPosition() {
         Location spawn = Canary.getServer().getDefaultWorld().getSpawnLocation();
         OChunkCoordinates loc = ((OEntityPlayerMP) entity).ab();
+
         if (loc != null) {
             spawn = new Location(Canary.getServer().getDefaultWorld(), loc.a, loc.b, loc.c, 0.0F, 0.0F);
         }
@@ -229,6 +236,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public Location getHome() {
         Warp home = Canary.warps().getHome(this);
+
         if (home != null) {
             return home.getLocation();
         }
@@ -243,6 +251,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public boolean hasHome() {
         Warp home = Canary.warps().getHome(this);
+
         if (home != null) {
             return true;
         }
@@ -252,12 +261,14 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void setSpawnPosition(Location spawn) {
         OChunkCoordinates loc = new OChunkCoordinates((int) spawn.getX(), (int) spawn.getY(), (int) spawn.getZ());
+
         ((OEntityPlayerMP) entity).a(loc);
     }
 
     @Override
     public String getIP() {
         String ip = ((OEntityPlayerMP) entity).a.b.c().toString();
+
         return ip.substring(1, ip.lastIndexOf(":"));
     }
 
@@ -269,22 +280,24 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             }
 
             String commandName = command[0];
+
             // It's a vanilla command, forward it to the server
             if (commandName.startsWith("/#") && (hasPermission("canary.commands.vanilla." + commandName.replace("/#", "")) || hasPermission("canary.vanilla.op"))) {
                 return Canary.getServer().consoleCommand(Canary.glueString(command, 0, " ").replace("/#", ""), this);
             }
             commandName = commandName.replace("/", "");
             PlayerCommandHook hook = new PlayerCommandHook(this, command);
+
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return true;
             } // someone wants us not to execute the command. So lets do them the favor
 
             CanaryCommand com = Canary.commands().getCommand(commandName);
+
             if (com != null) {
                 return com.parseCommand(this, command);
-            }
-            else {
+            } else {
                 if (Configuration.getServerConfig().getShowUnkownCommand()) {
                     notice("Unknown command");
                 }
@@ -414,8 +427,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public boolean isInGroup(Group group, boolean parents) {
         if (this.group.getName().equals(group.getName())) {
             return true;
-        }
-        else {
+        } else {
             if (parents) {
                 return this.group.parentsToList().contains(group);
             }
@@ -455,6 +467,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void teleportTo(double x, double y, double z, float pitch, float rotation) {
         OEntityPlayerMP player = (OEntityPlayerMP) entity;
+
         // If player is in vehicle - eject them before they are teleported.
         if (player.bh != null) {
             player.b(player.bh);
@@ -487,11 +500,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public String getColor() {
         if (prefix != null) {
             return Colors.MARKER + prefix;
-        }
-        else if (group.getPrefix() != null) {
+        } else if (group.getPrefix() != null) {
             return Colors.MARKER + group.getPrefix();
-        }
-        else {
+        } else {
             return Colors.WHITE;
         }
     }
@@ -515,13 +526,13 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public boolean isInGroup(String group, boolean parents) {
         if (parents) {
             ArrayList<Group> groups = this.group.parentsToList();
+
             for (Group g : groups) {
                 if (g.getName().equals(group)) {
                     return true;
                 }
             }
-        }
-        else {
+        } else {
             if (this.group.getName().equals(group)) {
                 return true;
             }
@@ -568,6 +579,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public void switchWorlds(World dim) {
         OMinecraftServer mcServer = ((CanaryServer) Canary.getServer()).getHandle();
         OEntityPlayerMP ent = (OEntityPlayerMP) entity;
+
         // Do not check for worlds. let plugins handle restrictions!
         // // Nether is not allowed, so shush
         // if (dim.getType().equals(WorldType.fromName("NETHER")) && !mcServer.d.a("allow-nether", true)) {
@@ -588,6 +600,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         // switch world if needed
         if (!(dim.getName().equals(ent.bi.getCanaryWorld().getName()))) {
             World oldWorld = ent.bi.getCanaryWorld();
+
             // remove player from entity tracker
             oldWorld.getEntityTracker().untrackPlayerSymmetrics(ent.getPlayer());
             oldWorld.getEntityTracker().untrackEntity(ent.getPlayer());
@@ -619,6 +632,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public EntityItem[] dropInventory() {
         Item[] items = getInventory().getContents();
         EntityItem[] drops = new EntityItem[items.length];
+
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
                 continue;
@@ -650,6 +664,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         // Adjust mode, make it null if number is invalid
         mode = OWorldSettings.a(mode);
         OEntityPlayerMP ent = ((OEntityPlayerMP) entity);
+
         if (ent.c.a() != mode) {
             ent.c.a(mode);
             ent.a.b((OPacket) (new OPacket70Bed(3, mode)));

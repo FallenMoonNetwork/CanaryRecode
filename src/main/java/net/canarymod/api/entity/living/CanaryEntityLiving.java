@@ -1,9 +1,9 @@
 package net.canarymod.api.entity.living;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.CanaryPacket;
@@ -21,6 +21,13 @@ import net.canarymod.api.entity.potion.PotionType;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
+import net.minecraft.server.EntityList;
+import net.minecraft.server.EntityPlayerMP;
+import net.minecraft.server.IAnimals;
+import net.minecraft.server.IMob;
+import net.minecraft.server.Packet12PlayerLook;
+import net.minecraft.server.Packet32EntityLook;
+
 
 /**
  * Living Entity wrapper implementation
@@ -41,9 +48,30 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     @Override
     public void dealDamage(DamageType damagetype, int amount) {
         DamageSource theSource = CanaryDamageSource.getDamageSourceFromType(damagetype);
+
         if (theSource != null) {
             ((net.minecraft.server.EntityLiving) entity).a(((CanaryDamageSource) theSource).getHandle(), amount);
         }
+    }
+
+    @Override
+    public int getHealth() {
+        return ((net.minecraft.server.EntityLiving) entity).aX();
+    }
+
+    @Override
+    public int getMaxHealth() {
+        return ((net.minecraft.server.EntityLiving) entity).aW();
+    }
+
+    @Override
+    public void setHealth(int newHealth) {
+        ((net.minecraft.server.EntityLiving) entity).b(newHealth);
+    }
+
+    @Override
+    public void increaseHealth(int increase) {
+        ((net.minecraft.server.EntityLiving) entity).j(increase);
     }
 
     @Override
@@ -52,8 +80,13 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
+    public void setAge(int age) {
+        ((net.minecraft.server.EntityLiving) entity).bC = age;
+    }
+
+    @Override
     public boolean isAnimal() {
-        return entity instanceof IAnimals && !(entity instanceof IMob);
+        return this.entity instanceof IAnimals && !(entity instanceof IMob);
     }
 
     @Override
@@ -91,42 +124,8 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public int getDeathTicks() {
-        return ((net.minecraft.server.EntityLiving) entity).aZ;
-    }
-
-    @Override
-    public int getHealth() {
-        return ((net.minecraft.server.EntityLiving) entity).aX();
-    }
-
-    @Override
-    public Location getHome() {
-        if (hasHome()) {
-            net.minecraft.server.ChunkCoordinates home = ((net.minecraft.server.EntityLiving) entity).aM();
-            return new Location(home.a, home.b, home.c);
-        }
-        return null;
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return ((net.minecraft.server.EntityLiving) entity).aW();
-    }
-
-    @Override
     public String getName() {
         return EntityList.b(entity);
-    }
-
-    @Override
-    public boolean hasHome() {
-        return ((net.minecraft.server.EntityLiving) entity).aP();
-    }
-
-    @Override
-    public void increaseHealth(int increase) {
-        ((net.minecraft.server.EntityLiving) entity).j(increase);
     }
 
     @Override
@@ -146,32 +145,32 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @Override
     public void moveEntity(double x, double y, double z) {
-        entity.a(x, y, z);
+        entity.d(x, y, z);
     }
 
     @Override
     public void playLivingSound() {
-        ((OEntityLiving) entity).az();
+        ((net.minecraft.server.EntityLiving) entity).aR();
+    }
+
+    @Override
+    public boolean hasHome() {
+        return ((net.minecraft.server.EntityLiving) entity).aP();
+    }
+
+    @Override
+    public Location getHome() {
+        if (hasHome()) {
+            net.minecraft.server.ChunkCoordinates home = ((net.minecraft.server.EntityLiving) entity).aM();
+
+            return new Location(home.a, home.b, home.c);
+        }
+        return null;
     }
 
     @Override
     public void removeHome() {
-        ((OEntityLiving) entity).ax();
-    }
-
-    @Override
-    public void setAge(int age) {
-        ((OEntityLiving) entity).aV = age;
-    }
-
-    @Override
-    public void setDeathTicks(int ticks) {
-        ((OEntityLiving) entity).av = ticks;
-    }
-
-    @Override
-    public void setHealth(int newHealth) {
-        ((OEntityLiving) entity).h(newHealth);
+        ((net.minecraft.server.EntityLiving) entity).aO();
     }
 
     @Override
@@ -182,14 +181,14 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     @Override
     public void setHomeArea(Position vector, int dist) {
         if (vector == null) {
-            throw new IllegalArgumentException("Could not set EntityLivings home. Location was null!");
+            throw new IllegalArgumentException("Could not set EntityLiving's home. Location was null!");
         }
         setHomeArea((int) Math.floor(vector.getX()), (int) Math.floor(vector.getY()), (int) Math.floor(vector.getZ()), dist);
     }
 
     @Override
     public void setHomeArea(int x, int y, int z, int dist) {
-        ((OEntityLiving) entity).b(x, y, z, dist);
+        ((net.minecraft.server.EntityLiving) entity).b(x, y, z, dist);
     }
 
     @Override
@@ -199,91 +198,123 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @Override
     public void spawn() {
-        spawn(null);
+        spawn((EntityLiving[]) null);
     }
 
     @Override
-    public void spawn(EntityLiving rider) {
-        OWorld world = ((CanaryWorld) getWorld()).getHandle();
+    public void spawn(EntityLiving... riders) {
+        net.minecraft.server.World world = ((CanaryWorld) getWorld()).getHandle();
 
-        entity.c(getX() + 0.5d, getY(), getZ() + 0.5d, getRotation(), 0f);
-        world.b(entity);
+        entity.b(getX() + 0.5d, getY(), getZ() + 0.5d, getRotation(), 0f);
+        world.d(entity);
 
-        if (rider != null) {
-            OEntityLiving mob2 = (OEntityLiving) ((CanaryEntityLiving) rider).getHandle();
+        if (riders != null) {
+            CanaryEntityLiving prev = this;
 
-            mob2.c(getX(), getY(), getZ(), getRotation(), 0f);
-            world.b(mob2);
-            mob2.b(entity);
+            for (EntityLiving rider : riders) {
+                net.minecraft.server.EntityLiving mob2 = (net.minecraft.server.EntityLiving) ((CanaryEntityLiving) rider).getHandle();
+
+                mob2.b(getX(), getY(), getZ(), getRotation(), 0f);
+                world.d(mob2);
+                mob2.a(prev.getHandle());
+            }
         }
 
     }
 
     @Override
     public void addPotionEffect(PotionEffect effect) {
-        OPotionEffect oEffect = ((CanaryPotionEffect) effect).getHandle();
-        ((OEntityLiving) entity).e(oEffect);
+        net.minecraft.server.PotionEffect oEffect = ((CanaryPotionEffect) effect).getHandle();
+
+        ((net.minecraft.server.EntityLiving) entity).d(oEffect);
     }
 
     @Override
     public void addPotionEffect(PotionType type, int duration, int amplifier) {
-        OPotionEffect oEffect = new OPotionEffect(type.getID(), duration, amplifier);
-        ((OEntityLiving) entity).e(oEffect);
+        net.minecraft.server.PotionEffect oEffect = new net.minecraft.server.PotionEffect(type.getID(), duration, amplifier);
+
+        ((net.minecraft.server.EntityLiving) entity).d(oEffect);
     }
 
     @Override
     public boolean isPotionActive(Potion potion) {
-        OPotion oPotion = ((CanaryPotion) potion).getHandle();
-        return ((OEntityLiving) entity).a(oPotion);
+        net.minecraft.server.Potion oPotion = ((CanaryPotion) potion).getHandle();
+
+        return ((net.minecraft.server.EntityLiving) entity).a(oPotion);
     }
 
     @Override
     public PotionEffect getActivePotionEffect(Potion potion) {
-        OPotion oPotion = ((CanaryPotion) potion).getHandle();
-        OPotionEffect oPotionEffect = ((OEntityLiving) entity).b(oPotion);
+        net.minecraft.server.Potion oPotion = ((CanaryPotion) potion).getHandle();
+        net.minecraft.server.PotionEffect oPotionEffect = ((net.minecraft.server.EntityLiving) entity).b(oPotion);
+
         return new CanaryPotionEffect(oPotionEffect);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public List<PotionEffect> getAllActivePotionEffects() {
-        Collection<OPotionEffect> collection = ((OEntityLiving) entity).aM();
+        Collection<net.minecraft.server.PotionEffect> collection = ((net.minecraft.server.EntityLiving) entity).bC();
         List<PotionEffect> list = new ArrayList<PotionEffect>();
-        for (OPotionEffect oEffect : collection) {
+
+        for (net.minecraft.server.PotionEffect oEffect : collection) {
             list.add(new CanaryPotionEffect(oEffect));
         }
         return list;
     }
 
     @Override
+    public int getDeathTicks() {
+        return ((net.minecraft.server.EntityLiving) entity).aZ;
+    }
+
+    @Override
+    public void setDeathTicks(int ticks) {
+        ((net.minecraft.server.EntityLiving) entity).aZ = ticks;
+    }
+    
+    @Override
+    public EntityLiving getTarget() {
+        return (EntityLiving) ((net.minecraft.server.EntityLiving) entity).aG().getCanaryEntity();
+    }
+
+    @Override
+    public void setTarget(EntityLiving entityliving) {
+        ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) ((CanaryEntity)entityliving).getHandle());
+    }
+
+    @Override
     public void lookAt(double x, double y, double z) {
+
         double xDiff = x - getX();
         double yDiff = y - getY();
         double zDiff = z - getZ();
+        double DistanceXZ = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
+        double DistanceY = Math.sqrt(DistanceXZ * DistanceXZ + yDiff * yDiff);
+        double yaw = (Math.acos(xDiff / DistanceXZ) * 180 / Math.PI);
+        double pitch = (Math.acos(yDiff / DistanceY) * 180 / Math.PI) - 90;
 
-        double pitch = -Math.atan2(yDiff, Math.sqrt(Math.pow(xDiff, 2) + Math.pow(zDiff, 2)));
-        double rotation = Math.atan2(-xDiff, zDiff);
-        Canary.logInfo("Rotation: " + rotation);
-        Canary.logInfo("Pitch: " + pitch);
-        pitch = Math.toDegrees(pitch);
-        rotation = Math.toDegrees(rotation);
-        Canary.logInfo("Rotation2: " + rotation);
-        Canary.logInfo("Pitch2: " + pitch);
+        if (zDiff < 0.0) {
+            yaw = yaw + (Math.abs(180 - yaw) * 2);
+        }
 
-        setRotation((float) rotation);
+        setRotation((float) yaw);
         setPitch((float) pitch);
 
-        OPacket toSend;
+        net.minecraft.server.Packet toSend;
+
         if (isPlayer()) {
-            toSend = new OPacket12PlayerLook();
-            OPacket12PlayerLook toSend2 = (OPacket12PlayerLook) toSend;
-            toSend2.e = (float) rotation;
+            toSend = new Packet12PlayerLook();
+            Packet12PlayerLook toSend2 = (Packet12PlayerLook) toSend;
+
+            toSend2.e = (float) yaw;
             toSend2.f = (float) pitch;
             getPlayer().sendPacket(new CanaryPacket(toSend));
         } else {
-            double rotation2 = Math.floor((rotation * 256F) / 360F);
+            double rotation2 = Math.floor((yaw * 256F) / 360F);
             double pitch2 = Math.floor((pitch * 256F) / 360F);
-            toSend = new OPacket32EntityLook(entity.bd, (byte) rotation2, (byte) pitch2);
+
+            toSend = new Packet32EntityLook(entity.k, (byte) rotation2, (byte) pitch2);
             Canary.getServer().getConfigurationManager().sendPacketToAllInWorld(getWorld().getName(), new CanaryPacket(toSend));
         }
     }

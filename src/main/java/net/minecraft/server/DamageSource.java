@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class DamageSource {
 
     public static DamageSource a = (new DamageSource("inFire")).l();

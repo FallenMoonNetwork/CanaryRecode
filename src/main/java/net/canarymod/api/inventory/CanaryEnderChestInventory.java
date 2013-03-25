@@ -1,6 +1,8 @@
 package net.canarymod.api.inventory;
 
+
 import net.canarymod.api.entity.living.humanoid.Player;
+
 
 public class CanaryEnderChestInventory implements EnderChestInventory {
 
@@ -87,33 +89,23 @@ public class CanaryEnderChestInventory implements EnderChestInventory {
     }
 
     @Override
-    public void addItem(int itemId, int amount) {
-        // TODO Auto-generated method stub
-
+    public void addItem(int itemId, int amount) {// TODO Auto-generated method stub
     }
 
     @Override
-    public void addItem(int itemId) {
-        // TODO Auto-generated method stub
-
+    public void addItem(int itemId) {// TODO Auto-generated method stub
     }
 
     @Override
-    public void addItem(Item item) {
-        // TODO Auto-generated method stub
-
+    public void addItem(Item item) {// TODO Auto-generated method stub
     }
 
     @Override
-    public void setSlot(Item item) {
-        // TODO Auto-generated method stub
-
+    public void setSlot(Item item) {// TODO Auto-generated method stub
     }
 
     @Override
-    public void setSlot(int itemId, int slot) {
-        // TODO Auto-generated method stub
-
+    public void setSlot(int itemId, int slot) {// TODO Auto-generated method stub
     }
 
     @Override
@@ -123,9 +115,7 @@ public class CanaryEnderChestInventory implements EnderChestInventory {
     }
 
     @Override
-    public void setSlot(int itemId, int amount, int slot) {
-        // TODO Auto-generated method stub
-
+    public void setSlot(int itemId, int amount, int slot) {// TODO Auto-generated method stub
     }
 
     @Override
@@ -141,21 +131,15 @@ public class CanaryEnderChestInventory implements EnderChestInventory {
     }
 
     @Override
-    public void clearContents() {
-        // TODO Auto-generated method stub
-
+    public void clearContents() {// TODO Auto-generated method stub
     }
 
     @Override
-    public void setContents(Item[] items) {
-        // TODO Auto-generated method stub
-
+    public void setContents(Item[] items) {// TODO Auto-generated method stub
     }
 
     @Override
-    public void setSlot(int index, Item value) {
-        // TODO Auto-generated method stub
-
+    public void setSlot(int index, Item value) {// TODO Auto-generated method stub
     }
 
     @Override
@@ -171,9 +155,7 @@ public class CanaryEnderChestInventory implements EnderChestInventory {
     }
 
     @Override
-    public void setInventoryName(String value) {
-        // TODO Auto-generated method stub
-
+    public void setInventoryName(String value) {// TODO Auto-generated method stub
     }
 
     @Override
@@ -207,9 +189,7 @@ public class CanaryEnderChestInventory implements EnderChestInventory {
     }
 
     @Override
-    public void update() {
-        // TODO Auto-generated method stub
-
+    public void update() {// TODO Auto-generated method stub
     }
 
     @Override

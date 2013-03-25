@@ -1,7 +1,9 @@
 package net.canarymod.api.entity.living.animal;
 
+
 import net.canarymod.api.entity.living.EntityLiving;
 import net.minecraft.server.EntityTameable;
+
 
 public class CanaryTameable extends CanaryEntityAnimal implements Tameable {
 

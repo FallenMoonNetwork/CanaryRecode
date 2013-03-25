@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
+
 
 public class BlockComparator extends BlockRedstoneLogic implements ITileEntityProvider {
 
@@ -50,11 +52,9 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
 
         if (i4 >= 15) {
             return true;
-        }
-        else if (i4 == 0) {
+        } else if (i4 == 0) {
             return false;
-        }
-        else {
+        } else {
             int i5 = this.f((IBlockAccess) world, i0, i1, i2, i3); // CanaryMod: Cast World to IBlockAccess for method f
 
             return i5 == 0 ? true : i4 >= i5;
@@ -71,8 +71,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         if (i8 > 0) {
             if (Block.r[i8].q_()) {
                 i4 = Block.r[i8].b_(world, i6, i1, i7, Direction.f[i5]);
-            }
-            else if (i4 < 15 && Block.l(i8)) {
+            } else if (i4 < 15 && Block.l(i8)) {
                 i6 += Direction.a[i5];
                 i7 += Direction.b[i5];
                 i8 = world.a(i6, i1, i7);
@@ -111,8 +110,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
             if (i5 != i6 || this.c(i4) != this.d(world, i0, i1, i2, i4)) {
                 if (this.h(world, i0, i1, i2, i4)) {
                     world.a(i0, i1, i2, this.cz, this.i_(0), -1);
-                }
-                else {
+                } else {
                     world.a(i0, i1, i2, this.cz, this.i_(0), 0);
                 }
             }
@@ -131,8 +129,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
 
             if (flag1 && !flag0) {
                 world.b(i0, i1, i2, i3 & -9, 2);
-            }
-            else if (!flag1 && flag0) {
+            } else if (!flag1 && flag0) {
                 world.b(i0, i1, i2, i3 | 8, 2);
             }
 

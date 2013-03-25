@@ -1,6 +1,8 @@
 package net.canarymod.api.entity.living.monster;
 
+
 import net.minecraft.server.EntityCreeper;
+
 
 /**
  * Creeper wrapper implementation
@@ -39,7 +41,7 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
 
     @Override
     public boolean isCharged() {
-        return ((EntityCreeper) entity).x();
+        return ((EntityCreeper) entity).m();
     }
 
     @Override

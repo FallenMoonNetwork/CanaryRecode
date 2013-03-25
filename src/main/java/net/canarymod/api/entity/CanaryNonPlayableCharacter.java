@@ -1,5 +1,6 @@
 package net.canarymod.api.entity;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,7 @@ import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
+
 
 public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements NonPlayableCharacter {
     private static CanaryServer server = (CanaryServer) CanaryMod.getServer();
@@ -42,33 +44,26 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     public NonPlayableCharacter despawn() {
         for (Iterator<Player> playerit = ((List<Player>) server.getPlayerList()).iterator(); playerit.hasNext();) {
             Player player = playerit.next();
+
             this.handler.o.remove(player);
         }
         return this;
     }
 
     @Override
-    public void teleportTo(Position arg0) {
-        // TODO Auto-generated method stub
-
+    public void teleportTo(Position arg0) {// TODO Auto-generated method stub
     }
 
     @Override
-    public void teleportTo(Location arg0) {
-        // TODO Auto-generated method stub
-
+    public void teleportTo(Location arg0) {// TODO Auto-generated method stub
     }
 
     @Override
-    public void teleportTo(int arg0, int arg1, int arg2) {
-        // TODO Auto-generated method stub
-
+    public void teleportTo(int arg0, int arg1, int arg2) {// TODO Auto-generated method stub
     }
 
     @Override
-    public void tick() {
-        // TODO Auto-generated method stub
-
+    public void tick() {// TODO Auto-generated method stub
     }
 
     @Override
@@ -86,6 +81,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     public void ghost(Player arg0) {
         for (Iterator<OEntityPlayerMP> playerit = ((List<OEntityPlayerMP>) mcserv.h.b).iterator(); playerit.hasNext();) {
             OEntityPlayerMP player = playerit.next();
+
             player.a.b(new OPacket29DestroyEntity(this.handler.a.bd));
         }
     }
@@ -93,6 +89,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     @Override
     public void haunt(Player player) {
         ArrayList<OEntityPlayerMP> list = new ArrayList<OEntityPlayerMP>();
+
         list.add((OEntityPlayerMP) player.getPlayer());
         this.handler.b(list);
         this.handler.a(list);
@@ -107,18 +104,21 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
         double targY = getY();
         double targZ = getZ();
         double dist = distance(targX, targY, targZ, myX, myY, myZ);
+
         if (dist < 25) {
             // yaw
             double adjyaw = myX - targX;
             double oppyaw = myZ - targZ;
             double yaw = Math.atan2(oppyaw, adjyaw);
             double rota = yaw * 180 / Math.PI;
+
             setRotation((float) rota - 90);
             // pitch
             double adjpitch = distance(targX, targZ, myX, myZ);
             double opppitch = targY - myY;
             double thepitch = (Math.atan2(opppitch, adjpitch));
             double pit = thepitch * 180 / Math.PI;
+
             setPitch((float) pit);
             ((OEntityPlayerMP) entity).ay = (float) pit; // set head position
             ((OEntityPlayerMP) entity).e(); // Update head position
@@ -135,8 +135,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     }
 
     @Override
-    public void lookAtNearest() {
-        // Find nearest player then call lookAt(player)
+    public void lookAtNearest() {// Find nearest player then call lookAt(player)
     }
 
     @Override

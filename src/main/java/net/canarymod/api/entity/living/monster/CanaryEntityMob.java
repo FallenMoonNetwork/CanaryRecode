@@ -1,40 +1,28 @@
 package net.canarymod.api.entity.living.monster;
 
-import net.canarymod.api.entity.CanaryEntity;
+
 import net.canarymod.api.entity.living.CanaryEntityLiving;
-import net.canarymod.api.entity.living.EntityLiving;
 import net.minecraft.server.EntityFlying;
 import net.minecraft.server.EntitySlime;
 
+
 /**
- * basic mob entity wrapper class
+ * EntityMob wrapper implementation
  * 
- * @author Jason
+ * @author Jason (darkdiplomat)
  */
-public class CanaryEntityMob extends CanaryEntityLiving implements EntityMob {
+public abstract class CanaryEntityMob extends CanaryEntityLiving implements EntityMob {
 
     public CanaryEntityMob(net.minecraft.server.EntityMob entity) {
         super(entity);
     }
 
-    // Workaround because notchies inconsistencies
     public CanaryEntityMob(EntitySlime entity) {
         super(entity);
     }
 
-    // Workaround because notchies inconsistencies
     public CanaryEntityMob(EntityFlying entity) {
         super(entity);
-    }
-
-    @Override
-    public EntityLiving getTarget() {
-        return new CanaryEntityLiving(((EntityLiving) entity).at());
-    }
-
-    @Override
-    public void setTarget(EntityLiving entityliving) {
-        ((net.minecraft.server.EntityLiving) entity).b(((CanaryEntity) entityliving).entity);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package net.canarymod.api.world.blocks;
 
+
 import net.minecraft.server.OTileEntitySign;
+
 
 public class CanarySign extends CanaryComplexBlock implements Sign {
 

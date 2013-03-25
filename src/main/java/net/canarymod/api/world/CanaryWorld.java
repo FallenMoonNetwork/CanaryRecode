@@ -1,5 +1,6 @@
 package net.canarymod.api.world;
 
+
 import java.util.ArrayList;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
@@ -65,6 +66,7 @@ import net.minecraft.server.EntityVillager;
 import net.minecraft.server.EntityWolf;
 import net.minecraft.server.WorldServer;
 
+
 public class CanaryWorld implements World {
     private WorldServer world;
     private WorldType type;
@@ -74,6 +76,7 @@ public class CanaryWorld implements World {
     private boolean enabled;
 
     private CanaryPlayerManager playerManager;
+
     /**
      * The world name
      */
@@ -84,6 +87,7 @@ public class CanaryWorld implements World {
 
         // manually set player managers
         int viewDistance = 10; // TODO: Add config for view distance!
+
         playerManager = new CanaryPlayerManager(new net.minecraft.server.PlayerManager(((CanaryServer) Canary.getServer()).getHandle(), 0, viewDistance, this), this);
         entityTracker = new CanaryEntityTracker((new net.minecraft.server.EntityTracker(((CanaryServer) Canary.getServer()).getHandle(), 0, this)), this);
         world = dimension;
@@ -124,8 +128,7 @@ public class CanaryWorld implements World {
 
     @Override
     public boolean canEnterWorld(Player player) {
-        return player.hasPermission("canary.world.traveling." + name + ".enter")
-                && isEnabled();
+        return player.hasPermission("canary.world.traveling." + name + ".enter") && isEnabled();
     }
 
     @Override
@@ -136,6 +139,7 @@ public class CanaryWorld implements World {
     @Override
     public ArrayList<Player> getPlayers() {
         ArrayList<Player> players = new ArrayList<Player>(Canary.getServer().getMaxPlayers());
+
         players.addAll(getPlayerList());
         return players;
     }
@@ -161,8 +165,7 @@ public class CanaryWorld implements World {
         double d2 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
         double d3 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
 
-        OEntityItem oei = new OEntityItem(world, x + d1, y + d2, z + d3,
-                new OItemStack(itemId, amount, damage));
+        OEntityItem oei = new OEntityItem(world, x + d1, y + d2, z + d3, new OItemStack(itemId, amount, damage));
 
         oei.c = 10;
         world.b(oei);
@@ -185,6 +188,7 @@ public class CanaryWorld implements World {
     @Override
     public ArrayList<EntityAnimal> getAnimalList() {
         ArrayList<EntityAnimal> animals = new ArrayList<EntityAnimal>();
+
         for (Entity entity : getEntityTracker().getTrackedEntities()) {
             if (entity instanceof EntityAnimal) {
                 animals.add((EntityAnimal) entity);
@@ -196,6 +200,7 @@ public class CanaryWorld implements World {
     @Override
     public ArrayList<EntityMob> getMobList() {
         ArrayList<EntityMob> mobs = new ArrayList<EntityMob>();
+
         for (Entity entity : getEntityTracker().getTrackedEntities()) {
             if (entity instanceof EntityMob) {
                 mobs.add((EntityMob) entity);
@@ -213,6 +218,7 @@ public class CanaryWorld implements World {
     public Block getBlockAt(int x, int y, int z) {
         short id = (short) world.a(x, y, z);
         byte data = getDataAt(x, y, z);
+
         return new CanaryBlock(id, data, x, y, z, this);
     }
 
@@ -275,6 +281,7 @@ public class CanaryWorld implements World {
     @Override
     public Player getClosestPlayer(double x, double y, double z, double distance) {
         OEntityPlayer user = world.a(x, y, z, distance);
+
         if ((user != null) && user instanceof OEntityPlayerMP) {
             return (Player) user.getCanaryEntity();
         }
@@ -284,6 +291,7 @@ public class CanaryWorld implements World {
     @Override
     public Player getClosestPlayer(Entity entity, int distance) {
         OEntityPlayer user = world.a(((CanaryEntity) entity).getHandle(), distance);
+
         if ((user != null) && user instanceof OEntityPlayerMP) {
             return (Player) user.getCanaryEntity();
         }
@@ -335,6 +343,7 @@ public class CanaryWorld implements World {
             margin += 24000;
         }
         long newTime = getRawTime() + margin;
+
         getHandle().a(newTime);
     }
 
@@ -388,8 +397,7 @@ public class CanaryWorld implements World {
     public Chunk getChunk(int x, int z) {
         if (isChunkLoaded(x, z)) {
             return chunkProvider.provideChunk(x, z);
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -423,26 +431,37 @@ public class CanaryWorld implements World {
         switch (mobtype) {
             case BLAZE:
                 return new CanaryBlaze(new OEntityBlaze(getHandle()));
+
             case CREEPER:
                 return new CanaryCreeper(new OEntityCreeper(getHandle()));
+
             case ENDERMAN:
                 return new CanaryEnderman(new OEntityEnderman(getHandle()));
+
             case GHAST:
                 return new CanaryGhast(new OEntityGhast(getHandle()));
+
             case GIANTZOMBIE:
                 return new CanaryGiantZombie(new OEntityGiantZombie(getHandle()));
+
             case LAVASLIME:
                 return new CanaryLavaSlime(new OEntityLavaSlime(getHandle()));
+
             case PIGZOMBIE:
                 return new CanaryPigZombie(new OEntityPigZombie(getHandle()));
+
             case SILVERFISH:
                 return new CanarySilverfish(new OEntitySilverfish(getHandle()));
+
             case SKELETON:
                 return new CanarySkeleton(new OEntitySkeleton(getHandle()));
+
             case SLIME:
                 return new CanarySlime(new OEntitySlime(getHandle()));
+
             case SPIDER:
                 return new CanarySpider(new OEntitySpider(getHandle()));
+
             case ZOMBIE:
                 return new CanaryZombie(new OEntityZombie(getHandle()));
         }
@@ -606,8 +625,7 @@ public class CanaryWorld implements World {
             if (result instanceof Chest) {
                 Chest chest = (Chest) result;
 
-                if (chest.hasAttachedChest()) {
-                    // return new CanaryDoubleChest(chest); TODO
+                if (chest.hasAttachedChest()) {// return new CanaryDoubleChest(chest); TODO
                 }
             }
         }
@@ -651,20 +669,28 @@ public class CanaryWorld implements World {
         switch (animalType) {
             case CHICKEN:
                 return (EntityAnimal) new EntityChicken(getHandle()).getCanaryEntity();
+
             case COW:
                 return new CanaryCow(new EntityCow(getHandle()));
+
             case MUSHROOMCOW:
                 return new CanaryMushroomCow(new EntityMooshroom(getHandle()));
+
             case OCELOT:
                 return new CanaryOcelot(new EntityOcelot(getHandle()));
+
             case PIG:
                 return new CanaryPig(new EntityPig(getHandle()));
+
             case SHEEP:
                 return new CanarySheep(new EntitySheep(getHandle()));
+
             case SQUID:
                 return new CanarySquid(new EntitySquid(getHandle()));
+
             case VILLAGER:
                 return new CanaryVillager(new EntityVillager(getHandle()));
+
             case WOLF:
                 return new CanaryWolf(new EntityWolf(getHandle()));
         }
@@ -694,6 +720,7 @@ public class CanaryWorld implements World {
             return false;
         }
         CanaryWorld test = (CanaryWorld) ob;
+
         return test.equals(name) && test.getType().equals(type);
     }
 }

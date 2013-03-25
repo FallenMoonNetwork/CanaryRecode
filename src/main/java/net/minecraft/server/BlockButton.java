@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.hook.world.RedstoneChangeHook;
+
 
 public abstract class BlockButton extends Block {
 
@@ -47,17 +49,13 @@ public abstract class BlockButton extends Block {
         i5 &= 7;
         if (i3 == 2 && world.u(i0, i1, i2 + 1)) {
             i5 = 4;
-        }
-        else if (i3 == 3 && world.u(i0, i1, i2 - 1)) {
+        } else if (i3 == 3 && world.u(i0, i1, i2 - 1)) {
             i5 = 3;
-        }
-        else if (i3 == 4 && world.u(i0 + 1, i1, i2)) {
+        } else if (i3 == 4 && world.u(i0 + 1, i1, i2)) {
             i5 = 2;
-        }
-        else if (i3 == 5 && world.u(i0 - 1, i1, i2)) {
+        } else if (i3 == 5 && world.u(i0 - 1, i1, i2)) {
             i5 = 1;
-        }
-        else {
+        } else {
             i5 = this.k(world, i0, i1, i2);
         }
 
@@ -101,8 +99,7 @@ public abstract class BlockButton extends Block {
             this.c(world, i0, i1, i2, world.h(i0, i1, i2), 0);
             world.i(i0, i1, i2);
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -127,14 +124,11 @@ public abstract class BlockButton extends Block {
 
         if (i1 == 1) {
             this.a(0.0F, f0, 0.5F - f2, f3, f1, 0.5F + f2);
-        }
-        else if (i1 == 2) {
+        } else if (i1 == 2) {
             this.a(1.0F - f3, f0, 0.5F - f2, 1.0F, f1, 0.5F + f2);
-        }
-        else if (i1 == 3) {
+        } else if (i1 == 3) {
             this.a(0.5F - f2, f0, 0.0F, 0.5F + f2, f1, f3);
-        }
-        else if (i1 == 4) {
+        } else if (i1 == 4) {
             this.a(0.5F - f2, f0, 1.0F - f3, 0.5F + f2, f1, 1.0F);
         }
     }
@@ -148,6 +142,7 @@ public abstract class BlockButton extends Block {
 
         // CanaryMod: Call RedstoneChangeHook
         RedstoneChangeHook hook = new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i4, i5);
+
         Canary.hooks().callHook(hook);
 
         if (i6 == 0 || hook.isCanceled()) {
@@ -182,8 +177,7 @@ public abstract class BlockButton extends Block {
 
         if ((i4 & 8) == 0) {
             return 0;
-        }
-        else {
+        } else {
             int i5 = i4 & 7;
 
             return i5 == 5 && i3 == 1 ? 15 : (i5 == 4 && i3 == 2 ? 15 : (i5 == 3 && i3 == 3 ? 15 : (i5 == 2 && i3 == 4 ? 15 : (i5 == 1 && i3 == 5 ? 15 : 0))));
@@ -201,8 +195,7 @@ public abstract class BlockButton extends Block {
             if ((i3 & 8) != 0) {
                 if (this.a) {
                     this.n(world, i0, i1, i2);
-                }
-                else {
+                } else {
                     world.b(i0, i1, i2, i3 & 7, 3);
                     int i4 = i3 & 7;
 
@@ -264,17 +257,13 @@ public abstract class BlockButton extends Block {
         world.f(i0, i1, i2, this.cz);
         if (i3 == 1) {
             world.f(i0 - 1, i1, i2, this.cz);
-        }
-        else if (i3 == 2) {
+        } else if (i3 == 2) {
             world.f(i0 + 1, i1, i2, this.cz);
-        }
-        else if (i3 == 3) {
+        } else if (i3 == 3) {
             world.f(i0, i1, i2 - 1, this.cz);
-        }
-        else if (i3 == 4) {
+        } else if (i3 == 4) {
             world.f(i0, i1, i2 + 1, this.cz);
-        }
-        else {
+        } else {
             world.f(i0, i1 - 1, i2, this.cz);
         }
     }

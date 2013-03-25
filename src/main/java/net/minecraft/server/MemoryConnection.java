@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 public class MemoryConnection implements INetworkManager {
 
@@ -76,8 +78,7 @@ public class MemoryConnection implements INetworkManager {
     public void b(Packet packet) {
         if (packet.a_() && this.e.b()) {
             packet.a(this.e);
-        }
-        else {
+        } else {
             this.b.add(packet);
         }
     }

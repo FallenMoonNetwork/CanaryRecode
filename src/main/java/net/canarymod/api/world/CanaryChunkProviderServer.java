@@ -1,8 +1,10 @@
 package net.canarymod.api.world;
 
+
 import java.io.IOException;
 
 import net.canarymod.Canary;
+
 
 public class CanaryChunkProviderServer implements ChunkProviderServer {
 
@@ -47,8 +49,8 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
         Long chunkCoordIntPair = OChunkCoordIntPair.a(x, z);
         // Unloading the chunk
         OChunk unloadedChunk = (OChunk) handle.f.a(chunkCoordIntPair.longValue());
-        if (unloadedChunk != null)
-        {
+
+        if (unloadedChunk != null) {
             unloadedChunk.e();
             try {
                 handle.b(unloadedChunk);
@@ -64,10 +66,10 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
 
         // Generating the new chunk
         OChunk newChunk = handle.d.b(x, z);
+
         handle.f.a(chunkCoordIntPair, newChunk);
         handle.g.add(newChunk);
-        if (newChunk != null)
-        {
+        if (newChunk != null) {
             newChunk.c();
             newChunk.d();
         }
@@ -81,8 +83,7 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
             Canary.logStackTrace("Exception while regenerating a chunk!", e);
         }
         newChunk.k = false;
-        if (handle.e != null)
-        {
+        if (handle.e != null) {
             handle.e.b();
         }
 

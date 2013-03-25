@@ -1,5 +1,6 @@
 package net.canarymod.api.inventory;
 
+
 /**
  * This is a basic Item wrapper, not for Itemstack, but for Item
  * 

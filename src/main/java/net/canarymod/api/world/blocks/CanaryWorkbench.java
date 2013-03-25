@@ -1,5 +1,6 @@
 package net.canarymod.api.world.blocks;
 
+
 import net.canarymod.api.inventory.CanaryInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
@@ -7,6 +8,7 @@ import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.World;
 import net.minecraft.server.OContainerWorkbench;
 import net.minecraft.server.OItemStack;
+
 
 public class CanaryWorkbench implements Workbench {
 
@@ -59,6 +61,7 @@ public class CanaryWorkbench implements Workbench {
     @Override
     public CanaryItem decreaseItemStackSize(int itemId, int amount) {
         OItemStack item = container.craftingGrid.decreaseItemStackSize(itemId, amount);
+
         return item != null ? item.getCanaryItem() : null;
     }
 
@@ -66,6 +69,7 @@ public class CanaryWorkbench implements Workbench {
     public CanaryItem[] getContents() {
         OItemStack[] oStacks = container.craftingGrid.getContents();
         CanaryItem[] items = new CanaryItem[oStacks.length];
+
         for (int i = 0; i < oStacks.length; i++) {
             items[i] = new CanaryItem(oStacks[i]);
         }
@@ -101,6 +105,7 @@ public class CanaryWorkbench implements Workbench {
     @Override
     public CanaryItem getSlot(int index) {
         OItemStack item = container.craftingGrid.getSlot(index);
+
         return item != null ? item.getCanaryItem() : null;
     }
 
@@ -127,11 +132,11 @@ public class CanaryWorkbench implements Workbench {
     @Override
     public void setContents(Item[] items) {
         OItemStack[] oStacks = new OItemStack[items.length];
+
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
                 oStacks[i] = ((CanaryItem) items[i]).getHandle();
-            }
-            else {
+            } else {
                 oStacks[i] = null;
             }
         }

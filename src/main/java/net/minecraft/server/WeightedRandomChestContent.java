@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
+
 
 public class WeightedRandomChestContent extends WeightedRandomItem {
 
@@ -32,8 +34,7 @@ public class WeightedRandomChestContent extends WeightedRandomItem {
 
                 itemstack.a = i2;
                 iinventory.a(random.nextInt(iinventory.j_()), itemstack);
-            }
-            else {
+            } else {
                 for (int i3 = 0; i3 < i2; ++i3) {
                     ItemStack itemstack1 = weightedrandomchestcontent.b.m();
 
@@ -54,8 +55,7 @@ public class WeightedRandomChestContent extends WeightedRandomItem {
 
                 itemstack.a = i2;
                 tileentitydispenser.a(random.nextInt(tileentitydispenser.j_()), itemstack);
-            }
-            else {
+            } else {
                 for (int i3 = 0; i3 < i2; ++i3) {
                     ItemStack itemstack1 = weightedrandomchestcontent.b.m();
 

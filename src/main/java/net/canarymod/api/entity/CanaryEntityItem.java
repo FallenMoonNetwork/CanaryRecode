@@ -1,6 +1,8 @@
 package net.canarymod.api.entity;
 
+
 import net.canarymod.api.inventory.CanaryItem;
+
 
 public class CanaryEntityItem extends CanaryEntity implements EntityItem {
 

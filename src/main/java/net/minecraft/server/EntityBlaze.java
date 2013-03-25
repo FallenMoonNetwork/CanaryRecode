@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.living.monster.CanaryBlaze;
+
 
 public class EntityBlaze extends EntityMob {
 
