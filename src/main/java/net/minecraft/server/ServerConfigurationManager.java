@@ -5,6 +5,7 @@ import java.net.SocketAddress;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -25,7 +26,6 @@ public abstract class ServerConfigurationManager {
     private final BanList g = new BanList(new File("banned-ips.txt"));
     private Set h = new HashSet();
     private Set i = new HashSet();
-    private IPlayerFileData j;
     private boolean k;
     protected int b;
     protected int c;
@@ -35,6 +35,7 @@ public abstract class ServerConfigurationManager {
 
     // CanaryMod
     protected CanaryConfigurationManager configurationmanager;
+    private HashMap<String, IPlayerFileData> playerFileData = new HashMap<String, IPlayerFileData>();
     //
     public ServerConfigurationManager(MinecraftServer minecraftserver) {
         this.e = minecraftserver;
@@ -127,7 +128,14 @@ public abstract class ServerConfigurationManager {
     }
 
     public void a(WorldServer[] aworldserver) {
-        this.j = aworldserver[0].K().e();
+        //CanaryMod Multiworld
+        for(WorldServer server : aworldserver) {
+            if(server == null) {
+                continue;
+            }
+            playerFileData.put(server.getCanaryWorld().getName(), server.K().e());
+        }
+        //
     }
 
     public void a(EntityPlayerMP entityplayermp, WorldServer worldserver) {
@@ -154,14 +162,18 @@ public abstract class ServerConfigurationManager {
             nbttagcompound1 = nbttagcompound;
             System.out.println("loading single player");
         } else {
-            nbttagcompound1 = this.j.b(entityplayermp);
+            //CanaryMod Multiworld
+            nbttagcompound1 = playerFileData.get(entityplayermp.getCanaryWorld().getName()).b(entityplayermp);
+            //
         }
 
         return nbttagcompound1;
     }
 
     protected void b(EntityPlayerMP entityplayermp) {
-        this.j.a(entityplayermp);
+        //CanaryMod Multiworld
+        playerFileData.get(entityplayermp.getCanaryWorld().getName()).a(entityplayermp);
+        //
     }
 
     public void c(EntityPlayerMP entityplayermp) {

@@ -1,7 +1,6 @@
 package net.canarymod;
 
 
-import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.factory.CanaryFactory;
 import net.canarymod.api.factory.Factory;
@@ -73,7 +72,7 @@ public class CanaryMod extends Canary {
         super.reload();
 
         // Reload minecraft variables
-        ((CanaryConfigurationManager) instance.server.getConfigurationManager()).getHandle().reload();
+        //        ((CanaryConfigurationManager) instance.server.getConfigurationManager()).reload();
         // TODO RCON + QUERY?
         ((CanaryServer) instance.server).getHandle().reload();
     }

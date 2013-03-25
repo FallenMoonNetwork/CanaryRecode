@@ -68,5 +68,4 @@ public class CanaryConfigurationManager implements ConfigurationManager {
         Canary.getServer().getWorldManager().getWorld(world, dimension, true).getPlayerManager().markBlockNeedsUpdate(x, y, z);
 
     }
-
 }
