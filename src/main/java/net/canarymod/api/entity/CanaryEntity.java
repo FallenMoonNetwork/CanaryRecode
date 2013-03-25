@@ -1,6 +1,7 @@
 package net.canarymod.api.entity;
 
 import java.util.UUID;
+
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
@@ -206,25 +207,24 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public Vector3D getMotion() {
-        // TODO Auto-generated method stub
-        return null;
+        return new Vector3D(getMotionX(), getMotionY(), getMotionZ());
     }
 
     @Override
     public Vector3D getForwardVector() {
-        // TODO Auto-generated method stub
-        return null;
+        return Vector3D.forward;
     }
 
     @Override
     public void translate(Vector3D factor) {
-        // TODO Auto-generated method stub
-
+        setX(getX() + factor.getX());
+        setY(getY() + factor.getY());
+        setZ(getZ() + factor.getZ());
     }
 
     @Override
     public void moveEntity(double motionX, double motionY, double motionZ) {
-        // TODO Auto-generated method stub
+        // TODO This is NMS access
 
     }
 
