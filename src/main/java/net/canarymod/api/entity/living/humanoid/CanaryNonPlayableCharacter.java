@@ -1,146 +1,207 @@
 package net.canarymod.api.entity.living.humanoid;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import net.canarymod.CanaryMod;
-import net.canarymod.api.CanaryServer;
+import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
-import net.canarymod.api.entity.living.humanoid.NonPlayableCharacter;
-import net.canarymod.api.entity.living.humanoid.Player;
-import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.Packet20NamedEntitySpawn;
+import net.minecraft.server.Packet29DestroyEntity;
 
 
-public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements NonPlayableCharacter {
-    private static CanaryServer server = (CanaryServer) CanaryMod.getServer();
-    private static MinecraftServer mcserv = server.getHandle();
+/**
+ * NonPlayableCharacter implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
+public abstract class CanaryNonPlayableCharacter extends CanaryEntityLiving implements NonPlayableCharacter {
 
-    public CanaryNonPlayableCharacter(OEntityPlayerMP user) {
-        super(user);
+    /**
+     * Constructs a new wrapper for EntityNonPlayableCharacter
+     * 
+     * @param entity
+     *            the EntityVillager to wrap
+     * @param inHand
+     *            the Item to set inHand
+     */
+    public CanaryNonPlayableCharacter(EntityNonPlayableCharacter npc, Item inHand) {
+        super(npc);
+        this.getHandle().setNPC(this);
+        this.getInventory().setSlot(inHand);
+        this.setItemInHandSlot(inHand != null ? inHand.getSlot() : 0);
     }
 
-    public CanaryNonPlayableCharacter(String name, World world, int dim, double x, double y, double z, float rotation, float pitch, Item itemInHand) {
-        super(new OEntityPlayerMP(mcserv, ((CanaryWorld) world).getHandle(), name, new OItemInWorldManager(((CanaryWorld) world).getHandle())));
-
+    /**
+     * Constructs a new NonPlayableCharacter
+     * 
+     * @param name
+     *            the Name to give to the NPC
+     * @param world
+     *            the World to spawn the NPC in
+     * @param dim
+     *            the Dimension of the World to spawn the NPC in
+     * @param x
+     *            the X coordinate to spawn the NPC at
+     * @param y
+     *            the Y coordinate to spawn the NPC at
+     * @param z
+     *            the Z coordinate to spawn the NPC at
+     * @param rotation
+     *            the rotation to spawn the NPC with
+     * @param pitch
+     *            the pitch to spawn the NPC with
+     * @param inHand
+     *            the Item to set in the NPC's hand
+     */
+    public CanaryNonPlayableCharacter(String name, World world, int dim, double x, double y, double z, float rotation, float pitch, Item inHand) {
+        this(new EntityNonPlayableCharacter(name, world, x, y, z, rotation, pitch), inHand);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
-        return ((OEntityPlayerMP) entity).v;
+        return getHandle().bS;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setName(String name) {
-        ((OEntityPlayerMP) entity).v = name;
+        getHandle().bS = name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void teleportTo(Position position) {
+        getHandle().a(position.getX(), position.getY(), position.getZ(), getRotation(), getPitch());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void teleportTo(Location location) {
+        getHandle().a(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
+        if (this.getWorld() != location.getWorld()) {
+            // I don't know yet
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void teleportTo(int x, int y, int z) {
+        getHandle().a(x, y, z, getRotation(), getPitch());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Item getItemHeld() {
+        return getHandle().getPlayerInventory().getSlot(getHandle().bK.c);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setItemInHandSlot(int slot) {
+        if (slot > 0 && slot < 9) {
+            getHandle().bK.c = slot;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Inventory getInventory() {
+        return getHandle().getPlayerInventory();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void ghost(Player player) {
+        player.sendPacket(new CanaryPacket(new Packet29DestroyEntity(this.getID())));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void haunt(Player player) {
+        player.sendPacket(new CanaryPacket(new Packet20NamedEntitySpawn(this.getHandle())));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void lookAt(Player player) {
+        double xDiff = player.getX() - getX();
+        double yDiff = player.getY() - getY();
+        double zDiff = player.getZ() - getZ();
+        double DistanceXZ = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
+        double DistanceY = Math.sqrt(DistanceXZ * DistanceXZ + yDiff * yDiff);
+        double yaw = (Math.acos(xDiff / DistanceXZ) * 180 / Math.PI);
+        double pitch = (Math.acos(yDiff / DistanceY) * 180 / Math.PI) - 90;
+
+        if (zDiff < 0.0) {
+            yaw = yaw + (Math.abs(180 - yaw) * 2);
+        }
+        teleportTo(new Location(this.getWorld(), getX(), getY(), getZ(), (float) yaw, (float) pitch));
+
+        getHandle().bR = (float) yaw - 90; // Camera/Head Position
+        getHandle().c(); // Update Entity
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void lookAtNearest() {
+        EntityPlayer ep = ((CanaryWorld) getWorld()).getHandle().a((net.minecraft.server.Entity) getHandle(), 25);
+        if (ep != null && ((CanaryEntityLiving) ep.getCanaryEntity()).isPlayer()) {
+            lookAt((Player) ep.getCanaryEntity());
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public NonPlayableCharacter despawn() {
-        for (Iterator<Player> playerit = ((List<Player>) server.getPlayerList()).iterator(); playerit.hasNext();) {
-            Player player = playerit.next();
-
-            this.handler.o.remove(player);
-        }
+        // TODO: Remove entity from trackers but do not destroy
         return this;
     }
 
-    @Override
-    public void teleportTo(Position arg0) {// TODO Auto-generated method stub
-    }
-
-    @Override
-    public void teleportTo(Location arg0) {// TODO Auto-generated method stub
-    }
-
-    @Override
-    public void teleportTo(int arg0, int arg1, int arg2) {// TODO Auto-generated method stub
-    }
-
-    @Override
-    public void tick() {// TODO Auto-generated method stub
-    }
-
-    @Override
-    public Item getItemInHand() {
-        return ((OEntityPlayerMP) entity).k.a[0] != null ? new CanaryItem(((OEntityPlayerMP) entity).y()[0]) : null;
-    }
-
-    @Override
-    public void setItemInHand(Item item) {
-        ((OEntityPlayerMP) entity).y()[0] = null;
-
-    }
-
-    @Override
-    public void ghost(Player arg0) {
-        for (Iterator<OEntityPlayerMP> playerit = ((List<OEntityPlayerMP>) mcserv.h.b).iterator(); playerit.hasNext();) {
-            OEntityPlayerMP player = playerit.next();
-
-            player.a.b(new OPacket29DestroyEntity(this.handler.a.bd));
-        }
-    }
-
-    @Override
-    public void haunt(Player player) {
-        ArrayList<OEntityPlayerMP> list = new ArrayList<OEntityPlayerMP>();
-
-        list.add((OEntityPlayerMP) player.getPlayer());
-        this.handler.b(list);
-        this.handler.a(list);
-    }
-
-    @Override
-    public void lookAt(Player player) {
-        double myX = player.getX();
-        double myY = player.getY();
-        double myZ = player.getZ();
-        double targX = getX();
-        double targY = getY();
-        double targZ = getZ();
-        double dist = distance(targX, targY, targZ, myX, myY, myZ);
-
-        if (dist < 25) {
-            // yaw
-            double adjyaw = myX - targX;
-            double oppyaw = myZ - targZ;
-            double yaw = Math.atan2(oppyaw, adjyaw);
-            double rota = yaw * 180 / Math.PI;
-
-            setRotation((float) rota - 90);
-            // pitch
-            double adjpitch = distance(targX, targZ, myX, myZ);
-            double opppitch = targY - myY;
-            double thepitch = (Math.atan2(opppitch, adjpitch));
-            double pit = thepitch * 180 / Math.PI;
-
-            setPitch((float) pit);
-            ((OEntityPlayerMP) entity).ay = (float) pit; // set head position
-            ((OEntityPlayerMP) entity).e(); // Update head position
-            spawn();
-        }
-    }
-
-    private double distance(double x1, double z1, double x2, double z2) {
-        return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((z1 - z2), 2));
-    }
-
-    private double distance(double x1, double y1, double z1, double x2, double y2, double z2) {
-        return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2) + Math.pow((z1 - z2), 2));
-    }
-
-    @Override
-    public void lookAtNearest() {// Find nearest player then call lookAt(player)
-    }
-
-    @Override
+    /**
+     * {@inheritDoc}
+     */
     public void spawn() {
-        this.handler.b(mcserv.h.b);
-        this.handler.a(mcserv.h.b);
+        super.spawn();
+        // TODO: Special spawning stuffs
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityNonPlayableCharacter getHandle() {
+        return (EntityNonPlayableCharacter) entity;
     }
 }
