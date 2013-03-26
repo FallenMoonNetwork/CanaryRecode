@@ -4,15 +4,15 @@ package net.canarymod.api.factory;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.animal.CanaryChicken;
 import net.canarymod.api.entity.living.animal.CanaryCow;
-import net.canarymod.api.entity.living.animal.CanaryMushroomCow;
+import net.canarymod.api.entity.living.animal.CanaryMooshroom;
 import net.canarymod.api.entity.living.animal.CanaryOcelot;
 import net.canarymod.api.entity.living.animal.CanaryPig;
 import net.canarymod.api.entity.living.animal.CanarySheep;
 import net.canarymod.api.entity.living.animal.CanarySquid;
-import net.canarymod.api.entity.living.animal.CanaryVillager;
 import net.canarymod.api.entity.living.animal.CanaryWolf;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.animal.EntityAnimal.AnimalType;
+import net.canarymod.api.entity.living.humanoid.CanaryVillager;
 import net.canarymod.api.entity.living.monster.CanaryBlaze;
 import net.canarymod.api.entity.living.monster.CanaryCreeper;
 import net.canarymod.api.entity.living.monster.CanaryEnderman;
@@ -136,7 +136,7 @@ public class CanaryEntityLivingFactory implements EntityLivingFactory {
                 return new CanaryCow(new OEntityCow(((CanaryWorld) world).getHandle()));
 
             case MUSHROOMCOW:
-                return new CanaryMushroomCow(new OEntityMooshroom(((CanaryWorld) world).getHandle()));
+                return new CanaryMooshroom(new OEntityMooshroom(((CanaryWorld) world).getHandle()));
 
             case OCELOT:
                 return new CanaryOcelot(new OEntityOcelot(((CanaryWorld) world).getHandle()));

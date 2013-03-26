@@ -26,6 +26,22 @@ public class CanaryCow extends CanaryEntityAnimal implements Cow {
      * {@inheritDoc}
      */
     @Override
+    public int getGrowingAge() {
+        return getHandle().b();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setGrowingAge(int age) {
+        getHandle().a(age);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public EntityCow getHandle() {
         return (EntityCow) entity;
     }

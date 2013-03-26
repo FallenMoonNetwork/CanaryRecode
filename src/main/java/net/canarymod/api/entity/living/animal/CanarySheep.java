@@ -1,38 +1,88 @@
 package net.canarymod.api.entity.living.animal;
 
 
+import net.canarymod.api.DyeColor;
 import net.minecraft.server.EntitySheep;
 
-
+/**
+ * Sheep wrapper implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
 public class CanarySheep extends CanaryEntityAnimal implements Sheep {
 
+    /**
+     * Constructs a new wrapper for EntitySheep
+     * 
+     * @param entity
+     *            the EntitySheep to wrap
+     */
     public CanarySheep(EntitySheep entity) {
         super(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void eatGrass() {
-        ((EntitySheep) entity).z();
+        getHandle().aK();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public int getColor() {
-        return ((EntitySheep) entity).x();
+    public DyeColor getColor() {
+        return DyeColor.values()[getHandle().m()];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setColor(int color) {
-        ((EntitySheep) entity).d_(color);
+    public void setColor(DyeColor color) {
+        getHandle().s(color.getDyeColorCode());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isSheared() {
-        return ((EntitySheep) entity).A_();
+        return getHandle().n();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSheared(boolean sheared) {
-        ((EntitySheep) entity).a(sheared);
+        getHandle().i(sheared);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getGrowingAge() {
+        return getHandle().b();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setGrowingAge(int age) {
+        getHandle().a(age);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntitySheep getHandle() {
+        return (EntitySheep) entity;
     }
 
 }

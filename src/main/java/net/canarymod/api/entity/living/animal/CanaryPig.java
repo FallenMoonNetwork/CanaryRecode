@@ -25,6 +25,22 @@ public class CanaryPig extends CanaryEntityAnimal implements Pig {
      * {@inheritDoc}
      */
     @Override
+    public int getGrowingAge() {
+        return getHandle().b();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setGrowingAge(int age) {
+        getHandle().a(age);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public EntityPig getHandle() {
         return (EntityPig) entity;
     }

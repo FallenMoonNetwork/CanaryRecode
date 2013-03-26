@@ -5,11 +5,11 @@ import net.minecraft.server.EntityMooshroom;
 
 
 /**
- * MushroomCow wrapper implementation
+ * MooshroomCow wrapper implementation
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryMushroomCow extends CanaryCow implements Mooshroom {
+public class CanaryMooshroom extends CanaryCow implements Mooshroom {
 
     /**
      * Constructs a new wrapper for EntityMooshroom
@@ -17,7 +17,7 @@ public class CanaryMushroomCow extends CanaryCow implements Mooshroom {
      * @param entity
      *            the EntityMooshroom to wrap
      */
-    public CanaryMushroomCow(EntityMooshroom entity) {
+    public CanaryMooshroom(EntityMooshroom entity) {
         super(entity);
     }
 

@@ -10,19 +10,19 @@ import net.canarymod.api.EntityTracker;
 import net.canarymod.api.Particle;
 import net.canarymod.api.PlayerManager;
 import net.canarymod.api.entity.CanaryEntity;
-import net.canarymod.api.entity.CanaryPlayer;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityItem;
 import net.canarymod.api.entity.living.animal.CanaryCow;
-import net.canarymod.api.entity.living.animal.CanaryMushroomCow;
+import net.canarymod.api.entity.living.animal.CanaryMooshroom;
 import net.canarymod.api.entity.living.animal.CanaryOcelot;
 import net.canarymod.api.entity.living.animal.CanaryPig;
 import net.canarymod.api.entity.living.animal.CanarySheep;
 import net.canarymod.api.entity.living.animal.CanarySquid;
-import net.canarymod.api.entity.living.animal.CanaryVillager;
 import net.canarymod.api.entity.living.animal.CanaryWolf;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.animal.EntityAnimal.AnimalType;
+import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
+import net.canarymod.api.entity.living.humanoid.CanaryVillager;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.living.monster.CanaryBlaze;
 import net.canarymod.api.entity.living.monster.CanaryCreeper;
@@ -674,7 +674,7 @@ public class CanaryWorld implements World {
                 return new CanaryCow(new EntityCow(getHandle()));
 
             case MUSHROOMCOW:
-                return new CanaryMushroomCow(new EntityMooshroom(getHandle()));
+                return new CanaryMooshroom(new EntityMooshroom(getHandle()));
 
             case OCELOT:
                 return new CanaryOcelot(new EntityOcelot(getHandle()));

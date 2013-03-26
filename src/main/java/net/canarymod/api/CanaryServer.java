@@ -6,7 +6,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import net.canarymod.Canary;
 import net.canarymod.Main;
-import net.canarymod.api.entity.CanaryPlayer;
+import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.WorldManager;

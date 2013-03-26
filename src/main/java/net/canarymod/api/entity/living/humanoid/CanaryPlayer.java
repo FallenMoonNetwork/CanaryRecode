@@ -1,4 +1,4 @@
-package net.canarymod.api.entity;
+package net.canarymod.api.entity.living.humanoid;
 
 
 import java.util.ArrayList;
@@ -9,6 +9,9 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
+import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.Entity;
+import net.canarymod.api.entity.EntityItem;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.inventory.CanaryPlayerInventory;

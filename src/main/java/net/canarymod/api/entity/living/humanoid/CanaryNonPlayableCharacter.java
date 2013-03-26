@@ -1,4 +1,4 @@
-package net.canarymod.api.entity;
+package net.canarymod.api.entity.living.humanoid;
 
 
 import java.util.ArrayList;
