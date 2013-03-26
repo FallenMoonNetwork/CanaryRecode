@@ -4,6 +4,7 @@ package net.canarymod.api;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+
 import net.canarymod.Canary;
 import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -59,7 +60,7 @@ public class CanaryServer implements Server {
      */
     @Override
     public int getMaxPlayers() {
-        return Configuration.getNetConfig().getMaxPlayers();
+        return Configuration.getServerConfig().getMaxPlayers();
     }
 
     /**

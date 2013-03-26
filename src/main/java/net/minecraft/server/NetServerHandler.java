@@ -12,6 +12,7 @@ import java.util.concurrent.Callable;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.world.position.Location;
+import net.canarymod.hook.player.DisconnectionHook;
 import net.canarymod.hook.player.TeleportHook;
 
 public class NetServerHandler extends NetHandler {
@@ -74,11 +75,19 @@ public class NetServerHandler extends NetHandler {
     }
 
     public void c(String s0) {
+        //CanaryMod disconnect hook
+        DisconnectionHook hook = new DisconnectionHook(serverHandler.getUser(), s0);
+        Canary.hooks().callHook(hook);
+        //
         if (!this.b) {
             this.c.k();
             this.b(new Packet255KickDisconnect(s0));
             this.a.d();
-            this.d.ad().a((Packet) (new Packet3Chat(EnumChatFormatting.o + this.c.bS + " left the game.")));
+            //CanaryMod hook data
+            if(!hook.isHidden()) {
+                this.d.ad().a((Packet) (new Packet3Chat(EnumChatFormatting.o + this.c.bS + " left the game.")));
+            }
+            //
             this.d.ad().e(this.c);
             this.b = true;
         }

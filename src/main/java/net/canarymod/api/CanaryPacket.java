@@ -16,7 +16,7 @@ public class CanaryPacket implements Packet {
 
     @Override
     public int getPacketId() {
-        return packet.b();
+        return packet.n();
     }
 
     public net.minecraft.server.Packet getPacket() {

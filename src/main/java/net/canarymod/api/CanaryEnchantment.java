@@ -62,12 +62,12 @@ public class CanaryEnchantment implements Enchantment {
 
     @Override
     public int getMaxEnchantmentLevel() {
-        return handle.a();
+        return handle.b();
     }
 
     @Override
     public int getMinEnchantmentLevel() {
-        return handle.c();
+        return handle.d();
     }
 
     @Override
@@ -77,7 +77,7 @@ public class CanaryEnchantment implements Enchantment {
 
     @Override
     public int getWeight() {
-        return handle.b();
+        return handle.c();
     }
 
     @Override

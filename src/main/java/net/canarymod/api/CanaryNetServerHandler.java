@@ -32,18 +32,18 @@ public class CanaryNetServerHandler implements NetServerHandler {
         if (chatPacket.getPacketId() != 3) {
             return; // Not a chat packet :O
         }
-        handler.playerChat((net.minecraft.server.Packet3Chat) ((CanaryPacket) chatPacket).getPacket());
+        handler.a((net.minecraft.server.Packet3Chat) ((CanaryPacket) chatPacket).getPacket());
 
     }
 
     @Override
-    public void sendMessage(String messgage) {
-        handler.sendMessage(messgage);
+    public void sendMessage(String message) {
+        getUser().sendMessage(message);
     }
 
     @Override
     public void handleCommand(String[] command) {
-        handler.getUser().executeCommand(command);
+        getUser().executeCommand(command);
 
     }
 
@@ -57,7 +57,7 @@ public class CanaryNetServerHandler implements NetServerHandler {
 
     @Override
     public Player getUser() {
-        return handler.getUser();
+        return handler.c.getPlayer();
     }
 
 }

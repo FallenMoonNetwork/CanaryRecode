@@ -2,6 +2,7 @@ package net.canarymod.api;
 
 
 import java.util.ArrayList;
+
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.CanaryWorld;
@@ -44,7 +45,7 @@ public class CanaryPlayerManager implements PlayerManager {
     public ArrayList<Player> getManagedPlayers() {
         ArrayList<Player> players = new ArrayList<Player>();
 
-        for (net.minecraft.server.EntityPlayerMP player : pm.managedPlayers) {
+        for (net.minecraft.server.EntityPlayerMP player : pm.getManagedPlayers()) {
             players.add(player.getPlayer());
         }
         return players;
@@ -57,7 +58,7 @@ public class CanaryPlayerManager implements PlayerManager {
 
     @Override
     public int getMaxTrackingDistance() {
-        return pm.c();
+        return net.minecraft.server.PlayerManager.a(pm.getPlayerViewRadius());
     }
 
     public net.minecraft.server.PlayerManager getHandle() {
