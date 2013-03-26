@@ -13,6 +13,7 @@ import net.minecraft.server.EntitySlime;
  */
 public abstract class CanaryEntityMob extends CanaryEntityLiving implements EntityMob {
 
+
     public CanaryEntityMob(net.minecraft.server.EntityMob entity) {
         super(entity);
     }
@@ -23,10 +24,5 @@ public abstract class CanaryEntityMob extends CanaryEntityLiving implements Enti
 
     public CanaryEntityMob(EntityFlying entity) {
         super(entity);
-    }
-
-    @Override
-    public boolean canSpawn() {
-        return ((net.minecraft.server.EntityLiving) entity).l();
     }
 }

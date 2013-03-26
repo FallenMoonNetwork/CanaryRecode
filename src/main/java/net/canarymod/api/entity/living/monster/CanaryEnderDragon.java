@@ -13,23 +13,35 @@ import net.minecraft.server.EntityDragon;
  */
 public class CanaryEnderDragon extends CanaryEntityLiving implements EnderDragon {
 
+    /**
+     * Constructs a new wrapper for EntityDragon
+     * 
+     * @param entity
+     *            the EntityDragon to wrap
+     */
     public CanaryEnderDragon(EntityDragon entity) {
         super(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isSlowed() {
-        return ((EntityDragon) entity).bQ;
+        return getHandle().bQ;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EnderCrystal getHealingCrystal() {
-        if (((EntityDragon) entity).bS == null) {
-            return null;
-        }
-        return (EnderCrystal) ((EntityDragon) entity).bS.getCanaryEntity();
+        return getHandle().bS != null ? (EnderCrystal) getHandle().bS.getCanaryEntity() : null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EntityDragon getHandle() {
         return (EntityDragon) entity;

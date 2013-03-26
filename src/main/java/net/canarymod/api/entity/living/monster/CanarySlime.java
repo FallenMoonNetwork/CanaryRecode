@@ -5,27 +5,44 @@ import net.minecraft.server.EntitySlime;
 
 
 /**
- * @author Jos
- * @author Chris
+ * Slime wrapper implementation
+ * 
+ * @author Chris (damagefilter)
+ * @author Jason (darkdiplomat)
  */
 public class CanarySlime extends CanaryEntityMob implements Slime {
 
+    /**
+     * Constructs a new wrapper for EntitySlime
+     * 
+     * @param entity
+     *            the EntitySlime to wrap
+     */
     public CanarySlime(EntitySlime entity) {
         super(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Size getSize() {
-        return Size.fromByte((byte) ((EntitySlime) entity).L());
+        return Size.fromByte((byte) getHandle().p());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSize(Size size) {
-        ((EntitySlime) entity).c(size.getByte());
+        getHandle().c(size.getByte());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public int getMaxHealth() {
-        return ((EntitySlime) entity).d();
+    public EntitySlime getHandle() {
+        return (EntitySlime) entity;
     }
 }

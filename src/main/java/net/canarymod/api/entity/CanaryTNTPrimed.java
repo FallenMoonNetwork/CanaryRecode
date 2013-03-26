@@ -10,7 +10,7 @@ import net.minecraft.server.EntityTNTPrimed;
  * @author Jason (darkdiplomat)
  */
 public class CanaryTNTPrimed extends CanaryEntity implements TNTPrimed {
-    private boolean damageWorld, damageEntity;
+    private boolean damageWorld = true, damageEntity = true;
     private float power = 4.0F;
 
     /**

@@ -13,7 +13,7 @@ public class EntityTNTPrimed extends Entity {
         this.m = true;
         this.a(0.98F, 0.98F);
         this.N = this.P / 2.0F;
-        this.entity = new CanaryTNTPrimed(this);
+        this.entity = new CanaryTNTPrimed(this); // CanaryMod: Wrap Entity
     }
 
     public EntityTNTPrimed(World world, double d0, double d1, double d2, EntityLiving entityliving) {

@@ -11,35 +11,59 @@ import net.minecraft.server.EntityEnderman;
  */
 public class CanaryEnderman extends CanaryEntityMob implements Enderman {
 
+    /**
+     * Constructs a new wrapper for EntityEnderman
+     * 
+     * @param entity
+     *            the EntityEnderman to wrap
+     */
     public CanaryEnderman(EntityEnderman entity) {
         super(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public short getCarriedBlockID() {
-        return (short) ((EntityEnderman) entity).o();
+        return (short) getHandle().o();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCarriedBlockID(short blockId) {
-        ((EntityEnderman) entity).a(blockId);
+        getHandle().a(blockId);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public short getCarriedBlockMetaData() {
-        return (short) ((EntityEnderman) entity).p();
+        return (short) getHandle().p();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCarriedBlockMetaData(short metadata) {
-        ((EntityEnderman) entity).s(metadata);
+        getHandle().s(metadata);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean randomTeleport() {
-        return ((EntityEnderman) entity).m();
+        return getHandle().m();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EntityEnderman getHandle() {
         return (EntityEnderman) entity;

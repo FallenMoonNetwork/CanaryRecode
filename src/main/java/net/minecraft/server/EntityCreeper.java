@@ -8,8 +8,8 @@ public class EntityCreeper extends EntityMob {
 
     private int d;
     private int e;
-    private int f = 30;
-    private int g = 3;
+    public int f = 30; // CanaryMod: private => public // Fuse
+    public int g = 3; // CanaryMod: private => public // Power
 
     public EntityCreeper(World world) {
         super(world);

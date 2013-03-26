@@ -11,20 +11,35 @@ import net.minecraft.server.EntityBlaze;
  */
 public class CanaryBlaze extends CanaryEntityMob implements Blaze {
 
+    /**
+     * Constructs a new wrapper for EntityBlaze
+     * 
+     * @param entity
+     *            the EntityBlaze to wrap
+     */
     public CanaryBlaze(EntityBlaze entity) {
         super(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isBurning() {
-        return ((EntityBlaze) entity).m();
+        return getHandle().m();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBurning(boolean isBurning) {
-        ((EntityBlaze) entity).a(isBurning);
+        getHandle().a(isBurning);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EntityBlaze getHandle() {
         return (EntityBlaze) entity;

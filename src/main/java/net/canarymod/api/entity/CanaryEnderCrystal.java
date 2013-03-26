@@ -10,8 +10,8 @@ import net.minecraft.server.EntityEnderCrystal;
  * @author Jason (darkdiplomat)
  */
 public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
-    private boolean damageWorld, damageEntity, oneHit;
-    private float explode = 6.0F;
+    private boolean damageWorld = true, damageEntity = true, oneHit = true;
+    private float power = 6.0F;
 
     /**
      * Constructs a new wrapper for EntityEnderCrystal
@@ -76,7 +76,7 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
      */
     @Override
     public float getPower() {
-        return explode;
+        return power;
     }
 
     /**
@@ -84,7 +84,7 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
      */
     @Override
     public void setPower(float power) {
-        explode = power;
+        this.power = power;
     }
 
     /**
@@ -93,7 +93,7 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
     @Override
     public void detonate() {
         this.destroy();
-        getHandle().q.a(getHandle(), this.getX(), this.getY(), this.getZ(), explode, true);
+        getHandle().q.a(getHandle(), this.getX(), this.getY(), this.getZ(), power, true);
     }
 
     /**
@@ -111,6 +111,20 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
     public void setOneHitDetonate(boolean oneHit) {
         this.oneHit = oneHit;
     }
+
+    /**
+     * There is no fuse
+     */
+    @Override
+    public int getFuse() {
+        return 0;
+    }
+
+    /**
+     * There is no fuse
+     */
+    @Override
+    public void setFuse(int fuse) {}
 
     /**
      * {@inheritDoc}
