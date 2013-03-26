@@ -1,15 +1,21 @@
 package net.minecraft.server;
 
+
+import net.canarymod.api.entity.vehicle.CanaryTNTMinecart;
+
+
 public class EntityMinecartTNT extends EntityMinecart {
 
-    private int a = -1;
+    public int a = -1; // CanaryMod: private => public
 
     public EntityMinecartTNT(World world) {
         super(world);
+        this.entity = new CanaryTNTMinecart(this); // CanaryMod: Wrap Entity
     }
 
     public EntityMinecartTNT(World world, double d0, double d1, double d2) {
         super(world, d0, d1, d2);
+        this.entity = new CanaryTNTMinecart(this); // CanaryMod: Wrap Entity
     }
 
     public int l() {

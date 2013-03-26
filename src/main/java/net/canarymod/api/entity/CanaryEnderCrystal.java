@@ -127,6 +127,18 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
     public void setFuse(int fuse) {}
 
     /**
+     * There is no fuse
+     */
+    @Override
+    public void increaseFuse(int increase) {}
+
+    /**
+     * There is no fuse
+     */
+    @Override
+    public void decreaseFuse(int decrease) {}
+
+    /**
      * {@inheritDoc}
      */
     @Override

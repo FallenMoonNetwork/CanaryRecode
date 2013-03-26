@@ -1,70 +1,121 @@
 package net.canarymod.api.entity.vehicle;
 
+import net.canarymod.api.world.CanaryWorld;
 import net.minecraft.server.EntityMinecartTNT;
 
+/**
+ * TNTMinecart wrapper implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
 public class CanaryTNTMinecart extends CanaryMinecart implements TNTMinecart {
+    private boolean damageWorld, damageEntity;
+    private float power = 4.0F;
 
+    /**
+     * Constructs a new wrapper for EntityMinecartTNT
+     * 
+     * @param entity
+     *            the EntityMinecartTNT to be wrapped
+     */
     public CanaryTNTMinecart(EntityMinecartTNT entity) {
         super(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCanDamageWorld(boolean canDamage) {
-        // TODO Auto-generated method stub
-
+        damageWorld = canDamage;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canDamageWorld() {
-        // TODO Auto-generated method stub
-        return false;
+        return damageWorld;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCanDamageEntities(boolean canDamage) {
-        // TODO Auto-generated method stub
-
+        damageEntity = canDamage;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canDamageEntities() {
-        // TODO Auto-generated method stub
-        return false;
+        return damageEntity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void detonate() {
-        // TODO Auto-generated method stub
-
+        ((CanaryWorld) getWorld()).getHandle().a(getHandle(), getX(), getY(), getZ(), power, true);
+        this.destroy();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getFuse() {
-        // TODO Auto-generated method stub
-        return 0;
+        return getHandle().a;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFuse(int fuse) {
-        // TODO Auto-generated method stub
-
+        getHandle().a = fuse;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void increaseFuse(int increase) {
-        // TODO Auto-generated method stub
-
+        getHandle().a += increase;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void decreaseFuse(int decrease) {
-        // TODO Auto-generated method stub
-
+        getHandle().a -= decrease;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public float getPower() {
+        return power;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPower(float power) {
+        this.power = power;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EntityMinecartTNT getHandle() {
         return (EntityMinecartTNT) entity;
     }
-
 }

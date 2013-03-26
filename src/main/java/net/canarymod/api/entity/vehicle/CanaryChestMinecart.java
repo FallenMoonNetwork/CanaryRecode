@@ -13,10 +13,19 @@ import net.minecraft.server.ItemStack;
  */
 public class CanaryChestMinecart extends CanaryMinecart implements ChestMinecart {
 
+    /**
+     * Constructs a new wrapper for EntityMinecartChest
+     * 
+     * @param entity
+     *            the EntityMinecartChest to be wrapped
+     */
     public CanaryChestMinecart(EntityMinecartChest entity) {
         super(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item[] getContents() {
         ItemStack[] contents = ((EntityMinecartChest) entity).getContents();
@@ -28,6 +37,9 @@ public class CanaryChestMinecart extends CanaryMinecart implements ChestMinecart
         return canaryItems;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setContents(Item[] items) {
         ItemStack[] values = new ItemStack[getInventorySize()];
@@ -36,106 +48,174 @@ public class CanaryChestMinecart extends CanaryMinecart implements ChestMinecart
         for (int i = 0; i < items.length; i++) {
             values[i] = ((CanaryItem) items[i]).getHandle();
         }
-        ((EntityMinecartChest) entity).setContents(values);
+        getHandle().setContents(values);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item getSlot(int index) {
-        return ((EntityMinecartChest) entity).getSlot(index).getCanaryItem();
+        return getHandle().getSlot(index).getCanaryItem();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addItem(int itemId, int amount) {
-        ((EntityMinecartChest) entity).addItem(itemId, amount);
+        getHandle().addItem(itemId, amount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addItem(Item item) {
-        ((EntityMinecartChest) entity).addItem(item);
+        getHandle().addItem(item);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getEmptySlot() {
-        return ((EntityMinecartChest) entity).getEmptySlot();
+        return getHandle().getEmptySlot();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSlot(int index, Item value) {
-        ((EntityMinecartChest) entity).setSlot(index, ((CanaryItem) value).getHandle());
+        getHandle().setSlot(index, ((CanaryItem) value).getHandle());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getInventorySize() {
-        return ((EntityMinecartChest) entity).getInventorySize();
+        return getHandle().getInventorySize();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getInventoryName() {
-        return ((EntityMinecartChest) entity).getInventoryName();
+        return getHandle().getInventoryName();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setInventoryName(String value) {
-        ((EntityMinecartChest) entity).setInventoryName(value);
+        getHandle().setInventoryName(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clearContents() {
-        ((EntityMinecartChest) entity).clearContents();
+        getHandle().clearContents();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item getItem(int id, int amount) {
-        return ((EntityMinecartChest) entity).getItem(id, amount);
+        return getHandle().getItem(id, amount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item getItem(int id) {
-        return ((EntityMinecartChest) entity).getItem(id);
+        return getHandle().getItem(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item removeItem(Item item) {
-        return ((EntityMinecartChest) entity).removeItem(item);
+        return getHandle().removeItem(item);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item removeItem(int id) {
-        return ((EntityMinecartChest) entity).removeItem(id);
+        return getHandle().removeItem(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item decreaseItemStackSize(int itemId, int amount) {
-        return ((EntityMinecartChest) entity).decreaseItemStackSize(itemId, amount).getCanaryItem();
+        return getHandle().decreaseItemStackSize(itemId, amount).getCanaryItem();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getInventoryStackLimit() {
-        return ((EntityMinecartChest) entity).getInventoryStackLimit();
+        return getHandle().getInventoryStackLimit();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItemStack(Item item) {
-        return ((EntityMinecartChest) entity).hasItemStack(((CanaryItem) item).getHandle());
+        return getHandle().hasItemStack(((CanaryItem) item).getHandle());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItemStack(int itemId, int amount) {
-        return ((EntityMinecartChest) entity).hasItemStack(itemId, amount);
+        return getHandle().hasItemStack(itemId, amount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        return ((EntityMinecartChest) entity).hasItemStack(itemId, minAmount, maxAmount);
+        return getHandle().hasItemStack(itemId, minAmount, maxAmount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItem(int itemId) {
         return hasItem(itemId);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
-        ((EntityMinecartChest) entity).update();
+        getHandle().update();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityMinecartChest getHandle() {
+        return (EntityMinecartChest) entity;
     }
 }

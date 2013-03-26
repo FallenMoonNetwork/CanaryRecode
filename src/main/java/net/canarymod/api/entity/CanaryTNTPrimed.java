@@ -43,6 +43,22 @@ public class CanaryTNTPrimed extends CanaryEntity implements TNTPrimed {
      * {@inheritDoc}
      */
     @Override
+    public void increaseFuse(int increase) {
+        getHandle().a += increase;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void decreaseFuse(int decrease) {
+        getHandle().a -= decrease;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void detonate() {
         getHandle().a = 0;
     }
