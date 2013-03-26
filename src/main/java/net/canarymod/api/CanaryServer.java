@@ -4,6 +4,10 @@ package net.canarymod.api;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import net.canarymod.Canary;
 import net.canarymod.Main;
@@ -25,6 +29,8 @@ import net.minecraft.server.MinecraftServer;
  */
 public class CanaryServer implements Server {
 
+    protected HashMap<String, ServerTimer> timers = new HashMap<String, ServerTimer>();
+    protected ScheduledExecutorService taskExecutor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
     private MinecraftServer server;
 
     /**
@@ -126,7 +132,15 @@ public class CanaryServer implements Server {
      */
     @Override
     public void setTimer(String uniqueName, int time) {
-        MinecraftServer.b.put(uniqueName, time);
+        if(timers.containsKey(uniqueName)) {
+            Canary.logWarning("Unique key timer " + uniqueName + " is already running, skipping.");
+            return;
+        }
+        ServerTimer newTimer = new ServerTimer(time, uniqueName);
+        synchronized(taskExecutor) {
+            taskExecutor.schedule(newTimer, 1, TimeUnit.SECONDS);
+            timers.put(uniqueName, newTimer);
+        }
     }
 
     /**
@@ -134,7 +148,7 @@ public class CanaryServer implements Server {
      */
     @Override
     public boolean isTimerExpired(String uniqueName) {
-        return MinecraftServer.b.containsKey(uniqueName);
+        return timers.containsKey(uniqueName);
     }
 
     @Override
@@ -207,7 +221,7 @@ public class CanaryServer implements Server {
 
     @Override
     public ConfigurationManager getConfigurationManager() {
-        return server.h.getCanaryConfigurationManager();
+        return server.getCanaryConfigurationManager();
     }
 
     @Override
@@ -222,7 +236,7 @@ public class CanaryServer implements Server {
 
     @Override
     public void initiateShutdown() {
-        server.initiateShutdown();
+        server.initShutdown();
     }
 
     @Override
@@ -250,5 +264,24 @@ public class CanaryServer implements Server {
     @Override
     public void notice(String message) {
         System.out.println("[NOTICE] " + message);
+    }
+
+    public class ServerTimer implements Runnable {
+        private int time;
+        private String name;
+        public ServerTimer(int time, String name) {
+            this.time = time;
+            this.name = name;
+        }
+        @Override
+        public synchronized void run() {
+            time--;
+            if(time > 0) {
+                taskExecutor.schedule(this, 1, TimeUnit.SECONDS);
+            }
+            else {
+                timers.remove(name);
+            }
+        }
     }
 }

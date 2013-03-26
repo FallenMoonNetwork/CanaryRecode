@@ -7,8 +7,10 @@ import java.security.KeyPair;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +33,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     private String q;
     private int r = -1;
     public WorldServer[] b; // XXX
-    private ServerConfigurationManager s;
+    public ServerConfigurationManager s; //CanaryMod private -> public
     private boolean t = true;
     private boolean u = false;
     private int v = 0;
@@ -66,11 +68,15 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     private String R;
     private boolean S;
 
-    // CanaryMod
+    // CanaryMod start: Multiworld \o/
+    public Map<String, WorldServer> worlds = new HashMap<String, WorldServer>(3);
+    public Map<String, long[][]> worldTickNanos = new HashMap<String, long[][]>(3);
     private CanaryServer server;
     private CanaryConfigurationManager cfgManager;
     CanaryWorldManager worldManager;
 
+    // CanaryMod start: Stop Message
+    private String stopMsg;
     //
 
     public MinecraftServer(File file1) {
@@ -107,8 +113,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     protected void a(String s0, String s1, long i0, WorldType worldtype, String s2) {
         this.b(s0);
         this.c("menu.loadingLevel");
-        this.b = new WorldServer[3];
-        this.j = new long[this.b.length][100];
+        //        this.b = new WorldServer[3];
+        //        this.j = new long[this.b.length][100];
         ISaveHandler isavehandler = this.l.a(s0, true);
         WorldInfo worldinfo = isavehandler.d();
         WorldSettings worldsettings;
@@ -1015,5 +1021,13 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     public CanaryConfigurationManager getConfigurationManager() {
         return cfgManager;
+    }
+
+    public void initShutdown() {
+        this.N = false;
+    }
+
+    public boolean isRunning() {
+        return N;
     }
 }
