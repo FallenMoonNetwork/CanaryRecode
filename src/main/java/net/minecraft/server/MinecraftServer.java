@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
@@ -270,6 +271,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.t = false;
     }
 
+    @Override
     public void run() {
         try {
             if (this.c()) {
@@ -685,18 +687,22 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         return k;
     }
 
+    @Override
     public String c_() {
         return "Server";
     }
 
+    @Override
     public void a(String s0) {
         this.al().a(StringUtils.a(s0));
     }
 
+    @Override
     public boolean a(int i0, String s0) {
         return true;
     }
 
+    @Override
     public String a(String s0, Object... aobject) {
         return StringTranslate.a().a(s0, aobject);
     }
@@ -804,6 +810,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.O = s0;
     }
 
+    @Override
     public void a(PlayerUsageSnooper playerusagesnooper) {
         playerusagesnooper.a("whitelist_enabled", Boolean.valueOf(false));
         playerusagesnooper.a("whitelist_count", Integer.valueOf(0));
@@ -839,6 +846,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         playerusagesnooper.a("worlds", Integer.valueOf(i0));
     }
 
+    @Override
     public void b(PlayerUsageSnooper playerusagesnooper) {
         playerusagesnooper.a("singleplayer", Boolean.valueOf(this.I()));
         playerusagesnooper.a("server_brand", this.getServerModName());
@@ -846,6 +854,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         playerusagesnooper.a("dedicated", Boolean.valueOf(this.T()));
     }
 
+    @Override
     public boolean R() {
         return true;
     }
@@ -948,6 +957,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.S = true;
     }
 
+    @Override
     public ChunkCoordinates b() {
         return new ChunkCoordinates(0, 0, 0);
     }
@@ -960,6 +970,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         return false;
     }
 
+    @Override
     public abstract ILogAgent al();
 
     public static ServerConfigurationManager a(MinecraftServer minecraftserver) {
@@ -1000,5 +1011,9 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      */
     public CanaryServer getServer() {
         return server;
+    }
+
+    public CanaryConfigurationManager getConfigurationManager() {
+        return cfgManager;
     }
 }

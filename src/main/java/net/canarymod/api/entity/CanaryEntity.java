@@ -236,6 +236,11 @@ public abstract class CanaryEntity implements Entity {
         return true;
     }
 
+    @Override
+    public boolean isRiding() {
+        return entity.af();
+    }
+
     /**
      * Destroys this entity
      */
