@@ -486,7 +486,10 @@ public class InventoryPlayer implements IInventory {
 
     @Override
     public void setContents(ItemStack[] items) {
-        System.arraycopy(items, 0, a, 0, items.length < getInventorySize() ? items.length : getInventorySize());
+        System.arraycopy(items, 0, a, 0, items.length < a.length ? items.length : a.length);
+        if (items.length > a.length) {
+            System.arraycopy(items, a.length, b, 0, items.length - a.length < b.length ? items.length : b.length);
+        }
     }
 
     @Override

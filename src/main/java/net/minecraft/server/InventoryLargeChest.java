@@ -99,7 +99,10 @@ public class InventoryLargeChest implements IInventory {
 
     @Override
     public void setContents(ItemStack[] items) {
-        System.arraycopy(items, 0, a, 0, items.length < getInventorySize() ? items.length : getInventorySize());
+        System.arraycopy(items, 0, b.getContents(), 0, items.length < b.getInventorySize() ? items.length : b.getInventorySize());
+        if (items.length > b.getInventorySize()) {
+            System.arraycopy(items, b.getInventorySize(), c.getContents(), 0, items.length - b.getInventorySize() < c.getInventorySize() ? items.length : c.getInventorySize());
+        }
     }
 
     @Override

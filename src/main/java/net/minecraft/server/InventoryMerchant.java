@@ -167,7 +167,7 @@ public class InventoryMerchant implements IInventory {
 
     @Override
     public void setContents(ItemStack[] items) {
-        System.arraycopy(items, 0, a, 0, items.length < getInventorySize() ? items.length : getInventorySize());
+        System.arraycopy(items, 0, getContents(), 0, items.length < getInventorySize() ? items.length : getInventorySize());
     }
 
     @Override

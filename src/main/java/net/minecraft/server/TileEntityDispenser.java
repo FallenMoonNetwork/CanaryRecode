@@ -1,43 +1,44 @@
 package net.minecraft.server;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Random;
+import net.canarymod.api.inventory.CanaryInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
 
-public class InventoryBasic implements IInventory {
+public class TileEntityDispenser extends TileEntity implements IInventory {
 
-    private String a;
-    private int b;
-    private ItemStack[] c;
-    private List d;
-    private boolean e;
+    private ItemStack[] b = new ItemStack[9];
+    private Random c = new Random();
+    protected String a;
+    private CanaryInventory inventory; // CanaryMod inventory instance
 
-    public InventoryBasic(String s0, boolean flag0, int i0) {
-        this.a = s0;
-        this.e = flag0;
-        this.b = i0;
-        this.c = new ItemStack[i0];
+    public TileEntityDispenser() {
+        this.inventory = new CanaryInventory(this); // CanaryMod: create once, use forever
+    }
+
+    public int j_() {
+        return 9;
     }
 
     public ItemStack a(int i0) {
-        return this.c[i0];
+        return this.b[i0];
     }
 
     public ItemStack a(int i0, int i1) {
-        if (this.c[i0] != null) {
+        if (this.b[i0] != null) {
             ItemStack itemstack;
 
-            if (this.c[i0].a <= i1) {
-                itemstack = this.c[i0];
-                this.c[i0] = null;
+            if (this.b[i0].a <= i1) {
+                itemstack = this.b[i0];
+                this.b[i0] = null;
                 this.k_();
                 return itemstack;
             } else {
-                itemstack = this.c[i0].a(i1);
-                if (this.c[i0].a == 0) {
-                    this.c[i0] = null;
+                itemstack = this.b[i0].a(i1);
+                if (this.b[i0].a == 0) {
+                    this.b[i0] = null;
                 }
 
                 this.k_();
@@ -49,18 +50,31 @@ public class InventoryBasic implements IInventory {
     }
 
     public ItemStack b(int i0) {
-        if (this.c[i0] != null) {
-            ItemStack itemstack = this.c[i0];
+        if (this.b[i0] != null) {
+            ItemStack itemstack = this.b[i0];
 
-            this.c[i0] = null;
+            this.b[i0] = null;
             return itemstack;
         } else {
             return null;
         }
     }
 
+    public int j() {
+        int i0 = -1;
+        int i1 = 1;
+
+        for (int i2 = 0; i2 < this.b.length; ++i2) {
+            if (this.b[i2] != null && this.c.nextInt(i1++) == 0) {
+                i0 = i2;
+            }
+        }
+
+        return i0;
+    }
+
     public void a(int i0, ItemStack itemstack) {
-        this.c[i0] = itemstack;
+        this.b[i0] = itemstack;
         if (itemstack != null && itemstack.a > this.d()) {
             itemstack.a = this.d();
         }
@@ -68,32 +82,75 @@ public class InventoryBasic implements IInventory {
         this.k_();
     }
 
-    public int j_() {
-        return this.b;
+    public int a(ItemStack itemstack) {
+        for (int i0 = 0; i0 < this.b.length; ++i0) {
+            if (this.b[i0] == null || this.b[i0].c == 0) {
+                this.a(i0, itemstack);
+                return i0;
+            }
+        }
+
+        return -1;
     }
 
     public String b() {
-        return this.a;
+        return this.c() ? this.a : "container.dispenser";
+    }
+
+    public void a(String s0) {
+        this.a = s0;
     }
 
     public boolean c() {
-        return this.e;
+        return this.a != null;
+    }
+
+    public void a(NBTTagCompound nbttagcompound) {
+        super.a(nbttagcompound);
+        NBTTagList nbttaglist = nbttagcompound.m("Items");
+
+        this.b = new ItemStack[this.j_()];
+
+        for (int i0 = 0; i0 < nbttaglist.c(); ++i0) {
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.b(i0);
+            int i1 = nbttagcompound1.c("Slot") & 255;
+
+            if (i1 >= 0 && i1 < this.b.length) {
+                this.b[i1] = ItemStack.a(nbttagcompound1);
+            }
+        }
+
+        if (nbttagcompound.b("CustomName")) {
+            this.a = nbttagcompound.i("CustomName");
+        }
+    }
+
+    public void b(NBTTagCompound nbttagcompound) {
+        super.b(nbttagcompound);
+        NBTTagList nbttaglist = new NBTTagList();
+
+        for (int i0 = 0; i0 < this.b.length; ++i0) {
+            if (this.b[i0] != null) {
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+
+                nbttagcompound1.a("Slot", (byte) i0);
+                this.b[i0].b(nbttagcompound1);
+                nbttaglist.a((NBTBase) nbttagcompound1);
+            }
+        }
+
+        nbttagcompound.a("Items", (NBTBase) nbttaglist);
+        if (this.c()) {
+            nbttagcompound.a("CustomName", this.a);
+        }
     }
 
     public int d() {
         return 64;
     }
 
-    public void k_() {
-        if (this.d != null) {
-            for (int i0 = 0; i0 < this.d.size(); ++i0) {
-                ((IInvBasic) this.d.get(i0)).a(this);
-            }
-        }
-    }
-
     public boolean a(EntityPlayer entityplayer) {
-        return true;
+        return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
     }
 
     public void f() {}
@@ -104,10 +161,15 @@ public class InventoryBasic implements IInventory {
         return true;
     }
 
+    // CanaryMod
+    public CanaryInventory getInventory() {
+        return inventory;
+    }
+
     // CanaryMod: Container<ItemStack>
     @Override
     public ItemStack[] getContents() {
-        return c;
+        return b;
     }
 
     @Override
@@ -123,7 +185,7 @@ public class InventoryBasic implements IInventory {
     @Override
     public ItemStack getSlot(int index) {
         if (!(index < 0 || index > getInventorySize())) {
-            return c[index];
+            return b[index];
         }
         return null;
     }
@@ -175,7 +237,7 @@ public class InventoryBasic implements IInventory {
     @Override
     public void setSlot(int index, ItemStack value) {
         if (!(index < 0 || index > getInventorySize())) {
-            this.c[index] = value;
+            this.b[index] = value;
         }
     }
 
@@ -191,7 +253,7 @@ public class InventoryBasic implements IInventory {
 
     @Override
     public void clearContents() {
-        Arrays.fill(c, null);
+        Arrays.fill(b, null);
     }
 
     @Override

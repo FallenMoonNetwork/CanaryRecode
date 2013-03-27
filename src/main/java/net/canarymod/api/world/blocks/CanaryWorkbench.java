@@ -6,15 +6,14 @@ import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.World;
-import net.minecraft.server.OContainerWorkbench;
-import net.minecraft.server.OItemStack;
+import net.minecraft.server.ContainerWorkbench;
 
 
 public class CanaryWorkbench implements Workbench {
 
-    private OContainerWorkbench container;
+    private ContainerWorkbench container;
 
-    public CanaryWorkbench(OContainerWorkbench container) {
+    public CanaryWorkbench(ContainerWorkbench container) {
         this.container = container;
     }
 

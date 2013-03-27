@@ -37,7 +37,7 @@ public class ItemSerializer implements Serializer<CanaryItem> {
             EnchantmentSerializer es = new EnchantmentSerializer();
 
             for (String e : enchantments) {
-                citem.addEnchantment(es.deserialize(e));
+                citem.addEnchantments(es.deserialize(e));
             }
         }
         return citem;

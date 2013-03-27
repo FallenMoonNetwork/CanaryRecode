@@ -5,6 +5,7 @@ import net.canarymod.api.inventory.CanaryInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
+import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityChest;
 
 
@@ -67,25 +68,20 @@ public class CanaryChest extends CanaryComplexBlock implements Chest {
     // }
 
     @Override
-    public OTileEntityChest getHandle() {
-        return (OTileEntityChest) tileentity;
-    }
-
-    @Override
     public void clearContents() {
-        ((OTileEntityChest) tileentity).clearContents();
+        getHandle().clearContents();
     }
 
     @Override
     public CanaryItem decreaseItemStackSize(int itemId, int amount) {
-        OItemStack item = ((OTileEntityChest) tileentity).decreaseItemStackSize(itemId, amount);
+        ItemStack item = getHandle().decreaseItemStackSize(itemId, amount);
 
         return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
     public CanaryItem[] getContents() {
-        OItemStack[] oStacks = ((OTileEntityChest) tileentity).getContents();
+        ItemStack[] oStacks = getHandle().getContents();
         CanaryItem[] items = new CanaryItem[oStacks.length];
 
         for (int i = 0; i < oStacks.length; i++) {
@@ -97,59 +93,59 @@ public class CanaryChest extends CanaryComplexBlock implements Chest {
 
     @Override
     public String getInventoryName() {
-        return ((OTileEntityChest) tileentity).getInventoryName();
+        return getHandle().getInventoryName();
     }
 
     @Override
     public int getInventorySize() {
-        return ((OTileEntityChest) tileentity).getInventorySize();
+        return getHandle().getInventorySize();
     }
 
     @Override
     public int getInventoryStackLimit() {
-        return ((OTileEntityChest) tileentity).getInventoryStackLimit();
+        return getHandle().getInventoryStackLimit();
     }
 
     @Override
     public Item getItem(int itemId) {
-        return ((OTileEntityChest) tileentity).getItem(itemId);
+        return getHandle().getItem(itemId);
     }
 
     @Override
     public Item getItem(int itemId, int amount) {
-        return ((OTileEntityChest) tileentity).getItem(itemId, amount);
+        return getHandle().getItem(itemId, amount);
     }
 
     @Override
     public CanaryItem getSlot(int index) {
-        OItemStack item = ((OTileEntityChest) tileentity).getSlot(index);
+        ItemStack item = getHandle().getSlot(index);
 
         return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
     public boolean hasItem(int itemId) {
-        return ((OTileEntityChest) tileentity).hasItem(itemId);
+        return getHandle().hasItem(itemId);
     }
 
     @Override
     public boolean hasItemStack(Item item) {
-        return ((OTileEntityChest) tileentity).hasItemStack(((CanaryItem) item).getHandle());
+        return getHandle().hasItemStack(((CanaryItem) item).getHandle());
     }
 
     @Override
     public Item removeItem(Item item) {
-        return ((OTileEntityChest) tileentity).removeItem(item);
+        return getHandle().removeItem(item);
     }
 
     @Override
     public Item removeItem(int itemId) {
-        return ((OTileEntityChest) tileentity).removeItem(itemId);
+        return getHandle().removeItem(itemId);
     }
 
     @Override
     public void setContents(Item[] items) {
-        OItemStack[] oStacks = new OItemStack[items.length];
+        ItemStack[] oStacks = new ItemStack[items.length];
 
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
@@ -158,41 +154,46 @@ public class CanaryChest extends CanaryComplexBlock implements Chest {
                 oStacks[i] = null;
             }
         }
-        ((OTileEntityChest) tileentity).setContents(oStacks);
+        getHandle().setContents(oStacks);
     }
 
     @Override
     public void setInventoryName(String name) {
-        ((OTileEntityChest) tileentity).setInventoryName(name);
+        getHandle().setInventoryName(name);
     }
 
     @Override
     public void setSlot(int index, Item item) {
-        ((OTileEntityChest) tileentity).setSlot(index, ((CanaryItem) item).getHandle());
+        getHandle().setSlot(index, ((CanaryItem) item).getHandle());
     }
 
     @Override
     public void addItem(int itemId, int amount) {
-        ((OTileEntityChest) tileentity).addItem(itemId, amount);
+        getHandle().addItem(itemId, amount);
     }
 
     @Override
     public void addItem(Item item) {
-        ((OTileEntityChest) tileentity).addItem(item);
+        getHandle().addItem(item);
     }
 
     @Override
     public int getEmptySlot() {
-        return ((OTileEntityChest) tileentity).getEmptySlot();
+        return getHandle().getEmptySlot();
     }
 
     @Override
     public boolean hasItemStack(int itemId, int amount) {
-        return ((OTileEntityChest) tileentity).hasItemStack(itemId, amount);
+        return getHandle().hasItemStack(itemId, amount);
     }
 
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        return ((OTileEntityChest) tileentity).hasItemStack(itemId, minAmount, maxAmount);
+        return getHandle().hasItemStack(itemId, minAmount, maxAmount);
+    }
+
+    @Override
+    public TileEntityChest getHandle() {
+        return (TileEntityChest) tileentity;
     }
 }

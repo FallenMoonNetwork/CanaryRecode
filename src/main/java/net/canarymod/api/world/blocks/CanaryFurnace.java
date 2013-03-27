@@ -1,7 +1,6 @@
 package net.canarymod.api.world.blocks;
 
 
-import net.canarymod.api.inventory.CanaryInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
@@ -17,24 +16,24 @@ public class CanaryFurnace extends CanaryComplexBlock implements Furnace {
 
     @Override
     public Inventory getInventory() {
-        return new CanaryInventory((TileEntityFurnace) tileentity);
+        return getHandle().getInventory();
     }
 
     @Override
     public void clearContents() {
-        ((TileEntityFurnace) tileentity).clearContents();
+        getHandle().clearContents();
     }
 
     @Override
     public CanaryItem decreaseItemStackSize(int itemId, int amount) {
-        ItemStack item = ((TileEntityFurnace) tileentity).decreaseItemStackSize(itemId, amount);
+        ItemStack item = getHandle().decreaseItemStackSize(itemId, amount);
 
         return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
     public CanaryItem[] getContents() {
-        ItemStack[] oStacks = ((TileEntityFurnace) tileentity).getContents();
+        ItemStack[] oStacks = getHandle().getContents();
         CanaryItem[] items = new CanaryItem[oStacks.length];
 
         for (int i = 0; i < oStacks.length; i++) {
@@ -46,54 +45,54 @@ public class CanaryFurnace extends CanaryComplexBlock implements Furnace {
 
     @Override
     public String getInventoryName() {
-        return ((TileEntityFurnace) tileentity).getInventoryName();
+        return getHandle().getInventoryName();
     }
 
     @Override
     public int getInventorySize() {
-        return ((TileEntityFurnace) tileentity).getInventorySize();
+        return getHandle().getInventorySize();
     }
 
     @Override
     public int getInventoryStackLimit() {
-        return ((TileEntityFurnace) tileentity).getInventoryStackLimit();
+        return getHandle().getInventoryStackLimit();
     }
 
     @Override
     public Item getItem(int id) {
-        return ((TileEntityFurnace) tileentity).getItem(id);
+        return getHandle().getItem(id);
     }
 
     @Override
     public Item getItem(int id, int amount) {
-        return ((TileEntityFurnace) tileentity).getItem(id, amount);
+        return getHandle().getItem(id, amount);
     }
 
     @Override
     public CanaryItem getSlot(int index) {
-        ItemStack item = ((TileEntityFurnace) tileentity).getSlot(index);
+        ItemStack item = getHandle().getSlot(index);
 
         return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
     public boolean hasItem(int itemId) {
-        return ((TileEntityFurnace) tileentity).hasItem(itemId);
+        return getHandle().hasItem(itemId);
     }
 
     @Override
     public boolean hasItemStack(Item item) {
-        return ((TileEntityFurnace) tileentity).hasItemStack(((CanaryItem) item).getHandle());
+        return getHandle().hasItemStack(((CanaryItem) item).getHandle());
     }
 
     @Override
     public Item removeItem(Item item) {
-        return ((TileEntityFurnace) tileentity).removeItem(item);
+        return getHandle().removeItem(item);
     }
 
     @Override
     public Item removeItem(int id) {
-        return ((TileEntityFurnace) tileentity).removeItem(id);
+        return getHandle().removeItem(id);
     }
 
     @Override
@@ -107,47 +106,47 @@ public class CanaryFurnace extends CanaryComplexBlock implements Furnace {
                 oStacks[i] = null;
             }
         }
-        ((TileEntityFurnace) tileentity).setContents(oStacks);
+        getHandle().setContents(oStacks);
     }
 
     @Override
     public void setInventoryName(String value) {
-        ((TileEntityFurnace) tileentity).setInventoryName(value);
+        getHandle().setInventoryName(value);
     }
 
     @Override
     public void setSlot(int index, Item value) {
-        ((TileEntityFurnace) tileentity).setSlot(index, ((CanaryItem) value).getHandle());
+        getHandle().setSlot(index, ((CanaryItem) value).getHandle());
+    }
+
+    @Override
+    public void addItem(int itemId, int amount) {
+        getHandle().addItem(itemId, amount);
+    }
+
+    @Override
+    public void addItem(Item item) {
+        getHandle().addItem(item);
+    }
+
+    @Override
+    public int getEmptySlot() {
+        return getHandle().getEmptySlot();
+    }
+
+    @Override
+    public boolean hasItemStack(int itemId, int amount) {
+        return getHandle().hasItemStack(itemId, amount);
+    }
+
+    @Override
+    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
+        return getHandle().hasItemStack(itemId, minAmount, maxAmount);
     }
 
     @Override
     public TileEntityFurnace getHandle() {
         return (TileEntityFurnace) tileentity;
-    }
-
-    @Override
-    public void addItem(int itemId, int amount) {
-        ((TileEntityFurnace) tileentity).addItem(itemId, amount);
-    }
-
-    @Override
-    public void addItem(Item item) {
-        ((TileEntityFurnace) tileentity).addItem(item);
-    }
-
-    @Override
-    public int getEmptySlot() {
-        return ((TileEntityFurnace) tileentity).getEmptySlot();
-    }
-
-    @Override
-    public boolean hasItemStack(int itemId, int amount) {
-        return ((TileEntityFurnace) tileentity).hasItemStack(itemId, amount);
-    }
-
-    @Override
-    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        return ((TileEntityFurnace) tileentity).hasItemStack(itemId, minAmount, maxAmount);
     }
 
 }
