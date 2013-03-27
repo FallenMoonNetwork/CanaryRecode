@@ -29,6 +29,7 @@ import net.minecraft.server.EntityEnderCrystal;
 import net.minecraft.server.EntityEnderEye;
 import net.minecraft.server.EntityEnderPearl;
 import net.minecraft.server.EntityEnderman;
+import net.minecraft.server.EntityExpBottle;
 import net.minecraft.server.EntityFallingSand;
 import net.minecraft.server.EntityFireworkRocket;
 import net.minecraft.server.EntityGhast;
@@ -44,7 +45,28 @@ import net.minecraft.server.EntityMinecartEmpty;
 import net.minecraft.server.EntityMinecartFurnace;
 import net.minecraft.server.EntityMinecartHopper;
 import net.minecraft.server.EntityMinecartMobSpawner;
+import net.minecraft.server.EntityMinecartTNT;
+import net.minecraft.server.EntityMooshroom;
+import net.minecraft.server.EntityOcelot;
+import net.minecraft.server.EntityPainting;
+import net.minecraft.server.EntityPig;
+import net.minecraft.server.EntityPigZombie;
 import net.minecraft.server.EntityPotion;
+import net.minecraft.server.EntitySheep;
+import net.minecraft.server.EntitySilverfish;
+import net.minecraft.server.EntitySkeleton;
+import net.minecraft.server.EntitySlime;
+import net.minecraft.server.EntitySmallFireball;
+import net.minecraft.server.EntitySnowman;
+import net.minecraft.server.EntitySpider;
+import net.minecraft.server.EntitySquid;
+import net.minecraft.server.EntityTNTPrimed;
+import net.minecraft.server.EntityVillager;
+import net.minecraft.server.EntityWitch;
+import net.minecraft.server.EntityWither;
+import net.minecraft.server.EntityWolf;
+import net.minecraft.server.EntityXPOrb;
+import net.minecraft.server.EntityZombie;
 
 /**
  * Entity Manufacturing Factory implementation
@@ -155,54 +177,54 @@ public class CanaryEntityFactory implements EntityFactory {
                     return new EntityLargeFireball(mcworld).getCanaryEntity();
                 case LAVASLIME:
                     return new EntityMagmaCube(mcworld).getCanaryEntity();
-                case LIGHTNINGBOLT:
+                case LIGHTNINGBOLT: // There is a chance that LightningBolt isnt quite right
                     return new EntityLightningBolt(mcworld, 0, 0, 0).getCanaryEntity();
                 case MOBSPAWNERMINECART:
                     return new EntityMinecartMobSpawner(mcworld).getCanaryEntity();
                 case MOOSHROOM:
-                    break;
+                    return new EntityMooshroom(mcworld).getCanaryEntity();
                 case OCELOT:
-                    break;
+                    return new EntityOcelot(mcworld).getCanaryEntity();
                 case PAINTING:
-                    break;
+                    return new EntityPainting(mcworld).getCanaryEntity();
                 case PIG:
-                    break;
+                    return new EntityPig(mcworld).getCanaryEntity();
                 case PIGZOMBIE:
-                    break;
+                    return new EntityPigZombie(mcworld).getCanaryEntity();
                 case SHEEP:
-                    break;
+                    return new EntitySheep(mcworld).getCanaryEntity();
                 case SILVERFISH:
-                    break;
+                    return new EntitySilverfish(mcworld).getCanaryEntity();
                 case SKELETON:
-                    break;
+                    return new EntitySkeleton(mcworld).getCanaryEntity();
                 case SLIME:
-                    break;
+                    return new EntitySlime(mcworld).getCanaryEntity();
                 case SMALLFIREBALL:
-                    break;
+                    return new EntitySmallFireball(mcworld).getCanaryEntity();
                 case SNOWMAN:
-                    break;
+                    return new EntitySnowman(mcworld).getCanaryEntity();
                 case SPIDER:
-                    break;
+                    return new EntitySpider(mcworld).getCanaryEntity();
                 case SQUID:
-                    break;
+                    return new EntitySquid(mcworld).getCanaryEntity();
                 case TNTMINECART:
-                    break;
+                    return new EntityMinecartTNT(mcworld).getCanaryEntity();
                 case TNTPRIMED:
-                    break;
+                    return new EntityTNTPrimed(mcworld).getCanaryEntity();
                 case VILLAGER:
-                    break;
+                    return new EntityVillager(mcworld).getCanaryEntity();
                 case WITCH:
-                    break;
+                    return new EntityWitch(mcworld).getCanaryEntity();
                 case WITHER:
-                    break;
+                    return new EntityWither(mcworld).getCanaryEntity();
                 case WOLF:
-                    break;
+                    return new EntityWolf(mcworld).getCanaryEntity();
                 case XPBOTTLE:
-                    break;
+                    return new EntityExpBottle(mcworld).getCanaryEntity();
                 case XPORB:
-                    break;
+                    return new EntityXPOrb(mcworld).getCanaryEntity();
                 case ZOMBIE:
-                    break;
+                    return new EntityZombie(mcworld).getCanaryEntity();
                 default:
                     break;
             }

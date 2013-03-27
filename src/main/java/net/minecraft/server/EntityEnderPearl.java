@@ -8,7 +8,7 @@ public class EntityEnderPearl extends EntityThrowable {
 
     public EntityEnderPearl(World world) {
         super(world);
-        this.entity = new CanaryEnderPearl(this);
+        this.entity = new CanaryEnderPearl(this); // CanaryMod: Wrap Entity
     }
 
     public EntityEnderPearl(World world, EntityLiving entityliving) {
