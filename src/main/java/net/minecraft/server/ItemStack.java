@@ -411,7 +411,7 @@ public final class ItemStack {
     }
 
     public CanaryBaseItem getBaseItem() {
-        return null; // this.a().getBaseItem();
+        return this.b().getBaseItem();
     }
     //
 }

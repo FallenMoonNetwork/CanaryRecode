@@ -1,11 +1,14 @@
 package net.canarymod.api.inventory;
 
 
-import net.canarymod.api.CanaryEnchantment;
 import net.canarymod.api.Enchantment;
 import net.minecraft.server.ItemStack;
 
-
+/**
+ * Item wrapper implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
 public class CanaryItem implements Item {
 
     private ItemType type;
@@ -41,7 +44,7 @@ public class CanaryItem implements Item {
 
     @Override
     public int getDamage() {
-        return item.g();
+        return item.k();
     }
 
     @Override
@@ -80,7 +83,7 @@ public class CanaryItem implements Item {
 
     @Override
     public boolean isEnchanted() {
-        return item.r();
+        return item.x();
     }
 
     @Override
@@ -90,74 +93,33 @@ public class CanaryItem implements Item {
 
     @Override
     public Enchantment getEnchantment(int index) {
-        if (this.isEnchanted() && index < item.p().d() && index > -1) {
-            ONBTTagCompound tag = (ONBTTagCompound) item.p().a(index);
-
-            return new CanaryEnchantment(Enchantment.Type.fromId(tag.e("id")), tag.e("lvl"));
-        }
+        // NBT implementation needed
         return null;
     }
 
     @Override
     public Enchantment[] getEnchantments() {
-        CanaryEnchantment[] enchantments = null;
-
-        if (this.isEnchanted()) {
-            enchantments = new CanaryEnchantment[item.p().d()];
-            for (int index = 0; index < item.p().d(); index++) {
-                ONBTTagCompound tag = (ONBTTagCompound) item.p().a(index);
-
-                enchantments[index] = new CanaryEnchantment(Enchantment.Type.fromId(tag.e("id")), tag.e("lvl"));
-            }
-        }
-        return enchantments;
+        // NBT implementation needed
+        return null;
+    }
+    @Override
+    public void addEnchantments(Enchantment... enchantments) {
+        // NBT implementation needed
     }
 
     @Override
-    public void addEnchantment(Enchantment enchantment) {
-        if (enchantment != null && enchantment.getType().getId() >= 0 && enchantment.getType().getId() < OEnchantment.b.length) {
-            OEnchantment enchantmentType = OEnchantment.b[enchantment.getType().getId()];
-
-            if (enchantmentType != null) {
-                item.a(enchantmentType, enchantment.getLevel());
-            }
-        }
-    }
-
-    @Override
-    public void addEnchantments(Enchantment[] enchantments) {
-        for (Enchantment enchantment : enchantments) {
-            addEnchantment(enchantment);
-        }
-    }
-
-    @Override
-    public void setEnchantment(Enchantment enchantment) {
-        removeAllEnchantments();
-        addEnchantment(enchantment);
-    }
-
-    @Override
-    public void setEnchantments(Enchantment[] enchantments) {
-        removeAllEnchantments();
-        addEnchantments(enchantments);
+    public void setEnchantments(Enchantment... enchantments) {
+        // NBT implementation needed
     }
 
     @Override
     public void removeEnchantment(Enchantment enchantment) {
-        Enchantment[] enchants = getEnchantments();
-
-        removeAllEnchantments();
-        for (Enchantment ench : enchants) {
-            if (!ench.getType().equals(enchantment.getType())) {
-                addEnchantment(ench);
-            }
-        }
+        // NBT implementation needed
     }
 
     @Override
     public void removeAllEnchantments() {
-        item.d(null);
+        // NBT implementation needed
     }
 
     @Override
@@ -172,5 +134,46 @@ public class CanaryItem implements Item {
     @Override
     public ItemType getType() {
         return type;
+    }
+
+    @Override
+    public boolean hasDisplayName() {
+        return item.t();
+    }
+
+    @Override
+    public String getDisplayName() {
+        return item.s();
+    }
+
+    @Override
+    public void setDisplayName(String name) {
+        item.c(name);
+    }
+
+    @Override
+    public void removeDisplayName() {
+        // NBT implementation needed
+    }
+
+    @Override
+    public int getRepairCost() {
+        return item.B();
+    }
+
+    @Override
+    public void setRepairCost(int cost) {
+        item.c(cost);
+    }
+
+    @Override
+    public String[] getLore() {
+        // NBT implementation needed
+        return null;
+    }
+
+    @Override
+    public void setLore(String... lore) {
+        // NBT implementation needed
     }
 }

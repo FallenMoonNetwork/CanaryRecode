@@ -32,7 +32,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
         super(npc);
         this.getHandle().setNPC(this);
         this.getInventory().setSlot(inHand);
-        this.setItemInHandSlot(inHand != null ? inHand.getSlot() : 0);
+        this.setItemInHandSlot(inHand != null && inHand.getSlot() > -1 ? inHand.getSlot() : 0);
     }
 
     /**

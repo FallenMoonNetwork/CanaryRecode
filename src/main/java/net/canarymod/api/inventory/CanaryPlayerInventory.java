@@ -13,15 +13,16 @@ public class CanaryPlayerInventory extends CanaryInventory implements PlayerInve
 
     @Override
     public Item getArmorSlot(int slot) {
-        // return ((OInventoryPlayer)inventory).getArmorSlot(slot);
-        return null;
+        return getSlot(slot + 36);
     }
 
     @Override
-    public void setArmorSlot(Item item) {}
+    public void setArmorSlot(Item item) {
+        // WAT
+    }
 
     public ItemStack getItemInHand() {
-        return ((InventoryPlayer) container).d();
+        return ((InventoryPlayer) container).h();
     }
 
 }
