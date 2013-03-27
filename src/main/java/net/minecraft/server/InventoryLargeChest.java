@@ -7,8 +7,8 @@ import net.canarymod.api.inventory.ItemType;
 public class InventoryLargeChest implements IInventory {
 
     private String a;
-    private IInventory b;
-    private IInventory c;
+    public IInventory b; // CanaryMod: private => public
+    public IInventory c; // CanaryMod: private => public
 
     public InventoryLargeChest(String s0, IInventory iinventory, IInventory iinventory1) {
         this.a = s0;
