@@ -3,29 +3,29 @@ package net.canarymod.api.factory;
 
 public class CanaryFactory implements Factory {
 
-    ItemFactory items = new CanaryItemFactory();
-    BlockFactory blocks = new CanaryBlockFactory();
-    PotionFactory potions = new CanaryPotionFactory();
-    EntityLivingFactory livingEntities = new CanaryEntityLivingFactory();
+    private final ItemFactory itemFactory = new CanaryItemFactory();
+    private final BlockFactory blockFactory = new CanaryBlockFactory();
+    private final PotionFactory potionFactory = new CanaryPotionFactory();
+    private final EntityFactory entityFactory = new CanaryEntityFactory();
 
     @Override
-    public ItemFactory itemFactory() {
-        return items;
+    public ItemFactory getItemFactory() {
+        return itemFactory;
     }
 
     @Override
-    public BlockFactory blockFactory() {
-        return blocks;
+    public BlockFactory getBlockFactory() {
+        return blockFactory;
     }
 
     @Override
-    public PotionFactory potionFactory() {
-        return potions;
+    public PotionFactory getPotionFactory() {
+        return potionFactory;
     }
 
     @Override
-    public EntityLivingFactory entityLivingFactory() {
-        return livingEntities;
+    public EntityFactory getEntityFactory() {
+        return entityFactory;
     }
 
 }

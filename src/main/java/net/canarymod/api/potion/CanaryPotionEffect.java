@@ -1,8 +1,9 @@
-package net.canarymod.api.entity.potion;
+package net.canarymod.api.potion;
 
 
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.entity.living.EntityLiving;
+import net.canarymod.api.potion.PotionEffect;
 
 
 public class CanaryPotionEffect implements PotionEffect {

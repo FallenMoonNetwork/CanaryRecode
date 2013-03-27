@@ -13,11 +13,11 @@ import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.living.monster.EntityMob;
-import net.canarymod.api.entity.potion.CanaryPotion;
-import net.canarymod.api.entity.potion.CanaryPotionEffect;
-import net.canarymod.api.entity.potion.Potion;
-import net.canarymod.api.entity.potion.PotionEffect;
-import net.canarymod.api.entity.potion.PotionType;
+import net.canarymod.api.potion.CanaryPotion;
+import net.canarymod.api.potion.CanaryPotionEffect;
+import net.canarymod.api.potion.Potion;
+import net.canarymod.api.potion.PotionEffect;
+import net.canarymod.api.potion.PotionEffectType;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
@@ -197,16 +197,11 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public void spawn() {
-        spawn((EntityLiving[]) null);
-    }
-
-    @Override
-    public void spawn(EntityLiving... riders) {
+    public boolean spawn(EntityLiving... riders) {
         net.minecraft.server.World world = ((CanaryWorld) getWorld()).getHandle();
 
         entity.b(getX() + 0.5d, getY(), getZ() + 0.5d, getRotation(), 0f);
-        world.d(entity);
+        boolean toRet = world.d(entity);
 
         if (riders != null) {
             CanaryEntityLiving prev = this;
@@ -219,6 +214,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
                 mob2.a(prev.getHandle());
             }
         }
+        return toRet;
 
     }
 
@@ -230,7 +226,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public void addPotionEffect(PotionType type, int duration, int amplifier) {
+    public void addPotionEffect(PotionEffectType type, int duration, int amplifier) {
         net.minecraft.server.PotionEffect oEffect = new net.minecraft.server.PotionEffect(type.getID(), duration, amplifier);
 
         ((net.minecraft.server.EntityLiving) entity).d(oEffect);

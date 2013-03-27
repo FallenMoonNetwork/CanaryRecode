@@ -1,19 +1,19 @@
 package net.minecraft.server;
 
 
-import net.canarymod.api.entity.throwable.CanaryEnderPerl;
+import net.canarymod.api.entity.throwable.CanaryEnderPearl;
 
 
 public class EntityEnderPearl extends EntityThrowable {
 
     public EntityEnderPearl(World world) {
         super(world);
-        this.entity = new CanaryEnderPerl(this);
+        this.entity = new CanaryEnderPearl(this);
     }
 
     public EntityEnderPearl(World world, EntityLiving entityliving) {
         super(world, entityliving);
-        this.entity = new CanaryEnderPerl(this); // CanaryMod: Wrap Entity
+        this.entity = new CanaryEnderPearl(this); // CanaryMod: Wrap Entity
     }
 
     protected void a(MovingObjectPosition movingobjectposition) {

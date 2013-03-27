@@ -1,7 +1,6 @@
 package net.canarymod.api.entity;
 
 import java.util.UUID;
-
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
@@ -247,6 +246,11 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public void destroy() {
         entity.w();
+    }
+
+    @Override
+    public boolean spawn() {
+        return ((CanaryWorld) getWorld()).getHandle().d(getHandle());
     }
 
     /**

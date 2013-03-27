@@ -1,8 +1,6 @@
-package net.canarymod.api.entity.throwable;
+package net.canarymod.api.entity;
 
 
-import net.canarymod.api.entity.CanaryEntity;
-import net.canarymod.api.entity.Entity;
 import net.minecraft.server.EntityArrow;
 
 
@@ -79,10 +77,5 @@ public class CanaryArrow extends CanaryEntity implements Arrow {
     @Override
     public EntityArrow getHandle() {
         return (EntityArrow) entity;
-    }
-
-    @Override
-    public Entity getThrower() {
-        return getOwner();
     }
 }

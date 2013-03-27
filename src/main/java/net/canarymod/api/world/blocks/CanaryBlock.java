@@ -4,14 +4,12 @@ package net.canarymod.api.world.blocks;
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
-import net.canarymod.api.world.blocks.BlockFace;
-import net.canarymod.api.world.blocks.Block;
 
 
 public class CanaryBlock implements Block {
-    protected short type;
-    protected byte data;
-    protected int x, y, z, status;
+    protected short type, data;
+    protected byte status;
+    protected int x, y, z;
     protected World dimension;
     protected BlockFace faceClicked;
 
@@ -25,7 +23,7 @@ public class CanaryBlock implements Block {
         dimension = Canary.getServer().getDefaultWorld();
     }
 
-    public CanaryBlock(short type, byte data) {
+    public CanaryBlock(short type, short data) {
         this.x = 0;
         this.y = 0;
         this.z = 0;
@@ -35,7 +33,7 @@ public class CanaryBlock implements Block {
         dimension = Canary.getServer().getDefaultWorld();
     }
 
-    public CanaryBlock(short type, byte data, int x, int y, int z) {
+    public CanaryBlock(short type, short data, int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -45,7 +43,7 @@ public class CanaryBlock implements Block {
         dimension = Canary.getServer().getDefaultWorld();
     }
 
-    public CanaryBlock(short type, byte data, int x, int y, int z, CanaryWorld canaryWorld) {
+    public CanaryBlock(short type, short data, int x, int y, int z, CanaryWorld canaryWorld) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -73,7 +71,7 @@ public class CanaryBlock implements Block {
     }
 
     @Override
-    public byte getData() {
+    public short getData() {
         return data;
     }
 
@@ -133,13 +131,12 @@ public class CanaryBlock implements Block {
     }
 
     @Override
-    public void setStatus(int status) {
+    public void setStatus(byte status) {
         this.status = status;
     }
 
     @Override
-    public int getStatus() {
+    public byte getStatus() {
         return status;
     }
-
 }

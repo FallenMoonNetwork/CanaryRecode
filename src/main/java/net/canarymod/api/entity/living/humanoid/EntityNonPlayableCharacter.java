@@ -5,7 +5,7 @@ import java.net.SocketAddress;
 import net.canarymod.CanaryMod;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.world.CanaryWorld;
-import net.canarymod.api.world.World;
+import net.canarymod.api.world.position.Location;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.INetworkManager;
 import net.minecraft.server.ItemInWorldManager;
@@ -39,10 +39,10 @@ import net.minecraft.server.Packet9Respawn;
 public final class EntityNonPlayableCharacter extends EntityPlayerMP {
     private static MinecraftServer mcserv = ((CanaryServer) CanaryMod.getServer()).getHandle();
 
-    public EntityNonPlayableCharacter(String name, World world, double x, double y, double z, float rotation, float pitch){
-        super(mcserv, ((CanaryWorld) world).getHandle(), name, new ItemInWorldManager(((CanaryWorld) world).getHandle()));
+    public EntityNonPlayableCharacter(String name, Location location) {
+        super(mcserv, ((CanaryWorld) location.getWorld()).getHandle(), name, new ItemInWorldManager(((CanaryWorld) location.getWorld()).getHandle()));
         this.a = new NonNetServerHandler(this);
-        this.a(x, y, z, rotation, pitch - 90);
+        this.a(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
     }
 
     @Override

@@ -2,7 +2,7 @@ package net.minecraft.server;
 
 
 import java.util.List;
-import net.canarymod.api.entity.throwable.CanaryArrow;
+import net.canarymod.api.entity.CanaryArrow;
 
 
 public class EntityArrow extends Entity implements IProjectile {

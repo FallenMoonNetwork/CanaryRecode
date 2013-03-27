@@ -1,8 +1,6 @@
 package net.canarymod.api.entity.throwable;
 
 
-import net.canarymod.api.entity.CanaryEntity;
-import net.canarymod.api.entity.Entity;
 import net.minecraft.server.EntityEgg;
 
 
@@ -11,15 +9,10 @@ import net.minecraft.server.EntityEgg;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryChickenEgg extends CanaryEntity implements ChickenEgg {
+public class CanaryChickenEgg extends CanaryEntityThrowable implements ChickenEgg {
 
     public CanaryChickenEgg(EntityEgg entity) {
         super(entity);
-    }
-
-    @Override
-    public Entity getThrower() {
-        return ((EntityEgg) entity).h().getCanaryEntity();
     }
 
     @Override

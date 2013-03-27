@@ -116,6 +116,22 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
      * {@inheritDoc}
      */
     @Override
+    public void increaseFuse(int increase) {
+        getHandle().f += increase;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void decreaseFuse(int decrease) {
+        getHandle().f -= decrease;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isAgro() {
         return getHandle().o() == 1;
     }

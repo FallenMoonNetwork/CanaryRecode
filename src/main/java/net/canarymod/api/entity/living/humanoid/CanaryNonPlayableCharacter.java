@@ -6,7 +6,6 @@ import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryWorld;
-import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.minecraft.server.EntityPlayer;
@@ -19,7 +18,7 @@ import net.minecraft.server.Packet29DestroyEntity;
  * 
  * @author Jason (darkdiplomat)
  */
-public abstract class CanaryNonPlayableCharacter extends CanaryEntityLiving implements NonPlayableCharacter {
+public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements NonPlayableCharacter {
 
     /**
      * Constructs a new wrapper for EntityNonPlayableCharacter
@@ -41,25 +40,13 @@ public abstract class CanaryNonPlayableCharacter extends CanaryEntityLiving impl
      * 
      * @param name
      *            the Name to give to the NPC
-     * @param world
-     *            the World to spawn the NPC in
-     * @param dim
-     *            the Dimension of the World to spawn the NPC in
-     * @param x
-     *            the X coordinate to spawn the NPC at
-     * @param y
-     *            the Y coordinate to spawn the NPC at
-     * @param z
-     *            the Z coordinate to spawn the NPC at
-     * @param rotation
-     *            the rotation to spawn the NPC with
-     * @param pitch
-     *            the pitch to spawn the NPC with
+     * @param location
+     *            the Location to put the NPC
      * @param inHand
      *            the Item to set in the NPC's hand
      */
-    public CanaryNonPlayableCharacter(String name, World world, int dim, double x, double y, double z, float rotation, float pitch, Item inHand) {
-        this(new EntityNonPlayableCharacter(name, world, x, y, z, rotation, pitch), inHand);
+    public CanaryNonPlayableCharacter(String name, Location location, Item inHand) {
+        this(new EntityNonPlayableCharacter(name, location), inHand);
     }
 
     /**
@@ -192,10 +179,15 @@ public abstract class CanaryNonPlayableCharacter extends CanaryEntityLiving impl
     /**
      * {@inheritDoc}
      */
-    public void spawn() {
-        super.spawn();
-        // TODO: Special spawning stuffs
+    public boolean spawn() {
+        if (super.spawn()) {
+            // TODO: Special spawning stuffs
+        }
+        return false;
     }
+
+    @Override
+    public void update() {}
 
     /**
      * {@inheritDoc}
