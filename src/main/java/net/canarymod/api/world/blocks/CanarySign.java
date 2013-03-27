@@ -1,37 +1,37 @@
 package net.canarymod.api.world.blocks;
 
 
-import net.minecraft.server.OTileEntitySign;
+import net.minecraft.server.TileEntitySign;
 
 
 public class CanarySign extends CanaryComplexBlock implements Sign {
 
-    public CanarySign(OTileEntitySign sign) {
+    public CanarySign(TileEntitySign sign) {
         super(sign);
     }
 
     @Override
     public String[] getText() {
-        return ((OTileEntitySign) tileentity).a;
+        return ((TileEntitySign) tileentity).a;
     }
 
     @Override
     public String getTextOnLine(int line) {
         if (line > 0 && line < 3) {
-            return ((OTileEntitySign) tileentity).a[line];
+            return ((TileEntitySign) tileentity).a[line];
         }
         return null;
     }
 
     @Override
     public void setText(String[] text) {
-        ((OTileEntitySign) tileentity).a = text;
+        ((TileEntitySign) tileentity).a = text;
     }
 
     @Override
     public void setTextOnLine(String text, int line) {
         if (line > 0 && line < 3) {
-            ((OTileEntitySign) tileentity).a[line] = text;
+            ((TileEntitySign) tileentity).a[line] = text;
         }
     }
 

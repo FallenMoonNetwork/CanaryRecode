@@ -5,36 +5,36 @@ import net.canarymod.api.inventory.CanaryInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OTileEntityFurnace;
+import net.minecraft.server.ItemStack;
+import net.minecraft.server.TileEntityFurnace;
 
 
 public class CanaryFurnace extends CanaryComplexBlock implements Furnace {
 
-    public CanaryFurnace(OTileEntityFurnace tileentity) {
+    public CanaryFurnace(TileEntityFurnace tileentity) {
         super(tileentity);
     }
 
     @Override
     public Inventory getInventory() {
-        return new CanaryInventory((OTileEntityFurnace) tileentity);
+        return new CanaryInventory((TileEntityFurnace) tileentity);
     }
 
     @Override
     public void clearContents() {
-        ((OTileEntityFurnace) tileentity).clearContents();
+        ((TileEntityFurnace) tileentity).clearContents();
     }
 
     @Override
     public CanaryItem decreaseItemStackSize(int itemId, int amount) {
-        OItemStack item = ((OTileEntityFurnace) tileentity).decreaseItemStackSize(itemId, amount);
+        ItemStack item = ((TileEntityFurnace) tileentity).decreaseItemStackSize(itemId, amount);
 
         return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
     public CanaryItem[] getContents() {
-        OItemStack[] oStacks = ((OTileEntityFurnace) tileentity).getContents();
+        ItemStack[] oStacks = ((TileEntityFurnace) tileentity).getContents();
         CanaryItem[] items = new CanaryItem[oStacks.length];
 
         for (int i = 0; i < oStacks.length; i++) {
@@ -46,59 +46,59 @@ public class CanaryFurnace extends CanaryComplexBlock implements Furnace {
 
     @Override
     public String getInventoryName() {
-        return ((OTileEntityFurnace) tileentity).getInventoryName();
+        return ((TileEntityFurnace) tileentity).getInventoryName();
     }
 
     @Override
     public int getInventorySize() {
-        return ((OTileEntityFurnace) tileentity).getInventorySize();
+        return ((TileEntityFurnace) tileentity).getInventorySize();
     }
 
     @Override
     public int getInventoryStackLimit() {
-        return ((OTileEntityFurnace) tileentity).getInventoryStackLimit();
+        return ((TileEntityFurnace) tileentity).getInventoryStackLimit();
     }
 
     @Override
     public Item getItem(int id) {
-        return ((OTileEntityFurnace) tileentity).getItem(id);
+        return ((TileEntityFurnace) tileentity).getItem(id);
     }
 
     @Override
     public Item getItem(int id, int amount) {
-        return ((OTileEntityFurnace) tileentity).getItem(id, amount);
+        return ((TileEntityFurnace) tileentity).getItem(id, amount);
     }
 
     @Override
     public CanaryItem getSlot(int index) {
-        OItemStack item = ((OTileEntityFurnace) tileentity).getSlot(index);
+        ItemStack item = ((TileEntityFurnace) tileentity).getSlot(index);
 
         return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
     public boolean hasItem(int itemId) {
-        return ((OTileEntityFurnace) tileentity).hasItem(itemId);
+        return ((TileEntityFurnace) tileentity).hasItem(itemId);
     }
 
     @Override
     public boolean hasItemStack(Item item) {
-        return ((OTileEntityFurnace) tileentity).hasItemStack(((CanaryItem) item).getHandle());
+        return ((TileEntityFurnace) tileentity).hasItemStack(((CanaryItem) item).getHandle());
     }
 
     @Override
     public Item removeItem(Item item) {
-        return ((OTileEntityFurnace) tileentity).removeItem(item);
+        return ((TileEntityFurnace) tileentity).removeItem(item);
     }
 
     @Override
     public Item removeItem(int id) {
-        return ((OTileEntityFurnace) tileentity).removeItem(id);
+        return ((TileEntityFurnace) tileentity).removeItem(id);
     }
 
     @Override
     public void setContents(Item[] items) {
-        OItemStack[] oStacks = new OItemStack[items.length];
+        ItemStack[] oStacks = new ItemStack[items.length];
 
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
@@ -107,46 +107,47 @@ public class CanaryFurnace extends CanaryComplexBlock implements Furnace {
                 oStacks[i] = null;
             }
         }
-        ((OTileEntityFurnace) tileentity).setContents(oStacks);
+        ((TileEntityFurnace) tileentity).setContents(oStacks);
     }
 
     @Override
     public void setInventoryName(String value) {
-        ((OTileEntityFurnace) tileentity).setInventoryName(value);
+        ((TileEntityFurnace) tileentity).setInventoryName(value);
     }
 
     @Override
     public void setSlot(int index, Item value) {
-        ((OTileEntityFurnace) tileentity).setSlot(index, ((CanaryItem) value).getHandle());
+        ((TileEntityFurnace) tileentity).setSlot(index, ((CanaryItem) value).getHandle());
     }
 
-    public OTileEntityFurnace getHandle() {
-        return (OTileEntityFurnace) tileentity;
+    @Override
+    public TileEntityFurnace getHandle() {
+        return (TileEntityFurnace) tileentity;
     }
 
     @Override
     public void addItem(int itemId, int amount) {
-        ((OTileEntityFurnace) tileentity).addItem(itemId, amount);
+        ((TileEntityFurnace) tileentity).addItem(itemId, amount);
     }
 
     @Override
     public void addItem(Item item) {
-        ((OTileEntityFurnace) tileentity).addItem(item);
+        ((TileEntityFurnace) tileentity).addItem(item);
     }
 
     @Override
     public int getEmptySlot() {
-        return ((OTileEntityFurnace) tileentity).getEmptySlot();
+        return ((TileEntityFurnace) tileentity).getEmptySlot();
     }
 
     @Override
     public boolean hasItemStack(int itemId, int amount) {
-        return ((OTileEntityFurnace) tileentity).hasItemStack(itemId, amount);
+        return ((TileEntityFurnace) tileentity).hasItemStack(itemId, amount);
     }
 
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        return ((OTileEntityFurnace) tileentity).hasItemStack(itemId, minAmount, maxAmount);
+        return ((TileEntityFurnace) tileentity).hasItemStack(itemId, minAmount, maxAmount);
     }
 
 }

@@ -30,6 +30,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         new DedicatedServerSleepThread(this);
     }
 
+    @Override
     protected boolean c() {
         DedicatedServerCommandThread dedicatedservercommandthread = new DedicatedServerCommandThread(this);
 
@@ -136,7 +137,10 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.d(MathHelper.a(this.ab(), 64, 256));
         this.o.a("max-build-height", Integer.valueOf(this.ab()));
         this.al().a("Preparing level \"" + this.J() + "\"");
-        this.a(this.J(), this.J(), i2, worldtype, s2);
+        // CanaryMod changed call to initWorld
+        net.canarymod.api.world.WorldType wt = net.canarymod.api.world.WorldType.fromName("NORMAL");
+        this.initWorld(this.J(), i2, worldtype, wt, s2, new AnvilSaveHandler(new File("worlds/"), this.J(), true, wt));
+        //
         long i4 = System.nanoTime() - i1;
         String s3 = String.format("%.3fs", new Object[] { Double.valueOf((double) i4 / 1.0E9D) });
 
@@ -156,22 +160,27 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         return true;
     }
 
+    @Override
     public boolean f() {
         return this.p;
     }
 
+    @Override
     public EnumGameType g() {
         return this.q;
     }
 
+    @Override
     public int h() {
         return this.o.a("difficulty", 1);
     }
 
+    @Override
     public boolean i() {
         return this.o.a("hardcore", false);
     }
 
+    @Override
     protected void a(CrashReport crashreport) {
         while (this.m()) {
             this.am();
@@ -184,6 +193,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         }
     }
 
+    @Override
     public CrashReport b(CrashReport crashreport) {
         crashreport = super.b(crashreport);
         crashreport.g().a("Is Modded", (Callable) (new CallableType(this)));
@@ -191,29 +201,35 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         return crashreport;
     }
 
+    @Override
     protected void p() {
         System.exit(0);
     }
 
+    @Override
     public void r() { // CanaryMod: protected => public
         super.r();
         this.am();
     }
 
+    @Override
     public boolean s() {
         return this.o.a("allow-nether", true);
     }
 
+    @Override
     public boolean L() {
         return this.o.a("spawn-monsters", true);
     }
 
+    @Override
     public void a(PlayerUsageSnooper playerusagesnooper) {
         playerusagesnooper.a("whitelist_enabled", Boolean.valueOf(this.an().n()));
         playerusagesnooper.a("whitelist_count", Integer.valueOf(this.an().h().size()));
         super.a(playerusagesnooper);
     }
 
+    @Override
     public boolean R() {
         return this.o.a("snooper-enabled", true);
     }
@@ -230,6 +246,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         }
     }
 
+    @Override
     public boolean T() {
         return true;
     }
@@ -238,14 +255,17 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         return (DedicatedPlayerList) super.ad();
     }
 
+    @Override
     public NetworkListenThread ae() {
         return this.r;
     }
 
+    @Override
     public int a(String s0, int i0) {
         return this.o.a(s0, i0);
     }
 
+    @Override
     public String a(String s0, String s1) {
         return this.o.a(s0, s1);
     }
@@ -254,14 +274,17 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         return this.o.a(s0, flag0);
     }
 
+    @Override
     public void a(String s0, Object object) {
         this.o.a(s0, object);
     }
 
+    @Override
     public void a() {
         this.o.b();
     }
 
+    @Override
     public String b_() {
         File file1 = this.o.c();
 
@@ -273,22 +296,27 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.s = true;
     }
 
+    @Override
     public boolean ag() {
         return this.s;
     }
 
+    @Override
     public String a(EnumGameType enumgametype, boolean flag0) {
         return "";
     }
 
+    @Override
     public boolean Z() {
         return this.o.a("enable-command-block", false);
     }
 
+    @Override
     public int ak() {
         return this.o.a("spawn-protection", super.ak());
     }
 
+    @Override
     public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {
         if (world.t.h != 0) {
             return false;
@@ -308,26 +336,29 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         }
     }
 
+    @Override
     public ILogAgent al() {
         return this.l;
     }
 
+    @Override
     public ServerConfigurationManager ad() {
         return this.an();
     }
 
+    @Override
     public void reload() {/* WorldConfiguration defWorld = Configuration.getWorldConfig(Configuration.getServerConfig().getDefaultWorldName());
-         * // this.d = new OPropertyManager(new File("server.properties"));
-         * this.y = Configuration.getNetConfig().getBindIp();
-         * this.n = Configuration.getNetConfig().isOnlineMode();
-         * this.o = defWorld.canSpawnAnimals();
-         * this.p = defWorld.canSpawnNpcs();
-         * this.q = defWorld.isPvpEnabled();
-         * this.r = defWorld.isFlightAllowed();
-         * this.s = Configuration.getServerConfig().getMotd();
-         * this.z = Configuration.getNetConfig().getPort();
-         * this.t = defWorld.getMaxBuildHeight();
-         * this.t = (this.t + 8) / 16 * 16;
-         * this.t = OMathHelper.a(this.t, 64, 256);
-         * // TODO Update worlds (??) */}
+     * // this.d = new OPropertyManager(new File("server.properties"));
+     * this.y = Configuration.getNetConfig().getBindIp();
+     * this.n = Configuration.getNetConfig().isOnlineMode();
+     * this.o = defWorld.canSpawnAnimals();
+     * this.p = defWorld.canSpawnNpcs();
+     * this.q = defWorld.isPvpEnabled();
+     * this.r = defWorld.isFlightAllowed();
+     * this.s = Configuration.getServerConfig().getMotd();
+     * this.z = Configuration.getNetConfig().getPort();
+     * this.t = defWorld.getMaxBuildHeight();
+     * this.t = (this.t + 8) / 16 * 16;
+     * this.t = OMathHelper.a(this.t, 64, 256);
+     * // TODO Update worlds (??) */}
 }

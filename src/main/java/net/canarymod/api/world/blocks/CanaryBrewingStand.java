@@ -5,24 +5,23 @@ import net.canarymod.api.inventory.CanaryInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OTileEntityBrewingStand;
+import net.minecraft.server.TileEntityBrewingStand;
 
 
 public class CanaryBrewingStand extends CanaryComplexBlock implements BrewingStand {
 
-    public CanaryBrewingStand(OTileEntityBrewingStand tileentity) {
+    public CanaryBrewingStand(TileEntityBrewingStand tileentity) {
         super(tileentity);
     }
 
     @Override
     public Inventory getInventory() {
-        return new CanaryInventory((OTileEntityBrewingStand) tileentity);
+        return new CanaryInventory((TileEntityBrewingStand) tileentity);
     }
 
     @Override
     public Item[] getContents() {
-        OItemStack[] oStacks = ((OTileEntityBrewingStand) tileentity).getContents();
+        OItemStack[] oStacks = ((TileEntityBrewingStand) tileentity).getContents();
         CanaryItem[] items = new CanaryItem[oStacks.length];
 
         for (int i = 0; i < oStacks.length; i++) {
@@ -43,106 +42,106 @@ public class CanaryBrewingStand extends CanaryComplexBlock implements BrewingSta
                 oStacks[i] = null;
             }
         }
-        ((OTileEntityBrewingStand) tileentity).setContents(oStacks);
+        ((TileEntityBrewingStand) tileentity).setContents(oStacks);
     }
 
     @Override
     public void addItem(int itemId, int amount) {
-        ((OTileEntityBrewingStand) tileentity).addItem(itemId, amount);
+        ((TileEntityBrewingStand) tileentity).addItem(itemId, amount);
     }
 
     @Override
     public void addItem(Item item) {
-        ((OTileEntityBrewingStand) tileentity).addItem(item);
+        ((TileEntityBrewingStand) tileentity).addItem(item);
     }
 
     @Override
     public int getEmptySlot() {
-        return ((OTileEntityBrewingStand) tileentity).getEmptySlot();
+        return ((TileEntityBrewingStand) tileentity).getEmptySlot();
     }
 
     @Override
     public void setSlot(int index, Item item) {
-        ((OTileEntityBrewingStand) tileentity).setSlot(index, ((CanaryItem) item).getHandle());
+        ((TileEntityBrewingStand) tileentity).setSlot(index, ((CanaryItem) item).getHandle());
     }
 
     @Override
     public int getInventorySize() {
-        return ((OTileEntityBrewingStand) tileentity).getInventorySize();
+        return ((TileEntityBrewingStand) tileentity).getInventorySize();
     }
 
     @Override
     public String getInventoryName() {
-        return ((OTileEntityBrewingStand) tileentity).getInventoryName();
+        return ((TileEntityBrewingStand) tileentity).getInventoryName();
     }
 
     @Override
     public void setInventoryName(String value) {
-        ((OTileEntityBrewingStand) tileentity).setInventoryName(value);
+        ((TileEntityBrewingStand) tileentity).setInventoryName(value);
     }
 
     @Override
     public void clearContents() {
-        ((OTileEntityBrewingStand) tileentity).clearContents();
+        ((TileEntityBrewingStand) tileentity).clearContents();
     }
 
     @Override
     public Item getItem(int id, int amount) {
-        return ((OTileEntityBrewingStand) tileentity).getItem(id, amount);
+        return ((TileEntityBrewingStand) tileentity).getItem(id, amount);
     }
 
     @Override
     public Item getItem(int id) {
-        return ((OTileEntityBrewingStand) tileentity).getItem(id);
+        return ((TileEntityBrewingStand) tileentity).getItem(id);
     }
 
     @Override
     public Item removeItem(Item item) {
-        return ((OTileEntityBrewingStand) tileentity).removeItem(item);
+        return ((TileEntityBrewingStand) tileentity).removeItem(item);
     }
 
     @Override
     public Item removeItem(int id) {
-        return ((OTileEntityBrewingStand) tileentity).removeItem(id);
+        return ((TileEntityBrewingStand) tileentity).removeItem(id);
     }
 
     @Override
     public Item decreaseItemStackSize(int itemId, int amount) {
-        OItemStack item = ((OTileEntityBrewingStand) tileentity).decreaseItemStackSize(itemId, amount);
+        OItemStack item = ((TileEntityBrewingStand) tileentity).decreaseItemStackSize(itemId, amount);
 
         return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
     public Item getSlot(int index) {
-        OItemStack item = ((OTileEntityBrewingStand) tileentity).getSlot(index);
+        OItemStack item = ((TileEntityBrewingStand) tileentity).getSlot(index);
 
         return item != null ? item.getCanaryItem() : null;
     }
 
     @Override
     public int getInventoryStackLimit() {
-        return ((OTileEntityBrewingStand) tileentity).getInventoryStackLimit();
+        return ((TileEntityBrewingStand) tileentity).getInventoryStackLimit();
     }
 
     @Override
     public boolean hasItemStack(Item item) {
-        return ((OTileEntityBrewingStand) tileentity).hasItemStack(((CanaryItem) item).getHandle());
+        return ((TileEntityBrewingStand) tileentity).hasItemStack(((CanaryItem) item).getHandle());
     }
 
     @Override
     public boolean hasItemStack(int itemId, int amount) {
-        return ((OTileEntityBrewingStand) tileentity).hasItemStack(itemId, amount);
+        return ((TileEntityBrewingStand) tileentity).hasItemStack(itemId, amount);
     }
 
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        return ((OTileEntityBrewingStand) tileentity).hasItemStack(itemId, minAmount, maxAmount);
+        return ((TileEntityBrewingStand) tileentity).hasItemStack(itemId, minAmount, maxAmount);
     }
 
     @Override
     public boolean hasItem(int itemId) {
-        return ((OTileEntityBrewingStand) tileentity).hasItem(itemId);
+        return ((TileEntityBrewingStand) tileentity).hasItem(itemId);
     }
 
 }

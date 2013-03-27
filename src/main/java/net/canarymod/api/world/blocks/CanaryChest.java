@@ -5,19 +5,18 @@ import net.canarymod.api.inventory.CanaryInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
-import net.minecraft.server.OItemStack;
-import net.minecraft.server.OTileEntityChest;
+import net.minecraft.server.TileEntityChest;
 
 
 public class CanaryChest extends CanaryComplexBlock implements Chest {
 
-    public CanaryChest(OTileEntityChest tileentity) {
+    public CanaryChest(TileEntityChest tileentity) {
         super(tileentity);
     }
 
     @Override
     public Inventory getInventory() {
-        return new CanaryInventory(((OTileEntityChest) tileentity));
+        return new CanaryInventory(((TileEntityChest) tileentity));
     }
 
     // TODO: Implement hasAttachedChest and the private tryAttachedChest!!
@@ -67,6 +66,7 @@ public class CanaryChest extends CanaryComplexBlock implements Chest {
     // return null;
     // }
 
+    @Override
     public OTileEntityChest getHandle() {
         return (OTileEntityChest) tileentity;
     }

@@ -6,14 +6,28 @@ import net.minecraft.server.TileEntityMobSpawner;
 
 public class CanaryMobSpawner extends CanaryComplexBlock implements MobSpawner {
 
-    private MobSpawnerLogic logic = ((TileEntityMobSpawner)this.tileentity).a().logic;
-
     public CanaryMobSpawner(TileEntityMobSpawner tileentity) {
         super(tileentity);
     }
 
     @Override
-    public MobSpawnerLogic getLogic() {
-        return logic;
+    public String getSpawnType() {
+        return ((TileEntityMobSpawner) tileentity).d;
     }
+
+    @Override
+    public void setSpawnType(String spawn) {
+        ((TileEntityMobSpawner) tileentity).d = spawn;
+    }
+
+    @Override
+    public int getDelay() {
+        return ((TileEntityMobSpawner) tileentity).reset;
+    }
+
+    @Override
+    public void setDelay(int delay) {
+        ((TileEntityMobSpawner) tileentity).reset = delay;
+    }
+
 }

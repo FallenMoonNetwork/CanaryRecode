@@ -4,13 +4,14 @@ package net.canarymod.api.world;
 import java.io.IOException;
 
 import net.canarymod.Canary;
+import net.minecraft.server.ChunkCoordIntPair;
 
 
 public class CanaryChunkProviderServer implements ChunkProviderServer {
 
-    private OChunkProviderServer handle;
+    private ChunkProviderServer handle;
 
-    public CanaryChunkProviderServer(OChunkProviderServer handle) {
+    public CanaryChunkProviderServer(ChunkProviderServer handle) {
         this.handle = handle;
     }
 
@@ -46,9 +47,9 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
 
     @Override
     public Chunk regenerateChunk(int x, int z) {
-        Long chunkCoordIntPair = OChunkCoordIntPair.a(x, z);
+        Long chunkCoordIntPair = ChunkCoordIntPair.a(x, z);
         // Unloading the chunk
-        OChunk unloadedChunk = (OChunk) handle.f.a(chunkCoordIntPair.longValue());
+        Chunk unloadedChunk = (Chunk) handle.f.a(chunkCoordIntPair.longValue());
 
         if (unloadedChunk != null) {
             unloadedChunk.e();
@@ -65,7 +66,7 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
         }
 
         // Generating the new chunk
-        OChunk newChunk = handle.d.b(x, z);
+        Chunk newChunk = handle.d.b(x, z);
 
         handle.f.a(chunkCoordIntPair, newChunk);
         handle.g.add(newChunk);

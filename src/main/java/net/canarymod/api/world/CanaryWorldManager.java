@@ -11,6 +11,7 @@ import net.canarymod.Canary;
 import net.canarymod.Logman;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.world.World.GeneratorType;
+import net.minecraft.server.WorldServer;
 
 
 /**
@@ -46,7 +47,7 @@ public class CanaryWorldManager implements WorldManager {
     }
 
     /**
-     * Implementation specific, do not call outside of OMCS!
+     * Implementation specific, do not call outside of NMS!
      * Adds an already prepared world to the world manager
      * 
      * @param world
@@ -121,7 +122,7 @@ public class CanaryWorldManager implements WorldManager {
         boolean success = file.renameTo(new File(dir, file.getName()));
 
         if (!success) {
-            Logman.logSevere("Attempted to move world " + name + " but it appeared to be still in use! Worlds should get unloaded before they are removed!");
+            Canary.logSevere("Attempted to move world " + name + " but it appeared to be still in use! Worlds should get unloaded before they are removed!");
         }
     }
 
@@ -148,5 +149,10 @@ public class CanaryWorldManager implements WorldManager {
     @Override
     public ArrayList<String> getExistingWorlds() {
         return existingWorlds; // TODO: This only reads base folders not the real dimension folders!
+    }
+
+    //Implementation specific shortcuts
+    public WorldServer getWorldServer(String name, int id) {
+        return (WorldServer)((CanaryWorld)loadedWorlds.get(name)).getHandle();
     }
 }

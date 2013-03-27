@@ -1,31 +1,31 @@
 package net.canarymod.api.world.blocks;
 
 
-import net.minecraft.server.OMaterial;
-import net.minecraft.server.OTileEntityNote;
+import net.minecraft.server.Material;
+import net.minecraft.server.TileEntityNote;
 
 
 public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
 
-    public CanaryNoteBlock(OTileEntityNote tileentity) {
+    public CanaryNoteBlock(TileEntityNote tileentity) {
         super(tileentity);
     }
 
     @Override
     public byte getInstrument() {
-        OMaterial material = tileentity.k.d(getX(), getY() - 1, getZ());
+        Material material = tileentity.k.d(getX(), getY() - 1, getZ());
         byte instrument = 0;
 
-        if (material == OMaterial.e) {
+        if (material == Material.e) {
             instrument = 1;
         }
-        if (material == OMaterial.o) {
+        if (material == Material.o) {
             instrument = 2;
         }
-        if (material == OMaterial.q) {
+        if (material == Material.q) {
             instrument = 3;
         }
-        if (material == OMaterial.d) {
+        if (material == Material.d) {
             instrument = 4;
         }
         return instrument;
@@ -33,12 +33,12 @@ public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
 
     @Override
     public byte getNote() {
-        return ((OTileEntityNote) tileentity).a;
+        return ((TileEntityNote) tileentity).a;
     }
 
     @Override
     public void play() {
-        ((OTileEntityNote) tileentity).a(tileentity.k, getX(), getY(), getZ());
+        ((TileEntityNote) tileentity).a(tileentity.k, getX(), getY(), getZ());
     }
 
     @Override
@@ -50,7 +50,7 @@ public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
             note = 24;
         }
 
-        ((OTileEntityNote) tileentity).a = note;
+        ((TileEntityNote) tileentity).a = note;
     }
 
 }

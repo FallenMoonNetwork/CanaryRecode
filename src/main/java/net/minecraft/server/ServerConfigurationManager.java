@@ -17,6 +17,7 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
+import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.hook.system.ServerShutdownHook;
 
 public abstract class ServerConfigurationManager {
@@ -130,14 +131,9 @@ public abstract class ServerConfigurationManager {
         }
     }
 
-    public void a(WorldServer[] aworldserver) {
+    public void a(WorldServer server) {
         //CanaryMod Multiworld
-        for(WorldServer server : aworldserver) {
-            if(server == null) {
-                continue;
-            }
-            playerFileData.put(server.getCanaryWorld().getName(), server.K().e());
-        }
+        playerFileData.put(server.getCanaryWorld().getName(), server.K().e());
         //
     }
 
@@ -157,7 +153,7 @@ public abstract class ServerConfigurationManager {
     }
 
     public NBTTagCompound a(EntityPlayerMP entityplayermp) {
-        NBTTagCompound nbttagcompound = this.e.b[0].L().i();
+        NBTTagCompound nbttagcompound = entityplayermp.getCanaryWorld().getHandle().L().i();
         NBTTagCompound nbttagcompound1;
 
         if (entityplayermp.c_().equals(this.e.H()) && nbttagcompound != null) {
@@ -492,7 +488,8 @@ public abstract class ServerConfigurationManager {
     }
 
     public boolean e(String s0) {
-        return this.h.contains(s0.trim().toLowerCase()) || this.e.I() && this.e.b[0].L().v() && this.e.H().equalsIgnoreCase(s0) || this.m;
+        WorldServer srv = (WorldServer)((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle();
+        return this.h.contains(s0.trim().toLowerCase()) || this.e.I() && srv.L().v() && this.e.H().equalsIgnoreCase(s0) || this.m;
     }
 
     public EntityPlayerMP f(String s0) {
@@ -689,7 +686,8 @@ public abstract class ServerConfigurationManager {
     }
 
     public String[] m() {
-        return this.e.b[0].K().e().f();
+        WorldServer srv = (WorldServer)((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle();
+        return srv.K().e().f();
     }
 
     public boolean n() {

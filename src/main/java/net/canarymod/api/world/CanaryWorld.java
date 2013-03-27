@@ -2,42 +2,20 @@ package net.canarymod.api.world;
 
 
 import java.util.ArrayList;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
-import net.canarymod.api.CanaryServer;
 import net.canarymod.api.EntityTracker;
 import net.canarymod.api.Particle;
 import net.canarymod.api.PlayerManager;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityItem;
-import net.canarymod.api.entity.living.animal.CanaryCow;
-import net.canarymod.api.entity.living.animal.CanaryMooshroom;
-import net.canarymod.api.entity.living.animal.CanaryOcelot;
-import net.canarymod.api.entity.living.animal.CanaryPig;
-import net.canarymod.api.entity.living.animal.CanarySheep;
-import net.canarymod.api.entity.living.animal.CanarySquid;
-import net.canarymod.api.entity.living.animal.CanaryWolf;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
-import net.canarymod.api.entity.living.animal.EntityAnimal.AnimalType;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
-import net.canarymod.api.entity.living.humanoid.CanaryVillager;
 import net.canarymod.api.entity.living.humanoid.Player;
-import net.canarymod.api.entity.living.monster.CanaryBlaze;
-import net.canarymod.api.entity.living.monster.CanaryCreeper;
-import net.canarymod.api.entity.living.monster.CanaryEnderman;
-import net.canarymod.api.entity.living.monster.CanaryGhast;
-import net.canarymod.api.entity.living.monster.CanaryGiantZombie;
-import net.canarymod.api.entity.living.monster.CanaryLavaSlime;
-import net.canarymod.api.entity.living.monster.CanaryPigZombie;
-import net.canarymod.api.entity.living.monster.CanarySilverfish;
-import net.canarymod.api.entity.living.monster.CanarySkeleton;
-import net.canarymod.api.entity.living.monster.CanarySlime;
-import net.canarymod.api.entity.living.monster.CanarySpider;
-import net.canarymod.api.entity.living.monster.CanaryZombie;
 import net.canarymod.api.entity.living.monster.EntityMob;
-import net.canarymod.api.entity.living.monster.EntityMob.MobType;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
@@ -55,15 +33,21 @@ import net.canarymod.api.world.blocks.Chest;
 import net.canarymod.api.world.blocks.ComplexBlock;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
-import net.minecraft.server.EntityChicken;
-import net.minecraft.server.EntityCow;
-import net.minecraft.server.EntityMooshroom;
-import net.minecraft.server.EntityOcelot;
-import net.minecraft.server.EntityPig;
-import net.minecraft.server.EntitySheep;
-import net.minecraft.server.EntitySquid;
-import net.minecraft.server.EntityVillager;
-import net.minecraft.server.EntityWolf;
+import net.minecraft.server.EntityLightningBolt;
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.EntityPlayerMP;
+import net.minecraft.server.EnumSkyBlock;
+import net.minecraft.server.ItemStack;
+import net.minecraft.server.TileEntity;
+import net.minecraft.server.TileEntityBrewingStand;
+import net.minecraft.server.TileEntityChest;
+import net.minecraft.server.TileEntityDispenser;
+import net.minecraft.server.TileEntityFurnace;
+import net.minecraft.server.TileEntityMobSpawner;
+import net.minecraft.server.TileEntityNote;
+import net.minecraft.server.TileEntityRecordPlayer;
+import net.minecraft.server.TileEntitySign;
+import net.minecraft.server.WorldInfo;
 import net.minecraft.server.WorldServer;
 
 
@@ -84,16 +68,18 @@ public class CanaryWorld implements World {
 
     public CanaryWorld(String name, WorldServer dimension, WorldType type) {
         this.name = name;
+        world = dimension;
 
         // manually set player managers
         int viewDistance = 10; // TODO: Add config for view distance!
 
-        playerManager = new CanaryPlayerManager(new net.minecraft.server.PlayerManager(((CanaryServer) Canary.getServer()).getHandle(), 0, viewDistance, this), this);
-        entityTracker = new CanaryEntityTracker((new net.minecraft.server.EntityTracker(((CanaryServer) Canary.getServer()).getHandle(), 0, this)), this);
-        world = dimension;
+        playerManager = new net.minecraft.server.PlayerManager(this.world, viewDistance).getPlayerManager();
+        entityTracker = new net.minecraft.server.EntityTracker(this.world).getCanaryEntityTracker();
         this.type = type;
         // Init nanotick size
         nanoTicks = new long[100];
+
+        chunkProvider = new CanaryChunkProviderServer(null);
     }
 
     @Override
@@ -161,11 +147,11 @@ public class CanaryWorld implements World {
 
     @Override
     public EntityItem dropItem(int x, int y, int z, int itemId, int amount, int damage) {
-        double d1 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
-        double d2 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
-        double d3 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
+        double d1 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
+        double d2 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
+        double d3 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
 
-        OEntityItem oei = new OEntityItem(world, x + d1, y + d2, z + d3, new OItemStack(itemId, amount, damage));
+        EntityItem oei = new EntityItem(world, x + d1, y + d2, z + d3, new ItemStack(itemId, amount, damage));
 
         oei.c = 10;
         world.b(oei);
@@ -174,11 +160,11 @@ public class CanaryWorld implements World {
 
     @Override
     public EntityItem dropItem(int x, int y, int z, Item item) {
-        double d1 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
-        double d2 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
-        double d3 = world.r.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
+        double d1 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
+        double d2 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
+        double d3 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
 
-        OEntityItem oei = new OEntityItem(world, x + d1, y + d2, z + d3, new OItemStack(item.getId(), item.getAmount(), item.getDamage()));
+        EntityItem oei = new EntityItem(world, x + d1, y + d2, z + d3, new ItemStack(item.getId(), item.getAmount(), item.getDamage()));
 
         oei.c = 10;
         world.b(oei);
@@ -280,9 +266,9 @@ public class CanaryWorld implements World {
 
     @Override
     public Player getClosestPlayer(double x, double y, double z, double distance) {
-        OEntityPlayer user = world.a(x, y, z, distance);
+        EntityPlayer user = world.a(x, y, z, distance);
 
-        if ((user != null) && user instanceof OEntityPlayerMP) {
+        if ((user != null) && user instanceof EntityPlayerMP) {
             return (Player) user.getCanaryEntity();
         }
         return null;
@@ -290,9 +276,9 @@ public class CanaryWorld implements World {
 
     @Override
     public Player getClosestPlayer(Entity entity, int distance) {
-        OEntityPlayer user = world.a(((CanaryEntity) entity).getHandle(), distance);
+        EntityPlayer user = world.a(((CanaryEntity) entity).getHandle(), distance);
 
-        if ((user != null) && user instanceof OEntityPlayerMP) {
+        if ((user != null) && user instanceof EntityPlayerMP) {
             return (Player) user.getCanaryEntity();
         }
         return null;
@@ -370,12 +356,12 @@ public class CanaryWorld implements World {
 
     @Override
     public void setLightLevelOnBlockMap(int x, int y, int z, int newLevel) {
-        world.a(OEnumSkyBlock.b, x, y, z, newLevel);
+        world.a(EnumSkyBlock.b, x, y, z, newLevel);
     }
 
     @Override
     public void setLightLevelOnSkyMap(int x, int y, int z, int newLevel) {
-        world.a(OEnumSkyBlock.a, x, y, z, newLevel);
+        world.a(EnumSkyBlock.a, x, y, z, newLevel);
     }
 
     @Override
@@ -427,48 +413,6 @@ public class CanaryWorld implements World {
     }
 
     @Override
-    public EntityMob createMob(MobType mobtype) {
-        switch (mobtype) {
-            case BLAZE:
-                return new CanaryBlaze(new OEntityBlaze(getHandle()));
-
-            case CREEPER:
-                return new CanaryCreeper(new OEntityCreeper(getHandle()));
-
-            case ENDERMAN:
-                return new CanaryEnderman(new OEntityEnderman(getHandle()));
-
-            case GHAST:
-                return new CanaryGhast(new OEntityGhast(getHandle()));
-
-            case GIANTZOMBIE:
-                return new CanaryGiantZombie(new OEntityGiantZombie(getHandle()));
-
-            case LAVASLIME:
-                return new CanaryLavaSlime(new OEntityLavaSlime(getHandle()));
-
-            case PIGZOMBIE:
-                return new CanaryPigZombie(new OEntityPigZombie(getHandle()));
-
-            case SILVERFISH:
-                return new CanarySilverfish(new OEntitySilverfish(getHandle()));
-
-            case SKELETON:
-                return new CanarySkeleton(new OEntitySkeleton(getHandle()));
-
-            case SLIME:
-                return new CanarySlime(new OEntitySlime(getHandle()));
-
-            case SPIDER:
-                return new CanarySpider(new OEntitySpider(getHandle()));
-
-            case ZOMBIE:
-                return new CanaryZombie(new OEntityZombie(getHandle()));
-        }
-        return null;
-    }
-
-    @Override
     public boolean isBlockPowered(Block block) {
         return isBlockPowered(block.getX(), block.getY(), block.getZ());
     }
@@ -505,9 +449,9 @@ public class CanaryWorld implements World {
 
         // Thanks to Bukkit for figuring out these numbers
         if (thundering) {
-            setThunderTime(world.r.nextInt(12000) + 3600);
+            setThunderTime(world.s.nextInt(12000) + 3600);
         } else {
-            setThunderTime(world.r.nextInt(168000) + 12000);
+            setThunderTime(world.s.nextInt(168000) + 12000);
         }
 
     }
@@ -524,9 +468,9 @@ public class CanaryWorld implements World {
 
         // Thanks to Bukkit for figuring out these numbers
         if (downfall) {
-            setRainTime(world.r.nextInt(12000) + 3600);
+            setRainTime(world.s.nextInt(12000) + 3600);
         } else {
-            setRainTime(world.r.nextInt(168000) + 12000);
+            setRainTime(world.s.nextInt(168000) + 12000);
         }
     }
 
@@ -557,12 +501,12 @@ public class CanaryWorld implements World {
 
     @Override
     public void makeLightningBolt(int x, int y, int z) {
-        world.a(new OEntityLightningBolt(world, x, y, z));
+        world.a(new EntityLightningBolt(world, x, y, z));
     }
 
     @Override
     public void makeLightningBolt(Position position) {
-        world.a(new OEntityLightningBolt(world, (int) position.getX(), (int) position.getY(), (int) position.getZ()));
+        world.a(new EntityLightningBolt(world, (int) position.getX(), (int) position.getY(), (int) position.getZ()));
     }
 
     @Override
@@ -582,19 +526,19 @@ public class CanaryWorld implements World {
 
     @Override
     public void removePlayerFromWorld(Player player) {
-        world.f((OEntity) ((CanaryPlayer) player).getHandle());
+        world.f((Entity) ((CanaryPlayer) player).getHandle());
 
     }
 
     @Override
     public void addPlayerToWorld(Player player) {
-        world.b((OEntity) ((CanaryPlayer) player).getHandle());
+        world.b((Entity) ((CanaryPlayer) player).getHandle());
     }
 
     @Override
     public Location getSpawnLocation() {
         // More structure ftw
-        OWorldInfo info = world.worldInfo;
+        WorldInfo info = world.worldInfo;
         Location spawn = new Location(0, 0, 0);
 
         spawn.setX(info.getSpawnX() + 0.5D);
@@ -640,77 +584,44 @@ public class CanaryWorld implements World {
 
     @Override
     public ComplexBlock getOnlyComplexBlockAt(int x, int y, int z) {
-        OTileEntity tileentity = world.b(x, y, z);
+        TileEntity tileentity = world.b(x, y, z);
 
         if (tileentity != null) {
-            if (tileentity instanceof OTileEntityChest) {
-                return new CanaryChest((OTileEntityChest) tileentity);
-            } else if (tileentity instanceof OTileEntitySign) {
-                return new CanarySign((OTileEntitySign) tileentity);
-            } else if (tileentity instanceof OTileEntityFurnace) {
-                return new CanaryFurnace((OTileEntityFurnace) tileentity);
-            } else if (tileentity instanceof OTileEntityMobSpawner) {
-                return new CanaryMobSpawner((OTileEntityMobSpawner) tileentity);
-            } else if (tileentity instanceof OTileEntityDispenser) {
-                return new CanaryDispenser((OTileEntityDispenser) tileentity);
-            } else if (tileentity instanceof OTileEntityNote) {
-                return new CanaryNoteBlock((OTileEntityNote) tileentity);
-            } else if (tileentity instanceof OTileEntityBrewingStand) {
-                return new CanaryBrewingStand((OTileEntityBrewingStand) tileentity);
-            } else if (tileentity instanceof OTileEntityRecordPlayer) {
-                return new CanaryJukebox((OTileEntityRecordPlayer) tileentity);
+            if (tileentity instanceof TileEntityChest) {
+                return new CanaryChest((TileEntityChest) tileentity);
+            } else if (tileentity instanceof TileEntitySign) {
+                return new CanarySign((TileEntitySign) tileentity);
+            } else if (tileentity instanceof TileEntityFurnace) {
+                return new CanaryFurnace((TileEntityFurnace) tileentity);
+            } else if (tileentity instanceof TileEntityMobSpawner) {
+                return new CanaryMobSpawner((TileEntityMobSpawner) tileentity);
+            } else if (tileentity instanceof TileEntityDispenser) {
+                return new CanaryDispenser((TileEntityDispenser) tileentity);
+            } else if (tileentity instanceof TileEntityNote) {
+                return new CanaryNoteBlock((TileEntityNote) tileentity);
+            } else if (tileentity instanceof TileEntityBrewingStand) {
+                return new CanaryBrewingStand((TileEntityBrewingStand) tileentity);
+            } else if (tileentity instanceof TileEntityRecordPlayer) {
+                return new CanaryJukebox((TileEntityRecordPlayer) tileentity);
             }
         }
         return null;
     }
 
     @Override
-    public EntityAnimal createAnimal(AnimalType animalType) { // XXX <darkdiplomat> - I am removing this and redoing the factories.
-        switch (animalType) {
-            case CHICKEN:
-                return (EntityAnimal) new EntityChicken(getHandle()).getCanaryEntity();
-
-            case COW:
-                return new CanaryCow(new EntityCow(getHandle()));
-
-            case MUSHROOMCOW:
-                return new CanaryMooshroom(new EntityMooshroom(getHandle()));
-
-            case OCELOT:
-                return new CanaryOcelot(new EntityOcelot(getHandle()));
-
-            case PIG:
-                return new CanaryPig(new EntityPig(getHandle()));
-
-            case SHEEP:
-                return new CanarySheep(new EntitySheep(getHandle()));
-
-            case SQUID:
-                return new CanarySquid(new EntitySquid(getHandle()));
-
-            case VILLAGER:
-                return new CanaryVillager(new EntityVillager(getHandle()));
-
-            case WOLF:
-                return new CanaryWolf(new EntityWolf(getHandle()));
-        }
-        return null;
-    }
-
-    @Override
     public Item createItem(ItemType itemType) {
-        return new CanaryItem(new OItemStack(itemType.getId(), 1, 0));
+        return new CanaryItem(new ItemStack(itemType.getId(), 1, 0));
     }
 
     @Override
     public Item createItem(ItemType itemType, int amount, int data) {
-        return new CanaryItem(new OItemStack(itemType.getId(), amount, data));
+        return new CanaryItem(new ItemStack(itemType.getId(), amount, data));
     }
 
     @Override
     public Item createItem(int itemId, int amount, int data) {
 
-        return new CanaryItem(new OItemStack(itemId, amount, data));
+        return new CanaryItem(new ItemStack(itemId, amount, data));
     }
 
     @Override

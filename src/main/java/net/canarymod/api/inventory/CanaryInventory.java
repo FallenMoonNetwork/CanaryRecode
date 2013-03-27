@@ -2,14 +2,15 @@ package net.canarymod.api.inventory;
 
 
 import java.util.ArrayList;
+
 import net.canarymod.Logman;
-import net.minecraft.server.OItemStack;
+import net.minecraft.server.ItemStack;
 
 
 public class CanaryInventory implements Inventory {
-    protected Container<OItemStack> container;
+    protected Container<ItemStack> container;
 
-    public CanaryInventory(Container<OItemStack> container) {
+    public CanaryInventory(Container<ItemStack> container) {
         this.container = container;
     }
 
@@ -41,7 +42,7 @@ public class CanaryInventory implements Inventory {
 
     @Override
     public Item[] getContents() {
-        OItemStack[] oStacks = container.getContents();
+        ItemStack[] oStacks = container.getContents();
         ArrayList<Item> items = new ArrayList<Item>(oStacks.length);
 
         for (int i = 0; i < oStacks.length; i++) {
@@ -102,12 +103,12 @@ public class CanaryInventory implements Inventory {
 
     @Override
     public boolean hasItem(ItemType type, int amount) {
-        return container.hasItemStack(new OItemStack(type.getId(), amount, 0));
+        return container.hasItemStack(new ItemStack(type.getId(), amount, 0));
     }
 
     @Override
     public boolean hasItem(int itemId, int amount) {
-        return container.hasItemStack(new OItemStack(itemId, amount, 0));
+        return container.hasItemStack(new ItemStack(itemId, amount, 0));
     }
 
     @Override
@@ -133,7 +134,7 @@ public class CanaryInventory implements Inventory {
 
     @Override
     public void setSlot(int itemId, int slot) {
-        CanaryItem item = new CanaryItem(new OItemStack(itemId, 1, 0));
+        CanaryItem item = new CanaryItem(new ItemStack(itemId, 1, 0));
 
         item.setSlot(slot);
         setSlot(item);
@@ -141,7 +142,7 @@ public class CanaryInventory implements Inventory {
 
     @Override
     public void setSlot(int slot, int itemId, int amount) {
-        CanaryItem item = new CanaryItem(new OItemStack(itemId, amount, 0));
+        CanaryItem item = new CanaryItem(new ItemStack(itemId, amount, 0));
 
         item.setSlot(slot);
         setSlot(item);
@@ -149,7 +150,7 @@ public class CanaryInventory implements Inventory {
 
     @Override
     public Item getSlot(int slot) {
-        OItemStack tmp = container.getSlot(slot);
+        ItemStack tmp = container.getSlot(slot);
 
         if (tmp != null) {
             return tmp.getCanaryItem();
@@ -164,7 +165,7 @@ public class CanaryInventory implements Inventory {
 
     @Override
     public void setContents(Item[] items) {
-        OItemStack[] oStacks = new OItemStack[items.length];
+        ItemStack[] oStacks = new ItemStack[items.length];
 
         for (int i = 0; i < items.length; i++) {
             oStacks[i] = ((CanaryItem) items[i]).getHandle();
@@ -195,7 +196,7 @@ public class CanaryInventory implements Inventory {
 
     @Override
     public Item decreaseItemStackSize(int itemId, int amount) {
-        OItemStack oStack = container.decreaseItemStackSize(itemId, amount);
+        ItemStack oStack = container.decreaseItemStackSize(itemId, amount);
 
         return new CanaryItem(oStack);
     }
