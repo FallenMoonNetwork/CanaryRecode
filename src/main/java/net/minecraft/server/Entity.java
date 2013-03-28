@@ -1047,7 +1047,7 @@ public abstract class Entity {
 
     protected abstract void a(NBTTagCompound nbttagcompound);
 
-    protected abstract void b(NBTTagCompound nbttagcompound);
+    public abstract void b(NBTTagCompound nbttagcompound); // CanaryMod: Make this Public
 
     protected NBTTagList a(double... adouble) {
         NBTTagList nbttaglist = new NBTTagList();
@@ -1556,7 +1556,7 @@ public abstract class Entity {
 
     /**
      * CanaryMod Get this entities current World (dimension)
-     * 
+     *
      * @return
      */
     public CanaryWorld getCanaryWorld() {
