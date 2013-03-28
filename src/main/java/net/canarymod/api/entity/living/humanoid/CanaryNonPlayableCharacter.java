@@ -1,6 +1,8 @@
 package net.canarymod.api.entity.living.humanoid;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.inventory.Inventory;
@@ -19,7 +21,7 @@ import net.minecraft.server.Packet29DestroyEntity;
  * @author Jason (darkdiplomat)
  */
 public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements NonPlayableCharacter {
-    private NPCBehavior[] behaviors;
+    private final List<NPCBehavior> behaviors;
 
     /**
      * Constructs a new wrapper for EntityNonPlayableCharacter
@@ -29,12 +31,10 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      * @param inHand
      *            the Item to set inHand
      */
-    public CanaryNonPlayableCharacter(EntityNonPlayableCharacter npc, Item inHand, NPCBehavior... behavior) {
+    public CanaryNonPlayableCharacter(EntityNonPlayableCharacter npc) {
         super(npc);
         this.getHandle().setNPC(this);
-        this.getInventory().setSlot(inHand);
-        this.setItemInHandSlot(inHand != null && inHand.getSlot() > -1 ? inHand.getSlot() : 0);
-        this.behaviors = behavior;
+        this.behaviors = new ArrayList<NPCBehavior>();
     }
 
     /**
@@ -47,8 +47,8 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      * @param inHand
      *            the Item to set in the NPC's hand
      */
-    public CanaryNonPlayableCharacter(String name, Location location, Item inHand, NPCBehavior... behavior) {
-        this(new EntityNonPlayableCharacter(name, location), inHand, behavior);
+    public CanaryNonPlayableCharacter(String name, Location location) {
+        this(new EntityNonPlayableCharacter(name, location));
     }
 
     /**
@@ -190,8 +190,10 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
 
     @Override
     public void update() {
-        for (NPCBehavior behavior : behaviors) {
-            behavior.onUpdate();
+        synchronized (behaviors) {
+            for (NPCBehavior behavior : behaviors) {
+                behavior.onUpdate();
+            }
         }
     }
 
@@ -201,5 +203,32 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     @Override
     public EntityNonPlayableCharacter getHandle() {
         return (EntityNonPlayableCharacter) entity;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<NPCBehavior> getBehaviors() {
+        return this.behaviors;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NPCBehavior removeBehavior(NPCBehavior behavior) {
+        if (this.behaviors.contains(behavior)) {
+            return this.behaviors.remove(behaviors.indexOf(behavior));
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean addBehavior(NPCBehavior behavior) {
+        return this.behaviors.add(behavior);
     }
 }
