@@ -19,6 +19,7 @@ import net.minecraft.server.Packet29DestroyEntity;
  * @author Jason (darkdiplomat)
  */
 public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements NonPlayableCharacter {
+    private NPCBehavior[] behaviors;
 
     /**
      * Constructs a new wrapper for EntityNonPlayableCharacter
@@ -28,11 +29,12 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      * @param inHand
      *            the Item to set inHand
      */
-    public CanaryNonPlayableCharacter(EntityNonPlayableCharacter npc, Item inHand) {
+    public CanaryNonPlayableCharacter(EntityNonPlayableCharacter npc, Item inHand, NPCBehavior... behavior) {
         super(npc);
         this.getHandle().setNPC(this);
         this.getInventory().setSlot(inHand);
         this.setItemInHandSlot(inHand != null && inHand.getSlot() > -1 ? inHand.getSlot() : 0);
+        this.behaviors = behavior;
     }
 
     /**
@@ -45,8 +47,8 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      * @param inHand
      *            the Item to set in the NPC's hand
      */
-    public CanaryNonPlayableCharacter(String name, Location location, Item inHand) {
-        this(new EntityNonPlayableCharacter(name, location), inHand);
+    public CanaryNonPlayableCharacter(String name, Location location, Item inHand, NPCBehavior... behavior) {
+        this(new EntityNonPlayableCharacter(name, location), inHand, behavior);
     }
 
     /**
@@ -187,7 +189,11 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     }
 
     @Override
-    public void update() {}
+    public void update() {
+        for (NPCBehavior behavior : behaviors) {
+            behavior.onUpdate();
+        }
+    }
 
     /**
      * {@inheritDoc}
