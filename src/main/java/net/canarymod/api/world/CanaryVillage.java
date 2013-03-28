@@ -2,6 +2,7 @@ package net.canarymod.api.world;
 
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.position.Location;
+import net.minecraft.server.ChunkCoordinates;
 
 /**
  * Village wrapper implementation
@@ -11,76 +12,110 @@ import net.canarymod.api.world.position.Location;
 public class CanaryVillage implements Village {
     private final net.minecraft.server.Village village;
 
+    /**
+     * Constructs a new wrapper for Village
+     * 
+     * @param village
+     *            the Village to wrap
+     */
     public CanaryVillage(net.minecraft.server.Village village) {
         this.village = village;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setReputationForPlayer(Player player, int rep) {
-        // TODO Auto-generated method stub
-
+        getHandle().a(player.getName(), rep);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getReputationForPlayer(Player player) {
-        // TODO Auto-generated method stub
-        return 0;
+        return getHandle().a(player.getName());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isPlayerReputationTooLow(Player player) {
-        // TODO Auto-generated method stub
-        return false;
+        return getHandle().d(player.getName());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isMatingSeason() {
-        // TODO Auto-generated method stub
-        return false;
+        return getHandle().i();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void startMatingSeason() {
-        // TODO Auto-generated method stub
-
+        getHandle().i -= 3600;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void endMatingSeason() {
-        // TODO Auto-generated method stub
-
+        getHandle().h();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Location getCenter() {
-        // TODO Auto-generated method stub
-        return null;
+        ChunkCoordinates cc = getHandle().a();
+        return new Location(cc.a, cc.b, cc.c);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getRadius() {
-        // TODO Auto-generated method stub
-        return 0;
+        return getHandle().b();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getVillagerCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        return getHandle().e();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getIronGolemCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        return getHandle().l;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isAnnihilated() {
-        // TODO Auto-generated method stub
-        return false;
+        return getHandle().g();
     }
 
+    /**
+     * Gets the Village being wrapped
+     * 
+     * @return the Village
+     */
     public net.minecraft.server.Village getHandle() {
         return village;
     }

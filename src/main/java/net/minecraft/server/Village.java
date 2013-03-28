@@ -16,10 +16,10 @@ public class Village {
     private int f = 0;
     private int g = 0;
     private int h = 0;
-    private int i;
+    public int i; // CanaryMod: private => public
     private TreeMap j = new TreeMap();
     private List k = new ArrayList();
-    private int l = 0;
+    public int l = 0; // CanaryMod: private => public
 
     // CanaryMod
     private CanaryVillage ville;
@@ -32,6 +32,7 @@ public class Village {
 
     public Village(World world) {
         this.a = world;
+        this.ville = new CanaryVillage(this); // CanaryMod: Wrap Village
     }
 
     public void a(World world) {
