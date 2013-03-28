@@ -151,11 +151,11 @@ public class CanaryWorld implements World {
         double d2 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
         double d3 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
 
-        EntityItem oei = new EntityItem(world, x + d1, y + d2, z + d3, new ItemStack(itemId, amount, damage));
+        net.minecraft.server.EntityItem oei = new net.minecraft.server.EntityItem(world, x + d1, y + d2, z + d3, new ItemStack(itemId, amount, damage));
 
         oei.c = 10;
-        world.b(oei);
-        return oei.getItem();
+        world.d(oei);
+        return oei.getEntityItem();
     }
 
     @Override
@@ -164,11 +164,11 @@ public class CanaryWorld implements World {
         double d2 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
         double d3 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
 
-        EntityItem oei = new EntityItem(world, x + d1, y + d2, z + d3, new ItemStack(item.getId(), item.getAmount(), item.getDamage()));
+        net.minecraft.server.EntityItem oei = new net.minecraft.server.EntityItem(world, x + d1, y + d2, z + d3, new ItemStack(item.getId(), item.getAmount(), item.getDamage()));
 
         oei.c = 10;
-        world.b(oei);
-        return oei.getItem();
+        world.d(oei);
+        return oei.getEntityItem();
     }
 
     @Override
@@ -203,13 +203,13 @@ public class CanaryWorld implements World {
     @Override
     public Block getBlockAt(int x, int y, int z) {
         short id = (short) world.a(x, y, z);
-        byte data = getDataAt(x, y, z);
+        short data = getDataAt(x, y, z);
 
         return new CanaryBlock(id, data, x, y, z, this);
     }
 
     @Override
-    public byte getDataAt(Position position) {
+    public short getDataAt(Position position) {
         return getDataAt((int) position.getX(), (int) position.getY(), (int) position.getZ());
     }
 
@@ -219,8 +219,8 @@ public class CanaryWorld implements World {
     }
 
     @Override
-    public byte getDataAt(int x, int y, int z) {
-        return (byte) world.c(x, y, z);
+    public short getDataAt(int x, int y, int z) {
+        return (short) world.h(x, y, z);
     }
 
     @Override
@@ -245,18 +245,18 @@ public class CanaryWorld implements World {
     }
 
     @Override
-    public void setBlockAt(Position position, short type, byte data) {
+    public void setBlockAt(Position position, short type, short data) {
         setBlockAt((int) position.getX(), (int) position.getY(), (int) position.getZ(), type, data);
     }
 
     @Override
-    public void setBlockAt(int x, int y, int z, short type, byte data) {
-        world.b(x, y, z, type, data);
+    public void setBlockAt(int x, int y, int z, short type, short data) {
+        world.c(x, y, z, type, data);
     }
 
     @Override
-    public void setDataAt(int x, int y, int z, byte data) {
-        world.d(x, y, z, data);
+    public void setDataAt(int x, int y, int z, short data) {
+        world.b(x, y, z, data);
     }
 
     @Override
@@ -312,7 +312,7 @@ public class CanaryWorld implements World {
 
     @Override
     public int getYHeighestBlockAt(int x, int z) {
-        return world.e(x, z);
+        return world.f(x, z);
     }
 
     @Override
@@ -335,33 +335,28 @@ public class CanaryWorld implements World {
 
     @Override
     public long getRelativeTime() {
-        long time = (getRawTime() % 24000);
-
-        // Java modulus is stupid.
-        if (time < 0) {
-            time += 24000;
-        }
-        return time;
+        return world.H();
     }
 
     @Override
     public long getRawTime() {
-        return world.o();
+        return world.G();
     }
 
     @Override
     public int getLightLevelAt(int x, int y, int z) {
-        return world.n(x, y, z);
+        //TODO: Returns skylight level, needs option for blocklight level too
+        return world.b(EnumSkyBlock.a, x, y, z);
     }
 
     @Override
     public void setLightLevelOnBlockMap(int x, int y, int z, int newLevel) {
-        world.a(EnumSkyBlock.b, x, y, z, newLevel);
+        world.b(EnumSkyBlock.b, x, y, z, newLevel);
     }
 
     @Override
     public void setLightLevelOnSkyMap(int x, int y, int z, int newLevel) {
-        world.a(EnumSkyBlock.a, x, y, z, newLevel);
+        world.b(EnumSkyBlock.a, x, y, z, newLevel);
     }
 
     @Override
@@ -445,7 +440,7 @@ public class CanaryWorld implements World {
     @Override
     public void setThundering(boolean thundering) {
         // TODO: add thunder_change hook here?
-        world.worldInfo.setThundering(thundering);
+        world.x.a(thundering);
 
         // Thanks to Bukkit for figuring out these numbers
         if (thundering) {
@@ -458,13 +453,13 @@ public class CanaryWorld implements World {
 
     @Override
     public void setThunderTime(int ticks) {
-        world.worldInfo.setThunderTimeTicks(ticks);
+        world.x.f(ticks);
     }
 
     @Override
     public void setRaining(boolean downfall) {
         // TODO: Add weather change hook
-        world.worldInfo.setRaining(downfall);
+        world.x.b(downfall);
 
         // Thanks to Bukkit for figuring out these numbers
         if (downfall) {
@@ -476,74 +471,74 @@ public class CanaryWorld implements World {
 
     @Override
     public void setRainTime(int ticks) {
-        world.worldInfo.setRainTimeTicks(ticks);
+        world.x.g(ticks);
     }
 
     @Override
     public boolean isRaining() {
-        return world.worldInfo.isRaining();
+        return world.x.p();
     }
 
     @Override
     public boolean isThundering() {
-        return world.worldInfo.isThundering();
+        return world.x.n();
     }
 
     @Override
     public int getRainTicks() {
-        return world.worldInfo.getRainTimeTicks();
+        return world.x.q();
     }
 
     @Override
     public int getThunderTicks() {
-        return world.worldInfo.getThunderTimeTicks();
+        return world.x.o();
     }
 
     @Override
     public void makeLightningBolt(int x, int y, int z) {
-        world.a(new EntityLightningBolt(world, x, y, z));
+        world.c(new EntityLightningBolt(world, x, y, z));
     }
 
     @Override
     public void makeLightningBolt(Position position) {
-        world.a(new EntityLightningBolt(world, (int) position.getX(), (int) position.getY(), (int) position.getZ()));
+        world.c(new EntityLightningBolt(world, (int) position.getX(), (int) position.getY(), (int) position.getZ()));
     }
 
     @Override
-    public void makeExplosion(Entity exploder, double x, double y, double z, float power) {
-        world.a(((CanaryEntity) exploder).getHandle(), x, y, z, power);
+    public void makeExplosion(Entity exploder, double x, double y, double z, float power, boolean damageBlocks) {
+        world.a(((CanaryEntity) exploder).getHandle(), x, y, z, power, damageBlocks);
     }
 
     @Override
-    public void makeExplosion(Entity exploder, Position position, float power) {
-        world.a(((CanaryEntity) exploder).getHandle(), position.getX(), position.getY(), position.getZ(), power);
+    public void makeExplosion(Entity exploder, Position position, float power, boolean damageBlocks) {
+        world.a(((CanaryEntity) exploder).getHandle(), position.getX(), position.getY(), position.getZ(), power, damageBlocks);
     }
 
     @Override
     public long getWorldSeed() {
-        return world.n();
+        return world.F();
     }
 
     @Override
     public void removePlayerFromWorld(Player player) {
-        world.f((Entity) ((CanaryPlayer) player).getHandle());
+        world.f((net.minecraft.server.Entity) ((CanaryPlayer) player).getHandle());
 
     }
 
     @Override
     public void addPlayerToWorld(Player player) {
-        world.b((Entity) ((CanaryPlayer) player).getHandle());
+        world.d((net.minecraft.server.Entity) ((CanaryPlayer) player).getHandle());
     }
 
     @Override
     public Location getSpawnLocation() {
         // More structure ftw
-        WorldInfo info = world.worldInfo;
+        WorldInfo info = world.x;
         Location spawn = new Location(0, 0, 0);
 
-        spawn.setX(info.getSpawnX() + 0.5D);
-        spawn.setY(world.f(info.getSpawnX(), info.getSpawnZ()) + 1.5D);
-        spawn.setZ(info.getSpawnZ() + 0.5D);
+        spawn.setX(info.c() + 0.5D);
+        spawn.setY(info.d());
+        spawn.setZ(info.e() + 0.5D);
         spawn.setRotation(0.0F);
         spawn.setPitch(0.0F);
         spawn.setType(type);
@@ -553,7 +548,7 @@ public class CanaryWorld implements World {
 
     @Override
     public void setSpawnLocation(Location p) {
-        world.worldInfo.setSpawn((int) p.getX(), (int) p.getY(), (int) p.getZ());
+        world.x.a((int) p.getX(), (int) p.getY(), (int) p.getZ());
     }
 
     @Override
@@ -584,7 +579,7 @@ public class CanaryWorld implements World {
 
     @Override
     public ComplexBlock getOnlyComplexBlockAt(int x, int y, int z) {
-        TileEntity tileentity = world.b(x, y, z);
+        TileEntity tileentity = world.r(x, y, z);
 
         if (tileentity != null) {
             if (tileentity instanceof TileEntityChest) {
@@ -632,6 +627,6 @@ public class CanaryWorld implements World {
         }
         CanaryWorld test = (CanaryWorld) ob;
 
-        return test.equals(name) && test.getType().equals(type);
+        return test == this;
     }
 }

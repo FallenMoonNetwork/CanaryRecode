@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import java.util.Iterator;
+
 import net.canarymod.api.entity.CanaryEntityItem;
 
 public class EntityItem extends Entity {
@@ -30,6 +31,7 @@ public class EntityItem extends Entity {
         this.a(itemstack);
     }
 
+    @Override
     protected boolean f_() {
         return false;
     }
@@ -44,10 +46,12 @@ public class EntityItem extends Entity {
         this.entity = new CanaryEntityItem(this); // CanaryMod: Wrap Entity
     }
 
+    @Override
     protected void a() {
         this.u().a(10, 5);
     }
 
+    @Override
     public void l_() {
         super.l_();
         if (this.b > 0) {
@@ -145,14 +149,17 @@ public class EntityItem extends Entity {
         this.a = 4800;
     }
 
+    @Override
     public boolean H() {
         return this.q.a(this.E, Material.h, (Entity) this);
     }
 
+    @Override
     protected void e(int i0) {
         this.a(DamageSource.a, i0);
     }
 
+    @Override
     public boolean a(DamageSource damagesource, int i0) {
         if (this.aq()) {
             return false;
@@ -169,6 +176,7 @@ public class EntityItem extends Entity {
         }
     }
 
+    @Override
     public void b(NBTTagCompound nbttagcompound) {
         nbttagcompound.a("Health", (short) ((byte) this.d));
         nbttagcompound.a("Age", (short) this.a);
@@ -177,6 +185,7 @@ public class EntityItem extends Entity {
         }
     }
 
+    @Override
     public void a(NBTTagCompound nbttagcompound) {
         this.d = nbttagcompound.d("Health") & 255;
         this.a = nbttagcompound.d("Age");
@@ -188,6 +197,7 @@ public class EntityItem extends Entity {
         }
     }
 
+    @Override
     public void b_(EntityPlayer entityplayer) {
         if (!this.q.I) {
             ItemStack itemstack = this.d();
@@ -219,14 +229,17 @@ public class EntityItem extends Entity {
         }
     }
 
+    @Override
     public String am() {
         return StatCollector.a("item." + this.d().a());
     }
 
+    @Override
     public boolean ap() {
         return false;
     }
 
+    @Override
     public void c(int i0) {
         super.c(i0);
         if (!this.q.I) {
@@ -251,5 +264,9 @@ public class EntityItem extends Entity {
     public void a(ItemStack itemstack) {
         this.u().b(10, itemstack);
         this.u().h(10);
+    }
+
+    public CanaryEntityItem getEntityItem() {
+        return (CanaryEntityItem) entity;
     }
 }
