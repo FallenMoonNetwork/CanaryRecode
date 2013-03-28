@@ -1,17 +1,14 @@
 package net.canarymod.api.world;
 
 
-import java.io.IOException;
-
-import net.canarymod.Canary;
 import net.minecraft.server.ChunkCoordIntPair;
 
 
 public class CanaryChunkProviderServer implements ChunkProviderServer {
 
-    private ChunkProviderServer handle;
+    private net.minecraft.server.ChunkProviderServer handle;
 
-    public CanaryChunkProviderServer(ChunkProviderServer handle) {
+    public CanaryChunkProviderServer(net.minecraft.server.ChunkProviderServer handle) {
         this.handle = handle;
     }
 
@@ -32,41 +29,34 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
 
     @Override
     public Chunk provideChunk(int x, int z) {
-        return this.handle.b(x, z).getCanaryChunk();
+        return this.handle.d(x, z).getCanaryChunk();
     }
 
     @Override
     public boolean saveChunk(boolean saveAll) {
         // The chunk saver doesn't touch the progress object thingy
-        try {
-            return this.handle.a(saveAll, null);
-        } catch (IOException e) {
-            return false;
-        }
+        return this.handle.a(saveAll, null);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Chunk regenerateChunk(int x, int z) {
         Long chunkCoordIntPair = ChunkCoordIntPair.a(x, z);
         // Unloading the chunk
-        Chunk unloadedChunk = (Chunk) handle.f.a(chunkCoordIntPair.longValue());
+        net.minecraft.server.Chunk unloadedChunk = (net.minecraft.server.Chunk) handle.f.a(chunkCoordIntPair.longValue());
 
         if (unloadedChunk != null) {
             unloadedChunk.e();
-            try {
-                handle.b(unloadedChunk);
-            } catch (IOException e) {
-                Canary.logStackTrace("Exception while unloading a chunk!", e);
-            }
+            handle.b(unloadedChunk); //save chunk data
+            handle.a(unloadedChunk); //save extra chunk data
 
-            handle.a(unloadedChunk);
             handle.b.remove(chunkCoordIntPair);
             handle.f.d(chunkCoordIntPair.longValue());
             handle.g.remove(unloadedChunk);
         }
 
         // Generating the new chunk
-        Chunk newChunk = handle.d.b(x, z);
+        net.minecraft.server.Chunk newChunk = handle.d.d(x, z);
 
         handle.f.a(chunkCoordIntPair, newChunk);
         handle.g.add(newChunk);
@@ -78,11 +68,7 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
 
         // Save the new chunk, overriding the old one
         handle.a(newChunk);
-        try {
-            handle.b(newChunk);
-        } catch (IOException e) {
-            Canary.logStackTrace("Exception while regenerating a chunk!", e);
-        }
+        handle.b(newChunk);
         newChunk.k = false;
         if (handle.e != null) {
             handle.e.b();

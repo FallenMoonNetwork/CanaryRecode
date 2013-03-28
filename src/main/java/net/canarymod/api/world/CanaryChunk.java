@@ -1,17 +1,15 @@
 package net.canarymod.api.world;
 
 
-import net.minecraft.server.OChunk;
-
 
 public class CanaryChunk implements Chunk {
-    private OChunk handle;
+    private net.minecraft.server.Chunk handle;
 
-    public CanaryChunk(OChunk chunk) {
+    public CanaryChunk(net.minecraft.server.Chunk chunk) {
         this.handle = chunk;
     }
 
-    public OChunk getHandle() {
+    public net.minecraft.server.Chunk getHandle() {
         return handle;
     }
 
@@ -27,12 +25,12 @@ public class CanaryChunk implements Chunk {
 
     @Override
     public int getBlockTypeAt(int x, int y, int z) {
-        return handle.b(x, y, z);
+        return handle.a(x, y, z);
     }
 
     @Override
     public void setBlockTypeAt(int x, int y, int z, int type) {
-        handle.a(x, y, z, type);
+        handle.b(x, y, z, type);
     }
 
     @Override
@@ -47,7 +45,7 @@ public class CanaryChunk implements Chunk {
 
     @Override
     public int getMaxHeigth() {
-        return 256; // TODO: configurable //Chris: Really? //Jason: how about HELL TO THE NO, I am not implementing per chunk build heights :P That is crazy stupid...
+        return 256;
     }
 
     @Override
@@ -62,12 +60,12 @@ public class CanaryChunk implements Chunk {
 
     @Override
     public byte[] getBiomeByteData() {
-        return handle.l();
+        return handle.m();
     }
 
     @Override
     public BiomeType[] getBiomeData() {
-        byte[] data = handle.l();
+        byte[] data = handle.m();
         BiomeType[] typedata = new BiomeType[256];
 
         for (int index = 0; index < 256; index++) {
