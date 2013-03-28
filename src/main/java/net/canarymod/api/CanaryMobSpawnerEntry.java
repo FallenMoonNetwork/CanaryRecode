@@ -81,7 +81,7 @@ public class CanaryMobSpawnerEntry implements MobSpawnerEntry {
 
         //sets the properties of this spawn.
         CanaryCompoundTag properties = new CanaryCompoundTag(new NBTTagCompound());
-        ent.b(properties.getHandle());
+        ent.getNBTProperties(properties.getHandle());
 
         entry.put("Properties", properties);
         return entry;

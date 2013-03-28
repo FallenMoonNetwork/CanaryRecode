@@ -1047,7 +1047,7 @@ public abstract class Entity {
 
     protected abstract void a(NBTTagCompound nbttagcompound);
 
-    public abstract void b(NBTTagCompound nbttagcompound); // CanaryMod: Make this Public
+    protected abstract void b(NBTTagCompound nbttagcompound);
 
     protected NBTTagList a(double... adouble) {
         NBTTagList nbttaglist = new NBTTagList();
@@ -1574,5 +1574,14 @@ public abstract class Entity {
 
     public UUID getEntityUUID() {
         return this.i;
+    }
+
+    /**
+     * Applies this Entities Properties to an NBT Tag. Initially implemented for
+     * getting properties for MobSpawnerEntry.
+     * @param tag tag to apply this entities properties to.
+     */
+    public void getNBTProperties(NBTTagCompound tag) {
+        this.b(tag);
     }
 }
