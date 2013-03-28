@@ -2,7 +2,15 @@ package net.canarymod.api.inventory;
 
 
 import net.canarymod.api.Enchantment;
+import net.canarymod.api.nbt.CanaryCompoundTag;
+import net.canarymod.api.nbt.CanaryListTag;
+import net.canarymod.api.nbt.CanaryStringTag;
+import net.canarymod.api.nbt.CompoundTag;
+import net.canarymod.api.nbt.ListTag;
+import net.canarymod.api.nbt.StringTag;
 import net.minecraft.server.ItemStack;
+import net.minecraft.server.NBTTagCompound;
+import net.minecraft.server.NBTTagList;
 
 /**
  * Item wrapper implementation
@@ -249,10 +257,18 @@ public class CanaryItem implements Item {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public String[] getLore() {
-        // NBT implementation needed
-        return null;
+        if (!hasLore()) {
+            return null;
+        }
+        ListTag<StringTag> lore = (ListTag<StringTag>) getDataTag().getCompoundTag("display").getListTag("Lore");
+        String[] rt = new String[lore.size()];
+        for (int index = 0; index < rt.length; index++) {
+            rt[index] = lore.get(index).getValue();
+        }
+        return rt;
     }
 
     /**
@@ -260,11 +276,68 @@ public class CanaryItem implements Item {
      */
     @Override
     public void setLore(String... lore) {
-        // NBT implementation needed
+        CompoundTag tag = getDataTag();
+        if (tag == null) {
+            tag = new CanaryCompoundTag(new NBTTagCompound("tag"));
+            setDataTag(tag);
+        }
+        if (!tag.containsKey("display")) {
+            tag.put("display", new CanaryCompoundTag("display"));
+        }
+        CanaryListTag<CanaryStringTag> list = new CanaryListTag<CanaryStringTag>(new NBTTagList());
+        for (String line : lore) {
+            list.add(new CanaryStringTag("", line));
+        }
+        tag.getCompoundTag("display").put("Lore", list);
+    }
+
+    public boolean hasLore() {
+        return item.p() && getDataTag().containsKey("display");
     }
 
     /**
      * {@inheritDoc}
+     */
+    @Override
+    public boolean hasDataTag() {
+        return item.p();
+    }
+
+    @Override
+    public CompoundTag getDataTag() {
+        return item.p() ? new CanaryCompoundTag(item.q()) : null;
+    }
+
+    public void setDataTag(CompoundTag tag) {
+        getHandle().d = tag == null ? null : ((CanaryCompoundTag) tag).getHandle();
+    }
+
+    @Override
+    public CompoundTag getMetaTag() {
+        if (!item.p()) {
+            return null;
+        }
+        CompoundTag dataTag = getDataTag();
+        if (!dataTag.containsKey("Canary")) {
+            dataTag.put("Canary", new CanaryCompoundTag("Canary"));
+        }
+        return dataTag.getCompoundTag("Canary");
+    }
+
+    @Override
+    public CompoundTag writeToTag(CompoundTag tag) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void readFromTag(CompoundTag tag) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * Gets the ItemStack being wrapped
      */
     public ItemStack getHandle() {
         return item;
