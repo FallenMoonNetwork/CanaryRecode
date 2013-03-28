@@ -58,7 +58,10 @@ public class CanaryMobSpawnerEntry implements MobSpawnerEntry {
     }
     @Override
     public boolean isValid() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.entity != null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
