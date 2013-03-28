@@ -5,42 +5,69 @@ import net.minecraft.server.Material;
 import net.minecraft.server.TileEntityNote;
 
 
+/**
+ * NoteBlock wrapper implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
 public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
 
+    /**
+     * Constructs a new wrapper for TileEntityChest
+     * 
+     * @param tileentity
+     *            the TileEntityChest to be wrapped
+     */
     public CanaryNoteBlock(TileEntityNote tileentity) {
         super(tileentity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public byte getInstrument() {
-        Material material = tileentity.k.d(getX(), getY() - 1, getZ());
+        Material material = tileentity.az().g(getX(), getY() - 1, getZ());
         byte instrument = 0;
 
         if (material == Material.e) {
             instrument = 1;
         }
-        if (material == Material.o) {
+
+        if (material == Material.p) {
             instrument = 2;
         }
-        if (material == Material.q) {
+
+        if (material == Material.r) {
             instrument = 3;
         }
+
         if (material == Material.d) {
             instrument = 4;
         }
+
         return instrument;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public byte getNote() {
-        return ((TileEntityNote) tileentity).a;
+        return getHandle().a;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void play() {
-        ((TileEntityNote) tileentity).a(tileentity.k, getX(), getY(), getZ());
+        getHandle().a(tileentity.az(), getX(), getY(), getZ());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setNote(byte note) {
         if (note < 0) {
@@ -50,7 +77,15 @@ public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
             note = 24;
         }
 
-        ((TileEntityNote) tileentity).a = note;
+        getHandle().a = note;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TileEntityNote getHandle() {
+        return (TileEntityNote) tileentity;
     }
 
 }

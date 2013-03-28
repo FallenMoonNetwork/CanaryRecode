@@ -5,43 +5,75 @@ import net.canarymod.api.world.World;
 import net.minecraft.server.TileEntity;
 
 
-public class CanaryComplexBlock implements ComplexBlock {
+/**
+ * ComplexBlock implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
+public abstract class CanaryComplexBlock implements ComplexBlock {
 
     protected TileEntity tileentity;
 
+    /**
+     * Constructs a new wrapper for TileEntityChest
+     * 
+     * @param tileentity
+     *            the TileEntityChest to be wrapped
+     */
     public CanaryComplexBlock(TileEntity tileentity) {
         this.tileentity = tileentity;
     }
 
-    public TileEntity getHandle() {
-        return tileentity;
-    }
+    /**
+     * Gets the TileEntity being wrapped
+     * 
+     * @return the TileEntity
+     */
+    public abstract TileEntity getHandle();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Block getBlock() {
         return getWorld().getBlockAt(getX(), getY(), getZ());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getX() {
         return tileentity.l;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getY() {
         return tileentity.m;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getZ() {
         return tileentity.n;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public World getWorld() {
         return tileentity.az().getCanaryWorld();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         tileentity.az().j(getX(), getY(), getZ());

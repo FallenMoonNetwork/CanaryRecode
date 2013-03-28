@@ -1,7 +1,5 @@
 package net.canarymod.api.potion;
 
-import net.canarymod.api.potion.Potion;
-import net.canarymod.api.potion.PotionEffectType;
 
 
 public class CanaryPotion implements Potion {
@@ -23,7 +21,7 @@ public class CanaryPotion implements Potion {
     }
 
     @Override
-    public PotionEffectType getType() {
+    public PotionEffectType getEffectType() {
         return PotionEffectType.fromName(getName());
     }
 
