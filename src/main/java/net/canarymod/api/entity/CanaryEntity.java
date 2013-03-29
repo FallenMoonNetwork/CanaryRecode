@@ -223,8 +223,7 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public void moveEntity(double motionX, double motionY, double motionZ) {
-        // TODO This is NMS access
-
+        entity.d(motionX, motionY, motionZ);
     }
 
     @Override

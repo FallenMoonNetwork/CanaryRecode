@@ -8,7 +8,6 @@ import java.util.concurrent.Callable;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
-import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.hook.entity.DamageHook;
 
@@ -318,7 +317,7 @@ public abstract class Entity {
     protected void z() {
         if (!this.ag) {
             // CanaryMod: call DamageHook (Lava)
-            DamageHook hook = new DamageHook(null, (CanaryEntityLiving) entity, new CanaryDamageSource(DamageSource.c), 4);
+            DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.c), 4);
 
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
