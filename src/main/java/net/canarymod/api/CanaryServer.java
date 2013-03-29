@@ -211,12 +211,12 @@ public class CanaryServer implements Server {
 
     @Override
     public World getWorld(String name) {
-        return server.getWorldManager().getWorld(name);
+        return server.getWorldManager().getWorld(name, false);
     }
 
     @Override
     public World getDefaultWorld() {
-        return getWorldManager().getWorld(getDefaultWorldName());
+        return getWorldManager().getWorld(getDefaultWorldName(), false);
     }
 
     @Override

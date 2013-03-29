@@ -58,8 +58,22 @@ public class CanaryWorldManager implements WorldManager {
     }
 
     @Override
-    public World getWorld(String name) {
-        return loadedWorlds.get(name + "_NORMAL");
+    public World getWorld(String name, boolean autoload) {
+        WorldType t = WorldType.fromName(name.substring(Math.max(0, name.lastIndexOf("_"))));
+        String nameOnly = name.substring(0, Math.max(0, name.lastIndexOf("_")));
+        if(t != null) {
+            return getWorld(nameOnly, t, autoload);
+        }
+
+        if(loadedWorlds.containsKey(name)) {
+            return loadedWorlds.get(name);
+        }
+        else if(loadedWorlds.containsKey(name + "_NORMAL")) {
+            return loadedWorlds.get(name + "_NORMAL");
+        }
+        else {
+            throw new UnknownWorldException("World " + name + " is unknown and can't be loaded!");
+        }
     }
 
     @Override
@@ -68,7 +82,8 @@ public class CanaryWorldManager implements WorldManager {
         if (worldIsLoaded(world + "_" + type.getName())) {
             // Logman.println("Is loaded, returning world");
             return loadedWorlds.get(world + "_" + type.getName());
-        } else {
+        }
+        else {
             if (worldExists(world + "_" + type.getName())) {
                 Canary.println("World exists but is not loaded. Loading ...");
                 return loadWorld(world, type);

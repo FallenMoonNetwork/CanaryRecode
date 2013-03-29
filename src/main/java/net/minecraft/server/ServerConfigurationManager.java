@@ -55,7 +55,7 @@ public abstract class ServerConfigurationManager {
     //XXX LOGIN
     public void a(INetworkManager inetworkmanager, EntityPlayerMP entityplayermp) {
         NBTTagCompound nbttagcompound = this.a(entityplayermp);
-        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(playerWorld.get(entityplayermp.bS), net.canarymod.api.world.WorldType.fromId(entityplayermp.ar), true);
+        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(playerWorld.get(entityplayermp.bS), true);
         playerWorld.remove(entityplayermp.bS);
         entityplayermp.a(w.getHandle());
         entityplayermp.c.a((WorldServer) entityplayermp.q);
@@ -243,7 +243,7 @@ public abstract class ServerConfigurationManager {
         }
 
         // CanaryMod: Store for later usage.
-        this.playerWorld.put(hook.getName(), hook.getWorld());
+        this.playerWorld.put(hook.getName(), hook.getWorld() + "_" + hook.getWorldType().getName());
 
         if (this.f.a(s0)) {
             BanEntry banentry = (BanEntry) this.f.c().get(s0);
@@ -273,6 +273,7 @@ public abstract class ServerConfigurationManager {
     }
 
     public EntityPlayerMP a(String playername) {
+        Canary.println("Logging in player " + playername);
         ArrayList arraylist = new ArrayList();
 
         EntityPlayerMP entityplayermp;
@@ -292,7 +293,7 @@ public abstract class ServerConfigurationManager {
 
         // CanaryMod: make sure the world is loaded into memory.
         Canary.println("Requesting world: " + playerWorld.get(playername));
-        WorldServer world = (WorldServer) ((CanaryWorld)Canary.getServer().getWorldManager().getWorld(playerWorld.get(playername))).getHandle();
+        WorldServer world = (WorldServer) ((CanaryWorld)Canary.getServer().getWorldManager().getWorld(playerWorld.get(playername), false)).getHandle();
         Object object;
 
         if (this.e.M()) {
@@ -306,8 +307,9 @@ public abstract class ServerConfigurationManager {
 
     //XXX
     //XXX
-    //IMPORTANT, HERE IS WORLD SWITCHIGN GOING ON!
+    //IMPORTANT, HERE IS WORLD SWITCHING GOING ON!
     public EntityPlayerMP a(EntityPlayerMP entityplayermp, int i0, boolean flag0) {
+        Canary.println("Respawning player");
         entityplayermp.o().p().a(entityplayermp);
         entityplayermp.o().p().b(entityplayermp);
         entityplayermp.o().r().c(entityplayermp);
@@ -340,7 +342,9 @@ public abstract class ServerConfigurationManager {
         ChunkCoordinates chunkcoordinates1;
 
         if (chunkcoordinates != null) {
-            chunkcoordinates1 = EntityPlayer.a(this.e.a(entityplayermp.ar), chunkcoordinates, flag1);
+            //CanaryMod get world from player
+            //chunkcoordinates1 = EntityPlayer.a(this.e.a(entityplayermp.ar), chunkcoordinates, flag1);
+            chunkcoordinates1 = EntityPlayer.a(entityplayermp.getCanaryWorld().getHandle(), chunkcoordinates, flag1);
             if (chunkcoordinates1 != null) {
                 entityplayermp1.b((double) ((float) chunkcoordinates1.a + 0.5F), (double) ((float) chunkcoordinates1.b + 0.1F), (double) ((float) chunkcoordinates1.c + 0.5F), 0.0F, 0.0F);
                 entityplayermp1.a(chunkcoordinates, flag1);
@@ -371,8 +375,9 @@ public abstract class ServerConfigurationManager {
 
     //XXX
     //XXX
-    //IMPORTANT, HERE IS DIMENSION SWITCHIGN GOING ON!
+    //IMPORTANT, HERE IS DIMENSION SWITCHING GOING ON!
     public void a(EntityPlayerMP entityplayermp, int i0) {
+        Canary.println("Switching player dimension to " + i0);
         int i1 = entityplayermp.ar;
         WorldServer worldserver = (WorldServer) entityplayermp.getCanaryWorld().getHandle();
 
