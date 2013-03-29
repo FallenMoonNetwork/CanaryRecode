@@ -72,7 +72,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     // CanaryMod start: Multiworld \o/
     public CanaryWorldManager worldManager = new CanaryWorldManager();
     private CanaryServer server;
-    private CanaryConfigurationManager cfgManager;
 
     // CanaryMod start: Stop Message
     private String stopMsg;
@@ -1008,19 +1007,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     /**
-     * CanaryMod get configuration manager
-     * 
-     * @return the cfgManager
-     */
-    public CanaryConfigurationManager getCanaryConfigurationManager() {
-        return cfgManager;
-    }
-
-    public void setCanaryConfigurationmanager(CanaryConfigurationManager man) {
-        cfgManager = man;
-    }
-
-    /**
      * Reload configurations
      */
     public abstract void reload(); // look in DedicatedServer class
@@ -1036,7 +1022,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public CanaryConfigurationManager getConfigurationManager() {
-        return cfgManager;
+        return s.getConfigurationManager();
     }
 
     public void initShutdown() {

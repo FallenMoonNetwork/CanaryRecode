@@ -500,6 +500,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet3Chat packet3chat) {
+        /* Diff visibility funkyness
         if (this.c.t() == 2) {
             this.b(new Packet3Chat("Cannot send chat message."));
         } else {
@@ -535,7 +536,8 @@ public class NetServerHandler extends NetHandler {
                     this.c("disconnect.spam");
                 }
             }
-        }
+        } */
+        this.c.getPlayer().chat(packet3chat.b);
     }
 
     private void d(String s0) {

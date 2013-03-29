@@ -2,6 +2,7 @@ package net.canarymod.api;
 
 
 import net.canarymod.api.entity.living.humanoid.Player;
+import net.minecraft.server.Packet3Chat;
 
 
 /**
@@ -37,8 +38,18 @@ public class CanaryNetServerHandler implements NetServerHandler {
     }
 
     @Override
-    public void sendMessage(String message) {
-        getUser().sendMessage(message);
+    public void sendMessage(String msg) {
+        if (msg.length() >= 119) {
+            String cutMsg = msg.substring(0, 118);
+            int finalCut = cutMsg.lastIndexOf(" ");
+            String subCut = cutMsg.substring(0, finalCut);
+            String newMsg = msg.substring(finalCut);
+
+            handler.b(new Packet3Chat(subCut));
+            sendMessage(newMsg);
+        } else {
+            handler.b(new Packet3Chat(msg));
+        }
     }
 
     @Override

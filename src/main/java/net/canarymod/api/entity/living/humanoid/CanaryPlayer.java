@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.canarymod.Canary;
+import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.NetServerHandler;
@@ -65,7 +66,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         group = Canary.usersAndGroups().getGroup(data[1]);
         permissions = Canary.permissionManager().getPlayerProvider(getName());
         if (data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
-            prefix = data[0];
+            prefix = ToolBox.stringToNull(data[0]);
         }
 
         //        if (data[2] != null && !data[2].isEmpty()) {

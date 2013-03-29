@@ -58,7 +58,7 @@ public class CanaryServer implements Server {
      */
     @Override
     public int getNumPlayersOnline() {
-        return server.getCanaryConfigurationManager().getNumPlayersOnline();
+        return server.getConfigurationManager().getNumPlayersOnline();
     }
 
     /**
@@ -157,7 +157,7 @@ public class CanaryServer implements Server {
 
         name = name.toLowerCase();
 
-        for (Player player : server.getCanaryConfigurationManager().getAllPlayers()) {
+        for (Player player : server.getConfigurationManager().getAllPlayers()) {
             CanaryPlayer cPlayer = (CanaryPlayer) player;
 
             if (cPlayer.getName().toLowerCase().equals(name)) {
@@ -180,12 +180,12 @@ public class CanaryServer implements Server {
 
     @Override
     public Player getPlayer(String name) {
-        return server.getCanaryConfigurationManager().getPlayerByName(name);
+        return server.getConfigurationManager().getPlayerByName(name);
     }
 
     @Override
     public ArrayList<Player> getPlayerList() {
-        return server.getCanaryConfigurationManager().getAllPlayers();
+        return server.getConfigurationManager().getAllPlayers();
     }
 
     public MinecraftServer getHandle() {
@@ -221,7 +221,7 @@ public class CanaryServer implements Server {
 
     @Override
     public ConfigurationManager getConfigurationManager() {
-        return server.getCanaryConfigurationManager();
+        return server.getConfigurationManager();
     }
 
     @Override

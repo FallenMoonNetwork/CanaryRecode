@@ -369,12 +369,17 @@ public abstract class ServerConfigurationManager {
         return entityplayermp1;
     }
 
+    //XXX
+    //XXX
+    //IMPORTANT, HERE IS DIMENSION SWITCHIGN GOING ON!
     public void a(EntityPlayerMP entityplayermp, int i0) {
         int i1 = entityplayermp.ar;
-        WorldServer worldserver = this.e.a(entityplayermp.ar);
+        WorldServer worldserver = (WorldServer) entityplayermp.getCanaryWorld().getHandle();
 
         entityplayermp.ar = i0;
-        WorldServer worldserver1 = this.e.a(entityplayermp.ar);
+        String name = worldserver.getCanaryWorld().getName();
+        net.canarymod.api.world.WorldType type = net.canarymod.api.world.WorldType.fromId(i0);
+        WorldServer worldserver1 = (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(name, type, true)).getHandle();
 
         entityplayermp.a.b(new Packet9Respawn(entityplayermp.ar, (byte) entityplayermp.q.r, worldserver1.L().u(), worldserver1.P(), entityplayermp.c.b()));
         worldserver.f(entityplayermp);

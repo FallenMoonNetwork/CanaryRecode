@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
@@ -179,6 +180,7 @@ public abstract class EntityLiving extends Entity {
         return this.bC;
     }
 
+    @Override
     public float ao() {
         return this.aA;
     }
@@ -211,6 +213,7 @@ public abstract class EntityLiving extends Entity {
 
     public void aK() {}
 
+    @Override
     protected void a(double d0, boolean flag0) {
         if (!this.G()) {
             this.H();
@@ -272,6 +275,7 @@ public abstract class EntityLiving extends Entity {
         this.f = this.e != null ? 100 : 0;
     }
 
+    @Override
     protected void a() {
         this.ah.a(8, Integer.valueOf(this.i));
         this.ah.a(9, Byte.valueOf((byte) 0));
@@ -284,14 +288,17 @@ public abstract class EntityLiving extends Entity {
         return this.q.a(this.q.T().a(this.u, this.v + (double) this.e(), this.w), this.q.T().a(entity.u, entity.v + (double) entity.e(), entity.w)) == null;
     }
 
+    @Override
     public boolean K() {
         return !this.M;
     }
 
+    @Override
     public boolean L() {
         return !this.M;
     }
 
+    @Override
     public float e() {
         return this.P * 0.85F;
     }
@@ -308,6 +315,7 @@ public abstract class EntityLiving extends Entity {
         }
     }
 
+    @Override
     public void x() {
         this.aQ = this.aR;
         super.x();
@@ -474,6 +482,7 @@ public abstract class EntityLiving extends Entity {
         }
     }
 
+    @Override
     public void T() {
         super.T();
         this.aC = this.aD;
@@ -481,6 +490,7 @@ public abstract class EntityLiving extends Entity {
         this.T = 0.0F;
     }
 
+    @Override
     public void l_() {
         super.l_();
         if (!this.q.I) {
@@ -624,6 +634,7 @@ public abstract class EntityLiving extends Entity {
         }
     }
 
+    @Override
     public boolean a(DamageSource damagesource, int i0) {
         if (this.aq()) {
             return false;
@@ -668,7 +679,7 @@ public abstract class EntityLiving extends Entity {
                         return false;
                     }
 
-                    this.d(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(hook.getDamageSource().getDamagetype())).getHandle(), hook.getDamageDealt());
+                    this.d(damagesource, hook.getDamageDealt());
                     this.bB = i0;
                     flag0 = false;
                 } else {
@@ -684,7 +695,7 @@ public abstract class EntityLiving extends Entity {
                     this.bB = i0;
                     this.aT = this.aS;
                     this.af = this.av;
-                    this.d(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(hook.getDamageSource().getDamagetype())).getHandle(), hook.getDamageDealt());
+                    this.d(damagesource, hook.getDamageDealt());
                     this.aW = this.aX = 10;
                 }
                 //
@@ -917,6 +928,7 @@ public abstract class EntityLiving extends Entity {
         return 0;
     }
 
+    @Override
     protected void a(float f0) {
         super.a(f0);
         int i0 = MathHelper.f(f0 - 3.0F);
@@ -1083,6 +1095,7 @@ public abstract class EntityLiving extends Entity {
         return i3 == Block.aJ.cz || i3 == Block.by.cz;
     }
 
+    @Override
     public void b(NBTTagCompound nbttagcompound) {
         if (this.aS < -32768) {
             this.aS = -32768;
@@ -1133,6 +1146,7 @@ public abstract class EntityLiving extends Entity {
         nbttagcompound.a("CustomNameVisible", this.bQ());
     }
 
+    @Override
     public void a(NBTTagCompound nbttagcompound) {
         this.aS = nbttagcompound.d("Health");
         if (!nbttagcompound.b("Health")) {
@@ -1180,6 +1194,7 @@ public abstract class EntityLiving extends Entity {
         }
     }
 
+    @Override
     public boolean R() {
         return !this.M && this.aS > 0;
     }
@@ -1562,10 +1577,12 @@ public abstract class EntityLiving extends Entity {
         return this.q.b(this.E) && this.q.a((Entity) this, this.E).isEmpty() && !this.q.d(this.E);
     }
 
+    @Override
     protected void B() {
         this.a(DamageSource.i, 4);
     }
 
+    @Override
     public Vec3 Y() {
         return this.i(1.0F);
     }
@@ -1802,6 +1819,7 @@ public abstract class EntityLiving extends Entity {
         }
     }
 
+    @Override
     public int ar() {
         if (this.aJ() == null) {
             return 3;
@@ -1829,10 +1847,12 @@ public abstract class EntityLiving extends Entity {
         return this.bT[i0 + 1];
     }
 
+    @Override
     public void c(int i0, ItemStack itemstack) {
         this.bT[i0] = itemstack;
     }
 
+    @Override
     public ItemStack[] ad() {
         return this.bT;
     }
@@ -2045,6 +2065,7 @@ public abstract class EntityLiving extends Entity {
         return (EntityLiving) (this.bt.c() != null ? this.bt.c() : (this.bk != null ? this.bk : (this.e != null ? this.e : null)));
     }
 
+    @Override
     public String am() {
         return this.bP() ? this.bO() : super.am();
     }
