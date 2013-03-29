@@ -415,7 +415,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             this.a.b();
             if (this.v % 20 == 0) {
                 this.a.a("timeSync");
-                this.s.a((Packet) (new Packet4UpdateTime(worldserver.G(), worldserver.H())), worldserver.t.h);
+                //                this.s.a((Packet) (new Packet4UpdateTime(worldserver.G(), worldserver.H())), worldserver.t.h);
+                this.s.sendPacketToDimension((new Packet4UpdateTime(worldserver.G(), worldserver.H())), w.getName(), w.getType().getId());
                 this.a.b();
             }
 
@@ -575,7 +576,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     @Deprecated
     public WorldServer a(int i) {
-        throw new UnsupportedOperationException("OMinecraftServer.a(int) has" +
+        throw new UnsupportedOperationException("MinecraftServer.a(int) has" +
                 " been replaced by MinecraftServer.getWorld(String, int).");
     }
 

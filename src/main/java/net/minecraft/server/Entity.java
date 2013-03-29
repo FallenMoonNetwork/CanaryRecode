@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
@@ -135,6 +136,13 @@ public abstract class Entity {
         this.ah.a(0, Byte.valueOf((byte) 0));
         this.ah.a(1, Short.valueOf((short) 300));
         this.a();
+        entity = new CanaryEntity(this) {
+
+            @Override
+            public Entity getHandle() {
+                return entity;
+            }
+        };
     }
 
     protected abstract void a();
@@ -143,10 +151,12 @@ public abstract class Entity {
         return this.ah;
     }
 
+    @Override
     public boolean equals(Object object) {
         return object instanceof Entity ? ((Entity) object).k == this.k : false;
     }
 
+    @Override
     public int hashCode() {
         return this.k;
     }
@@ -1466,6 +1476,7 @@ public abstract class Entity {
         return false;
     }
 
+    @Override
     public String toString() {
         return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", new Object[] { this.getClass().getSimpleName(), this.am(), Integer.valueOf(this.k), this.q == null ? "~NULL~" : this.q.L().k(), Double.valueOf(this.u), Double.valueOf(this.v), Double.valueOf(this.w) });
     }
@@ -1492,8 +1503,9 @@ public abstract class Entity {
             this.q.C.a("changeDimension");
             MinecraftServer minecraftserver = MinecraftServer.D();
             int i1 = this.ar;
-            WorldServer worldserver = minecraftserver.a(i1);
-            WorldServer worldserver1 = minecraftserver.a(i0);
+            //CanaryMod changes for multiworld
+            WorldServer worldserver = minecraftserver.getWorld(getCanaryWorld().getName(), i0);
+            WorldServer worldserver1 = minecraftserver.getWorld(getCanaryWorld().getName(), i0);
 
             this.ar = i0;
             this.q.e(this);

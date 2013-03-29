@@ -286,7 +286,7 @@ public class NetServerHandler extends NetHandler {
 
     public void a(double d0, double d1, double d2, float f0, float f1, int dimension, String world) {
         //CanaryMod - start teleportation hook
-        net.canarymod.api.world.World dim = Canary.getServer().getWorldManager().getWorld(world, net.canarymod.api.world.WorldType.fromId(dimension), false);
+        net.canarymod.api.world.World dim = Canary.getServer().getWorldManager().getWorld(world, net.canarymod.api.world.WorldType.fromId(dimension), true);
         Location location = new Location(dim, d0, d1, d2, f0, f1);
         TeleportHook hook = new TeleportHook(c.getPlayer(), location, false);
 
@@ -294,10 +294,7 @@ public class NetServerHandler extends NetHandler {
         if (hook.isCanceled()) {
             return;
         }
-        if (!dim.equals(this.c.getCanaryWorld())) {
-            this.c.getPlayer().switchWorlds(dim);
-        }
-        // CanaryMod - end.
+        //         CanaryMod - end.
         this.q = false;
         this.n = d0;
         this.o = d1;

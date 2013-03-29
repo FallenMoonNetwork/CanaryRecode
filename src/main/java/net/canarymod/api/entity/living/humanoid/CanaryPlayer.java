@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
-import net.canarymod.api.CanaryServer;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
 import net.canarymod.api.entity.CanaryEntity;
@@ -19,7 +18,6 @@ import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.EnderChestInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
-import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.position.Direction;
@@ -34,14 +32,11 @@ import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
 import net.canarymod.warp.Warp;
-import net.minecraft.server.AchievementList;
 import net.minecraft.server.ChunkCoordinates;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.EnumGameType;
 import net.minecraft.server.ItemStack;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.StatBase;
 import net.minecraft.server.WorldSettings;
 
 
@@ -586,7 +581,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     public void switchWorlds(World dim) {
-        MinecraftServer mcServer = ((CanaryServer) Canary.getServer()).getHandle();
+        Canary.println(getName() + " is switching dimension to " + dim.getType().getName());
+        //        MinecraftServer mcServer = ((CanaryServer) Canary.getServer()).getHandle();
         EntityPlayerMP ent = (EntityPlayerMP) entity;
 
         // Do not check for worlds. let plugins handle restrictions!
@@ -603,38 +599,39 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         if (ent.o != null) {
             ent.h(ent.o);
         }
+        Canary.getServer().getConfigurationManager().switchDimension(this, dim, false);
         // Collect world switch achievement ?
-        ent.a((StatBase) AchievementList.B);
-        // switch world if needed
-        if (!(dim.getName().equals(ent.getCanaryWorld().getName()))) {
-            World oldWorld = ent.getCanaryWorld();
-
-            // remove player from entity tracker
-            oldWorld.getEntityTracker().untrackPlayerSymmetrics(ent.getPlayer());
-            oldWorld.getEntityTracker().untrackEntity(ent.getPlayer());
-            // remove player from old worlds entity list
-            oldWorld.removePlayerFromWorld(ent.getPlayer());
-            // Remove player from player manager for the old world
-            oldWorld.getPlayerManager().removePlayer(ent.getPlayer());
-
-            // Change players world reference
-            ent.q = ((CanaryWorld) dim).getHandle();
-            // Add player back to the new world
-            // dim.addPlayerToWorld(this);
-            // dim.getPlayerManager().addPlayer(this);
-        }
-        // Get chunk coordinates...
-        // OChunkCoordinates var2 = mcServer.getWorld(ent.bi.getCanaryDimension().getName(), dim.getType().getId()).d();
-        Location l = ent.getCanaryWorld().getSpawnLocation();
-        ChunkCoordinates var2 = new ChunkCoordinates((int)l.getX(), (int)l.getY(), (int)l.getZ());
-
-        if (var2 != null) {
-            ent.a.a((double) var2.a, (double) var2.b, (double) var2.c, 0.0F, 0.0F, dim.getType().getId(), ent.getCanaryWorld().getName());
-        }
-        Canary.logInfo("Prepared to switch worlds.");
-        mcServer.getConfigurationManager().switchDimension(ent.getPlayer(), dim, false);
-
-        refreshCreativeMode();
+        //        ent.a((StatBase) AchievementList.B);
+        //        // switch world if needed
+        //        if (!(dim.getName().equals(ent.getCanaryWorld().getName()))) {
+        //            World oldWorld = ent.getCanaryWorld();
+        //
+        //            // remove player from entity tracker
+        //            oldWorld.getEntityTracker().untrackPlayerSymmetrics(ent.getPlayer());
+        //            oldWorld.getEntityTracker().untrackEntity(ent.getPlayer());
+        //            // remove player from old worlds entity list
+        //            oldWorld.removePlayerFromWorld(ent.getPlayer());
+        //            // Remove player from player manager for the old world
+        //            oldWorld.getPlayerManager().removePlayer(ent.getPlayer());
+        //
+        //            // Change players world reference
+        //            ent.q = ((CanaryWorld) dim).getHandle();
+        //            // Add player back to the new world
+        //            // dim.addPlayerToWorld(this);
+        //            // dim.getPlayerManager().addPlayer(this);
+        //        }
+        //        // Get chunk coordinates...
+        //        // OChunkCoordinates var2 = mcServer.getWorld(ent.bi.getCanaryDimension().getName(), dim.getType().getId()).d();
+        //        Location l = ent.getCanaryWorld().getSpawnLocation();
+        //        ChunkCoordinates var2 = new ChunkCoordinates((int)l.getX(), (int)l.getY(), (int)l.getZ());
+        //
+        //        if (var2 != null) {
+        //            ent.a.a((double) var2.a, (double) var2.b, (double) var2.c, 0.0F, 0.0F, dim.getType().getId(), ent.getCanaryWorld().getName());
+        //        }
+        //        Canary.logInfo("Prepared to switch worlds.");
+        //        mcServer.getConfigurationManager().switchDimension(ent.getPlayer(), dim, false);
+        //
+        //        refreshCreativeMode();
     }
 
     @Override

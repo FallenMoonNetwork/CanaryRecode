@@ -391,7 +391,9 @@ public abstract class ServerConfigurationManager {
         entityplayermp.M = false;
         this.a(entityplayermp, i1, worldserver, worldserver1);
         this.a(entityplayermp, worldserver);
+
         entityplayermp.a.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B, entityplayermp.getCanaryWorld().getType().getId(), entityplayermp.getCanaryWorld().getName());
+        //        entityplayermp.a.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B);
         entityplayermp.c.a(worldserver1);
         this.b(entityplayermp, worldserver1);
         this.f(entityplayermp);
@@ -482,14 +484,22 @@ public abstract class ServerConfigurationManager {
         }
     }
 
-    public void a(Packet packet, int i0) {
-        for (int i1 = 0; i1 < this.a.size(); ++i1) {
-            EntityPlayerMP entityplayermp = (EntityPlayerMP) this.a.get(i1);
+    //CanaryMod re-route packets properly
+    public void sendPacketToDimension(Packet opacket, String world, int i) {
+        for (int j = 0; j < this.a.size(); ++j) {
+            EntityPlayerMP oentityplayermp = (EntityPlayerMP) this.a.get(j);
 
-            if (entityplayermp.ar == i0) {
-                entityplayermp.a.b(packet);
+            if (world.equals(oentityplayermp.getCanaryWorld().getName()) && oentityplayermp.ar == i) {
+                // TODO check: CanaryMod re-route time updates to world-specific entity trackers
+                oentityplayermp.a.b(opacket);
             }
         }
+    }
+    //CanaryMod end
+
+    @Deprecated
+    public void a(Packet packet, int i0) {
+        throw new UnsupportedOperationException("a(packet, int) has been deprecated. use sendPacketToDimension instead!");
     }
 
     public String c() {
