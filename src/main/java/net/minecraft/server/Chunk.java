@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryChunk;
 
@@ -261,7 +260,7 @@ public class Chunk {
             int i7;
             int i8;
 
-            if (!this.e.t.e) {
+            if (!this.e.t.f) {
                 ExtendedBlockStorage extendedblockstorage;
 
                 if (i4 < i3) {
