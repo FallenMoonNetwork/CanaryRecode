@@ -18,6 +18,9 @@ import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.bansystem.Ban;
+import net.canarymod.hook.player.ConnectionHook;
+import net.canarymod.hook.player.PreConnectionHook;
 import net.canarymod.hook.system.ServerShutdownHook;
 
 public abstract class ServerConfigurationManager {
@@ -39,6 +42,7 @@ public abstract class ServerConfigurationManager {
     // CanaryMod
     protected CanaryConfigurationManager configurationmanager;
     private HashMap<String, IPlayerFileData> playerFileData = new HashMap<String, IPlayerFileData>();
+    private HashMap<String, String> playerWorld = new HashMap<String, String>(1);
     //
     public ServerConfigurationManager(MinecraftServer minecraftserver) {
         this.e = minecraftserver;
@@ -51,8 +55,9 @@ public abstract class ServerConfigurationManager {
     //XXX LOGIN
     public void a(INetworkManager inetworkmanager, EntityPlayerMP entityplayermp) {
         NBTTagCompound nbttagcompound = this.a(entityplayermp);
-
-        entityplayermp.a((World) this.e.a(entityplayermp.ar));
+        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(entityplayermp.bS, net.canarymod.api.world.WorldType.fromId(entityplayermp.ar), true);
+        playerWorld.remove(entityplayermp.bS);
+        entityplayermp.a(w.getHandle());
         entityplayermp.c.a((WorldServer) entityplayermp.q);
         String s0 = "local";
 
@@ -73,7 +78,13 @@ public abstract class ServerConfigurationManager {
         netserverhandler.b(new Packet16BlockItemSwitch(entityplayermp.bK.c));
         this.a((ServerScoreboard) worldserver.V(), entityplayermp);
         this.b(entityplayermp, worldserver);
-        this.a((Packet) (new Packet3Chat(EnumChatFormatting.o + entityplayermp.ax() + EnumChatFormatting.o + " joined the game.")));
+        //CanaryMod Connection hook
+        ConnectionHook hook = new ConnectionHook(entityplayermp.getPlayer(), EnumChatFormatting.o + entityplayermp.ax() + EnumChatFormatting.o + " joined the game.");
+        Canary.hooks().callHook(hook);
+        if(!hook.isHidden()) {
+            this.a((Packet) (new Packet3Chat(hook.getMessage())));
+        }
+        //CanaryMod end
         this.c(entityplayermp);
         netserverhandler.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B, entityplayermp.getCanaryWorld().getType().getId(), entityplayermp.getCanaryWorld().getName());
         this.e.ae().a(netserverhandler);
@@ -210,6 +221,28 @@ public abstract class ServerConfigurationManager {
     }
 
     public String a(SocketAddress socketaddress, String s0) {
+
+        // CanaryMod, add some stuff here
+        String s2 = socketaddress.toString();
+
+        s2 = s2.substring(s2.indexOf("/") + 1);
+        s2 = s2.substring(0, s2.indexOf(":"));
+
+        PreConnectionHook hook = new PreConnectionHook(s2, s0, net.canarymod.api.world.WorldType.fromId(0), Canary.getServer().getDefaultWorldName());
+        Canary.hooks().callHook(hook);
+
+        if (hook.getKickReason() != null) {
+            return hook.getKickReason();
+        }
+        if(Canary.bans().isBanned(s0)) {
+            Ban ban = Canary.bans().getBan(s0);
+            //TODO: Temp bans
+            return ban.getReason();
+        }
+
+        // CanaryMod: Store for later usage.
+        this.playerWorld.put(hook.getName(), hook.getWorld());
+
         if (this.f.a(s0)) {
             BanEntry banentry = (BanEntry) this.f.c().get(s0);
             String s1 = "You are banned from this server!\nReason: " + banentry.f();
@@ -222,10 +255,6 @@ public abstract class ServerConfigurationManager {
         } else if (!this.d(s0)) {
             return "You are not white-listed on this server!";
         } else {
-            String s2 = socketaddress.toString();
-
-            s2 = s2.substring(s2.indexOf("/") + 1);
-            s2 = s2.substring(0, s2.indexOf(":"));
             if (this.g.a(s2)) {
                 BanEntry banentry1 = (BanEntry) this.g.c().get(s2);
                 String s3 = "Your IP address is banned from this server!\nReason: " + banentry1.f();
@@ -241,14 +270,13 @@ public abstract class ServerConfigurationManager {
         }
     }
 
-    public EntityPlayerMP a(String s0) {
+    public EntityPlayerMP a(String playername) {
         ArrayList arraylist = new ArrayList();
 
         EntityPlayerMP entityplayermp;
-
         for (int i0 = 0; i0 < this.a.size(); ++i0) {
             entityplayermp = (EntityPlayerMP) this.a.get(i0);
-            if (entityplayermp.bS.equalsIgnoreCase(s0)) {
+            if (entityplayermp.bS.equalsIgnoreCase(playername)) {
                 arraylist.add(entityplayermp);
             }
         }
@@ -260,15 +288,17 @@ public abstract class ServerConfigurationManager {
             entityplayermp.a.c("You logged in from another location");
         }
 
+        // CanaryMod: make sure the world is loaded into memory.
+        WorldServer world = (WorldServer) Canary.getServer().getWorldManager().getWorld(playerWorld.get(playername));
         Object object;
 
         if (this.e.M()) {
-            object = new DemoWorldManager(this.e.a(0));
+            object = new DemoWorldManager(world);
         } else {
-            object = new ItemInWorldManager(this.e.a(0));
+            object = new ItemInWorldManager(world);
         }
 
-        return new EntityPlayerMP(this.e, this.e.a(0), s0, (ItemInWorldManager) object);
+        return new EntityPlayerMP(this.e, world, playername, (ItemInWorldManager) object);
     }
 
     public EntityPlayerMP a(EntityPlayerMP entityplayermp, int i0, boolean flag0) {

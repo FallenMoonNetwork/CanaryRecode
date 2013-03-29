@@ -9,6 +9,10 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
+import net.canarymod.api.CanaryEntityTracker;
+import net.canarymod.api.CanaryPlayerManager;
+import net.canarymod.api.world.CanaryWorld;
+
 public class WorldServer extends World {
 
     private final MinecraftServer a;
@@ -29,7 +33,7 @@ public class WorldServer extends World {
 
     public WorldServer(MinecraftServer minecraftserver, ISaveHandler isavehandler, String s0, int i0, WorldSettings worldsettings, Profiler profiler, ILogAgent ilogagent) {
         //TODO: WorldProvider: Needs changing so it would get any WorldProvider. Might need to make a mapping/register
-        super(isavehandler, s0, worldsettings, WorldProvider.a(i0), profiler, ilogagent);
+        super(isavehandler, s0, worldsettings, WorldProvider.a(i0), profiler, ilogagent, net.canarymod.api.world.WorldType.fromId(i0));
         this.a = minecraftserver;
         this.J = new EntityTracker(this);
         this.K = new PlayerManager(this, minecraftserver.ad().o());
@@ -56,6 +60,7 @@ public class WorldServer extends World {
 
         scoreboardsavedata.a(this.D);
         ((ServerScoreboard) this.D).a(scoreboardsavedata);
+        canaryDimension = new CanaryWorld(s0, (WorldServer)this, net.canarymod.api.world.WorldType.fromId(i0));
     }
 
     @Override
@@ -748,5 +753,18 @@ public class WorldServer extends World {
 
     public Teleporter s() {
         return this.P;
+    }
+
+    public CanaryEntityTracker getEntityTracker() {
+        return J.getCanaryEntityTracker();
+    }
+
+    /**
+     * Get the canary player manager wrapper for this dimension
+     * 
+     * @return
+     */
+    public CanaryPlayerManager getPlayerManager() {
+        return K.getPlayerManager();
     }
 }

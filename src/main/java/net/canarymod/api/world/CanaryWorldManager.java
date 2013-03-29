@@ -53,6 +53,7 @@ public class CanaryWorldManager implements WorldManager {
      * @param world
      */
     public void addWorld(CanaryWorld world) {
+        Canary.println("worldname entry in manager: " + world.getName() + "_" + world.getType().getName());
         loadedWorlds.put(world.getName() + "_" + world.getType().getName(), world);
     }
 

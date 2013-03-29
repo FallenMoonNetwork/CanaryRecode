@@ -25,7 +25,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
         File tmp = new File(file1, s0);
 
         tmp.mkdirs();
-        this.a = new File(file1, s0 + "/" + "_" + type.getName());
+        this.a = new File(file1, s0 + "/" + s0 + "_" + type.getName());
         this.a.mkdirs();
 
         this.b = new File(this.a, "players");

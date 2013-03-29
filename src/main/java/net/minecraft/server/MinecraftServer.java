@@ -110,10 +110,10 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     //Used to initialize the "master" worlds
-    protected void initWorld(String name, long seed, WorldType nmsWt, net.canarymod.api.world.WorldType worldtype, String generatorSettings, ISaveHandler isavehandler) {
+    protected void initWorld(String name, long seed, WorldType nmsWt, net.canarymod.api.world.WorldType worldtype, String generatorSettings) {
         this.b(name); //Anvil Converter
         this.c("menu.loadingLevel");
-
+        AnvilSaveHandler isavehandler = new AnvilSaveHandler(new File("worlds/"), name, true, worldtype);
         WorldInfo worldinfo = isavehandler.d();
         WorldConfiguration config = Configuration.getWorldConfig(name);
 
@@ -137,37 +137,35 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         if (this.M) {
             worldsettings.a();
         }
-        for(int i = 0; i < 3; i++) {
-            if (worldtype.getId() == 0) {
-                if (this.M()) {
-                    world = new DemoWorldServer(this, isavehandler, name, worldtype.getId(), this.a, this.al());
-                } else {
-                    world = new WorldServer(this, isavehandler, name, worldtype.getId(), worldsettings, this.a, this.al());
-                }
+
+        if (worldtype.getId() == 0) {
+            if (this.M()) {
+                world = new DemoWorldServer(this, isavehandler, name, worldtype.getId(), this.a, this.al());
             } else {
-                world = new WorldServerMulti(this, isavehandler, name, worldtype.getId(), worldsettings, (WorldServer)((CanaryWorld) worldManager.getWorld(name, net.canarymod.api.world.WorldType.fromName("NORMAL"), false)).getHandle(), this.a, this.al());
+                world = new WorldServer(this, isavehandler, name, worldtype.getId(), worldsettings, this.a, this.al());
             }
-
-            world.a((IWorldAccess) (new WorldManager(this, world)));
-            if (!this.I()) {
-                world.L().a(this.g());
-            }
-
-            this.s.a(world); //Init player data files
-
-            this.c(this.h());
-            this.e(world); //Generate terrain
-            worldManager.addWorld(world.getCanaryWorld());
+        } else {
+            world = new WorldServerMulti(this, isavehandler, name, worldtype.getId(), worldsettings, (WorldServer)((CanaryWorld) worldManager.getWorld(name, net.canarymod.api.world.WorldType.fromName("NORMAL"), false)).getHandle(), this.a, this.al());
         }
+
+        world.a((IWorldAccess) (new WorldManager(this, world)));
+        if (!this.I()) {
+            world.L().a(this.g());
+        }
+
+        this.s.a(world); //Init player data files
+
+        this.c(this.h());
+        this.e(world); //Generate terrain
+        worldManager.addWorld(world.getCanaryWorld());
     }
 
     protected void e(WorldServer worldserver) {
         int i0 = 0;
 
         this.c("menu.generatingTerrain");
-        byte b0 = 0;
 
-        this.al().a("Preparing start region for level " + b0);
+        this.al().a("Preparing start region for level " + worldserver.getCanaryWorld().getName());
         ChunkCoordinates chunkcoordinates = worldserver.I();
         long i1 = System.currentTimeMillis();
 
@@ -447,7 +445,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             worldserver.p().a();
             this.a.b();
             this.a.b();
-            w.setNanoTick(v, System.nanoTime() - i1);
+            w.setNanoTick(this.v % 100, System.nanoTime() - i1);
             //            this.j[i0][this.v % 100] = System.nanoTime() - i1;
         }
 
@@ -642,7 +640,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public String getServerModName() {
-        return "vanilla";
+        return "CanaryMod";
     }
 
     public CrashReport b(CrashReport crashreport) {
@@ -1063,7 +1061,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public void loadWorld(String name, long seed, net.canarymod.api.world.WorldType type, net.canarymod.api.world.World.GeneratorType typeGen) {
-        this.initWorld(name, seed, WorldType.a(typeGen.toString()), type, null, new AnvilSaveHandler(new File("worlds/"), name, true, type));
+        this.initWorld(name, seed, WorldType.a(typeGen.toString()), type, null);
     }
 
     //

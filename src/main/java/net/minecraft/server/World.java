@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Callable;
+
 import net.canarymod.Canary;
-import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.hook.entity.EntitySpawnHook;
 
@@ -62,45 +62,6 @@ public abstract class World implements IBlockAccess {
 
     // CanaryMod: multiworld
     protected CanaryWorld canaryDimension;
-    protected CanaryPlayerManager playerManager;
-
-    //
-
-    /**
-     * Get the canary dimension wrapper
-     * 
-     * @return
-     */
-    public CanaryWorld getCanaryWorld() {
-        return canaryDimension;
-    }
-
-    /**
-     * Set the canary dimension wrapper
-     * 
-     * @param dim
-     */
-    public void setCanaryWorld(CanaryWorld dim) {
-        this.canaryDimension = dim;
-    }
-
-    /**
-     * Get the canary player manager wrapper for this dimension
-     * 
-     * @return
-     */
-    public CanaryPlayerManager getPlayerManager() {
-        return playerManager;
-    }
-
-    /**
-     * Set the player manager for this dimension
-     * 
-     * @param manager
-     */
-    public void setPlayerManager(CanaryPlayerManager manager) {
-        this.playerManager = manager;
-    }
 
     public BiomeGenBase a(int i0, int i1) {
         if (this.f(i0, 0, i1)) {
@@ -118,7 +79,7 @@ public abstract class World implements IBlockAccess {
         return this.t.d;
     }
 
-    public World(ISaveHandler isavehandler, String s0, WorldSettings worldsettings, WorldProvider worldprovider, Profiler profiler, ILogAgent ilogagent) {
+    public World(ISaveHandler isavehandler, String s0, WorldSettings worldsettings, WorldProvider worldprovider, Profiler profiler, ILogAgent ilogagent, net.canarymod.api.world.WorldType type) {
         this.O = this.s.nextInt(12000);
         this.H = new int['\u8000'];
         this.I = false;
@@ -191,6 +152,7 @@ public abstract class World implements IBlockAccess {
         return this.a(i0, i2, i1);
     }
 
+    @Override
     public int a(int i0, int i1, int i2) {
         if (i0 >= -30000000 && i2 >= -30000000 && i0 < 30000000 && i2 < 30000000) {
             if (i1 < 0) {
@@ -244,19 +206,19 @@ public abstract class World implements IBlockAccess {
     public boolean e(int i0, int i1, int i2, int i3, int i4, int i5) {
         if (i4 >= 0 && i1 < 256) {
             i0 >>= 4;
-            i2 >>= 4;
-            i3 >>= 4;
-            i5 >>= 4;
+        i2 >>= 4;
+        i3 >>= 4;
+        i5 >>= 4;
 
-            for (int i6 = i0; i6 <= i3; ++i6) {
-                for (int i7 = i2; i7 <= i5; ++i7) {
-                    if (!this.c(i6, i7)) {
-                        return false;
-                    }
+        for (int i6 = i0; i6 <= i3; ++i6) {
+            for (int i7 = i2; i7 <= i5; ++i7) {
+                if (!this.c(i6, i7)) {
+                    return false;
                 }
             }
+        }
 
-            return true;
+        return true;
         } else {
             return false;
         }
@@ -315,12 +277,14 @@ public abstract class World implements IBlockAccess {
         }
     }
 
+    @Override
     public Material g(int i0, int i1, int i2) {
         int i3 = this.a(i0, i1, i2);
 
         return i3 == 0 ? Material.a : Block.r[i3].cO;
     }
 
+    @Override
     public int h(int i0, int i1, int i2) {
         if (i0 >= -30000000 && i2 >= -30000000 && i0 < 30000000 && i2 < 30000000) {
             if (i1 < 0) {
@@ -610,15 +574,15 @@ public abstract class World implements IBlockAccess {
 
         if (i0 >= -30000000 && i2 >= -30000000 && i0 < 30000000 && i2 < 30000000) {
             int i3 = i0 >> 4;
-            int i4 = i2 >> 4;
+        int i4 = i2 >> 4;
 
-            if (!this.c(i3, i4)) {
-                return enumskyblock.c;
-            } else {
-                Chunk chunk = this.e(i3, i4);
+        if (!this.c(i3, i4)) {
+            return enumskyblock.c;
+        } else {
+            Chunk chunk = this.e(i3, i4);
 
-                return chunk.a(enumskyblock, i0 & 15, i1, i2 & 15);
-            }
+            return chunk.a(enumskyblock, i0 & 15, i1, i2 & 15);
+        }
         } else {
             return enumskyblock.c;
         }
@@ -1610,6 +1574,7 @@ public abstract class World implements IBlockAccess {
         }
     }
 
+    @Override
     public TileEntity r(int i0, int i1, int i2) {
         if (i1 >= 0 && i1 < 256) {
             TileEntity tileentity = null;
@@ -1709,6 +1674,7 @@ public abstract class World implements IBlockAccess {
         return block == null ? false : block.c();
     }
 
+    @Override
     public boolean u(int i0, int i1, int i2) {
         return Block.l(this.a(i0, i1, i2));
     }
@@ -1895,19 +1861,19 @@ public abstract class World implements IBlockAccess {
             int i2 = this.k >> 2;
             int i3 = i2 & 15;
             int i4 = i2 >> 8 & 15;
-            int i5 = i2 >> 16 & 127;
-            int i6 = chunk.a(i3, i5, i4);
+                int i5 = i2 >> 16 & 127;
+                int i6 = chunk.a(i3, i5, i4);
 
-            i3 += i0;
-            i4 += i1;
-            if (i6 == 0 && this.m(i3, i5, i4) <= this.s.nextInt(8) && this.b(EnumSkyBlock.a, i3, i5, i4) <= 0) {
-                EntityPlayer entityplayer = this.a((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D, 8.0D);
+                i3 += i0;
+                i4 += i1;
+                if (i6 == 0 && this.m(i3, i5, i4) <= this.s.nextInt(8) && this.b(EnumSkyBlock.a, i3, i5, i4) <= 0) {
+                    EntityPlayer entityplayer = this.a((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D, 8.0D);
 
-                if (entityplayer != null && entityplayer.e((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D) > 4.0D) {
-                    this.a((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D, "ambient.cave.cave", 0.7F, 0.8F + this.s.nextFloat() * 0.2F);
-                    this.O = this.s.nextInt(12000) + 6000;
+                    if (entityplayer != null && entityplayer.e((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D) > 4.0D) {
+                        this.a((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D, "ambient.cave.cave", 0.7F, 0.8F + this.s.nextFloat() * 0.2F);
+                        this.O = this.s.nextInt(12000) + 6000;
+                    }
                 }
-            }
         }
 
         this.C.c("checkLight");
@@ -2067,28 +2033,28 @@ public abstract class World implements IBlockAccess {
                     i9 = (i7 >> 6 & 63) - 32 + i1;
                     i10 = (i7 >> 12 & 63) - 32 + i2;
                     i11 = i7 >> 18 & 15;
-                    i12 = this.b(enumskyblock, i8, i9, i10);
-                    if (i12 == i11) {
-                        this.b(enumskyblock, i8, i9, i10, 0);
-                        if (i11 > 0) {
-                            i13 = MathHelper.a(i8 - i0);
-                            i15 = MathHelper.a(i9 - i1);
-                            i14 = MathHelper.a(i10 - i2);
-                            if (i13 + i15 + i14 < 17) {
-                                for (int i16 = 0; i16 < 6; ++i16) {
-                                    int i17 = i8 + Facing.b[i16];
-                                    int i18 = i9 + Facing.c[i16];
-                                    int i19 = i10 + Facing.d[i16];
-                                    int i20 = Math.max(1, Block.t[this.a(i17, i18, i19)]);
+                i12 = this.b(enumskyblock, i8, i9, i10);
+                if (i12 == i11) {
+                    this.b(enumskyblock, i8, i9, i10, 0);
+                    if (i11 > 0) {
+                        i13 = MathHelper.a(i8 - i0);
+                        i15 = MathHelper.a(i9 - i1);
+                        i14 = MathHelper.a(i10 - i2);
+                        if (i13 + i15 + i14 < 17) {
+                            for (int i16 = 0; i16 < 6; ++i16) {
+                                int i17 = i8 + Facing.b[i16];
+                                int i18 = i9 + Facing.c[i16];
+                                int i19 = i10 + Facing.d[i16];
+                                int i20 = Math.max(1, Block.t[this.a(i17, i18, i19)]);
 
-                                    i12 = this.b(enumskyblock, i17, i18, i19);
-                                    if (i12 == i11 - i20 && i4 < this.H.length) {
-                                        this.H[i4++] = i17 - i0 + 32 | i18 - i1 + 32 << 6 | i19 - i2 + 32 << 12 | i11 - i20 << 18;
-                                    }
+                                i12 = this.b(enumskyblock, i17, i18, i19);
+                                if (i12 == i11 - i20 && i4 < this.H.length) {
+                                    this.H[i4++] = i17 - i0 + 32 | i18 - i1 + 32 << 6 | i19 - i2 + 32 << 12 | i11 - i20 << 18;
                                 }
                             }
                         }
                     }
+                }
                 }
 
                 i3 = 0;
@@ -2311,6 +2277,7 @@ public abstract class World implements IBlockAccess {
         return pathentity;
     }
 
+    @Override
     public int j(int i0, int i1, int i2, int i3) {
         int i4 = this.a(i0, i1, i2);
 
@@ -2631,6 +2598,7 @@ public abstract class World implements IBlockAccess {
         }
     }
 
+    @Override
     public Vec3Pool T() {
         return this.J;
     }
@@ -2673,5 +2641,23 @@ public abstract class World implements IBlockAccess {
 
     public ILogAgent W() {
         return this.L;
+    }
+
+    /**
+     * Get the canary dimension wrapper
+     * 
+     * @return
+     */
+    public CanaryWorld getCanaryWorld() {
+        return canaryDimension;
+    }
+
+    /**
+     * Set the canary dimension wrapper
+     * 
+     * @param dim
+     */
+    public void setCanaryWorld(CanaryWorld dim) {
+        this.canaryDimension = dim;
     }
 }
