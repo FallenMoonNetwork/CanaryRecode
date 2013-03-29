@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 
@@ -34,7 +35,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public boolean h;
     public int i;
     public boolean j = false;
-
+    //CanarMod
+    private CanaryPlayer playerEntity;
     public EntityPlayerMP(MinecraftServer minecraftserver, World world, String s0, ItemInWorldManager iteminworldmanager) {
         super(world);
         iteminworldmanager.b = this;
@@ -62,6 +64,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         while (!world.a((Entity) this, this.E).isEmpty()) {
             this.b(this.u, this.v + 1.0D, this.w);
         }
+        this.playerEntity = new CanaryPlayer(this);
     }
 
     @Override
@@ -684,7 +687,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
      * @return
      */
     public CanaryPlayer getPlayer() {
-        return (CanaryPlayer) this.entity;
+        return this.playerEntity;
     }
 
     public CanaryNetServerHandler getServerHandler() {

@@ -55,7 +55,7 @@ public abstract class ServerConfigurationManager {
     //XXX LOGIN
     public void a(INetworkManager inetworkmanager, EntityPlayerMP entityplayermp) {
         NBTTagCompound nbttagcompound = this.a(entityplayermp);
-        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(entityplayermp.bS, net.canarymod.api.world.WorldType.fromId(entityplayermp.ar), true);
+        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(playerWorld.get(entityplayermp.bS), net.canarymod.api.world.WorldType.fromId(entityplayermp.ar), true);
         playerWorld.remove(entityplayermp.bS);
         entityplayermp.a(w.getHandle());
         entityplayermp.c.a((WorldServer) entityplayermp.q);
@@ -66,7 +66,8 @@ public abstract class ServerConfigurationManager {
         }
 
         this.e.al().a(entityplayermp.bS + "[" + s0 + "] logged in with entity id " + entityplayermp.k + " at (" + entityplayermp.u + ", " + entityplayermp.v + ", " + entityplayermp.w + ")");
-        WorldServer worldserver = this.e.a(entityplayermp.ar);
+        //CanaryMod: Use players world directly
+        WorldServer worldserver = (WorldServer) entityplayermp.getCanaryWorld().getHandle();//this.e.a(entityplayermp.ar);
         ChunkCoordinates chunkcoordinates = worldserver.I();
 
         this.a(entityplayermp, (EntityPlayerMP) null, worldserver);
@@ -189,7 +190,8 @@ public abstract class ServerConfigurationManager {
     public void c(EntityPlayerMP entityplayermp) {
         this.a((Packet) (new Packet201PlayerInfo(entityplayermp.bS, true, 1000)));
         this.a.add(entityplayermp);
-        WorldServer worldserver = this.e.a(entityplayermp.ar);
+        //CanaryMod: Directly use playerworld instead
+        WorldServer worldserver = (WorldServer) entityplayermp.getCanaryWorld().getHandle();//this.e.a(entityplayermp.ar);
 
         worldserver.d(entityplayermp);
         this.a(entityplayermp, (WorldServer) null);
@@ -289,7 +291,8 @@ public abstract class ServerConfigurationManager {
         }
 
         // CanaryMod: make sure the world is loaded into memory.
-        WorldServer world = (WorldServer) Canary.getServer().getWorldManager().getWorld(playerWorld.get(playername));
+        Canary.println("Requesting world: " + playerWorld.get(playername));
+        WorldServer world = (WorldServer) ((CanaryWorld)Canary.getServer().getWorldManager().getWorld(playerWorld.get(playername))).getHandle();
         Object object;
 
         if (this.e.M()) {
@@ -301,30 +304,37 @@ public abstract class ServerConfigurationManager {
         return new EntityPlayerMP(this.e, world, playername, (ItemInWorldManager) object);
     }
 
+    //XXX
+    //XXX
+    //IMPORTANT, HERE IS WORLD SWITCHIGN GOING ON!
     public EntityPlayerMP a(EntityPlayerMP entityplayermp, int i0, boolean flag0) {
         entityplayermp.o().p().a(entityplayermp);
         entityplayermp.o().p().b(entityplayermp);
         entityplayermp.o().r().c(entityplayermp);
         this.a.remove(entityplayermp);
-        this.e.a(entityplayermp.ar).f(entityplayermp);
+        //        this.e.a(entityplayermp.ar).f(entityplayermp);
+        entityplayermp.getCanaryWorld().getHandle().f(entityplayermp);
         ChunkCoordinates chunkcoordinates = entityplayermp.ci();
         boolean flag1 = entityplayermp.cj();
 
         entityplayermp.ar = i0;
         Object object;
+        String name = entityplayermp.getCanaryWorld().getName();
+        net.canarymod.api.world.WorldType type = net.canarymod.api.world.WorldType.fromId(i0);
 
+        WorldServer srv = (WorldServer) ((CanaryWorld)Canary.getServer().getWorldManager().getWorld(name, type, true)).getHandle();
         if (this.e.M()) {
-            object = new DemoWorldManager(this.e.a(entityplayermp.ar));
+            object = new DemoWorldManager(srv);
         } else {
-            object = new ItemInWorldManager(this.e.a(entityplayermp.ar));
+            object = new ItemInWorldManager(srv);
         }
 
-        EntityPlayerMP entityplayermp1 = new EntityPlayerMP(this.e, this.e.a(entityplayermp.ar), entityplayermp.bS, (ItemInWorldManager) object);
+        EntityPlayerMP entityplayermp1 = new EntityPlayerMP(this.e, srv, entityplayermp.bS, (ItemInWorldManager) object);
 
         entityplayermp1.a = entityplayermp.a;
         entityplayermp1.a(entityplayermp, flag0);
         entityplayermp1.k = entityplayermp.k;
-        WorldServer worldserver = this.e.a(entityplayermp.ar);
+        WorldServer worldserver = srv;
 
         this.a(entityplayermp1, entityplayermp, worldserver);
         ChunkCoordinates chunkcoordinates1;

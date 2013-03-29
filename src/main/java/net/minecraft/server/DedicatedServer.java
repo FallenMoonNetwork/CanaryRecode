@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
+import net.canarymod.config.Configuration;
+import net.canarymod.config.WorldConfiguration;
+
 
 public class DedicatedServer extends MinecraftServer implements IServer {
 
@@ -106,12 +109,14 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         long i1 = System.nanoTime();
 
         if (this.J() == null) {
-            this.l(this.o.a("level-name", "world"));
+            this.l(Configuration.getServerConfig().getDefaultWorldName()); //CanaryMod use our world config
         }
+        //CanaryMod use or configurations instead of native ones
+        WorldConfiguration worldcfg = Configuration.getWorldConfig(this.J());
 
-        String s0 = this.o.a("level-seed", "");
-        String s1 = this.o.a("level-type", "DEFAULT");
-        String s2 = this.o.a("generator-settings", "");
+        String s0 = worldcfg.getWorldSeed();//this.o.a("level-seed", "");
+        String s1 = worldcfg.getWorldType().toString();//this.o.a("level-type", "DEFAULT");
+        String s2 = worldcfg.getGeneratorSettings();//this.o.a("generator-settings", "");
         long i2 = (new Random()).nextLong();
 
         if (s0.length() > 0) {
@@ -132,10 +137,12 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             worldtype = WorldType.b;
         }
 
-        this.d(this.o.a("max-build-height", 256));
+        this.d(worldcfg.getMaxBuildHeight());
         this.d((this.ab() + 8) / 16 * 16);
         this.d(MathHelper.a(this.ab(), 64, 256));
+        //That setting a valid value back?
         this.o.a("max-build-height", Integer.valueOf(this.ab()));
+
         this.al().a("Preparing level \"" + this.J() + "\"");
         // CanaryMod changed call to initWorld
         net.canarymod.api.world.WorldType wt = net.canarymod.api.world.WorldType.fromName("NORMAL");

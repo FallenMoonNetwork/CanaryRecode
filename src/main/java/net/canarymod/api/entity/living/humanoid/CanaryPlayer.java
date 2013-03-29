@@ -59,6 +59,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     public CanaryPlayer(EntityPlayerMP entity) {
         super(entity);
+        Canary.println("Creating CanaryPlayer");
         String[] data = Canary.usersAndGroups().getPlayerData(getName());
 
         group = Canary.usersAndGroups().getGroup(data[1]);
@@ -67,9 +68,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             prefix = data[0];
         }
 
-        if (data[2] != null && !data[2].isEmpty()) {
-            allowedIPs = data[2].split(",");
-        }
+        //        if (data[2] != null && !data[2].isEmpty()) {
+        //            allowedIPs = data[2].split(",");
+        //        }
     }
 
     /**
@@ -87,6 +88,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void chat(String message) {
+        Canary.println(getName() + " is chatting");
         if (message.length() > 100) {
             kick("Message too long!");
         }

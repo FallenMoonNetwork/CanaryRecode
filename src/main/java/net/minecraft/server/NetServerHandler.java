@@ -95,7 +95,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet10Flying packet10flying) {
-        WorldServer worldserver = this.d.a(this.c.ar);
+        WorldServer worldserver = (WorldServer) this.c.getCanaryWorld().getHandle();//this.d.a(this.c.ar);
 
         this.g = true;
         if (!this.c.j) {
@@ -308,7 +308,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet14BlockDig packet14blockdig) {
-        WorldServer worldserver = this.d.a(this.c.ar);
+        WorldServer worldserver = (WorldServer) this.c.getCanaryWorld().getHandle();//this.d.a(this.c.ar);
 
         if (packet14blockdig.e == 4) {
             this.c.a(false);
@@ -372,7 +372,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet15Place packet15place) {
-        WorldServer worldserver = this.d.a(this.c.ar);
+        WorldServer worldserver = (WorldServer) this.c.getCanaryWorld().getHandle();//this.d.a(this.c.ar);
         ItemStack itemstack = this.c.bK.h();
         boolean flag0 = false;
         int i0 = packet15place.d();
@@ -576,7 +576,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet7UseEntity packet7useentity) {
-        WorldServer worldserver = this.d.a(this.c.ar);
+        WorldServer worldserver = (WorldServer) this.c.getCanaryWorld().getHandle();//this.d.a(this.c.ar);
         Entity entity = worldserver.a(packet7useentity.b);
 
         if (entity != null) {
@@ -709,7 +709,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet130UpdateSign packet130updatesign) {
-        WorldServer worldserver = this.d.a(this.c.ar);
+        WorldServer worldserver = (WorldServer) this.c.getCanaryWorld().getHandle();//this.d.a(this.c.ar);
 
         if (worldserver.f(packet130updatesign.a, packet130updatesign.b, packet130updatesign.c)) {
             TileEntity tileentity = worldserver.r(packet130updatesign.a, packet130updatesign.b, packet130updatesign.c);

@@ -574,6 +574,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.al().b(s0);
     }
 
+    @Deprecated
     public WorldServer a(int i) {
         throw new UnsupportedOperationException("OMinecraftServer.a(int) has" +
                 " been replaced by MinecraftServer.getWorld(String, int).");
