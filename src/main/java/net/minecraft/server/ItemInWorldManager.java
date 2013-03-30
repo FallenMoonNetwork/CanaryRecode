@@ -226,8 +226,8 @@ public class ItemInWorldManager {
     }
 
     // CanaryMod: ItemUseHook
-    public boolean itemUsed(CanaryPlayer player, World world, ItemStack itemstack, CanaryBlock clicked, CanaryBlock placed) {
-        ItemUseHook hook = new ItemUseHook(player, itemstack.getCanaryItem(), clicked, placed);
+    public boolean itemUsed(CanaryPlayer player, World world, ItemStack itemstack, CanaryBlock clicked) {
+        ItemUseHook hook = new ItemUseHook(player, itemstack.getCanaryItem(), clicked);
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return false;
