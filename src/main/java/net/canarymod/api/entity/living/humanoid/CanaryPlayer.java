@@ -4,7 +4,6 @@ package net.canarymod.api.entity.living.humanoid;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
@@ -703,6 +702,29 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void message(String message) {
         sendMessage(message);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Player[name=%s]", getName());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Player)) {
+            return false;
+        }
+        final Player other = (Player) obj;
+
+        return getName().equals(other.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+
+        hash = 89 * hash + (this.getName() != null ? this.getName().hashCode() : 0);
+        return hash;
     }
 
 }

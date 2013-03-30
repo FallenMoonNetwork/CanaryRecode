@@ -384,4 +384,47 @@ public class CanaryItem implements Item {
     public ItemStack getHandle() {
         return item;
     }
+
+    /**
+     * Returns a String value representing this object
+     * 
+     * @return String representation of this object
+     */
+    @Override
+    public String toString() {
+        return String.format("Item[id=%d, amount=%d, slot=%d, damage=%d, Name=%s, isEnchanted=%b, hasLore=%b]", getId(), getAmount(), slot, getDamage(), getDisplayName(), isEnchanted(), hasLore());
+    }
+
+    /**
+     * Tests the given object to see if it equals this object
+     * 
+     * @param obj
+     *            the object to test
+     * @return true if the two objects match
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ItemStack) {
+            return ItemStack.b(item, (ItemStack) obj);
+        } else if (obj instanceof CanaryItem) {
+            return ItemStack.b(item, ((CanaryItem) obj).getHandle());
+        }
+        return false;
+    }
+
+    /**
+     * Returns a semi-unique hashcode for this object
+     * 
+     * @return hashcode
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+
+        hash = 97 * hash + getId();
+        hash = 97 * hash + getAmount();
+        hash = 97 * hash + slot;
+        hash = 97 * hash + getDamage();
+        return hash;
+    }
 }

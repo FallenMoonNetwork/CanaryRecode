@@ -139,4 +139,58 @@ public class CanaryBlock implements Block {
     public byte getStatus() {
         return status;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Block[type=%d, x=%d, y=%d, z=%d, world=%s, dim=%d]", this.type, this.x, this.y, this.z, this.dimension.getName(), this.dimension.getType().getId());
+    }
+
+    /**
+     * Tests the given object to see if it equals this object
+     * 
+     * @param obj
+     *            the object to test
+     * @return true if the two objects match
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CanaryBlock other = (CanaryBlock) obj;
+
+        if (this.x != other.getX()) {
+            return false;
+        }
+        if (this.y != other.getY()) {
+            return false;
+        }
+        if (this.z != other.getZ()) {
+            return false;
+        }
+        if (!this.getDimension().equals(other.getDimension())) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns a semi-unique hashcode for this block
+     * 
+     * @return hashcode
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+
+        hash = 97 * hash + this.data;
+        hash = 97 * hash + this.x;
+        hash = 97 * hash + this.y;
+        hash = 97 * hash + this.z;
+        hash = 97 * hash + this.type;
+        return hash;
+    }
 }

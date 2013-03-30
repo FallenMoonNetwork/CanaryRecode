@@ -231,4 +231,26 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     public boolean addBehavior(NPCBehavior behavior) {
         return this.behaviors.add(behavior);
     }
+
+    @Override
+    public String toString() {
+        return String.format("NPC[id=%d, name=%s]", getID(), getName());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof CanaryNonPlayableCharacter)) {
+            return false;
+        }
+        return obj == this;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+
+        hash = 89 * hash + this.getID();
+        hash = 89 * hash + (this.getName() != null ? this.getName().hashCode() : 0);
+        return hash;
+    }
 }
