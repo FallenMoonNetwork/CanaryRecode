@@ -42,7 +42,7 @@ import net.minecraft.server.WorldSettings;
 
 /**
  * Canary Player wrapper.
- * 
+ *
  * @author Chris
  */
 public class CanaryPlayer extends CanaryEntityLiving implements Player {
@@ -64,9 +64,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             prefix = ToolBox.stringToNull(data[0]);
         }
 
-        //        if (data[2] != null && !data[2].isEmpty()) {
-        //            allowedIPs = data[2].split(",");
-        //        }
+        if (data[2] != null && !data[2].isEmpty()) {
+            muted = Boolean.valueOf(data[2]);
+        }
     }
 
     /**
@@ -84,7 +84,6 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void chat(String message) {
-        Canary.println(getName() + " is chatting");
         if (message.length() > 100) {
             kick("Message too long!");
         }
@@ -97,7 +96,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
         message = out;
 
-        // TODO: Add configuration for spam protection?
+        // TODO: Add configuration for spam protection (and delegate into thread?)
 
         if (message.startsWith("/")) {
             executeCommand(message.split(" "));
@@ -105,26 +104,33 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             if (isMuted()) {
                 notice("You are currently muted!");
             } else {
-                String prefix = "<" + getColor() + getName() + Colors.WHITE + "> ";
+                String format = "<%prefix%name" + Colors.WHITE + "> %message";
+                String prefix = getColor();
 
                 // This is a copy of the real player list already, no need to copy again (re: Collections.copy())
                 ArrayList<Player> receivers = Canary.getServer().getPlayerList();
 
-                ChatHook hook = new ChatHook(this, prefix, message, receivers);
+                ChatHook hook = new ChatHook(this, prefix, message, format, receivers);
 
                 Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
                     return;
                 }
                 receivers = hook.getReceiverList();
-                String toSend = hook.getPrefix() + hook.getMessage();
+                String formattedMessage = hook.getFormat()
+                        .replace("%prefix", hook.getPrefix())
+                        .replace("%name", getName())
+                        .replace("%group", getGroup().getName());
 
                 for (Player player : receivers) {
-                    if (hook.getPrefix().length() + hook.getMessage().length() >= 100) {
-                        player.sendMessage(hook.getPrefix());
+                    if ((formattedMessage.length() - 8 + hook.getMessage().length()) >= 100) {
+                        player.sendMessage(formattedMessage.replace("%message", ""));
                         player.sendMessage(hook.getMessage());
+                        Canary.logInfo(TextFormat.removeFormatting(formattedMessage.replace("%message", hook.getMessage())));
                     } else {
-                        player.sendMessage(toSend);
+                        String send = formattedMessage.replace("%message", hook.getMessage());
+                        player.sendMessage(send);
+                        Canary.logInfo(TextFormat.removeFormatting(send));
                     }
                 }
             }
@@ -142,7 +148,6 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public void sendMessage(String message) {
         getNetServerHandler().sendMessage(message);
         // Should cover all chat logging
-        Canary.logInfo(TextFormat.removeFormatting(message));
     }
 
     @Override
