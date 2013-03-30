@@ -1,12 +1,17 @@
 package net.minecraft.server;
 
+import net.canarymod.api.world.blocks.CanarySign;
+
 public class TileEntitySign extends TileEntity {
 
     public String[] a = new String[] { "", "", "", ""};
     public int b = -1;
     private boolean c = true;
+    private CanarySign sign; // CanaryMod: sign instance
 
-    public TileEntitySign() {}
+    public TileEntitySign() {
+        this.sign = new CanarySign(this); // CanaryMod: wrap sign
+    }
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
@@ -38,4 +43,10 @@ public class TileEntitySign extends TileEntity {
     public boolean a() {
         return this.c;
     }
+
+    // CanaryMod
+    public CanarySign getCanarySign() {
+        return sign;
+    }
+    //
 }
