@@ -984,6 +984,9 @@ public abstract class Entity {
             nbttagcompound.a("PortalCooldown", this.ao);
             nbttagcompound.a("UUIDMost", this.i.getMostSignificantBits());
             nbttagcompound.a("UUIDLeast", this.i.getLeastSignificantBits());
+            //CanaryMod add level name
+            nbttagcompound.a("LevelName", getCanaryWorld().getName());
+            //
             this.b(nbttagcompound);
             if (this.o != null) {
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound("Riding");

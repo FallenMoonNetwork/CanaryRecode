@@ -42,7 +42,6 @@ public abstract class ServerConfigurationManager {
     // CanaryMod
     protected CanaryConfigurationManager configurationmanager;
     private HashMap<String, IPlayerFileData> playerFileData = new HashMap<String, IPlayerFileData>();
-    private HashMap<String, String> playerWorld = new HashMap<String, String>(1);
     //
     public ServerConfigurationManager(MinecraftServer minecraftserver) {
         this.e = minecraftserver;
@@ -55,8 +54,7 @@ public abstract class ServerConfigurationManager {
     //XXX LOGIN
     public void a(INetworkManager inetworkmanager, EntityPlayerMP entityplayermp) {
         NBTTagCompound nbttagcompound = this.a(entityplayermp);
-        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(playerWorld.get(entityplayermp.bS), true);
-        playerWorld.remove(entityplayermp.bS);
+        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(nbttagcompound.i("LevelName"), net.canarymod.api.world.WorldType.fromId(nbttagcompound.e("Dimension")), true);
         entityplayermp.a(w.getHandle());
         entityplayermp.c.a((WorldServer) entityplayermp.q);
         String s0 = "local";
@@ -66,8 +64,8 @@ public abstract class ServerConfigurationManager {
         }
 
         this.e.al().a(entityplayermp.bS + "[" + s0 + "] logged in with entity id " + entityplayermp.k + " at (" + entityplayermp.u + ", " + entityplayermp.v + ", " + entityplayermp.w + ")");
-        //CanaryMod: Use players world directly
-        WorldServer worldserver = (WorldServer) entityplayermp.getCanaryWorld().getHandle();//this.e.a(entityplayermp.ar);
+        //CanaryMod: Use world we got from players NBT data
+        WorldServer worldserver = (WorldServer) w.getHandle();
         ChunkCoordinates chunkcoordinates = worldserver.I();
 
         this.a(entityplayermp, (EntityPlayerMP) null, worldserver);
@@ -181,6 +179,18 @@ public abstract class ServerConfigurationManager {
         return nbttagcompound1;
     }
 
+    //CanaryMod: get player data for name
+    public NBTTagCompound getPlayerDatByName(String name) {
+        ISaveHandler handler = ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().K();
+        if(handler instanceof SaveHandler) {
+            SaveHandler saves = (SaveHandler) handler;
+            return saves.a(name);
+        }
+        else {
+            throw new RuntimeException("ISaveHandler is not of type SaveHandler! Failing to laod playerdata");
+        }
+    }
+
     protected void b(EntityPlayerMP entityplayermp) {
         //CanaryMod Multiworld
         playerFileData.get(entityplayermp.getCanaryWorld().getName()).a(entityplayermp);
@@ -190,6 +200,7 @@ public abstract class ServerConfigurationManager {
     public void c(EntityPlayerMP entityplayermp) {
         this.a((Packet) (new Packet201PlayerInfo(entityplayermp.bS, true, 1000)));
         this.a.add(entityplayermp);
+
         //CanaryMod: Directly use playerworld instead
         WorldServer worldserver = (WorldServer) entityplayermp.getCanaryWorld().getHandle();//this.e.a(entityplayermp.ar);
 
@@ -242,9 +253,6 @@ public abstract class ServerConfigurationManager {
             return ban.getReason();
         }
 
-        // CanaryMod: Store for later usage.
-        this.playerWorld.put(hook.getName(), hook.getWorld() + "_" + hook.getWorldType().getName());
-
         if (this.f.a(s0)) {
             BanEntry banentry = (BanEntry) this.f.c().get(s0);
             String s1 = "You are banned from this server!\nReason: " + banentry.f();
@@ -273,7 +281,6 @@ public abstract class ServerConfigurationManager {
     }
 
     public EntityPlayerMP a(String playername) {
-        Canary.println("Logging in player " + playername);
         ArrayList arraylist = new ArrayList();
 
         EntityPlayerMP entityplayermp;
@@ -291,9 +298,15 @@ public abstract class ServerConfigurationManager {
             entityplayermp.a.c("You logged in from another location");
         }
 
-        // CanaryMod: make sure the world is loaded into memory.
-        Canary.println("Requesting world: " + playerWorld.get(playername));
-        WorldServer world = (WorldServer) ((CanaryWorld)Canary.getServer().getWorldManager().getWorld(playerWorld.get(playername), false)).getHandle();
+        //CanaryMod read the players dat file to find out the world it was last in
+        NBTTagCompound playertag = getPlayerDatByName(playername);
+        net.canarymod.api.nbt.CanaryCompoundTag canarycompound = new net.canarymod.api.nbt.CanaryCompoundTag(playertag);
+        String worldName = canarycompound.getString("LevelName");
+        if(worldName == null || worldName.isEmpty()) {
+            worldName = Canary.getServer().getDefaultWorldName();
+        }
+        net.canarymod.api.world.WorldType worldtype = net.canarymod.api.world.WorldType.fromId(canarycompound.getInt("Dimension"));
+        WorldServer world = (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(worldName, worldtype, true)).getHandle();
         Object object;
 
         if (this.e.M()) {
