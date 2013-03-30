@@ -86,7 +86,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         // CanaryMod
         this.server = new CanaryServer(this);
         Canary.setServer(server);
-        worldManager = new CanaryWorldManager();
         //
     }
 
