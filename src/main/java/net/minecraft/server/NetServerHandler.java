@@ -14,7 +14,6 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockFace;
-import net.canarymod.api.world.blocks.BlockType;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.player.BlockLeftClickHook;
@@ -422,19 +421,20 @@ public class NetServerHandler extends NetHandler {
         int i3 = packet15place.h();
 
         // CanaryMod: BlockRightClick/ItemUse
-        Block blockClicked = i3 == 255 ? null : worldserver.getCanaryWorld().getBlockAt(i0, i1, i2);
+        CanaryBlock blockClicked = (CanaryBlock) worldserver.getCanaryWorld().getBlockAt(i0, i1, i2);
         blockClicked.setFaceClicked(BlockFace.fromByte((byte) i3));
-        Block blockPlaced = new CanaryBlock(itemstack != null && itemstack.c < 255 ? (short) itemstack.c : BlockType.Air.getId(), (byte) 0, //
+        CanaryBlock blockPlaced = new CanaryBlock(itemstack != null && itemstack.c < 255 ? (short) itemstack.c : 0, (byte) 0, //
                 i3 == 4 ? i0 - 1 : i3 == 5 ? i0 + 1 : i0, // get Block X
                 i3 == 0 ? i1 - 1 : i3 == 1 ? i1 + 1 : i1, // get Block Y
-                i3 == 2 ? i2 - 1 : i3 == 3 ? i2 + 1 : i2); // get Block Z
+                i3 == 2 ? i2 - 1 : i3 == 3 ? i2 + 1 : i2, // get Block Z
+                worldserver.getCanaryWorld());
 
         if (packet15place.h() == 255) {
             if (itemstack == null) {
                 return;
             }
 
-            this.c.c.a(this.c, worldserver, itemstack); // XXX Needs redirection
+            this.c.c.itemUsed(this.c.getPlayer(), worldserver, itemstack, blockClicked, blockPlaced); // CanaryMod: Redirect through ItemInWorldManager.itemUsed
         } else if (packet15place.f() >= this.d.ab() - 1 && (packet15place.h() == 1 || packet15place.f() >= this.d.ab())) {
             this.c.a.b(new Packet3Chat("" + EnumChatFormatting.h + "Height limit for building is " + this.d.ab()));
             flag0 = true;
