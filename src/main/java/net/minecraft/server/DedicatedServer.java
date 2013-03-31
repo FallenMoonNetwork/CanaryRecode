@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
-
 import net.canarymod.config.Configuration;
 import net.canarymod.config.WorldConfiguration;
 
@@ -29,7 +28,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     public DedicatedServer(File file1) {
         super(file1);
-        this.l = new LogAgent("Minecraft-Server", (String) null, (new File(file1, "server.log")).getAbsolutePath());
+        this.l = net.canarymod.Main.getLogAgent(); // new LogAgent("Minecraft-Server", (String) null, (new File(file1, "server.log")).getAbsolutePath());
         new DedicatedServerSleepThread(this);
     }
 
