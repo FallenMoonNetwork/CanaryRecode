@@ -4,6 +4,7 @@ package net.canarymod.api.entity.living.humanoid;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
@@ -125,13 +126,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                     if ((formattedMessage.length() - 8 + hook.getMessage().length()) >= 100) {
                         player.sendMessage(formattedMessage.replace("%message", ""));
                         player.sendMessage(hook.getMessage());
-                        Canary.logInfo(TextFormat.removeFormatting(formattedMessage.replace("%message", hook.getMessage())));
                     } else {
-                        String send = formattedMessage.replace("%message", hook.getMessage());
-                        player.sendMessage(send);
-                        Canary.logInfo(TextFormat.removeFormatting(send));
+                        player.sendMessage(formattedMessage.replace("%message", hook.getMessage()));
                     }
                 }
+                Canary.logInfo(TextFormat.removeFormatting(formattedMessage.replace("%message", hook.getMessage())));
             }
         }
 
