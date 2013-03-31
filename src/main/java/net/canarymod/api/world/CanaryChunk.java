@@ -65,17 +65,8 @@ public class CanaryChunk implements Chunk {
 
     @Override
     public BiomeType[] getBiomeData() {
-        byte[] data = handle.m();
-        BiomeType[] typedata = new BiomeType[256];
-
-        for (int index = 0; index < 256; index++) {
-            if (data[index] < 0 || data[index] > 22) {
-                typedata[index] = BiomeType.OCEAN;
-                continue;
-            }
-            typedata[index] = BiomeType.fromId(data[index]);
-        }
-        return typedata;
+        BiomeType[] data = BiomeType.fromIdArray(handle.m());
+        return data;
     }
 
     @Override
@@ -83,16 +74,7 @@ public class CanaryChunk implements Chunk {
         if (type.length != 256) {
             return;
         }
-        byte[] data = new byte[256];
-
-        for (int index = 0; index < 256; index++) {
-            if (type[index] == null) {
-                data[index] = (byte) 0;
-                continue;
-            }
-            data[index] = type[index].getId();
-        }
-        handle.a(data);
+        handle.a(BiomeType.fromTypeArray(type));
     }
 
     @Override

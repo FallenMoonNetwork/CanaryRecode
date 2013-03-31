@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryChunkProviderServer;
 import net.canarymod.hook.world.ChunkCreatedHook;
@@ -91,7 +90,7 @@ public class ChunkProviderServer implements IChunkProvider {
                 } else {
                     try {
                         chunk = this.d.d(i0, i1);
-                        // CanaryMod start - onChunkCreation
+                        // CanaryMod: ChunkCreation
                         ChunkCreationHook hook = new ChunkCreationHook(i0, i1, h.getCanaryWorld());
                         Canary.hooks().callHook(hook);
                         byte[] blocks = hook.getBlockData();
@@ -101,6 +100,7 @@ public class ChunkProviderServer implements IChunkProvider {
                                 chunk.getCanaryChunk().setBiomeData(hook.getBiomeData());
                             }
                         }
+                        //
                     } catch (Throwable throwable) {
                         CrashReport crashreport = CrashReport.a(throwable, "Exception generating new chunk");
                         CrashReportCategory crashreportcategory = crashreport.a("Chunk to be generated");
@@ -110,17 +110,18 @@ public class ChunkProviderServer implements IChunkProvider {
                         crashreportcategory.a("Generator", this.d.d());
                         throw new ReportedException(crashreport);
                     }
-                    // CanaryMod - onChunkCreated
-                    ChunkCreatedHook hook = new ChunkCreatedHook(chunk.getCanaryChunk(), h.getCanaryWorld());
-                    Canary.hooks().callHook(hook);
+                    // CanaryMod: ChunkCreated
+                    Canary.hooks().callHook(new ChunkCreatedHook(chunk.getCanaryChunk(), h.getCanaryWorld()));
+                    //
                 }
             }
             this.f.a(i2, chunk);
             this.g.add(chunk);
             if (chunk != null) {
                 chunk.c();
-                // CanaryMod onChunkLoad
+                // CanaryMod: ChunkLoaded
                 Canary.hooks().callHook(new ChunkLoadedHook(chunk.getCanaryChunk(), h.getCanaryWorld()));
+                //
             }
             chunk.a(this, this, i0, i1);
         }
@@ -234,13 +235,14 @@ public class ChunkProviderServer implements IChunkProvider {
                     Long olong = (Long) this.b.iterator().next();
                     Chunk chunk = (Chunk) this.f.a(olong.longValue());
                     if(chunk != null) {
-                        // CanaryMod onChunkUnloaded
+                        // CanaryMod: ChunkUnload
                         ChunkUnloadHook hook = new ChunkUnloadHook(chunk.getCanaryChunk(), h.getCanaryWorld());
                         Canary.hooks().callHook(hook);
                         if(hook.isCanceled()) {
                             //TODO: Might need to return false instead ... unsure
                             return true;
                         }
+                        //
                         chunk.d();
                         this.b(chunk);
                         this.a(chunk);

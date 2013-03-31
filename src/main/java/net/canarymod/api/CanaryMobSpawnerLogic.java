@@ -2,7 +2,10 @@ package net.canarymod.api;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.canarymod.api.nbt.*;
+import net.canarymod.api.nbt.CanaryCompoundTag;
+import net.canarymod.api.nbt.CanaryListTag;
+import net.canarymod.api.nbt.CompoundTag;
+import net.canarymod.api.nbt.ListTag;
 import net.minecraft.server.MobSpawnerBaseLogic;
 import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.NBTTagList;
@@ -20,6 +23,7 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
         logic = msbl;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public String[] getSpawns() {
         List<String> spawns = new ArrayList<String>();
@@ -97,6 +101,7 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
         this.logic.m = range;
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void setSpawnedEntities(MobSpawnerEntry... entries) {
         CanaryCompoundTag toSet = new CanaryCompoundTag(new NBTTagCompound());
