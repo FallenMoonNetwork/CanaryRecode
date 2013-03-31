@@ -54,7 +54,11 @@ public abstract class ServerConfigurationManager {
     //XXX LOGIN
     public void a(INetworkManager inetworkmanager, EntityPlayerMP entityplayermp) {
         NBTTagCompound nbttagcompound = this.a(entityplayermp);
-        CanaryWorld w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(nbttagcompound.i("LevelName"), net.canarymod.api.world.WorldType.fromId(nbttagcompound.e("Dimension")), true);
+        CanaryWorld w;
+        if(nbttagcompound != null) {
+            w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(nbttagcompound.i("LevelName"), net.canarymod.api.world.WorldType.fromId(nbttagcompound.e("Dimension")), true);
+        }
+        w = (CanaryWorld) Canary.getServer().getDefaultWorld();
         entityplayermp.a(w.getHandle());
         entityplayermp.c.a((WorldServer) entityplayermp.q);
         String s0 = "local";
@@ -172,7 +176,7 @@ public abstract class ServerConfigurationManager {
             System.out.println("loading single player");
         } else {
             //CanaryMod Multiworld
-            nbttagcompound1 = playerFileData.get(entityplayermp.getCanaryWorld().getName()).b(entityplayermp);
+            return getPlayerDatByName(entityplayermp.bS);
             //
         }
 
@@ -299,13 +303,18 @@ public abstract class ServerConfigurationManager {
         }
 
         //CanaryMod read the players dat file to find out the world it was last in
+        String worldName = Canary.getServer().getDefaultWorldName();
+        net.canarymod.api.world.WorldType worldtype = net.canarymod.api.world.WorldType.fromId(0);
         NBTTagCompound playertag = getPlayerDatByName(playername);
-        net.canarymod.api.nbt.CanaryCompoundTag canarycompound = new net.canarymod.api.nbt.CanaryCompoundTag(playertag);
-        String worldName = canarycompound.getString("LevelName");
-        if(worldName == null || worldName.isEmpty()) {
-            worldName = Canary.getServer().getDefaultWorldName();
+        if(playertag != null) {
+            net.canarymod.api.nbt.CanaryCompoundTag canarycompound = new net.canarymod.api.nbt.CanaryCompoundTag(playertag);
+            worldName = canarycompound.getString("LevelName");
+            if(worldName == null || worldName.isEmpty()) {
+                worldName = Canary.getServer().getDefaultWorldName();
+            }
+            worldtype = net.canarymod.api.world.WorldType.fromId(canarycompound.getInt("Dimension"));
         }
-        net.canarymod.api.world.WorldType worldtype = net.canarymod.api.world.WorldType.fromId(canarycompound.getInt("Dimension"));
+
         WorldServer world = (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(worldName, worldtype, true)).getHandle();
         Object object;
 
