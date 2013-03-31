@@ -2,6 +2,7 @@ package net.canarymod;
 
 
 import java.io.File;
+
 import net.canarymod.api.Enchantment;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.serialize.EnchantmentSerializer;
@@ -12,10 +13,11 @@ import net.minecraft.server.MinecraftServer;
 
 public class Main {
     private static LogAgent la;
+    private static CanaryMod mod;
 
     private static void initBird() {
         // Initialize the bird
-        CanaryMod mod = new CanaryMod();
+        mod = new CanaryMod();
 
         Canary.setCanary(mod);
         // Add system internal serializers
@@ -26,12 +28,11 @@ public class Main {
         mod.initUserAndGroupsManager();
         mod.initWarps();
         mod.initKits();
-        mod.initCommands();
     }
 
     /**
      * The canary Bootstrap process
-     * 
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -43,11 +44,14 @@ public class Main {
         } catch (Throwable t) {
             Canary.logStackTrace("Exception while starting the server: ", t);
         }
+        //commands require a valid commandOwner which is the server.
+        //That means for commands to work, we gotta load Minecraft first
+        mod.initCommands();
     }
 
     /**
      * Restart the server without killing the JVM
-     * 
+     *
      * @param reloadCanary
      */
     public static void restart(boolean reloadCanary) {
