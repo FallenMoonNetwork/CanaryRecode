@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
@@ -153,7 +152,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
         this.s.a(world); //Init player data files
 
-        this.c(this.h());
+        // this.c(this.h()); // If we call this then worlds can't do custom difficulty, plus it doesn't work
+        world.r = config.getDifficulty().getId(); // Set difficulty directly based on WorldConfiguration setting
         this.e(world); //Generate terrain
         worldManager.addWorld(world.getCanaryWorld());
     }
@@ -772,6 +772,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
             //
             if (worldserver != null) {
+                System.out.println(worldserver.getCanaryWorld().getName() + " Difficulty " + i0);
                 if (worldserver.L().t()) {
                     worldserver.r = 3;
                     worldserver.a(true, true);
