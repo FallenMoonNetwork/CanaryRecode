@@ -6,10 +6,13 @@ import net.canarymod.CanaryMod;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
+import net.minecraft.server.DamageSource;
+import net.minecraft.server.EntityLiving;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.INetworkManager;
 import net.minecraft.server.ItemInWorldManager;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.NetHandler;
 import net.minecraft.server.NetServerHandler;
 import net.minecraft.server.Packet;
@@ -46,11 +49,37 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
     }
 
     @Override
-    public void g() {
-        super.g();
+    public void a(NBTTagCompound nbttagcompound) {
+        // NO NBTTag yet
+    }
+
+    @Override
+    public void b(NBTTagCompound nbttagcompound) {
+        // NO NBTTag yet
+    }
+
+    @Override
+    public void l_() {
+        super.l_();
         ((CanaryNonPlayableCharacter) entity).update();
     }
     
+    @Override
+    public void a(DamageSource damagesource) {
+        this.b.ad().k(this.bt.b());
+        if (!this.q.M().b("keepInventory")) {
+            this.bK.m();
+        }
+
+        // Skip ScoreBoard stuff
+
+        EntityLiving entityliving = this.bN();
+
+        if (entityliving != null) {
+            entityliving.c(this, this.aM);
+        }
+    }
+
     void setNPC(CanaryNonPlayableCharacter cnpc){
         this.entity = cnpc;
     }

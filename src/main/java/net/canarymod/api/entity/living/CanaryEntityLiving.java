@@ -11,6 +11,7 @@ import net.canarymod.api.DamageSource;
 import net.canarymod.api.DamageType;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
+import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.living.monster.EntityMob;
 import net.canarymod.api.potion.CanaryPotion;
@@ -22,7 +23,6 @@ import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.minecraft.server.EntityList;
-import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.IAnimals;
 import net.minecraft.server.IMob;
 import net.minecraft.server.Packet12PlayerLook;
@@ -96,7 +96,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @Override
     public boolean isPlayer() {
-        return entity instanceof EntityPlayerMP;
+        return entity.getCanaryEntity() instanceof CanaryPlayer;
     }
 
     @Override

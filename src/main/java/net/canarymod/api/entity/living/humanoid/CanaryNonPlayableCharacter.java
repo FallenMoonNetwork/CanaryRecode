@@ -3,14 +3,14 @@ package net.canarymod.api.entity.living.humanoid;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
-import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
-import net.minecraft.server.EntityPlayer;
+import net.canarymod.chat.Colors;
 import net.minecraft.server.Packet20NamedEntitySpawn;
 import net.minecraft.server.Packet29DestroyEntity;
 
@@ -72,7 +72,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public void teleportTo(Position position) {
-        getHandle().a(position.getX(), position.getY(), position.getZ(), getRotation(), getPitch());
+        getHandle().b(position.getX(), position.getY(), position.getZ(), getRotation(), getPitch());
     }
 
     /**
@@ -80,7 +80,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public void teleportTo(Location location) {
-        getHandle().a(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
+        getHandle().b(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
         if (this.getWorld() != location.getWorld()) {
             // I don't know yet
         }
@@ -91,7 +91,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public void teleportTo(int x, int y, int z) {
-        getHandle().a(x, y, z, getRotation(), getPitch());
+        getHandle().b(x, y, z, getRotation(), getPitch());
     }
 
     /**
@@ -152,8 +152,8 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
         if (zDiff < 0.0) {
             yaw = yaw + (Math.abs(180 - yaw) * 2);
         }
-        teleportTo(new Location(this.getWorld(), getX(), getY(), getZ(), (float) yaw, (float) pitch));
-
+        this.setRotation((float) yaw - 90);
+        this.setPitch((float) pitch);
         getHandle().bR = (float) yaw - 90; // Camera/Head Position
         getHandle().c(); // Update Entity
     }
@@ -163,10 +163,32 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public void lookAtNearest() {
-        EntityPlayer ep = ((CanaryWorld) getWorld()).getHandle().a((net.minecraft.server.Entity) getHandle(), 25);
-        if (ep != null && ((CanaryEntityLiving) ep.getCanaryEntity()).isPlayer()) {
-            lookAt((Player) ep.getCanaryEntity());
+        Player toLookAt = null;
+        for (Player player : Canary.getServer().getPlayerList()) {
+            if (player.getWorld().getName().equals(this.getWorld().getName())) {
+                if (player.getWorld().getType() == this.getWorld().getType()) {
+                    if (toLookAt != null) {
+                        if (distanceTo(player) < distanceTo(toLookAt)) {
+                            toLookAt = player;
+                        }
+                    }
+                    else {
+                        toLookAt = player;
+                    }
+                }
+            }
         }
+        if (toLookAt != null) {
+            lookAt(toLookAt);
+        }
+    }
+
+    private double distanceTo(Player player) {
+        double xDiff = player.getX() - getX();
+        double yDiff = player.getY() - getY();
+        double zDiff = player.getZ() - getZ();
+
+        return xDiff * xDiff + yDiff * yDiff + zDiff * zDiff;
     }
 
     /**
@@ -192,7 +214,11 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     public void update() {
         synchronized (behaviors) {
             for (NPCBehavior behavior : behaviors) {
-                behavior.onUpdate();
+                try {
+                    behavior.onUpdate();
+                } catch (Exception ex) {
+                    Canary.logWarning("Exception while calling onUpdate in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
+                }
             }
         }
     }
@@ -230,6 +256,15 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     @Override
     public boolean addBehavior(NPCBehavior behavior) {
         return this.behaviors.add(behavior);
+    }
+
+    public void chat(String msg) { // Could really use some custom prefix stuff
+        Canary.getServer().broadcastMessage("<" + Colors.ORANGE + "NPC " + Colors.WHITE + this.getName() + "> " + msg);
+    }
+
+    @Override
+    public void privateMessage(Player player, String msg) { // Could really use some custom prefix stuff
+        player.sendMessage("[PM] <NPC " + this.getName() + "> " + msg);
     }
 
     @Override

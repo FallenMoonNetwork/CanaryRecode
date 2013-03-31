@@ -9,9 +9,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
+import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
 
 public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
@@ -63,7 +63,12 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         while (!world.a((Entity) this, this.E).isEmpty()) {
             this.b(this.u, this.v + 1.0D, this.w);
         }
-        this.entity = new CanaryPlayer(this);
+
+        // CanaryMod: create wrapper
+        if (!(this instanceof EntityNonPlayableCharacter)) { // We might be an NPC
+            this.entity = new CanaryPlayer(this);
+        }
+        //
     }
 
     @Override
@@ -275,7 +280,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         } else {
             if (this.ar == 1 && i0 == 0) {
                 this.a((StatBase) AchievementList.B);
-                ChunkCoordinates chunkcoordinates = this.b.a(i0).l();
+                ChunkCoordinates chunkcoordinates = this.b.getWorld(this.getCanaryWorld().getName(), i0).l();
 
                 if (chunkcoordinates != null) {
                     this.a.a((double) chunkcoordinates.a, (double) chunkcoordinates.b, (double) chunkcoordinates.c, 0.0F, 0.0F, getCanaryWorld().getType().getId(), getCanaryWorld().getName());
