@@ -2,7 +2,6 @@ package net.canarymod.api.world;
 
 
 import java.util.ArrayList;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
@@ -330,7 +329,7 @@ public class CanaryWorld implements World {
         }
         long newTime = getRawTime() + margin;
 
-        getHandle().a(newTime);
+        getHandle().b(newTime);
     }
 
     @Override

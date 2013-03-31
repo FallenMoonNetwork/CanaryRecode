@@ -10,10 +10,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Callable;
-
 import net.canarymod.Canary;
+import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.entity.EntitySpawnHook;
+import net.canarymod.hook.world.BlockUpdateHook;
+import net.canarymod.hook.world.TimeChangeHook;
+import net.canarymod.hook.world.WeatherChangeHook;
 
 
 public abstract class World implements IBlockAccess {
@@ -250,7 +254,17 @@ public abstract class World implements IBlockAccess {
                     i6 = chunk.a(i0 & 15, i1, i2 & 15);
                 }
 
-                boolean flag0 = chunk.a(i0 & 15, i1, i2 & 15, i3, i4);
+                // CanaryMod: BlockUpdate
+                boolean flag0 = false;
+                CanaryBlock cblock = (CanaryBlock) this.canaryDimension.getBlockAt(i0, i1, i2);
+                BlockUpdateHook hook = new BlockUpdateHook(cblock, i3);
+                if (i3 == 0) { // Ignore Air
+                    Canary.hooks().callHook(hook);
+                }
+                if (!hook.isCanceled()) {
+                    flag0 = chunk.a(i0 & 15, i1, i2 & 15, i3, i4);
+                }
+                //
 
                 this.C.a("checkLight");
                 this.A(i0, i1, i2);
@@ -825,26 +839,24 @@ public abstract class World implements IBlockAccess {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public boolean c(Entity entity) {
         this.i.add(entity);
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     public boolean d(Entity entity) {
 
-        // CanaryMod: call EntitySpawnHook
-        if (!(entity instanceof EntityPlayer)) {
-            EntitySpawnHook hook = null;
-
-            if (entity instanceof EntityLiving) {// implement MobSpawnRate Here!
-            }
-            hook = new EntitySpawnHook(entity.getCanaryEntity(), true);
+        // CanaryMod: EntitySpawn
+        if (!(entity.getCanaryEntity() instanceof CanaryPlayer)) {
+            EntitySpawnHook hook = new EntitySpawnHook(entity.getCanaryEntity(), true);
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return false;
             }
         }
-        // CanaryMod end - EntitySpawnHook
+        //
         int i0 = MathHelper.c(entity.u / 16.0D);
         int i1 = MathHelper.c(entity.w / 16.0D);
         boolean flag0 = entity.p;
@@ -1757,7 +1769,13 @@ public abstract class World implements IBlockAccess {
                 --i0;
                 this.x.f(i0);
                 if (i0 <= 0) {
-                    this.x.a(!this.x.n());
+                    // CanaryMod: WeatherChange (Thunder)
+                    WeatherChangeHook hook = new WeatherChangeHook(canaryDimension, !this.x.n(), true);
+                    Canary.hooks().callHook(hook);
+                    if (!hook.isCanceled()) {
+                        this.x.a(!this.x.n());
+                    }
+                    //
                 }
             }
 
@@ -1773,7 +1791,13 @@ public abstract class World implements IBlockAccess {
                 --i1;
                 this.x.g(i1);
                 if (i1 <= 0) {
-                    this.x.b(!this.x.p());
+                    // CanaryMod: WeatherChange (Rain)
+                    WeatherChangeHook hook = new WeatherChangeHook(canaryDimension, !this.x.p(), false);
+                    Canary.hooks().callHook(hook);
+                    if (!hook.isCanceled()) {
+                        this.x.b(!this.x.p());
+                    }
+                    //
                 }
             }
 
@@ -2439,7 +2463,13 @@ public abstract class World implements IBlockAccess {
     }
 
     public void b(long i0) {
-        this.x.c(i0);
+        // CanaryMod: TimeChange
+        TimeChangeHook hook = new TimeChangeHook(canaryDimension, i0);
+        Canary.hooks().callHook(hook);
+        if (!hook.isCanceled()) {
+            this.x.c(i0);
+        }
+        //
     }
 
     public ChunkCoordinates I() {
