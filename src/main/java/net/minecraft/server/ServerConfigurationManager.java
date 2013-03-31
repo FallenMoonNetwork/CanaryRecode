@@ -56,9 +56,14 @@ public abstract class ServerConfigurationManager {
         NBTTagCompound nbttagcompound = this.a(entityplayermp);
         CanaryWorld w;
         if(nbttagcompound != null) {
+            Canary.println("loading world from NBT data");
+            Canary.println(nbttagcompound.i("LevelName") + ", " + nbttagcompound.e("Dimension"));
             w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(nbttagcompound.i("LevelName"), net.canarymod.api.world.WorldType.fromId(nbttagcompound.e("Dimension")), true);
         }
-        w = (CanaryWorld) Canary.getServer().getDefaultWorld();
+        else {
+            Canary.println("loading default world");
+            w = (CanaryWorld) Canary.getServer().getDefaultWorld();
+        }
         entityplayermp.a(w.getHandle());
         entityplayermp.c.a((WorldServer) entityplayermp.q);
         String s0 = "local";
@@ -176,7 +181,7 @@ public abstract class ServerConfigurationManager {
             System.out.println("loading single player");
         } else {
             //CanaryMod Multiworld
-            return getPlayerDatByName(entityplayermp.bS);
+            nbttagcompound1 = playerFileData.get(entityplayermp.getCanaryWorld().getName()).b(entityplayermp);
             //
         }
 
@@ -306,7 +311,9 @@ public abstract class ServerConfigurationManager {
         String worldName = Canary.getServer().getDefaultWorldName();
         net.canarymod.api.world.WorldType worldtype = net.canarymod.api.world.WorldType.fromId(0);
         NBTTagCompound playertag = getPlayerDatByName(playername);
+
         if(playertag != null) {
+            Canary.println("item manager from NBT data");
             net.canarymod.api.nbt.CanaryCompoundTag canarycompound = new net.canarymod.api.nbt.CanaryCompoundTag(playertag);
             worldName = canarycompound.getString("LevelName");
             if(worldName == null || worldName.isEmpty()) {
