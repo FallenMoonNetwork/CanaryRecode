@@ -1,9 +1,12 @@
 package net.canarymod.api.entity.vehicle;
 
 
+import java.util.Arrays;
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
 import net.minecraft.server.EntityMinecartChest;
+import net.minecraft.server.ItemStack;
 
 /**
  * ChestMinecart wrapper implementation
@@ -31,63 +34,43 @@ public class CanaryChestMinecart extends CanaryMinecart implements ChestMinecart
     }
 
     @Override
-    public void addItem(Item item) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void addItem(ItemType type) {
-        // TODO Auto-generated method stub
-
+        this.addItem(type.getId(), 1, (short) 0);
     }
 
     @Override
     public void addItem(int itemId) {
-        // TODO Auto-generated method stub
-
+        this.addItem(itemId, 1, (short) 0);
     }
 
     @Override
     public void addItem(int itemId, short damage) {
-        // TODO Auto-generated method stub
-
+        this.addItem(itemId, 1, damage);
     }
 
     @Override
     public void addItem(int itemId, int amount) {
-        // TODO Auto-generated method stub
-
+        this.addItem(itemId, amount, (short) 0);
     }
 
     @Override
     public void addItem(ItemType type, int amount) {
-        // TODO Auto-generated method stub
-
+        this.addItem(type.getId(), amount, (short) 0);
     }
 
     @Override
     public void addItem(int itemId, int amount, short damage) {
-        // TODO Auto-generated method stub
-
+        this.addItem(new CanaryItem(itemId, amount, damage));
     }
 
     @Override
     public void addItem(ItemType type, int amount, short damage) {
-        // TODO Auto-generated method stub
-
+        this.addItem(type.getId(), amount, damage);
     }
 
     @Override
-    public void clearContents() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Item[] clearInventory() {
-        // TODO Auto-generated method stub
-        return null;
+    public void addItem(Item item) {
+        this.insertItem(item);
     }
 
     @Override
@@ -103,134 +86,162 @@ public class CanaryChestMinecart extends CanaryMinecart implements ChestMinecart
     }
 
     @Override
-    public Item[] getContents() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public int getEmptySlot() {
-        // TODO Auto-generated method stub
-        return 0;
+        for (int index = 0; index < getSize(); index++) {
+            if (getSlot(index) == null) {
+                return index;
+            }
+        }
+        return -1;
     }
 
     @Override
     public String getInventoryName() {
-        // TODO Auto-generated method stub
-        return null;
+        return getHandle().b();
     }
 
     @Override
     public int getInventoryStackLimit() {
-        // TODO Auto-generated method stub
-        return 0;
+        return getHandle().d();
     }
 
     @Override
     public Item getItem(ItemType type) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.getItem(type.getId());
     }
 
     @Override
     public Item getItem(int id) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == id) {
+                toCheck.setSlot(index);
+                return toCheck;
+            }
+        }
         return null;
     }
 
     @Override
     public Item getItem(ItemType type, int amount) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.getItem(type.getId(), amount);
     }
 
     @Override
     public Item getItem(int id, int amount) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount) {
+                toCheck.setSlot(index);
+                return toCheck;
+            }
+        }
         return null;
     }
 
     @Override
     public Item getItem(int id, int amount, short damage) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount && toCheck.getDamage() == damage) {
+                toCheck.setSlot(index);
+                return toCheck;
+            }
+        }
         return null;
     }
 
     @Override
     public Item getItem(ItemType type, int amount, short damage) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.getItem(type.getId(), amount, damage);
     }
 
     @Override
     public int getSize() {
-        // TODO Auto-generated method stub
-        return 0;
+        return getHandle().j_();
     }
 
     @Override
-    public Item getSlot(int slot) {
-        // TODO Auto-generated method stub
-        return null;
+    public Item getSlot(int index) {
+        return getHandle().a(index).getCanaryItem();
     }
 
     @Override
     public boolean hasItem(int itemId) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            if (getSlot(index) != null && getSlot(index).getId() == itemId) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean hasItem(ItemType type) {
-        // TODO Auto-generated method stub
-        return false;
+        return this.hasItem(type.getId());
     }
 
     @Override
     public boolean hasItem(ItemType type, short damage) {
-        // TODO Auto-generated method stub
-        return false;
+        return this.hasItem(type.getId(), damage);
     }
 
     @Override
     public boolean hasItem(int itemId, short damage) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item item = getSlot(index);
+            if (item != null && item.getId() == itemId && item.getDamage() == damage) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean hasItemStack(ItemType type, int amount) {
-        // TODO Auto-generated method stub
-        return false;
+        return this.hasItemStack(type.getId(), amount, 64);
     }
 
     @Override
     public boolean hasItemStack(int itemId, int amount) {
-        // TODO Auto-generated method stub
-        return false;
+        return this.hasItemStack(itemId, amount, 64);
     }
 
     @Override
     public boolean hasItemStack(ItemType type, int amount, short damage) {
-        // TODO Auto-generated method stub
-        return false;
+        return this.hasItemStack(type.getId(), amount, 64, damage);
     }
 
     @Override
     public boolean hasItemStack(int itemId, int amount, short damage) {
-        // TODO Auto-generated method stub
-        return false;
+        return hasItemStack(itemId, amount, 64, damage);
     }
 
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == itemId) {
+                int am = toCheck.getAmount();
+                if (am > minAmount && am < maxAmount) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount, short damage) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == itemId && toCheck.getDamage() == damage) {
+                int am = toCheck.getAmount();
+                if (am > minAmount && am < maxAmount) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -241,86 +252,105 @@ public class CanaryChestMinecart extends CanaryMinecart implements ChestMinecart
     }
 
     @Override
-    public void setSlot(Item item) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void setSlot(int itemId, short damage, int slot) {
-        // TODO Auto-generated method stub
-
+        this.setSlot(itemId, 1, damage, slot);
     }
 
     @Override
     public void setSlot(int itemId, int amount, short damage, int slot) {
-        // TODO Auto-generated method stub
-
+        CanaryItem item = new CanaryItem(itemId, 1, damage);
+        item.setSlot(slot);
+        this.setSlot(item);
     }
 
     @Override
     public void setSlot(ItemType type, int amount, int slot) {
-        // TODO Auto-generated method stub
-
+        this.setSlot(type.getId(), amount, (short) 0, slot);
     }
 
     @Override
     public void setSlot(ItemType type, int amount, short damage, int slot) {
-        // TODO Auto-generated method stub
+        this.setSlot(type.getId(), amount, damage, slot);
+    }
 
+    @Override
+    public void setSlot(Item item) {
+        this.setSlot(item.getSlot(), item);
+    }
+
+    @Override
+    public void setSlot(int index, Item value) {
+        getHandle().a(index, ((CanaryItem) value).getHandle());
     }
 
     @Override
     public Item removeItem(Item item) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.removeItem(item.getId(), (short) item.getDamage());
     }
 
     @Override
     public Item removeItem(int id) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == id) {
+                setSlot(index, null);
+                return toCheck;
+            }
+        }
         return null;
     }
 
     @Override
     public Item removeItem(int id, short damage) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == id && toCheck.getDamage() == damage) {
+                setSlot(index, null);
+                return toCheck;
+            }
+        }
         return null;
     }
 
     @Override
     public Item removeItem(ItemType type) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.removeItem(type.getId());
     }
 
     @Override
     public Item removeItem(ItemType type, short damage) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.removeItem(type.getId(), damage);
+    }
+
+    @Override
+    public void clearContents() {
+        Arrays.fill(getHandle().a, null);
+    }
+
+    @Override
+    public Item[] clearInventory() {
+        ItemStack[] items = Arrays.copyOf(getHandle().a, getSize());
+        clearContents();
+        return CanaryItem.stackArrayToItemArray(items);
+    }
+
+    @Override
+    public Item[] getContents() {
+        return CanaryItem.stackArrayToItemArray(getHandle().a);
     }
 
     @Override
     public void setContents(Item[] items) {
-        // TODO Auto-generated method stub
-
+        System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getHandle().a, 0, getSize());
     }
 
     @Override
     public void setInventoryName(String value) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setSlot(int index, Item value) {
-        // TODO Auto-generated method stub
-
+        getHandle().a(value);
     }
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-
+        getHandle().k_();
     }
 }

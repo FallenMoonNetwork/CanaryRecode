@@ -4,7 +4,6 @@ package net.canarymod.api.world.blocks;
 import java.util.Arrays;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
-import net.minecraft.server.Container;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityBrewingStand;
 
@@ -26,11 +25,17 @@ public class CanaryBrewingStand extends CanaryContainerBlock implements BrewingS
         super(tileentity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clearContents() {
         Arrays.fill(getTileEntity().c, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getTileEntity().c, getTileEntity().c.length);
@@ -38,16 +43,25 @@ public class CanaryBrewingStand extends CanaryContainerBlock implements BrewingS
         return CanaryItem.stackArrayToItemArray(items);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item[] getContents() {
         return CanaryItem.stackArrayToItemArray(getTileEntity().c);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setContents(Item[] items) {
         System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getTileEntity().c, 0, getSize());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setInventoryName(String value) {
         getTileEntity().a(value);
@@ -59,14 +73,5 @@ public class CanaryBrewingStand extends CanaryContainerBlock implements BrewingS
     @Override
     public TileEntityBrewingStand getTileEntity() {
         return (TileEntityBrewingStand) tileentity;
-    }
-
-    /**
-     * @throws UnsupportedOperationException
-     *             this isn't a Minecraft Container instance
-     */
-    @Override
-    public Container getContainer() {
-        throw new UnsupportedOperationException("Not a Container");
     }
 }

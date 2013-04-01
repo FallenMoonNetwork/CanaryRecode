@@ -5,7 +5,6 @@ import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.World;
-import net.minecraft.server.Container;
 import net.minecraft.server.IInventory;
 import net.minecraft.server.InventoryLargeChest;
 import net.minecraft.server.ItemStack;
@@ -175,10 +174,4 @@ public class CanaryHopperBlock extends CanaryContainerBlock implements HopperBlo
     public void setInventoryName(String value) {
         this.getTileEntity().a(value);
     }
-
-    @Override
-    public Container getContainer() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
 }

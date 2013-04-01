@@ -1,7 +1,6 @@
 package net.canarymod.api.world.blocks;
 
 
-import net.minecraft.server.Container;
 import net.minecraft.server.Material;
 import net.minecraft.server.TileEntityNote;
 
@@ -88,14 +87,4 @@ public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
     public TileEntityNote getTileEntity() {
         return (TileEntityNote) tileentity;
     }
-
-    /**
-     * @throws UnsupportedOperationException
-     *             this isn't a Minecraft Container instance
-     */
-    @Override
-    public Container getContainer() {
-        throw new UnsupportedOperationException("Not a Container");
-    }
-
 }

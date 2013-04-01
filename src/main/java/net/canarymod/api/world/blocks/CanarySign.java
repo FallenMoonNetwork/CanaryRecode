@@ -1,7 +1,6 @@
 package net.canarymod.api.world.blocks;
 
 
-import net.minecraft.server.Container;
 import net.minecraft.server.TileEntitySign;
 
 
@@ -75,14 +74,5 @@ public class CanarySign extends CanaryComplexBlock implements Sign {
     @Override
     public TileEntitySign getTileEntity() {
         return (TileEntitySign) tileentity;
-    }
-
-    /**
-     * @throws UnsupportedOperationException
-     *             this isn't a Minecraft Container instance
-     */
-    @Override
-    public Container getContainer() {
-        throw new UnsupportedOperationException("Not a Container");
     }
 }

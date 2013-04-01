@@ -3,8 +3,10 @@ package net.canarymod.api.world.blocks;
 
 import java.util.Arrays;
 import net.canarymod.ToolBox;
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.InventoryLargeChest;
+import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityChest;
 
 
@@ -27,12 +29,18 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest {
         this.largechest = largechest;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clearContents() {
         getHandleA().getCanaryChest().clearContents();
         getHandleB().getCanaryChest().clearContents();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item[] clearInventory() {
         Item[] itemsA = Arrays.copyOf(getHandleA().getCanaryChest().getContents(), getHandleA().getCanaryChest().getSize());
@@ -42,14 +50,31 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest {
         return toRet;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item[] getContents() {
         return ToolBox.arrayMerge(getHandleA().getCanaryChest().getContents(), getHandleB().getCanaryChest().getContents());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setContents(Item[] items) {
-        // TODO
+        int aSize = getHandleA().getCanaryChest().getSize();
+        int bSize = getHandleB().getCanaryChest().getSize();
+        ItemStack[] stacks = CanaryItem.itemArrayToStackArray(items);
+        ItemStack[] stacksA = new ItemStack[aSize];
+        ItemStack[] stacksB = new ItemStack[bSize];
+        for (int index = 0; index < getSize(); index++) {
+            if (index < aSize) {
+                stacksA[index] = stacks[index];
+            } else {
+                stacksB[index - aSize] = stacks[index];
+            }
+        }
     }
 
     /**

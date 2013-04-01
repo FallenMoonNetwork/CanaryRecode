@@ -60,11 +60,17 @@ public class CanaryWorkbench extends CanaryContainerBlock implements Workbench {
         return container.g.getCanaryWorld();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clearContents() {
         Arrays.fill(getInventory().a, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getInventory().a, getSize());
@@ -72,21 +78,34 @@ public class CanaryWorkbench extends CanaryContainerBlock implements Workbench {
         return CanaryItem.stackArrayToItemArray(items);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item[] getContents() {
         return CanaryItem.stackArrayToItemArray(getInventory().a);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setContents(Item[] items) {
         System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getInventory().a, 0, getSize());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setInventoryName(String value) {
         getInventory().setName(value);
     }
 
+    /**
+     * @throws UnsupportedOperationException
+     *             This Block is not of TileEntity
+     */
     @Override
     public TileEntity getTileEntity() {
         throw new UnsupportedOperationException("Not a TileEntity");

@@ -2,7 +2,6 @@ package net.canarymod.api.world.blocks;
 
 
 import net.canarymod.api.world.World;
-import net.minecraft.server.Container;
 import net.minecraft.server.IInventory;
 import net.minecraft.server.TileEntity;
 
@@ -40,9 +39,7 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
      * @return the TileEntity
      */
     public abstract TileEntity getTileEntity();
-
-    public abstract Container getContainer();
-
+    
     /**
      * {@inheritDoc}
      */

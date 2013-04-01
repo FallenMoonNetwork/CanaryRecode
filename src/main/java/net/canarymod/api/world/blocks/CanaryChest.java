@@ -4,7 +4,6 @@ package net.canarymod.api.world.blocks;
 import java.util.Arrays;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
-import net.minecraft.server.Container;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityChest;
 
@@ -73,11 +72,17 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
     // return null;
     // }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clearContents() {
         Arrays.fill(getTileEntity().i, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getTileEntity().i, getSize());
@@ -85,21 +90,29 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
         return CanaryItem.stackArrayToItemArray(items);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item[] getContents() {
         return CanaryItem.stackArrayToItemArray(getTileEntity().i);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setContents(Item[] items) {
         System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getTileEntity().i, 0, getSize());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setInventoryName(String value) {
         getTileEntity().a(value);
     }
-
 
     /**
      * {@inheritDoc}
@@ -107,14 +120,5 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
     @Override
     public TileEntityChest getTileEntity() {
         return (TileEntityChest) tileentity;
-    }
-
-    /**
-     * @throws UnsupportedOperationException
-     *             this isn't a Minecraft Container instance
-     */
-    @Override
-    public Container getContainer() {
-        throw new UnsupportedOperationException("Not a Container");
     }
 }

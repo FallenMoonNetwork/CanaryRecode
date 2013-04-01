@@ -50,24 +50,41 @@ public class CanaryEnchantmentTable extends CanaryContainerBlock implements Ench
         return container.h.getCanaryWorld();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         container.b();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean enchantItem(Player player, int slot) {
         return container.a(((CanaryPlayer) player).getHandle(), slot);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int[] getEnchantLevels() {
         return container.g;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clearContents() {
         Arrays.fill(getInventory().c, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getInventory().c, getSize());
@@ -75,33 +92,36 @@ public class CanaryEnchantmentTable extends CanaryContainerBlock implements Ench
         return CanaryItem.stackArrayToItemArray(items);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item[] getContents() {
         return CanaryItem.stackArrayToItemArray(getInventory().c);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setContents(Item[] items) {
         System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getInventory().c, 0, getSize());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setInventoryName(String value) {
         // getInventory().setName(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TileEntityEnchantmentTable getTileEntity() {
         return (TileEntityEnchantmentTable) getWorld().getComplexBlockAt(getX(), getY(), getZ());
-    }
-
-    /**
-     * @throws UnsupportedOperationException
-     *             this isn't a Minecraft Container instance
-     */
-    @Override
-    public ContainerEnchantment getContainer() {
-        return container;
     }
 
     private InventoryBasic getInventory() {
