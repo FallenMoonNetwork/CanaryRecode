@@ -304,7 +304,9 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
         synchronized (behaviors) {
             for (NPCBehavior behavior : behaviors) {
                 try {
-                    behavior.onUpdate();
+                    if (!getHandle().M) {
+                        behavior.onUpdate();
+                    }
                 } catch (Exception ex) {
                     Canary.logWarning("Exception while calling onUpdate in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
                 }
@@ -316,7 +318,9 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
         synchronized (behaviors) {
             for (NPCBehavior behavior : behaviors) {
                 try {
-                    behavior.onClicked(player);
+                    if (!getHandle().M) {
+                        behavior.onClicked(player);
+                    }
                 } catch (Exception ex) {
                     Canary.logWarning("Exception while calling onClicked in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
                 }
@@ -328,7 +332,23 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
         synchronized (behaviors) {
             for (NPCBehavior behavior : behaviors) {
                 try {
-                    behavior.onAttack(entity);
+                    if (!getHandle().M) {
+                        behavior.onAttack(entity);
+                    }
+                } catch (Exception ex) {
+                    Canary.logWarning("Exception while calling onAttack in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
+                }
+            }
+        }
+    }
+
+    void destoryed() {
+        synchronized (behaviors) {
+            for (NPCBehavior behavior : behaviors) {
+                try {
+                    if (getHandle().M) {
+                        behavior.onDestroy();
+                    }
                 } catch (Exception ex) {
                     Canary.logWarning("Exception while calling onAttack in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
                 }
