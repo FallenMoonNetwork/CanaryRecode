@@ -16,7 +16,7 @@ import net.minecraft.server.WorldServer;
 
 /**
  * This is a container for all of the worlds.
- * 
+ *
  * @author Jos Kuijpers
  * @author Chris Ksoll
  */
@@ -49,7 +49,7 @@ public class CanaryWorldManager implements WorldManager {
     /**
      * Implementation specific, do not call outside of NMS!
      * Adds an already prepared world to the world manager
-     * 
+     *
      * @param world
      */
     public void addWorld(CanaryWorld world) {
@@ -72,22 +72,24 @@ public class CanaryWorldManager implements WorldManager {
             return loadedWorlds.get(name + "_NORMAL");
         }
         else {
+            if(existingWorlds.contains(name)) {
+                return loadWorld(name, WorldType.fromId(0));
+            }
             throw new UnknownWorldException("World " + name + " is unknown and can't be loaded!");
         }
     }
 
     @Override
     public World getWorld(String world, WorldType type, boolean autoload) {
-        // Logman.println("Trying to load: "+world+"_"+type.getName());
         if (worldIsLoaded(world + "_" + type.getName())) {
-            // Logman.println("Is loaded, returning world");
             return loadedWorlds.get(world + "_" + type.getName());
         }
         else {
-            if (worldExists(world + "_" + type.getName())) {
+            if (worldExists(world + "_" + type.getName()) && autoload) {
                 Canary.println("World exists but is not loaded. Loading ...");
                 return loadWorld(world, type);
-            } else {
+            }
+            else {
                 if (autoload) {
                     Canary.println("World does not exist, we can autoload, will load!");
                     createWorld(world, type);
@@ -126,7 +128,8 @@ public class CanaryWorldManager implements WorldManager {
         if (!worldIsLoaded(name + "_" + type.getName())) {
             ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, new Random().nextLong(), type);
             return loadedWorlds.get(name + "_" + type.getName());
-        } else {
+        }
+        else {
             return loadedWorlds.get(name + "_" + type.getName());
         }
     }

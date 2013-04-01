@@ -56,12 +56,9 @@ public abstract class ServerConfigurationManager {
         NBTTagCompound nbttagcompound = this.a(entityplayermp);
         CanaryWorld w;
         if(nbttagcompound != null) {
-            Canary.println("loading world from NBT data");
-            Canary.println(nbttagcompound.i("LevelName") + ", " + nbttagcompound.e("Dimension"));
             w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(nbttagcompound.i("LevelName"), net.canarymod.api.world.WorldType.fromId(nbttagcompound.e("Dimension")), true);
         }
         else {
-            Canary.println("loading default world");
             w = (CanaryWorld) Canary.getServer().getDefaultWorld();
         }
         entityplayermp.a(w.getHandle());
@@ -157,12 +154,12 @@ public abstract class ServerConfigurationManager {
     }
 
     public void a(EntityPlayerMP entityplayermp, WorldServer worldserver) {
+        Canary.println("Herpaderp called");
+        //XXX swap worldserver with worldserver1 if things go derp. but this should be correct atm
         WorldServer worldserver1 = entityplayermp.o();
-
-        if (worldserver != null) {
+        if(worldserver != null) {
             worldserver.r().c(entityplayermp);
         }
-
         worldserver1.r().a(entityplayermp);
         worldserver1.b.c((int) entityplayermp.u >> 4, (int) entityplayermp.w >> 4);
     }
@@ -402,18 +399,20 @@ public abstract class ServerConfigurationManager {
         return entityplayermp1;
     }
 
+    @Deprecated
+    public void a(EntityPlayerMP entityplayermp, int i0) {
+        throw new UnsupportedOperationException("a(EntityPlayerMP, int is deprecated. please use a(EntityPlayerMP, String, int))");
+    }
     //XXX
     //XXX
     //IMPORTANT, HERE IS DIMENSION SWITCHING GOING ON!
-    public void a(EntityPlayerMP entityplayermp, int i0) {
-        Canary.println("Switching player dimension to " + i0);
+    public void a(EntityPlayerMP entityplayermp, String worldName, int i0) {
         int i1 = entityplayermp.ar;
         WorldServer worldserver = (WorldServer) entityplayermp.getCanaryWorld().getHandle();
 
         entityplayermp.ar = i0;
-        String name = worldserver.getCanaryWorld().getName();
         net.canarymod.api.world.WorldType type = net.canarymod.api.world.WorldType.fromId(i0);
-        WorldServer worldserver1 = (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(name, type, true)).getHandle();
+        WorldServer worldserver1 = (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(worldName, type, true)).getHandle();
 
         entityplayermp.a.b(new Packet9Respawn(entityplayermp.ar, (byte) entityplayermp.q.r, worldserver1.L().u(), worldserver1.P(), entityplayermp.c.b()));
         worldserver.f(entityplayermp);
@@ -422,10 +421,10 @@ public abstract class ServerConfigurationManager {
         this.a(entityplayermp, worldserver);
 
         entityplayermp.a.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B, entityplayermp.getCanaryWorld().getType().getId(), entityplayermp.getCanaryWorld().getName());
-        //        entityplayermp.a.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B);
         entityplayermp.c.a(worldserver1);
         this.b(entityplayermp, worldserver1);
         this.f(entityplayermp);
+        worldserver1.b.c((int) entityplayermp.u >> 4, (int) entityplayermp.w >> 4);
         Iterator iterator = entityplayermp.bC().iterator();
 
         while (iterator.hasNext()) {

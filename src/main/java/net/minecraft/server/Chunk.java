@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryChunk;
 
@@ -87,6 +88,7 @@ public class Chunk {
                 }
             }
         }
+        canaryChunk = new CanaryChunk(this);
     }
 
     public boolean a(int i0, int i1) {

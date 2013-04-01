@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
@@ -127,7 +128,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 worldsettings.a("");
             }
             //
-        } else {
+        }
+        else {
             worldsettings = new WorldSettings(worldinfo);
         }
 
@@ -240,6 +242,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             this.al().a("Saving worlds");
             this.a(false);
 
+            //CanaryMod Multiworld
             for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
                 WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
 
@@ -249,6 +252,9 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             if (this.m != null && this.m.d()) {
                 this.m.e();
             }
+            //CanaryMod disable plugins:
+            Canary.logInfo("Disabling Plugins ...");
+            Canary.loader().disableAllPlugins();
         }
     }
 
@@ -1000,7 +1006,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     /**
      * Returns the canary world manager for this server instance
-     * 
+     *
      * @return
      */
     public CanaryWorldManager getWorldManager() {
@@ -1015,7 +1021,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     // CanaryMod
     /**
      * Get the CanaryMod server handler
-     * 
+     *
      * @return
      */
     public CanaryServer getServer() {
@@ -1051,6 +1057,4 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     public void loadWorld(String name, long seed, net.canarymod.api.world.WorldType type, net.canarymod.api.world.World.GeneratorType typeGen) {
         this.initWorld(name, seed, WorldType.a(typeGen.toString()), type, null);
     }
-
-    //
 }

@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -345,11 +346,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             }
 
             // CanaryMod onPortalUse
-            Location goingTo = simulatePortalUse(i, MinecraftServer.D().getWorld(getCanaryWorld().getName(), i));
+            Location goingTo = simulatePortalUse(i0, MinecraftServer.D().getWorld(getCanaryWorld().getName(), i0));
             PortalUseHook hook = new PortalUseHook(getPlayer(), goingTo);
 
             if (!hook.isCanceled()) {
-                this.b.ad().a(this, i);
+                this.b.ad().a(this, getCanaryWorld().getName(), i0);
                 this.cp = -1;
                 this.cm = -1;
             } //

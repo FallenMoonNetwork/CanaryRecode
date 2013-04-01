@@ -32,11 +32,13 @@ import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
 import net.canarymod.warp.Warp;
+import net.minecraft.server.AchievementList;
 import net.minecraft.server.ChunkCoordinates;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.EnumGameType;
 import net.minecraft.server.ItemStack;
+import net.minecraft.server.StatBase;
 import net.minecraft.server.WorldSettings;
 
 
@@ -485,7 +487,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void teleportTo(Location location) {
-        if (!(getWorld().getType().equals(location.getWorld().getType()))) {
+        if(getWorld() != location.getWorld()) {
             Canary.println("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
             switchWorlds(location.getWorld());
         }
@@ -584,57 +586,15 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     public void switchWorlds(World dim) {
-        Canary.println(getName() + " is switching dimension to " + dim.getType().getName());
-        //        MinecraftServer mcServer = ((CanaryServer) Canary.getServer()).getHandle();
         EntityPlayerMP ent = (EntityPlayerMP) entity;
-
-        // Do not check for worlds. let plugins handle restrictions!
-        // // Nether is not allowed, so shush
-        // if (dim.getType().equals(WorldType.fromName("NETHER")) && !mcServer.d.a("allow-nether", true)) {
-        // return;
-        // }
-        // // The End is not allowed, so shush
-        // if (dim.getType().equals(WorldType.fromName("END")) && !mcServer.d.a("allow-end", true)) {
-        // return;
-        // }
-
         // Dismount first or get buggy
         if (ent.o != null) {
             ent.h(ent.o);
         }
-        Canary.getServer().getConfigurationManager().switchDimension(this, dim, false);
         // Collect world switch achievement ?
-        //        ent.a((StatBase) AchievementList.B);
-        //        // switch world if needed
-        //        if (!(dim.getName().equals(ent.getCanaryWorld().getName()))) {
-        //            World oldWorld = ent.getCanaryWorld();
-        //
-        //            // remove player from entity tracker
-        //            oldWorld.getEntityTracker().untrackPlayerSymmetrics(ent.getPlayer());
-        //            oldWorld.getEntityTracker().untrackEntity(ent.getPlayer());
-        //            // remove player from old worlds entity list
-        //            oldWorld.removePlayerFromWorld(ent.getPlayer());
-        //            // Remove player from player manager for the old world
-        //            oldWorld.getPlayerManager().removePlayer(ent.getPlayer());
-        //
-        //            // Change players world reference
-        //            ent.q = ((CanaryWorld) dim).getHandle();
-        //            // Add player back to the new world
-        //            // dim.addPlayerToWorld(this);
-        //            // dim.getPlayerManager().addPlayer(this);
-        //        }
-        //        // Get chunk coordinates...
-        //        // OChunkCoordinates var2 = mcServer.getWorld(ent.bi.getCanaryDimension().getName(), dim.getType().getId()).d();
-        //        Location l = ent.getCanaryWorld().getSpawnLocation();
-        //        ChunkCoordinates var2 = new ChunkCoordinates((int)l.getX(), (int)l.getY(), (int)l.getZ());
-        //
-        //        if (var2 != null) {
-        //            ent.a.a((double) var2.a, (double) var2.b, (double) var2.c, 0.0F, 0.0F, dim.getType().getId(), ent.getCanaryWorld().getName());
-        //        }
-        //        Canary.logInfo("Prepared to switch worlds.");
-        //        mcServer.getConfigurationManager().switchDimension(ent.getPlayer(), dim, false);
-        //
-        //        refreshCreativeMode();
+        ent.a((StatBase) AchievementList.B);
+        Canary.getServer().getConfigurationManager().switchDimension(ent.getPlayer(), dim, false);
+        refreshCreativeMode();
     }
 
     @Override
