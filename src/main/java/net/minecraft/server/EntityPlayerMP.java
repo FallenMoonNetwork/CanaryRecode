@@ -13,6 +13,11 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
+import net.canarymod.api.entity.vehicle.CanaryChestMinecart;
+import net.canarymod.api.inventory.CanaryEnderChestInventory;
+import net.canarymod.api.inventory.Inventory;
+import net.canarymod.api.world.blocks.CanaryDoubleChest;
+import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
@@ -457,6 +462,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         CanaryWorkbench bench = new CanaryWorkbench(container);
         InventoryHook hook = new InventoryHook(getPlayer(), bench, false);
 
+        Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return;
         }
@@ -471,8 +477,15 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     @Override
     public void a(int i0, int i1, int i2, String s0) {
+        // CanaryMod: InventoryHook
         ContainerEnchantment container = new ContainerEnchantment(this.bK, this.q, i0, i1, i2);
-        // CanaryEnchantmentTable table = new CanaryEnchantmentTable(container);
+        CanaryEnchantmentTable table = new CanaryEnchantmentTable(container);
+        InventoryHook hook = new InventoryHook(getPlayer(), table, false);
+        Canary.hooks().callHook(hook);
+        if (hook.isCanceled()) {
+            return;
+        }
+        //
 
         this.cr();
         this.a.b(new Packet100OpenWindow(this.cu, 4, s0 == null ? "" : s0, 9, s0 != null));
@@ -483,6 +496,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     @Override
     public void c(int i0, int i1, int i2) {
+        // TODO: Anvil wrapper
         this.cr();
         this.a.b(new Packet100OpenWindow(this.cu, 8, "Repairing", 9, true));
         this.bM = new ContainerRepair(this.bK, this.q, i0, i1, i2, this);
@@ -495,6 +509,26 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (this.bM != this.bL) {
             this.h();
         }
+        // CanaryMod: InventoryHook
+        Inventory inventory = null;
+        if (iinventory instanceof TileEntityChest) {
+            inventory = ((TileEntityChest) iinventory).getCanaryChest();
+        } else if (iinventory instanceof InventoryLargeChest) {
+            inventory = new CanaryDoubleChest((InventoryLargeChest) iinventory);
+        } else if (iinventory instanceof InventoryEnderChest) {
+            inventory = new CanaryEnderChestInventory((InventoryEnderChest) iinventory, getPlayer());
+        } else if (iinventory instanceof EntityMinecartChest) {
+            inventory = (CanaryChestMinecart) ((EntityMinecartChest) iinventory).getCanaryEntity();
+        }
+
+        if (inventory != null) {
+            InventoryHook hook = new InventoryHook(getPlayer(), inventory, false);
+            Canary.hooks().callHook(hook);
+            if (hook.isCanceled()) {
+                return;
+            }
+        }
+        //
 
         this.cr();
         this.a.b(new Packet100OpenWindow(this.cu, 0, iinventory.b(), iinventory.j_(), iinventory.c()));
@@ -523,6 +557,14 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     @Override
     public void a(TileEntityFurnace tileentityfurnace) {
+        // CanaryMod: InventoryHook
+        InventoryHook hook = new InventoryHook(getPlayer(), tileentityfurnace.getCanaryFurnace(), false);
+        Canary.hooks().callHook(hook);
+        if (hook.isCanceled()) {
+            return;
+        }
+        //
+
         this.cr();
         this.a.b(new Packet100OpenWindow(this.cu, 2, tileentityfurnace.b(), tileentityfurnace.j_(), tileentityfurnace.c()));
         this.bM = new ContainerFurnace(this.bK, tileentityfurnace);
@@ -532,6 +574,14 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     @Override
     public void a(TileEntityDispenser tileentitydispenser) {
+        // CanaryMod: InventoryHook
+        InventoryHook hook = new InventoryHook(getPlayer(), tileentitydispenser.getCanaryDispenser(), false);
+        Canary.hooks().callHook(hook);
+        if (hook.isCanceled()) {
+            return;
+        }
+        //
+
         this.cr();
         this.a.b(new Packet100OpenWindow(this.cu, tileentitydispenser instanceof TileEntityDropper ? 10 : 3, tileentitydispenser.b(), tileentitydispenser.j_(), tileentitydispenser.c()));
         this.bM = new ContainerDispenser(this.bK, tileentitydispenser);
@@ -541,6 +591,14 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     @Override
     public void a(TileEntityBrewingStand tileentitybrewingstand) {
+        // CanaryMod: InventoryHook
+        InventoryHook hook = new InventoryHook(getPlayer(), tileentitybrewingstand.getCanaryBrewingStand(), false);
+        Canary.hooks().callHook(hook);
+        if (hook.isCanceled()) {
+            return;
+        }
+        //
+
         this.cr();
         this.a.b(new Packet100OpenWindow(this.cu, 5, tileentitybrewingstand.b(), tileentitybrewingstand.j_(), tileentitybrewingstand.c()));
         this.bM = new ContainerBrewingStand(this.bK, tileentitybrewingstand);
@@ -550,6 +608,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     @Override
     public void a(TileEntityBeacon tileentitybeacon) {
+        // TODO: Beacon
         this.cr();
         this.a.b(new Packet100OpenWindow(this.cu, 7, tileentitybeacon.b(), tileentitybeacon.j_(), tileentitybeacon.c()));
         this.bM = new ContainerBeacon(this.bK, tileentitybeacon);

@@ -99,4 +99,9 @@ public class InventoryBasic implements IInventory {
     public boolean b(int i0, ItemStack itemstack) {
         return true;
     }
+
+    public void setName(String value) {
+        this.a = value;
+        this.e = false; // Crap, i forgot
+    }
 }

@@ -11,9 +11,20 @@ import net.minecraft.server.InventoryBasic;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityEnchantmentTable;
 
+/**
+ * EnchantmentTable wrapper implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
 public class CanaryEnchantmentTable extends CanaryContainerBlock implements EnchantmentTable {
     private ContainerEnchantment container;
 
+    /**
+     * Constructs a new CanaryEnchantmentTable
+     * 
+     * @param container
+     *            the ContainerEnchantment to wrap
+     */
     public CanaryEnchantmentTable(ContainerEnchantment container) {
         super(container.a);
     }
@@ -113,7 +124,7 @@ public class CanaryEnchantmentTable extends CanaryContainerBlock implements Ench
      */
     @Override
     public void setInventoryName(String value) {
-        // getInventory().setName(value);
+        getInventory().setName(value);
     }
 
     /**

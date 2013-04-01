@@ -339,7 +339,7 @@ public class InventoryPlayer implements IInventory {
     }
 
     public boolean c() {
-        return false;
+        return name == "container.inventory";
     }
 
     public int d() {
@@ -468,5 +468,10 @@ public class InventoryPlayer implements IInventory {
         }
 
         this.c = inventoryplayer.c;
+    }
+
+    // CanaryMod
+    public void setName(String value) {
+        this.name = value;
     }
 }

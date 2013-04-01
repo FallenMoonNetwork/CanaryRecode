@@ -1,5 +1,7 @@
 package net.canarymod.api.inventory;
 
+import net.canarymod.api.nbt.CanaryCompoundTag;
+import net.canarymod.config.Configuration;
 import net.minecraft.server.IInventory;
 
 
@@ -9,305 +11,459 @@ import net.minecraft.server.IInventory;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryContainerEntity implements Inventory {
+public abstract class CanaryContainerEntity implements Inventory {
     protected IInventory inventory;
 
     public CanaryContainerEntity(IInventory inventory) {
         this.inventory = inventory;
     }
 
-    @Override
-    public void addItem(Item item) {
-        // TODO Auto-generated method stub
-
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addItem(ItemType type) {
-        // TODO Auto-generated method stub
-
+        this.addItem(type.getId(), 1, (short) 0);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addItem(int itemId) {
-        // TODO Auto-generated method stub
-
+        this.addItem(itemId, 1, (short) 0);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addItem(int itemId, short damage) {
-        // TODO Auto-generated method stub
-
+        this.addItem(itemId, 1, damage);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addItem(int itemId, int amount) {
-        // TODO Auto-generated method stub
-
+        this.addItem(itemId, amount, (short) 0);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addItem(ItemType type, int amount) {
-        // TODO Auto-generated method stub
-
+        this.addItem(type.getId(), amount, (short) 0);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addItem(int itemId, int amount, short damage) {
-        // TODO Auto-generated method stub
-
+        this.addItem(new CanaryItem(itemId, amount, damage));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addItem(ItemType type, int amount, short damage) {
-        // TODO Auto-generated method stub
-
+        this.addItem(type.getId(), amount, damage);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void clearContents() {
-        // TODO Auto-generated method stub
-
+    public void addItem(Item item) {
+        this.insertItem(item);
     }
 
-    @Override
-    public Item[] clearInventory() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item decreaseItemStackSize(int itemId, int amount) {
         // TODO Auto-generated method stub
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item decreaseItemStackSize(int itemId, int amount, short damage) {
         // TODO Auto-generated method stub
         return null;
     }
 
-    @Override
-    public Item[] getContents() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getEmptySlot() {
-        // TODO Auto-generated method stub
-        return 0;
+        for (int index = 0; index < getSize(); index++) {
+            if (getSlot(index) == null) {
+                return index;
+            }
+        }
+        return -1;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getInventoryName() {
-        // TODO Auto-generated method stub
-        return null;
+        return inventory.b();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getInventoryStackLimit() {
-        // TODO Auto-generated method stub
-        return 0;
+        return inventory.d();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item getItem(ItemType type) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.getItem(type.getId());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item getItem(int id) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == id) {
+                toCheck.setSlot(index);
+                return toCheck;
+            }
+        }
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item getItem(ItemType type, int amount) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.getItem(type.getId(), amount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item getItem(int id, int amount) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount) {
+                toCheck.setSlot(index);
+                return toCheck;
+            }
+        }
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item getItem(int id, int amount, short damage) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount && toCheck.getDamage() == damage) {
+                toCheck.setSlot(index);
+                return toCheck;
+            }
+        }
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item getItem(ItemType type, int amount, short damage) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.getItem(type.getId(), amount, damage);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getSize() {
-        // TODO Auto-generated method stub
-        return 0;
+        return inventory.j_();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Item getSlot(int slot) {
-        // TODO Auto-generated method stub
-        return null;
+    public Item getSlot(int index) {
+        return inventory.a(index).getCanaryItem();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItem(int itemId) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            if (getSlot(index) != null && getSlot(index).getId() == itemId) {
+                return true;
+            }
+        }
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItem(ItemType type) {
-        // TODO Auto-generated method stub
-        return false;
+        return this.hasItem(type.getId());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItem(ItemType type, short damage) {
-        // TODO Auto-generated method stub
-        return false;
+        return this.hasItem(type.getId(), damage);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItem(int itemId, short damage) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item item = getSlot(index);
+            if (item != null && item.getId() == itemId && item.getDamage() == damage) {
+                return true;
+            }
+        }
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItemStack(ItemType type, int amount) {
-        // TODO Auto-generated method stub
-        return false;
+        return this.hasItemStack(type.getId(), amount, 64);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItemStack(int itemId, int amount) {
-        // TODO Auto-generated method stub
-        return false;
+        return this.hasItemStack(itemId, amount, 64);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItemStack(ItemType type, int amount, short damage) {
-        // TODO Auto-generated method stub
-        return false;
+        return this.hasItemStack(type.getId(), amount, 64, damage);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItemStack(int itemId, int amount, short damage) {
-        // TODO Auto-generated method stub
-        return false;
+        return hasItemStack(itemId, amount, 64, damage);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == itemId) {
+                int am = toCheck.getAmount();
+                if (am > minAmount && am < maxAmount) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount, short damage) {
-        // TODO Auto-generated method stub
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == itemId && toCheck.getDamage() == damage) {
+                int am = toCheck.getAmount();
+                if (am > minAmount && am < maxAmount) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean insertItem(Item item) {
-        // TODO Auto-generated method stub
-        return false;
+        int amount = item.getAmount();
+        Item itemExisting;
+        int maxAmount = item.getMaxAmount();
+
+        while (amount > 0) {
+            // Get an existing item with at least 1 spot free
+            itemExisting = this.getItem(item.getId(), maxAmount - 1, (short) item.getDamage());
+
+            // Add the items to the existing stack of items
+            if (itemExisting != null && (!item.isEnchanted() || Configuration.getServerConfig().allowEnchantmentStacking())) {
+                // Add as much items as possible to the stack
+                int k = Math.min(maxAmount - itemExisting.getAmount(), item.getAmount());
+                this.setSlot(item.getId(), itemExisting.getAmount() + k, (short) item.getDamage(), itemExisting.getSlot());
+                amount -= k;
+                continue;
+            }
+            // We still have slots, but no stack, create a new stack.
+            if (this.getEmptySlot() != -1) {
+                CanaryCompoundTag nbt = new CanaryCompoundTag("");
+                ((CanaryItem) item).getHandle().b(nbt.getHandle());
+                Item tempItem = new CanaryItem(item.getId(), amount, -1, item.getDamage());
+                ((CanaryItem) tempItem).getHandle().c(nbt.getHandle());
+                this.addItem(tempItem);
+                amount = 0;
+                continue;
+            }
+
+            // No free slots, no incomplete stacks: full
+            // make sure the stored items are removed
+            item.setAmount(amount);
+            return false;
+        }
+        return true;
     }
 
-    @Override
-    public void setSlot(Item item) {
-        // TODO Auto-generated method stub
-
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSlot(int itemId, short damage, int slot) {
-        // TODO Auto-generated method stub
-
+        this.setSlot(itemId, 1, damage, slot);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSlot(int itemId, int amount, short damage, int slot) {
-        // TODO Auto-generated method stub
-
+        CanaryItem item = new CanaryItem(itemId, 1, damage);
+        item.setSlot(slot);
+        this.setSlot(item);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSlot(ItemType type, int amount, int slot) {
-        // TODO Auto-generated method stub
-
+        this.setSlot(type.getId(), amount, (short) 0, slot);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSlot(ItemType type, int amount, short damage, int slot) {
-        // TODO Auto-generated method stub
-
+        this.setSlot(type.getId(), amount, damage, slot);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Item removeItem(Item item) {
-        // TODO Auto-generated method stub
-        return null;
+    public void setSlot(Item item) {
+        this.setSlot(item.getSlot(), item);
     }
 
-    @Override
-    public Item removeItem(int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Item removeItem(int id, short damage) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Item removeItem(ItemType type) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Item removeItem(ItemType type, short damage) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setContents(Item[] items) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setInventoryName(String value) {
-        // TODO Auto-generated method stub
-
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSlot(int index, Item value) {
-        // TODO Auto-generated method stub
-
+        inventory.a(index, ((CanaryItem) value).getHandle());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void update() {
-        // TODO Auto-generated method stub
-
+    public Item removeItem(Item item) {
+        return this.removeItem(item.getId(), (short) item.getDamage());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Item removeItem(int id) {
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == id) {
+                setSlot(index, null);
+                return toCheck;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Item removeItem(int id, short damage) {
+        for (int index = 0; index < getSize(); index++) {
+            Item toCheck = getSlot(index);
+            if (toCheck != null && toCheck.getId() == id && toCheck.getDamage() == damage) {
+                setSlot(index, null);
+                return toCheck;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Item removeItem(ItemType type) {
+        return this.removeItem(type.getId());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Item removeItem(ItemType type, short damage) {
+        return this.removeItem(type.getId(), damage);
+    }
 }

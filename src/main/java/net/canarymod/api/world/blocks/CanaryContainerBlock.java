@@ -5,6 +5,7 @@ import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
 import net.canarymod.api.nbt.CanaryCompoundTag;
+import net.canarymod.config.Configuration;
 import net.minecraft.server.IInventory;
 
 /**
@@ -337,7 +338,7 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
             itemExisting = this.getItem(item.getId(), maxAmount - 1, (short) item.getDamage());
 
             // Add the items to the existing stack of items
-            if (itemExisting != null /* TODO INSERT ENCHANT CHECKS */) {
+            if (itemExisting != null && (!item.isEnchanted() || Configuration.getServerConfig().allowEnchantmentStacking())) {
                 // Add as much items as possible to the stack
                 int k = Math.min(maxAmount - itemExisting.getAmount(), item.getAmount());
                 this.setSlot(item.getId(), itemExisting.getAmount() + k, (short) item.getDamage(), itemExisting.getSlot());
@@ -360,7 +361,7 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
             item.setAmount(amount);
             return false;
         }
-        return false;
+        return true;
     }
 
     /**
