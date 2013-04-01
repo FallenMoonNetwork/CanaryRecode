@@ -196,7 +196,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public NonPlayableCharacter despawn() {
-        // TODO: Remove entity from trackers but do not destroy
+        getWorld().getEntityTracker().untrackEntity(this);
         return this;
     }
 
@@ -205,7 +205,8 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     public boolean spawn() {
         if (super.spawn()) {
-            // TODO: Special spawning stuffs
+            // TODO: Special spawning stuffs ?
+            return true;
         }
         return false;
     }
@@ -274,9 +275,6 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof CanaryNonPlayableCharacter)) {
-            return false;
-        }
         return obj == this;
     }
 

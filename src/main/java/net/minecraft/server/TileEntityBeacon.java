@@ -13,6 +13,8 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
     private ItemStack h;
     private String i;
 
+    // private CanaryBeacon beacon; //TODO
+
     public TileEntityBeacon() {}
 
     public void h() {
@@ -232,103 +234,4 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
     public boolean b(int i0, ItemStack itemstack) {
         return itemstack.c == Item.bI.cp || itemstack.c == Item.o.cp || itemstack.c == Item.q.cp || itemstack.c == Item.p.cp;
     }
-
-    // CanaryMod: Container<ItemStack>
-    // Going to have to do something different here. Not sure what yet though.
-    @Override
-    public ItemStack[] getContents() {
-        return null;
-    }
-
-    @Override
-    public void setContents(ItemStack[] items) {}
-
-    @Override
-    public ItemStack getSlot(int index) {
-        return null;
-    }
-
-    @Override
-    public void addItem(int itemId, int amount) {}
-
-    @Override
-    public void addItem(net.canarymod.api.inventory.Item item) {}
-
-    @Override
-    public int getEmptySlot() {
-        return 0;
-    }
-
-    @Override
-    public void setSlot(int index, ItemStack value) {}
-
-    @Override
-    public int getInventorySize() {
-        return 0;
-    }
-
-    @Override
-    public String getInventoryName() {
-        return null;
-    }
-
-    @Override
-    public void setInventoryName(String value) {}
-
-    @Override
-    public void clearContents() {}
-
-    @Override
-    public net.canarymod.api.inventory.Item getItem(int id, int amount) {
-        return null;
-    }
-
-    @Override
-    public net.canarymod.api.inventory.Item getItem(int id) {
-        return null;
-    }
-
-    @Override
-    public net.canarymod.api.inventory.Item removeItem(net.canarymod.api.inventory.Item item) {
-        return null;
-    }
-
-    @Override
-    public net.canarymod.api.inventory.Item removeItem(int id) {
-        return null;
-    }
-
-    @Override
-    public ItemStack decreaseItemStackSize(int itemId, int amount) {
-        return null;
-    }
-
-    @Override
-    public int getInventoryStackLimit() {
-        return 0;
-    }
-
-    @Override
-    public boolean hasItemStack(ItemStack oItemStack) {
-        return false;
-    }
-
-    @Override
-    public boolean hasItemStack(int itemId, int amount) {
-        return false;
-    }
-
-    @Override
-    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        return false;
-    }
-
-    @Override
-    public boolean hasItem(int itemId) {
-        return false;
-    }
-
-    @Override
-    public void update() {}
-
 }

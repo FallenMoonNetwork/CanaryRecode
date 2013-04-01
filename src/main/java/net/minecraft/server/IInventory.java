@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-public interface IInventory extends net.canarymod.api.inventory.Container<ItemStack> { // CanaryMod: adds extends
+public interface IInventory {
 
     int j_();
 

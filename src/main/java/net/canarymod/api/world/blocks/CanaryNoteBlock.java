@@ -1,6 +1,7 @@
 package net.canarymod.api.world.blocks;
 
 
+import net.minecraft.server.Container;
 import net.minecraft.server.Material;
 import net.minecraft.server.TileEntityNote;
 
@@ -54,7 +55,7 @@ public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
      */
     @Override
     public byte getNote() {
-        return getHandle().a;
+        return getTileEntity().a;
     }
 
     /**
@@ -62,7 +63,7 @@ public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
      */
     @Override
     public void play() {
-        getHandle().a(tileentity.az(), getX(), getY(), getZ());
+        getTileEntity().a(tileentity.az(), getX(), getY(), getZ());
     }
 
     /**
@@ -77,15 +78,24 @@ public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
             note = 24;
         }
 
-        getHandle().a = note;
+        getTileEntity().a = note;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public TileEntityNote getHandle() {
+    public TileEntityNote getTileEntity() {
         return (TileEntityNote) tileentity;
+    }
+
+    /**
+     * @throws UnsupportedOperationException
+     *             this isn't a Minecraft Container instance
+     */
+    @Override
+    public Container getContainer() {
+        throw new UnsupportedOperationException("Not a Container");
     }
 
 }

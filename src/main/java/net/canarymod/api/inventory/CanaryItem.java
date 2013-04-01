@@ -27,20 +27,25 @@ public class CanaryItem implements Item {
      * 
      * @param oItemStack
      */
-    public CanaryItem(ItemStack oItemStack) {
-        type = ItemType.fromId(oItemStack.c);
-        item = oItemStack;
+    public CanaryItem(ItemStack itemStack) {
+        this.type = ItemType.fromId(itemStack.c);
+        this.item = itemStack;
     }
 
     public CanaryItem(int id, int amount) {
         this.type = ItemType.fromId(id);
-        item = new ItemStack(id, amount, 0);
+        this.item = new ItemStack(id, amount, 0);
     }
 
-    public CanaryItem(int itemId, int amount, int targetSlot) {
-        item = new ItemStack(itemId, amount, 0);
-        slot = targetSlot;
-        type = ItemType.fromId(itemId);
+    public CanaryItem(int itemId, int amount, int damage) {
+        this.item = new ItemStack(itemId, amount, damage);
+        this.type = ItemType.fromId(itemId);
+    }
+
+    public CanaryItem(int itemId, int amount, int damage, int slot) {
+        this.item = new ItemStack(itemId, amount, damage);
+        this.slot = slot;
+        this.type = ItemType.fromId(itemId);
     }
 
     /**
@@ -383,6 +388,28 @@ public class CanaryItem implements Item {
      */
     public ItemStack getHandle() {
         return item;
+    }
+
+    public static Item[] stackArrayToItemArray(ItemStack[] stackarray) {
+        CanaryItem[] items = new CanaryItem[stackarray.length];
+
+        for (int index = 0; index < stackarray.length; index++) {
+            if (stackarray != null) {
+                items[index] = stackarray[index].getCanaryItem();
+            }
+        }
+        return items;
+    }
+
+    public static ItemStack[] itemArrayToStackArray(Item[] itemarray) {
+        ItemStack[] stacks = new ItemStack[itemarray.length];
+
+        for (int index = 0; index < itemarray.length; index++) {
+            if (itemarray[index] != null) {
+                stacks[index] = ((CanaryItem) itemarray[index]).getHandle();
+            }
+        }
+        return stacks;
     }
 
     /**

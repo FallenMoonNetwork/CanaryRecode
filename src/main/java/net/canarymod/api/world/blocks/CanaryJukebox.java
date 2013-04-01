@@ -3,6 +3,7 @@ package net.canarymod.api.world.blocks;
 
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
+import net.minecraft.server.Container;
 import net.minecraft.server.TileEntityRecordPlayer;
 
 
@@ -28,7 +29,7 @@ public class CanaryJukebox extends CanaryComplexBlock implements Jukebox {
      */
     @Override
     public Item getDisc() {
-        return getHandle().a().getCanaryItem();
+        return getTileEntity().a().getCanaryItem();
     }
 
     /**
@@ -39,15 +40,23 @@ public class CanaryJukebox extends CanaryComplexBlock implements Jukebox {
         if (disc.getId() < 2256 || disc.getId() > 2267) {
             return;
         }
-        getHandle().a(((CanaryItem) disc).getHandle());
+        getTileEntity().a(((CanaryItem) disc).getHandle());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public TileEntityRecordPlayer getHandle() {
+    public TileEntityRecordPlayer getTileEntity() {
         return (TileEntityRecordPlayer) tileentity;
     }
 
+    /**
+     * @throws UnsupportedOperationException
+     *             this isn't a Minecraft Container instance
+     */
+    @Override
+    public Container getContainer() {
+        throw new UnsupportedOperationException("Not a Container");
+    }
 }

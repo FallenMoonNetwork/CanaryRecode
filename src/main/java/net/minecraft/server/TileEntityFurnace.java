@@ -1,24 +1,21 @@
 package net.minecraft.server;
 
-import java.util.Arrays;
-import net.canarymod.api.inventory.CanaryInventory;
-import net.canarymod.api.inventory.CanaryItem;
-import net.canarymod.api.inventory.ItemType;
+import net.canarymod.api.world.blocks.CanaryFurnace;
 
 public class TileEntityFurnace extends TileEntity implements ISidedInventory {
 
     private static final int[] d = new int[] { 0};
     private static final int[] e = new int[] { 2, 1};
     private static final int[] f = new int[] { 1};
-    private ItemStack[] g = new ItemStack[3];
+    public ItemStack[] g = new ItemStack[3]; // CanaryMod: private => public
     public int a = 0;
     public int b = 0;
     public int c = 0;
     private String h;
-    private CanaryInventory inventory; // CanaryMod inventory instance
+    private CanaryFurnace furnace; // CanaryMod inventory instance
 
     public TileEntityFurnace() {
-        this.inventory = new CanaryInventory(this); // CanaryMod: create once, use forever
+        this.furnace = new CanaryFurnace(this); // CanaryMod: create once, use forever
     }
 
     public int j_() {
@@ -257,194 +254,7 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
         return i1 != 0 || i0 != 1 || itemstack.c == Item.ax.cp;
     }
 
-    // CanaryMod
-    public CanaryInventory getInventory() {
-        return inventory;
+    public CanaryFurnace getCanaryFurnace() {
+        return furnace;
     }
-
-    // CanaryMod: Container<ItemStack>
-    @Override
-    public ItemStack[] getContents() {
-        return g;
-    }
-
-    @Override
-    public void setContents(ItemStack[] items) {
-        System.arraycopy(items, 0, getContents(), 0, items.length < getInventorySize() ? items.length : getInventorySize());
-    }
-
-    @Override
-    public int getInventorySize() {
-        return j_();
-    }
-
-    @Override
-    public ItemStack getSlot(int index) {
-        if (!(index < 0 || index > getInventorySize())) {
-            return g[index];
-        }
-        return null;
-    }
-
-    @Override
-    public void addItem(int itemId, int amount) {
-        this.addItem(new CanaryItem(itemId, amount));
-    }
-
-    @Override
-    public void addItem(net.canarymod.api.inventory.Item item) {
-        if (item == null) {
-            return;
-        }
-
-        int slot = item.getSlot();
-        int size = getInventorySize();
-
-        if (slot < size && slot >= 0) {
-            if (item.getAmount() <= 0) {
-                removeItem(slot);
-            } else if (ItemType.fromId(item.getId()) != null) {
-                setSlot(slot, ((CanaryItem) item).getHandle());
-            }
-        } else if (slot == -1) {
-            int newSlot = getEmptySlot();
-
-            if (newSlot != -1) {
-                setSlot(newSlot, ((CanaryItem) item).getHandle());
-                item.setSlot(newSlot);
-            }
-        }
-    }
-
-    @Override
-    public int getEmptySlot() {
-        int size = getInventorySize();
-
-        for (int index = 0; size > index; index++) {
-            if (getSlot(index) != null) {
-                continue;
-            }
-            return index;
-        }
-
-        return -1;
-    }
-
-    @Override
-    public void setSlot(int index, ItemStack value) {
-        if (!(index < 0 || index > getInventorySize())) {
-            this.g[index] = value;
-        }
-    }
-
-    @Override
-    public String getInventoryName() {
-        return this.b();
-    }
-
-    @Override
-    public void setInventoryName(String value) {
-        this.h = value;
-    }
-
-    @Override
-    public void clearContents() {
-        Arrays.fill(g, null);
-    }
-
-    @Override
-    public net.canarymod.api.inventory.Item getItem(int id, int amount) {
-        for (ItemStack stack : getContents()) {
-            if (stack != null && stack.c == id && stack.a == amount) {
-                return stack.getCanaryItem();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public net.canarymod.api.inventory.Item getItem(int id) {
-        for (ItemStack stack : getContents()) {
-            if (stack != null && stack.c == id) {
-                return stack.getCanaryItem();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public net.canarymod.api.inventory.Item removeItem(net.canarymod.api.inventory.Item item) {
-        return removeItem(item.getId());
-    }
-
-    @Override
-    public net.canarymod.api.inventory.Item removeItem(int id) {
-        for (int index = 0; index < getInventorySize(); index++) {
-            ItemStack toCheck = getSlot(index);
-            if (toCheck != null && toCheck.c == id) {
-                setSlot(index, null);
-                return toCheck.getCanaryItem();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public ItemStack decreaseItemStackSize(int itemId, int amount) {
-        return this.a(itemId, amount);
-    }
-
-    @Override
-    public int getInventoryStackLimit() {
-        return this.d();
-    }
-
-    @Override
-    public boolean hasItemStack(ItemStack oItemStack) {
-        for (int index = 0; index < getInventorySize(); index++) {
-            ItemStack toCheck = getSlot(index);
-            if (toCheck != null && toCheck.a(oItemStack)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasItemStack(int itemId, int amount) {
-        for (int index = 0; index < getInventorySize(); index++) {
-            ItemStack toCheck = getSlot(index);
-            if (toCheck != null && toCheck.c == itemId && toCheck.a == amount) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        for (int index = 0; index < getInventorySize(); index++) {
-            ItemStack toCheck = getSlot(index);
-            if (toCheck != null && toCheck.c == itemId && toCheck.a >= minAmount && toCheck.a <= maxAmount) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasItem(int itemId) {
-        for (int index = 0; index < getInventorySize(); index++) {
-            if (getSlot(index) != null && getSlot(index).c == itemId) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void update() {
-        this.k_();
-    }
-    //
 }

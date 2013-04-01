@@ -9,7 +9,7 @@ import net.minecraft.server.ItemStack;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryPlayerInventory extends CanaryInventory implements PlayerInventory {
+public class CanaryPlayerInventory extends CanaryContainerEntity implements PlayerInventory {
 
     public CanaryPlayerInventory(InventoryPlayer playerInventory) {
         super(playerInventory);
@@ -32,7 +32,7 @@ public class CanaryPlayerInventory extends CanaryInventory implements PlayerInve
     }
 
     public ItemStack getItemInHand() {
-        return ((InventoryPlayer) container).h();
+        return ((InventoryPlayer) inventory).h();
     }
 
 }

@@ -1,12 +1,12 @@
 package net.canarymod.api.world.blocks;
 
 
+import java.util.Arrays;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.inventory.CanaryItem;
-import net.canarymod.api.inventory.Container;
-import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryWorld;
+import net.minecraft.server.Container;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityDispenser;
 
@@ -16,7 +16,7 @@ import net.minecraft.server.TileEntityDispenser;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Container<Item> {
+public class CanaryDispenser extends CanaryContainerBlock implements Dispenser {
     // private Random random = new Random();
 
     /**
@@ -33,14 +33,6 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
      * {@inheritDoc}
      */
     @Override
-    public Inventory getInventory() {
-        return getHandle().getInventory();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Entity activate() {
         return dispense(null);
     }
@@ -50,10 +42,10 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
      */
     @Override
     public Entity dispenseFromSlot(int slot) {
-        ItemStack stack = getHandle().getSlot(slot);
+        Item stack = getSlot(slot);
 
         if (stack != null) {
-            return dispense(stack);
+            return dispense(((CanaryItem) stack).getHandle());
         } else {
             ((CanaryWorld) getWorld()).getHandle().e(1001, this.getX(), this.getY(), this.getZ(), 0);
         }
@@ -65,199 +57,47 @@ public class CanaryDispenser extends CanaryComplexBlock implements Dispenser, Co
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void clearContents() {
-        getHandle().clearContents();
+        Arrays.fill(getTileEntity().b, null);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public CanaryItem decreaseItemStackSize(int itemId, int amount) {
-        ItemStack item = getHandle().decreaseItemStackSize(itemId, amount);
-
-        return item != null ? item.getCanaryItem() : null;
+    public Item[] clearInventory() {
+        ItemStack[] items = Arrays.copyOf(getTileEntity().b, getSize());
+        clearContents();
+        return CanaryItem.stackArrayToItemArray(items);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public CanaryItem[] getContents() {
-        ItemStack[] oStacks = getHandle().getContents();
-        CanaryItem[] items = new CanaryItem[oStacks.length];
-
-        for (int i = 0; i < oStacks.length; i++) {
-            items[i] = new CanaryItem(oStacks[i]);
-        }
-
-        return items;
+    public Item[] getContents() {
+        return CanaryItem.stackArrayToItemArray(getTileEntity().b);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getInventoryName() {
-        return getHandle().getInventoryName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getInventorySize() {
-        return getHandle().getInventorySize();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getInventoryStackLimit() {
-        return getHandle().getInventoryStackLimit();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Item getItem(int id) {
-        return getHandle().getItem(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Item getItem(int id, int amount) {
-        return getHandle().getItem(id, amount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Item getSlot(int index) {
-        ItemStack item = getHandle().getSlot(index);
-
-        return item != null ? item.getCanaryItem() : null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasItem(int itemId) {
-        return getHandle().hasItem(itemId);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasItemStack(Item item) {
-        return getHandle().hasItemStack(((CanaryItem) item).getHandle());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Item removeItem(Item item) {
-        return getHandle().removeItem(item);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Item removeItem(int id) {
-        return getHandle().removeItem(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setContents(Item[] items) {
-        ItemStack[] oStacks = new ItemStack[items.length];
-
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null) {
-                oStacks[i] = ((CanaryItem) items[i]).getHandle();
-            } else {
-                oStacks[i] = null;
-            }
-        }
-        getHandle().setContents(oStacks);
+        System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getTileEntity().b, 0, getSize());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setInventoryName(String value) {
-        getHandle().setInventoryName(value);
+        getTileEntity().a(value);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setSlot(int index, Item value) {
-        getHandle().setSlot(index, ((CanaryItem) value).getHandle());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addItem(int itemId, int amount) {
-        getHandle().addItem(itemId, amount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addItem(Item item) {
-        getHandle().addItem(item);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getEmptySlot() {
-        return getHandle().getEmptySlot();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasItemStack(int itemId, int amount) {
-        return getHandle().hasItemStack(itemId, amount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        return getHandle().hasItemStack(itemId, minAmount, maxAmount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public TileEntityDispenser getHandle() {
+    public TileEntityDispenser getTileEntity() {
         return (TileEntityDispenser) tileentity;
+    }
+
+    /**
+     * @throws UnsupportedOperationException
+     *             this isn't a Minecraft Container instance
+     */
+    @Override
+    public Container getContainer() {
+        throw new UnsupportedOperationException("Not a Container");
     }
 }

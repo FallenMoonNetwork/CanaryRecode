@@ -1,18 +1,21 @@
 package net.canarymod.api.world.blocks;
 
 
-import net.canarymod.api.inventory.Inventory;
+import java.util.Arrays;
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.World;
 import net.minecraft.server.ContainerWorkbench;
+import net.minecraft.server.InventoryCrafting;
+import net.minecraft.server.ItemStack;
+import net.minecraft.server.TileEntity;
 
 /**
  * Workbench wrapper implementation
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryWorkbench implements Workbench {
-
+public class CanaryWorkbench extends CanaryContainerBlock implements Workbench {
     private ContainerWorkbench container;
 
     /**
@@ -22,23 +25,7 @@ public class CanaryWorkbench implements Workbench {
      *            the ContainerWorkbench to be wrapped
      */
     public CanaryWorkbench(ContainerWorkbench container) {
-        this.container = container;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Inventory getInventory() {
-        return container.getInventory();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Block getBlock() {
-        return getWorld().getBlockAt(getX(), getY(), getZ());
+        super(container.a);
     }
 
     /**
@@ -73,187 +60,47 @@ public class CanaryWorkbench implements Workbench {
         return container.g.getCanaryWorld();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void update() {
-        getInventory().update();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void clearContents() {
-        getInventory().clearContents();
+        Arrays.fill(getInventory().a, null);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public Item decreaseItemStackSize(int itemId, int amount) {
-        return getInventory().decreaseItemStackSize(itemId, amount);
+    public Item[] clearInventory() {
+        ItemStack[] items = Arrays.copyOf(getInventory().a, getSize());
+        clearContents();
+        return CanaryItem.stackArrayToItemArray(items);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Item[] getContents() {
-        return getInventory().getContents();
+        return CanaryItem.stackArrayToItemArray(getInventory().a);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getInventoryName() {
-        return getInventory().getInventoryName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getInventorySize() {
-        return getInventory().getInventorySize();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getInventoryStackLimit() {
-        return getInventory().getInventoryStackLimit();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Item getItem(int id) {
-        return getInventory().getItem(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Item getItem(int id, int amount) {
-        return getInventory().getItem(id, amount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Item getSlot(int index) {
-        return getInventory().getSlot(index);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasItem(int itemId) {
-        return getInventory().hasItem(itemId);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasItemStack(Item item) {
-        return getInventory().hasItemStack(item);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Item removeItem(Item item) {
-        return getInventory().removeItem(item);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Item removeItem(int id) {
-        return getInventory().removeItem(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setContents(Item[] items) {
-        getInventory().setContents(items);
+        System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getInventory().a, 0, getSize());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setInventoryName(String value) {
-        getInventory().setInventoryName(value);
+        getInventory().setName(value);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void setSlot(int index, Item item) {
-        getInventory().setSlot(index, item);
+    public TileEntity getTileEntity() {
+        throw new UnsupportedOperationException("Not a TileEntity");
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void addItem(int itemId, int amount) {
-        getInventory().addItem(itemId, amount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addItem(Item item) {
-        getInventory().addItem(item);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getEmptySlot() {
-        return getInventory().getEmptySlot();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasItemStack(int itemId, int amount) {
-        return getInventory().hasItemStack(itemId, amount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        return getInventory().hasItemStack(itemId, minAmount, maxAmount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public ContainerWorkbench getHandle() {
+    public ContainerWorkbench getContainer() {
         return container;
+    }
+
+    private InventoryCrafting getInventory() {
+        return container.a;
     }
 
 }

@@ -1,6 +1,7 @@
 package net.canarymod.api.world.blocks;
 
 import net.canarymod.api.MobSpawnerLogic;
+import net.minecraft.server.Container;
 import net.minecraft.server.TileEntity;
 import net.minecraft.server.TileEntityMobSpawner;
 
@@ -19,7 +20,16 @@ public class CanaryMobSpawner extends CanaryComplexBlock implements MobSpawner {
     }
 
     @Override
-    public TileEntity getHandle() {
+    public TileEntity getTileEntity() {
         return this.tileentity;
+    }
+
+    /**
+     * @throws UnsupportedOperationException
+     *             this isn't a Minecraft Container instance
+     */
+    @Override
+    public Container getContainer() {
+        throw new UnsupportedOperationException("Not a Container");
     }
 }

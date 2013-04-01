@@ -1,33 +1,19 @@
-package net.canarymod.api.entity.vehicle;
+package net.canarymod.api.inventory;
+
+import net.minecraft.server.IInventory;
 
 
-import net.canarymod.api.inventory.Item;
-import net.canarymod.api.inventory.ItemType;
-import net.minecraft.server.EntityMinecartChest;
 
 /**
- * ChestMinecart wrapper implementation
+ * Inventory implementation
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryChestMinecart extends CanaryMinecart implements ChestMinecart {
+public class CanaryContainerEntity implements Inventory {
+    protected IInventory inventory;
 
-    /**
-     * Constructs a new wrapper for EntityMinecartChest
-     * 
-     * @param entity
-     *            the EntityMinecartChest to be wrapped
-     */
-    public CanaryChestMinecart(EntityMinecartChest entity) {
-        super(entity);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public EntityMinecartChest getHandle() {
-        return (EntityMinecartChest) entity;
+    public CanaryContainerEntity(IInventory inventory) {
+        this.inventory = inventory;
     }
 
     @Override
@@ -323,4 +309,5 @@ public class CanaryChestMinecart extends CanaryMinecart implements ChestMinecart
         // TODO Auto-generated method stub
 
     }
+
 }

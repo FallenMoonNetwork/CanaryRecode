@@ -2,6 +2,8 @@ package net.canarymod.api.world.blocks;
 
 
 import net.canarymod.api.world.World;
+import net.minecraft.server.Container;
+import net.minecraft.server.IInventory;
 import net.minecraft.server.TileEntity;
 
 
@@ -13,6 +15,7 @@ import net.minecraft.server.TileEntity;
 public abstract class CanaryComplexBlock implements ComplexBlock {
 
     protected TileEntity tileentity;
+    protected IInventory inventory;
 
     /**
      * Constructs a new wrapper for TileEntityChest
@@ -24,12 +27,21 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
         this.tileentity = tileentity;
     }
 
+    public CanaryComplexBlock(IInventory inventory) {
+        this.inventory = inventory;
+        if (inventory instanceof TileEntity) {
+            this.tileentity = (TileEntity) inventory;
+        }
+    }
+
     /**
      * Gets the TileEntity being wrapped
      * 
      * @return the TileEntity
      */
-    public abstract TileEntity getHandle();
+    public abstract TileEntity getTileEntity();
+
+    public abstract Container getContainer();
 
     /**
      * {@inheritDoc}

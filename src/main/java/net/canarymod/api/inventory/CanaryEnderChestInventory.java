@@ -9,7 +9,7 @@ import net.minecraft.server.InventoryEnderChest;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryEnderChestInventory extends CanaryInventory implements EnderChestInventory {
+public class CanaryEnderChestInventory extends CanaryContainerEntity implements EnderChestInventory {
 
     public CanaryEnderChestInventory(InventoryEnderChest echest) {
         super(echest);

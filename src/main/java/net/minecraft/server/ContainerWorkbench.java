@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import net.canarymod.api.inventory.CanaryInventory;
+import net.canarymod.api.world.blocks.CanaryWorkbench;
 
 public class ContainerWorkbench extends Container {
 
@@ -10,7 +10,7 @@ public class ContainerWorkbench extends Container {
     public int h; // CanaryMod: private => public
     public int i; // CanaryMod: private => public
     public int j; // CanaryMod: private => public
-    private CanaryInventory inventory; // CanaryMod inventory instance
+    private CanaryWorkbench bench; // CanaryMod inventory instance
 
     public ContainerWorkbench(InventoryPlayer inventoryplayer, World world, int i0, int i1, int i2) {
         this.g = world;
@@ -38,7 +38,7 @@ public class ContainerWorkbench extends Container {
             this.a(new Slot(inventoryplayer, i3, 8 + i3 * 18, 142));
         }
 
-        this.inventory = new CanaryInventory(this.a); // CanaryMod: create once, use forever
+        this.bench = new CanaryWorkbench(this); // CanaryMod: create once, use forever
         this.a((IInventory) this.a);
     }
 
@@ -110,7 +110,7 @@ public class ContainerWorkbench extends Container {
     }
 
     // CanaryMod
-    public CanaryInventory getInventory() {
-        return inventory;
+    public CanaryWorkbench getCanaryWorkbench() {
+        return bench;
     }
 }
