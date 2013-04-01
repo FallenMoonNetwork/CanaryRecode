@@ -68,8 +68,15 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
     @Override
     public void l_() {
         super.l_();
-        super.x(); // EntityLiving.x() fixes damage taking (no idea yet as to why x() isnt called normally)
-        ((CanaryNonPlayableCharacter) entity).update();
+        super.x(); // EntityLiving.x() fixes damage taking (no idea yet as to why x() isn't called normally)
+        if (this.entity != null){
+            if(!this.M) {
+                try {
+                    ((CanaryNonPlayableCharacter) entity).update();
+                } catch (Exception ex) { // For some reason an exception gets thrown after death and nulled CanaryEntity...
+                }
+            }
+        }
     }
     
     @Override
@@ -88,22 +95,31 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         }
     }
 
+    @Override
     public boolean a_(EntityPlayer entityplayer) { // RightClicked
-        if(((CanaryEntityLiving)entityplayer.getCanaryEntity()).isPlayer()){
-            ((CanaryNonPlayableCharacter) entity).clicked(((EntityPlayerMP) entityplayer).getPlayer());
-            return true;
+        if (this.entity != null) {
+            if (((CanaryEntityLiving) entityplayer.getCanaryEntity()).isPlayer()) {
+                ((CanaryNonPlayableCharacter) entity).clicked(((EntityPlayerMP) entityplayer).getPlayer());
+                return true;
+            }
         }
         return false;
     }
 
+    @Override
     public boolean a(DamageSource damagesource, int i0) {
         boolean toRet = super.a(damagesource, i0);
-        if (toRet) {
-
-            CanaryEntity entity = damagesource.i().getCanaryEntity();
-            ((CanaryNonPlayableCharacter) entity).attack(entity);
+        if (toRet && this.entity != null) {
+            CanaryEntity atk = damagesource.i().getCanaryEntity();
+            ((CanaryNonPlayableCharacter) entity).attack(atk);
         }
         return toRet;
+    }
+
+    @Override
+    public void w() {
+        super.w();
+        ((CanaryNonPlayableCharacter) entity).destoryed();
     }
 
     void setNPC(CanaryNonPlayableCharacter cnpc){
