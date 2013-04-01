@@ -1,17 +1,19 @@
 package net.minecraft.server;
 
 import java.util.List;
+import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryHopperBlock;
+import net.canarymod.hook.world.HopperTransferHook;
 
 public class TileEntityHopper extends TileEntity implements Hopper {
 
     public ItemStack[] a = new ItemStack[5]; // CanaryMod: private to public
     private String b;
     public int c = -1;  // CanaryMod: private to public
-    private CanaryHopperBlock hopper; // CanaryMod inventory instance
+    private CanaryHopperBlock canaryHopper; // CanaryMod inventory instance
 
     public TileEntityHopper() {
-        this.hopper = new CanaryHopperBlock(this); // CanaryMod: create once, use forever
+        this.canaryHopper = new CanaryHopperBlock(this); // CanaryMod: create once, use forever
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -172,6 +174,13 @@ public class TileEntityHopper extends TileEntity implements Hopper {
             for (int i0 = 0; i0 < this.j_(); ++i0) {
                 if (this.a(i0) != null) {
                     ItemStack itemstack = this.a(i0).m();
+                    // CanaryMod: Hopper Transfer hook
+                    HopperTransferHook hook = new HopperTransferHook(this.canaryHopper, new net.canarymod.api.inventory.CanaryItem(itemstack), false);
+                    Canary.hooks().callHook(hook);
+                    if (hook.isCanceled()){
+                        return false;
+                    }// CanaryMod: End
+
                     ItemStack itemstack1 = a(iinventory, this.a(i0, 1), Facing.a[BlockHopper.c(this.p())]);
 
                     if (itemstack1 == null || itemstack1.a == 0) {
@@ -227,6 +236,19 @@ public class TileEntityHopper extends TileEntity implements Hopper {
 
         if (itemstack != null && b(iinventory, itemstack, i0, i1)) {
             ItemStack itemstack1 = itemstack.m();
+            // CanaryMod: Hopper Transfer hook.
+            net.canarymod.api.inventory.Hopper hookHopper = null;
+            if (hopper instanceof TileEntityHopper) {
+                hookHopper = (net.canarymod.api.inventory.Hopper)((TileEntityHopper) hopper).canaryHopper;
+            } else if (hopper instanceof EntityMinecartHopper) {
+                hookHopper = (net.canarymod.api.inventory.Hopper)((EntityMinecartHopper) hopper).entity;
+            }
+            HopperTransferHook hook = new HopperTransferHook(hookHopper, new net.canarymod.api.inventory.CanaryItem(itemstack), true);
+            Canary.hooks().callHook(hook);
+            if (hook.isCanceled()){
+                return false;
+            }// CanaryMod: End
+
             ItemStack itemstack2 = a(hopper, iinventory.a(i0, 1), -1);
 
             if (itemstack2 == null || itemstack2.a == 0) {
@@ -394,7 +416,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
 
     // CanaryMod
     public CanaryHopperBlock getCanaryHopper() {
-        return hopper;
+        return canaryHopper;
     }
 
     public IInventory getInputInventory(){
