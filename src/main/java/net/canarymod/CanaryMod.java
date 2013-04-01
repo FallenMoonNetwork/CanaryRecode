@@ -8,6 +8,7 @@ import net.canarymod.bansystem.BanManager;
 import net.canarymod.commandsys.CommandList;
 import net.canarymod.commandsys.CommandManager;
 import net.canarymod.config.Configuration;
+import net.canarymod.database.DatabaseLoader;
 import net.canarymod.help.HelpManager;
 import net.canarymod.hook.HookExecutor;
 import net.canarymod.kit.KitProvider;
@@ -19,7 +20,7 @@ import net.canarymod.warp.WarpProvider;
 
 /**
  * The implementation of Canary, the new catch-all etc replacement, only much better :P
- * 
+ *
  * @author Chris Ksoll
  * @author Jos Kuijpers
  * @author Brian McCarthy
@@ -30,6 +31,9 @@ public class CanaryMod extends Canary {
      * Creates a new CanaryMod
      */
     public CanaryMod() {
+        //This must be the first thing to call!
+        DatabaseLoader.load();
+
         Canary.instance = this;
 
         this.config = new Configuration();
