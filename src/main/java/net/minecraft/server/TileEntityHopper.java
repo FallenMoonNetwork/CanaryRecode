@@ -1,17 +1,17 @@
 package net.minecraft.server;
 
 import java.util.List;
-import net.canarymod.api.world.blocks.CanaryHopper;
+import net.canarymod.api.world.blocks.CanaryHopperBlock;
 
 public class TileEntityHopper extends TileEntity implements Hopper {
 
-    private ItemStack[] a = new ItemStack[5];
+    public ItemStack[] a = new ItemStack[5]; // CanaryMod: private to public
     private String b;
-    private int c = -1;
-    private CanaryHopper hopper; // CanaryMod inventory instance
+    public int c = -1;  // CanaryMod: private to public
+    private CanaryHopperBlock hopper; // CanaryMod inventory instance
 
     public TileEntityHopper() {
-        this.hopper = new CanaryHopper(this); // CanaryMod: create once, use forever
+        this.hopper = new CanaryHopperBlock(this); // CanaryMod: create once, use forever
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -393,7 +393,15 @@ public class TileEntityHopper extends TileEntity implements Hopper {
     }
 
     // CanaryMod
-    public CanaryHopper getCanaryHopper() {
+    public CanaryHopperBlock getCanaryHopper() {
         return hopper;
+    }
+
+    public IInventory getInputInventory(){
+        return b(this);
+    }
+
+    public IInventory getOutputInventory(){
+        return this.v();
     }
 }
