@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
+import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
@@ -318,6 +319,18 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
                     behavior.onClicked(player);
                 } catch (Exception ex) {
                     Canary.logWarning("Exception while calling onClicked in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
+                }
+            }
+        }
+    }
+
+    void attack(CanaryEntity entity) {
+        synchronized (behaviors) {
+            for (NPCBehavior behavior : behaviors) {
+                try {
+                    behavior.onAttack(entity);
+                } catch (Exception ex) {
+                    Canary.logWarning("Exception while calling onAttack in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
                 }
             }
         }

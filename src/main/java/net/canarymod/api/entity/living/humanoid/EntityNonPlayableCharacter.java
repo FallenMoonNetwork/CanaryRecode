@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import net.canarymod.CanaryMod;
 import net.canarymod.api.CanaryServer;
+import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
@@ -67,6 +68,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
     @Override
     public void l_() {
         super.l_();
+        super.x(); // EntityLiving.x() fixes damage taking (no idea yet as to why x() isnt called normally)
         ((CanaryNonPlayableCharacter) entity).update();
     }
     
@@ -92,6 +94,16 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
             return true;
         }
         return false;
+    }
+
+    public boolean a(DamageSource damagesource, int i0) {
+        boolean toRet = super.a(damagesource, i0);
+        if (toRet) {
+
+            CanaryEntity entity = damagesource.i().getCanaryEntity();
+            ((CanaryNonPlayableCharacter) entity).attack(entity);
+        }
+        return toRet;
     }
 
     void setNPC(CanaryNonPlayableCharacter cnpc){
