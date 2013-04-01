@@ -22,6 +22,7 @@ import net.minecraft.server.Packet29DestroyEntity;
  */
 public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements NonPlayableCharacter {
     private final List<NPCBehavior> behaviors;
+    private String prefix = "<" + Colors.ORANGE + "NPC " + Colors.WHITE + "%name> ";
 
     /**
      * Constructs a new wrapper for EntityNonPlayableCharacter
@@ -72,7 +73,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public void teleportTo(Position position) {
-        getHandle().b(position.getX(), position.getY(), position.getZ(), getRotation(), getPitch());
+        getHandle().a(position.getX(), position.getY(), position.getZ(), getRotation(), getPitch());
     }
 
     /**
@@ -80,7 +81,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public void teleportTo(Location location) {
-        getHandle().b(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
+        getHandle().a(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
         if (this.getWorld() != location.getWorld()) {
             // I don't know yet
         }
@@ -91,7 +92,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public void teleportTo(int x, int y, int z) {
-        getHandle().b(x, y, z, getRotation(), getPitch());
+        getHandle().a(x, y, z, getRotation(), getPitch());
     }
 
     /**
@@ -168,6 +169,9 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
             if (player.getWorld().getName().equals(this.getWorld().getName())) {
                 if (player.getWorld().getType() == this.getWorld().getType()) {
                     if (toLookAt != null) {
+                        if (distanceTo(player) > 15) {
+                            continue;
+                        }
                         if (distanceTo(player) < distanceTo(toLookAt)) {
                             toLookAt = player;
                         }
@@ -211,27 +215,6 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
         return false;
     }
 
-    @Override
-    public void update() {
-        synchronized (behaviors) {
-            for (NPCBehavior behavior : behaviors) {
-                try {
-                    behavior.onUpdate();
-                } catch (Exception ex) {
-                    Canary.logWarning("Exception while calling onUpdate in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
-                }
-            }
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public EntityNonPlayableCharacter getHandle() {
-        return (EntityNonPlayableCharacter) entity;
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -259,15 +242,98 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
         return this.behaviors.add(behavior);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void chat(String msg) { // Could really use some custom prefix stuff
-        Canary.getServer().broadcastMessage("<" + Colors.ORANGE + "NPC " + Colors.WHITE + this.getName() + "> " + msg);
+        Canary.getServer().broadcastMessage(prefix.replace("%name", getName()) + msg);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void privateMessage(Player player, String msg) { // Could really use some custom prefix stuff
-        player.sendMessage("[PM] <NPC " + this.getName() + "> " + msg);
+        player.sendMessage("[PM] " + prefix.replace("%name", getName()) + msg);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPrefix() {
+        return prefix;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setInvulnerable(boolean invulnerable) {
+        getHandle().ce.a = invulnerable;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isInvulnerable() {
+        return getHandle().ce.a;
+    }
+
+    // public void setDisplayName(String name) { // WIP
+    // Packet20NamedEntitySpawn pkt = new Packet20NamedEntitySpawn(getHandle());
+    // for (Player p : Canary.getServer().getPlayerList()) { // could be improved to only send to nearby players
+    // if (!p.equals(this.player)) {
+    // p.getEntity().a.b(pkt);
+    // }
+    // }
+    // }
+
+    void update() {
+        synchronized (behaviors) {
+            for (NPCBehavior behavior : behaviors) {
+                try {
+                    behavior.onUpdate();
+                } catch (Exception ex) {
+                    Canary.logWarning("Exception while calling onUpdate in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
+                }
+            }
+        }
+    }
+
+    void clicked(Player player) {
+        synchronized (behaviors) {
+            for (NPCBehavior behavior : behaviors) {
+                try {
+                    behavior.onClicked(player);
+                } catch (Exception ex) {
+                    Canary.logWarning("Exception while calling onClicked in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
+                }
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityNonPlayableCharacter getHandle() {
+        return (EntityNonPlayableCharacter) entity;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return String.format("NPC[id=%d, name=%s]", getID(), getName());

@@ -4,10 +4,12 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import net.canarymod.CanaryMod;
 import net.canarymod.api.CanaryServer;
+import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.minecraft.server.DamageSource;
 import net.minecraft.server.EntityLiving;
+import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.INetworkManager;
 import net.minecraft.server.ItemInWorldManager;
@@ -47,6 +49,10 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         this.a = new NonNetServerHandler(this);
         this.a(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
     }
+    @Override
+    public void c(int i0) {
+        // NO PORTAL USE
+    }
 
     @Override
     public void a(NBTTagCompound nbttagcompound) {
@@ -78,6 +84,14 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         if (entityliving != null) {
             entityliving.c(this, this.aM);
         }
+    }
+
+    public boolean a_(EntityPlayer entityplayer) { // RightClicked
+        if(((CanaryEntityLiving)entityplayer.getCanaryEntity()).isPlayer()){
+            ((CanaryNonPlayableCharacter) entity).clicked(((EntityPlayerMP) entityplayer).getPlayer());
+            return true;
+        }
+        return false;
     }
 
     void setNPC(CanaryNonPlayableCharacter cnpc){
