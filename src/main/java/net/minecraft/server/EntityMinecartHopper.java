@@ -5,7 +5,7 @@ import java.util.List;
 public class EntityMinecartHopper extends EntityMinecartContainer implements Hopper {
 
     private boolean a = true;
-    private int b = -1;
+    public int b = -1; // CanaryMod: private to public
 
     public EntityMinecartHopper(World world) {
         super(world);
