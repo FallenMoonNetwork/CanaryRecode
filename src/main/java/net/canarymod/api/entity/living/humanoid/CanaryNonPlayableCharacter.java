@@ -65,6 +65,22 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      * {@inheritDoc}
      */
     @Override
+    public String getDisplayName() {
+        return getHandle().getDisplayName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDisplayName(String name) {
+        getHandle().setDisplayName(name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setName(String name) {
         getHandle().bS = name;
     }

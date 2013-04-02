@@ -3,9 +3,14 @@ package net.minecraft.server;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
+import net.canarymod.api.inventory.CanaryEnderChestInventory;
+import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.Inventory;
+import net.canarymod.hook.player.EntityRightClickHook;
+import net.canarymod.hook.player.LevelUpHook;
 
 public abstract class EntityPlayer extends EntityLiving implements ICommandSender {
 
@@ -13,7 +18,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     private InventoryEnderChest a = new InventoryEnderChest();
     public Container bL;
     public Container bM;
-    protected FoodStats bN = new FoodStats(this);
+    protected FoodStats bN = new FoodStats(this); // CanaryMod: pass player
     protected int bO = 0;
     public byte bP = 0;
     public float bQ;
@@ -44,6 +49,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     protected float cj = 0.02F;
     private int h = 0;
     public EntityFishHook ck = null;
+    private String displayName; // CanaryMod: custom display names
 
     public EntityPlayer(World world) {
         super(world);
@@ -722,6 +728,14 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         if (entity.a_(this)) {
             return true;
         } else {
+            // CanaryMod: EntityRightClickHook
+            EntityRightClickHook hook = new EntityRightClickHook(entity.getCanaryEntity(), ((EntityPlayerMP) this).getPlayer());
+            Canary.hooks().callHook(hook);
+            if (hook.isCanceled()) {
+                return false;
+            }
+            //
+
             ItemStack itemstack = this.cb();
 
             if (itemstack != null && entity instanceof EntityLiving) {
@@ -1220,6 +1234,10 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     }
 
     public void a(int i0) {
+        // CanaryMod: LevelUpHook
+        LevelUpHook hook = new LevelUpHook(((EntityPlayerMP) this).getPlayer());
+        Canary.hooks().callHook(hook);
+        //
         this.cf += i0;
         if (this.cf < 0) {
             this.cf = 0;
@@ -1416,8 +1434,8 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         return ScorePlayerTeam.a(this.cq(), this.bS);
     }
 
-    // CanaryMod start - custom XP methods
-
+    // CanaryMod
+    // Start: Custom XP methods
     public void addXP(int amount) {
         this.w(amount);
         updateXP();
@@ -1477,13 +1495,27 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
                 ((CanaryPlayer)getCanaryEntity()).getExhaustionLevel());
         player.sendPacket(new CanaryPacket(packet));
     }
-    // CanaryMod end - custom XP methods
 
+    // End: Custom XP methods
+    // Start: Inventory getters
     public Inventory getPlayerInventory() {
-        return null; //bK
+        return new CanaryPlayerInventory(bK);
     }
 
     public Inventory getEnderChestInventory() {
-        return null; //a
+        return new CanaryEnderChestInventory(a, ((EntityPlayerMP) this).getPlayer());
     }
+
+    // End: Inventory getters
+
+    // Start: Custom Display Name
+    public String getDisplayName() {
+        return displayName == null ? this.bS : displayName;
+    }
+
+    public void setDisplayName(String name) {
+        this.displayName = name;
+    }
+    // End: Custom Display Name
+    //
 }

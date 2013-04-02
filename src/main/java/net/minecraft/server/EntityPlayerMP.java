@@ -9,9 +9,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
+import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
 import net.canarymod.api.entity.vehicle.CanaryChestMinecart;
@@ -850,6 +850,28 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         return new ChunkCoordinates(MathHelper.c(this.u), MathHelper.c(this.v + 0.5D), MathHelper.c(this.w));
     }
 
+    // CanaryMod
+    // Start: Custom Display name
+    @Override
+    public void setDisplayName(String name) {
+        super.setDisplayName(name);
+        Packet20NamedEntitySpawn pkt = new Packet20NamedEntitySpawn(this);
+        Canary.getServer().getConfigurationManager().sendPacketToAllInWorld(this.getCanaryWorld().getName(), new CanaryPacket(pkt));
+    }
+
+    public void updateSlot(int windowId, int slotIndex, ItemStack item) {
+        this.a.b(new Packet103SetSlot(windowId, slotIndex, item));
+    }
+
+    public boolean getColorEnabled() {
+        return this.ct;
+    }
+
+    public int getViewDistance() {
+        return this.cr;
+    }
+
+    //
     /**
      * Get the CanaryEntity as CanaryPlayer
      * @return

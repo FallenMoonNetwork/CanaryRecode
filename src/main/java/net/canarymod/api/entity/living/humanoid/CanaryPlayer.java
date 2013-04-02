@@ -4,7 +4,6 @@ package net.canarymod.api.entity.living.humanoid;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
@@ -82,6 +81,22 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public String getName() {
         return ((EntityPlayerMP) entity).bS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getDisplayName() {
+        return getHandle().getDisplayName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDisplayName(String name) {
+        getHandle().setDisplayName(name);
     }
 
     @Override
