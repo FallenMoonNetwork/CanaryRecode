@@ -8,6 +8,6 @@ public class WorldServerMulti extends WorldServer {
         this.D = worldserver.V();
         this.x = new DerivedWorldInfo(worldserver.L());
     }
-
-    protected void a() throws MinecraftException {}
+//CanaryMod - allow this world to have level.dat etc too
+//    protected void a() throws MinecraftException {}
 }

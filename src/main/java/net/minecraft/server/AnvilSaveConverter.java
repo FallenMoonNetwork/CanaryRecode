@@ -11,10 +11,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 
+import net.canarymod.Canary;
+
 public class AnvilSaveConverter extends SaveFormatOld {
 
     public AnvilSaveConverter(File file1, net.canarymod.api.world.WorldType type) {
-        super(file1);
+        super(file1, type);
     }
 
     protected int c() {
@@ -27,10 +29,8 @@ public class AnvilSaveConverter extends SaveFormatOld {
     }
 
     @Override
-    @Deprecated
     public ISaveHandler a(String s0, boolean flag0) {
-        //        return new AnvilSaveHandler(this.a, s0, flag0, WorldType.);
-        throw new UnsupportedOperationException("Cannot create AnvilSaveHandler without WorldType. Create a new SaveHandler directly instead!");
+                return new AnvilSaveHandler(this.a, s0, flag0, type);
     }
 
     @Override
@@ -42,6 +42,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
 
     @Override
     public boolean a(String s0, IProgressUpdate iprogressupdate) {
+        Canary.println("AnvilSaveConverter a calling");
         iprogressupdate.a(0);
         ArrayList arraylist = new ArrayList();
         ArrayList arraylist1 = new ArrayList();

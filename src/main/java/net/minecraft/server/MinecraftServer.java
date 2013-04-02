@@ -151,7 +151,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 world = new WorldServer(this, isavehandler, name, worldtype.getId(), worldsettings, this.a, this.al());
             }
         } else {
-            world = new WorldServerMulti(this, isavehandler, name, worldtype.getId(), worldsettings, (WorldServer)((CanaryWorld) worldManager.getWorld(name, net.canarymod.api.world.WorldType.fromName("NORMAL"), false)).getHandle(), this.a, this.al());
+            world = new WorldServerMulti(this, isavehandler, name, worldtype.getId(), worldsettings, (WorldServer)((CanaryWorld) worldManager.getWorld(name, net.canarymod.api.world.WorldType.fromName("NORMAL"), true)).getHandle(), this.a, this.al());
         }
 
         world.a((IWorldAccess) (new WorldManager(this, world)));
@@ -217,7 +217,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             //CanaryMod changed to use worldManager
             for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
                 WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
-
                 if (worldserver != null) {
                     if (!flag0) {
                         this.al().a("Saving chunks for level \'" + worldserver.L().k() + "\'/" + worldserver.t.l());
@@ -226,8 +225,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     try {
                         worldserver.a(true, (IProgressUpdate) null);
                     } catch (MinecraftException minecraftexception) {
+                        Canary.println(minecraftexception.getMessage());
                         this.al().b(minecraftexception.getMessage());
                     }
+                }
+                else {
+                    Canary.println("World is null");
                 }
             }
         }
@@ -821,6 +824,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public void P() {
+        //CanaryMod XXX: Remove this? It'll delete all worlds
         this.N = true;
         this.N().d();
 

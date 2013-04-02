@@ -22,9 +22,6 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
 
     public SaveHandler(File file1, String s0, boolean flag0, net.canarymod.api.world.WorldType type) {
         // CanaryMod refactored for more flexible folder structure
-//        File tmp = new File(file1, s0);
-//
-//        tmp.mkdirs();
         this.a = new File(file1, s0 + "/" + s0 + "_" + type.getName());
         this.a.mkdirs();
 

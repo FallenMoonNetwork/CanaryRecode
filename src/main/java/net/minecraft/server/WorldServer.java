@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
@@ -609,6 +610,7 @@ public class WorldServer extends World {
     }
 
     public void a(boolean flag0, IProgressUpdate iprogressupdate) throws MinecraftException {
+        //CanaryMod assume every world is able to save
         if (this.v.c()) {
             if (iprogressupdate != null) {
                 iprogressupdate.a("Saving level");
@@ -785,7 +787,7 @@ public class WorldServer extends World {
 
     /**
      * Get the canary player manager wrapper for this dimension
-     * 
+     *
      * @return
      */
     public CanaryPlayerManager getPlayerManager() {
