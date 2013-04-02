@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
 import java.util.Iterator;
-
+import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntityItem;
+import net.canarymod.hook.entity.EntityDespawnHook;
+import net.canarymod.hook.entity.ItemTouchGroundHook;
 
 public class EntityItem extends Entity {
 
@@ -58,6 +60,8 @@ public class EntityItem extends Entity {
             --this.b;
         }
 
+        boolean tmpTouch = this.I; // CanaryMod
+
         this.r = this.u;
         this.s = this.v;
         this.t = this.w;
@@ -88,6 +92,17 @@ public class EntityItem extends Entity {
             if (i0 > 0) {
                 f0 = Block.r[i0].cP * 0.98F;
             }
+
+            // CanaryMod: ItemTouchGround
+            // It does touch the ground now, but didn't in last tick
+            if (!tmpTouch) {
+                ItemTouchGroundHook hook = new ItemTouchGroundHook((net.canarymod.api.entity.EntityItem) getCanaryEntity());
+                Canary.hooks().callHook(hook);
+                if (hook.isCanceled()) {
+                    this.w(); // kill the item
+                }
+            }
+            //
         }
 
         this.x *= (double) f0;
@@ -99,7 +114,15 @@ public class EntityItem extends Entity {
 
         ++this.a;
         if (!this.q.I && this.a >= 6000) {
-            this.w();
+            // CanaryMod: EntityDespawn
+            EntityDespawnHook hook = new EntityDespawnHook(getCanaryEntity());
+            Canary.hooks().callHook(hook);
+            if (!hook.isCanceled()) {
+                this.w();
+            } else {
+                this.b = 0;
+            }
+            //
         }
     }
 
@@ -203,27 +226,29 @@ public class EntityItem extends Entity {
             ItemStack itemstack = this.d();
             int i0 = itemstack.a;
 
-            if (this.b == 0 && entityplayer.bK.a(itemstack)) {
-                if (itemstack.c == Block.N.cz) {
-                    entityplayer.a((StatBase) AchievementList.g);
-                }
+            if (this.b == 0 && entityplayer.bK.canPickup(this)) { // CanaryMod: simulate pickup first
+                if (entityplayer.bK.a(itemstack)) {
+                    if (itemstack.c == Block.N.cz) {
+                        entityplayer.a((StatBase) AchievementList.g);
+                    }
 
-                if (itemstack.c == Item.aG.cp) {
-                    entityplayer.a((StatBase) AchievementList.t);
-                }
+                    if (itemstack.c == Item.aG.cp) {
+                        entityplayer.a((StatBase) AchievementList.t);
+                    }
 
-                if (itemstack.c == Item.o.cp) {
-                    entityplayer.a((StatBase) AchievementList.w);
-                }
+                    if (itemstack.c == Item.o.cp) {
+                        entityplayer.a((StatBase) AchievementList.w);
+                    }
 
-                if (itemstack.c == Item.bp.cp) {
-                    entityplayer.a((StatBase) AchievementList.z);
-                }
+                    if (itemstack.c == Item.bp.cp) {
+                        entityplayer.a((StatBase) AchievementList.z);
+                    }
 
-                this.a("random.pop", 0.2F, ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-                entityplayer.a((Entity) this, i0);
-                if (itemstack.a <= 0) {
-                    this.w();
+                    this.a("random.pop", 0.2F, ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                    entityplayer.a((Entity) this, i0);
+                    if (itemstack.a <= 0) {
+                        this.w();
+                    }
                 }
             }
         }

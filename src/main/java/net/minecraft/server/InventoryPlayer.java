@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
 import java.util.concurrent.Callable;
+import net.canarymod.Canary;
+import net.canarymod.hook.player.ItemPickupHook;
 
 public class InventoryPlayer implements IInventory {
 
@@ -159,6 +161,53 @@ public class InventoryPlayer implements IInventory {
         int i1 = this.h(i0);
 
         return i1 >= 0;
+    }
+
+    // CanaryMod: Simulate Pickup (Its the same as a(ItemStack) but without altering the inventory
+    public boolean canPickup(EntityItem entityitem) {
+        ItemStack itemstack = entityitem.d();
+        int i;
+
+        if (itemstack.h()) {
+            i = InventoryPlayer.i();
+            if (i >= 0) {
+                // CanaryMod: ItemPickUp
+                ItemPickupHook hook = new ItemPickupHook(((EntityPlayerMP) this.d).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity());
+                Canary.hooks().callHook(hook);
+                return !hook.isCanceled();
+                //
+            } else if (this.d.ce.d) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            int slot = 0;
+            int left = itemstack.a;
+
+            do {
+                ItemStack itemstack1 = this.a[slot];
+                int delta = 0;
+
+                if (itemstack1 == null) {
+                    delta = Math.min(64, left);
+                } else if (itemstack1.a < 64 && itemstack.c == itemstack1.c && itemstack.e() == itemstack1.e()) {
+                    delta = Math.min(64 - itemstack.a, left);
+                }
+                left -= delta;
+                slot++;
+            }
+            while (left > 0 && slot < 36);
+            if (itemstack.a - left > 0) {
+                // CanaryMod: ItemPickUp
+                ItemPickupHook hook = new ItemPickupHook(((EntityPlayerMP) this.d).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity());
+                Canary.hooks().callHook(hook);
+                return !hook.isCanceled();
+                //
+            } else {
+                return false;
+            }
+        }
     }
 
     public boolean a(ItemStack itemstack) {

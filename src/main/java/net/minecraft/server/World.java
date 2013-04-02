@@ -850,7 +850,7 @@ public abstract class World implements IBlockAccess {
 
         // CanaryMod: EntitySpawn
         if (!(entity.getCanaryEntity() instanceof CanaryPlayer)) {
-            EntitySpawnHook hook = new EntitySpawnHook(entity.getCanaryEntity(), true);
+            EntitySpawnHook hook = new EntitySpawnHook(entity.getCanaryEntity());
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return false;

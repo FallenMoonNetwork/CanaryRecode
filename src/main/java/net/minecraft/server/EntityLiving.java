@@ -11,7 +11,7 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.hook.entity.DamageHook;
-import net.canarymod.hook.entity.EntitySpawnHook;
+import net.canarymod.hook.entity.EntityDespawnHook;
 
 
 public abstract class EntityLiving extends Entity {
@@ -1416,8 +1416,8 @@ public abstract class EntityLiving extends Entity {
     }
 
     protected boolean bm() {
-        // CanaryMod: call EntitySpawnHook (Despawn)
-        EntitySpawnHook hook = new EntitySpawnHook(entity, false);
+        // CanaryMod: EntityDespawn
+        EntityDespawnHook hook = new EntityDespawnHook(entity);
 
         Canary.hooks().callHook(hook);
         return !hook.isCanceled();
