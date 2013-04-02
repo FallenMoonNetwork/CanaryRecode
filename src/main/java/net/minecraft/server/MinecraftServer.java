@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
+import net.canarymod.api.world.CanarySaveConverter;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.CanaryWorldManager;
 import net.canarymod.config.Configuration;
@@ -111,6 +112,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     protected void initWorld(String name, long seed, WorldType nmsWt, net.canarymod.api.world.WorldType worldtype, String generatorSettings) {
         this.b(name); //Anvil Converter
         this.c("menu.loadingLevel");
+        File worldFolder = new File("worlds/" + name);
+        CanarySaveConverter converter = new CanarySaveConverter(worldFolder);
+        if(converter.isVanillaFormat()) {
+            Canary.logInfo("World " + name + " is Vanilla. Will now attempt to convert.");
+            converter.convert();
+        }
         AnvilSaveHandler isavehandler = new AnvilSaveHandler(new File("worlds/"), name, true, worldtype);
         WorldInfo worldinfo = isavehandler.d();
         WorldConfiguration config = Configuration.getWorldConfig(name);
@@ -586,7 +593,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public WorldServer getWorld(String s, int i) {
-        net.canarymod.api.world.World w = worldManager.getWorld(s, net.canarymod.api.world.WorldType.fromId(i), false);
+        net.canarymod.api.world.World w = worldManager.getWorld(s, net.canarymod.api.world.WorldType.fromId(i), true);
         if(w != null) {
             return (WorldServer)((CanaryWorld) w).getHandle();
         }

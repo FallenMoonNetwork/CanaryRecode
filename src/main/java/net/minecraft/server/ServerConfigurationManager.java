@@ -154,8 +154,6 @@ public abstract class ServerConfigurationManager {
     }
 
     public void a(EntityPlayerMP entityplayermp, WorldServer worldserver) {
-        Canary.println("Herpaderp called");
-        //XXX swap worldserver with worldserver1 if things go derp. but this should be correct atm
         WorldServer worldserver1 = entityplayermp.o();
         if(worldserver != null) {
             worldserver.r().c(entityplayermp);
