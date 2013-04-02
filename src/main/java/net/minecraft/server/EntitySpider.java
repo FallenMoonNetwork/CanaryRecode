@@ -11,6 +11,7 @@ public class EntitySpider extends EntityMob {
         this.aH = "/mob/spider.png";
         this.a(1.4F, 0.9F);
         this.bI = 0.8F;
+        this.maxHealth = 16; // CanaryMod: initialize
         this.entity = new CanarySpider(this); // CanaryMod: Wrap Entity
     }
 
@@ -27,7 +28,7 @@ public class EntitySpider extends EntityMob {
     }
 
     public int aW() {
-        return 16;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     public double W() {

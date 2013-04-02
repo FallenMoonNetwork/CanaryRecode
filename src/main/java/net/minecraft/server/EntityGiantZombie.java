@@ -10,11 +10,12 @@ public class EntityGiantZombie extends EntityMob {
         this.bI = 0.5F;
         this.N *= 6.0F;
         this.a(this.O * 6.0F, this.P * 6.0F);
+        this.maxHealth = 100; // CanaryMod: initialize
         this.entity = new CanaryGiantZombie(this); // CanaryMod: Wrap Entity
     }
 
     public int aW() {
-        return 100;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     public float a(int i0, int i1, int i2) {

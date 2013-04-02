@@ -55,6 +55,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
         this.bo.a(9, new EntityAIWatchClosest2(this, EntityVillager.class, 5.0F, 0.02F));
         this.bo.a(9, new EntityAIWander(this, 0.3F));
         this.bo.a(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
+        this.maxHealth = 20; // CanaryMod: initialize
         this.entity = new CanaryVillager(this); // CanaryMod: Wrap Entity
     }
 
@@ -133,7 +134,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
     }
 
     public int aW() {
-        return 20;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     public void b(NBTTagCompound nbttagcompound) {

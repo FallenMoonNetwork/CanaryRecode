@@ -20,6 +20,7 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob {
         this.bo.a(3, new EntityAILookIdle(this));
         this.bp.a(1, new EntityAIHurtByTarget(this, false));
         this.bp.a(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
+        this.maxHealth = 26; // CanaryMod: initialize
         this.entity = new CanaryWitch(this); // CanaryMod: Wrap Entity
     }
 
@@ -49,7 +50,7 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob {
     }
 
     public int aW() {
-        return 26;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     public boolean bh() {

@@ -49,7 +49,7 @@ public class EntityWolf extends EntityTameable {
         this.ah.b(18, Integer.valueOf(this.aX()));
     }
 
-    public int aW() {
+    public int aW() { // TODO: Wild and Tame Max
         return this.m() ? 20 : 8;
     }
 

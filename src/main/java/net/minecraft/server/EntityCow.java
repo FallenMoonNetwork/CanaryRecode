@@ -19,6 +19,7 @@ public class EntityCow extends EntityAnimal {
         this.bo.a(5, new EntityAIWander(this, 0.2F));
         this.bo.a(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.bo.a(7, new EntityAILookIdle(this));
+        this.maxHealth = 10; // CanaryMod: initialize
         this.entity = new CanaryCow(this); // CanaryMod: Wrap Entity
     }
 
@@ -27,7 +28,7 @@ public class EntityCow extends EntityAnimal {
     }
 
     public int aW() {
-        return 10;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     protected String bb() {

@@ -23,6 +23,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
         if (world != null && !world.I) {
             this.m();
         }
+        this.maxHealth = 20; // CanaryMod: initialize
         this.entity = new CanarySkeleton(this); // CanaryMod: Wrap Entity
     }
 
@@ -36,7 +37,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
     }
 
     public int aW() {
-        return 20;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     protected String bb() {

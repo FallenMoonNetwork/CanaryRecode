@@ -39,11 +39,12 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
         this.ag = true;
         this.b = 100.0D;
         this.am = true;
+        this.maxHealth = 200; // CanaryMod: initialize
         this.entity = new CanaryEnderDragon(this); // CanaryMod: Wrap Entity
     }
 
     public int aW() {
-        return 200;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     protected void a() {

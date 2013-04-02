@@ -3,7 +3,6 @@ package net.minecraft.server;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.inventory.Inventory;
@@ -14,7 +13,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     private InventoryEnderChest a = new InventoryEnderChest();
     public Container bL;
     public Container bM;
-    protected FoodStats bN = new FoodStats();
+    protected FoodStats bN = new FoodStats(this);
     protected int bO = 0;
     public byte bP = 0;
     public float bQ;
@@ -58,11 +57,12 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         this.aJ = 180.0F;
         this.ad = 20;
         this.aH = "/mob/char.png";
+        this.maxHealth = 20; // CanaryMod: initialize
     }
 
     @Override
     public int aW() {
-        return 20;
+        return this.maxHealth; // CanaryMod: custom Max
     }
 
     @Override

@@ -7,8 +7,11 @@ public class FoodStats {
     private float c;
     private int d = 0;
     private int e = 20;
+    private EntityPlayer entityplayer;
 
-    public FoodStats() {}
+    public FoodStats(EntityPlayer entityplayer) {
+        this.entityplayer = entityplayer;
+    }
 
     public void a(int i0, float f0) {
         this.a = Math.min(i0 + this.a, 20);

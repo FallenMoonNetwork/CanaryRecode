@@ -75,6 +75,11 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
+    public void setMaxHealth(int maxHealth) {
+        ((net.minecraft.server.EntityLiving) entity).setMaxHealth(maxHealth);
+    }
+
+    @Override
     public int getAge() {
         return ((net.minecraft.server.EntityLiving) entity).aH();
     }

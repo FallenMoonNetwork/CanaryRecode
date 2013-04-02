@@ -30,6 +30,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
         this.bp.a(1, new EntityAIHurtByTarget(this, false));
         this.bp.a(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 30.0F, 0, false, false, bK));
         this.be = 50;
+        this.maxHealth = 300; // CanaryMod: initialize
         this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
     }
 
@@ -412,7 +413,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
     }
 
     public int aW() {
-        return 300;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     public int n() {

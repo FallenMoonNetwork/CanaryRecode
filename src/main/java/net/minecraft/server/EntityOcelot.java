@@ -23,6 +23,7 @@ public class EntityOcelot extends EntityTameable {
         this.bo.a(10, new EntityAIWander(this, 0.23F));
         this.bo.a(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
         this.bp.a(1, new EntityAITargetNonTamed(this, EntityChicken.class, 14.0F, 750, false));
+        this.maxHealth = 10; // CanaryMod: initialize
         this.entity = new CanaryOcelot(this); // CanaryMod: Wrap Entity
     }
 
@@ -60,7 +61,7 @@ public class EntityOcelot extends EntityTameable {
     }
 
     public int aW() {
-        return 10;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     protected void a(float f0) {}

@@ -11,11 +11,12 @@ public class EntitySilverfish extends EntityMob {
         this.aH = "/mob/silverfish.png";
         this.a(0.3F, 0.7F);
         this.bI = 0.6F;
+        this.maxHealth = 8; // CanaryMod: initialize
         this.entity = new CanarySilverfish(this); // CanaryMod: Wrap Entity
     }
 
     public int aW() {
-        return 8;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     protected boolean f_() {

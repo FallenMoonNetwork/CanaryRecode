@@ -24,11 +24,12 @@ public class EntitySquid extends EntityWaterMob {
         this.aH = "/mob/squid.png";
         this.a(0.95F, 0.95F);
         this.bM = 1.0F / (this.ab.nextFloat() + 1.0F) * 0.2F;
+        this.maxHealth = 10; // CanaryMod: initialize
         this.entity = new CanarySquid(this); // CanaryMod: Wrap Entity
     }
 
     public int aW() {
-        return 10;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     protected String bb() {

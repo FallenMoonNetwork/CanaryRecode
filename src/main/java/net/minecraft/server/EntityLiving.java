@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
@@ -109,6 +108,9 @@ public abstract class EntityLiving extends Entity {
     private int bX = 0;
     private Entity bY;
     protected int bJ = 0;
+
+    // CanaryMod
+    protected int maxHealth;
 
     public EntityLiving(World world) {
         super(world);
@@ -2100,5 +2102,10 @@ public abstract class EntityLiving extends Entity {
 
     public void h(boolean flag0) {
         this.bV = flag0;
+    }
+
+    // CanaryMod
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 }

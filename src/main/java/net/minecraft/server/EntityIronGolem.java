@@ -25,6 +25,7 @@ public class EntityIronGolem extends EntityGolem {
         this.bp.a(1, new EntityAIDefendVillage(this));
         this.bp.a(2, new EntityAIHurtByTarget(this, false));
         this.bp.a(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true, IMob.a));
+        this.maxHealth = 100; // CanaryMod: initialize
         this.entity = new CanaryIronGolem(this); // CanaryMod: Warp Entity
     }
 
@@ -54,7 +55,7 @@ public class EntityIronGolem extends EntityGolem {
     }
 
     public int aW() {
-        return 100;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     protected int h(int i0) {

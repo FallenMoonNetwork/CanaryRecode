@@ -10,11 +10,12 @@ public class EntityCaveSpider extends EntitySpider {
         super(world);
         this.aH = "/mob/cavespider.png";
         this.a(0.7F, 0.5F);
+        this.maxHealth = 12; // CanaryMod: initialize
         this.entity = new CanaryCaveSpider(this); // CanaryMod: Wrap Entity
     }
 
     public int aW() {
-        return 12;
+        return maxHealth; // CanaryMod: custom Max
     }
 
     public boolean m(Entity entity) {
