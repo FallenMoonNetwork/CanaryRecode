@@ -1,7 +1,10 @@
 package net.minecraft.server;
 
 import java.util.List;
+import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryLightningBolt;
+import net.canarymod.api.world.blocks.CanaryBlock;
+import net.canarymod.hook.world.IgnitionHook;
 
 public class EntityLightningBolt extends EntityWeatherEffect {
 
@@ -22,7 +25,16 @@ public class EntityLightningBolt extends EntityWeatherEffect {
             int i2 = MathHelper.c(d2);
 
             if (world.a(i0, i1, i2) == 0 && Block.av.c(world, i0, i1, i2)) {
-                world.c(i0, i1, i2, Block.av.cz);
+                // CanaryMod: Ignition
+                CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+                ignited.setStatus((byte) 5); // LightningBolt Status 5
+                IgnitionHook hook = new IgnitionHook(ignited, null);
+                Canary.hooks().callHook(hook);
+                if (!hook.isCanceled()) {
+                    world.c(i0, i1, i2, Block.av.cz);
+                }
+                //
+
             }
 
             for (i0 = 0; i0 < 4; ++i0) {
@@ -31,7 +43,16 @@ public class EntityLightningBolt extends EntityWeatherEffect {
                 int i3 = MathHelper.c(d2) + this.ab.nextInt(3) - 1;
 
                 if (world.a(i1, i2, i3) == 0 && Block.av.c(world, i1, i2, i3)) {
-                    world.c(i1, i2, i3, Block.av.cz);
+                    // CanaryMod: Ignition
+                    CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i1, i2, i3);
+                    ignited.setStatus((byte) 5); // LightningBolt Status 5
+                    IgnitionHook hook = new IgnitionHook(ignited, null);
+                    Canary.hooks().callHook(hook);
+                    if (!hook.isCanceled()) {
+                        world.c(i1, i2, i3, Block.av.cz);
+                    }
+                    //
+
                 }
             }
         }
