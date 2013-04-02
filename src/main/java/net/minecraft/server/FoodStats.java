@@ -1,5 +1,12 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.hook.entity.DamageHook;
+import net.canarymod.hook.player.FoodExhaustionHook;
+import net.canarymod.hook.player.FoodLevelHook;
+import net.canarymod.hook.player.FoodSaturationHook;
+
 public class FoodStats {
 
     private int a = 20;
@@ -7,6 +14,7 @@ public class FoodStats {
     private float c;
     private int d = 0;
     private int e = 20;
+    // CanaryMod: entity reference
     private EntityPlayer entityplayer;
 
     public FoodStats(EntityPlayer entityplayer) {
@@ -14,8 +22,17 @@ public class FoodStats {
     }
 
     public void a(int i0, float f0) {
-        this.a = Math.min(i0 + this.a, 20);
-        this.b = Math.min(this.b + (float) i0 * f0 * 2.0F, (float) this.a);
+        // CanaryMod: FoodLevelHook
+        FoodLevelHook lvl = new FoodLevelHook(((EntityPlayerMP) entityplayer).getPlayer(), this.a, Math.min(i0 + this.a, 20));
+        Canary.hooks().callHook(lvl);
+        this.a = Math.min(lvl.getNewValue(), 20);
+        //
+
+        // CanaryMod: FoodSaturationHook
+        FoodSaturationHook sat = new FoodSaturationHook(((EntityPlayerMP) entityplayer).getPlayer(), this.b, Math.min(this.b + (float) i0 * f0 * 2.0F, (float) this.a));
+        Canary.hooks().callHook(sat);
+        this.b = Math.min(sat.getNewValue(), (float) this.a);
+        //
     }
 
     public void a(ItemFood itemfood) {
@@ -27,11 +44,25 @@ public class FoodStats {
 
         this.e = this.a;
         if (this.c > 4.0F) {
-            this.c -= 4.0F;
-            if (this.b > 0.0F) {
-                this.b = Math.max(this.b - 1.0F, 0.0F);
-            } else if (i0 > 0) {
-                this.a = Math.max(this.a - 1, 0);
+            // CanaryMod: FoodExhaustionHook
+            FoodExhaustionHook exh = new FoodExhaustionHook(((EntityPlayerMP) entityplayer).getPlayer(), this.c, this.c - 4.0F);
+            Canary.hooks().callHook(exh);
+            this.c = exh.getNewValue();
+            //
+            if (this.c > 4.0F) { // Hey, if didn't go below 4.0, why change the rest?
+                if (this.b > 0.0F) {
+                    // CanaryMod: FoodSaturationHook
+                    FoodSaturationHook sat = new FoodSaturationHook(((EntityPlayerMP) entityplayer).getPlayer(), this.b, Math.min(this.b - 1.0F, 0.0F));
+                    Canary.hooks().callHook(sat);
+                    this.b = Math.min(sat.getNewValue(), 0.0F);
+                    //
+                } else if (i0 > 0) {
+                    // CanaryMod: FoodLevelHook
+                    FoodLevelHook lvl = new FoodLevelHook(((EntityPlayerMP) entityplayer).getPlayer(), this.a, Math.min(this.a - 1, 0));
+                    Canary.hooks().callHook(lvl);
+                    this.a = Math.max(lvl.getNewValue(), 0);
+                    //
+                }
             }
         }
 
@@ -45,7 +76,13 @@ public class FoodStats {
             ++this.d;
             if (this.d >= 80) {
                 if (entityplayer.aX() > 10 || i0 >= 3 || entityplayer.aX() > 1 && i0 >= 2) {
-                    entityplayer.a(DamageSource.f, 1);
+                    // CanaryMod: DamageHook (starve)
+                    DamageHook dmg = new DamageHook(((EntityPlayerMP) entityplayer).getPlayer(), null, new CanaryDamageSource(DamageSource.f), 1);
+                    Canary.hooks().callHook(dmg);
+                    if (!dmg.isCanceled()) {
+                        entityplayer.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(dmg.getDamageSource().getDamagetype())).getHandle(), dmg.getDamageDealt());
+                    }
+                    //
                 }
 
                 this.d = 0;
@@ -89,7 +126,8 @@ public class FoodStats {
 
     //CanaryMod
     /**
-     * Set the exhaustion leven, overriding the old value
+     * Set the exhaustion level, overriding the old value
+     * 
      * @param f
      */
     public void setExhaustionLevel(float f) {
