@@ -23,7 +23,6 @@ public class EntityCreeper extends EntityMob {
         this.bo.a(6, new EntityAILookIdle(this));
         this.bp.a(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
         this.bp.a(2, new EntityAIHurtByTarget(this, false));
-        this.maxHealth = 20; // CanaryMod: initialize
         this.entity = new CanaryCreeper(this); // CanaryMod: Wrap Entity
     }
 
@@ -44,7 +43,7 @@ public class EntityCreeper extends EntityMob {
     }
 
     public int aW() {
-        return maxHealth; // CanaryMod: custom Max
+        return maxHealth == 0 ? 20 : maxHealth; // CanaryMod: custom Max Health
     }
 
     protected void a() {

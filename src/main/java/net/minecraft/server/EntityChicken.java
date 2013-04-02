@@ -29,7 +29,6 @@ public class EntityChicken extends EntityAnimal {
         this.bo.a(5, new EntityAIWander(this, f0));
         this.bo.a(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.bo.a(7, new EntityAILookIdle(this));
-        this.maxHealth = 4; // CanaryMod: initialize
         this.entity = new CanaryChicken(this); // CanaryMod: Wrap Entity
     }
 
@@ -38,7 +37,7 @@ public class EntityChicken extends EntityAnimal {
     }
 
     public int aW() {
-        return maxHealth; // CanaryMod: custom Max
+        return maxHealth == 0 ? 4 : maxHealth; // CanaryMod: custom Max
     }
 
     public void c() {

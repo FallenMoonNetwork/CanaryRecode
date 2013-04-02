@@ -63,12 +63,11 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         this.aJ = 180.0F;
         this.ad = 20;
         this.aH = "/mob/char.png";
-        this.maxHealth = 20; // CanaryMod: initialize
     }
 
     @Override
     public int aW() {
-        return this.maxHealth; // CanaryMod: custom Max
+        return maxHealth == 0 ? 20 : maxHealth; // CanaryMod: custom Max Health
     }
 
     @Override

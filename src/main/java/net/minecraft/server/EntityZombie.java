@@ -26,7 +26,6 @@ public class EntityZombie extends EntityMob {
         this.bp.a(1, new EntityAIHurtByTarget(this, true));
         this.bp.a(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
         this.bp.a(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 16.0F, 0, false));
-        this.maxHealth = 20; // CanaryMod: initialize
         this.entity = new CanaryZombie(this); // CanaryMod: Wrap Entity
     }
 
@@ -46,7 +45,7 @@ public class EntityZombie extends EntityMob {
     }
 
     public int aW() {
-        return maxHealth; // CanaryMod: custom Max
+        return maxHealth == 0 ? 20 : maxHealth; // CanaryMod: custom Max Health
     }
 
     public int aZ() {

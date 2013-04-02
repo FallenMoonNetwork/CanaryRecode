@@ -109,7 +109,7 @@ public abstract class EntityLiving extends Entity {
     private Entity bY;
     protected int bJ = 0;
 
-    // CanaryMod
+    // CanaryMod: Custom MaxHealth
     protected int maxHealth;
 
     public EntityLiving(World world) {
@@ -2106,6 +2106,6 @@ public abstract class EntityLiving extends Entity {
 
     // CanaryMod
     public void setMaxHealth(int maxHealth) {
-        this.maxHealth = maxHealth;
+        this.aS = maxHealth;
     }
 }

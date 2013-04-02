@@ -18,12 +18,11 @@ public class EntityEnderman extends EntityMob {
         this.bI = 0.2F;
         this.a(0.6F, 2.9F);
         this.Y = 1.0F;
-        this.maxHealth = 40; // CanaryMod: initialize
         this.entity = new CanaryEnderman(this); // CanaryMod: Wrap Entity
     }
 
     public int aW() {
-        return maxHealth; // CanaryMod: custom Max
+        return maxHealth == 0 ? 40 : maxHealth; // CanaryMod: custom Max Health
     }
 
     protected void a() {

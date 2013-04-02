@@ -20,7 +20,6 @@ public class EntityGhast extends EntityFlying implements IMob {
         this.a(4.0F, 4.0F);
         this.ag = true;
         this.be = 5;
-        this.maxHealth = 10; // CanaryMod: initialize
         this.entity = new CanaryGhast(this); // CanaryMod: Wrap Entity
     }
 
@@ -42,7 +41,7 @@ public class EntityGhast extends EntityFlying implements IMob {
     }
 
     public int aW() {
-        return maxHealth; // CanaryMod: custom Max
+        return maxHealth == 0 ? 10 : maxHealth; // CanaryMod: custom Max Health
     }
 
     public void l_() {

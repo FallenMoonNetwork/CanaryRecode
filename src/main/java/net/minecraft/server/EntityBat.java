@@ -14,7 +14,6 @@ public class EntityBat extends EntityAmbientCreature {
         this.aH = "/mob/bat.png";
         this.a(0.5F, 0.9F);
         this.a(true);
-        this.maxHealth = 6; // CanaryMod: initialize
         this.entity = new CanaryBat(this); // CanaryMod: Wrap Entity
     }
 
@@ -52,7 +51,7 @@ public class EntityBat extends EntityAmbientCreature {
     protected void bg() {}
 
     public int aW() {
-        return maxHealth; // CanaryMod: custom Max
+        return maxHealth == 0 ? 6 : maxHealth; // CanaryMod: custom Max Health
     }
 
     public boolean h() {

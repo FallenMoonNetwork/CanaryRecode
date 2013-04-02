@@ -14,7 +14,6 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob {
         this.bo.a(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.bo.a(4, new EntityAILookIdle(this));
         this.bp.a(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, true, false, IMob.a));
-        this.maxHealth = 4; // CanaryMod: initialize
         this.entity = new CanarySnowman(this); // CanaryMod: Wrap Entity
     }
 
@@ -23,7 +22,7 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob {
     }
 
     public int aW() {
-        return maxHealth; // CanaryMod: custom Max
+        return maxHealth == 0 ? 4 : maxHealth; // CanaryMod: custom Max Health
     }
 
     public void c() {

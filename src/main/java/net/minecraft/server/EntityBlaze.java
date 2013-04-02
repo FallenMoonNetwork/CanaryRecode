@@ -15,12 +15,11 @@ public class EntityBlaze extends EntityMob {
         this.aH = "/mob/fire.png";
         this.ag = true;
         this.be = 10;
-        this.maxHealth = 20; // CanaryMod: initialize
         this.entity = new CanaryBlaze(this); // CanaryMod: Wrap Entity
     }
 
     public int aW() {
-        return maxHealth; // CanaryMod: custom Max
+        return maxHealth == 0 ? 20 : maxHealth; // CanaryMod: custom Max
     }
 
     protected void a() {

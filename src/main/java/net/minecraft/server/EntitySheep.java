@@ -28,7 +28,6 @@ public class EntitySheep extends EntityAnimal {
         this.bo.a(8, new EntityAILookIdle(this));
         this.e.a(0, new ItemStack(Item.aX, 1, 0));
         this.e.a(1, new ItemStack(Item.aX, 1, 0));
-        this.maxHealth = 8; // CanaryMod: initialize
         this.entity = new CanarySheep(this); // CanaryMod: Wrap Entity
     }
 
@@ -50,7 +49,7 @@ public class EntitySheep extends EntityAnimal {
     }
 
     public int aW() {
-        return maxHealth; // CanaryMod: custom Max
+        return maxHealth == 0 ? 8 : maxHealth; // CanaryMod: custom Max Health
     }
 
     protected void a() {
