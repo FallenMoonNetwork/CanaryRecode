@@ -87,18 +87,58 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
      * {@inheritDoc}
      */
     @Override
-    public Item decreaseItemStackSize(int itemId, int amount) {
-        // TODO Auto-generated method stub
-        return null;
+    public void decreaseItemStackSize(int itemId, int amount) {
+        Item[] items = getContents();
+        int remaining = amount;
+
+        for (Item item : items) {
+            if (item.getId() == itemId) {
+                if (item.getAmount() == remaining) {
+                    removeItem(item.getSlot());
+                    return;
+                } else if (item.getAmount() > remaining) {
+                    item.setAmount(item.getAmount() - remaining);
+                    setSlot(item.getSlot(), item);
+                    return;
+                } else {
+                    removeItem(item.getSlot());
+                    remaining -= item.getAmount();
+                }
+            }
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Item decreaseItemStackSize(int itemId, int amount, short damage) {
-        // TODO Auto-generated method stub
-        return null;
+    public void decreaseItemStackSize(int itemId, int amount, short damage) {
+        this.decreaseItemStackSize(new CanaryItem(itemId, amount, damage));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void decreaseItemStackSize(Item item) {
+        Item[] items = getContents();
+        int remaining = item.getAmount();
+
+        for (Item it : items) {
+            if (it.getId() == item.getId() && it.getDamage() == item.getDamage()) {
+                if (it.getAmount() == remaining) {
+                    removeItem(it.getSlot());
+                    return;
+                } else if (it.getAmount() > remaining) {
+                    it.setAmount(it.getAmount() - remaining);
+                    setSlot(it.getSlot(), it);
+                    return;
+                } else {
+                    removeItem(it.getSlot());
+                    remaining -= it.getAmount();
+                }
+            }
+        }
     }
 
     /**

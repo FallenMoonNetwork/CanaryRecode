@@ -1,12 +1,17 @@
 package net.canarymod.api.entity.living.humanoid;
 
 
+import net.canarymod.api.CanaryVillagerTrade;
+import net.canarymod.api.VillagerTrade;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.entity.living.EntityLiving;
 import net.canarymod.api.world.CanaryVillage;
 import net.canarymod.api.world.Village;
+import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityVillager;
+import net.minecraft.server.MerchantRecipe;
+import net.minecraft.server.MerchantRecipeList;
 
 
 /**
@@ -142,8 +147,37 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      * {@inheritDoc}
      */
     @Override
+    public VillagerTrade[] getTrades() {
+        MerchantRecipeList list = getHandle().b((EntityPlayer) null);
+        VillagerTrade[] rt = new VillagerTrade[list.size()];
+        for (int i = 0; i < rt.length; i++) {
+            rt[i] = new CanaryVillagerTrade((MerchantRecipe) list.get(i));
+        }
+        return rt;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public void addTrade(VillagerTrade trade) {
+        getHandle().b((EntityPlayer) null).add(((CanaryVillagerTrade) trade).getRecipe());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeTrade(int index) {
+        getHandle().b((EntityPlayer) null).remove(index);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public EntityVillager getHandle() {
         return (EntityVillager) entity;
     }
-
 }
