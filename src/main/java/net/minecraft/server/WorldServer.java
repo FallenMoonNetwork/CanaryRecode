@@ -8,10 +8,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
-
+import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.hook.world.TimeChangeHook;
+import net.canarymod.hook.world.WeatherChangeHook;
 
 public class WorldServer extends World {
 
@@ -81,7 +83,13 @@ public class WorldServer extends World {
             if (!flag0) {
                 long i0 = this.x.g() + 24000L;
 
-                this.x.c(i0 - i0 % 24000L);
+                // CanaryMod: TimeChangeHook
+                TimeChangeHook hook = new TimeChangeHook(getCanaryWorld(), i0 - i0 % 24000L);
+                Canary.hooks().callHook(hook);
+                if (!hook.isCanceled()) {
+                    this.x.c(i0 - i0 % 24000L);
+                }
+                //
                 this.d();
             }
         }
@@ -99,8 +107,14 @@ public class WorldServer extends World {
             this.j = i1;
         }
 
-        this.x.b(this.x.f() + 1L);
-        this.x.c(this.x.g() + 1L);
+        // CanaryMod: TimeChangeHook
+        TimeChangeHook hook = new TimeChangeHook(getCanaryWorld(), this.x.f());
+        Canary.hooks().callHook(hook);
+        if (!hook.isCanceled()) {
+            this.x.b(this.x.f() + 1L);
+            this.x.c(this.x.g() + 1L);
+        }
+        //
         this.C.c("tickPending");
         this.a(false);
         this.C.c("tickTiles");
@@ -153,10 +167,20 @@ public class WorldServer extends World {
     }
 
     private void X() {
-        this.x.g(0);
-        this.x.b(false);
-        this.x.f(0);
-        this.x.a(false);
+        // CanaryMod: WeatherChange
+        WeatherChangeHook hook = new WeatherChangeHook(getCanaryWorld(), false, false);
+        Canary.hooks().callHook(hook);
+        if (!hook.isCanceled()) {
+            this.x.g(0);
+            this.x.b(false);
+        }
+        hook = new WeatherChangeHook(getCanaryWorld(), false, true);
+        Canary.hooks().callHook(hook);
+        if (!hook.isCanceled()) {
+            this.x.f(0);
+            this.x.a(false);
+        }
+        //
     }
 
     public boolean e() {

@@ -77,7 +77,7 @@ public class FoodStats {
             if (this.d >= 80) {
                 if (entityplayer.aX() > 10 || i0 >= 3 || entityplayer.aX() > 1 && i0 >= 2) {
                     // CanaryMod: DamageHook (starve)
-                    DamageHook dmg = new DamageHook(((EntityPlayerMP) entityplayer).getPlayer(), null, new CanaryDamageSource(DamageSource.f), 1);
+                    DamageHook dmg = new DamageHook(null, entityplayer.getCanaryEntity(), new CanaryDamageSource(DamageSource.f), 1);
                     Canary.hooks().callHook(dmg);
                     if (!dmg.isCanceled()) {
                         entityplayer.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(dmg.getDamageSource().getDamagetype())).getHandle(), dmg.getDamageDealt());
