@@ -17,6 +17,7 @@ import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
 import net.canarymod.api.entity.vehicle.CanaryChestMinecart;
 import net.canarymod.api.inventory.CanaryEnderChestInventory;
 import net.canarymod.api.inventory.Inventory;
+import net.canarymod.api.statistics.CanaryStat;
 import net.canarymod.api.world.blocks.CanaryDoubleChest;
 import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
@@ -27,6 +28,7 @@ import net.canarymod.hook.player.HealthChangeHook;
 import net.canarymod.hook.player.InventoryHook;
 import net.canarymod.hook.player.PlayerDeathHook;
 import net.canarymod.hook.player.PortalUseHook;
+import net.canarymod.hook.player.StatGainedHook;
 
 public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
@@ -687,6 +689,13 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void a(StatBase statbase, int i0) {
         if (statbase != null) {
             if (!statbase.f) {
+                // CanaryMod: StatGained
+                StatGainedHook hook = new StatGainedHook(getPlayer(), new CanaryStat(statbase));
+                Canary.hooks().callHook(hook);
+                if (hook.isCanceled()) {
+                    return;
+                }
+                //
                 while (i0 > 100) {
                     this.a.b(new Packet200Statistic(statbase.e, 100));
                     i0 -= 100;
