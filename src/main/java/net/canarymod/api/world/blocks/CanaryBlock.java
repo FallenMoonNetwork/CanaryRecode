@@ -1,8 +1,6 @@
 package net.canarymod.api.world.blocks;
 
 
-import net.canarymod.Canary;
-import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 
 
@@ -13,66 +11,47 @@ public class CanaryBlock implements Block {
     protected World dimension;
     protected BlockFace faceClicked;
 
-    public CanaryBlock(int x, int y, int z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.type = 0;
-        this.data = 0;
-        status = 0;
-        dimension = Canary.getServer().getDefaultWorld();
-    }
-
-    public CanaryBlock(short type, short data) {
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-        this.type = type;
-        this.data = data;
-        status = 0;
-        dimension = Canary.getServer().getDefaultWorld();
-    }
-
-    public CanaryBlock(short type, short data, int x, int y, int z) {
+    public CanaryBlock(short type, short data, int x, int y, int z, World world) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.type = type;
         this.data = data;
         status = 0;
-        dimension = Canary.getServer().getDefaultWorld();
-    }
-
-    public CanaryBlock(short type, short data, int x, int y, int z, CanaryWorld canaryWorld) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.type = type;
-        this.data = data;
-        status = 0;
-        this.dimension = canaryWorld;
+        this.dimension = world;
     }
 
     @Override
-    public short getType() {
+    public short getTypeID() {
         return type;
     }
 
     @Override
-    public void setType(short type) {
+    public void setTypeID(short type) {
         this.type = type;
 
     }
 
     @Override
-    public void setType(int type) {
-        this.type = (short) type;
+    public BlockType getType() {
+        return BlockType.fromIdAndData(type, data);
+    }
+
+    @Override
+    public void setType(BlockType type) {
+        this.type = type.getId();
+        this.data = type.getData();
 
     }
 
     @Override
     public short getData() {
         return data;
+    }
+
+    @Override
+    public void setData(short data) {
+        this.data = data;
     }
 
     @Override
