@@ -5,7 +5,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
+import net.canarymod.Canary;
+import net.canarymod.api.CanaryVillagerTrade;
 import net.canarymod.api.entity.living.humanoid.CanaryVillager;
+import net.canarymod.api.entity.living.humanoid.Villager;
+import net.canarymod.hook.entity.VillagerTradeUnlockHook;
 
 public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
 
@@ -408,7 +412,14 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
         }
 
         for (int i5 = 0; i5 < i0 && i5 < merchantrecipelist.size(); ++i5) {
-            this.i.a((MerchantRecipe) merchantrecipelist.get(i5));
+            MerchantRecipe recipe = (MerchantRecipe) merchantrecipelist.get(i5);
+            // CanaryMod: VillagerTradeUnlock
+            VillagerTradeUnlockHook hook = new VillagerTradeUnlockHook((Villager) getCanaryEntity(), new CanaryVillagerTrade(recipe));
+            Canary.hooks().callHook(hook);
+            if (!hook.isCanceled()) {
+                this.i.a(recipe);
+            }
+            //
         }
     }
 
