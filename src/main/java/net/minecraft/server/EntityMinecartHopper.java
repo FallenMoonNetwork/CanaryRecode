@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import java.util.List;
+import net.canarymod.api.entity.vehicle.CanaryHopperMinecart;
 
 public class EntityMinecartHopper extends EntityMinecartContainer implements Hopper {
 
@@ -9,10 +10,12 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
 
     public EntityMinecartHopper(World world) {
         super(world);
+        this.entity = new CanaryHopperMinecart(this); // Wrap entity
     }
 
     public EntityMinecartHopper(World world, double d0, double d1, double d2) {
         super(world, d0, d1, d2);
+        this.entity = new CanaryHopperMinecart(this); // Wrap entity
     }
 
     public int l() {

@@ -126,6 +126,7 @@ public class NetServerHandler extends NetHandler {
                 if (hook.isCanceled()) {
                     // Return the player to their previous position gracefully, hopefully bypassing the TeleportHook and not going derp.
                     this.c.a.b(new Packet13PlayerLookMove(from.getX(), from.getY() + 1.6200000047683716D, from.getY(), from.getZ(), from.getRotation(), from.getPitch(), false));
+                    this.c.b(from.getX(), from.getY(), from.getZ()); // correct position server side to, or get BoUnCy
                     return;
                 }
             }

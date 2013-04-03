@@ -4,8 +4,17 @@ package net.minecraft.server;
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.api.entity.living.EntityLiving;
 import net.canarymod.api.entity.vehicle.CanaryBoat;
+import net.canarymod.api.entity.vehicle.Vehicle;
+import net.canarymod.api.world.position.Vector3D;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.VehicleCollisionHook;
 import net.canarymod.hook.entity.VehicleDamageHook;
+import net.canarymod.hook.entity.VehicleDestroyHook;
+import net.canarymod.hook.entity.VehicleEnterHook;
+import net.canarymod.hook.entity.VehicleExitHook;
+import net.canarymod.hook.entity.VehicleMoveHook;
 
 
 public class EntityBoat extends Entity {
@@ -68,25 +77,24 @@ public class EntityBoat extends Entity {
     }
 
     public boolean a(DamageSource damagesource, int i0) {
-
-        // CanaryMod: call VehicleDamageHook
-        net.canarymod.api.entity.Entity attk = null;
-
-        if (damagesource.h() != null) {
-            attk = damagesource.h().getCanaryEntity();
-        }
-        VehicleDamageHook hook = new VehicleDamageHook((CanaryBoat) this.entity, attk, new CanaryDamageSource(damagesource), i0);
-
-        Canary.hooks().callHook(hook);
-        if (hook.isCanceled()) {
-            return true;
-        }
-        i0 = hook.getDamageDealt();
-        //
-
         if (this.aq()) {
             return false;
         } else if (!this.q.I && !this.M) {
+            // CanaryMod: VehicleDamage
+            net.canarymod.api.entity.Entity attk = null;
+
+            if (damagesource.h() != null) {
+                attk = damagesource.h().getCanaryEntity();
+            }
+            VehicleDamageHook hook = new VehicleDamageHook((CanaryBoat) this.entity, attk, new CanaryDamageSource(damagesource), i0);
+
+            Canary.hooks().callHook(hook);
+            if (hook.isCanceled()) {
+                return false;
+            }
+            i0 = hook.getDamageDealt();
+            //
+
             this.h(-this.h());
             this.b(10);
             this.a(this.d() + i0 * 10);
@@ -101,7 +109,10 @@ public class EntityBoat extends Entity {
                 if (!flag0) {
                     this.a(Item.aF.cp, 1, 0.0F);
                 }
-
+                // CanaryMod: VehicleDestroy
+                VehicleDestroyHook vdh = new VehicleDestroyHook((Vehicle) this.entity);
+                Canary.hooks().callHook(vdh);
+                //
                 this.w();
             }
 
@@ -280,6 +291,15 @@ public class EntityBoat extends Entity {
 
             this.A = (float) ((double) this.A + d12);
             this.b(this.A, this.B);
+            // CanaryMod: VehicleMove
+            if (Math.floor(this.r) != Math.floor(this.u) || Math.floor(this.s) != Math.floor(this.v) || Math.floor(this.t) != Math.floor(this.w)) {
+                Vector3D from = new Vector3D(this.r, this.s, this.t);
+                Vector3D to = new Vector3D(this.u, this.v, this.w);
+                VehicleMoveHook vmh = new VehicleMoveHook((Vehicle) this.entity, from, to);
+                Canary.hooks().callHook(vmh);
+                // Can't handle canceling yet...
+            }
+            //
             if (!this.q.I) {
                 List list = this.q.b((Entity) this, this.E.b(0.20000000298023224D, 0.0D, 0.20000000298023224D));
                 int i3;
@@ -289,7 +309,13 @@ public class EntityBoat extends Entity {
                         Entity entity = (Entity) list.get(i3);
 
                         if (entity != this.n && entity.L() && entity instanceof EntityBoat) {
-                            entity.f((Entity) this);
+                            // CanaryMod: VehicleCollision
+                            VehicleCollisionHook vch = new VehicleCollisionHook((Vehicle) this.entity, entity.getCanaryEntity());
+                            Canary.hooks().callHook(vch);
+                            if (!vch.isCanceled()) {
+                                entity.f((Entity) this);
+                            }
+                            //
                         }
                     }
                 }
@@ -335,7 +361,20 @@ public class EntityBoat extends Entity {
             return true;
         } else {
             if (!this.q.I) {
-                entityplayer.a((Entity) this);
+                // CanaryMod: VehicleEnter/VehicleExit
+                CancelableHook hook = null;
+                if (this.n == null) {
+                    hook = new VehicleEnterHook((Vehicle) this.entity, (EntityLiving) entityplayer.getCanaryEntity());
+                } else if (this.n == entityplayer) {
+                    hook = new VehicleExitHook((Vehicle) this.entity, (EntityLiving) entityplayer.getCanaryEntity());
+                }
+                if (hook != null) {
+                    Canary.hooks().callHook(hook);
+                    if (!hook.isCanceled()) {
+                        entityplayer.a((Entity) this);
+                    }
+                }
+                //
             }
 
             return true;

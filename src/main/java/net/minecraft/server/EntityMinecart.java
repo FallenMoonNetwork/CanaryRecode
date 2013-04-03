@@ -1,6 +1,16 @@
 package net.minecraft.server;
 
 import java.util.List;
+import net.canarymod.Canary;
+import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.api.entity.living.EntityLiving;
+import net.canarymod.api.entity.vehicle.Vehicle;
+import net.canarymod.api.world.position.Vector3D;
+import net.canarymod.hook.entity.VehicleCollisionHook;
+import net.canarymod.hook.entity.VehicleDamageHook;
+import net.canarymod.hook.entity.VehicleDestroyHook;
+import net.canarymod.hook.entity.VehicleEnterHook;
+import net.canarymod.hook.entity.VehicleMoveHook;
 
 public abstract class EntityMinecart extends Entity {
 
@@ -91,6 +101,21 @@ public abstract class EntityMinecart extends Entity {
             if (this.aq()) {
                 return false;
             } else {
+                // CanaryMod: VehicleDamage
+                net.canarymod.api.entity.Entity attk = null;
+
+                if (damagesource.h() != null) {
+                    attk = damagesource.h().getCanaryEntity();
+                }
+                VehicleDamageHook hook = new VehicleDamageHook((Vehicle) this.entity, attk, new CanaryDamageSource(damagesource), i0);
+
+                Canary.hooks().callHook(hook);
+                if (hook.isCanceled()) {
+                    return false;
+                }
+                i0 = hook.getDamageDealt();
+                //
+
                 this.j(-this.k());
                 this.i(10);
                 this.J();
@@ -117,6 +142,10 @@ public abstract class EntityMinecart extends Entity {
     }
 
     public void a(DamageSource damagesource) {
+        // CanaryMod: VehicleDestroy
+        VehicleDestroyHook vdh = new VehicleDestroyHook((Vehicle) this.entity);
+        Canary.hooks().callHook(vdh);
+        //
         this.w();
         ItemStack itemstack = new ItemStack(Item.aA, 1);
 
@@ -222,6 +251,16 @@ public abstract class EntityMinecart extends Entity {
 
             i0 = MathHelper.c(this.v);
             int i2 = MathHelper.c(this.w);
+
+            // CanaryMod: VehicleMove
+            if (Math.floor(this.r) != Math.floor(this.u) || Math.floor(this.s) != Math.floor(this.v) || Math.floor(this.t) != Math.floor(this.w)) {
+                Vector3D from = new Vector3D(this.r, this.s, this.t);
+                Vector3D to = new Vector3D(this.u, this.v, this.w);
+                VehicleMoveHook vmh = new VehicleMoveHook((Vehicle) this.entity, from, to);
+                Canary.hooks().callHook(vmh);
+                // Can't handle canceling yet... if (vmh.isCanceled()) { }
+            }
+            //
 
             if (BlockRailBase.d_(this.q, i1, i0 - 1, i2)) {
                 --i0;
@@ -608,9 +647,23 @@ public abstract class EntityMinecart extends Entity {
     public void f(Entity entity) {
         if (!this.q.I) {
             if (entity != this.n) {
-                if (entity instanceof EntityLiving && !(entity instanceof EntityPlayer) && !(entity instanceof EntityIronGolem) && this.l() == 0 && this.x * this.x + this.z * this.z > 0.01D && this.n == null && entity.o == null) {
-                    entity.a((Entity) this);
+                // CanaryMod: VehicleCollision
+                VehicleCollisionHook vch = new VehicleCollisionHook((Vehicle) this.entity, entity.getCanaryEntity());
+                Canary.hooks().callHook(vch);
+                if (vch.isCanceled()) {
+                    return;
                 }
+                //
+                if (entity instanceof EntityLiving && !(entity instanceof EntityPlayer) && !(entity instanceof EntityIronGolem) && this.l() == 0 && this.x * this.x + this.z * this.z > 0.01D && this.n == null && entity.o == null) {
+                    // CanaryMod: VehicleEnter (Animal/Mob)
+                    VehicleEnterHook veh = new VehicleEnterHook((Vehicle) this.entity, (EntityLiving) entity.getCanaryEntity());
+                    Canary.hooks().callHook(veh);
+                    if (!veh.isCanceled()) {
+                        entity.a((Entity) this);
+                    }
+                    //
+                }
+
 
                 double d0 = entity.u - this.u;
                 double d1 = entity.w - this.w;
