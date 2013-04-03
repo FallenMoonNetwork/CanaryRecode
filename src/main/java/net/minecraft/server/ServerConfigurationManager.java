@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryPacket;
@@ -405,8 +404,10 @@ public abstract class ServerConfigurationManager {
         this.a.add(entityplayermp1);
         entityplayermp1.d_();
         entityplayermp1.b(entityplayermp1.aX());
+        // CanaryMod: PlayerRespawn
         PlayerRespawnHook hook = new PlayerRespawnHook(entityplayermp1.getPlayer(), loc);
         Canary.hooks().callHook(hook);
+        //
         return entityplayermp1;
     }
 
