@@ -19,6 +19,7 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.player.BlockLeftClickHook;
 import net.canarymod.hook.player.BlockRightClickHook;
 import net.canarymod.hook.player.DisconnectionHook;
+import net.canarymod.hook.player.PlayerLeftClickHook;
 import net.canarymod.hook.player.PlayerMoveHook;
 import net.canarymod.hook.player.SignChangeHook;
 import net.canarymod.hook.player.TeleportHook;
@@ -607,6 +608,9 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void a(Packet18Animation packet18animation) {
         if (packet18animation.b == 1) {
+            // CanaryMod: PlayerLeftClick
+            Canary.hooks().callHook(new PlayerLeftClickHook(this.c.getPlayer()));
+            //
             this.c.bK();
         }
     }
