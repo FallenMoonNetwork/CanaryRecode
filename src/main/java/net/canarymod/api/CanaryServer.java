@@ -112,7 +112,7 @@ public class CanaryServer implements Server {
         if (!Canary.commands().parseCommand(this, command.split(" ")[0], command.split(" "))) {
             return server.E().a(server, command) > 0; // Vanilla Commands passed
         }
-        return false;
+        return true;
     }
 
     /**
@@ -129,7 +129,7 @@ public class CanaryServer implements Server {
         if (!Canary.commands().parseCommand(player, command.split(" ")[0], command.split(" "))) {
             return server.E().a(((CanaryPlayer) player).getHandle(), command) > 0; // Vanilla Commands passed
         }
-        return false;
+        return true;
     }
 
     /**
