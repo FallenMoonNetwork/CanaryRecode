@@ -12,9 +12,11 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
+import net.canarymod.api.entity.vehicle.CanaryVehicle;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.entity.EntitySpawnHook;
+import net.canarymod.hook.entity.VehicleCollisionHook;
 import net.canarymod.hook.world.BlockUpdateHook;
 import net.canarymod.hook.world.TimeChangeHook;
 import net.canarymod.hook.world.WeatherChangeHook;
@@ -955,18 +957,43 @@ public abstract class World implements IBlockAccess {
             }
         }
 
+        // CanaryMod: Implemented fix via M4411K4 VEHICLE_COLLISION hook
+        CanaryVehicle vehicle = null;
+        if (entity instanceof EntityMinecart || entity instanceof EntityBoat) {
+            vehicle = (CanaryVehicle) entity.getCanaryEntity();
+        }
+
         double d0 = 0.25D;
         List list = this.b(entity, axisalignedbb.b(d0, d0, d0));
 
-        for (int i9 = 0; i9 < list.size(); ++i9) {
-            AxisAlignedBB axisalignedbb1 = ((Entity) list.get(i9)).D();
+        for (int j2 = 0; j2 < list.size(); ++j2) {
+            Entity entity1 = (Entity) list.get(j2); // CanaryMod: split these two lines
+            AxisAlignedBB axisalignedbb1 = entity1.D();
 
             if (axisalignedbb1 != null && axisalignedbb1.a(axisalignedbb)) {
+                // CanaryMod: this collided with a boat
+                if (vehicle != null) {
+                    VehicleCollisionHook vch = new VehicleCollisionHook(vehicle, entity.getCanaryEntity());
+                    Canary.hooks().callHook(vch);
+                    if (vch.isCanceled()) {
+                        continue;
+                    }
+                }
+                //
                 this.M.add(axisalignedbb1);
             }
 
-            axisalignedbb1 = entity.g((Entity) list.get(i9));
+            axisalignedbb1 = entity.g((Entity) list.get(j2));
             if (axisalignedbb1 != null && axisalignedbb1.a(axisalignedbb)) {
+                // CanaryMod: this collided with entity
+                if (vehicle != null) {
+                    VehicleCollisionHook vch = new VehicleCollisionHook(vehicle, entity.getCanaryEntity());
+                    Canary.hooks().callHook(vch);
+                    if (vch.isCanceled()) {
+                        continue;
+                    }
+                }
+                //
                 this.M.add(axisalignedbb1);
             }
         }
