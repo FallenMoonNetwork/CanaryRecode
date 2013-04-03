@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.CanaryPacket;
@@ -18,6 +19,7 @@ import net.canarymod.api.entity.vehicle.CanaryChestMinecart;
 import net.canarymod.api.inventory.CanaryEnderChestInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.statistics.CanaryStat;
+import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.blocks.CanaryDoubleChest;
 import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
@@ -326,6 +328,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         return !this.b.X() ? false : super.a(entityplayer);
     }
 
+    //CanaryMod renamed c -> changeDimension
     @Override
     public void c(int i0) {
         if (this.ar == 1 && i0 == 1) {
@@ -333,7 +336,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             this.q.e((Entity) this);
             this.j = true;
             this.a.b(new Packet70GameEvent(4, 0));
-        } else {
+        }
+        else {
             if (this.ar == 1 && i0 == 0) {
                 this.a((StatBase) AchievementList.B);
                 ChunkCoordinates chunkcoordinates = this.b.getWorld(this.getCanaryWorld().getName(), i0).l();
@@ -349,6 +353,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
             // CanaryMod onPortalUse
             Location goingTo = simulatePortalUse(i0, MinecraftServer.D().getWorld(getCanaryWorld().getName(), i0));
+
             PortalUseHook hook = new PortalUseHook(getPlayer(), goingTo);
 
             if (!hook.isCanceled()) {
@@ -891,5 +896,23 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public CanaryNetServerHandler getServerHandler() {
         return a.getCanaryServerHandler();
+    }
+
+    @Override
+    public void setDimension(CanaryWorld world) {
+        super.setDimension(world);
+        this.c.a((WorldServer)world.getHandle());
+    }
+
+    public void changeWorld(WorldServer srv) {
+        ChunkCoordinates chunkcoordinates = srv.l();
+        if (chunkcoordinates != null) {
+            this.a.a((double) chunkcoordinates.a, (double) chunkcoordinates.b, (double) chunkcoordinates.c, 0.0F, 0.0F, srv.getCanaryWorld().getType().getId(), srv.getCanaryWorld().getName());
+        }
+        this.b.ad().a(this, srv.getCanaryWorld().getName(), srv.getCanaryWorld().getType().getId());
+        this.cp = -1;
+        this.cm = -1;
+        this.cn = -1;
+        this.cn = -1;
     }
 }

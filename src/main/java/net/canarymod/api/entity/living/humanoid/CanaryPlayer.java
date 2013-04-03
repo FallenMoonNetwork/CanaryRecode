@@ -4,6 +4,7 @@ package net.canarymod.api.entity.living.humanoid;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
@@ -31,13 +32,11 @@ import net.canarymod.hook.player.ChatHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
 import net.canarymod.warp.Warp;
-import net.minecraft.server.AchievementList;
 import net.minecraft.server.ChunkCoordinates;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.EnumGameType;
 import net.minecraft.server.ItemStack;
-import net.minecraft.server.StatBase;
 import net.minecraft.server.WorldSettings;
 
 
@@ -606,9 +605,10 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         if (ent.o != null) {
             ent.h(ent.o);
         }
-        // Collect world switch achievement ?
-        ent.a((StatBase) AchievementList.B);
+//        ent.a((StatBase) AchievementList.B);
         Canary.getServer().getConfigurationManager().switchDimension(ent.getPlayer(), dim, false);
+//        ((EntityPlayerMP)entity).changeWorld((WorldServer) ((CanaryWorld) dim).getHandle());
+//        ((EntityPlayerMP)entity).b.ad().a(((EntityPlayerMP)entity), dim.getName(), dim.getType().getId());
         refreshCreativeMode();
     }
 

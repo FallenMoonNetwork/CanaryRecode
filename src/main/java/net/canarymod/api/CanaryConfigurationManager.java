@@ -73,6 +73,7 @@ public class CanaryConfigurationManager implements ConfigurationManager {
 
     @Override
     public void switchDimension(Player player, World world, boolean createPortal) {
-        manager.a(((CanaryPlayer) player).getHandle(), world.getName(), world.getType().getId());
+        //Respawn
+        manager.a(((CanaryPlayer) player).getHandle(), world.getType().getId(), false, world.getSpawnLocation());
     }
 }

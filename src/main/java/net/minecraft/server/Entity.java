@@ -1501,14 +1501,14 @@ public abstract class Entity {
         this.as = entity.as;
     }
 
+    //CanaryMod renamed c -> changeDimension
     public void c(int i0) {
         if (!this.q.I && !this.M) {
             this.q.C.a("changeDimension");
             MinecraftServer minecraftserver = MinecraftServer.D();
             int i1 = this.ar;
-            //CanaryMod changes for multiworld
             WorldServer worldserver = minecraftserver.getWorld(getCanaryWorld().getName(), i0);
-            WorldServer worldserver1 = minecraftserver.getWorld(getCanaryWorld().getName(), i0);
+            WorldServer worldserver1 = minecraftserver.getWorld(getCanaryWorld().getName(), i1);
 
             this.ar = i0;
             this.q.e(this);
@@ -1579,7 +1579,6 @@ public abstract class Entity {
 
     public void setDimension(CanaryWorld dim) {
         this.q = dim.getHandle();
-        this.q.setCanaryWorld(dim);
     }
 
     public CanaryEntity getCanaryEntity() {
