@@ -394,7 +394,7 @@ public class CanaryItem implements Item {
         CanaryItem[] items = new CanaryItem[stackarray.length];
 
         for (int index = 0; index < stackarray.length; index++) {
-            if (stackarray != null) {
+            if (stackarray[index] != null) {
                 items[index] = stackarray[index].getCanaryItem();
             }
         }
