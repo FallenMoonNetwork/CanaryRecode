@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.CanaryPacket;
@@ -24,6 +23,7 @@ import net.canarymod.api.world.blocks.CanaryDoubleChest;
 import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.canarymod.api.world.position.Location;
+import net.canarymod.commandsys.CanaryCommand;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.player.ExperienceHook;
 import net.canarymod.hook.player.HealthChangeHook;
@@ -813,7 +813,21 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     @Override
     public boolean a(int i0, String s0) {
-        return "seed".equals(s0) && !this.b.T() ? true : (!"tell".equals(s0) && !"help".equals(s0) && !"me".equals(s0) ? this.b.ad().e(this.bS) : true);
+        // CanaryMod: replace permission checking with ours
+        // return "seed".equals(s0) && !this.b.T() ? true : (!"tell".equals(s0) && !"help".equals(s0) && !"me".equals(s0) ? this.b.ad().e(this.bS) : true);
+        if (s0.trim().isEmpty()) { // Purely checking for permission level
+            return getPlayer().hasPermission("canary.world.commandblock");
+        }
+        if (s0.startsWith("/")) {
+            s0 = s0.substring(1);
+        }
+        CanaryCommand command = Canary.commands().getCommand(s0.contains(" ") ? s0.split(" ")[0] : s0);
+        if (command != null) {
+            return getPlayer().hasPermission(command.permissionNode);
+        }
+        // Might be vanilla, so just assume
+        return getPlayer().hasPermission("canary.commands.vanilla.".concat(s0.contains(" ") ? s0.split(" ")[0] : s0));
+        //
     }
 
     public String p() {

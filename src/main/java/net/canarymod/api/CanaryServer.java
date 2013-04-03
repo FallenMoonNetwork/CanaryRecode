@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import net.canarymod.Canary;
 import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -110,7 +109,10 @@ public class CanaryServer implements Server {
         if (hook.isCanceled()) {
             return true;
         }
-        return Canary.commands().parseCommand(this, command.split(" ")[0], command.split(" "));
+        if (!Canary.commands().parseCommand(this, command.split(" ")[0], command.split(" "))) {
+            return server.E().a(server, command) > 0; // Vanilla Commands passed
+        }
+        return false;
     }
 
     /**
@@ -124,7 +126,10 @@ public class CanaryServer implements Server {
         if (hook.isCanceled()) {
             return true;
         }
-        return Canary.commands().parseCommand(player, command.split(" ")[0], command.split(" "));
+        if (!Canary.commands().parseCommand(player, command.split(" ")[0], command.split(" "))) {
+            return server.E().a(((CanaryPlayer) player).getHandle(), command) > 0; // Vanilla Commands passed
+        }
+        return false;
     }
 
     /**

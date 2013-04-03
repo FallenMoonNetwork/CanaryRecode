@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.world.blocks.Block;
@@ -941,7 +940,7 @@ public class NetServerHandler extends NetHandler {
                 if ("MC|AdvCdm".equals(packet250custompayload.a)) {
                     if (!this.d.Z()) {
                         this.c.a(this.c.a("advMode.notEnabled", new Object[0]));
-                    } else if (this.c.a(2, "") && this.c.ce.d) {
+                    } else if (this.c.a(2, "") /*&& this.c.ce.d*/) { // CanaryMod: First check for Command Block Permission ignore Creative
                         try {
                             datainputstream = new DataInputStream(new ByteArrayInputStream(packet250custompayload.c));
                             i0 = datainputstream.readInt();
@@ -951,15 +950,19 @@ public class NetServerHandler extends NetHandler {
                             TileEntity tileentity = this.c.q.r(i0, i1, i2);
 
                             if (tileentity != null && tileentity instanceof TileEntityCommandBlock) {
-                                ((TileEntityCommandBlock) tileentity).b(s0);
-                                this.c.q.j(i0, i1, i2);
-                                this.c.a("Command set: " + s0);
+                                if (this.c.a(0, s0)) { // CanaryMod: Check for Command Permission
+                                    ((TileEntityCommandBlock) tileentity).b(s0);
+                                    this.c.q.j(i0, i1, i2);
+                                    this.c.a("Command set: " + s0);
+                                } else {
+                                    this.c.a("No Permission to Command: " + s0); // CanaryMod: No Permission (locale?)
+                                }
                             }
                         } catch (Exception exception3) {
                             exception3.printStackTrace();
                         }
                     } else {
-                        this.c.a(this.c.a("advMode.notAllowed", new Object[0]));
+                        this.c.a(this.c.a("advMode.notAllowed", new Object[0])); // TODO: Change message?
                     }
                 } else if ("MC|Beacon".equals(packet250custompayload.a)) {
                     if (this.c.bM instanceof ContainerBeacon) {
