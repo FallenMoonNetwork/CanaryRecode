@@ -7,9 +7,11 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.inventory.CanaryEnderChestInventory;
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.hook.player.EntityRightClickHook;
+import net.canarymod.hook.player.ItemDropHook;
 import net.canarymod.hook.player.LevelUpHook;
 
 public abstract class EntityPlayer extends EntityLiving implements ICommandSender {
@@ -457,9 +459,22 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
                 entityitem.z += Math.sin((double) f1) * (double) f0;
             }
 
-            this.a(entityitem);
-            this.a(StatList.v, 1);
-            return entityitem;
+            // CanaryMod: ItemDrop
+            ItemDropHook hook = new ItemDropHook(((EntityPlayerMP) this).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity());
+            Canary.hooks().callHook(hook);
+            if (!hook.isCanceled()) {
+                CanaryItem droppedItem = entityitem.d().getCanaryItem();
+
+                if (droppedItem.getAmount() < 0) {
+                    droppedItem.setAmount(1);
+                }
+                this.a(entityitem);
+                this.a(StatList.v, 1);
+                return entityitem;
+            } else {
+                return null;
+            }
+            //
         }
     }
 
