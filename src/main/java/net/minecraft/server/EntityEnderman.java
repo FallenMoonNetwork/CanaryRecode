@@ -3,6 +3,7 @@ package net.minecraft.server;
 import java.util.Arrays;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.monster.CanaryEnderman;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.entity.EndermanDropBlockHook;
 import net.canarymod.hook.entity.EndermanPickupBlockHook;
 
@@ -102,19 +103,18 @@ public class EntityEnderman extends EntityMob {
                     i1 = MathHelper.c(this.v + this.ab.nextDouble() * 3.0D);
                     i2 = MathHelper.c(this.w - 2.0D + this.ab.nextDouble() * 4.0D);
                     i3 = this.q.a(i0, i1, i2);
-                    if (d[i3]) {
+                    // CanaryMod: Replace checking static array with checking the world config list or Ender Blocks
+                    if (Arrays.asList(Configuration.getWorldConfig(getCanaryWorld().getName()).getEnderBlocks()).contains(i3)) {
                         // CanaryMod: call EndermanPickupBlockHook
                         EndermanPickupBlockHook hook = new EndermanPickupBlockHook((CanaryEnderman) entity, ((CanaryEnderman) entity).getWorld().getBlockAt(i0, i1, i2));
 
                         Canary.hooks().callHook(hook);
-                        if (hook.isCanceled()) {
-                            return;
+                        if (!hook.isCanceled()) {
+                            this.a(this.q.a(i0, i1, i2));
+                            this.s(this.q.h(i0, i1, i2));
+                            this.q.c(i0, i1, i2, 0);
                         }
                         //
-                        
-                        this.a(this.q.a(i0, i1, i2));
-                        this.s(this.q.h(i0, i1, i2));
-                        this.q.c(i0, i1, i2, 0);
                     }
                 }
             } else if (this.ab.nextInt(2000) == 0) {
@@ -129,13 +129,11 @@ public class EntityEnderman extends EntityMob {
                     EndermanDropBlockHook hook = new EndermanDropBlockHook((CanaryEnderman)entity, ((CanaryEnderman)entity).getWorld().getBlockAt(i0, i1, i2));
 
                     Canary.hooks().callHook(hook);
-                    if (hook.isCanceled()) {
-                        return;
+                    if (!hook.isCanceled()) {
+                        this.q.f(i0, i1, i2, this.o(), this.p(), 3);
+                        this.a(0);
                     }
                     //
-                    
-                    this.q.f(i0, i1, i2, this.o(), this.p(), 3);
-                    this.a(0);
                 }
             }
         }

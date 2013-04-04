@@ -67,6 +67,7 @@ public class Chunk {
 
         Arrays.fill(this.b, -999);
         Arrays.fill(this.s, (byte) -1);
+        canaryChunk = new CanaryChunk(this); // CanaryMod: wrap chunk
     }
 
     public Chunk(World world, byte[] abyte, int i0, int i1) {
@@ -90,7 +91,7 @@ public class Chunk {
                 }
             }
         }
-        canaryChunk = new CanaryChunk(this);
+        canaryChunk = new CanaryChunk(this); // CanaryMod: wrap chunk
     }
 
     public boolean a(int i0, int i1) {
