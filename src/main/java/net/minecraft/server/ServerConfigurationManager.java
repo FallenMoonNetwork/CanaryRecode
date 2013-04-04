@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
 import net.canarymod.Canary;
+import net.canarymod.Translator;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -240,7 +242,7 @@ public abstract class ServerConfigurationManager {
 
     public String a(SocketAddress socketaddress, String s0) {
 
-        // CanaryMod, add some stuff here
+        // CanaryMod, redo the whole thing
         String s2 = socketaddress.toString();
 
         s2 = s2.substring(s2.indexOf("/") + 1);
@@ -254,35 +256,46 @@ public abstract class ServerConfigurationManager {
         }
         if(Canary.bans().isBanned(s0)) {
             Ban ban = Canary.bans().getBan(s0);
-            //TODO: Temp bans
+            if(ban.getTimestamp() != -1) {
+                return ban.getReason() + ", " + Translator.translateAndFormat("ban expires", Canary.formatTimestamp(ban.getTimestamp()));
+            }
             return ban.getReason();
         }
-
-        if (this.f.a(s0)) {
-            BanEntry banentry = (BanEntry) this.f.c().get(s0);
-            String s1 = "You are banned from this server!\nReason: " + banentry.f();
-
-            if (banentry.d() != null) {
-                s1 = s1 + "\nYour ban will be removed on " + d.format(banentry.d());
-            }
-
-            return s1;
-        } else if (!this.d(s0)) {
-            return "You are not white-listed on this server!";
-        } else {
-            if (this.g.a(s2)) {
-                BanEntry banentry1 = (BanEntry) this.g.c().get(s2);
-                String s3 = "Your IP address is banned from this server!\nReason: " + banentry1.f();
-
-                if (banentry1.d() != null) {
-                    s3 = s3 + "\nYour ban will be removed on " + d.format(banentry1.d());
-                }
-
-                return s3;
-            } else {
-                return this.a.size() >= this.b ? "The server is full!" : null;
-            }
+        if(Canary.bans().isIpBanned(s2)) {
+            return Translator.translate("you are banned");
         }
+
+        if(!Canary.whitelist().isWhitelisted(s0)) {
+            return Translator.translate("not on whitelist");
+        }
+
+        return this.a.size() >= this.b ? Translator.translate("server full") : null;
+
+//        if (this.f.a(s0)) {
+//            BanEntry banentry = (BanEntry) this.f.c().get(s0);
+//            String s1 = "You are banned from this server!\nReason: " + banentry.f();
+//
+//            if (banentry.d() != null) {
+//                s1 = s1 + "\nYour ban will be removed on " + d.format(banentry.d());
+//            }
+//
+//            return s1;
+//        } else if (!this.d(s0)) {
+//            return "You are not white-listed on this server!";
+//        } else {
+//            if (this.g.a(s2)) {
+//                BanEntry banentry1 = (BanEntry) this.g.c().get(s2);
+//                String s3 = "Your IP address is banned from this server!\nReason: " + banentry1.f();
+//
+//                if (banentry1.d() != null) {
+//                    s3 = s3 + "\nYour ban will be removed on " + d.format(banentry1.d());
+//                }
+//
+//                return s3;
+//            } else {
+//                return this.a.size() >= this.b ? "The server is full!" : null;
+//            }
+//        }
     }
 
     public EntityPlayerMP a(String playername) {
