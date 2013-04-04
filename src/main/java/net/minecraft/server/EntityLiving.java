@@ -13,6 +13,7 @@ import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.entity.EntityDespawnHook;
+import net.canarymod.hook.entity.MobTargetHook;
 import net.canarymod.hook.entity.PotionEffectAppliedHook;
 import net.canarymod.hook.entity.PotionEffectFinishHook;
 
@@ -209,6 +210,13 @@ public abstract class EntityLiving extends Entity {
     }
 
     public void b(EntityLiving entityliving) {
+        // CanaryMod: MobTarget
+        MobTargetHook hook = new MobTargetHook((net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) entityliving.getCanaryEntity());
+        Canary.hooks().callHook(hook);
+        if (hook.isCanceled()) {
+            return;
+        }
+        //
         this.bO = entityliving;
     }
 

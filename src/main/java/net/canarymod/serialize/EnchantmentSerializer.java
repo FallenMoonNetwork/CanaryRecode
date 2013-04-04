@@ -2,8 +2,8 @@ package net.canarymod.serialize;
 
 
 import net.canarymod.CanaryDeserializeException;
-import net.canarymod.api.CanaryEnchantment;
-import net.canarymod.api.Enchantment;
+import net.canarymod.api.inventory.CanaryEnchantment;
+import net.canarymod.api.inventory.Enchantment;
 
 
 public class EnchantmentSerializer implements Serializer<CanaryEnchantment> {
@@ -17,7 +17,7 @@ public class EnchantmentSerializer implements Serializer<CanaryEnchantment> {
                 throw new CanaryDeserializeException("Could not deserialize Enchantment: Number of fields do not match expected fields (" + fields.length + "/2)", getVendor());
             }
             Enchantment.Type type = Enchantment.Type.fromId(Integer.parseInt(fields[0]));
-            CanaryEnchantment ench = new CanaryEnchantment(type, Integer.parseInt(fields[1]));
+            CanaryEnchantment ench = new CanaryEnchantment(type, Short.parseShort(fields[1]));
 
             return ench;
         } catch (NumberFormatException e) {

@@ -1,7 +1,10 @@
 package net.minecraft.server;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.canarymod.api.inventory.CanaryEnchantment;
+import net.canarymod.hook.player.EnchantHook;
 
 public class ContainerEnchantment extends Container {
 
@@ -111,6 +114,7 @@ public class ContainerEnchantment extends Container {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public boolean a(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = this.a.a(0);
 
@@ -120,26 +124,40 @@ public class ContainerEnchantment extends Container {
                 boolean flag0 = itemstack.c == Item.aM.cp;
 
                 if (list != null) {
-                    entityplayer.a(-this.g[i0]);
-                    if (flag0) {
-                        itemstack.c = Item.bX.cp;
+                    // CanaryMod: Enchant
+                    List<net.canarymod.api.inventory.Enchantment> cench = new ArrayList<net.canarymod.api.inventory.Enchantment>();
+                    for (EnchantmentData endat : (List<EnchantmentData>) list) {
+                        cench.add(new CanaryEnchantment(endat));
                     }
+                    EnchantHook hook = new EnchantHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), cench);
+                    if (!hook.isCanceled() && hook.isValid(false)) {
+                        list.clear();
+                        for (net.canarymod.api.inventory.Enchantment ench : hook.getEnchantmentList()) {
+                            list.add(((CanaryEnchantment) ench).getEnchantmentData());
+                        }
 
-                    int i1 = flag0 ? this.l.nextInt(list.size()) : -1;
+                        entityplayer.a(-this.g[i0]);
+                        if (flag0) {
+                            itemstack.c = Item.bX.cp;
+                        }
 
-                    for (int i2 = 0; i2 < list.size(); ++i2) {
-                        EnchantmentData enchantmentdata = (EnchantmentData) list.get(i2);
+                        int i1 = flag0 ? this.l.nextInt(list.size()) : -1;
 
-                        if (!flag0 || i2 == i1) {
-                            if (flag0) {
-                                Item.bX.a(itemstack, enchantmentdata);
-                            } else {
-                                itemstack.a(enchantmentdata.b, enchantmentdata.c);
+                        for (int i2 = 0; i2 < list.size(); ++i2) {
+                            EnchantmentData enchantmentdata = (EnchantmentData) list.get(i2);
+
+                            if (!flag0 || i2 == i1) {
+                                if (flag0) {
+                                    Item.bX.a(itemstack, enchantmentdata);
+                                } else {
+                                    itemstack.a(enchantmentdata.b, enchantmentdata.c);
+                                }
                             }
                         }
-                    }
 
-                    this.a(this.a);
+                        this.a(this.a);
+                    }
+                    //
                 }
             }
 

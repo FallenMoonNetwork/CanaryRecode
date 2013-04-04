@@ -3,9 +3,9 @@ package net.canarymod.serialize;
 
 import net.canarymod.Canary;
 import net.canarymod.CanaryDeserializeException;
-import net.canarymod.api.CanaryEnchantment;
-import net.canarymod.api.Enchantment;
+import net.canarymod.api.inventory.CanaryEnchantment;
 import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.Enchantment;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.ItemStack;
 

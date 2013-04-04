@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
 import java.util.List;
+import net.canarymod.Canary;
 import net.canarymod.api.entity.living.monster.CanaryPigZombie;
+import net.canarymod.hook.entity.MobTargetHook;
 
 public class EntityPigZombie extends EntityZombie {
 
@@ -54,19 +56,25 @@ public class EntityPigZombie extends EntityZombie {
             Entity entity = damagesource.i();
 
             if (entity instanceof EntityPlayer) {
-                List list = this.q.b((Entity) this, this.E.b(32.0D, 32.0D, 32.0D));
+                // CanaryMod: MobTarget
+                MobTargetHook hook = new MobTargetHook((net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) entity.getCanaryEntity());
+                Canary.hooks().callHook(hook);
+                if (!hook.isCanceled()) {
+                    List list = this.q.b((Entity) this, this.E.b(32.0D, 32.0D, 32.0D));
 
-                for (int i1 = 0; i1 < list.size(); ++i1) {
-                    Entity entity1 = (Entity) list.get(i1);
+                    for (int i1 = 0; i1 < list.size(); ++i1) {
+                        Entity entity1 = (Entity) list.get(i1);
 
-                    if (entity1 instanceof EntityPigZombie) {
-                        EntityPigZombie entitypigzombie = (EntityPigZombie) entity1;
+                        if (entity1 instanceof EntityPigZombie) {
+                            EntityPigZombie entitypigzombie = (EntityPigZombie) entity1;
 
-                        entitypigzombie.p(entity);
+                            entitypigzombie.p(entity);
+                        }
                     }
-                }
 
-                this.p(entity);
+                    this.p(entity);
+                }
+                //
             }
 
             return super.a(damagesource, i0);

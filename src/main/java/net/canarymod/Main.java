@@ -3,7 +3,7 @@ package net.canarymod;
 
 import java.io.File;
 
-import net.canarymod.api.Enchantment;
+import net.canarymod.api.inventory.Enchantment;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.serialize.EnchantmentSerializer;
 import net.canarymod.serialize.ItemSerializer;

@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.living.monster.CanaryGhast;
+import net.canarymod.hook.entity.MobTargetHook;
 
 public class EntityGhast extends EntityFlying implements IMob {
 
@@ -88,7 +90,16 @@ public class EntityGhast extends EntityFlying implements IMob {
         }
 
         if (this.h == null || this.i-- <= 0) {
-            this.h = this.q.b(this, 100.0D);
+            // CanaryMod: MobTarget
+            EntityPlayer entity = this.q.b(this, 100.0D);
+            if (entity != null) {
+                MobTargetHook hook = new MobTargetHook((net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) entity.getCanaryEntity());
+                Canary.hooks().callHook(hook);
+                if (!hook.isCanceled()) {
+                    this.h = entity;
+                }
+            }
+            //
             if (this.h != null) {
                 this.i = 20;
             }

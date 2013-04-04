@@ -4,8 +4,10 @@ import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.EntityLiving;
+import net.canarymod.api.entity.vehicle.Minecart;
 import net.canarymod.api.entity.vehicle.Vehicle;
 import net.canarymod.api.world.position.Vector3D;
+import net.canarymod.hook.entity.MinecartActivateHook;
 import net.canarymod.hook.entity.VehicleCollisionHook;
 import net.canarymod.hook.entity.VehicleDamageHook;
 import net.canarymod.hook.entity.VehicleDestroyHook;
@@ -275,7 +277,13 @@ public abstract class EntityMinecart extends Entity {
 
                 this.a(i1, i0, i2, d4, d5, i3, i4);
                 if (i3 == Block.cx.cz) {
-                    this.a(i1, i0, i2, (i4 & 8) != 0);
+                    // CanaryMod: MinecartActivate
+                    MinecartActivateHook mah = new MinecartActivateHook((Minecart) this.getCanaryEntity(), (i1 & 8) != 0);
+                    Canary.hooks().callHook(mah);
+                    if (!mah.isCanceled()) {
+                        this.a(i1, i0, i2, (i4 & 8) != 0);
+                    }
+                    //
                 }
             } else {
                 this.b(d4);
