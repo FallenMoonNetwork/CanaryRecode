@@ -10,8 +10,11 @@ import java.util.concurrent.Callable;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
+import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.entity.EntityDespawnHook;
+import net.canarymod.hook.entity.PotionEffectAppliedHook;
+import net.canarymod.hook.entity.PotionEffectFinishHook;
 
 
 public abstract class EntityLiving extends Entity {
@@ -1727,6 +1730,14 @@ public abstract class EntityLiving extends Entity {
     }
 
     public void d(PotionEffect potioneffect) {
+        // CanaryMod: PotionEffectApplied
+        PotionEffectAppliedHook hook = new PotionEffectAppliedHook((net.canarymod.api.entity.living.EntityLiving) getCanaryEntity(), new CanaryPotionEffect(potioneffect));
+        Canary.hooks().callHook(hook);
+        if (hook.getPotionEffect() == null) {
+            return;
+        }
+        potioneffect = ((CanaryPotionEffect) hook.getPotionEffect()).getHandle();
+        //
         if (this.e(potioneffect)) {
             if (this.bn.containsKey(Integer.valueOf(potioneffect.a()))) {
                 ((PotionEffect) this.bn.get(Integer.valueOf(potioneffect.a()))).a(potioneffect);
@@ -1771,6 +1782,10 @@ public abstract class EntityLiving extends Entity {
     }
 
     protected void c(PotionEffect potioneffect) {
+        // CanaryMod: PotionEffectFinish
+        PotionEffectFinishHook hook = new PotionEffectFinishHook((net.canarymod.api.entity.living.EntityLiving) getCanaryEntity(), new CanaryPotionEffect(potioneffect));
+        Canary.hooks().callHook(hook);
+        //
         this.h = true;
     }
 
