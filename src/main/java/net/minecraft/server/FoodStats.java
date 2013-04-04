@@ -25,13 +25,13 @@ public class FoodStats {
         // CanaryMod: FoodLevelHook
         FoodLevelHook lvl = new FoodLevelHook(((EntityPlayerMP) entityplayer).getPlayer(), this.a, Math.min(i0 + this.a, 20));
         Canary.hooks().callHook(lvl);
-        this.a = Math.min(lvl.getNewValue(), 20);
+        this.a = Math.min(Math.max(lvl.getNewValue(), 0), 20);
         //
 
         // CanaryMod: FoodSaturationHook
         FoodSaturationHook sat = new FoodSaturationHook(((EntityPlayerMP) entityplayer).getPlayer(), this.b, Math.min(this.b + (float) i0 * f0 * 2.0F, (float) this.a));
         Canary.hooks().callHook(sat);
-        this.b = Math.min(sat.getNewValue(), (float) this.a);
+        this.b = Math.min(Math.max(sat.getNewValue(), 0.0F), (float) this.a);
         //
     }
 
