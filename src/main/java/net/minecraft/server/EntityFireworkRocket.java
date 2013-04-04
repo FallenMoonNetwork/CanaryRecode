@@ -1,6 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryFireworkRocket;
+import net.canarymod.api.entity.FireworkRocket;
+import net.canarymod.hook.world.FireworkExplodeHook;
 
 public class EntityFireworkRocket extends Entity {
 
@@ -83,8 +86,14 @@ public class EntityFireworkRocket extends Entity {
         }
 
         if (!this.q.I && this.a > this.b) {
-            this.q.a((Entity) this, (byte) 17);
-            this.w();
+            // CanaryMod: FireworkExplode
+            FireworkExplodeHook hook = new FireworkExplodeHook((FireworkRocket) this.getCanaryEntity());
+            Canary.hooks().callHook(hook);
+            if (!hook.isCanceled()) {
+                this.q.a((Entity) this, (byte) 17);
+                this.w();
+            }
+            //
         }
     }
 
