@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.hook.entity.DamageHook;
+import net.canarymod.hook.entity.EntityMountHook;
 
 
 public abstract class Entity {
@@ -1224,9 +1224,16 @@ public abstract class Entity {
             if (this.o != null) {
                 this.o.n = null;
             }
-
-            this.o = entity;
-            entity.n = this;
+            // CanaryMod: EntityMount
+            EntityMountHook hook = null;
+            if (this instanceof EntityLiving && entity instanceof EntityLiving) {
+                hook = new EntityMountHook((net.canarymod.api.entity.living.EntityLiving) entity.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity());
+            }
+            if (hook == null || !hook.isCanceled()) {
+                this.o = entity;
+                entity.n = this;
+            }
+            //
         }
     }
 
