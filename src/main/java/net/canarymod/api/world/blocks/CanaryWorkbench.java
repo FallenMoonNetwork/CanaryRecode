@@ -26,6 +26,7 @@ public class CanaryWorkbench extends CanaryContainerBlock implements Workbench {
      */
     public CanaryWorkbench(ContainerWorkbench container) {
         super(container.a);
+        this.container = container;
     }
 
     /**

@@ -1,6 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
+import net.canarymod.hook.player.CraftHook;
 
 public class ContainerWorkbench extends Container {
 
@@ -43,7 +46,24 @@ public class ContainerWorkbench extends Container {
     }
 
     public void a(IInventory iinventory) {
-        this.f.a(0, CraftingManager.a().a(this.a, this.g));
+        ItemStack result = CraftingManager.a().a(this.a, this.g);
+
+        if (this.e.isEmpty() || result == null) {
+            this.f.a(0, result);
+            return;
+        }
+
+        // CanaryMod: Send custom recipe results to client
+        EntityPlayerMP player = (EntityPlayerMP) this.e.get(0);
+        // call CraftHook
+        CraftHook hook = new CraftHook(player.getPlayer(), bench, result.getCanaryItem());
+        Canary.hooks().callHook(hook);
+        result = hook.getRecipeResult() != null ? ((CanaryItem) hook.getRecipeResult()).getHandle() : null;
+        // Set custom result
+        this.f.a(0, result);
+        // And send player custom result
+        player.a.b(new Packet103SetSlot(this.d, 0, result));
+        //
     }
 
     public void b(EntityPlayer entityplayer) {
