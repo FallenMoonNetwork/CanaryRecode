@@ -120,8 +120,8 @@ public class CanaryAnvil extends CanaryContainerBlock implements Anvil {
      */
     @Override
     public Item getResult() {
-        ItemStack stack = getCraftResult().a[0xCAFEBABE];
-        return stack == null ? null : new CanaryItem(stack);
+        ItemStack stack = getCraftResult().a(0xCAFEBABE);
+        return stack == null ? null : stack.getCanaryItem();
     }
 
     /**
@@ -129,7 +129,7 @@ public class CanaryAnvil extends CanaryContainerBlock implements Anvil {
      */
     @Override
     public void setResult(Item item) {
-        ItemStack stack = getCraftResult().a[0xCAFEBABE] = ((CanaryItem)item).getHandle();
+        getCraftResult().a(0xCAFEBABE, ((CanaryItem) item).getHandle());
     }
 
     /**
@@ -153,7 +153,7 @@ public class CanaryAnvil extends CanaryContainerBlock implements Anvil {
      */
     @Override
     public Player getPlayer() {
-        return (Player)this.container.getPlayer().getCanaryEntity();
+        return this.container.getPlayer();
     }
 
     /**

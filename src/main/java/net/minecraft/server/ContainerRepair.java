@@ -2,6 +2,10 @@ package net.minecraft.server;
 
 import java.util.Iterator;
 import java.util.Map;
+import net.canarymod.Canary;
+import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.world.blocks.CanaryAnvil;
+import net.canarymod.hook.player.AnvilUseHook;
 
 public class ContainerRepair extends Container {
 
@@ -281,8 +285,13 @@ public class ContainerRepair extends Container {
             }
 
             this.f.a(0, itemstack1);
+            // CanaryMod: AnvilUse
+            AnvilUseHook hook = new AnvilUseHook(getPlayer(), new CanaryAnvil(this));
+            Canary.hooks().callHook(hook);
+            //
             this.b();
         }
+
     }
 
     public void a(ICrafting icrafting) {
@@ -367,9 +376,8 @@ public class ContainerRepair extends Container {
         return this.m;
     }
 
-    public EntityPlayer getPlayer() {
-        return this.n;
+    public Player getPlayer() {
+        return ((EntityPlayerMP) this.n).getPlayer();
     }
-
     // CanaryMod end
 }
