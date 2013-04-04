@@ -158,7 +158,7 @@ public class EntityFallingSand extends Entity {
                     DamageHook hook = new DamageHook(null, entity.getCanaryEntity(), new CanaryDamageSource(damagesource), Math.min(MathHelper.d((float) i0 * this.i), this.h));
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
-                        entity.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(hook.getDamageSource().getDamagetype())).getHandle(), Math.min(hook.getDamageDealt(), this.h));
+                        entity.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), Math.min(hook.getDamageDealt(), this.h));
                     }
                     //
                 }

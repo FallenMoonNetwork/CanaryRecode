@@ -80,7 +80,7 @@ public class FoodStats {
                     DamageHook dmg = new DamageHook(null, entityplayer.getCanaryEntity(), new CanaryDamageSource(DamageSource.f), 1);
                     Canary.hooks().callHook(dmg);
                     if (!dmg.isCanceled()) {
-                        entityplayer.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(dmg.getDamageSource().getDamagetype())).getHandle(), dmg.getDamageDealt());
+                        entityplayer.a((((CanaryDamageSource) dmg.getDamageSource()).getHandle()), dmg.getDamageDealt());
                     }
                     //
                 }

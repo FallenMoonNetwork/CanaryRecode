@@ -344,7 +344,7 @@ public abstract class EntityLiving extends Entity {
 
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
-                this.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(hook.getDamageSource().getDamagetype())).getHandle(), hook.getDamageDealt());
+                this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
             }
             //
         }
@@ -373,7 +373,7 @@ public abstract class EntityLiving extends Entity {
                         this.q.a("bubble", this.u + (double) f0, this.v + (double) f1, this.w + (double) f2, this.x, this.y, this.z);
                     }
 
-                    this.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(hook.getDamageSource().getDamagetype())).getHandle(), hook.getDamageDealt());
+                    this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
                 }
                 //
             }
@@ -692,7 +692,7 @@ public abstract class EntityLiving extends Entity {
                         return false;
                     }
 
-                    this.d(damagesource, hook.getDamageDealt());
+                    this.d((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
                     this.bB = i0;
                     flag0 = false;
                 } else {
@@ -708,7 +708,7 @@ public abstract class EntityLiving extends Entity {
                     this.bB = i0;
                     this.aT = this.aS;
                     this.af = this.av;
-                    this.d(damagesource, hook.getDamageDealt());
+                    this.d((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
                     this.aW = this.aX = 10;
                 }
                 //
@@ -958,7 +958,7 @@ public abstract class EntityLiving extends Entity {
                     this.a("damage.fallsmall", 1.0F, 1.0F);
                 }
 
-                this.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(hook.getDamageSource().getDamagetype())).getHandle(), hook.getDamageDealt());
+                this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
             }
             //
 

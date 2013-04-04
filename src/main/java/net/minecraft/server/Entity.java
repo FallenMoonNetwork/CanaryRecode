@@ -293,7 +293,7 @@ public abstract class Entity {
                     Canary.hooks().callHook(hook);
 
                     if (!hook.isCanceled()) {
-                        this.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(hook.getDamageSource().getDamagetype())).getHandle(), hook.getDamageDealt());
+                        this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
                     }
                     //
                 }
@@ -331,7 +331,7 @@ public abstract class Entity {
 
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
-                this.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(hook.getDamageSource().getDamagetype())).getHandle(), hook.getDamageDealt());
+                this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
                 this.d(15);
             }
             //
@@ -698,7 +698,7 @@ public abstract class Entity {
 
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
-                this.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(hook.getDamageSource().getDamagetype())).getHandle(), hook.getDamageDealt());
+                this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
             }
             //
         }

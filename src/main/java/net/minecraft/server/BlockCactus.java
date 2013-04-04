@@ -84,7 +84,7 @@ public class BlockCactus extends Block {
         DamageHook hook = new DamageHook(null, entity.getCanaryEntity(), new CanaryDamageSource(DamageSource.g), 1);
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
-            entity.a(DamageSource.g, 1);
+            entity.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
         }
         //
     }
