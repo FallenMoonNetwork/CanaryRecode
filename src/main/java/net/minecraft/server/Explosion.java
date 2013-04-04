@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.world.blocks.CanaryBlock;
@@ -148,10 +149,10 @@ public class Explosion {
                     DamageHook dmg = new DamageHook(this.f != null ? this.f.getCanaryEntity() : null, entity.getCanaryEntity(), source, damage);
                     Canary.hooks().callHook(dmg);
                     if (!dmg.isCanceled()) {
-                        entity.a(((CanaryDamageSource) CanaryDamageSource.getDamageSourceFromType(dmg.getDamageSource().getDamagetype())).getHandle(), damage);
+                        entity.a((((CanaryDamageSource) dmg.getDamageSource()).getHandle()), damage);
                     }
                     //
-                    
+
                     double d11 = EnchantmentProtection.a(entity, d10);
 
                     entity.x += d0 * d11;

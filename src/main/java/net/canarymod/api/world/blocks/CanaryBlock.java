@@ -2,6 +2,8 @@ package net.canarymod.api.world.blocks;
 
 
 import net.canarymod.api.world.World;
+import net.canarymod.api.world.position.Location;
+import net.canarymod.api.world.position.Position;
 
 
 public class CanaryBlock implements Block {
@@ -126,7 +128,7 @@ public class CanaryBlock implements Block {
 
     /**
      * Tests the given object to see if it equals this object
-     * 
+     *
      * @param obj
      *            the object to test
      * @return true if the two objects match
@@ -158,7 +160,7 @@ public class CanaryBlock implements Block {
 
     /**
      * Returns a semi-unique hashcode for this block
-     * 
+     *
      * @return hashcode
      */
     @Override
@@ -171,5 +173,15 @@ public class CanaryBlock implements Block {
         hash = 97 * hash + this.z;
         hash = 97 * hash + this.type;
         return hash;
+    }
+
+    @Override
+    public Location getLocation() {
+        return new Location(dimension, x, y, z, 0, 0);
+    }
+
+    @Override
+    public Position getPosition() {
+        return new Position(x, y, z);
     }
 }

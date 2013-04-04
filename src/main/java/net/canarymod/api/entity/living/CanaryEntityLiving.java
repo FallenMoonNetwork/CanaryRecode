@@ -4,6 +4,7 @@ package net.canarymod.api.entity.living;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.CanaryPacket;
@@ -31,7 +32,7 @@ import net.minecraft.server.Packet32EntityLook;
 
 /**
  * Living Entity wrapper implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
@@ -273,7 +274,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     public void setDeathTicks(int ticks) {
         ((net.minecraft.server.EntityLiving) entity).aZ = ticks;
     }
-    
+
     @Override
     public EntityLiving getTarget() {
         return (EntityLiving) ((net.minecraft.server.EntityLiving) entity).aG().getCanaryEntity();

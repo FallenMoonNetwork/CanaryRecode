@@ -1,6 +1,7 @@
 package net.canarymod.api.entity;
 
 import java.util.UUID;
+
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
@@ -9,7 +10,7 @@ import net.canarymod.api.world.position.Vector3D;
 
 /**
  * Entity Wrapper
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryEntity implements Entity {
@@ -249,12 +250,31 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public boolean spawn() {
-        return ((CanaryWorld) getWorld()).getHandle().d(getHandle());
+        entity.b(getX() + 0.5d, getY(), getZ() + 0.5d, getRotation(), 0f);
+        return entity.q.d(entity);
+    }
+
+    @Override
+    public boolean spawn(Entity rider) {
+        boolean ret = spawn();
+        if (rider != null) {
+            net.minecraft.server.Entity mob2 = ((CanaryEntity) rider).getHandle();
+
+            mob2.b(getX(), getY(), getZ(), getRotation(), 0f);
+            ret &= entity.q.d(mob2);
+            mob2.a(entity);
+        }
+        return ret;
+    }
+
+    @Override
+    public void setRider(Entity rider) {
+        ((CanaryEntity)rider).getHandle().a(this.entity);
     }
 
     /**
      * Gets the Minecraft entity being wrapped
-     * 
+     *
      * @return entity
      */
     public abstract net.minecraft.server.Entity getHandle();
