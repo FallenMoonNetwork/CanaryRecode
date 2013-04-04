@@ -55,18 +55,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     public CanaryPlayer(EntityPlayerMP entity) {
         super(entity);
-        Canary.println("Creating CanaryPlayer");
-        String[] data = Canary.usersAndGroups().getPlayerData(getName());
-
-        group = Canary.usersAndGroups().getGroup(data[1]);
-        permissions = Canary.permissionManager().getPlayerProvider(getName());
-        if (data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
-            prefix = ToolBox.stringToNull(data[0]);
-        }
-
-        if (data[2] != null && !data[2].isEmpty()) {
-            muted = Boolean.valueOf(data[2]);
-        }
+        initPlayerData();
     }
 
     /**
@@ -699,6 +688,21 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
         hash = 89 * hash + (this.getName() != null ? this.getName().hashCode() : 0);
         return hash;
+    }
+
+    @Override
+    public void initPlayerData() {
+        String[] data = Canary.usersAndGroups().getPlayerData(getName());
+
+        group = Canary.usersAndGroups().getGroup(data[1]);
+        permissions = Canary.permissionManager().getPlayerProvider(getName());
+        if (data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
+            prefix = ToolBox.stringToNull(data[0]);
+        }
+
+        if (data[2] != null && !data[2].isEmpty()) {
+            muted = Boolean.valueOf(data[2]);
+        }
     }
 
 }
