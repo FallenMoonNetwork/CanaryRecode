@@ -21,6 +21,7 @@ import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.bansystem.Ban;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.hook.player.PlayerRespawnHook;
 import net.canarymod.hook.player.PreConnectionHook;
@@ -265,7 +266,7 @@ public abstract class ServerConfigurationManager {
             return Translator.translate("you are banned");
         }
 
-        if(!Canary.whitelist().isWhitelisted(s0)) {
+        if(!Canary.whitelist().isWhitelisted(s0) && Configuration.getServerConfig().isWhitelistEnabled()) {
             return Translator.translate("not on whitelist");
         }
 
