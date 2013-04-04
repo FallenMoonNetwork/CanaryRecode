@@ -8,9 +8,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryChunk;
+import net.canarymod.api.world.blocks.BlockType;
+import net.canarymod.api.world.blocks.CanaryBlock;
+import net.canarymod.hook.world.PortalDestroyHook;
 
 public class Chunk {
 
@@ -363,6 +365,10 @@ public class Chunk {
     }
 
     public boolean a(int i0, int i1, int i2, int i3, int i4) {
+        return this.a(i0, i1, i2, i3, i4, true); // CanaryMod: Redirect
+    }
+
+    public boolean a(int i0, int i1, int i2, int i3, int i4, boolean checkPortal) { // CanaryMod: add Portal Check
         int i5 = i2 << 4 | i0;
 
         if (i1 >= this.b[i5] - 1) {
@@ -376,6 +382,63 @@ public class Chunk {
         if (i7 == i3 && i8 == i4) {
             return false;
         } else {
+            // CanaryMod: Start - check if removed block is portal block
+            int portalPointX = this.g * 16 + i0;
+            int portalPointZ = this.h * 16 + i2;
+            if (checkPortal == true) {
+                int portalPointY = i1;
+
+                int portalId = BlockType.Portal.getId();
+
+                if (canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ).getTypeID() == portalId) {
+                    // These will be equal 1 if the portal is defined on their axis and 0 if not.
+                    int portalXOffset = (canaryChunk.getDimension().getBlockAt(portalPointX - 1, portalPointY, portalPointZ).getTypeID() == portalId
+                            || canaryChunk.getDimension().getBlockAt(portalPointX + 1, portalPointY, portalPointZ).getTypeID() == portalId) ? 1 : 0;
+                    int portalZOffset = (canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ - 1).getTypeID() == portalId
+                            || canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ + 1).getTypeID() == portalId) ? 1 : 0;
+
+                    // If the portal is either x aligned or z aligned but not both (has neighbor portal in x or z plane but not both)
+                    if (portalXOffset != portalZOffset) {
+                        // Get the edge of the portal.
+                        int portalX = portalPointX - ((canaryChunk.getDimension().getBlockAt(portalPointX - 1, portalPointY, portalPointZ).getTypeID() == portalId) ? 1 : 0);
+                        int portalZ = portalPointZ - ((canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ - 1).getTypeID() == portalId) ? 1 : 0);
+                        int portalY = i1;
+
+                        while (canaryChunk.getDimension().getBlockAt(portalX, ++portalY, portalZ).getTypeID() == portalId) {
+                            ;
+                        }
+                        portalY -= 1;
+                        // Scan the portal and see if its still all there (2x3 formation)
+                        boolean completePortal = true;
+                        CanaryBlock[][] portalBlocks = new CanaryBlock[3][2];
+
+                        for (int i9001 = 0; i9001 < 3 && completePortal; i9001 += 1) {
+                            for (int i9002 = 0; i9002 < 2 && completePortal; i9002 += 1) {
+                                portalBlocks[i9001][i9002] = (CanaryBlock) canaryChunk.getDimension().getBlockAt(portalX + i9002 * portalXOffset, portalY - i9001, portalZ + i9002 * portalZOffset);
+                                if (portalBlocks[i9001][i9002].getTypeID() != portalId) {
+                                    completePortal = false;
+                                }
+                            }
+                        }
+                        if (completePortal == true) {
+                            // CanaryMod: PortalDestroy
+                            PortalDestroyHook hook = new PortalDestroyHook(portalBlocks);
+                            Canary.hooks().callHook(hook);
+                            if (hook.isCanceled()) {
+                                // Hook canceled = don't destroy the portal.
+                                // in that case we need to reconstruct the portal's frame to make the portal valid.
+                                // Problem is we don't want to reconstruct it right away because more blocks might be deleted (for example on explosion).
+                                // In order to avoid spamming the hook for each destroyed block, I'm queuing the reconstruction of the portal instead.
+
+                                // FIXME FIXME FIXME: Need a task queue
+                                // new PortalReconstructJob(getWorld(), portalX, portalY, portalZ, (portalXOffset == 1));
+                            }
+                        }
+                    }
+                }
+            }
+            // CanaryMod: End - check if removed block is portal block0.
+
             ExtendedBlockStorage extendedblockstorage = this.r[i1 >> 4];
             boolean flag0 = false;
 
