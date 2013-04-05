@@ -109,7 +109,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
     @Override
     public boolean a(DamageSource damagesource, int i0) {
         boolean toRet = super.a(damagesource, i0);
-        if (toRet && this.entity != null) {
+        if (toRet && this.entity != null && damagesource.i() != null) {
             CanaryEntity atk = damagesource.i().getCanaryEntity();
             ((CanaryNonPlayableCharacter) entity).attack(atk);
         }
