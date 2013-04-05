@@ -31,6 +31,10 @@ public class CanarySaveConverter {
      */
     public boolean isVanillaFormat() {
         boolean isVanilla = false;
+        if(!baseFolder.exists()) {
+            //Nothing in there at all, it's not vanilla though
+            return false;
+        }
         for(File file : baseFolder.listFiles()) {
             if(file.isDirectory()) {
                 if(file.getName().equals("DIM1")) {
