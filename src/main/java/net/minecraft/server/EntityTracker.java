@@ -8,6 +8,7 @@ import java.util.concurrent.Callable;
 
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.config.Configuration;
 
 public class EntityTracker {
 
@@ -124,8 +125,12 @@ public class EntityTracker {
             try {
                 throw new ReportedException(crashreport);
             } catch (ReportedException reportedexception) {
-                System.err.println("\"Silently\" catching entity tracking error.");
-                reportedexception.printStackTrace();
+                //CanaryMod only dump this in debug mode
+                //That exception is of informational nature and has no side-effects
+                if(Configuration.getServerConfig().isDebugMode()) {
+                    System.err.println("\"Silently\" catching entity tracking error.");
+                    reportedexception.printStackTrace();
+                }
             }
         }
     }
