@@ -49,20 +49,18 @@ public class FoodStats {
             Canary.hooks().callHook(exh);
             this.c = exh.getNewValue();
             //
-            if (this.c > 4.0F) { // Hey, if didn't go below 4.0, why change the rest?
-                if (this.b > 0.0F) {
-                    // CanaryMod: FoodSaturationHook
-                    FoodSaturationHook sat = new FoodSaturationHook(((EntityPlayerMP) entityplayer).getPlayer(), this.b, Math.min(this.b - 1.0F, 0.0F));
-                    Canary.hooks().callHook(sat);
-                    this.b = Math.min(sat.getNewValue(), 0.0F);
-                    //
-                } else if (i0 > 0) {
-                    // CanaryMod: FoodLevelHook
-                    FoodLevelHook lvl = new FoodLevelHook(((EntityPlayerMP) entityplayer).getPlayer(), this.a, Math.min(this.a - 1, 0));
-                    Canary.hooks().callHook(lvl);
-                    this.a = Math.max(lvl.getNewValue(), 0);
-                    //
-                }
+            if (this.b > 0.0F) {
+                // CanaryMod: FoodSaturationHook
+                FoodSaturationHook sat = new FoodSaturationHook(((EntityPlayerMP) entityplayer).getPlayer(), this.b, Math.max(this.b - 1.0F, 0.0F));
+                Canary.hooks().callHook(sat);
+                this.b = Math.max(Math.min(sat.getNewValue(), (float) this.a), 0.0F);
+                //
+            } else if (i0 > 0) {
+                // CanaryMod: FoodLevelHook
+                FoodLevelHook lvl = new FoodLevelHook(((EntityPlayerMP) entityplayer).getPlayer(), this.a, Math.max(this.a - 1, 0));
+                Canary.hooks().callHook(lvl);
+                this.a = Math.max(Math.min(lvl.getNewValue(), 20), 0);
+                //
             }
         }
 
@@ -117,7 +115,11 @@ public class FoodStats {
     }
 
     public void a(float f0) {
-        this.c = Math.min(this.c + f0, 40.0F);
+        // CanaryMod: FoodExhaustionHook
+        FoodExhaustionHook exh = new FoodExhaustionHook(((EntityPlayerMP) entityplayer).getPlayer(), this.c, Math.min(this.c + f0, 40.0F));
+        Canary.hooks().callHook(exh);
+        this.c = exh.getNewValue();
+        //
     }
 
     public float e() {
