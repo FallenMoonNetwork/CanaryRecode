@@ -30,6 +30,7 @@ import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.EnumSkyBlock;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntity;
+import net.minecraft.server.TileEntityBeacon;
 import net.minecraft.server.TileEntityBrewingStand;
 import net.minecraft.server.TileEntityChest;
 import net.minecraft.server.TileEntityCommandBlock;
@@ -581,6 +582,8 @@ public class CanaryWorld implements World {
         if (tileentity != null) {
             if (tileentity instanceof TileEntityBrewingStand) {
                 return ((TileEntityBrewingStand) tileentity).getCanaryBrewingStand();
+            } else if (tileentity instanceof TileEntityBeacon) {
+                return ((TileEntityBeacon) tileentity).getCanaryBeacon();
             } else if (tileentity instanceof TileEntityChest) {
                 return ((TileEntityChest) tileentity).getCanaryChest();
             } else if (tileentity instanceof TileEntityCommandBlock) {

@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import java.util.Iterator;
 import java.util.List;
+import net.canarymod.api.world.blocks.CanaryBeacon;
 
 public class TileEntityBeacon extends TileEntity implements IInventory {
 
@@ -13,9 +14,9 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
     private ItemStack h;
     private String i;
 
-    // private CanaryBeacon beacon; //TODO
-
-    public TileEntityBeacon() {}
+    public TileEntityBeacon() {
+        this.complexBlock = new CanaryBeacon(this); // CanaryMod: wrap tile entity
+    }
 
     public void h() {
         if (this.k.G() % 80L == 0L) {
@@ -234,4 +235,22 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
     public boolean b(int i0, ItemStack itemstack) {
         return itemstack.c == Item.bI.cp || itemstack.c == Item.o.cp || itemstack.c == Item.q.cp || itemstack.c == Item.p.cp;
     }
+
+    // CanaryMod
+    public void setPrimaryEffectDirectly(int effect) {
+        this.f = effect;
+    }
+
+    public void setSecondaryEffectDirectly(int effect) {
+        this.g = effect;
+    }
+
+    public void setLevels(int levels) {
+        this.e = levels;
+    }
+
+    public CanaryBeacon getCanaryBeacon() {
+        return (CanaryBeacon) complexBlock;
+    }
+    //
 }
