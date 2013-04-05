@@ -211,10 +211,12 @@ public abstract class EntityLiving extends Entity {
 
     public void b(EntityLiving entityliving) {
         // CanaryMod: MobTarget
-        MobTargetHook hook = new MobTargetHook((net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) entityliving.getCanaryEntity());
-        Canary.hooks().callHook(hook);
-        if (hook.isCanceled()) {
-            return;
+        if (entityliving != null) {
+            MobTargetHook hook = new MobTargetHook((net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) entityliving.getCanaryEntity());
+            Canary.hooks().callHook(hook);
+            if (hook.isCanceled()) {
+                return;
+            }
         }
         //
         this.bO = entityliving;
