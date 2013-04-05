@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import net.canarymod.Canary;
+import net.canarymod.LineTracer;
+import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockFace;
@@ -430,7 +432,11 @@ public class NetServerHandler extends NetHandler {
             if (itemstack == null) {
                 return;
             }
-
+            // Correct coordinates on block
+            LineTracer trace = new LineTracer(this.c.getPlayer(), 6, 0.2);
+            blockClicked = (CanaryBlock) trace.getTargetBlock();
+            blockClicked = blockClicked != null ? blockClicked : new CanaryBlock((short) 0, (short) 0, ToolBox.floorToBlock(this.n), ToolBox.floorToBlock(this.o), ToolBox.floorToBlock(this.p), this.c.getCanaryWorld());
+            //
             this.c.c.itemUsed(this.c.getPlayer(), worldserver, itemstack, blockClicked); // CanaryMod: Redirect through ItemInWorldManager.itemUsed
         } else if (packet15place.f() >= this.d.ab() - 1 && (packet15place.h() == 1 || packet15place.f() >= this.d.ab())) {
             this.c.a.b(new Packet3Chat("" + EnumChatFormatting.h + "Height limit for building is " + this.d.ab()));
