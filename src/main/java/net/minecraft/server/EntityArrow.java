@@ -2,7 +2,9 @@ package net.minecraft.server;
 
 
 import java.util.List;
+import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryArrow;
+import net.canarymod.hook.entity.ProjectileHitHook;
 
 
 public class EntityArrow extends Entity implements IProjectile {
@@ -209,81 +211,86 @@ public class EntityArrow extends Entity implements IProjectile {
             float f3;
 
             if (movingobjectposition != null) {
-                if (movingobjectposition.g != null) {
-                    f2 = MathHelper.a(this.x * this.x + this.y * this.y + this.z * this.z);
-                    int i4 = MathHelper.f((double) f2 * this.av);
+                // CanaryMod: ProjectileHit
+                ProjectileHitHook hook = new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity());
+                Canary.hooks().callHook(hook);
+                if (!hook.isCanceled()) { //
+                    if (movingobjectposition.g != null) {
+                        f2 = MathHelper.a(this.x * this.x + this.y * this.y + this.z * this.z);
+                        int i4 = MathHelper.f((double) f2 * this.av);
 
-                    if (this.d()) {
-                        i4 += this.ab.nextInt(i4 / 2 + 2);
-                    }
+                        if (this.d()) {
+                            i4 += this.ab.nextInt(i4 / 2 + 2);
+                        }
 
-                    DamageSource damagesource = null;
+                        DamageSource damagesource = null;
 
-                    if (this.c == null) {
-                        damagesource = DamageSource.a(this, this);
-                    } else {
-                        damagesource = DamageSource.a(this, this.c);
-                    }
+                        if (this.c == null) {
+                            damagesource = DamageSource.a(this, this);
+                        } else {
+                            damagesource = DamageSource.a(this, this.c);
+                        }
 
-                    if (this.ae() && !(movingobjectposition.g instanceof EntityEnderman)) {
-                        movingobjectposition.g.d(5);
-                    }
+                        if (this.ae() && !(movingobjectposition.g instanceof EntityEnderman)) {
+                            movingobjectposition.g.d(5);
+                        }
 
-                    if (movingobjectposition.g.a(damagesource, i4)) {
-                        if (movingobjectposition.g instanceof EntityLiving) {
-                            EntityLiving entityliving = (EntityLiving) movingobjectposition.g;
+                        if (movingobjectposition.g.a(damagesource, i4)) {
+                            if (movingobjectposition.g instanceof EntityLiving) {
+                                EntityLiving entityliving = (EntityLiving) movingobjectposition.g;
 
-                            if (!this.q.I) {
-                                entityliving.r(entityliving.bM() + 1);
-                            }
+                                if (!this.q.I) {
+                                    entityliving.r(entityliving.bM() + 1);
+                                }
 
-                            if (this.aw > 0) {
-                                f3 = MathHelper.a(this.x * this.x + this.z * this.z);
-                                if (f3 > 0.0F) {
-                                    movingobjectposition.g.g(this.x * (double) this.aw * 0.6000000238418579D / (double) f3, 0.1D, this.z * (double) this.aw * 0.6000000238418579D / (double) f3);
+                                if (this.aw > 0) {
+                                    f3 = MathHelper.a(this.x * this.x + this.z * this.z);
+                                    if (f3 > 0.0F) {
+                                        movingobjectposition.g.g(this.x * (double) this.aw * 0.6000000238418579D / (double) f3, 0.1D, this.z * (double) this.aw * 0.6000000238418579D / (double) f3);
+                                    }
+                                }
+
+                                if (this.c != null) {
+                                    EnchantmentThorns.a(this.c, entityliving, this.ab);
+                                }
+
+                                if (this.c != null && movingobjectposition.g != this.c && movingobjectposition.g instanceof EntityPlayer && this.c instanceof EntityPlayerMP) {
+                                    ((EntityPlayerMP) this.c).a.b(new Packet70GameEvent(6, 0));
                                 }
                             }
 
-                            if (this.c != null) {
-                                EnchantmentThorns.a(this.c, entityliving, this.ab);
+                            this.a("random.bowhit", 1.0F, 1.2F / (this.ab.nextFloat() * 0.2F + 0.9F));
+                            if (!(movingobjectposition.g instanceof EntityEnderman)) {
+                                this.w();
                             }
-
-                            if (this.c != null && movingobjectposition.g != this.c && movingobjectposition.g instanceof EntityPlayer && this.c instanceof EntityPlayerMP) {
-                                ((EntityPlayerMP) this.c).a.b(new Packet70GameEvent(6, 0));
-                            }
-                        }
-
-                        this.a("random.bowhit", 1.0F, 1.2F / (this.ab.nextFloat() * 0.2F + 0.9F));
-                        if (!(movingobjectposition.g instanceof EntityEnderman)) {
-                            this.w();
+                        } else {
+                            this.x *= -0.10000000149011612D;
+                            this.y *= -0.10000000149011612D;
+                            this.z *= -0.10000000149011612D;
+                            this.A += 180.0F;
+                            this.C += 180.0F;
+                            this.au = 0;
                         }
                     } else {
-                        this.x *= -0.10000000149011612D;
-                        this.y *= -0.10000000149011612D;
-                        this.z *= -0.10000000149011612D;
-                        this.A += 180.0F;
-                        this.C += 180.0F;
-                        this.au = 0;
-                    }
-                } else {
-                    this.d = movingobjectposition.b;
-                    this.e = movingobjectposition.c;
-                    this.f = movingobjectposition.d;
-                    this.g = this.q.a(this.d, this.e, this.f);
-                    this.h = this.q.h(this.d, this.e, this.f);
-                    this.x = (double) ((float) (movingobjectposition.f.c - this.u));
-                    this.y = (double) ((float) (movingobjectposition.f.d - this.v));
-                    this.z = (double) ((float) (movingobjectposition.f.e - this.w));
-                    f2 = MathHelper.a(this.x * this.x + this.y * this.y + this.z * this.z);
-                    this.u -= this.x / (double) f2 * 0.05000000074505806D;
-                    this.v -= this.y / (double) f2 * 0.05000000074505806D;
-                    this.w -= this.z / (double) f2 * 0.05000000074505806D;
-                    this.a("random.bowhit", 1.0F, 1.2F / (this.ab.nextFloat() * 0.2F + 0.9F));
-                    this.i = true;
-                    this.b = 7;
-                    this.a(false);
-                    if (this.g != 0) {
-                        Block.r[this.g].a(this.q, this.d, this.e, this.f, (Entity) this);
+                        this.d = movingobjectposition.b;
+                        this.e = movingobjectposition.c;
+                        this.f = movingobjectposition.d;
+                        this.g = this.q.a(this.d, this.e, this.f);
+                        this.h = this.q.h(this.d, this.e, this.f);
+                        this.x = (double) ((float) (movingobjectposition.f.c - this.u));
+                        this.y = (double) ((float) (movingobjectposition.f.d - this.v));
+                        this.z = (double) ((float) (movingobjectposition.f.e - this.w));
+                        f2 = MathHelper.a(this.x * this.x + this.y * this.y + this.z * this.z);
+                        this.u -= this.x / (double) f2 * 0.05000000074505806D;
+                        this.v -= this.y / (double) f2 * 0.05000000074505806D;
+                        this.w -= this.z / (double) f2 * 0.05000000074505806D;
+                        this.a("random.bowhit", 1.0F, 1.2F / (this.ab.nextFloat() * 0.2F + 0.9F));
+                        this.i = true;
+                        this.b = 7;
+                        this.a(false);
+                        if (this.g != 0) {
+                            Block.r[this.g].a(this.q, this.d, this.e, this.f, (Entity) this);
+                        }
                     }
                 }
             }

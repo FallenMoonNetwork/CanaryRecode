@@ -7,9 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.api.entity.Explosive;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.world.ExplosionHook;
@@ -98,22 +98,25 @@ public class Explosion {
             }
         }
 
-        // CanaryMod: Add affected blocks into a List of Blocks.
-        List<net.canarymod.api.world.blocks.Block> blkAff = new ArrayList<net.canarymod.api.world.blocks.Block>(hashset.size());
-        for (ChunkPosition ocp : (HashSet<ChunkPosition>) hashset) {
-            blkAff.add(this.k.getCanaryWorld().getBlockAt(ocp.a, ocp.b, ocp.c));
-        }
-        // Explosion call
-        ExplosionHook exp = new ExplosionHook(gzero, this.f != null ? this.f.getCanaryEntity() : null, blkAff);
-        Canary.hooks().callHook(exp);
-        // if cancelled, don't populate this.h at all.
-        if (!exp.isCanceled()) {
-            // Repopulate hashset according to blocksAffected.
-            hashset.clear();
-            for (net.canarymod.api.world.blocks.Block affected : exp.getAffectedBlocks()) {
-                hashset.add(new ChunkPosition(affected.getX(), affected.getY(), affected.getZ()));
+        // Check entity if instance of Explosive and can damage world
+        if (this.f == null || (this.f.getCanaryEntity() instanceof Explosive && ((Explosive) this.f.getCanaryEntity()).canDamageWorld())) {
+            // CanaryMod: Add affected blocks into a List of Blocks.
+            List<net.canarymod.api.world.blocks.Block> blkAff = new ArrayList<net.canarymod.api.world.blocks.Block>(hashset.size());
+            for (ChunkPosition ocp : (HashSet<ChunkPosition>) hashset) {
+                blkAff.add(this.k.getCanaryWorld().getBlockAt(ocp.a, ocp.b, ocp.c));
             }
-            this.h.addAll(hashset);
+            // Explosion call
+            ExplosionHook exp = new ExplosionHook(gzero, this.f != null ? this.f.getCanaryEntity() : null, blkAff);
+            Canary.hooks().callHook(exp);
+            // if cancelled, don't populate this.h at all.
+            if (!exp.isCanceled()) {
+                // Repopulate hashset according to blocksAffected.
+                hashset.clear();
+                for (net.canarymod.api.world.blocks.Block affected : exp.getAffectedBlocks()) {
+                    hashset.add(new ChunkPosition(affected.getX(), affected.getY(), affected.getZ()));
+                }
+                this.h.addAll(hashset);
+            }
         }
         //
         this.g *= 2.0F;
@@ -143,15 +146,18 @@ public class Explosion {
                     double d9 = (double) this.k.a(vec3, entity.E);
                     double d10 = (1.0D - d7) * d9;
 
-                    // CanaryMod Damage hook: Explosions
-                    int damage = (int) ((d10 * d10 + d10) / 2.0D * 8.0D * (double) this.g + 1.0D);
-                    CanaryDamageSource source = DamageSource.a(this).getCanaryDamageSource();
-                    DamageHook dmg = new DamageHook(this.f != null ? this.f.getCanaryEntity() : null, entity.getCanaryEntity(), source, damage);
-                    Canary.hooks().callHook(dmg);
-                    if (!dmg.isCanceled()) {
-                        entity.a((((CanaryDamageSource) dmg.getDamageSource()).getHandle()), damage);
+                    // Check entity if instance of Explosive and can damage entities
+                    if (this.f == null || (this.f.getCanaryEntity() instanceof Explosive && ((Explosive) this.f.getCanaryEntity()).canDamageEntities())) {
+                        // CanaryMod Damage hook: Explosions
+                        int damage = (int) ((d10 * d10 + d10) / 2.0D * 8.0D * (double) this.g + 1.0D);
+                        CanaryDamageSource source = DamageSource.a(this).getCanaryDamageSource();
+                        DamageHook dmg = new DamageHook(this.f != null ? this.f.getCanaryEntity() : null, entity.getCanaryEntity(), source, damage);
+                        Canary.hooks().callHook(dmg);
+                        if (!dmg.isCanceled()) {
+                            entity.a((((CanaryDamageSource) dmg.getDamageSource()).getHandle()), damage);
+                        }
+                        //
                     }
-                    //
 
                     double d11 = EnchantmentProtection.a(entity, d10);
 
