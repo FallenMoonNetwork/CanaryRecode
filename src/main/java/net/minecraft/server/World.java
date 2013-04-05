@@ -260,7 +260,7 @@ public abstract class World implements IBlockAccess {
                 boolean flag0 = false;
                 CanaryBlock cblock = (CanaryBlock) this.canaryDimension.getBlockAt(i0, i1, i2);
                 BlockUpdateHook hook = new BlockUpdateHook(cblock, i3);
-                if (i3 == 0) { // Ignore Air
+                if (i3 != 0) { // Ignore Air
                     Canary.hooks().callHook(hook);
                 }
                 if (!hook.isCanceled()) {
