@@ -12,10 +12,9 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
     public int b = 0;
     public int c = 0;
     private String h;
-    private CanaryFurnace furnace; // CanaryMod inventory instance
 
     public TileEntityFurnace() {
-        this.furnace = new CanaryFurnace(this); // CanaryMod: create once, use forever
+        this.complexBlock = new CanaryFurnace(this); // CanaryMod: create once, use forever
     }
 
     public int j_() {
@@ -254,7 +253,8 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
         return i1 != 0 || i0 != 1 || itemstack.c == Item.ax.cp;
     }
 
+    // CanaryMod
     public CanaryFurnace getCanaryFurnace() {
-        return furnace;
+        return (CanaryFurnace) complexBlock;
     }
 }

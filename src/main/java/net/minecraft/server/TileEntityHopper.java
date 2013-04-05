@@ -10,10 +10,9 @@ public class TileEntityHopper extends TileEntity implements Hopper {
     public ItemStack[] a = new ItemStack[5]; // CanaryMod: private to public
     private String b;
     public int c = -1;  // CanaryMod: private to public
-    private CanaryHopperBlock canaryHopper; // CanaryMod inventory instance
 
     public TileEntityHopper() {
-        this.canaryHopper = new CanaryHopperBlock(this); // CanaryMod: create once, use forever
+        this.complexBlock = new CanaryHopperBlock(this); // CanaryMod: create once, use forever
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -175,7 +174,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
                 if (this.a(i0) != null) {
                     ItemStack itemstack = this.a(i0).m();
                     // CanaryMod: Hopper Transfer hook
-                    HopperTransferHook hook = new HopperTransferHook(this.canaryHopper, new net.canarymod.api.inventory.CanaryItem(itemstack), false);
+                    HopperTransferHook hook = new HopperTransferHook(getCanaryHopper(), new net.canarymod.api.inventory.CanaryItem(itemstack), false);
                     Canary.hooks().callHook(hook);
                     if (hook.isCanceled()){
                         return false;
@@ -239,7 +238,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
             // CanaryMod: Hopper Transfer hook.
             net.canarymod.api.inventory.Hopper hookHopper = null;
             if (hopper instanceof TileEntityHopper) {
-                hookHopper = (net.canarymod.api.inventory.Hopper)((TileEntityHopper) hopper).canaryHopper;
+                hookHopper = (net.canarymod.api.inventory.Hopper) ((TileEntityHopper) hopper).getCanaryHopper();
             } else if (hopper instanceof EntityMinecartHopper) {
                 hookHopper = (net.canarymod.api.inventory.Hopper)((EntityMinecartHopper) hopper).entity;
             }
@@ -416,7 +415,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
 
     // CanaryMod
     public CanaryHopperBlock getCanaryHopper() {
-        return canaryHopper;
+        return (CanaryHopperBlock) complexBlock;
     }
 
     public IInventory getInputInventory(){

@@ -8,10 +8,9 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
     public ItemStack[] b = new ItemStack[9]; // CanaryMod: private => public
     private Random c = new Random();
     protected String a;
-    private CanaryDispenser dispenser; // CanaryMod: instance
 
     public TileEntityDispenser() {
-        this.dispenser = new CanaryDispenser(this); // CanaryMod: create once, use forever
+        this.complexBlock = new CanaryDispenser(this); // CanaryMod: create once, use forever
     }
 
     public int j_() {
@@ -159,7 +158,7 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
 
     // CanaryMod
     public CanaryDispenser getCanaryDispenser() {
-        return dispenser;
+        return (CanaryDispenser) complexBlock;
     }
     //
 }

@@ -18,10 +18,9 @@ public class TileEntityChest extends TileEntity implements IInventory {
     private int j;
     private int r = -1;
     private String s;
-    private CanaryChest chest; // CanaryMod inventory instance
 
     public TileEntityChest() {
-        this.chest = new CanaryChest(this); // CanaryMod: create once, use forever
+        this.complexBlock = new CanaryChest(this); // CanaryMod: create once, use forever
     }
 
     public int j_() {
@@ -348,7 +347,8 @@ public class TileEntityChest extends TileEntity implements IInventory {
         return this.r;
     }
 
+    // CanaryMod
     public CanaryChest getCanaryChest() {
-        return chest;
+        return (CanaryChest) complexBlock;
     }
 }

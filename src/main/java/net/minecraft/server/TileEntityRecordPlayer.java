@@ -1,10 +1,14 @@
 package net.minecraft.server;
 
+import net.canarymod.api.world.blocks.CanaryJukebox;
+
 public class TileEntityRecordPlayer extends TileEntity {
 
     private ItemStack a;
 
-    public TileEntityRecordPlayer() {}
+    public TileEntityRecordPlayer() {
+        this.complexBlock = new CanaryJukebox(this); // CanaryMod: wrap tile entity
+    }
 
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
@@ -30,5 +34,10 @@ public class TileEntityRecordPlayer extends TileEntity {
     public void a(ItemStack itemstack) {
         this.a = itemstack;
         this.k_();
+    }
+
+    // CanaryMod
+    public CanaryJukebox getCanaryJukebox() {
+        return (CanaryJukebox) complexBlock;
     }
 }

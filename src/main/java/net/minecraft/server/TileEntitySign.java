@@ -7,10 +7,9 @@ public class TileEntitySign extends TileEntity {
     public String[] a = new String[] { "", "", "", ""};
     public int b = -1;
     private boolean c = true;
-    private CanarySign sign; // CanaryMod: sign instance
 
     public TileEntitySign() {
-        this.sign = new CanarySign(this); // CanaryMod: wrap sign
+        this.complexBlock = new CanarySign(this); // CanaryMod: wrap sign
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -46,7 +45,7 @@ public class TileEntitySign extends TileEntity {
 
     // CanaryMod
     public CanarySign getCanarySign() {
-        return sign;
+        return (CanarySign) complexBlock;
     }
     //
 }

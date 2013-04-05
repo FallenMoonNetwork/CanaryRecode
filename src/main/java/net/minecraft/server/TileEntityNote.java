@@ -1,11 +1,15 @@
 package net.minecraft.server;
 
+import net.canarymod.api.world.blocks.CanaryNoteBlock;
+
 public class TileEntityNote extends TileEntity {
 
     public byte a = 0;
     public boolean b = false;
 
-    public TileEntityNote() {}
+    public TileEntityNote() {
+        this.complexBlock = new CanaryNoteBlock(this); // CanaryMod: wrap tile entity
+    }
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
@@ -52,5 +56,10 @@ public class TileEntityNote extends TileEntity {
 
             world.d(i0, i1, i2, Block.V.cz, b0, this.a);
         }
+    }
+
+    // CanaryMod
+    public CanaryNoteBlock getCanaryNoteBlock() {
+        return (CanaryNoteBlock) complexBlock;
     }
 }

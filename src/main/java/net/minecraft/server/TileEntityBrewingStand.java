@@ -12,10 +12,9 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
     private int e;
     private int f;
     private String g;
-    private CanaryBrewingStand brewingstand; // CanaryMod inventory instance
 
     public TileEntityBrewingStand() {
-        this.brewingstand = new CanaryBrewingStand(this); // CanaryMod: create once, use forever
+        this.complexBlock = new CanaryBrewingStand(this); // CanaryMod: create once, use forever
     }
 
     public String b() {
@@ -254,6 +253,6 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
 
     // CanaryMod
     public CanaryBrewingStand getCanaryBrewingStand() {
-        return brewingstand;
+        return (CanaryBrewingStand) complexBlock;
     }
 }

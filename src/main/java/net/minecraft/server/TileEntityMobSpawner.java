@@ -40,4 +40,9 @@ public class TileEntityMobSpawner extends TileEntity {
     public MobSpawnerBaseLogic a() {
         return this.a;
     }
+
+    // CanaryMod
+    public CanaryMobSpawner getCanaryMobSpawner() {
+        return (CanaryMobSpawner) complexBlock;
+    }
 }

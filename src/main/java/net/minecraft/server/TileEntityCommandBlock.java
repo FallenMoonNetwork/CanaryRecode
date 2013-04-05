@@ -9,10 +9,9 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     private int a = 0;
     private String b = "";
     private String c = "@";
-    private CanaryCommandBlock commandblock;
 
     public TileEntityCommandBlock() {
-        this.commandblock = new CanaryCommandBlock(this); // CanaryMod: wrap tile entity
+        this.complexBlock = new CanaryCommandBlock(this); // CanaryMod: wrap tile entity
     }
 
     public void b(String s0) {
@@ -29,7 +28,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
             if (minecraftserver != null && minecraftserver.Z()) {
                 // CanaryMod: CommandBlockCommand
                 // ICommandManager icommandmanager = minecraftserver.E();
-                CommandBlockCommandHook hook = new CommandBlockCommandHook(commandblock, this.b.split(" "));
+                CommandBlockCommandHook hook = new CommandBlockCommandHook(getCanaryCommandBlock(), this.b.split(" "));
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     if (Canary.getServer().consoleCommand(this.b)) { // Redirect for Canary Console Commands too
@@ -98,5 +97,10 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
 
     public String getCommand() { // CanaryMod: allows us to access the command stored
         return this.b;
+    }
+
+    // CanaryMod
+    public CanaryCommandBlock getCanaryCommandBlock() {
+        return (CanaryCommandBlock) complexBlock;
     }
 }

@@ -20,14 +20,6 @@ import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.CanaryBlock;
-import net.canarymod.api.world.blocks.CanaryBrewingStand;
-import net.canarymod.api.world.blocks.CanaryChest;
-import net.canarymod.api.world.blocks.CanaryDispenser;
-import net.canarymod.api.world.blocks.CanaryFurnace;
-import net.canarymod.api.world.blocks.CanaryJukebox;
-import net.canarymod.api.world.blocks.CanaryMobSpawner;
-import net.canarymod.api.world.blocks.CanaryNoteBlock;
-import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.blocks.Chest;
 import net.canarymod.api.world.blocks.ComplexBlock;
 import net.canarymod.api.world.position.Location;
@@ -40,12 +32,18 @@ import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntity;
 import net.minecraft.server.TileEntityBrewingStand;
 import net.minecraft.server.TileEntityChest;
+import net.minecraft.server.TileEntityCommandBlock;
+import net.minecraft.server.TileEntityComparator;
+import net.minecraft.server.TileEntityDaylightDetector;
 import net.minecraft.server.TileEntityDispenser;
+import net.minecraft.server.TileEntityDropper;
 import net.minecraft.server.TileEntityFurnace;
+import net.minecraft.server.TileEntityHopper;
 import net.minecraft.server.TileEntityMobSpawner;
 import net.minecraft.server.TileEntityNote;
 import net.minecraft.server.TileEntityRecordPlayer;
 import net.minecraft.server.TileEntitySign;
+import net.minecraft.server.TileEntitySkull;
 import net.minecraft.server.WorldInfo;
 import net.minecraft.server.WorldServer;
 
@@ -581,22 +579,34 @@ public class CanaryWorld implements World {
         TileEntity tileentity = world.r(x, y, z);
 
         if (tileentity != null) {
-            if (tileentity instanceof TileEntityChest) {
-                return new CanaryChest((TileEntityChest) tileentity);
-            } else if (tileentity instanceof TileEntitySign) {
-                return new CanarySign((TileEntitySign) tileentity);
-            } else if (tileentity instanceof TileEntityFurnace) {
-                return new CanaryFurnace((TileEntityFurnace) tileentity);
-            } else if (tileentity instanceof TileEntityMobSpawner) {
-                return new CanaryMobSpawner((TileEntityMobSpawner) tileentity);
+            if (tileentity instanceof TileEntityBrewingStand) {
+                return ((TileEntityBrewingStand) tileentity).getCanaryBrewingStand();
+            } else if (tileentity instanceof TileEntityChest) {
+                return ((TileEntityChest) tileentity).getCanaryChest();
+            } else if (tileentity instanceof TileEntityCommandBlock) {
+                return ((TileEntityCommandBlock) tileentity).getCanaryCommandBlock();
+            } else if (tileentity instanceof TileEntityComparator) {
+                return ((TileEntityComparator) tileentity).getCanaryComparator();
+            } else if (tileentity instanceof TileEntityDaylightDetector) {
+                return ((TileEntityDaylightDetector) tileentity).getCanaryDaylightDetector();
             } else if (tileentity instanceof TileEntityDispenser) {
-                return new CanaryDispenser((TileEntityDispenser) tileentity);
+                return ((TileEntityDispenser) tileentity).getCanaryDispenser();
+            } else if (tileentity instanceof TileEntityDropper) {
+                return ((TileEntityDropper) tileentity).getCanaryDropper();
+            } else if (tileentity instanceof TileEntityFurnace) {
+                return ((TileEntityFurnace) tileentity).getCanaryFurnace();
+            } else if (tileentity instanceof TileEntityHopper) {
+                return ((TileEntityHopper) tileentity).getCanaryHopper();
+            } else if (tileentity instanceof TileEntityMobSpawner) {
+                return ((TileEntityMobSpawner) tileentity).getCanaryMobSpawner();
             } else if (tileentity instanceof TileEntityNote) {
-                return new CanaryNoteBlock((TileEntityNote) tileentity);
-            } else if (tileentity instanceof TileEntityBrewingStand) {
-                return new CanaryBrewingStand((TileEntityBrewingStand) tileentity);
+                return ((TileEntityNote) tileentity).getCanaryNoteBlock();
             } else if (tileentity instanceof TileEntityRecordPlayer) {
-                return new CanaryJukebox((TileEntityRecordPlayer) tileentity);
+                return ((TileEntityRecordPlayer) tileentity).getCanaryJukebox();
+            } else if (tileentity instanceof TileEntitySign) {
+                return ((TileEntitySign) tileentity).getCanarySign();
+            } else if (tileentity instanceof TileEntitySkull) {
+                return ((TileEntitySkull) tileentity).getCanarySkull();
             }
         }
         return null;
