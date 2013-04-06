@@ -25,6 +25,8 @@ import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.commandsys.CanaryCommand;
 import net.canarymod.config.Configuration;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.DimensionSwitch;
 import net.canarymod.hook.player.ExperienceHook;
 import net.canarymod.hook.player.HealthChangeHook;
 import net.canarymod.hook.player.InventoryHook;
@@ -351,56 +353,26 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                 this.a((StatBase) AchievementList.x);
             }
 
-            // CanaryMod onPortalUse
+            // CanaryMod onPortalUse && onDimensionSwitch
             Location goingTo = simulatePortalUse(i0, MinecraftServer.D().getWorld(getCanaryWorld().getName(), i0));
 
             PortalUseHook hook = new PortalUseHook(getPlayer(), goingTo);
+            CancelableHook hook1 = new DimensionSwitch(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
 
-            if (!hook.isCanceled()) {
+            Canary.hooks().callHook(hook);
+            Canary.hooks().callHook(hook1);
+
+            if (hook.isCanceled() || hook1.isCanceled()) {
+                return;
+            }//
+            else {
                 this.b.ad().a(this, getCanaryWorld().getName(), i0);
                 this.cp = -1;
                 this.cm = -1;
+                this.cn = -1;
             } //
-            this.cn = -1;
-            this.cn = -1;
         }
     }
-
-    // CanaryMod: Simulates the use of a Portal by the Player to determine the location going to
-    private final Location simulatePortalUse(int dimensionTo, WorldServer oworldserverTo) {
-        double y = this.u;
-        float rotX = this.A;
-        float rotY = this.B;
-        double x = this.t;
-        double z = this.v;
-        double adjust = 8.0D;
-        if (dimensionTo == -1) {
-            x /= adjust;
-            z /= adjust;
-        } else if (dimensionTo == 0) {
-            x *= adjust;
-            z *= adjust;
-        } else {
-            ChunkCoordinates ochunkcoordinates;
-            if (dimensionTo == 1) {
-                ochunkcoordinates = oworldserverTo.I();
-            } else {
-                ochunkcoordinates = oworldserverTo.l();
-            }
-            x = (double) ochunkcoordinates.a;
-            y = (double) ochunkcoordinates.b;
-            z = (double) ochunkcoordinates.c;
-            rotX = 90.0F;
-            rotY = 0.0F;
-        }
-        if (dimensionTo != 1) {
-            x = (double) MathHelper.a((int) x, -29999872, 29999872);
-            z = (double) MathHelper.a((int) z, -29999872, 29999872);
-        }
-        return new Location(oworldserverTo.getCanaryWorld(), x, y, z, rotX, rotY);
-    }
-
-    //
 
     private void b(TileEntity tileentity) {
         if (tileentity != null) {
@@ -926,7 +898,6 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         this.b.ad().a(this, srv.getCanaryWorld().getName(), srv.getCanaryWorld().getType().getId());
         this.cp = -1;
         this.cm = -1;
-        this.cn = -1;
         this.cn = -1;
     }
 }

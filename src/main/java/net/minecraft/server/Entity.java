@@ -9,7 +9,10 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.position.Location;
+import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DamageHook;
+import net.canarymod.hook.entity.DimensionSwitch;
 import net.canarymod.hook.entity.EntityMountHook;
 
 
@@ -1517,6 +1520,14 @@ public abstract class Entity {
             WorldServer worldserver = minecraftserver.getWorld(getCanaryWorld().getName(), i0);
             WorldServer worldserver1 = minecraftserver.getWorld(getCanaryWorld().getName(), i1);
 
+            // CanaryMod: Dimension switch hook.
+            Location goingTo = this.simulatePortalUse(i0, MinecraftServer.D().getWorld(this.getCanaryWorld().getName(), i0));
+            CancelableHook hook = new DimensionSwitch(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
+            Canary.hooks().callHook(hook);
+            if (hook.isCanceled()) {
+                return;
+            }//
+
             this.ar = i0;
             this.q.e(this);
             this.M = false;
@@ -1604,4 +1615,40 @@ public abstract class Entity {
     public void getNBTProperties(NBTTagCompound tag) {
         this.b(tag);
     }
+
+    // CanaryMod: Simulates the use of a Portal by the Player to determine the location going to
+    protected final Location simulatePortalUse(int dimensionTo, WorldServer oworldserverTo) {
+        double y = this.u;
+        float rotX = this.A;
+        float rotY = this.B;
+        double x = this.t;
+        double z = this.v;
+        double adjust = 8.0D;
+        if (dimensionTo == -1) {
+            x /= adjust;
+            z /= adjust;
+        } else if (dimensionTo == 0) {
+            x *= adjust;
+            z *= adjust;
+        } else {
+            ChunkCoordinates ochunkcoordinates;
+            if (dimensionTo == 1) {
+                ochunkcoordinates = oworldserverTo.I();
+            } else {
+                ochunkcoordinates = oworldserverTo.l();
+            }
+            x = (double) ochunkcoordinates.a;
+            y = (double) ochunkcoordinates.b;
+            z = (double) ochunkcoordinates.c;
+            rotX = 90.0F;
+            rotY = 0.0F;
+        }
+        if (dimensionTo != 1) {
+            x = (double) MathHelper.a((int) x, -29999872, 29999872);
+            z = (double) MathHelper.a((int) z, -29999872, 29999872);
+        }
+        return new Location(oworldserverTo.getCanaryWorld(), x, y, z, rotX, rotY);
+    }
+
+    //
 }
