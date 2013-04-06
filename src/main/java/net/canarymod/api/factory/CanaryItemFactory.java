@@ -10,7 +10,7 @@ import net.canarymod.api.inventory.ItemType;
 
 /**
  * Item Factory
- * 
+ *
  * @author Brian (WWOL)
  * @author Jason (darkdiplomat)
  */
@@ -86,6 +86,27 @@ public class CanaryItemFactory implements ItemFactory {
      * {@inheritDoc}
      */
     @Override
+    public Item newItem(String commandInput) {
+        String[] data = commandInput.split(":");
+        CanaryItem item;
+        if(data[0].matches("\\d+")) {
+            item = (CanaryItem)(newItem(ItemType.fromId(Integer.parseInt(data[0]))));
+        }
+        else {
+            item = (CanaryItem)(newItem(ItemType.fromString(data[0])));
+        }
+        if(data.length == 2){
+            if(data[1].matches("\\d+") && item != null) {
+                item.setDamage(Integer.parseInt(data[1]));
+            }
+        }
+        return item;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Item newItem(int id, int damage, Enchantment[] enchantments) {
         CanaryItem item = new CanaryItem(id, damage);
 
@@ -111,5 +132,4 @@ public class CanaryItemFactory implements ItemFactory {
         }
         return null;
     }
-
 }
