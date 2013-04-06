@@ -7,6 +7,7 @@ import net.canarymod.api.inventory.ItemType;
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.config.Configuration;
 import net.minecraft.server.IInventory;
+import net.minecraft.server.ItemStack;
 
 /**
  * ContainerBlock buffer between ComplexBlock and those with Inventories
@@ -252,7 +253,8 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
      */
     @Override
     public Item getSlot(int index) {
-        return inventory.a(index).getCanaryItem();
+        ItemStack stack = inventory.a(index);
+        return stack != null ? stack.getCanaryItem() : null;
     }
 
     /**
@@ -386,12 +388,13 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
                 continue;
             }
             // We still have slots, but no stack, create a new stack.
-            if (this.getEmptySlot() != -1) {
+            int eslot = this.getEmptySlot();
+            if (eslot != -1) {
                 CanaryCompoundTag nbt = new CanaryCompoundTag("");
                 ((CanaryItem) item).getHandle().b(nbt.getHandle());
                 Item tempItem = new CanaryItem(item.getId(), amount, -1, item.getDamage());
                 ((CanaryItem) tempItem).getHandle().c(nbt.getHandle());
-                this.addItem(tempItem);
+                this.setSlot(eslot, tempItem);
                 amount = 0;
                 continue;
             }

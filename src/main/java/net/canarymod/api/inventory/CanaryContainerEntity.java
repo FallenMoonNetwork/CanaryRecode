@@ -253,10 +253,7 @@ public abstract class CanaryContainerEntity implements Inventory {
     @Override
     public Item getSlot(int index) {
         ItemStack stack = inventory.a(index);
-        if(stack != null) {
-            return stack.getCanaryItem();
-        }
-        return null;
+        return stack != null ? stack.getCanaryItem() : null;
     }
 
     /**
@@ -390,12 +387,13 @@ public abstract class CanaryContainerEntity implements Inventory {
                 continue;
             }
             // We still have slots, but no stack, create a new stack.
-            if (this.getEmptySlot() != -1) {
+            int eslot = getEmptySlot();
+            if (eslot != -1) {
                 CanaryCompoundTag nbt = new CanaryCompoundTag("");
                 ((CanaryItem) item).getHandle().b(nbt.getHandle());
                 CanaryItem tempItem = new CanaryItem(item.getId(), amount, -1, item.getDamage());
                 tempItem.getHandle().c(nbt.getHandle());
-                inventory.a(this.getEmptySlot(), tempItem.getHandle());
+                this.setSlot(eslot, tempItem);
                 amount = 0;
                 continue;
             }
@@ -403,7 +401,7 @@ public abstract class CanaryContainerEntity implements Inventory {
             // No free slots, no incomplete stacks: full
             // make sure the stored items are removed
             item.setAmount(amount);
-//            return false;
+            return false;
         }
         return true;
     }

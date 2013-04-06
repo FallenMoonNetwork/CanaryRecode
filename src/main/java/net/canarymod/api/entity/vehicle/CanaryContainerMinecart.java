@@ -5,6 +5,7 @@ import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
 import net.canarymod.api.nbt.CanaryCompoundTag;
+import net.canarymod.config.Configuration;
 import net.minecraft.server.EntityMinecart;
 import net.minecraft.server.EntityMinecartContainer;
 import net.minecraft.server.ItemStack;
@@ -252,7 +253,8 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
      */
     @Override
     public Item getSlot(int index) {
-        return this.getHandle().a(index).getCanaryItem();
+        ItemStack stack = getHandle().a(index);
+        return stack != null ? stack.getCanaryItem() : null;
     }
 
     /**
@@ -378,7 +380,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
             itemExisting = this.getItem(item.getId(), maxAmount - 1, (short) item.getDamage());
 
             // Add the items to the existing stack of items
-            if (itemExisting != null /* TODO INSERT ENCHANT CHECKS */) {
+            if (itemExisting != null && (!item.isEnchanted() || Configuration.getServerConfig().allowEnchantmentStacking())) {
                 // Add as much items as possible to the stack
                 int k = Math.min(maxAmount - itemExisting.getAmount(), item.getAmount());
                 this.setSlot(item.getId(), itemExisting.getAmount() + k, (short) item.getDamage(), itemExisting.getSlot());
@@ -386,12 +388,13 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
                 continue;
             }
             // We still have slots, but no stack, create a new stack.
-            if (this.getEmptySlot() != -1) {
+            int eslot = this.getEmptySlot();
+            if (eslot != -1) {
                 CanaryCompoundTag nbt = new CanaryCompoundTag("");
                 ((CanaryItem) item).getHandle().b(nbt.getHandle());
                 Item tempItem = new CanaryItem(item.getId(), amount, -1, item.getDamage());
                 ((CanaryItem) tempItem).getHandle().c(nbt.getHandle());
-                this.addItem(tempItem);
+                this.setSlot(eslot, tempItem);
                 amount = 0;
                 continue;
             }
@@ -401,7 +404,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
             item.setAmount(amount);
             return false;
         }
-        return false;
+        return true;
     }
 
     /**
