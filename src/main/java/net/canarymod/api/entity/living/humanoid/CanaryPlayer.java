@@ -520,6 +520,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
+    public void setColor(String color) {
+        prefix = color;
+    }
+
+    @Override
     public NetServerHandler getNetServerHandler() {
         return ((EntityPlayerMP) entity).getServerHandler();
     }

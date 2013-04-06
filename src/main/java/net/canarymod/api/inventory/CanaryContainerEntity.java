@@ -3,12 +3,13 @@ package net.canarymod.api.inventory;
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.config.Configuration;
 import net.minecraft.server.IInventory;
+import net.minecraft.server.ItemStack;
 
 
 
 /**
  * Inventory implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryContainerEntity implements Inventory {
@@ -251,7 +252,11 @@ public abstract class CanaryContainerEntity implements Inventory {
      */
     @Override
     public Item getSlot(int index) {
-        return inventory.a(index).getCanaryItem();
+        ItemStack stack = inventory.a(index);
+        if(stack != null) {
+            return stack.getCanaryItem();
+        }
+        return null;
     }
 
     /**
@@ -388,9 +393,9 @@ public abstract class CanaryContainerEntity implements Inventory {
             if (this.getEmptySlot() != -1) {
                 CanaryCompoundTag nbt = new CanaryCompoundTag("");
                 ((CanaryItem) item).getHandle().b(nbt.getHandle());
-                Item tempItem = new CanaryItem(item.getId(), amount, -1, item.getDamage());
-                ((CanaryItem) tempItem).getHandle().c(nbt.getHandle());
-                this.addItem(tempItem);
+                CanaryItem tempItem = new CanaryItem(item.getId(), amount, -1, item.getDamage());
+                tempItem.getHandle().c(nbt.getHandle());
+                inventory.a(this.getEmptySlot(), tempItem.getHandle());
                 amount = 0;
                 continue;
             }
@@ -398,7 +403,7 @@ public abstract class CanaryContainerEntity implements Inventory {
             // No free slots, no incomplete stacks: full
             // make sure the stored items are removed
             item.setAmount(amount);
-            return false;
+//            return false;
         }
         return true;
     }
