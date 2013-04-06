@@ -12,10 +12,17 @@ import net.canarymod.Canary;
 import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.recipes.CraftingRecipe;
+import net.canarymod.api.inventory.recipes.ShapedRecipeHelper;
+import net.canarymod.api.inventory.recipes.SmeltRecipe;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.WorldManager;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.ConsoleCommandHook;
+import net.minecraft.server.CraftingManager;
+import net.minecraft.server.FurnaceRecipes;
+import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
 
 
@@ -288,5 +295,24 @@ public class CanaryServer implements Server {
                 timers.remove(name);
             }
         }
+    }
+
+    @Override
+    public void addRecipe(CraftingRecipe recipe) {
+        if (recipe.hasShape()) {
+            CraftingManager.a().a(((CanaryItem) recipe.getResult()).getHandle(), ShapedRecipeHelper.createRecipeShape(recipe));
+        } else {
+            ItemStack result = ((CanaryItem) recipe.getResult()).getHandle();
+            Object[] rec = new Object[recipe.getItems().length];
+            for(int index = 0; index < recipe.getItems().length; index++){
+                rec[index] = ((CanaryItem) recipe.getItems()[index]).getHandle();
+            }
+            CraftingManager.a().b(result, rec);
+        }
+    }
+
+    @Override
+    public void addSmeltingRecipe(SmeltRecipe recipe) {
+        FurnaceRecipes.a().a(recipe.getItemIDFrom(), ((CanaryItem) recipe.getResult()).getHandle(), recipe.getXP());
     }
 }
