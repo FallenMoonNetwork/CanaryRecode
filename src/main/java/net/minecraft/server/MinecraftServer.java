@@ -82,7 +82,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         k = this;
         this.n = file1;
         this.p = new ServerCommandManager();
-        this.l = new AnvilSaveConverter(file1, net.canarymod.api.world.WorldType.fromName("NORMAL"));
+        this.l = new AnvilSaveConverter(file1, net.canarymod.api.world.DimensionType.fromName("NORMAL"));
         this.am();
         // CanaryMod
         this.server = new CanaryServer(this);
@@ -109,7 +109,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     //Used to initialize the "master" worlds
-    protected void initWorld(String name, long seed, WorldType nmsWt, net.canarymod.api.world.WorldType worldtype, String generatorSettings) {
+    protected void initWorld(String name, long seed, WorldType nmsWt, net.canarymod.api.world.DimensionType worldtype, String generatorSettings) {
         this.b(name); //Anvil Converter
         this.c("menu.loadingLevel");
         File worldFolder = new File("worlds/" + name);
@@ -151,7 +151,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 world = new WorldServer(this, isavehandler, name, worldtype.getId(), worldsettings, this.a, this.al());
             }
         } else {
-            world = new WorldServerMulti(this, isavehandler, name, worldtype.getId(), worldsettings, (WorldServer)((CanaryWorld) worldManager.getWorld(name, net.canarymod.api.world.WorldType.fromName("NORMAL"), true)).getHandle(), this.a, this.al());
+            world = new WorldServerMulti(this, isavehandler, name, worldtype.getId(), worldsettings, (WorldServer)((CanaryWorld) worldManager.getWorld(name, net.canarymod.api.world.DimensionType.fromName("NORMAL"), true)).getHandle(), this.a, this.al());
         }
 
         world.a((IWorldAccess) (new WorldManager(this, world)));
@@ -596,7 +596,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public WorldServer getWorld(String s, int i) {
-        net.canarymod.api.world.World w = worldManager.getWorld(s, net.canarymod.api.world.WorldType.fromId(i), true);
+        net.canarymod.api.world.World w = worldManager.getWorld(s, net.canarymod.api.world.DimensionType.fromId(i), true);
         if(w != null) {
             return (WorldServer)((CanaryWorld) w).getHandle();
         }
@@ -1058,14 +1058,14 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      * @param seed
      */
     public void loadWorld(String name, long seed) {
-        loadWorld(name, seed, net.canarymod.api.world.WorldType.fromName("NORMAL"));
+        loadWorld(name, seed, net.canarymod.api.world.DimensionType.fromName("NORMAL"));
     }
 
-    public void loadWorld(String name, long seed, net.canarymod.api.world.WorldType type) {
-        this.loadWorld(name, seed, type, net.canarymod.api.world.World.GeneratorType.DEFAULT);
+    public void loadWorld(String name, long seed, net.canarymod.api.world.DimensionType type) {
+        this.loadWorld(name, seed, type, net.canarymod.api.world.WorldType.DEFAULT);
     }
 
-    public void loadWorld(String name, long seed, net.canarymod.api.world.WorldType type, net.canarymod.api.world.World.GeneratorType typeGen) {
+    public void loadWorld(String name, long seed, net.canarymod.api.world.DimensionType type, net.canarymod.api.world.WorldType typeGen) {
         this.initWorld(name, seed, WorldType.a(typeGen.toString()), type, null);
     }
 }

@@ -10,7 +10,6 @@ import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.Logman;
 import net.canarymod.api.CanaryServer;
-import net.canarymod.api.world.World.GeneratorType;
 import net.minecraft.server.WorldServer;
 
 
@@ -26,9 +25,9 @@ public class CanaryWorldManager implements WorldManager {
     private ArrayList<String> existingWorlds;
 
     public CanaryWorldManager() {
-        WorldType.addType("NORMAL", 0);
-        WorldType.addType("NETHER", -1);
-        WorldType.addType("END", 1);
+        DimensionType.addType("NORMAL", 0);
+        DimensionType.addType("NETHER", -1);
+        DimensionType.addType("END", 1);
         File worlds = new File("worlds");
 
         if (!worlds.exists()) {
@@ -59,7 +58,7 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public World getWorld(String name, boolean autoload) {
-        WorldType t = WorldType.fromName(name.substring(Math.max(0, name.lastIndexOf("_"))));
+        DimensionType t = DimensionType.fromName(name.substring(Math.max(0, name.lastIndexOf("_"))));
         String nameOnly = name.substring(0, Math.max(0, name.lastIndexOf("_")));
         if(t != null) {
             return getWorld(nameOnly, t, autoload);
@@ -73,14 +72,14 @@ public class CanaryWorldManager implements WorldManager {
         }
         else {
             if(existingWorlds.contains(name)) {
-                return loadWorld(name, WorldType.fromId(0));
+                return loadWorld(name, DimensionType.fromId(0));
             }
             throw new UnknownWorldException("World " + name + " is unknown and can't be loaded!");
         }
     }
 
     @Override
-    public World getWorld(String world, WorldType type, boolean autoload) {
+    public World getWorld(String world, DimensionType type, boolean autoload) {
         if (worldIsLoaded(world + "_" + type.getName())) {
             return loadedWorlds.get(world + "_" + type.getName());
         }
@@ -105,26 +104,26 @@ public class CanaryWorldManager implements WorldManager {
     }
 
     @Override
-    public boolean createWorld(String name, long seed, WorldType type) {
+    public boolean createWorld(String name, long seed, DimensionType type) {
         ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, seed);
         return true;
     }
 
     @Override
-    public boolean createWorld(String name, WorldType type) {
+    public boolean createWorld(String name, DimensionType type) {
         Logman.println("Creating a new world! " + name + "_" + type.getName());
         ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, new Random().nextLong(), type);
         return true;
     }
 
     @Override
-    public boolean createWorld(String name, long seed, WorldType worldType, GeneratorType genType) {
+    public boolean createWorld(String name, long seed, DimensionType worldType, WorldType genType) {
         ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name + worldType.getName(), new Random().nextLong(), worldType, genType);
         return true;
     }
 
     @Override
-    public World loadWorld(String name, WorldType type) {
+    public World loadWorld(String name, DimensionType type) {
         if (!worldIsLoaded(name + "_" + type.getName())) {
             ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, new Random().nextLong(), type);
             return loadedWorlds.get(name + "_" + type.getName());
@@ -151,7 +150,7 @@ public class CanaryWorldManager implements WorldManager {
     }
 
     @Override
-    public void unloadWorld(String name, WorldType type) {
+    public void unloadWorld(String name, DimensionType type) {
         loadedWorlds.remove(name + "_" + type.getName());
     }
 

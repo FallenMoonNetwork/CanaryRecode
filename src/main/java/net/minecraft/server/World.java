@@ -85,7 +85,7 @@ public abstract class World implements IBlockAccess {
         return this.t.d;
     }
 
-    public World(ISaveHandler isavehandler, String s0, WorldSettings worldsettings, WorldProvider worldprovider, Profiler profiler, ILogAgent ilogagent, net.canarymod.api.world.WorldType type) {
+    public World(ISaveHandler isavehandler, String s0, WorldSettings worldsettings, WorldProvider worldprovider, Profiler profiler, ILogAgent ilogagent, net.canarymod.api.world.DimensionType type) {
         this.O = this.s.nextInt(12000);
         this.H = new int['\u8000'];
         this.I = false;

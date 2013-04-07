@@ -36,7 +36,7 @@ public class WorldServer extends World {
 
     public WorldServer(MinecraftServer minecraftserver, ISaveHandler isavehandler, String s0, int i0, WorldSettings worldsettings, Profiler profiler, ILogAgent ilogagent) {
         //TODO: WorldProvider: Needs changing so it would get any WorldProvider. Might need to make a mapping/register
-        super(isavehandler, s0, worldsettings, WorldProvider.a(i0), profiler, ilogagent, net.canarymod.api.world.WorldType.fromId(i0));
+        super(isavehandler, s0, worldsettings, WorldProvider.a(i0), profiler, ilogagent, net.canarymod.api.world.DimensionType.fromId(i0));
         this.a = minecraftserver;
         this.J = new EntityTracker(this);
         this.K = new PlayerManager(this, minecraftserver.ad().o());
@@ -63,7 +63,7 @@ public class WorldServer extends World {
 
         scoreboardsavedata.a(this.D);
         ((ServerScoreboard) this.D).a(scoreboardsavedata);
-        canaryDimension = new CanaryWorld(s0, (WorldServer)this, net.canarymod.api.world.WorldType.fromId(i0));
+        canaryDimension = new CanaryWorld(s0, (WorldServer)this, net.canarymod.api.world.DimensionType.fromId(i0));
     }
 
     @Override

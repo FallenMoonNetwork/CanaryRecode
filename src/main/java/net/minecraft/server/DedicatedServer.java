@@ -144,7 +144,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
         this.al().a("Preparing level \"" + this.J() + "\"");
         // CanaryMod changed call to initWorld
-        net.canarymod.api.world.WorldType wt = net.canarymod.api.world.WorldType.fromName("NORMAL");
+        net.canarymod.api.world.DimensionType wt = net.canarymod.api.world.DimensionType.fromName("NORMAL");
         //        this.initWorld(this.J(), i2, worldtype, s2, this.J(), true, wt);
         this.initWorld(this.J(), i2, worldtype, wt, s2);
         //

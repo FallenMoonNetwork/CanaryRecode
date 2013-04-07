@@ -59,7 +59,7 @@ public abstract class ServerConfigurationManager {
         NBTTagCompound nbttagcompound = this.a(entityplayermp);
         CanaryWorld w;
         if(nbttagcompound != null) {
-            w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(nbttagcompound.i("LevelName"), net.canarymod.api.world.WorldType.fromId(nbttagcompound.e("Dimension")), true);
+            w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(nbttagcompound.i("LevelName"), net.canarymod.api.world.DimensionType.fromId(nbttagcompound.e("Dimension")), true);
         }
         else {
             w = (CanaryWorld) Canary.getServer().getDefaultWorld();
@@ -248,7 +248,7 @@ public abstract class ServerConfigurationManager {
         s2 = s2.substring(s2.indexOf("/") + 1);
         s2 = s2.substring(0, s2.indexOf(":"));
 
-        PreConnectionHook hook = new PreConnectionHook(s2, s0, net.canarymod.api.world.WorldType.fromId(0), Canary.getServer().getDefaultWorldName());
+        PreConnectionHook hook = new PreConnectionHook(s2, s0, net.canarymod.api.world.DimensionType.fromId(0), Canary.getServer().getDefaultWorldName());
         Canary.hooks().callHook(hook);
 
         if (hook.getKickReason() != null) {
@@ -318,7 +318,7 @@ public abstract class ServerConfigurationManager {
 
         //CanaryMod read the players dat file to find out the world it was last in
         String worldName = Canary.getServer().getDefaultWorldName();
-        net.canarymod.api.world.WorldType worldtype = net.canarymod.api.world.WorldType.fromId(0);
+        net.canarymod.api.world.DimensionType worldtype = net.canarymod.api.world.DimensionType.fromId(0);
         NBTTagCompound playertag = getPlayerDatByName(playername);
 
         if(playertag != null) {
@@ -328,7 +328,7 @@ public abstract class ServerConfigurationManager {
             if(worldName == null || worldName.isEmpty()) {
                 worldName = Canary.getServer().getDefaultWorldName();
             }
-            worldtype = net.canarymod.api.world.WorldType.fromId(canarycompound.getInt("Dimension"));
+            worldtype = net.canarymod.api.world.DimensionType.fromId(canarycompound.getInt("Dimension"));
         }
 
         WorldServer world = (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(worldName, worldtype, true)).getHandle();
@@ -361,7 +361,7 @@ public abstract class ServerConfigurationManager {
         entityplayermp.ar = i0;
         Object object;
         String name = entityplayermp.getCanaryWorld().getName();
-        net.canarymod.api.world.WorldType type = net.canarymod.api.world.WorldType.fromId(i0);
+        net.canarymod.api.world.DimensionType type = net.canarymod.api.world.DimensionType.fromId(i0);
 
         WorldServer worldserver = (WorldServer) (loc == null ? (WorldServer) ((CanaryWorld)Canary.getServer().getWorldManager().getWorld(name, type, true)).getHandle(): ((CanaryWorld) loc.getWorld()).getHandle());
         if (this.e.M()) {
@@ -437,7 +437,7 @@ public abstract class ServerConfigurationManager {
         WorldServer worldserver = (WorldServer) entityplayermp.getCanaryWorld().getHandle();
 
         entityplayermp.ar = i0;
-        net.canarymod.api.world.WorldType type = net.canarymod.api.world.WorldType.fromId(i0);
+        net.canarymod.api.world.DimensionType type = net.canarymod.api.world.DimensionType.fromId(i0);
         WorldServer worldserver1 = (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(worldName, type, true)).getHandle();
 
         //Pre-load a chunk in the new world, makes spawning there a little faster

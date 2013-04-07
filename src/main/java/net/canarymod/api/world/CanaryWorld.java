@@ -51,7 +51,7 @@ import net.minecraft.server.WorldServer;
 
 public class CanaryWorld implements World {
     private WorldServer world;
-    private WorldType type;
+    private DimensionType type;
     private CanaryChunkProviderServer chunkProvider;
     private CanaryEntityTracker entityTracker;
     public long[] nanoTicks;
@@ -64,7 +64,7 @@ public class CanaryWorld implements World {
      */
     private String name;
 
-    public CanaryWorld(String name, WorldServer dimension, WorldType type) {
+    public CanaryWorld(String name, WorldServer dimension, DimensionType type) {
         this.name = name;
         world = dimension;
 
@@ -387,7 +387,7 @@ public class CanaryWorld implements World {
     }
 
     @Override
-    public WorldType getType() {
+    public DimensionType getType() {
         return this.type;
     }
 

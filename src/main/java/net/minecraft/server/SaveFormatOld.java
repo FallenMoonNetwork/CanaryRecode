@@ -7,10 +7,10 @@ import java.io.InputStream;
 public class SaveFormatOld implements ISaveFormat {
 
     protected final File a;
-    protected net.canarymod.api.world.WorldType type;
+    protected net.canarymod.api.world.DimensionType type;
 //CanaryMod changed constructor
 
-    public SaveFormatOld(File file1, net.canarymod.api.world.WorldType type) {
+    public SaveFormatOld(File file1, net.canarymod.api.world.DimensionType type) {
         if (!file1.exists()) {
             file1.mkdirs();
         }

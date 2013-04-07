@@ -15,7 +15,7 @@ import net.canarymod.Canary;
 
 public class AnvilSaveConverter extends SaveFormatOld {
 
-    public AnvilSaveConverter(File file1, net.canarymod.api.world.WorldType type) {
+    public AnvilSaveConverter(File file1, net.canarymod.api.world.DimensionType type) {
         super(file1, type);
     }
 

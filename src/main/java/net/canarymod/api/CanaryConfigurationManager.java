@@ -7,7 +7,7 @@ import net.canarymod.Canary;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.World;
-import net.canarymod.api.world.WorldType;
+import net.canarymod.api.world.DimensionType;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.ServerConfigurationManager;
 
@@ -66,7 +66,7 @@ public class CanaryConfigurationManager implements ConfigurationManager {
     }
 
     @Override
-    public void markBlockNeedsUpdate(int x, int y, int z, WorldType dimension, String world) {
+    public void markBlockNeedsUpdate(int x, int y, int z, DimensionType dimension, String world) {
         Canary.getServer().getWorldManager().getWorld(world, dimension, true).getPlayerManager().markBlockNeedsUpdate(x, y, z);
 
     }
