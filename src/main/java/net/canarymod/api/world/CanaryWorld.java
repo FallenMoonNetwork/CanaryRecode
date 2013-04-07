@@ -6,7 +6,6 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.EntityTracker;
-import net.canarymod.api.Particle;
 import net.canarymod.api.PlayerManager;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;
@@ -20,6 +19,8 @@ import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.blocks.Chest;
 import net.canarymod.api.world.blocks.ComplexBlock;
+import net.canarymod.api.world.effects.AuxiliarySoundEffect;
+import net.canarymod.api.world.effects.Particle;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.minecraft.server.EntityLightningBolt;
@@ -404,6 +405,16 @@ public class CanaryWorld implements World {
     @Override
     public void spawnParticle(Particle particle) {
         world.a(particle.type.getMcName(), particle.x, particle.y, particle.z, particle.velocityX, particle.velocityY, particle.velocityZ);
+    }
+
+    @Override
+    public void playAUXEffect(AuxiliarySoundEffect effect) {
+        world.e(effect.type.getDigits(), effect.x, effect.y, effect.z, effect.extra);
+    }
+
+    @Override
+    public void playAUXEffectAt(Player player, AuxiliarySoundEffect effect) {
+        world.a(player != null ? ((CanaryPlayer) player).getHandle() : null, effect.type.getDigits(), effect.x, effect.y, effect.z, effect.extra);
     }
 
     @Override
