@@ -173,9 +173,9 @@ public class CanaryWorld implements World {
     public ArrayList<EntityAnimal> getAnimalList() {
         ArrayList<EntityAnimal> animals = new ArrayList<EntityAnimal>();
 
-        for (Entity entity : getEntityTracker().getTrackedEntities()) {
-            if (entity instanceof EntityAnimal) {
-                animals.add((EntityAnimal) entity);
+        for (Object o : (ArrayList) ((ArrayList) world.e).clone()) {
+            if (((net.minecraft.server.Entity) o).getCanaryEntity() instanceof EntityAnimal) {
+                animals.add((EntityAnimal) ((net.minecraft.server.Entity) o).getCanaryEntity());
             }
         }
         return animals;
@@ -185,9 +185,9 @@ public class CanaryWorld implements World {
     public ArrayList<EntityMob> getMobList() {
         ArrayList<EntityMob> mobs = new ArrayList<EntityMob>();
 
-        for (Entity entity : getEntityTracker().getTrackedEntities()) {
-            if (entity instanceof EntityMob) {
-                mobs.add((EntityMob) entity);
+        for (Object o : (ArrayList) ((ArrayList) world.e).clone()) {
+            if (((net.minecraft.server.Entity) o).getCanaryEntity() instanceof EntityMob) {
+                mobs.add((EntityMob) ((net.minecraft.server.Entity) o).getCanaryEntity());
             }
         }
         return mobs;
@@ -249,12 +249,13 @@ public class CanaryWorld implements World {
 
     @Override
     public void setBlockAt(int x, int y, int z, short type, short data) {
-        world.c(x, y, z, type, data);
+        world.c(x, y, z, type);
+        setDataAt(x, y, z, data);
     }
 
     @Override
     public void setDataAt(int x, int y, int z, short data) {
-        world.b(x, y, z, data);
+        world.b(x, y, z, data, 0x2);
     }
 
     @Override
