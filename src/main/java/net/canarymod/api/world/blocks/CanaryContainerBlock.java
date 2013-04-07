@@ -11,7 +11,7 @@ import net.minecraft.server.ItemStack;
 
 /**
  * ContainerBlock buffer between ComplexBlock and those with Inventories
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryContainerBlock extends CanaryComplexBlock implements Inventory {
@@ -20,6 +20,13 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
         super(inventory);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getName() {
+        return inventory.b();
+    }
     /**
      * {@inheritDoc}
      */
@@ -509,5 +516,13 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
     @Override
     public Item removeItem(ItemType type, short damage) {
         return this.removeItem(type.getId(), damage);
+    }
+
+    /**
+     * Gets the inventory handle of this ContainerBlock
+     * @return
+     */
+    public IInventory getInventoryHandle() {
+        return inventory;
     }
 }

@@ -184,4 +184,32 @@ public class CanaryBlock implements Block {
     public Position getPosition() {
         return new Position(x, y, z);
     }
+
+    @Override
+    public Block getFacingBlock(BlockFace face) {
+        switch(face) {
+            case BOTTOM:
+                return getRelative(0, -1, 0);
+            case EAST:
+                return getRelative(0, 0, -1);
+            case NORTH:
+                return getRelative(1, 0, 0);
+            case SOUTH:
+                return getRelative(-1, 0, 0);
+            case TOP:
+                return getRelative(0, 1, 0);
+            case UNKNOWN:
+                break;
+            case WEST:
+                return getRelative(0, 0, 1);
+            default:
+                break;
+        }
+        return null;
+    }
+
+    @Override
+    public Block getRelative(int x, int y, int z) {
+        return this.dimension.getBlockAt(getX() + x, getY() + y, getZ() + z);
+    }
 }

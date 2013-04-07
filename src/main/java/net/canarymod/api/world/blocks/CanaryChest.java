@@ -2,22 +2,24 @@ package net.canarymod.api.world.blocks;
 
 
 import java.util.Arrays;
+
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
+import net.minecraft.server.InventoryLargeChest;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityChest;
 
 
 /**
  * Chest wrapper implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public class CanaryChest extends CanaryContainerBlock implements Chest {
 
     /**
      * Constructs a new wrapper for TileEntityChest
-     * 
+     *
      * @param tileentity
      *            the TileEntityChest to be wrapped
      */
@@ -25,52 +27,50 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
         super(tileentity);
     }
 
-    // TODO: Implement hasAttachedChest and the private tryAttachedChest!!
-    // Requres changes to the Block interface
     @Override
     public boolean hasAttachedChest() {
-        // Block block = getBlock();
-        // DoubleChest result;
-        //
-        // result = tryAttachedChest(block, BlockFace.NORTH);
-        // if (result != null) {
-        // return result;
-        // }
-        //
-        // result = tryAttachedChest(block, Block.Face.Back);
-        // if (result != null) {
-        // return result;
-        // }
-        //
-        // result = tryAttachedChest(block, Block.Face.Left);
-        // if (result != null) {
-        // return result;
-        // }
-        //
-        // result = tryAttachedChest(block, Block.Face.Right);
-        // if (result != null) {
-        // return result;
-        // }
-        //
-        // return result != null;
-        return false;
+         Block block = getBlock();
+         DoubleChest result;
+
+         result = tryAttachedChest(block, BlockFace.NORTH);
+         if (result != null) {
+         return true;
+         }
+
+         result = tryAttachedChest(block, BlockFace.SOUTH);
+         if (result != null) {
+         return true;
+         }
+
+         result = tryAttachedChest(block, BlockFace.EAST);
+         if (result != null) {
+         return true;
+         }
+
+         result = tryAttachedChest(block, BlockFace.WEST);
+         if (result != null) {
+         return true;
+         }
+         return false;
     }
 
-    // private DoubleChest tryAttachedChest(Block origin, BlockFace face) {
-    // Block block = origin.getFace(face);
-    //
-    // if (BlockType.fromId(block.getType()) == BlockType.Chest) {
-    // ComplexBlock cblock = getWorld().getOnlyComplexBlock(block);
-    //
-    // if ((cblock != null) && (cblock instanceof Chest)) {
-    // Chest chest = (Chest) cblock;
-    //
-    // return new DoubleChest(new OInventoryLargeChest(getName(), container, chest.container));
-    // }
-    // }
-    //
-    // return null;
-    // }
+    private DoubleChest tryAttachedChest(Block origin, BlockFace face) {
+        Block block = origin.getFacingBlock(face);
+        if (block == null) {
+            return null;
+        }
+        if (block.getType() == BlockType.Chest) {
+            ComplexBlock cblock = getWorld().getOnlyComplexBlock(block);
+
+            if ((cblock != null) && (cblock instanceof Chest)) {
+                Chest chest = (Chest) cblock;
+
+                return new CanaryDoubleChest(new InventoryLargeChest(getName(), this.inventory, ((CanaryChest)chest).getInventoryHandle()));
+            }
+        }
+
+        return null;
+    }
 
     /**
      * {@inheritDoc}
@@ -120,5 +120,30 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
     @Override
     public TileEntityChest getTileEntity() {
         return (TileEntityChest) tileentity;
+    }
+
+    @Override
+    public Chest getAttachedChest() {
+        Chest chest;
+        chest = tryAttachedChest(getBlock(), BlockFace.NORTH);
+        if(chest != null) {
+            return chest;
+        }
+
+        chest = tryAttachedChest(getBlock(), BlockFace.SOUTH);
+        if(chest != null) {
+            return chest;
+        }
+
+        chest = tryAttachedChest(getBlock(), BlockFace.EAST);
+        if(chest != null) {
+            return chest;
+        }
+
+        chest = tryAttachedChest(getBlock(), BlockFace.WEST);
+        if(chest != null) {
+            return chest;
+        }
+        return null;
     }
 }
