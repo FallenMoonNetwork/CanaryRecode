@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.IgnitionHook;
+
 
 public class BlockFire extends Block {
 
@@ -133,8 +135,10 @@ public class BlockFire extends Block {
 
                                             // CanaryMod: Ignition
                                             CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+
                                             ignited.setStatus((byte) 3); // Spread Status 3
                                             IgnitionHook hook = new IgnitionHook(ignited, null);
+
                                             Canary.hooks().callHook(hook);
                                             if (!hook.isCanceled()) {
                                                 world.f(i4, i6, i5, this.cz, i10, 3);
@@ -169,8 +173,10 @@ public class BlockFire extends Block {
                 }
                 // CanaryMod: Ignition
                 CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+
                 ignited.setStatus((byte) 3); // Spread Status 3
                 IgnitionHook hook = new IgnitionHook(ignited, null);
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     world.f(i0, i1, i2, this.cz, i6, 3);
@@ -179,8 +185,10 @@ public class BlockFire extends Block {
             } else {
                 // CanaryMod: Ignition
                 CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+
                 ignited.setStatus((byte) 4); // Burned Up Status 4
                 IgnitionHook hook = new IgnitionHook(ignited, null);
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     world.i(i0, i1, i2);

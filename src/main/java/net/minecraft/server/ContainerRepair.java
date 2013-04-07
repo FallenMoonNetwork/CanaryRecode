@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.Map;
 import net.canarymod.Canary;
@@ -7,14 +8,15 @@ import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.blocks.CanaryAnvil;
 import net.canarymod.hook.player.AnvilUseHook;
 
+
 public class ContainerRepair extends Container {
 
-    public IInventory f = new InventoryCraftResult(); //Canary: private to public
-    public IInventory g = new InventoryRepair(this, "Repair", true, 2); //Canary: private to public
-    public World h; //Canary: private to public
-    public int i; //Canary: private to public
-    public int j; //Canary: private to public
-    public int k; //Canary: private to public
+    public IInventory f = new InventoryCraftResult(); // Canary: private to public
+    public IInventory g = new InventoryRepair(this, "Repair", true, 2); // Canary: private to public
+    public World h; // Canary: private to public
+    public int i; // Canary: private to public
+    public int j; // Canary: private to public
+    public int k; // Canary: private to public
     public int a = 0;
     public int l = 0;
     private String m;
@@ -287,6 +289,7 @@ public class ContainerRepair extends Container {
             this.f.a(0, itemstack1);
             // CanaryMod: AnvilUse
             AnvilUseHook hook = new AnvilUseHook(getPlayer(), new CanaryAnvil(this));
+
             Canary.hooks().callHook(hook);
             //
             this.b();

@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.ItemUseHook;
+
 
 public class ItemRecord extends Item {
 
@@ -23,8 +25,10 @@ public class ItemRecord extends Item {
     public boolean a(ItemStack itemstack, EntityPlayer entityplayer, World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2) {
         // CanaryMod: ItemUse
         CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+
         clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
         ItemUseHook hook = new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked);
+
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return false;

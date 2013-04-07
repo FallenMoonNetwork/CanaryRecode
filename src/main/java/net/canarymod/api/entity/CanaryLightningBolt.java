@@ -1,7 +1,9 @@
 package net.canarymod.api.entity;
 
+
 import net.canarymod.api.world.CanaryWorld;
 import net.minecraft.server.EntityLightningBolt;
+
 
 public class CanaryLightningBolt extends CanaryEntity implements LightningBolt {
 

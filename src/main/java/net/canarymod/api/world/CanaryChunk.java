@@ -1,7 +1,6 @@
 package net.canarymod.api.world;
 
 
-
 public class CanaryChunk implements Chunk {
     private net.minecraft.server.Chunk handle;
 
@@ -66,6 +65,7 @@ public class CanaryChunk implements Chunk {
     @Override
     public BiomeType[] getBiomeData() {
         BiomeType[] data = BiomeType.fromIdArray(handle.m());
+
         return data;
     }
 

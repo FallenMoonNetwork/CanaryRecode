@@ -34,8 +34,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     public final Profiler a = new Profiler();
     private String q;
     private int r = -1;
-    //    public WorldServer[] b; // XXX
-    public ServerConfigurationManager s; //CanaryMod private -> public
+    // public WorldServer[] b; // XXX
+    public ServerConfigurationManager s; // CanaryMod private -> public
     private boolean t = true;
     private boolean u = false;
     private int v = 0;
@@ -57,13 +57,13 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     public final long[] g = new long[100];
     public final long[] h = new long[100];
     public final long[] i = new long[100];
-    //    public long[][] j; //XXX
+    // public long[][] j; //XXX
     private KeyPair H;
     private String I;
     private String J;
     private boolean L;
     private boolean M;
-    private boolean N; //isRunning
+    private boolean N; // isRunning
     private String O = "";
     private boolean P = false;
     private long Q;
@@ -108,13 +108,14 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.R = s0;
     }
 
-    //Used to initialize the "master" worlds
+    // Used to initialize the "master" worlds
     protected void initWorld(String name, long seed, WorldType nmsWt, net.canarymod.api.world.DimensionType worldtype, String generatorSettings) {
-        this.b(name); //Anvil Converter
+        this.b(name); // Anvil Converter
         this.c("menu.loadingLevel");
         File worldFolder = new File("worlds/" + name);
         CanarySaveConverter converter = new CanarySaveConverter(worldFolder);
-        if(converter.isVanillaFormat()) {
+
+        if (converter.isVanillaFormat()) {
             Canary.logInfo("World " + name + " is Vanilla. Will now attempt to convert.");
             converter.convert();
         }
@@ -127,16 +128,14 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
         if (worldinfo == null) {
             worldsettings = new WorldSettings(seed, EnumGameType.a(config.getGameMode().getId()), config.generatesStructures(), false, nmsWt);
-            //CanaryMod those are flatworld settings, and they are likely unset
-            if(generatorSettings != null) {
+            // CanaryMod those are flatworld settings, and they are likely unset
+            if (generatorSettings != null) {
                 worldsettings.a(generatorSettings);
-            }
-            else {
+            } else {
                 worldsettings.a("");
             }
             //
-        }
-        else {
+        } else {
             worldsettings = new WorldSettings(worldinfo);
         }
 
@@ -151,7 +150,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 world = new WorldServer(this, isavehandler, name, worldtype.getId(), worldsettings, this.a, this.al());
             }
         } else {
-            world = new WorldServerMulti(this, isavehandler, name, worldtype.getId(), worldsettings, (WorldServer)((CanaryWorld) worldManager.getWorld(name, net.canarymod.api.world.DimensionType.fromName("NORMAL"), true)).getHandle(), this.a, this.al());
+            world = new WorldServerMulti(this, isavehandler, name, worldtype.getId(), worldsettings, (WorldServer) ((CanaryWorld) worldManager.getWorld(name, net.canarymod.api.world.DimensionType.fromName("NORMAL"), true)).getHandle(), this.a, this.al());
         }
 
         world.a((IWorldAccess) (new WorldManager(this, world)));
@@ -159,11 +158,11 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             world.L().a(this.g());
         }
 
-        this.s.a(world); //Init player data files
+        this.s.a(world); // Init player data files
 
         // this.c(this.h()); // If we call this then worlds can't do custom difficulty, plus it doesn't work
         world.r = config.getDifficulty().getId(); // Set difficulty directly based on WorldConfiguration setting
-        this.e(world); //Generate terrain
+        this.e(world); // Generate terrain
         worldManager.addWorld(world.getCanaryWorld());
     }
 
@@ -214,9 +213,10 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     protected void a(boolean flag0) {
         if (!this.N) {
-            //CanaryMod changed to use worldManager
+            // CanaryMod changed to use worldManager
             for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
                 WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+
                 if (worldserver != null) {
                     if (!flag0) {
                         this.al().a("Saving chunks for level \'" + worldserver.L().k() + "\'/" + worldserver.t.l());
@@ -228,8 +228,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                         Canary.println(minecraftexception.getMessage());
                         this.al().b(minecraftexception.getMessage());
                     }
-                }
-                else {
+                } else {
                     Canary.println("World is null");
                 }
             }
@@ -252,7 +251,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             this.al().a("Saving worlds");
             this.a(false);
 
-            //CanaryMod Multiworld
+            // CanaryMod Multiworld
             for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
                 WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
 
@@ -262,7 +261,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             if (this.m != null && this.m.d()) {
                 this.m.e();
             }
-            //CanaryMod disable plugins:
+            // CanaryMod disable plugins:
             Canary.logInfo("Disabling Plugins ...");
             Canary.loader().disableAllPlugins();
         }
@@ -311,7 +310,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     boolean allSleeping = true;
 
                     for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
-                        allSleeping &= ((WorldServer)((CanaryWorld) w).getHandle()).e();
+                        allSleeping &= ((WorldServer) ((CanaryWorld) w).getHandle()).e();
                     }
                     // CanaryMod end
                     if (allSleeping) {
@@ -418,7 +417,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
         int i0;
 
-        //CanaryMod use worldManager instead
+        // CanaryMod use worldManager instead
         for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
             //
@@ -430,7 +429,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             this.a.b();
             if (this.v % 20 == 0) {
                 this.a.a("timeSync");
-                //                this.s.a((Packet) (new Packet4UpdateTime(worldserver.G(), worldserver.H())), worldserver.t.h);
+                // this.s.a((Packet) (new Packet4UpdateTime(worldserver.G(), worldserver.H())), worldserver.t.h);
                 this.s.sendPacketToDimension((new Packet4UpdateTime(worldserver.G(), worldserver.H())), w.getName(), w.getType().getId());
                 this.a.b();
             }
@@ -461,7 +460,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             this.a.b();
             this.a.b();
             w.setNanoTick(this.v % 100, System.nanoTime() - i1);
-            //            this.j[i0][this.v % 100] = System.nanoTime() - i1;
+            // this.j[i0][this.v % 100] = System.nanoTime() - i1;
         }
 
         this.a.c("connection");
@@ -591,14 +590,14 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     @Deprecated
     public WorldServer a(int i) {
-        throw new UnsupportedOperationException("MinecraftServer.a(int) has" +
-                " been replaced by MinecraftServer.getWorld(String, int).");
+        throw new UnsupportedOperationException("MinecraftServer.a(int) has" + " been replaced by MinecraftServer.getWorld(String, int).");
     }
 
     public WorldServer getWorld(String s, int i) {
         net.canarymod.api.world.World w = worldManager.getWorld(s, net.canarymod.api.world.DimensionType.fromId(i), true);
-        if(w != null) {
-            return (WorldServer)((CanaryWorld) w).getHandle();
+
+        if (w != null) {
+            return (WorldServer) ((CanaryWorld) w).getHandle();
         }
         return null;
     }
@@ -661,8 +660,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     public CrashReport b(CrashReport crashreport) {
         crashreport.g().a("Profiler Position", (Callable) (new CallableIsServerModded(this)));
-        //        if (this.b != null && this.b.length > 0 && this.b[0] != null) {
-        if(worldManager != null && worldManager.getAllWorlds().size() > 0) {
+        // if (this.b != null && this.b.length > 0 && this.b[0] != null) {
+        if (worldManager != null && worldManager.getAllWorlds().size() > 0) {
             crashreport.g().a("Vec3 Pool Size", (Callable) (new CallableServerProfiler(this)));
         }
 
@@ -783,9 +782,10 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public void c(int i0) {
-        //CanaryMod changes for Multiworld
+        // CanaryMod changes for Multiworld
         for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+
             //
             if (worldserver != null) {
                 System.out.println(worldserver.getCanaryWorld().getName() + " Difficulty " + i0);
@@ -824,7 +824,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public void P() {
-        //CanaryMod XXX: Remove this? It'll delete all worlds
+        // CanaryMod XXX: Remove this? It'll delete all worlds
         this.N = true;
         this.N().d();
 
@@ -834,7 +834,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             if (worldserver != null) {
                 worldserver.m();
             }
-            if(w.getType().getId() == 0) {
+            if (w.getType().getId() == 0) {
                 this.N().e(worldserver.K().g());
             }
         }
@@ -975,6 +975,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     public void a(EnumGameType enumgametype) {
         for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+
             worldserver.L().a(enumgametype);
         }
     }

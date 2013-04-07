@@ -9,6 +9,7 @@ import net.canarymod.api.nbt.ListTag;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.NBTTagCompound;
 
+
 /**
  * Item wrapper implementation
  * 
@@ -193,6 +194,7 @@ public class CanaryItem implements Item {
         }
         ListTag lore = getDataTag().getCompoundTag("display").getListTag("Lore");
         String[] rt = new String[lore.size()];
+
         for (int index = 0; index < rt.length; index++) {
             rt[index] = ((CanaryStringTag) lore.get(index)).getValue();
         }
@@ -206,6 +208,7 @@ public class CanaryItem implements Item {
     @Override
     public void setLore(String... lore) {
         CompoundTag tag = getDataTag();
+
         if (tag == null) {
             tag = new CanaryCompoundTag("tag");
             setDataTag(tag);
@@ -214,6 +217,7 @@ public class CanaryItem implements Item {
             tag.put("display", new CanaryCompoundTag("display"));
         }
         CanaryListTag list = new CanaryListTag("");
+
         for (String line : lore) {
             list.add(new CanaryStringTag("", line));
         }
@@ -251,10 +255,12 @@ public class CanaryItem implements Item {
     public Enchantment getEnchantment(int index) {
         if (isEnchanted()) {
             int size = getHandle().r().c();
+
             if (index >= size) {
                 index = 0;
             }
             CompoundTag tag = new CanaryCompoundTag((NBTTagCompound) getHandle().r().b(index));
+
             return new CanaryEnchantment(Enchantment.Type.fromId(tag.getShort("id")), tag.getShort("lvl"));
         }
         return null;
@@ -267,12 +273,16 @@ public class CanaryItem implements Item {
     @Override
     public Enchantment[] getEnchantments() {
         Enchantment[] enchantments = null;
+
         if (isEnchanted()) {
             int size = getHandle().r().c();
+
             enchantments = new Enchantment[size];
             CanaryListTag nbtTagList = new CanaryListTag(getHandle().r());
+
             for (int i = 0; i < size; i++) {
                 CompoundTag tag = (CompoundTag) nbtTagList.get(i);
+
                 enchantments[i] = new CanaryEnchantment(Enchantment.Type.fromId(tag.getShort("id")), tag.getShort("lvl"));
             }
         }
@@ -304,8 +314,7 @@ public class CanaryItem implements Item {
      * {@inheritDoc}
      */
     @Override
-    public void removeEnchantment(Enchantment enchantment) {
-        // hmmmmmm....... No sure yet.
+    public void removeEnchantment(Enchantment enchantment) {// hmmmmmm....... No sure yet.
     }
 
     /**
@@ -315,7 +324,6 @@ public class CanaryItem implements Item {
     public void removeAllEnchantments() {
         getDataTag().remove("ench");
     }
-
 
     /**
      * {@inheritDoc}
@@ -347,6 +355,7 @@ public class CanaryItem implements Item {
     @Override
     public CompoundTag getMetaTag() {
         CompoundTag dataTag = getDataTag();
+
         if (dataTag == null) {
             dataTag = new CanaryCompoundTag("tag");
             setDataTag(dataTag);

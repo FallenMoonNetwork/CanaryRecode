@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.hook.world.DispenseHook;
+
 
 final class DispenserBehaviorFireworks extends BehaviorDefaultDispenseItem {
 
@@ -15,6 +17,7 @@ final class DispenserBehaviorFireworks extends BehaviorDefaultDispenseItem {
         EntityFireworkRocket entityfireworkrocket = new EntityFireworkRocket(iblocksource.k(), d0, d1, d2, itemstack);
         // CanaryMod: Dispense
         DispenseHook hook = new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), entityfireworkrocket.getCanaryEntity());
+
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             iblocksource.k().d((Entity) entityfireworkrocket);

@@ -13,7 +13,6 @@ import net.minecraft.server.EntitySlime;
  */
 public abstract class CanaryEntityMob extends CanaryEntityLiving implements EntityMob {
 
-
     public CanaryEntityMob(net.minecraft.server.EntityMob entity) {
         super(entity);
     }

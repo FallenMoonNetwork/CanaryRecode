@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryFurnace;
 import net.canarymod.hook.world.SmeltHook;
+
 
 public class TileEntityFurnace extends TileEntity implements ISidedInventory {
 
@@ -192,6 +194,7 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
             ItemStack itemstack = FurnaceRecipes.a().b(this.g[0].b().cp);
             // CanaryMod: Smelt
             SmeltHook hook = new SmeltHook(getCanaryFurnace(), itemstack.getCanaryItem());
+
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return;

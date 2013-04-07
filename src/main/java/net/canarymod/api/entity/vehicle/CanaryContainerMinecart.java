@@ -1,5 +1,6 @@
 package net.canarymod.api.entity.vehicle;
 
+
 import java.util.Arrays;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
@@ -9,6 +10,7 @@ import net.canarymod.config.Configuration;
 import net.minecraft.server.EntityMinecart;
 import net.minecraft.server.EntityMinecartContainer;
 import net.minecraft.server.ItemStack;
+
 
 /**
  *
@@ -186,6 +188,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     public Item getItem(int id) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == id) {
                 toCheck.setSlot(index);
                 return toCheck;
@@ -209,6 +212,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     public Item getItem(int id, int amount) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount) {
                 toCheck.setSlot(index);
                 return toCheck;
@@ -224,6 +228,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     public Item getItem(int id, int amount, short damage) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount && toCheck.getDamage() == damage) {
                 toCheck.setSlot(index);
                 return toCheck;
@@ -254,6 +259,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     @Override
     public Item getSlot(int index) {
         ItemStack stack = getHandle().a(index);
+
         return stack != null ? stack.getCanaryItem() : null;
     }
 
@@ -293,6 +299,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     public boolean hasItem(int itemId, short damage) {
         for (int index = 0; index < getSize(); index++) {
             Item item = getSlot(index);
+
             if (item != null && item.getId() == itemId && item.getDamage() == damage) {
                 return true;
             }
@@ -339,8 +346,10 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == itemId) {
                 int am = toCheck.getAmount();
+
                 if (am > minAmount && am < maxAmount) {
                     return true;
                 }
@@ -356,8 +365,10 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount, short damage) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == itemId && toCheck.getDamage() == damage) {
                 int am = toCheck.getAmount();
+
                 if (am > minAmount && am < maxAmount) {
                     return true;
                 }
@@ -383,16 +394,20 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
             if (itemExisting != null && (!item.isEnchanted() || Configuration.getServerConfig().allowEnchantmentStacking())) {
                 // Add as much items as possible to the stack
                 int k = Math.min(maxAmount - itemExisting.getAmount(), item.getAmount());
+
                 this.setSlot(item.getId(), itemExisting.getAmount() + k, (short) item.getDamage(), itemExisting.getSlot());
                 amount -= k;
                 continue;
             }
             // We still have slots, but no stack, create a new stack.
             int eslot = this.getEmptySlot();
+
             if (eslot != -1) {
                 CanaryCompoundTag nbt = new CanaryCompoundTag("");
+
                 ((CanaryItem) item).getHandle().b(nbt.getHandle());
                 Item tempItem = new CanaryItem(item.getId(), amount, -1, item.getDamage());
+
                 ((CanaryItem) tempItem).getHandle().c(nbt.getHandle());
                 this.setSlot(eslot, tempItem);
                 amount = 0;
@@ -421,6 +436,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     @Override
     public void setSlot(int itemId, int amount, short damage, int slot) {
         CanaryItem item = new CanaryItem(itemId, 1, damage);
+
         item.setSlot(slot);
         this.setSlot(item);
     }
@@ -472,6 +488,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     public Item removeItem(int id) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == id) {
                 setSlot(index, null);
                 return toCheck;
@@ -487,6 +504,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     public Item removeItem(int id, short damage) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == id && toCheck.getDamage() == damage) {
                 setSlot(index, null);
                 return toCheck;
@@ -525,6 +543,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(this.getHandle().a, getSize());
+
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
     }

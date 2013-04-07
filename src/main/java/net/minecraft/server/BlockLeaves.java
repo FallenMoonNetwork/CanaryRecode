@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.LeafDecayHook;
+
 
 public class BlockLeaves extends BlockLeavesBase {
 
@@ -125,6 +127,7 @@ public class BlockLeaves extends BlockLeavesBase {
         // CanaryMod: LeafDecay
         CanaryBlock leaves = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
         LeafDecayHook hook = new LeafDecayHook(leaves);
+
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             this.c(world, i0, i1, i2, world.h(i0, i1, i2), 0);

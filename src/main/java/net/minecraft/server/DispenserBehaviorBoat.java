@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.hook.world.DispenseHook;
+
 
 final class DispenserBehaviorBoat extends BehaviorDefaultDispenseItem {
 
@@ -34,6 +36,7 @@ final class DispenserBehaviorBoat extends BehaviorDefaultDispenseItem {
         EntityBoat entityboat = new EntityBoat(world, d0, d1 + d3, d2);
         // CanaryMod: Dispense
         DispenseHook hook = new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), entityboat.getCanaryEntity());
+
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             world.d((Entity) entityboat);

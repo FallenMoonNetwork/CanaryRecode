@@ -1,5 +1,6 @@
 package net.canarymod.api.entity.living.humanoid;
 
+
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import net.canarymod.CanaryMod;
@@ -42,6 +43,7 @@ import net.minecraft.server.Packet3Chat;
 import net.minecraft.server.Packet7UseEntity;
 import net.minecraft.server.Packet9Respawn;
 
+
 public final class EntityNonPlayableCharacter extends EntityPlayerMP {
     private static MinecraftServer mcserv = ((CanaryServer) CanaryMod.getServer()).getHandle();
 
@@ -50,30 +52,28 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         this.a = new NonNetServerHandler(this);
         this.a(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
     }
+
     @Override
-    public void c(int i0) {
-        // NO PORTAL USE
+    public void c(int i0) {// NO PORTAL USE
     }
 
     @Override
-    public void a(NBTTagCompound nbttagcompound) {
-        // NO NBTTag yet
+    public void a(NBTTagCompound nbttagcompound) {// NO NBTTag yet
     }
 
     @Override
-    public void b(NBTTagCompound nbttagcompound) {
-        // NO NBTTag yet
+    public void b(NBTTagCompound nbttagcompound) {// NO NBTTag yet
     }
 
     @Override
     public void l_() {
         super.l_();
         super.x(); // EntityLiving.x() fixes damage taking (no idea yet as to why x() isn't called normally)
-        if (this.entity != null){
-            if(!this.M) {
+        if (this.entity != null) {
+            if (!this.M) {
                 try {
                     ((CanaryNonPlayableCharacter) entity).update();
-                } catch (Exception ex) { // For some reason an exception gets thrown after death and nulled CanaryEntity...
+                } catch (Exception ex) {// For some reason an exception gets thrown after death and nulled CanaryEntity...
                 }
             }
         }
@@ -109,8 +109,10 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
     @Override
     public boolean a(DamageSource damagesource, int i0) {
         boolean toRet = super.a(damagesource, i0);
+
         if (toRet && this.entity != null && damagesource.i() != null) {
             CanaryEntity atk = damagesource.i().getCanaryEntity();
+
             ((CanaryNonPlayableCharacter) entity).attack(atk);
         }
         return toRet;
@@ -122,7 +124,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         ((CanaryNonPlayableCharacter) entity).destoryed();
     }
 
-    void setNPC(CanaryNonPlayableCharacter cnpc){
+    void setNPC(CanaryNonPlayableCharacter cnpc) {
         this.entity = cnpc;
     }
 
@@ -144,14 +146,14 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
             super(mcserv, herp, npc);
         }
 
-        public void d(){}
+        public void d() {}
 
-        public void c(String s){}
+        public void c(String s) {}
 
         public void a(Packet10Flying opacket10flying) {}
 
         @SuppressWarnings("unused")
-        public void a(double d0, double d1, double d2, float f, float f1){
+        public void a(double d0, double d1, double d2, float f, float f1) {
             this.c.a(d0, d1, d2, f, f1);
         }
 
@@ -159,7 +161,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
 
         public void a(Packet15Place opacket15place) {}
 
-        public void a(String s, Object[] aobject){}
+        public void a(String s, Object[] aobject) {}
 
         public void a(Packet opacket) {}
 
@@ -175,7 +177,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
 
         public void a(Packet255KickDisconnect opacket255kickdisconnect) {}
 
-        public int e(){
+        public int e() {
             return -1;
         }
 
@@ -183,7 +185,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
 
         public void a(Packet205ClientCommand opacket205clientcommand) {}
 
-        public boolean b(){
+        public boolean b() {
             return true;
         }
 
@@ -203,7 +205,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
 
         public void a(Packet0KeepAlive opacket0keepalive) {}
 
-        public boolean a(){
+        public boolean a() {
             return true;
         }
 
@@ -216,6 +218,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         public void a(Packet250CustomPayload opacket250custompayload) {}
     }
 
+
     /**
      * Overrides the INetworkManager of NonPlayableCharacters
      * 
@@ -226,7 +229,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         private final SocketAddress herp = new InetSocketAddress("127.0.0.1", 0);
 
         @Override
-        public void a(){}
+        public void a() {}
 
         @Override
         public void a(NetHandler arg0) {}
@@ -235,21 +238,21 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         public void a(Packet arg0) {}
 
         @Override
-        public void a(String arg0, Object... arg1){}
+        public void a(String arg0, Object... arg1) {}
 
         @Override
-        public void b(){}
+        public void b() {}
 
         @Override
-        public SocketAddress c(){
+        public SocketAddress c() {
             return herp;
         }
 
         @Override
-        public void d(){}
+        public void d() {}
 
         @Override
-        public int e(){
+        public int e() {
             return 0;
         }
     }

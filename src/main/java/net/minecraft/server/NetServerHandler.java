@@ -89,6 +89,7 @@ public class NetServerHandler extends NetHandler {
     public void c(String s0) {
         // CanaryMod disconnect hook
         DisconnectionHook hook = new DisconnectionHook(serverHandler.getUser(), s0, EnumChatFormatting.o + this.c.ax() + " left the game.");
+
         Canary.hooks().callHook(hook);
         if (!this.b) {
             this.c.k();
@@ -426,6 +427,7 @@ public class NetServerHandler extends NetHandler {
 
         // CanaryMod: BlockRightClick/ItemUse
         CanaryBlock blockClicked = (CanaryBlock) worldserver.getCanaryWorld().getBlockAt(i0, i1, i2);
+
         blockClicked.setFaceClicked(BlockFace.fromByte((byte) i3));
 
         if (packet15place.h() == 255) {
@@ -434,6 +436,7 @@ public class NetServerHandler extends NetHandler {
             }
             // Correct coordinates on block
             LineTracer trace = new LineTracer(this.c.getPlayer(), 6, 0.2);
+
             blockClicked = (CanaryBlock) trace.getTargetBlock();
             blockClicked = blockClicked != null ? blockClicked : new CanaryBlock((short) 0, (short) 0, ToolBox.floorToBlock(this.n), ToolBox.floorToBlock(this.o), ToolBox.floorToBlock(this.p), this.c.getCanaryWorld());
             //
@@ -445,6 +448,7 @@ public class NetServerHandler extends NetHandler {
             if (this.q && this.c.e((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D) < 64.0D && (!this.d.a(worldserver, i0, i1, i2, this.c) || c.getPlayer().hasPermission("canary.world.spawnbuild")) && c.getPlayer().canBuild()) {
                 // CanaryMod: BlockRightClicked
                 BlockRightClickHook hook = new BlockRightClickHook(c.getPlayer(), blockClicked);
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     this.c.c.a(this.c, worldserver, itemstack, i0, i1, i2, i3, packet15place.j(), packet15place.k(), packet15place.l());
@@ -511,6 +515,7 @@ public class NetServerHandler extends NetHandler {
     public void a(String s0, Object[] aobject) {
         // CanaryMod: DisconnectionHook
         DisconnectionHook hook = new DisconnectionHook(c.getPlayer(), s0, EnumChatFormatting.o + this.c.ax() + " left the game.");
+
         Canary.hooks().callHook(hook);
         this.d.al().a(this.c.bS + " lost connection: " + s0);
         this.d.ad().a((Packet) (new Packet3Chat(hook.getLeaveMessage())));
@@ -946,7 +951,7 @@ public class NetServerHandler extends NetHandler {
                 if ("MC|AdvCdm".equals(packet250custompayload.a)) {
                     if (!this.d.Z()) {
                         this.c.a(this.c.a("advMode.notEnabled", new Object[0]));
-                    } else if (this.c.a(2, "") /*&& this.c.ce.d*/) { // CanaryMod: First check for Command Block Permission ignore Creative
+                    } else if (this.c.a(2, "")/* && this.c.ce.d*/) { // CanaryMod: First check for Command Block Permission ignore Creative
                         try {
                             datainputstream = new DataInputStream(new ByteArrayInputStream(packet250custompayload.c));
                             i0 = datainputstream.readInt();

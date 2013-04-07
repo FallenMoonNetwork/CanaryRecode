@@ -150,6 +150,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
     public VillagerTrade[] getTrades() {
         MerchantRecipeList list = getHandle().b((EntityPlayer) null);
         VillagerTrade[] rt = new VillagerTrade[list.size()];
+
         for (int i = 0; i < rt.length; i++) {
             rt[i] = new CanaryVillagerTrade((MerchantRecipe) list.get(i));
         }

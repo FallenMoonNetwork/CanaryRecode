@@ -58,8 +58,10 @@ public class CanaryDispenser extends CanaryContainerBlock implements Dispenser {
         if (item != null) {
             BlockSourceImpl blocksourceimpl = new BlockSourceImpl(((CanaryWorld) getWorld()).getHandle(), getX(), getY(), getZ());
             IBehaviorDispenseItem ibehaviordispenseitem = (IBehaviorDispenseItem) BlockDispenser.a.a(item.b());
+
             if (ibehaviordispenseitem != IBehaviorDispenseItem.a) {
                 ItemStack itemstack1 = ibehaviordispenseitem.a(blocksourceimpl, item);
+
                 if (slot != -1) {
                     getTileEntity().a(slot, itemstack1.a == 0 ? null : itemstack1);
                 }
@@ -82,6 +84,7 @@ public class CanaryDispenser extends CanaryContainerBlock implements Dispenser {
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getTileEntity().b, getSize());
+
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
     }

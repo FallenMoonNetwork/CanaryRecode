@@ -1,12 +1,14 @@
 package net.canarymod.api.entity.vehicle;
 
+
 import net.minecraft.server.EntityMinecartHopper;
+
 
 /**
  *
  * @author Somners
  */
-public class CanaryHopperMinecart extends CanaryContainerMinecart implements HopperMinecart{
+public class CanaryHopperMinecart extends CanaryContainerMinecart implements HopperMinecart {
 
     public CanaryHopperMinecart(EntityMinecartHopper minecart) {
         super(minecart);

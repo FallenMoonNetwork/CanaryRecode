@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +14,7 @@ import net.canarymod.api.inventory.Inventory;
 import net.canarymod.hook.player.EntityRightClickHook;
 import net.canarymod.hook.player.ItemDropHook;
 import net.canarymod.hook.player.LevelUpHook;
+
 
 public abstract class EntityPlayer extends EntityLiving implements ICommandSender {
 
@@ -42,8 +44,8 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     private boolean d;
     private ChunkCoordinates e;
     public PlayerCapabilities ce = new PlayerCapabilities();
-    public int cf; //level
-    public int cg; //total points
+    public int cf; // level
+    public int cg; // total points
     public float ch;
     private ItemStack f;
     private int g;
@@ -461,6 +463,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 
             // CanaryMod: ItemDrop
             ItemDropHook hook = new ItemDropHook(((EntityPlayerMP) this).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity());
+
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
                 CanaryItem droppedItem = entityitem.d().getCanaryItem();
@@ -744,6 +747,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         } else {
             // CanaryMod: EntityRightClickHook
             EntityRightClickHook hook = new EntityRightClickHook(entity.getCanaryEntity(), ((EntityPlayerMP) this).getPlayer());
+
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return false;
@@ -1250,6 +1254,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     public void a(int i0) {
         // CanaryMod: LevelUpHook
         LevelUpHook hook = new LevelUpHook(((EntityPlayerMP) this).getPlayer());
+
         Canary.hooks().callHook(hook);
         //
         this.cf += i0;
@@ -1496,17 +1501,16 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     }
 
     private void updateXP() {
-        CanaryPlayer player = ((CanaryPlayer)getCanaryEntity());
+        CanaryPlayer player = ((CanaryPlayer) getCanaryEntity());
         Packet43Experience packet = new Packet43Experience(this.ch, this.cg, this.cf);
+
         player.sendPacket(new CanaryPacket(packet));
     }
 
     private void updateLevels() {
-        CanaryPlayer player = ((CanaryPlayer)getCanaryEntity());
-        Packet8UpdateHealth packet = new Packet8UpdateHealth(
-                ((CanaryPlayer)getCanaryEntity()).getHealth(),
-                ((CanaryPlayer)getCanaryEntity()).getHunger(),
-                ((CanaryPlayer)getCanaryEntity()).getExhaustionLevel());
+        CanaryPlayer player = ((CanaryPlayer) getCanaryEntity());
+        Packet8UpdateHealth packet = new Packet8UpdateHealth(((CanaryPlayer) getCanaryEntity()).getHealth(), ((CanaryPlayer) getCanaryEntity()).getHunger(), ((CanaryPlayer) getCanaryEntity()).getExhaustionLevel());
+
         player.sendPacket(new CanaryPacket(packet));
     }
 

@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.ItemUseHook;
 import net.canarymod.hook.world.IgnitionHook;
+
 
 public class ItemFlintAndSteel extends Item {
 
@@ -18,6 +20,7 @@ public class ItemFlintAndSteel extends Item {
     public boolean a(ItemStack itemstack, EntityPlayer entityplayer, World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2) {
         // CanaryMod: get clicked
         CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+
         clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
         clicked.setStatus((byte) 2); // Flint&Steel Status 2
         //
@@ -53,8 +56,10 @@ public class ItemFlintAndSteel extends Item {
 
             // CanaryMod: ItemUse/Ignition
             ItemUseHook iuh = new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked);
+
             Canary.hooks().callHook(iuh);
             IgnitionHook ih = new IgnitionHook(clicked, ((EntityPlayerMP) entityplayer).getPlayer());
+
             Canary.hooks().callHook(ih);
             if (iuh.isCanceled() || ih.isCanceled()) {
                 return false;

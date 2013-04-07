@@ -3,6 +3,7 @@ package net.canarymod.api.entity;
 
 import net.minecraft.server.EntityPainting;
 
+
 /**
  * Painting wrapper implementation
  * 

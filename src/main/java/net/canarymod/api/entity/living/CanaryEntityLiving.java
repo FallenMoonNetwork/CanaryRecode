@@ -282,7 +282,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @Override
     public void setTarget(EntityLiving entityliving) {
-        ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) ((CanaryEntity)entityliving).getHandle());
+        ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) ((CanaryEntity) entityliving).getHandle());
     }
 
     @Override

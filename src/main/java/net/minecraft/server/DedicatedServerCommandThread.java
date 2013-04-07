@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import net.canarymod.Canary;
+
 
 class DedicatedServerCommandThread extends Thread {
 

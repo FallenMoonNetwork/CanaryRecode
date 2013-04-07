@@ -58,8 +58,7 @@ public class EntityEnderCrystal extends Entity {
                 // CanaryMod: Check if one hit can kill this entity
                 if (((CanaryEnderCrystal) entity).isOneHitDetonate()) {
                     this.b = 0;
-                }
-                else {
+                } else {
                     this.b -= i0;
                 }
                 //

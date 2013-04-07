@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.world.CanaryWorld;
+
 
 public class CommandServerSaveAll extends CommandBase {
 
@@ -26,6 +28,7 @@ public class CommandServerSaveAll extends CommandBase {
             // CanaryMod: Fix for MultiWorld
             for (net.canarymod.api.world.World w : minecraftserver.worldManager.getAllWorlds()) {
                 WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+
                 if (worldserver != null) {
                     boolean flag0 = worldserver.c;
 

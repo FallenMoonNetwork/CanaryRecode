@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
@@ -49,8 +50,10 @@ public class ItemSlab extends ItemBlock {
 
                 // CanaryMod: BlockPlaceHook
                 CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+
                 clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
                 CanaryBlock placed = new CanaryBlock((short) i4, (short) i6, i0, i1, i2, world.getCanaryWorld());
+
                 hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
                 Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
@@ -66,6 +69,7 @@ public class ItemSlab extends ItemBlock {
                 return true;
             } else {
                 boolean ret = this.a(itemstack, entityplayer, world, i0, i1, i2, i3); // Moved up to call hook before the return
+
                 this.handled = hook != null; // Let super know we got this shit
                 return (hook != null && hook.isCanceled()) ? false : ret ? true : super.a(itemstack, entityplayer, world, i0, i1, i2, i3, f0, f1, f2);
             }
@@ -75,6 +79,7 @@ public class ItemSlab extends ItemBlock {
     private boolean a(ItemStack itemstack, EntityPlayer entityplayer, World world, int i0, int i1, int i2, int i3) {
         // CanaryMod: BlockPlaceHook
         CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+
         clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
 
         if (i3 == 0) {
@@ -108,6 +113,7 @@ public class ItemSlab extends ItemBlock {
         if (i4 == this.b.cz && i6 == itemstack.k()) {
             // Call hook
             CanaryBlock placed = new CanaryBlock((short) i4, (short) i6, i0, i1, i2, world.getCanaryWorld());
+
             hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {

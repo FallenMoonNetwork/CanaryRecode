@@ -108,14 +108,14 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         long i1 = System.nanoTime();
 
         if (this.J() == null) {
-            this.l(Configuration.getServerConfig().getDefaultWorldName()); //CanaryMod use our world config
+            this.l(Configuration.getServerConfig().getDefaultWorldName()); // CanaryMod use our world config
         }
-        //CanaryMod use or configurations instead of native ones
+        // CanaryMod use or configurations instead of native ones
         WorldConfiguration worldcfg = Configuration.getWorldConfig(this.J());
 
-        String s0 = worldcfg.getWorldSeed();//this.o.a("level-seed", "");
-        String s1 = worldcfg.getWorldType().toString();//this.o.a("level-type", "DEFAULT");
-        String s2 = worldcfg.getGeneratorSettings();//this.o.a("generator-settings", "");
+        String s0 = worldcfg.getWorldSeed(); // this.o.a("level-seed", "");
+        String s1 = worldcfg.getWorldType().toString(); // this.o.a("level-type", "DEFAULT");
+        String s2 = worldcfg.getGeneratorSettings(); // this.o.a("generator-settings", "");
         long i2 = (new Random()).nextLong();
 
         if (s0.length() > 0) {
@@ -139,13 +139,14 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.d(worldcfg.getMaxBuildHeight());
         this.d((this.ab() + 8) / 16 * 16);
         this.d(MathHelper.a(this.ab(), 64, 256));
-        //That setting a valid value back?
+        // That setting a valid value back?
         this.o.a("max-build-height", Integer.valueOf(this.ab()));
 
         this.al().a("Preparing level \"" + this.J() + "\"");
         // CanaryMod changed call to initWorld
         net.canarymod.api.world.DimensionType wt = net.canarymod.api.world.DimensionType.fromName("NORMAL");
-        //        this.initWorld(this.J(), i2, worldtype, s2, this.J(), true, wt);
+
+        // this.initWorld(this.J(), i2, worldtype, s2, this.J(), true, wt);
         this.initWorld(this.J(), i2, worldtype, wt, s2);
         //
         long i4 = System.nanoTime() - i1;
@@ -355,17 +356,17 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     @Override
     public void reload() {/* WorldConfiguration defWorld = Configuration.getWorldConfig(Configuration.getServerConfig().getDefaultWorldName());
-     * // this.d = new OPropertyManager(new File("server.properties"));
-     * this.y = Configuration.getNetConfig().getBindIp();
-     * this.n = Configuration.getNetConfig().isOnlineMode();
-     * this.o = defWorld.canSpawnAnimals();
-     * this.p = defWorld.canSpawnNpcs();
-     * this.q = defWorld.isPvpEnabled();
-     * this.r = defWorld.isFlightAllowed();
-     * this.s = Configuration.getServerConfig().getMotd();
-     * this.z = Configuration.getNetConfig().getPort();
-     * this.t = defWorld.getMaxBuildHeight();
-     * this.t = (this.t + 8) / 16 * 16;
-     * this.t = OMathHelper.a(this.t, 64, 256);
-     * // TODO Update worlds (??) */}
+         * // this.d = new OPropertyManager(new File("server.properties"));
+         * this.y = Configuration.getNetConfig().getBindIp();
+         * this.n = Configuration.getNetConfig().isOnlineMode();
+         * this.o = defWorld.canSpawnAnimals();
+         * this.p = defWorld.canSpawnNpcs();
+         * this.q = defWorld.isPvpEnabled();
+         * this.r = defWorld.isFlightAllowed();
+         * this.s = Configuration.getServerConfig().getMotd();
+         * this.z = Configuration.getNetConfig().getPort();
+         * this.t = defWorld.getMaxBuildHeight();
+         * this.t = (this.t + 8) / 16 * 16;
+         * this.t = OMathHelper.a(this.t, 64, 256);
+         * // TODO Update worlds (??) */}
 }

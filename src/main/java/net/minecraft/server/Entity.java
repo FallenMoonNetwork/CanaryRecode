@@ -987,7 +987,7 @@ public abstract class Entity {
             nbttagcompound.a("PortalCooldown", this.ao);
             nbttagcompound.a("UUIDMost", this.i.getMostSignificantBits());
             nbttagcompound.a("UUIDLeast", this.i.getLeastSignificantBits());
-            //CanaryMod add level name
+            // CanaryMod add level name
             nbttagcompound.a("LevelName", getCanaryWorld().getName());
             //
             this.b(nbttagcompound);
@@ -1229,6 +1229,7 @@ public abstract class Entity {
             }
             // CanaryMod: EntityMount
             EntityMountHook hook = null;
+
             if (this instanceof EntityLiving && entity instanceof EntityLiving) {
                 hook = new EntityMountHook((net.canarymod.api.entity.living.EntityLiving) entity.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity());
             }
@@ -1511,7 +1512,7 @@ public abstract class Entity {
         this.as = entity.as;
     }
 
-    //CanaryMod renamed c -> changeDimension
+    // CanaryMod renamed c -> changeDimension
     public void c(int i0) {
         if (!this.q.I && !this.M) {
             this.q.C.a("changeDimension");
@@ -1523,6 +1524,7 @@ public abstract class Entity {
             // CanaryMod: Dimension switch hook.
             Location goingTo = this.simulatePortalUse(i0, MinecraftServer.D().getWorld(this.getCanaryWorld().getName(), i0));
             CancelableHook hook = new DimensionSwitch(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
+
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return;
@@ -1624,6 +1626,7 @@ public abstract class Entity {
         double x = this.t;
         double z = this.v;
         double adjust = 8.0D;
+
         if (dimensionTo == -1) {
             x /= adjust;
             z /= adjust;
@@ -1632,6 +1635,7 @@ public abstract class Entity {
             z *= adjust;
         } else {
             ChunkCoordinates ochunkcoordinates;
+
             if (dimensionTo == 1) {
                 ochunkcoordinates = oworldserverTo.I();
             } else {

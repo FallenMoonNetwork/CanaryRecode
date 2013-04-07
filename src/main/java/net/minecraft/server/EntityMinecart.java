@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
@@ -13,6 +14,7 @@ import net.canarymod.hook.entity.VehicleDamageHook;
 import net.canarymod.hook.entity.VehicleDestroyHook;
 import net.canarymod.hook.entity.VehicleEnterHook;
 import net.canarymod.hook.entity.VehicleMoveHook;
+
 
 public abstract class EntityMinecart extends Entity {
 
@@ -146,6 +148,7 @@ public abstract class EntityMinecart extends Entity {
     public void a(DamageSource damagesource) {
         // CanaryMod: VehicleDestroy
         VehicleDestroyHook vdh = new VehicleDestroyHook((Vehicle) this.entity);
+
         Canary.hooks().callHook(vdh);
         //
         this.w();
@@ -259,6 +262,7 @@ public abstract class EntityMinecart extends Entity {
                 Vector3D from = new Vector3D(this.r, this.s, this.t);
                 Vector3D to = new Vector3D(this.u, this.v, this.w);
                 VehicleMoveHook vmh = new VehicleMoveHook((Vehicle) this.entity, from, to);
+
                 Canary.hooks().callHook(vmh);
                 // Can't handle canceling yet... if (vmh.isCanceled()) { }
             }
@@ -279,6 +283,7 @@ public abstract class EntityMinecart extends Entity {
                 if (i3 == Block.cx.cz) {
                     // CanaryMod: MinecartActivate
                     MinecartActivateHook mah = new MinecartActivateHook((Minecart) this.getCanaryEntity(), (i1 & 8) != 0);
+
                     Canary.hooks().callHook(mah);
                     if (!mah.isCanceled()) {
                         this.a(i1, i0, i2, (i4 & 8) != 0);
@@ -657,6 +662,7 @@ public abstract class EntityMinecart extends Entity {
             if (entity != this.n) {
                 // CanaryMod: VehicleCollision
                 VehicleCollisionHook vch = new VehicleCollisionHook((Vehicle) this.entity, entity.getCanaryEntity());
+
                 Canary.hooks().callHook(vch);
                 if (vch.isCanceled()) {
                     return;
@@ -665,13 +671,13 @@ public abstract class EntityMinecart extends Entity {
                 if (entity instanceof EntityLiving && !(entity instanceof EntityPlayer) && !(entity instanceof EntityIronGolem) && this.l() == 0 && this.x * this.x + this.z * this.z > 0.01D && this.n == null && entity.o == null) {
                     // CanaryMod: VehicleEnter (Animal/Mob)
                     VehicleEnterHook veh = new VehicleEnterHook((Vehicle) this.entity, (EntityLiving) entity.getCanaryEntity());
+
                     Canary.hooks().callHook(veh);
                     if (!veh.isCanceled()) {
                         entity.a((Entity) this);
                     }
                     //
                 }
-
 
                 double d0 = entity.u - this.u;
                 double d1 = entity.w - this.w;

@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import net.canarymod.api.entity.HangingEntity;
 import net.canarymod.hook.entity.HangingEntityDestroyHook;
+
 
 public abstract class EntityHanging extends Entity {
 
@@ -174,6 +176,7 @@ public abstract class EntityHanging extends Entity {
         if (entity instanceof EntityPlayer) {
             // CanaryMod: HangingEntityDestory
             HangingEntityDestroyHook hook = new HangingEntityDestroyHook((HangingEntity) this.entity, ((EntityPlayerMP) entity).getPlayer());
+
             return !hook.isCanceled() ? this.a(DamageSource.a((EntityPlayer) entity), 0) : false;
             //
         }

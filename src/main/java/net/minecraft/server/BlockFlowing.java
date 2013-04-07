@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.FlowHook;
 import net.canarymod.hook.world.LiquidDestroyHook;
+
 
 public class BlockFlowing extends BlockFluid {
 
@@ -107,6 +109,7 @@ public class BlockFlowing extends BlockFluid {
             // CanaryMod: Flow (down)
             CanaryBlock to = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1 - 1, i2);
             FlowHook hook = new FlowHook(from, to);
+
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
                 if (i3 >= 8) {
@@ -132,6 +135,7 @@ public class BlockFlowing extends BlockFluid {
                 // CanaryMod: Flow
                 CanaryBlock to = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0 - 1, i1, i2);
                 FlowHook hook = new FlowHook(from, to);
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     this.e(world, i0 - 1, i1, i2, i4);
@@ -143,6 +147,7 @@ public class BlockFlowing extends BlockFluid {
                 // CanaryMod: Flow
                 CanaryBlock to = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0 + 1, i1, i2);
                 FlowHook hook = new FlowHook(from, to);
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     this.e(world, i0 + 1, i1, i2, i4);
@@ -154,6 +159,7 @@ public class BlockFlowing extends BlockFluid {
                 // CanaryMod: Flow
                 CanaryBlock to = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2 - 1);
                 FlowHook hook = new FlowHook(from, to);
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     this.e(world, i0, i1, i2 - 1, i4);
@@ -165,6 +171,7 @@ public class BlockFlowing extends BlockFluid {
                 // CanaryMod: Flow
                 CanaryBlock to = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2 + 1);
                 FlowHook hook = new FlowHook(from, to);
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     this.e(world, i0, i1, i2 + 1, i4);
@@ -320,6 +327,7 @@ public class BlockFlowing extends BlockFluid {
         // CanaryMod: LiquidDestroy
         CanaryBlock dest = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
         LiquidDestroyHook hook = new LiquidDestroyHook(dest);
+
         Canary.hooks().callHook(hook);
         if (hook.isForceDestroy()) {
             return true;

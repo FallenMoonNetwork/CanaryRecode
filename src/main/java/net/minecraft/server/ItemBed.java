@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.inventory.ItemType;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.BlockPlaceHook;
+
 
 public class ItemBed extends Item {
 
@@ -21,6 +23,7 @@ public class ItemBed extends Item {
         } else {
             // CanaryMod: ItemUseHook
             CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2); // Store Clicked
+
             clicked.setFaceClicked(BlockFace.fromByte((byte) i3)); // Set face clicked
 
             ++i1;
@@ -50,6 +53,7 @@ public class ItemBed extends Item {
                     CanaryBlock placed = new CanaryBlock((short) ItemType.Bed.getId(), (short) 0, i0, i1, i2, world.getCanaryWorld());
                     // Create Hook and call it
                     BlockPlaceHook hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
+
                     Canary.hooks().callHook(hook);
                     if (hook.isCanceled()) {
                         return false;

@@ -1,7 +1,9 @@
 package net.canarymod.api.inventory.recipes;
 
+
 import java.util.ArrayList;
 import net.canarymod.api.inventory.CanaryItem;
+
 
 /**
  * Shaped Recipe Helper
@@ -19,6 +21,7 @@ public final class ShapedRecipeHelper {
             RecipeRow a = rows[0];
             RecipeRow b = null;
             RecipeRow c = null;
+
             if (rows.length > 1) {
                 b = rows[1];
             }
@@ -34,6 +37,7 @@ public final class ShapedRecipeHelper {
             }
             Character lastid = null;
             int index = 0;
+
             for (char id : a.getIdentifiers()) {
                 if (lastid != null && id == lastid.charValue() || id == ' ') {
                     continue;

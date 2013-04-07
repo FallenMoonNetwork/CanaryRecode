@@ -10,6 +10,7 @@ import net.minecraft.server.InventoryCrafting;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntity;
 
+
 /**
  * Workbench wrapper implementation
  * 
@@ -75,6 +76,7 @@ public class CanaryWorkbench extends CanaryContainerBlock implements Workbench {
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getInventory().a, getSize());
+
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
     }

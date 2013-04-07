@@ -213,6 +213,7 @@ public class EntityArrow extends Entity implements IProjectile {
             if (movingobjectposition != null) {
                 // CanaryMod: ProjectileHit
                 ProjectileHitHook hook = new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity());
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) { //
                     if (movingobjectposition.g != null) {

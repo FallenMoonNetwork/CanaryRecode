@@ -7,6 +7,7 @@ import net.canarymod.api.inventory.Item;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityFurnace;
 
+
 /**
  * Furnace wrapper implementation
  * 
@@ -70,6 +71,7 @@ public class CanaryFurnace extends CanaryContainerBlock implements Furnace {
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getTileEntity().g, getSize());
+
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
     }
@@ -97,6 +99,7 @@ public class CanaryFurnace extends CanaryContainerBlock implements Furnace {
     public void setInventoryName(String value) {
         getTileEntity().a(value);
     }
+
     /**
      * {@inheritDoc}
      */

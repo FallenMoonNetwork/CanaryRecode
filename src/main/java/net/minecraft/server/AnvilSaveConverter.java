@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutput;
@@ -12,6 +13,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import net.canarymod.Canary;
+
 
 public class AnvilSaveConverter extends SaveFormatOld {
 
@@ -30,7 +32,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
 
     @Override
     public ISaveHandler a(String s0, boolean flag0) {
-                return new AnvilSaveHandler(this.a, s0, flag0, type);
+        return new AnvilSaveHandler(this.a, s0, flag0, type);
     }
 
     @Override

@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.hook.world.RedstoneChangeHook;
+
 
 public abstract class BlockBasePressurePlate extends Block {
 
@@ -94,6 +96,7 @@ public abstract class BlockBasePressurePlate extends Block {
         // CanaryMod: RedstoneChange
         if (i3 != i4) {
             RedstoneChangeHook hook = new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i3, i4);
+
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 i4 = this.d(hook.getOldLevel());

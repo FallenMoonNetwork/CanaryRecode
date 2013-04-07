@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.CanaryTNTPrimed;
+
 
 public class EntityTNTPrimed extends Entity {
 

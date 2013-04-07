@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,6 +10,7 @@ import java.util.Map;
 import net.canarymod.Canary;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.player.EatHook;
+
 
 public class ItemPotion extends Item {
 
@@ -69,6 +71,7 @@ public class ItemPotion extends Item {
                 Iterator iterator = list.iterator();
 
                 int index = 0;
+
                 while (iterator.hasNext()) {
                     PotionEffect potioneffect = (PotionEffect) iterator.next();
 
@@ -83,6 +86,7 @@ public class ItemPotion extends Item {
 
         // Call Hook
         EatHook hook = new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), 0, 0, effects);
+
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return itemstack;

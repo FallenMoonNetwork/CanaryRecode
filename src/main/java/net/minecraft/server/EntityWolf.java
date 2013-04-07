@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.living.animal.CanaryWolf;
 import net.canarymod.hook.entity.EntityTameHook;
+
 
 public class EntityWolf extends EntityTameable {
 
@@ -239,6 +241,7 @@ public class EntityWolf extends EntityTameable {
             if (!this.q.I) {
                 // CanaryMod: EntityTame
                 EntityTameHook hook = new EntityTameHook((net.canarymod.api.entity.living.animal.EntityAnimal) this.getCanaryEntity(), ((EntityPlayerMP) entityplayer).getPlayer(), this.ab.nextInt(3) == 0);
+
                 if (hook.isTamed() && !hook.isCanceled()) {
                     //
                     this.j(true);

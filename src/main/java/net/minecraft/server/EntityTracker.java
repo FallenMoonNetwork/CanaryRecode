@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -9,6 +10,7 @@ import java.util.concurrent.Callable;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.config.Configuration;
+
 
 public class EntityTracker {
 
@@ -110,6 +112,7 @@ public class EntityTracker {
             this.b.add(entitytrackerentry);
             this.c.a(entity.k, entitytrackerentry);
             CanaryWorld dim = entity.getCanaryWorld();
+
             entitytrackerentry.b(dim.getHandle().h);
         } catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.a(throwable, "Adding entity to track");
@@ -125,9 +128,9 @@ public class EntityTracker {
             try {
                 throw new ReportedException(crashreport);
             } catch (ReportedException reportedexception) {
-                //CanaryMod only dump this in debug mode
-                //That exception is of informational nature and has no side-effects
-                if(Configuration.getServerConfig().isDebugMode()) {
+                // CanaryMod only dump this in debug mode
+                // That exception is of informational nature and has no side-effects
+                if (Configuration.getServerConfig().isDebugMode()) {
                     System.err.println("\"Silently\" catching entity tracking error.");
                     reportedexception.printStackTrace();
                 }

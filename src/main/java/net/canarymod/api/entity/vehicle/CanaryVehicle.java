@@ -6,6 +6,7 @@ import net.canarymod.api.entity.Entity;
 import net.minecraft.server.EntityBoat;
 import net.minecraft.server.EntityMinecart;
 
+
 /**
  * Vehicle implementation
  * 

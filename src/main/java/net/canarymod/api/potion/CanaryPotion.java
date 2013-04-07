@@ -76,7 +76,6 @@ public class CanaryPotion implements Potion {
         return potion.b();
     }
 
-
     /**
      * Gets the Potion being wrapped
      * 

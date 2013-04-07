@@ -144,12 +144,13 @@ public class CanaryServer implements Server {
      */
     @Override
     public void setTimer(String uniqueName, int time) {
-        if(timers.containsKey(uniqueName)) {
+        if (timers.containsKey(uniqueName)) {
             Canary.logWarning("Unique key timer " + uniqueName + " is already running, skipping.");
             return;
         }
         ServerTimer newTimer = new ServerTimer(time, uniqueName);
-        synchronized(taskExecutor) {
+
+        synchronized (taskExecutor) {
             taskExecutor.schedule(newTimer, 1, TimeUnit.SECONDS);
             timers.put(uniqueName, newTimer);
         }
@@ -285,13 +286,13 @@ public class CanaryServer implements Server {
             this.time = time;
             this.name = name;
         }
+
         @Override
         public synchronized void run() {
             time--;
-            if(time > 0) {
+            if (time > 0) {
                 taskExecutor.schedule(this, 1, TimeUnit.SECONDS);
-            }
-            else {
+            } else {
                 timers.remove(name);
             }
         }
@@ -304,7 +305,8 @@ public class CanaryServer implements Server {
         } else {
             ItemStack result = ((CanaryItem) recipe.getResult()).getHandle();
             Object[] rec = new Object[recipe.getItems().length];
-            for(int index = 0; index < recipe.getItems().length; index++){
+
+            for (int index = 0; index < recipe.getItems().length; index++) {
                 rec[index] = ((CanaryItem) recipe.getItems()[index]).getHandle();
             }
             CraftingManager.a().b(result, rec);

@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class ItemSoup extends ItemFood {
 
     public ItemSoup(int i0, int i1) {
@@ -9,6 +10,7 @@ public class ItemSoup extends ItemFood {
 
     public ItemStack b(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         int tempAm = itemstack.a;
+
         super.b(itemstack, world, entityplayer);
         // CanaryMod: check if EatHook got canceled
         if (itemstack.a != tempAm) {

@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.canarymod.api.world.blocks.CanaryDispenser;
+
 
 public class TileEntityDispenser extends TileEntity implements IInventory {
 

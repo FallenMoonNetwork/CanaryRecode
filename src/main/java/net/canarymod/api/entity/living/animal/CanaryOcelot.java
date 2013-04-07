@@ -3,6 +3,7 @@ package net.canarymod.api.entity.living.animal;
 
 import net.minecraft.server.EntityOcelot;
 
+
 /**
  * Ocelot wrapper implementation
  * 

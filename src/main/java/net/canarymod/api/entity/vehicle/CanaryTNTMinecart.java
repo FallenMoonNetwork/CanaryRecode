@@ -1,7 +1,9 @@
 package net.canarymod.api.entity.vehicle;
 
+
 import net.canarymod.api.world.CanaryWorld;
 import net.minecraft.server.EntityMinecartTNT;
+
 
 /**
  * TNTMinecart wrapper implementation

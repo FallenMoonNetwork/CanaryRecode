@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.world.blocks.CanarySign;
+
 
 public class TileEntitySign extends TileEntity {
 

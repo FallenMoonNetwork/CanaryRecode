@@ -1,5 +1,6 @@
 package net.canarymod.api.entity;
 
+
 import java.util.UUID;
 
 import net.canarymod.api.world.CanaryWorld;
@@ -7,6 +8,7 @@ import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.canarymod.api.world.position.Vector3D;
+
 
 /**
  * Entity Wrapper
@@ -257,6 +259,7 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public boolean spawn(Entity rider) {
         boolean ret = spawn();
+
         if (rider != null) {
             net.minecraft.server.Entity mob2 = ((CanaryEntity) rider).getHandle();
 
@@ -269,7 +272,7 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public void setRider(Entity rider) {
-        ((CanaryEntity)rider).getHandle().a(this.entity);
+        ((CanaryEntity) rider).getHandle().a(this.entity);
     }
 
     /**

@@ -3,6 +3,7 @@ package net.canarymod.api.entity.living.monster;
 
 import net.minecraft.server.EntityWitch;
 
+
 /**
  * Witch wrapper implementation
  * 

@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.potion.CanaryPotion;
+
 
 public class Potion {
 

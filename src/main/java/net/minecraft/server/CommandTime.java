@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.canarymod.api.world.CanaryWorld;
+
 
 public class CommandTime extends CommandBase {
 
@@ -56,6 +58,7 @@ public class CommandTime extends CommandBase {
         // CanaryMod: MultiWorld fix
         for (net.canarymod.api.world.World w : MinecraftServer.D().worldManager.getAllWorlds()) {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+
             if (worldserver != null) {
                 worldserver.b((long) i0);
             }
@@ -66,6 +69,7 @@ public class CommandTime extends CommandBase {
         // CanaryMod: MultiWorld fix
         for (net.canarymod.api.world.World w : MinecraftServer.D().worldManager.getAllWorlds()) {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+
             if (worldserver != null) {
                 worldserver.b(worldserver.H() + (long) i0);
             }

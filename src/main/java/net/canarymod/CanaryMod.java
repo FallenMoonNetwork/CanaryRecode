@@ -32,7 +32,7 @@ public class CanaryMod extends Canary {
      * Creates a new CanaryMod
      */
     public CanaryMod() {
-        //This must be the first thing to call!
+        // This must be the first thing to call!
         DatabaseLoader.load();
 
         Canary.instance = this;
@@ -78,7 +78,7 @@ public class CanaryMod extends Canary {
         super.reload();
 
         // Reload minecraft variables
-        //        ((CanaryConfigurationManager) instance.server.getConfigurationManager()).reload();
+        // ((CanaryConfigurationManager) instance.server.getConfigurationManager()).reload();
         // TODO RCON + QUERY?
         ((CanaryServer) instance.server).getHandle().reload();
     }

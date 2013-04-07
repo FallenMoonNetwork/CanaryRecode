@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,6 +11,7 @@ import net.canarymod.api.CanaryVillagerTrade;
 import net.canarymod.api.entity.living.humanoid.CanaryVillager;
 import net.canarymod.api.entity.living.humanoid.Villager;
 import net.canarymod.hook.entity.VillagerTradeUnlockHook;
+
 
 public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
 
@@ -414,6 +416,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
             MerchantRecipe recipe = (MerchantRecipe) merchantrecipelist.get(i5);
             // CanaryMod: VillagerTradeUnlock
             VillagerTradeUnlockHook hook = new VillagerTradeUnlockHook((Villager) getCanaryEntity(), new CanaryVillagerTrade(recipe));
+
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
                 this.i.a(recipe);

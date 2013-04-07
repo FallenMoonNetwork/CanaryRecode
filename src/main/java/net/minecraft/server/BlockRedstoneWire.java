@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import net.canarymod.Canary;
 import net.canarymod.hook.world.RedstoneChangeHook;
+
 
 public class BlockRedstoneWire extends Block {
 
@@ -113,6 +115,7 @@ public class BlockRedstoneWire extends Block {
         // CanaryMod: RedstoneChange
         if (i6 != i7) {
             RedstoneChangeHook hook = new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i6, i7);
+
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return;

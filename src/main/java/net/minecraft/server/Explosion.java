@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import net.canarymod.api.entity.Explosive;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.world.ExplosionHook;
+
 
 public class Explosion {
 
@@ -103,11 +105,13 @@ public class Explosion {
         if (this.f == null || (this.f.getCanaryEntity() instanceof Explosive && ((Explosive) this.f.getCanaryEntity()).canDamageWorld())) {
             // CanaryMod: Add affected blocks into a List of Blocks.
             List<net.canarymod.api.world.blocks.Block> blkAff = new ArrayList<net.canarymod.api.world.blocks.Block>(hashset.size());
+
             for (ChunkPosition ocp : (HashSet<ChunkPosition>) hashset) {
                 blkAff.add(this.k.getCanaryWorld().getBlockAt(ocp.a, ocp.b, ocp.c));
             }
             // Explosion call
             ExplosionHook exp = new ExplosionHook(gzero, this.f != null ? this.f.getCanaryEntity() : null, blkAff);
+
             Canary.hooks().callHook(exp);
             // if cancelled, don't populate this.h at all.
             if (!exp.isCanceled()) {
@@ -153,6 +157,7 @@ public class Explosion {
                         int damage = (int) ((d10 * d10 + d10) / 2.0D * 8.0D * (double) this.g + 1.0D);
                         CanaryDamageSource source = DamageSource.a(this).getCanaryDamageSource();
                         DamageHook dmg = new DamageHook(this.f != null ? this.f.getCanaryEntity() : null, entity.getCanaryEntity(), source, damage);
+
                         Canary.hooks().callHook(dmg);
                         if (!dmg.isCanceled()) {
                             entity.a((((CanaryDamageSource) dmg.getDamageSource()).getHandle()), damage);

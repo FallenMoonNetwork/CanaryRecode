@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.canarymod.api.entity.living.monster.CanaryWither;
+
 
 public class EntityWither extends EntityMob implements IRangedAttackMob {
 

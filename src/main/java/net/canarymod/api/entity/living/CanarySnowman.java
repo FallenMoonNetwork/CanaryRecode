@@ -1,6 +1,8 @@
 package net.canarymod.api.entity.living;
 
+
 import net.minecraft.server.EntitySnowman;
+
 
 /**
  * Snowman wrapper implementation

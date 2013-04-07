@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.hook.world.DispenseHook;
+
 
 public class BehaviorDefaultDispenseItem implements IBehaviorDispenseItem {
 
@@ -22,9 +24,11 @@ public class BehaviorDefaultDispenseItem implements IBehaviorDispenseItem {
         // CanaryMod: Dispense
         EntityItem temp = new EntityItem(iblocksource.k(), iposition.a(), iposition.b() - 0.3D, iposition.c(), itemstack);
         DispenseHook hook = new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), temp.getCanaryEntity());
+
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             ItemStack itemstack1 = itemstack.a(1);
+
             a(iblocksource.k(), itemstack1, 6, enumfacing, iposition);
         }
         temp.w(); // Clear the temp EntityItem

@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.canarymod.api.entity.vehicle.CanaryHopperMinecart;
+
 
 public class EntityMinecartHopper extends EntityMinecartContainer implements Hopper {
 

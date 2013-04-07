@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import net.canarymod.api.entity.living.monster.CanaryWitch;
+
 
 public class EntityWitch extends EntityMob implements IRangedAttackMob {
 

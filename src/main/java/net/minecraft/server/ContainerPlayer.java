@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.CanaryPlayerCraftingMatrix;
 import net.canarymod.hook.player.CraftHook;
+
 
 public class ContainerPlayer extends Container {
 
@@ -54,6 +56,7 @@ public class ContainerPlayer extends Container {
         // CanaryMod: Send custom recipe results to client
         // call CraftHook
         CraftHook hook = new CraftHook(((EntityPlayerMP) this.h).getPlayer(), new CanaryPlayerCraftingMatrix(this.a), result.getCanaryItem());
+
         Canary.hooks().callHook(hook);
         result = hook.getRecipeResult() == null || hook.isCanceled() ? null : ((CanaryItem) hook.getRecipeResult()).getHandle();
         // Set custom result

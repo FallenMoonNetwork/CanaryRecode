@@ -39,6 +39,7 @@ public class CanaryBrewingStand extends CanaryContainerBlock implements BrewingS
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getTileEntity().c, getTileEntity().c.length);
+
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
     }

@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.living.CanaryIronGolem;
+
 
 public class EntityIronGolem extends EntityGolem {
 

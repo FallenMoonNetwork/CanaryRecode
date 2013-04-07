@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.world.blocks.CanaryDaylightDetector;
+
 
 public class TileEntityDaylightDetector extends TileEntity {
 

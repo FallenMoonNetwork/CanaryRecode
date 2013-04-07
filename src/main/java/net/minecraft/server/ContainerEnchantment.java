@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import net.canarymod.api.inventory.CanaryEnchantment;
 import net.canarymod.hook.player.EnchantHook;
+
 
 public class ContainerEnchantment extends Container {
 
@@ -126,10 +128,12 @@ public class ContainerEnchantment extends Container {
                 if (list != null) {
                     // CanaryMod: Enchant
                     List<net.canarymod.api.inventory.Enchantment> cench = new ArrayList<net.canarymod.api.inventory.Enchantment>();
+
                     for (EnchantmentData endat : (List<EnchantmentData>) list) {
                         cench.add(new CanaryEnchantment(endat));
                     }
                     EnchantHook hook = new EnchantHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), cench);
+
                     if (!hook.isCanceled() && hook.isValid(false)) {
                         list.clear();
                         for (net.canarymod.api.inventory.Enchantment ench : hook.getEnchantmentList()) {

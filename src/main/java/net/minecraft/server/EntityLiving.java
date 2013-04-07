@@ -213,6 +213,7 @@ public abstract class EntityLiving extends Entity {
         // CanaryMod: MobTarget
         if (entityliving != null) {
             MobTargetHook hook = new MobTargetHook((net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) entityliving.getCanaryEntity());
+
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return;
@@ -1742,6 +1743,7 @@ public abstract class EntityLiving extends Entity {
     public void d(PotionEffect potioneffect) {
         // CanaryMod: PotionEffectApplied
         PotionEffectAppliedHook hook = new PotionEffectAppliedHook((net.canarymod.api.entity.living.EntityLiving) getCanaryEntity(), new CanaryPotionEffect(potioneffect));
+
         Canary.hooks().callHook(hook);
         if (hook.getPotionEffect() == null) {
             return;
@@ -1794,6 +1796,7 @@ public abstract class EntityLiving extends Entity {
     protected void c(PotionEffect potioneffect) {
         // CanaryMod: PotionEffectFinish
         PotionEffectFinishHook hook = new PotionEffectFinishHook((net.canarymod.api.entity.living.EntityLiving) getCanaryEntity(), new CanaryPotionEffect(potioneffect));
+
         Canary.hooks().callHook(hook);
         //
         this.h = true;

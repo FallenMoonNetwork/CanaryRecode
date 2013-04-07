@@ -3,6 +3,7 @@ package net.canarymod.api.entity.vehicle;
 
 import net.minecraft.server.EntityMinecartFurnace;
 
+
 /**
  * FurnaceMinecart wrapper implementation
  * 

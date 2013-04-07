@@ -1,5 +1,6 @@
 package net.canarymod.api.world.blocks;
 
+
 import java.util.Arrays;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
@@ -10,6 +11,7 @@ import net.minecraft.server.InventoryLargeChest;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntity;
 import net.minecraft.server.TileEntityHopper;
+
 
 /**
  *
@@ -42,7 +44,7 @@ public class CanaryHopperBlock extends CanaryContainerBlock implements HopperBlo
      * @param oiinventory OIInventory instance to get Inventory wrapper for.
      * @return The inventory or null if none.
      */
-    private Inventory getBaseContainerBlock(IInventory iinventory){
+    private Inventory getBaseContainerBlock(IInventory iinventory) {
         if (iinventory instanceof TileEntity) {
             return (Inventory) ((TileEntity) iinventory).complexBlock;
         } else if (iinventory instanceof InventoryLargeChest) {
@@ -129,9 +131,8 @@ public class CanaryHopperBlock extends CanaryContainerBlock implements HopperBlo
      */
     @Override
     public TileEntityHopper getTileEntity() {
-        return (TileEntityHopper)this.tileentity;
+        return (TileEntityHopper) this.tileentity;
     }
-
 
     /**
      * {@inheritDoc}
@@ -147,6 +148,7 @@ public class CanaryHopperBlock extends CanaryContainerBlock implements HopperBlo
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(this.getTileEntity().a, getSize());
+
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
     }
@@ -164,7 +166,7 @@ public class CanaryHopperBlock extends CanaryContainerBlock implements HopperBlo
      */
     @Override
     public void setContents(Item[] items) {
-       System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getTileEntity().a, 0, getSize());
+        System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getTileEntity().a, 0, getSize());
     }
 
     /**

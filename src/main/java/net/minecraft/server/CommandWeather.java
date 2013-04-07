@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import java.util.Random;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.DimensionType;
+
 
 public class CommandWeather extends CommandBase {
 
@@ -30,6 +32,7 @@ public class CommandWeather extends CommandBase {
             // CanaryMod: MutliWorld fix
             for (net.canarymod.api.world.World w : MinecraftServer.D().worldManager.getAllWorlds()) {
                 WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+
                 if (worldserver != null && worldserver.getCanaryWorld().getType() == DimensionType.fromId(0)) {
 
                     WorldInfo worldinfo = worldserver.L();

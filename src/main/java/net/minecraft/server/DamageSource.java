@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.CanaryDamageSource;
 
 
@@ -29,7 +30,7 @@ public class DamageSource {
     private boolean w = false;
     public String o;
 
-    //CanaryMod
+    // CanaryMod
     protected CanaryDamageSource damageSource;
 
     public static DamageSource a(EntityLiving entityliving) {
@@ -179,7 +180,7 @@ public class DamageSource {
      */
     public void setUnblockable(boolean b) {
         this.p = b;
-        if(b == true) {
+        if (b == true) {
             this.r = 0.0f;
         }
     }

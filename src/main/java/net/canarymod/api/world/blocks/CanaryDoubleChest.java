@@ -45,8 +45,10 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest {
     public Item[] clearInventory() {
         Item[] itemsA = Arrays.copyOf(getHandleA().getCanaryChest().getContents(), getHandleA().getCanaryChest().getSize());
         Item[] itemsB = Arrays.copyOf(getHandleB().getCanaryChest().getContents(), getHandleB().getCanaryChest().getSize());
+
         clearContents();
         Item[] toRet = ToolBox.arrayMerge(itemsA, itemsB);
+
         return toRet;
     }
 
@@ -68,6 +70,7 @@ public class CanaryDoubleChest extends CanaryChest implements DoubleChest {
         ItemStack[] stacks = CanaryItem.itemArrayToStackArray(items);
         ItemStack[] stacksA = new ItemStack[aSize];
         ItemStack[] stacksB = new ItemStack[bSize];
+
         for (int index = 0; index < getSize(); index++) {
             if (index < aSize) {
                 stacksA[index] = stacks[index];

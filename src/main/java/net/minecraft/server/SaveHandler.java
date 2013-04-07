@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+
 public class SaveHandler implements ISaveHandler, IPlayerFileData {
 
     private final File a;
@@ -25,7 +26,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
         this.a = new File(file1, s0 + "/" + s0 + "_" + type.getName());
         this.a.mkdirs();
 
-        //CanaryMod put the players and data files into a global folder valid for all worlds
+        // CanaryMod put the players and data files into a global folder valid for all worlds
         this.b = new File(file1, "players");
         this.c = new File(a, "data");
         this.c.mkdirs();

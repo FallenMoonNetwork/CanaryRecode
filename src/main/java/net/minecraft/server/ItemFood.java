@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.player.EatHook;
+
 
 public class ItemFood extends Item {
 
@@ -32,16 +34,16 @@ public class ItemFood extends Item {
     public ItemStack b(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         // CanaryMod: Eat
         net.canarymod.api.potion.PotionEffect[] effects = null;
+
         if (this instanceof ItemAppleGold && !world.I) {
-            effects = new net.canarymod.api.potion.PotionEffect[]{
-                    new CanaryPotionEffect(new PotionEffect(Potion.l.H, 600, 3)),
-                    new CanaryPotionEffect(new PotionEffect(Potion.m.H, 6000, 0)),
-                    new CanaryPotionEffect(new PotionEffect(Potion.n.H, 6000, 0))
+            effects = new net.canarymod.api.potion.PotionEffect[] {
+                new CanaryPotionEffect(new PotionEffect(Potion.l.H, 600, 3)), new CanaryPotionEffect(new PotionEffect(Potion.m.H, 6000, 0)), new CanaryPotionEffect(new PotionEffect(Potion.n.H, 6000, 0))
             };
         } else if (!world.I && this.cv > 0 && world.s.nextFloat() < this.cy) {
-            effects = new net.canarymod.api.potion.PotionEffect[]{ new CanaryPotionEffect(new PotionEffect(this.cv, this.cw * 20, this.cx)) };
+            effects = new net.canarymod.api.potion.PotionEffect[] { new CanaryPotionEffect(new PotionEffect(this.cv, this.cw * 20, this.cx)) };
         }
         EatHook hook = new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), this.g(), this.h(), effects);
+
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             --itemstack.a;

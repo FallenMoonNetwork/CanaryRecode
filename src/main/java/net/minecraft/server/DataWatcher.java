@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import net.canarymod.api.CanaryDataWatcher;
 
+
 public class DataWatcher {
 
     private boolean a = true;
@@ -21,7 +23,7 @@ public class DataWatcher {
     private boolean d;
     private ReadWriteLock e = new ReentrantReadWriteLock();
 
-    //CanaryMod
+    // CanaryMod
     protected CanaryDataWatcher watcher;
     //
 
@@ -237,43 +239,43 @@ public class DataWatcher {
             }
 
             int i0 = (b0 & 224) >> 5;
-        int i1 = b0 & 31;
-        WatchableObject watchableobject = null;
+            int i1 = b0 & 31;
+            WatchableObject watchableobject = null;
 
-        switch (i0) {
-            case 0:
-                watchableobject = new WatchableObject(i0, i1, Byte.valueOf(datainputstream.readByte()));
-                break;
+            switch (i0) {
+                case 0:
+                    watchableobject = new WatchableObject(i0, i1, Byte.valueOf(datainputstream.readByte()));
+                    break;
 
-            case 1:
-                watchableobject = new WatchableObject(i0, i1, Short.valueOf(datainputstream.readShort()));
-                break;
+                case 1:
+                    watchableobject = new WatchableObject(i0, i1, Short.valueOf(datainputstream.readShort()));
+                    break;
 
-            case 2:
-                watchableobject = new WatchableObject(i0, i1, Integer.valueOf(datainputstream.readInt()));
-                break;
+                case 2:
+                    watchableobject = new WatchableObject(i0, i1, Integer.valueOf(datainputstream.readInt()));
+                    break;
 
-            case 3:
-                watchableobject = new WatchableObject(i0, i1, Float.valueOf(datainputstream.readFloat()));
-                break;
+                case 3:
+                    watchableobject = new WatchableObject(i0, i1, Float.valueOf(datainputstream.readFloat()));
+                    break;
 
-            case 4:
-                watchableobject = new WatchableObject(i0, i1, Packet.a(datainputstream, 64));
-                break;
+                case 4:
+                    watchableobject = new WatchableObject(i0, i1, Packet.a(datainputstream, 64));
+                    break;
 
-            case 5:
-                watchableobject = new WatchableObject(i0, i1, Packet.c(datainputstream));
-                break;
+                case 5:
+                    watchableobject = new WatchableObject(i0, i1, Packet.c(datainputstream));
+                    break;
 
-            case 6:
-                int i2 = datainputstream.readInt();
-                int i3 = datainputstream.readInt();
-                int i4 = datainputstream.readInt();
+                case 6:
+                    int i2 = datainputstream.readInt();
+                    int i3 = datainputstream.readInt();
+                    int i4 = datainputstream.readInt();
 
-                watchableobject = new WatchableObject(i0, i1, new ChunkCoordinates(i2, i3, i4));
-        }
+                    watchableobject = new WatchableObject(i0, i1, new ChunkCoordinates(i2, i3, i4));
+            }
 
-        arraylist.add(watchableobject);
+            arraylist.add(watchableobject);
         }
 
         return arraylist;

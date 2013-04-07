@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import java.util.List;
+
 
 public class InventoryBasic implements IInventory {
 

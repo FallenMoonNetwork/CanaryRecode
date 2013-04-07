@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.hook.entity.DamageHook;
+
 
 public class BlockCactus extends Block {
 
@@ -82,6 +84,7 @@ public class BlockCactus extends Block {
     public void a(World world, int i0, int i1, int i2, Entity entity) {
         // CanaryMod: Damage (Craptus)
         DamageHook hook = new DamageHook(null, entity.getCanaryEntity(), new CanaryDamageSource(DamageSource.g), 1);
+
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             entity.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());

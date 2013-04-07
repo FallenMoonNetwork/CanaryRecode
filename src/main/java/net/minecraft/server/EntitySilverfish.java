@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.living.monster.CanarySilverfish;
+
 
 public class EntitySilverfish extends EntityMob {
 

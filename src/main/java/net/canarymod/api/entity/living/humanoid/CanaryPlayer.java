@@ -122,10 +122,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                     return;
                 }
                 receivers = hook.getReceiverList();
-                String formattedMessage = hook.getFormat()
-                        .replace("%prefix", hook.getPrefix())
-                        .replace("%name", getName())
-                        .replace("%group", getGroup().getName());
+                String formattedMessage = hook.getFormat().replace("%prefix", hook.getPrefix()).replace("%name", getName()).replace("%group", getGroup().getName());
 
                 for (Player player : receivers) {
                     if ((formattedMessage.length() - 8 + hook.getMessage().length()) >= 100) {
@@ -275,6 +272,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void setSpawnPosition(Location spawn) {
         ChunkCoordinates loc = new ChunkCoordinates((int) spawn.getX(), (int) spawn.getY(), (int) spawn.getZ());
+
         ((EntityPlayerMP) entity).a(loc, true);
     }
 
@@ -490,7 +488,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void teleportTo(Location location) {
-        if(getWorld() != location.getWorld()) {
+        if (getWorld() != location.getWorld()) {
             Canary.println("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
             switchWorlds(location.getWorld());
         }
@@ -595,14 +593,15 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     public void switchWorlds(World dim) {
         EntityPlayerMP ent = (EntityPlayerMP) entity;
+
         // Dismount first or get buggy
         if (ent.o != null) {
             ent.h(ent.o);
         }
-//        ent.a((StatBase) AchievementList.B);
+        // ent.a((StatBase) AchievementList.B);
         Canary.getServer().getConfigurationManager().switchDimension(ent.getPlayer(), dim, false);
-//        ((EntityPlayerMP)entity).changeWorld((WorldServer) ((CanaryWorld) dim).getHandle());
-//        ((EntityPlayerMP)entity).b.ad().a(((EntityPlayerMP)entity), dim.getName(), dim.getType().getId());
+        // ((EntityPlayerMP)entity).changeWorld((WorldServer) ((CanaryWorld) dim).getHandle());
+        // ((EntityPlayerMP)entity).b.ad().a(((EntityPlayerMP)entity), dim.getName(), dim.getType().getId());
         refreshCreativeMode();
     }
 

@@ -3,6 +3,7 @@ package net.canarymod.api.entity;
 
 import net.minecraft.server.EntityEnderEye;
 
+
 /**
  * EnderEye wrapper
  * 

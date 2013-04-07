@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class InventoryCrafting implements IInventory {
 
     public ItemStack[] a; // CanaryMod: private => public

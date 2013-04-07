@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class WorldServerMulti extends WorldServer {
 
     public WorldServerMulti(MinecraftServer minecraftserver, ISaveHandler isavehandler, String s0, int i0, WorldSettings worldsettings, WorldServer worldserver, Profiler profiler, ILogAgent ilogagent) {
@@ -8,6 +9,6 @@ public class WorldServerMulti extends WorldServer {
         this.D = worldserver.V();
         this.x = new DerivedWorldInfo(worldserver.L());
     }
-//CanaryMod - allow this world to have level.dat etc too
-//    protected void a() throws MinecraftException {}
+    // CanaryMod - allow this world to have level.dat etc too
+    // protected void a() throws MinecraftException {}
 }

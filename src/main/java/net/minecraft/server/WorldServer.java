@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -15,6 +16,7 @@ import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.hook.world.TimeChangeHook;
 import net.canarymod.hook.world.WeatherChangeHook;
+
 
 public class WorldServer extends World {
 
@@ -35,7 +37,7 @@ public class WorldServer extends World {
     private IntHashMap U;
 
     public WorldServer(MinecraftServer minecraftserver, ISaveHandler isavehandler, String s0, int i0, WorldSettings worldsettings, Profiler profiler, ILogAgent ilogagent) {
-        //TODO: WorldProvider: Needs changing so it would get any WorldProvider. Might need to make a mapping/register
+        // TODO: WorldProvider: Needs changing so it would get any WorldProvider. Might need to make a mapping/register
         super(isavehandler, s0, worldsettings, WorldProvider.a(i0), profiler, ilogagent, net.canarymod.api.world.DimensionType.fromId(i0));
         this.a = minecraftserver;
         this.J = new EntityTracker(this);
@@ -63,7 +65,7 @@ public class WorldServer extends World {
 
         scoreboardsavedata.a(this.D);
         ((ServerScoreboard) this.D).a(scoreboardsavedata);
-        canaryDimension = new CanaryWorld(s0, (WorldServer)this, net.canarymod.api.world.DimensionType.fromId(i0));
+        canaryDimension = new CanaryWorld(s0, (WorldServer) this, net.canarymod.api.world.DimensionType.fromId(i0));
     }
 
     @Override
@@ -86,6 +88,7 @@ public class WorldServer extends World {
 
                 // CanaryMod: TimeChangeHook
                 TimeChangeHook hook = new TimeChangeHook(getCanaryWorld(), i0 - i0 % 24000L);
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     this.x.c(i0 - i0 % 24000L);
@@ -110,6 +113,7 @@ public class WorldServer extends World {
 
         // CanaryMod: TimeChangeHook
         TimeChangeHook hook = new TimeChangeHook(getCanaryWorld(), this.x.f());
+
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             this.x.b(this.x.f() + 1L);
@@ -170,6 +174,7 @@ public class WorldServer extends World {
     private void X() {
         // CanaryMod: WeatherChange
         WeatherChangeHook hook = new WeatherChangeHook(getCanaryWorld(), false, false);
+
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             this.x.g(0);
@@ -280,18 +285,18 @@ public class WorldServer extends World {
                     for (int i9 = 0; i9 < 3; ++i9) {
                         this.k = this.k * 3 + 1013904223;
                         i8 = this.k >> 2;
-                    int i10 = i8 & 15;
-                    int i11 = i8 >> 8 & 15;
-                    int i12 = i8 >> 16 & 15;
-                    int i13 = extendedblockstorage.a(i10, i12, i11);
+                        int i10 = i8 & 15;
+                        int i11 = i8 >> 8 & 15;
+                        int i12 = i8 >> 16 & 15;
+                        int i13 = extendedblockstorage.a(i10, i12, i11);
 
-                    ++i1;
-                    Block block = Block.r[i13];
+                        ++i1;
+                        Block block = Block.r[i13];
 
-                    if (block != null && block.s()) {
-                        ++i0;
-                        block.a(this, i10 + i2, i12 + extendedblockstorage.d(), i11 + i3, this.s);
-                    }
+                        if (block != null && block.s()) {
+                            ++i0;
+                            block.a(this, i10 + i2, i12 + extendedblockstorage.d(), i11 + i3, this.s);
+                        }
                     }
                 }
             }
@@ -610,7 +615,7 @@ public class WorldServer extends World {
     }
 
     public void a(boolean flag0, IProgressUpdate iprogressupdate) throws MinecraftException {
-        //CanaryMod assume every world is able to save
+        // CanaryMod assume every world is able to save
         if (this.v.c()) {
             if (iprogressupdate != null) {
                 iprogressupdate.a("Saving level");

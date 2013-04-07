@@ -27,11 +27,11 @@ public class CanaryConfigurationManager implements ConfigurationManager {
     @Override
     public void sendPacketToAllInWorld(String world, Packet packet) {
         for (Object p : manager.a) {
-            if(!(p instanceof EntityPlayerMP)) {
+            if (!(p instanceof EntityPlayerMP)) {
                 continue;
             }
-            if (((EntityPlayerMP)p).getCanaryWorld().getName().equals(world)) {
-                manager.sendPacketToPlayer(((EntityPlayerMP)p).getPlayer(), (CanaryPacket)packet);
+            if (((EntityPlayerMP) p).getCanaryWorld().getName().equals(world)) {
+                manager.sendPacketToPlayer(((EntityPlayerMP) p).getPlayer(), (CanaryPacket) packet);
             }
         }
 
@@ -52,10 +52,10 @@ public class CanaryConfigurationManager implements ConfigurationManager {
         ArrayList<Player> players = new ArrayList<Player>(manager.a.size());
 
         for (Object p : manager.a) {
-            if(!(p instanceof EntityPlayerMP)) {
+            if (!(p instanceof EntityPlayerMP)) {
                 continue;
             }
-            players.add(((EntityPlayerMP)p).getPlayer());
+            players.add(((EntityPlayerMP) p).getPlayer());
         }
         return players;
     }
@@ -73,7 +73,7 @@ public class CanaryConfigurationManager implements ConfigurationManager {
 
     @Override
     public void switchDimension(Player player, World world, boolean createPortal) {
-        //Respawn
+        // Respawn
         manager.a(((CanaryPlayer) player).getHandle(), world.getType().getId(), false, world.getSpawnLocation());
     }
 }

@@ -1,6 +1,8 @@
 package net.canarymod.api.entity.vehicle;
 
+
 import net.minecraft.server.EntityMinecartEmpty;
+
 
 /**
  * EmptyMinecart wrapper implementation

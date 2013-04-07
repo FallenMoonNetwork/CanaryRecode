@@ -1,7 +1,9 @@
 package net.canarymod.api.entity.vehicle;
 
+
 import net.canarymod.api.MobSpawnerLogic;
 import net.minecraft.server.EntityMinecartMobSpawner;
+
 
 /**
  * MobSpawnerMinecart wrapper implementation

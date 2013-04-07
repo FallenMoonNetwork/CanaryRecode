@@ -47,8 +47,8 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
 
         if (unloadedChunk != null) {
             unloadedChunk.e();
-            handle.b(unloadedChunk); //save chunk data
-            handle.a(unloadedChunk); //save extra chunk data
+            handle.b(unloadedChunk); // save chunk data
+            handle.a(unloadedChunk); // save extra chunk data
 
             handle.b.remove(chunkCoordIntPair);
             handle.f.d(chunkCoordIntPair.longValue());

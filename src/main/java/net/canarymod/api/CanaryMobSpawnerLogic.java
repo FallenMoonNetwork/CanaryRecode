@@ -1,5 +1,6 @@
 package net.canarymod.api;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import net.canarymod.api.nbt.CanaryCompoundTag;
@@ -10,6 +11,7 @@ import net.minecraft.server.MobSpawnerBaseLogic;
 import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.NBTTagList;
 
+
 /**
  * Implementation of MobSpawnerLogic
  *
@@ -19,7 +21,7 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
 
     private MobSpawnerBaseLogic logic;
 
-    public CanaryMobSpawnerLogic (MobSpawnerBaseLogic msbl) {
+    public CanaryMobSpawnerLogic(MobSpawnerBaseLogic msbl) {
         logic = msbl;
     }
 
@@ -28,10 +30,12 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
     public String[] getSpawns() {
         List<String> spawns = new ArrayList<String>();
         CanaryCompoundTag tag = new CanaryCompoundTag(new NBTTagCompound());
+
         logic.b(tag.getHandle());
         ListTag list = tag.getListTag("SpawnPotentials");
-        for (int i = 0 ; i < list.size() ; i++) {
-            spawns.add(((CompoundTag)list.get(i)).getString("id"));
+
+        for (int i = 0; i < list.size(); i++) {
+            spawns.add(((CompoundTag) list.get(i)).getString("id"));
         }
         return spawns.toArray(new String[spawns.size()]);
     }
@@ -105,8 +109,10 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
     @Override
     public void setSpawnedEntities(MobSpawnerEntry... entries) {
         CanaryCompoundTag toSet = new CanaryCompoundTag(new NBTTagCompound());
+
         logic.b(toSet.getHandle());
         ListTag list = new CanaryListTag(new NBTTagList());
+
         for (MobSpawnerEntry entry : entries) {
             list.add(entry);
         }

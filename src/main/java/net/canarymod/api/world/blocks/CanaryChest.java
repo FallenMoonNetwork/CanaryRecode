@@ -29,33 +29,34 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
 
     @Override
     public boolean hasAttachedChest() {
-         Block block = getBlock();
-         DoubleChest result;
+        Block block = getBlock();
+        DoubleChest result;
 
-         result = tryAttachedChest(block, BlockFace.NORTH);
-         if (result != null) {
-         return true;
-         }
+        result = tryAttachedChest(block, BlockFace.NORTH);
+        if (result != null) {
+            return true;
+        }
 
-         result = tryAttachedChest(block, BlockFace.SOUTH);
-         if (result != null) {
-         return true;
-         }
+        result = tryAttachedChest(block, BlockFace.SOUTH);
+        if (result != null) {
+            return true;
+        }
 
-         result = tryAttachedChest(block, BlockFace.EAST);
-         if (result != null) {
-         return true;
-         }
+        result = tryAttachedChest(block, BlockFace.EAST);
+        if (result != null) {
+            return true;
+        }
 
-         result = tryAttachedChest(block, BlockFace.WEST);
-         if (result != null) {
-         return true;
-         }
-         return false;
+        result = tryAttachedChest(block, BlockFace.WEST);
+        if (result != null) {
+            return true;
+        }
+        return false;
     }
 
     private DoubleChest tryAttachedChest(Block origin, BlockFace face) {
         Block block = origin.getFacingBlock(face);
+
         if (block == null) {
             return null;
         }
@@ -65,7 +66,7 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
             if ((cblock != null) && (cblock instanceof Chest)) {
                 Chest chest = (Chest) cblock;
 
-                return new CanaryDoubleChest(new InventoryLargeChest(getName(), this.inventory, ((CanaryChest)chest).getInventoryHandle()));
+                return new CanaryDoubleChest(new InventoryLargeChest(getName(), this.inventory, ((CanaryChest) chest).getInventoryHandle()));
             }
         }
 
@@ -86,6 +87,7 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getTileEntity().i, getSize());
+
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
     }
@@ -125,23 +127,24 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
     @Override
     public DoubleChest getDoubleChest() {
         DoubleChest chest;
+
         chest = tryAttachedChest(getBlock(), BlockFace.NORTH);
-        if(chest != null) {
+        if (chest != null) {
             return chest;
         }
 
         chest = tryAttachedChest(getBlock(), BlockFace.SOUTH);
-        if(chest != null) {
+        if (chest != null) {
             return chest;
         }
 
         chest = tryAttachedChest(getBlock(), BlockFace.EAST);
-        if(chest != null) {
+        if (chest != null) {
             return chest;
         }
 
         chest = tryAttachedChest(getBlock(), BlockFace.WEST);
-        if(chest != null) {
+        if (chest != null) {
             return chest;
         }
         return null;

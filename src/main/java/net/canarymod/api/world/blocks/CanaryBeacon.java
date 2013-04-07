@@ -1,10 +1,12 @@
 package net.canarymod.api.world.blocks;
 
+
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.potion.PotionEffectType;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityBeacon;
+
 
 /**
  * Beacon wrapper implementation
@@ -37,10 +39,12 @@ public class CanaryBeacon extends CanaryContainerBlock implements Beacon {
     @Override
     public boolean isValidEffectAtLevels(PotionEffectType effect, int levels) {
         net.minecraft.server.Potion[][] potions = TileEntityBeacon.a;
+
         for (int i = 0; i < levels && i < potions.length; i++) {
             for (int j = 0; j < potions[i].length; j++) {
-                if (potions[i][j].H == effect.getID())
+                if (potions[i][j].H == effect.getID()) {
                     return true;
+                }
             }
         }
         return false;
@@ -124,7 +128,8 @@ public class CanaryBeacon extends CanaryContainerBlock implements Beacon {
     @Override
     public Item[] clearInventory() {
         ItemStack stack = getTileEntity().a(0);
-        Item[] item = new Item[]{ stack == null ? null : stack.getCanaryItem() };
+        Item[] item = new Item[] { stack == null ? null : stack.getCanaryItem() };
+
         getTileEntity().a(0, null);
         return item;
     }
@@ -135,7 +140,8 @@ public class CanaryBeacon extends CanaryContainerBlock implements Beacon {
     @Override
     public Item[] getContents() {
         ItemStack stack = getTileEntity().a(0);
-        return new Item[]{ stack == null ? null : stack.getCanaryItem() };
+
+        return new Item[] { stack == null ? null : stack.getCanaryItem() };
     }
 
     /**

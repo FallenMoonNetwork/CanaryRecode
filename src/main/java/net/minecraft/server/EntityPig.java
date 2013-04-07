@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.living.animal.CanaryPig;
+
 
 public class EntityPig extends EntityAnimal {
 

@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.hook.entity.MobTargetHook;
+
 
 public abstract class EntityCreature extends EntityLiving {
 
@@ -33,6 +35,7 @@ public abstract class EntityCreature extends EntityLiving {
 
             if (entity != null && entity instanceof EntityLiving) {
                 MobTargetHook hook = new MobTargetHook((net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) entity.getCanaryEntity());
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     this.a_ = entity;

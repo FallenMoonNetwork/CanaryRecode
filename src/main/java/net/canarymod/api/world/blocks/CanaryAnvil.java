@@ -1,5 +1,6 @@
 package net.canarymod.api.world.blocks;
 
+
 import java.util.Arrays;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.inventory.CanaryItem;
@@ -10,6 +11,7 @@ import net.minecraft.server.InventoryBasic;
 import net.minecraft.server.InventoryCraftResult;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntity;
+
 
 /**
  * The implementation of Anvil
@@ -71,6 +73,7 @@ public class CanaryAnvil extends CanaryContainerBlock implements Anvil {
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getInventory().c, getSize());
+
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
     }
@@ -121,6 +124,7 @@ public class CanaryAnvil extends CanaryContainerBlock implements Anvil {
     @Override
     public Item getResult() {
         ItemStack stack = getCraftResult().a(0xCAFEBABE);
+
         return stack == null ? null : stack.getCanaryItem();
     }
 
@@ -169,11 +173,11 @@ public class CanaryAnvil extends CanaryContainerBlock implements Anvil {
     }
 
     private InventoryBasic getInventory() {
-        return (InventoryBasic)container.g;
+        return (InventoryBasic) container.g;
     }
 
     private InventoryCraftResult getCraftResult() {
-        return (InventoryCraftResult)container.f;
+        return (InventoryCraftResult) container.f;
     }
 
 }

@@ -7,6 +7,7 @@ import net.canarymod.api.entity.living.humanoid.Player;
 import net.minecraft.server.InventoryEnderChest;
 import net.minecraft.server.ItemStack;
 
+
 /**
  * EnderChest Inventory implementation
  *
@@ -41,6 +42,7 @@ public class CanaryEnderChestInventory extends CanaryContainerEntity implements 
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getInventoryHandle().c, getSize());
+
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
     }

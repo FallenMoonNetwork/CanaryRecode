@@ -1,6 +1,8 @@
 package net.canarymod.api.entity;
 
+
 import net.minecraft.server.EntitySmallFireball;
+
 
 /**
  * SmallFireball wrapper implementation

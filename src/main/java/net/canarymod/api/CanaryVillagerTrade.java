@@ -1,10 +1,12 @@
 package net.canarymod.api;
 
+
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.nbt.CompoundTag;
 import net.minecraft.server.MerchantRecipe;
+
 
 /**
  * VillagerTrade wrapper implementation

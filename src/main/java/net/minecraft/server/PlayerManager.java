@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import net.canarymod.api.CanaryPlayerManager;
+
 
 public class PlayerManager {
 
@@ -14,7 +16,7 @@ public class PlayerManager {
     private final int e;
     private final int[][] f = new int[][] { { 1, 0}, { 0, 1}, { -1, 0}, { 0, -1}};
 
-    //CanaryMod
+    // CanaryMod
     private CanaryPlayerManager playerManager;
     //
 
@@ -93,60 +95,60 @@ public class PlayerManager {
         int i0 = 0;
         int i1 = this.e;
         int i2 = (int) entityplayermp.u >> 4;
-            int i3 = (int) entityplayermp.w >> 4;
-            int i4 = 0;
-            int i5 = 0;
-            ChunkCoordIntPair chunkcoordintpair = PlayerInstance.a(this.a(i2, i3, true));
+        int i3 = (int) entityplayermp.w >> 4;
+        int i4 = 0;
+        int i5 = 0;
+        ChunkCoordIntPair chunkcoordintpair = PlayerInstance.a(this.a(i2, i3, true));
 
-            entityplayermp.f.clear();
-            if (arraylist.contains(chunkcoordintpair)) {
-                entityplayermp.f.add(chunkcoordintpair);
-            }
+        entityplayermp.f.clear();
+        if (arraylist.contains(chunkcoordintpair)) {
+            entityplayermp.f.add(chunkcoordintpair);
+        }
 
-            int i6;
+        int i6;
 
-            for (i6 = 1; i6 <= i1 * 2; ++i6) {
-                for (int i7 = 0; i7 < 2; ++i7) {
-                    int[] aint = this.f[i0++ % 4];
+        for (i6 = 1; i6 <= i1 * 2; ++i6) {
+            for (int i7 = 0; i7 < 2; ++i7) {
+                int[] aint = this.f[i0++ % 4];
 
-                    for (int i8 = 0; i8 < i6; ++i8) {
-                        i4 += aint[0];
-                        i5 += aint[1];
-                        chunkcoordintpair = PlayerInstance.a(this.a(i2 + i4, i3 + i5, true));
-                        if (arraylist.contains(chunkcoordintpair)) {
-                            entityplayermp.f.add(chunkcoordintpair);
-                        }
+                for (int i8 = 0; i8 < i6; ++i8) {
+                    i4 += aint[0];
+                    i5 += aint[1];
+                    chunkcoordintpair = PlayerInstance.a(this.a(i2 + i4, i3 + i5, true));
+                    if (arraylist.contains(chunkcoordintpair)) {
+                        entityplayermp.f.add(chunkcoordintpair);
                     }
                 }
             }
+        }
 
-            i0 %= 4;
+        i0 %= 4;
 
-            for (i6 = 0; i6 < i1 * 2; ++i6) {
-                i4 += this.f[i0][0];
-                i5 += this.f[i0][1];
-                chunkcoordintpair = PlayerInstance.a(this.a(i2 + i4, i3 + i5, true));
-                if (arraylist.contains(chunkcoordintpair)) {
-                    entityplayermp.f.add(chunkcoordintpair);
-                }
+        for (i6 = 0; i6 < i1 * 2; ++i6) {
+            i4 += this.f[i0][0];
+            i5 += this.f[i0][1];
+            chunkcoordintpair = PlayerInstance.a(this.a(i2 + i4, i3 + i5, true));
+            if (arraylist.contains(chunkcoordintpair)) {
+                entityplayermp.f.add(chunkcoordintpair);
             }
+        }
     }
 
     public void c(EntityPlayerMP entityplayermp) {
         int i0 = (int) entityplayermp.d >> 4;
-            int i1 = (int) entityplayermp.e >> 4;
+        int i1 = (int) entityplayermp.e >> 4;
 
-                for (int i2 = i0 - this.e; i2 <= i0 + this.e; ++i2) {
-                    for (int i3 = i1 - this.e; i3 <= i1 + this.e; ++i3) {
-                        PlayerInstance playerinstance = this.a(i2, i3, false);
+        for (int i2 = i0 - this.e; i2 <= i0 + this.e; ++i2) {
+            for (int i3 = i1 - this.e; i3 <= i1 + this.e; ++i3) {
+                PlayerInstance playerinstance = this.a(i2, i3, false);
 
-                        if (playerinstance != null) {
-                            playerinstance.b(entityplayermp);
-                        }
-                    }
+                if (playerinstance != null) {
+                    playerinstance.b(entityplayermp);
                 }
+            }
+        }
 
-                this.b.remove(entityplayermp);
+        this.b.remove(entityplayermp);
     }
 
     private boolean a(int i0, int i1, int i2, int i3, int i4) {
@@ -224,7 +226,7 @@ public class PlayerManager {
         return playerManager;
     }
 
-    //CanaryMod
+    // CanaryMod
     public List<EntityPlayerMP> getManagedPlayers() {
         return b;
     }

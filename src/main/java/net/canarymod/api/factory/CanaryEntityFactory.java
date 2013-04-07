@@ -67,6 +67,7 @@ import net.minecraft.server.EntityWolf;
 import net.minecraft.server.EntityXPOrb;
 import net.minecraft.server.EntityZombie;
 
+
 /**
  * Entity Manufacturing Factory implementation
  *
@@ -83,6 +84,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public Entity newEntity(String name, World world) {
         if (name != null && world != null) {
             EntityType type;
+
             try {
                 type = EntityType.valueOf(name.toUpperCase());
             } catch (IllegalArgumentException iaex) {
@@ -98,6 +100,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public Entity newEntity(String name, Location location) {
         if (name != null && location != null) {
             Entity toRet = newEntity(name, location.getWorld());
+
             if (toRet != null) {
                 toRet.setX(location.getX());
                 toRet.setY(location.getY());
@@ -119,111 +122,164 @@ public class CanaryEntityFactory implements EntityFactory {
     public Entity newEntity(EntityType type, World world) {
         if (type != null && world != null) {
             net.minecraft.server.World mcworld = ((CanaryWorld) world).getHandle();
+
             switch (type) {
                 case ARROW:
                     return new EntityArrow(mcworld).getCanaryEntity();
+
                 case BAT:
                     return new EntityBat(mcworld).getCanaryEntity();
+
                 case BLAZE:
                     return new EntityBlaze(mcworld).getCanaryEntity();
+
                 case BOAT:
                     return new EntityBoat(mcworld).getCanaryEntity();
+
                 case CAVESPIDER:
                     return new EntityCaveSpider(mcworld).getCanaryEntity();
+
                 case CHESTMINECART:
                     return new EntityMinecartChest(mcworld).getCanaryEntity();
+
                 case CHICKEN:
                     return new EntityChicken(mcworld).getCanaryEntity();
+
                 case CHICKENEGG:
                     return new EntityEgg(mcworld).getCanaryEntity();
+
                 case COW:
                     return new EntityCow(mcworld).getCanaryEntity();
+
                 case CREEPER:
                     return new EntityCreeper(mcworld).getCanaryEntity();
+
                 case EMPTYMINECART:
                     return new EntityMinecartEmpty(mcworld).getCanaryEntity();
+
                 case ENDERCRYSTAL:
                     return new EntityEnderCrystal(mcworld).getCanaryEntity();
+
                 case ENDERDRAGON:
                     return new EntityDragon(mcworld).getCanaryEntity();
+
                 case ENDEREYE:
                     return new EntityEnderEye(mcworld).getCanaryEntity();
+
                 case ENDERMAN:
                     return new EntityEnderman(mcworld).getCanaryEntity();
+
                 case ENDERPERL:
                     return new EntityEnderPearl(mcworld).getCanaryEntity();
+
                 case ENTITYITEM:
                     return new EntityItem(mcworld).getCanaryEntity();
+
                 case ENTITYPOTION:
                     return new EntityPotion(mcworld).getCanaryEntity();
+
                 case FALLINGBLOCK:
                     return new EntityFallingSand(mcworld).getCanaryEntity();
+
                 case FIREWORKROCKET:
                     return new EntityFireworkRocket(mcworld).getCanaryEntity();
+
                 case FURNACEMINECART:
                     return new EntityMinecartFurnace(mcworld).getCanaryEntity();
+
                 case GHAST:
                     return new EntityGhast(mcworld).getCanaryEntity();
+
                 case GIANTZOMBIE:
                     return new EntityGiantZombie(mcworld).getCanaryEntity();
+
                 case HOPPERMINECART:
                     return new EntityMinecartHopper(mcworld).getCanaryEntity();
+
                 case IRONGOLEM:
                     return new EntityIronGolem(mcworld).getCanaryEntity();
+
                 case ITEMFRAME:
                     return new EntityItemFrame(mcworld).getCanaryEntity();
+
                 case LARGEFIREBALL:
                     return new EntityLargeFireball(mcworld).getCanaryEntity();
+
                 case LAVASLIME:
                     return new EntityMagmaCube(mcworld).getCanaryEntity();
+
                 case LIGHTNINGBOLT: // There is a chance that LightningBolt isnt quite right
                     return new EntityLightningBolt(mcworld, 0, 0, 0).getCanaryEntity();
+
                 case MOBSPAWNERMINECART:
                     return new EntityMinecartMobSpawner(mcworld).getCanaryEntity();
+
                 case MOOSHROOM:
                     return new EntityMooshroom(mcworld).getCanaryEntity();
+
                 case OCELOT:
                     return new EntityOcelot(mcworld).getCanaryEntity();
+
                 case PAINTING:
                     return new EntityPainting(mcworld).getCanaryEntity();
+
                 case PIG:
                     return new EntityPig(mcworld).getCanaryEntity();
+
                 case PIGZOMBIE:
                     return new EntityPigZombie(mcworld).getCanaryEntity();
+
                 case SHEEP:
                     return new EntitySheep(mcworld).getCanaryEntity();
+
                 case SILVERFISH:
                     return new EntitySilverfish(mcworld).getCanaryEntity();
+
                 case SKELETON:
                     return new EntitySkeleton(mcworld).getCanaryEntity();
+
                 case SLIME:
                     return new EntitySlime(mcworld).getCanaryEntity();
+
                 case SMALLFIREBALL:
                     return new EntitySmallFireball(mcworld).getCanaryEntity();
+
                 case SNOWMAN:
                     return new EntitySnowman(mcworld).getCanaryEntity();
+
                 case SPIDER:
                     return new EntitySpider(mcworld).getCanaryEntity();
+
                 case SQUID:
                     return new EntitySquid(mcworld).getCanaryEntity();
+
                 case TNTMINECART:
                     return new EntityMinecartTNT(mcworld).getCanaryEntity();
+
                 case TNTPRIMED:
                     return new EntityTNTPrimed(mcworld).getCanaryEntity();
+
                 case VILLAGER:
                     return new EntityVillager(mcworld).getCanaryEntity();
+
                 case WITCH:
                     return new EntityWitch(mcworld).getCanaryEntity();
+
                 case WITHER:
                     return new EntityWither(mcworld).getCanaryEntity();
+
                 case WOLF:
                     return new EntityWolf(mcworld).getCanaryEntity();
+
                 case XPBOTTLE:
                     return new EntityExpBottle(mcworld).getCanaryEntity();
+
                 case XPORB:
                     return new EntityXPOrb(mcworld).getCanaryEntity();
+
                 case ZOMBIE:
                     return new EntityZombie(mcworld).getCanaryEntity();
+
                 default:
                     break;
             }
@@ -236,6 +292,7 @@ public class CanaryEntityFactory implements EntityFactory {
         Canary.println(location.toString());
         if (type != null && location != null) {
             Entity toRet = newEntity(type, location.getWorld());
+
             if (toRet != null) {
                 toRet.setX(location.getX());
                 toRet.setY(location.getY());
@@ -257,6 +314,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public EntityThrowable newThrowable(String name, World world) {
         if (name != null) {
             EntityType type;
+
             try {
                 type = EntityType.valueOf(name.toUpperCase());
             } catch (IllegalArgumentException iaex) {
@@ -271,6 +329,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public EntityThrowable newThrowable(String name, Location location) {
         if (name != null) {
             EntityType type;
+
             try {
                 type = EntityType.valueOf(name.toUpperCase());
             } catch (IllegalArgumentException iaex) {
@@ -311,6 +370,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public Vehicle newVehicle(String name, World world) {
         if (name != null) {
             EntityType type;
+
             try {
                 type = EntityType.valueOf(name.toUpperCase());
             } catch (IllegalArgumentException iaex) {
@@ -325,6 +385,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public Vehicle newVehicle(String name, Location location) {
         if (name != null) {
             EntityType type;
+
             try {
                 type = EntityType.valueOf(name.toUpperCase());
             } catch (IllegalArgumentException iaex) {
@@ -365,6 +426,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public EntityLiving newEntityLiving(String name, World world) {
         if (name != null) {
             EntityType type;
+
             try {
                 type = EntityType.valueOf(name.toUpperCase());
             } catch (IllegalArgumentException iaex) {
@@ -379,6 +441,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public EntityLiving newEntityLiving(String name, Location location) {
         if (name != null) {
             EntityType type;
+
             try {
                 type = EntityType.valueOf(name.toUpperCase());
             } catch (IllegalArgumentException iaex) {
@@ -419,6 +482,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public EntityAnimal newEntityAnimal(String name, World world) {
         if (name != null) {
             EntityType type;
+
             try {
                 type = EntityType.valueOf(name.toUpperCase());
             } catch (IllegalArgumentException iaex) {
@@ -433,6 +497,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public EntityAnimal newEntityAnimal(String name, Location location) {
         if (name != null) {
             EntityType type;
+
             try {
                 type = EntityType.valueOf(name.toUpperCase());
             } catch (IllegalArgumentException iaex) {
@@ -473,6 +538,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public EntityMob newEntityMob(String name, World world) {
         if (name != null) {
             EntityType type;
+
             try {
                 type = EntityType.valueOf(name.toUpperCase());
             } catch (IllegalArgumentException iaex) {
@@ -487,6 +553,7 @@ public class CanaryEntityFactory implements EntityFactory {
     public EntityMob newEntityMob(String name, Location location) {
         if (name != null) {
             EntityType type;
+
             try {
                 type = EntityType.valueOf(name.toUpperCase());
             } catch (IllegalArgumentException iaex) {

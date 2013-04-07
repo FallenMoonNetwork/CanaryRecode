@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.vehicle.CanaryChestMinecart;
+
 
 public class EntityMinecartChest extends EntityMinecartContainer {
 

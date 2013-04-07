@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanarySmallFireball;
 import net.canarymod.hook.entity.ProjectileHitHook;
+
 
 public class EntitySmallFireball extends EntityFireball {
 
@@ -28,6 +30,7 @@ public class EntitySmallFireball extends EntityFireball {
         if (!this.q.I) {
             // CanaryMod: ProjectileHit
             ProjectileHitHook hook = new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity());
+
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) { //
                 if (movingobjectposition.g != null) {

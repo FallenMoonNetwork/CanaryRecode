@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.hook.world.DispenseHook;
+
 
 final class BehaviorDispenseMinecart extends BehaviorDefaultDispenseItem {
 
@@ -35,6 +37,7 @@ final class BehaviorDispenseMinecart extends BehaviorDefaultDispenseItem {
 
         // CanaryMod: Dispense
         DispenseHook hook = new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), entityminecart.getCanaryEntity());
+
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             world.d((Entity) entityminecart);

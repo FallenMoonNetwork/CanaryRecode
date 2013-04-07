@@ -14,15 +14,16 @@ import net.canarymod.hook.world.ChunkCreationHook;
 import net.canarymod.hook.world.ChunkLoadedHook;
 import net.canarymod.hook.world.ChunkUnloadHook;
 
+
 public class ChunkProviderServer implements IChunkProvider {
 
-    public Set b = new HashSet(); //CanaryMod private->public
+    public Set b = new HashSet(); // CanaryMod private->public
     private Chunk c;
-    public IChunkProvider d; //CanaryMod private->public
+    public IChunkProvider d; // CanaryMod private->public
     public IChunkLoader e; // //CanaryMod private->public
     public boolean a = true;
-    public LongHashMap f = new LongHashMap(); //CanaryMod private->public
-    public List g = new ArrayList(); //CanaryMod private->public
+    public LongHashMap f = new LongHashMap(); // CanaryMod private->public
+    public List g = new ArrayList(); // CanaryMod private->public
     private WorldServer h;
 
     // CanaryMod start
@@ -92,11 +93,13 @@ public class ChunkProviderServer implements IChunkProvider {
                         chunk = this.d.d(i0, i1);
                         // CanaryMod: ChunkCreation
                         ChunkCreationHook hook = new ChunkCreationHook(i0, i1, h.getCanaryWorld());
+
                         Canary.hooks().callHook(hook);
                         byte[] blocks = hook.getBlockData();
-                        if(blocks != null) {
+
+                        if (blocks != null) {
                             chunk = new Chunk(h, blocks, i0, i1);
-                            if(hook.getBiomeData() != null) {
+                            if (hook.getBiomeData() != null) {
                                 chunk.getCanaryChunk().setBiomeData(hook.getBiomeData());
                             }
                         }
@@ -157,7 +160,7 @@ public class ChunkProviderServer implements IChunkProvider {
         }
     }
 
-    //CanaryMod private -> public
+    // CanaryMod private -> public
     public void a(Chunk chunk) {
         if (this.e != null) {
             try {
@@ -234,12 +237,14 @@ public class ChunkProviderServer implements IChunkProvider {
                 if (!this.b.isEmpty()) {
                     Long olong = (Long) this.b.iterator().next();
                     Chunk chunk = (Chunk) this.f.a(olong.longValue());
-                    if(chunk != null) {
+
+                    if (chunk != null) {
                         // CanaryMod: ChunkUnload
                         ChunkUnloadHook hook = new ChunkUnloadHook(chunk.getCanaryChunk(), h.getCanaryWorld());
+
                         Canary.hooks().callHook(hook);
-                        if(hook.isCanceled()) {
-                            //TODO: Might need to return false instead ... unsure
+                        if (hook.isCanceled()) {
+                            // TODO: Might need to return false instead ... unsure
                             return true;
                         }
                         //

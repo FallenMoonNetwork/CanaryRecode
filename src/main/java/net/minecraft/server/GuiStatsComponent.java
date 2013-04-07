@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -10,6 +11,7 @@ import javax.swing.Timer;
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
+
 
 public class GuiStatsComponent extends JComponent {
 

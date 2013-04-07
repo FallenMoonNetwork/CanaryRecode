@@ -1,7 +1,9 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.canarymod.api.world.blocks.CanaryBrewingStand;
+
 
 public class TileEntityBrewingStand extends TileEntity implements ISidedInventory {
 

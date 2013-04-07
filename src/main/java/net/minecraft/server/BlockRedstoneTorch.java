@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.hook.world.RedstoneChangeHook;
+
 
 public class BlockRedstoneTorch extends BlockTorch {
 
@@ -107,6 +109,7 @@ public class BlockRedstoneTorch extends BlockTorch {
 
                 // CanaryMod: RedstoneChange
                 RedstoneChangeHook hook = new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 1, 0);
+
                 Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
                     return;

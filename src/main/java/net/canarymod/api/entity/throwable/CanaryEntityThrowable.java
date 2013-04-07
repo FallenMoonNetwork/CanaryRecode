@@ -1,7 +1,9 @@
 package net.canarymod.api.entity.throwable;
 
+
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.living.EntityLiving;
+
 
 /**
  * EntityThrowable wrapper implementation

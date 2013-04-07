@@ -8,6 +8,7 @@ import net.canarymod.api.inventory.Enchantment.Type;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
 
+
 /**
  * Item Factory
  *
@@ -89,14 +90,14 @@ public class CanaryItemFactory implements ItemFactory {
     public Item newItem(String commandInput) {
         String[] data = commandInput.split(":");
         CanaryItem item;
-        if(data[0].matches("\\d+")) {
-            item = (CanaryItem)(newItem(ItemType.fromId(Integer.parseInt(data[0]))));
+
+        if (data[0].matches("\\d+")) {
+            item = (CanaryItem) (newItem(ItemType.fromId(Integer.parseInt(data[0]))));
+        } else {
+            item = (CanaryItem) (newItem(ItemType.fromString(data[0])));
         }
-        else {
-            item = (CanaryItem)(newItem(ItemType.fromString(data[0])));
-        }
-        if(data.length == 2){
-            if(data[1].matches("\\d+") && item != null) {
+        if (data.length == 2) {
+            if (data[1].matches("\\d+") && item != null) {
                 item.setDamage(Integer.parseInt(data[1]));
             }
         }

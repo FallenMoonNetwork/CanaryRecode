@@ -1,8 +1,10 @@
 package net.minecraft.server;
 
+
 import java.util.Iterator;
 import java.util.List;
 import net.canarymod.api.world.blocks.CanaryBeacon;
+
 
 public class TileEntityBeacon extends TileEntity implements IInventory {
 

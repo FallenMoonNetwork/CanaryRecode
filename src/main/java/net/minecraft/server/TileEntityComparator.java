@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.world.blocks.CanaryComparator;
+
 
 public class TileEntityComparator extends TileEntity {
 

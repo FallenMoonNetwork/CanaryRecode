@@ -1,10 +1,10 @@
 package net.canarymod.api.inventory;
 
+
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.config.Configuration;
 import net.minecraft.server.IInventory;
 import net.minecraft.server.ItemStack;
-
 
 
 /**
@@ -185,6 +185,7 @@ public abstract class CanaryContainerEntity implements Inventory {
     public Item getItem(int id) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == id) {
                 toCheck.setSlot(index);
                 return toCheck;
@@ -208,6 +209,7 @@ public abstract class CanaryContainerEntity implements Inventory {
     public Item getItem(int id, int amount) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount) {
                 toCheck.setSlot(index);
                 return toCheck;
@@ -223,6 +225,7 @@ public abstract class CanaryContainerEntity implements Inventory {
     public Item getItem(int id, int amount, short damage) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount && toCheck.getDamage() == damage) {
                 toCheck.setSlot(index);
                 return toCheck;
@@ -253,6 +256,7 @@ public abstract class CanaryContainerEntity implements Inventory {
     @Override
     public Item getSlot(int index) {
         ItemStack stack = inventory.a(index);
+
         return stack != null ? stack.getCanaryItem() : null;
     }
 
@@ -292,6 +296,7 @@ public abstract class CanaryContainerEntity implements Inventory {
     public boolean hasItem(int itemId, short damage) {
         for (int index = 0; index < getSize(); index++) {
             Item item = getSlot(index);
+
             if (item != null && item.getId() == itemId && item.getDamage() == damage) {
                 return true;
             }
@@ -338,8 +343,10 @@ public abstract class CanaryContainerEntity implements Inventory {
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == itemId) {
                 int am = toCheck.getAmount();
+
                 if (am > minAmount && am < maxAmount) {
                     return true;
                 }
@@ -355,8 +362,10 @@ public abstract class CanaryContainerEntity implements Inventory {
     public boolean hasItemStack(int itemId, int minAmount, int maxAmount, short damage) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == itemId && toCheck.getDamage() == damage) {
                 int am = toCheck.getAmount();
+
                 if (am > minAmount && am < maxAmount) {
                     return true;
                 }
@@ -382,16 +391,20 @@ public abstract class CanaryContainerEntity implements Inventory {
             if (itemExisting != null && (!item.isEnchanted() || Configuration.getServerConfig().allowEnchantmentStacking())) {
                 // Add as much items as possible to the stack
                 int k = Math.min(maxAmount - itemExisting.getAmount(), item.getAmount());
+
                 this.setSlot(item.getId(), itemExisting.getAmount() + k, (short) item.getDamage(), itemExisting.getSlot());
                 amount -= k;
                 continue;
             }
             // We still have slots, but no stack, create a new stack.
             int eslot = getEmptySlot();
+
             if (eslot != -1) {
                 CanaryCompoundTag nbt = new CanaryCompoundTag("");
+
                 ((CanaryItem) item).getHandle().b(nbt.getHandle());
                 CanaryItem tempItem = new CanaryItem(item.getId(), amount, -1, item.getDamage());
+
                 tempItem.getHandle().c(nbt.getHandle());
                 this.setSlot(eslot, tempItem);
                 amount = 0;
@@ -420,6 +433,7 @@ public abstract class CanaryContainerEntity implements Inventory {
     @Override
     public void setSlot(int itemId, int amount, short damage, int slot) {
         CanaryItem item = new CanaryItem(itemId, 1, damage);
+
         item.setSlot(slot);
         this.setSlot(item);
     }
@@ -471,6 +485,7 @@ public abstract class CanaryContainerEntity implements Inventory {
     public Item removeItem(int id) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == id) {
                 setSlot(index, null);
                 return toCheck;
@@ -486,6 +501,7 @@ public abstract class CanaryContainerEntity implements Inventory {
     public Item removeItem(int id, short damage) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
+
             if (toCheck != null && toCheck.getId() == id && toCheck.getDamage() == damage) {
                 setSlot(index, null);
                 return toCheck;

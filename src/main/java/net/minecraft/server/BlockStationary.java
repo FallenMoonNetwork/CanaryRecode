@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.IgnitionHook;
+
 
 public class BlockStationary extends BlockFluid {
 
@@ -39,8 +41,10 @@ public class BlockStationary extends BlockFluid {
 
             // CanaryMod: Ignition
             CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+
             ignited.setStatus((byte) 1); // Lava Status 1
             IgnitionHook hook = new IgnitionHook(ignited, null);
+
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return;

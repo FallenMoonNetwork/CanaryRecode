@@ -5,6 +5,7 @@ import java.util.Arrays;
 import net.minecraft.server.InventoryPlayer;
 import net.minecraft.server.ItemStack;
 
+
 /**
  * PlayerInventory implementation
  * 
@@ -28,8 +29,7 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      * {@inheritDoc}
      */
     @Override
-    public void setArmorSlot(Item item) {
-        // WAT
+    public void setArmorSlot(Item item) {// WAT
     }
 
     public ItemStack getItemInHand() {
@@ -50,6 +50,7 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
     @Override
     public Item[] clearInventory() {
         ItemStack[] items = Arrays.copyOf(getInventoryHandle().a, getSize());
+
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
     }

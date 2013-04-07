@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 public class MerchantRecipe {
 
     // CanaryMod: private => public

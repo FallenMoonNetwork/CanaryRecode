@@ -60,18 +60,17 @@ public class CanaryWorldManager implements WorldManager {
     public World getWorld(String name, boolean autoload) {
         DimensionType t = DimensionType.fromName(name.substring(Math.max(0, name.lastIndexOf("_"))));
         String nameOnly = name.substring(0, Math.max(0, name.lastIndexOf("_")));
-        if(t != null) {
+
+        if (t != null) {
             return getWorld(nameOnly, t, autoload);
         }
 
-        if(loadedWorlds.containsKey(name)) {
+        if (loadedWorlds.containsKey(name)) {
             return loadedWorlds.get(name);
-        }
-        else if(loadedWorlds.containsKey(name + "_NORMAL")) {
+        } else if (loadedWorlds.containsKey(name + "_NORMAL")) {
             return loadedWorlds.get(name + "_NORMAL");
-        }
-        else {
-            if(existingWorlds.contains(name)) {
+        } else {
+            if (existingWorlds.contains(name)) {
                 return loadWorld(name, DimensionType.fromId(0));
             }
             throw new UnknownWorldException("World " + name + " is unknown and can't be loaded!");
@@ -82,13 +81,11 @@ public class CanaryWorldManager implements WorldManager {
     public World getWorld(String world, DimensionType type, boolean autoload) {
         if (worldIsLoaded(world + "_" + type.getName())) {
             return loadedWorlds.get(world + "_" + type.getName());
-        }
-        else {
+        } else {
             if (worldExists(world + "_" + type.getName()) && autoload) {
                 Canary.println("World exists but is not loaded. Loading ...");
                 return loadWorld(world, type);
-            }
-            else {
+            } else {
                 if (autoload) {
                     Canary.println("World does not exist, we can autoload, will load!");
                     createWorld(world, type);
@@ -127,8 +124,7 @@ public class CanaryWorldManager implements WorldManager {
         if (!worldIsLoaded(name + "_" + type.getName())) {
             ((CanaryServer) Canary.getServer()).getHandle().loadWorld(name, new Random().nextLong(), type);
             return loadedWorlds.get(name + "_" + type.getName());
-        }
-        else {
+        } else {
             return loadedWorlds.get(name + "_" + type.getName());
         }
     }
@@ -169,8 +165,8 @@ public class CanaryWorldManager implements WorldManager {
         return existingWorlds; // TODO: This only reads base folders not the real dimension folders!
     }
 
-    //Implementation specific shortcuts
+    // Implementation specific shortcuts
     public WorldServer getWorldServer(String name, int id) {
-        return (WorldServer)((CanaryWorld)loadedWorlds.get(name)).getHandle();
+        return (WorldServer) ((CanaryWorld) loadedWorlds.get(name)).getHandle();
     }
 }

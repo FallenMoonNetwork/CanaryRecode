@@ -212,19 +212,19 @@ public abstract class World implements IBlockAccess {
     public boolean e(int i0, int i1, int i2, int i3, int i4, int i5) {
         if (i4 >= 0 && i1 < 256) {
             i0 >>= 4;
-        i2 >>= 4;
-        i3 >>= 4;
-        i5 >>= 4;
+            i2 >>= 4;
+            i3 >>= 4;
+            i5 >>= 4;
 
-        for (int i6 = i0; i6 <= i3; ++i6) {
-            for (int i7 = i2; i7 <= i5; ++i7) {
-                if (!this.c(i6, i7)) {
-                    return false;
+            for (int i6 = i0; i6 <= i3; ++i6) {
+                for (int i7 = i2; i7 <= i5; ++i7) {
+                    if (!this.c(i6, i7)) {
+                        return false;
+                    }
                 }
             }
-        }
 
-        return true;
+            return true;
         } else {
             return false;
         }
@@ -260,6 +260,7 @@ public abstract class World implements IBlockAccess {
                 boolean flag0 = false;
                 CanaryBlock cblock = (CanaryBlock) this.canaryDimension.getBlockAt(i0, i1, i2);
                 BlockUpdateHook hook = new BlockUpdateHook(cblock, i3);
+
                 if (i3 != 0) { // Ignore Air
                     Canary.hooks().callHook(hook);
                 }
@@ -590,15 +591,15 @@ public abstract class World implements IBlockAccess {
 
         if (i0 >= -30000000 && i2 >= -30000000 && i0 < 30000000 && i2 < 30000000) {
             int i3 = i0 >> 4;
-        int i4 = i2 >> 4;
+            int i4 = i2 >> 4;
 
-        if (!this.c(i3, i4)) {
-            return enumskyblock.c;
-        } else {
-            Chunk chunk = this.e(i3, i4);
+            if (!this.c(i3, i4)) {
+                return enumskyblock.c;
+            } else {
+                Chunk chunk = this.e(i3, i4);
 
-            return chunk.a(enumskyblock, i0 & 15, i1, i2 & 15);
-        }
+                return chunk.a(enumskyblock, i0 & 15, i1, i2 & 15);
+            }
         } else {
             return enumskyblock.c;
         }
@@ -853,6 +854,7 @@ public abstract class World implements IBlockAccess {
         // CanaryMod: EntitySpawn
         if (!(entity.getCanaryEntity() instanceof CanaryPlayer)) {
             EntitySpawnHook hook = new EntitySpawnHook(entity.getCanaryEntity());
+
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return false;
@@ -959,6 +961,7 @@ public abstract class World implements IBlockAccess {
 
         // CanaryMod: Implemented fix via M4411K4 VEHICLE_COLLISION hook
         CanaryVehicle vehicle = null;
+
         if (entity instanceof EntityMinecart || entity instanceof EntityBoat) {
             vehicle = (CanaryVehicle) entity.getCanaryEntity();
         }
@@ -974,6 +977,7 @@ public abstract class World implements IBlockAccess {
                 // CanaryMod: this collided with a boat
                 if (vehicle != null) {
                     VehicleCollisionHook vch = new VehicleCollisionHook(vehicle, entity.getCanaryEntity());
+
                     Canary.hooks().callHook(vch);
                     if (vch.isCanceled()) {
                         continue;
@@ -988,6 +992,7 @@ public abstract class World implements IBlockAccess {
                 // CanaryMod: this collided with entity
                 if (vehicle != null) {
                     VehicleCollisionHook vch = new VehicleCollisionHook(vehicle, entity.getCanaryEntity());
+
                     Canary.hooks().callHook(vch);
                     if (vch.isCanceled()) {
                         continue;
@@ -1798,6 +1803,7 @@ public abstract class World implements IBlockAccess {
                 if (i0 <= 0) {
                     // CanaryMod: WeatherChange (Thunder)
                     WeatherChangeHook hook = new WeatherChangeHook(canaryDimension, !this.x.n(), true);
+
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
                         this.x.a(!this.x.n());
@@ -1820,6 +1826,7 @@ public abstract class World implements IBlockAccess {
                 if (i1 <= 0) {
                     // CanaryMod: WeatherChange (Rain)
                     WeatherChangeHook hook = new WeatherChangeHook(canaryDimension, !this.x.p(), false);
+
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
                         this.x.b(!this.x.p());
@@ -1912,19 +1919,19 @@ public abstract class World implements IBlockAccess {
             int i2 = this.k >> 2;
             int i3 = i2 & 15;
             int i4 = i2 >> 8 & 15;
-                int i5 = i2 >> 16 & 127;
-                int i6 = chunk.a(i3, i5, i4);
+            int i5 = i2 >> 16 & 127;
+            int i6 = chunk.a(i3, i5, i4);
 
-                i3 += i0;
-                i4 += i1;
-                if (i6 == 0 && this.m(i3, i5, i4) <= this.s.nextInt(8) && this.b(EnumSkyBlock.a, i3, i5, i4) <= 0) {
-                    EntityPlayer entityplayer = this.a((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D, 8.0D);
+            i3 += i0;
+            i4 += i1;
+            if (i6 == 0 && this.m(i3, i5, i4) <= this.s.nextInt(8) && this.b(EnumSkyBlock.a, i3, i5, i4) <= 0) {
+                EntityPlayer entityplayer = this.a((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D, 8.0D);
 
-                    if (entityplayer != null && entityplayer.e((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D) > 4.0D) {
-                        this.a((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D, "ambient.cave.cave", 0.7F, 0.8F + this.s.nextFloat() * 0.2F);
-                        this.O = this.s.nextInt(12000) + 6000;
-                    }
+                if (entityplayer != null && entityplayer.e((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D) > 4.0D) {
+                    this.a((double) i3 + 0.5D, (double) i5 + 0.5D, (double) i4 + 0.5D, "ambient.cave.cave", 0.7F, 0.8F + this.s.nextFloat() * 0.2F);
+                    this.O = this.s.nextInt(12000) + 6000;
                 }
+            }
         }
 
         this.C.c("checkLight");
@@ -2084,28 +2091,28 @@ public abstract class World implements IBlockAccess {
                     i9 = (i7 >> 6 & 63) - 32 + i1;
                     i10 = (i7 >> 12 & 63) - 32 + i2;
                     i11 = i7 >> 18 & 15;
-                i12 = this.b(enumskyblock, i8, i9, i10);
-                if (i12 == i11) {
-                    this.b(enumskyblock, i8, i9, i10, 0);
-                    if (i11 > 0) {
-                        i13 = MathHelper.a(i8 - i0);
-                        i15 = MathHelper.a(i9 - i1);
-                        i14 = MathHelper.a(i10 - i2);
-                        if (i13 + i15 + i14 < 17) {
-                            for (int i16 = 0; i16 < 6; ++i16) {
-                                int i17 = i8 + Facing.b[i16];
-                                int i18 = i9 + Facing.c[i16];
-                                int i19 = i10 + Facing.d[i16];
-                                int i20 = Math.max(1, Block.t[this.a(i17, i18, i19)]);
+                    i12 = this.b(enumskyblock, i8, i9, i10);
+                    if (i12 == i11) {
+                        this.b(enumskyblock, i8, i9, i10, 0);
+                        if (i11 > 0) {
+                            i13 = MathHelper.a(i8 - i0);
+                            i15 = MathHelper.a(i9 - i1);
+                            i14 = MathHelper.a(i10 - i2);
+                            if (i13 + i15 + i14 < 17) {
+                                for (int i16 = 0; i16 < 6; ++i16) {
+                                    int i17 = i8 + Facing.b[i16];
+                                    int i18 = i9 + Facing.c[i16];
+                                    int i19 = i10 + Facing.d[i16];
+                                    int i20 = Math.max(1, Block.t[this.a(i17, i18, i19)]);
 
-                                i12 = this.b(enumskyblock, i17, i18, i19);
-                                if (i12 == i11 - i20 && i4 < this.H.length) {
-                                    this.H[i4++] = i17 - i0 + 32 | i18 - i1 + 32 << 6 | i19 - i2 + 32 << 12 | i11 - i20 << 18;
+                                    i12 = this.b(enumskyblock, i17, i18, i19);
+                                    if (i12 == i11 - i20 && i4 < this.H.length) {
+                                        this.H[i4++] = i17 - i0 + 32 | i18 - i1 + 32 << 6 | i19 - i2 + 32 << 12 | i11 - i20 << 18;
+                                    }
                                 }
                             }
                         }
                     }
-                }
                 }
 
                 i3 = 0;
@@ -2492,6 +2499,7 @@ public abstract class World implements IBlockAccess {
     public void b(long i0) {
         // CanaryMod: TimeChange
         TimeChangeHook hook = new TimeChangeHook(canaryDimension, i0);
+
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             this.x.c(i0);

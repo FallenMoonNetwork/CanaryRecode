@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.monster.CanaryPigZombie;
 import net.canarymod.hook.entity.MobTargetHook;
+
 
 public class EntityPigZombie extends EntityZombie {
 
@@ -58,6 +60,7 @@ public class EntityPigZombie extends EntityZombie {
             if (entity instanceof EntityPlayer) {
                 // CanaryMod: MobTarget
                 MobTargetHook hook = new MobTargetHook((net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) entity.getCanaryEntity());
+
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     List list = this.q.b((Entity) this, this.E.b(32.0D, 32.0D, 32.0D));

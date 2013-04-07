@@ -1,9 +1,11 @@
 package net.minecraft.server;
 
+
 import net.canarymod.Canary;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.canarymod.hook.player.CraftHook;
+
 
 public class ContainerWorkbench extends Container {
 
@@ -57,6 +59,7 @@ public class ContainerWorkbench extends Container {
         EntityPlayerMP player = (EntityPlayerMP) this.e.get(0);
         // call CraftHook
         CraftHook hook = new CraftHook(player.getPlayer(), bench, result.getCanaryItem());
+
         Canary.hooks().callHook(hook);
         result = hook.getRecipeResult() != null || hook.isCanceled() ? ((CanaryItem) hook.getRecipeResult()).getHandle() : null;
         // Set custom result

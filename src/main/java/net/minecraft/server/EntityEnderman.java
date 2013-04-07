@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.Arrays;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.monster.CanaryEnderman;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.entity.EndermanDropBlockHook;
 import net.canarymod.hook.entity.EndermanPickupBlockHook;
+
 
 public class EntityEnderman extends EntityMob {
 
@@ -126,7 +128,7 @@ public class EntityEnderman extends EntityMob {
 
                 if (i3 == 0 && i4 > 0 && Block.r[i4].b()) {
                     // CanaryMod: call EndermanDropBlockHook
-                    EndermanDropBlockHook hook = new EndermanDropBlockHook((CanaryEnderman)entity, ((CanaryEnderman)entity).getWorld().getBlockAt(i0, i1, i2));
+                    EndermanDropBlockHook hook = new EndermanDropBlockHook((CanaryEnderman) entity, ((CanaryEnderman) entity).getWorld().getBlockAt(i0, i1, i2));
 
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
@@ -341,20 +343,20 @@ public class EntityEnderman extends EntityMob {
 
     static {
         // CanaryMod: Disable all default allowed pick ups
-        //d[Block.y.cz] = true;
-        //d[Block.z.cz] = true;
-        //d[Block.I.cz] = true;
-        //d[Block.J.cz] = true;
-        //d[Block.ah.cz] = true;
-        //d[Block.ai.cz] = true;
-        //d[Block.aj.cz] = true;
-        //d[Block.ak.cz] = true;
-        //d[Block.aq.cz] = true;
-        //d[Block.aZ.cz] = true;
-        //d[Block.ba.cz] = true;
-        //d[Block.be.cz] = true;
-        //d[Block.bv.cz] = true;
-        //d[Block.bC.cz] = true;
+        // d[Block.y.cz] = true;
+        // d[Block.z.cz] = true;
+        // d[Block.I.cz] = true;
+        // d[Block.J.cz] = true;
+        // d[Block.ah.cz] = true;
+        // d[Block.ai.cz] = true;
+        // d[Block.aj.cz] = true;
+        // d[Block.ak.cz] = true;
+        // d[Block.aq.cz] = true;
+        // d[Block.aZ.cz] = true;
+        // d[Block.ba.cz] = true;
+        // d[Block.be.cz] = true;
+        // d[Block.bv.cz] = true;
+        // d[Block.bC.cz] = true;
         // CanaryMod: pre-fill the array with false
         Arrays.fill(d, false);
     }

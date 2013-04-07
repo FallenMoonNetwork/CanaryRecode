@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryFallingBlock;
 import net.canarymod.hook.entity.DamageHook;
+
 
 public class EntityFallingSand extends Entity {
 
@@ -156,6 +158,7 @@ public class EntityFallingSand extends Entity {
                     Entity entity = (Entity) iterator.next();
                     // CanaryMod: DamageHook (FallingBlock/Anvil)
                     DamageHook hook = new DamageHook(null, entity.getCanaryEntity(), new CanaryDamageSource(damagesource), Math.min(MathHelper.d((float) i0 * this.i), this.h));
+
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
                         entity.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), Math.min(hook.getDamageDealt(), this.h));

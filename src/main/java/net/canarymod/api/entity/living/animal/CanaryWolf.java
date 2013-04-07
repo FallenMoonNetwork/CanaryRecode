@@ -4,6 +4,7 @@ package net.canarymod.api.entity.living.animal;
 import net.canarymod.api.DyeColor;
 import net.minecraft.server.EntityWolf;
 
+
 /**
  * Wolf wrapper implementation
  * 

@@ -26,6 +26,7 @@ public class EntityEgg extends EntityThrowable {
     protected void a(MovingObjectPosition movingobjectposition) {
         // CanaryMod: ProjectileHit
         ProjectileHitHook hook = new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity());
+
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) { //
             if (movingobjectposition.g != null) {

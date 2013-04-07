@@ -1,5 +1,6 @@
 package net.minecraft.server;
 
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -33,6 +34,7 @@ import net.canarymod.hook.player.InventoryHook;
 import net.canarymod.hook.player.PlayerDeathHook;
 import net.canarymod.hook.player.PortalUseHook;
 import net.canarymod.hook.player.StatGainedHook;
+
 
 public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
@@ -219,6 +221,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                     this.M = false;
                 } else {
                     HealthChangeHook hook = new HealthChangeHook(getPlayer(), cm, this.aX());
+
                     Canary.hooks().callHook(hook);
                     if (hook.isCanceled()) {
                         super.b(this.cm);
@@ -230,6 +233,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             if (this.aX() != this.cm || this.cn != this.bN.a() || this.bN.e() == 0.0F != this.co) {
                 // CanaryMod: convert health for values above 20
                 int health = (int) (this.aX() / (this.aW() / 20));
+
                 health = (this.aX() > 0 && health == 0) ? 1 : health;
                 this.a.b(new Packet8UpdateHealth(health, this.bN.a(), this.bN.e()));
                 //
@@ -245,6 +249,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                     this.cf = 0;
                 } else if (getPlayer() != null) { // NPC?
                     ExperienceHook hook = new ExperienceHook(getPlayer(), this.cp, cg);
+
                     if (!hook.isCanceled()) {
                         this.cp = this.cg;
                         this.a.b(new Packet43Experience(this.ch, this.cg, this.cf));
@@ -265,6 +270,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void a(DamageSource damagesource) {
         // CanaryMod: PlayerDeathHook
         PlayerDeathHook hook = new PlayerDeathHook(getPlayer(), this.bt.b());
+
         Canary.hooks().callHook(hook);
 
         // Check Death Message enabled
@@ -330,7 +336,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         return !this.b.X() ? false : super.a(entityplayer);
     }
 
-    //CanaryMod renamed c -> changeDimension
+    // CanaryMod renamed c -> changeDimension
     @Override
     public void c(int i0) {
         if (this.ar == 1 && i0 == 1) {
@@ -338,8 +344,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             this.q.e((Entity) this);
             this.j = true;
             this.a.b(new Packet70GameEvent(4, 0));
-        }
-        else {
+        } else {
             if (this.ar == 1 && i0 == 0) {
                 this.a((StatBase) AchievementList.B);
                 ChunkCoordinates chunkcoordinates = this.b.getWorld(this.getCanaryWorld().getName(), i0).l();
@@ -364,7 +369,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
             if (hook.isCanceled() || hook1.isCanceled()) {
                 return;
-            }//
+            } //
             else {
                 this.b.ad().a(this, getCanaryWorld().getName(), i0);
                 this.cp = -1;
@@ -461,6 +466,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         ContainerEnchantment container = new ContainerEnchantment(this.bK, this.q, i0, i1, i2);
         CanaryEnchantmentTable table = new CanaryEnchantmentTable(container);
         InventoryHook hook = new InventoryHook(getPlayer(), table, false);
+
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return;
@@ -491,6 +497,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         }
         // CanaryMod: InventoryHook
         Inventory inventory = null;
+
         if (iinventory instanceof TileEntityChest) {
             inventory = ((TileEntityChest) iinventory).getCanaryChest();
         } else if (iinventory instanceof InventoryLargeChest) {
@@ -503,6 +510,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
         if (inventory != null) {
             InventoryHook hook = new InventoryHook(getPlayer(), inventory, false);
+
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
                 return;
@@ -539,6 +547,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void a(TileEntityFurnace tileentityfurnace) {
         // CanaryMod: InventoryHook
         InventoryHook hook = new InventoryHook(getPlayer(), tileentityfurnace.getCanaryFurnace(), false);
+
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return;
@@ -556,6 +565,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void a(TileEntityDispenser tileentitydispenser) {
         // CanaryMod: InventoryHook
         InventoryHook hook = new InventoryHook(getPlayer(), tileentitydispenser.getCanaryDispenser(), false);
+
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return;
@@ -573,6 +583,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void a(TileEntityBrewingStand tileentitybrewingstand) {
         // CanaryMod: InventoryHook
         InventoryHook hook = new InventoryHook(getPlayer(), tileentitybrewingstand.getCanaryBrewingStand(), false);
+
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return;
@@ -668,6 +679,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             if (!statbase.f) {
                 // CanaryMod: StatGained
                 StatGainedHook hook = new StatGainedHook(getPlayer(), new CanaryStat(statbase));
+
                 Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
                     return;
@@ -794,6 +806,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             s0 = s0.substring(1);
         }
         CanaryCommand command = Canary.commands().getCommand(s0.contains(" ") ? s0.split(" ")[0] : s0);
+
         if (command != null) {
             return getPlayer().hasPermission(command.permissionNode);
         }
@@ -817,17 +830,17 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
         int i0 = 256 >> packet204clientinfo.f();
 
-                if (i0 > 3 && i0 < 15) {
-                    this.cr = i0;
-                }
+        if (i0 > 3 && i0 < 15) {
+            this.cr = i0;
+        }
 
-                this.cs = packet204clientinfo.g();
-                this.ct = packet204clientinfo.h();
-                if (this.b.I() && this.b.H().equals(this.bS)) {
-                    this.b.c(packet204clientinfo.i());
-                }
+        this.cs = packet204clientinfo.g();
+        this.ct = packet204clientinfo.h();
+        if (this.b.I() && this.b.H().equals(this.bS)) {
+            this.b.c(packet204clientinfo.i());
+        }
 
-                this.b(1, !packet204clientinfo.j());
+        this.b(1, !packet204clientinfo.j());
     }
 
     @Override
@@ -856,6 +869,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void setDisplayName(String name) {
         super.setDisplayName(name);
         Packet20NamedEntitySpawn pkt = new Packet20NamedEntitySpawn(this);
+
         Canary.getServer().getConfigurationManager().sendPacketToAllInWorld(this.getCanaryWorld().getName(), new CanaryPacket(pkt));
     }
 
@@ -887,11 +901,12 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     @Override
     public void setDimension(CanaryWorld world) {
         super.setDimension(world);
-        this.c.a((WorldServer)world.getHandle());
+        this.c.a((WorldServer) world.getHandle());
     }
 
     public void changeWorld(WorldServer srv) {
         ChunkCoordinates chunkcoordinates = srv.l();
+
         if (chunkcoordinates != null) {
             this.a.a((double) chunkcoordinates.a, (double) chunkcoordinates.b, (double) chunkcoordinates.c, 0.0F, 0.0F, srv.getCanaryWorld().getType().getId(), srv.getCanaryWorld().getName());
         }
@@ -899,6 +914,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         // CanaryMod: Dimension switch hook.
         Location goingTo = this.simulatePortalUse(srv.q, MinecraftServer.D().getWorld(this.getCanaryWorld().getName(), srv.q));
         CancelableHook hook = new DimensionSwitch(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
+
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             return;

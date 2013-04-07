@@ -99,8 +99,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     @Override
     public void teleportTo(Location location) {
         getHandle().a(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
-        if (this.getWorld() != location.getWorld()) {
-            // I don't know yet
+        if (this.getWorld() != location.getWorld()) {// I don't know yet
         }
     }
 
@@ -182,6 +181,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     @Override
     public void lookAtNearest() {
         Player toLookAt = null;
+
         for (Player player : Canary.getServer().getPlayerList()) {
             if (player.getWorld().getName().equals(this.getWorld().getName())) {
                 if (player.getWorld().getType() == this.getWorld().getType()) {
@@ -192,8 +192,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
                         if (distanceTo(player) < distanceTo(toLookAt)) {
                             toLookAt = player;
                         }
-                    }
-                    else {
+                    } else {
                         toLookAt = player;
                     }
                 }

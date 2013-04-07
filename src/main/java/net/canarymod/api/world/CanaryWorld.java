@@ -344,7 +344,7 @@ public class CanaryWorld implements World {
 
     @Override
     public int getLightLevelAt(int x, int y, int z) {
-        //TODO: Returns skylight level, needs option for blocklight level too
+        // TODO: Returns skylight level, needs option for blocklight level too
         return world.b(EnumSkyBlock.a, x, y, z);
     }
 

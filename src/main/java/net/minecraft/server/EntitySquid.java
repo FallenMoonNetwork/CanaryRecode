@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
+
 import net.canarymod.api.entity.living.animal.CanarySquid;
+
 
 public class EntitySquid extends EntityWaterMob {
 

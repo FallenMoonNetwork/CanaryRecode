@@ -1,6 +1,8 @@
 package net.canarymod.api.entity.throwable;
 
+
 import net.minecraft.server.EntitySnowball;
+
 
 /**
  * Snowball wrapper implementation

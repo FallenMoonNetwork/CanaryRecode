@@ -4,6 +4,7 @@ package net.canarymod.api.potion;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.entity.living.EntityLiving;
 
+
 /**
  * PotionEffect wrapper implementation
  * 
