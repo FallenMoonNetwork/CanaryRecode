@@ -289,7 +289,6 @@ public class CanaryEntityFactory implements EntityFactory {
 
     @Override
     public Entity newEntity(EntityType type, Location location) {
-        Canary.println(location.toString());
         if (type != null && location != null) {
             Entity toRet = newEntity(type, location.getWorld());
 
