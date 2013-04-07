@@ -6,6 +6,9 @@ import net.canarymod.api.entity.Entity;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryWorld;
+import net.minecraft.server.BlockDispenser;
+import net.minecraft.server.BlockSourceImpl;
+import net.minecraft.server.IBehaviorDispenseItem;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityDispenser;
 
@@ -33,7 +36,7 @@ public class CanaryDispenser extends CanaryContainerBlock implements Dispenser {
      */
     @Override
     public Entity activate() {
-        return dispense(null);
+        return dispense(null, -1);
     }
 
     /**
@@ -44,16 +47,25 @@ public class CanaryDispenser extends CanaryContainerBlock implements Dispenser {
         Item stack = getSlot(slot);
 
         if (stack != null) {
-            return dispense(((CanaryItem) stack).getHandle());
+            return dispense(((CanaryItem) stack).getHandle(), slot);
         } else {
             ((CanaryWorld) getWorld()).getHandle().e(1001, this.getX(), this.getY(), this.getZ(), 0);
         }
         return null;
     }
 
-    private Entity dispense(ItemStack item) {
-        // Um... hmmmm...
-        return null;
+    private Entity dispense(ItemStack item, int slot) {
+        if (item != null) {
+            BlockSourceImpl blocksourceimpl = new BlockSourceImpl(((CanaryWorld) getWorld()).getHandle(), getX(), getY(), getZ());
+            IBehaviorDispenseItem ibehaviordispenseitem = (IBehaviorDispenseItem) BlockDispenser.a.a(item.b());
+            if (ibehaviordispenseitem != IBehaviorDispenseItem.a) {
+                ItemStack itemstack1 = ibehaviordispenseitem.a(blocksourceimpl, item);
+                if (slot != -1) {
+                    getTileEntity().a(slot, itemstack1.a == 0 ? null : itemstack1);
+                }
+            }
+        }
+        return null; // No way to get the entity with the behavior classes as is without major refactoring of native code...
     }
 
     /**
