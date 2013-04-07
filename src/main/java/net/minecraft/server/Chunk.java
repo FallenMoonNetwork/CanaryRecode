@@ -391,21 +391,21 @@ public class Chunk {
 
                 int portalId = BlockType.Portal.getId();
 
-                if (canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ).getTypeID() == portalId) {
+                if (canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ).getTypeId() == portalId) {
                     // These will be equal 1 if the portal is defined on their axis and 0 if not.
-                    int portalXOffset = (canaryChunk.getDimension().getBlockAt(portalPointX - 1, portalPointY, portalPointZ).getTypeID() == portalId
-                            || canaryChunk.getDimension().getBlockAt(portalPointX + 1, portalPointY, portalPointZ).getTypeID() == portalId) ? 1 : 0;
-                    int portalZOffset = (canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ - 1).getTypeID() == portalId
-                            || canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ + 1).getTypeID() == portalId) ? 1 : 0;
+                    int portalXOffset = (canaryChunk.getDimension().getBlockAt(portalPointX - 1, portalPointY, portalPointZ).getTypeId() == portalId
+                            || canaryChunk.getDimension().getBlockAt(portalPointX + 1, portalPointY, portalPointZ).getTypeId() == portalId) ? 1 : 0;
+                    int portalZOffset = (canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ - 1).getTypeId() == portalId
+                            || canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ + 1).getTypeId() == portalId) ? 1 : 0;
 
                     // If the portal is either x aligned or z aligned but not both (has neighbor portal in x or z plane but not both)
                     if (portalXOffset != portalZOffset) {
                         // Get the edge of the portal.
-                        int portalX = portalPointX - ((canaryChunk.getDimension().getBlockAt(portalPointX - 1, portalPointY, portalPointZ).getTypeID() == portalId) ? 1 : 0);
-                        int portalZ = portalPointZ - ((canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ - 1).getTypeID() == portalId) ? 1 : 0);
+                        int portalX = portalPointX - ((canaryChunk.getDimension().getBlockAt(portalPointX - 1, portalPointY, portalPointZ).getTypeId() == portalId) ? 1 : 0);
+                        int portalZ = portalPointZ - ((canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ - 1).getTypeId() == portalId) ? 1 : 0);
                         int portalY = i1;
 
-                        while (canaryChunk.getDimension().getBlockAt(portalX, ++portalY, portalZ).getTypeID() == portalId) {
+                        while (canaryChunk.getDimension().getBlockAt(portalX, ++portalY, portalZ).getTypeId() == portalId) {
                             ;
                         }
                         portalY -= 1;
@@ -416,7 +416,7 @@ public class Chunk {
                         for (int i9001 = 0; i9001 < 3 && completePortal; i9001 += 1) {
                             for (int i9002 = 0; i9002 < 2 && completePortal; i9002 += 1) {
                                 portalBlocks[i9001][i9002] = (CanaryBlock) canaryChunk.getDimension().getBlockAt(portalX + i9002 * portalXOffset, portalY - i9001, portalZ + i9002 * portalZOffset);
-                                if (portalBlocks[i9001][i9002].getTypeID() != portalId) {
+                                if (portalBlocks[i9001][i9002].getTypeId() != portalId) {
                                     completePortal = false;
                                 }
                             }

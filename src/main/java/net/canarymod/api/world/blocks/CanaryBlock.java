@@ -24,12 +24,12 @@ public class CanaryBlock implements Block {
     }
 
     @Override
-    public short getTypeID() {
+    public short getTypeId() {
         return type;
     }
 
     @Override
-    public void setTypeID(short type) {
+    public void setTypeId(short type) {
         this.type = type;
 
     }

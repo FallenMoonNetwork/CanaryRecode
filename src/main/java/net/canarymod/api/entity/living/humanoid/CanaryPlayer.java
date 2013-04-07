@@ -536,7 +536,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public float damageVsBlock(Block block) {
-        return ((EntityPlayerMP) entity).bK.a(net.minecraft.server.Block.r[block.getTypeID()]);
+        return ((EntityPlayerMP) entity).bK.a(net.minecraft.server.Block.r[block.getTypeId()]);
     }
 
     @Override
