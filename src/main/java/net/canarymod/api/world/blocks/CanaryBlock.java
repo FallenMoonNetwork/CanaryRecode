@@ -57,12 +57,12 @@ public class CanaryBlock implements Block {
     }
 
     @Override
-    public World getDimension() {
+    public World getWorld() {
         return this.dimension;
     }
 
     @Override
-    public void setDimension(World dimension) {
+    public void setWorld(World dimension) {
         this.dimension = dimension;
     }
 
@@ -152,7 +152,7 @@ public class CanaryBlock implements Block {
         if (this.z != other.getZ()) {
             return false;
         }
-        if (!this.getDimension().equals(other.getDimension())) {
+        if (!this.getWorld().equals(other.getWorld())) {
             return false;
         }
         return true;

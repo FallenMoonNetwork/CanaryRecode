@@ -123,8 +123,8 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
     }
 
     @Override
-    public Chest getAttachedChest() {
-        Chest chest;
+    public DoubleChest getDoubleChest() {
+        DoubleChest chest;
         chest = tryAttachedChest(getBlock(), BlockFace.NORTH);
         if(chest != null) {
             return chest;
