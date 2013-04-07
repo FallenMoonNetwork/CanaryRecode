@@ -895,6 +895,15 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (chunkcoordinates != null) {
             this.a.a((double) chunkcoordinates.a, (double) chunkcoordinates.b, (double) chunkcoordinates.c, 0.0F, 0.0F, srv.getCanaryWorld().getType().getId(), srv.getCanaryWorld().getName());
         }
+
+        // CanaryMod: Dimension switch hook.
+        Location goingTo = this.simulatePortalUse(srv.q, MinecraftServer.D().getWorld(this.getCanaryWorld().getName(), srv.q));
+        CancelableHook hook = new DimensionSwitch(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
+        Canary.hooks().callHook(hook);
+        if (hook.isCanceled()) {
+            return;
+        }//
+        
         this.b.ad().a(this, srv.getCanaryWorld().getName(), srv.getCanaryWorld().getType().getId());
         this.cp = -1;
         this.cm = -1;

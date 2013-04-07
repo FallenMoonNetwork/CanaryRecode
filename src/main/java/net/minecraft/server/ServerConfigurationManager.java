@@ -21,8 +21,6 @@ import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.bansystem.Ban;
 import net.canarymod.config.Configuration;
-import net.canarymod.hook.CancelableHook;
-import net.canarymod.hook.entity.DimensionSwitch;
 import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.hook.player.PlayerRespawnHook;
 import net.canarymod.hook.player.PreConnectionHook;
@@ -441,15 +439,6 @@ public abstract class ServerConfigurationManager {
         entityplayermp.ar = i0;
         net.canarymod.api.world.WorldType type = net.canarymod.api.world.WorldType.fromId(i0);
         WorldServer worldserver1 = (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(worldName, type, true)).getHandle();
-
-        // CanaryMod: Dimension switch hook.
-        Location goingTo = entityplayermp.simulatePortalUse(i0, MinecraftServer.D().getWorld(entityplayermp.getCanaryWorld().getName(), i0));
-        CancelableHook hook = new DimensionSwitch(entityplayermp.getCanaryEntity(), entityplayermp.getCanaryEntity().getLocation(), goingTo);
-        Canary.hooks().callHook(hook);
-        if (hook.isCanceled()) {
-            entityplayermp.ar = i1; //don't forget to reset the dimension variable :p
-            return;
-        }//
 
         //Pre-load a chunk in the new world, makes spawning there a little faster
         worldserver1.b.c((int) entityplayermp.u >> 4, (int) entityplayermp.w >> 4);
