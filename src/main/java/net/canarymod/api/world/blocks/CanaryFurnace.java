@@ -7,7 +7,11 @@ import net.canarymod.api.inventory.Item;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityFurnace;
 
-
+/**
+ * Furnace wrapper implementation
+ * 
+ * @author Jason (darkdiplomat)
+ */
 public class CanaryFurnace extends CanaryContainerBlock implements Furnace {
 
     /**
@@ -18,6 +22,38 @@ public class CanaryFurnace extends CanaryContainerBlock implements Furnace {
      */
     public CanaryFurnace(TileEntityFurnace tileentity) {
         super(tileentity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public short getBurnTime() {
+        return (short) getTileEntity().a;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setBurnTime(short time) {
+        getTileEntity().a = time;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public short getCookTime() {
+        return (short) getTileEntity().c;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setCookTime(short time) {
+        getTileEntity().c = time;
     }
 
     /**

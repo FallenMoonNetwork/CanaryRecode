@@ -167,6 +167,7 @@ public class CanaryWorld implements World {
         return oei.getEntityItem();
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public ArrayList<EntityAnimal> getAnimalList() {
         ArrayList<EntityAnimal> animals = new ArrayList<EntityAnimal>();
@@ -179,6 +180,7 @@ public class CanaryWorld implements World {
         return animals;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public ArrayList<EntityMob> getMobList() {
         ArrayList<EntityMob> mobs = new ArrayList<EntityMob>();
