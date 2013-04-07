@@ -15,9 +15,7 @@ import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.living.monster.EntityMob;
-import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
-import net.canarymod.api.inventory.ItemType;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.blocks.Chest;
@@ -277,7 +275,7 @@ public class CanaryWorld implements World {
     public Player getClosestPlayer(Entity entity, int distance) {
         EntityPlayer user = world.a(((CanaryEntity) entity).getHandle(), distance);
 
-        if ((user != null) && user instanceof EntityPlayerMP) {
+        if ((user != null) && user.getCanaryEntity() instanceof Player) {
             return (Player) user.getCanaryEntity();
         }
         return null;
@@ -290,13 +288,13 @@ public class CanaryWorld implements World {
 
     @Override
     public boolean isChunkLoaded(Block block) {
-        chunkProvider.isChunkLoaded(block.getX(), block.getZ());
+        chunkProvider.isChunkLoaded(block.getX() >> 4, block.getZ() >> 4);
         return false;
     }
 
     @Override
-    public boolean isChunkLoaded(int x, int y, int z) { // TODO: remove?
-        return chunkProvider.isChunkLoaded(x, z);
+    public boolean isChunkLoaded(int x, int y, int z) {
+        return chunkProvider.isChunkLoaded(x >> 4, z >> 4);
     }
 
     @Override
@@ -563,7 +561,8 @@ public class CanaryWorld implements World {
             if (result instanceof Chest) {
                 Chest chest = (Chest) result;
 
-                if (chest.hasAttachedChest()) {// return new CanaryDoubleChest(chest); TODO
+                if (chest.hasAttachedChest()) {
+                    return chest.getDoubleChest();
                 }
             }
         }
@@ -614,22 +613,6 @@ public class CanaryWorld implements World {
             }
         }
         return null;
-    }
-
-    @Override
-    public Item createItem(ItemType itemType) {
-        return new CanaryItem(new ItemStack(itemType.getId(), 1, 0));
-    }
-
-    @Override
-    public Item createItem(ItemType itemType, int amount, int data) {
-        return new CanaryItem(new ItemStack(itemType.getId(), amount, data));
-    }
-
-    @Override
-    public Item createItem(int itemId, int amount, int data) {
-
-        return new CanaryItem(new ItemStack(itemId, amount, data));
     }
 
     @Override
