@@ -174,14 +174,7 @@ public abstract class EntityHanging extends Entity {
     }
 
     public boolean j(Entity entity) {
-        if (entity instanceof EntityPlayer) {
-            // CanaryMod: HangingEntityDestory
-            HangingEntityDestroyHook hook = new HangingEntityDestroyHook((HangingEntity) this.entity, ((EntityPlayerMP) entity).getPlayer());
-            Canary.hooks().callHook(hook);
-            return !hook.isCanceled() ? this.a(DamageSource.a((EntityPlayer) entity), 0) : false;
-            //
-        }
-        return false;
+        return entity instanceof EntityPlayer ? this.a(DamageSource.a((EntityPlayer) entity), 0) : false;
     }
 
     public boolean a(DamageSource damagesource, int i0) {
@@ -189,13 +182,24 @@ public abstract class EntityHanging extends Entity {
             return false;
         } else {
             if (!this.M && !this.q.I) {
-                this.w();
-                this.J();
                 EntityPlayer entityplayer = null;
 
                 if (damagesource.i() instanceof EntityPlayer) {
                     entityplayer = (EntityPlayer) damagesource.i();
                 }
+
+                if (entityplayer != null) {
+                    // CanaryMod: HangingEntityDestory
+                    HangingEntityDestroyHook hook = new HangingEntityDestroyHook((HangingEntity) this.entity, ((EntityPlayerMP) entityplayer).getPlayer());
+                    Canary.hooks().callHook(hook);
+                    if (hook.isCanceled()) {
+                        return false;
+                    }
+                    //
+                }
+
+                this.w();
+                this.J();
 
                 if (entityplayer != null && entityplayer.ce.d) {
                     return true;
