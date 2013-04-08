@@ -49,7 +49,7 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(ItemType type) {
-        return new CanaryItem(type.getId(), 0);
+        return type == null ? null : new CanaryItem(type.getId(), 0);
     }
 
     /**
@@ -57,7 +57,7 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(ItemType type, int damage) {
-        return new CanaryItem(type.getId(), damage);
+        return type == null ? null : new CanaryItem(type.getId(), damage);
     }
 
     /**
@@ -65,6 +65,8 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(ItemType type, int damage, int stackSize) {
+        if(type == null) return null;
+        
         CanaryItem item = new CanaryItem(type.getId(), damage);
 
         item.setAmount(stackSize);
@@ -76,6 +78,8 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(Item item) {
+        if(item == null) return null;
+        
         CanaryItem item2 = new CanaryItem(item.getId(), item.getDamage());
 
         item2.setAmount(item.getAmount());
