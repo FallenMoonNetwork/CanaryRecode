@@ -18,6 +18,8 @@ import net.canarymod.api.inventory.recipes.ShapedRecipeHelper;
 import net.canarymod.api.inventory.recipes.SmeltRecipe;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.WorldManager;
+import net.canarymod.api.world.blocks.CanaryCommandBlock;
+import net.canarymod.api.world.blocks.CommandBlock;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.ConsoleCommandHook;
 import net.minecraft.server.CraftingManager;
@@ -135,6 +137,23 @@ public class CanaryServer implements Server {
         }
         if (!Canary.commands().parseCommand(player, command.split(" ")[0], command.split(" "))) {
             return server.E().a(((CanaryPlayer) player).getHandle(), command) > 0; // Vanilla Commands passed
+        }
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean consoleCommand(String command, CommandBlock cmdBlock) {
+        ConsoleCommandHook hook = new ConsoleCommandHook(cmdBlock, command);
+
+        Canary.hooks().callHook(hook);
+        if (hook.isCanceled()) {
+            return true;
+        }
+        if (!Canary.commands().parseCommand(cmdBlock, command.split(" ")[0], command.split(" "))) {
+            return server.E().a(((CanaryCommandBlock) cmdBlock).getTileEntity(), command) > 0; // Vanilla Commands passed
         }
         return true;
     }
