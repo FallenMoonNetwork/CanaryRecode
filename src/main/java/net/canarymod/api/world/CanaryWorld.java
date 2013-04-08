@@ -21,6 +21,7 @@ import net.canarymod.api.world.blocks.Chest;
 import net.canarymod.api.world.blocks.ComplexBlock;
 import net.canarymod.api.world.effects.AuxiliarySoundEffect;
 import net.canarymod.api.world.effects.Particle;
+import net.canarymod.api.world.effects.SoundEffect;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.minecraft.server.EntityLightningBolt;
@@ -405,6 +406,11 @@ public class CanaryWorld implements World {
     @Override
     public void spawnParticle(Particle particle) {
         world.a(particle.type.getMcName(), particle.x, particle.y, particle.z, particle.velocityX, particle.velocityY, particle.velocityZ);
+    }
+
+    @Override
+    public void playSound(SoundEffect effect) {
+        world.a(effect.x, effect.y, effect.z, effect.type.getMcName(), effect.volume, effect.pitch);
     }
 
     @Override
