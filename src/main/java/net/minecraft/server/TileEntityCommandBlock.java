@@ -34,7 +34,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
 
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
-                    if (Canary.getServer().consoleCommand(this.b)) { // Redirect for Canary Console Commands too
+                    if (Canary.getServer().consoleCommand(this.b, this.getCanaryCommandBlock())) { // Redirect for Canary Console Commands too
                         return 1;
                     }
                     // return icommandmanager.a(this, this.b);
