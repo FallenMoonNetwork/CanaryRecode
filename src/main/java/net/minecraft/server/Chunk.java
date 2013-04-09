@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import net.canarymod.Canary;
+import net.canarymod.PortalReconstructJob;
 import net.canarymod.api.world.CanaryChunk;
 import net.canarymod.api.world.blocks.BlockType;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.PortalDestroyHook;
+import net.canarymod.tasks.ServerTaskManager;
 
 
 public class Chunk {
@@ -430,8 +432,7 @@ public class Chunk {
                                 // in that case we need to reconstruct the portal's frame to make the portal valid.
                                 // Problem is we don't want to reconstruct it right away because more blocks might be deleted (for example on explosion).
                                 // In order to avoid spamming the hook for each destroyed block, I'm queuing the reconstruction of the portal instead.
-                                // FIXME FIXME FIXME: Need a task queue
-                                // new PortalReconstructJob(getWorld(), portalX, portalY, portalZ, (portalXOffset == 1));
+                                ServerTaskManager.addTask(new PortalReconstructJob(this.e.getCanaryWorld(), portalX, portalY, portalZ, (portalXOffset == 1)));
                             }
                         }
                     }

@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
@@ -21,6 +20,7 @@ import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.CanaryWorldManager;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.WorldConfiguration;
+import net.canarymod.tasks.ServerTaskManager;
 
 
 public abstract class MinecraftServer implements ICommandSender, Runnable, IPlayerUsage {
@@ -290,6 +290,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 long i0 = System.currentTimeMillis();
 
                 for (long i1 = 0L; this.t; this.P = true) {
+                    ServerTaskManager.runTasks(); // CanaryMod: Run tasks
                     long i2 = System.currentTimeMillis();
                     long i3 = i2 - i0;
 
