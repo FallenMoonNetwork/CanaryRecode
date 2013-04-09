@@ -5,6 +5,7 @@ import net.canarymod.api.CanaryServer;
 import net.canarymod.api.factory.CanaryFactory;
 import net.canarymod.api.factory.Factory;
 import net.canarymod.bansystem.BanManager;
+import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.commandsys.CommandList;
 import net.canarymod.commandsys.CommandManager;
 import net.canarymod.config.Configuration;
@@ -70,7 +71,11 @@ public class CanaryMod extends Canary {
     }
 
     public void initCommands() {
-        this.commandManager.registerAll(CommandList.class);
+        try {
+            this.commandManager.registerCommands(new CommandList(), Canary.getServer(), false);
+        } catch (CommandDependencyException e) {
+            Canary.logStackTrace(e.getMessage(), e);
+        }
     }
 
     @Override

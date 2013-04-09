@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.CanaryPacket;
@@ -808,7 +809,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         CanaryCommand command = Canary.commands().getCommand(s0.contains(" ") ? s0.split(" ")[0] : s0);
 
         if (command != null) {
-            return getPlayer().hasPermission(command.permissionNode);
+            return command.canUse(getPlayer());
         }
         // Might be vanilla, so just assume
         return getPlayer().hasPermission("canary.commands.vanilla.".concat(s0.contains(" ") ? s0.split(" ")[0] : s0));
@@ -919,7 +920,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (hook.isCanceled()) {
             return;
         }//
-        
+
         this.b.ad().a(this, srv.getCanaryWorld().getName(), srv.getCanaryWorld().getType().getId());
         this.cp = -1;
         this.cm = -1;
