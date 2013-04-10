@@ -52,8 +52,8 @@ public class CanaryEntityTracker implements EntityTracker {
     }
 
     @Override
-    public void sendPacketToTrackedPlayer(Entity entity, Packet packet) {
-        tracker.a(((CanaryEntity) entity).getHandle(), ((CanaryPacket) packet).getPacket());
+    public void sendPacketToTrackedPlayer(Player player, Packet packet) {
+        tracker.a(((CanaryEntity) player).getHandle(), ((CanaryPacket) packet).getPacket());
     }
 
     @Override

@@ -23,7 +23,7 @@ public class CanaryDamageSource implements DamageSource {
     }
 
     @Override
-    public String getNotchianName() {
+    public String getNativeName() {
         return handle.o;
     }
 
