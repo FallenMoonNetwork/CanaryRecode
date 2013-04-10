@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
+
+import net.canarymod.Canary;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.WorldConfiguration;
 
@@ -249,8 +251,10 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     public void am() {
         while (!this.k.isEmpty()) {
             ServerCommand servercommand = (ServerCommand) this.k.remove(0);
-
-            this.E().a(servercommand.b, servercommand.a);
+            //CanaryMod intercept command queue for our own commands
+            if(!Canary.getServer().consoleCommand(servercommand.a)) {
+                this.E().a(servercommand.b, servercommand.a);
+            }
         }
     }
 

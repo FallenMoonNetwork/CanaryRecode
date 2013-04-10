@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
@@ -413,6 +414,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.a.b();
     }
 
+    //CanaryMod: ticks world
     public void r() {
         this.a.a("levels");
 

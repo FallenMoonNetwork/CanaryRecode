@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
 import net.canarymod.Canary;
 import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -20,6 +21,7 @@ import net.canarymod.api.world.World;
 import net.canarymod.api.world.WorldManager;
 import net.canarymod.api.world.blocks.CanaryCommandBlock;
 import net.canarymod.api.world.blocks.CommandBlock;
+import net.canarymod.commandsys.CanaryCommand;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.ConsoleCommandHook;
 import net.minecraft.server.CraftingManager;
@@ -30,7 +32,7 @@ import net.minecraft.server.MinecraftServer;
 
 /**
  * Main entry point of the software
- * 
+ *
  * @author Jos Kuijpers
  * @author Chris (damagefilter)
  * @author Jason (darkdiplomat)
@@ -43,7 +45,7 @@ public class CanaryServer implements Server {
 
     /**
      * Create a new Server Wrapper
-     * 
+     *
      * @param server
      */
     public CanaryServer(MinecraftServer server) {
@@ -118,10 +120,13 @@ public class CanaryServer implements Server {
         if (hook.isCanceled()) {
             return true;
         }
-        if (!Canary.commands().parseCommand(this, command.split(" ")[0], command.split(" "))) {
-            return server.E().a(server, command) > 0; // Vanilla Commands passed
+        String[] split = command.split(" ");
+        CanaryCommand cmd = Canary.commands().getCommand(split[0]);
+        if(cmd != null) {
+            cmd.parseCommand(this, split);
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -135,10 +140,15 @@ public class CanaryServer implements Server {
         if (hook.isCanceled()) {
             return true;
         }
-        if (!Canary.commands().parseCommand(player, command.split(" ")[0], command.split(" "))) {
+        String[] split = command.split(" ");
+        CanaryCommand cmd = Canary.commands().getCommand(split[0]);
+        if(cmd != null) {
+            cmd.parseCommand(player, split);
+            return true;
+        }
+        else {
             return server.E().a(((CanaryPlayer) player).getHandle(), command) > 0; // Vanilla Commands passed
         }
-        return true;
     }
 
     /**
