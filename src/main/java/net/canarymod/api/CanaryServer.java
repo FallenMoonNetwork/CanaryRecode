@@ -21,7 +21,7 @@ import net.canarymod.api.world.World;
 import net.canarymod.api.world.WorldManager;
 import net.canarymod.api.world.blocks.CanaryCommandBlock;
 import net.canarymod.api.world.blocks.CommandBlock;
-import net.canarymod.commandsys.CanaryCommand;
+import net.canarymod.chat.TextFormat;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.ConsoleCommandHook;
 import net.minecraft.server.CraftingManager;
@@ -121,12 +121,10 @@ public class CanaryServer implements Server {
             return true;
         }
         String[] split = command.split(" ");
-        CanaryCommand cmd = Canary.commands().getCommand(split[0]);
-        if(cmd != null) {
-            cmd.parseCommand(this, split);
-            return true;
+        if (!Canary.commands().parseCommand(this, split[0], split)) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -141,14 +139,10 @@ public class CanaryServer implements Server {
             return true;
         }
         String[] split = command.split(" ");
-        CanaryCommand cmd = Canary.commands().getCommand(split[0]);
-        if(cmd != null) {
-            cmd.parseCommand(player, split);
-            return true;
-        }
-        else {
+        if(!Canary.commands().parseCommand(player, split[0], split)) {
             return server.E().a(((CanaryPlayer) player).getHandle(), command) > 0; // Vanilla Commands passed
         }
+        return true;
     }
 
     /**
@@ -300,7 +294,7 @@ public class CanaryServer implements Server {
 
     @Override
     public void message(String message) {
-        System.out.println(message);
+        System.out.println(TextFormat.removeFormatting(message));
     }
 
     @Override

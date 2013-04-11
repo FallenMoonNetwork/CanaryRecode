@@ -25,7 +25,6 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.canarymod.chat.Colors;
 import net.canarymod.chat.TextFormat;
-import net.canarymod.commandsys.CanaryCommand;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
@@ -304,16 +303,14 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 return true;
             } // someone wants us not to execute the command. So lets do them the favor
 
-            CanaryCommand com = Canary.commands().getCommand(commandName);
-
-            if (com != null) {
-                return com.parseCommand(this, command);
-            } else {
+            if(!Canary.commands().parseCommand(this, commandName, command)) {
                 if (Configuration.getServerConfig().getShowUnkownCommand()) {
                     notice("Unknown command");
                 }
                 return false;
             }
+            return true;
+
         } catch (Throwable ex) {
             Canary.logStackTrace("Exception in command handler: ", ex);
             if (isAdmin()) {
@@ -520,6 +517,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void setColor(String color) {
         prefix = color;
+        Canary.usersAndGroups().addOrUpdatePlayerData(this);
     }
 
     @Override
