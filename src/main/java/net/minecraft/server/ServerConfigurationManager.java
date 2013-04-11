@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
 import net.canarymod.Canary;
 import net.canarymod.Translator;
 import net.canarymod.api.CanaryConfigurationManager;
@@ -191,7 +192,7 @@ public abstract class ServerConfigurationManager {
     }
 
     // CanaryMod: get player data for name
-    public NBTTagCompound getPlayerDatByName(String name) {
+    public static NBTTagCompound getPlayerDatByName(String name) {
         ISaveHandler handler = ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().K();
 
         if (handler instanceof SaveHandler) {

@@ -17,6 +17,7 @@ import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.recipes.CraftingRecipe;
 import net.canarymod.api.inventory.recipes.ShapedRecipeHelper;
 import net.canarymod.api.inventory.recipes.SmeltRecipe;
+import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.WorldManager;
 import net.canarymod.api.world.blocks.CanaryCommandBlock;
@@ -28,6 +29,7 @@ import net.minecraft.server.CraftingManager;
 import net.minecraft.server.FurnaceRecipes;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.ServerConfigurationManager;
 
 
 /**
@@ -193,9 +195,7 @@ public class CanaryServer implements Server {
 
         name = name.toLowerCase();
 
-        for (Player player : server.getConfigurationManager().getAllPlayers()) {
-            CanaryPlayer cPlayer = (CanaryPlayer) player;
-
+        for (Player cPlayer : server.getConfigurationManager().getAllPlayers()) {
             if (cPlayer.getName().toLowerCase().equals(name)) {
                 // Perfect match found
                 lastPlayer = cPlayer;
@@ -212,6 +212,12 @@ public class CanaryServer implements Server {
         }
 
         return lastPlayer;
+    }
+
+    @Override
+    public OfflinePlayer getOfflinePlayer(String player) {
+        CanaryCompoundTag comp = new CanaryCompoundTag(ServerConfigurationManager.getPlayerDatByName(player));
+        return new CanaryOfflinePlayer(player, comp);
     }
 
     @Override
