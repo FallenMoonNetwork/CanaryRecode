@@ -109,7 +109,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 notice("You are currently muted!");
             } else {
                 String format = "<%prefix%name" + Colors.WHITE + "> %message";
-                String prefix = getColor();
+                String prefix = getPrefix();
 
                 // This is a copy of the real player list already, no need to copy again (re: Collections.copy())
                 ArrayList<Player> receivers = Canary.getServer().getPlayerList();
@@ -504,7 +504,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
-    public String getColor() {
+    public String getPrefix() {
         if (prefix != null) {
             return Colors.MARKER + prefix;
         } else if (group.getPrefix() != null) {
