@@ -56,7 +56,7 @@ public class ItemSkull extends Item {
                 return false;
             } else {
                 // Create and call
-                CanaryBlock placed = new CanaryBlock((short) 144, (short) 0, i0, i1, i2, world.getCanaryWorld());
+                CanaryBlock placed = new CanaryBlock((short) 144, (short) itemstack.getCanaryItem().getDamage(), i0, i1, i2, world.getCanaryWorld());
                 BlockPlaceHook hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
 
                 Canary.hooks().callHook(hook);
