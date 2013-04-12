@@ -426,7 +426,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void giveItem(Item item) {
-        ((EntityPlayer) entity).getPlayerInventory().addItem(item.getId(), item.getAmount());
+        ((EntityPlayer) entity).getPlayerInventory().addItem(item);
         ((EntityPlayer) entity).getPlayerInventory().update();
     }
 
