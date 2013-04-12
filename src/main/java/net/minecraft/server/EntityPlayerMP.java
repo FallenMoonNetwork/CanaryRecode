@@ -25,7 +25,6 @@ import net.canarymod.api.world.blocks.CanaryDoubleChest;
 import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.canarymod.api.world.position.Location;
-import net.canarymod.commandsys.CanaryCommand;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DimensionSwitch;
@@ -806,10 +805,9 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (s0.startsWith("/")) {
             s0 = s0.substring(1);
         }
-        CanaryCommand command = Canary.commands().getCommand(s0.contains(" ") ? s0.split(" ")[0] : s0);
-
-        if (command != null) {
-            return command.canUse(getPlayer());
+        String[] split = s0.split(" ");
+        if(Canary.commands().hasCommand(split[0])) {
+            return Canary.commands().canUseCommand(getPlayer(), split[0]);
         }
         // Might be vanilla, so just assume
         return getPlayer().hasPermission("canary.commands.vanilla.".concat(s0.contains(" ") ? s0.split(" ")[0] : s0));
