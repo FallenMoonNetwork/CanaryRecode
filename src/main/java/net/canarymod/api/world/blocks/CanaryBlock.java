@@ -78,6 +78,7 @@ public class CanaryBlock implements Block {
 
     @Override
     public void update() {
+        dimension.setBlock(this);
         dimension.markBlockNeedsUpdate(x, y, z);
     }
 
