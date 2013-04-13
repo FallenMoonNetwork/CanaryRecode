@@ -108,13 +108,10 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             if (isMuted()) {
                 notice("You are currently muted!");
             } else {
-                String format = "<%prefix%name" + Colors.WHITE + "> %message";
-                String prefix = getPrefix();
-
                 // This is a copy of the real player list already, no need to copy again (re: Collections.copy())
                 ArrayList<Player> receivers = Canary.getServer().getPlayerList();
 
-                ChatHook hook = new ChatHook(this, prefix, message, format, receivers);
+                ChatHook hook = new ChatHook(this, getPrefix(), message, "<%prefix%name" + Colors.WHITE + "> %message", receivers);
 
                 Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
@@ -506,6 +503,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public String getPrefix() {
         if (prefix != null) {
+            if(prefix.contains(Colors.MARKER)) {
+                return prefix;
+            }
             return Colors.MARKER + prefix;
         } else if (group.getPrefix() != null) {
             return Colors.MARKER + group.getPrefix();

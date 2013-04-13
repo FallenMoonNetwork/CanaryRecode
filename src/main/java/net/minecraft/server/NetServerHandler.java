@@ -6,10 +6,11 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
+
+import net.canarymod.AutocompleteUtils;
 import net.canarymod.Canary;
 import net.canarymod.LineTracer;
 import net.canarymod.ToolBox;
@@ -872,7 +873,8 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet203AutoComplete packet203autocomplete) {
-        StringBuilder stringbuilder = new StringBuilder();
+        //CanaryMod start replace with our logic instead
+        /*StringBuilder stringbuilder = new StringBuilder();
 
         String s0;
 
@@ -881,9 +883,11 @@ public class NetServerHandler extends NetHandler {
             if (stringbuilder.length() > 0) {
                 stringbuilder.append("\u0000");
             }
-        }
+        }*/
 
-        this.c.a.b(new Packet203AutoComplete(stringbuilder.toString()));
+        StringBuilder result = AutocompleteUtils.autoComplete(packet203autocomplete.d(), c.getPlayer());
+        //CanaryMod end
+        this.c.a.b(new Packet203AutoComplete(result.toString()));
     }
 
     @Override
