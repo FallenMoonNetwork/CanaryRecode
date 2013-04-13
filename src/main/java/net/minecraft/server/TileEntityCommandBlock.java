@@ -3,6 +3,7 @@ package net.minecraft.server;
 
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryCommandBlock;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.CommandBlockCommandHook;
 
 
@@ -33,7 +34,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
                 CommandBlockCommandHook hook = new CommandBlockCommandHook(getCanaryCommandBlock(), this.b.split(" "));
 
                 Canary.hooks().callHook(hook);
-                if (!hook.isCanceled()) {
+                if (!hook.isCanceled() && Configuration.getServerConfig().commandBlockCanUseCommand(this.b)) {
                     if (Canary.getServer().consoleCommand(this.b, this.getCanaryCommandBlock())) { // Redirect for Canary Console Commands too
                         return 1;
                     }
@@ -45,6 +46,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         }
     }
 
+    @Override
     public String c_() {
         return this.c;
     }
@@ -53,16 +55,20 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         this.c = s0;
     }
 
+    @Override
     public void a(String s0) {}
 
+    @Override
     public boolean a(int i0, String s0) {
         return i0 <= 2;
     }
 
+    @Override
     public String a(String s0, Object... aobject) {
         return s0;
     }
 
+    @Override
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
         nbttagcompound.a("Command", this.b);
@@ -70,6 +76,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         nbttagcompound.a("CustomName", this.c);
     }
 
+    @Override
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
         this.b = nbttagcompound.i("Command");
@@ -79,10 +86,12 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         }
     }
 
+    @Override
     public ChunkCoordinates b() {
         return new ChunkCoordinates(this.l, this.m, this.n);
     }
 
+    @Override
     public Packet m() {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
 
