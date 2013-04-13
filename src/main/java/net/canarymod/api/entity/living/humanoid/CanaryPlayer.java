@@ -368,7 +368,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean canBuild() {
-        return hasPermission("canary.world.build") || hasPermission("canary.canilla.op") || isAdmin();
+        return hasPermission("canary.world.build") || hasPermission("canary.vanilla.op") || isAdmin();
     }
 
     @Override
@@ -383,7 +383,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void setCanIgnoreRestrictions(boolean canIgnore) {
-        permissions.addPermission("canary.player.ignoreRestrictions", canIgnore, -1);
+        permissions.addPermission("canary.super.ignoreRestrictions", canIgnore, -1);
     }
 
     @Override

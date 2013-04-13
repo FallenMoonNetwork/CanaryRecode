@@ -2,6 +2,7 @@ package net.canarymod.api.world;
 
 
 import java.util.ArrayList;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
@@ -111,12 +112,12 @@ public class CanaryWorld implements World {
     }
 
     @Override
-    public boolean canEnterWorld(Player player) {
+    public boolean canEnterWorld(Player player) { //TODO: this is not used
         return player.hasPermission("canary.world.traveling." + name + ".enter") && isEnabled();
     }
 
     @Override
-    public boolean canLeaveWorld(Player player) {
+    public boolean canLeaveWorld(Player player) { //TODO: This is not used
         return player.hasPermission("canary.world.traveling." + name + ".leave");
     }
 
