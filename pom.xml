@@ -3,7 +3,7 @@
   <groupId>net.canarymod</groupId>
   <artifactId>CanaryMod</artifactId>
   <packaging>jar</packaging>
-  <version>0.5</version>
+  <version>0.6-SNAPSHOT</version>
   <name>CanaryMod</name>
   <url>http://www.canarymod.net</url>
   <properties>
@@ -139,7 +139,7 @@
   		<dependency>
   			<groupId>net.canarymod</groupId>
   			<artifactId>CanaryLib</artifactId>
-  			<version>0.5-SNAPSHOT</version>
+  			<version>0.6-SNAPSHOT</version>
   		</dependency>
   	</dependencies>
   </dependencyManagement>
