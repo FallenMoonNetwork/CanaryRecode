@@ -5,6 +5,7 @@ import net.canarymod.api.CanaryServer;
 import net.canarymod.api.factory.CanaryFactory;
 import net.canarymod.api.factory.Factory;
 import net.canarymod.bansystem.BanManager;
+import net.canarymod.channels.ChannelManager;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.commandsys.CommandList;
 import net.canarymod.commandsys.CommandManager;
@@ -47,6 +48,7 @@ public class CanaryMod extends Canary {
         this.banManager = new BanManager();
         this.whitelist = new WhitelistProvider();
         this.factory = (Factory) new CanaryFactory();
+        this.channelManager = new ChannelManager();
         // Initialize the plugin loader and scan for plugins
         this.loader = new PluginLoader();
         this.loader.scanPlugins();
