@@ -1017,13 +1017,41 @@ public class NetServerHandler extends NetHandler {
         }
 
         // CanaryMod: Custom Payload implementation!
-        try {
-            Canary.channels().sendCustomPayloadToListeners(packet250custompayload.a, packet250custompayload.c, this.c.getPlayer());
-        } catch (Exception ex) {
+        if ("REGISTER".equals(packet250custompayload.a)) {
             try {
-                throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());
-            } catch (CustomPayloadChannelException ex1) {
-                Canary.logStackTrace(ex1.getMessage(), ex);
+                datainputstream = new DataInputStream(new ByteArrayInputStream(packet250custompayload.c));
+                String channel = datainputstream.readUTF();
+                Canary.channels().registerClient(channel, this.serverHandler);
+                Canary.logInfo(String.format("Player '%s' registered Custom Payload on channel '%s'", this.c.getPlayer().getName(), channel));
+            } catch (Exception ex) {
+                try {
+                    throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());
+                } catch (CustomPayloadChannelException ex1) {
+                    Canary.logStackTrace(ex1.getMessage(), ex);
+                }
+            }
+        } else if ("UNREGISTER".equals(packet250custompayload.a)) {
+            try {
+                datainputstream = new DataInputStream(new ByteArrayInputStream(packet250custompayload.c));
+                String channel = datainputstream.readUTF();
+                Canary.channels().unregisterClient(channel, this.serverHandler);
+                Canary.logInfo(String.format("Player '%s' unregistered Custom Payload on channel '%s'", this.c.getPlayer().getName(), channel));
+            } catch (Exception ex) {
+                try {
+                    throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());
+                } catch (CustomPayloadChannelException ex1) {
+                    Canary.logStackTrace(ex1.getMessage(), ex);
+                }
+            }
+        } else {
+            try {
+                Canary.channels().sendCustomPayloadToListeners(packet250custompayload.a, packet250custompayload.c, this.c.getPlayer());
+            } catch (Exception ex) {
+                try {
+                    throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());
+                } catch (CustomPayloadChannelException ex1) {
+                    Canary.logStackTrace(ex1.getMessage(), ex);
+                }
             }
         }// CanaryMod: End
 
