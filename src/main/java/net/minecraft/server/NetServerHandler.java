@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
-
 import net.canarymod.AutocompleteUtils;
 import net.canarymod.Canary;
 import net.canarymod.LineTracer;
@@ -19,6 +18,7 @@ import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.position.Location;
+import net.canarymod.channels.CustomPayloadChannelException;
 import net.canarymod.hook.player.BlockLeftClickHook;
 import net.canarymod.hook.player.BlockRightClickHook;
 import net.canarymod.hook.player.DisconnectionHook;
@@ -1015,6 +1015,19 @@ public class NetServerHandler extends NetHandler {
                 }
             }
         }
+
+        // CanaryMod: Custom Payload implementation!
+        try {
+            Canary.channels().sendCustomPayloadToListeners(packet250custompayload.a, packet250custompayload.c, this.c.getPlayer());
+        } catch (Exception ex) {
+            try {
+                throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());
+            } catch (CustomPayloadChannelException ex1) {
+                Canary.logStackTrace(ex1.getMessage(), ex);
+            }
+        }// CanaryMod: End
+
+
     }
 
     /**
