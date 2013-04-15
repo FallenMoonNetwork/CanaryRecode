@@ -78,7 +78,7 @@ public class CanaryWorld implements World {
         // Init nanotick size
         nanoTicks = new long[100];
 
-        chunkProvider = new CanaryChunkProviderServer(null);
+        chunkProvider = new CanaryChunkProviderServer(dimension.b);
     }
 
     @Override
