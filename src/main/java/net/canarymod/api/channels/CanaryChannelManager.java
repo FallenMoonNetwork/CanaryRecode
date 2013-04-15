@@ -32,7 +32,7 @@ public class CanaryChannelManager extends ChannelManager {
             if (channel == null || channel.trim().equals("") || channel.equalsIgnoreCase("REGISTER") || channel.equalsIgnoreCase("UNREGISTER")) {
                 throw new CustomPayloadChannelException(String.format("Invalid Custom Payload: Invalid channel name of '%s'", channel));
             }
-            if (channel.length() > 16) {
+            if (channel.length() > 20) {
                 throw new CustomPayloadChannelException(String.format("Invalid Custom Payload: Channel Name too long '%s'", channel));
             }
             if (player == null) {
@@ -62,7 +62,7 @@ public class CanaryChannelManager extends ChannelManager {
             if (channel == null || channel.trim().equals("") || channel.equalsIgnoreCase("REGISTER") || channel.equalsIgnoreCase("UNREGISTER")) {
                 throw new CustomPayloadChannelException(String.format("Invalid Custom Payload: Invalid channel name of '%s'", channel));
             }
-            if (channel.length() > 16) {
+            if (channel.length() > 20) {
                 throw new CustomPayloadChannelException(String.format("Invalid Custom Payload: Channel Name too long '%s'", channel));
             }
             if (clients.containsKey(channel)) {
@@ -74,6 +74,6 @@ public class CanaryChannelManager extends ChannelManager {
         } catch (CustomPayloadChannelException ex) {
             Canary.logStackTrace(ex.getMessage(), ex);
         }
-        return false;
+        return toRet;
     }
 }

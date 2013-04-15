@@ -4,6 +4,8 @@ package net.minecraft.server;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -1020,7 +1022,20 @@ public class NetServerHandler extends NetHandler {
         if ("REGISTER".equals(packet250custompayload.a)) {
             try {
                 datainputstream = new DataInputStream(new ByteArrayInputStream(packet250custompayload.c));
-                String channel = datainputstream.readUTF();
+
+                StringBuilder sb = new StringBuilder();
+                byte[] buff;
+                for (int i = 0; i < 20; i++) {
+                    buff = new byte[2];
+                    datainputstream.read(buff);
+                    if (buff[0] == 0 || buff[1] == 0) {
+                        break;
+                    }
+                    CharBuffer cBuffer = ByteBuffer.wrap(buff).asCharBuffer();
+                    sb.append(cBuffer.toString());
+                }
+
+                String channel = sb.toString();
                 Canary.channels().registerClient(channel, this.serverHandler);
                 Canary.logInfo(String.format("Player '%s' registered Custom Payload on channel '%s'", this.c.getPlayer().getName(), channel));
             } catch (Exception ex) {
@@ -1033,7 +1048,20 @@ public class NetServerHandler extends NetHandler {
         } else if ("UNREGISTER".equals(packet250custompayload.a)) {
             try {
                 datainputstream = new DataInputStream(new ByteArrayInputStream(packet250custompayload.c));
-                String channel = datainputstream.readUTF();
+
+                StringBuilder sb = new StringBuilder();
+                byte[] buff;
+                for (int i = 0; i < 20; i++) {
+                    buff = new byte[2];
+                    datainputstream.read(buff);
+                    if (buff[0] == 0 || buff[1] == 0) {
+                        break;
+                    }
+                    CharBuffer cBuffer = ByteBuffer.wrap(buff).asCharBuffer();
+                    sb.append(cBuffer.toString());
+                }
+
+                String channel = sb.toString();
                 Canary.channels().unregisterClient(channel, this.serverHandler);
                 Canary.logInfo(String.format("Player '%s' unregistered Custom Payload on channel '%s'", this.c.getPlayer().getName(), channel));
             } catch (Exception ex) {
