@@ -4,8 +4,6 @@ package net.minecraft.server;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -1031,8 +1029,7 @@ public class NetServerHandler extends NetHandler {
                     if (buff[0] == 0 || buff[1] == 0) {
                         break;
                     }
-                    CharBuffer cBuffer = ByteBuffer.wrap(buff).asCharBuffer();
-                    sb.append(cBuffer.toString());
+                    sb.append(new String(buff));
                 }
 
                 String channel = sb.toString();
@@ -1057,8 +1054,7 @@ public class NetServerHandler extends NetHandler {
                     if (buff[0] == 0 || buff[1] == 0) {
                         break;
                     }
-                    CharBuffer cBuffer = ByteBuffer.wrap(buff).asCharBuffer();
-                    sb.append(cBuffer.toString());
+                    sb.append(new String(buff));
                 }
 
                 String channel = sb.toString();
