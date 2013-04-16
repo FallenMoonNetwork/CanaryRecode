@@ -1019,20 +1019,7 @@ public class NetServerHandler extends NetHandler {
         // CanaryMod: Custom Payload implementation!
         if ("REGISTER".equals(packet250custompayload.a)) {
             try {
-                datainputstream = new DataInputStream(new ByteArrayInputStream(packet250custompayload.c));
-
-                StringBuilder sb = new StringBuilder();
-                byte[] buff;
-                for (int i = 0; i < 20; i++) {
-                    buff = new byte[2];
-                    datainputstream.read(buff);
-                    if (buff[0] == 0 || buff[1] == 0) {
-                        break;
-                    }
-                    sb.append(new String(buff));
-                }
-
-                String channel = sb.toString();
+                String channel = new String(packet250custompayload.c, "UTF-8");
                 Canary.channels().registerClient(channel, this.serverHandler);
                 Canary.logInfo(String.format("Player '%s' registered Custom Payload on channel '%s'", this.c.getPlayer().getName(), channel));
             } catch (Exception ex) {
@@ -1044,20 +1031,7 @@ public class NetServerHandler extends NetHandler {
             }
         } else if ("UNREGISTER".equals(packet250custompayload.a)) {
             try {
-                datainputstream = new DataInputStream(new ByteArrayInputStream(packet250custompayload.c));
-
-                StringBuilder sb = new StringBuilder();
-                byte[] buff;
-                for (int i = 0; i < 20; i++) {
-                    buff = new byte[2];
-                    datainputstream.read(buff);
-                    if (buff[0] == 0 || buff[1] == 0) {
-                        break;
-                    }
-                    sb.append(new String(buff));
-                }
-
-                String channel = sb.toString();
+                String channel = new String(packet250custompayload.c, "UTF-8");
                 Canary.channels().unregisterClient(channel, this.serverHandler);
                 Canary.logInfo(String.format("Player '%s' unregistered Custom Payload on channel '%s'", this.c.getPlayer().getName(), channel));
             } catch (Exception ex) {
