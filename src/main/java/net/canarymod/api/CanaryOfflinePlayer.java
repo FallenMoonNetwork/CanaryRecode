@@ -1,5 +1,7 @@
 package net.canarymod.api;
 
+import java.util.Arrays;
+
 import net.canarymod.Canary;
 import net.canarymod.api.nbt.CanaryBaseTag;
 import net.canarymod.api.nbt.CanaryCompoundTag;
@@ -15,7 +17,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
 
     private CanaryCompoundTag data;
     private PermissionProvider provider;
-    private Group group = null;
+    private Group[] groups = null;
     private String prefix = null;
     private String name;
     private boolean isMuted;
@@ -24,7 +26,17 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
         this.name = name;
         provider = Canary.permissionManager().getPlayerProvider(name);
         String[] data = Canary.usersAndGroups().getPlayerData(name);
-        group = Canary.usersAndGroups().getGroup(data[1]);
+        Group[] subs = Canary.usersAndGroups().getModuleGroupsForPlayer(name);
+        groups = new Group[1];
+        groups[0] = Canary.usersAndGroups().getGroup(data[1]);
+        int i = 1;
+        for(Group g : subs) {
+            if(g != null) {
+                groups = Arrays.copyOf(groups, groups.length + 1);
+                groups[i] = g;
+                ++i;
+            }
+        }
         prefix = data[0];
         isMuted = Boolean.parseBoolean(data[2]);
     }
@@ -35,7 +47,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
 
     @Override
     public Group getGroup() {
-        return group;
+        return groups[0];
     }
 
     @Override
@@ -50,7 +62,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
 
     @Override
     public void setGroup(Group group) {
-        this.group = group;
+        this.groups[0] = group;
         Canary.usersAndGroups().addOrUpdateOfflinePlayer(this);
     }
 
@@ -94,6 +106,17 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
     public void setMuted(boolean muted) {
         this.isMuted = muted;
         Canary.usersAndGroups().addOrUpdateOfflinePlayer(this);
+    }
+    @Override
+    public void addGroup(Group group) {
+        if(groups[groups.length - 1] != null) {
+            groups = Arrays.copyOf(groups, groups.length + 1);
+        }
+        groups[groups.length - 1] = group;
+    }
+    @Override
+    public Group[] getPlayerGroups() {
+        return groups;
     }
 
 }
