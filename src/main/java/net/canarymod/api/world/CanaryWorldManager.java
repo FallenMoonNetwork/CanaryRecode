@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
-
 import net.canarymod.Canary;
-import net.canarymod.Logman;
 import net.canarymod.api.CanaryServer;
+import net.canarymod.logger.Logman;
 import net.minecraft.server.WorldServer;
 
 

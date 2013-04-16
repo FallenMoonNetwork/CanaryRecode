@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import net.canarymod.Canary;
 import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -300,12 +299,12 @@ public class CanaryServer implements Server {
 
     @Override
     public void message(String message) {
-        System.out.println(TextFormat.removeFormatting(message));
+        Canary.logServerMessage(TextFormat.removeFormatting(message));
     }
 
     @Override
     public void notice(String message) {
-        System.out.println("[NOTICE] " + message);
+        Canary.logNotice(message);
     }
 
     public class ServerTimer implements Runnable {
