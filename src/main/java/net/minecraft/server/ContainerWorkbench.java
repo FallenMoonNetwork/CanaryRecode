@@ -50,18 +50,20 @@ public class ContainerWorkbench extends Container {
     public void a(IInventory iinventory) {
         ItemStack result = CraftingManager.a().a(this.a, this.g);
 
-        if (this.e.isEmpty() || result == null) {
+        if (this.e.isEmpty()) {
             this.f.a(0, result);
             return;
         }
 
         // CanaryMod: Send custom recipe results to client
         EntityPlayerMP player = (EntityPlayerMP) this.e.get(0);
+
         // call CraftHook
-        CraftHook hook = new CraftHook(player.getPlayer(), bench, result.getCanaryItem());
+        CraftHook hook = new CraftHook(player.getPlayer(), bench, result == null ? null : result.getCanaryItem());
 
         Canary.hooks().callHook(hook);
         result = hook.getRecipeResult() != null || hook.isCanceled() ? ((CanaryItem) hook.getRecipeResult()).getHandle() : null;
+
         // Set custom result
         this.f.a(0, result);
         // And send player custom result
