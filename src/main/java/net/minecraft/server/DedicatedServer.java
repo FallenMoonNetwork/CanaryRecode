@@ -13,6 +13,7 @@ import java.util.concurrent.Callable;
 
 import net.canarymod.Canary;
 import net.canarymod.config.Configuration;
+import net.canarymod.config.ServerConfiguration;
 import net.canarymod.config.WorldConfiguration;
 
 
@@ -47,19 +48,19 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
         this.al().a("Loading properties");
         this.o = new PropertyManager(new File("server.properties"), this.al());
+        //CanaryMod use our config
+        ServerConfiguration cfg = Configuration.getServerConfig();
         if (this.I()) {
             this.d("127.0.0.1");
         } else {
-            this.d(this.o.a("online-mode", true));
-            this.d(this.o.a("server-ip", ""));
+            this.d(cfg.isOnlineMode());
+            this.d(cfg.getBindIp());
         }
-
+        //CanaryMod: Those settings are world-dependent
         this.e(this.o.a("spawn-animals", true));
         this.f(this.o.a("spawn-npcs", true));
         this.g(this.o.a("pvp", true));
         this.h(this.o.a("allow-flight", false));
-        this.n(this.o.a("texture-pack", ""));
-        this.o(this.o.a("motd", "A Minecraft Server"));
         if (this.o.a("difficulty", 1) < 0) {
             this.o.a("difficulty", Integer.valueOf(0));
         } else if (this.o.a("difficulty", 1) > 3) {
@@ -68,7 +69,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
         this.p = this.o.a("generate-structures", true);
         int i0 = this.o.a("gamemode", EnumGameType.b.a());
-
+        //
+        this.o(cfg.getMotd());
+        this.n(cfg.getTexturePack());
         this.q = WorldSettings.a(i0);
         this.al().a("Default game type: " + this.q);
         InetAddress inetaddress = null;
@@ -83,7 +86,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         }
 
         if (this.G() < 0) {
-            this.b(this.o.a("server-port", 25565));
+            this.b(cfg.getPort());
         }
 
         this.al().a("Generating keypair");
