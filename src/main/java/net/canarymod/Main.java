@@ -26,7 +26,6 @@ public class Main {
 
         // Initialize providers that require Canary to be set already
         mod.initUserAndGroupsManager();
-        mod.initWarps();
         mod.initKits();
     }
 
@@ -47,6 +46,8 @@ public class Main {
         // commands require a valid commandOwner which is the server.
         // That means for commands to work, we gotta load Minecraft first
         mod.initCommands();
+        //Warps need the DimensionType data which is created upon servre start
+        mod.initWarps();
     }
 
     /**

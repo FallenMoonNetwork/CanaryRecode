@@ -258,12 +258,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean hasHome() {
-        Warp home = Canary.warps().getHome(this);
-
-        if (home != null) {
-            return true;
-        }
-        return false;
+        return Canary.warps().getHome(this) != null;
     }
 
     @Override
