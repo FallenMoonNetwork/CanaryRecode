@@ -689,10 +689,8 @@ public class NetServerHandler extends NetHandler {
                     this.c.a.c("You have died. Game over, man, it\'s game over!");
                     this.d.P();
                 } else {
-                    BanEntry banentry = new BanEntry(this.c.bS);
-
-                    banentry.b("Death in Hardcore");
-                    this.d.ad().e().a(banentry);
+                    //CanaryMod use our Ban System instead
+                    Canary.bans().issueBan(this.c.getPlayer(), "Death in Hardcore");
                     this.c.a.c("You have died. Game over, man, it\'s game over!");
                 }
             } else {

@@ -25,7 +25,6 @@ import net.canarymod.api.world.effects.Particle;
 import net.canarymod.api.world.effects.SoundEffect;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
-import net.canarymod.config.Configuration;
 import net.minecraft.server.EntityLightningBolt;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityPlayerMP;
@@ -69,8 +68,6 @@ public class CanaryWorld implements World {
     public CanaryWorld(String name, WorldServer dimension, DimensionType type) {
         this.name = name;
         world = dimension;
-
-        int viewDistance = Configuration.getServerConfig().getViewDistance();
 
         playerManager = dimension.r().getPlayerManager();
         entityTracker = dimension.getEntityTracker();
@@ -347,7 +344,6 @@ public class CanaryWorld implements World {
 
     @Override
     public int getLightLevelAt(int x, int y, int z) {
-        // TODO: Returns skylight level, needs option for blocklight level too
         return world.b(EnumSkyBlock.a, x, y, z);
     }
 

@@ -16,19 +16,11 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     private File d;
     public DedicatedPlayerList(DedicatedServer dedicatedserver) {
         super(dedicatedserver);
-      //CanaryMod removed whitelist settings
+        // CanaryMod removed whitelist settings
         this.d = dedicatedserver.e("ops.txt");
         this.c = Configuration.getServerConfig().getViewDistance();
         this.b = Configuration.getServerConfig().getMaxPlayers();
-        if (!dedicatedserver.I()) {
-            this.e().a(true);
-            this.f().a(true);
-        }
-
-        this.e().e();
-        this.e().f();
-        this.f().e();
-        this.f().f();
+        // CanaryMod removed references to NMS ban system
         this.t();
         this.v();
         this.u();

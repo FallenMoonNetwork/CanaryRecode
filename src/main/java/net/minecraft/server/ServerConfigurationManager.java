@@ -1,7 +1,6 @@
 package net.minecraft.server;
 
 
-import java.io.File;
 import java.net.SocketAddress;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,8 +33,8 @@ public abstract class ServerConfigurationManager {
     private static final SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd \'at\' HH:mm:ss z");
     private final MinecraftServer e;
     public final List a = new ArrayList();
-    private final BanList f = new BanList(new File("banned-players.txt"));
-    private final BanList g = new BanList(new File("banned-ips.txt"));
+//    private final BanList f = new BanList(new File("banned-players.txt"));
+//    private final BanList g = new BanList(new File("banned-ips.txt"));
     private Set h = new HashSet();
     private Set i = new HashSet();
     private boolean k;
@@ -51,8 +50,8 @@ public abstract class ServerConfigurationManager {
     //
     public ServerConfigurationManager(MinecraftServer minecraftserver) {
         this.e = minecraftserver;
-        this.f.a(false);
-        this.g.a(false);
+//        this.f.a(false);
+//        this.g.a(false);
         this.b = Configuration.getServerConfig().getMaxPlayers();
         configurationmanager = new CanaryConfigurationManager(this);
     }
@@ -596,11 +595,13 @@ public abstract class ServerConfigurationManager {
     }
 
     public BanList e() {
-        return this.f;
+        //CanaryMod this is unused
+        throw new UnsupportedOperationException("SCM.e() is deprecated");
     }
 
     public BanList f() {
-        return this.g;
+        //CanaryMod this is unused
+        throw new UnsupportedOperationException("SCM.f() is deprecated");
     }
 
     public void b(String s0) {
