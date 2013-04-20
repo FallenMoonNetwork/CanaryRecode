@@ -25,6 +25,7 @@ import net.canarymod.api.world.effects.Particle;
 import net.canarymod.api.world.effects.SoundEffect;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
+import net.canarymod.config.Configuration;
 import net.minecraft.server.EntityLightningBolt;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityPlayerMP;
@@ -69,11 +70,10 @@ public class CanaryWorld implements World {
         this.name = name;
         world = dimension;
 
-        // manually set player managers
-        int viewDistance = 10; // TODO: Add config for view distance!
+        int viewDistance = Configuration.getServerConfig().getViewDistance();
 
-        playerManager = new net.minecraft.server.PlayerManager(this.world, viewDistance).getPlayerManager();
-        entityTracker = new net.minecraft.server.EntityTracker(this.world).getCanaryEntityTracker();
+        playerManager = dimension.r().getPlayerManager();
+        entityTracker = dimension.getEntityTracker();
         this.type = type;
         // Init nanotick size
         nanoTicks = new long[100];

@@ -53,7 +53,7 @@ public abstract class ServerConfigurationManager {
         this.e = minecraftserver;
         this.f.a(false);
         this.g.a(false);
-        this.b = 8;
+        this.b = Configuration.getServerConfig().getMaxPlayers();
         configurationmanager = new CanaryConfigurationManager(this);
     }
 

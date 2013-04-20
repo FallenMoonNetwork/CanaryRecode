@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
+
 import net.canarymod.AutocompleteUtils;
 import net.canarymod.Canary;
 import net.canarymod.LineTracer;
@@ -19,6 +20,7 @@ import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.channels.CustomPayloadChannelException;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.player.BlockLeftClickHook;
 import net.canarymod.hook.player.BlockRightClickHook;
 import net.canarymod.hook.player.DisconnectionHook;
@@ -293,7 +295,8 @@ public class NetServerHandler extends NetHandler {
                 AxisAlignedBB axisalignedbb = this.c.E.c().b((double) f4, (double) f4, (double) f4).a(0.0D, -0.55D, 0.0D);
 
                 // CanaryMod: check on flying capability instead of mode
-                if (!this.d.Y() && !this.c.ce.c && !worldserver.c(axisalignedbb)) {
+                // moved allow-flight to per-world config
+                if (!Configuration.getWorldConfig(c.getCanaryWorld().getFqName()).isFlightAllowed() && !this.c.ce.c && !worldserver.c(axisalignedbb)) {
                     if (d12 >= -0.03125D) {
                         ++this.f;
                         if (this.f > 80) {

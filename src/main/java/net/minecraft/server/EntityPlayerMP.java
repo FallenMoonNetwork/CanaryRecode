@@ -26,6 +26,7 @@ import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
+import net.canarymod.config.WorldConfiguration;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DimensionSwitch;
 import net.canarymod.hook.player.ExperienceHook;
@@ -61,6 +62,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public EntityPlayerMP(MinecraftServer minecraftserver, World world, String s0, ItemInWorldManager iteminworldmanager) {
         super(world);
+        WorldConfiguration cfg = Configuration.getWorldConfig(world.getCanaryWorld().getFqName());
         iteminworldmanager.b = this;
         this.c = iteminworldmanager;
         this.cr = minecraftserver.ad().o();
@@ -70,7 +72,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         int i2 = chunkcoordinates.b;
 
         if (!world.t.f && world.L().r() != EnumGameType.d) {
-            int i3 = Math.max(5, minecraftserver.ak() - 6);
+            int i3 = Math.max(5, cfg.getSpawnProtectionSize() - 6);
 
             i0 += this.ab.nextInt(i3 * 2) - i3;
             i1 += this.ab.nextInt(i3 * 2) - i3;
@@ -305,7 +307,9 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (this.aq()) {
             return false;
         } else {
-            boolean flag0 = this.b.T() && this.b.X() && "fall".equals(damagesource.o);
+            //CanaryMod moved pvp to per-world config
+            boolean haspvp = Configuration.getWorldConfig(getCanaryWorld().getFqName()).isPvpEnabled();
+            boolean flag0 = this.b.T() && haspvp && "fall".equals(damagesource.o);
 
             if (!flag0 && this.cq > 0 && damagesource != DamageSource.i) {
                 return false;
@@ -333,10 +337,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     @Override
     public boolean a(EntityPlayer entityplayer) {
-        return !this.b.X() ? false : super.a(entityplayer);
+        //CanaryMod moved pvp to per-world config
+        boolean haspvp = Configuration.getWorldConfig(getCanaryWorld().getFqName()).isPvpEnabled();
+        return !haspvp ? false : super.a(entityplayer);
     }
 
-    // CanaryMod renamed c -> changeDimension
     @Override
     public void c(int i0) {
         if (this.ar == 1 && i0 == 1) {

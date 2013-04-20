@@ -23,9 +23,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     private final ILogAgent l;
     private RConThreadQuery m;
     private RConThreadMain n;
-    private PropertyManager o;
-    private boolean p;
-    private EnumGameType q;
+//  CanaryMod - Removed private PropertyManager o
+//  CanaryMod - Removed private boolean p;
+//  CanaryMod - Removed private EnumGameType q;
     private NetworkListenThread r;
     private boolean s = false;
 
@@ -47,7 +47,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         }
 
         this.al().a("Loading properties");
-        this.o = new PropertyManager(new File("server.properties"), this.al());
+//        this.o = new PropertyManager(new File("server.properties"), this.al()); //CanaryMod - Removed
         //CanaryMod use our config
         ServerConfiguration cfg = Configuration.getServerConfig();
         if (this.I()) {
@@ -56,24 +56,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             this.d(cfg.isOnlineMode());
             this.d(cfg.getBindIp());
         }
-        //CanaryMod: Those settings are world-dependent
-        this.e(this.o.a("spawn-animals", true));
-        this.f(this.o.a("spawn-npcs", true));
-        this.g(this.o.a("pvp", true));
-        this.h(this.o.a("allow-flight", false));
-        if (this.o.a("difficulty", 1) < 0) {
-            this.o.a("difficulty", Integer.valueOf(0));
-        } else if (this.o.a("difficulty", 1) > 3) {
-            this.o.a("difficulty", Integer.valueOf(3));
-        }
-
-        this.p = this.o.a("generate-structures", true);
-        int i0 = this.o.a("gamemode", EnumGameType.b.a());
-        //
+        //CanaryMod: Removed world-dependent settings
         this.o(cfg.getMotd());
         this.n(cfg.getTexturePack());
-        this.q = WorldSettings.a(i0);
-        this.al().a("Default game type: " + this.q);
         InetAddress inetaddress = null;
 
         if (this.l().length() > 0) {
@@ -116,7 +101,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             this.l(Configuration.getServerConfig().getDefaultWorldName()); // CanaryMod use our world config
         }
         // CanaryMod use or configurations instead of native ones
-        WorldConfiguration worldcfg = Configuration.getWorldConfig(this.J());
+        WorldConfiguration worldcfg = Configuration.getWorldConfig(this.J() + "_NORMAL");
 
         String s0 = worldcfg.getWorldSeed(); // this.o.a("level-seed", "");
         String s1 = worldcfg.getWorldType().toString(); // this.o.a("level-type", "DEFAULT");
@@ -144,27 +129,24 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.d(worldcfg.getMaxBuildHeight());
         this.d((this.ab() + 8) / 16 * 16);
         this.d(MathHelper.a(this.ab(), 64, 256));
-        // That setting a valid value back?
-        this.o.a("max-build-height", Integer.valueOf(this.ab()));
+        worldcfg.getFile().setInt("max-build-height", this.ab());
 
         this.al().a("Preparing level \"" + this.J() + "\"");
         // CanaryMod changed call to initWorld
         net.canarymod.api.world.DimensionType wt = net.canarymod.api.world.DimensionType.fromName("NORMAL");
 
-        // this.initWorld(this.J(), i2, worldtype, s2, this.J(), true, wt);
         this.initWorld(this.J(), i2, worldtype, wt, s2);
         //
         long i4 = System.nanoTime() - i1;
         String s3 = String.format("%.3fs", new Object[] { Double.valueOf((double) i4 / 1.0E9D) });
 
         this.al().a("Done (" + s3 + ")! For help, type \"help\" or \"?\"");
-        if (this.o.a("enable-query", false)) {
+        if (cfg.isQueryEnabled()) {
             this.al().a("Starting GS4 status listener");
             this.m = new RConThreadQuery(this);
             this.m.a();
         }
-
-        if (this.o.a("enable-rcon", false)) {
+        if (cfg.isRconEnabled()) {
             this.al().a("Starting remote control listener");
             this.n = new RConThreadMain(this);
             this.n.a();
@@ -175,22 +157,22 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     @Override
     public boolean f() {
-        return this.p;
+        throw new UnsupportedOperationException("Generate-structures setting has been moved to a per-world configuration!");
     }
 
     @Override
     public EnumGameType g() {
-        return this.q;
+        throw new UnsupportedOperationException("GameType setting has been moved to a per-world configuration!");
     }
 
     @Override
     public int h() {
-        return this.o.a("difficulty", 1);
+        throw new UnsupportedOperationException("Difficulty setting has been moved to a per-world configuration!");
     }
 
     @Override
     public boolean i() {
-        return this.o.a("hardcore", false);
+        throw new UnsupportedOperationException("Hardcoremode setting has been moved to a per-world configuration!");
     }
 
     @Override
@@ -227,24 +209,25 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     @Override
     public boolean s() {
-        return this.o.a("allow-nether", true);
+        throw new UnsupportedOperationException("allow-nether has been moved to a per-world config");
     }
 
     @Override
     public boolean L() {
-        return this.o.a("spawn-monsters", true);
+        throw new UnsupportedOperationException("spawn-monsters has been moved to a per-world config");
     }
 
     @Override
     public void a(PlayerUsageSnooper playerusagesnooper) {
-        playerusagesnooper.a("whitelist_enabled", Boolean.valueOf(this.an().n()));
-        playerusagesnooper.a("whitelist_count", Integer.valueOf(this.an().h().size()));
+        playerusagesnooper.a("whitelist_enabled", Configuration.getServerConfig().isWhitelistEnabled());
+        playerusagesnooper.a("whitelist_count", Canary.whitelist().getSize());
         super.a(playerusagesnooper);
     }
 
     @Override
     public boolean R() {
-        return this.o.a("snooper-enabled", true);
+        //CanaryMod moved to config/server.cfg
+        return Configuration.getServerConfig().isSnooperEnabled();
     }
 
     public void a(String s0, ICommandSender icommandsender) {
@@ -277,33 +260,33 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     @Override
     public int a(String s0, int i0) {
-        return this.o.a(s0, i0);
+        throw new UnsupportedOperationException("Setting int values to server.properties is disabled!");
     }
 
     @Override
     public String a(String s0, String s1) {
-        return this.o.a(s0, s1);
+        throw new UnsupportedOperationException("Setting String values to server.properties is disabled!");
     }
 
     public boolean a(String s0, boolean flag0) {
-        return this.o.a(s0, flag0);
+        throw new UnsupportedOperationException("Setting boolean values to server.properties is disabled!");
     }
 
     @Override
     public void a(String s0, Object object) {
-        this.o.a(s0, object);
+        throw new UnsupportedOperationException("Setting Object values to server.properties is disabled!");
     }
 
     @Override
+    @Deprecated
     public void a() {
-        this.o.b();
+        throw new UnsupportedOperationException("Cannot finish this request. DdedicatedServer.a() is deprecated");
     }
 
     @Override
+    @Deprecated
     public String b_() {
-        File file1 = this.o.c();
-
-        return file1 != null ? file1.getAbsolutePath() : "No settings file";
+        throw new UnsupportedOperationException("Cannot finish this request. DdedicatedServer.b_() is deprecated");
     }
 
     public void ao() {
@@ -323,23 +306,25 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     @Override
     public boolean Z() {
-        return this.o.a("enable-command-block", false);
+        //CanaryMod moved to config/server.cfg
+        return Configuration.getServerConfig().isCommandBlockEnabled();
     }
 
     @Override
     public int ak() {
-        return this.o.a("spawn-protection", super.ak());
+        throw new UnsupportedOperationException("spawn-protection has been moved to a per-world config!");
     }
 
     @Override
     public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {
+        WorldConfiguration cfg = Configuration.getWorldConfig(world.getCanaryWorld().getFqName());
         if (world.t.h != 0) {
             return false;
         } else if (this.an().i().isEmpty()) {
             return false;
         } else if (this.an().e(entityplayer.bS)) {
             return false;
-        } else if (this.ak() <= 0) {
+        } else if (cfg.getSpawnProtectionSize() <= 0) {
             return false;
         } else {
             ChunkCoordinates chunkcoordinates = world.I();
@@ -347,7 +332,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             int i4 = MathHelper.a(i2 - chunkcoordinates.c);
             int i5 = Math.max(i3, i4);
 
-            return i5 <= this.ak();
+            return i5 <= cfg.getSpawnProtectionSize();
         }
     }
 

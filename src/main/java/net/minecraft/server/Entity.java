@@ -11,6 +11,7 @@ import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.entity.DimensionSwitch;
@@ -230,11 +231,11 @@ public abstract class Entity {
 
         if (!this.q.I && this.q instanceof WorldServer) {
             this.q.C.a("portal");
-            MinecraftServer minecraftserver = ((WorldServer) this.q).o();
 
             i0 = this.y();
             if (this.ap) {
-                if (minecraftserver.s()) {
+                //CanatyMod moved allow-nether to per-world config
+                if (Configuration.getWorldConfig(getCanaryWorld().getFqName()).isNetherAllowed()) {
                     if (this.o == null && this.aq++ >= i0) {
                         this.aq = i0;
                         this.ao = this.aa();

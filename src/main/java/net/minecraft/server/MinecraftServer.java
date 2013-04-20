@@ -22,6 +22,7 @@ import net.canarymod.api.world.CanaryWorldManager;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.WorldConfiguration;
 import net.canarymod.tasks.ServerTaskManager;
+import net.visualillusionsent.utils.PropertiesFile;
 
 
 public abstract class MinecraftServer implements ICommandSender, Runnable, IPlayerUsage {
@@ -122,13 +123,17 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
         AnvilSaveHandler isavehandler = new AnvilSaveHandler(new File("worlds/"), name, true, worldtype);
         WorldInfo worldinfo = isavehandler.d();
-        WorldConfiguration config = Configuration.getWorldConfig(name);
+        WorldConfiguration config = Configuration.getWorldConfig(name + "_" + worldtype.getName());
 
         WorldSettings worldsettings;
         WorldServer world;
 
         if (worldinfo == null) {
             worldsettings = new WorldSettings(seed, EnumGameType.a(config.getGameMode().getId()), config.generatesStructures(), false, nmsWt);
+            PropertiesFile worldRaw = config.getFile();
+            worldRaw.setString("world-seed", String.valueOf(seed));
+            worldRaw.setInt("gamemode", 0);
+            worldRaw.save();
             // CanaryMod those are flatworld settings, and they are likely unset
             if (generatorSettings != null) {
                 worldsettings.a(generatorSettings);
@@ -156,7 +161,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
         world.a((IWorldAccess) (new WorldManager(this, world)));
         if (!this.I()) {
-            world.L().a(this.g());
+            world.L().a(EnumGameType.a(config.getGameMode().getId())); //Use per-world config for game mode
         }
 
         this.s.a(world); // Init player data files
@@ -480,7 +485,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public boolean s() {
-        return true;
+        throw new UnsupportedOperationException("allow-nether has been moved to a per-world configuration!");
     }
 
     public void a(IUpdatePlayerListBox iupdateplayerlistbox) {
@@ -800,7 +805,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     worldserver.a(worldserver.r > 0, true);
                 } else {
                     worldserver.r = i0;
-                    worldserver.a(this.L(), this.x);
+                    //Canarymod moved spawn-monsters to per-world config
+                    worldserver.a(Configuration.getWorldConfig(w.getFqName()).canSpawnMonsters(), this.x);
                 }
             }
         }

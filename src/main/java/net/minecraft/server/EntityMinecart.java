@@ -2,12 +2,14 @@ package net.minecraft.server;
 
 
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.EntityLiving;
 import net.canarymod.api.entity.vehicle.Minecart;
 import net.canarymod.api.entity.vehicle.Vehicle;
 import net.canarymod.api.world.position.Vector3D;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.entity.MinecartActivateHook;
 import net.canarymod.hook.entity.VehicleCollisionHook;
 import net.canarymod.hook.entity.VehicleDamageHook;
@@ -193,11 +195,11 @@ public abstract class EntityMinecart extends Entity {
 
         if (!this.q.I && this.q instanceof WorldServer) {
             this.q.C.a("portal");
-            MinecraftServer minecraftserver = ((WorldServer) this.q).o();
 
             i0 = this.y();
             if (this.ap) {
-                if (minecraftserver.s()) {
+                //CanaryMod moved allow-nether to per-world config
+                if (Configuration.getWorldConfig(getCanaryWorld().getFqName()).isNetherAllowed()) {
                     if (this.o == null && this.aq++ >= i0) {
                         this.aq = i0;
                         this.ao = this.aa();

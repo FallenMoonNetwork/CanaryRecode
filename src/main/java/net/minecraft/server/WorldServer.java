@@ -14,6 +14,7 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.world.TimeChangeHook;
 import net.canarymod.hook.world.WeatherChangeHook;
 
@@ -41,7 +42,8 @@ public class WorldServer extends World {
         super(isavehandler, s0, worldsettings, WorldProvider.a(i0), profiler, ilogagent, net.canarymod.api.world.DimensionType.fromId(i0));
         this.a = minecraftserver;
         this.J = new EntityTracker(this);
-        this.K = new PlayerManager(this, minecraftserver.ad().o());
+        //CanaryMod: Use our view-distance handling
+        this.K = new PlayerManager(this, Configuration.getServerConfig().getViewDistance());
         if (this.U == null) {
             this.U = new IntHashMap();
         }
@@ -495,11 +497,12 @@ public class WorldServer extends World {
 
     @Override
     public void a(Entity entity, boolean flag0) {
-        if (!this.a.V() && (entity instanceof EntityAnimal || entity instanceof EntityWaterMob)) {
+        //CanaryMod moved sapwn-animals to per-world config
+        if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).canSpawnAnimals() && (entity instanceof EntityAnimal || entity instanceof EntityWaterMob)) {
             entity.w();
         }
-
-        if (!this.a.W() && entity instanceof INpc) {
+        //CanaryMod moved spawn-npcs to per-world config
+        if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).canSpawnNpcs() && entity instanceof INpc) {
             entity.w();
         }
 
