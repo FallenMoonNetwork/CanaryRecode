@@ -6,19 +6,21 @@ import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.canarymod.chat.Colors;
+import net.minecraft.server.Packet16BlockItemSwitch;
 import net.minecraft.server.Packet20NamedEntitySpawn;
 import net.minecraft.server.Packet29DestroyEntity;
 
 
 /**
  * NonPlayableCharacter implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements NonPlayableCharacter {
@@ -27,7 +29,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
 
     /**
      * Constructs a new wrapper for EntityNonPlayableCharacter
-     * 
+     *
      * @param entity
      *            the EntityVillager to wrap
      * @param inHand
@@ -41,7 +43,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
 
     /**
      * Constructs a new NonPlayableCharacter
-     * 
+     *
      * @param name
      *            the Name to give to the NPC
      * @param location
@@ -126,6 +128,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     public void setItemInHandSlot(int slot) {
         if (slot > 0 && slot < 9) {
             getHandle().bK.c = slot;
+            getHandle().a.b(new Packet16BlockItemSwitch(getHandle().bK.c));
         }
     }
 
@@ -157,10 +160,10 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      * {@inheritDoc}
      */
     @Override
-    public void lookAt(Player player) {
-        double xDiff = player.getX() - getX();
-        double yDiff = player.getY() - getY();
-        double zDiff = player.getZ() - getZ();
+    public void lookAt(Entity entity) {
+        double xDiff = entity.getX() - getX();
+        double yDiff = entity.getY() - getY();
+        double zDiff = entity.getZ() - getZ();
         double DistanceXZ = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
         double DistanceY = Math.sqrt(DistanceXZ * DistanceXZ + yDiff * yDiff);
         double yaw = (Math.acos(xDiff / DistanceXZ) * 180 / Math.PI);
@@ -375,6 +378,35 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     @Override
     public EntityNonPlayableCharacter getHandle() {
         return (EntityNonPlayableCharacter) entity;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void attackEntity(Entity entity) {
+        this.lookAt(entity);
+        this.getHandle().bK();
+        this.getHandle().q(((CanaryEntity)entity).getHandle());
+    }
+
+    /**
+     * {@inheritDoc}
+     * Needed to allow gravity on NPC's.
+     */
+    @Override
+    public void moveEntity(double x, double y, double z) {
+        this.getHandle().x = x;
+        this.getHandle().y = y;
+        this.getHandle().z = z;
+//        this.getHandle().J = true;
+        if (y > 0.0) {
+            this.getHandle().isJumping = true;
+        } else {
+            y = -1;
+        }
+
+        this.getHandle().c();
     }
 
     /**
