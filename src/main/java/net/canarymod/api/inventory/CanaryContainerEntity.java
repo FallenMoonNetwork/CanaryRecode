@@ -423,8 +423,8 @@ public abstract class CanaryContainerEntity implements Inventory {
      * {@inheritDoc}
      */
     @Override
-    public void setSlot(int itemId, short damage, int slot) {
-        this.setSlot(itemId, 1, damage, slot);
+    public void setSlot(int itemId, int amount, int slot) {
+        this.setSlot(itemId, amount, (short) 0, slot);
     }
 
     /**
