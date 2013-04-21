@@ -467,7 +467,11 @@ public abstract class CanaryContainerEntity implements Inventory {
      */
     @Override
     public void setSlot(int index, Item value) {
-        inventory.a(index, ((CanaryItem) value).getHandle());
+        if(value == null) {
+            inventory.a(index, null);
+        } else {
+            inventory.a(index, ((CanaryItem) value).getHandle());
+        }
     }
 
     /**
