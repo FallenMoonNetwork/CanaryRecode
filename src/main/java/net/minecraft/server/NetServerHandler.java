@@ -4,6 +4,7 @@ package net.minecraft.server;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -1020,9 +1021,11 @@ public class NetServerHandler extends NetHandler {
         // CanaryMod: Custom Payload implementation!
         if ("REGISTER".equals(packet250custompayload.a)) {
             try {
-                String channel = new String(packet250custompayload.c, "UTF-8");
-                Canary.channels().registerClient(channel, this.serverHandler);
-                Canary.logInfo(String.format("Player '%s' registered Custom Payload on channel '%s'", this.c.getPlayer().getName(), channel));
+                String channel = new String(packet250custompayload.c, Charset.forName("utf-8"));
+                for(String chan : channel.split("\0")) {
+                    Canary.channels().registerClient(chan, this.serverHandler);
+                }
+                Canary.logInfo(String.format("Player '%s' registered Custom Payload on channel(s) '%s'", this.c.getPlayer().getName(), Arrays.toString(channel.split("\0"))));
             } catch (Exception ex) {
                 try {
                     throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());

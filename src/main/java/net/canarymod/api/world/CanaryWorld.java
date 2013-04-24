@@ -641,4 +641,24 @@ public class CanaryWorld implements World {
 
         return test == this;
     }
+
+    @Override
+    public BiomeType getBiomeType(int x, int z) {
+        CanaryChunk c = (CanaryChunk) getChunk(x, z);
+        if(c == null) {
+            return BiomeType.fromId((byte)0);
+        }
+        return BiomeType.fromId(c.getBiomeByteData()[z << 4 | x]);
+    }
+
+    @Override
+    public void setBiome(int x, int z, BiomeType biome) {
+        CanaryChunk c = (CanaryChunk) getChunk(x, z);
+        if(c == null) {
+            return;
+        }
+        byte[] bytes = c.getBiomeByteData();
+        bytes[z << 4 | x] = biome.getId();
+        c.setBiomeData(bytes);
+    }
 }

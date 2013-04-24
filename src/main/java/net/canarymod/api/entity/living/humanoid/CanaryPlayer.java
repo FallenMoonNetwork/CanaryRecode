@@ -88,23 +88,20 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
-    public void chat(String message) {
+    public void chat(final String message) {
         if (message.length() > 100) {
             kick("Message too long!");
         }
-        message = message.trim();
-        Matcher m = badChatPattern.matcher(message);
-        String out = message;
+        String out = message.trim();
+        Matcher m = badChatPattern.matcher(out);
 
         if (m.find() && !this.canIgnoreRestrictions()) {
-            out = message.replaceAll(m.group(), "");
+            out = out.replaceAll(m.group(), "");
         }
-        message = out;
 
-        // TODO: Add configuration for spam protection (and delegate into thread?)
-
-        if (message.startsWith("/")) {
-            executeCommand(message.split(" "));
+        // TODO: Add configuration for spam protection
+        if (out.startsWith("/")) {
+            executeCommand(out.split(" "));
         } else {
             if (isMuted()) {
                 notice("You are currently muted!");
@@ -112,7 +109,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 // This is a copy of the real player list already, no need to copy again (re: Collections.copy())
                 ArrayList<Player> receivers = Canary.getServer().getPlayerList();
 
-                ChatHook hook = new ChatHook(this, getPrefix(), message, "<%prefix%name" + Colors.WHITE + "> %message", receivers);
+                ChatHook hook = new ChatHook(getPlayer(), getPrefix(), out, "<%prefix%name" + Colors.WHITE + "> %message", receivers);
 
                 Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
@@ -738,5 +735,4 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             muted = Boolean.valueOf(data[2]);
         }
     }
-
 }
