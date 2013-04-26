@@ -15,6 +15,8 @@ import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.living.monster.EntityMob;
+import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.Item;
 import net.canarymod.api.potion.CanaryPotion;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.api.potion.Potion;
@@ -26,6 +28,7 @@ import net.canarymod.api.world.position.Position;
 import net.minecraft.server.EntityList;
 import net.minecraft.server.IAnimals;
 import net.minecraft.server.IMob;
+import net.minecraft.server.ItemStack;
 import net.minecraft.server.Packet12PlayerLook;
 import net.minecraft.server.Packet32EntityLook;
 
@@ -276,13 +279,28 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
+    public int getInvulnerabilityTicks() {
+        return ((net.minecraft.server.EntityLiving)entity).av;
+    }
+
+    @Override
+    public void setInvulnerabilityTicks(int ticks) {
+        ((net.minecraft.server.EntityLiving)entity).av = ticks;
+    }
+
+    @Override
     public EntityLiving getTarget() {
         return (EntityLiving) ((net.minecraft.server.EntityLiving) entity).aG().getCanaryEntity();
     }
 
     @Override
     public void setTarget(EntityLiving entityliving) {
-        ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) ((CanaryEntity) entityliving).getHandle());
+        if(entityliving == null) {
+            ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) null);
+        }
+        else {
+            ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) ((CanaryEntity) entityliving).getHandle());
+        }
     }
 
     @Override
@@ -324,5 +342,54 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     @Override
     public void lookAt(Location location) {
         lookAt(location.getX(), location.getY(), location.getZ());
+    }
+
+    @Override
+    public Item getItemInHand() {
+        return new CanaryItem(((net.minecraft.server.EntityLiving)entity).bG());
+    }
+
+    @Override
+    public Item[] getEquiptment() {
+        Item[] stack = new Item[5];
+        ItemStack[] istack = ((net.minecraft.server.EntityLiving)entity).ad();
+        for(int i = 0; i < 5; i++) {
+            if(istack[i] != null) {
+                stack[i] = new CanaryItem(istack[i]);
+            }
+        }
+        return stack;
+    }
+
+    public Item getEquipmentInSlot(int slot) {
+        ItemStack istack = ((net.minecraft.server.EntityLiving)entity).p(slot);
+        if(istack != null) {
+            return new CanaryItem(istack);
+        }
+        return new CanaryItem(0, 0);
+    }
+
+    public void setEquipment(Item[] items) {
+        for(int i = 0; i < 5; i++) {
+            if(items[i] == null) {
+                continue;
+            }
+            ((net.minecraft.server.EntityLiving)entity).c(i, ((CanaryItem)items[i]).getHandle());
+        }
+    }
+
+    public void setEquipment(Item item, int slot) {
+        if(slot > 5 ) {
+            return; //TODO: Response for user...
+        }
+        ((net.minecraft.server.EntityLiving)entity).c(slot, ((CanaryItem)item).getHandle());
+    }
+
+    public float getDropChance(int slot) {
+        return ((net.minecraft.server.EntityLiving)entity).getDropChance(slot);
+    }
+
+    public void setDropChance(int slot, float chance) {
+        ((net.minecraft.server.EntityLiving)entity).a(slot, chance);
     }
 }

@@ -2,6 +2,7 @@ package net.canarymod.api.entity.vehicle;
 
 
 import java.util.Arrays;
+
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
@@ -327,7 +328,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
      * {@inheritDoc}
      */
     @Override
-    public boolean hasItemStack(ItemType type, int amount, short damage) {
+    public boolean hasItemStack(ItemType type, int amount, int damage) {
         return this.hasItemStack(type.getId(), amount, 64, damage);
     }
 
@@ -335,34 +336,34 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
      * {@inheritDoc}
      */
     @Override
-    public boolean hasItemStack(int itemId, int amount, short damage) {
+    public boolean hasItemStack(int itemId, int amount, int damage) {
         return hasItemStack(itemId, amount, 64, damage);
     }
 
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
+//        for (int index = 0; index < getSize(); index++) {
+//            Item toCheck = getSlot(index);
+//
+//            if (toCheck != null && toCheck.getId() == itemId) {
+//                int am = toCheck.getAmount();
+//
+//                if (am > minAmount && am < maxAmount) {
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-        for (int index = 0; index < getSize(); index++) {
-            Item toCheck = getSlot(index);
-
-            if (toCheck != null && toCheck.getId() == itemId) {
-                int am = toCheck.getAmount();
-
-                if (am > minAmount && am < maxAmount) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasItemStack(int itemId, int minAmount, int maxAmount, short damage) {
+    public boolean hasItemStack(int itemId, int minAmount, int maxAmount, int damage) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
 
@@ -434,7 +435,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
      * {@inheritDoc}
      */
     @Override
-    public void setSlot(int itemId, int amount, short damage, int slot) {
+    public void setSlot(int itemId, int amount, int damage, int slot) {
         CanaryItem item = new CanaryItem(itemId, 1, damage);
 
         item.setSlot(slot);
@@ -453,7 +454,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
      * {@inheritDoc}
      */
     @Override
-    public void setSlot(ItemType type, int amount, short damage, int slot) {
+    public void setSlot(ItemType type, int amount, int damage, int slot) {
         this.setSlot(type.getId(), amount, damage, slot);
     }
 
@@ -501,7 +502,7 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
      * {@inheritDoc}
      */
     @Override
-    public Item removeItem(int id, short damage) {
+    public Item removeItem(int id, int damage) {
         for (int index = 0; index < getSize(); index++) {
             Item toCheck = getSlot(index);
 

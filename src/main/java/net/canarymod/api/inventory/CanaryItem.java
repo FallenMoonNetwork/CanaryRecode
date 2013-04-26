@@ -12,7 +12,7 @@ import net.minecraft.server.NBTTagCompound;
 
 /**
  * Item wrapper implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public class CanaryItem implements Item {
@@ -23,7 +23,7 @@ public class CanaryItem implements Item {
 
     /**
      * Constructs a new CanaryItem
-     * 
+     *
      * @param oItemStack
      */
     public CanaryItem(ItemStack itemStack) {
@@ -421,7 +421,7 @@ public class CanaryItem implements Item {
 
     /**
      * Returns a String value representing this object
-     * 
+     *
      * @return String representation of this object
      */
     @Override
@@ -431,7 +431,7 @@ public class CanaryItem implements Item {
 
     /**
      * Tests the given object to see if it equals this object
-     * 
+     *
      * @param obj
      *            the object to test
      * @return true if the two objects match
@@ -448,7 +448,7 @@ public class CanaryItem implements Item {
 
     /**
      * Returns a semi-unique hashcode for this object
-     * 
+     *
      * @return hashcode
      */
     @Override
