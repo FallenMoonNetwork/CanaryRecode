@@ -67,21 +67,20 @@ public class ItemBlock extends Item {
             Block block = Block.r[this.a];
             int i5 = this.a(itemstack.k());
             int i6 = Block.r[this.a].a(world, i0, i1, i2, i3, f0, f1, f2, i5);
+            if (!handled) { // if ItemSlab didn't call BlockPlace
+                // set placed
+                CanaryBlock placed = new CanaryBlock((short) this.a, (short) i5, i0, i1, i2, world.getCanaryWorld());
+                // Create and Call
+                BlockPlaceHook hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
+
+                Canary.hooks().callHook(hook);
+                if (hook.isCanceled()) {
+                    return false;
+                }
+                //
+            }
 
             if (world.f(i0, i1, i2, this.a, i6, 3)) {
-                if (!handled) { // if ItemSlab didn't call BlockPlace
-                    // set placed
-                    CanaryBlock placed = new CanaryBlock((short) this.a, (short) i5, i0, i1, i2, world.getCanaryWorld());
-                    // Create and Call
-                    BlockPlaceHook hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
-
-                    Canary.hooks().callHook(hook);
-                    if (hook.isCanceled()) {
-                        return false;
-                    }
-                    //
-                }
-
                 if (world.a(i0, i1, i2) == this.a) {
                     Block.r[this.a].a(world, i0, i1, i2, (EntityLiving) entityplayer, itemstack);
                     Block.r[this.a].k(world, i0, i1, i2, i6);

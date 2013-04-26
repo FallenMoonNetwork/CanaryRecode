@@ -34,6 +34,8 @@ public class ItemSlab extends ItemBlock {
     public boolean a(ItemStack itemstack, EntityPlayer entityplayer, World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2) {
         this.hook = null; // CanaryMod: Clean up
         this.handled = false; // CanaryMod: Clean up
+        // CanaryMod: BlockPlaceHook
+        CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
         if (this.a) {
             return super.a(itemstack, entityplayer, world, i0, i1, i2, i3, f0, f1, f2);
         } else if (itemstack.a == 0) {
@@ -47,17 +49,13 @@ public class ItemSlab extends ItemBlock {
             boolean flag0 = (i5 & 8) != 0;
 
             if ((i3 == 1 && !flag0 || i3 == 0 && flag0) && i4 == this.b.cz && i6 == itemstack.k()) {
-
-                // CanaryMod: BlockPlaceHook
-                CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
-
                 clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
                 CanaryBlock placed = new CanaryBlock((short) i4, (short) i6, i0, i1, i2, world.getCanaryWorld());
 
                 hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
                 Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
-                    return false;
+                    return true;
                 }
                 //
 
