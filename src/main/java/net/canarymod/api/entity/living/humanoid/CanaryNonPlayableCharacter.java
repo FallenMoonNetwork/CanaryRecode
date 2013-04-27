@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
+import net.canarymod.api.PathFinder;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
@@ -327,6 +328,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
                     }
                 } catch (Exception ex) {
                     Canary.logWarning("Exception while calling onUpdate in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
+                    Canary.logStackTrace("", ex);
                 }
             }
         }
@@ -341,6 +343,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
                     }
                 } catch (Exception ex) {
                     Canary.logWarning("Exception while calling onClicked in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
+                    Canary.logStackTrace("", ex);
                 }
             }
         }
@@ -385,9 +388,9 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public void attackEntity(Entity entity) {
-        this.lookAt(entity);
-        this.getHandle().bK();
-        this.getHandle().q(((CanaryEntity)entity).getHandle());
+        this.lookAt(entity);//looks at the entity
+        this.getHandle().bK();// swings the arm
+        this.getHandle().q(((CanaryEntity)entity).getHandle());// attacks the target
     }
 
     /**
@@ -396,17 +399,44 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public void moveEntity(double x, double y, double z) {
+        this.lookAt(x, y, z);
         this.getHandle().x = x;
         this.getHandle().y = y;
         this.getHandle().z = z;
-//        this.getHandle().J = true;
-        if (y > 0.0) {
-            this.getHandle().isJumping = true;
-        } else {
-            y = -1;
-        }
+    }
 
-        this.getHandle().c();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PathFinder getPathFinder() {
+        return this.getHandle().getPathNavigator().getCanaryPathFinder();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void moveEntityWithGravity(double x, double y, double z, float speed) {
+        this.lookAt(x, y, z);
+        this.getHandle().aA().a(x, y, z, speed);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean canFly() {
+        return this.getHandle().ce.c;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setFly(boolean bool) {
+        this.getHandle().ce.c = bool;
+        this.getHandle().ce.b = bool;
     }
 
     /**

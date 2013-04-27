@@ -7,10 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
+import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.entity.EntityDespawnHook;
@@ -1268,7 +1268,8 @@ public abstract class EntityLiving extends Entity {
             this.bD = 0.0F;
             this.bE = 0.0F;
             this.bF = 0.0F;
-        } else if (this.bi()) {
+        }
+        else if (this.bi()) {
             if (this.bh()) {
                 this.q.C.a("newAi");
                 this.bo();
@@ -1280,7 +1281,11 @@ public abstract class EntityLiving extends Entity {
                 this.aA = this.A;
             }
         }
-
+        // CanaryMod: NPC Addition, this is vital for pathfinding
+        // Just call the "newAi" method up there ^^
+        if (this instanceof EntityNonPlayableCharacter) {
+            this.bo();
+        }// END
         this.q.C.b();
         this.q.C.a("jump");
         if (this.bG) {
@@ -2140,6 +2145,9 @@ public abstract class EntityLiving extends Entity {
 
     public float getDropChance(int slot) {
         return this.bq[slot];
+    }
+    public PathNavigate getPathNavigator() {
+        return this.bN;
     }
     //
 }

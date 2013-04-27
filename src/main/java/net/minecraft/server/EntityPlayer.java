@@ -158,7 +158,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         if (this.ae() && this.ce.a) {
             this.A();
         }
-
+        
         this.bU = this.bX;
         this.bV = this.bY;
         this.bW = this.bZ;
