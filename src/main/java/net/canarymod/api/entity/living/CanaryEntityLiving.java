@@ -379,7 +379,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     public void setEquipment(Item item, int slot) {
-        if(slot > 5 ) {
+        if(slot >= 5 ) {
             return; //TODO: Response for user...
         }
         ((net.minecraft.server.EntityLiving)entity).c(slot, ((CanaryItem)item).getHandle());

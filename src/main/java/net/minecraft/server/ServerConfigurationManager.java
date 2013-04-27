@@ -60,9 +60,10 @@ public abstract class ServerConfigurationManager {
     public void a(INetworkManager inetworkmanager, EntityPlayerMP entityplayermp) {
         NBTTagCompound nbttagcompound = this.a(entityplayermp);
         CanaryWorld w;
-
+        boolean firstTime = true;
         if (nbttagcompound != null) {
             w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(nbttagcompound.i("LevelName"), net.canarymod.api.world.DimensionType.fromId(nbttagcompound.e("Dimension")), true);
+            firstTime = false;
         } else {
             w = (CanaryWorld) Canary.getServer().getDefaultWorld();
         }
@@ -89,7 +90,7 @@ public abstract class ServerConfigurationManager {
         this.a((ServerScoreboard) worldserver.V(), entityplayermp);
         this.b(entityplayermp, worldserver);
         // CanaryMod Connection hook
-        ConnectionHook hook = new ConnectionHook(entityplayermp.getPlayer(), EnumChatFormatting.o + entityplayermp.ax() + EnumChatFormatting.o + " joined the game.");
+        ConnectionHook hook = new ConnectionHook(entityplayermp.getPlayer(), EnumChatFormatting.o + entityplayermp.ax() + EnumChatFormatting.o + " joined the game.", firstTime);
 
         Canary.hooks().callHook(hook);
         if (!hook.isHidden()) {
@@ -428,7 +429,7 @@ public abstract class ServerConfigurationManager {
         entityplayermp1.d_();
         entityplayermp1.b(entityplayermp1.aX());
         // CanaryMod: PlayerRespawn
-        PlayerRespawnHook hook = new PlayerRespawnHook(entityplayermp1.getPlayer(), loc);
+        PlayerRespawnHook hook = new PlayerRespawnHook(entityplayermp1.getPlayer(), loc, chunkcoordinates != null);
 
         Canary.hooks().callHook(hook);
         //
