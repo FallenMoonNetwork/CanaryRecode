@@ -2149,5 +2149,9 @@ public abstract class EntityLiving extends Entity {
     public PathNavigate getPathNavigator() {
         return this.bN;
     }
+
+    public EntityAITasks getAITasks() {
+        return this.bp;
+    }
     //
 }

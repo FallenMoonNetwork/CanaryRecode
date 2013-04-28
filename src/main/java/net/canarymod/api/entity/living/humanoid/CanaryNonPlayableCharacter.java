@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
-import net.canarymod.api.PathFinder;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
@@ -403,23 +402,6 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
         this.getHandle().x = x;
         this.getHandle().y = y;
         this.getHandle().z = z;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public PathFinder getPathFinder() {
-        return this.getHandle().getPathNavigator().getCanaryPathFinder();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void moveEntityWithGravity(double x, double y, double z, float speed) {
-        this.lookAt(x, y, z);
-        this.getHandle().aA().a(x, y, z, speed);
     }
 
     /**

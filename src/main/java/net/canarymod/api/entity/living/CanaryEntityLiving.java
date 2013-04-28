@@ -4,12 +4,13 @@ package net.canarymod.api.entity.living;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.DamageSource;
 import net.canarymod.api.DamageType;
+import net.canarymod.api.PathFinder;
+import net.canarymod.api.ai.AIManager;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -378,6 +379,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
         }
     }
 
+    @Override
     public void setEquipment(Item item, int slot) {
         if(slot >= 5 ) {
             return; //TODO: Response for user...
@@ -385,11 +387,38 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
         ((net.minecraft.server.EntityLiving)entity).c(slot, ((CanaryItem)item).getHandle());
     }
 
+    @Override
     public float getDropChance(int slot) {
         return ((net.minecraft.server.EntityLiving)entity).getDropChance(slot);
     }
 
+    @Override
     public void setDropChance(int slot, float chance) {
         ((net.minecraft.server.EntityLiving)entity).a(slot, chance);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PathFinder getPathFinder() {
+        return ((net.minecraft.server.EntityLiving)entity).getPathNavigator().getCanaryPathFinder();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void moveEntityWithGravity(double x, double y, double z, float speed) {
+        this.lookAt(x, y, z);
+        ((net.minecraft.server.EntityLiving)entity).aA().a(x, y, z, speed);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public AIManager getAITaskManager() {
+        return ((net.minecraft.server.EntityLiving)entity).getAITasks().getAIManager();
     }
 }
