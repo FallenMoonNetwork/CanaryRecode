@@ -1,6 +1,7 @@
 package net.canarymod.api.world;
 
 
+
 public class CanaryChunk implements Chunk {
     private net.minecraft.server.Chunk handle;
 

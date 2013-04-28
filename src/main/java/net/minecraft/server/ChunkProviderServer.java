@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryChunkProviderServer;
 import net.canarymod.hook.world.ChunkCreatedHook;
@@ -28,9 +29,7 @@ public class ChunkProviderServer implements IChunkProvider {
 
     // CanaryMod start
     private CanaryChunkProviderServer canaryChunkProvider;
-    private int loadStage = 0;
-    // CanaryMod end
-
+    //
     public ChunkProviderServer(WorldServer worldserver, IChunkLoader ichunkloader, IChunkProvider ichunkprovider) {
         this.c = new EmptyChunk(worldserver, 0, 0);
         this.h = worldserver;
@@ -86,24 +85,25 @@ public class ChunkProviderServer implements IChunkProvider {
         if (chunk == null) {
             chunk = this.f(i0, i1);
             if (chunk == null) {
-                if (this.d == null) {
+             // CanaryMod: ChunkCreation
+                ChunkCreationHook hook = new ChunkCreationHook(i0, i1, h.getCanaryWorld());
+                Canary.hooks().callHook(hook);
+                byte[] blocks = hook.getBlockData();
+                if (blocks != null) {
+                    chunk = new Chunk(h, blocks, i0, i1);
+                    chunk.k = true; //is populated
+                    chunk.b(); //lighting update
+                    if (hook.getBiomeData() != null) {
+                        chunk.getCanaryChunk().setBiomeData(hook.getBiomeData());
+                    }
+                }
+                //
+                else if (this.d == null) {
                     chunk = this.c;
-                } else {
+                }
+                else {
                     try {
                         chunk = this.d.d(i0, i1);
-                        // CanaryMod: ChunkCreation
-                        ChunkCreationHook hook = new ChunkCreationHook(i0, i1, h.getCanaryWorld());
-
-                        Canary.hooks().callHook(hook);
-                        byte[] blocks = hook.getBlockData();
-
-                        if (blocks != null) {
-                            chunk = new Chunk(h, blocks, i0, i1);
-                            if (hook.getBiomeData() != null) {
-                                chunk.getCanaryChunk().setBiomeData(hook.getBiomeData());
-                            }
-                        }
-                        //
                     } catch (Throwable throwable) {
                         CrashReport crashreport = CrashReport.a(throwable, "Exception generating new chunk");
                         CrashReportCategory crashreportcategory = crashreport.a("Chunk to be generated");
