@@ -2,7 +2,6 @@ package net.canarymod.api.world;
 
 
 import java.util.ArrayList;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
@@ -310,8 +309,13 @@ public class CanaryWorld implements World {
     }
 
     @Override
-    public int getYHeighestBlockAt(int x, int z) {
-        return world.f(x, z);
+    public int getHighestBlockAt(int x, int z) {
+        for (int i = 0 ; i < this.getHeight() ; i++) {
+            if (world.l(x, i, z)) {
+                return i;
+            }
+        }
+        return 256;
     }
 
     @Override
