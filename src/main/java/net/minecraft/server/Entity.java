@@ -1619,6 +1619,10 @@ public abstract class Entity {
         this.b(tag);
     }
 
+    public void setNBTProperties(NBTTagCompound tag) {
+        this.a(tag);
+    }
+
     // CanaryMod: Simulates the use of a Portal by the Player to determine the location going to
     protected final Location simulatePortalUse(int dimensionTo, WorldServer oworldserverTo) {
         double y = this.u;

@@ -2,7 +2,10 @@ package net.canarymod.api;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import net.canarymod.Canary;
+import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.nbt.CanaryListTag;
 import net.canarymod.api.nbt.CompoundTag;
@@ -118,5 +121,32 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
         }
         toSet.put("SpawnPotentials", list);
         logic.a(toSet.getHandle());
+    }
+
+    @Override
+    public void addSpawnedEntities(MobSpawnerEntry... entries) {
+        MobSpawnerEntry[] array = this.getSpawnedEntities();
+        List<MobSpawnerEntry> list = Arrays.asList(array);
+        list.addAll(Arrays.asList(entries));
+        this.setSpawnedEntities((MobSpawnerEntry[])list.toArray(new MobSpawnerEntry[]{}));
+    }
+
+    @Override
+    public MobSpawnerEntry[] getSpawnedEntities() {
+        CanaryCompoundTag toSet = new CanaryCompoundTag(new NBTTagCompound());
+        ArrayList<MobSpawnerEntry> array = new ArrayList<MobSpawnerEntry>();
+
+        logic.b(toSet.getHandle());
+        if (toSet.containsKey("SpawnPotentials")) {
+            ListTag list = toSet.getListTag("SpawnPotentials");
+            CanaryCompoundTag tag;
+            for (int i = 0; i < list.size() ; i++) {
+                tag = (CanaryCompoundTag)list.get(i);
+                net.minecraft.server.Entity ent = ((CanaryEntity)Canary.factory().getEntityFactory().newEntity(tag.getString("id"))).getHandle();
+                ent.setNBTProperties(((CanaryCompoundTag)tag.getCompoundTag("Properties")).getHandle());
+                array.add(new CanaryMobSpawnerEntry(ent.getCanaryEntity()));
+            }
+        }
+        return (MobSpawnerEntry[])array.toArray(new MobSpawnerEntry[]{});
     }
 }
