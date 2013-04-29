@@ -4,6 +4,7 @@ package net.canarymod.api;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.nbt.CanaryCompoundTag;
@@ -137,7 +138,7 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
 
         logic.b(toSet.getHandle());
         if (toSet.containsKey("SpawnPotentials")) {
-            ListTag list = toSet.getListTag("SpawnPotentials");
+            ListTag<?> list = toSet.getListTag("SpawnPotentials");
             CanaryCompoundTag tag;
             for (int i = 0; i < list.size() ; i++) {
                 tag = (CanaryCompoundTag)list.get(i);

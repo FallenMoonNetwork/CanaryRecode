@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Callable;
+
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.vehicle.CanaryVehicle;
@@ -137,9 +138,8 @@ public abstract class World implements IBlockAccess {
             this.A = villagecollection;
             this.A.a(this);
         }
-
         this.y();
-        this.a();
+        this.a(); //CanaryMod removed
     }
 
     protected abstract IChunkProvider j();
@@ -258,16 +258,23 @@ public abstract class World implements IBlockAccess {
 
                 // CanaryMod: BlockUpdate
                 boolean flag0 = false;
-                CanaryBlock cblock = (CanaryBlock) this.canaryDimension.getBlockAt(i0, i1, i2);
-                BlockUpdateHook hook = new BlockUpdateHook(cblock, i3);
+                CanaryBlock cblock;
+                if(canaryDimension != null) {
+                    cblock = (CanaryBlock) this.canaryDimension.getBlockAt(i0, i1, i2);
+                    BlockUpdateHook hook = new BlockUpdateHook(cblock, i3);
 
-                if (i3 != 0) { // Ignore Air
-                    Canary.hooks().callHook(hook);
+                    if (i3 != 0) { // Ignore Air
+                        Canary.hooks().callHook(hook);
+                    }
+                    if (!hook.isCanceled()) {
+                        flag0 = chunk.a(i0 & 15, i1, i2 & 15, i3, i4);
+                    }
+                    //
                 }
-                if (!hook.isCanceled()) {
+                else {
+                    //Do not forward things when the world wrapper isn't init yet
                     flag0 = chunk.a(i0 & 15, i1, i2 & 15, i3, i4);
                 }
-                //
 
                 this.C.a("checkLight");
                 this.A(i0, i1, i2);
@@ -2710,7 +2717,7 @@ public abstract class World implements IBlockAccess {
 
     /**
      * Get the canary dimension wrapper
-     * 
+     *
      * @return
      */
     public CanaryWorld getCanaryWorld() {
@@ -2719,7 +2726,7 @@ public abstract class World implements IBlockAccess {
 
     /**
      * Set the canary dimension wrapper
-     * 
+     *
      * @param dim
      */
     public void setCanaryWorld(CanaryWorld dim) {
