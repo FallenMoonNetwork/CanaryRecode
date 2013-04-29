@@ -1,20 +1,22 @@
 package net.canarymod.api.world.blocks;
 
 
+import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.hook.system.PermissionCheckHook;
 import net.minecraft.server.TileEntityCommandBlock;
 
 
 /**
  * CommandBlock wrapper implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlock {
 
     /**
      * Constructs a wrapper for TileEntityCommandBlock
-     * 
+     *
      * @param tileentity
      *            the TileEntityCommandBlock to wrap
      */
@@ -51,6 +53,16 @@ public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlo
      */
     @Override
     public boolean hasPermission(String node) {
+        PermissionCheckHook hook = new PermissionCheckHook(node, this, true);
+        Canary.hooks().callHook(hook);
+        return hook.getResult();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean saveHasPermission(String node) {
         return true;
     }
 

@@ -29,6 +29,7 @@ import net.canarymod.chat.TextFormat;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
+import net.canarymod.hook.system.PermissionCheckHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
 import net.canarymod.warp.Warp;
@@ -356,12 +357,44 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean hasPermission(String permission) {
+        PermissionCheckHook hook = new PermissionCheckHook(permission, this, false);
+        //If player has the permission set, use its personal permissions
+        if(permissions.pathExists(permission)) {
+            hook.setResult(permissions.queryPermission(permission));
+            Canary.hooks().callHook(hook);
+            return hook.getResult();
+        }
+        //Only main group is set
+        else if(groups.length == 1) {
+            hook.setResult(groups[0].hasPermission(permission));
+            Canary.hooks().callHook(hook);
+            return hook.getResult();
+        }
+
+        //Check sub groups
+        for(int i = 1; i < groups.length; i++) {
+            //First group that
+            if(groups[i].getPermissionProvider().pathExists(permission)) {
+                hook.setResult(groups[i].hasPermission(permission));
+                Canary.hooks().callHook(hook);
+                return hook.getResult();
+            }
+        }
+
+        //No subgroup has permission defined, use what base group has to say
+        hook.setResult(groups[0].hasPermission(permission));
+        Canary.hooks().callHook(hook);
+        return hook.getResult();
+    }
+
+    @Override
+    public boolean saveHasPermission(String permission) {
         //If player has the permission set, use its personal permissions
         if(permissions.pathExists(permission)) {
             return permissions.queryPermission(permission);
         }
         //Only main group is set
-        if(groups.length == 1) {
+        else if(groups.length == 1) {
             return groups[0].hasPermission(permission);
         }
 
@@ -372,6 +405,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 return groups[i].hasPermission(permission);
             }
         }
+
         //No subgroup has permission defined, use what base group has to say
         return groups[0].hasPermission(permission);
     }

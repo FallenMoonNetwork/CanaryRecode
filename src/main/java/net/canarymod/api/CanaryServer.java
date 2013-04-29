@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
 import net.canarymod.Canary;
 import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -24,6 +25,7 @@ import net.canarymod.api.world.blocks.CommandBlock;
 import net.canarymod.chat.TextFormat;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.ConsoleCommandHook;
+import net.canarymod.hook.system.PermissionCheckHook;
 import net.minecraft.server.CraftingManager;
 import net.minecraft.server.FurnaceRecipes;
 import net.minecraft.server.ItemStack;
@@ -272,6 +274,13 @@ public class CanaryServer implements Server {
 
     @Override
     public boolean hasPermission(String node) {
+        PermissionCheckHook hook = new PermissionCheckHook(node, this, true);
+        Canary.hooks().callHook(hook);
+        return hook.getResult();
+    }
+
+    @Override
+    public boolean saveHasPermission(String node) {
         return true;
     }
 

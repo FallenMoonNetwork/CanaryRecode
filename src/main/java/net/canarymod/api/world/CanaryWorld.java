@@ -2,7 +2,7 @@ package net.canarymod.api.world;
 
 
 import java.util.ArrayList;
-import net.canarymod.Canary;
+
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.EntityTracker;
@@ -55,7 +55,6 @@ public class CanaryWorld implements World {
     private CanaryChunkProviderServer chunkProvider;
     private CanaryEntityTracker entityTracker;
     public long[] nanoTicks;
-    private boolean enabled;
 
     private CanaryPlayerManager playerManager;
 
@@ -95,34 +94,6 @@ public class CanaryWorld implements World {
     @Override
     public long getNanoTick(int tickIndex) {
         return nanoTicks[tickIndex];
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled; // TODO: implement
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.enabled;
-    }
-
-    @Override
-    public boolean canEnterWorld(Player player) { //TODO: this is not used
-        return player.hasPermission("canary.world.traveling." + name + ".enter") && isEnabled();
-    }
-
-    @Override
-    public boolean canLeaveWorld(Player player) { //TODO: This is not used
-        return player.hasPermission("canary.world.traveling." + name + ".leave");
-    }
-
-    @Override
-    public ArrayList<Player> getPlayers() {
-        ArrayList<Player> players = new ArrayList<Player>(Canary.getServer().getMaxPlayers());
-
-        players.addAll(getPlayerList());
-        return players;
     }
 
     @Override

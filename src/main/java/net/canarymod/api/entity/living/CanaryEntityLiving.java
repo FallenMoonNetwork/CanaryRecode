@@ -4,6 +4,7 @@ package net.canarymod.api.entity.living;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.CanaryPacket;
@@ -362,14 +363,16 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
         return stack;
     }
 
+    @Override
     public Item getEquipmentInSlot(int slot) {
         ItemStack istack = ((net.minecraft.server.EntityLiving)entity).p(slot);
         if(istack != null) {
             return new CanaryItem(istack);
         }
-        return new CanaryItem(0, 0);
+        return null;
     }
 
+    @Override
     public void setEquipment(Item[] items) {
         for(int i = 0; i < 5; i++) {
             if(items[i] == null) {
