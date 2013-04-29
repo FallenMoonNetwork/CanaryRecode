@@ -388,7 +388,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
-    public boolean saveHasPermission(String permission) {
+    public boolean safeHasPermission(String permission) {
         //If player has the permission set, use its personal permissions
         if(permissions.pathExists(permission)) {
             return permissions.queryPermission(permission);

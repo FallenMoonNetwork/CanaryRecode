@@ -280,7 +280,7 @@ public class CanaryServer implements Server {
     }
 
     @Override
-    public boolean saveHasPermission(String node) {
+    public boolean safeHasPermission(String node) {
         return true;
     }
 

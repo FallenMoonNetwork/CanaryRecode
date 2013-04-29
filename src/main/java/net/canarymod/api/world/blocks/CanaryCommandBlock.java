@@ -62,7 +62,7 @@ public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlo
      * {@inheritDoc}
      */
     @Override
-    public boolean saveHasPermission(String node) {
+    public boolean safeHasPermission(String node) {
         return true;
     }
 
