@@ -44,6 +44,7 @@ public class Chunk {
     private CanaryChunk canaryChunk;
 
     public Chunk(World world, int i0, int i1) {
+        canaryChunk = new CanaryChunk(this); // CanaryMod: wrap chunk
         this.r = new ExtendedBlockStorage[16];
         this.s = new byte[256];
         this.b = new int[256];
@@ -70,7 +71,6 @@ public class Chunk {
 
         Arrays.fill(this.b, -999);
         Arrays.fill(this.s, (byte) -1);
-        canaryChunk = new CanaryChunk(this); // CanaryMod: wrap chunk
     }
 
     public Chunk(World world, byte[] abyte, int i0, int i1) {
