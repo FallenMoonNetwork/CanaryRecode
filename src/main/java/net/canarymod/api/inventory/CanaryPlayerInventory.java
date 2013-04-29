@@ -2,13 +2,14 @@ package net.canarymod.api.inventory;
 
 
 import java.util.Arrays;
+
 import net.minecraft.server.InventoryPlayer;
 import net.minecraft.server.ItemStack;
 
 
 /**
  * PlayerInventory implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public class CanaryPlayerInventory extends CanaryContainerEntity implements PlayerInventory {
@@ -68,7 +69,7 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      */
     @Override
     public void setContents(Item[] items) {
-        System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getInventoryHandle().a, 0, getSize());
+        getInventoryHandle().a = Arrays.copyOf(CanaryItem.itemArrayToStackArray(items), getInventoryHandle().a.length);
     }
 
     /**
