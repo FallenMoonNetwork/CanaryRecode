@@ -352,7 +352,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public Item[] getEquiptment() {
+    public Item[] getEquipment() {
         Item[] stack = new Item[5];
         ItemStack[] istack = ((net.minecraft.server.EntityLiving)entity).ad();
         for(int i = 0; i < 5; i++) {
