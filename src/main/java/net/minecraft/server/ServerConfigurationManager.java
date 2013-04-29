@@ -389,12 +389,13 @@ public abstract class ServerConfigurationManager {
 
         this.a(entityplayermp1, entityplayermp, worldserver);
         ChunkCoordinates chunkcoordinates1;
-
+        boolean isBedSpawn = false;
         if (chunkcoordinates != null) {
             // CanaryMod get world from player
             // chunkcoordinates1 = EntityPlayer.a(this.e.a(entityplayermp.ar), chunkcoordinates, flag1);
             chunkcoordinates1 = EntityPlayer.a(worldserver, chunkcoordinates, flag1);
             if (chunkcoordinates1 != null) {
+                isBedSpawn = true;
                 entityplayermp1.b((double) ((float) chunkcoordinates1.a + 0.5F), (double) ((float) chunkcoordinates1.b + 0.1F), (double) ((float) chunkcoordinates1.c + 0.5F), 0.0F, 0.0F);
                 entityplayermp1.a(chunkcoordinates, flag1);
             } else {
@@ -406,6 +407,11 @@ public abstract class ServerConfigurationManager {
         if (loc != null) {
             entityplayermp1.a.c = entityplayermp1; // Set ONetServerHandler.user
             entityplayermp1.b(loc.getX(), loc.getY(), loc.getZ(), loc.getPitch(), loc.getRotation());
+        }
+        else {
+            Location l = worldserver.getCanaryWorld().getSpawnLocation();
+            entityplayermp1.a.c = entityplayermp1; // Set ONetServerHandler.user
+            entityplayermp1.b(l.getX(), l.getY(), l.getZ(), l.getPitch(), l.getRotation());
         }
         worldserver.b.c((int) entityplayermp1.u >> 4, (int) entityplayermp1.w >> 4);
 
@@ -429,7 +435,7 @@ public abstract class ServerConfigurationManager {
         entityplayermp1.d_();
         entityplayermp1.b(entityplayermp1.aX());
         // CanaryMod: PlayerRespawn
-        PlayerRespawnHook hook = new PlayerRespawnHook(entityplayermp1.getPlayer(), loc, chunkcoordinates1 != null);
+        PlayerRespawnHook hook = new PlayerRespawnHook(entityplayermp1.getPlayer(), loc, isBedSpawn);
 
         Canary.hooks().callHook(hook);
         //
