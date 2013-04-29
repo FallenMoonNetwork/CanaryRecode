@@ -115,18 +115,17 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
 
         logic.b(toSet.getHandle());
         ListTag list = new CanaryListTag(new NBTTagList());
-
-        for (MobSpawnerEntry entry : entries) {
-            list.add(entry);
-        }
+        list.addAll(Arrays.asList(entries));
         toSet.put("SpawnPotentials", list);
         logic.a(toSet.getHandle());
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void addSpawnedEntities(MobSpawnerEntry... entries) {
         MobSpawnerEntry[] array = this.getSpawnedEntities();
-        List<MobSpawnerEntry> list = Arrays.asList(array);
+        List<MobSpawnerEntry> list = new ArrayList<MobSpawnerEntry>();
+        list.addAll(Arrays.asList(array));
         list.addAll(Arrays.asList(entries));
         this.setSpawnedEntities((MobSpawnerEntry[])list.toArray(new MobSpawnerEntry[]{}));
     }

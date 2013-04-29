@@ -1,7 +1,6 @@
 package net.canarymod.api.ai;
 
 import java.util.Iterator;
-
 import net.canarymod.Canary;
 import net.minecraft.server.EntityAITaskEntry;
 import net.minecraft.server.EntityAITasks;
@@ -88,5 +87,14 @@ public class CanaryAIManager implements AIManager {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean addTask(int priority, AIBase ai) {
+        if (!this.hasTask(ai.getClass())) {
+            tasks.a(priority, new EntityAICanary(ai));
+            return true;
+        }
+        return false;
     }
 }
