@@ -10,6 +10,7 @@ import net.canarymod.api.PlayerManager;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityItem;
+import net.canarymod.api.entity.living.EntityLiving;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
@@ -166,6 +167,17 @@ public class CanaryWorld implements World {
     @Override
     public ArrayList<Player> getPlayerList() {
         return playerManager.getManagedPlayers();
+    }
+
+    @Override
+    public ArrayList<EntityLiving> getEntityLivingList() {
+        ArrayList<EntityLiving> list = new ArrayList<EntityLiving>();
+        for(Entity e : getEntityTracker().getTrackedEntities()) {
+            if(e instanceof EntityLiving && !list.contains(e)) {
+                list.add((EntityLiving) e);
+            }
+        }
+        return list;
     }
 
     @Override
