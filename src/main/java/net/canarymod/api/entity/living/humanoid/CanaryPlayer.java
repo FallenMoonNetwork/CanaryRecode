@@ -531,7 +531,6 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             player.h(player.o);
         }
         player.a.a(x, y, z, rotation, pitch, getWorld().getType().getId(), getWorld().getName());
-
     }
 
     @Override

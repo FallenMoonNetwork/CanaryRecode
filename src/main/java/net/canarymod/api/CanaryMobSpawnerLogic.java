@@ -121,7 +121,6 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
         logic.a(toSet.getHandle());
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void addSpawnedEntities(MobSpawnerEntry... entries) {
         MobSpawnerEntry[] array = this.getSpawnedEntities();
