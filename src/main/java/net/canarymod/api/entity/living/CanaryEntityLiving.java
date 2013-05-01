@@ -281,18 +281,19 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @Override
     public int getInvulnerabilityTicks() {
-        return ((net.minecraft.server.EntityLiving)entity).av;
+        return ((net.minecraft.server.EntityLiving) entity).av;
     }
 
     @Override
     public void setInvulnerabilityTicks(int ticks) {
-        ((net.minecraft.server.EntityLiving)entity).av = ticks;
+        ((net.minecraft.server.EntityLiving) entity).av = ticks;
     }
 
     @Override
     public EntityLiving getTarget() {
         net.minecraft.server.Entity target = ((net.minecraft.server.EntityLiving) entity).aG();
-        if(target != null){
+
+        if (target != null) {
             return (EntityLiving) ((net.minecraft.server.EntityLiving) target).getCanaryEntity();
         }
         return null;
@@ -300,10 +301,9 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @Override
     public void setTarget(EntityLiving entityliving) {
-        if(entityliving == null) {
+        if (entityliving == null) {
             ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) null);
-        }
-        else {
+        } else {
             ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) ((CanaryEntity) entityliving).getHandle());
         }
     }
@@ -351,15 +351,16 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @Override
     public Item getItemInHand() {
-        return new CanaryItem(((net.minecraft.server.EntityLiving)entity).bG());
+        return new CanaryItem(((net.minecraft.server.EntityLiving) entity).bG());
     }
 
     @Override
     public Item[] getEquipment() {
         Item[] stack = new Item[5];
-        ItemStack[] istack = ((net.minecraft.server.EntityLiving)entity).ad();
-        for(int i = 0; i < 5; i++) {
-            if(istack[i] != null) {
+        ItemStack[] istack = ((net.minecraft.server.EntityLiving) entity).ad();
+
+        for (int i = 0; i < 5; i++) {
+            if (istack[i] != null) {
                 stack[i] = new CanaryItem(istack[i]);
             }
         }
@@ -368,8 +369,9 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @Override
     public Item getEquipmentInSlot(int slot) {
-        ItemStack istack = ((net.minecraft.server.EntityLiving)entity).p(slot);
-        if(istack != null) {
+        ItemStack istack = ((net.minecraft.server.EntityLiving) entity).p(slot);
+
+        if (istack != null) {
             return new CanaryItem(istack);
         }
         return null;
@@ -377,30 +379,30 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @Override
     public void setEquipment(Item[] items) {
-        for(int i = 0; i < 5; i++) {
-            if(items[i] == null) {
+        for (int i = 0; i < 5; i++) {
+            if (items[i] == null) {
                 continue;
             }
-            ((net.minecraft.server.EntityLiving)entity).c(i, ((CanaryItem)items[i]).getHandle());
+            ((net.minecraft.server.EntityLiving) entity).c(i, ((CanaryItem) items[i]).getHandle());
         }
     }
 
     @Override
     public void setEquipment(Item item, int slot) {
-        if(slot >= 5 ) {
-            return; //TODO: Response for user...
+        if (slot >= 5) {
+            return; // TODO: Response for user...
         }
-        ((net.minecraft.server.EntityLiving)entity).c(slot, ((CanaryItem)item).getHandle());
+        ((net.minecraft.server.EntityLiving) entity).c(slot, ((CanaryItem) item).getHandle());
     }
 
     @Override
     public float getDropChance(int slot) {
-        return ((net.minecraft.server.EntityLiving)entity).getDropChance(slot);
+        return ((net.minecraft.server.EntityLiving) entity).getDropChance(slot);
     }
 
     @Override
     public void setDropChance(int slot, float chance) {
-        ((net.minecraft.server.EntityLiving)entity).a(slot, chance);
+        ((net.minecraft.server.EntityLiving) entity).a(slot, chance);
     }
 
     /**
@@ -408,7 +410,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
      */
     @Override
     public PathFinder getPathFinder() {
-        return ((net.minecraft.server.EntityLiving)entity).getPathNavigator().getCanaryPathFinder();
+        return ((net.minecraft.server.EntityLiving) entity).getPathNavigator().getCanaryPathFinder();
     }
 
     /**
@@ -417,7 +419,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     @Override
     public void moveEntityWithGravity(double x, double y, double z, float speed) {
         this.lookAt(x, y, z);
-        ((net.minecraft.server.EntityLiving)entity).aA().a(x, y, z, speed);
+        ((net.minecraft.server.EntityLiving) entity).aA().a(x, y, z, speed);
     }
 
     /**
@@ -425,13 +427,13 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
      */
     @Override
     public AIManager getAITaskManager() {
-        return ((net.minecraft.server.EntityLiving)entity).getAITasks().getAIManager();
+        return ((net.minecraft.server.EntityLiving) entity).getAITasks().getAIManager();
     }
     
     /**
      * {@inheritDoc}
      */
     public int getArrowCountInEntity() {
-	return ((net.minecraft.server.EntityLiving)entity).bM();
+        return ((net.minecraft.server.EntityLiving) entity).bM();
     }
 }
