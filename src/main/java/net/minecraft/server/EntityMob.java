@@ -45,12 +45,17 @@ public abstract class EntityMob extends EntityCreature implements IMob {
             if (this.n != entity && this.o != entity) {
                 if (entity != this) {
                     // CanaryMod: MobTarget
-                    MobTargetHook hook = new MobTargetHook((net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) entity.getCanaryEntity());
+                    if (entity instanceof net.minecraft.server.EntityLiving) {
+                        MobTargetHook hook = new MobTargetHook((net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) entity.getCanaryEntity());
 
-                    Canary.hooks().callHook(hook);
-                    if (!hook.isCanceled()) {
+                        Canary.hooks().callHook(hook);
+                        if (!hook.isCanceled()) {
+                            this.a_ = entity;
+                        }
+                    } else {
                         this.a_ = entity;
                     }
+
                     //
                 }
 
