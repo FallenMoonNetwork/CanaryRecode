@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Callable;
-
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.vehicle.CanaryVehicle;

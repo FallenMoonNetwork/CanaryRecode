@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;

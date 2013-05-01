@@ -94,7 +94,7 @@ public class Chunk {
                 }
             }
         }
-        canaryChunk = new CanaryChunk(this); // CanaryMod: wrap chunk
+//        canaryChunk = new CanaryChunk(this); // CanaryMod: wrap chunk
     }
 
     public boolean a(int i0, int i1) {
@@ -394,8 +394,8 @@ public class Chunk {
                 int portalPointY = i1;
 
                 int portalId = BlockType.Portal.getId();
-
-                if (canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ).getTypeId() == portalId) {
+                net.canarymod.api.world.World world = canaryChunk.getDimension();
+                if (world != null && world.getBlockAt(portalPointX, portalPointY, portalPointZ).getTypeId() == portalId) {
                     // These will be equal 1 if the portal is defined on their axis and 0 if not.
                     int portalXOffset = (canaryChunk.getDimension().getBlockAt(portalPointX - 1, portalPointY, portalPointZ).getTypeId() == portalId || canaryChunk.getDimension().getBlockAt(portalPointX + 1, portalPointY, portalPointZ).getTypeId() == portalId) ? 1 : 0;
                     int portalZOffset = (canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ - 1).getTypeId() == portalId || canaryChunk.getDimension().getBlockAt(portalPointX, portalPointY, portalPointZ + 1).getTypeId() == portalId) ? 1 : 0;

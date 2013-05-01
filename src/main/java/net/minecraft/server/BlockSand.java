@@ -21,11 +21,13 @@ public class BlockSand extends Block {
 
     public void a(World world, int i0, int i1, int i2) {
         // CanaryMod: BlockPhysics
-        BlockPhysicsHook hook = new BlockPhysicsHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), true);
+        if (world.getCanaryWorld() != null) {
+            BlockPhysicsHook hook = new BlockPhysicsHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), true);
 
-        Canary.hooks().callHook(hook);
-        if (hook.isCanceled()) {
-            return;
+            Canary.hooks().callHook(hook);
+            if (hook.isCanceled()) {
+                return;
+            }
         }
         //
         world.a(i0, i1, i2, this.cz, this.a(world));
