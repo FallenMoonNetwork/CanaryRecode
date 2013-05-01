@@ -394,14 +394,11 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
 
     /**
      * {@inheritDoc}
-     * Needed to allow gravity on NPC's.
+     * Needed to make NPC's turn.
      */
     @Override
     public void moveEntity(double x, double y, double z) {
         this.lookAt(x, y, z);
-        this.getHandle().x = x;
-        this.getHandle().y = y;
-        this.getHandle().z = z;
     }
 
     /**

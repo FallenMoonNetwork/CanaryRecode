@@ -12,6 +12,7 @@ import net.canarymod.api.DamageType;
 import net.canarymod.api.PathFinder;
 import net.canarymod.api.ai.AIManager;
 import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
@@ -417,7 +418,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
      * {@inheritDoc}
      */
     @Override
-    public void moveEntityWithGravity(double x, double y, double z, float speed) {
+    public void moveEntityToXYZ(double x, double y, double z, float speed) {
         this.lookAt(x, y, z);
         ((net.minecraft.server.EntityLiving) entity).aA().a(x, y, z, speed);
     }
@@ -429,11 +430,24 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     public AIManager getAITaskManager() {
         return ((net.minecraft.server.EntityLiving) entity).getAITasks().getAIManager();
     }
-    
+
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getArrowCountInEntity() {
         return ((net.minecraft.server.EntityLiving) entity).bM();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void attackEntity(Entity entity, int damage){
+        if (!(entity instanceof net.canarymod.api.entity.living.EntityLiving)) {
+            return;
+        }
+        ((net.minecraft.server.EntityLiving)this.getHandle()).bK();// swings the arm
+        ((net.canarymod.api.entity.living.CanaryEntityLiving)entity).getHandle().a(net.minecraft.server.DamageSource.j, damage);
     }
 }
