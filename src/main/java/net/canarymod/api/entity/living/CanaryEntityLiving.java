@@ -4,7 +4,6 @@ package net.canarymod.api.entity.living;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.CanaryPacket;
@@ -292,7 +291,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @Override
     public EntityLiving getTarget() {
-        Entity target = entity.aG();
+        net.minecraft.server.Entity target = ((net.minecraft.server.EntityLiving) entity).aG();
         if(target != null){
             return (EntityLiving) ((net.minecraft.server.EntityLiving) target).getCanaryEntity();
         }
