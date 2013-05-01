@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.CanaryPacket;
@@ -34,6 +33,7 @@ import net.canarymod.hook.player.HealthChangeHook;
 import net.canarymod.hook.player.InventoryHook;
 import net.canarymod.hook.player.PlayerDeathHook;
 import net.canarymod.hook.player.PortalUseHook;
+import net.canarymod.hook.player.SignShowHook;
 import net.canarymod.hook.player.StatGainedHook;
 
 
@@ -386,6 +386,12 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     private void b(TileEntity tileentity) {
         if (tileentity != null) {
+            // CanaryMod: SignShowHook
+            if (tileentity instanceof TileEntitySign) {
+                SignShowHook hook = new SignShowHook(this.getPlayer(), ((TileEntitySign) tileentity).getCanarySign());
+                Canary.hooks().callHook(hook);
+            }
+            //
             Packet packet = tileentity.m();
 
             if (packet != null) {
