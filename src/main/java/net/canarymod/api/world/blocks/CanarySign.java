@@ -34,7 +34,7 @@ public class CanarySign extends CanaryComplexBlock implements Sign {
      */
     @Override
     public String getTextOnLine(int line) {
-        if (line > 0 && line < 3) {
+        if (line >= 0 && line <= 3) {
             return getTileEntity().a[line];
         }
         return null;
@@ -53,7 +53,7 @@ public class CanarySign extends CanaryComplexBlock implements Sign {
      */
     @Override
     public void setTextOnLine(String text, int line) {
-        if (line > 0 && line < 3) {
+        if (line >= 0 && line <= 3) {
             getTileEntity().a[line] = text;
         }
     }
