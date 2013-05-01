@@ -2,12 +2,11 @@ package net.canarymod.api;
 
 
 import java.util.ArrayList;
-
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
-import net.canarymod.api.world.World;
 import net.canarymod.api.world.DimensionType;
+import net.canarymod.api.world.World;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.ServerConfigurationManager;
 
@@ -75,6 +74,6 @@ public class CanaryConfigurationManager implements ConfigurationManager {
     @Override
     public void switchDimension(Player player, World world, boolean createPortal) {
         // Respawn
-        manager.a(((CanaryPlayer) player).getHandle(), world.getType().getId(), false, world.getSpawnLocation());
+        manager.a(((CanaryPlayer) player).getHandle(), world.getType().getId(), true, world.getSpawnLocation());
     }
 }
