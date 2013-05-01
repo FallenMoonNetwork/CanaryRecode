@@ -59,6 +59,22 @@ public class CanarySign extends CanaryComplexBlock implements Sign {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isWallSign() {
+        return getBlock().getType() == BlockType.WallSign;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isSignPost() {
+        return getBlock().getType() == BlockType.SignPost;
+    }
+
+    /**
      * Returns a String value representing this Block
      * 
      * @return String representation of this block
