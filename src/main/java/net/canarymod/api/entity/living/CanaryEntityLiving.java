@@ -427,4 +427,11 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     public AIManager getAITaskManager() {
         return ((net.minecraft.server.EntityLiving)entity).getAITasks().getAIManager();
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public int getArrowCountInEntity() {
+	return ((net.minecraft.server.EntityLiving)entity).bM();
+    }
 }
