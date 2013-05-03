@@ -2,7 +2,6 @@ package net.canarymod.api.world;
 
 
 import java.util.ArrayList;
-
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.EntityTracker;
@@ -15,6 +14,7 @@ import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.living.monster.EntityMob;
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.CanaryBlock;
@@ -29,7 +29,6 @@ import net.minecraft.server.EntityLightningBolt;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.EnumSkyBlock;
-import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntity;
 import net.minecraft.server.TileEntityBeacon;
 import net.minecraft.server.TileEntityBrewingStand;
@@ -114,15 +113,7 @@ public class CanaryWorld implements World {
 
     @Override
     public EntityItem dropItem(int x, int y, int z, int itemId, int amount, int damage) {
-        double d1 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
-        double d2 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
-        double d3 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
-
-        net.minecraft.server.EntityItem oei = new net.minecraft.server.EntityItem(world, x + d1, y + d2, z + d3, new ItemStack(itemId, amount, damage));
-
-        oei.c = 10;
-        world.d(oei);
-        return oei.getEntityItem();
+        return dropItem(x, y, z, new CanaryItem(itemId, amount, damage));
     }
 
     @Override
@@ -131,7 +122,7 @@ public class CanaryWorld implements World {
         double d2 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
         double d3 = world.s.nextFloat() * 0.7F + (1.0F - 0.7F) * 0.5D;
 
-        net.minecraft.server.EntityItem oei = new net.minecraft.server.EntityItem(world, x + d1, y + d2, z + d3, new ItemStack(item.getId(), item.getAmount(), item.getDamage()));
+        net.minecraft.server.EntityItem oei = new net.minecraft.server.EntityItem(world, x + d1, y + d2, z + d3, ((CanaryItem) item).getHandle());
 
         oei.c = 10;
         world.d(oei);
