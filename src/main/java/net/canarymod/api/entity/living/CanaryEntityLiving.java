@@ -292,7 +292,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
 
     @Override
     public EntityLiving getTarget() {
-        net.minecraft.server.Entity target = ((net.minecraft.server.EntityLiving) entity).aG();
+        net.minecraft.server.Entity target = ((net.minecraft.server.EntityLiving) entity).aJ();
 
         if (target != null) {
             return (EntityLiving) ((net.minecraft.server.EntityLiving) target).getCanaryEntity();
@@ -303,9 +303,9 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     @Override
     public void setTarget(EntityLiving entityliving) {
         if (entityliving == null) {
-            ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) null);
+            ((net.minecraft.server.EntityLiving) entity).b((net.minecraft.server.EntityLiving) null);
         } else {
-            ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) ((CanaryEntity) entityliving).getHandle());
+            ((net.minecraft.server.EntityLiving) entity).b((net.minecraft.server.EntityLiving) ((CanaryEntity) entityliving).getHandle());
         }
     }
 

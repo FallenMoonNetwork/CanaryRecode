@@ -886,7 +886,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             playerusagesnooper.a("world[" + i0 + "][generator_name]", worldinfo.u().a());
             playerusagesnooper.a("world[" + i0 + "][generator_version]", Integer.valueOf(worldinfo.u().c()));
             playerusagesnooper.a("world[" + i0 + "][height]", Integer.valueOf(this.C));
-            playerusagesnooper.a("world[" + i0 + "][chunks_loaded]", Integer.valueOf(worldserver.L().f()));
+            playerusagesnooper.a("world[" + i0 + "][chunks_loaded]", Integer.valueOf(worldserver.K().f()));
             ++i0;
         }
 

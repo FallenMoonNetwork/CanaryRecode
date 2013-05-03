@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
@@ -147,27 +146,27 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void addExhaustion(float exhaustion) {
-        ((EntityPlayerMP) entity).cl().a(exhaustion);
+        ((EntityPlayerMP) entity).cn().a(exhaustion);
     }
 
     @Override
     public void setExhaustion(float exhaustion) {
-        ((EntityPlayerMP) entity).cl().setExhaustionLevel(exhaustion);
+        ((EntityPlayerMP) entity).cn().setExhaustionLevel(exhaustion);
     }
 
     @Override
     public float getExhaustionLevel() {
-        return ((EntityPlayerMP) entity).cl().getExhaustionLevel();
+        return ((EntityPlayerMP) entity).cn().getExhaustionLevel();
     }
 
     @Override
     public void setHunger(int hunger) {
-        ((EntityPlayerMP) entity).cl().setFoodLevel(hunger);
+        ((EntityPlayerMP) entity).cn().setFoodLevel(hunger);
     }
 
     @Override
     public int getHunger() {
-        return ((EntityPlayerMP) entity).cl().a();
+        return ((EntityPlayerMP) entity).cn().a();
     }
 
     @Override
@@ -210,7 +209,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void destroyItemHeld() {
-        ((EntityPlayerMP) entity).bY();
+        ((EntityPlayerMP) entity).ca();
     }
 
     @Override
@@ -231,7 +230,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public Location getSpawnPosition() {
         Location spawn = Canary.getServer().getDefaultWorld().getSpawnLocation();
-        ChunkCoordinates loc = ((EntityPlayerMP) entity).ci();
+        ChunkCoordinates loc = ((EntityPlayerMP) entity).ck();
 
         if (loc != null) {
             spawn = new Location(Canary.getServer().getDefaultWorld(), loc.a, loc.b, loc.c, 0.0F, 0.0F);

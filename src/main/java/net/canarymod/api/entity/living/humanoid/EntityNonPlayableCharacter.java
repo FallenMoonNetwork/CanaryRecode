@@ -93,8 +93,9 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
     }
     @Override
     public void a(DamageSource damagesource) {
-        this.b.ad().k(this.bt.b());
-        if (!this.q.M().b("keepInventory")) {
+        // NPC Death
+        // this.b.ad().k(this.bt.b()); // Death Messages; temp disable pending configuration
+        if (!this.q.N().b("keepInventory")) {
             this.bK.m();
         }
 
