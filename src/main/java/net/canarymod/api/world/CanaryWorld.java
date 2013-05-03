@@ -68,7 +68,7 @@ public class CanaryWorld implements World {
         this.name = name;
         world = dimension;
 
-        playerManager = dimension.r().getPlayerManager();
+        playerManager = dimension.s().getPlayerManager();
         entityTracker = dimension.getEntityTracker();
         this.type = type;
         // Init nanotick size
@@ -516,7 +516,7 @@ public class CanaryWorld implements World {
 
     @Override
     public long getWorldSeed() {
-        return world.F();
+        return world.G();
     }
 
     @Override

@@ -14,7 +14,7 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
 
     @Override
     public boolean canSave() {
-        return this.handle.b();
+        return this.handle.c();
     }
 
     @Override

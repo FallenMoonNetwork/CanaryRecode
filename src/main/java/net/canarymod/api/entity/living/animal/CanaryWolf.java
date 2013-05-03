@@ -7,14 +7,14 @@ import net.minecraft.server.EntityWolf;
 
 /**
  * Wolf wrapper implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public class CanaryWolf extends CanaryTameable implements Wolf {
 
     /**
      * Constructs a new wrapper for EntityWolf
-     * 
+     *
      * @param entity
      *            the EntityWolf to wrap
      */
@@ -51,7 +51,7 @@ public class CanaryWolf extends CanaryTameable implements Wolf {
      */
     @Override
     public DyeColor getCollarColor() {
-        return DyeColor.values()[getHandle().bV()];
+        return DyeColor.values()[getHandle().bX()];
     }
 
     /**

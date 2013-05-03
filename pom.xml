@@ -33,7 +33,7 @@
     <dependency>
       <groupId>net.minecraft</groupId>
       <artifactId>server</artifactId>
-      <version>1.5.1</version>
+      <version>1.5.2</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
