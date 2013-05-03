@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import net.canarymod.Canary;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.player.EatHook;
@@ -92,7 +93,7 @@ public class ItemPotion extends Item {
             return itemstack;
         }
         // Apply food changes
-        entityplayer.cl().a(hook.getLevelGain(), hook.getSaturationGain());
+        entityplayer.cn().a(hook.getLevelGain(), hook.getSaturationGain());
         // And finally add the effects
         if (hook.getPotionEffects() != null) {
             for (net.canarymod.api.potion.PotionEffect effect : hook.getPotionEffects()) {

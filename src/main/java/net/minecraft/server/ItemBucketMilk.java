@@ -22,7 +22,7 @@ public class ItemBucketMilk extends Item {
             return itemstack;
         }
         // For those Lactose intolerant
-        entityplayer.cl().a(hook.getLevelGain(), hook.getSaturationGain());
+        entityplayer.cn().a(hook.getLevelGain(), hook.getSaturationGain());
         //
 
         if (!entityplayer.ce.d) {

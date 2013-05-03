@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
@@ -1638,7 +1639,7 @@ public abstract class Entity {
             ChunkCoordinates ochunkcoordinates;
 
             if (dimensionTo == 1) {
-                ochunkcoordinates = oworldserverTo.I();
+                ochunkcoordinates = oworldserverTo.J();
             } else {
                 ochunkcoordinates = oworldserverTo.l();
             }

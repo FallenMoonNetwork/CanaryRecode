@@ -4,6 +4,7 @@ package net.minecraft.server;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -1418,11 +1419,11 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
             i = this.cg;
         }
 
-        this.cg -= (float) i / (float) this.ck();
+        this.cg -= (float) i / (float) this.cm();
 
         // Inverse of for loop in this.t(int)
-        for (this.cg -= i; this.ch < 0.0F; this.ch = this.ch / this.ck() + 1.0F) {
-            this.ch *= this.ck();
+        for (this.cg -= i; this.ch < 0.0F; this.ch = this.ch / this.cm() + 1.0F) {
+            this.ch *= this.cm();
             this.a(-1);
         }
         updateXP();
@@ -1438,13 +1439,13 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     }
 
     public void recalculateXP() {
-        this.ch = this.cg / (float) this.ck();
+        this.ch = this.cg / (float) this.cm();
         this.cf = 0;
 
         while (this.ch >= 1.0F) {
-            this.ch = (this.ch - 1.0F) * this.ck();
+            this.ch = (this.ch - 1.0F) * this.cm();
             this.cf++;
-            this.ch /= this.ck();
+            this.ch /= this.cm();
         }
 
         if (this instanceof EntityPlayerMP) {

@@ -99,7 +99,7 @@ public abstract class ServerConfigurationManager {
         }
         // CanaryMod end
         this.c(entityplayermp);
-        netserverhandler.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B);
+        netserverhandler.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B, entityplayermp.getCanaryWorld().getType().getId(), entityplayermp.getCanaryWorld().getName());
         this.e.ae().a(netserverhandler);
         netserverhandler.b(new Packet4UpdateTime(worldserver.H(), worldserver.I()));
         if (this.e.Q().length() > 0) {
@@ -195,7 +195,7 @@ public abstract class ServerConfigurationManager {
 
     // CanaryMod: get player data for name
     public static NBTTagCompound getPlayerDatByName(String name) {
-        ISaveHandler handler = ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().K();
+        ISaveHandler handler = ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().L();
 
         if (handler instanceof SaveHandler) {
             SaveHandler saves = (SaveHandler) handler;
@@ -421,8 +421,8 @@ public abstract class ServerConfigurationManager {
             entityplayermp1.b(entityplayermp1.u, entityplayermp1.v + 1.0D, entityplayermp1.w);
         }
 
-        entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar >= 0 ? -1 : 0, (byte) entityplayermp1.q.r, entityplayermp1.q.L().u(), entityplayermp1.q.P(), entityplayermp1.c.b()));
-        entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar, (byte) entityplayermp1.q.r, entityplayermp1.q.L().u(), entityplayermp1.q.P(), entityplayermp1.c.b()));
+        entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar >= 0 ? -1 : 0, (byte) entityplayermp1.q.r, entityplayermp1.q.M().u(), entityplayermp1.q.Q(), entityplayermp1.c.b()));
+        entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar, (byte) entityplayermp1.q.r, entityplayermp1.q.M().u(), entityplayermp1.q.Q(), entityplayermp1.c.b()));
 
         chunkcoordinates1 = worldserver.J();
 
@@ -462,7 +462,7 @@ public abstract class ServerConfigurationManager {
         // Pre-load a chunk in the new world, makes spawning there a little faster
         worldserver1.b.c((int) entityplayermp.u >> 4, (int) entityplayermp.w >> 4);
 
-        entityplayermp.a.b(new Packet9Respawn(i0, (byte) entityplayermp.q.r, worldserver1.L().u(), worldserver1.P(), entityplayermp.c.b()));
+        entityplayermp.a.b(new Packet9Respawn(i0, (byte) entityplayermp.q.r, worldserver1.M().u(), worldserver1.Q(), entityplayermp.c.b()));
         worldserver.f(entityplayermp);
         entityplayermp.M = false;
         this.a(entityplayermp, i1, worldserver, worldserver1); // i1
@@ -628,7 +628,7 @@ public abstract class ServerConfigurationManager {
     public boolean e(String s0) {
         WorldServer srv = (WorldServer) ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle();
 
-        return this.h.contains(s0.trim().toLowerCase()) || this.e.I() && srv.L().v() && this.e.H().equalsIgnoreCase(s0) || this.m;
+        return this.h.contains(s0.trim().toLowerCase()) || this.e.I() && srv.M().v() && this.e.H().equalsIgnoreCase(s0) || this.m;
     }
 
     public EntityPlayerMP f(String s0) {
@@ -827,7 +827,7 @@ public abstract class ServerConfigurationManager {
     public String[] m() {
         WorldServer srv = (WorldServer) ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle();
 
-        return srv.K().e().f();
+        return srv.L().e().f();
     }
 
     public boolean n() {
@@ -872,7 +872,7 @@ public abstract class ServerConfigurationManager {
             entityplayermp.c.a(this.l);
         }
 
-        entityplayermp.c.b(world.L().r());
+        entityplayermp.c.b(world.M().r());
     }
 
     public void r() {
