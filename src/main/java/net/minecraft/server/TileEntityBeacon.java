@@ -21,7 +21,7 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
     }
 
     public void h() {
-        if (this.k.G() % 80L == 0L) {
+        if (this.k.H() % 80L == 0L) {
             this.v();
             this.u();
         }
@@ -38,7 +38,7 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
 
             AxisAlignedBB axisalignedbb = AxisAlignedBB.a().a((double) this.l, (double) this.m, (double) this.n, (double) (this.l + 1), (double) (this.m + 1), (double) (this.n + 1)).b(d0, d0, d0);
 
-            axisalignedbb.e = (double) this.k.P();
+            axisalignedbb.e = (double) this.k.Q();
             List list = this.k.a(EntityPlayer.class, axisalignedbb);
             Iterator iterator = list.iterator();
 

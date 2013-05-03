@@ -81,7 +81,7 @@ public abstract class World implements IBlockAccess {
         return this.t.d.a(i0, i1);
     }
 
-    public WorldChunkManager t() {
+    public WorldChunkManager u() {
         return this.t.d;
     }
 
@@ -137,7 +137,7 @@ public abstract class World implements IBlockAccess {
             this.A = villagecollection;
             this.A.a(this);
         }
-        this.y();
+        this.z();
         this.a(); //CanaryMod removed
     }
 
@@ -639,7 +639,7 @@ public abstract class World implements IBlockAccess {
         return this.t.g[this.n(i0, i1, i2)];
     }
 
-    public boolean u() {
+    public boolean v() {
         return this.j < 4;
     }
 
@@ -768,7 +768,7 @@ public abstract class World implements IBlockAccess {
                         vec3.e = d2;
                     }
 
-                    Vec3 vec32 = this.T().a(vec3.c, vec3.d, vec3.e);
+                    Vec3 vec32 = this.U().a(vec3.c, vec3.d, vec3.e);
 
                     i3 = (int) (vec32.c = (double) MathHelper.c(vec3.c));
                     if (b0 == 5) {
@@ -1061,7 +1061,7 @@ public abstract class World implements IBlockAccess {
         return this.t.a(this.x.g(), f0);
     }
 
-    public int v() {
+    public int w() {
         return this.t.a(this.x.g());
     }
 
@@ -1463,7 +1463,7 @@ public abstract class World implements IBlockAccess {
             return false;
         } else {
             boolean flag0 = false;
-            Vec3 vec3 = this.T().a(0.0D, 0.0D, 0.0D);
+            Vec3 vec3 = this.U().a(0.0D, 0.0D, 0.0D);
 
             for (int i6 = i0; i6 < i1; ++i6) {
                 for (int i7 = i2; i7 < i3; ++i7) {
@@ -1578,7 +1578,7 @@ public abstract class World implements IBlockAccess {
                     double d4 = axisalignedbb.b + (axisalignedbb.e - axisalignedbb.b) * (double) f1;
                     double d5 = axisalignedbb.c + (axisalignedbb.f - axisalignedbb.c) * (double) f2;
 
-                    if (this.a(this.T().a(d3, d4, d5), vec3) == null) {
+                    if (this.a(this.U().a(d3, d4, d5), vec3) == null) {
                         ++i0;
                     }
 
@@ -1767,7 +1767,7 @@ public abstract class World implements IBlockAccess {
         }
     }
 
-    public void y() {
+    public void z() {
         int i0 = this.a(1.0F);
 
         if (i0 != this.j) {
@@ -1781,7 +1781,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public void b() {
-        this.n();
+        this.o();
     }
 
     private void a() {
@@ -1793,7 +1793,7 @@ public abstract class World implements IBlockAccess {
         }
     }
 
-    protected void n() {
+    protected void o() {
         if (!this.t.f) {
             int i0 = this.x.o();
 
@@ -1873,11 +1873,11 @@ public abstract class World implements IBlockAccess {
         }
     }
 
-    public void z() {
+    public void A() {
         this.x.g(1);
     }
 
-    protected void A() {
+    protected void B() {
         this.G.clear();
         this.C.a("buildList");
 
@@ -1945,7 +1945,7 @@ public abstract class World implements IBlockAccess {
     }
 
     protected void g() {
-        this.A();
+        this.B();
     }
 
     public boolean x(int i0, int i1, int i2) {
@@ -2262,7 +2262,7 @@ public abstract class World implements IBlockAccess {
         for (int i1 = 0; i1 < this.e.size(); ++i1) {
             Entity entity = (Entity) this.e.get(i1);
 
-            if (oclass0.isAssignableFrom(entity.getClass())) {
+            if ((!(entity instanceof EntityLiving) || !((EntityLiving) entity).bU()) && oclass0.isAssignableFrom(entity.getClass())) {
                 ++i0;
             }
         }
@@ -2457,7 +2457,7 @@ public abstract class World implements IBlockAccess {
                 }
 
                 if (entityplayer1.ai()) {
-                    float f0 = entityplayer1.ca();
+                    float f0 = entityplayer1.cc();
 
                     if (f0 < 0.1F) {
                         f0 = 0.1F;
@@ -2486,19 +2486,19 @@ public abstract class World implements IBlockAccess {
         return null;
     }
 
-    public void E() throws MinecraftException {
+    public void F() throws MinecraftException {
         this.w.c();
     }
 
-    public long F() {
+    public long G() {
         return this.x.b();
     }
 
-    public long G() {
+    public long H() {
         return this.x.f();
     }
 
-    public long H() {
+    public long I() {
         return this.x.g();
     }
 
@@ -2513,7 +2513,7 @@ public abstract class World implements IBlockAccess {
         //
     }
 
-    public ChunkCoordinates I() {
+    public ChunkCoordinates J() {
         return new ChunkCoordinates(this.x.c(), this.x.d(), this.x.e());
     }
 
@@ -2523,7 +2523,7 @@ public abstract class World implements IBlockAccess {
 
     public void a(Entity entity, byte b0) {}
 
-    public IChunkProvider J() {
+    public IChunkProvider K() {
         return this.v;
     }
 
@@ -2533,15 +2533,15 @@ public abstract class World implements IBlockAccess {
         }
     }
 
-    public ISaveHandler K() {
+    public ISaveHandler L() {
         return this.w;
     }
 
-    public WorldInfo L() {
+    public WorldInfo M() {
         return this.x;
     }
 
-    public GameRules M() {
+    public GameRules N() {
         return this.x.x();
     }
 
@@ -2555,16 +2555,16 @@ public abstract class World implements IBlockAccess {
         return this.m + (this.n - this.m) * f0;
     }
 
-    public boolean N() {
+    public boolean O() {
         return (double) this.h(1.0F) > 0.9D;
     }
 
-    public boolean O() {
+    public boolean P() {
         return (double) this.i(1.0F) > 0.2D;
     }
 
     public boolean F(int i0, int i1, int i2) {
-        if (!this.O()) {
+        if (!this.P()) {
             return false;
         } else if (!this.l(i0, i1, i2)) {
             return false;
@@ -2622,11 +2622,11 @@ public abstract class World implements IBlockAccess {
         }
     }
 
-    public int P() {
+    public int Q() {
         return 256;
     }
 
-    public int Q() {
+    public int R() {
         return this.t.f ? 128 : 256;
     }
 
@@ -2635,7 +2635,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public Random H(int i0, int i1, int i2) {
-        long i3 = (long) i0 * 341873128712L + (long) i1 * 132897987541L + this.L().b() + (long) i2;
+        long i3 = (long) i0 * 341873128712L + (long) i1 * 132897987541L + this.M().b() + (long) i2;
 
         this.s.setSeed(i3);
         return this.s;
@@ -2669,20 +2669,19 @@ public abstract class World implements IBlockAccess {
         }
     }
 
-    @Override
-    public Vec3Pool T() {
+    public Vec3Pool U() {
         return this.J;
     }
 
-    public Calendar U() {
-        if (this.G() % 600L == 0L) {
+    public Calendar V() {
+        if (this.H() % 600L == 0L) {
             this.K.setTimeInMillis(System.currentTimeMillis());
         }
 
         return this.K;
     }
 
-    public Scoreboard V() {
+    public Scoreboard W() {
         return this.D;
     }
 
@@ -2710,7 +2709,7 @@ public abstract class World implements IBlockAccess {
         }
     }
 
-    public ILogAgent W() {
+    public ILogAgent X() {
         return this.L;
     }
 

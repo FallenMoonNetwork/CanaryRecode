@@ -75,7 +75,7 @@ public class Village {
             int i9 = i2 + this.a.s.nextInt(16) - 8;
 
             if (this.a(i7, i8, i9) && this.b(i7, i8, i9, i3, i4, i5)) {
-                return this.a.T().a((double) i7, (double) i8, (double) i9);
+                return this.a.U().a((double) i7, (double) i8, (double) i9);
             }
         }
 

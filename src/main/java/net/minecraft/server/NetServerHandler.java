@@ -297,7 +297,7 @@ public class NetServerHandler extends NetHandler {
 
                 // CanaryMod: check on flying capability instead of mode
                 // moved allow-flight to per-world config
-                if (!Configuration.getWorldConfig(c.getCanaryWorld().getFqName()).isFlightAllowed() && !this.c.ce.c && !worldserver.c(axisalignedbb)) {
+                if (!Configuration.getWorldConfig(c.getCanaryWorld().getFqName()).isFlightAllowed() && !this.c.c.d() && !worldserver.c(axisalignedbb)) {
                     if (d12 >= -0.03125D) {
                         ++this.f;
                         if (this.f > 80) {
@@ -346,7 +346,7 @@ public class NetServerHandler extends NetHandler {
         } else if (packet14blockdig.e == 3) {
             this.c.a(true);
         } else if (packet14blockdig.e == 5) {
-            this.c.bX();
+            this.c.bZ();
         } else {
             boolean flag0 = false;
 
@@ -685,7 +685,7 @@ public class NetServerHandler extends NetHandler {
         if (packet205clientcommand.a == 1) {
             if (this.c.j) {
                 this.c = this.d.ad().a(this.c, 0, true);
-            } else if (this.c.o().L().t()) {
+            } else if (this.c.o().M().t()) {
                 if (this.d.I() && this.c.bS.equals(this.d.H())) {
                     this.c.a.c("You have died. Game over, man, it\'s game over!");
                     this.d.P();

@@ -11,7 +11,7 @@ public class TileEntityDaylightDetector extends TileEntity {
     }
 
     public void h() {
-        if (this.k != null && !this.k.I && this.k.G() % 20L == 0L) {
+        if (this.k != null && !this.k.I && this.k.H() % 20L == 0L) {
             this.q = this.q();
             if (this.q != null && this.q instanceof BlockDaylightDetector) {
                 ((BlockDaylightDetector) this.q).i_(this.k, this.l, this.m, this.n);

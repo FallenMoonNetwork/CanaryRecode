@@ -183,7 +183,7 @@ public class PathNavigate {
     }
 
     private Vec3 i() {
-        return this.b.T().a(this.a.u, (double) this.j(), this.a.w);
+        return this.b.U().a(this.a.u, (double) this.j(), this.a.w);
     }
 
     private int j() {

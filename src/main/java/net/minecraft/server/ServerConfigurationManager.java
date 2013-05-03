@@ -37,6 +37,7 @@ public abstract class ServerConfigurationManager {
 //    private final BanList g = new BanList(new File("banned-ips.txt"));
     private Set h = new HashSet();
     private Set i = new HashSet();
+    private IPlayerFileData j;
     private boolean k;
     protected int b;
     protected int c;
@@ -78,16 +79,16 @@ public abstract class ServerConfigurationManager {
         this.e.al().a(entityplayermp.bS + "[" + s0 + "] logged in with entity id " + entityplayermp.k + " at (" + entityplayermp.u + ", " + entityplayermp.v + ", " + entityplayermp.w + ")");
         // CanaryMod: Use world we got from players NBT data
         WorldServer worldserver = (WorldServer) w.getHandle();
-        ChunkCoordinates chunkcoordinates = worldserver.I();
+        ChunkCoordinates chunkcoordinates = worldserver.J();
 
         this.a(entityplayermp, (EntityPlayerMP) null, worldserver);
         NetServerHandler netserverhandler = new NetServerHandler(this.e, inetworkmanager, entityplayermp);
 
-        netserverhandler.b(new Packet1Login(entityplayermp.k, worldserver.L().u(), entityplayermp.c.b(), worldserver.L().t(), worldserver.t.h, worldserver.r, worldserver.P(), this.l()));
+        netserverhandler.b(new Packet1Login(entityplayermp.k, worldserver.M().u(), entityplayermp.c.b(), worldserver.M().t(), worldserver.t.h, worldserver.r, worldserver.Q(), this.l()));
         netserverhandler.b(new Packet6SpawnPosition(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c));
         netserverhandler.b(new Packet202PlayerAbilities(entityplayermp.ce));
         netserverhandler.b(new Packet16BlockItemSwitch(entityplayermp.bK.c));
-        this.a((ServerScoreboard) worldserver.V(), entityplayermp);
+        this.a((ServerScoreboard) worldserver.W(), entityplayermp);
         this.b(entityplayermp, worldserver);
         // CanaryMod Connection hook
         ConnectionHook hook = new ConnectionHook(entityplayermp.getPlayer(), EnumChatFormatting.o + entityplayermp.ax() + EnumChatFormatting.o + " joined the game.", firstTime);
@@ -98,9 +99,9 @@ public abstract class ServerConfigurationManager {
         }
         // CanaryMod end
         this.c(entityplayermp);
-        netserverhandler.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B, entityplayermp.getCanaryWorld().getType().getId(), entityplayermp.getCanaryWorld().getName());
+        netserverhandler.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B);
         this.e.ae().a(netserverhandler);
-        netserverhandler.b(new Packet4UpdateTime(worldserver.G(), worldserver.H()));
+        netserverhandler.b(new Packet4UpdateTime(worldserver.H(), worldserver.I()));
         if (this.e.Q().length() > 0) {
             entityplayermp.a(this.e.Q(), this.e.S());
         }
@@ -156,7 +157,7 @@ public abstract class ServerConfigurationManager {
 
     public void a(WorldServer server) {
         // CanaryMod Multiworld
-        playerFileData.put(server.getCanaryWorld().getName(), server.K().e());
+        playerFileData.put(server.getCanaryWorld().getName(), server.L().e());
         //
     }
 
@@ -164,9 +165,10 @@ public abstract class ServerConfigurationManager {
         WorldServer worldserver1 = entityplayermp.o();
 
         if (worldserver != null) {
-            worldserver.r().c(entityplayermp);
+            worldserver.s().c(entityplayermp);
         }
-        worldserver1.r().a(entityplayermp);
+
+        worldserver1.s().a(entityplayermp);
         worldserver1.b.c((int) entityplayermp.u >> 4, (int) entityplayermp.w >> 4);
     }
 
@@ -175,7 +177,7 @@ public abstract class ServerConfigurationManager {
     }
 
     public NBTTagCompound a(EntityPlayerMP entityplayermp) {
-        NBTTagCompound nbttagcompound = entityplayermp.getCanaryWorld().getHandle().L().i();
+        NBTTagCompound nbttagcompound = entityplayermp.getCanaryWorld().getHandle().M().i();
         NBTTagCompound nbttagcompound1;
 
         if (entityplayermp.c_().equals(this.e.H()) && nbttagcompound != null) {
@@ -228,7 +230,7 @@ public abstract class ServerConfigurationManager {
     }
 
     public void d(EntityPlayerMP entityplayermp) {
-        entityplayermp.o().r().d(entityplayermp);
+        entityplayermp.o().s().d(entityplayermp);
     }
 
     public void e(EntityPlayerMP entityplayermp) {
@@ -241,7 +243,7 @@ public abstract class ServerConfigurationManager {
         }
 
         worldserver.e(entityplayermp);
-        worldserver.r().c(entityplayermp);
+        worldserver.s().c(entityplayermp);
         this.a.remove(entityplayermp);
         this.a((Packet) (new Packet201PlayerInfo(entityplayermp.bS, false, 9999)));
     }
@@ -360,13 +362,13 @@ public abstract class ServerConfigurationManager {
     // XXX
     // IMPORTANT, HERE IS WORLD SWITCHING GOING ON!
     public EntityPlayerMP a(EntityPlayerMP entityplayermp, int i0, boolean flag0, Location loc) {
-        entityplayermp.o().p().a(entityplayermp);
-        entityplayermp.o().p().b(entityplayermp);
-        entityplayermp.o().r().c(entityplayermp);
+        entityplayermp.o().q().a(entityplayermp);
+        entityplayermp.o().q().b(entityplayermp);
+        entityplayermp.o().s().c(entityplayermp);
         this.a.remove(entityplayermp);
         entityplayermp.getCanaryWorld().getHandle().f(entityplayermp);
-        ChunkCoordinates chunkcoordinates = entityplayermp.ci();
-        boolean flag1 = entityplayermp.cj();
+        ChunkCoordinates chunkcoordinates = entityplayermp.ck();
+        boolean flag1 = entityplayermp.cl();
 
         entityplayermp.ar = i0;
         Object object;
@@ -422,14 +424,13 @@ public abstract class ServerConfigurationManager {
         entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar >= 0 ? -1 : 0, (byte) entityplayermp1.q.r, entityplayermp1.q.L().u(), entityplayermp1.q.P(), entityplayermp1.c.b()));
         entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar, (byte) entityplayermp1.q.r, entityplayermp1.q.L().u(), entityplayermp1.q.P(), entityplayermp1.c.b()));
 
-        chunkcoordinates1 = worldserver.I();
+        chunkcoordinates1 = worldserver.J();
 
         entityplayermp1.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName());
         entityplayermp1.a.b(new Packet6SpawnPosition(chunkcoordinates1.a, chunkcoordinates1.b, chunkcoordinates1.c));
         entityplayermp1.a.b(new Packet43Experience(entityplayermp1.ch, entityplayermp1.cg, entityplayermp1.cf));
         this.b(entityplayermp1, worldserver);
-
-        worldserver.r().a(entityplayermp1);
+        worldserver.s().a(entityplayermp1);
         worldserver.d(entityplayermp1);
         this.a.add(entityplayermp1);
         entityplayermp1.d_();
@@ -508,7 +509,7 @@ public abstract class ServerConfigurationManager {
             ChunkCoordinates chunkcoordinates;
 
             if (i0 == 1) {
-                chunkcoordinates = worldserver1.I();
+                chunkcoordinates = worldserver1.J();
             } else {
                 chunkcoordinates = worldserver1.l();
             }
@@ -531,7 +532,7 @@ public abstract class ServerConfigurationManager {
                 worldserver1.d(entity);
                 entity.b(d0, entity.v, d1, entity.A, entity.B);
                 worldserver1.a(entity, false);
-                worldserver1.s().a(entity, d3, d4, d5, f0);
+                worldserver1.t().a(entity, d3, d4, d5, f0);
             }
 
             worldserver.C.b();
@@ -559,13 +560,13 @@ public abstract class ServerConfigurationManager {
     }
 
     // CanaryMod re-route packets properly
-    public void sendPacketToDimension(Packet opacket, String world, int i) {
+    public void sendPacketToDimension(Packet packet, String world, int i) {
         for (int j = 0; j < this.a.size(); ++j) {
-            EntityPlayerMP oentityplayermp = (EntityPlayerMP) this.a.get(j);
+            EntityPlayerMP entityplayermp = (EntityPlayerMP) this.a.get(j);
 
-            if (world.equals(oentityplayermp.getCanaryWorld().getName()) && oentityplayermp.ar == i) {
+            if (world.equals(entityplayermp.getCanaryWorld().getName()) && entityplayermp.ar == i) {
                 // TODO check: CanaryMod re-route time updates to world-specific entity trackers
-                oentityplayermp.a.b(opacket);
+                entityplayermp.a.b(packet);
             }
         }
     }
@@ -678,7 +679,7 @@ public abstract class ServerConfigurationManager {
                         s1 = s1.substring(1);
                     }
 
-                    ScorePlayerTeam scoreplayerteam = entityplayermp.cq();
+                    ScorePlayerTeam scoreplayerteam = entityplayermp.cs();
                     String s2 = scoreplayerteam == null ? "" : scoreplayerteam.b();
 
                     if (flag1 == s1.equalsIgnoreCase(s2)) {
@@ -737,14 +738,14 @@ public abstract class ServerConfigurationManager {
                     s0 = s0.substring(0, s0.length() - 4);
                 }
 
-                Scoreboard scoreboard = entityplayer.cp();
+                Scoreboard scoreboard = entityplayer.cr();
                 ScoreObjective scoreobjective = scoreboard.b(s0);
 
                 if (scoreobjective == null) {
                     return false;
                 }
 
-                Score score = entityplayer.cp().a(entityplayer.am(), scoreobjective);
+                Score score = entityplayer.cr().a(entityplayer.am(), scoreobjective);
 
                 i0 = score.c();
                 if (i0 < ((Integer) entry.getValue()).intValue() && flag0) {
@@ -803,8 +804,8 @@ public abstract class ServerConfigurationManager {
     public void j() {}
 
     public void b(EntityPlayerMP entityplayermp, WorldServer worldserver) {
-        entityplayermp.a.b(new Packet4UpdateTime(worldserver.G(), worldserver.H()));
-        if (worldserver.O()) {
+        entityplayermp.a.b(new Packet4UpdateTime(worldserver.H(), worldserver.I()));
+        if (worldserver.P()) {
             entityplayermp.a.b(new Packet70GameEvent(1, 0));
         }
     }
