@@ -2642,7 +2642,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public ChunkPosition b(String s0, int i0, int i1, int i2) {
-        return this.J().a(this, s0, i0, i1, i2);
+        return this.K().a(this, s0, i0, i1, i2);
     }
 
     public CrashReportCategory a(CrashReport crashreport) {

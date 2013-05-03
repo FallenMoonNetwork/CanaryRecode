@@ -735,7 +735,7 @@ public class WorldServer extends World {
 
     }
 
-    private void Y() {
+    private void Z() {
         while (!this.Q[this.R].isEmpty()) {
             int i0 = this.R;
 
