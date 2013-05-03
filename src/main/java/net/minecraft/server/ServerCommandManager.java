@@ -59,7 +59,7 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
         boolean flag0 = true;
 
         // CanaryMod: Fix for MultiWorld
-        if (icommandsender instanceof TileEntityCommandBlock && !((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().M().b("commandBlockOutput")) {
+        if (icommandsender instanceof TileEntityCommandBlock && !((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().N().b("commandBlockOutput")) {
             flag0 = false;
         }
 
