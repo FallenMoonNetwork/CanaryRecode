@@ -23,7 +23,7 @@ public class EntityTracker {
 
     public EntityTracker(WorldServer worldserver) {
         this.a = worldserver;
-        this.d = worldserver.o().ad().a();
+        this.d = worldserver.p().ad().a();
         canaryTracker = new CanaryEntityTracker(this, worldserver.getCanaryWorld());
     }
 

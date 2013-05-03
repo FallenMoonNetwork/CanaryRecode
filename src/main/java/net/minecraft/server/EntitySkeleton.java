@@ -89,7 +89,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
     }
 
     public void c() {
-        if (this.q.u() && !this.q.I) {
+        if (this.q.v() && !this.q.I) {
             float f0 = this.c(1.0F);
 
             if (f0 > 0.5F && this.ab.nextFloat() * 30.0F < (f0 - 0.4F) * 2.0F && this.q.l(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w))) {
@@ -187,7 +187,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
 
         this.h(this.ab.nextFloat() < au[this.q.r]);
         if (this.p(4) == null) {
-            Calendar calendar = this.q.U();
+            Calendar calendar = this.q.V();
 
             if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.ab.nextFloat() < 0.25F) {
                 this.c(4, new ItemStack(this.ab.nextFloat() < 0.1F ? Block.bj : Block.be));

@@ -67,7 +67,7 @@ public abstract class Entity {
     protected Random ab;
     public int ac;
     public int ad;
-    public int d; // CanaryMod: private => public (FireTicks)
+    public int d; // CanaryMod: private -> public (FireTicks)
     protected boolean ae;
     public int af;
     private boolean e;
@@ -155,12 +155,10 @@ public abstract class Entity {
         return this.ah;
     }
 
-    @Override
     public boolean equals(Object object) {
         return object instanceof Entity ? ((Entity) object).k == this.k : false;
     }
 
-    @Override
     public int hashCode() {
         return this.k;
     }
@@ -233,7 +231,7 @@ public abstract class Entity {
 
             i0 = this.y();
             if (this.ap) {
-                //CanatyMod moved allow-nether to per-world config
+                //CanaryMod moved allow-nether to per-world config
                 if (Configuration.getWorldConfig(getCanaryWorld().getFqName()).isNetherAllowed()) {
                     if (this.o == null && this.aq++ >= i0) {
                         this.aq = i0;
@@ -976,9 +974,9 @@ public abstract class Entity {
 
     public void e(NBTTagCompound nbttagcompound) {
         try {
-            nbttagcompound.a("Pos", (NBTBase) this.a(new double[] { this.u, this.v + (double) this.X, this.w }));
-            nbttagcompound.a("Motion", (NBTBase) this.a(new double[] { this.x, this.y, this.z }));
-            nbttagcompound.a("Rotation", (NBTBase) this.a(new float[] { this.A, this.B }));
+            nbttagcompound.a("Pos", (NBTBase) this.a(new double[] { this.u, this.v + (double) this.X, this.w}));
+            nbttagcompound.a("Motion", (NBTBase) this.a(new double[] { this.x, this.y, this.z}));
+            nbttagcompound.a("Rotation", (NBTBase) this.a(new float[] { this.A, this.B}));
             nbttagcompound.a("FallDistance", this.T);
             nbttagcompound.a("Fire", (short) this.d);
             nbttagcompound.a("Air", (short) this.ak());
@@ -1196,7 +1194,7 @@ public abstract class Entity {
 
     public void U() {
         if (this.n != null) {
-            if (!(this.n instanceof EntityPlayer) || !((EntityPlayer) this.n).ce()) {
+            if (!(this.n instanceof EntityPlayer) || !((EntityPlayer) this.n).cg()) {
                 this.n.U = this.U;
                 this.n.V = this.V + this.W() + this.n.V();
                 this.n.W = this.W;
@@ -1491,9 +1489,8 @@ public abstract class Entity {
         return false;
     }
 
-    @Override
     public String toString() {
-        return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", new Object[] { this.getClass().getSimpleName(), this.am(), Integer.valueOf(this.k), this.q == null ? "~NULL~" : this.q.L().k(), Double.valueOf(this.u), Double.valueOf(this.v), Double.valueOf(this.w) });
+        return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", new Object[] { this.getClass().getSimpleName(), this.am(), Integer.valueOf(this.k), this.q == null ? "~NULL~" : this.q.M().k(), Double.valueOf(this.u), Double.valueOf(this.v), Double.valueOf(this.w)});
     }
 
     public boolean aq() {
@@ -1513,7 +1510,6 @@ public abstract class Entity {
         this.as = entity.as;
     }
 
-    // CanaryMod renamed c -> changeDimension
     public void c(int i0) {
         if (!this.q.I && !this.M) {
             this.q.C.a("changeDimension");
@@ -1576,9 +1572,9 @@ public abstract class Entity {
         crashreportcategory.a("Entity Type", (Callable) (new CallableEntityType(this)));
         crashreportcategory.a("Entity ID", Integer.valueOf(this.k));
         crashreportcategory.a("Entity Name", (Callable) (new CallableEntityName(this)));
-        crashreportcategory.a("Entity\'s Exact location", String.format("%.2f, %.2f, %.2f", new Object[] { Double.valueOf(this.u), Double.valueOf(this.v), Double.valueOf(this.w) }));
+        crashreportcategory.a("Entity\'s Exact location", String.format("%.2f, %.2f, %.2f", new Object[] { Double.valueOf(this.u), Double.valueOf(this.v), Double.valueOf(this.w)}));
         crashreportcategory.a("Entity\'s Block location", CrashReportCategory.a(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w)));
-        crashreportcategory.a("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", new Object[] { Double.valueOf(this.x), Double.valueOf(this.y), Double.valueOf(this.z) }));
+        crashreportcategory.a("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", new Object[] { Double.valueOf(this.x), Double.valueOf(this.y), Double.valueOf(this.z)}));
     }
 
     public boolean aw() {

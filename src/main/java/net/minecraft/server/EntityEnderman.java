@@ -14,6 +14,7 @@ public class EntityEnderman extends EntityMob {
     private static boolean[] d = new boolean[256];
     private int e = 0;
     private int f = 0;
+    private boolean g;
 
     public EntityEnderman(World world) {
         super(world);
@@ -52,6 +53,7 @@ public class EntityEnderman extends EntityMob {
 
         if (entityplayer != null) {
             if (this.e(entityplayer)) {
+                this.g = true;
                 if (this.f == 0) {
                     this.q.a((Entity) entityplayer, "mob.endermen.stare", 1.0F, 1.0F);
                 }
@@ -76,7 +78,7 @@ public class EntityEnderman extends EntityMob {
             return false;
         } else {
             Vec3 vec3 = entityplayer.i(1.0F).a();
-            Vec3 vec31 = this.q.T().a(this.u - entityplayer.u, this.E.b + (double) (this.P / 2.0F) - (entityplayer.v + (double) entityplayer.e()), this.w - entityplayer.w);
+            Vec3 vec31 = this.q.U().a(this.u - entityplayer.u, this.E.b + (double) (this.P / 2.0F) - (entityplayer.v + (double) entityplayer.e()), this.w - entityplayer.w);
             double d0 = vec31.b();
 
             vec31 = vec31.a();
@@ -94,7 +96,7 @@ public class EntityEnderman extends EntityMob {
         this.bI = this.a_ != null ? 6.5F : 0.3F;
         int i0;
 
-        if (!this.q.I && this.q.M().b("mobGriefing")) {
+        if (!this.q.I && this.q.N().b("mobGriefing")) {
             int i1;
             int i2;
             int i3;
@@ -144,12 +146,13 @@ public class EntityEnderman extends EntityMob {
             this.q.a("portal", this.u + (this.ab.nextDouble() - 0.5D) * (double) this.O, this.v + this.ab.nextDouble() * (double) this.P - 0.25D, this.w + (this.ab.nextDouble() - 0.5D) * (double) this.O, (this.ab.nextDouble() - 0.5D) * 2.0D, -this.ab.nextDouble(), (this.ab.nextDouble() - 0.5D) * 2.0D);
         }
 
-        if (this.q.u() && !this.q.I) {
+        if (this.q.v() && !this.q.I) {
             float f0 = this.c(1.0F);
 
             if (f0 > 0.5F && this.q.l(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w)) && this.ab.nextFloat() * 30.0F < (f0 - 0.4F) * 2.0F) {
                 this.a_ = null;
                 this.a(false);
+                this.g = false;
                 this.m();
             }
         }
@@ -157,7 +160,12 @@ public class EntityEnderman extends EntityMob {
         if (this.F() || this.ae()) {
             this.a_ = null;
             this.a(false);
+            this.g = false;
             this.m();
+        }
+
+        if (this.q() && !this.g && this.ab.nextInt(100) == 0) {
+            this.a(false);
         }
 
         this.bG = false;
@@ -187,7 +195,7 @@ public class EntityEnderman extends EntityMob {
         super.c();
     }
 
-    public boolean m() { // CanaryMod: protected => public
+    public boolean m() { // CanaryMod: protected -> public
         double d0 = this.u + (this.ab.nextDouble() - 0.5D) * 64.0D;
         double d1 = this.v + (double) (this.ab.nextInt(64) - 32);
         double d2 = this.w + (this.ab.nextDouble() - 0.5D) * 64.0D;
@@ -196,7 +204,7 @@ public class EntityEnderman extends EntityMob {
     }
 
     protected boolean p(Entity entity) {
-        Vec3 vec3 = this.q.T().a(this.u - entity.u, this.E.b + (double) (this.P / 2.0F) - entity.v + (double) entity.e(), this.w - entity.w);
+        Vec3 vec3 = this.q.U().a(this.u - entity.u, this.E.b + (double) (this.P / 2.0F) - entity.v + (double) entity.e(), this.w - entity.w);
 
         vec3 = vec3.a();
         double d0 = 16.0D;
@@ -315,7 +323,13 @@ public class EntityEnderman extends EntityMob {
             return false;
         } else {
             this.a(true);
+            if (damagesource instanceof EntityDamageSource && damagesource.i() instanceof EntityPlayer) {
+                this.g = true;
+            }
+
             if (damagesource instanceof EntityDamageSourceIndirect) {
+                this.g = false;
+
                 for (int i1 = 0; i1 < 64; ++i1) {
                     if (this.m()) {
                         return true;

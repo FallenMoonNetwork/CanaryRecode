@@ -169,7 +169,7 @@ public class EntityBat extends EntityAmbientCreature {
             int i2 = MathHelper.c(this.w);
             int i3 = this.q.n(i1, i0, i2);
             byte b0 = 4;
-            Calendar calendar = this.q.U();
+            Calendar calendar = this.q.V();
 
             if ((calendar.get(2) + 1 != 10 || calendar.get(5) < 20) && (calendar.get(2) + 1 != 11 || calendar.get(5) > 3)) {
                 if (this.ab.nextBoolean()) {

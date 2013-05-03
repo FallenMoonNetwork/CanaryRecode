@@ -42,13 +42,10 @@ public class GuiStatsComponent extends JComponent {
 
         // CanaryMod: Multiworld
         Collection<World> worlds = Canary.getServer().getWorldManager().getAllWorlds();
-
         if (worlds != null) {
             int i = 0;
-
             for (World world : worlds) {
                 WorldServer level = (WorldServer) (((CanaryWorld) world).getHandle());
-
                 this.d[5 + i] = "World " + world.getName() + " lvl " + i + " tick " + a.format(world.getNanoTick(i) * 1.0E-6D) + " ms";
                 if (world != null && level.b != null) {
                     this.d[5 + i] += ", " + level.b.d();

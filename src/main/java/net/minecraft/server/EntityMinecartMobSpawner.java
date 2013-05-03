@@ -6,7 +6,7 @@ import net.canarymod.api.entity.vehicle.CanaryMobSpawnerMinecart;
 
 public class EntityMinecartMobSpawner extends EntityMinecart {
 
-    public final MobSpawnerBaseLogic a = new EntityMinecartMobSpawnerLogic(this); // CanaryMod: private => public
+    public final MobSpawnerBaseLogic a = new EntityMinecartMobSpawnerLogic(this); // CanaryMod: private -> public
 
     public EntityMinecartMobSpawner(World world) {
         super(world);

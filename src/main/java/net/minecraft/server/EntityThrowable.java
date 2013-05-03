@@ -113,14 +113,14 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
             ++this.j;
         }
 
-        Vec3 vec3 = this.q.T().a(this.u, this.v, this.w);
-        Vec3 vec31 = this.q.T().a(this.u + this.x, this.v + this.y, this.w + this.z);
+        Vec3 vec3 = this.q.U().a(this.u, this.v, this.w);
+        Vec3 vec31 = this.q.U().a(this.u + this.x, this.v + this.y, this.w + this.z);
         MovingObjectPosition movingobjectposition = this.q.a(vec3, vec31);
 
-        vec3 = this.q.T().a(this.u, this.v, this.w);
-        vec31 = this.q.T().a(this.u + this.x, this.v + this.y, this.w + this.z);
+        vec3 = this.q.U().a(this.u, this.v, this.w);
+        vec31 = this.q.U().a(this.u + this.x, this.v + this.y, this.w + this.z);
         if (movingobjectposition != null) {
-            vec31 = this.q.T().a(movingobjectposition.f.c, movingobjectposition.f.d, movingobjectposition.f.e);
+            vec31 = this.q.U().a(movingobjectposition.f.c, movingobjectposition.f.d, movingobjectposition.f.e);
         }
 
         if (!this.q.I) {

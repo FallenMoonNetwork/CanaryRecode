@@ -12,7 +12,6 @@ public class AnvilSaveHandler extends SaveHandler {
         super(file1, s0, flag0, type);
     }
 
-    @Override
     public IChunkLoader a(WorldProvider worldprovider) {
         // CanaryMod changed the whole thing since we have recollection of the world type we're serving.
         // This means we can spare us the checks for instanceof generator
@@ -20,7 +19,11 @@ public class AnvilSaveHandler extends SaveHandler {
         return new AnvilChunkLoader(new File(getWorldBaseDir(), getBaseName() + "/" + getBaseName() + "_" + this.type.getName()));
     }
 
-    @Override
+    public void a(WorldInfo worldinfo, NBTTagCompound nbttagcompound) {
+        worldinfo.e(19133);
+        super.a(worldinfo, nbttagcompound);
+    }
+
     public void a() {
         try {
             ThreadedFileIOBase.a.a();

@@ -3,7 +3,7 @@ package net.minecraft.server;
 
 public abstract class EntityMinecartContainer extends EntityMinecart implements IInventory {
 
-    public ItemStack[] a = new ItemStack[36]; // CanaryMod: private => public
+    public ItemStack[] a = new ItemStack[36]; // CanaryMod: private -> public
     private boolean b = true;
 
     public EntityMinecartContainer(World world) {

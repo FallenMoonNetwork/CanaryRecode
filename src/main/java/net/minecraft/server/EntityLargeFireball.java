@@ -31,7 +31,7 @@ public class EntityLargeFireball extends EntityFireball {
                     movingobjectposition.g.a(DamageSource.a((EntityFireball) this, this.a), 6);
                 }
 
-                this.q.a((Entity) this, this.u, this.v, this.w, (float) this.e, true, this.q.M().b("mobGriefing")); // CanaryMod: pass entity instead of null...
+                this.q.a((Entity) null, this.u, this.v, this.w, (float) this.e, true, this.q.N().b("mobGriefing"));
                 this.w();
             }
         }

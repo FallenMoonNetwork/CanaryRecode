@@ -7,12 +7,9 @@ import java.util.Random;
 
 public class ComponentStrongholdRightTurn extends ComponentStrongholdLeftTurn {
 
-    // CanaryMod: Add missing Constructor
-    public ComponentStrongholdRightTurn(int arg0, Random arg1, StructureBoundingBox arg2, int arg3) {
-        super(arg0, arg1, arg2, arg3);
+    public ComponentStrongholdRightTurn(int i0, Random random, StructureBoundingBox structureboundingbox, int i1) {
+        super(i0, random, structureboundingbox, i1);
     }
-
-    //
 
     public void a(StructureComponent structurecomponent, List list, Random random) {
         if (this.f != 2 && this.f != 3) {

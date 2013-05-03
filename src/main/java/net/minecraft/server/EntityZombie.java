@@ -79,7 +79,7 @@ public class EntityZombie extends EntityMob {
     }
 
     public void c() {
-        if (this.q.u() && !this.q.I && !this.h_()) {
+        if (this.q.v() && !this.q.I && !this.h_()) {
             float f0 = this.c(1.0F);
 
             if (f0 > 0.5F && this.ab.nextFloat() * 30.0F < (f0 - 0.4F) * 2.0F && this.q.l(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w))) {
@@ -253,7 +253,7 @@ public class EntityZombie extends EntityMob {
         this.bH();
         this.bI();
         if (this.p(4) == null) {
-            Calendar calendar = this.q.U();
+            Calendar calendar = this.q.V();
 
             if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.ab.nextFloat() < 0.25F) {
                 this.c(4, new ItemStack(this.ab.nextFloat() < 0.1F ? Block.bj : Block.be));
@@ -263,7 +263,7 @@ public class EntityZombie extends EntityMob {
     }
 
     public boolean a_(EntityPlayer entityplayer) {
-        ItemStack itemstack = entityplayer.cb();
+        ItemStack itemstack = entityplayer.cd();
 
         if (itemstack != null && itemstack.b() == Item.au && itemstack.k() == 0 && this.m() && this.a(Potion.t)) {
             if (!entityplayer.ce.d) {

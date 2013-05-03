@@ -3,7 +3,7 @@ package net.minecraft.server;
 
 public class InventoryCrafting implements IInventory {
 
-    public ItemStack[] a; // CanaryMod: private => public
+    public ItemStack[] a; // CanaryMod: private -> public
     private int b;
     private Container c;
     private String name = "container.crafting"; // CanaryMod: custom name

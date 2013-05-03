@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 public interface IInventory {
 
     int j_();

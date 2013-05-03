@@ -49,7 +49,6 @@ public class BehaviorDefaultDispenseItem implements IBehaviorDispenseItem {
         entityitem.x += world.s.nextGaussian() * 0.007499999832361937D * (double) i0;
         entityitem.y += world.s.nextGaussian() * 0.007499999832361937D * (double) i0;
         entityitem.z += world.s.nextGaussian() * 0.007499999832361937D * (double) i0;
-
         world.d((Entity) entityitem);
     }
 

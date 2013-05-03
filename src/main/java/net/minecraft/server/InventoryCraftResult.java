@@ -3,7 +3,7 @@ package net.minecraft.server;
 
 public class InventoryCraftResult implements IInventory {
 
-    public ItemStack[] a = new ItemStack[1]; // CanaryMod: private => public
+    public ItemStack[] a = new ItemStack[1]; // CanaryMod: private -> public
     private String name = "Result"; // CanaryMod: changeable name
 
     public InventoryCraftResult() {}

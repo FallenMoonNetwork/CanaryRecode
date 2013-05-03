@@ -168,7 +168,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
         if (this.n() > 0) {
             i0 = this.n() - 1;
             if (i0 <= 0) {
-                this.q.a(this, this.u, this.v + (double) this.e(), this.w, 7.0F, false, this.q.M().b("mobGriefing"));
+                this.q.a(this, this.u, this.v + (double) this.e(), this.w, 7.0F, false, this.q.N().b("mobGriefing"));
                 this.q.d(1013, (int) this.u, (int) this.v, (int) this.w, 0);
             }
 
@@ -243,7 +243,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
 
             if (this.j > 0) {
                 --this.j;
-                if (this.j == 0 && this.q.M().b("mobGriefing")) {
+                if (this.j == 0 && this.q.N().b("mobGriefing")) {
                     i0 = MathHelper.c(this.v);
                     i1 = MathHelper.c(this.u);
                     int i5 = MathHelper.c(this.w);

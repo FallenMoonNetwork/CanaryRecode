@@ -64,7 +64,7 @@ public class EntityWitherSkull extends EntityFireball {
                 }
             }
 
-            this.q.a(this, this.u, this.v, this.w, 1.0F, false, this.q.M().b("mobGriefing"));
+            this.q.a(this, this.u, this.v, this.w, 1.0F, false, this.q.N().b("mobGriefing"));
             this.w();
         }
     }

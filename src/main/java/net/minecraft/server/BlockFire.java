@@ -65,7 +65,7 @@ public class BlockFire extends Block {
     }
 
     public void a(World world, int i0, int i1, int i2, Random random) {
-        if (world.M().b("doFireTick")) {
+        if (world.N().b("doFireTick")) {
             boolean flag0 = world.a(i0, i1 - 1, i2) == Block.bf.cz;
 
             if (world.t instanceof WorldProviderEnd && world.a(i0, i1 - 1, i2) == Block.D.cz) {
@@ -76,7 +76,7 @@ public class BlockFire extends Block {
                 world.i(i0, i1, i2);
             }
 
-            if (!flag0 && world.O() && (world.F(i0, i1, i2) || world.F(i0 - 1, i1, i2) || world.F(i0 + 1, i1, i2) || world.F(i0, i1, i2 - 1) || world.F(i0, i1, i2 + 1))) {
+            if (!flag0 && world.P() && (world.F(i0, i1, i2) || world.F(i0 - 1, i1, i2) || world.F(i0 + 1, i1, i2) || world.F(i0, i1, i2 - 1) || world.F(i0, i1, i2 + 1))) {
                 world.i(i0, i1, i2);
             } else {
                 int i3 = world.h(i0, i1, i2);
@@ -126,7 +126,7 @@ public class BlockFire extends Block {
                                             i9 /= 2;
                                         }
 
-                                        if (i9 > 0 && random.nextInt(i7) <= i9 && (!world.O() || !world.F(i4, i6, i5)) && !world.F(i4 - 1, i6, i2) && !world.F(i4 + 1, i6, i5) && !world.F(i4, i6, i5 - 1) && !world.F(i4, i6, i5 + 1)) {
+                                        if (i9 > 0 && random.nextInt(i7) <= i9 && (!world.P() || !world.F(i4, i6, i5)) && !world.F(i4 - 1, i6, i2) && !world.F(i4 + 1, i6, i5) && !world.F(i4, i6, i5 - 1) && !world.F(i4, i6, i5 + 1)) {
                                             int i10 = i3 + random.nextInt(5) / 4;
 
                                             if (i10 > 15) {

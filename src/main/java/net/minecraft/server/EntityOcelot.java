@@ -216,7 +216,7 @@ public class EntityOcelot extends EntityTameable {
     }
 
     public String am() {
-        return this.bP() ? this.bO() : (this.m() ? "entity.Cat.name" : super.am());
+        return this.bQ() ? this.bP() : (this.m() ? "entity.Cat.name" : super.am());
     }
 
     public void bJ() {

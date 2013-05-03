@@ -80,7 +80,7 @@ public abstract class BlockFluid extends Block {
     }
 
     private Vec3 g(IBlockAccess iblockaccess, int i0, int i1, int i2) {
-        Vec3 vec3 = iblockaccess.T().a(0.0D, 0.0D, 0.0D);
+        Vec3 vec3 = iblockaccess.U().a(0.0D, 0.0D, 0.0D);
         int i3 = this.d(iblockaccess, i0, i1, i2);
 
         for (int i4 = 0; i4 < 4; ++i4) {

@@ -37,6 +37,23 @@ public class CommandServerSaveAll extends CommandBase {
                     worldserver.c = flag0;
                 }
             }
+
+            if (astring.length > 0 && "flush".equals(astring[0])) {
+                icommandsender.a(icommandsender.a("commands.save.flushStart", new Object[0]));
+
+                for (net.canarymod.api.world.World w : minecraftserver.worldManager.getAllWorlds()) {
+                    WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+
+                    if (worldserver != null) {
+                        boolean flag0 = worldserver.c;
+                        worldserver.c = false;
+                        worldserver.m();
+                        worldserver.c = flag0;
+                    }
+                }
+
+                icommandsender.a(icommandsender.a("commands.save.flushEnd", new Object[0]));
+            }
         } catch (MinecraftException minecraftexception) {
             a(icommandsender, "commands.save.failed", new Object[] { minecraftexception.getMessage()});
             return;

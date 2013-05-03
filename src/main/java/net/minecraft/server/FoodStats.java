@@ -71,7 +71,7 @@ public class FoodStats {
             }
         }
 
-        if (this.a >= 18 && entityplayer.cm()) {
+        if (this.a >= 18 && entityplayer.co()) {
             ++this.d;
             if (this.d >= 80) {
                 entityplayer.j(1);

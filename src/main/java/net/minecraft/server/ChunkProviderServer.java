@@ -45,14 +45,13 @@ public class ChunkProviderServer implements IChunkProvider {
 
     // CanaryMod end
 
-    @Override
     public boolean a(int i0, int i1) {
         return this.f.b(ChunkCoordIntPair.a(i0, i1));
     }
 
     public void b(int i0, int i1) {
         if (this.h.t.e()) {
-            ChunkCoordinates chunkcoordinates = this.h.I();
+            ChunkCoordinates chunkcoordinates = this.h.J();
             int i2 = i0 * 16 + 8 - chunkcoordinates.a;
             int i3 = i1 * 16 + 8 - chunkcoordinates.c;
             short short1 = 128;
@@ -75,7 +74,6 @@ public class ChunkProviderServer implements IChunkProvider {
         }
     }
 
-    @Override
     public Chunk c(int i0, int i1) {
         long i2 = ChunkCoordIntPair.a(i0, i1);
 
@@ -110,7 +108,7 @@ public class ChunkProviderServer implements IChunkProvider {
 
                         crashreportcategory.a("Location", String.format("%d,%d", new Object[] { Integer.valueOf(i0), Integer.valueOf(i1)}));
                         crashreportcategory.a("Position hash", Long.valueOf(i2));
-                        crashreportcategory.a("Generator", this.d.d());
+                        crashreportcategory.a("Generator", this.d.e());
                         throw new ReportedException(crashreport);
                     }
                     // CanaryMod: ChunkCreated
@@ -118,6 +116,7 @@ public class ChunkProviderServer implements IChunkProvider {
                     //
                 }
             }
+
             this.f.a(i2, chunk);
             this.g.add(chunk);
             if (chunk != null) {
@@ -126,12 +125,13 @@ public class ChunkProviderServer implements IChunkProvider {
                 Canary.hooks().callHook(new ChunkLoadedHook(chunk.getCanaryChunk(), h.getCanaryWorld()));
                 //
             }
+
             chunk.a(this, this, i0, i1);
         }
+
         return chunk;
     }
 
-    @Override
     public Chunk d(int i0, int i1) {
         Chunk chunk = (Chunk) this.f.a(ChunkCoordIntPair.a(i0, i1));
 
@@ -146,7 +146,7 @@ public class ChunkProviderServer implements IChunkProvider {
                 Chunk chunk = this.e.a(this.h, i0, i1);
 
                 if (chunk != null) {
-                    chunk.n = this.h.G();
+                    chunk.n = this.h.H();
                     if (this.d != null) {
                         this.d.e(i0, i1);
                     }
@@ -175,7 +175,7 @@ public class ChunkProviderServer implements IChunkProvider {
     public void b(Chunk chunk) {
         if (this.e != null) {
             try {
-                chunk.n = this.h.G();
+                chunk.n = this.h.H();
                 this.e.a(this.h, chunk);
             } catch (IOException ioexception) {
                 ioexception.printStackTrace();
@@ -185,7 +185,6 @@ public class ChunkProviderServer implements IChunkProvider {
         }
     }
 
-    @Override
     public void a(IChunkProvider ichunkprovider, int i0, int i1) {
         Chunk chunk = this.d(i0, i1);
 
@@ -198,7 +197,6 @@ public class ChunkProviderServer implements IChunkProvider {
         }
     }
 
-    @Override
     public boolean a(boolean flag0, IProgressUpdate iprogressupdate) {
         int i0 = 0;
 
@@ -219,19 +217,16 @@ public class ChunkProviderServer implements IChunkProvider {
             }
         }
 
-        if (flag0) {
-            if (this.e == null) {
-                return true;
-            }
-
-            this.e.b();
-        }
-
         return true;
     }
 
-    @Override
-    public boolean b() {
+    public void b() {
+        if (this.e != null) {
+            this.e.b();
+        }
+    }
+
+    public boolean c() {
         if (!this.h.c) {
             for (int i0 = 0; i0 < 100; ++i0) {
                 if (!this.b.isEmpty()) {
@@ -263,34 +258,28 @@ public class ChunkProviderServer implements IChunkProvider {
             }
         }
 
-        return this.d.b();
+        return this.d.c();
     }
 
-    @Override
-    public boolean c() {
+    public boolean d() {
         return !this.h.c;
     }
 
-    @Override
-    public String d() {
+    public String e() {
         return "ServerChunkCache: " + this.f.a() + " Drop: " + this.b.size();
     }
 
-    @Override
     public List a(EnumCreatureType enumcreaturetype, int i0, int i1, int i2) {
         return this.d.a(enumcreaturetype, i0, i1, i2);
     }
 
-    @Override
     public ChunkPosition a(World world, String s0, int i0, int i1, int i2) {
         return this.d.a(world, s0, i0, i1, i2);
     }
 
-    @Override
-    public int e() {
+    public int f() {
         return this.f.a();
     }
 
-    @Override
     public void e(int i0, int i1) {}
 }

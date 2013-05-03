@@ -25,26 +25,21 @@ public class AnvilSaveConverter extends SaveFormatOld {
         return 19133;
     }
 
-    @Override
     public void d() {
         RegionFileCache.a();
     }
 
-    @Override
     public ISaveHandler a(String s0, boolean flag0) {
         return new AnvilSaveHandler(this.a, s0, flag0, type);
     }
 
-    @Override
     public boolean b(String s0) {
         WorldInfo worldinfo = this.c(s0);
 
         return worldinfo != null && worldinfo.l() != this.c();
     }
 
-    @Override
     public boolean a(String s0, IProgressUpdate iprogressupdate) {
-        Canary.println("AnvilSaveConverter a calling");
         iprogressupdate.a(0);
         ArrayList arraylist = new ArrayList();
         ArrayList arraylist1 = new ArrayList();

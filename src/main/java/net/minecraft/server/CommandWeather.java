@@ -32,10 +32,8 @@ public class CommandWeather extends CommandBase {
             // CanaryMod: MutliWorld fix
             for (net.canarymod.api.world.World w : MinecraftServer.D().worldManager.getAllWorlds()) {
                 WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
-
                 if (worldserver != null && worldserver.getCanaryWorld().getType() == DimensionType.fromId(0)) {
-
-                    WorldInfo worldinfo = worldserver.L();
+                    WorldInfo worldinfo = worldserver.M();
 
                     worldinfo.g(i0);
                     worldinfo.f(i0);

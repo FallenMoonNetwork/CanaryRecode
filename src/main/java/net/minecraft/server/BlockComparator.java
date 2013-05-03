@@ -40,7 +40,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     }
 
     private int m(World world, int i0, int i1, int i2, int i3) {
-        return !this.d(i3) ? this.e(world, i0, i1, i2, i3) : Math.max(this.e(world, i0, i1, i2, i3) - this.f((IBlockAccess) world, i0, i1, i2, i3), 0); // CanaryMod: Cast World to IBlockAccess for method f
+        return !this.d(i3) ? this.e(world, i0, i1, i2, i3) : Math.max(this.e(world, i0, i1, i2, i3) - this.f((IBlockAccess) world, i0, i1, i2, i3), 0);
     }
 
     public boolean d(int i0) {

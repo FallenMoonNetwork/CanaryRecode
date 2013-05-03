@@ -6,7 +6,7 @@ import net.canarymod.api.entity.vehicle.CanaryTNTMinecart;
 
 public class EntityMinecartTNT extends EntityMinecart {
 
-    public int a = -1; // CanaryMod: private => public
+    public int a = -1; // CanaryMod: private -> public
 
     public EntityMinecartTNT(World world) {
         super(world);

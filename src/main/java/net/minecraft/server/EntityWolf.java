@@ -69,8 +69,8 @@ public class EntityWolf extends EntityTameable {
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("Angry", this.bU());
-        nbttagcompound.a("CollarColor", (byte) this.bV());
+        nbttagcompound.a("Angry", this.bW());
+        nbttagcompound.a("CollarColor", (byte) this.bX());
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -82,11 +82,11 @@ public class EntityWolf extends EntityTameable {
     }
 
     protected boolean bm() {
-        return this.bU();
+        return this.bW() && !this.m();
     }
 
     protected String bb() {
-        return this.bU() ? "mob.wolf.growl" : (this.ab.nextInt(3) == 0 ? (this.m() && this.ah.c(18) < 10 ? "mob.wolf.whine" : "mob.wolf.panting") : "mob.wolf.bark");
+        return this.bW() ? "mob.wolf.growl" : (this.ab.nextInt(3) == 0 ? (this.m() && this.ah.c(18) < 10 ? "mob.wolf.whine" : "mob.wolf.panting") : "mob.wolf.bark");
     }
 
     protected String bc() {
@@ -118,13 +118,13 @@ public class EntityWolf extends EntityTameable {
     public void l_() {
         super.l_();
         this.f = this.e;
-        if (this.bW()) {
+        if (this.bY()) {
             this.e += (1.0F - this.e) * 0.4F;
         } else {
             this.e += (0.0F - this.e) * 0.4F;
         }
 
-        if (this.bW()) {
+        if (this.bY()) {
             this.bJ = 10;
         }
 
@@ -213,7 +213,7 @@ public class EntityWolf extends EntityTameable {
                 } else if (itemstack.c == Item.aX.cp) {
                     int i0 = BlockCloth.g_(itemstack.k());
 
-                    if (i0 != this.bV()) {
+                    if (i0 != this.bX()) {
                         this.s(i0);
                         if (!entityplayer.ce.d && --itemstack.a <= 0) {
                             entityplayer.bK.a(entityplayer.bK.c, (ItemStack) null);
@@ -229,7 +229,7 @@ public class EntityWolf extends EntityTameable {
                 this.bG = false;
                 this.a((PathEntity) null);
             }
-        } else if (itemstack != null && itemstack.c == Item.aY.cp && !this.bU()) {
+        } else if (itemstack != null && itemstack.c == Item.aY.cp && !this.bW()) {
             if (!entityplayer.ce.d) {
                 --itemstack.a;
             }
@@ -272,7 +272,7 @@ public class EntityWolf extends EntityTameable {
         return 8;
     }
 
-    public boolean bU() {
+    public boolean bW() {
         return (this.ah.a(16) & 2) != 0;
     }
 
@@ -286,7 +286,7 @@ public class EntityWolf extends EntityTameable {
         }
     }
 
-    public int bV() {
+    public int bX() {
         return this.ah.a(20) & 15;
     }
 
@@ -330,7 +330,7 @@ public class EntityWolf extends EntityTameable {
         }
     }
 
-    public boolean bW() {
+    public boolean bY() {
         return this.ah.a(19) == 1;
     }
 

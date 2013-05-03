@@ -4,7 +4,7 @@ package net.minecraft.server;
 public class InventoryMerchant implements IInventory {
 
     private final IMerchant a;
-    public ItemStack[] b = new ItemStack[3]; // CanaryMod: private => public
+    public ItemStack[] b = new ItemStack[3]; // CanaryMod: private -> public
     private final EntityPlayer c;
     private MerchantRecipe d;
     private int e;

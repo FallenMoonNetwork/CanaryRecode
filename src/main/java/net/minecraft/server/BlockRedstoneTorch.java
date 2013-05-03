@@ -23,7 +23,7 @@ public class BlockRedstoneTorch extends BlockTorch {
         List list = (List) b.get(world);
 
         if (flag0) {
-            list.add(new RedstoneUpdateInfo(i0, i1, i2, world.G()));
+            list.add(new RedstoneUpdateInfo(i0, i1, i2, world.H()));
         }
 
         int i3 = 0;
@@ -99,7 +99,7 @@ public class BlockRedstoneTorch extends BlockTorch {
         boolean flag0 = this.m(world, i0, i1, i2);
         List list = (List) b.get(world);
 
-        while (list != null && !list.isEmpty() && world.G() - ((RedstoneUpdateInfo) list.get(0)).d > 60L) {
+        while (list != null && !list.isEmpty() && world.H() - ((RedstoneUpdateInfo) list.get(0)).d > 60L) {
             list.remove(0);
         }
 

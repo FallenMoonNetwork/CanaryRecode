@@ -131,7 +131,7 @@ public class EntityArrow extends Entity implements IProjectile {
             Block.r[i0].a((IBlockAccess) this.q, this.d, this.e, this.f);
             AxisAlignedBB axisalignedbb = Block.r[i0].b(this.q, this.d, this.e, this.f);
 
-            if (axisalignedbb != null && axisalignedbb.a(this.q.T().a(this.u, this.v, this.w))) {
+            if (axisalignedbb != null && axisalignedbb.a(this.q.U().a(this.u, this.v, this.w))) {
                 this.i = true;
             }
         }
@@ -159,14 +159,14 @@ public class EntityArrow extends Entity implements IProjectile {
             }
         } else {
             ++this.au;
-            Vec3 vec3 = this.q.T().a(this.u, this.v, this.w);
-            Vec3 vec31 = this.q.T().a(this.u + this.x, this.v + this.y, this.w + this.z);
+            Vec3 vec3 = this.q.U().a(this.u, this.v, this.w);
+            Vec3 vec31 = this.q.U().a(this.u + this.x, this.v + this.y, this.w + this.z);
             MovingObjectPosition movingobjectposition = this.q.a(vec3, vec31, false, true);
 
-            vec3 = this.q.T().a(this.u, this.v, this.w);
-            vec31 = this.q.T().a(this.u + this.x, this.v + this.y, this.w + this.z);
+            vec3 = this.q.U().a(this.u, this.v, this.w);
+            vec31 = this.q.U().a(this.u + this.x, this.v + this.y, this.w + this.z);
             if (movingobjectposition != null) {
-                vec31 = this.q.T().a(movingobjectposition.f.c, movingobjectposition.f.d, movingobjectposition.f.e);
+                vec31 = this.q.U().a(movingobjectposition.f.c, movingobjectposition.f.d, movingobjectposition.f.e);
             }
 
             Entity entity = null;
@@ -213,6 +213,7 @@ public class EntityArrow extends Entity implements IProjectile {
             if (movingobjectposition != null) {
                 // CanaryMod: ProjectileHit
                 ProjectileHitHook hook = new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity());
+     
 
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) { //
@@ -223,9 +224,7 @@ public class EntityArrow extends Entity implements IProjectile {
                         if (this.d()) {
                             i4 += this.ab.nextInt(i4 / 2 + 2);
                         }
-
                         DamageSource damagesource = null;
-
                         if (this.c == null) {
                             damagesource = DamageSource.a(this, this);
                         } else {

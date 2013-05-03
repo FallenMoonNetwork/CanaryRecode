@@ -20,7 +20,7 @@ import net.canarymod.hook.entity.VehicleMoveHook;
 
 public abstract class EntityMinecart extends Entity {
 
-    public boolean a; // CanaryMod: private => public
+    public boolean a; // CanaryMod: private -> public
     private final IUpdatePlayerListBox b;
     private String c;
     private static final int[][][] d = new int[][][] { { { 0, 0, -1}, { 0, 0, 1}}, { { -1, 0, 0}, { 1, 0, 0}}, { { -1, -1, 0}, { 1, 0, 0}}, { { -1, 0, 0}, { 1, -1, 0}}, { { 0, 0, -1}, { 0, -1, 1}}, { { 0, -1, -1}, { 0, 0, 1}}, { { 0, 0, 1}, { 1, 0, 0}}, { { 0, 0, 1}, { -1, 0, 0}}, { { 0, 0, -1}, { -1, 0, 0}}, { { 0, 0, -1}, { 1, 0, 0}}};
@@ -628,7 +628,7 @@ public abstract class EntityMinecart extends Entity {
                 d1 += 0.5D;
             }
 
-            return this.q.T().a(d0, d1, d2);
+            return this.q.U().a(d0, d1, d2);
         } else {
             return null;
         }
@@ -706,8 +706,8 @@ public abstract class EntityMinecart extends Entity {
                     if (entity instanceof EntityMinecart) {
                         double d4 = entity.u - this.u;
                         double d5 = entity.w - this.w;
-                        Vec3 vec3 = this.q.T().a(d4, 0.0D, d5).a();
-                        Vec3 vec31 = this.q.T().a((double) MathHelper.b(this.A * 3.1415927F / 180.0F), 0.0D, (double) MathHelper.a(this.A * 3.1415927F / 180.0F)).a();
+                        Vec3 vec3 = this.q.U().a(d4, 0.0D, d5).a();
+                        Vec3 vec31 = this.q.U().a((double) MathHelper.b(this.A * 3.1415927F / 180.0F), 0.0D, (double) MathHelper.a(this.A * 3.1415927F / 180.0F)).a();
                         double d6 = Math.abs(vec3.b(vec31));
 
                         if (d6 < 0.800000011920929D) {

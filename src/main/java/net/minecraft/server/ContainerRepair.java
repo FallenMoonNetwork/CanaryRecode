@@ -11,8 +11,8 @@ import net.canarymod.hook.player.AnvilUseHook;
 
 public class ContainerRepair extends Container {
 
-    public IInventory f = new InventoryCraftResult(); // Canary: private to public
-    public IInventory g = new InventoryRepair(this, "Repair", true, 2); // Canary: private to public
+    public IInventory f = new InventoryCraftResult(); // Canary: private -> public
+    public IInventory g = new InventoryRepair(this, "Repair", true, 2); // Canary: private -> public
     public World h; // Canary: private to public
     public int i; // Canary: private to public
     public int j; // Canary: private to public
@@ -201,7 +201,7 @@ public class ContainerRepair extends Container {
                 }
             }
 
-            if (this.m != null && !this.m.equalsIgnoreCase(itemstack.s()) && this.m.length() > 0) {
+            if (this.m != null && this.m.length() > 0 && !this.m.equalsIgnoreCase(this.n.r().c(itemstack.a())) && !this.m.equals(itemstack.s())) {
                 i1 = itemstack.g() ? 7 : itemstack.a * 5;
                 i0 += i1;
                 if (itemstack.t()) {
@@ -259,7 +259,7 @@ public class ContainerRepair extends Container {
             }
 
             if (i1 == i0 && i1 > 0 && this.a >= 40) {
-                this.h.W().a("Naming an item only, cost too high; giving discount to cap cost to 39 levels");
+                this.h.X().a("Naming an item only, cost too high; giving discount to cap cost to 39 levels");
                 this.a = 39;
             }
 

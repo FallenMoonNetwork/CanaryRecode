@@ -6,7 +6,7 @@ import net.canarymod.api.entity.CanaryItemFrame;
 
 public class EntityItemFrame extends EntityHanging {
 
-    public float e = 1.0F; // CanaryMod: private => public
+    public float e = 1.0F; // CanaryMod: private -> public
 
     public EntityItemFrame(World world) {
         super(world);

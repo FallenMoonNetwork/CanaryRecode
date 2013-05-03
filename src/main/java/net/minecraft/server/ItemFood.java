@@ -47,7 +47,7 @@ public class ItemFood extends Item {
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             --itemstack.a;
-            entityplayer.cl().a(hook.getLevelGain(), hook.getSaturationGain());
+            entityplayer.cn().a(hook.getLevelGain(), hook.getSaturationGain());
             world.a((Entity) entityplayer, "random.burp", 0.5F, world.s.nextFloat() * 0.1F + 0.9F);
             // this.c(itemstack, world, entityplayer); moved above and below
             if (hook.getPotionEffects() != null) {

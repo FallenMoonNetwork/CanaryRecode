@@ -8,7 +8,7 @@ public class InventoryBasic implements IInventory {
 
     private String a;
     private int b;
-    public ItemStack[] c; // CanaryMod: private => public
+    public ItemStack[] c; // CanaryMod: private -> public
     private List d;
     private boolean e;
 

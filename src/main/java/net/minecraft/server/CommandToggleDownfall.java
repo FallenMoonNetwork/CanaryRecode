@@ -27,8 +27,8 @@ public class CommandToggleDownfall extends CommandBase {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
 
             if (worldserver != null && worldserver.getCanaryWorld().getType() == DimensionType.fromId(0)) {
-                worldserver.z();
-                worldserver.L().a(true);
+                worldserver.A();
+                worldserver.M().a(true);
             }
         }
     }

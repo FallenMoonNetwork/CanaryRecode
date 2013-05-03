@@ -4,8 +4,8 @@ package net.minecraft.server;
 public class InventoryLargeChest implements IInventory {
 
     private String a;
-    public IInventory b; // CanaryMod: private => public
-    public IInventory c; // CanaryMod: private => public
+    public IInventory b; // CanaryMod: private -> public
+    public IInventory c; // CanaryMod: private -> public
 
     public InventoryLargeChest(String s0, IInventory iinventory, IInventory iinventory1) {
         this.a = s0;

@@ -60,7 +60,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         this.bL = new ContainerPlayer(this.bK, !world.I, this);
         this.bM = this.bL;
         this.N = 1.62F;
-        ChunkCoordinates chunkcoordinates = world.I();
+        ChunkCoordinates chunkcoordinates = world.J();
 
         this.b((double) chunkcoordinates.a + 0.5D, (double) (chunkcoordinates.b + 1), (double) chunkcoordinates.c + 0.5D, 0.0F, 0.0F);
         this.aK = "humanoid";
@@ -69,12 +69,10 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         this.aH = "/mob/char.png";
     }
 
-    @Override
     public int aW() {
         return maxHealth == 0 ? 20 : maxHealth; // CanaryMod: custom Max Health
     }
 
-    @Override
     protected void a() {
         super.a();
         this.ah.a(16, Byte.valueOf((byte) 0));
@@ -82,19 +80,19 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         this.ah.a(18, Integer.valueOf(0));
     }
 
-    public boolean bV() {
+    public boolean bX() {
         return this.f != null;
     }
 
-    public void bX() {
+    public void bZ() {
         if (this.f != null) {
             this.f.b(this.q, this, this.g);
         }
 
-        this.bY();
+        this.ca();
     }
 
-    public void bY() {
+    public void ca() {
         this.f = null;
         this.g = 0;
         if (!this.q.I) {
@@ -102,12 +100,10 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     public boolean bk() {
-        return this.bV() && Item.f[this.f.c].b_(this.f) == EnumAction.d;
+        return this.bX() && Item.f[this.f.c].b_(this.f) == EnumAction.d;
     }
 
-    @Override
     public void l_() {
         if (this.f != null) {
             ItemStack itemstack = this.bK.h();
@@ -121,7 +117,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
                     this.m();
                 }
             } else {
-                this.bY();
+                this.ca();
             }
         }
 
@@ -138,7 +134,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
             if (!this.q.I) {
                 if (!this.i()) {
                     this.a(true, true, false);
-                } else if (this.q.u()) {
+                } else if (this.q.v()) {
                     this.a(false, true, true);
                 }
             }
@@ -158,7 +154,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         if (this.ae() && this.ce.a) {
             this.A();
         }
-        
+
         this.bU = this.bX;
         this.bV = this.bY;
         this.bW = this.bZ;
@@ -204,17 +200,14 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     public int y() {
         return this.ce.a ? 0 : 80;
     }
 
-    @Override
     public int aa() {
         return 10;
     }
 
-    @Override
     public void a(String s0, float f0, float f1) {
         this.q.a(this, s0, f0, f1);
     }
@@ -226,11 +219,11 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 
         if (itemstack.o() == EnumAction.b) {
             for (int i1 = 0; i1 < i0; ++i1) {
-                Vec3 vec3 = this.q.T().a(((double) this.ab.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
+                Vec3 vec3 = this.q.U().a(((double) this.ab.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
 
                 vec3.a(-this.B * 3.1415927F / 180.0F);
                 vec3.b(-this.A * 3.1415927F / 180.0F);
-                Vec3 vec31 = this.q.T().a(((double) this.ab.nextFloat() - 0.5D) * 0.3D, (double) (-this.ab.nextFloat()) * 0.6D - 0.3D, 0.6D);
+                Vec3 vec31 = this.q.U().a(((double) this.ab.nextFloat() - 0.5D) * 0.3D, (double) (-this.ab.nextFloat()) * 0.6D - 0.3D, 0.6D);
 
                 vec31.a(-this.B * 3.1415927F / 180.0F);
                 vec31.b(-this.A * 3.1415927F / 180.0F);
@@ -255,11 +248,10 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
                 }
             }
 
-            this.bY();
+            this.ca();
         }
     }
 
-    @Override
     protected boolean bj() {
         return this.aX() <= 0 || this.bz();
     }
@@ -268,7 +260,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         this.bM = this.bL;
     }
 
-    @Override
     public void a(Entity entity) {
         if (this.o == entity) {
             this.h(entity);
@@ -282,7 +273,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     public void T() {
         double d0 = this.u;
         double d1 = this.v;
@@ -301,12 +291,10 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     protected void bq() {
         this.br();
     }
 
-    @Override
     public void c() {
         if (this.bO > 0) {
             --this.bO;
@@ -362,7 +350,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         entity.b_(this);
     }
 
-    public int bZ() {
+    public int cb() {
         return this.ah.c(18);
     }
 
@@ -371,12 +359,11 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     }
 
     public void t(int i0) {
-        int i1 = this.bZ();
+        int i1 = this.cb();
 
         this.ah.b(18, Integer.valueOf(i1 + i0));
     }
 
-    @Override
     public void a(DamageSource damagesource) {
         super.a(damagesource);
         this.a(0.2F, 0.2F);
@@ -386,7 +373,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
             this.a(new ItemStack(Item.k, 1), true);
         }
 
-        if (!this.q.M().b("keepInventory")) {
+        if (!this.q.N().b("keepInventory")) {
             this.bK.m();
         }
 
@@ -401,14 +388,13 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         this.a(StatList.y, 1);
     }
 
-    @Override
     public void c(Entity entity, int i0) {
         this.t(i0);
-        Collection collection = this.cp().a(ScoreObjectiveCriteria.e);
+        Collection collection = this.cr().a(ScoreObjectiveCriteria.e);
 
         if (entity instanceof EntityPlayer) {
             this.a(StatList.A, 1);
-            collection.addAll(this.cp().a(ScoreObjectiveCriteria.d));
+            collection.addAll(this.cr().a(ScoreObjectiveCriteria.d));
         } else {
             this.a(StatList.z, 1);
         }
@@ -417,7 +403,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 
         while (iterator.hasNext()) {
             ScoreObjective scoreobjective = (ScoreObjective) iterator.next();
-            Score score = this.cp().a(this.am(), scoreobjective);
+            Score score = this.cr().a(this.am(), scoreobjective);
 
             score.a();
         }
@@ -526,7 +512,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         return this.bK.b(block);
     }
 
-    @Override
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
         NBTTagList nbttaglist = nbttagcompound.m("Inventory");
@@ -558,7 +543,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
         nbttagcompound.a("Inventory", (NBTBase) this.bK.a(new NBTTagList()));
@@ -568,7 +552,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         nbttagcompound.a("XpP", this.ch);
         nbttagcompound.a("XpLevel", this.cf);
         nbttagcompound.a("XpTotal", this.cg);
-        nbttagcompound.a("Score", this.bZ());
+        nbttagcompound.a("Score", this.cb());
         if (this.c != null) {
             nbttagcompound.a("SpawnX", this.c.a);
             nbttagcompound.a("SpawnY", this.c.b);
@@ -593,7 +577,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 
     public void b(int i0, int i1, int i2) {}
 
-    @Override
     public float e() {
         return 0.12F;
     }
@@ -602,7 +585,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         this.N = 1.62F;
     }
 
-    @Override
     public boolean a(DamageSource damagesource, int i0) {
         if (this.aq()) {
             return false;
@@ -652,8 +634,8 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     }
 
     public boolean a(EntityPlayer entityplayer) {
-        ScorePlayerTeam scoreplayerteam = this.cq();
-        ScorePlayerTeam scoreplayerteam1 = entityplayer.cq();
+        ScorePlayerTeam scoreplayerteam = this.cs();
+        ScorePlayerTeam scoreplayerteam1 = entityplayer.cs();
 
         return scoreplayerteam != scoreplayerteam1 ? true : (scoreplayerteam != null ? scoreplayerteam.g() : true);
     }
@@ -684,17 +666,15 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     protected void k(int i0) {
         this.bK.g(i0);
     }
 
-    @Override
     public int aZ() {
         return this.bK.l();
     }
 
-    public float ca() {
+    public float cc() {
         int i0 = 0;
         ItemStack[] aitemstack = this.bK.b;
         int i1 = aitemstack.length;
@@ -710,7 +690,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         return (float) i0 / (float) this.bK.b.length;
     }
 
-    @Override
     protected void d(DamageSource damagesource, int i0) {
         if (!this.aq()) {
             if (!damagesource.e() && this.bk()) {
@@ -754,7 +733,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
             }
             //
 
-            ItemStack itemstack = this.cb();
+            ItemStack itemstack = this.cd();
 
             if (itemstack != null && entity instanceof EntityLiving) {
                 if (this.ce.d) {
@@ -763,7 +742,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 
                 if (itemstack.a((EntityLiving) entity)) {
                     if (itemstack.a <= 0 && !this.ce.d) {
-                        this.cc();
+                        this.ce();
                     }
 
                     return true;
@@ -774,15 +753,14 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    public ItemStack cb() {
+    public ItemStack cd() {
         return this.bK.h();
     }
 
-    public void cc() {
+    public void ce() {
         this.bK.a(this.bK.c, (ItemStack) null);
     }
 
-    @Override
     public double V() {
         return (double) (this.N - 0.5F);
     }
@@ -856,7 +834,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
                         }
                     }
 
-                    ItemStack itemstack = this.cb();
+                    ItemStack itemstack = this.cd();
                     Object object = entity;
 
                     if (entity instanceof EntityDragonPart) {
@@ -870,7 +848,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
                     if (itemstack != null && object instanceof EntityLiving) {
                         itemstack.a((EntityLiving) object, this);
                         if (itemstack.a <= 0) {
-                            this.cc();
+                            this.ce();
                         }
                     }
 
@@ -897,7 +875,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 
     public void c(Entity entity) {}
 
-    @Override
     public void w() {
         super.w();
         this.bL.b(this);
@@ -906,12 +883,11 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     public boolean S() {
         return !this.ca && super.S();
     }
 
-    public boolean ce() {
+    public boolean cg() {
         return false;
     }
 
@@ -925,7 +901,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
                 return EnumStatus.b;
             }
 
-            if (this.q.u()) {
+            if (this.q.v()) {
                 return EnumStatus.c;
             }
 
@@ -1042,7 +1018,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     }
 
     public static ChunkCoordinates a(World world, ChunkCoordinates chunkcoordinates, boolean flag0) {
-        IChunkProvider ichunkprovider = world.J();
+        IChunkProvider ichunkprovider = world.K();
 
         ichunkprovider.c(chunkcoordinates.a - 3 >> 4, chunkcoordinates.c - 3 >> 4);
         ichunkprovider.c(chunkcoordinates.a + 3 >> 4, chunkcoordinates.c - 3 >> 4);
@@ -1062,12 +1038,11 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     public boolean bz() {
         return this.ca;
     }
 
-    public boolean cg() {
+    public boolean ci() {
         return this.ca && this.b >= 100;
     }
 
@@ -1083,11 +1058,11 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 
     public void b(String s0) {}
 
-    public ChunkCoordinates ci() {
+    public ChunkCoordinates ck() {
         return this.c;
     }
 
-    public boolean cj() {
+    public boolean cl() {
         return this.d;
     }
 
@@ -1107,7 +1082,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 
     public void a(StatBase statbase, int i0) {}
 
-    @Override
     protected void bl() {
         super.bl();
         this.a(StatList.u, 1);
@@ -1118,7 +1092,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     public void e(float f0, float f1) {
         double d0 = this.u;
         double d1 = this.v;
@@ -1199,7 +1172,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     protected void a(float f0) {
         if (!this.ce.c) {
             if (f0 >= 2.0F) {
@@ -1210,29 +1182,24 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     public void a(EntityLiving entityliving) {
         if (entityliving instanceof IMob) {
             this.a((StatBase) AchievementList.s);
         }
     }
 
-    @Override
     public void al() {
         if (!this.ce.b) {
             super.al();
         }
     }
 
-    @Override
     public ItemStack q(int i0) {
         return this.bK.f(i0);
     }
 
-    @Override
     protected void bH() {}
 
-    @Override
     protected void bI() {}
 
     public void w(int i0) {
@@ -1243,10 +1210,10 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
             i0 = i1;
         }
 
-        this.ch += (float) i0 / (float) this.ck();
+        this.ch += (float) i0 / (float) this.cm();
 
-        for (this.cg += i0; this.ch >= 1.0F; this.ch /= (float) this.ck()) {
-            this.ch = (this.ch - 1.0F) * (float) this.ck();
+        for (this.cg += i0; this.ch >= 1.0F; this.ch /= (float) this.cm()) {
+            this.ch = (this.ch - 1.0F) * (float) this.cm();
             this.a(1);
         }
     }
@@ -1272,7 +1239,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    public int ck() {
+    public int cm() {
         return this.cf >= 30 ? 62 + (this.cf - 30) * 7 : (this.cf >= 15 ? 17 + (this.cf - 15) * 3 : 17);
     }
 
@@ -1284,7 +1251,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    public FoodStats cl() {
+    public FoodStats cn() {
         return this.bN;
     }
 
@@ -1292,7 +1259,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         return (flag0 || this.bN.c()) && !this.ce.a;
     }
 
-    public boolean cm() {
+    public boolean co() {
         return this.aX() > 0 && this.aX() < this.aW();
     }
 
@@ -1319,8 +1286,8 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
                     return true;
                 }
 
-                if (this.cb() != null) {
-                    ItemStack itemstack = this.cb();
+                if (this.cd() != null) {
+                    ItemStack itemstack = this.cd();
 
                     if (itemstack.b(block) || itemstack.a(block) > 1.0F) {
                         return true;
@@ -1336,9 +1303,8 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         return this.ce.e ? true : (itemstack != null ? itemstack.y() : false);
     }
 
-    @Override
     protected int d(EntityPlayer entityplayer) {
-        if (this.q.M().b("keepInventory")) {
+        if (this.q.N().b("keepInventory")) {
             return 0;
         } else {
             int i0 = this.cf * 7;
@@ -1347,23 +1313,19 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
     }
 
-    @Override
     protected boolean aT() {
         return true;
     }
 
-    @Override
     public String am() {
         return this.bS;
     }
 
-    @Override
-    public boolean bQ() {
-        return super.bQ();
+    public boolean bR() {
+        return super.bR();
     }
 
-    @Override
-    public boolean bS() {
+    public boolean bT() {
         return false;
     }
 
@@ -1375,20 +1337,19 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
             this.cf = entityplayer.cf;
             this.cg = entityplayer.cg;
             this.ch = entityplayer.ch;
-            this.s(entityplayer.bZ());
+            this.s(entityplayer.cb());
             this.as = entityplayer.as;
-        } else if (this.q.M().b("keepInventory")) {
+        } else if (this.q.N().b("keepInventory")) {
             this.bK.b(entityplayer.bK);
             this.cf = entityplayer.cf;
             this.cg = entityplayer.cg;
             this.ch = entityplayer.ch;
-            this.s(entityplayer.bZ());
+            this.s(entityplayer.cb());
         }
 
         this.a = entityplayer.a;
     }
 
-    @Override
     protected boolean f_() {
         return !this.ce.b;
     }
@@ -1397,7 +1358,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 
     public void a(EnumGameType enumgametype) {}
 
-    @Override
     public String c_() {
         return this.bS;
     }
@@ -1406,51 +1366,44 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         return StringTranslate.a();
     }
 
-    @Override
     public String a(String s0, Object... aobject) {
         return this.r().a(s0, aobject);
     }
 
-    public InventoryEnderChest cn() {
+    public InventoryEnderChest cp() {
         return this.a;
     }
 
-    @Override
     public ItemStack p(int i0) {
         return i0 == 0 ? this.bK.h() : this.bK.b[i0 - 1];
     }
 
-    @Override
     public ItemStack bG() {
         return this.bK.h();
     }
 
-    @Override
     public void c(int i0, ItemStack itemstack) {
         this.bK.b[i0] = itemstack;
     }
 
-    @Override
     public ItemStack[] ad() {
         return this.bK.b;
     }
 
-    @Override
     public boolean aw() {
         return !this.ce.b;
     }
 
-    public Scoreboard cp() {
-        return this.q.V();
+    public Scoreboard cr() {
+        return this.q.W();
     }
 
-    public ScorePlayerTeam cq() {
-        return this.cp().i(this.bS);
+    public ScorePlayerTeam cs() {
+        return this.cr().i(this.bS);
     }
 
-    @Override
     public String ax() {
-        return ScorePlayerTeam.a(this.cq(), this.bS);
+        return ScorePlayerTeam.a(this.cs(), this.bS);
     }
 
     // CanaryMod

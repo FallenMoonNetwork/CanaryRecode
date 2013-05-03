@@ -94,7 +94,6 @@ public class Chunk {
                 }
             }
         }
-//        canaryChunk = new CanaryChunk(this); // CanaryMod: wrap chunk
     }
 
     public boolean a(int i0, int i1) {
@@ -599,7 +598,7 @@ public class Chunk {
         int i1 = MathHelper.c(entity.w / 16.0D);
 
         if (i0 != this.g || i1 != this.h) {
-            this.e.W().c("Wrong location! " + entity);
+            this.e.X().c("Wrong location! " + entity);
             // Thread.dumpStack();
             entity.w();
             return;
@@ -805,10 +804,10 @@ public class Chunk {
 
     public boolean a(boolean flag0) {
         if (flag0) {
-            if (this.m && this.e.G() != this.n || this.l) {
+            if (this.m && this.e.H() != this.n || this.l) {
                 return true;
             }
-        } else if (this.m && this.e.G() >= this.n + 600L) {
+        } else if (this.m && this.e.H() >= this.n + 600L) {
             return true;
         }
 
@@ -816,7 +815,7 @@ public class Chunk {
     }
 
     public Random a(long i0) {
-        return new Random(this.e.F() + (long) (this.g * this.g * 4987142) + (long) (this.g * 5947611) + (long) (this.h * this.h) * 4392871L + (long) (this.h * 389711) ^ i0);
+        return new Random(this.e.G() + (long) (this.g * this.g * 4987142) + (long) (this.g * 5947611) + (long) (this.h * this.h) * 4392871L + (long) (this.h * 389711) ^ i0);
     }
 
     public boolean g() {

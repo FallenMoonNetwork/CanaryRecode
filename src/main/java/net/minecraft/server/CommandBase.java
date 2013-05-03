@@ -37,7 +37,7 @@ public abstract class CommandBase implements ICommand {
         try {
             return Integer.parseInt(s0);
         } catch (NumberFormatException numberformatexception) {
-            throw new NumberInvalidException("commands.generic.num.invalid", new Object[] { s0 });
+            throw new NumberInvalidException("commands.generic.num.invalid", new Object[] { s0});
         }
     }
 
@@ -49,9 +49,9 @@ public abstract class CommandBase implements ICommand {
         int i2 = a(icommandsender, s0);
 
         if (i2 < i0) {
-            throw new NumberInvalidException("commands.generic.num.tooSmall", new Object[] { Integer.valueOf(i2), Integer.valueOf(i0) });
+            throw new NumberInvalidException("commands.generic.num.tooSmall", new Object[] { Integer.valueOf(i2), Integer.valueOf(i0)});
         } else if (i2 > i1) {
-            throw new NumberInvalidException("commands.generic.num.tooBig", new Object[] { Integer.valueOf(i2), Integer.valueOf(i1) });
+            throw new NumberInvalidException("commands.generic.num.tooBig", new Object[] { Integer.valueOf(i2), Integer.valueOf(i1)});
         } else {
             return i2;
         }
@@ -61,7 +61,7 @@ public abstract class CommandBase implements ICommand {
         try {
             return Double.parseDouble(s0);
         } catch (NumberFormatException numberformatexception) {
-            throw new NumberInvalidException("commands.generic.double.invalid", new Object[] { s0 });
+            throw new NumberInvalidException("commands.generic.double.invalid", new Object[] { s0});
         }
     }
 
@@ -158,11 +158,11 @@ public abstract class CommandBase implements ICommand {
         return s1.regionMatches(true, 0, s0, 0, s0.length());
     }
 
-    public static List a(String[] astring, String... astring0) { // CanaryMod: Fix bad var names...
+    public static List a(String[] astring, String... astring0) {
         String s0 = astring[astring.length - 1];
         ArrayList arraylist = new ArrayList();
-        String[] astring1 = astring0; // CanaryMod: Fix bad var names...
-        int i0 = astring0.length; // CanaryMod: Fix bad var names...
+        String[] astring1 = astring0;
+        int i0 = astring0.length;
 
         for (int i1 = 0; i1 < i0; ++i1) {
             String s1 = astring1[i1];

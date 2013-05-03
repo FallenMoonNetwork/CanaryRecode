@@ -138,7 +138,7 @@ public class CraftingManager {
         System.out.println(this.b.size() + " recipes");
     }
 
-    public ShapedRecipes a(ItemStack itemstack, Object... aobject) { // CanaryMod: package => public
+    public ShapedRecipes a(ItemStack itemstack, Object... aobject) { // CanaryMod: package -> public
         String s0 = "";
         int i0 = 0;
         int i1 = 0;
@@ -199,7 +199,7 @@ public class CraftingManager {
         return shapedrecipes;
     }
 
-    public void b(ItemStack itemstack, Object... aobject) { // CanaryMod: package => public
+    public void b(ItemStack itemstack, Object... aobject) { // CanaryMod: package -> public
         ArrayList arraylist = new ArrayList();
         Object[] aobject1 = aobject;
         int i0 = aobject.length;

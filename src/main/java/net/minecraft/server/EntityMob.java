@@ -130,7 +130,7 @@ public abstract class EntityMob extends EntityCreature implements IMob {
         } else {
             int i3 = this.q.n(i0, i1, i2);
 
-            if (this.q.N()) {
+            if (this.q.O()) {
                 int i4 = this.q.j;
 
                 this.q.j = 10;

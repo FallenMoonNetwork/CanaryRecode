@@ -7,7 +7,7 @@ import net.canarymod.api.entity.living.CanaryIronGolem;
 public class EntityIronGolem extends EntityGolem {
 
     private int e = 0;
-    public Village d = null; // CanaryMod package => public
+    public Village d = null; // CanaryMod package -> public
     private int f;
     private int g;
 

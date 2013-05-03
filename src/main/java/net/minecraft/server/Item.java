@@ -241,7 +241,7 @@ public class Item {
         return this.b;
     }
 
-    public Item e(int i0) { // CanaryMod: protected => public
+    public Item e(int i0) { // CanaryMod: protected -> public
         this.b = i0;
         return this;
     }
@@ -369,7 +369,7 @@ public class Item {
         double d0 = entityplayer.r + (entityplayer.u - entityplayer.r) * (double) f0;
         double d1 = entityplayer.s + (entityplayer.v - entityplayer.s) * (double) f0 + 1.62D - (double) entityplayer.N;
         double d2 = entityplayer.t + (entityplayer.w - entityplayer.t) * (double) f0;
-        Vec3 vec3 = world.T().a(d0, d1, d2);
+        Vec3 vec3 = world.U().a(d0, d1, d2);
         float f3 = MathHelper.b(-f2 * 0.017453292F - 3.1415927F);
         float f4 = MathHelper.a(-f2 * 0.017453292F - 3.1415927F);
         float f5 = -MathHelper.b(-f1 * 0.017453292F);

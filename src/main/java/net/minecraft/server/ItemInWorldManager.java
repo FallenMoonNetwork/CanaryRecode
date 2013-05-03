@@ -208,13 +208,13 @@ public class ItemInWorldManager {
             if (this.d()) {
                 this.b.a.b(new Packet53BlockChange(i0, i1, i2, this.a));
             } else {
-                ItemStack itemstack = this.b.cb();
+                ItemStack itemstack = this.b.cd();
                 boolean flag1 = this.b.a(Block.r[i3]);
 
                 if (itemstack != null) {
                     itemstack.a(this.a, i3, i0, i1, i2, this.b);
                     if (itemstack.a == 0) {
-                        this.b.cc();
+                        this.b.ce();
                     }
                 }
 
@@ -260,7 +260,7 @@ public class ItemInWorldManager {
                 entityplayer.bK.a[entityplayer.bK.c] = null;
             }
 
-            if (!entityplayer.bV()) {
+            if (!entityplayer.bX()) {
                 ((EntityPlayerMP) entityplayer).a(entityplayer.bL);
             }
 

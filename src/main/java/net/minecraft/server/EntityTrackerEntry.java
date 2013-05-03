@@ -52,12 +52,10 @@ public class EntityTrackerEntry {
         canaryEntry = new CanaryEntityTrackerEntry(this);
     }
 
-    @Override
     public boolean equals(Object object) {
         return object instanceof EntityTrackerEntry ? ((EntityTrackerEntry) object).a.k == this.a.k : false;
     }
 
-    @Override
     public int hashCode() {
         return this.a.k;
     }
@@ -124,7 +122,7 @@ public class EntityTrackerEntry {
                 boolean flag0 = Math.abs(i5) >= 4 || Math.abs(i6) >= 4 || Math.abs(i7) >= 4 || this.m % 60 == 0;
                 boolean flag1 = Math.abs(i3 - this.g) >= 4 || Math.abs(i4 - this.h) >= 4;
 
-                if (this.m > 0) {
+                if (this.m > 0 || this.a instanceof EntityArrow) {
                     if (i5 >= -128 && i5 < 128 && i6 >= -128 && i6 < 128 && i7 >= -128 && i7 < 128 && this.u <= 400 && !this.w) {
                         if (flag0 && flag1) {
                             object = new Packet33RelEntityMoveLook(this.a.k, (byte) i5, (byte) i6, (byte) i7, (byte) i3, (byte) i4);
@@ -312,7 +310,7 @@ public class EntityTrackerEntry {
     }
 
     private boolean d(EntityPlayerMP entityplayermp) {
-        return entityplayermp.o().r().a(entityplayermp, this.a.aj, this.a.al);
+        return entityplayermp.o().s().a(entityplayermp, this.a.aj, this.a.al);
     }
 
     public void b(List list) {
@@ -323,7 +321,7 @@ public class EntityTrackerEntry {
 
     private Packet b() {
         if (this.a.M) {
-            this.a.q.W().b("Fetching addPacket for removed entity");
+            this.a.q.X().b("Fetching addPacket for removed entity");
         }
 
         if (this.a instanceof EntityItem) {

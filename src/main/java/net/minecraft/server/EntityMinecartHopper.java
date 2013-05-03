@@ -8,7 +8,7 @@ import net.canarymod.api.entity.vehicle.CanaryHopperMinecart;
 public class EntityMinecartHopper extends EntityMinecartContainer implements Hopper {
 
     private boolean a = true;
-    public int b = -1; // CanaryMod: private to public
+    public int b = -1; // CanaryMod: private -> public
 
     public EntityMinecartHopper(World world) {
         super(world);

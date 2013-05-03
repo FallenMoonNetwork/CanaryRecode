@@ -111,7 +111,6 @@ public class EntityBoat extends Entity {
                 }
                 // CanaryMod: VehicleDestroy
                 VehicleDestroyHook vdh = new VehicleDestroyHook((Vehicle) this.entity);
-
                 Canary.hooks().callHook(vdh);
                 //
                 this.w();
@@ -253,7 +252,7 @@ public class EntityBoat extends Entity {
 
             this.d(this.x, this.y, this.z);
             if (this.G && d3 > 0.2D) {
-                if (!this.q.I) {
+                if (!this.q.I && !this.M) {
                     this.w();
 
                     int i2;

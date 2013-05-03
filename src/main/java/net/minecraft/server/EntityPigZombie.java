@@ -9,7 +9,7 @@ import net.canarymod.hook.entity.MobTargetHook;
 
 public class EntityPigZombie extends EntityZombie {
 
-    public int d = 0; // CanaryMod: private => public
+    public int d = 0; // CanaryMod: private -> public
     private int e = 0;
 
     public EntityPigZombie(World world) {
@@ -74,7 +74,6 @@ public class EntityPigZombie extends EntityZombie {
                             entitypigzombie.p(entity);
                         }
                     }
-
                     this.p(entity);
                 }
                 //

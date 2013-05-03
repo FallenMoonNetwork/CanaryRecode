@@ -52,7 +52,7 @@ public class CryptManager {
 
     public static byte[] a(String s0, PublicKey publickey, SecretKey secretkey) {
         try {
-            return a("SHA-1", new byte[][] { s0.getBytes("ISO_8859_1"), secretkey.getEncoded(), publickey.getEncoded() });
+            return a("SHA-1", new byte[][] { s0.getBytes("ISO_8859_1"), secretkey.getEncoded(), publickey.getEncoded()});
         } catch (UnsupportedEncodingException unsupportedencodingexception) {
             unsupportedencodingexception.printStackTrace();
             return null;
@@ -62,11 +62,11 @@ public class CryptManager {
     private static byte[] a(String s0, byte[]... abyte) {
         try {
             MessageDigest messagedigest = MessageDigest.getInstance(s0);
-            byte[][] abyte0 = abyte; // CanaryMod: Fix bad var name
+            byte[][] abyte0 = abyte;
             int i0 = abyte.length;
 
             for (int i1 = 0; i1 < i0; ++i1) {
-                byte[] abyte1 = abyte0[i1]; // CanaryMod: Fix bad var name
+                byte[] abyte1 = abyte0[i1];
 
                 messagedigest.update(abyte1);
             }

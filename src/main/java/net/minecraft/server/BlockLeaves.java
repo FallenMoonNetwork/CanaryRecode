@@ -180,7 +180,7 @@ public class BlockLeaves extends BlockLeavesBase {
     }
 
     public void a(World world, EntityPlayer entityplayer, int i0, int i1, int i2, int i3) {
-        if (!world.I && entityplayer.cb() != null && entityplayer.cb().c == Item.bf.cp) {
+        if (!world.I && entityplayer.cd() != null && entityplayer.cd().c == Item.bf.cp) {
             entityplayer.a(StatList.C[this.cz], 1);
             this.b(world, i0, i1, i2, new ItemStack(Block.O.cz, 1, i3 & 3));
         } else {

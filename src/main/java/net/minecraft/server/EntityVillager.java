@@ -124,7 +124,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
         if (!flag0 && this.R() && !this.p() && !this.h_()) {
             if (!this.q.I) {
                 this.a(entityplayer);
-                entityplayer.a((IMerchant) this, this.bO());
+                entityplayer.a((IMerchant) this, this.bP());
             }
 
             return true;

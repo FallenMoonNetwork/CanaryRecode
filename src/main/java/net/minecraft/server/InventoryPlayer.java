@@ -391,7 +391,7 @@ public class InventoryPlayer implements IInventory {
     }
 
     public boolean c() {
-        return name == "container.inventory";
+        return false;
     }
 
     public int d() {

@@ -116,7 +116,6 @@ public class ContainerEnchantment extends Container {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public boolean a(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = this.a.a(0);
 

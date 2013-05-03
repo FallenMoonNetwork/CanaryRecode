@@ -71,7 +71,7 @@ public class CommandTime extends CommandBase {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
 
             if (worldserver != null) {
-                worldserver.b(worldserver.H() + (long) i0);
+                worldserver.b(worldserver.I() + (long) i0);
             }
         }
     }

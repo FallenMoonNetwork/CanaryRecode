@@ -31,7 +31,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
 
     public EntityDragon(World world) {
         super(world);
-        this.f = new EntityDragonPart[] { this.g = new EntityDragonPart(this, "head", 6.0F, 6.0F), this.h = new EntityDragonPart(this, "body", 8.0F, 8.0F), this.i = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.j = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bK = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bL = new EntityDragonPart(this, "wing", 4.0F, 4.0F), this.bM = new EntityDragonPart(this, "wing", 4.0F, 4.0F) };
+        this.f = new EntityDragonPart[] { this.g = new EntityDragonPart(this, "head", 6.0F, 6.0F), this.h = new EntityDragonPart(this, "body", 8.0F, 8.0F), this.i = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.j = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bK = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bL = new EntityDragonPart(this, "wing", 4.0F, 4.0F), this.bM = new EntityDragonPart(this, "wing", 4.0F, 4.0F)};
         this.b(this.aW());
         this.aH = "/mob/enderdragon/ender.png";
         this.a(16.0F, 8.0F);
@@ -185,8 +185,8 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
                     d9 = -50.0D;
                 }
 
-                Vec3 vec3 = this.q.T().a(this.a - this.u, this.b - this.v, this.c - this.w).a();
-                Vec3 vec31 = this.q.T().a((double) MathHelper.a(this.A * 3.1415927F / 180.0F), this.y, (double) (-MathHelper.b(this.A * 3.1415927F / 180.0F))).a();
+                Vec3 vec3 = this.q.U().a(this.a - this.u, this.b - this.v, this.c - this.w).a();
+                Vec3 vec31 = this.q.U().a((double) MathHelper.a(this.A * 3.1415927F / 180.0F), this.y, (double) (-MathHelper.b(this.A * 3.1415927F / 180.0F))).a();
                 float f4 = (float) (vec31.b(vec3) + 0.5D) / 1.5F;
 
                 if (f4 < 0.0F) {
@@ -213,7 +213,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
                     this.d(this.x, this.y, this.z);
                 }
 
-                Vec3 vec32 = this.q.T().a(this.x, this.y, this.z).a();
+                Vec3 vec32 = this.q.U().a(this.x, this.y, this.z).a();
                 float f8 = (float) (vec32.b(vec31) + 1.0D) / 2.0F;
 
                 f8 = 0.8F + 0.15F * f8;
@@ -399,7 +399,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
                     int i9 = this.q.a(i6, i7, i8);
 
                     if (i9 != 0) {
-                        if (i9 != Block.at.cz && i9 != Block.bN.cz && i9 != Block.D.cz && this.q.M().b("mobGriefing")) {
+                        if (i9 != Block.at.cz && i9 != Block.bN.cz && i9 != Block.D.cz && this.q.N().b("mobGriefing")) {
                             flag1 = this.q.i(i6, i7, i8) || flag1;
                         } else {
                             flag0 = true;

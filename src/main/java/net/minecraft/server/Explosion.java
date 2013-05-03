@@ -132,7 +132,7 @@ public class Explosion {
         int i8 = MathHelper.c(this.e - (double) this.g - 1.0D);
         int i9 = MathHelper.c(this.e + (double) this.g + 1.0D);
         List list = this.k.b(this.f, AxisAlignedBB.a().a((double) i0, (double) i2, (double) i8, (double) i1, (double) i7, (double) i9));
-        Vec3 vec3 = this.k.T().a(this.c, this.d, this.e);
+        Vec3 vec3 = this.k.U().a(this.c, this.d, this.e);
 
         for (int i10 = 0; i10 < list.size(); ++i10) {
             Entity entity = (Entity) list.get(i10);
@@ -171,7 +171,7 @@ public class Explosion {
                     entity.y += d1 * d11;
                     entity.z += d2 * d11;
                     if (entity instanceof EntityPlayer) {
-                        this.l.put((EntityPlayer) entity, this.k.T().a(d0 * d10, d1 * d10, d2 * d10));
+                        this.l.put((EntityPlayer) entity, this.k.U().a(d0 * d10, d1 * d10, d2 * d10));
                     }
                 }
             }

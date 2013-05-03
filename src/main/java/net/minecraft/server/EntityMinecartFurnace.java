@@ -6,7 +6,7 @@ import net.canarymod.api.entity.vehicle.CanaryFurnaceMinecart;
 
 public class EntityMinecartFurnace extends EntityMinecart {
 
-    public int c = 0; // CanaryMod: private => public
+    public int c = 0; // CanaryMod: private -> public
     public double a;
     public double b;
 

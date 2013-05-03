@@ -11,10 +11,10 @@ public class ContainerWorkbench extends Container {
 
     public InventoryCrafting a = new InventoryCrafting(this, 3, 3);
     public IInventory f = new InventoryCraftResult();
-    public World g; // CanaryMod: private => public
-    public int h; // CanaryMod: private => public
-    public int i; // CanaryMod: private => public
-    public int j; // CanaryMod: private => public
+    public World g; // CanaryMod: private -> public
+    public int h; // CanaryMod: private -> public
+    public int i; // CanaryMod: private -> public
+    public int j; // CanaryMod: private -> public
     private CanaryWorkbench bench; // CanaryMod inventory instance
 
     public ContainerWorkbench(InventoryPlayer inventoryplayer, World world, int i0, int i1, int i2) {

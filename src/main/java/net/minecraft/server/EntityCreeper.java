@@ -8,8 +8,8 @@ public class EntityCreeper extends EntityMob {
 
     private int d;
     private int e;
-    public int f = 30; // CanaryMod: private => public // Fuse
-    public int g = 3; // CanaryMod: private => public // Power
+    public int f = 30; // CanaryMod: private -> public // Fuse
+    public int g = 3; // CanaryMod: private -> public // Power
 
     public EntityCreeper(World world) {
         super(world);
@@ -91,7 +91,7 @@ public class EntityCreeper extends EntityMob {
             if (this.e >= this.f) {
                 this.e = this.f;
                 if (!this.q.I) {
-                    boolean flag0 = this.q.M().b("mobGriefing");
+                    boolean flag0 = this.q.N().b("mobGriefing");
 
                     if (this.m()) {
                         this.q.a(this, this.u, this.v, this.w, (float) (this.g * 2), flag0);
