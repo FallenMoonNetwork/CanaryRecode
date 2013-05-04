@@ -169,7 +169,7 @@ public class CanaryEntityFactory implements EntityFactory {
                 case ENDERMAN:
                     return new EntityEnderman(mcworld).getCanaryEntity();
 
-                case ENDERPERL:
+                case ENDERPEARL:
                     return new EntityEnderPearl(mcworld).getCanaryEntity();
 
                 case ENTITYITEM:
