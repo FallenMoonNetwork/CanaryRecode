@@ -2,6 +2,7 @@ package net.canarymod.api.world;
 
 
 import java.util.ArrayList;
+
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.EntityTracker;
@@ -311,12 +312,12 @@ public class CanaryWorld implements World {
 
     @Override
     public long getRelativeTime() {
-        return world.H();
+        return world.I();
     }
 
     @Override
     public long getRawTime() {
-        return world.G();
+        return world.H();
     }
 
     @Override
