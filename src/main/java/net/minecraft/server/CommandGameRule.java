@@ -1,0 +1,74 @@
+package net.minecraft.server;
+
+import java.util.List;
+import net.canarymod.Canary;
+import net.canarymod.api.world.CanaryWorld;
+
+public class CommandGameRule extends CommandBase {
+
+    public CommandGameRule() {}
+
+    public String c() {
+        return "gamerule";
+    }
+
+    public int a() {
+        return 2;
+    }
+
+    public String a(ICommandSender icommandsender) {
+        return icommandsender.a("commands.gamerule.usage", new Object[0]);
+    }
+
+    public void b(ICommandSender icommandsender, String[] astring) {
+        String s0;
+
+        if (astring.length == 2) {
+            s0 = astring[0];
+            String s1 = astring[1];
+            // CanaryMod: Fixes for MultiWorld
+            GameRules gamerules = icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.N() : icommandsender instanceof TileEntityCommandBlock ? ((EntityPlayerMP) icommandsender).q.N() : this.d();
+            //
+
+            if (gamerules.e(s0)) {
+                gamerules.b(s0, s1);
+                a(icommandsender, "commands.gamerule.success", new Object[0]);
+            } else {
+                a(icommandsender, "commands.gamerule.norule", new Object[] { s0});
+            }
+        } else if (astring.length == 1) {
+            s0 = astring[0];
+            // CanaryMod: Fixes for MultiWorld
+            GameRules gamerules1 = icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.N() : icommandsender instanceof TileEntityCommandBlock ? ((EntityPlayerMP) icommandsender).q.N() : this.d();
+            //
+
+            if (gamerules1.e(s0)) {
+                String s2 = gamerules1.a(s0);
+
+                icommandsender.a(s0 + " = " + s2);
+            } else {
+                a(icommandsender, "commands.gamerule.norule", new Object[] { s0});
+            }
+        } else if (astring.length == 0) {
+            GameRules gamerules2 = this.d();
+
+            icommandsender.a(a(gamerules2.b()));
+        } else {
+            throw new WrongUsageException("commands.gamerule.usage", new Object[0]);
+        }
+    }
+
+    public List a(ICommandSender icommandsender, String[] astring) {
+        // CanaryMod: Fixes for MultiWorld
+        String[] rules = icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.N().b() : icommandsender instanceof TileEntityCommandBlock ? ((EntityPlayerMP) icommandsender).q.N().b() : this.d().b();
+        //
+        return astring.length == 1 ? a(astring, rules) : (astring.length == 2 ? a(astring, new String[] { "true", "false"}) : null);
+    }
+
+    private GameRules d() {
+        // CanaryMod: Fixes for MultiWorld
+        // return MinecraftServer.D().a(0).N();
+        return ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().N();
+        //
+    }
+}
