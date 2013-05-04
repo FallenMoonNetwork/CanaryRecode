@@ -27,7 +27,6 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.minecraft.server.EntityLightningBolt;
 import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.EnumSkyBlock;
 import net.minecraft.server.TileEntity;
 import net.minecraft.server.TileEntityBeacon;
@@ -240,7 +239,7 @@ public class CanaryWorld implements World {
     public Player getClosestPlayer(double x, double y, double z, double distance) {
         EntityPlayer user = world.a(x, y, z, distance);
 
-        if ((user != null) && user instanceof EntityPlayerMP) {
+        if ((user != null) && user.getCanaryEntity() instanceof Player) {
             return (Player) user.getCanaryEntity();
         }
         return null;
