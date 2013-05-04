@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
@@ -113,7 +114,7 @@ public class WorldServer extends World {
         }
 
         // CanaryMod: TimeChangeHook
-        TimeChangeHook hook = new TimeChangeHook(getCanaryWorld(), this.x.f());
+        TimeChangeHook hook = new TimeChangeHook(getCanaryWorld(), this.x.g());
 
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
@@ -175,7 +176,6 @@ public class WorldServer extends World {
     private void Y() {
         // CanaryMod: WeatherChange
         WeatherChangeHook hook = new WeatherChangeHook(getCanaryWorld(), false, false);
-
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
             this.x.g(0);

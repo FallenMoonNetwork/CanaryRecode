@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
@@ -439,7 +440,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             if (this.v % 20 == 0) {
                 this.a.a("timeSync");
                 // this.s.a((Packet) (new Packet4UpdateTime(worldserver.G(), worldserver.H())), worldserver.t.h);
-                this.s.sendPacketToDimension((new Packet4UpdateTime(worldserver.G(), worldserver.H())), w.getName(), w.getType().getId());
+                this.s.sendPacketToDimension((new Packet4UpdateTime(worldserver.H(), worldserver.I())), w.getName(), w.getType().getId());
                 this.a.b();
             }
 
