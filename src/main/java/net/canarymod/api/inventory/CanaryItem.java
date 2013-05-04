@@ -314,7 +314,15 @@ public class CanaryItem implements Item {
      * {@inheritDoc}
      */
     @Override
-    public void removeEnchantment(Enchantment enchantment) {// hmmmmmm....... No sure yet.
+    public void removeEnchantment(Enchantment enchantment) {
+        Enchantment[] enchs = getEnchantments();
+        removeAllEnchantments();
+        for (Enchantment ench : enchs) {
+            if (ench.getType() == enchantment.getType() && ench.getLevel() == enchantment.getLevel()) {
+                continue;
+            }
+            getHandle().a(((CanaryEnchantment) ench).getHandle(), ench.getLevel());
+        }
     }
 
     /**
@@ -322,7 +330,9 @@ public class CanaryItem implements Item {
      */
     @Override
     public void removeAllEnchantments() {
-        getDataTag().remove("ench");
+        if (isEnchanted()) {
+            getDataTag().remove("ench");
+        }
     }
 
     /**
