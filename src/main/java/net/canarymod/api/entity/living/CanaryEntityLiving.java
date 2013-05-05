@@ -4,6 +4,7 @@ package net.canarymod.api.entity.living;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.CanaryPacket;
@@ -437,6 +438,14 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     @Override
     public int getArrowCountInEntity() {
         return ((net.minecraft.server.EntityLiving) entity).bM();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setArrowCountInEntity(int arrows) {
+        ((net.minecraft.server.EntityLiving) entity).r(arrows);
     }
 
     /**
