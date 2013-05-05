@@ -203,7 +203,6 @@ public class EntitySlime extends EntityLiving implements IMob {
         } else {
             if (this.p() == 1 || this.q.r > 0) {
                 BiomeGenBase biomegenbase = this.q.a(MathHelper.c(this.u), MathHelper.c(this.w));
-
                 if (biomegenbase == BiomeGenBase.h && this.v > 50.0D && this.v < 70.0D && this.ab.nextFloat() < 0.5F && this.ab.nextFloat() < e[this.q.w()] && this.q.n(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w)) <= this.ab.nextInt(8)) {
                     return super.bv();
                 }
