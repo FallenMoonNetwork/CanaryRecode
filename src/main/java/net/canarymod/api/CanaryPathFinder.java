@@ -54,24 +54,6 @@ public class CanaryPathFinder implements PathFinder {
      * {@inheritDoc}
      */
     @Override
-    @Deprecated
-    public void enableWaterPathing() {
-        nav.a(true);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @Deprecated
-    public void disableWaterPathing() {
-        nav.a(false);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void setWaterPathing(boolean bool) {
 	nav.a(bool);
     }

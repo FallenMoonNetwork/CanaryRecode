@@ -10,11 +10,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
-import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
+import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.vehicle.CanaryChestMinecart;
 import net.canarymod.api.inventory.CanaryEnderChestInventory;
 import net.canarymod.api.inventory.Inventory;
@@ -836,8 +837,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void setDisplayName(String name) {
         super.setDisplayName(name);
         Packet20NamedEntitySpawn pkt = new Packet20NamedEntitySpawn(this);
-
-        Canary.getServer().getConfigurationManager().sendPacketToAllInWorld(this.getCanaryWorld().getName(), new CanaryPacket(pkt));
+        for(Player p : Canary.getServer().getPlayerList()) {
+            if(!p.getName().equals(this.bS)) {
+                ((CanaryPlayer)p).getHandle().a.b(pkt);
+            }
+        }
     }
 
     public void updateSlot(int windowId, int slotIndex, ItemStack item) {

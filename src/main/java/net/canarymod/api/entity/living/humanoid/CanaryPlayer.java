@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
@@ -327,7 +328,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void sendPacket(Packet packet) {
-        getWorld().getEntityTracker().sendPacketToTrackedPlayer(this, packet);
+        getHandle().a.b(((CanaryPacket)packet).getPacket());
     }
 
     @Override
