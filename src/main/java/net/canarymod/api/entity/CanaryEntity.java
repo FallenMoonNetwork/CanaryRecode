@@ -2,12 +2,16 @@ package net.canarymod.api.entity;
 
 
 import java.util.UUID;
+import net.canarymod.api.nbt.BaseTag;
+import net.canarymod.api.nbt.CanaryBaseTag;
+import net.canarymod.api.nbt.CanaryCompoundTag;
 
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.canarymod.api.world.position.Vector3D;
+import net.minecraft.server.NBTTagCompound;
 
 
 /**
@@ -288,6 +292,18 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public void setRider(Entity rider) {
         ((CanaryEntity) rider).getHandle().a(this.entity);
+    }
+    
+    @Override
+    public BaseTag getNBT() {
+        NBTTagCompound tag = new NBTTagCompound();
+        this.getHandle().d(tag);
+        return (new CanaryCompoundTag(tag));
+    }
+    
+    @Override
+    public void setNBT(BaseTag tag) {
+        this.getHandle().f((NBTTagCompound) ((CanaryCompoundTag)tag).getHandle());
     }
 
     /**
