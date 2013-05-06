@@ -20,6 +20,8 @@ import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.living.monster.EntityMob;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
+import net.canarymod.api.nbt.BaseTag;
+import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.potion.CanaryPotion;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.api.potion.Potion;
@@ -32,6 +34,7 @@ import net.minecraft.server.EntityList;
 import net.minecraft.server.IAnimals;
 import net.minecraft.server.IMob;
 import net.minecraft.server.ItemStack;
+import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.Packet12PlayerLook;
 import net.minecraft.server.Packet32EntityLook;
 
@@ -458,5 +461,19 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
         }
         ((net.minecraft.server.EntityLiving)this.getHandle()).bK();// swings the arm
         ((net.canarymod.api.entity.living.CanaryEntityLiving)entity).getHandle().a(net.minecraft.server.DamageSource.j, damage);
+    }
+    
+    @Override
+    public BaseTag getNBT() {
+        NBTTagCompound tag = new NBTTagCompound();
+        this.getHandle().d(tag);
+        ((net.minecraft.server.EntityLiving)this.getHandle()).b(tag);
+        return (new CanaryCompoundTag(tag));
+    }
+    
+    @Override
+    public void setNBT(BaseTag tag) {
+        this.getHandle().f((NBTTagCompound) ((CanaryCompoundTag)tag).getHandle());
+        ((net.minecraft.server.EntityLiving)this.getHandle()).a((NBTTagCompound) ((CanaryCompoundTag)tag).getHandle());
     }
 }

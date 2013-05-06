@@ -12,7 +12,7 @@ import net.minecraft.server.EntityCreeper;
  */
 public class CanaryCreeper extends CanaryEntityMob implements Creeper {
 
-    private boolean damageEntity, damageWorld = true;
+    private boolean damageEntity = true, damageWorld = true;
 
     /**
      * Constructs a new wrapper for EntityCreeper
