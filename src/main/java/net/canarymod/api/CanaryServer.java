@@ -13,6 +13,8 @@ import net.canarymod.Canary;
 import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.gui.GUI;
+import net.canarymod.api.gui.TickUpdate;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.recipes.CraftingRecipe;
 import net.canarymod.api.inventory.recipes.ShapedRecipeHelper;
@@ -31,6 +33,7 @@ import net.minecraft.server.FurnaceRecipes;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerConfigurationManager;
+import net.minecraft.server.ServerGUI;
 
 
 /**
@@ -354,4 +357,45 @@ public class CanaryServer implements Server {
     public void addSmeltingRecipe(SmeltRecipe recipe) {
         FurnaceRecipes.a().a(recipe.getItemIDFrom(), ((CanaryItem) recipe.getResult()).getHandle(), recipe.getXP());
     }
+
+    @Override
+    public void addGUIOnTickUpdate(TickUpdate tickupdate) {
+        server.addOnTickUpdate(tickupdate);
+    }
+
+    @Override
+    public void removeGUIOnTickUpdate(TickUpdate tickupdate) {
+	server.removeOnTickUpdate(tickupdate);
+    }
+
+    @Override
+    public void addGUI(GUI gui) {
+	ServerGUI.closeWindow();
+    }
+
+    @Override
+    public long[] getSentPacketCountArray() {
+        return server.e;
+    }
+
+    @Override
+    public long[] getSentPacketSizeArray() {
+        return server.f;
+    }
+
+    @Override
+    public long[] getReceivedPacketCountArray() {
+        return server.g;
+    }
+
+    @Override
+    public long[] getReceivedPacketSizeArray() {
+        return server.h;
+    }
+
+    @Override
+    public long[] getTickTimeArray() {
+        return server.i;
+    }
+
 }
