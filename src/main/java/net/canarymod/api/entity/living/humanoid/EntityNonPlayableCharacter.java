@@ -20,6 +20,7 @@ import net.minecraft.server.MathHelper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.NetHandler;
+import net.minecraft.server.NetLoginHandler;
 import net.minecraft.server.NetServerHandler;
 import net.minecraft.server.Packet;
 import net.minecraft.server.Packet0KeepAlive;
@@ -106,6 +107,8 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         if (entityliving != null) {
             entityliving.c(this, this.aM);
         }
+        
+        this.a.c("NPC Killed");
     }
 
     @Override
@@ -199,7 +202,13 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
 
         public void d() {}
 
-        public void c(String s) {}
+        public void c(String s) {
+            this.c.k();
+            this.b(new Packet255KickDisconnect(s));
+            this.a.d();
+            this.d.ad().e(this.c);
+            this.b = true;
+        }
 
         public void a(Packet10Flying opacket10flying) { super.a(opacket10flying);}
 

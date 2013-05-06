@@ -34,7 +34,7 @@ import net.canarymod.hook.player.TeleportHook;
 public class NetServerHandler extends NetHandler {
 
     public final INetworkManager a;
-    private final MinecraftServer d;
+    public final MinecraftServer d;//private to public
     public boolean b = false;
     public EntityPlayerMP c;
     private int e;
