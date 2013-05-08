@@ -12,6 +12,7 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 
 import net.canarymod.Canary;
+import net.canarymod.api.CanaryServer;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.ServerConfiguration;
 import net.canarymod.config.WorldConfiguration;
@@ -270,8 +271,8 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     }
 
     public void ap() {
-        ServerGUI.a(this);
-        this.s = true;
+	((CanaryServer) Canary.getServer()).currentGUI = ServerGUI.a();
+	((CanaryServer) Canary.getServer()).notHeadless = this.s = true;
     }
 
     public boolean ag() {

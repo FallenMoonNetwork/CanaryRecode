@@ -14,6 +14,7 @@ import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.gui.GUI;
+import net.canarymod.api.gui.GUIControl;
 import net.canarymod.api.gui.TickUpdate;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.recipes.CraftingRecipe;
@@ -33,7 +34,6 @@ import net.minecraft.server.FurnaceRecipes;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerConfigurationManager;
-import net.minecraft.server.ServerGUI;
 
 
 /**
@@ -48,6 +48,8 @@ public class CanaryServer implements Server {
     protected HashMap<String, ServerTimer> timers = new HashMap<String, ServerTimer>();
     protected ScheduledExecutorService taskExecutor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
     private MinecraftServer server;
+    public GUIControl currentGUI;
+    public boolean notHeadless;
 
     /**
      * Create a new Server Wrapper
@@ -365,12 +367,17 @@ public class CanaryServer implements Server {
 
     @Override
     public void removeGUIOnTickUpdate(TickUpdate tickupdate) {
-	server.removeOnTickUpdate(tickupdate);
+        server.removeOnTickUpdate(tickupdate);
     }
 
     @Override
     public void addGUI(GUI gui) {
-	ServerGUI.closeWindow();
+        if (currentGUI != null) {
+            currentGUI.Close();
+        }
+        if (notHeadless) {
+            currentGUI = gui.start();
+        }
     }
 
     @Override

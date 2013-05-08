@@ -14,20 +14,24 @@ import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class ServerGUI extends JComponent {
+import net.canarymod.Canary;
+import net.canarymod.api.CanaryServer;
+import net.canarymod.api.gui.GUI;
+import net.canarymod.api.gui.GUIControl;
+
+public class ServerGUI extends JComponent implements GUI {
 
     private static boolean a = false;
     private static JFrame jframe;
-    private DedicatedServer b;
 
-    public static void a(DedicatedServer dedicatedserver) {
-        try {
+    public static GUIControl a() {
+	try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception exception) {
             ;
         }
 
-        ServerGUI servergui = new ServerGUI(dedicatedserver);
+        ServerGUI servergui = new ServerGUI();
 
         a = true;
         jframe = new JFrame("Minecraft server");
@@ -36,11 +40,12 @@ public class ServerGUI extends JComponent {
         jframe.pack();
         jframe.setLocationRelativeTo((Component) null);
         jframe.setVisible(true);
-        jframe.addWindowListener(new ServerWindowAdapter(dedicatedserver));
+        jframe.addWindowListener(new ServerWindowAdapter());
+
+        return new GUIControl(servergui);
     }
 
-    public ServerGUI(DedicatedServer dedicatedserver) {
-        this.b = dedicatedserver;
+    public ServerGUI() {
         this.setPreferredSize(new Dimension(854, 480));
         this.setLayout(new BorderLayout());
 
@@ -55,14 +60,14 @@ public class ServerGUI extends JComponent {
     private JComponent b() {
         JPanel jpanel = new JPanel(new BorderLayout());
 
-        jpanel.add(new GuiStatsComponent(this.b), "North");
+        jpanel.add(new GuiStatsComponent(), "North");
         jpanel.add(this.c(), "Center");
         jpanel.setBorder(new TitledBorder(new EtchedBorder(), "Stats"));
         return jpanel;
     }
 
     private JComponent c() {
-        PlayerListBox playerlistbox = new PlayerListBox(this.b);
+        PlayerListBox playerlistbox = new PlayerListBox();
         JScrollPane jscrollpane = new JScrollPane(playerlistbox, 22, 30);
 
         jscrollpane.setBorder(new TitledBorder(new EtchedBorder(), "Players"));
@@ -73,7 +78,7 @@ public class ServerGUI extends JComponent {
         JPanel jpanel = new JPanel(new BorderLayout());
         JTextArea jtextarea = new JTextArea();
 
-        this.b.al().a().addHandler(new GuiLogOutputHandler(jtextarea));
+        ((CanaryServer) Canary.getServer()).getHandle().al().a().addHandler(new GuiLogOutputHandler(jtextarea));
         JScrollPane jscrollpane = new JScrollPane(jtextarea, 22, 30);
 
         jtextarea.setEditable(false);
@@ -88,10 +93,17 @@ public class ServerGUI extends JComponent {
     }
 
     static DedicatedServer a(ServerGUI servergui) {
-        return servergui.b;
+        return null;
     }
 
-    public static void closeWindow() {
+    @Override
+    public GUIControl start() {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
+    public void closeWindow() {
 	jframe.dispose();
     }
 
