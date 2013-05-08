@@ -42,6 +42,7 @@ public class CanaryNetServerHandler implements NetServerHandler {
         if (msg.length() >= 119) {
             String cutMsg = msg.substring(0, 118);
             int finalCut = cutMsg.lastIndexOf(" ");
+            if (finalCut == -1)finalCut = 117;
             String subCut = cutMsg.substring(0, finalCut);
             String newMsg = msg.substring(finalCut);
 
