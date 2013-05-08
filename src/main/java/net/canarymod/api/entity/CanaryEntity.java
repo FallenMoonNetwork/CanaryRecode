@@ -5,6 +5,7 @@ import java.util.UUID;
 import net.canarymod.api.nbt.BaseTag;
 import net.canarymod.api.nbt.CanaryBaseTag;
 import net.canarymod.api.nbt.CanaryCompoundTag;
+import net.canarymod.api.nbt.CompoundTag;
 
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
@@ -295,7 +296,7 @@ public abstract class CanaryEntity implements Entity {
     }
     
     @Override
-    public BaseTag getNBT() {
+    public CompoundTag getNBT() {
         NBTTagCompound tag = new NBTTagCompound();
         this.getHandle().d(tag);
         return (new CanaryCompoundTag(tag));

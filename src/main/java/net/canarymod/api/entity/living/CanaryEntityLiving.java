@@ -462,18 +462,4 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
         ((net.minecraft.server.EntityLiving)this.getHandle()).bK();// swings the arm
         ((net.canarymod.api.entity.living.CanaryEntityLiving)entity).getHandle().a(net.minecraft.server.DamageSource.j, damage);
     }
-    
-    @Override
-    public BaseTag getNBT() {
-        NBTTagCompound tag = new NBTTagCompound();
-        this.getHandle().d(tag);
-        ((net.minecraft.server.EntityLiving)this.getHandle()).b(tag);
-        return (new CanaryCompoundTag(tag));
-    }
-    
-    @Override
-    public void setNBT(BaseTag tag) {
-        this.getHandle().f((NBTTagCompound) ((CanaryCompoundTag)tag).getHandle());
-        ((net.minecraft.server.EntityLiving)this.getHandle()).a((NBTTagCompound) ((CanaryCompoundTag)tag).getHandle());
-    }
 }
