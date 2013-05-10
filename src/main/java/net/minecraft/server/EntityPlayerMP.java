@@ -217,7 +217,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             // CanaryMod: HealthChange / HealthEnabled
             if (this.aX() != this.cm && cm != -99999999 && this.getPlayer() != null) {
                 // updates your health when it is changed.
-                if (!Configuration.getWorldConfig(getCanaryWorld().getName()).isHealthEnabled()) {
+                if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).isHealthEnabled()) {
                     super.b(this.aW());
                     this.M = false;
                 } else {
@@ -245,7 +245,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
             if (this.cg != this.cp) {
                 // CanaryMod: ExperienceHook / ExperienceEnabled
-                if (!Configuration.getWorldConfig(getCanaryWorld().getName()).isExperienceEnabled()) {
+                if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).isExperienceEnabled()) {
                     this.cg = 0;
                     this.cf = 0;
                 } else if (getPlayer() != null) { // NPC?

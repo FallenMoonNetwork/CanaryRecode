@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 
 import java.util.Arrays;
+
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.monster.CanaryEnderman;
 import net.canarymod.config.Configuration;
@@ -108,7 +109,7 @@ public class EntityEnderman extends EntityMob {
                     i2 = MathHelper.c(this.w - 2.0D + this.ab.nextDouble() * 4.0D);
                     i3 = this.q.a(i0, i1, i2);
                     // CanaryMod: Replace checking static array with checking the world config list or Ender Blocks
-                    if (Arrays.asList(Configuration.getWorldConfig(getCanaryWorld().getName()).getEnderBlocks()).contains(i3)) {
+                    if (Arrays.asList(Configuration.getWorldConfig(getCanaryWorld().getFqName()).getEnderBlocks()).contains(i3)) {
                         // CanaryMod: call EndermanPickupBlockHook
                         EndermanPickupBlockHook hook = new EndermanPickupBlockHook((CanaryEnderman) entity, ((CanaryEnderman) entity).getWorld().getBlockAt(i0, i1, i2));
 

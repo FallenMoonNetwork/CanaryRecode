@@ -699,7 +699,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     public void refreshCreativeMode() {
-        if (getMode() == 1 || Configuration.getWorldConfig(getWorld().getName()).getGameMode() == World.GameMode.CREATIVE) {
+        if (getMode() == 1 || Configuration.getWorldConfig(getWorld().getFqName()).getGameMode() == World.GameMode.CREATIVE) {
             ((EntityPlayerMP) entity).c.a(WorldSettings.a(1));
         } else {
             ((EntityPlayerMP) entity).c.a(WorldSettings.a(0));
