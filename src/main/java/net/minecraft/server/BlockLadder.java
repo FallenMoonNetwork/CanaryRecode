@@ -10,7 +10,7 @@ public class BlockLadder extends Block {
     }
 
     public AxisAlignedBB b(World world, int i0, int i1, int i2) {
-        this.a((IBlockAccess) world, i0, i1, i2);
+        this.a((IBlockAccess) world, i0, i1, i2); //CanaryMod: cast to IBlockAccess
         return super.b(world, i0, i1, i2);
     }
 
