@@ -124,11 +124,12 @@ public class ChunkProviderServer implements IChunkProvider {
                 // CanaryMod: ChunkLoaded
                 Canary.hooks().callHook(new ChunkLoadedHook(chunk.getCanaryChunk(), h.getCanaryWorld()));
                 //
+                if (chunk.k && this.a(i0 + 1, i1 + 1) && this.a(i0, i1 + 1) && this.a(i0 + 1, i1)) {
+                    this.a(this, i0, i1);
+                }
             }
-
             chunk.a(this, this, i0, i1);
         }
-
         return chunk;
     }
 
