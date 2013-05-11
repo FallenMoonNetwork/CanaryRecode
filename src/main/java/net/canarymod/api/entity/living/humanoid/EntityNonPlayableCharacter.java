@@ -3,6 +3,7 @@ package net.canarymod.api.entity.living.humanoid;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+
 import net.canarymod.CanaryMod;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.entity.CanaryEntity;
@@ -20,7 +21,6 @@ import net.minecraft.server.MathHelper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.NetHandler;
-import net.minecraft.server.NetLoginHandler;
 import net.minecraft.server.NetServerHandler;
 import net.minecraft.server.Packet;
 import net.minecraft.server.Packet0KeepAlive;
@@ -107,7 +107,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         if (entityliving != null) {
             entityliving.c(this, this.aM);
         }
-        
+
         this.a.c("NPC Killed");
     }
 
