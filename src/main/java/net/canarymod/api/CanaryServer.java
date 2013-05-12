@@ -34,6 +34,7 @@ import net.minecraft.server.FurnaceRecipes;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerConfigurationManager;
+import net.minecraft.server.TcpConnection;
 
 
 /**
@@ -48,7 +49,7 @@ public class CanaryServer implements Server {
     protected HashMap<String, ServerTimer> timers = new HashMap<String, ServerTimer>();
     protected ScheduledExecutorService taskExecutor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
     private MinecraftServer server;
-    public GUIControl currentGUI;
+    public GUIControl currentGUI = null;
     public boolean notHeadless;
 
     /**
@@ -360,18 +361,28 @@ public class CanaryServer implements Server {
         FurnaceRecipes.a().a(recipe.getItemIDFrom(), ((CanaryItem) recipe.getResult()).getHandle(), recipe.getXP());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addGUIOnTickUpdate(TickUpdate tickupdate) {
         server.addOnTickUpdate(tickupdate);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void removeGUIOnTickUpdate(TickUpdate tickupdate) {
         server.removeOnTickUpdate(tickupdate);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addGUI(GUI gui) {
+	Canary.println("UU");
         if (currentGUI != null) {
             currentGUI.Close();
         }
@@ -380,16 +391,25 @@ public class CanaryServer implements Server {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public long[] getSentPacketCountArray() {
         return server.e;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public long[] getSentPacketSizeArray() {
         return server.f;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public long[] getReceivedPacketCountArray() {
         return server.g;
@@ -400,9 +420,28 @@ public class CanaryServer implements Server {
         return server.h;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public long[] getTickTimeArray() {
         return server.i;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getTcpReaderThreadCount() {
+	return TcpConnection.a.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getTcpWriterThreadCount() {
+	return TcpConnection.b.get();
     }
 
 }
