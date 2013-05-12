@@ -274,7 +274,7 @@ public class CanaryWorld implements World {
 
     @Override
     public boolean isChunkLoaded(int x, int z) {
-        return chunkProvider.isChunkLoaded(x, z);
+        return chunkProvider.isChunkLoaded(x >> 4, z >> 4);
     }
 
     @Override
@@ -337,23 +337,23 @@ public class CanaryWorld implements World {
 
     @Override
     public Chunk loadChunk(int x, int z) {
-        return chunkProvider.loadChunk(x, z);
+        return chunkProvider.loadChunk(x >> 4, z >> 4);
     }
 
     @Override
     public Chunk loadChunk(Location location) {
-        return chunkProvider.loadChunk((int) location.getX(), (int) location.getZ());
+        return chunkProvider.loadChunk((int) location.getX() >> 4, (int) location.getZ() >> 4);
     }
 
     @Override
     public Chunk loadChunk(Position vec3d) {
-        return chunkProvider.loadChunk((int) vec3d.getX(), (int) vec3d.getZ());
+        return chunkProvider.loadChunk((int) vec3d.getX() >> 4, (int) vec3d.getZ() >> 4);
     }
 
     @Override
     public Chunk getChunk(int x, int z) {
         if (isChunkLoaded(x, z)) {
-            return chunkProvider.provideChunk(x, z);
+            return chunkProvider.provideChunk(x >> 4, z >> 4);
         } else {
             return null;
         }
@@ -636,7 +636,7 @@ public class CanaryWorld implements World {
             return;
         }
         byte[] bytes = c.getBiomeByteData();
-        bytes[z << 4 | x] = biome.getId();
+        bytes[((z & 0xF) << 4) | (x & 0xF)] = biome.getId();
         c.setBiomeData(bytes);
     }
 }
