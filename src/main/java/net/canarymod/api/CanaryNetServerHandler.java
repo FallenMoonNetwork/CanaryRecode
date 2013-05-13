@@ -7,7 +7,7 @@ import net.minecraft.server.Packet3Chat;
 
 /**
  * Wrap up NetServerHandler to minimize entry point to notch code
- * 
+ *
  * @author Chris Ksoll
  */
 public class CanaryNetServerHandler implements NetServerHandler {
@@ -42,6 +42,9 @@ public class CanaryNetServerHandler implements NetServerHandler {
         if (msg.length() >= 119) {
             String cutMsg = msg.substring(0, 118);
             int finalCut = cutMsg.lastIndexOf(" ");
+            if(finalCut == -1) {
+                finalCut = 118;
+            }
             String subCut = cutMsg.substring(0, finalCut);
             String newMsg = msg.substring(finalCut);
 

@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.config.Configuration;
@@ -297,8 +296,8 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         WorldConfiguration cfg = Configuration.getWorldConfig(world.getCanaryWorld().getFqName());
         if (world.t.h != 0) {
             return false;
-        } else if (this.ao().i().isEmpty()) {
-            return false;
+            // } else if (this.ao().i().isEmpty()) { // CanaryMod: Empty Ops list shouldn't break spawn protections...
+            // return false;
         } else if (this.ao().e(entityplayer.bS)) {
             return false;
         } else if (cfg.getSpawnProtectionSize() <= 0) {

@@ -130,7 +130,7 @@ public class CanaryServer implements Server {
         }
         String[] split = command.split(" ");
         if (!Canary.commands().parseCommand(this, split[0], split)) {
-            return false;
+            return server.E().a(getHandle(), command) > 0; // Vanilla Commands passed
         }
         return true;
     }

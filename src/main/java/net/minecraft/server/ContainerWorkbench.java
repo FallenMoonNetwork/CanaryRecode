@@ -60,9 +60,13 @@ public class ContainerWorkbench extends Container {
 
         // call CraftHook
         CraftHook hook = new CraftHook(player.getPlayer(), bench, result == null ? null : result.getCanaryItem());
-
         Canary.hooks().callHook(hook);
-        result = hook.getRecipeResult() != null || hook.isCanceled() ? ((CanaryItem) hook.getRecipeResult()).getHandle() : null;
+        if (hook.isCanceled()) {
+            result = null;
+        }
+        else {
+            result = hook.getRecipeResult() == null ? null : ((CanaryItem) hook.getRecipeResult()).getHandle();
+        }
 
         // Set custom result
         this.f.a(0, result);

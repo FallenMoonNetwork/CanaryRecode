@@ -43,11 +43,11 @@ public class Main {
         } catch (Throwable t) {
             Canary.logStackTrace("Exception while starting the server: ", t);
         }
+        //Warps need the DimensionType data which is created upon servre start
+        mod.initWarps();
         // commands require a valid commandOwner which is the server.
         // That means for commands to work, we gotta load Minecraft first
         mod.initCommands();
-        //Warps need the DimensionType data which is created upon servre start
-        mod.initWarps();
     }
 
     /**

@@ -77,4 +77,20 @@ public class CanaryFallingBlock extends CanaryEntity implements FallingBlock {
         return (EntityFallingSand) entity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setBlockID(int id) {
+        getHandle().a = id;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setBlockMetaData(int data) {
+        getHandle().b = data;
+    }
+
 }

@@ -9,6 +9,8 @@ import java.util.concurrent.Callable;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.nbt.CanaryCompoundTag;
+import net.canarymod.api.nbt.CompoundTag;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
@@ -93,7 +95,7 @@ public abstract class Entity {
 
     // CanaryMod
     protected CanaryEntity entity;
-
+    protected CompoundTag metadata = null;
     //
 
     public Entity(World world) {
@@ -989,7 +991,10 @@ public abstract class Entity {
             nbttagcompound.a("UUIDLeast", this.i.getLeastSignificantBits());
             // CanaryMod add level name
             nbttagcompound.a("LevelName", getCanaryWorld().getName());
-            //
+            // CanaryMod: allow the saving of persistent metadata
+            if (metadata != null) {
+                nbttagcompound.a("Canary", ((CanaryCompoundTag)metadata).getHandle());
+            } // CanaryMod end
             this.b(nbttagcompound);
             if (this.o != null) {
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound("Riding");
@@ -1046,6 +1051,9 @@ public abstract class Entity {
 
             this.b(this.u, this.v, this.w);
             this.b(this.A, this.B);
+            // CanaryMod: allow the saving of persistent metadata
+            this.metadata = nbttagcompound.b("Canary") ? new CanaryCompoundTag(nbttagcompound.l("Canary")) : new CanaryCompoundTag("Canary"); 
+            // CanaryMod: END
             this.a(nbttagcompound);
         } catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.a(throwable, "Loading entity NBT");

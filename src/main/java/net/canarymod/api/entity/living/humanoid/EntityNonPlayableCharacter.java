@@ -3,6 +3,7 @@ package net.canarymod.api.entity.living.humanoid;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+
 import net.canarymod.CanaryMod;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.entity.CanaryEntity;
@@ -106,6 +107,8 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         if (entityliving != null) {
             entityliving.c(this, this.aM);
         }
+
+        this.a.c("NPC Killed");
     }
 
     @Override
@@ -199,7 +202,13 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
 
         public void d() {}
 
-        public void c(String s) {}
+        public void c(String s) {
+            this.c.k();
+            this.b(new Packet255KickDisconnect(s));
+            this.a.d();
+            this.d.ad().e(this.c);
+            this.b = true;
+        }
 
         public void a(Packet10Flying opacket10flying) { super.a(opacket10flying);}
 

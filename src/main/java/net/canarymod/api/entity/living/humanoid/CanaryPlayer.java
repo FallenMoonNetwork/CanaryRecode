@@ -556,12 +556,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public String getPrefix() {
         if (prefix != null) {
-            if(prefix.contains(Colors.MARKER)) {
-                return prefix;
-            }
-            return Colors.MARKER + prefix;
+            return prefix;
         } else if (groups[0].getPrefix() != null) {
-            return Colors.MARKER + groups[0].getPrefix();
+            return groups[0].getPrefix();
         } else {
             return Colors.WHITE;
         }
@@ -699,7 +696,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     public void refreshCreativeMode() {
-        if (getMode() == 1 || Configuration.getWorldConfig(getWorld().getName()).getGameMode() == World.GameMode.CREATIVE) {
+        if (getMode() == 1 || Configuration.getWorldConfig(getWorld().getFqName()).getGameMode() == World.GameMode.CREATIVE) {
             ((EntityPlayerMP) entity).c.a(WorldSettings.a(1));
         } else {
             ((EntityPlayerMP) entity).c.a(WorldSettings.a(0));
