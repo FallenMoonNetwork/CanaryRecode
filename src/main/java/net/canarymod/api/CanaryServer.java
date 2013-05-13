@@ -13,7 +13,6 @@ import net.canarymod.Canary;
 import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
-import net.canarymod.api.gui.GUI;
 import net.canarymod.api.gui.GUIControl;
 import net.canarymod.api.gui.TickUpdate;
 import net.canarymod.api.inventory.CanaryItem;
@@ -381,13 +380,14 @@ public class CanaryServer implements Server {
      * {@inheritDoc}
      */
     @Override
-    public void addGUI(GUI gui) {
+    public void addGUI(GUIControl gui) {
 	Canary.println("UU");
         if (currentGUI != null) {
-            currentGUI.Close();
+            currentGUI.closeWindow();
         }
         if (notHeadless) {
-            currentGUI = gui.start();
+            currentGUI = gui;
+            currentGUI.start();
         }
     }
 

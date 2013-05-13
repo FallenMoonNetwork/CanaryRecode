@@ -16,15 +16,14 @@ import javax.swing.border.TitledBorder;
 
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryServer;
-import net.canarymod.api.gui.GUI;
 import net.canarymod.api.gui.GUIControl;
 
-public class ServerGUI extends JComponent implements GUI {
+public class ServerGUI extends JComponent implements GUIControl {
 
     private static boolean a = false;
     private static JFrame jframe;
 
-    public static GUIControl a() {
+    public static void a() {
 	try {
 	    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 	} catch (Exception exception) {
@@ -42,7 +41,6 @@ public class ServerGUI extends JComponent implements GUI {
 	jframe.setVisible(true);
 	jframe.addWindowListener(new ServerWindowAdapter());
 
-	return new GUIControl(servergui);
     }
 
     public ServerGUI() {
@@ -99,8 +97,8 @@ public class ServerGUI extends JComponent implements GUI {
     }
 
     @Override
-    public GUIControl start() {
-	return ServerGUI.a();
+    public void start() {
+	ServerGUI.a();
     }
 
     @Override
