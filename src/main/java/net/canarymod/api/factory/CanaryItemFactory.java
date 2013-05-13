@@ -57,7 +57,7 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(ItemType type, int damage) {
-        return type == null ? null : new CanaryItem(type.getId(), damage);
+        return type == null ? null : new CanaryItem(type.getId(), 0, damage);
     }
 
     /**
@@ -65,11 +65,11 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(ItemType type, int damage, int stackSize) {
-        if(type == null) return null;
+        if (type == null) {
+            return null;
+        }
         
-        CanaryItem item = new CanaryItem(type.getId(), damage);
-
-        item.setAmount(stackSize);
+        CanaryItem item = new CanaryItem(type.getId(), stackSize, damage);
         return item;
     }
 
@@ -78,12 +78,15 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(Item item) {
-        if(item == null) return null;
+        if (item == null) {
+            return null;
+        }
         
-        CanaryItem item2 = new CanaryItem(item.getId(), item.getDamage());
+        CanaryItem item2 = new CanaryItem(item.getId(), item.getAmount(), item.getDamage());
 
-        item2.setAmount(item.getAmount());
-        item2.setEnchantments(item.getEnchantments());
+        if (item.hasDataTag()) {
+            item2.setDataTag(item.getDataTag());
+        }
         return item2;
     }
 
@@ -113,7 +116,7 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(int id, int damage, Enchantment[] enchantments) {
-        CanaryItem item = new CanaryItem(id, damage);
+        CanaryItem item = new CanaryItem(id, 0, damage);
 
         item.setEnchantments(enchantments);
         return item;
