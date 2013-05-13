@@ -23,7 +23,7 @@ class ServerGuiCommandListener implements ActionListener {
         String s0 = this.a.getText().trim();
 
         if (s0.length() > 0) {
-            // ServerGUI.a(this.b).a(s0, (ICommandSender) MinecraftServer.D());
+            // XXX ServerGUI.a(this.b).a(s0, (ICommandSender) MinecraftServer.D());
             Canary.getServer().consoleCommand(s0);
         }
 

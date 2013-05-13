@@ -381,7 +381,7 @@ public class CanaryServer implements Server {
      */
     @Override
     public void addGUI(GUIControl gui) {
-	Canary.println("UU");
+        Canary.println("UU");
         if (currentGUI != null) {
             currentGUI.closeWindow();
         }
@@ -433,7 +433,7 @@ public class CanaryServer implements Server {
      */
     @Override
     public int getTcpReaderThreadCount() {
-	return TcpConnection.a.get();
+        return TcpConnection.a.get();
     }
 
     /**
@@ -441,7 +441,7 @@ public class CanaryServer implements Server {
      */
     @Override
     public int getTcpWriterThreadCount() {
-	return TcpConnection.b.get();
+        return TcpConnection.b.get();
     }
 
 }

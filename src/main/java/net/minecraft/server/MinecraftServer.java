@@ -1099,7 +1099,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public void removeOnTickUpdate(TickUpdate tickupdate) {
-	this.o.remove(tickupdate);
+        this.o.remove(tickupdate);
     }
 
 }
