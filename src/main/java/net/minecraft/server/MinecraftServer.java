@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
-import net.canarymod.api.gui.TickUpdate;
 import net.canarymod.api.world.CanarySaveConverter;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.CanaryWorldManager;
@@ -481,11 +480,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.a.c("tickables");
 
         for (i0 = 0; i0 < this.o.size(); ++i0) {
-            if (this.o.get(i0) instanceof IUpdatePlayerListBox) {
-                ((IUpdatePlayerListBox) this.o.get(i0)).a();
-            } else if (this.o.get(i0) instanceof TickUpdate) {
-                ((TickUpdate) this.o.get(i0)).onTickUpdate();
-            }
+            ((IUpdatePlayerListBox) this.o.get(i0)).a();
         }
 
         this.a.b();
@@ -1092,14 +1087,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     public void loadWorld(String name, long seed, net.canarymod.api.world.DimensionType type, net.canarymod.api.world.WorldType typeGen) {
         this.initWorld(name, seed, WorldType.a(typeGen.toString()), type, null);
-    }
-
-    public void addOnTickUpdate(TickUpdate tickupdate) {
-        this.o.add(tickupdate);
-    }
-
-    public void removeOnTickUpdate(TickUpdate tickupdate) {
-        this.o.remove(tickupdate);
     }
 
 }

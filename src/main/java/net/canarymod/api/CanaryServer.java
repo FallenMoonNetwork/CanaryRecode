@@ -14,7 +14,6 @@ import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.gui.GUIControl;
-import net.canarymod.api.gui.TickUpdate;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.recipes.CraftingRecipe;
 import net.canarymod.api.inventory.recipes.ShapedRecipeHelper;
@@ -358,22 +357,6 @@ public class CanaryServer implements Server {
     @Override
     public void addSmeltingRecipe(SmeltRecipe recipe) {
         FurnaceRecipes.a().a(recipe.getItemIDFrom(), ((CanaryItem) recipe.getResult()).getHandle(), recipe.getXP());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addGUIOnTickUpdate(TickUpdate tickupdate) {
-        server.addOnTickUpdate(tickupdate);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void removeGUIOnTickUpdate(TickUpdate tickupdate) {
-        server.removeOnTickUpdate(tickupdate);
     }
 
     /**

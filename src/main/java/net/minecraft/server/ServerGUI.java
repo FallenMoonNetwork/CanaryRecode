@@ -22,6 +22,7 @@ public class ServerGUI extends JComponent implements GUIControl {
 
     private static boolean a = false;
     private static JFrame jframe;
+    public static ServerGUI servergui = new ServerGUI();
 
     public static GUIControl a() {
         try {
@@ -30,7 +31,14 @@ public class ServerGUI extends JComponent implements GUIControl {
             ;
         }
 
-        ServerGUI servergui = new ServerGUI();
+        ServerGUI servergui = ServerGUI.servergui;
+
+        try {
+            servergui.add(ServerGUI.servergui.d(), "Center");
+            servergui.add(ServerGUI.servergui.b(), "West");
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
         a = true;
         jframe = new JFrame("Minecraft server");
@@ -48,13 +56,6 @@ public class ServerGUI extends JComponent implements GUIControl {
     public ServerGUI() {
         this.setPreferredSize(new Dimension(854, 480));
         this.setLayout(new BorderLayout());
-
-        try {
-            this.add(this.d(), "Center");
-            this.add(this.b(), "West");
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
     }
 
     private JComponent b() {

@@ -10,11 +10,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.ServerConfiguration;
 import net.canarymod.config.WorldConfiguration;
+import net.canarymod.hook.system.ServerGuiStartHook;
 
 
 public class DedicatedServer extends MinecraftServer implements IServer {
@@ -270,8 +272,10 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     }
 
     public void ap() {
-        // TODO GUI start Hook
-        ((CanaryServer) Canary.getServer()).currentGUI = ServerGUI.a();
+        ServerGuiStartHook guiHook = new ServerGuiStartHook(ServerGUI.servergui);
+        Canary.hooks().callHook(guiHook);
+        ((CanaryServer) Canary.getServer()).currentGUI = guiHook.getGui();
+        ((CanaryServer) Canary.getServer()).currentGUI.start();
         ((CanaryServer) Canary.getServer()).notHeadless = this.s = true;
     }
 
