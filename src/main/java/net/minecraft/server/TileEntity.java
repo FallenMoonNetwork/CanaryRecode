@@ -67,7 +67,9 @@ public class TileEntity {
             nbttagcompound.a("x", this.l);
             nbttagcompound.a("y", this.m);
             nbttagcompound.a("z", this.n);
-            nbttagcompound.a("Canary", meta.getHandle());
+            if (meta != null) {
+                nbttagcompound.a("Canary", meta.getHandle());
+            }
         }
     }
 
