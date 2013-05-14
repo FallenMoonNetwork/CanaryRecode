@@ -2,6 +2,7 @@ package net.canarymod.api;
 
 
 import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.chat.TextFormat;
 import net.minecraft.server.Packet3Chat;
 
 
@@ -42,14 +43,14 @@ public class CanaryNetServerHandler implements NetServerHandler {
         if (msg.length() >= 119) {
             String cutMsg = msg.substring(0, 118);
             int finalCut = cutMsg.lastIndexOf(" ");
-            if(finalCut == -1) {
+            if (finalCut == -1) {
                 finalCut = 118;
             }
             String subCut = cutMsg.substring(0, finalCut);
             String newMsg = msg.substring(finalCut);
 
             handler.b(new Packet3Chat(subCut));
-            sendMessage(newMsg);
+            sendMessage(TextFormat.getLastColor(subCut) + newMsg);
         } else {
             handler.b(new Packet3Chat(msg));
         }
