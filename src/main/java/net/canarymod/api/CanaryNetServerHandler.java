@@ -50,7 +50,8 @@ public class CanaryNetServerHandler implements NetServerHandler {
             String newMsg = msg.substring(finalCut);
 
             handler.b(new Packet3Chat(subCut));
-            sendMessage(TextFormat.getLastColor(subCut) + newMsg);
+            String lastColor = TextFormat.getLastColor(subCut);
+            sendMessage((lastColor == null ? "" : lastColor) + newMsg);
         } else {
             handler.b(new Packet3Chat(msg));
         }
