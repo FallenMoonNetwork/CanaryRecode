@@ -22,7 +22,7 @@ public class TileEntity {
 
     // CanaryMod: Variable Declaration
     public ComplexBlock complexBlock;
-    private CanaryCompoundTag meta; // hold it for extra data
+    private CanaryCompoundTag meta = new CanaryCompoundTag("Canary"); // hold it for extra data
     // CanaryMod: End
 
     public TileEntity() {}
