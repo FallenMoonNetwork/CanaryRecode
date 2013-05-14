@@ -6,9 +6,12 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.text.DecimalFormat;
 import java.util.Collection;
+
 import javax.swing.JComponent;
 import javax.swing.Timer;
+
 import net.canarymod.Canary;
+import net.canarymod.api.CanaryServer;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 
@@ -21,7 +24,8 @@ public class GuiStatsComponent extends JComponent {
     private String[] d = new String[11];
     private final MinecraftServer e;
 
-    public GuiStatsComponent(MinecraftServer minecraftserver) {
+    public GuiStatsComponent() {
+        MinecraftServer minecraftserver = ((CanaryServer) Canary.getServer()).getHandle();
         this.e = minecraftserver;
         this.setPreferredSize(new Dimension(456, 246));
         this.setMinimumSize(new Dimension(456, 246));
@@ -69,6 +73,7 @@ public class GuiStatsComponent extends JComponent {
         return (double) i0 / (double) along.length;
     }
 
+    @Override
     public void paint(Graphics graphics) {
         graphics.setColor(new Color(16777215));
         graphics.fillRect(0, 0, 456, 246);

@@ -10,10 +10,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
+
 import net.canarymod.Canary;
+import net.canarymod.api.CanaryServer;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.ServerConfiguration;
 import net.canarymod.config.WorldConfiguration;
+import net.canarymod.hook.system.ServerGuiStartHook;
 
 
 public class DedicatedServer extends MinecraftServer implements IServer {
@@ -22,9 +25,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     private final ILogAgent l;
     private RConThreadQuery m;
     private RConThreadMain n;
-//  CanaryMod - Removed private PropertyManager o;
-//  CanaryMod - Removed private boolean p;
-//  CanaryMod - Removed private EnumGameType q;
+    //  CanaryMod - Removed private PropertyManager o;
+    //  CanaryMod - Removed private boolean p;
+    //  CanaryMod - Removed private EnumGameType q;
     private NetworkListenThread r;
     private boolean s = false;
 
@@ -45,7 +48,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         }
 
         this.al().a("Loading properties");
-//        this.o = new PropertyManager(new File("server.properties"), this.al()); //CanaryMod - Removed
+        //        this.o = new PropertyManager(new File("server.properties"), this.al()); //CanaryMod - Removed
         //CanaryMod use our config
         ServerConfiguration cfg = Configuration.getServerConfig();
         if (this.I()) {
@@ -269,8 +272,11 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     }
 
     public void ap() {
-        ServerGUI.a(this);
-        this.s = true;
+        ServerGuiStartHook guiHook = new ServerGuiStartHook(ServerGUI.servergui);
+        Canary.hooks().callHook(guiHook);
+        ((CanaryServer) Canary.getServer()).currentGUI = guiHook.getGui();
+        ((CanaryServer) Canary.getServer()).currentGUI.start();
+        ((CanaryServer) Canary.getServer()).notHeadless = this.s = true;
     }
 
     public boolean ag() {
@@ -320,17 +326,17 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     @Override
     public void reload() {/* WorldConfiguration defWorld = Configuration.getWorldConfig(Configuration.getServerConfig().getDefaultWorldName());
-         * // this.d = new OPropertyManager(new File("server.properties"));
-         * this.y = Configuration.getNetConfig().getBindIp();
-         * this.n = Configuration.getNetConfig().isOnlineMode();
-         * this.o = defWorld.canSpawnAnimals();
-         * this.p = defWorld.canSpawnNpcs();
-         * this.q = defWorld.isPvpEnabled();
-         * this.r = defWorld.isFlightAllowed();
-         * this.s = Configuration.getServerConfig().getMotd();
-         * this.z = Configuration.getNetConfig().getPort();
-         * this.t = defWorld.getMaxBuildHeight();
-         * this.t = (this.t + 8) / 16 * 16;
-         * this.t = OMathHelper.a(this.t, 64, 256);
-         * // TODO Update worlds (??) */}
+     * // this.d = new OPropertyManager(new File("server.properties"));
+     * this.y = Configuration.getNetConfig().getBindIp();
+     * this.n = Configuration.getNetConfig().isOnlineMode();
+     * this.o = defWorld.canSpawnAnimals();
+     * this.p = defWorld.canSpawnNpcs();
+     * this.q = defWorld.isPvpEnabled();
+     * this.r = defWorld.isFlightAllowed();
+     * this.s = Configuration.getServerConfig().getMotd();
+     * this.z = Configuration.getNetConfig().getPort();
+     * this.t = defWorld.getMaxBuildHeight();
+     * this.t = (this.t + 8) / 16 * 16;
+     * this.t = OMathHelper.a(this.t, 64, 256);
+     * // TODO Update worlds (??) */}
 }

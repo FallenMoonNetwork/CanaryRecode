@@ -1088,4 +1088,5 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     public void loadWorld(String name, long seed, net.canarymod.api.world.DimensionType type, net.canarymod.api.world.WorldType typeGen) {
         this.initWorld(name, seed, WorldType.a(typeGen.toString()), type, null);
     }
+
 }
