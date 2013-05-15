@@ -13,6 +13,7 @@ import net.canarymod.Canary;
 import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.gui.GUIControl;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.recipes.CraftingRecipe;
 import net.canarymod.api.inventory.recipes.ShapedRecipeHelper;
@@ -31,6 +32,7 @@ import net.minecraft.server.FurnaceRecipes;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerConfigurationManager;
+import net.minecraft.server.TcpConnection;
 
 
 /**
@@ -45,6 +47,8 @@ public class CanaryServer implements Server {
     protected HashMap<String, ServerTimer> timers = new HashMap<String, ServerTimer>();
     protected ScheduledExecutorService taskExecutor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
     private MinecraftServer server;
+    public GUIControl currentGUI = null;
+    public boolean notHeadless;
 
     /**
      * Create a new Server Wrapper
@@ -354,4 +358,73 @@ public class CanaryServer implements Server {
     public void addSmeltingRecipe(SmeltRecipe recipe) {
         FurnaceRecipes.a().a(recipe.getItemIDFrom(), ((CanaryItem) recipe.getResult()).getHandle(), recipe.getXP());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addGUI(GUIControl gui) {
+        Canary.println("UU");
+        if (currentGUI != null) {
+            currentGUI.closeWindow();
+        }
+        if (notHeadless) {
+            currentGUI = gui;
+            currentGUI.start();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long[] getSentPacketCountArray() {
+        return server.e;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long[] getSentPacketSizeArray() {
+        return server.f;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long[] getReceivedPacketCountArray() {
+        return server.g;
+    }
+
+    @Override
+    public long[] getReceivedPacketSizeArray() {
+        return server.h;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long[] getTickTimeArray() {
+        return server.i;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getTcpReaderThreadCount() {
+        return TcpConnection.a.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getTcpWriterThreadCount() {
+        return TcpConnection.b.get();
+    }
+
 }
