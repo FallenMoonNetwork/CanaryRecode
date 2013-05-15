@@ -7,6 +7,7 @@ public class CanaryFactory implements Factory {
     private final PotionFactory potionFactory = new CanaryPotionFactory();
     private final EntityFactory entityFactory = new CanaryEntityFactory();
     private final ObjectFactory objFactory = new CanaryObjectFactory();
+    private final NBTFactory nbtFactory = new CanaryNBTFactory();
 
     @Override
     public ItemFactory getItemFactory() {
@@ -26,6 +27,11 @@ public class CanaryFactory implements Factory {
     @Override
     public ObjectFactory getObjectFactory() {
         return objFactory;
+    }
+
+    @Override
+    public NBTFactory getNBTFactory() {
+        return nbtFactory;
     }
 
 }

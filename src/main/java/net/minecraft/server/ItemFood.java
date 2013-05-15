@@ -35,7 +35,7 @@ public class ItemFood extends Item {
         // CanaryMod: Eat
         net.canarymod.api.potion.PotionEffect[] effects = null;
 
-        if (this instanceof ItemAppleGold && !world.I) {
+        if (this instanceof ItemAppleGold && !world.I && itemstack.k() > 0) {
             effects = new net.canarymod.api.potion.PotionEffect[] {
                 new CanaryPotionEffect(new PotionEffect(Potion.l.H, 600, 3)), new CanaryPotionEffect(new PotionEffect(Potion.m.H, 6000, 0)), new CanaryPotionEffect(new PotionEffect(Potion.n.H, 6000, 0))
             };

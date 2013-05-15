@@ -12,9 +12,11 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 
 import net.canarymod.Canary;
+import net.canarymod.api.CanaryServer;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.ServerConfiguration;
 import net.canarymod.config.WorldConfiguration;
+import net.canarymod.hook.system.ServerGuiStartHook;
 
 
 public class DedicatedServer extends MinecraftServer implements IServer {
@@ -270,8 +272,17 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     }
 
     public void ap() {
-        ServerGUI.a(this);
-        this.s = true;
+        ServerGuiStartHook guiHook = new ServerGuiStartHook(ServerGUI.servergui);
+        Canary.hooks().callHook(guiHook);
+        if (guiHook.getGui() != null) {
+            ((CanaryServer) Canary.getServer()).currentGUI = guiHook.getGui();
+            ((CanaryServer) Canary.getServer()).currentGUI.start();
+            ((CanaryServer) Canary.getServer()).notHeadless = this.s = true;
+        } else {
+            ((CanaryServer) Canary.getServer()).currentGUI = ServerGUI.servergui;
+            ((CanaryServer) Canary.getServer()).currentGUI.start();
+            ((CanaryServer) Canary.getServer()).notHeadless = this.s = true;
+        }
     }
 
     public boolean ag() {
@@ -295,8 +306,8 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         WorldConfiguration cfg = Configuration.getWorldConfig(world.getCanaryWorld().getFqName());
         if (world.t.h != 0) {
             return false;
-        } else if (this.ao().i().isEmpty()) {
-            return false;
+            // } else if (this.ao().i().isEmpty()) { // CanaryMod: Empty Ops list shouldn't break spawn protections...
+            // return false;
         } else if (this.ao().e(entityplayer.bS)) {
             return false;
         } else if (cfg.getSpawnProtectionSize() <= 0) {

@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
-
 import net.canarymod.AutocompleteUtils;
 import net.canarymod.Canary;
 import net.canarymod.LineTracer;
@@ -386,13 +385,7 @@ public class NetServerHandler extends NetHandler {
             BlockLeftClickHook hook = new BlockLeftClickHook(c.getPlayer(), block);
 
             if (packet14blockdig.e == 0) {
-                // CanaryMod: can player build?
-                if (!c.getPlayer().canBuild()) {
-                    return;
-                }
-                //
-
-                if (!this.d.a(worldserver, i0, i1, i2, this.c) || c.getPlayer().hasPermission("canary.world.spawnbuild")) {
+                if ((!this.d.a(worldserver, i0, i1, i2, this.c) || c.getPlayer().hasPermission("canary.world.spawnbuild")) && c.getPlayer().canBuild()) {
                     block.setStatus((byte) 0); // Set Status
                     Canary.hooks().callHook(hook); // Call Hook
                     if (!hook.isCanceled()) {

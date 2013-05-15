@@ -1,8 +1,11 @@
 package net.canarymod.api.world.blocks;
 
 
+import net.canarymod.api.nbt.CanaryCompoundTag;
+import net.canarymod.api.nbt.CompoundTag;
 import net.canarymod.api.world.World;
 import net.minecraft.server.IInventory;
+import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.TileEntity;
 
 
@@ -86,6 +89,61 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
     @Override
     public void update() {
         tileentity.az().j(getX(), getY(), getZ());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CompoundTag getDataTag() {
+        if (tileentity != null) {
+            NBTTagCompound tag = new NBTTagCompound("tag");
+            tileentity.b(tag);
+            return new CanaryCompoundTag(tag);
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CompoundTag getMetaTag() {
+        if (tileentity != null) {
+            CompoundTag dataTag = getDataTag();
+
+            if (dataTag == null) {
+                dataTag = new CanaryCompoundTag("tag");
+                writeToTag(dataTag);
+            }
+            if (!dataTag.containsKey("Canary")) {
+                dataTag.put("Canary", new CanaryCompoundTag("Canary"));
+            }
+            return dataTag.getCompoundTag("Canary");
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CompoundTag writeToTag(CompoundTag tag) {
+        if (tileentity != null) {
+            tileentity.b(((CanaryCompoundTag) tag).getHandle());
+            return tag;
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void readFromTag(CompoundTag tag) {
+        if (tileentity != null) {
+            tileentity.a(((CanaryCompoundTag) tag).getHandle());
+        }
     }
 
     /**

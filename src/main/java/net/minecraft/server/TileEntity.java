@@ -4,6 +4,7 @@ package net.minecraft.server;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.world.blocks.ComplexBlock;
 
 
@@ -21,6 +22,7 @@ public class TileEntity {
 
     // CanaryMod: Variable Declaration
     public ComplexBlock complexBlock;
+    private CanaryCompoundTag meta = new CanaryCompoundTag("Canary"); // hold it for extra data
     // CanaryMod: End
 
     public TileEntity() {}
@@ -50,6 +52,9 @@ public class TileEntity {
         this.l = nbttagcompound.e("x");
         this.m = nbttagcompound.e("y");
         this.n = nbttagcompound.e("z");
+        if (nbttagcompound.b("Canary")) {
+            this.meta = new CanaryCompoundTag(nbttagcompound.l("Canary"));
+        }
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -62,6 +67,9 @@ public class TileEntity {
             nbttagcompound.a("x", this.l);
             nbttagcompound.a("y", this.m);
             nbttagcompound.a("z", this.n);
+            if (meta != null) {
+                nbttagcompound.a("Canary", meta.getHandle());
+            }
         }
     }
 

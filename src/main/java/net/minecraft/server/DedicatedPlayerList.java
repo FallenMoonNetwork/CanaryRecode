@@ -1,39 +1,32 @@
 package net.minecraft.server;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.Iterator;
-
 import net.canarymod.Canary;
 import net.canarymod.config.Configuration;
 
 public class DedicatedPlayerList extends ServerConfigurationManager {
 
 //  CanaryMod removed whitelist
-    private File d;
+    // CanaryMod: removed ops
     public DedicatedPlayerList(DedicatedServer dedicatedserver) {
         super(dedicatedserver);
         // CanaryMod removed whitelist settings
-        this.d = dedicatedserver.e("ops.txt");
+        // CanaryMod: removed ops
         this.c = Configuration.getServerConfig().getViewDistance();
         this.b = Configuration.getServerConfig().getMaxPlayers();
         // CanaryMod removed references to NMS ban system
-        this.t();
-        this.v();
-        this.u();
+        // this.t();
+        // this.v();
+        // this.u();
     }
 
     public void b(String s0) {
-        super.b(s0);
-        this.u();
+        super.b(s0); // Add OP
+        // this.u();
     }
 
     public void c(String s0) {
-        super.c(s0);
-        this.u();
+        super.c(s0); // Remove OP
+        // this.u();
     }
 
     public void i(String s0) {
@@ -52,36 +45,36 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     }
 
     private void t() {
-        try {
-            this.i().clear();
-            BufferedReader bufferedreader = new BufferedReader(new FileReader(this.d));
-            String s0 = "";
-
-            while ((s0 = bufferedreader.readLine()) != null) {
-                this.i().add(s0.trim().toLowerCase());
-            }
-
-            bufferedreader.close();
-        } catch (Exception exception) {
-            this.s().al().b("Failed to load operators list: " + exception);
-        }
+        // try {
+        // this.i().clear();
+        // BufferedReader bufferedreader = new BufferedReader(new FileReader(this.d));
+        // String s0 = "";
+        //
+        // while ((s0 = bufferedreader.readLine()) != null) {
+        // this.i().add(s0.trim().toLowerCase());
+        // }
+        //
+        // bufferedreader.close();
+        // } catch (Exception exception) {
+        // this.s().al().b("Failed to load operators list: " + exception);
+        // }
     }
 
     private void u() {
-        try {
-            PrintWriter printwriter = new PrintWriter(new FileWriter(this.d, false));
-            Iterator iterator = this.i().iterator();
-
-            while (iterator.hasNext()) {
-                String s0 = (String) iterator.next();
-
-                printwriter.println(s0);
-            }
-
-            printwriter.close();
-        } catch (Exception exception) {
-            this.s().al().b("Failed to save operators list: " + exception);
-        }
+        // try {
+        // PrintWriter printwriter = new PrintWriter(new FileWriter(this.d, false));
+        // Iterator iterator = this.i().iterator();
+        //
+        // while (iterator.hasNext()) {
+        // String s0 = (String) iterator.next();
+        //
+        // printwriter.println(s0);
+        // }
+        //
+        // printwriter.close();
+        // } catch (Exception exception) {
+        // this.s().al().b("Failed to save operators list: " + exception);
+        // }
     }
 
     private void v() {
@@ -118,8 +111,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     }
 
     public boolean d(String s0) {
-        s0 = s0.trim().toLowerCase();
-        return !this.n() || this.e(s0) || this.h().contains(s0);
+        return !this.n() || this.e(s0) || Canary.ops().isOpped(s0);
     }
 
     public DedicatedServer s() {

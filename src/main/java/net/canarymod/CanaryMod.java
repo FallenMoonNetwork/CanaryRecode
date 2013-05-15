@@ -16,6 +16,7 @@ import net.canarymod.hook.HookExecutor;
 import net.canarymod.kit.KitProvider;
 import net.canarymod.permissionsystem.PermissionManager;
 import net.canarymod.plugin.PluginLoader;
+import net.canarymod.user.OperatorsProvider;
 import net.canarymod.user.UserAndGroupsProvider;
 import net.canarymod.user.WhitelistProvider;
 import net.canarymod.warp.WarpProvider;
@@ -47,6 +48,7 @@ public class CanaryMod extends Canary {
         this.helpManager = new HelpManager();
         this.banManager = new BanManager();
         this.whitelist = new WhitelistProvider();
+        this.ops = new OperatorsProvider();
         this.factory = (Factory) new CanaryFactory();
         this.channelManager = new CanaryChannelManager();
         // Initialize the plugin loader and scan for plugins

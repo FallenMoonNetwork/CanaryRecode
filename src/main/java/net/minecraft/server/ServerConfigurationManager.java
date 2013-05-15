@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import net.canarymod.Canary;
 import net.canarymod.Translator;
 import net.canarymod.api.CanaryConfigurationManager;
@@ -239,7 +238,6 @@ public abstract class ServerConfigurationManager {
 
         if (entityplayermp.o != null) {
             worldserver.e(entityplayermp.o);
-            System.out.println("removing player mount");
         }
 
         worldserver.e(entityplayermp);
@@ -333,7 +331,6 @@ public abstract class ServerConfigurationManager {
         NBTTagCompound playertag = getPlayerDatByName(playername);
 
         if (playertag != null) {
-            Canary.println("item manager from NBT data");
             net.canarymod.api.nbt.CanaryCompoundTag canarycompound = new net.canarymod.api.nbt.CanaryCompoundTag(playertag);
 
             worldName = canarycompound.getString("LevelName");
@@ -613,22 +610,22 @@ public abstract class ServerConfigurationManager {
     }
 
     public void b(String s0) {
-        this.h.add(s0.toLowerCase());
+        Canary.ops().addPlayer(s0); // CanaryMod: Re-route to our Ops listing
     }
 
     public void c(String s0) {
-        this.h.remove(s0.toLowerCase());
+        Canary.ops().removePlayer(s0); // CanaryMod: Re-route to our Ops listing
     }
 
     public boolean d(String s0) {
-        s0 = s0.trim().toLowerCase();
-        return !this.k || this.h.contains(s0) || this.i.contains(s0);
+        return !this.k || Canary.ops().isOpped(s0); // CanaryMod: Re-route to our Ops listing
     }
 
     public boolean e(String s0) {
         WorldServer srv = (WorldServer) ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle();
 
-        return this.h.contains(s0.trim().toLowerCase()) || this.e.I() && srv.M().v() && this.e.H().equalsIgnoreCase(s0) || this.m;
+        // CanaryMod: Added Re-route to our Ops listing
+        return Canary.ops().isOpped(s0) || this.e.I() && srv.M().v() && this.e.H().equalsIgnoreCase(s0) || this.m;
     }
 
     public EntityPlayerMP f(String s0) {

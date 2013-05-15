@@ -460,7 +460,7 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
      */
     @Override
     public void setSlot(int index, Item value) {
-        inventory.a(index, ((CanaryItem) value).getHandle());
+        inventory.a(index, value != null ? ((CanaryItem) value).getHandle() : null);
     }
 
     /**
