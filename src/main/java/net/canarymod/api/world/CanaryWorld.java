@@ -57,19 +57,20 @@ public class CanaryWorld implements World {
     public long[] nanoTicks;
 
     private CanaryPlayerManager playerManager;
-
     /**
      * The world name
      */
-    private String name;
+    private String name, fqName;
 
     public CanaryWorld(String name, WorldServer dimension, DimensionType type) {
         this.name = name;
+        this.type = type;
         world = dimension;
+        fqName = name + "_" + this.type.getName();
+
 
         playerManager = dimension.s().getPlayerManager();
         entityTracker = dimension.getEntityTracker();
-        this.type = type;
         // Init nanotick size
         nanoTicks = new long[100];
 
@@ -83,7 +84,7 @@ public class CanaryWorld implements World {
 
     @Override
     public String getFqName() {
-        return this.name + "_" + this.type.getName();
+        return fqName;
     }
 
     @Override
