@@ -2,6 +2,7 @@ package net.canarymod.api.entity.living.humanoid;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
@@ -38,7 +39,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
     public CanaryNonPlayableCharacter(EntityNonPlayableCharacter npc) {
         super(npc);
         this.getHandle().setNPC(this);
-        this.behaviors = new ArrayList<NPCBehavior>();
+        this.behaviors = Collections.synchronizedList(new ArrayList<NPCBehavior>());
     }
 
     /**
@@ -265,7 +266,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      * {@inheritDoc}
      */
     @Override
-    public void chat(String msg) { // Could really use some custom prefix stuff
+    public void chat(String msg) {
         Canary.getServer().broadcastMessage(prefix.replace("%name", getName()) + msg);
     }
 
@@ -273,7 +274,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      * {@inheritDoc}
      */
     @Override
-    public void privateMessage(Player player, String msg) { // Could really use some custom prefix stuff
+    public void privateMessage(Player player, String msg) {
         player.sendMessage("[PM] " + prefix.replace("%name", getName()) + msg);
     }
 
@@ -309,68 +310,79 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
         return getHandle().ce.a;
     }
 
-    // public void setDisplayName(String name) { // WIP
-    // Packet20NamedEntitySpawn pkt = new Packet20NamedEntitySpawn(getHandle());
-    // for (Player p : Canary.getServer().getPlayerList()) { // could be improved to only send to nearby players
-    // if (!p.equals(this.player)) {
-    // p.getEntity().a.b(pkt);
-    // }
-    // }
-    // }
-
     void update() {
-        synchronized (behaviors) {
-            for (NPCBehavior behavior : behaviors) {
-                try {
-                    if (!getHandle().M) {
-                        behavior.onUpdate();
+        try {
+            synchronized (behaviors) {
+                for (NPCBehavior behavior : behaviors) {
+                    try {
+                        if (!getHandle().M) {
+                            behavior.onUpdate();
+                        }
+                    } catch (Exception ex) {
+                        Canary.logWarning("Exception while calling onUpdate in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
+                        Canary.logStackTrace("", ex);
                     }
-                } catch (Exception ex) {
-                    Canary.logWarning("Exception while calling onUpdate in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
-                    Canary.logStackTrace("", ex);
                 }
             }
+        } catch (Exception ex) {
+            Canary.logWarning("Exception occured while calling update for NPC " + this.getName());
+            Canary.logStackTrace("", ex);
         }
     }
 
     void clicked(Player player) {
-        synchronized (behaviors) {
-            for (NPCBehavior behavior : behaviors) {
-                try {
-                    if (!getHandle().M) {
-                        behavior.onClicked(player);
+        try {
+            synchronized (behaviors) {
+                for (NPCBehavior behavior : behaviors) {
+                    try {
+                        if (!getHandle().M) {
+                            behavior.onClicked(player);
+                        }
+                    } catch (Exception ex) {
+                        Canary.logWarning("Exception occured while calling onClicked in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
+                        Canary.logStackTrace("", ex);
                     }
-                } catch (Exception ex) {
-                    Canary.logWarning("Exception while calling onClicked in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
-                    Canary.logStackTrace("", ex);
                 }
             }
+        } catch (Exception ex) {
+            Canary.logWarning("Exception while calling clicked for NPC " + this.getName());
+            Canary.logStackTrace("", ex);
         }
     }
 
-    void attack(CanaryEntity entity) {
-        synchronized (behaviors) {
-            for (NPCBehavior behavior : behaviors) {
-                try {
-                    if (!getHandle().M) {
-                        behavior.onAttack(entity);
+    void attacked(CanaryEntity entity) {
+        try {
+            synchronized (behaviors) {
+                for (NPCBehavior behavior : behaviors) {
+                    try {
+                        if (!getHandle().M) {
+                            behavior.onAttacked(entity);
+                        }
+                    } catch (Exception ex) {
+                        Canary.logWarning("Exception while calling onAttack in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
                     }
-                } catch (Exception ex) {
-                    Canary.logWarning("Exception while calling onAttack in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
                 }
             }
+        } catch (Exception ex) {
+            Canary.logWarning("Exception occured while calling attacked for NPC " + this.getName());
+            Canary.logStackTrace("", ex);
         }
     }
 
-    void destoryed() {
-        synchronized (behaviors) {
-            for (NPCBehavior behavior : behaviors) {
-                try {
-                    behavior.onDestroy();
-                } catch (Exception ex) {
-                    Canary.logWarning("Exception while calling onAttack in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
+    void destroyed() {
+        try {
+            synchronized (behaviors) {
+                for (NPCBehavior behavior : behaviors) {
+                    try {
+                        behavior.onDestroy();
+                    } catch (Exception ex) {
+                        Canary.logWarning("Exception while calling onDestroyed in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
+                    }
                 }
             }
+        } catch (Exception ex) {
+            Canary.logWarning("Exception occured while calling destroyed for NPC " + this.getName());
+            Canary.logStackTrace("", ex);
         }
     }
 
