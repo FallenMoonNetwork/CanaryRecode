@@ -364,7 +364,6 @@ public class CanaryServer implements Server {
      */
     @Override
     public void addGUI(GUIControl gui) {
-        Canary.println("UU");
         if (currentGUI != null) {
             currentGUI.closeWindow();
         }

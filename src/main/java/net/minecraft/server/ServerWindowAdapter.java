@@ -17,7 +17,7 @@ final class ServerWindowAdapter extends WindowAdapter {
                 Thread.sleep(100L);
             } catch (InterruptedException interruptedexception) {
                 if (Configuration.getServerConfig().isDebugMode()) {
-                    interruptedexception.printStackTrace();
+                    Canary.logStackTrace("", interruptedexception);
                 }
             }
         }

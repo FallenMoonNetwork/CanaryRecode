@@ -104,7 +104,6 @@ public class ServerGUI extends JComponent implements GUIControl {
 
     @Override
     public void closeWindow() {
-        System.out.println("TT");
         if (jframe != null) {
             jframe.dispose();
         }
