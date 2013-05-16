@@ -1,7 +1,9 @@
 package net.canarymod.api.nbt;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
+import net.minecraft.server.NBTBase;
 import net.minecraft.server.NBTTagCompound;
 
 
@@ -39,7 +41,11 @@ public class CanaryCompoundTag extends CanaryBaseTag implements CompoundTag {
     @SuppressWarnings("unchecked")
     @Override
     public Collection<BaseTag> values() {
-        return getHandle().c();
+        Collection<BaseTag> values = new ArrayList<BaseTag>();
+        for (NBTBase tag : (Collection<NBTBase>) getHandle().c()) {
+            values.add(CanaryBaseTag.wrap(tag));
+        }
+        return values;
     }
 
     /**
