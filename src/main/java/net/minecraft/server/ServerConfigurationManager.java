@@ -373,7 +373,10 @@ public abstract class ServerConfigurationManager {
         Object object;
         String name = entityplayermp.getCanaryWorld().getName();
         net.canarymod.api.world.DimensionType type = net.canarymod.api.world.DimensionType.fromId(i0);
-
+        // CanaryMod: PlayerRespawn
+        PlayerRespawnHook hook = new PlayerRespawnHook(entityplayermp.getPlayer(), loc, respawnLocation != null);
+        Canary.hooks().callHook(hook);
+        loc = hook.getRespawnLocation();
         WorldServer worldserver = (WorldServer) (loc == null ? (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(name, type, true)).getHandle() : ((CanaryWorld) loc.getWorld()).getHandle());
 
         //CanaryMod changes to accommodate multiworld bed spawns
@@ -381,20 +384,25 @@ public abstract class ServerConfigurationManager {
         if(respawnLocation != null) {
             chunkcoordinates = new ChunkCoordinates(respawnLocation.getBlockX(), respawnLocation.getBlockY(), respawnLocation.getBlockZ());
             //Check if the spawn world differs from the expected one and adjust
-            if(!worldserver.equals(((CanaryWorld)respawnLocation.getWorld()).getHandle()) && loc == null) {
+            if(!worldserver.equals(((CanaryWorld)respawnLocation.getWorld()).getHandle())) {
                 worldserver = (WorldServer) ((CanaryWorld)respawnLocation.getWorld()).getHandle();
             }
         }
+        if(loc != null) {
+            //Override
+            chunkcoordinates = new ChunkCoordinates(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
+            //Check if the spawn world differs from the expected one and adjust
+            if(!worldserver.equals(((CanaryWorld)loc.getWorld()).getHandle())) {
+                worldserver = (WorldServer) ((CanaryWorld)loc.getWorld()).getHandle();
+            }
+        }
         //
-
         if (this.e.M()) {
             object = new DemoWorldManager(worldserver);
         } else {
             object = new ItemInWorldManager(worldserver);
         }
-
         EntityPlayerMP entityplayermp1 = new EntityPlayerMP(this.e, worldserver, entityplayermp.bS, (ItemInWorldManager) object);
-
         entityplayermp1.a = entityplayermp.a;
         entityplayermp1.a(entityplayermp, flag0);
         entityplayermp1.k = entityplayermp.k;
@@ -403,41 +411,23 @@ public abstract class ServerConfigurationManager {
 
         this.a(entityplayermp1, entityplayermp, worldserver);
         ChunkCoordinates chunkcoordinates1;
-        boolean isBedSpawn = false;
-
-
+     // CanaryMod set player location and angle if a spawn location is defined
 
         if (chunkcoordinates != null) {
             // CanaryMod get world from player
             // chunkcoordinates1 = EntityPlayer.a(this.e.a(entityplayermp.ar), chunkcoordinates, flag1);
             chunkcoordinates1 = EntityPlayer.a(worldserver, chunkcoordinates, flag1);
             if (chunkcoordinates1 != null) {
-                isBedSpawn = true;
                 entityplayermp1.b((double) ((float) chunkcoordinates1.a + 0.5F), (double) ((float) chunkcoordinates1.b + 0.1F), (double) ((float) chunkcoordinates1.c + 0.5F), 0.0F, 0.0F);
                 entityplayermp1.a(chunkcoordinates, flag1);
             } else {
                 entityplayermp1.a.b(new Packet70GameEvent(0, 0));
             }
         }
-        entityplayermp1.a.c = entityplayermp1; // Set ONetServerHandler.user
-        // CanaryMod set player location and angle if a spawn location is defined
-        if (loc != null && respawnLocation == null) {
-            entityplayermp1.b(loc.getX(), loc.getY(), loc.getZ(), loc.getPitch(), loc.getRotation());
-        }
-        else {
-            if(respawnLocation != null) {
-                entityplayermp1.b(respawnLocation.getX(), respawnLocation.getY(), respawnLocation.getZ(), respawnLocation.getPitch(), respawnLocation.getRotation());
-            }
-            else {
-                Location l = worldserver.getCanaryWorld().getSpawnLocation();
-                entityplayermp1.b(l.getX(), l.getY(), l.getZ(), l.getPitch(), l.getRotation());
-            }
-        }
+
         worldserver.b.c((int) entityplayermp1.u >> 4, (int) entityplayermp1.w >> 4);
 
-//        while (!worldserver.a(entityplayermp1, entityplayermp1.E).isEmpty()) {
-//            entityplayermp1.b(entityplayermp1.u, entityplayermp1.v + 1.0D, entityplayermp1.w);
-//        }
+        //CanaryMod changed old logic with this one, this suffices and is, for some reason, more reliable
         while(worldserver.getCanaryWorld().getBlockAt(ToolBox.floorToBlock(entityplayermp1.u), ToolBox.floorToBlock(entityplayermp1.v + 1), ToolBox.floorToBlock(entityplayermp1.w)).getTypeId() != 0) {
             entityplayermp1.v = entityplayermp1.v + 1D;
         }
@@ -456,10 +446,7 @@ public abstract class ServerConfigurationManager {
         this.a.add(entityplayermp1);
         entityplayermp1.d_();
         entityplayermp1.b(entityplayermp1.aX());
-        // CanaryMod: PlayerRespawn
-        PlayerRespawnHook hook = new PlayerRespawnHook(entityplayermp1.getPlayer(), loc, isBedSpawn);
 
-        Canary.hooks().callHook(hook);
         //
         return entityplayermp1;
     }
@@ -469,9 +456,7 @@ public abstract class ServerConfigurationManager {
         throw new UnsupportedOperationException("a(EntityPlayerMP, int) is deprecated. please use a(EntityPlayerMP, String, int))");
     }
 
-    // XXX
-    // XXX
-    // IMPORTANT, HERE IS DIMENSION SWITCHING GOING ON!
+    // XXX IMPORTANT, HERE IS DIMENSION SWITCHING GOING ON!
     public void a(EntityPlayerMP entityplayermp, String worldName, int i0) {
         int i1 = entityplayermp.ar;
         WorldServer worldserver = (WorldServer) entityplayermp.getCanaryWorld().getHandle();
