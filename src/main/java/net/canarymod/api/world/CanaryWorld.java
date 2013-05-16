@@ -2,6 +2,7 @@ package net.canarymod.api.world;
 
 
 import java.util.ArrayList;
+import net.canarymod.Canary;
 
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
@@ -29,6 +30,8 @@ import net.canarymod.api.world.position.Position;
 import net.minecraft.server.EntityLightningBolt;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EnumSkyBlock;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.Packet63WorldParticles;
 import net.minecraft.server.TileEntity;
 import net.minecraft.server.TileEntityBeacon;
 import net.minecraft.server.TileEntityBrewingStand;
@@ -381,7 +384,8 @@ public class CanaryWorld implements World {
 
     @Override
     public void spawnParticle(Particle particle) {
-        world.a(particle.type.getMcName(), particle.x, particle.y, particle.z, particle.velocityX, particle.velocityY, particle.velocityZ);
+        MinecraftServer.D().s.sendPacketToDimension(new Packet63WorldParticles(particle), this.name, this.type.getId());
+        
     }
 
     @Override
