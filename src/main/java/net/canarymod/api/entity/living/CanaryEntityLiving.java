@@ -20,8 +20,6 @@ import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.living.monster.EntityMob;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
-import net.canarymod.api.nbt.BaseTag;
-import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.potion.CanaryPotion;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.api.potion.Potion;
@@ -34,7 +32,6 @@ import net.minecraft.server.EntityList;
 import net.minecraft.server.IAnimals;
 import net.minecraft.server.IMob;
 import net.minecraft.server.ItemStack;
-import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.Packet12PlayerLook;
 import net.minecraft.server.Packet32EntityLook;
 

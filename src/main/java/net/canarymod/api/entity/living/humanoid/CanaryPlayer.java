@@ -118,16 +118,22 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 }
                 receivers = hook.getReceiverList();
                 String formattedMessage = hook.getFormat().replace("%prefix", hook.getPrefix()).replace("%name", getName()).replace("%group", getGroup().getName());
-
+                String toSend = null;
+                if ((formattedMessage.length() - 8 + hook.getMessage().length()) >= 100) {
+                    toSend = hook.getMessage();
+                    formattedMessage = formattedMessage.replace("%message", "");
+                } else {
+                    toSend = formattedMessage.replace("%message", hook.getMessage());
+                }
                 for (Player player : receivers) {
                     if ((formattedMessage.length() - 8 + hook.getMessage().length()) >= 100) {
-                        player.sendMessage(formattedMessage.replace("%message", ""));
-                        player.sendMessage(hook.getMessage());
+                        player.sendMessage(formattedMessage);
+                        player.sendMessage(toSend);
                     } else {
-                        player.sendMessage(formattedMessage.replace("%message", hook.getMessage()));
+                        player.sendMessage(toSend);
                     }
                 }
-                Canary.logInfo(TextFormat.removeFormatting(formattedMessage.replace("%message", hook.getMessage())));
+                Canary.logInfo(TextFormat.removeFormatting("<" + getName() + "> " + hook.getMessage()));
             }
         }
 
