@@ -4,7 +4,6 @@ package net.minecraft.server;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -55,10 +54,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     protected float cj = 0.02F;
     private int h = 0;
     public EntityFishHook ck = null;
-    private String displayName; // CanaryMod: custom display names
     private String respawnWorld; //CanaryMod: Respawn world (for bed spawns)
-
-
 
     public EntityPlayer(World world) {
         super(world);
@@ -1490,11 +1486,12 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 
     // Start: Custom Display Name
     public String getDisplayName() {
-        return displayName == null ? this.bS : displayName;
+        return this.bQ() ? this.bP() : this.bS;
     }
 
     public void setDisplayName(String name) {
-        this.displayName = name;
+        this.c(name);
+        this.g(true); // auto set show
     }
     // End: Custom Display Name
 

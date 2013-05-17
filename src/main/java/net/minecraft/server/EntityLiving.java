@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
@@ -2082,27 +2081,30 @@ public abstract class EntityLiving extends Entity {
         return (EntityLiving) (this.bt.c() != null ? this.bt.c() : (this.bk != null ? this.bk : (this.e != null ? this.e : null)));
     }
 
-    public String am() {
+    public String am() { // get name or custom
         return this.bQ() ? this.bP() : super.am();
     }
 
-    public void c(String s0) {
+    public void c(String s0) { // set custom name
+        if (s0 == null) {
+            s0 = "";
+        }
         this.ah.b(5, s0);
     }
 
-    public String bP() {
+    public String bP() { // get custom name
         return this.ah.e(5);
     }
 
-    public boolean bQ() {
+    public boolean bQ() { // Has custom name
         return this.ah.e(5).length() > 0;
     }
 
-    public void g(boolean flag0) {
+    public void g(boolean flag0) { // set show custom name
         this.ah.b(6, Byte.valueOf((byte) (flag0 ? 1 : 0)));
     }
 
-    public boolean bR() {
+    public boolean bR() { // show custom name
         return this.ah.a(6) == 1;
     }
 

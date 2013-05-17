@@ -4,7 +4,6 @@ package net.canarymod.api.entity.living;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.CanaryPacket;
@@ -477,5 +476,36 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
         }
         ((net.minecraft.server.EntityLiving)this.getHandle()).bK();// swings the arm
         ((net.canarymod.api.entity.living.CanaryEntityLiving)entity).getHandle().a(net.minecraft.server.DamageSource.j, damage);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getDisplayName() {
+        return ((net.minecraft.server.EntityLiving) this.getHandle()).bP();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setDisplayName(String display) {
+        ((net.minecraft.server.EntityLiving) this.getHandle()).c(display);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean showingDisplayName() {
+        return ((net.minecraft.server.EntityLiving) this.getHandle()).bR();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setShowDisplayName(boolean show) {
+        ((net.minecraft.server.EntityLiving) this.getHandle()).g(show);
     }
 }

@@ -24,7 +24,7 @@ public class Packet20NamedEntitySpawn extends Packet {
 
     public Packet20NamedEntitySpawn(EntityPlayer entityplayer) {
         this.a = entityplayer.k;
-        this.b = entityplayer.getDisplayName(); // CanaryMod: Custom DisplayName
+        this.b = entityplayer.bR() ? entityplayer.getDisplayName() : entityplayer.am(); // CanaryMod: Custom DisplayName
         this.c = MathHelper.c(entityplayer.u * 32.0D);
         this.d = MathHelper.c(entityplayer.v * 32.0D);
         this.e = MathHelper.c(entityplayer.w * 32.0D);
