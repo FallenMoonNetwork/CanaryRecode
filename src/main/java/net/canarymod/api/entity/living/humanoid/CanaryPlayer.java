@@ -3,6 +3,7 @@ package net.canarymod.api.entity.living.humanoid;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,6 +54,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     private String prefix = null;
     private boolean muted;
     private String[] allowedIPs;
+    private HashMap<String, String> defaultChatpattern = new HashMap<String, String>();
 
     public CanaryPlayer(EntityPlayerMP entity) {
         super(entity);
@@ -109,31 +111,19 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             } else {
                 // This is a copy of the real player list already, no need to copy again (re: Collections.copy())
                 ArrayList<Player> receivers = Canary.getServer().getPlayerList();
-
-                ChatHook hook = new ChatHook(getPlayer(), getPrefix(), out, "<%prefix%name" + Colors.WHITE + "> %message", receivers);
-
+                defaultChatpattern.put("%message", out);
+                ChatHook hook = new ChatHook(getPlayer(), "<%prefix%name" + Colors.WHITE + "> %message", receivers, defaultChatpattern);
                 Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
                     return;
                 }
+
                 receivers = hook.getReceiverList();
-                String formattedMessage = hook.getFormat().replace("%prefix", hook.getPrefix()).replace("%name", getName()).replace("%group", getGroup().getName());
-                String toSend = null;
-                if ((formattedMessage.length() - 8 + hook.getMessage().length()) >= 100) {
-                    toSend = hook.getMessage();
-                    formattedMessage = formattedMessage.replace("%message", "");
-                } else {
-                    toSend = formattedMessage.replace("%message", hook.getMessage());
-                }
+                String formattedMessage = hook.buildSendMessage();
                 for (Player player : receivers) {
-                    if ((formattedMessage.length() - 8 + hook.getMessage().length()) >= 100) {
-                        player.sendMessage(formattedMessage);
-                        player.sendMessage(toSend);
-                    } else {
-                        player.sendMessage(toSend);
-                    }
+                    player.sendMessage(formattedMessage);
                 }
-                Canary.logInfo(TextFormat.removeFormatting("<" + getName() + "> " + hook.getMessage()));
+                Canary.logInfo(TextFormat.removeFormatting(formattedMessage));
             }
         }
 
@@ -770,5 +760,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         if (data[2] != null && !data[2].isEmpty()) {
             muted = Boolean.valueOf(data[2]);
         }
+        defaultChatpattern.put("%name", getDisplayName());
+        defaultChatpattern.put("%prefix", getPrefix());
     }
 }
