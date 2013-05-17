@@ -1505,7 +1505,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
      */
     public Location getRespawnLocation() {
         if(this.c != null) {
-            if(respawnWorld == null) {
+            if(respawnWorld == null || respawnWorld.isEmpty()) {
                 respawnWorld = getCanaryWorld().getFqName();
             }
             return new Location(Canary.getServer().getWorld(respawnWorld), c.a, c.b, c.c, 0, 0);
