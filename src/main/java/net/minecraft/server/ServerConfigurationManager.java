@@ -364,7 +364,7 @@ public abstract class ServerConfigurationManager {
         entityplayermp.o().q().b(entityplayermp);
         entityplayermp.o().s().c(entityplayermp);
         this.a.remove(entityplayermp);
-        entityplayermp.getCanaryWorld().getHandle().f(entityplayermp);
+        entityplayermp.q.f(entityplayermp);
 //        ChunkCoordinates chunkcoordinates = entityplayermp.ck(); //CanaryMod removed in favor of a real location
         Location respawnLocation = entityplayermp.getRespawnLocation();
         boolean flag1 = entityplayermp.cl();
@@ -406,8 +406,9 @@ public abstract class ServerConfigurationManager {
         entityplayermp1.a = entityplayermp.a;
         entityplayermp1.a(entityplayermp, flag0);
         entityplayermp1.k = entityplayermp.k;
-        //CanaryMod Copy the respawn location too!
+        //CanaryMod Copy the respawn location and NetServerHandler.user too!
         entityplayermp1.setRespawnLocation(entityplayermp.getRespawnLocation());
+        entityplayermp1.a.c = entityplayermp1;
 
         this.a(entityplayermp1, entityplayermp, worldserver);
         ChunkCoordinates chunkcoordinates1;
@@ -435,7 +436,7 @@ public abstract class ServerConfigurationManager {
         entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar >= 0 ? -1 : 0, (byte) entityplayermp1.q.r, entityplayermp1.q.M().u(), entityplayermp1.q.Q(), entityplayermp1.c.b()));
         entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar, (byte) entityplayermp1.q.r, entityplayermp1.q.M().u(), entityplayermp1.q.Q(), entityplayermp1.c.b()));
         //CanaryMod: Adjust the data for the respawn packet by using player coordinates instead!
-//        chunkcoordinates1 = worldserver.J();
+        chunkcoordinates1 = worldserver.J();
 
         entityplayermp1.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName());
         entityplayermp1.a.b(new Packet6SpawnPosition((int)entityplayermp1.u, (int)entityplayermp1.v, (int)entityplayermp1.w)); //CanaryMod changed used data to player coords
