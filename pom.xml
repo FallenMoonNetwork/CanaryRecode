@@ -107,6 +107,7 @@
             <manifestEntries>
               <Main-Class>net.canarymod.Main</Main-Class>
               <Class-Path>lib/CanaryLib.jar</Class-Path>
+              <Server-Version>1.5.2</Server-Version>
               <Sealed>true</Sealed>
             </manifestEntries>
           </archive>

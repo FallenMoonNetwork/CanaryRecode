@@ -1,13 +1,17 @@
 package net.canarymod.api;
 
 
+import java.io.IOException;
 import java.net.InetAddress;
+import java.net.URISyntaxException;
 import java.net.UnknownHostException;
+import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.jar.JarFile;
 
 import net.canarymod.Canary;
 import net.canarymod.Main;
@@ -49,6 +53,8 @@ public class CanaryServer implements Server {
     private MinecraftServer server;
     public GUIControl currentGUI = null;
     public boolean notHeadless;
+    String canaryVersion = null;
+    String mcVersion = null;
 
     /**
      * Create a new Server Wrapper
@@ -424,6 +430,49 @@ public class CanaryServer implements Server {
     @Override
     public int getTcpWriterThreadCount() {
         return TcpConnection.b.get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getCanaryModVersion() {
+        if(canaryVersion == null) {
+            Package p = getClass().getPackage();
+            if(p == null) {
+                return "info missing!";
+            }
+            canaryVersion = p.getImplementationVersion();
+        }
+        return canaryVersion;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getServerVersion() {
+        if(mcVersion == null) {
+            try {
+                CodeSource codeSource = this.getClass().getProtectionDomain().getCodeSource();
+                codeSource.getLocation().toURI().getPath();
+                JarFile jar = new JarFile(codeSource.getLocation().toURI().getPath());
+                mcVersion = jar.getManifest().getMainAttributes().getValue("Server-Version");
+            } catch (IOException e) {
+                Canary.logStackTrace(e.getMessage(), e);
+            } catch (URISyntaxException e) {
+                Canary.logStackTrace(e.getMessage(), e);
+            } catch(NullPointerException e) {
+                Canary.logStackTrace(e.getMessage(), e);
+            }
+            finally {
+                if(mcVersion == null) {
+                    mcVersion = "info missing!";
+                }
+            }
+        }
+
+        return mcVersion;
     }
 
 }
