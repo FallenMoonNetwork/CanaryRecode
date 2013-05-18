@@ -2,8 +2,9 @@ package net.canarymod.api.entity.living.humanoid;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,7 +50,7 @@ import net.minecraft.server.WorldSettings;
  */
 public class CanaryPlayer extends CanaryEntityLiving implements Player {
     private Pattern badChatPattern = Pattern.compile("[\u00a7\u2302\u00D7\u00AA\u00BA\u00AE\u00AC\u00BD\u00BC\u00A1\u00AB\u00BB]");
-    private Group[] groups;
+    private List<Group> groups;
     private PermissionProvider permissions;
     private String prefix = null;
     private boolean muted;
@@ -329,26 +330,25 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public Group getGroup() {
-        return groups[0];
+        return groups.get(0);
     }
 
     @Override
     public Group[] getPlayerGroups() {
-        return groups;
+        return (Group[]) groups.toArray();
     }
 
     @Override
     public void setGroup(Group group) {
-        this.groups[0] = group;
+        groups.set(0, group);
         Canary.usersAndGroups().addOrUpdatePlayerData(this);
     }
 
     @Override
     public void addGroup(Group group) {
-        if(groups[groups.length - 1] != null) {
-            groups = Arrays.copyOf(groups, groups.length + 1);
+        if(!groups.contains(group)) {
+            groups.add(group);
         }
-        groups[groups.length - 1] = group;
     }
 
     @Override
@@ -361,24 +361,24 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             return hook.getResult();
         }
         //Only main group is set
-        else if(groups.length == 1) {
-            hook.setResult(groups[0].hasPermission(permission));
+        else if(groups.size() == 1) {
+            hook.setResult(groups.get(0).hasPermission(permission));
             Canary.hooks().callHook(hook);
             return hook.getResult();
         }
 
         //Check sub groups
-        for(int i = 1; i < groups.length; i++) {
+        for(int i = 1; i < groups.size(); i++) {
             //First group that
-            if(groups[i].getPermissionProvider().pathExists(permission)) {
-                hook.setResult(groups[i].hasPermission(permission));
+            if(groups.get(i).getPermissionProvider().pathExists(permission)) {
+                hook.setResult(groups.get(i).hasPermission(permission));
                 Canary.hooks().callHook(hook);
                 return hook.getResult();
             }
         }
 
         //No subgroup has permission defined, use what base group has to say
-        hook.setResult(groups[0].hasPermission(permission));
+        hook.setResult(groups.get(0).hasPermission(permission));
         Canary.hooks().callHook(hook);
         return hook.getResult();
     }
@@ -390,20 +390,20 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             return permissions.queryPermission(permission);
         }
         //Only main group is set
-        else if(groups.length == 1) {
-            return groups[0].hasPermission(permission);
+        else if(groups.size() == 1) {
+            return groups.get(0).hasPermission(permission);
         }
 
         //Check sub groups
-        for(int i = 1; i < groups.length; i++) {
+        for(int i = 1; i < groups.size(); i++) {
             //First group that
-            if(groups[i].getPermissionProvider().pathExists(permission)) {
-                return groups[i].hasPermission(permission);
+            if(groups.get(i).getPermissionProvider().pathExists(permission)) {
+                return groups.get(i).hasPermission(permission);
             }
         }
 
         //No subgroup has permission defined, use what base group has to say
-        return groups[0].hasPermission(permission);
+        return groups.get(0).hasPermission(permission);
     }
 
     @Override
@@ -553,8 +553,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public String getPrefix() {
         if (prefix != null) {
             return prefix;
-        } else if (groups[0].getPrefix() != null) {
-            return groups[0].getPrefix();
+        } else if (groups.get(0).getPrefix() != null) {
+            return groups.get(0).getPrefix();
         } else {
             return Colors.WHITE;
         }
@@ -741,14 +741,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public void initPlayerData() {
         String[] data = Canary.usersAndGroups().getPlayerData(getName());
         Group[] subs = Canary.usersAndGroups().getModuleGroupsForPlayer(getName());
-        groups = new Group[1];
-        groups[0] = Canary.usersAndGroups().getGroup(data[1]);
-        int i = 1;
+        groups = new LinkedList<Group>();
+        groups.add(Canary.usersAndGroups().getGroup(data[1]));
         for(Group g : subs) {
             if(g != null) {
-                groups = Arrays.copyOf(groups, groups.length + 1);
-                groups[i] = g;
-                ++i;
+                groups.add(g);
             }
         }
 
@@ -762,5 +759,22 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
         defaultChatpattern.put("%name", getDisplayName());
         defaultChatpattern.put("%prefix", getPrefix());
+    }
+
+    @Override
+    public boolean removeGroup(Group group) {
+        if(groups.get(0).equals(group)) {
+            return false;
+        }
+        return groups.remove(group);
+    }
+
+    @Override
+    public boolean removeGroup(String group) {
+        Group g = Canary.usersAndGroups().getGroup(group);
+        if(g == null) {
+            return false;
+        }
+        return removeGroup(g);
     }
 }

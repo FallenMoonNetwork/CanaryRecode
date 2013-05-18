@@ -1,6 +1,7 @@
 package net.canarymod.api;
 
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import net.canarymod.Canary;
 import net.canarymod.api.nbt.CanaryBaseTag;
@@ -17,7 +18,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
 
     private CanaryCompoundTag data;
     private PermissionProvider provider;
-    private Group[] groups = null;
+    private List<Group> groups = null;
     private String prefix = null;
     private String name;
     private boolean isMuted;
@@ -27,14 +28,11 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
         provider = Canary.permissionManager().getPlayerProvider(name);
         String[] data = Canary.usersAndGroups().getPlayerData(name);
         Group[] subs = Canary.usersAndGroups().getModuleGroupsForPlayer(name);
-        groups = new Group[1];
-        groups[0] = Canary.usersAndGroups().getGroup(data[1]);
-        int i = 1;
+        groups = new LinkedList<Group>();
+        groups.add(Canary.usersAndGroups().getGroup(data[1]));
         for(Group g : subs) {
             if(g != null) {
-                groups = Arrays.copyOf(groups, groups.length + 1);
-                groups[i] = g;
-                ++i;
+                groups.add(g);
             }
         }
         prefix = data[0];
@@ -47,7 +45,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
 
     @Override
     public Group getGroup() {
-        return groups[0];
+        return groups.get(0);
     }
 
     @Override
@@ -62,7 +60,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
 
     @Override
     public void setGroup(Group group) {
-        this.groups[0] = group;
+        this.groups.set(0, group);
         Canary.usersAndGroups().addOrUpdateOfflinePlayer(this);
     }
 
@@ -109,14 +107,28 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
     }
     @Override
     public void addGroup(Group group) {
-        if(groups[groups.length - 1] != null) {
-            groups = Arrays.copyOf(groups, groups.length + 1);
+        if(!groups.contains(group)) {
+            groups.add(group);
         }
-        groups[groups.length - 1] = group;
     }
     @Override
     public Group[] getPlayerGroups() {
-        return groups;
+        return (Group[]) groups.toArray();
+    }
+    @Override
+    public boolean removeGroup(Group g) {
+        if(groups.get(0).equals(g)) {
+            return false;
+        }
+        return groups.remove(g);
+    }
+    @Override
+    public boolean removeGroup(String g) {
+        Group gr = Canary.usersAndGroups().getGroup(g);
+        if(gr == null) {
+            return false;
+        }
+        return removeGroup(gr);
     }
 
 }
