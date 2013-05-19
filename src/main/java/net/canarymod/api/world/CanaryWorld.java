@@ -2,7 +2,6 @@ package net.canarymod.api.world;
 
 
 import java.util.ArrayList;
-import net.canarymod.Canary;
 
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
@@ -29,6 +28,7 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.minecraft.server.EntityLightningBolt;
 import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.EnumGameType;
 import net.minecraft.server.EnumSkyBlock;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.Packet63WorldParticles;
@@ -173,6 +173,11 @@ public class CanaryWorld implements World {
             }
         }
         return list;
+    }
+
+    @Override
+    public ArrayList<Entity> getTrackedEntities() {
+        return entityTracker.getTrackedEntities();
     }
 
     @Override
@@ -385,7 +390,7 @@ public class CanaryWorld implements World {
     @Override
     public void spawnParticle(Particle particle) {
         MinecraftServer.D().s.sendPacketToDimension(new Packet63WorldParticles(particle), this.name, this.type.getId());
-        
+
     }
 
     @Override
@@ -643,5 +648,16 @@ public class CanaryWorld implements World {
         byte[] bytes = c.getBiomeByteData();
         bytes[((z & 0xF) << 4) | (x & 0xF)] = biome.getId();
         c.setBiomeData(bytes);
+    }
+
+
+    @Override
+    public GameMode getGameMode() {
+        return GameMode.fromId(world.x.r().a());
+    }
+
+    @Override
+    public void setGameMode(GameMode mode) {
+        world.x.a(EnumGameType.a(mode.getId()));
     }
 }
