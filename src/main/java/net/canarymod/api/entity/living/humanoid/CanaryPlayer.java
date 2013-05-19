@@ -348,6 +348,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public void addGroup(Group group) {
         if(!groups.contains(group)) {
             groups.add(group);
+            Canary.usersAndGroups().addOrUpdatePlayerData(this);
         }
     }
 
@@ -766,7 +767,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         if(groups.get(0).equals(group)) {
             return false;
         }
-        return groups.remove(group);
+        boolean success = groups.remove(group);
+        if(success) {
+            Canary.usersAndGroups().addOrUpdatePlayerData(this);
+        }
+        return success;
     }
 
     @Override
