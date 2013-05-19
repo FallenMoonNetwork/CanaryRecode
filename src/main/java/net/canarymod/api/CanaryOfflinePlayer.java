@@ -113,7 +113,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
     }
     @Override
     public Group[] getPlayerGroups() {
-        return (Group[]) groups.toArray();
+        return groups.toArray(new Group[0]);
     }
     @Override
     public boolean removeGroup(Group g) {
