@@ -646,7 +646,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         Canary.getServer().getConfigurationManager().switchDimension(ent.getPlayer(), dim, false);
         // ((EntityPlayerMP)entity).changeWorld((WorldServer) ((CanaryWorld) dim).getHandle());
         // ((EntityPlayerMP)entity).b.ad().a(((EntityPlayerMP)entity), dim.getName(), dim.getType().getId());
-        refreshCreativeMode();
+//        refreshCreativeMode();
     }
 
     @Override

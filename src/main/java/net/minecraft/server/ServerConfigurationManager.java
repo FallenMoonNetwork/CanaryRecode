@@ -406,10 +406,11 @@ public abstract class ServerConfigurationManager {
         entityplayermp1.a = entityplayermp.a;
         entityplayermp1.a(entityplayermp, flag0);
         entityplayermp1.k = entityplayermp.k;
-        //CanaryMod Copy the respawn location and NetServerHandler.user too!
+        //CanaryMod Copy the respawn location and NetServerHandler.user
         entityplayermp1.setRespawnLocation(entityplayermp.getRespawnLocation());
+
         entityplayermp1.a.c = entityplayermp1;
-        this.a(entityplayermp1, entityplayermp, worldserver);
+        this.a(entityplayermp1, entityplayermp, worldserver); //XXX
         ChunkCoordinates chunkcoordinates1;
      // CanaryMod set player location and angle if a spawn location is defined
 
@@ -427,16 +428,14 @@ public abstract class ServerConfigurationManager {
 
         worldserver.b.c((int) entityplayermp1.u >> 4, (int) entityplayermp1.w >> 4);
 
-        //CanaryMod changed old logic with this one, this suffices and is, for some reason, more reliable
-        while(worldserver.getCanaryWorld().getBlockAt(ToolBox.floorToBlock(entityplayermp1.u), ToolBox.floorToBlock(entityplayermp1.v + 1), ToolBox.floorToBlock(entityplayermp1.w)).getTypeId() != 0) {
-            entityplayermp1.v = entityplayermp1.v + 1D;
-        }
-
         entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar >= 0 ? -1 : 0, (byte) entityplayermp1.q.r, entityplayermp1.q.M().u(), entityplayermp1.q.Q(), entityplayermp1.c.b()));
         entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar, (byte) entityplayermp1.q.r, entityplayermp1.q.M().u(), entityplayermp1.q.Q(), entityplayermp1.c.b()));
         //CanaryMod: Adjust the data for the respawn packet by using player coordinates instead!
         chunkcoordinates1 = worldserver.J();
-
+        //CanaryMod changed old logic with this one, this suffices and is, for some reason, more reliable
+        while(worldserver.getCanaryWorld().getBlockAt(ToolBox.floorToBlock(entityplayermp1.u), ToolBox.floorToBlock(entityplayermp1.v + 1), ToolBox.floorToBlock(entityplayermp1.w)).getTypeId() != 0) {
+            entityplayermp1.v = entityplayermp1.v + 1D;
+        }
         entityplayermp1.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName());
         entityplayermp1.a.b(new Packet6SpawnPosition((int)entityplayermp1.u, (int)entityplayermp1.v, (int)entityplayermp1.w)); //CanaryMod changed used data to player coords
         entityplayermp1.a.b(new Packet43Experience(entityplayermp1.ch, entityplayermp1.cg, entityplayermp1.cf));
@@ -446,11 +445,6 @@ public abstract class ServerConfigurationManager {
         this.a.add(entityplayermp1);
         entityplayermp1.d_();
         entityplayermp1.b(entityplayermp1.aX());
-        //CanaryMod: Adjust game mode if it differs in the new world.
-        if(entityplayermp1.getPlayer().getMode() != worldserver.getCanaryWorld().getGameMode().getId()) {
-            entityplayermp1.getPlayer().setMode(worldserver.getCanaryWorld().getGameMode().getId());
-        }
-
         //
         return entityplayermp1;
     }
@@ -876,11 +870,12 @@ public abstract class ServerConfigurationManager {
     }
 
     private void a(EntityPlayerMP entityplayermp, EntityPlayerMP entityplayermp1, World world) {
-        if (entityplayermp1 != null) {
-            entityplayermp.c.a(entityplayermp1.c.b());
-        } else if (this.l != null) {
-            entityplayermp.c.a(this.l);
-        }
+        //CanaryMod always use world!
+//        if (entityplayermp1 != null) {
+//            entityplayermp.c.a(entityplayermp1.c.b());
+//        } else if (this.l != null) {
+//            entityplayermp.c.a(this.l);
+//        }
 
         entityplayermp.c.b(world.M().r());
     }

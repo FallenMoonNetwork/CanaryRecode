@@ -79,7 +79,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             i1 += this.ab.nextInt(i3 * 2) - i3;
             i2 = world.i(i0, i1);
         }
-        //TODO: Might be a good palce to put mode-switchign here (when going into other-mode worlds)
+
         this.b = minecraftserver;
         this.Y = 0.0F;
         this.bS = s0;
