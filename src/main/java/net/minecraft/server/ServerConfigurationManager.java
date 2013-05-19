@@ -409,7 +409,6 @@ public abstract class ServerConfigurationManager {
         //CanaryMod Copy the respawn location and NetServerHandler.user too!
         entityplayermp1.setRespawnLocation(entityplayermp.getRespawnLocation());
         entityplayermp1.a.c = entityplayermp1;
-
         this.a(entityplayermp1, entityplayermp, worldserver);
         ChunkCoordinates chunkcoordinates1;
      // CanaryMod set player location and angle if a spawn location is defined
@@ -447,6 +446,10 @@ public abstract class ServerConfigurationManager {
         this.a.add(entityplayermp1);
         entityplayermp1.d_();
         entityplayermp1.b(entityplayermp1.aX());
+        //CanaryMod: Adjust game mode if it differs in the new world.
+        if(entityplayermp1.getPlayer().getMode() != worldserver.getCanaryWorld().getGameMode().getId()) {
+            entityplayermp1.getPlayer().setMode(worldserver.getCanaryWorld().getGameMode().getId());
+        }
 
         //
         return entityplayermp1;
