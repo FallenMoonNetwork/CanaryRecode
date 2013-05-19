@@ -109,6 +109,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
     public void addGroup(Group group) {
         if(!groups.contains(group)) {
             groups.add(group);
+            Canary.usersAndGroups().addOrUpdateOfflinePlayer(this);
         }
     }
     @Override
@@ -120,7 +121,11 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
         if(groups.get(0).equals(g)) {
             return false;
         }
-        return groups.remove(g);
+        boolean success = groups.remove(g);
+        if(success) {
+            Canary.usersAndGroups().addOrUpdateOfflinePlayer(this);
+        }
+        return success;
     }
     @Override
     public boolean removeGroup(String g) {
