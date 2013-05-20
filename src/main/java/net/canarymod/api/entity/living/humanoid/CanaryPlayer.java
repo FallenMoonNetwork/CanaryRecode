@@ -409,7 +409,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean isAdmin() {
-        return hasPermission("canary.super.administrator");
+        return hasPermission("canary.super.administrator") || Canary.ops().isOpped(getName());
     }
 
     @Override
