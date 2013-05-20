@@ -660,4 +660,9 @@ public class CanaryWorld implements World {
     public void setGameMode(GameMode mode) {
         world.x.a(EnumGameType.a(mode.getId()));
     }
+
+    @Override
+    public void save() {
+        world.b.a(true, null);
+    }
 }
