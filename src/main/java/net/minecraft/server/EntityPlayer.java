@@ -4,7 +4,6 @@ package net.minecraft.server;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -12,6 +11,7 @@ import net.canarymod.api.inventory.CanaryEnderChestInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.Inventory;
+import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.player.EntityRightClickHook;
 import net.canarymod.hook.player.ItemDropHook;
 import net.canarymod.hook.player.LevelUpHook;
@@ -54,7 +54,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
     protected float cj = 0.02F;
     private int h = 0;
     public EntityFishHook ck = null;
-    private String displayName; // CanaryMod: custom display names
+    private String respawnWorld; //CanaryMod: Respawn world (for bed spawns)
 
     public EntityPlayer(World world) {
         super(world);
@@ -533,6 +533,8 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         if (nbttagcompound.b("SpawnX") && nbttagcompound.b("SpawnY") && nbttagcompound.b("SpawnZ")) {
             this.c = new ChunkCoordinates(nbttagcompound.e("SpawnX"), nbttagcompound.e("SpawnY"), nbttagcompound.e("SpawnZ"));
             this.d = nbttagcompound.n("SpawnForced");
+            //CanaryMod added respawn world
+            this.respawnWorld = nbttagcompound.i("SpawnWorld");
         }
 
         this.bN.a(nbttagcompound);
@@ -559,6 +561,8 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
             nbttagcompound.a("SpawnY", this.c.b);
             nbttagcompound.a("SpawnZ", this.c.c);
             nbttagcompound.a("SpawnForced", this.d);
+            //CanaryMod add world fq name
+            nbttagcompound.a("SpawnWorld", getCanaryWorld().getFqName());
         }
 
         this.bN.b(nbttagcompound);
@@ -1482,12 +1486,43 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 
     // Start: Custom Display Name
     public String getDisplayName() {
-        return displayName == null ? this.bS : displayName;
+        return this.bQ() ? this.bP() : this.bS;
     }
 
     public void setDisplayName(String name) {
-        this.displayName = name;
+        this.c(name);
+        this.g(true); // auto set show
     }
     // End: Custom Display Name
+
+    /**
+     * Returns a respawn location for this player.
+     * Null if there is no explicitly set respawn location
+     * @return
+     */
+    public Location getRespawnLocation() {
+        if(this.c != null) {
+            if(respawnWorld == null || respawnWorld.isEmpty()) {
+                respawnWorld = getCanaryWorld().getFqName();
+            }
+            return new Location(Canary.getServer().getWorld(respawnWorld), c.a, c.b, c.c, 0, 0);
+        }
+        return null;
+    }
+
+    public void setRespawnLocation(Location l) {
+        if(l == null) {
+            c = null;
+            respawnWorld = null;
+            return;
+        }
+        if(c == null) {
+            c = new ChunkCoordinates();
+        }
+        c.a = l.getBlockX();
+        c.b = l.getBlockY();
+        c.c = l.getBlockZ();
+        respawnWorld = l.getWorld().getFqName();
+    }
     //
 }

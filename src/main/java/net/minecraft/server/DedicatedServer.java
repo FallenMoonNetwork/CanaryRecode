@@ -131,7 +131,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.d((this.ab() + 8) / 16 * 16);
         this.d(MathHelper.a(this.ab(), 64, 256));
         worldcfg.getFile().setInt("max-build-height", this.ab());
-
+        //CanaryMod enable plugins here, before the first world is loaded.
+        //At this point all bootstrapping should be done and systems should be running
+        Canary.enablePlugins();
         this.al().a("Preparing level \"" + this.J() + "\"");
         // CanaryMod changed call to initWorld
         net.canarymod.api.world.DimensionType wt = net.canarymod.api.world.DimensionType.fromName("NORMAL");

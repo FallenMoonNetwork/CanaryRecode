@@ -5,9 +5,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryServer;
+import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.hook.system.UnloadWorldHook;
 import net.canarymod.logger.Logman;
 import net.minecraft.server.WorldServer;
 
@@ -22,6 +26,7 @@ public class CanaryWorldManager implements WorldManager {
 
     private HashMap<String, World> loadedWorlds;
     private ArrayList<String> existingWorlds;
+    private HashMap<String, Boolean> markedForUnload;
 
     public CanaryWorldManager() {
         DimensionType.addType("NORMAL", 0);
@@ -42,6 +47,7 @@ public class CanaryWorldManager implements WorldManager {
         for (String f : worlds.list()) {
             existingWorlds.add(f);
         }
+        markedForUnload = new HashMap<String, Boolean>(1);
     }
 
     /**
@@ -141,12 +147,53 @@ public class CanaryWorldManager implements WorldManager {
 
     @Override
     public Collection<World> getAllWorlds() {
+        //before we return all the worlds, first check if there are any worlds marked for unload!
+        if(markedForUnload.size() > 0) {
+            Canary.println("Processing worlds for unload");
+            removeWorlds();
+//            markedForUnload.clear();
+        }
+//        Canary.println("getAllWorlds");
         return this.loadedWorlds.values();
     }
 
     @Override
-    public void unloadWorld(String name, DimensionType type) {
-        loadedWorlds.remove(name + "_" + type.getName());
+    public void unloadWorld(String name, DimensionType type, boolean force) {
+        //This actually just schedules a world for unloading,
+        //to prevent ConcurrentModificationExceptions as the values for world are iterated over constantly.
+        //See getAllWorld for details
+        markedForUnload.put(name + "_" + type.getName(), Boolean.valueOf(force));
+    }
+
+    /**
+     * This'll actually remove all marked worlds from the system so that they may get GC'd soon after
+     * @param world
+     */
+    private void removeWorlds() {
+        Iterator<String> iter = markedForUnload.keySet().iterator();
+        while(iter.hasNext()) {
+            String fqName = iter.next();
+            CanaryWorld world = (CanaryWorld) loadedWorlds.get(fqName);
+            boolean force = markedForUnload.get(fqName);
+            if(world.getPlayerList().size() > 0) {
+                if(force) {
+                    for(Player p : world.getPlayerList()) {
+                        p.kick("Server scheduled world shutdown");
+                    }
+                }
+                else {
+                    Canary.logWarning(world.getFqName() + " was scheduled for unload but there were still players in it. Not unloading world!");
+                    iter.remove();
+                    continue;
+                }
+            }
+            world.save();
+            Canary.hooks().callHook(new UnloadWorldHook(world));
+            loadedWorlds.remove(world.getFqName());
+            iter.remove();
+
+        }
+
     }
 
     @Override

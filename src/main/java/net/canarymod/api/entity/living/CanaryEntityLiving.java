@@ -4,7 +4,6 @@ package net.canarymod.api.entity.living;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.CanaryPacket;
@@ -20,8 +19,6 @@ import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.living.monster.EntityMob;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
-import net.canarymod.api.nbt.BaseTag;
-import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.potion.CanaryPotion;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.api.potion.Potion;
@@ -34,7 +31,6 @@ import net.minecraft.server.EntityList;
 import net.minecraft.server.IAnimals;
 import net.minecraft.server.IMob;
 import net.minecraft.server.ItemStack;
-import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.Packet12PlayerLook;
 import net.minecraft.server.Packet32EntityLook;
 
@@ -314,6 +310,25 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
+    public EntityLiving getLastAssailant() {
+        net.minecraft.server.Entity target = ((net.minecraft.server.EntityLiving) entity).aG();
+
+        if (target != null) {
+            return (EntityLiving) ((net.minecraft.server.EntityLiving) target).getCanaryEntity();
+        }
+        return null;
+    }
+
+    @Override
+    public void setLastAssailant(EntityLiving entityliving) {
+        if (entityliving == null) {
+            ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) null);
+        } else {
+            ((net.minecraft.server.EntityLiving) entity).l((net.minecraft.server.EntityLiving) ((CanaryEntity) entityliving).getHandle());
+        }
+    }
+
+    @Override
     public void lookAt(double x, double y, double z) {
 
         double xDiff = x - getX();
@@ -461,5 +476,36 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
         }
         ((net.minecraft.server.EntityLiving)this.getHandle()).bK();// swings the arm
         ((net.canarymod.api.entity.living.CanaryEntityLiving)entity).getHandle().a(net.minecraft.server.DamageSource.j, damage);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getDisplayName() {
+        return ((net.minecraft.server.EntityLiving) this.getHandle()).bP();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setDisplayName(String display) {
+        ((net.minecraft.server.EntityLiving) this.getHandle()).c(display);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean showingDisplayName() {
+        return ((net.minecraft.server.EntityLiving) this.getHandle()).bR();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setShowDisplayName(boolean show) {
+        ((net.minecraft.server.EntityLiving) this.getHandle()).g(show);
     }
 }

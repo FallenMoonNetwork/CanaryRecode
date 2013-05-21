@@ -144,6 +144,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             }
             //
         } else {
+            //CanaryMod: Force game type from config
+            worldinfo.a(EnumGameType.a(config.getGameMode().getId()));
             worldsettings = new WorldSettings(worldinfo);
         }
 
@@ -835,7 +837,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public void P() {
-        // CanaryMod XXX: Remove this? It'll delete all worlds
         this.N = true;
         this.N().d();
 

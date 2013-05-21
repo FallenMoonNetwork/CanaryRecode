@@ -28,7 +28,10 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.minecraft.server.EntityLightningBolt;
 import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.EnumGameType;
 import net.minecraft.server.EnumSkyBlock;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.Packet63WorldParticles;
 import net.minecraft.server.TileEntity;
 import net.minecraft.server.TileEntityBeacon;
 import net.minecraft.server.TileEntityBrewingStand;
@@ -57,19 +60,20 @@ public class CanaryWorld implements World {
     public long[] nanoTicks;
 
     private CanaryPlayerManager playerManager;
-
     /**
      * The world name
      */
-    private String name;
+    private String name, fqName;
 
     public CanaryWorld(String name, WorldServer dimension, DimensionType type) {
         this.name = name;
+        this.type = type;
         world = dimension;
+        fqName = name + "_" + this.type.getName();
+
 
         playerManager = dimension.s().getPlayerManager();
         entityTracker = dimension.getEntityTracker();
-        this.type = type;
         // Init nanotick size
         nanoTicks = new long[100];
 
@@ -83,7 +87,7 @@ public class CanaryWorld implements World {
 
     @Override
     public String getFqName() {
-        return this.name + "_" + this.type.getName();
+        return fqName;
     }
 
     @Override
@@ -169,6 +173,11 @@ public class CanaryWorld implements World {
             }
         }
         return list;
+    }
+
+    @Override
+    public ArrayList<Entity> getTrackedEntities() {
+        return entityTracker.getTrackedEntities();
     }
 
     @Override
@@ -274,7 +283,7 @@ public class CanaryWorld implements World {
 
     @Override
     public boolean isChunkLoaded(int x, int z) {
-        return chunkProvider.isChunkLoaded(x, z);
+        return chunkProvider.isChunkLoaded(x >> 4, z >> 4);
     }
 
     @Override
@@ -337,23 +346,23 @@ public class CanaryWorld implements World {
 
     @Override
     public Chunk loadChunk(int x, int z) {
-        return chunkProvider.loadChunk(x, z);
+        return chunkProvider.loadChunk(x >> 4, z >> 4);
     }
 
     @Override
     public Chunk loadChunk(Location location) {
-        return chunkProvider.loadChunk((int) location.getX(), (int) location.getZ());
+        return chunkProvider.loadChunk((int) location.getX() >> 4, (int) location.getZ() >> 4);
     }
 
     @Override
     public Chunk loadChunk(Position vec3d) {
-        return chunkProvider.loadChunk((int) vec3d.getX(), (int) vec3d.getZ());
+        return chunkProvider.loadChunk((int) vec3d.getX() >> 4, (int) vec3d.getZ() >> 4);
     }
 
     @Override
     public Chunk getChunk(int x, int z) {
         if (isChunkLoaded(x, z)) {
-            return chunkProvider.provideChunk(x, z);
+            return chunkProvider.provideChunk(x >> 4, z >> 4);
         } else {
             return null;
         }
@@ -380,7 +389,8 @@ public class CanaryWorld implements World {
 
     @Override
     public void spawnParticle(Particle particle) {
-        world.a(particle.type.getMcName(), particle.x, particle.y, particle.z, particle.velocityX, particle.velocityY, particle.velocityZ);
+        MinecraftServer.D().s.sendPacketToDimension(new Packet63WorldParticles(particle), this.name, this.type.getId());
+
     }
 
     @Override
@@ -636,7 +646,23 @@ public class CanaryWorld implements World {
             return;
         }
         byte[] bytes = c.getBiomeByteData();
-        bytes[z << 4 | x] = biome.getId();
+        bytes[((z & 0xF) << 4) | (x & 0xF)] = biome.getId();
         c.setBiomeData(bytes);
+    }
+
+
+    @Override
+    public GameMode getGameMode() {
+        return GameMode.fromId(world.x.r().a());
+    }
+
+    @Override
+    public void setGameMode(GameMode mode) {
+        world.x.a(EnumGameType.a(mode.getId()));
+    }
+
+    @Override
+    public void save() {
+        world.b.a(true, null);
     }
 }

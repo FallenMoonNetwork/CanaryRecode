@@ -82,11 +82,7 @@ public class CanaryItemFactory implements ItemFactory {
             return null;
         }
         
-        CanaryItem item2 = new CanaryItem(item.getId(), item.getAmount(), item.getDamage());
-
-        if (item.hasDataTag()) {
-            item2.setDataTag(item.getDataTag());
-        }
+        CanaryItem item2 = new CanaryItem(((CanaryItem)item).getHandle().m());
         return item2;
     }
 

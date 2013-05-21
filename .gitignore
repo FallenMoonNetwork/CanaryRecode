@@ -9,3 +9,4 @@ bin/*
 /target/
 *.prefs
 dependency-reduced-pom.xml
+/bin

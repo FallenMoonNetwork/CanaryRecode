@@ -3,7 +3,9 @@ package net.canarymod.api.world.blocks;
 
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.config.Configuration;
 import net.canarymod.hook.system.PermissionCheckHook;
+import net.canarymod.user.Group;
 import net.minecraft.server.TileEntityCommandBlock;
 
 
@@ -14,6 +16,7 @@ import net.minecraft.server.TileEntityCommandBlock;
  */
 public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlock {
 
+    Group group; //The group for permission checking
     /**
      * Constructs a wrapper for TileEntityCommandBlock
      *
@@ -22,6 +25,7 @@ public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlo
      */
     public CanaryCommandBlock(TileEntityCommandBlock tileentity) {
         super(tileentity);
+        group = Canary.usersAndGroups().getGroup(Configuration.getServerConfig().getCommandBlockGroupName());
     }
 
     /**
@@ -53,7 +57,7 @@ public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlo
      */
     @Override
     public boolean hasPermission(String node) {
-        PermissionCheckHook hook = new PermissionCheckHook(node, this, true);
+        PermissionCheckHook hook = new PermissionCheckHook(node, this, group.hasPermission(node));
         Canary.hooks().callHook(hook);
         return hook.getResult();
     }
@@ -63,7 +67,7 @@ public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlo
      */
     @Override
     public boolean safeHasPermission(String node) {
-        return true;
+        return group.hasPermission(node);
     }
 
     /**

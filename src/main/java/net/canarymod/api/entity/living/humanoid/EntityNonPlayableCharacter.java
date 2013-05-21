@@ -3,7 +3,6 @@ package net.canarymod.api.entity.living.humanoid;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-
 import net.canarymod.CanaryMod;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.entity.CanaryEntity;
@@ -129,7 +128,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         if (toRet && this.entity != null && damagesource.i() != null) {
             CanaryEntity atk = damagesource.i().getCanaryEntity();
 
-            ((CanaryNonPlayableCharacter) entity).attack(atk);
+            ((CanaryNonPlayableCharacter) entity).attacked(atk);
         }
         return toRet;
     }
@@ -175,7 +174,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
     @Override
     public void w() {
         super.w();
-        ((CanaryNonPlayableCharacter) entity).destoryed();
+        ((CanaryNonPlayableCharacter) entity).destroyed();
     }
 
     void setNPC(CanaryNonPlayableCharacter cnpc) {

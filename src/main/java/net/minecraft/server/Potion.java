@@ -1,7 +1,10 @@
 package net.minecraft.server;
 
 
+import net.canarymod.Canary;
 import net.canarymod.api.potion.CanaryPotion;
+import net.canarymod.api.potion.CanaryPotionEffect;
+import net.canarymod.hook.entity.PotionEffectAppliedHook;
 
 
 public class Potion {
@@ -96,6 +99,15 @@ public class Potion {
     }
 
     public void a(EntityLiving entityliving, EntityLiving entityliving1, int i0, double d0) {
+        // CanaryMod: PotionEffectApplied
+        PotionEffectAppliedHook hook = new PotionEffectAppliedHook((net.canarymod.api.entity.living.EntityLiving) entityliving1.getCanaryEntity(), Canary.factory().getPotionFactory().newPotionEffect(this.H, 0, i0));
+
+        Canary.hooks().callHook(hook);
+        if (hook.getPotionEffect() == null) {
+            return;
+        }
+        i0 = hook.getPotionEffect().getAmplifier();
+        //
         int i1;
 
         if ((this.H != h.H || entityliving1.bD()) && (this.H != i.H || !entityliving1.bD())) {
