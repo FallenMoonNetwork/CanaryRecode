@@ -501,7 +501,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         ILogAgent ilogagent = null;
 
         try {
-            boolean flag0 = !GraphicsEnvironment.isHeadless();
             String s0 = null;
             String s1 = ".";
             String s2 = null;
@@ -537,8 +536,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     } else if (s3.equals("--bonusChest")) {
                         flag2 = true;
                     }
-                } else {
-                    flag0 = false;
                 }
 
                 if (flag3) {
@@ -547,6 +544,10 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             }
 
             DedicatedServer dedicatedserver = new DedicatedServer(new File(s1));
+
+            if (CanaryServer.notHeadless) {
+                ServerGUI.servergui.validate();
+            }
 
             ilogagent = dedicatedserver.al();
             if (s0 != null) {
@@ -567,10 +568,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
             if (flag2) {
                 dedicatedserver.c(true);
-            }
-
-            if (flag0) {
-                dedicatedserver.ap();
             }
 
             dedicatedserver.t();

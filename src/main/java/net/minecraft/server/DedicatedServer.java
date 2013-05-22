@@ -134,6 +134,12 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         //CanaryMod enable plugins here, before the first world is loaded.
         //At this point all bootstrapping should be done and systems should be running
         Canary.enablePlugins();
+
+        if (CanaryServer.notHeadless) {
+            // CanaryMod moved GUI start to after plugins enable
+            ap();
+        }
+
         this.al().a("Preparing level \"" + this.J() + "\"");
         // CanaryMod changed call to initWorld
         net.canarymod.api.world.DimensionType wt = net.canarymod.api.world.DimensionType.fromName("NORMAL");
@@ -278,13 +284,11 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         Canary.hooks().callHook(guiHook);
         if (guiHook.getGui() != null) {
             ((CanaryServer) Canary.getServer()).currentGUI = guiHook.getGui();
-            ((CanaryServer) Canary.getServer()).currentGUI.start();
-            ((CanaryServer) Canary.getServer()).notHeadless = this.s = true;
         } else {
             ((CanaryServer) Canary.getServer()).currentGUI = ServerGUI.servergui;
-            ((CanaryServer) Canary.getServer()).currentGUI.start();
-            ((CanaryServer) Canary.getServer()).notHeadless = this.s = true;
         }
+        ((CanaryServer) Canary.getServer()).currentGUI.start();
+        CanaryServer.notHeadless = this.s = true;
     }
 
     public boolean ag() {

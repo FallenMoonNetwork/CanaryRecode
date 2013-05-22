@@ -1,12 +1,15 @@
 package net.canarymod;
 
 
+import java.awt.GraphicsEnvironment;
 import java.io.File;
 
+import net.canarymod.api.CanaryServer;
 import net.canarymod.api.inventory.Enchantment;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.serialize.EnchantmentSerializer;
 import net.canarymod.serialize.ItemSerializer;
+import net.minecraft.server.GuiLogOutputHandler;
 import net.minecraft.server.LogAgent;
 import net.minecraft.server.MinecraftServer;
 
@@ -35,8 +38,22 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
+
+        CanaryServer.notHeadless = !GraphicsEnvironment.isHeadless();
+        for (int i1 = 0; i1 < args.length; ++i1) {
+            String s3 = args[i1];
+            if (!s3.equals("nogui") && !s3.equals("--nogui")) {
+                ;
+            } else {
+                CanaryServer.notHeadless = false;
+            }
+        }
+
         // Initialize Logging Early, TODO: the new File(".") is a directory setting, the cli arg is --universe
         la = new LogAgent("Minecraft-Server", (String) null, (new File(new File("."), "server.log")).getAbsolutePath());
+        if (CanaryServer.notHeadless) {
+            GuiLogOutputHandler.getOutputHandler().poke();
+        }
         initBird();
         try {
             MinecraftServer.main(args);

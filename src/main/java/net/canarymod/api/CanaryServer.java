@@ -33,6 +33,7 @@ import net.canarymod.hook.command.ConsoleCommandHook;
 import net.canarymod.hook.system.PermissionCheckHook;
 import net.minecraft.server.CraftingManager;
 import net.minecraft.server.FurnaceRecipes;
+import net.minecraft.server.GuiLogOutputHandler;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerConfigurationManager;
@@ -48,11 +49,12 @@ import net.minecraft.server.TcpConnection;
  */
 public class CanaryServer implements Server {
 
+    public static boolean notHeadless;
+
     protected HashMap<String, ServerTimer> timers = new HashMap<String, ServerTimer>();
     protected ScheduledExecutorService taskExecutor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
     private MinecraftServer server;
     public GUIControl currentGUI = null;
-    public boolean notHeadless;
     String canaryVersion = null;
     String mcVersion = null;
 
@@ -473,6 +475,18 @@ public class CanaryServer implements Server {
         }
 
         return mcVersion;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getServerGUILog() {
+        if (CanaryServer.notHeadless) {
+            return GuiLogOutputHandler.getLog();
+        } else {
+            return null;
+        }
     }
 
 }
