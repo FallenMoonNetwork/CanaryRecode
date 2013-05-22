@@ -33,6 +33,7 @@ import net.canarymod.hook.command.ConsoleCommandHook;
 import net.canarymod.hook.system.PermissionCheckHook;
 import net.minecraft.server.CraftingManager;
 import net.minecraft.server.FurnaceRecipes;
+import net.minecraft.server.GuiLogOutputHandler;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerConfigurationManager;
@@ -51,8 +52,7 @@ public class CanaryServer implements Server {
     protected HashMap<String, ServerTimer> timers = new HashMap<String, ServerTimer>();
     protected ScheduledExecutorService taskExecutor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
     private MinecraftServer server;
-    public GUIControl currentGUI = null;
-    public boolean notHeadless;
+    private GUIControl currentGUI = null;
     String canaryVersion = null;
     String mcVersion = null;
 
@@ -373,7 +373,7 @@ public class CanaryServer implements Server {
         if (currentGUI != null) {
             currentGUI.closeWindow();
         }
-        if (notHeadless) {
+        if (!isHeadless()) {
             currentGUI = gui;
             currentGUI.start();
         }
@@ -473,6 +473,38 @@ public class CanaryServer implements Server {
         }
 
         return mcVersion;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getServerGUILog() {
+        if (!isHeadless()) {
+            return GuiLogOutputHandler.getLog();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GUIControl getCurrentGUI() {
+        return this.currentGUI;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isHeadless() {
+        return MinecraftServer.isHeadless();
+    }
+
+    public void setCurrentGUI(GUIControl guicontrol) {
+        this.currentGUI = guicontrol;
     }
 
 }

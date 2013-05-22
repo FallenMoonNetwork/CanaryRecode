@@ -28,6 +28,8 @@ import net.visualillusionsent.utils.PropertiesFile;
 
 public abstract class MinecraftServer implements ICommandSender, Runnable, IPlayerUsage {
 
+    private static boolean notHeadless;
+
     private static MinecraftServer k = null;
     private final ISaveFormat l;
     private final PlayerUsageSnooper m = new PlayerUsageSnooper("server", this);
@@ -501,7 +503,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         ILogAgent ilogagent = null;
 
         try {
-            boolean flag0 = !GraphicsEnvironment.isHeadless();
             String s0 = null;
             String s1 = ".";
             String s2 = null;
@@ -537,8 +538,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     } else if (s3.equals("--bonusChest")) {
                         flag2 = true;
                     }
-                } else {
-                    flag0 = false;
                 }
 
                 if (flag3) {
@@ -547,6 +546,10 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             }
 
             DedicatedServer dedicatedserver = new DedicatedServer(new File(s1));
+
+            if (notHeadless) {
+                ServerGUI.servergui.validate();
+            }
 
             ilogagent = dedicatedserver.al();
             if (s0 != null) {
@@ -567,10 +570,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
             if (flag2) {
                 dedicatedserver.c(true);
-            }
-
-            if (flag0) {
-                dedicatedserver.ap();
             }
 
             dedicatedserver.t();
@@ -1088,6 +1087,14 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     public void loadWorld(String name, long seed, net.canarymod.api.world.DimensionType type, net.canarymod.api.world.WorldType typeGen) {
         this.initWorld(name, seed, WorldType.a(typeGen.toString()), type, null);
+    }
+
+    public static boolean isHeadless() {
+        return !MinecraftServer.notHeadless;
+    }
+
+    public static void setHeadless(boolean state) {
+        MinecraftServer.notHeadless = !state;
     }
 
 }
