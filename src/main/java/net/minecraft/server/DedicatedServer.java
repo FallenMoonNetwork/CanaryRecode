@@ -135,7 +135,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         //At this point all bootstrapping should be done and systems should be running
         Canary.enablePlugins();
 
-        if (CanaryServer.notHeadless) {
+        if (!MinecraftServer.isHeadless()) {
             // CanaryMod moved GUI start to after plugins enable
             ap();
         }
@@ -283,12 +283,13 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         ServerGuiStartHook guiHook = new ServerGuiStartHook(ServerGUI.servergui);
         Canary.hooks().callHook(guiHook);
         if (guiHook.getGui() != null) {
-            ((CanaryServer) Canary.getServer()).currentGUI = guiHook.getGui();
+            ((CanaryServer) Canary.getServer()).setCurrentGUI(guiHook.getGui());
         } else {
-            ((CanaryServer) Canary.getServer()).currentGUI = ServerGUI.servergui;
+            ((CanaryServer) Canary.getServer()).setCurrentGUI(ServerGUI.servergui);
         }
-        ((CanaryServer) Canary.getServer()).currentGUI.start();
-        CanaryServer.notHeadless = this.s = true;
+        ((CanaryServer) Canary.getServer()).getCurrentGUI().start();
+        this.s = true;
+        MinecraftServer.setHeadless(false);
     }
 
     public boolean ag() {

@@ -49,12 +49,10 @@ import net.minecraft.server.TcpConnection;
  */
 public class CanaryServer implements Server {
 
-    public static boolean notHeadless;
-
     protected HashMap<String, ServerTimer> timers = new HashMap<String, ServerTimer>();
     protected ScheduledExecutorService taskExecutor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
     private MinecraftServer server;
-    public GUIControl currentGUI = null;
+    private GUIControl currentGUI = null;
     String canaryVersion = null;
     String mcVersion = null;
 
@@ -375,7 +373,7 @@ public class CanaryServer implements Server {
         if (currentGUI != null) {
             currentGUI.closeWindow();
         }
-        if (notHeadless) {
+        if (!isHeadless()) {
             currentGUI = gui;
             currentGUI.start();
         }
@@ -482,11 +480,31 @@ public class CanaryServer implements Server {
      */
     @Override
     public String getServerGUILog() {
-        if (CanaryServer.notHeadless) {
+        if (!isHeadless()) {
             return GuiLogOutputHandler.getLog();
         } else {
             return null;
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GUIControl getCurrentGUI() {
+        return this.currentGUI;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isHeadless() {
+        return MinecraftServer.isHeadless();
+    }
+
+    public void setCurrentGUI(GUIControl guicontrol) {
+        this.currentGUI = guicontrol;
     }
 
 }

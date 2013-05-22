@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
-import net.canarymod.Canary;
 import net.canarymod.config.Configuration;
 
 public class GuiLogOutputHandler extends Handler {
@@ -78,7 +77,5 @@ public class GuiLogOutputHandler extends Handler {
         return GuiLogOutputHandler.d.getText();
     }
 
-    public void poke() {
-        Canary.println("TEST");
-    }
+    public void poke() {}
 }
