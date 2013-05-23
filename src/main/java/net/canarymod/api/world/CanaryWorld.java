@@ -266,7 +266,7 @@ public class CanaryWorld implements World {
     }
 
     @Override
-    public ChunkProviderServer getChunkProvider() {
+    public ChunkProvider getChunkProvider() {
         return chunkProvider;
     }
 

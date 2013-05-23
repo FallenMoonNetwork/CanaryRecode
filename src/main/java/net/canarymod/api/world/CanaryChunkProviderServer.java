@@ -4,7 +4,7 @@ package net.canarymod.api.world;
 import net.minecraft.server.ChunkCoordIntPair;
 
 
-public class CanaryChunkProviderServer implements ChunkProviderServer {
+public class CanaryChunkProviderServer implements ChunkProvider {
 
     private net.minecraft.server.ChunkProviderServer handle;
 
@@ -91,6 +91,16 @@ public class CanaryChunkProviderServer implements ChunkProviderServer {
     @Override
     public boolean isChunkLoaded(int x, int z) {
         return handle.a(x, z);
+    }
+
+    @Override
+    public void populate(ChunkProvider provider, int x, int z) {
+        handle.a(null, x, z);
+    }
+
+    @Override
+    public String getStatistics() {
+        return handle.e();
     }
 
 }
