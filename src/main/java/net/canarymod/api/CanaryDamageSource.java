@@ -19,7 +19,8 @@ public class CanaryDamageSource implements DamageSource {
 
     @Override
     public Entity getDamageDealer() {
-        return handle.i().getCanaryEntity();
+        net.minecraft.server.Entity entity = handle.i();
+    	return (entity == null) ? null : entity.getCanaryEntity();
     }
 
     @Override
