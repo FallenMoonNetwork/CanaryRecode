@@ -3,7 +3,9 @@ package net.minecraft.server;
 
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanarySmallFireball;
+import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.entity.ProjectileHitHook;
+import net.canarymod.hook.world.IgnitionHook;
 
 
 public class EntitySmallFireball extends EntityFireball {
@@ -68,7 +70,15 @@ public class EntitySmallFireball extends EntityFireball {
                     }
 
                     if (this.q.c(i0, i1, i2)) {
-                        this.q.c(i0, i1, i2, Block.av.cz);
+                        //CanaryMod recognise ignition from this entity
+                        CanaryBlock block = (CanaryBlock) this.q.getCanaryWorld().getBlockAt(i0, i1-1, i2);
+                        block.setStatus((byte) 7); //7 fireball hit
+                        IgnitionHook ignitionHook = new IgnitionHook(block, null);
+                        Canary.hooks().callHook(ignitionHook);
+                        if(!ignitionHook.isCanceled()) {
+                            this.q.c(i0, i1, i2, Block.av.cz);
+                        }
+                        // CanaryMod end
                     }
                 }
 
