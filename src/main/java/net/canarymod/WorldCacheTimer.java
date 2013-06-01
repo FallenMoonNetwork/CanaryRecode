@@ -1,7 +1,6 @@
 package net.canarymod;
 
 import net.canarymod.api.world.CanaryWorld;
-import net.canarymod.config.Configuration;
 import net.visualillusionsent.utils.TaskManager;
 
 /**
@@ -24,9 +23,15 @@ public class WorldCacheTimer implements Runnable {
 
     @Override
     public void run() {
+        if(!Canary.getServer().getWorldManager().worldIsLoaded(world.getFqName())) {
+            // This thing belongs to nothing anymore.
+            TaskManager.removeTask(this);
+            scheduledForRemove = false;
+            return;
+        }
         boolean resched = false;
         if(scheduledForRemove) {
-            if(this.world.getPlayerList().isEmpty()) {
+            if(this.world.getPlayerList().isEmpty() && Canary.getServer().getWorldManager().getAllWorlds().size() > 1) {
                 Canary.getServer().getWorldManager().unloadWorld(world.getName(), world.getType(), false);
             } else {
                 scheduledForRemove = false;
@@ -37,8 +42,9 @@ public class WorldCacheTimer implements Runnable {
             scheduledForRemove = true;
             resched = true;
         }
-        if(resched) {
-            TaskManager.scheduleDelayedTaskInMinutes(this, Configuration.getServerConfig().getWorldCacheTimeout());
+        if(!resched) {
+            TaskManager.removeTask(this);
+            scheduledForRemove = false;
         }
     }
 

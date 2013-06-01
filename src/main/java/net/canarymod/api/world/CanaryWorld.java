@@ -81,7 +81,7 @@ public class CanaryWorld implements World {
         nanoTicks = new long[100];
         chunkProvider = new CanaryChunkProviderServer(dimension.b);
         if(Configuration.getServerConfig().isWorldCacheTimerEnabled()) {
-            TaskManager.scheduleDelayedTaskInMinutes(new WorldCacheTimer(this), Configuration.getServerConfig().getWorldCacheTimeout());
+            TaskManager.scheduleContinuedTaskInMinutes(new WorldCacheTimer(this), Configuration.getServerConfig().getWorldCacheTimeout(), Configuration.getServerConfig().getWorldCacheTimeout());
         }
 
     }
