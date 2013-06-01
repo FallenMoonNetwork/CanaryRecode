@@ -251,7 +251,15 @@ public class Explosion {
                 int i4 = this.k.a(i0, i1 - 1, i2);
 
                 if (i3 == 0 && Block.s[i4] && this.j.nextInt(3) == 0) {
-                    this.k.c(i0, i1, i2, Block.av.cz);
+                    //CanaryMod ignition from EntityLargeFireball
+                    CanaryBlock block = (CanaryBlock) this.k.getCanaryWorld().getBlockAt(i0, i1-1, i2);
+                    block.setStatus((byte) 7); //7 fireball hit
+                    IgnitionHook ignitionHook = new IgnitionHook(block, null);
+                    Canary.hooks().callHook(ignitionHook);
+                    if(!ignitionHook.isCanceled()) {
+                        this.k.c(i0, i1, i2, Block.av.cz);
+                    }
+                    // CanaryMod end
                 }
             }
         }
