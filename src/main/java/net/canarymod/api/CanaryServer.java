@@ -31,6 +31,8 @@ import net.canarymod.chat.TextFormat;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.ConsoleCommandHook;
 import net.canarymod.hook.system.PermissionCheckHook;
+import net.canarymod.tasks.ServerTask;
+import net.canarymod.tasks.ServerTaskManager;
 import net.minecraft.server.CraftingManager;
 import net.minecraft.server.FurnaceRecipes;
 import net.minecraft.server.GuiLogOutputHandler;
@@ -507,4 +509,13 @@ public class CanaryServer implements Server {
         this.currentGUI = guicontrol;
     }
 
+    @Override
+    public boolean addSynchronousTask(ServerTask task) {
+        return ServerTaskManager.addTask(task);
+    }
+
+    @Override
+    public boolean removeSynchronousTask(ServerTask task) {
+        return ServerTaskManager.removeTask(task);
+    }
 }

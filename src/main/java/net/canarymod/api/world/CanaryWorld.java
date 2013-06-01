@@ -3,6 +3,7 @@ package net.canarymod.api.world;
 
 import java.util.ArrayList;
 
+import net.canarymod.WorldCacheTimer;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.EntityTracker;
@@ -26,6 +27,7 @@ import net.canarymod.api.world.effects.Particle;
 import net.canarymod.api.world.effects.SoundEffect;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
+import net.canarymod.config.Configuration;
 import net.minecraft.server.EntityLightningBolt;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EnumGameType;
@@ -50,6 +52,7 @@ import net.minecraft.server.TileEntitySign;
 import net.minecraft.server.TileEntitySkull;
 import net.minecraft.server.WorldInfo;
 import net.minecraft.server.WorldServer;
+import net.visualillusionsent.utils.TaskManager;
 
 
 public class CanaryWorld implements World {
@@ -76,8 +79,11 @@ public class CanaryWorld implements World {
         entityTracker = dimension.getEntityTracker();
         // Init nanotick size
         nanoTicks = new long[100];
-
         chunkProvider = new CanaryChunkProviderServer(dimension.b);
+        if(Configuration.getServerConfig().isWorldCacheTimerEnabled()) {
+            TaskManager.scheduleDelayedTaskInMinutes(new WorldCacheTimer(this), Configuration.getServerConfig().getWorldCacheTimeout());
+        }
+
     }
 
     @Override
