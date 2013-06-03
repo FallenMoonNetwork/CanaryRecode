@@ -8,13 +8,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.Explosive;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.world.ExplosionHook;
+import net.canarymod.hook.world.IgnitionHook;
 
 
 public class Explosion {
