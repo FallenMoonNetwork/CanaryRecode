@@ -6,6 +6,7 @@ import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.ItemUseHook;
 import net.canarymod.hook.world.IgnitionHook;
+import net.canarymod.hook.world.IgnitionHook.IgnitionCause;
 
 
 public class ItemFlintAndSteel extends Item {
@@ -55,12 +56,15 @@ public class ItemFlintAndSteel extends Item {
             int i4 = world.a(i0, i1, i2);
 
             // CanaryMod: ItemUse/Ignition
+            // Create & Call ItemUseHook
             ItemUseHook iuh = new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked);
-
             Canary.hooks().callHook(iuh);
-            IgnitionHook ih = new IgnitionHook(clicked, ((EntityPlayerMP) entityplayer).getPlayer());
-
+            // Create & Call IgnitionHook
+            CanaryBlock ignited = new CanaryBlock((short) Block.av.cz, (short) 0, i0, i1, i2, world.getCanaryWorld());
+            IgnitionHook ih = new IgnitionHook(ignited, ((EntityPlayerMP) entityplayer).getPlayer(), clicked, IgnitionCause.FLINT_AND_STEEL);
             Canary.hooks().callHook(ih);
+
+            // If either hook is canceled, return
             if (iuh.isCanceled() || ih.isCanceled()) {
                 return false;
             }

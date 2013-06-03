@@ -15,6 +15,7 @@ import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.world.ExplosionHook;
 import net.canarymod.hook.world.IgnitionHook;
+import net.canarymod.hook.world.IgnitionHook.IgnitionCause;
 
 
 public class Explosion {
@@ -254,7 +255,7 @@ public class Explosion {
                     //CanaryMod ignition from EntityLargeFireball
                     CanaryBlock block = (CanaryBlock) this.k.getCanaryWorld().getBlockAt(i0, i1-1, i2);
                     block.setStatus((byte) 7); //7 fireball hit
-                    IgnitionHook ignitionHook = new IgnitionHook(block, null);
+                    IgnitionHook ignitionHook = new IgnitionHook(block, null, null, IgnitionCause.FIREBALL_HIT);
                     Canary.hooks().callHook(ignitionHook);
                     if(!ignitionHook.isCanceled()) {
                         this.k.c(i0, i1, i2, Block.av.cz);

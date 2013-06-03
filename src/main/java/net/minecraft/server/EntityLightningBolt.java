@@ -6,6 +6,7 @@ import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryLightningBolt;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.IgnitionHook;
+import net.canarymod.hook.world.IgnitionHook.IgnitionCause;
 
 
 public class EntityLightningBolt extends EntityWeatherEffect {
@@ -31,7 +32,7 @@ public class EntityLightningBolt extends EntityWeatherEffect {
                 CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
                 ignited.setStatus((byte) 5); // LightningBolt Status 5
-                IgnitionHook hook = new IgnitionHook(ignited, null);
+                IgnitionHook hook = new IgnitionHook(ignited, null, null, IgnitionCause.LIGHTNING_STRIKE);
 
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
@@ -51,7 +52,7 @@ public class EntityLightningBolt extends EntityWeatherEffect {
                     CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i1, i2, i3);
 
                     ignited.setStatus((byte) 5); // LightningBolt Status 5
-                    IgnitionHook hook = new IgnitionHook(ignited, null);
+                    IgnitionHook hook = new IgnitionHook(ignited, null, null, IgnitionCause.LIGHTNING_STRIKE);
 
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
