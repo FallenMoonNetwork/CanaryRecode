@@ -363,6 +363,17 @@ public class CanaryItem implements Item {
      * {@inheritDoc}
      */
     @Override
+    public boolean hasMetaTag() {
+        if (hasDataTag()) {
+            return getDataTag().containsKey("Canary");
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public CompoundTag getMetaTag() {
         CompoundTag dataTag = getDataTag();
 
