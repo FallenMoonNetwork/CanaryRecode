@@ -1,18 +1,10 @@
 package net.canarymod.api;
 
 
-import java.io.IOException;
 import java.net.InetAddress;
-import java.net.URISyntaxException;
 import java.net.UnknownHostException;
-import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.jar.JarFile;
-
 import net.canarymod.Canary;
 import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -40,6 +32,7 @@ import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerConfigurationManager;
 import net.minecraft.server.TcpConnection;
+import net.visualillusionsent.utils.TaskManager;
 
 
 /**
@@ -52,7 +45,6 @@ import net.minecraft.server.TcpConnection;
 public class CanaryServer implements Server {
 
     protected HashMap<String, ServerTimer> timers = new HashMap<String, ServerTimer>();
-    protected ScheduledExecutorService taskExecutor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
     private MinecraftServer server;
     private GUIControl currentGUI = null;
     String canaryVersion = null;
@@ -186,12 +178,9 @@ public class CanaryServer implements Server {
             Canary.logWarning("Unique key timer " + uniqueName + " is already running, skipping.");
             return;
         }
-        ServerTimer newTimer = new ServerTimer(time, uniqueName);
-
-        synchronized (taskExecutor) {
-            taskExecutor.schedule(newTimer, 1, TimeUnit.SECONDS);
-            timers.put(uniqueName, newTimer);
-        }
+        ServerTimer newTimer = new ServerTimer(uniqueName);
+        TaskManager.scheduleDelayedTaskInSeconds(newTimer, time);
+        timers.put(uniqueName, newTimer);
     }
 
     /**
@@ -199,7 +188,7 @@ public class CanaryServer implements Server {
      */
     @Override
     public boolean isTimerExpired(String uniqueName) {
-        return timers.containsKey(uniqueName);
+        return !timers.containsKey(uniqueName);
     }
 
     @Override
@@ -328,25 +317,6 @@ public class CanaryServer implements Server {
         Canary.logNotice(message);
     }
 
-    public class ServerTimer implements Runnable {
-        private int time;
-        private String name;
-        public ServerTimer(int time, String name) {
-            this.time = time;
-            this.name = name;
-        }
-
-        @Override
-        public synchronized void run() {
-            time--;
-            if (time > 0) {
-                taskExecutor.schedule(this, 1, TimeUnit.SECONDS);
-            } else {
-                timers.remove(name);
-            }
-        }
-    }
-
     @Override
     public void addRecipe(CraftingRecipe recipe) {
         if (recipe.hasShape()) {
@@ -454,6 +424,7 @@ public class CanaryServer implements Server {
      */
     @Override
     public String getServerVersion() {
+        /* Why would we go through the process of reading the manifest when MinecraftServer.x() returns its version?
         if(mcVersion == null) {
             try {
                 CodeSource codeSource = this.getClass().getProtectionDomain().getCodeSource();
@@ -473,8 +444,8 @@ public class CanaryServer implements Server {
                 }
             }
         }
-
-        return mcVersion;
+        */
+        return server.x();
     }
 
     /**
@@ -517,5 +488,25 @@ public class CanaryServer implements Server {
     @Override
     public boolean removeSynchronousTask(ServerTask task) {
         return ServerTaskManager.removeTask(task);
+    }
+
+    @Override
+    public void sendPlayerListEntry(PlayerListEntry entry) {
+        if (Configuration.getServerConfig().isPlayerListEnabled()) {
+            server.ad().a(new net.minecraft.server.Packet201PlayerInfo(entry.getName(), entry.isShown(), entry.getPing()));
+        }
+    }
+
+    public class ServerTimer implements Runnable {
+        private String name;
+
+        public ServerTimer(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public synchronized void run() {
+            timers.remove(name);
+        }
     }
 }

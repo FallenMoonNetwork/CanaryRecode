@@ -7,12 +7,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
+import net.canarymod.api.PlayerListEntry;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityItem;
@@ -40,13 +40,15 @@ import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.EnumGameType;
 import net.minecraft.server.ItemStack;
+import net.minecraft.server.Packet201PlayerInfo;
 import net.minecraft.server.WorldSettings;
 
 
 /**
  * Canary Player wrapper.
- *
- * @author Chris
+ * 
+ * @author Chris (damagefilter)
+ * @author Jason (darkdiplomat)
  */
 public class CanaryPlayer extends CanaryEntityLiving implements Player {
     private Pattern badChatPattern = Pattern.compile("[\u00a7\u2302\u00D7\u00AA\u00BA\u00AE\u00AC\u00BD\u00BC\u00A1\u00AB\u00BB]");
@@ -781,5 +783,21 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             return false;
         }
         return removeGroup(g);
+    }
+
+    @Override
+    public int getPing() {
+        return ((EntityPlayerMP) entity).i;
+    }
+
+    @Override
+    public PlayerListEntry getPlayerListEntry(boolean shown) {
+        return new PlayerListEntry(this, shown);
+    }
+
+    public void sendPlayerListEntry(PlayerListEntry plentry) {
+        if (Configuration.getServerConfig().isPlayerListEnabled()) {
+            ((EntityPlayerMP) entity).a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), plentry.getPing()));
+        }
     }
 }
