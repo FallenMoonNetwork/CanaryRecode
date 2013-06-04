@@ -318,17 +318,15 @@ public abstract class ServerConfigurationManager {
             return Translator.translate("not on whitelist");
         }
 
-        /*
-         * if(this.a.size() >= this.b){
-         *   if (Canary.reserverlist().isSlotReserved(s0) && Configuration.getServerConfig().isReserveListEnabled()){
-         *       return null;
-         *   }
-         *   return Translator.translate("server full");
-         * }
-         * return null;
-         */
+        if (this.a.size() >= this.b) {
+            if (Canary.reservelist().isSlotReserved(s0) && Configuration.getServerConfig().isReservelistEnabled()) {
+                return null;
+            }
+            return Translator.translate("server full");
+        }
+        return null;
 
-        return this.a.size() >= this.b ? Translator.translate("server full") : null;
+        
 
         // if (this.f.a(s0)) {
         // BanEntry banentry = (BanEntry) this.f.c().get(s0);
