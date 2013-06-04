@@ -429,6 +429,11 @@ public class CanaryItem implements Item {
         return stacks;
     }
 
+    @Override
+    public Item clone() {
+        return getHandle().m().getCanaryItem();
+    }
+
     /**
      * Returns a String value representing this object
      *

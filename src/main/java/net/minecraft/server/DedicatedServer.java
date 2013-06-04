@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.config.Configuration;
@@ -92,7 +91,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             this.al().b("**** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!");
             this.al().b("The server will make no attempt to authenticate usernames. Beware.");
             this.al().b("While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.");
-            this.al().b("To change this, set \"online-mode\" to \"true\" in the server.properties file.");
+            this.al().b("To change this, set \"online-mode\" to \"true\" in the server.cfg file."); // modified Server properties name
         }
 
         this.a((ServerConfigurationManager) (new DedicatedPlayerList(this)));
