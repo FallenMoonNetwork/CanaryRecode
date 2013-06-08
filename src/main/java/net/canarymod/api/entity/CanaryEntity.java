@@ -306,6 +306,16 @@ public abstract class CanaryEntity implements Entity {
         this.getHandle().f((NBTTagCompound) ((CanaryCompoundTag)tag).getHandle());
     }
 
+    @Override
+    public void isInvisible() {
+        return entity.ai();
+    }
+
+    @Override
+    public void setInvisible(boolean invisible) {
+        entity.d(b);
+    }
+
     /**
      * Gets the Minecraft entity being wrapped
      *
