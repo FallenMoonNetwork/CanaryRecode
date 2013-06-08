@@ -114,7 +114,7 @@ public class WorldServer extends World {
         }
 
         // CanaryMod: TimeChangeHook
-        TimeChangeHook hook = new TimeChangeHook(getCanaryWorld(), this.x.g());
+        TimeChangeHook hook = new TimeChangeHook(getCanaryWorld(), this.x.g() + 1L);
 
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
