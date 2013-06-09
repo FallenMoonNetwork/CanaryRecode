@@ -2,7 +2,6 @@ package net.canarymod.api.entity;
 
 
 import java.util.UUID;
-
 import net.canarymod.api.nbt.BaseTag;
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.nbt.CompoundTag;
@@ -307,13 +306,18 @@ public abstract class CanaryEntity implements Entity {
     }
 
     @Override
-    public void isInvisible() {
+    public boolean isInvisible() {
         return entity.ai();
     }
 
     @Override
     public void setInvisible(boolean invisible) {
-        entity.d(b);
+        entity.d(invisible);
+    }
+
+    @Override
+    public CompoundTag getMetaData() {
+        return entity.getMetaData();
     }
 
     /**

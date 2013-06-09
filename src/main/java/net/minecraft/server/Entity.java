@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
@@ -994,7 +993,8 @@ public abstract class Entity {
             // CanaryMod: allow the saving of persistent metadata
             if (metadata != null) {
                 nbttagcompound.a("Canary", ((CanaryCompoundTag)metadata).getHandle());
-            } // CanaryMod end
+            }
+            // CanaryMod end
             this.b(nbttagcompound);
             if (this.o != null) {
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound("Riding");
@@ -1626,6 +1626,11 @@ public abstract class Entity {
 
     public void setNBTProperties(NBTTagCompound tag) {
         this.a(tag);
+    }
+
+    public CompoundTag getMetaData() {
+        this.metadata = this.metadata == null ? new CanaryCompoundTag("Canary") : metadata;
+        return this.metadata;
     }
 
     // CanaryMod: Simulates the use of a Portal by the Player to determine the location going to
