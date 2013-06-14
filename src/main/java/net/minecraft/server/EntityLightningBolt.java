@@ -4,9 +4,12 @@ package net.minecraft.server;
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryLightningBolt;
+import net.canarymod.api.entity.LightningBolt;
 import net.canarymod.api.world.blocks.CanaryBlock;
+import net.canarymod.hook.entity.EntityLightningStruckHook;
 import net.canarymod.hook.world.IgnitionHook;
 import net.canarymod.hook.world.IgnitionHook.IgnitionCause;
+import net.canarymod.hook.world.LightningStrikeHook;
 
 
 public class EntityLightningBolt extends EntityWeatherEffect {
@@ -67,9 +70,14 @@ public class EntityLightningBolt extends EntityWeatherEffect {
 
     public void l_() {
         super.l_();
+
         if (this.b == 2) {
             this.q.a(this.u, this.v, this.w, "ambient.weather.thunder", 10000.0F, 0.8F + this.ab.nextFloat() * 0.2F);
             this.q.a(this.u, this.v, this.w, "random.explode", 2.0F, 0.5F + this.ab.nextFloat() * 0.2F);
+            // CanaryMod: LightningStrike
+            LightningStrikeHook lsh = new LightningStrikeHook((LightningBolt) this.getCanaryEntity());
+            Canary.hooks().callHook(lsh);
+            //
         }
 
         --this.b;
@@ -86,7 +94,16 @@ public class EntityLightningBolt extends EntityWeatherEffect {
                     int i2 = MathHelper.c(this.w);
 
                     if (this.q.a(i0, i1, i2) == 0 && Block.av.c(this.q, i0, i1, i2)) {
-                        this.q.c(i0, i1, i2, Block.av.cz);
+                        // CanaryMod: Ignition
+                        CanaryBlock ignited = (CanaryBlock) q.getCanaryWorld().getBlockAt(i0, i1, i2);
+                        ignited.setStatus((byte) 5); // LightningBolt Status 5
+                        IgnitionHook hook = new IgnitionHook(ignited, null, null, IgnitionCause.LIGHTNING_STRIKE);
+                        Canary.hooks().callHook(hook);
+
+                        if (!hook.isCanceled()) {
+                            this.q.c(i0, i1, i2, Block.av.cz);
+                        }
+                        //
                     }
                 }
             }
@@ -102,7 +119,13 @@ public class EntityLightningBolt extends EntityWeatherEffect {
                 for (int i3 = 0; i3 < list.size(); ++i3) {
                     Entity entity = (Entity) list.get(i3);
 
-                    entity.a(this);
+                    // CanaryMod: EntityLightningStruck
+                    EntityLightningStruckHook hook = new EntityLightningStruckHook((LightningBolt) this.getCanaryEntity(), entity.getCanaryEntity());
+                    Canary.hooks().callHook(hook);
+                    if (!hook.isCanceled()) {
+                        entity.a(this);
+                    }
+                    //
                 }
             }
         }

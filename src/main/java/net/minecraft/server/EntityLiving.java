@@ -13,6 +13,7 @@ import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.entity.DamageHook;
+import net.canarymod.hook.entity.EntityDeathHook;
 import net.canarymod.hook.entity.EntityDespawnHook;
 import net.canarymod.hook.entity.MobTargetHook;
 import net.canarymod.hook.entity.PotionEffectAppliedHook;
@@ -878,6 +879,11 @@ public abstract class EntityLiving extends Entity {
     }
 
     public void a(DamageSource damagesource) {
+        // CanaryMod: EntityDeath
+        EntityDeathHook hook = new EntityDeathHook(this.getCanaryEntity(), damagesource.getCanaryDamageSource());
+        Canary.hooks().callHook(hook);
+        //
+
         Entity entity = damagesource.i();
         EntityLiving entityliving = this.bN();
 
