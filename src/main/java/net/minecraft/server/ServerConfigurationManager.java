@@ -27,6 +27,7 @@ import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.hook.player.PlayerListEntryHook;
 import net.canarymod.hook.player.PlayerRespawnHook;
 import net.canarymod.hook.player.PreConnectionHook;
+import net.canarymod.hook.player.TeleportHook;
 import net.canarymod.hook.system.ServerShutdownHook;
 
 
@@ -101,7 +102,7 @@ public abstract class ServerConfigurationManager {
         }
         // CanaryMod end
         this.c(entityplayermp);
-        netserverhandler.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B, entityplayermp.getCanaryWorld().getType().getId(), entityplayermp.getCanaryWorld().getName());
+        netserverhandler.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B, entityplayermp.getCanaryWorld().getType().getId(), entityplayermp.getCanaryWorld().getName(), TeleportHook.TeleportCause.RESPAWN);
         this.e.ae().a(netserverhandler);
         netserverhandler.b(new Packet4UpdateTime(worldserver.H(), worldserver.I()));
         if (this.e.Q().length() > 0) {
@@ -483,7 +484,7 @@ public abstract class ServerConfigurationManager {
         while(worldserver.getCanaryWorld().getBlockAt(ToolBox.floorToBlock(entityplayermp1.u), ToolBox.floorToBlock(entityplayermp1.v + 1), ToolBox.floorToBlock(entityplayermp1.w)).getTypeId() != 0) {
             entityplayermp1.v = entityplayermp1.v + 1D;
         }
-        entityplayermp1.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName());
+        entityplayermp1.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName(), TeleportHook.TeleportCause.RESPAWN);
         entityplayermp1.a.b(new Packet6SpawnPosition((int)entityplayermp1.u, (int)entityplayermp1.v, (int)entityplayermp1.w)); //CanaryMod changed used data to player coords
         entityplayermp1.a.b(new Packet43Experience(entityplayermp1.ch, entityplayermp1.cg, entityplayermp1.cf));
         this.b(entityplayermp1, worldserver);
@@ -519,7 +520,7 @@ public abstract class ServerConfigurationManager {
         this.a(entityplayermp, i1, worldserver, worldserver1); // i1
         this.a(entityplayermp, worldserver);
         // TP player to position
-        entityplayermp.a.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B, entityplayermp.getCanaryWorld().getType().getId(), entityplayermp.getCanaryWorld().getName());
+        entityplayermp.a.a(entityplayermp.u, entityplayermp.v, entityplayermp.w, entityplayermp.A, entityplayermp.B, entityplayermp.getCanaryWorld().getType().getId(), entityplayermp.getCanaryWorld().getName(), TeleportHook.TeleportCause.PORTAL);
         entityplayermp.c.a(worldserver1);
         this.b(entityplayermp, worldserver1);
         this.f(entityplayermp);

@@ -31,6 +31,7 @@ import net.canarymod.chat.TextFormat;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
+import net.canarymod.hook.player.TeleportHook;
 import net.canarymod.hook.system.PermissionCheckHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
@@ -505,7 +506,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void teleportTo(double x, double y, double z, World dim) {
         if (!(getWorld().getType().equals(dim.getType()))) {
-            Canary.println("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
+            Canary.logDebug("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
             switchWorlds(dim);
         }
         teleportTo(x, y, z, 0.0F, 0.0F);
@@ -515,7 +516,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void teleportTo(double x, double y, double z, float pitch, float rotation, World dim) {
         if (!(getWorld().getType().equals(dim.getType()))) {
-            Canary.println("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
+            Canary.logDebug("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
             switchWorlds(dim);
         }
         teleportTo(x, y, z, pitch, rotation);
@@ -523,22 +524,36 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void teleportTo(double x, double y, double z, float pitch, float rotation) {
+        this.teleportTo(x, y, z, pitch, rotation, TeleportHook.TeleportCause.PLUGIN);
+    }
+
+    @Override
+    public void teleportTo(Location location) {
+        if (getWorld() != location.getWorld()) {
+            Canary.logDebug("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
+            switchWorlds(location.getWorld());
+        }
+        teleportTo(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getRotation());
+    }
+
+    @Override
+    public void teleportTo(Location location, TeleportHook.TeleportCause cause) {
+        if (getWorld() != location.getWorld()) {
+            Canary.logDebug("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
+            switchWorlds(location.getWorld());
+        }
+        teleportTo(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getRotation(), cause);
+    }
+
+    private void teleportTo(double x, double y, double z, float pitch, float rotation, TeleportHook.TeleportCause cause) {
         EntityPlayerMP player = (EntityPlayerMP) entity;
 
         // If player is in vehicle - eject them before they are teleported.
         if (isRiding()) {
             player.h(player.o);
         }
-        player.a.a(x, y, z, rotation, pitch, getWorld().getType().getId(), getWorld().getName());
-    }
 
-    @Override
-    public void teleportTo(Location location) {
-        if (getWorld() != location.getWorld()) {
-            Canary.println("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
-            switchWorlds(location.getWorld());
-        }
-        teleportTo(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getRotation());
+        player.a.a(x, y, z, rotation, pitch, getWorld().getType().getId(), getWorld().getName(), cause);
     }
 
     @Override

@@ -253,7 +253,7 @@ public class NetServerHandler extends NetHandler {
 
                 if (d11 > 100.0D && (!this.d.I() || !this.d.H().equals(this.c.bS))) {
                     this.d.al().b(this.c.bS + " moved too quickly! " + d4 + "," + d6 + "," + d7 + " (" + d8 + ", " + d9 + ", " + d10 + ")");
-                    this.a(this.n, this.o, this.p, this.c.A, this.c.B, c.getCanaryWorld().getType().getId(), c.getCanaryWorld().getName());
+                    this.a(this.n, this.o, this.p, this.c.A, this.c.B, c.getCanaryWorld().getType().getId(), c.getCanaryWorld().getName(), TeleportHook.TeleportCause.MOVEMENT);
                     return;
                 }
 
@@ -288,7 +288,7 @@ public class NetServerHandler extends NetHandler {
                 boolean flag2 = worldserver.a(this.c, this.c.E.c().e((double) f4, (double) f4, (double) f4)).isEmpty();
 
                 if (flag0 && (flag1 || !flag2) && !this.c.bz()) {
-                    this.a(this.n, this.o, this.p, f2, f3, c.getCanaryWorld().getType().getId(), c.getCanaryWorld().getName());
+                    this.a(this.n, this.o, this.p, f2, f3, c.getCanaryWorld().getType().getId(), c.getCanaryWorld().getName(), TeleportHook.TeleportCause.MOVEMENT);
                     return;
                 }
 
@@ -316,11 +316,11 @@ public class NetServerHandler extends NetHandler {
         }
     }
 
-    public void a(double d0, double d1, double d2, float f0, float f1, int dimension, String world) {
+    public void a(double d0, double d1, double d2, float f0, float f1, int dimension, String world, TeleportHook.TeleportCause cause) {
         // CanaryMod: TeleportHook
         net.canarymod.api.world.World dim = Canary.getServer().getWorldManager().getWorld(world, net.canarymod.api.world.DimensionType.fromId(dimension), true);
         Location location = new Location(dim, d0, d1, d2, f0, f1);
-        TeleportHook hook = new TeleportHook(c.getPlayer(), location, false);
+        TeleportHook hook = new TeleportHook(c.getPlayer(), location, cause);
 
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {

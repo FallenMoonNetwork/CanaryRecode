@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 
 import java.util.List;
+import net.canarymod.hook.player.TeleportHook;
 
 
 public class CommandServerTp extends CommandBase {
@@ -50,7 +51,7 @@ public class CommandServerTp extends CommandBase {
 
                     entityplayermp.a((Entity) null);
                     // CanaryMod: DERP (MultiWorld fix)
-                    entityplayermp.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName());
+                    entityplayermp.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName(), TeleportHook.TeleportCause.COMMAND);
                     a(icommandsender, "commands.tp.success", new Object[] { entityplayermp.am(), entityplayermp1.am()});
                 }
             } else if (entityplayermp.q != null) {

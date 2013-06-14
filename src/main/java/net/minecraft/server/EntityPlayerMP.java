@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -36,6 +35,7 @@ import net.canarymod.hook.player.PlayerDeathHook;
 import net.canarymod.hook.player.PortalUseHook;
 import net.canarymod.hook.player.SignShowHook;
 import net.canarymod.hook.player.StatGainedHook;
+import net.canarymod.hook.player.TeleportHook;
 
 
 public class EntityPlayerMP extends EntityPlayer implements ICrafting {
@@ -350,7 +350,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                 ChunkCoordinates chunkcoordinates = this.b.getWorld(this.getCanaryWorld().getName(), i0).l();
 
                 if (chunkcoordinates != null) {
-                    this.a.a((double) chunkcoordinates.a, (double) chunkcoordinates.b, (double) chunkcoordinates.c, 0.0F, 0.0F, getCanaryWorld().getType().getId(), getCanaryWorld().getName());
+                    this.a.a((double) chunkcoordinates.a, (double) chunkcoordinates.b, (double) chunkcoordinates.c, 0.0F, 0.0F, getCanaryWorld().getType().getId(), getCanaryWorld().getName(), TeleportHook.TeleportCause.PORTAL);
                 }
 
                 i0 = 1;
@@ -407,7 +407,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             Packet17Sleep packet17sleep = new Packet17Sleep(this, 0, i0, i1, i2);
 
             this.o().q().a((Entity) this, (Packet) packet17sleep);
-            this.a.a(this.u, this.v, this.w, this.A, this.B, getCanaryWorld().getType().getId(), getCanaryWorld().getName());
+            this.a.a(this.u, this.v, this.w, this.A, this.B, getCanaryWorld().getType().getId(), getCanaryWorld().getName(), TeleportHook.TeleportCause.BED);
             this.a.b(packet17sleep);
         }
 
@@ -421,14 +421,14 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
         super.a(flag0, flag1, flag2);
         if (this.a != null) {
-            this.a.a(this.u, this.v, this.w, this.A, this.B, getCanaryWorld().getType().getId(), getCanaryWorld().getName());
+            this.a.a(this.u, this.v, this.w, this.A, this.B, getCanaryWorld().getType().getId(), getCanaryWorld().getName(), TeleportHook.TeleportCause.BED);
         }
     }
 
     public void a(Entity entity) {
         super.a(entity);
         this.a.b(new Packet39AttachEntity(this, this.o));
-        this.a.a(this.u, this.v, this.w, this.A, this.B, getCanaryWorld().getType().getId(), getCanaryWorld().getName());
+        this.a.a(this.u, this.v, this.w, this.A, this.B, getCanaryWorld().getType().getId(), getCanaryWorld().getName(), TeleportHook.TeleportCause.MOUNT_CHANGE);
     }
 
     protected void a(double d0, boolean flag0) {}
@@ -737,7 +737,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     }
 
     public void a(double d0, double d1, double d2) {
-        this.a.a(d0, d1, d2, this.A, this.B, getCanaryWorld().getType().getId(), getCanaryWorld().getName());
+        this.a.a(d0, d1, d2, this.A, this.B, getCanaryWorld().getType().getId(), getCanaryWorld().getName(), TeleportHook.TeleportCause.MOVEMENT);
     }
 
     public void b(Entity entity) {
@@ -879,7 +879,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         ChunkCoordinates chunkcoordinates = srv.l();
 
         if (chunkcoordinates != null) {
-            this.a.a((double) chunkcoordinates.a, (double) chunkcoordinates.b, (double) chunkcoordinates.c, 0.0F, 0.0F, srv.getCanaryWorld().getType().getId(), srv.getCanaryWorld().getName());
+            this.a.a((double) chunkcoordinates.a, (double) chunkcoordinates.b, (double) chunkcoordinates.c, 0.0F, 0.0F, srv.getCanaryWorld().getType().getId(), srv.getCanaryWorld().getName(), TeleportHook.TeleportCause.MOVEMENT);
         }
 
         // CanaryMod: Dimension switch hook.
