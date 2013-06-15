@@ -4,6 +4,7 @@ package net.minecraft.server;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -1029,11 +1030,10 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         ichunkprovider.c(chunkcoordinates.a + 3 >> 4, chunkcoordinates.c - 3 >> 4);
         ichunkprovider.c(chunkcoordinates.a - 3 >> 4, chunkcoordinates.c + 3 >> 4);
         ichunkprovider.c(chunkcoordinates.a + 3 >> 4, chunkcoordinates.c + 3 >> 4);
-        if (world.a(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c) == Block.W.cz) {
+        if (world.a(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c) == Block.W.cz) { //Bed spawn
             ChunkCoordinates chunkcoordinates1 = BlockBed.b(world, chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c, 0);
-
             return chunkcoordinates1;
-        } else {
+        } else { //World spawn
             Material material = world.g(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c);
             Material material1 = world.g(chunkcoordinates.a, chunkcoordinates.b + 1, chunkcoordinates.c);
             boolean flag1 = !material.a() && !material.d();
