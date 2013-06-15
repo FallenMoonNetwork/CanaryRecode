@@ -123,6 +123,61 @@ public class CanaryBlock implements Block {
     }
 
     @Override
+    public boolean isAir() {
+        return type == 0;
+    }
+
+    @Override
+    public BlockMaterial getBlockMaterial() {
+        return net.minecraft.server.Block.r[type].cO.getCanaryBlockMaterial();
+    }
+
+    @Override
+    public Location getLocation() {
+        return new Location(dimension, x, y, z, 0, 0);
+    }
+
+    @Override
+    public Position getPosition() {
+        return new Position(x, y, z);
+    }
+
+    @Override
+    public Block getFacingBlock(BlockFace face) {
+        switch (face) {
+            case BOTTOM:
+                return getRelative(0, -1, 0);
+
+            case EAST:
+                return getRelative(0, 0, -1);
+
+            case NORTH:
+                return getRelative(1, 0, 0);
+
+            case SOUTH:
+                return getRelative(-1, 0, 0);
+
+            case TOP:
+                return getRelative(0, 1, 0);
+
+            case UNKNOWN:
+                break;
+
+            case WEST:
+                return getRelative(0, 0, 1);
+
+            default:
+                break;
+        }
+        return null;
+    }
+
+    @Override
+    public Block getRelative(int x, int y, int z) {
+        return this.dimension.getBlockAt(getX() + x, getY() + y, getZ() + z);
+    }
+
+    @Override
     public String toString() {
         return String.format("Block[type=%d, x=%d, y=%d, z=%d, world=%s, dim=%d]", this.type, this.x, this.y, this.z, this.dimension.getName(), this.dimension.getType().getId());
     }
@@ -174,50 +229,5 @@ public class CanaryBlock implements Block {
         hash = 97 * hash + this.z;
         hash = 97 * hash + this.type;
         return hash;
-    }
-
-    @Override
-    public Location getLocation() {
-        return new Location(dimension, x, y, z, 0, 0);
-    }
-
-    @Override
-    public Position getPosition() {
-        return new Position(x, y, z);
-    }
-
-    @Override
-    public Block getFacingBlock(BlockFace face) {
-        switch (face) {
-            case BOTTOM:
-                return getRelative(0, -1, 0);
-
-            case EAST:
-                return getRelative(0, 0, -1);
-
-            case NORTH:
-                return getRelative(1, 0, 0);
-
-            case SOUTH:
-                return getRelative(-1, 0, 0);
-
-            case TOP:
-                return getRelative(0, 1, 0);
-
-            case UNKNOWN:
-                break;
-
-            case WEST:
-                return getRelative(0, 0, 1);
-
-            default:
-                break;
-        }
-        return null;
-    }
-
-    @Override
-    public Block getRelative(int x, int y, int z) {
-        return this.dimension.getBlockAt(getX() + x, getY() + y, getZ() + z);
     }
 }

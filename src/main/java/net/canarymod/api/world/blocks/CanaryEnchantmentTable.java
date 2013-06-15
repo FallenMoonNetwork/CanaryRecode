@@ -1,6 +1,7 @@
 package net.canarymod.api.world.blocks;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
@@ -85,6 +86,60 @@ public class CanaryEnchantmentTable extends CanaryContainerBlock implements Ench
     @Override
     public int[] getEnchantLevels() {
         return container.g;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getNumBookshelves() {
+        return getBookshelves().length;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Block[] getBookshelves() {
+        ArrayList<Block> bookshelves = new ArrayList<Block>();
+        for (int i1 = -1; i1 <= 1; ++i1) {
+            for (int i2 = -1; i2 <= 1; ++i2) {
+                if ((i1 != 0 || i2 != 0) && getWorld().getBlockAt(getX() + i2, getY(), getZ() + i1).isAir() && getWorld().getBlockAt(getX() + i2, getY() + 1, getZ() + i1).isAir()) {
+                    Block bookshelf = getWorld().getBlockAt(getX() + i2 * 2, getY(), getZ() + i1 * 2);
+                    if (bookshelf.getType() == BlockType.Bookshelf) {
+                        bookshelves.add(bookshelf);
+                    }
+
+                    bookshelf = getWorld().getBlockAt(getX() + i2 * 2, getY() + 1, getZ() + i1 * 2);
+                    if (bookshelf.getType() == BlockType.Bookshelf) {
+                        bookshelves.add(bookshelf);
+                    }
+
+                    if (i2 != 0 && i1 != 0) {
+                        bookshelf = getWorld().getBlockAt(getX() + i2 * 2, getY(), getZ() + i1);
+                        if (bookshelf.getType() == BlockType.Bookshelf) {
+                            bookshelves.add(bookshelf);
+                        }
+
+                        bookshelf = getWorld().getBlockAt(getX() + i2 * 2, getY() + 1, getZ() + i1);
+                        if (bookshelf.getType() == BlockType.Bookshelf) {
+                            bookshelves.add(bookshelf);
+                        }
+
+                        bookshelf = getWorld().getBlockAt(getX() + i2, getY(), getZ() + i1 * 2);
+                        if (bookshelf.getType() == BlockType.Bookshelf) {
+                            bookshelves.add(bookshelf);
+                        }
+
+                        bookshelf = getWorld().getBlockAt(getX() + i2, getY() + 1, getZ() + i1 * 2);
+                        if (bookshelf.getType() == BlockType.Bookshelf) {
+                            bookshelves.add(bookshelf);
+                        }
+                    }
+                }
+            }
+        }
+        return bookshelves.toArray(new Block[bookshelves.size()]);
     }
 
     /**
