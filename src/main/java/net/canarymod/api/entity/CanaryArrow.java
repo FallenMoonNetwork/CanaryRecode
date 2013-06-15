@@ -78,4 +78,12 @@ public class CanaryArrow extends CanaryEntity implements Arrow {
     public EntityArrow getHandle() {
         return (EntityArrow) entity;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+	@Override
+	public void setProjectileHeading(double motionX, double motionY, double motionZ, float rotationYaw, float rotationPitch) {
+		getHandle().c(motionX, motionY, motionZ, rotationYaw, rotationPitch);
+	}
 }

@@ -45,4 +45,12 @@ public abstract class CanaryEntityThrowable extends CanaryEntity implements Enti
     public EntityLiving getThrower() {
         return (EntityLiving) ((net.minecraft.server.EntityThrowable) entity).h().getCanaryEntity();
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+	@Override
+	public void setProjectileHeading(double motionX, double motionY, double motionZ, float rotationYaw, float rotationPitch) {
+		((net.minecraft.server.EntityThrowable) entity).c(motionX, motionY, motionZ, rotationYaw, rotationPitch);
+	}
 }
