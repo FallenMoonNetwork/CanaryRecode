@@ -15,7 +15,7 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DamageHook;
-import net.canarymod.hook.entity.DimensionSwitch;
+import net.canarymod.hook.entity.DimensionSwitchHook;
 import net.canarymod.hook.entity.EntityMountHook;
 
 
@@ -1529,7 +1529,7 @@ public abstract class Entity {
 
             // CanaryMod: Dimension switch hook.
             Location goingTo = this.simulatePortalUse(i0, MinecraftServer.D().getWorld(this.getCanaryWorld().getName(), i0));
-            CancelableHook hook = new DimensionSwitch(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
+            CancelableHook hook = new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
 
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {

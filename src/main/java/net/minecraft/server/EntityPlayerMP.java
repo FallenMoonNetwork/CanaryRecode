@@ -27,7 +27,7 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.WorldConfiguration;
 import net.canarymod.hook.CancelableHook;
-import net.canarymod.hook.entity.DimensionSwitch;
+import net.canarymod.hook.entity.DimensionSwitchHook;
 import net.canarymod.hook.player.ExperienceHook;
 import net.canarymod.hook.player.HealthChangeHook;
 import net.canarymod.hook.player.InventoryHook;
@@ -362,7 +362,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             Location goingTo = simulatePortalUse(i0, MinecraftServer.D().getWorld(getCanaryWorld().getName(), i0));
 
             PortalUseHook hook = new PortalUseHook(getPlayer(), goingTo);
-            CancelableHook hook1 = new DimensionSwitch(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
+            CancelableHook hook1 = new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
 
             Canary.hooks().callHook(hook);
             Canary.hooks().callHook(hook1);
@@ -884,7 +884,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
         // CanaryMod: Dimension switch hook.
         Location goingTo = this.simulatePortalUse(srv.q, MinecraftServer.D().getWorld(this.getCanaryWorld().getName(), srv.q));
-        CancelableHook hook = new DimensionSwitch(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
+        CancelableHook hook = new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
 
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
