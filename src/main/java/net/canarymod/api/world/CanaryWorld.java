@@ -2,7 +2,6 @@ package net.canarymod.api.world;
 
 
 import java.util.ArrayList;
-
 import net.canarymod.WorldCacheTimer;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
@@ -16,6 +15,9 @@ import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.living.monster.EntityMob;
+import net.canarymod.api.entity.vehicle.Boat;
+import net.canarymod.api.entity.vehicle.Minecart;
+import net.canarymod.api.entity.vehicle.Vehicle;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.blocks.Block;
@@ -163,6 +165,58 @@ public class CanaryWorld implements World {
             }
         }
         return mobs;
+    }
+
+    @SuppressWarnings("rawtypes")
+    @Override
+    public ArrayList<Boat> getBoatList() {
+        ArrayList<Boat> boats = new ArrayList<Boat>();
+
+        for (Object o : (ArrayList) ((ArrayList) world.e).clone()) {
+            if (((net.minecraft.server.Entity) o).getCanaryEntity() instanceof Boat) {
+                boats.add((Boat) ((net.minecraft.server.Entity) o).getCanaryEntity());
+            }
+        }
+        return boats;
+    }
+
+    @SuppressWarnings("rawtypes")
+    @Override
+    public ArrayList<Minecart> getMinecartList() {
+        ArrayList<Minecart> minecarts = new ArrayList<Minecart>();
+
+        for (Object o : (ArrayList) ((ArrayList) world.e).clone()) {
+            if (((net.minecraft.server.Entity) o).getCanaryEntity() instanceof Minecart) {
+                minecarts.add((Minecart) ((net.minecraft.server.Entity) o).getCanaryEntity());
+            }
+        }
+        return minecarts;
+    }
+
+    @SuppressWarnings("rawtypes")
+    @Override
+    public ArrayList<Vehicle> getVehicleList() {
+        ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+
+        for (Object o : (ArrayList) ((ArrayList) world.e).clone()) {
+            if (((net.minecraft.server.Entity) o).getCanaryEntity() instanceof Vehicle) {
+                vehicles.add((Vehicle) ((net.minecraft.server.Entity) o).getCanaryEntity());
+            }
+        }
+        return vehicles;
+    }
+
+    @SuppressWarnings("rawtypes")
+    @Override
+    public ArrayList<EntityItem> getItemList() {
+        ArrayList<EntityItem> items = new ArrayList<EntityItem>();
+
+        for (Object o : (ArrayList) ((ArrayList) world.e).clone()) {
+            if (((net.minecraft.server.Entity) o).getCanaryEntity() instanceof EntityItem) {
+                items.add((EntityItem) ((net.minecraft.server.Entity) o).getCanaryEntity());
+            }
+        }
+        return items;
     }
 
     @Override

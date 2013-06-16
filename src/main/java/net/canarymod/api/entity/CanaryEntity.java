@@ -2,6 +2,8 @@ package net.canarymod.api.entity;
 
 
 import java.util.UUID;
+import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.Item;
 import net.canarymod.api.nbt.BaseTag;
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.nbt.CompoundTag;
@@ -178,6 +180,10 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public EntityItem dropLoot(int itemId, int amount) {
         return new CanaryEntityItem(entity.b(itemId, amount));
+    }
+
+    public EntityItem dropLoot(Item item) {
+        return new CanaryEntityItem(entity.a(((CanaryItem) item).getHandle(), 0.0F));
     }
 
     @Override

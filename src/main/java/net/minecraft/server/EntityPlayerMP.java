@@ -269,10 +269,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public void a(DamageSource damagesource) {
         // CanaryMod: PlayerDeathHook
-        PlayerDeathHook hook = new PlayerDeathHook(getPlayer(), this.bt.b());
-
+        PlayerDeathHook hook = new PlayerDeathHook(getPlayer(), damagesource.getCanaryDamageSource(), this.bt.b());
         Canary.hooks().callHook(hook);
-
         // Check Death Message enabled
         if (Configuration.getServerConfig().isDeathMessageEnabled()) {
             this.b.ad().k(hook.getDeathMessage());
