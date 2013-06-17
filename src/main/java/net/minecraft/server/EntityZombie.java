@@ -284,7 +284,7 @@ public class EntityZombie extends EntityMob {
         }
     }
 
-    protected void a(int i0) {
+    public void a(int i0) { // CanaryMod: protected => public
         this.d = i0;
         this.u().b(14, Byte.valueOf((byte) 1));
         this.o(Potion.t.H);
@@ -296,7 +296,7 @@ public class EntityZombie extends EntityMob {
         return this.u().a(14) == 1;
     }
 
-    protected void p() {
+    public void p() { // CanaryMod: protected => public
         EntityVillager entityvillager = new EntityVillager(this.q);
 
         entityvillager.k(this);
@@ -337,4 +337,15 @@ public class EntityZombie extends EntityMob {
 
         return i0;
     }
+
+    // CanaryMod
+    public int getConvertTicks() {
+        return this.d;
+    }
+
+    public void stopConversion() {
+        this.u().b(12, Byte.valueOf((byte) 0));
+        this.d = -1;
+    }
+    //
 }

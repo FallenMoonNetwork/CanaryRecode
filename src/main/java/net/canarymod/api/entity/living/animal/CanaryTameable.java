@@ -34,8 +34,24 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      * {@inheritDoc}
      */
     @Override
+    public String getOwnerName() {
+        return ((EntityTameable) entity).o();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setOwner(EntityLiving entity) {
-        ((EntityTameable) entity).a(entity.getName());
+        setOwner(entity.getName());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setOwner(String name) {
+        ((EntityTameable) entity).a(name);
     }
 
     /**
