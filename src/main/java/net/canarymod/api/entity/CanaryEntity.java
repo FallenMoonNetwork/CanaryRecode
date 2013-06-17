@@ -138,17 +138,33 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public void teleportTo(double x, double y, double z) {
-        teleportTo(x, y, z, 0f, 0f);
+        teleportTo(x, y, z, 0.0F, 0.0F);
+    }
+
+    @Override
+    public void teleportTo(double x, double y, double z, World world) {
+        teleportTo(x, y, z, 0.0F, 0.0F, world);
+    }
+
+    @Override
+    public void teleportTo(double x, double y, double z, float pitch, float rotation, World dim) {
+        this.entity.a(((CanaryWorld) dim).getHandle());
+        this.entity.b(x, y, z, rotation, pitch);
+    }
+
+    @Override
+    public void teleportTo(Location location) {
+        teleportTo(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch(), location.getWorld());
     }
 
     @Override
     public void teleportTo(Position pos) {
-        teleportTo(pos.getX(), pos.getY(), pos.getZ(), 0f, 0f);
+        teleportTo(pos.getX(), pos.getY(), pos.getZ(), 0.0F, 0.0F);
     }
 
     @Override
     public void setDimension(World dim) {
-        this.entity.setDimension((CanaryWorld) dim);
+        this.entity.a(((CanaryWorld) dim).getHandle());
     }
 
     @Override

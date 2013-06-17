@@ -6,6 +6,7 @@ import net.canarymod.WorldCacheTimer;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.EntityTracker;
+import net.canarymod.api.GameMode;
 import net.canarymod.api.PlayerManager;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;

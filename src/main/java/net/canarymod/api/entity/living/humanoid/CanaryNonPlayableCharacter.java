@@ -275,7 +275,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public void privateMessage(Player player, String msg) {
-        player.sendMessage("[PM] " + prefix.replace("%name", getName()) + msg);
+        player.message("(MSG) " + prefix.replace("%name", getName()) + msg);
     }
 
     /**

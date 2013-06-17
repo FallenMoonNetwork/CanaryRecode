@@ -867,9 +867,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         return a.getCanaryServerHandler();
     }
 
-    @Override
     public void setDimension(CanaryWorld world) {
-        super.setDimension(world);
+        super.a(world.getHandle());
         this.c.a((WorldServer) world.getHandle());
     }
 
