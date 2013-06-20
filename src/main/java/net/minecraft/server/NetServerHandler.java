@@ -125,7 +125,7 @@ public class NetServerHandler extends NetHandler {
 
             // CanaryMod: PlayerMoveHook
             if (Math.floor(n) != Math.floor(c.getPlayer().getX()) || Math.floor(o) != Math.floor(c.getPlayer().getY()) || Math.floor(p) != Math.floor(c.getPlayer().getZ())) {
-                Location from = new Location(c.getPlayer().getWorld(), n, o, p, c.getPlayer().getRotation(), c.getPlayer().getPitch());
+                Location from = new Location(c.getPlayer().getWorld(), n, o, p, c.getPlayer().getPitch(), c.getPlayer().getRotation());// Remember rotation and pitch are swapped in Location constructor...
                 PlayerMoveHook hook = new PlayerMoveHook(c.getPlayer(), from, c.getPlayer().getLocation());
 
                 Canary.hooks().callHook(hook);
@@ -319,7 +319,7 @@ public class NetServerHandler extends NetHandler {
     public void a(double d0, double d1, double d2, float f0, float f1, int dimension, String world, TeleportHook.TeleportCause cause) {
         // CanaryMod: TeleportHook
         net.canarymod.api.world.World dim = Canary.getServer().getWorldManager().getWorld(world, net.canarymod.api.world.DimensionType.fromId(dimension), true);
-        Location location = new Location(dim, d0, d1, d2, f0, f1);
+        Location location = new Location(dim, d0, d1, d2, f1, f0); // Remember rotation and pitch are swapped in Location constructor...
         TeleportHook hook = new TeleportHook(c.getPlayer(), location, cause);
 
         Canary.hooks().callHook(hook);
