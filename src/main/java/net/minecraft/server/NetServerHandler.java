@@ -721,7 +721,7 @@ public class NetServerHandler extends NetHandler {
         if (this.c.bM.d == packet102windowclick.a && this.c.bM.c(this.c)) {
 
             // CanaryMod: SlotClick
-            ItemStack itemstack = packet102windowclick.b != -999 ? this.c.bM.a(packet102windowclick.b).c() : null;
+            ItemStack itemstack = packet102windowclick.b > -1 ? this.c.bM.a(packet102windowclick.b).c() : null;
             SlotType slot_type = SlotHelper.getSlotType(this.c.bM, packet102windowclick.b);
             SecondarySlotType finer_slot = SlotHelper.getSpecificSlotType(this.c.bM, packet102windowclick.b);
             GrabMode grab_mode = GrabMode.fromInt(packet102windowclick.f);
