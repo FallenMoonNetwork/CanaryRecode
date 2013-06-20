@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import net.canarymod.api.inventory.CanaryEnchantment;
 import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
+import net.canarymod.api.world.blocks.EnchantmentTable;
 import net.canarymod.hook.player.EnchantHook;
 
 
@@ -19,7 +20,6 @@ public class ContainerEnchantment extends Container {
     private Random l = new Random();
     public long f;
     public int[] g = new int[3];
-    private CanaryEnchantmentTable cet; // CanaryMod: Enchantment Table wrapper
 
     public ContainerEnchantment(InventoryPlayer inventoryplayer, World world, int i0, int i1, int i2) {
         this.h = world;
@@ -40,7 +40,7 @@ public class ContainerEnchantment extends Container {
             this.a(new Slot(inventoryplayer, i3, 8 + i3 * 18, 142));
         }
 
-        this.cet = new CanaryEnchantmentTable(this); // CanaryMod: set wrapper
+        this.inventory = new CanaryEnchantmentTable(this); // CanaryMod: Set inventory instance
     }
 
     public void a(ICrafting icrafting) {
@@ -136,7 +136,7 @@ public class ContainerEnchantment extends Container {
                     for (EnchantmentData endat : list) {
                         cench.add(new CanaryEnchantment(endat));
                     }
-                    EnchantHook hook = new EnchantHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), this.cet, cench);
+                    EnchantHook hook = new EnchantHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), (EnchantmentTable) this.inventory, cench);
 
                     if (!hook.isCanceled() && hook.isValid(false)) {
                         list.clear();

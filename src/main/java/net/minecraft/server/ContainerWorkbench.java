@@ -15,7 +15,6 @@ public class ContainerWorkbench extends Container {
     public int h; // CanaryMod: private -> public
     public int i; // CanaryMod: private -> public
     public int j; // CanaryMod: private -> public
-    private CanaryWorkbench bench; // CanaryMod inventory instance
 
     public ContainerWorkbench(InventoryPlayer inventoryplayer, World world, int i0, int i1, int i2) {
         this.g = world;
@@ -43,7 +42,7 @@ public class ContainerWorkbench extends Container {
             this.a(new Slot(inventoryplayer, i3, 8 + i3 * 18, 142));
         }
 
-        this.bench = new CanaryWorkbench(this); // CanaryMod: create once, use forever
+        this.inventory = new CanaryWorkbench(this); // CanaryMod: Set inventory instance
         this.a((IInventory) this.a);
     }
 
@@ -59,7 +58,7 @@ public class ContainerWorkbench extends Container {
         EntityPlayerMP player = (EntityPlayerMP) this.e.get(0);
 
         // call CraftHook
-        CraftHook hook = new CraftHook(player.getPlayer(), bench, result == null ? null : result.getCanaryItem());
+        CraftHook hook = new CraftHook(player.getPlayer(), (CanaryWorkbench) inventory, result == null ? null : result.getCanaryItem());
         Canary.hooks().callHook(hook);
         if (hook.isCanceled()) {
             result = null;
@@ -136,10 +135,5 @@ public class ContainerWorkbench extends Container {
 
     public boolean a(ItemStack itemstack, Slot slot) {
         return slot.f != this.f && super.a(itemstack, slot);
-    }
-
-    // CanaryMod
-    public CanaryWorkbench getCanaryWorkbench() {
-        return bench;
     }
 }

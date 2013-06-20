@@ -15,6 +15,11 @@ import net.canarymod.Canary;
 import net.canarymod.LineTracer;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryNetServerHandler;
+import net.canarymod.api.inventory.slot.ButtonPress;
+import net.canarymod.api.inventory.slot.SecondarySlotType;
+import net.canarymod.api.inventory.slot.GrabMode;
+import net.canarymod.api.inventory.slot.SlotHelper;
+import net.canarymod.api.inventory.slot.SlotType;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
@@ -27,6 +32,7 @@ import net.canarymod.hook.player.DisconnectionHook;
 import net.canarymod.hook.player.PlayerLeftClickHook;
 import net.canarymod.hook.player.PlayerMoveHook;
 import net.canarymod.hook.player.SignChangeHook;
+import net.canarymod.hook.player.SlotClickHook;
 import net.canarymod.hook.player.TeleportHook;
 
 
@@ -713,6 +719,33 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void a(Packet102WindowClick packet102windowclick) {
         if (this.c.bM.d == packet102windowclick.a && this.c.bM.c(this.c)) {
+
+            // CanaryMod: SlotClick
+            SlotType slot_type = SlotHelper.getSlotType(this.c.bM, packet102windowclick.b);
+            SecondarySlotType finer_slot = SlotHelper.getSpecificSlotType(this.c.bM, packet102windowclick.b);
+            GrabMode grab_mode = GrabMode.fromInt(packet102windowclick.f);
+            ButtonPress mouse_click = ButtonPress.matchButton(grab_mode, packet102windowclick.c, packet102windowclick.b);
+            SlotClickHook sch = new SlotClickHook(this.c.getPlayer(), this.c.bM.getInventory(), slot_type, finer_slot, grab_mode, mouse_click, (short) packet102windowclick.b, packet102windowclick.d);
+            Canary.hooks().callHook(sch);
+            if (sch.isCanceled()) {
+                if (sch.doUpdate()) {
+                    if (packet102windowclick.f == 0) {
+                        this.c.bM.updateSlot(packet102windowclick.b);
+                        this.c.updateSlot(-1, -1, this.c.bK.o());
+                    } else {
+                        ArrayList arraylist = new ArrayList();
+
+                        for (int i = 0; i < this.c.bM.c.size(); ++i) {
+                            arraylist.add(((Slot) this.c.bM.c.get(i)).c());
+                        }
+
+                        this.c.a(this.c.bM, arraylist);
+                    }
+                }
+                return;
+            }
+            //
+
             ItemStack itemstack = this.c.bM.a(packet102windowclick.b, packet102windowclick.c, packet102windowclick.f, this.c);
 
             if (ItemStack.b(packet102windowclick.e, itemstack)) {
