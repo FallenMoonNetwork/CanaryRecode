@@ -16,8 +16,8 @@ import net.canarymod.LineTracer;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.inventory.slot.ButtonPress;
-import net.canarymod.api.inventory.slot.SecondarySlotType;
 import net.canarymod.api.inventory.slot.GrabMode;
+import net.canarymod.api.inventory.slot.SecondarySlotType;
 import net.canarymod.api.inventory.slot.SlotHelper;
 import net.canarymod.api.inventory.slot.SlotType;
 import net.canarymod.api.world.blocks.Block;
@@ -721,11 +721,12 @@ public class NetServerHandler extends NetHandler {
         if (this.c.bM.d == packet102windowclick.a && this.c.bM.c(this.c)) {
 
             // CanaryMod: SlotClick
+            ItemStack itemstack = packet102windowclick.b != -999 ? this.c.bM.a(packet102windowclick.b).c() : null;
             SlotType slot_type = SlotHelper.getSlotType(this.c.bM, packet102windowclick.b);
             SecondarySlotType finer_slot = SlotHelper.getSpecificSlotType(this.c.bM, packet102windowclick.b);
             GrabMode grab_mode = GrabMode.fromInt(packet102windowclick.f);
             ButtonPress mouse_click = ButtonPress.matchButton(grab_mode, packet102windowclick.c, packet102windowclick.b);
-            SlotClickHook sch = new SlotClickHook(this.c.getPlayer(), this.c.bM.getInventory(), slot_type, finer_slot, grab_mode, mouse_click, (short) packet102windowclick.b, packet102windowclick.d);
+            SlotClickHook sch = new SlotClickHook(this.c.getPlayer(), this.c.bM.getInventory(), itemstack != null ? itemstack.getCanaryItem() : null, slot_type, finer_slot, grab_mode, mouse_click, (short) packet102windowclick.b, packet102windowclick.d);
             Canary.hooks().callHook(sch);
             if (sch.isCanceled()) {
                 if (sch.doUpdate()) {
@@ -746,7 +747,7 @@ public class NetServerHandler extends NetHandler {
             }
             //
 
-            ItemStack itemstack = this.c.bM.a(packet102windowclick.b, packet102windowclick.c, packet102windowclick.f, this.c);
+            itemstack = this.c.bM.a(packet102windowclick.b, packet102windowclick.c, packet102windowclick.f, this.c);
 
             if (ItemStack.b(packet102windowclick.e, itemstack)) {
                 this.c.a.b(new Packet106Transaction(packet102windowclick.a, packet102windowclick.d, true));
