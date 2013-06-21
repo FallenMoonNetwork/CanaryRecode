@@ -44,8 +44,14 @@ public final class SlotHelper {
             return SlotType.NULL;
         }
         
+        // Outside window
         if (slotIndex == -999) {
             return SlotType.OUTSIDE;
+        }
+
+        // In Window/non-slot
+        if (slotIndex == -1) {
+            return SlotType.NULL;
         }
 
         Slot slot = container.a(slotIndex);
@@ -84,6 +90,12 @@ public final class SlotHelper {
             return SecondarySlotType.NULL;
         }
 
+        // In Window, non-slot
+        if (slotIndex == -1) {
+            return SecondarySlotType.NULL;
+        }
+
+        // Outside window
         if (slotIndex == -999) {
             return SecondarySlotType.OUTSIDE;
         }

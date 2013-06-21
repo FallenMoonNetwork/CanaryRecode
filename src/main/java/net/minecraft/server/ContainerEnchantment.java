@@ -4,6 +4,7 @@ package net.minecraft.server;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.canarymod.Canary;
 import net.canarymod.api.inventory.CanaryEnchantment;
 import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
 import net.canarymod.api.world.blocks.EnchantmentTable;
@@ -137,7 +138,7 @@ public class ContainerEnchantment extends Container {
                         cench.add(new CanaryEnchantment(endat));
                     }
                     EnchantHook hook = new EnchantHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), (EnchantmentTable) this.inventory, cench);
-
+                    Canary.hooks().callHook(hook);
                     if (!hook.isCanceled() && hook.isValid(false)) {
                         list.clear();
                         for (net.canarymod.api.inventory.Enchantment ench : hook.getEnchantmentList()) {
