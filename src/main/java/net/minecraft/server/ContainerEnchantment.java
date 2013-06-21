@@ -4,7 +4,6 @@ package net.minecraft.server;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import net.canarymod.Canary;
 import net.canarymod.api.inventory.CanaryEnchantment;
 import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
 import net.canarymod.api.world.blocks.EnchantmentTable;
@@ -46,6 +45,7 @@ public class ContainerEnchantment extends Container {
 
     public void a(ICrafting icrafting) {
         super.a(icrafting);
+        // TODO: Hook
         icrafting.a(this, 0, this.g[0]);
         icrafting.a(this, 1, this.g[1]);
         icrafting.a(this, 2, this.g[2]);
@@ -54,6 +54,7 @@ public class ContainerEnchantment extends Container {
     public void b() {
         super.b();
 
+        // Hook
         for (int i0 = 0; i0 < this.e.size(); ++i0) {
             ICrafting icrafting = (ICrafting) this.e.get(i0);
 
@@ -137,8 +138,7 @@ public class ContainerEnchantment extends Container {
                     for (EnchantmentData endat : list) {
                         cench.add(new CanaryEnchantment(endat));
                     }
-                    EnchantHook hook = new EnchantHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), (EnchantmentTable) this.inventory, cench);
-                    Canary.hooks().callHook(hook);
+                    EnchantHook hook = (EnchantHook) new EnchantHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), (EnchantmentTable) this.inventory, cench).call();
                     if (!hook.isCanceled() && hook.isValid(false)) {
                         list.clear();
                         for (net.canarymod.api.inventory.Enchantment ench : hook.getEnchantmentList()) {
