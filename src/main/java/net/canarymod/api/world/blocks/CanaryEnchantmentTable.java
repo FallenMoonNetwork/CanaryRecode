@@ -30,6 +30,7 @@ public class CanaryEnchantmentTable extends CanaryContainerBlock implements Ench
      */
     public CanaryEnchantmentTable(ContainerEnchantment container) {
         super(container.a);
+        this.container = container;
     }
 
     /**
