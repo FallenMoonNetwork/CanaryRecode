@@ -267,6 +267,15 @@ public class CanaryListTag<T extends CanaryBaseTag> extends CanaryBaseTag implem
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Override
+    public ListTag<T> copy() {
+        return new CanaryListTag((NBTTagList) getHandle().b());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public NBTTagList getHandle() {
         return (NBTTagList) tag;

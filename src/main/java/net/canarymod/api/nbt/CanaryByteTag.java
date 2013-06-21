@@ -54,6 +54,14 @@ public class CanaryByteTag extends CanaryBaseTag implements ByteTag {
      * {@inheritDoc}
      */
     @Override
+    public ByteTag copy() {
+        return new CanaryByteTag((NBTTagByte) getHandle().b());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public NBTTagByte getHandle() {
         return (NBTTagByte) tag;
     }

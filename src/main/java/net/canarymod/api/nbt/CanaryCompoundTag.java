@@ -276,6 +276,14 @@ public class CanaryCompoundTag extends CanaryBaseTag implements CompoundTag {
      * {@inheritDoc}
      */
     @Override
+    public CompoundTag copy() {
+        return new CanaryCompoundTag((NBTTagCompound) getHandle().b());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public NBTTagCompound getHandle() {
         return (NBTTagCompound) tag;
     }
