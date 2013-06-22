@@ -15,6 +15,11 @@ import net.canarymod.Canary;
 import net.canarymod.LineTracer;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryNetServerHandler;
+import net.canarymod.api.inventory.slot.ButtonPress;
+import net.canarymod.api.inventory.slot.GrabMode;
+import net.canarymod.api.inventory.slot.SecondarySlotType;
+import net.canarymod.api.inventory.slot.SlotHelper;
+import net.canarymod.api.inventory.slot.SlotType;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
@@ -27,6 +32,7 @@ import net.canarymod.hook.player.DisconnectionHook;
 import net.canarymod.hook.player.PlayerLeftClickHook;
 import net.canarymod.hook.player.PlayerMoveHook;
 import net.canarymod.hook.player.SignChangeHook;
+import net.canarymod.hook.player.SlotClickHook;
 import net.canarymod.hook.player.TeleportHook;
 
 
@@ -125,7 +131,7 @@ public class NetServerHandler extends NetHandler {
 
             // CanaryMod: PlayerMoveHook
             if (Math.floor(n) != Math.floor(c.getPlayer().getX()) || Math.floor(o) != Math.floor(c.getPlayer().getY()) || Math.floor(p) != Math.floor(c.getPlayer().getZ())) {
-                Location from = new Location(c.getPlayer().getWorld(), n, o, p, c.getPlayer().getRotation(), c.getPlayer().getPitch());
+                Location from = new Location(c.getPlayer().getWorld(), n, o, p, c.getPlayer().getPitch(), c.getPlayer().getRotation());// Remember rotation and pitch are swapped in Location constructor...
                 PlayerMoveHook hook = new PlayerMoveHook(c.getPlayer(), from, c.getPlayer().getLocation());
 
                 Canary.hooks().callHook(hook);
@@ -319,7 +325,7 @@ public class NetServerHandler extends NetHandler {
     public void a(double d0, double d1, double d2, float f0, float f1, int dimension, String world, TeleportHook.TeleportCause cause) {
         // CanaryMod: TeleportHook
         net.canarymod.api.world.World dim = Canary.getServer().getWorldManager().getWorld(world, net.canarymod.api.world.DimensionType.fromId(dimension), true);
-        Location location = new Location(dim, d0, d1, d2, f0, f1);
+        Location location = new Location(dim, d0, d1, d2, f1, f0); // Remember rotation and pitch are swapped in Location constructor...
         TeleportHook hook = new TeleportHook(c.getPlayer(), location, cause);
 
         Canary.hooks().callHook(hook);
@@ -713,7 +719,35 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void a(Packet102WindowClick packet102windowclick) {
         if (this.c.bM.d == packet102windowclick.a && this.c.bM.c(this.c)) {
-            ItemStack itemstack = this.c.bM.a(packet102windowclick.b, packet102windowclick.c, packet102windowclick.f, this.c);
+
+            // CanaryMod: SlotClick
+            ItemStack itemstack = packet102windowclick.b > -1 ? this.c.bM.a(packet102windowclick.b).c() : null;
+            SlotType slot_type = SlotHelper.getSlotType(this.c.bM, packet102windowclick.b);
+            SecondarySlotType finer_slot = SlotHelper.getSpecificSlotType(this.c.bM, packet102windowclick.b);
+            GrabMode grab_mode = GrabMode.fromInt(packet102windowclick.f);
+            ButtonPress mouse_click = ButtonPress.matchButton(grab_mode, packet102windowclick.c, packet102windowclick.b);
+            SlotClickHook sch = new SlotClickHook(this.c.getPlayer(), this.c.bM.getInventory(), itemstack != null ? itemstack.getCanaryItem() : null, slot_type, finer_slot, grab_mode, mouse_click, (short) packet102windowclick.b, packet102windowclick.d);
+            Canary.hooks().callHook(sch);
+            if (sch.isCanceled()) {
+                if (sch.doUpdate()) {
+                    if (packet102windowclick.f == 0) {
+                        this.c.bM.updateSlot(packet102windowclick.b);
+                        this.c.updateSlot(-1, -1, this.c.bK.o());
+                    } else {
+                        ArrayList arraylist = new ArrayList();
+
+                        for (int i = 0; i < this.c.bM.c.size(); ++i) {
+                            arraylist.add(((Slot) this.c.bM.c.get(i)).c());
+                        }
+
+                        this.c.a(this.c.bM, arraylist);
+                    }
+                }
+                return;
+            }
+            //
+
+            itemstack = this.c.bM.a(packet102windowclick.b, packet102windowclick.c, packet102windowclick.f, this.c);
 
             if (ItemStack.b(packet102windowclick.e, itemstack)) {
                 this.c.a.b(new Packet106Transaction(packet102windowclick.a, packet102windowclick.d, true));

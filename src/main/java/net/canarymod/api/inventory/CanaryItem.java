@@ -23,8 +23,8 @@ public class CanaryItem implements Item {
 
     /**
      * Constructs a new CanaryItem
-     *
-     * @param oItemStack
+     * 
+     * @param itemStack
      */
     public CanaryItem(ItemStack itemStack) {
         this.type = ItemType.fromId(itemStack.c);
@@ -424,6 +424,7 @@ public class CanaryItem implements Item {
         for (int index = 0; index < stackarray.length; index++) {
             if (stackarray[index] != null) {
                 items[index] = stackarray[index].getCanaryItem();
+                items[index].setSlot(index);
             }
         }
         return items;

@@ -1603,10 +1603,6 @@ public abstract class Entity {
         return q.getCanaryWorld();
     }
 
-    public void setDimension(CanaryWorld dim) {
-        this.q = dim.getHandle();
-    }
-
     public CanaryEntity getCanaryEntity() {
         return entity;
     }

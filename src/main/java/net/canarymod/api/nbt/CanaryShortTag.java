@@ -54,6 +54,14 @@ public class CanaryShortTag extends CanaryBaseTag implements ShortTag {
      * {@inheritDoc}
      */
     @Override
+    public ShortTag copy() {
+        return new CanaryShortTag((NBTTagShort) getHandle().b());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public NBTTagShort getHandle() {
         return (NBTTagShort) tag;
     }

@@ -14,6 +14,8 @@
   <inceptionYear>2012</inceptionYear>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <minecraft.server.version>1.5.2</minecraft.server.version>
+    <api.version>0.8</api.version>
   </properties>
   <licenses>
     <license>
@@ -137,15 +139,30 @@
           <archive>
             <addMavenDescriptor>true</addMavenDescriptor>
             <manifest>
-              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
+              <addDefaultImplementationEntries>false</addDefaultImplementationEntries>
             </manifest>
             <manifestEntries>
+              <Implementation-Title>CanaryMod</Implementation-Title>
+              <Implementation-Version>${project.version}</Implementation-Version>
+              <Implementation-Vendor>CanaryMod Team</Implementation-Vendor>
+              <Implementation-Vendor-Id>net.canarymod</Implementation-Vendor-Id>
+              <Specification-Title>CanaryLib</Specification-Title>
+              <Specification-Version>${api.version}</Specification-Version>
+              <Specification-Vendor>CanaryMod Team</Specification-Vendor>
+              <Specification-Vendor-Id>net.canarymod</Specification-Vendor-Id>
+              <Server-Version>${minecraft.server.version}</Server-Version>
               <Main-Class>net.canarymod.Main</Main-Class>
-              <Class-Path>../lib/*</Class-Path>
-              <Server-Version>1.5.2</Server-Version>
               <Sealed>true</Sealed>
             </manifestEntries>
+            <manifestSections>
+              <manifestSection>
+                <name>net/canarymod/</name>
+                <manifestEntries>
+                  <Sealed>true</Sealed>
+                </manifestEntries>
+              </manifestSection>
+            </manifestSections>
           </archive>
         </configuration>
       </plugin>

@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
+import net.canarymod.api.GameMode;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
 import net.canarymod.api.PlayerListEntry;
@@ -125,7 +126,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 receivers = hook.getReceiverList();
                 String formattedMessage = hook.buildSendMessage();
                 for (Player player : receivers) {
-                    player.sendMessage(formattedMessage);
+                    player.message(formattedMessage);
                 }
                 Canary.logInfo(TextFormat.removeFormatting(formattedMessage));
             }
@@ -140,9 +141,14 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
-    public void sendMessage(String message) {
+    public void message(String message) {
         getNetServerHandler().sendMessage(message);
         // Should cover all chat logging
+    }
+
+    @Override
+    public void notice(String message) {
+        message(Colors.LIGHT_RED + message);
     }
 
     @Override
@@ -218,7 +224,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         ItemStack item = ((CanaryPlayerInventory) getInventory()).getItemInHand();
 
         if (item != null) {
-            return item.getCanaryItem();
+            Item cItem = item.getCanaryItem();
+            cItem.setSlot(((CanaryPlayerInventory) getInventory()).getSelectedHotbarSlot());
+            return cItem;
         }
         return null;
     }
@@ -305,7 +313,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         } catch (Throwable ex) {
             Canary.logStackTrace("Exception in command handler: ", ex);
             if (isAdmin()) {
-                sendMessage(Colors.LIGHT_RED + "Exception occured. " + ex.getMessage());
+                message(Colors.LIGHT_RED + "Exception occured. " + ex.getMessage());
             }
             return false;
         }
@@ -510,7 +518,6 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             switchWorlds(dim);
         }
         teleportTo(x, y, z, 0.0F, 0.0F);
-
     }
 
     @Override
@@ -559,12 +566,6 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void kick(String reason) {
         ((EntityPlayerMP) entity).a.c(reason);
-    }
-
-    @Override
-    public void notice(String message) {
-        sendMessage(Colors.LIGHT_RED + message);
-
     }
 
     @Override
@@ -693,12 +694,16 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
-    public int getMode() {
+    public int getModeId() {
         return ((EntityPlayerMP) entity).c.b().a();
     }
 
+    public GameMode getMode() {
+        return GameMode.fromId(((EntityPlayerMP) entity).c.b().a());
+    }
+
     @Override
-    public void setMode(int mode) {
+    public void setModeId(int mode) {
         // Adjust mode, make it null if number is invalid
         EnumGameType gt = WorldSettings.a(mode);
         EntityPlayerMP ent = ((EntityPlayerMP) entity);
@@ -709,8 +714,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
     }
 
+    public void setMode(GameMode mode) {
+        this.setModeId(mode.getId());
+    }
+
     public void refreshCreativeMode() {
-        if (getMode() == 1 || Configuration.getWorldConfig(getWorld().getFqName()).getGameMode() == World.GameMode.CREATIVE) {
+        if (getModeId() == 1 || Configuration.getWorldConfig(getWorld().getFqName()).getGameMode() == GameMode.CREATIVE) {
             ((EntityPlayerMP) entity).c.a(WorldSettings.a(1));
         } else {
             ((EntityPlayerMP) entity).c.a(WorldSettings.a(0));
@@ -725,11 +734,6 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public boolean isInVehicle() {
         return ((EntityPlayerMP) entity).o != null;
-    }
-
-    @Override
-    public void message(String message) {
-        sendMessage(message);
     }
 
     @Override

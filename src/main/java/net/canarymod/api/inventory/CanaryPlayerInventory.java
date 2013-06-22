@@ -2,7 +2,6 @@ package net.canarymod.api.inventory;
 
 
 import java.util.Arrays;
-
 import net.minecraft.server.InventoryPlayer;
 import net.minecraft.server.ItemStack;
 
@@ -33,8 +32,9 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
     public void setArmorSlot(Item item) {// WAT
     }
 
-    public ItemStack getItemInHand() {
-        return ((InventoryPlayer) inventory).h();
+    @Override
+    public int getSelectedHotbarSlot() {
+        return getInventoryHandle().c;
     }
 
     /**
@@ -88,8 +88,11 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
         getInventoryHandle().k_();
     }
 
+    public ItemStack getItemInHand() {
+        return ((InventoryPlayer) inventory).h();
+    }
+
     public InventoryPlayer getInventoryHandle() {
         return (InventoryPlayer) inventory;
     }
-
 }

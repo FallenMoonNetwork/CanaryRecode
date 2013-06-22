@@ -54,6 +54,14 @@ public class CanaryIntArrayTag extends CanaryBaseTag implements IntArrayTag {
      * {@inheritDoc}
      */
     @Override
+    public IntArrayTag copy() {
+        return new CanaryIntArrayTag((NBTTagIntArray) getHandle().b());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public NBTTagIntArray getHandle() {
         return (NBTTagIntArray) tag;
     }

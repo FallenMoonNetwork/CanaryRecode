@@ -5,6 +5,7 @@ import net.canarymod.api.CanaryServer;
 import net.canarymod.api.channels.CanaryChannelManager;
 import net.canarymod.api.factory.CanaryFactory;
 import net.canarymod.api.factory.Factory;
+import net.canarymod.api.scoreboard.CanaryScoreboardManager;
 import net.canarymod.bansystem.BanManager;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.commandsys.CommandList;
@@ -56,6 +57,7 @@ public class CanaryMod extends Canary {
         // Initialize the plugin loader and scan for plugins
         this.loader = new PluginLoader();
         this.loader.scanPlugins();
+        this.scoreboardManager = new CanaryScoreboardManager();
     }
 
     /**

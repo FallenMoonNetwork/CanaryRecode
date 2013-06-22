@@ -20,6 +20,7 @@ import net.canarymod.api.inventory.CanaryEnderChestInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.statistics.CanaryStat;
 import net.canarymod.api.world.CanaryWorld;
+import net.canarymod.api.world.blocks.CanaryAnvil;
 import net.canarymod.api.world.blocks.CanaryDoubleChest;
 import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
@@ -269,10 +270,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public void a(DamageSource damagesource) {
         // CanaryMod: PlayerDeathHook
-        PlayerDeathHook hook = new PlayerDeathHook(getPlayer(), this.bt.b());
-
+        PlayerDeathHook hook = new PlayerDeathHook(getPlayer(), damagesource.getCanaryDamageSource(), this.bt.b());
         Canary.hooks().callHook(hook);
-
         // Check Death Message enabled
         if (Configuration.getServerConfig().isDeathMessageEnabled()) {
             this.b.ad().k(hook.getDeathMessage());
@@ -444,10 +443,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void b(int i0, int i1, int i2) {
         // CanaryMod: InventoryHook
         ContainerWorkbench container = new ContainerWorkbench(this.bK, this.q, i0, i1, i2);
-        CanaryWorkbench bench = new CanaryWorkbench(container);
-        InventoryHook hook = new InventoryHook(getPlayer(), bench, false);
-
-        Canary.hooks().callHook(hook);
+        CanaryWorkbench bench = (CanaryWorkbench) container.getInventory();
+        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), bench, false).call();
         if (hook.isCanceled()) {
             return;
         }
@@ -463,10 +460,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void a(int i0, int i1, int i2, String s0) {
         // CanaryMod: InventoryHook
         ContainerEnchantment container = new ContainerEnchantment(this.bK, this.q, i0, i1, i2);
-        CanaryEnchantmentTable table = new CanaryEnchantmentTable(container);
-        InventoryHook hook = new InventoryHook(getPlayer(), table, false);
-
-        Canary.hooks().callHook(hook);
+        CanaryEnchantmentTable table = (CanaryEnchantmentTable) container.getInventory();
+        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), table, false).call();
         if (hook.isCanceled()) {
             return;
         }
@@ -480,10 +475,17 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     }
 
     public void c(int i0, int i1, int i2) {
-        // TODO: Anvil wrapper
+        // CanaryMod: InventoryHook
+        ContainerRepair container = new ContainerRepair(this.bK, this.q, i0, i1, i2, this);
+        CanaryAnvil anvil = (CanaryAnvil) container.getInventory();
+        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), anvil, false).call();
+        if (hook.isCanceled()) {
+            return;
+        }
+        //
         this.ct();
         this.a.b(new Packet100OpenWindow(this.cu, 8, "Repairing", 9, true));
-        this.bM = new ContainerRepair(this.bK, this.q, i0, i1, i2, this);
+        this.bM = container;
         this.bM.d = this.cu;
         this.bM.a((ICrafting) this);
     }
@@ -494,21 +496,24 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         }
         // CanaryMod: InventoryHook
         Inventory inventory = null;
+        ContainerChest container = new ContainerChest(this.bK, iinventory);
 
         if (iinventory instanceof TileEntityChest) {
             inventory = ((TileEntityChest) iinventory).getCanaryChest();
+            container.setInventory(inventory);
         } else if (iinventory instanceof InventoryLargeChest) {
             inventory = new CanaryDoubleChest((InventoryLargeChest) iinventory);
+            container.setInventory(inventory);
         } else if (iinventory instanceof InventoryEnderChest) {
             inventory = new CanaryEnderChestInventory((InventoryEnderChest) iinventory, getPlayer());
+            container.setInventory(inventory);
         } else if (iinventory instanceof EntityMinecartChest) {
             inventory = (CanaryChestMinecart) ((EntityMinecartChest) iinventory).getCanaryEntity();
+            container.setInventory(inventory);
         }
 
         if (inventory != null) {
-            InventoryHook hook = new InventoryHook(getPlayer(), inventory, false);
-
-            Canary.hooks().callHook(hook);
+            InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), inventory, false).call();
             if (hook.isCanceled()) {
                 return;
             }
@@ -517,12 +522,19 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
         this.ct();
         this.a.b(new Packet100OpenWindow(this.cu, 0, iinventory.b(), iinventory.j_(), iinventory.c()));
-        this.bM = new ContainerChest(this.bK, iinventory);
+        this.bM = container;
         this.bM.d = this.cu;
         this.bM.a((ICrafting) this);
     }
 
     public void a(TileEntityHopper tileentityhopper) {
+        // CanaryMod: InventoryHook
+        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), tileentityhopper.getCanaryHopper(), false).call();
+        if (hook.isCanceled()) {
+            return;
+        }
+        //
+
         this.ct();
         this.a.b(new Packet100OpenWindow(this.cu, 9, tileentityhopper.b(), tileentityhopper.j_(), tileentityhopper.c()));
         this.bM = new ContainerHopper(this.bK, tileentityhopper);
@@ -531,6 +543,12 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     }
 
     public void a(EntityMinecartHopper entityminecarthopper) {
+        // CanaryMod: InventoryHook
+        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), (Inventory) entityminecarthopper.getCanaryEntity(), false).call();
+        if (hook.isCanceled()) {
+            return;
+        }
+        //
         this.ct();
         this.a.b(new Packet100OpenWindow(this.cu, 9, entityminecarthopper.b(), entityminecarthopper.j_(), entityminecarthopper.c()));
         this.bM = new ContainerHopper(this.bK, entityminecarthopper);
@@ -540,9 +558,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public void a(TileEntityFurnace tileentityfurnace) {
         // CanaryMod: InventoryHook
-        InventoryHook hook = new InventoryHook(getPlayer(), tileentityfurnace.getCanaryFurnace(), false);
-
-        Canary.hooks().callHook(hook);
+        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), tileentityfurnace.getCanaryFurnace(), false).call();
         if (hook.isCanceled()) {
             return;
         }
@@ -557,9 +573,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public void a(TileEntityDispenser tileentitydispenser) {
         // CanaryMod: InventoryHook
-        InventoryHook hook = new InventoryHook(getPlayer(), tileentitydispenser.getCanaryDispenser(), false);
-
-        Canary.hooks().callHook(hook);
+        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), tileentitydispenser.getCanaryDispenser(), false).call();
         if (hook.isCanceled()) {
             return;
         }
@@ -574,9 +588,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public void a(TileEntityBrewingStand tileentitybrewingstand) {
         // CanaryMod: InventoryHook
-        InventoryHook hook = new InventoryHook(getPlayer(), tileentitybrewingstand.getCanaryBrewingStand(), false);
-
-        Canary.hooks().callHook(hook);
+        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), tileentitybrewingstand.getCanaryBrewingStand(), false).call();
         if (hook.isCanceled()) {
             return;
         }
@@ -590,7 +602,12 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     }
 
     public void a(TileEntityBeacon tileentitybeacon) {
-        // TODO: Beacon
+        // CanaryMod: InventoryHook
+        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), tileentitybeacon.getCanaryBeacon(), false).call();
+        if (hook.isCanceled()) {
+            return;
+        }
+        //
         this.ct();
         this.a.b(new Packet100OpenWindow(this.cu, 7, tileentitybeacon.b(), tileentitybeacon.j_(), tileentitybeacon.c()));
         this.bM = new ContainerBeacon(this.bK, tileentitybeacon);
@@ -869,9 +886,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         return a.getCanaryServerHandler();
     }
 
-    @Override
     public void setDimension(CanaryWorld world) {
-        super.setDimension(world);
+        super.a(world.getHandle());
         this.c.a((WorldServer) world.getHandle());
     }
 

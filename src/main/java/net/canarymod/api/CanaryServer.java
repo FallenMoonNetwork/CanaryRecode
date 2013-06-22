@@ -239,7 +239,7 @@ public class CanaryServer implements Server {
     @Override
     public void broadcastMessage(String message) {
         for (Player player : getPlayerList()) {
-            player.sendMessage(message);
+            player.message(message);
         }
 
     }
