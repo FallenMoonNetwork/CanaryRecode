@@ -257,7 +257,12 @@ public abstract class CanaryContainerEntity implements Inventory {
     public Item getSlot(int index) {
         ItemStack stack = inventory.a(index);
 
-        return stack != null ? stack.getCanaryItem() : null;
+        if (stack != null) {
+            Item slot_item = stack.getCanaryItem();
+            slot_item.setSlot(index);
+            return slot_item;
+        }
+        return null;
     }
 
     /**

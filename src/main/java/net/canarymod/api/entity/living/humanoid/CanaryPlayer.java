@@ -224,7 +224,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         ItemStack item = ((CanaryPlayerInventory) getInventory()).getItemInHand();
 
         if (item != null) {
-            return item.getCanaryItem();
+            Item cItem = item.getCanaryItem();
+            cItem.setSlot(((CanaryPlayerInventory) getInventory()).getSelectedHotbarSlot());
+            return cItem;
         }
         return null;
     }
