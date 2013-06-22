@@ -55,7 +55,7 @@ public abstract class World implements IBlockAccess {
     public final Profiler C;
     private final Vec3Pool J = new Vec3Pool(300, 2000);
     private final Calendar K = Calendar.getInstance();
-    protected Scoreboard D = new Scoreboard();
+    public Scoreboard D = new Scoreboard(); // Protected => public
     private final ILogAgent L;
     private ArrayList M = new ArrayList();
     private boolean N;
