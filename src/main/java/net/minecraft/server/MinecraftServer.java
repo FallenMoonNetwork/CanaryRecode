@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
@@ -22,6 +21,7 @@ import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.CanaryWorldManager;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.WorldConfiguration;
+import net.canarymod.hook.system.LoadWorldHook;
 import net.canarymod.tasks.ServerTaskManager;
 import net.visualillusionsent.utils.PropertiesFile;
 
@@ -176,6 +176,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         world.r = config.getDifficulty().getId(); // Set difficulty directly based on WorldConfiguration setting
         this.e(world); // Generate terrain
         worldManager.addWorld(world.getCanaryWorld());
+        new LoadWorldHook(world.getCanaryWorld()).call();
     }
 
     protected void e(WorldServer worldserver) {
