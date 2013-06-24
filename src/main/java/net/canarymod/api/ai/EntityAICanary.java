@@ -83,7 +83,7 @@ public class EntityAICanary extends EntityAIBase {
     }
 
     private void log(String msg, Throwable t) {
-        Canary.logStackTrace(msg, t);
+        Canary.logStacktrace(msg, t);
     }
 
 }

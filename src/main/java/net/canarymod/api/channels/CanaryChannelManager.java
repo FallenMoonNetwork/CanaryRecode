@@ -41,7 +41,7 @@ public class CanaryChannelManager extends ChannelManager {
                 }
             }
         } catch (CustomPayloadChannelException ex) {
-            Canary.logStackTrace(ex.getMessage(), ex);
+            Canary.logStacktrace(ex.getMessage(), ex);
         }
         return false;
     }
@@ -66,7 +66,7 @@ public class CanaryChannelManager extends ChannelManager {
                 }
             }
         } catch (CustomPayloadChannelException ex) {
-            Canary.logStackTrace(ex.getMessage(), ex);
+            Canary.logStacktrace(ex.getMessage(), ex);
         }
         return toRet;
     }

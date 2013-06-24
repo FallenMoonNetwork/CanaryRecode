@@ -311,7 +311,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             return true;
 
         } catch (Throwable ex) {
-            Canary.logStackTrace("Exception in command handler: ", ex);
+            Canary.logStacktrace("Exception in command handler: ", ex);
             if (isAdmin()) {
                 message(Colors.LIGHT_RED + "Exception occured. " + ex.getMessage());
             }

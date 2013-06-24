@@ -1057,7 +1057,7 @@ public class NetServerHandler extends NetHandler {
                 try {
                     throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());
                 } catch (CustomPayloadChannelException ex1) {
-                    Canary.logStackTrace(ex1.getMessage(), ex);
+                    Canary.logStacktrace(ex1.getMessage(), ex);
                 }
             }
         } else if ("UNREGISTER".equals(packet250custompayload.a)) {
@@ -1069,7 +1069,7 @@ public class NetServerHandler extends NetHandler {
                 try {
                     throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());
                 } catch (CustomPayloadChannelException ex1) {
-                    Canary.logStackTrace(ex1.getMessage(), ex);
+                    Canary.logStacktrace(ex1.getMessage(), ex);
                 }
             }
         } else {
@@ -1079,7 +1079,7 @@ public class NetServerHandler extends NetHandler {
                 try {
                     throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());
                 } catch (CustomPayloadChannelException ex1) {
-                    Canary.logStackTrace(ex1.getMessage(), ex);
+                    Canary.logStacktrace(ex1.getMessage(), ex);
                 }
             }
         }// CanaryMod: End

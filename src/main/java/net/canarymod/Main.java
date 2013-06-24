@@ -3,7 +3,6 @@ package net.canarymod;
 
 import java.awt.GraphicsEnvironment;
 import java.io.File;
-
 import net.canarymod.api.inventory.Enchantment;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.serialize.EnchantmentSerializer;
@@ -57,7 +56,7 @@ public class Main {
         try {
             MinecraftServer.main(args);
         } catch (Throwable t) {
-            Canary.logStackTrace("Exception while starting the server: ", t);
+            Canary.logStacktrace("Exception while starting the server: ", t);
         }
         //Warps need the DimensionType data which is created upon servre start
         mod.initWarps();

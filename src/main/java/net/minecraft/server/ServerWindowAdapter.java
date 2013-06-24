@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import net.canarymod.Canary;
 import net.canarymod.config.Configuration;
 
@@ -17,7 +16,7 @@ final class ServerWindowAdapter extends WindowAdapter {
                 Thread.sleep(100L);
             } catch (InterruptedException interruptedexception) {
                 if (Configuration.getServerConfig().isDebugMode()) {
-                    Canary.logStackTrace("", interruptedexception);
+                    Canary.logStacktrace("", interruptedexception);
                 }
             }
         }

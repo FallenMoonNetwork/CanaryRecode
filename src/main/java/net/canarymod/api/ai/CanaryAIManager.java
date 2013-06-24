@@ -27,9 +27,9 @@ public class CanaryAIManager implements AIManager {
                 tasks.a(priority, new EntityAICanary(ai.newInstance()));
                 return true;
             } catch (InstantiationException ex) {
-                Canary.logStackTrace("Exception adding new AI taks in Canary's AIManager: ", ex);
+                Canary.logStacktrace("Exception adding new AI taks in Canary's AIManager: ", ex);
             } catch (IllegalAccessException ex) {
-                Canary.logStackTrace("Exception adding new AI taks in Canary's AIManager: ", ex);
+                Canary.logStacktrace("Exception adding new AI taks in Canary's AIManager: ", ex);
             }
         }
         return false;

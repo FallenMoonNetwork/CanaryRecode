@@ -82,7 +82,7 @@ public class CanaryMod extends Canary {
         try {
             this.commandManager.registerCommands(new CommandList(), Canary.getServer(), false);
         } catch (CommandDependencyException e) {
-            Canary.logStackTrace(e.getMessage(), e);
+            Canary.logStacktrace(e.getMessage(), e);
         }
     }
 
