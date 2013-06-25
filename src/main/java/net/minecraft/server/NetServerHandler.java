@@ -111,6 +111,10 @@ public class NetServerHandler extends NetHandler {
             // //
             this.d.ad().e(this.c);
             this.b = true;
+
+            // CanaryMod unregester Custom Payload registrations
+            Canary.channels().unregisterClientAll(serverHandler);
+            // End
         }
     }
 
