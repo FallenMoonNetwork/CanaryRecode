@@ -291,6 +291,11 @@ public abstract class CanaryEntity implements Entity {
     }
 
     @Override
+    public boolean isDead() {
+        return entity.M;
+    }
+
+    @Override
     public boolean spawn() {
         entity.b(getX() + 0.5d, getY(), getZ() + 0.5d, getRotation(), 0f);
         return entity.q.d(entity);
