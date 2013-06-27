@@ -5,13 +5,16 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.Main;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.gui.GUIControl;
 import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.recipes.CanaryRecipe;
 import net.canarymod.api.inventory.recipes.CraftingRecipe;
+import net.canarymod.api.inventory.recipes.Recipe;
 import net.canarymod.api.inventory.recipes.ShapedRecipeHelper;
 import net.canarymod.api.inventory.recipes.SmeltRecipe;
 import net.canarymod.api.nbt.CanaryCompoundTag;
@@ -28,9 +31,12 @@ import net.canarymod.tasks.ServerTaskManager;
 import net.minecraft.server.CraftingManager;
 import net.minecraft.server.FurnaceRecipes;
 import net.minecraft.server.GuiLogOutputHandler;
+import net.minecraft.server.IRecipe;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerConfigurationManager;
+import net.minecraft.server.ShapedRecipes;
+import net.minecraft.server.ShapelessRecipes;
 import net.minecraft.server.TcpConnection;
 import net.visualillusionsent.utils.TaskManager;
 
@@ -317,10 +323,13 @@ public class CanaryServer implements Server {
         Canary.logNotice(message);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void addRecipe(CraftingRecipe recipe) {
+    public Recipe addRecipe(CraftingRecipe recipe) {
         if (recipe.hasShape()) {
-            CraftingManager.a().a(((CanaryItem) recipe.getResult()).getHandle(), ShapedRecipeHelper.createRecipeShape(recipe));
+            return CraftingManager.a().a(((CanaryItem) recipe.getResult()).getHandle(), ShapedRecipeHelper.createRecipeShape(recipe)).getCanaryRecipe();
         } else {
             ItemStack result = ((CanaryItem) recipe.getResult()).getHandle();
             Object[] rec = new Object[recipe.getItems().length];
@@ -328,13 +337,59 @@ public class CanaryServer implements Server {
             for (int index = 0; index < recipe.getItems().length; index++) {
                 rec[index] = ((CanaryItem) recipe.getItems()[index]).getHandle();
             }
-            CraftingManager.a().b(result, rec);
+            return CraftingManager.a().addShapeless(result, rec).getCanaryRecipe();
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Recipe> getServerRecipes() {
+        List<IRecipe> server_recipes = CraftingManager.a().b();
+        List<Recipe> rtn_recipes = new ArrayList<Recipe>();
+        for (IRecipe recipe : server_recipes) {
+            if (recipe instanceof ShapedRecipes) {
+                rtn_recipes.add(((ShapedRecipes) recipe).getCanaryRecipe());
+            } else if (recipe instanceof ShapelessRecipes) {
+                rtn_recipes.add(((ShapelessRecipes) recipe).getCanaryRecipe());
+            }
+            // if it's neither, something went wrong or its something I haven't included yet
+        }
+        return rtn_recipes;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean removeRecipe(Recipe recipe) {
+        return CraftingManager.a().b().remove(((CanaryRecipe) recipe).getHandle());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addSmeltingRecipe(SmeltRecipe recipe) {
         FurnaceRecipes.a().a(recipe.getItemIDFrom(), ((CanaryItem) recipe.getResult()).getHandle(), recipe.getXP());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<SmeltRecipe> getServerSmeltRecipes() {
+        return FurnaceRecipes.a().getSmeltingRecipes();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean removeSmeltRecipe(SmeltRecipe recipe) {
+        return FurnaceRecipes.a().removeSmeltingRecipe(recipe);
     }
 
     /**

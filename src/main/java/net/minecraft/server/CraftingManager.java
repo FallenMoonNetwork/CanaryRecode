@@ -199,7 +199,11 @@ public class CraftingManager {
         return shapedrecipes;
     }
 
-    public void b(ItemStack itemstack, Object... aobject) { // CanaryMod: package -> public
+    void b(ItemStack itemstack, Object... aobject) {// CanaryMod: pass down to return ShapelessRecipe (signature change breaks things elsewhere)
+        this.addShapeless(itemstack, aobject);
+    }
+
+    public ShapelessRecipes addShapeless(ItemStack itemstack, Object... aobject) { // CanaryMod: safe return without breakage
         ArrayList arraylist = new ArrayList();
         Object[] aobject1 = aobject;
         int i0 = aobject.length;
@@ -220,7 +224,11 @@ public class CraftingManager {
             }
         }
 
-        this.b.add(new ShapelessRecipes(itemstack, arraylist));
+        // CanaryMod: Allow Shapeless to be returned
+        ShapelessRecipes shapelessrecipes = new ShapelessRecipes(itemstack, arraylist);
+        this.b.add(shapelessrecipes);
+        return shapelessrecipes;
+        //
     }
 
     public ItemStack a(InventoryCrafting inventorycrafting, World world) {
