@@ -460,11 +460,8 @@ public class NetServerHandler extends NetHandler {
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
                     this.c.c.a(this.c, worldserver, itemstack, i0, i1, i2, i3, packet15place.j(), packet15place.k(), packet15place.l());
-                } else {
-                    // CanaryMod: No point telling the client to update the blocks that they weren't allowed to place!
-                    this.c.a.b(new Packet53BlockChange(i0, i1, i2, worldserver));
-                    return;
                 }
+                // NOTE: calling the BlockChange packet here and returning was causing ghosting (fake visible blocks)
             }
             //
 
