@@ -282,6 +282,27 @@ public abstract class CanaryEntity implements Entity {
         return entity.af();
     }
 
+    @Override
+    public boolean isRidden() {
+        return entity.n != null;
+    }
+
+    @Override
+    public Entity getRiding() {
+        if (entity.o != null) {
+            return entity.o.getCanaryEntity();
+        }
+        return null;
+    }
+
+    @Override
+    public Entity getRider() {
+        if (entity.n != null) {
+            return entity.n.getCanaryEntity();
+        }
+        return null;
+    }
+
     /**
      * Destroys this entity
      */
