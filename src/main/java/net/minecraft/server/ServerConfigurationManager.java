@@ -24,6 +24,7 @@ import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.bansystem.Ban;
 import net.canarymod.config.Configuration;
+import net.canarymod.config.ServerConfiguration;
 import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.hook.player.PlayerListEntryHook;
 import net.canarymod.hook.player.PlayerRespawnHook;
@@ -304,27 +305,30 @@ public abstract class ServerConfigurationManager {
         if (hook.getKickReason() != null) {
             return hook.getKickReason();
         }
+        ServerConfiguration srv = Configuration.getServerConfig();
+
         if (Canary.bans().isBanned(s0)) {
             Ban ban = Canary.bans().getBan(s0);
 
             if (ban.getTimestamp() != -1) {
-                return ban.getReason() + ", " + Translator.translateAndFormat("ban expires", ToolBox.formatTimestamp(ban.getTimestamp()));
+                return ban.getReason() + ", " +
+            srv.getBanExpireDateMessage() + ToolBox.formatTimestamp(ban.getTimestamp());
             }
             return ban.getReason();
         }
-        if (Canary.bans().isIpBanned(s2)) {
-            return Translator.translate("you are banned");
-        }
 
+        if (Canary.bans().isIpBanned(s2)) {
+            return Translator.translate(srv.getDefaultBannedMessage());
+        }
         if (!Canary.whitelist().isWhitelisted(s0) && Configuration.getServerConfig().isWhitelistEnabled()) {
-            return Translator.translate("not on whitelist");
+            return srv.getNotWhitelistedMessage();
         }
 
         if (this.a.size() >= this.b) {
             if (Canary.reservelist().isSlotReserved(s0) && Configuration.getServerConfig().isReservelistEnabled()) {
                 return null;
             }
-            return Translator.translate("server full");
+            return srv.getServerFullMessage();
         }
         return null;
 
