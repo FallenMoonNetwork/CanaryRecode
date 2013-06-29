@@ -637,10 +637,11 @@ public abstract class EntityLiving extends Entity {
     }
 
     public void b(int i0) {
-        this.aS = i0;
+        // CanaryMod: Swap these around
         if (i0 > this.aW()) {
             i0 = this.aW();
         }
+        this.aS = i0;
     }
 
     public boolean a(DamageSource damagesource, int i0) {
@@ -2131,7 +2132,7 @@ public abstract class EntityLiving extends Entity {
     }
     // CanaryMod
     public void setMaxHealth(int maxHealth) {
-        this.aS = maxHealth;
+        this.maxHealth = maxHealth;
     }
 
     public float getDropChance(int slot) {
