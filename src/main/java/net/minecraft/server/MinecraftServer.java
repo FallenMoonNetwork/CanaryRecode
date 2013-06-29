@@ -22,6 +22,7 @@ import net.canarymod.api.world.CanaryWorldManager;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.WorldConfiguration;
 import net.canarymod.hook.system.LoadWorldHook;
+import net.canarymod.hook.system.ServerTickHook;
 import net.canarymod.tasks.ServerTaskManager;
 import net.visualillusionsent.utils.PropertiesFile;
 
@@ -427,9 +428,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     //CanaryMod: ticks world
+    private long previousTick = -1L; // Tick Time Tracker
     public void r() {
-        this.a.a("levels");
+        new ServerTickHook(previousTick).call(); // CanaryMod: ServerTick
+        long curTrack = System.nanoTime(); // CanaryMod: Start tick track
 
+        this.a.a("levels");
         int i0;
 
         // CanaryMod use worldManager instead
@@ -489,6 +493,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
 
         this.a.b();
+        previousTick = System.nanoTime() - curTrack; // CanaryMod: End tick track
     }
 
     public boolean s() {
