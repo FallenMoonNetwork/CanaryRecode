@@ -3,7 +3,7 @@ package net.canarymod;
 
 import java.awt.GraphicsEnvironment;
 import java.io.File;
-
+import java.util.logging.Level;
 import net.canarymod.api.inventory.Enchantment;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.serialize.EnchantmentSerializer;
@@ -45,6 +45,7 @@ public class Main {
 
         // Initialize Logging Early, TODO: the new File(".") is a directory setting, the cli arg is --universe
         la = new LogAgent("Minecraft-Server", (String) null, (new File(new File("."), "server.log")).getAbsolutePath());
+        la.a().setLevel(Level.ALL);
         if (!MinecraftServer.isHeadless()) {
             GuiLogOutputHandler.getOutputHandler().poke();
         }
