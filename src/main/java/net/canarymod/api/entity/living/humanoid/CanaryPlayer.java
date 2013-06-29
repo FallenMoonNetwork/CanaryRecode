@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
@@ -44,11 +45,12 @@ import net.minecraft.server.EnumGameType;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.Packet201PlayerInfo;
 import net.minecraft.server.WorldSettings;
+import net.visualillusionsent.utils.StringUtils;
 
 
 /**
  * Canary Player wrapper.
- * 
+ *
  * @author Chris (damagefilter)
  * @author Jason (darkdiplomat)
  */
@@ -285,14 +287,14 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public boolean executeCommand(String[] command) {
         try {
             if (Configuration.getServerConfig().isLogging()) {
-                Canary.logInfo("Command used by " + getName() + ": " + Canary.glueString(command, 0, " "));
+                Canary.logInfo("Command used by " + getName() + ": " + StringUtils.joinString(command, " ", 0));
             }
 
             String commandName = command[0];
 
             // It's a vanilla command, forward it to the server
             if (commandName.startsWith("/#") && (hasPermission("canary.commands.vanilla." + commandName.replace("/#", "")) || hasPermission("canary.vanilla.op"))) {
-                return Canary.getServer().consoleCommand(Canary.glueString(command, 0, " ").replace("/#", ""), this);
+                return Canary.getServer().consoleCommand(StringUtils.joinString(command, " ", 0).replace("/#", ""), this);
             }
             commandName = commandName.replace("/", "");
             PlayerCommandHook hook = new PlayerCommandHook(this, command);
@@ -771,7 +773,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             }
         }
 
-        permissions = Canary.permissionManager().getPlayerProvider(getName());
+        permissions = Canary.permissionManager().getPlayerProvider(getName(), getWorld().getFqName());
         if (data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
             prefix = ToolBox.stringToNull(data[0]);
         }

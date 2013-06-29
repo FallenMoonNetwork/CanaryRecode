@@ -308,7 +308,7 @@ public abstract class ServerConfigurationManager {
             Ban ban = Canary.bans().getBan(s0);
 
             if (ban.getTimestamp() != -1) {
-                return ban.getReason() + ", " + Translator.translateAndFormat("ban expires", Canary.formatTimestamp(ban.getTimestamp()));
+                return ban.getReason() + ", " + Translator.translateAndFormat("ban expires", ToolBox.formatTimestamp(ban.getTimestamp()));
             }
             return ban.getReason();
         }

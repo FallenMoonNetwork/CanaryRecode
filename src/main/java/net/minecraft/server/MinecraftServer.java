@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.CanaryServer;
@@ -22,6 +23,7 @@ import net.canarymod.api.world.CanaryWorldManager;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.WorldConfiguration;
 import net.canarymod.hook.system.LoadWorldHook;
+import net.canarymod.logger.Logman;
 import net.canarymod.hook.system.ServerTickHook;
 import net.canarymod.tasks.ServerTaskManager;
 import net.visualillusionsent.utils.PropertiesFile;
@@ -239,11 +241,11 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     try {
                         worldserver.a(true, (IProgressUpdate) null);
                     } catch (MinecraftException minecraftexception) {
-                        Canary.println(minecraftexception.getMessage());
+                        Logman.println(minecraftexception.getMessage());
                         this.al().b(minecraftexception.getMessage());
                     }
                 } else {
-                    Canary.println("World is null");
+                    Logman.println("World is null");
                 }
             }
         }
@@ -493,7 +495,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
 
         this.a.b();
-        previousTick = System.nanoTime() - curTrack; // CanaryMod: End tick track
     }
 
     public boolean s() {

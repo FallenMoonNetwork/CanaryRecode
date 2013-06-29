@@ -3,6 +3,7 @@ package net.canarymod;
 
 import java.awt.GraphicsEnvironment;
 import java.io.File;
+
 import net.canarymod.api.inventory.Enchantment;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.serialize.EnchantmentSerializer;
@@ -19,15 +20,10 @@ public class Main {
     private static void initBird() {
         // Initialize the bird
         mod = new CanaryMod();
-
         Canary.setCanary(mod);
         // Add system internal serializers
         Canary.addSerializer(new ItemSerializer(), Item.class);
         Canary.addSerializer(new EnchantmentSerializer(), Enchantment.class);
-
-        // Initialize providers that require Canary to be set already
-        mod.initUserAndGroupsManager();
-        mod.initKits();
     }
 
     /**
@@ -58,6 +54,11 @@ public class Main {
         } catch (Throwable t) {
             Canary.logStacktrace("Exception while starting the server: ", t);
         }
+        //They need the server to be set
+        mod.initPermissions();
+        // Initialize providers that require Canary to be set already
+        mod.initUserAndGroupsManager();
+        mod.initKits();
         //Warps need the DimensionType data which is created upon servre start
         mod.initWarps();
         // commands require a valid commandOwner which is the server.

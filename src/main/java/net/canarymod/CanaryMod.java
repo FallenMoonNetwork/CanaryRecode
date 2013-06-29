@@ -45,7 +45,7 @@ public class CanaryMod extends Canary {
         this.config = new Configuration();
         // Initialize the subsystems that do not rely on others
         this.commandManager = new CommandManager();
-        this.permissionLoader = new PermissionManager();
+//        this.permissionManager = new PermissionManager();
         this.hookExecutor = new HookExecutor();
         this.helpManager = new HelpManager();
         this.banManager = new BanManager();
@@ -84,6 +84,10 @@ public class CanaryMod extends Canary {
         } catch (CommandDependencyException e) {
             Canary.logStacktrace(e.getMessage(), e);
         }
+    }
+
+    public void initPermissions() {
+        this.permissionManager = new PermissionManager();
     }
 
     @Override
