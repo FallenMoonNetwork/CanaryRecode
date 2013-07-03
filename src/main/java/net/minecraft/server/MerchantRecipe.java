@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 public class MerchantRecipe {
 
     // CanaryMod: private => public
@@ -51,7 +50,7 @@ public class MerchantRecipe {
     }
 
     public boolean b(MerchantRecipe merchantrecipe) {
-        return this.a(merchantrecipe) && (this.a.a < merchantrecipe.a.a || this.b != null && this.b.a < merchantrecipe.b.a);
+        return this.a(merchantrecipe) && (this.a.b < merchantrecipe.a.b || this.b != null && this.b.b < merchantrecipe.b.b);
     }
 
     public void f() {

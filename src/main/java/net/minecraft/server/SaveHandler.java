@@ -287,7 +287,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
             }
             file1.renameTo(file2);
         } catch (Exception exception) {
-            MinecraftServer.D().al().b("Failed to save player data for " + player);
+            MinecraftServer.F().an().b("Failed to save player data for " + player);
         }
     }
     // CanaryMod end

@@ -16,6 +16,7 @@ import javax.swing.border.TitledBorder;
 public class MinecraftServerGui extends JComponent {
 
     private static boolean a;
+    private static MinecraftServerGui minecraftservergui; // CanaryMod
     private DedicatedServer b;
 
     public static void a(DedicatedServer dedicatedserver) {
@@ -25,7 +26,7 @@ public class MinecraftServerGui extends JComponent {
             ;
         }
 
-        MinecraftServerGui minecraftservergui = new MinecraftServerGui(dedicatedserver);
+        minecraftservergui = new MinecraftServerGui(dedicatedserver);
 
         a = true;
         JFrame jframe = new JFrame("Minecraft server");
@@ -87,5 +88,9 @@ public class MinecraftServerGui extends JComponent {
 
     static DedicatedServer a(MinecraftServerGui minecraftservergui) {
         return minecraftservergui.b;
+    }
+
+    static MinecraftServerGui getServerGui(MinecraftServer minecraftserver) {
+        return minecraftservergui;
     }
 }

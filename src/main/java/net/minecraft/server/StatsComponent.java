@@ -36,7 +36,8 @@ public class StatsComponent extends JComponent {
         System.gc();
         this.d[0] = "Memory use: " + i0 / 1024L / 1024L + " mb (" + Runtime.getRuntime().freeMemory() * 100L / Runtime.getRuntime().maxMemory() + "% free)";
         this.d[1] = "Threads: " + TcpConnection.a.get() + " + " + TcpConnection.b.get();
-        this.d[2] = "Avg tick: " + a.format(this.a(this.e.j) * 1.0E-6D) + " ms";
+        //this.d[2] = "Avg tick: " + a.format(this.a(this.e.j) * 1.0E-6D) + " ms";
+        this.d[2] = "BROKEN - Needs Further Review";
         this.d[3] = "Avg sent: " + (int) this.a(this.e.f) + ", Avg size: " + (int) this.a(this.e.g);
         this.d[4] = "Avg rec: " + (int) this.a(this.e.h) + ", Avg size: " + (int) this.a(this.e.i);
         

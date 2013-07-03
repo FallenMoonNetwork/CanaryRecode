@@ -1,11 +1,8 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
 import net.canarymod.api.CanaryPlayerManager;
-
 
 public class PlayerManager {
 
@@ -18,8 +15,9 @@ public class PlayerManager {
     private long g;
     private final int[][] h = new int[][]{ { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 
-// CanaryMod
+    // CanaryMod
     private CanaryPlayerManager playerManager;
+
     //
     public PlayerManager(WorldServer worldserver, int i0) {
         if (i0 > 15) {
@@ -235,12 +233,13 @@ public class PlayerManager {
         return playermanager.e;
     }
 
-static List d(PlayerManager playermanager) {
+    static List d(PlayerManager playermanager) {
         return playermanager.d;
     }
 
     /**
      * Get the canary player manager
+     * 
      * @return
      */
     public CanaryPlayerManager getPlayerManager() {
@@ -253,7 +252,7 @@ static List d(PlayerManager playermanager) {
     }
 
     public int getPlayerViewRadius() {
-        return e;
+        return f;
     }
     //
 }

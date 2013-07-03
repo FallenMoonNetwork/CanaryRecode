@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import javax.crypto.SecretKey;
-
 import net.canarymod.Canary;
 import net.canarymod.hook.system.ServerListPingHook;
 
@@ -138,16 +137,13 @@ public class NetLoginHandler extends NetHandler {
             if (packet254serverping.d()) {
                 s0 = this.e.ac() + "\u00a7" + serverconfigurationmanager.k() + "\u00a7" + serverconfigurationmanager.l();
             } else {
-                List list = Arrays.asList(new Serializable[]{ Integer.valueOf(1), Integer.valueOf(73), this.e.z(), this.e.ac(), Integer.valueOf(serverconfigurationmanager.k()), Integer.valueOf(serverconfigurationmanager.l()) });
-
-                //CanaryMod: ServerListPingHook
-                ServerListPingHook hook = new ServerListPingHook(this.e.aa(), Integer.valueOf(serverconfigurationmanager.k()), Integer.valueOf(serverconfigurationmanager.l()));
+                // CanaryMod: ServerListPingHook
+                ServerListPingHook hook = new ServerListPingHook(this.e.ac(), Integer.valueOf(serverconfigurationmanager.k()), Integer.valueOf(serverconfigurationmanager.l()));
                 Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
                     return;
                 }
-
-                List list = Arrays.asList(new Serializable[] { Integer.valueOf(1), Integer.valueOf(61), this.e.x(), hook.getMotd(), hook.getCurrentPlayers(), hook.getMaxPlayers()});
+                List list = Arrays.asList(new Serializable[]{ Integer.valueOf(1), Integer.valueOf(73), this.e.z(), hook.getMotd(), hook.getCurrentPlayers(), hook.getMaxPlayers() });
                 //
                 Object object;
 
@@ -159,8 +155,6 @@ public class NetLoginHandler extends NetHandler {
                         s0 = s0 + "\u0000";
                     }
                 }
-            } else {
-                s0 = this.e.aa() + "\u00a7" + serverconfigurationmanager.k() + "\u00a7" + serverconfigurationmanager.l();
             }
 
             InetAddress inetaddress = null;

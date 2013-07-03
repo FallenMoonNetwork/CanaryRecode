@@ -1,16 +1,13 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Maps;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
-
+import java.util.UUID;
+import com.google.common.collect.Maps;
 import net.canarymod.Canary;
 import net.canarymod.api.potion.CanaryPotion;
-import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.entity.PotionEffectAppliedHook;
-
 
 public class Potion {
 
@@ -55,7 +52,7 @@ public class Potion {
     private int M = -1;
     private double N;
     private boolean O;
-	private CanaryPotion canaryPotion; // CanaryMod: potion instance
+    private CanaryPotion canaryPotion; // CanaryMod: potion instance
 
     protected Potion(int i0, boolean flag0, int i1) {
         this.H = i0;
@@ -107,7 +104,7 @@ public class Potion {
         }
     }
 
-public void a(EntityLivingBase entitylivingbase, EntityLivingBase entitylivingbase1, int i0, double d0) {
+    public void a(EntityLivingBase entitylivingbase, EntityLivingBase entitylivingbase1, int i0, double d0) {
         // CanaryMod: PotionEffectApplied
         PotionEffectAppliedHook hook = new PotionEffectAppliedHook((net.canarymod.api.entity.living.EntityLiving) entityliving1.getCanaryEntity(), Canary.factory().getPotionFactory().newPotionEffect(this.H, 0, i0));
 
@@ -181,7 +178,7 @@ public void a(EntityLivingBase entitylivingbase, EntityLivingBase entitylivingba
         return this.K;
     }
 
-public Potion a(Attribute attribute, String s0, double d0, int i0) {
+    public Potion a(Attribute attribute, String s0, double d0, int i0) {
         AttributeModifier attributemodifier = new AttributeModifier(UUID.fromString(s0), this.a(), d0, i0);
 
         this.I.put(attribute, attributemodifier);

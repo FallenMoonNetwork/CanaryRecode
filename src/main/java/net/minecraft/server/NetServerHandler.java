@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.io.ByteArrayInputStream;
 import java.io.DataInput;
 import java.io.DataInputStream;
@@ -37,11 +36,10 @@ import net.canarymod.hook.player.SignChangeHook;
 import net.canarymod.hook.player.SlotClickHook;
 import net.canarymod.hook.player.TeleportHook;
 
-
 public class NetServerHandler extends NetHandler {
 
     public final INetworkManager a;
-    public final MinecraftServer d;//private to public
+    public final MinecraftServer d;// private to public
     public boolean b = false;
     public EntityPlayerMP c;
     private int e;
@@ -61,6 +59,7 @@ public class NetServerHandler extends NetHandler {
 
     // CanaryMod
     protected CanaryNetServerHandler serverHandler;
+
     //
 
     public NetServerHandler(MinecraftServer minecraftserver, INetworkManager inetworkmanager, EntityPlayerMP entityplayermp) {
@@ -529,7 +528,7 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void a(String s0, Object[] aobject) {
         // CanaryMod: DisconnectionHook
-        DisconnectionHook hook = new DisconnectionHook(ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.aw() }).a(EnumChatFormatting.o)));
+        DisconnectionHook hook = new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.aw() }).a(EnumChatFormatting.o).toString()));
 
         Canary.hooks().callHook(hook);
         this.d.an().a(this.c.c_() + " lost connection: " + s0);
@@ -673,7 +672,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet7UseEntity packet7useentity) {
-        WorldServer worldserver = (WorldServer) this.d.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
+        WorldServer worldserver = (WorldServer) this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
         Entity entity = worldserver.a(packet7useentity.b);
 
         if (entity != null) {
@@ -704,7 +703,7 @@ public class NetServerHandler extends NetHandler {
                     this.c.a.c("You have died. Game over, man, it\'s game over!");
                     this.d.R();
                 } else {
-                    //CanaryMod use our Ban System instead
+                    // CanaryMod use our Ban System instead
                     Canary.bans().issueBan(this.c.getPlayer(), "Death in Hardcore");
                     this.c.a.c("You have died. Game over, man, it\'s game over!");
                 }
@@ -917,7 +916,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet203AutoComplete packet203autocomplete) {
-        //CanaryMod start replace with our logic instead
+        // CanaryMod start replace with our logic instead
         /*StringBuilder stringbuilder = new StringBuilder();
 
         String s0;
@@ -930,7 +929,7 @@ public class NetServerHandler extends NetHandler {
         }*/
 
         StringBuilder result = AutocompleteUtils.autoComplete(packet203autocomplete.d(), c.getPlayer());
-        //CanaryMod end
+        // CanaryMod end
         this.c.a.b(new Packet203AutoComplete(result.toString()));
     }
 
@@ -1064,7 +1063,7 @@ public class NetServerHandler extends NetHandler {
         if ("REGISTER".equals(packet250custompayload.a)) {
             try {
                 String channel = new String(packet250custompayload.c, Charset.forName("utf-8"));
-                for(String chan : channel.split("\0")) {
+                for (String chan : channel.split("\0")) {
                     Canary.channels().registerClient(chan, this.serverHandler);
                 }
                 Canary.logInfo(String.format("Player '%s' registered Custom Payload on channel(s) '%s'", this.c.getPlayer().getName(), Arrays.toString(channel.split("\0"))));
@@ -1099,11 +1098,11 @@ public class NetServerHandler extends NetHandler {
             }
         }// CanaryMod: End
 
-
     }
 
     /**
      * gets the CanaryNetServerHandler wrapper
+     * 
      * @return
      */
     public CanaryNetServerHandler getCanaryServerHandler() {

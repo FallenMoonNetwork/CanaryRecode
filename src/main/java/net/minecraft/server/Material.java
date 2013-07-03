@@ -45,6 +45,8 @@ public class Material {
     private int M;
     private boolean N;
 
+    private final CanaryBlockMaterial cbm; // CanaryMod
+
     public Material(MapColor mapcolor) {
         this.H = mapcolor;
         this.cbm = new CanaryBlockMaterial(this);
