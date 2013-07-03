@@ -14,8 +14,8 @@
   <inceptionYear>2012</inceptionYear>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <minecraft.server.version>1.5.2</minecraft.server.version>
-    <api.version>0.8</api.version>
+    <minecraft.server.version>1.6.1</minecraft.server.version>
+    <api.version>0.9</api.version>
   </properties>
   <licenses>
     <license>
@@ -75,7 +75,7 @@
     <dependency>
       <groupId>net.minecraft</groupId>
       <artifactId>server</artifactId>
-      <version>1.6.1</version>
+      <version>${minecraft.server.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
