@@ -82,7 +82,8 @@ public class CanaryMod extends Canary {
         try {
             this.commandManager.registerCommands(new CommandList(), Canary.getServer(), false);
         } catch (CommandDependencyException e) {
-            Canary.logStacktrace(e.getMessage(), e);
+            //Silently ignore this. If that happens someone intended to override system commands,
+            //which is perfectly fine.
         }
     }
 
