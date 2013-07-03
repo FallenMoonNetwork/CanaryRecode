@@ -1,11 +1,10 @@
 package net.minecraft.server;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import java.util.Random;
 import java.util.UUID;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.canarymod.api.inventory.CanaryBaseItem;
-
 
 public class Item {
 
@@ -192,6 +191,8 @@ public class Item {
     private String d;
     private String cB;
     protected String cA;
+
+    private final CanaryBaseItem base; // CanaryMod
 
     protected Item(int i0) {
         this.cv = 256 + i0;
@@ -399,7 +400,7 @@ public class Item {
         return false;
     }
 
-public Multimap h() {
+    public Multimap h() {
         return HashMultimap.create();
     }
 

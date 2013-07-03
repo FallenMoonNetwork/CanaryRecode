@@ -1,13 +1,11 @@
 package net.minecraft.server;
 
-
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.ItemUseHook;
 import net.canarymod.hook.world.IgnitionHook;
 import net.canarymod.hook.world.IgnitionHook.IgnitionCause;
-
 
 public class ItemFlintAndSteel extends Item {
 
@@ -60,7 +58,7 @@ public class ItemFlintAndSteel extends Item {
             ItemUseHook iuh = new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked);
             Canary.hooks().callHook(iuh);
             // Create & Call IgnitionHook
-            CanaryBlock ignited = new CanaryBlock((short) Block.av.cz, (short) 0, i0, i1, i2, world.getCanaryWorld());
+            CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
             IgnitionHook ih = new IgnitionHook(ignited, ((EntityPlayerMP) entityplayer).getPlayer(), clicked, IgnitionCause.FLINT_AND_STEEL);
             Canary.hooks().callHook(ih);
 

@@ -1,11 +1,9 @@
 package net.minecraft.server;
 
-
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.BlockPlaceHook;
-
 
 public class ItemBlock extends Item {
 
@@ -23,6 +21,10 @@ public class ItemBlock extends Item {
 
     public boolean a(ItemStack itemstack, EntityPlayer entityplayer, World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2) {
         int i4 = world.a(i0, i1, i2);
+
+        // CanaryMod: BlockPlaceHook
+        CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+        clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
 
         if (i4 == Block.aX.cF && (world.h(i0, i1, i2) & 7) < 1) {
             i3 = 1;
