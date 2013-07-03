@@ -22,7 +22,7 @@ public class EntityMinecartEmpty extends EntityMinecart {
         this.entity = new CanaryEmptyMinecart(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean a_(EntityPlayer entityplayer) {
+    public boolean c(EntityPlayer entityplayer) {
         if (this.n != null && this.n instanceof EntityPlayer && this.n != entityplayer) {
             return true;
         } else if (this.n != null && this.n != entityplayer) {

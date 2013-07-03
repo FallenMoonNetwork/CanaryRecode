@@ -23,7 +23,7 @@ public class EntityMinecartMobSpawner extends EntityMinecart {
     }
 
     public Block n() {
-        return Block.aw;
+        return Block.ax;
     }
 
     protected void a(NBTTagCompound nbttagcompound) {

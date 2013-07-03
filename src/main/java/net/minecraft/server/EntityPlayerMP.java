@@ -41,7 +41,7 @@ import net.canarymod.hook.player.TeleportHook;
 
 public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
-    private StringTranslate cl = new StringTranslate("en_US");
+    private String bN = "en_US";
     public NetServerHandler a;
     public MinecraftServer b;
     public ItemInWorldManager c;
@@ -49,31 +49,32 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public double e;
     public final List f = new LinkedList();
     public final List g = new LinkedList();
-    private int cm = -99999999;
-    private int cn = -99999999;
-    private boolean co = true;
-    private int cp = -99999999;
-    private int cq = 60;
-    private int cr = 0;
-    private int cs = 0;
-    private boolean ct = true;
-    private int cu = 0;
+    private float bO = Float.MIN_VALUE;
+    private float bP = -1.0E8F;
+    private int bQ = -99999999;
+    private boolean bR = true;
+    private int bS = -99999999;
+    private int bT = 60;
+    private int bU;
+    private int bV;
+    private boolean bW = true;
+    private int bX;
     public boolean h;
     public int i;
-    public boolean j = false;
+    public boolean j;
 
     public EntityPlayerMP(MinecraftServer minecraftserver, World world, String s0, ItemInWorldManager iteminworldmanager) {
-        super(world);
+        super(world, s0);
         WorldConfiguration cfg = Configuration.getWorldConfig(world.getCanaryWorld().getFqName());
         iteminworldmanager.b = this;
         this.c = iteminworldmanager;
-        this.cr = minecraftserver.ad().o();
-        ChunkCoordinates chunkcoordinates = world.J();
+        this.bU = minecraftserver.af().o();
+        ChunkCoordinates chunkcoordinates = world.K();
         int i0 = chunkcoordinates.a;
         int i1 = chunkcoordinates.c;
         int i2 = chunkcoordinates.b;
 
-        if (!world.t.f && world.M().r() != EnumGameType.d) {
+        if (!world.t.g && world.N().r() != EnumGameType.d) {
             int i3 = Math.max(5, cfg.getSpawnProtectionSize() - 6);
 
             i0 += this.ab.nextInt(i3 * 2) - i3;
@@ -83,7 +84,6 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
         this.b = minecraftserver;
         this.Y = 0.0F;
-        this.bS = s0;
         this.N = 0.0F;
         this.b((double) i0 + 0.5D, (double) i2, (double) i1 + 0.5D, 0.0F, 0.0F);
 
@@ -101,9 +101,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
         if (nbttagcompound.b("playerGameType")) {
-//XXX Check this, it was only the last call to this.c.a
-            if (MinecraftServer.D().am()) {
-                this.c.a(MinecraftServer.D().g());
+            if (MinecraftServer.F().ao()) {
+                this.c.a(MinecraftServer.F().h());
             } else {
                 this.c.a(EnumGameType.a(nbttagcompound.e("playerGameType")));
             }
@@ -117,25 +116,29 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public void a(int i0) {
         super.a(i0);
-        this.cp = -1;
+        this.bS = -1;
     }
 
-    public void d_() {
-        this.bM.a((ICrafting) this);
+    public void d() {
+        this.bp.a((ICrafting) this);
     }
 
-    protected void e_() {
+    protected void d_() {
         this.N = 0.0F;
     }
 
-    public float e() {
+    public float f() {
         return 1.62F;
     }
 
     public void l_() {
         this.c.a();
-        --this.cq;
-        this.bM.b();
+        --this.bT;
+        this.bp.b();
+        if (!this.q.I && !this.bp.a((EntityPlayer) this)) {
+            this.i();
+            this.bp = this.bo;
+        }
 
         while (!this.g.isEmpty()) {
             int i0 = Math.min(this.g.size(), 127);
@@ -181,33 +184,21 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                 while (iterator2.hasNext()) {
                     Chunk chunk = (Chunk) iterator2.next();
 
-                    this.o().q().a(this, chunk);
+                    this.p().q().a(this, chunk);
                 }
             }
         }
     }
 
-    public void b(int i0) {
-        super.b(i0);
-        Collection collection = this.cr().a(ScoreObjectiveCriteria.f);
-        Iterator iterator = collection.iterator();
-
-        while (iterator.hasNext()) {
-            ScoreObjective scoreobjective = (ScoreObjective) iterator.next();
-
-            this.cr().a(this.am(), scoreobjective).a(Arrays.asList(new EntityPlayer[] { this}));
-        }
-    }
-
-    public void g() {
+    public void h() {
         try {
             super.l_();
 
-            for (int i0 = 0; i0 < this.bK.j_(); ++i0) {
-                ItemStack itemstack = this.bK.a(i0);
+            for (int i0 = 0; i0 < this.bn.j_(); ++i0) {
+                ItemStack itemstack = this.bn.a(i0);
 
-                if (itemstack != null && Item.f[itemstack.c].f() && this.a.e() <= 5) {
-                    Packet packet = ((ItemMapBase) Item.f[itemstack.c]).c(itemstack, this.q, this);
+                if (itemstack != null && Item.g[itemstack.d].f() && this.a.e() <= 5) {
+                    Packet packet = ((ItemMapBase) Item.g[itemstack.d]).c(itemstack, this.q, this);
 
                     if (packet != null) {
                         this.a.b(packet);
@@ -232,29 +223,38 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             }
             //
 
-            if (this.aX() != this.cm || this.cn != this.bN.a() || this.bN.e() == 0.0F != this.co) {
+            if (this.aJ() != this.bP || this.bQ != this.bq.a() || this.bq.e() == 0.0F != this.bR) {
                 // CanaryMod: convert health for values above 20
-                int health = (int) (this.aX() / (this.aW() / 20));
+                int health = (int) (this.aX() / (this.aW() / 20)); //MERGE: this.aJ() ?
 
                 health = (this.aX() > 0 && health == 0) ? 1 : health;
-                this.a.b(new Packet8UpdateHealth(health, this.bN.a(), this.bN.e()));
+                this.a.b(new Packet8UpdateHealth(health, this.bq.a(), this.bq.e()));
                 //
-                this.cm = this.aX();
-                this.cn = this.bN.a();
-                this.co = this.bN.e() == 0.0F;
+                this.bP = this.aJ();
+                this.bQ = this.bq.a();
+                this.bR = this.bq.e() == 0.0F;
             }
 
-            if (this.cg != this.cp) {
+            if (this.aJ() + this.bj() != this.bO) {
+                this.bO = this.aJ() + this.bj();
+                Collection collection = this.bH().a(ScoreObjectiveCriteria.f);
+                Iterator iterator = collection.iterator();
+
+                while (iterator.hasNext()) {
+                    ScoreObjective scoreobjective = (ScoreObjective) iterator.next();
+
+                    this.bH().a(this.al(), scoreobjective).a(Arrays.asList(new EntityPlayer[]{ this }));
+                }
                 // CanaryMod: ExperienceHook / ExperienceEnabled
                 if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).isExperienceEnabled()) {
                     this.cg = 0;
                     this.cf = 0;
                 } else if (getPlayer() != null) { // NPC?
-                    ExperienceHook hook = new ExperienceHook(getPlayer(), this.cp, cg);
+                    ExperienceHook hook = new ExperienceHook(getPlayer(), this.bS, this.bI);
 
                     if (!hook.isCanceled()) {
-                        this.cp = this.cg;
-                        this.a.b(new Packet43Experience(this.ch, this.cg, this.cf));
+                        this.bS = this.bI;
+                        this.a.b(new Packet43Experience(this.bJ, this.bI, this.bH));
                     }
                 }
                 //
@@ -276,38 +276,39 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (Configuration.getServerConfig().isDeathMessageEnabled()) {
             this.b.ad().k(hook.getDeathMessage());
         }
+        if (!this.q.O().b("keepInventory")) {
+            this.bn.m();
+        }
         //
 
-        if (!this.q.N().b("keepInventory")) {
-            this.bK.m();
-        }
-
-        Collection collection = this.q.W().a(ScoreObjectiveCriteria.c);
+        Collection collection = this.q.X().a(ScoreObjectiveCriteria.c);
         Iterator iterator = collection.iterator();
 
         while (iterator.hasNext()) {
             ScoreObjective scoreobjective = (ScoreObjective) iterator.next();
-            Score score = this.cr().a(this.am(), scoreobjective);
+            Score score = this.bH().a(this.al(), scoreobjective);
 
             score.a();
         }
 
-        EntityLiving entityliving = this.bN();
+        EntityLivingBase entitylivingbase = this.aO();
 
-        if (entityliving != null) {
-            entityliving.c(this, this.aM);
+        if (entitylivingbase != null) {
+            entitylivingbase.b(this, this.bb);
         }
+
+        this.a(StatList.y, 1);
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
-        if (this.aq()) {
+    public boolean a(DamageSource damagesource, float f0) {
+        if (this.ap()) {
             return false;
         } else {
             //CanaryMod moved pvp to per-world config
             boolean haspvp = Configuration.getWorldConfig(getCanaryWorld().getFqName()).isPvpEnabled();
-            boolean flag0 = this.b.T() && haspvp && "fall".equals(damagesource.o);
+            boolean flag0 = this.b.V() && haspvp && "fall".equals(damagesource.o);
 
-            if (!flag0 && this.cq > 0 && damagesource != DamageSource.i) {
+            if (!flag0 && this.bT > 0 && damagesource != DamageSource.i) {
                 return false;
             } else {
                 if (damagesource instanceof EntityDamageSource) {
@@ -326,7 +327,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                     }
                 }
 
-                return super.a(damagesource, i0);
+                return super.a(damagesource, f0);
             }
         }
     }
@@ -337,14 +338,14 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         return !haspvp ? false : super.a(entityplayer);
     }
 
-    public void c(int i0) {
+    public void b(int i0) {
         if (this.ar == 1 && i0 == 1) {
             this.a((StatBase) AchievementList.C);
             this.q.e((Entity) this);
             this.j = true;
             this.a.b(new Packet70GameEvent(4, 0));
         } else {
-            if (this.ar == 1 && i0 == 0) {
+            if (this.ar == 0 && i0 == 1) {
                 this.a((StatBase) AchievementList.B);
                 ChunkCoordinates chunkcoordinates = this.b.getWorld(this.getCanaryWorld().getName(), i0).l();
 
@@ -358,7 +359,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             }
 
             // CanaryMod onPortalUse && onDimensionSwitch
-            Location goingTo = simulatePortalUse(i0, MinecraftServer.D().getWorld(getCanaryWorld().getName(), i0));
+            Location goingTo = simulatePortalUse(i0, MinecraftServer.F().getWorld(getCanaryWorld().getName(), i0));
 
             PortalUseHook hook = new PortalUseHook(getPlayer(), goingTo);
             CancelableHook hook1 = new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
@@ -370,10 +371,10 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                 return;
             } //
             else {
-                this.b.ad().a(this, getCanaryWorld().getName(), i0);
-                this.cp = -1;
-                this.cm = -1;
-                this.cn = -1;
+                this.b.af().a(this, getCanaryWorld().getName(), i0);
+                this.bS = -1;
+                this.bP = -1.0F;
+                this.bQ = -1;
             } //
         }
     }
@@ -396,7 +397,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public void a(Entity entity, int i0) {
         super.a(entity, i0);
-        this.bM.b();
+        this.bp.b();
     }
 
     public EnumStatus a(int i0, int i1, int i2) {
@@ -405,7 +406,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (enumstatus == EnumStatus.a) {
             Packet17Sleep packet17sleep = new Packet17Sleep(this, 0, i0, i1, i2);
 
-            this.o().q().a((Entity) this, (Packet) packet17sleep);
+            this.p().q().a((Entity) this, (Packet) packet17sleep);
             this.a.a(this.u, this.v, this.w, this.A, this.B, getCanaryWorld().getType().getId(), getCanaryWorld().getName(), TeleportHook.TeleportCause.BED);
             this.a.b(packet17sleep);
         }
@@ -414,8 +415,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     }
 
     public void a(boolean flag0, boolean flag1, boolean flag2) {
-        if (this.bz()) {
-            this.o().q().b(this, new Packet18Animation(this, 3));
+        if (this.bd()) {
+            this.p().q().b(this, new Packet18Animation(this, 3));
         }
 
         super.a(flag0, flag1, flag2);
@@ -426,7 +427,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public void a(Entity entity) {
         super.a(entity);
-        this.a.b(new Packet39AttachEntity(this, this.o));
+        this.a.b(new Packet39AttachEntity(0, this, this.o));
         this.a.a(this.u, this.v, this.w, this.A, this.B, getCanaryWorld().getType().getId(), getCanaryWorld().getName(), TeleportHook.TeleportCause.MOUNT_CHANGE);
     }
 
@@ -436,67 +437,65 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         super.a(d0, flag0);
     }
 
-    private void ct() {
-        this.cu = this.cu % 100 + 1;
+    private void bJ() {
+        this.bX = this.bX % 100 + 1;
     }
 
     public void b(int i0, int i1, int i2) {
         // CanaryMod: InventoryHook
-        ContainerWorkbench container = new ContainerWorkbench(this.bK, this.q, i0, i1, i2);
+        ContainerWorkbench container = new ContainerWorkbench(this.bn, this.q, i0, i1, i2);
         CanaryWorkbench bench = (CanaryWorkbench) container.getInventory();
         InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), bench, false).call();
         if (hook.isCanceled()) {
             return;
         }
         //
-
-        this.ct();
-        this.a.b(new Packet100OpenWindow(this.cu, 1, bench.getInventoryName(), 9, true));
-        this.bM = container;
-        this.bM.d = this.cu;
-        this.bM.a((ICrafting) this);
+        this.bJ();
+        this.a.b(new Packet100OpenWindow(this.bX, 1, bench.getInventoryName(), 9, true));
+        this.bp = container;
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
     }
 
     public void a(int i0, int i1, int i2, String s0) {
         // CanaryMod: InventoryHook
-        ContainerEnchantment container = new ContainerEnchantment(this.bK, this.q, i0, i1, i2);
+        ContainerEnchantment container = new ContainerEnchantment(this.bn, this.q, i0, i1, i2);
         CanaryEnchantmentTable table = (CanaryEnchantmentTable) container.getInventory();
         InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), table, false).call();
         if (hook.isCanceled()) {
             return;
         }
         //
-
-        this.ct();
-        this.a.b(new Packet100OpenWindow(this.cu, 4, s0 == null ? "" : s0, 9, s0 != null));
-        this.bM = container;
-        this.bM.d = this.cu;
-        this.bM.a((ICrafting) this);
+        this.bJ();
+        this.a.b(new Packet100OpenWindow(this.bX, 4, s0 == null ? "" : s0, 9, s0 != null));
+        this.bp = new ContainerEnchantment(this.bn, this.q, i0, i1, i2);
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
     }
 
     public void c(int i0, int i1, int i2) {
         // CanaryMod: InventoryHook
-        ContainerRepair container = new ContainerRepair(this.bK, this.q, i0, i1, i2, this);
+        ContainerRepair container = new ContainerRepair(this.bn, this.q, i0, i1, i2, this);
         CanaryAnvil anvil = (CanaryAnvil) container.getInventory();
         InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), anvil, false).call();
         if (hook.isCanceled()) {
             return;
         }
         //
-        this.ct();
-        this.a.b(new Packet100OpenWindow(this.cu, 8, "Repairing", 9, true));
-        this.bM = container;
-        this.bM.d = this.cu;
-        this.bM.a((ICrafting) this);
+        this.bJ();
+        this.a.b(new Packet100OpenWindow(this.bX, 8, "Repairing", 9, true));
+        this.bp = container;
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
     }
 
     public void a(IInventory iinventory) {
-        if (this.bM != this.bL) {
-            this.h();
+        if (this.bp != this.bo) {
+            this.i();
         }
         // CanaryMod: InventoryHook
         Inventory inventory = null;
-        ContainerChest container = new ContainerChest(this.bK, iinventory);
+        ContainerChest container = new ContainerChest(this.bn, iinventory);
 
         if (iinventory instanceof TileEntityChest) {
             inventory = ((TileEntityChest) iinventory).getCanaryChest();
@@ -519,12 +518,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             }
         }
         //
-
-        this.ct();
-        this.a.b(new Packet100OpenWindow(this.cu, 0, iinventory.b(), iinventory.j_(), iinventory.c()));
-        this.bM = container;
-        this.bM.d = this.cu;
-        this.bM.a((ICrafting) this);
+        this.bJ();
+        this.a.b(new Packet100OpenWindow(this.bX, 0, iinventory.b(), iinventory.j_(), iinventory.c()));
+        this.bp = container;
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
     }
 
     public void a(TileEntityHopper tileentityhopper) {
@@ -534,12 +532,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             return;
         }
         //
-
-        this.ct();
-        this.a.b(new Packet100OpenWindow(this.cu, 9, tileentityhopper.b(), tileentityhopper.j_(), tileentityhopper.c()));
-        this.bM = new ContainerHopper(this.bK, tileentityhopper);
-        this.bM.d = this.cu;
-        this.bM.a((ICrafting) this);
+        this.bJ();
+        this.a.b(new Packet100OpenWindow(this.bX, 9, tileentityhopper.b(), tileentityhopper.j_(), tileentityhopper.c()));
+        this.bp = new ContainerHopper(this.bn, tileentityhopper);
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
     }
 
     public void a(EntityMinecartHopper entityminecarthopper) {
@@ -549,11 +546,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             return;
         }
         //
-        this.ct();
-        this.a.b(new Packet100OpenWindow(this.cu, 9, entityminecarthopper.b(), entityminecarthopper.j_(), entityminecarthopper.c()));
-        this.bM = new ContainerHopper(this.bK, entityminecarthopper);
-        this.bM.d = this.cu;
-        this.bM.a((ICrafting) this);
+        this.bJ();
+        this.a.b(new Packet100OpenWindow(this.bX, 9, entityminecarthopper.b(), entityminecarthopper.j_(), entityminecarthopper.c()));
+        this.bp = new ContainerHopper(this.bn, entityminecarthopper);
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
     }
 
     public void a(TileEntityFurnace tileentityfurnace) {
@@ -563,12 +560,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             return;
         }
         //
-
-        this.ct();
-        this.a.b(new Packet100OpenWindow(this.cu, 2, tileentityfurnace.b(), tileentityfurnace.j_(), tileentityfurnace.c()));
-        this.bM = new ContainerFurnace(this.bK, tileentityfurnace);
-        this.bM.d = this.cu;
-        this.bM.a((ICrafting) this);
+        this.bJ();
+        this.a.b(new Packet100OpenWindow(this.bX, 2, tileentityfurnace.b(), tileentityfurnace.j_(), tileentityfurnace.c()));
+        this.bp = new ContainerFurnace(this.bn, tileentityfurnace);
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
     }
 
     public void a(TileEntityDispenser tileentitydispenser) {
@@ -578,12 +574,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             return;
         }
         //
-
-        this.ct();
-        this.a.b(new Packet100OpenWindow(this.cu, tileentitydispenser instanceof TileEntityDropper ? 10 : 3, tileentitydispenser.b(), tileentitydispenser.j_(), tileentitydispenser.c()));
-        this.bM = new ContainerDispenser(this.bK, tileentitydispenser);
-        this.bM.d = this.cu;
-        this.bM.a((ICrafting) this);
+        this.bJ();
+        this.a.b(new Packet100OpenWindow(this.bX, tileentitydispenser instanceof TileEntityDropper ? 10 : 3, tileentitydispenser.b(), tileentitydispenser.j_(), tileentitydispenser.c()));
+        this.bp = new ContainerDispenser(this.bn, tileentitydispenser);
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
     }
 
     public void a(TileEntityBrewingStand tileentitybrewingstand) {
@@ -593,12 +588,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             return;
         }
         //
-
-        this.ct();
-        this.a.b(new Packet100OpenWindow(this.cu, 5, tileentitybrewingstand.b(), tileentitybrewingstand.j_(), tileentitybrewingstand.c()));
-        this.bM = new ContainerBrewingStand(this.bK, tileentitybrewingstand);
-        this.bM.d = this.cu;
-        this.bM.a((ICrafting) this);
+        this.bJ();
+        this.a.b(new Packet100OpenWindow(this.bX, 5, tileentitybrewingstand.b(), tileentitybrewingstand.j_(), tileentitybrewingstand.c()));
+        this.bp = new ContainerBrewingStand(this.bn, tileentitybrewingstand);
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
     }
 
     public void a(TileEntityBeacon tileentitybeacon) {
@@ -608,21 +602,21 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             return;
         }
         //
-        this.ct();
-        this.a.b(new Packet100OpenWindow(this.cu, 7, tileentitybeacon.b(), tileentitybeacon.j_(), tileentitybeacon.c()));
-        this.bM = new ContainerBeacon(this.bK, tileentitybeacon);
-        this.bM.d = this.cu;
-        this.bM.a((ICrafting) this);
+        this.bJ();
+        this.a.b(new Packet100OpenWindow(this.bX, 7, tileentitybeacon.b(), tileentitybeacon.j_(), tileentitybeacon.c()));
+        this.bp = new ContainerBeacon(this.bn, tileentitybeacon);
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
     }
 
     public void a(IMerchant imerchant, String s0) {
-        this.ct();
-        this.bM = new ContainerMerchant(this.bK, imerchant, this.q);
-        this.bM.d = this.cu;
-        this.bM.a((ICrafting) this);
-        InventoryMerchant inventorymerchant = ((ContainerMerchant) this.bM).e();
+        this.bJ();
+        this.bp = new ContainerMerchant(this.bn, imerchant, this.q);
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
+        InventoryMerchant inventorymerchant = ((ContainerMerchant) this.bp).e();
 
-        this.a.b(new Packet100OpenWindow(this.cu, 6, s0 == null ? "" : s0, inventorymerchant.j_(), s0 != null));
+        this.a.b(new Packet100OpenWindow(this.bX, 6, s0 == null ? "" : s0, inventorymerchant.j_(), s0 != null));
         MerchantRecipeList merchantrecipelist = imerchant.b(this);
 
         if (merchantrecipelist != null) {
@@ -630,13 +624,25 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                 ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
                 DataOutputStream dataoutputstream = new DataOutputStream(bytearrayoutputstream);
 
-                dataoutputstream.writeInt(this.cu);
+                dataoutputstream.writeInt(this.bX);
                 merchantrecipelist.a(dataoutputstream);
                 this.a.b(new Packet250CustomPayload("MC|TrList", bytearrayoutputstream.toByteArray()));
             } catch (IOException ioexception) {
                 ioexception.printStackTrace();
             }
         }
+    }
+
+    public void a(EntityHorse entityhorse, IInventory iinventory) {
+        if (this.bp != this.bo) {
+            this.i();
+        }
+//HOOK: InventoryHook for horse inv!
+        this.bJ();
+        this.a.b(new Packet100OpenWindow(this.bX, 11, iinventory.b(), iinventory.j_(), iinventory.c(), entityhorse.k));
+        this.bp = new ContainerHorseInventory(this.bn, iinventory, entityhorse);
+        this.bp.d = this.bX;
+        this.bp.a((ICrafting) this);
     }
 
     public void a(Container container, int i0, ItemStack itemstack) {
@@ -653,27 +659,42 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public void a(Container container, List list) {
         this.a.b(new Packet104WindowItems(container.d, list));
-        this.a.b(new Packet103SetSlot(-1, -1, this.bK.o()));
+        this.a.b(new Packet103SetSlot(-1, -1, this.bn.o()));
     }
 
     public void a(Container container, int i0, int i1) {
         this.a.b(new Packet105UpdateProgressbar(container.d, i0, i1));
     }
 
-    public void h() {
-        this.a.b(new Packet101CloseWindow(this.bM.d));
-        this.j();
-    }
-
     public void i() {
-        if (!this.h) {
-            this.a.b(new Packet103SetSlot(-1, -1, this.bK.o()));
-        }
+        this.a.b(new Packet101CloseWindow(this.bp.d));
+        this.k();
     }
 
     public void j() {
-        this.bM.b((EntityPlayer) this);
-        this.bM = this.bL;
+        if (!this.h) {
+            this.a.b(new Packet103SetSlot(-1, -1, this.bn.o()));
+        }
+    }
+
+    public void k() {
+        this.bp.b((EntityPlayer) this);
+        this.bp = this.bo;
+    }
+
+    public void a(float f0, float f1, boolean flag0, boolean flag1) {
+        if (this.o != null) {
+            if (f0 >= -1.0F && f0 <= 1.0F) {
+                this.be = f0;
+            }
+
+            if (f1 >= -1.0F && f1 <= 1.0F) {
+                this.bf = f1;
+            }
+
+            this.bd = flag0;
+            this.b(flag1);
+        }
     }
 
     public void a(StatBase statbase, int i0) {
@@ -697,44 +718,41 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         }
     }
 
-    public void k() {
+    public void l() {
         if (this.n != null) {
             this.n.a((Entity) this);
         }
 
-        if (this.ca) {
+        if (this.bC) {
             this.a(true, false, false);
         }
     }
 
-    public void l() {
-        this.cm = -99999999;
+    public void m() {
+        this.bP = -1.0E8F;
     }
 
-    public void b(String s0) {
-        StringTranslate stringtranslate = StringTranslate.a();
-        String s1 = stringtranslate.a(s0);
-
-        this.a.b(new Packet3Chat(s1));
+    public void a(String s0) {
+        this.a.b(new Packet3Chat(ChatMessageComponent.e(s0)));
     }
 
-    protected void m() {
+    protected void n() {
         this.a.b(new Packet38EntityStatus(this.k, (byte) 9));
-        super.m();
+        super.n();
     }
 
     public void a(ItemStack itemstack, int i0) {
         super.a(itemstack, i0);
-        if (itemstack != null && itemstack.b() != null && itemstack.b().b_(itemstack) == EnumAction.b) {
-            this.o().q().b(this, new Packet18Animation(this, 5));
+        if (itemstack != null && itemstack.b() != null && itemstack.b().c_(itemstack) == EnumAction.b) {
+            this.p().q().b(this, new Packet18Animation(this, 5));
         }
     }
 
     public void a(EntityPlayer entityplayer, boolean flag0) {
         super.a(entityplayer, flag0);
-        this.cp = -1;
-        this.cm = -1;
-        this.cn = -1;
+        this.bS = -1;
+        this.bP = -1.0F;
+        this.bQ = -1;
         this.g.addAll(((EntityPlayerMP) entityplayer).g);
     }
 
@@ -758,20 +776,20 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     }
 
     public void b(Entity entity) {
-        this.o().q().b(this, new Packet18Animation(entity, 6));
+        this.p().q().b(this, new Packet18Animation(entity, 6));
     }
 
     public void c(Entity entity) {
-        this.o().q().b(this, new Packet18Animation(entity, 7));
+        this.p().q().b(this, new Packet18Animation(entity, 7));
     }
 
-    public void n() {
+    public void o() {
         if (this.a != null) {
-            this.a.b(new Packet202PlayerAbilities(this.ce));
+            this.a.b(new Packet202PlayerAbilities(this.bG));
         }
     }
 
-    public WorldServer o() {
+    public WorldServer p() {
         return (WorldServer) this.q;
     }
 
@@ -780,8 +798,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         this.a.b(new Packet70GameEvent(3, enumgametype.a()));
     }
 
-    public void a(String s0) {
-        this.a.b(new Packet3Chat(s0));
+    public void a(ChatMessageComponent chatmessagecomponent) {
+        this.a.b(new Packet3Chat(chatmessagecomponent));
     }
 
     public boolean a(int i0, String s0) {
@@ -802,7 +820,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         //
     }
 
-    public String p() {
+    public String q() {
         String s0 = this.a.a.c().toString();
 
         s0 = s0.substring(s0.indexOf("/") + 1);
@@ -811,31 +829,24 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     }
 
     public void a(Packet204ClientInfo packet204clientinfo) {
-        if (this.cl.b().containsKey(packet204clientinfo.d())) {
-            this.cl.a(packet204clientinfo.d(), false);
-        }
-
+        this.bN = packet204clientinfo.d();
         int i0 = 256 >> packet204clientinfo.f();
 
         if (i0 > 3 && i0 < 15) {
-            this.cr = i0;
+            this.bU = i0;
         }
 
-        this.cs = packet204clientinfo.g();
-        this.ct = packet204clientinfo.h();
-        if (this.b.I() && this.b.H().equals(this.bS)) {
+        this.bV = packet204clientinfo.g();
+        this.bW = packet204clientinfo.h();
+        if (this.b.K() && this.b.J().equals(this.bu)) {
             this.b.c(packet204clientinfo.i());
         }
 
         this.b(1, !packet204clientinfo.j());
     }
 
-    public StringTranslate r() {
-        return this.cl;
-    }
-
     public int t() {
-        return this.cs;
+        return this.bV;
     }
 
     public void a(String s0, int i0) {

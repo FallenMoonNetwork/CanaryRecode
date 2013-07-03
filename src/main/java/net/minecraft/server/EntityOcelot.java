@@ -7,25 +7,24 @@ import net.canarymod.hook.entity.EntityTameHook;
 
 public class EntityOcelot extends EntityTameable {
 
-    private EntityAITempt e;
+    private EntityAITempt bq;
 
     public EntityOcelot(World world) {
         super(world);
-        this.aH = "/mob/ozelot.png";
         this.a(0.6F, 0.8F);
-        this.aC().a(true);
-        this.bo.a(1, new EntityAISwimming(this));
-        this.bo.a(2, this.d);
-        this.bo.a(3, this.e = new EntityAITempt(this, 0.18F, Item.aV.cp, true));
-        this.bo.a(4, new EntityAIAvoidEntity(this, EntityPlayer.class, 16.0F, 0.23F, 0.4F));
-        this.bo.a(5, new EntityAIFollowOwner(this, 0.3F, 10.0F, 5.0F));
-        this.bo.a(6, new EntityAIOcelotSit(this, 0.4F));
-        this.bo.a(7, new EntityAILeapAtTarget(this, 0.3F));
-        this.bo.a(8, new EntityAIOcelotAttack(this));
-        this.bo.a(9, new EntityAIMate(this, 0.23F));
-        this.bo.a(10, new EntityAIWander(this, 0.23F));
-        this.bo.a(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
-        this.bp.a(1, new EntityAITargetNonTamed(this, EntityChicken.class, 14.0F, 750, false));
+        this.k().a(true);
+        this.c.a(1, new EntityAISwimming(this));
+        this.c.a(2, this.bp);
+        this.c.a(3, this.bq = new EntityAITempt(this, 0.6D, Item.aW.cv, true));
+        this.c.a(4, new EntityAIAvoidEntity(this, EntityPlayer.class, 16.0F, 0.8D, 1.33D));
+        this.c.a(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 5.0F));
+        this.c.a(6, new EntityAIOcelotSit(this, 1.33D));
+        this.c.a(7, new EntityAILeapAtTarget(this, 0.3F));
+        this.c.a(8, new EntityAIOcelotAttack(this));
+        this.c.a(9, new EntityAIMate(this, 0.8D));
+        this.c.a(10, new EntityAIWander(this, 0.8D));
+        this.c.a(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+        this.d.a(1, new EntityAITargetNonTamed(this, EntityChicken.class, 750, false));
         this.entity = new CanaryOcelot(this); // CanaryMod: Wrap Entity
     }
 
@@ -34,14 +33,14 @@ public class EntityOcelot extends EntityTameable {
         this.ah.a(18, Byte.valueOf((byte) 0));
     }
 
-    public void bp() {
-        if (this.aA().a()) {
-            float f0 = this.aA().b();
+    public void bg() {
+        if (this.i().a()) {
+            double d0 = this.i().b();
 
-            if (f0 == 0.18F) {
+            if (d0 == 0.6D) {
                 this.b(true);
                 this.c(false);
-            } else if (f0 == 0.4F) {
+            } else if (d0 == 1.33D) {
                 this.b(false);
                 this.c(true);
             } else {
@@ -54,79 +53,85 @@ public class EntityOcelot extends EntityTameable {
         }
     }
 
-    protected boolean bm() {
-        return !this.m();
+    protected boolean t() {
+        return !this.bP() && this.ac > 2400;
     }
 
-    public boolean bh() {
+    public boolean bb() {
         return true;
+    }
+
+    protected void ax() {
+        super.ax();
+        this.a(SharedMonsterAttributes.a).a(10.0D);
+        this.a(SharedMonsterAttributes.d).a(0.30000001192092896D);
     }
 
     public int aW() {
         return maxHealth == 0 ? 10 : maxHealth; // CanaryMod: custom Max Health
     }
 
-    protected void a(float f0) {}
+    protected void b(float f0) {}
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("CatType", this.t());
+        nbttagcompound.a("CatType", this.bW());
     }
 
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
-        this.s(nbttagcompound.e("CatType"));
+        this.p(nbttagcompound.e("CatType"));
     }
 
-    protected String bb() {
-        return this.m() ? (this.r() ? "mob.cat.purr" : (this.ab.nextInt(4) == 0 ? "mob.cat.purreow" : "mob.cat.meow")) : "";
+    protected String r() {
+        return this.bP() ? (this.bU() ? "mob.cat.purr" : (this.ab.nextInt(4) == 0 ? "mob.cat.purreow" : "mob.cat.meow")) : "";
     }
 
-    protected String bc() {
+    protected String aK() {
         return "mob.cat.hitt";
     }
 
-    protected String bd() {
+    protected String aL() {
         return "mob.cat.hitt";
     }
 
-    protected float ba() {
+    protected float aW() {
         return 0.4F;
     }
 
-    protected int be() {
-        return Item.aG.cp;
+    protected int s() {
+        return Item.aH.cv;
     }
 
     public boolean m(Entity entity) {
-        return entity.a(DamageSource.a((EntityLiving) this), 3);
+        return entity.a(DamageSource.a((EntityLivingBase) this), 3.0F);
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
-        if (this.aq()) {
+    public boolean a(DamageSource damagesource, float f0) {
+        if (this.ap()) {
             return false;
         } else {
-            this.d.a(false);
-            return super.a(damagesource, i0);
+            this.bp.a(false);
+            return super.a(damagesource, f0);
         }
     }
 
-    protected void a(boolean flag0, int i0) {}
+    protected void b(boolean flag0, int i0) {}
 
-    public boolean a_(EntityPlayer entityplayer) {
-        ItemStack itemstack = entityplayer.bK.h();
+    public boolean a(EntityPlayer entityplayer) {
+        ItemStack itemstack = entityplayer.bn.h();
 
-        if (this.m()) {
-            if (entityplayer.bS.equalsIgnoreCase(this.o()) && !this.q.I && !this.c(itemstack)) {
-                this.d.a(!this.n());
+        if (this.bP()) {
+            if (entityplayer.c_().equalsIgnoreCase(this.h_()) && !this.q.I && !this.c(itemstack)) {
+                this.bp.a(!this.bQ());
             }
-        } else if (this.e.f() && itemstack != null && itemstack.c == Item.aV.cp && entityplayer.e(this) < 9.0D) {
-            if (!entityplayer.ce.d) {
-                --itemstack.a;
+        } else if (this.bq.f() && itemstack != null && itemstack.d == Item.aW.cv && entityplayer.e(this) < 9.0D) {
+            if (!entityplayer.bG.d) {
+                --itemstack.b;
             }
 
-            if (itemstack.a <= 0) {
-                entityplayer.bK.a(entityplayer.bK.c, (ItemStack) null);
+            if (itemstack.b <= 0) {
+                entityplayer.bn.a(entityplayer.bn.c, (ItemStack) null);
             }
 
             if (!this.q.I) {
@@ -135,14 +140,14 @@ public class EntityOcelot extends EntityTameable {
 
                 if (hook.isTamed() && !hook.isCanceled()) {
                     //
+                    this.k(true);
+                    this.p(1 + this.q.s.nextInt(3));
+                    this.b(entityplayer.c_());
                     this.j(true);
-                    this.s(1 + this.q.s.nextInt(3));
-                    this.a(entityplayer.bS);
-                    this.i(true);
-                    this.d.a(true);
+                    this.bp.a(true);
                     this.q.a((Entity) this, (byte) 7);
                 } else {
-                    this.i(false);
+                    this.j(false);
                     this.q.a((Entity) this, (byte) 6);
                 }
             }
@@ -150,48 +155,48 @@ public class EntityOcelot extends EntityTameable {
             return true;
         }
 
-        return super.a_(entityplayer);
+        return super.a(entityplayer);
     }
 
     public EntityOcelot b(EntityAgeable entityageable) {
         EntityOcelot entityocelot = new EntityOcelot(this.q);
 
-        if (this.m()) {
-            entityocelot.a(this.o());
-            entityocelot.j(true);
-            entityocelot.s(this.t());
+        if (this.bP()) {
+            entityocelot.b(this.h_());
+            entityocelot.k(true);
+            entityocelot.p(this.bW());
         }
 
         return entityocelot;
     }
 
     public boolean c(ItemStack itemstack) {
-        return itemstack != null && itemstack.c == Item.aV.cp;
+        return itemstack != null && itemstack.d == Item.aW.cv;
     }
 
     public boolean a(EntityAnimal entityanimal) {
         if (entityanimal == this) {
             return false;
-        } else if (!this.m()) {
+        } else if (!this.bP()) {
             return false;
         } else if (!(entityanimal instanceof EntityOcelot)) {
             return false;
         } else {
             EntityOcelot entityocelot = (EntityOcelot) entityanimal;
 
-            return !entityocelot.m() ? false : this.r() && entityocelot.r();
+            return !entityocelot.bP() ? false : this.bU() && entityocelot.bU();
         }
     }
 
-    public int t() {
+    public int bW() {
         return this.ah.a(18);
     }
 
-    public void s(int i0) {
+    public void p(int i0) {
         this.ah.b(18, Byte.valueOf((byte) i0));
     }
 
-    public boolean bv() {
+    public boolean bo() {
         if (this.q.s.nextInt(3) == 0) {
             return false;
         } else {
@@ -206,7 +211,7 @@ public class EntityOcelot extends EntityTameable {
 
                 int i3 = this.q.a(i0, i1 - 1, i2);
 
-                if (i3 == Block.y.cz || i3 == Block.O.cz) {
+                if (i3 == Block.z.cF || i3 == Block.P.cF) {
                     return true;
                 }
             }
@@ -215,20 +220,23 @@ public class EntityOcelot extends EntityTameable {
         }
     }
 
-    public String am() {
-        return this.bQ() ? this.bP() : (this.m() ? "entity.Cat.name" : super.am());
+    public String al() {
+        return this.bx() ? this.bw() : (this.bP() ? "entity.Cat.name" : super.al());
     }
 
-    public void bJ() {
+    public EntityLivingData a(EntityLivingData entitylivingdata) {
+        entitylivingdata = super.a(entitylivingdata);
         if (this.q.s.nextInt(7) == 0) {
             for (int i0 = 0; i0 < 2; ++i0) {
                 EntityOcelot entityocelot = new EntityOcelot(this.q);
 
                 entityocelot.b(this.u, this.v, this.w, this.A, 0.0F);
-                entityocelot.a(-24000);
+                entityocelot.c(-24000);
                 this.q.d((Entity) entityocelot);
             }
         }
+
+        return entitylivingdata;
     }
 
     public EntityAgeable a(EntityAgeable entityageable) {

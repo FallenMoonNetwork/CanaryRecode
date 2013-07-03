@@ -8,45 +8,44 @@ public class EntityMooshroom extends EntityCow {
 
     public EntityMooshroom(World world) {
         super(world);
-        this.aH = "/mob/redcow.png";
         this.a(0.9F, 1.3F);
         this.entity = new CanaryMooshroom(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean a_(EntityPlayer entityplayer) {
-        ItemStack itemstack = entityplayer.bK.h();
+    public boolean a(EntityPlayer entityplayer) {
+        ItemStack itemstack = entityplayer.bn.h();
 
-        if (itemstack != null && itemstack.c == Item.F.cp && this.b() >= 0) {
-            if (itemstack.a == 1) {
-                entityplayer.bK.a(entityplayer.bK.c, new ItemStack(Item.G));
+        if (itemstack != null && itemstack.d == Item.G.cv && this.b() >= 0) {
+            if (itemstack.b == 1) {
+                entityplayer.bn.a(entityplayer.bn.c, new ItemStack(Item.H));
                 return true;
             }
 
-            if (entityplayer.bK.a(new ItemStack(Item.G)) && !entityplayer.ce.d) {
-                entityplayer.bK.a(entityplayer.bK.c, 1);
+            if (entityplayer.bn.a(new ItemStack(Item.H)) && !entityplayer.bG.d) {
+                entityplayer.bn.a(entityplayer.bn.c, 1);
                 return true;
             }
         }
 
-        if (itemstack != null && itemstack.c == Item.bf.cp && this.b() >= 0) {
+        if (itemstack != null && itemstack.d == Item.bg.cv && this.b() >= 0) {
             this.w();
             this.q.a("largeexplode", this.u, this.v + (double) (this.P / 2.0F), this.w, 0.0D, 0.0D, 0.0D);
             if (!this.q.I) {
                 EntityCow entitycow = new EntityCow(this.q);
 
                 entitycow.b(this.u, this.v, this.w, this.A, this.B);
-                entitycow.b(this.aX());
-                entitycow.ay = this.ay;
+                entitycow.g(this.aJ());
+                entitycow.aN = this.aN;
                 this.q.d((Entity) entitycow);
 
                 for (int i0 = 0; i0 < 5; ++i0) {
-                    this.q.d((Entity) (new EntityItem(this.q, this.u, this.v + (double) this.P, this.w, new ItemStack(Block.ak))));
+                    this.q.d((Entity) (new EntityItem(this.q, this.u, this.v + (double) this.P, this.w, new ItemStack(Block.al))));
                 }
             }
 
             return true;
         } else {
-            return super.a_(entityplayer);
+            return super.a(entityplayer);
         }
     }
 

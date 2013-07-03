@@ -25,7 +25,7 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
     }
 
     public Block n() {
-        return Block.cu;
+        return Block.cv;
     }
 
     public int r() {
@@ -36,7 +36,7 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
         return 5;
     }
 
-    public boolean a_(EntityPlayer entityplayer) {
+    public boolean c(EntityPlayer entityplayer) {
         if (!this.q.I) {
             entityplayer.a(this);
         }
@@ -47,12 +47,12 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
     public void a(int i0, int i1, int i2, boolean flag0) {
         boolean flag1 = !flag0;
 
-        if (flag1 != this.ay()) {
+        if (flag1 != this.ax()) {
             this.f(flag1);
         }
     }
 
-    public boolean ay() {
+    public boolean ax() {
         return this.a;
     }
 
@@ -60,37 +60,37 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
         this.a = flag0;
     }
 
-    public World az() {
+    public World ay() {
         return this.q;
     }
 
-    public double aA() {
+    public double az() {
         return this.u;
     }
 
-    public double aB() {
+    public double aA() {
         return this.v;
     }
 
-    public double aC() {
+    public double aB() {
         return this.w;
     }
 
     public void l_() {
         super.l_();
-        if (!this.q.I && this.R() && this.ay()) {
+        if (!this.q.I && this.R() && this.ax()) {
             --this.b;
-            if (!this.aE()) {
-                this.n(0);
-                if (this.aD()) {
-                    this.n(4);
-                    this.k_();
+            if (!this.aD()) {
+                this.l(0);
+                if (this.aC()) {
+                    this.l(4);
+                    this.e();
                 }
             }
         }
     }
 
-    public boolean aD() {
+    public boolean aC() {
         if (TileEntityHopper.a((Hopper) this)) {
             return true;
         } else {
@@ -106,7 +106,7 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
 
     public void a(DamageSource damagesource) {
         super.a(damagesource);
-        this.a(Block.cu.cz, 1, 0.0F);
+        this.a(Block.cv.cF, 1, 0.0F);
     }
 
     protected void b(NBTTagCompound nbttagcompound) {
@@ -119,11 +119,11 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
         this.b = nbttagcompound.e("TransferCooldown");
     }
 
-    public void n(int i0) {
+    public void l(int i0) {
         this.b = i0;
     }
 
-    public boolean aE() {
+    public boolean aD() {
         return this.b > 0;
     }
 }

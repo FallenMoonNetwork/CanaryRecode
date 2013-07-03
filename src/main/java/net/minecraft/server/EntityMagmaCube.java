@@ -8,40 +8,44 @@ public class EntityMagmaCube extends EntitySlime {
 
     public EntityMagmaCube(World world) {
         super(world);
-        this.aH = "/mob/lava.png";
         this.ag = true;
         this.aO = 0.2F;
         this.entity = new CanaryLavaSlime(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean bv() {
+    protected void ax() {
+        super.ax();
+        this.a(SharedMonsterAttributes.d).a(0.20000000298023224D);
+    }
+
+    public boolean bo() {
         return this.q.r > 0 && this.q.b(this.E) && this.q.a((Entity) this, this.E).isEmpty() && !this.q.d(this.E);
     }
 
-    public int aZ() {
-        return this.p() * 3;
+    public int aM() {
+        return this.bN() * 3;
     }
 
-    public float c(float f0) {
+    public float d(float f0) {
         return 1.0F;
     }
 
-    protected String h() {
+    protected String bF() {
         return "flame";
     }
 
-    protected EntitySlime i() {
+    protected EntitySlime bG() {
         return new EntityMagmaCube(this.q);
     }
 
-    protected int be() {
-        return Item.by.cp;
+    protected int s() {
+        return Item.bz.cv;
     }
 
-    protected void a(boolean flag0, int i0) {
-        int i1 = this.be();
+    protected void b(boolean flag0, int i0) {
+        int i1 = this.s();
 
-        if (i1 > 0 && this.p() > 1) {
+        if (i1 > 0 && this.bN() > 1) {
             int i2 = this.ab.nextInt(4) - 2;
 
             if (i0 > 0) {
@@ -54,50 +58,50 @@ public class EntityMagmaCube extends EntitySlime {
         }
     }
 
-    public boolean ae() {
+    public boolean ad() {
         return false;
     }
 
-    protected int j() {
-        return super.j() * 4;
+    protected int bH() {
+        return super.bH() * 4;
     }
 
-    protected void k() {
-        this.b *= 0.9F;
+    protected void bI() {
+        this.h *= 0.9F;
     }
 
-    protected void bl() {
-        this.y = (double) (0.42F + (float) this.p() * 0.1F);
+    protected void ba() {
+        this.y = (double) (0.42F + (float) this.bN() * 0.1F);
         this.an = true;
     }
 
-    protected void a(float f0) {}
+    protected void b(float f0) {}
 
-    protected boolean l() {
+    protected boolean bJ() {
         return true;
     }
 
-    protected int m() {
-        return super.m() + 2;
+    protected int bK() {
+        return super.bK() + 2;
     }
 
-    protected String bc() {
-        return "mob.slime." + (this.p() > 1 ? "big" : "small");
+    protected String aK() {
+        return "mob.slime." + (this.bN() > 1 ? "big" : "small");
     }
 
-    protected String bd() {
-        return "mob.slime." + (this.p() > 1 ? "big" : "small");
+    protected String aL() {
+        return "mob.slime." + (this.bN() > 1 ? "big" : "small");
     }
 
-    protected String n() {
-        return this.p() > 1 ? "mob.magmacube.big" : "mob.magmacube.small";
+    protected String bL() {
+        return this.bN() > 1 ? "mob.magmacube.big" : "mob.magmacube.small";
     }
 
     public boolean I() {
         return false;
     }
 
-    protected boolean o() {
+    protected boolean bM() {
         return true;
     }
 }

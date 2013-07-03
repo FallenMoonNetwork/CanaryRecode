@@ -18,7 +18,7 @@ public class EntityMinecartChest extends EntityMinecartContainer {
 
     public void a(DamageSource damagesource) {
         super.a(damagesource);
-        this.a(Block.ay.cz, 1, 0.0F);
+        this.a(Block.az.cF, 1, 0.0F);
     }
 
     public int j_() {
@@ -30,7 +30,7 @@ public class EntityMinecartChest extends EntityMinecartContainer {
     }
 
     public Block n() {
-        return Block.ay;
+        return Block.az;
     }
 
     public int r() {

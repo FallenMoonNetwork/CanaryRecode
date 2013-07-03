@@ -6,7 +6,7 @@ import net.canarymod.api.entity.vehicle.CanaryFurnaceMinecart;
 
 public class EntityMinecartFurnace extends EntityMinecart {
 
-    public int c = 0; // CanaryMod: private -> public
+    public int c; // CanaryMod: private -> public
     public double a;
     public double b;
 
@@ -48,7 +48,7 @@ public class EntityMinecartFurnace extends EntityMinecart {
     public void a(DamageSource damagesource) {
         super.a(damagesource);
         if (!damagesource.c()) {
-            this.a(new ItemStack(Block.aF, 1), 0.0F);
+            this.a(new ItemStack(Block.aG, 1), 0.0F);
         }
     }
 
@@ -93,12 +93,12 @@ public class EntityMinecartFurnace extends EntityMinecart {
         super.h();
     }
 
-    public boolean a_(EntityPlayer entityplayer) {
-        ItemStack itemstack = entityplayer.bK.h();
+    public boolean c(EntityPlayer entityplayer) {
+        ItemStack itemstack = entityplayer.bn.h();
 
-        if (itemstack != null && itemstack.c == Item.n.cp) {
-            if (--itemstack.a == 0) {
-                entityplayer.bK.a(entityplayer.bK.c, (ItemStack) null);
+        if (itemstack != null && itemstack.d == Item.o.cv) {
+            if (!entityplayer.bG.d && --itemstack.b == 0) {
+                entityplayer.bn.a(entityplayer.bn.c, (ItemStack) null);
             }
 
             this.c += 3600;
@@ -136,7 +136,7 @@ public class EntityMinecartFurnace extends EntityMinecart {
     }
 
     public Block n() {
-        return Block.aG;
+        return Block.aH;
     }
 
     public int p() {

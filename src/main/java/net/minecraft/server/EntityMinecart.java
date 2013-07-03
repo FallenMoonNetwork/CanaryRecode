@@ -33,7 +33,6 @@ public abstract class EntityMinecart extends Entity {
 
     public EntityMinecart(World world) {
         super(world);
-        this.a = false;
         this.m = true;
         this.a(0.98F, 0.7F);
         this.N = this.P / 2.0F;
@@ -62,14 +61,14 @@ public abstract class EntityMinecart extends Entity {
         }
     }
 
-    protected boolean f_() {
+    protected boolean e_() {
         return false;
     }
 
     protected void a() {
         this.ah.a(17, new Integer(0));
         this.ah.a(18, new Integer(1));
-        this.ah.a(19, new Integer(0));
+        this.ah.a(19, new Float(0.0F));
         this.ah.a(20, new Integer(0));
         this.ah.a(21, new Integer(6));
         this.ah.a(22, Byte.valueOf((byte) 0));
@@ -89,7 +88,7 @@ public abstract class EntityMinecart extends Entity {
 
     public EntityMinecart(World world, double d0, double d1, double d2) {
         this(world);
-        this.b(d0, d1 + (double) this.N, d2);
+        this.b(d0, d1, d2);
         this.x = 0.0D;
         this.y = 0.0D;
         this.z = 0.0D;
@@ -102,9 +101,9 @@ public abstract class EntityMinecart extends Entity {
         return (double) this.P * 0.0D - 0.30000001192092896D;
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
+    public boolean a(DamageSource damagesource, float f0) {
         if (!this.q.I && !this.M) {
-            if (this.aq()) {
+            if (this.ap()) {
                 return false;
             } else {
                 // CanaryMod: VehicleDamage
@@ -122,13 +121,13 @@ public abstract class EntityMinecart extends Entity {
                 i0 = hook.getDamageDealt();
                 //
 
-                this.j(-this.k());
-                this.i(10);
+                this.h(-this.k());
+                this.c(10);
                 this.J();
-                this.h(this.i() + i0 * 10);
-                boolean flag0 = damagesource.i() instanceof EntityPlayer && ((EntityPlayer) damagesource.i()).ce.d;
+                this.a(this.i() + f0 * 10.0F);
+                boolean flag0 = damagesource.i() instanceof EntityPlayer && ((EntityPlayer) damagesource.i()).bG.d;
 
-                if (flag0 || this.i() > 40) {
+                if (flag0 || this.i() > 40.0F) {
                     if (this.n != null) {
                         this.n.a((Entity) this);
                     }
@@ -154,7 +153,7 @@ public abstract class EntityMinecart extends Entity {
         Canary.hooks().callHook(vdh);
         //
         this.w();
-        ItemStack itemstack = new ItemStack(Item.aA, 1);
+        ItemStack itemstack = new ItemStack(Item.aB, 1);
 
         if (this.c != null) {
             itemstack.c(this.c);
@@ -180,11 +179,11 @@ public abstract class EntityMinecart extends Entity {
         }
 
         if (this.j() > 0) {
-            this.i(this.j() - 1);
+            this.c(this.j() - 1);
         }
 
-        if (this.i() > 0) {
-            this.h(this.i() - 1);
+        if (this.i() > 0.0F) {
+            this.a(this.i() - 1.0F);
         }
 
         if (this.v < -64.0D) {
@@ -205,13 +204,13 @@ public abstract class EntityMinecart extends Entity {
                         this.ao = this.aa();
                         byte b0;
 
-                        if (this.q.t.h == -1) {
+                        if (this.q.t.i == -1) {
                             b0 = 0;
                         } else {
                             b0 = -1;
                         }
 
-                        this.c(b0);
+                        this.b(b0);
                     }
 
                     this.ap = false;
@@ -278,11 +277,11 @@ public abstract class EntityMinecart extends Entity {
             double d5 = 0.0078125D;
             int i3 = this.q.a(i1, i0, i2);
 
-            if (BlockRailBase.d_(i3)) {
+            if (BlockRailBase.e_(i3)) {
                 int i4 = this.q.h(i1, i0, i2);
 
                 this.a(i1, i0, i2, d4, d5, i3, i4);
-                if (i3 == Block.cx.cz) {
+                if (i3 == Block.cy.cF) {
                     // CanaryMod: MinecartActivate
                     MinecartActivateHook mah = new MinecartActivateHook((Minecart) this.getCanaryEntity(), (i1 & 8) != 0);
 
@@ -379,12 +378,12 @@ public abstract class EntityMinecart extends Entity {
         boolean flag0 = false;
         boolean flag1 = false;
 
-        if (i3 == Block.X.cz) {
+        if (i3 == Block.Y.cF) {
             flag0 = (i4 & 8) != 0;
             flag1 = !flag0;
         }
 
-        if (((BlockRailBase) Block.r[i3]).e()) {
+        if (((BlockRailBase) Block.s[i3]).e()) {
             i4 &= 7;
         }
 
@@ -429,14 +428,20 @@ public abstract class EntityMinecart extends Entity {
         this.z = d6 * d3 / d4;
         double d7;
         double d8;
+        double d9;
+        double d10;
 
-        if (this.n != null) {
-            d7 = this.n.x * this.n.x + this.n.z * this.n.z;
-            d8 = this.x * this.x + this.z * this.z;
-            if (d7 > 1.0E-4D && d8 < 0.01D) {
-                this.x += this.n.x * 0.1D;
-                this.z += this.n.z * 0.1D;
-                flag1 = false;
+        if (this.n != null && this.n instanceof EntityLivingBase) {
+            d7 = (double) ((EntityLivingBase) this.n).bf;
+            if (d7 > 0.0D) {
+                d8 = -Math.sin((double) (this.n.A * 3.1415927F / 180.0F));
+                d9 = Math.cos((double) (this.n.A * 3.1415927F / 180.0F));
+                d10 = this.x * this.x + this.z * this.z;
+                if (d10 < 0.01D) {
+                    this.x += d8 * 0.1D;
+                    this.z += d9 * 0.1D;
+                    flag1 = false;
+                }
             }
         }
 
@@ -455,8 +460,8 @@ public abstract class EntityMinecart extends Entity {
 
         d7 = 0.0D;
         d8 = (double) i0 + 0.5D + (double) aint[0][0] * 0.5D;
-        double d9 = (double) i2 + 0.5D + (double) aint[0][2] * 0.5D;
-        double d10 = (double) i0 + 0.5D + (double) aint[1][0] * 0.5D;
+        d9 = (double) i2 + 0.5D + (double) aint[0][2] * 0.5D;
+        d10 = (double) i0 + 0.5D + (double) aint[1][0] * 0.5D;
         double d11 = (double) i2 + 0.5D + (double) aint[1][2] * 0.5D;
 
         d2 = d10 - d8;
@@ -580,11 +585,11 @@ public abstract class EntityMinecart extends Entity {
 
         int i3 = this.q.a(i0, i1, i2);
 
-        if (BlockRailBase.d_(i3)) {
+        if (BlockRailBase.e_(i3)) {
             int i4 = this.q.h(i0, i1, i2);
 
             d1 = (double) i1;
-            if (((BlockRailBase) Block.r[i3]).e()) {
+            if (((BlockRailBase) Block.s[i3]).e()) {
                 i4 &= 7;
             }
 
@@ -628,7 +633,7 @@ public abstract class EntityMinecart extends Entity {
                 d1 += 0.5D;
             }
 
-            return this.q.U().a(d0, d1, d2);
+            return this.q.V().a(d0, d1, d2);
         } else {
             return null;
         }
@@ -636,9 +641,9 @@ public abstract class EntityMinecart extends Entity {
 
     protected void a(NBTTagCompound nbttagcompound) {
         if (nbttagcompound.n("CustomDisplayTile")) {
-            this.k(nbttagcompound.e("DisplayTile"));
-            this.l(nbttagcompound.e("DisplayData"));
-            this.m(nbttagcompound.e("DisplayOffset"));
+            this.i(nbttagcompound.e("DisplayTile"));
+            this.j(nbttagcompound.e("DisplayData"));
+            this.k(nbttagcompound.e("DisplayOffset"));
         }
 
         if (nbttagcompound.b("CustomName") && nbttagcompound.i("CustomName").length() > 0) {
@@ -649,7 +654,7 @@ public abstract class EntityMinecart extends Entity {
     protected void b(NBTTagCompound nbttagcompound) {
         if (this.s()) {
             nbttagcompound.a("CustomDisplayTile", true);
-            nbttagcompound.a("DisplayTile", this.m() == null ? 0 : this.m().cz);
+            nbttagcompound.a("DisplayTile", this.m() == null ? 0 : this.m().cF);
             nbttagcompound.a("DisplayData", this.o());
             nbttagcompound.a("DisplayOffset", this.q());
         }
@@ -670,7 +675,7 @@ public abstract class EntityMinecart extends Entity {
                     return;
                 }
                 //
-                if (entity instanceof EntityLiving && !(entity instanceof EntityPlayer) && !(entity instanceof EntityIronGolem) && this.l() == 0 && this.x * this.x + this.z * this.z > 0.01D && this.n == null && entity.o == null) {
+                if (entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer) && !(entity instanceof EntityIronGolem) && this.l() == 0 && this.x * this.x + this.z * this.z > 0.01D && this.n == null && entity.o == null) {
                     // CanaryMod: VehicleEnter (Animal/Mob)
                     VehicleEnterHook veh = new VehicleEnterHook((Vehicle) this.entity, (EntityLiving) entity.getCanaryEntity());
 
@@ -706,8 +711,8 @@ public abstract class EntityMinecart extends Entity {
                     if (entity instanceof EntityMinecart) {
                         double d4 = entity.u - this.u;
                         double d5 = entity.w - this.w;
-                        Vec3 vec3 = this.q.U().a(d4, 0.0D, d5).a();
-                        Vec3 vec31 = this.q.U().a((double) MathHelper.b(this.A * 3.1415927F / 180.0F), 0.0D, (double) MathHelper.a(this.A * 3.1415927F / 180.0F)).a();
+                        Vec3 vec3 = this.q.V().a(d4, 0.0D, d5).a();
+                        Vec3 vec31 = this.q.V().a((double) MathHelper.b(this.A * 3.1415927F / 180.0F), 0.0D, (double) MathHelper.a(this.A * 3.1415927F / 180.0F)).a();
                         double d6 = Math.abs(vec3.b(vec31));
 
                         if (d6 < 0.800000011920929D) {
@@ -748,15 +753,15 @@ public abstract class EntityMinecart extends Entity {
         }
     }
 
-    public void h(int i0) {
-        this.ah.b(19, Integer.valueOf(i0));
+    public void a(float f0) {
+        this.ah.b(19, Float.valueOf(f0));
     }
 
-    public int i() {
-        return this.ah.c(19);
+    public float i() {
+        return this.ah.d(19);
     }
 
-    public void i(int i0) {
+    public void c(int i0) {
         this.ah.b(17, Integer.valueOf(i0));
     }
 
@@ -764,7 +769,7 @@ public abstract class EntityMinecart extends Entity {
         return this.ah.c(17);
     }
 
-    public void j(int i0) {
+    public void h(int i0) {
         this.ah.b(18, Integer.valueOf(i0));
     }
 
@@ -780,7 +785,7 @@ public abstract class EntityMinecart extends Entity {
         } else {
             int i0 = this.u().c(20) & '\uffff';
 
-            return i0 > 0 && i0 < Block.r.length ? Block.r[i0] : null;
+            return i0 > 0 && i0 < Block.s.length ? Block.s[i0] : null;
         }
     }
 
@@ -804,20 +809,20 @@ public abstract class EntityMinecart extends Entity {
         return 6;
     }
 
-    public void k(int i0) {
+    public void i(int i0) {
         this.u().b(20, Integer.valueOf(i0 & '\uffff' | this.o() << 16));
         this.a(true);
     }
 
-    public void l(int i0) {
+    public void j(int i0) {
         Block block = this.m();
-        int i1 = block == null ? 0 : block.cz;
+        int i1 = block == null ? 0 : block.cF;
 
         this.u().b(20, Integer.valueOf(i1 & '\uffff' | i0 << 16));
         this.a(true);
     }
 
-    public void m(int i0) {
+    public void k(int i0) {
         this.u().b(21, Integer.valueOf(i0));
         this.a(true);
     }
@@ -834,8 +839,8 @@ public abstract class EntityMinecart extends Entity {
         this.c = s0;
     }
 
-    public String am() {
-        return this.c != null ? this.c : super.am();
+    public String al() {
+        return this.c != null ? this.c : super.al();
     }
 
     public boolean c() {

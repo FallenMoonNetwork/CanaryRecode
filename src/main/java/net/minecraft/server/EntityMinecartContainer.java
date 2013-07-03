@@ -25,15 +25,15 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
                 float f1 = this.ab.nextFloat() * 0.8F + 0.1F;
                 float f2 = this.ab.nextFloat() * 0.8F + 0.1F;
 
-                while (itemstack.a > 0) {
+                while (itemstack.b > 0) {
                     int i1 = this.ab.nextInt(21) + 10;
 
-                    if (i1 > itemstack.a) {
-                        i1 = itemstack.a;
+                    if (i1 > itemstack.b) {
+                        i1 = itemstack.b;
                     }
 
-                    itemstack.a -= i1;
-                    EntityItem entityitem = new EntityItem(this.q, this.u + (double) f0, this.v + (double) f1, this.w + (double) f2, new ItemStack(itemstack.c, i1, itemstack.k()));
+                    itemstack.b -= i1;
+                    EntityItem entityitem = new EntityItem(this.q, this.u + (double) f0, this.v + (double) f1, this.w + (double) f2, new ItemStack(itemstack.d, i1, itemstack.k()));
                     float f3 = 0.05F;
 
                     entityitem.x = (double) ((float) this.ab.nextGaussian() * f3);
@@ -53,13 +53,13 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
         if (this.a[i0] != null) {
             ItemStack itemstack;
 
-            if (this.a[i0].a <= i1) {
+            if (this.a[i0].b <= i1) {
                 itemstack = this.a[i0];
                 this.a[i0] = null;
                 return itemstack;
             } else {
                 itemstack = this.a[i0].a(i1);
-                if (this.a[i0].a == 0) {
+                if (this.a[i0].b == 0) {
                     this.a[i0] = null;
                 }
 
@@ -70,7 +70,7 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
         }
     }
 
-    public ItemStack b(int i0) {
+    public ItemStack a_(int i0) {
         if (this.a[i0] != null) {
             ItemStack itemstack = this.a[i0];
 
@@ -83,18 +83,18 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
 
     public void a(int i0, ItemStack itemstack) {
         this.a[i0] = itemstack;
-        if (itemstack != null && itemstack.a > this.d()) {
-            itemstack.a = this.d();
+        if (itemstack != null && itemstack.b > this.d()) {
+            itemstack.b = this.d();
         }
     }
 
-    public void k_() {}
+    public void e() {}
 
     public boolean a(EntityPlayer entityplayer) {
         return this.M ? false : entityplayer.e(this) <= 64.0D;
     }
 
-    public void f() {}
+    public void k_() {}
 
     public void g() {}
 
@@ -110,9 +110,9 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
         return 64;
     }
 
-    public void c(int i0) {
+    public void b(int i0) {
         this.b = false;
-        super.c(i0);
+        super.b(i0);
     }
 
     public void w() {
@@ -125,15 +125,15 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
                     float f1 = this.ab.nextFloat() * 0.8F + 0.1F;
                     float f2 = this.ab.nextFloat() * 0.8F + 0.1F;
 
-                    while (itemstack.a > 0) {
+                    while (itemstack.b > 0) {
                         int i1 = this.ab.nextInt(21) + 10;
 
-                        if (i1 > itemstack.a) {
-                            i1 = itemstack.a;
+                        if (i1 > itemstack.b) {
+                            i1 = itemstack.b;
                         }
 
-                        itemstack.a -= i1;
-                        EntityItem entityitem = new EntityItem(this.q, this.u + (double) f0, this.v + (double) f1, this.w + (double) f2, new ItemStack(itemstack.c, i1, itemstack.k()));
+                        itemstack.b -= i1;
+                        EntityItem entityitem = new EntityItem(this.q, this.u + (double) f0, this.v + (double) f1, this.w + (double) f2, new ItemStack(itemstack.d, i1, itemstack.k()));
 
                         if (itemstack.p()) {
                             entityitem.d().d((NBTTagCompound) itemstack.q().b());
@@ -186,7 +186,7 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
         }
     }
 
-    public boolean a_(EntityPlayer entityplayer) {
+    public boolean c(EntityPlayer entityplayer) {
         if (!this.q.I) {
             entityplayer.a((IInventory) this);
         }

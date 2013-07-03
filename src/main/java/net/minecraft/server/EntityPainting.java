@@ -67,11 +67,19 @@ public class EntityPainting extends EntityHanging {
         return this.e.C;
     }
 
-    public int g() {
+    public int e() {
         return this.e.D;
     }
 
-    public void h() {
-        this.a(new ItemStack(Item.at), 0.0F);
+    public void b(Entity entity) {
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer entityplayer = (EntityPlayer) entity;
+
+            if (entityplayer.bG.d) {
+                return;
+            }
+        }
+
+        this.a(new ItemStack(Item.au), 0.0F);
     }
 }

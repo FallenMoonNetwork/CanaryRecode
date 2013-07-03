@@ -23,7 +23,7 @@ public class EntityMinecartTNT extends EntityMinecart {
     }
 
     public Block n() {
-        return Block.aq;
+        return Block.ar;
     }
 
     public void l_() {
@@ -49,7 +49,7 @@ public class EntityMinecartTNT extends EntityMinecart {
         double d0 = this.x * this.x + this.z * this.z;
 
         if (!damagesource.c()) {
-            this.a(new ItemStack(Block.aq, 1), 0.0F);
+            this.a(new ItemStack(Block.ar, 1), 0.0F);
         }
 
         if (damagesource.m() || damagesource.c() || d0 >= 0.009999999776482582D) {
@@ -70,14 +70,14 @@ public class EntityMinecartTNT extends EntityMinecart {
         }
     }
 
-    protected void a(float f0) {
+    protected void b(float f0) {
         if (f0 >= 3.0F) {
             float f1 = f0 / 10.0F;
 
             this.c((double) (f1 * f1));
         }
 
-        super.a(f0);
+        super.b(f0);
     }
 
     public void a(int i0, int i1, int i2, boolean flag0) {
@@ -94,16 +94,16 @@ public class EntityMinecartTNT extends EntityMinecart {
         }
     }
 
-    public boolean ay() {
+    public boolean ax() {
         return this.a > -1;
     }
 
     public float a(Explosion explosion, World world, int i0, int i1, int i2, Block block) {
-        return this.ay() && (BlockRailBase.d_(block.cz) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? 0.0F : super.a(explosion, world, i0, i1, i2, block);
+        return this.ax() && (BlockRailBase.e_(block.cF) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? 0.0F : super.a(explosion, world, i0, i1, i2, block);
     }
 
     public boolean a(Explosion explosion, World world, int i0, int i1, int i2, int i3, float f0) {
-        return this.ay() && (BlockRailBase.d_(i3) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? false : super.a(explosion, world, i0, i1, i2, i3, f0);
+        return this.ax() && (BlockRailBase.e_(i3) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? false : super.a(explosion, world, i0, i1, i2, i3, f0);
     }
 
     protected void a(NBTTagCompound nbttagcompound) {
