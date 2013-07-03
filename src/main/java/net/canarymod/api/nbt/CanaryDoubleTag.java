@@ -54,6 +54,14 @@ public class CanaryDoubleTag extends CanaryBaseTag implements DoubleTag {
      * {@inheritDoc}
      */
     @Override
+    public DoubleTag copy() {
+        return new CanaryDoubleTag((NBTTagDouble) getHandle().b());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public NBTTagDouble getHandle() {
         return (NBTTagDouble) tag;
     }

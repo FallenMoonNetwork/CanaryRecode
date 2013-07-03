@@ -1,7 +1,23 @@
 package net.canarymod.api.world;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import net.canarymod.api.entity.Entity;
+import net.canarymod.api.world.blocks.ComplexBlock;
+import net.canarymod.api.world.position.Position;
+import net.minecraft.server.ChunkPosition;
+import net.minecraft.server.TileEntity;
 
 
+/**
+ * Chunk implementation
+ * 
+ * @author Chris (damagefilter)
+ * @author Jason (darkdiplomat)
+ * @author Jos Kuijpers
+ */
 public class CanaryChunk implements Chunk {
     private net.minecraft.server.Chunk handle;
 
@@ -89,5 +105,62 @@ public class CanaryChunk implements Chunk {
             }
         }
         handle.a(data);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Map<Position, ComplexBlock> getTileEntityMap() {
+        HashMap<Position, ComplexBlock> toRet = new HashMap<Position, ComplexBlock>();
+        synchronized (handle.i) {
+            for (ChunkPosition pos : (Set<ChunkPosition>) handle.i.keySet()) {
+                Position cPos = new Position(pos.a, pos.b, pos.c);
+                TileEntity te = (TileEntity) handle.i.get(pos);
+                if (te.complexBlock != null) {
+                    toRet.put(cPos, te.complexBlock);
+                }
+            }
+        }
+        return toRet;
+    }
+
+    @Override
+    public boolean hasEntities() {
+        return handle.m;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Entity>[] getEntityLists() {
+        List<Entity>[] toRet = new List[handle.j.length];
+        for (int index = 0; index < handle.j.length; index++) {
+            for (Object e : handle.j[index]) {
+                toRet[index].add(((net.minecraft.server.Entity) e).getCanaryEntity());
+            }
+        }
+        return toRet;
+    }
+
+    @Override
+    public int[] getHeightMap() {
+        return handle.f;
+    }
+
+    @Override
+    public int[] getPrecipitationHeightMap() {
+        return handle.b;
+    }
+
+    @Override
+    public long getLastSaveTime() {
+        return handle.n;
+    }
+
+    @Override
+    public boolean isTerrainPopulated() {
+        return handle.k;
+    }
+
+    @Override
+    public boolean isModified() {
+        return handle.l;
     }
 }

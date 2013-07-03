@@ -54,6 +54,14 @@ public class CanaryFloatTag extends CanaryBaseTag implements FloatTag {
      * {@inheritDoc}
      */
     @Override
+    public FloatTag copy() {
+        return new CanaryFloatTag((NBTTagFloat) getHandle().b());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public NBTTagFloat getHandle() {
         return (NBTTagFloat) tag;
     }

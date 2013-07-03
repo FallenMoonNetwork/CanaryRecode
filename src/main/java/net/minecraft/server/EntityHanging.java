@@ -194,7 +194,7 @@ public abstract class EntityHanging extends Entity {
 
                 if (entityplayer != null) {
                     // CanaryMod: HangingEntityDestory
-                    HangingEntityDestroyHook hook = new HangingEntityDestroyHook((HangingEntity) this.entity, ((EntityPlayerMP) entityplayer).getPlayer());
+                    HangingEntityDestroyHook hook = new HangingEntityDestroyHook((HangingEntity) this.entity, ((EntityPlayerMP) entityplayer).getPlayer(), damagesource.damageSource);
                     Canary.hooks().callHook(hook);
                     if (hook.isCanceled()) {
                         return false;

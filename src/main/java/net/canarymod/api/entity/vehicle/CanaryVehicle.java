@@ -24,8 +24,8 @@ public abstract class CanaryVehicle extends CanaryEntity implements Vehicle {
 
     @Override
     public Entity getPassenger() {
-        if (entity.n != null) {
-            entity.n.getCanaryEntity();
+        if (!isEmpty()) {
+            return entity.n.getCanaryEntity();
         }
         return null;
     }

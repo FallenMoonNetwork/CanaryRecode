@@ -7,12 +7,17 @@ import net.canarymod.Canary;
 import net.canarymod.api.nbt.CanaryBaseTag;
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.nbt.CanaryDoubleTag;
+import net.canarymod.api.nbt.CompoundTag;
 import net.canarymod.api.nbt.ListTag;
+import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.DimensionType;
+import net.canarymod.api.world.UnknownWorldException;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Position;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
+import net.minecraft.server.ISaveHandler;
+import net.minecraft.server.SaveHandler;
 
 public class CanaryOfflinePlayer implements OfflinePlayer {
 
@@ -25,7 +30,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
     public CanaryOfflinePlayer(String name, CanaryCompoundTag tag) {
         this.data = tag;
         this.name = name;
-        provider = Canary.permissionManager().getPlayerProvider(name);
+        provider = Canary.permissionManager().getPlayerProvider(name, getWorld().getFqName());
         String[] data = Canary.usersAndGroups().getPlayerData(name);
         Group[] subs = Canary.usersAndGroups().getModuleGroupsForPlayer(name);
         groups = new LinkedList<Group>();
@@ -77,7 +82,12 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
         }
         int dim = data.getInt("Dimension");
         String world = data.getString("LevelName");
-        return Canary.getServer().getWorldManager().getWorld(world, DimensionType.fromId(dim), false);
+        try {
+            return Canary.getServer().getWorldManager().getWorld(world, DimensionType.fromId(dim), false);
+        }
+        catch(UnknownWorldException e) {
+            return Canary.getServer().getDefaultWorld();
+        }
     }
 
     @Override
@@ -134,6 +144,30 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
             return false;
         }
         return removeGroup(gr);
+    }
+    @Override
+    public boolean isOnline() {
+        return Canary.getServer().getPlayer(name) != null;
+    }
+    @Override
+    public CompoundTag getNBT() {
+        return data;
+    }
+    @Override
+    public void save() {
+        if(isOnline()) {
+            Canary.logDebug("Attempted to save an online player! ("+getName()+")");
+            return;
+        }
+        ISaveHandler handler = ((CanaryWorld)getWorld()).getHandle().L();
+        if(handler instanceof SaveHandler) {
+            SaveHandler shandler = (SaveHandler)handler;
+            shandler.writePlayerNbt(getName(), (CanaryCompoundTag)getNBT());
+        }
+        else {
+            Canary.logServerMessage(getName() + "'s OfflinePlayer could not be saved! Unsupported SaveHandler!");
+        }
+
     }
 
 }

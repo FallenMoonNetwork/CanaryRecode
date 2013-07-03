@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 
 import java.util.List;
+import net.canarymod.hook.player.TeleportHook;
 
 
 public class CommandServerTp extends CommandBase {
@@ -16,8 +17,8 @@ public class CommandServerTp extends CommandBase {
         return 2;
     }
 
-    public String c(ICommandSender icommandsender) {
-        return "commands.tp.usage";
+    public String a(ICommandSender icommandsender) {
+        return icommandsender.a("commands.tp.usage", new Object[0]);
     }
 
     public void b(ICommandSender icommandsender, String[] astring) {

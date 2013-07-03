@@ -16,7 +16,7 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DamageHook;
-import net.canarymod.hook.entity.DimensionSwitch;
+import net.canarymod.hook.entity.DimensionSwitchHook;
 import net.canarymod.hook.entity.EntityMountHook;
 
 
@@ -1627,5 +1627,6 @@ public abstract class Entity {
         }
         return new Location(oworldserverTo.getCanaryWorld(), x, y, z, rotX, rotY);
     }
+
     //
 }

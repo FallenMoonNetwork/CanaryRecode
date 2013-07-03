@@ -9,8 +9,8 @@ import net.canarymod.hook.world.FireworkExplodeHook;
 
 public class EntityFireworkRocket extends Entity {
 
-    private int a;
-    private int b;
+    public int a; // CanaryMod: private => public
+    public int b; // CanaryMod: private => public
 
     public EntityFireworkRocket(World world) {
         super(world);
@@ -133,5 +133,13 @@ public class EntityFireworkRocket extends Entity {
 
     public boolean ao() {
         return false;
+    }
+
+    public ItemStack getItemStack() {
+        return this.ah.f(8);
+    }
+
+    public void setItemStack(ItemStack stack) {
+        this.ah.b(8, stack);
     }
 }

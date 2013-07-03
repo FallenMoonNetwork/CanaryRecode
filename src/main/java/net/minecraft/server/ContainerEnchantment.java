@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import net.canarymod.api.inventory.CanaryEnchantment;
+import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
+import net.canarymod.api.world.blocks.EnchantmentTable;
 import net.canarymod.hook.player.EnchantHook;
 
 
@@ -37,10 +39,13 @@ public class ContainerEnchantment extends Container {
         for (i3 = 0; i3 < 9; ++i3) {
             this.a(new Slot(inventoryplayer, i3, 8 + i3 * 18, 142));
         }
+
+        this.inventory = new CanaryEnchantmentTable(this); // CanaryMod: Set inventory instance
     }
 
     public void a(ICrafting icrafting) {
         super.a(icrafting);
+        // TODO: Hook
         icrafting.a(this, 0, this.g[0]);
         icrafting.a(this, 1, this.g[1]);
         icrafting.a(this, 2, this.g[2]);
@@ -49,6 +54,7 @@ public class ContainerEnchantment extends Container {
     public void b() {
         super.b();
 
+        // Hook
         for (int i0 = 0; i0 < this.e.size(); ++i0) {
             ICrafting icrafting = (ICrafting) this.e.get(i0);
 
@@ -118,23 +124,23 @@ public class ContainerEnchantment extends Container {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public boolean a(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = this.a.a(0);
 
         if (this.g[i0] > 0 && itemstack != null && (entityplayer.bH >= this.g[i0] || entityplayer.bG.d)) {
             if (!this.h.I) {
-                List list = EnchantmentHelper.b(this.l, itemstack, this.g[i0]);
+                List<EnchantmentData> list = EnchantmentHelper.b(this.l, itemstack, this.g[i0]);
                 boolean flag0 = itemstack.d == Item.aN.cv;
 
                 if (list != null) {
                     // CanaryMod: Enchant
                     List<net.canarymod.api.inventory.Enchantment> cench = new ArrayList<net.canarymod.api.inventory.Enchantment>();
 
-                    for (EnchantmentData endat : (List<EnchantmentData>) list) {
+                    for (EnchantmentData endat : list) {
                         cench.add(new CanaryEnchantment(endat));
                     }
-                    EnchantHook hook = new EnchantHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), cench);
-
+                    EnchantHook hook = (EnchantHook) new EnchantHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), (EnchantmentTable) this.inventory, cench).call();
                     if (!hook.isCanceled() && hook.isValid(false)) {
                         list.clear();
                         for (net.canarymod.api.inventory.Enchantment ench : hook.getEnchantmentList()) {

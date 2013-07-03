@@ -54,6 +54,14 @@ public class CanaryLongTag extends CanaryBaseTag implements LongTag {
      * {@inheritDoc}
      */
     @Override
+    public LongTag copy() {
+        return new CanaryLongTag((NBTTagLong) getHandle().b());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public NBTTagLong getHandle() {
         return (NBTTagLong) tag;
     }

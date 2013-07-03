@@ -243,6 +243,7 @@ public class CanaryCompoundTag extends CanaryBaseTag implements CompoundTag {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public ListTag<? extends CanaryBaseTag> getListTag(String key) {
         return new CanaryListTag<CanaryBaseTag>(getHandle().m(key));
@@ -270,6 +271,14 @@ public class CanaryCompoundTag extends CanaryBaseTag implements CompoundTag {
     @Override
     public boolean isEmpty() {
         return getHandle().d();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CompoundTag copy() {
+        return new CanaryCompoundTag((NBTTagCompound) getHandle().b());
     }
 
     /**

@@ -5,6 +5,7 @@ import net.canarymod.api.CanaryServer;
 import net.canarymod.api.channels.CanaryChannelManager;
 import net.canarymod.api.factory.CanaryFactory;
 import net.canarymod.api.factory.Factory;
+import net.canarymod.api.scoreboard.CanaryScoreboardManager;
 import net.canarymod.bansystem.BanManager;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.commandsys.CommandList;
@@ -17,6 +18,7 @@ import net.canarymod.kit.KitProvider;
 import net.canarymod.permissionsystem.PermissionManager;
 import net.canarymod.plugin.PluginLoader;
 import net.canarymod.user.OperatorsProvider;
+import net.canarymod.user.ReservelistProvider;
 import net.canarymod.user.UserAndGroupsProvider;
 import net.canarymod.user.WhitelistProvider;
 import net.canarymod.warp.WarpProvider;
@@ -43,17 +45,19 @@ public class CanaryMod extends Canary {
         this.config = new Configuration();
         // Initialize the subsystems that do not rely on others
         this.commandManager = new CommandManager();
-        this.permissionLoader = new PermissionManager();
+//        this.permissionManager = new PermissionManager();
         this.hookExecutor = new HookExecutor();
         this.helpManager = new HelpManager();
         this.banManager = new BanManager();
         this.whitelist = new WhitelistProvider();
         this.ops = new OperatorsProvider();
+        this.reservelist = new ReservelistProvider();
         this.factory = (Factory) new CanaryFactory();
         this.channelManager = new CanaryChannelManager();
         // Initialize the plugin loader and scan for plugins
         this.loader = new PluginLoader();
         this.loader.scanPlugins();
+        this.scoreboardManager = new CanaryScoreboardManager();
     }
 
     /**
@@ -78,8 +82,12 @@ public class CanaryMod extends Canary {
         try {
             this.commandManager.registerCommands(new CommandList(), Canary.getServer(), false);
         } catch (CommandDependencyException e) {
-            Canary.logStackTrace(e.getMessage(), e);
+            Canary.logStacktrace(e.getMessage(), e);
         }
+    }
+
+    public void initPermissions() {
+        this.permissionManager = new PermissionManager();
     }
 
     @Override

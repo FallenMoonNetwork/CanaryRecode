@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import net.canarymod.api.nbt.CanaryCompoundTag;
+
 
 public class SaveHandler implements ISaveHandler, IPlayerFileData {
 
@@ -213,7 +215,6 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
         } catch (Exception exception) {
             MinecraftServer.D().al().b("Failed to save player data for " + entityplayer.bS);
         }
-
     }
 
     @Override
@@ -271,4 +272,24 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
     public String g() {
         return this.e;
     }
+
+    //CanaryMod enable writing dat files from player name and a given base tag
+    //This is a copy of this.a(EntityPlayer and might need adjustments accordingly!)
+    public void writePlayerNbt(String player, CanaryCompoundTag tag) {
+        try {
+            NBTTagCompound nbttagcompound = tag.getHandle();
+
+            File file1 = new File(this.b, player + ".dat.tmp");
+            File file2 = new File(this.b, player + ".dat");
+
+            CompressedStreamTools.a(nbttagcompound, (OutputStream) (new FileOutputStream(file1)));
+            if (file2.exists()) {
+                file2.delete();
+            }
+            file1.renameTo(file2);
+        } catch (Exception exception) {
+            MinecraftServer.D().al().b("Failed to save player data for " + player);
+        }
+    }
+    // CanaryMod end
 }

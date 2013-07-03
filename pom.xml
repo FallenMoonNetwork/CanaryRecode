@@ -1,30 +1,72 @@
+<!--
+  Maven build file for CanaryMod
+  Copyright (c) 2012-2013 The CanaryMod Team <http://www.canarymod.net>
+  CanaryMod is available under the BSD 3-Clause License
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.canarymod</groupId>
   <artifactId>CanaryMod</artifactId>
   <packaging>jar</packaging>
-  <version>0.8-SNAPSHOT</version>
+  <version>0.9-SNAPSHOT</version>
   <name>CanaryMod</name>
   <url>http://www.canarymod.net</url>
+  <inceptionYear>2012</inceptionYear>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <minecraft.server.version>1.5.2</minecraft.server.version>
+    <api.version>0.8</api.version>
   </properties>
+  <licenses>
+    <license>
+      <name>BSD 3-Clause License</name>
+      <url>http://opensource.org/licenses/BSD-3-Clause</url>
+      <comments>
+        Copyright (c) 2012 - 2013, FallenMoonNetwork/CanaryMod Team
+        All rights reserved.
 
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are met:
+            * Redistributions of source code must retain the above copyright
+              notice, this list of conditions and the following disclaimer.
+            * Redistributions in binary form must reproduce the above copyright
+              notice, this list of conditions and the following disclaimer in the
+              documentation and/or other materials provided with the distribution.
+            * Neither the name of the FallenMoonNetwork/CanaryMod Team nor the
+              names of its contributors may be used to endorse or promote products
+              derived from this software without specific prior written permission.
+
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+        ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+        WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED. IN NO EVENT SHALL FallenMoonNetwork/CanaryMod Team BE LIABLE FOR ANY
+        DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+        (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+        LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+        ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+        SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    
+        Any code in src/main/java/net/minecraft is not owned by FallenMoonNetwork/CanaryMod
+        Team and is not covered by above license.
+        FallenMoonNetwork, CanaryMod Team, CanaryLib, and CanaryMod are NOT affiliated with, endorsed, 
+        or sponsored by Mojang AB, makers of Minecraft.
+        "Minecraft" is a trademark of Notch Development AB
+      </comments>
+    </license>
+  </licenses>
   <scm>
     <connection>scm:git:git://github.com/FallenMoonNetwork/CanaryRecode.git</connection>
     <url>https://github.com/FallenMoonNetwork/CanaryRecode</url>
     <developerConnection>scm:git:git@github.com:FallenMoonNetwork/CanaryRecode.git</developerConnection>
   </scm>
-
   <repositories>
     <repository>
      <id>vi-repo</id>
      <name>Visual Illusions Repository</name>
      <url>http://repo.visualillusionsent.net</url>
     </repository>
-    
   </repositories>
-
   <dependencies>
     <dependency>
       <groupId>net.canarymod</groupId>
@@ -42,7 +84,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <build>
     <sourceDirectory>${basedir}/src/main/java/</sourceDirectory>
     <resources>
@@ -50,7 +91,6 @@
         <directory>${basedir}/src/main/resources</directory>
       </resource>
     </resources>
-
     <!-- Plugins -->
     <plugins>
       <!-- Compile plugin -->
@@ -63,7 +103,6 @@
           <target>1.6</target>
         </configuration>
       </plugin>
-
       <!-- Dependency shader -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -91,7 +130,6 @@
           </filters>
         </configuration>
       </plugin>
-
       <!-- JAR creation plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -101,19 +139,33 @@
           <archive>
             <addMavenDescriptor>true</addMavenDescriptor>
             <manifest>
-              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
+              <addDefaultImplementationEntries>false</addDefaultImplementationEntries>
             </manifest>
             <manifestEntries>
+              <Implementation-Title>CanaryMod</Implementation-Title>
+              <Implementation-Version>${project.version}</Implementation-Version>
+              <Implementation-Vendor>CanaryMod Team</Implementation-Vendor>
+              <Implementation-Vendor-Id>net.canarymod</Implementation-Vendor-Id>
+              <Specification-Title>CanaryLib</Specification-Title>
+              <Specification-Version>${api.version}</Specification-Version>
+              <Specification-Vendor>CanaryMod Team</Specification-Vendor>
+              <Specification-Vendor-Id>net.canarymod</Specification-Vendor-Id>
+              <Server-Version>${minecraft.server.version}</Server-Version>
               <Main-Class>net.canarymod.Main</Main-Class>
-              <Class-Path>../lib/*</Class-Path>
-              <Server-Version>1.5.2</Server-Version>
               <Sealed>true</Sealed>
             </manifestEntries>
+            <manifestSections>
+              <manifestSection>
+                <name>net/canarymod/</name>
+                <manifestEntries>
+                  <Sealed>true</Sealed>
+                </manifestEntries>
+              </manifestSection>
+            </manifestSections>
           </archive>
         </configuration>
       </plugin>
-
       <!-- Assembly -->
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -122,7 +174,6 @@
           <descriptor>${basedir}/src/main/assembly/default.xml</descriptor>
         </configuration>
       </plugin>
-
       <!-- Release -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -137,12 +188,12 @@
     </plugins>
   </build>
   <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>net.canarymod</groupId>
-  			<artifactId>CanaryLib</artifactId>
-  			<version>0.8-SNAPSHOT</version>
-  		</dependency>
-  	</dependencies>
+    <dependencies>
+      <dependency>
+        <groupId>net.canarymod</groupId>
+        <artifactId>CanaryLib</artifactId>
+        <version>0.9-SNAPSHOT</version>
+      </dependency>
+    </dependencies>
   </dependencyManagement>
 </project>

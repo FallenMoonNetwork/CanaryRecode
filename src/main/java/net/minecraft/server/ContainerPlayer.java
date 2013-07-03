@@ -43,6 +43,8 @@ public class ContainerPlayer extends Container {
             this.a(new Slot(inventoryplayer, i0, 8 + i0 * 18, 142));
         }
 
+        this.inventory = this.h.getPlayerInventory(); // CanaryMod: Set inventory instance
+
         this.a((IInventory) this.a);
     }
 

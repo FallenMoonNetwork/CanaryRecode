@@ -11,8 +11,10 @@ import java.util.regex.Pattern;
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
+import net.canarymod.api.GameMode;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
+import net.canarymod.api.PlayerListEntry;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityItem;
@@ -31,6 +33,7 @@ import net.canarymod.chat.TextFormat;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
+import net.canarymod.hook.player.TeleportHook;
 import net.canarymod.hook.system.PermissionCheckHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
@@ -40,13 +43,16 @@ import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.EnumGameType;
 import net.minecraft.server.ItemStack;
+import net.minecraft.server.Packet201PlayerInfo;
 import net.minecraft.server.WorldSettings;
+import net.visualillusionsent.utils.StringUtils;
 
 
 /**
  * Canary Player wrapper.
  *
- * @author Chris
+ * @author Chris (damagefilter)
+ * @author Jason (darkdiplomat)
  */
 public class CanaryPlayer extends CanaryEntityLiving implements Player {
     private Pattern badChatPattern = Pattern.compile("[\u00a7\u2302\u00D7\u00AA\u00BA\u00AE\u00AC\u00BD\u00BC\u00A1\u00AB\u00BB]");
@@ -122,7 +128,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 receivers = hook.getReceiverList();
                 String formattedMessage = hook.buildSendMessage();
                 for (Player player : receivers) {
-                    player.sendMessage(formattedMessage);
+                    player.message(formattedMessage);
                 }
                 Canary.logInfo(TextFormat.removeFormatting(formattedMessage));
             }
@@ -137,9 +143,14 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
-    public void sendMessage(String message) {
+    public void message(String message) {
         getNetServerHandler().sendMessage(message);
         // Should cover all chat logging
+    }
+
+    @Override
+    public void notice(String message) {
+        message(Colors.LIGHT_RED + message);
     }
 
     @Override
@@ -215,7 +226,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         ItemStack item = ((CanaryPlayerInventory) getInventory()).getItemInHand();
 
         if (item != null) {
-            return item.getCanaryItem();
+            Item cItem = item.getCanaryItem();
+            cItem.setSlot(((CanaryPlayerInventory) getInventory()).getSelectedHotbarSlot());
+            return cItem;
         }
         return null;
     }
@@ -274,14 +287,14 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     public boolean executeCommand(String[] command) {
         try {
             if (Configuration.getServerConfig().isLogging()) {
-                Canary.logInfo("Command used by " + getName() + ": " + Canary.glueString(command, 0, " "));
+                Canary.logInfo("Command used by " + getName() + ": " + StringUtils.joinString(command, " ", 0));
             }
 
             String commandName = command[0];
 
             // It's a vanilla command, forward it to the server
             if (commandName.startsWith("/#") && (hasPermission("canary.commands.vanilla." + commandName.replace("/#", "")) || hasPermission("canary.vanilla.op"))) {
-                return Canary.getServer().consoleCommand(Canary.glueString(command, 0, " ").replace("/#", ""), this);
+                return Canary.getServer().consoleCommand(StringUtils.joinString(command, " ", 0).replace("/#", ""), this);
             }
             commandName = commandName.replace("/", "");
             PlayerCommandHook hook = new PlayerCommandHook(this, command);
@@ -300,9 +313,9 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             return true;
 
         } catch (Throwable ex) {
-            Canary.logStackTrace("Exception in command handler: ", ex);
+            Canary.logStacktrace("Exception in command handler: ", ex);
             if (isAdmin()) {
-                sendMessage(Colors.LIGHT_RED + "Exception occured. " + ex.getMessage());
+                message(Colors.LIGHT_RED + "Exception occured. " + ex.getMessage());
             }
             return false;
         }
@@ -503,17 +516,16 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public void teleportTo(double x, double y, double z, World dim) {
         if (!(getWorld().getType().equals(dim.getType()))) {
-            Canary.println("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
+            Canary.logDebug("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
             switchWorlds(dim);
         }
         teleportTo(x, y, z, 0.0F, 0.0F);
-
     }
 
     @Override
     public void teleportTo(double x, double y, double z, float pitch, float rotation, World dim) {
         if (!(getWorld().getType().equals(dim.getType()))) {
-            Canary.println("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
+            Canary.logDebug("Switching world from " + getWorld().getFqName() + " to " + dim.getFqName());
             switchWorlds(dim);
         }
         teleportTo(x, y, z, pitch, rotation);
@@ -521,33 +533,41 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void teleportTo(double x, double y, double z, float pitch, float rotation) {
-        EntityPlayerMP player = (EntityPlayerMP) entity;
-
-        // If player is in vehicle - eject them before they are teleported.
-        if (isRiding()) {
-            player.h(player.o);
-        }
-        player.a.a(x, y, z, rotation, pitch, getWorld().getType().getId(), getWorld().getName());
+        this.teleportTo(x, y, z, pitch, rotation, TeleportHook.TeleportCause.PLUGIN);
     }
 
     @Override
     public void teleportTo(Location location) {
         if (getWorld() != location.getWorld()) {
-            Canary.println("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
+            Canary.logDebug("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
             switchWorlds(location.getWorld());
         }
         teleportTo(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getRotation());
     }
 
     @Override
-    public void kick(String reason) {
-        ((EntityPlayerMP) entity).a.c(reason);
+    public void teleportTo(Location location, TeleportHook.TeleportCause cause) {
+        if (getWorld() != location.getWorld()) {
+            Canary.logDebug("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
+            switchWorlds(location.getWorld());
+        }
+        teleportTo(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getRotation(), cause);
+    }
+
+    private void teleportTo(double x, double y, double z, float pitch, float rotation, TeleportHook.TeleportCause cause) {
+        EntityPlayerMP player = (EntityPlayerMP) entity;
+
+        // If player is in vehicle - eject them before they are teleported.
+        if (isRiding()) {
+            player.h(player.o);
+        }
+
+        player.a.a(x, y, z, rotation, pitch, getWorld().getType().getId(), getWorld().getName(), cause);
     }
 
     @Override
-    public void notice(String message) {
-        sendMessage(Colors.LIGHT_RED + message);
-
+    public void kick(String reason) {
+        ((EntityPlayerMP) entity).a.c(reason);
     }
 
     @Override
@@ -676,12 +696,16 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     }
 
     @Override
-    public int getMode() {
+    public int getModeId() {
         return ((EntityPlayerMP) entity).c.b().a();
     }
 
+    public GameMode getMode() {
+        return GameMode.fromId(((EntityPlayerMP) entity).c.b().a());
+    }
+
     @Override
-    public void setMode(int mode) {
+    public void setModeId(int mode) {
         // Adjust mode, make it null if number is invalid
         EnumGameType gt = WorldSettings.a(mode);
         EntityPlayerMP ent = ((EntityPlayerMP) entity);
@@ -692,8 +716,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         }
     }
 
+    public void setMode(GameMode mode) {
+        this.setModeId(mode.getId());
+    }
+
     public void refreshCreativeMode() {
-        if (getMode() == 1 || Configuration.getWorldConfig(getWorld().getFqName()).getGameMode() == World.GameMode.CREATIVE) {
+        if (getModeId() == 1 || Configuration.getWorldConfig(getWorld().getFqName()).getGameMode() == GameMode.CREATIVE) {
             ((EntityPlayerMP) entity).c.a(WorldSettings.a(1));
         } else {
             ((EntityPlayerMP) entity).c.a(WorldSettings.a(0));
@@ -708,11 +736,6 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public boolean isInVehicle() {
         return ((EntityPlayerMP) entity).o != null;
-    }
-
-    @Override
-    public void message(String message) {
-        sendMessage(message);
     }
 
     @Override
@@ -750,7 +773,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             }
         }
 
-        permissions = Canary.permissionManager().getPlayerProvider(getName());
+        permissions = Canary.permissionManager().getPlayerProvider(getName(), getWorld().getFqName());
         if (data[0] != null && (!data[0].isEmpty() && !data[0].equals(" "))) {
             prefix = ToolBox.stringToNull(data[0]);
         }
@@ -781,5 +804,21 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
             return false;
         }
         return removeGroup(g);
+    }
+
+    @Override
+    public int getPing() {
+        return ((EntityPlayerMP) entity).i;
+    }
+
+    @Override
+    public PlayerListEntry getPlayerListEntry(boolean shown) {
+        return new PlayerListEntry(this, shown);
+    }
+
+    public void sendPlayerListEntry(PlayerListEntry plentry) {
+        if (Configuration.getServerConfig().isPlayerListEnabled()) {
+            ((EntityPlayerMP) entity).a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), plentry.getPing()));
+        }
     }
 }

@@ -2,7 +2,8 @@ package net.canarymod.api.entity;
 
 
 import java.util.UUID;
-
+import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.Item;
 import net.canarymod.api.nbt.BaseTag;
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.nbt.CompoundTag;
@@ -137,17 +138,33 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public void teleportTo(double x, double y, double z) {
-        teleportTo(x, y, z, 0f, 0f);
+        teleportTo(x, y, z, 0.0F, 0.0F);
+    }
+
+    @Override
+    public void teleportTo(double x, double y, double z, World world) {
+        teleportTo(x, y, z, 0.0F, 0.0F, world);
+    }
+
+    @Override
+    public void teleportTo(double x, double y, double z, float pitch, float rotation, World dim) {
+        this.entity.a(((CanaryWorld) dim).getHandle());
+        this.entity.b(x, y, z, rotation, pitch);
+    }
+
+    @Override
+    public void teleportTo(Location location) {
+        teleportTo(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch(), location.getWorld());
     }
 
     @Override
     public void teleportTo(Position pos) {
-        teleportTo(pos.getX(), pos.getY(), pos.getZ(), 0f, 0f);
+        teleportTo(pos.getX(), pos.getY(), pos.getZ(), 0.0F, 0.0F);
     }
 
     @Override
     public void setDimension(World dim) {
-        this.entity.setDimension((CanaryWorld) dim);
+        this.entity.a(((CanaryWorld) dim).getHandle());
     }
 
     @Override
@@ -179,6 +196,10 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public EntityItem dropLoot(int itemId, int amount) {
         return new CanaryEntityItem(entity.b(itemId, amount));
+    }
+
+    public EntityItem dropLoot(Item item) {
+        return new CanaryEntityItem(entity.a(((CanaryItem) item).getHandle(), 0.0F));
     }
 
     @Override
@@ -261,12 +282,38 @@ public abstract class CanaryEntity implements Entity {
         return entity.af();
     }
 
+    @Override
+    public boolean isRidden() {
+        return entity.n != null;
+    }
+
+    @Override
+    public Entity getRiding() {
+        if (entity.o != null) {
+            return entity.o.getCanaryEntity();
+        }
+        return null;
+    }
+
+    @Override
+    public Entity getRider() {
+        if (entity.n != null) {
+            return entity.n.getCanaryEntity();
+        }
+        return null;
+    }
+
     /**
      * Destroys this entity
      */
     @Override
     public void destroy() {
         entity.w();
+    }
+
+    @Override
+    public boolean isDead() {
+        return entity.M;
     }
 
     @Override
@@ -304,6 +351,21 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public void setNBT(BaseTag tag) {
         this.getHandle().f((NBTTagCompound) ((CanaryCompoundTag)tag).getHandle());
+    }
+
+    @Override
+    public boolean isInvisible() {
+        return entity.ai();
+    }
+
+    @Override
+    public void setInvisible(boolean invisible) {
+        entity.d(invisible);
+    }
+
+    @Override
+    public CompoundTag getMetaData() {
+        return entity.getMetaData();
     }
 
     /**

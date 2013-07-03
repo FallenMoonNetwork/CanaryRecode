@@ -198,7 +198,6 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
             Item toCheck = getSlot(index);
 
             if (toCheck != null && toCheck.getId() == id) {
-                toCheck.setSlot(index);
                 return toCheck;
             }
         }
@@ -222,7 +221,6 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
             Item toCheck = getSlot(index);
 
             if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount) {
-                toCheck.setSlot(index);
                 return toCheck;
             }
         }
@@ -238,7 +236,6 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
             Item toCheck = getSlot(index);
 
             if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount && toCheck.getDamage() == damage) {
-                toCheck.setSlot(index);
                 return toCheck;
             }
         }
@@ -267,8 +264,12 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
     @Override
     public Item getSlot(int index) {
         ItemStack stack = inventory.a(index);
-
-        return stack != null ? stack.getCanaryItem() : null;
+        if (stack != null) {
+            Item slot_item = stack.getCanaryItem();
+            slot_item.setSlot(index);
+            return slot_item;
+        }
+        return null;
     }
 
     /**

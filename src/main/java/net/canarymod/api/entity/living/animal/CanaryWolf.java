@@ -58,8 +58,23 @@ public class CanaryWolf extends CanaryTameable implements Wolf {
      * {@inheritDoc}
      */
     @Override
+    public boolean isAngry() {
+        return ((EntityWolf) entity).bW();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAngry(boolean angry) {
+        ((EntityWolf) entity).l(angry);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public EntityWolf getHandle() {
         return (EntityWolf) entity;
     }
-
 }

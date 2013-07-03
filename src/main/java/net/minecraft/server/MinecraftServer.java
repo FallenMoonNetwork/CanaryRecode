@@ -22,6 +22,9 @@ import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.CanaryWorldManager;
 import net.canarymod.config.Configuration;
 import net.canarymod.config.WorldConfiguration;
+import net.canarymod.hook.system.LoadWorldHook;
+import net.canarymod.logger.Logman;
+import net.canarymod.hook.system.ServerTickHook;
 import net.canarymod.tasks.ServerTaskManager;
 import net.visualillusionsent.utils.PropertiesFile;
 
@@ -176,6 +179,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         world.r = config.getDifficulty().getId(); // Set difficulty directly based on WorldConfiguration setting
         this.e(world); // Generate terrain
         worldManager.addWorld(world.getCanaryWorld());
+        new LoadWorldHook(world.getCanaryWorld()).call();
     }
 
     protected void e(WorldServer worldserver) {
@@ -237,11 +241,11 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     try {
                         worldserver.a(true, (IProgressUpdate) null);
                     } catch (MinecraftException minecraftexception) {
-                        Canary.println(minecraftexception.getMessage());
+                        Logman.println(minecraftexception.getMessage());
                         this.al().b(minecraftexception.getMessage());
                     }
                 } else {
-                    Canary.println("World is null");
+                    Logman.println("World is null");
                 }
             }
         }
@@ -426,9 +430,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     //CanaryMod: ticks world
+    private long previousTick = -1L; // Tick Time Tracker
     public void r() {
-        this.a.a("levels");
+        new ServerTickHook(previousTick).call(); // CanaryMod: ServerTick
+        long curTrack = System.nanoTime(); // CanaryMod: Start tick track
 
+        this.a.a("levels");
         int i0;
 
         // CanaryMod use worldManager instead

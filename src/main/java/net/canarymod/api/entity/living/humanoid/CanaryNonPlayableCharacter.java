@@ -275,7 +275,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
      */
     @Override
     public void privateMessage(Player player, String msg) {
-        player.sendMessage("[PM] " + prefix.replace("%name", getName()) + msg);
+        player.message("(MSG) " + prefix.replace("%name", getName()) + msg);
     }
 
     /**
@@ -320,13 +320,13 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
                         }
                     } catch (Exception ex) {
                         Canary.logWarning("Exception while calling onUpdate in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
-                        Canary.logStackTrace("", ex);
+                        Canary.logStacktrace("", ex);
                     }
                 }
             }
         } catch (Exception ex) {
             Canary.logWarning("Exception occured while calling update for NPC " + this.getName());
-            Canary.logStackTrace("", ex);
+            Canary.logStacktrace("", ex);
         }
     }
 
@@ -340,13 +340,13 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
                         }
                     } catch (Exception ex) {
                         Canary.logWarning("Exception occured while calling onClicked in behavior" + behavior.getClass().getSimpleName() + " for NPC " + this.getName());
-                        Canary.logStackTrace("", ex);
+                        Canary.logStacktrace("", ex);
                     }
                 }
             }
         } catch (Exception ex) {
             Canary.logWarning("Exception while calling clicked for NPC " + this.getName());
-            Canary.logStackTrace("", ex);
+            Canary.logStacktrace("", ex);
         }
     }
 
@@ -365,7 +365,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
             }
         } catch (Exception ex) {
             Canary.logWarning("Exception occured while calling attacked for NPC " + this.getName());
-            Canary.logStackTrace("", ex);
+            Canary.logStacktrace("", ex);
         }
     }
 
@@ -382,7 +382,7 @@ public class CanaryNonPlayableCharacter extends CanaryEntityLiving implements No
             }
         } catch (Exception ex) {
             Canary.logWarning("Exception occured while calling destroyed for NPC " + this.getName());
-            Canary.logStackTrace("", ex);
+            Canary.logStacktrace("", ex);
         }
     }
 

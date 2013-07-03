@@ -43,6 +43,8 @@ public class ContainerRepair extends Container {
         for (i3 = 0; i3 < 9; ++i3) {
             this.a(new Slot(inventoryplayer, i3, 8 + i3 * 18, 142));
         }
+
+        this.inventory = new CanaryAnvil(this); // CanaryMod: Set inventory instance
     }
 
     public void a(IInventory iinventory) {

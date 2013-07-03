@@ -55,7 +55,7 @@ public abstract class World implements IBlockAccess {
     public final Profiler C;
     private final Vec3Pool J = new Vec3Pool(300, 2000);
     private final Calendar K = Calendar.getInstance();
-    protected Scoreboard D = new Scoreboard();
+    public Scoreboard D = new Scoreboard(); // Protected => public
     private final ILogAgent L;
     private ArrayList M = new ArrayList();
     private boolean N;
@@ -262,9 +262,7 @@ public abstract class World implements IBlockAccess {
                     cblock = (CanaryBlock) this.canaryDimension.getBlockAt(i0, i1, i2);
                     BlockUpdateHook hook = new BlockUpdateHook(cblock, i3);
 
-                    if (i3 != 0) { // Ignore Air
-                        Canary.hooks().callHook(hook);
-                    }
+                    Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
                         flag0 = chunk.a(i0 & 15, i1, i2 & 15, i3, i4);
                     }

@@ -23,8 +23,8 @@ public class CanaryItem implements Item {
 
     /**
      * Constructs a new CanaryItem
-     *
-     * @param oItemStack
+     * 
+     * @param itemStack
      */
     public CanaryItem(ItemStack itemStack) {
         this.type = ItemType.fromId(itemStack.c);
@@ -363,6 +363,17 @@ public class CanaryItem implements Item {
      * {@inheritDoc}
      */
     @Override
+    public boolean hasMetaTag() {
+        if (hasDataTag()) {
+            return getDataTag().containsKey("Canary");
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public CompoundTag getMetaTag() {
         CompoundTag dataTag = getDataTag();
 
@@ -413,6 +424,7 @@ public class CanaryItem implements Item {
         for (int index = 0; index < stackarray.length; index++) {
             if (stackarray[index] != null) {
                 items[index] = stackarray[index].getCanaryItem();
+                items[index].setSlot(index);
             }
         }
         return items;
@@ -427,6 +439,11 @@ public class CanaryItem implements Item {
             }
         }
         return stacks;
+    }
+
+    @Override
+    public Item clone() {
+        return getHandle().m().getCanaryItem();
     }
 
     /**

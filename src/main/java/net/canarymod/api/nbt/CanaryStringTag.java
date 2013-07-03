@@ -54,6 +54,14 @@ public class CanaryStringTag extends CanaryBaseTag implements StringTag {
      * {@inheritDoc}
      */
     @Override
+    public StringTag copy() {
+        return new CanaryStringTag((NBTTagString) getHandle().b());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public NBTTagString getHandle() {
         return (NBTTagString) tag;
     }

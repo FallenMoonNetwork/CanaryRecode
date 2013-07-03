@@ -186,16 +186,13 @@ public class ItemInWorldManager {
         if (this.c.c() && !this.b.e(i0, i1, i2)) {
             return false;
         } else {
-
             // CanaryMod: BlockDestroyHook
             net.canarymod.api.world.blocks.Block block = ((EntityPlayerMP) b).getCanaryWorld().getBlockAt(i0, i1, i2);
-
             block.setStatus((byte) 1); // Block break status.
-            BlockDestroyHook hook = new BlockDestroyHook(((EntityPlayerMP) b).getPlayer(), block);
-
-            Canary.hooks().callHook(hook);
+            BlockDestroyHook hook = (BlockDestroyHook) new BlockDestroyHook(((EntityPlayerMP) b).getPlayer(), block).call();
             if (hook.isCanceled()) {
-                return true;
+                this.b.a.b(new Packet53BlockChange(i0, i1, i2, this.a)); // For some reason, the client thinks things worked without this
+                return false;
             }
             //
 

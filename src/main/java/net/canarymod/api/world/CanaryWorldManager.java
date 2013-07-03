@@ -32,20 +32,25 @@ public class CanaryWorldManager implements WorldManager {
         DimensionType.addType("NORMAL", 0);
         DimensionType.addType("NETHER", -1);
         DimensionType.addType("END", 1);
-        File worlds = new File("worlds");
+        File worldsFolders = new File("worlds");
 
-        if (!worlds.exists()) {
-            worlds.mkdirs();
+        if (!worldsFolders.exists()) {
+            worldsFolders.mkdirs();
         }
-        int worldNum = worlds.listFiles().length;
+        int worldNum = worldsFolders.listFiles().length;
 
         if (worldNum == 0) {
             worldNum = 1;
         }
         existingWorlds = new ArrayList<String>(worldNum);
         loadedWorlds = new HashMap<String, World>(worldNum);
-        for (String f : worlds.list()) {
-            existingWorlds.add(f);
+        for (String f : worldsFolders.list()) {
+            File world = new File(worldsFolders, f);
+            for(File fqname : world.listFiles()) {
+                if(fqname.isDirectory() && fqname.getName().contains("_")) {
+                    existingWorlds.add(fqname.getName());
+                }
+            }
         }
         markedForUnload = new HashMap<String, Boolean>(1);
     }
@@ -57,7 +62,7 @@ public class CanaryWorldManager implements WorldManager {
      * @param world
      */
     public void addWorld(CanaryWorld world) {
-        Canary.println("worldname entry in manager: " + world.getName() + "_" + world.getType().getName());
+        Logman.println("worldname entry in manager: " + world.getName() + "_" + world.getType().getName());
         loadedWorlds.put(world.getName() + "_" + world.getType().getName(), world);
     }
 
@@ -75,10 +80,18 @@ public class CanaryWorldManager implements WorldManager {
         } else if (loadedWorlds.containsKey(name + "_NORMAL")) {
             return loadedWorlds.get(name + "_NORMAL");
         } else {
-            if (existingWorlds.contains(name)) {
-                return loadWorld(name, DimensionType.fromId(0));
+            if(autoload) {
+                if (existingWorlds.contains(name)) {
+                    return loadWorld(name, DimensionType.fromId(0));
+                }
+                else if(existingWorlds.contains(name + "_NORMAL")) {
+                    return loadWorld(name, DimensionType.fromId(0));
+                }
+                else {
+                    throw new UnknownWorldException("World " + name + " is unknown. Autoload was enabled for this call.");
+                }
             }
-            throw new UnknownWorldException("World " + name + " is unknown and can't be loaded!");
+            throw new UnknownWorldException("World " + name + " is not loaded. Autoload was disabled for this call.");
         }
     }
 
@@ -88,11 +101,11 @@ public class CanaryWorldManager implements WorldManager {
             return loadedWorlds.get(world + "_" + type.getName());
         } else {
             if (worldExists(world + "_" + type.getName()) && autoload) {
-                Canary.println("World exists but is not loaded. Loading ...");
+                Logman.println("World exists but is not loaded. Loading ...");
                 return loadWorld(world, type);
             } else {
                 if (autoload) {
-                    Canary.println("World does not exist, we can autoload, will load!");
+                    Logman.println("World does not exist, we can autoload, will load!");
                     createWorld(world, type);
                     return loadedWorlds.get(world + "_" + type.getName());
                 } else {
@@ -149,7 +162,7 @@ public class CanaryWorldManager implements WorldManager {
     public Collection<World> getAllWorlds() {
         //before we return all the worlds, first check if there are any worlds marked for unload!
         if(markedForUnload.size() > 0) {
-            Canary.println("Processing worlds for unload");
+            Logman.println("Processing worlds for unload");
             removeWorlds();
 //            markedForUnload.clear();
         }
