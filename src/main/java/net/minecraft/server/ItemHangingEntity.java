@@ -45,7 +45,7 @@ public class ItemHangingEntity extends Item {
                         world.d((Entity) entityhanging);
                     }
 
-                    --itemstack.a;
+                    --itemstack.b;
                 }
 
                 return true;

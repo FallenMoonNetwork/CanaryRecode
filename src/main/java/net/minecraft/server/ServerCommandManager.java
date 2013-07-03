@@ -32,8 +32,10 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
         this.a(new CommandGameRule());
         this.a(new CommandClearInventory());
         this.a(new ServerCommandTestFor());
+        this.a(new CommandSpreadPlayers());
+        this.a(new CommandPlaySound());
         this.a(new ServerCommandScoreboard());
-        if (MinecraftServer.D().T()) {
+        if (MinecraftServer.F().V()) {
             this.a(new CommandServerOp());
             this.a(new CommandServerDeop());
             this.a(new CommandServerStop());
@@ -59,28 +61,32 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
         boolean flag0 = true;
 
         // CanaryMod: Fix for MultiWorld
-        if (icommandsender instanceof TileEntityCommandBlock && !((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().N().b("commandBlockOutput")) {
+        if (icommandsender instanceof TileEntityCommandBlock && !((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().O().b("commandBlockOutput")) {
             flag0 = false;
         }
 
+        ChatMessageComponent chatmessagecomponent = ChatMessageComponent.b("chat.type.admin", new Object[]{ icommandsender.c_(), ChatMessageComponent.b(s0, aobject) });
+
+        chatmessagecomponent.a(EnumChatFormatting.h);
+        chatmessagecomponent.b(Boolean.valueOf(true));
         if (flag0) {
-            Iterator iterator = MinecraftServer.D().ad().a.iterator();
+            Iterator iterator = MinecraftServer.F().af().a.iterator();
 
             while (iterator.hasNext()) {
                 EntityPlayerMP entityplayermp = (EntityPlayerMP) iterator.next();
 
-                if (entityplayermp != icommandsender && MinecraftServer.D().ad().e(entityplayermp.bS)) {
-                    entityplayermp.a("" + EnumChatFormatting.h + "" + EnumChatFormatting.u + "[" + icommandsender.c_() + ": " + entityplayermp.a(s0, aobject) + "]");
+                if (entityplayermp != icommandsender && MinecraftServer.F().af().e(entityplayermp.c_())) {
+                    entityplayermp.a(chatmessagecomponent);
                 }
             }
         }
 
-        if (icommandsender != MinecraftServer.D()) {
-            MinecraftServer.D().al().a("[" + icommandsender.c_() + ": " + MinecraftServer.D().a(s0, aobject) + "]");
+        if (icommandsender != MinecraftServer.F()) {
+            MinecraftServer.F().a(chatmessagecomponent);
         }
 
         if ((i0 & 1) != 1) {
-            icommandsender.a(icommandsender.a(s0, aobject));
+            icommandsender.a(ChatMessageComponent.b(s0, aobject));
         }
     }
 }

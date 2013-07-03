@@ -31,7 +31,7 @@ public class InventoryMerchant implements IInventory {
                 itemstack = this.b[i0];
                 this.b[i0] = null;
                 return itemstack;
-            } else if (this.b[i0].a <= i1) {
+            } else if (this.b[i0].b <= i1) {
                 itemstack = this.b[i0];
                 this.b[i0] = null;
                 if (this.d(i0)) {
@@ -41,7 +41,7 @@ public class InventoryMerchant implements IInventory {
                 return itemstack;
             } else {
                 itemstack = this.b[i0].a(i1);
-                if (this.b[i0].a == 0) {
+                if (this.b[i0].b == 0) {
                     this.b[i0] = null;
                 }
 
@@ -60,7 +60,7 @@ public class InventoryMerchant implements IInventory {
         return i0 == 0 || i0 == 1;
     }
 
-    public ItemStack b(int i0) {
+    public ItemStack a_(int i0) {
         if (this.b[i0] != null) {
             ItemStack itemstack = this.b[i0];
 
@@ -73,8 +73,8 @@ public class InventoryMerchant implements IInventory {
 
     public void a(int i0, ItemStack itemstack) {
         this.b[i0] = itemstack;
-        if (itemstack != null && itemstack.a > this.d()) {
-            itemstack.a = this.d();
+        if (itemstack != null && itemstack.b > this.d()) {
+            itemstack.b = this.d();
         }
 
         if (this.d(i0)) {
@@ -98,7 +98,7 @@ public class InventoryMerchant implements IInventory {
         return this.a.m_() == entityplayer;
     }
 
-    public void f() {}
+    public void k_() {}
 
     public void g() {}
 
@@ -106,7 +106,7 @@ public class InventoryMerchant implements IInventory {
         return true;
     }
 
-    public void k_() {
+    public void e() {
         this.h();
     }
 
@@ -144,6 +144,8 @@ public class InventoryMerchant implements IInventory {
                 }
             }
         }
+
+        this.a.a_(this.a(2));
     }
 
     public MerchantRecipe i() {

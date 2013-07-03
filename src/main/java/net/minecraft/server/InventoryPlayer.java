@@ -28,9 +28,9 @@ public class InventoryPlayer implements IInventory {
         return 9;
     }
 
-    private int h(int i0) {
+    private int g(int i0) {
         for (int i1 = 0; i1 < this.a.length; ++i1) {
-            if (this.a[i1] != null && this.a[i1].c == i0) {
+            if (this.a[i1] != null && this.a[i1].d == i0) {
                 return i1;
             }
         }
@@ -40,7 +40,7 @@ public class InventoryPlayer implements IInventory {
 
     private int d(ItemStack itemstack) {
         for (int i0 = 0; i0 < this.a.length; ++i0) {
-            if (this.a[i0] != null && this.a[i0].c == itemstack.c && this.a[i0].f() && this.a[i0].a < this.a[i0].e() && this.a[i0].a < this.d() && (!this.a[i0].h() || this.a[i0].k() == itemstack.k()) && ItemStack.a(this.a[i0], itemstack)) {
+            if (this.a[i0] != null && this.a[i0].d == itemstack.d && this.a[i0].f() && this.a[i0].b < this.a[i0].e() && this.a[i0].b < this.d() && (!this.a[i0].h() || this.a[i0].k() == itemstack.k()) && ItemStack.a(this.a[i0], itemstack)) {
                 return i0;
             }
         }
@@ -66,26 +66,39 @@ public class InventoryPlayer implements IInventory {
 
         for (i3 = 0; i3 < this.a.length; ++i3) {
             itemstack = this.a[i3];
-            if (itemstack != null && (i0 <= -1 || itemstack.c == i0) && (i1 <= -1 || itemstack.k() == i1)) {
-                i2 += itemstack.a;
+            if (itemstack != null && (i0 <= -1 || itemstack.d == i0) && (i1 <= -1 || itemstack.k() == i1)) {
+                i2 += itemstack.b;
                 this.a[i3] = null;
             }
         }
 
         for (i3 = 0; i3 < this.b.length; ++i3) {
             itemstack = this.b[i3];
-            if (itemstack != null && (i0 <= -1 || itemstack.c == i0) && (i1 <= -1 || itemstack.k() == i1)) {
-                i2 += itemstack.a;
+            if (itemstack != null && (i0 <= -1 || itemstack.d == i0) && (i1 <= -1 || itemstack.k() == i1)) {
+                i2 += itemstack.b;
                 this.b[i3] = null;
             }
+        }
+
+        if (this.g != null) {
+            if (i0 > -1 && this.g.d != i0) {
+                return i2;
+            }
+
+            if (i1 > -1 && this.g.k() != i1) {
+                return i2;
+            }
+
+            i2 += this.g.b;
+            this.b((ItemStack) null);
         }
 
         return i2;
     }
 
     private int e(ItemStack itemstack) {
-        int i0 = itemstack.c;
-        int i1 = itemstack.a;
+        int i0 = itemstack.d;
+        int i1 = itemstack.b;
         int i2;
 
         if (itemstack.e() == 1) {
@@ -117,20 +130,20 @@ public class InventoryPlayer implements IInventory {
 
                 int i3 = i1;
 
-                if (i1 > this.a[i2].e() - this.a[i2].a) {
-                    i3 = this.a[i2].e() - this.a[i2].a;
+                if (i1 > this.a[i2].e() - this.a[i2].b) {
+                    i3 = this.a[i2].e() - this.a[i2].b;
                 }
 
-                if (i3 > this.d() - this.a[i2].a) {
-                    i3 = this.d() - this.a[i2].a;
+                if (i3 > this.d() - this.a[i2].b) {
+                    i3 = this.d() - this.a[i2].b;
                 }
 
                 if (i3 == 0) {
                     return i1;
                 } else {
                     i1 -= i3;
-                    this.a[i2].a += i3;
-                    this.a[i2].b = 5;
+                    this.a[i2].b += i3;
+                    this.a[i2].c = 5;
                     return i1;
                 }
             }
@@ -146,12 +159,12 @@ public class InventoryPlayer implements IInventory {
     }
 
     public boolean d(int i0) {
-        int i1 = this.h(i0);
+        int i1 = this.g(i0);
 
         if (i1 < 0) {
             return false;
         } else {
-            if (--this.a[i1].a <= 0) {
+            if (--this.a[i1].b <= 0) {
                 this.a[i1] = null;
             }
 
@@ -160,7 +173,7 @@ public class InventoryPlayer implements IInventory {
     }
 
     public boolean e(int i0) {
-        int i1 = this.h(i0);
+        int i1 = this.g(i0);
 
         return i1 >= 0;
     }
@@ -216,6 +229,8 @@ public class InventoryPlayer implements IInventory {
     public boolean a(ItemStack itemstack) {
         if (itemstack == null) {
             return false;
+        } else if (itemstack.b == 0) {
+            return false;
         } else {
             try {
                 int i0;
@@ -224,33 +239,34 @@ public class InventoryPlayer implements IInventory {
                     i0 = this.j();
                     if (i0 >= 0) {
                         this.a[i0] = ItemStack.b(itemstack);
-                        this.a[i0].b = 5;
-                        itemstack.a = 0;
+                        this.a[i0].c = 5;
+                        itemstack.b = 0;
                         return true;
-                    } else if (this.d.ce.d) {
-                        itemstack.a = 0;
+                    } else if (this.d.bG.d) {
+                        itemstack.b = 0;
                         return true;
                     } else {
                         return false;
                     }
                 } else {
                     do {
-                        i0 = itemstack.a;
-                        itemstack.a = this.e(itemstack);
-                    } while (itemstack.a > 0 && itemstack.a < i0);
+                        i0 = itemstack.b;
+                        itemstack.b = this.e(itemstack);
+                    }
+                    while (itemstack.b > 0 && itemstack.b < i0);
 
-                    if (itemstack.a == i0 && this.d.ce.d) {
-                        itemstack.a = 0;
+                    if (itemstack.b == i0 && this.d.bG.d) {
+                        itemstack.b = 0;
                         return true;
                     } else {
-                        return itemstack.a < i0;
+                        return itemstack.b < i0;
                     }
                 }
             } catch (Throwable throwable) {
                 CrashReport crashreport = CrashReport.a(throwable, "Adding item to inventory");
                 CrashReportCategory crashreportcategory = crashreport.a("Item being added");
 
-                crashreportcategory.a("Item ID", Integer.valueOf(itemstack.c));
+                crashreportcategory.a("Item ID", Integer.valueOf(itemstack.d));
                 crashreportcategory.a("Item data", Integer.valueOf(itemstack.k()));
                 crashreportcategory.a("Item name", (Callable) (new CallableItemName(this, itemstack)));
                 throw new ReportedException(crashreport);
@@ -269,13 +285,13 @@ public class InventoryPlayer implements IInventory {
         if (aitemstack[i0] != null) {
             ItemStack itemstack;
 
-            if (aitemstack[i0].a <= i1) {
+            if (aitemstack[i0].b <= i1) {
                 itemstack = aitemstack[i0];
                 aitemstack[i0] = null;
                 return itemstack;
             } else {
                 itemstack = aitemstack[i0].a(i1);
-                if (aitemstack[i0].a == 0) {
+                if (aitemstack[i0].b == 0) {
                     aitemstack[i0] = null;
                 }
 
@@ -286,7 +302,7 @@ public class InventoryPlayer implements IInventory {
         }
     }
 
-    public ItemStack b(int i0) {
+    public ItemStack a_(int i0) {
         ItemStack[] aitemstack = this.a;
 
         if (i0 >= this.a.length) {
@@ -398,14 +414,8 @@ public class InventoryPlayer implements IInventory {
         return 64;
     }
 
-    public int a(Entity entity) {
-        ItemStack itemstack = this.a(this.c);
-
-        return itemstack != null ? itemstack.a(entity) : 1;
-    }
-
     public boolean b(Block block) {
-        if (block.cO.l()) {
+        if (block.cU.l()) {
             return true;
         } else {
             ItemStack itemstack = this.a(this.c);
@@ -432,17 +442,17 @@ public class InventoryPlayer implements IInventory {
         return i0;
     }
 
-    public void g(int i0) {
-        i0 /= 4;
-        if (i0 < 1) {
-            i0 = 1;
+    public void a(float f0) {
+        f0 /= 4.0F;
+        if (f0 < 1.0F) {
+            f0 = 1.0F;
         }
 
-        for (int i1 = 0; i1 < this.b.length; ++i1) {
-            if (this.b[i1] != null && this.b[i1].b() instanceof ItemArmor) {
-                this.b[i1].a(i0, (EntityLiving) this.d);
-                if (this.b[i1].a == 0) {
-                    this.b[i1] = null;
+        for (int i0 = 0; i0 < this.b.length; ++i0) {
+            if (this.b[i0] != null && this.b[i0].b() instanceof ItemArmor) {
+                this.b[i0].a((int) f0, (EntityLivingBase) this.d);
+                if (this.b[i0].b == 0) {
+                    this.b[i0] = null;
                 }
             }
         }
@@ -466,7 +476,7 @@ public class InventoryPlayer implements IInventory {
         }
     }
 
-    public void k_() {
+    public void e() {
         this.e = true;
     }
 
@@ -500,7 +510,7 @@ public class InventoryPlayer implements IInventory {
         return false;
     }
 
-    public void f() {}
+    public void k_() {}
 
     public void g() {}
 

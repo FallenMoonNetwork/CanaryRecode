@@ -10,7 +10,7 @@ public class SlotBrewingStandIngredient extends Slot { // CanaryMod: package => 
     }
 
     public boolean a(ItemStack itemstack) {
-        return itemstack != null ? Item.f[itemstack.c].w() : false;
+        return itemstack != null ? Item.g[itemstack.d].x() : false;
     }
 
     public int a() {

@@ -13,7 +13,7 @@ public class ItemReed extends Item {
 
     public ItemReed(int i0, Block block) {
         super(i0);
-        this.a = block.cz;
+        this.a = block.cF;
     }
 
     public boolean a(ItemStack itemstack, EntityPlayer entityplayer, World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2) {
@@ -24,9 +24,9 @@ public class ItemReed extends Item {
 
         clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
 
-        if (i4 == Block.aW.cz && (world.h(i0, i1, i2) & 7) < 1) {
+        if (i4 == Block.aX.cF && (world.h(i0, i1, i2) & 7) < 1) {
             i3 = 1;
-        } else if (i4 != Block.by.cz && i4 != Block.ab.cz && i4 != Block.ac.cz) {
+        } else if (i4 != Block.bz.cF && i4 != Block.ac.cF && i4 != Block.ad.cF) {
             if (i3 == 0) {
                 --i1;
             }
@@ -54,11 +54,11 @@ public class ItemReed extends Item {
 
         if (!entityplayer.a(i0, i1, i2, i3, itemstack)) {
             return false;
-        } else if (itemstack.a == 0) {
+        } else if (itemstack.b == 0) {
             return false;
         } else {
             if (world.a(this.a, i0, i1, i2, false, i3, (Entity) null, itemstack)) {
-                Block block = Block.r[this.a];
+                Block block = Block.s[this.a];
                 int i5 = block.a(world, i0, i1, i2, i3, f0, f1, f2, 0);
 
                 if (world.f(i0, i1, i2, this.a, i5, 3)) {
@@ -73,12 +73,12 @@ public class ItemReed extends Item {
                     }
                     //
                     if (world.a(i0, i1, i2) == this.a) {
-                        Block.r[this.a].a(world, i0, i1, i2, (EntityLiving) entityplayer, itemstack);
-                        Block.r[this.a].k(world, i0, i1, i2, i5);
+                        Block.s[this.a].a(world, i0, i1, i2, (EntityLivingBase) entityplayer, itemstack);
+                        Block.s[this.a].k(world, i0, i1, i2, i5);
                     }
 
-                    world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), block.cM.b(), (block.cM.c() + 1.0F) / 2.0F, block.cM.d() * 0.8F);
-                    --itemstack.a;
+                    world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), block.cS.b(), (block.cS.c() + 1.0F) / 2.0F, block.cS.d() * 0.8F);
+                    --itemstack.b;
                 }
             }
 

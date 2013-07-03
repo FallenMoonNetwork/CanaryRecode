@@ -45,8 +45,8 @@ public class InventoryLargeChest implements IInventory {
         return i0 >= this.b.j_() ? this.c.a(i0 - this.b.j_(), i1) : this.b.a(i0, i1);
     }
 
-    public ItemStack b(int i0) {
-        return i0 >= this.b.j_() ? this.c.b(i0 - this.b.j_()) : this.b.b(i0);
+    public ItemStack a_(int i0) {
+        return i0 >= this.b.j_() ? this.c.a_(i0 - this.b.j_()) : this.b.a_(i0);
     }
 
     public void a(int i0, ItemStack itemstack) {
@@ -61,18 +61,18 @@ public class InventoryLargeChest implements IInventory {
         return this.b.d();
     }
 
-    public void k_() {
-        this.b.k_();
-        this.c.k_();
+    public void e() {
+        this.b.e();
+        this.c.e();
     }
 
     public boolean a(EntityPlayer entityplayer) {
         return this.b.a(entityplayer) && this.c.a(entityplayer);
     }
 
-    public void f() {
-        this.b.f();
-        this.c.f();
+    public void k_() {
+        this.b.k_();
+        this.c.k_();
     }
 
     public void g() {

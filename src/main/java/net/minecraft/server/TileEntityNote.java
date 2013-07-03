@@ -32,7 +32,7 @@ public class TileEntityNote extends TileEntity {
 
     public void a() {
         this.a = (byte) ((this.a + 1) % 25);
-        this.k_();
+        this.e();
     }
 
     public void a(World world, int i0, int i1, int i2) {
@@ -48,7 +48,7 @@ public class TileEntityNote extends TileEntity {
                 b0 = 2;
             }
 
-            if (material == Material.r) {
+            if (material == Material.s) {
                 b0 = 3;
             }
 
@@ -56,7 +56,7 @@ public class TileEntityNote extends TileEntity {
                 b0 = 4;
             }
 
-            world.d(i0, i1, i2, Block.V.cz, b0, this.a);
+            world.d(i0, i1, i2, Block.W.cF, b0, this.a);
         }
     }
 

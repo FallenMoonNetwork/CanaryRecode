@@ -2,28 +2,26 @@ package net.minecraft.server;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JTextField;
 
 import net.canarymod.Canary;
 
-class ServerGuiCommandListener implements ActionListener {
+class MinecraftServerGuiINNER2 implements ActionListener {
 
     final JTextField a;
 
-    final ServerGUI b;
+    final MinecraftServerGui b;
 
-    ServerGuiCommandListener(ServerGUI servergui, JTextField jtextfield) {
-        this.b = servergui;
+    MinecraftServerGuiINNER2(MinecraftServerGui minecraftservergui, JTextField jtextfield) {
+        this.b = minecraftservergui;
         this.a = jtextfield;
     }
 
-    @Override
     public void actionPerformed(ActionEvent actionevent) {
         String s0 = this.a.getText().trim();
 
         if (s0.length() > 0) {
-            // XXX ServerGUI.a(this.b).a(s0, (ICommandSender) MinecraftServer.D());
+            // XXX MinecraftServerGui.a(this.b).a(s0, (ICommandSender) MinecraftServer.F());
             Canary.getServer().consoleCommand(s0);
         }
 

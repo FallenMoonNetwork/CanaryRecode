@@ -104,43 +104,43 @@ public class ItemPotion extends Item {
         }
         //
 
-        if (!entityplayer.ce.d) { // moved
-            --itemstack.a;
+        if (!entityplayer.bG.d) { // moved
+            --itemstack.b;
         }
 
-        if (!entityplayer.ce.d) {
-            if (itemstack.a <= 0) {
-                return new ItemStack(Item.bu);
+        if (!entityplayer.bG.d) {
+            if (itemstack.b <= 0) {
+                return new ItemStack(Item.bv);
             }
 
-            entityplayer.bK.a(new ItemStack(Item.bu));
+            entityplayer.bn.a(new ItemStack(Item.bv));
         }
 
         return itemstack;
     }
 
-    public int c_(ItemStack itemstack) {
+    public int d_(ItemStack itemstack) {
         return 32;
     }
 
-    public EnumAction b_(ItemStack itemstack) {
+    public EnumAction c_(ItemStack itemstack) {
         return EnumAction.c;
     }
 
     public ItemStack a(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if (f(itemstack.k())) {
-            if (!entityplayer.ce.d) {
-                --itemstack.a;
+            if (!entityplayer.bG.d) {
+                --itemstack.b;
             }
 
-            world.a((Entity) entityplayer, "random.bow", 0.5F, 0.4F / (e.nextFloat() * 0.4F + 0.8F));
+            world.a((Entity) entityplayer, "random.bow", 0.5F, 0.4F / (f.nextFloat() * 0.4F + 0.8F));
             if (!world.I) {
                 world.d((Entity) (new EntityPotion(world, entityplayer, itemstack)));
             }
 
             return itemstack;
         } else {
-            entityplayer.a(itemstack, this.c_(itemstack));
+            entityplayer.a(itemstack, this.d_(itemstack));
             return itemstack;
         }
     }
@@ -163,7 +163,7 @@ public class ItemPotion extends Item {
                 s0 = StatCollector.a("potion.prefix.grenade").trim() + " ";
             }
 
-            List list = Item.bt.g(itemstack);
+            List list = Item.bu.g(itemstack);
             String s1;
 
             if (list != null && !list.isEmpty()) {

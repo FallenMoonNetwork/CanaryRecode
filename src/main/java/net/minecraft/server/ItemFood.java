@@ -12,11 +12,11 @@ public class ItemFood extends Item {
     private final int b;
     private final float c;
     private final boolean d;
-    private boolean cu;
-    private int cv;
-    private int cw;
-    private int cx;
-    private float cy;
+    private boolean cB;
+    private int cC;
+    private int cD;
+    private int cE;
+    private float cF;
 
     public ItemFood(int i0, int i1, float f0, boolean flag0) {
         super(i0);
@@ -46,8 +46,8 @@ public class ItemFood extends Item {
 
         Canary.hooks().callHook(hook);
         if (!hook.isCanceled()) {
-            --itemstack.a;
-            entityplayer.cn().a(hook.getLevelGain(), hook.getSaturationGain());
+            --itemstack.b;
+            entityplayer.bD().a(hook.getLevelGain(), hook.getSaturationGain());
             world.a((Entity) entityplayer, "random.burp", 0.5F, world.s.nextFloat() * 0.1F + 0.9F);
             // this.c(itemstack, world, entityplayer); moved above and below
             if (hook.getPotionEffects() != null) {
@@ -63,22 +63,22 @@ public class ItemFood extends Item {
     }
 
     protected void c(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-        if (!world.I && this.cv > 0 && world.s.nextFloat() < this.cy) {
-            entityplayer.d(new PotionEffect(this.cv, this.cw * 20, this.cx));
+        if (!world.I && this.cC > 0 && world.s.nextFloat() < this.cF) {
+            entityplayer.d(new PotionEffect(this.cC, this.cD * 20, this.cE));
         }
     }
 
-    public int c_(ItemStack itemstack) {
+    public int d_(ItemStack itemstack) {
         return 32;
     }
 
-    public EnumAction b_(ItemStack itemstack) {
+    public EnumAction c_(ItemStack itemstack) {
         return EnumAction.b;
     }
 
     public ItemStack a(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-        if (entityplayer.i(this.cu)) {
-            entityplayer.a(itemstack, this.c_(itemstack));
+        if (entityplayer.g(this.cB)) {
+            entityplayer.a(itemstack, this.d_(itemstack));
         }
 
         return itemstack;
@@ -88,24 +88,24 @@ public class ItemFood extends Item {
         return this.b;
     }
 
-    public float h() {
+    public float i() {
         return this.c;
     }
 
-    public boolean i() {
+    public boolean j() {
         return this.d;
     }
 
     public ItemFood a(int i0, int i1, int i2, float f0) {
-        this.cv = i0;
-        this.cw = i1;
-        this.cx = i2;
-        this.cy = f0;
+        this.cC = i0;
+        this.cD = i1;
+        this.cE = i2;
+        this.cF = f0;
         return this;
     }
 
-    public ItemFood j() {
-        this.cu = true;
+    public ItemFood k() {
+        this.cB = true;
         return this;
     }
 }

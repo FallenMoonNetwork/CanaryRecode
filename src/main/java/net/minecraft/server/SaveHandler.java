@@ -19,7 +19,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
     private final File b;
     private final File worldbaseDir; // CanaryMod
     private final File c;
-    private final long d = System.currentTimeMillis();
+    private final long d = MinecraftServer.aq();
     private final String e;
     protected net.canarymod.api.world.DimensionType type;
 
@@ -37,7 +37,6 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
         if (flag0) {
             this.b.mkdirs();
         }
-        this.f();
         this.type = type;
         this.h();
     }
@@ -203,8 +202,8 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
             NBTTagCompound nbttagcompound = new NBTTagCompound();
 
             entityplayer.e(nbttagcompound);
-            File file1 = new File(this.b, entityplayer.bS + ".dat.tmp");
-            File file2 = new File(this.b, entityplayer.bS + ".dat");
+            File file1 = new File(this.b, entityplayer.c_() + ".dat.tmp");
+            File file2 = new File(this.b, entityplayer.c_() + ".dat");
 
             CompressedStreamTools.a(nbttagcompound, (OutputStream) (new FileOutputStream(file1)));
             if (file2.exists()) {
@@ -213,13 +212,13 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
 
             file1.renameTo(file2);
         } catch (Exception exception) {
-            MinecraftServer.D().al().b("Failed to save player data for " + entityplayer.bS);
+            MinecraftServer.F().an().b("Failed to save player data for " + entityplayer.c_());
         }
     }
 
     @Override
     public NBTTagCompound b(EntityPlayer entityplayer) {
-        NBTTagCompound nbttagcompound = this.a(entityplayer.bS);
+        NBTTagCompound nbttagcompound = this.a(entityplayer.c_());
 
         if (nbttagcompound != null) {
             entityplayer.f(nbttagcompound);
@@ -236,7 +235,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
                 return CompressedStreamTools.a((InputStream) (new FileInputStream(file1)));
             }
         } catch (Exception exception) {
-            MinecraftServer.D().al().b("Failed to load player data for " + s0);
+            MinecraftServer.F().an().b("Failed to load player data for " + s0);
         }
 
         return null;

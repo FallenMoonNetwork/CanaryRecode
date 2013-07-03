@@ -41,7 +41,7 @@ public class ItemSeeds extends Item {
                 //
 
                 world.c(i0, i1 + 1, i2, this.a);
-                --itemstack.a;
+                --itemstack.b;
                 return true;
             } else {
                 return false;

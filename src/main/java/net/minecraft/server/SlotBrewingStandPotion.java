@@ -10,7 +10,7 @@ public class SlotBrewingStandPotion extends Slot { // CanaryMod: package => publ
     }
 
     public boolean a(ItemStack itemstack) {
-        return a_(itemstack);
+        return b_(itemstack);
     }
 
     public int a() {
@@ -18,14 +18,14 @@ public class SlotBrewingStandPotion extends Slot { // CanaryMod: package => publ
     }
 
     public void a(EntityPlayer entityplayer, ItemStack itemstack) {
-        if (itemstack.c == Item.bt.cp && itemstack.k() > 0) {
+        if (itemstack.d == Item.bu.cv && itemstack.k() > 0) {
             this.a.a((StatBase) AchievementList.A, 1);
         }
 
         super.a(entityplayer, itemstack);
     }
 
-    public static boolean a_(ItemStack itemstack) {
-        return itemstack != null && (itemstack.c == Item.bt.cp || itemstack.c == Item.bu.cp);
+    public static boolean b_(ItemStack itemstack) {
+        return itemstack != null && (itemstack.d == Item.bu.cv || itemstack.d == Item.bv.cv);
     }
 }

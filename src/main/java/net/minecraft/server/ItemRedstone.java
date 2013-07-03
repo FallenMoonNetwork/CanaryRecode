@@ -21,7 +21,7 @@ public class ItemRedstone extends Item {
 
         clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
 
-        if (world.a(i0, i1, i2) != Block.aW.cz) {
+        if (world.a(i0, i1, i2) != Block.aX.cF) {
             if (i3 == 0) {
                 --i1;
             }
@@ -64,9 +64,9 @@ public class ItemRedstone extends Item {
                 return false;
             }
             //
-            if (Block.az.c(world, i0, i1, i2)) {
-                --itemstack.a;
-                world.c(i0, i1, i2, Block.az.cz);
+            if (Block.aA.c(world, i0, i1, i2)) {
+                --itemstack.b;
+                world.c(i0, i1, i2, Block.aA.cF);
             }
 
             return true;

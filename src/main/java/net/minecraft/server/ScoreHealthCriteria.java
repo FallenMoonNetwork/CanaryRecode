@@ -15,28 +15,17 @@ public class ScoreHealthCriteria extends ScoreDummyCriteria {
     public int a(List list) {
         float f0 = 0.0F;
 
-        int i0;
-        float f1;
+        EntityPlayer entityplayer;
 
-        for (Iterator iterator = list.iterator(); iterator.hasNext(); f0 += (float) i0 / f1) {
-            EntityPlayer entityplayer = (EntityPlayer) iterator.next();
-
-            i0 = entityplayer.aX();
-            f1 = (float) entityplayer.aW();
-            if (i0 < 0) {
-                i0 = 0;
-            }
-
-            if ((float) i0 > f1) {
-                i0 = entityplayer.aW();
-            }
+        for (Iterator iterator = list.iterator(); iterator.hasNext(); f0 += entityplayer.aJ() + entityplayer.bj()) {
+            entityplayer = (EntityPlayer) iterator.next();
         }
 
         if (list.size() > 0) {
             f0 /= (float) list.size();
         }
 
-        return MathHelper.d(f0 * 19.0F) + (f0 > 0.0F ? 1 : 0);
+        return MathHelper.f(f0);
     }
 
     public boolean b() {

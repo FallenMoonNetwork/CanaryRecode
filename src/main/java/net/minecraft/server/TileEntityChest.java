@@ -37,18 +37,18 @@ public class TileEntityChest extends TileEntity implements IInventory {
         if (this.i[i0] != null) {
             ItemStack itemstack;
 
-            if (this.i[i0].a <= i1) {
+            if (this.i[i0].b <= i1) {
                 itemstack = this.i[i0];
                 this.i[i0] = null;
-                this.k_();
+                this.e();
                 return itemstack;
             } else {
                 itemstack = this.i[i0].a(i1);
-                if (this.i[i0].a == 0) {
+                if (this.i[i0].b == 0) {
                     this.i[i0] = null;
                 }
 
-                this.k_();
+                this.e();
                 return itemstack;
             }
         } else {
@@ -56,7 +56,7 @@ public class TileEntityChest extends TileEntity implements IInventory {
         }
     }
 
-    public ItemStack b(int i0) {
+    public ItemStack a_(int i0) {
         if (this.i[i0] != null) {
             ItemStack itemstack = this.i[i0];
 
@@ -69,11 +69,11 @@ public class TileEntityChest extends TileEntity implements IInventory {
 
     public void a(int i0, ItemStack itemstack) {
         this.i[i0] = itemstack;
-        if (itemstack != null && itemstack.a > this.d()) {
-            itemstack.a = this.d();
+        if (itemstack != null && itemstack.b > this.d()) {
+            itemstack.b = this.d();
         }
 
-        this.k_();
+        this.e();
     }
 
     public String b() {
@@ -213,7 +213,7 @@ public class TileEntityChest extends TileEntity implements IInventory {
     }
 
     private boolean a(int i0, int i1, int i2) {
-        Block block = Block.r[this.k.a(i0, i1, i2)];
+        Block block = Block.s[this.k.a(i0, i1, i2)];
 
         return block != null && block instanceof BlockChest ? ((BlockChest) block).a == this.l() : false;
     }
@@ -233,8 +233,8 @@ public class TileEntityChest extends TileEntity implements IInventory {
             while (iterator.hasNext()) {
                 EntityPlayer entityplayer = (EntityPlayer) iterator.next();
 
-                if (entityplayer.bM instanceof ContainerChest) {
-                    IInventory iinventory = ((ContainerChest) entityplayer.bM).e();
+                if (entityplayer.bp instanceof ContainerChest) {
+                    IInventory iinventory = ((ContainerChest) entityplayer.bp).e();
 
                     if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest) iinventory).a((IInventory) this)) {
                         ++this.h;
@@ -307,23 +307,23 @@ public class TileEntityChest extends TileEntity implements IInventory {
         }
     }
 
-    public void f() {
+    public void k_() {
         if (this.h < 0) {
             this.h = 0;
         }
 
         ++this.h;
-        this.k.d(this.l, this.m, this.n, this.q().cz, 1, this.h);
-        this.k.f(this.l, this.m, this.n, this.q().cz);
-        this.k.f(this.l, this.m - 1, this.n, this.q().cz);
+        this.k.d(this.l, this.m, this.n, this.q().cF, 1, this.h);
+        this.k.f(this.l, this.m, this.n, this.q().cF);
+        this.k.f(this.l, this.m - 1, this.n, this.q().cF);
     }
 
     public void g() {
         if (this.q() != null && this.q() instanceof BlockChest) {
             --this.h;
-            this.k.d(this.l, this.m, this.n, this.q().cz, 1, this.h);
-            this.k.f(this.l, this.m, this.n, this.q().cz);
-            this.k.f(this.l, this.m - 1, this.n, this.q().cz);
+            this.k.d(this.l, this.m, this.n, this.q().cF, 1, this.h);
+            this.k.f(this.l, this.m, this.n, this.q().cF);
+            this.k.f(this.l, this.m - 1, this.n, this.q().cF);
         }
     }
 

@@ -10,7 +10,7 @@ public class SlotBeacon extends Slot { // CanaryMod: package => public
     }
 
     public boolean a(ItemStack itemstack) {
-        return itemstack == null ? false : itemstack.c == Item.bI.cp || itemstack.c == Item.o.cp || itemstack.c == Item.q.cp || itemstack.c == Item.p.cp;
+        return itemstack == null ? false : itemstack.d == Item.bJ.cv || itemstack.d == Item.p.cv || itemstack.d == Item.r.cv || itemstack.d == Item.q.cv;
     }
 
     public int a() {

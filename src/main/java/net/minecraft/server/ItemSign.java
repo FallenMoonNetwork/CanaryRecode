@@ -11,7 +11,7 @@ public class ItemSign extends Item {
 
     public ItemSign(int i0) {
         super(i0);
-        this.cq = 16;
+        this.cw = 16;
         this.a(CreativeTabs.c);
     }
 
@@ -48,7 +48,7 @@ public class ItemSign extends Item {
 
             if (!entityplayer.a(i0, i1, i2, i3, itemstack)) {
                 return false;
-            } else if (!Block.aH.c(world, i0, i1, i2)) {
+            } else if (!Block.aI.c(world, i0, i1, i2)) {
                 return false;
             } else {
                 // Create and call
@@ -64,12 +64,12 @@ public class ItemSign extends Item {
                 if (i3 == 1) {
                     int i4 = MathHelper.c((double) ((entityplayer.A + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
 
-                    world.f(i0, i1, i2, Block.aH.cz, i4, 2);
+                    world.f(i0, i1, i2, Block.aI.cF, i4, 2);
                 } else {
-                    world.f(i0, i1, i2, Block.aM.cz, i3, 2);
+                    world.f(i0, i1, i2, Block.aN.cF, i3, 2);
                 }
 
-                --itemstack.a;
+                --itemstack.b;
                 TileEntitySign tileentitysign = (TileEntitySign) world.r(i0, i1, i2);
 
                 if (tileentitysign != null) {

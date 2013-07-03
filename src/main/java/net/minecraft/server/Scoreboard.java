@@ -107,15 +107,12 @@ public class Scoreboard {
     public Collection e() {
         Collection collection = this.c.values();
         ArrayList arraylist = new ArrayList();
+        Iterator iterator = collection.iterator();
 
-        if (collection != null) {
-            Iterator iterator = collection.iterator();
+        while (iterator.hasNext()) {
+            Map map = (Map) iterator.next();
 
-            while (iterator.hasNext()) {
-                Map map = (Map) iterator.next();
-
-                arraylist.addAll(map.values());
-            }
+            arraylist.addAll(map.values());
         }
 
         return arraylist;
@@ -272,7 +269,7 @@ public class Scoreboard {
         return s0.equalsIgnoreCase("list") ? 0 : (s0.equalsIgnoreCase("sidebar") ? 1 : (s0.equalsIgnoreCase("belowName") ? 2 : -1));
     }
 
-    // CAnaryMod: our methods
+    // CanaryMod: our methods
     public CanaryScoreboard getCanaryScoreboard() {
         return this.scoreboard;
     }

@@ -21,7 +21,7 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
     }
 
     public void h() {
-        if (this.k.H() % 80L == 0L) {
+        if (this.k.I() % 80L == 0L) {
             this.v();
             this.u();
         }
@@ -38,7 +38,7 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
 
             AxisAlignedBB axisalignedbb = AxisAlignedBB.a().a((double) this.l, (double) this.m, (double) this.n, (double) (this.l + 1), (double) (this.m + 1), (double) (this.n + 1)).b(d0, d0, d0);
 
-            axisalignedbb.e = (double) this.k.Q();
+            axisalignedbb.e = (double) this.k.R();
             List list = this.k.a(EntityPlayer.class, axisalignedbb);
             Iterator iterator = list.iterator();
 
@@ -81,7 +81,7 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
                     for (int i3 = this.n - i0; i3 <= this.n + i0; ++i3) {
                         int i4 = this.k.a(i2, i1, i3);
 
-                        if (i4 != Block.bZ.cz && i4 != Block.al.cz && i4 != Block.aB.cz && i4 != Block.am.cz) {
+                        if (i4 != Block.ca.cF && i4 != Block.am.cF && i4 != Block.aC.cF && i4 != Block.an.cF) {
                             flag0 = false;
                             break;
                         }
@@ -179,21 +179,21 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
 
     public ItemStack a(int i0, int i1) {
         if (i0 == 0 && this.h != null) {
-            if (i1 >= this.h.a) {
+            if (i1 >= this.h.b) {
                 ItemStack itemstack = this.h;
 
                 this.h = null;
                 return itemstack;
             } else {
-                this.h.a -= i1;
-                return new ItemStack(this.h.c, i1, this.h.k());
+                this.h.b -= i1;
+                return new ItemStack(this.h.d, i1, this.h.k());
             }
         } else {
             return null;
         }
     }
 
-    public ItemStack b(int i0) {
+    public ItemStack a_(int i0) {
         if (i0 == 0 && this.h != null) {
             ItemStack itemstack = this.h;
 
@@ -230,12 +230,12 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
         return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
     }
 
-    public void f() {}
+    public void k_() {}
 
     public void g() {}
 
     public boolean b(int i0, ItemStack itemstack) {
-        return itemstack.c == Item.bI.cp || itemstack.c == Item.o.cp || itemstack.c == Item.q.cp || itemstack.c == Item.p.cp;
+        return itemstack.d == Item.bJ.cv || itemstack.d == Item.p.cv || itemstack.d == Item.r.cv || itemstack.d == Item.q.cv;
     }
 
     // CanaryMod

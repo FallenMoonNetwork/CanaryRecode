@@ -57,10 +57,6 @@ public class PotionEffect {
         return this.c;
     }
 
-    public boolean d() {
-        return this.d;
-    }
-
     public void a(boolean flag0) {
         this.d = flag0;
     }
@@ -69,10 +65,10 @@ public class PotionEffect {
         return this.e;
     }
 
-    public boolean a(EntityLiving entityliving) {
+    public boolean a(EntityLivingBase entitylivingbase) {
         if (this.b > 0) {
             if (Potion.a[this.a].a(this.b, this.c)) {
-                this.b(entityliving);
+                this.b(entitylivingbase);
             }
 
             this.h();
@@ -85,9 +81,9 @@ public class PotionEffect {
         return --this.b;
     }
 
-    public void b(EntityLiving entityliving) {
+    public void b(EntityLivingBase entitylivingbase) {
         if (this.b > 0) {
-            Potion.a[this.a].a(entityliving, this.c);
+            Potion.a[this.a].a(entitylivingbase, this.c);
         }
     }
 

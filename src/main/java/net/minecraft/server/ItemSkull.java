@@ -9,8 +9,8 @@ import net.canarymod.hook.player.BlockPlaceHook;
 
 public class ItemSkull extends Item {
 
-    private static final String[] b = new String[] { "skeleton", "wither", "zombie", "char", "creeper"};
-    public static final String[] a = new String[] { "skull_skeleton", "skull_wither", "skull_zombie", "skull_char", "skull_creeper"};
+    private static final String[] b = new String[]{ "skeleton", "wither", "zombie", "char", "creeper" };
+    public static final String[] a = new String[]{ "skeleton", "wither", "zombie", "steve", "creeper" };
 
     public ItemSkull(int i0) {
         super(i0);
@@ -52,7 +52,7 @@ public class ItemSkull extends Item {
 
             if (!entityplayer.a(i0, i1, i2, i3, itemstack)) {
                 return false;
-            } else if (!Block.ck.c(world, i0, i1, i2)) {
+            } else if (!Block.cl.c(world, i0, i1, i2)) {
                 return false;
             } else {
                 // Create and call
@@ -65,7 +65,7 @@ public class ItemSkull extends Item {
                 }
                 //
 
-                world.f(i0, i1, i2, Block.ck.cz, i3, 2);
+                world.f(i0, i1, i2, Block.cl.cF, i3, 2);
                 int i4 = 0;
 
                 if (i3 == 1) {
@@ -83,10 +83,10 @@ public class ItemSkull extends Item {
 
                     ((TileEntitySkull) tileentity).a(itemstack.k(), s0);
                     ((TileEntitySkull) tileentity).a(i4);
-                    ((BlockSkull) Block.ck).a(world, i0, i1, i2, (TileEntitySkull) tileentity);
+                    ((BlockSkull) Block.cl).a(world, i0, i1, i2, (TileEntitySkull) tileentity);
                 }
 
-                --itemstack.a;
+                --itemstack.b;
                 return true;
             }
         }
@@ -107,6 +107,6 @@ public class ItemSkull extends Item {
     }
 
     public String l(ItemStack itemstack) {
-        return itemstack.k() == 3 && itemstack.p() && itemstack.q().b("SkullOwner") ? StatCollector.a("item.skull.player.name", new Object[] { itemstack.q().i("SkullOwner")}) : super.l(itemstack);
+        return itemstack.k() == 3 && itemstack.p() && itemstack.q().b("SkullOwner") ? StatCollector.a("item.skull.player.name", new Object[]{ itemstack.q().i("SkullOwner") }) : super.l(itemstack);
     }
 }

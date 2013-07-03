@@ -13,7 +13,7 @@ public class ItemDoor extends Item {
     public ItemDoor(int i0, Material material) {
         super(i0);
         this.a = material;
-        this.cq = 1;
+        this.cw = 1;
         this.a(CreativeTabs.d);
     }
 
@@ -25,9 +25,9 @@ public class ItemDoor extends Item {
             Block block;
 
             if (this.a == Material.d) {
-                block = Block.aI;
+                block = Block.aJ;
             } else {
-                block = Block.aP;
+                block = Block.aQ;
             }
 
             if (entityplayer.a(i0, i1, i2, i3, itemstack) && entityplayer.a(i0, i1 + 1, i2, i3, itemstack)) {
@@ -48,7 +48,7 @@ public class ItemDoor extends Item {
                     int i4 = MathHelper.c((double) ((entityplayer.A + 180.0F) * 4.0F / 360.0F) - 0.5D) & 3;
 
                     a(world, i0, i1, i2, i4, block);
-                    --itemstack.a;
+                    --itemstack.b;
                     return true;
                 }
             } else {
@@ -79,8 +79,8 @@ public class ItemDoor extends Item {
 
         int i4 = (world.u(i0 - b0, i1, i2 - b1) ? 1 : 0) + (world.u(i0 - b0, i1 + 1, i2 - b1) ? 1 : 0);
         int i5 = (world.u(i0 + b0, i1, i2 + b1) ? 1 : 0) + (world.u(i0 + b0, i1 + 1, i2 + b1) ? 1 : 0);
-        boolean flag0 = world.a(i0 - b0, i1, i2 - b1) == block.cz || world.a(i0 - b0, i1 + 1, i2 - b1) == block.cz;
-        boolean flag1 = world.a(i0 + b0, i1, i2 + b1) == block.cz || world.a(i0 + b0, i1 + 1, i2 + b1) == block.cz;
+        boolean flag0 = world.a(i0 - b0, i1, i2 - b1) == block.cF || world.a(i0 - b0, i1 + 1, i2 - b1) == block.cF;
+        boolean flag1 = world.a(i0 + b0, i1, i2 + b1) == block.cF || world.a(i0 + b0, i1 + 1, i2 + b1) == block.cF;
         boolean flag2 = false;
 
         if (flag0 && !flag1) {
@@ -89,9 +89,9 @@ public class ItemDoor extends Item {
             flag2 = true;
         }
 
-        world.f(i0, i1, i2, block.cz, i3, 2);
-        world.f(i0, i1 + 1, i2, block.cz, 8 | (flag2 ? 1 : 0), 2);
-        world.f(i0, i1, i2, block.cz);
-        world.f(i0, i1 + 1, i2, block.cz);
+        world.f(i0, i1, i2, block.cF, i3, 2);
+        world.f(i0, i1 + 1, i2, block.cF, 8 | (flag2 ? 1 : 0), 2);
+        world.f(i0, i1, i2, block.cF);
+        world.f(i0, i1 + 1, i2, block.cF);
     }
 }

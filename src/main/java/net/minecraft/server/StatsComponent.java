@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -11,26 +10,23 @@ import javax.swing.JComponent;
 import javax.swing.Timer;
 
 import net.canarymod.Canary;
-import net.canarymod.api.CanaryServer;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 
-
-public class GuiStatsComponent extends JComponent {
+public class StatsComponent extends JComponent {
 
     private static final DecimalFormat a = new DecimalFormat("########0.000");
     private int[] b = new int[256];
-    private int c = 0;
+    private int c;
     private String[] d = new String[11];
     private final MinecraftServer e;
 
-    public GuiStatsComponent() {
-        MinecraftServer minecraftserver = ((CanaryServer) Canary.getServer()).getHandle();
+    public StatsComponent(MinecraftServer minecraftserver) {
         this.e = minecraftserver;
         this.setPreferredSize(new Dimension(456, 246));
         this.setMinimumSize(new Dimension(456, 246));
         this.setMaximumSize(new Dimension(456, 246));
-        (new Timer(500, new GuiStatsListener(this))).start();
+        (new Timer(500, new StatsComponentINNER1(this))).start();
         this.setBackground(Color.BLACK);
     }
 
@@ -40,10 +36,10 @@ public class GuiStatsComponent extends JComponent {
         System.gc();
         this.d[0] = "Memory use: " + i0 / 1024L / 1024L + " mb (" + Runtime.getRuntime().freeMemory() * 100L / Runtime.getRuntime().maxMemory() + "% free)";
         this.d[1] = "Threads: " + TcpConnection.a.get() + " + " + TcpConnection.b.get();
-        this.d[2] = "Avg tick: " + a.format(this.a(this.e.i) * 1.0E-6D) + " ms";
-        this.d[3] = "Avg sent: " + (int) this.a(this.e.e) + ", Avg size: " + (int) this.a(this.e.f);
-        this.d[4] = "Avg rec: " + (int) this.a(this.e.g) + ", Avg size: " + (int) this.a(this.e.h);
-
+        this.d[2] = "Avg tick: " + a.format(this.a(this.e.j) * 1.0E-6D) + " ms";
+        this.d[3] = "Avg sent: " + (int) this.a(this.e.f) + ", Avg size: " + (int) this.a(this.e.g);
+        this.d[4] = "Avg rec: " + (int) this.a(this.e.h) + ", Avg size: " + (int) this.a(this.e.i);
+        
         // CanaryMod: Multiworld
         Collection<World> worlds = Canary.getServer().getWorldManager().getAllWorlds();
         if (worlds != null) {
@@ -58,8 +54,10 @@ public class GuiStatsComponent extends JComponent {
             }
         }
         //
+        
+        double d0 = 12500.0D;
 
-        this.b[this.c++ & 255] = (int) (this.a(this.e.f) * 100.0D / 12500.0D);
+        this.b[this.c++ & 255] = (int) (this.a(this.e.g) * 100.0D / 12500.0D);
         this.repaint();
     }
 
@@ -73,7 +71,6 @@ public class GuiStatsComponent extends JComponent {
         return (double) i0 / (double) along.length;
     }
 
-    @Override
     public void paint(Graphics graphics) {
         graphics.setColor(new Color(16777215));
         graphics.fillRect(0, 0, 456, 246);
@@ -98,7 +95,7 @@ public class GuiStatsComponent extends JComponent {
         }
     }
 
-    static void a(GuiStatsComponent guistatscomponent) {
-        guistatscomponent.a();
+    static void a(StatsComponent statscomponent) {
+        statscomponent.a();
     }
 }

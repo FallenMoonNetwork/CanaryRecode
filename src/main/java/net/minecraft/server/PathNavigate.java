@@ -7,9 +7,9 @@ public class PathNavigate {
     private EntityLiving a;
     private World b;
     private PathEntity c;
-    public float d; // CanaryMod: private to public
-    public float e; // CanaryMod: private to public
-    private boolean f = false;
+    private double d;
+    private AttributeInstance e;
+    private boolean f;
     private int g;
     private int h;
     private Vec3 i = Vec3.a(0.0D, 0.0D, 0.0D);
@@ -20,10 +20,10 @@ public class PathNavigate {
 
     private CanaryPathFinder nav = new CanaryPathFinder(this); // CanaryMod: our var
 
-    public PathNavigate(EntityLiving entityliving, World world, float f0) {
+    public PathNavigate(EntityLiving entityliving, World world) {
         this.a = entityliving;
         this.b = world;
-        this.e = f0;
+        this.e = entityliving.a(SharedMonsterAttributes.b);
     }
 
     public void a(boolean flag0) {
@@ -50,37 +50,39 @@ public class PathNavigate {
         this.f = flag0;
     }
 
-    public void a(float f0) {
-        this.d = f0;
+    public void a(double d0) {
+        this.d = d0;
     }
 
     public void e(boolean flag0) {
         this.m = flag0;
     }
 
-    public PathEntity a(double d0, double d1, double d2) {
-//        Canary.logInfo(String.valueOf(!this.k()));
-//                Canary.logInfo(String.valueOf(!this.a.F));
-        return !this.k() ? null : this.b.a(this.a, MathHelper.c(d0), (int) d1, MathHelper.c(d2), this.e, this.j, this.k, this.l, this.m);
+    public float d() {
+        return (float) this.e.e();
     }
 
-    public boolean a(double d0, double d1, double d2, float f0) {
+    public PathEntity a(double d0, double d1, double d2) {
+        return !this.l() ? null : this.b.a(this.a, MathHelper.c(d0), (int) d1, MathHelper.c(d2), this.d(), this.j, this.k, this.l, this.m);
+    }
+
+    public boolean a(double d0, double d1, double d2, double d3) {
         PathEntity pathentity = this.a((double) MathHelper.c(d0), (double) ((int) d1), (double) MathHelper.c(d2));
 
-        return this.a(pathentity, f0);
+        return this.a(pathentity, d3);
     }
 
-    public PathEntity a(EntityLiving entityliving) {
-        return !this.k() ? null : this.b.a(this.a, entityliving, this.e, this.j, this.k, this.l, this.m);
+    public PathEntity a(Entity entity) {
+        return !this.l() ? null : this.b.a(this.a, entity, this.d(), this.j, this.k, this.l, this.m);
     }
 
-    public boolean a(EntityLiving entityliving, float f0) {
-        PathEntity pathentity = this.a(entityliving);
+    public boolean a(Entity entity, double d0) {
+        PathEntity pathentity = this.a(entity);
 
-        return pathentity != null ? this.a(pathentity, f0) : false;
+        return pathentity != null ? this.a(pathentity, d0) : false;
     }
 
-    public boolean a(PathEntity pathentity, float f0) {
+    public boolean a(PathEntity pathentity, double d0) {
         if (pathentity == null) {
             this.c = null;
 //            Canary.logInfo("path was null");
@@ -91,16 +93,15 @@ public class PathNavigate {
             }
 
             if (this.f) {
-//                Canary.logInfo("path was sunny");
-                this.m();
+                this.n();
             }
 
             if (this.c.d() == 0) {
 //                Canary.logInfo("path was of length 0");
                 return false;
             } else {
-                this.d = f0;
-                Vec3 vec3 = this.i();
+                this.d = d0;
+                Vec3 vec3 = this.j();
 
                 this.h = this.g;
                 this.i.c = vec3.c;
@@ -111,27 +112,29 @@ public class PathNavigate {
         }
     }
 
-    public PathEntity d() {
+    public PathEntity e() {
         return this.c;
     }
 
-    public void e() {
+    public void f() {
         ++this.g;
-        if (!this.f()) {
-            if (this.k()) {
-                this.h();
+        if (!this.g()) {
+            if (this.l()) {
+                this.i();
             }
-            if (!this.f()) {
+
+            if (!this.g()) {
                 Vec3 vec3 = this.c.a((Entity) this.a);
-                    if (vec3 != null) {
-                    this.a.aA().a(vec3.c, vec3.d, vec3.e, this.d);
+
+                if (vec3 != null) {
+                    this.a.i().a(vec3.c, vec3.d, vec3.e, this.d);
                 }
             }
         }
     }
 
-    private void h() {
-        Vec3 vec3 = this.i();
+    private void i() {
+        Vec3 vec3 = this.j();
         int i0 = this.c.d();
 
         for (int i1 = this.c.e(); i1 < this.c.d(); ++i1) {
@@ -164,7 +167,7 @@ public class PathNavigate {
 
         if (this.g - this.h > 100) {
             if (vec3.e(this.i) < 2.25D) {
-                this.g();
+                this.h();
             }
 
             this.h = this.g;
@@ -174,33 +177,34 @@ public class PathNavigate {
         }
     }
 
-    public boolean f() {
+    public boolean g() {
         return this.c == null || this.c.b();
     }
 
-    public void g() {
+    public void h() {
         this.c = null;
     }
 
-    private Vec3 i() {
-        return this.b.U().a(this.a.u, (double) this.j(), this.a.w);
+    private Vec3 j() {
+        return this.b.V().a(this.a.u, (double) this.k(), this.a.w);
     }
 
-    private int j() {
+    private int k() {
         if (this.a.G() && this.m) {
             int i0 = (int) this.a.E.b;
             int i1 = this.b.a(MathHelper.c(this.a.u), i0, MathHelper.c(this.a.w));
             int i2 = 0;
 
             do {
-                if (i1 != Block.E.cz && i1 != Block.F.cz) {
+                if (i1 != Block.F.cF && i1 != Block.G.cF) {
                     return i0;
                 }
 
                 ++i0;
                 i1 = this.b.a(MathHelper.c(this.a.u), i0, MathHelper.c(this.a.w));
                 ++i2;
-            } while (i2 <= 16);
+            }
+            while (i2 <= 16);
 
             return (int) this.a.E.b;
         } else {
@@ -208,15 +212,15 @@ public class PathNavigate {
         }
     }
 
-    private boolean k() {
-        return this.a.F || this.m && this.l();
+    private boolean l() {
+        return this.a.F || this.m && this.m();
     }
 
-    private boolean l() {
+    private boolean m() {
         return this.a.G() || this.a.I();
     }
 
-    private void m() {
+    private void n() {
         if (!this.b.l(MathHelper.c(this.a.u), (int) (this.a.E.b + 0.5D), MathHelper.c(this.a.w))) {
             for (int i0 = 0; i0 < this.c.d(); ++i0) {
                 PathPoint pathpoint = this.c.a(i0);
@@ -286,7 +290,8 @@ public class PathNavigate {
                         i4 += i6;
                         i10 = i8 - i4;
                     }
-                } while (this.a(i3, (int) vec3.d, i4, i0, i1, i2, vec3, d0, d1));
+                }
+                while (this.a(i3, (int) vec3.d, i4, i0, i1, i2, vec3, d0, d1));
 
                 return false;
             }
@@ -312,7 +317,7 @@ public class PathNavigate {
                             return false;
                         }
 
-                        Material material = Block.r[i10].cO;
+                        Material material = Block.s[i10].cU;
 
                         if (material == Material.h && !this.a.G()) {
                             return false;
@@ -339,7 +344,7 @@ public class PathNavigate {
                     if (d2 * d0 + d3 * d1 >= 0.0D) {
                         int i9 = this.b.a(i6, i7, i8);
 
-                        if (i9 > 0 && !Block.r[i9].b((IBlockAccess) this.b, i6, i7, i8)) {
+                        if (i9 > 0 && !Block.s[i9].b((IBlockAccess) this.b, i6, i7, i8)) {
                             return false;
                         }
                     }

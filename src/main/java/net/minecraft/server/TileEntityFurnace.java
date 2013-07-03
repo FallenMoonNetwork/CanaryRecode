@@ -33,13 +33,13 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
         if (this.g[i0] != null) {
             ItemStack itemstack;
 
-            if (this.g[i0].a <= i1) {
+            if (this.g[i0].b <= i1) {
                 itemstack = this.g[i0];
                 this.g[i0] = null;
                 return itemstack;
             } else {
                 itemstack = this.g[i0].a(i1);
-                if (this.g[i0].a == 0) {
+                if (this.g[i0].b == 0) {
                     this.g[i0] = null;
                 }
 
@@ -50,7 +50,7 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
         }
     }
 
-    public ItemStack b(int i0) {
+    public ItemStack a_(int i0) {
         if (this.g[i0] != null) {
             ItemStack itemstack = this.g[i0];
 
@@ -63,8 +63,8 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
 
     public void a(int i0, ItemStack itemstack) {
         this.g[i0] = itemstack;
-        if (itemstack != null && itemstack.a > this.d()) {
-            itemstack.a = this.d();
+        if (itemstack != null && itemstack.b > this.d()) {
+            itemstack.b = this.d();
         }
     }
 
@@ -147,9 +147,9 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
                 if (this.a > 0) {
                     flag1 = true;
                     if (this.g[1] != null) {
-                        --this.g[1].a;
-                        if (this.g[1].a == 0) {
-                            Item item = this.g[1].b().s();
+                        --this.g[1].b;
+                        if (this.g[1].b == 0) {
+                            Item item = this.g[1].b().t();
 
                             this.g[1] = item != null ? new ItemStack(item) : null;
                         }
@@ -175,7 +175,7 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
         }
 
         if (flag1) {
-            this.k_();
+            this.e();
         }
     }
 
@@ -183,15 +183,15 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
         if (this.g[0] == null) {
             return false;
         } else {
-            ItemStack itemstack = FurnaceRecipes.a().b(this.g[0].b().cp);
+            ItemStack itemstack = FurnaceRecipes.a().b(this.g[0].b().cv);
 
-            return itemstack == null ? false : (this.g[2] == null ? true : (!this.g[2].a(itemstack) ? false : (this.g[2].a < this.d() && this.g[2].a < this.g[2].e() ? true : this.g[2].a < itemstack.e())));
+            return itemstack == null ? false : (this.g[2] == null ? true : (!this.g[2].a(itemstack) ? false : (this.g[2].b < this.d() && this.g[2].b < this.g[2].e() ? true : this.g[2].b < itemstack.e())));
         }
     }
 
     public void l() {
         if (this.u()) {
-            ItemStack itemstack = FurnaceRecipes.a().b(this.g[0].b().cp);
+            ItemStack itemstack = FurnaceRecipes.a().b(this.g[0].b().cv);
             // CanaryMod: Smelt
             SmeltHook hook = new SmeltHook(getCanaryFurnace(), itemstack.getCanaryItem());
 
@@ -203,12 +203,12 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
 
             if (this.g[2] == null) {
                 this.g[2] = itemstack.m();
-            } else if (this.g[2].c == itemstack.c) {
-                ++this.g[2].a;
+            } else if (this.g[2].d == itemstack.d) {
+                ++this.g[2].b;
             }
 
-            --this.g[0].a;
-            if (this.g[0].a <= 0) {
+            --this.g[0].b;
+            if (this.g[0].b <= 0) {
                 this.g[0] = null;
             }
         }
@@ -218,22 +218,26 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
         if (itemstack == null) {
             return 0;
         } else {
-            int i0 = itemstack.b().cp;
+            int i0 = itemstack.b().cv;
             Item item = itemstack.b();
 
-            if (i0 < 256 && Block.r[i0] != null) {
-                Block block = Block.r[i0];
+            if (i0 < 256 && Block.s[i0] != null) {
+                Block block = Block.s[i0];
 
-                if (block == Block.bS) {
+                if (block == Block.bT) {
                     return 150;
                 }
 
-                if (block.cO == Material.d) {
+                if (block.cU == Material.d) {
                     return 300;
+                }
+
+                if (block == Block.cE) {
+                    return 16000;
                 }
             }
 
-            return item instanceof ItemTool && ((ItemTool) item).g().equals("WOOD") ? 200 : (item instanceof ItemSword && ((ItemSword) item).h().equals("WOOD") ? 200 : (item instanceof ItemHoe && ((ItemHoe) item).g().equals("WOOD") ? 200 : (i0 == Item.E.cp ? 100 : (i0 == Item.n.cp ? 1600 : (i0 == Item.az.cp ? 20000 : (i0 == Block.C.cz ? 100 : (i0 == Item.bp.cp ? 2400 : 0)))))));
+            return item instanceof ItemTool && ((ItemTool) item).g().equals("WOOD") ? 200 : (item instanceof ItemSword && ((ItemSword) item).i().equals("WOOD") ? 200 : (item instanceof ItemHoe && ((ItemHoe) item).g().equals("WOOD") ? 200 : (i0 == Item.F.cv ? 100 : (i0 == Item.o.cv ? 1600 : (i0 == Item.aA.cv ? 20000 : (i0 == Block.D.cF ? 100 : (i0 == Item.bq.cv ? 2400 : 0)))))));
         }
     }
 
@@ -245,7 +249,7 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
         return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
     }
 
-    public void f() {}
+    public void k_() {}
 
     public void g() {}
 
@@ -262,7 +266,7 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
     }
 
     public boolean b(int i0, ItemStack itemstack, int i1) {
-        return i1 != 0 || i0 != 1 || itemstack.c == Item.ax.cp;
+        return i1 != 0 || i0 != 1 || itemstack.d == Item.ay.cv;
     }
 
     // CanaryMod

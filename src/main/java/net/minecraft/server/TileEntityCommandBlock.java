@@ -16,20 +16,20 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         this.complexBlock = new CanaryCommandBlock(this); // CanaryMod: wrap tile entity
     }
 
-    public void b(String s0) {
+    public void a(String s0) {
         this.b = s0;
-        this.k_();
+        this.e();
     }
 
     public int a(World world) {
         if (world.I) {
             return 0;
         } else {
-            MinecraftServer minecraftserver = MinecraftServer.D();
+            MinecraftServer minecraftserver = MinecraftServer.F();
 
-            if (minecraftserver != null && minecraftserver.Z()) {
+            if (minecraftserver != null && minecraftserver.ab()) {
                 // CanaryMod: CommandBlockCommand
-                // ICommandManager icommandmanager = minecraftserver.E();
+                // ICommandManager icommandmanager = minecraftserver.G();
                 CommandBlockCommandHook hook = new CommandBlockCommandHook(getCanaryCommandBlock(), this.b.split(" "));
 
                 Canary.hooks().callHook(hook);
@@ -43,29 +43,20 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         }
     }
 
-    @Override
     public String c_() {
         return this.c;
     }
 
-    public void c(String s0) {
+    public void b(String s0) {
         this.c = s0;
     }
 
-    @Override
-    public void a(String s0) {}
+    public void a(ChatMessageComponent chatmessagecomponent) {}
 
-    @Override
     public boolean a(int i0, String s0) {
         return i0 <= 2;
     }
 
-    @Override
-    public String a(String s0, Object... aobject) {
-        return s0;
-    }
-
-    @Override
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
         nbttagcompound.a("Command", this.b);
@@ -73,7 +64,6 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         nbttagcompound.a("CustomName", this.c);
     }
 
-    @Override
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
         this.b = nbttagcompound.i("Command");
@@ -83,12 +73,14 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         }
     }
 
-    @Override
     public ChunkCoordinates b() {
         return new ChunkCoordinates(this.l, this.m, this.n);
     }
 
-    @Override
+    public World f_() {
+        return this.ay();
+    }
+
     public Packet m() {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
 
@@ -96,7 +88,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         return new Packet132TileEntityData(this.l, this.m, this.n, 2, nbttagcompound);
     }
 
-    public int d() {
+    public int f() {
         return this.a;
     }
 

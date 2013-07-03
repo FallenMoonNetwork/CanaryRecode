@@ -36,7 +36,7 @@ public class TileEntity {
         }
     }
 
-    public World az() {
+    public World ay() {
         return this.k;
     }
 
@@ -91,7 +91,7 @@ public class TileEntity {
         if (tileentity != null) {
             tileentity.a(nbttagcompound);
         } else {
-            MinecraftServer.D().al().b("Skipping TileEntity with id " + nbttagcompound.i("id"));
+            MinecraftServer.F().an().b("Skipping TileEntity with id " + nbttagcompound.i("id"));
         }
 
         return tileentity;
@@ -105,19 +105,19 @@ public class TileEntity {
         return this.p;
     }
 
-    public void k_() {
+    public void e() {
         if (this.k != null) {
             this.p = this.k.h(this.l, this.m, this.n);
             this.k.b(this.l, this.m, this.n, this);
             if (this.q() != null) {
-                this.k.m(this.l, this.m, this.n, this.q().cz);
+                this.k.m(this.l, this.m, this.n, this.q().cF);
             }
         }
     }
 
     public Block q() {
         if (this.q == null) {
-            this.q = Block.r[this.k.a(this.l, this.m, this.n)];
+            this.q = Block.s[this.k.a(this.l, this.m, this.n)];
         }
 
         return this.q;
@@ -150,7 +150,7 @@ public class TileEntity {
 
     public void a(CrashReportCategory crashreportcategory) {
         crashreportcategory.a("Name", (Callable) (new CallableTileEntityName(this)));
-        CrashReportCategory.a(crashreportcategory, this.l, this.m, this.n, this.q().cz, this.p());
+        CrashReportCategory.a(crashreportcategory, this.l, this.m, this.n, this.q().cF, this.p());
         crashreportcategory.a("Actual block type", (Callable) (new CallableTileEntityID(this)));
         crashreportcategory.a("Actual block data value", (Callable) (new CallableTileEntityData(this)));
     }

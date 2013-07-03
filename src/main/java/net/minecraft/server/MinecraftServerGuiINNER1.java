@@ -2,17 +2,23 @@ package net.minecraft.server;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import net.canarymod.Canary;
 import net.canarymod.config.Configuration;
 
-final class ServerWindowAdapter extends WindowAdapter {
+final class MinecraftServerGuiINNER1 extends WindowAdapter {
 
-    @Override
+    final DedicatedServer a;
+
+    MinecraftServerGuiINNER1(DedicatedServer dedicatedserver) {
+        this.a = dedicatedserver;
+    }
+
     public void windowClosing(WindowEvent windowevent) {
-        Canary.getServer().initiateShutdown();
+        this.a.p();
 
-        while (!Canary.getServer().isRunning()) {
-            try {
+        while (!this.a.ae()) {
+        	try {
                 Thread.sleep(100L);
             } catch (InterruptedException interruptedexception) {
                 if (Configuration.getServerConfig().isDebugMode()) {

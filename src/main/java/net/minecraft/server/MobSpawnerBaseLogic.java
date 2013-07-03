@@ -100,11 +100,11 @@ public abstract class MobSpawnerBaseLogic {
                     EntityLiving entityliving = entity instanceof EntityLiving ? (EntityLiving) entity : null;
 
                     entity.b(d0, d3, d4, this.a().s.nextFloat() * 360.0F, 0.0F);
-                    if (entityliving == null || entityliving.bv()) {
+                    if (entityliving == null || entityliving.bo()) {
                         this.a(entity);
                         this.a().e(2004, this.b(), this.c(), this.d(), 0);
                         if (entityliving != null) {
-                            entityliving.aU();
+                            entityliving.q();
                         }
 
                         flag0 = true;
@@ -140,7 +140,7 @@ public abstract class MobSpawnerBaseLogic {
 
             for (Entity entity1 = entity; nbttagcompound.b("Riding"); nbttagcompound = nbttagcompound1) {
                 nbttagcompound1 = nbttagcompound.l("Riding");
-                Entity entity2 = EntityList.a(nbttagcompound1.i("id"), this.a());
+                Entity entity2 = EntityList.a(nbttagcompound1.i("id"), entity.q);
 
                 if (entity2 != null) {
                     NBTTagCompound nbttagcompound2 = new NBTTagCompound();
@@ -156,14 +156,17 @@ public abstract class MobSpawnerBaseLogic {
 
                     entity2.f(nbttagcompound2);
                     entity2.b(entity1.u, entity1.v, entity1.w, entity1.A, entity1.B);
-                    this.a().d(entity2);
+                    if (entity.q != null) {
+                        entity.q.d(entity2);
+                    }
+
                     entity1.a(entity2);
                 }
 
                 entity1 = entity2;
             }
-        } else if (entity instanceof EntityLiving && entity.q != null) {
-            ((EntityLiving) entity).bJ();
+        } else if (entity instanceof EntityLivingBase && entity.q != null) {
+            ((EntityLiving) entity).a((EntityLivingData) null);
             this.a().d(entity);
         }
 

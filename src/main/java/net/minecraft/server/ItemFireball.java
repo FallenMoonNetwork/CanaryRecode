@@ -72,12 +72,12 @@ public class ItemFireball extends Item {
                 //
 
                 if (i4 == 0) {
-                    world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D, "fire.ignite", 1.0F, e.nextFloat() * 0.4F + 0.8F);
-                    world.c(i0, i1, i2, Block.av.cz);
+                    world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D, "fire.ignite", 1.0F, f.nextFloat() * 0.4F + 0.8F);
+                    world.c(i0, i1, i2, Block.aw.cF);
                 }
 
-                if (!entityplayer.ce.d) {
-                    --itemstack.a;
+                if (!entityplayer.bG.d) {
+                    --itemstack.b;
                 }
 
                 return true;

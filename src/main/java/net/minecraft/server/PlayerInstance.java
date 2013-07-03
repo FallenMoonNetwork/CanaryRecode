@@ -12,6 +12,7 @@ class PlayerInstance {
     private short[] d;
     private int e;
     private int f;
+    private long g;
 
     final PlayerManager a;
 
@@ -19,7 +20,6 @@ class PlayerInstance {
         this.a = playermanager;
         this.b = new ArrayList();
         this.d = new short[64];
-        this.e = 0;
         this.c = new ChunkCoordIntPair(i0, i1);
         playermanager.a().b.c(i0, i1);
     }
@@ -28,6 +28,10 @@ class PlayerInstance {
         if (this.b.contains(entityplayermp)) {
             throw new IllegalStateException("Failed to add player. " + entityplayermp + " already is in chunk " + this.c.a + ", " + this.c.b);
         } else {
+            if (this.b.isEmpty()) {
+                this.g = PlayerManager.a(this.a).I();
+            }
+
             this.b.add(entityplayermp);
             entityplayermp.f.add(this.c);
         }
@@ -35,15 +39,19 @@ class PlayerInstance {
 
     public void b(EntityPlayerMP entityplayermp) {
         if (this.b.contains(entityplayermp)) {
-            entityplayermp.a.b(new Packet51MapChunk(PlayerManager.a(this.a).e(this.c.a, this.c.b), true, 0));
+            Chunk chunk = PlayerManager.a(this.a).e(this.c.a, this.c.b);
+
+            entityplayermp.a.b(new Packet51MapChunk(chunk, true, 0));
             this.b.remove(entityplayermp);
             entityplayermp.f.remove(this.c);
             if (this.b.isEmpty()) {
                 long i0 = (long) this.c.a + 2147483647L | (long) this.c.b + 2147483647L << 32;
 
+                this.a(chunk);
                 PlayerManager.b(this.a).d(i0);
+                PlayerManager.c(this.a).remove(this);
                 if (this.e > 0) {
-                    PlayerManager.c(this.a).remove(this);
+                    PlayerManager.d(this.a).remove(this);
                 }
 
                 this.a.a().b.b(this.c.a, this.c.b);
@@ -51,9 +59,18 @@ class PlayerInstance {
         }
     }
 
+    public void a() {
+        this.a(PlayerManager.a(this.a).e(this.c.a, this.c.b));
+    }
+
+    private void a(Chunk chunk) {
+        chunk.q += PlayerManager.a(this.a).I() - this.g;
+        this.g = PlayerManager.a(this.a).I();
+    }
+
     public void a(int i0, int i1, int i2) {
         if (this.e == 0) {
-            PlayerManager.c(this.a).add(this);
+            PlayerManager.d(this.a).add(this);
         }
 
         this.f |= 1 << (i1 >> 4);
@@ -80,7 +97,7 @@ class PlayerInstance {
         }
     }
 
-    public void a() {
+    public void b() {
         if (this.e != 0) {
             int i0;
             int i1;

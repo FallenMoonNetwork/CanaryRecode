@@ -75,7 +75,7 @@ public class Village {
             int i9 = i2 + this.a.s.nextInt(16) - 8;
 
             if (this.a(i7, i8, i9) && this.b(i7, i8, i9, i3, i4, i5)) {
-                return this.a.U().a((double) i7, (double) i8, (double) i9);
+                return this.a.V().a((double) i7, (double) i8, (double) i9);
             }
         }
 
@@ -221,30 +221,31 @@ public class Village {
         return this.b.isEmpty();
     }
 
-    public void a(EntityLiving entityliving) {
+    public void a(EntityLivingBase entitylivingbase) {
         Iterator iterator = this.k.iterator();
 
         VillageAgressor villageagressor;
 
         do {
             if (!iterator.hasNext()) {
-                this.k.add(new VillageAgressor(this, entityliving, this.g));
+                this.k.add(new VillageAgressor(this, entitylivingbase, this.g));
                 return;
             }
 
             villageagressor = (VillageAgressor) iterator.next();
-        } while (villageagressor.a != entityliving);
+        }
+        while (villageagressor.a != entitylivingbase);
 
         villageagressor.b = this.g;
     }
 
-    public EntityLiving b(EntityLiving entityliving) {
+    public EntityLivingBase b(EntityLivingBase entitylivingbase) {
         double d0 = Double.MAX_VALUE;
         VillageAgressor villageagressor = null;
 
         for (int i0 = 0; i0 < this.k.size(); ++i0) {
             VillageAgressor villageagressor1 = (VillageAgressor) this.k.get(i0);
-            double d1 = villageagressor1.a.e(entityliving);
+            double d1 = villageagressor1.a.e((Entity) entitylivingbase);
 
             if (d1 <= d0) {
                 villageagressor = villageagressor1;
@@ -255,7 +256,7 @@ public class Village {
         return villageagressor != null ? villageagressor.a : null;
     }
 
-    public EntityPlayer c(EntityLiving entityliving) {
+    public EntityPlayer c(EntityLivingBase entitylivingbase) {
         double d0 = Double.MAX_VALUE;
         EntityPlayer entityplayer = null;
         Iterator iterator = this.j.keySet().iterator();
@@ -267,7 +268,7 @@ public class Village {
                 EntityPlayer entityplayer1 = this.a.a(s0);
 
                 if (entityplayer1 != null) {
-                    double d1 = entityplayer1.e(entityliving);
+                    double d1 = entityplayer1.e(entitylivingbase);
 
                     if (d1 <= d0) {
                         entityplayer = entityplayer1;
@@ -322,7 +323,7 @@ public class Village {
     private boolean f(int i0, int i1, int i2) {
         int i3 = this.a.a(i0, i1, i2);
 
-        return i3 <= 0 ? false : i3 == Block.aI.cz;
+        return i3 <= 0 ? false : i3 == Block.aJ.cF;
     }
 
     private void n() {

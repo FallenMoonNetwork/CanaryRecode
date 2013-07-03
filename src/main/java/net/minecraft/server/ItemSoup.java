@@ -14,7 +14,7 @@ public class ItemSoup extends ItemFood {
         super.b(itemstack, world, entityplayer);
         // CanaryMod: check if EatHook got canceled
         if (itemstack.a != tempAm) {
-            return new ItemStack(Item.F);
+            return new ItemStack(Item.G);
         }
         //
         return itemstack;

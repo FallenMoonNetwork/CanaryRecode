@@ -27,7 +27,7 @@ public class ItemBed extends Item {
             clicked.setFaceClicked(BlockFace.fromByte((byte) i3)); // Set face clicked
 
             ++i1;
-            BlockBed blockbed = (BlockBed) Block.W;
+            BlockBed blockbed = (BlockBed) Block.X;
             int i4 = MathHelper.c((double) (entityplayer.A * 4.0F / 360.0F) + 0.5D) & 3;
             byte b0 = 0;
             byte b1 = 0;
@@ -59,12 +59,12 @@ public class ItemBed extends Item {
                         return false;
                     }
                     //
-                    world.f(i0, i1, i2, blockbed.cz, i4, 3);
-                    if (world.a(i0, i1, i2) == blockbed.cz) {
-                        world.f(i0 + b0, i1, i2 + b1, blockbed.cz, i4 + 8, 3);
+                    world.f(i0, i1, i2, blockbed.cF, i4, 3);
+                    if (world.a(i0, i1, i2) == blockbed.cF) {
+                        world.f(i0 + b0, i1, i2 + b1, blockbed.cF, i4 + 8, 3);
                     }
 
-                    --itemstack.a;
+                    --itemstack.b;
                     return true;
                 } else {
                     return false;

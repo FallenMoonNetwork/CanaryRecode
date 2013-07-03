@@ -32,13 +32,13 @@ public class WeightedRandomChestContent extends WeightedRandomItem {
             if (weightedrandomchestcontent.b.e() >= i2) {
                 ItemStack itemstack = weightedrandomchestcontent.b.m();
 
-                itemstack.a = i2;
+                itemstack.b = i2;
                 iinventory.a(random.nextInt(iinventory.j_()), itemstack);
             } else {
                 for (int i3 = 0; i3 < i2; ++i3) {
                     ItemStack itemstack1 = weightedrandomchestcontent.b.m();
 
-                    itemstack1.a = 1;
+                    itemstack1.b = 1;
                     iinventory.a(random.nextInt(iinventory.j_()), itemstack1);
                 }
             }
@@ -53,13 +53,13 @@ public class WeightedRandomChestContent extends WeightedRandomItem {
             if (weightedrandomchestcontent.b.e() >= i2) {
                 ItemStack itemstack = weightedrandomchestcontent.b.m();
 
-                itemstack.a = i2;
+                itemstack.b = i2;
                 tileentitydispenser.a(random.nextInt(tileentitydispenser.j_()), itemstack);
             } else {
                 for (int i3 = 0; i3 < i2; ++i3) {
                     ItemStack itemstack1 = weightedrandomchestcontent.b.m();
 
-                    itemstack1.a = 1;
+                    itemstack1.b = 1;
                     tileentitydispenser.a(random.nextInt(tileentitydispenser.j_()), itemstack1);
                 }
             }

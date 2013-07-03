@@ -15,8 +15,8 @@ public class SlotFurnace extends Slot {
     }
 
     public ItemStack a(int i0) {
-        if (this.d()) {
-            this.b += Math.min(i0, this.c().a);
+        if (this.e()) {
+            this.b += Math.min(i0, this.d().b);
         }
 
         return super.a(i0);
@@ -36,7 +36,7 @@ public class SlotFurnace extends Slot {
         itemstack.a(this.a.q, this.a, this.b);
         if (!this.a.q.I) {
             int i0 = this.b;
-            float f0 = FurnaceRecipes.a().c(itemstack.c);
+            float f0 = FurnaceRecipes.a().c(itemstack.d);
             int i1;
 
             if (f0 == 0.0F) {
@@ -58,11 +58,11 @@ public class SlotFurnace extends Slot {
         }
 
         this.b = 0;
-        if (itemstack.c == Item.p.cp) {
+        if (itemstack.d == Item.q.cv) {
             this.a.a((StatBase) AchievementList.k, 1);
         }
 
-        if (itemstack.c == Item.aW.cp) {
+        if (itemstack.d == Item.aX.cv) {
             this.a.a((StatBase) AchievementList.p, 1);
         }
     }

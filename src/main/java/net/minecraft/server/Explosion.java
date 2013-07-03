@@ -83,7 +83,7 @@ public class Explosion {
                             int i6 = this.k.a(i3, i4, i5);
 
                             if (i6 > 0) {
-                                Block block = Block.r[i6];
+                                Block block = Block.s[i6];
                                 float f3 = this.f != null ? this.f.a(this, this.k, i3, i4, i5, block) : block.a(this.f);
 
                                 f1 -= (f3 + 0.3F) * f2;
@@ -133,7 +133,7 @@ public class Explosion {
         int i8 = MathHelper.c(this.e - (double) this.g - 1.0D);
         int i9 = MathHelper.c(this.e + (double) this.g + 1.0D);
         List list = this.k.b(this.f, AxisAlignedBB.a().a((double) i0, (double) i2, (double) i8, (double) i1, (double) i7, (double) i9));
-        Vec3 vec3 = this.k.U().a(this.c, this.d, this.e);
+        Vec3 vec3 = this.k.V().a(this.c, this.d, this.e);
 
         for (int i10 = 0; i10 < list.size(); ++i10) {
             Entity entity = (Entity) list.get(i10);
@@ -141,7 +141,7 @@ public class Explosion {
 
             if (d7 <= 1.0D) {
                 d0 = entity.u - this.c;
-                d1 = entity.v + (double) entity.e() - this.d;
+                d1 = entity.v + (double) entity.f() - this.d;
                 d2 = entity.w - this.e;
                 double d8 = (double) MathHelper.a(d0 * d0 + d1 * d1 + d2 * d2);
 
@@ -172,7 +172,7 @@ public class Explosion {
                     entity.y += d1 * d11;
                     entity.z += d2 * d11;
                     if (entity instanceof EntityPlayer) {
-                        this.l.put((EntityPlayer) entity, this.k.U().a(d0 * d10, d1 * d10, d2 * d10));
+                        this.l.put((EntityPlayer) entity, this.k.V().a(d0 * d10, d1 * d10, d2 * d10));
                     }
                 }
             }
@@ -228,7 +228,7 @@ public class Explosion {
                 }
 
                 if (i3 > 0) {
-                    Block block = Block.r[i3];
+                    Block block = Block.s[i3];
 
                     if (block.a(this)) {
                         block.a(this.k, i0, i1, i2, this.k.h(i0, i1, i2), 1.0F / this.g, 0);
@@ -251,14 +251,14 @@ public class Explosion {
                 i3 = this.k.a(i0, i1, i2);
                 int i4 = this.k.a(i0, i1 - 1, i2);
 
-                if (i3 == 0 && Block.s[i4] && this.j.nextInt(3) == 0) {
+                if (i3 == 0 && Block.t[i4] && this.j.nextInt(3) == 0) {
                     //CanaryMod ignition from EntityLargeFireball
                     CanaryBlock block = (CanaryBlock) this.k.getCanaryWorld().getBlockAt(i0, i1-1, i2);
                     block.setStatus((byte) 7); //7 fireball hit
                     IgnitionHook ignitionHook = new IgnitionHook(block, null, null, IgnitionCause.FIREBALL_HIT);
                     Canary.hooks().callHook(ignitionHook);
                     if(!ignitionHook.isCanceled()) {
-                        this.k.c(i0, i1, i2, Block.av.cz);
+                        this.k.c(i0, i1, i2, Block.aw.cF);
                     }
                     // CanaryMod end
                 }
@@ -270,7 +270,7 @@ public class Explosion {
         return this.l;
     }
 
-    public EntityLiving c() {
-        return this.f == null ? null : (this.f instanceof EntityTNTPrimed ? ((EntityTNTPrimed) this.f).c() : (this.f instanceof EntityLiving ? (EntityLiving) this.f : null));
+    public EntityLivingBase c() {
+        return this.f == null ? null : (this.f instanceof EntityTNTPrimed ? ((EntityTNTPrimed) this.f).c() : (this.f instanceof EntityLivingBase ? (EntityLivingBase) this.f : null));
     }
 }

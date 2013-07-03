@@ -19,6 +19,18 @@ public class InventoryBasic implements IInventory {
         this.c = new ItemStack[i0];
     }
 
+    public void a(IInvBasic iinvbasic) {
+        if (this.d == null) {
+            this.d = new ArrayList();
+        }
+
+        this.d.add(iinvbasic);
+    }
+
+    public void b(IInvBasic iinvbasic) {
+        this.d.remove(iinvbasic);
+    }
+
     public ItemStack a(int i0) {
         return this.c[i0];
     }
@@ -27,18 +39,18 @@ public class InventoryBasic implements IInventory {
         if (this.c[i0] != null) {
             ItemStack itemstack;
 
-            if (this.c[i0].a <= i1) {
+            if (this.c[i0].b <= i1) {
                 itemstack = this.c[i0];
                 this.c[i0] = null;
-                this.k_();
+                this.e();
                 return itemstack;
             } else {
                 itemstack = this.c[i0].a(i1);
-                if (this.c[i0].a == 0) {
+                if (this.c[i0].b == 0) {
                     this.c[i0] = null;
                 }
 
-                this.k_();
+                this.e();
                 return itemstack;
             }
         } else {
@@ -46,7 +58,7 @@ public class InventoryBasic implements IInventory {
         }
     }
 
-    public ItemStack b(int i0) {
+    public ItemStack a_(int i0) {
         if (this.c[i0] != null) {
             ItemStack itemstack = this.c[i0];
 
@@ -59,11 +71,11 @@ public class InventoryBasic implements IInventory {
 
     public void a(int i0, ItemStack itemstack) {
         this.c[i0] = itemstack;
-        if (itemstack != null && itemstack.a > this.d()) {
-            itemstack.a = this.d();
+        if (itemstack != null && itemstack.b > this.d()) {
+            itemstack.b = this.d();
         }
 
-        this.k_();
+        this.e();
     }
 
     public int j_() {
@@ -78,11 +90,16 @@ public class InventoryBasic implements IInventory {
         return this.e;
     }
 
+    public void a(String s0) {
+        this.e = true;
+        this.a = s0;
+    }
+
     public int d() {
         return 64;
     }
 
-    public void k_() {
+    public void e() {
         if (this.d != null) {
             for (int i0 = 0; i0 < this.d.size(); ++i0) {
                 ((IInvBasic) this.d.get(i0)).a(this);
@@ -94,7 +111,7 @@ public class InventoryBasic implements IInventory {
         return true;
     }
 
-    public void f() {}
+    public void k_() {}
 
     public void g() {}
 

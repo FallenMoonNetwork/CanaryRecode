@@ -40,17 +40,17 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
             --this.d;
             if (this.d == 0) {
                 this.u();
-                this.k_();
+                this.e();
             } else if (!this.l()) {
                 this.d = 0;
-                this.k_();
-            } else if (this.f != this.c[3].c) {
+                this.e();
+            } else if (this.f != this.c[3].d) {
                 this.d = 0;
-                this.k_();
+                this.e();
             }
         } else if (this.l()) {
             this.d = 400;
-            this.f = this.c[3].c;
+            this.f = this.c[3].d;
         }
 
         int i0 = this.j();
@@ -68,16 +68,16 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
     }
 
     private boolean l() {
-        if (this.c[3] != null && this.c[3].a > 0) {
+        if (this.c[3] != null && this.c[3].b > 0) {
             ItemStack itemstack = this.c[3];
 
-            if (!Item.f[itemstack.c].w()) {
+            if (!Item.g[itemstack.d].x()) {
                 return false;
             } else {
                 boolean flag0 = false;
 
                 for (int i0 = 0; i0 < 3; ++i0) {
-                    if (this.c[i0] != null && this.c[i0].c == Item.bt.cp) {
+                    if (this.c[i0] != null && this.c[i0].d == Item.bu.cv) {
                         int i1 = this.c[i0].k();
                         int i2 = this.c(i1, itemstack);
 
@@ -86,8 +86,8 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
                             break;
                         }
 
-                        List list = Item.bt.c(i1);
-                        List list1 = Item.bt.c(i2);
+                        List list = Item.bu.c(i1);
+                        List list1 = Item.bu.c(i2);
 
                         if ((i1 <= 0 || list != list1) && (list == null || !list.equals(list1) && list1 != null) && i1 != i2) {
                             flag0 = true;
@@ -108,11 +108,11 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
             ItemStack itemstack = this.c[3];
 
             for (int i0 = 0; i0 < 3; ++i0) {
-                if (this.c[i0] != null && this.c[i0].c == Item.bt.cp) {
+                if (this.c[i0] != null && this.c[i0].d == Item.bu.cv) {
                     int i1 = this.c[i0].k();
                     int i2 = this.c(i1, itemstack);
-                    List list = Item.bt.c(i1);
-                    List list1 = Item.bt.c(i2);
+                    List list = Item.bu.c(i1);
+                    List list1 = Item.bu.c(i2);
 
                     if ((i1 <= 0 || list != list1) && (list == null || !list.equals(list1) && list1 != null)) {
                         if (i1 != i2) {
@@ -124,11 +124,11 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
                 }
             }
 
-            if (Item.f[itemstack.c].t()) {
-                this.c[3] = new ItemStack(Item.f[itemstack.c].s());
+            if (Item.g[itemstack.d].u()) {
+                this.c[3] = new ItemStack(Item.g[itemstack.d].t());
             } else {
-                --this.c[3].a;
-                if (this.c[3].a <= 0) {
+                --this.c[3].b;
+                if (this.c[3].b <= 0) {
                     this.c[3] = null;
                 }
             }
@@ -136,7 +136,7 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
     }
 
     private int c(int i0, ItemStack itemstack) {
-        return itemstack == null ? i0 : (Item.f[itemstack.c].w() ? PotionHelper.a(i0, Item.f[itemstack.c].v()) : i0);
+        return itemstack == null ? i0 : (Item.g[itemstack.d].x() ? PotionHelper.a(i0, Item.g[itemstack.d].w()) : i0);
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -196,7 +196,7 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
         }
     }
 
-    public ItemStack b(int i0) {
+    public ItemStack a_(int i0) {
         if (i0 >= 0 && i0 < this.c.length) {
             ItemStack itemstack = this.c[i0];
 
@@ -221,12 +221,12 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
         return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
     }
 
-    public void f() {}
+    public void k_() {}
 
     public void g() {}
 
     public boolean b(int i0, ItemStack itemstack) {
-        return i0 == 3 ? Item.f[itemstack.c].w() : itemstack.c == Item.bt.cp || itemstack.c == Item.bu.cp;
+        return i0 == 3 ? Item.g[itemstack.d].x() : itemstack.d == Item.bu.cv || itemstack.d == Item.bv.cv;
     }
 
     public int j() {

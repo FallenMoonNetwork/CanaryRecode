@@ -8,7 +8,7 @@ public interface IInventory {
 
     ItemStack a(int i0, int i1);
 
-    ItemStack b(int i0);
+    ItemStack a_(int i0);
 
     void a(int i0, ItemStack itemstack);
 
@@ -18,11 +18,11 @@ public interface IInventory {
 
     int d();
 
-    void k_();
+    void e();
 
     boolean a(EntityPlayer entityplayer);
 
-    void f();
+    void k_();
 
     void g();
 

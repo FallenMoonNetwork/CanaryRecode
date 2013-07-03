@@ -13,8 +13,8 @@ public class SlotEnchantmentTable extends InventoryBasic { // CanaryMod: package
         return 1;
     }
 
-    public void k_() {
-        super.k_();
+    public void e() {
+        super.e();
         this.a.a((IInventory) this);
     }
 

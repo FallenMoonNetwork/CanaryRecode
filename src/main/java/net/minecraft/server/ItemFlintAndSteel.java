@@ -13,7 +13,7 @@ public class ItemFlintAndSteel extends Item {
 
     public ItemFlintAndSteel(int i0) {
         super(i0);
-        this.cq = 1;
+        this.cw = 1;
         this.e(64);
         this.a(CreativeTabs.i);
     }
@@ -71,11 +71,11 @@ public class ItemFlintAndSteel extends Item {
             //
 
             if (i4 == 0) {
-                world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D, "fire.ignite", 1.0F, e.nextFloat() * 0.4F + 0.8F);
-                world.c(i0, i1, i2, Block.av.cz);
+                world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D, "fire.ignite", 1.0F, f.nextFloat() * 0.4F + 0.8F);
+                world.c(i0, i1, i2, Block.aw.cF);
             }
 
-            itemstack.a(1, (EntityLiving) entityplayer);
+            itemstack.a(1, (EntityLivingBase) entityplayer);
             return true;
         }
     }

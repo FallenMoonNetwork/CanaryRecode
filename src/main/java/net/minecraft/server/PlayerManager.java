@@ -13,20 +13,21 @@ public class PlayerManager {
     private final List b = new ArrayList();
     private final LongHashMap c = new LongHashMap();
     private final List d = new ArrayList();
-    private final int e;
-    private final int[][] f = new int[][] { { 1, 0}, { 0, 1}, { -1, 0}, { 0, -1}};
+    private final List e = new ArrayList();
+    private final int f;
+    private long g;
+    private final int[][] h = new int[][]{ { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 
-    // CanaryMod
+// CanaryMod
     private CanaryPlayerManager playerManager;
     //
-
     public PlayerManager(WorldServer worldserver, int i0) {
         if (i0 > 15) {
             throw new IllegalArgumentException("Too big view radius!");
         } else if (i0 < 3) {
             throw new IllegalArgumentException("Too small view radius!");
         } else {
-            this.e = i0;
+            this.f = i0;
             this.a = worldserver;
         }
         playerManager = new CanaryPlayerManager(this, worldserver.getCanaryWorld());
@@ -37,8 +38,23 @@ public class PlayerManager {
     }
 
     public void b() {
-        for (int i0 = 0; i0 < this.d.size(); ++i0) {
-            ((PlayerInstance) this.d.get(i0)).a();
+        long i0 = this.a.I();
+        int i1;
+        PlayerInstance playerinstance;
+
+        if (i0 - this.g > 8000L) {
+            this.g = i0;
+
+            for (i1 = 0; i1 < this.e.size(); ++i1) {
+                playerinstance = (PlayerInstance) this.e.get(i1);
+                playerinstance.b();
+                playerinstance.a();
+            }
+        } else {
+            for (i1 = 0; i1 < this.d.size(); ++i1) {
+                playerinstance = (PlayerInstance) this.d.get(i1);
+                playerinstance.b();
+            }
         }
 
         this.d.clear();
@@ -58,6 +74,7 @@ public class PlayerManager {
         if (playerinstance == null && flag0) {
             playerinstance = new PlayerInstance(this, i0, i1);
             this.c.a(i2, playerinstance);
+            this.e.add(playerinstance);
         }
 
         return playerinstance;
@@ -80,8 +97,8 @@ public class PlayerManager {
         entityplayermp.d = entityplayermp.u;
         entityplayermp.e = entityplayermp.w;
 
-        for (int i2 = i0 - this.e; i2 <= i0 + this.e; ++i2) {
-            for (int i3 = i1 - this.e; i3 <= i1 + this.e; ++i3) {
+        for (int i2 = i0 - this.f; i2 <= i0 + this.f; ++i2) {
+            for (int i3 = i1 - this.f; i3 <= i1 + this.f; ++i3) {
                 this.a(i2, i3, true).a(entityplayermp);
             }
         }
@@ -93,7 +110,7 @@ public class PlayerManager {
     public void b(EntityPlayerMP entityplayermp) {
         ArrayList arraylist = new ArrayList(entityplayermp.f);
         int i0 = 0;
-        int i1 = this.e;
+        int i1 = this.f;
         int i2 = (int) entityplayermp.u >> 4;
         int i3 = (int) entityplayermp.w >> 4;
         int i4 = 0;
@@ -109,7 +126,7 @@ public class PlayerManager {
 
         for (i6 = 1; i6 <= i1 * 2; ++i6) {
             for (int i7 = 0; i7 < 2; ++i7) {
-                int[] aint = this.f[i0++ % 4];
+                int[] aint = this.h[i0++ % 4];
 
                 for (int i8 = 0; i8 < i6; ++i8) {
                     i4 += aint[0];
@@ -125,8 +142,8 @@ public class PlayerManager {
         i0 %= 4;
 
         for (i6 = 0; i6 < i1 * 2; ++i6) {
-            i4 += this.f[i0][0];
-            i5 += this.f[i0][1];
+            i4 += this.h[i0][0];
+            i5 += this.h[i0][1];
             chunkcoordintpair = PlayerInstance.a(this.a(i2 + i4, i3 + i5, true));
             if (arraylist.contains(chunkcoordintpair)) {
                 entityplayermp.f.add(chunkcoordintpair);
@@ -138,8 +155,8 @@ public class PlayerManager {
         int i0 = (int) entityplayermp.d >> 4;
         int i1 = (int) entityplayermp.e >> 4;
 
-        for (int i2 = i0 - this.e; i2 <= i0 + this.e; ++i2) {
-            for (int i3 = i1 - this.e; i3 <= i1 + this.e; ++i3) {
+        for (int i2 = i0 - this.f; i2 <= i0 + this.f; ++i2) {
+            for (int i3 = i1 - this.f; i3 <= i1 + this.f; ++i3) {
                 PlayerInstance playerinstance = this.a(i2, i3, false);
 
                 if (playerinstance != null) {
@@ -168,7 +185,7 @@ public class PlayerManager {
         if (d2 >= 64.0D) {
             int i2 = (int) entityplayermp.d >> 4;
             int i3 = (int) entityplayermp.e >> 4;
-            int i4 = this.e;
+            int i4 = this.f;
             int i5 = i0 - i2;
             int i6 = i1 - i3;
 
@@ -215,6 +232,10 @@ public class PlayerManager {
     }
 
     static List c(PlayerManager playermanager) {
+        return playermanager.e;
+    }
+
+static List d(PlayerManager playermanager) {
         return playermanager.d;
     }
 

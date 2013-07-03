@@ -35,7 +35,7 @@ public class InventoryCraftResult implements IInventory {
         }
     }
 
-    public ItemStack b(int i0) {
+    public ItemStack a_(int i0) {
         if (this.a[0] != null) {
             ItemStack itemstack = this.a[0];
 
@@ -54,13 +54,13 @@ public class InventoryCraftResult implements IInventory {
         return 64;
     }
 
-    public void k_() {}
+    public void e() {}
 
     public boolean a(EntityPlayer entityplayer) {
         return true;
     }
 
-    public void f() {}
+    public void k_() {}
 
     public void g() {}
 

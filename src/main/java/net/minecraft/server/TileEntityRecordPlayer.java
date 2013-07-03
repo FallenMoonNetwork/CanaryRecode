@@ -25,7 +25,7 @@ public class TileEntityRecordPlayer extends TileEntity {
         super.b(nbttagcompound);
         if (this.a() != null) {
             nbttagcompound.a("RecordItem", this.a().b(new NBTTagCompound()));
-            nbttagcompound.a("Record", this.a().c);
+            nbttagcompound.a("Record", this.a().d);
         }
     }
 
@@ -35,7 +35,7 @@ public class TileEntityRecordPlayer extends TileEntity {
 
     public void a(ItemStack itemstack) {
         this.a = itemstack;
-        this.k_();
+        this.e();
     }
 
     // CanaryMod

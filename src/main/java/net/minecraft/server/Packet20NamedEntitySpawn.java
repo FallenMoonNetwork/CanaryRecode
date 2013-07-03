@@ -24,15 +24,15 @@ public class Packet20NamedEntitySpawn extends Packet {
 
     public Packet20NamedEntitySpawn(EntityPlayer entityplayer) {
         this.a = entityplayer.k;
-        this.b = entityplayer.bR() ? entityplayer.getDisplayName() : entityplayer.am(); // CanaryMod: Custom DisplayName
+        this.b = entityplayer.c_();
         this.c = MathHelper.c(entityplayer.u * 32.0D);
         this.d = MathHelper.c(entityplayer.v * 32.0D);
         this.e = MathHelper.c(entityplayer.w * 32.0D);
         this.f = (byte) ((int) (entityplayer.A * 256.0F / 360.0F));
         this.g = (byte) ((int) (entityplayer.B * 256.0F / 360.0F));
-        ItemStack itemstack = entityplayer.bK.h();
+        ItemStack itemstack = entityplayer.bn.h();
 
-        this.h = itemstack == null ? 0 : itemstack.c;
+        this.h = itemstack == null ? 0 : itemstack.d;
         this.i = entityplayer.u();
     }
 

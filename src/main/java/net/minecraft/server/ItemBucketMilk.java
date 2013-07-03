@@ -25,27 +25,27 @@ public class ItemBucketMilk extends Item {
         entityplayer.cn().a(hook.getLevelGain(), hook.getSaturationGain());
         //
 
-        if (!entityplayer.ce.d) {
-            --itemstack.a;
+        if (!entityplayer.bG.d) {
+            --itemstack.b;
         }
 
         if (!world.I) {
-            entityplayer.bB();
+            entityplayer.aG();
         }
 
-        return itemstack.a <= 0 ? new ItemStack(Item.ax) : itemstack;
+        return itemstack.b <= 0 ? new ItemStack(Item.ay) : itemstack;
     }
 
-    public int c_(ItemStack itemstack) {
+    public int d_(ItemStack itemstack) {
         return 32;
     }
 
-    public EnumAction b_(ItemStack itemstack) {
+    public EnumAction c_(ItemStack itemstack) {
         return EnumAction.c;
     }
 
     public ItemStack a(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-        entityplayer.a(itemstack, this.c_(itemstack));
+        entityplayer.a(itemstack, this.d_(itemstack));
         return itemstack;
     }
 }

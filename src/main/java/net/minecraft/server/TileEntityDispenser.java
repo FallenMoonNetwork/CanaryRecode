@@ -27,18 +27,18 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
         if (this.b[i0] != null) {
             ItemStack itemstack;
 
-            if (this.b[i0].a <= i1) {
+            if (this.b[i0].b <= i1) {
                 itemstack = this.b[i0];
                 this.b[i0] = null;
-                this.k_();
+                this.e();
                 return itemstack;
             } else {
                 itemstack = this.b[i0].a(i1);
-                if (this.b[i0].a == 0) {
+                if (this.b[i0].b == 0) {
                     this.b[i0] = null;
                 }
 
-                this.k_();
+                this.e();
                 return itemstack;
             }
         } else {
@@ -46,7 +46,7 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
         }
     }
 
-    public ItemStack b(int i0) {
+    public ItemStack a_(int i0) {
         if (this.b[i0] != null) {
             ItemStack itemstack = this.b[i0];
 
@@ -72,16 +72,16 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
 
     public void a(int i0, ItemStack itemstack) {
         this.b[i0] = itemstack;
-        if (itemstack != null && itemstack.a > this.d()) {
-            itemstack.a = this.d();
+        if (itemstack != null && itemstack.b > this.d()) {
+            itemstack.b = this.d();
         }
 
-        this.k_();
+        this.e();
     }
 
     public int a(ItemStack itemstack) {
         for (int i0 = 0; i0 < this.b.length; ++i0) {
-            if (this.b[i0] == null || this.b[i0].c == 0) {
+            if (this.b[i0] == null || this.b[i0].d == 0) {
                 this.a(i0, itemstack);
                 return i0;
             }
@@ -150,7 +150,7 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
         return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
     }
 
-    public void f() {}
+    public void k_() {}
 
     public void g() {}
 

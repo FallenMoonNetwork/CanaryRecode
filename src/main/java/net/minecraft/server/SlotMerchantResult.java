@@ -26,8 +26,8 @@ public class SlotMerchantResult extends Slot {
     }
 
     public ItemStack a(int i0) {
-        if (this.d()) {
-            this.c += Math.min(i0, this.c().a);
+        if (this.e()) {
+            this.c += Math.min(i0, this.d().b);
         }
 
         return super.a(i0);
@@ -68,17 +68,17 @@ public class SlotMerchantResult extends Slot {
             ItemStack itemstack2 = this.a.a(1);
 
             if (this.a(merchantrecipe, itemstack1, itemstack2) || this.a(merchantrecipe, itemstack2, itemstack1)) {
-                if (itemstack1 != null && itemstack1.a <= 0) {
+                this.d.a(merchantrecipe);
+                if (itemstack1 != null && itemstack1.b <= 0) {
                     itemstack1 = null;
                 }
 
-                if (itemstack2 != null && itemstack2.a <= 0) {
+                if (itemstack2 != null && itemstack2.b <= 0) {
                     itemstack2 = null;
                 }
 
                 this.a.a(0, itemstack1);
                 this.a.a(1, itemstack2);
-                this.d.a(merchantrecipe);
             }
         }
     }
@@ -87,15 +87,15 @@ public class SlotMerchantResult extends Slot {
         ItemStack itemstack2 = merchantrecipe.a();
         ItemStack itemstack3 = merchantrecipe.b();
 
-        if (itemstack != null && itemstack.c == itemstack2.c) {
-            if (itemstack3 != null && itemstack1 != null && itemstack3.c == itemstack1.c) {
-                itemstack.a -= itemstack2.a;
-                itemstack1.a -= itemstack3.a;
+        if (itemstack != null && itemstack.d == itemstack2.d) {
+            if (itemstack3 != null && itemstack1 != null && itemstack3.d == itemstack1.d) {
+                itemstack.b -= itemstack2.b;
+                itemstack1.b -= itemstack3.b;
                 return true;
             }
 
             if (itemstack3 == null && itemstack1 == null) {
-                itemstack.a -= itemstack2.a;
+                itemstack.b -= itemstack2.b;
                 return true;
             }
         }

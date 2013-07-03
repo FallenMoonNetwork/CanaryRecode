@@ -14,16 +14,12 @@ public class ItemBucket extends Item {
 
     public ItemBucket(int i0, int i1) {
         super(i0);
-        this.cq = 1;
+        this.cw = 1;
         this.a = i1;
         this.a(CreativeTabs.f);
     }
 
     public ItemStack a(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-        float f0 = 1.0F;
-        double d0 = entityplayer.r + (entityplayer.u - entityplayer.r) * (double) f0;
-        double d1 = entityplayer.s + (entityplayer.v - entityplayer.s) * (double) f0 + 1.62D - (double) entityplayer.N;
-        double d2 = entityplayer.t + (entityplayer.w - entityplayer.t) * (double) f0;
         boolean flag0 = this.a == 0;
         MovingObjectPosition movingobjectposition = this.a(world, entityplayer, flag0);
 
@@ -52,7 +48,7 @@ public class ItemBucket extends Item {
 
                     if (world.g(i0, i1, i2) == Material.h && world.h(i0, i1, i2) == 0) {
                         world.i(i0, i1, i2);
-                        if (entityplayer.ce.d) {
+                        if (entityplayer.bG.d) {
                             return itemstack;
                         }
 
@@ -63,12 +59,12 @@ public class ItemBucket extends Item {
                         }
                         //
 
-                        if (--itemstack.a <= 0) {
-                            return new ItemStack(Item.ay);
+                        if (--itemstack.b <= 0) {
+                            return new ItemStack(Item.az);
                         }
 
-                        if (!entityplayer.bK.a(new ItemStack(Item.ay))) {
-                            entityplayer.c(new ItemStack(Item.ay.cp, 1, 0));
+                        if (!entityplayer.bn.a(new ItemStack(Item.az))) {
+                            entityplayer.b(new ItemStack(Item.az.cv, 1, 0));
                         }
 
                         return itemstack;
@@ -76,7 +72,7 @@ public class ItemBucket extends Item {
 
                     if (world.g(i0, i1, i2) == Material.i && world.h(i0, i1, i2) == 0) {
                         world.i(i0, i1, i2);
-                        if (entityplayer.ce.d) {
+                        if (entityplayer.bG.d) {
                             return itemstack;
                         }
 
@@ -87,19 +83,19 @@ public class ItemBucket extends Item {
                         }
                         //
 
-                        if (--itemstack.a <= 0) {
-                            return new ItemStack(Item.az);
+                        if (--itemstack.b <= 0) {
+                            return new ItemStack(Item.aA);
                         }
 
-                        if (!entityplayer.bK.a(new ItemStack(Item.az))) {
-                            entityplayer.c(new ItemStack(Item.az.cp, 1, 0));
+                        if (!entityplayer.bn.a(new ItemStack(Item.aA))) {
+                            entityplayer.b(new ItemStack(Item.aA.cv, 1, 0));
                         }
 
                         return itemstack;
                     }
                 } else {
                     if (this.a < 0) {
-                        return new ItemStack(Item.ax);
+                        return new ItemStack(Item.ay);
                     }
 
                     if (movingobjectposition.e == 0) {
@@ -130,12 +126,10 @@ public class ItemBucket extends Item {
                         return itemstack;
                     }
 
-                    if (this.a(world, d0, d1, d2, i0, i1, i2, entityplayer) && !entityplayer.ce.d) { // CanaryMod: pass entityplayer
-                        return new ItemStack(Item.ax);
+                    if (this.a(world, i0, i1, i2) && !entityplayer.bG.d) {
+                        return new ItemStack(Item.ay);
                     }
                 }
-            } else if (this.a == 0 && movingobjectposition.g instanceof EntityCow) {
-                return new ItemStack(Item.aH);
             }
 
             return itemstack;
@@ -153,12 +147,12 @@ public class ItemBucket extends Item {
         } else if (!world.c(i0, i1, i2) && world.g(i0, i1, i2).a()) {
             return false;
         } else {
-            if (world.t.e && this.a == Block.E.cz) {
-                world.a(d0 + 0.5D, d1 + 0.5D, d2 + 0.5D, "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
+            if (world.t.f && this.a == Block.F.cF) {
+                world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
 
-                for (int i3 = 0; i3 < 8; ++i3) {
-                    world.a("largesmoke", (double) i0 + Math.random(), (double) i1 + Math.random(), (double) i2 + Math.random(), 0.0D, 0.0D, 0.0D);
-                }
+                    for (int i3 = 0; i3 < 8; ++i3) {
+                        world.a("largesmoke", (double) i0 + Math.random(), (double) i1 + Math.random(), (double) i2 + Math.random(), 0.0D, 0.0D, 0.0D);
+                    }
             } else {
                 // CanaryMod: BlockPlaceHook water/lava bucket
                 if (entityplayer != null) {

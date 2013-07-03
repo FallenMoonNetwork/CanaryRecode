@@ -17,7 +17,7 @@ public class ItemRecord extends Item {
     protected ItemRecord(int i0, String s0) {
         super(i0);
         this.a = s0;
-        this.cq = 1;
+        this.cw = 1;
         this.a(CreativeTabs.f);
         b.put(s0, this);
     }
@@ -34,13 +34,13 @@ public class ItemRecord extends Item {
             return false;
         }
         //
-        if (world.a(i0, i1, i2) == Block.bc.cz && world.h(i0, i1, i2) == 0) {
+        if (world.a(i0, i1, i2) == Block.bd.cF && world.h(i0, i1, i2) == 0) {
             if (world.I) {
                 return true;
             } else {
-                ((BlockJukeBox) Block.bc).a(world, i0, i1, i2, itemstack);
-                world.a((EntityPlayer) null, 1005, i0, i1, i2, this.cp);
-                --itemstack.a;
+                ((BlockJukeBox) Block.bd).a(world, i0, i1, i2, itemstack);
+                world.a((EntityPlayer) null, 1005, i0, i1, i2, this.cv);
+                --itemstack.b;
                 return true;
             }
         } else {

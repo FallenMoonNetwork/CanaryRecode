@@ -42,7 +42,7 @@ public class InventoryCrafting implements IInventory {
         return !this.name.equals("container.crafting");
     }
 
-    public ItemStack b(int i0) {
+    public ItemStack a_(int i0) {
         if (this.a[i0] != null) {
             ItemStack itemstack = this.a[i0];
 
@@ -57,14 +57,14 @@ public class InventoryCrafting implements IInventory {
         if (this.a[i0] != null) {
             ItemStack itemstack;
 
-            if (this.a[i0].a <= i1) {
+            if (this.a[i0].b <= i1) {
                 itemstack = this.a[i0];
                 this.a[i0] = null;
                 this.c.a((IInventory) this);
                 return itemstack;
             } else {
                 itemstack = this.a[i0].a(i1);
-                if (this.a[i0].a == 0) {
+                if (this.a[i0].b == 0) {
                     this.a[i0] = null;
                 }
 
@@ -85,13 +85,13 @@ public class InventoryCrafting implements IInventory {
         return 64;
     }
 
-    public void k_() {}
+    public void e() {}
 
     public boolean a(EntityPlayer entityplayer) {
         return true;
     }
 
-    public void f() {}
+    public void k_() {}
 
     public void g() {}
 

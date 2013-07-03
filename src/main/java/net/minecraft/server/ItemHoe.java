@@ -14,7 +14,7 @@ public class ItemHoe extends Item {
     public ItemHoe(int i0, EnumToolMaterial enumtoolmaterial) {
         super(i0);
         this.a = enumtoolmaterial;
-        this.cq = 1;
+        this.cw = 1;
         this.e(enumtoolmaterial.a());
         this.a(CreativeTabs.i);
     }
@@ -26,7 +26,7 @@ public class ItemHoe extends Item {
             int i4 = world.a(i0, i1, i2);
             int i5 = world.a(i0, i1 + 1, i2);
 
-            if ((i3 == 0 || i5 != 0 || i4 != Block.y.cz) && i4 != Block.z.cz) {
+            if ((i3 == 0 || i5 != 0 || i4 != Block.z.cF) && i4 != Block.A.cF) {
                 return false;
             } else {
                 // CanaryMod: ItemUse
@@ -41,14 +41,14 @@ public class ItemHoe extends Item {
                 }
                 //
 
-                Block block = Block.aE;
+                Block block = Block.aF;
 
-                world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), block.cM.e(), (block.cM.c() + 1.0F) / 2.0F, block.cM.d() * 0.8F);
+                world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), block.cS.e(), (block.cS.c() + 1.0F) / 2.0F, block.cS.d() * 0.8F);
                 if (world.I) {
                     return true;
                 } else {
-                    world.c(i0, i1, i2, block.cz);
-                    itemstack.a(1, (EntityLiving) entityplayer);
+                    world.c(i0, i1, i2, block.cF);
+                    itemstack.a(1, (EntityLivingBase) entityplayer);
                     return true;
                 }
             }

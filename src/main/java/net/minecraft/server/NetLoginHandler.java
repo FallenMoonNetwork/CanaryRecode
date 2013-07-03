@@ -31,7 +31,7 @@ public class NetLoginHandler extends NetHandler {
 
     public NetLoginHandler(MinecraftServer minecraftserver, Socket socket, String s0) throws IOException {
         this.e = minecraftserver;
-        this.a = new TcpConnection(minecraftserver.al(), socket, s0, this, minecraftserver.F().getPrivate());
+        this.a = new TcpConnection(minecraftserver.an(), socket, s0, this, minecraftserver.H().getPrivate());
         this.a.e = 0;
     }
 
@@ -49,7 +49,7 @@ public class NetLoginHandler extends NetHandler {
 
     public void a(String s0) {
         try {
-            this.e.al().a("Disconnecting " + this.e() + ": " + s0);
+            this.e.an().a("Disconnecting " + this.e() + ": " + s0);
             this.a.a((Packet) (new Packet255KickDisconnect(s0)));
             this.a.d();
             this.b = true;
@@ -63,16 +63,16 @@ public class NetLoginHandler extends NetHandler {
         if (!this.g.equals(StringUtils.a(this.g))) {
             this.a("Invalid username!");
         } else {
-            PublicKey publickey = this.e.F().getPublic();
+            PublicKey publickey = this.e.H().getPublic();
 
-            if (packet2clientprotocol.d() != 61) {
-                if (packet2clientprotocol.d() > 61) {
+            if (packet2clientprotocol.d() != 73) {
+                if (packet2clientprotocol.d() > 73) {
                     this.a("Outdated server!");
                 } else {
                     this.a("Outdated client!");
                 }
             } else {
-                this.i = this.e.U() ? Long.toString(c.nextLong(), 16) : "-";
+                this.i = this.e.W() ? Long.toString(c.nextLong(), 16) : "-";
                 this.d = new byte[4];
                 c.nextBytes(this.d);
                 this.a.a((Packet) (new Packet253ServerAuthData(this.i, publickey, this.d)));
@@ -81,7 +81,7 @@ public class NetLoginHandler extends NetHandler {
     }
 
     public void a(Packet252SharedKey packet252sharedkey) {
-        PrivateKey privatekey = this.e.F().getPrivate();
+        PrivateKey privatekey = this.e.H().getPrivate();
 
         this.k = packet252sharedkey.a(privatekey);
         if (!Arrays.equals(this.d, packet252sharedkey.b(privatekey))) {
@@ -99,7 +99,7 @@ public class NetLoginHandler extends NetHandler {
             }
 
             this.j = true;
-            if (this.e.U()) {
+            if (this.e.W()) {
                 (new ThreadLoginVerifier(this)).start();
             } else {
                 this.h = true;
@@ -110,15 +110,15 @@ public class NetLoginHandler extends NetHandler {
     public void a(Packet1Login packet1login) {}
 
     public void d() {
-        String s0 = this.e.ad().a(this.a.c(), this.g);
+        String s0 = this.e.af().a(this.a.c(), this.g);
 
         if (s0 != null) {
             this.a(s0);
         } else {
-            EntityPlayerMP entityplayermp = this.e.ad().a(this.g);
+            EntityPlayerMP entityplayermp = this.e.af().a(this.g);
 
             if (entityplayermp != null) {
-                this.e.ad().a((INetworkManager) this.a, entityplayermp);
+                this.e.af().a((INetworkManager) this.a, entityplayermp);
             }
         }
 
@@ -126,16 +126,19 @@ public class NetLoginHandler extends NetHandler {
     }
 
     public void a(String s0, Object[] aobject) {
-        this.e.al().a(this.e() + " lost connection");
+        this.e.an().a(this.e() + " lost connection");
         this.b = true;
     }
 
     public void a(Packet254ServerPing packet254serverping) {
         try {
-            ServerConfigurationManager serverconfigurationmanager = this.e.ad();
+            ServerConfigurationManager serverconfigurationmanager = this.e.af();
             String s0 = null;
 
-            if (packet254serverping.a == 1) {
+            if (packet254serverping.d()) {
+                s0 = this.e.ac() + "\u00a7" + serverconfigurationmanager.k() + "\u00a7" + serverconfigurationmanager.l();
+            } else {
+                List list = Arrays.asList(new Serializable[]{ Integer.valueOf(1), Integer.valueOf(73), this.e.z(), this.e.ac(), Integer.valueOf(serverconfigurationmanager.k()), Integer.valueOf(serverconfigurationmanager.l()) });
 
                 //CanaryMod: ServerListPingHook
                 ServerListPingHook hook = new ServerListPingHook(this.e.aa(), Integer.valueOf(serverconfigurationmanager.k()), Integer.valueOf(serverconfigurationmanager.l()));
@@ -168,8 +171,8 @@ public class NetLoginHandler extends NetHandler {
 
             this.a.a((Packet) (new Packet255KickDisconnect(s0)));
             this.a.d();
-            if (inetaddress != null && this.e.ae() instanceof DedicatedServerListenThread) {
-                ((DedicatedServerListenThread) this.e.ae()).a(inetaddress);
+            if (inetaddress != null && this.e.ag() instanceof DedicatedServerListenThread) {
+                ((DedicatedServerListenThread) this.e.ag()).a(inetaddress);
             }
 
             this.b = true;

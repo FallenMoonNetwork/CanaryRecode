@@ -13,7 +13,7 @@ public class ShapedRecipes implements IRecipe {
     private final CanaryShapedRecipe canary_recipe; // CanaryMod: recipe instance
 
     public ShapedRecipes(int i0, int i1, ItemStack[] aitemstack, ItemStack itemstack) {
-        this.a = itemstack.c;
+        this.a = itemstack.d;
         this.b = i0;
         this.c = i1;
         this.d = aitemstack;
@@ -63,7 +63,7 @@ public class ShapedRecipes implements IRecipe {
                         return false;
                     }
 
-                    if (itemstack.c != itemstack1.c) {
+                    if (itemstack.d != itemstack1.d) {
                         return false;
                     }
 
@@ -85,7 +85,7 @@ public class ShapedRecipes implements IRecipe {
                 ItemStack itemstack1 = inventorycrafting.a(i0);
 
                 if (itemstack1 != null && itemstack1.p()) {
-                    itemstack.d((NBTTagCompound) itemstack1.d.b());
+                    itemstack.d((NBTTagCompound) itemstack1.e.b());
                 }
             }
         }

@@ -4,6 +4,7 @@ package net.minecraft.server;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
+import java.net.Proxy;
 import java.security.KeyPair;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,53 +34,54 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     private static boolean notHeadless;
 
-    private static MinecraftServer k = null;
-    private final ISaveFormat l;
-    private final PlayerUsageSnooper m = new PlayerUsageSnooper("server", this);
-    private final File n;
-    private final List o = new ArrayList();
-    private final ICommandManager p;
+    private static MinecraftServer l = null;
+    private final ISaveFormat m;
+    private final PlayerUsageSnooper n = new PlayerUsageSnooper("server", this, aq());
+    private final File o;
+    private final List p = new ArrayList();
+    private final ICommandManager q;
     public final Profiler a = new Profiler();
-    private String q;
-    private int r = -1;
+    private String r;
+    private int s = -1;
     // public WorldServer[] b; // XXX
-    public ServerConfigurationManager s; // CanaryMod private -> public
-    private boolean t = true;
-    private boolean u = false;
-    private int v = 0;
-    public String c;
-    public int d;
-    private boolean w;
+    public ServerConfigurationManager t; // CanaryMod private -> public
+    private boolean u = true;
+    private boolean v;
+    private int w;
+    protected Proxy c;
+    public String d;
+    public int e;
     private boolean x;
     private boolean y;
     private boolean z;
     private boolean A;
-    private String B;
-    private int C;
-    private long D;
+    private boolean B;
+    private String C;
+    private int D;
     private long E;
     private long F;
     private long G;
-    public final long[] e = new long[100];
-    public final long[] f = new long[100];
-    public final long[] g = new long[100];
-    public final long[] h = new long[100];
-    public final long[] i = new long[100];
-    // public long[][] j; //XXX
-    private KeyPair H;
-    private String I;
+    private long H;
+    public final long[] f;
+    public final long[] g;
+    public final long[] h;
+    public final long[] i;
+    //public final long[] j;
+    public long[][] k;
+    private KeyPair I;
     private String J;
-    private boolean L;
+    private String K;
     private boolean M;
-    private boolean N; // isRunning
-    private String O = "";
-    private boolean P = false;
-    private long Q;
-    private String R;
-    private boolean S;
-    private boolean T = false;
+    private boolean N;
+    private boolean O;
+    private String P;
+    private boolean Q;
+    private long R;
+    private String S;
+    private boolean T;
+    private boolean U;
 
-    // CanaryMod start: Multiworld \o/
+ // CanaryMod start: Multiworld \o/
     public CanaryWorldManager worldManager = new CanaryWorldManager();
     private CanaryServer server;
 
@@ -88,39 +90,46 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     //
 
     public MinecraftServer(File file1) {
-        k = this;
-        this.n = file1;
-        this.p = new ServerCommandManager();
-        this.l = new AnvilSaveConverter(file1, net.canarymod.api.world.DimensionType.fromName("NORMAL"));
-        this.an();
-        // CanaryMod
+        this.c = Proxy.NO_PROXY;
+        this.f = new long[100];
+        this.g = new long[100];
+        this.h = new long[100];
+        this.i = new long[100];
+        //this.j = new long[100];
+        this.P = "";
+        l = this;
+        this.o = file1;
+        this.q = new ServerCommandManager();
+        this.m = new AnvilSaveConverter(file1, net.canarymod.api.world.DimensionType.fromName("NORMAL"));
+        this.ar();
+// CanaryMod
         this.server = new CanaryServer(this);
         Canary.setServer(server);
         //
     }
 
-    private void an() {
+    private void ar() {
         DispenserBehaviors.a();
     }
 
-    protected abstract boolean c() throws IOException;
+    protected abstract boolean d() throws IOException;
 
-    protected void b(String s0) {
-        if (this.N().b(s0)) {
-            this.al().a("Converting map!");
-            this.c("menu.convertingLevel");
-            this.N().a(s0, new ConvertingProgressUpdate(this));
+    protected void a(String s0) {
+        if (this.P().b(s0)) {
+            this.an().a("Converting map!");
+            this.b("menu.convertingLevel");
+            this.P().a(s0, new ConvertingProgressUpdate(this));
         }
     }
 
-    protected synchronized void c(String s0) {
-        this.R = s0;
+    protected synchronized void b(String s0) {
+        this.S = s0;
     }
 
     // Used to initialize the "master" worlds
     protected void initWorld(String name, long seed, WorldType nmsWt, net.canarymod.api.world.DimensionType worldtype, String generatorSettings) {
-        this.b(name); // Anvil Converter
-        this.c("menu.loadingLevel");
+        this.a(name); // Anvil Converter
+        this.b("menu.loadingLevel");
         File worldFolder = new File("worlds/" + name);
         CanarySaveConverter converter = new CanarySaveConverter(worldFolder);
 
@@ -154,46 +163,65 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             worldsettings = new WorldSettings(worldinfo);
         }
 
-        if (this.M) {
+        if (this.N) {
             worldsettings.a();
         }
 
-        if (worldtype.getId() == 0) {
-            if (this.M()) {
-                world = new DemoWorldServer(this, isavehandler, name, worldtype.getId(), this.a, this.al());
-            } else {
-                world = new WorldServer(this, isavehandler, name, worldtype.getId(), worldsettings, this.a, this.al());
-            }
-        } else {
-            world = new WorldServerMulti(this, isavehandler, name, worldtype.getId(), worldsettings, (WorldServer) ((CanaryWorld) worldManager.getWorld(name, net.canarymod.api.world.DimensionType.fromName("NORMAL"), true)).getHandle(), this.a, this.al());
-        }
+        for (int i1 = 0; i1 < this.b.length; ++i1) {
+            byte b0 = 0;
 
-        world.a((IWorldAccess) (new WorldManager(this, world)));
-        if (!this.I()) {
-            world.M().a(EnumGameType.a(config.getGameMode().getId())); //Use per-world config for game mode
+            if (i1 == 1) {
+                b0 = -1;
+            }
+
+            if (i1 == 2) {
+                b0 = 1;
+            }
+
+            if (i1 == 0) {
+                if (this.O()) {
+                    this.b[i1] = new DemoWorldServer(this, isavehandler, s1, b0, this.a, this.an());
+                } else {
+                    this.b[i1] = new WorldServer(this, isavehandler, s1, b0, worldsettings, this.a, this.an());
+                }
+            } else {
+                this.b[i1] = new WorldServerMulti(this, isavehandler, s1, b0, worldsettings, this.b[0], this.a, this.an());
+            }
+
+            this.b[i1].a((IWorldAccess) (new WorldManager(this, this.b[i1])));
+            if (!this.K()) {
+                this.b[i1].N().a(this.h());
+            }
+
+            this.t.a(this.b);
         }
 
         this.s.a(world); // Init player data files
 
-        // this.c(this.h()); // If we call this then worlds can't do custom difficulty, plus it doesn't work
+        // this.c(this.i()); // If we call this then worlds can't do custom difficulty, plus it doesn't work
         world.r = config.getDifficulty().getId(); // Set difficulty directly based on WorldConfiguration setting
-        this.e(world); // Generate terrain
+        this.f(world); // Generate terrain
         worldManager.addWorld(world.getCanaryWorld());
         new LoadWorldHook(world.getCanaryWorld()).call();
     }
 
-    protected void e(WorldServer worldserver) {
+    protected void f() {
+        boolean flag0 = true;
+        boolean flag1 = true;
+        boolean flag2 = true;
+        boolean flag3 = true;
         int i0 = 0;
 
-        this.c("menu.generatingTerrain");
+        this.b("menu.generatingTerrain");
+        byte b0 = 0;
 
-        this.al().a("Preparing start region for level " + worldserver.getCanaryWorld().getName());
-        ChunkCoordinates chunkcoordinates = worldserver.J();
-        long i1 = System.currentTimeMillis();
+        this.an().a("Preparing start region for level " + worldserver.getCanaryWorld().getName());
+        ChunkCoordinates chunkcoordinates = worldserver.K();
+        long i1 = aq();
 
-        for (int i2 = -192; i2 <= 192 && this.m(); i2 += 16) {
-            for (int i3 = -192; i3 <= 192 && this.m(); i3 += 16) {
-                long i4 = System.currentTimeMillis();
+        for (int i2 = -192; i2 <= 192 && this.o(); i2 += 16) {
+            for (int i3 = -192; i3 <= 192 && this.o(); i3 += 16) {
+                long i4 = aq();
 
                 if (i4 - i1 > 1000L) {
                     this.a_("Preparing spawn area", i0 * 100 / 625);
@@ -205,44 +233,45 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             }
         }
 
-        this.j();
+        this.l();
     }
 
-    public abstract boolean f();
+    public abstract boolean g();
 
-    public abstract EnumGameType g();
+    public abstract EnumGameType h();
 
-    public abstract int h();
+    public abstract int i();
 
-    public abstract boolean i();
+    public abstract boolean j();
+
+    public abstract int k();
 
     protected void a_(String s0, int i0) {
-        this.c = s0;
-        this.d = i0;
-        this.al().a(s0 + ": " + i0 + "%");
+        this.d = s0;
+        this.e = i0;
+        this.an().a(s0 + ": " + i0 + "%");
     }
 
-    protected void j() {
-        this.c = null;
-        this.d = 0;
+    protected void l() {
+        this.d = null;
+        this.e = 0;
     }
 
     protected void a(boolean flag0) {
-        if (!this.N) {
+        if (!this.O) {
             // CanaryMod changed to use worldManager
             for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
                 WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
 
                 if (worldserver != null) {
                     if (!flag0) {
-                        this.al().a("Saving chunks for level \'" + worldserver.M().k() + "\'/" + worldserver.t.l());
+                        this.an().a("Saving chunks for level \'" + worldserver.N().k() + "\'/" + worldserver.t.l());
                     }
 
                     try {
                         worldserver.a(true, (IProgressUpdate) null);
                     } catch (MinecraftException minecraftexception) {
-                        Logman.println(minecraftexception.getMessage());
-                        this.al().b(minecraftexception.getMessage());
+                        this.an().b(minecraftexception.getMessage());
                     }
                 } else {
                     Logman.println("World is null");
@@ -251,20 +280,20 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
     }
 
-    public void k() {
-        if (!this.N) {
-            this.al().a("Stopping server");
-            if (this.ae() != null) {
-                this.ae().a();
+    public void m() {
+        if (!this.O) {
+            this.an().a("Stopping server");
+            if (this.ag() != null) {
+                this.ag().a();
             }
 
-            if (this.s != null) {
-                this.al().a("Saving players");
-                this.s.g();
-                this.s.r();
+            if (this.t != null) {
+                this.an().a("Saving players");
+                this.t.g();
+                this.t.r();
             }
 
-            this.al().a("Saving worlds");
+            this.an().a("Saving worlds");
             this.a(false);
 
             // CanaryMod Multiworld
@@ -274,8 +303,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 worldserver.n();
             }
 
-            if (this.m != null && this.m.d()) {
-                this.m.e();
+            if (this.n != null && this.n.d()) {
+                this.n.e();
             }
             // CanaryMod disable plugins:
             Canary.logInfo("Disabling Plugins ...");
@@ -283,41 +312,41 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
     }
 
-    public String l() {
-        return this.q;
+    public String n() {
+        return this.r;
     }
 
-    public void d(String s0) {
-        this.q = s0;
+    public void c(String s0) {
+        this.r = s0;
     }
 
-    public boolean m() {
-        return this.t;
+    public boolean o() {
+        return this.u;
     }
 
-    public void n() {
-        this.t = false;
+    public void p() {
+        this.u = false;
     }
 
     @Override
     public void run() {
         try {
-            if (this.c()) {
-                long i0 = System.currentTimeMillis();
+            if (this.d()) {
+                long i0 = aq();
 
-                for (long i1 = 0L; this.t; this.P = true) {
+                for (long i1 = 0L; this.u; this.Q = true) {
                     ServerTaskManager.runTasks(); // CanaryMod: Run tasks
-                    long i2 = System.currentTimeMillis();
+                    long i2 = aq();
                     long i3 = i2 - i0;
 
-                    if (i3 > 2000L && i0 - this.Q >= 15000L) {
-                        this.al().b("Can\'t keep up! Did the system time change, or is the server overloaded?");
+                    if (i3 > 2000L && i0 - this.R >= 15000L) {
+                        this.an().b("Can\'t keep up! Did the system time change, or is the server overloaded?");
                         i3 = 2000L;
-                        this.Q = i0;
+                        this.R = i0;
                     }
 
                     if (i3 < 0L) {
-                        this.al().b("Time ran backwards! Did the system time change?");
+                        this.an().b("Time ran backwards! Did the system time change?");
                         i3 = 0L;
                     }
 
@@ -331,12 +360,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     }
                     // CanaryMod end
                     if (allSleeping) {
-                        this.q();
+                        this.s();
                         i1 = 0L;
                     } else {
                         while (i1 > 50L) {
                             i1 -= 50L;
-                            this.q();
+                            this.s();
                         }
                     }
 
@@ -347,7 +376,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             }
         } catch (Throwable throwable) {
             throwable.printStackTrace();
-            this.al().c("Encountered an unexpected exception " + throwable.getClass().getSimpleName(), throwable);
+            this.an().c("Encountered an unexpected exception " + throwable.getClass().getSimpleName(), throwable);
             CrashReport crashreport = null;
 
             if (throwable instanceof ReportedException) {
@@ -356,73 +385,75 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 crashreport = this.b(new CrashReport("Exception in server tick loop", throwable));
             }
 
-            File file1 = new File(new File(this.o(), "crash-reports"), "crash-" + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss")).format(new Date()) + "-server.txt");
+            File file1 = new File(new File(this.q(), "crash-reports"), "crash-" + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss")).format(new Date()) + "-server.txt");
 
-            if (crashreport.a(file1, this.al())) {
-                this.al().c("This crash report has been saved to: " + file1.getAbsolutePath());
+            if (crashreport.a(file1, this.an())) {
+                this.an().c("This crash report has been saved to: " + file1.getAbsolutePath());
             } else {
-                this.al().c("We were unable to save this crash report to disk.");
+                this.an().c("We were unable to save this crash report to disk.");
             }
 
             this.a(crashreport);
-        } finally {
+        }
+        finally {
             try {
-                this.k();
-                this.u = true;
+                this.m();
+                this.v = true;
             } catch (Throwable throwable1) {
                 throwable1.printStackTrace();
-            } finally {
-                this.p();
+            }
+            finally {
+                this.r();
             }
         }
     }
 
-    protected File o() {
+    protected File q() {
         return new File(".");
     }
 
     protected void a(CrashReport crashreport) {}
 
-    protected void p() {}
+    protected void r() {}
 
-    protected void q() {
+    protected void s() {
         long i0 = System.nanoTime();
 
         AxisAlignedBB.a().a();
-        ++this.v;
-        if (this.S) {
-            this.S = false;
+        ++this.w;
+        if (this.T) {
+            this.T = false;
             this.a.a = true;
             this.a.a();
         }
 
         this.a.a("root");
-        this.r();
-        if (this.v % 900 == 0) {
+        this.t();
+        if (this.w % 900 == 0) {
             this.a.a("save");
-            this.s.g();
+            this.t.g();
             this.a(true);
             this.a.b();
         }
 
         this.a.a("tallying");
-        this.i[this.v % 100] = System.nanoTime() - i0;
-        this.e[this.v % 100] = Packet.q - this.D;
-        this.D = Packet.q;
-        this.f[this.v % 100] = Packet.r - this.E;
-        this.E = Packet.r;
-        this.g[this.v % 100] = Packet.o - this.F;
-        this.F = Packet.o;
-        this.h[this.v % 100] = Packet.p - this.G;
-        this.G = Packet.p;
+        this.j[this.w % 100] = System.nanoTime() - i0;
+        this.f[this.w % 100] = Packet.q - this.E;
+        this.E = Packet.q;
+        this.g[this.w % 100] = Packet.r - this.F;
+        this.F = Packet.r;
+        this.h[this.w % 100] = Packet.o - this.G;
+        this.G = Packet.o;
+        this.i[this.w % 100] = Packet.p - this.H;
+        this.H = Packet.p;
         this.a.b();
         this.a.a("snooper");
-        if (!this.m.d() && this.v > 100) {
-            this.m.a();
+        if (!this.n.d() && this.w > 100) {
+            this.n.a();
         }
 
-        if (this.v % 6000 == 0) {
-            this.m.b();
+        if (this.w % 6000 == 0) {
+            this.n.b();
         }
 
         this.a.b();
@@ -431,7 +462,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     //CanaryMod: ticks world
     private long previousTick = -1L; // Tick Time Tracker
-    public void r() {
+    public void t() {
         new ServerTickHook(previousTick).call(); // CanaryMod: ServerTick
         long curTrack = System.nanoTime(); // CanaryMod: Start tick track
 
@@ -444,14 +475,14 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             //
             long i1 = System.nanoTime();
 
-            this.a.a(worldserver.M().k());
+            this.a.a(worldserver.N().k());
             this.a.a("pools");
-            worldserver.U().a();
+            worldserver.V().a();
             this.a.b();
             if (this.v % 20 == 0) {
                 this.a.a("timeSync");
-                // this.s.a((Packet) (new Packet4UpdateTime(worldserver.G(), worldserver.H())), worldserver.t.h);
-                this.s.sendPacketToDimension((new Packet4UpdateTime(worldserver.H(), worldserver.I())), w.getName(), w.getType().getId());
+                // this.t.a((Packet) (new Packet4UpdateTime(worldserver.I(), worldserver.J())), worldserver.O().b("doDaylightCycle"));
+                this.s.sendPacketToDimension((new Packet4UpdateTime(worldserver.I(), worldserver.J())), w.getName(), w.getType().getId());
                 this.a.b();
             }
 
@@ -480,29 +511,29 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             worldserver.q().a();
             this.a.b();
             this.a.b();
-            w.setNanoTick(this.v % 100, System.nanoTime() - i1);
-            // this.j[i0][this.v % 100] = System.nanoTime() - i1;
+            w.setNanoTick(this.w % 100, System.nanoTime() - i1);
+            // this.j[i0][this.w % 100] = System.nanoTime() - i1;
         }
 
         this.a.c("connection");
-        this.ae().b();
+        this.ag().b();
         this.a.c("players");
-        this.s.b();
+        this.t.b();
         this.a.c("tickables");
 
-        for (i0 = 0; i0 < this.o.size(); ++i0) {
-            ((IUpdatePlayerListBox) this.o.get(i0)).a();
+        for (i0 = 0; i0 < this.p.size(); ++i0) {
+            ((IUpdatePlayerListBox) this.p.get(i0)).a();
         }
 
         this.a.b();
     }
 
-    public boolean s() {
+    public boolean u() {
         throw new UnsupportedOperationException("allow-nether has been moved to a per-world configuration!");
     }
 
     public void a(IUpdatePlayerListBox iupdateplayerlistbox) {
-        this.o.add(iupdateplayerlistbox);
+        this.p.add(iupdateplayerlistbox);
     }
 
     public static void main(String[] astring) {
@@ -510,6 +541,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         ILogAgent ilogagent = null;
 
         try {
+            boolean flag0 = !GraphicsEnvironment.isHeadless();
             String s0 = null;
             String s1 = ".";
             String s2 = null;
@@ -545,6 +577,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     } else if (s3.equals("--bonusChest")) {
                         flag2 = true;
                     }
+                } else {
+                    flag0 = false;
                 }
 
                 if (flag3) {
@@ -558,13 +592,13 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 ServerGUI.servergui.validate();
             }
 
-            ilogagent = dedicatedserver.al();
+            ilogagent = dedicatedserver.an();
             if (s0 != null) {
-                dedicatedserver.k(s0);
+                dedicatedserver.j(s0);
             }
 
             if (s2 != null) {
-                dedicatedserver.l(s2);
+                dedicatedserver.k(s2);
             }
 
             if (i0 >= 0) {
@@ -579,7 +613,11 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 dedicatedserver.c(true);
             }
 
-            dedicatedserver.t();
+            if (flag0) {
+                dedicatedserver.at();
+            }
+
+            dedicatedserver.v();
             Runtime.getRuntime().addShutdownHook(new ThreadDedicatedServer(dedicatedserver));
         } catch (Exception exception) {
             if (ilogagent != null) {
@@ -590,20 +628,20 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
     }
 
-    public void t() {
+    public void v() {
         (new ThreadMinecraftServer(this, "Server thread")).start();
     }
 
-    public File e(String s0) {
-        return new File(this.o(), s0);
+    public File d(String s0) {
+        return new File(this.q(), s0);
+    }
+
+    public void e(String s0) {
+        this.an().a(s0);
     }
 
     public void f(String s0) {
-        this.al().a(s0);
-    }
-
-    public void g(String s0) {
-        this.al().b(s0);
+        this.an().b(s0);
     }
 
     @Deprecated
@@ -620,55 +658,54 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         return null;
     }
 
-    public String u() {
-        return this.q;
-    }
-
-    public int v() {
+    public String w() {
         return this.r;
     }
 
-    public String w() {
-        return this.B;
+    public int x() {
+        return this.s;
     }
 
-    public String x() {
-        return "1.5.2";
+    public String y() {
+        return this.C;
     }
 
-    public int y() {
-        return this.s.k();
+    public String z() {
+        return "1.6.1";   }
+
+    public int A() {
+        return this.t.k();
     }
 
-    public int z() {
-        return this.s.l();
+    public int B() {
+        return this.t.l();
     }
 
-    public String[] A() {
-        return this.s.d();
+    public String[] C() {
+        return this.t.d();
     }
 
-    public String B() {
+    public String D() {
         return "";
     }
 
-    public String h(String s0) {
-        RConConsoleSource.a.c();
-        this.p.a(RConConsoleSource.a, s0);
-        return RConConsoleSource.a.d();
+    public String g(String s0) {
+        RConConsoleSource.a.d();
+        this.q.a(RConConsoleSource.a, s0);
+        return RConConsoleSource.a.e();
     }
 
-    public boolean C() {
+    public boolean E() {
         return false;
     }
 
-    public void i(String s0) {
-        this.al().c(s0);
+    public void h(String s0) {
+        this.an().c(s0);
     }
 
-    public void j(String s0) {
-        if (this.C()) {
-            this.al().a(s0);
+    public void i(String s0) {
+        if (this.E()) {
+            this.an().a(s0);
         }
     }
 
@@ -683,7 +720,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             crashreport.g().a("Vec3 Pool Size", (Callable) (new CallableServerProfiler(this)));
         }
 
-        if (this.s != null) {
+        if (this.t != null) {
             crashreport.g().a("Player Count", (Callable) (new CallableServerMemoryStats(this)));
         }
 
@@ -696,7 +733,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         if (s0.startsWith("/")) {
             s0 = s0.substring(1);
             boolean flag0 = !s0.contains(" ");
-            List list = this.p.b(icommandsender, s0);
+            List list = this.q.b(icommandsender, s0);
 
             if (list != null) {
                 Iterator iterator = list.iterator();
@@ -716,7 +753,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         } else {
             String[] astring = s0.split(" ", -1);
             String s2 = astring[astring.length - 1];
-            String[] astring1 = this.s.d();
+            String[] astring1 = this.t.d();
             int i0 = astring1.length;
 
             for (int i1 = 0; i1 < i0; ++i1) {
@@ -731,8 +768,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
     }
 
-    public static MinecraftServer D() {
-        return k;
+    public static MinecraftServer F() {
+        return l;
     }
 
     @Override
@@ -740,9 +777,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         return "Server";
     }
 
-    @Override
-    public void a(String s0) {
-        this.al().a(StringUtils.a(s0));
+    public void a(ChatMessageComponent chatmessagecomponent) {
+        this.an().a(chatmessagecomponent.toString());
     }
 
     @Override
@@ -750,53 +786,44 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         return true;
     }
 
-    @Override
-    public String a(String s0, Object... aobject) {
-        return StringTranslate.a().a(s0, aobject);
+    public ICommandManager G() {
+        return this.q;
     }
 
-    public ICommandManager E() {
-        return this.p;
-    }
-
-    public KeyPair F() {
-        return this.H;
-    }
-
-    public int G() {
-        return this.r;
-    }
-
-    public void b(int i0) {
-        this.r = i0;
-    }
-
-    public String H() {
+    public KeyPair H() {
         return this.I;
     }
 
-    public void k(String s0) {
-        this.I = s0;
+    public int I() {
+        return this.s;
     }
 
-    public boolean I() {
-        return this.I != null;
+    public void b(int i0) {
+        this.s = i0;
     }
 
-    /**
-     * Level name
-     * @return
-     */
     public String J() {
         return this.J;
     }
 
-    public void l(String s0) {
+    public void j(String s0) {
         this.J = s0;
     }
 
+    public boolean K() {
+        return this.J != null;
+    }
+
+    public String L() {
+        return this.K;
+    }
+
+    public void k(String s0) {
+        this.K = s0;
+    }
+
     public void a(KeyPair keypair) {
-        this.H = keypair;
+        this.I = keypair;
     }
 
     public void c(int i0) {
@@ -807,44 +834,44 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             //
             if (worldserver != null) {
                 //System.out.println(worldserver.getCanaryWorld().getName() + " Difficulty " + i0);
-                if (worldserver.M().t()) {
+                if (worldserver.N().t()) {
                     worldserver.r = 3;
                     worldserver.a(true, true);
-                } else if (this.I()) {
+                } else if (this.K()) {
                     worldserver.r = i0;
                     worldserver.a(worldserver.r > 0, true);
                 } else {
                     worldserver.r = i0;
                     //Canarymod moved spawn-monsters to per-world config
-                    worldserver.a(Configuration.getWorldConfig(w.getFqName()).canSpawnMonsters(), this.x);
+                    worldserver.a(Configuration.getWorldConfig(w.getFqName()).canSpawnMonsters(), this.y);
                 }
             }
         }
     }
 
-    protected boolean L() {
+    protected boolean N() {
         return true;
     }
 
-    public boolean M() {
-        return this.L;
+    public boolean O() {
+        return this.M;
     }
 
     public void b(boolean flag0) {
-        this.L = flag0;
-    }
-
-    public void c(boolean flag0) {
         this.M = flag0;
     }
 
-    public ISaveFormat N() {
-        return this.l;
+    public void c(boolean flag0) {
+        this.N = flag0;
     }
 
-    public void P() {
-        this.N = true;
-        this.N().d();
+    public ISaveFormat P() {
+        return this.m;
+    }
+
+    public void R() {
+        this.O = true;
+        this.P().d();
 
         for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
@@ -856,36 +883,39 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 this.N().e(worldserver.L().g());
             }
         }
-        this.n();
+
+        this.P().e(this.b[0].M().g());
+        this.p();
     }
 
-    public String Q() {
-        return this.O;
+    public String S() {
+        return this.P;
     }
 
-    public void n(String s0) {
-        this.O = s0;
+    public void m(String s0) {
+        this.P = s0;
     }
 
     @Override
     public void a(PlayerUsageSnooper playerusagesnooper) {
         playerusagesnooper.a("whitelist_enabled", Boolean.valueOf(false));
         playerusagesnooper.a("whitelist_count", Integer.valueOf(0));
-        playerusagesnooper.a("players_current", Integer.valueOf(this.y()));
-        playerusagesnooper.a("players_max", Integer.valueOf(this.z()));
-        playerusagesnooper.a("players_seen", Integer.valueOf(this.s.m().length));
-        playerusagesnooper.a("uses_auth", Boolean.valueOf(this.w));
-        playerusagesnooper.a("gui_state", this.ag() ? "enabled" : "disabled");
-        playerusagesnooper.a("avg_tick_ms", Integer.valueOf((int) (MathHelper.a(this.i) * 1.0E-6D)));
-        playerusagesnooper.a("avg_sent_packet_count", Integer.valueOf((int) MathHelper.a(this.e)));
-        playerusagesnooper.a("avg_sent_packet_size", Integer.valueOf((int) MathHelper.a(this.f)));
-        playerusagesnooper.a("avg_rec_packet_count", Integer.valueOf((int) MathHelper.a(this.g)));
-        playerusagesnooper.a("avg_rec_packet_size", Integer.valueOf((int) MathHelper.a(this.h)));
+        playerusagesnooper.a("players_current", Integer.valueOf(this.A()));
+        playerusagesnooper.a("players_max", Integer.valueOf(this.B()));
+        playerusagesnooper.a("players_seen", Integer.valueOf(this.t.m().length));
+        playerusagesnooper.a("uses_auth", Boolean.valueOf(this.x));
+        playerusagesnooper.a("gui_state", this.ai() ? "enabled" : "disabled");
+        playerusagesnooper.a("run_time", Long.valueOf((aq() - playerusagesnooper.g()) / 60L * 1000L));
+        playerusagesnooper.a("avg_tick_ms", Integer.valueOf((int) (MathHelper.a(this.j) * 1.0E-6D)));
+        playerusagesnooper.a("avg_sent_packet_count", Integer.valueOf((int) MathHelper.a(this.f)));
+        playerusagesnooper.a("avg_sent_packet_size", Integer.valueOf((int) MathHelper.a(this.g)));
+        playerusagesnooper.a("avg_rec_packet_count", Integer.valueOf((int) MathHelper.a(this.h)));
+        playerusagesnooper.a("avg_rec_packet_size", Integer.valueOf((int) MathHelper.a(this.i)));
         int i0 = 0;
 
         for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
-            WorldInfo worldinfo = worldserver.M();
+            WorldInfo worldinfo = worldserver.N();
 
             playerusagesnooper.a("world[" + i0 + "][dimension]", Integer.valueOf(worldserver.t.h));
             playerusagesnooper.a("world[" + i0 + "][mode]", worldinfo.r());
@@ -903,115 +933,114 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     @Override
     public void b(PlayerUsageSnooper playerusagesnooper) {
-        playerusagesnooper.a("singleplayer", Boolean.valueOf(this.I()));
+        playerusagesnooper.a("singleplayer", Boolean.valueOf(this.K()));
         playerusagesnooper.a("server_brand", this.getServerModName());
         playerusagesnooper.a("gui_supported", GraphicsEnvironment.isHeadless() ? "headless" : "supported");
-        playerusagesnooper.a("dedicated", Boolean.valueOf(this.T()));
+        playerusagesnooper.a("dedicated", Boolean.valueOf(this.V()));
     }
 
-    @Override
-    public boolean R() {
+    public boolean T() {
         return true;
     }
 
-    public int S() {
+    public int U() {
         return 16;
     }
 
-    public abstract boolean T();
+    public abstract boolean V();
 
-    public boolean U() {
-        return this.w;
-    }
-
-    public void d(boolean flag0) {
-        this.w = flag0;
-    }
-
-    public boolean V() {
+    public boolean W() {
         return this.x;
     }
 
-    public void e(boolean flag0) {
+    public void d(boolean flag0) {
         this.x = flag0;
     }
 
-    public boolean W() {
+    public boolean X() {
         return this.y;
     }
 
-    public void f(boolean flag0) {
+    public void e(boolean flag0) {
         this.y = flag0;
     }
 
-    public boolean X() {
+    public boolean Y() {
         return this.z;
     }
 
-    public void g(boolean flag0) {
+    public void f(boolean flag0) {
         this.z = flag0;
     }
 
-    public boolean Y() {
+    public boolean Z() {
         return this.A;
     }
 
-    public void h(boolean flag0) {
+    public void g(boolean flag0) {
         this.A = flag0;
     }
 
-    public abstract boolean Z();
-
-    public String aa() {
+    public boolean aa() {
         return this.B;
     }
 
-    public void o(String s0) {
-        this.B = s0;
+    public void h(boolean flag0) {
+        this.B = flag0;
     }
 
-    public int ab() {
+    public abstract boolean ab();
+
+    public String ac() {
         return this.C;
     }
 
+    public void n(String s0) {
+        this.C = s0;
+    }
+
+    public int ad() {
+        return this.D;
+    }
+
     public void d(int i0) {
-        this.C = i0;
+        this.D = i0;
     }
 
-    public boolean ac() {
-        return this.u;
+    public boolean ae() {
+        return this.v;
     }
 
-    public ServerConfigurationManager ad() {
-        return this.s;
+    public ServerConfigurationManager af() {
+        return this.t;
     }
 
     public void a(ServerConfigurationManager serverconfigurationmanager) {
-        this.s = serverconfigurationmanager;
+        this.t = serverconfigurationmanager;
     }
 
     public void a(EnumGameType enumgametype) {
         for (net.canarymod.api.world.World w : worldManager.getAllWorlds()) {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
 
-            worldserver.M().a(enumgametype);
+            worldserver.N().a(enumgametype);
         }
     }
 
-    public abstract NetworkListenThread ae();
+    public abstract NetworkListenThread ag();
 
-    public boolean ag() {
+    public boolean ai() {
         return false;
     }
 
     public abstract String a(EnumGameType enumgametype, boolean flag0);
 
-    public int ah() {
-        return this.v;
+    public int aj() {
+        return this.w;
     }
 
-    public void ai() {
-        this.S = true;
+    public void ak() {
+        this.T = true;
     }
 
     @Override
@@ -1019,7 +1048,11 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         return new ChunkCoordinates(0, 0, 0);
     }
 
-    public int ak() {
+    public World f_() {
+        return this.b[0];
+    }
+
+    public int am() {
         return 16;
     }
 
@@ -1027,19 +1060,26 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         return false;
     }
 
-    @Override
-    public abstract ILogAgent al();
+    public abstract ILogAgent an();
 
     public void i(boolean flag0) {
-        this.T = flag0;
+        this.U = flag0;
     }
 
-    public boolean am() {
-        return this.T;
+    public boolean ao() {
+        return this.U;
+    }
+
+    public Proxy ap() {
+        return this.c;
+    }
+
+    public static long aq() {
+        return System.currentTimeMillis();
     }
 
     public static ServerConfigurationManager a(MinecraftServer minecraftserver) {
-        return minecraftserver.s;
+        return minecraftserver.t;
     }
 
     /**

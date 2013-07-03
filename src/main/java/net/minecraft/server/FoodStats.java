@@ -40,7 +40,7 @@ public class FoodStats {
     }
 
     public void a(ItemFood itemfood) {
-        this.a(itemfood.g(), itemfood.h());
+        this.a(itemfood.g(), itemfood.i());
     }
 
     public void a(EntityPlayer entityplayer) {
@@ -71,16 +71,17 @@ public class FoodStats {
             }
         }
 
-        if (this.a >= 18 && entityplayer.co()) {
+        if (entityplayer.q.O().b("naturalRegeneration") && this.a >= 18 && entityplayer.bE()) {
             ++this.d;
             if (this.d >= 80) {
-                entityplayer.j(1);
+                entityplayer.f(1.0F);
+                this.a(3.0F);
                 this.d = 0;
             }
         } else if (this.a <= 0) {
             ++this.d;
             if (this.d >= 80) {
-                if (entityplayer.aX() > 10 || i0 >= 3 || entityplayer.aX() > 1 && i0 >= 2) {
+                if (entityplayer.aJ() > 10.0F || i0 >= 3 || entityplayer.aJ() > 1.0F && i0 >= 2) {
                     // CanaryMod: DamageHook (starve)
                     DamageHook dmg = new DamageHook(null, entityplayer.getCanaryEntity(), new CanaryDamageSource(DamageSource.f), 1);
 

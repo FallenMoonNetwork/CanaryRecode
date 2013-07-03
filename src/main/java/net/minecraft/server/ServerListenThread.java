@@ -43,7 +43,7 @@ public class ServerListenThread extends Thread {
                     netloginhandler.c();
                 } catch (Exception exception) {
                     netloginhandler.a("Internal server error");
-                    this.e.d().al().b("Failed to handle packet for " + netloginhandler.e() + ": " + exception, (Throwable) exception);
+                    this.e.d().an().b("Failed to handle packet for " + netloginhandler.e() + ": " + exception, (Throwable) exception);
                 }
 
                 if (netloginhandler.b) {
@@ -68,7 +68,7 @@ public class ServerListenThread extends Thread {
             }
         }
 
-        this.e.d().al().a("Closing listening thread");
+        this.e.d().an().a("Closing listening thread");
     }
 
     private void a(NetLoginHandler netloginhandler) {

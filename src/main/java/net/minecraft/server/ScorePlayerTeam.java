@@ -95,14 +95,13 @@ public class ScorePlayerTeam {
 
     public int i() {
         int i0 = 0;
-        int i1 = 0;
 
         if (this.g()) {
-            i0 |= 1 << i1++;
+            i0 |= 1;
         }
 
         if (this.h()) {
-            i0 |= 1 << i1++;
+            i0 |= 2;
         }
 
         return i0;

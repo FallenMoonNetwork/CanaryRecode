@@ -17,30 +17,31 @@ public class FurnaceRecipes {
     }
 
     private FurnaceRecipes() {
-        this.a(Block.L.cz, new ItemStack(Item.p), 0.7F);
-        this.a(Block.K.cz, new ItemStack(Item.q), 1.0F);
-        this.a(Block.aA.cz, new ItemStack(Item.o), 1.0F);
-        this.a(Block.I.cz, new ItemStack(Block.Q), 0.1F);
-        this.a(Item.ar.cp, new ItemStack(Item.as), 0.35F);
-        this.a(Item.bj.cp, new ItemStack(Item.bk), 0.35F);
-        this.a(Item.bl.cp, new ItemStack(Item.bm), 0.35F);
-        this.a(Item.aV.cp, new ItemStack(Item.aW), 0.35F);
-        this.a(Block.A.cz, new ItemStack(Block.x), 0.1F);
-        this.a(Item.aJ.cp, new ItemStack(Item.aI), 0.3F);
-        this.a(Block.aZ.cz, new ItemStack(Item.aX, 1, 2), 0.2F);
-        this.a(Block.N.cz, new ItemStack(Item.n, 1, 1), 0.15F);
-        this.a(Block.bV.cz, new ItemStack(Item.bI), 1.0F);
-        this.a(Item.bM.cp, new ItemStack(Item.bN), 0.35F);
-        this.a(Block.bf.cz, new ItemStack(Item.bZ), 0.1F);
-        this.a(Block.M.cz, new ItemStack(Item.n), 0.1F);
-        this.a(Block.aR.cz, new ItemStack(Item.aD), 0.7F);
-        this.a(Block.R.cz, new ItemStack(Item.aX, 1, 4), 0.2F);
-        this.a(Block.ct.cz, new ItemStack(Item.ca), 0.2F);
+        this.a(Block.M.cF, new ItemStack(Item.q), 0.7F);
+        this.a(Block.L.cF, new ItemStack(Item.r), 1.0F);
+        this.a(Block.aB.cF, new ItemStack(Item.p), 1.0F);
+        this.a(Block.J.cF, new ItemStack(Block.R), 0.1F);
+        this.a(Item.as.cv, new ItemStack(Item.at), 0.35F);
+        this.a(Item.bk.cv, new ItemStack(Item.bl), 0.35F);
+        this.a(Item.bm.cv, new ItemStack(Item.bn), 0.35F);
+        this.a(Item.aW.cv, new ItemStack(Item.aX), 0.35F);
+        this.a(Block.B.cF, new ItemStack(Block.y), 0.1F);
+        this.a(Item.aK.cv, new ItemStack(Item.aJ), 0.3F);
+        this.a(Block.bb.cF, new ItemStack(Block.cD), 0.35F);
+        this.a(Block.ba.cF, new ItemStack(Item.aY, 1, 2), 0.2F);
+        this.a(Block.O.cF, new ItemStack(Item.o, 1, 1), 0.15F);
+        this.a(Block.bW.cF, new ItemStack(Item.bJ), 1.0F);
+        this.a(Item.bN.cv, new ItemStack(Item.bO), 0.35F);
+        this.a(Block.bg.cF, new ItemStack(Item.ca), 0.1F);
+        this.a(Block.N.cF, new ItemStack(Item.o), 0.1F);
+        this.a(Block.aS.cF, new ItemStack(Item.aE), 0.7F);
+        this.a(Block.S.cF, new ItemStack(Item.aY, 1, 4), 0.2F);
+        this.a(Block.cu.cF, new ItemStack(Item.cb), 0.2F);
     }
 
     public void a(int i0, ItemStack itemstack, float f0) {
         this.b.put(Integer.valueOf(i0), itemstack);
-        this.c.put(Integer.valueOf(itemstack.c), Float.valueOf(f0));
+        this.c.put(Integer.valueOf(itemstack.d), Float.valueOf(f0));
     }
 
     public ItemStack b(int i0) {
