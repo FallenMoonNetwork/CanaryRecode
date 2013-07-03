@@ -16,7 +16,7 @@ public abstract class BlockFluid extends Block {
     }
 
     public boolean b(IBlockAccess iblockaccess, int i0, int i1, int i2) {
-        return this.cO != Material.i;
+        return this.cU != Material.i;
     }
 
     public static float d(int i0) {
@@ -27,12 +27,12 @@ public abstract class BlockFluid extends Block {
         return (float) (i0 + 1) / 9.0F;
     }
 
-    protected int k_(World world, int i0, int i1, int i2) {
-        return world.g(i0, i1, i2) == this.cO ? world.h(i0, i1, i2) : -1;
+    protected int l_(World world, int i0, int i1, int i2) {
+        return world.g(i0, i1, i2) == this.cU ? world.h(i0, i1, i2) : -1;
     }
 
     protected int d(IBlockAccess iblockaccess, int i0, int i1, int i2) {
-        if (iblockaccess.g(i0, i1, i2) != this.cO) {
+        if (iblockaccess.g(i0, i1, i2) != this.cU) {
             return -1;
         } else {
             int i3 = iblockaccess.h(i0, i1, i2);
@@ -60,7 +60,7 @@ public abstract class BlockFluid extends Block {
     public boolean a_(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
         Material material = iblockaccess.g(i0, i1, i2);
 
-        return material == this.cO ? false : (i3 == 1 ? true : (material == Material.v ? false : super.a_(iblockaccess, i0, i1, i2, i3)));
+        return material == this.cU ? false : (i3 == 1 ? true : (material == Material.w ? false : super.a_(iblockaccess, i0, i1, i2, i3)));
     }
 
     public AxisAlignedBB b(World world, int i0, int i1, int i2) {
@@ -80,7 +80,7 @@ public abstract class BlockFluid extends Block {
     }
 
     private Vec3 g(IBlockAccess iblockaccess, int i0, int i1, int i2) {
-        Vec3 vec3 = iblockaccess.U().a(0.0D, 0.0D, 0.0D);
+        Vec3 vec3 = iblockaccess.V().a(0.0D, 0.0D, 0.0D);
         int i3 = this.d(iblockaccess, i0, i1, i2);
 
         for (int i4 = 0; i4 < 4; ++i4) {
@@ -173,7 +173,7 @@ public abstract class BlockFluid extends Block {
     }
 
     public int a(World world) {
-        return this.cO == Material.h ? 5 : (this.cO == Material.i ? (world.t.f ? 10 : 30) : 0);
+        return this.cU == Material.h ? 5 : (this.cU == Material.i ? (world.t.g ? 10 : 30) : 0);
     }
 
     public void a(World world, int i0, int i1, int i2) {
@@ -185,8 +185,8 @@ public abstract class BlockFluid extends Block {
     }
 
     private void k(World world, int i0, int i1, int i2) {
-        if (world.a(i0, i1, i2) == this.cz) {
-            if (this.cO == Material.i) {
+        if (world.a(i0, i1, i2) == this.cF) {
+            if (this.cU == Material.i) {
                 boolean flag0 = false;
 
                 if (flag0 || world.g(i0, i1, i2 - 1) == Material.h) {
@@ -213,9 +213,9 @@ public abstract class BlockFluid extends Block {
                     int i3 = world.h(i0, i1, i2);
 
                     if (i3 == 0) {
-                        world.c(i0, i1, i2, Block.at.cz);
+                        world.c(i0, i1, i2, Block.au.cF);
                     } else if (i3 <= 4) {
-                        world.c(i0, i1, i2, Block.A.cz);
+                        world.c(i0, i1, i2, Block.B.cF);
                     }
 
                     this.j(world, i0, i1, i2);

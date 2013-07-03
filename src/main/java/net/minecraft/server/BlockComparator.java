@@ -8,23 +8,23 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
 
     public BlockComparator(int i0, boolean flag0) {
         super(i0, flag0);
-        this.cF = true;
+        this.cL = true;
     }
 
     public int a(int i0, Random random, int i1) {
-        return Item.bY.cp;
+        return Item.bZ.cv;
     }
 
-    protected int i_(int i0) {
+    protected int k_(int i0) {
         return 2;
     }
 
     protected BlockRedstoneLogic i() {
-        return Block.cq;
+        return Block.cr;
     }
 
     protected BlockRedstoneLogic j() {
-        return Block.cp;
+        return Block.cq;
     }
 
     public int d() {
@@ -69,14 +69,14 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         int i8 = world.a(i6, i1, i7);
 
         if (i8 > 0) {
-            if (Block.r[i8].q_()) {
-                i4 = Block.r[i8].b_(world, i6, i1, i7, Direction.f[i5]);
+            if (Block.s[i8].q_()) {
+                i4 = Block.s[i8].b_(world, i6, i1, i7, Direction.f[i5]);
             } else if (i4 < 15 && Block.l(i8)) {
                 i6 += Direction.a[i5];
                 i7 += Direction.b[i5];
                 i8 = world.a(i6, i1, i7);
-                if (i8 > 0 && Block.r[i8].q_()) {
-                    i4 = Block.r[i8].b_(world, i6, i1, i7, Direction.f[i5]);
+                if (i8 > 0 && Block.s[i8].q_()) {
+                    i4 = Block.s[i8].b_(world, i6, i1, i7, Direction.f[i5]);
                 }
             }
         }
@@ -102,16 +102,16 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     }
 
     protected void f(World world, int i0, int i1, int i2, int i3) {
-        if (!world.a(i0, i1, i2, this.cz)) {
+        if (!world.a(i0, i1, i2, this.cF)) {
             int i4 = world.h(i0, i1, i2);
             int i5 = this.m(world, i0, i1, i2, i4);
             int i6 = this.a_(world, i0, i1, i2).a();
 
             if (i5 != i6 || this.c(i4) != this.d(world, i0, i1, i2, i4)) {
                 if (this.h(world, i0, i1, i2, i4)) {
-                    world.a(i0, i1, i2, this.cz, this.i_(0), -1);
+                    world.a(i0, i1, i2, this.cF, this.k_(0), -1);
                 } else {
-                    world.a(i0, i1, i2, this.cz, this.i_(0), 0);
+                    world.a(i0, i1, i2, this.cF, this.k_(0), 0);
                 }
             }
         }
@@ -141,7 +141,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         if (this.a) {
             int i3 = world.h(i0, i1, i2);
 
-            world.f(i0, i1, i2, this.j().cz, i3 | 8, 4);
+            world.f(i0, i1, i2, this.j().cF, i3 | 8, 4);
         }
 
         this.c(world, i0, i1, i2, random);

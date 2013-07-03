@@ -29,7 +29,12 @@ public class BlockLever extends Block {
     }
 
     public boolean c(World world, int i0, int i1, int i2, int i3) {
-        return i3 == 0 && world.u(i0, i1 + 1, i2) ? true : (i3 == 1 && world.w(i0, i1 - 1, i2) ? true : (i3 == 2 && world.u(i0, i1, i2 + 1) ? true : (i3 == 3 && world.u(i0, i1, i2 - 1) ? true : (i3 == 4 && world.u(i0 + 1, i1, i2) ? true : i3 == 5 && world.u(i0 - 1, i1, i2)))));
+        return i3 == 0 && world.u(i0, i1 + 1, i2) ? true : (i3 == 1
+                && world.w(i0, i1 - 1, i2) ? true : (i3 == 2
+                && world.u(i0, i1, i2 + 1) ? true : (i3 == 3
+                && world.u(i0, i1, i2 - 1) ? true : (i3 == 4
+                && world.u(i0 + 1, i1, i2) ? true : i3 == 5
+                && world.u(i0 - 1, i1, i2)))));
     }
 
     public boolean c(World world, int i0, int i1, int i2) {
@@ -68,19 +73,19 @@ public class BlockLever extends Block {
         return b0 + i5;
     }
 
-    public void a(World world, int i0, int i1, int i2, EntityLiving entityliving, ItemStack itemstack) {
+    public void a(World world, int i0, int i1, int i2, EntityLivingBase entitylivingbase, ItemStack itemstack) {
         int i3 = world.h(i0, i1, i2);
         int i4 = i3 & 7;
         int i5 = i3 & 8;
 
         if (i4 == d(1)) {
-            if ((MathHelper.c((double) (entityliving.A * 4.0F / 360.0F) + 0.5D) & 1) == 0) {
+            if ((MathHelper.c((double) (entitylivingbase.A * 4.0F / 360.0F) + 0.5D) & 1) == 0) {
                 world.b(i0, i1, i2, 5 | i5, 2);
             } else {
                 world.b(i0, i1, i2, 6 | i5, 2);
             }
         } else if (i4 == d(0)) {
-            if ((MathHelper.c((double) (entityliving.A * 4.0F / 360.0F) + 0.5D) & 1) == 0) {
+            if ((MathHelper.c((double) (entitylivingbase.A * 4.0F / 360.0F) + 0.5D) & 1) == 0) {
                 world.b(i0, i1, i2, 7 | i5, 2);
             } else {
                 world.b(i0, i1, i2, 0 | i5, 2);
@@ -208,22 +213,23 @@ public class BlockLever extends Block {
             //
 
             world.b(i0, i1, i2, i5 + i6, 3);
-            world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D, "random.click", 0.3F, i6 > 0 ? 0.6F : 0.5F);
-            world.f(i0, i1, i2, this.cz);
+            world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D,
+                    "random.click", 0.3F, i6 > 0 ? 0.6F : 0.5F);
+            world.f(i0, i1, i2, this.cF);
             if (i5 == 1) {
-                world.f(i0 - 1, i1, i2, this.cz);
+                world.f(i0 - 1, i1, i2, this.cF);
             } else if (i5 == 2) {
-                world.f(i0 + 1, i1, i2, this.cz);
+                world.f(i0 + 1, i1, i2, this.cF);
             } else if (i5 == 3) {
-                world.f(i0, i1, i2 - 1, this.cz);
+                world.f(i0, i1, i2 - 1, this.cF);
             } else if (i5 == 4) {
-                world.f(i0, i1, i2 + 1, this.cz);
+                world.f(i0, i1, i2 + 1, this.cF);
             } else if (i5 != 5 && i5 != 6) {
                 if (i5 == 0 || i5 == 7) {
-                    world.f(i0, i1 + 1, i2, this.cz);
+                    world.f(i0, i1 + 1, i2, this.cF);
                 }
             } else {
-                world.f(i0, i1 - 1, i2, this.cz);
+                world.f(i0, i1 - 1, i2, this.cF);
             }
 
             return true;
@@ -232,23 +238,23 @@ public class BlockLever extends Block {
 
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         if ((i4 & 8) > 0) {
-            world.f(i0, i1, i2, this.cz);
+            world.f(i0, i1, i2, this.cF);
             int i5 = i4 & 7;
 
             if (i5 == 1) {
-                world.f(i0 - 1, i1, i2, this.cz);
+                world.f(i0 - 1, i1, i2, this.cF);
             } else if (i5 == 2) {
-                world.f(i0 + 1, i1, i2, this.cz);
+                world.f(i0 + 1, i1, i2, this.cF);
             } else if (i5 == 3) {
-                world.f(i0, i1, i2 - 1, this.cz);
+                world.f(i0, i1, i2 - 1, this.cF);
             } else if (i5 == 4) {
-                world.f(i0, i1, i2 + 1, this.cz);
+                world.f(i0, i1, i2 + 1, this.cF);
             } else if (i5 != 5 && i5 != 6) {
                 if (i5 == 0 || i5 == 7) {
-                    world.f(i0, i1 + 1, i2, this.cz);
+                    world.f(i0, i1 + 1, i2, this.cF);
                 }
             } else {
-                world.f(i0, i1 - 1, i2, this.cz);
+                world.f(i0, i1 - 1, i2, this.cF);
             }
         }
 

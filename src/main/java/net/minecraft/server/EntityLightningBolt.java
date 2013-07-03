@@ -11,7 +11,7 @@ import net.canarymod.hook.world.IgnitionHook;
 public class EntityLightningBolt extends EntityWeatherEffect {
 
     private int b;
-    public long a = 0L;
+    public long a;
     private int c;
 
     public EntityLightningBolt(World world, double d0, double d1, double d2) {
@@ -21,12 +21,12 @@ public class EntityLightningBolt extends EntityWeatherEffect {
         this.a = this.ab.nextLong();
         this.c = this.ab.nextInt(3) + 1;
         this.entity = new CanaryLightningBolt(this); // CanaryMod: Wrap Entity
-        if (!world.I && world.r >= 2 && world.b(MathHelper.c(d0), MathHelper.c(d1), MathHelper.c(d2), 10)) {
+        if (!world.I && world.O().b("doFireTick") && world.r >= 2 && world.b(MathHelper.c(d0), MathHelper.c(d1), MathHelper.c(d2), 10)) {
             int i0 = MathHelper.c(d0);
             int i1 = MathHelper.c(d1);
             int i2 = MathHelper.c(d2);
 
-            if (world.a(i0, i1, i2) == 0 && Block.av.c(world, i0, i1, i2)) {
+            if (world.a(i0, i1, i2) == 0 && Block.aw.c(world, i0, i1, i2)) {
                 // CanaryMod: Ignition
                 CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
@@ -35,7 +35,7 @@ public class EntityLightningBolt extends EntityWeatherEffect {
 
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
-                    world.c(i0, i1, i2, Block.av.cz);
+                    world.c(i0, i1, i2, Block.aw.cF);
                 }
                 //
 
@@ -46,7 +46,7 @@ public class EntityLightningBolt extends EntityWeatherEffect {
                 i2 = MathHelper.c(d1) + this.ab.nextInt(3) - 1;
                 int i3 = MathHelper.c(d2) + this.ab.nextInt(3) - 1;
 
-                if (world.a(i1, i2, i3) == 0 && Block.av.c(world, i1, i2, i3)) {
+                if (world.a(i1, i2, i3) == 0 && Block.aw.c(world, i1, i2, i3)) {
                     // CanaryMod: Ignition
                     CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i1, i2, i3);
 
@@ -55,7 +55,7 @@ public class EntityLightningBolt extends EntityWeatherEffect {
 
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
-                        world.c(i1, i2, i3, Block.av.cz);
+                        world.c(i1, i2, i3, Block.aw.cF);
                     }
                     //
 
@@ -79,13 +79,13 @@ public class EntityLightningBolt extends EntityWeatherEffect {
                 --this.c;
                 this.b = 1;
                 this.a = this.ab.nextLong();
-                if (!this.q.I && this.q.b(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w), 10)) {
+                if (!this.q.I && this.q.O().b("doFireTick") && this.q.b(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w), 10)) {
                     int i0 = MathHelper.c(this.u);
                     int i1 = MathHelper.c(this.v);
                     int i2 = MathHelper.c(this.w);
 
-                    if (this.q.a(i0, i1, i2) == 0 && Block.av.c(this.q, i0, i1, i2)) {
-                        this.q.c(i0, i1, i2, Block.av.cz);
+                    if (this.q.a(i0, i1, i2) == 0 && Block.aw.c(this.q, i0, i1, i2)) {
+                        this.q.c(i0, i1, i2, Block.aw.cF);
                     }
                 }
             }

@@ -19,10 +19,12 @@ public class CommandWeather extends CommandBase {
         return 2;
     }
 
+    public String c(ICommandSender icommandsender) {
+        return "commands.weather.usage";
+    }
+
     public void b(ICommandSender icommandsender, String[] astring) {
-        if (astring.length < 1) {
-            throw new WrongUsageException("commands.weather.usage", new Object[0]);
-        } else {
+        if (astring.length >= 1 && astring.length <= 2) {
             int i0 = (300 + (new Random()).nextInt(600)) * 20;
 
             if (astring.length >= 2) {
@@ -30,10 +32,10 @@ public class CommandWeather extends CommandBase {
             }
 
             // CanaryMod: MutliWorld fix
-            for (net.canarymod.api.world.World w : MinecraftServer.D().worldManager.getAllWorlds()) {
+            for (net.canarymod.api.world.World w : MinecraftServer.F().worldManager.getAllWorlds()) {
                 WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
                 if (worldserver != null && worldserver.getCanaryWorld().getType() == DimensionType.fromId(0)) {
-                    WorldInfo worldinfo = worldserver.M();
+                    WorldInfo worldinfo = worldserver.N();
 
                     worldinfo.g(i0);
                     worldinfo.f(i0);
@@ -45,17 +47,24 @@ public class CommandWeather extends CommandBase {
                         worldinfo.b(true);
                         worldinfo.a(false);
                         a(icommandsender, "commands.weather.rain", new Object[0]);
-                    } else if ("thunder".equalsIgnoreCase(astring[0])) {
+                    } else {
+                        if (!"thunder".equalsIgnoreCase(astring[0])) {
+                            throw new WrongUsageException("commands.weather.usage", new Object[0]);
+                        }
+
                         worldinfo.b(true);
                         worldinfo.a(true);
                         a(icommandsender, "commands.weather.thunder", new Object[0]);
                     }
                 }
             }
+        } else {
+            throw new WrongUsageException("commands.weather.usage",
+                    new Object[0]);
         }
     }
 
     public List a(ICommandSender icommandsender, String[] astring) {
-        return astring.length == 1 ? a(astring, new String[] { "clear", "rain", "thunder"}) : null;
+        return astring.length == 1 ? a(astring, new String[]{ "clear", "rain", "thunder" }) : null;
     }
 }

@@ -12,14 +12,14 @@ public class EntityArrow extends Entity implements IProjectile {
     private int d = -1;
     private int e = -1;
     private int f = -1;
-    private int g = 0;
-    private int h = 0;
-    private boolean i = false;
-    public int a = 0;
-    public int b = 0;
+    private int g;
+    private int h;
+    private boolean i;
+    public int a;
+    public int b;
     public Entity c;
     private int j;
-    private int au = 0;
+    private int au;
     private double av = 2.0D;
     private int aw;
 
@@ -39,19 +39,19 @@ public class EntityArrow extends Entity implements IProjectile {
         this.entity = new CanaryArrow(this); // CanaryMod: Wrap Entity
     }
 
-    public EntityArrow(World world, EntityLiving entityliving, EntityLiving entityliving1, float f0, float f1) {
+    public EntityArrow(World world, EntityLivingBase entitylivingbase, EntityLivingBase entitylivingbase1, float f0, float f1) {
         super(world);
         this.l = 10.0D;
-        this.c = entityliving;
-        if (entityliving instanceof EntityPlayer) {
+        this.c = entitylivingbase;
+        if (entitylivingbase instanceof EntityPlayer) {
             this.a = 1;
         }
         this.entity = new CanaryArrow(this); // CanaryMod: Wrap Entity
 
-        this.v = entityliving.v + (double) entityliving.e() - 0.10000000149011612D;
-        double d0 = entityliving1.u - entityliving.u;
-        double d1 = entityliving1.E.b + (double) (entityliving1.P / 3.0F) - this.v;
-        double d2 = entityliving1.w - entityliving.w;
+        this.v = entitylivingbase.v + (double) entitylivingbase.f() - 0.10000000149011612D;
+        double d0 = entitylivingbase1.u - entitylivingbase.u;
+        double d1 = entitylivingbase1.E.b + (double) (entitylivingbase1.P / 3.0F) - this.v;
+        double d2 = entitylivingbase1.w - entitylivingbase.w;
         double d3 = (double) MathHelper.a(d0 * d0 + d2 * d2);
 
         if (d3 >= 1.0E-7D) {
@@ -60,7 +60,7 @@ public class EntityArrow extends Entity implements IProjectile {
             double d4 = d0 / d3;
             double d5 = d2 / d3;
 
-            this.b(entityliving.u + d4, this.v, entityliving.w + d5, f2, f3);
+            this.b(entitylivingbase.u + d4, this.v, entitylivingbase.w + d5, f2, f3);
             this.N = 0.0F;
             float f4 = (float) d3 * 0.2F;
 
@@ -68,17 +68,17 @@ public class EntityArrow extends Entity implements IProjectile {
         }
     }
 
-    public EntityArrow(World world, EntityLiving entityliving, float f0) {
+    public EntityArrow(World world, EntityLivingBase entitylivingbase, float f0) {
         super(world);
         this.l = 10.0D;
-        this.c = entityliving;
-        if (entityliving instanceof EntityPlayer) {
+        this.c = entitylivingbase;
+        if (entitylivingbase instanceof EntityPlayer) {
             this.a = 1;
         }
         this.entity = new CanaryArrow(this); // CanaryMod: Wrap Entity
 
         this.a(0.5F, 0.5F);
-        this.b(entityliving.u, entityliving.v + (double) entityliving.e(), entityliving.w, entityliving.A, entityliving.B);
+        this.b(entitylivingbase.u, entitylivingbase.v + (double) entitylivingbase.f(), entitylivingbase.w, entitylivingbase.A, entitylivingbase.B);
         this.u -= (double) (MathHelper.b(this.A / 180.0F * 3.1415927F) * 0.16F);
         this.v -= 0.10000000149011612D;
         this.w -= (double) (MathHelper.a(this.A / 180.0F * 3.1415927F) * 0.16F);
@@ -128,10 +128,10 @@ public class EntityArrow extends Entity implements IProjectile {
         int i0 = this.q.a(this.d, this.e, this.f);
 
         if (i0 > 0) {
-            Block.r[i0].a((IBlockAccess) this.q, this.d, this.e, this.f);
-            AxisAlignedBB axisalignedbb = Block.r[i0].b(this.q, this.d, this.e, this.f);
+            Block.s[i0].a((IBlockAccess) this.q, this.d, this.e, this.f);
+            AxisAlignedBB axisalignedbb = Block.s[i0].b(this.q, this.d, this.e, this.f);
 
-            if (axisalignedbb != null && axisalignedbb.a(this.q.U().a(this.u, this.v, this.w))) {
+            if (axisalignedbb != null && axisalignedbb.a(this.q.V().a(this.u, this.v, this.w))) {
                 this.i = true;
             }
         }
@@ -159,14 +159,14 @@ public class EntityArrow extends Entity implements IProjectile {
             }
         } else {
             ++this.au;
-            Vec3 vec3 = this.q.U().a(this.u, this.v, this.w);
-            Vec3 vec31 = this.q.U().a(this.u + this.x, this.v + this.y, this.w + this.z);
+            Vec3 vec3 = this.q.V().a(this.u, this.v, this.w);
+            Vec3 vec31 = this.q.V().a(this.u + this.x, this.v + this.y, this.w + this.z);
             MovingObjectPosition movingobjectposition = this.q.a(vec3, vec31, false, true);
 
-            vec3 = this.q.U().a(this.u, this.v, this.w);
-            vec31 = this.q.U().a(this.u + this.x, this.v + this.y, this.w + this.z);
+            vec3 = this.q.V().a(this.u, this.v, this.w);
+            vec31 = this.q.V().a(this.u + this.x, this.v + this.y, this.w + this.z);
             if (movingobjectposition != null) {
-                vec31 = this.q.U().a(movingobjectposition.f.c, movingobjectposition.f.d, movingobjectposition.f.e);
+                vec31 = this.q.V().a(movingobjectposition.f.c, movingobjectposition.f.d, movingobjectposition.f.e);
             }
 
             Entity entity = null;
@@ -202,7 +202,7 @@ public class EntityArrow extends Entity implements IProjectile {
             if (movingobjectposition != null && movingobjectposition.g != null && movingobjectposition.g instanceof EntityPlayer) {
                 EntityPlayer entityplayer = (EntityPlayer) movingobjectposition.g;
 
-                if (entityplayer.ce.a || this.c instanceof EntityPlayer && !((EntityPlayer) this.c).a(entityplayer)) {
+                if (entityplayer.bG.a || this.c instanceof EntityPlayer && !((EntityPlayer) this.c).a(entityplayer)) {
                     movingobjectposition = null;
                 }
             }
@@ -224,6 +224,7 @@ public class EntityArrow extends Entity implements IProjectile {
                         if (this.d()) {
                             i4 += this.ab.nextInt(i4 / 2 + 2);
                         }
+
                         DamageSource damagesource = null;
                         if (this.c == null) {
                             damagesource = DamageSource.a(this, this);
@@ -231,16 +232,16 @@ public class EntityArrow extends Entity implements IProjectile {
                             damagesource = DamageSource.a(this, this.c);
                         }
 
-                        if (this.ae() && !(movingobjectposition.g instanceof EntityEnderman)) {
+                        if (this.ad() && !(movingobjectposition.g instanceof EntityEnderman)) {
                             movingobjectposition.g.d(5);
                         }
 
-                        if (movingobjectposition.g.a(damagesource, i4)) {
-                            if (movingobjectposition.g instanceof EntityLiving) {
-                                EntityLiving entityliving = (EntityLiving) movingobjectposition.g;
+                        if (movingobjectposition.g.a(damagesource, (float) i4)) {
+                            if (movingobjectposition.g instanceof EntityLivingBase) {
+                                EntityLivingBase entitylivingbase = (EntityLivingBase) movingobjectposition.g;
 
                                 if (!this.q.I) {
-                                    entityliving.r(entityliving.bM() + 1);
+                                    entitylivingbase.m(entitylivingbase.aQ() + 1);
                                 }
 
                                 if (this.aw > 0) {
@@ -251,7 +252,7 @@ public class EntityArrow extends Entity implements IProjectile {
                                 }
 
                                 if (this.c != null) {
-                                    EnchantmentThorns.a(this.c, entityliving, this.ab);
+                                    EnchantmentThorns.a(this.c, entitylivingbase, this.ab);
                                 }
 
                                 if (this.c != null && movingobjectposition.g != this.c && movingobjectposition.g instanceof EntityPlayer && this.c instanceof EntityPlayerMP) {
@@ -289,7 +290,7 @@ public class EntityArrow extends Entity implements IProjectile {
                         this.b = 7;
                         this.a(false);
                         if (this.g != 0) {
-                            Block.r[this.g].a(this.q, this.d, this.e, this.f, (Entity) this);
+                            Block.s[this.g].a(this.q, this.d, this.e, this.f, (Entity) this);
                         }
                     }
                 }
@@ -379,9 +380,9 @@ public class EntityArrow extends Entity implements IProjectile {
 
     public void b_(EntityPlayer entityplayer) {
         if (!this.q.I && this.i && this.b <= 0) {
-            boolean flag0 = this.a == 1 || this.a == 2 && entityplayer.ce.d;
+            boolean flag0 = this.a == 1 || this.a == 2 && entityplayer.bG.d;
 
-            if (this.a == 1 && !entityplayer.bK.a(new ItemStack(Item.m, 1))) {
+            if (this.a == 1 && !entityplayer.bn.a(new ItemStack(Item.n, 1))) {
                 flag0 = false;
             }
 
@@ -393,7 +394,7 @@ public class EntityArrow extends Entity implements IProjectile {
         }
     }
 
-    protected boolean f_() {
+    protected boolean e_() {
         return false;
     }
 
@@ -409,7 +410,7 @@ public class EntityArrow extends Entity implements IProjectile {
         this.aw = i0;
     }
 
-    public boolean ap() {
+    public boolean ao() {
         return false;
     }
 

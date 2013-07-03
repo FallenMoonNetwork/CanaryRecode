@@ -156,7 +156,7 @@ public abstract class BlockButton extends Block {
             world.g(i0, i1, i2, i0, i1, i2);
             world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D, "random.click", 0.3F, 0.6F);
             this.d(world, i0, i1, i2, i5);
-            world.a(i0, i1, i2, this.cz, this.a(world));
+            world.a(i0, i1, i2, this.cF, this.a(world));
             return true;
         }
     }
@@ -234,7 +234,7 @@ public abstract class BlockButton extends Block {
         boolean flag0 = (i3 & 8) != 0;
 
         this.d(i3);
-        List list = world.a(EntityArrow.class, AxisAlignedBB.a().a((double) i0 + this.cG, (double) i1 + this.cH, (double) i2 + this.cI, (double) i0 + this.cJ, (double) i1 + this.cK, (double) i2 + this.cL));
+        List list = world.a(EntityArrow.class, AxisAlignedBB.a().a((double) i0 + this.cM, (double) i1 + this.cN, (double) i2 + this.cO, (double) i0 + this.cP, (double) i1 + this.cQ, (double) i2 + this.cR));
         boolean flag1 = !list.isEmpty();
 
         if (flag1 && !flag0) {
@@ -252,22 +252,22 @@ public abstract class BlockButton extends Block {
         }
 
         if (flag1) {
-            world.a(i0, i1, i2, this.cz, this.a(world));
+            world.a(i0, i1, i2, this.cF, this.a(world));
         }
     }
 
     private void d(World world, int i0, int i1, int i2, int i3) {
-        world.f(i0, i1, i2, this.cz);
+        world.f(i0, i1, i2, this.cF);
         if (i3 == 1) {
-            world.f(i0 - 1, i1, i2, this.cz);
+            world.f(i0 - 1, i1, i2, this.cF);
         } else if (i3 == 2) {
-            world.f(i0 + 1, i1, i2, this.cz);
+            world.f(i0 + 1, i1, i2, this.cF);
         } else if (i3 == 3) {
-            world.f(i0, i1, i2 - 1, this.cz);
+            world.f(i0, i1, i2 - 1, this.cF);
         } else if (i3 == 4) {
-            world.f(i0, i1, i2 + 1, this.cz);
+            world.f(i0, i1, i2 + 1, this.cF);
         } else {
-            world.f(i0, i1 - 1, i2, this.cz);
+            world.f(i0, i1 - 1, i2, this.cF);
         }
     }
 }

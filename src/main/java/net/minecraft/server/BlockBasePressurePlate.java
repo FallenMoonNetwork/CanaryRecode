@@ -15,14 +15,14 @@ public abstract class BlockBasePressurePlate extends Block {
         this.a = s0;
         this.a(CreativeTabs.d);
         this.b(true);
-        this.b_(this.d(15));
+        this.c_(this.d(15));
     }
 
     public void a(IBlockAccess iblockaccess, int i0, int i1, int i2) {
-        this.b_(iblockaccess.h(i0, i1, i2));
+        this.c_(iblockaccess.h(i0, i1, i2));
     }
 
-    protected void b_(int i0) {
+    protected void c_(int i0) {
         boolean flag0 = this.c(i0) > 0;
         float f0 = 0.0625F;
 
@@ -54,13 +54,13 @@ public abstract class BlockBasePressurePlate extends Block {
     }
 
     public boolean c(World world, int i0, int i1, int i2) {
-        return world.w(i0, i1 - 1, i2) || BlockFence.l_(world.a(i0, i1 - 1, i2));
+        return world.w(i0, i1 - 1, i2) || BlockFence.n_(world.a(i0, i1 - 1, i2));
     }
 
     public void a(World world, int i0, int i1, int i2, int i3) {
         boolean flag0 = false;
 
-        if (!world.w(i0, i1 - 1, i2) && !BlockFence.l_(world.a(i0, i1 - 1, i2))) {
+        if (!world.w(i0, i1 - 1, i2) && !BlockFence.n_(world.a(i0, i1 - 1, i2))) {
             flag0 = true;
         }
 
@@ -120,7 +120,7 @@ public abstract class BlockBasePressurePlate extends Block {
         }
 
         if (flag1) {
-            world.a(i0, i1, i2, this.cz, this.a(world));
+            world.a(i0, i1, i2, this.cF, this.a(world));
         }
     }
 
@@ -139,8 +139,8 @@ public abstract class BlockBasePressurePlate extends Block {
     }
 
     protected void b_(World world, int i0, int i1, int i2) {
-        world.f(i0, i1, i2, this.cz);
-        world.f(i0, i1 - 1, i2, this.cz);
+        world.f(i0, i1, i2, this.cF);
+        world.f(i0, i1 - 1, i2, this.cF);
     }
 
     public int b(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {

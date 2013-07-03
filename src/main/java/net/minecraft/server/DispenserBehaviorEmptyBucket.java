@@ -12,7 +12,7 @@ final class DispenserBehaviorEmptyBucket extends BehaviorDefaultDispenseItem {
     DispenserBehaviorEmptyBucket() {}
 
     public ItemStack b(IBlockSource iblocksource, ItemStack itemstack) {
-        EnumFacing enumfacing = BlockDispenser.j_(iblocksource.h());
+        EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
         World world = iblocksource.k();
         int i0 = iblocksource.d() + enumfacing.c();
         int i1 = iblocksource.e() + enumfacing.d();
@@ -22,24 +22,24 @@ final class DispenserBehaviorEmptyBucket extends BehaviorDefaultDispenseItem {
         Item item;
 
         if (Material.h.equals(material) && i3 == 0) {
-            item = Item.ay;
+            item = Item.az;
         } else {
             if (!Material.i.equals(material) || i3 != 0) {
                 return super.b(iblocksource, itemstack);
             }
 
-            item = Item.az;
+            item = Item.aA;
         }
 
         world.i(i0, i1, i2);
-        if (--itemstack.a == 0) {
+        if (--itemstack.b == 0) {
             // CanaryMod: Dispense
             DispenseHook hook = new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), null);
 
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
-                itemstack.c = item.cp;
-                itemstack.a = 1;
+                itemstack.d = item.cv;
+                itemstack.b = 1;
             }
             //
         } else if (((TileEntityDispenser) iblocksource.j()).a(new ItemStack(item)) < 0) {

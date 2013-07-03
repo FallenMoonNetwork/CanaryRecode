@@ -14,12 +14,10 @@ public class EntityExpBottle extends EntityThrowable {
         //
     }
 
-    public EntityExpBottle(World world, EntityLiving entityliving) {
-        super(world, entityliving);
-        // CanaryMod
+    public EntityExpBottle(World world, EntityLivingBase entitylivingbase) {
+        super(world, entitylivingbase);
         this.gravity = 0.07F;
         this.entity = new CanaryXPBottle(this); // Wrap Entity
-        //
     }
 
     public EntityExpBottle(World world, double d0, double d1, double d2) {
@@ -31,7 +29,7 @@ public class EntityExpBottle extends EntityThrowable {
     }
 
     // CanaryMod: remove unneeded method override
-    // protected float g() {
+    // protected float e() {
     // return 0.07F;
     // }
     //

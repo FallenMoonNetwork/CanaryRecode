@@ -17,8 +17,8 @@ public class CommandTime extends CommandBase {
         return 2;
     }
 
-    public String a(ICommandSender icommandsender) {
-        return icommandsender.a("commands.time.usage", new Object[0]);
+    public String c(ICommandSender icommandsender) {
+        return "commands.time.usage";
     }
 
     public void b(ICommandSender icommandsender, String[] astring) {
@@ -56,7 +56,7 @@ public class CommandTime extends CommandBase {
 
     protected void a(ICommandSender icommandsender, int i0) {
         // CanaryMod: MultiWorld fix
-        for (net.canarymod.api.world.World w : MinecraftServer.D().worldManager.getAllWorlds()) {
+        for (net.canarymod.api.world.World w : MinecraftServer.F().worldManager.getAllWorlds()) {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
 
             if (worldserver != null) {
@@ -71,7 +71,7 @@ public class CommandTime extends CommandBase {
             WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
 
             if (worldserver != null) {
-                worldserver.b(worldserver.I() + (long) i0);
+                worldserver.b(worldserver.J() + (long) i0);
             }
         }
     }

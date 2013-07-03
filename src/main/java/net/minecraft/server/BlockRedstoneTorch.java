@@ -12,7 +12,7 @@ import net.canarymod.hook.world.RedstoneChangeHook;
 
 public class BlockRedstoneTorch extends BlockTorch {
 
-    private boolean a = false;
+    private boolean a;
     private static Map b = new HashMap();
 
     private boolean a(World world, int i0, int i1, int i2, boolean flag0) {
@@ -23,7 +23,7 @@ public class BlockRedstoneTorch extends BlockTorch {
         List list = (List) b.get(world);
 
         if (flag0) {
-            list.add(new RedstoneUpdateInfo(i0, i1, i2, world.H()));
+            list.add(new RedstoneUpdateInfo(i0, i1, i2, world.I()));
         }
 
         int i3 = 0;
@@ -59,23 +59,23 @@ public class BlockRedstoneTorch extends BlockTorch {
         }
 
         if (this.a) {
-            world.f(i0, i1 - 1, i2, this.cz);
-            world.f(i0, i1 + 1, i2, this.cz);
-            world.f(i0 - 1, i1, i2, this.cz);
-            world.f(i0 + 1, i1, i2, this.cz);
-            world.f(i0, i1, i2 - 1, this.cz);
-            world.f(i0, i1, i2 + 1, this.cz);
+            world.f(i0, i1 - 1, i2, this.cF);
+            world.f(i0, i1 + 1, i2, this.cF);
+            world.f(i0 - 1, i1, i2, this.cF);
+            world.f(i0 + 1, i1, i2, this.cF);
+            world.f(i0, i1, i2 - 1, this.cF);
+            world.f(i0, i1, i2 + 1, this.cF);
         }
     }
 
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         if (this.a) {
-            world.f(i0, i1 - 1, i2, this.cz);
-            world.f(i0, i1 + 1, i2, this.cz);
-            world.f(i0 - 1, i1, i2, this.cz);
-            world.f(i0 + 1, i1, i2, this.cz);
-            world.f(i0, i1, i2 - 1, this.cz);
-            world.f(i0, i1, i2 + 1, this.cz);
+            world.f(i0, i1 - 1, i2, this.cF);
+            world.f(i0, i1 + 1, i2, this.cF);
+            world.f(i0 - 1, i1, i2, this.cF);
+            world.f(i0 + 1, i1, i2, this.cF);
+            world.f(i0, i1, i2 - 1, this.cF);
+            world.f(i0, i1, i2 + 1, this.cF);
         }
     }
 
@@ -99,13 +99,13 @@ public class BlockRedstoneTorch extends BlockTorch {
         boolean flag0 = this.m(world, i0, i1, i2);
         List list = (List) b.get(world);
 
-        while (list != null && !list.isEmpty() && world.H() - ((RedstoneUpdateInfo) list.get(0)).d > 60L) {
+        while (list != null && !list.isEmpty() && world.I() - ((RedstoneUpdateInfo) list.get(0)).d > 60L) {
             list.remove(0);
         }
 
         if (this.a) {
             if (flag0) {
-                world.f(i0, i1, i2, Block.aT.cz, world.h(i0, i1, i2), 3);
+                world.f(i0, i1, i2, Block.aU.cF, world.h(i0, i1, i2), 3);
 
                 // CanaryMod: RedstoneChange
                 RedstoneChangeHook hook = new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 1, 0);
@@ -116,7 +116,12 @@ public class BlockRedstoneTorch extends BlockTorch {
                 }
                 //
                 if (this.a(world, i0, i1, i2, true)) {
-                    world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
+                    world.a((double) ((float) i0 + 0.5F),
+                            (double) ((float) i1 + 0.5F),
+                            (double) ((float) i2 + 0.5F),
+                            "random.fizz",
+                            0.5F,
+                            2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
 
                     for (int i3 = 0; i3 < 5; ++i3) {
                         double d0 = (double) i0 + random.nextDouble() * 0.6D + 0.2D;
@@ -128,7 +133,7 @@ public class BlockRedstoneTorch extends BlockTorch {
                 }
             }
         } else if (!flag0 && !this.a(world, i0, i1, i2, false)) {
-            world.f(i0, i1, i2, Block.aU.cz, world.h(i0, i1, i2), 3);
+            world.f(i0, i1, i2, Block.aV.cF, world.h(i0, i1, i2), 3);
         }
     }
 
@@ -137,7 +142,7 @@ public class BlockRedstoneTorch extends BlockTorch {
             boolean flag0 = this.m(world, i0, i1, i2);
 
             if (this.a && flag0 || !this.a && !flag0) {
-                world.a(i0, i1, i2, this.cz, this.a(world));
+                world.a(i0, i1, i2, this.cF, this.a(world));
             }
         }
     }
@@ -147,7 +152,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     }
 
     public int a(int i0, Random random, int i1) {
-        return Block.aU.cz;
+        return Block.aV.cF;
     }
 
     public boolean f() {
@@ -155,6 +160,6 @@ public class BlockRedstoneTorch extends BlockTorch {
     }
 
     public boolean i(int i0) {
-        return i0 == Block.aT.cz || i0 == Block.aU.cz;
+        return i0 == Block.aU.cF || i0 == Block.aV.cF;
     }
 }

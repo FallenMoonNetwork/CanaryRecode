@@ -38,9 +38,22 @@ class CallableSuspiciousClasses implements Callable {
             if (oclass0 != null) {
                 String s1 = oclass0.getCanonicalName();
 
-                if (s1 != null && !s1.startsWith("org.lwjgl.") && !s1.startsWith("paulscode.") && !s1.startsWith("org.bouncycastle.") && !s1.startsWith("argo.") && !s1.startsWith("com.jcraft.") && !s1.startsWith("com.fasterxml.") && !s1.equals("util.GLX")) {
+                if (s1 != null && !s1.startsWith("org.lwjgl.")
+                        && !s1.startsWith("paulscode.")
+                        && !s1.startsWith("org.bouncycastle.")
+                        && !s1.startsWith("argo.")
+                        && !s1.startsWith("com.jcraft.")
+                        && !s1.startsWith("com.fasterxml.")
+                        && !s1.startsWith("com.google.")
+                        && !s1.startsWith("joptsimple.")
+                        && !s1.startsWith("org.apache.")
+                        && !s1.equals("util.GLX")) {
                     if (flag1) {
-                        if (s1.length() <= 3 || s1.equals("net.minecraft.client.MinecraftApplet") || s1.equals("net.minecraft.client.Minecraft") || s1.equals("net.minecraft.client.ClientBrandRetriever") || s1.equals("net.minecraft.server.MinecraftServer")) {
+                        if (s1.length() <= 3
+                                || s1.equals("net.minecraft.client.main.Main")
+                                || s1.equals("net.minecraft.client.Minecraft")
+                                || s1.equals("net.minecraft.client.ClientBrandRetriever")
+                                || s1.equals("net.minecraft.server.MinecraftServer")) {
                             continue;
                         }
                     } else if (s1.startsWith("net.minecraft")) {
@@ -74,15 +87,15 @@ class CallableSuspiciousClasses implements Callable {
                         hashmap.put(s2, Integer.valueOf(1));
                     }
 
-                    if (s0 != s2 && s0.length() > 0) {
+                    if (!s0.equals(s2) && s0.length() > 0) {
                         stringbuilder.append("], ");
                     }
 
-                    if (!flag0 && s0 == s2) {
+                    if (!flag0 && s0.equals(s2)) {
                         stringbuilder.append(", ");
                     }
 
-                    if (s0 != s2) {
+                    if (!s0.equals(s2)) {
                         stringbuilder.append("[");
                         stringbuilder.append(s2);
                         stringbuilder.append(".");

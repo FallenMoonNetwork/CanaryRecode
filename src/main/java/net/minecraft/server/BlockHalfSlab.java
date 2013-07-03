@@ -11,7 +11,7 @@ public abstract class BlockHalfSlab extends Block {
         super(i0, material);
         this.a = flag0;
         if (flag0) {
-            s[i0] = true;
+            t[i0] = true;
         } else {
             this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
         }

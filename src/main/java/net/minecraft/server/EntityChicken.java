@@ -6,81 +6,79 @@ import net.canarymod.api.entity.living.animal.CanaryChicken;
 
 public class EntityChicken extends EntityAnimal {
 
-    public boolean d = false;
-    public float e = 0.0F;
-    public float f = 0.0F;
-    public float g;
-    public float h;
-    public float i = 1.0F;
-    public int j;
+    public float bp;
+    public float bq;
+    public float br;
+    public float bs;
+    public float bt = 1.0F;
+    public int bu;
 
     public EntityChicken(World world) {
         super(world);
-        this.aH = "/mob/chicken.png";
         this.a(0.3F, 0.7F);
-        this.j = this.ab.nextInt(6000) + 6000;
-        float f0 = 0.25F;
-
-        this.bo.a(0, new EntityAISwimming(this));
-        this.bo.a(1, new EntityAIPanic(this, 0.38F));
-        this.bo.a(2, new EntityAIMate(this, f0));
-        this.bo.a(3, new EntityAITempt(this, 0.25F, Item.T.cp, false));
-        this.bo.a(4, new EntityAIFollowParent(this, 0.28F));
-        this.bo.a(5, new EntityAIWander(this, f0));
-        this.bo.a(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.bo.a(7, new EntityAILookIdle(this));
+        this.bu = this.ab.nextInt(6000) + 6000;
+        this.c.a(0, new EntityAISwimming(this));
+        this.c.a(1, new EntityAIPanic(this, 1.4D));
+        this.c.a(2, new EntityAIMate(this, 1.0D));
+        this.c.a(3, new EntityAITempt(this, 1.0D, Item.U.cv, false));
+        this.c.a(4, new EntityAIFollowParent(this, 1.1D));
+        this.c.a(5, new EntityAIWander(this, 1.0D));
+        this.c.a(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.c.a(7, new EntityAILookIdle(this));
         this.entity = new CanaryChicken(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean bh() {
+    public boolean bb() {
         return true;
     }
 
-    public int aW() {
-        return maxHealth == 0 ? 4 : maxHealth; // CanaryMod: custom Max
+    protected void ax() {
+        super.ax();
+        this.a(SharedMonsterAttributes.a).a(4.0D);
+        this.a(SharedMonsterAttributes.d).a(0.25D);
     }
 
     public void c() {
         super.c();
-        this.h = this.e;
-        this.g = this.f;
-        this.f = (float) ((double) this.f + (double) (this.F ? -1 : 4) * 0.3D);
-        if (this.f < 0.0F) {
-            this.f = 0.0F;
+        this.bs = this.bp;
+        this.br = this.bq;
+        this.bq = (float) ((double) this.bq + (double) (this.F ? -1 : 4) * 0.3D);
+        if (this.bq < 0.0F) {
+            this.bq = 0.0F;
         }
 
-        if (this.f > 1.0F) {
-            this.f = 1.0F;
+        if (this.bq > 1.0F) {
+            this.bq = 1.0F;
         }
 
-        if (!this.F && this.i < 1.0F) {
-            this.i = 1.0F;
+        if (!this.F && this.bt < 1.0F) {
+            this.bt = 1.0F;
         }
 
-        this.i = (float) ((double) this.i * 0.9D);
+        this.bt = (float) ((double) this.bt * 0.9D);
         if (!this.F && this.y < 0.0D) {
             this.y *= 0.6D;
         }
 
-        this.e += this.i * 2.0F;
-        if (!this.h_() && !this.q.I && --this.j <= 0) {
+        this.bp += this.bt * 2.0F;
+        if (!this.g_() && !this.q.I && --this.bu <= 0) {
             this.a("mob.chicken.plop", 1.0F, (this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F);
-            this.b(Item.aQ.cp, 1);
-            this.j = this.ab.nextInt(6000) + 6000;
+            this.b(Item.aR.cv, 1);
+            this.bu = this.ab.nextInt(6000) + 6000;
         }
     }
 
-    protected void a(float f0) {}
+    protected void b(float f0) {}
 
-    protected String bb() {
+    protected String r() {
         return "mob.chicken.say";
     }
 
-    protected String bc() {
+    protected String aK() {
         return "mob.chicken.hurt";
     }
 
-    protected String bd() {
+    protected String aL() {
         return "mob.chicken.hurt";
     }
 
@@ -88,21 +86,21 @@ public class EntityChicken extends EntityAnimal {
         this.a("mob.chicken.step", 0.15F, 1.0F);
     }
 
-    protected int be() {
-        return Item.M.cp;
+    protected int s() {
+        return Item.N.cv;
     }
 
-    protected void a(boolean flag0, int i0) {
+    protected void b(boolean flag0, int i0) {
         int i1 = this.ab.nextInt(3) + this.ab.nextInt(1 + i0);
 
         for (int i2 = 0; i2 < i1; ++i2) {
-            this.b(Item.M.cp, 1);
+            this.b(Item.N.cv, 1);
         }
 
-        if (this.ae()) {
-            this.b(Item.bm.cp, 1);
+        if (this.ad()) {
+            this.b(Item.bn.cv, 1);
         } else {
-            this.b(Item.bl.cp, 1);
+            this.b(Item.bm.cv, 1);
         }
     }
 

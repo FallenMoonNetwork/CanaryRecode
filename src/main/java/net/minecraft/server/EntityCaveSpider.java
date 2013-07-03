@@ -8,18 +8,18 @@ public class EntityCaveSpider extends EntitySpider {
 
     public EntityCaveSpider(World world) {
         super(world);
-        this.aH = "/mob/cavespider.png";
         this.a(0.7F, 0.5F);
         this.entity = new CanaryCaveSpider(this); // CanaryMod: Wrap Entity
     }
 
-    public int aW() {
-        return maxHealth == 0 ? 12 : maxHealth; // CanaryMod: custom Max
+    protected void ax() {
+        super.ax();
+        this.a(SharedMonsterAttributes.a).a(12.0D);
     }
 
     public boolean m(Entity entity) {
         if (super.m(entity)) {
-            if (entity instanceof EntityLiving) {
+            if (entity instanceof EntityLivingBase) {
                 byte b0 = 0;
 
                 if (this.q.r > 1) {
@@ -31,7 +31,7 @@ public class EntityCaveSpider extends EntitySpider {
                 }
 
                 if (b0 > 0) {
-                    ((EntityLiving) entity).d(new PotionEffect(Potion.u.H, b0 * 20, 0));
+                    ((EntityLivingBase) entity).d(new PotionEffect(Potion.u.H, b0 * 20, 0));
                 }
             }
 
@@ -41,5 +41,7 @@ public class EntityCaveSpider extends EntitySpider {
         }
     }
 
-    public void bJ() {}
+    public EntityLivingData a(EntityLivingData entitylivingdata) {
+        return entitylivingdata;
+    }
 }

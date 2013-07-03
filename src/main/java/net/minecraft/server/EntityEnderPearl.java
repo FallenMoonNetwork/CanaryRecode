@@ -11,14 +11,14 @@ public class EntityEnderPearl extends EntityThrowable {
         this.entity = new CanaryEnderPearl(this); // CanaryMod: Wrap Entity
     }
 
-    public EntityEnderPearl(World world, EntityLiving entityliving) {
-        super(world, entityliving);
+    public EntityEnderPearl(World world, EntityLivingBase entitylivingbase) {
+        super(world, entitylivingbase);
         this.entity = new CanaryEnderPearl(this); // CanaryMod: Wrap Entity
     }
 
     protected void a(MovingObjectPosition movingobjectposition) {
         if (movingobjectposition.g != null) {
-            movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), 0);
+            movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), 0.0F);
         }
 
         for (int i0 = 0; i0 < 32; ++i0) {
@@ -30,9 +30,13 @@ public class EntityEnderPearl extends EntityThrowable {
                 EntityPlayerMP entityplayermp = (EntityPlayerMP) this.h();
 
                 if (!entityplayermp.a.b && entityplayermp.q == this.q) {
+                    if (this.h().ae()) {
+                        this.h().a((Entity) null);
+                    }
+
                     this.h().a(this.u, this.v, this.w);
                     this.h().T = 0.0F;
-                    this.h().a(DamageSource.h, 5);
+                    this.h().a(DamageSource.h, 5.0F);
                 }
             }
 

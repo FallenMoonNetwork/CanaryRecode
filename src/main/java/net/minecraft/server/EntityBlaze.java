@@ -6,18 +6,23 @@ import net.canarymod.api.entity.living.monster.CanaryBlaze;
 
 public class EntityBlaze extends EntityMob {
 
-    private float d = 0.5F;
-    private int e;
-    private int f;
+    private float bp = 0.5F;
+    private int bq;
+    private int br;
 
     public EntityBlaze(World world) {
         super(world);
-        this.aH = "/mob/fire.png";
         this.ag = true;
-        this.be = 10;
+        this.b = 10;
         this.entity = new CanaryBlaze(this); // CanaryMod: Wrap Entity
     }
 
+    protected void ax() {
+        super.ax();
+        this.a(SharedMonsterAttributes.e).a(6.0D);
+    }
+
+//MERGE: Deprecated? - Chris
     public int aW() {
         return maxHealth == 0 ? 20 : maxHealth; // CanaryMod: custom Max
     }
@@ -27,35 +32,35 @@ public class EntityBlaze extends EntityMob {
         this.ah.a(16, new Byte((byte) 0));
     }
 
-    protected String bb() {
+    protected String r() {
         return "mob.blaze.breathe";
     }
 
-    protected String bc() {
+    protected String aK() {
         return "mob.blaze.hit";
     }
 
-    protected String bd() {
+    protected String aL() {
         return "mob.blaze.death";
     }
 
-    public float c(float f0) {
+    public float d(float f0) {
         return 1.0F;
     }
 
     public void c() {
         if (!this.q.I) {
             if (this.F()) {
-                this.a(DamageSource.e, 1);
+                this.a(DamageSource.e, 1.0F);
             }
 
-            --this.e;
-            if (this.e <= 0) {
-                this.e = 100;
-                this.d = 0.5F + (float) this.ab.nextGaussian() * 3.0F;
+            --this.bq;
+            if (this.bq <= 0) {
+                this.bq = 100;
+                this.bp = 0.5F + (float) this.ab.nextGaussian() * 3.0F;
             }
 
-            if (this.l() != null && this.l().v + (double) this.l().e() > this.v + (double) this.e() + (double) this.d) {
+            if (this.bJ() != null && this.bJ().v + (double) this.bJ().f() > this.v + (double) this.f() + (double) this.bp) {
                 this.y += (0.30000001192092896D - this.y) * 0.30000001192092896D;
             }
         }
@@ -76,28 +81,28 @@ public class EntityBlaze extends EntityMob {
     }
 
     protected void a(Entity entity, float f0) {
-        if (this.ba <= 0 && f0 < 2.0F && entity.E.e > this.E.b && entity.E.b < this.E.e) {
-            this.ba = 20;
+        if (this.aC <= 0 && f0 < 2.0F && entity.E.e > this.E.b && entity.E.b < this.E.e) {
+            this.aC = 20;
             this.m(entity);
         } else if (f0 < 30.0F) {
             double d0 = entity.u - this.u;
             double d1 = entity.E.b + (double) (entity.P / 2.0F) - (this.v + (double) (this.P / 2.0F));
             double d2 = entity.w - this.w;
 
-            if (this.ba == 0) {
-                ++this.f;
-                if (this.f == 1) {
-                    this.ba = 60;
+            if (this.aC == 0) {
+                ++this.br;
+                if (this.br == 1) {
+                    this.aC = 60;
                     this.a(true);
-                } else if (this.f <= 4) {
-                    this.ba = 6;
+                } else if (this.br <= 4) {
+                    this.aC = 6;
                 } else {
-                    this.ba = 100;
-                    this.f = 0;
+                    this.aC = 100;
+                    this.br = 0;
                     this.a(false);
                 }
 
-                if (this.f > 1) {
+                if (this.br > 1) {
                     float f1 = MathHelper.c(f0) * 0.5F;
 
                     this.q.a((EntityPlayer) null, 1009, (int) this.u, (int) this.v, (int) this.w, 0);
@@ -112,31 +117,31 @@ public class EntityBlaze extends EntityMob {
             }
 
             this.A = (float) (Math.atan2(d2, d0) * 180.0D / 3.1415927410125732D) - 90.0F;
-            this.b = true;
+            this.bn = true;
         }
     }
 
-    protected void a(float f0) {}
+    protected void b(float f0) {}
 
-    protected int be() {
-        return Item.bp.cp;
+    protected int s() {
+        return Item.bq.cv;
     }
 
-    public boolean ae() {
-        return this.m();
+    public boolean ad() {
+        return this.bP();
     }
 
-    protected void a(boolean flag0, int i0) {
+    protected void b(boolean flag0, int i0) {
         if (flag0) {
             int i1 = this.ab.nextInt(2 + i0);
 
             for (int i2 = 0; i2 < i1; ++i2) {
-                this.b(Item.bp.cp, 1);
+                this.b(Item.bq.cv, 1);
             }
         }
     }
 
-    public boolean m() {
+    public boolean bP() {
         return (this.ah.a(16) & 1) != 0;
     }
 
@@ -154,9 +159,5 @@ public class EntityBlaze extends EntityMob {
 
     protected boolean i_() {
         return true;
-    }
-
-    public int c(Entity entity) {
-        return 6;
     }
 }

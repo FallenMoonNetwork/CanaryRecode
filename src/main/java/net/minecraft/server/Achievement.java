@@ -6,9 +6,9 @@ public class Achievement extends StatBase {
     public final int a;
     public final int b;
     public final Achievement c;
-    private final String k;
+    private final String l;
     public final ItemStack d;
-    private boolean m;
+    private boolean n;
 
     public Achievement(int i0, String s0, int i1, int i2, Item item, Achievement achievement) {
         this(i0, s0, i1, i2, new ItemStack(item), achievement);
@@ -21,7 +21,7 @@ public class Achievement extends StatBase {
     public Achievement(int i0, String s0, int i1, int i2, ItemStack itemstack, Achievement achievement) {
         super(5242880 + i0, "achievement." + s0);
         this.d = itemstack;
-        this.k = "achievement." + s0 + ".desc";
+        this.l = "achievement." + s0 + ".desc";
         this.a = i1;
         this.b = i2;
         if (i1 < AchievementList.a) {
@@ -49,7 +49,7 @@ public class Achievement extends StatBase {
     }
 
     public Achievement b() {
-        this.m = true;
+        this.n = true;
         return this;
     }
 

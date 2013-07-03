@@ -18,12 +18,12 @@ public class BlockStationary extends BlockFluid {
     }
 
     public boolean b(IBlockAccess iblockaccess, int i0, int i1, int i2) {
-        return this.cO != Material.i;
+        return this.cU != Material.i;
     }
 
     public void a(World world, int i0, int i1, int i2, int i3) {
         super.a(world, i0, i1, i2, i3);
-        if (world.a(i0, i1, i2) == this.cz) {
+        if (world.a(i0, i1, i2) == this.cF) {
             this.k(world, i0, i1, i2);
         }
     }
@@ -31,12 +31,12 @@ public class BlockStationary extends BlockFluid {
     private void k(World world, int i0, int i1, int i2) {
         int i3 = world.h(i0, i1, i2);
 
-        world.f(i0, i1, i2, this.cz - 1, i3, 2);
-        world.a(i0, i1, i2, this.cz - 1, this.a(world));
+        world.f(i0, i1, i2, this.cF - 1, i3, 2);
+        world.a(i0, i1, i2, this.cF - 1, this.a(world));
     }
 
     public void a(World world, int i0, int i1, int i2, Random random) {
-        if (this.cO == Material.i) {
+        if (this.cU == Material.i) {
             int i3 = random.nextInt(3);
 
             // CanaryMod: Ignition
@@ -60,11 +60,16 @@ public class BlockStationary extends BlockFluid {
                 i2 += random.nextInt(3) - 1;
                 i5 = world.a(i0, i1, i2);
                 if (i5 == 0) {
-                    if (this.m(world, i0 - 1, i1, i2) || this.m(world, i0 + 1, i1, i2) || this.m(world, i0, i1, i2 - 1) || this.m(world, i0, i1, i2 + 1) || this.m(world, i0, i1 - 1, i2) || this.m(world, i0, i1 + 1, i2)) {
-                        world.c(i0, i1, i2, Block.av.cz);
+                    if (this.m(world, i0 - 1, i1, i2)
+                            || this.m(world, i0 + 1, i1, i2)
+                            || this.m(world, i0, i1, i2 - 1)
+                            || this.m(world, i0, i1, i2 + 1)
+                            || this.m(world, i0, i1 - 1, i2)
+                            || this.m(world, i0, i1 + 1, i2)) {
+                        world.c(i0, i1, i2, Block.aw.cF);
                         return;
                     }
-                } else if (Block.r[i5].cO.c()) {
+                } else if (Block.s[i5].cU.c()) {
                     return;
                 }
             }
@@ -77,7 +82,7 @@ public class BlockStationary extends BlockFluid {
                     i0 = i4 + random.nextInt(3) - 1;
                     i2 = i5 + random.nextInt(3) - 1;
                     if (world.c(i0, i1 + 1, i2) && this.m(world, i0, i1, i2)) {
-                        world.c(i0, i1 + 1, i2, Block.av.cz);
+                        world.c(i0, i1 + 1, i2, Block.aw.cF);
                     }
                 }
             }

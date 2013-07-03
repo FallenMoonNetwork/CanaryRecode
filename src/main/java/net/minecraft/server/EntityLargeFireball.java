@@ -15,8 +15,8 @@ public class EntityLargeFireball extends EntityFireball {
         this.entity = new CanaryLargeFireball(this); // CanaryMod: Wrap entity
     }
 
-    public EntityLargeFireball(World world, EntityLiving entityliving, double d0, double d1, double d2) {
-        super(world, entityliving, d0, d1, d2);
+    public EntityLargeFireball(World world, EntityLivingBase entitylivingbase, double d0, double d1, double d2) {
+        super(world, entitylivingbase, d0, d1, d2);
         this.entity = new CanaryLargeFireball(this); // CanaryMod: Wrap entity
     }
 
@@ -31,7 +31,7 @@ public class EntityLargeFireball extends EntityFireball {
                     movingobjectposition.g.a(DamageSource.a((EntityFireball) this, this.a), 6);
                 }
 
-                this.q.a((Entity) null, this.u, this.v, this.w, (float) this.e, true, this.q.N().b("mobGriefing"));
+                this.q.a((Entity) null, this.u, this.v, this.w, (float) this.e, true, this.q.O().b("mobGriefing"));
                 this.w();
             }
         }

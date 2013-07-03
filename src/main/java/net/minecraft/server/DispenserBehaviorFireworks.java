@@ -10,7 +10,7 @@ final class DispenserBehaviorFireworks extends BehaviorDefaultDispenseItem {
     DispenserBehaviorFireworks() {}
 
     public ItemStack b(IBlockSource iblocksource, ItemStack itemstack) {
-        EnumFacing enumfacing = BlockDispenser.j_(iblocksource.h());
+        EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
         double d0 = iblocksource.a() + (double) enumfacing.c();
         double d1 = (double) ((float) iblocksource.e() + 0.2F);
         double d2 = iblocksource.c() + (double) enumfacing.e();

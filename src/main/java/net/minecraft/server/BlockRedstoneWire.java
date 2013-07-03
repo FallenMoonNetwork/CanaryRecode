@@ -36,7 +36,7 @@ public class BlockRedstoneWire extends Block {
     }
 
     public boolean c(World world, int i0, int i1, int i2) {
-        return world.w(i0, i1 - 1, i2) || world.a(i0, i1 - 1, i2) == Block.bh.cz;
+        return world.w(i0, i1 - 1, i2) || world.a(i0, i1 - 1, i2) == Block.bi.cF;
     }
 
     private void k(World world, int i0, int i1, int i2) {
@@ -48,7 +48,7 @@ public class BlockRedstoneWire extends Block {
         for (int i3 = 0; i3 < arraylist.size(); ++i3) {
             ChunkPosition chunkposition = (ChunkPosition) arraylist.get(i3);
 
-            world.f(chunkposition.a, chunkposition.b, chunkposition.c, this.cz);
+            world.f(chunkposition.a, chunkposition.b, chunkposition.c, this.cF);
         }
     }
 
@@ -136,14 +136,14 @@ public class BlockRedstoneWire extends Block {
     }
 
     private void m(World world, int i0, int i1, int i2) {
-        if (world.a(i0, i1, i2) == this.cz) {
-            world.f(i0, i1, i2, this.cz);
-            world.f(i0 - 1, i1, i2, this.cz);
-            world.f(i0 + 1, i1, i2, this.cz);
-            world.f(i0, i1, i2 - 1, this.cz);
-            world.f(i0, i1, i2 + 1, this.cz);
-            world.f(i0, i1 - 1, i2, this.cz);
-            world.f(i0, i1 + 1, i2, this.cz);
+        if (world.a(i0, i1, i2) == this.cF) {
+            world.f(i0, i1, i2, this.cF);
+            world.f(i0 - 1, i1, i2, this.cF);
+            world.f(i0 + 1, i1, i2, this.cF);
+            world.f(i0, i1, i2 - 1, this.cF);
+            world.f(i0, i1, i2 + 1, this.cF);
+            world.f(i0, i1 - 1, i2, this.cF);
+            world.f(i0, i1 + 1, i2, this.cF);
         }
     }
 
@@ -151,8 +151,8 @@ public class BlockRedstoneWire extends Block {
         super.a(world, i0, i1, i2);
         if (!world.I) {
             this.k(world, i0, i1, i2);
-            world.f(i0, i1 + 1, i2, this.cz);
-            world.f(i0, i1 - 1, i2, this.cz);
+            world.f(i0, i1 + 1, i2, this.cF);
+            world.f(i0, i1 - 1, i2, this.cF);
             this.m(world, i0 - 1, i1, i2);
             this.m(world, i0 + 1, i1, i2);
             this.m(world, i0, i1, i2 - 1);
@@ -186,12 +186,12 @@ public class BlockRedstoneWire extends Block {
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         super.a(world, i0, i1, i2, i3, i4);
         if (!world.I) {
-            world.f(i0, i1 + 1, i2, this.cz);
-            world.f(i0, i1 - 1, i2, this.cz);
-            world.f(i0 + 1, i1, i2, this.cz);
-            world.f(i0 - 1, i1, i2, this.cz);
-            world.f(i0, i1, i2 + 1, this.cz);
-            world.f(i0, i1, i2 - 1, this.cz);
+            world.f(i0, i1 + 1, i2, this.cF);
+            world.f(i0, i1 - 1, i2, this.cF);
+            world.f(i0 + 1, i1, i2, this.cF);
+            world.f(i0 - 1, i1, i2, this.cF);
+            world.f(i0, i1, i2 + 1, this.cF);
+            world.f(i0, i1, i2 - 1, this.cF);
             this.k(world, i0, i1, i2);
             this.m(world, i0 - 1, i1, i2);
             this.m(world, i0 + 1, i1, i2);
@@ -224,7 +224,7 @@ public class BlockRedstoneWire extends Block {
     }
 
     private int d(World world, int i0, int i1, int i2, int i3) {
-        if (world.a(i0, i1, i2) != this.cz) {
+        if (world.a(i0, i1, i2) != this.cF) {
             return i3;
         } else {
             int i4 = world.h(i0, i1, i2);
@@ -249,7 +249,7 @@ public class BlockRedstoneWire extends Block {
     }
 
     public int a(int i0, Random random, int i1) {
-        return Item.aD.cp;
+        return Item.aE.cv;
     }
 
     public int c(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
@@ -302,12 +302,12 @@ public class BlockRedstoneWire extends Block {
     public static boolean f(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
         int i4 = iblockaccess.a(i0, i1, i2);
 
-        if (i4 == Block.az.cz) {
+        if (i4 == Block.aA.cF) {
             return true;
         } else if (i4 == 0) {
             return false;
-        } else if (!Block.bl.g(i4)) {
-            return Block.r[i4].f() && i3 != -1;
+        } else if (!Block.bm.g(i4)) {
+            return Block.s[i4].f() && i3 != -1;
         } else {
             int i5 = iblockaccess.h(i0, i1, i2);
 
@@ -321,7 +321,7 @@ public class BlockRedstoneWire extends Block {
         } else {
             int i4 = iblockaccess.a(i0, i1, i2);
 
-            if (i4 == Block.bm.cz) {
+            if (i4 == Block.bn.cF) {
                 int i5 = iblockaccess.h(i0, i1, i2);
 
                 return i3 == (i5 & 3);

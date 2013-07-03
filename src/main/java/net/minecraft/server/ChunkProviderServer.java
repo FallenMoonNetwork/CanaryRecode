@@ -51,7 +51,7 @@ public class ChunkProviderServer implements IChunkProvider {
 
     public void b(int i0, int i1) {
         if (this.h.t.e()) {
-            ChunkCoordinates chunkcoordinates = this.h.J();
+            ChunkCoordinates chunkcoordinates = this.h.K();
             int i2 = i0 * 16 + 8 - chunkcoordinates.a;
             int i3 = i1 * 16 + 8 - chunkcoordinates.c;
             short short1 = 128;
@@ -98,8 +98,7 @@ public class ChunkProviderServer implements IChunkProvider {
                 //
                 else if (this.d == null) {
                     chunk = this.c;
-                }
-                else {
+                } else {
                     try {
                         chunk = this.d.d(i0, i1);
                     } catch (Throwable throwable) {
@@ -128,8 +127,10 @@ public class ChunkProviderServer implements IChunkProvider {
                     this.a(this, i0, i1);
                 }
             }
+
             chunk.a(this, this, i0, i1);
         }
+
         return chunk;
     }
 
@@ -147,7 +148,7 @@ public class ChunkProviderServer implements IChunkProvider {
                 Chunk chunk = this.e.a(this.h, i0, i1);
 
                 if (chunk != null) {
-                    chunk.n = this.h.H();
+                    chunk.n = this.h.I();
                     if (this.d != null) {
                         this.d.e(i0, i1);
                     }
@@ -176,7 +177,7 @@ public class ChunkProviderServer implements IChunkProvider {
     public void b(Chunk chunk) {
         if (this.e != null) {
             try {
-                chunk.n = this.h.H();
+                chunk.n = this.h.I();
                 this.e.a(this.h, chunk);
             } catch (IOException ioexception) {
                 ioexception.printStackTrace();

@@ -13,8 +13,8 @@ public class EntityEgg extends EntityThrowable {
         this.entity = new CanaryChickenEgg(this); // CanaryMod: Wrap Entity
     }
 
-    public EntityEgg(World world, EntityLiving entityliving) {
-        super(world, entityliving);
+    public EntityEgg(World world, EntityLivingBase entitylivingbase) {
+        super(world, entitylivingbase);
         this.entity = new CanaryChickenEgg(this); // CanaryMod: Wrap Entity
     }
 
@@ -43,7 +43,7 @@ public class EntityEgg extends EntityThrowable {
                 for (int i0 = 0; i0 < b0; ++i0) {
                     EntityChicken entitychicken = new EntityChicken(this.q);
 
-                    entitychicken.a(-24000);
+                    entitychicken.c(-24000);
                     entitychicken.b(this.u, this.v, this.w, this.A, 0.0F);
                     this.q.d((Entity) entitychicken);
                 }

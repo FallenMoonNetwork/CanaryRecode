@@ -5,10 +5,10 @@ public class BlockWall extends Block {
     public static final String[] a = new String[] { "normal", "mossy"};
 
     public BlockWall(int i0, Block block) {
-        super(i0, block.cO);
-        this.c(block.cA);
-        this.b(block.cB / 3.0F);
-        this.a(block.cM);
+        super(i0, block.cU);
+        this.c(block.cG);
+        this.b(block.cH / 3.0F);
+        this.a(block.cS);
         this.a(CreativeTabs.b);
     }
 
@@ -69,18 +69,18 @@ public class BlockWall extends Block {
     }
 
     public AxisAlignedBB b(World world, int i0, int i1, int i2) {
-        this.a((IBlockAccess) world, i0, i1, i2);
-        this.cK = 1.5D;
+        this.a((IBlockAccess) world, i0, i1, i2); //CanaryMod Cast to IBlockAccess
+        this.cQ = 1.5D;
         return super.b(world, i0, i1, i2);
     }
 
     public boolean d(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         int i3 = iblockaccess.a(i0, i1, i2);
 
-        if (i3 != this.cz && i3 != Block.bz.cz) {
-            Block block = Block.r[i3];
+        if (i3 != this.cF && i3 != Block.bA.cF) {
+            Block block = Block.s[i3];
 
-            return block != null && block.cO.k() && block.b() ? block.cO != Material.A : false;
+            return block != null && block.cU.k() && block.b() ? block.cU != Material.B : false;
         } else {
             return true;
         }

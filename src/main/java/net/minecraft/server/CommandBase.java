@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-
+import com.google.common.primitives.Doubles;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -9,14 +9,14 @@ import java.util.List;
 
 public abstract class CommandBase implements ICommand {
 
-    private static IAdminCommand a = null;
+    private static IAdminCommand a;
 
     public CommandBase() {}
 
     public int a() {
         return 4;
     }
-
+//MERGE Is this deprecated now? - Chris
     public String a(ICommandSender icommandsender) {
         return "/" + this.c();
     }
@@ -25,7 +25,7 @@ public abstract class CommandBase implements ICommand {
         return null;
     }
 
-    public boolean b(ICommandSender icommandsender) {
+    public boolean a(ICommandSender icommandsender) {
         return icommandsender.a(this.a(), this.c());
     }
 
@@ -37,7 +37,7 @@ public abstract class CommandBase implements ICommand {
         try {
             return Integer.parseInt(s0);
         } catch (NumberFormatException numberformatexception) {
-            throw new NumberInvalidException("commands.generic.num.invalid", new Object[] { s0});
+            throw new NumberInvalidException("commands.generic.num.invalid", new Object[]{ s0 });
         }
     }
 
@@ -59,13 +59,53 @@ public abstract class CommandBase implements ICommand {
 
     public static double b(ICommandSender icommandsender, String s0) {
         try {
-            return Double.parseDouble(s0);
+            double d0 = Double.parseDouble(s0);
+
+            if (!Doubles.isFinite(d0)) {
+                throw new NumberInvalidException(
+                        "commands.generic.double.invalid", new Object[]{ s0 });
+            } else {
+                return d0;
+            }
         } catch (NumberFormatException numberformatexception) {
             throw new NumberInvalidException("commands.generic.double.invalid", new Object[] { s0});
         }
     }
 
-    public static EntityPlayerMP c(ICommandSender icommandsender) {
+    public static double a(ICommandSender icommandsender, String s0, double d0) {
+        return a(icommandsender, s0, d0, Double.MAX_VALUE);
+    }
+
+    public static double a(ICommandSender icommandsender, String s0, double d0,
+            double d1) {
+        double d2 = b(icommandsender, s0);
+
+        if (d2 < d0) {
+            throw new NumberInvalidException(
+                    "commands.generic.double.tooSmall", new Object[]{
+                            Double.valueOf(d2), Double.valueOf(d0) });
+        } else if (d2 > d1) {
+            throw new NumberInvalidException("commands.generic.double.tooBig",
+                    new Object[]{ Double.valueOf(d2), Double.valueOf(d1) });
+        } else {
+            return d2;
+        }
+    }
+
+    public static boolean c(ICommandSender icommandsender, String s0) {
+        if (!s0.equals("true") && !s0.equals("1")) {
+            if (!s0.equals("false") && !s0.equals("0")) {
+                throw new CommandException("commands.generic.boolean.invalid",
+                        new Object[]{ s0 });
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    public static EntityPlayerMP b(ICommandSender icommandsender) {
         if (icommandsender instanceof EntityPlayerMP) {
             return (EntityPlayerMP) icommandsender;
         } else {
@@ -73,13 +113,13 @@ public abstract class CommandBase implements ICommand {
         }
     }
 
-    public static EntityPlayerMP c(ICommandSender icommandsender, String s0) {
+    public static EntityPlayerMP d(ICommandSender icommandsender, String s0) {
         EntityPlayerMP entityplayermp = PlayerSelector.a(icommandsender, s0);
 
         if (entityplayermp != null) {
             return entityplayermp;
         } else {
-            entityplayermp = MinecraftServer.D().ad().f(s0);
+            entityplayermp = MinecraftServer.F().af().f(s0);
             if (entityplayermp == null) {
                 throw new PlayerNotFoundException();
             } else {
@@ -88,11 +128,11 @@ public abstract class CommandBase implements ICommand {
         }
     }
 
-    public static String d(ICommandSender icommandsender, String s0) {
+    public static String e(ICommandSender icommandsender, String s0) {
         EntityPlayerMP entityplayermp = PlayerSelector.a(icommandsender, s0);
 
         if (entityplayermp != null) {
-            return entityplayermp.am();
+            return entityplayermp.al();
         } else if (PlayerSelector.b(s0)) {
             throw new PlayerNotFoundException();
         } else {
@@ -130,6 +170,51 @@ public abstract class CommandBase implements ICommand {
         return stringbuilder.toString();
     }
 
+    public static double a(ICommandSender icommandsender, double d0, String s0) {
+        return a(icommandsender, d0, s0, -30000000, 30000000);
+    }
+
+    public static double a(ICommandSender icommandsender, double d0, String s0,
+            int i0, int i1) {
+        boolean flag0 = s0.startsWith("~");
+
+        if (flag0 && Double.isNaN(d0)) {
+            throw new NumberInvalidException("commands.generic.num.invalid",
+                    new Object[]{ Double.valueOf(d0) });
+        } else {
+            double d1 = flag0 ? d0 : 0.0D;
+
+            if (!flag0 || s0.length() > 1) {
+                boolean flag1 = s0.contains(".");
+
+                if (flag0) {
+                    s0 = s0.substring(1);
+                }
+
+                d1 += b(icommandsender, s0);
+                if (!flag1 && !flag0) {
+                    d1 += 0.5D;
+                }
+            }
+
+            if (i0 != 0 || i1 != 0) {
+                if (d1 < (double) i0) {
+                    throw new NumberInvalidException(
+                            "commands.generic.double.tooSmall", new Object[]{
+                                    Double.valueOf(d1), Integer.valueOf(i0) });
+                }
+
+                if (d1 > (double) i1) {
+                    throw new NumberInvalidException(
+                            "commands.generic.double.tooBig", new Object[]{
+                                    Double.valueOf(d1), Integer.valueOf(i1) });
+                }
+            }
+
+            return d1;
+        }
+    }
+
     public static String a(Object[] aobject) {
         StringBuilder stringbuilder = new StringBuilder();
 
@@ -151,7 +236,21 @@ public abstract class CommandBase implements ICommand {
     }
 
     public static String a(Collection collection) {
-        return a(collection.toArray(new String[0]));
+        return a(collection.toArray(new String[collection.size()]));
+    }
+
+    public static String b(Collection collection) {
+        String[] astring = new String[collection.size()];
+        int i0 = 0;
+
+        EntityLivingBase entitylivingbase;
+
+        for (Iterator iterator = collection.iterator(); iterator.hasNext(); astring[i0++] = entitylivingbase
+                .aw()) {
+            entitylivingbase = (EntityLivingBase) iterator.next();
+        }
+
+        return a((Object[]) astring);
     }
 
     public static boolean a(String s0, String s1) {

@@ -79,25 +79,25 @@ public class ContainerWorkbench extends Container {
         super.b(entityplayer);
         if (!this.g.I) {
             for (int i0 = 0; i0 < 9; ++i0) {
-                ItemStack itemstack = this.a.b(i0);
+                ItemStack itemstack = this.a.a_(i0);
 
                 if (itemstack != null) {
-                    entityplayer.c(itemstack);
+                    entityplayer.b(itemstack);
                 }
             }
         }
     }
 
     public boolean a(EntityPlayer entityplayer) {
-        return this.g.a(this.h, this.i, this.j) != Block.aC.cz ? false : entityplayer.e((double) this.h + 0.5D, (double) this.i + 0.5D, (double) this.j + 0.5D) <= 64.0D;
+        return this.g.a(this.h, this.i, this.j) != Block.aD.cF ? false : entityplayer.e((double) this.h + 0.5D, (double) this.i + 0.5D, (double) this.j + 0.5D) <= 64.0D;
     }
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.c.get(i0);
 
-        if (slot != null && slot.d()) {
-            ItemStack itemstack1 = slot.c();
+        if (slot != null && slot.e()) {
+            ItemStack itemstack1 = slot.d();
 
             itemstack = itemstack1.m();
             if (i0 == 0) {
@@ -118,13 +118,13 @@ public class ContainerWorkbench extends Container {
                 return null;
             }
 
-            if (itemstack1.a == 0) {
+            if (itemstack1.b == 0) {
                 slot.c((ItemStack) null);
             } else {
-                slot.e();
+                slot.f();
             }
 
-            if (itemstack1.a == itemstack.a) {
+            if (itemstack1.b == itemstack.b) {
                 return null;
             }
 

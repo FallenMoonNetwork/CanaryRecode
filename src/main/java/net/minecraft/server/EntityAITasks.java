@@ -7,10 +7,10 @@ import net.canarymod.api.ai.CanaryAIManager;
 
 public class EntityAITasks {
 
-    public List a = new ArrayList(); // CanaryMod: private to public
-    public List b = new ArrayList(); // CanaryMod: private to public
+    public List a = new ArrayList(); // CanaryMod: private -> public
+    public List b = new ArrayList(); // CanaryMod: private -> public
     private final Profiler c;
-    private int d = 0;
+    private int d;
     private int e = 3;
 
     private CanaryAIManager manager = new CanaryAIManager(this);

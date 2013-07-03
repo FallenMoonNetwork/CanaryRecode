@@ -13,12 +13,12 @@ public class BehaviorDefaultDispenseItem implements IBehaviorDispenseItem {
         ItemStack itemstack1 = this.b(iblocksource, itemstack);
 
         this.a(iblocksource);
-        this.a(iblocksource, BlockDispenser.j_(iblocksource.h()));
+        this.a(iblocksource, BlockDispenser.l_(iblocksource.h()));
         return itemstack1;
     }
 
     protected ItemStack b(IBlockSource iblocksource, ItemStack itemstack) {
-        EnumFacing enumfacing = BlockDispenser.j_(iblocksource.h());
+        EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
         IPosition iposition = BlockDispenser.a(iblocksource);
 
         // CanaryMod: Dispense

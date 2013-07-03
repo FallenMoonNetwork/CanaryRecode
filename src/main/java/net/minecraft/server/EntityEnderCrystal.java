@@ -6,7 +6,7 @@ import net.canarymod.api.entity.CanaryEnderCrystal;
 
 public class EntityEnderCrystal extends Entity {
 
-    public int a = 0;
+    public int a;
     public int b;
 
     public EntityEnderCrystal(World world) {
@@ -19,7 +19,7 @@ public class EntityEnderCrystal extends Entity {
         this.entity = new CanaryEnderCrystal(this); // CanaryMod: Wrap Entity
     }
 
-    protected boolean f_() {
+    protected boolean e_() {
         return false;
     }
 
@@ -37,8 +37,8 @@ public class EntityEnderCrystal extends Entity {
         int i1 = MathHelper.c(this.v);
         int i2 = MathHelper.c(this.w);
 
-        if (this.q.a(i0, i1, i2) != Block.av.cz) {
-            this.q.c(i0, i1, i2, Block.av.cz);
+        if (this.q.a(i0, i1, i2) != Block.aw.cF) {
+            this.q.c(i0, i1, i2, Block.aw.cF);
         }
     }
 
@@ -50,8 +50,8 @@ public class EntityEnderCrystal extends Entity {
         return true;
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
-        if (this.aq()) {
+    public boolean a(DamageSource damagesource, float f0) {
+        if (this.ap()) {
             return false;
         } else {
             if (!this.M && !this.q.I) {

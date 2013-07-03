@@ -18,21 +18,23 @@ public class BlockFire extends Block {
     }
 
     public void s_() {
-        this.a(Block.B.cz, 5, 20);
-        this.a(Block.bR.cz, 5, 20);
-        this.a(Block.bS.cz, 5, 20);
-        this.a(Block.bd.cz, 5, 20);
-        this.a(Block.ax.cz, 5, 20);
-        this.a(Block.cb.cz, 5, 20);
-        this.a(Block.ca.cz, 5, 20);
-        this.a(Block.cc.cz, 5, 20);
-        this.a(Block.N.cz, 5, 5);
-        this.a(Block.O.cz, 30, 60);
-        this.a(Block.ar.cz, 30, 20);
-        this.a(Block.aq.cz, 15, 100);
-        this.a(Block.ab.cz, 60, 100);
-        this.a(Block.af.cz, 30, 60);
-        this.a(Block.by.cz, 15, 100);
+        this.a(Block.C.cF, 5, 20);
+        this.a(Block.bS.cF, 5, 20);
+        this.a(Block.bT.cF, 5, 20);
+        this.a(Block.be.cF, 5, 20);
+        this.a(Block.ay.cF, 5, 20);
+        this.a(Block.cc.cF, 5, 20);
+        this.a(Block.cb.cF, 5, 20);
+        this.a(Block.cd.cF, 5, 20);
+        this.a(Block.O.cF, 5, 5);
+        this.a(Block.P.cF, 30, 60);
+        this.a(Block.as.cF, 30, 20);
+        this.a(Block.ar.cF, 15, 100);
+        this.a(Block.ac.cF, 60, 100);
+        this.a(Block.ag.cF, 30, 60);
+        this.a(Block.bz.cF, 15, 100);
+        this.a(Block.cE.cF, 5, 5);
+        this.a(Block.cB.cF, 60, 20);
     }
 
     private void a(int i0, int i1, int i2) {
@@ -65,10 +67,10 @@ public class BlockFire extends Block {
     }
 
     public void a(World world, int i0, int i1, int i2, Random random) {
-        if (world.N().b("doFireTick")) {
-            boolean flag0 = world.a(i0, i1 - 1, i2) == Block.bf.cz;
+        if (world.O().b("doFireTick")) {
+            boolean flag0 = world.a(i0, i1 - 1, i2) == Block.bg.cF;
 
-            if (world.t instanceof WorldProviderEnd && world.a(i0, i1 - 1, i2) == Block.D.cz) {
+            if (world.t instanceof WorldProviderEnd && world.a(i0, i1 - 1, i2) == Block.E.cF) {
                 flag0 = true;
             }
 
@@ -76,7 +78,7 @@ public class BlockFire extends Block {
                 world.i(i0, i1, i2);
             }
 
-            if (!flag0 && world.P() && (world.F(i0, i1, i2) || world.F(i0 - 1, i1, i2) || world.F(i0 + 1, i1, i2) || world.F(i0, i1, i2 - 1) || world.F(i0, i1, i2 + 1))) {
+            if (!flag0 && world.Q() && (world.F(i0, i1, i2) || world.F(i0 - 1, i1, i2) || world.F(i0 + 1, i1, i2) || world.F(i0, i1, i2 - 1) || world.F(i0, i1, i2 + 1))) {
                 world.i(i0, i1, i2);
             } else {
                 int i3 = world.h(i0, i1, i2);
@@ -85,7 +87,7 @@ public class BlockFire extends Block {
                     world.b(i0, i1, i2, i3 + random.nextInt(3) / 2, 4);
                 }
 
-                world.a(i0, i1, i2, this.cz, this.a(world) + random.nextInt(10));
+                world.a(i0, i1, i2, this.cF, this.a(world) + random.nextInt(10));
                 if (!flag0 && !this.k(world, i0, i1, i2)) {
                     if (!world.w(i0, i1 - 1, i2) || i3 > 3) {
                         world.i(i0, i1, i2);
@@ -126,7 +128,7 @@ public class BlockFire extends Block {
                                             i9 /= 2;
                                         }
 
-                                        if (i9 > 0 && random.nextInt(i7) <= i9 && (!world.P() || !world.F(i4, i6, i5)) && !world.F(i4 - 1, i6, i2) && !world.F(i4 + 1, i6, i5) && !world.F(i4, i6, i5 - 1) && !world.F(i4, i6, i5 + 1)) {
+                                        if (i9 > 0 && random.nextInt(i7) <= i9 && (!world.Q() || !world.F(i4, i6, i5)) && !world.F(i4 - 1, i6, i2) && !world.F(i4 + 1, i6, i5) && !world.F(i4, i6, i5 - 1) && !world.F(i4, i6, i5 + 1)) {
                                             int i10 = i3 + random.nextInt(5) / 4;
 
                                             if (i10 > 15) {
@@ -141,7 +143,7 @@ public class BlockFire extends Block {
 
                                             Canary.hooks().callHook(hook);
                                             if (!hook.isCanceled()) {
-                                                world.f(i4, i6, i5, this.cz, i10, 3);
+                                                world.f(i4, i6, i5, this.cF, i10, 3);
                                             }
                                             //
                                         }
@@ -163,7 +165,7 @@ public class BlockFire extends Block {
         int i5 = this.b[world.a(i0, i1, i2)];
 
         if (random.nextInt(i3) < i5) {
-            boolean flag0 = world.a(i0, i1, i2) == Block.aq.cz;
+            boolean flag0 = world.a(i0, i1, i2) == Block.ar.cF;
 
             if (random.nextInt(i4 + 10) < 5 && !world.F(i0, i1, i2)) {
                 int i6 = i4 + random.nextInt(5) / 4;
@@ -179,7 +181,7 @@ public class BlockFire extends Block {
 
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) {
-                    world.f(i0, i1, i2, this.cz, i6, 3);
+                    world.f(i0, i1, i2, this.cF, i6, 3);
                 }
                 //
             } else {
@@ -197,7 +199,7 @@ public class BlockFire extends Block {
             }
 
             if (flag0) {
-                Block.aq.g(world, i0, i1, i2, 1);
+                Block.ar.g(world, i0, i1, i2, 1);
             }
         }
     }
@@ -248,11 +250,11 @@ public class BlockFire extends Block {
     }
 
     public void a(World world, int i0, int i1, int i2) {
-        if (world.t.h > 0 || world.a(i0, i1 - 1, i2) != Block.at.cz || !Block.bi.n_(world, i0, i1, i2)) {
+        if (world.t.i > 0 || world.a(i0, i1 - 1, i2) != Block.au.cF || !Block.bj.o_(world, i0, i1, i2)) {
             if (!world.w(i0, i1 - 1, i2) && !this.k(world, i0, i1, i2)) {
                 world.i(i0, i1, i2);
             } else {
-                world.a(i0, i1, i2, this.cz, this.a(world) + world.s.nextInt(10));
+                world.a(i0, i1, i2, this.cF, this.a(world) + world.s.nextInt(10));
             }
         }
     }

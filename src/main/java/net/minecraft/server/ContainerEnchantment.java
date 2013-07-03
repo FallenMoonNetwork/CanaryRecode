@@ -63,7 +63,7 @@ public class ContainerEnchantment extends Container {
             ItemStack itemstack = iinventory.a(0);
             int i0;
 
-            if (itemstack != null && itemstack.w()) {
+            if (itemstack != null && itemstack.x()) {
                 this.f = this.l.nextLong();
                 if (!this.h.I) {
                     i0 = 0;
@@ -72,29 +72,31 @@ public class ContainerEnchantment extends Container {
 
                     for (i1 = -1; i1 <= 1; ++i1) {
                         for (int i2 = -1; i2 <= 1; ++i2) {
-                            if ((i1 != 0 || i2 != 0) && this.h.c(this.i + i2, this.j, this.k + i1) && this.h.c(this.i + i2, this.j + 1, this.k + i1)) {
-                                if (this.h.a(this.i + i2 * 2, this.j, this.k + i1 * 2) == Block.ar.cz) {
+                            if ((i1 != 0 || i2 != 0)
+                                    && this.h.c(this.i + i2, this.j, this.k + i1)
+                                    && this.h.c(this.i + i2, this.j + 1, this.k + i1)) {
+                                if (this.h.a(this.i + i2 * 2, this.j, this.k + i1 * 2) == Block.as.cF) {
                                     ++i0;
                                 }
 
-                                if (this.h.a(this.i + i2 * 2, this.j + 1, this.k + i1 * 2) == Block.ar.cz) {
+                                if (this.h.a(this.i + i2 * 2, this.j + 1, this.k + i1 * 2) == Block.as.cF) {
                                     ++i0;
                                 }
 
                                 if (i2 != 0 && i1 != 0) {
-                                    if (this.h.a(this.i + i2 * 2, this.j, this.k + i1) == Block.ar.cz) {
+                                    if (this.h.a(this.i + i2 * 2, this.j, this.k + i1) == Block.as.cF) {
                                         ++i0;
                                     }
 
-                                    if (this.h.a(this.i + i2 * 2, this.j + 1, this.k + i1) == Block.ar.cz) {
+                                    if (this.h.a(this.i + i2 * 2, this.j + 1, this.k + i1) == Block.as.cF) {
                                         ++i0;
                                     }
 
-                                    if (this.h.a(this.i + i2, this.j, this.k + i1 * 2) == Block.ar.cz) {
+                                    if (this.h.a(this.i + i2, this.j, this.k + i1 * 2) == Block.as.cF) {
                                         ++i0;
                                     }
 
-                                    if (this.h.a(this.i + i2, this.j + 1, this.k + i1 * 2) == Block.ar.cz) {
+                                    if (this.h.a(this.i + i2, this.j + 1, this.k + i1 * 2) == Block.as.cF) {
                                         ++i0;
                                     }
                                 }
@@ -119,10 +121,10 @@ public class ContainerEnchantment extends Container {
     public boolean a(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = this.a.a(0);
 
-        if (this.g[i0] > 0 && itemstack != null && (entityplayer.cf >= this.g[i0] || entityplayer.ce.d)) {
+        if (this.g[i0] > 0 && itemstack != null && (entityplayer.bH >= this.g[i0] || entityplayer.bG.d)) {
             if (!this.h.I) {
                 List list = EnchantmentHelper.b(this.l, itemstack, this.g[i0]);
-                boolean flag0 = itemstack.c == Item.aM.cp;
+                boolean flag0 = itemstack.d == Item.aN.cv;
 
                 if (list != null) {
                     // CanaryMod: Enchant
@@ -141,7 +143,7 @@ public class ContainerEnchantment extends Container {
 
                         entityplayer.a(-this.g[i0]);
                         if (flag0) {
-                            itemstack.c = Item.bX.cp;
+                            itemstack.d = Item.bY.cv;
                         }
 
                         int i1 = flag0 ? this.l.nextInt(list.size()) : -1;
@@ -151,7 +153,7 @@ public class ContainerEnchantment extends Container {
 
                             if (!flag0 || i2 == i1) {
                                 if (flag0) {
-                                    Item.bX.a(itemstack, enchantmentdata);
+                                    Item.bY.a(itemstack, enchantmentdata);
                                 } else {
                                     itemstack.a(enchantmentdata.b, enchantmentdata.c);
                                 }
@@ -173,24 +175,24 @@ public class ContainerEnchantment extends Container {
     public void b(EntityPlayer entityplayer) {
         super.b(entityplayer);
         if (!this.h.I) {
-            ItemStack itemstack = this.a.b(0);
+            ItemStack itemstack = this.a.a_(0);
 
             if (itemstack != null) {
-                entityplayer.c(itemstack);
+                entityplayer.b(itemstack);
             }
         }
     }
 
     public boolean a(EntityPlayer entityplayer) {
-        return this.h.a(this.i, this.j, this.k) != Block.bI.cz ? false : entityplayer.e((double) this.i + 0.5D, (double) this.j + 0.5D, (double) this.k + 0.5D) <= 64.0D;
+        return this.h.a(this.i, this.j, this.k) != Block.bJ.cF ? false : entityplayer.e((double) this.i + 0.5D, (double) this.j + 0.5D, (double) this.k + 0.5D) <= 64.0D;
     }
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.c.get(i0);
 
-        if (slot != null && slot.d()) {
-            ItemStack itemstack1 = slot.c();
+        if (slot != null && slot.e()) {
+            ItemStack itemstack1 = slot.d();
 
             itemstack = itemstack1.m();
             if (i0 == 0) {
@@ -198,26 +200,26 @@ public class ContainerEnchantment extends Container {
                     return null;
                 }
             } else {
-                if (((Slot) this.c.get(0)).d() || !((Slot) this.c.get(0)).a(itemstack1)) {
+                if (((Slot) this.c.get(0)).e() || !((Slot) this.c.get(0)).a(itemstack1)) {
                     return null;
                 }
 
-                if (itemstack1.p() && itemstack1.a == 1) {
+                if (itemstack1.p() && itemstack1.b == 1) {
                     ((Slot) this.c.get(0)).c(itemstack1.m());
-                    itemstack1.a = 0;
-                } else if (itemstack1.a >= 1) {
-                    ((Slot) this.c.get(0)).c(new ItemStack(itemstack1.c, 1, itemstack1.k()));
-                    --itemstack1.a;
+                    itemstack1.b = 0;
+                } else if (itemstack1.b >= 1) {
+                    ((Slot) this.c.get(0)).c(new ItemStack(itemstack1.d, 1, itemstack1.k()));
+                    --itemstack1.b;
                 }
             }
 
-            if (itemstack1.a == 0) {
+            if (itemstack1.b == 0) {
                 slot.c((ItemStack) null);
             } else {
-                slot.e();
+                slot.f();
             }
 
-            if (itemstack1.a == itemstack.a) {
+            if (itemstack1.b == itemstack.b) {
                 return null;
             }
 

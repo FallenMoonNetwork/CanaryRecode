@@ -17,7 +17,6 @@ public class EntityItem extends Entity {
 
     public EntityItem(World world, double d0, double d1, double d2) {
         super(world);
-        this.a = 0;
         this.d = 5;
         this.c = (float) (Math.random() * 3.141592653589793D * 2.0D);
         this.a(0.25F, 0.25F);
@@ -35,13 +34,12 @@ public class EntityItem extends Entity {
         this.a(itemstack);
     }
 
-    protected boolean f_() {
+    protected boolean e_() {
         return false;
     }
 
     public EntityItem(World world) {
         super(world);
-        this.a = 0;
         this.d = 5;
         this.c = (float) (Math.random() * 3.141592653589793D * 2.0D);
         this.a(0.25F, 0.25F);
@@ -78,7 +76,7 @@ public class EntityItem extends Entity {
             }
 
             if (!this.q.I) {
-                this.g();
+                this.e();
             }
         }
 
@@ -89,7 +87,7 @@ public class EntityItem extends Entity {
             int i0 = this.q.a(MathHelper.c(this.u), MathHelper.c(this.E.b) - 1, MathHelper.c(this.w));
 
             if (i0 > 0) {
-                f0 = Block.r[i0].cP * 0.98F;
+                f0 = Block.s[i0].cV * 0.98F;
             }
 
             // CanaryMod: ItemTouchGround
@@ -127,7 +125,7 @@ public class EntityItem extends Entity {
         }
     }
 
-    private void g() {
+    private void e() {
         Iterator iterator = this.q.a(EntityItem.class, this.E.b(0.5D, 0.0D, 0.5D)).iterator();
 
         while (iterator.hasNext()) {
@@ -150,14 +148,14 @@ public class EntityItem extends Entity {
                 return false;
             } else if (itemstack1.p() && !itemstack1.q().equals(itemstack.q())) {
                 return false;
-            } else if (itemstack1.b().m() && itemstack1.k() != itemstack.k()) {
+            } else if (itemstack1.b().n() && itemstack1.k() != itemstack.k()) {
                 return false;
-            } else if (itemstack1.a < itemstack.a) {
+            } else if (itemstack1.b < itemstack.b) {
                 return entityitem.a(this);
-            } else if (itemstack1.a + itemstack.a > itemstack1.e()) {
+            } else if (itemstack1.b + itemstack.b > itemstack1.e()) {
                 return false;
             } else {
-                itemstack1.a += itemstack.a;
+                itemstack1.b += itemstack.b;
                 entityitem.b = Math.max(entityitem.b, this.b);
                 entityitem.a = Math.min(entityitem.a, this.a);
                 entityitem.a(itemstack1);
@@ -178,17 +176,17 @@ public class EntityItem extends Entity {
     }
 
     protected void e(int i0) {
-        this.a(DamageSource.a, i0);
+        this.a(DamageSource.a, (float) i0);
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
-        if (this.aq()) {
+    public boolean a(DamageSource damagesource, float f0) {
+        if (this.ap()) {
             return false;
-        } else if (this.d() != null && this.d().c == Item.bT.cp && damagesource.c()) {
+        } else if (this.d() != null && this.d().d == Item.bU.cv && damagesource.c()) {
             return false;
         } else {
             this.J();
-            this.d -= i0;
+            this.d = (int) ((float) this.d - f0);
             if (this.d <= 0) {
                 this.w();
             }
@@ -219,48 +217,47 @@ public class EntityItem extends Entity {
     public void b_(EntityPlayer entityplayer) {
         if (!this.q.I) {
             ItemStack itemstack = this.d();
-            int i0 = itemstack.a;
+            int i0 = itemstack.b;
 
-            if (this.b == 0 && entityplayer.bK.canPickup(this)) { // CanaryMod: simulate pickup first
-                if (entityplayer.bK.a(itemstack)) {
-                    if (itemstack.c == Block.N.cz) {
+            if (this.b == 0 && entityplayer.bn.canPickup(this)) { // CanaryMod: simulate pickup first
+                if (entityplayer.bn.a(itemstack)) {
+                    if (itemstack.d == Block.O.cF) {
                         entityplayer.a((StatBase) AchievementList.g);
                     }
 
-                    if (itemstack.c == Item.aG.cp) {
+                    if (itemstack.d == Item.aH.cv) {
                         entityplayer.a((StatBase) AchievementList.t);
                     }
 
-                    if (itemstack.c == Item.o.cp) {
+                    if (itemstack.d == Item.p.cv) {
                         entityplayer.a((StatBase) AchievementList.w);
                     }
 
-                    if (itemstack.c == Item.bp.cp) {
+                    if (itemstack.d == Item.bq.cv) {
                         entityplayer.a((StatBase) AchievementList.z);
                     }
 
-                    this.a("random.pop", 0.2F, ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-                    entityplayer.a((Entity) this, i0);
-                    if (itemstack.a <= 0) {
-                        this.w();
-                    }
+                this.a("random.pop", 0.2F, ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                entityplayer.a((Entity) this, i0);
+                if (itemstack.b <= 0) {
+                    this.w();
                 }
             }
         }
     }
 
-    public String am() {
+    public String al() {
         return StatCollector.a("item." + this.d().a());
     }
 
-    public boolean ap() {
+    public boolean ao() {
         return false;
     }
 
-    public void c(int i0) {
-        super.c(i0);
+    public void b(int i0) {
+        super.b(i0);
         if (!this.q.I) {
-            this.g();
+            this.e();
         }
     }
 
@@ -269,10 +266,10 @@ public class EntityItem extends Entity {
 
         if (itemstack == null) {
             if (this.q != null) {
-                this.q.X().c("Item entity " + this.k + " has no item?!");
+                this.q.Y().c("Item entity " + this.k + " has no item?!");
             }
 
-            return new ItemStack(Block.x);
+            return new ItemStack(Block.y);
         } else {
             return itemstack;
         }

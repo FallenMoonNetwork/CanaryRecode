@@ -13,12 +13,12 @@ public class ContainerRepair extends Container {
 
     public IInventory f = new InventoryCraftResult(); // Canary: private -> public
     public IInventory g = new InventoryRepair(this, "Repair", true, 2); // Canary: private -> public
-    public World h; // Canary: private to public
-    public int i; // Canary: private to public
-    public int j; // Canary: private to public
-    public int k; // Canary: private to public
-    public int a = 0;
-    public int l = 0;
+    public World h; // Canary: private -> public
+    public int i; // Canary: private -> public
+    public int j; // Canary: private -> public
+    public int k; // Canary: private -> public
+    public int a;
+    public int l; // Canary: private -> public
     private String m;
     private final EntityPlayer n;
 
@@ -30,7 +30,7 @@ public class ContainerRepair extends Container {
         this.n = entityplayer;
         this.a(new Slot(this.g, 0, 27, 47));
         this.a(new Slot(this.g, 1, 76, 47));
-        this.a((Slot) (new SlotRepair(this, this.f, 2, 134, 47, world, i0, i1, i2)));
+        this.a((Slot) (new ContainerRepairINNER2(this, this.f, 2, 134, 47, world, i0, i1, i2)));
 
         int i3;
 
@@ -68,7 +68,7 @@ public class ContainerRepair extends Container {
             ItemStack itemstack2 = this.g.a(1);
             Map map = EnchantmentHelper.a(itemstack1);
             boolean flag0 = false;
-            int i2 = b0 + itemstack.B() + (itemstack2 == null ? 0 : itemstack2.B());
+            int i2 = b0 + itemstack.C() + (itemstack2 == null ? 0 : itemstack2.C());
 
             this.l = 0;
             int i3;
@@ -80,8 +80,8 @@ public class ContainerRepair extends Container {
             Enchantment enchantment;
 
             if (itemstack2 != null) {
-                flag0 = itemstack2.c == Item.bX.cp && Item.bX.g(itemstack2).c() > 0;
-                if (itemstack1.g() && Item.f[itemstack1.c].a(itemstack, itemstack2)) {
+                flag0 = itemstack2.d == Item.bY.cv && Item.bY.g(itemstack2).c() > 0;
+                if (itemstack1.g() && Item.g[itemstack1.d].a(itemstack, itemstack2)) {
                     i3 = Math.min(itemstack1.j(), itemstack1.l() / 4);
                     if (i3 <= 0) {
                         this.f.a(0, (ItemStack) null);
@@ -89,7 +89,7 @@ public class ContainerRepair extends Container {
                         return;
                     }
 
-                    for (i4 = 0; i3 > 0 && i4 < itemstack2.a; ++i4) {
+                    for (i4 = 0; i3 > 0 && i4 < itemstack2.b; ++i4) {
                         i5 = itemstack1.j() - i3;
                         itemstack1.b(i5);
                         i0 += Math.max(1, i3 / 100) + map.size();
@@ -98,7 +98,7 @@ public class ContainerRepair extends Container {
 
                     this.l = i4;
                 } else {
-                    if (!flag0 && (itemstack1.c != itemstack2.c || !itemstack1.g())) {
+                    if (!flag0 && (itemstack1.d != itemstack2.d || !itemstack1.g())) {
                         this.f.a(0, (ItemStack) null);
                         this.a = 0;
                         return;
@@ -143,7 +143,7 @@ public class ContainerRepair extends Container {
                         int i10 = i7 - i6;
                         boolean flag1 = enchantment.a(itemstack);
 
-                        if (this.n.ce.d || itemstack.c == ItemEnchantedBook.bX.cp) {
+                        if (this.n.bG.d || itemstack.d == ItemEnchantedBook.bY.cv) {
                             flag1 = true;
                         }
 
@@ -201,10 +201,16 @@ public class ContainerRepair extends Container {
                 }
             }
 
-            if (this.m != null && this.m.length() > 0 && !this.m.equalsIgnoreCase(this.n.r().c(itemstack.a())) && !this.m.equals(itemstack.s())) {
-                i1 = itemstack.g() ? 7 : itemstack.a * 5;
+            if (org.apache.commons.lang3.StringUtils.isBlank(this.m)) {
+                if (itemstack.u()) {
+                    i1 = itemstack.g() ? 7 : itemstack.b * 5;
+                    i0 += i1;
+                    itemstack1.t();
+                }
+            } else if (!this.m.equals(itemstack.s())) {
+                i1 = itemstack.g() ? 7 : itemstack.b * 5;
                 i0 += i1;
-                if (itemstack.t()) {
+                if (itemstack.u()) {
                     i2 += i1 / 2;
                 }
 
@@ -259,21 +265,20 @@ public class ContainerRepair extends Container {
             }
 
             if (i1 == i0 && i1 > 0 && this.a >= 40) {
-                this.h.X().a("Naming an item only, cost too high; giving discount to cap cost to 39 levels");
                 this.a = 39;
             }
 
-            if (this.a >= 40 && !this.n.ce.d) {
+            if (this.a >= 40 && !this.n.bG.d) {
                 itemstack1 = null;
             }
 
             if (itemstack1 != null) {
-                i4 = itemstack1.B();
-                if (itemstack2 != null && i4 < itemstack2.B()) {
-                    i4 = itemstack2.B();
+                i4 = itemstack1.C();
+                if (itemstack2 != null && i4 < itemstack2.C()) {
+                    i4 = itemstack2.C();
                 }
 
-                if (itemstack1.t()) {
+                if (itemstack1.u()) {
                     i4 -= 9;
                 }
 
@@ -294,7 +299,6 @@ public class ContainerRepair extends Container {
             //
             this.b();
         }
-
     }
 
     public void a(ICrafting icrafting) {
@@ -306,25 +310,25 @@ public class ContainerRepair extends Container {
         super.b(entityplayer);
         if (!this.h.I) {
             for (int i0 = 0; i0 < this.g.j_(); ++i0) {
-                ItemStack itemstack = this.g.b(i0);
+                ItemStack itemstack = this.g.a_(i0);
 
                 if (itemstack != null) {
-                    entityplayer.c(itemstack);
+                    entityplayer.b(itemstack);
                 }
             }
         }
     }
 
     public boolean a(EntityPlayer entityplayer) {
-        return this.h.a(this.i, this.j, this.k) != Block.cl.cz ? false : entityplayer.e((double) this.i + 0.5D, (double) this.j + 0.5D, (double) this.k + 0.5D) <= 64.0D;
+        return this.h.a(this.i, this.j, this.k) != Block.cm.cF ? false : entityplayer.e((double) this.i + 0.5D, (double) this.j + 0.5D, (double) this.k + 0.5D) <= 64.0D;
     }
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.c.get(i0);
 
-        if (slot != null && slot.d()) {
-            ItemStack itemstack1 = slot.c();
+        if (slot != null && slot.e()) {
+            ItemStack itemstack1 = slot.d();
 
             itemstack = itemstack1.m();
             if (i0 == 2) {
@@ -341,13 +345,13 @@ public class ContainerRepair extends Container {
                 return null;
             }
 
-            if (itemstack1.a == 0) {
+            if (itemstack1.b == 0) {
                 slot.c((ItemStack) null);
             } else {
-                slot.e();
+                slot.f();
             }
 
-            if (itemstack1.a == itemstack.a) {
+            if (itemstack1.b == itemstack.b) {
                 return null;
             }
 
@@ -359,8 +363,14 @@ public class ContainerRepair extends Container {
 
     public void a(String s0) {
         this.m = s0;
-        if (this.a(2).d()) {
-            this.a(2).c().c(this.m);
+        if (this.a(2).e()) {
+            ItemStack itemstack = this.a(2).d();
+
+            if (org.apache.commons.lang3.StringUtils.isBlank(s0)) {
+                itemstack.t();
+            } else {
+                itemstack.c(this.m);
+            }
         }
 
         this.e();

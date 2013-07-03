@@ -15,9 +15,9 @@ public class BlockPistonBase extends Block {
     private boolean attemptRetract; // CanaryMod: Used to signal wether to retract the block attached to the stick piston.
 
     public BlockPistonBase(int i0, boolean flag0) {
-        super(i0, Material.F);
+        super(i0, Material.G);
         this.a = flag0;
-        this.a(j);
+        this.a(k);
         this.c(0.5F);
         this.a(CreativeTabs.d);
     }
@@ -34,8 +34,8 @@ public class BlockPistonBase extends Block {
         return false;
     }
 
-    public void a(World world, int i0, int i1, int i2, EntityLiving entityliving, ItemStack itemstack) {
-        int i3 = a(world, i0, i1, i2, entityliving);
+    public void a(World world, int i0, int i1, int i2, EntityLivingBase entitylivingbase, ItemStack itemstack) {
+        int i3 = a(world, i0, i1, i2, entitylivingbase);
 
         world.b(i0, i1, i2, i3, 2);
         if (!world.I) {
@@ -75,7 +75,7 @@ public class BlockPistonBase extends Block {
 
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
-                        world.d(i0, i1, i2, this.cz, 0, i4);
+                        world.d(i0, i1, i2, this.cF, 0, i4);
                     }
                     //
                 }
@@ -88,13 +88,24 @@ public class BlockPistonBase extends Block {
                 attemptRetract = !hook.isCanceled();
                 //
                 world.b(i0, i1, i2, i4, 2);
-                world.d(i0, i1, i2, this.cz, 1, i4);
+                world.d(i0, i1, i2, this.cF, 1, i4);
             }
         }
     }
 
     private boolean d(World world, int i0, int i1, int i2, int i3) {
-        return i3 != 0 && world.k(i0, i1 - 1, i2, 0) ? true : (i3 != 1 && world.k(i0, i1 + 1, i2, 1) ? true : (i3 != 2 && world.k(i0, i1, i2 - 1, 2) ? true : (i3 != 3 && world.k(i0, i1, i2 + 1, 3) ? true : (i3 != 5 && world.k(i0 + 1, i1, i2, 5) ? true : (i3 != 4 && world.k(i0 - 1, i1, i2, 4) ? true : (world.k(i0, i1, i2, 0) ? true : (world.k(i0, i1 + 2, i2, 1) ? true : (world.k(i0, i1 + 1, i2 - 1, 2) ? true : (world.k(i0, i1 + 1, i2 + 1, 3) ? true : (world.k(i0 - 1, i1 + 1, i2, 4) ? true : world.k(i0 + 1, i1 + 1, i2, 5)))))))))));
+        return i3 != 0 && world.k(i0, i1 - 1, i2, 0) ? true : (i3 != 1
+                && world.k(i0, i1 + 1, i2, 1) ? true : (i3 != 2
+                && world.k(i0, i1, i2 - 1, 2) ? true : (i3 != 3
+                && world.k(i0, i1, i2 + 1, 3) ? true : (i3 != 5
+                && world.k(i0 + 1, i1, i2, 5) ? true : (i3 != 4
+                && world.k(i0 - 1, i1, i2, 4) ? true
+                : (world.k(i0, i1, i2, 0) ? true
+                        : (world.k(i0, i1 + 2, i2, 1) ? true : (world.k(i0,
+                                i1 + 1, i2 - 1, 2) ? true : (world.k(i0,
+                                i1 + 1, i2 + 1, 3) ? true : (world.k(i0 - 1,
+                                i1 + 1, i2, 4) ? true : world.k(i0 + 1, i1 + 1,
+                                i2, 5)))))))))));
     }
 
     public boolean b(World world, int i0, int i1, int i2, int i3, int i4) {
@@ -125,8 +136,8 @@ public class BlockPistonBase extends Block {
                 ((TileEntityPiston) tileentity).f();
             }
 
-            world.f(i0, i1, i2, Block.ag.cz, i4, 3);
-            world.a(i0, i1, i2, BlockPistonMoving.a(this.cz, i4, i4, false, true));
+            world.f(i0, i1, i2, Block.ah.cF, i4, 3);
+            world.a(i0, i1, i2, BlockPistonMoving.a(this.cF, i4, i4, false, true));
             if (this.a) {
                 int i5 = i0 + Facing.b[i4] * 2;
                 int i6 = i1 + Facing.c[i4] * 2;
@@ -135,7 +146,7 @@ public class BlockPistonBase extends Block {
                 int i9 = world.h(i5, i6, i7);
                 boolean flag1 = false;
 
-                if (i8 == Block.ag.cz) {
+                if (i8 == Block.ah.cF) {
                     TileEntity tileentity1 = world.r(i5, i6, i7);
 
                     if (tileentity1 instanceof TileEntityPiston) {
@@ -151,12 +162,17 @@ public class BlockPistonBase extends Block {
                 }
 
                 // CanaryMod: check attemptRetract
-                if (attemptRetract && !flag1 && i8 > 0 && a(i8, world, i5, i6, i7, false) && (Block.r[i8].h() == 0 || i8 == Block.ad.cz || i8 == Block.Z.cz)) {
+                if (attemptRetract 
+                        && !flag1
+                        && i8 > 0
+                        && a(i8, world, i5, i6, i7, false)
+                        && (Block.s[i8].h() == 0 || i8 == Block.ae.cF || i8 == Block.aa.cF)) {
                     i0 += Facing.b[i4];
                     i1 += Facing.c[i4];
                     i2 += Facing.d[i4];
-                    world.f(i0, i1, i2, Block.ag.cz, i9, 3);
-                    world.a(i0, i1, i2, BlockPistonMoving.a(i8, i9, i4, false, false));
+                    world.f(i0, i1, i2, Block.ah.cF, i9, 3);
+                    world.a(i0, i1, i2,
+                            BlockPistonMoving.a(i8, i9, i4, false, false));
                     world.i(i5, i6, i7);
                 } else if (!flag1) {
                     world.i(i0 + Facing.b[i4], i1 + Facing.c[i4], i2 + Facing.d[i4]);
@@ -175,6 +191,8 @@ public class BlockPistonBase extends Block {
         int i3 = iblockaccess.h(i0, i1, i2);
 
         if (e(i3)) {
+            float f0 = 0.25F;
+
             switch (d(i3)) {
                 case 0:
                     this.a(0.0F, 0.25F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -230,9 +248,9 @@ public class BlockPistonBase extends Block {
         return (i0 & 8) != 0;
     }
 
-    public static int a(World world, int i0, int i1, int i2, EntityLiving entityliving) {
-        if (MathHelper.e((float) entityliving.u - (float) i0) < 2.0F && MathHelper.e((float) entityliving.w - (float) i2) < 2.0F) {
-            double d0 = entityliving.v + 1.82D - (double) entityliving.N;
+    public static int a(World world, int i0, int i1, int i2, EntityLivingBase entitylivingbase) {
+        if (MathHelper.e((float) entitylivingbase.u - (float) i0) < 2.0F && MathHelper.e((float) entitylivingbase.w - (float) i2) < 2.0F) {
+            double d0 = entitylivingbase.v + 1.82D - (double) entitylivingbase.N;
 
             if (d0 - (double) i1 > 2.0D) {
                 return 1;
@@ -243,25 +261,25 @@ public class BlockPistonBase extends Block {
             }
         }
 
-        int i3 = MathHelper.c((double) (entityliving.A * 4.0F / 360.0F) + 0.5D) & 3;
+        int i3 = MathHelper.c((double) (entitylivingbase.A * 4.0F / 360.0F) + 0.5D) & 3;
 
         return i3 == 0 ? 2 : (i3 == 1 ? 5 : (i3 == 2 ? 3 : (i3 == 3 ? 4 : 0)));
     }
 
     private static boolean a(int i0, World world, int i1, int i2, int i3, boolean flag0) {
-        if (i0 == Block.at.cz) {
+        if (i0 == Block.au.cF) {
             return false;
         } else {
-            if (i0 != Block.ad.cz && i0 != Block.Z.cz) {
-                if (Block.r[i0].l(world, i1, i2, i3) == -1.0F) {
+            if (i0 != Block.ae.cF && i0 != Block.aa.cF) {
+                if (Block.s[i0].l(world, i1, i2, i3) == -1.0F) {
                     return false;
                 }
 
-                if (Block.r[i0].h() == 2) {
+                if (Block.s[i0].h() == 2) {
                     return false;
                 }
 
-                if (Block.r[i0].h() == 1) {
+                if (Block.s[i0].h() == 1) {
                     if (!flag0) {
                         return false;
                     }
@@ -272,7 +290,7 @@ public class BlockPistonBase extends Block {
                 return false;
             }
 
-            return !(Block.r[i0] instanceof ITileEntityProvider);
+            return !(Block.s[i0] instanceof ITileEntityProvider);
         }
     }
 
@@ -295,7 +313,7 @@ public class BlockPistonBase extends Block {
                         return false;
                     }
 
-                    if (Block.r[i8].h() != 1) {
+                    if (Block.s[i8].h() != 1) {
                         if (i7 == 12) {
                             return false;
                         }
@@ -333,7 +351,7 @@ public class BlockPistonBase extends Block {
                         return false;
                     }
 
-                    if (Block.r[i8].h() != 1) {
+                    if (Block.s[i8].h() != 1) {
                         if (i7 == 12) {
                             return false;
                         }
@@ -345,7 +363,7 @@ public class BlockPistonBase extends Block {
                         continue;
                     }
 
-                    Block.r[i8].c(world, i4, i5, i6, world.h(i4, i5, i6), 0);
+                    Block.s[i8].c(world, i4, i5, i6, world.h(i4, i5, i6), 0);
                     world.i(i4, i5, i6);
                 }
             }
@@ -367,11 +385,11 @@ public class BlockPistonBase extends Block {
                 int i14 = world.a(i11, i12, i13);
                 int i15 = world.h(i11, i12, i13);
 
-                if (i14 == this.cz && i11 == i0 && i12 == i1 && i13 == i2) {
-                    world.f(i4, i5, i6, Block.ag.cz, i3 | (this.a ? 8 : 0), 4);
-                    world.a(i4, i5, i6, BlockPistonMoving.a(Block.ae.cz, i3 | (this.a ? 8 : 0), i3, true, false));
+                if (i14 == this.cF && i11 == i0 && i12 == i1 && i13 == i2) {
+                    world.f(i4, i5, i6, Block.ah.cF, i3 | (this.a ? 8 : 0), 4);
+                    world.a(i4, i5, i6, BlockPistonMoving.a(Block.af.cF, i3 | (this.a ? 8 : 0), i3, true, false));
                 } else {
-                    world.f(i4, i5, i6, Block.ag.cz, i15, 4);
+                    world.f(i4, i5, i6, Block.ah.cF, i15, 4);
                     world.a(i4, i5, i6, BlockPistonMoving.a(i14, i15, i3, true, false));
                 }
 

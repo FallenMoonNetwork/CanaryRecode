@@ -16,16 +16,16 @@ final class DispenserBehaviorFilledBucket extends BehaviorDefaultDispenseItem {
         int i0 = iblocksource.d();
         int i1 = iblocksource.e();
         int i2 = iblocksource.f();
-        EnumFacing enumfacing = BlockDispenser.j_(iblocksource.h());
+        EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
 
-        if (itembucket.a(iblocksource.k(), (double) i0, (double) i1, (double) i2, i0 + enumfacing.c(), i1 + enumfacing.d(), i2 + enumfacing.e())) {
+        if (itembucket.a(iblocksource.k(), i0 + enumfacing.c(), i1 + enumfacing.d(), i2 + enumfacing.e())) {
             // CanaryMod: Dispense
             DispenseHook hook = new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), null);
 
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
-                itemstack.c = Item.ax.cp;
-                itemstack.a = 1;
+                itemstack.d = Item.ay.cv;
+                itemstack.b = 1;
             }
             //
             return itemstack;

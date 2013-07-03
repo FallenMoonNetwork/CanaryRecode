@@ -28,45 +28,66 @@ public class EntityItemFrame extends EntityHanging {
         return 9;
     }
 
-    public int g() {
+    public int e() {
         return 9;
     }
 
-    public void h() {
-        this.a(new ItemStack(Item.bJ), 0.0F);
-        ItemStack itemstack = this.i();
+    public void b(Entity entity) {
+        ItemStack itemstack = this.h();
 
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer entityplayer = (EntityPlayer) entity;
+
+            if (entityplayer.bG.d) {
+                this.b(itemstack);
+                return;
+            }
+        }
+
+        this.a(new ItemStack(Item.bK), 0.0F);
         if (itemstack != null && this.ab.nextFloat() < this.e) {
             itemstack = itemstack.m();
-            itemstack.a((EntityItemFrame) null);
+            this.b(itemstack);
             this.a(itemstack, 0.0F);
         }
     }
 
-    public ItemStack i() {
+    private void b(ItemStack itemstack) {
+        if (itemstack != null) {
+            if (itemstack.d == Item.bf.cv) {
+                MapData mapdata = ((ItemMap) itemstack.b()).a(itemstack, this.q);
+
+                mapdata.g.remove("frame-" + this.k);
+            }
+
+            itemstack.a((EntityItemFrame) null);
+        }
+    }
+
+    public ItemStack h() {
         return this.u().f(2);
     }
 
     public void a(ItemStack itemstack) {
         itemstack = itemstack.m();
-        itemstack.a = 1;
+        itemstack.b = 1;
         itemstack.a(this);
         this.u().b(2, itemstack);
         this.u().h(2);
     }
 
-    public int j() {
+    public int i() {
         return this.u().a(3);
     }
 
-    public void b(int i0) {
+    public void c(int i0) {
         this.u().b(3, Byte.valueOf((byte) (i0 % 4)));
     }
 
     public void b(NBTTagCompound nbttagcompound) {
-        if (this.i() != null) {
-            nbttagcompound.a("Item", this.i().b(new NBTTagCompound()));
-            nbttagcompound.a("ItemRotation", (byte) this.j());
+        if (this.h() != null) {
+            nbttagcompound.a("Item", this.h().b(new NBTTagCompound()));
+            nbttagcompound.a("ItemRotation", (byte) this.i());
             nbttagcompound.a("ItemDropChance", this.e);
         }
 
@@ -78,7 +99,7 @@ public class EntityItemFrame extends EntityHanging {
 
         if (nbttagcompound1 != null && !nbttagcompound1.d()) {
             this.a(ItemStack.a(nbttagcompound1));
-            this.b(nbttagcompound.c("ItemRotation"));
+            this.c(nbttagcompound.c("ItemRotation"));
             if (nbttagcompound.b("ItemDropChance")) {
                 this.e = nbttagcompound.g("ItemDropChance");
             }
@@ -87,18 +108,18 @@ public class EntityItemFrame extends EntityHanging {
         super.a(nbttagcompound);
     }
 
-    public boolean a_(EntityPlayer entityplayer) {
-        if (this.i() == null) {
-            ItemStack itemstack = entityplayer.bG();
+    public boolean c(EntityPlayer entityplayer) {
+        if (this.h() == null) {
+            ItemStack itemstack = entityplayer.aV();
 
             if (itemstack != null && !this.q.I) {
                 this.a(itemstack);
-                if (!entityplayer.ce.d && --itemstack.a <= 0) {
-                    entityplayer.bK.a(entityplayer.bK.c, (ItemStack) null);
+                if (!entityplayer.bG.d && --itemstack.b <= 0) {
+                    entityplayer.bn.a(entityplayer.bn.c, (ItemStack) null);
                 }
             }
         } else if (!this.q.I) {
-            this.b(this.j() + 1);
+            this.c(this.i() + 1);
         }
 
         return true;

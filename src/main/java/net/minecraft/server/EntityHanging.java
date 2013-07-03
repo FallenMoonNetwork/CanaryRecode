@@ -37,7 +37,7 @@ public abstract class EntityHanging extends Entity {
         this.a = i0;
         this.C = this.A = (float) (i0 * 90);
         float f0 = (float) this.d();
-        float f1 = (float) this.g();
+        float f1 = (float) this.e();
         float f2 = (float) this.d();
 
         if (i0 != 2 && i0 != 0) {
@@ -72,38 +72,41 @@ public abstract class EntityHanging extends Entity {
         }
 
         if (i0 == 2) {
-            f3 -= this.b(this.d());
+            f3 -= this.c(this.d());
         }
 
         if (i0 == 1) {
-            f5 += this.b(this.d());
+            f5 += this.c(this.d());
         }
 
         if (i0 == 0) {
-            f3 += this.b(this.d());
+            f3 += this.c(this.d());
         }
 
         if (i0 == 3) {
-            f5 -= this.b(this.d());
+            f5 -= this.c(this.d());
         }
 
-        f4 += this.b(this.g());
+        f4 += this.c(this.e());
         this.b((double) f3, (double) f4, (double) f5);
         float f7 = -0.03125F;
 
         this.E.b((double) (f3 - f0 - f7), (double) (f4 - f1 - f7), (double) (f5 - f2 - f7), (double) (f3 + f0 + f7), (double) (f4 + f1 + f7), (double) (f5 + f2 + f7));
     }
 
-    private float b(int i0) {
+    private float c(int i0) {
         return i0 == 32 ? 0.5F : (i0 == 64 ? 0.5F : 0.0F);
     }
 
     public void l_() {
+        this.r = this.u;
+        this.s = this.v;
+        this.t = this.w;
         if (this.e++ == 100 && !this.q.I) {
             this.e = 0;
             if (!this.M && !this.c()) {
                 this.w();
-                this.h();
+                this.b((Entity) null);
             }
         }
     }
@@ -113,7 +116,7 @@ public abstract class EntityHanging extends Entity {
             return false;
         } else {
             int i0 = Math.max(1, this.d() / 16);
-            int i1 = Math.max(1, this.g() / 16);
+            int i1 = Math.max(1, this.e() / 16);
             int i2 = this.b;
             int i3 = this.c;
             int i4 = this.d;
@@ -134,7 +137,7 @@ public abstract class EntityHanging extends Entity {
                 i4 = MathHelper.c(this.w - (double) ((float) this.d() / 32.0F));
             }
 
-            i3 = MathHelper.c(this.v - (double) ((float) this.g() / 32.0F));
+            i3 = MathHelper.c(this.v - (double) ((float) this.e() / 32.0F));
 
             for (int i5 = 0; i5 < i0; ++i5) {
                 for (int i6 = 0; i6 < i1; ++i6) {
@@ -163,7 +166,8 @@ public abstract class EntityHanging extends Entity {
                 }
 
                 entity = (Entity) iterator.next();
-            } while (!(entity instanceof EntityHanging));
+            }
+            while (!(entity instanceof EntityHanging));
 
             return false;
         }
@@ -173,12 +177,12 @@ public abstract class EntityHanging extends Entity {
         return true;
     }
 
-    public boolean j(Entity entity) {
-        return entity instanceof EntityPlayer ? this.a(DamageSource.a((EntityPlayer) entity), 0) : false;
+    public boolean i(Entity entity) {
+        return entity instanceof EntityPlayer ? this.a(DamageSource.a((EntityPlayer) entity), 0.0F) : false;
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
-        if (this.aq()) {
+    public boolean a(DamageSource damagesource, float f0) {
+        if (this.ap()) {
             return false;
         } else {
             if (!this.M && !this.q.I) {
@@ -200,12 +204,7 @@ public abstract class EntityHanging extends Entity {
 
                 this.w();
                 this.J();
-
-                if (entityplayer != null && entityplayer.ce.d) {
-                    return true;
-                }
-
-                this.h();
+                this.b(damagesource.i());
             }
 
             return true;
@@ -215,14 +214,14 @@ public abstract class EntityHanging extends Entity {
     public void d(double d0, double d1, double d2) {
         if (!this.q.I && !this.M && d0 * d0 + d1 * d1 + d2 * d2 > 0.0D) {
             this.w();
-            this.h();
+            this.b((Entity) null);
         }
     }
 
     public void g(double d0, double d1, double d2) {
         if (!this.q.I && !this.M && d0 * d0 + d1 * d1 + d2 * d2 > 0.0D) {
             this.w();
-            this.h();
+            this.b((Entity) null);
         }
     }
 
@@ -279,7 +278,7 @@ public abstract class EntityHanging extends Entity {
 
     public abstract int d();
 
-    public abstract int g();
+    public abstract int e();
 
-    public abstract void h();
+    public abstract void b(Entity entity);
 }

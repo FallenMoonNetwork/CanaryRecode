@@ -7,11 +7,10 @@ import net.canarymod.api.entity.living.animal.CanaryBat;
 
 public class EntityBat extends EntityAmbientCreature {
 
-    private ChunkCoordinates a;
+    private ChunkCoordinates h;
 
     public EntityBat(World world) {
         super(world);
-        this.aH = "/mob/bat.png";
         this.a(0.5F, 0.9F);
         this.a(true);
         this.entity = new CanaryBat(this); // CanaryMod: Wrap Entity
@@ -22,23 +21,23 @@ public class EntityBat extends EntityAmbientCreature {
         this.ah.a(16, new Byte((byte) 0));
     }
 
-    protected float ba() {
+    protected float aW() {
         return 0.1F;
     }
 
-    protected float aY() {
-        return super.aY() * 0.95F;
+    protected float aX() {
+        return super.aX() * 0.95F;
     }
 
-    protected String bb() {
-        return this.h() && this.ab.nextInt(4) != 0 ? null : "mob.bat.idle";
+    protected String r() {
+        return this.bF() && this.ab.nextInt(4) != 0 ? null : "mob.bat.idle";
     }
 
-    protected String bc() {
+    protected String aK() {
         return "mob.bat.hurt";
     }
 
-    protected String bd() {
+    protected String aL() {
         return "mob.bat.death";
     }
 
@@ -46,15 +45,21 @@ public class EntityBat extends EntityAmbientCreature {
         return false;
     }
 
-    protected void o(Entity entity) {}
+    protected void n(Entity entity) {}
 
-    protected void bg() {}
+    protected void bf() {}
 
-    public int aW() {
+    protected void ax() {
+        super.ax();
+        this.a(SharedMonsterAttributes.a).a(6.0D);
+    }
+
+//MERGE: Deprecated? - Chris
+    public int ax() {
         return maxHealth == 0 ? 6 : maxHealth; // CanaryMod: custom Max Health
     }
 
-    public boolean h() {
+    public boolean bF() {
         return (this.ah.a(16) & 1) != 0;
     }
 
@@ -68,13 +73,13 @@ public class EntityBat extends EntityAmbientCreature {
         }
     }
 
-    protected boolean bh() {
+    protected boolean bb() {
         return true;
     }
 
     public void l_() {
         super.l_();
-        if (this.h()) {
+        if (this.bF()) {
             this.x = this.y = this.z = 0.0D;
             this.v = (double) MathHelper.c(this.v) + 1.0D - (double) this.P;
         } else {
@@ -82,15 +87,15 @@ public class EntityBat extends EntityAmbientCreature {
         }
     }
 
-    protected void bo() {
-        super.bo();
-        if (this.h()) {
+    protected void be() {
+        super.be();
+        if (this.bF()) {
             if (!this.q.u(MathHelper.c(this.u), (int) this.v + 1, MathHelper.c(this.w))) {
                 this.a(false);
                 this.q.a((EntityPlayer) null, 1015, (int) this.u, (int) this.v, (int) this.w, 0);
             } else {
                 if (this.ab.nextInt(200) == 0) {
-                    this.aA = (float) this.ab.nextInt(360);
+                    this.aP = (float) this.ab.nextInt(360);
                 }
 
                 if (this.q.a(this, 4.0D) != null) {
@@ -99,17 +104,17 @@ public class EntityBat extends EntityAmbientCreature {
                 }
             }
         } else {
-            if (this.a != null && (!this.q.c(this.a.a, this.a.b, this.a.c) || this.a.b < 1)) {
-                this.a = null;
+            if (this.h != null && (!this.q.c(this.h.a, this.h.b, this.h.c) || this.h.b < 1)) {
+                this.h = null;
             }
 
-            if (this.a == null || this.ab.nextInt(30) == 0 || this.a.e((int) this.u, (int) this.v, (int) this.w) < 4.0F) {
-                this.a = new ChunkCoordinates((int) this.u + this.ab.nextInt(7) - this.ab.nextInt(7), (int) this.v + this.ab.nextInt(6) - 2, (int) this.w + this.ab.nextInt(7) - this.ab.nextInt(7));
+            if (this.h == null || this.ab.nextInt(30) == 0 || this.h.e((int) this.u, (int) this.v, (int) this.w) < 4.0F) {
+                this.h = new ChunkCoordinates((int) this.u + this.ab.nextInt(7) - this.ab.nextInt(7), (int) this.v + this.ab.nextInt(6) - 2, (int) this.w + this.ab.nextInt(7) - this.ab.nextInt(7));
             }
 
-            double d0 = (double) this.a.a + 0.5D - this.u;
-            double d1 = (double) this.a.b + 0.1D - this.v;
-            double d2 = (double) this.a.c + 0.5D - this.w;
+            double d0 = (double) this.h.a + 0.5D - this.u;
+            double d1 = (double) this.h.b + 0.1D - this.v;
+            double d2 = (double) this.h.c + 0.5D - this.w;
 
             this.x += (Math.signum(d0) * 0.5D - this.x) * 0.10000000149011612D;
             this.y += (Math.signum(d1) * 0.699999988079071D - this.y) * 0.10000000149011612D;
@@ -117,7 +122,7 @@ public class EntityBat extends EntityAmbientCreature {
             float f0 = (float) (Math.atan2(this.z, this.x) * 180.0D / 3.1415927410125732D) - 90.0F;
             float f1 = MathHelper.g(f0 - this.A);
 
-            this.bE = 0.5F;
+            this.bf = 0.5F;
             this.A += f1;
             if (this.ab.nextInt(100) == 0 && this.q.u(MathHelper.c(this.u), (int) this.v + 1, MathHelper.c(this.w))) {
                 this.a(true);
@@ -125,27 +130,27 @@ public class EntityBat extends EntityAmbientCreature {
         }
     }
 
-    protected boolean f_() {
+    protected boolean e_() {
         return false;
     }
 
-    protected void a(float f0) {}
+    protected void b(float f0) {}
 
     protected void a(double d0, boolean flag0) {}
 
-    public boolean at() {
+    public boolean as() {
         return true;
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
-        if (this.aq()) {
+    public boolean a(DamageSource damagesource, float f0) {
+        if (this.ap()) {
             return false;
         } else {
-            if (!this.q.I && this.h()) {
+            if (!this.q.I && this.bF()) {
                 this.a(false);
             }
 
-            return super.a(damagesource, i0);
+            return super.a(damagesource, f0);
         }
     }
 
@@ -159,7 +164,7 @@ public class EntityBat extends EntityAmbientCreature {
         nbttagcompound.a("BatFlags", this.ah.a(16));
     }
 
-    public boolean bv() {
+    public boolean bo() {
         int i0 = MathHelper.c(this.E.b);
 
         if (i0 >= 63) {
@@ -169,7 +174,7 @@ public class EntityBat extends EntityAmbientCreature {
             int i2 = MathHelper.c(this.w);
             int i3 = this.q.n(i1, i0, i2);
             byte b0 = 4;
-            Calendar calendar = this.q.V();
+            Calendar calendar = this.q.W();
 
             if ((calendar.get(2) + 1 != 10 || calendar.get(5) < 20) && (calendar.get(2) + 1 != 11 || calendar.get(5) > 3)) {
                 if (this.ab.nextBoolean()) {
@@ -179,9 +184,7 @@ public class EntityBat extends EntityAmbientCreature {
                 b0 = 7;
             }
 
-            return i3 > this.ab.nextInt(b0) ? false : super.bv();
+            return i3 > this.ab.nextInt(b0) ? false : super.bo();
         }
     }
-
-    public void bJ() {}
 }

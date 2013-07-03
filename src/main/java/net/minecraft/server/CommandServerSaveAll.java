@@ -16,15 +16,20 @@ public class CommandServerSaveAll extends CommandBase {
         return 4;
     }
 
-    public void b(ICommandSender icommandsender, String[] astring) {
-        MinecraftServer minecraftserver = MinecraftServer.D();
+    public String c(ICommandSender icommandsender) {
+        return "commands.save.usage";
+    }
 
-        icommandsender.a(icommandsender.a("commands.save.start", new Object[0]));
-        if (minecraftserver.ad() != null) {
-            minecraftserver.ad().g();
+    public void b(ICommandSender icommandsender, String[] astring) {
+        MinecraftServer minecraftserver = MinecraftServer.F();
+
+        icommandsender.a(ChatMessageComponent.e("commands.save.start"));
+        if (minecraftserver.af() != null) {
+            minecraftserver.af().g();
         }
 
         try {
+            int i0;
             // CanaryMod: Fix for MultiWorld
             for (net.canarymod.api.world.World w : minecraftserver.worldManager.getAllWorlds()) {
                 WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
@@ -39,7 +44,7 @@ public class CommandServerSaveAll extends CommandBase {
             }
 
             if (astring.length > 0 && "flush".equals(astring[0])) {
-                icommandsender.a(icommandsender.a("commands.save.flushStart", new Object[0]));
+                icommandsender.a(ChatMessageComponent.e("commands.save.flushStart"));
 
                 for (net.canarymod.api.world.World w : minecraftserver.worldManager.getAllWorlds()) {
                     WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
@@ -52,10 +57,10 @@ public class CommandServerSaveAll extends CommandBase {
                     }
                 }
 
-                icommandsender.a(icommandsender.a("commands.save.flushEnd", new Object[0]));
+                icommandsender.a(ChatMessageComponent.e("commands.save.flushEnd"));
             }
         } catch (MinecraftException minecraftexception) {
-            a(icommandsender, "commands.save.failed", new Object[] { minecraftexception.getMessage()});
+            a(icommandsender, "commands.save.failed", new Object[]{ minecraftexception.getMessage() });
             return;
         }
 

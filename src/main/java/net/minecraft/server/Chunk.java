@@ -38,8 +38,8 @@ public class Chunk {
     public long n;
     public boolean o;
     public int p;
+    public long q;
     private int u;
-    boolean q;
     // CanaryMod Chunk handler
     private CanaryChunk canaryChunk;
 
@@ -49,16 +49,8 @@ public class Chunk {
         this.s = new byte[256];
         this.b = new int[256];
         this.c = new boolean[256];
-        this.t = false;
         this.i = new HashMap();
-        this.k = false;
-        this.l = false;
-        this.m = false;
-        this.n = 0L;
-        this.o = false;
-        this.p = 0;
         this.u = 4096;
-        this.q = false;
         this.j = new List[16];
         this.e = world;
         this.g = i0;
@@ -86,7 +78,7 @@ public class Chunk {
                         int i6 = i5 >> 4;
 
                         if (this.r[i6] == null) {
-                            this.r[i6] = new ExtendedBlockStorage(i6 << 4, !world.t.f);
+                            this.r[i6] = new ExtendedBlockStorage(i6 << 4, !world.t.g);
                         }
 
                         this.r[i6].a(i3, i5 & 15, i4, b0);
@@ -146,7 +138,7 @@ public class Chunk {
                         }
                     }
 
-                    if (!this.e.t.f) {
+                    if (!this.e.t.g) {
                         i3 = 15;
                         int i4 = i0 + 16 - 1;
 
@@ -267,7 +259,7 @@ public class Chunk {
             int i7;
             int i8;
 
-            if (!this.e.t.f) {
+            if (!this.e.t.g) {
                 ExtendedBlockStorage extendedblockstorage;
 
                 if (i4 < i3) {
@@ -331,7 +323,7 @@ public class Chunk {
                 this.p = i7;
             }
 
-            if (!this.e.t.f) {
+            if (!this.e.t.g) {
                 this.d(i5 - 1, i6, i8, i9);
                 this.d(i5 + 1, i6, i8, i9);
                 this.d(i5, i6 - 1, i8, i9);
@@ -344,7 +336,7 @@ public class Chunk {
     }
 
     public int b(int i0, int i1, int i2) {
-        return Block.t[this.a(i0, i1, i2)];
+        return Block.u[this.a(i0, i1, i2)];
     }
 
     public int a(int i0, int i1, int i2) {
@@ -447,7 +439,7 @@ public class Chunk {
                     return false;
                 }
 
-                extendedblockstorage = this.r[i1 >> 4] = new ExtendedBlockStorage(i1 >> 4 << 4, !this.e.t.f);
+                extendedblockstorage = this.r[i1 >> 4] = new ExtendedBlockStorage(i1 >> 4 << 4, !this.e.t.g);
                 flag0 = i1 >= i6;
             }
 
@@ -455,14 +447,14 @@ public class Chunk {
             int i10 = this.h * 16 + i2;
 
             if (i7 != 0 && !this.e.I) {
-                Block.r[i7].l(this.e, i9, i1, i10, i8);
+                Block.s[i7].l(this.e, i9, i1, i10, i8);
             }
 
             extendedblockstorage.a(i0, i1 & 15, i2, i3);
             if (i7 != 0) {
                 if (!this.e.I) {
-                    Block.r[i7].a(this.e, i9, i1, i10, i7, i8);
-                } else if (Block.r[i7] instanceof ITileEntityProvider && i7 != i3) {
+                    Block.s[i7].a(this.e, i9, i1, i10, i7, i8);
+                } else if (Block.s[i7] instanceof ITileEntityProvider && i7 != i3) {
                     this.e.s(i9, i1, i10);
                 }
             }
@@ -474,7 +466,7 @@ public class Chunk {
                 if (flag0) {
                     this.b();
                 } else {
-                    if (Block.t[i3 & 4095] > 0) {
+                    if (Block.u[i3 & 4095] > 0) {
                         if (i1 >= i6) {
                             this.h(i0, i1 + 1, i2);
                         }
@@ -489,13 +481,14 @@ public class Chunk {
 
                 if (i3 != 0) {
                     if (!this.e.I) {
-                        Block.r[i3].a(this.e, i9, i1, i10);
+                        Block.s[i3].a(this.e, i9, i1, i10);
                     }
 
-                    if (Block.r[i3] instanceof ITileEntityProvider) {
+                    if (Block.s[i3] instanceof ITileEntityProvider) {
                         tileentity = this.e(i0, i1, i2);
                         if (tileentity == null) {
-                            tileentity = ((ITileEntityProvider) Block.r[i3]).b(this.e);
+                            tileentity = ((ITileEntityProvider) Block.s[i3])
+                                    .b(this.e);
                             this.e.a(i9, i1, i10, tileentity);
                         }
 
@@ -503,7 +496,7 @@ public class Chunk {
                             tileentity.i();
                         }
                     }
-                } else if (i7 > 0 && Block.r[i7] instanceof ITileEntityProvider) {
+                } else if (i7 > 0 && Block.s[i7] instanceof ITileEntityProvider) {
                     tileentity = this.e(i0, i1, i2);
                     if (tileentity != null) {
                         tileentity.i();
@@ -531,7 +524,7 @@ public class Chunk {
                 extendedblockstorage.b(i0, i1 & 15, i2, i3);
                 int i5 = extendedblockstorage.a(i0, i1 & 15, i2);
 
-                if (i5 > 0 && Block.r[i5] instanceof ITileEntityProvider) {
+                if (i5 > 0 && Block.s[i5] instanceof ITileEntityProvider) {
                     TileEntity tileentity = this.e(i0, i1, i2);
 
                     if (tileentity != null) {
@@ -548,20 +541,25 @@ public class Chunk {
     public int a(EnumSkyBlock enumskyblock, int i0, int i1, int i2) {
         ExtendedBlockStorage extendedblockstorage = this.r[i1 >> 4];
 
-        return extendedblockstorage == null ? (this.d(i0, i1, i2) ? enumskyblock.c : 0) : (enumskyblock == EnumSkyBlock.a ? (this.e.t.f ? 0 : extendedblockstorage.c(i0, i1 & 15, i2)) : (enumskyblock == EnumSkyBlock.b ? extendedblockstorage.d(i0, i1 & 15, i2) : enumskyblock.c));
+        return extendedblockstorage == null ? (this.d(i0, i1, i2) ? enumskyblock.c
+                : 0)
+                : (enumskyblock == EnumSkyBlock.a ? (this.e.t.g ? 0
+                        : extendedblockstorage.c(i0, i1 & 15, i2))
+                        : (enumskyblock == EnumSkyBlock.b ? extendedblockstorage
+                                .d(i0, i1 & 15, i2) : enumskyblock.c));
     }
 
     public void a(EnumSkyBlock enumskyblock, int i0, int i1, int i2, int i3) {
         ExtendedBlockStorage extendedblockstorage = this.r[i1 >> 4];
 
         if (extendedblockstorage == null) {
-            extendedblockstorage = this.r[i1 >> 4] = new ExtendedBlockStorage(i1 >> 4 << 4, !this.e.t.f);
+            extendedblockstorage = this.r[i1 >> 4] = new ExtendedBlockStorage(i1 >> 4 << 4, !this.e.t.g);
             this.b();
         }
 
         this.l = true;
         if (enumskyblock == EnumSkyBlock.a) {
-            if (!this.e.t.f) {
+            if (!this.e.t.g) {
                 extendedblockstorage.c(i0, i1 & 15, i2, i3);
             }
         } else if (enumskyblock == EnumSkyBlock.b) {
@@ -573,9 +571,9 @@ public class Chunk {
         ExtendedBlockStorage extendedblockstorage = this.r[i1 >> 4];
 
         if (extendedblockstorage == null) {
-            return !this.e.t.f && i3 < EnumSkyBlock.a.c ? EnumSkyBlock.a.c - i3 : 0;
+            return !this.e.t.g && i3 < EnumSkyBlock.a.c ? EnumSkyBlock.a.c - i3 : 0;
         } else {
-            int i4 = this.e.t.f ? 0 : extendedblockstorage.c(i0, i1 & 15, i2);
+            int i4 = this.e.t.g ? 0 : extendedblockstorage.c(i0, i1 & 15, i2);
 
             if (i4 > 0) {
                 a = true;
@@ -598,8 +596,9 @@ public class Chunk {
         int i1 = MathHelper.c(entity.w / 16.0D);
 
         if (i0 != this.g || i1 != this.h) {
-            this.e.X().c("Wrong location! " + entity);
+            this.e.Y().c("Wrong location! " + entity);
             // Thread.dumpStack();
+//MERGE: entity.w() is probably not kill() anymore! - Chris
             entity.w();
             return;
         }
@@ -648,12 +647,12 @@ public class Chunk {
         if (tileentity == null) {
             int i3 = this.a(i0, i1, i2);
 
-            if (i3 <= 0 || !Block.r[i3].t()) {
+            if (i3 <= 0 || !Block.s[i3].t()) {
                 return null;
             }
 
             if (tileentity == null) {
-                tileentity = ((ITileEntityProvider) Block.r[i3]).b(this.e);
+                tileentity = ((ITileEntityProvider) Block.s[i3]).b(this.e);
                 this.e.a(this.g * 16 + i0, i1, this.h * 16 + i2, tileentity);
             }
 
@@ -686,7 +685,7 @@ public class Chunk {
         tileentity.l = this.g * 16 + i0;
         tileentity.m = i1;
         tileentity.n = this.h * 16 + i2;
-        if (this.a(i0, i1, i2) != 0 && Block.r[this.a(i0, i1, i2)] instanceof ITileEntityProvider) {
+        if (this.a(i0, i1, i2) != 0 && Block.s[this.a(i0, i1, i2)] instanceof ITileEntityProvider) {
             if (this.i.containsKey(chunkposition)) {
                 ((TileEntity) this.i.get(chunkposition)).w_();
             }
@@ -713,6 +712,14 @@ public class Chunk {
         this.e.a(this.i.values());
 
         for (int i0 = 0; i0 < this.j.length; ++i0) {
+            Iterator iterator = this.j[i0].iterator();
+
+            while (iterator.hasNext()) {
+                Entity entity = (Entity) iterator.next();
+
+                entity.P();
+            }
+
             this.e.a(this.j[i0]);
         }
     }
@@ -756,14 +763,19 @@ public class Chunk {
             for (int i3 = 0; i3 < list1.size(); ++i3) {
                 Entity entity1 = (Entity) list1.get(i3);
 
-                if (entity1 != entity && entity1.E.a(axisalignedbb) && (ientityselector == null || ientityselector.a(entity1))) {
+                if (entity1 != entity
+                        && entity1.E.b(axisalignedbb)
+                        && (ientityselector == null || ientityselector
+                                .a(entity1))) {
                     list.add(entity1);
-                    Entity[] aentity = entity1.an();
+                    Entity[] aentity = entity1.am();
 
                     if (aentity != null) {
                         for (int i4 = 0; i4 < aentity.length; ++i4) {
                             entity1 = aentity[i4];
-                            if (entity1 != entity && entity1.E.a(axisalignedbb) && (ientityselector == null || ientityselector.a(entity1))) {
+                            if (entity1 != entity
+                                    && entity1.E.b(axisalignedbb)
+                                    && (ientityselector == null || ientityselector.a(entity1))) {
                                 list.add(entity1);
                             }
                         }
@@ -795,7 +807,9 @@ public class Chunk {
             for (int i3 = 0; i3 < list1.size(); ++i3) {
                 Entity entity = (Entity) list1.get(i3);
 
-                if (oclass0.isAssignableFrom(entity.getClass()) && entity.E.a(axisalignedbb) && (ientityselector == null || ientityselector.a(entity))) {
+                if (oclass0.isAssignableFrom(entity.getClass())
+                        && entity.E.b(axisalignedbb)
+                        && (ientityselector == null || ientityselector.a(entity))) {
                     list.add(entity);
                 }
             }
@@ -804,10 +818,10 @@ public class Chunk {
 
     public boolean a(boolean flag0) {
         if (flag0) {
-            if (this.m && this.e.H() != this.n || this.l) {
+            if (this.m && this.e.I() != this.n || this.l) {
                 return true;
             }
-        } else if (this.m && this.e.H() >= this.n + 600L) {
+        } else if (this.m && this.e.I() >= this.n + 600L) {
             return true;
         }
 
@@ -815,7 +829,9 @@ public class Chunk {
     }
 
     public Random a(long i0) {
-        return new Random(this.e.G() + (long) (this.g * this.g * 4987142) + (long) (this.g * 5947611) + (long) (this.h * this.h) * 4392871L + (long) (this.h * 389711) ^ i0);
+        return new Random(this.e.H() + (long) (this.g * this.g * 4987142)
+                + (long) (this.g * 5947611) + (long) (this.h * this.h)
+                * 4392871L + (long) (this.h * 389711) ^ i0);
     }
 
     public boolean g() {
@@ -827,15 +843,23 @@ public class Chunk {
             ichunkprovider.a(ichunkprovider1, i0, i1);
         }
 
-        if (ichunkprovider.a(i0 - 1, i1) && !ichunkprovider.d(i0 - 1, i1).k && ichunkprovider.a(i0 - 1, i1 + 1) && ichunkprovider.a(i0, i1 + 1) && ichunkprovider.a(i0 - 1, i1 + 1)) {
+        if (ichunkprovider.a(i0 - 1, i1) && !ichunkprovider.d(i0 - 1, i1).k
+                && ichunkprovider.a(i0 - 1, i1 + 1)
+                && ichunkprovider.a(i0, i1 + 1)
+                && ichunkprovider.a(i0 - 1, i1 + 1)) {
             ichunkprovider.a(ichunkprovider1, i0 - 1, i1);
         }
 
-        if (ichunkprovider.a(i0, i1 - 1) && !ichunkprovider.d(i0, i1 - 1).k && ichunkprovider.a(i0 + 1, i1 - 1) && ichunkprovider.a(i0 + 1, i1 - 1) && ichunkprovider.a(i0 + 1, i1)) {
+        if (ichunkprovider.a(i0, i1 - 1) && !ichunkprovider.d(i0, i1 - 1).k
+                && ichunkprovider.a(i0 + 1, i1 - 1)
+                && ichunkprovider.a(i0 + 1, i1 - 1)
+                && ichunkprovider.a(i0 + 1, i1)) {
             ichunkprovider.a(ichunkprovider1, i0, i1 - 1);
         }
 
-        if (ichunkprovider.a(i0 - 1, i1 - 1) && !ichunkprovider.d(i0 - 1, i1 - 1).k && ichunkprovider.a(i0, i1 - 1) && ichunkprovider.a(i0 - 1, i1)) {
+        if (ichunkprovider.a(i0 - 1, i1 - 1)
+                && !ichunkprovider.d(i0 - 1, i1 - 1).k
+                && ichunkprovider.a(i0, i1 - 1) && ichunkprovider.a(i0 - 1, i1)) {
             ichunkprovider.a(ichunkprovider1, i0 - 1, i1 - 1);
         }
     }
@@ -851,7 +875,7 @@ public class Chunk {
 
             while (i4 > 0 && i3 == -1) {
                 int i5 = this.a(i0, i4, i1);
-                Material material = i5 == 0 ? Material.a : Block.r[i5].cO;
+                Material material = i5 == 0 ? Material.a : Block.s[i5].cU;
 
                 if (!material.c() && !material.d()) {
                     --i4;
@@ -867,7 +891,7 @@ public class Chunk {
     }
 
     public void k() {
-        if (this.t && !this.e.t.f) {
+        if (this.t && !this.e.t.g) {
             this.q();
         }
     }
@@ -942,28 +966,30 @@ public class Chunk {
             for (int i6 = 0; i6 < 16; ++i6) {
                 int i7 = (i1 << 4) + i6;
 
-                if (this.r[i1] == null && (i6 == 0 || i6 == 15 || i2 == 0 || i2 == 15 || i3 == 0 || i3 == 15) || this.r[i1] != null && this.r[i1].a(i2, i6, i3) == 0) {
-                    if (Block.v[this.e.a(i4, i7 - 1, i5)] > 0) {
+                if (this.r[i1] == null
+                        && (i6 == 0 || i6 == 15 || i2 == 0 || i2 == 15 || i3 == 0 || i3 == 15) || this.r[i1] != null
+                        && this.r[i1].a(i2, i6, i3) == 0) {
+                    if (Block.w[this.e.a(i4, i7 - 1, i5)] > 0) {
                         this.e.A(i4, i7 - 1, i5);
                     }
 
-                    if (Block.v[this.e.a(i4, i7 + 1, i5)] > 0) {
+                    if (Block.w[this.e.a(i4, i7 + 1, i5)] > 0) {
                         this.e.A(i4, i7 + 1, i5);
                     }
 
-                    if (Block.v[this.e.a(i4 - 1, i7, i5)] > 0) {
+                    if (Block.w[this.e.a(i4 - 1, i7, i5)] > 0) {
                         this.e.A(i4 - 1, i7, i5);
                     }
 
-                    if (Block.v[this.e.a(i4 + 1, i7, i5)] > 0) {
+                    if (Block.w[this.e.a(i4 + 1, i7, i5)] > 0) {
                         this.e.A(i4 + 1, i7, i5);
                     }
 
-                    if (Block.v[this.e.a(i4, i7, i5 - 1)] > 0) {
+                    if (Block.w[this.e.a(i4, i7, i5 - 1)] > 0) {
                         this.e.A(i4, i7, i5 - 1);
                     }
 
-                    if (Block.v[this.e.a(i4, i7, i5 + 1)] > 0) {
+                    if (Block.w[this.e.a(i4, i7, i5 + 1)] > 0) {
                         this.e.A(i4, i7, i5 + 1);
                     }
 

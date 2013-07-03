@@ -6,40 +6,44 @@ import java.util.List;
 import net.canarymod.api.entity.living.monster.CanaryEnderDragon;
 
 
-public class EntityDragon extends EntityLiving implements IEntityMultiPart {
+public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob {
 
-    public double a;
-    public double b;
-    public double c;
-    public double[][] d = new double[64][3];
-    public int e = -1;
-    public EntityDragonPart[] f;
-    public EntityDragonPart g;
-    public EntityDragonPart h;
-    public EntityDragonPart i;
-    public EntityDragonPart j;
-    public EntityDragonPart bK;
-    public EntityDragonPart bL;
-    public EntityDragonPart bM;
-    public float bN = 0.0F;
-    public float bO = 0.0F;
-    public boolean bP = false;
-    public boolean bQ = false;
-    private Entity bT;
-    public int bR = 0;
-    public EntityEnderCrystal bS = null;
+    public double h;
+    public double i;
+    public double j;
+    public double[][] bn = new double[64][3];
+    public int bo = -1;
+    public EntityDragonPart[] bp;
+    public EntityDragonPart bq;
+    public EntityDragonPart br;
+    public EntityDragonPart bs;
+    public EntityDragonPart bt;
+    public EntityDragonPart bu;
+    public EntityDragonPart bv;
+    public EntityDragonPart bw;
+    public float bx;
+    public float by;
+    public boolean bz;
+    public boolean bA;
+    private Entity bD;
+    public int bB;
+    public EntityEnderCrystal bC;
 
     public EntityDragon(World world) {
         super(world);
-        this.f = new EntityDragonPart[] { this.g = new EntityDragonPart(this, "head", 6.0F, 6.0F), this.h = new EntityDragonPart(this, "body", 8.0F, 8.0F), this.i = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.j = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bK = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bL = new EntityDragonPart(this, "wing", 4.0F, 4.0F), this.bM = new EntityDragonPart(this, "wing", 4.0F, 4.0F)};
-        this.b(this.aW());
-        this.aH = "/mob/enderdragon/ender.png";
+        this.bp = new EntityDragonPart[]{ this.bq = new EntityDragonPart(this, "head", 6.0F, 6.0F), this.br = new EntityDragonPart(this, "body", 8.0F, 8.0F), this.bs = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bt = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bu = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bv = new EntityDragonPart(this, "wing", 4.0F, 4.0F), this.bw = new EntityDragonPart(this, "wing", 4.0F, 4.0F) };
+        this.g(this.aP());
         this.a(16.0F, 8.0F);
         this.Z = true;
         this.ag = true;
-        this.b = 100.0D;
+        this.i = 100.0D;
         this.am = true;
         this.entity = new CanaryEnderDragon(this); // CanaryMod: Wrap Entity
+    }
+
+    protected void ax() {
+        super.ax();
+        this.a(SharedMonsterAttributes.a).a(200.0D);
     }
 
     public int aW() {
@@ -48,26 +52,25 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
 
     protected void a() {
         super.a();
-        this.ah.a(16, new Integer(this.aW()));
     }
 
     public double[] b(int i0, float f0) {
-        if (this.aS <= 0) {
+        if (this.aJ() <= 0.0F) {
             f0 = 0.0F;
         }
 
         f0 = 1.0F - f0;
-        int i1 = this.e - i0 * 1 & 63;
-        int i2 = this.e - i0 * 1 - 1 & 63;
+        int i1 = this.bo - i0 * 1 & 63;
+        int i2 = this.bo - i0 * 1 - 1 & 63;
         double[] adouble = new double[3];
-        double d0 = this.d[i1][0];
-        double d1 = MathHelper.g(this.d[i2][0] - d0);
+        double d0 = this.bn[i1][0];
+        double d1 = MathHelper.g(this.bn[i2][0] - d0);
 
         adouble[0] = d0 + d1 * (double) f0;
-        d0 = this.d[i1][1];
-        d1 = this.d[i2][1] - d0;
+        d0 = this.bn[i1][1];
+        d1 = this.bn[i2][1] - d0;
         adouble[1] = d0 + d1 * (double) f0;
-        adouble[2] = this.d[i1][2] + (this.d[i2][2] - this.d[i1][2]) * (double) f0;
+        adouble[2] = this.bn[i1][2] + (this.bn[i2][2] - this.bn[i1][2]) * (double) f0;
         return adouble;
     }
 
@@ -75,48 +78,46 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
         float f0;
         float f1;
 
-        if (!this.q.I) {
-            this.ah.b(16, Integer.valueOf(this.aS));
-        } else {
-            f0 = MathHelper.b(this.bO * 3.1415927F * 2.0F);
-            f1 = MathHelper.b(this.bN * 3.1415927F * 2.0F);
+        if (this.q.I) {
+            f0 = MathHelper.b(this.by * 3.1415927F * 2.0F);
+            f1 = MathHelper.b(this.bx * 3.1415927F * 2.0F);
             if (f1 <= -0.3F && f0 >= -0.3F) {
                 this.q.a(this.u, this.v, this.w, "mob.enderdragon.wings", 5.0F, 0.8F + this.ab.nextFloat() * 0.3F, false);
             }
         }
 
-        this.bN = this.bO;
+        this.bx = this.by;
         float f2;
 
-        if (this.aS <= 0) {
+        if (this.aJ() <= 0.0F) {
             f0 = (this.ab.nextFloat() - 0.5F) * 8.0F;
             f1 = (this.ab.nextFloat() - 0.5F) * 4.0F;
             f2 = (this.ab.nextFloat() - 0.5F) * 8.0F;
             this.q.a("largeexplode", this.u + (double) f0, this.v + 2.0D + (double) f1, this.w + (double) f2, 0.0D, 0.0D, 0.0D);
         } else {
-            this.h();
+            this.bF();
             f0 = 0.2F / (MathHelper.a(this.x * this.x + this.z * this.z) * 10.0F + 1.0F);
             f0 *= (float) Math.pow(2.0D, this.y);
-            if (this.bQ) {
-                this.bO += f0 * 0.5F;
+            if (this.bA) {
+                this.by += f0 * 0.5F;
             } else {
-                this.bO += f0;
+                this.by += f0;
             }
 
             this.A = MathHelper.g(this.A);
-            if (this.e < 0) {
-                for (int d05 = 0; d05 < this.d.length; ++d05) {
-                    this.d[d05][0] = (double) this.A;
-                    this.d[d05][1] = this.v;
+            if (this.bo < 0) {
+                for (int d05 = 0; d05 < this.bn.length; ++d05) {
+                    this.bn[d05][0] = (double) this.A;
+                    this.bn[d05][1] = this.v;
                 }
             }
 
-            if (++this.e == this.d.length) {
-                this.e = 0;
+            if (++this.bo == this.bn.length) {
+                this.bo = 0;
             }
 
-            this.d[this.e][0] = (double) this.A;
-            this.d[this.e][1] = this.v;
+            this.bn[this.bo][0] = (double) this.A;
+            this.bn[this.bo][1] = this.v;
             double d0;
             double d1;
             double d2;
@@ -124,27 +125,27 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
             float f3;
 
             if (this.q.I) {
-                if (this.bu > 0) {
-                    d0 = this.u + (this.bv - this.u) / (double) this.bu;
-                    d1 = this.v + (this.bw - this.v) / (double) this.bu;
-                    d2 = this.w + (this.bx - this.w) / (double) this.bu;
-                    d3 = MathHelper.g(this.by - (double) this.A);
-                    this.A = (float) ((double) this.A + d3 / (double) this.bu);
-                    this.B = (float) ((double) this.B + (this.bz - (double) this.B) / (double) this.bu);
-                    --this.bu;
+                if (this.bh > 0) {
+                    d0 = this.u + (this.bi - this.u) / (double) this.bh;
+                    d1 = this.v + (this.bj - this.v) / (double) this.bh;
+                    d2 = this.w + (this.bk - this.w) / (double) this.bh;
+                    d3 = MathHelper.g(this.bl - (double) this.A);
+                    this.A = (float) ((double) this.A + d3 / (double) this.bh);
+                    this.B = (float) ((double) this.B + (this.bm - (double) this.B) / (double) this.bh);
+                    --this.bh;
                     this.b(d0, d1, d2);
                     this.b(this.A, this.B);
                 }
             } else {
-                d0 = this.a - this.u;
-                d1 = this.b - this.v;
-                d2 = this.c - this.w;
+                d0 = this.h - this.u;
+                d1 = this.i - this.v;
+                d2 = this.j - this.w;
                 d3 = d0 * d0 + d1 * d1 + d2 * d2;
-                if (this.bT != null) {
-                    this.a = this.bT.u;
-                    this.c = this.bT.w;
-                    double d4 = this.a - this.u;
-                    double d5 = this.c - this.w;
+                if (this.bD != null) {
+                    this.h = this.bD.u;
+                    this.j = this.bD.w;
+                    double d4 = this.h - this.u;
+                    double d5 = this.j - this.w;
                     double d6 = Math.sqrt(d4 * d4 + d5 * d5);
                     double d7 = 0.4000000059604645D + d6 / 80.0D - 1.0D;
 
@@ -152,14 +153,14 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
                         d7 = 10.0D;
                     }
 
-                    this.b = this.bT.E.b + d7;
+                    this.i = this.bD.E.b + d7;
                 } else {
-                    this.a += this.ab.nextGaussian() * 2.0D;
-                    this.c += this.ab.nextGaussian() * 2.0D;
+                    this.h += this.ab.nextGaussian() * 2.0D;
+                    this.j += this.ab.nextGaussian() * 2.0D;
                 }
 
-                if (this.bP || d3 < 100.0D || d3 > 22500.0D || this.G || this.H) {
-                    this.i();
+                if (this.bz || d3 < 100.0D || d3 > 22500.0D || this.G || this.H) {
+                    this.bG();
                 }
 
                 d1 /= (double) MathHelper.a(d0 * d0 + d2 * d2);
@@ -185,15 +186,15 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
                     d9 = -50.0D;
                 }
 
-                Vec3 vec3 = this.q.U().a(this.a - this.u, this.b - this.v, this.c - this.w).a();
-                Vec3 vec31 = this.q.U().a((double) MathHelper.a(this.A * 3.1415927F / 180.0F), this.y, (double) (-MathHelper.b(this.A * 3.1415927F / 180.0F))).a();
+                Vec3 vec3 = this.q.V().a(this.h - this.u, this.i - this.v, this.j - this.w).a();
+                Vec3 vec31 = this.q.V().a((double) MathHelper.a(this.A * 3.1415927F / 180.0F), this.y, (double) (-MathHelper.b(this.A * 3.1415927F / 180.0F))).a();
                 float f4 = (float) (vec31.b(vec3) + 0.5D) / 1.5F;
 
                 if (f4 < 0.0F) {
                     f4 = 0.0F;
                 }
 
-                this.bF *= 0.8F;
+                this.bg *= 0.8F;
                 float f5 = MathHelper.a(this.x * this.x + this.z * this.z) * 1.0F + 1.0F;
                 double d10 = Math.sqrt(this.x * this.x + this.z * this.z) * 1.0D + 1.0D;
 
@@ -201,19 +202,19 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
                     d10 = 40.0D;
                 }
 
-                this.bF = (float) ((double) this.bF + d9 * (0.699999988079071D / d10 / (double) f5));
-                this.A += this.bF * 0.1F;
+                this.bg = (float) ((double) this.bg + d9 * (0.699999988079071D / d10 / (double) f5));
+                this.A += this.bg * 0.1F;
                 float f6 = (float) (2.0D / (d10 + 1.0D));
                 float f7 = 0.06F;
 
                 this.a(0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
-                if (this.bQ) {
+                if (this.bA) {
                     this.d(this.x * 0.800000011920929D, this.y * 0.800000011920929D, this.z * 0.800000011920929D);
                 } else {
                     this.d(this.x, this.y, this.z);
                 }
 
-                Vec3 vec32 = this.q.U().a(this.x, this.y, this.z).a();
+                Vec3 vec32 = this.q.V().a(this.x, this.y, this.z).a();
                 float f8 = (float) (vec32.b(vec31) + 1.0D) / 2.0F;
 
                 f8 = 0.8F + 0.15F * f8;
@@ -222,17 +223,17 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
                 this.y *= 0.9100000262260437D;
             }
 
-            this.ay = this.A;
-            this.g.O = this.g.P = 3.0F;
-            this.i.O = this.i.P = 2.0F;
-            this.j.O = this.j.P = 2.0F;
-            this.bK.O = this.bK.P = 2.0F;
-            this.h.P = 3.0F;
-            this.h.O = 5.0F;
-            this.bL.P = 2.0F;
-            this.bL.O = 4.0F;
-            this.bM.P = 3.0F;
-            this.bM.O = 4.0F;
+            this.aN = this.A;
+            this.bq.O = this.bq.P = 3.0F;
+            this.bs.O = this.bs.P = 2.0F;
+            this.bt.O = this.bt.P = 2.0F;
+            this.bu.O = this.bu.P = 2.0F;
+            this.br.P = 3.0F;
+            this.br.O = 5.0F;
+            this.bv.P = 2.0F;
+            this.bv.O = 4.0F;
+            this.bw.P = 3.0F;
+            this.bw.O = 4.0F;
             f1 = (float) (this.b(5, 1.0F)[1] - this.b(10, 1.0F)[1]) * 10.0F / 180.0F * 3.1415927F;
             f2 = MathHelper.b(f1);
             float f9 = -MathHelper.a(f1);
@@ -240,40 +241,40 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
             float f11 = MathHelper.a(f10);
             float f12 = MathHelper.b(f10);
 
-            this.h.l_();
-            this.h.b(this.u + (double) (f11 * 0.5F), this.v, this.w - (double) (f12 * 0.5F), 0.0F, 0.0F);
-            this.bL.l_();
-            this.bL.b(this.u + (double) (f12 * 4.5F), this.v + 2.0D, this.w + (double) (f11 * 4.5F), 0.0F, 0.0F);
-            this.bM.l_();
-            this.bM.b(this.u - (double) (f12 * 4.5F), this.v + 2.0D, this.w - (double) (f11 * 4.5F), 0.0F, 0.0F);
-            if (!this.q.I && this.aW == 0) {
-                this.a(this.q.b((Entity) this, this.bL.E.b(4.0D, 2.0D, 4.0D).d(0.0D, -2.0D, 0.0D)));
-                this.a(this.q.b((Entity) this, this.bM.E.b(4.0D, 2.0D, 4.0D).d(0.0D, -2.0D, 0.0D)));
-                this.b(this.q.b((Entity) this, this.g.E.b(1.0D, 1.0D, 1.0D)));
+            this.br.l_();
+            this.br.b(this.u + (double) (f11 * 0.5F), this.v, this.w - (double) (f12 * 0.5F), 0.0F, 0.0F);
+            this.bv.l_();
+            this.bv.b(this.u + (double) (f12 * 4.5F), this.v + 2.0D, this.w + (double) (f11 * 4.5F), 0.0F, 0.0F);
+            this.bw.l_();
+            this.bw.b(this.u - (double) (f12 * 4.5F), this.v + 2.0D, this.w - (double) (f11 * 4.5F), 0.0F, 0.0F);
+            if (!this.q.I && this.ay == 0) {
+                this.a(this.q.b((Entity) this, this.bv.E.b(4.0D, 2.0D, 4.0D).d(0.0D, -2.0D, 0.0D)));
+                this.a(this.q.b((Entity) this, this.bw.E.b(4.0D, 2.0D, 4.0D).d(0.0D, -2.0D, 0.0D)));
+                this.b(this.q.b((Entity) this, this.bq.E.b(1.0D, 1.0D, 1.0D)));
             }
 
             double[] adouble = this.b(5, 1.0F);
             double[] adouble1 = this.b(0, 1.0F);
 
-            f3 = MathHelper.a(this.A * 3.1415927F / 180.0F - this.bF * 0.01F);
-            float f13 = MathHelper.b(this.A * 3.1415927F / 180.0F - this.bF * 0.01F);
+            f3 = MathHelper.a(this.A * 3.1415927F / 180.0F - this.bg * 0.01F);
+            float f13 = MathHelper.b(this.A * 3.1415927F / 180.0F - this.bg * 0.01F);
 
-            this.g.l_();
-            this.g.b(this.u + (double) (f3 * 5.5F * f2), this.v + (adouble1[1] - adouble[1]) * 1.0D + (double) (f9 * 5.5F), this.w - (double) (f13 * 5.5F * f2), 0.0F, 0.0F);
+            this.bq.l_();
+            this.bq.b(this.u + (double) (f3 * 5.5F * f2), this.v + (adouble1[1] - adouble[1]) * 1.0D + (double) (f9 * 5.5F), this.w - (double) (f13 * 5.5F * f2), 0.0F, 0.0F);
 
             for (int i1 = 0; i1 < 3; ++i1) {
                 EntityDragonPart entitydragonpart = null;
 
                 if (i1 == 0) {
-                    entitydragonpart = this.i;
+                    entitydragonpart = this.bs;
                 }
 
                 if (i1 == 1) {
-                    entitydragonpart = this.j;
+                    entitydragonpart = this.bt;
                 }
 
                 if (i1 == 2) {
-                    entitydragonpart = this.bK;
+                    entitydragonpart = this.bu;
                 }
 
                 double[] adouble2 = this.b(12 + i1 * 2, 1.0F);
@@ -288,21 +289,21 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
             }
 
             if (!this.q.I) {
-                this.bQ = this.a(this.g.E) | this.a(this.h.E);
+                this.bA = this.a(this.bq.E) | this.a(this.br.E);
             }
         }
     }
 
-    private void h() {
-        if (this.bS != null) {
-            if (this.bS.M) {
+    private void bF() {
+        if (this.bC != null) {
+            if (this.bC.M) {
                 if (!this.q.I) {
-                    this.a(this.g, DamageSource.a((Explosion) null), 10);
+                    this.a(this.bq, DamageSource.a((Explosion) null), 10.0F);
                 }
 
-                this.bS = null;
-            } else if (this.ac % 10 == 0 && this.aX() < this.aW()) {
-                this.b(this.aX() + 1);
+                this.bC = null;
+            } else if (this.ac % 10 == 0 && this.aJ() < this.aP()) {
+                this.g(this.aJ() + 1.0F);
             }
         }
 
@@ -323,19 +324,19 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
                 }
             }
 
-            this.bS = entityendercrystal;
+            this.bC = entityendercrystal;
         }
     }
 
     private void a(List list) {
-        double d0 = (this.h.E.a + this.h.E.d) / 2.0D;
-        double d1 = (this.h.E.c + this.h.E.f) / 2.0D;
+        double d0 = (this.br.E.a + this.br.E.d) / 2.0D;
+        double d1 = (this.br.E.c + this.br.E.f) / 2.0D;
         Iterator iterator = list.iterator();
 
         while (iterator.hasNext()) {
             Entity entity = (Entity) iterator.next();
 
-            if (entity instanceof EntityLiving) {
+            if (entity instanceof EntityLivingBase) {
                 double d2 = entity.u - d0;
                 double d3 = entity.w - d1;
                 double d4 = d2 * d2 + d3 * d3;
@@ -349,33 +350,34 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
         for (int i0 = 0; i0 < list.size(); ++i0) {
             Entity entity = (Entity) list.get(i0);
 
-            if (entity instanceof EntityLiving) {
-                entity.a(DamageSource.a((EntityLiving) this), 10);
+            if (entity instanceof EntityLivingBase) {
+                entity.a(DamageSource.a((EntityLivingBase) this), 10.0F);
             }
         }
     }
 
-    private void i() {
-        this.bP = false;
+    private void bG() {
+        this.bz = false;
         if (this.ab.nextInt(2) == 0 && !this.q.h.isEmpty()) {
-            this.bT = (Entity) this.q.h.get(this.ab.nextInt(this.q.h.size()));
+            this.bD = (Entity) this.q.h.get(this.ab.nextInt(this.q.h.size()));
         } else {
             boolean flag0 = false;
 
             do {
-                this.a = 0.0D;
-                this.b = (double) (70.0F + this.ab.nextFloat() * 50.0F);
-                this.c = 0.0D;
-                this.a += (double) (this.ab.nextFloat() * 120.0F - 60.0F);
-                this.c += (double) (this.ab.nextFloat() * 120.0F - 60.0F);
-                double d0 = this.u - this.a;
-                double d1 = this.v - this.b;
-                double d2 = this.w - this.c;
+                this.h = 0.0D;
+                this.i = (double) (70.0F + this.ab.nextFloat() * 50.0F);
+                this.j = 0.0D;
+                this.h += (double) (this.ab.nextFloat() * 120.0F - 60.0F);
+                this.j += (double) (this.ab.nextFloat() * 120.0F - 60.0F);
+                double d0 = this.u - this.h;
+                double d1 = this.v - this.i;
+                double d2 = this.w - this.j;
 
                 flag0 = d0 * d0 + d1 * d1 + d2 * d2 > 100.0D;
-            } while (!flag0);
+            }
+            while (!flag0);
 
-            this.bT = null;
+            this.bD = null;
         }
     }
 
@@ -399,7 +401,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
                     int i9 = this.q.a(i6, i7, i8);
 
                     if (i9 != 0) {
-                        if (i9 != Block.at.cz && i9 != Block.bN.cz && i9 != Block.D.cz && this.q.N().b("mobGriefing")) {
+                        if (i9 != Block.au.cF && i9 != Block.bO.cF && i9 != Block.E.cF && this.q.O().b("mobGriefing")) {
                             flag1 = this.q.i(i6, i7, i8) || flag1;
                         } else {
                             flag0 = true;
@@ -420,37 +422,37 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
         return flag0;
     }
 
-    public boolean a(EntityDragonPart entitydragonpart, DamageSource damagesource, int i0) {
-        if (entitydragonpart != this.g) {
-            i0 = i0 / 4 + 1;
+    public boolean a(EntityDragonPart entitydragonpart, DamageSource damagesource, float f0) {
+        if (entitydragonpart != this.bq) {
+            f0 = f0 / 4.0F + 1.0F;
         }
 
-        float f0 = this.A * 3.1415927F / 180.0F;
-        float f1 = MathHelper.a(f0);
-        float f2 = MathHelper.b(f0);
+        float f1 = this.A * 3.1415927F / 180.0F;
+        float f2 = MathHelper.a(f1);
+        float f3 = MathHelper.b(f1);
 
-        this.a = this.u + (double) (f1 * 5.0F) + (double) ((this.ab.nextFloat() - 0.5F) * 2.0F);
-        this.b = this.v + (double) (this.ab.nextFloat() * 3.0F) + 1.0D;
-        this.c = this.w - (double) (f2 * 5.0F) + (double) ((this.ab.nextFloat() - 0.5F) * 2.0F);
-        this.bT = null;
+        this.h = this.u + (double) (f2 * 5.0F) + (double) ((this.ab.nextFloat() - 0.5F) * 2.0F);
+        this.i = this.v + (double) (this.ab.nextFloat() * 3.0F) + 1.0D;
+        this.j = this.w - (double) (f3 * 5.0F) + (double) ((this.ab.nextFloat() - 0.5F) * 2.0F);
+        this.bD = null;
         if (damagesource.i() instanceof EntityPlayer || damagesource.c()) {
-            this.e(damagesource, i0);
+            this.e(damagesource, f0);
         }
 
         return true;
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
+    public boolean a(DamageSource damagesource, float f0) {
         return false;
     }
 
-    protected boolean e(DamageSource damagesource, int i0) {
-        return super.a(damagesource, i0);
+    protected boolean e(DamageSource damagesource, float f0) {
+        return super.a(damagesource, f0);
     }
 
-    protected void aS() {
-        ++this.bR;
-        if (this.bR >= 180 && this.bR <= 200) {
+    protected void az() {
+        ++this.bB;
+        if (this.bB >= 180 && this.bB <= 200) {
             float f0 = (this.ab.nextFloat() - 0.5F) * 8.0F;
             float f1 = (this.ab.nextFloat() - 0.5F) * 4.0F;
             float f2 = (this.ab.nextFloat() - 0.5F) * 8.0F;
@@ -462,7 +464,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
         int i1;
 
         if (!this.q.I) {
-            if (this.bR > 150 && this.bR % 5 == 0) {
+            if (this.bB > 150 && this.bB % 5 == 0) {
                 i0 = 1000;
 
                 while (i0 > 0) {
@@ -472,14 +474,14 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
                 }
             }
 
-            if (this.bR == 1) {
+            if (this.bB == 1) {
                 this.q.d(1018, (int) this.u, (int) this.v, (int) this.w, 0);
             }
         }
 
         this.d(0.0D, 0.10000000149011612D, 0.0D);
-        this.ay = this.A += 20.0F;
-        if (this.bR == 200 && !this.q.I) {
+        this.aN = this.A += 20.0F;
+        if (this.bB == 200 && !this.q.I) {
             i0 = 2000;
 
             while (i0 > 0) {
@@ -509,55 +511,55 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart {
                     if (d2 <= ((double) b1 - 0.5D) * ((double) b1 - 0.5D)) {
                         if (i2 < b0) {
                             if (d2 <= ((double) (b1 - 1) - 0.5D) * ((double) (b1 - 1) - 0.5D)) {
-                                this.q.c(i3, i2, i4, Block.D.cz);
+                                this.q.c(i3, i2, i4, Block.E.cF);
                             }
                         } else if (i2 > b0) {
                             this.q.c(i3, i2, i4, 0);
                         } else if (d2 > ((double) (b1 - 1) - 0.5D) * ((double) (b1 - 1) - 0.5D)) {
-                            this.q.c(i3, i2, i4, Block.D.cz);
+                            this.q.c(i3, i2, i4, Block.E.cF);
                         } else {
-                            this.q.c(i3, i2, i4, Block.bL.cz);
+                            this.q.c(i3, i2, i4, Block.bM.cF);
                         }
                     }
                 }
             }
         }
 
-        this.q.c(i0, b0 + 0, i1, Block.D.cz);
-        this.q.c(i0, b0 + 1, i1, Block.D.cz);
-        this.q.c(i0, b0 + 2, i1, Block.D.cz);
-        this.q.c(i0 - 1, b0 + 2, i1, Block.au.cz);
-        this.q.c(i0 + 1, b0 + 2, i1, Block.au.cz);
-        this.q.c(i0, b0 + 2, i1 - 1, Block.au.cz);
-        this.q.c(i0, b0 + 2, i1 + 1, Block.au.cz);
-        this.q.c(i0, b0 + 3, i1, Block.D.cz);
-        this.q.c(i0, b0 + 4, i1, Block.bO.cz);
+        this.q.c(i0, b0 + 0, i1, Block.E.cF);
+        this.q.c(i0, b0 + 1, i1, Block.E.cF);
+        this.q.c(i0, b0 + 2, i1, Block.E.cF);
+        this.q.c(i0 - 1, b0 + 2, i1, Block.av.cF);
+        this.q.c(i0 + 1, b0 + 2, i1, Block.av.cF);
+        this.q.c(i0, b0 + 2, i1 - 1, Block.av.cF);
+        this.q.c(i0, b0 + 2, i1 + 1, Block.av.cF);
+        this.q.c(i0, b0 + 3, i1, Block.E.cF);
+        this.q.c(i0, b0 + 4, i1, Block.bP.cF);
         BlockEndPortal.a = false;
     }
 
-    protected void bn() {}
+    protected void bk() {}
 
-    public Entity[] an() {
-        return this.f;
+    public Entity[] am() {
+        return this.bp;
     }
 
     public boolean K() {
         return false;
     }
 
-    public World d() {
+    public World b() {
         return this.q;
     }
 
-    protected String bb() {
+    protected String r() {
         return "mob.enderdragon.growl";
     }
 
-    protected String bc() {
+    protected String aK() {
         return "mob.enderdragon.hit";
     }
 
-    protected float ba() {
+    protected float aW() {
         return 5.0F;
     }
 }

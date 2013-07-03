@@ -10,23 +10,28 @@ public class BlockStairs extends Block {
     private static final int[][] a = new int[][] { { 2, 6}, { 3, 7}, { 2, 3}, { 6, 7}, { 0, 4}, { 1, 5}, { 0, 1}, { 4, 5}};
     private final Block b;
     private final int c;
-    private boolean d = false;
-    private int e = 0;
+    private boolean d;
+    private int e;
 
     protected BlockStairs(int i0, Block block, int i1) {
-        super(i0, block.cO);
+        super(i0, block.cU);
         this.b = block;
         this.c = i1;
-        this.c(block.cA);
-        this.b(block.cB / 3.0F);
-        this.a(block.cM);
+        this.c(block.cG);
+        this.b(block.cH / 3.0F);
+        this.a(block.cS);
         this.k(255);
         this.a(CreativeTabs.b);
     }
 
     public void a(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         if (this.d) {
-            this.a(0.5F * (float) (this.e % 2), 0.5F * (float) (this.e / 2 % 2), 0.5F * (float) (this.e / 4 % 2), 0.5F + 0.5F * (float) (this.e % 2), 0.5F + 0.5F * (float) (this.e / 2 % 2), 0.5F + 0.5F * (float) (this.e / 4 % 2));
+            this.a(0.5F * (float) (this.e % 2),
+                    0.5F * (float) (this.e / 2 % 2),
+                    0.5F * (float) (this.e / 4 % 2),
+                    0.5F + 0.5F * (float) (this.e % 2),
+                    0.5F + 0.5F * (float) (this.e / 2 % 2),
+                    0.5F + 0.5F * (float) (this.e / 4 % 2));
         } else {
             this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         }
@@ -55,7 +60,7 @@ public class BlockStairs extends Block {
     }
 
     public static boolean d(int i0) {
-        return i0 > 0 && Block.r[i0] instanceof BlockStairs;
+        return i0 > 0 && Block.s[i0] instanceof BlockStairs;
     }
 
     private boolean f(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
@@ -307,8 +312,8 @@ public class BlockStairs extends Block {
         this.b.a(world, i0, i1, i2, explosion);
     }
 
-    public void a(World world, int i0, int i1, int i2, EntityLiving entityliving, ItemStack itemstack) {
-        int i3 = MathHelper.c((double) (entityliving.A * 4.0F / 360.0F) + 0.5D) & 3;
+    public void a(World world, int i0, int i1, int i2, EntityLivingBase entitylivingbase, ItemStack itemstack) {
+        int i3 = MathHelper.c((double) (entitylivingbase.A * 4.0F / 360.0F) + 0.5D) & 3;
         int i4 = world.h(i0, i1, i2) & 4;
 
         if (i3 == 0) {

@@ -12,7 +12,7 @@ final class DispenserBehaviorBoat extends BehaviorDefaultDispenseItem {
     DispenserBehaviorBoat() {}
 
     public ItemStack b(IBlockSource iblocksource, ItemStack itemstack) {
-        EnumFacing enumfacing = BlockDispenser.j_(iblocksource.h());
+        EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
         World world = iblocksource.k();
         double d0 = iblocksource.a() + (double) ((float) enumfacing.c() * 1.125F);
         double d1 = iblocksource.b() + (double) ((float) enumfacing.d() * 1.125F);

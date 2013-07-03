@@ -20,21 +20,20 @@ public class DamageSource {
     public static DamageSource l = (new DamageSource("wither")).j();
     public static DamageSource m = new DamageSource("anvil");
     public static DamageSource n = new DamageSource("fallingBlock");
-    private boolean p = false;
-    private boolean q = false;
+    private boolean p;
+    private boolean q;
     private float r = 0.3F;
     private boolean s;
     private boolean t;
     private boolean u;
-    private boolean v = false;
-    private boolean w = false;
+    private boolean v;
+    private boolean w;
     public String o;
 
     // CanaryMod
     protected CanaryDamageSource damageSource;
-
-    public static DamageSource a(EntityLiving entityliving) {
-        return new EntityDamageSource("mob", entityliving);
+    public static DamageSource a(EntityLivingBase entitylivingbase) {
+        return new EntityDamageSource("mob", entitylivingbase);
     }
 
     public static DamageSource a(EntityPlayer entityplayer) {
@@ -124,12 +123,12 @@ public class DamageSource {
         return this;
     }
 
-    public String b(EntityLiving entityliving) {
-        EntityLiving entityliving1 = entityliving.bN();
+    public ChatMessageComponent b(EntityLivingBase entitylivingbase) {
+        EntityLivingBase entitylivingbase1 = entitylivingbase.aO();
         String s0 = "death.attack." + this.o;
         String s1 = s0 + ".player";
 
-        return entityliving1 != null && StatCollector.b(s1) ? StatCollector.a(s1, new Object[] { entityliving.ax(), entityliving1.ax()}) : StatCollector.a(s0, new Object[] { entityliving.ax()});
+        return entitylivingbase1 != null && StatCollector.b(s1) ? ChatMessageComponent.b(s1, new Object[]{ entitylivingbase.aw(), entitylivingbase1.aw() }) : ChatMessageComponent.b(s0, new Object[]{ entitylivingbase.aw() });
     }
 
     public boolean m() {

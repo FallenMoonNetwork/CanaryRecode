@@ -11,7 +11,7 @@ final class DispenserBehaviorFireball extends BehaviorDefaultDispenseItem {
     DispenserBehaviorFireball() {}
 
     public ItemStack b(IBlockSource iblocksource, ItemStack itemstack) {
-        EnumFacing enumfacing = BlockDispenser.j_(iblocksource.h());
+        EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
         IPosition iposition = BlockDispenser.a(iblocksource);
         double d0 = iposition.a() + (double) ((float) enumfacing.c() * 0.3F);
         double d1 = iposition.b() + (double) ((float) enumfacing.c() * 0.3F);

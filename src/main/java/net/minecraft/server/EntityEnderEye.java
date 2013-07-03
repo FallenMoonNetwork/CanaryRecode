@@ -6,7 +6,7 @@ import net.canarymod.api.entity.CanaryEnderEye;
 
 public class EntityEnderEye extends Entity {
 
-    public int a = 0;
+    public double a; //CanaryMod private -> public
     private double b;
     private double c;
     private double d;
@@ -23,7 +23,7 @@ public class EntityEnderEye extends Entity {
 
     public EntityEnderEye(World world, double d0, double d1, double d2) {
         super(world);
-        this.e = 0;
+        this.d = 0;
         this.a(0.25F, 0.25F);
         this.b(d0, d1, d2);
         this.N = 0.0F;
@@ -36,17 +36,17 @@ public class EntityEnderEye extends Entity {
         float f0 = MathHelper.a(d2 * d2 + d3 * d3);
 
         if (f0 > 12.0F) {
-            this.b = this.u + d2 / (double) f0 * 12.0D;
-            this.d = this.w + d3 / (double) f0 * 12.0D;
-            this.c = this.v + 8.0D;
+            this.a = this.u + d2 / (double) f0 * 12.0D;
+            this.c = this.w + d3 / (double) f0 * 12.0D;
+            this.b = this.v + 8.0D;
         } else {
-            this.b = d0;
-            this.c = (double) i0;
-            this.d = d1;
+            this.a = d0;
+            this.b = (double) i0;
+            this.c = d1;
         }
 
-        this.e = 0;
-        this.f = this.ab.nextInt(5) > 0;
+        this.d = 0;
+        this.e = this.ab.nextInt(5) > 0;
     }
 
     public void l_() {
@@ -80,8 +80,8 @@ public class EntityEnderEye extends Entity {
         this.B = this.D + (this.B - this.D) * 0.2F;
         this.A = this.C + (this.A - this.C) * 0.2F;
         if (!this.q.I) {
-            double d0 = this.b - this.u;
-            double d1 = this.d - this.w;
+            double d0 = this.a - this.u;
+            double d1 = this.c - this.w;
             float f1 = (float) Math.sqrt(d0 * d0 + d1 * d1);
             float f2 = (float) Math.atan2(d1, d0);
             double d2 = (double) f0 + (double) (f1 - f0) * 0.0025D;
@@ -93,7 +93,7 @@ public class EntityEnderEye extends Entity {
 
             this.x = Math.cos((double) f2) * d2;
             this.z = Math.sin((double) f2) * d2;
-            if (this.v < this.c) {
+            if (this.v < this.b) {
                 this.y += (1.0D - this.y) * 0.014999999664723873D;
             } else {
                 this.y += (-1.0D - this.y) * 0.014999999664723873D;
@@ -112,11 +112,11 @@ public class EntityEnderEye extends Entity {
 
         if (!this.q.I) {
             this.b(this.u, this.v, this.w);
-            ++this.e;
-            if (this.e > 80 && !this.q.I) {
+            ++this.d;
+            if (this.d > 80 && !this.q.I) {
                 this.w();
-                if (this.f) {
-                    this.q.d((Entity) (new EntityItem(this.q, this.u, this.v, this.w, new ItemStack(Item.bB))));
+                if (this.e) {
+                    this.q.d((Entity) (new EntityItem(this.q, this.u, this.v, this.w, new ItemStack(Item.bC))));
                 } else {
                     this.q.e(2003, (int) Math.round(this.u), (int) Math.round(this.v), (int) Math.round(this.w), 0);
                 }
@@ -128,11 +128,11 @@ public class EntityEnderEye extends Entity {
 
     public void a(NBTTagCompound nbttagcompound) {}
 
-    public float c(float f0) {
+    public float d(float f0) {
         return 1.0F;
     }
 
-    public boolean ap() {
+    public boolean ao() {
         return false;
     }
 }

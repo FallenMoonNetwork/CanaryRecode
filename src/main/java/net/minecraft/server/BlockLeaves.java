@@ -9,9 +9,13 @@ import net.canarymod.hook.world.LeafDecayHook;
 
 public class BlockLeaves extends BlockLeavesBase {
 
-    public static final String[] a = new String[] { "oak", "spruce", "birch", "jungle"};
-    public static final String[][] b = new String[][] { { "leaves", "leaves_spruce", "leaves", "leaves_jungle"}, { "leaves_opaque", "leaves_spruce_opaque", "leaves_opaque", "leaves_jungle_opaque"}};
-    private Icon[][] cR = new Icon[2][];
+    public static final String[] a = new String[]{ "oak", "spruce", "birch",
+            "jungle" };
+    public static final String[][] b = new String[][]{
+            { "leaves_oak", "leaves_spruce", "leaves_birch", "leaves_jungle" },
+            { "leaves_oak_opaque", "leaves_spruce_opaque",
+                    "leaves_birch_opaque", "leaves_jungle_opaque" } };
+    private Icon[][] cX = new Icon[2][];
     int[] c;
 
     protected BlockLeaves(int i0) {
@@ -30,7 +34,7 @@ public class BlockLeaves extends BlockLeavesBase {
                     for (int i8 = -b0; i8 <= b0; ++i8) {
                         int i9 = world.a(i0 + i6, i1 + i7, i2 + i8);
 
-                        if (i9 == Block.O.cz) {
+                        if (i9 == Block.P.cF) {
                             int i10 = world.h(i0 + i6, i1 + i7, i2 + i8);
 
                             world.b(i0 + i6, i1 + i7, i2 + i8, i10 | 8, 4);
@@ -67,9 +71,9 @@ public class BlockLeaves extends BlockLeavesBase {
                         for (i8 = -b0; i8 <= b0; ++i8) {
                             for (i9 = -b0; i9 <= b0; ++i9) {
                                 i10 = world.a(i0 + i7, i1 + i8, i2 + i9);
-                                if (i10 == Block.N.cz) {
+                                if (i10 == Block.O.cF) {
                                     this.c[(i7 + i6) * i5 + (i8 + i6) * b1 + i9 + i6] = 0;
-                                } else if (i10 == Block.O.cz) {
+                                } else if (i10 == Block.P.cF) {
                                     this.c[(i7 + i6) * i5 + (i8 + i6) * b1 + i9 + i6] = -2;
                                 } else {
                                     this.c[(i7 + i6) * i5 + (i8 + i6) * b1 + i9 + i6] = -1;
@@ -141,7 +145,7 @@ public class BlockLeaves extends BlockLeavesBase {
     }
 
     public int a(int i0, Random random, int i1) {
-        return Block.C.cz;
+        return Block.D.cF;
     }
 
     public void a(World world, int i0, int i1, int i2, int i3, float f0, int i4) {
@@ -174,15 +178,15 @@ public class BlockLeaves extends BlockLeavesBase {
             }
 
             if ((i3 & 3) == 0 && world.s.nextInt(i5) == 0) {
-                this.b(world, i0, i1, i2, new ItemStack(Item.k, 1, 0));
+                this.b(world, i0, i1, i2, new ItemStack(Item.l, 1, 0));
             }
         }
     }
 
     public void a(World world, EntityPlayer entityplayer, int i0, int i1, int i2, int i3) {
-        if (!world.I && entityplayer.cd() != null && entityplayer.cd().c == Item.bf.cp) {
-            entityplayer.a(StatList.C[this.cz], 1);
-            this.b(world, i0, i1, i2, new ItemStack(Block.O.cz, 1, i3 & 3));
+        if (!world.I && entityplayer.bt() != null && entityplayer.bt().d == Item.bg.cv) {
+            entityplayer.a(StatList.C[this.cF], 1);
+            this.b(world, i0, i1, i2, new ItemStack(Block.P.cF, 1, i3 & 3));
         } else {
             super.a(world, entityplayer, i0, i1, i2, i3);
         }
@@ -196,7 +200,7 @@ public class BlockLeaves extends BlockLeavesBase {
         return !this.d;
     }
 
-    protected ItemStack c_(int i0) {
-        return new ItemStack(this.cz, 1, i0 & 3);
+    protected ItemStack d_(int i0) {
+        return new ItemStack(this.cF, 1, i0 & 3);
     }
 }

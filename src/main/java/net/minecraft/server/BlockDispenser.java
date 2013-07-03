@@ -33,19 +33,19 @@ public class BlockDispenser extends BlockContainer {
             int i6 = world.a(i0 + 1, i1, i2);
             byte b0 = 3;
 
-            if (Block.s[i3] && !Block.s[i4]) {
+            if (Block.t[i3] && !Block.t[i4]) {
                 b0 = 3;
             }
 
-            if (Block.s[i4] && !Block.s[i3]) {
+            if (Block.t[i4] && !Block.t[i3]) {
                 b0 = 2;
             }
 
-            if (Block.s[i5] && !Block.s[i6]) {
+            if (Block.t[i5] && !Block.t[i6]) {
                 b0 = 5;
             }
 
-            if (Block.s[i6] && !Block.s[i5]) {
+            if (Block.t[i6] && !Block.t[i5]) {
                 b0 = 4;
             }
 
@@ -90,7 +90,7 @@ public class BlockDispenser extends BlockContainer {
                 if (ibehaviordispenseitem != IBehaviorDispenseItem.a) {
                     ItemStack itemstack1 = ibehaviordispenseitem.a(blocksourceimpl, itemstack);
 
-                    tileentitydispenser.a(i3, itemstack1.a == 0 ? null : itemstack1);
+                    tileentitydispenser.a(i3, itemstack1.b == 0 ? null : itemstack1);
                 }
             }
         }
@@ -106,7 +106,7 @@ public class BlockDispenser extends BlockContainer {
         boolean flag1 = (i4 & 8) != 0;
 
         if (flag0 && !flag1) {
-            world.a(i0, i1, i2, this.cz, this.a(world));
+            world.a(i0, i1, i2, this.cF, this.a(world));
             world.b(i0, i1, i2, i4 | 8, 4);
         } else if (!flag0 && flag1) {
             world.b(i0, i1, i2, i4 & -9, 4);
@@ -123,11 +123,11 @@ public class BlockDispenser extends BlockContainer {
         return new TileEntityDispenser();
     }
 
-    public void a(World world, int i0, int i1, int i2, EntityLiving entityliving, ItemStack itemstack) {
-        int i3 = BlockPistonBase.a(world, i0, i1, i2, entityliving);
+    public void a(World world, int i0, int i1, int i2, EntityLivingBase entitylivingbase, ItemStack itemstack) {
+        int i3 = BlockPistonBase.a(world, i0, i1, i2, entitylivingbase);
 
         world.b(i0, i1, i2, i3, 2);
-        if (itemstack.t()) {
+        if (itemstack.u()) {
             ((TileEntityDispenser) world.r(i0, i1, i2)).a(itemstack.s());
         }
     }
@@ -144,15 +144,15 @@ public class BlockDispenser extends BlockContainer {
                     float f1 = this.b.nextFloat() * 0.8F + 0.1F;
                     float f2 = this.b.nextFloat() * 0.8F + 0.1F;
 
-                    while (itemstack.a > 0) {
+                    while (itemstack.b > 0) {
                         int i6 = this.b.nextInt(21) + 10;
 
-                        if (i6 > itemstack.a) {
-                            i6 = itemstack.a;
+                        if (i6 > itemstack.b) {
+                            i6 = itemstack.b;
                         }
 
-                        itemstack.a -= i6;
-                        EntityItem entityitem = new EntityItem(world, (double) ((float) i0 + f0), (double) ((float) i1 + f1), (double) ((float) i2 + f2), new ItemStack(itemstack.c, i6, itemstack.k()));
+                        itemstack.b -= i6;
+                        EntityItem entityitem = new EntityItem(world, (double) ((float) i0 + f0), (double) ((float) i1 + f1), (double) ((float) i2 + f2), new ItemStack(itemstack.d, i6, itemstack.k()));
 
                         if (itemstack.p()) {
                             entityitem.d().d((NBTTagCompound) itemstack.q().b());
@@ -175,7 +175,7 @@ public class BlockDispenser extends BlockContainer {
     }
 
     public static IPosition a(IBlockSource iblocksource) {
-        EnumFacing enumfacing = j_(iblocksource.h());
+        EnumFacing enumfacing = l_(iblocksource.h());
         double d0 = iblocksource.a() + 0.7D * (double) enumfacing.c();
         double d1 = iblocksource.b() + 0.7D * (double) enumfacing.d();
         double d2 = iblocksource.c() + 0.7D * (double) enumfacing.e();
@@ -183,7 +183,7 @@ public class BlockDispenser extends BlockContainer {
         return new PositionImpl(d0, d1, d2);
     }
 
-    public static EnumFacing j_(int i0) {
+    public static EnumFacing l_(int i0) {
         return EnumFacing.a(i0 & 7);
     }
 

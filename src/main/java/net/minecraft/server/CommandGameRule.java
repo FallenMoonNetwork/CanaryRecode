@@ -16,8 +16,8 @@ public class CommandGameRule extends CommandBase {
         return 2;
     }
 
-    public String a(ICommandSender icommandsender) {
-        return icommandsender.a("commands.gamerule.usage", new Object[0]);
+    public String c(ICommandSender icommandsender) {
+        return "commands.gamerule.usage";
     }
 
     public void b(ICommandSender icommandsender, String[] astring) {
@@ -27,6 +27,7 @@ public class CommandGameRule extends CommandBase {
             s0 = astring[0];
             String s1 = astring[1];
             // CanaryMod: Fixes for MultiWorld
+//MERGE: This is definitely not correct anymore! this.d is still okay though - Chris
             GameRules gamerules = icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.N() : icommandsender instanceof TileEntityCommandBlock ? ((EntityPlayerMP) icommandsender).q.N() : this.d();
             //
 
@@ -39,20 +40,21 @@ public class CommandGameRule extends CommandBase {
         } else if (astring.length == 1) {
             s0 = astring[0];
             // CanaryMod: Fixes for MultiWorld
+//MERGE: This is definitely not correct anymore! this.d is still okay though - Chris
             GameRules gamerules1 = icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.N() : icommandsender instanceof TileEntityCommandBlock ? ((EntityPlayerMP) icommandsender).q.N() : this.d();
             //
 
             if (gamerules1.e(s0)) {
                 String s2 = gamerules1.a(s0);
 
-                icommandsender.a(s0 + " = " + s2);
+                icommandsender.a(ChatMessageComponent.d(s0).a(" = ").a(s2));
             } else {
-                a(icommandsender, "commands.gamerule.norule", new Object[] { s0});
+                a(icommandsender, "commands.gamerule.norule", new Object[]{ s0 });
             }
         } else if (astring.length == 0) {
             GameRules gamerules2 = this.d();
 
-            icommandsender.a(a(gamerules2.b()));
+            icommandsender.a(ChatMessageComponent.d(a(gamerules2.b())));
         } else {
             throw new WrongUsageException("commands.gamerule.usage", new Object[0]);
         }
@@ -60,6 +62,7 @@ public class CommandGameRule extends CommandBase {
 
     public List a(ICommandSender icommandsender, String[] astring) {
         // CanaryMod: Fixes for MultiWorld
+//MERGE: This is definitely not correct anymore! this.d is still okay though - Chris
         String[] rules = icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.N().b() : icommandsender instanceof TileEntityCommandBlock ? ((EntityPlayerMP) icommandsender).q.N().b() : this.d().b();
         //
         return astring.length == 1 ? a(astring, rules) : (astring.length == 2 ? a(astring, new String[] { "true", "false"}) : null);
@@ -67,8 +70,8 @@ public class CommandGameRule extends CommandBase {
 
     private GameRules d() {
         // CanaryMod: Fixes for MultiWorld
-        // return MinecraftServer.D().a(0).N();
-        return ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().N();
+        // return MinecraftServer.F().a(0).O();
+        return ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().O();
         //
     }
 }

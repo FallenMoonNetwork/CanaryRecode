@@ -28,7 +28,7 @@ public class BlockTrapDoor extends Block {
     }
 
     public AxisAlignedBB b(World world, int i0, int i1, int i2) {
-        this.a((IBlockAccess)world, i0, i1, i2);
+        this.a((IBlockAccess)world, i0, i1, i2); //CanaryMod Cast to IBlockAccess
         return super.b(world, i0, i1, i2);
     }
 
@@ -73,7 +73,7 @@ public class BlockTrapDoor extends Block {
     public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {}
 
     public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer, int i3, float f0, float f1, float f2) {
-        if (this.cO == Material.f) {
+        if (this.cU == Material.f) {
             return true;
         } else {
             int i4 = world.h(i0, i1, i2);
@@ -123,7 +123,7 @@ public class BlockTrapDoor extends Block {
 
             boolean flag0 = world.C(i0, i1, i2);
 
-            if (flag0 || i3 > 0 && Block.r[i3].f()) {
+            if (flag0 || i3 > 0 && Block.s[i3].f()) {
                 this.a(world, i0, i1, i2, flag0);
             }
         }
@@ -194,9 +194,11 @@ public class BlockTrapDoor extends Block {
         if (i0 <= 0) {
             return false;
         } else {
-            Block block = Block.r[i0];
+            Block block = Block.s[i0];
 
-            return block != null && block.cO.k() && block.b() || block == Block.bh || block instanceof BlockHalfSlab || block instanceof BlockStairs;
+            return block != null && block.cU.k() && block.b()
+                    || block == Block.bi || block instanceof BlockHalfSlab
+                    || block instanceof BlockStairs;
         }
     }
 }

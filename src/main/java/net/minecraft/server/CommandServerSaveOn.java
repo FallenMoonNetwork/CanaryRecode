@@ -16,8 +16,13 @@ public class CommandServerSaveOn extends CommandBase {
         return 4;
     }
 
+    public String c(ICommandSender icommandsender) {
+        return "commands.save-on.usage";
+    }
+
     public void b(ICommandSender icommandsender, String[] astring) {
-        MinecraftServer minecraftserver = MinecraftServer.D();
+        MinecraftServer minecraftserver = MinecraftServer.F();
+        boolean flag0 = false;
 
         // CanaryMod: Fix for MultiWorld
         for (net.canarymod.api.world.World w : minecraftserver.worldManager.getAllWorlds()) {
@@ -25,9 +30,15 @@ public class CommandServerSaveOn extends CommandBase {
 
             if (worldserver != null) {
                 worldserver.c = false;
+                flag0 = true;
             }
         }
 
-        a(icommandsender, "commands.save.enabled", new Object[0]);
+        if (flag0) {
+            a(icommandsender, "commands.save.enabled", new Object[0]);
+        } else {
+            throw new CommandException("commands.save-on.alreadyOn",
+                    new Object[0]);
+        }
     }
 }

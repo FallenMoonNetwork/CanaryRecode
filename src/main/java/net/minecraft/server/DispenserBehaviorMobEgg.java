@@ -10,16 +10,16 @@ final class DispenserBehaviorMobEgg extends BehaviorDefaultDispenseItem {
     DispenserBehaviorMobEgg() {}
 
     public ItemStack b(IBlockSource iblocksource, ItemStack itemstack) {
-        EnumFacing enumfacing = BlockDispenser.j_(iblocksource.h());
+        EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
         double d0 = iblocksource.a() + (double) enumfacing.c();
         double d1 = (double) ((float) iblocksource.e() + 0.2F);
         double d2 = iblocksource.c() + (double) enumfacing.e();
         Entity entity = ItemMonsterPlacer.a(iblocksource.k(), itemstack.k(), d0, d1, d2, false); // Disallow spawn
 
-        if (entity instanceof EntityLiving && itemstack.t()) {
-            ((EntityLiving) entity).c(itemstack.s());
+        if (entity instanceof EntityLivingBase && itemstack.u()) {
+            ((EntityLiving) entity).a(itemstack.s());
         }
-
+//MERGE: This might not be correct (iblocksource.j())
         // CanaryMod: Dispense
         DispenseHook hook = new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), entity.getCanaryEntity());
 

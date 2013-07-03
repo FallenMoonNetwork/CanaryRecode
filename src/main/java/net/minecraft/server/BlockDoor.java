@@ -1,20 +1,13 @@
 package net.minecraft.server;
 
+
 import java.util.Random;
+
 
 public class BlockDoor extends Block {
 
-    private static final String[] a = new String[] { "doorWood_lower", "doorWood_upper", "doorIron_lower", "doorIron_upper"};
-    private final int b;
-
     protected BlockDoor(int i0, Material material) {
         super(i0, material);
-        if (material == Material.f) {
-            this.b = 2;
-        } else {
-            this.b = 0;
-        }
-
         float f0 = 0.5F;
         float f1 = 1.0F;
 
@@ -110,7 +103,7 @@ public class BlockDoor extends Block {
     public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {}
 
     public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer, int i3, float f0, float f1, float f2) {
-        if (this.cO == Material.f) {
+        if (this.cU == Material.f) {
             return true;
         } else {
             int i4 = this.c_(world, i0, i1, i2);
@@ -156,7 +149,7 @@ public class BlockDoor extends Block {
         if ((i4 & 8) == 0) {
             boolean flag0 = false;
 
-            if (world.a(i0, i1 + 1, i2) != this.cz) {
+            if (world.a(i0, i1 + 1, i2) != this.cF) {
                 world.i(i0, i1, i2);
                 flag0 = true;
             }
@@ -164,7 +157,7 @@ public class BlockDoor extends Block {
             if (!world.w(i0, i1 - 1, i2)) {
                 world.i(i0, i1, i2);
                 flag0 = true;
-                if (world.a(i0, i1 + 1, i2) == this.cz) {
+                if (world.a(i0, i1 + 1, i2) == this.cF) {
                     world.i(i0, i1 + 1, i2);
                 }
             }
@@ -176,23 +169,23 @@ public class BlockDoor extends Block {
             } else {
                 boolean flag1 = world.C(i0, i1, i2) || world.C(i0, i1 + 1, i2);
 
-                if ((flag1 || i3 > 0 && Block.r[i3].f()) && i3 != this.cz) {
+                if ((flag1 || i3 > 0 && Block.s[i3].f()) && i3 != this.cF) {
                     this.a(world, i0, i1, i2, flag1);
                 }
             }
         } else {
-            if (world.a(i0, i1 - 1, i2) != this.cz) {
+            if (world.a(i0, i1 - 1, i2) != this.cF) {
                 world.i(i0, i1, i2);
             }
 
-            if (i3 > 0 && i3 != this.cz) {
+            if (i3 > 0 && i3 != this.cF) {
                 this.a(world, i0, i1 - 1, i2, i3);
             }
         }
     }
 
     public int a(int i0, Random random, int i1) {
-        return (i0 & 8) != 0 ? 0 : (this.cO == Material.f ? Item.aC.cp : Item.aw.cp);
+        return (i0 & 8) != 0 ? 0 : (this.cU == Material.f ? Item.aD.cv : Item.ax.cv);
     }
 
     public MovingObjectPosition a(World world, int i0, int i1, int i2, Vec3 vec3, Vec3 vec31) {
@@ -228,7 +221,7 @@ public class BlockDoor extends Block {
     }
 
     public void a(World world, int i0, int i1, int i2, int i3, EntityPlayer entityplayer) {
-        if (entityplayer.ce.d && (i3 & 8) != 0 && world.a(i0, i1 - 1, i2) == this.cz) {
+        if (entityplayer.bG.d && (i3 & 8) != 0 && world.a(i0, i1 - 1, i2) == this.cF) {
             world.i(i0, i1 - 1, i2);
         }
     }

@@ -48,7 +48,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
         File file2 = new File(file1, "DIM-1");
         File file3 = new File(file1, "DIM1");
 
-        MinecraftServer.D().al().a("Scanning folders...");
+        MinecraftServer.F().an().a("Scanning folders...");
         this.a(file1, (Collection) arraylist);
         if (file2.exists()) {
             this.a(file2, (Collection) arraylist1);
@@ -60,7 +60,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
 
         int i0 = arraylist.size() + arraylist1.size() + arraylist2.size();
 
-        MinecraftServer.D().al().a("Total conversion count is " + i0);
+        MinecraftServer.F().an().a("Total conversion count is " + i0);
         WorldInfo worldinfo = this.c(s0);
         Object object = null;
 
@@ -133,7 +133,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
                         DataInputStream datainputstream = regionfile.a(i2, i3);
 
                         if (datainputstream == null) {
-                            MinecraftServer.D().al().b("Failed to fetch input stream");
+                            MinecraftServer.F().an().b("Failed to fetch input stream");
                         } else {
                             NBTTagCompound nbttagcompound = CompressedStreamTools.a((DataInput) datainputstream);
 

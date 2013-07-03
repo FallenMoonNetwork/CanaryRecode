@@ -35,8 +35,6 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 public class CryptManager {
 
-    public static final Charset a = Charset.forName("ISO_8859_1");
-
     public static KeyPair b() {
         try {
             KeyPairGenerator keypairgenerator = KeyPairGenerator.getInstance("RSA");
@@ -52,7 +50,7 @@ public class CryptManager {
 
     public static byte[] a(String s0, PublicKey publickey, SecretKey secretkey) {
         try {
-            return a("SHA-1", new byte[][] { s0.getBytes("ISO_8859_1"), secretkey.getEncoded(), publickey.getEncoded()});
+            return a("SHA-1", new byte[][]{ s0.getBytes("ISO_8859_1"), secretkey.getEncoded(), publickey.getEncoded() });
         } catch (UnsupportedEncodingException unsupportedencodingexception) {
             unsupportedencodingexception.printStackTrace();
             return null;
@@ -136,7 +134,7 @@ public class CryptManager {
     private static BufferedBlockCipher a(boolean flag0, Key key) {
         BufferedBlockCipher bufferedblockcipher = new BufferedBlockCipher(new CFBBlockCipher(new AESFastEngine(), 8));
 
-        bufferedblockcipher.a(flag0, new ParametersWithIV(new KeyParameter(key.getEncoded()), key.getEncoded(), 0, 16));
+        bufferedblockcipher.init(flag0, new ParametersWithIV(new KeyParameter(key.getEncoded()), key.getEncoded(), 0, 16));
         return bufferedblockcipher;
     }
 

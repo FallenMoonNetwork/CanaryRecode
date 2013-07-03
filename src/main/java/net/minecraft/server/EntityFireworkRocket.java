@@ -127,11 +127,11 @@ public class EntityFireworkRocket extends Entity {
         }
     }
 
-    public float c(float f0) {
-        return super.c(f0);
+    public float d(float f0) {
+        return super.d(f0);
     }
 
-    public boolean ap() {
+    public boolean ao() {
         return false;
     }
 }

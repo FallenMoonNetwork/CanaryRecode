@@ -10,7 +10,7 @@ import net.canarymod.hook.entity.DamageHook;
 public class BlockCactus extends Block {
 
     protected BlockCactus(int i0) {
-        super(i0, Material.y);
+        super(i0, Material.z);
         this.b(true);
         this.a(CreativeTabs.c);
     }
@@ -19,7 +19,7 @@ public class BlockCactus extends Block {
         if (world.c(i0, i1 + 1, i2)) {
             int i3;
 
-            for (i3 = 1; world.a(i0, i1 - i3, i2) == this.cz; ++i3) {
+            for (i3 = 1; world.a(i0, i1 - i3, i2) == this.cF; ++i3) {
                 ;
             }
 
@@ -27,9 +27,9 @@ public class BlockCactus extends Block {
                 int i4 = world.h(i0, i1, i2);
 
                 if (i4 == 15) {
-                    world.c(i0, i1 + 1, i2, this.cz);
+                    world.c(i0, i1 + 1, i2, this.cF);
                     world.b(i0, i1, i2, 0, 4);
-                    this.a(world, i0, i1 + 1, i2, this.cz);
+                    this.a(world, i0, i1 + 1, i2, this.cF);
                 } else {
                     world.b(i0, i1, i2, i4 + 1, 4);
                 }
@@ -77,7 +77,7 @@ public class BlockCactus extends Block {
         } else {
             int i3 = world.a(i0, i1 - 1, i2);
 
-            return i3 == Block.aZ.cz || i3 == Block.I.cz;
+            return i3 == Block.ba.cF || i3 == Block.J.cF;
         }
     }
 

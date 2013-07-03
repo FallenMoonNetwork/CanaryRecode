@@ -5,8 +5,9 @@ import net.canarymod.config.Configuration;
 
 public class DedicatedPlayerList extends ServerConfigurationManager {
 
-//  CanaryMod removed whitelist
+    //  CanaryMod removed whitelist
     // CanaryMod: removed ops
+
     public DedicatedPlayerList(DedicatedServer dedicatedserver) {
         super(dedicatedserver);
         // CanaryMod removed whitelist settings
@@ -29,12 +30,12 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
         // this.u();
     }
 
-    public void i(String s0) {
+    public void h(String s0) {
         //CanaryMod re-route to our whitelist
         Canary.whitelist().removePlayer(s0);
     }
 
-    public void h(String s0) {
+    public void g(String s0) {
         //Canary, re-route to our whitelist
         Canary.whitelist().addPlayer(s0);
     }
@@ -56,7 +57,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
         //
         // bufferedreader.close();
         // } catch (Exception exception) {
-        // this.s().al().b("Failed to load operators list: " + exception);
+        // this.s().an().b("Failed to load operators list: " + exception);
         // }
     }
 
@@ -73,7 +74,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
         //
         // printwriter.close();
         // } catch (Exception exception) {
-        // this.s().al().b("Failed to save operators list: " + exception);
+        // this.s().an().b("Failed to save operators list: " + exception);
         // }
     }
 
@@ -89,7 +90,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
 //
 //            bufferedreader.close();
 //        } catch (Exception exception) {
-//            this.s().al().b("Failed to load white-list: " + exception);
+//            this.s().an().b("Failed to load white-list: " + exception);
 //        }
     }
 
@@ -106,7 +107,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
 //
 //            printwriter.close();
 //        } catch (Exception exception) {
-//            this.s().al().b("Failed to save white-list: " + exception);
+//            this.s().an().b("Failed to save white-list: " + exception);
 //        }
     }
 
