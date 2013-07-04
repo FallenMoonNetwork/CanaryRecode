@@ -6,8 +6,8 @@ import net.canarymod.hook.world.TreeGrowHook;
 
 public class BlockSapling extends BlockFlower {
 
-    public static final String[] a = new String[] { "oak", "spruce", "birch", "jungle"};
-    private static final String[] b = new String[] { "sapling", "sapling_spruce", "sapling_birch", "sapling_jungle"};
+    public static final String[] a = new String[]{ "oak", "spruce", "birch", "jungle" };
+    private static final String[] b = new String[]{ "sapling", "sapling_spruce", "sapling_birch", "sapling_jungle" };
 
     protected BlockSapling(int i0) {
         super(i0);
@@ -91,18 +91,18 @@ public class BlockSapling extends BlockFlower {
 
         if (!((WorldGenerator) object).a(world, random, i0 + i4, i1, i2 + i5)) {
             if (flag0) {
-                world.f(i0 + i4, i1, i2 + i5, this.cz, i3, 4);
-                world.f(i0 + i4 + 1, i1, i2 + i5, this.cz, i3, 4);
-                world.f(i0 + i4, i1, i2 + i5 + 1, this.cz, i3, 4);
-                world.f(i0 + i4 + 1, i1, i2 + i5 + 1, this.cz, i3, 4);
+                world.f(i0 + i4, i1, i2 + i5, this.cF, i3, 4);
+                world.f(i0 + i4 + 1, i1, i2 + i5, this.cF, i3, 4);
+                world.f(i0 + i4, i1, i2 + i5 + 1, this.cF, i3, 4);
+                world.f(i0 + i4 + 1, i1, i2 + i5 + 1, this.cF, i3, 4);
             } else {
-                world.f(i0, i1, i2, this.cz, i3, 4);
+                world.f(i0, i1, i2, this.cF, i3, 4);
             }
         }
     }
 
     public boolean d(World world, int i0, int i1, int i2, int i3) {
-        return world.a(i0, i1, i2) == this.cz && (world.h(i0, i1, i2) & 3) == i3;
+        return world.a(i0, i1, i2) == this.cF && (world.h(i0, i1, i2) & 3) == i3;
     }
 
     public int a(int i0) {

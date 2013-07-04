@@ -1,11 +1,10 @@
 package net.minecraft.server;
 
-import com.google.common.primitives.Doubles;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
+import com.google.common.primitives.Doubles;
 
 public abstract class CommandBase implements ICommand {
 
@@ -16,10 +15,11 @@ public abstract class CommandBase implements ICommand {
     public int a() {
         return 4;
     }
-//MERGE Is this deprecated now? - Chris
-    public String a(ICommandSender icommandsender) {
-        return "/" + this.c();
-    }
+
+    // MERGE Is this deprecated now? - Chris
+    // public String a(ICommandSender icommandsender) {
+    // return "/" + this.c();
+    // }
 
     public List b() {
         return null;
@@ -49,9 +49,9 @@ public abstract class CommandBase implements ICommand {
         int i2 = a(icommandsender, s0);
 
         if (i2 < i0) {
-            throw new NumberInvalidException("commands.generic.num.tooSmall", new Object[] { Integer.valueOf(i2), Integer.valueOf(i0)});
+            throw new NumberInvalidException("commands.generic.num.tooSmall", new Object[]{ Integer.valueOf(i2), Integer.valueOf(i0) });
         } else if (i2 > i1) {
-            throw new NumberInvalidException("commands.generic.num.tooBig", new Object[] { Integer.valueOf(i2), Integer.valueOf(i1)});
+            throw new NumberInvalidException("commands.generic.num.tooBig", new Object[]{ Integer.valueOf(i2), Integer.valueOf(i1) });
         } else {
             return i2;
         }
@@ -68,7 +68,7 @@ public abstract class CommandBase implements ICommand {
                 return d0;
             }
         } catch (NumberFormatException numberformatexception) {
-            throw new NumberInvalidException("commands.generic.double.invalid", new Object[] { s0});
+            throw new NumberInvalidException("commands.generic.double.invalid", new Object[]{ s0 });
         }
     }
 

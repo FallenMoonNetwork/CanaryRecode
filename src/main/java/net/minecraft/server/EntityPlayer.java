@@ -1,10 +1,8 @@
 package net.minecraft.server;
 
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -16,7 +14,6 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.player.EntityRightClickHook;
 import net.canarymod.hook.player.ItemDropHook;
 import net.canarymod.hook.player.LevelUpHook;
-
 
 public abstract class EntityPlayer extends EntityLivingBase implements ICommandSender {
 
@@ -54,7 +51,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     protected float bL = 0.02F;
     private int h;
     public EntityFishHook bM;
-    private String respawnWorld; //CanaryMod: Respawn world (for bed spawns)
+    private String respawnWorld; // CanaryMod: Respawn world (for bed spawns)
 
     public EntityPlayer(World world, String s0) {
         super(world);
@@ -72,10 +69,6 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     protected void ax() {
         super.ax();
         this.aT().b(SharedMonsterAttributes.e).a(1.0D);
-    }
-
-    public int aW() {
-        return maxHealth == 0 ? 20 : maxHealth; // CanaryMod: custom Max Health
     }
 
     protected void a() {
@@ -561,7 +554,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         if (nbttagcompound.b("SpawnX") && nbttagcompound.b("SpawnY") && nbttagcompound.b("SpawnZ")) {
             this.c = new ChunkCoordinates(nbttagcompound.e("SpawnX"), nbttagcompound.e("SpawnY"), nbttagcompound.e("SpawnZ"));
             this.d = nbttagcompound.n("SpawnForced");
-            //CanaryMod added respawn world
+            // CanaryMod added respawn world
             this.respawnWorld = nbttagcompound.i("SpawnWorld");
         }
 
@@ -589,7 +582,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             nbttagcompound.a("SpawnY", this.c.b);
             nbttagcompound.a("SpawnZ", this.c.c);
             nbttagcompound.a("SpawnForced", this.d);
-            //CanaryMod add world fq name
+            // CanaryMod add world fq name
             nbttagcompound.a("SpawnWorld", getCanaryWorld().getFqName());
         }
 
@@ -1064,11 +1057,11 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         ichunkprovider.c(chunkcoordinates.a + 3 >> 4, chunkcoordinates.c - 3 >> 4);
         ichunkprovider.c(chunkcoordinates.a - 3 >> 4, chunkcoordinates.c + 3 >> 4);
         ichunkprovider.c(chunkcoordinates.a + 3 >> 4, chunkcoordinates.c + 3 >> 4);
-        if (world.a(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c) == Block.X.cF) { //Bed spawn
+        if (world.a(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c) == Block.X.cF) { // Bed spawn
             ChunkCoordinates chunkcoordinates1 = BlockBed.b(world, chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c, 0);
 
             return chunkcoordinates1;
-        } else { //World spawn
+        } else { // World spawn
             Material material = world.g(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c);
             Material material1 = world.g(chunkcoordinates.a, chunkcoordinates.b + 1, chunkcoordinates.c);
             boolean flag1 = !material.a() && !material.d();
@@ -1445,6 +1438,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     public float bj() {
         return this.u().d(17);
     }
+
     // CanaryMod
     // Start: Custom XP methods
     public void addXP(int amount) {
@@ -1527,16 +1521,18 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.c(name);
         this.g(true); // auto set show
     }
+
     // End: Custom Display Name
 
     /**
      * Returns a respawn location for this player.
      * Null if there is no explicitly set respawn location
+     * 
      * @return
      */
     public Location getRespawnLocation() {
-        if(this.c != null) {
-            if(respawnWorld == null || respawnWorld.isEmpty()) {
+        if (this.c != null) {
+            if (respawnWorld == null || respawnWorld.isEmpty()) {
                 respawnWorld = getCanaryWorld().getFqName();
             }
             return new Location(Canary.getServer().getWorld(respawnWorld), c.a, c.b, c.c, 0, 0);
@@ -1545,12 +1541,12 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     }
 
     public void setRespawnLocation(Location l) {
-        if(l == null) {
+        if (l == null) {
             c = null;
             respawnWorld = null;
             return;
         }
-        if(c == null) {
+        if (c == null) {
             c = new ChunkCoordinates();
         }
         c.a = l.getBlockX();

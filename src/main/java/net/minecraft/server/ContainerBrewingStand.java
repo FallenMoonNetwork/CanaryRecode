@@ -55,16 +55,16 @@ public class ContainerBrewingStand extends Container {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.c.get(i0);
 
-        if (slot != null && slot.d()) {
-            ItemStack itemstack1 = slot.c();
+        if (slot != null && slot.e()) {
+            ItemStack itemstack1 = slot.d();
 
             itemstack = itemstack1.m();
             if ((i0 < 0 || i0 > 2) && i0 != 3) {
-                if (!this.f.d() && this.f.a(itemstack1)) {
+                if (!this.f.e() && this.f.a(itemstack1)) {
                     if (!this.a(itemstack1, 3, 4, false)) {
                         return null;
                     }
-                } else if (SlotBrewingStandPotion.a_(itemstack)) {
+                } else if (SlotBrewingStandPotion.b_(itemstack)) {
                     if (!this.a(itemstack1, 0, 3, false)) {
                         return null;
                     }
@@ -87,13 +87,13 @@ public class ContainerBrewingStand extends Container {
                 slot.a(itemstack1, itemstack);
             }
 
-            if (itemstack1.a == 0) {
+            if (itemstack1.b == 0) {
                 slot.c((ItemStack) null);
             } else {
-                slot.e();
+                slot.f();
             }
 
-            if (itemstack1.a == itemstack.a) {
+            if (itemstack1.b == itemstack.b) {
                 return null;
             }
 

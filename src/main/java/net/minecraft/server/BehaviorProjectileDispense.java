@@ -1,9 +1,7 @@
 package net.minecraft.server;
 
-
 import net.canarymod.Canary;
 import net.canarymod.hook.world.DispenseHook;
-
 
 public abstract class BehaviorProjectileDispense extends BehaviorDefaultDispenseItem {
 
@@ -12,7 +10,7 @@ public abstract class BehaviorProjectileDispense extends BehaviorDefaultDispense
     public ItemStack b(IBlockSource iblocksource, ItemStack itemstack) {
         World world = iblocksource.k();
         IPosition iposition = BlockDispenser.a(iblocksource);
-        EnumFacing enumfacing = BlockDispenser.j_(iblocksource.h());
+        EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
         IProjectile iprojectile = this.a(world, iposition);
 
         iprojectile.c((double) enumfacing.c(), (double) ((float) enumfacing.d() + 0.1F), (double) enumfacing.e(), this.b(), this.a());

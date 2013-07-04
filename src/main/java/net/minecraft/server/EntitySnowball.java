@@ -13,8 +13,8 @@ public class EntitySnowball extends EntityThrowable {
         this.entity = new CanarySnowball(this); // CanaryMod: wrap entity
     }
 
-    public EntitySnowball(World world, EntityLiving entityliving) {
-        super(world, entityliving);
+    public EntitySnowball(World world, EntityLivingBase entitylivingbase) {
+        super(world, entitylivingbase);
         this.entity = new CanarySnowball(this); // CanaryMod: warp entity
     }
 
@@ -36,7 +36,7 @@ public class EntitySnowball extends EntityThrowable {
                     b0 = 3;
                 }
 
-                movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), b0);
+                movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), (float)b0);
             }
 
             for (int i0 = 0; i0 < 8; ++i0) {

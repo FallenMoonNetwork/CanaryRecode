@@ -1,9 +1,7 @@
 package net.minecraft.server;
 
-
 import java.util.Calendar;
 import net.canarymod.api.entity.living.animal.CanaryBat;
-
 
 public class EntityBat extends EntityAmbientCreature {
 
@@ -52,11 +50,6 @@ public class EntityBat extends EntityAmbientCreature {
     protected void ax() {
         super.ax();
         this.a(SharedMonsterAttributes.a).a(6.0D);
-    }
-
-//MERGE: Deprecated? - Chris
-    public int ax() {
-        return maxHealth == 0 ? 6 : maxHealth; // CanaryMod: custom Max Health
     }
 
     public boolean bF() {

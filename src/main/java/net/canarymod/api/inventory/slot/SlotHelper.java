@@ -11,6 +11,7 @@ import net.minecraft.server.ContainerFurnace;
 import net.minecraft.server.ContainerMerchant;
 import net.minecraft.server.ContainerPlayer;
 import net.minecraft.server.ContainerRepair;
+import net.minecraft.server.ContainerRepairINNER2;
 import net.minecraft.server.ContainerWorkbench;
 import net.minecraft.server.Slot;
 import net.minecraft.server.SlotArmor;
@@ -21,7 +22,6 @@ import net.minecraft.server.SlotCrafting;
 import net.minecraft.server.SlotEnchantment;
 import net.minecraft.server.SlotFurnace;
 import net.minecraft.server.SlotMerchantResult;
-import net.minecraft.server.SlotRepair;
 
 /**
  * SlotHelper for SlotClickHook
@@ -43,7 +43,7 @@ public final class SlotHelper {
         if (container == null) {
             return SlotType.NULL;
         }
-        
+
         // Outside window
         if (slotIndex == -999) {
             return SlotType.OUTSIDE;
@@ -71,7 +71,7 @@ public final class SlotHelper {
             return SlotType.FURNACE;
         } else if (slot instanceof SlotMerchantResult) {
             return SlotType.MERCHANT;
-        } else if (slot instanceof SlotRepair) {
+        } else if (slot instanceof ContainerRepairINNER2) {
             return SlotType.REPAIR;
         } else if (slot.getClass() != Slot.class) {
             return SlotType.UNKNOWN;

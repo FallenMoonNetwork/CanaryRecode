@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.animal.CanaryCow;
-
 
 public class EntityCow extends EntityAnimal {
 
@@ -29,10 +27,6 @@ public class EntityCow extends EntityAnimal {
         super.ax();
         this.a(SharedMonsterAttributes.a).a(10.0D);
         this.a(SharedMonsterAttributes.d).a(0.20000000298023224D);
-    }
-
-    public int aW() {
-        return maxHealth == 0 ? 10 : maxHealth; // CanaryMod: custom Max Health
     }
 
     protected String r() {

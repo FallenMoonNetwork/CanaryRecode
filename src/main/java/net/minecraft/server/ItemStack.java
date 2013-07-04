@@ -1,12 +1,11 @@
 package net.minecraft.server;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import java.text.DecimalFormat;
 import java.util.Random;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.canarymod.api.inventory.CanaryBaseItem;
 import net.canarymod.api.inventory.CanaryItem;
-
 
 public final class ItemStack {
 
@@ -419,7 +418,8 @@ public final class ItemStack {
 
         this.e.a("RepairCost", i0);
     }
-public Multimap D() {
+
+    public Multimap D() {
         Object object;
 
         if (this.p() && this.e.b("AttributeModifiers")) {

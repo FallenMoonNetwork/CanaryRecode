@@ -1,13 +1,11 @@
 package net.minecraft.server;
 
 import java.io.ByteArrayInputStream;
-import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
@@ -98,7 +96,7 @@ public class NetServerHandler extends NetHandler {
 
     public void c(String s0) {
         // CanaryMod disconnect hook
-        DisconnectionHook hook = new DisconnectionHook(serverHandler.getUser(), s0, EnumChatFormatting.o + this.c.ax() + " left the game.");
+        DisconnectionHook hook = new DisconnectionHook(serverHandler.getUser(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.aw() }).a(EnumChatFormatting.o).toString());
 
         Canary.hooks().callHook(hook);
         if (!this.b) {
@@ -270,7 +268,7 @@ public class NetServerHandler extends NetHandler {
 
                 if (d11 > 100.0D && (!this.d.K() || !this.d.J().equals(this.c.c_()))) {
                     this.d.an().b(this.c.c_() + " moved too quickly! " + d4 + "," + d6 + "," + d7 + " (" + d8 + ", " + d9 + ", " + d10 + ")");
-                    this.a(this.n, this.o, this.p, this.c.A, this.c.B);
+                    this.a(this.n, this.o, this.p, this.c.A, this.c.B, this.c.q.getCanaryWorld().getType().getId(), this.c.q.getCanaryWorld().getName(), TeleportHook.TeleportCause.MOVEMENT);
                     return;
                 }
 
@@ -330,7 +328,7 @@ public class NetServerHandler extends NetHandler {
                 this.d.af().d(this.c);
                 this.c.b(this.c.v - d0, packet10flying.g);
             } else if (this.e % 20 == 0) {
-                this.a(this.n, this.o, this.p, this.c.A, this.c.B);
+                this.a(this.n, this.o, this.p, this.c.A, this.c.B, this.c.q.getCanaryWorld().getType().getId(), this.c.q.getCanaryWorld().getName(), TeleportHook.TeleportCause.MOVEMENT);
             }
         }
     }
@@ -458,7 +456,7 @@ public class NetServerHandler extends NetHandler {
             blockClicked = blockClicked != null ? blockClicked : new CanaryBlock((short) 0, (short) 0, ToolBox.floorToBlock(this.n), ToolBox.floorToBlock(this.o), ToolBox.floorToBlock(this.p), this.c.getCanaryWorld());
             //
             this.c.c.itemUsed(this.c.getPlayer(), worldserver, itemstack, blockClicked); // CanaryMod: Redirect through ItemInWorldManager.itemUsed
-        } else if (packet15place.f() >= this.d.ab() - 1 && (packet15place.h() == 1 || packet15place.f() >= this.d.ad())) {
+        } else if (packet15place.f() >= this.d.ad() - 1 && (packet15place.h() == 1 || packet15place.f() >= this.d.ad())) {
             this.c.a.b(new Packet3Chat(ChatMessageComponent.b("build.tooHigh", new Object[]{ Integer.valueOf(this.d.ad()) }).a(EnumChatFormatting.m)));
             flag0 = true;
         } else {
@@ -528,7 +526,7 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void a(String s0, Object[] aobject) {
         // CanaryMod: DisconnectionHook
-        DisconnectionHook hook = new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.aw() }).a(EnumChatFormatting.o).toString()));
+        DisconnectionHook hook = new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.aw() }).a(EnumChatFormatting.o).toString());
 
         Canary.hooks().callHook(hook);
         this.d.an().a(this.c.c_() + " lost connection: " + s0);
@@ -735,26 +733,26 @@ public class NetServerHandler extends NetHandler {
         if (this.c.bp.d == packet102windowclick.a && this.c.bp.c(this.c)) {
 
             // CanaryMod: SlotClick
-            ItemStack itemstack = packet102windowclick.b > -1 ? this.c.bp.a(packet102windowclick.b).c() : null;
+            ItemStack itemstack = packet102windowclick.b > -1 ? this.c.bp.a(packet102windowclick.b).d() : null;
             SlotType slot_type = SlotHelper.getSlotType(this.c.bp, packet102windowclick.b);
             SecondarySlotType finer_slot = SlotHelper.getSpecificSlotType(this.c.bp, packet102windowclick.b);
             GrabMode grab_mode = GrabMode.fromInt(packet102windowclick.f);
             ButtonPress mouse_click = ButtonPress.matchButton(grab_mode, packet102windowclick.c, packet102windowclick.b);
-            SlotClickHook sch = new SlotClickHook(this.c.getPlayer(), this.c.bM.getInventory(), itemstack != null ? itemstack.getCanaryItem() : null, slot_type, finer_slot, grab_mode, mouse_click, (short) packet102windowclick.b, packet102windowclick.d);
+            SlotClickHook sch = new SlotClickHook(this.c.getPlayer(), this.c.bp.getInventory(), itemstack != null ? itemstack.getCanaryItem() : null, slot_type, finer_slot, grab_mode, mouse_click, (short) packet102windowclick.b, packet102windowclick.d);
             Canary.hooks().callHook(sch);
             if (sch.isCanceled()) {
                 if (sch.doUpdate()) {
                     if (packet102windowclick.f == 0) {
-                        this.c.bM.updateSlot(packet102windowclick.b);
-                        this.c.updateSlot(-1, -1, this.c.bK.o());
+                        this.c.bp.updateSlot(packet102windowclick.b);
+                        this.c.updateSlot(-1, -1, this.c.bn.o());
                     } else {
                         ArrayList arraylist = new ArrayList();
 
-                        for (int i = 0; i < this.c.bM.c.size(); ++i) {
-                            arraylist.add(((Slot) this.c.bM.c.get(i)).c());
+                        for (int i = 0; i < this.c.bp.c.size(); ++i) {
+                            arraylist.add(((Slot) this.c.bp.c.get(i)).d());
                         }
 
-                        this.c.a(this.c.bM, arraylist);
+                        this.c.a(this.c.bp, arraylist);
                     }
                 }
                 return;
@@ -1011,7 +1009,7 @@ public class NetServerHandler extends NetHandler {
                                 if (this.c.a(0, s0)) { // CanaryMod: Check for Command Permission
                                     ((TileEntityCommandBlock) tileentity).a(s0);
                                     this.c.q.j(i0, i1, i2);
-                                    this.c.b("Command set: " + s0);
+                                    this.c.a(ChatMessageComponent.b("advMode.setCommand.success", new Object[]{ s0 }));
                                 } else {
                                     this.c.a("No Permission to Command: " + s0); // CanaryMod: No Permission (locale?)
                                 }

@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.CanaryIronGolem;
-
 
 public class EntityIronGolem extends EntityGolem {
 
@@ -26,7 +24,7 @@ public class EntityIronGolem extends EntityGolem {
         this.d.a(1, new EntityAIDefendVillage(this));
         this.d.a(2, new EntityAIHurtByTarget(this, false));
         this.d.a(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true, IMob.a));
-                this.entity = new CanaryIronGolem(this); // CanaryMod: Warp Entity
+        this.entity = new CanaryIronGolem(this); // CanaryMod: Warp Entity
     }
 
     protected void a() {
@@ -58,10 +56,6 @@ public class EntityIronGolem extends EntityGolem {
         super.ax();
         this.a(SharedMonsterAttributes.a).a(100.0D);
         this.a(SharedMonsterAttributes.d).a(0.25D);
-    }
-
-    public int aW() {
-        return maxHealth == 0 ? 100 : maxHealth; // CanaryMod: custom Max Health
     }
 
     protected int h(int i0) {

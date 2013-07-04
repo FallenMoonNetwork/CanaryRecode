@@ -11,8 +11,8 @@ public class EntityWitherSkull extends EntityFireball {
         this.entity = new CanaryWitherSkull(this);
     }
 
-    public EntityWitherSkull(World world, EntityLiving entityliving, double d0, double d1, double d2) {
-        super(world, entityliving, d0, d1, d2);
+    public EntityWitherSkull(World world, EntityLivingBase entitylivingbase, double d0, double d1, double d2) {
+        super(world, entitylivingbase, d0, d1, d2);
         this.a(0.3125F, 0.3125F);
         //CanaryMod
         this.entity = new CanaryWitherSkull(this);
@@ -22,14 +22,14 @@ public class EntityWitherSkull extends EntityFireball {
         return this.d() ? 0.73F : super.c();
     }
 
-    public boolean ae() {
+    public boolean ad() {
         return false;
     }
 
     public float a(Explosion explosion, World world, int i0, int i1, int i2, Block block) {
         float f0 = super.a(explosion, world, i0, i1, i2, block);
 
-        if (this.d() && block != Block.D && block != Block.bL && block != Block.bM) {
+        if (this.d() && block != Block.E && block != Block.bM && block != Block.bN) {
             f0 = Math.min(0.8F, f0);
         }
 
@@ -40,14 +40,14 @@ public class EntityWitherSkull extends EntityFireball {
         if (!this.q.I) {
             if (movingobjectposition.g != null) {
                 if (this.a != null) {
-                    if (movingobjectposition.g.a(DamageSource.a(this.a), 8) && !movingobjectposition.g.R()) {
-                        this.a.j(5);
+                    if (movingobjectposition.g.a(DamageSource.a(this.a), 8.0F) && !movingobjectposition.g.R()) {
+                        this.a.f(5.0F);
                     }
                 } else {
-                    movingobjectposition.g.a(DamageSource.k, 5);
+                    movingobjectposition.g.a(DamageSource.k, 5.0F);
                 }
 
-                if (movingobjectposition.g instanceof EntityLiving) {
+                if (movingobjectposition.g instanceof EntityLivingBase) {
                     byte b0 = 0;
 
                     if (this.q.r > 1) {
@@ -59,12 +59,12 @@ public class EntityWitherSkull extends EntityFireball {
                     }
 
                     if (b0 > 0) {
-                        ((EntityLiving) movingobjectposition.g).d(new PotionEffect(Potion.v.H, 20 * b0, 1));
+                        ((EntityLivingBase) movingobjectposition.g).d(new PotionEffect(Potion.v.H, 20 * b0, 1));
                     }
                 }
             }
 
-            this.q.a(this, this.u, this.v, this.w, 1.0F, false, this.q.N().b("mobGriefing"));
+            this.q.a(this, this.u, this.v, this.w, 1.0F, false, this.q.O().b("mobGriefing"));
             this.w();
         }
     }
@@ -73,7 +73,7 @@ public class EntityWitherSkull extends EntityFireball {
         return false;
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
+    public boolean a(DamageSource damagesource, float f0) {
         return false;
     }
 

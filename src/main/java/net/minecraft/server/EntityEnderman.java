@@ -1,15 +1,12 @@
 package net.minecraft.server;
 
-
 import java.util.Arrays;
 import java.util.UUID;
-
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.monster.CanaryEnderman;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.entity.EndermanDropBlockHook;
 import net.canarymod.hook.entity.EndermanPickupBlockHook;
-
 
 public class EntityEnderman extends EntityMob {
 
@@ -33,10 +30,6 @@ public class EntityEnderman extends EntityMob {
         this.a(SharedMonsterAttributes.a).a(40.0D);
         this.a(SharedMonsterAttributes.d).a(0.30000001192092896D);
         this.a(SharedMonsterAttributes.e).a(7.0D);
-    }
-
-    public int aW() {
-        return maxHealth == 0 ? 40 : maxHealth; // CanaryMod: custom Max Health
     }
 
     protected void a() {
@@ -370,19 +363,19 @@ public class EntityEnderman extends EntityMob {
 
     static {
         // CanaryMod: Disable all default allowed pick ups
-//        br[Block.z.cF] = true;
-//        br[Block.A.cF] = true;
-//       br[Block.J.cF] = true;
-//        br[Block.K.cF] = true;
-//        br[Block.ai.cF] = true;
-//        br[Block.aj.cF] = true;
-//        br[Block.ak.cF] = true;
-//        br[Block.al.cF] = true;
-//        br[Block.ar.cF] = true;
-//        br[Block.ba.cF] = true;
-//        br[Block.bb.cF] = true;
-//        br[Block.bf.cF] = true;
-//        br[Block.bw.cF] = true;
-//        br[Block.bD.cF] = true;
+        // br[Block.z.cF] = true;
+        // br[Block.A.cF] = true;
+        // br[Block.J.cF] = true;
+        // br[Block.K.cF] = true;
+        // br[Block.ai.cF] = true;
+        // br[Block.aj.cF] = true;
+        // br[Block.ak.cF] = true;
+        // br[Block.al.cF] = true;
+        // br[Block.ar.cF] = true;
+        // br[Block.ba.cF] = true;
+        // br[Block.bb.cF] = true;
+        // br[Block.bf.cF] = true;
+        // br[Block.bw.cF] = true;
+        // br[Block.bD.cF] = true;
     }
 }

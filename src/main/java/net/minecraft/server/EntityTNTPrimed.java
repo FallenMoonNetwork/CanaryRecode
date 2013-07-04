@@ -1,13 +1,11 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.CanaryTNTPrimed;
-
 
 public class EntityTNTPrimed extends Entity {
 
     public int a;
-    private EntityLiving b;
+    private EntityLivingBase b;
 
     public EntityTNTPrimed(World world) {
         super(world);
@@ -18,7 +16,7 @@ public class EntityTNTPrimed extends Entity {
         this.entity = new CanaryTNTPrimed(this); // CanaryMod: Wrap Entity
     }
 
-    public EntityTNTPrimed(World world, double d0, double d1, double d2, EntityLiving entityliving) {
+    public EntityTNTPrimed(World world, double d0, double d1, double d2, EntityLivingBase entitylivingbase) {
         this(world);
         this.b(d0, d1, d2);
         float f0 = (float) (Math.random() * 3.1415927410125732D * 2.0D);
@@ -30,12 +28,12 @@ public class EntityTNTPrimed extends Entity {
         this.r = d0;
         this.s = d1;
         this.t = d2;
-        this.b = entityliving;
+        this.b = entitylivingbase;
     }
 
     protected void a() {}
 
-    protected boolean f_() {
+    protected boolean e_() {
         return false;
     }
 
@@ -82,7 +80,7 @@ public class EntityTNTPrimed extends Entity {
         this.a = nbttagcompound.c("Fuse");
     }
 
-    public EntityLiving c() {
+    public EntityLivingBase c() {
         return this.b;
     }
 }

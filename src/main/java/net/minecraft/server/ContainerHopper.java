@@ -8,7 +8,7 @@ public class ContainerHopper extends Container {
 
     public ContainerHopper(InventoryPlayer inventoryplayer, IInventory iinventory) {
         this.a = iinventory;
-        iinventory.f();
+        iinventory.k_();
         byte b0 = 51;
 
         int i0;
@@ -38,8 +38,8 @@ public class ContainerHopper extends Container {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.c.get(i0);
 
-        if (slot != null && slot.d()) {
-            ItemStack itemstack1 = slot.c();
+        if (slot != null && slot.e()) {
+            ItemStack itemstack1 = slot.d();
 
             itemstack = itemstack1.m();
             if (i0 < this.a.j_()) {
@@ -50,10 +50,10 @@ public class ContainerHopper extends Container {
                 return null;
             }
 
-            if (itemstack1.a == 0) {
+            if (itemstack1.b == 0) {
                 slot.c((ItemStack) null);
             } else {
-                slot.e();
+                slot.f();
             }
         }
 

@@ -1,9 +1,7 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.animal.CanaryOcelot;
 import net.canarymod.hook.entity.EntityTameHook;
-
 
 public class EntityOcelot extends EntityTameable {
 
@@ -65,10 +63,6 @@ public class EntityOcelot extends EntityTameable {
         super.ax();
         this.a(SharedMonsterAttributes.a).a(10.0D);
         this.a(SharedMonsterAttributes.d).a(0.30000001192092896D);
-    }
-
-    public int aW() {
-        return maxHealth == 0 ? 10 : maxHealth; // CanaryMod: custom Max Health
     }
 
     protected void b(float f0) {}

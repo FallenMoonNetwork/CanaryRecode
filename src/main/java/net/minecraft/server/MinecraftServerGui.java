@@ -12,33 +12,34 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import net.canarymod.api.gui.GUIControl;
 
-public class MinecraftServerGui extends JComponent {
+public class MinecraftServerGui extends JComponent implements GUIControl {
 
     private static boolean a;
-    private static MinecraftServerGui minecraftservergui; // CanaryMod
+    private static JFrame jframe;
+    public static MinecraftServerGui minecraftservergui; // CanaryMod
     private DedicatedServer b;
 
-    public static void a(DedicatedServer dedicatedserver) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception exception) {
-            ;
-        }
-
-        minecraftservergui = new MinecraftServerGui(dedicatedserver);
-
+    public static GUIControl a(DedicatedServer dedicatedserver) { // Signature Changed to return GUIControl
         a = true;
-        JFrame jframe = new JFrame("Minecraft server");
+        jframe = new JFrame("Minecraft server");
 
         jframe.add(minecraftservergui);
         jframe.pack();
         jframe.setLocationRelativeTo((Component) null);
         jframe.setVisible(true);
         jframe.addWindowListener(new MinecraftServerGuiINNER1(dedicatedserver));
+        return minecraftservergui;
     }
 
     public MinecraftServerGui(DedicatedServer dedicatedserver) {
+        // CanaryMod: Rearrangement
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception exception) {
+            ;
+        }
         this.b = dedicatedserver;
         this.setPreferredSize(new Dimension(854, 480));
         this.setLayout(new BorderLayout());
@@ -49,6 +50,7 @@ public class MinecraftServerGui extends JComponent {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+        minecraftservergui = this;
     }
 
     private JComponent b() {
@@ -90,7 +92,24 @@ public class MinecraftServerGui extends JComponent {
         return minecraftservergui.b;
     }
 
-    static MinecraftServerGui getServerGui(MinecraftServer minecraftserver) {
-        return minecraftservergui;
+    @Override
+    public void start() {
+        a((DedicatedServer) MinecraftServer.F());
+    }
+
+    @Override
+    public void closeWindow() {
+        if (jframe != null) {
+            jframe.dispose();
+        }
+        jframe = null;
+    }
+
+    public static boolean isLoaded() {
+        return a;
+    }
+
+    public static final GUIControl preInit(DedicatedServer dedicatedserver) {
+        return new MinecraftServerGui(dedicatedserver);
     }
 }

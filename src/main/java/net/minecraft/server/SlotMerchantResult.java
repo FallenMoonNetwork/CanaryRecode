@@ -1,11 +1,9 @@
 package net.minecraft.server;
 
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryVillagerTrade;
 import net.canarymod.api.entity.living.humanoid.Villager;
 import net.canarymod.hook.player.VillagerTradeHook;
-
 
 public class SlotMerchantResult extends Slot {
 
@@ -57,7 +55,7 @@ public class SlotMerchantResult extends Slot {
             if (heldShift) {
                 ((EntityPlayerMP) entityplayer).getPlayer().getInventory().decreaseItemStackSize(merchantrecipe.d().getCanaryItem());
             } else {
-                entityplayer.bK.b((ItemStack) null);
+                entityplayer.bn.b((ItemStack) null);
             }
         }
         //

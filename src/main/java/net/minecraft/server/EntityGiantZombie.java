@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.monster.CanaryGiantZombie;
-
 
 public class EntityGiantZombie extends EntityMob {
 
@@ -18,10 +16,6 @@ public class EntityGiantZombie extends EntityMob {
         this.a(SharedMonsterAttributes.a).a(100.0D);
         this.a(SharedMonsterAttributes.d).a(0.5D);
         this.a(SharedMonsterAttributes.e).a(50.0D);
-    }
-
-    public int aW() {
-        return maxHealth == 0 ? 100 : maxHealth; // CanaryMod: custom Max Health
     }
 
     public float a(int i0, int i1, int i2) {

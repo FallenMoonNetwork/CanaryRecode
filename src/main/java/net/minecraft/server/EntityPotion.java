@@ -18,12 +18,12 @@ public class EntityPotion extends EntityThrowable {
         //
     }
 
-    public EntityPotion(World world, EntityLiving entityliving, int i0) {
-        this(world, entityliving, new ItemStack(Item.bt, 1, i0));
+    public EntityPotion(World world, EntityLivingBase entitylivingbase, int i0) {
+        this(world, entitylivingbase, new ItemStack(Item.bu, 1, i0));
     }
 
-    public EntityPotion(World world, EntityLiving entityliving, ItemStack itemstack) {
-        super(world, entityliving);
+    public EntityPotion(World world, EntityLivingBase entitylivingbase, ItemStack itemstack) {
+        super(world, entitylivingbase);
         this.c = itemstack;
         // CanaryMod
         this.gravity = 0.05F;
@@ -56,7 +56,7 @@ public class EntityPotion extends EntityThrowable {
 
     public void a(int i0) {
         if (this.c == null) {
-            this.c = new ItemStack(Item.bt, 1, 0);
+            this.c = new ItemStack(Item.bu, 1, 0);
         }
 
         this.c.b(i0);
@@ -64,7 +64,7 @@ public class EntityPotion extends EntityThrowable {
 
     public int i() {
         if (this.c == null) {
-            this.c = new ItemStack(Item.bt, 1, 0);
+            this.c = new ItemStack(Item.bu, 1, 0);
         }
 
         return this.c.k();
@@ -72,23 +72,23 @@ public class EntityPotion extends EntityThrowable {
 
     protected void a(MovingObjectPosition movingobjectposition) {
         if (!this.q.I) {
-            List list = Item.bt.g(this.c);
+            List list = Item.bu.g(this.c);
 
             if (list != null && !list.isEmpty()) {
                 AxisAlignedBB axisalignedbb = this.E.b(4.0D, 2.0D, 4.0D);
-                List list1 = this.q.a(EntityLiving.class, axisalignedbb);
+                List list1 = this.q.a(EntityLivingBase.class, axisalignedbb);
 
                 if (list1 != null && !list1.isEmpty()) {
                     Iterator iterator = list1.iterator();
 
                     while (iterator.hasNext()) {
-                        EntityLiving entityliving = (EntityLiving) iterator.next();
-                        double d0 = this.e(entityliving);
+                        EntityLivingBase entitylivingbase = (EntityLivingBase) iterator.next();
+                        double d0 = this.e(entitylivingbase);
 
                         if (d0 < 16.0D) {
                             double d1 = 1.0D - Math.sqrt(d0) / 4.0D;
 
-                            if (entityliving == movingobjectposition.g) {
+                            if (entitylivingbase == movingobjectposition.g) {
                                 d1 = 1.0D;
                             }
 
@@ -99,12 +99,12 @@ public class EntityPotion extends EntityThrowable {
                                 int i0 = potioneffect.a();
 
                                 if (Potion.a[i0].b()) {
-                                    Potion.a[i0].a(this.h(), entityliving, potioneffect.c(), d1);
+                                    Potion.a[i0].a(this.h(), entitylivingbase, potioneffect.c(), d1);
                                 } else {
                                     int i1 = (int) (d1 * (double) potioneffect.b() + 0.5D);
 
                                     if (i1 > 20) {
-                                        entityliving.d(new PotionEffect(i0, i1, potioneffect.c()));
+                                        entitylivingbase.d(new PotionEffect(i0, i1, potioneffect.c()));
                                     }
                                 }
                             }

@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,7 +9,6 @@ import java.util.Map;
 import net.canarymod.Canary;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.player.EatHook;
-
 
 public class ItemPotion extends Item {
 
@@ -93,7 +91,7 @@ public class ItemPotion extends Item {
             return itemstack;
         }
         // Apply food changes
-        entityplayer.cn().a(hook.getLevelGain(), hook.getSaturationGain());
+        entityplayer.bD().a(hook.getLevelGain(), hook.getSaturationGain());
         // And finally add the effects
         if (hook.getPotionEffects() != null) {
             for (net.canarymod.api.potion.PotionEffect effect : hook.getPotionEffects()) {

@@ -1,10 +1,8 @@
 package net.minecraft.server;
 
-
 import java.util.Iterator;
 import java.util.List;
 import net.canarymod.api.entity.living.monster.CanaryEnderDragon;
-
 
 public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob {
 
@@ -31,7 +29,8 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
 
     public EntityDragon(World world) {
         super(world);
-        this.bp = new EntityDragonPart[]{ this.bq = new EntityDragonPart(this, "head", 6.0F, 6.0F), this.br = new EntityDragonPart(this, "body", 8.0F, 8.0F), this.bs = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bt = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bu = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bv = new EntityDragonPart(this, "wing", 4.0F, 4.0F), this.bw = new EntityDragonPart(this, "wing", 4.0F, 4.0F) };
+        this.bp = new EntityDragonPart[]{ this.bq = new EntityDragonPart(this, "head", 6.0F, 6.0F), this.br = new EntityDragonPart(this, "body", 8.0F, 8.0F), this.bs = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bt = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bu = new EntityDragonPart(this, "tail", 4.0F, 4.0F),
+                this.bv = new EntityDragonPart(this, "wing", 4.0F, 4.0F), this.bw = new EntityDragonPart(this, "wing", 4.0F, 4.0F) };
         this.g(this.aP());
         this.a(16.0F, 8.0F);
         this.Z = true;
@@ -44,10 +43,6 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
     protected void ax() {
         super.ax();
         this.a(SharedMonsterAttributes.a).a(200.0D);
-    }
-
-    public int aW() {
-        return maxHealth == 0 ? 200 : maxHealth; // CanaryMod: custom Max Health
     }
 
     protected void a() {

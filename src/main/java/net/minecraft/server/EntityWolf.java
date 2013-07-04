@@ -1,66 +1,88 @@
 package net.minecraft.server;
 
-
+import java.util.Iterator;
+import java.util.List;
 import net.canarymod.api.entity.living.animal.CanaryWolf;
 import net.canarymod.hook.entity.EntityTameHook;
 
 
 public class EntityWolf extends EntityTameable {
 
-    private float e;
-    private float f;
-    private boolean g;
-    private boolean h;
-    private float i;
-    private float j;
+    private float bq;
+    private float br;
+    private boolean bs;
+    private boolean bt;
+    private float bu;
+    private float bv;
 
     public EntityWolf(World world) {
         super(world);
-        this.aH = "/mob/wolf.png";
         this.a(0.6F, 0.8F);
-        this.bI = 0.3F;
-        this.aC().a(true);
-        this.bo.a(1, new EntityAISwimming(this));
-        this.bo.a(2, this.d);
-        this.bo.a(3, new EntityAILeapAtTarget(this, 0.4F));
-        this.bo.a(4, new EntityAIAttackOnCollide(this, this.bI, true));
-        this.bo.a(5, new EntityAIFollowOwner(this, this.bI, 10.0F, 2.0F));
-        this.bo.a(6, new EntityAIMate(this, this.bI));
-        this.bo.a(7, new EntityAIWander(this, this.bI));
-        this.bo.a(8, new EntityAIBeg(this, 8.0F));
-        this.bo.a(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.bo.a(9, new EntityAILookIdle(this));
-        this.bp.a(1, new EntityAIOwnerHurtByTarget(this));
-        this.bp.a(2, new EntityAIOwnerHurtTarget(this));
-        this.bp.a(3, new EntityAIHurtByTarget(this, true));
-        this.bp.a(4, new EntityAITargetNonTamed(this, EntitySheep.class, 16.0F, 200, false));
+        this.k().a(true);
+        this.c.a(1, new EntityAISwimming(this));
+        this.c.a(2, this.bp);
+        this.c.a(3, new EntityAILeapAtTarget(this, 0.4F));
+        this.c.a(4, new EntityAIAttackOnCollide(this, 1.0D, true));
+        this.c.a(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
+        this.c.a(6, new EntityAIMate(this, 1.0D));
+        this.c.a(7, new EntityAIWander(this, 1.0D));
+        this.c.a(8, new EntityAIBeg(this, 8.0F));
+        this.c.a(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.c.a(9, new EntityAILookIdle(this));
+        this.d.a(1, new EntityAIOwnerHurtByTarget(this));
+        this.d.a(2, new EntityAIOwnerHurtTarget(this));
+        this.d.a(3, new EntityAIHurtByTarget(this, true));
+        this.d.a(4, new EntityAITargetNonTamed(this, EntitySheep.class, 200, false));
+        this.k(false);
         this.entity = new CanaryWolf(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean bh() {
-        return true;
-    }
-
-    public void b(EntityLiving entityliving) {
-        super.b(entityliving);
-        if (entityliving instanceof EntityPlayer) {
-            this.l(true);
+    protected void ax() {
+        super.ax();
+        this.a(SharedMonsterAttributes.d).a(0.30000001192092896D);
+        if (this.bP()) {
+            this.a(SharedMonsterAttributes.a).a(20.0D);
+        } else {
+            this.a(SharedMonsterAttributes.a).a(8.0D);
         }
     }
 
-    protected void bp() {
-        this.ah.b(18, Integer.valueOf(this.aX()));
+    public boolean bb() {
+        return true;
     }
 
-    public int aW() { // TODO: Wild and Tame Max
-        return this.m() ? 20 : 8;
+    public void c(EntityLivingBase entitylivingbase) {
+        super.c(entitylivingbase);
+        if (entitylivingbase == null) {
+            if (!this.bY()) {
+                return;
+            }
+
+            this.m(false);
+            List list = this.q.a(this.getClass(), AxisAlignedBB.a().a(this.u, this.v, this.w, this.u + 1.0D, this.v + 1.0D, this.w + 1.0D).b(16.0D, 10.0D, 16.0D));
+            Iterator iterator = list.iterator();
+
+            while (iterator.hasNext()) {
+                EntityWolf entitywolf = (EntityWolf) iterator.next();
+
+                if (this != entitywolf) {
+                    entitywolf.m(false);
+                }
+            }
+        } else {
+            this.m(true);
+        }
+    }
+
+    protected void bg() {
+        this.ah.b(18, Float.valueOf(this.aJ()));
     }
 
     protected void a() {
         super.a();
-        this.ah.a(18, new Integer(this.aX()));
+        this.ah.a(18, new Float(this.aJ()));
         this.ah.a(19, new Byte((byte) 0));
-        this.ah.a(20, new Byte((byte) BlockCloth.g_(1)));
+        this.ah.a(20, new Byte((byte) BlockColored.j_(1)));
     }
 
     protected void a(int i0, int i1, int i2, int i3) {
@@ -69,87 +91,83 @@ public class EntityWolf extends EntityTameable {
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("Angry", this.bW());
-        nbttagcompound.a("CollarColor", (byte) this.bX());
+        nbttagcompound.a("Angry", this.bY());
+        nbttagcompound.a("CollarColor", (byte) this.bZ());
     }
 
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
-        this.l(nbttagcompound.n("Angry"));
+        this.m(nbttagcompound.n("Angry"));
         if (nbttagcompound.b("CollarColor")) {
-            this.s(nbttagcompound.c("CollarColor"));
+            this.p(nbttagcompound.c("CollarColor"));
         }
     }
 
-    protected boolean bm() {
-        return this.bW() && !this.m();
+    protected String r() {
+        return this.bY() ? "mob.wolf.growl" : (this.ab.nextInt(3) == 0 ? (this.bP() && this.ah.d(18) < 10.0F ? "mob.wolf.whine" : "mob.wolf.panting") : "mob.wolf.bark");
     }
 
-    protected String bb() {
-        return this.bW() ? "mob.wolf.growl" : (this.ab.nextInt(3) == 0 ? (this.m() && this.ah.c(18) < 10 ? "mob.wolf.whine" : "mob.wolf.panting") : "mob.wolf.bark");
-    }
-
-    protected String bc() {
+    protected String aK() {
         return "mob.wolf.hurt";
     }
 
-    protected String bd() {
+    protected String aL() {
         return "mob.wolf.death";
     }
 
-    protected float ba() {
+    protected float aW() {
         return 0.4F;
     }
 
-    protected int be() {
+    protected int s() {
         return -1;
     }
 
     public void c() {
         super.c();
-        if (!this.q.I && this.g && !this.h && !this.k() && this.F) {
-            this.h = true;
-            this.i = 0.0F;
-            this.j = 0.0F;
+        if (!this.q.I && this.bs && !this.bt && !this.bI() && this.F) {
+            this.bt = true;
+            this.bu = 0.0F;
+            this.bv = 0.0F;
             this.q.a((Entity) this, (byte) 8);
         }
     }
 
     public void l_() {
         super.l_();
-        this.f = this.e;
-        if (this.bY()) {
-            this.e += (1.0F - this.e) * 0.4F;
+        this.br = this.bq;
+        if (this.ca()) {
+            this.bq += (1.0F - this.bq) * 0.4F;
         } else {
-            this.e += (0.0F - this.e) * 0.4F;
+            this.bq += (0.0F - this.bq) * 0.4F;
         }
 
-        if (this.bY()) {
-            this.bJ = 10;
+        if (this.ca()) {
+            this.g = 10;
         }
 
         if (this.F()) {
-            this.g = true;
-            this.h = false;
-            this.i = 0.0F;
-            this.j = 0.0F;
-        } else if ((this.g || this.h) && this.h) {
-            if (this.i == 0.0F) {
-                this.a("mob.wolf.shake", this.ba(), (this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F);
+            this.bs = true;
+            this.bt = false;
+            this.bu = 0.0F;
+            this.bv = 0.0F;
+        } else if ((this.bs || this.bt) && this.bt) {
+            if (this.bu == 0.0F) {
+                this.a("mob.wolf.shake", this.aW(), (this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F);
             }
 
-            this.j = this.i;
-            this.i += 0.05F;
-            if (this.j >= 2.0F) {
-                this.g = false;
-                this.h = false;
-                this.j = 0.0F;
-                this.i = 0.0F;
+            this.bv = this.bu;
+            this.bu += 0.05F;
+            if (this.bv >= 2.0F) {
+                this.bs = false;
+                this.bt = false;
+                this.bv = 0.0F;
+                this.bu = 0.0F;
             }
 
-            if (this.i > 0.4F) {
+            if (this.bu > 0.4F) {
                 float f0 = (float) this.E.b;
-                int i0 = (int) (MathHelper.a((this.i - 0.4F) * 3.1415927F) * 7.0F);
+                int i0 = (int) (MathHelper.a((this.bu - 0.4F) * 3.1415927F) * 7.0F);
 
                 for (int i1 = 0; i1 < i0; ++i1) {
                     float f1 = (this.ab.nextFloat() * 2.0F - 1.0F) * this.O * 0.5F;
@@ -161,62 +179,71 @@ public class EntityWolf extends EntityTameable {
         }
     }
 
-    public float e() {
+    public float f() {
         return this.P * 0.8F;
     }
 
-    public int bs() {
-        return this.n() ? 20 : super.bs();
+    public int bl() {
+        return this.bQ() ? 20 : super.bl();
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
-        if (this.aq()) {
+    public boolean a(DamageSource damagesource, float f0) {
+        if (this.ap()) {
             return false;
         } else {
             Entity entity = damagesource.i();
 
-            this.d.a(false);
+            this.bp.a(false);
             if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow)) {
-                i0 = (i0 + 1) / 2;
+                f0 = (f0 + 1.0F) / 2.0F;
             }
 
-            return super.a(damagesource, i0);
+            return super.a(damagesource, f0);
         }
     }
 
     public boolean m(Entity entity) {
-        int i0 = this.m() ? 4 : 2;
+        int i0 = this.bP() ? 4 : 2;
 
-        return entity.a(DamageSource.a((EntityLiving) this), i0);
+        return entity.a(DamageSource.a((EntityLivingBase) this), (float) i0);
     }
 
-    public boolean a_(EntityPlayer entityplayer) {
-        ItemStack itemstack = entityplayer.bK.h();
+    public void k(boolean flag0) {
+        super.k(flag0);
+        if (flag0) {
+            this.a(SharedMonsterAttributes.a).a(20.0D);
+        } else {
+            this.a(SharedMonsterAttributes.a).a(8.0D);
+        }
+    }
 
-        if (this.m()) {
+    public boolean a(EntityPlayer entityplayer) {
+        ItemStack itemstack = entityplayer.bn.h();
+
+        if (this.bP()) {
             if (itemstack != null) {
-                if (Item.f[itemstack.c] instanceof ItemFood) {
-                    ItemFood itemfood = (ItemFood) Item.f[itemstack.c];
+                if (Item.g[itemstack.d] instanceof ItemFood) {
+                    ItemFood itemfood = (ItemFood) Item.g[itemstack.d];
 
-                    if (itemfood.i() && this.ah.c(18) < 20) {
-                        if (!entityplayer.ce.d) {
-                            --itemstack.a;
+                    if (itemfood.j() && this.ah.d(18) < 20.0F) {
+                        if (!entityplayer.bG.d) {
+                            --itemstack.b;
                         }
 
-                        this.j(itemfood.g());
-                        if (itemstack.a <= 0) {
-                            entityplayer.bK.a(entityplayer.bK.c, (ItemStack) null);
+                        this.f((float) itemfood.g());
+                        if (itemstack.b <= 0) {
+                            entityplayer.bn.a(entityplayer.bn.c, (ItemStack) null);
                         }
 
                         return true;
                     }
-                } else if (itemstack.c == Item.aX.cp) {
-                    int i0 = BlockCloth.g_(itemstack.k());
+                } else if (itemstack.d == Item.aY.cv) {
+                    int i0 = BlockColored.j_(itemstack.k());
 
-                    if (i0 != this.bX()) {
-                        this.s(i0);
-                        if (!entityplayer.ce.d && --itemstack.a <= 0) {
-                            entityplayer.bK.a(entityplayer.bK.c, (ItemStack) null);
+                    if (i0 != this.bZ()) {
+                        this.p(i0);
+                        if (!entityplayer.bG.d && --itemstack.b <= 0) {
+                            entityplayer.bn.a(entityplayer.bn.c, (ItemStack) null);
                         }
 
                         return true;
@@ -224,18 +251,18 @@ public class EntityWolf extends EntityTameable {
                 }
             }
 
-            if (entityplayer.bS.equalsIgnoreCase(this.o()) && !this.q.I && !this.c(itemstack)) {
-                this.d.a(!this.n());
-                this.bG = false;
+            if (entityplayer.c_().equalsIgnoreCase(this.h_()) && !this.q.I && !this.c(itemstack)) {
+                this.bp.a(!this.bQ());
+                this.bd = false;
                 this.a((PathEntity) null);
             }
-        } else if (itemstack != null && itemstack.c == Item.aY.cp && !this.bW()) {
-            if (!entityplayer.ce.d) {
-                --itemstack.a;
+        } else if (itemstack != null && itemstack.d == Item.aZ.cv && !this.bY()) {
+            if (!entityplayer.bG.d) {
+                --itemstack.b;
             }
 
-            if (itemstack.a <= 0) {
-                entityplayer.bK.a(entityplayer.bK.c, (ItemStack) null);
+            if (itemstack.b <= 0) {
+                entityplayer.bn.a(entityplayer.bn.c, (ItemStack) null);
             }
 
             if (!this.q.I) {
@@ -244,16 +271,16 @@ public class EntityWolf extends EntityTameable {
 
                 if (hook.isTamed() && !hook.isCanceled()) {
                     //
-                    this.j(true);
+                    this.k(true);
                     this.a((PathEntity) null);
-                    this.b((EntityLiving) null);
-                    this.d.a(true);
-                    this.b(20);
-                    this.a(entityplayer.bS);
-                    this.i(true);
+                    this.c((EntityLivingBase) null);
+                    this.bp.a(true);
+                    this.g(20.0F);
+                    this.b(entityplayer.c_());
+                    this.j(true);
                     this.q.a((Entity) this, (byte) 7);
                 } else {
-                    this.i(false);
+                    this.j(false);
                     this.q.a((Entity) this, (byte) 6);
                 }
             }
@@ -261,22 +288,22 @@ public class EntityWolf extends EntityTameable {
             return true;
         }
 
-        return super.a_(entityplayer);
+        return super.a(entityplayer);
     }
 
     public boolean c(ItemStack itemstack) {
-        return itemstack == null ? false : (!(Item.f[itemstack.c] instanceof ItemFood) ? false : ((ItemFood) Item.f[itemstack.c]).i());
+        return itemstack == null ? false : (!(Item.g[itemstack.d] instanceof ItemFood) ? false : ((ItemFood) Item.g[itemstack.d]).j());
     }
 
-    public int by() {
+    public int br() {
         return 8;
     }
 
-    public boolean bW() {
+    public boolean bY() {
         return (this.ah.a(16) & 2) != 0;
     }
 
-    public void l(boolean flag0) {
+    public void m(boolean flag0) {
         byte b0 = this.ah.a(16);
 
         if (flag0) {
@@ -286,29 +313,27 @@ public class EntityWolf extends EntityTameable {
         }
     }
 
-    public int bX() {
+    public int bZ() {
         return this.ah.a(20) & 15;
     }
 
-    public void s(int i0) {
+    public void p(int i0) {
         this.ah.b(20, Byte.valueOf((byte) (i0 & 15)));
     }
 
     public EntityWolf b(EntityAgeable entityageable) {
         EntityWolf entitywolf = new EntityWolf(this.q);
-        String s0 = this.o();
+        String s0 = this.h_();
 
         if (s0 != null && s0.trim().length() > 0) {
-            entitywolf.a(s0);
-            entitywolf.j(true);
+            entitywolf.b(s0);
+            entitywolf.k(true);
         }
 
         return entitywolf;
     }
 
-    public void m(boolean flag0) {
-        byte b0 = this.ah.a(19);
-
+    public void n(boolean flag0) {
         if (flag0) {
             this.ah.b(19, Byte.valueOf((byte) 1));
         } else {
@@ -319,19 +344,23 @@ public class EntityWolf extends EntityTameable {
     public boolean a(EntityAnimal entityanimal) {
         if (entityanimal == this) {
             return false;
-        } else if (!this.m()) {
+        } else if (!this.bP()) {
             return false;
         } else if (!(entityanimal instanceof EntityWolf)) {
             return false;
         } else {
             EntityWolf entitywolf = (EntityWolf) entityanimal;
 
-            return !entitywolf.m() ? false : (entitywolf.n() ? false : this.r() && entitywolf.r());
+            return !entitywolf.bP() ? false : (entitywolf.bQ() ? false : this.bU() && entitywolf.bU());
         }
     }
 
-    public boolean bY() {
+    public boolean ca() {
         return this.ah.a(19) == 1;
+    }
+
+    protected boolean t() {
+        return !this.bP() && this.ac > 2400;
     }
 
     public EntityAgeable a(EntityAgeable entityageable) {

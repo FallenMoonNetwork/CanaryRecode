@@ -1,12 +1,10 @@
 package net.minecraft.server;
 
-
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.BlockDestroyHook;
 import net.canarymod.hook.player.BlockPlaceHook;
-
 
 public class ItemBucket extends Item {
 
@@ -136,38 +134,46 @@ public class ItemBucket extends Item {
         }
     }
 
-    public boolean a(World world, double d0, double d1, double d2, int i0, int i1, int i2) {
-        return a(world, d0, d1, d2, i0, i1, i2, null); // CanaryMod: redirection
+    public boolean a(World world, int i0, int i1, int i2) {
+        return a(world, i0, i1, i2, null); // CanaryMod: redirection
     }
 
-    // CanaryMod: We need a Player for ItemUse
-    public boolean a(World world, double d0, double d1, double d2, int i0, int i1, int i2, EntityPlayer entityplayer) {
+    // CanaryMod: We need a Player for hooks
+    public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {
         if (this.a <= 0) {
             return false;
-        } else if (!world.c(i0, i1, i2) && world.g(i0, i1, i2).a()) {
-            return false;
         } else {
-            if (world.t.f && this.a == Block.F.cF) {
-                world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
+            boolean flag0 = !world.g(i0, i1, i2).a();
+
+            if (!world.c(i0, i1, i2) && !flag0) {
+                return false;
+            } else {
+                if (!world.I && flag0) {
+                    world.a(i0, i1, i2, true);
+                }
+
+                if (world.t.f && this.a == Block.F.cF) {
+                    world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
 
                     for (int i3 = 0; i3 < 8; ++i3) {
                         world.a("largesmoke", (double) i0 + Math.random(), (double) i1 + Math.random(), (double) i2 + Math.random(), 0.0D, 0.0D, 0.0D);
                     }
-            } else {
-                // CanaryMod: BlockPlaceHook water/lava bucket
-                if (entityplayer != null) {
-                    CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
-                    CanaryBlock placed = new CanaryBlock((short) this.a, (short) 0, i0, i1, i2, world.getCanaryWorld());
-                    Player player = ((EntityPlayerMP) entityplayer).getPlayer();
-                    BlockPlaceHook hook = new BlockPlaceHook(player, clicked, placed);
+                } else {
+                    // CanaryMod: BlockPlaceHook water/lava bucket
+                    if (entityplayer != null) {
+                        CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+                        CanaryBlock placed = new CanaryBlock((short) this.a, (short) 0, i0, i1, i2, world.getCanaryWorld());
+                        Player player = ((EntityPlayerMP) entityplayer).getPlayer();
+                        BlockPlaceHook hook = new BlockPlaceHook(player, clicked, placed);
 
-                    Canary.hooks().callHook(hook);
-                    if (hook.isCanceled()) {
-                        return false;
+                        Canary.hooks().callHook(hook);
+                        if (hook.isCanceled()) {
+                            return false;
+                        }
                     }
+                    //
+                    world.f(i0, i1, i2, this.a, 0, 3);
                 }
-                //
-                world.f(i0, i1, i2, this.a, 0, 3);
             }
 
             return true;

@@ -67,8 +67,8 @@ public class ContainerFurnace extends Container {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.c.get(i0);
 
-        if (slot != null && slot.d()) {
-            ItemStack itemstack1 = slot.c();
+        if (slot != null && slot.e()) {
+            ItemStack itemstack1 = slot.d();
 
             itemstack = itemstack1.m();
             if (i0 == 2) {
@@ -78,7 +78,7 @@ public class ContainerFurnace extends Container {
 
                 slot.a(itemstack1, itemstack);
             } else if (i0 != 1 && i0 != 0) {
-                if (FurnaceRecipes.a().b(itemstack1.b().cp) != null) {
+                if (FurnaceRecipes.a().b(itemstack1.b().cv) != null) {
                     if (!this.a(itemstack1, 0, 1, false)) {
                         return null;
                     }
@@ -97,13 +97,13 @@ public class ContainerFurnace extends Container {
                 return null;
             }
 
-            if (itemstack1.a == 0) {
+            if (itemstack1.b == 0) {
                 slot.c((ItemStack) null);
             } else {
-                slot.e();
+                slot.f();
             }
 
-            if (itemstack1.a == itemstack.a) {
+            if (itemstack1.b == itemstack.b) {
                 return null;
             }
 

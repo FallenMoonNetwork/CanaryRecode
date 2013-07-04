@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.CanaryEnderCrystal;
-
 
 public class EntityEnderCrystal extends Entity {
 
@@ -59,7 +57,7 @@ public class EntityEnderCrystal extends Entity {
                 if (((CanaryEnderCrystal) entity).isOneHitDetonate()) {
                     this.b = 0;
                 } else {
-                    this.b -= i0;
+                    this.b -= f0;
                 }
                 //
                 if (this.b <= 0) {

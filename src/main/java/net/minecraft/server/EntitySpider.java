@@ -8,9 +8,7 @@ public class EntitySpider extends EntityMob {
 
     public EntitySpider(World world) {
         super(world);
-        this.aH = "/mob/spider.png";
         this.a(1.4F, 0.9F);
-        this.bI = 0.8F;
         this.entity = new CanarySpider(this); // CanaryMod: Wrap Entity
     }
 
@@ -26,16 +24,14 @@ public class EntitySpider extends EntityMob {
         }
     }
 
-    public int aW() {
-        return maxHealth == 0 ? 16 : maxHealth; // CanaryMod: custom Max Health
+    protected void ax() {
+        super.ax();
+        this.a(SharedMonsterAttributes.a).a(16.0D);
+        this.a(SharedMonsterAttributes.d).a(0.800000011920929D);
     }
 
-    public double W() {
-        return (double) this.P * 0.75D - 0.5D;
-    }
-
-    protected Entity j() {
-        float f0 = this.c(1.0F);
+    protected Entity bH() {
+        float f0 = this.d(1.0F);
 
         if (f0 < 0.5F) {
             double d0 = 16.0D;
@@ -46,15 +42,15 @@ public class EntitySpider extends EntityMob {
         }
     }
 
-    protected String bb() {
+    protected String r() {
         return "mob.spider.say";
     }
 
-    protected String bc() {
+    protected String aK() {
         return "mob.spider.say";
     }
 
-    protected String bd() {
+    protected String aL() {
         return "mob.spider.death";
     }
 
@@ -63,10 +59,10 @@ public class EntitySpider extends EntityMob {
     }
 
     protected void a(Entity entity, float f0) {
-        float f1 = this.c(1.0F);
+        float f1 = this.d(1.0F);
 
         if (f1 > 0.5F && this.ab.nextInt(100) == 0) {
-            this.a_ = null;
+            this.j = null;
         } else {
             if (f0 > 2.0F && f0 < 6.0F && this.ab.nextInt(10) == 0) {
                 if (this.F) {
@@ -84,24 +80,24 @@ public class EntitySpider extends EntityMob {
         }
     }
 
-    protected int be() {
-        return Item.L.cp;
+    protected int s() {
+        return Item.M.cv;
     }
 
-    protected void a(boolean flag0, int i0) {
-        super.a(flag0, i0);
+    protected void b(boolean flag0, int i0) {
+        super.b(flag0, i0);
         if (flag0 && (this.ab.nextInt(3) == 0 || this.ab.nextInt(1 + i0) > 0)) {
-            this.b(Item.bv.cp, 1);
+            this.b(Item.bw.cv, 1);
         }
     }
 
-    public boolean g_() {
-        return this.o();
+    public boolean e() {
+        return this.bP();
     }
 
-    public void al() {}
+    public void ak() {}
 
-    public EnumCreatureAttribute bF() {
+    public EnumCreatureAttribute aU() {
         return EnumCreatureAttribute.c;
     }
 
@@ -109,7 +105,7 @@ public class EntitySpider extends EntityMob {
         return potioneffect.a() == Potion.u.H ? false : super.e(potioneffect);
     }
 
-    public boolean o() {
+    public boolean bP() {
         return (this.ah.a(16) & 1) != 0;
     }
 
@@ -125,14 +121,33 @@ public class EntitySpider extends EntityMob {
         this.ah.b(16, Byte.valueOf(b0));
     }
 
-    public void bJ() {
+    public EntityLivingData a(EntityLivingData entitylivingdata) {
+        Object object = super.a(entitylivingdata);
+
         if (this.q.s.nextInt(100) == 0) {
             EntitySkeleton entityskeleton = new EntitySkeleton(this.q);
 
             entityskeleton.b(this.u, this.v, this.w, this.A, 0.0F);
-            entityskeleton.bJ();
+            entityskeleton.a((EntityLivingData) null);
             this.q.d((Entity) entityskeleton);
             entityskeleton.a((Entity) this);
         }
+
+        if (object == null) {
+            object = new SpiderEffectsGroupData();
+            if (this.q.r > 2 && this.q.s.nextFloat() < 0.1F * this.q.b(this.u, this.v, this.w)) {
+                ((SpiderEffectsGroupData) object).a(this.q.s);
+            }
+        }
+
+        if (object instanceof SpiderEffectsGroupData) {
+            int i0 = ((SpiderEffectsGroupData) object).a;
+
+            if (i0 > 0 && Potion.a[i0] != null) {
+                this.d(new PotionEffect(i0, Integer.MAX_VALUE));
+            }
+        }
+
+        return (EntityLivingData) object;
     }
 }

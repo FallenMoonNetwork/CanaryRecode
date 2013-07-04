@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.io.DataInput;
-import java.io.DataOutput;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 import net.canarymod.api.CanaryDataWatcher;
-
 
 public class DataWatcher {
 
@@ -24,6 +22,7 @@ public class DataWatcher {
 
     // CanaryMod
     protected CanaryDataWatcher watcher;
+
     //
 
     public DataWatcher() {
@@ -120,7 +119,7 @@ public class DataWatcher {
         return this.d;
     }
 
-    public static void a(List list, DataOutput dataoutput) throws IOException {
+    public static void a(List list, DataOutputStream dataoutput) throws IOException {
         if (list != null) {
             Iterator iterator = list.iterator();
 
@@ -161,7 +160,7 @@ public class DataWatcher {
         return arraylist;
     }
 
-    public void a(DataOutput dataoutput) throws IOException {
+    public void a(DataOutputStream dataoutput) throws IOException {
         this.e.readLock().lock();
         Iterator iterator = this.c.values().iterator();
 
@@ -193,7 +192,7 @@ public class DataWatcher {
         return arraylist;
     }
 
-    private static void a(DataOutput dataoutput, WatchableObject watchableobject) throws IOException {
+    private static void a(DataOutputStream dataoutput, WatchableObject watchableobject) throws IOException {
         int i0 = (watchableobject.c() << 5 | watchableobject.a() & 31) & 255;
 
         dataoutput.writeByte(i0);
@@ -233,7 +232,7 @@ public class DataWatcher {
         }
     }
 
-    public static List a(DataInput datainput) throws IOException {
+    public static List a(DataInputStream datainput) throws IOException {
         ArrayList arraylist = null;
 
         for (byte b0 = datainput.readByte(); b0 != 127; b0 = datainput.readByte()) {
@@ -304,6 +303,7 @@ public class DataWatcher {
 
     /**
      * get the CanaryMod DataWatcher wrapper
+     * 
      * @return
      */
     public CanaryDataWatcher getCanaryDataWatcher() {

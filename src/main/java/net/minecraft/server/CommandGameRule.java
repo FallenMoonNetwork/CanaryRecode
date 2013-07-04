@@ -27,21 +27,23 @@ public class CommandGameRule extends CommandBase {
             s0 = astring[0];
             String s1 = astring[1];
             // CanaryMod: Fixes for MultiWorld
-//MERGE: This is definitely not correct anymore! this.d is still okay though - Chris
-            GameRules gamerules = icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.N() : icommandsender instanceof TileEntityCommandBlock ? ((EntityPlayerMP) icommandsender).q.N() : this.d();
+            GameRules gamerules =
+                    icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.O()
+                            : icommandsender instanceof TileEntityCommandBlock ? ((TileEntityCommandBlock) icommandsender).k.O() : this.d();
             //
 
             if (gamerules.e(s0)) {
                 gamerules.b(s0, s1);
                 a(icommandsender, "commands.gamerule.success", new Object[0]);
             } else {
-                a(icommandsender, "commands.gamerule.norule", new Object[] { s0});
+                a(icommandsender, "commands.gamerule.norule", new Object[]{ s0 });
             }
         } else if (astring.length == 1) {
             s0 = astring[0];
             // CanaryMod: Fixes for MultiWorld
-//MERGE: This is definitely not correct anymore! this.d is still okay though - Chris
-            GameRules gamerules1 = icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.N() : icommandsender instanceof TileEntityCommandBlock ? ((EntityPlayerMP) icommandsender).q.N() : this.d();
+            GameRules gamerules1 =
+                    icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.O()
+                            : icommandsender instanceof TileEntityCommandBlock ? ((TileEntityCommandBlock) icommandsender).k.O() : this.d();
             //
 
             if (gamerules1.e(s0)) {
@@ -62,10 +64,11 @@ public class CommandGameRule extends CommandBase {
 
     public List a(ICommandSender icommandsender, String[] astring) {
         // CanaryMod: Fixes for MultiWorld
-//MERGE: This is definitely not correct anymore! this.d is still okay though - Chris
-        String[] rules = icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.N().b() : icommandsender instanceof TileEntityCommandBlock ? ((EntityPlayerMP) icommandsender).q.N().b() : this.d().b();
+        String[] rules =
+                icommandsender instanceof EntityPlayerMP ? ((EntityPlayerMP) icommandsender).q.O().b()
+                        : icommandsender instanceof TileEntityCommandBlock ? ((TileEntityCommandBlock) icommandsender).k.O().b() : this.d().b();
         //
-        return astring.length == 1 ? a(astring, rules) : (astring.length == 2 ? a(astring, new String[] { "true", "false"}) : null);
+        return astring.length == 1 ? a(astring, rules) : (astring.length == 2 ? a(astring, new String[]{ "true", "false" }) : null);
     }
 
     private GameRules d() {

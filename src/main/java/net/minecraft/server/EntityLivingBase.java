@@ -5,20 +5,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Callable;
 import java.util.UUID;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
-import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.entity.DamageHook;
-import net.canarymod.hook.entity.EntityDeathHook;
-import net.canarymod.hook.entity.EntityDespawnHook;
-import net.canarymod.hook.entity.MobTargetHook;
-import net.canarymod.hook.entity.PotionEffectAppliedHook;
-import net.canarymod.hook.entity.PotionEffectFinishHook;
 
 public abstract class EntityLivingBase extends Entity {
 
@@ -83,6 +75,7 @@ public abstract class EntityLivingBase extends Entity {
 
     // CanaryMod: Custom MaxHealth
     protected int maxHealth;
+
     public EntityLivingBase(World world) {
         super(world);
         this.ax();
@@ -170,76 +163,77 @@ public abstract class EntityLivingBase extends Entity {
                 if (this.aj() == -20) {
                     this.g(0);
 
-                // CanaryMod - drowning damage.
-                DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.e), 2);
+                    // CanaryMod - drowning damage.
+                    DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.e), 2);
 
-                Canary.hooks().callHook(hook);
-                if (!hook.isCanceled()) {
-                    for (int i0 = 0; i0 < 8; ++i0) {
-                        float f0 = this.ab.nextFloat() - this.ab.nextFloat();
-                        float f1 = this.ab.nextFloat() - this.ab.nextFloat();
-                        float f2 = this.ab.nextFloat() - this.ab.nextFloat();
+                    Canary.hooks().callHook(hook);
+                    if (!hook.isCanceled()) {
+                        for (int i0 = 0; i0 < 8; ++i0) {
+                            float f0 = this.ab.nextFloat() - this.ab.nextFloat();
+                            float f1 = this.ab.nextFloat() - this.ab.nextFloat();
+                            float f2 = this.ab.nextFloat() - this.ab.nextFloat();
 
-                        this.q.a("bubble", this.u + (double) f0, this.v + (double) f1, this.w + (double) f2, this.x, this.y, this.z);
+                            this.q.a("bubble", this.u + (double) f0, this.v + (double) f1, this.w + (double) f2, this.x, this.y, this.z);
+                        }
+
+                        this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
                     }
-
-                    this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
+                    //
                 }
-                //
-            }
 
-            this.A();
-            if (!this.q.I && this.ae() && this.o instanceof EntityLivingBase) {
-                this.a((Entity) null);
-            }
-        } else {
-            this.g(300);
-        }
-
-        this.aJ = this.aK;
-        if (this.aC > 0) {
-            --this.aC;
-        }
-
-        if (this.ay > 0) {
-            --this.ay;
-        }
-
-        if (this.af > 0) {
-            --this.af;
-        }
-
-        if (this.aJ() <= 0.0F) {
-            this.az();
-        }
-
-        if (this.aT > 0) {
-            --this.aT;
-        } else {
-            this.aS = null;
-        }
-
-        if (this.bn != null && !this.bn.R()) {
-            this.bn = null;
-        }
-
-        if (this.i != null) {
-            if (!this.i.R()) {
-                this.b((EntityLivingBase) null);
-            } else if (this.j > 0) {
-                --this.j;
+                this.A();
+                if (!this.q.I && this.ae() && this.o instanceof EntityLivingBase) {
+                    this.a((Entity) null);
+                }
             } else {
-                this.b((EntityLivingBase) null);
+                this.g(300);
             }
-        }
 
-        this.aF();
-        this.aZ = this.aY;
-        this.aO = this.aN;
-        this.aQ = this.aP;
-        this.C = this.A;
-        this.D = this.B;
-        this.q.C.b();
+            this.aJ = this.aK;
+            if (this.aC > 0) {
+                --this.aC;
+            }
+
+            if (this.ay > 0) {
+                --this.ay;
+            }
+
+            if (this.af > 0) {
+                --this.af;
+            }
+
+            if (this.aJ() <= 0.0F) {
+                this.az();
+            }
+
+            if (this.aT > 0) {
+                --this.aT;
+            } else {
+                this.aS = null;
+            }
+
+            if (this.bn != null && !this.bn.R()) {
+                this.bn = null;
+            }
+
+            if (this.i != null) {
+                if (!this.i.R()) {
+                    this.b((EntityLivingBase) null);
+                } else if (this.j > 0) {
+                    --this.j;
+                } else {
+                    this.b((EntityLivingBase) null);
+                }
+            }
+
+            this.aF();
+            this.aZ = this.aY;
+            this.aO = this.aN;
+            this.aQ = this.aP;
+            this.C = this.A;
+            this.D = this.B;
+            this.q.C.b();
+        }
     }
 
     public boolean g_() {
@@ -591,20 +585,20 @@ public abstract class EntityLivingBase extends Entity {
                 if (damagesource instanceof EntityDamageSource && ((EntityDamageSource) damagesource).h() instanceof EntityLiving) {
                     attacker = (CanaryEntityLiving) ((EntityDamageSource) damagesource).h().getCanaryEntity();
                 }
-                DamageHook hook = new DamageHook(attacker, entity, new CanaryDamageSource(damagesource), i0);
+                DamageHook hook = new DamageHook(attacker, entity, new CanaryDamageSource(damagesource), (int) f0);
 
                 if ((float) this.af > (float) this.aI / 2.0F) {
                     if (f0 <= this.bc) {
                         return false;
                     }
 
-                    hook.setDamageDealt(f0 - this.bc);
+                    hook.setDamageDealt((int) (f0 - this.bc));
                     if (attacker != null) {
                         Canary.hooks().callHook(hook);
                     }
                     if (hook.isCanceled()) {
                         if (this instanceof EntityCreature) {
-//MERGE: Can't find substitute to what it was before (c) - Chris
+                            // MERGE: Can't find substitute to what it was before (c) - Chris
                             ((EntityCreature) this).aA = 0;
                         }
                         return false;
@@ -619,7 +613,7 @@ public abstract class EntityLivingBase extends Entity {
                     }
                     if (hook.isCanceled()) {
                         if (this instanceof EntityCreature) {
-                            ((EntityCreature) this).c = 0;
+                            // ((EntityCreature) this).c = 0; XXX
                         }
                         return false;
                     }

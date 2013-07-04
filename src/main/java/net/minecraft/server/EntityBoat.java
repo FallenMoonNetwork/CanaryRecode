@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
@@ -15,7 +14,6 @@ import net.canarymod.hook.entity.VehicleDestroyHook;
 import net.canarymod.hook.entity.VehicleEnterHook;
 import net.canarymod.hook.entity.VehicleExitHook;
 import net.canarymod.hook.entity.VehicleMoveHook;
-
 
 public class EntityBoat extends Entity {
 
@@ -86,7 +84,7 @@ public class EntityBoat extends Entity {
             if (damagesource.h() != null) {
                 attk = damagesource.h().getCanaryEntity();
             }
-            VehicleDamageHook hook = new VehicleDamageHook((CanaryBoat) this.entity, attk, new CanaryDamageSource(damagesource), i0);
+            VehicleDamageHook hook = new VehicleDamageHook((CanaryBoat) this.entity, attk, new CanaryDamageSource(damagesource), (int) f0);
 
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {

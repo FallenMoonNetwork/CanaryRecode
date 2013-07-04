@@ -1,10 +1,8 @@
 package net.minecraft.server;
 
-
 import java.util.concurrent.Callable;
 import net.canarymod.Canary;
 import net.canarymod.hook.player.ItemPickupHook;
-
 
 public class InventoryPlayer implements IInventory {
 
@@ -192,14 +190,14 @@ public class InventoryPlayer implements IInventory {
                 Canary.hooks().callHook(hook);
                 return !hook.isCanceled();
                 //
-            } else if (this.d.ce.d) {
+            } else if (this.d.bG.d) {
                 return true;
             } else {
                 return false;
             }
         } else {
             int slot = 0;
-            int left = itemstack.a;
+            int left = itemstack.b;
 
             do {
                 ItemStack itemstack1 = this.a[slot];
@@ -207,13 +205,14 @@ public class InventoryPlayer implements IInventory {
 
                 if (itemstack1 == null) {
                     delta = Math.min(64, left);
-                } else if (itemstack1.a < 64 && itemstack.c == itemstack1.c && itemstack.e() == itemstack1.e()) {
-                    delta = Math.min(64 - itemstack.a, left);
+                } else if (itemstack1.b < 64 && itemstack.c == itemstack1.c && itemstack.e() == itemstack1.e()) {
+                    delta = Math.min(64 - itemstack.b, left);
                 }
                 left -= delta;
                 slot++;
-            } while (left > 0 && slot < 36);
-            if (itemstack.a - left > 0) {
+            }
+            while (left > 0 && slot < 36);
+            if (itemstack.b - left > 0) {
                 // CanaryMod: ItemPickUp
                 ItemPickupHook hook = new ItemPickupHook(((EntityPlayerMP) this.d).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity());
 

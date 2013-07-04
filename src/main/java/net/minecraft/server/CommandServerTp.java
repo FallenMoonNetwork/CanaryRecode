@@ -1,9 +1,7 @@
 package net.minecraft.server;
 
-
 import java.util.List;
 import net.canarymod.hook.player.TeleportHook;
-
 
 public class CommandServerTp extends CommandBase {
 
@@ -17,8 +15,8 @@ public class CommandServerTp extends CommandBase {
         return 2;
     }
 
-    public String a(ICommandSender icommandsender) {
-        return icommandsender.a("commands.tp.usage", new Object[0]);
+    public String c(ICommandSender icommandsender) {
+        return "commands.tp.usage";
     }
 
     public void b(ICommandSender icommandsender, String[] astring) {
@@ -51,8 +49,8 @@ public class CommandServerTp extends CommandBase {
 
                     entityplayermp.a((Entity) null);
                     // CanaryMod: DERP (MultiWorld fix)
-                    entityplayermp.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName());
-                    a(icommandsender, "commands.tp.success", new Object[] { entityplayermp.al(), entityplayermp1.al()});
+                    entityplayermp.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName(), TeleportHook.TeleportCause.COMMAND);
+                    a(icommandsender, "commands.tp.success", new Object[]{ entityplayermp.al(), entityplayermp1.al() });
                 }
             } else if (entityplayermp.q != null) {
                 int i0 = astring.length - 3;

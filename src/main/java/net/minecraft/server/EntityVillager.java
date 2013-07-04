@@ -12,23 +12,22 @@ import net.canarymod.api.entity.living.humanoid.CanaryVillager;
 import net.canarymod.api.entity.living.humanoid.Villager;
 import net.canarymod.hook.entity.VillagerTradeUnlockHook;
 
+public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
 
-public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
-
-    private int e;
-    private boolean f;
-    private boolean g;
-    public Village d; // CanaryMod: package => public
-    private EntityPlayer h;
-    private MerchantRecipeList i;
-    private int j;
-    private boolean bK;
-    private int bL;
-    private String bM;
-    private boolean bN;
-    private float bO;
-    private static final Map bP = new HashMap();
-    private static final Map bQ = new HashMap();
+    private int bq;
+    private boolean br;
+    private boolean bs;
+    public Village bp; // CanaryMod: package => public
+    private EntityPlayer bt;
+    private MerchantRecipeList bu;
+    private int bv;
+    private boolean bw;
+    private int bx;
+    private String by;
+    private boolean bz;
+    private float bA;
+    private static final Map bB = new HashMap();
+    private static final Map bC = new HashMap();
 
     public EntityVillager(World world) {
         this(world, 0);
@@ -36,62 +35,61 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
 
     public EntityVillager(World world, int i0) {
         super(world);
-        this.e = 0;
-        this.f = false;
-        this.g = false;
-        this.d = null;
-        this.s(i0);
-        this.aH = "/mob/villager/villager.png";
-        this.bI = 0.5F;
+        this.p(i0);
         this.a(0.6F, 1.8F);
-        this.aC().b(true);
-        this.aC().a(true);
-        this.bo.a(0, new EntityAISwimming(this));
-        this.bo.a(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8.0F, 0.3F, 0.35F));
-        this.bo.a(1, new EntityAITradePlayer(this));
-        this.bo.a(1, new EntityAILookAtTradePlayer(this));
-        this.bo.a(2, new EntityAIMoveIndoors(this));
-        this.bo.a(3, new EntityAIRestrictOpenDoor(this));
-        this.bo.a(4, new EntityAIOpenDoor(this, true));
-        this.bo.a(5, new EntityAIMoveTwardsRestriction(this, 0.3F));
-        this.bo.a(6, new EntityAIVillagerMate(this));
-        this.bo.a(7, new EntityAIFollowGolem(this));
-        this.bo.a(8, new EntityAIPlay(this, 0.32F));
-        this.bo.a(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
-        this.bo.a(9, new EntityAIWatchClosest2(this, EntityVillager.class, 5.0F, 0.02F));
-        this.bo.a(9, new EntityAIWander(this, 0.3F));
-        this.bo.a(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
+        this.k().b(true);
+        this.k().a(true);
+        this.c.a(0, new EntityAISwimming(this));
+        this.c.a(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8.0F, 0.6D, 0.6D));
+        this.c.a(1, new EntityAITradePlayer(this));
+        this.c.a(1, new EntityAILookAtTradePlayer(this));
+        this.c.a(2, new EntityAIMoveIndoors(this));
+        this.c.a(3, new EntityAIRestrictOpenDoor(this));
+        this.c.a(4, new EntityAIOpenDoor(this, true));
+        this.c.a(5, new EntityAIMoveTwardsRestriction(this, 0.6D));
+        this.c.a(6, new EntityAIVillagerMate(this));
+        this.c.a(7, new EntityAIFollowGolem(this));
+        this.c.a(8, new EntityAIPlay(this, 0.32D));
+        this.c.a(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
+        this.c.a(9, new EntityAIWatchClosest2(this, EntityVillager.class, 5.0F, 0.02F));
+        this.c.a(9, new EntityAIWander(this, 0.6D));
+        this.c.a(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
         this.entity = new CanaryVillager(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean bh() {
+    protected void ax() {
+        super.ax();
+        this.a(SharedMonsterAttributes.d).a(0.5D);
+    }
+
+    public boolean bb() {
         return true;
     }
 
-    protected void bp() {
-        if (--this.e <= 0) {
+    protected void bg() {
+        if (--this.bq <= 0) {
             this.q.A.a(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w));
-            this.e = 70 + this.ab.nextInt(50);
-            this.d = this.q.A.a(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w), 32);
-            if (this.d == null) {
-                this.aO();
+            this.bq = 70 + this.ab.nextInt(50);
+            this.bp = this.q.A.a(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w), 32);
+            if (this.bp == null) {
+                this.bN();
             } else {
-                ChunkCoordinates chunkcoordinates = this.d.a();
+                ChunkCoordinates chunkcoordinates = this.bp.a();
 
-                this.b(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c, (int) ((float) this.d.b() * 0.6F));
-                if (this.bN) {
-                    this.bN = false;
-                    this.d.b(5);
+                this.b(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c, (int) ((float) this.bp.b() * 0.6F));
+                if (this.bz) {
+                    this.bz = false;
+                    this.bp.b(5);
                 }
             }
         }
 
-        if (!this.p() && this.j > 0) {
-            --this.j;
-            if (this.j <= 0) {
-                if (this.bK) {
-                    if (this.i.size() > 1) {
-                        Iterator iterator = this.i.iterator();
+        if (!this.bS() && this.bv > 0) {
+            --this.bv;
+            if (this.bv <= 0) {
+                if (this.bw) {
+                    if (this.bu.size() > 1) {
+                        Iterator iterator = this.bu.iterator();
 
                         while (iterator.hasNext()) {
                             MerchantRecipe merchantrecipe = (MerchantRecipe) iterator.next();
@@ -102,11 +100,11 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
                         }
                     }
 
-                    this.t(1);
-                    this.bK = false;
-                    if (this.d != null && this.bM != null) {
+                    this.q(1);
+                    this.bw = false;
+                    if (this.bp != null && this.by != null) {
                         this.q.a((Entity) this, (byte) 14);
-                        this.d.a(this.bM, 1);
+                        this.bp.a(this.by, 1);
                     }
                 }
 
@@ -114,22 +112,22 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
             }
         }
 
-        super.bp();
+        super.bg();
     }
 
-    public boolean a_(EntityPlayer entityplayer) {
-        ItemStack itemstack = entityplayer.bK.h();
-        boolean flag0 = itemstack != null && itemstack.c == Item.bD.cp;
+    public boolean a(EntityPlayer entityplayer) {
+        ItemStack itemstack = entityplayer.bn.h();
+        boolean flag0 = itemstack != null && itemstack.d == Item.bE.cv;
 
-        if (!flag0 && this.R() && !this.p() && !this.h_()) {
+        if (!flag0 && this.R() && !this.bS() && !this.g_()) {
             if (!this.q.I) {
-                this.a(entityplayer);
-                entityplayer.a((IMerchant) this, this.bP());
+                this.a_(entityplayer);
+                entityplayer.a((IMerchant) this, this.bw());
             }
 
             return true;
         } else {
-            return super.a_(entityplayer);
+            return super.a(entityplayer);
         }
     }
 
@@ -138,82 +136,78 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
         this.ah.a(16, Integer.valueOf(0));
     }
 
-    public int aW() {
-        return maxHealth == 0 ? 20 : maxHealth; // CanaryMod: custom Max Health
-    }
-
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("Profession", this.m());
-        nbttagcompound.a("Riches", this.bL);
-        if (this.i != null) {
-            nbttagcompound.a("Offers", this.i.a());
+        nbttagcompound.a("Profession", this.bP());
+        nbttagcompound.a("Riches", this.bx);
+        if (this.bu != null) {
+            nbttagcompound.a("Offers", this.bu.a());
         }
     }
 
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
-        this.s(nbttagcompound.e("Profession"));
-        this.bL = nbttagcompound.e("Riches");
+        this.p(nbttagcompound.e("Profession"));
+        this.bx = nbttagcompound.e("Riches");
         if (nbttagcompound.b("Offers")) {
             NBTTagCompound nbttagcompound1 = nbttagcompound.l("Offers");
 
-            this.i = new MerchantRecipeList(nbttagcompound1);
+            this.bu = new MerchantRecipeList(nbttagcompound1);
         }
     }
 
-    protected boolean bm() {
+    protected boolean t() {
         return false;
     }
 
-    protected String bb() {
-        return "mob.villager.default";
+    protected String r() {
+        return this.bS() ? "mob.villager.haggle" : "mob.villager.idle";
     }
 
-    protected String bc() {
-        return "mob.villager.defaulthurt";
+    protected String aK() {
+        return "mob.villager.hit";
     }
 
-    protected String bd() {
-        return "mob.villager.defaultdeath";
+    protected String aL() {
+        return "mob.villager.death";
     }
 
-    public void s(int i0) {
+    public void p(int i0) {
         this.ah.b(16, Integer.valueOf(i0));
     }
 
-    public int m() {
+    public int bP() {
         return this.ah.c(16);
     }
 
-    public boolean n() {
-        return this.f;
-    }
-
-    public void i(boolean flag0) {
-        this.f = flag0;
+    public boolean bQ() {
+        return this.br;
     }
 
     public void j(boolean flag0) {
-        this.g = flag0;
+        this.br = flag0;
     }
 
-    public boolean o() {
-        return this.g;
+    public void k(boolean flag0) {
+        this.bs = flag0;
     }
 
-    public void c(EntityLiving entityliving) {
-        super.c(entityliving);
-        if (this.d != null && entityliving != null) {
-            this.d.a(entityliving);
-            if (entityliving instanceof EntityPlayer) {
+    public boolean bR() {
+        return this.bs;
+    }
+
+    public void b(EntityLivingBase entitylivingbase) {
+        super.b(entitylivingbase);
+        if (this.bp != null && entitylivingbase != null) {
+            this.bp.a(entitylivingbase);
+            if (entitylivingbase instanceof EntityPlayer) {
                 byte b0 = -1;
 
-                if (this.h_()) {
+                if (this.g_()) {
                     b0 = -3;
                 }
 
-                this.d.a(((EntityPlayer) entityliving).c_(), b0);
+                this.bp.a(((EntityPlayer) entitylivingbase).c_(), b0);
                 if (this.R()) {
                     this.q.a((Entity) this, (byte) 13);
                 }
@@ -222,20 +216,20 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
     }
 
     public void a(DamageSource damagesource) {
-        if (this.d != null) {
+        if (this.bp != null) {
             Entity entity = damagesource.i();
 
             if (entity != null) {
                 if (entity instanceof EntityPlayer) {
-                    this.d.a(((EntityPlayer) entity).c_(), -2);
+                    this.bp.a(((EntityPlayer) entity).c_(), -2);
                 } else if (entity instanceof IMob) {
-                    this.d.h();
+                    this.bp.h();
                 }
             } else if (entity == null) {
                 EntityPlayer entityplayer = this.q.a(this, 16.0D);
 
                 if (entityplayer != null) {
-                    this.d.h();
+                    this.bp.h();
                 }
             }
         }
@@ -243,54 +237,67 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
         super.a(damagesource);
     }
 
-    public void a(EntityPlayer entityplayer) {
-        this.h = entityplayer;
+    public void a_(EntityPlayer entityplayer) {
+        this.bt = entityplayer;
     }
 
     public EntityPlayer m_() {
-        return this.h;
+        return this.bt;
     }
 
-    public boolean p() {
-        return this.h != null;
+    public boolean bS() {
+        return this.bt != null;
     }
 
     public void a(MerchantRecipe merchantrecipe) {
         merchantrecipe.f();
-        if (merchantrecipe.a((MerchantRecipe) this.i.get(this.i.size() - 1))) {
-            this.j = 40;
-            this.bK = true;
-            if (this.h != null) {
-                this.bM = this.h.c_();
+        this.a_ = -this.o();
+        this.a("mob.villager.yes", this.aW(), this.aX());
+        if (merchantrecipe.a((MerchantRecipe) this.bu.get(this.bu.size() - 1))) {
+            this.bv = 40;
+            this.bw = true;
+            if (this.bt != null) {
+                this.by = this.bt.c_();
             } else {
-                this.bM = null;
+                this.by = null;
             }
         }
 
-        if (merchantrecipe.a().c == Item.bI.cp) {
-            this.bL += merchantrecipe.a().a;
+        if (merchantrecipe.a().d == Item.bJ.cv) {
+            this.bx += merchantrecipe.a().b;
+        }
+    }
+
+    public void a_(ItemStack itemstack) {
+        if (!this.q.I && this.a_ > -this.o() + 20) {
+            this.a_ = -this.o();
+            if (itemstack != null) {
+                this.a("mob.villager.yes", this.aW(), this.aX());
+            } else {
+                this.a("mob.villager.no", this.aW(), this.aX());
+            }
         }
     }
 
     public MerchantRecipeList b(EntityPlayer entityplayer) {
-        if (this.i == null) {
-            this.t(1);
+        if (this.bu == null) {
+            this.q(1);
         }
 
-        return this.i;
+        return this.bu;
     }
 
-    private float j(float f0) {
-        float f1 = f0 + this.bO;
+    private float o(float f0) {
+        float f1 = f0 + this.bA;
 
         return f1 > 0.9F ? 0.9F - (f1 - 0.9F) : f1;
     }
 
-    private void t(int i0) {
-        if (this.i != null) {
-            this.bO = MathHelper.c((float) this.i.size()) * 0.2F;
+    private void q(int i0) {
+        if (this.bu != null) {
+            this.bA = MathHelper.c((float) this.bu.size()) * 0.2F;
         } else {
-            this.bO = 0.0F;
+            this.bA = 0.0F;
         }
 
         MerchantRecipeList merchantrecipelist;
@@ -298,50 +305,49 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
         merchantrecipelist = new MerchantRecipeList();
         int i1;
 
-        label50:
-        switch (this.m()) {
+        label50: switch (this.bP()) {
             case 0:
-                a(merchantrecipelist, Item.U.cp, this.ab, this.j(0.9F));
-                a(merchantrecipelist, Block.af.cz, this.ab, this.j(0.5F));
-                a(merchantrecipelist, Item.bl.cp, this.ab, this.j(0.5F));
-                a(merchantrecipelist, Item.aW.cp, this.ab, this.j(0.4F));
-                b(merchantrecipelist, Item.V.cp, this.ab, this.j(0.9F));
-                b(merchantrecipelist, Item.bg.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.k.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.bd.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.bf.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.j.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.bm.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.m.cp, this.ab, this.j(0.5F));
-                if (this.ab.nextFloat() < this.j(0.5F)) {
-                    merchantrecipelist.add(new MerchantRecipe(new ItemStack(Block.J, 10), new ItemStack(Item.bI), new ItemStack(Item.aq.cp, 4 + this.ab.nextInt(2), 0)));
+                a(merchantrecipelist, Item.V.cv, this.ab, this.o(0.9F));
+                a(merchantrecipelist, Block.ag.cF, this.ab, this.o(0.5F));
+                a(merchantrecipelist, Item.bm.cv, this.ab, this.o(0.5F));
+                a(merchantrecipelist, Item.aX.cv, this.ab, this.o(0.4F));
+                b(merchantrecipelist, Item.W.cv, this.ab, this.o(0.9F));
+                b(merchantrecipelist, Item.bh.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.l.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.be.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.bg.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.k.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.bn.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.n.cv, this.ab, this.o(0.5F));
+                if (this.ab.nextFloat() < this.o(0.5F)) {
+                    merchantrecipelist.add(new MerchantRecipe(new ItemStack(Block.K, 10), new ItemStack(Item.bJ), new ItemStack(Item.ar.cv, 4 + this.ab.nextInt(2), 0)));
                 }
                 break;
 
             case 1:
-                a(merchantrecipelist, Item.aL.cp, this.ab, this.j(0.8F));
-                a(merchantrecipelist, Item.aM.cp, this.ab, this.j(0.8F));
-                a(merchantrecipelist, Item.bH.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Block.ar.cz, this.ab, this.j(0.8F));
-                b(merchantrecipelist, Block.Q.cz, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.aR.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.aT.cp, this.ab, this.j(0.2F));
-                if (this.ab.nextFloat() < this.j(0.07F)) {
+                a(merchantrecipelist, Item.aM.cv, this.ab, this.o(0.8F));
+                a(merchantrecipelist, Item.aN.cv, this.ab, this.o(0.8F));
+                a(merchantrecipelist, Item.bI.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Block.as.cF, this.ab, this.o(0.8F));
+                b(merchantrecipelist, Block.R.cF, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.aS.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.aU.cv, this.ab, this.o(0.2F));
+                if (this.ab.nextFloat() < this.o(0.07F)) {
                     Enchantment enchantment = Enchantment.c[this.ab.nextInt(Enchantment.c.length)];
                     int i2 = MathHelper.a(this.ab, enchantment.d(), enchantment.b());
-                    ItemStack itemstack = Item.bX.a(new EnchantmentData(enchantment, i2));
+                    ItemStack itemstack = Item.bY.a(new EnchantmentData(enchantment, i2));
 
                     i1 = 2 + this.ab.nextInt(5 + i2 * 10) + 3 * i2;
-                    merchantrecipelist.add(new MerchantRecipe(new ItemStack(Item.aM), new ItemStack(Item.bI, i1), itemstack));
+                    merchantrecipelist.add(new MerchantRecipe(new ItemStack(Item.aN), new ItemStack(Item.bJ, i1), itemstack));
                 }
                 break;
 
             case 2:
-                b(merchantrecipelist, Item.bB.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.bE.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.aD.cp, this.ab, this.j(0.4F));
-                b(merchantrecipelist, Block.bh.cz, this.ab, this.j(0.3F));
-                int[] aint = new int[] { Item.r.cp, Item.A.cp, Item.af.cp, Item.aj.cp, Item.i.cp, Item.D.cp, Item.h.cp, Item.C.cp};
+                b(merchantrecipelist, Item.bC.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.bF.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.aE.cv, this.ab, this.o(0.4F));
+                b(merchantrecipelist, Block.bi.cF, this.ab, this.o(0.3F));
+                int[] aint = new int[]{ Item.s.cv, Item.B.cv, Item.ag.cv, Item.ak.cv, Item.j.cv, Item.E.cv, Item.i.cv, Item.D.cv };
                 int[] aint1 = aint;
                 int i3 = aint.length;
 
@@ -354,62 +360,62 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
 
                     int i4 = aint1[i1];
 
-                    if (this.ab.nextFloat() < this.j(0.05F)) {
-                        merchantrecipelist.add(new MerchantRecipe(new ItemStack(i4, 1, 0), new ItemStack(Item.bI, 2 + this.ab.nextInt(3), 0), EnchantmentHelper.a(this.ab, new ItemStack(i4, 1, 0), 5 + this.ab.nextInt(15))));
+                    if (this.ab.nextFloat() < this.o(0.05F)) {
+                        merchantrecipelist.add(new MerchantRecipe(new ItemStack(i4, 1, 0), new ItemStack(Item.bJ, 2 + this.ab.nextInt(3), 0), EnchantmentHelper.a(this.ab, new ItemStack(i4, 1, 0), 5 + this.ab.nextInt(15))));
                     }
 
                     ++i1;
                 }
 
             case 3:
-                a(merchantrecipelist, Item.n.cp, this.ab, this.j(0.7F));
-                a(merchantrecipelist, Item.p.cp, this.ab, this.j(0.5F));
-                a(merchantrecipelist, Item.q.cp, this.ab, this.j(0.5F));
-                a(merchantrecipelist, Item.o.cp, this.ab, this.j(0.5F));
-                b(merchantrecipelist, Item.r.cp, this.ab, this.j(0.5F));
-                b(merchantrecipelist, Item.A.cp, this.ab, this.j(0.5F));
-                b(merchantrecipelist, Item.i.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.D.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.h.cp, this.ab, this.j(0.5F));
-                b(merchantrecipelist, Item.C.cp, this.ab, this.j(0.5F));
-                b(merchantrecipelist, Item.g.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.B.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.Q.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.R.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.ah.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.al.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.ae.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.ai.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.af.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.aj.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.ag.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.ak.cp, this.ab, this.j(0.2F));
-                b(merchantrecipelist, Item.ad.cp, this.ab, this.j(0.1F));
-                b(merchantrecipelist, Item.aa.cp, this.ab, this.j(0.1F));
-                b(merchantrecipelist, Item.ab.cp, this.ab, this.j(0.1F));
-                b(merchantrecipelist, Item.ac.cp, this.ab, this.j(0.1F));
+                a(merchantrecipelist, Item.o.cv, this.ab, this.o(0.7F));
+                a(merchantrecipelist, Item.q.cv, this.ab, this.o(0.5F));
+                a(merchantrecipelist, Item.r.cv, this.ab, this.o(0.5F));
+                a(merchantrecipelist, Item.p.cv, this.ab, this.o(0.5F));
+                b(merchantrecipelist, Item.s.cv, this.ab, this.o(0.5F));
+                b(merchantrecipelist, Item.B.cv, this.ab, this.o(0.5F));
+                b(merchantrecipelist, Item.j.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.E.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.i.cv, this.ab, this.o(0.5F));
+                b(merchantrecipelist, Item.D.cv, this.ab, this.o(0.5F));
+                b(merchantrecipelist, Item.h.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.C.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.R.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.S.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.ai.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.am.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.af.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.aj.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.ag.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.ak.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.ah.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.al.cv, this.ab, this.o(0.2F));
+                b(merchantrecipelist, Item.ae.cv, this.ab, this.o(0.1F));
+                b(merchantrecipelist, Item.ab.cv, this.ab, this.o(0.1F));
+                b(merchantrecipelist, Item.ac.cv, this.ab, this.o(0.1F));
+                b(merchantrecipelist, Item.ad.cv, this.ab, this.o(0.1F));
                 break;
 
             case 4:
-                a(merchantrecipelist, Item.n.cp, this.ab, this.j(0.7F));
-                a(merchantrecipelist, Item.ar.cp, this.ab, this.j(0.5F));
-                a(merchantrecipelist, Item.bj.cp, this.ab, this.j(0.5F));
-                b(merchantrecipelist, Item.aB.cp, this.ab, this.j(0.1F));
-                b(merchantrecipelist, Item.X.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.Z.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.W.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.Y.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.as.cp, this.ab, this.j(0.3F));
-                b(merchantrecipelist, Item.bk.cp, this.ab, this.j(0.3F));
+                a(merchantrecipelist, Item.o.cv, this.ab, this.o(0.7F));
+                a(merchantrecipelist, Item.as.cv, this.ab, this.o(0.5F));
+                a(merchantrecipelist, Item.bk.cv, this.ab, this.o(0.5F));
+                b(merchantrecipelist, Item.aC.cv, this.ab, this.o(0.1F));
+                b(merchantrecipelist, Item.Y.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.aa.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.X.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.Z.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.at.cv, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.bl.cv, this.ab, this.o(0.3F));
         }
 
         if (merchantrecipelist.isEmpty()) {
-            a(merchantrecipelist, Item.q.cp, this.ab, 1.0F);
+            a(merchantrecipelist, Item.r.cv, this.ab, 1.0F);
         }
 
         Collections.shuffle(merchantrecipelist);
-        if (this.i == null) {
-            this.i = new MerchantRecipeList();
+        if (this.bu == null) {
+            this.bu = new MerchantRecipeList();
         }
 
         for (int i5 = 0; i5 < i0 && i5 < merchantrecipelist.size(); ++i5) {
@@ -419,7 +425,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
 
             Canary.hooks().callHook(hook);
             if (!hook.isCanceled()) {
-                this.i.a(recipe);
+                this.bu.a(recipe);
             }
             //
         }
@@ -427,7 +433,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
 
     private static void a(MerchantRecipeList merchantrecipelist, int i0, Random random, float f0) {
         if (random.nextFloat() < f0) {
-            merchantrecipelist.add(new MerchantRecipe(a(i0, random), Item.bI));
+            merchantrecipelist.add(new MerchantRecipe(a(i0, random), Item.bJ));
         }
     }
 
@@ -436,7 +442,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
     }
 
     private static int b(int i0, Random random) {
-        Tuple tuple = (Tuple) bP.get(Integer.valueOf(i0));
+        Tuple tuple = (Tuple) bB.get(Integer.valueOf(i0));
 
         return tuple == null ? 1 : (((Integer) tuple.a()).intValue() >= ((Integer) tuple.b()).intValue() ? ((Integer) tuple.a()).intValue() : ((Integer) tuple.a()).intValue() + random.nextInt(((Integer) tuple.b()).intValue() - ((Integer) tuple.a()).intValue()));
     }
@@ -448,10 +454,10 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
             ItemStack itemstack1;
 
             if (i1 < 0) {
-                itemstack = new ItemStack(Item.bI.cp, 1, 0);
+                itemstack = new ItemStack(Item.bJ.cv, 1, 0);
                 itemstack1 = new ItemStack(i0, -i1, 0);
             } else {
-                itemstack = new ItemStack(Item.bI.cp, i1, 0);
+                itemstack = new ItemStack(Item.bJ.cv, i1, 0);
                 itemstack1 = new ItemStack(i0, 1, 0);
             }
 
@@ -460,24 +466,30 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
     }
 
     private static int c(int i0, Random random) {
-        Tuple tuple = (Tuple) bQ.get(Integer.valueOf(i0));
+        Tuple tuple = (Tuple) bC.get(Integer.valueOf(i0));
 
         return tuple == null ? 1 : (((Integer) tuple.a()).intValue() >= ((Integer) tuple.b()).intValue() ? ((Integer) tuple.a()).intValue() : ((Integer) tuple.a()).intValue() + random.nextInt(((Integer) tuple.b()).intValue() - ((Integer) tuple.a()).intValue()));
     }
 
-    public void bJ() {
-        this.s(this.q.s.nextInt(5));
+    public EntityLivingData a(EntityLivingData entitylivingdata) {
+        entitylivingdata = super.a(entitylivingdata);
+        this.p(this.q.s.nextInt(5));
+        return entitylivingdata;
     }
 
-    public void q() {
-        this.bN = true;
+    public void bT() {
+        this.bz = true;
     }
 
     public EntityVillager b(EntityAgeable entityageable) {
         EntityVillager entityvillager = new EntityVillager(this.q);
 
-        entityvillager.bJ();
+        entityvillager.a((EntityLivingData) null);
         return entityvillager;
+    }
+
+    public boolean bC() {
+        return false;
     }
 
     public EntityAgeable a(EntityAgeable entityageable) {
@@ -485,69 +497,69 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
     }
 
     static {
-        bP.put(Integer.valueOf(Item.n.cp), new Tuple(Integer.valueOf(16), Integer.valueOf(24)));
-        bP.put(Integer.valueOf(Item.p.cp), new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
-        bP.put(Integer.valueOf(Item.q.cp), new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
-        bP.put(Integer.valueOf(Item.o.cp), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
-        bP.put(Integer.valueOf(Item.aL.cp), new Tuple(Integer.valueOf(24), Integer.valueOf(36)));
-        bP.put(Integer.valueOf(Item.aM.cp), new Tuple(Integer.valueOf(11), Integer.valueOf(13)));
-        bP.put(Integer.valueOf(Item.bH.cp), new Tuple(Integer.valueOf(1), Integer.valueOf(1)));
-        bP.put(Integer.valueOf(Item.bo.cp), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
-        bP.put(Integer.valueOf(Item.bB.cp), new Tuple(Integer.valueOf(2), Integer.valueOf(3)));
-        bP.put(Integer.valueOf(Item.ar.cp), new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
-        bP.put(Integer.valueOf(Item.bj.cp), new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
-        bP.put(Integer.valueOf(Item.bl.cp), new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
-        bP.put(Integer.valueOf(Item.aW.cp), new Tuple(Integer.valueOf(9), Integer.valueOf(13)));
-        bP.put(Integer.valueOf(Item.T.cp), new Tuple(Integer.valueOf(34), Integer.valueOf(48)));
-        bP.put(Integer.valueOf(Item.bi.cp), new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
-        bP.put(Integer.valueOf(Item.bh.cp), new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
-        bP.put(Integer.valueOf(Item.U.cp), new Tuple(Integer.valueOf(18), Integer.valueOf(22)));
-        bP.put(Integer.valueOf(Block.af.cz), new Tuple(Integer.valueOf(14), Integer.valueOf(22)));
-        bP.put(Integer.valueOf(Item.bn.cp), new Tuple(Integer.valueOf(36), Integer.valueOf(64)));
-        bQ.put(Integer.valueOf(Item.j.cp), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
-        bQ.put(Integer.valueOf(Item.bf.cp), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
-        bQ.put(Integer.valueOf(Item.r.cp), new Tuple(Integer.valueOf(7), Integer.valueOf(11)));
-        bQ.put(Integer.valueOf(Item.A.cp), new Tuple(Integer.valueOf(12), Integer.valueOf(14)));
-        bQ.put(Integer.valueOf(Item.i.cp), new Tuple(Integer.valueOf(6), Integer.valueOf(8)));
-        bQ.put(Integer.valueOf(Item.D.cp), new Tuple(Integer.valueOf(9), Integer.valueOf(12)));
-        bQ.put(Integer.valueOf(Item.h.cp), new Tuple(Integer.valueOf(7), Integer.valueOf(9)));
-        bQ.put(Integer.valueOf(Item.C.cp), new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
-        bQ.put(Integer.valueOf(Item.g.cp), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
-        bQ.put(Integer.valueOf(Item.B.cp), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
-        bQ.put(Integer.valueOf(Item.Q.cp), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
-        bQ.put(Integer.valueOf(Item.R.cp), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
-        bQ.put(Integer.valueOf(Item.ah.cp), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
-        bQ.put(Integer.valueOf(Item.al.cp), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
-        bQ.put(Integer.valueOf(Item.ae.cp), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
-        bQ.put(Integer.valueOf(Item.ai.cp), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
-        bQ.put(Integer.valueOf(Item.af.cp), new Tuple(Integer.valueOf(10), Integer.valueOf(14)));
-        bQ.put(Integer.valueOf(Item.aj.cp), new Tuple(Integer.valueOf(16), Integer.valueOf(19)));
-        bQ.put(Integer.valueOf(Item.ag.cp), new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
-        bQ.put(Integer.valueOf(Item.ak.cp), new Tuple(Integer.valueOf(11), Integer.valueOf(14)));
-        bQ.put(Integer.valueOf(Item.ad.cp), new Tuple(Integer.valueOf(5), Integer.valueOf(7)));
-        bQ.put(Integer.valueOf(Item.aa.cp), new Tuple(Integer.valueOf(5), Integer.valueOf(7)));
-        bQ.put(Integer.valueOf(Item.ab.cp), new Tuple(Integer.valueOf(11), Integer.valueOf(15)));
-        bQ.put(Integer.valueOf(Item.ac.cp), new Tuple(Integer.valueOf(9), Integer.valueOf(11)));
-        bQ.put(Integer.valueOf(Item.V.cp), new Tuple(Integer.valueOf(-4), Integer.valueOf(-2)));
-        bQ.put(Integer.valueOf(Item.bg.cp), new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
-        bQ.put(Integer.valueOf(Item.k.cp), new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
-        bQ.put(Integer.valueOf(Item.bd.cp), new Tuple(Integer.valueOf(-10), Integer.valueOf(-7)));
-        bQ.put(Integer.valueOf(Block.Q.cz), new Tuple(Integer.valueOf(-5), Integer.valueOf(-3)));
-        bQ.put(Integer.valueOf(Block.ar.cz), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
-        bQ.put(Integer.valueOf(Item.X.cp), new Tuple(Integer.valueOf(4), Integer.valueOf(5)));
-        bQ.put(Integer.valueOf(Item.Z.cp), new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
-        bQ.put(Integer.valueOf(Item.W.cp), new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
-        bQ.put(Integer.valueOf(Item.Y.cp), new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
-        bQ.put(Integer.valueOf(Item.aB.cp), new Tuple(Integer.valueOf(6), Integer.valueOf(8)));
-        bQ.put(Integer.valueOf(Item.bE.cp), new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
-        bQ.put(Integer.valueOf(Item.aD.cp), new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
-        bQ.put(Integer.valueOf(Item.aR.cp), new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
-        bQ.put(Integer.valueOf(Item.aT.cp), new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
-        bQ.put(Integer.valueOf(Block.bh.cz), new Tuple(Integer.valueOf(-3), Integer.valueOf(-1)));
-        bQ.put(Integer.valueOf(Item.as.cp), new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
-        bQ.put(Integer.valueOf(Item.bk.cp), new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
-        bQ.put(Integer.valueOf(Item.bm.cp), new Tuple(Integer.valueOf(-8), Integer.valueOf(-6)));
-        bQ.put(Integer.valueOf(Item.bB.cp), new Tuple(Integer.valueOf(7), Integer.valueOf(11)));
-        bQ.put(Integer.valueOf(Item.m.cp), new Tuple(Integer.valueOf(-12), Integer.valueOf(-8)));
+        bB.put(Integer.valueOf(Item.o.cv), new Tuple(Integer.valueOf(16), Integer.valueOf(24)));
+        bB.put(Integer.valueOf(Item.q.cv), new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
+        bB.put(Integer.valueOf(Item.r.cv), new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
+        bB.put(Integer.valueOf(Item.p.cv), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
+        bB.put(Integer.valueOf(Item.aM.cv), new Tuple(Integer.valueOf(24), Integer.valueOf(36)));
+        bB.put(Integer.valueOf(Item.aN.cv), new Tuple(Integer.valueOf(11), Integer.valueOf(13)));
+        bB.put(Integer.valueOf(Item.bI.cv), new Tuple(Integer.valueOf(1), Integer.valueOf(1)));
+        bB.put(Integer.valueOf(Item.bp.cv), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+        bB.put(Integer.valueOf(Item.bC.cv), new Tuple(Integer.valueOf(2), Integer.valueOf(3)));
+        bB.put(Integer.valueOf(Item.as.cv), new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
+        bB.put(Integer.valueOf(Item.bk.cv), new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
+        bB.put(Integer.valueOf(Item.bm.cv), new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
+        bB.put(Integer.valueOf(Item.aX.cv), new Tuple(Integer.valueOf(9), Integer.valueOf(13)));
+        bB.put(Integer.valueOf(Item.U.cv), new Tuple(Integer.valueOf(34), Integer.valueOf(48)));
+        bB.put(Integer.valueOf(Item.bj.cv), new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
+        bB.put(Integer.valueOf(Item.bi.cv), new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
+        bB.put(Integer.valueOf(Item.V.cv), new Tuple(Integer.valueOf(18), Integer.valueOf(22)));
+        bB.put(Integer.valueOf(Block.ag.cF), new Tuple(Integer.valueOf(14), Integer.valueOf(22)));
+        bB.put(Integer.valueOf(Item.bo.cv), new Tuple(Integer.valueOf(36), Integer.valueOf(64)));
+        bC.put(Integer.valueOf(Item.k.cv), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+        bC.put(Integer.valueOf(Item.bg.cv), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+        bC.put(Integer.valueOf(Item.s.cv), new Tuple(Integer.valueOf(7), Integer.valueOf(11)));
+        bC.put(Integer.valueOf(Item.B.cv), new Tuple(Integer.valueOf(12), Integer.valueOf(14)));
+        bC.put(Integer.valueOf(Item.j.cv), new Tuple(Integer.valueOf(6), Integer.valueOf(8)));
+        bC.put(Integer.valueOf(Item.E.cv), new Tuple(Integer.valueOf(9), Integer.valueOf(12)));
+        bC.put(Integer.valueOf(Item.i.cv), new Tuple(Integer.valueOf(7), Integer.valueOf(9)));
+        bC.put(Integer.valueOf(Item.D.cv), new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
+        bC.put(Integer.valueOf(Item.h.cv), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
+        bC.put(Integer.valueOf(Item.C.cv), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
+        bC.put(Integer.valueOf(Item.R.cv), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
+        bC.put(Integer.valueOf(Item.S.cv), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
+        bC.put(Integer.valueOf(Item.ai.cv), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
+        bC.put(Integer.valueOf(Item.am.cv), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
+        bC.put(Integer.valueOf(Item.af.cv), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
+        bC.put(Integer.valueOf(Item.aj.cv), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
+        bC.put(Integer.valueOf(Item.ag.cv), new Tuple(Integer.valueOf(10), Integer.valueOf(14)));
+        bC.put(Integer.valueOf(Item.ak.cv), new Tuple(Integer.valueOf(16), Integer.valueOf(19)));
+        bC.put(Integer.valueOf(Item.ah.cv), new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
+        bC.put(Integer.valueOf(Item.al.cv), new Tuple(Integer.valueOf(11), Integer.valueOf(14)));
+        bC.put(Integer.valueOf(Item.ae.cv), new Tuple(Integer.valueOf(5), Integer.valueOf(7)));
+        bC.put(Integer.valueOf(Item.ab.cv), new Tuple(Integer.valueOf(5), Integer.valueOf(7)));
+        bC.put(Integer.valueOf(Item.ac.cv), new Tuple(Integer.valueOf(11), Integer.valueOf(15)));
+        bC.put(Integer.valueOf(Item.ad.cv), new Tuple(Integer.valueOf(9), Integer.valueOf(11)));
+        bC.put(Integer.valueOf(Item.W.cv), new Tuple(Integer.valueOf(-4), Integer.valueOf(-2)));
+        bC.put(Integer.valueOf(Item.bh.cv), new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
+        bC.put(Integer.valueOf(Item.l.cv), new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
+        bC.put(Integer.valueOf(Item.be.cv), new Tuple(Integer.valueOf(-10), Integer.valueOf(-7)));
+        bC.put(Integer.valueOf(Block.R.cF), new Tuple(Integer.valueOf(-5), Integer.valueOf(-3)));
+        bC.put(Integer.valueOf(Block.as.cF), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+        bC.put(Integer.valueOf(Item.Y.cv), new Tuple(Integer.valueOf(4), Integer.valueOf(5)));
+        bC.put(Integer.valueOf(Item.aa.cv), new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
+        bC.put(Integer.valueOf(Item.X.cv), new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
+        bC.put(Integer.valueOf(Item.Z.cv), new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
+        bC.put(Integer.valueOf(Item.aC.cv), new Tuple(Integer.valueOf(6), Integer.valueOf(8)));
+        bC.put(Integer.valueOf(Item.bF.cv), new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
+        bC.put(Integer.valueOf(Item.aE.cv), new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
+        bC.put(Integer.valueOf(Item.aS.cv), new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
+        bC.put(Integer.valueOf(Item.aU.cv), new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
+        bC.put(Integer.valueOf(Block.bi.cF), new Tuple(Integer.valueOf(-3), Integer.valueOf(-1)));
+        bC.put(Integer.valueOf(Item.at.cv), new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
+        bC.put(Integer.valueOf(Item.bl.cv), new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
+        bC.put(Integer.valueOf(Item.bn.cv), new Tuple(Integer.valueOf(-8), Integer.valueOf(-6)));
+        bC.put(Integer.valueOf(Item.bC.cv), new Tuple(Integer.valueOf(7), Integer.valueOf(11)));
+        bC.put(Integer.valueOf(Item.n.cv), new Tuple(Integer.valueOf(-12), Integer.valueOf(-8)));
     }
 }

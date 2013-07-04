@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-public class SlotRepair extends Slot { // CanaryMod: package => public
+public class ContainerRepairINNER2 extends Slot { // CanaryMod: package => public
 
     final World a;
 
@@ -12,7 +12,7 @@ public class SlotRepair extends Slot { // CanaryMod: package => public
 
     final ContainerRepair e;
 
-    SlotRepair(ContainerRepair containerrepair, IInventory iinventory, int i0, int i1, int i2, World world, int i3, int i4, int i5) {
+    ContainerRepairINNER2(ContainerRepair containerrepair, IInventory iinventory, int i0, int i1, int i2, World world, int i3, int i4, int i5) {
         super(iinventory, i0, i1, i2);
         this.e = containerrepair;
         this.a = world;
@@ -26,11 +26,11 @@ public class SlotRepair extends Slot { // CanaryMod: package => public
     }
 
     public boolean a(EntityPlayer entityplayer) {
-        return (entityplayer.ce.d || entityplayer.cf >= this.e.a) && this.e.a > 0 && this.d();
+        return (entityplayer.bG.d || entityplayer.bH >= this.e.a) && this.e.a > 0 && this.e();
     }
 
     public void a(EntityPlayer entityplayer, ItemStack itemstack) {
-        if (!entityplayer.ce.d) {
+        if (!entityplayer.bG.d) {
             entityplayer.a(-this.e.a);
         }
 
@@ -38,8 +38,8 @@ public class SlotRepair extends Slot { // CanaryMod: package => public
         if (ContainerRepair.b(this.e) > 0) {
             ItemStack itemstack1 = ContainerRepair.a(this.e).a(1);
 
-            if (itemstack1 != null && itemstack1.a > ContainerRepair.b(this.e)) {
-                itemstack1.a -= ContainerRepair.b(this.e);
+            if (itemstack1 != null && itemstack1.b > ContainerRepair.b(this.e)) {
+                itemstack1.b -= ContainerRepair.b(this.e);
                 ContainerRepair.a(this.e).a(1, itemstack1);
             } else {
                 ContainerRepair.a(this.e).a(1, (ItemStack) null);
@@ -49,7 +49,7 @@ public class SlotRepair extends Slot { // CanaryMod: package => public
         }
 
         this.e.a = 0;
-        if (!entityplayer.ce.d && !this.a.I && this.a.a(this.b, this.c, this.d) == Block.cl.cz && entityplayer.aE().nextFloat() < 0.12F) {
+        if (!entityplayer.bG.d && !this.a.I && this.a.a(this.b, this.c, this.d) == Block.cm.cF && entityplayer.aB().nextFloat() < 0.12F) {
             int i0 = this.a.h(this.b, this.c, this.d);
             int i1 = i0 & 3;
             int i2 = i0 >> 2;

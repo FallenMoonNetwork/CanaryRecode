@@ -23,7 +23,7 @@ public class EntityTracker {
 
     public EntityTracker(WorldServer worldserver) {
         this.a = worldserver;
-        this.d = worldserver.p().ad().a();
+        this.d = worldserver.p().af().a();
         canaryTracker = new CanaryEntityTracker(this, worldserver.getCanaryWorld());
     }
 
@@ -82,7 +82,7 @@ public class EntityTracker {
             this.a(entity, 160, 10, true);
         } else if (entity instanceof EntityFallingSand) {
             this.a(entity, 160, 20, true);
-        } else if (entity instanceof EntityPainting) {
+        } else if (entity instanceof EntityHanging) {
             this.a(entity, 160, Integer.MAX_VALUE, false);
         } else if (entity instanceof EntityXPOrb) {
             this.a(entity, 160, 20, true);

@@ -27,7 +27,7 @@ public class EntityXPOrb extends Entity {
         this.entity = new CanaryXPOrb(this); // CanaryMod: Wrap Entity
     }
 
-    protected boolean f_() {
+    protected boolean e_() {
         return false;
     }
 
@@ -70,7 +70,7 @@ public class EntityXPOrb extends Entity {
 
         if (this.f != null) {
             double d1 = (this.f.u - this.u) / d0;
-            double d2 = (this.f.v + (double) this.f.e() - this.v) / d0;
+            double d2 = (this.f.v + (double) this.f.f() - this.v) / d0;
             double d3 = (this.f.w - this.w) / d0;
             double d4 = Math.sqrt(d1 * d1 + d2 * d2 + d3 * d3);
             double d5 = 1.0D - d4;
@@ -91,7 +91,7 @@ public class EntityXPOrb extends Entity {
             int i0 = this.q.a(MathHelper.c(this.u), MathHelper.c(this.E.b) - 1, MathHelper.c(this.w));
 
             if (i0 > 0) {
-                f0 = Block.r[i0].cP * 0.98F;
+                f0 = Block.s[i0].cV * 0.98F;
             }
         }
 
@@ -114,15 +114,15 @@ public class EntityXPOrb extends Entity {
     }
 
     protected void e(int i0) {
-        this.a(DamageSource.a, i0);
+        this.a(DamageSource.a, (float) i0);
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
-        if (this.aq()) {
+    public boolean a(DamageSource damagesource, float f0) {
+        if (this.ap()) {
             return false;
         } else {
             this.J();
-            this.d -= i0;
+            this.d = (int) ((float) this.d - f0);
             if (this.d <= 0) {
                 this.w();
             }
@@ -145,11 +145,11 @@ public class EntityXPOrb extends Entity {
 
     public void b_(EntityPlayer entityplayer) {
         if (!this.q.I) {
-            if (this.c == 0 && entityplayer.bT == 0) {
-                entityplayer.bT = 2;
+            if (this.c == 0 && entityplayer.bv == 0) {
+                entityplayer.bv = 2;
                 this.a("random.orb", 0.1F, 0.5F * ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.7F + 1.8F));
                 entityplayer.a((Entity) this, 1);
-                entityplayer.w(this.e);
+                entityplayer.s(this.e);
                 this.w();
             }
         }
@@ -163,7 +163,7 @@ public class EntityXPOrb extends Entity {
         return i0 >= 2477 ? 2477 : (i0 >= 1237 ? 1237 : (i0 >= 617 ? 617 : (i0 >= 307 ? 307 : (i0 >= 149 ? 149 : (i0 >= 73 ? 73 : (i0 >= 37 ? 37 : (i0 >= 17 ? 17 : (i0 >= 7 ? 7 : (i0 >= 3 ? 3 : 1)))))))));
     }
 
-    public boolean ap() {
+    public boolean ao() {
         return false;
     }
 }

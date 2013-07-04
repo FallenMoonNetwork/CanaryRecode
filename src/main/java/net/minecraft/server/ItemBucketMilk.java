@@ -1,9 +1,7 @@
 package net.minecraft.server;
 
-
 import net.canarymod.Canary;
 import net.canarymod.hook.player.EatHook;
-
 
 public class ItemBucketMilk extends Item {
 
@@ -22,7 +20,7 @@ public class ItemBucketMilk extends Item {
             return itemstack;
         }
         // For those Lactose intolerant
-        entityplayer.cn().a(hook.getLevelGain(), hook.getSaturationGain());
+        entityplayer.bq.a(hook.getLevelGain(), hook.getSaturationGain());
         //
 
         if (!entityplayer.bG.d) {

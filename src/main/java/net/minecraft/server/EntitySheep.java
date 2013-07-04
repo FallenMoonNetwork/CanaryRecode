@@ -7,51 +7,50 @@ import net.canarymod.api.entity.living.animal.CanarySheep;
 
 public class EntitySheep extends EntityAnimal {
 
-    private final InventoryCrafting e = new InventoryCrafting(new ContainerSheep(this), 2, 1);
-    public static final float[][] d = new float[][] { { 1.0F, 1.0F, 1.0F}, { 0.85F, 0.5F, 0.2F}, { 0.7F, 0.3F, 0.85F}, { 0.4F, 0.6F, 0.85F}, { 0.9F, 0.9F, 0.2F}, { 0.5F, 0.8F, 0.1F}, { 0.95F, 0.5F, 0.65F}, { 0.3F, 0.3F, 0.3F}, { 0.6F, 0.6F, 0.6F}, { 0.3F, 0.5F, 0.6F}, { 0.5F, 0.25F, 0.7F}, { 0.2F, 0.3F, 0.7F}, { 0.4F, 0.3F, 0.2F}, { 0.4F, 0.5F, 0.2F}, { 0.6F, 0.2F, 0.2F}, { 0.1F, 0.1F, 0.1F}};
-    private int f;
-    private EntityAIEatGrass g = new EntityAIEatGrass(this);
+    private final InventoryCrafting bq = new InventoryCrafting(new ContainerSheep(this), 2, 1);
+    public static final float[][] bp = new float[][]{ { 1.0F, 1.0F, 1.0F }, { 0.85F, 0.5F, 0.2F }, { 0.7F, 0.3F, 0.85F }, { 0.4F, 0.6F, 0.85F }, { 0.9F, 0.9F, 0.2F }, { 0.5F, 0.8F, 0.1F }, { 0.95F, 0.5F, 0.65F }, { 0.3F, 0.3F, 0.3F }, { 0.6F, 0.6F, 0.6F }, { 0.3F, 0.5F, 0.6F }, { 0.5F, 0.25F, 0.7F }, { 0.2F, 0.3F, 0.7F }, { 0.4F, 0.3F, 0.2F }, { 0.4F, 0.5F, 0.2F }, { 0.6F, 0.2F, 0.2F }, { 0.1F, 0.1F, 0.1F } };
+    private int br;
+    private EntityAIEatGrass bs = new EntityAIEatGrass(this);
 
     public EntitySheep(World world) {
         super(world);
-        this.aH = "/mob/sheep.png";
         this.a(0.9F, 1.3F);
-        float f0 = 0.23F;
-
-        this.aC().a(true);
-        this.bo.a(0, new EntityAISwimming(this));
-        this.bo.a(1, new EntityAIPanic(this, 0.38F));
-        this.bo.a(2, new EntityAIMate(this, f0));
-        this.bo.a(3, new EntityAITempt(this, 0.25F, Item.U.cp, false));
-        this.bo.a(4, new EntityAIFollowParent(this, 0.25F));
-        this.bo.a(5, this.g);
-        this.bo.a(6, new EntityAIWander(this, f0));
-        this.bo.a(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.bo.a(8, new EntityAILookIdle(this));
-        this.e.a(0, new ItemStack(Item.aX, 1, 0));
-        this.e.a(1, new ItemStack(Item.aX, 1, 0));
+        this.k().a(true);
+        this.c.a(0, new EntityAISwimming(this));
+        this.c.a(1, new EntityAIPanic(this, 1.25D));
+        this.c.a(2, new EntityAIMate(this, 1.0D));
+        this.c.a(3, new EntityAITempt(this, 1.1D, Item.V.cv, false));
+        this.c.a(4, new EntityAIFollowParent(this, 1.1D));
+        this.c.a(5, this.bs);
+        this.c.a(6, new EntityAIWander(this, 1.0D));
+        this.c.a(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.c.a(8, new EntityAILookIdle(this));
+        this.bq.a(0, new ItemStack(Item.aY, 1, 0));
+        this.bq.a(1, new ItemStack(Item.aY, 1, 0));
         this.entity = new CanarySheep(this); // CanaryMod: Wrap Entity
     }
 
-    protected boolean bh() {
+    protected boolean bb() {
         return true;
     }
 
-    protected void bo() {
-        this.f = this.g.f();
-        super.bo();
+    protected void be() {
+        this.br = this.bs.f();
+        super.be();
     }
 
     public void c() {
         if (this.q.I) {
-            this.f = Math.max(0, this.f - 1);
+            this.br = Math.max(0, this.br - 1);
         }
 
         super.c();
     }
 
-    public int aW() {
-        return maxHealth == 0 ? 8 : maxHealth; // CanaryMod: custom Max Health
+    protected void ax() {
+        super.ax();
+        this.a(SharedMonsterAttributes.a).a(8.0D);
+        this.a(SharedMonsterAttributes.d).a(0.23000000417232513D);
     }
 
     protected void a() {
@@ -59,26 +58,26 @@ public class EntitySheep extends EntityAnimal {
         this.ah.a(16, new Byte((byte) 0));
     }
 
-    protected void a(boolean flag0, int i0) {
-        if (!this.n()) {
-            this.a(new ItemStack(Block.af.cz, 1, this.m()), 0.0F);
+    protected void b(boolean flag0, int i0) {
+        if (!this.bQ()) {
+            this.a(new ItemStack(Block.ag.cF, 1, this.bP()), 0.0F);
         }
     }
 
-    protected int be() {
-        return Block.af.cz;
+    protected int s() {
+        return Block.ag.cF;
     }
 
-    public boolean a_(EntityPlayer entityplayer) {
-        ItemStack itemstack = entityplayer.bK.h();
+    public boolean a(EntityPlayer entityplayer) {
+        ItemStack itemstack = entityplayer.bn.h();
 
-        if (itemstack != null && itemstack.c == Item.bf.cp && !this.n() && !this.h_()) {
+        if (itemstack != null && itemstack.d == Item.bg.cv && !this.bQ() && !this.g_()) {
             if (!this.q.I) {
-                this.i(true);
+                this.j(true);
                 int i0 = 1 + this.ab.nextInt(3);
 
                 for (int i1 = 0; i1 < i0; ++i1) {
-                    EntityItem entityitem = this.a(new ItemStack(Block.af.cz, 1, this.m()), 1.0F);
+                    EntityItem entityitem = this.a(new ItemStack(Block.ag.cF, 1, this.bP()), 1.0F);
 
                     entityitem.y += (double) (this.ab.nextFloat() * 0.05F);
                     entityitem.x += (double) ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.1F);
@@ -86,34 +85,34 @@ public class EntitySheep extends EntityAnimal {
                 }
             }
 
-            itemstack.a(1, (EntityLiving) entityplayer);
+            itemstack.a(1, (EntityLivingBase) entityplayer);
             this.a("mob.sheep.shear", 1.0F, 1.0F);
         }
 
-        return super.a_(entityplayer);
+        return super.a(entityplayer);
     }
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("Sheared", this.n());
-        nbttagcompound.a("Color", (byte) this.m());
+        nbttagcompound.a("Sheared", this.bQ());
+        nbttagcompound.a("Color", (byte) this.bP());
     }
 
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
-        this.i(nbttagcompound.n("Sheared"));
-        this.s(nbttagcompound.c("Color"));
+        this.j(nbttagcompound.n("Sheared"));
+        this.p(nbttagcompound.c("Color"));
     }
 
-    protected String bb() {
+    protected String r() {
         return "mob.sheep.say";
     }
 
-    protected String bc() {
+    protected String aK() {
         return "mob.sheep.say";
     }
 
-    protected String bd() {
+    protected String aL() {
         return "mob.sheep.say";
     }
 
@@ -121,21 +120,21 @@ public class EntitySheep extends EntityAnimal {
         this.a("mob.sheep.step", 0.15F, 1.0F);
     }
 
-    public int m() {
+    public int bP() {
         return this.ah.a(16) & 15;
     }
 
-    public void s(int i0) {
+    public void p(int i0) {
         byte b0 = this.ah.a(16);
 
         this.ah.b(16, Byte.valueOf((byte) (b0 & 240 | i0 & 15)));
     }
 
-    public boolean n() {
+    public boolean bQ() {
         return (this.ah.a(16) & 16) != 0;
     }
 
-    public void i(boolean flag0) {
+    public void j(boolean flag0) {
         byte b0 = this.ah.a(16);
 
         if (flag0) {
@@ -156,37 +155,33 @@ public class EntitySheep extends EntityAnimal {
         EntitySheep entitysheep1 = new EntitySheep(this.q);
         int i0 = this.a(this, entitysheep);
 
-        entitysheep1.s(15 - i0);
+        entitysheep1.p(15 - i0);
         return entitysheep1;
     }
 
-    public void aK() {
-        this.i(false);
-        if (this.h_()) {
-            int i0 = this.b() + 1200;
-
-            if (i0 > 0) {
-                i0 = 0;
-            }
-
-            this.a(i0);
+    public void n() {
+        this.j(false);
+        if (this.g_()) {
+            this.a(60);
         }
     }
 
-    public void bJ() {
-        this.s(a(this.q.s));
+    public EntityLivingData a(EntityLivingData entitylivingdata) {
+        entitylivingdata = super.a(entitylivingdata);
+        this.p(a(this.q.s));
+        return entitylivingdata;
     }
 
     private int a(EntityAnimal entityanimal, EntityAnimal entityanimal1) {
         int i0 = this.b(entityanimal);
         int i1 = this.b(entityanimal1);
 
-        this.e.a(0).b(i0);
-        this.e.a(1).b(i1);
-        ItemStack itemstack = CraftingManager.a().a(this.e, ((EntitySheep) entityanimal).q);
+        this.bq.a(0).b(i0);
+        this.bq.a(1).b(i1);
+        ItemStack itemstack = CraftingManager.a().a(this.bq, ((EntitySheep) entityanimal).q);
         int i2;
 
-        if (itemstack != null && itemstack.b().cp == Item.aX.cp) {
+        if (itemstack != null && itemstack.b().cv == Item.aY.cv) {
             i2 = itemstack.k();
         } else {
             i2 = this.q.s.nextBoolean() ? i0 : i1;
@@ -196,7 +191,7 @@ public class EntitySheep extends EntityAnimal {
     }
 
     private int b(EntityAnimal entityanimal) {
-        return 15 - ((EntitySheep) entityanimal).m();
+        return 15 - ((EntitySheep) entityanimal).bP();
     }
 
     public EntityAgeable a(EntityAgeable entityageable) {

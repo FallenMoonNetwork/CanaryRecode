@@ -1,13 +1,11 @@
 package net.minecraft.server;
 
-
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import net.canarymod.api.CanaryEntityTrackerEntry;
-
 
 public class EntityTrackerEntry {
 
@@ -47,7 +45,7 @@ public class EntityTrackerEntry {
         this.f = MathHelper.c(entity.w * 32.0D);
         this.g = MathHelper.d(entity.A * 256.0F / 360.0F);
         this.h = MathHelper.d(entity.B * 256.0F / 360.0F);
-        this.i = MathHelper.d(entity.ao() * 256.0F / 360.0F);
+        this.i = MathHelper.d(entity.an() * 256.0F / 360.0F);
 
         canaryEntry = new CanaryEntityTrackerEntry(this);
     }
@@ -73,37 +71,33 @@ public class EntityTrackerEntry {
 
         if (this.v != this.a.o || this.a.o != null && this.m % 60 == 0) {
             this.v = this.a.o;
-            this.a((Packet) (new Packet39AttachEntity(this.a, this.a.o)));
+            this.a((Packet) (new Packet39AttachEntity(0, this.a, this.a.o)));
         }
 
         if (this.a instanceof EntityItemFrame && this.m % 10 == 0) {
-            EntityItemFrame i04 = (EntityItemFrame) this.a;
-            ItemStack i05 = i04.i();
+            EntityItemFrame i03 = (EntityItemFrame) this.a;
+            ItemStack i04 = i03.h();
 
-            if (i05 != null && i05.b() instanceof ItemMap) {
-                MapData i07 = Item.be.a(i05, this.a.q);
-                Iterator i10 = list.iterator();
+            if (i04 != null && i04.b() instanceof ItemMap) {
+                MapData i06 = Item.bf.a(i04, this.a.q);
+                Iterator i07 = list.iterator();
 
-                while (i10.hasNext()) {
-                    EntityPlayer i11 = (EntityPlayer) i10.next();
-                    EntityPlayerMP i12 = (EntityPlayerMP) i11;
+                while (i07.hasNext()) {
+                    EntityPlayer i08 = (EntityPlayer) i07.next();
+                    EntityPlayerMP i09 = (EntityPlayerMP) i08;
 
-                    i07.a(i12, i05);
-                    if (i12.a.e() <= 5) {
-                        Packet i13 = Item.be.c(i05, this.a.q, i12);
+                    i06.a(i09, i04);
+                    if (i09.a.e() <= 5) {
+                        Packet i10 = Item.bf.c(i04, this.a.q, i09);
 
-                        if (i13 != null) {
-                            i12.a.b(i13);
+                        if (i10 != null) {
+                            i09.a.b(i10);
                         }
                     }
                 }
             }
 
-            DataWatcher i09 = this.a.u();
-
-            if (i09.a()) {
-                this.b((Packet) (new Packet40EntityMetadata(this.a.k, i09, false)));
-            }
+            this.b();
         } else if (this.m % this.c == 0 || this.a.an || this.a.u().a()) {
             int i0;
             int i1;
@@ -156,12 +150,7 @@ public class EntityTrackerEntry {
                     this.a((Packet) object);
                 }
 
-                DataWatcher datawatcher1 = this.a.u();
-
-                if (datawatcher1.a()) {
-                    this.b((Packet) (new Packet40EntityMetadata(this.a.k, datawatcher1, false)));
-                }
-
+                this.b();
                 if (flag0) {
                     this.d = i0;
                     this.e = i1;
@@ -188,16 +177,11 @@ public class EntityTrackerEntry {
                 this.d = this.a.at.a(this.a.u);
                 this.e = MathHelper.c(this.a.v * 32.0D);
                 this.f = this.a.at.a(this.a.w);
-                DataWatcher datawatcher2 = this.a.u();
-
-                if (datawatcher2.a()) {
-                    this.b((Packet) (new Packet40EntityMetadata(this.a.k, datawatcher2, false)));
-                }
-
+                this.b();
                 this.w = true;
             }
 
-            i0 = MathHelper.d(this.a.ao() * 256.0F / 360.0F);
+            i0 = MathHelper.d(this.a.an() * 256.0F / 360.0F);
             if (Math.abs(i0 - this.i) >= 4) {
                 this.a((Packet) (new Packet35EntityHeadRotation(this.a.k, (byte) i0)));
                 this.i = i0;
@@ -210,6 +194,25 @@ public class EntityTrackerEntry {
         if (this.a.J) {
             this.b((Packet) (new Packet28EntityVelocity(this.a)));
             this.a.J = false;
+        }
+    }
+
+    private void b() {
+        DataWatcher datawatcher = this.a.u();
+
+        if (datawatcher.a()) {
+            this.b((Packet) (new Packet40EntityMetadata(this.a.k, datawatcher, false)));
+        }
+
+        if (this.a instanceof EntityLivingBase) {
+            ServersideAttributeMap serversideattributemap = (ServersideAttributeMap) ((EntityLivingBase) this.a).aT();
+            Set set = serversideattributemap.b();
+
+            if (!set.isEmpty()) {
+                this.b((Packet) (new Packet44UpdateAttributes(this.a.k, set)));
+            }
+
+            set.clear();
         }
     }
 
@@ -255,11 +258,20 @@ public class EntityTrackerEntry {
             if (d0 >= (double) (-this.b) && d0 <= (double) this.b && d1 >= (double) (-this.b) && d1 <= (double) this.b) {
                 if (!this.o.contains(entityplayermp) && (this.d(entityplayermp) || this.a.p)) {
                     this.o.add(entityplayermp);
-                    Packet packet = this.b();
+                    Packet packet = this.c();
 
                     entityplayermp.a.b(packet);
                     if (!this.a.u().d()) {
                         entityplayermp.a.b(new Packet40EntityMetadata(this.a.k, this.a.u(), true));
+                    }
+
+                    if (this.a instanceof EntityLivingBase) {
+                        ServersideAttributeMap serversideattributemap = (ServersideAttributeMap) ((EntityLivingBase) this.a).aT();
+                        Collection collection = serversideattributemap.c();
+
+                        if (!collection.isEmpty()) {
+                            entityplayermp.a.b(new Packet44UpdateAttributes(this.a.k, collection));
+                        }
                     }
 
                     this.j = this.a.x;
@@ -270,12 +282,16 @@ public class EntityTrackerEntry {
                     }
 
                     if (this.a.o != null) {
-                        entityplayermp.a.b(new Packet39AttachEntity(this.a, this.a.o));
+                        entityplayermp.a.b(new Packet39AttachEntity(0, this.a, this.a.o));
                     }
 
-                    if (this.a instanceof EntityLiving) {
+                    if (this.a instanceof EntityLiving && ((EntityLiving) this.a).bE() != null) {
+                        entityplayermp.a.b(new Packet39AttachEntity(1, this.a, ((EntityLiving) this.a).bE()));
+                    }
+
+                    if (this.a instanceof EntityLivingBase) {
                         for (int i0 = 0; i0 < 5; ++i0) {
-                            ItemStack itemstack = ((EntityLiving) this.a).p(i0);
+                            ItemStack itemstack = ((EntityLivingBase) this.a).n(i0);
 
                             if (itemstack != null) {
                                 entityplayermp.a.b(new Packet5PlayerInventory(this.a.k, i0, itemstack));
@@ -286,14 +302,14 @@ public class EntityTrackerEntry {
                     if (this.a instanceof EntityPlayer) {
                         EntityPlayer entityplayer = (EntityPlayer) this.a;
 
-                        if (entityplayer.bz()) {
+                        if (entityplayer.bd()) {
                             entityplayermp.a.b(new Packet17Sleep(this.a, 0, MathHelper.c(this.a.u), MathHelper.c(this.a.v), MathHelper.c(this.a.w)));
                         }
                     }
 
-                    if (this.a instanceof EntityLiving) {
-                        EntityLiving entityliving = (EntityLiving) this.a;
-                        Iterator iterator = entityliving.bC().iterator();
+                    if (this.a instanceof EntityLivingBase) {
+                        EntityLivingBase entitylivingbase = (EntityLivingBase) this.a;
+                        Iterator iterator = entitylivingbase.aH().iterator();
 
                         while (iterator.hasNext()) {
                             PotionEffect potioneffect = (PotionEffect) iterator.next();
@@ -310,7 +326,7 @@ public class EntityTrackerEntry {
     }
 
     private boolean d(EntityPlayerMP entityplayermp) {
-        return entityplayermp.o().s().a(entityplayermp, this.a.aj, this.a.al);
+        return entityplayermp.p().s().a(entityplayermp, this.a.aj, this.a.al);
     }
 
     public void b(List list) {
@@ -319,9 +335,9 @@ public class EntityTrackerEntry {
         }
     }
 
-    private Packet b() {
+    private Packet c() {
         if (this.a.M) {
-            this.a.q.X().b("Fetching addPacket for removed entity");
+            this.a.q.Y().b("Fetching addPacket for removed entity");
         }
 
         if (this.a instanceof EntityItem) {
@@ -400,6 +416,14 @@ public class EntityTrackerEntry {
                     packet23vehiclespawn.c = MathHelper.d((float) (entityitemframe.c * 32));
                     packet23vehiclespawn.d = MathHelper.d((float) (entityitemframe.d * 32));
                     return packet23vehiclespawn;
+                } else if (this.a instanceof EntityLeashKnot) {
+                    EntityLeashKnot entityleashknot = (EntityLeashKnot) this.a;
+
+                    packet23vehiclespawn = new Packet23VehicleSpawn(this.a, 77);
+                    packet23vehiclespawn.b = MathHelper.d((float) (entityleashknot.b * 32));
+                    packet23vehiclespawn.c = MathHelper.d((float) (entityleashknot.c * 32));
+                    packet23vehiclespawn.d = MathHelper.d((float) (entityleashknot.d * 32));
+                    return packet23vehiclespawn;
                 } else if (this.a instanceof EntityXPOrb) {
                     return new Packet26EntityExpOrb((EntityXPOrb) this.a);
                 } else {
@@ -407,8 +431,8 @@ public class EntityTrackerEntry {
                 }
             }
         } else {
-            this.i = MathHelper.d(this.a.ao() * 256.0F / 360.0F);
-            return new Packet24MobSpawn((EntityLiving) this.a);
+            this.i = MathHelper.d(this.a.an() * 256.0F / 360.0F);
+            return new Packet24MobSpawn((EntityLivingBase) this.a);
         }
     }
 
@@ -421,6 +445,7 @@ public class EntityTrackerEntry {
 
     /**
      * get canaryMod EntityTracker entry
+     * 
      * @return
      */
     public CanaryEntityTrackerEntry getCanaryTrackerEntry() {

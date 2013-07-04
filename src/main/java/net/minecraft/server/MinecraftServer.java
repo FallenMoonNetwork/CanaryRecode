@@ -574,7 +574,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             DedicatedServer dedicatedserver = new DedicatedServer(new File(s1));
 
             if (notHeadless) {
-                MinecraftServerGui.getServerGui(dedicatedserver).validate();
+                MinecraftServerGui.minecraftservergui.validate();
             }
 
             ilogagent = dedicatedserver.an();

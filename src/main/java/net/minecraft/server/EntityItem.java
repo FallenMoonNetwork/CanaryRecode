@@ -1,12 +1,10 @@
 package net.minecraft.server;
 
-
 import java.util.Iterator;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntityItem;
 import net.canarymod.hook.entity.EntityDespawnHook;
 import net.canarymod.hook.entity.ItemTouchGroundHook;
-
 
 public class EntityItem extends Entity {
 
@@ -237,10 +235,11 @@ public class EntityItem extends Entity {
                         entityplayer.a((StatBase) AchievementList.z);
                     }
 
-                this.a("random.pop", 0.2F, ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-                entityplayer.a((Entity) this, i0);
-                if (itemstack.b <= 0) {
-                    this.w();
+                    this.a("random.pop", 0.2F, ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                    entityplayer.a((Entity) this, i0);
+                    if (itemstack.b <= 0) {
+                        this.w();
+                    }
                 }
             }
         }

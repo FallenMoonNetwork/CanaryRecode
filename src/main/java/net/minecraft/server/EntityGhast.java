@@ -1,10 +1,8 @@
 package net.minecraft.server;
 
-
 import net.canarymod.Canary;
 import net.canarymod.api.entity.living.monster.CanaryGhast;
 import net.canarymod.hook.entity.MobTargetHook;
-
 
 public class EntityGhast extends EntityFlying implements IMob {
 
@@ -46,10 +44,6 @@ public class EntityGhast extends EntityFlying implements IMob {
     protected void ax() {
         super.ax();
         this.a(SharedMonsterAttributes.a).a(10.0D);
-    }
-
-    public int aW() {
-        return maxHealth == 0 ? 10 : maxHealth; // CanaryMod: custom Max Health
     }
 
     protected void bh() {

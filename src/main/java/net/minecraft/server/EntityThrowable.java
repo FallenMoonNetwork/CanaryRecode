@@ -9,11 +9,11 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
     private int c = -1;
     private int d = -1;
     private int e = -1;
-    private int f = 0;
-    protected boolean a = false;
-    public int b = 0;
-    private EntityLiving g;
-    private String h = null;
+    private int f;
+    protected boolean a;
+    public int b;
+    private EntityLivingBase g;
+    private String h;
     private int i;
     private int j = 0;
 
@@ -26,11 +26,11 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
 
     protected void a() {}
 
-    public EntityThrowable(World world, EntityLiving entityliving) {
+    public EntityThrowable(World world, EntityLivingBase entitylivingbase) {
         super(world);
-        this.g = entityliving;
+        this.g = entitylivingbase;
         this.a(0.25F, 0.25F);
-        this.b(entityliving.u, entityliving.v + (double) entityliving.e(), entityliving.w, entityliving.A, entityliving.B);
+        this.b(entitylivingbase.u, entitylivingbase.v + (double) entitylivingbase.f(), entitylivingbase.w, entitylivingbase.A, entitylivingbase.B);
         this.u -= (double) (MathHelper.b(this.A / 180.0F * 3.1415927F) * 0.16F);
         this.v -= 0.10000000149011612D;
         this.w -= (double) (MathHelper.a(this.A / 180.0F * 3.1415927F) * 0.16F);
@@ -113,26 +113,26 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
             ++this.j;
         }
 
-        Vec3 vec3 = this.q.U().a(this.u, this.v, this.w);
-        Vec3 vec31 = this.q.U().a(this.u + this.x, this.v + this.y, this.w + this.z);
+        Vec3 vec3 = this.q.V().a(this.u, this.v, this.w);
+        Vec3 vec31 = this.q.V().a(this.u + this.x, this.v + this.y, this.w + this.z);
         MovingObjectPosition movingobjectposition = this.q.a(vec3, vec31);
 
-        vec3 = this.q.U().a(this.u, this.v, this.w);
-        vec31 = this.q.U().a(this.u + this.x, this.v + this.y, this.w + this.z);
+        vec3 = this.q.V().a(this.u, this.v, this.w);
+        vec31 = this.q.V().a(this.u + this.x, this.v + this.y, this.w + this.z);
         if (movingobjectposition != null) {
-            vec31 = this.q.U().a(movingobjectposition.f.c, movingobjectposition.f.d, movingobjectposition.f.e);
+            vec31 = this.q.V().a(movingobjectposition.f.c, movingobjectposition.f.d, movingobjectposition.f.e);
         }
 
         if (!this.q.I) {
             Entity entity = null;
             List list = this.q.b((Entity) this, this.E.a(this.x, this.y, this.z).b(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;
-            EntityLiving entityliving = this.h();
+            EntityLivingBase entitylivingbase = this.h();
 
             for (int i1 = 0; i1 < list.size(); ++i1) {
                 Entity entity1 = (Entity) list.get(i1);
 
-                if (entity1.K() && (entity1 != entityliving || this.j >= 5)) {
+                if (entity1.K() && (entity1 != entitylivingbase || this.j >= 5)) {
                     float f0 = 0.3F;
                     AxisAlignedBB axisalignedbb = entity1.E.b((double) f0, (double) f0, (double) f0);
                     MovingObjectPosition movingobjectposition1 = axisalignedbb.a(vec3, vec31);
@@ -154,7 +154,7 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
         }
 
         if (movingobjectposition != null) {
-            if (movingobjectposition.a == EnumMovingObjectType.a && this.q.a(movingobjectposition.b, movingobjectposition.c, movingobjectposition.d) == Block.bi.cz) {
+            if (movingobjectposition.a == EnumMovingObjectType.a && this.q.a(movingobjectposition.b, movingobjectposition.c, movingobjectposition.d) == Block.bj.cF) {
                 this.Z();
             } else {
                 this.a(movingobjectposition);
@@ -187,7 +187,7 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
         this.B = this.D + (this.B - this.D) * 0.2F;
         this.A = this.C + (this.A - this.C) * 0.2F;
         float f2 = 0.99F;
-        float f3 = this.g();
+        float f3 = this.e();
 
         if (this.G()) {
             for (int i2 = 0; i2 < 4; ++i2) {
@@ -206,7 +206,7 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
         this.b(this.u, this.v, this.w);
     }
 
-    protected float g() {
+    protected float e() {
         return gravity; // CanaryMod: return gravity
     }
 
@@ -220,7 +220,7 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
         nbttagcompound.a("shake", (byte) this.b);
         nbttagcompound.a("inGround", (byte) (this.a ? 1 : 0));
         if ((this.h == null || this.h.length() == 0) && this.g != null && this.g instanceof EntityPlayer) {
-            this.h = this.g.am();
+            this.h = this.g.al();
         }
 
         nbttagcompound.a("ownerName", this.h == null ? "" : this.h);
@@ -239,7 +239,7 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
         }
     }
 
-    public EntityLiving h() {
+    public EntityLivingBase h() {
         if (this.g == null && this.h != null && this.h.length() > 0) {
             this.g = this.q.a(this.h);
         }

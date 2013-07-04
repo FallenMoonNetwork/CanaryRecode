@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.monster.CanaryCreeper;
-
 
 public class EntityCreeper extends EntityMob {
 
@@ -44,10 +42,6 @@ public class EntityCreeper extends EntityMob {
         if (this.bq > this.br - 5) {
             this.bq = this.br - 5;
         }
-    }
-
-    public int aW() {
-        return maxHealth == 0 ? 20 : maxHealth; // CanaryMod: custom Max Health
     }
 
     protected void a() {

@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.EntityLiving;
@@ -17,13 +15,13 @@ import net.canarymod.hook.entity.VehicleDestroyHook;
 import net.canarymod.hook.entity.VehicleEnterHook;
 import net.canarymod.hook.entity.VehicleMoveHook;
 
-
 public abstract class EntityMinecart extends Entity {
 
     public boolean a; // CanaryMod: private -> public
     private final IUpdatePlayerListBox b;
     private String c;
-    private static final int[][][] d = new int[][][] { { { 0, 0, -1}, { 0, 0, 1}}, { { -1, 0, 0}, { 1, 0, 0}}, { { -1, -1, 0}, { 1, 0, 0}}, { { -1, 0, 0}, { 1, -1, 0}}, { { 0, 0, -1}, { 0, -1, 1}}, { { 0, -1, -1}, { 0, 0, 1}}, { { 0, 0, 1}, { 1, 0, 0}}, { { 0, 0, 1}, { -1, 0, 0}}, { { 0, 0, -1}, { -1, 0, 0}}, { { 0, 0, -1}, { 1, 0, 0}}};
+    private static final int[][][] d = new int[][][]{ { { 0, 0, -1 }, { 0, 0, 1 } }, { { -1, 0, 0 }, { 1, 0, 0 } }, { { -1, -1, 0 }, { 1, 0, 0 } }, { { -1, 0, 0 }, { 1, -1, 0 } }, { { 0, 0, -1 }, { 0, -1, 1 } }, { { 0, -1, -1 }, { 0, 0, 1 } }, { { 0, 0, 1 }, { 1, 0, 0 } }, { { 0, 0, 1 }, { -1, 0, 0 } }, { { 0, 0, -1 }, { -1, 0, 0 } },
+            { { 0, 0, -1 }, { 1, 0, 0 } } };
     private int e;
     private double f;
     private double g;
@@ -112,13 +110,13 @@ public abstract class EntityMinecart extends Entity {
                 if (damagesource.h() != null) {
                     attk = damagesource.h().getCanaryEntity();
                 }
-                VehicleDamageHook hook = new VehicleDamageHook((Vehicle) this.entity, attk, new CanaryDamageSource(damagesource), i0);
+                VehicleDamageHook hook = new VehicleDamageHook((Vehicle) this.entity, attk, new CanaryDamageSource(damagesource), (int) f0);
 
                 Canary.hooks().callHook(hook);
                 if (hook.isCanceled()) {
                     return false;
                 }
-                i0 = hook.getDamageDealt();
+                f0 = hook.getDamageDealt();
                 //
 
                 this.h(-this.k());
@@ -197,7 +195,7 @@ public abstract class EntityMinecart extends Entity {
 
             i0 = this.y();
             if (this.ap) {
-                //CanaryMod moved allow-nether to per-world config
+                // CanaryMod moved allow-nether to per-world config
                 if (Configuration.getWorldConfig(getCanaryWorld().getFqName()).isNetherAllowed()) {
                     if (this.o == null && this.aq++ >= i0) {
                         this.aq = i0;

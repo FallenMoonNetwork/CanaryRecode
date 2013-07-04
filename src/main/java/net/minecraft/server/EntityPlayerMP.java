@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -37,7 +36,6 @@ import net.canarymod.hook.player.PortalUseHook;
 import net.canarymod.hook.player.SignShowHook;
 import net.canarymod.hook.player.StatGainedHook;
 import net.canarymod.hook.player.TeleportHook;
-
 
 public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
@@ -207,17 +205,17 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             }
 
             // CanaryMod: HealthChange / HealthEnabled
-            if (this.aX() != this.cm && cm != -99999999 && this.getPlayer() != null) {
+            if (this.aJ() != this.bP && bP != -99999999 && this.getPlayer() != null) {
                 // updates your health when it is changed.
                 if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).isHealthEnabled()) {
                     super.b(this.aW());
                     this.M = false;
                 } else {
-                    HealthChangeHook hook = new HealthChangeHook(getPlayer(), cm, this.aX());
+                    HealthChangeHook hook = new HealthChangeHook(getPlayer(), bP, this.aJ());
 
                     Canary.hooks().callHook(hook);
                     if (hook.isCanceled()) {
-                        super.b(this.cm);
+                        super.b(this.bP);
                     }
                 }
             }
@@ -225,7 +223,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
             if (this.aJ() != this.bP || this.bQ != this.bq.a() || this.bq.e() == 0.0F != this.bR) {
                 // CanaryMod: convert health for values above 20
-                int health = (int) (this.aX() / (this.aW() / 20)); //MERGE: this.aJ() ?
+                int health = (int) (this.aX() / (this.aW() / 20)); // MERGE: this.aJ() ?
 
                 health = (this.aX() > 0 && health == 0) ? 1 : health;
                 this.a.b(new Packet8UpdateHealth(health, this.bq.a(), this.bq.e()));
@@ -304,7 +302,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (this.ap()) {
             return false;
         } else {
-            //CanaryMod moved pvp to per-world config
+            // CanaryMod moved pvp to per-world config
             boolean haspvp = Configuration.getWorldConfig(getCanaryWorld().getFqName()).isPvpEnabled();
             boolean flag0 = this.b.V() && haspvp && "fall".equals(damagesource.o);
 
@@ -333,7 +331,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     }
 
     public boolean a(EntityPlayer entityplayer) {
-        //CanaryMod moved pvp to per-world config
+        // CanaryMod moved pvp to per-world config
         boolean haspvp = Configuration.getWorldConfig(getCanaryWorld().getFqName()).isPvpEnabled();
         return !haspvp ? false : super.a(entityplayer);
     }
@@ -637,7 +635,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (this.bp != this.bo) {
             this.i();
         }
-//HOOK: InventoryHook for horse inv!
+        // HOOK: InventoryHook for horse inv!
         this.bJ();
         this.a.b(new Packet100OpenWindow(this.bX, 11, iinventory.b(), iinventory.j_(), iinventory.c(), entityhorse.k));
         this.bp = new ContainerHorseInventory(this.bn, iinventory, entityhorse);
@@ -812,7 +810,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             s0 = s0.substring(1);
         }
         String[] split = s0.split(" ");
-        if(Canary.commands().hasCommand(split[0])) {
+        if (Canary.commands().hasCommand(split[0])) {
             return Canary.commands().canUseCommand(getPlayer(), split[0]);
         }
         // Might be vanilla, so just assume
@@ -865,9 +863,9 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void setDisplayName(String name) {
         super.setDisplayName(name);
         Packet20NamedEntitySpawn pkt = new Packet20NamedEntitySpawn(this);
-        for(Player p : Canary.getServer().getPlayerList()) {
-            if(!p.getName().equals(this.bS)) {
-                ((CanaryPlayer)p).getHandle().a.b(pkt);
+        for (Player p : Canary.getServer().getPlayerList()) {
+            if (!p.getName().equals(this.bS)) {
+                ((CanaryPlayer) p).getHandle().a.b(pkt);
             }
         }
     }
@@ -887,6 +885,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     //
     /**
      * Get the CanaryEntity as CanaryPlayer
+     * 
      * @return
      */
     public CanaryPlayer getPlayer() {

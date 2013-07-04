@@ -6,12 +6,11 @@ import net.canarymod.api.entity.CanaryEnderEye;
 
 public class EntityEnderEye extends Entity {
 
-    public double a; //CanaryMod private -> public
+    private double a;
     private double b;
     private double c;
-    private double d;
-    private int e;
-    private boolean f;
+    private int d;
+    private boolean e;
 
     public EntityEnderEye(World world) {
         super(world);

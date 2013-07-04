@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.monster.CanaryBlaze;
-
 
 public class EntityBlaze extends EntityMob {
 
@@ -20,11 +18,6 @@ public class EntityBlaze extends EntityMob {
     protected void ax() {
         super.ax();
         this.a(SharedMonsterAttributes.e).a(6.0D);
-    }
-
-//MERGE: Deprecated? - Chris
-    public int aW() {
-        return maxHealth == 0 ? 20 : maxHealth; // CanaryMod: custom Max
     }
 
     protected void a() {

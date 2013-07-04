@@ -17,8 +17,8 @@ public class EntitySmallFireball extends EntityFireball {
         this.entity = new CanarySmallFireball(this); // CanaryMod: wrap entity
     }
 
-    public EntitySmallFireball(World world, EntityLiving entityliving, double d0, double d1, double d2) {
-        super(world, entityliving, d0, d1, d2);
+    public EntitySmallFireball(World world, EntityLivingBase entitylivingbase, double d0, double d1, double d2) {
+        super(world, entitylivingbase, d0, d1, d2);
         this.a(0.3125F, 0.3125F);
         this.entity = new CanarySmallFireball(this); // CanaryMod: wrap entity
     }
@@ -77,7 +77,7 @@ public class EntitySmallFireball extends EntityFireball {
                         IgnitionHook ignitionHook = new IgnitionHook(block, null, null, IgnitionCause.FIREBALL_HIT);
                         Canary.hooks().callHook(ignitionHook);
                         if(!ignitionHook.isCanceled()) {
-                            this.q.c(i0, i1, i2, Block.av.cz);
+                            this.q.c(i0, i1, i2, Block.aw.cF);
                         }
                         //
                     }
@@ -92,7 +92,7 @@ public class EntitySmallFireball extends EntityFireball {
         return false;
     }
 
-    public boolean a(DamageSource damagesource, int i0) {
+    public boolean a(DamageSource damagesource, float f0) {
         return false;
     }
 }

@@ -1,11 +1,9 @@
 package net.minecraft.server;
 
-
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
-
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
@@ -18,7 +16,6 @@ import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.entity.DimensionSwitchHook;
 import net.canarymod.hook.entity.EntityMountHook;
-
 
 public abstract class Entity {
 
@@ -96,6 +93,7 @@ public abstract class Entity {
     // CanaryMod
     protected CanaryEntity entity;
     protected CompoundTag metadata = null;
+
     //
 
     public Entity(World world) {
@@ -212,7 +210,7 @@ public abstract class Entity {
 
             i0 = this.y();
             if (this.ap) {
-                //CanaryMod moved allow-nether to per-world config
+                // CanaryMod moved allow-nether to per-world config
                 if (Configuration.getWorldConfig(getCanaryWorld().getFqName()).isNetherAllowed()) {
                     if (this.o == null && this.aq++ >= i0) {
                         this.aq = i0;
@@ -987,7 +985,7 @@ public abstract class Entity {
             nbttagcompound.a("LevelName", getCanaryWorld().getName());
             // CanaryMod: allow the saving of persistent metadata
             if (metadata != null) {
-                nbttagcompound.a("Canary", ((CanaryCompoundTag)metadata).getHandle());
+                nbttagcompound.a("Canary", ((CanaryCompoundTag) metadata).getHandle());
             } // CanaryMod end
             this.b(nbttagcompound);
             if (this.o != null) {
@@ -1046,7 +1044,7 @@ public abstract class Entity {
             this.b(this.u, this.v, this.w);
             this.b(this.A, this.B);
             // CanaryMod: allow the saving of persistent metadata
-            this.metadata = nbttagcompound.b("Canary") ? new CanaryCompoundTag(nbttagcompound.l("Canary")) : new CanaryCompoundTag("Canary"); 
+            this.metadata = nbttagcompound.b("Canary") ? new CanaryCompoundTag(nbttagcompound.l("Canary")) : new CanaryCompoundTag("Canary");
             // CanaryMod: END
             this.a(nbttagcompound);
         } catch (Throwable throwable) {
@@ -1486,7 +1484,7 @@ public abstract class Entity {
 
             // CanaryMod: Dimension switch hook.
             Location goingTo = this.simulatePortalUse(i0, minecraftserver.getWorld(this.getCanaryWorld().getName(), i0));
-            CancelableHook hook = new DimensionSwitch(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
+            CancelableHook hook = new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
 
             Canary.hooks().callHook(hook);
             if (hook.isCanceled()) {
@@ -1550,7 +1548,6 @@ public abstract class Entity {
         crashreportcategory.a("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", new Object[]{ Double.valueOf(this.x), Double.valueOf(this.y), Double.valueOf(this.z) }));
     }
 
-
     public UUID au() {
         return this.i;
     }
@@ -1566,7 +1563,9 @@ public abstract class Entity {
     /**
      * Applies this Entities Properties to an NBT Tag. Initially implemented for
      * getting properties for MobSpawnerEntry.
-     * @param tag tag to apply this entities properties to.
+     * 
+     * @param tag
+     *            tag to apply this entities properties to.
      */
     public void getNBTProperties(NBTTagCompound tag) {
         this.b(tag);
@@ -1575,9 +1574,10 @@ public abstract class Entity {
     public void setNBTProperties(NBTTagCompound tag) {
         this.a(tag);
     }
+
     /**
      * CanaryMod Get this entities current World (dimension)
-     *
+     * 
      * @return
      */
     public CanaryWorld getCanaryWorld() {
@@ -1611,7 +1611,7 @@ public abstract class Entity {
             ChunkCoordinates ochunkcoordinates;
 
             if (dimensionTo == 1) {
-                ochunkcoordinates = oworldserverTo.J();
+                ochunkcoordinates = oworldserverTo.l(); // XXX
             } else {
                 ochunkcoordinates = oworldserverTo.l();
             }

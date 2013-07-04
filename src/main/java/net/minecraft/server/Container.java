@@ -12,7 +12,6 @@ public abstract class Container {
     public List b = new ArrayList();
     public List c = new ArrayList();
     public int d = 0;
-    private short a = 0;
     private int f = -1;
     private int g = 0;
     private final Set h = new HashSet();
@@ -44,7 +43,7 @@ public abstract class Container {
         ArrayList arraylist = new ArrayList();
 
         for (int i0 = 0; i0 < this.c.size(); ++i0) {
-            arraylist.add(((Slot) this.c.get(i0)).c());
+            arraylist.add(((Slot) this.c.get(i0)).d());
         }
 
         return arraylist;
@@ -52,7 +51,7 @@ public abstract class Container {
 
     public void b() {
         for (int i0 = 0; i0 < this.c.size(); ++i0) {
-            ItemStack itemstack = ((Slot) this.c.get(i0)).c();
+            ItemStack itemstack = ((Slot) this.c.get(i0)).d();
             ItemStack itemstack1 = (ItemStack) this.b.get(i0);
 
             if (!ItemStack.b(itemstack1, itemstack)) {
@@ -89,12 +88,12 @@ public abstract class Container {
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         Slot slot = (Slot) this.c.get(i0);
 
-        return slot != null ? slot.c() : null;
+        return slot != null ? slot.d() : null;
     }
 
     public ItemStack a(int i0, int i1, int i2, EntityPlayer entityplayer) {
         ItemStack itemstack = null;
-        InventoryPlayer inventoryplayer = entityplayer.bK;
+        InventoryPlayer inventoryplayer = entityplayer.bn;
         int i3;
         ItemStack itemstack1;
 
@@ -117,38 +116,38 @@ public abstract class Container {
             } else if (this.g == 1) {
                 Slot slot = (Slot) this.c.get(i0);
 
-                if (slot != null && a(slot, inventoryplayer.o(), true) && slot.a(inventoryplayer.o()) && inventoryplayer.o().a > this.h.size() && this.b(slot)) {
+                if (slot != null && a(slot, inventoryplayer.o(), true) && slot.a(inventoryplayer.o()) && inventoryplayer.o().b > this.h.size() && this.b(slot)) {
                     this.h.add(slot);
                 }
             } else if (this.g == 2) {
                 if (!this.h.isEmpty()) {
                     itemstack1 = inventoryplayer.o().m();
-                    i3 = inventoryplayer.o().a;
+                    i3 = inventoryplayer.o().b;
                     Iterator iterator = this.h.iterator();
 
                     while (iterator.hasNext()) {
                         Slot slot1 = (Slot) iterator.next();
 
-                        if (slot1 != null && a(slot1, inventoryplayer.o(), true) && slot1.a(inventoryplayer.o()) && inventoryplayer.o().a >= this.h.size() && this.b(slot1)) {
+                        if (slot1 != null && a(slot1, inventoryplayer.o(), true) && slot1.a(inventoryplayer.o()) && inventoryplayer.o().b >= this.h.size() && this.b(slot1)) {
                             ItemStack itemstack2 = itemstack1.m();
-                            int i5 = slot1.d() ? slot1.c().a : 0;
+                            int i5 = slot1.e() ? slot1.d().b : 0;
 
                             a(this.h, this.f, itemstack2, i5);
-                            if (itemstack2.a > itemstack2.e()) {
-                                itemstack2.a = itemstack2.e();
+                            if (itemstack2.b > itemstack2.e()) {
+                                itemstack2.b = itemstack2.e();
                             }
 
-                            if (itemstack2.a > slot1.a()) {
-                                itemstack2.a = slot1.a();
+                            if (itemstack2.b > slot1.a()) {
+                                itemstack2.b = slot1.a();
                             }
 
-                            i3 -= itemstack2.a - i5;
+                            i3 -= itemstack2.b - i5;
                             slot1.c(itemstack2);
                         }
                     }
 
-                    itemstack1.a = i3;
-                    if (itemstack1.a <= 0) {
+                    itemstack1.b = i3;
+                    if (itemstack1.b <= 0) {
                         itemstack1 = null;
                     }
 
@@ -170,13 +169,13 @@ public abstract class Container {
                 if (i0 == -999) {
                     if (inventoryplayer.o() != null && i0 == -999) {
                         if (i1 == 0) {
-                            entityplayer.c(inventoryplayer.o());
+                            entityplayer.b(inventoryplayer.o());
                             inventoryplayer.b((ItemStack) null);
                         }
 
                         if (i1 == 1) {
-                            entityplayer.c(inventoryplayer.o().a(1));
-                            if (inventoryplayer.o().a == 0) {
+                            entityplayer.b(inventoryplayer.o().a(1));
+                            if (inventoryplayer.o().b == 0) {
                                 inventoryplayer.b((ItemStack) null);
                             }
                         }
@@ -190,9 +189,9 @@ public abstract class Container {
                     if (slot2 != null && slot2.a(entityplayer)) {
                         itemstack1 = this.b(entityplayer, i0);
                         if (itemstack1 != null) {
-                            i3 = itemstack1.c;
+                            i3 = itemstack1.d;
                             itemstack = itemstack1.m();
-                            if (slot2 != null && slot2.c() != null && slot2.c().c == i3) {
+                            if (slot2 != null && slot2.d() != null && slot2.d().d == i3) {
                                 this.a(i0, i1, true, entityplayer);
                             }
                         }
@@ -204,7 +203,7 @@ public abstract class Container {
 
                     slot2 = (Slot) this.c.get(i0);
                     if (slot2 != null) {
-                        itemstack1 = slot2.c();
+                        itemstack1 = slot2.d();
                         ItemStack itemstack4 = inventoryplayer.o();
 
                         if (itemstack1 != null) {
@@ -213,53 +212,56 @@ public abstract class Container {
 
                         if (itemstack1 == null) {
                             if (itemstack4 != null && slot2.a(itemstack4)) {
-                                i6 = i1 == 0 ? itemstack4.a : 1;
+                                i6 = i1 == 0 ? itemstack4.b : 1;
                                 if (i6 > slot2.a()) {
                                     i6 = slot2.a();
                                 }
 
-                                slot2.c(itemstack4.a(i6));
-                                if (itemstack4.a == 0) {
+                                if (itemstack4.b >= i6) {
+                                    slot2.c(itemstack4.a(i6));
+                                }
+
+                                if (itemstack4.b == 0) {
                                     inventoryplayer.b((ItemStack) null);
                                 }
                             }
                         } else if (slot2.a(entityplayer)) {
                             if (itemstack4 == null) {
-                                i6 = i1 == 0 ? itemstack1.a : (itemstack1.a + 1) / 2;
+                                i6 = i1 == 0 ? itemstack1.b : (itemstack1.b + 1) / 2;
                                 itemstack3 = slot2.a(i6);
                                 inventoryplayer.b(itemstack3);
-                                if (itemstack1.a == 0) {
+                                if (itemstack1.b == 0) {
                                     slot2.c((ItemStack) null);
                                 }
 
                                 slot2.a(entityplayer, inventoryplayer.o());
                             } else if (slot2.a(itemstack4)) {
-                                if (itemstack1.c == itemstack4.c && itemstack1.k() == itemstack4.k() && ItemStack.a(itemstack1, itemstack4)) {
-                                    i6 = i1 == 0 ? itemstack4.a : 1;
-                                    if (i6 > slot2.a() - itemstack1.a) {
-                                        i6 = slot2.a() - itemstack1.a;
+                                if (itemstack1.d == itemstack4.d && itemstack1.k() == itemstack4.k() && ItemStack.a(itemstack1, itemstack4)) {
+                                    i6 = i1 == 0 ? itemstack4.b : 1;
+                                    if (i6 > slot2.a() - itemstack1.b) {
+                                        i6 = slot2.a() - itemstack1.b;
                                     }
 
-                                    if (i6 > itemstack4.e() - itemstack1.a) {
-                                        i6 = itemstack4.e() - itemstack1.a;
+                                    if (i6 > itemstack4.e() - itemstack1.b) {
+                                        i6 = itemstack4.e() - itemstack1.b;
                                     }
 
                                     itemstack4.a(i6);
-                                    if (itemstack4.a == 0) {
+                                    if (itemstack4.b == 0) {
                                         inventoryplayer.b((ItemStack) null);
                                     }
 
-                                    itemstack1.a += i6;
-                                } else if (itemstack4.a <= slot2.a()) {
+                                    itemstack1.b += i6;
+                                } else if (itemstack4.b <= slot2.a()) {
                                     slot2.c(itemstack4);
                                     inventoryplayer.b(itemstack1);
                                 }
-                            } else if (itemstack1.c == itemstack4.c && itemstack4.e() > 1 && (!itemstack1.h() || itemstack1.k() == itemstack4.k()) && ItemStack.a(itemstack1, itemstack4)) {
-                                i6 = itemstack1.a;
-                                if (i6 > 0 && i6 + itemstack4.a <= itemstack4.e()) {
-                                    itemstack4.a += i6;
+                            } else if (itemstack1.d == itemstack4.d && itemstack4.e() > 1 && (!itemstack1.h() || itemstack1.k() == itemstack4.k()) && ItemStack.a(itemstack1, itemstack4)) {
+                                i6 = itemstack1.b;
+                                if (i6 > 0 && i6 + itemstack4.b <= itemstack4.e()) {
+                                    itemstack4.b += i6;
                                     itemstack1 = slot2.a(i6);
-                                    if (itemstack1.a == 0) {
+                                    if (itemstack1.b == 0) {
                                         slot2.c((ItemStack) null);
                                     }
 
@@ -268,7 +270,7 @@ public abstract class Container {
                             }
                         }
 
-                        slot2.e();
+                        slot2.f();
                     }
                 }
             } else if (i2 == 2 && i1 >= 0 && i1 < 9) {
@@ -283,57 +285,57 @@ public abstract class Container {
                         flag0 |= i6 > -1;
                     }
 
-                    if (slot2.d() && flag0) {
-                        itemstack3 = slot2.c();
+                    if (slot2.e() && flag0) {
+                        itemstack3 = slot2.d();
                         inventoryplayer.a(i1, itemstack3.m());
                         if ((slot2.f != inventoryplayer || !slot2.a(itemstack1)) && itemstack1 != null) {
                             if (i6 > -1) {
                                 inventoryplayer.a(itemstack1);
-                                slot2.a(itemstack3.a);
+                                slot2.a(itemstack3.b);
                                 slot2.c((ItemStack) null);
                                 slot2.a(entityplayer, itemstack3);
                             }
                         } else {
-                            slot2.a(itemstack3.a);
+                            slot2.a(itemstack3.b);
                             slot2.c(itemstack1);
                             slot2.a(entityplayer, itemstack3);
                         }
-                    } else if (!slot2.d() && itemstack1 != null && slot2.a(itemstack1)) {
+                    } else if (!slot2.e() && itemstack1 != null && slot2.a(itemstack1)) {
                         inventoryplayer.a(i1, (ItemStack) null);
                         slot2.c(itemstack1);
                     }
                 }
-            } else if (i2 == 3 && entityplayer.ce.d && inventoryplayer.o() == null && i0 >= 0) {
+            } else if (i2 == 3 && entityplayer.bG.d && inventoryplayer.o() == null && i0 >= 0) {
                 slot2 = (Slot) this.c.get(i0);
-                if (slot2 != null && slot2.d()) {
-                    itemstack1 = slot2.c().m();
-                    itemstack1.a = itemstack1.e();
+                if (slot2 != null && slot2.e()) {
+                    itemstack1 = slot2.d().m();
+                    itemstack1.b = itemstack1.e();
                     inventoryplayer.b(itemstack1);
                 }
             } else if (i2 == 4 && inventoryplayer.o() == null && i0 >= 0) {
                 slot2 = (Slot) this.c.get(i0);
-                if (slot2 != null && slot2.d() && slot2.a(entityplayer)) {
-                    itemstack1 = slot2.a(i1 == 0 ? 1 : slot2.c().a);
+                if (slot2 != null && slot2.e() && slot2.a(entityplayer)) {
+                    itemstack1 = slot2.a(i1 == 0 ? 1 : slot2.d().b);
                     slot2.a(entityplayer, itemstack1);
-                    entityplayer.c(itemstack1);
+                    entityplayer.b(itemstack1);
                 }
             } else if (i2 == 6 && i0 >= 0) {
                 slot2 = (Slot) this.c.get(i0);
                 itemstack1 = inventoryplayer.o();
-                if (itemstack1 != null && (slot2 == null || !slot2.d() || !slot2.a(entityplayer))) {
+                if (itemstack1 != null && (slot2 == null || !slot2.e() || !slot2.a(entityplayer))) {
                     i3 = i1 == 0 ? 0 : this.c.size() - 1;
                     i6 = i1 == 0 ? 1 : -1;
 
                     for (int i7 = 0; i7 < 2; ++i7) {
-                        for (int i8 = i3; i8 >= 0 && i8 < this.c.size() && itemstack1.a < itemstack1.e(); i8 += i6) {
+                        for (int i8 = i3; i8 >= 0 && i8 < this.c.size() && itemstack1.b < itemstack1.e(); i8 += i6) {
                             Slot slot3 = (Slot) this.c.get(i8);
 
-                            if (slot3.d() && a(slot3, itemstack1, true) && slot3.a(entityplayer) && this.a(itemstack1, slot3) && (i7 != 0 || slot3.c().a != slot3.c().e())) {
-                                int i9 = Math.min(itemstack1.e() - itemstack1.a, slot3.c().a);
+                            if (slot3.e() && a(slot3, itemstack1, true) && slot3.a(entityplayer) && this.a(itemstack1, slot3) && (i7 != 0 || slot3.d().b != slot3.d().e())) {
+                                int i9 = Math.min(itemstack1.e() - itemstack1.b, slot3.d().b);
                                 ItemStack itemstack5 = slot3.a(i9);
 
-                                itemstack1.a += i9;
-                                if (itemstack5.a <= 0) {
+                                itemstack1.b += i9;
+                                if (itemstack5.b <= 0) {
                                     slot3.c((ItemStack) null);
                                 }
 
@@ -359,10 +361,10 @@ public abstract class Container {
     }
 
     public void b(EntityPlayer entityplayer) {
-        InventoryPlayer inventoryplayer = entityplayer.bK;
+        InventoryPlayer inventoryplayer = entityplayer.bn;
 
         if (inventoryplayer.o() != null) {
-            entityplayer.c(inventoryplayer.o());
+            entityplayer.b(inventoryplayer.o());
             inventoryplayer.b((ItemStack) null);
         }
     }
@@ -401,21 +403,21 @@ public abstract class Container {
         ItemStack itemstack1;
 
         if (itemstack.f()) {
-            while (itemstack.a > 0 && (!flag0 && i2 < i1 || flag0 && i2 >= i0)) {
+            while (itemstack.b > 0 && (!flag0 && i2 < i1 || flag0 && i2 >= i0)) {
                 slot = (Slot) this.c.get(i2);
-                itemstack1 = slot.c();
-                if (itemstack1 != null && itemstack1.c == itemstack.c && (!itemstack.h() || itemstack.k() == itemstack1.k()) && ItemStack.a(itemstack, itemstack1)) {
-                    int i3 = itemstack1.a + itemstack.a;
+                itemstack1 = slot.d();
+                if (itemstack1 != null && itemstack1.d == itemstack.d && (!itemstack.h() || itemstack.k() == itemstack1.k()) && ItemStack.a(itemstack, itemstack1)) {
+                    int i3 = itemstack1.b + itemstack.b;
 
                     if (i3 <= itemstack.e()) {
-                        itemstack.a = 0;
-                        itemstack1.a = i3;
-                        slot.e();
+                        itemstack.b = 0;
+                        itemstack1.b = i3;
+                        slot.f();
                         flag1 = true;
-                    } else if (itemstack1.a < itemstack.e()) {
-                        itemstack.a -= itemstack.e() - itemstack1.a;
-                        itemstack1.a = itemstack.e();
-                        slot.e();
+                    } else if (itemstack1.b < itemstack.e()) {
+                        itemstack.b -= itemstack.e() - itemstack1.b;
+                        itemstack1.b = itemstack.e();
+                        slot.f();
                         flag1 = true;
                     }
                 }
@@ -428,7 +430,7 @@ public abstract class Container {
             }
         }
 
-        if (itemstack.a > 0) {
+        if (itemstack.b > 0) {
             if (flag0) {
                 i2 = i1 - 1;
             } else {
@@ -437,11 +439,11 @@ public abstract class Container {
 
             while (!flag0 && i2 < i1 || flag0 && i2 >= i0) {
                 slot = (Slot) this.c.get(i2);
-                itemstack1 = slot.c();
+                itemstack1 = slot.d();
                 if (itemstack1 == null) {
                     slot.c(itemstack.m());
-                    slot.e();
-                    itemstack.a = 0;
+                    slot.f();
+                    itemstack.b = 0;
                     flag1 = true;
                     break;
                 }
@@ -475,12 +477,12 @@ public abstract class Container {
     }
 
     public static boolean a(Slot slot, ItemStack itemstack, boolean flag0) {
-        boolean flag1 = slot == null || !slot.d();
+        boolean flag1 = slot == null || !slot.e();
 
-        if (slot != null && slot.d() && itemstack != null && itemstack.a(slot.c()) && ItemStack.a(slot.c(), itemstack)) {
-            int i0 = flag0 ? 0 : itemstack.a;
+        if (slot != null && slot.e() && itemstack != null && itemstack.a(slot.d()) && ItemStack.a(slot.d(), itemstack)) {
+            int i0 = flag0 ? 0 : itemstack.b;
 
-            flag1 |= slot.c().a + i0 <= itemstack.e();
+            flag1 |= slot.d().b + i0 <= itemstack.e();
         }
 
         return flag1;
@@ -489,14 +491,14 @@ public abstract class Container {
     public static void a(Set set, int i0, ItemStack itemstack, int i1) {
         switch (i0) {
             case 0:
-                itemstack.a = MathHelper.d((float) itemstack.a / (float) set.size());
+                itemstack.b = MathHelper.d((float) itemstack.b / (float) set.size());
                 break;
 
             case 1:
-                itemstack.a = 1;
+                itemstack.b = 1;
         }
 
-        itemstack.a += i1;
+        itemstack.b += i1;
     }
 
     public boolean b(Slot slot) {
@@ -514,7 +516,7 @@ public abstract class Container {
                 ItemStack itemstack = iinventory.a(i1);
 
                 if (itemstack != null) {
-                    f0 += (float) itemstack.a / (float) Math.min(iinventory.d(), itemstack.e());
+                    f0 += (float) itemstack.b / (float) Math.min(iinventory.d(), itemstack.e());
                     ++i0;
                 }
             }
@@ -535,7 +537,7 @@ public abstract class Container {
      */
     public void updateChangedSlots() {
         for (int i = 0; i < this.c.size(); ++i) {
-            ItemStack itemstack = ((Slot) this.c.get(i)).c();
+            ItemStack itemstack = ((Slot) this.c.get(i)).d();
             ItemStack itemstack1 = (ItemStack) this.b.get(i);
 
             if (!ItemStack.b(itemstack1, itemstack)) {
@@ -569,7 +571,7 @@ public abstract class Container {
         if (slot == null)
             return;
 
-        ItemStack oitemstack = slot.c();
+        ItemStack oitemstack = slot.d();
         if (oitemstack != null)
             oitemstack = oitemstack.m();
 
