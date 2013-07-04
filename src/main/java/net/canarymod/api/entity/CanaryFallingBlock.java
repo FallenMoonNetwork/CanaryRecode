@@ -1,8 +1,7 @@
 package net.canarymod.api.entity;
 
-
+import net.canarymod.api.world.blocks.BlockType;
 import net.minecraft.server.EntityFallingSand;
-
 
 /**
  * FallingBlock wrapper implementation
@@ -33,8 +32,92 @@ public class CanaryFallingBlock extends CanaryEntity implements FallingBlock {
      * {@inheritDoc}
      */
     @Override
+    public void setBlockID(short id) {
+        if (BlockType.fromId(id) != null) { // Safety
+            getHandle().a = id;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public short getBlockMetaData() {
         return (short) getHandle().b;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setBlockMetaData(short data) {
+        getHandle().b = data;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getFallTime() {
+        return getHandle().c;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setFallTime(int fallTime) {
+        getHandle().c = fallTime;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean dropsItem() {
+        return getHandle().d;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDropsItem(boolean drops) {
+        getHandle().d = drops;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isBreakingAnvil() {
+        return getHandle().f;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setIsBreakingAnvil(boolean breaking) {
+        if (getBlockID() == BlockType.Anvil.getId()) {
+            getHandle().f = breaking;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hurtEntities() {
+        return getHandle().g;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setHurtEntities(boolean hurt) {
+        getHandle().g = hurt;
     }
 
     /**
@@ -76,21 +159,4 @@ public class CanaryFallingBlock extends CanaryEntity implements FallingBlock {
     public EntityFallingSand getHandle() {
         return (EntityFallingSand) entity;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setBlockID(int id) {
-        getHandle().a = id;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setBlockMetaData(int data) {
-        getHandle().b = data;
-    }
-
 }

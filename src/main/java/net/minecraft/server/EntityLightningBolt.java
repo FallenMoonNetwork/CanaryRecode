@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import java.util.List;
-import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryLightningBolt;
 import net.canarymod.api.entity.LightningBolt;
 import net.canarymod.api.world.blocks.CanaryBlock;
@@ -11,12 +9,11 @@ import net.canarymod.hook.world.IgnitionHook;
 import net.canarymod.hook.world.IgnitionHook.IgnitionCause;
 import net.canarymod.hook.world.LightningStrikeHook;
 
-
 public class EntityLightningBolt extends EntityWeatherEffect {
 
-    private int b;
+    public int b; // CanaryMod: private => public; lightningState
     public long a;
-    private int c;
+    public int c; // CanaryMod: private => public; livingTime
 
     public EntityLightningBolt(World world, double d0, double d1, double d2) {
         super(world);
@@ -35,9 +32,7 @@ public class EntityLightningBolt extends EntityWeatherEffect {
                 CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
                 ignited.setStatus((byte) 5); // LightningBolt Status 5
-                IgnitionHook hook = new IgnitionHook(ignited, null, null, IgnitionCause.LIGHTNING_STRIKE);
-
-                Canary.hooks().callHook(hook);
+                IgnitionHook hook = (IgnitionHook) new IgnitionHook(ignited, null, null, IgnitionCause.LIGHTNING_STRIKE).call();
                 if (!hook.isCanceled()) {
                     world.c(i0, i1, i2, Block.aw.cF);
                 }
@@ -55,9 +50,7 @@ public class EntityLightningBolt extends EntityWeatherEffect {
                     CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i1, i2, i3);
 
                     ignited.setStatus((byte) 5); // LightningBolt Status 5
-                    IgnitionHook hook = new IgnitionHook(ignited, null, null, IgnitionCause.LIGHTNING_STRIKE);
-
-                    Canary.hooks().callHook(hook);
+                    IgnitionHook hook = (IgnitionHook) new IgnitionHook(ignited, null, null, IgnitionCause.LIGHTNING_STRIKE).call();
                     if (!hook.isCanceled()) {
                         world.c(i1, i2, i3, Block.aw.cF);
                     }
@@ -75,8 +68,7 @@ public class EntityLightningBolt extends EntityWeatherEffect {
             this.q.a(this.u, this.v, this.w, "ambient.weather.thunder", 10000.0F, 0.8F + this.ab.nextFloat() * 0.2F);
             this.q.a(this.u, this.v, this.w, "random.explode", 2.0F, 0.5F + this.ab.nextFloat() * 0.2F);
             // CanaryMod: LightningStrike
-            LightningStrikeHook lsh = new LightningStrikeHook((LightningBolt) this.getCanaryEntity());
-            Canary.hooks().callHook(lsh);
+            new LightningStrikeHook((LightningBolt) this.getCanaryEntity()).call();
             //
         }
 
@@ -97,9 +89,7 @@ public class EntityLightningBolt extends EntityWeatherEffect {
                         // CanaryMod: Ignition
                         CanaryBlock ignited = (CanaryBlock) q.getCanaryWorld().getBlockAt(i0, i1, i2);
                         ignited.setStatus((byte) 5); // LightningBolt Status 5
-                        IgnitionHook hook = new IgnitionHook(ignited, null, null, IgnitionCause.LIGHTNING_STRIKE);
-                        Canary.hooks().callHook(hook);
-
+                        IgnitionHook hook = (IgnitionHook) new IgnitionHook(ignited, null, null, IgnitionCause.LIGHTNING_STRIKE).call();
                         if (!hook.isCanceled()) {
                             this.q.c(i0, i1, i2, Block.aw.cF);
                         }
@@ -120,8 +110,7 @@ public class EntityLightningBolt extends EntityWeatherEffect {
                     Entity entity = (Entity) list.get(i3);
 
                     // CanaryMod: EntityLightningStruck
-                    EntityLightningStruckHook hook = new EntityLightningStruckHook((LightningBolt) this.getCanaryEntity(), entity.getCanaryEntity());
-                    Canary.hooks().callHook(hook);
+                    EntityLightningStruckHook hook = (EntityLightningStruckHook) new EntityLightningStruckHook((LightningBolt) this.getCanaryEntity(), entity.getCanaryEntity()).call();
                     if (!hook.isCanceled()) {
                         entity.a(this);
                     }

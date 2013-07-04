@@ -1,15 +1,13 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.CanaryXPOrb;
-
 
 public class EntityXPOrb extends Entity {
 
     public int a;
     public int b = 0;
     public int c;
-    private int d = 5;
+    public int d = 5; // CanaryMod: private => public; health
     private int e;
     private EntityPlayer f;
     private int g;
@@ -166,4 +164,14 @@ public class EntityXPOrb extends Entity {
     public boolean ao() {
         return false;
     }
+
+    // CanaryMod
+    public void setXPValue(int value) {
+        this.e = value;
+    }
+
+    public EntityPlayer getClosestPlayer() {
+        return this.f;
+    }
+    //
 }

@@ -7,19 +7,17 @@ public class EntityWitherSkull extends EntityFireball {
     public EntityWitherSkull(World world) {
         super(world);
         this.a(0.3125F, 0.3125F);
-        //CanaryMod
-        this.entity = new CanaryWitherSkull(this);
+        this.entity = new CanaryWitherSkull(this); // CanaryMod: wrap entity
     }
 
     public EntityWitherSkull(World world, EntityLivingBase entitylivingbase, double d0, double d1, double d2) {
         super(world, entitylivingbase, d0, d1, d2);
         this.a(0.3125F, 0.3125F);
-        //CanaryMod
-        this.entity = new CanaryWitherSkull(this);
+        this.entity = new CanaryWitherSkull(this); // CanaryMod: wrap entity
     }
 
-    protected float c() {
-        return this.d() ? 0.73F : super.c();
+    public float c() {
+        return /* this.d() ? 0.73F  : */super.c(); // CanaryMod: Motion Factor was made configurable
     }
 
     public boolean ad() {

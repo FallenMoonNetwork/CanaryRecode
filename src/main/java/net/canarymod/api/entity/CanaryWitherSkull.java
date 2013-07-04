@@ -19,8 +19,16 @@ public class CanaryWitherSkull extends CanaryFireball implements WitherSkull {
      * {@inheritDoc}
      */
     @Override
-    public net.minecraft.server.Entity getHandle() {
-        return (net.minecraft.server.Entity) this.entity;
+    public boolean isInvulnerable() {
+        return getHandle().d();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setInvulnerable(boolean invulnerable) {
+        getHandle().a(invulnerable);
     }
 
     /**
@@ -72,7 +80,7 @@ public class CanaryWitherSkull extends CanaryFireball implements WitherSkull {
     }
 
     /**
-     * {@inheritDoc}
+     * There is no fuse
      */
     @Override
     public int getFuse() {
@@ -80,32 +88,36 @@ public class CanaryWitherSkull extends CanaryFireball implements WitherSkull {
     }
 
     /**
-     * {@inheritDoc}
+     * There is no fuse
      */
     @Override
-    public void setFuse(int fuse) {
-    }
+    public void setFuse(int fuse) {}
 
     /**
-     * {@inheritDoc}
+     * There is no fuse
      */
     @Override
-    public void increaseFuse(int increase) {
-    }
+    public void increaseFuse(int increase) {}
 
     /**
-     * {@inheritDoc}
+     * There is no fuse
      */
     @Override
-    public void decreaseFuse(int decrease) {
-    }
+    public void decreaseFuse(int decrease) {}
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void detonate() {
-        getHandle().q.a(getHandle(), getX(), getY(), getZ(), getPower(), true, true);
+        getHandle().q.a(getHandle(), getX(), getY(), getZ(), getPower(), false, damageWorld);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityWitherSkull getHandle() {
+        return (EntityWitherSkull) this.entity;
+    }
 }

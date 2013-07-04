@@ -7,9 +7,9 @@ import net.minecraft.server.EntityArrow;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryArrow extends CanaryEntity implements Arrow{
+public class CanaryArrow extends CanaryProjectile implements Arrow {
 
-    public CanaryArrow(EntityArrow entity){
+    public CanaryArrow(EntityArrow entity) {
         super(entity);
     }
 
@@ -17,71 +17,103 @@ public class CanaryArrow extends CanaryEntity implements Arrow{
      * {@inheritDoc}
      */
     @Override
-    public boolean canPickUp(){
-        return ((EntityArrow) entity).a == 1;
+    public boolean canPickUp() {
+        return getHandle().a == 1;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setCanPickUp(boolean canPickUp){
-        ((EntityArrow) entity).a = canPickUp ? 1 : 0;
+    public void setCanPickUp(boolean canPickUp) {
+        getHandle().a = canPickUp ? 1 : 0;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Entity getOwner(){
-        return ((EntityArrow) entity).c != null ? ((EntityArrow) entity).c.getCanaryEntity() : null;
+    public Entity getOwner() {
+        return getHandle().c != null ? getHandle().c.getCanaryEntity() : null;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public double getDamage(){
-        return ((EntityArrow) entity).c();
+    public double getDamage() {
+        return getHandle().c();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setDamage(double damage){
-        ((EntityArrow) entity).b(damage);
+    public void setDamage(double damage) {
+        getHandle().b(damage);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean isCritical(){
-        return ((EntityArrow) entity).d();
+    public boolean isCritical() {
+        return getHandle().d();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setIsCritical(boolean critical){
-        ((EntityArrow) entity).a(critical);
+    public void setIsCritical(boolean critical) {
+        getHandle().a(critical);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public EntityArrow getHandle(){
+    public boolean isInGround() {
+        return getHandle().i;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getTicksInAir() {
+        return getHandle().au;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getTicksInGround() {
+        return getHandle().j;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getKnockbackStrength() {
+        return getHandle().cmeakb();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setKnockbackStrenth(int knockback) {
+        getHandle().a(knockback);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityArrow getHandle() {
         return (EntityArrow) entity;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setProjectileHeading(double motionX, double motionY, double motionZ, float rotationYaw, float rotationPitch){
-        getHandle().c(motionX, motionY, motionZ, rotationYaw, rotationPitch);
     }
 }

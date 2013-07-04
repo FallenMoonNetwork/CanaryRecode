@@ -38,8 +38,8 @@ public abstract class Entity {
     public double z; // Motion Z
     public float A; // Rotation
     public float B; // Pitch
-    public float C;
-    public float D;
+    public float C; // previous Yaw
+    public float D; // previous Pitch
     public final AxisAlignedBB E;
     public boolean F;
     public boolean G;
@@ -1626,10 +1626,6 @@ public abstract class Entity {
             z = (double) MathHelper.a((int) z, -29999872, 29999872);
         }
         return new Location(oworldserverTo.getCanaryWorld(), x, y, z, rotX, rotY);
-    }
-
-    public UUID getEntityUUID() {
-        return this.i;
     }
 
     public CompoundTag getMetaData() {

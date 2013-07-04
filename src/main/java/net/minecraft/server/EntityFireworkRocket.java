@@ -1,16 +1,14 @@
 package net.minecraft.server;
 
-
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryFireworkRocket;
 import net.canarymod.api.entity.FireworkRocket;
 import net.canarymod.hook.world.FireworkExplodeHook;
 
-
 public class EntityFireworkRocket extends Entity {
 
-    public int a; // CanaryMod: private => public
-    public int b; // CanaryMod: private => public
+    public int a; // CanaryMod: private => public; life
+    public int b; // CanaryMod: private => public; life max
 
     public EntityFireworkRocket(World world) {
         super(world);

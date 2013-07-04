@@ -10,7 +10,7 @@ public class EntityItem extends Entity {
 
     public int a;
     public int b;
-    private int d;
+    public int d; // CanaryMod: private => public; health
     public float c;
 
     public EntityItem(World world, double d0, double d1, double d2) {
@@ -117,7 +117,7 @@ public class EntityItem extends Entity {
             if (!hook.isCanceled()) {
                 this.w();
             } else {
-                this.b = 0;
+                this.a = 0; // Reset Age
             }
             //
         }

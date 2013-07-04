@@ -1,16 +1,14 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.CanaryEnderEye;
-
 
 public class EntityEnderEye extends Entity {
 
-    private double a;
-    private double b;
-    private double c;
-    private int d;
-    private boolean e;
+    public double a; // CanaryMod: private => public; targetX
+    public double b; // CanaryMod: private => public; targetY
+    public double c; // CanaryMod: private => public; targetZ
+    public int d; // CanaryMod: private => public; despawnTimer
+    public boolean e; // CanaryMod: private => public; dropOrShatter
 
     public EntityEnderEye(World world) {
         super(world);

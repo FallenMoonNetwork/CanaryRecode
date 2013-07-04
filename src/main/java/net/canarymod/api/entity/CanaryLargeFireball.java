@@ -1,8 +1,6 @@
 package net.canarymod.api.entity;
 
-
 import net.minecraft.server.EntityLargeFireball;
-
 
 /**
  * LargeFireball wrapper implementation
@@ -101,8 +99,8 @@ public class CanaryLargeFireball extends CanaryFireball implements LargeFireball
      */
     @Override
     public void detonate() {
-        // Temporary
-        getHandle().q.a(getHandle(), getX(), getY(), getZ(), getPower(), true, true);
+        this.destroy();
+        getHandle().q.a(getHandle(), getX(), getY(), getZ(), getPower(), true, damageWorld);
     }
 
     /**

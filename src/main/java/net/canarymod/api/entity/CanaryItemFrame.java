@@ -50,7 +50,7 @@ public class CanaryItemFrame extends CanaryHangingEntity implements ItemFrame {
      */
     @Override
     public void setItemRotation(int rot) {
-        ((EntityItemFrame) entity).b(rot);
+        ((EntityItemFrame) entity).c(rot);
     }
 
     /**

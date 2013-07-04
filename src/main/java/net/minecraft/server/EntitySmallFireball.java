@@ -1,13 +1,10 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.entity.CanarySmallFireball;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.entity.ProjectileHitHook;
 import net.canarymod.hook.world.IgnitionHook;
 import net.canarymod.hook.world.IgnitionHook.IgnitionCause;
-
 
 public class EntitySmallFireball extends EntityFireball {
 
@@ -32,9 +29,7 @@ public class EntitySmallFireball extends EntityFireball {
     protected void a(MovingObjectPosition movingobjectposition) {
         if (!this.q.I) {
             // CanaryMod: ProjectileHit
-            ProjectileHitHook hook = new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity());
-
-            Canary.hooks().callHook(hook);
+            ProjectileHitHook hook = (ProjectileHitHook) new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
             if (!hook.isCanceled()) { //
                 if (movingobjectposition.g != null) {
                     if (!movingobjectposition.g.E() && movingobjectposition.g.a(DamageSource.a((EntityFireball) this, this.a), 5)) {
@@ -72,11 +67,10 @@ public class EntitySmallFireball extends EntityFireball {
 
                     if (this.q.c(i0, i1, i2)) {
                         // CanaryMod: IgnitionHook
-                        CanaryBlock block = (CanaryBlock) this.q.getCanaryWorld().getBlockAt(i0, i1-1, i2);
-                        block.setStatus((byte) 7); //7 fireball hit
-                        IgnitionHook ignitionHook = new IgnitionHook(block, null, null, IgnitionCause.FIREBALL_HIT);
-                        Canary.hooks().callHook(ignitionHook);
-                        if(!ignitionHook.isCanceled()) {
+                        CanaryBlock block = (CanaryBlock) this.q.getCanaryWorld().getBlockAt(i0, i1 - 1, i2);
+                        block.setStatus((byte) 7); // 7 fireball hit
+                        IgnitionHook ignitionHook = (IgnitionHook) new IgnitionHook(block, null, null, IgnitionCause.FIREBALL_HIT).call();
+                        if (!ignitionHook.isCanceled()) {
                             this.q.c(i0, i1, i2, Block.aw.cF);
                         }
                         //

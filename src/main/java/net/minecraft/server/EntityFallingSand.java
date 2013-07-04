@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import net.canarymod.Canary;
@@ -8,15 +7,14 @@ import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryFallingBlock;
 import net.canarymod.hook.entity.DamageHook;
 
-
 public class EntityFallingSand extends Entity {
 
     public int a;
     public int b;
     public int c;
     public boolean d;
-    private boolean f;
-    private boolean g;
+    public boolean f; // CanaryMod: private => public; isBreakingAnvil?
+    public boolean g; // CanaryMod: private => public; hurtEntities
     public int h; // CanaryMod: private -> public
     public float i; // CanaryMod: private -> public
     public NBTTagCompound e;

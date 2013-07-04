@@ -1,12 +1,10 @@
 package net.minecraft.server;
 
-
 import java.util.Iterator;
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.HangingEntity;
 import net.canarymod.hook.entity.HangingEntityDestroyHook;
-
 
 public abstract class EntityHanging extends Entity {
 
@@ -281,4 +279,14 @@ public abstract class EntityHanging extends Entity {
     public abstract int e();
 
     public abstract void b(Entity entity);
+
+    // CanaryMod
+    public int getTickCounter() {
+        return this.e;
+    }
+
+    public void setTicks(int ticks) {
+        this.e = ticks;
+    }
+    //
 }

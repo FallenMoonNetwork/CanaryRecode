@@ -193,16 +193,16 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public EntityItem dropLoot(int itemId, int amount) {
-        return new CanaryEntityItem(entity.b(itemId, amount));
+        return (EntityItem) entity.b(itemId, amount).getEntityItem();
     }
 
     public EntityItem dropLoot(Item item) {
-        return new CanaryEntityItem(entity.a(((CanaryItem) item).getHandle(), 0.0F));
+        return entity.a(((CanaryItem) item).getHandle(), 0.0F).getEntityItem();
     }
 
     @Override
-    public boolean isSprinting() {
-        return entity.ah();
+    public boolean isSprinting() { // 3
+        return entity.ag();
     }
 
     @Override
@@ -211,13 +211,23 @@ public abstract class CanaryEntity implements Entity {
     }
 
     @Override
-    public boolean isSneaking() {
-        return entity.ag();
+    public boolean isSneaking() { // 1
+        return entity.af();
     }
 
     @Override
     public void setSneaking(boolean sneaking) {
         entity.b(sneaking);
+    }
+
+    @Override
+    public boolean isInvisible() { // 5
+        return entity.ah();
+    }
+
+    @Override
+    public void setInvisible(boolean invisible) {
+        entity.d(invisible);
     }
 
     @Override
@@ -242,7 +252,7 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public UUID getUUID() {
-        return entity.getEntityUUID();
+        return entity.au();
     }
 
     @Override
@@ -349,16 +359,6 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public void setNBT(BaseTag tag) {
         this.getHandle().f((NBTTagCompound) ((CanaryCompoundTag) tag).getHandle());
-    }
-
-    @Override
-    public boolean isInvisible() {
-        return entity.af();
-    }
-
-    @Override
-    public void setInvisible(boolean invisible) {
-        entity.d(invisible);
     }
 
     @Override

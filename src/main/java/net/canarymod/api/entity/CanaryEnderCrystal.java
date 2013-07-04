@@ -1,8 +1,7 @@
 package net.canarymod.api.entity;
 
-
+import java.util.Random;
 import net.minecraft.server.EntityEnderCrystal;
-
 
 /**
  * EnderCrystal wrapper implementation
@@ -10,6 +9,7 @@ import net.minecraft.server.EntityEnderCrystal;
  * @author Jason (darkdiplomat)
  */
 public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
+    private final static Random darks_humor = new Random();
     private boolean damageWorld = true, damageEntity = true, oneHit = true;
     private float power = 6.0F;
 
@@ -93,7 +93,7 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
     @Override
     public void detonate() {
         this.destroy();
-        getHandle().q.a(getHandle(), this.getX(), this.getY(), this.getZ(), power, true);
+        getHandle().q.a(getHandle(), this.getX(), this.getY(), this.getZ(), power, damageWorld);
     }
 
     /**
@@ -117,7 +117,7 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
      */
     @Override
     public int getFuse() {
-        return 0;
+        return darks_humor.nextInt(Integer.MAX_VALUE);
     }
 
     /**

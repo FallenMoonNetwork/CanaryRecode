@@ -1,11 +1,9 @@
 package net.minecraft.server;
 
-
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryArrow;
 import net.canarymod.hook.entity.ProjectileHitHook;
-
 
 public class EntityArrow extends Entity implements IProjectile {
 
@@ -14,12 +12,12 @@ public class EntityArrow extends Entity implements IProjectile {
     private int f = -1;
     private int g;
     private int h;
-    private boolean i;
+    public boolean i; // CanaryMod: private => public; inGround
     public int a;
     public int b;
     public Entity c;
-    private int j;
-    private int au;
+    public int j; // CanaryMod: private => public; ticksInGround
+    public int au; // CanaryMod: private => public; ticksInAir
     private double av = 2.0D;
     private int aw;
 
@@ -213,7 +211,6 @@ public class EntityArrow extends Entity implements IProjectile {
             if (movingobjectposition != null) {
                 // CanaryMod: ProjectileHit
                 ProjectileHitHook hook = new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity());
-     
 
                 Canary.hooks().callHook(hook);
                 if (!hook.isCanceled()) { //
@@ -428,5 +425,9 @@ public class EntityArrow extends Entity implements IProjectile {
         byte b0 = this.ah.a(16);
 
         return (b0 & 1) != 0;
+    }
+
+    public int cmeakb() {
+        return this.aw;
     }
 }
