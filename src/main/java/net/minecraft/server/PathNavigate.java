@@ -7,7 +7,7 @@ public class PathNavigate {
     private EntityLiving a;
     private World b;
     private PathEntity c;
-    private double d;
+    public double d; // CanaryMod: private => public
     private AttributeInstance e;
     private boolean f;
     private int g;
@@ -85,7 +85,7 @@ public class PathNavigate {
     public boolean a(PathEntity pathentity, double d0) {
         if (pathentity == null) {
             this.c = null;
-//            Canary.logInfo("path was null");
+            // Canary.logInfo("path was null");
             return false;
         } else {
             if (!pathentity.a(this.c)) {
@@ -97,7 +97,7 @@ public class PathNavigate {
             }
 
             if (this.c.d() == 0) {
-//                Canary.logInfo("path was of length 0");
+                // Canary.logInfo("path was of length 0");
                 return false;
             } else {
                 this.d = d0;
@@ -355,7 +355,7 @@ public class PathNavigate {
         return true;
     }
 
-    //CanaryMod
+    // CanaryMod
     public CanaryPathFinder getCanaryPathFinder() {
         return this.nav;
     }

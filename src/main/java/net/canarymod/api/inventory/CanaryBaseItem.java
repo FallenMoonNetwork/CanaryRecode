@@ -1,6 +1,5 @@
 package net.canarymod.api.inventory;
 
-
 /**
  * This is a basic Item wrapper, not for Itemstack, but for Item
  * 
@@ -26,7 +25,7 @@ public class CanaryBaseItem implements BaseItem {
      */
     @Override
     public int getMaxStackSize() {
-        return item.l();
+        return item.m();
     }
 
     /**
@@ -34,7 +33,7 @@ public class CanaryBaseItem implements BaseItem {
      */
     @Override
     public int getMaxDamage() {
-        return item.n();
+        return item.o();
     }
 
     /**
@@ -50,7 +49,7 @@ public class CanaryBaseItem implements BaseItem {
      */
     @Override
     public boolean isDamageable() {
-        return item.o();
+        return item.p();
     }
 
 }

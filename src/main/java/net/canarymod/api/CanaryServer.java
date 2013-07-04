@@ -1,6 +1,5 @@
 package net.canarymod.api;
 
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ import net.canarymod.tasks.ServerTask;
 import net.canarymod.tasks.ServerTaskManager;
 import net.minecraft.server.CraftingManager;
 import net.minecraft.server.FurnaceRecipes;
-import net.minecraft.server.GuiLogOutputHandler;
 import net.minecraft.server.IRecipe;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
@@ -40,10 +38,9 @@ import net.minecraft.server.ShapelessRecipes;
 import net.minecraft.server.TcpConnection;
 import net.visualillusionsent.utils.TaskManager;
 
-
 /**
  * Main entry point of the software
- *
+ * 
  * @author Jos Kuijpers
  * @author Chris (damagefilter)
  * @author Jason (darkdiplomat)
@@ -58,7 +55,7 @@ public class CanaryServer implements Server {
 
     /**
      * Create a new Server Wrapper
-     *
+     * 
      * @param server
      */
     public CanaryServer(MinecraftServer server) {
@@ -135,7 +132,7 @@ public class CanaryServer implements Server {
         }
         String[] split = command.split(" ");
         if (!Canary.commands().parseCommand(this, split[0], split)) {
-            return server.E().a(getHandle(), command) > 0; // Vanilla Commands passed
+            return server.G().a(getHandle(), command) > 0; // Vanilla Commands passed
         }
         return true;
     }
@@ -152,8 +149,8 @@ public class CanaryServer implements Server {
             return true;
         }
         String[] split = command.split(" ");
-        if(!Canary.commands().parseCommand(player, split[0], split)) {
-            return server.E().a(((CanaryPlayer) player).getHandle(), command) > 0; // Vanilla Commands passed
+        if (!Canary.commands().parseCommand(player, split[0], split)) {
+            return server.G().a(((CanaryPlayer) player).getHandle(), command) > 0; // Vanilla Commands passed
         }
         return true;
     }
@@ -170,7 +167,7 @@ public class CanaryServer implements Server {
             return true;
         }
         if (!Canary.commands().parseCommand(cmdBlock, command.split(" ")[0], command.split(" "))) {
-            return server.E().a(((CanaryCommandBlock) cmdBlock).getTileEntity(), command) > 0; // Vanilla Commands passed
+            return server.G().a(((CanaryCommandBlock) cmdBlock).getTileEntity(), command) > 0; // Vanilla Commands passed
         }
         return true;
     }
@@ -411,14 +408,6 @@ public class CanaryServer implements Server {
      */
     @Override
     public long[] getSentPacketCountArray() {
-        return server.e;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public long[] getSentPacketSizeArray() {
         return server.f;
     }
 
@@ -426,13 +415,21 @@ public class CanaryServer implements Server {
      * {@inheritDoc}
      */
     @Override
-    public long[] getReceivedPacketCountArray() {
+    public long[] getSentPacketSizeArray() {
         return server.g;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long[] getReceivedPacketCountArray() {
+        return server.h;
     }
 
     @Override
     public long[] getReceivedPacketSizeArray() {
-        return server.h;
+        return server.i;
     }
 
     /**
@@ -440,7 +437,7 @@ public class CanaryServer implements Server {
      */
     @Override
     public long[] getTickTimeArray() {
-        return server.i;
+        return server.j;
     }
 
     /**
@@ -464,9 +461,9 @@ public class CanaryServer implements Server {
      */
     @Override
     public String getCanaryModVersion() {
-        if(canaryVersion == null) {
+        if (canaryVersion == null) {
             Package p = getClass().getPackage();
-            if(p == null) {
+            if (p == null) {
                 return "info missing!";
             }
             canaryVersion = p.getImplementationVersion();
@@ -479,28 +476,7 @@ public class CanaryServer implements Server {
      */
     @Override
     public String getServerVersion() {
-        /* Why would we go through the process of reading the manifest when MinecraftServer.x() returns its version?
-        if(mcVersion == null) {
-            try {
-                CodeSource codeSource = this.getClass().getProtectionDomain().getCodeSource();
-                codeSource.getLocation().toURI().getPath();
-                JarFile jar = new JarFile(codeSource.getLocation().toURI().getPath());
-                mcVersion = jar.getManifest().getMainAttributes().getValue("Server-Version");
-            } catch (IOException e) {
-                Canary.logStackTrace(e.getMessage(), e);
-            } catch (URISyntaxException e) {
-                Canary.logStackTrace(e.getMessage(), e);
-            } catch(NullPointerException e) {
-                Canary.logStackTrace(e.getMessage(), e);
-            }
-            finally {
-                if(mcVersion == null) {
-                    mcVersion = "info missing!";
-                }
-            }
-        }
-        */
-        return server.x();
+        return server.z();
     }
 
     /**
@@ -509,7 +485,8 @@ public class CanaryServer implements Server {
     @Override
     public String getServerGUILog() {
         if (!isHeadless()) {
-            return GuiLogOutputHandler.getLog();
+            // return TextAreaLogHandler.getLog(); ///XXX
+            return null;
         } else {
             return null;
         }
@@ -548,7 +525,7 @@ public class CanaryServer implements Server {
     @Override
     public void sendPlayerListEntry(PlayerListEntry entry) {
         if (Configuration.getServerConfig().isPlayerListEnabled()) {
-            server.ad().a(new net.minecraft.server.Packet201PlayerInfo(entry.getName(), entry.isShown(), entry.getPing()));
+            server.af().a(new net.minecraft.server.Packet201PlayerInfo(entry.getName(), entry.isShown(), entry.getPing()));
         }
     }
 

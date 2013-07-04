@@ -1,10 +1,8 @@
 package net.canarymod.api.entity.living;
 
-
 import net.canarymod.api.world.CanaryVillage;
 import net.canarymod.api.world.Village;
 import net.minecraft.server.EntityIronGolem;
-
 
 /**
  * IronGolem wrapper implementation
@@ -28,7 +26,7 @@ public class CanaryIronGolem extends CanaryEntityLiving implements IronGolem {
      */
     @Override
     public Village getVillage() {
-        return getHandle().m().getCanaryVillage();
+        return getHandle().bP().getCanaryVillage();
     }
 
     /**
@@ -36,7 +34,7 @@ public class CanaryIronGolem extends CanaryEntityLiving implements IronGolem {
      */
     @Override
     public void setVillage(Village village) {
-        getHandle().d = ((CanaryVillage) village).getHandle();
+        getHandle().bp = ((CanaryVillage) village).getHandle();
     }
 
     /**
@@ -44,7 +42,7 @@ public class CanaryIronGolem extends CanaryEntityLiving implements IronGolem {
      */
     @Override
     public boolean isPlayerCreated() {
-        return getHandle().p();
+        return getHandle().bS();
     }
 
     /**

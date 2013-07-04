@@ -1,6 +1,5 @@
 package net.canarymod.api.entity.living.humanoid;
 
-
 import net.canarymod.api.CanaryVillagerTrade;
 import net.canarymod.api.VillagerTrade;
 import net.canarymod.api.entity.CanaryEntity;
@@ -12,7 +11,6 @@ import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityVillager;
 import net.minecraft.server.MerchantRecipe;
 import net.minecraft.server.MerchantRecipeList;
-
 
 /**
  * Villager wrapper implementation
@@ -36,7 +34,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     @Override
     public Profession getProfession() {
-        return Profession.fromId(getHandle().m());
+        return Profession.fromId(getHandle().bP());
     }
 
     /**
@@ -44,7 +42,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     @Override
     public void setProfession(Profession profession) {
-        getHandle().s(profession.ordinal());
+        getHandle().p(profession.ordinal());
     }
 
     /**
@@ -52,7 +50,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     @Override
     public boolean isMating() {
-        return getHandle().n();
+        return getHandle().bQ();
     }
 
     /**
@@ -68,7 +66,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     @Override
     public boolean isPlaying() {
-        return getHandle().o();
+        return getHandle().bR();
     }
 
     /**
@@ -116,7 +114,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     @Override
     public Village getVillage() {
-        return getHandle().d.getCanaryVillage();
+        return getHandle().bp.getCanaryVillage();
     }
 
     /**
@@ -124,7 +122,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     @Override
     public void setVillage(Village village) {
-        getHandle().d = ((CanaryVillage) village).getHandle();
+        getHandle().bp = ((CanaryVillage) village).getHandle();
     }
 
     /**

@@ -1,10 +1,8 @@
 package net.canarymod.api.entity;
 
-
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.EntityItemFrame;
-
 
 /**
  * ItemFrame wrapper implementation
@@ -28,7 +26,7 @@ public class CanaryItemFrame extends CanaryHangingEntity implements ItemFrame {
      */
     @Override
     public Item getItemInFrame() {
-        return ((EntityItemFrame) entity).i().getCanaryItem();
+        return ((EntityItemFrame) entity).h().getCanaryItem();
     }
 
     /**
@@ -44,7 +42,7 @@ public class CanaryItemFrame extends CanaryHangingEntity implements ItemFrame {
      */
     @Override
     public int getItemRotation() {
-        return ((EntityItemFrame) entity).j();
+        return ((EntityItemFrame) entity).i();
     }
 
     /**

@@ -52,6 +52,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     private int h;
     public EntityFishHook bM;
     private String respawnWorld; // CanaryMod: Respawn world (for bed spawns)
+    protected String dispName; // CanaryMod: Mojang screwed us from using the methods in EntityLiving...
 
     public EntityPlayer(World world, String s0) {
         super(world);
@@ -565,6 +566,9 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
             this.a.a(nbttaglist1);
         }
+        if (nbttagcompound.b("CustomName")) {
+            this.dispName = nbttagcompound.i("CustomName");
+        }
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -589,6 +593,9 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.bq.b(nbttagcompound);
         this.bG.a(nbttagcompound);
         nbttagcompound.a("EnderItems", (NBTBase) this.a.h());
+        if (dispName != null) {
+            nbttagcompound.a("CustomName", dispName);
+        }
     }
 
     public void a(IInventory iinventory) {}
@@ -1257,11 +1264,11 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
         Canary.hooks().callHook(hook);
         //
-        this.cf += i0;
-        if (this.cf < 0) {
-            this.cf = 0;
-            this.ch = 0.0F;
-            this.cg = 0;
+        this.bH += i0;
+        if (this.bH < 0) {
+            this.bH = 0;
+            this.bJ = 0.0F;
+            this.bI = 0;
         }
 
         if (i0 > 0 && this.bH % 5 == 0 && (float) this.h < (float) this.ac - 100.0F) {
@@ -1442,42 +1449,42 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     // CanaryMod
     // Start: Custom XP methods
     public void addXP(int amount) {
-        this.w(amount);
+        this.s(amount);
         updateXP();
     }
 
     public void removeXP(int i) {
-        if (i > this.cg) { // Don't go below 0
-            i = this.cg;
+        if (i > this.bI) { // Don't go below 0
+            i = this.bI;
         }
 
-        this.cg -= (float) i / (float) this.cm();
+        this.bI -= (float) i / (float) this.bC();
 
         // Inverse of for loop in this.t(int)
-        for (this.cg -= i; this.ch < 0.0F; this.ch = this.ch / this.cm() + 1.0F) {
-            this.ch *= this.cm();
+        for (this.bI -= i; this.bJ < 0.0F; this.bJ = this.bJ / this.bC() + 1.0F) {
+            this.bJ *= this.bC();
             this.a(-1);
         }
         updateXP();
     }
 
     public void setXP(int i) {
-        if (i < this.cf) {
-            this.removeXP(this.cf - i);
+        if (i < this.bH) {
+            this.removeXP(this.bH - i);
         } else {
-            this.t(i - this.cf);
+            this.t(i - this.bH);
         }
         updateXP();
     }
 
     public void recalculateXP() {
-        this.ch = this.cg / (float) this.cm();
-        this.cf = 0;
+        this.bJ = this.bI / (float) this.bC();
+        this.bH = 0;
 
-        while (this.ch >= 1.0F) {
-            this.ch = (this.ch - 1.0F) * this.cm();
-            this.cf++;
-            this.ch /= this.cm();
+        while (this.bJ >= 1.0F) {
+            this.bJ = (this.bJ - 1.0F) * this.bC();
+            this.bI++;
+            this.bJ /= this.bC();
         }
 
         if (this instanceof EntityPlayerMP) {
@@ -1488,7 +1495,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
     private void updateXP() {
         CanaryPlayer player = ((CanaryPlayer) getCanaryEntity());
-        Packet43Experience packet = new Packet43Experience(this.ch, this.cg, this.cf);
+        Packet43Experience packet = new Packet43Experience(this.bJ, this.bI, this.bH);
 
         player.sendPacket(new CanaryPacket(packet));
     }
@@ -1503,7 +1510,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     // End: Custom XP methods
     // Start: Inventory getters
     public Inventory getPlayerInventory() {
-        return new CanaryPlayerInventory(bK);
+        return new CanaryPlayerInventory(bn);
     }
 
     public Inventory getEnderChestInventory() {
@@ -1514,12 +1521,11 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
     // Start: Custom Display Name
     public String getDisplayName() {
-        return this.bQ() ? this.bP() : this.bS;
+        return this.dispName != null ? dispName : this.c_();
     }
 
     public void setDisplayName(String name) {
-        this.c(name);
-        this.g(true); // auto set show
+        dispName = name;
     }
 
     // End: Custom Display Name

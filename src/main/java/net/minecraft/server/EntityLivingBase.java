@@ -613,7 +613,7 @@ public abstract class EntityLivingBase extends Entity {
                     }
                     if (hook.isCanceled()) {
                         if (this instanceof EntityCreature) {
-                            // ((EntityCreature) this).c = 0; XXX
+                            ((EntityCreature) this).aA = 0;
                         }
                         return false;
                     }

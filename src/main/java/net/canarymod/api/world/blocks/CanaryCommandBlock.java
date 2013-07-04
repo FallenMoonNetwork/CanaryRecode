@@ -1,6 +1,5 @@
 package net.canarymod.api.world.blocks;
 
-
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.config.Configuration;
@@ -8,18 +7,18 @@ import net.canarymod.hook.system.PermissionCheckHook;
 import net.canarymod.user.Group;
 import net.minecraft.server.TileEntityCommandBlock;
 
-
 /**
  * CommandBlock wrapper implementation
- *
+ * 
  * @author Jason (darkdiplomat)
  */
 public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlock {
 
-    Group group; //The group for permission checking
+    Group group; // The group for permission checking
+
     /**
      * Constructs a wrapper for TileEntityCommandBlock
-     *
+     * 
      * @param tileentity
      *            the TileEntityCommandBlock to wrap
      */
@@ -99,7 +98,7 @@ public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlo
      */
     @Override
     public void setPrefix(String prefix) {
-        getTileEntity().c(prefix);
+        getTileEntity().b(prefix);
     }
 
     /**

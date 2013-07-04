@@ -1,6 +1,5 @@
 package net.canarymod.api.potion;
 
-
 /**
  * Potion wrapper implementation
  * 
@@ -49,7 +48,7 @@ public class CanaryPotion implements Potion {
      */
     @Override
     public boolean isBad() {
-        return potion.K;
+        return potion.J;
     }
 
     /**

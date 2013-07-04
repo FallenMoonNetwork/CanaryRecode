@@ -35,4 +35,18 @@ public class TextAreaLogHandler extends Handler {
         this.b[this.c] = i1;
         this.c = (this.c + 1) % 1024;
     }
+
+    public JTextArea getTextArea() {
+        return this.d;
+    }
+
+    public JTextArea getJTextArea() {
+        return this.d;
+    }
+
+    public String getLog() {
+        return this.d.getText();
+    }
+
+    public void poke() {}
 }

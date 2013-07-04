@@ -1,13 +1,11 @@
 package net.canarymod.api.entity.living.humanoid;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
@@ -47,10 +45,9 @@ import net.minecraft.server.Packet201PlayerInfo;
 import net.minecraft.server.WorldSettings;
 import net.visualillusionsent.utils.StringUtils;
 
-
 /**
  * Canary Player wrapper.
- *
+ * 
  * @author Chris (damagefilter)
  * @author Jason (darkdiplomat)
  */
@@ -78,7 +75,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public String getName() {
-        return ((EntityPlayerMP) entity).bS;
+        return ((EntityPlayerMP) entity).c_();
     }
 
     /**
@@ -155,27 +152,27 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void addExhaustion(float exhaustion) {
-        ((EntityPlayerMP) entity).cn().a(exhaustion);
+        ((EntityPlayerMP) entity).bD().a(exhaustion);
     }
 
     @Override
     public void setExhaustion(float exhaustion) {
-        ((EntityPlayerMP) entity).cn().setExhaustionLevel(exhaustion);
+        ((EntityPlayerMP) entity).bD().setExhaustionLevel(exhaustion);
     }
 
     @Override
     public float getExhaustionLevel() {
-        return ((EntityPlayerMP) entity).cn().getExhaustionLevel();
+        return ((EntityPlayerMP) entity).bD().getExhaustionLevel();
     }
 
     @Override
     public void setHunger(int hunger) {
-        ((EntityPlayerMP) entity).cn().setFoodLevel(hunger);
+        ((EntityPlayerMP) entity).bD().setFoodLevel(hunger);
     }
 
     @Override
     public int getHunger() {
-        return ((EntityPlayerMP) entity).cn().a();
+        return ((EntityPlayerMP) entity).bD().a();
     }
 
     @Override
@@ -190,7 +187,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public int getExperience() {
-        return ((EntityPlayerMP) entity).cg;
+        return ((EntityPlayerMP) entity).bI;
     }
 
     @Override
@@ -203,7 +200,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public int getLevel() {
-        return ((EntityPlayerMP) entity).cf;
+        return ((EntityPlayerMP) entity).bH;
     }
 
     @Override
@@ -304,7 +301,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
                 return true;
             } // someone wants us not to execute the command. So lets do them the favor
 
-            if(!Canary.commands().parseCommand(this, commandName, command)) {
+            if (!Canary.commands().parseCommand(this, commandName, command)) {
                 if (Configuration.getServerConfig().getShowUnkownCommand()) {
                     notice("Unknown command");
                 }
@@ -328,17 +325,17 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean isFlying() {
-        return ((EntityPlayerMP) entity).ce.b;
+        return ((EntityPlayerMP) entity).bG.b;
     }
 
     @Override
     public void setFlying(boolean flying) {
-        ((EntityPlayerMP) entity).ce.b = flying;
+        ((EntityPlayerMP) entity).bG.b = flying;
     }
 
     @Override
     public void sendPacket(Packet packet) {
-        getHandle().a.b(((CanaryPacket)packet).getPacket());
+        getHandle().a.b(((CanaryPacket) packet).getPacket());
     }
 
     @Override
@@ -359,7 +356,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public void addGroup(Group group) {
-        if(!groups.contains(group)) {
+        if (!groups.contains(group)) {
             groups.add(group);
             Canary.usersAndGroups().addOrUpdatePlayerData(this);
         }
@@ -368,30 +365,30 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public boolean hasPermission(String permission) {
         PermissionCheckHook hook = new PermissionCheckHook(permission, this, false);
-        //If player has the permission set, use its personal permissions
-        if(permissions.pathExists(permission)) {
+        // If player has the permission set, use its personal permissions
+        if (permissions.pathExists(permission)) {
             hook.setResult(permissions.queryPermission(permission));
             Canary.hooks().callHook(hook);
             return hook.getResult();
         }
-        //Only main group is set
-        else if(groups.size() == 1) {
+        // Only main group is set
+        else if (groups.size() == 1) {
             hook.setResult(groups.get(0).hasPermission(permission));
             Canary.hooks().callHook(hook);
             return hook.getResult();
         }
 
-        //Check sub groups
-        for(int i = 1; i < groups.size(); i++) {
-            //First group that
-            if(groups.get(i).getPermissionProvider().pathExists(permission)) {
+        // Check sub groups
+        for (int i = 1; i < groups.size(); i++) {
+            // First group that
+            if (groups.get(i).getPermissionProvider().pathExists(permission)) {
                 hook.setResult(groups.get(i).hasPermission(permission));
                 Canary.hooks().callHook(hook);
                 return hook.getResult();
             }
         }
 
-        //No subgroup has permission defined, use what base group has to say
+        // No subgroup has permission defined, use what base group has to say
         hook.setResult(groups.get(0).hasPermission(permission));
         Canary.hooks().callHook(hook);
         return hook.getResult();
@@ -399,24 +396,24 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean safeHasPermission(String permission) {
-        //If player has the permission set, use its personal permissions
-        if(permissions.pathExists(permission)) {
+        // If player has the permission set, use its personal permissions
+        if (permissions.pathExists(permission)) {
             return permissions.queryPermission(permission);
         }
-        //Only main group is set
-        else if(groups.size() == 1) {
+        // Only main group is set
+        else if (groups.size() == 1) {
             return groups.get(0).hasPermission(permission);
         }
 
-        //Check sub groups
-        for(int i = 1; i < groups.size(); i++) {
-            //First group that
-            if(groups.get(i).getPermissionProvider().pathExists(permission)) {
+        // Check sub groups
+        for (int i = 1; i < groups.size(); i++) {
+            // First group that
+            if (groups.get(i).getPermissionProvider().pathExists(permission)) {
                 return groups.get(i).hasPermission(permission);
             }
         }
 
-        //No subgroup has permission defined, use what base group has to say
+        // No subgroup has permission defined, use what base group has to say
         return groups.get(0).hasPermission(permission);
     }
 
@@ -488,13 +485,13 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean isInGroup(Group group, boolean parents) {
-        for(Group g : groups) {
-            if(g.getName().equals(group.getName())) {
+        for (Group g : groups) {
+            if (g.getName().equals(group.getName())) {
                 return true;
             }
-            if(parents) {
-                for(Group parent : g.parentsToList()) {
-                    if(parent.getName().equals(group.getName())) {
+            if (parents) {
+                for (Group parent : g.parentsToList()) {
+                    if (parent.getName().equals(group.getName())) {
                         return true;
                     }
                 }
@@ -604,13 +601,13 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean isInGroup(String group, boolean parents) {
-        for(Group g : groups) {
-            if(g.getName().equals(group)) {
+        for (Group g : groups) {
+            if (g.getName().equals(group)) {
                 return true;
             }
-            if(parents) {
-                for(Group parent : g.parentsToList()) {
-                    if(parent.getName().equals(group)) {
+            if (parents) {
+                for (Group parent : g.parentsToList()) {
+                    if (parent.getName().equals(group)) {
                         return true;
                     }
                 }
@@ -666,7 +663,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         Canary.getServer().getConfigurationManager().switchDimension(ent.getPlayer(), dim, false);
         // ((EntityPlayerMP)entity).changeWorld((WorldServer) ((CanaryWorld) dim).getHandle());
         // ((EntityPlayerMP)entity).b.ad().a(((EntityPlayerMP)entity), dim.getName(), dim.getType().getId());
-//        refreshCreativeMode();
+        // refreshCreativeMode();
     }
 
     @Override
@@ -687,12 +684,12 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean isDamageDisabled() {
-        return ((EntityPlayerMP) entity).ce.a;
+        return ((EntityPlayerMP) entity).bG.a;
     }
 
     @Override
     public void setDamageDisabled(boolean disabled) {
-        ((EntityPlayerMP) entity).ce.a = disabled;
+        ((EntityPlayerMP) entity).bG.a = disabled;
     }
 
     @Override
@@ -767,8 +764,8 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
         Group[] subs = Canary.usersAndGroups().getModuleGroupsForPlayer(getName());
         groups = new LinkedList<Group>();
         groups.add(Canary.usersAndGroups().getGroup(data[1]));
-        for(Group g : subs) {
-            if(g != null) {
+        for (Group g : subs) {
+            if (g != null) {
                 groups.add(g);
             }
         }
@@ -787,11 +784,11 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
 
     @Override
     public boolean removeGroup(Group group) {
-        if(groups.get(0).equals(group)) {
+        if (groups.get(0).equals(group)) {
             return false;
         }
         boolean success = groups.remove(group);
-        if(success) {
+        if (success) {
             Canary.usersAndGroups().addOrUpdatePlayerData(this);
         }
         return success;
@@ -800,7 +797,7 @@ public class CanaryPlayer extends CanaryEntityLiving implements Player {
     @Override
     public boolean removeGroup(String group) {
         Group g = Canary.usersAndGroups().getGroup(group);
-        if(g == null) {
+        if (g == null) {
             return false;
         }
         return removeGroup(g);

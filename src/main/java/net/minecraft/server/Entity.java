@@ -1628,5 +1628,12 @@ public abstract class Entity {
         return new Location(oworldserverTo.getCanaryWorld(), x, y, z, rotX, rotY);
     }
 
+    public UUID getEntityUUID() {
+        return this.i;
+    }
+
+    public CompoundTag getMetaData() {
+        return this.metadata;
+    }
     //
 }

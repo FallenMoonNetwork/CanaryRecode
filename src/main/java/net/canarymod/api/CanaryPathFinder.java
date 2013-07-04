@@ -7,7 +7,6 @@ import net.canarymod.api.world.position.Location;
 import net.minecraft.server.PathNavigate;
 
 /**
- *
  * @author Somners
  */
 public class CanaryPathFinder implements PathFinder {
@@ -55,7 +54,7 @@ public class CanaryPathFinder implements PathFinder {
      */
     @Override
     public void setWaterPathing(boolean bool) {
-	nav.a(bool);
+        nav.a(bool);
     }
 
     /**
@@ -103,7 +102,7 @@ public class CanaryPathFinder implements PathFinder {
      */
     @Override
     public void setPathSearchRange(float range) {
-        nav.e = range;
+        // nav.e = range; // Unable to set Range at this time...
     }
 
 }

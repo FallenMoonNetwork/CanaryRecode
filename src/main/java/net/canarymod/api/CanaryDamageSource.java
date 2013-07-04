@@ -1,10 +1,8 @@
 package net.canarymod.api;
 
-
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
-
 
 public class CanaryDamageSource implements DamageSource {
     net.minecraft.server.DamageSource handle;
@@ -20,7 +18,7 @@ public class CanaryDamageSource implements DamageSource {
     @Override
     public Entity getDamageDealer() {
         net.minecraft.server.Entity entity = handle.i();
-    	return (entity == null) ? null : entity.getCanaryEntity();
+        return (entity == null) ? null : entity.getCanaryEntity();
     }
 
     @Override
@@ -30,7 +28,7 @@ public class CanaryDamageSource implements DamageSource {
 
     @Override
     public String getDeathMessage(Player player) {
-        return handle.b(((CanaryPlayer) player).getHandle());
+        return handle.b(((CanaryPlayer) player).getHandle()).toString();
     }
 
     @Override

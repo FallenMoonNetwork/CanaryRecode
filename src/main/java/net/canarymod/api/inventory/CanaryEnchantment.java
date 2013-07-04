@@ -1,14 +1,10 @@
 package net.canarymod.api.inventory;
 
-
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.DamageSource;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.living.EntityLiving;
-import net.canarymod.api.inventory.Enchantment;
-import net.canarymod.api.inventory.Item;
 import net.minecraft.server.EnchantmentData;
-
 
 /**
  * Enchantment wrapper implementation
@@ -85,7 +81,7 @@ public class CanaryEnchantment implements Enchantment {
      * {@inheritDoc}
      */
     @Override
-    public int getDamageModifier(EntityLiving entity) {
+    public float getDamageModifier(EntityLiving entity) {
         return getHandle().a(level, (net.minecraft.server.EntityLiving) ((CanaryEntity) entity).getHandle());
     }
 

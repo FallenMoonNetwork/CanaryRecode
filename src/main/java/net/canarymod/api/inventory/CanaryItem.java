@@ -1,6 +1,5 @@
 package net.canarymod.api.inventory;
 
-
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.nbt.CanaryListTag;
 import net.canarymod.api.nbt.CanaryStringTag;
@@ -9,10 +8,9 @@ import net.canarymod.api.nbt.ListTag;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.NBTTagCompound;
 
-
 /**
  * Item wrapper implementation
- *
+ * 
  * @author Jason (darkdiplomat)
  */
 public class CanaryItem implements Item {
@@ -77,7 +75,7 @@ public class CanaryItem implements Item {
      */
     @Override
     public int getAmount() {
-        return item.a;
+        return item.b;
     }
 
     /**
@@ -93,7 +91,7 @@ public class CanaryItem implements Item {
      */
     @Override
     public void setAmount(int amount) {
-        item.a = amount;
+        item.b = amount;
     }
 
     /**
@@ -140,7 +138,7 @@ public class CanaryItem implements Item {
      */
     @Override
     public boolean hasDisplayName() {
-        return item.t();
+        return item.u();
     }
 
     /**
@@ -172,7 +170,7 @@ public class CanaryItem implements Item {
      */
     @Override
     public int getRepairCost() {
-        return item.B();
+        return item.C();
     }
 
     /**
@@ -356,7 +354,7 @@ public class CanaryItem implements Item {
      */
     @Override
     public void setDataTag(CompoundTag tag) {
-        getHandle().d = tag == null ? null : ((CanaryCompoundTag) tag).getHandle();
+        getHandle().e = tag == null ? null : ((CanaryCompoundTag) tag).getHandle();
     }
 
     /**
@@ -448,7 +446,7 @@ public class CanaryItem implements Item {
 
     /**
      * Returns a String value representing this object
-     *
+     * 
      * @return String representation of this object
      */
     @Override
@@ -458,7 +456,7 @@ public class CanaryItem implements Item {
 
     /**
      * Tests the given object to see if it equals this object
-     *
+     * 
      * @param obj
      *            the object to test
      * @return true if the two objects match
@@ -475,7 +473,7 @@ public class CanaryItem implements Item {
 
     /**
      * Returns a semi-unique hashcode for this object
-     *
+     * 
      * @return hashcode
      */
     @Override

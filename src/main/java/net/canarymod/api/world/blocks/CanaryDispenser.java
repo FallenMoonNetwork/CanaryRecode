@@ -1,6 +1,5 @@
 package net.canarymod.api.world.blocks;
 
-
 import java.util.Arrays;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.inventory.CanaryItem;
@@ -11,7 +10,6 @@ import net.minecraft.server.BlockSourceImpl;
 import net.minecraft.server.IBehaviorDispenseItem;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityDispenser;
-
 
 /**
  * Dispenser wrapper implementation
@@ -63,7 +61,7 @@ public class CanaryDispenser extends CanaryContainerBlock implements Dispenser {
                 ItemStack itemstack1 = ibehaviordispenseitem.a(blocksourceimpl, item);
 
                 if (slot != -1) {
-                    getTileEntity().a(slot, itemstack1.a == 0 ? null : itemstack1);
+                    getTileEntity().a(slot, itemstack1.b == 0 ? null : itemstack1);
                 }
             }
         }

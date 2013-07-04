@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,7 +15,6 @@ import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.world.ExplosionHook;
 import net.canarymod.hook.world.IgnitionHook;
 import net.canarymod.hook.world.IgnitionHook.IgnitionCause;
-
 
 public class Explosion {
 
@@ -155,7 +153,7 @@ public class Explosion {
                     // Check entity if instance of Explosive and can damage entities
                     if (this.f == null || (this.f.getCanaryEntity() instanceof Explosive && ((Explosive) this.f.getCanaryEntity()).canDamageEntities())) {
                         // CanaryMod Damage hook: Explosions
-                        int damage = (int) ((d10 * d10 + d10) / 2.0D * 8.0D * (double) this.g + 1.0D);
+                        float damage = (float) ((int) ((d10 * d10 + d10) / 2.0D * 8.0D * (double) this.g + 1.0D));
                         CanaryDamageSource source = DamageSource.a(this).getCanaryDamageSource();
                         DamageHook dmg = new DamageHook(this.f != null ? this.f.getCanaryEntity() : null, entity.getCanaryEntity(), source, damage);
 
@@ -252,12 +250,12 @@ public class Explosion {
                 int i4 = this.k.a(i0, i1 - 1, i2);
 
                 if (i3 == 0 && Block.t[i4] && this.j.nextInt(3) == 0) {
-                    //CanaryMod ignition from EntityLargeFireball
-                    CanaryBlock block = (CanaryBlock) this.k.getCanaryWorld().getBlockAt(i0, i1-1, i2);
-                    block.setStatus((byte) 7); //7 fireball hit
+                    // CanaryMod ignition from EntityLargeFireball
+                    CanaryBlock block = (CanaryBlock) this.k.getCanaryWorld().getBlockAt(i0, i1 - 1, i2);
+                    block.setStatus((byte) 7); // 7 fireball hit
                     IgnitionHook ignitionHook = new IgnitionHook(block, null, null, IgnitionCause.FIREBALL_HIT);
                     Canary.hooks().callHook(ignitionHook);
-                    if(!ignitionHook.isCanceled()) {
+                    if (!ignitionHook.isCanceled()) {
                         this.k.c(i0, i1, i2, Block.aw.cF);
                     }
                     // CanaryMod end

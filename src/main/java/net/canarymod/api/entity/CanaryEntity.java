@@ -1,6 +1,5 @@
 package net.canarymod.api.entity;
 
-
 import java.util.UUID;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
@@ -14,10 +13,9 @@ import net.canarymod.api.world.position.Position;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.NBTTagCompound;
 
-
 /**
  * Entity Wrapper
- *
+ * 
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryEntity implements Entity {
@@ -272,14 +270,14 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public boolean canSpawn() {
         if (this.isLiving()) {
-            return ((net.minecraft.server.EntityLiving) entity).bv();
+            return ((net.minecraft.server.EntityLiving) entity).bo();
         }
         return true;
     }
 
     @Override
     public boolean isRiding() {
-        return entity.af();
+        return entity.ae();
     }
 
     @Override
@@ -350,12 +348,12 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public void setNBT(BaseTag tag) {
-        this.getHandle().f((NBTTagCompound) ((CanaryCompoundTag)tag).getHandle());
+        this.getHandle().f((NBTTagCompound) ((CanaryCompoundTag) tag).getHandle());
     }
 
     @Override
     public boolean isInvisible() {
-        return entity.ai();
+        return entity.af();
     }
 
     @Override
@@ -370,7 +368,7 @@ public abstract class CanaryEntity implements Entity {
 
     /**
      * Gets the Minecraft entity being wrapped
-     *
+     * 
      * @return entity
      */
     public abstract net.minecraft.server.Entity getHandle();

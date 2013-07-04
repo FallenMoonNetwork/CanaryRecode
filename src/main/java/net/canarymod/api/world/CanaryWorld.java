@@ -1,6 +1,5 @@
 package net.canarymod.api.world;
 
-
 import java.util.ArrayList;
 import net.canarymod.WorldCacheTimer;
 import net.canarymod.api.CanaryEntityTracker;
@@ -57,7 +56,6 @@ import net.minecraft.server.WorldInfo;
 import net.minecraft.server.WorldServer;
 import net.visualillusionsent.utils.TaskManager;
 
-
 public class CanaryWorld implements World {
     private WorldServer world;
     private DimensionType type;
@@ -77,13 +75,12 @@ public class CanaryWorld implements World {
         world = dimension;
         fqName = name + "_" + this.type.getName();
 
-
         playerManager = dimension.s().getPlayerManager();
         entityTracker = dimension.getEntityTracker();
         // Init nanotick size
         nanoTicks = new long[100];
         chunkProvider = new CanaryChunkProviderServer(dimension.b);
-        if(Configuration.getServerConfig().isWorldCacheTimerEnabled()) {
+        if (Configuration.getServerConfig().isWorldCacheTimerEnabled()) {
             TaskManager.scheduleContinuedTaskInMinutes(new WorldCacheTimer(this), Configuration.getServerConfig().getWorldCacheTimeout(), Configuration.getServerConfig().getWorldCacheTimeout());
         }
 
@@ -228,8 +225,8 @@ public class CanaryWorld implements World {
     @Override
     public ArrayList<EntityLiving> getEntityLivingList() {
         ArrayList<EntityLiving> list = new ArrayList<EntityLiving>();
-        for(Entity e : getEntityTracker().getTrackedEntities()) {
-            if(e instanceof EntityLiving && !list.contains(e)) {
+        for (Entity e : getEntityTracker().getTrackedEntities()) {
+            if (e instanceof EntityLiving && !list.contains(e)) {
                 list.add((EntityLiving) e);
             }
         }
@@ -354,7 +351,7 @@ public class CanaryWorld implements World {
 
     @Override
     public int getHighestBlockAt(int x, int z) {
-        for (int i = 0 ; i < this.getHeight() ; i++) {
+        for (int i = 0; i < this.getHeight(); i++) {
             if (world.l(x, i, z)) {
                 return i;
             }
@@ -450,8 +447,7 @@ public class CanaryWorld implements World {
 
     @Override
     public void spawnParticle(Particle particle) {
-        MinecraftServer.D().s.sendPacketToDimension(new Packet63WorldParticles(particle), this.name, this.type.getId());
-
+        MinecraftServer.F().t.sendPacketToDimension(new Packet63WorldParticles(particle), this.name, this.type.getId());
     }
 
     @Override
@@ -578,7 +574,7 @@ public class CanaryWorld implements World {
 
     @Override
     public long getWorldSeed() {
-        return world.G();
+        return world.H();
     }
 
     @Override
@@ -694,8 +690,8 @@ public class CanaryWorld implements World {
     @Override
     public BiomeType getBiomeType(int x, int z) {
         CanaryChunk c = (CanaryChunk) getChunk(x, z);
-        if(c == null) {
-            return BiomeType.fromId((byte)0);
+        if (c == null) {
+            return BiomeType.fromId((byte) 0);
         }
         return BiomeType.fromId(c.getBiomeByteData()[z << 4 | x]);
     }
@@ -703,14 +699,13 @@ public class CanaryWorld implements World {
     @Override
     public void setBiome(int x, int z, BiomeType biome) {
         CanaryChunk c = (CanaryChunk) getChunk(x, z);
-        if(c == null) {
+        if (c == null) {
             return;
         }
         byte[] bytes = c.getBiomeByteData();
         bytes[((z & 0xF) << 4) | (x & 0xF)] = biome.getId();
         c.setBiomeData(bytes);
     }
-
 
     @Override
     public GameMode getGameMode() {

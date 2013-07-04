@@ -1,13 +1,11 @@
 package net.canarymod.api.world.blocks;
 
-
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.nbt.CompoundTag;
 import net.canarymod.api.world.World;
 import net.minecraft.server.IInventory;
 import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.TileEntity;
-
 
 /**
  * ComplexBlock implementation
@@ -42,7 +40,7 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
      * @return the TileEntity
      */
     public abstract TileEntity getTileEntity();
-    
+
     /**
      * {@inheritDoc}
      */
@@ -80,7 +78,7 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
      */
     @Override
     public World getWorld() {
-        return tileentity.az().getCanaryWorld();
+        return tileentity.ay().getCanaryWorld();
     }
 
     /**
@@ -88,7 +86,7 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
      */
     @Override
     public void update() {
-        tileentity.az().j(getX(), getY(), getZ());
+        tileentity.ay().j(getX(), getY(), getZ());
     }
 
     /**
@@ -148,7 +146,7 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
 
     /**
      * Returns a semi-unique hashcode for this block
-     *
+     * 
      * @return hashcode
      */
     @Override
@@ -163,7 +161,7 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
 
     /**
      * Tests the given object to see if it equals this object
-     *
+     * 
      * @param obj
      *            the object to test
      * @return true if the two objects match

@@ -1,8 +1,6 @@
 package net.canarymod.api.entity.vehicle;
 
-
 import net.minecraft.server.EntityBoat;
-
 
 /**
  * Boat wrapper implementation
@@ -34,7 +32,7 @@ public class CanaryBoat extends CanaryVehicle implements Boat {
      */
     @Override
     public void setForwardDirection(int direction) {
-        getHandle().h(direction);
+        getHandle().g(direction);
     }
 
     /**

@@ -1,6 +1,5 @@
 package net.canarymod.api.world.blocks;
 
-
 import java.util.Arrays;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
@@ -12,9 +11,7 @@ import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntity;
 import net.minecraft.server.TileEntityHopper;
 
-
 /**
- *
  * @author Somners
  */
 public class CanaryHopperBlock extends CanaryContainerBlock implements HopperBlock {
@@ -41,7 +38,9 @@ public class CanaryHopperBlock extends CanaryContainerBlock implements HopperBlo
 
     /**
      * Gets the Inventory from the inventory instance.
-     * @param oiinventory OIInventory instance to get Inventory wrapper for.
+     * 
+     * @param oiinventory
+     *            OIInventory instance to get Inventory wrapper for.
      * @return The inventory or null if none.
      */
     private Inventory getBaseContainerBlock(IInventory iinventory) {
@@ -83,7 +82,7 @@ public class CanaryHopperBlock extends CanaryContainerBlock implements HopperBlo
      */
     @Override
     public World getWorld() {
-        return this.getTileEntity().az().getCanaryWorld();
+        return this.getTileEntity().ay().getCanaryWorld();
     }
 
     /**

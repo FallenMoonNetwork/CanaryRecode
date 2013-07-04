@@ -1,6 +1,5 @@
 package net.canarymod.api.entity.living;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -34,15 +33,14 @@ import net.minecraft.server.ItemStack;
 import net.minecraft.server.Packet12PlayerLook;
 import net.minecraft.server.Packet32EntityLook;
 
-
 /**
  * Living Entity wrapper implementation
- *
+ * 
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryEntityLiving extends CanaryEntity implements EntityLiving {
 
-    public CanaryEntityLiving(net.minecraft.server.EntityLiving entity) {
+    public CanaryEntityLiving(net.minecraft.server.EntityLivingBase entity) {
         super(entity);
     }
 
@@ -52,7 +50,7 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public void dealDamage(DamageType damagetype, int amount) {
+    public void dealDamage(DamageType damagetype, float amount) {
         DamageSource theSource = CanaryDamageSource.getDamageSourceFromType(damagetype);
 
         if (theSource != null) {
@@ -61,28 +59,29 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
     }
 
     @Override
-    public int getHealth() {
-        return ((net.minecraft.server.EntityLiving) entity).aX();
+    public float getHealth() {
+        return ((net.minecraft.server.EntityLiving) entity).aJ();
     }
 
     @Override
-    public int getMaxHealth() {
+    public float getMaxHealth() {
         return ((net.minecraft.server.EntityLiving) entity).aW();
     }
 
     @Override
-    public void setHealth(int newHealth) {
-        ((net.minecraft.server.EntityLiving) entity).b(newHealth);
+    public void setHealth(float newHealth) {
+        ((net.minecraft.server.EntityLiving) entity).g(newHealth);
     }
 
     @Override
-    public void increaseHealth(int increase) {
-        ((net.minecraft.server.EntityLiving) entity).j(increase);
+    public void increaseHealth(float increase) {
+        ((net.minecraft.server.EntityLiving) entity).f(increase);
     }
 
     @Override
-    public void setMaxHealth(int maxHealth) {
-        ((net.minecraft.server.EntityLiving) entity).setMaxHealth(maxHealth);
+    public void setMaxHealth(float maxHealth) {
+        // ((net.minecraft.server.EntityLiving) entity).setMaxHealth(maxHealth);
+        // Can't do it right now...
     }
 
     @Override
@@ -470,12 +469,12 @@ public abstract class CanaryEntityLiving extends CanaryEntity implements EntityL
      * {@inheritDoc}
      */
     @Override
-    public void attackEntity(Entity entity, int damage){
+    public void attackEntity(Entity entity, float damage) {
         if (!(entity instanceof net.canarymod.api.entity.living.EntityLiving)) {
             return;
         }
-        ((net.minecraft.server.EntityLiving)this.getHandle()).bK();// swings the arm
-        ((net.canarymod.api.entity.living.CanaryEntityLiving)entity).getHandle().a(net.minecraft.server.DamageSource.j, damage);
+        ((net.minecraft.server.EntityLiving) this.getHandle()).bK();// swings the arm
+        ((net.canarymod.api.entity.living.CanaryEntityLiving) entity).getHandle().a(net.minecraft.server.DamageSource.j, damage);
     }
 
     /**

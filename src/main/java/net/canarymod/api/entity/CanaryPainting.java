@@ -1,8 +1,6 @@
 package net.canarymod.api.entity;
 
-
 import net.minecraft.server.EntityPainting;
-
 
 /**
  * Painting wrapper implementation
@@ -50,7 +48,7 @@ public class CanaryPainting extends CanaryHangingEntity implements Painting {
      */
     @Override
     public int getSizeY() {
-        return ((EntityPainting) entity).g();
+        return ((EntityPainting) entity).e();
     }
 
     /**

@@ -1,6 +1,5 @@
 package net.canarymod;
 
-
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.util.logging.Level;
@@ -8,10 +7,8 @@ import net.canarymod.api.inventory.Enchantment;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.serialize.EnchantmentSerializer;
 import net.canarymod.serialize.ItemSerializer;
-import net.minecraft.server.GuiLogOutputHandler;
 import net.minecraft.server.LogAgent;
 import net.minecraft.server.MinecraftServer;
-
 
 public class Main {
     private static LogAgent la;
@@ -28,7 +25,7 @@ public class Main {
 
     /**
      * The canary Bootstrap process
-     *
+     * 
      * @param args
      */
     public static void main(String[] args) {
@@ -47,7 +44,7 @@ public class Main {
             la = new LogAgent("Minecraft-Server", (String) null, (new File(new File("."), "server.log")).getAbsolutePath());
             la.a().setLevel(Level.ALL);
             if (!MinecraftServer.isHeadless()) {
-                GuiLogOutputHandler.getOutputHandler().poke();
+                // GuiLogOutputHandler.getOutputHandler().poke(); //XXX Its no longer done the way it was before...
             }
             initBird();
 
@@ -70,7 +67,7 @@ public class Main {
 
     /**
      * Restart the server without killing the JVM
-     *
+     * 
      * @param reloadCanary
      */
     public static void restart(boolean reloadCanary) {

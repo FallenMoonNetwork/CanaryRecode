@@ -223,7 +223,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
             if (this.aJ() != this.bP || this.bQ != this.bq.a() || this.bq.e() == 0.0F != this.bR) {
                 // CanaryMod: convert health for values above 20
-                int health = (int) (this.aX() / (this.aW() / 20)); // MERGE: this.aJ() ?
+                int health = (int) (this.aJ() / (this.aW() / 20));
 
                 health = (this.aX() > 0 && health == 0) ? 1 : health;
                 this.a.b(new Packet8UpdateHealth(health, this.bq.a(), this.bq.e()));
@@ -245,8 +245,8 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                 }
                 // CanaryMod: ExperienceHook / ExperienceEnabled
                 if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).isExperienceEnabled()) {
-                    this.cg = 0;
-                    this.cf = 0;
+                    this.bI = 0;
+                    this.bH = 0;
                 } else if (getPlayer() != null) { // NPC?
                     ExperienceHook hook = new ExperienceHook(getPlayer(), this.bS, this.bI);
 
@@ -268,11 +268,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public void a(DamageSource damagesource) {
         // CanaryMod: PlayerDeathHook
-        PlayerDeathHook hook = new PlayerDeathHook(getPlayer(), damagesource.getCanaryDamageSource(), this.bt.b());
+        PlayerDeathHook hook = new PlayerDeathHook(getPlayer(), damagesource.getCanaryDamageSource(), this.aN().b().toString());
         Canary.hooks().callHook(hook);
         // Check Death Message enabled
         if (Configuration.getServerConfig().isDeathMessageEnabled()) {
-            this.b.ad().k(hook.getDeathMessage());
+            this.b.af().a(ChatMessageComponent.e(hook.getDeathMessage()));
         }
         if (!this.q.O().b("keepInventory")) {
             this.bn.m();
@@ -875,11 +875,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     }
 
     public boolean getColorEnabled() {
-        return this.ct;
+        return this.bW;
     }
 
     public int getViewDistance() {
-        return this.cr;
+        return this.bU;
     }
 
     //
@@ -909,7 +909,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         }
 
         // CanaryMod: Dimension switch hook.
-        Location goingTo = this.simulatePortalUse(srv.q, MinecraftServer.D().getWorld(this.getCanaryWorld().getName(), srv.q));
+        Location goingTo = this.simulatePortalUse(srv.q, MinecraftServer.F().getWorld(this.getCanaryWorld().getName(), srv.q));
         CancelableHook hook = new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
 
         Canary.hooks().callHook(hook);
@@ -917,9 +917,9 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             return;
         }//
 
-        this.b.ad().a(this, srv.getCanaryWorld().getName(), srv.getCanaryWorld().getType().getId());
-        this.cp = -1;
-        this.cm = -1;
-        this.cn = -1;
+        this.b.af().a(this, srv.getCanaryWorld().getName(), srv.getCanaryWorld().getType().getId());
+        this.bO = -1;
+        this.bP = -1;
+        this.bS = -1;
     }
 }
