@@ -1,16 +1,13 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryFurnace;
 import net.canarymod.hook.world.SmeltHook;
 
-
 public class TileEntityFurnace extends TileEntity implements ISidedInventory {
 
-    private static final int[] d = new int[] { 0};
-    private static final int[] e = new int[] { 2, 1};
-    private static final int[] f = new int[] { 1};
+    private static final int[] d = new int[]{ 0 };
+    private static final int[] e = new int[]{ 2, 1 };
+    private static final int[] f = new int[]{ 1 };
     public ItemStack[] g = new ItemStack[3]; // CanaryMod: private => public
     public int a = 0;
     public int b = 0;
@@ -193,9 +190,7 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
         if (this.u()) {
             ItemStack itemstack = FurnaceRecipes.a().b(this.g[0].b().cv);
             // CanaryMod: Smelt
-            SmeltHook hook = new SmeltHook(getCanaryFurnace(), itemstack.getCanaryItem());
-
-            Canary.hooks().callHook(hook);
+            SmeltHook hook = (SmeltHook) new SmeltHook(getCanaryFurnace(), itemstack.getCanaryItem()).call();
             if (hook.isCanceled()) {
                 return;
             }
@@ -237,7 +232,8 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
                 }
             }
 
-            return item instanceof ItemTool && ((ItemTool) item).g().equals("WOOD") ? 200 : (item instanceof ItemSword && ((ItemSword) item).i().equals("WOOD") ? 200 : (item instanceof ItemHoe && ((ItemHoe) item).g().equals("WOOD") ? 200 : (i0 == Item.F.cv ? 100 : (i0 == Item.o.cv ? 1600 : (i0 == Item.aA.cv ? 20000 : (i0 == Block.D.cF ? 100 : (i0 == Item.bq.cv ? 2400 : 0)))))));
+            return item instanceof ItemTool && ((ItemTool) item).g().equals("WOOD") ? 200 : (item instanceof ItemSword && ((ItemSword) item).i().equals("WOOD") ? 200 : (item instanceof ItemHoe && ((ItemHoe) item).g().equals("WOOD") ? 200 : (i0 == Item.F.cv ? 100 : (i0 == Item.o.cv ? 1600 : (i0 == Item.aA.cv ? 20000 : (i0 == Block.D.cF ? 100
+                    : (i0 == Item.bq.cv ? 2400 : 0)))))));
         }
     }
 

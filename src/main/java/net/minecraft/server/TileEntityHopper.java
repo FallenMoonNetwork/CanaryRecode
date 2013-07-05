@@ -1,11 +1,8 @@
 package net.minecraft.server;
 
-
 import java.util.List;
-import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryHopperBlock;
 import net.canarymod.hook.world.HopperTransferHook;
-
 
 public class TileEntityHopper extends TileEntity implements Hopper {
 
@@ -177,9 +174,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
                 if (this.a(i0) != null) {
                     ItemStack itemstack = this.a(i0).m();
                     // CanaryMod: Hopper Transfer hook
-                    HopperTransferHook hook = new HopperTransferHook(getCanaryHopper(), new net.canarymod.api.inventory.CanaryItem(itemstack), false);
-
-                    Canary.hooks().callHook(hook);
+                    HopperTransferHook hook = (HopperTransferHook) new HopperTransferHook(getCanaryHopper(), new net.canarymod.api.inventory.CanaryItem(itemstack), false).call();
                     if (hook.isCanceled()) {
                         return false;
                     }// CanaryMod: End
@@ -247,9 +242,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
             } else if (hopper instanceof EntityMinecartHopper) {
                 hookHopper = (net.canarymod.api.inventory.Hopper) ((EntityMinecartHopper) hopper).entity;
             }
-            HopperTransferHook hook = new HopperTransferHook(hookHopper, new net.canarymod.api.inventory.CanaryItem(itemstack), true);
-
-            Canary.hooks().callHook(hook);
+            HopperTransferHook hook = (HopperTransferHook) new HopperTransferHook(hookHopper, new net.canarymod.api.inventory.CanaryItem(itemstack), true).call();
             if (hook.isCanceled()) {
                 return false;
             }// CanaryMod: End

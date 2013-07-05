@@ -94,11 +94,9 @@ public abstract class ServerConfigurationManager {
         this.a((ServerScoreboard) worldserver.X(), entityplayermp);
         this.b(entityplayermp, worldserver);
         // CanaryMod Connection hook
-        ConnectionHook hook = new ConnectionHook(entityplayermp.getPlayer(), EnumChatFormatting.o + entityplayermp.aw() + EnumChatFormatting.o + " joined the game.", firstTime);
-
-        Canary.hooks().callHook(hook);
+        ConnectionHook hook = (ConnectionHook) new ConnectionHook(entityplayermp.getPlayer(), ChatMessageComponent.b("multiplayer.player.joined", new Object[]{ entityplayermp.aw() }).a(EnumChatFormatting.o).toString(), firstTime).call();
         if (!hook.isHidden()) {
-            this.a((Packet) (new Packet3Chat(hook.getMessage())));
+            this.a((Packet) (new Packet3Chat(ChatMessageComponent.e(hook.getMessage()))));
         }
         // CanaryMod end
         this.c(entityplayermp);
@@ -226,7 +224,7 @@ public abstract class ServerConfigurationManager {
                 // Clone the entry so that each receiver will start with the given data
                 PlayerListEntry clone = plentry.clone();
                 // Call PlayerListEntryHook
-                Canary.hooks().callHook(new PlayerListEntryHook(clone, entityplayermp1.getPlayer()));
+                new PlayerListEntryHook(clone, entityplayermp1.getPlayer()).call();
                 // Send Packet
                 entityplayermp1.a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), 1000)); // Ping ignored
             }
@@ -247,7 +245,7 @@ public abstract class ServerConfigurationManager {
                 // Get the PlayerListEntry
                 PlayerListEntry plentry = entityplayermp1.getPlayer().getPlayerListEntry(true);
                 // Call PlayerListEntryHook
-                Canary.hooks().callHook(new PlayerListEntryHook(plentry, entityplayermp.getPlayer()));
+                new PlayerListEntryHook(plentry, entityplayermp.getPlayer()).call();
                 // Send Packet
                 entityplayermp.a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), plentry.getPing()));
             }
@@ -281,7 +279,7 @@ public abstract class ServerConfigurationManager {
                 // Clone the entry so that each receiver will start with the given data
                 PlayerListEntry clone = plentry.clone();
                 // Call PlayerListEntryHook
-                Canary.hooks().callHook(new PlayerListEntryHook(clone, entityplayermp1.getPlayer()));
+                new PlayerListEntryHook(clone, entityplayermp1.getPlayer()).call();
                 // Send Packet
                 entityplayermp1.a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), plentry.getPing()));
             }
@@ -297,9 +295,7 @@ public abstract class ServerConfigurationManager {
         s2 = s2.substring(s2.indexOf("/") + 1);
         s2 = s2.substring(0, s2.indexOf(":"));
 
-        PreConnectionHook hook = new PreConnectionHook(s2, s0, net.canarymod.api.world.DimensionType.fromId(0), Canary.getServer().getDefaultWorldName());
-
-        Canary.hooks().callHook(hook);
+        PreConnectionHook hook = (PreConnectionHook) new PreConnectionHook(s2, s0, net.canarymod.api.world.DimensionType.fromId(0), Canary.getServer().getDefaultWorldName()).call();
 
         if (hook.getKickReason() != null) {
             return hook.getKickReason();
@@ -424,8 +420,7 @@ public abstract class ServerConfigurationManager {
         String name = entityplayermp.getCanaryWorld().getName();
         net.canarymod.api.world.DimensionType type = net.canarymod.api.world.DimensionType.fromId(i0);
         // CanaryMod: PlayerRespawn
-        PlayerRespawnHook hook = new PlayerRespawnHook(entityplayermp.getPlayer(), loc, isBedSpawn);
-        Canary.hooks().callHook(hook);
+        PlayerRespawnHook hook = (PlayerRespawnHook) new PlayerRespawnHook(entityplayermp.getPlayer(), loc, isBedSpawn).call();
         loc = hook.getRespawnLocation();
         WorldServer worldserver = (WorldServer) (loc == null ? (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(name, type, true)).getHandle() : ((CanaryWorld) loc.getWorld()).getHandle());
 
@@ -608,7 +603,7 @@ public abstract class ServerConfigurationManager {
                 // Clone the entry so that each receiver will start with the given data
                 PlayerListEntry clone = plentry.clone();
                 // Call PlayerListEntryHook
-                Canary.hooks().callHook(new PlayerListEntryHook(clone, entityplayermp1.getPlayer()));
+                new PlayerListEntryHook(clone, entityplayermp1.getPlayer()).call();
                 // Send Packet
                 entityplayermp1.a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), plentry.getPing()));
             }
@@ -941,9 +936,7 @@ public abstract class ServerConfigurationManager {
 
     public void r() {
         // CanaryMod shutdown hook
-        ServerShutdownHook hook = new ServerShutdownHook("Server closed");
-
-        Canary.hooks().callHook(hook);
+        ServerShutdownHook hook = (ServerShutdownHook) new ServerShutdownHook("Server closed").call();
         //
         while (!this.a.isEmpty()) {
             ((EntityPlayerMP) this.a.get(0)).a.c(hook.getReason());

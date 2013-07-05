@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import net.canarymod.Canary;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.player.EatHook;
 
@@ -84,9 +83,7 @@ public class ItemPotion extends Item {
         }
 
         // Call Hook
-        EatHook hook = new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), 0, 0, effects);
-
-        Canary.hooks().callHook(hook);
+        EatHook hook = (EatHook) new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), 0, 0, effects).call();
         if (hook.isCanceled()) {
             return itemstack;
         }

@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import net.canarymod.Canary;
 import net.canarymod.hook.player.EatHook;
 
 public class ItemBucketMilk extends Item {
@@ -13,9 +12,7 @@ public class ItemBucketMilk extends Item {
 
     public ItemStack b(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         // CanaryMod: Eat
-        EatHook hook = new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), 0, 0, null);
-
-        Canary.hooks().callHook(hook);
+        EatHook hook = (EatHook) new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), 0, 0, null).call();
         if (hook.isCanceled()) {
             return itemstack;
         }

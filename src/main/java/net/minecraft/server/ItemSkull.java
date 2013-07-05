@@ -1,11 +1,8 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.BlockPlaceHook;
-
 
 public class ItemSkull extends Item {
 
@@ -57,9 +54,7 @@ public class ItemSkull extends Item {
             } else {
                 // Create and call
                 CanaryBlock placed = new CanaryBlock((short) 144, (short) itemstack.getCanaryItem().getDamage(), i0, i1, i2, world.getCanaryWorld());
-                BlockPlaceHook hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
-
-                Canary.hooks().callHook(hook);
+                BlockPlaceHook hook = (BlockPlaceHook) new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed).call();
                 if (hook.isCanceled()) {
                     return false;
                 }

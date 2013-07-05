@@ -1,11 +1,8 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.BlockPlaceHook;
-
 
 public class ItemSlab extends ItemBlock {
 
@@ -52,8 +49,7 @@ public class ItemSlab extends ItemBlock {
                 clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
                 CanaryBlock placed = new CanaryBlock((short) i4, (short) i6, i0, i1, i2, world.getCanaryWorld());
 
-                hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
-                Canary.hooks().callHook(hook);
+                hook = (BlockPlaceHook) new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed).call();
                 if (hook.isCanceled()) {
                     return true;
                 }
@@ -112,8 +108,7 @@ public class ItemSlab extends ItemBlock {
             // Call hook
             CanaryBlock placed = new CanaryBlock((short) i4, (short) i6, i0, i1, i2, world.getCanaryWorld());
 
-            hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
-            Canary.hooks().callHook(hook);
+            hook = (BlockPlaceHook) new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed).call();
             if (hook.isCanceled()) {
                 return false;
             }

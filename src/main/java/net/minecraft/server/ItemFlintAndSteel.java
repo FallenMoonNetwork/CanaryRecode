@@ -55,8 +55,7 @@ public class ItemFlintAndSteel extends Item {
 
             // CanaryMod: ItemUse/Ignition
             // Create & Call ItemUseHook
-            ItemUseHook iuh = new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked);
-            Canary.hooks().callHook(iuh);
+            ItemUseHook iuh = (ItemUseHook) new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked).call();
             // Create & Call IgnitionHook
             CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
             IgnitionHook ih = new IgnitionHook(ignited, ((EntityPlayerMP) entityplayer).getPlayer(), clicked, IgnitionCause.FLINT_AND_STEEL);

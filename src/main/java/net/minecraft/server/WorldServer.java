@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,15 +8,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
-
-import net.canarymod.Canary;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.world.TimeChangeHook;
 import net.canarymod.hook.world.WeatherChangeHook;
-
 
 public class WorldServer extends World {
 
@@ -34,7 +30,8 @@ public class WorldServer extends World {
     private final SpawnerAnimals Q = new SpawnerAnimals();
     private ServerBlockEventList[] R = new ServerBlockEventList[]{ new ServerBlockEventList((ServerBlockEvent) null), new ServerBlockEventList((ServerBlockEvent) null) };
     private int S;
-    private static final WeightedRandomChestContent[] T = new WeightedRandomChestContent[]{ new WeightedRandomChestContent(Item.F.cv, 0, 1, 3, 10), new WeightedRandomChestContent(Block.C.cF, 0, 1, 3, 10), new WeightedRandomChestContent(Block.O.cF, 0, 1, 3, 10), new WeightedRandomChestContent(Item.A.cv, 0, 1, 1, 3), new WeightedRandomChestContent(Item.w.cv, 0, 1, 1, 5), new WeightedRandomChestContent(Item.z.cv, 0, 1, 1, 3), new WeightedRandomChestContent(Item.v.cv, 0, 1, 1, 5), new WeightedRandomChestContent(Item.l.cv, 0, 2, 3, 5), new WeightedRandomChestContent(Item.W.cv, 0, 2, 3, 3) };
+    private static final WeightedRandomChestContent[] T = new WeightedRandomChestContent[]{ new WeightedRandomChestContent(Item.F.cv, 0, 1, 3, 10), new WeightedRandomChestContent(Block.C.cF, 0, 1, 3, 10), new WeightedRandomChestContent(Block.O.cF, 0, 1, 3, 10), new WeightedRandomChestContent(Item.A.cv, 0, 1, 1, 3),
+            new WeightedRandomChestContent(Item.w.cv, 0, 1, 1, 5), new WeightedRandomChestContent(Item.z.cv, 0, 1, 1, 3), new WeightedRandomChestContent(Item.v.cv, 0, 1, 1, 5), new WeightedRandomChestContent(Item.l.cv, 0, 2, 3, 5), new WeightedRandomChestContent(Item.W.cv, 0, 2, 3, 3) };
     private List U = new ArrayList();
     private IntHashMap V;
 
@@ -43,7 +40,7 @@ public class WorldServer extends World {
         super(isavehandler, s0, worldsettings, WorldProvider.a(i0), profiler, ilogagent, net.canarymod.api.world.DimensionType.fromId(i0));
         this.a = minecraftserver;
         this.J = new EntityTracker(this);
-        //CanaryMod: Use our view-distance handling
+        // CanaryMod: Use our view-distance handling
         this.K = new PlayerManager(this, Configuration.getServerConfig().getViewDistance());
         if (this.V == null) {
             this.V = new IntHashMap();
@@ -84,9 +81,7 @@ public class WorldServer extends World {
                 long i0 = this.x.g() + 24000L;
 
                 // CanaryMod: TimeChangeHook
-                TimeChangeHook hook = new TimeChangeHook(getCanaryWorld(), i0 - i0 % 24000L);
-
-                Canary.hooks().callHook(hook);
+                TimeChangeHook hook = (TimeChangeHook) new TimeChangeHook(getCanaryWorld(), i0 - i0 % 24000L).call();
                 if (!hook.isCanceled()) {
                     this.x.c(i0 - i0 % 24000L);
                 }
@@ -108,16 +103,14 @@ public class WorldServer extends World {
             this.j = i1;
         }
 
-		if (this.O().b("doDaylightCycle")) {
-		    // CanaryMod: TimeChangeHook
-		    TimeChangeHook hook = new TimeChangeHook(getCanaryWorld(), this.x.g() + 1L);
-
-		    Canary.hooks().callHook(hook);
-		    if (!hook.isCanceled()) {
-		        this.x.c(this.x.g() + 1L);
-		    }
-		    //
-		}
+        if (this.O().b("doDaylightCycle")) {
+            // CanaryMod: TimeChangeHook
+            TimeChangeHook hook = (TimeChangeHook) new TimeChangeHook(getCanaryWorld(), this.x.g() + 1L).call();
+            if (!hook.isCanceled()) {
+                this.x.c(this.x.g() + 1L);
+            }
+            //
+        }
         this.C.c("tickPending");
         this.a(false);
         this.C.c("tickTiles");
@@ -170,14 +163,12 @@ public class WorldServer extends World {
 
     private void Z() {
         // CanaryMod: WeatherChange
-        WeatherChangeHook hook = new WeatherChangeHook(getCanaryWorld(), false, false);
-        Canary.hooks().callHook(hook);
+        WeatherChangeHook hook = (WeatherChangeHook) new WeatherChangeHook(getCanaryWorld(), false, false).call();
         if (!hook.isCanceled()) {
             this.x.g(0);
             this.x.b(false);
         }
-        hook = new WeatherChangeHook(getCanaryWorld(), false, true);
-        Canary.hooks().callHook(hook);
+        hook = (WeatherChangeHook) new WeatherChangeHook(getCanaryWorld(), false, true).call();
         if (!hook.isCanceled()) {
             this.x.f(0);
             this.x.a(false);
@@ -484,11 +475,11 @@ public class WorldServer extends World {
     }
 
     public void a(Entity entity, boolean flag0) {
-        //CanaryMod moved sapwn-animals to per-world config
+        // CanaryMod moved sapwn-animals to per-world config
         if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).canSpawnAnimals() && (entity instanceof EntityAnimal || entity instanceof EntityWaterMob)) {
             entity.w();
         }
-        //CanaryMod moved spawn-npcs to per-world config
+        // CanaryMod moved spawn-npcs to per-world config
         if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).canSpawnNpcs() && entity instanceof INpc) {
             entity.w();
         }
@@ -717,7 +708,8 @@ public class WorldServer extends World {
             }
 
             blockeventdata1 = (BlockEventData) iterator.next();
-        } while (!blockeventdata1.equals(blockeventdata));
+        }
+        while (!blockeventdata1.equals(blockeventdata));
 
     }
 
@@ -785,7 +777,7 @@ public class WorldServer extends World {
 
     /**
      * Get the canary player manager wrapper for this dimension
-     *
+     * 
      * @return
      */
     public CanaryPlayerManager getPlayerManager() {

@@ -96,9 +96,7 @@ public class NetServerHandler extends NetHandler {
 
     public void c(String s0) {
         // CanaryMod disconnect hook
-        DisconnectionHook hook = new DisconnectionHook(serverHandler.getUser(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.aw() }).a(EnumChatFormatting.o).toString());
-
-        Canary.hooks().callHook(hook);
+        DisconnectionHook hook = (DisconnectionHook) new DisconnectionHook(serverHandler.getUser(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.aw() }).a(EnumChatFormatting.o).toString()).call();
         if (!this.b) {
             this.c.l();
             this.b(new Packet255KickDisconnect(s0));
@@ -138,9 +136,7 @@ public class NetServerHandler extends NetHandler {
             // CanaryMod: PlayerMoveHook
             if (Math.floor(n) != Math.floor(c.getPlayer().getX()) || Math.floor(o) != Math.floor(c.getPlayer().getY()) || Math.floor(p) != Math.floor(c.getPlayer().getZ())) {
                 Location from = new Location(c.getPlayer().getWorld(), n, o, p, c.getPlayer().getPitch(), c.getPlayer().getRotation());// Remember rotation and pitch are swapped in Location constructor...
-                PlayerMoveHook hook = new PlayerMoveHook(c.getPlayer(), from, c.getPlayer().getLocation());
-
-                Canary.hooks().callHook(hook);
+                PlayerMoveHook hook = (PlayerMoveHook) new PlayerMoveHook(c.getPlayer(), from, c.getPlayer().getLocation()).call();
                 if (hook.isCanceled()) {
                     // Return the player to their previous position gracefully, hopefully bypassing the TeleportHook and not going derp.
                     this.c.a.b(new Packet13PlayerLookMove(from.getX(), from.getY() + 1.6200000047683716D, from.getY(), from.getZ(), from.getRotation(), from.getPitch(), false));
@@ -337,9 +333,7 @@ public class NetServerHandler extends NetHandler {
         // CanaryMod: TeleportHook
         net.canarymod.api.world.World dim = Canary.getServer().getWorldManager().getWorld(world, net.canarymod.api.world.DimensionType.fromId(dimension), true);
         Location location = new Location(dim, d0, d1, d2, f1, f0); // Remember rotation and pitch are swapped in Location constructor...
-        TeleportHook hook = new TeleportHook(c.getPlayer(), location, cause);
-
-        Canary.hooks().callHook(hook);
+        TeleportHook hook = (TeleportHook) new TeleportHook(c.getPlayer(), location, cause).call();
         if (hook.isCanceled()) {
             return;
         }
@@ -404,7 +398,7 @@ public class NetServerHandler extends NetHandler {
             if (packet14blockdig.e == 0) {
                 if ((!this.d.a(worldserver, i0, i1, i2, this.c) || c.getPlayer().hasPermission("canary.world.spawnbuild")) && c.getPlayer().canBuild()) {
                     block.setStatus((byte) 0); // Set Status
-                    Canary.hooks().callHook(hook); // Call Hook
+                    hook.call(); // Call Hook
                     if (!hook.isCanceled()) {
                         this.c.c.a(i0, i1, i2, packet14blockdig.d);
                     } else {
@@ -413,14 +407,14 @@ public class NetServerHandler extends NetHandler {
                 }
             } else if (packet14blockdig.e == 2) {
                 block.setStatus((byte) 2); // Set Status
-                Canary.hooks().callHook(hook); // Call Hook
+                hook.call(); // Call Hook
                 this.c.c.a(i0, i1, i2);
                 if (worldserver.a(i0, i1, i2) != 0) {
                     this.c.a.b(new Packet53BlockChange(i0, i1, i2, worldserver));
                 }
             } else if (packet14blockdig.e == 1) {
                 block.setStatus((byte) 1); // Set Status
-                Canary.hooks().callHook(hook); // And, Call Hook
+                hook.call(); // And, Call Hook
                 this.c.c.c(i0, i1, i2);
                 if (worldserver.a(i0, i1, i2) != 0) {
                     this.c.a.b(new Packet53BlockChange(i0, i1, i2, worldserver));
@@ -462,9 +456,7 @@ public class NetServerHandler extends NetHandler {
         } else {
             if (this.q && this.c.e((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D) < 64.0D && (!this.d.a(worldserver, i0, i1, i2, this.c) || c.getPlayer().hasPermission("canary.world.spawnbuild")) && c.getPlayer().canBuild()) {
                 // CanaryMod: BlockRightClicked
-                BlockRightClickHook hook = new BlockRightClickHook(c.getPlayer(), blockClicked);
-
-                Canary.hooks().callHook(hook);
+                BlockRightClickHook hook = (BlockRightClickHook) new BlockRightClickHook(c.getPlayer(), blockClicked).call();
                 if (!hook.isCanceled()) {
                     this.c.c.a(this.c, worldserver, itemstack, i0, i1, i2, i3, packet15place.j(), packet15place.k(), packet15place.l());
                 }
@@ -526,11 +518,9 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void a(String s0, Object[] aobject) {
         // CanaryMod: DisconnectionHook
-        DisconnectionHook hook = new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.aw() }).a(EnumChatFormatting.o).toString());
-
-        Canary.hooks().callHook(hook);
+        DisconnectionHook hook = (DisconnectionHook) new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.aw() }).a(EnumChatFormatting.o).toString()).call();
         this.d.an().a(this.c.c_() + " lost connection: " + s0);
-        this.d.af().a((Packet) (new Packet3Chat(hook.getLeaveMessage())));
+        this.d.af().a((Packet) (new Packet3Chat(ChatMessageComponent.e(hook.getLeaveMessage()))));
         this.d.af().e(this.c);
         this.b = true;
         if (this.d.K() && this.c.c_().equals(this.d.J())) {
@@ -631,8 +621,7 @@ public class NetServerHandler extends NetHandler {
     public void a(Packet18Animation packet18animation) {
         if (packet18animation.b == 1) {
             // CanaryMod: PlayerLeftClick
-            Canary.hooks().callHook(new PlayerLeftClickHook(this.c.getPlayer()));
-            //
+            new PlayerLeftClickHook(this.c.getPlayer()).call();
             this.c.aR();
         }
     }
@@ -738,8 +727,7 @@ public class NetServerHandler extends NetHandler {
             SecondarySlotType finer_slot = SlotHelper.getSpecificSlotType(this.c.bp, packet102windowclick.b);
             GrabMode grab_mode = GrabMode.fromInt(packet102windowclick.f);
             ButtonPress mouse_click = ButtonPress.matchButton(grab_mode, packet102windowclick.c, packet102windowclick.b);
-            SlotClickHook sch = new SlotClickHook(this.c.getPlayer(), this.c.bp.getInventory(), itemstack != null ? itemstack.getCanaryItem() : null, slot_type, finer_slot, grab_mode, mouse_click, (short) packet102windowclick.b, packet102windowclick.d);
-            Canary.hooks().callHook(sch);
+            SlotClickHook sch = (SlotClickHook) new SlotClickHook(this.c.getPlayer(), this.c.bp.getInventory(), itemstack != null ? itemstack.getCanaryItem() : null, slot_type, finer_slot, grab_mode, mouse_click, (short) packet102windowclick.b, packet102windowclick.d).call();
             if (sch.isCanceled()) {
                 if (sch.doUpdate()) {
                     if (packet102windowclick.f == 0) {
@@ -873,15 +861,10 @@ public class NetServerHandler extends NetHandler {
 
                 // CanaryMod: Copy the old line text
                 String[] old = Arrays.copyOf(tileentitysign1.a, tileentitysign1.a.length);
-
                 //
-
                 System.arraycopy(packet130updatesign.d, 0, tileentitysign1.a, 0, 4);
-
                 // CanaryMod: SignChange Hook
-                SignChangeHook hook = new SignChangeHook(c.getPlayer(), tileentitysign1.getCanarySign());
-
-                Canary.hooks().callHook(hook);
+                SignChangeHook hook = (SignChangeHook) new SignChangeHook(c.getPlayer(), tileentitysign1.getCanarySign()).call();
                 if (hook.isCanceled()) {
                     System.arraycopy(old, 0, tileentitysign1.a, 0, 4); // Restore old text
                 }

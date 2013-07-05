@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import javax.crypto.SecretKey;
-import net.canarymod.Canary;
 import net.canarymod.hook.system.ServerListPingHook;
 
 public class NetLoginHandler extends NetHandler {
@@ -138,8 +137,7 @@ public class NetLoginHandler extends NetHandler {
                 s0 = this.e.ac() + "\u00a7" + serverconfigurationmanager.k() + "\u00a7" + serverconfigurationmanager.l();
             } else {
                 // CanaryMod: ServerListPingHook
-                ServerListPingHook hook = new ServerListPingHook(this.e.ac(), Integer.valueOf(serverconfigurationmanager.k()), Integer.valueOf(serverconfigurationmanager.l()));
-                Canary.hooks().callHook(hook);
+                ServerListPingHook hook = (ServerListPingHook) new ServerListPingHook(this.e.ac(), Integer.valueOf(serverconfigurationmanager.k()), Integer.valueOf(serverconfigurationmanager.l())).call();
                 if (hook.isCanceled()) {
                     return;
                 }

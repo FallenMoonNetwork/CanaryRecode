@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import net.canarymod.Canary;
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.player.EatHook;
 
@@ -45,9 +44,7 @@ public class ItemFood extends Item {
         } else if (!world.I && this.cv > 0 && world.s.nextFloat() < this.cF) {
             effects = new net.canarymod.api.potion.PotionEffect[]{ new CanaryPotionEffect(new PotionEffect(this.cC, this.cD * 20, this.cE)) };
         }
-        EatHook hook = new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), this.g(), this.i(), effects);
-
-        Canary.hooks().callHook(hook);
+        EatHook hook = (EatHook) new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), this.g(), this.i(), effects).call();
         if (!hook.isCanceled()) {
             --itemstack.b;
             entityplayer.bD().a(hook.getLevelGain(), hook.getSaturationGain());

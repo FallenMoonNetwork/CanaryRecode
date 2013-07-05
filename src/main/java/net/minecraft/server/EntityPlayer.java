@@ -471,9 +471,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             }
 
             // CanaryMod: ItemDrop
-            ItemDropHook hook = new ItemDropHook(((EntityPlayerMP) this).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity());
-
-            Canary.hooks().callHook(hook);
+            ItemDropHook hook = (ItemDropHook) new ItemDropHook(((EntityPlayerMP) this).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity()).call();
             if (!hook.isCanceled()) {
                 CanaryItem droppedItem = entityitem.d().getCanaryItem();
 
@@ -770,9 +768,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             return true;
         } else {
             // CanaryMod: EntityRightClickHook
-            EntityRightClickHook hook = new EntityRightClickHook(entity.getCanaryEntity(), ((EntityPlayerMP) this).getPlayer());
-
-            Canary.hooks().callHook(hook);
+            EntityRightClickHook hook = (EntityRightClickHook) new EntityRightClickHook(entity.getCanaryEntity(), ((EntityPlayerMP) this).getPlayer()).call();
             if (hook.isCanceled()) {
                 return false;
             }
@@ -1260,9 +1256,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
     public void a(int i0) {
         // CanaryMod: LevelUpHook
-        LevelUpHook hook = new LevelUpHook(((EntityPlayerMP) this).getPlayer());
-
-        Canary.hooks().callHook(hook);
+        new LevelUpHook(((EntityPlayerMP) this).getPlayer()).call();
         //
         this.bH += i0;
         if (this.bH < 0) {

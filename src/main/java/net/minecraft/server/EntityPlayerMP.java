@@ -211,9 +211,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                     super.b(this.aW());
                     this.M = false;
                 } else {
-                    HealthChangeHook hook = new HealthChangeHook(getPlayer(), bP, this.aJ());
-
-                    Canary.hooks().callHook(hook);
+                    HealthChangeHook hook = (HealthChangeHook) new HealthChangeHook(getPlayer(), bP, this.aJ()).call();
                     if (hook.isCanceled()) {
                         super.b(this.bP);
                     }
@@ -268,8 +266,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     public void a(DamageSource damagesource) {
         // CanaryMod: PlayerDeathHook
-        PlayerDeathHook hook = new PlayerDeathHook(getPlayer(), damagesource.getCanaryDamageSource(), this.aN().b().toString());
-        Canary.hooks().callHook(hook);
+        PlayerDeathHook hook = (PlayerDeathHook) new PlayerDeathHook(getPlayer(), damagesource.getCanaryDamageSource(), this.aN().b().toString()).call();
         // Check Death Message enabled
         if (Configuration.getServerConfig().isDeathMessageEnabled()) {
             this.b.af().a(ChatMessageComponent.e(hook.getDeathMessage()));
@@ -359,13 +356,10 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             // CanaryMod onPortalUse && onDimensionSwitch
             Location goingTo = simulatePortalUse(i0, MinecraftServer.F().getWorld(getCanaryWorld().getName(), i0));
 
-            PortalUseHook hook = new PortalUseHook(getPlayer(), goingTo);
-            CancelableHook hook1 = new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
+            PortalUseHook puh = (PortalUseHook) new PortalUseHook(getPlayer(), goingTo).call();
+            DimensionSwitchHook dsh = (DimensionSwitchHook) new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo).call();
 
-            Canary.hooks().callHook(hook);
-            Canary.hooks().callHook(hook1);
-
-            if (hook.isCanceled() || hook1.isCanceled()) {
+            if (puh.isCanceled() || dsh.isCanceled()) {
                 return;
             } //
             else {
@@ -381,8 +375,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (tileentity != null) {
             // CanaryMod: SignShowHook
             if (tileentity instanceof TileEntitySign) {
-                SignShowHook hook = new SignShowHook(this.getPlayer(), ((TileEntitySign) tileentity).getCanarySign());
-                Canary.hooks().callHook(hook);
+                new SignShowHook(this.getPlayer(), ((TileEntitySign) tileentity).getCanarySign()).call();
             }
             //
             Packet packet = tileentity.m();
@@ -699,9 +692,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (statbase != null) {
             if (!statbase.f) {
                 // CanaryMod: StatGained
-                StatGainedHook hook = new StatGainedHook(getPlayer(), new CanaryStat(statbase));
-
-                Canary.hooks().callHook(hook);
+                StatGainedHook hook = (StatGainedHook) new StatGainedHook(getPlayer(), new CanaryStat(statbase)).call();
                 if (hook.isCanceled()) {
                     return;
                 }
@@ -910,9 +901,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
         // CanaryMod: Dimension switch hook.
         Location goingTo = this.simulatePortalUse(srv.q, MinecraftServer.F().getWorld(this.getCanaryWorld().getName(), srv.q));
-        CancelableHook hook = new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
-
-        Canary.hooks().callHook(hook);
+        CancelableHook hook = (CancelableHook) new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo).call();
         if (hook.isCanceled()) {
             return;
         }//

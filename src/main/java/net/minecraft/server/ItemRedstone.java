@@ -1,12 +1,9 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.BlockType;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.BlockPlaceHook;
-
 
 public class ItemRedstone extends Item {
 
@@ -57,9 +54,7 @@ public class ItemRedstone extends Item {
             // set placed
             CanaryBlock placed = new CanaryBlock((short) BlockType.RedstoneBlock.getId(), (short) 0, i0, i1, i2, world.getCanaryWorld());
             // Create and Call
-            BlockPlaceHook hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
-
-            Canary.hooks().callHook(hook);
+            BlockPlaceHook hook = (BlockPlaceHook) new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed).call();
             if (hook.isCanceled()) {
                 return false;
             }

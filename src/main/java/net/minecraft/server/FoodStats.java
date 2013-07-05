@@ -1,13 +1,10 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.hook.entity.DamageHook;
 import net.canarymod.hook.player.FoodExhaustionHook;
 import net.canarymod.hook.player.FoodLevelHook;
 import net.canarymod.hook.player.FoodSaturationHook;
-
 
 public class FoodStats {
 
@@ -25,16 +22,12 @@ public class FoodStats {
 
     public void a(int i0, float f0) {
         // CanaryMod: FoodLevelHook
-        FoodLevelHook lvl = new FoodLevelHook(((EntityPlayerMP) entityplayer).getPlayer(), this.a, Math.min(i0 + this.a, 20));
-
-        Canary.hooks().callHook(lvl);
+        FoodLevelHook lvl = (FoodLevelHook) new FoodLevelHook(((EntityPlayerMP) entityplayer).getPlayer(), this.a, Math.min(i0 + this.a, 20)).call();
         this.a = Math.min(Math.max(lvl.getNewValue(), 0), 20);
         //
 
         // CanaryMod: FoodSaturationHook
-        FoodSaturationHook sat = new FoodSaturationHook(((EntityPlayerMP) entityplayer).getPlayer(), this.b, Math.min(this.b + (float) i0 * f0 * 2.0F, (float) this.a));
-
-        Canary.hooks().callHook(sat);
+        FoodSaturationHook sat = (FoodSaturationHook) new FoodSaturationHook(((EntityPlayerMP) entityplayer).getPlayer(), this.b, Math.min(this.b + (float) i0 * f0 * 2.0F, (float) this.a)).call();
         this.b = Math.min(Math.max(sat.getNewValue(), 0.0F), (float) this.a);
         //
     }
@@ -49,23 +42,17 @@ public class FoodStats {
         this.e = this.a;
         if (this.c > 4.0F) {
             // CanaryMod: FoodExhaustionHook
-            FoodExhaustionHook exh = new FoodExhaustionHook(((EntityPlayerMP) entityplayer).getPlayer(), this.c, this.c - 4.0F);
-
-            Canary.hooks().callHook(exh);
+            FoodExhaustionHook exh = (FoodExhaustionHook) new FoodExhaustionHook(((EntityPlayerMP) entityplayer).getPlayer(), this.c, this.c - 4.0F).call();
             this.c = exh.getNewValue();
             //
             if (this.b > 0.0F) {
                 // CanaryMod: FoodSaturationHook
-                FoodSaturationHook sat = new FoodSaturationHook(((EntityPlayerMP) entityplayer).getPlayer(), this.b, Math.max(this.b - 1.0F, 0.0F));
-
-                Canary.hooks().callHook(sat);
+                FoodSaturationHook sat = (FoodSaturationHook) new FoodSaturationHook(((EntityPlayerMP) entityplayer).getPlayer(), this.b, Math.max(this.b - 1.0F, 0.0F)).call();
                 this.b = Math.max(Math.min(sat.getNewValue(), (float) this.a), 0.0F);
                 //
             } else if (i0 > 0) {
                 // CanaryMod: FoodLevelHook
-                FoodLevelHook lvl = new FoodLevelHook(((EntityPlayerMP) entityplayer).getPlayer(), this.a, Math.max(this.a - 1, 0));
-
-                Canary.hooks().callHook(lvl);
+                FoodLevelHook lvl = (FoodLevelHook) new FoodLevelHook(((EntityPlayerMP) entityplayer).getPlayer(), this.a, Math.max(this.a - 1, 0)).call();
                 this.a = Math.max(Math.min(lvl.getNewValue(), 20), 0);
                 //
             }
@@ -83,9 +70,7 @@ public class FoodStats {
             if (this.d >= 80) {
                 if (entityplayer.aJ() > 10.0F || i0 >= 3 || entityplayer.aJ() > 1.0F && i0 >= 2) {
                     // CanaryMod: DamageHook (starve)
-                    DamageHook dmg = new DamageHook(null, entityplayer.getCanaryEntity(), new CanaryDamageSource(DamageSource.f), 1);
-
-                    Canary.hooks().callHook(dmg);
+                    DamageHook dmg = (DamageHook) new DamageHook(null, entityplayer.getCanaryEntity(), new CanaryDamageSource(DamageSource.f), 1).call();
                     if (!dmg.isCanceled()) {
                         entityplayer.a((((CanaryDamageSource) dmg.getDamageSource()).getHandle()), dmg.getDamageDealt());
                     }
@@ -125,9 +110,7 @@ public class FoodStats {
 
     public void a(float f0) {
         // CanaryMod: FoodExhaustionHook
-        FoodExhaustionHook exh = new FoodExhaustionHook(((EntityPlayerMP) entityplayer).getPlayer(), this.c, Math.min(this.c + f0, 40.0F));
-
-        Canary.hooks().callHook(exh);
+        FoodExhaustionHook exh = (FoodExhaustionHook) new FoodExhaustionHook(((EntityPlayerMP) entityplayer).getPlayer(), this.c, Math.min(this.c + f0, 40.0F)).call();
         this.c = exh.getNewValue();
         //
     }

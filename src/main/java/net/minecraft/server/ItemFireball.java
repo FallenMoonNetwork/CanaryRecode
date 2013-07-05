@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.ItemUseHook;
@@ -55,13 +54,10 @@ public class ItemFireball extends Item {
 
                 // CanaryMod: ItemUse/Ignition
                 // Create & Call ItemUseHook
-                ItemUseHook iuh = new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked);
-                Canary.hooks().callHook(iuh);
-
+                ItemUseHook iuh = (ItemUseHook) new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked).call();
                 // Create & Call IgnitionHook
                 CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
-                IgnitionHook ih = new IgnitionHook(ignited, ((EntityPlayerMP) entityplayer).getPlayer(), clicked, IgnitionCause.FIREBALL_CLICK);
-                Canary.hooks().callHook(ih);
+                IgnitionHook ih = (IgnitionHook) new IgnitionHook(ignited, ((EntityPlayerMP) entityplayer).getPlayer(), clicked, IgnitionCause.FIREBALL_CLICK).call();
 
                 // If either hook is canceled, return
                 if (iuh.isCanceled() || ih.isCanceled()) {

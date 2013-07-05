@@ -1,12 +1,9 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.BlockDestroyHook;
 import net.canarymod.hook.player.ItemUseHook;
-
 
 public class ItemInWorldManager {
 
@@ -228,9 +225,7 @@ public class ItemInWorldManager {
 
     // CanaryMod: ItemUseHook
     public boolean itemUsed(CanaryPlayer player, World world, ItemStack itemstack, CanaryBlock clicked) {
-        ItemUseHook hook = new ItemUseHook(player, itemstack.getCanaryItem(), clicked);
-
-        Canary.hooks().callHook(hook);
+        ItemUseHook hook = (ItemUseHook) new ItemUseHook(player, itemstack.getCanaryItem(), clicked).call();
         if (hook.isCanceled()) {
             return false;
         }

@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import net.canarymod.Canary;
 import net.canarymod.config.Configuration;
 
@@ -18,12 +17,14 @@ final class MinecraftServerGuiINNER1 extends WindowAdapter {
         this.a.p();
 
         while (!this.a.ae()) {
-        	try {
+            try {
                 Thread.sleep(100L);
             } catch (InterruptedException interruptedexception) {
+                // CanaryMod: Don't show stack unless needed
                 if (Configuration.getServerConfig().isDebugMode()) {
                     Canary.logStacktrace("", interruptedexception);
                 }
+                //
             }
         }
 

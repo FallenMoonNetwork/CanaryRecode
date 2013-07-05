@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.Explosive;
 import net.canarymod.api.world.blocks.CanaryBlock;
@@ -109,9 +108,7 @@ public class Explosion {
                 blkAff.add(this.k.getCanaryWorld().getBlockAt(ocp.a, ocp.b, ocp.c));
             }
             // Explosion call
-            ExplosionHook exp = new ExplosionHook(gzero, this.f != null ? this.f.getCanaryEntity() : null, blkAff);
-
-            Canary.hooks().callHook(exp);
+            ExplosionHook exp = (ExplosionHook) new ExplosionHook(gzero, this.f != null ? this.f.getCanaryEntity() : null, blkAff).call();
             // if cancelled, don't populate this.h at all.
             if (!exp.isCanceled()) {
                 // Repopulate hashset according to blocksAffected.
@@ -155,9 +152,7 @@ public class Explosion {
                         // CanaryMod Damage hook: Explosions
                         float damage = (float) ((int) ((d10 * d10 + d10) / 2.0D * 8.0D * (double) this.g + 1.0D));
                         CanaryDamageSource source = DamageSource.a(this).getCanaryDamageSource();
-                        DamageHook dmg = new DamageHook(this.f != null ? this.f.getCanaryEntity() : null, entity.getCanaryEntity(), source, damage);
-
-                        Canary.hooks().callHook(dmg);
+                        DamageHook dmg = (DamageHook) new DamageHook(this.f != null ? this.f.getCanaryEntity() : null, entity.getCanaryEntity(), source, damage).call();
                         if (!dmg.isCanceled()) {
                             entity.a((((CanaryDamageSource) dmg.getDamageSource()).getHandle()), damage);
                         }
@@ -253,8 +248,7 @@ public class Explosion {
                     // CanaryMod ignition from EntityLargeFireball
                     CanaryBlock block = (CanaryBlock) this.k.getCanaryWorld().getBlockAt(i0, i1 - 1, i2);
                     block.setStatus((byte) 7); // 7 fireball hit
-                    IgnitionHook ignitionHook = new IgnitionHook(block, null, null, IgnitionCause.FIREBALL_HIT);
-                    Canary.hooks().callHook(ignitionHook);
+                    IgnitionHook ignitionHook = (IgnitionHook) new IgnitionHook(block, null, null, IgnitionCause.FIREBALL_HIT).call();
                     if (!ignitionHook.isCanceled()) {
                         this.k.c(i0, i1, i2, Block.aw.cF);
                     }

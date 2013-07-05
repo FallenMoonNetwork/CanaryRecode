@@ -1,10 +1,8 @@
 package net.minecraft.server;
 
-
 import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryCommandBlock;
 import net.canarymod.hook.command.CommandBlockCommandHook;
-
 
 public class TileEntityCommandBlock extends TileEntity implements ICommandSender {
 
@@ -30,9 +28,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
             if (minecraftserver != null && minecraftserver.ab()) {
                 // CanaryMod: CommandBlockCommand
                 // ICommandManager icommandmanager = minecraftserver.G();
-                CommandBlockCommandHook hook = new CommandBlockCommandHook(getCanaryCommandBlock(), this.b.split(" "));
-
-                Canary.hooks().callHook(hook);
+                new CommandBlockCommandHook(getCanaryCommandBlock(), this.b.split(" ")).call();
                 if (Canary.getServer().consoleCommand(this.b, this.getCanaryCommandBlock())) { // Redirect for Canary Console Commands too
                     return 1;
                 }

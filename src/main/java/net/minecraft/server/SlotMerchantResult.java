@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import net.canarymod.Canary;
 import net.canarymod.api.CanaryVillagerTrade;
 import net.canarymod.api.entity.living.humanoid.Villager;
 import net.canarymod.hook.player.VillagerTradeHook;
@@ -48,9 +47,7 @@ public class SlotMerchantResult extends Slot {
     public void a(EntityPlayer entityplayer, ItemStack itemstack, boolean heldShift) {
         MerchantRecipe merchantrecipe = this.a.i();
         // CanaryMod: VillagerTradeHook
-        VillagerTradeHook hook = new VillagerTradeHook(((EntityPlayerMP) entityplayer).getPlayer(), (Villager) ((EntityVillager) this.d).getCanaryEntity(), new CanaryVillagerTrade(merchantrecipe));
-
-        Canary.hooks().callHook(hook);
+        VillagerTradeHook hook = (VillagerTradeHook) new VillagerTradeHook(((EntityPlayerMP) entityplayer).getPlayer(), (Villager) ((EntityVillager) this.d).getCanaryEntity(), new CanaryVillagerTrade(merchantrecipe)).call();
         if (hook.isCanceled()) {
             if (heldShift) {
                 ((EntityPlayerMP) entityplayer).getPlayer().getInventory().decreaseItemStackSize(merchantrecipe.d().getCanaryItem());

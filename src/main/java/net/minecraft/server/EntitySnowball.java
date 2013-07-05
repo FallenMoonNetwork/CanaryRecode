@@ -1,10 +1,7 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.entity.throwable.CanarySnowball;
 import net.canarymod.hook.entity.ProjectileHitHook;
-
 
 public class EntitySnowball extends EntityThrowable {
 
@@ -25,9 +22,7 @@ public class EntitySnowball extends EntityThrowable {
 
     protected void a(MovingObjectPosition movingobjectposition) {
         // CanaryMod: ProjectileHit
-        ProjectileHitHook hook = new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity());
-
-        Canary.hooks().callHook(hook);
+        ProjectileHitHook hook = (ProjectileHitHook) new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
         if (!hook.isCanceled()) { //
             if (movingobjectposition.g != null) {
                 byte b0 = 0;
@@ -36,7 +31,7 @@ public class EntitySnowball extends EntityThrowable {
                     b0 = 3;
                 }
 
-                movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), (float)b0);
+                movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), (float) b0);
             }
 
             for (int i0 = 0; i0 < 8; ++i0) {

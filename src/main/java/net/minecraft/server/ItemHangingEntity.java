@@ -1,11 +1,8 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockFace;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.ItemUseHook;
-
 
 public class ItemHangingEntity extends Item {
 
@@ -27,9 +24,7 @@ public class ItemHangingEntity extends Item {
             CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
             clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
-            ItemUseHook hook = new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked);
-
-            Canary.hooks().callHook(hook);
+            ItemUseHook hook = (ItemUseHook) new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked).call();
             if (hook.isCanceled()) {
                 return false;
             }

@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.player.BlockPlaceHook;
 
@@ -35,9 +34,7 @@ public class ItemDoor extends Item {
                     // CanaryMod: BlockPlaceHook
                     CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
                     CanaryBlock placed = new CanaryBlock((short) block.cF, (short) 0, i0, i1 + 1, i2, world.getCanaryWorld());
-                    BlockPlaceHook hook = new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed);
-
-                    Canary.hooks().callHook(hook);
+                    BlockPlaceHook hook = (BlockPlaceHook) new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed).call();
                     if (hook.isCanceled()) {
                         return false;
                     }

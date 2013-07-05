@@ -185,9 +185,7 @@ public class InventoryPlayer implements IInventory {
             i = InventoryPlayer.i();
             if (i >= 0) {
                 // CanaryMod: ItemPickUp
-                ItemPickupHook hook = new ItemPickupHook(((EntityPlayerMP) this.d).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity());
-
-                Canary.hooks().callHook(hook);
+                ItemPickupHook hook = (ItemPickupHook) new ItemPickupHook(((EntityPlayerMP) this.d).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity()).call();
                 return !hook.isCanceled();
                 //
             } else if (this.d.bG.d) {
