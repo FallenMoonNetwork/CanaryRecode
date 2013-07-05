@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
 
-import net.canarymod.api.entity.CanaryItemFrame;
+import net.canarymod.api.entity.hanging.CanaryItemFrame;
 
 
 public class EntityItemFrame extends EntityHanging {

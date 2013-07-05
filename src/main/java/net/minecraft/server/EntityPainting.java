@@ -2,7 +2,7 @@ package net.minecraft.server;
 
 
 import java.util.ArrayList;
-import net.canarymod.api.entity.CanaryPainting;
+import net.canarymod.api.entity.hanging.CanaryPainting;
 
 
 public class EntityPainting extends EntityHanging {

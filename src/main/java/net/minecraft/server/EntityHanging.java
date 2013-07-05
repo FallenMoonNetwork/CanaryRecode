@@ -3,7 +3,7 @@ package net.minecraft.server;
 import java.util.Iterator;
 import java.util.List;
 import net.canarymod.Canary;
-import net.canarymod.api.entity.HangingEntity;
+import net.canarymod.api.entity.hanging.HangingEntity;
 import net.canarymod.hook.entity.HangingEntityDestroyHook;
 
 public abstract class EntityHanging extends Entity {

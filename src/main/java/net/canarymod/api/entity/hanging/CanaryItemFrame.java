@@ -1,5 +1,6 @@
-package net.canarymod.api.entity;
+package net.canarymod.api.entity.hanging;
 
+import net.canarymod.api.entity.hanging.ItemFrame;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.EntityItemFrame;

@@ -1,6 +1,11 @@
 package net.canarymod.api.entity;
 
 import java.util.UUID;
+import net.canarymod.api.entity.living.Golem;
+import net.canarymod.api.entity.living.LivingBase;
+import net.canarymod.api.entity.living.animal.EntityAnimal;
+import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.entity.living.monster.EntityMob;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.nbt.BaseTag;
@@ -11,6 +16,7 @@ import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.canarymod.api.world.position.Vector3D;
+import net.minecraft.server.EntityList;
 import net.minecraft.server.NBTTagCompound;
 
 /**
@@ -182,13 +188,33 @@ public abstract class CanaryEntity implements Entity {
     }
 
     @Override
-    public boolean isLiving() {
-        return entity instanceof net.minecraft.server.EntityLiving;
+    public boolean isItem() {
+        return this instanceof EntityItem;
     }
 
     @Override
-    public boolean isItem() {
-        return entity instanceof net.minecraft.server.EntityItem;
+    public boolean isLiving() {
+        return this instanceof LivingBase;
+    }
+
+    @Override
+    public boolean isAnimal() {
+        return this instanceof EntityAnimal;
+    }
+
+    @Override
+    public boolean isMob() {
+        return this instanceof EntityMob;
+    }
+
+    @Override
+    public boolean isPlayer() {
+        return this instanceof Player;
+    }
+
+    @Override
+    public boolean isGolem() {
+        return this instanceof Golem;
     }
 
     @Override
@@ -232,7 +258,12 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public String getName() {
-        return getClass().getSimpleName();
+        return entity.al();
+    }
+
+    @Override
+    public String getFqName() {
+        return EntityList.b(entity);
     }
 
     @Override
@@ -270,11 +301,6 @@ public abstract class CanaryEntity implements Entity {
         setX(getX() + factor.getX());
         setY(getY() + factor.getY());
         setZ(getZ() + factor.getZ());
-    }
-
-    @Override
-    public void moveEntity(double motionX, double motionY, double motionZ) {
-        entity.d(motionX, motionY, motionZ);
     }
 
     @Override
@@ -364,6 +390,11 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public CompoundTag getMetaData() {
         return entity.getMetaData();
+    }
+
+    @Override
+    public void moveEntity(double motionX, double motionY, double motionZ) {
+        entity.d(motionX, motionY, motionZ);
     }
 
     /**

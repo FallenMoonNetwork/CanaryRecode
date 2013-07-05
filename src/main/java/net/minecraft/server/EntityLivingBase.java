@@ -142,9 +142,7 @@ public abstract class EntityLivingBase extends Entity {
         this.q.C.a("livingEntityBaseTick");
         if (this.R() && this.S()) {
             // CanaryMod: call DamageHook (Suffocation)
-            DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.d), 1);
-
-            Canary.hooks().callHook(hook);
+            DamageHook hook = (DamageHook) new DamageHook(null, entity, new CanaryDamageSource(DamageSource.d), 1).call();
             if (!hook.isCanceled()) {
                 this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
             }
@@ -164,9 +162,7 @@ public abstract class EntityLivingBase extends Entity {
                     this.g(0);
 
                     // CanaryMod - drowning damage.
-                    DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.e), 2);
-
-                    Canary.hooks().callHook(hook);
+                    DamageHook hook = (DamageHook) new DamageHook(null, entity, new CanaryDamageSource(DamageSource.e), 2).call();
                     if (!hook.isCanceled()) {
                         for (int i0 = 0; i0 < 8; ++i0) {
                             float f0 = this.ab.nextFloat() - this.ab.nextFloat();
@@ -1524,5 +1520,10 @@ public abstract class EntityLivingBase extends Entity {
         }
 
         this.bq = f0;
+    }
+
+    // CanaryMod
+    public void setAge(int age) {
+        this.aV = age;
     }
 }

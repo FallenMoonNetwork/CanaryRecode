@@ -1,6 +1,5 @@
 package net.canarymod.api.factory;
 
-
 import net.canarymod.Canary;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityType;
@@ -33,10 +32,12 @@ import net.minecraft.server.EntityFallingSand;
 import net.minecraft.server.EntityFireworkRocket;
 import net.minecraft.server.EntityGhast;
 import net.minecraft.server.EntityGiantZombie;
+import net.minecraft.server.EntityHorse;
 import net.minecraft.server.EntityIronGolem;
 import net.minecraft.server.EntityItem;
 import net.minecraft.server.EntityItemFrame;
 import net.minecraft.server.EntityLargeFireball;
+import net.minecraft.server.EntityLeashKnot;
 import net.minecraft.server.EntityLightningBolt;
 import net.minecraft.server.EntityMagmaCube;
 import net.minecraft.server.EntityMinecartChest;
@@ -56,6 +57,7 @@ import net.minecraft.server.EntitySilverfish;
 import net.minecraft.server.EntitySkeleton;
 import net.minecraft.server.EntitySlime;
 import net.minecraft.server.EntitySmallFireball;
+import net.minecraft.server.EntitySnowball;
 import net.minecraft.server.EntitySnowman;
 import net.minecraft.server.EntitySpider;
 import net.minecraft.server.EntitySquid;
@@ -63,14 +65,14 @@ import net.minecraft.server.EntityTNTPrimed;
 import net.minecraft.server.EntityVillager;
 import net.minecraft.server.EntityWitch;
 import net.minecraft.server.EntityWither;
+import net.minecraft.server.EntityWitherSkull;
 import net.minecraft.server.EntityWolf;
 import net.minecraft.server.EntityXPOrb;
 import net.minecraft.server.EntityZombie;
 
-
 /**
  * Entity Manufacturing Factory implementation
- *
+ * 
  * @author Jason (darkdiplomat)
  */
 public class CanaryEntityFactory implements EntityFactory {
@@ -126,160 +128,118 @@ public class CanaryEntityFactory implements EntityFactory {
             switch (type) {
                 case ARROW:
                     return new EntityArrow(mcworld).getCanaryEntity();
-
                 case BAT:
                     return new EntityBat(mcworld).getCanaryEntity();
-
                 case BLAZE:
                     return new EntityBlaze(mcworld).getCanaryEntity();
-
                 case BOAT:
                     return new EntityBoat(mcworld).getCanaryEntity();
-
                 case CAVESPIDER:
                     return new EntityCaveSpider(mcworld).getCanaryEntity();
-
                 case CHESTMINECART:
                     return new EntityMinecartChest(mcworld).getCanaryEntity();
-
                 case CHICKEN:
                     return new EntityChicken(mcworld).getCanaryEntity();
-
                 case CHICKENEGG:
                     return new EntityEgg(mcworld).getCanaryEntity();
-
                 case COW:
                     return new EntityCow(mcworld).getCanaryEntity();
-
                 case CREEPER:
                     return new EntityCreeper(mcworld).getCanaryEntity();
-
                 case EMPTYMINECART:
                     return new EntityMinecartEmpty(mcworld).getCanaryEntity();
-
                 case ENDERCRYSTAL:
                     return new EntityEnderCrystal(mcworld).getCanaryEntity();
-
                 case ENDERDRAGON:
                     return new EntityDragon(mcworld).getCanaryEntity();
-
                 case ENDEREYE:
                     return new EntityEnderEye(mcworld).getCanaryEntity();
-
                 case ENDERMAN:
                     return new EntityEnderman(mcworld).getCanaryEntity();
-
                 case ENDERPEARL:
                     return new EntityEnderPearl(mcworld).getCanaryEntity();
-
                 case ENTITYITEM:
                     return new EntityItem(mcworld).getCanaryEntity();
-
                 case ENTITYPOTION:
                     return new EntityPotion(mcworld).getCanaryEntity();
-
                 case FALLINGBLOCK:
                     return new EntityFallingSand(mcworld).getCanaryEntity();
-
                 case FIREWORKROCKET:
                     return new EntityFireworkRocket(mcworld).getCanaryEntity();
-
                 case FURNACEMINECART:
                     return new EntityMinecartFurnace(mcworld).getCanaryEntity();
-
                 case GHAST:
                     return new EntityGhast(mcworld).getCanaryEntity();
-
                 case GIANTZOMBIE:
                     return new EntityGiantZombie(mcworld).getCanaryEntity();
-
                 case HOPPERMINECART:
                     return new EntityMinecartHopper(mcworld).getCanaryEntity();
-
+                case HORSE:
+                    return new EntityHorse(mcworld).getCanaryEntity();
                 case IRONGOLEM:
                     return new EntityIronGolem(mcworld).getCanaryEntity();
-
                 case ITEMFRAME:
                     return new EntityItemFrame(mcworld).getCanaryEntity();
-
                 case LARGEFIREBALL:
                     return new EntityLargeFireball(mcworld).getCanaryEntity();
-
                 case LAVASLIME:
                     return new EntityMagmaCube(mcworld).getCanaryEntity();
-
+                case LEASHKNOT:
+                    return new EntityLeashKnot(mcworld).getCanaryEntity();
                 case LIGHTNINGBOLT: // There is a chance that LightningBolt isnt quite right
                     return new EntityLightningBolt(mcworld, 0, 0, 0).getCanaryEntity();
-
                 case MOBSPAWNERMINECART:
                     return new EntityMinecartMobSpawner(mcworld).getCanaryEntity();
-
                 case MOOSHROOM:
                     return new EntityMooshroom(mcworld).getCanaryEntity();
-
                 case OCELOT:
                     return new EntityOcelot(mcworld).getCanaryEntity();
-
                 case PAINTING:
                     return new EntityPainting(mcworld).getCanaryEntity();
-
                 case PIG:
                     return new EntityPig(mcworld).getCanaryEntity();
-
                 case PIGZOMBIE:
                     return new EntityPigZombie(mcworld).getCanaryEntity();
-
+                case POTION:
+                    return new EntityPotion(mcworld).getCanaryEntity();
                 case SHEEP:
                     return new EntitySheep(mcworld).getCanaryEntity();
-
                 case SILVERFISH:
                     return new EntitySilverfish(mcworld).getCanaryEntity();
-
                 case SKELETON:
                     return new EntitySkeleton(mcworld).getCanaryEntity();
-
                 case SLIME:
                     return new EntitySlime(mcworld).getCanaryEntity();
-
                 case SMALLFIREBALL:
                     return new EntitySmallFireball(mcworld).getCanaryEntity();
-
+                case SNOWBALL:
+                    return new EntitySnowball(mcworld).getCanaryEntity();
                 case SNOWMAN:
                     return new EntitySnowman(mcworld).getCanaryEntity();
-
                 case SPIDER:
                     return new EntitySpider(mcworld).getCanaryEntity();
-
                 case SQUID:
                     return new EntitySquid(mcworld).getCanaryEntity();
-
                 case TNTMINECART:
                     return new EntityMinecartTNT(mcworld).getCanaryEntity();
-
                 case TNTPRIMED:
                     return new EntityTNTPrimed(mcworld).getCanaryEntity();
-
                 case VILLAGER:
                     return new EntityVillager(mcworld).getCanaryEntity();
-
                 case WITCH:
                     return new EntityWitch(mcworld).getCanaryEntity();
-
                 case WITHER:
                     return new EntityWither(mcworld).getCanaryEntity();
-
+                case WITHERSKULL:
+                    return new EntityWitherSkull(mcworld).getCanaryEntity();
                 case WOLF:
                     return new EntityWolf(mcworld).getCanaryEntity();
-
                 case XPBOTTLE:
                     return new EntityExpBottle(mcworld).getCanaryEntity();
-
                 case XPORB:
                     return new EntityXPOrb(mcworld).getCanaryEntity();
-
                 case ZOMBIE:
                     return new EntityZombie(mcworld).getCanaryEntity();
-
                 default:
                     break;
             }

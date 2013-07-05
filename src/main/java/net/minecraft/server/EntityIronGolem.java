@@ -185,4 +185,10 @@ public class EntityIronGolem extends EntityGolem {
 
         super.a(damagesource);
     }
+
+    // CanaryMod
+    public void setRoseTicks(int ticks) {
+        this.bs = ticks;
+    }
+    //
 }

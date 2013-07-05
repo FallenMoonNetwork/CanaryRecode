@@ -1,5 +1,7 @@
-package net.canarymod.api.entity;
+package net.canarymod.api.entity.hanging;
 
+import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.hanging.HangingEntity;
 import net.minecraft.server.EntityHanging;
 
 /**

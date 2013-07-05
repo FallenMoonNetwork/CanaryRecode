@@ -108,7 +108,7 @@ public abstract class EntityLiving extends EntityLivingBase {
             this.a_ = -this.o();
             this.p();
         }
-//MERGE: Suffocation hook logic here?
+        // MERGE: Suffocation hook logic here?
         this.q.C.b();
     }
 
@@ -843,5 +843,17 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
 
         this.bx = null;
+    }
+
+    // CanaryMod
+    public float getDropChanceForSlot(int slot) {
+        if (slot < 0 || slot > 5) {
+            return -1.0F;
+        }
+        return this.e[slot];
+    }
+
+    public EntityAITasks getTasks() {
+        return this.c;
     }
 }
