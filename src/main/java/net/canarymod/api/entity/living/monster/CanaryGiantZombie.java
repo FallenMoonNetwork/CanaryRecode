@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.monster;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityGiantZombie;
-
 
 /**
  * GiantZombie wrapper implementation
@@ -19,6 +18,14 @@ public class CanaryGiantZombie extends CanaryEntityMob implements GiantZombie {
      */
     public CanaryGiantZombie(EntityGiantZombie entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.GIANTZOMBIE;
     }
 
     /**

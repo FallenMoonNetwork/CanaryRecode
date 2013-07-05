@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.monster;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityZombie;
-
 
 /**
  * Zombie wrapper implementation
@@ -25,8 +24,16 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.ZOMBIE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isVillager() {
-        return ((EntityZombie) entity).m();
+        return ((EntityZombie) entity).bP();
     }
 
     /**
@@ -34,7 +41,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public void setVillager(boolean villager) {
-        ((EntityZombie) entity).i(villager);
+        ((EntityZombie) entity).j(villager);
     }
 
     /**
@@ -42,7 +49,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public boolean isChild() {
-        return ((EntityZombie) entity).h_();
+        return ((EntityZombie) entity).g_();
     }
 
     /**
@@ -74,7 +81,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public boolean isConverting() {
-        return ((EntityZombie) entity).o();
+        return ((EntityZombie) entity).bR();
     }
 
     /**
@@ -90,7 +97,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public void convertToVillager() {
-        ((EntityZombie) entity).p();
+        ((EntityZombie) entity).bS();
     }
 
     /**

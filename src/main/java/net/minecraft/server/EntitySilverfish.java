@@ -1,12 +1,10 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.monster.CanarySilverfish;
-
 
 public class EntitySilverfish extends EntityMob {
 
-    private int bp;
+    public int bp; // CanaryMod: private => public; allySummonCooldown
 
     public EntitySilverfish(World world) {
         super(world);

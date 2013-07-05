@@ -10,8 +10,8 @@ public class EntityGhast extends EntityFlying implements IMob {
     public double i;
     public double j;
     public double bn;
-    private Entity bq;
-    private int br;
+    public Entity bq; // CanaryMod: private => public; Target
+    public int br; // CanaryMod: private => public; argoCoolDown
     public int bo;
     public int bp;
     private int bs = 1;

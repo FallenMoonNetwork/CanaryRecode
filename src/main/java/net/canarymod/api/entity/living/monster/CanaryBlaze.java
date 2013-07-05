@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.monster;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityBlaze;
-
 
 /**
  * Blaze wrapper implementation
@@ -25,8 +24,16 @@ public class CanaryBlaze extends CanaryEntityMob implements Blaze {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.BLAZE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isBurning() {
-        return getHandle().m();
+        return getHandle().bP();
     }
 
     /**

@@ -1,8 +1,9 @@
 package net.canarymod.api.entity.living.monster;
 
-
+import net.canarymod.api.entity.EntityType;
+import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
+import net.canarymod.api.entity.living.humanoid.Player;
 import net.minecraft.server.EntityPigZombie;
-
 
 /**
  * PigZombie wrapper implementation
@@ -25,8 +26,16 @@ public class CanaryPigZombie extends CanaryZombie implements PigZombie {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.PIGZOMBIE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getAngerLevel() {
-        return getHandle().d;
+        return getHandle().bs;
     }
 
     /**
@@ -34,7 +43,7 @@ public class CanaryPigZombie extends CanaryZombie implements PigZombie {
      */
     @Override
     public boolean isAngry() {
-        return getHandle().d > 0;
+        return getHandle().bs > 0;
     }
 
     /**
@@ -42,7 +51,26 @@ public class CanaryPigZombie extends CanaryZombie implements PigZombie {
      */
     @Override
     public void setAngerLevel(int level) {
-        getHandle().d = level;
+        getHandle().bs = level;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void becomeAngryAt(Player player) {
+        if (player == null) {
+            return;
+        }
+        getHandle().c(((CanaryPlayer) player).getHandle());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dontMakeLemonade(Player player) {
+        this.becomeAngryAt(player);
     }
 
     /**

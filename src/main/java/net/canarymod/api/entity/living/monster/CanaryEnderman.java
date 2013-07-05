@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.monster;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityEnderman;
-
 
 /**
  * Enderman wrapper implementation
@@ -25,8 +24,16 @@ public class CanaryEnderman extends CanaryEntityMob implements Enderman {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.ENDERMAN;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public short getCarriedBlockID() {
-        return (short) getHandle().o();
+        return (short) getHandle().bR();
     }
 
     /**
@@ -42,7 +49,7 @@ public class CanaryEnderman extends CanaryEntityMob implements Enderman {
      */
     @Override
     public short getCarriedBlockMetaData() {
-        return (short) getHandle().p();
+        return (short) getHandle().bS();
     }
 
     /**
@@ -50,7 +57,7 @@ public class CanaryEnderman extends CanaryEntityMob implements Enderman {
      */
     @Override
     public void setCarriedBlockMetaData(short metadata) {
-        getHandle().s(metadata);
+        getHandle().c(metadata);
     }
 
     /**
@@ -58,7 +65,23 @@ public class CanaryEnderman extends CanaryEntityMob implements Enderman {
      */
     @Override
     public boolean randomTeleport() {
-        return getHandle().m();
+        return getHandle().bP();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isScreaming() {
+        return getHandle().bT();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setScreaming(boolean screaming) {
+        getHandle().a(screaming);
     }
 
     /**

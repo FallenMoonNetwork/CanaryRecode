@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.monster;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntitySlime;
-
 
 /**
  * Slime wrapper implementation
@@ -26,8 +25,16 @@ public class CanarySlime extends CanaryEntityMob implements Slime {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.SLIME;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Size getSize() {
-        return Size.fromByte((byte) getHandle().p());
+        return Size.fromByte((byte) getHandle().bN());
     }
 
     /**
@@ -35,7 +42,7 @@ public class CanarySlime extends CanaryEntityMob implements Slime {
      */
     @Override
     public void setSize(Size size) {
-        getHandle().c(size.getByte());
+        getHandle().a(size.getByte());
     }
 
     /**

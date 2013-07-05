@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.monster;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityCaveSpider;
-
 
 /**
  * Cave Spider wrapper
@@ -20,6 +19,14 @@ public class CanaryCaveSpider extends CanarySpider {
      */
     public CanaryCaveSpider(EntityCaveSpider entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.CAVESPIDER;
     }
 
     /**

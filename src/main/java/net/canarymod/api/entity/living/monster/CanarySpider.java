@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.monster;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntitySpider;
-
 
 /**
  * Spider wrapper implementation
@@ -19,6 +18,14 @@ public class CanarySpider extends CanaryEntityMob implements Spider {
      */
     public CanarySpider(EntitySpider entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.SPIDER;
     }
 
     /**

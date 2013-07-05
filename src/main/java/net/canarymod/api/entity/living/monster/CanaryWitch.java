@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.monster;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityWitch;
-
 
 /**
  * Witch wrapper implementation
@@ -25,8 +24,31 @@ public class CanaryWitch extends CanaryEntityMob implements Witch {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.WITCH;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isAgressive() {
+        return getHandle().bP();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAggressive(boolean aggressive) {
+        getHandle().a(aggressive);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public EntityWitch getHandle() {
         return (EntityWitch) entity;
     }
-
 }

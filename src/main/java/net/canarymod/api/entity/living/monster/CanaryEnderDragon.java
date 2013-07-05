@@ -1,10 +1,9 @@
 package net.canarymod.api.entity.living.monster;
 
-
 import net.canarymod.api.entity.EnderCrystal;
+import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.minecraft.server.EntityDragon;
-
 
 /**
  * Dragon wrapper implementation
@@ -27,8 +26,16 @@ public class CanaryEnderDragon extends CanaryEntityLiving implements EnderDragon
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.ENDERDRAGON;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isSlowed() {
-        return getHandle().bQ;
+        return getHandle().bA;
     }
 
     /**
@@ -36,7 +43,7 @@ public class CanaryEnderDragon extends CanaryEntityLiving implements EnderDragon
      */
     @Override
     public EnderCrystal getHealingCrystal() {
-        return getHandle().bS != null ? (EnderCrystal) getHandle().bS.getCanaryEntity() : null;
+        return getHandle().bC != null ? (EnderCrystal) getHandle().bC.getCanaryEntity() : null;
     }
 
     /**

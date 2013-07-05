@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.monster;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityWither;
-
 
 /**
  * Wither wrapper implementation
@@ -19,6 +18,14 @@ public class CanaryWither extends CanaryEntityMob implements Wither {
      */
     public CanaryWither(EntityWither entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.WITHER;
     }
 
     /**

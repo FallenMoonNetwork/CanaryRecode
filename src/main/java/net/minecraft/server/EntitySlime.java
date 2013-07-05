@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.monster.CanarySlime;
-
 
 public class EntitySlime extends EntityLiving implements IMob {
 
@@ -26,7 +24,7 @@ public class EntitySlime extends EntityLiving implements IMob {
         this.ah.a(16, new Byte((byte) 1));
     }
 
-    protected void a(int i0) {
+    public void a(int i0) { // CanaryMod: protected => public
         this.ah.b(16, new Byte((byte) i0));
         this.a(0.6F * (float) i0, 0.6F * (float) i0);
         this.b(this.u, this.v, this.w);

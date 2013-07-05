@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.monster;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityCreeper;
-
 
 /**
  * Creeper wrapper implementation
@@ -22,6 +21,14 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
      */
     public CanaryCreeper(EntityCreeper entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.CREEPER;
     }
 
     /**
@@ -61,7 +68,7 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
      */
     @Override
     public boolean isCharged() {
-        return getHandle().m();
+        return getHandle().bP();
     }
 
     /**
@@ -77,7 +84,7 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
      */
     @Override
     public float getPower() {
-        return getHandle().g;
+        return getHandle().bs;
     }
 
     /**
@@ -85,7 +92,7 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
      */
     @Override
     public void setPower(float power) {
-        getHandle().g = (int) power;
+        getHandle().bs = (int) power;
     }
 
     /**
@@ -93,7 +100,7 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
      */
     @Override
     public void detonate() {
-        getHandle().g = 0;
+        getHandle().br = 0;
     }
 
     /**
@@ -101,7 +108,7 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
      */
     @Override
     public int getFuse() {
-        return getHandle().f;
+        return getHandle().br;
     }
 
     /**
@@ -109,7 +116,7 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
      */
     @Override
     public void setFuse(int fuse) {
-        getHandle().f = fuse;
+        getHandle().br = fuse;
     }
 
     /**
@@ -117,7 +124,7 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
      */
     @Override
     public void increaseFuse(int increase) {
-        getHandle().f += increase;
+        getHandle().br += increase;
     }
 
     /**
@@ -125,7 +132,7 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
      */
     @Override
     public void decreaseFuse(int decrease) {
-        getHandle().f -= decrease;
+        getHandle().br -= decrease;
     }
 
     /**
@@ -133,7 +140,7 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
      */
     @Override
     public boolean isAgro() {
-        return getHandle().o() == 1;
+        return getHandle().bR() == 1;
     }
 
     /**
