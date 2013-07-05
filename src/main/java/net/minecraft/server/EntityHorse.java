@@ -20,7 +20,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     public int bp;
     public int bq;
     protected boolean br;
-    private AnimalChest bG;
+    public AnimalChest bG; // CanaryMod: private => public
     private boolean bH;
     protected int bs;
     protected float bt;

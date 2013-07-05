@@ -1,17 +1,15 @@
 package net.canarymod.api.entity.living.humanoid;
 
-
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import net.canarymod.CanaryMod;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.entity.CanaryEntity;
-import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.minecraft.server.Block;
 import net.minecraft.server.DamageSource;
-import net.minecraft.server.EntityLiving;
+import net.minecraft.server.EntityLivingBase;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.INetworkManager;
@@ -45,7 +43,6 @@ import net.minecraft.server.Packet3Chat;
 import net.minecraft.server.Packet7UseEntity;
 import net.minecraft.server.Packet9Respawn;
 
-
 public final class EntityNonPlayableCharacter extends EntityPlayerMP {
     private static MinecraftServer mcserv = ((CanaryServer) CanaryMod.getServer()).getHandle();
     protected boolean isJumping;
@@ -54,11 +51,11 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         super(mcserv, ((CanaryWorld) location.getWorld()).getHandle(), name, new ItemInWorldManager(((CanaryWorld) location.getWorld()).getHandle()));
         this.a = new NonNetServerHandler(this);
         this.a(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
-        this.e(1.0F);
+        // this.e(1.0F); ?
     }
 
     @Override
-    public void c(int i0) {// NO PORTAL USE
+    public void b(int i0) {// NO PORTAL USE
     }
 
     @Override
@@ -85,44 +82,36 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
 
     }
 
-
-    @Override
-    protected boolean bh() {
-        return true;
-
-    }
     @Override
     public void a(DamageSource damagesource) {
         // NPC Death
         // this.b.ad().k(this.bt.b()); // Death Messages; temp disable pending configuration
-        if (!this.q.N().b("keepInventory")) {
-            this.bK.m();
+        if (!this.q.O().b("keepInventory")) {
+            this.bn.m();
         }
 
         // Skip ScoreBoard stuff
 
-        EntityLiving entityliving = this.bN();
+        EntityLivingBase entitylivingbase = this.aO();
 
-        if (entityliving != null) {
-            entityliving.c(this, this.aM);
+        if (entitylivingbase != null) {
+            entitylivingbase.b(this, this.bb);
         }
 
         this.a.c("NPC Killed");
     }
 
     @Override
-    public boolean a_(EntityPlayer entityplayer) { // RightClicked
+    public boolean c(EntityPlayer entityplayer) { // RightClicked
         if (this.entity != null) {
-            if (((CanaryEntityLiving) entityplayer.getCanaryEntity()).isPlayer()) {
-                ((CanaryNonPlayableCharacter) entity).clicked(((EntityPlayerMP) entityplayer).getPlayer());
-                return true;
-            }
+            ((CanaryNonPlayableCharacter) entity).clicked(((EntityPlayerMP) entityplayer).getPlayer());
+            return true;
         }
         return false;
     }
 
     @Override
-    public boolean a(DamageSource damagesource, int i0) {
+    public boolean a(DamageSource damagesource, float i0) {
         boolean toRet = super.a(damagesource, i0);
 
         if (toRet && this.entity != null && damagesource.i() != null) {
@@ -158,7 +147,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
             }
 
             if (i3 > 0) {
-                Block.r[i3].a(this.q, i0, i1, i2, this, this.T);
+                Block.s[i3].a(this.q, i0, i1, i2, this, this.T);
             }
         }
         if (flag0) {
@@ -188,7 +177,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
 
     /**
      * Override the NetServerHandler for NonPlayableCharacters.
-     *
+     * 
      * @author Jason (darkdiplomat)
      */
     private final static class NonNetServerHandler extends NetServerHandler {
@@ -205,11 +194,13 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
             this.c.k();
             this.b(new Packet255KickDisconnect(s));
             this.a.d();
-            this.d.ad().e(this.c);
+            this.d.af().e(this.c);
             this.b = true;
         }
 
-        public void a(Packet10Flying opacket10flying) { super.a(opacket10flying);}
+        public void a(Packet10Flying opacket10flying) {
+            super.a(opacket10flying);
+        }
 
         @SuppressWarnings("unused")
         public void a(double d0, double d1, double d2, float f, float f1) {
@@ -277,10 +268,9 @@ public final class EntityNonPlayableCharacter extends EntityPlayerMP {
         public void a(Packet250CustomPayload opacket250custompayload) {}
     }
 
-
     /**
      * Overrides the INetworkManager of NonPlayableCharacters
-     *
+     * 
      * @author Jason (darkdiplomat)
      */
     private final static class NonNetworkManager implements INetworkManager {

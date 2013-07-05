@@ -3,6 +3,7 @@ package net.canarymod.api.entity.living.humanoid;
 import net.canarymod.api.CanaryVillagerTrade;
 import net.canarymod.api.VillagerTrade;
 import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.entity.living.EntityLiving;
 import net.canarymod.api.world.CanaryVillage;
@@ -27,6 +28,10 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     public CanaryVillager(EntityVillager entity) {
         super(entity);
+    }
+
+    public EntityType getEntityType() {
+        return EntityType.VILLAGER;
     }
 
     /**

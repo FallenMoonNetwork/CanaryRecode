@@ -9,6 +9,7 @@ import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.DamageSource;
 import net.canarymod.api.DamageType;
 import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.potion.CanaryPotion;
 import net.canarymod.api.potion.CanaryPotionEffect;
@@ -282,6 +283,14 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
     @Override
     public void lookAt(Location location) {
         lookAt(location.getX(), location.getY(), location.getZ());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void lookAt(Entity entity) {
+        lookAt(entity.getX(), entity.getY(), entity.getZ());
     }
 
     /**
