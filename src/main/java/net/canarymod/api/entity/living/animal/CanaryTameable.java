@@ -1,9 +1,7 @@
 package net.canarymod.api.entity.living.animal;
 
-
-import net.canarymod.api.entity.living.EntityLiving;
+import net.canarymod.api.entity.living.LivingBase;
 import net.minecraft.server.EntityTameable;
-
 
 /**
  * Tameable wrapper implementation
@@ -26,8 +24,8 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      * {@inheritDoc}
      */
     @Override
-    public EntityLiving getOwner() {
-        return (EntityLiving) ((EntityTameable) entity).p().getCanaryEntity();
+    public LivingBase getOwner() {
+        return (LivingBase) getHandle().bR().getCanaryEntity();
     }
 
     /**
@@ -35,14 +33,14 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public String getOwnerName() {
-        return ((EntityTameable) entity).o();
+        return getHandle().h_();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setOwner(EntityLiving entity) {
+    public void setOwner(LivingBase entity) {
         setOwner(entity.getName());
     }
 
@@ -51,7 +49,7 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public void setOwner(String name) {
-        ((EntityTameable) entity).a(name);
+        ((EntityTameable) entity).b(name);
     }
 
     /**
@@ -59,7 +57,7 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public boolean isTamed() {
-        return ((EntityTameable) entity).m();
+        return ((EntityTameable) entity).bP();
     }
 
     /**
@@ -67,7 +65,7 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public void setTamed(boolean tamed) {
-        ((EntityTameable) entity).j(tamed);
+        ((EntityTameable) entity).k(tamed);
     }
 
     /**
@@ -75,7 +73,7 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public boolean isSitting() {
-        return ((EntityTameable) entity).n();
+        return ((EntityTameable) entity).bQ();
     }
 
     /**
@@ -83,6 +81,14 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public void setSitting(boolean sitting) {
-        ((EntityTameable) entity).k(sitting);
+        ((EntityTameable) entity).l(sitting);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityTameable getHandle() {
+        return (EntityTameable) entity;
     }
 }

@@ -7,6 +7,7 @@ import java.util.concurrent.Callable;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.nbt.CompoundTag;
 import net.canarymod.api.world.CanaryWorld;
@@ -124,6 +125,11 @@ public abstract class Entity {
             @Override
             public Entity getHandle() {
                 return entity;
+            }
+
+            @Override
+            public EntityType getEntityType() {
+                return null;
             }
         };
     }

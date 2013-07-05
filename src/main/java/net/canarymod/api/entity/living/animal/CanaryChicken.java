@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.animal;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityChicken;
-
 
 /**
  * Chicken wrapper implementation
@@ -26,8 +25,20 @@ public class CanaryChicken extends CanaryEntityAnimal implements Chicken {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.CHICKEN;
+    }
+
+    public int getTimeUntilNextEgg() {
+        return getHandle().bu;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setTimeUntilNextEgg(int timeTicks) {
-        getHandle().j = timeTicks;
+        getHandle().bu = timeTicks;
     }
 
     /**

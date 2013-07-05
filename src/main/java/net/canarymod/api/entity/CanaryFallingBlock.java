@@ -24,6 +24,14 @@ public class CanaryFallingBlock extends CanaryEntity implements FallingBlock {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.FALLINGBLOCK;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public short getBlockID() {
         return (short) getHandle().a;
     }

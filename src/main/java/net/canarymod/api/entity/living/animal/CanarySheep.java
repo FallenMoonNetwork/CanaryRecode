@@ -1,9 +1,8 @@
 package net.canarymod.api.entity.living.animal;
 
-
 import net.canarymod.api.DyeColor;
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntitySheep;
-
 
 /**
  * Sheep wrapper implementation
@@ -26,8 +25,16 @@ public class CanarySheep extends CanaryEntityAnimal implements Sheep {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.SHEEP;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void eatGrass() {
-        getHandle().aK();
+        getHandle().n();
     }
 
     /**
@@ -35,7 +42,7 @@ public class CanarySheep extends CanaryEntityAnimal implements Sheep {
      */
     @Override
     public DyeColor getColor() {
-        return DyeColor.values()[getHandle().m()];
+        return DyeColor.values()[getHandle().bP()];
     }
 
     /**
@@ -43,7 +50,7 @@ public class CanarySheep extends CanaryEntityAnimal implements Sheep {
      */
     @Override
     public void setColor(DyeColor color) {
-        getHandle().s(color.getDyeColorCode());
+        getHandle().p(color.getDyeColorCode());
     }
 
     /**
@@ -51,7 +58,7 @@ public class CanarySheep extends CanaryEntityAnimal implements Sheep {
      */
     @Override
     public boolean isSheared() {
-        return getHandle().n();
+        return getHandle().bQ();
     }
 
     /**
@@ -59,7 +66,7 @@ public class CanarySheep extends CanaryEntityAnimal implements Sheep {
      */
     @Override
     public void setSheared(boolean sheared) {
-        getHandle().i(sheared);
+        getHandle().j(sheared);
     }
 
     /**

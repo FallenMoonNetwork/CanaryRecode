@@ -19,6 +19,14 @@ public class CanaryWitherSkull extends CanaryFireball implements WitherSkull {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.WITHERSKULL;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isInvulnerable() {
         return getHandle().d();
     }

@@ -1,6 +1,6 @@
 package net.canarymod.api.entity.hanging;
 
-import net.canarymod.api.entity.hanging.ItemFrame;
+import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.EntityItemFrame;
@@ -20,6 +20,14 @@ public class CanaryItemFrame extends CanaryHangingEntity implements ItemFrame {
      */
     public CanaryItemFrame(EntityItemFrame entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.ITEMFRAME;
     }
 
     /**

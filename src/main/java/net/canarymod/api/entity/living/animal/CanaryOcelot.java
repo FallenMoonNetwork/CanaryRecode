@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.animal;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityOcelot;
-
 
 /**
  * Ocelot wrapper implementation
@@ -25,8 +24,16 @@ public class CanaryOcelot extends CanaryTameable implements Ocelot {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.OCELOT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public SkinType getSkinType() {
-        return SkinType.values()[getHandle().t()];
+        return SkinType.values()[getHandle().bW()];
     }
 
     /**
@@ -34,7 +41,7 @@ public class CanaryOcelot extends CanaryTameable implements Ocelot {
      */
     @Override
     public void setSkinType(SkinType type) {
-        getHandle().s(type.ordinal());
+        getHandle().p(type.ordinal());
     }
 
     /**

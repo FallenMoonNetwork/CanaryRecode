@@ -27,6 +27,14 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.ENDERCRYSTAL;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setCanDamageWorld(boolean canDamage) {
         damageWorld = canDamage;
     }

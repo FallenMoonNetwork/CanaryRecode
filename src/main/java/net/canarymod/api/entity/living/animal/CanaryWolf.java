@@ -1,25 +1,32 @@
 package net.canarymod.api.entity.living.animal;
 
-
 import net.canarymod.api.DyeColor;
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityWolf;
-
 
 /**
  * Wolf wrapper implementation
- *
+ * 
  * @author Jason (darkdiplomat)
  */
 public class CanaryWolf extends CanaryTameable implements Wolf {
 
     /**
      * Constructs a new wrapper for EntityWolf
-     *
+     * 
      * @param entity
      *            the EntityWolf to wrap
      */
     public CanaryWolf(EntityWolf entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.WOLF;
     }
 
     /**
@@ -43,7 +50,7 @@ public class CanaryWolf extends CanaryTameable implements Wolf {
      */
     @Override
     public void setCollarColor(DyeColor color) {
-        getHandle().s(color.getColorCode());
+        getHandle().p(color.getColorCode());
     }
 
     /**
@@ -51,7 +58,7 @@ public class CanaryWolf extends CanaryTameable implements Wolf {
      */
     @Override
     public DyeColor getCollarColor() {
-        return DyeColor.values()[getHandle().bX()];
+        return DyeColor.values()[getHandle().bZ()];
     }
 
     /**
@@ -59,7 +66,7 @@ public class CanaryWolf extends CanaryTameable implements Wolf {
      */
     @Override
     public boolean isAngry() {
-        return ((EntityWolf) entity).bW();
+        return ((EntityWolf) entity).bY();
     }
 
     /**
@@ -67,7 +74,7 @@ public class CanaryWolf extends CanaryTameable implements Wolf {
      */
     @Override
     public void setAngry(boolean angry) {
-        ((EntityWolf) entity).l(angry);
+        ((EntityWolf) entity).m(angry);
     }
 
     /**

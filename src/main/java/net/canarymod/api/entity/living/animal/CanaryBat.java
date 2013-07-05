@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.animal;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityBat;
-
 
 /**
  * Bat wrapper implementation
@@ -25,8 +24,16 @@ public class CanaryBat extends CanaryEntityAnimal implements Bat {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.BAT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isHanging() {
-        return getHandle().h();
+        return getHandle().bF();
     }
 
     /**

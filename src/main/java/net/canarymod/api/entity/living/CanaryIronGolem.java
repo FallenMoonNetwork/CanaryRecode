@@ -1,5 +1,6 @@
 package net.canarymod.api.entity.living;
 
+import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.world.CanaryVillage;
 import net.canarymod.api.world.Village;
 import net.minecraft.server.EntityIronGolem;
@@ -19,6 +20,14 @@ public class CanaryIronGolem extends CanaryEntityLiving implements IronGolem {
      */
     public CanaryIronGolem(EntityIronGolem entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.IRONGOLEM;
     }
 
     /**

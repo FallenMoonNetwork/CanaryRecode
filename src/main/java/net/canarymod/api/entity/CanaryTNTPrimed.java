@@ -22,6 +22,14 @@ public class CanaryTNTPrimed extends CanaryEntity implements TNTPrimed {
         super(tntprimed);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.TNTPRIMED;
+    }
+
     @Override
     public LivingBase getActivatedBy() {
         return (LivingBase) getHandle().c().getCanaryEntity();

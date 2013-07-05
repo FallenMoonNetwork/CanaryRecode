@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.animal;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityPig;
-
 
 /**
  * Pig wrapper implementation
@@ -25,8 +24,16 @@ public class CanaryPig extends CanaryEntityAnimal implements Pig {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.PIG;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isSaddled() {
-        return ((EntityPig) entity).m();
+        return ((EntityPig) entity).bP();
     }
 
     /**
@@ -34,7 +41,7 @@ public class CanaryPig extends CanaryEntityAnimal implements Pig {
      */
     @Override
     public void setSaddled(boolean saddled) {
-        ((EntityPig) entity).i(saddled);
+        ((EntityPig) entity).j(saddled);
     }
 
     /**

@@ -24,6 +24,14 @@ public class CanaryLargeFireball extends CanaryFireball implements LargeFireball
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.LARGEFIREBALL;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setCanDamageWorld(boolean canDamage) {
         this.damageWorld = canDamage;
     }

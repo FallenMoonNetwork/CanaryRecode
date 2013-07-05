@@ -1,6 +1,6 @@
 package net.canarymod.api.entity.hanging;
 
-import net.canarymod.api.entity.hanging.Painting;
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityPainting;
 
 /**
@@ -18,6 +18,14 @@ public class CanaryPainting extends CanaryHangingEntity implements Painting {
      */
     public CanaryPainting(EntityPainting entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.PAINTING;
     }
 
     /**

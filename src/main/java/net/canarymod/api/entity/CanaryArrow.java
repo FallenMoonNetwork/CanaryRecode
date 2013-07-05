@@ -17,6 +17,14 @@ public class CanaryArrow extends CanaryProjectile implements Arrow {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.ARROW;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean canPickUp() {
         return getHandle().a == 1;
     }

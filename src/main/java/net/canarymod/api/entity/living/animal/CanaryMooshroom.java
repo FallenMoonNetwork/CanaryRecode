@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.animal;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityMooshroom;
-
 
 /**
  * MooshroomCow wrapper implementation
@@ -19,6 +18,14 @@ public class CanaryMooshroom extends CanaryCow implements Mooshroom {
      */
     public CanaryMooshroom(EntityMooshroom entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.MOOSHROOM;
     }
 
     /**

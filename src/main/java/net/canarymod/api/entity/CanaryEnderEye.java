@@ -24,6 +24,14 @@ public class CanaryEnderEye extends CanaryEntity implements EnderEye {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.ENDEREYE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public double getTargetX() {
         return getHandle().a;
     }

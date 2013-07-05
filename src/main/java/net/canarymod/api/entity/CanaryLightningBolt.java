@@ -18,6 +18,14 @@ public class CanaryLightningBolt extends CanaryEntity implements LightningBolt {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.LIGHTNINGBOLT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getLivingTime() {
         return getHandle().c;
     }

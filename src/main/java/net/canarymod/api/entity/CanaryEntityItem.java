@@ -24,6 +24,14 @@ public class CanaryEntityItem extends CanaryEntity implements EntityItem {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.ENTITYITEM;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setAge(short age) {
         getHandle().a = age;
     }

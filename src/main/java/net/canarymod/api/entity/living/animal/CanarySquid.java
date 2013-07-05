@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.living.animal;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntitySquid;
-
 
 /**
  * Squid wrapper implementation
@@ -19,6 +18,14 @@ public class CanarySquid extends CanaryEntityAnimal implements Squid {
      */
     public CanarySquid(EntitySquid entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.SQUID;
     }
 
     /**

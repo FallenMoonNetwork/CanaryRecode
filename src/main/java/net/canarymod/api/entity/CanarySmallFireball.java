@@ -1,8 +1,6 @@
 package net.canarymod.api.entity;
 
-
 import net.minecraft.server.EntitySmallFireball;
-
 
 /**
  * SmallFireball wrapper implementation
@@ -19,6 +17,14 @@ public class CanarySmallFireball extends CanaryFireball implements SmallFireball
      */
     public CanarySmallFireball(EntitySmallFireball entity) {
         super(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.SMALLFIREBALL;
     }
 
     /**

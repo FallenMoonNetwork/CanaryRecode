@@ -26,6 +26,14 @@ public class CanaryXPOrb extends CanaryEntity implements XPOrb {
      * {@inheritDoc}
      */
     @Override
+    public EntityType getEntityType() {
+        return EntityType.XPORB;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public short getOrbAge() {
         return (short) getHandle().b;
     }
