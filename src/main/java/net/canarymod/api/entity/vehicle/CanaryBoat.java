@@ -1,5 +1,6 @@
 package net.canarymod.api.entity.vehicle;
 
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityBoat;
 
 /**
@@ -19,6 +20,11 @@ public class CanaryBoat extends CanaryVehicle implements Boat {
         super(entity);
     }
 
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.BOAT;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -32,7 +38,7 @@ public class CanaryBoat extends CanaryVehicle implements Boat {
      */
     @Override
     public void setForwardDirection(int direction) {
-        getHandle().g(direction);
+        getHandle().c(direction);
     }
 
     /**

@@ -1,17 +1,20 @@
 package net.canarymod.api.entity.vehicle;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityMinecartHopper;
 
-
 /**
- *
  * @author Somners
  */
 public class CanaryHopperMinecart extends CanaryContainerMinecart implements HopperMinecart {
 
     public CanaryHopperMinecart(EntityMinecartHopper minecart) {
         super(minecart);
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.HOPPERMINECART;
     }
 
     /**
@@ -52,6 +55,14 @@ public class CanaryHopperMinecart extends CanaryContainerMinecart implements Hop
     @Override
     public void setTransferCooldown(int cooldown) {
         this.getHandle().b = cooldown;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isBlocked() {
+        return getHandle().ax();
     }
 
     /**

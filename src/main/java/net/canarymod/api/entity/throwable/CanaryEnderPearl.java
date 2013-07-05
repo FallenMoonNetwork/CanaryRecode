@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.throwable;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityEnderPearl;
-
 
 /**
  * EnderPearl wrapper implementation
@@ -19,6 +18,11 @@ public class CanaryEnderPearl extends CanaryEntityThrowable implements EnderPear
      */
     public CanaryEnderPearl(EntityEnderPearl entity) {
         super(entity);
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.ENDERPEARL;
     }
 
     /**

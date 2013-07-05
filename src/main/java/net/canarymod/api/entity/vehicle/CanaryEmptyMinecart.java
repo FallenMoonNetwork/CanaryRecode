@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.vehicle;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityMinecartEmpty;
-
 
 /**
  * EmptyMinecart wrapper implementation
@@ -19,6 +18,11 @@ public class CanaryEmptyMinecart extends CanaryMinecart implements EmptyMinecart
      */
     public CanaryEmptyMinecart(EntityMinecartEmpty entity) {
         super(entity);
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.EMPTYMINECART;
     }
 
     /**

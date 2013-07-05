@@ -1,14 +1,13 @@
 package net.canarymod.api;
 
-
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.chat.TextFormat;
+import net.minecraft.server.ChatMessageComponent;
 import net.minecraft.server.Packet3Chat;
-
 
 /**
  * Wrap up NetServerHandler to minimize entry point to notch code
- *
+ * 
  * @author Chris Ksoll
  */
 public class CanaryNetServerHandler implements NetServerHandler {
@@ -53,7 +52,7 @@ public class CanaryNetServerHandler implements NetServerHandler {
             String lastColor = TextFormat.getLastColor(subCut);
             sendMessage((lastColor == null ? "" : lastColor) + newMsg);
         } else {
-            handler.b(new Packet3Chat(msg));
+            handler.b(new Packet3Chat(ChatMessageComponent.e(msg)));
         }
     }
 

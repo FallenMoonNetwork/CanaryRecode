@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.throwable;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityExpBottle;
-
 
 /**
  * XPBottle wrapper implementation
@@ -19,6 +18,11 @@ public class CanaryXPBottle extends CanaryEntityThrowable implements XPBottle {
      */
     public CanaryXPBottle(EntityExpBottle entity) {
         super(entity);
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.XPBOTTLE;
     }
 
     /**

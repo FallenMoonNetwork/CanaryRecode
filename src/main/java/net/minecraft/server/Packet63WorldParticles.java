@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 import net.canarymod.api.world.effects.Particle;
 
@@ -18,7 +18,7 @@ public class Packet63WorldParticles extends Packet {
     private int i;
 
     public Packet63WorldParticles() {}
-    
+
     // CanaryMod: our special constructor
     public Packet63WorldParticles(Particle particle) {
         this.a = particle.type.getMcName();
@@ -32,7 +32,7 @@ public class Packet63WorldParticles extends Packet {
         this.i = particle.quantity;
     }//
 
-    public void a(DataInputStream datainputstream) throws IOException {
+    public void a(DataInput datainputstream) throws IOException {
         this.a = a(datainputstream, 64);
         this.b = datainputstream.readFloat();
         this.c = datainputstream.readFloat();
@@ -44,7 +44,7 @@ public class Packet63WorldParticles extends Packet {
         this.i = datainputstream.readInt();
     }
 
-    public void a(DataOutputStream dataoutputstream) throws IOException {
+    public void a(DataOutput dataoutputstream) throws IOException {
         a(this.a, dataoutputstream);
         dataoutputstream.writeFloat(this.b);
         dataoutputstream.writeFloat(this.c);

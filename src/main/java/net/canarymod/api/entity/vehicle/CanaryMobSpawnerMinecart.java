@@ -1,9 +1,8 @@
 package net.canarymod.api.entity.vehicle;
 
-
 import net.canarymod.api.MobSpawnerLogic;
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.server.EntityMinecartMobSpawner;
-
 
 /**
  * MobSpawnerMinecart wrapper implementation
@@ -19,6 +18,11 @@ public class CanaryMobSpawnerMinecart extends CanaryMinecart implements MobSpawn
     @Override
     public MobSpawnerLogic getMobSpawnerLogic() {
         return ((EntityMinecartMobSpawner) entity).a.logic;
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.MOBSPAWNERMINECART;
     }
 
 }

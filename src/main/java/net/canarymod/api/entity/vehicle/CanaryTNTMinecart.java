@@ -1,9 +1,8 @@
 package net.canarymod.api.entity.vehicle;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.world.CanaryWorld;
 import net.minecraft.server.EntityMinecartTNT;
-
 
 /**
  * TNTMinecart wrapper implementation
@@ -22,6 +21,11 @@ public class CanaryTNTMinecart extends CanaryMinecart implements TNTMinecart {
      */
     public CanaryTNTMinecart(EntityMinecartTNT entity) {
         super(entity);
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.TNTMINECART;
     }
 
     /**
@@ -61,7 +65,7 @@ public class CanaryTNTMinecart extends CanaryMinecart implements TNTMinecart {
      */
     @Override
     public void detonate() {
-        ((CanaryWorld) getWorld()).getHandle().a(getHandle(), getX(), getY(), getZ(), power, true);
+        ((CanaryWorld) getWorld()).getHandle().a(getHandle(), getX(), getY(), getZ(), power, damageWorld);
         this.destroy();
     }
 

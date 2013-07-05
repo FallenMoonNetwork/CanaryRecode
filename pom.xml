@@ -75,7 +75,7 @@
     <dependency>
       <groupId>net.minecraft</groupId>
       <artifactId>server</artifactId>
-      <version>${minecraft.server.version}</version>
+      <version>${minecraft.server.version}_1</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

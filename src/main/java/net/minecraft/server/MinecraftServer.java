@@ -1097,7 +1097,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public void initShutdown() {
-        this.n();
+        this.p();
     }
 
     public boolean isRunning() {

@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
@@ -56,12 +56,12 @@ public abstract class Packet {
         }
     }
 
-    public static void a(DataOutputStream dataoutput, byte[] abyte) throws IOException {
+    public static void a(DataOutput dataoutput, byte[] abyte) throws IOException {
         dataoutput.writeShort(abyte.length);
         dataoutput.write(abyte);
     }
 
-    public static byte[] b(DataInputStream datainput) throws IOException {
+    public static byte[] b(DataInput datainput) throws IOException {
         short short1 = datainput.readShort();
 
         if (short1 < 0) {
@@ -78,7 +78,7 @@ public abstract class Packet {
         return ((Integer) a.get(this.getClass())).intValue();
     }
 
-    public static Packet a(ILogAgent ilogagent, DataInputStream datainput, boolean flag0, Socket socket) throws IOException {
+    public static Packet a(ILogAgent ilogagent, DataInput datainput, boolean flag0, Socket socket) throws IOException {
         boolean flag1 = false;
         Packet packet = null;
         int i0 = socket.getSoTimeout();
@@ -116,14 +116,14 @@ public abstract class Packet {
         return packet;
     }
 
-    public static void a(Packet packet, DataOutputStream dataoutput) throws IOException {
+    public static void a(Packet packet, DataOutput dataoutput) throws IOException {
         dataoutput.write(packet.n());
         packet.a(dataoutput);
         ++q;
         r += (long) packet.a();
     }
 
-    public static void a(String s0, DataOutputStream dataoutput) throws IOException {
+    public static void a(String s0, DataOutput dataoutput) throws IOException {
         if (s0.length() > 32767) {
             throw new IOException("String too big");
         } else {
@@ -132,7 +132,7 @@ public abstract class Packet {
         }
     }
 
-    public static String a(DataInputStream datainput, int i0) throws IOException {
+    public static String a(DataInput datainput, int i0) throws IOException {
         short short1 = datainput.readShort();
 
         if (short1 > i0) {
@@ -150,9 +150,9 @@ public abstract class Packet {
         }
     }
 
-    public abstract void a(DataInputStream var1) throws IOException;
+    public abstract void a(DataInput var1) throws IOException;
 
-    public abstract void a(DataOutputStream var1) throws IOException;
+    public abstract void a(DataOutput var1) throws IOException;
 
     public abstract void a(NetHandler nethandler);
 
@@ -176,7 +176,7 @@ public abstract class Packet {
         return s0;
     }
 
-    public static ItemStack c(DataInputStream datainput) throws IOException {
+    public static ItemStack c(DataInput datainput) throws IOException {
         ItemStack itemstack = null;
         short short1 = datainput.readShort();
 
@@ -191,7 +191,7 @@ public abstract class Packet {
         return itemstack;
     }
 
-    public static void a(ItemStack itemstack, DataOutputStream dataoutput) throws IOException {
+    public static void a(ItemStack itemstack, DataOutput dataoutput) throws IOException {
         if (itemstack == null) {
             dataoutput.writeShort(-1);
         } else {
@@ -208,7 +208,7 @@ public abstract class Packet {
         }
     }
 
-    public static NBTTagCompound d(DataInputStream datainput) throws IOException {
+    public static NBTTagCompound d(DataInput datainput) throws IOException {
         short short1 = datainput.readShort();
 
         if (short1 < 0) {
@@ -221,7 +221,7 @@ public abstract class Packet {
         }
     }
 
-    protected static void a(NBTTagCompound nbttagcompound, DataOutputStream dataoutput) throws IOException {
+    protected static void a(NBTTagCompound nbttagcompound, DataOutput dataoutput) throws IOException {
         if (nbttagcompound == null) {
             dataoutput.writeShort(-1);
         } else {

@@ -1,8 +1,7 @@
 package net.canarymod.api.entity.throwable;
 
-
+import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.potion.PotionType;
-
 
 /**
  * EntityPotion wrapper implementation
@@ -19,6 +18,11 @@ public class CanaryEntityPotion extends CanaryEntityThrowable implements EntityP
      */
     public CanaryEntityPotion(net.minecraft.server.EntityPotion entity) {
         super(entity);
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.ENTITYPOTION;
     }
 
     /**

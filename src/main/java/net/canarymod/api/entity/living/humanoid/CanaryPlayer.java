@@ -86,7 +86,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
                 for (Player player : receivers) {
                     player.message(formattedMessage);
                 }
-                Canary.logInfo("<" + getName() + "> " + TextFormat.removeFormatting(formattedMessage));
+                Canary.logInfo("[" + getName() + "] " + TextFormat.removeFormatting(formattedMessage));
             }
         }
 
@@ -486,7 +486,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
     public void setPrefix(String prefix) {
         super.setPrefix(prefix);
         Canary.usersAndGroups().addOrUpdatePlayerData(this);
-        this.defaultChatpattern.put("%prefix", prefix);
+        this.defaultChatpattern.put("%prefix", getPrefix());
     }
 
     @Override

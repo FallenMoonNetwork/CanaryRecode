@@ -1,8 +1,6 @@
 package net.canarymod.api.entity.vehicle;
 
-
 import net.minecraft.server.EntityMinecart;
-
 
 /**
  * Minecart wrapper implementation
@@ -34,7 +32,7 @@ public abstract class CanaryMinecart extends CanaryVehicle implements Minecart {
      */
     @Override
     public void setRollingAmplitude(int amp) {
-        getHandle().i(amp);
+        getHandle().c(amp);
     }
 
     /**
@@ -50,7 +48,7 @@ public abstract class CanaryMinecart extends CanaryVehicle implements Minecart {
      */
     @Override
     public void setRollingDirection(int direction) {
-        getHandle().j(direction);
+        getHandle().h(direction);
     }
 
     /**
