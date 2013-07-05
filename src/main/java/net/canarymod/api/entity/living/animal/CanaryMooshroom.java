@@ -28,6 +28,11 @@ public class CanaryMooshroom extends CanaryCow implements Mooshroom {
         return EntityType.MOOSHROOM;
     }
 
+    @Override
+    public String getFqName() {
+        return "Mooshroom";
+    }
+
     /**
      * {@inheritDoc}
      */

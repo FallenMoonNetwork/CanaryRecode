@@ -30,6 +30,11 @@ public class CanaryPigZombie extends CanaryZombie implements PigZombie {
         return EntityType.PIGZOMBIE;
     }
 
+    @Override
+    public String getFqName() {
+        return "PigZombie";
+    }
+
     /**
      * {@inheritDoc}
      */

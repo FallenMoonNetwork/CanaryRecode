@@ -22,6 +22,11 @@ public class CanaryLeashKnot extends CanaryHangingEntity implements LeashKnot {
         return EntityType.LEASHKNOT;
     }
 
+    @Override
+    public String getFqName() {
+        return "LeashKnot";
+    }
+
     /**
      * {@inheritDoc}
      */

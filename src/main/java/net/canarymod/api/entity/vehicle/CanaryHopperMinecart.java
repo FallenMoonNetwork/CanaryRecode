@@ -17,6 +17,11 @@ public class CanaryHopperMinecart extends CanaryContainerMinecart implements Hop
         return EntityType.HOPPERMINECART;
     }
 
+    @Override
+    public String getFqName() {
+        return "HopperMinecart";
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -29,6 +29,11 @@ public class CanarySlime extends CanaryEntityMob implements Slime {
         return EntityType.SLIME;
     }
 
+    @Override
+    public String getFqName() {
+        return "Slime";
+    }
+
     /**
      * {@inheritDoc}
      */

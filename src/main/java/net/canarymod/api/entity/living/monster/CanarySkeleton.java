@@ -28,6 +28,11 @@ public class CanarySkeleton extends CanaryEntityMob implements Skeleton {
         return EntityType.SKELETON;
     }
 
+    @Override
+    public String getFqName() {
+        return "Skeleton";
+    }
+
     /**
      * {@inheritDoc}
      */

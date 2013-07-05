@@ -16,7 +16,6 @@ import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.canarymod.api.world.position.Vector3D;
-import net.minecraft.server.EntityList;
 import net.minecraft.server.NBTTagCompound;
 
 /**
@@ -259,11 +258,6 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public String getName() {
         return entity.al();
-    }
-
-    @Override
-    public String getFqName() {
-        return EntityList.b(entity);
     }
 
     @Override

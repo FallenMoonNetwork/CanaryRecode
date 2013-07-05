@@ -25,6 +25,11 @@ public class CanaryFurnaceMinecart extends CanaryMinecart implements FurnaceMine
         return EntityType.FURNACEMINECART;
     }
 
+    @Override
+    public String getFqName() {
+        return "FurnaceMinecart";
+    }
+
     /**
      * {@inheritDoc}
      */

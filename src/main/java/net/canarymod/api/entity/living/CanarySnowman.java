@@ -28,6 +28,11 @@ public class CanarySnowman extends CanaryEntityLiving implements Snowman {
         return EntityType.SNOWMAN;
     }
 
+    @Override
+    public String getFqName() {
+        return "Snowman";
+    }
+
     /**
      * {@inheritDoc}
      */

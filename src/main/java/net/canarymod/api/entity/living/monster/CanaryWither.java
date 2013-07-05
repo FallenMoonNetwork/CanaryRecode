@@ -28,6 +28,11 @@ public class CanaryWither extends CanaryEntityMob implements Wither {
         return EntityType.WITHER;
     }
 
+    @Override
+    public String getFqName() {
+        return "Wither";
+    }
+
     /**
      * {@inheritDoc}
      */

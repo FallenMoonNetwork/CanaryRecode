@@ -28,6 +28,11 @@ public class CanaryEntityItem extends CanaryEntity implements EntityItem {
         return EntityType.ENTITYITEM;
     }
 
+    @Override
+    public String getFqName() {
+        return "Item";
+    }
+
     /**
      * {@inheritDoc}
      */

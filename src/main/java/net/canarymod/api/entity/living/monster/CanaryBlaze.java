@@ -28,6 +28,11 @@ public class CanaryBlaze extends CanaryEntityMob implements Blaze {
         return EntityType.BLAZE;
     }
 
+    @Override
+    public String getFqName() {
+        return "Blaze";
+    }
+
     /**
      * {@inheritDoc}
      */

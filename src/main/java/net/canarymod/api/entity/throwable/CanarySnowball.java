@@ -25,6 +25,11 @@ public class CanarySnowball extends CanaryEntityThrowable implements Snowball {
         return EntityType.SNOWBALL;
     }
 
+    @Override
+    public String getFqName() {
+        return "Snowball";
+    }
+
     /**
      * {@inheritDoc}
      */

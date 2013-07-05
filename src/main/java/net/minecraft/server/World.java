@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
@@ -13,6 +14,8 @@ import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.vehicle.CanaryVehicle;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.blocks.CanaryBlock;
+import net.canarymod.config.Configuration;
+import net.canarymod.config.WorldConfiguration;
 import net.canarymod.hook.entity.EntitySpawnHook;
 import net.canarymod.hook.entity.VehicleCollisionHook;
 import net.canarymod.hook.world.BlockUpdateHook;
@@ -845,6 +848,10 @@ public abstract class World implements IBlockAccess {
 
     public boolean d(Entity entity) {
 
+        // Check Entity for spawning
+        if (!canSpawn(entity)) {
+            return false;
+        }
         // CanaryMod: EntitySpawn
         if (!(entity.getCanaryEntity() instanceof CanaryPlayer)) {
             EntitySpawnHook hook = (EntitySpawnHook) new EntitySpawnHook(entity.getCanaryEntity()).call();
@@ -2724,5 +2731,47 @@ public abstract class World implements IBlockAccess {
      */
     public void setCanaryWorld(CanaryWorld dim) {
         this.canaryDimension = dim;
+    }
+
+    /**
+     * Checks if the Entity is allowed to spawn based on the world configuration
+     * 
+     * @param entity
+     *            the entity to check
+     * @return true if can spawn; flase if not
+     */
+    protected final boolean canSpawn(Entity entity) {
+        WorldConfiguration world_cfg = Configuration.getWorldConfig(this.canaryDimension.getFqName());
+        if (entity instanceof EntityAnimal || entity instanceof EntityWaterMob || entity instanceof EntityAmbientCreature) {
+            if (!world_cfg.canSpawnAnimals()) {
+                return false;
+            }
+            else if (entity instanceof EntityWaterMob && !Arrays.asList(world_cfg.getSpawnableWaterAnimals()).contains(entity.getCanaryEntity().getFqName())) {
+                return false;
+            }
+            else if (!Arrays.asList(world_cfg.getSpawnableAnimals()).contains(entity.getCanaryEntity().getFqName())) {
+                return false;
+            }
+        }
+        else if (entity instanceof IMob) {
+            if (!world_cfg.canSpawnMonsters()) {
+                return false;
+            }
+            else if (!Arrays.asList(world_cfg.getSpawnableMobs()).contains(entity.getCanaryEntity().getFqName())) {
+                return false;
+            }
+        }
+        else if (entity instanceof INpc && !world_cfg.canSpawnVillagers()) {
+            return false;
+        }
+        else if (entity instanceof EntityGolem) {
+            if (!world_cfg.canSpawnGolems()) {
+                return false;
+            }
+            else if (!Arrays.asList(world_cfg.getSpawnableGolems()).contains(entity.getCanaryEntity().getFqName())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

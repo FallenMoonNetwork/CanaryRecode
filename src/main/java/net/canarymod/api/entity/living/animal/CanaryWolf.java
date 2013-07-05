@@ -29,6 +29,11 @@ public class CanaryWolf extends CanaryTameable implements Wolf {
         return EntityType.WOLF;
     }
 
+    @Override
+    public String getFqName() {
+        return "Wolf";
+    }
+
     /**
      * {@inheritDoc}
      */

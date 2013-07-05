@@ -28,6 +28,11 @@ public class CanarySquid extends CanaryEntityAnimal implements Squid {
         return EntityType.SQUID;
     }
 
+    @Override
+    public String getFqName() {
+        return "Squid";
+    }
+
     /**
      * {@inheritDoc}
      */

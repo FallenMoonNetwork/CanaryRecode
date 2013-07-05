@@ -30,6 +30,11 @@ public class CanaryXPOrb extends CanaryEntity implements XPOrb {
         return EntityType.XPORB;
     }
 
+    @Override
+    public String getFqName() {
+        return "XPOrb";
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -25,6 +25,11 @@ public class CanaryEmptyMinecart extends CanaryMinecart implements EmptyMinecart
         return EntityType.EMPTYMINECART;
     }
 
+    @Override
+    public String getFqName() {
+        return "EmptyMinecart";
+    }
+
     /**
      * {@inheritDoc}
      */

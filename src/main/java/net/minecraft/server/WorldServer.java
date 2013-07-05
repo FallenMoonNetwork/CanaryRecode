@@ -475,15 +475,10 @@ public class WorldServer extends World {
     }
 
     public void a(Entity entity, boolean flag0) {
-        // CanaryMod moved sapwn-animals to per-world config
-        if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).canSpawnAnimals() && (entity instanceof EntityAnimal || entity instanceof EntityWaterMob)) {
+        /* CanaryMod: Spawning checks per world, see World#canSpawn */
+        if (!canSpawn(entity)) {
             entity.w();
         }
-        // CanaryMod moved spawn-npcs to per-world config
-        if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).canSpawnNpcs() && entity instanceof INpc) {
-            entity.w();
-        }
-
         if (!(entity.n instanceof EntityPlayer)) {
             super.a(entity, flag0);
         }

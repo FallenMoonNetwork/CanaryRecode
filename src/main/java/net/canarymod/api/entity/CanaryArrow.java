@@ -21,6 +21,11 @@ public class CanaryArrow extends CanaryProjectile implements Arrow {
         return EntityType.ARROW;
     }
 
+    @Override
+    public String getFqName() {
+        return "Arrow";
+    }
+
     /**
      * {@inheritDoc}
      */

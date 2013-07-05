@@ -28,6 +28,11 @@ public class CanaryPig extends CanaryEntityAnimal implements Pig {
         return EntityType.PIG;
     }
 
+    @Override
+    public String getFqName() {
+        return "Ocelot";
+    }
+
     /**
      * {@inheritDoc}
      */

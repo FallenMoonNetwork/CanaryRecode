@@ -131,6 +131,11 @@ public abstract class Entity {
             public EntityType getEntityType() {
                 return null;
             }
+
+            @Override
+            public String getFqName() {
+                return "Entity";
+            }
         };
     }
 

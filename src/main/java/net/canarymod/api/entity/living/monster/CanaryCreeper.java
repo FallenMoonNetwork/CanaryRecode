@@ -31,6 +31,11 @@ public class CanaryCreeper extends CanaryEntityMob implements Creeper {
         return EntityType.CREEPER;
     }
 
+    @Override
+    public String getFqName() {
+        return "Creeper";
+    }
+
     /**
      * {@inheritDoc}
      */

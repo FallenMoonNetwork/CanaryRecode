@@ -28,6 +28,11 @@ public class CanaryTNTMinecart extends CanaryMinecart implements TNTMinecart {
         return EntityType.TNTMINECART;
     }
 
+    @Override
+    public String getFqName() {
+        return "TNTMinecart";
+    }
+
     /**
      * {@inheritDoc}
      */

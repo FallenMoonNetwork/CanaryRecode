@@ -28,6 +28,11 @@ public class CanaryWitch extends CanaryEntityMob implements Witch {
         return EntityType.WITCH;
     }
 
+    @Override
+    public String getFqName() {
+        return "Witch";
+    }
+
     /**
      * {@inheritDoc}
      */

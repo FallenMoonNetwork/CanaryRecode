@@ -28,6 +28,11 @@ public class CanaryEnderman extends CanaryEntityMob implements Enderman {
         return EntityType.ENDERMAN;
     }
 
+    @Override
+    public String getFqName() {
+        return "Enderman";
+    }
+
     /**
      * {@inheritDoc}
      */

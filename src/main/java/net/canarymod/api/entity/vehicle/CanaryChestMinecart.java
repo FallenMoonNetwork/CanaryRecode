@@ -25,6 +25,11 @@ public class CanaryChestMinecart extends CanaryContainerMinecart implements Ches
         return EntityType.CHESTMINECART;
     }
 
+    @Override
+    public String getFqName() {
+        return "ChestMinecart";
+    }
+
     /**
      * {@inheritDoc}
      */

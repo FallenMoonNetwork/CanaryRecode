@@ -28,6 +28,11 @@ public class CanarySpider extends CanaryEntityMob implements Spider {
         return EntityType.SPIDER;
     }
 
+    @Override
+    public String getFqName() {
+        return "Spider";
+    }
+
     /**
      * {@inheritDoc}
      */

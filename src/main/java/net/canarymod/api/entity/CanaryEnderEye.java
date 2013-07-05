@@ -28,6 +28,11 @@ public class CanaryEnderEye extends CanaryEntity implements EnderEye {
         return EntityType.ENDEREYE;
     }
 
+    @Override
+    public String getFqName() {
+        return "EnderEye";
+    }
+
     /**
      * {@inheritDoc}
      */

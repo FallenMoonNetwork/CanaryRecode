@@ -56,6 +56,11 @@ public class CanaryPlayer extends CanaryHuman implements Player {
     }
 
     @Override
+    public String getFqName() {
+        return "Player";
+    }
+
+    @Override
     public void chat(final String message) {
         if (message.length() > 100) {
             kick("Message too long!");

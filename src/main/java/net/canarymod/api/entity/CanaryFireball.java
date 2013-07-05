@@ -20,6 +20,11 @@ public abstract class CanaryFireball extends CanaryEntity implements Fireball {
         super(entity);
     }
 
+    @Override
+    public String getFqName() {
+        return "Fireball";
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -58,6 +58,11 @@ public class CanaryNonPlayableCharacter extends CanaryHuman implements NonPlayab
         return EntityType.NPC;
     }
 
+    @Override
+    public String getFqName() {
+        return "NonPlayableCharacter";
+    }
+
     /**
      * {@inheritDoc}
      */

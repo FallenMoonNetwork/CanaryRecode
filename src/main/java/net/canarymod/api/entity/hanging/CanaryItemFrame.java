@@ -30,6 +30,11 @@ public class CanaryItemFrame extends CanaryHangingEntity implements ItemFrame {
         return EntityType.ITEMFRAME;
     }
 
+    @Override
+    public String getFqName() {
+        return "ItemFrame";
+    }
+
     /**
      * {@inheritDoc}
      */

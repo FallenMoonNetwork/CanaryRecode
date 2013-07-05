@@ -28,6 +28,11 @@ public class CanaryBat extends CanaryEntityAnimal implements Bat {
         return EntityType.BAT;
     }
 
+    @Override
+    public String getFqName() {
+        return "Bat";
+    }
+
     /**
      * {@inheritDoc}
      */

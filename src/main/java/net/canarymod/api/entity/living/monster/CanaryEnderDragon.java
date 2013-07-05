@@ -30,6 +30,11 @@ public class CanaryEnderDragon extends CanaryEntityLiving implements EnderDragon
         return EntityType.ENDERDRAGON;
     }
 
+    @Override
+    public String getFqName() {
+        return "EnderDragon";
+    }
+
     /**
      * {@inheritDoc}
      */

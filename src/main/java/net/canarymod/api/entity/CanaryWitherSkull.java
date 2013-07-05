@@ -23,6 +23,11 @@ public class CanaryWitherSkull extends CanaryFireball implements WitherSkull {
         return EntityType.WITHERSKULL;
     }
 
+    @Override
+    public String getFqName() {
+        return "WitherSkull";
+    }
+
     /**
      * {@inheritDoc}
      */

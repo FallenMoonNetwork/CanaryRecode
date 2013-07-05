@@ -24,6 +24,11 @@ public class CanaryHorse extends CanaryEntityAnimal implements Horse {
         return EntityType.HORSE;
     }
 
+    @Override
+    public String getFqName() {
+        return "Horse";
+    }
+
     /**
      * {@inheritDoc}
      */

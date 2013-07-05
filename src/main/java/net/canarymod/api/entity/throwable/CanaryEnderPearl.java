@@ -25,6 +25,11 @@ public class CanaryEnderPearl extends CanaryEntityThrowable implements EnderPear
         return EntityType.ENDERPEARL;
     }
 
+    @Override
+    public String getFqName() {
+        return "EnderPearl";
+    }
+
     /**
      * {@inheritDoc}
      */

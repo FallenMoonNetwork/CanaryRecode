@@ -28,6 +28,11 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
         return EntityType.ZOMBIE;
     }
 
+    @Override
+    public String getFqName() {
+        return "Zombie";
+    }
+
     /**
      * {@inheritDoc}
      */

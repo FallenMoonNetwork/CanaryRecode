@@ -28,6 +28,11 @@ public class CanarySilverfish extends CanaryEntityMob implements Silverfish {
         return EntityType.SILVERFISH;
     }
 
+    @Override
+    public String getFqName() {
+        return "Silverfish";
+    }
+
     /**
      * {@inheritDoc}
      */

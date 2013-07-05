@@ -28,6 +28,11 @@ public class CanaryFallingBlock extends CanaryEntity implements FallingBlock {
         return EntityType.FALLINGBLOCK;
     }
 
+    @Override
+    public String getFqName() {
+        return "FallingBlock";
+    }
+
     /**
      * {@inheritDoc}
      */

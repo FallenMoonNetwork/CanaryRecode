@@ -25,6 +25,11 @@ public class CanaryEntityPotion extends CanaryEntityThrowable implements EntityP
         return EntityType.ENTITYPOTION;
     }
 
+    @Override
+    public String getFqName() {
+        return "Potion";
+    }
+
     /**
      * {@inheritDoc}
      */

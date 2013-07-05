@@ -28,6 +28,11 @@ public class CanaryOcelot extends CanaryTameable implements Ocelot {
         return EntityType.OCELOT;
     }
 
+    @Override
+    public String getFqName() {
+        return "Ocelot";
+    }
+
     /**
      * {@inheritDoc}
      */

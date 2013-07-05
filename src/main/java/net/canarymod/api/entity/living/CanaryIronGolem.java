@@ -30,6 +30,11 @@ public class CanaryIronGolem extends CanaryEntityLiving implements IronGolem {
         return EntityType.IRONGOLEM;
     }
 
+    @Override
+    public String getFqName() {
+        return "IronGolem";
+    }
+
     /**
      * {@inheritDoc}
      */

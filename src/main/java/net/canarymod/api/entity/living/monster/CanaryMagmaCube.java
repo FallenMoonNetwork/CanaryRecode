@@ -8,7 +8,7 @@ import net.minecraft.server.EntityMagmaCube;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryLavaSlime extends CanarySlime implements LavaSlime {
+public class CanaryMagmaCube extends CanarySlime implements MagmaCube {
 
     /**
      * Constructs a new wrapper for EntityMagmaCube
@@ -16,7 +16,7 @@ public class CanaryLavaSlime extends CanarySlime implements LavaSlime {
      * @param entity
      *            the EntityMagmaCube to wrap
      */
-    public CanaryLavaSlime(EntityMagmaCube entity) {
+    public CanaryMagmaCube(EntityMagmaCube entity) {
         super(entity);
     }
 
@@ -25,7 +25,12 @@ public class CanaryLavaSlime extends CanarySlime implements LavaSlime {
      */
     @Override
     public EntityType getEntityType() {
-        return EntityType.LAVASLIME;
+        return EntityType.MAGMACUBE;
+    }
+
+    @Override
+    public String getFqName() {
+        return "MagmaCube";
     }
 
     /**

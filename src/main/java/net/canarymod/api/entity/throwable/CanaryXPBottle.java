@@ -25,6 +25,11 @@ public class CanaryXPBottle extends CanaryEntityThrowable implements XPBottle {
         return EntityType.XPBOTTLE;
     }
 
+    @Override
+    public String getFqName() {
+        return "XPBottle";
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -182,12 +182,12 @@ public class CanaryEntityFactory implements EntityFactory {
                     return new EntityItemFrame(mcworld).getCanaryEntity();
                 case LARGEFIREBALL:
                     return new EntityLargeFireball(mcworld).getCanaryEntity();
-                case LAVASLIME:
-                    return new EntityMagmaCube(mcworld).getCanaryEntity();
                 case LEASHKNOT:
                     return new EntityLeashKnot(mcworld).getCanaryEntity();
                 case LIGHTNINGBOLT: // There is a chance that LightningBolt isnt quite right
                     return new EntityLightningBolt(mcworld, 0, 0, 0).getCanaryEntity();
+                case MAGMACUBE:
+                    return new EntityMagmaCube(mcworld).getCanaryEntity();
                 case MOBSPAWNERMINECART:
                     return new EntityMinecartMobSpawner(mcworld).getCanaryEntity();
                 case MOOSHROOM:

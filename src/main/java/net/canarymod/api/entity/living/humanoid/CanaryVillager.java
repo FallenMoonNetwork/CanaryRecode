@@ -34,6 +34,11 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
         return EntityType.VILLAGER;
     }
 
+    @Override
+    public String getFqName() {
+        return "Villager";
+    }
+
     /**
      * {@inheritDoc}
      */

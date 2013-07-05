@@ -27,6 +27,11 @@ public class CanarySmallFireball extends CanaryFireball implements SmallFireball
         return EntityType.SMALLFIREBALL;
     }
 
+    @Override
+    public String getFqName() {
+        return "SmallFireball";
+    }
+
     /**
      * {@inheritDoc}
      */

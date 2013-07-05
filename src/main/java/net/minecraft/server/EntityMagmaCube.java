@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
 
-import net.canarymod.api.entity.living.monster.CanaryLavaSlime;
+import net.canarymod.api.entity.living.monster.CanaryMagmaCube;
 
 
 public class EntityMagmaCube extends EntitySlime {
@@ -10,7 +10,7 @@ public class EntityMagmaCube extends EntitySlime {
         super(world);
         this.ag = true;
         this.aO = 0.2F;
-        this.entity = new CanaryLavaSlime(this); // CanaryMod: Wrap Entity
+        this.entity = new CanaryMagmaCube(this); // CanaryMod: Wrap Entity
     }
 
     protected void ax() {

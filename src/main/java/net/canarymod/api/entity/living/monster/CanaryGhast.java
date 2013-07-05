@@ -30,6 +30,11 @@ public class CanaryGhast extends CanaryEntityMob implements Ghast {
         return EntityType.GHAST;
     }
 
+    @Override
+    public String getFqName() {
+        return "Ghast";
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -31,6 +31,11 @@ public class CanaryFireworkRocket extends CanaryEntity implements FireworkRocket
         return EntityType.FIREWORKROCKET;
     }
 
+    @Override
+    public String getFqName() {
+        return "FireworkRocket";
+    }
+
     /**
      * {@inheritDoc}
      */

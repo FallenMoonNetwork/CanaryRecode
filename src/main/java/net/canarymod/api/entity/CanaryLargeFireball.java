@@ -28,6 +28,11 @@ public class CanaryLargeFireball extends CanaryFireball implements LargeFireball
         return EntityType.LARGEFIREBALL;
     }
 
+    @Override
+    public String getFqName() {
+        return "LargeFireball";
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -28,6 +28,11 @@ public class CanaryPainting extends CanaryHangingEntity implements Painting {
         return EntityType.PAINTING;
     }
 
+    @Override
+    public String getFqName() {
+        return "Painting";
+    }
+
     /**
      * {@inheritDoc}
      */

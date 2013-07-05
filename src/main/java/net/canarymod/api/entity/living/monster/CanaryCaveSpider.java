@@ -29,6 +29,11 @@ public class CanaryCaveSpider extends CanarySpider {
         return EntityType.CAVESPIDER;
     }
 
+    @Override
+    public String getFqName() {
+        return "CaveSpider";
+    }
+
     /**
      * {@inheritDoc}
      */

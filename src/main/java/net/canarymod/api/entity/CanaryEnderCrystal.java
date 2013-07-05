@@ -31,6 +31,11 @@ public class CanaryEnderCrystal extends CanaryEntity implements EnderCrystal {
         return EntityType.ENDERCRYSTAL;
     }
 
+    @Override
+    public String getFqName() {
+        return "EnderCrystal";
+    }
+
     /**
      * {@inheritDoc}
      */

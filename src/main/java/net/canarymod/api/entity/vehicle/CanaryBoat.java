@@ -25,6 +25,11 @@ public class CanaryBoat extends CanaryVehicle implements Boat {
         return EntityType.BOAT;
     }
 
+    @Override
+    public String getFqName() {
+        return "Boat";
+    }
+
     /**
      * {@inheritDoc}
      */

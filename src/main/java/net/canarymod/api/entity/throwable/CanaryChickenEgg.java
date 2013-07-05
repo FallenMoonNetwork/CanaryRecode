@@ -25,6 +25,11 @@ public class CanaryChickenEgg extends CanaryEntityThrowable implements ChickenEg
         return EntityType.CHICKENEGG;
     }
 
+    @Override
+    public String getFqName() {
+        return "ChickenEgg";
+    }
+
     /**
      * {@inheritDoc}
      */

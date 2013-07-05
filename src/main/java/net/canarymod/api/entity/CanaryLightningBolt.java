@@ -22,6 +22,11 @@ public class CanaryLightningBolt extends CanaryEntity implements LightningBolt {
         return EntityType.LIGHTNINGBOLT;
     }
 
+    @Override
+    public String getFqName() {
+        return "LightningBolt";
+    }
+
     /**
      * {@inheritDoc}
      */

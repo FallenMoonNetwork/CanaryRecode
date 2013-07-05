@@ -25,4 +25,9 @@ public class CanaryMobSpawnerMinecart extends CanaryMinecart implements MobSpawn
         return EntityType.MOBSPAWNERMINECART;
     }
 
+    @Override
+    public String getFqName() {
+        return "MobSpawnerMinecart";
+    }
+
 }

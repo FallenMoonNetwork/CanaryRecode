@@ -29,6 +29,11 @@ public class CanaryChicken extends CanaryEntityAnimal implements Chicken {
         return EntityType.CHICKEN;
     }
 
+    @Override
+    public String getFqName() {
+        return "Chicken";
+    }
+
     public int getTimeUntilNextEgg() {
         return getHandle().bu;
     }
