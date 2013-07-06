@@ -168,7 +168,12 @@ public final class SlotHelper {
                     return SecondarySlotType.CRAFT;
                 }
             } else if (container instanceof ContainerHorseInventory) {
-                return SecondarySlotType.CONTAINER;
+                if (slotIndex == 0) {
+                    return SecondarySlotType.SADDLE;
+                }
+                if (slotIndex == 1) {
+                    return SecondarySlotType.HORSE_ARMOR;
+                }
             }
         }
 

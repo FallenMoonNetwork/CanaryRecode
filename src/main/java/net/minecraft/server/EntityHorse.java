@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import java.util.Iterator;
 import java.util.List;
+import net.canarymod.api.entity.living.animal.CanaryHorse;
 
 public class EntityHorse extends EntityAnimal implements IInvBasic {
 
@@ -50,6 +51,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         this.c.a(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.c.a(8, new EntityAILookIdle(this));
         this.cD();
+        this.entity = new CanaryHorse(this); // CanaryMod: wrap entity
     }
 
     protected void a() {

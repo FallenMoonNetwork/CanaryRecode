@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import net.canarymod.api.inventory.Inventory;
+
 public class ContainerHorseInventory extends Container {
 
     private IInventory a;
@@ -79,4 +81,10 @@ public class ContainerHorseInventory extends Container {
         super.b(entityplayer);
         this.a.g();
     }
+
+    // CanaryMod: Special setter to handle the difference in Chests
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+    //
 }

@@ -631,14 +631,18 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             this.i();
         }
         // CanaryMod: InventoryHook
-        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), new CanaryAnimalInventory((AnimalChest) iinventory, (EntityAnimal) entityhorse.getCanaryEntity()), false).call();
+        Inventory inv = new CanaryAnimalInventory((AnimalChest) iinventory, (EntityAnimal) entityhorse.getCanaryEntity());
+
+        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), inv, false).call();
         if (hook.isCanceled()) {
             return;
         }
+        ContainerHorseInventory chi = new ContainerHorseInventory(this.bn, iinventory, entityhorse);
+        chi.setInventory(inv);
         //
         this.bJ();
         this.a.b(new Packet100OpenWindow(this.bX, 11, iinventory.b(), iinventory.j_(), iinventory.c(), entityhorse.k));
-        this.bp = new ContainerHorseInventory(this.bn, iinventory, entityhorse);
+        this.bp = chi;
         this.bp.d = this.bX;
         this.bp.a((ICrafting) this);
     }
