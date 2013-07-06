@@ -5,9 +5,14 @@ import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.entity.living.EntityLiving;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
+import net.canarymod.api.entity.living.animal.Horse;
+import net.canarymod.api.entity.living.animal.Horse.HorseType;
 import net.canarymod.api.entity.living.humanoid.CanaryNonPlayableCharacter;
 import net.canarymod.api.entity.living.humanoid.NonPlayableCharacter;
+import net.canarymod.api.entity.living.humanoid.Villager;
+import net.canarymod.api.entity.living.humanoid.Villager.Profession;
 import net.canarymod.api.entity.living.monster.EntityMob;
+import net.canarymod.api.entity.living.monster.Skeleton;
 import net.canarymod.api.entity.throwable.EntityThrowable;
 import net.canarymod.api.entity.vehicle.Vehicle;
 import net.canarymod.api.world.CanaryWorld;
@@ -130,10 +135,18 @@ public class CanaryEntityFactory implements EntityFactory {
                     return new EntityArrow(mcworld).getCanaryEntity();
                 case BAT:
                     return new EntityBat(mcworld).getCanaryEntity();
+                case BLACKSMITH: // Special Case
+                    Villager blacksmith = (Villager) new EntityVillager(mcworld).getCanaryEntity();
+                    blacksmith.setProfession(Profession.BLACKSMITH);
+                    return blacksmith;
                 case BLAZE:
                     return new EntityBlaze(mcworld).getCanaryEntity();
                 case BOAT:
                     return new EntityBoat(mcworld).getCanaryEntity();
+                case BUTCHER: // Special Case
+                    Villager butcher = (Villager) new EntityVillager(mcworld).getCanaryEntity();
+                    butcher.setProfession(Profession.BUTCHER);
+                    return butcher;
                 case CAVESPIDER:
                     return new EntityCaveSpider(mcworld).getCanaryEntity();
                 case CHESTMINECART:
@@ -146,6 +159,10 @@ public class CanaryEntityFactory implements EntityFactory {
                     return new EntityCow(mcworld).getCanaryEntity();
                 case CREEPER:
                     return new EntityCreeper(mcworld).getCanaryEntity();
+                case DONKEY: // Special Case
+                    Horse donkey = (Horse) new EntityHorse(mcworld).getCanaryEntity();
+                    donkey.setType(HorseType.DONKEY);
+                    return donkey;
                 case EMPTYMINECART:
                     return new EntityMinecartEmpty(mcworld).getCanaryEntity();
                 case ENDERCRYSTAL:
@@ -164,6 +181,10 @@ public class CanaryEntityFactory implements EntityFactory {
                     return new EntityPotion(mcworld).getCanaryEntity();
                 case FALLINGBLOCK:
                     return new EntityFallingSand(mcworld).getCanaryEntity();
+                case FARMER: // Special Case
+                    Villager farmer = (Villager) new EntityVillager(mcworld).getCanaryEntity();
+                    farmer.setProfession(Profession.FARMER);
+                    return farmer;
                 case FIREWORKROCKET:
                     return new EntityFireworkRocket(mcworld).getCanaryEntity();
                 case FURNACEMINECART:
@@ -184,6 +205,10 @@ public class CanaryEntityFactory implements EntityFactory {
                     return new EntityLargeFireball(mcworld).getCanaryEntity();
                 case LEASHKNOT:
                     return new EntityLeashKnot(mcworld).getCanaryEntity();
+                case LIBRARIAN: // Special Case
+                    Villager librarian = (Villager) new EntityVillager(mcworld).getCanaryEntity();
+                    librarian.setProfession(Profession.LIBRARIAN);
+                    return librarian;
                 case LIGHTNINGBOLT: // There is a chance that LightningBolt isnt quite right
                     return new EntityLightningBolt(mcworld, 0, 0, 0).getCanaryEntity();
                 case MAGMACUBE:
@@ -192,6 +217,10 @@ public class CanaryEntityFactory implements EntityFactory {
                     return new EntityMinecartMobSpawner(mcworld).getCanaryEntity();
                 case MOOSHROOM:
                     return new EntityMooshroom(mcworld).getCanaryEntity();
+                case MULE: // Special Case
+                    Horse mule = (Horse) new EntityHorse(mcworld).getCanaryEntity();
+                    mule.setType(HorseType.MULE);
+                    return mule;
                 case OCELOT:
                     return new EntityOcelot(mcworld).getCanaryEntity();
                 case PAINTING:
@@ -202,12 +231,20 @@ public class CanaryEntityFactory implements EntityFactory {
                     return new EntityPigZombie(mcworld).getCanaryEntity();
                 case POTION:
                     return new EntityPotion(mcworld).getCanaryEntity();
+                case PRIEST: // Special Case
+                    Villager priest = (Villager) new EntityVillager(mcworld).getCanaryEntity();
+                    priest.setProfession(Profession.PRIEST);
+                    return priest;
                 case SHEEP:
                     return new EntitySheep(mcworld).getCanaryEntity();
                 case SILVERFISH:
                     return new EntitySilverfish(mcworld).getCanaryEntity();
                 case SKELETON:
                     return new EntitySkeleton(mcworld).getCanaryEntity();
+                case SKELETONHORSE: // Special Case
+                    Horse skeletonhorse = (Horse) new EntityHorse(mcworld).getCanaryEntity();
+                    skeletonhorse.setType(HorseType.SKELETON);
+                    return skeletonhorse;
                 case SLIME:
                     return new EntitySlime(mcworld).getCanaryEntity();
                 case SMALLFIREBALL:
@@ -230,6 +267,10 @@ public class CanaryEntityFactory implements EntityFactory {
                     return new EntityWitch(mcworld).getCanaryEntity();
                 case WITHER:
                     return new EntityWither(mcworld).getCanaryEntity();
+                case WITHERSKELETON: // Special Case
+                    Skeleton witherskeleton = (Skeleton) new EntitySkeleton(mcworld).getCanaryEntity();
+                    witherskeleton.setIsWitherSkeleton(true);
+                    return witherskeleton;
                 case WITHERSKULL:
                     return new EntityWitherSkull(mcworld).getCanaryEntity();
                 case WOLF:
@@ -240,6 +281,10 @@ public class CanaryEntityFactory implements EntityFactory {
                     return new EntityXPOrb(mcworld).getCanaryEntity();
                 case ZOMBIE:
                     return new EntityZombie(mcworld).getCanaryEntity();
+                case ZOMBIEHORSE: // Special Case
+                    Horse zombiehorse = (Horse) new EntityHorse(mcworld).getCanaryEntity();
+                    zombiehorse.setType(HorseType.ZOMBIE);
+                    return zombiehorse;
                 default:
                     break;
             }

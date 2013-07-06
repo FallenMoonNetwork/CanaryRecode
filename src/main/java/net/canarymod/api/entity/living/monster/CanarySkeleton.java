@@ -25,7 +25,7 @@ public class CanarySkeleton extends CanaryEntityMob implements Skeleton {
      */
     @Override
     public EntityType getEntityType() {
-        return EntityType.SKELETON;
+        return isWitherSkeleton() ? EntityType.WITHERSKELETON : EntityType.SKELETON;
     }
 
     @Override

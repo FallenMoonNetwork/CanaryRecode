@@ -21,7 +21,20 @@ public class CanaryHorse extends CanaryEntityAnimal implements Horse {
      */
     @Override
     public EntityType getEntityType() {
-        return EntityType.HORSE;
+        switch (getType()) {
+            case DONKEY:
+                return EntityType.DONKEY;
+            case HORSE:
+                return EntityType.HORSE;
+            case MULE:
+                return EntityType.MULE;
+            case SKELETON:
+                return EntityType.SKELETONHORSE;
+            case ZOMBIE:
+                return EntityType.ZOMBIEHORSE;
+            default:
+                return EntityType.HORSE;
+        }
     }
 
     @Override
