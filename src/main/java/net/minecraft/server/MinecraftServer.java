@@ -526,7 +526,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         ILogAgent ilogagent = null;
 
         try {
-            boolean flag0 = !GraphicsEnvironment.isHeadless();
+            // CanaryMod - Removed boolean flag0 = !GraphicsEnvironment.isHeadless();
             String s0 = null;
             String s1 = ".";
             String s2 = null;
@@ -539,7 +539,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 String s4 = i1 == astring.length - 1 ? null : astring[i1 + 1];
                 boolean flag3 = false;
 
-                if (!s3.equals("nogui") && !s3.equals("--nogui")) {
+                // CanaryMod removed Nogui check, now done in Main
+                {
                     if (s3.equals("--port") && s4 != null) {
                         flag3 = true;
 
@@ -562,8 +563,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     } else if (s3.equals("--bonusChest")) {
                         flag2 = true;
                     }
-                } else {
-                    flag0 = false;
+                    // CanaryMod removed else
                 }
 
                 if (flag3) {
@@ -572,10 +572,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             }
 
             DedicatedServer dedicatedserver = new DedicatedServer(new File(s1));
-
-            if (notHeadless) {
-                MinecraftServerGui.minecraftservergui.validate();
-            }
 
             ilogagent = dedicatedserver.an();
             if (s0 != null) {
@@ -598,9 +594,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 dedicatedserver.c(true);
             }
 
-            if (flag0) {
-                dedicatedserver.at();
-            }
+            // CanaryMod Removed old call to start GUI
 
             dedicatedserver.v();
             Runtime.getRuntime().addShutdownHook(new ThreadDedicatedServer(dedicatedserver));
