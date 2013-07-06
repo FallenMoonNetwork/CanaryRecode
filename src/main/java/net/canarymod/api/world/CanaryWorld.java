@@ -30,6 +30,7 @@ import net.canarymod.api.world.effects.SoundEffect;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.canarymod.config.Configuration;
+import net.canarymod.config.WorldConfiguration;
 import net.minecraft.server.EntityLightningBolt;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EnumGameType;
@@ -62,6 +63,7 @@ public class CanaryWorld implements World {
     private CanaryChunkProviderServer chunkProvider;
     private CanaryEntityTracker entityTracker;
     public long[] nanoTicks;
+    private WorldConfiguration wrld_cfg;
 
     private CanaryPlayerManager playerManager;
     /**
@@ -80,6 +82,7 @@ public class CanaryWorld implements World {
         // Init nanotick size
         nanoTicks = new long[100];
         chunkProvider = new CanaryChunkProviderServer(dimension.b);
+        wrld_cfg = Configuration.getWorldConfig(this.fqName);
         if (Configuration.getServerConfig().isWorldCacheTimerEnabled()) {
             TaskManager.scheduleContinuedTaskInMinutes(new WorldCacheTimer(this), Configuration.getServerConfig().getWorldCacheTimeout(), Configuration.getServerConfig().getWorldCacheTimeout());
         }
@@ -330,8 +333,7 @@ public class CanaryWorld implements World {
 
     @Override
     public boolean isChunkLoaded(Block block) {
-        chunkProvider.isChunkLoaded(block.getX() >> 4, block.getZ() >> 4);
-        return false;
+        return chunkProvider.isChunkLoaded(block.getX() >> 4, block.getZ() >> 4);
     }
 
     @Override
@@ -346,7 +348,7 @@ public class CanaryWorld implements World {
 
     @Override
     public int getHeight() {
-        return 256;
+        return wrld_cfg.getMaxBuildHeight();
     }
 
     @Override
@@ -356,7 +358,7 @@ public class CanaryWorld implements World {
                 return i;
             }
         }
-        return 256;
+        return getHeight();
     }
 
     @Override
@@ -379,12 +381,12 @@ public class CanaryWorld implements World {
 
     @Override
     public long getRelativeTime() {
-        return world.I();
+        return world.J();
     }
 
     @Override
     public long getRawTime() {
-        return world.H();
+        return world.I();
     }
 
     @Override
@@ -424,10 +426,6 @@ public class CanaryWorld implements World {
         } else {
             return null;
         }
-    }
-
-    public net.minecraft.server.World getHandle() {
-        return world;
     }
 
     @Override
@@ -677,17 +675,6 @@ public class CanaryWorld implements World {
     }
 
     @Override
-    public boolean equals(Object ob) {
-
-        if (!(ob instanceof CanaryWorld)) {
-            return false;
-        }
-        CanaryWorld test = (CanaryWorld) ob;
-
-        return test == this;
-    }
-
-    @Override
     public BiomeType getBiomeType(int x, int z) {
         CanaryChunk c = (CanaryChunk) getChunk(x, z);
         if (c == null) {
@@ -720,5 +707,20 @@ public class CanaryWorld implements World {
     @Override
     public void save() {
         world.b.a(true, null);
+    }
+
+    public net.minecraft.server.World getHandle() {
+        return world;
+    }
+
+    @Override
+    public boolean equals(Object ob) {
+
+        if (!(ob instanceof CanaryWorld)) {
+            return false;
+        }
+        CanaryWorld test = (CanaryWorld) ob;
+
+        return test == this;
     }
 }
