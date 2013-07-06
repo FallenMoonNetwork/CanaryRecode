@@ -1,11 +1,8 @@
 package net.minecraft.server;
 
-
 import java.util.List;
 import java.util.Random;
-import net.canarymod.Canary;
 import net.canarymod.hook.world.RedstoneChangeHook;
-
 
 public abstract class BlockButton extends Block {
 
@@ -145,9 +142,7 @@ public abstract class BlockButton extends Block {
         }
 
         // CanaryMod: RedstoneChange
-        RedstoneChangeHook hook = new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i3, i6);
-
-        Canary.hooks().callHook(hook);
+        RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i3, i6).call();
         if (hook.isCanceled()) {
             return true;
             //

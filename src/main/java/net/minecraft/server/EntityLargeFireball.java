@@ -1,10 +1,7 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryLargeFireball;
 import net.canarymod.hook.entity.ProjectileHitHook;
-
 
 public class EntityLargeFireball extends EntityFireball {
 
@@ -23,9 +20,7 @@ public class EntityLargeFireball extends EntityFireball {
     protected void a(MovingObjectPosition movingobjectposition) {
         if (!this.q.I) {
             // CanaryMod: ProjectileHitHook
-            ProjectileHitHook hook = new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity());
-
-            Canary.hooks().callHook(hook);
+            ProjectileHitHook hook = (ProjectileHitHook) new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
             if (!hook.isCanceled()) { //
                 if (movingobjectposition.g != null) {
                     movingobjectposition.g.a(DamageSource.a((EntityFireball) this, this.a), 6);

@@ -1,7 +1,6 @@
 package net.minecraft.server;
 
 import java.util.List;
-import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryArrow;
 import net.canarymod.hook.entity.ProjectileHitHook;
 
@@ -210,9 +209,7 @@ public class EntityArrow extends Entity implements IProjectile {
 
             if (movingobjectposition != null) {
                 // CanaryMod: ProjectileHit
-                ProjectileHitHook hook = new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity());
-
-                Canary.hooks().callHook(hook);
+                ProjectileHitHook hook = (ProjectileHitHook) new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
                 if (!hook.isCanceled()) { //
                     if (movingobjectposition.g != null) {
                         f2 = MathHelper.a(this.x * this.x + this.y * this.y + this.z * this.z);

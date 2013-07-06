@@ -6,11 +6,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
+import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.hook.entity.DamageHook;
+import net.canarymod.hook.entity.EntityDeathHook;
+import net.canarymod.hook.entity.PotionEffectAppliedHook;
+import net.canarymod.hook.entity.PotionEffectFinishHook;
 
 public abstract class EntityLivingBase extends Entity {
 
@@ -237,6 +240,7 @@ public abstract class EntityLivingBase extends Entity {
     }
 
     protected void az() {
+        // ?
         ++this.aB;
         if (this.aB == 20) {
             int i0;
@@ -480,12 +484,21 @@ public abstract class EntityLivingBase extends Entity {
 
     public void d(PotionEffect potioneffect) {
         if (this.e(potioneffect)) {
-            if (this.f.containsKey(Integer.valueOf(potioneffect.a()))) {
-                ((PotionEffect) this.f.get(Integer.valueOf(potioneffect.a()))).a(potioneffect);
-                this.b((PotionEffect) this.f.get(Integer.valueOf(potioneffect.a())));
-            } else {
-                this.f.put(Integer.valueOf(potioneffect.a()), potioneffect);
-                this.a(potioneffect);
+            // CanaryMod: PotionEffectApplied
+            PotionEffectAppliedHook hook = (PotionEffectAppliedHook) new PotionEffectAppliedHook((net.canarymod.api.entity.living.LivingBase) getCanaryEntity(), new CanaryPotionEffect(potioneffect)).call();
+            if (hook.getPotionEffect() == null) {
+                return;
+            }
+            potioneffect = ((CanaryPotionEffect) hook.getPotionEffect()).getHandle();
+            //
+            if (this.e(potioneffect)) {
+                if (this.f.containsKey(Integer.valueOf(potioneffect.a()))) {
+                    ((PotionEffect) this.f.get(Integer.valueOf(potioneffect.a()))).a(potioneffect);
+                    this.b((PotionEffect) this.f.get(Integer.valueOf(potioneffect.a())));
+                } else {
+                    this.f.put(Integer.valueOf(potioneffect.a()), potioneffect);
+                    this.a(potioneffect);
+                }
             }
         }
     }
@@ -533,6 +546,9 @@ public abstract class EntityLivingBase extends Entity {
     }
 
     protected void c(PotionEffect potioneffect) {
+        // CanaryMod: PotionEffectFinish
+        new PotionEffectFinishHook((net.canarymod.api.entity.living.EntityLiving) getCanaryEntity(), new CanaryPotionEffect(potioneffect)).call();
+        //
         this.h = true;
         if (!this.q.I) {
             Potion.a[potioneffect.a()].a(this, this.aT(), potioneffect.c());
@@ -590,7 +606,7 @@ public abstract class EntityLivingBase extends Entity {
 
                     hook.setDamageDealt((int) (f0 - this.bc));
                     if (attacker != null) {
-                        Canary.hooks().callHook(hook);
+                        hook.call();
                     }
                     if (hook.isCanceled()) {
                         if (this instanceof EntityCreature) {
@@ -605,7 +621,7 @@ public abstract class EntityLivingBase extends Entity {
                     flag0 = false;
                 } else {
                     if (attacker != null) {
-                        Canary.hooks().callHook(hook);
+                        hook.call();
                     }
                     if (hook.isCanceled()) {
                         if (this instanceof EntityCreature) {
@@ -697,6 +713,9 @@ public abstract class EntityLivingBase extends Entity {
     }
 
     public void a(DamageSource damagesource) {
+        // CanaryMod: EntityDeath
+        new EntityDeathHook(this.getCanaryEntity(), damagesource.getCanaryDamageSource()).call();
+        //
         Entity entity = damagesource.i();
         EntityLivingBase entitylivingbase = this.aO();
 
@@ -784,13 +803,19 @@ public abstract class EntityLivingBase extends Entity {
         int i0 = MathHelper.f(f0 - 3.0F - f1);
 
         if (i0 > 0) {
-            if (i0 > 4) {
-                this.a("damage.fallbig", 1.0F, 1.0F);
-            } else {
-                this.a("damage.fallsmall", 1.0F, 1.0F);
-            }
+            // CanaryMod: call DamageHook (Fall)
+            DamageHook hook = (DamageHook) new DamageHook(null, entity, new CanaryDamageSource(DamageSource.h), i0).call();
+            if (!hook.isCanceled()) {
+                if (i0 > 4) {
+                    this.a("damage.fallbig", 1.0F, 1.0F);
+                } else {
+                    this.a("damage.fallsmall", 1.0F, 1.0F);
+                }
 
-            this.a(DamageSource.h, (float) i0);
+                this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
+            }
+            //
+
             int i1 = this.q.a(MathHelper.c(this.u), MathHelper.c(this.v - 0.20000000298023224D - (double) this.N), MathHelper.c(this.w));
 
             if (i1 > 0) {

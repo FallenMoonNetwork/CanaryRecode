@@ -1,14 +1,11 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
-import net.canarymod.api.entity.living.EntityLiving;
+import net.canarymod.api.entity.living.LivingBase;
 import net.canarymod.api.entity.vehicle.CanaryEmptyMinecart;
 import net.canarymod.api.entity.vehicle.Vehicle;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.VehicleEnterHook;
 import net.canarymod.hook.entity.VehicleExitHook;
-
 
 public class EntityMinecartEmpty extends EntityMinecart {
 
@@ -33,12 +30,12 @@ public class EntityMinecartEmpty extends EntityMinecart {
                 CancelableHook hook = null;
 
                 if (this.n == null) {
-                    hook = new VehicleEnterHook((Vehicle) this.entity, (EntityLiving) entityplayer.getCanaryEntity());
+                    hook = new VehicleEnterHook((Vehicle) this.entity, (LivingBase) entityplayer.getCanaryEntity());
                 } else if (this.n == entityplayer) {
-                    hook = new VehicleExitHook((Vehicle) this.entity, (EntityLiving) entityplayer.getCanaryEntity());
+                    hook = new VehicleExitHook((Vehicle) this.entity, (LivingBase) entityplayer.getCanaryEntity());
                 }
                 if (hook != null) {
-                    Canary.hooks().callHook(hook);
+                    hook.call();
                     if (!hook.isCanceled()) {
                         entityplayer.a((Entity) this);
                     }

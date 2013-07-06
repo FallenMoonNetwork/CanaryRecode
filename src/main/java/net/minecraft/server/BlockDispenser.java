@@ -1,10 +1,7 @@
 package net.minecraft.server;
 
-
 import java.util.Random;
-import net.canarymod.Canary;
 import net.canarymod.hook.world.DispenseHook;
-
 
 public class BlockDispenser extends BlockContainer {
 
@@ -76,9 +73,7 @@ public class BlockDispenser extends BlockContainer {
 
             if (i3 < 0) {
                 // CanaryMod: Dispense Smoke
-                DispenseHook hook = new DispenseHook(tileentitydispenser.getCanaryDispenser(), null);
-
-                Canary.hooks().callHook(hook);
+                DispenseHook hook = (DispenseHook) new DispenseHook(tileentitydispenser.getCanaryDispenser(), null).call();
                 if (!hook.isCanceled()) {
                     world.e(1001, i0, i1, i2, 0);
                 }

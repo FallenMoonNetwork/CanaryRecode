@@ -1,10 +1,7 @@
 package net.minecraft.server;
 
-
 import java.util.Random;
-import net.canarymod.Canary;
 import net.canarymod.hook.world.DispenseHook;
-
 
 final class DispenserBehaviorFireball extends BehaviorDefaultDispenseItem {
 
@@ -24,9 +21,7 @@ final class DispenserBehaviorFireball extends BehaviorDefaultDispenseItem {
 
         // CanaryMod: Dispense
         Entity fireball = new EntitySmallFireball(world, d0, d1, d2, d3, d4, d5);
-        DispenseHook hook = new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), fireball.getCanaryEntity());
-
-        Canary.hooks().callHook(hook);
+        DispenseHook hook = (DispenseHook) new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), fireball.getCanaryEntity()).call();
         if (!hook.isCanceled()) {
             world.d(fireball);
             itemstack.a(1);

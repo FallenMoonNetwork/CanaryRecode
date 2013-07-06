@@ -1,7 +1,6 @@
 package net.minecraft.server;
 
 import java.util.concurrent.Callable;
-import net.canarymod.Canary;
 import net.canarymod.hook.player.ItemPickupHook;
 
 public class InventoryPlayer implements IInventory {
@@ -212,9 +211,7 @@ public class InventoryPlayer implements IInventory {
             while (left > 0 && slot < 36);
             if (itemstack.b - left > 0) {
                 // CanaryMod: ItemPickUp
-                ItemPickupHook hook = new ItemPickupHook(((EntityPlayerMP) this.d).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity());
-
-                Canary.hooks().callHook(hook);
+                ItemPickupHook hook = (ItemPickupHook) new ItemPickupHook(((EntityPlayerMP) this.d).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity()).call();
                 return !hook.isCanceled();
                 //
             } else {

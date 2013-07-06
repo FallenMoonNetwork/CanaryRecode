@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,7 +14,6 @@ import net.canarymod.api.world.blocks.BlockType;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.PortalDestroyHook;
 import net.canarymod.tasks.ServerTaskManager;
-
 
 public class Chunk {
 
@@ -154,7 +152,8 @@ public class Chunk {
                             }
 
                             --i4;
-                        } while (i4 > 0 && i3 > 0);
+                        }
+                        while (i4 > 0 && i3 > 0);
                     }
 
                     ++i2;
@@ -416,9 +415,7 @@ public class Chunk {
                         }
                         if (completePortal == true) {
                             // CanaryMod: PortalDestroy
-                            PortalDestroyHook hook = new PortalDestroyHook(portalBlocks);
-
-                            Canary.hooks().callHook(hook);
+                            PortalDestroyHook hook = (PortalDestroyHook) new PortalDestroyHook(portalBlocks).call();
                             if (hook.isCanceled()) {// Hook canceled = don't destroy the portal.
                                 // in that case we need to reconstruct the portal's frame to make the portal valid.
                                 // Problem is we don't want to reconstruct it right away because more blocks might be deleted (for example on explosion).
@@ -598,7 +595,7 @@ public class Chunk {
         if (i0 != this.g || i1 != this.h) {
             this.e.Y().c("Wrong location! " + entity);
             // Thread.dumpStack();
-//MERGE: entity.w() is probably not kill() anymore! - Chris
+            // MERGE: entity.w() is probably not kill() anymore! - Chris
             entity.w();
             return;
         }

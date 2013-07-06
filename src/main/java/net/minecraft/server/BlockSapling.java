@@ -1,7 +1,6 @@
 package net.minecraft.server;
 
 import java.util.Random;
-import net.canarymod.Canary;
 import net.canarymod.hook.world.TreeGrowHook;
 
 public class BlockSapling extends BlockFlower {
@@ -33,8 +32,7 @@ public class BlockSapling extends BlockFlower {
             world.b(i0, i1, i2, i3 | 8, 4);
         } else {
             // CanaryMod: TreeGrow; If someone figures out how to get more information into this, let me know - darkdiplomat;
-            TreeGrowHook hook = new TreeGrowHook(world.getCanaryWorld().getBlockAt(i0, i1, i2));
-            Canary.hooks().callHook(hook);
+            TreeGrowHook hook = (TreeGrowHook) new TreeGrowHook(world.getCanaryWorld().getBlockAt(i0, i1, i2)).call();
             if (!hook.isCanceled()) {
                 this.d(world, i0, i1, i2, random);
             }

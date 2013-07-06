@@ -1,11 +1,8 @@
 package net.minecraft.server;
 
-
 import java.util.Random;
-import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.PortalCreateHook;
-
 
 public class BlockPortal extends BlockBreakable {
 
@@ -103,15 +100,12 @@ public class BlockPortal extends BlockBreakable {
 
             // CanaryMod: PortalCreate
             CanaryBlock[][] portalBlocks = new CanaryBlock[3][2];
-//MERGE This should be checked, I don't know if I changed things correctly! - Chris
             for (i3 = 0; i3 < 2; ++i3) {
                 for (i4 = 0; i4 < 3; ++i4) {
-                    portalBlocks[i3][i4] = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0 + b0 * i3, i1 + i4, i2 + b1 * i3);
+                    portalBlocks[i4][i3] = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0 + b0 * i3, i1 + i4, i2 + b1 * i3);
                 }
             }
-            PortalCreateHook hook = new PortalCreateHook(portalBlocks);
-
-            Canary.hooks().callHook(hook);
+            PortalCreateHook hook = (PortalCreateHook) new PortalCreateHook(portalBlocks).call();
             if (!hook.isCanceled()) {
                 for (i3 = 0; i3 < 2; ++i3) {
                     for (i4 = 0; i4 < 3; ++i4) {

@@ -1,9 +1,6 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.hook.world.DispenseHook;
-
 
 final class DispenserBehaviorEmptyBucket extends BehaviorDefaultDispenseItem {
 
@@ -34,9 +31,7 @@ final class DispenserBehaviorEmptyBucket extends BehaviorDefaultDispenseItem {
         world.i(i0, i1, i2);
         if (--itemstack.b == 0) {
             // CanaryMod: Dispense
-            DispenseHook hook = new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), null);
-
-            Canary.hooks().callHook(hook);
+            DispenseHook hook = (DispenseHook) new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), null).call();
             if (!hook.isCanceled()) {
                 itemstack.d = item.cv;
                 itemstack.b = 1;

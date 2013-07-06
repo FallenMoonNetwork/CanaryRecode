@@ -1,7 +1,6 @@
 package net.minecraft.server;
 
 import java.util.Iterator;
-import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntityItem;
 import net.canarymod.hook.entity.EntityDespawnHook;
 import net.canarymod.hook.entity.ItemTouchGroundHook;
@@ -91,9 +90,7 @@ public class EntityItem extends Entity {
             // CanaryMod: ItemTouchGround
             // It does touch the ground now, but didn't in last tick
             if (!tmpTouch) {
-                ItemTouchGroundHook hook = new ItemTouchGroundHook((net.canarymod.api.entity.EntityItem) getCanaryEntity());
-
-                Canary.hooks().callHook(hook);
+                ItemTouchGroundHook hook = (ItemTouchGroundHook) new ItemTouchGroundHook((net.canarymod.api.entity.EntityItem) getCanaryEntity()).call();
                 if (hook.isCanceled()) {
                     this.w(); // kill the item
                 }
@@ -111,9 +108,7 @@ public class EntityItem extends Entity {
         ++this.a;
         if (!this.q.I && this.a >= 6000) {
             // CanaryMod: EntityDespawn
-            EntityDespawnHook hook = new EntityDespawnHook(getCanaryEntity());
-
-            Canary.hooks().callHook(hook);
+            EntityDespawnHook hook = (EntityDespawnHook) new EntityDespawnHook(getCanaryEntity()).call();
             if (!hook.isCanceled()) {
                 this.w();
             } else {

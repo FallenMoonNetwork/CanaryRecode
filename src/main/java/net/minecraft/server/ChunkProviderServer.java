@@ -1,20 +1,16 @@
 package net.minecraft.server;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryChunkProviderServer;
 import net.canarymod.hook.world.ChunkCreatedHook;
 import net.canarymod.hook.world.ChunkCreationHook;
 import net.canarymod.hook.world.ChunkLoadedHook;
 import net.canarymod.hook.world.ChunkUnloadHook;
-
 
 public class ChunkProviderServer implements IChunkProvider {
 
@@ -29,6 +25,7 @@ public class ChunkProviderServer implements IChunkProvider {
 
     // CanaryMod start
     private CanaryChunkProviderServer canaryChunkProvider;
+
     //
     public ChunkProviderServer(WorldServer worldserver, IChunkLoader ichunkloader, IChunkProvider ichunkprovider) {
         this.c = new EmptyChunk(worldserver, 0, 0);
@@ -83,14 +80,13 @@ public class ChunkProviderServer implements IChunkProvider {
         if (chunk == null) {
             chunk = this.f(i0, i1);
             if (chunk == null) {
-             // CanaryMod: ChunkCreation
-                ChunkCreationHook hook = new ChunkCreationHook(i0, i1, h.getCanaryWorld());
-                Canary.hooks().callHook(hook);
+                // CanaryMod: ChunkCreation
+                ChunkCreationHook hook = (ChunkCreationHook) new ChunkCreationHook(i0, i1, h.getCanaryWorld()).call();
                 byte[] blocks = hook.getBlockData();
                 if (blocks != null) {
                     chunk = new Chunk(h, blocks, i0, i1);
-                    chunk.k = true; //is populated
-                    chunk.b(); //lighting update
+                    chunk.k = true; // is populated
+                    chunk.b(); // lighting update
                     if (hook.getBiomeData() != null) {
                         chunk.getCanaryChunk().setBiomeData(hook.getBiomeData());
                     }
@@ -105,13 +101,13 @@ public class ChunkProviderServer implements IChunkProvider {
                         CrashReport crashreport = CrashReport.a(throwable, "Exception generating new chunk");
                         CrashReportCategory crashreportcategory = crashreport.a("Chunk to be generated");
 
-                        crashreportcategory.a("Location", String.format("%d,%d", new Object[] { Integer.valueOf(i0), Integer.valueOf(i1)}));
+                        crashreportcategory.a("Location", String.format("%d,%d", new Object[]{ Integer.valueOf(i0), Integer.valueOf(i1) }));
                         crashreportcategory.a("Position hash", Long.valueOf(i2));
                         crashreportcategory.a("Generator", this.d.e());
                         throw new ReportedException(crashreport);
                     }
                     // CanaryMod: ChunkCreated
-                    Canary.hooks().callHook(new ChunkCreatedHook(chunk.getCanaryChunk(), h.getCanaryWorld()));
+                    new ChunkCreatedHook(chunk.getCanaryChunk(), h.getCanaryWorld()).call();
                     //
                 }
             }
@@ -121,7 +117,7 @@ public class ChunkProviderServer implements IChunkProvider {
             if (chunk != null) {
                 chunk.c();
                 // CanaryMod: ChunkLoaded
-                Canary.hooks().callHook(new ChunkLoadedHook(chunk.getCanaryChunk(), h.getCanaryWorld()));
+                new ChunkLoadedHook(chunk.getCanaryChunk(), h.getCanaryWorld()).call();
                 //
                 if (chunk.k && this.a(i0 + 1, i1 + 1) && this.a(i0, i1 + 1) && this.a(i0 + 1, i1)) {
                     this.a(this, i0, i1);
@@ -237,9 +233,7 @@ public class ChunkProviderServer implements IChunkProvider {
 
                     if (chunk != null) {
                         // CanaryMod: ChunkUnload
-                        ChunkUnloadHook hook = new ChunkUnloadHook(chunk.getCanaryChunk(), h.getCanaryWorld());
-
-                        Canary.hooks().callHook(hook);
+                        ChunkUnloadHook hook = (ChunkUnloadHook) new ChunkUnloadHook(chunk.getCanaryChunk(), h.getCanaryWorld()).call();
                         if (hook.isCanceled()) {
                             // TODO: Might need to return false instead ... unsure
                             return true;

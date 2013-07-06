@@ -8,6 +8,9 @@ import net.minecraft.server.ContainerChest;
 import net.minecraft.server.ContainerDispenser;
 import net.minecraft.server.ContainerEnchantment;
 import net.minecraft.server.ContainerFurnace;
+import net.minecraft.server.ContainerHorseInventory;
+import net.minecraft.server.ContainerHorseInventorySlotArmor;
+import net.minecraft.server.ContainerHorseInventorySlotSaddle;
 import net.minecraft.server.ContainerMerchant;
 import net.minecraft.server.ContainerPlayer;
 import net.minecraft.server.ContainerRepair;
@@ -73,6 +76,10 @@ public final class SlotHelper {
             return SlotType.MERCHANT;
         } else if (slot instanceof ContainerRepairINNER2) {
             return SlotType.REPAIR;
+        } else if (slot instanceof ContainerHorseInventorySlotSaddle) {
+            return SlotType.SADDLE;
+        } else if (slot instanceof ContainerHorseInventorySlotArmor) {
+            return SlotType.ARMOR;
         } else if (slot.getClass() != Slot.class) {
             return SlotType.UNKNOWN;
         } else {
@@ -160,6 +167,8 @@ public final class SlotHelper {
                 if (slotIndex <= 9) {
                     return SecondarySlotType.CRAFT;
                 }
+            } else if (container instanceof ContainerHorseInventory) {
+                return SecondarySlotType.CONTAINER;
             }
         }
 

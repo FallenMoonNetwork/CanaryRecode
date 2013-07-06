@@ -1,9 +1,6 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.hook.world.DispenseHook;
-
 
 final class DispenserBehaviorMobEgg extends BehaviorDefaultDispenseItem {
 
@@ -19,11 +16,8 @@ final class DispenserBehaviorMobEgg extends BehaviorDefaultDispenseItem {
         if (entity instanceof EntityLivingBase && itemstack.u()) {
             ((EntityLiving) entity).a(itemstack.s());
         }
-//MERGE: This might not be correct (iblocksource.j())
         // CanaryMod: Dispense
-        DispenseHook hook = new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), entity.getCanaryEntity());
-
-        Canary.hooks().callHook(hook);
+        DispenseHook hook = (DispenseHook) new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), entity.getCanaryEntity()).call();
         if (!hook.isCanceled()) {
             iblocksource.k().d(entity);
             itemstack.a(1);

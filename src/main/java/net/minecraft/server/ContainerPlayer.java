@@ -1,12 +1,9 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.CanaryPlayerCraftingMatrix;
 import net.canarymod.hook.player.CraftHook;
-
 
 public class ContainerPlayer extends Container {
 
@@ -49,13 +46,12 @@ public class ContainerPlayer extends Container {
     }
 
     public void a(IInventory iinventory) {
-//MERGE: This might contain wrong calls! - Chris
+        // MERGE: This might contain wrong calls! - Chris
         ItemStack result = CraftingManager.a().a(this.a, this.h.q);
 
         // CanaryMod: Send custom recipe results to client
-        if(this.h.getCanaryEntity() instanceof CanaryPlayer) {
-            CraftHook hook = new CraftHook(((EntityPlayerMP) this.h).getPlayer(), new CanaryPlayerCraftingMatrix(this.a), result == null ? null : result.getCanaryItem());
-            Canary.hooks().callHook(hook);
+        if (this.h.getCanaryEntity() instanceof CanaryPlayer) {
+            CraftHook hook = (CraftHook) new CraftHook(((EntityPlayerMP) this.h).getPlayer(), new CanaryPlayerCraftingMatrix(this.a), result == null ? null : result.getCanaryItem()).call();
             if (hook.isCanceled()) {
                 result = null;
             }

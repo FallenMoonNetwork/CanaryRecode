@@ -269,8 +269,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     }
 
     public void at() {
-        ServerGuiStartHook guiHook = new ServerGuiStartHook(MinecraftServerGui.preInit(this)); // CanaryMod: PreInitialize the GUI without starting it
-        Canary.hooks().callHook(guiHook);
+        ServerGuiStartHook guiHook = (ServerGuiStartHook) new ServerGuiStartHook(MinecraftServerGui.preInit(this)).call(); // CanaryMod: PreInitialize the GUI without starting it
         if (guiHook.getGui() != null) {
             ((CanaryServer) Canary.getServer()).setCurrentGUI(guiHook.getGui());
         } else {

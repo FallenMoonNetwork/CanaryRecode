@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import net.canarymod.Canary;
 import net.canarymod.hook.world.DispenseHook;
 
 public abstract class BehaviorProjectileDispense extends BehaviorDefaultDispenseItem {
@@ -15,9 +14,7 @@ public abstract class BehaviorProjectileDispense extends BehaviorDefaultDispense
 
         iprojectile.c((double) enumfacing.c(), (double) ((float) enumfacing.d() + 0.1F), (double) enumfacing.e(), this.b(), this.a());
         // CanaryMod: Dispense
-        DispenseHook hook = new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), ((Entity) iprojectile).getCanaryEntity());
-
-        Canary.hooks().callHook(hook);
+        DispenseHook hook = (DispenseHook) new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), ((Entity) iprojectile).getCanaryEntity()).call();
         if (!hook.isCanceled()) {
             world.d((Entity) iprojectile);
             itemstack.a(1);

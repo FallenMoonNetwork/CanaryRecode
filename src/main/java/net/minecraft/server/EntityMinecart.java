@@ -110,9 +110,7 @@ public abstract class EntityMinecart extends Entity {
                 if (damagesource.h() != null) {
                     attk = damagesource.h().getCanaryEntity();
                 }
-                VehicleDamageHook hook = new VehicleDamageHook((Vehicle) this.entity, attk, new CanaryDamageSource(damagesource), (int) f0);
-
-                Canary.hooks().callHook(hook);
+                VehicleDamageHook hook = (VehicleDamageHook) new VehicleDamageHook((Vehicle) this.entity, attk, new CanaryDamageSource(damagesource), (int) f0).call();
                 if (hook.isCanceled()) {
                     return false;
                 }
@@ -146,9 +144,7 @@ public abstract class EntityMinecart extends Entity {
 
     public void a(DamageSource damagesource) {
         // CanaryMod: VehicleDestroy
-        VehicleDestroyHook vdh = new VehicleDestroyHook((Vehicle) this.entity);
-
-        Canary.hooks().callHook(vdh);
+        new VehicleDestroyHook((Vehicle) this.entity).call();
         //
         this.w();
         ItemStack itemstack = new ItemStack(Item.aB, 1);
@@ -260,9 +256,7 @@ public abstract class EntityMinecart extends Entity {
             if (Math.floor(this.r) != Math.floor(this.u) || Math.floor(this.s) != Math.floor(this.v) || Math.floor(this.t) != Math.floor(this.w)) {
                 Vector3D from = new Vector3D(this.r, this.s, this.t);
                 Vector3D to = new Vector3D(this.u, this.v, this.w);
-                VehicleMoveHook vmh = new VehicleMoveHook((Vehicle) this.entity, from, to);
-
-                Canary.hooks().callHook(vmh);
+                new VehicleMoveHook((Vehicle) this.entity, from, to).call();
                 // Can't handle canceling yet... if (vmh.isCanceled()) { }
             }
             //

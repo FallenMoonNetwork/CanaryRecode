@@ -108,7 +108,7 @@ public abstract class EntityLiving extends EntityLivingBase {
             this.a_ = -this.o();
             this.p();
         }
-        // MERGE: Suffocation hook logic here?
+
         this.q.C.b();
     }
 

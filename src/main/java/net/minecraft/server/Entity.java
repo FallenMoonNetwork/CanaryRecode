@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
-import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.EntityType;
@@ -280,10 +279,7 @@ public abstract class Entity {
             } else {
                 if (this.d % 20 == 0) {
                     // CanaryMod: call DamageHook (FireTick)
-                    DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.b), 1);
-
-                    Canary.hooks().callHook(hook);
-
+                    DamageHook hook = (DamageHook) new DamageHook(null, entity, new CanaryDamageSource(DamageSource.b), 1).call();
                     if (!hook.isCanceled()) {
                         this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
                     }
@@ -318,9 +314,7 @@ public abstract class Entity {
     protected void z() {
         if (!this.ag) {
             // CanaryMod: call DamageHook (Lava)
-            DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.c), 4);
-
-            Canary.hooks().callHook(hook);
+            DamageHook hook = (DamageHook) new DamageHook(null, entity, new CanaryDamageSource(DamageSource.c), 4).call();
             if (!hook.isCanceled()) {
                 this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
                 this.d(15);
@@ -702,9 +696,7 @@ public abstract class Entity {
     protected void e(int i0) {
         if (!this.ag) {
             // CanaryMod: call DamageHook (onfire)
-            DamageHook hook = new DamageHook(null, entity, new CanaryDamageSource(DamageSource.a), i0);
-
-            Canary.hooks().callHook(hook);
+            DamageHook hook = (DamageHook) new DamageHook(null, entity, new CanaryDamageSource(DamageSource.a), i0).call();
             if (!hook.isCanceled()) {
                 this.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
             }
@@ -1495,9 +1487,7 @@ public abstract class Entity {
 
             // CanaryMod: Dimension switch hook.
             Location goingTo = this.simulatePortalUse(i0, minecraftserver.getWorld(this.getCanaryWorld().getName(), i0));
-            CancelableHook hook = new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo);
-
-            Canary.hooks().callHook(hook);
+            CancelableHook hook = (CancelableHook) new DimensionSwitchHook(this.getCanaryEntity(), this.getCanaryEntity().getLocation(), goingTo).call();
             if (hook.isCanceled()) {
                 return;
             }//

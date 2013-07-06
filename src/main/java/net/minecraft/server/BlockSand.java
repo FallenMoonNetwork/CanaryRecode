@@ -1,10 +1,7 @@
 package net.minecraft.server;
 
-
 import java.util.Random;
-import net.canarymod.Canary;
 import net.canarymod.hook.world.BlockPhysicsHook;
-
 
 public class BlockSand extends Block {
 
@@ -22,9 +19,7 @@ public class BlockSand extends Block {
     public void a(World world, int i0, int i1, int i2) {
         // CanaryMod: BlockPhysics
         if (world.getCanaryWorld() != null) {
-            BlockPhysicsHook hook = new BlockPhysicsHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), true);
-
-            Canary.hooks().callHook(hook);
+            BlockPhysicsHook hook = (BlockPhysicsHook) new BlockPhysicsHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), true).call();
             if (hook.isCanceled()) {
                 return;
             }
@@ -35,9 +30,7 @@ public class BlockSand extends Block {
 
     public void a(World world, int i0, int i1, int i2, int i3) {
         // CanaryMod: BlockPhysics
-        BlockPhysicsHook hook = new BlockPhysicsHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), false);
-
-        Canary.hooks().callHook(hook);
+        BlockPhysicsHook hook = (BlockPhysicsHook) new BlockPhysicsHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), false).call();
         if (hook.isCanceled()) {
             return;
         }

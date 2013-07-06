@@ -1,10 +1,7 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.api.entity.throwable.CanaryChickenEgg;
 import net.canarymod.hook.entity.ProjectileHitHook;
-
 
 public class EntityEgg extends EntityThrowable {
 
@@ -25,9 +22,7 @@ public class EntityEgg extends EntityThrowable {
 
     protected void a(MovingObjectPosition movingobjectposition) {
         // CanaryMod: ProjectileHit
-        ProjectileHitHook hook = new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity());
-
-        Canary.hooks().callHook(hook);
+        ProjectileHitHook hook = (ProjectileHitHook) new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
         if (!hook.isCanceled()) { //
             if (movingobjectposition.g != null) {
                 movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), 0);

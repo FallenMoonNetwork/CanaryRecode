@@ -1,12 +1,9 @@
 package net.minecraft.server;
 
-
 import java.util.Random;
-import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.IgnitionHook;
 import net.canarymod.hook.world.IgnitionHook.IgnitionCause;
-
 
 public class BlockFire extends Block {
 
@@ -140,9 +137,7 @@ public class BlockFire extends Block {
                                             CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
                                             ignited.setStatus((byte) 3); // Spread Status 3
-                                            IgnitionHook hook = new IgnitionHook(ignited, null, null, IgnitionCause.FIRE_SPREAD);
-
-                                            Canary.hooks().callHook(hook);
+                                            IgnitionHook hook = (IgnitionHook) new IgnitionHook(ignited, null, null, IgnitionCause.FIRE_SPREAD).call();
                                             if (!hook.isCanceled()) {
                                                 world.f(i4, i6, i5, this.cF, i10, 3);
                                             }
@@ -178,9 +173,7 @@ public class BlockFire extends Block {
                 CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
                 ignited.setStatus((byte) 3); // Spread Status 3
-                IgnitionHook hook = new IgnitionHook(ignited, null, null, IgnitionCause.FIRE_SPREAD);
-
-                Canary.hooks().callHook(hook);
+                IgnitionHook hook = (IgnitionHook) new IgnitionHook(ignited, null, null, IgnitionCause.FIRE_SPREAD).call();
                 if (!hook.isCanceled()) {
                     world.f(i0, i1, i2, this.cF, i6, 3);
                 }
@@ -190,9 +183,7 @@ public class BlockFire extends Block {
                 CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
                 ignited.setStatus((byte) 4); // Burned Up Status 4
-                IgnitionHook hook = new IgnitionHook(ignited, null, null, IgnitionCause.BURNT);
-
-                Canary.hooks().callHook(hook);
+                IgnitionHook hook = (IgnitionHook) new IgnitionHook(ignited, null, null, IgnitionCause.BURNT).call();
                 if (!hook.isCanceled()) {
                     world.i(i0, i1, i2);
                 }

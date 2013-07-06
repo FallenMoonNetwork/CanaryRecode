@@ -1,10 +1,7 @@
 package net.minecraft.server;
 
-
 import java.util.List;
 import java.util.Random;
-
-import net.canarymod.Canary;
 import net.canarymod.hook.world.BlockDropXpHook;
 
 public class Block {
@@ -337,24 +334,19 @@ public class Block {
         return true;
     }
 
-    public void a(World world, int i0, int i1, int i2, Random random) {
-    }
+    public void a(World world, int i0, int i1, int i2, Random random) {}
 
-    public void g(World world, int i0, int i1, int i2, int i3) {
-    }
+    public void g(World world, int i0, int i1, int i2, int i3) {}
 
-    public void a(World world, int i0, int i1, int i2, int i3) {
-    }
+    public void a(World world, int i0, int i1, int i2, int i3) {}
 
     public int a(World world) {
         return 10;
     }
 
-    public void a(World world, int i0, int i1, int i2) {
-    }
+    public void a(World world, int i0, int i1, int i2) {}
 
-    public void a(World world, int i0, int i1, int i2, int i3, int i4) {
-    }
+    public void a(World world, int i0, int i1, int i2, int i3, int i4) {}
 
     public int a(Random random) {
         return 1;
@@ -407,8 +399,7 @@ public class Block {
         if (!world.I) {
             // CanaryMod: BlockDropXpHook
             net.canarymod.api.world.blocks.Block block = world.getCanaryWorld().getBlockAt(i0, i1, i2);
-            BlockDropXpHook hook = new BlockDropXpHook(block, i3);
-            Canary.hooks().callHook(hook);
+            BlockDropXpHook hook = (BlockDropXpHook) new BlockDropXpHook(block, i3).call();
             if (hook.isCanceled()) {
                 return;
             }
@@ -558,21 +549,17 @@ public class Block {
         return false;
     }
 
-    public void b(World world, int i0, int i1, int i2, Entity entity) {
-    }
+    public void b(World world, int i0, int i1, int i2, Entity entity) {}
 
     public int a(World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2, int i4) {
         return i4;
     }
 
-    public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {
-    }
+    public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {}
 
-    public void a(World world, int i0, int i1, int i2, Entity entity, Vec3 vec3) {
-    }
+    public void a(World world, int i0, int i1, int i2, Entity entity, Vec3 vec3) {}
 
-    public void a(IBlockAccess iblockaccess, int i0, int i1, int i2) {
-    }
+    public void a(IBlockAccess iblockaccess, int i0, int i1, int i2) {}
 
     public final double u() {
         return this.cM;
@@ -750,8 +737,8 @@ public class Block {
         Item.g[D.cF] = (new ItemMultiTextureTile(D.cF - 256, D, BlockSapling.a)).b("sapling");
         Item.g[P.cF] = (new ItemLeaves(P.cF - 256)).b("leaves");
         Item.g[bz.cF] = new ItemColored(bz.cF - 256, false);
-        Item.g[ac.cF] = (new ItemColored(ac.cF - 256, true)).a(new String[] {
-            "shrub", "grass", "fern" });
+        Item.g[ac.cF] = (new ItemColored(ac.cF - 256, true)).a(new String[]{
+                "shrub", "grass", "fern" });
         Item.g[aX.cF] = new ItemSnow(aX.cF - 256, aX);
         Item.g[bE.cF] = new ItemLilyPad(bE.cF - 256);
         Item.g[ae.cF] = new ItemPiston(ae.cF - 256);

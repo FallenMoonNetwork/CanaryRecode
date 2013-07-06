@@ -11,10 +11,12 @@ import java.util.LinkedList;
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
+import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.vehicle.CanaryChestMinecart;
+import net.canarymod.api.inventory.CanaryAnimalInventory;
 import net.canarymod.api.inventory.CanaryEnderChestInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.statistics.CanaryStat;
@@ -628,7 +630,12 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         if (this.bp != this.bo) {
             this.i();
         }
-        // HOOK: InventoryHook for horse inv!
+        // CanaryMod: InventoryHook
+        InventoryHook hook = (InventoryHook) new InventoryHook(getPlayer(), new CanaryAnimalInventory((AnimalChest) iinventory, (EntityAnimal) entityhorse.getCanaryEntity()), false).call();
+        if (hook.isCanceled()) {
+            return;
+        }
+        //
         this.bJ();
         this.a.b(new Packet100OpenWindow(this.bX, 11, iinventory.b(), iinventory.j_(), iinventory.c(), entityhorse.k));
         this.bp = new ContainerHorseInventory(this.bn, iinventory, entityhorse);

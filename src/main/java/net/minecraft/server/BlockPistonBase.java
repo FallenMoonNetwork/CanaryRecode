@@ -1,13 +1,10 @@
 package net.minecraft.server;
 
-
 import java.util.List;
-import net.canarymod.Canary;
 import net.canarymod.api.world.blocks.BlockType;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.PistonExtendHook;
 import net.canarymod.hook.world.PistonRetractHook;
-
 
 public class BlockPistonBase extends Block {
 
@@ -71,9 +68,7 @@ public class BlockPistonBase extends Block {
             if (flag0 && !e(i3)) {
                 if (e(world, i0, i1, i2, i4)) {
                     // CanaryMod: PistonExtend
-                    PistonExtendHook hook = new PistonExtendHook(piston, moving);
-
-                    Canary.hooks().callHook(hook);
+                    PistonExtendHook hook = (PistonExtendHook) new PistonExtendHook(piston, moving).call();
                     if (!hook.isCanceled()) {
                         world.d(i0, i1, i2, this.cF, 0, i4);
                     }
@@ -82,9 +77,7 @@ public class BlockPistonBase extends Block {
             } else if (!flag0 && e(i3)) {
                 // CanaryMod: PistonRetract
                 moving = new CanaryBlock((short) world.a(i0 + Facing.b[i4] * 2, i1 + Facing.c[i4] * 2, i2 + Facing.d[i4] * 2), (byte) 0, (i0 + Facing.b[i4]), (i1 + Facing.c[i4]), (i2 + Facing.d[i4]), world.getCanaryWorld());
-                PistonRetractHook hook = new PistonRetractHook(piston, moving);
-
-                Canary.hooks().callHook(hook);
+                PistonRetractHook hook = (PistonRetractHook) new PistonRetractHook(piston, moving).call();
                 attemptRetract = !hook.isCanceled();
                 //
                 world.b(i0, i1, i2, i4, 2);
@@ -162,7 +155,7 @@ public class BlockPistonBase extends Block {
                 }
 
                 // CanaryMod: check attemptRetract
-                if (attemptRetract 
+                if (attemptRetract
                         && !flag1
                         && i8 > 0
                         && a(i8, world, i5, i6, i7, false)

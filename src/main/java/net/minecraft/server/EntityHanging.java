@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import java.util.Iterator;
 import java.util.List;
-import net.canarymod.Canary;
 import net.canarymod.api.entity.hanging.HangingEntity;
 import net.canarymod.hook.entity.HangingEntityDestroyHook;
 
@@ -192,8 +191,7 @@ public abstract class EntityHanging extends Entity {
 
                 if (entityplayer != null) {
                     // CanaryMod: HangingEntityDestory
-                    HangingEntityDestroyHook hook = new HangingEntityDestroyHook((HangingEntity) this.entity, ((EntityPlayerMP) entityplayer).getPlayer(), damagesource.damageSource);
-                    Canary.hooks().callHook(hook);
+                    HangingEntityDestroyHook hook = (HangingEntityDestroyHook) new HangingEntityDestroyHook((HangingEntity) this.entity, ((EntityPlayerMP) entityplayer).getPlayer(), damagesource.damageSource).call();
                     if (hook.isCanceled()) {
                         return false;
                     }

@@ -1,9 +1,6 @@
 package net.minecraft.server;
 
-
-import net.canarymod.Canary;
 import net.canarymod.hook.world.RedstoneChangeHook;
-
 
 public class BlockLever extends Block {
 
@@ -204,9 +201,7 @@ public class BlockLever extends Block {
             int i6 = 8 - (i4 & 8);
 
             // CanaryMod: RedstoneChange
-            RedstoneChangeHook hook = new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i3, i6);
-
-            Canary.hooks().callHook(hook);
+            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i3, i6).call();
             if (hook.isCanceled()) {
                 return true;
             }

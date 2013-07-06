@@ -122,9 +122,7 @@ public class EntityEnderman extends EntityMob {
                     // CanaryMod: Replace checking static array with checking the world config list or Ender Blocks
                     if (Arrays.asList(Configuration.getWorldConfig(getCanaryWorld().getFqName()).getEnderBlocks()).contains(i3)) {
                         // CanaryMod: call EndermanPickupBlockHook
-                        EndermanPickupBlockHook hook = new EndermanPickupBlockHook((CanaryEnderman) entity, ((CanaryEnderman) entity).getWorld().getBlockAt(i0, i1, i2));
-
-                        Canary.hooks().callHook(hook);
+                        EndermanPickupBlockHook hook = (EndermanPickupBlockHook) new EndermanPickupBlockHook((CanaryEnderman) entity, ((CanaryEnderman) entity).getWorld().getBlockAt(i0, i1, i2)).call();
                         if (!hook.isCanceled()) {
                             this.a(this.q.a(i0, i1, i2));
                             this.c(this.q.h(i0, i1, i2));
