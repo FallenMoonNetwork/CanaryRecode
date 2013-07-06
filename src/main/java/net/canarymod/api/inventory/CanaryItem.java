@@ -25,7 +25,7 @@ public class CanaryItem implements Item {
      * @param itemStack
      */
     public CanaryItem(ItemStack itemStack) {
-        this.type = ItemType.fromId(itemStack.c);
+        this.type = ItemType.fromId(itemStack.d);
         this.item = itemStack;
     }
 
@@ -59,7 +59,7 @@ public class CanaryItem implements Item {
     @Override
     public void setId(int id) {
         type = ItemType.fromId(id);
-        item.c = type.getId();
+        item.d = type.getId();
     }
 
     /**

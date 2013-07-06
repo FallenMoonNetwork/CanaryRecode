@@ -39,7 +39,7 @@ public class Material {
     public static final Material G = (new Material(MapColor.m)).o();
     private boolean I;
     public boolean J; // CanaryMod: private => public (translucent)
-    private boolean K = true;
+    private boolean K;
     public final MapColor H;
     private boolean L = true;
     private int M;

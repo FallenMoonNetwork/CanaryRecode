@@ -122,7 +122,7 @@ public class ItemBucket extends Item {
                         return itemstack;
                     }
 
-                    if (this.a(world, i0, i1, i2) && !entityplayer.bG.d) {
+                    if (this.a(world, i0, i1, i2, entityplayer) && !entityplayer.bG.d) {
                         return new ItemStack(Item.ay);
                     }
                 }

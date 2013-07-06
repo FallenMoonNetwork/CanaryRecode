@@ -7,7 +7,7 @@ import net.canarymod.hook.player.BlockPlaceHook;
 public class ItemBlock extends Item {
 
     private int a;
-    protected boolean handled = false; // CanaryMod: for ItemSlab inconsistance...
+    protected boolean handled = false; // CanaryMod: for ItemSlab inconsistency...
 
     public ItemBlock(int i0) {
         super(i0);
