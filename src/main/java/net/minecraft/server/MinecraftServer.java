@@ -540,31 +540,29 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 boolean flag3 = false;
 
                 // CanaryMod removed Nogui check, now done in Main
-                {
-                    if (s3.equals("--port") && s4 != null) {
-                        flag3 = true;
+                if (s3.equals("--port") && s4 != null) {
+                    flag3 = true;
 
-                        try {
-                            i0 = Integer.parseInt(s4);
-                        } catch (NumberFormatException numberformatexception) {
-                            ;
-                        }
-                    } else if (s3.equals("--singleplayer") && s4 != null) {
-                        flag3 = true;
-                        s0 = s4;
-                    } else if (s3.equals("--universe") && s4 != null) {
-                        flag3 = true;
-                        s1 = s4;
-                    } else if (s3.equals("--world") && s4 != null) {
-                        flag3 = true;
-                        s2 = s4;
-                    } else if (s3.equals("--demo")) {
-                        flag1 = true;
-                    } else if (s3.equals("--bonusChest")) {
-                        flag2 = true;
+                    try {
+                        i0 = Integer.parseInt(s4);
+                    } catch (NumberFormatException numberformatexception) {
+                        ;
                     }
-                    // CanaryMod removed else
+                } else if (s3.equals("--singleplayer") && s4 != null) {
+                    flag3 = true;
+                    s0 = s4;
+                } else if (s3.equals("--universe") && s4 != null) {
+                    flag3 = true;
+                    s1 = s4;
+                } else if (s3.equals("--world") && s4 != null) {
+                    flag3 = true;
+                    s2 = s4;
+                } else if (s3.equals("--demo")) {
+                    flag1 = true;
+                } else if (s3.equals("--bonusChest")) {
+                    flag2 = true;
                 }
+                // CanaryMod removed else to Nogui check
 
                 if (flag3) {
                     ++i1;

@@ -48,7 +48,7 @@ public class TextAreaLogHandler extends Handler {
     /**
      * Gets the textarea used by the handler
      * 
-     * @return
+     * @return used JTextArea
      */
     public JTextArea getJTextArea() {
         return this.d;
@@ -57,7 +57,7 @@ public class TextAreaLogHandler extends Handler {
     /**
      * Gets the Contents of the log up to this point
      * 
-     * @return
+     * @return current log
      */
     public String getLog() {
         return this.d.getText();
@@ -71,7 +71,7 @@ public class TextAreaLogHandler extends Handler {
     /**
      * Gets the LogHandler
      * 
-     * @return
+     * @return the LogHandler
      */
     static public TextAreaLogHandler getLogHandler() {
         return textarealoghandler;
