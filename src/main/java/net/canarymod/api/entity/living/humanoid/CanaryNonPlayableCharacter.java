@@ -8,7 +8,6 @@ import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityType;
-import net.canarymod.api.world.position.Location;
 import net.canarymod.chat.Colors;
 import net.minecraft.server.Packet20NamedEntitySpawn;
 import net.minecraft.server.Packet29DestroyEntity;
@@ -32,22 +31,7 @@ public class CanaryNonPlayableCharacter extends CanaryHuman implements NonPlayab
      */
     public CanaryNonPlayableCharacter(EntityNonPlayableCharacter npc) {
         super(npc);
-        this.getHandle().setNPC(this);
         this.behaviors = Collections.synchronizedList(new ArrayList<NPCBehavior>());
-    }
-
-    /**
-     * Constructs a new NonPlayableCharacter
-     * 
-     * @param name
-     *            the Name to give to the NPC
-     * @param location
-     *            the Location to put the NPC
-     * @param inHand
-     *            the Item to set in the NPC's hand
-     */
-    public CanaryNonPlayableCharacter(String name, Location location) {
-        this(new EntityNonPlayableCharacter(name, location));
     }
 
     /**
@@ -122,17 +106,6 @@ public class CanaryNonPlayableCharacter extends CanaryHuman implements NonPlayab
     public NonPlayableCharacter despawn() {
         getWorld().getEntityTracker().untrackEntity(this);
         return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean spawn() {
-        if (super.spawn()) {
-            // TODO: Special spawning stuffs ?
-            return true;
-        }
-        return false;
     }
 
     /**

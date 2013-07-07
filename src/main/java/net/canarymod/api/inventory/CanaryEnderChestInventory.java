@@ -1,31 +1,29 @@
 package net.canarymod.api.inventory;
 
-
 import java.util.Arrays;
-
-import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.entity.living.humanoid.Human;
 import net.minecraft.server.InventoryEnderChest;
 import net.minecraft.server.ItemStack;
 
-
 /**
  * EnderChest Inventory implementation
- *
+ * 
  * @author Jason (darkdiplomat)
  */
 public class CanaryEnderChestInventory extends CanaryContainerEntity implements EnderChestInventory {
-    private Player player;
+    private Human human;
 
-    public CanaryEnderChestInventory(InventoryEnderChest echest, Player player) {
+    public CanaryEnderChestInventory(InventoryEnderChest echest, Human human) {
         super(echest);
+        this.human = human;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Player getInventoryOwner() {
-        return player;
+    public Human getInventoryOwner() {
+        return human;
     }
 
     /**

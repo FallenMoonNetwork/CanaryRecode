@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import net.canarymod.api.CanaryEntityTrackerEntry;
+import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
 
 public class EntityTrackerEntry {
 
@@ -343,6 +344,8 @@ public class EntityTrackerEntry {
         if (this.a instanceof EntityItem) {
             return new Packet23VehicleSpawn(this.a, 2, 1);
         } else if (this.a instanceof EntityPlayerMP) {
+            return new Packet20NamedEntitySpawn((EntityPlayer) this.a);
+        } else if (this.a instanceof EntityNonPlayableCharacter) { // CanaryMod: NPC
             return new Packet20NamedEntitySpawn((EntityPlayer) this.a);
         } else if (this.a instanceof EntityMinecart) {
             EntityMinecart entityminecart = (EntityMinecart) this.a;

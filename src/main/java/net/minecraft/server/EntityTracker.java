@@ -1,16 +1,14 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Callable;
-
 import net.canarymod.api.CanaryEntityTracker;
+import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.config.Configuration;
-
 
 public class EntityTracker {
 
@@ -90,6 +88,8 @@ public class EntityTracker {
             this.a(entity, 256, Integer.MAX_VALUE, false);
         } else if (entity instanceof EntityItemFrame) {
             this.a(entity, 160, Integer.MAX_VALUE, false);
+        } else if (entity instanceof EntityNonPlayableCharacter) { // CanaryMod: NPC
+            this.a(entity, 512, 2);
         }
     }
 
@@ -225,6 +225,7 @@ public class EntityTracker {
 
     /**
      * Get the CanaryEntityTracker wrapper
+     * 
      * @return
      */
     public CanaryEntityTracker getCanaryEntityTracker() {
@@ -233,6 +234,7 @@ public class EntityTracker {
 
     /**
      * Get the HashSet of tracked entity entries
+     * 
      * @return
      */
     public Set<EntityTrackerEntry> getTrackedEntities() {

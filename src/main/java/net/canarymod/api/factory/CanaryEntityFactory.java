@@ -7,7 +7,7 @@ import net.canarymod.api.entity.living.EntityLiving;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.animal.Horse;
 import net.canarymod.api.entity.living.animal.Horse.HorseType;
-import net.canarymod.api.entity.living.humanoid.CanaryNonPlayableCharacter;
+import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
 import net.canarymod.api.entity.living.humanoid.NonPlayableCharacter;
 import net.canarymod.api.entity.living.humanoid.Villager;
 import net.canarymod.api.entity.living.humanoid.Villager.Profession;
@@ -592,7 +592,7 @@ public class CanaryEntityFactory implements EntityFactory {
     @Override
     public NonPlayableCharacter newNPC(String name, Location location) {
         if (name != null && location != null) {
-            return new CanaryNonPlayableCharacter(name, location);
+            return new EntityNonPlayableCharacter(name, location).getNPC();
         }
         return null;
     }

@@ -5,11 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryPacket;
+import net.canarymod.api.entity.EntityType;
+import net.canarymod.api.entity.living.humanoid.CanaryHuman;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.inventory.CanaryEnderChestInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.CanaryPlayerInventory;
-import net.canarymod.api.inventory.Inventory;
+import net.canarymod.api.inventory.EnderChestInventory;
+import net.canarymod.api.inventory.PlayerInventory;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.player.EntityRightClickHook;
 import net.canarymod.hook.player.ItemDropHook;
@@ -52,7 +55,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     private int h;
     public EntityFishHook bM;
     private String respawnWorld; // CanaryMod: Respawn world (for bed spawns)
-    protected String dispName; // CanaryMod: Mojang screwed us from using the methods in EntityLiving...
+    protected String dispName = ""; // CanaryMod: Mojang screwed us from using the methods in EntityLiving...
 
     public EntityPlayer(World world, String s0) {
         super(world);
@@ -65,6 +68,18 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.b((double) chunkcoordinates.a + 0.5D, (double) (chunkcoordinates.b + 1), (double) chunkcoordinates.c + 0.5D, 0.0F, 0.0F);
         this.ba = 180.0F;
         this.ad = 20;
+
+        this.entity = new CanaryHuman(this) { // CanaryMod: Special Case wrap
+            @Override
+            public String getFqName() {
+                return "Human";
+            }
+
+            @Override
+            public EntityType getEntityType() {
+                return null;
+            }
+        };
     }
 
     protected void ax() {
@@ -194,7 +209,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             this.e = null;
         }
 
-        if (!this.q.I) {
+        if (!this.q.I && this instanceof EntityPlayerMP) { // CanaryMod: check if actually a Player
             this.bq.a(this);
         }
     }
@@ -471,19 +486,20 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             }
 
             // CanaryMod: ItemDrop
-            ItemDropHook hook = (ItemDropHook) new ItemDropHook(((EntityPlayerMP) this).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity()).call();
-            if (!hook.isCanceled()) {
-                CanaryItem droppedItem = entityitem.d().getCanaryItem();
+            if (this instanceof EntityPlayerMP) { // NO NPCs
+                ItemDropHook hook = (ItemDropHook) new ItemDropHook(((EntityPlayerMP) this).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity()).call();
+                if (!hook.isCanceled()) {
+                    CanaryItem droppedItem = entityitem.d().getCanaryItem();
 
-                if (droppedItem.getAmount() < 0) {
-                    droppedItem.setAmount(1);
+                    if (droppedItem.getAmount() < 0) {
+                        droppedItem.setAmount(1);
+                    }
+                    this.a(entityitem);
+                    this.a(StatList.v, 1);
+                    return entityitem;
                 }
-                this.a(entityitem);
-                this.a(StatList.v, 1);
-                return entityitem;
-            } else {
-                return null;
             }
+            return null;
             //
         }
     }
@@ -591,9 +607,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.bq.b(nbttagcompound);
         this.bG.a(nbttagcompound);
         nbttagcompound.a("EnderItems", (NBTBase) this.a.h());
-        if (dispName != null) {
-            nbttagcompound.a("CustomName", dispName);
-        }
+        nbttagcompound.a("CustomName", dispName == null ? "" : dispName);
     }
 
     public void a(IInventory iinventory) {}
@@ -1503,23 +1517,23 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
     // End: Custom XP methods
     // Start: Inventory getters
-    public Inventory getPlayerInventory() {
+    public PlayerInventory getPlayerInventory() {
         return new CanaryPlayerInventory(bn);
     }
 
-    public Inventory getEnderChestInventory() {
-        return new CanaryEnderChestInventory(a, ((EntityPlayerMP) this).getPlayer());
+    public EnderChestInventory getEnderChestInventory() {
+        return new CanaryEnderChestInventory(a, getCanaryHuman());
     }
 
     // End: Inventory getters
 
     // Start: Custom Display Name
     public String getDisplayName() {
-        return this.dispName != null ? dispName : this.c_();
+        return this.dispName.isEmpty() ? this.c_() : this.dispName;
     }
 
     public void setDisplayName(String name) {
-        dispName = name;
+        dispName = name != null ? name : "";
     }
 
     // End: Custom Display Name
@@ -1553,6 +1567,10 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         c.b = l.getBlockY();
         c.c = l.getBlockZ();
         respawnWorld = l.getWorld().getFqName();
+    }
+
+    public CanaryHuman getCanaryHuman() {
+        return (CanaryHuman) entity;
     }
     //
 }

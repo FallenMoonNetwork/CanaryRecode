@@ -13,7 +13,6 @@ import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
-import net.canarymod.api.entity.living.humanoid.EntityNonPlayableCharacter;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.vehicle.CanaryChestMinecart;
 import net.canarymod.api.inventory.CanaryAnimalInventory;
@@ -91,11 +90,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             this.b(this.u, this.v + 1.0D, this.w);
         }
 
-        // CanaryMod: create wrapper
-        if (!(this instanceof EntityNonPlayableCharacter)) { // We might be an NPC
-            this.entity = new CanaryPlayer(this);
-        }
-        //
+        this.entity = new CanaryPlayer(this); // CanaryMod: wrap entity
     }
 
     public void a(NBTTagCompound nbttagcompound) {

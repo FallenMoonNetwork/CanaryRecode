@@ -9,11 +9,13 @@ import java.util.regex.Pattern;
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
+import net.canarymod.api.GameMode;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
 import net.canarymod.api.PlayerListEntry;
 import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.inventory.EnderChestInventory;
+import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Direction;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.chat.Colors;
@@ -22,13 +24,16 @@ import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.PlayerCommandHook;
 import net.canarymod.hook.player.ChatHook;
 import net.canarymod.hook.player.TeleportHook;
+import net.canarymod.hook.player.TeleportHook.TeleportCause;
 import net.canarymod.hook.system.PermissionCheckHook;
 import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
 import net.canarymod.warp.Warp;
 import net.minecraft.server.ChunkCoordinates;
 import net.minecraft.server.EntityPlayerMP;
+import net.minecraft.server.EnumGameType;
 import net.minecraft.server.Packet201PlayerInfo;
+import net.minecraft.server.WorldSettings;
 import net.visualillusionsent.utils.StringUtils;
 
 /**
@@ -348,15 +353,6 @@ public class CanaryPlayer extends CanaryHuman implements Player {
     }
 
     @Override
-    public void teleportTo(Location location, TeleportHook.TeleportCause cause) {
-        if (getWorld() != location.getWorld()) {
-            Canary.logDebug("Switching world from " + getWorld().getFqName() + " to " + location.getWorld().getFqName());
-            switchWorlds(location.getWorld());
-        }
-        teleportTo(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getRotation(), cause);
-    }
-
-    @Override
     public boolean isInGroup(String group, boolean parents) {
         for (Group g : groups) {
             if (g.getName().equals(group)) {
@@ -472,8 +468,133 @@ public class CanaryPlayer extends CanaryHuman implements Player {
     }
 
     @Override
-    public boolean canFly() {
-        return hasPermission("canary.player.canFly");
+    public void addExhaustion(float exhaustion) {
+        getHandle().bD().a(exhaustion);
+    }
+
+    @Override
+    public void setExhaustion(float exhaustion) {
+        getHandle().bD().setExhaustionLevel(exhaustion);
+    }
+
+    @Override
+    public float getExhaustionLevel() {
+        return getHandle().bD().getExhaustionLevel();
+    }
+
+    @Override
+    public void setHunger(int hunger) {
+        getHandle().bD().setFoodLevel(hunger);
+    }
+
+    @Override
+    public int getHunger() {
+        return getHandle().bD().a();
+    }
+
+    @Override
+    public void addExperience(int experience) {
+        getHandle().addXP(experience);
+    }
+
+    @Override
+    public void removeExperience(int experience) {
+        getHandle().removeXP(experience);
+    }
+
+    @Override
+    public int getExperience() {
+        return getHandle().bI;
+    }
+
+    @Override
+    public void setExperience(int xp) {
+        if (xp < 0) {
+            return;
+        }
+        getHandle().setXP(xp);
+    }
+
+    @Override
+    public int getLevel() {
+        return getHandle().bH;
+    }
+
+    @Override
+    public boolean isSleeping() {
+        return getHandle().bd();
+    }
+
+    @Override
+    public boolean isDeeplySleeping() {
+        return getHandle().by();
+    }
+
+    @Override
+    public int getModeId() {
+        return getHandle().c.b().a();
+    }
+
+    public GameMode getMode() {
+        return GameMode.fromId(getHandle().c.b().a());
+    }
+
+    @Override
+    public void setModeId(int mode) {
+        // Adjust mode, make it null if number is invalid
+        EnumGameType gt = WorldSettings.a(mode);
+        EntityPlayerMP ent = getHandle();
+
+        if (ent.c.b() != gt) {
+            ent.c.a(gt);
+            ent.getServerHandler().sendPacket(new CanaryPacket(new net.minecraft.server.Packet70GameEvent(3, mode)));
+        }
+    }
+
+    @Override
+    public void setMode(GameMode mode) {
+        this.setModeId(mode.getId());
+    }
+
+    @Override
+    public void refreshCreativeMode() {
+        if (getModeId() == 1 || Configuration.getWorldConfig(getWorld().getFqName()).getGameMode() == GameMode.CREATIVE) {
+            getHandle().c.a(WorldSettings.a(1));
+        } else {
+            getHandle().c.a(WorldSettings.a(0));
+        }
+    }
+
+    @Override
+    public void setDimension(World world) {
+        Canary.getServer().getConfigurationManager().switchDimension(this, world, false);
+    }
+
+    @Override
+    public void teleportTo(double x, double y, double z, float pitch, float rotation) {
+        this.teleportTo(x, y, z, pitch, rotation, getWorld());
+    }
+
+    @Override
+    public void teleportTo(double x, double y, double z, float pitch, float rotation, World dim) {
+        this.teleportTo(x, y, z, pitch, rotation, dim, TeleportHook.TeleportCause.PLUGIN);
+    }
+
+    @Override
+    public void teleportTo(Location location, TeleportCause cause) {
+        this.teleportTo(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getRotation(), location.getWorld(), cause);
+    }
+
+    protected void teleportTo(double x, double y, double z, float pitch, float rotation, World world, TeleportHook.TeleportCause cause) {
+        // If in a vehicle - eject before teleporting.
+        if (isRiding()) {
+            getHandle().h(getHandle().o);
+        }
+        if (world != this.getWorld()) {
+            this.setDimension(world);
+        }
+
+        getHandle().a.a(x, y, z, rotation, pitch, getWorld().getType().getId(), getWorld().getName(), cause);
     }
 
     @Override
@@ -515,5 +636,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
 
         hash = 89 * hash + (this.getName() != null ? this.getName().hashCode() : 0);
         return hash;
+    }
+
+    public EntityPlayerMP getHandle() {
+        return (EntityPlayerMP) entity;
     }
 }

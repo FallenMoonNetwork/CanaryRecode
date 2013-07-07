@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
+import net.canarymod.api.entity.living.humanoid.CanaryHuman;
 import net.canarymod.api.entity.vehicle.CanaryVehicle;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.blocks.CanaryBlock;
@@ -853,7 +853,7 @@ public abstract class World implements IBlockAccess {
             return false;
         }
         // CanaryMod: EntitySpawn
-        if (!(entity.getCanaryEntity() instanceof CanaryPlayer)) {
+        if (!(entity.getCanaryEntity() instanceof CanaryHuman)) {
             EntitySpawnHook hook = (EntitySpawnHook) new EntitySpawnHook(entity.getCanaryEntity()).call();
             if (hook.isCanceled()) {
                 return false;
@@ -871,7 +871,7 @@ public abstract class World implements IBlockAccess {
         if (!flag0 && !this.c(i0, i1)) {
             return false;
         } else {
-            if (entity instanceof EntityPlayer) {
+            if (entity instanceof EntityPlayerMP) { // CanaryMod: dont handle NPC's this way
                 EntityPlayer entityplayer = (EntityPlayer) entity;
 
                 this.h.add(entityplayer);
