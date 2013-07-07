@@ -22,6 +22,15 @@ public class MinecraftServerGui extends JComponent implements GUIControl {
     private DedicatedServer b;
 
     public static GUIControl a(DedicatedServer dedicatedserver) { // Signature Changed to return GUIControl
+
+        // CanaryMod Sets LookAndFeel
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception exception) {
+            ;
+        }
+        //
+
         a = true;
         jframe = new JFrame("Minecraft server");
 
@@ -72,9 +81,11 @@ public class MinecraftServerGui extends JComponent implements GUIControl {
 
     private JComponent d() {
         JPanel jpanel = new JPanel(new BorderLayout());
-        JTextArea jtextarea = new JTextArea();
+        // CanaryMod
+        JTextArea jtextarea = TextAreaLogHandler.getLogHandler().getJTextArea();
 
-        this.b.an().a().addHandler(new TextAreaLogHandler(jtextarea));
+        // Removed Old code to add LogHandler to Logger
+        //
         JScrollPane jscrollpane = new JScrollPane(jtextarea, 22, 30);
 
         jtextarea.setEditable(false);

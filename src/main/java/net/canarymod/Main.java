@@ -9,6 +9,7 @@ import net.canarymod.serialize.EnchantmentSerializer;
 import net.canarymod.serialize.ItemSerializer;
 import net.minecraft.server.LogAgent;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.TextAreaLogHandler;
 
 public class Main {
     private static LogAgent la;
@@ -44,7 +45,7 @@ public class Main {
             la = new LogAgent("Minecraft-Server", (String) null, (new File(new File("."), "server.log")).getAbsolutePath());
             la.a().setLevel(Level.ALL);
             if (!MinecraftServer.isHeadless()) {
-                // GuiLogOutputHandler.getOutputHandler().poke(); //XXX Its no longer done the way it was before...
+                TextAreaLogHandler.getLogHandler().poke();
             }
             initBird();
 
