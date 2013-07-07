@@ -124,13 +124,13 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public void setPitch(float pitch) {
-        entity.A = pitch;
+        entity.B = pitch;
 
     }
 
     @Override
     public void setRotation(float rotation) {
-        entity.B = rotation;
+        entity.A = rotation;
 
     }
 
