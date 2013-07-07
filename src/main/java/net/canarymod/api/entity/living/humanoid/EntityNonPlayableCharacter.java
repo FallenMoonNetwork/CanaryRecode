@@ -1,22 +1,40 @@
 package net.canarymod.api.entity.living.humanoid;
 
 import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.entity.living.humanoid.npchelpers.EntityNPCJumpHelper;
+import net.canarymod.api.entity.living.humanoid.npchelpers.EntityNPCMoveHelper;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.minecraft.server.ChatMessageComponent;
 import net.minecraft.server.ChunkCoordinates;
 import net.minecraft.server.DamageSource;
+import net.minecraft.server.Entity;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.NBTTagCompound;
+import net.minecraft.server.World;
 
+/**
+ * NonPlayableCharacter (NPC) Entity class
+ * 
+ * @author Jason (darkdiplomat)
+ */
 public final class EntityNonPlayableCharacter extends EntityPlayer {
-    protected boolean isJumping;
+    private EntityNPCMoveHelper move_helper;
+    private EntityNPCJumpHelper jump_helper;
 
     public EntityNonPlayableCharacter(String name, Location location) {
         super(((CanaryWorld) location.getWorld()).getHandle(), name);
-        this.b(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
-        this.i(1.0F); // ?
+        World world = ((CanaryWorld) location.getWorld()).getHandle();
+        this.move_helper = new EntityNPCMoveHelper(this);
+        this.jump_helper = new EntityNPCJumpHelper(this);
+        this.Y = 0.0F;
+        this.N = 0.0F;
+        this.b((double) location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
+
+        while (!world.a((Entity) this, this.E).isEmpty()) {
+            this.b(this.u, this.v + 1.0D, this.w);
+        }
         this.entity = new CanaryNonPlayableCharacter(this);
     }
 
@@ -51,7 +69,6 @@ public final class EntityNonPlayableCharacter extends EntityPlayer {
         if (!this.M) {
             getNPC().update();
         }
-        this.H();
     }
 
     @Override
@@ -78,6 +95,18 @@ public final class EntityNonPlayableCharacter extends EntityPlayer {
     public void w() {
         super.w();
         getNPC().destroyed();
+    }
+
+    protected void be() {
+        this.move_helper.c();
+    }
+
+    public void entityliving_n_clone(float f0) {
+        this.bf = f0;
+    }
+
+    public EntityNPCJumpHelper getJumpHelper() {
+        return jump_helper;
     }
 
     public void a(float f0) {} // Food Exhaustion stuff

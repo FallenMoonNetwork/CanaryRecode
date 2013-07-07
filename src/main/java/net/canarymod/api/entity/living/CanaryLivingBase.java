@@ -55,8 +55,8 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
      * {@inheritDoc}
      */
     @Override
-    public boolean canSee(EntityLiving entityliving) {
-        return getHandle().o(((CanaryEntity) entityliving).getHandle());
+    public boolean canSee(LivingBase livingbase) {
+        return getHandle().o(((CanaryEntity) livingbase).getHandle());
     }
 
     /**
@@ -172,7 +172,7 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
         if (potion == null) {
             return null;
         }
-        net.minecraft.server.PotionEffect nms_potioneffect = ((net.minecraft.server.EntityLiving) entity).b(((CanaryPotion) potion).getHandle());
+        net.minecraft.server.PotionEffect nms_potioneffect = ((net.minecraft.server.EntityLivingBase) entity).b(((CanaryPotion) potion).getHandle());
         return nms_potioneffect != null ? new CanaryPotionEffect(nms_potioneffect) : null;
     }
 
@@ -182,7 +182,7 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
     @SuppressWarnings("unchecked")
     @Override
     public List<PotionEffect> getAllActivePotionEffects() {
-        Collection<net.minecraft.server.PotionEffect> effect_collection = ((net.minecraft.server.EntityLiving) entity).aH();
+        Collection<net.minecraft.server.PotionEffect> effect_collection = ((net.minecraft.server.EntityLivingBase) entity).aH();
         List<PotionEffect> list = new ArrayList<PotionEffect>();
 
         for (net.minecraft.server.PotionEffect nms_effect : effect_collection) {
@@ -211,7 +211,7 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
         if (livingbase == null) {
             getHandle().b((net.minecraft.server.EntityLivingBase) null);
         } else {
-            getHandle().b((net.minecraft.server.EntityLivingBase) ((CanaryEntity) livingbase).getHandle());
+            getHandle().b(((CanaryLivingBase) livingbase).getHandle());
         }
     }
 
@@ -220,9 +220,9 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
      */
     @Override
     public LivingBase getLastAssailant() {
-        net.minecraft.server.Entity target = ((net.minecraft.server.EntityLiving) entity).aD();
+        net.minecraft.server.EntityLivingBase target = ((net.minecraft.server.EntityLivingBase) entity).aD();
         if (target != null) {
-            return (EntityLiving) ((net.minecraft.server.EntityLiving) target).getCanaryEntity();
+            return (EntityLiving) target.getCanaryEntity();
         }
         return null;
     }
@@ -253,7 +253,7 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
         double pitch = (Math.acos(yDiff / DistanceY) * 180 - 90 / Math.PI);
 
         if (zDiff < 0.0) {
-            yaw = yaw + (Math.abs(180 - yaw) * 2);
+            yaw += (Math.abs(180 - yaw) * 2);
         }
 
         setRotation((float) yaw);
@@ -323,7 +323,7 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
             return;
         }
         swingArm();
-        ((net.canarymod.api.entity.living.CanaryEntityLiving) entity).getHandle().a(new net.minecraft.server.EntityDamageSource(getName(), getHandle()), damage);
+        ((net.canarymod.api.entity.living.CanaryLivingBase) entity).getHandle().a(new net.minecraft.server.EntityDamageSource(getName(), getHandle()), damage);
     }
 
     /**

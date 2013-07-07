@@ -156,7 +156,7 @@ public class CanaryNonPlayableCharacter extends CanaryHuman implements NonPlayab
             synchronized (behaviors) {
                 for (NPCBehavior behavior : behaviors) {
                     try {
-                        if (!getHandle().M) {
+                        if (!isDead()) {
                             behavior.onUpdate();
                         }
                     } catch (Exception ex) {
@@ -176,7 +176,7 @@ public class CanaryNonPlayableCharacter extends CanaryHuman implements NonPlayab
             synchronized (behaviors) {
                 for (NPCBehavior behavior : behaviors) {
                     try {
-                        if (!getHandle().M) {
+                        if (!isDead()) {
                             behavior.onClicked(player);
                         }
                     } catch (Exception ex) {
@@ -196,7 +196,7 @@ public class CanaryNonPlayableCharacter extends CanaryHuman implements NonPlayab
             synchronized (behaviors) {
                 for (NPCBehavior behavior : behaviors) {
                     try {
-                        if (!getHandle().M) {
+                        if (!isDead()) {
                             behavior.onAttacked(entity);
                         }
                     } catch (Exception ex) {
