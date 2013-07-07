@@ -307,7 +307,7 @@ public class NetServerHandler extends NetHandler {
 
                 // CanaryMod: check on flying capability instead of mode
                 // moved allow-flight to per-world config
-                if (!Configuration.getWorldConfig(c.getCanaryWorld().getFqName()).isFlightAllowed() && !this.c.c.d() && !worldserver.c(axisalignedbb)) {
+                if (!Configuration.getWorldConfig(c.getCanaryWorld().getFqName()).isFlightAllowed() && !this.c.bG.c && !worldserver.c(axisalignedbb)) {
                     if (d12 >= -0.03125D) {
                         ++this.f;
                         if (this.f > 80) {

@@ -179,60 +179,60 @@ public abstract class EntityLivingBase extends Entity {
                     }
                     //
                 }
-
-                this.A();
-                if (!this.q.I && this.ae() && this.o instanceof EntityLivingBase) {
-                    this.a((Entity) null);
-                }
-            } else {
-                this.g(300);
             }
 
-            this.aJ = this.aK;
-            if (this.aC > 0) {
-                --this.aC;
+            this.A();
+            if (!this.q.I && this.ae() && this.o instanceof EntityLivingBase) {
+                this.a((Entity) null);
             }
-
-            if (this.ay > 0) {
-                --this.ay;
-            }
-
-            if (this.af > 0) {
-                --this.af;
-            }
-
-            if (this.aJ() <= 0.0F) {
-                this.az();
-            }
-
-            if (this.aT > 0) {
-                --this.aT;
-            } else {
-                this.aS = null;
-            }
-
-            if (this.bn != null && !this.bn.R()) {
-                this.bn = null;
-            }
-
-            if (this.i != null) {
-                if (!this.i.R()) {
-                    this.b((EntityLivingBase) null);
-                } else if (this.j > 0) {
-                    --this.j;
-                } else {
-                    this.b((EntityLivingBase) null);
-                }
-            }
-
-            this.aF();
-            this.aZ = this.aY;
-            this.aO = this.aN;
-            this.aQ = this.aP;
-            this.C = this.A;
-            this.D = this.B;
-            this.q.C.b();
+        } else {
+            this.g(300);
         }
+
+        this.aJ = this.aK;
+        if (this.aC > 0) {
+            --this.aC;
+        }
+
+        if (this.ay > 0) {
+            --this.ay;
+        }
+
+        if (this.af > 0) {
+            --this.af;
+        }
+
+        if (this.aJ() <= 0.0F) {
+            this.az();
+        }
+
+        if (this.aT > 0) {
+            --this.aT;
+        } else {
+            this.aS = null;
+        }
+
+        if (this.bn != null && !this.bn.R()) {
+            this.bn = null;
+        }
+
+        if (this.i != null) {
+            if (!this.i.R()) {
+                this.b((EntityLivingBase) null);
+            } else if (this.j > 0) {
+                --this.j;
+            } else {
+                this.b((EntityLivingBase) null);
+            }
+        }
+
+        this.aF();
+        this.aZ = this.aY;
+        this.aO = this.aN;
+        this.aQ = this.aP;
+        this.C = this.A;
+        this.D = this.B;
+        this.q.C.b();
     }
 
     public boolean g_() {
@@ -240,7 +240,6 @@ public abstract class EntityLivingBase extends Entity {
     }
 
     protected void az() {
-        // ?
         ++this.aB;
         if (this.aB == 20) {
             int i0;
@@ -547,7 +546,7 @@ public abstract class EntityLivingBase extends Entity {
 
     protected void c(PotionEffect potioneffect) {
         // CanaryMod: PotionEffectFinish
-        new PotionEffectFinishHook((net.canarymod.api.entity.living.EntityLiving) getCanaryEntity(), new CanaryPotionEffect(potioneffect)).call();
+        new PotionEffectFinishHook((net.canarymod.api.entity.living.LivingBase) getCanaryEntity(), new CanaryPotionEffect(potioneffect)).call();
         //
         this.h = true;
         if (!this.q.I) {

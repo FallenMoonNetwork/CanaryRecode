@@ -250,7 +250,7 @@ public class CanaryNonPlayableCharacter extends CanaryHuman implements NonPlayab
      */
     @Override
     public String toString() {
-        return String.format("NPC[id=%d, name=%s]", getID(), getName());
+        return String.format("%s[ID=%d, Name=%s]", getFqName(), getID(), getName());
     }
 
     @Override
@@ -261,7 +261,6 @@ public class CanaryNonPlayableCharacter extends CanaryHuman implements NonPlayab
     @Override
     public int hashCode() {
         int hash = 7;
-
         hash = 89 * hash + this.getID();
         hash = 89 * hash + (this.getName() != null ? this.getName().hashCode() : 0);
         return hash;

@@ -250,7 +250,7 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
         double DistanceXZ = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
         double DistanceY = Math.sqrt(DistanceXZ * DistanceXZ + yDiff * yDiff);
         double yaw = (Math.acos(xDiff / DistanceXZ) * 180 / Math.PI);
-        double pitch = (Math.acos(yDiff / DistanceY) * 180 / Math.PI);
+        double pitch = (Math.acos(yDiff / DistanceY) * 180 - 90 / Math.PI);
 
         if (zDiff < 0.0) {
             yaw = yaw + (Math.abs(180 - yaw) * 2);

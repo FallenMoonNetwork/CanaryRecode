@@ -15,7 +15,8 @@ public final class EntityNonPlayableCharacter extends EntityPlayer {
 
     public EntityNonPlayableCharacter(String name, Location location) {
         super(((CanaryWorld) location.getWorld()).getHandle(), name);
-        this.a(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
+        this.b(location.getX(), location.getY(), location.getZ(), location.getRotation(), location.getPitch());
+        this.i(1.0F); // ?
         this.entity = new CanaryNonPlayableCharacter(this);
     }
 
@@ -46,20 +47,17 @@ public final class EntityNonPlayableCharacter extends EntityPlayer {
 
     @Override
     public void l_() {
-        super.c();
         super.l_();
         if (!this.M) {
-            try {
-                getNPC().update();
-            } catch (Exception ex) {// For some reason an exception gets thrown after death and nulled CanaryEntity...
-            }
+            getNPC().update();
         }
+        this.H();
     }
 
     @Override
     public boolean a(EntityPlayer entityplayer) { // RightClicked
         if (this.entity != null) {
-            ((CanaryNonPlayableCharacter) entity).clicked(((EntityPlayerMP) entityplayer).getPlayer());
+            getNPC().clicked(((EntityPlayerMP) entityplayer).getPlayer());
             return true;
         }
         return false;
@@ -69,9 +67,8 @@ public final class EntityNonPlayableCharacter extends EntityPlayer {
     public boolean a(DamageSource damagesource, float i0) {
         boolean toRet = super.a(damagesource, i0);
 
-        if (toRet && this.entity != null && damagesource.i() != null) {
+        if (toRet && damagesource.i() != null) {
             CanaryEntity atk = damagesource.i().getCanaryEntity();
-
             getNPC().attacked(atk);
         }
         return toRet;
@@ -102,6 +99,6 @@ public final class EntityNonPlayableCharacter extends EntityPlayer {
     //
 
     public CanaryNonPlayableCharacter getNPC() {
-        return (CanaryNonPlayableCharacter) entity; // Not a Player now are we
+        return (CanaryNonPlayableCharacter) entity;
     }
 }
