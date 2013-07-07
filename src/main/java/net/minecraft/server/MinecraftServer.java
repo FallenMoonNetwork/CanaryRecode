@@ -511,6 +511,10 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
 
         this.a.b();
+
+        // CanaryMod: set this ticks time
+        previousTick = System.nanoTime() - curTrack;
+        //
     }
 
     public boolean u() {

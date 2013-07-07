@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import net.canarymod.api.world.blocks.BlockType;
+import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.RedstoneChangeHook;
 
 public class BlockRedstoneTorch extends BlockTorch {
@@ -56,6 +58,12 @@ public class BlockRedstoneTorch extends BlockTorch {
         }
 
         if (this.a) {
+            // CanaryMod: RedstoneChange; Torch put in
+            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 0, 15).call();
+            if (hook.isCanceled()) {
+                return;
+            }
+            //
             world.f(i0, i1 - 1, i2, this.cF);
             world.f(i0, i1 + 1, i2, this.cF);
             world.f(i0 - 1, i1, i2, this.cF);
@@ -67,6 +75,12 @@ public class BlockRedstoneTorch extends BlockTorch {
 
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         if (this.a) {
+            // CanaryMod: RedstoneChange; Torch broke
+            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(new CanaryBlock(BlockType.RedstoneLampOn.getId(), (short) 2, i0, i1, i2, world.getCanaryWorld()), 15, 0).call();
+            if (hook.isCanceled()) {
+                return;
+            }
+            //
             world.f(i0, i1 - 1, i2, this.cF);
             world.f(i0, i1 + 1, i2, this.cF);
             world.f(i0 - 1, i1, i2, this.cF);
@@ -102,14 +116,13 @@ public class BlockRedstoneTorch extends BlockTorch {
 
         if (this.a) {
             if (flag0) {
-                world.f(i0, i1, i2, Block.aU.cF, world.h(i0, i1, i2), 3);
-
-                // CanaryMod: RedstoneChange
-                RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 1, 0).call();
+                // CanaryMod: RedstoneChange; Torch off
+                RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
                 if (hook.isCanceled()) {
                     return;
                 }
                 //
+                world.f(i0, i1, i2, Block.aU.cF, world.h(i0, i1, i2), 3);
                 if (this.a(world, i0, i1, i2, true)) {
                     world.a((double) ((float) i0 + 0.5F),
                             (double) ((float) i1 + 0.5F),
@@ -128,6 +141,12 @@ public class BlockRedstoneTorch extends BlockTorch {
                 }
             }
         } else if (!flag0 && !this.a(world, i0, i1, i2, false)) {
+            // CanaryMod: RedstoneChange; Torch on
+            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
+            if (hook.isCanceled()) {
+                return;
+            }
+            //
             world.f(i0, i1, i2, Block.aV.cF, world.h(i0, i1, i2), 3);
         }
     }

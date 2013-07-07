@@ -141,8 +141,8 @@ public abstract class BlockButton extends Block {
             return true;
         }
 
-        // CanaryMod: RedstoneChange
-        RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i3, i6).call();
+        // CanaryMod: RedstoneChange; Button On
+        RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 0, 15).call();
         if (hook.isCanceled()) {
             return true;
             //
@@ -194,6 +194,13 @@ public abstract class BlockButton extends Block {
                 if (this.a) {
                     this.n(world, i0, i1, i2);
                 } else {
+                    // CanaryMod: RedstoneChange; Button off
+                    RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
+                    if (hook.isCanceled()) {
+                        return;
+                    }
+                    //
+
                     world.b(i0, i1, i2, i3 & 7, 3);
                     int i4 = i3 & 7;
 

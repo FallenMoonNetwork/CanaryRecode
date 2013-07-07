@@ -201,11 +201,13 @@ public class BlockLever extends Block {
             int i6 = 8 - (i4 & 8);
 
             // CanaryMod: RedstoneChange
-            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i3, i6).call();
+            // Get adjusted levels properly
+            int oldLvl = this.c((IBlockAccess) world, i0, i1, i2, i3);
+            int newLvl = i6 == 0 ? 0 : 15; //
+            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), oldLvl, newLvl).call();
             if (hook.isCanceled()) {
                 return true;
-            }
-            //
+            } // CanaryMod: end
 
             world.b(i0, i1, i2, i5 + i6, 3);
             world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D,

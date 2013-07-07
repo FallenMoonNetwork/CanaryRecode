@@ -103,6 +103,7 @@ public class WorldServer extends World {
             this.j = i1;
         }
 
+        this.x.b(this.x.f() + 1L);
         if (this.O().b("doDaylightCycle")) {
             // CanaryMod: TimeChangeHook
             TimeChangeHook hook = (TimeChangeHook) new TimeChangeHook(getCanaryWorld(), this.x.g() + 1L).call();
