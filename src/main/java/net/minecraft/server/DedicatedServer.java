@@ -128,7 +128,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
         if (!MinecraftServer.isHeadless()) {
             // CanaryMod moved GUI start to after plugins enable
-            ap();
+            at();
         }
 
         this.an().a("Preparing level \"" + this.L() + "\"");

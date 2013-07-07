@@ -526,7 +526,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         ILogAgent ilogagent = null;
 
         try {
-            boolean flag0 = !GraphicsEnvironment.isHeadless();
+            // CanaryMod - Removed boolean flag0 = !GraphicsEnvironment.isHeadless();
             String s0 = null;
             String s1 = ".";
             String s2 = null;
@@ -539,32 +539,30 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 String s4 = i1 == astring.length - 1 ? null : astring[i1 + 1];
                 boolean flag3 = false;
 
-                if (!s3.equals("nogui") && !s3.equals("--nogui")) {
-                    if (s3.equals("--port") && s4 != null) {
-                        flag3 = true;
+                // CanaryMod removed Nogui check, now done in Main
+                if (s3.equals("--port") && s4 != null) {
+                    flag3 = true;
 
-                        try {
-                            i0 = Integer.parseInt(s4);
-                        } catch (NumberFormatException numberformatexception) {
-                            ;
-                        }
-                    } else if (s3.equals("--singleplayer") && s4 != null) {
-                        flag3 = true;
-                        s0 = s4;
-                    } else if (s3.equals("--universe") && s4 != null) {
-                        flag3 = true;
-                        s1 = s4;
-                    } else if (s3.equals("--world") && s4 != null) {
-                        flag3 = true;
-                        s2 = s4;
-                    } else if (s3.equals("--demo")) {
-                        flag1 = true;
-                    } else if (s3.equals("--bonusChest")) {
-                        flag2 = true;
+                    try {
+                        i0 = Integer.parseInt(s4);
+                    } catch (NumberFormatException numberformatexception) {
+                        ;
                     }
-                } else {
-                    flag0 = false;
+                } else if (s3.equals("--singleplayer") && s4 != null) {
+                    flag3 = true;
+                    s0 = s4;
+                } else if (s3.equals("--universe") && s4 != null) {
+                    flag3 = true;
+                    s1 = s4;
+                } else if (s3.equals("--world") && s4 != null) {
+                    flag3 = true;
+                    s2 = s4;
+                } else if (s3.equals("--demo")) {
+                    flag1 = true;
+                } else if (s3.equals("--bonusChest")) {
+                    flag2 = true;
                 }
+                // CanaryMod removed else to Nogui check
 
                 if (flag3) {
                     ++i1;
@@ -572,10 +570,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             }
 
             DedicatedServer dedicatedserver = new DedicatedServer(new File(s1));
-
-            if (notHeadless) {
-                MinecraftServerGui.minecraftservergui.validate();
-            }
 
             ilogagent = dedicatedserver.an();
             if (s0 != null) {
@@ -598,9 +592,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 dedicatedserver.c(true);
             }
 
-            if (flag0) {
-                dedicatedserver.at();
-            }
+            // CanaryMod Removed old call to start GUI
 
             dedicatedserver.v();
             Runtime.getRuntime().addShutdownHook(new ThreadDedicatedServer(dedicatedserver));
