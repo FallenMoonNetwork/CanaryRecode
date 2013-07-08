@@ -5,6 +5,7 @@ import net.canarymod.api.nbt.CanaryListTag;
 import net.canarymod.api.nbt.CanaryStringTag;
 import net.canarymod.api.nbt.CompoundTag;
 import net.canarymod.api.nbt.ListTag;
+import net.canarymod.api.nbt.StringTag;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.NBTTagCompound;
 
@@ -184,13 +185,12 @@ public class CanaryItem implements Item {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("rawtypes")
     @Override
     public String[] getLore() {
         if (!hasLore()) {
             return null;
         }
-        ListTag lore = getDataTag().getCompoundTag("display").getListTag("Lore");
+        ListTag<StringTag> lore = getDataTag().getCompoundTag("display").getListTag("Lore");
         String[] rt = new String[lore.size()];
 
         for (int index = 0; index < rt.length; index++) {
@@ -214,10 +214,10 @@ public class CanaryItem implements Item {
         if (!tag.containsKey("display")) {
             tag.put("display", new CanaryCompoundTag("display"));
         }
-        CanaryListTag list = new CanaryListTag("");
+        CanaryListTag<StringTag> list = new CanaryListTag("Lore");
 
         for (String line : lore) {
-            list.add(new CanaryStringTag("", line));
+            list.add(new CanaryStringTag("line" + list.size(), line));
         }
         tag.getCompoundTag("display").put("Lore", list);
     }
@@ -227,7 +227,14 @@ public class CanaryItem implements Item {
      */
     @Override
     public boolean hasLore() {
-        return item.p() && getDataTag().containsKey("display");
+        if (hasDataTag()) {
+            if (getDataTag().containsKey("display")) {
+                if (getDataTag().getCompoundTag("display").containsKey("Lore")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -235,7 +242,7 @@ public class CanaryItem implements Item {
      */
     @Override
     public boolean isEnchanted() {
-        return item.x();
+        return item.y();
     }
 
     /**
@@ -267,7 +274,6 @@ public class CanaryItem implements Item {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("rawtypes")
     @Override
     public Enchantment[] getEnchantments() {
         Enchantment[] enchantments = null;
@@ -276,11 +282,10 @@ public class CanaryItem implements Item {
             int size = getHandle().r().c();
 
             enchantments = new Enchantment[size];
-            CanaryListTag nbtTagList = new CanaryListTag(getHandle().r());
+            CanaryListTag<CompoundTag> nbtTagList = new CanaryListTag<CompoundTag>(getHandle().r());
 
             for (int i = 0; i < size; i++) {
-                CompoundTag tag = (CompoundTag) nbtTagList.get(i);
-
+                CompoundTag tag = nbtTagList.get(i);
                 enchantments[i] = new CanaryEnchantment(Enchantment.Type.fromId(tag.getShort("id")), tag.getShort("lvl"));
             }
         }
