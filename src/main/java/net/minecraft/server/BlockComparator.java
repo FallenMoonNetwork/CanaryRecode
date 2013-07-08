@@ -159,10 +159,12 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     }
 
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
+        // CanaryMod: Comparator break
         int oldLvl = this.e(world, i0, i1, i2, i3);
         if (oldLvl != 0) {
             new RedstoneChangeHook(new CanaryBlock(BlockType.RedstoneComparatorOn.getId(), (short) 2, i0, i1, i2, world.getCanaryWorld()), oldLvl, 0).call();
         }
+        //
         super.a(world, i0, i1, i2, i3, i4);
         world.s(i0, i1, i2);
         this.h_(world, i0, i1, i2);
