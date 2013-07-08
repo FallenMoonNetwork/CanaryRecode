@@ -61,6 +61,7 @@ public class BlockRedstoneTorch extends BlockTorch {
             // CanaryMod: RedstoneChange; Torch put in
             RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 0, 15).call();
             if (hook.isCanceled()) {
+                this.a = false;
                 return;
             }
             //
@@ -76,10 +77,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         if (this.a) {
             // CanaryMod: RedstoneChange; Torch broke
-            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(new CanaryBlock(BlockType.RedstoneLampOn.getId(), (short) 2, i0, i1, i2, world.getCanaryWorld()), 15, 0).call();
-            if (hook.isCanceled()) {
-                return;
-            }
+            new RedstoneChangeHook(new CanaryBlock(BlockType.RedstoneLampOn.getId(), (short) 2, i0, i1, i2, world.getCanaryWorld()), 15, 0).call();
             //
             world.f(i0, i1 - 1, i2, this.cF);
             world.f(i0, i1 + 1, i2, this.cF);

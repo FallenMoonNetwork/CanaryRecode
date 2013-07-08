@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
-
 import java.util.Random;
-
+import net.canarymod.api.world.blocks.BlockType;
+import net.canarymod.api.world.blocks.CanaryBlock;
+import net.canarymod.hook.world.RedstoneChangeHook;
 
 public class BlockComparator extends BlockRedstoneLogic implements ITileEntityProvider {
 
@@ -124,6 +125,12 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
 
         this.a_(world, i0, i1, i2).a(i4);
         if (i5 != i4 || !this.d(i3)) {
+            // CanaryMod: RedstoneChange; Comparator change
+            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i5, i4).call();
+            if (hook.isCanceled()) {
+                return;
+            }
+            //
             boolean flag0 = this.d(world, i0, i1, i2, i3);
             boolean flag1 = this.a || (i3 & 8) != 0;
 
@@ -140,7 +147,6 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     public void a(World world, int i0, int i1, int i2, Random random) {
         if (this.a) {
             int i3 = world.h(i0, i1, i2);
-
             world.f(i0, i1, i2, this.j().cF, i3 | 8, 4);
         }
 
@@ -153,6 +159,10 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     }
 
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
+        // CanaryMod: RedstoneChange; Comparator break
+        int oldLvl = this.e(world, i0, i1, i2, i3);
+        new RedstoneChangeHook(new CanaryBlock(BlockType.RedstoneComparatorOn.getId(), (short) 2, i0, i1, i2, world.getCanaryWorld()), oldLvl, 0).call();
+        //
         super.a(world, i0, i1, i2, i3, i4);
         world.s(i0, i1, i2);
         this.h_(world, i0, i1, i2);
