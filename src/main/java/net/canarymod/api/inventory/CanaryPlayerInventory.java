@@ -92,7 +92,8 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      */
     @Override
     public Item getItemInHand() {
-        return getInventoryHandle().h().getCanaryItem();
+        ItemStack is = getInventoryHandle().h();
+        return is == null ? null : is.getCanaryItem();
     }
 
     /**
