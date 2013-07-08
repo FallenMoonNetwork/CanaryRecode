@@ -410,7 +410,7 @@ public abstract class ServerConfigurationManager {
         entityplayermp.p().q().b(entityplayermp);
         entityplayermp.p().s().c(entityplayermp);
         this.a.remove(entityplayermp);
-        this.e.a(entityplayermp.ar).f(entityplayermp);
+        this.e.getWorld(entityplayermp.getCanaryWorld().getName(), entityplayermp.ar).f(entityplayermp); // CanaryMod: added multiworld support
         // ChunkCoordinates chunkcoordinates = entityplayermp.bA(); //CanaryMod removed in favor of a real location
         Location respawnLocation = entityplayermp.getRespawnLocation();
         boolean flag1 = entityplayermp.bB();
