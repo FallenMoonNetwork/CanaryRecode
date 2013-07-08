@@ -1,5 +1,6 @@
 package net.canarymod.api.factory;
 
+import net.canarymod.api.nbt.BaseTag;
 import net.canarymod.api.nbt.ByteArrayTag;
 import net.canarymod.api.nbt.ByteTag;
 import net.canarymod.api.nbt.CanaryByteArrayTag;
@@ -84,10 +85,9 @@ public final class CanaryNBTFactory implements NBTFactory {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("rawtypes")
     @Override
-    public ListTag<?> newListTag(String name) {
-        return new CanaryListTag(name);
+    public <E extends BaseTag> ListTag<E> newListTag(String name) {
+        return new CanaryListTag<E>(name);
     }
 
     /**

@@ -1,6 +1,5 @@
 package net.canarymod.api.nbt;
 
-
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,14 +9,13 @@ import java.util.ListIterator;
 import net.minecraft.server.NBTBase;
 import net.minecraft.server.NBTTagList;
 
-
 /**
  * ListTag wrapper implementation
  * 
  * @author Greg (gregthegeek)
  * @author Jason (darkdiplomat)
  */
-public class CanaryListTag<E extends CanaryBaseTag> extends CanaryBaseTag implements ListTag<E> {
+public class CanaryListTag<E extends BaseTag> extends CanaryBaseTag implements ListTag<E> {
 
     /**
      * Constructs a new wrapper for NBTTagList
@@ -44,7 +42,7 @@ public class CanaryListTag<E extends CanaryBaseTag> extends CanaryBaseTag implem
      */
     @Override
     public boolean add(E e) {
-        getHandle().a(e.getHandle());
+        getHandle().a(((CanaryBaseTag) e).getHandle());
         return true;
     }
 
@@ -54,7 +52,7 @@ public class CanaryListTag<E extends CanaryBaseTag> extends CanaryBaseTag implem
     @SuppressWarnings("unchecked")
     @Override
     public void add(int index, E element) {
-        getHandle().a.add(index, element.getHandle());
+        getHandle().a.add(index, ((CanaryBaseTag) element).getHandle());
     }
 
     /**
@@ -65,7 +63,7 @@ public class CanaryListTag<E extends CanaryBaseTag> extends CanaryBaseTag implem
     public boolean addAll(Collection<? extends E> c) {
         return getHandle().a.addAll(makeRaw(c));
     }
-    
+
     private Collection<NBTBase> makeRaw(Collection<?> c) {
         Collection<NBTBase> raw = new ArrayList<NBTBase>(c.size());
 
