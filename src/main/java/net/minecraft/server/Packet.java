@@ -104,7 +104,6 @@ public abstract class Packet {
             p += (long) packet.a();
         } catch (EOFException eofexception) {
             ilogagent.c("Reached end of stream for " + socket.getInetAddress());
-            eofexception.printStackTrace();
             return null;
         }
 
