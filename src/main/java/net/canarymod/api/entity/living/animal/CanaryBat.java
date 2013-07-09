@@ -38,7 +38,7 @@ public class CanaryBat extends CanaryEntityAnimal implements Bat {
      */
     @Override
     public boolean isHanging() {
-        return getHandle().bF();
+        return getHandle().bG();
     }
 
     /**

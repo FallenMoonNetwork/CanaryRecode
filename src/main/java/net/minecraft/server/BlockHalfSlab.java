@@ -42,7 +42,7 @@ public abstract class BlockHalfSlab extends Block {
     }
 
     public void a(World world, int i0, int i1, int i2, AxisAlignedBB axisalignedbb, List list, Entity entity) {
-        this.a((IBlockAccess)world, i0, i1, i2); //CanaryMod cast to IBlockAccess
+        this.a((IBlockAccess) world, i0, i1, i2); // CanaryMod cast to IBlockAccess
         super.a(world, i0, i1, i2, axisalignedbb, list, entity);
     }
 

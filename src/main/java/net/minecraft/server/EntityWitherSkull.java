@@ -20,7 +20,7 @@ public class EntityWitherSkull extends EntityFireball {
         return /* this.d() ? 0.73F  : */super.c(); // CanaryMod: Motion Factor was made configurable
     }
 
-    public boolean ad() {
+    public boolean ae() {
         return false;
     }
 
@@ -38,7 +38,7 @@ public class EntityWitherSkull extends EntityFireball {
         if (!this.q.I) {
             if (movingobjectposition.g != null) {
                 if (this.a != null) {
-                    if (movingobjectposition.g.a(DamageSource.a(this.a), 8.0F) && !movingobjectposition.g.R()) {
+                    if (movingobjectposition.g.a(DamageSource.a(this.a), 8.0F) && !movingobjectposition.g.S()) {
                         this.a.f(5.0F);
                     }
                 } else {
@@ -57,7 +57,7 @@ public class EntityWitherSkull extends EntityFireball {
                     }
 
                     if (b0 > 0) {
-                        ((EntityLivingBase) movingobjectposition.g).d(new PotionEffect(Potion.v.H, 20 * b0, 1));
+                        ((EntityLivingBase) movingobjectposition.g).c(new PotionEffect(Potion.v.H, 20 * b0, 1));
                     }
                 }
             }

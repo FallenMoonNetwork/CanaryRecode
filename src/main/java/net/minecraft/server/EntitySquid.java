@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.animal.CanarySquid;
-
 
 public class EntitySquid extends EntityWaterMob {
 
@@ -28,8 +26,8 @@ public class EntitySquid extends EntityWaterMob {
         this.entity = new CanarySquid(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(10.0D);
     }
 
@@ -37,15 +35,15 @@ public class EntitySquid extends EntityWaterMob {
         return null;
     }
 
-    protected String aK() {
+    protected String aN() {
         return null;
     }
 
-    protected String aL() {
+    protected String aO() {
         return null;
     }
 
-    protected float aW() {
+    protected float aZ() {
         return 0.4F;
     }
 
@@ -129,7 +127,7 @@ public class EntitySquid extends EntityWaterMob {
         this.d(this.x, this.y, this.z);
     }
 
-    protected void bh() {
+    protected void bk() {
         ++this.aV;
         if (this.aV > 100) {
             this.bA = this.bB = this.bC = 0.0F;
@@ -141,10 +139,10 @@ public class EntitySquid extends EntityWaterMob {
             this.bC = MathHelper.a(f0) * 0.2F;
         }
 
-        this.bk();
+        this.bo();
     }
 
-    public boolean bo() {
-        return this.v > 45.0D && this.v < 63.0D && super.bo();
+    public boolean bs() {
+        return this.v > 45.0D && this.v < 63.0D && super.bs();
     }
 }

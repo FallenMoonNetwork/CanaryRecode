@@ -10,7 +10,7 @@ public abstract class EntityMob extends EntityCreature implements IMob {
     }
 
     public void c() {
-        this.aS();
+        this.aV();
         float f0 = this.d(1.0F);
 
         if (f0 > 0.5F) {
@@ -27,14 +27,14 @@ public abstract class EntityMob extends EntityCreature implements IMob {
         }
     }
 
-    protected Entity bH() {
+    protected Entity bL() {
         EntityPlayer entityplayer = this.q.b(this, 16.0D);
 
         return entityplayer != null && this.o(entityplayer) ? entityplayer : null;
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else if (super.a(damagesource, f0)) {
             Entity entity = damagesource.i();
@@ -128,12 +128,12 @@ public abstract class EntityMob extends EntityCreature implements IMob {
         }
     }
 
-    public boolean bo() {
-        return this.q.r > 0 && this.i_() && super.bo();
+    public boolean bs() {
+        return this.q.r > 0 && this.i_() && super.bs();
     }
 
-    protected void ax() {
-        super.ax();
-        this.aT().b(SharedMonsterAttributes.e);
+    protected void ay() {
+        super.ay();
+        this.aW().b(SharedMonsterAttributes.e);
     }
 }

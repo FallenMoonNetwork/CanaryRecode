@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,7 +7,6 @@ import net.canarymod.api.inventory.CanaryEnchantment;
 import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
 import net.canarymod.api.world.blocks.EnchantmentTable;
 import net.canarymod.hook.player.EnchantHook;
-
 
 public class ContainerEnchantment extends Container {
 

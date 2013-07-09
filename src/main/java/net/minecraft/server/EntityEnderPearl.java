@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.throwable.CanaryEnderPearl;
-
 
 public class EntityEnderPearl extends EntityThrowable {
 
@@ -30,7 +28,7 @@ public class EntityEnderPearl extends EntityThrowable {
                 EntityPlayerMP entityplayermp = (EntityPlayerMP) this.h();
 
                 if (!entityplayermp.a.b && entityplayermp.q == this.q) {
-                    if (this.h().ae()) {
+                    if (this.h().af()) {
                         this.h().a((Entity) null);
                     }
 

@@ -168,11 +168,12 @@ public class ServerCommandScoreboard extends CommandBase {
 
     protected Scoreboard d() {
         // CanaryMod: This here returns the default world to get the default scoreboard.
-        return ((CanaryWorld)Canary.getServer().getDefaultWorld()).getHandle().D;
+        return ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().D;
     }
+
     protected Scoreboard getScoreboard(World world) {
         // CanaryMod: This here returns the default world to get the default scoreboard.
-        return ((CanaryWorld)Canary.getServer().getDefaultWorld()).getHandle().D;
+        return ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().D;
     }
 
     protected ScoreObjective a(String s0, boolean flag0) {
@@ -357,7 +358,7 @@ public class ServerCommandScoreboard extends CommandBase {
         String s0;
 
         if (icommandsender instanceof EntityPlayer && i0 == astring.length) {
-            s0 = b(icommandsender).al();
+            s0 = b(icommandsender).am();
             scoreboard.a(s0, scoreplayerteam);
             hashset.add(s0);
         } else {
@@ -380,7 +381,7 @@ public class ServerCommandScoreboard extends CommandBase {
         String s0;
 
         if (icommandsender instanceof EntityPlayer && i0 == astring.length) {
-            s0 = b(icommandsender).al();
+            s0 = b(icommandsender).am();
             if (scoreboard.g(s0)) {
                 hashset.add(s0);
             } else {

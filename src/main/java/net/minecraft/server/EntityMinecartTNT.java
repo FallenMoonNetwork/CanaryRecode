@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.vehicle.CanaryTNTMinecart;
-
 
 public class EntityMinecartTNT extends EntityMinecart {
 
@@ -94,16 +92,16 @@ public class EntityMinecartTNT extends EntityMinecart {
         }
     }
 
-    public boolean ax() {
+    public boolean ay() {
         return this.a > -1;
     }
 
     public float a(Explosion explosion, World world, int i0, int i1, int i2, Block block) {
-        return this.ax() && (BlockRailBase.e_(block.cF) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? 0.0F : super.a(explosion, world, i0, i1, i2, block);
+        return this.ay() && (BlockRailBase.e_(block.cF) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? 0.0F : super.a(explosion, world, i0, i1, i2, block);
     }
 
     public boolean a(Explosion explosion, World world, int i0, int i1, int i2, int i3, float f0) {
-        return this.ax() && (BlockRailBase.e_(i3) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? false : super.a(explosion, world, i0, i1, i2, i3, f0);
+        return this.ay() && (BlockRailBase.e_(i3) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? false : super.a(explosion, world, i0, i1, i2, i3, f0);
     }
 
     protected void a(NBTTagCompound nbttagcompound) {

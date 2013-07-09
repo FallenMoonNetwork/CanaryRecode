@@ -15,8 +15,8 @@ public class EntityBlaze extends EntityMob {
         this.entity = new CanaryBlaze(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.e).a(6.0D);
     }
 
@@ -29,11 +29,11 @@ public class EntityBlaze extends EntityMob {
         return "mob.blaze.breathe";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.blaze.hit";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.blaze.death";
     }
 
@@ -53,7 +53,7 @@ public class EntityBlaze extends EntityMob {
                 this.bp = 0.5F + (float) this.ab.nextGaussian() * 3.0F;
             }
 
-            if (this.bJ() != null && this.bJ().v + (double) this.bJ().f() > this.v + (double) this.f() + (double) this.bp) {
+            if (this.bN() != null && this.bN().v + (double) this.bN().f() > this.v + (double) this.f() + (double) this.bp) {
                 this.y += (0.30000001192092896D - this.y) * 0.30000001192092896D;
             }
         }
@@ -120,8 +120,8 @@ public class EntityBlaze extends EntityMob {
         return Item.bq.cv;
     }
 
-    public boolean ad() {
-        return this.bP();
+    public boolean ae() {
+        return this.bT();
     }
 
     protected void b(boolean flag0, int i0) {
@@ -134,7 +134,7 @@ public class EntityBlaze extends EntityMob {
         }
     }
 
-    public boolean bP() {
+    public boolean bT() {
         return (this.ah.a(16) & 1) != 0;
     }
 

@@ -44,9 +44,9 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
     }
 
-    protected void ax() {
-        super.ax();
-        this.aT().b(SharedMonsterAttributes.b).a(16.0D);
+    protected void ay() {
+        super.ay();
+        this.aW().b(SharedMonsterAttributes.b).a(16.0D);
     }
 
     public EntityLookHelper h() {
@@ -73,7 +73,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         return this.bp;
     }
 
-    public void c(EntityLivingBase entitylivingbase) {
+    public void d(EntityLivingBase entitylivingbase) {
         this.bp = entitylivingbase;
     }
 
@@ -97,14 +97,14 @@ public abstract class EntityLiving extends EntityLivingBase {
         String s0 = this.r();
 
         if (s0 != null) {
-            this.a(s0, this.aW(), this.aX());
+            this.a(s0, this.aZ(), this.ba());
         }
     }
 
     public void x() {
         super.x();
         this.q.C.a("mobBaseTick");
-        if (this.R() && this.ab.nextInt(1000) < this.a_++) {
+        if (this.S() && this.ab.nextInt(1000) < this.a_++) {
             this.a_ = -this.o();
             this.p();
         }
@@ -115,7 +115,7 @@ public abstract class EntityLiving extends EntityLivingBase {
     protected int e(EntityPlayer entityplayer) {
         if (this.b > 0) {
             int i0 = this.b;
-            ItemStack[] aitemstack = this.ac();
+            ItemStack[] aitemstack = this.ad();
 
             for (int i1 = 0; i1 < aitemstack.length; ++i1) {
                 if (aitemstack[i1] != null && this.e[i1] <= 1.0F) {
@@ -143,12 +143,12 @@ public abstract class EntityLiving extends EntityLivingBase {
     public void l_() {
         super.l_();
         if (!this.q.I) {
-            this.bB();
+            this.bF();
         }
     }
 
     protected float f(float f0, float f1) {
-        if (this.bb()) {
+        if (this.be()) {
             this.bn.a();
             return f1;
         } else {
@@ -182,7 +182,7 @@ public abstract class EntityLiving extends EntityLivingBase {
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("CanPickUpLoot", this.bz());
+        nbttagcompound.a("CanPickUpLoot", this.bD());
         nbttagcompound.a("PersistenceRequired", this.bt);
         NBTTagList nbttaglist = new NBTTagList();
 
@@ -205,14 +205,14 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
 
         nbttagcompound.a("DropChances", (NBTBase) nbttaglist1);
-        nbttagcompound.a("CustomName", this.bw());
-        nbttagcompound.a("CustomNameVisible", this.by());
+        nbttagcompound.a("CustomName", this.bA());
+        nbttagcompound.a("CustomNameVisible", this.bC());
         nbttagcompound.a("Leashed", this.bv);
         if (this.bw != null) {
             nbttagcompound1 = new NBTTagCompound("Leash");
             if (this.bw instanceof EntityLivingBase) {
-                nbttagcompound1.a("UUIDMost", this.bw.au().getMostSignificantBits());
-                nbttagcompound1.a("UUIDLeast", this.bw.au().getLeastSignificantBits());
+                nbttagcompound1.a("UUIDMost", this.bw.av().getMostSignificantBits());
+                nbttagcompound1.a("UUIDLeast", this.bw.av().getLeastSignificantBits());
             } else if (this.bw instanceof EntityHanging) {
                 EntityHanging entityhanging = (EntityHanging) this.bw;
 
@@ -271,7 +271,7 @@ public abstract class EntityLiving extends EntityLivingBase {
     public void c() {
         super.c();
         this.q.C.a("looting");
-        if (!this.q.I && this.bz() && !this.aU && this.q.O().b("mobGriefing")) {
+        if (!this.q.I && this.bD() && !this.aU && this.q.O().b("mobGriefing")) {
             List list = this.q.a(EntityItem.class, this.E.b(1.0D, 0.0D, 1.0D));
             Iterator iterator = list.iterator();
 
@@ -337,7 +337,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.q.C.b();
     }
 
-    protected boolean bb() {
+    protected boolean be() {
         return false;
     }
 
@@ -345,7 +345,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         return true;
     }
 
-    protected void bk() {
+    protected void bo() {
         if (this.bt) {
             this.aV = 0;
         } else {
@@ -370,10 +370,10 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
     }
 
-    protected void be() {
+    protected void bh() {
         ++this.aV;
         this.q.C.a("checkDespawn");
-        this.bk();
+        this.bo();
         this.q.C.b();
         this.q.C.a("sensing");
         this.bq.a();
@@ -388,7 +388,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.bo.f();
         this.q.C.b();
         this.q.C.a("mob tick");
-        this.bg();
+        this.bj();
         this.q.C.b();
         this.q.C.a("controls");
         this.q.C.a("move");
@@ -401,11 +401,11 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.q.C.b();
     }
 
-    protected void bh() {
-        super.bh();
+    protected void bk() {
+        super.bk();
         this.be = 0.0F;
         this.bf = 0.0F;
-        this.bk();
+        this.bo();
         float f0 = 8.0F;
 
         if (this.ab.nextFloat() < 0.02F) {
@@ -420,7 +420,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
 
         if (this.bu != null) {
-            this.a(this.bu, 10.0F, (float) this.bl());
+            this.a(this.bu, 10.0F, (float) this.bp());
             if (this.g-- <= 0 || this.bu.M || this.bu.e((Entity) this) > (double) (f0 * f0)) {
                 this.bu = null;
             }
@@ -441,7 +441,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
     }
 
-    public int bl() {
+    public int bp() {
         return 40;
     }
 
@@ -480,19 +480,19 @@ public abstract class EntityLiving extends EntityLivingBase {
         return f0 + f3;
     }
 
-    public boolean bo() {
+    public boolean bs() {
         return this.q.b(this.E) && this.q.a((Entity) this, this.E).isEmpty() && !this.q.d(this.E);
     }
 
-    public int br() {
+    public int bv() {
         return 4;
     }
 
-    public int aq() {
+    public int ar() {
         if (this.m() == null) {
             return 3;
         } else {
-            int i0 = (int) (this.aJ() - this.aP() * 0.33F);
+            int i0 = (int) (this.aM() - this.aS() * 0.33F);
 
             i0 -= (3 - this.q.r) * 4;
             if (i0 < 0) {
@@ -503,7 +503,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
     }
 
-    public ItemStack aV() {
+    public ItemStack aY() {
         return this.br[0];
     }
 
@@ -519,12 +519,12 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.br[i0] = itemstack;
     }
 
-    public ItemStack[] ac() {
+    public ItemStack[] ad() {
         return this.br;
     }
 
     protected void a(boolean flag0, int i0) {
-        for (int i1 = 0; i1 < this.ac().length; ++i1) {
+        for (int i1 = 0; i1 < this.ad().length; ++i1) {
             ItemStack itemstack = this.n(i1);
             boolean flag1 = this.e[i1] > 1.0F;
 
@@ -549,7 +549,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
     }
 
-    protected void bs() {
+    protected void bw() {
         if (this.ab.nextFloat() < 0.15F * this.q.b(this.u, this.v, this.w)) {
             int i0 = this.ab.nextInt(2);
             float f0 = this.q.r == 3 ? 0.1F : 0.25F;
@@ -667,11 +667,11 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
     }
 
-    protected void bt() {
+    protected void bx() {
         float f0 = this.q.b(this.u, this.v, this.w);
 
-        if (this.aV() != null && this.ab.nextFloat() < 0.25F * f0) {
-            EnchantmentHelper.a(this.ab, this.aV(), (int) (5.0F + f0 * (float) this.ab.nextInt(18)));
+        if (this.aY() != null && this.ab.nextFloat() < 0.25F * f0) {
+            EnchantmentHelper.a(this.ab, this.aY(), (int) (5.0F + f0 * (float) this.ab.nextInt(18)));
         }
 
         for (int i0 = 0; i0 < 4; ++i0) {
@@ -688,15 +688,15 @@ public abstract class EntityLiving extends EntityLivingBase {
         return entitylivingdata;
     }
 
-    public boolean bu() {
+    public boolean by() {
         return false;
     }
 
-    public String al() {
-        return this.bx() ? this.bw() : super.al();
+    public String am() {
+        return this.bB() ? this.bA() : super.am();
     }
 
-    public void bv() {
+    public void bz() {
         this.bt = true;
     }
 
@@ -704,11 +704,11 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.ah.b(10, s0);
     }
 
-    public String bw() {
+    public String bA() {
         return this.ah.e(10);
     }
 
-    public boolean bx() {
+    public boolean bB() {
         return this.ah.e(10).length() > 0;
     }
 
@@ -716,7 +716,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.ah.b(11, Byte.valueOf((byte) (flag0 ? 1 : 0)));
     }
 
-    public boolean by() {
+    public boolean bC() {
         return this.ah.a(11) == 1;
     }
 
@@ -724,7 +724,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.e[i0] = f0;
     }
 
-    public boolean bz() {
+    public boolean bD() {
         return this.bs;
     }
 
@@ -732,19 +732,19 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.bs = flag0;
     }
 
-    public boolean bA() {
+    public boolean bE() {
         return this.bt;
     }
 
     public final boolean c(EntityPlayer entityplayer) {
-        if (this.bD() && this.bE() == entityplayer) {
-            this.i(true);
+        if (this.bH() && this.bI() == entityplayer) {
+            this.a(true, !entityplayer.bG.d);
             return true;
         } else {
             ItemStack itemstack = entityplayer.bn.h();
 
-            if (itemstack != null && itemstack.d == Item.ch.cv && this.bC()) {
-                if (!(this instanceof EntityTameable) || !((EntityTameable) this).bP()) {
+            if (itemstack != null && itemstack.d == Item.ch.cv && this.bG()) {
+                if (!(this instanceof EntityTameable) || !((EntityTameable) this).bT()) {
                     this.b(entityplayer, true);
                     --itemstack.b;
                     return true;
@@ -765,23 +765,23 @@ public abstract class EntityLiving extends EntityLivingBase {
         return false;
     }
 
-    protected void bB() {
+    protected void bF() {
         if (this.bx != null) {
-            this.bF();
+            this.bJ();
         }
 
         if (this.bv) {
             if (this.bw == null || this.bw.M) {
-                this.i(true);
+                this.a(true, true);
             }
         }
     }
 
-    public void i(boolean flag0) {
+    public void a(boolean flag0, boolean flag1) {
         if (this.bv) {
             this.bv = false;
             this.bw = null;
-            if (!this.q.I) {
+            if (!this.q.I && flag1) {
                 this.b(Item.ch.cv, 1);
             }
 
@@ -791,15 +791,15 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
     }
 
-    public boolean bC() {
-        return !this.bD() && !(this instanceof IMob);
+    public boolean bG() {
+        return !this.bH() && !(this instanceof IMob);
     }
 
-    public boolean bD() {
+    public boolean bH() {
         return this.bv;
     }
 
-    public Entity bE() {
+    public Entity bI() {
         return this.bw;
     }
 
@@ -811,7 +811,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
     }
 
-    private void bF() {
+    private void bJ() {
         if (this.bv && this.bx != null) {
             if (this.bx.b("UUIDMost") && this.bx.b("UUIDLeast")) {
                 UUID uuid = new UUID(this.bx.f("UUIDMost"), this.bx.f("UUIDLeast"));
@@ -821,7 +821,7 @@ public abstract class EntityLiving extends EntityLivingBase {
                 while (iterator.hasNext()) {
                     EntityLivingBase entitylivingbase = (EntityLivingBase) iterator.next();
 
-                    if (entitylivingbase.au().equals(uuid)) {
+                    if (entitylivingbase.av().equals(uuid)) {
                         this.bw = entitylivingbase;
                         break;
                     }
@@ -838,7 +838,7 @@ public abstract class EntityLiving extends EntityLivingBase {
 
                 this.bw = entityleashknot;
             } else {
-                this.i(false);
+                this.a(false, true);
             }
         }
 

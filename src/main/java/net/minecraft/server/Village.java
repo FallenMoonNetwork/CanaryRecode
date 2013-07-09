@@ -1,12 +1,10 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 import net.canarymod.api.world.CanaryVillage;
-
 
 public class Village {
 
@@ -202,7 +200,8 @@ public class Village {
                 }
 
                 villagedoorinfo = (VillageDoorInfo) iterator.next();
-            } while (villagedoorinfo.a != i0 || villagedoorinfo.c != i2 || Math.abs(villagedoorinfo.b - i1) > 1);
+            }
+            while (villagedoorinfo.a != i0 || villagedoorinfo.c != i2 || Math.abs(villagedoorinfo.b - i1) > 1);
 
             return villagedoorinfo;
         }
@@ -287,7 +286,7 @@ public class Village {
         while (iterator.hasNext()) {
             VillageAgressor villageagressor = (VillageAgressor) iterator.next();
 
-            if (!villageagressor.a.R() || Math.abs(this.g - villageagressor.b) > 300) {
+            if (!villageagressor.a.S() || Math.abs(this.g - villageagressor.b) > 300) {
                 iterator.remove();
             }
         }

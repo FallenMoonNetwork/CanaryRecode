@@ -16,7 +16,7 @@ public class EntityIronGolem extends EntityGolem {
         this.c.a(1, new EntityAIAttackOnCollide(this, 1.0D, true));
         this.c.a(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
         this.c.a(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
-        this.c.a(4, new EntityAIMoveTwardsRestriction(this, 1.0D));
+        this.c.a(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.c.a(5, new EntityAILookAtVillager(this));
         this.c.a(6, new EntityAIWander(this, 0.6D));
         this.c.a(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -32,16 +32,16 @@ public class EntityIronGolem extends EntityGolem {
         this.ah.a(16, Byte.valueOf((byte) 0));
     }
 
-    public boolean bb() {
+    public boolean be() {
         return true;
     }
 
-    protected void bg() {
+    protected void bj() {
         if (--this.bq <= 0) {
             this.bq = 70 + this.ab.nextInt(50);
             this.bp = this.q.A.a(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w), 32);
             if (this.bp == null) {
-                this.bN();
+                this.bR();
             } else {
                 ChunkCoordinates chunkcoordinates = this.bp.a();
 
@@ -49,11 +49,11 @@ public class EntityIronGolem extends EntityGolem {
             }
         }
 
-        super.bg();
+        super.bj();
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(100.0D);
         this.a(SharedMonsterAttributes.d).a(0.25D);
     }
@@ -63,8 +63,8 @@ public class EntityIronGolem extends EntityGolem {
     }
 
     protected void n(Entity entity) {
-        if (entity instanceof IMob && this.aB().nextInt(20) == 0) {
-            this.c((EntityLivingBase) entity);
+        if (entity instanceof IMob && this.aC().nextInt(20) == 0) {
+            this.d((EntityLivingBase) entity);
         }
 
         super.n(entity);
@@ -93,17 +93,17 @@ public class EntityIronGolem extends EntityGolem {
     }
 
     public boolean a(Class oclass0) {
-        return this.bS() && EntityPlayer.class.isAssignableFrom(oclass0) ? false : super.a(oclass0);
+        return this.bW() && EntityPlayer.class.isAssignableFrom(oclass0) ? false : super.a(oclass0);
     }
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("PlayerCreated", this.bS());
+        nbttagcompound.a("PlayerCreated", this.bW());
     }
 
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
-        this.j(nbttagcompound.n("PlayerCreated"));
+        this.i(nbttagcompound.n("PlayerCreated"));
     }
 
     public boolean m(Entity entity) {
@@ -119,7 +119,7 @@ public class EntityIronGolem extends EntityGolem {
         return flag0;
     }
 
-    public Village bP() {
+    public Village bT() {
         return this.bp;
     }
 
@@ -132,11 +132,11 @@ public class EntityIronGolem extends EntityGolem {
         return "none";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.irongolem.hit";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.irongolem.death";
     }
 
@@ -160,15 +160,15 @@ public class EntityIronGolem extends EntityGolem {
         }
     }
 
-    public int bR() {
+    public int bV() {
         return this.bs;
     }
 
-    public boolean bS() {
+    public boolean bW() {
         return (this.ah.a(16) & 1) != 0;
     }
 
-    public void j(boolean flag0) {
+    public void i(boolean flag0) {
         byte b0 = this.ah.a(16);
 
         if (flag0) {
@@ -179,7 +179,7 @@ public class EntityIronGolem extends EntityGolem {
     }
 
     public void a(DamageSource damagesource) {
-        if (!this.bS() && this.aS != null && this.bp != null) {
+        if (!this.bW() && this.aS != null && this.bp != null) {
             this.bp.a(this.aS.c_(), -5);
         }
 

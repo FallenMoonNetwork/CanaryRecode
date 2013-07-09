@@ -69,7 +69,7 @@ public class NetServerHandler extends NetHandler {
         serverHandler = new CanaryNetServerHandler(this);
     }
 
-    public void d() {
+    public void e() {
         this.g = false;
         ++this.e;
         this.d.a.a("packetflow");
@@ -150,47 +150,26 @@ public class NetServerHandler extends NetHandler {
                 double d1;
                 double d2;
                 double d3;
-                double d4;
 
                 if (this.c.o != null) {
                     float f0 = this.c.A;
                     float f1 = this.c.B;
 
-                    this.c.o.U();
+                    this.c.o.V();
                     d1 = this.c.u;
                     d2 = this.c.v;
                     d3 = this.c.w;
-                    double d5 = 0.0D;
-
-                    d4 = 0.0D;
                     if (packet10flying.i) {
                         f0 = packet10flying.e;
                         f1 = packet10flying.f;
                     }
 
-                    if (packet10flying.h && packet10flying.b == -999.0D && packet10flying.d == -999.0D) {
-                        if (Math.abs(packet10flying.a) > 1.0D || Math.abs(packet10flying.c) > 1.0D) {
-                            System.err.println(this.c.c_() + " was caught trying to crash the server with an invalid position.");
-                            this.c("Nope!");
-                            return;
-                        }
-
-                        d5 = packet10flying.a;
-                        d4 = packet10flying.c;
-                    }
-
                     this.c.F = packet10flying.g;
                     this.c.h();
-                    this.c.d(d5, 0.0D, d4);
+                    this.c.X = 0.0F;
                     this.c.a(d1, d2, d3, f0, f1);
-                    this.c.x = d5;
-                    this.c.z = d4;
                     if (this.c.o != null) {
-                        worldserver.b(this.c.o, true);
-                    }
-
-                    if (this.c.o != null) {
-                        this.c.o.U();
+                        this.c.o.V();
                     }
 
                     this.d.af().d(this.c);
@@ -204,7 +183,7 @@ public class NetServerHandler extends NetHandler {
                     return;
                 }
 
-                if (this.c.bd()) {
+                if (this.c.bg()) {
                     this.c.h();
                     this.c.a(this.n, this.o, this.p, this.c.A, this.c.B);
                     worldserver.g(this.c);
@@ -225,12 +204,14 @@ public class NetServerHandler extends NetHandler {
                     packet10flying.h = false;
                 }
 
+                double d4;
+
                 if (packet10flying.h) {
                     d1 = packet10flying.a;
                     d2 = packet10flying.b;
                     d3 = packet10flying.c;
                     d4 = packet10flying.d - packet10flying.b;
-                    if (!this.c.bd() && (d4 > 1.65D || d4 < 0.1D)) {
+                    if (!this.c.bg() && (d4 > 1.65D || d4 < 0.1D)) {
                         this.c("Illegal stance");
                         this.d.an().b(this.c.c_() + " had an illegal stance: " + d4);
                         return;
@@ -255,15 +236,15 @@ public class NetServerHandler extends NetHandler {
                 }
 
                 d4 = d1 - this.c.u;
-                double d6 = d2 - this.c.v;
-                double d7 = d3 - this.c.w;
-                double d8 = Math.min(Math.abs(d4), Math.abs(this.c.x));
-                double d9 = Math.min(Math.abs(d6), Math.abs(this.c.y));
-                double d10 = Math.min(Math.abs(d7), Math.abs(this.c.z));
-                double d11 = d8 * d8 + d9 * d9 + d10 * d10;
+                double d5 = d2 - this.c.v;
+                double d6 = d3 - this.c.w;
+                double d7 = Math.min(Math.abs(d4), Math.abs(this.c.x));
+                double d8 = Math.min(Math.abs(d5), Math.abs(this.c.y));
+                double d9 = Math.min(Math.abs(d6), Math.abs(this.c.z));
+                double d10 = d7 * d7 + d8 * d8 + d9 * d9;
 
-                if (d11 > 100.0D && (!this.d.K() || !this.d.J().equals(this.c.c_()))) {
-                    this.d.an().b(this.c.c_() + " moved too quickly! " + d4 + "," + d6 + "," + d7 + " (" + d8 + ", " + d9 + ", " + d10 + ")");
+                if (d10 > 100.0D && (!this.d.K() || !this.d.J().equals(this.c.c_()))) {
+                    this.d.an().b(this.c.c_() + " moved too quickly! " + d4 + "," + d5 + "," + d6 + " (" + d7 + ", " + d8 + ", " + d9 + ")");
                     this.a(this.n, this.o, this.p, this.c.A, this.c.B, this.c.q.getCanaryWorld().getType().getId(), this.c.q.getCanaryWorld().getName(), TeleportHook.TeleportCause.MOVEMENT);
                     return;
                 }
@@ -271,26 +252,26 @@ public class NetServerHandler extends NetHandler {
                 float f4 = 0.0625F;
                 boolean flag0 = worldserver.a(this.c, this.c.E.c().e((double) f4, (double) f4, (double) f4)).isEmpty();
 
-                if (this.c.F && !packet10flying.g && d6 > 0.0D) {
+                if (this.c.F && !packet10flying.g && d5 > 0.0D) {
                     this.c.a(0.2F);
                 }
 
-                this.c.d(d4, d6, d7);
+                this.c.d(d4, d5, d6);
                 this.c.F = packet10flying.g;
-                this.c.j(d4, d6, d7);
-                double d12 = d6;
+                this.c.j(d4, d5, d6);
+                double d11 = d5;
 
                 d4 = d1 - this.c.u;
-                d6 = d2 - this.c.v;
-                if (d6 > -0.5D || d6 < 0.5D) {
-                    d6 = 0.0D;
+                d5 = d2 - this.c.v;
+                if (d5 > -0.5D || d5 < 0.5D) {
+                    d5 = 0.0D;
                 }
 
-                d7 = d3 - this.c.w;
-                d11 = d4 * d4 + d6 * d6 + d7 * d7;
+                d6 = d3 - this.c.w;
+                d10 = d4 * d4 + d5 * d5 + d6 * d6;
                 boolean flag1 = false;
 
-                if (d11 > 0.0625D && !this.c.bd() && !this.c.c.d()) {
+                if (d10 > 0.0625D && !this.c.bg() && !this.c.c.d()) {
                     flag1 = true;
                     this.d.an().b(this.c.c_() + " moved wrongly!");
                 }
@@ -298,7 +279,7 @@ public class NetServerHandler extends NetHandler {
                 this.c.a(d1, d2, d3, f2, f3);
                 boolean flag2 = worldserver.a(this.c, this.c.E.c().e((double) f4, (double) f4, (double) f4)).isEmpty();
 
-                if (flag0 && (flag1 || !flag2) && !this.c.bd()) {
+                if (flag0 && (flag1 || !flag2) && !this.c.bg()) {
                     this.a(this.n, this.o, this.p, f2, f3, c.getCanaryWorld().getType().getId(), c.getCanaryWorld().getName(), TeleportHook.TeleportCause.MOVEMENT);
                     return;
                 }
@@ -308,7 +289,7 @@ public class NetServerHandler extends NetHandler {
                 // CanaryMod: check on flying capability instead of mode
                 // moved allow-flight to per-world config
                 if (!Configuration.getWorldConfig(c.getCanaryWorld().getFqName()).isFlightAllowed() && !this.c.bG.c && !worldserver.c(axisalignedbb)) {
-                    if (d12 >= -0.03125D) {
+                    if (d11 >= -0.03125D) {
                         ++this.f;
                         if (this.f > 80) {
                             this.d.an().b(this.c.c_() + " was kicked for floating too long!");
@@ -356,7 +337,7 @@ public class NetServerHandler extends NetHandler {
         } else if (packet14blockdig.e == 3) {
             this.c.a(true);
         } else if (packet14blockdig.e == 5) {
-            this.c.bo();
+            this.c.bs();
         } else {
             boolean flag0 = false;
 
@@ -598,7 +579,7 @@ public class NetServerHandler extends NetHandler {
                         return;
                     }
 
-                    ChatMessageComponent chatmessagecomponent = ChatMessageComponent.b("chat.type.text", new Object[]{ this.c.aw(), s0 });
+                    ChatMessageComponent chatmessagecomponent = ChatMessageComponent.b("chat.type.text", new Object[] { this.c.ax(), s0});
 
                     this.d.af().a(chatmessagecomponent, false);
                 }
@@ -622,7 +603,7 @@ public class NetServerHandler extends NetHandler {
         if (packet18animation.b == 1) {
             // CanaryMod: PlayerLeftClick
             new PlayerLeftClickHook(this.c.getPlayer()).call();
-            this.c.aR();
+            this.c.aU();
         }
     }
 
@@ -653,7 +634,7 @@ public class NetServerHandler extends NetHandler {
         this.a.a("disconnect.quitting", new Object[0]);
     }
 
-    public int e() {
+    public int f() {
         return this.a.e();
     }
 
@@ -695,7 +676,7 @@ public class NetServerHandler extends NetHandler {
                     this.c.a.c("You have died. Game over, man, it\'s game over!");
                 }
             } else {
-                if (this.c.aJ() > 0.0F) {
+                if (this.c.aM() > 0.0F) {
                     return;
                 }
 
@@ -825,7 +806,7 @@ public class NetServerHandler extends NetHandler {
             if (tileentity instanceof TileEntitySign) {
                 TileEntitySign tileentitysign = (TileEntitySign) tileentity;
 
-                if (!tileentitysign.a()) {
+                if (!tileentitysign.a() || tileentitysign.b() != this.c) {
                     this.d.f("Player " + this.c.c_() + " just tried to change non-editable sign");
                     return;
                 }
@@ -1079,6 +1060,10 @@ public class NetServerHandler extends NetHandler {
             }
         }// CanaryMod: End
 
+    }
+
+    public boolean c() {
+        return this.b;
     }
 
     /**

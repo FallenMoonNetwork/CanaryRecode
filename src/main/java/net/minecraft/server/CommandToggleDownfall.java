@@ -1,9 +1,7 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.DimensionType;
-
 
 public class CommandToggleDownfall extends CommandBase {
 

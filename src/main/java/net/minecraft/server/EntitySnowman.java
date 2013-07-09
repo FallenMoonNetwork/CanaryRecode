@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.CanarySnowman;
-
 
 public class EntitySnowman extends EntityGolem implements IRangedAttackMob {
 
@@ -16,14 +14,14 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob {
         this.c.a(4, new EntityAILookIdle(this));
         this.d.a(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, true, false, IMob.a));
         this.entity = new CanarySnowman(this); // CanaryMod: Wrap Entity
-}
+    }
 
-    public boolean bb() {
+    public boolean be() {
         return true;
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(4.0D);
         this.a(SharedMonsterAttributes.d).a(0.20000000298023224D);
     }
@@ -72,7 +70,7 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob {
         float f1 = MathHelper.a(d0 * d0 + d2 * d2) * 0.2F;
 
         entitysnowball.c(d0, d1 + (double) f1, d2, 1.6F, 12.0F);
-        this.a("random.bow", 1.0F, 1.0F / (this.aB().nextFloat() * 0.4F + 0.8F));
+        this.a("random.bow", 1.0F, 1.0F / (this.aC().nextFloat() * 0.4F + 0.8F));
         this.q.d((Entity) entitysnowball);
     }
 }

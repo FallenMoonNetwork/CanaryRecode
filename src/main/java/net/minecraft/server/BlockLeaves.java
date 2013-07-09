@@ -6,12 +6,8 @@ import net.canarymod.hook.world.LeafDecayHook;
 
 public class BlockLeaves extends BlockLeavesBase {
 
-    public static final String[] a = new String[]{ "oak", "spruce", "birch",
-            "jungle" };
-    public static final String[][] b = new String[][]{
-            { "leaves_oak", "leaves_spruce", "leaves_birch", "leaves_jungle" },
-            { "leaves_oak_opaque", "leaves_spruce_opaque",
-                    "leaves_birch_opaque", "leaves_jungle_opaque" } };
+    public static final String[] a = new String[]{ "oak", "spruce", "birch", "jungle" };
+    public static final String[][] b = new String[][]{ { "leaves_oak", "leaves_spruce", "leaves_birch", "leaves_jungle" }, { "leaves_oak_opaque", "leaves_spruce_opaque", "leaves_birch_opaque", "leaves_jungle_opaque" } };
     private Icon[][] cX = new Icon[2][];
     int[] c;
 
@@ -179,7 +175,7 @@ public class BlockLeaves extends BlockLeavesBase {
     }
 
     public void a(World world, EntityPlayer entityplayer, int i0, int i1, int i2, int i3) {
-        if (!world.I && entityplayer.bt() != null && entityplayer.bt().d == Item.bg.cv) {
+        if (!world.I && entityplayer.bx() != null && entityplayer.bx().d == Item.bg.cv) {
             entityplayer.a(StatList.C[this.cF], 1);
             this.b(world, i0, i1, i2, new ItemStack(Block.P.cF, 1, i3 & 3));
         } else {

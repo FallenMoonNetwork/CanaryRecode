@@ -116,7 +116,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
     @Override
     public Location getSpawnPosition() {
         Location spawn = Canary.getServer().getDefaultWorld().getSpawnLocation();
-        ChunkCoordinates loc = ((EntityPlayerMP) entity).bA();
+        ChunkCoordinates loc = ((EntityPlayerMP) entity).bE();
 
         if (loc != null) {
             spawn = new Location(Canary.getServer().getDefaultWorld(), loc.a, loc.b, loc.c, 0.0F, 0.0F);
@@ -469,27 +469,27 @@ public class CanaryPlayer extends CanaryHuman implements Player {
 
     @Override
     public void addExhaustion(float exhaustion) {
-        getHandle().bD().a(exhaustion);
+        getHandle().bH().a(exhaustion);
     }
 
     @Override
     public void setExhaustion(float exhaustion) {
-        getHandle().bD().setExhaustionLevel(exhaustion);
+        getHandle().bH().setExhaustionLevel(exhaustion);
     }
 
     @Override
     public float getExhaustionLevel() {
-        return getHandle().bD().getExhaustionLevel();
+        return getHandle().bH().getExhaustionLevel();
     }
 
     @Override
     public void setHunger(int hunger) {
-        getHandle().bD().setFoodLevel(hunger);
+        getHandle().bH().setFoodLevel(hunger);
     }
 
     @Override
     public int getHunger() {
-        return getHandle().bD().a();
+        return getHandle().bH().a();
     }
 
     @Override
@@ -522,12 +522,12 @@ public class CanaryPlayer extends CanaryHuman implements Player {
 
     @Override
     public boolean isSleeping() {
-        return getHandle().bd();
+        return getHandle().bg();
     }
 
     @Override
     public boolean isDeeplySleeping() {
-        return getHandle().by();
+        return getHandle().bC();
     }
 
     @Override

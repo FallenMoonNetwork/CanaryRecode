@@ -49,7 +49,7 @@ public class EntityEnderCrystal extends Entity {
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else {
             if (!this.M && !this.q.I) {

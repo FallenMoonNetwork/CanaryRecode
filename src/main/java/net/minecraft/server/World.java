@@ -1269,10 +1269,10 @@ public abstract class World implements IBlockAccess {
             entity.C = entity.A;
             entity.D = entity.B;
             if (flag0 && entity.ai) {
+                ++entity.ac;
                 if (entity.o != null) {
-                    entity.T();
+                    entity.U();
                 } else {
-                    ++entity.ac;
                     entity.l_();
                 }
             }
@@ -1471,7 +1471,7 @@ public abstract class World implements IBlockAccess {
                 }
             }
 
-            if (vec3.b() > 0.0D && entity.av()) {
+            if (vec3.b() > 0.0D && entity.aw()) {
                 vec3 = vec3.a();
                 double d1 = 0.014D;
 
@@ -2245,7 +2245,7 @@ public abstract class World implements IBlockAccess {
         for (int i1 = 0; i1 < this.e.size(); ++i1) {
             Entity entity = (Entity) this.e.get(i1);
 
-            if ((!(entity instanceof EntityLiving) || !((EntityLiving) entity).bA()) && oclass0.isAssignableFrom(entity.getClass())) {
+            if ((!(entity instanceof EntityLiving) || !((EntityLiving) entity).bE()) && oclass0.isAssignableFrom(entity.getClass())) {
                 ++i0;
             }
         }
@@ -2430,16 +2430,16 @@ public abstract class World implements IBlockAccess {
         for (int i0 = 0; i0 < this.h.size(); ++i0) {
             EntityPlayer entityplayer1 = (EntityPlayer) this.h.get(i0);
 
-            if (!entityplayer1.bG.a && entityplayer1.R()) {
+            if (!entityplayer1.bG.a && entityplayer1.S()) {
                 double d5 = entityplayer1.e(d0, d1, d2);
                 double d6 = d3;
 
-                if (entityplayer1.af()) {
+                if (entityplayer1.ag()) {
                     d6 = d3 * 0.800000011920929D;
                 }
 
-                if (entityplayer1.ah()) {
-                    float f0 = entityplayer1.bs();
+                if (entityplayer1.ai()) {
+                    float f0 = entityplayer1.bw();
 
                     if (f0 < 0.1F) {
                         f0 = 0.1F;

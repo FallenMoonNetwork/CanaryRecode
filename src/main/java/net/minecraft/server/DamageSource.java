@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.CanaryDamageSource;
-
 
 public class DamageSource {
 
@@ -32,6 +30,7 @@ public class DamageSource {
 
     // CanaryMod
     protected CanaryDamageSource damageSource;
+
     public static DamageSource a(EntityLivingBase entitylivingbase) {
         return new EntityDamageSource("mob", entitylivingbase);
     }
@@ -124,11 +123,11 @@ public class DamageSource {
     }
 
     public ChatMessageComponent b(EntityLivingBase entitylivingbase) {
-        EntityLivingBase entitylivingbase1 = entitylivingbase.aO();
+        EntityLivingBase entitylivingbase1 = entitylivingbase.aR();
         String s0 = "death.attack." + this.o;
         String s1 = s0 + ".player";
 
-        return entitylivingbase1 != null && StatCollector.b(s1) ? ChatMessageComponent.b(s1, new Object[]{ entitylivingbase.aw(), entitylivingbase1.aw() }) : ChatMessageComponent.b(s0, new Object[]{ entitylivingbase.aw() });
+        return entitylivingbase1 != null && StatCollector.b(s1) ? ChatMessageComponent.b(s1, new Object[]{ entitylivingbase.ax(), entitylivingbase1.ax() }) : ChatMessageComponent.b(s0, new Object[]{ entitylivingbase.ax() });
     }
 
     public boolean m() {
@@ -159,6 +158,7 @@ public class DamageSource {
 
     /**
      * Gets the CanaryMod damagesource wrapper
+     * 
      * @return
      */
     public CanaryDamageSource getCanaryDamageSource() {
@@ -167,6 +167,7 @@ public class DamageSource {
 
     /**
      * Set hunger damage
+     * 
      * @param f
      */
     public void setHungerDamage(float f) {
@@ -175,6 +176,7 @@ public class DamageSource {
 
     /**
      * Set unblockable
+     * 
      * @param b
      */
     public void setUnblockable(boolean b) {

@@ -49,7 +49,7 @@ public class ContainerRepairINNER2 extends Slot { // CanaryMod: package => publi
         }
 
         this.e.a = 0;
-        if (!entityplayer.bG.d && !this.a.I && this.a.a(this.b, this.c, this.d) == Block.cm.cF && entityplayer.aB().nextFloat() < 0.12F) {
+        if (!entityplayer.bG.d && !this.a.I && this.a.a(this.b, this.c, this.d) == Block.cm.cF && entityplayer.aC().nextFloat() < 0.12F) {
             int i0 = this.a.h(this.b, this.c, this.d);
             int i1 = i0 & 3;
             int i2 = i0 >> 2;

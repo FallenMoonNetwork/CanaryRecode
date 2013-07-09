@@ -38,7 +38,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
         dedicatedservercommandthread.setDaemon(true);
         dedicatedservercommandthread.start();
-        this.an().a("Starting minecraft server version 1.6.1");
+        this.an().a("Starting minecraft server version 1.6.2");
         if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
             this.an().b("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
         }
@@ -301,7 +301,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         WorldConfiguration cfg = Configuration.getWorldConfig(world.getCanaryWorld().getFqName());
         if (world.t.i != 0) {
             return false;
-            // } else if (this.ao().i().isEmpty()) { // CanaryMod: Empty Ops list shouldn't break spawn protections...
+            // } else if (this.as().i().isEmpty()) { // CanaryMod: Empty Ops list shouldn't break spawn protections...
             // return false;
         } else if (this.as().e(entityplayer.c_())) {
             return false;

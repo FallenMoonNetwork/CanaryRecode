@@ -25,7 +25,7 @@ public class ItemBucketMilk extends Item {
         }
 
         if (!world.I) {
-            entityplayer.aG();
+            entityplayer.aJ();
         }
 
         return itemstack.b <= 0 ? new ItemStack(Item.ay) : itemstack;

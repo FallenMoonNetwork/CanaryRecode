@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.world.blocks.CanaryNoteBlock;
-
 
 public class TileEntityNote extends TileEntity {
 

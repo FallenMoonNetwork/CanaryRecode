@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 public class InventoryMerchant implements IInventory {
 
     private final IMerchant a;

@@ -63,7 +63,7 @@ public class CanaryWolf extends CanaryTameable implements Wolf {
      */
     @Override
     public DyeColor getCollarColor() {
-        return DyeColor.values()[getHandle().bZ()];
+        return DyeColor.values()[getHandle().cd()];
     }
 
     /**

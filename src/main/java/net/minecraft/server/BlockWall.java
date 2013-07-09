@@ -2,7 +2,7 @@ package net.minecraft.server;
 
 public class BlockWall extends Block {
 
-    public static final String[] a = new String[] { "normal", "mossy"};
+    public static final String[] a = new String[]{ "normal", "mossy" };
 
     public BlockWall(int i0, Block block) {
         super(i0, block.cU);
@@ -69,7 +69,7 @@ public class BlockWall extends Block {
     }
 
     public AxisAlignedBB b(World world, int i0, int i1, int i2) {
-        this.a((IBlockAccess) world, i0, i1, i2); //CanaryMod Cast to IBlockAccess
+        this.a((IBlockAccess) world, i0, i1, i2); // CanaryMod Cast to IBlockAccess
         this.cQ = 1.5D;
         return super.b(world, i0, i1, i2);
     }

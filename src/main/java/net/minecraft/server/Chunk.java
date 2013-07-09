@@ -595,7 +595,6 @@ public class Chunk {
         if (i0 != this.g || i1 != this.h) {
             this.e.Y().c("Wrong location! " + entity);
             // Thread.dumpStack();
-            // MERGE: entity.w() is probably not kill() anymore! - Chris
             entity.w();
             return;
         }
@@ -714,7 +713,7 @@ public class Chunk {
             while (iterator.hasNext()) {
                 Entity entity = (Entity) iterator.next();
 
-                entity.P();
+                entity.Q();
             }
 
             this.e.a(this.j[i0]);
@@ -760,19 +759,14 @@ public class Chunk {
             for (int i3 = 0; i3 < list1.size(); ++i3) {
                 Entity entity1 = (Entity) list1.get(i3);
 
-                if (entity1 != entity
-                        && entity1.E.b(axisalignedbb)
-                        && (ientityselector == null || ientityselector
-                                .a(entity1))) {
+                if (entity1 != entity && entity1.E.b(axisalignedbb) && (ientityselector == null || ientityselector.a(entity1))) {
                     list.add(entity1);
-                    Entity[] aentity = entity1.am();
+                    Entity[] aentity = entity1.an();
 
                     if (aentity != null) {
                         for (int i4 = 0; i4 < aentity.length; ++i4) {
                             entity1 = aentity[i4];
-                            if (entity1 != entity
-                                    && entity1.E.b(axisalignedbb)
-                                    && (ientityselector == null || ientityselector.a(entity1))) {
+                            if (entity1 != entity && entity1.E.b(axisalignedbb) && (ientityselector == null || ientityselector.a(entity1))) {
                                 list.add(entity1);
                             }
                         }
@@ -804,9 +798,7 @@ public class Chunk {
             for (int i3 = 0; i3 < list1.size(); ++i3) {
                 Entity entity = (Entity) list1.get(i3);
 
-                if (oclass0.isAssignableFrom(entity.getClass())
-                        && entity.E.b(axisalignedbb)
-                        && (ientityselector == null || ientityselector.a(entity))) {
+                if (oclass0.isAssignableFrom(entity.getClass()) && entity.E.b(axisalignedbb) && (ientityselector == null || ientityselector.a(entity))) {
                     list.add(entity);
                 }
             }
@@ -826,9 +818,7 @@ public class Chunk {
     }
 
     public Random a(long i0) {
-        return new Random(this.e.H() + (long) (this.g * this.g * 4987142)
-                + (long) (this.g * 5947611) + (long) (this.h * this.h)
-                * 4392871L + (long) (this.h * 389711) ^ i0);
+        return new Random(this.e.H() + (long) (this.g * this.g * 4987142) + (long) (this.g * 5947611) + (long) (this.h * this.h) * 4392871L + (long) (this.h * 389711) ^ i0);
     }
 
     public boolean g() {
@@ -840,23 +830,15 @@ public class Chunk {
             ichunkprovider.a(ichunkprovider1, i0, i1);
         }
 
-        if (ichunkprovider.a(i0 - 1, i1) && !ichunkprovider.d(i0 - 1, i1).k
-                && ichunkprovider.a(i0 - 1, i1 + 1)
-                && ichunkprovider.a(i0, i1 + 1)
-                && ichunkprovider.a(i0 - 1, i1 + 1)) {
+        if (ichunkprovider.a(i0 - 1, i1) && !ichunkprovider.d(i0 - 1, i1).k && ichunkprovider.a(i0 - 1, i1 + 1) && ichunkprovider.a(i0, i1 + 1) && ichunkprovider.a(i0 - 1, i1 + 1)) {
             ichunkprovider.a(ichunkprovider1, i0 - 1, i1);
         }
 
-        if (ichunkprovider.a(i0, i1 - 1) && !ichunkprovider.d(i0, i1 - 1).k
-                && ichunkprovider.a(i0 + 1, i1 - 1)
-                && ichunkprovider.a(i0 + 1, i1 - 1)
-                && ichunkprovider.a(i0 + 1, i1)) {
+        if (ichunkprovider.a(i0, i1 - 1) && !ichunkprovider.d(i0, i1 - 1).k && ichunkprovider.a(i0 + 1, i1 - 1) && ichunkprovider.a(i0 + 1, i1 - 1) && ichunkprovider.a(i0 + 1, i1)) {
             ichunkprovider.a(ichunkprovider1, i0, i1 - 1);
         }
 
-        if (ichunkprovider.a(i0 - 1, i1 - 1)
-                && !ichunkprovider.d(i0 - 1, i1 - 1).k
-                && ichunkprovider.a(i0, i1 - 1) && ichunkprovider.a(i0 - 1, i1)) {
+        if (ichunkprovider.a(i0 - 1, i1 - 1) && !ichunkprovider.d(i0 - 1, i1 - 1).k && ichunkprovider.a(i0, i1 - 1) && ichunkprovider.a(i0 - 1, i1)) {
             ichunkprovider.a(ichunkprovider1, i0 - 1, i1 - 1);
         }
     }
@@ -963,9 +945,7 @@ public class Chunk {
             for (int i6 = 0; i6 < 16; ++i6) {
                 int i7 = (i1 << 4) + i6;
 
-                if (this.r[i1] == null
-                        && (i6 == 0 || i6 == 15 || i2 == 0 || i2 == 15 || i3 == 0 || i3 == 15) || this.r[i1] != null
-                        && this.r[i1].a(i2, i6, i3) == 0) {
+                if (this.r[i1] == null && (i6 == 0 || i6 == 15 || i2 == 0 || i2 == 15 || i3 == 0 || i3 == 15) || this.r[i1] != null && this.r[i1].a(i2, i6, i3) == 0) {
                     if (Block.w[this.e.a(i4, i7 - 1, i5)] > 0) {
                         this.e.A(i4, i7 - 1, i5);
                     }

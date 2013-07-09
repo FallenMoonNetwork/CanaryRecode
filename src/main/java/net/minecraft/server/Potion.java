@@ -80,11 +80,11 @@ public class Potion {
 
     public void a(EntityLivingBase entitylivingbase, int i0) {
         if (this.H == l.H) {
-            if (entitylivingbase.aJ() < entitylivingbase.aP()) {
+            if (entitylivingbase.aM() < entitylivingbase.aS()) {
                 entitylivingbase.f(1.0F);
             }
         } else if (this.H == u.H) {
-            if (entitylivingbase.aJ() > 1.0F) {
+            if (entitylivingbase.aM() > 1.0F) {
                 entitylivingbase.a(DamageSource.k, 1.0F);
             }
         } else if (this.H == v.H) {
@@ -93,10 +93,10 @@ public class Potion {
             ((EntityPlayer) entitylivingbase).a(0.025F * (float) (i0 + 1));
         } else if (this.H == y.H && entitylivingbase instanceof EntityPlayer) {
             if (!entitylivingbase.q.I) {
-                ((EntityPlayer) entitylivingbase).bD().a(i0 + 1, 1.0F);
+                ((EntityPlayer) entitylivingbase).bH().a(i0 + 1, 1.0F);
             }
-        } else if ((this.H != h.H || entitylivingbase.aI()) && (this.H != i.H || !entitylivingbase.aI())) {
-            if (this.H == i.H && !entitylivingbase.aI() || this.H == h.H && entitylivingbase.aI()) {
+        } else if ((this.H != h.H || entitylivingbase.aL()) && (this.H != i.H || !entitylivingbase.aL())) {
+            if (this.H == i.H && !entitylivingbase.aL() || this.H == h.H && entitylivingbase.aL()) {
                 entitylivingbase.a(DamageSource.k, (float) (6 << i0));
             }
         } else {
@@ -114,8 +114,8 @@ public class Potion {
         //
         int i1;
 
-        if ((this.H != h.H || entitylivingbase1.aI()) && (this.H != i.H || !entitylivingbase1.aI())) {
-            if (this.H == i.H && !entitylivingbase1.aI() || this.H == h.H && entitylivingbase1.aI()) {
+        if ((this.H != h.H || entitylivingbase1.aL()) && (this.H != i.H || !entitylivingbase1.aL())) {
+            if (this.H == i.H && !entitylivingbase1.aL() || this.H == h.H && entitylivingbase1.aL()) {
                 i1 = (int) (d0 * (double) (6 << i0) + 0.5D);
                 if (entitylivingbase == null) {
                     entitylivingbase1.a(DamageSource.k, (float) i1);

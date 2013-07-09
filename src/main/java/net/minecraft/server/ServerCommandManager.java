@@ -1,10 +1,8 @@
 package net.minecraft.server;
 
-
 import java.util.Iterator;
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryWorld;
-
 
 public class ServerCommandManager extends CommandHandler implements IAdminCommand {
 

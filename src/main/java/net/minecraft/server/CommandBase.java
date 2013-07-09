@@ -16,11 +16,6 @@ public abstract class CommandBase implements ICommand {
         return 4;
     }
 
-    // MERGE Is this deprecated now? - Chris
-    // public String a(ICommandSender icommandsender) {
-    // return "/" + this.c();
-    // }
-
     public List b() {
         return null;
     }
@@ -62,8 +57,7 @@ public abstract class CommandBase implements ICommand {
             double d0 = Double.parseDouble(s0);
 
             if (!Doubles.isFinite(d0)) {
-                throw new NumberInvalidException(
-                        "commands.generic.double.invalid", new Object[]{ s0 });
+                throw new NumberInvalidException("commands.generic.double.invalid", new Object[]{ s0 });
             } else {
                 return d0;
             }
@@ -76,17 +70,13 @@ public abstract class CommandBase implements ICommand {
         return a(icommandsender, s0, d0, Double.MAX_VALUE);
     }
 
-    public static double a(ICommandSender icommandsender, String s0, double d0,
-            double d1) {
+    public static double a(ICommandSender icommandsender, String s0, double d0, double d1) {
         double d2 = b(icommandsender, s0);
 
         if (d2 < d0) {
-            throw new NumberInvalidException(
-                    "commands.generic.double.tooSmall", new Object[]{
-                            Double.valueOf(d2), Double.valueOf(d0) });
+            throw new NumberInvalidException("commands.generic.double.tooSmall", new Object[]{ Double.valueOf(d2), Double.valueOf(d0) });
         } else if (d2 > d1) {
-            throw new NumberInvalidException("commands.generic.double.tooBig",
-                    new Object[]{ Double.valueOf(d2), Double.valueOf(d1) });
+            throw new NumberInvalidException("commands.generic.double.tooBig", new Object[]{ Double.valueOf(d2), Double.valueOf(d1) });
         } else {
             return d2;
         }
@@ -95,8 +85,7 @@ public abstract class CommandBase implements ICommand {
     public static boolean c(ICommandSender icommandsender, String s0) {
         if (!s0.equals("true") && !s0.equals("1")) {
             if (!s0.equals("false") && !s0.equals("0")) {
-                throw new CommandException("commands.generic.boolean.invalid",
-                        new Object[]{ s0 });
+                throw new CommandException("commands.generic.boolean.invalid", new Object[]{ s0 });
             } else {
                 return false;
             }
@@ -132,7 +121,7 @@ public abstract class CommandBase implements ICommand {
         EntityPlayerMP entityplayermp = PlayerSelector.a(icommandsender, s0);
 
         if (entityplayermp != null) {
-            return entityplayermp.al();
+            return entityplayermp.am();
         } else if (PlayerSelector.b(s0)) {
             throw new PlayerNotFoundException();
         } else {
@@ -174,13 +163,11 @@ public abstract class CommandBase implements ICommand {
         return a(icommandsender, d0, s0, -30000000, 30000000);
     }
 
-    public static double a(ICommandSender icommandsender, double d0, String s0,
-            int i0, int i1) {
+    public static double a(ICommandSender icommandsender, double d0, String s0, int i0, int i1) {
         boolean flag0 = s0.startsWith("~");
 
         if (flag0 && Double.isNaN(d0)) {
-            throw new NumberInvalidException("commands.generic.num.invalid",
-                    new Object[]{ Double.valueOf(d0) });
+            throw new NumberInvalidException("commands.generic.num.invalid", new Object[]{ Double.valueOf(d0) });
         } else {
             double d1 = flag0 ? d0 : 0.0D;
 
@@ -199,15 +186,11 @@ public abstract class CommandBase implements ICommand {
 
             if (i0 != 0 || i1 != 0) {
                 if (d1 < (double) i0) {
-                    throw new NumberInvalidException(
-                            "commands.generic.double.tooSmall", new Object[]{
-                                    Double.valueOf(d1), Integer.valueOf(i0) });
+                    throw new NumberInvalidException("commands.generic.double.tooSmall", new Object[]{ Double.valueOf(d1), Integer.valueOf(i0) });
                 }
 
                 if (d1 > (double) i1) {
-                    throw new NumberInvalidException(
-                            "commands.generic.double.tooBig", new Object[]{
-                                    Double.valueOf(d1), Integer.valueOf(i1) });
+                    throw new NumberInvalidException("commands.generic.double.tooBig", new Object[]{ Double.valueOf(d1), Integer.valueOf(i1) });
                 }
             }
 
@@ -245,8 +228,7 @@ public abstract class CommandBase implements ICommand {
 
         EntityLivingBase entitylivingbase;
 
-        for (Iterator iterator = collection.iterator(); iterator.hasNext(); astring[i0++] = entitylivingbase
-                .aw()) {
+        for (Iterator iterator = collection.iterator(); iterator.hasNext(); astring[i0++] = entitylivingbase.ax()) {
             entitylivingbase = (EntityLivingBase) iterator.next();
         }
 

@@ -1,9 +1,7 @@
 package net.minecraft.server;
 
-
 import java.util.List;
 import net.canarymod.api.entity.vehicle.CanaryHopperMinecart;
-
 
 public class EntityMinecartHopper extends EntityMinecartContainer implements Hopper {
 
@@ -47,12 +45,12 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
     public void a(int i0, int i1, int i2, boolean flag0) {
         boolean flag1 = !flag0;
 
-        if (flag1 != this.ax()) {
+        if (flag1 != this.ay()) {
             this.f(flag1);
         }
     }
 
-    public boolean ax() {
+    public boolean ay() {
         return this.a;
     }
 
@@ -60,29 +58,29 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
         this.a = flag0;
     }
 
-    public World ay() {
+    public World az() {
         return this.q;
     }
 
-    public double az() {
+    public double aA() {
         return this.u;
     }
 
-    public double aA() {
+    public double aB() {
         return this.v;
     }
 
-    public double aB() {
+    public double aC() {
         return this.w;
     }
 
     public void l_() {
         super.l_();
-        if (!this.q.I && this.R() && this.ax()) {
+        if (!this.q.I && this.S() && this.ay()) {
             --this.b;
-            if (!this.aD()) {
+            if (!this.aE()) {
                 this.l(0);
-                if (this.aC()) {
+                if (this.aD()) {
                     this.l(4);
                     this.e();
                 }
@@ -90,7 +88,7 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
         }
     }
 
-    public boolean aC() {
+    public boolean aD() {
         if (TileEntityHopper.a((Hopper) this)) {
             return true;
         } else {
@@ -123,7 +121,7 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
         this.b = i0;
     }
 
-    public boolean aD() {
+    public boolean aE() {
         return this.b > 0;
     }
 }

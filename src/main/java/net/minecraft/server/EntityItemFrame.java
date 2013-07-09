@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.hanging.CanaryItemFrame;
-
 
 public class EntityItemFrame extends EntityHanging {
 
@@ -110,7 +108,7 @@ public class EntityItemFrame extends EntityHanging {
 
     public boolean c(EntityPlayer entityplayer) {
         if (this.h() == null) {
-            ItemStack itemstack = entityplayer.aV();
+            ItemStack itemstack = entityplayer.aY();
 
             if (itemstack != null && !this.q.I) {
                 this.a(itemstack);

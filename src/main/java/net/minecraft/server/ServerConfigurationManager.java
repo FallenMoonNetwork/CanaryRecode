@@ -94,7 +94,7 @@ public abstract class ServerConfigurationManager {
         this.a((ServerScoreboard) worldserver.X(), entityplayermp);
         this.b(entityplayermp, worldserver);
         // CanaryMod Connection hook
-        ConnectionHook hook = (ConnectionHook) new ConnectionHook(entityplayermp.getPlayer(), ChatMessageComponent.b("multiplayer.player.joined", new Object[]{ entityplayermp.aw() }).a(EnumChatFormatting.o).toString(), firstTime).call();
+        ConnectionHook hook = (ConnectionHook) new ConnectionHook(entityplayermp.getPlayer(), ChatMessageComponent.b("multiplayer.player.joined", new Object[]{ entityplayermp.ax() }).a(EnumChatFormatting.o).toString(), firstTime).call();
         if (!hook.isHidden()) {
             this.a((Packet) (new Packet3Chat(ChatMessageComponent.e(hook.getMessage()))));
         }
@@ -107,7 +107,7 @@ public abstract class ServerConfigurationManager {
             entityplayermp.a(this.e.S(), this.e.U());
         }
 
-        Iterator iterator = entityplayermp.aH().iterator();
+        Iterator iterator = entityplayermp.aK().iterator();
 
         while (iterator.hasNext()) {
             PotionEffect potioneffect = (PotionEffect) iterator.next();
@@ -411,9 +411,9 @@ public abstract class ServerConfigurationManager {
         entityplayermp.p().s().c(entityplayermp);
         this.a.remove(entityplayermp);
         this.e.getWorld(entityplayermp.getCanaryWorld().getName(), entityplayermp.ar).f(entityplayermp); // CanaryMod: added multiworld support
-        // ChunkCoordinates chunkcoordinates = entityplayermp.bA(); //CanaryMod removed in favor of a real location
+        // ChunkCoordinates chunkcoordinates = entityplayermp.bE(); //CanaryMod removed in favor of a real location
         Location respawnLocation = entityplayermp.getRespawnLocation();
-        boolean flag1 = entityplayermp.bB();
+        boolean flag1 = entityplayermp.bF();
         boolean isBedSpawn = respawnLocation != null;
         entityplayermp.ar = i0;
         Object object;
@@ -486,7 +486,7 @@ public abstract class ServerConfigurationManager {
         worldserver.d(entityplayermp1);
         this.a.add(entityplayermp1);
         entityplayermp1.d();
-        entityplayermp1.g(entityplayermp1.aJ());
+        entityplayermp1.g(entityplayermp1.aM());
         //
         return entityplayermp1;
     }
@@ -518,7 +518,7 @@ public abstract class ServerConfigurationManager {
         entityplayermp.c.a(worldserver1);
         this.b(entityplayermp, worldserver1);
         this.f(entityplayermp);
-        Iterator iterator = entityplayermp.aH().iterator();
+        Iterator iterator = entityplayermp.aK().iterator();
 
         while (iterator.hasNext()) {
             PotionEffect potioneffect = (PotionEffect) iterator.next();
@@ -541,14 +541,14 @@ public abstract class ServerConfigurationManager {
             d0 /= d2;
             d1 /= d2;
             entity.b(d0, entity.v, d1, entity.A, entity.B);
-            if (entity.R()) {
+            if (entity.S()) {
                 worldserver.a(entity, false);
             }
         } else if (entity.ar == 0) {
             d0 *= d2;
             d1 *= d2;
             entity.b(d0, entity.v, d1, entity.A, entity.B);
-            if (entity.R()) {
+            if (entity.S()) {
                 worldserver.a(entity, false);
             }
         } else {
@@ -564,7 +564,7 @@ public abstract class ServerConfigurationManager {
             entity.v = (double) chunkcoordinates.b;
             d1 = (double) chunkcoordinates.c;
             entity.b(d0, entity.v, d1, 90.0F, 0.0F);
-            if (entity.R()) {
+            if (entity.S()) {
                 worldserver.a(entity, false);
             }
         }
@@ -574,7 +574,7 @@ public abstract class ServerConfigurationManager {
             worldserver.C.a("placing");
             d0 = (double) MathHelper.a((int) d0, -29999872, 29999872);
             d1 = (double) MathHelper.a((int) d1, -29999872, 29999872);
-            if (entity.R()) {
+            if (entity.S()) {
                 worldserver1.d(entity);
                 entity.b(d0, entity.v, d1, entity.A, entity.B);
                 worldserver1.a(entity, false);
@@ -729,10 +729,10 @@ public abstract class ServerConfigurationManager {
             for (int i8 = 0; i8 < this.a.size(); ++i8) {
                 EntityPlayerMP entityplayermp = (EntityPlayerMP) this.a.get(i8);
 
-                if ((world == null || entityplayermp.q == world) && (s0 == null || flag1 != s0.equalsIgnoreCase(entityplayermp.al()))) {
+                if ((world == null || entityplayermp.q == world) && (s0 == null || flag1 != s0.equalsIgnoreCase(entityplayermp.am()))) {
                     if (s1 != null) {
-                        ScorePlayerTeam scoreplayerteam = entityplayermp.bI();
-                        String s2 = scoreplayerteam == null ? "" : scoreplayerteam.b();
+                        Team team = entityplayermp.bn();
+                        String s2 = team == null ? "" : team.b();
 
                         if (flag2 == s1.equalsIgnoreCase(s2)) {
                             continue;
@@ -791,14 +791,14 @@ public abstract class ServerConfigurationManager {
                     s0 = s0.substring(0, s0.length() - 4);
                 }
 
-                Scoreboard scoreboard = entityplayer.bH();
+                Scoreboard scoreboard = entityplayer.bL();
                 ScoreObjective scoreobjective = scoreboard.b(s0);
 
                 if (scoreobjective == null) {
                     return false;
                 }
 
-                Score score = entityplayer.bH().a(entityplayer.al(), scoreobjective);
+                Score score = entityplayer.bL().a(entityplayer.am(), scoreobjective);
 
                 i0 = score.c();
                 if (i0 < ((Integer) entry.getValue()).intValue() && flag0) {
@@ -930,10 +930,6 @@ public abstract class ServerConfigurationManager {
         entityplayermp.c.b(world.N().r());
     }
 
-    public void a(ChatMessageComponent chatmessagecomponent) {
-        this.a(chatmessagecomponent, true);
-    }
-
     public void r() {
         // CanaryMod shutdown hook
         ServerShutdownHook hook = (ServerShutdownHook) new ServerShutdownHook("Server closed").call();
@@ -941,6 +937,10 @@ public abstract class ServerConfigurationManager {
         while (!this.a.isEmpty()) {
             ((EntityPlayerMP) this.a.get(0)).a.c(hook.getReason());
         }
+    }
+
+    public void a(ChatMessageComponent chatmessagecomponent) {
+        this.a(chatmessagecomponent, true);
     }
 
     public void a(ChatMessageComponent chatmessagecomponent, boolean flag0) {

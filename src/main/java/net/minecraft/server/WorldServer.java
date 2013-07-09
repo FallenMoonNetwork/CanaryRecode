@@ -140,7 +140,7 @@ public class WorldServer extends World {
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
 
-            if (!entityplayer.bd()) {
+            if (!entityplayer.bg()) {
                 this.N = false;
                 break;
             }
@@ -154,7 +154,7 @@ public class WorldServer extends World {
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
 
-            if (entityplayer.bd()) {
+            if (entityplayer.bg()) {
                 entityplayer.a(false, false, true);
             }
         }
@@ -190,7 +190,7 @@ public class WorldServer extends World {
 
                 entityplayer = (EntityPlayer) iterator.next();
             }
-            while (entityplayer.by());
+            while (entityplayer.bC());
 
             return false;
         } else {
@@ -480,21 +480,12 @@ public class WorldServer extends World {
         if (!canSpawn(entity)) {
             entity.w();
         }
-        if (!(entity.n instanceof EntityPlayer)) {
-            super.a(entity, flag0);
-        }
-    }
 
-    public void b(Entity entity, boolean flag0) {
-        try {
-            super.a(entity, flag0);
-        } catch (Throwable throwable) {
-            CrashReport crashreport = CrashReport.a(throwable, "Forcefully ticking entity");
-            CrashReportCategory crashreportcategory = crashreport.a("Entity being force ticked");
-
-            entity.a(crashreportcategory);
-            throw new ReportedException(crashreport);
+        if (!this.a.Y() && entity instanceof INpc) {
+            entity.w();
         }
+
+        super.a(entity, flag0);
     }
 
     protected IChunkProvider j() {
@@ -627,7 +618,7 @@ public class WorldServer extends World {
     protected void a(Entity entity) {
         super.a(entity);
         this.V.a(entity.k, entity);
-        Entity[] aentity = entity.am();
+        Entity[] aentity = entity.an();
 
         if (aentity != null) {
             for (int i0 = 0; i0 < aentity.length; ++i0) {
@@ -639,7 +630,7 @@ public class WorldServer extends World {
     protected void b(Entity entity) {
         super.b(entity);
         this.V.d(entity.k);
-        Entity[] aentity = entity.am();
+        Entity[] aentity = entity.an();
 
         if (aentity != null) {
             for (int i0 = 0; i0 < aentity.length; ++i0) {

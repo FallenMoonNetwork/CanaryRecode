@@ -226,7 +226,7 @@ public class EntityArrow extends Entity implements IProjectile {
                             damagesource = DamageSource.a(this, this.c);
                         }
 
-                        if (this.ad() && !(movingobjectposition.g instanceof EntityEnderman)) {
+                        if (this.ae() && !(movingobjectposition.g instanceof EntityEnderman)) {
                             movingobjectposition.g.d(5);
                         }
 
@@ -235,7 +235,7 @@ public class EntityArrow extends Entity implements IProjectile {
                                 EntityLivingBase entitylivingbase = (EntityLivingBase) movingobjectposition.g;
 
                                 if (!this.q.I) {
-                                    entitylivingbase.m(entitylivingbase.aQ() + 1);
+                                    entitylivingbase.m(entitylivingbase.aT() + 1);
                                 }
 
                                 if (this.aw > 0) {
@@ -404,7 +404,7 @@ public class EntityArrow extends Entity implements IProjectile {
         this.aw = i0;
     }
 
-    public boolean ao() {
+    public boolean ap() {
         return false;
     }
 

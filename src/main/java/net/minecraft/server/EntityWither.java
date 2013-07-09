@@ -1,9 +1,7 @@
 package net.minecraft.server;
 
-
 import java.util.List;
 import net.canarymod.api.entity.living.monster.CanaryWither;
-
 
 public class EntityWither extends EntityMob implements IRangedAttackMob {
 
@@ -18,7 +16,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
 
     public EntityWither(World world) {
         super(world);
-        this.g(this.aP());
+        this.g(this.aS());
         this.a(0.9F, 4.0F);
         this.ag = true;
         this.k().e(true);
@@ -30,7 +28,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
         this.d.a(1, new EntityAIHurtByTarget(this, false));
         this.d.a(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, false, bw));
         this.b = 50;
-this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
+        this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
     }
 
     protected void a() {
@@ -43,7 +41,7 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("Invul", this.bQ());
+        nbttagcompound.a("Invul", this.bU());
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -55,11 +53,11 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
         return "mob.wither.idle";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.wither.hurt";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.wither.death";
     }
 
@@ -73,7 +71,7 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
             Entity entity = this.q.a(this.q(0));
 
             if (entity != null) {
-                if (this.v < entity.v || !this.bR() && this.v < entity.v + 5.0D) {
+                if (this.v < entity.v || !this.bV() && this.v < entity.v + 5.0D) {
                     if (this.y < 0.0D) {
                         this.y = 0.0D;
                     }
@@ -134,7 +132,7 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
             }
         }
 
-        boolean flag0 = this.bR();
+        boolean flag0 = this.bV();
 
         for (i1 = 0; i1 < 3; ++i1) {
             double d8 = this.r(i1);
@@ -147,18 +145,18 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
             }
         }
 
-        if (this.bQ() > 0) {
+        if (this.bU() > 0) {
             for (i1 = 0; i1 < 3; ++i1) {
                 this.q.a("mobSpell", this.u + this.ab.nextGaussian() * 1.0D, this.v + (double) (this.ab.nextFloat() * 3.3F), this.w + this.ab.nextGaussian() * 1.0D, 0.699999988079071D, 0.699999988079071D, 0.8999999761581421D);
             }
         }
     }
 
-    protected void be() {
+    protected void bh() {
         int i0;
 
-        if (this.bQ() > 0) {
-            i0 = this.bQ() - 1;
+        if (this.bU() > 0) {
+            i0 = this.bU() - 1;
             if (i0 <= 0) {
                 this.q.a(this, this.u, this.v + (double) this.f(), this.w, 7.0F, false, this.q.O().b("mobGriefing"));
                 this.q.d(1013, (int) this.u, (int) this.v, (int) this.w, 0);
@@ -169,7 +167,7 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
                 this.f(10.0F);
             }
         } else {
-            super.be();
+            super.bh();
 
             int i1;
 
@@ -197,7 +195,7 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
                     if (i1 > 0) {
                         Entity entity = this.q.a(i1);
 
-                        if (entity != null && entity.R() && this.e(entity) <= 900.0D && this.o(entity)) {
+                        if (entity != null && entity.S() && this.e(entity) <= 900.0D && this.o(entity)) {
                             this.a(i0 + 1, (EntityLivingBase) entity);
                             this.bt[i0 - 1] = this.ac + 40 + this.ab.nextInt(20);
                             this.bu[i0 - 1] = 0;
@@ -210,7 +208,7 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
                         for (int i4 = 0; i4 < 10 && !list.isEmpty(); ++i4) {
                             EntityLivingBase entitylivingbase = (EntityLivingBase) list.get(this.ab.nextInt(list.size()));
 
-                            if (entitylivingbase != this && entitylivingbase.R() && this.o(entitylivingbase)) {
+                            if (entitylivingbase != this && entitylivingbase.S() && this.o(entitylivingbase)) {
                                 if (entitylivingbase instanceof EntityPlayer) {
                                     if (!((EntityPlayer) entitylivingbase).bG.a) {
                                         this.c(i0, entitylivingbase.k);
@@ -268,14 +266,14 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
         }
     }
 
-    public void bP() {
+    public void bT() {
         this.p(220);
-        this.g(this.aP() / 3.0F);
+        this.g(this.aS() / 3.0F);
     }
 
-    public void ak() {}
+    public void al() {}
 
-    public int aM() {
+    public int aP() {
         return 4;
     }
 
@@ -348,16 +346,16 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else if (damagesource == DamageSource.e) {
             return false;
-        } else if (this.bQ() > 0) {
+        } else if (this.bU() > 0) {
             return false;
         } else {
             Entity entity;
 
-            if (this.bR()) {
+            if (this.bV()) {
                 entity = damagesource.h();
                 if (entity instanceof EntityArrow) {
                     return false;
@@ -365,7 +363,7 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
             }
 
             entity = damagesource.i();
-            if (entity != null && !(entity instanceof EntityPlayer) && entity instanceof EntityLivingBase && ((EntityLivingBase) entity).aU() == this.aU()) {
+            if (entity != null && !(entity instanceof EntityPlayer) && entity instanceof EntityLivingBase && ((EntityLivingBase) entity).aX() == this.aX()) {
                 return false;
             } else {
                 if (this.bv <= 0) {
@@ -385,7 +383,7 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
         this.b(Item.bU.cv, 1);
     }
 
-    protected void bk() {
+    protected void bo() {
         this.aV = 0;
     }
 
@@ -395,20 +393,20 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
 
     protected void b(float f0) {}
 
-    public void d(PotionEffect potioneffect) {}
+    public void c(PotionEffect potioneffect) {}
 
-    protected boolean bb() {
+    protected boolean be() {
         return true;
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(300.0D);
         this.a(SharedMonsterAttributes.d).a(0.6000000238418579D);
         this.a(SharedMonsterAttributes.b).a(40.0D);
     }
 
-    public int bQ() {
+    public int bU() {
         return this.ah.c(20);
     }
 
@@ -424,11 +422,11 @@ this.entity = new CanaryWither(this); // CanaryMod: Wrap Entity
         this.ah.b(17 + i0, Integer.valueOf(i1));
     }
 
-    public boolean bR() {
-        return this.aJ() <= this.aP() / 2.0F;
+    public boolean bV() {
+        return this.aM() <= this.aS() / 2.0F;
     }
 
-    public EnumCreatureAttribute aU() {
+    public EnumCreatureAttribute aX() {
         return EnumCreatureAttribute.b;
     }
 

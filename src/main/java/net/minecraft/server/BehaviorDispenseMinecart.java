@@ -31,7 +31,6 @@ final class BehaviorDispenseMinecart extends BehaviorDefaultDispenseItem {
         }
 
         EntityMinecart entityminecart = EntityMinecart.a(world, d0, d1 + d3, d2, ((ItemMinecart) itemstack.b()).a);
-        // MERGE: This seems to be new - Chris
         if (itemstack.u()) {
             entityminecart.a(itemstack.s());
         }

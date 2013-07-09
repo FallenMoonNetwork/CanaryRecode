@@ -38,7 +38,7 @@ public class CanaryBlaze extends CanaryEntityMob implements Blaze {
      */
     @Override
     public boolean isBurning() {
-        return getHandle().bP();
+        return getHandle().bT();
     }
 
     /**

@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.concurrent.Callable;
-
 
 class CallableSuspiciousClasses implements Callable {
 
@@ -18,7 +16,7 @@ class CallableSuspiciousClasses implements Callable {
         this.a = crashreport;
     }
 
-    public String a() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException { // CanaryMod: Throws Added
+    public String a() throws SecurityException, NoSuchFieldException, IllegalAccessException, IllegalArgumentException {
         StringBuilder stringbuilder = new StringBuilder();
         Field field = ClassLoader.class.getDeclaredField("classes");
 
@@ -38,22 +36,9 @@ class CallableSuspiciousClasses implements Callable {
             if (oclass0 != null) {
                 String s1 = oclass0.getCanonicalName();
 
-                if (s1 != null && !s1.startsWith("org.lwjgl.")
-                        && !s1.startsWith("paulscode.")
-                        && !s1.startsWith("org.bouncycastle.")
-                        && !s1.startsWith("argo.")
-                        && !s1.startsWith("com.jcraft.")
-                        && !s1.startsWith("com.fasterxml.")
-                        && !s1.startsWith("com.google.")
-                        && !s1.startsWith("joptsimple.")
-                        && !s1.startsWith("org.apache.")
-                        && !s1.equals("util.GLX")) {
+                if (s1 != null && !s1.startsWith("org.lwjgl.") && !s1.startsWith("paulscode.") && !s1.startsWith("org.bouncycastle.") && !s1.startsWith("argo.") && !s1.startsWith("com.jcraft.") && !s1.startsWith("com.fasterxml.") && !s1.startsWith("com.google.") && !s1.startsWith("joptsimple.") && !s1.startsWith("org.apache.") && !s1.equals("util.GLX")) {
                     if (flag1) {
-                        if (s1.length() <= 3
-                                || s1.equals("net.minecraft.client.main.Main")
-                                || s1.equals("net.minecraft.client.Minecraft")
-                                || s1.equals("net.minecraft.client.ClientBrandRetriever")
-                                || s1.equals("net.minecraft.server.MinecraftServer")) {
+                        if (s1.length() <= 3 || s1.equals("net.minecraft.client.main.Main") || s1.equals("net.minecraft.client.Minecraft") || s1.equals("net.minecraft.client.ClientBrandRetriever") || s1.equals("net.minecraft.server.MinecraftServer")) {
                             continue;
                         }
                     } else if (s1.startsWith("net.minecraft")) {
@@ -117,7 +102,11 @@ class CallableSuspiciousClasses implements Callable {
         return stringbuilder.toString();
     }
 
-    public Object call() throws SecurityException, IllegalArgumentException, NoSuchFieldException, IllegalAccessException { // CanaryMod: Throws added
-        return this.a();
+    public Object call() {
+        try {
+            return this.a();
+        } catch (Exception ex) {
+            return null;
+        }
     }
 }

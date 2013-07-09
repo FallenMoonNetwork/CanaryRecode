@@ -19,23 +19,23 @@ public class EntityBat extends EntityAmbientCreature {
         this.ah.a(16, new Byte((byte) 0));
     }
 
-    protected float aW() {
+    protected float aZ() {
         return 0.1F;
     }
 
-    protected float aX() {
-        return super.aX() * 0.95F;
+    protected float ba() {
+        return super.ba() * 0.95F;
     }
 
     protected String r() {
-        return this.bF() && this.ab.nextInt(4) != 0 ? null : "mob.bat.idle";
+        return this.bJ() && this.ab.nextInt(4) != 0 ? null : "mob.bat.idle";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.bat.hurt";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.bat.death";
     }
 
@@ -45,14 +45,14 @@ public class EntityBat extends EntityAmbientCreature {
 
     protected void n(Entity entity) {}
 
-    protected void bf() {}
+    protected void bi() {}
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(6.0D);
     }
 
-    public boolean bF() {
+    public boolean bJ() {
         return (this.ah.a(16) & 1) != 0;
     }
 
@@ -66,13 +66,13 @@ public class EntityBat extends EntityAmbientCreature {
         }
     }
 
-    protected boolean bb() {
+    protected boolean be() {
         return true;
     }
 
     public void l_() {
         super.l_();
-        if (this.bF()) {
+        if (this.bJ()) {
             this.x = this.y = this.z = 0.0D;
             this.v = (double) MathHelper.c(this.v) + 1.0D - (double) this.P;
         } else {
@@ -80,9 +80,9 @@ public class EntityBat extends EntityAmbientCreature {
         }
     }
 
-    protected void be() {
-        super.be();
-        if (this.bF()) {
+    protected void bh() {
+        super.bh();
+        if (this.bJ()) {
             if (!this.q.u(MathHelper.c(this.u), (int) this.v + 1, MathHelper.c(this.w))) {
                 this.a(false);
                 this.q.a((EntityPlayer) null, 1015, (int) this.u, (int) this.v, (int) this.w, 0);
@@ -131,15 +131,15 @@ public class EntityBat extends EntityAmbientCreature {
 
     protected void a(double d0, boolean flag0) {}
 
-    public boolean as() {
+    public boolean at() {
         return true;
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else {
-            if (!this.q.I && this.bF()) {
+            if (!this.q.I && this.bJ()) {
                 this.a(false);
             }
 
@@ -157,7 +157,7 @@ public class EntityBat extends EntityAmbientCreature {
         nbttagcompound.a("BatFlags", this.ah.a(16));
     }
 
-    public boolean bo() {
+    public boolean bs() {
         int i0 = MathHelper.c(this.E.b);
 
         if (i0 >= 63) {
@@ -177,7 +177,7 @@ public class EntityBat extends EntityAmbientCreature {
                 b0 = 7;
             }
 
-            return i3 > this.ab.nextInt(b0) ? false : super.bo();
+            return i3 > this.ab.nextInt(b0) ? false : super.bs();
         }
     }
 }

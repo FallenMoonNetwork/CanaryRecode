@@ -73,7 +73,7 @@ public class ItemPotion extends Item {
                 while (iterator.hasNext()) {
                     PotionEffect potioneffect = (PotionEffect) iterator.next();
 
-                    // entityplayer.d(new PotionEffect(potioneffect));
+                    // entityplayer.c(new PotionEffect(potioneffect));
                     // add to the array first
                     effects[index] = new CanaryPotionEffect(potioneffect);
                     index++;
@@ -88,12 +88,12 @@ public class ItemPotion extends Item {
             return itemstack;
         }
         // Apply food changes
-        entityplayer.bD().a(hook.getLevelGain(), hook.getSaturationGain());
+        entityplayer.bH().a(hook.getLevelGain(), hook.getSaturationGain());
         // And finally add the effects
         if (hook.getPotionEffects() != null) {
             for (net.canarymod.api.potion.PotionEffect effect : hook.getPotionEffects()) {
                 if (effect != null) {
-                    entityplayer.d(((CanaryPotionEffect) effect).getHandle());
+                    entityplayer.c(((CanaryPotionEffect) effect).getHandle());
                 }
             }
         }

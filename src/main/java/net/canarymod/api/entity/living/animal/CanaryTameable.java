@@ -25,7 +25,7 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public LivingBase getOwner() {
-        return (LivingBase) getHandle().bR().getCanaryEntity();
+        return (LivingBase) getHandle().bV().getCanaryEntity();
     }
 
     /**
@@ -49,7 +49,7 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public void setOwner(String name) {
-        ((EntityTameable) entity).b(name);
+        getHandle().b(name);
     }
 
     /**
@@ -57,7 +57,7 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public boolean isTamed() {
-        return ((EntityTameable) entity).bP();
+        return getHandle().bT();
     }
 
     /**
@@ -65,7 +65,7 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public void setTamed(boolean tamed) {
-        ((EntityTameable) entity).k(tamed);
+        getHandle().j(tamed);
     }
 
     /**
@@ -73,7 +73,7 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public boolean isSitting() {
-        return ((EntityTameable) entity).bQ();
+        return getHandle().bU();
     }
 
     /**
@@ -81,7 +81,7 @@ public abstract class CanaryTameable extends CanaryEntityAnimal implements Tamea
      */
     @Override
     public void setSitting(boolean sitting) {
-        ((EntityTameable) entity).l(sitting);
+        ((EntityTameable) entity).k(sitting);
     }
 
     /**

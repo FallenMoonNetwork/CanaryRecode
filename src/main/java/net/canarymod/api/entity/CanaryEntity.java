@@ -259,7 +259,7 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public String getName() {
-        return entity.al();
+        return entity.am();
     }
 
     @Override
@@ -279,7 +279,7 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public UUID getUUID() {
-        return entity.au();
+        return entity.av();
     }
 
     @Override
@@ -302,7 +302,7 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public boolean canSpawn() {
         if (this.isLiving()) {
-            return ((net.minecraft.server.EntityLiving) entity).bo();
+            return ((net.minecraft.server.EntityLiving) entity).bs();
         }
         return true;
     }

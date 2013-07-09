@@ -24,7 +24,7 @@ public class BlockPortal extends BlockBreakable {
                 Entity entity = ItemMonsterPlacer.a(world, 57, (double) i0 + 0.5D, (double) i3 + 1.1D, (double) i2 + 0.5D);
 
                 if (entity != null) {
-                    entity.ao = entity.aa();
+                    entity.ao = entity.ab();
                 }
             }
         }
@@ -167,7 +167,7 @@ public class BlockPortal extends BlockBreakable {
 
     public void a(World world, int i0, int i1, int i2, Entity entity) {
         if (entity.o == null && entity.n == null) {
-            entity.Z();
+            entity.aa();
         }
     }
 }

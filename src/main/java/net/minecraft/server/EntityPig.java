@@ -23,22 +23,22 @@ public class EntityPig extends EntityAnimal {
         this.entity = new CanaryPig(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean bb() {
+    public boolean be() {
         return true;
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(10.0D);
         this.a(SharedMonsterAttributes.d).a(0.25D);
     }
 
-    protected void be() {
-        super.be();
+    protected void bh() {
+        super.bh();
     }
 
-    public boolean bu() {
-        ItemStack itemstack = ((EntityPlayer) this.n).aV();
+    public boolean by() {
+        ItemStack itemstack = ((EntityPlayer) this.n).aY();
 
         return itemstack != null && itemstack.d == Item.bT.cv;
     }
@@ -50,23 +50,23 @@ public class EntityPig extends EntityAnimal {
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("Saddle", this.bP());
+        nbttagcompound.a("Saddle", this.bT());
     }
 
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
-        this.j(nbttagcompound.n("Saddle"));
+        this.i(nbttagcompound.n("Saddle"));
     }
 
     protected String r() {
         return "mob.pig.say";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.pig.say";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.pig.death";
     }
 
@@ -77,7 +77,7 @@ public class EntityPig extends EntityAnimal {
     public boolean a(EntityPlayer entityplayer) {
         if (super.a(entityplayer)) {
             return true;
-        } else if (this.bP() && !this.q.I && (this.n == null || this.n == entityplayer)) {
+        } else if (this.bT() && !this.q.I && (this.n == null || this.n == entityplayer)) {
             entityplayer.a((Entity) this);
             return true;
         } else {
@@ -86,30 +86,30 @@ public class EntityPig extends EntityAnimal {
     }
 
     protected int s() {
-        return this.ad() ? Item.at.cv : Item.as.cv;
+        return this.ae() ? Item.at.cv : Item.as.cv;
     }
 
     protected void b(boolean flag0, int i0) {
         int i1 = this.ab.nextInt(3) + 1 + this.ab.nextInt(1 + i0);
 
         for (int i2 = 0; i2 < i1; ++i2) {
-            if (this.ad()) {
+            if (this.ae()) {
                 this.b(Item.at.cv, 1);
             } else {
                 this.b(Item.as.cv, 1);
             }
         }
 
-        if (this.bP()) {
+        if (this.bT()) {
             this.b(Item.aC.cv, 1);
         }
     }
 
-    public boolean bP() {
+    public boolean bT() {
         return (this.ah.a(16) & 1) != 0;
     }
 
-    public void j(boolean flag0) {
+    public void i(boolean flag0) {
         if (flag0) {
             this.ah.b(16, Byte.valueOf((byte) 1));
         } else {
@@ -142,7 +142,7 @@ public class EntityPig extends EntityAnimal {
         return itemstack != null && itemstack.d == Item.bM.cv;
     }
 
-    public EntityAIControlledByPlayer bQ() {
+    public EntityAIControlledByPlayer bU() {
         return this.bp;
     }
 

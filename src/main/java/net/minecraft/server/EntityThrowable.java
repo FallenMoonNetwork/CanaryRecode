@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import java.util.List;
-
 
 public abstract class EntityThrowable extends Entity implements IProjectile {
 
@@ -155,7 +153,7 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
 
         if (movingobjectposition != null) {
             if (movingobjectposition.a == EnumMovingObjectType.a && this.q.a(movingobjectposition.b, movingobjectposition.c, movingobjectposition.d) == Block.bj.cF) {
-                this.Z();
+                this.aa();
             } else {
                 this.a(movingobjectposition);
             }
@@ -220,7 +218,7 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
         nbttagcompound.a("shake", (byte) this.b);
         nbttagcompound.a("inGround", (byte) (this.a ? 1 : 0));
         if ((this.h == null || this.h.length() == 0) && this.g != null && this.g instanceof EntityPlayer) {
-            this.h = this.g.al();
+            this.h = this.g.am();
         }
 
         nbttagcompound.a("ownerName", this.h == null ? "" : this.h);

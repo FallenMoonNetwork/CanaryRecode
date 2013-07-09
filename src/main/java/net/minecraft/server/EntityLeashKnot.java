@@ -42,20 +42,22 @@ public class EntityLeashKnot extends EntityHanging {
     public void a(NBTTagCompound nbttagcompound) {}
 
     public boolean c(EntityPlayer entityplayer) {
-        ItemStack itemstack = entityplayer.aV();
+        ItemStack itemstack = entityplayer.aY();
         boolean flag0 = false;
+        double d0;
+        List list;
+        Iterator iterator;
+        EntityLiving entityliving;
 
         if (itemstack != null && itemstack.d == Item.ch.cv && !this.q.I) {
-            double d0 = 7.0D;
-            List list = this.q.a(EntityLiving.class, AxisAlignedBB.a().a(this.u - d0, this.v - d0, this.w - d0, this.u + d0, this.v + d0, this.w + d0));
-
+            d0 = 7.0D;
+            list = this.q.a(EntityLiving.class, AxisAlignedBB.a().a(this.u - d0, this.v - d0, this.w - d0, this.u + d0, this.v + d0, this.w + d0));
             if (list != null) {
-                Iterator iterator = list.iterator();
+                iterator = list.iterator();
 
                 while (iterator.hasNext()) {
-                    EntityLiving entityliving = (EntityLiving) iterator.next();
-
-                    if (entityliving.bD() && entityliving.bE() == entityplayer) {
+                    entityliving = (EntityLiving) iterator.next();
+                    if (entityliving.bH() && entityliving.bI() == entityplayer) {
                         entityliving.b(this, true);
                         flag0 = true;
                     }
@@ -65,6 +67,20 @@ public class EntityLeashKnot extends EntityHanging {
 
         if (!this.q.I && !flag0) {
             this.w();
+            if (entityplayer.bG.d) {
+                d0 = 7.0D;
+                list = this.q.a(EntityLiving.class, AxisAlignedBB.a().a(this.u - d0, this.v - d0, this.w - d0, this.u + d0, this.v + d0, this.w + d0));
+                if (list != null) {
+                    iterator = list.iterator();
+
+                    while (iterator.hasNext()) {
+                        entityliving = (EntityLiving) iterator.next();
+                        if (entityliving.bH() && entityliving.bI() == this) {
+                            entityliving.a(true, false);
+                        }
+                    }
+                }
+            }
         }
 
         return true;

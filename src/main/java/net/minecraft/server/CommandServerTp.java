@@ -50,7 +50,7 @@ public class CommandServerTp extends CommandBase {
                     entityplayermp.a((Entity) null);
                     // CanaryMod: DERP (MultiWorld fix)
                     entityplayermp.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName(), TeleportHook.TeleportCause.COMMAND);
-                    a(icommandsender, "commands.tp.success", new Object[]{ entityplayermp.al(), entityplayermp1.al() });
+                    a(icommandsender, "commands.tp.success", new Object[]{ entityplayermp.am(), entityplayermp1.am() });
                 }
             } else if (entityplayermp.q != null) {
                 int i0 = astring.length - 3;
@@ -60,7 +60,7 @@ public class CommandServerTp extends CommandBase {
 
                 entityplayermp.a((Entity) null);
                 entityplayermp.a(d0, d1, d2);
-                a(icommandsender, "commands.tp.success.coordinates", new Object[]{ entityplayermp.al(), Double.valueOf(d0), Double.valueOf(d1), Double.valueOf(d2) });
+                a(icommandsender, "commands.tp.success.coordinates", new Object[]{ entityplayermp.am(), Double.valueOf(d0), Double.valueOf(d1), Double.valueOf(d2) });
             }
         }
     }

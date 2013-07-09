@@ -92,7 +92,7 @@ public abstract class CanaryEntityLiving extends CanaryLivingBase implements Ent
      */
     @Override
     public Item getItemInHand() {
-        return getHandle().aV().getCanaryItem();
+        return getHandle().aY().getCanaryItem();
     }
 
     /**
@@ -100,7 +100,7 @@ public abstract class CanaryEntityLiving extends CanaryLivingBase implements Ent
      */
     @Override
     public Item[] getEquipment() {
-        return CanaryItem.stackArrayToItemArray(getHandle().ac());
+        return CanaryItem.stackArrayToItemArray(getHandle().ad());
     }
 
     /**
@@ -166,7 +166,7 @@ public abstract class CanaryEntityLiving extends CanaryLivingBase implements Ent
      */
     @Override
     public boolean canPickUpLoot() {
-        return getHandle().bz();
+        return getHandle().bD();
     }
 
     /**
@@ -182,7 +182,7 @@ public abstract class CanaryEntityLiving extends CanaryLivingBase implements Ent
      */
     @Override
     public boolean isPersistenceRequired() {
-        return getHandle().bA();
+        return getHandle().bE();
     }
 
     /**
@@ -206,7 +206,7 @@ public abstract class CanaryEntityLiving extends CanaryLivingBase implements Ent
      */
     @Override
     public boolean hasDisplayName() {
-        return getHandle().bx();
+        return getHandle().bB();
     }
 
     /**
@@ -214,7 +214,7 @@ public abstract class CanaryEntityLiving extends CanaryLivingBase implements Ent
      */
     @Override
     public String getDisplayName() {
-        return getHandle().bw();
+        return getHandle().bA();
     }
 
     /**

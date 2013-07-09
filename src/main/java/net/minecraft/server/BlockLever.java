@@ -26,12 +26,7 @@ public class BlockLever extends Block {
     }
 
     public boolean c(World world, int i0, int i1, int i2, int i3) {
-        return i3 == 0 && world.u(i0, i1 + 1, i2) ? true : (i3 == 1
-                && world.w(i0, i1 - 1, i2) ? true : (i3 == 2
-                && world.u(i0, i1, i2 + 1) ? true : (i3 == 3
-                && world.u(i0, i1, i2 - 1) ? true : (i3 == 4
-                && world.u(i0 + 1, i1, i2) ? true : i3 == 5
-                && world.u(i0 - 1, i1, i2)))));
+        return i3 == 0 && world.u(i0, i1 + 1, i2) ? true : (i3 == 1 && world.w(i0, i1 - 1, i2) ? true : (i3 == 2 && world.u(i0, i1, i2 + 1) ? true : (i3 == 3 && world.u(i0, i1, i2 - 1) ? true : (i3 == 4 && world.u(i0 + 1, i1, i2) ? true : i3 == 5 && world.u(i0 - 1, i1, i2)))));
     }
 
     public boolean c(World world, int i0, int i1, int i2) {
@@ -210,8 +205,7 @@ public class BlockLever extends Block {
             } // CanaryMod: end
 
             world.b(i0, i1, i2, i5 + i6, 3);
-            world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D,
-                    "random.click", 0.3F, i6 > 0 ? 0.6F : 0.5F);
+            world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D, "random.click", 0.3F, i6 > 0 ? 0.6F : 0.5F);
             world.f(i0, i1, i2, this.cF);
             if (i5 == 1) {
                 world.f(i0 - 1, i1, i2, this.cF);

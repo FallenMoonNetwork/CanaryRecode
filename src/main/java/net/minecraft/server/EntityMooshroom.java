@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.animal.CanaryMooshroom;
-
 
 public class EntityMooshroom extends EntityCow {
 
@@ -34,7 +32,7 @@ public class EntityMooshroom extends EntityCow {
                 EntityCow entitycow = new EntityCow(this.q);
 
                 entitycow.b(this.u, this.v, this.w, this.A, this.B);
-                entitycow.g(this.aJ());
+                entitycow.g(this.aM());
                 entitycow.aN = this.aN;
                 this.q.d((Entity) entitycow);
 

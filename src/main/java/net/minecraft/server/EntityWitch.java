@@ -33,11 +33,11 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob {
         return "mob.witch.idle";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.witch.hurt";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.witch.death";
     }
 
@@ -45,26 +45,26 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob {
         this.u().b(21, Byte.valueOf((byte) (flag0 ? 1 : 0)));
     }
 
-    public boolean bP() {
+    public boolean bT() {
         return this.u().a(21) == 1;
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(26.0D);
         this.a(SharedMonsterAttributes.d).a(0.25D);
     }
 
-    public boolean bb() {
+    public boolean be() {
         return true;
     }
 
     public void c() {
         if (!this.q.I) {
-            if (this.bP()) {
+            if (this.bT()) {
                 if (this.bs-- <= 0) {
                     this.a(false);
-                    ItemStack itemstack = this.aV();
+                    ItemStack itemstack = this.aY();
 
                     this.c(0, (ItemStack) null);
                     if (itemstack != null && itemstack.d == Item.bu.cv) {
@@ -76,7 +76,7 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob {
                             while (iterator.hasNext()) {
                                 PotionEffect potioneffect = (PotionEffect) iterator.next();
 
-                                this.d(new PotionEffect(potioneffect));
+                                this.c(new PotionEffect(potioneffect));
                             }
                         }
                     }
@@ -86,19 +86,19 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob {
             } else {
                 short short1 = -1;
 
-                if (this.ab.nextFloat() < 0.15F && this.ad() && !this.a(Potion.n)) {
+                if (this.ab.nextFloat() < 0.15F && this.ae() && !this.a(Potion.n)) {
                     short1 = 16307;
-                } else if (this.ab.nextFloat() < 0.05F && this.aJ() < this.aP()) {
+                } else if (this.ab.nextFloat() < 0.05F && this.aM() < this.aS()) {
                     short1 = 16341;
-                } else if (this.ab.nextFloat() < 0.25F && this.m() != null && !this.a(Potion.c) && this.m().e((Entity) this) > 121.0D) {
+                } else if (this.ab.nextFloat() < 0.25F && this.m() != null && !this.a(Potion.c) && this.m().e(this) > 121.0D) {
                     short1 = 16274;
-                } else if (this.ab.nextFloat() < 0.25F && this.m() != null && !this.a(Potion.c) && this.m().e((Entity) this) > 121.0D) {
+                } else if (this.ab.nextFloat() < 0.25F && this.m() != null && !this.a(Potion.c) && this.m().e(this) > 121.0D) {
                     short1 = 16274;
                 }
 
                 if (short1 > -1) {
                     this.c(0, new ItemStack(Item.bu, 1, short1));
-                    this.bs = this.aV().n();
+                    this.bs = this.aY().n();
                     this.a(true);
                     AttributeInstance attributeinstance = this.a(SharedMonsterAttributes.d);
 
@@ -146,7 +146,7 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob {
     }
 
     public void a(EntityLivingBase entitylivingbase, float f0) {
-        if (!this.bP()) {
+        if (!this.bT()) {
             EntityPotion entitypotion = new EntityPotion(this.q, this, 32732);
 
             entitypotion.B -= -20.0F;
@@ -157,7 +157,7 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob {
 
             if (f1 >= 8.0F && !entitylivingbase.a(Potion.d)) {
                 entitypotion.a(32698);
-            } else if (entitylivingbase.aJ() >= 8.0F && !entitylivingbase.a(Potion.u)) {
+            } else if (entitylivingbase.aM() >= 8.0F && !entitylivingbase.a(Potion.u)) {
                 entitypotion.a(32660);
             } else if (f1 <= 3.0F && !entitylivingbase.a(Potion.t) && this.ab.nextFloat() < 0.25F) {
                 entitypotion.a(32696);

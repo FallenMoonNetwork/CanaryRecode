@@ -47,7 +47,7 @@ public class CanarySheep extends CanaryEntityAnimal implements Sheep {
      */
     @Override
     public DyeColor getColor() {
-        return DyeColor.values()[getHandle().bP()];
+        return DyeColor.values()[getHandle().bT()];
     }
 
     /**
@@ -63,7 +63,7 @@ public class CanarySheep extends CanaryEntityAnimal implements Sheep {
      */
     @Override
     public boolean isSheared() {
-        return getHandle().bQ();
+        return getHandle().bU();
     }
 
     /**
@@ -71,7 +71,7 @@ public class CanarySheep extends CanaryEntityAnimal implements Sheep {
      */
     @Override
     public void setSheared(boolean sheared) {
-        getHandle().j(sheared);
+        getHandle().i(sheared);
     }
 
     /**

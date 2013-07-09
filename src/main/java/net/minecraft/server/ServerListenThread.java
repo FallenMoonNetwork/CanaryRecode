@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -9,9 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
 import net.canarymod.Canary;
-
 
 public class ServerListenThread extends Thread {
 
@@ -40,10 +37,10 @@ public class ServerListenThread extends Thread {
                 NetLoginHandler netloginhandler = (NetLoginHandler) this.a.get(i0);
 
                 try {
-                    netloginhandler.c();
+                    netloginhandler.d();
                 } catch (Exception exception) {
                     netloginhandler.a("Internal server error");
-                    this.e.d().an().b("Failed to handle packet for " + netloginhandler.e() + ": " + exception, (Throwable) exception);
+                    this.e.d().an().b("Failed to handle packet for " + netloginhandler.f() + ": " + exception, (Throwable) exception);
                 }
 
                 if (netloginhandler.b) {

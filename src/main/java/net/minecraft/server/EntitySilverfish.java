@@ -12,8 +12,8 @@ public class EntitySilverfish extends EntityMob {
         this.entity = new CanarySilverfish(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(8.0D);
         this.a(SharedMonsterAttributes.d).a(0.6000000238418579D);
         this.a(SharedMonsterAttributes.e).a(1.0D);
@@ -23,7 +23,7 @@ public class EntitySilverfish extends EntityMob {
         return false;
     }
 
-    protected Entity bH() {
+    protected Entity bL() {
         double d0 = 8.0D;
 
         return this.q.b(this, d0);
@@ -33,16 +33,16 @@ public class EntitySilverfish extends EntityMob {
         return "mob.silverfish.say";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.silverfish.hit";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.silverfish.kill";
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else {
             if (this.bp <= 0 && (damagesource instanceof EntityDamageSource || damagesource == DamageSource.k)) {
@@ -73,8 +73,8 @@ public class EntitySilverfish extends EntityMob {
         super.l_();
     }
 
-    protected void bh() {
-        super.bh();
+    protected void bk() {
+        super.bk();
         if (!this.q.I) {
             int i0;
             int i1;
@@ -124,7 +124,7 @@ public class EntitySilverfish extends EntityMob {
                 }
             }
 
-            if (this.j == null && !this.bI()) {
+            if (this.j == null && !this.bM()) {
                 i0 = MathHelper.c(this.u);
                 i1 = MathHelper.c(this.v + 0.5D);
                 i2 = MathHelper.c(this.w);
@@ -136,9 +136,9 @@ public class EntitySilverfish extends EntityMob {
                     this.q();
                     this.w();
                 } else {
-                    this.bG();
+                    this.bK();
                 }
-            } else if (this.j != null && !this.bI()) {
+            } else if (this.j != null && !this.bM()) {
                 this.j = null;
             }
         }
@@ -152,8 +152,8 @@ public class EntitySilverfish extends EntityMob {
         return true;
     }
 
-    public boolean bo() {
-        if (super.bo()) {
+    public boolean bs() {
+        if (super.bs()) {
             EntityPlayer entityplayer = this.q.a(this, 5.0D);
 
             return entityplayer == null;
@@ -162,7 +162,7 @@ public class EntitySilverfish extends EntityMob {
         }
     }
 
-    public EnumCreatureAttribute aU() {
+    public EnumCreatureAttribute aX() {
         return EnumCreatureAttribute.c;
     }
 }

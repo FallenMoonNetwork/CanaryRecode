@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import java.util.Random;
-
 
 public abstract class BlockFluid extends Block {
 

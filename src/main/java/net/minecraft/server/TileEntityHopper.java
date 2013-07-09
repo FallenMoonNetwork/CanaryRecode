@@ -219,7 +219,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
                 }
             }
         } else {
-            EntityItem entityitem = a(hopper.ay(), hopper.az(), hopper.aA() + 1.0D, hopper.aB());
+            EntityItem entityitem = a(hopper.az(), hopper.aA(), hopper.aB() + 1.0D, hopper.aC());
 
             if (entityitem != null) {
                 return a((IInventory) hopper, entityitem);
@@ -346,11 +346,11 @@ public class TileEntityHopper extends TileEntity implements Hopper {
     private IInventory v() {
         int i0 = BlockHopper.c(this.p());
 
-        return b(this.ay(), (double) (this.l + Facing.b[i0]), (double) (this.m + Facing.c[i0]), (double) (this.n + Facing.d[i0]));
+        return b(this.az(), (double) (this.l + Facing.b[i0]), (double) (this.m + Facing.c[i0]), (double) (this.n + Facing.d[i0]));
     }
 
     public static IInventory b(Hopper hopper) {
-        return b(hopper.ay(), hopper.az(), hopper.aA() + 1.0D, hopper.aB());
+        return b(hopper.az(), hopper.aA(), hopper.aB() + 1.0D, hopper.aC());
     }
 
     public static EntityItem a(World world, double d0, double d1, double d2) {
@@ -393,15 +393,15 @@ public class TileEntityHopper extends TileEntity implements Hopper {
         return itemstack.d != itemstack1.d ? false : (itemstack.k() != itemstack1.k() ? false : (itemstack.b > itemstack.e() ? false : ItemStack.a(itemstack, itemstack1)));
     }
 
-    public double az() {
+    public double aA() {
         return (double) this.l;
     }
 
-    public double aA() {
+    public double aB() {
         return (double) this.m;
     }
 
-    public double aB() {
+    public double aC() {
         return (double) this.n;
     }
 

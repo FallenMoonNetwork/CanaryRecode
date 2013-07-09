@@ -1,10 +1,8 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.canarymod.hook.player.CraftHook;
-
 
 public class ContainerWorkbench extends Container {
 

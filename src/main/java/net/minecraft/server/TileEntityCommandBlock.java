@@ -74,7 +74,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     }
 
     public World f_() {
-        return this.ay();
+        return this.az();
     }
 
     public Packet m() {

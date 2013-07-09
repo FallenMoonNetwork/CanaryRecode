@@ -31,7 +31,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
         super(world);
         this.bp = new EntityDragonPart[]{ this.bq = new EntityDragonPart(this, "head", 6.0F, 6.0F), this.br = new EntityDragonPart(this, "body", 8.0F, 8.0F), this.bs = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bt = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.bu = new EntityDragonPart(this, "tail", 4.0F, 4.0F),
                 this.bv = new EntityDragonPart(this, "wing", 4.0F, 4.0F), this.bw = new EntityDragonPart(this, "wing", 4.0F, 4.0F) };
-        this.g(this.aP());
+        this.g(this.aS());
         this.a(16.0F, 8.0F);
         this.Z = true;
         this.ag = true;
@@ -40,8 +40,8 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
         this.entity = new CanaryEnderDragon(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(200.0D);
     }
 
@@ -50,7 +50,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
     }
 
     public double[] b(int i0, float f0) {
-        if (this.aJ() <= 0.0F) {
+        if (this.aM() <= 0.0F) {
             f0 = 0.0F;
         }
 
@@ -84,13 +84,13 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
         this.bx = this.by;
         float f2;
 
-        if (this.aJ() <= 0.0F) {
+        if (this.aM() <= 0.0F) {
             f0 = (this.ab.nextFloat() - 0.5F) * 8.0F;
             f1 = (this.ab.nextFloat() - 0.5F) * 4.0F;
             f2 = (this.ab.nextFloat() - 0.5F) * 8.0F;
             this.q.a("largeexplode", this.u + (double) f0, this.v + 2.0D + (double) f1, this.w + (double) f2, 0.0D, 0.0D, 0.0D);
         } else {
-            this.bF();
+            this.bJ();
             f0 = 0.2F / (MathHelper.a(this.x * this.x + this.z * this.z) * 10.0F + 1.0F);
             f0 *= (float) Math.pow(2.0D, this.y);
             if (this.bA) {
@@ -155,7 +155,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
                 }
 
                 if (this.bz || d3 < 100.0D || d3 > 22500.0D || this.G || this.H) {
-                    this.bG();
+                    this.bK();
                 }
 
                 d1 /= (double) MathHelper.a(d0 * d0 + d2 * d2);
@@ -289,7 +289,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
         }
     }
 
-    private void bF() {
+    private void bJ() {
         if (this.bC != null) {
             if (this.bC.M) {
                 if (!this.q.I) {
@@ -297,8 +297,8 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
                 }
 
                 this.bC = null;
-            } else if (this.ac % 10 == 0 && this.aJ() < this.aP()) {
-                this.g(this.aJ() + 1.0F);
+            } else if (this.ac % 10 == 0 && this.aM() < this.aS()) {
+                this.g(this.aM() + 1.0F);
             }
         }
 
@@ -351,7 +351,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
         }
     }
 
-    private void bG() {
+    private void bK() {
         this.bz = false;
         if (this.ab.nextInt(2) == 0 && !this.q.h.isEmpty()) {
             this.bD = (Entity) this.q.h.get(this.ab.nextInt(this.q.h.size()));
@@ -445,7 +445,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
         return super.a(damagesource, f0);
     }
 
-    protected void az() {
+    protected void aA() {
         ++this.bB;
         if (this.bB >= 180 && this.bB <= 200) {
             float f0 = (this.ab.nextFloat() - 0.5F) * 8.0F;
@@ -532,9 +532,9 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
         BlockEndPortal.a = false;
     }
 
-    protected void bk() {}
+    protected void bo() {}
 
-    public Entity[] am() {
+    public Entity[] an() {
         return this.bp;
     }
 
@@ -550,11 +550,11 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
         return "mob.enderdragon.growl";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.enderdragon.hit";
     }
 
-    protected float aW() {
+    protected float aZ() {
         return 5.0F;
     }
 }

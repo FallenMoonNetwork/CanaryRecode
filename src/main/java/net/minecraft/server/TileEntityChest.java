@@ -1,10 +1,8 @@
 package net.minecraft.server;
 
-
 import java.util.Iterator;
 import java.util.List;
 import net.canarymod.api.world.blocks.CanaryChest;
-
 
 public class TileEntityChest extends TileEntity implements IInventory {
 

@@ -129,7 +129,7 @@ public class EntityEnderEye extends Entity {
         return 1.0F;
     }
 
-    public boolean ao() {
+    public boolean ap() {
         return false;
     }
 }

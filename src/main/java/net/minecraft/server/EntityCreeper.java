@@ -23,17 +23,17 @@ public class EntityCreeper extends EntityMob {
         this.entity = new CanaryCreeper(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.d).a(0.25D);
     }
 
-    public boolean bb() {
+    public boolean be() {
         return true;
     }
 
-    public int aq() {
-        return this.m() == null ? 3 : 3 + (int) (this.aJ() - 1.0F);
+    public int ar() {
+        return this.m() == null ? 3 : 3 + (int) (this.aM() - 1.0F);
     }
 
     protected void b(float f0) {
@@ -73,9 +73,9 @@ public class EntityCreeper extends EntityMob {
     }
 
     public void l_() {
-        if (this.R()) {
+        if (this.S()) {
             this.bp = this.bq;
-            int i0 = this.bR();
+            int i0 = this.bV();
 
             if (i0 > 0 && this.bq == 0) {
                 this.a("random.fuse", 1.0F, 0.5F);
@@ -91,7 +91,7 @@ public class EntityCreeper extends EntityMob {
                 if (!this.q.I) {
                     boolean flag0 = this.q.O().b("mobGriefing");
 
-                    if (this.bP()) {
+                    if (this.bT()) {
                         this.q.a(this, this.u, this.v, this.w, (float) (this.bs * 2), flag0);
                     } else {
                         this.q.a(this, this.u, this.v, this.w, (float) this.bs, flag0);
@@ -105,11 +105,11 @@ public class EntityCreeper extends EntityMob {
         super.l_();
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.creeper.say";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.creeper.death";
     }
 
@@ -126,7 +126,7 @@ public class EntityCreeper extends EntityMob {
         return true;
     }
 
-    public boolean bP() {
+    public boolean bT() {
         return this.ah.a(17) == 1;
     }
 
@@ -134,7 +134,7 @@ public class EntityCreeper extends EntityMob {
         return Item.O.cv;
     }
 
-    public int bR() {
+    public int bV() {
         return this.ah.a(16);
     }
 

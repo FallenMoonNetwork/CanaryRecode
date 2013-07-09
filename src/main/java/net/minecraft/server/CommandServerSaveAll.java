@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.world.CanaryWorld;
-
 
 public class CommandServerSaveAll extends CommandBase {
 

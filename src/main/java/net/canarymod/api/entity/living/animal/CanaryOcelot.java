@@ -38,7 +38,7 @@ public class CanaryOcelot extends CanaryTameable implements Ocelot {
      */
     @Override
     public SkinType getSkinType() {
-        return SkinType.values()[getHandle().bW()];
+        return SkinType.values()[getHandle().ca()];
     }
 
     /**

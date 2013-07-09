@@ -1,9 +1,7 @@
 package net.minecraft.server;
 
-
 import java.util.Calendar;
 import net.canarymod.api.entity.living.monster.CanarySkeleton;
-
 
 public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
 
@@ -21,13 +19,13 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
         this.d.a(1, new EntityAIHurtByTarget(this, false));
         this.d.a(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         if (world != null && !world.I) {
-            this.bP();
+            this.bT();
         }
         this.entity = new CanarySkeleton(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.d).a(0.25D);
     }
 
@@ -36,7 +34,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
         this.ah.a(13, new Byte((byte) 0));
     }
 
-    public boolean bb() {
+    public boolean be() {
         return true;
     }
 
@@ -44,11 +42,11 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
         return "mob.skeleton.say";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.skeleton.hurt";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.skeleton.death";
     }
 
@@ -58,8 +56,8 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
 
     public boolean m(Entity entity) {
         if (super.m(entity)) {
-            if (this.bR() == 1 && entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).d(new PotionEffect(Potion.v.H, 200));
+            if (this.bV() == 1 && entity instanceof EntityLivingBase) {
+                ((EntityLivingBase) entity).c(new PotionEffect(Potion.v.H, 200));
             }
 
             return true;
@@ -68,7 +66,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
         }
     }
 
-    public EnumCreatureAttribute aU() {
+    public EnumCreatureAttribute aX() {
         return EnumCreatureAttribute.b;
     }
 
@@ -98,15 +96,15 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
             }
         }
 
-        if (this.q.I && this.bR() == 1) {
+        if (this.q.I && this.bV() == 1) {
             this.a(0.72F, 2.34F);
         }
 
         super.c();
     }
 
-    public void T() {
-        super.T();
+    public void U() {
+        super.U();
         if (this.o instanceof EntityCreature) {
             EntityCreature entitycreature = (EntityCreature) this.o;
 
@@ -135,7 +133,7 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
         int i1;
         int i2;
 
-        if (this.bR() == 1) {
+        if (this.bV() == 1) {
             i1 = this.ab.nextInt(3 + i0) - 1;
 
             for (i2 = 0; i2 < i1; ++i2) {
@@ -157,27 +155,27 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
     }
 
     protected void l(int i0) {
-        if (this.bR() == 1) {
+        if (this.bV() == 1) {
             this.a(new ItemStack(Item.bS.cv, 1, 1), 0.0F);
         }
     }
 
-    protected void bs() {
-        super.bs();
+    protected void bw() {
+        super.bw();
         this.c(0, new ItemStack(Item.m));
     }
 
     public EntityLivingData a(EntityLivingData entitylivingdata) {
         entitylivingdata = super.a(entitylivingdata);
-        if (this.q.t instanceof WorldProviderHell && this.aB().nextInt(5) > 0) {
+        if (this.q.t instanceof WorldProviderHell && this.aC().nextInt(5) > 0) {
             this.c.a(4, this.bq);
             this.a(1);
             this.c(0, new ItemStack(Item.x));
             this.a(SharedMonsterAttributes.e).a(4.0D);
         } else {
             this.c.a(4, this.bp);
-            this.bs();
-            this.bt();
+            this.bw();
+            this.bx();
         }
 
         this.h(this.ab.nextFloat() < 0.55F * this.q.b(this.u, this.v, this.w));
@@ -193,10 +191,10 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
         return entitylivingdata;
     }
 
-    public void bP() {
+    public void bT() {
         this.c.a((EntityAIBase) this.bq);
         this.c.a((EntityAIBase) this.bp);
-        ItemStack itemstack = this.aV();
+        ItemStack itemstack = this.aY();
 
         if (itemstack != null && itemstack.d == Item.m.cv) {
             this.c.a(4, this.bp);
@@ -207,8 +205,8 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
 
     public void a(EntityLivingBase entitylivingbase, float f0) {
         EntityArrow entityarrow = new EntityArrow(this.q, this, entitylivingbase, 1.6F, (float) (14 - this.q.r * 4));
-        int i0 = EnchantmentHelper.a(Enchantment.v.z, this.aV());
-        int i1 = EnchantmentHelper.a(Enchantment.w.z, this.aV());
+        int i0 = EnchantmentHelper.a(Enchantment.v.z, this.aY());
+        int i1 = EnchantmentHelper.a(Enchantment.w.z, this.aY());
 
         entityarrow.b((double) (f0 * 2.0F) + this.ab.nextGaussian() * 0.25D + (double) ((float) this.q.r * 0.11F));
         if (i0 > 0) {
@@ -219,15 +217,15 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
             entityarrow.a(i1);
         }
 
-        if (EnchantmentHelper.a(Enchantment.x.z, this.aV()) > 0 || this.bR() == 1) {
+        if (EnchantmentHelper.a(Enchantment.x.z, this.aY()) > 0 || this.bV() == 1) {
             entityarrow.d(100);
         }
 
-        this.a("random.bow", 1.0F, 1.0F / (this.aB().nextFloat() * 0.4F + 0.8F));
+        this.a("random.bow", 1.0F, 1.0F / (this.aC().nextFloat() * 0.4F + 0.8F));
         this.q.d((Entity) entityarrow);
     }
 
-    public int bR() {
+    public int bV() {
         return this.ah.a(13);
     }
 
@@ -249,22 +247,22 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
             this.a(b0);
         }
 
-        this.bP();
+        this.bT();
     }
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("SkeletonType", (byte) this.bR());
+        nbttagcompound.a("SkeletonType", (byte) this.bV());
     }
 
     public void c(int i0, ItemStack itemstack) {
         super.c(i0, itemstack);
         if (!this.q.I && i0 == 0) {
-            this.bP();
+            this.bT();
         }
     }
 
-    public double V() {
-        return super.V() - 0.5D;
+    public double W() {
+        return super.W() - 0.5D;
     }
 }

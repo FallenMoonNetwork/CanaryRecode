@@ -77,5 +77,5 @@ public class Score {
     public CanaryScore getCanaryScore() {
         return this.score;
     }
-    
+
 }

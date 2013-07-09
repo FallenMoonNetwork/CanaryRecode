@@ -33,9 +33,9 @@ public class NetLoginHandler extends NetHandler {
         this.a.e = 0;
     }
 
-    public void c() {
+    public void d() {
         if (this.h) {
-            this.d();
+            this.e();
         }
 
         if (this.f++ == 600) {
@@ -47,7 +47,7 @@ public class NetLoginHandler extends NetHandler {
 
     public void a(String s0) {
         try {
-            this.e.an().a("Disconnecting " + this.e() + ": " + s0);
+            this.e.an().a("Disconnecting " + this.f() + ": " + s0);
             this.a.a((Packet) (new Packet255KickDisconnect(s0)));
             this.a.d();
             this.b = true;
@@ -63,8 +63,8 @@ public class NetLoginHandler extends NetHandler {
         } else {
             PublicKey publickey = this.e.H().getPublic();
 
-            if (packet2clientprotocol.d() != 73) {
-                if (packet2clientprotocol.d() > 73) {
+            if (packet2clientprotocol.d() != 74) {
+                if (packet2clientprotocol.d() > 74) {
                     this.a("Outdated server!");
                 } else {
                     this.a("Outdated client!");
@@ -107,7 +107,7 @@ public class NetLoginHandler extends NetHandler {
 
     public void a(Packet1Login packet1login) {}
 
-    public void d() {
+    public void e() {
         String s0 = this.e.af().a(this.a.c(), this.g);
 
         if (s0 != null) {
@@ -124,7 +124,7 @@ public class NetLoginHandler extends NetHandler {
     }
 
     public void a(String s0, Object[] aobject) {
-        this.e.an().a(this.e() + " lost connection");
+        this.e.an().a(this.f() + " lost connection");
         this.b = true;
     }
 
@@ -177,12 +177,16 @@ public class NetLoginHandler extends NetHandler {
         this.a("Protocol error");
     }
 
-    public String e() {
+    public String f() {
         return this.g != null ? this.g + " [" + this.a.c().toString() + "]" : this.a.c().toString();
     }
 
     public boolean a() {
         return true;
+    }
+
+    public boolean c() {
+        return this.b;
     }
 
     static String a(NetLoginHandler netloginhandler) {

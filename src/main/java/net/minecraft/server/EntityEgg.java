@@ -25,7 +25,7 @@ public class EntityEgg extends EntityThrowable {
         ProjectileHitHook hook = (ProjectileHitHook) new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
         if (!hook.isCanceled()) { //
             if (movingobjectposition.g != null) {
-                movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), 0);
+                movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), 0.0F);
             }
 
             if (!this.q.I && this.ab.nextInt(8) == 0) {

@@ -15,7 +15,7 @@ public class ScoreDummyCriteria implements ScoreObjectiveCriteria {
         if (!ScoreObjectiveCriteria.a.containsKey(s0)) {
             ScoreObjectiveCriteria.a.put(s0, this);
         }//
-        // CanaryMod: Set Variable
+         // CanaryMod: Set Variable
         if (!(this instanceof ScoreHealthCriteria)) {
             criteria = new CanaryScoreDummyCriteria(this);
         }//

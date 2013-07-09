@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.world.blocks.CanaryDropper;
-
 
 public class TileEntityDropper extends TileEntityDispenser {
 

@@ -1,11 +1,9 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
 
 public class CraftingManager {
 
@@ -38,7 +36,6 @@ public class CraftingManager {
         this.a(new ItemStack(Block.bA, 1), new Object[]{ "#W#", "#W#", Character.valueOf('#'), Item.F, Character.valueOf('W'), Block.C });
         this.a(new ItemStack(Block.bd, 1), new Object[]{ "###", "#X#", "###", Character.valueOf('#'), Block.C, Character.valueOf('X'), Item.p });
         this.a(new ItemStack(Item.ch, 2), new Object[]{ "~~ ", "~O ", "  ~", Character.valueOf('~'), Item.M, Character.valueOf('O'), Item.aO });
-        this.a(new ItemStack(Block.cB, 1), new Object[]{ "###", "###", "###", Character.valueOf('#'), Item.V });
         this.a(new ItemStack(Block.W, 1), new Object[]{ "###", "#X#", "###", Character.valueOf('#'), Block.C, Character.valueOf('X'), Item.aE });
         this.a(new ItemStack(Block.as, 1), new Object[]{ "###", "XXX", "###", Character.valueOf('#'), Block.C, Character.valueOf('X'), Item.aN });
         this.a(new ItemStack(Block.aZ, 1), new Object[]{ "##", "##", Character.valueOf('#'), Item.aF });

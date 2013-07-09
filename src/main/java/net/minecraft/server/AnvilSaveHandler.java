@@ -1,10 +1,7 @@
 package net.minecraft.server;
 
-
 import java.io.File;
-
 import net.canarymod.api.world.DimensionType;
-
 
 public class AnvilSaveHandler extends SaveHandler {
 

@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 public class InventoryLargeChest implements IInventory {
 
     private String a;

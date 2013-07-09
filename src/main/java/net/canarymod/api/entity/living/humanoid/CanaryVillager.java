@@ -44,7 +44,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     @Override
     public Profession getProfession() {
-        return Profession.fromId(getHandle().bP());
+        return Profession.fromId(getHandle().bT());
     }
 
     /**
@@ -60,7 +60,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     @Override
     public boolean isMating() {
-        return getHandle().bQ();
+        return getHandle().bU();
     }
 
     /**
@@ -68,7 +68,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     @Override
     public void setMating(boolean isMating) {
-        getHandle().i(isMating);
+        getHandle().j(isMating);
     }
 
     /**
@@ -76,7 +76,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     @Override
     public boolean isPlaying() {
-        return getHandle().bR();
+        return getHandle().bS();
     }
 
     /**
@@ -84,7 +84,7 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      */
     @Override
     public void setPlaying(boolean playing) {
-        getHandle().j(playing);
+        getHandle().i(playing);
     }
 
     /**

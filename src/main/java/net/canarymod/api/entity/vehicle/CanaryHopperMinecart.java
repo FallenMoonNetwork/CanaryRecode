@@ -67,7 +67,7 @@ public class CanaryHopperMinecart extends CanaryContainerMinecart implements Hop
      */
     @Override
     public boolean isBlocked() {
-        return getHandle().ax();
+        return getHandle().ay();
     }
 
     /**

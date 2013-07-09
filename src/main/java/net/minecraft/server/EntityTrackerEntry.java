@@ -46,7 +46,7 @@ public class EntityTrackerEntry {
         this.f = MathHelper.c(entity.w * 32.0D);
         this.g = MathHelper.d(entity.A * 256.0F / 360.0F);
         this.h = MathHelper.d(entity.B * 256.0F / 360.0F);
-        this.i = MathHelper.d(entity.an() * 256.0F / 360.0F);
+        this.i = MathHelper.d(entity.ao() * 256.0F / 360.0F);
 
         canaryEntry = new CanaryEntityTrackerEntry(this);
     }
@@ -88,7 +88,7 @@ public class EntityTrackerEntry {
                     EntityPlayerMP i09 = (EntityPlayerMP) i08;
 
                     i06.a(i09, i04);
-                    if (i09.a.e() <= 5) {
+                    if (i09.a.f() <= 5) {
                         Packet i10 = Item.bf.c(i04, this.a.q, i09);
 
                         if (i10 != null) {
@@ -182,7 +182,7 @@ public class EntityTrackerEntry {
                 this.w = true;
             }
 
-            i0 = MathHelper.d(this.a.an() * 256.0F / 360.0F);
+            i0 = MathHelper.d(this.a.ao() * 256.0F / 360.0F);
             if (Math.abs(i0 - this.i) >= 4) {
                 this.a((Packet) (new Packet35EntityHeadRotation(this.a.k, (byte) i0)));
                 this.i = i0;
@@ -206,7 +206,7 @@ public class EntityTrackerEntry {
         }
 
         if (this.a instanceof EntityLivingBase) {
-            ServersideAttributeMap serversideattributemap = (ServersideAttributeMap) ((EntityLivingBase) this.a).aT();
+            ServersideAttributeMap serversideattributemap = (ServersideAttributeMap) ((EntityLivingBase) this.a).aW();
             Set set = serversideattributemap.b();
 
             if (!set.isEmpty()) {
@@ -267,7 +267,7 @@ public class EntityTrackerEntry {
                     }
 
                     if (this.a instanceof EntityLivingBase) {
-                        ServersideAttributeMap serversideattributemap = (ServersideAttributeMap) ((EntityLivingBase) this.a).aT();
+                        ServersideAttributeMap serversideattributemap = (ServersideAttributeMap) ((EntityLivingBase) this.a).aW();
                         Collection collection = serversideattributemap.c();
 
                         if (!collection.isEmpty()) {
@@ -286,8 +286,8 @@ public class EntityTrackerEntry {
                         entityplayermp.a.b(new Packet39AttachEntity(0, this.a, this.a.o));
                     }
 
-                    if (this.a instanceof EntityLiving && ((EntityLiving) this.a).bE() != null) {
-                        entityplayermp.a.b(new Packet39AttachEntity(1, this.a, ((EntityLiving) this.a).bE()));
+                    if (this.a instanceof EntityLiving && ((EntityLiving) this.a).bI() != null) {
+                        entityplayermp.a.b(new Packet39AttachEntity(1, this.a, ((EntityLiving) this.a).bI()));
                     }
 
                     if (this.a instanceof EntityLivingBase) {
@@ -303,14 +303,14 @@ public class EntityTrackerEntry {
                     if (this.a instanceof EntityPlayer) {
                         EntityPlayer entityplayer = (EntityPlayer) this.a;
 
-                        if (entityplayer.bd()) {
+                        if (entityplayer.bg()) {
                             entityplayermp.a.b(new Packet17Sleep(this.a, 0, MathHelper.c(this.a.u), MathHelper.c(this.a.v), MathHelper.c(this.a.w)));
                         }
                     }
 
                     if (this.a instanceof EntityLivingBase) {
                         EntityLivingBase entitylivingbase = (EntityLivingBase) this.a;
-                        Iterator iterator = entitylivingbase.aH().iterator();
+                        Iterator iterator = entitylivingbase.aK().iterator();
 
                         while (iterator.hasNext()) {
                             PotionEffect potioneffect = (PotionEffect) iterator.next();
@@ -434,7 +434,7 @@ public class EntityTrackerEntry {
                 }
             }
         } else {
-            this.i = MathHelper.d(this.a.an() * 256.0F / 360.0F);
+            this.i = MathHelper.d(this.a.ao() * 256.0F / 360.0F);
             return new Packet24MobSpawn((EntityLivingBase) this.a);
         }
     }

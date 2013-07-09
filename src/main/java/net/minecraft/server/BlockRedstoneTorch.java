@@ -122,12 +122,7 @@ public class BlockRedstoneTorch extends BlockTorch {
                 //
                 world.f(i0, i1, i2, Block.aU.cF, world.h(i0, i1, i2), 3);
                 if (this.a(world, i0, i1, i2, true)) {
-                    world.a((double) ((float) i0 + 0.5F),
-                            (double) ((float) i1 + 0.5F),
-                            (double) ((float) i2 + 0.5F),
-                            "random.fizz",
-                            0.5F,
-                            2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
+                    world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
 
                     for (int i3 = 0; i3 < 5; ++i3) {
                         double d0 = (double) i0 + random.nextDouble() * 0.6D + 0.2D;

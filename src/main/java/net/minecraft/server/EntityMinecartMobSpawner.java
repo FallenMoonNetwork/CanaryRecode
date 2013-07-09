@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.vehicle.CanaryMobSpawnerMinecart;
-
 
 public class EntityMinecartMobSpawner extends EntityMinecart {
 

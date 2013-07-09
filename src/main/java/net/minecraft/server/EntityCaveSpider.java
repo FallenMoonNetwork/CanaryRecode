@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.monster.CanaryCaveSpider;
-
 
 public class EntityCaveSpider extends EntitySpider {
 
@@ -12,8 +10,8 @@ public class EntityCaveSpider extends EntitySpider {
         this.entity = new CanaryCaveSpider(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(12.0D);
     }
 
@@ -31,7 +29,7 @@ public class EntityCaveSpider extends EntitySpider {
                 }
 
                 if (b0 > 0) {
-                    ((EntityLivingBase) entity).d(new PotionEffect(Potion.u.H, b0 * 20, 0));
+                    ((EntityLivingBase) entity).c(new PotionEffect(Potion.u.H, b0 * 20, 0));
                 }
             }
 

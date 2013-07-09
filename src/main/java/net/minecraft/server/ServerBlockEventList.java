@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
-
 
 class ServerBlockEventList extends ArrayList {
 

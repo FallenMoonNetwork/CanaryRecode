@@ -131,7 +131,7 @@ public class EntityItem extends Entity {
     public boolean a(EntityItem entityitem) {
         if (entityitem == this) {
             return false;
-        } else if (entityitem.R() && this.R()) {
+        } else if (entityitem.S() && this.S()) {
             ItemStack itemstack = this.d();
             ItemStack itemstack1 = entityitem.d();
 
@@ -173,7 +173,7 @@ public class EntityItem extends Entity {
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else if (this.d() != null && this.d().d == Item.bU.cv && damagesource.c()) {
             return false;
@@ -240,11 +240,11 @@ public class EntityItem extends Entity {
         }
     }
 
-    public String al() {
+    public String am() {
         return StatCollector.a("item." + this.d().a());
     }
 
-    public boolean ao() {
+    public boolean ap() {
         return false;
     }
 

@@ -12,7 +12,7 @@ public class EntityEnderman extends EntityMob {
 
     private static final UUID bp = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291A0");
     private static final AttributeModifier bq = (new AttributeModifier(bp, "Attacking speed boost", 6.199999809265137D, 0)).a(false);
-    private static boolean[] br = new boolean[256];
+    // private static boolean[] br = new boolean[256]; //CanaryMod: disabled
     private int bs;
     private int bt;
     private Entity bu;
@@ -25,8 +25,8 @@ public class EntityEnderman extends EntityMob {
         this.entity = new CanaryEnderman(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(40.0D);
         this.a(SharedMonsterAttributes.d).a(0.30000001192092896D);
         this.a(SharedMonsterAttributes.e).a(7.0D);
@@ -41,8 +41,8 @@ public class EntityEnderman extends EntityMob {
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("carried", (short) this.bR());
-        nbttagcompound.a("carriedData", (short) this.bS());
+        nbttagcompound.a("carried", (short) this.bV());
+        nbttagcompound.a("carriedData", (short) this.bW());
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -51,7 +51,7 @@ public class EntityEnderman extends EntityMob {
         this.c(nbttagcompound.d("carriedData"));
     }
 
-    protected Entity bH() {
+    protected Entity bL() {
         EntityPlayer entityplayer = this.q.b(this, 64.0D);
 
         if (entityplayer != null) {
@@ -113,7 +113,7 @@ public class EntityEnderman extends EntityMob {
             int i2;
             int i3;
 
-            if (this.bR() == 0) {
+            if (this.bV() == 0) {
                 if (this.ab.nextInt(20) == 0) {
                     i0 = MathHelper.c(this.u - 2.0D + this.ab.nextDouble() * 4.0D);
                     i1 = MathHelper.c(this.v + this.ab.nextDouble() * 3.0D);
@@ -144,7 +144,7 @@ public class EntityEnderman extends EntityMob {
 
                     Canary.hooks().callHook(hook);
                     if (!hook.isCanceled()) {
-                        this.q.f(i0, i1, i2, this.bR(), this.bS(), 3);
+                        this.q.f(i0, i1, i2, this.bV(), this.bW(), 3);
                         this.a(0);
                     }
                     //
@@ -163,18 +163,18 @@ public class EntityEnderman extends EntityMob {
                 this.j = null;
                 this.a(false);
                 this.bv = false;
-                this.bP();
+                this.bT();
             }
         }
 
-        if (this.F() || this.ad()) {
+        if (this.F() || this.ae()) {
             this.j = null;
             this.a(false);
             this.bv = false;
-            this.bP();
+            this.bT();
         }
 
-        if (this.bT() && !this.bv && this.ab.nextInt(100) == 0) {
+        if (this.bX() && !this.bv && this.ab.nextInt(100) == 0) {
             this.a(false);
         }
 
@@ -183,11 +183,11 @@ public class EntityEnderman extends EntityMob {
             this.a(this.j, 100.0F, 100.0F);
         }
 
-        if (!this.q.I && this.R()) {
+        if (!this.q.I && this.S()) {
             if (this.j != null) {
                 if (this.j instanceof EntityPlayer && this.f((EntityPlayer) this.j)) {
                     if (this.j.e((Entity) this) < 16.0D) {
-                        this.bP();
+                        this.bT();
                     }
 
                     this.bs = 0;
@@ -203,7 +203,7 @@ public class EntityEnderman extends EntityMob {
         super.c();
     }
 
-    public boolean bP() { // CanaryMod: protected -> public
+    public boolean bT() { // CanaryMod: protected -> public
         double d0 = this.u + (this.ab.nextDouble() - 0.5D) * 64.0D;
         double d1 = this.v + (double) (this.ab.nextInt(64) - 32);
         double d2 = this.w + (this.ab.nextDouble() - 0.5D) * 64.0D;
@@ -283,14 +283,14 @@ public class EntityEnderman extends EntityMob {
     }
 
     protected String r() {
-        return this.bT() ? "mob.endermen.scream" : "mob.endermen.idle";
+        return this.bX() ? "mob.endermen.scream" : "mob.endermen.idle";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.endermen.hit";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.endermen.death";
     }
 
@@ -314,7 +314,7 @@ public class EntityEnderman extends EntityMob {
         this.ah.b(16, Byte.valueOf((byte) (i0 & 255)));
     }
 
-    public int bR() {
+    public int bV() {
         return this.ah.a(16);
     }
 
@@ -322,12 +322,12 @@ public class EntityEnderman extends EntityMob {
         this.ah.b(17, Byte.valueOf((byte) (i0 & 255)));
     }
 
-    public int bS() {
+    public int bW() {
         return this.ah.a(17);
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else {
             this.a(true);
@@ -339,7 +339,7 @@ public class EntityEnderman extends EntityMob {
                 this.bv = false;
 
                 for (int i0 = 0; i0 < 64; ++i0) {
-                    if (this.bP()) {
+                    if (this.bT()) {
                         return true;
                     }
                 }
@@ -351,7 +351,7 @@ public class EntityEnderman extends EntityMob {
         }
     }
 
-    public boolean bT() {
+    public boolean bX() {
         return this.ah.a(18) > 0;
     }
 
@@ -359,21 +359,21 @@ public class EntityEnderman extends EntityMob {
         this.ah.b(18, Byte.valueOf((byte) (flag0 ? 1 : 0)));
     }
 
-    static {
-        // CanaryMod: Disable all default allowed pick ups
-        // br[Block.z.cF] = true;
-        // br[Block.A.cF] = true;
-        // br[Block.J.cF] = true;
-        // br[Block.K.cF] = true;
-        // br[Block.ai.cF] = true;
-        // br[Block.aj.cF] = true;
-        // br[Block.ak.cF] = true;
-        // br[Block.al.cF] = true;
-        // br[Block.ar.cF] = true;
-        // br[Block.ba.cF] = true;
-        // br[Block.bb.cF] = true;
-        // br[Block.bf.cF] = true;
-        // br[Block.bw.cF] = true;
-        // br[Block.bD.cF] = true;
-    }
+    /* CanaryMod: Disable all default allowed pick ups
+        static {
+            // br[Block.z.cF] = true;
+            // br[Block.A.cF] = true;
+            // br[Block.J.cF] = true;
+            // br[Block.K.cF] = true;
+            // br[Block.ai.cF] = true;
+            // br[Block.aj.cF] = true;
+            // br[Block.ak.cF] = true;
+            // br[Block.al.cF] = true;
+            // br[Block.ar.cF] = true;
+            // br[Block.ba.cF] = true;
+            // br[Block.bb.cF] = true;
+            // br[Block.bf.cF] = true;
+            // br[Block.bw.cF] = true;
+            // br[Block.bD.cF] = true;
+        } */
 }

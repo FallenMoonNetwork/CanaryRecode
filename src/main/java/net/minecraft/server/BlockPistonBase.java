@@ -87,18 +87,8 @@ public class BlockPistonBase extends Block {
     }
 
     private boolean d(World world, int i0, int i1, int i2, int i3) {
-        return i3 != 0 && world.k(i0, i1 - 1, i2, 0) ? true : (i3 != 1
-                && world.k(i0, i1 + 1, i2, 1) ? true : (i3 != 2
-                && world.k(i0, i1, i2 - 1, 2) ? true : (i3 != 3
-                && world.k(i0, i1, i2 + 1, 3) ? true : (i3 != 5
-                && world.k(i0 + 1, i1, i2, 5) ? true : (i3 != 4
-                && world.k(i0 - 1, i1, i2, 4) ? true
-                : (world.k(i0, i1, i2, 0) ? true
-                        : (world.k(i0, i1 + 2, i2, 1) ? true : (world.k(i0,
-                                i1 + 1, i2 - 1, 2) ? true : (world.k(i0,
-                                i1 + 1, i2 + 1, 3) ? true : (world.k(i0 - 1,
-                                i1 + 1, i2, 4) ? true : world.k(i0 + 1, i1 + 1,
-                                i2, 5)))))))))));
+        return i3 != 0 && world.k(i0, i1 - 1, i2, 0) ? true : (i3 != 1 && world.k(i0, i1 + 1, i2, 1) ? true : (i3 != 2 && world.k(i0, i1, i2 - 1, 2) ? true : (i3 != 3 && world.k(i0, i1, i2 + 1, 3) ? true : (i3 != 5 && world.k(i0 + 1, i1, i2, 5) ? true : (i3 != 4 && world.k(i0 - 1, i1, i2, 4) ? true : (world.k(i0, i1, i2, 0) ? true : (world.k(i0, i1 + 2, i2,
+                1) ? true : (world.k(i0, i1 + 1, i2 - 1, 2) ? true : (world.k(i0, i1 + 1, i2 + 1, 3) ? true : (world.k(i0 - 1, i1 + 1, i2, 4) ? true : world.k(i0 + 1, i1 + 1, i2, 5)))))))))));
     }
 
     public boolean b(World world, int i0, int i1, int i2, int i3, int i4) {

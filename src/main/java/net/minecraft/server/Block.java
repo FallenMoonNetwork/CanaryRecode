@@ -296,8 +296,7 @@ public class Block {
         return this.cL;
     }
 
-    protected final void a(float f0, float f1, float f2, float f3, float f4,
-            float f5) {
+    protected final void a(float f0, float f1, float f2, float f3, float f4, float f5) {
         this.cM = (double) f0;
         this.cN = (double) f1;
         this.cO = (double) f2;

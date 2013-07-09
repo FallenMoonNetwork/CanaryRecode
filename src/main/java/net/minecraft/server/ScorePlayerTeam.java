@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 import net.canarymod.api.scoreboard.CanaryTeam;
 
-public class ScorePlayerTeam {
+public class ScorePlayerTeam extends Team {
 
-    public final Scoreboard a; //CanaryMod: private to public
+    public final Scoreboard a; // CanaryMod: private to public
     private final String b;
     private final Set c = new HashSet();
     private String d;
@@ -71,8 +71,12 @@ public class ScorePlayerTeam {
         }
     }
 
-    public static String a(ScorePlayerTeam scoreplayerteam, String s0) {
-        return scoreplayerteam == null ? s0 : scoreplayerteam.e() + s0 + scoreplayerteam.f();
+    public String d(String s0) {
+        return this.e() + s0 + this.f();
+    }
+
+    public static String a(Team team, String s0) {
+        return team == null ? s0 : team.d(s0);
     }
 
     public boolean g() {

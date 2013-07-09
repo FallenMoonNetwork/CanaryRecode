@@ -17,7 +17,7 @@ public class ScoreHealthCriteria extends ScoreDummyCriteria {
 
         EntityPlayer entityplayer;
 
-        for (Iterator iterator = list.iterator(); iterator.hasNext(); f0 += entityplayer.aJ() + entityplayer.bj()) {
+        for (Iterator iterator = list.iterator(); iterator.hasNext(); f0 += entityplayer.aM() + entityplayer.bm()) {
             entityplayer = (EntityPlayer) iterator.next();
         }
 

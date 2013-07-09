@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import java.util.Random;
-
 
 public class BlockDoor extends Block {
 

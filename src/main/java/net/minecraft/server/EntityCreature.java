@@ -13,18 +13,18 @@ public abstract class EntityCreature extends EntityLiving {
     protected int bo;
     private ChunkCoordinates bq = new ChunkCoordinates(0, 0, 0);
     private float br = -1.0F;
-    private EntityAIBase bs = new EntityAIMoveTwardsRestriction(this, 1.0D);
+    private EntityAIBase bs = new EntityAIMoveTowardsRestriction(this, 1.0D);
     private boolean bt;
 
     public EntityCreature(World world) {
         super(world);
     }
 
-    protected boolean bF() {
+    protected boolean bJ() {
         return false;
     }
 
-    protected void bh() {
+    protected void bk() {
         this.q.C.a("ai");
         if (this.bo > 0 && --this.bo == 0) {
             AttributeInstance attributeinstance = this.a(SharedMonsterAttributes.d);
@@ -32,12 +32,12 @@ public abstract class EntityCreature extends EntityLiving {
             attributeinstance.b(i);
         }
 
-        this.bn = this.bF();
+        this.bn = this.bJ();
         float f11 = 16.0F;
 
         if (this.j == null) {
             // CanaryMod: MobTarget
-            Entity entity = this.bH();
+            Entity entity = this.bL();
             if (entity != null && entity instanceof EntityLivingBase) {
                 MobTargetHook hook = (MobTargetHook) new MobTargetHook((net.canarymod.api.entity.living.LivingBase) this.getCanaryEntity(), (net.canarymod.api.entity.living.LivingBase) entity.getCanaryEntity()).call();
                 if (!hook.isCanceled()) {
@@ -49,7 +49,7 @@ public abstract class EntityCreature extends EntityLiving {
             if (this.j != null) {
                 this.bp = this.q.a(this, this.j, f11, true, false, false, true);
             }
-        } else if (this.j.R()) {
+        } else if (this.j.S()) {
             float f1 = this.j.d((Entity) this);
 
             if (this.o(this.j)) {
@@ -63,7 +63,7 @@ public abstract class EntityCreature extends EntityLiving {
         if (!this.bn && this.j != null && (this.bp == null || this.ab.nextInt(20) == 0)) {
             this.bp = this.q.a(this, this.j, f11, true, false, false, true);
         } else if (!this.bn && (this.bp == null && this.ab.nextInt(180) == 0 || this.ab.nextInt(120) == 0 || this.bo > 0) && this.aV < 100) {
-            this.bG();
+            this.bK();
         }
 
         int i0 = MathHelper.c(this.E.b + 0.5D);
@@ -124,7 +124,7 @@ public abstract class EntityCreature extends EntityLiving {
                 this.a(this.j, 30.0F, 30.0F);
             }
 
-            if (this.G && !this.bI()) {
+            if (this.G && !this.bM()) {
                 this.bd = true;
             }
 
@@ -134,12 +134,12 @@ public abstract class EntityCreature extends EntityLiving {
 
             this.q.C.b();
         } else {
-            super.bh();
+            super.bk();
             this.bp = null;
         }
     }
 
-    protected void bG() {
+    protected void bK() {
         this.q.C.a("stroll");
         boolean flag0 = false;
         int i0 = -1;
@@ -175,19 +175,19 @@ public abstract class EntityCreature extends EntityLiving {
         return 0.0F;
     }
 
-    protected Entity bH() {
+    protected Entity bL() {
         return null;
     }
 
-    public boolean bo() {
+    public boolean bs() {
         int i0 = MathHelper.c(this.u);
         int i1 = MathHelper.c(this.E.b);
         int i2 = MathHelper.c(this.w);
 
-        return super.bo() && this.a(i0, i1, i2) >= 0.0F;
+        return super.bs() && this.a(i0, i1, i2) >= 0.0F;
     }
 
-    public boolean bI() {
+    public boolean bM() {
         return this.bp != null;
     }
 
@@ -195,7 +195,7 @@ public abstract class EntityCreature extends EntityLiving {
         this.bp = pathentity;
     }
 
-    public Entity bJ() {
+    public Entity bN() {
         return this.j;
     }
 
@@ -203,7 +203,7 @@ public abstract class EntityCreature extends EntityLiving {
         this.j = entity;
     }
 
-    public boolean bK() {
+    public boolean bO() {
         return this.b(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w));
     }
 
@@ -216,33 +216,33 @@ public abstract class EntityCreature extends EntityLiving {
         this.br = (float) i3;
     }
 
-    public ChunkCoordinates bL() {
+    public ChunkCoordinates bP() {
         return this.bq;
     }
 
-    public float bM() {
+    public float bQ() {
         return this.br;
     }
 
-    public void bN() {
+    public void bR() {
         this.br = -1.0F;
     }
 
-    public boolean bO() {
+    public boolean bS() {
         return this.br != -1.0F;
     }
 
-    protected void bB() {
-        super.bB();
-        if (this.bD() && this.bE() != null && this.bE().q == this.q) {
-            Entity entity = this.bE();
+    protected void bF() {
+        super.bF();
+        if (this.bH() && this.bI() != null && this.bI().q == this.q) {
+            Entity entity = this.bI();
 
             this.b((int) entity.u, (int) entity.v, (int) entity.w, 5);
             float f0 = this.d(entity);
 
-            if (this instanceof EntityTameable && ((EntityTameable) this).bQ()) {
+            if (this instanceof EntityTameable && ((EntityTameable) this).bU()) {
                 if (f0 > 10.0F) {
-                    this.i(true);
+                    this.a(true, true);
                 }
 
                 return;
@@ -254,6 +254,7 @@ public abstract class EntityCreature extends EntityLiving {
                 this.bt = true;
             }
 
+            this.o(f0);
             if (f0 > 4.0F) {
                 this.k().a(entity, 1.0D);
             }
@@ -269,13 +270,15 @@ public abstract class EntityCreature extends EntityLiving {
             }
 
             if (f0 > 10.0F) {
-                this.i(true);
+                this.a(true, true);
             }
-        } else if (!this.bD() && this.bt) {
+        } else if (!this.bH() && this.bt) {
             this.bt = false;
             this.c.a(this.bs);
             this.k().a(true);
-            this.bN();
+            this.bR();
         }
     }
+
+    protected void o(float f0) {}
 }

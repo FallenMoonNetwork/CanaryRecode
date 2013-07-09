@@ -78,7 +78,7 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
      */
     @Override
     public World getWorld() {
-        return tileentity.ay().getCanaryWorld();
+        return tileentity.az().getCanaryWorld();
     }
 
     /**
@@ -86,7 +86,7 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
      */
     @Override
     public void update() {
-        tileentity.ay().j(getX(), getY(), getZ());
+        tileentity.az().j(getX(), getY(), getZ());
     }
 
     /**

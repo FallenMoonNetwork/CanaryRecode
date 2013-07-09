@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.monster.CanarySpider;
-
 
 public class EntitySpider extends EntityMob {
 
@@ -24,13 +22,13 @@ public class EntitySpider extends EntityMob {
         }
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(16.0D);
         this.a(SharedMonsterAttributes.d).a(0.800000011920929D);
     }
 
-    protected Entity bH() {
+    protected Entity bL() {
         float f0 = this.d(1.0F);
 
         if (f0 < 0.5F) {
@@ -46,11 +44,11 @@ public class EntitySpider extends EntityMob {
         return "mob.spider.say";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.spider.say";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.spider.death";
     }
 
@@ -92,20 +90,20 @@ public class EntitySpider extends EntityMob {
     }
 
     public boolean e() {
-        return this.bP();
+        return this.bT();
     }
 
-    public void ak() {}
+    public void al() {}
 
-    public EnumCreatureAttribute aU() {
+    public EnumCreatureAttribute aX() {
         return EnumCreatureAttribute.c;
     }
 
-    public boolean e(PotionEffect potioneffect) {
-        return potioneffect.a() == Potion.u.H ? false : super.e(potioneffect);
+    public boolean d(PotionEffect potioneffect) {
+        return potioneffect.a() == Potion.u.H ? false : super.d(potioneffect);
     }
 
-    public boolean bP() {
+    public boolean bT() {
         return (this.ah.a(16) & 1) != 0;
     }
 
@@ -144,7 +142,7 @@ public class EntitySpider extends EntityMob {
             int i0 = ((SpiderEffectsGroupData) object).a;
 
             if (i0 > 0 && Potion.a[i0] != null) {
-                this.d(new PotionEffect(i0, Integer.MAX_VALUE));
+                this.c(new PotionEffect(i0, Integer.MAX_VALUE));
             }
         }
 

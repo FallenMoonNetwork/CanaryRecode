@@ -19,14 +19,14 @@ public class EntityPigZombie extends EntityZombie {
         this.entity = new CanaryPigZombie(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(bp).a(0.0D);
         this.a(SharedMonsterAttributes.d).a(0.5D);
         this.a(SharedMonsterAttributes.e).a(5.0D);
     }
 
-    protected boolean bb() {
+    protected boolean be() {
         return false;
     }
 
@@ -42,13 +42,13 @@ public class EntityPigZombie extends EntityZombie {
 
         this.bu = this.j;
         if (this.bt > 0 && --this.bt == 0) {
-            this.a("mob.zombiepig.zpigangry", this.aW() * 2.0F, ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F) * 1.8F);
+            this.a("mob.zombiepig.zpigangry", this.aZ() * 2.0F, ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F) * 1.8F);
         }
 
         super.l_();
     }
 
-    public boolean bo() {
+    public boolean bs() {
         return this.q.r > 0 && this.q.b(this.E) && this.q.a((Entity) this, this.E).isEmpty() && !this.q.d(this.E);
     }
 
@@ -62,12 +62,12 @@ public class EntityPigZombie extends EntityZombie {
         this.bs = nbttagcompound.d("Anger");
     }
 
-    protected Entity bH() {
-        return this.bs == 0 ? null : super.bH();
+    protected Entity bL() {
+        return this.bs == 0 ? null : super.bL();
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else {
             Entity entity = damagesource.i();
@@ -106,11 +106,11 @@ public class EntityPigZombie extends EntityZombie {
         return "mob.zombiepig.zpig";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.zombiepig.zpighurt";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.zombiepig.zpigdeath";
     }
 
@@ -142,13 +142,13 @@ public class EntityPigZombie extends EntityZombie {
         return Item.bo.cv;
     }
 
-    protected void bs() {
+    protected void bw() {
         this.c(0, new ItemStack(Item.I));
     }
 
     public EntityLivingData a(EntityLivingData entitylivingdata) {
         super.a(entitylivingdata);
-        this.j(false);
+        this.i(false);
         return entitylivingdata;
     }
 }

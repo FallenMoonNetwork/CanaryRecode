@@ -97,7 +97,7 @@ public final class EntityNonPlayableCharacter extends EntityPlayer {
         getNPC().destroyed();
     }
 
-    protected void be() {
+    protected void bh() {
         this.move_helper.c();
     }
 

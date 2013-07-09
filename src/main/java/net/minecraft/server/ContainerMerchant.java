@@ -107,7 +107,7 @@ public class ContainerMerchant extends Container {
 
             itemstack = this.f.a_(1);
             if (itemstack != null) {
-                entityplayer.c(itemstack);
+                entityplayer.b(itemstack);
             }
         }
     }

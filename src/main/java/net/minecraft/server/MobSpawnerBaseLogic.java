@@ -1,13 +1,11 @@
 package net.minecraft.server;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import net.canarymod.api.CanaryMobSpawnerLogic;
 import net.canarymod.api.MobSpawnerLogic;
-
 
 public abstract class MobSpawnerBaseLogic {
 
@@ -27,6 +25,7 @@ public abstract class MobSpawnerBaseLogic {
 
     // CanaryMod: Variable Declaration
     public MobSpawnerLogic logic = (MobSpawnerLogic) new CanaryMobSpawnerLogic(this);
+
     // CanaryMod: End
 
     public MobSpawnerBaseLogic() {}
@@ -100,7 +99,7 @@ public abstract class MobSpawnerBaseLogic {
                     EntityLiving entityliving = entity instanceof EntityLiving ? (EntityLiving) entity : null;
 
                     entity.b(d0, d3, d4, this.a().s.nextFloat() * 360.0F, 0.0F);
-                    if (entityliving == null || entityliving.bo()) {
+                    if (entityliving == null || entityliving.bs()) {
                         this.a(entity);
                         this.a().e(2004, this.b(), this.c(), this.d(), 0);
                         if (entityliving != null) {

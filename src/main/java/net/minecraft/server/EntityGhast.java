@@ -24,7 +24,7 @@ public class EntityGhast extends EntityFlying implements IMob {
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else if ("fireball".equals(damagesource.n()) && damagesource.i() instanceof EntityPlayer) {
             super.a(damagesource, 1000.0F);
@@ -40,17 +40,17 @@ public class EntityGhast extends EntityFlying implements IMob {
         this.ah.a(16, Byte.valueOf((byte) 0));
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(10.0D);
     }
 
-    protected void bh() {
+    protected void bk() {
         if (!this.q.I && this.q.r == 0) {
             this.w();
         }
 
-        this.bk();
+        this.bo();
         this.bo = this.bp;
         double d0 = this.i - this.u;
         double d1 = this.j - this.v;
@@ -165,11 +165,11 @@ public class EntityGhast extends EntityFlying implements IMob {
         return "mob.ghast.moan";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.ghast.scream";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.ghast.death";
     }
 
@@ -193,15 +193,15 @@ public class EntityGhast extends EntityFlying implements IMob {
         }
     }
 
-    protected float aW() {
+    protected float aZ() {
         return 10.0F;
     }
 
-    public boolean bo() {
-        return this.ab.nextInt(20) == 0 && super.bo() && this.q.r > 0;
+    public boolean bs() {
+        return this.ab.nextInt(20) == 0 && super.bs() && this.q.r > 0;
     }
 
-    public int br() {
+    public int bv() {
         return 1;
     }
 

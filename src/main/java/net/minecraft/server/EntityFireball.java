@@ -212,17 +212,17 @@ public abstract class EntityFireball extends Entity {
         return true;
     }
 
-    public float X() {
+    public float Y() {
         return 1.0F;
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else {
             this.J();
             if (damagesource.i() != null) {
-                Vec3 vec3 = damagesource.i().Y();
+                Vec3 vec3 = damagesource.i().Z();
 
                 if (vec3 != null) {
                     this.x = vec3.c;

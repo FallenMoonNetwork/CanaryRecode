@@ -95,13 +95,13 @@ public abstract class EntityMinecart extends Entity {
         this.t = d2;
     }
 
-    public double W() {
+    public double X() {
         return (double) this.P * 0.0D - 0.30000001192092896D;
     }
 
     public boolean a(DamageSource damagesource, float f0) {
         if (!this.q.I && !this.M) {
-            if (this.ap()) {
+            if (this.aq()) {
                 return false;
             } else {
                 // CanaryMod: VehicleDamage
@@ -195,7 +195,7 @@ public abstract class EntityMinecart extends Entity {
                 if (Configuration.getWorldConfig(getCanaryWorld().getFqName()).isNetherAllowed()) {
                     if (this.o == null && this.aq++ >= i0) {
                         this.aq = i0;
-                        this.ao = this.aa();
+                        this.ao = this.ab();
                         byte b0;
 
                         if (this.q.t.i == -1) {
@@ -831,8 +831,8 @@ public abstract class EntityMinecart extends Entity {
         this.c = s0;
     }
 
-    public String al() {
-        return this.c != null ? this.c : super.al();
+    public String am() {
+        return this.c != null ? this.c : super.am();
     }
 
     public boolean c() {

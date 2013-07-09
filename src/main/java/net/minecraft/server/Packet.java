@@ -22,7 +22,7 @@ public abstract class Packet {
     public static long p;
     public static long q;
     public static long r;
-    public boolean s = false;
+    public boolean s;
 
     public Packet() {}
 
@@ -82,9 +82,7 @@ public abstract class Packet {
         boolean flag1 = false;
         Packet packet = null;
         int i0 = socket.getSoTimeout();
-
         int i1;
-
         try {
             i1 = datainput.readUnsignedByte();
             if (flag0 && !c.contains(Integer.valueOf(i1)) || !flag0 && !b.contains(Integer.valueOf(i1))) {
@@ -106,6 +104,7 @@ public abstract class Packet {
             p += (long) packet.a();
         } catch (EOFException eofexception) {
             ilogagent.c("Reached end of stream for " + socket.getInetAddress());
+            eofexception.printStackTrace();
             return null;
         }
 
@@ -299,6 +298,7 @@ public abstract class Packet {
         a(130, true, true, Packet130UpdateSign.class);
         a(131, true, false, Packet131MapData.class);
         a(132, true, false, Packet132TileEntityData.class);
+        a(133, true, false, Packet133TileEditorOpen.class);
         a(200, true, false, Packet200Statistic.class);
         a(201, true, false, Packet201PlayerInfo.class);
         a(202, true, true, Packet202PlayerAbilities.class);

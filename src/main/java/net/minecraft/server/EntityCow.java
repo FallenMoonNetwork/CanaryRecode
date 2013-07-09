@@ -19,12 +19,12 @@ public class EntityCow extends EntityAnimal {
         this.entity = new CanaryCow(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean bb() {
+    public boolean be() {
         return true;
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(10.0D);
         this.a(SharedMonsterAttributes.d).a(0.20000000298023224D);
     }
@@ -33,11 +33,11 @@ public class EntityCow extends EntityAnimal {
         return "mob.cow.say";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.cow.hurt";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.cow.hurt";
     }
 
@@ -45,7 +45,7 @@ public class EntityCow extends EntityAnimal {
         this.a("mob.cow.step", 0.15F, 1.0F);
     }
 
-    protected float aW() {
+    protected float aZ() {
         return 0.4F;
     }
 
@@ -65,7 +65,7 @@ public class EntityCow extends EntityAnimal {
         i1 = this.ab.nextInt(3) + 1 + this.ab.nextInt(1 + i0);
 
         for (i2 = 0; i2 < i1; ++i2) {
-            if (this.ad()) {
+            if (this.ae()) {
                 this.b(Item.bl.cv, 1);
             } else {
                 this.b(Item.bk.cv, 1);

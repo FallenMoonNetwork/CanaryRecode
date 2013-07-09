@@ -38,7 +38,7 @@ public class CanaryPig extends CanaryEntityAnimal implements Pig {
      */
     @Override
     public boolean isSaddled() {
-        return ((EntityPig) entity).bP();
+        return ((EntityPig) entity).bT();
     }
 
     /**
@@ -46,7 +46,7 @@ public class CanaryPig extends CanaryEntityAnimal implements Pig {
      */
     @Override
     public void setSaddled(boolean saddled) {
-        ((EntityPig) entity).j(saddled);
+        ((EntityPig) entity).i(saddled);
     }
 
     /**

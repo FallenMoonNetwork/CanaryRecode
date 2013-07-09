@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -9,9 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import net.canarymod.api.nbt.CanaryCompoundTag;
-
 
 public class SaveHandler implements ISaveHandler, IPlayerFileData {
 
@@ -44,6 +41,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
     // CanaryMod added getname
     /**
      * get the base name of this world saver (only world name, without dimension appendix)
+     * 
      * @return
      */
     public String getBaseName() {
@@ -53,6 +51,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
     // CanaryMod
     /**
      * get the dir folder (worlds/)
+     * 
      * @return
      */
     public File getWorldBaseDir() {
@@ -66,7 +65,8 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
 
             try {
                 dataoutputstream.writeLong(this.d);
-            } finally {
+            }
+            finally {
                 dataoutputstream.close();
             }
         } catch (IOException ioexception) {
@@ -89,7 +89,8 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
                 if (datainputstream.readLong() != this.d) {
                     throw new MinecraftException("The save is being accessed from another location, aborting");
                 }
-            } finally {
+            }
+            finally {
                 datainputstream.close();
             }
         } catch (IOException ioexception) {
@@ -272,8 +273,8 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
         return this.e;
     }
 
-    //CanaryMod enable writing dat files from player name and a given base tag
-    //This is a copy of this.a(EntityPlayer and might need adjustments accordingly!)
+    // CanaryMod enable writing dat files from player name and a given base tag
+    // This is a copy of this.a(EntityPlayer and might need adjustments accordingly!)
     public void writePlayerNbt(String player, CanaryCompoundTag tag) {
         try {
             NBTTagCompound nbttagcompound = tag.getHandle();

@@ -1,14 +1,12 @@
 package net.minecraft.server;
 
-
 import java.util.Iterator;
 import java.util.List;
 import net.canarymod.api.world.blocks.CanaryBeacon;
 
-
 public class TileEntityBeacon extends TileEntity implements IInventory {
 
-    public static final Potion[][] a = new Potion[][] { { Potion.c, Potion.e}, { Potion.m, Potion.j}, { Potion.g}, { Potion.l}};
+    public static final Potion[][] a = new Potion[][]{ { Potion.c, Potion.e }, { Potion.m, Potion.j }, { Potion.g }, { Potion.l } };
     private boolean d;
     private int e = -1;
     private int f;
@@ -46,7 +44,7 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
 
             while (iterator.hasNext()) {
                 entityplayer = (EntityPlayer) iterator.next();
-                entityplayer.d(new PotionEffect(this.f, 180, b0, true));
+                entityplayer.c(new PotionEffect(this.f, 180, b0, true));
             }
 
             if (this.e >= 4 && this.f != this.g && this.g > 0) {
@@ -54,7 +52,7 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
 
                 while (iterator.hasNext()) {
                     entityplayer = (EntityPlayer) iterator.next();
-                    entityplayer.d(new PotionEffect(this.g, 180, 0, true));
+                    entityplayer.c(new PotionEffect(this.g, 180, 0, true));
                 }
             }
         }

@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-
 public class WorldServerMulti extends WorldServer {
 
     public WorldServerMulti(MinecraftServer minecraftserver, ISaveHandler isavehandler, String s0, int i0, WorldSettings worldsettings, WorldServer worldserver, Profiler profiler, ILogAgent ilogagent) {

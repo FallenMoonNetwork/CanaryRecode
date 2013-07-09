@@ -13,6 +13,6 @@ public class ContainerHorseInventorySlotArmor extends Slot { // CanaryMod: packa
     }
 
     public boolean a(ItemStack itemstack) {
-        return super.a(itemstack) && this.a.cr() && EntityHorse.v(itemstack.d) && !this.e();
+        return super.a(itemstack) && this.a.cv() && EntityHorse.v(itemstack.d);
     }
 }

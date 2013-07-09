@@ -15,8 +15,6 @@ public abstract class EntityHanging extends Entity {
 
     public EntityHanging(World world) {
         super(world);
-        this.e = 0;
-        this.a = 0;
         this.N = 0.0F;
         this.a(0.5F, 0.5F);
     }
@@ -179,7 +177,7 @@ public abstract class EntityHanging extends Entity {
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else {
             if (!this.M && !this.q.I) {
@@ -277,6 +275,10 @@ public abstract class EntityHanging extends Entity {
     public abstract int e();
 
     public abstract void b(Entity entity);
+
+    protected boolean O() {
+        return false;
+    }
 
     // CanaryMod
     public int getTickCounter() {

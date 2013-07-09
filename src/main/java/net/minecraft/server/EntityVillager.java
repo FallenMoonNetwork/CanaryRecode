@@ -44,7 +44,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         this.c.a(2, new EntityAIMoveIndoors(this));
         this.c.a(3, new EntityAIRestrictOpenDoor(this));
         this.c.a(4, new EntityAIOpenDoor(this, true));
-        this.c.a(5, new EntityAIMoveTwardsRestriction(this, 0.6D));
+        this.c.a(5, new EntityAIMoveTowardsRestriction(this, 0.6D));
         this.c.a(6, new EntityAIVillagerMate(this));
         this.c.a(7, new EntityAIFollowGolem(this));
         this.c.a(8, new EntityAIPlay(this, 0.32D));
@@ -55,22 +55,22 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         this.entity = new CanaryVillager(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.d).a(0.5D);
     }
 
-    public boolean bb() {
+    public boolean be() {
         return true;
     }
 
-    protected void bg() {
+    protected void bj() {
         if (--this.bq <= 0) {
             this.q.A.a(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w));
             this.bq = 70 + this.ab.nextInt(50);
             this.bp = this.q.A.a(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w), 32);
             if (this.bp == null) {
-                this.bN();
+                this.bR();
             } else {
                 ChunkCoordinates chunkcoordinates = this.bp.a();
 
@@ -82,7 +82,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
             }
         }
 
-        if (!this.bS() && this.bv > 0) {
+        if (!this.bW() && this.bv > 0) {
             --this.bv;
             if (this.bv <= 0) {
                 if (this.bw) {
@@ -106,21 +106,21 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
                     }
                 }
 
-                this.d(new PotionEffect(Potion.l.H, 200, 0));
+                this.c(new PotionEffect(Potion.l.H, 200, 0));
             }
         }
 
-        super.bg();
+        super.bj();
     }
 
     public boolean a(EntityPlayer entityplayer) {
         ItemStack itemstack = entityplayer.bn.h();
         boolean flag0 = itemstack != null && itemstack.d == Item.bE.cv;
 
-        if (!flag0 && this.R() && !this.bS() && !this.g_()) {
+        if (!flag0 && this.S() && !this.bW() && !this.g_()) {
             if (!this.q.I) {
                 this.a_(entityplayer);
-                entityplayer.a((IMerchant) this, this.bw());
+                entityplayer.a((IMerchant) this, this.bA());
             }
 
             return true;
@@ -136,7 +136,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("Profession", this.bP());
+        nbttagcompound.a("Profession", this.bT());
         nbttagcompound.a("Riches", this.bx);
         if (this.bu != null) {
             nbttagcompound.a("Offers", this.bu.a());
@@ -159,14 +159,14 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
     }
 
     protected String r() {
-        return this.bS() ? "mob.villager.haggle" : "mob.villager.idle";
+        return this.bW() ? "mob.villager.haggle" : "mob.villager.idle";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.villager.hit";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.villager.death";
     }
 
@@ -174,23 +174,23 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         this.ah.b(16, Integer.valueOf(i0));
     }
 
-    public int bP() {
+    public int bT() {
         return this.ah.c(16);
     }
 
-    public boolean bQ() {
+    public boolean bU() {
         return this.br;
     }
 
-    public void j(boolean flag0) {
+    public void i(boolean flag0) {
         this.br = flag0;
     }
 
-    public void k(boolean flag0) {
+    public void j(boolean flag0) {
         this.bs = flag0;
     }
 
-    public boolean bR() {
+    public boolean bV() {
         return this.bs;
     }
 
@@ -206,7 +206,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
                 }
 
                 this.bp.a(((EntityPlayer) entitylivingbase).c_(), b0);
-                if (this.R()) {
+                if (this.S()) {
                     this.q.a((Entity) this, (byte) 13);
                 }
             }
@@ -243,14 +243,14 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         return this.bt;
     }
 
-    public boolean bS() {
+    public boolean bW() {
         return this.bt != null;
     }
 
     public void a(MerchantRecipe merchantrecipe) {
         merchantrecipe.f();
         this.a_ = -this.o();
-        this.a("mob.villager.yes", this.aW(), this.aX());
+        this.a("mob.villager.yes", this.aZ(), this.ba());
         if (merchantrecipe.a((MerchantRecipe) this.bu.get(this.bu.size() - 1))) {
             this.bv = 40;
             this.bw = true;
@@ -270,9 +270,9 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         if (!this.q.I && this.a_ > -this.o() + 20) {
             this.a_ = -this.o();
             if (itemstack != null) {
-                this.a("mob.villager.yes", this.aW(), this.aX());
+                this.a("mob.villager.yes", this.aZ(), this.ba());
             } else {
-                this.a("mob.villager.no", this.aW(), this.aX());
+                this.a("mob.villager.no", this.aZ(), this.ba());
             }
         }
     }
@@ -285,7 +285,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         return this.bu;
     }
 
-    private float o(float f0) {
+    private float p(float f0) {
         float f1 = f0 + this.bA;
 
         return f1 > 0.9F ? 0.9F - (f1 - 0.9F) : f1;
@@ -303,34 +303,34 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         merchantrecipelist = new MerchantRecipeList();
         int i1;
 
-        label50: switch (this.bP()) {
+        label50: switch (this.bT()) {
             case 0:
-                a(merchantrecipelist, Item.V.cv, this.ab, this.o(0.9F));
-                a(merchantrecipelist, Block.ag.cF, this.ab, this.o(0.5F));
-                a(merchantrecipelist, Item.bm.cv, this.ab, this.o(0.5F));
-                a(merchantrecipelist, Item.aX.cv, this.ab, this.o(0.4F));
-                b(merchantrecipelist, Item.W.cv, this.ab, this.o(0.9F));
-                b(merchantrecipelist, Item.bh.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.l.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.be.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.bg.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.k.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.bn.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.n.cv, this.ab, this.o(0.5F));
-                if (this.ab.nextFloat() < this.o(0.5F)) {
+                a(merchantrecipelist, Item.V.cv, this.ab, this.p(0.9F));
+                a(merchantrecipelist, Block.ag.cF, this.ab, this.p(0.5F));
+                a(merchantrecipelist, Item.bm.cv, this.ab, this.p(0.5F));
+                a(merchantrecipelist, Item.aX.cv, this.ab, this.p(0.4F));
+                b(merchantrecipelist, Item.W.cv, this.ab, this.p(0.9F));
+                b(merchantrecipelist, Item.bh.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.l.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.be.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.bg.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.k.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.bn.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.n.cv, this.ab, this.p(0.5F));
+                if (this.ab.nextFloat() < this.p(0.5F)) {
                     merchantrecipelist.add(new MerchantRecipe(new ItemStack(Block.K, 10), new ItemStack(Item.bJ), new ItemStack(Item.ar.cv, 4 + this.ab.nextInt(2), 0)));
                 }
                 break;
 
             case 1:
-                a(merchantrecipelist, Item.aM.cv, this.ab, this.o(0.8F));
-                a(merchantrecipelist, Item.aN.cv, this.ab, this.o(0.8F));
-                a(merchantrecipelist, Item.bI.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Block.as.cF, this.ab, this.o(0.8F));
-                b(merchantrecipelist, Block.R.cF, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.aS.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.aU.cv, this.ab, this.o(0.2F));
-                if (this.ab.nextFloat() < this.o(0.07F)) {
+                a(merchantrecipelist, Item.aM.cv, this.ab, this.p(0.8F));
+                a(merchantrecipelist, Item.aN.cv, this.ab, this.p(0.8F));
+                a(merchantrecipelist, Item.bI.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Block.as.cF, this.ab, this.p(0.8F));
+                b(merchantrecipelist, Block.R.cF, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.aS.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.aU.cv, this.ab, this.p(0.2F));
+                if (this.ab.nextFloat() < this.p(0.07F)) {
                     Enchantment enchantment = Enchantment.c[this.ab.nextInt(Enchantment.c.length)];
                     int i2 = MathHelper.a(this.ab, enchantment.d(), enchantment.b());
                     ItemStack itemstack = Item.bY.a(new EnchantmentData(enchantment, i2));
@@ -341,10 +341,10 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
                 break;
 
             case 2:
-                b(merchantrecipelist, Item.bC.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.bF.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.aE.cv, this.ab, this.o(0.4F));
-                b(merchantrecipelist, Block.bi.cF, this.ab, this.o(0.3F));
+                b(merchantrecipelist, Item.bC.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.bF.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.aE.cv, this.ab, this.p(0.4F));
+                b(merchantrecipelist, Block.bi.cF, this.ab, this.p(0.3F));
                 int[] aint = new int[]{ Item.s.cv, Item.B.cv, Item.ag.cv, Item.ak.cv, Item.j.cv, Item.E.cv, Item.i.cv, Item.D.cv };
                 int[] aint1 = aint;
                 int i3 = aint.length;
@@ -358,7 +358,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
 
                     int i4 = aint1[i1];
 
-                    if (this.ab.nextFloat() < this.o(0.05F)) {
+                    if (this.ab.nextFloat() < this.p(0.05F)) {
                         merchantrecipelist.add(new MerchantRecipe(new ItemStack(i4, 1, 0), new ItemStack(Item.bJ, 2 + this.ab.nextInt(3), 0), EnchantmentHelper.a(this.ab, new ItemStack(i4, 1, 0), 5 + this.ab.nextInt(15))));
                     }
 
@@ -366,45 +366,45 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
                 }
 
             case 3:
-                a(merchantrecipelist, Item.o.cv, this.ab, this.o(0.7F));
-                a(merchantrecipelist, Item.q.cv, this.ab, this.o(0.5F));
-                a(merchantrecipelist, Item.r.cv, this.ab, this.o(0.5F));
-                a(merchantrecipelist, Item.p.cv, this.ab, this.o(0.5F));
-                b(merchantrecipelist, Item.s.cv, this.ab, this.o(0.5F));
-                b(merchantrecipelist, Item.B.cv, this.ab, this.o(0.5F));
-                b(merchantrecipelist, Item.j.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.E.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.i.cv, this.ab, this.o(0.5F));
-                b(merchantrecipelist, Item.D.cv, this.ab, this.o(0.5F));
-                b(merchantrecipelist, Item.h.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.C.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.R.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.S.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.ai.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.am.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.af.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.aj.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.ag.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.ak.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.ah.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.al.cv, this.ab, this.o(0.2F));
-                b(merchantrecipelist, Item.ae.cv, this.ab, this.o(0.1F));
-                b(merchantrecipelist, Item.ab.cv, this.ab, this.o(0.1F));
-                b(merchantrecipelist, Item.ac.cv, this.ab, this.o(0.1F));
-                b(merchantrecipelist, Item.ad.cv, this.ab, this.o(0.1F));
+                a(merchantrecipelist, Item.o.cv, this.ab, this.p(0.7F));
+                a(merchantrecipelist, Item.q.cv, this.ab, this.p(0.5F));
+                a(merchantrecipelist, Item.r.cv, this.ab, this.p(0.5F));
+                a(merchantrecipelist, Item.p.cv, this.ab, this.p(0.5F));
+                b(merchantrecipelist, Item.s.cv, this.ab, this.p(0.5F));
+                b(merchantrecipelist, Item.B.cv, this.ab, this.p(0.5F));
+                b(merchantrecipelist, Item.j.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.E.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.i.cv, this.ab, this.p(0.5F));
+                b(merchantrecipelist, Item.D.cv, this.ab, this.p(0.5F));
+                b(merchantrecipelist, Item.h.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.C.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.R.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.S.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.ai.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.am.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.af.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.aj.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.ag.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.ak.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.ah.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.al.cv, this.ab, this.p(0.2F));
+                b(merchantrecipelist, Item.ae.cv, this.ab, this.p(0.1F));
+                b(merchantrecipelist, Item.ab.cv, this.ab, this.p(0.1F));
+                b(merchantrecipelist, Item.ac.cv, this.ab, this.p(0.1F));
+                b(merchantrecipelist, Item.ad.cv, this.ab, this.p(0.1F));
                 break;
 
             case 4:
-                a(merchantrecipelist, Item.o.cv, this.ab, this.o(0.7F));
-                a(merchantrecipelist, Item.as.cv, this.ab, this.o(0.5F));
-                a(merchantrecipelist, Item.bk.cv, this.ab, this.o(0.5F));
-                b(merchantrecipelist, Item.aC.cv, this.ab, this.o(0.1F));
-                b(merchantrecipelist, Item.Y.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.aa.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.X.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.Z.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.at.cv, this.ab, this.o(0.3F));
-                b(merchantrecipelist, Item.bl.cv, this.ab, this.o(0.3F));
+                a(merchantrecipelist, Item.o.cv, this.ab, this.p(0.7F));
+                a(merchantrecipelist, Item.as.cv, this.ab, this.p(0.5F));
+                a(merchantrecipelist, Item.bk.cv, this.ab, this.p(0.5F));
+                b(merchantrecipelist, Item.aC.cv, this.ab, this.p(0.1F));
+                b(merchantrecipelist, Item.Y.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.aa.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.X.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.Z.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.at.cv, this.ab, this.p(0.3F));
+                b(merchantrecipelist, Item.bl.cv, this.ab, this.p(0.3F));
         }
 
         if (merchantrecipelist.isEmpty()) {
@@ -473,7 +473,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         return entitylivingdata;
     }
 
-    public void bT() {
+    public void bX() {
         this.bz = true;
     }
 
@@ -484,7 +484,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         return entityvillager;
     }
 
-    public boolean bC() {
+    public boolean bG() {
         return false;
     }
 

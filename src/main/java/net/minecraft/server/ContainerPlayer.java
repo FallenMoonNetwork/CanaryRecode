@@ -46,7 +46,6 @@ public class ContainerPlayer extends Container {
     }
 
     public void a(IInventory iinventory) {
-        // MERGE: This might contain wrong calls! - Chris
         ItemStack result = CraftingManager.a().a(this.a, this.h.q);
 
         // CanaryMod: Send custom recipe results to client

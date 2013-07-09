@@ -47,13 +47,13 @@ public class ItemFood extends Item {
         EatHook hook = (EatHook) new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), this.g(), this.i(), effects).call();
         if (!hook.isCanceled()) {
             --itemstack.b;
-            entityplayer.bD().a(hook.getLevelGain(), hook.getSaturationGain());
+            entityplayer.bH().a(hook.getLevelGain(), hook.getSaturationGain());
             world.a((Entity) entityplayer, "random.burp", 0.5F, world.s.nextFloat() * 0.1F + 0.9F);
             // this.c(itemstack, world, entityplayer); moved above and below
             if (hook.getPotionEffects() != null) {
                 for (net.canarymod.api.potion.PotionEffect effect : hook.getPotionEffects()) {
                     if (effect != null) {
-                        entityplayer.d(((CanaryPotionEffect) effect).getHandle());
+                        entityplayer.c(((CanaryPotionEffect) effect).getHandle());
                     }
                 }
             }
@@ -64,7 +64,7 @@ public class ItemFood extends Item {
 
     protected void c(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if (!world.I && this.cC > 0 && world.s.nextFloat() < this.cF) {
-            entityplayer.d(new PotionEffect(this.cC, this.cD * 20, this.cE));
+            entityplayer.c(new PotionEffect(this.cC, this.cD * 20, this.cE));
         }
     }
 

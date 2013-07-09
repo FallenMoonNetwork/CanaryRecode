@@ -38,7 +38,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public boolean isVillager() {
-        return ((EntityZombie) entity).bP();
+        return getHandle().bT();
     }
 
     /**
@@ -46,7 +46,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public void setVillager(boolean villager) {
-        ((EntityZombie) entity).j(villager);
+        getHandle().i(villager);
     }
 
     /**
@@ -54,7 +54,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public boolean isChild() {
-        return ((EntityZombie) entity).g_();
+        return getHandle().g_();
     }
 
     /**
@@ -62,7 +62,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public void setChild(boolean child) {
-        ((EntityZombie) entity).a(child);
+        getHandle().a(child);
     }
 
     /**
@@ -70,7 +70,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public int getConversionTime() {
-        return ((EntityZombie) entity).getConvertTicks();
+        return getHandle().getConvertTicks();
     }
 
     /**
@@ -78,7 +78,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public void setConversionTime(int ticks) {
-        ((EntityZombie) entity).a(ticks);
+        getHandle().b(ticks);
     }
 
     /**
@@ -86,7 +86,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public boolean isConverting() {
-        return ((EntityZombie) entity).bR();
+        return getHandle().bV();
     }
 
     /**
@@ -94,7 +94,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public void stopConverting() {
-        ((EntityZombie) entity).stopConversion();
+        getHandle().stopConversion();
     }
 
     /**
@@ -102,7 +102,7 @@ public class CanaryZombie extends CanaryEntityMob implements Zombie {
      */
     @Override
     public void convertToVillager() {
-        ((EntityZombie) entity).bS();
+        getHandle().bS();
     }
 
     /**

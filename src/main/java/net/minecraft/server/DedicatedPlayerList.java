@@ -5,7 +5,7 @@ import net.canarymod.config.Configuration;
 
 public class DedicatedPlayerList extends ServerConfigurationManager {
 
-    //  CanaryMod removed whitelist
+    // CanaryMod removed whitelist
     // CanaryMod: removed ops
 
     public DedicatedPlayerList(DedicatedServer dedicatedserver) {
@@ -31,17 +31,17 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     }
 
     public void h(String s0) {
-        //CanaryMod re-route to our whitelist
+        // CanaryMod re-route to our whitelist
         Canary.whitelist().removePlayer(s0);
     }
 
     public void g(String s0) {
-        //Canary, re-route to our whitelist
+        // Canary, re-route to our whitelist
         Canary.whitelist().addPlayer(s0);
     }
 
     public void j() {
-        //Load whitelist
+        // Load whitelist
         throw new UnsupportedOperationException("Minecraft whitelist is disabled! Cannot load");
     }
 
@@ -79,36 +79,36 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     }
 
     private void v() {
-//        try {
-//            this.h().clear();
-//            BufferedReader bufferedreader = new BufferedReader(new FileReader(this.e));
-//            String s0 = "";
-//
-//            while ((s0 = bufferedreader.readLine()) != null) {
-//                this.h().add(s0.trim().toLowerCase());
-//            }
-//
-//            bufferedreader.close();
-//        } catch (Exception exception) {
-//            this.s().an().b("Failed to load white-list: " + exception);
-//        }
+        // try {
+        // this.h().clear();
+        // BufferedReader bufferedreader = new BufferedReader(new FileReader(this.e));
+        // String s0 = "";
+        //
+        // while ((s0 = bufferedreader.readLine()) != null) {
+        // this.h().add(s0.trim().toLowerCase());
+        // }
+        //
+        // bufferedreader.close();
+        // } catch (Exception exception) {
+        // this.s().an().b("Failed to load white-list: " + exception);
+        // }
     }
 
     private void w() {
-//        try {
-//            PrintWriter printwriter = new PrintWriter(new FileWriter(this.e, false));
-//            Iterator iterator = this.h().iterator();
-//
-//            while (iterator.hasNext()) {
-//                String s0 = (String) iterator.next();
-//
-//                printwriter.println(s0);
-//            }
-//
-//            printwriter.close();
-//        } catch (Exception exception) {
-//            this.s().an().b("Failed to save white-list: " + exception);
-//        }
+        // try {
+        // PrintWriter printwriter = new PrintWriter(new FileWriter(this.e, false));
+        // Iterator iterator = this.h().iterator();
+        //
+        // while (iterator.hasNext()) {
+        // String s0 = (String) iterator.next();
+        //
+        // printwriter.println(s0);
+        // }
+        //
+        // printwriter.close();
+        // } catch (Exception exception) {
+        // this.s().an().b("Failed to save white-list: " + exception);
+        // }
     }
 
     public boolean d(String s0) {

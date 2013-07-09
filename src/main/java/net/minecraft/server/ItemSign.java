@@ -59,9 +59,9 @@ public class ItemSign extends Item {
                 if (i3 == 1) {
                     int i4 = MathHelper.c((double) ((entityplayer.A + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
 
-                    world.f(i0, i1, i2, Block.aI.cF, i4, 2);
+                    world.f(i0, i1, i2, Block.aI.cF, i4, 3);
                 } else {
-                    world.f(i0, i1, i2, Block.aN.cF, i3, 2);
+                    world.f(i0, i1, i2, Block.aN.cF, i3, 3);
                 }
 
                 --itemstack.b;

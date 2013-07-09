@@ -69,12 +69,12 @@ public class EntityBoat extends Entity {
         this.entity = new CanaryBoat(this); // CanaryMod: Wrap Entity
     }
 
-    public double W() {
+    public double X() {
         return (double) this.P * 0.0D - 0.30000001192092896D;
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else if (!this.q.I && !this.M) {
             // CanaryMod: VehicleDamage
@@ -340,12 +340,12 @@ public class EntityBoat extends Entity {
         }
     }
 
-    public void U() {
+    public void V() {
         if (this.n != null) {
             double d0 = Math.cos((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
             double d1 = Math.sin((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
 
-            this.n.b(this.u + d0, this.v + this.W() + this.n.V(), this.w + d1);
+            this.n.b(this.u + d0, this.v + this.X() + this.n.W(), this.w + d1);
         }
     }
 

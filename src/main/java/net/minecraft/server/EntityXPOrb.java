@@ -116,7 +116,7 @@ public class EntityXPOrb extends Entity {
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.ap()) {
+        if (this.aq()) {
             return false;
         } else {
             this.J();
@@ -161,7 +161,7 @@ public class EntityXPOrb extends Entity {
         return i0 >= 2477 ? 2477 : (i0 >= 1237 ? 1237 : (i0 >= 617 ? 617 : (i0 >= 307 ? 307 : (i0 >= 149 ? 149 : (i0 >= 73 ? 73 : (i0 >= 37 ? 37 : (i0 >= 17 ? 17 : (i0 >= 7 ? 7 : (i0 >= 3 ? 3 : 1)))))))));
     }
 
-    public boolean ao() {
+    public boolean ap() {
         return false;
     }
 

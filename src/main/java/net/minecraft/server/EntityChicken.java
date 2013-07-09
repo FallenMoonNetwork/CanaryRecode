@@ -1,8 +1,6 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.entity.living.animal.CanaryChicken;
-
 
 public class EntityChicken extends EntityAnimal {
 
@@ -28,12 +26,12 @@ public class EntityChicken extends EntityAnimal {
         this.entity = new CanaryChicken(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean bb() {
+    public boolean be() {
         return true;
     }
 
-    protected void ax() {
-        super.ax();
+    protected void ay() {
+        super.ay();
         this.a(SharedMonsterAttributes.a).a(4.0D);
         this.a(SharedMonsterAttributes.d).a(0.25D);
     }
@@ -74,11 +72,11 @@ public class EntityChicken extends EntityAnimal {
         return "mob.chicken.say";
     }
 
-    protected String aK() {
+    protected String aN() {
         return "mob.chicken.hurt";
     }
 
-    protected String aL() {
+    protected String aO() {
         return "mob.chicken.hurt";
     }
 
@@ -97,7 +95,7 @@ public class EntityChicken extends EntityAnimal {
             this.b(Item.N.cv, 1);
         }
 
-        if (this.ad()) {
+        if (this.ae()) {
             this.b(Item.bn.cv, 1);
         } else {
             this.b(Item.bm.cv, 1);

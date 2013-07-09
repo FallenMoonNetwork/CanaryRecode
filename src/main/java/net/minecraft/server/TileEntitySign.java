@@ -1,14 +1,13 @@
 package net.minecraft.server;
 
-
 import net.canarymod.api.world.blocks.CanarySign;
-
 
 public class TileEntitySign extends TileEntity {
 
-    public String[] a = new String[] { "", "", "", ""};
+    public String[] a = new String[]{ "", "", "", "" };
     public int b = -1;
     private boolean c = true;
+    private EntityPlayer d;
 
     public TileEntitySign() {
         this.complexBlock = new CanarySign(this); // CanaryMod: wrap sign
@@ -43,6 +42,14 @@ public class TileEntitySign extends TileEntity {
 
     public boolean a() {
         return this.c;
+    }
+
+    public void a(EntityPlayer entityplayer) {
+        this.d = entityplayer;
+    }
+
+    public EntityPlayer b() {
+        return this.d;
     }
 
     // CanaryMod

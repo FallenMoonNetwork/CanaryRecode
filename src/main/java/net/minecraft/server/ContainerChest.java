@@ -2,7 +2,6 @@ package net.minecraft.server;
 
 import net.canarymod.api.inventory.Inventory;
 
-
 public class ContainerChest extends Container {
 
     private IInventory a;

@@ -46,7 +46,7 @@ public class MerchantRecipe {
     }
 
     public boolean a(MerchantRecipe merchantrecipe) {
-        return this.a.c == merchantrecipe.a.c && this.c.c == merchantrecipe.c.c ? this.b == null && merchantrecipe.b == null || this.b != null && merchantrecipe.b != null && this.b.c == merchantrecipe.b.c : false;
+        return this.a.d == merchantrecipe.a.d && this.c.d == merchantrecipe.c.d ? this.b == null && merchantrecipe.b == null || this.b != null && merchantrecipe.b != null && this.b.d == merchantrecipe.b.d : false;
     }
 
     public boolean b(MerchantRecipe merchantrecipe) {

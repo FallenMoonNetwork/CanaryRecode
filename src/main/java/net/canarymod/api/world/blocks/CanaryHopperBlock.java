@@ -82,7 +82,7 @@ public class CanaryHopperBlock extends CanaryContainerBlock implements HopperBlo
      */
     @Override
     public World getWorld() {
-        return this.getTileEntity().ay().getCanaryWorld();
+        return this.getTileEntity().az().getCanaryWorld();
     }
 
     /**

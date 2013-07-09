@@ -652,7 +652,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public String z() {
-        return "1.6.1";
+        return "1.6.2";
     }
 
     public int A() {

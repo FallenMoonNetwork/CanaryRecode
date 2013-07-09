@@ -1,10 +1,8 @@
 package net.minecraft.server;
 
-
 import java.util.Iterator;
 import java.util.List;
 import net.canarymod.api.entity.throwable.CanaryEntityPotion;
-
 
 public class EntityPotion extends EntityThrowable {
 
@@ -41,7 +39,7 @@ public class EntityPotion extends EntityThrowable {
     }
 
     // CanaryMod: remove unneeded method override
-    // protected float g() {
+    // protected float e() {
     // return 0.05F;
     // }
     //
@@ -104,7 +102,7 @@ public class EntityPotion extends EntityThrowable {
                                     int i1 = (int) (d1 * (double) potioneffect.b() + 0.5D);
 
                                     if (i1 > 20) {
-                                        entitylivingbase.d(new PotionEffect(i0, i1, potioneffect.c()));
+                                        entitylivingbase.c(new PotionEffect(i0, i1, potioneffect.c()));
                                     }
                                 }
                             }

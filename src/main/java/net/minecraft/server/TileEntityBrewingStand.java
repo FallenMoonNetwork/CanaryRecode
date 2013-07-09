@@ -1,14 +1,12 @@
 package net.minecraft.server;
 
-
 import java.util.List;
 import net.canarymod.api.world.blocks.CanaryBrewingStand;
 
-
 public class TileEntityBrewingStand extends TileEntity implements ISidedInventory {
 
-    private static final int[] a = new int[] { 3};
-    private static final int[] b = new int[] { 0, 1, 2};
+    private static final int[] a = new int[]{ 3 };
+    private static final int[] b = new int[]{ 0, 1, 2 };
     public ItemStack[] c = new ItemStack[4]; // CanaryMod: private => public
     private int d;
     private int e;

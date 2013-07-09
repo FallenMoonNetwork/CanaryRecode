@@ -1,15 +1,14 @@
 package net.minecraft.server;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-
 
 public class SaveFormatOld implements ISaveFormat {
 
     protected final File a;
     protected net.canarymod.api.world.DimensionType type;
+
     // CanaryMod changed constructor
 
     public SaveFormatOld(File file1, net.canarymod.api.world.DimensionType type) {

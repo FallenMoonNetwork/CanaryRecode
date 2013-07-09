@@ -126,7 +126,7 @@ public class EntityFireworkRocket extends Entity {
         return super.d(f0);
     }
 
-    public boolean ao() {
+    public boolean ap() {
         return false;
     }
 
