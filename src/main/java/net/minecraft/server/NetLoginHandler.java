@@ -141,7 +141,7 @@ public class NetLoginHandler extends NetHandler {
                 if (hook.isCanceled()) {
                     return;
                 }
-                List list = Arrays.asList(new Serializable[]{ Integer.valueOf(1), Integer.valueOf(73), this.e.z(), hook.getMotd(), hook.getCurrentPlayers(), hook.getMaxPlayers() });
+                List list = Arrays.asList(new Serializable[]{ Integer.valueOf(1), Integer.valueOf(74), this.e.z(), hook.getMotd(), hook.getCurrentPlayers(), hook.getMaxPlayers() });
                 //
                 Object object;
 
