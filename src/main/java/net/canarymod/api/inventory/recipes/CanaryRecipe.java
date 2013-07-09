@@ -1,6 +1,9 @@
 package net.canarymod.api.inventory.recipes;
 
+import net.canarymod.api.inventory.CanaryPlayerCraftingMatrix;
+import net.canarymod.api.inventory.CraftingMatrix;
 import net.canarymod.api.inventory.Item;
+import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.minecraft.server.IRecipe;
 
 /**
@@ -24,6 +27,20 @@ public abstract class CanaryRecipe implements Recipe {
     @Override
     public int getRecipeSize() {
         return recipe.a();
+    }
+
+    public boolean matchesMatrix(CraftingMatrix matrix) {
+        if (matrix instanceof CanaryPlayerCraftingMatrix) {
+            if (getHandle().a(((CanaryPlayerCraftingMatrix) matrix).getInventoryHandle(), null)) {
+                return true;
+            }
+        }
+        else if (matrix instanceof CanaryWorkbench) {
+            if (getHandle().a(((CanaryWorkbench) matrix).getInventory(), null)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public abstract IRecipe getHandle();

@@ -1,6 +1,5 @@
 package net.canarymod.api.world.blocks;
 
-
 import java.util.Arrays;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
@@ -9,7 +8,6 @@ import net.minecraft.server.ContainerWorkbench;
 import net.minecraft.server.InventoryCrafting;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntity;
-
 
 /**
  * Workbench wrapper implementation
@@ -121,7 +119,7 @@ public class CanaryWorkbench extends CanaryContainerBlock implements Workbench {
         return container;
     }
 
-    private InventoryCrafting getInventory() {
+    public InventoryCrafting getInventory() {
         return container.a;
     }
 
