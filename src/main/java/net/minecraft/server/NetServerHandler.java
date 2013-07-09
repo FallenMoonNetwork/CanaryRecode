@@ -28,7 +28,7 @@ import net.canarymod.config.Configuration;
 import net.canarymod.hook.player.BlockLeftClickHook;
 import net.canarymod.hook.player.BlockRightClickHook;
 import net.canarymod.hook.player.DisconnectionHook;
-import net.canarymod.hook.player.PlayerLeftClickHook;
+import net.canarymod.hook.player.PlayerArmSwingHook;
 import net.canarymod.hook.player.PlayerMoveHook;
 import net.canarymod.hook.player.SignChangeHook;
 import net.canarymod.hook.player.SlotClickHook;
@@ -602,7 +602,7 @@ public class NetServerHandler extends NetHandler {
     public void a(Packet18Animation packet18animation) {
         if (packet18animation.b == 1) {
             // CanaryMod: PlayerLeftClick
-            new PlayerLeftClickHook(this.c.getPlayer()).call();
+            new PlayerArmSwingHook(this.c.getPlayer()).call();
             this.c.aU();
         }
     }

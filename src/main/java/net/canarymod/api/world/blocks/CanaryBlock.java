@@ -1,10 +1,13 @@
 package net.canarymod.api.world.blocks;
 
+import java.util.Random;
+import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 
 public class CanaryBlock implements Block {
+    private final static Random rndm = new Random(); // Passed to the idDropped method
     protected short type, data;
     protected byte status;
     protected int x, y, z;
@@ -173,6 +176,30 @@ public class CanaryBlock implements Block {
     @Override
     public Block getRelative(int x, int y, int z) {
         return this.dimension.getBlockAt(getX() + x, getY() + y, getZ() + z);
+    }
+
+    @Override
+    public int getIdDropped() {
+        return net.minecraft.server.Block.s[getTypeId()].a(0, rndm, 0);
+    }
+
+    @Override
+    public int getDamageDropped() {
+        return net.minecraft.server.Block.s[getTypeId()].a(getData());
+    }
+
+    @Override
+    public int getQuantityDropped() {
+        return net.minecraft.server.Block.s[getTypeId()].a(rndm);
+    }
+
+    @Override
+    public void dropBlockAsItem(boolean remove) {
+        net.minecraft.server.Block.s[getTypeId()].c(((CanaryWorld) getWorld()).getHandle(), getX(), getY(), getZ(), getData(), 1);
+        if (remove) {
+            this.setTypeId((short) 0);
+            this.update();
+        }
     }
 
     @Override
