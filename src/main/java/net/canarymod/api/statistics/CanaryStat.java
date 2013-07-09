@@ -1,9 +1,7 @@
 package net.canarymod.api.statistics;
 
-
 import net.canarymod.api.statistics.Stat;
 import net.minecraft.server.StatBase;
-
 
 /**
  * Stat wrapper implementation

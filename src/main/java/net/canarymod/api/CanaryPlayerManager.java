@@ -1,13 +1,10 @@
 package net.canarymod.api;
 
-
 import java.util.ArrayList;
-
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
-
 
 public class CanaryPlayerManager implements PlayerManager {
     private net.minecraft.server.PlayerManager pm;

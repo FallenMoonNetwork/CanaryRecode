@@ -1,7 +1,6 @@
 package net.canarymod;
 
 import java.util.ArrayList;
-
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.CanaryWorld;
@@ -14,7 +13,7 @@ import net.minecraft.server.Packet53BlockChange;
  * Portal Reconstruct Job
  * <p>
  * Task for delaying the rebuilding of a Portal so the PortalDestroyHook isn't spammed
- *
+ * 
  * @author YLivay (Phillip)
  * @author Jason (darkdiplomat)
  */

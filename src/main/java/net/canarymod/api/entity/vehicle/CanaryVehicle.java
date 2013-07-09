@@ -1,11 +1,9 @@
 package net.canarymod.api.entity.vehicle;
 
-
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;
 import net.minecraft.server.EntityBoat;
 import net.minecraft.server.EntityMinecart;
-
 
 /**
  * Vehicle implementation

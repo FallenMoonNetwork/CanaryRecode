@@ -1,10 +1,8 @@
 package net.canarymod.api.factory;
 
-
 import net.canarymod.api.potion.CanaryPotionEffect;
 import net.canarymod.api.potion.PotionEffect;
 import net.canarymod.api.potion.PotionEffectType;
-
 
 public class CanaryPotionFactory implements PotionFactory {
 
@@ -17,9 +15,9 @@ public class CanaryPotionFactory implements PotionFactory {
 
     @Override
     public PotionEffect newPotionEffect(PotionEffectType type, int duration, int amplifier) {
-        if(type == null) return null;
-        
+        if (type == null)
+            return null;
+
         return newPotionEffect(type.getID(), duration, amplifier);
     }
-
 }

@@ -1,7 +1,6 @@
 package net.canarymod.api.scoreboard;
 
 /**
- *
  * @author Somners
  */
 public class CanaryScoreObjective implements ScoreObjective {
@@ -19,7 +18,7 @@ public class CanaryScoreObjective implements ScoreObjective {
 
     @Override
     public ScoreObjectiveCriteria getScoreObjectiveCriteria() {
-        return ((net.minecraft.server.ScoreDummyCriteria)handle.c()).getCanaryScoreObjectiveCriteria();
+        return ((net.minecraft.server.ScoreDummyCriteria) handle.c()).getCanaryScoreObjectiveCriteria();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package net.canarymod.api.world.blocks;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -12,7 +11,6 @@ import net.minecraft.server.ContainerEnchantment;
 import net.minecraft.server.InventoryBasic;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityEnchantmentTable;
-
 
 /**
  * EnchantmentTable wrapper implementation

@@ -4,7 +4,6 @@ import java.util.List;
 import net.minecraft.server.ServerScoreboard;
 
 /**
- *
  * @author Somners
  */
 public class CanaryScore implements Score {
@@ -42,7 +41,7 @@ public class CanaryScore implements Score {
 
     @Override
     public Scoreboard getScoreboard() {
-        return ((ServerScoreboard)handle.f()).getCanaryScoreboard();
+        return ((ServerScoreboard) handle.f()).getCanaryScoreboard();
     }
 
     @Override

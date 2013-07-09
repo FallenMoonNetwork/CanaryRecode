@@ -9,7 +9,6 @@ import net.canarymod.channels.CustomPayloadChannelException;
 import net.minecraft.server.Packet250CustomPayload;
 
 /**
- *
  * @author Somners
  */
 public class CanaryChannelManager extends ChannelManager {

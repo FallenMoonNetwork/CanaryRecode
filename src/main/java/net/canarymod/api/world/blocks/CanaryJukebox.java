@@ -1,10 +1,8 @@
 package net.canarymod.api.world.blocks;
 
-
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.TileEntityRecordPlayer;
-
 
 /**
  * Jukebox wrapper implementation

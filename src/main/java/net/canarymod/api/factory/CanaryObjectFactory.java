@@ -1,13 +1,11 @@
 package net.canarymod.api.factory;
 
-
 import net.canarymod.api.CanaryMobSpawnerEntry;
 import net.canarymod.api.CanaryVillagerTrade;
 import net.canarymod.api.MobSpawnerEntry;
 import net.canarymod.api.VillagerTrade;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.inventory.Item;
-
 
 public class CanaryObjectFactory implements ObjectFactory {
 

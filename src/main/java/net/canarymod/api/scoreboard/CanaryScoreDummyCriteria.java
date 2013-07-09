@@ -3,7 +3,6 @@ package net.canarymod.api.scoreboard;
 import java.util.List;
 
 /**
- *
  * @author Somners
  */
 public class CanaryScoreDummyCriteria implements ScoreDummyCriteria {

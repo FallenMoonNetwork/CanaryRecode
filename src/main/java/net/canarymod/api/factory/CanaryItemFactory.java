@@ -1,6 +1,5 @@
 package net.canarymod.api.factory;
 
-
 import net.canarymod.api.inventory.CanaryEnchantment;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Enchantment;
@@ -8,10 +7,9 @@ import net.canarymod.api.inventory.Enchantment.Type;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
 
-
 /**
  * Item Factory
- *
+ * 
  * @author Brian (WWOL)
  * @author Jason (darkdiplomat)
  */
@@ -68,7 +66,7 @@ public class CanaryItemFactory implements ItemFactory {
         if (type == null) {
             return null;
         }
-        
+
         CanaryItem item = new CanaryItem(type.getId(), stackSize, damage);
         return item;
     }
@@ -81,8 +79,8 @@ public class CanaryItemFactory implements ItemFactory {
         if (item == null) {
             return null;
         }
-        
-        CanaryItem item2 = new CanaryItem(((CanaryItem)item).getHandle().m());
+
+        CanaryItem item2 = new CanaryItem(((CanaryItem) item).getHandle().m());
         return item2;
     }
 

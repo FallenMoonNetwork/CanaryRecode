@@ -1,8 +1,6 @@
 package net.canarymod.api.nbt;
 
-
 import net.minecraft.server.NBTTagShort;
-
 
 /**
  * ShortTag wrapper implementation

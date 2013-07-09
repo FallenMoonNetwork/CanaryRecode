@@ -1,6 +1,5 @@
 package net.canarymod.api.world.blocks;
 
-
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.Item;
@@ -10,10 +9,9 @@ import net.canarymod.config.Configuration;
 import net.minecraft.server.IInventory;
 import net.minecraft.server.ItemStack;
 
-
 /**
  * ContainerBlock buffer between ComplexBlock and those with Inventories
- *
+ * 
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryContainerBlock extends CanaryComplexBlock implements Inventory {
@@ -348,7 +346,6 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
         return hasItemStack(itemId, amount, 64, damage);
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -522,6 +519,7 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
 
     /**
      * Gets the inventory handle of this ContainerBlock
+     * 
      * @return
      */
     public IInventory getInventoryHandle() {

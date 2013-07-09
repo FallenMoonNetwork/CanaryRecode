@@ -1,8 +1,6 @@
 package net.canarymod.api.nbt;
 
-
 import net.minecraft.server.NBTTagString;
-
 
 /**
  * StringTag wrapper implementation

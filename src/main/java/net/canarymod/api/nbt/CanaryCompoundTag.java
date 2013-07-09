@@ -1,11 +1,9 @@
 package net.canarymod.api.nbt;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import net.minecraft.server.NBTBase;
 import net.minecraft.server.NBTTagCompound;
-
 
 /**
  * CompoundTag wrapper implementation

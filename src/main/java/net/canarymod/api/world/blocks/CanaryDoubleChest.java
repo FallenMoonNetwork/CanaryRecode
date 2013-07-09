@@ -1,6 +1,5 @@
 package net.canarymod.api.world.blocks;
 
-
 import java.util.Arrays;
 import net.canarymod.ToolBox;
 import net.canarymod.api.inventory.CanaryItem;
@@ -8,7 +7,6 @@ import net.canarymod.api.inventory.Item;
 import net.minecraft.server.InventoryLargeChest;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityChest;
-
 
 /**
  * DoubleChest implementation

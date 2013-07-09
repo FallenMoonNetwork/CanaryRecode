@@ -1,8 +1,6 @@
 package net.canarymod.api.entity.vehicle;
 
-
 import java.util.Arrays;
-
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
@@ -12,9 +10,7 @@ import net.minecraft.server.EntityMinecart;
 import net.minecraft.server.EntityMinecartContainer;
 import net.minecraft.server.ItemStack;
 
-
 /**
- *
  * @author Somners
  */
 public abstract class CanaryContainerMinecart extends CanaryMinecart implements ContainerMinecart {
@@ -340,24 +336,24 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
         return hasItemStack(itemId, amount, 64, damage);
     }
 
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
-//        for (int index = 0; index < getSize(); index++) {
-//            Item toCheck = getSlot(index);
-//
-//            if (toCheck != null && toCheck.getId() == itemId) {
-//                int am = toCheck.getAmount();
-//
-//                if (am > minAmount && am < maxAmount) {
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // public boolean hasItemStack(int itemId, int minAmount, int maxAmount) {
+    // for (int index = 0; index < getSize(); index++) {
+    // Item toCheck = getSlot(index);
+    //
+    // if (toCheck != null && toCheck.getId() == itemId) {
+    // int am = toCheck.getAmount();
+    //
+    // if (am > minAmount && am < maxAmount) {
+    // return true;
+    // }
+    // }
+    // }
+    // return false;
+    // }
 
     /**
      * {@inheritDoc}

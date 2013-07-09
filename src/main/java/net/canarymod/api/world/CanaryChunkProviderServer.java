@@ -1,8 +1,6 @@
 package net.canarymod.api.world;
 
-
 import net.minecraft.server.ChunkCoordIntPair;
-
 
 public class CanaryChunkProviderServer implements ChunkProvider {
 

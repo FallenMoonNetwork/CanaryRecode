@@ -1,10 +1,8 @@
 package net.canarymod.api;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.nbt.CanaryCompoundTag;
@@ -15,10 +13,9 @@ import net.minecraft.server.MobSpawnerBaseLogic;
 import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.NBTTagList;
 
-
 /**
  * Implementation of MobSpawnerLogic
- *
+ * 
  * @author Somners
  */
 public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
@@ -127,7 +124,7 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
         List<MobSpawnerEntry> list = new ArrayList<MobSpawnerEntry>();
         list.addAll(Arrays.asList(array));
         list.addAll(Arrays.asList(entries));
-        this.setSpawnedEntities((MobSpawnerEntry[])list.toArray(new MobSpawnerEntry[]{}));
+        this.setSpawnedEntities((MobSpawnerEntry[]) list.toArray(new MobSpawnerEntry[]{}));
     }
 
     @Override
@@ -139,13 +136,13 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
         if (toSet.containsKey("SpawnPotentials")) {
             ListTag<?> list = toSet.getListTag("SpawnPotentials");
             CanaryCompoundTag tag;
-            for (int i = 0; i < list.size() ; i++) {
-                tag = (CanaryCompoundTag)list.get(i);
-                net.minecraft.server.Entity ent = ((CanaryEntity)Canary.factory().getEntityFactory().newEntity(tag.getString("id"))).getHandle();
-                ent.setNBTProperties(((CanaryCompoundTag)tag.getCompoundTag("Properties")).getHandle());
+            for (int i = 0; i < list.size(); i++) {
+                tag = (CanaryCompoundTag) list.get(i);
+                net.minecraft.server.Entity ent = ((CanaryEntity) Canary.factory().getEntityFactory().newEntity(tag.getString("id"))).getHandle();
+                ent.setNBTProperties(((CanaryCompoundTag) tag.getCompoundTag("Properties")).getHandle());
                 array.add(new CanaryMobSpawnerEntry(ent.getCanaryEntity()));
             }
         }
-        return (MobSpawnerEntry[])array.toArray(new MobSpawnerEntry[]{});
+        return (MobSpawnerEntry[]) array.toArray(new MobSpawnerEntry[]{});
     }
 }

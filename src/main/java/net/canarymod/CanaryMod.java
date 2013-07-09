@@ -1,6 +1,5 @@
 package net.canarymod;
 
-
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.channels.CanaryChannelManager;
 import net.canarymod.api.factory.CanaryFactory;
@@ -23,10 +22,9 @@ import net.canarymod.user.UserAndGroupsProvider;
 import net.canarymod.user.WhitelistProvider;
 import net.canarymod.warp.WarpProvider;
 
-
 /**
  * The implementation of Canary, the new catch-all etc replacement, only much better :P
- *
+ * 
  * @author Chris Ksoll
  * @author Jos Kuijpers
  * @author Brian McCarthy
@@ -45,7 +43,7 @@ public class CanaryMod extends Canary {
         this.config = new Configuration();
         // Initialize the subsystems that do not rely on others
         this.commandManager = new CommandManager();
-//        this.permissionManager = new PermissionManager();
+        // this.permissionManager = new PermissionManager();
         this.hookExecutor = new HookExecutor();
         this.helpManager = new HelpManager();
         this.banManager = new BanManager();
@@ -82,8 +80,8 @@ public class CanaryMod extends Canary {
         try {
             this.commandManager.registerCommands(new CommandList(), Canary.getServer(), false);
         } catch (CommandDependencyException e) {
-            //Silently ignore this. If that happens someone intended to override system commands,
-            //which is perfectly fine.
+            // Silently ignore this. If that happens someone intended to override system commands,
+            // which is perfectly fine.
         }
     }
 

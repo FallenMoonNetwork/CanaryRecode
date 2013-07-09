@@ -1,8 +1,6 @@
 package net.canarymod.api.nbt;
 
-
 import net.minecraft.server.NBTTagLong;
-
 
 /**
  * LongTag wrapper implementation

@@ -7,7 +7,6 @@ import net.canarymod.api.world.World;
 import net.minecraft.server.ServerScoreboard;
 
 /**
- *
  * @author Somners
  */
 public class CanaryScoreboardManager implements ScoreboardManager {
@@ -25,12 +24,12 @@ public class CanaryScoreboardManager implements ScoreboardManager {
         if (world.getType() != DimensionType.fromId(0)) {
             world = Canary.getServer().getWorldManager().getWorld(world.getName(), DimensionType.fromId(0), true);
         }
-        return ((ServerScoreboard)((CanaryWorld)world).getHandle().D).getCanaryScoreboard();
+        return ((ServerScoreboard) ((CanaryWorld) world).getHandle().D).getCanaryScoreboard();
     }
 
     @Override
     public ScoreObjectiveCriteria getScoreCriteria(String name) {
-        return ((net.minecraft.server.ScoreDummyCriteria)net.minecraft.server.ScoreObjectiveCriteria.a.get(name)).getCanaryScoreObjectiveCriteria();
+        return ((net.minecraft.server.ScoreDummyCriteria) net.minecraft.server.ScoreObjectiveCriteria.a.get(name)).getCanaryScoreObjectiveCriteria();
     }
 
     @Override

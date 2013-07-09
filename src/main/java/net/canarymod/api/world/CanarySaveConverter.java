@@ -1,17 +1,13 @@
 package net.canarymod.api.world;
 
-
 import java.io.File;
-
 import net.canarymod.Canary;
-
 
 /**
  * MC Specific converter helper to move around vanilla world folder structure
  * to match canarymods world structure
- *
+ * 
  * @author chris
- *
  */
 public class CanarySaveConverter {
 
@@ -29,7 +25,7 @@ public class CanarySaveConverter {
     /**
      * Check if the world for this SaveConverter is in vanilla format.
      * This will also prepare folders for movement if required.
-     *
+     * 
      * @return
      */
     public boolean isVanillaFormat() {

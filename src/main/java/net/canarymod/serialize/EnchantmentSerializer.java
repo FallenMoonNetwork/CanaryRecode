@@ -1,10 +1,8 @@
 package net.canarymod.serialize;
 
-
 import net.canarymod.CanaryDeserializeException;
 import net.canarymod.api.inventory.CanaryEnchantment;
 import net.canarymod.api.inventory.Enchantment;
-
 
 public class EnchantmentSerializer implements Serializer<CanaryEnchantment> {
 

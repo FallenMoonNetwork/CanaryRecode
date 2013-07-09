@@ -1,6 +1,5 @@
 package net.canarymod.api;
 
-
 public class CanaryPacket implements Packet {
 
     private net.minecraft.server.Packet packet;

@@ -9,10 +9,9 @@ import net.minecraft.server.Packet;
 import net.minecraft.server.Packet208SetDisplayObjective;
 
 /**
- *
  * @author Somners
  */
-public class CanaryScoreboard implements Scoreboard{
+public class CanaryScoreboard implements Scoreboard {
 
     private net.minecraft.server.Scoreboard handle;
 
@@ -24,7 +23,7 @@ public class CanaryScoreboard implements Scoreboard{
     public List<ScoreObjective> getScoreObjectives() {
         List<ScoreObjective> toRet = new ArrayList<ScoreObjective>();
         for (Object o : handle.getAllScoreObjective()) {
-            net.minecraft.server.ScoreObjective objective = (net.minecraft.server.ScoreObjective)o;
+            net.minecraft.server.ScoreObjective objective = (net.minecraft.server.ScoreObjective) o;
             toRet.add(objective.getCanaryScoreObjective());
         }
         return toRet;
@@ -37,20 +36,18 @@ public class CanaryScoreboard implements Scoreboard{
 
     @Override
     public void addScoreObjective(String name, ScoreObjectiveCriteria criteria) {
-        this.handle.a(name, ((CanaryScoreDummyCriteria)criteria).getHandle());
+        this.handle.a(name, ((CanaryScoreDummyCriteria) criteria).getHandle());
     }
 
     @Override
     public void removeScoreObjective(ScoreObjective objective) {
-        this.handle.c(((CanaryScoreObjective)objective).getHandle());
+        this.handle.c(((CanaryScoreObjective) objective).getHandle());
     }
 
     @Override
     public ScoreObjective getScoreObjective(String name) {
         return handle.getScoreObjective(name).getCanaryScoreObjective();
     }
-
-
 
     @Override
     public void removeScoreObjective(String name) {
@@ -65,7 +62,7 @@ public class CanaryScoreboard implements Scoreboard{
     public List<Team> getTeams() {
         List<Team> toRet = new ArrayList<Team>();
         for (Object o : handle.g()) {
-            net.minecraft.server.ScorePlayerTeam team = (net.minecraft.server.ScorePlayerTeam)o;
+            net.minecraft.server.ScorePlayerTeam team = (net.minecraft.server.ScorePlayerTeam) o;
             toRet.add(team.getCanaryTeam());
         }
         return toRet;
@@ -73,18 +70,18 @@ public class CanaryScoreboard implements Scoreboard{
 
     @Override
     public void addTeam(Team team) {
-        handle.a(((CanaryTeam)team).getHandle());
+        handle.a(((CanaryTeam) team).getHandle());
     }
 
     @Override
     public void removeTeam(Team team) {
-        handle.c(((CanaryTeam)team).getHandle());
+        handle.c(((CanaryTeam) team).getHandle());
     }
 
     @Override
     public void removeTeam(String name) {
         for (Object o : handle.g()) {
-            net.minecraft.server.ScorePlayerTeam team = (net.minecraft.server.ScorePlayerTeam)o;
+            net.minecraft.server.ScorePlayerTeam team = (net.minecraft.server.ScorePlayerTeam) o;
             if (team.b().equalsIgnoreCase(name)) {
                 handle.c(team);
                 return;
@@ -99,15 +96,15 @@ public class CanaryScoreboard implements Scoreboard{
 
     @Override
     public Score getScore(String name, ScoreObjective scoreObjective) {
-        return handle.a(name, ((CanaryScoreObjective)scoreObjective).getHandle()).getCanaryScore();
+        return handle.a(name, ((CanaryScoreObjective) scoreObjective).getHandle()).getCanaryScore();
     }
 
     @Override
     public List<Score> getScores(ScoreObjective scoreObjective) {
-        Collection i = handle.i(((CanaryScoreObjective)scoreObjective).getHandle());
+        Collection i = handle.i(((CanaryScoreObjective) scoreObjective).getHandle());
         List<Score> scores = new ArrayList<Score>();
         for (Object o : i) {
-            scores.add((Score)o);
+            scores.add((Score) o);
         }
         return scores;
     }
@@ -117,7 +114,7 @@ public class CanaryScoreboard implements Scoreboard{
         Collection i = handle.e();
         List<Score> scores = new ArrayList<Score>();
         for (Object o : i) {
-            scores.add((Score)o);
+            scores.add((Score) o);
         }
         return scores;
     }
@@ -128,12 +125,12 @@ public class CanaryScoreboard implements Scoreboard{
 
     @Override
     public void setScoreObjectivePostion(ScorePosition type, ScoreObjective objective) {
-        handle.a(type.getId(), ((CanaryScoreObjective)objective).getHandle());
+        handle.a(type.getId(), ((CanaryScoreObjective) objective).getHandle());
     }
 
     @Override
     public void setScoreObjectivePostion(ScorePosition type, ScoreObjective objective, Player player) {
-        ((CanaryPlayer)player).getHandle().a.b((Packet) (new Packet208SetDisplayObjective(type.getId(), ((CanaryScoreObjective)objective).getHandle())));
+        ((CanaryPlayer) player).getHandle().a.b((Packet) (new Packet208SetDisplayObjective(type.getId(), ((CanaryScoreObjective) objective).getHandle())));
     }
 
 }

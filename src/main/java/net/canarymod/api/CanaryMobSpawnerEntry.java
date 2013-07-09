@@ -1,6 +1,5 @@
 package net.canarymod.api;
 
-
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.CanaryEntityItem;
@@ -12,9 +11,7 @@ import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.minecraft.server.EntityItem;
 import net.minecraft.server.NBTTagCompound;
 
-
 /**
- *
  * @author Somners
  */
 public class CanaryMobSpawnerEntry implements MobSpawnerEntry {

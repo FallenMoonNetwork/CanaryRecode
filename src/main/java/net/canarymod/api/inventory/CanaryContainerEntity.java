@@ -1,15 +1,13 @@
 package net.canarymod.api.inventory;
 
-
 import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.config.Configuration;
 import net.minecraft.server.IInventory;
 import net.minecraft.server.ItemStack;
 
-
 /**
  * Inventory implementation
- *
+ * 
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryContainerEntity implements Inventory {
@@ -453,7 +451,7 @@ public abstract class CanaryContainerEntity implements Inventory {
      */
     @Override
     public void setSlot(int index, Item value) {
-        if(value == null) {
+        if (value == null) {
             inventory.a(index, null);
         } else {
             inventory.a(index, ((CanaryItem) value).getHandle());

@@ -8,7 +8,7 @@ import net.canarymod.api.entity.living.EntityLiving;
  * 
  * @author Jason (darkdiplomat)
  */
-public abstract class CanaryEntityThrowable extends CanaryEntity implements EntityThrowable{
+public abstract class CanaryEntityThrowable extends CanaryEntity implements EntityThrowable {
 
     /**
      * Constructs a new wrapper for EntityThrowable
@@ -16,7 +16,7 @@ public abstract class CanaryEntityThrowable extends CanaryEntity implements Enti
      * @param entity
      *            the EntityThrowable to be wrapped
      */
-    public CanaryEntityThrowable(net.minecraft.server.EntityThrowable entity){
+    public CanaryEntityThrowable(net.minecraft.server.EntityThrowable entity) {
         super(entity);
     }
 
@@ -24,7 +24,7 @@ public abstract class CanaryEntityThrowable extends CanaryEntity implements Enti
      * {@inheritDoc}
      */
     @Override
-    public float getGravity(){
+    public float getGravity() {
         return ((net.minecraft.server.EntityThrowable) getHandle()).gravity;
     }
 
@@ -32,7 +32,7 @@ public abstract class CanaryEntityThrowable extends CanaryEntity implements Enti
      * {@inheritDoc}
      */
     @Override
-    public void setGravity(float velocity){
+    public void setGravity(float velocity) {
         ((net.minecraft.server.EntityThrowable) getHandle()).gravity = velocity;
     }
 
@@ -40,7 +40,7 @@ public abstract class CanaryEntityThrowable extends CanaryEntity implements Enti
      * {@inheritDoc}
      */
     @Override
-    public EntityLiving getThrower(){
+    public EntityLiving getThrower() {
         return (EntityLiving) ((net.minecraft.server.EntityThrowable) entity).h().getCanaryEntity();
     }
 
@@ -48,7 +48,7 @@ public abstract class CanaryEntityThrowable extends CanaryEntity implements Enti
      * {@inheritDoc}
      */
     @Override
-    public void setProjectileHeading(double motionX, double motionY, double motionZ, float rotationYaw, float rotationPitch){
+    public void setProjectileHeading(double motionX, double motionY, double motionZ, float rotationYaw, float rotationPitch) {
         ((net.minecraft.server.EntityThrowable) entity).c(motionX, motionY, motionZ, rotationYaw, rotationPitch);
     }
 }

@@ -1,9 +1,7 @@
 package net.canarymod.api.inventory.recipes;
 
-
 import java.util.ArrayList;
 import net.canarymod.api.inventory.CanaryItem;
-
 
 /**
  * Shaped Recipe Helper

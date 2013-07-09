@@ -10,7 +10,6 @@ import net.canarymod.api.world.position.Position;
 import net.minecraft.server.ChunkPosition;
 import net.minecraft.server.TileEntity;
 
-
 /**
  * Chunk implementation
  * 

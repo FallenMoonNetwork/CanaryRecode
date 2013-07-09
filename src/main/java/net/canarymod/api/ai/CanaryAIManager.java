@@ -6,7 +6,6 @@ import net.minecraft.server.EntityAITaskEntry;
 import net.minecraft.server.EntityAITasks;
 
 /**
- *
  * @author Somners
  */
 public class CanaryAIManager implements AIManager {
@@ -43,9 +42,9 @@ public class CanaryAIManager implements AIManager {
         if (this.hasTask(ai)) {
             Iterator<?> it = tasks.a.iterator();
             while (it.hasNext()) {
-                EntityAITaskEntry entry = (EntityAITaskEntry)it.next();
+                EntityAITaskEntry entry = (EntityAITaskEntry) it.next();
                 if (entry.a instanceof EntityAICanary) {
-                    if (((EntityAICanary)entry.a).getAIBase().getClass().equals(ai)) {
+                    if (((EntityAICanary) entry.a).getAIBase().getClass().equals(ai)) {
                         tasks.a(entry.a);
                         return true;
                     }
@@ -62,9 +61,9 @@ public class CanaryAIManager implements AIManager {
     public boolean hasTask(Class<? extends AIBase> ai) {
         Iterator<?> it = tasks.a.iterator();
         while (it.hasNext()) {
-            EntityAITaskEntry entry = (EntityAITaskEntry)it.next();
+            EntityAITaskEntry entry = (EntityAITaskEntry) it.next();
             if (entry.a instanceof EntityAICanary) {
-                if (((EntityAICanary)entry.a).getAIBase().getClass().equals(ai)) {
+                if (((EntityAICanary) entry.a).getAIBase().getClass().equals(ai)) {
                     return true;
                 }
             }
@@ -79,10 +78,10 @@ public class CanaryAIManager implements AIManager {
     public AIBase getTask(Class<? extends AIBase> ai) {
         Iterator<?> it = tasks.a.iterator();
         while (it.hasNext()) {
-            EntityAITaskEntry entry = (EntityAITaskEntry)it.next();
+            EntityAITaskEntry entry = (EntityAITaskEntry) it.next();
             if (entry.a instanceof EntityAICanary) {
-                if (((EntityAICanary)entry.a).getAIBase().getClass().equals(ai)) {
-                    return ((EntityAICanary)entry.a).getAIBase();
+                if (((EntityAICanary) entry.a).getAIBase().getClass().equals(ai)) {
+                    return ((EntityAICanary) entry.a).getAIBase();
                 }
             }
         }

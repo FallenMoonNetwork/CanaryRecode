@@ -1,12 +1,10 @@
 package net.canarymod.api.world.blocks;
 
-
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.potion.PotionEffectType;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityBeacon;
-
 
 /**
  * Beacon wrapper implementation
@@ -128,7 +126,7 @@ public class CanaryBeacon extends CanaryContainerBlock implements Beacon {
     @Override
     public Item[] clearInventory() {
         ItemStack stack = getTileEntity().a(0);
-        Item[] item = new Item[] { stack == null ? null : stack.getCanaryItem() };
+        Item[] item = new Item[]{ stack == null ? null : stack.getCanaryItem() };
 
         getTileEntity().a(0, null);
         return item;
@@ -141,7 +139,7 @@ public class CanaryBeacon extends CanaryContainerBlock implements Beacon {
     public Item[] getContents() {
         ItemStack stack = getTileEntity().a(0);
 
-        return new Item[] { stack == null ? null : stack.getCanaryItem() };
+        return new Item[]{ stack == null ? null : stack.getCanaryItem() };
     }
 
     /**

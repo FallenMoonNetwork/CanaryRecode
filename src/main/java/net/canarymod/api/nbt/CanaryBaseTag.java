@@ -1,6 +1,5 @@
 package net.canarymod.api.nbt;
 
-
 import net.minecraft.server.NBTBase;
 import net.minecraft.server.NBTTagByte;
 import net.minecraft.server.NBTTagByteArray;
@@ -14,10 +13,9 @@ import net.minecraft.server.NBTTagLong;
 import net.minecraft.server.NBTTagShort;
 import net.minecraft.server.NBTTagString;
 
-
 public abstract class CanaryBaseTag implements BaseTag {
     protected final NBTBase tag;
-    
+
     protected CanaryBaseTag(NBTBase tag) {
         this.tag = tag;
     }
@@ -46,17 +44,19 @@ public abstract class CanaryBaseTag implements BaseTag {
         }
         return false;
     }
-    
+
     @Override
     public int hashCode() {
         return tag.hashCode();
     }
-    
+
     protected abstract NBTBase getHandle();
-    
+
     /**
      * Wraps the given NBTBase in its corresponding Canary wrapper.
-     * @param tag The NBTBase tag to wrap.
+     * 
+     * @param tag
+     *            The NBTBase tag to wrap.
      * @return The wrapped tag. Null if the tag is of an unsupported type.
      */
     protected static CanaryBaseTag wrap(NBTBase tag) {

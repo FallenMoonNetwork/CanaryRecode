@@ -1,8 +1,6 @@
 package net.canarymod.api.nbt;
 
-
 import net.minecraft.server.NBTTagByteArray;
-
 
 /**
  * ByteArrayTag wrapper implementation
@@ -49,7 +47,7 @@ public class CanaryByteArrayTag extends CanaryBaseTag implements ByteArrayTag {
     public void setValue(byte[] value) {
         getHandle().a = value;
     }
-    
+
     /**
      * {@inheritDoc}
      */

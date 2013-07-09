@@ -1,6 +1,5 @@
 package net.canarymod.api;
 
-
 public class CanaryDataWatcher implements DataWatcher {
 
     private net.minecraft.server.DataWatcher dataWatcher;

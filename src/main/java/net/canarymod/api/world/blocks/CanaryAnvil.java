@@ -1,6 +1,5 @@
 package net.canarymod.api.world.blocks;
 
-
 import java.util.Arrays;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.inventory.CanaryItem;
@@ -12,10 +11,9 @@ import net.minecraft.server.InventoryCraftResult;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntity;
 
-
 /**
  * The implementation of Anvil
- *
+ * 
  * @author Somners
  */
 public class CanaryAnvil extends CanaryContainerBlock implements Anvil {

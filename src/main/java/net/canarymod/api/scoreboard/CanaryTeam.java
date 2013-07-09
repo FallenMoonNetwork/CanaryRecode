@@ -8,7 +8,6 @@ import net.minecraft.server.ScorePlayerTeam;
 import net.minecraft.server.ServerScoreboard;
 
 /**
- *
  * @author Somners
  */
 public class CanaryTeam implements Team {
@@ -58,7 +57,7 @@ public class CanaryTeam implements Team {
     public List<Player> getPlayers() {
         List<Player> toRet = new ArrayList<Player>();
         for (Object o : handle.d()) {
-            Player player = Canary.getServer().getPlayer((String)o);
+            Player player = Canary.getServer().getPlayer((String) o);
             if (player != null) {
                 toRet.add(player);
             }
@@ -70,7 +69,7 @@ public class CanaryTeam implements Team {
     public List<String> getPlayerNames() {
         List<String> toRet = new ArrayList<String>();
         for (Object o : handle.d()) {
-            toRet.add(((String)o));
+            toRet.add(((String) o));
         }
         return toRet;
     }
@@ -92,7 +91,7 @@ public class CanaryTeam implements Team {
 
     @Override
     public Scoreboard getScoreboard() {
-        return ((ServerScoreboard)handle.a).getCanaryScoreboard();
+        return ((ServerScoreboard) handle.a).getCanaryScoreboard();
     }
 
     @Override

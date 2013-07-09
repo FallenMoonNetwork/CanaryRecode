@@ -1,10 +1,8 @@
 package net.canarymod.api.entity.living.monster;
 
-
 import net.canarymod.api.entity.living.CanaryEntityLiving;
 import net.minecraft.server.EntityFlying;
 import net.minecraft.server.EntitySlime;
-
 
 /**
  * EntityMob wrapper implementation
