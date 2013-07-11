@@ -1,7 +1,7 @@
 package net.canarymod.api.potion;
 
-import net.canarymod.api.entity.living.CanaryEntityLiving;
-import net.canarymod.api.entity.living.EntityLiving;
+import net.canarymod.api.entity.living.CanaryLivingBase;
+import net.canarymod.api.entity.living.LivingBase;
 
 /**
  * PotionEffect wrapper implementation
@@ -66,8 +66,8 @@ public class CanaryPotionEffect implements PotionEffect {
      * {@inheritDoc}
      */
     @Override
-    public void performEffect(EntityLiving entity) {
-        net.minecraft.server.EntityLiving oLiving = (net.minecraft.server.EntityLiving) ((CanaryEntityLiving) entity).getHandle();
+    public void performEffect(LivingBase entity) {
+        net.minecraft.server.EntityLivingBase oLiving = (net.minecraft.server.EntityLivingBase) ((CanaryLivingBase) entity).getHandle();
 
         effect.b(oLiving);
     }
