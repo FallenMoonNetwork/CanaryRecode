@@ -5,7 +5,7 @@ import net.canarymod.api.VillagerTrade;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.entity.living.CanaryEntityLiving;
-import net.canarymod.api.entity.living.EntityLiving;
+import net.canarymod.api.entity.living.LivingBase;
 import net.canarymod.api.world.CanaryVillage;
 import net.canarymod.api.world.Village;
 import net.minecraft.server.EntityPlayer;
@@ -91,8 +91,8 @@ public class CanaryVillager extends CanaryEntityLiving implements Villager {
      * {@inheritDoc}
      */
     @Override
-    public void setRevengeTarget(EntityLiving targetEntity) {
-        getHandle().c((net.minecraft.server.EntityLiving) ((CanaryEntity) targetEntity).getHandle());
+    public void setRevengeTarget(LivingBase targetEntity) {
+        getHandle().c((net.minecraft.server.EntityLivingBase) ((CanaryEntity) targetEntity).getHandle());
     }
 
     /**

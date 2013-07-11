@@ -12,7 +12,9 @@ import net.minecraft.server.EntityItem;
 import net.minecraft.server.NBTTagCompound;
 
 /**
- * @author Somners
+ * MobSpawnerEntry wrapper implementation
+ * 
+ * @author Arron (somners)
  */
 public class CanaryMobSpawnerEntry implements MobSpawnerEntry {
 
@@ -37,26 +39,41 @@ public class CanaryMobSpawnerEntry implements MobSpawnerEntry {
         entity = new CanaryEntityItem(new EntityItem(null, 0, 0, 0, ((CanaryItem) item).getHandle()));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setWeight(int i) {
         weight = i > 0 ? i : 1;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getWeight() {
         return weight;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Entity getEntity() {
         return entity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setEntity(Entity entity) {
         this.entity = entity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isValid() {
         if (this.entity != null) {
@@ -65,6 +82,9 @@ public class CanaryMobSpawnerEntry implements MobSpawnerEntry {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BaseTag getSpawnPotentialsTag() {
         if (!this.isValid()) {

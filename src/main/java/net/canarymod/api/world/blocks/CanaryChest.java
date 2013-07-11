@@ -63,7 +63,7 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
             if ((cblock != null) && (cblock instanceof Chest)) {
                 Chest chest = (Chest) cblock;
 
-                return new CanaryDoubleChest(new InventoryLargeChest(getName(), this.inventory, ((CanaryChest) chest).getInventoryHandle()));
+                return new CanaryDoubleChest(new InventoryLargeChest(getInventoryName(), this.inventory, ((CanaryChest) chest).getInventoryHandle()));
             }
         }
 

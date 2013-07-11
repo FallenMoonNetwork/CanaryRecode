@@ -1,6 +1,8 @@
 package net.canarymod.api.entity.living.animal;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.EntityType;
+import net.canarymod.api.entity.living.LivingBase;
 import net.canarymod.api.inventory.CanaryAnimalInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.minecraft.server.EntityHorse;
@@ -37,6 +39,9 @@ public class CanaryHorse extends CanaryEntityAnimal implements Horse {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFqName() {
         return "Horse";
@@ -166,7 +171,7 @@ public class CanaryHorse extends CanaryEntityAnimal implements Horse {
      * {@inheritDoc}
      */
     @Override
-    public boolean isTame() {
+    public boolean isTamed() {
         return getHandle().bW();
     }
 
@@ -174,7 +179,7 @@ public class CanaryHorse extends CanaryEntityAnimal implements Horse {
      * {@inheritDoc}
      */
     @Override
-    public void setTame(boolean tame) {
+    public void setTamed(boolean tame) {
         getHandle().i(tame);
     }
 
@@ -190,8 +195,69 @@ public class CanaryHorse extends CanaryEntityAnimal implements Horse {
      * {@inheritDoc}
      */
     @Override
+    public int getGrowingAge() {
+        return getHandle().b();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setGrowingAge(int age) {
+        getHandle().a(age);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LivingBase getOwner() {
+        return Canary.getServer().getPlayer(getOwnerName());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getOwnerName() {
+        return getHandle().cb();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setOwner(LivingBase entity) {
+        setOwner(entity.getName());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setOwner(String name) {
+        getHandle().b(name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isSitting() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSitting(boolean sitting) {} // Horses can't sit
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public EntityHorse getHandle() {
         return (EntityHorse) entity;
     }
-
 }

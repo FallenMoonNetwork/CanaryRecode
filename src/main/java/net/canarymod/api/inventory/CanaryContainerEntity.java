@@ -513,9 +513,4 @@ public abstract class CanaryContainerEntity implements Inventory {
     public Item removeItem(ItemType type, short damage) {
         return this.removeItem(type.getId(), damage);
     }
-
-    @Override
-    public String getName() {
-        return inventory.b();
-    }
 }

@@ -24,14 +24,6 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
      * {@inheritDoc}
      */
     @Override
-    public String getName() {
-        return inventory.b();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void addItem(ItemType type) {
         this.addItem(type.getId(), 1, (short) 0);
     }
