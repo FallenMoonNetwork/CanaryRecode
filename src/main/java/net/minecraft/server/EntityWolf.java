@@ -1,7 +1,5 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.List;
 import net.canarymod.api.entity.living.animal.CanaryWolf;
 import net.canarymod.hook.entity.EntityTameHook;
 

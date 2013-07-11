@@ -21,6 +21,7 @@ import net.canarymod.api.nbt.IntArrayTag;
 import net.canarymod.api.nbt.IntTag;
 import net.canarymod.api.nbt.ListTag;
 import net.canarymod.api.nbt.LongTag;
+import net.canarymod.api.nbt.NBTTagType;
 import net.canarymod.api.nbt.ShortTag;
 import net.canarymod.api.nbt.StringTag;
 
@@ -114,4 +115,40 @@ public final class CanaryNBTFactory implements NBTFactory {
         return new CanaryStringTag(name, value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BaseTag newTagFromType(NBTTagType type, String name, Object value) {
+        try {
+            switch (type) {
+                case BYTE:
+                    return newByteTag(name, (Byte) value);
+                case BYTE_ARRAY:
+                    return newByteArrayTag(name, (byte[]) value);
+                case COMPOUND:
+                    return newCompoundTag(name);
+                case DOUBLE:
+                    return newDoubleTag(name, (Double) value);
+                case FLOAT:
+                    return newFloatTag(name, (Float) value);
+                case INT:
+                    return newIntTag(name, (Integer) value);
+                case INT_ARRAY:
+                    return newIntArrayTag(name, (int[]) value);
+                case LIST:
+                    return newListTag(name);
+                case LONG:
+                    return newLongTag(name, (Long) value);
+                case SHORT:
+                    return newShortTag(name, (Short) value);
+                case STRING:
+                    return newStringTag(name, (String) value);
+                default:
+                    return null;
+            }
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 }
