@@ -50,6 +50,14 @@ public class CanaryPotionEffect implements PotionEffect {
      * {@inheritDoc}
      */
     @Override
+    public boolean isAmbient() {
+        return effect.e();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getName() {
         return effect.f();
     }
