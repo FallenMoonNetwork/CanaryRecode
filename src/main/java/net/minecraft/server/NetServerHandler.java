@@ -96,7 +96,7 @@ public class NetServerHandler extends NetHandler {
 
     public void c(String s0) {
         // CanaryMod disconnect hook
-        DisconnectionHook hook = (DisconnectionHook) new DisconnectionHook(serverHandler.getUser(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.aw() }).a(EnumChatFormatting.o).toString()).call();
+        DisconnectionHook hook = (DisconnectionHook) new DisconnectionHook(serverHandler.getUser(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.c_() }).a(EnumChatFormatting.o).toString()).call();
         if (!this.b) {
             this.c.l();
             this.b(new Packet255KickDisconnect(s0));

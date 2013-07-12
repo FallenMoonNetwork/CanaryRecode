@@ -21,7 +21,6 @@ import net.canarymod.api.world.World;
 import net.canarymod.api.world.WorldManager;
 import net.canarymod.api.world.blocks.CanaryCommandBlock;
 import net.canarymod.api.world.blocks.CommandBlock;
-import net.canarymod.chat.TextFormat;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.command.ConsoleCommandHook;
 import net.canarymod.hook.system.PermissionCheckHook;
@@ -312,7 +311,7 @@ public class CanaryServer implements Server {
 
     @Override
     public void message(String message) {
-        Canary.logServerMessage(TextFormat.removeFormatting(message));
+        Canary.logServerMessage(message);
     }
 
     @Override
