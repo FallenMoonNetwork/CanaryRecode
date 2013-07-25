@@ -194,13 +194,15 @@ public class CanaryBlock implements Block {
     }
 
     @Override
-    public void dropBlockAsItem(boolean remove) {
-        net.minecraft.server.Block.s[getTypeId()].c(((CanaryWorld) getWorld()).getHandle(), getX(), getY(), getZ(), getData(), 1);
-        if (remove) {
-            this.setTypeId((short) 0);
-            this.update();
-        }
-    }
+	public void dropBlockAsItem(boolean remove) {
+		if (!isAir()) {
+			net.minecraft.server.Block.s[getTypeId()].c(((CanaryWorld) getWorld()).getHandle(), getX(), getY(),getZ(), getData(), 1);
+			if (remove) {
+				this.setTypeId((short) 0);
+				this.update();
+			}
+		}
+	}
 
     @Override
     public String toString() {
