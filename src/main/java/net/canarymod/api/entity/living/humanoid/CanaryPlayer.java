@@ -33,6 +33,7 @@ import net.minecraft.server.ChunkCoordinates;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.EnumGameType;
 import net.minecraft.server.Packet201PlayerInfo;
+import net.minecraft.server.Packet202PlayerAbilities;
 import net.minecraft.server.WorldSettings;
 import net.visualillusionsent.utils.StringUtils;
 
@@ -55,16 +56,25 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         initPlayerData();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EntityType getEntityType() {
         return EntityType.PLAYER;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFqName() {
         return "Player";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void chat(final String message) {
         if (message.length() > 100) {
@@ -102,17 +112,26 @@ public class CanaryPlayer extends CanaryHuman implements Player {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void message(String message) {
         getNetServerHandler().sendMessage(message);
         // Should cover all chat logging
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void notice(String message) {
         message(Colors.LIGHT_RED + message);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Location getSpawnPosition() {
         Location spawn = Canary.getServer().getDefaultWorld().getSpawnLocation();
@@ -124,6 +143,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         return spawn;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Location getHome() {
         Warp home = Canary.warps().getHome(this);
@@ -134,16 +156,25 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         return getSpawnPosition();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setHome(Location home) {
         Canary.warps().setHome(this, home);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasHome() {
         return Canary.warps().getHome(this) != null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSpawnPosition(Location spawn) {
         ChunkCoordinates loc = new ChunkCoordinates((int) spawn.getX(), (int) spawn.getY(), (int) spawn.getZ());
@@ -151,6 +182,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         ((EntityPlayerMP) entity).a(loc, true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getIP() {
         String ip = ((EntityPlayerMP) entity).a.a.c().toString();
@@ -158,6 +192,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         return ip.substring(1, ip.lastIndexOf(":"));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean executeCommand(String[] command) {
         try {
@@ -196,27 +233,42 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void sendPacket(Packet packet) {
         getHandle().a.b(((CanaryPacket) packet).getPacket());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Group getGroup() {
         return groups.get(0);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Group[] getPlayerGroups() {
         return groups.toArray(new Group[0]);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setGroup(Group group) {
         groups.set(0, group);
         Canary.usersAndGroups().addOrUpdatePlayerData(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addGroup(Group group) {
         if (!groups.contains(group)) {
@@ -225,6 +277,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasPermission(String permission) {
         PermissionCheckHook hook = new PermissionCheckHook(permission, this, false);
@@ -257,6 +312,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         return hook.getResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean safeHasPermission(String permission) {
         // If player has the permission set, use its personal permissions
@@ -280,51 +338,81 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         return groups.get(0).hasPermission(permission);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isAdmin() {
         return hasPermission("canary.super.administrator") || Canary.ops().isOpped(getName());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canBuild() {
         return hasPermission("canary.world.build") || hasPermission("canary.vanilla.op") || isAdmin();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCanBuild(boolean canModify) {
         permissions.addPermission("canary.world.build", canModify);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canIgnoreRestrictions() {
         return hasPermission("canary.super.ignoreRestrictions");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCanIgnoreRestrictions(boolean canIgnore) {
         permissions.addPermission("canary.super.ignoreRestrictions", canIgnore, -1);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isMuted() {
         return muted;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMuted(boolean muted) {
         this.muted = muted;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PermissionProvider getPermissionProvider() {
         return permissions;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EnderChestInventory getEnderChestInventory() {
         return (EnderChestInventory) ((EntityPlayerMP) entity).getEnderChestInventory();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInGroup(Group group, boolean parents) {
         for (Group g : groups) {
@@ -342,16 +430,25 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void kick(String reason) {
         ((EntityPlayerMP) entity).a.c(reason);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public NetServerHandler getNetServerHandler() {
         return ((EntityPlayerMP) entity).getServerHandler();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInGroup(String group, boolean parents) {
         for (Group g : groups) {
@@ -369,11 +466,17 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String[] getAllowedIPs() {
         return allowedIPs;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Direction getCardinalDirection() {
         double degrees = (getRotation() - 180) % 360;
@@ -405,6 +508,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void initPlayerData() {
         String[] data = Canary.usersAndGroups().getPlayerData(getName());
@@ -429,6 +535,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         defaultChatpattern.put("%prefix", getPrefix());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean removeGroup(Group group) {
         if (groups.get(0).equals(group)) {
@@ -441,6 +550,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         return success;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean removeGroup(String group) {
         Group g = Canary.usersAndGroups().getGroup(group);
@@ -450,16 +562,25 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         return removeGroup(g);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getPing() {
         return ((EntityPlayerMP) entity).i;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PlayerListEntry getPlayerListEntry(boolean shown) {
         return new PlayerListEntry(this, shown);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void sendPlayerListEntry(PlayerListEntry plentry) {
         if (Configuration.getServerConfig().isPlayerListEnabled()) {
@@ -467,46 +588,73 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addExhaustion(float exhaustion) {
         getHandle().bH().a(exhaustion);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setExhaustion(float exhaustion) {
         getHandle().bH().setExhaustionLevel(exhaustion);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public float getExhaustionLevel() {
         return getHandle().bH().getExhaustionLevel();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setHunger(int hunger) {
         getHandle().bH().setFoodLevel(hunger);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getHunger() {
         return getHandle().bH().a();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addExperience(int experience) {
         getHandle().addXP(experience);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void removeExperience(int experience) {
         getHandle().removeXP(experience);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getExperience() {
         return getHandle().bI;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setExperience(int xp) {
         if (xp < 0) {
@@ -515,30 +663,49 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         getHandle().setXP(xp);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getLevel() {
         return getHandle().bH;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isSleeping() {
         return getHandle().bg();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isDeeplySleeping() {
         return getHandle().bC();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getModeId() {
         return getHandle().c.b().a();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public GameMode getMode() {
         return GameMode.fromId(getHandle().c.b().a());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setModeId(int mode) {
         // Adjust mode, make it null if number is invalid
@@ -551,11 +718,17 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMode(GameMode mode) {
         this.setModeId(mode.getId());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void refreshCreativeMode() {
         if (getModeId() == 1 || Configuration.getWorldConfig(getWorld().getFqName()).getGameMode() == GameMode.CREATIVE) {
@@ -565,21 +738,33 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setDimension(World world) {
         Canary.getServer().getConfigurationManager().switchDimension(this, world, false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void teleportTo(double x, double y, double z, float pitch, float rotation) {
         this.teleportTo(x, y, z, pitch, rotation, getWorld());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void teleportTo(double x, double y, double z, float pitch, float rotation, World dim) {
         this.teleportTo(x, y, z, pitch, rotation, dim, TeleportHook.TeleportCause.PLUGIN);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void teleportTo(Location location, TeleportCause cause) {
         this.teleportTo(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getRotation(), location.getWorld(), cause);
@@ -597,6 +782,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         getHandle().a.a(x, y, z, rotation, pitch, getWorld().getType().getId(), getWorld().getName(), cause);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPrefix() {
         if (prefix != null) {
@@ -608,6 +796,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPrefix(String prefix) {
         super.setPrefix(prefix);
@@ -615,11 +806,17 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         this.defaultChatpattern.put("%prefix", getPrefix());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return String.format("Player[name=%s]", getName());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Player)) {
@@ -630,6 +827,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         return getName().equals(other.getName());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -638,7 +838,19 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         return hash;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public EntityPlayerMP getHandle() {
         return (EntityPlayerMP) entity;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateCapabilities() {
+        this.sendPacket(new CanaryPacket(new Packet202PlayerAbilities(getHandle().bG)));
     }
 }
