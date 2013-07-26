@@ -103,7 +103,7 @@ public class NetServerHandler extends NetHandler {
             this.a.d();
             // CanaryMod hook data
             if (!hook.isHidden()) {
-                this.d.af().a((Packet) (new Packet3Chat(hook.getLeaveMessage())));
+                this.d.af().a((Packet) (new Packet3Chat(ChatMessageComponent.d(hook.getLeaveMessage()))));
             }
             // //
             this.d.af().e(this.c);
@@ -1068,7 +1068,7 @@ public class NetServerHandler extends NetHandler {
 
     /**
      * gets the CanaryNetServerHandler wrapper
-     * 
+     *
      * @return
      */
     public CanaryNetServerHandler getCanaryServerHandler() {
