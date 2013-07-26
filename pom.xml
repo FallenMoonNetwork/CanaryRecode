@@ -114,6 +114,10 @@
             <goals>
               <goal>shade</goal>
             </goals>
+            <configuration>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>shaded</shadedClassifierName>
+            </configuration>
           </execution>
         </executions>
         <configuration>
