@@ -106,7 +106,7 @@ public class Potion {
 
     public void a(EntityLivingBase entitylivingbase, EntityLivingBase entitylivingbase1, int i0, double d0) {
         // CanaryMod: PotionEffectApplied
-        PotionEffectAppliedHook hook = (PotionEffectAppliedHook) new PotionEffectAppliedHook((net.canarymod.api.entity.living.EntityLiving) entitylivingbase1.getCanaryEntity(), Canary.factory().getPotionFactory().newPotionEffect(this.H, 0, i0)).call();
+        PotionEffectAppliedHook hook = (PotionEffectAppliedHook) new PotionEffectAppliedHook((net.canarymod.api.entity.living.CanaryEntityLiving) entitylivingbase1.getCanaryEntity(), Canary.factory().getPotionFactory().newPotionEffect(this.H, 0, i0)).call();
         if (hook.getPotionEffect() == null) {
             return;
         }
