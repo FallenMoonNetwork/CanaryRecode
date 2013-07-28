@@ -512,7 +512,7 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
     /**
      * Gets the inventory handle of this ContainerBlock
      * 
-     * @return
+     * @return native Inventory interface
      */
     public IInventory getInventoryHandle() {
         return inventory;

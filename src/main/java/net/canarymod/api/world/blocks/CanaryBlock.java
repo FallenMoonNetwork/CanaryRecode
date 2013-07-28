@@ -203,6 +203,11 @@ public class CanaryBlock implements Block {
     }
 
     @Override
+    public ComplexBlock getComplexBlock() {
+        return getWorld().getComplexBlock(this);
+    }
+
+    @Override
     public String toString() {
         return String.format("Block[Type=%s TypeId=%d, data=%d, x=%d, y=%d, z=%d, world=%s, dim=%d]", BlockType.fromIdAndData(type, data).getMachineName(), this.type, this.data, this.x, this.y, this.z, this.dimension.getName(), this.dimension.getType().getId());
     }

@@ -25,7 +25,7 @@ public class CanarySign extends CanaryComplexBlock implements Sign {
      */
     @Override
     public String[] getText() {
-        return getTileEntity().a;
+        return getTileEntity().a.clone();
     }
 
     /**
@@ -74,13 +74,35 @@ public class CanarySign extends CanaryComplexBlock implements Sign {
     }
 
     /**
+     * {@inheirtDoc}
+     */
+    @Override
+    public Block getBlockAttached() {
+        if (isSignPost()) {
+            return getWorld().getBlockAt(getX(), getY() - 1, getZ());
+        }
+        switch (getBlock().getData()) {
+            case 2: // Facing North / Attached is South
+                return getWorld().getBlockAt(getX(), getY(), getZ() + 1);
+            case 3: // Facing South / Attached is North
+                return getWorld().getBlockAt(getX(), getY(), getZ() - 1);
+            case 4: // Facing West / Attached is East
+                return getWorld().getBlockAt(getX() + 1, getY(), getZ());
+            case 5: // Facing East / Attached is West
+                return getWorld().getBlockAt(getX() - 1, getY(), getZ());
+            default:
+                return null;
+        }
+    }
+
+    /**
      * Returns a String value representing this Block
      * 
      * @return String representation of this block
      */
     @Override
     public String toString() {
-        return String.format("Sign [x=%d, y=%d, z=%d, SignType=%s, Text1=%s, Text2=%s, Text3=%s, Text4=%s]", getX(), getY(), getZ(), isWallSign() ? "WallSign" : "SignPost", getTileEntity().a[0], getTileEntity().a[1], getTileEntity().a[2], getTileEntity().a[3]);
+        return String.format("Sign[X=%d Y=%d Z=%d SignType=%s Text1=%s Text2=%s Text3=%s Text4=%s]", getX(), getY(), getZ(), isWallSign() ? "WallSign" : "SignPost", getTileEntity().a[0], getTileEntity().a[1], getTileEntity().a[2], getTileEntity().a[3]);
     }
 
     /**
