@@ -5,7 +5,9 @@ import net.canarymod.api.CanaryVillagerTrade;
 import net.canarymod.api.MobSpawnerEntry;
 import net.canarymod.api.VillagerTrade;
 import net.canarymod.api.entity.Entity;
+import net.canarymod.api.inventory.CustomStorageInventory;
 import net.canarymod.api.inventory.Item;
+import net.canarymod.api.inventory.NativeCustomStorageInventory;
 
 /**
  * Object Factory implementation
@@ -52,6 +54,22 @@ public class CanaryObjectFactory implements ObjectFactory {
     @Override
     public MobSpawnerEntry newMobSpawnerEntry(Item item) {
         return new CanaryMobSpawnerEntry(item);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CustomStorageInventory newCustomStorageInventory(int size) {
+        return new NativeCustomStorageInventory(size).getCanaryCustomInventory();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CustomStorageInventory newCustomStorageInventory(String name, int size) {
+        return new NativeCustomStorageInventory(size, name).getCanaryCustomInventory();
     }
 
 }

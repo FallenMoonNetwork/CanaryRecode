@@ -3,6 +3,7 @@ package net.canarymod.api.world.blocks;
 import java.util.Arrays;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
+import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.World;
 import net.minecraft.server.IInventory;
@@ -18,6 +19,14 @@ public class CanaryHopperBlock extends CanaryContainerBlock implements HopperBlo
 
     public CanaryHopperBlock(TileEntityHopper hopper) {
         super(hopper);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InventoryType getInventoryType() {
+        return InventoryType.HOPPER;
     }
 
     /**

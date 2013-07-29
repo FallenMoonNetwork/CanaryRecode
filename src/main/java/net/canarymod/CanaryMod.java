@@ -3,7 +3,6 @@ package net.canarymod;
 import net.canarymod.api.CanaryServer;
 import net.canarymod.api.channels.CanaryChannelManager;
 import net.canarymod.api.factory.CanaryFactory;
-import net.canarymod.api.factory.Factory;
 import net.canarymod.api.scoreboard.CanaryScoreboardManager;
 import net.canarymod.bansystem.BanManager;
 import net.canarymod.commandsys.CommandDependencyException;
@@ -35,10 +34,10 @@ public class CanaryMod extends Canary {
      * Creates a new CanaryMod
      */
     public CanaryMod() {
+        Canary.instance = this;
+
         // This must be the first thing to call!
         DatabaseLoader.load();
-
-        Canary.instance = this;
 
         this.config = new Configuration();
         // Initialize the subsystems that do not rely on others
@@ -50,7 +49,7 @@ public class CanaryMod extends Canary {
         this.whitelist = new WhitelistProvider();
         this.ops = new OperatorsProvider();
         this.reservelist = new ReservelistProvider();
-        this.factory = (Factory) new CanaryFactory();
+        this.factory = new CanaryFactory();
         this.channelManager = new CanaryChannelManager();
         // Initialize the plugin loader and scan for plugins
         this.loader = new PluginLoader();

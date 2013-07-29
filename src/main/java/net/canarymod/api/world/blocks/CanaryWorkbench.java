@@ -2,6 +2,7 @@ package net.canarymod.api.world.blocks;
 
 import java.util.Arrays;
 import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.World;
 import net.minecraft.server.ContainerWorkbench;
@@ -26,6 +27,14 @@ public class CanaryWorkbench extends CanaryContainerBlock implements Workbench {
     public CanaryWorkbench(ContainerWorkbench container) {
         super(container.a);
         this.container = container;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InventoryType getInventoryType() {
+        return InventoryType.WORKBENCH;
     }
 
     /**

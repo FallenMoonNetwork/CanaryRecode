@@ -2,6 +2,7 @@ package net.canarymod.api.world.blocks;
 
 import java.util.Arrays;
 import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.TileEntityFurnace;
@@ -21,6 +22,14 @@ public class CanaryFurnace extends CanaryContainerBlock implements Furnace {
      */
     public CanaryFurnace(TileEntityFurnace tileentity) {
         super(tileentity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InventoryType getInventoryType() {
+        return InventoryType.FURNACE;
     }
 
     /**

@@ -3,6 +3,7 @@ package net.canarymod.api.world.blocks;
 import java.util.Arrays;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.World;
 import net.minecraft.server.ContainerRepair;
@@ -23,6 +24,14 @@ public class CanaryAnvil extends CanaryContainerBlock implements Anvil {
     public CanaryAnvil(ContainerRepair container) {
         super(container.g);
         this.container = container;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InventoryType getInventoryType() {
+        return InventoryType.ANVIL;
     }
 
     /**

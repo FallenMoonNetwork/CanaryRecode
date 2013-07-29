@@ -3,6 +3,7 @@ package net.canarymod.api.world.blocks;
 import java.util.Arrays;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.CanaryWorld;
 import net.minecraft.server.BlockDispenser;
@@ -27,6 +28,14 @@ public class CanaryDispenser extends CanaryContainerBlock implements Dispenser {
      */
     public CanaryDispenser(TileEntityDispenser tileentity) {
         super(tileentity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InventoryType getInventoryType() {
+        return InventoryType.DISPENSER;
     }
 
     /**

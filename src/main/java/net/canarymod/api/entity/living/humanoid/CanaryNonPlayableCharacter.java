@@ -24,10 +24,8 @@ public class CanaryNonPlayableCharacter extends CanaryHuman implements NonPlayab
     /**
      * Constructs a new wrapper for EntityNonPlayableCharacter
      * 
-     * @param entity
-     *            the EntityVillager to wrap
-     * @param inHand
-     *            the Item to set inHand
+     * @param npc
+     *            the EntityNonPlayableCharacter to wrap
      */
     public CanaryNonPlayableCharacter(EntityNonPlayableCharacter npc) {
         super(npc);

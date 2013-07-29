@@ -18,6 +18,10 @@ public class CanaryEnderChestInventory extends CanaryContainerEntity implements 
         this.human = human;
     }
 
+    public InventoryType getInventoryType() {
+        return InventoryType.CHEST;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -31,7 +35,7 @@ public class CanaryEnderChestInventory extends CanaryContainerEntity implements 
      */
     @Override
     public void clearContents() {
-        Arrays.fill(getInventoryHandle().c, null);
+        Arrays.fill(getHandle().c, null);
     }
 
     /**
@@ -39,7 +43,7 @@ public class CanaryEnderChestInventory extends CanaryContainerEntity implements 
      */
     @Override
     public Item[] clearInventory() {
-        ItemStack[] items = Arrays.copyOf(getInventoryHandle().c, getSize());
+        ItemStack[] items = Arrays.copyOf(getHandle().c, getSize());
 
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
@@ -50,7 +54,7 @@ public class CanaryEnderChestInventory extends CanaryContainerEntity implements 
      */
     @Override
     public Item[] getContents() {
-        return CanaryItem.stackArrayToItemArray(getInventoryHandle().c);
+        return CanaryItem.stackArrayToItemArray(getHandle().c);
     }
 
     /**
@@ -58,7 +62,7 @@ public class CanaryEnderChestInventory extends CanaryContainerEntity implements 
      */
     @Override
     public void setContents(Item[] items) {
-        System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getInventoryHandle().c, 0, getSize());
+        System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getHandle().c, 0, getSize());
     }
 
     /**
@@ -66,7 +70,7 @@ public class CanaryEnderChestInventory extends CanaryContainerEntity implements 
      */
     @Override
     public void setInventoryName(String value) {
-        getInventoryHandle().setName(value);
+        getHandle().setName(value);
     }
 
     /**
@@ -74,10 +78,10 @@ public class CanaryEnderChestInventory extends CanaryContainerEntity implements 
      */
     @Override
     public void update() {
-        getInventoryHandle().k_();
+        getHandle().k_();
     }
 
-    public InventoryEnderChest getInventoryHandle() {
+    public InventoryEnderChest getHandle() {
         return (InventoryEnderChest) inventory;
     }
 }

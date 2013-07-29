@@ -6,7 +6,7 @@ public class TileEntitySign extends TileEntity {
 
     public String[] a = new String[]{ "", "", "", "" };
     public int b = -1;
-    private boolean c = true;
+    public boolean c = true; // CanaryMod: private => public; editable
     private EntityPlayer d;
 
     public TileEntitySign() {

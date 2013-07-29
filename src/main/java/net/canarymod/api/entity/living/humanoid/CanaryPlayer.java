@@ -14,8 +14,16 @@ import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
 import net.canarymod.api.PlayerListEntry;
 import net.canarymod.api.entity.EntityType;
+import net.canarymod.api.inventory.CanaryContainerEntity;
 import net.canarymod.api.inventory.EnderChestInventory;
+import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.world.World;
+import net.canarymod.api.world.blocks.CanaryAnvil;
+import net.canarymod.api.world.blocks.CanaryComplexBlock;
+import net.canarymod.api.world.blocks.CanaryContainerBlock;
+import net.canarymod.api.world.blocks.CanarySign;
+import net.canarymod.api.world.blocks.CanaryWorkbench;
+import net.canarymod.api.world.blocks.Sign;
 import net.canarymod.api.world.position.Direction;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.chat.Colors;
@@ -810,6 +818,63 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      * {@inheritDoc}
      */
     @Override
+    public void updateCapabilities() {
+        this.sendPacket(new CanaryPacket(new Packet202PlayerAbilities(getHandle().bG)));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void openInventory(Inventory inventory) {
+        if (inventory == null) {
+            return;
+        }
+        switch (inventory.getInventoryType()) {
+            case CHEST:
+                getHandle().a(((CanaryContainerBlock) inventory).getInventoryHandle());
+                return;
+            case CUSTOM:
+            case MINECART_CHEST:
+                getHandle().a(((CanaryContainerEntity) inventory).getHandle());
+                return;
+            case ANVIL:
+                CanaryAnvil anvil = (CanaryAnvil) inventory;
+                getHandle().c(anvil.getX(), anvil.getY(), anvil.getZ());
+                return;
+            case ANIMAL:
+                return;
+            case BEACON:
+            case BREWING:
+            case DISPENSER:
+            case ENCHANTMENT:
+            case FURNACE:
+            case HOPPER:
+                getHandle().a(((CanaryComplexBlock) inventory).getTileEntity());
+                return;
+            case MINECART_HOPPER:
+                break;
+            case WORKBENCH:
+                CanaryWorkbench bench = (CanaryWorkbench) inventory;
+                getHandle().b(bench.getX(), bench.getY(), bench.getZ());
+                return;
+            default:
+                return;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void openSignEditWindow(Sign sign) {
+        getHandle().a(((CanarySign) sign).getTileEntity());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String toString() {
         return String.format("Player[name=%s]", getName());
     }
@@ -844,13 +909,5 @@ public class CanaryPlayer extends CanaryHuman implements Player {
     @Override
     public EntityPlayerMP getHandle() {
         return (EntityPlayerMP) entity;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void updateCapabilities() {
-        this.sendPacket(new CanaryPacket(new Packet202PlayerAbilities(getHandle().bG)));
     }
 }

@@ -19,6 +19,14 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      * {@inheritDoc}
      */
     @Override
+    public InventoryType getInventoryType() {
+        return InventoryType.PLAYER;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Item getHelmetSlot() {
         return getSlot(39);
     }
@@ -84,7 +92,7 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      */
     @Override
     public int getSelectedHotbarSlotId() {
-        return getInventoryHandle().c;
+        return getHandle().c;
     }
 
     /**
@@ -92,7 +100,7 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      */
     @Override
     public Item getItemInHand() {
-        ItemStack is = getInventoryHandle().h();
+        ItemStack is = getHandle().h();
         return is == null ? null : is.getCanaryItem();
     }
 
@@ -101,7 +109,7 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      */
     @Override
     public void clearContents() {
-        Arrays.fill(getInventoryHandle().a, null);
+        Arrays.fill(getHandle().a, null);
     }
 
     /**
@@ -109,7 +117,7 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      */
     @Override
     public Item[] clearInventory() {
-        ItemStack[] items = Arrays.copyOf(getInventoryHandle().a, getSize());
+        ItemStack[] items = Arrays.copyOf(getHandle().a, getSize());
 
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
@@ -120,7 +128,7 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      */
     @Override
     public Item[] getContents() {
-        return CanaryItem.stackArrayToItemArray(getInventoryHandle().a);
+        return CanaryItem.stackArrayToItemArray(getHandle().a);
     }
 
     /**
@@ -128,7 +136,7 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      */
     @Override
     public void setContents(Item[] items) {
-        getInventoryHandle().a = Arrays.copyOf(CanaryItem.itemArrayToStackArray(items), getInventoryHandle().a.length);
+        getHandle().a = Arrays.copyOf(CanaryItem.itemArrayToStackArray(items), getHandle().a.length);
     }
 
     /**
@@ -136,7 +144,7 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      */
     @Override
     public void setInventoryName(String value) {
-        getInventoryHandle().setName(value);
+        getHandle().setName(value);
     }
 
     /**
@@ -144,10 +152,14 @@ public class CanaryPlayerInventory extends CanaryContainerEntity implements Play
      */
     @Override
     public void update() {
-        getInventoryHandle().k_();
+        getHandle().k_();
     }
 
-    public InventoryPlayer getInventoryHandle() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InventoryPlayer getHandle() {
         return (InventoryPlayer) inventory;
     }
 }

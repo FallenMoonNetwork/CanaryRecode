@@ -1,6 +1,7 @@
 package net.canarymod.api.entity.vehicle;
 
 import net.canarymod.api.entity.EntityType;
+import net.canarymod.api.inventory.InventoryType;
 import net.minecraft.server.EntityMinecartChest;
 
 /**
@@ -23,6 +24,10 @@ public class CanaryChestMinecart extends CanaryContainerMinecart implements Ches
     @Override
     public EntityType getEntityType() {
         return EntityType.CHESTMINECART;
+    }
+
+    public InventoryType getInventoryType() {
+        return InventoryType.MINECART_CHEST;
     }
 
     @Override

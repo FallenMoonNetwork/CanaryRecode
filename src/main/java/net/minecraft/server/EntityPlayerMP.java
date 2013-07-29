@@ -17,6 +17,7 @@ import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.vehicle.CanaryChestMinecart;
 import net.canarymod.api.inventory.CanaryAnimalInventory;
 import net.canarymod.api.inventory.CanaryEnderChestInventory;
+import net.canarymod.api.inventory.NativeCustomStorageInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.statistics.CanaryStat;
 import net.canarymod.api.world.CanaryWorld;
@@ -484,7 +485,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         this.bp.a((ICrafting) this);
     }
 
-    public void a(IInventory iinventory) {
+    public void a(IInventory iinventory) { // Open Inventory
         if (this.bp != this.bo) {
             this.i();
         }
@@ -503,6 +504,9 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             container.setInventory(inventory);
         } else if (iinventory instanceof EntityMinecartChest) {
             inventory = (CanaryChestMinecart) ((EntityMinecartChest) iinventory).getCanaryEntity();
+            container.setInventory(inventory);
+        } else if (iinventory instanceof NativeCustomStorageInventory) {
+            inventory = ((NativeCustomStorageInventory) iinventory).getCanaryCustomInventory();
             container.setInventory(inventory);
         }
 

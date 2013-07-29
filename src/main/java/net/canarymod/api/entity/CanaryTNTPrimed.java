@@ -15,7 +15,7 @@ public class CanaryTNTPrimed extends CanaryEntity implements TNTPrimed {
     /**
      * Constructs a new wrapper for EntityItemFrame
      * 
-     * @param entity
+     * @param tntprimed
      *            the EntityItemFrame to be wrapped
      */
     public CanaryTNTPrimed(EntityTNTPrimed tntprimed) {

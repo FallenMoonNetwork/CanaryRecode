@@ -1,6 +1,7 @@
 package net.canarymod.api.entity.vehicle;
 
 import net.canarymod.api.entity.EntityType;
+import net.canarymod.api.inventory.InventoryType;
 import net.minecraft.server.EntityMinecartHopper;
 
 /**
@@ -15,6 +16,10 @@ public class CanaryHopperMinecart extends CanaryContainerMinecart implements Hop
     @Override
     public EntityType getEntityType() {
         return EntityType.HOPPERMINECART;
+    }
+
+    public InventoryType getInventoryType() {
+        return InventoryType.MINECART_HOPPER;
     }
 
     @Override

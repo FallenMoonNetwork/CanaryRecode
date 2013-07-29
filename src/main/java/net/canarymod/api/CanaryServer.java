@@ -35,6 +35,7 @@ import net.minecraft.server.ServerConfigurationManager;
 import net.minecraft.server.ShapedRecipes;
 import net.minecraft.server.ShapelessRecipes;
 import net.minecraft.server.TcpConnection;
+import net.minecraft.server.TextAreaLogHandler;
 import net.visualillusionsent.utils.TaskManager;
 
 /**
@@ -484,8 +485,7 @@ public class CanaryServer implements Server {
     @Override
     public String getServerGUILog() {
         if (!isHeadless()) {
-            // return TextAreaLogHandler.getLog(); ///XXX
-            return null;
+            return TextAreaLogHandler.getLogHandler().getLog();
         } else {
             return null;
         }

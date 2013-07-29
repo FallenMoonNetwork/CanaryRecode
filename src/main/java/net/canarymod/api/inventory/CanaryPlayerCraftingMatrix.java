@@ -19,8 +19,16 @@ public class CanaryPlayerCraftingMatrix extends CanaryContainerEntity implements
      * {@inheritDoc}
      */
     @Override
+    public InventoryType getInventoryType() {
+        return InventoryType.CRAFTMATRIX;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void clearContents() {
-        Arrays.fill(getInventoryHandle().a, null);
+        Arrays.fill(getHandle().a, null);
     }
 
     /**
@@ -28,7 +36,7 @@ public class CanaryPlayerCraftingMatrix extends CanaryContainerEntity implements
      */
     @Override
     public Item[] clearInventory() {
-        ItemStack[] items = Arrays.copyOf(getInventoryHandle().a, getSize());
+        ItemStack[] items = Arrays.copyOf(getHandle().a, getSize());
 
         clearContents();
         return CanaryItem.stackArrayToItemArray(items);
@@ -39,7 +47,7 @@ public class CanaryPlayerCraftingMatrix extends CanaryContainerEntity implements
      */
     @Override
     public Item[] getContents() {
-        return CanaryItem.stackArrayToItemArray(getInventoryHandle().a);
+        return CanaryItem.stackArrayToItemArray(getHandle().a);
     }
 
     /**
@@ -47,7 +55,7 @@ public class CanaryPlayerCraftingMatrix extends CanaryContainerEntity implements
      */
     @Override
     public void setContents(Item[] items) {
-        System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getInventoryHandle().a, 0, getSize());
+        System.arraycopy(CanaryItem.itemArrayToStackArray(items), 0, getHandle().a, 0, getSize());
     }
 
     /**
@@ -55,7 +63,7 @@ public class CanaryPlayerCraftingMatrix extends CanaryContainerEntity implements
      */
     @Override
     public void setInventoryName(String value) {
-        getInventoryHandle().setName(value);
+        getHandle().setName(value);
     }
 
     /**
@@ -63,10 +71,14 @@ public class CanaryPlayerCraftingMatrix extends CanaryContainerEntity implements
      */
     @Override
     public void update() {
-        getInventoryHandle().k_();
+        getHandle().k_();
     }
 
-    public InventoryCrafting getInventoryHandle() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InventoryCrafting getHandle() {
         return (InventoryCrafting) inventory;
     }
 }

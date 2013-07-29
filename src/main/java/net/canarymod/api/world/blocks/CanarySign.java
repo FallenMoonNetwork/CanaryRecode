@@ -1,6 +1,9 @@
 package net.canarymod.api.world.blocks;
 
 import java.util.Arrays;
+import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
+import net.canarymod.api.entity.living.humanoid.Player;
+import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.TileEntitySign;
 
 /**
@@ -95,6 +98,27 @@ public class CanarySign extends CanaryComplexBlock implements Sign {
         }
     }
 
+    @Override
+    public boolean isEditable() {
+        return getTileEntity().c;
+    }
+
+    @Override
+    public void setEditable(boolean edit) {
+        getTileEntity().c = edit;
+    }
+
+    @Override
+    public Player getOwner() {
+        EntityPlayer entityplayer = getTileEntity().b();
+        return (Player) (entityplayer == null ? null : entityplayer.getCanaryEntity());
+    }
+
+    @Override
+    public void setOwner(Player player) {
+        getTileEntity().a(player == null ? null : ((CanaryPlayer) player).getHandle());
+    }
+
     /**
      * Returns a String value representing this Block
      * 
@@ -103,6 +127,21 @@ public class CanarySign extends CanaryComplexBlock implements Sign {
     @Override
     public String toString() {
         return String.format("Sign[X=%d Y=%d Z=%d SignType=%s Text1=%s Text2=%s Text3=%s Text4=%s]", getX(), getY(), getZ(), isWallSign() ? "WallSign" : "SignPost", getTileEntity().a[0], getTileEntity().a[1], getTileEntity().a[2], getTileEntity().a[3]);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof CanarySign)) {
+            return false;
+        }
+        CanarySign other = (CanarySign) obj;
+        if (!Arrays.equals(this.getText(), other.getText())) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
     /**

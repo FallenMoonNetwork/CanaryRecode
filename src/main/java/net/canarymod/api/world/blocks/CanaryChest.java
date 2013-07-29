@@ -2,6 +2,7 @@ package net.canarymod.api.world.blocks;
 
 import java.util.Arrays;
 import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.InventoryLargeChest;
 import net.minecraft.server.ItemStack;
@@ -22,6 +23,14 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
      */
     public CanaryChest(TileEntityChest tileentity) {
         super(tileentity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InventoryType getInventoryType() {
+        return InventoryType.CHEST;
     }
 
     @Override

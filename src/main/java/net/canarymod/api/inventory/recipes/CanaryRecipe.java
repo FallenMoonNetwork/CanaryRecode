@@ -31,7 +31,7 @@ public abstract class CanaryRecipe implements Recipe {
 
     public boolean matchesMatrix(CraftingMatrix matrix) {
         if (matrix instanceof CanaryPlayerCraftingMatrix) {
-            if (getHandle().a(((CanaryPlayerCraftingMatrix) matrix).getInventoryHandle(), null)) {
+            if (getHandle().a(((CanaryPlayerCraftingMatrix) matrix).getHandle(), null)) {
                 return true;
             }
         }

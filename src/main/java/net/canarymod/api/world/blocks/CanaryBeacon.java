@@ -1,6 +1,7 @@
 package net.canarymod.api.world.blocks;
 
 import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.potion.PotionEffectType;
 import net.minecraft.server.ItemStack;
@@ -21,6 +22,14 @@ public class CanaryBeacon extends CanaryContainerBlock implements Beacon {
      */
     public CanaryBeacon(TileEntityBeacon tileentity) {
         super(tileentity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InventoryType getInventoryType() {
+        return InventoryType.BEACON;
     }
 
     /**

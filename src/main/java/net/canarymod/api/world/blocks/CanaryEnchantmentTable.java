@@ -5,6 +5,7 @@ import java.util.Arrays;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.inventory.CanaryItem;
+import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.World;
 import net.minecraft.server.ContainerEnchantment;
@@ -29,6 +30,14 @@ public class CanaryEnchantmentTable extends CanaryContainerBlock implements Ench
     public CanaryEnchantmentTable(ContainerEnchantment container) {
         super(container.a);
         this.container = container;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InventoryType getInventoryType() {
+        return InventoryType.ENCHANTMENT;
     }
 
     /**
