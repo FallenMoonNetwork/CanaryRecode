@@ -101,4 +101,13 @@ public class CanaryChunkProviderServer implements ChunkProvider {
         return handle.e();
     }
 
+    /**
+     * Get the handle for this CanaryChunkProviderServer.
+     * That is the NMS object.
+     * @return net.minecraft.server.ChunkProviderServer
+     */
+    public net.minecraft.server.ChunkProviderServer getHandle() {
+        return this.handle;
+    }
+
 }

@@ -26,9 +26,9 @@ public class CanaryWorldManager implements WorldManager {
     private HashMap<String, Boolean> markedForUnload;
 
     public CanaryWorldManager() {
-        DimensionType.addType("NORMAL", 0);
-        DimensionType.addType("NETHER", -1);
-        DimensionType.addType("END", 1);
+        DimensionType.registerType("NORMAL", 0);
+        DimensionType.registerType("NETHER", -1);
+        DimensionType.registerType("END", 1);
         File worldsFolders = new File("worlds");
 
         if (!worldsFolders.exists()) {
