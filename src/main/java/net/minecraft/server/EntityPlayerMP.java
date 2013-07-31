@@ -17,8 +17,8 @@ import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.entity.vehicle.CanaryChestMinecart;
 import net.canarymod.api.inventory.CanaryAnimalInventory;
 import net.canarymod.api.inventory.CanaryEnderChestInventory;
-import net.canarymod.api.inventory.NativeCustomStorageInventory;
 import net.canarymod.api.inventory.Inventory;
+import net.canarymod.api.inventory.NativeCustomStorageInventory;
 import net.canarymod.api.statistics.CanaryStat;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.blocks.CanaryAnvil;
@@ -218,12 +218,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
             //
 
             if (this.aM() != this.bP || this.bQ != this.bq.a() || this.bq.e() == 0.0F != this.bR) {
-                // CanaryMod: convert health for values above 20
-                int health = (int) (this.aM() / (this.bm() / 20));
-
-                health = (this.aM() > 0 && health == 0) ? 1 : health;
-                this.a.b(new Packet8UpdateHealth(health, this.bq.a(), this.bq.e()));
-                //
+                this.a.b(new Packet8UpdateHealth(this.aM(), this.bq.a(), this.bq.e()));
                 this.bP = this.aM();
                 this.bQ = this.bq.a();
                 this.bR = this.bq.e() == 0.0F;
