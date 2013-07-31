@@ -239,7 +239,7 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public boolean isSneaking() { // 1
-        return entity.af();
+        return entity.ag();
     }
 
     @Override
