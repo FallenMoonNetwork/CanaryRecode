@@ -499,7 +499,7 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void a(String s0, Object[] aobject) {
         // CanaryMod: DisconnectionHook
-        DisconnectionHook hook = (DisconnectionHook) new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.aw() }).a(EnumChatFormatting.o).toString()).call();
+        DisconnectionHook hook = (DisconnectionHook) new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.c_() }).a(EnumChatFormatting.o).toString()).call();
         this.d.an().a(this.c.c_() + " lost connection: " + s0);
         this.d.af().a((Packet) (new Packet3Chat(ChatMessageComponent.e(hook.getLeaveMessage()))));
         this.d.af().e(this.c);
@@ -1068,7 +1068,7 @@ public class NetServerHandler extends NetHandler {
 
     /**
      * gets the CanaryNetServerHandler wrapper
-     *
+     * 
      * @return
      */
     public CanaryNetServerHandler getCanaryServerHandler() {
