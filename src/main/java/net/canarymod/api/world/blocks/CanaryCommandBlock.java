@@ -9,7 +9,7 @@ import net.minecraft.server.TileEntityCommandBlock;
 
 /**
  * CommandBlock wrapper implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlock {
@@ -18,7 +18,7 @@ public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlo
 
     /**
      * Constructs a wrapper for TileEntityCommandBlock
-     * 
+     *
      * @param tileentity
      *            the TileEntityCommandBlock to wrap
      */
@@ -115,6 +115,22 @@ public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlo
     @Override
     public TileEntityCommandBlock getTileEntity() {
         return (TileEntityCommandBlock) tileentity;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Group getGroup() {
+        return this.group;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
 }

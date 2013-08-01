@@ -5,19 +5,16 @@ import net.canarymod.api.CanaryVillagerTrade;
 import net.canarymod.api.MobSpawnerEntry;
 import net.canarymod.api.VillagerTrade;
 import net.canarymod.api.entity.Entity;
-import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.CustomStorageInventory;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.NativeCustomStorageInventory;
-import net.canarymod.api.inventory.PlayerInventory;
 import net.canarymod.api.world.CanaryWorld;
-import net.canarymod.api.world.blocks.Workbench;
-import net.canarymod.api.world.position.Location;
-import net.minecraft.server.ContainerWorkbench;
+import net.canarymod.api.world.Chunk;
+import net.canarymod.api.world.World;
 
 /**
  * Object Factory implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public class CanaryObjectFactory implements ObjectFactory {
@@ -76,5 +73,13 @@ public class CanaryObjectFactory implements ObjectFactory {
     @Override
     public CustomStorageInventory newCustomStorageInventory(String name, int size) {
         return new NativeCustomStorageInventory(size, name).getCanaryCustomInventory();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Chunk newChunk(World world, int x, int z) {
+        return new net.minecraft.server.Chunk(((CanaryWorld)world).getHandle(), x, z).getCanaryChunk();
     }
 }
