@@ -142,7 +142,7 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
         if (effect == null) {
             return;
         }
-        getHandle().d(((CanaryPotionEffect) effect).getHandle());
+        getHandle().c(((CanaryPotionEffect) effect).getHandle());
     }
 
     /**
@@ -150,7 +150,7 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
      */
     @Override
     public void addPotionEffect(PotionEffectType type, int duration, int amplifier) {
-        getHandle().d(new net.minecraft.server.PotionEffect(type.getID(), duration, amplifier));
+        getHandle().c(new net.minecraft.server.PotionEffect(type.getID(), duration, amplifier));
     }
 
     /**
