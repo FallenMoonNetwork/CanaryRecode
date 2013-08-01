@@ -381,11 +381,21 @@ public class CanaryWorld implements World {
 
     @Override
     public long getRelativeTime() {
-        return world.J();
+        long margin = getRawTime() % 24000;
+
+        // Java modulus is stupid.
+        if (margin < 0) {
+            margin += 24000;
+        }
+        return margin;
     }
 
     @Override
     public long getRawTime() {
+        return world.J();
+    }
+
+    public long getTotalTime() {
         return world.I();
     }
 
