@@ -263,7 +263,7 @@ public class CanaryServer implements Server {
 
     @Override
     public World getDefaultWorld() {
-        return getWorldManager().getWorld(getDefaultWorldName(), false);
+        return getWorldManager().getWorld(getDefaultWorldName(), true);
     }
 
     @Override
