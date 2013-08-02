@@ -549,11 +549,11 @@ public abstract class EntityLivingBase extends Entity {
     }
 
     protected void b(PotionEffect potioneffect) {
-        // CanaryMod: PotionEffectFinish
-        new PotionEffectFinishHook((net.canarymod.api.entity.living.LivingBase) getCanaryEntity(), new CanaryPotionEffect(potioneffect)).call();
-        //
         this.h = true;
         if (!this.q.I) {
+            // CanaryMod: PotionEffectFinish
+            new PotionEffectFinishHook((net.canarymod.api.entity.living.LivingBase) getCanaryEntity(), new CanaryPotionEffect(potioneffect)).call();
+            //
             Potion.a[potioneffect.a()].a(this, this.aW(), potioneffect.c());
         }
     }

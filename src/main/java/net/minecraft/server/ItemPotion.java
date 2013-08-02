@@ -75,7 +75,7 @@ public class ItemPotion extends Item {
 
                     // entityplayer.c(new PotionEffect(potioneffect));
                     // add to the array first
-                    effects[index] = new CanaryPotionEffect(potioneffect);
+                    effects[index] = new CanaryPotionEffect(new PotionEffect(potioneffect)); // CLONE CLONE CLONE CLONE!
                     index++;
                     //
                 }
