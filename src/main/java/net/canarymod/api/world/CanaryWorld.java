@@ -718,6 +718,13 @@ public class CanaryWorld implements World {
         world.b.a(true, null);
     }
 
+    @Override
+    public void broadcastMessage(String msg) {
+        for (Player player : getPlayerList()) {
+            player.message(msg);
+        }
+    }
+
     public net.minecraft.server.World getHandle() {
         return world;
     }
