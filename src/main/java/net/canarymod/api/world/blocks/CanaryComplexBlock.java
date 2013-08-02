@@ -5,16 +5,15 @@ import net.canarymod.api.nbt.CompoundTag;
 import net.canarymod.api.world.World;
 import net.minecraft.server.IInventory;
 import net.minecraft.server.NBTTagCompound;
-import net.minecraft.server.TileEntity;
 
 /**
- * ComplexBlock implementation
+ * TileEntity implementation
  * 
  * @author Jason (darkdiplomat)
  */
-public abstract class CanaryComplexBlock implements ComplexBlock {
+public abstract class CanaryComplexBlock implements TileEntity {
 
-    protected TileEntity tileentity;
+    protected net.minecraft.server.TileEntity tileentity;
     protected IInventory inventory;
 
     /**
@@ -23,14 +22,14 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
      * @param tileentity
      *            the TileEntityChest to be wrapped
      */
-    public CanaryComplexBlock(TileEntity tileentity) {
+    public CanaryComplexBlock(net.minecraft.server.TileEntity tileentity) {
         this.tileentity = tileentity;
     }
 
     public CanaryComplexBlock(IInventory inventory) {
         this.inventory = inventory;
-        if (inventory instanceof TileEntity) {
-            this.tileentity = (TileEntity) inventory;
+        if (inventory instanceof net.minecraft.server.TileEntity) {
+            this.tileentity = (net.minecraft.server.TileEntity) inventory;
         }
     }
 
@@ -39,7 +38,7 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
      * 
      * @return the TileEntity
      */
-    public abstract TileEntity getTileEntity();
+    public abstract net.minecraft.server.TileEntity getTileEntity();
 
     /**
      * {@inheritDoc}
@@ -171,10 +170,10 @@ public abstract class CanaryComplexBlock implements ComplexBlock {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof ComplexBlock)) {
+        if (!(obj instanceof TileEntity)) {
             return false;
         }
-        final ComplexBlock other = (ComplexBlock) obj;
+        final TileEntity other = (TileEntity) obj;
 
         if (getX() != other.getX()) {
             return false;

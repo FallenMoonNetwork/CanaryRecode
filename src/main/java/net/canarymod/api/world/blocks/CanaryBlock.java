@@ -203,8 +203,8 @@ public class CanaryBlock implements Block {
     }
 
     @Override
-    public ComplexBlock getComplexBlock() {
-        return getWorld().getComplexBlock(this);
+    public TileEntity getTileEntity() {
+        return getWorld().getTileEntity(this);
     }
 
     @Override

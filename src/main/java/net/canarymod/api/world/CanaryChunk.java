@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import net.canarymod.api.entity.Entity;
-import net.canarymod.api.world.blocks.ComplexBlock;
+import net.canarymod.api.world.blocks.TileEntity;
 import net.canarymod.api.world.position.Position;
 import net.minecraft.server.ChunkPosition;
-import net.minecraft.server.TileEntity;
 
 /**
  * Chunk implementation
@@ -108,12 +107,12 @@ public class CanaryChunk implements Chunk {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map<Position, ComplexBlock> getTileEntityMap() {
-        HashMap<Position, ComplexBlock> toRet = new HashMap<Position, ComplexBlock>();
+    public Map<Position, TileEntity> getTileEntityMap() {
+        HashMap<Position, TileEntity> toRet = new HashMap<Position, TileEntity>();
         synchronized (handle.i) {
             for (ChunkPosition pos : (Set<ChunkPosition>) handle.i.keySet()) {
                 Position cPos = new Position(pos.a, pos.b, pos.c);
-                TileEntity te = (TileEntity) handle.i.get(pos);
+                net.minecraft.server.TileEntity te = (net.minecraft.server.TileEntity) handle.i.get(pos);
                 if (te.complexBlock != null) {
                     toRet.put(cPos, te.complexBlock);
                 }

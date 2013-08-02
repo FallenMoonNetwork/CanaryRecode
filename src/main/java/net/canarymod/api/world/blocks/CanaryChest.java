@@ -67,7 +67,7 @@ public class CanaryChest extends CanaryContainerBlock implements Chest {
             return null;
         }
         if (block.getType() == BlockType.Chest) {
-            ComplexBlock cblock = getWorld().getOnlyComplexBlock(block);
+            TileEntity cblock = getWorld().getOnlyTileEntity(block);
 
             if ((cblock != null) && (cblock instanceof Chest)) {
                 Chest chest = (Chest) cblock;

@@ -198,7 +198,7 @@ public class CanaryEnchantmentTable extends CanaryContainerBlock implements Ench
      */
     @Override
     public TileEntityEnchantmentTable getTileEntity() {
-        return (TileEntityEnchantmentTable) getWorld().getComplexBlockAt(getX(), getY(), getZ());
+        return (TileEntityEnchantmentTable) getWorld().getTileEntityAt(getX(), getY(), getZ());
     }
 
     private InventoryBasic getInventory() {

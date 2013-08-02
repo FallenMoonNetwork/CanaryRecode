@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import net.canarymod.api.nbt.CanaryCompoundTag;
-import net.canarymod.api.world.blocks.ComplexBlock;
 
 public class TileEntity {
 
@@ -19,7 +18,7 @@ public class TileEntity {
     public Block q;
 
     // CanaryMod: Variable Declaration
-    public ComplexBlock complexBlock;
+    public net.canarymod.api.world.blocks.TileEntity complexBlock;
     private CanaryCompoundTag meta = new CanaryCompoundTag("Canary"); // hold it for extra data
 
     // CanaryMod: End

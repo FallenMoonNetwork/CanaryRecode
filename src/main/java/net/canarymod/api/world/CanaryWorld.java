@@ -23,7 +23,7 @@ import net.canarymod.api.inventory.Item;
 import net.canarymod.api.world.blocks.Block;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.blocks.Chest;
-import net.canarymod.api.world.blocks.ComplexBlock;
+import net.canarymod.api.world.blocks.TileEntity;
 import net.canarymod.api.world.effects.AuxiliarySoundEffect;
 import net.canarymod.api.world.effects.Particle;
 import net.canarymod.api.world.effects.SoundEffect;
@@ -37,7 +37,6 @@ import net.minecraft.server.EnumGameType;
 import net.minecraft.server.EnumSkyBlock;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.Packet63WorldParticles;
-import net.minecraft.server.TileEntity;
 import net.minecraft.server.TileEntityBeacon;
 import net.minecraft.server.TileEntityBrewingStand;
 import net.minecraft.server.TileEntityChest;
@@ -618,13 +617,13 @@ public class CanaryWorld implements World {
     }
 
     @Override
-    public ComplexBlock getComplexBlock(Block block) {
-        return getComplexBlockAt(block.getX(), block.getY(), block.getZ());
+    public TileEntity getTileEntity(Block block) {
+        return getTileEntityAt(block.getX(), block.getY(), block.getZ());
     }
 
     @Override
-    public ComplexBlock getComplexBlockAt(int x, int y, int z) {
-        ComplexBlock result = getOnlyComplexBlockAt(x, y, z);
+    public TileEntity getTileEntityAt(int x, int y, int z) {
+        TileEntity result = getOnlyTileEntityAt(x, y, z);
 
         if (result != null) {
             if (result instanceof Chest) {
@@ -640,13 +639,13 @@ public class CanaryWorld implements World {
     }
 
     @Override
-    public ComplexBlock getOnlyComplexBlock(Block block) {
-        return getOnlyComplexBlockAt(block.getX(), block.getY(), block.getZ());
+    public TileEntity getOnlyTileEntity(Block block) {
+        return getOnlyTileEntityAt(block.getX(), block.getY(), block.getZ());
     }
 
     @Override
-    public ComplexBlock getOnlyComplexBlockAt(int x, int y, int z) {
-        TileEntity tileentity = world.r(x, y, z);
+    public TileEntity getOnlyTileEntityAt(int x, int y, int z) {
+        net.minecraft.server.TileEntity tileentity = world.r(x, y, z);
 
         if (tileentity != null) {
             if (tileentity instanceof TileEntityBrewingStand) {

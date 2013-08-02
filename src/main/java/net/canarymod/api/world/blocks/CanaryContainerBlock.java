@@ -10,7 +10,7 @@ import net.minecraft.server.IInventory;
 import net.minecraft.server.ItemStack;
 
 /**
- * ContainerBlock buffer between ComplexBlock and those with Inventories
+ * ContainerBlock buffer between TileEntity and those with Inventories
  * 
  * @author Jason (darkdiplomat)
  */

@@ -10,7 +10,6 @@ import net.minecraft.server.ContainerRepair;
 import net.minecraft.server.InventoryBasic;
 import net.minecraft.server.InventoryCraftResult;
 import net.minecraft.server.ItemStack;
-import net.minecraft.server.TileEntity;
 
 /**
  * The implementation of Anvil
@@ -171,7 +170,7 @@ public class CanaryAnvil extends CanaryContainerBlock implements Anvil {
      * {@inheritDoc}
      */
     @Override
-    public TileEntity getTileEntity() {
+    public net.minecraft.server.TileEntity getTileEntity() {
         throw new UnsupportedOperationException("Method 'getTileEntity' in class 'CanaryAnvil' is not supported. Not a tile Entity.");
     }
 
