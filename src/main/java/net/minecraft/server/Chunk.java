@@ -176,7 +176,8 @@ public class Chunk {
         this.t = true;
     }
 
-    private void q() {
+    //CanaryMod private->public
+    public void q() {
         this.e.C.a("recheckGaps");
         if (this.e.b(this.g * 16 + 8, 0, this.h * 16 + 8, 16)) {
             for (int i0 = 0; i0 < 16; ++i0) {
@@ -238,7 +239,8 @@ public class Chunk {
         }
     }
 
-    private void h(int i0, int i1, int i2) {
+    //CanaryMod private->public
+    public void h(int i0, int i1, int i2) {
         int i3 = this.f[i2 << 4 | i0] & 255;
         int i4 = i3;
 

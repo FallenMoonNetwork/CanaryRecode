@@ -161,4 +161,25 @@ public class CanaryChunk implements Chunk {
     public boolean isModified() {
         return handle.l;
     }
+
+    @Override
+    public void generateSkyLightMap() {
+        handle.b();
+    }
+
+    @Override
+    public void updateSkyLightMap(boolean force) {
+        if(force) {
+            handle.q();
+        }
+        else {
+            handle.k();
+        }
+    }
+
+    @Override
+    public void relightBlock(int x, int y, int z) {
+        handle.h(x, y, z);
+        
+    }
 }

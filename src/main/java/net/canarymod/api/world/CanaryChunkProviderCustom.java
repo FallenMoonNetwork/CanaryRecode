@@ -3,7 +3,6 @@ package net.canarymod.api.world;
 import java.util.List;
 import net.minecraft.server.Chunk;
 import net.minecraft.server.ChunkPosition;
-import net.minecraft.server.ChunkProviderServer;
 import net.minecraft.server.EnumCreatureType;
 import net.minecraft.server.IChunkProvider;
 import net.minecraft.server.IProgressUpdate;
