@@ -83,7 +83,7 @@ public class CanaryChunkProviderServer implements ChunkProvider {
 
     @Override
     public void dropChunk(int x, int z) {
-        handle.d(x, z);
+        handle.b(x, z);
     }
 
     @Override
@@ -104,6 +104,7 @@ public class CanaryChunkProviderServer implements ChunkProvider {
     /**
      * Get the handle for this CanaryChunkProviderServer.
      * That is the NMS object.
+     * 
      * @return net.minecraft.server.ChunkProviderServer
      */
     public net.minecraft.server.ChunkProviderServer getHandle() {
