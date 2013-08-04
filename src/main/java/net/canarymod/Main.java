@@ -3,8 +3,8 @@ package net.canarymod;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.util.logging.Level;
-import net.canarymod.api.inventory.Enchantment;
-import net.canarymod.api.inventory.Item;
+import net.canarymod.api.inventory.CanaryEnchantment;
+import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.serialize.EnchantmentSerializer;
 import net.canarymod.serialize.ItemSerializer;
 import net.minecraft.server.LogAgent;
@@ -19,9 +19,10 @@ public class Main {
         // Initialize the bird
         mod = new CanaryMod();
         Canary.setCanary(mod);
+        Canary.logInfo("Starting: " + CanaryMod.getImplementationTitle() + " " + CanaryMod.getImplementationVersion() + " Implementing: " + CanaryMod.getSpecificationTitle() + " " + CanaryMod.getSpecificationVersion());
         // Add system internal serializers
-        Canary.addSerializer(new ItemSerializer(), Item.class);
-        Canary.addSerializer(new EnchantmentSerializer(), Enchantment.class);
+        Canary.addSerializer(new ItemSerializer(), CanaryItem.class);
+        Canary.addSerializer(new EnchantmentSerializer(), CanaryEnchantment.class);
     }
 
     /**
@@ -47,6 +48,7 @@ public class Main {
             if (!MinecraftServer.isHeadless()) {
                 TextAreaLogHandler.getLogHandler().poke();
             }
+
             initBird();
 
             MinecraftServer.main(args);
