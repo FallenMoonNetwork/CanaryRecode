@@ -143,7 +143,7 @@ public final class CanaryNBTFactory implements NBTFactory {
                 case SHORT:
                     return newShortTag(name, (Short) value);
                 case STRING:
-                    return newStringTag(name, (String) value);
+                    return newStringTag(name, value == null ? "null" : (String) value);
                 default:
                     return null;
             }
