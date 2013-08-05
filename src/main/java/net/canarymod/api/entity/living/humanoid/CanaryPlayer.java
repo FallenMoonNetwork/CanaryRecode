@@ -272,6 +272,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
     public void setGroup(Group group) {
         groups.set(0, group);
         Canary.usersAndGroups().addOrUpdatePlayerData(this);
+        defaultChatpattern.put("%prefix", getPrefix()); // Update Prefix
     }
 
     /**
