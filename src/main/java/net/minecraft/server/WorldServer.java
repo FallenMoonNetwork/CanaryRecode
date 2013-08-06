@@ -481,9 +481,9 @@ public class WorldServer extends World {
             entity.w();
         }
 
-        if (!this.a.Y() && entity instanceof INpc) {
-            entity.w();
-        }
+        // if (!this.a.Y() && entity instanceof INpc) { // CanaryMod: Remove this check for NPC Spawn as its handled as part of the above
+        // entity.w();
+        // }
 
         super.a(entity, flag0);
     }
