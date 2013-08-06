@@ -876,6 +876,22 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      * {@inheritDoc}
      */
     @Override
+    public String getFirstJoined() {
+        return getHandle().getFirstJoined();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long getTimePlayed() {
+        return getHandle().getTimePlayed();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String toString() {
         return String.format("Player[name=%s]", getName());
     }

@@ -31,6 +31,7 @@ import net.minecraft.server.FurnaceRecipes;
 import net.minecraft.server.IRecipe;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.ServerConfigurationManager;
 import net.minecraft.server.ShapedRecipes;
 import net.minecraft.server.ShapelessRecipes;
@@ -221,7 +222,11 @@ public class CanaryServer implements Server {
 
     @Override
     public OfflinePlayer getOfflinePlayer(String player) {
-        CanaryCompoundTag comp = new CanaryCompoundTag(ServerConfigurationManager.getPlayerDatByName(player));
+        NBTTagCompound nbttagcompound = ServerConfigurationManager.getPlayerDatByName(player);
+        CanaryCompoundTag comp = null;
+        if (nbttagcompound != null) {
+            comp = new CanaryCompoundTag(ServerConfigurationManager.getPlayerDatByName(player));
+        }
         return new CanaryOfflinePlayer(player, comp);
     }
 

@@ -169,15 +169,32 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
             Canary.logDebug("Attempted to save an online player! (" + getName() + ")");
             return;
         }
-        ISaveHandler handler = ((CanaryWorld) getWorld()).getHandle().M();
-        if (handler instanceof SaveHandler) {
-            SaveHandler shandler = (SaveHandler) handler;
-            shandler.writePlayerNbt(getName(), (CanaryCompoundTag) getNBT());
+        if (getNBT() != null) {
+            ISaveHandler handler = ((CanaryWorld) getWorld()).getHandle().M();
+            if (handler instanceof SaveHandler) {
+                SaveHandler shandler = (SaveHandler) handler;
+                shandler.writePlayerNbt(getName(), (CanaryCompoundTag) getNBT());
+            }
+            else {
+                Canary.logServerMessage(getName() + "'s OfflinePlayer could not be saved! Unsupported SaveHandler!");
+            }
         }
-        else {
-            Canary.logServerMessage(getName() + "'s OfflinePlayer could not be saved! Unsupported SaveHandler!");
-        }
+    }
 
+    @Override
+    public String getFirstJoined() {
+        if (getNBT() != null && getNBT().containsKey("FirstJoined")) {
+            return getNBT().getString("FirstJoined");
+        }
+        return "NEVER";
+    }
+
+    @Override
+    public long getTimePlayed() {
+        if (getNBT() != null && getNBT().containsKey("TimePlayed")) {
+            return getNBT().getInt("TimePlayed");
+        }
+        return 0;
     }
 
 }

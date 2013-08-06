@@ -17,6 +17,7 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.player.EntityRightClickHook;
 import net.canarymod.hook.player.ItemDropHook;
 import net.canarymod.hook.player.LevelUpHook;
+import net.visualillusionsent.utils.DateUtils;
 
 public abstract class EntityPlayer extends EntityLivingBase implements ICommandSender {
 
@@ -56,6 +57,9 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     public EntityFishHook bM;
     private String respawnWorld; // CanaryMod: Respawn world (for bed spawns)
     protected String dispName = ""; // CanaryMod: Mojang screwed us from using the methods in EntityLiving...
+    protected String firstJoin;
+    private long previous_total = 0;
+    private long currentSessionStart;
 
     public EntityPlayer(World world, String s0) {
         super(world);
@@ -68,7 +72,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.b((double) chunkcoordinates.a + 0.5D, (double) (chunkcoordinates.b + 1), (double) chunkcoordinates.c + 0.5D, 0.0F, 0.0F);
         this.ba = 180.0F;
         this.ad = 20;
-
+        this.firstJoin = DateUtils.longToDateTime(System.currentTimeMillis());
+        this.currentSessionStart = System.currentTimeMillis() / 1000;
         this.entity = new CanaryHuman(this) { // CanaryMod: Special Case wrap
             @Override
             public String getFqName() {
@@ -580,9 +585,18 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
             this.a.a(nbttaglist1);
         }
+        // CanaryMod
         if (nbttagcompound.b("CustomName")) {
             this.dispName = nbttagcompound.i("CustomName");
         }
+        if (nbttagcompound.b("FirstJoin")) {
+            this.firstJoin = nbttagcompound.i("FirstJoin");
+        }
+        if (nbttagcompound.b("TimePlayed")) {
+            this.previous_total = nbttagcompound.f("TimePlayed");
+        }
+
+        //
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -608,6 +622,11 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.bG.a(nbttagcompound);
         nbttagcompound.a("EnderItems", (NBTBase) this.a.h());
         nbttagcompound.a("CustomName", dispName == null ? "" : dispName);
+        // CanaryMod: First Join and time played
+        nbttagcompound.a("FirstJoin", firstJoin);
+        nbttagcompound.a("TimePlayed", previous_total + ((System.currentTimeMillis() / 1000) - currentSessionStart)); // Bring time up to seconds
+        //
+
     }
 
     public void a(IInventory iinventory) {}
@@ -1535,6 +1554,14 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
     public CanaryHuman getCanaryHuman() {
         return (CanaryHuman) entity;
+    }
+
+    public String getFirstJoined() {
+        return firstJoin;
+    }
+
+    public long getTimePlayed() {
+        return previous_total + ((System.currentTimeMillis() / 1000) - currentSessionStart);
     }
     //
 }
