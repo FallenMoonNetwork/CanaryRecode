@@ -225,7 +225,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
             } // someone wants us not to execute the command. So lets do them the favor
 
             if (!Canary.commands().parseCommand(this, commandName, command)) {
-                if (Configuration.getServerConfig().getShowUnkownCommand()) {
+                if (Configuration.getServerConfig().getShowUnknownCommand()) {
                     notice("Unknown command");
                 }
                 return false;
