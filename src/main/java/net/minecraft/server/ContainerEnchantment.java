@@ -43,7 +43,6 @@ public class ContainerEnchantment extends Container {
 
     public void a(ICrafting icrafting) {
         super.a(icrafting);
-        // TODO: Hook
         icrafting.a(this, 0, this.g[0]);
         icrafting.a(this, 1, this.g[1]);
         icrafting.a(this, 2, this.g[2]);
@@ -52,7 +51,6 @@ public class ContainerEnchantment extends Container {
     public void b() {
         super.b();
 
-        // Hook
         for (int i0 = 0; i0 < this.e.size(); ++i0) {
             ICrafting icrafting = (ICrafting) this.e.get(i0);
 
@@ -73,39 +71,45 @@ public class ContainerEnchantment extends Container {
                     i0 = 0;
 
                     int i1;
-
-                    for (i1 = -1; i1 <= 1; ++i1) {
-                        for (int i2 = -1; i2 <= 1; ++i2) {
-                            if ((i1 != 0 || i2 != 0)
-                                    && this.h.c(this.i + i2, this.j, this.k + i1)
-                                    && this.h.c(this.i + i2, this.j + 1, this.k + i1)) {
-                                if (this.h.a(this.i + i2 * 2, this.j, this.k + i1 * 2) == Block.as.cF) {
-                                    ++i0;
-                                }
-
-                                if (this.h.a(this.i + i2 * 2, this.j + 1, this.k + i1 * 2) == Block.as.cF) {
-                                    ++i0;
-                                }
-
-                                if (i2 != 0 && i1 != 0) {
-                                    if (this.h.a(this.i + i2 * 2, this.j, this.k + i1) == Block.as.cF) {
+                    // CanaryMod: if fake cases are used, skip bookcase checks
+                    if (!((CanaryEnchantmentTable) this.inventory).hasFakeCases()) {
+                        for (i1 = -1; i1 <= 1; ++i1) {
+                            for (int i2 = -1; i2 <= 1; ++i2) {
+                                if ((i1 != 0 || i2 != 0)
+                                        && this.h.c(this.i + i2, this.j, this.k + i1)
+                                        && this.h.c(this.i + i2, this.j + 1, this.k + i1)) {
+                                    if (this.h.a(this.i + i2 * 2, this.j, this.k + i1 * 2) == Block.as.cF) {
                                         ++i0;
                                     }
 
-                                    if (this.h.a(this.i + i2 * 2, this.j + 1, this.k + i1) == Block.as.cF) {
+                                    if (this.h.a(this.i + i2 * 2, this.j + 1, this.k + i1 * 2) == Block.as.cF) {
                                         ++i0;
                                     }
 
-                                    if (this.h.a(this.i + i2, this.j, this.k + i1 * 2) == Block.as.cF) {
-                                        ++i0;
-                                    }
+                                    if (i2 != 0 && i1 != 0) {
+                                        if (this.h.a(this.i + i2 * 2, this.j, this.k + i1) == Block.as.cF) {
+                                            ++i0;
+                                        }
 
-                                    if (this.h.a(this.i + i2, this.j + 1, this.k + i1 * 2) == Block.as.cF) {
-                                        ++i0;
+                                        if (this.h.a(this.i + i2 * 2, this.j + 1, this.k + i1) == Block.as.cF) {
+                                            ++i0;
+                                        }
+
+                                        if (this.h.a(this.i + i2, this.j, this.k + i1 * 2) == Block.as.cF) {
+                                            ++i0;
+                                        }
+
+                                        if (this.h.a(this.i + i2, this.j + 1, this.k + i1 * 2) == Block.as.cF) {
+                                            ++i0;
+                                        }
                                     }
                                 }
                             }
                         }
+                    }
+                    else {
+                        // CanaryMod: set case count
+                        i0 = ((CanaryEnchantmentTable) this.inventory).getFakeCaseCount();
                     }
 
                     for (i1 = 0; i1 < 3; ++i1) {
@@ -188,6 +192,11 @@ public class ContainerEnchantment extends Container {
     }
 
     public boolean a(EntityPlayer entityplayer) {
+        // CanaryMod: remote inventories
+        if (this.inventory.canOpenRemote()) {
+            return true;
+        }
+        //
         return this.h.a(this.i, this.j, this.k) != Block.bJ.cF ? false : entityplayer.e((double) this.i + 0.5D, (double) this.j + 0.5D, (double) this.k + 0.5D) <= 64.0D;
     }
 

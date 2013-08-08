@@ -100,7 +100,7 @@ public abstract class World implements IBlockAccess {
         } else {
             this.t = WorldProvider.a(0);
         }
-        //CanaryMod set dimension type in world provider
+        // CanaryMod set dimension type in world provider
         this.t.setCanaryDimensionType(type);
         if (this.x == null) {
             this.x = new WorldInfo(worldsettings, s0);
@@ -2718,7 +2718,7 @@ public abstract class World implements IBlockAccess {
 
     /**
      * Get the canary dimension wrapper
-     *
+     * 
      * @return
      */
     public CanaryWorld getCanaryWorld() {
@@ -2727,7 +2727,7 @@ public abstract class World implements IBlockAccess {
 
     /**
      * Set the canary dimension wrapper
-     *
+     * 
      * @param dim
      */
     public void setCanaryWorld(CanaryWorld dim) {
@@ -2736,7 +2736,7 @@ public abstract class World implements IBlockAccess {
 
     /**
      * Checks if the Entity is allowed to spawn based on the world configuration
-     *
+     * 
      * @param entity
      *            the entity to check
      * @return true if can spawn; flase if not
@@ -2747,8 +2747,10 @@ public abstract class World implements IBlockAccess {
             if (!world_cfg.canSpawnAnimals()) {
                 return false;
             }
-            else if (entity instanceof EntityWaterMob && !Arrays.asList(world_cfg.getSpawnableWaterAnimals()).contains(entity.getCanaryEntity().getFqName())) {
-                return false;
+            else if (entity instanceof EntityWaterMob) {
+                if (!Arrays.asList(world_cfg.getSpawnableWaterAnimals()).contains(entity.getCanaryEntity().getFqName())) {
+                    return false;
+                }
             }
             else if (!Arrays.asList(world_cfg.getSpawnableAnimals()).contains(entity.getCanaryEntity().getFqName())) {
                 return false;

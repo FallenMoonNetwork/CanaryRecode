@@ -317,6 +317,11 @@ public class ContainerRepair extends Container {
     }
 
     public boolean a(EntityPlayer entityplayer) {
+        // CanaryMod: remote inventories
+        if (this.inventory.canOpenRemote()) {
+            return true;
+        }
+        //
         return this.h.a(this.i, this.j, this.k) != Block.cm.cF ? false : entityplayer.e((double) this.i + 0.5D, (double) this.j + 0.5D, (double) this.k + 0.5D) <= 64.0D;
     }
 

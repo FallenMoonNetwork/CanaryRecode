@@ -145,6 +145,11 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
     }
 
     public boolean a(EntityPlayer entityplayer) {
+        // CanaryMod: remote inventories
+        if (getCanaryDispenser().canOpenRemote()) {
+            return true;
+        }
+        //
         return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
     }
 

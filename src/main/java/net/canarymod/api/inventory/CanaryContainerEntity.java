@@ -12,6 +12,7 @@ import net.minecraft.server.ItemStack;
  */
 public abstract class CanaryContainerEntity implements Inventory {
     protected IInventory inventory;
+    private boolean openRemote = false;
 
     public CanaryContainerEntity(IInventory inventory) {
         this.inventory = inventory;
@@ -512,6 +513,14 @@ public abstract class CanaryContainerEntity implements Inventory {
     @Override
     public Item removeItem(ItemType type, short damage) {
         return this.removeItem(type.getId(), damage);
+    }
+
+    public boolean canOpenRemote() {
+        return openRemote;
+    }
+
+    public void setCanOpenRemote(boolean remote) {
+        openRemote = remote;
     }
 
     public abstract IInventory getHandle();

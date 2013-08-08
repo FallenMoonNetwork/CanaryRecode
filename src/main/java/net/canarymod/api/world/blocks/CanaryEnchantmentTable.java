@@ -20,6 +20,7 @@ import net.minecraft.server.TileEntityEnchantmentTable;
  */
 public class CanaryEnchantmentTable extends CanaryContainerBlock implements EnchantmentTable {
     private ContainerEnchantment container;
+    public int fakeCaseCount = -1;
 
     /**
      * Constructs a new CanaryEnchantmentTable
@@ -193,6 +194,17 @@ public class CanaryEnchantmentTable extends CanaryContainerBlock implements Ench
         getInventory().setName(value);
     }
 
+    // Special internal methods
+    public int getFakeCaseCount() {
+        return fakeCaseCount;
+    }
+
+    public boolean hasFakeCases() {
+        return fakeCaseCount >= 0;
+    }
+
+    //
+
     /**
      * {@inheritDoc}
      */
@@ -201,7 +213,11 @@ public class CanaryEnchantmentTable extends CanaryContainerBlock implements Ench
         return (TileEntityEnchantmentTable) getWorld().getTileEntityAt(getX(), getY(), getZ());
     }
 
-    private InventoryBasic getInventory() {
+    public InventoryBasic getInventory() {
         return (InventoryBasic) container.a;
+    }
+
+    public ContainerEnchantment getContainer() {
+        return container;
     }
 }

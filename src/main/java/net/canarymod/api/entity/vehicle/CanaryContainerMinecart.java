@@ -14,6 +14,7 @@ import net.minecraft.server.ItemStack;
  * @author Somners
  */
 public abstract class CanaryContainerMinecart extends CanaryMinecart implements ContainerMinecart {
+    private boolean openRemote;
 
     public CanaryContainerMinecart(EntityMinecart minecart) {
         super(minecart);
@@ -572,6 +573,14 @@ public abstract class CanaryContainerMinecart extends CanaryMinecart implements 
     @Override
     public void update() {
         this.getHandle().k_();
+    }
+
+    public boolean canOpenRemote() {
+        return openRemote;
+    }
+
+    public void setCanOpenRemote(boolean remote) {
+        openRemote = remote;
     }
 
     /**

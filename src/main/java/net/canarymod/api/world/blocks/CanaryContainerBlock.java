@@ -15,6 +15,7 @@ import net.minecraft.server.ItemStack;
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryContainerBlock extends CanaryComplexBlock implements Inventory {
+    private boolean openRemote;
 
     public CanaryContainerBlock(IInventory inventory) {
         super(inventory);
@@ -507,6 +508,14 @@ public abstract class CanaryContainerBlock extends CanaryComplexBlock implements
     @Override
     public Item removeItem(ItemType type, short damage) {
         return this.removeItem(type.getId(), damage);
+    }
+
+    public boolean canOpenRemote() {
+        return openRemote;
+    }
+
+    public void setCanOpenRemote(boolean remote) {
+        openRemote = remote;
     }
 
     /**

@@ -84,6 +84,11 @@ public class ContainerWorkbench extends Container {
     }
 
     public boolean a(EntityPlayer entityplayer) {
+        // CanaryMod: remote inventories
+        if (this.inventory.canOpenRemote()) {
+            return true;
+        }
+        //
         return this.g.a(this.h, this.i, this.j) != Block.aD.cF ? false : entityplayer.e((double) this.h + 0.5D, (double) this.i + 0.5D, (double) this.j + 0.5D) <= 64.0D;
     }
 

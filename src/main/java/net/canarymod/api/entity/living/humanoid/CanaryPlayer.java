@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import net.canarymod.Canary;
+import net.canarymod.MathHelp;
 import net.canarymod.ToolBox;
 import net.canarymod.api.CanaryPacket;
 import net.canarymod.api.GameMode;
@@ -17,10 +18,14 @@ import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.inventory.CanaryContainerEntity;
 import net.canarymod.api.inventory.EnderChestInventory;
 import net.canarymod.api.inventory.Inventory;
+import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.CanaryAnvil;
 import net.canarymod.api.world.blocks.CanaryComplexBlock;
 import net.canarymod.api.world.blocks.CanaryContainerBlock;
+import net.canarymod.api.world.blocks.CanaryDispenser;
+import net.canarymod.api.world.blocks.CanaryDropper;
+import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
 import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.canarymod.api.world.blocks.Sign;
@@ -38,6 +43,11 @@ import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
 import net.canarymod.warp.Warp;
 import net.minecraft.server.ChunkCoordinates;
+import net.minecraft.server.ContainerChest;
+import net.minecraft.server.ContainerDispenser;
+import net.minecraft.server.ContainerEnchantment;
+import net.minecraft.server.ContainerRepair;
+import net.minecraft.server.ContainerWorkbench;
 import net.minecraft.server.EntityPlayerMP;
 import net.minecraft.server.EnumGameType;
 import net.minecraft.server.Packet201PlayerInfo;
@@ -833,35 +843,70 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         }
         switch (inventory.getInventoryType()) {
             case CHEST:
-                getHandle().a(((CanaryContainerBlock) inventory).getInventoryHandle());
+                getHandle().openContainer(new ContainerChest(getHandle().bn, ((CanaryContainerBlock) inventory).getInventoryHandle()), 0, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
                 return;
             case CUSTOM:
             case MINECART_CHEST:
-                getHandle().a(((CanaryContainerEntity) inventory).getHandle());
+                getHandle().openContainer(new ContainerChest(getHandle().bn, ((CanaryContainerEntity) inventory).getHandle()), 0, inventory.getSize(), ((CanaryContainerEntity) inventory).getHandle().c());
                 return;
             case ANVIL:
-                CanaryAnvil anvil = (CanaryAnvil) inventory;
-                getHandle().c(anvil.getX(), anvil.getY(), anvil.getZ());
+                getHandle().openContainer(((CanaryAnvil) inventory).getContainer(), 8, 9);
                 return;
             case ANIMAL:
                 return;
             case BEACON:
+                return;
             case BREWING:
+                return;
             case DISPENSER:
+                getHandle().openContainer(new ContainerDispenser(getHandle().bn, ((CanaryDispenser) inventory).getTileEntity()), inventory instanceof CanaryDropper ? 10 : 3, inventory.getSize(), ((CanaryDispenser) inventory).getTileEntity().c());
             case ENCHANTMENT:
+                getHandle().openContainer(((CanaryEnchantmentTable) inventory).getContainer(), 4, 9);
+                return;
             case FURNACE:
+                return;
             case HOPPER:
                 getHandle().a(((CanaryComplexBlock) inventory).getTileEntity());
                 return;
             case MINECART_HOPPER:
                 break;
             case WORKBENCH:
-                CanaryWorkbench bench = (CanaryWorkbench) inventory;
-                getHandle().b(bench.getX(), bench.getY(), bench.getZ());
+                getHandle().openContainer(((CanaryWorkbench) inventory).getContainer(), 1, 9);
                 return;
             default:
                 return;
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void createAndOpenWorkbench() {
+        Inventory bench_inv = new ContainerWorkbench(getHandle().bn, ((CanaryWorld) getWorld()).getHandle(), -1, -1, -1).getInventory();
+        bench_inv.setCanOpenRemote(true);
+        openInventory(bench_inv);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void createAndOpenAnvil() {
+        Inventory anvil_inv = new ContainerRepair(getHandle().bn, ((CanaryWorld) getWorld()).getHandle(), -1, -1, -1, getHandle()).getInventory();
+        anvil_inv.setCanOpenRemote(true);
+        openInventory(anvil_inv);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void createAndOpenEnchantmentTable(int bookshelves) {
+        CanaryEnchantmentTable ench_inv = (CanaryEnchantmentTable) new ContainerEnchantment(getHandle().bn, ((CanaryWorld) getWorld()).getHandle(), -1, -1, -1).getInventory();
+        ench_inv.setCanOpenRemote(true);
+        ench_inv.fakeCaseCount = MathHelp.setInRange(bookshelves, 0, 15);
+        openInventory(ench_inv);
     }
 
     /**

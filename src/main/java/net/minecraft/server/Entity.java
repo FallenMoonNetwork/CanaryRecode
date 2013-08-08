@@ -1622,7 +1622,7 @@ public abstract class Entity {
             ChunkCoordinates ochunkcoordinates;
 
             if (dimensionTo == 1) {
-                ochunkcoordinates = oworldserverTo.l(); // XXX
+                ochunkcoordinates = oworldserverTo.K(); // XXX
             } else {
                 ochunkcoordinates = oworldserverTo.l();
             }

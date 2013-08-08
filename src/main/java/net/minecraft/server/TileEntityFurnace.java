@@ -242,6 +242,11 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
     }
 
     public boolean a(EntityPlayer entityplayer) {
+        // CanaryMod: remote inventories
+        if (getCanaryFurnace().canOpenRemote()) {
+            return true;
+        }
+        //
         return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
     }
 
