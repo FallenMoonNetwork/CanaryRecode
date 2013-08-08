@@ -153,6 +153,9 @@ public abstract class Entity {
     }
 
     public void w() {
+        if (this instanceof EntityDragon) {
+            Thread.dumpStack();
+        }
         this.M = true;
     }
 

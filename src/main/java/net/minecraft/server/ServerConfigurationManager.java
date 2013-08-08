@@ -560,12 +560,15 @@ public abstract class ServerConfigurationManager {
                 chunkcoordinates = worldserver1.l();
             }
 
-            d0 = (double) chunkcoordinates.a;
-            entity.v = (double) chunkcoordinates.b;
-            d1 = (double) chunkcoordinates.c;
-            entity.b(d0, entity.v, d1, 90.0F, 0.0F);
-            if (entity.S()) {
-                worldserver.a(entity, false);
+            // CanaryMod: fix for an Entity trying to go to an unloaded world via a portal
+            if (chunkcoordinates != null) {
+                d0 = (double) chunkcoordinates.a;
+                entity.v = (double) chunkcoordinates.b;
+                d1 = (double) chunkcoordinates.c;
+                entity.b(d0, entity.v, d1, 90.0F, 0.0F);
+                if (entity.S()) {
+                    worldserver.a(entity, false);
+                }
             }
         }
 

@@ -1,6 +1,7 @@
 package net.canarymod.api.entity.living.animal;
 
 import net.canarymod.api.entity.EntityType;
+import net.canarymod.api.entity.vehicle.CanaryAnimalVehicle;
 import net.minecraft.server.EntityPig;
 
 /**
@@ -8,7 +9,7 @@ import net.minecraft.server.EntityPig;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryPig extends CanaryEntityAnimal implements Pig {
+public class CanaryPig extends CanaryAnimalVehicle implements Pig {
 
     /**
      * Constructs a new wrapper for EntityPig

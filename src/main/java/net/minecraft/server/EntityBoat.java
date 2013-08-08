@@ -130,9 +130,13 @@ public class EntityBoat extends Entity {
             this.a(this.d() - 1.0F);
         }
 
+        double ppX = this.r, ppY = this.s, ppZ = this.t; // CanaryMod: previousprevious
+        float prevRot = this.A, prevPit = this.B;
+
         this.r = this.u;
         this.s = this.v;
         this.t = this.w;
+
         byte b0 = 5;
         double d0 = 0.0D;
 
@@ -294,8 +298,22 @@ public class EntityBoat extends Entity {
             if (Math.floor(this.r) != Math.floor(this.u) || Math.floor(this.s) != Math.floor(this.v) || Math.floor(this.t) != Math.floor(this.w)) {
                 Vector3D from = new Vector3D(this.r, this.s, this.t);
                 Vector3D to = new Vector3D(this.u, this.v, this.w);
-                new VehicleMoveHook((Vehicle) this.entity, from, to).call();
-                // Can't handle canceling yet...
+                VehicleMoveHook vmh = (VehicleMoveHook) new VehicleMoveHook((Vehicle) this.entity, from, to).call();
+                if (vmh.isCanceled()) {
+                    this.x = 0.0D;
+                    this.y = 0.0D;
+                    this.z = 0.0D;
+                    this.b(this.r, this.s, this.t, prevRot, prevPit);
+                    this.r = ppX;
+                    this.s = ppY;
+                    this.t = ppZ;
+                    this.V(); // Update rider
+                    if (this.n != null && this.n instanceof EntityPlayerMP) {
+                        double ox = Math.cos((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
+                        double oz = Math.sin((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
+                        ((EntityPlayerMP) this.n).a.b(new Packet13PlayerLookMove(this.u + ox, this.v + this.X() + this.n.W(), this.v + this.X(), this.w + oz, this.n.A, this.n.B, this.F));
+                    }
+                }
             }
             //
             if (!this.q.I) {

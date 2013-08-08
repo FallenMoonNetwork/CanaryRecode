@@ -3,6 +3,7 @@ package net.canarymod.api.entity.living.animal;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.entity.living.LivingBase;
+import net.canarymod.api.entity.vehicle.CanaryAnimalVehicle;
 import net.canarymod.api.inventory.CanaryAnimalInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.minecraft.server.EntityHorse;
@@ -12,7 +13,7 @@ import net.minecraft.server.EntityHorse;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryHorse extends CanaryEntityAnimal implements Horse {
+public class CanaryHorse extends CanaryAnimalVehicle implements Horse {
 
     public CanaryHorse(EntityHorse entity) {
         super(entity);

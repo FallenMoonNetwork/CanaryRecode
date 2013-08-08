@@ -139,7 +139,7 @@ public class NetServerHandler extends NetHandler {
                 PlayerMoveHook hook = (PlayerMoveHook) new PlayerMoveHook(c.getPlayer(), from, c.getPlayer().getLocation()).call();
                 if (hook.isCanceled()) {
                     // Return the player to their previous position gracefully, hopefully bypassing the TeleportHook and not going derp.
-                    this.c.a.b(new Packet13PlayerLookMove(from.getX(), from.getY() + 1.6200000047683716D, from.getY(), from.getZ(), from.getRotation(), from.getPitch(), false));
+                    this.c.a.b(new Packet13PlayerLookMove(from.getX(), from.getY() + 1.6200000047683716D, from.getY(), from.getZ(), from.getRotation(), from.getPitch(), this.c.F));
                     this.c.b(from.getX(), from.getY(), from.getZ()); // correct position server side to, or get BoUnCy
                     return;
                 }
@@ -324,7 +324,7 @@ public class NetServerHandler extends NetHandler {
         this.o = d1;
         this.p = d2;
         this.c.a(d0, d1, d2, f0, f1);
-        this.c.a.b(new Packet13PlayerLookMove(d0, d1 + 1.6200000047683716D, d1, d2, f0, f1, false));
+        this.c.a.b(new Packet13PlayerLookMove(d0, d1 + 1.6200000047683716D, d1, d2, f0, f1, this.c.F));
     }
 
     @Override

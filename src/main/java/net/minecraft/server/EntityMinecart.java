@@ -243,6 +243,8 @@ public abstract class EntityMinecart extends Entity {
                 this.b(this.A, this.B);
             }
         } else {
+            float prevRot = this.A, prevPit = this.B;
+            double ppX = this.r, ppY = this.s, ppZ = this.t;
             this.r = this.u;
             this.s = this.v;
             this.t = this.w;
@@ -251,15 +253,6 @@ public abstract class EntityMinecart extends Entity {
 
             i0 = MathHelper.c(this.v);
             int i2 = MathHelper.c(this.w);
-
-            // CanaryMod: VehicleMove
-            if (Math.floor(this.r) != Math.floor(this.u) || Math.floor(this.s) != Math.floor(this.v) || Math.floor(this.t) != Math.floor(this.w)) {
-                Vector3D from = new Vector3D(this.r, this.s, this.t);
-                Vector3D to = new Vector3D(this.u, this.v, this.w);
-                new VehicleMoveHook((Vehicle) this.entity, from, to).call();
-                // Can't handle canceling yet... if (vmh.isCanceled()) { }
-            }
-            //
 
             if (BlockRailBase.d_(this.q, i1, i0 - 1, i2)) {
                 --i0;
@@ -307,6 +300,29 @@ public abstract class EntityMinecart extends Entity {
             }
 
             this.b(this.A, this.B);
+            // CanaryMod: VehicleMove
+            if (Math.floor(this.r) != Math.floor(this.u) || Math.floor(this.s) != Math.floor(this.v) || Math.floor(this.t) != Math.floor(this.w)) {
+                Vector3D from = new Vector3D(this.r, this.s, this.t);
+                Vector3D to = new Vector3D(this.u, this.v, this.w);
+                VehicleMoveHook vmh = (VehicleMoveHook) new VehicleMoveHook((Vehicle) this.entity, from, to).call();
+                if (vmh.isCanceled()) {
+                    this.x = 0.0D;
+                    this.y = 0.0D;
+                    this.z = 0.0D;
+                    this.b(this.r, this.s, this.t, prevRot, prevPit);
+                    this.r = ppX;
+                    this.s = ppY;
+                    this.t = ppZ;
+                    this.V(); // Update rider
+                    if (this.n != null && this.n instanceof EntityPlayerMP) {
+                        double ox = Math.cos((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
+                        double oz = Math.sin((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
+                        ((EntityPlayerMP) this.n).a.b(new Packet13PlayerLookMove(this.u + ox, this.v + this.X() + this.n.W(), this.v + this.X(), this.w + oz, this.n.A, this.n.B, this.F));
+                    }
+                }
+            }
+            //
+
             List list = this.q.b((Entity) this, this.E.b(0.20000000298023224D, 0.0D, 0.20000000298023224D));
 
             if (list != null && !list.isEmpty()) {
@@ -314,7 +330,12 @@ public abstract class EntityMinecart extends Entity {
                     Entity entity = (Entity) list.get(i5);
 
                     if (entity != this.n && entity.L() && entity instanceof EntityMinecart) {
-                        entity.f((Entity) this);
+                        // CanaryMod: VehicleCollision
+                        VehicleCollisionHook vch = (VehicleCollisionHook) new VehicleCollisionHook((Vehicle) this.entity, entity.getCanaryEntity()).call();
+                        if (!vch.isCanceled()) {
+                            entity.f((Entity) this);
+                        }
+                        //
                     }
                 }
             }
