@@ -15,17 +15,22 @@ import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.Packet;
 import net.canarymod.api.PlayerListEntry;
 import net.canarymod.api.entity.EntityType;
+import net.canarymod.api.entity.living.animal.CanaryHorse;
+import net.canarymod.api.inventory.CanaryAnimalInventory;
 import net.canarymod.api.inventory.CanaryContainerEntity;
 import net.canarymod.api.inventory.EnderChestInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.CanaryAnvil;
-import net.canarymod.api.world.blocks.CanaryComplexBlock;
+import net.canarymod.api.world.blocks.CanaryBeacon;
+import net.canarymod.api.world.blocks.CanaryBrewingStand;
 import net.canarymod.api.world.blocks.CanaryContainerBlock;
 import net.canarymod.api.world.blocks.CanaryDispenser;
 import net.canarymod.api.world.blocks.CanaryDropper;
 import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
+import net.canarymod.api.world.blocks.CanaryFurnace;
+import net.canarymod.api.world.blocks.CanaryHopperBlock;
 import net.canarymod.api.world.blocks.CanarySign;
 import net.canarymod.api.world.blocks.CanaryWorkbench;
 import net.canarymod.api.world.blocks.Sign;
@@ -43,9 +48,14 @@ import net.canarymod.permissionsystem.PermissionProvider;
 import net.canarymod.user.Group;
 import net.canarymod.warp.Warp;
 import net.minecraft.server.ChunkCoordinates;
+import net.minecraft.server.ContainerBeacon;
+import net.minecraft.server.ContainerBrewingStand;
 import net.minecraft.server.ContainerChest;
 import net.minecraft.server.ContainerDispenser;
 import net.minecraft.server.ContainerEnchantment;
+import net.minecraft.server.ContainerFurnace;
+import net.minecraft.server.ContainerHopper;
+import net.minecraft.server.ContainerHorseInventory;
 import net.minecraft.server.ContainerRepair;
 import net.minecraft.server.ContainerWorkbench;
 import net.minecraft.server.EntityPlayerMP;
@@ -853,23 +863,29 @@ public class CanaryPlayer extends CanaryHuman implements Player {
                 getHandle().openContainer(((CanaryAnvil) inventory).getContainer(), 8, 9);
                 return;
             case ANIMAL:
+                getHandle().openContainer(new ContainerHorseInventory(getHandle().bn, ((CanaryAnimalInventory) inventory).getHandle(), ((CanaryHorse) ((CanaryAnimalInventory) inventory).getOwner()).getHandle()), 11, inventory.getSize(), ((CanaryContainerEntity) inventory).getHandle().c());
                 return;
             case BEACON:
+                getHandle().openContainer(new ContainerBeacon(getHandle().bn, ((CanaryBeacon) inventory).getTileEntity()), 7, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
                 return;
             case BREWING:
+                getHandle().openContainer(new ContainerBrewingStand(getHandle().bn, ((CanaryBrewingStand) inventory).getTileEntity()), 5, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
                 return;
             case DISPENSER:
-                getHandle().openContainer(new ContainerDispenser(getHandle().bn, ((CanaryDispenser) inventory).getTileEntity()), inventory instanceof CanaryDropper ? 10 : 3, inventory.getSize(), ((CanaryDispenser) inventory).getTileEntity().c());
+                getHandle().openContainer(new ContainerDispenser(getHandle().bn, ((CanaryDispenser) inventory).getTileEntity()), inventory instanceof CanaryDropper ? 10 : 3, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
+                return;
             case ENCHANTMENT:
-                getHandle().openContainer(((CanaryEnchantmentTable) inventory).getContainer(), 4, 9);
+                getHandle().openContainer(((CanaryEnchantmentTable) inventory).getContainer(), 4, inventory.getSize());
                 return;
             case FURNACE:
+                getHandle().openContainer(new ContainerFurnace(getHandle().bn, ((CanaryFurnace) inventory).getTileEntity()), 2, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
                 return;
             case HOPPER:
-                getHandle().a(((CanaryComplexBlock) inventory).getTileEntity());
+                getHandle().openContainer(new ContainerHopper(getHandle().bn, ((CanaryHopperBlock) inventory).getTileEntity()), 9, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
                 return;
             case MINECART_HOPPER:
-                break;
+                getHandle().openContainer(new ContainerHopper(getHandle().bn, ((CanaryContainerEntity) inventory).getHandle()), 9, inventory.getSize(), ((CanaryContainerEntity) inventory).getHandle().c());
+                return;
             case WORKBENCH:
                 getHandle().openContainer(((CanaryWorkbench) inventory).getContainer(), 1, 9);
                 return;
