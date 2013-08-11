@@ -689,7 +689,11 @@ public class CanaryWorld implements World {
         if (c == null) {
             return BiomeType.fromId((byte) 0);
         }
-        return BiomeType.fromId(c.getBiomeByteData()[z << 4 | x]);
+        int xx = x - ((x >> 4) * 16);
+        int zz = z - ((z >> 4) * 16);
+//        Canary.logInfo(String.format("Chunk: %s:%s   Index: %s   Value:%s", xx, zz, zz << 4 | xx, c.getBiomeByteData()[zz << 4 | xx]));
+////        return BiomeType.fromId(c.getBiomeByteData()[zz << 4 | xx]);
+        return BiomeType.fromId((byte) c.getHandle().a(xx, zz, this.getHandle().u()).N);
     }
 
     @Override
