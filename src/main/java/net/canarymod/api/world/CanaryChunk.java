@@ -11,7 +11,7 @@ import net.minecraft.server.ChunkPosition;
 
 /**
  * Chunk implementation
- * 
+ *
  * @author Chris (damagefilter)
  * @author Jason (darkdiplomat)
  * @author Jos Kuijpers
@@ -180,6 +180,11 @@ public class CanaryChunk implements Chunk {
     @Override
     public void relightBlock(int x, int y, int z) {
         handle.h(x, y, z);
-        
+
+    }
+
+    @Override
+    public Biome getBiome(int x, int z) {
+        return this.getHandle().a(x, z, this.getHandle().e.u()).getCanaryBiome();
     }
 }

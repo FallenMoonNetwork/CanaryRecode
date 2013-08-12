@@ -741,4 +741,15 @@ public class CanaryWorld implements World {
 
         return test == this;
     }
+
+    @Override
+    public Biome getBiome(int x, int z) {
+        CanaryChunk c = (CanaryChunk) getChunk(x, z);
+        if (c == null) {
+            return null;
+        }
+        int xx = x - ((x >> 4) * 16);
+        int zz = z - ((z >> 4) * 16);
+        return c.getHandle().a(xx, zz, this.getHandle().u()).getCanaryBiome();
+    }
 }
