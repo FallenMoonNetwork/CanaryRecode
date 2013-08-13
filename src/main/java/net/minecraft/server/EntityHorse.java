@@ -3,6 +3,10 @@ package net.minecraft.server;
 import java.util.Iterator;
 import java.util.List;
 import net.canarymod.api.entity.living.animal.CanaryHorse;
+import net.canarymod.api.entity.vehicle.Vehicle;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.VehicleEnterHook;
+import net.canarymod.hook.entity.VehicleExitHook;
 
 public class EntityHorse extends EntityAnimal implements IInvBasic {
 
@@ -640,7 +644,20 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         this.o(false);
         this.p(false);
         if (!this.q.I) {
-            entityplayer.a((Entity) this);
+            // CanaryMod: VehicleEnter/VehicleExit
+            CancelableHook hook = null;
+            if (this.n == null) {
+                hook = new VehicleEnterHook((Vehicle) this.entity, entityplayer.getCanaryHuman());
+            } else if (this.n == entityplayer) {
+                hook = new VehicleExitHook((Vehicle) this.entity, entityplayer.getCanaryHuman());
+            }
+            if (hook != null) {
+                hook.call();
+                if (!hook.isCanceled()) {
+                    entityplayer.a((Entity) this);
+                }
+            }
+            //
         }
     }
 

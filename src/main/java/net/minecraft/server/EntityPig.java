@@ -1,6 +1,10 @@
 package net.minecraft.server;
 
 import net.canarymod.api.entity.living.animal.CanaryPig;
+import net.canarymod.api.entity.vehicle.Vehicle;
+import net.canarymod.hook.CancelableHook;
+import net.canarymod.hook.entity.VehicleEnterHook;
+import net.canarymod.hook.entity.VehicleExitHook;
 
 public class EntityPig extends EntityAnimal {
 
@@ -78,7 +82,20 @@ public class EntityPig extends EntityAnimal {
         if (super.a(entityplayer)) {
             return true;
         } else if (this.bT() && !this.q.I && (this.n == null || this.n == entityplayer)) {
-            entityplayer.a((Entity) this);
+            // CanaryMod: VehicleEnter/VehicleExit
+            CancelableHook hook = null;
+            if (this.n == null) {
+                hook = new VehicleEnterHook((Vehicle) this.entity, entityplayer.getCanaryHuman());
+            } else if (this.n == entityplayer) {
+                hook = new VehicleExitHook((Vehicle) this.entity, entityplayer.getCanaryHuman());
+            }
+            if (hook != null) {
+                hook.call();
+                if (!hook.isCanceled()) {
+                    entityplayer.a((Entity) this);
+                }
+            }
+            //
             return true;
         } else {
             return false;
