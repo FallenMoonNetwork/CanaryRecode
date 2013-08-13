@@ -312,6 +312,9 @@ public class EntityBoat extends Entity {
                         double ox = Math.cos((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
                         double oz = Math.sin((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
                         ((EntityPlayerMP) this.n).a.b(new Packet13PlayerLookMove(this.u + ox, this.v + this.X() + this.n.W(), this.v + this.X(), this.w + oz, this.n.A, this.n.B, this.F));
+                        this.n.x = 0.0D;
+                        this.n.y = 0.0D;
+                        this.n.z = 0.0D;
                     }
                 }
             }

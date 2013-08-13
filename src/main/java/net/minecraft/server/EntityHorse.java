@@ -4,9 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 import net.canarymod.api.entity.living.animal.CanaryHorse;
 import net.canarymod.api.entity.vehicle.Vehicle;
+import net.canarymod.api.world.position.Vector3D;
 import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.VehicleEnterHook;
 import net.canarymod.hook.entity.VehicleExitHook;
+import net.canarymod.hook.entity.VehicleMoveHook;
 
 public class EntityHorse extends EntityAnimal implements IInvBasic {
 
@@ -870,6 +872,8 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
 
     public void e(float f0, float f1) {
         if (this.n != null && this.co()) {
+            double prevX = this.r, prevY = this.s, prevZ = this.t;
+            float prevR = this.A, prevP = this.B;
             this.C = this.A = this.n.A;
             this.B = this.n.B * 0.5F;
             this.b(this.A, this.B);
@@ -911,6 +915,30 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
             if (!this.q.I) {
                 this.i((float) this.a(SharedMonsterAttributes.d).e());
                 super.e(f0, f1);
+                // TODO: This may be the move point
+                if (Math.floor(this.r) != Math.floor(this.u) || Math.floor(this.s) != Math.floor(this.v) || Math.floor(this.t) != Math.floor(this.w)) {
+                    Vector3D from = new Vector3D(this.r, this.s, this.t);
+                    Vector3D to = new Vector3D(this.u, this.v, this.w);
+                    VehicleMoveHook vmh = (VehicleMoveHook) new VehicleMoveHook((Vehicle) this.entity, from, to).call();
+                    if (vmh.isCanceled()) {
+                        this.x = 0.0D;
+                        this.y = 0.0D;
+                        this.z = 0.0D;
+                        this.b(this.r, this.s, this.t, prevR, prevP);
+                        this.r = prevX;
+                        this.s = prevY;
+                        this.t = prevZ;
+                        this.V(); // Update rider
+                        if (this.n instanceof EntityPlayerMP) {
+                            double ox = Math.cos((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
+                            double oz = Math.sin((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
+                            ((EntityPlayerMP) this.n).a.b(new Packet13PlayerLookMove(this.u + ox, this.v + this.X() + this.n.W(), this.v + this.X(), this.w + oz, this.n.A, this.n.B, this.F));
+                            this.n.x = 0.0D;
+                            this.n.y = 0.0D;
+                            this.n.z = 0.0D;
+                        }
+                    }
+                }
             }
 
             if (this.F) {
