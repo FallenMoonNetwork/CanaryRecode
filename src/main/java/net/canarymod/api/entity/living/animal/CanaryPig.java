@@ -31,7 +31,7 @@ public class CanaryPig extends CanaryAnimalVehicle implements Pig {
 
     @Override
     public String getFqName() {
-        return "Ocelot";
+        return "Pig";
     }
 
     /**
