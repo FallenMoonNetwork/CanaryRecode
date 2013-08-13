@@ -20,7 +20,7 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(int id) {
-        return new CanaryItem(id, 0);
+        return this.newItem(id, 0, 0);
     }
 
     /**
@@ -28,7 +28,7 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(int id, int damage) {
-        return new CanaryItem(id, damage);
+        return this.newItem(id, damage, 0);
     }
 
     /**
@@ -36,9 +36,7 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(int id, int damage, int stackSize) {
-        CanaryItem item = new CanaryItem(id, damage);
-
-        item.setAmount(stackSize);
+        CanaryItem item = new CanaryItem(id, stackSize, damage);
         return item;
     }
 
@@ -47,7 +45,7 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(ItemType type) {
-        return type == null ? null : new CanaryItem(type.getId(), 0);
+        return type == null ? null : new CanaryItem(type.getId(), 0, 0);
     }
 
     /**
@@ -63,12 +61,7 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(ItemType type, int damage, int stackSize) {
-        if (type == null) {
-            return null;
-        }
-
-        CanaryItem item = new CanaryItem(type.getId(), stackSize, damage);
-        return item;
+        return type == null ? null : new CanaryItem(type.getId(), stackSize, damage);
     }
 
     /**
@@ -76,12 +69,7 @@ public class CanaryItemFactory implements ItemFactory {
      */
     @Override
     public Item newItem(Item item) {
-        if (item == null) {
-            return null;
-        }
-
-        CanaryItem item2 = new CanaryItem(((CanaryItem) item).getHandle().m());
-        return item2;
+        return item == null ? null : new CanaryItem(((CanaryItem) item).getHandle().m());
     }
 
     /**
@@ -111,7 +99,6 @@ public class CanaryItemFactory implements ItemFactory {
     @Override
     public Item newItem(int id, int damage, Enchantment[] enchantments) {
         CanaryItem item = new CanaryItem(id, 0, damage);
-
         item.setEnchantments(enchantments);
         return item;
     }

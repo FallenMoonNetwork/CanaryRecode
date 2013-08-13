@@ -535,6 +535,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         } else {
             return Direction.ERROR;
         }
+
     }
 
     /**

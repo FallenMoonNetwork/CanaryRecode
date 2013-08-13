@@ -26,7 +26,7 @@ public class CanaryItem implements Item {
      * @param itemStack
      */
     public CanaryItem(ItemStack itemStack) {
-        this.type = ItemType.fromId(itemStack.d);
+        this.type = ItemType.fromIdAndData(itemStack.d, itemStack.k());
         this.item = itemStack;
     }
 
@@ -37,13 +37,13 @@ public class CanaryItem implements Item {
 
     public CanaryItem(int itemId, int amount, int damage) {
         this.item = new ItemStack(itemId, amount, damage);
-        this.type = ItemType.fromId(itemId);
+        this.type = ItemType.fromIdAndData(itemId, damage);
     }
 
     public CanaryItem(int itemId, int amount, int damage, int slot) {
         this.item = new ItemStack(itemId, amount, damage);
         this.slot = slot;
-        this.type = ItemType.fromId(itemId);
+        this.type = ItemType.fromIdAndData(itemId, damage);
     }
 
     /**

@@ -104,7 +104,7 @@ public abstract class CanaryHuman extends CanaryLivingBase implements Human {
      */
     @Override
     public void dropItem(Item item) {
-        getWorld().dropItem((int) getX(), (int) getY(), (int) getZ(), item);
+        getWorld().dropItem(getPosition(), item);
     }
 
     /**

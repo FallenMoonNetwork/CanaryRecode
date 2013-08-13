@@ -136,7 +136,7 @@ public class CanaryWorld implements World {
 
         net.minecraft.server.EntityItem oei = new net.minecraft.server.EntityItem(world, x + d1, y + d2, z + d3, ((CanaryItem) item).getHandle());
 
-        oei.c = 10;
+        oei.b = 10;
         world.d(oei);
         return oei.getEntityItem();
     }
