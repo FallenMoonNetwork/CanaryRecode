@@ -109,6 +109,11 @@ public class CanarySign extends CanaryComplexBlock implements Sign {
     }
 
     @Override
+    public String getOwnerName() {
+        return getTileEntity().getOwnerName();
+    }
+
+    @Override
     public Player getOwner() {
         EntityPlayer entityplayer = getTileEntity().b();
         return (Player) (entityplayer == null ? null : entityplayer.getCanaryEntity());

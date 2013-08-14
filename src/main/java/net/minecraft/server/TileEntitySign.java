@@ -8,6 +8,7 @@ public class TileEntitySign extends TileEntity {
     public int b = -1;
     public boolean c = true; // CanaryMod: private => public; editable
     private EntityPlayer d;
+    private String owner_name; // CanaryMod: Track owner name
 
     public TileEntitySign() {
         this.complexBlock = new CanarySign(this); // CanaryMod: wrap sign
@@ -19,6 +20,7 @@ public class TileEntitySign extends TileEntity {
         nbttagcompound.a("Text2", this.a[1]);
         nbttagcompound.a("Text3", this.a[2]);
         nbttagcompound.a("Text4", this.a[3]);
+        nbttagcompound.a("Owner", this.d != null ? d.c_() : "");
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -31,6 +33,7 @@ public class TileEntitySign extends TileEntity {
                 this.a[i0] = this.a[i0].substring(0, 15);
             }
         }
+        this.owner_name = nbttagcompound.i("OwnerName");
     }
 
     public Packet m() {
@@ -49,12 +52,24 @@ public class TileEntitySign extends TileEntity {
     }
 
     public EntityPlayer b() {
+        // CanaryMod: Set Player owner if not already set and if they are available to be set
+        if (this.d == null) {
+            if (this.owner_name.isEmpty()) {
+                return null;
+            }
+            this.d = MinecraftServer.F().af().f(owner_name);
+        }
+        //
         return this.d;
     }
 
     // CanaryMod
     public CanarySign getCanarySign() {
         return (CanarySign) complexBlock;
+    }
+
+    public String getOwnerName() {
+        return owner_name;
     }
     //
 }
