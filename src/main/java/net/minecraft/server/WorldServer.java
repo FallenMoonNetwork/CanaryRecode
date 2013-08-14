@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
+
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.CanaryPlayerManager;
-import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.world.TimeChangeHook;
 import net.canarymod.hook.world.WeatherChangeHook;
@@ -65,7 +65,6 @@ public class WorldServer extends World {
 
         scoreboardsavedata.a(this.D);
         ((ServerScoreboard) this.D).a(scoreboardsavedata);
-        canaryDimension = new CanaryWorld(s0, (WorldServer) this, net.canarymod.api.world.DimensionType.fromId(i0));
     }
 
     @Override
@@ -764,7 +763,7 @@ public class WorldServer extends World {
 
     /**
      * Get the canary player manager wrapper for this dimension
-     * 
+     *
      * @return
      */
     public CanaryPlayerManager getPlayerManager() {

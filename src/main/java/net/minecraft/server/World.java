@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Callable;
+
 import net.canarymod.api.entity.living.humanoid.CanaryHuman;
 import net.canarymod.api.entity.vehicle.CanaryVehicle;
 import net.canarymod.api.world.CanaryWorld;
@@ -101,6 +102,7 @@ public abstract class World implements IBlockAccess {
             this.t = WorldProvider.a(0);
         }
         // CanaryMod set dimension type in world provider
+        canaryDimension = new CanaryWorld(s0, (WorldServer) this, type);
         this.t.setCanaryDimensionType(type);
         if (this.x == null) {
             this.x = new WorldInfo(worldsettings, s0);
@@ -2718,7 +2720,7 @@ public abstract class World implements IBlockAccess {
 
     /**
      * Get the canary dimension wrapper
-     * 
+     *
      * @return
      */
     public CanaryWorld getCanaryWorld() {
@@ -2727,7 +2729,7 @@ public abstract class World implements IBlockAccess {
 
     /**
      * Set the canary dimension wrapper
-     * 
+     *
      * @param dim
      */
     public void setCanaryWorld(CanaryWorld dim) {
@@ -2736,7 +2738,7 @@ public abstract class World implements IBlockAccess {
 
     /**
      * Checks if the Entity is allowed to spawn based on the world configuration
-     * 
+     *
      * @param entity
      *            the entity to check
      * @return true if can spawn; flase if not

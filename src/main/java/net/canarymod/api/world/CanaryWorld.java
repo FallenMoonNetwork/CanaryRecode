@@ -1,10 +1,9 @@
 package net.canarymod.api.world;
 
 import java.util.ArrayList;
+
 import net.canarymod.WorldCacheTimer;
 import net.canarymod.api.CanaryEntityTracker;
-import net.canarymod.api.CanaryPlayerManager;
-import net.canarymod.api.EntityTracker;
 import net.canarymod.api.GameMode;
 import net.canarymod.api.PlayerManager;
 import net.canarymod.api.entity.CanaryEntity;
@@ -59,12 +58,8 @@ import net.visualillusionsent.utils.TaskManager;
 public class CanaryWorld implements World {
     private WorldServer world;
     private DimensionType type;
-    private CanaryChunkProviderServer chunkProvider;
-    private CanaryEntityTracker entityTracker;
     public long[] nanoTicks;
     private WorldConfiguration wrld_cfg;
-
-    private CanaryPlayerManager playerManager;
     /**
      * The world name
      */
@@ -75,12 +70,8 @@ public class CanaryWorld implements World {
         this.type = type;
         world = dimension;
         fqName = name + "_" + this.type.getName();
-
-        playerManager = dimension.s().getPlayerManager();
-        entityTracker = dimension.getEntityTracker();
         // Init nanotick size
         nanoTicks = new long[100];
-        chunkProvider = new CanaryChunkProviderServer(dimension.b);
         wrld_cfg = Configuration.getWorldConfig(this.fqName);
         if (Configuration.getServerConfig().isWorldCacheTimerEnabled()) {
             TaskManager.scheduleContinuedTaskInMinutes(new WorldCacheTimer(this), Configuration.getServerConfig().getWorldCacheTimeout(), Configuration.getServerConfig().getWorldCacheTimeout());
@@ -110,12 +101,7 @@ public class CanaryWorld implements World {
 
     @Override
     public CanaryEntityTracker getEntityTracker() {
-        return entityTracker;
-    }
-
-    @Override
-    public void setEntityTracker(EntityTracker entityTracker) {
-        this.entityTracker = (CanaryEntityTracker) entityTracker;
+        return world.q().getCanaryEntityTracker();
     }
 
     @Override
@@ -221,7 +207,7 @@ public class CanaryWorld implements World {
 
     @Override
     public ArrayList<Player> getPlayerList() {
-        return playerManager.getManagedPlayers();
+        return getPlayerManager().getManagedPlayers();
     }
 
     @Override
@@ -237,7 +223,7 @@ public class CanaryWorld implements World {
 
     @Override
     public ArrayList<Entity> getTrackedEntities() {
-        return entityTracker.getTrackedEntities();
+        return getEntityTracker().getTrackedEntities();
     }
 
     @Override
@@ -327,22 +313,22 @@ public class CanaryWorld implements World {
 
     @Override
     public ChunkProvider getChunkProvider() {
-        return chunkProvider;
+        return world.b.getCanaryChunkProvider();
     }
 
     @Override
     public boolean isChunkLoaded(Block block) {
-        return chunkProvider.isChunkLoaded(block.getX() >> 4, block.getZ() >> 4);
+        return getChunkProvider().isChunkLoaded(block.getX() >> 4, block.getZ() >> 4);
     }
 
     @Override
     public boolean isChunkLoaded(int x, int y, int z) {
-        return chunkProvider.isChunkLoaded(x >> 4, z >> 4);
+        return getChunkProvider().isChunkLoaded(x >> 4, z >> 4);
     }
 
     @Override
     public boolean isChunkLoaded(int x, int z) {
-        return chunkProvider.isChunkLoaded(x >> 4, z >> 4);
+        return getChunkProvider().isChunkLoaded(x >> 4, z >> 4);
     }
 
     @Override
@@ -415,23 +401,23 @@ public class CanaryWorld implements World {
 
     @Override
     public Chunk loadChunk(int x, int z) {
-        return chunkProvider.loadChunk(x >> 4, z >> 4);
+        return getChunkProvider().loadChunk(x >> 4, z >> 4);
     }
 
     @Override
     public Chunk loadChunk(Location location) {
-        return chunkProvider.loadChunk((int) location.getX() >> 4, (int) location.getZ() >> 4);
+        return getChunkProvider().loadChunk((int) location.getX() >> 4, (int) location.getZ() >> 4);
     }
 
     @Override
     public Chunk loadChunk(Position vec3d) {
-        return chunkProvider.loadChunk((int) vec3d.getX() >> 4, (int) vec3d.getZ() >> 4);
+        return getChunkProvider().loadChunk((int) vec3d.getX() >> 4, (int) vec3d.getZ() >> 4);
     }
 
     @Override
     public Chunk getChunk(int x, int z) {
         if (isChunkLoaded(x, z)) {
-            return chunkProvider.provideChunk(x >> 4, z >> 4);
+            return getChunkProvider().provideChunk(x >> 4, z >> 4);
         } else {
             return null;
         }
@@ -444,12 +430,7 @@ public class CanaryWorld implements World {
 
     @Override
     public PlayerManager getPlayerManager() {
-        return playerManager;
-    }
-
-    @Override
-    public void setPlayerManager(PlayerManager pm) {
-        this.playerManager = (CanaryPlayerManager) pm;
+        return world.s().getPlayerManager();
     }
 
     @Override
