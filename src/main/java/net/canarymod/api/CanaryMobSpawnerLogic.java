@@ -35,6 +35,10 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
         logic.b(tag.getHandle());
         ListTag list = tag.getListTag("SpawnPotentials");
 
+        if (list.isEmpty()) {
+            return new String[]{ logic.e() };
+        }
+
         for (int i = 0; i < list.size(); i++) {
             spawns.add(((CompoundTag) list.get(i)).getString("id"));
         }
