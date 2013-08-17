@@ -125,7 +125,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     // Used to initialize the "master" worlds
-    protected void initWorld(String name, long seed, WorldType nmsWt, net.canarymod.api.world.DimensionType worldtype, String generatorSettings) {
+    protected void initWorld(String name, long seed, WorldType nmsWt, net.canarymod.api.world.DimensionType dimType, String generatorSettings) {
         this.a(name); // Anvil Converter
         this.b("menu.loadingLevel");
         File worldFolder = new File("worlds/" + name);
@@ -135,9 +135,9 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             Canary.logInfo("World " + name + " is Vanilla. Will now attempt to convert.");
             converter.convert();
         }
-        AnvilSaveHandler isavehandler = new AnvilSaveHandler(new File("worlds/"), name, true, worldtype);
+        AnvilSaveHandler isavehandler = new AnvilSaveHandler(new File("worlds/"), name, true, dimType);
         WorldInfo worldinfo = isavehandler.d();
-        WorldConfiguration config = Configuration.getWorldConfig(name + "_" + worldtype.getName());
+        WorldConfiguration config = Configuration.getWorldConfig(name + "_" + dimType.getName());
 
         WorldSettings worldsettings;
         WorldServer world;
@@ -165,14 +165,14 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             worldsettings.a();
         }
 
-        if (worldtype.getId() == 0) {
+        if (dimType.getId() == 0) {
             if (this.O()) {
-                world = new DemoWorldServer(this, isavehandler, name, worldtype.getId(), this.a, this.an());
+                world = new DemoWorldServer(this, isavehandler, name, dimType.getId(), this.a, this.an());
             } else {
-                world = new WorldServer(this, isavehandler, name, worldtype.getId(), worldsettings, this.a, this.an());
+                world = new WorldServer(this, isavehandler, name, dimType.getId(), worldsettings, this.a, this.an());
             }
         } else {
-            world = new WorldServerMulti(this, isavehandler, name, worldtype.getId(), worldsettings, (WorldServer) ((CanaryWorld) worldManager.getWorld(name, net.canarymod.api.world.DimensionType.fromName("NORMAL"), true)).getHandle(), this.a, this.an());
+            world = new WorldServerMulti(this, isavehandler, name, dimType.getId(), worldsettings, (WorldServer) ((CanaryWorld) worldManager.getWorld(name, net.canarymod.api.world.DimensionType.fromName("NORMAL"), true)).getHandle(), this.a, this.an());
         }
 
         world.a((IWorldAccess) (new WorldManager(this, world)));

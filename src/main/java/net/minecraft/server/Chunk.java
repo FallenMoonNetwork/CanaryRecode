@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import net.canarymod.Canary;
 import net.canarymod.PortalReconstructJob;
 import net.canarymod.api.world.CanaryChunk;
@@ -19,7 +20,7 @@ public class Chunk {
 
     public static boolean a;
     private ExtendedBlockStorage[] r;
-    private byte[] s;
+    public byte[] s; //CanaryMod private => public
     public int[] b;
     public boolean[] c;
     public boolean d;
@@ -66,7 +67,6 @@ public class Chunk {
     public Chunk(World world, byte[] abyte, int i0, int i1) {
         this(world, i0, i1);
         int i2 = abyte.length / 256;
-
         for (int i3 = 0; i3 < 16; ++i3) {
             for (int i4 = 0; i4 < 16; ++i4) {
                 for (int i5 = 0; i5 < i2; ++i5) {
@@ -512,8 +512,11 @@ public class Chunk {
         ExtendedBlockStorage extendedblockstorage = this.r[i1 >> 4];
 
         if (extendedblockstorage == null) {
-            return false;
-        } else {
+            //CanaryMod add new extended block storage
+            this.r[i1 >> 4] = new ExtendedBlockStorage(i3, true);
+            extendedblockstorage = this.r[i1 >> 4];
+//            return false;
+        } //else {
             int i4 = extendedblockstorage.b(i0, i1 & 15, i2);
 
             if (i4 == i3) {
@@ -534,7 +537,7 @@ public class Chunk {
 
                 return true;
             }
-        }
+//        }
     }
 
     public int a(EnumSkyBlock enumskyblock, int i0, int i1, int i2) {

@@ -1,6 +1,7 @@
 package net.canarymod.api.world;
 
 import java.util.List;
+
 import net.minecraft.server.Chunk;
 import net.minecraft.server.ChunkPosition;
 import net.minecraft.server.EnumCreatureType;
@@ -59,7 +60,9 @@ public class CanaryChunkProviderCustom implements IChunkProvider {
     //unloadQueuedChunks
     @Override
     public boolean c() {
-        throw new UnsupportedOperationException("Custom Chunk Provider cannot unload chunks! This must be called from ChunkProviderServer instead!");
+        //All ChunkProviders, except ChunkProviderServer return false.
+        //This is an indication that unloading chunks failed
+        return false;
     }
 
     //canSave
