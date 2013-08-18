@@ -41,7 +41,7 @@ import net.canarymod.hook.player.TeleportHook;
 
 public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
-    private String bN = "en_US";
+    public String bN = "en_US"; // CanaryMod: private -> public
     public NetServerHandler a;
     public MinecraftServer b;
     public ItemInWorldManager c;

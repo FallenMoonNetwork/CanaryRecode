@@ -954,6 +954,14 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      * {@inheritDoc}
      */
     @Override
+    public String getLocale() {
+        return getHandle().bN;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String toString() {
         return String.format("Player[name=%s]", getName());
     }
