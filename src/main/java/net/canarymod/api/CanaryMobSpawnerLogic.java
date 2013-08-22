@@ -5,13 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntity;
+import net.canarymod.api.nbt.BaseTag;
 import net.canarymod.api.nbt.CanaryCompoundTag;
-import net.canarymod.api.nbt.CanaryListTag;
 import net.canarymod.api.nbt.CompoundTag;
 import net.canarymod.api.nbt.ListTag;
 import net.minecraft.server.MobSpawnerBaseLogic;
 import net.minecraft.server.NBTTagCompound;
-import net.minecraft.server.NBTTagList;
 
 /**
  * Implementation of MobSpawnerLogic
@@ -110,14 +109,15 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
         this.logic.m = range;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void setSpawnedEntities(MobSpawnerEntry... entries) {
         CanaryCompoundTag toSet = new CanaryCompoundTag(new NBTTagCompound());
-
         logic.b(toSet.getHandle());
-        ListTag list = new CanaryListTag(new NBTTagList());
-        list.addAll(Arrays.asList(entries));
+        ListTag<BaseTag> list = Canary.factory().getNBTFactory().newListTag("SpawnPotentials");
+        for (MobSpawnerEntry entry : entries) {
+            list.add(entry.getSpawnPotentialsTag());
+        }
+        toSet.remove("SpawnPotentials");
         toSet.put("SpawnPotentials", list);
         logic.a(toSet.getHandle());
     }

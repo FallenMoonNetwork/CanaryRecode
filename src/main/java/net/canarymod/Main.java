@@ -21,7 +21,6 @@ public class Main {
         // Initialize the bird
         mod = new CanaryMod();
         Canary.setCanary(mod);
-        Canary.logInfo("Starting: " + CanaryMod.getImplementationTitle() + " " + CanaryMod.getImplementationVersion() + " Implementing: " + CanaryMod.getSpecificationTitle() + " " + CanaryMod.getSpecificationVersion());
         // Add system internal serializers
         Canary.addSerializer(new ItemSerializer(), CanaryItem.class);
         Canary.addSerializer(new ItemSerializer(), Item.class);
@@ -35,27 +34,30 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
+        System.out.println("Starting: " + Canary.getImplementationTitle() + " " + Canary.getImplementationVersion() + " Implementing: " + Canary.getSpecificationTitle() + " " + Canary.getSpecificationVersion());
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {} // Need to initialize the SQLite driver for some reason, initialize here for plugin use as well
         try {
             MinecraftServer.setHeadless(GraphicsEnvironment.isHeadless());
-            for (int i1 = 0; i1 < args.length; ++i1) {
-                String s3 = args[i1];
-                if (!s3.equals("nogui") && !s3.equals("--nogui")) {
-                    ;
-                } else {
+            for (int index = 0; index < args.length; ++index) {
+                String key = args[index];
+                String value = index == args.length - 1 ? null : args[index + 1];
+                if (key.equals("nogui") || key.equals("--nogui")) {
                     MinecraftServer.setHeadless(true);
+                } else if (key.equals("--universe") && value != null) {
+                    // Initialize Logging Early, TODO: the new File(".") is a directory setting, the cli arg is --universe
+                    la = new LogAgent("Minecraft-Server", (String) null, (new File(new File(value), "server.log")).getAbsolutePath());
+                    la.a().setLevel(Level.ALL);
                 }
             }
 
-            // Initialize Logging Early, TODO: the new File(".") is a directory setting, the cli arg is --universe
-            la = new LogAgent("Minecraft-Server", (String) null, (new File(new File("."), "server.log")).getAbsolutePath());
-            la.a().setLevel(Level.ALL);
             if (!MinecraftServer.isHeadless()) {
                 TextAreaLogHandler.getLogHandler().poke();
             }
 
-            initBird();
-
-            MinecraftServer.main(args);
+            initBird(); // Initialize the Bird
+            MinecraftServer.main(args); // Boot up the native server
 
             // They need the server to be set
             mod.initPermissions();

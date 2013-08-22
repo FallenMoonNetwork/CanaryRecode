@@ -820,7 +820,7 @@ public class NetServerHandler extends NetHandler {
 
                 if (packet130updatesign.d[i1].length() > 15) {
                     flag0 = false;
-                } else {
+                } else if (Configuration.getServerConfig().getStrictSignCharacterChecks()) { // CanaryMod: Check if we use strict characters on signs
                     for (i0 = 0; i0 < packet130updatesign.d[i1].length(); ++i0) {
                         if (ChatAllowedCharacters.a.indexOf(packet130updatesign.d[i1].charAt(i0)) < 0) {
                             if (packet130updatesign.d[i1].charAt(i0) != '\u00A7') { // CanaryMod: Ignore Color Char
