@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import net.canarymod.api.world.CanaryChunkProviderServer;
 import net.canarymod.hook.world.ChunkCreatedHook;
 import net.canarymod.hook.world.ChunkCreationHook;
@@ -253,7 +254,6 @@ public class ChunkProviderServer implements IChunkProvider {
                 this.e.a();
             }
         }
-
         return this.d.c();
     }
 
