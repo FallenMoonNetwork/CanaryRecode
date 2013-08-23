@@ -3,7 +3,6 @@ package net.canarymod.api.entity;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.ItemType;
-import net.canarymod.api.inventory.fireworks.FireworkRocketItem;
 import net.minecraft.server.EntityFireworkRocket;
 
 /**
@@ -52,25 +51,6 @@ public class CanaryFireworkRocket extends CanaryEntity implements FireworkRocket
         if (item.getType() == ItemType.FireworkRocket) {
             getHandle().setItemStack(((CanaryItem) item).getHandle());
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public FireworkRocketItem getRocketItem() {
-        if (getItem() != null) {
-            return new FireworkRocketItem(getItem());
-        }
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setRocketItem(FireworkRocketItem fireworkRocket) {
-        this.setItem(fireworkRocket.getItem());
     }
 
     /**

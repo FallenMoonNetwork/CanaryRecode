@@ -48,9 +48,13 @@ public class Main {
                 } else if (key.equals("--universe") && value != null) {
                     // Initialize Logging Early, TODO: the new File(".") is a directory setting, the cli arg is --universe
                     la = new LogAgent("Minecraft-Server", (String) null, (new File(new File(value), "server.log")).getAbsolutePath());
-                    la.a().setLevel(Level.ALL);
                 }
             }
+
+            if (la == null) { // If universe wasn't set we need to initialize to the working directory
+                la = new LogAgent("Minecraft-Server", (String) null, (new File(new File("."), "server.log")).getAbsolutePath());
+            }
+            la.a().setLevel(Level.ALL);
 
             if (!MinecraftServer.isHeadless()) {
                 TextAreaLogHandler.getLogHandler().poke();

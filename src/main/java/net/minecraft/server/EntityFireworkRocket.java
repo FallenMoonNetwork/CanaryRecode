@@ -136,5 +136,11 @@ public class EntityFireworkRocket extends Entity {
 
     public void setItemStack(ItemStack stack) {
         this.ah.b(8, stack);
+        // Update Flight information
+        NBTTagCompound nbttagcompound = stack.q();
+        NBTTagCompound nbttagcompound1 = nbttagcompound.l("Fireworks");
+        if (nbttagcompound1 != null) {
+            this.b = 10 * nbttagcompound1.c("Flight") + this.ab.nextInt(6) + this.ab.nextInt(7);
+        }
     }
 }
