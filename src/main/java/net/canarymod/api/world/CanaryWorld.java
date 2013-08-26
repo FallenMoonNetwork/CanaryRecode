@@ -1,6 +1,7 @@
 package net.canarymod.api.world;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.canarymod.WorldCacheTimer;
 import net.canarymod.api.CanaryEntityTracker;
@@ -421,6 +422,16 @@ public class CanaryWorld implements World {
         } else {
             return null;
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Chunk> getLoadedChunks() {
+        List<Chunk> loadedChunks = new ArrayList<Chunk>(this.world.b.g.size());
+        for (net.minecraft.server.Chunk nmschunk : (List<net.minecraft.server.Chunk>)this.world.b.g) {
+            loadedChunks.add(nmschunk.getCanaryChunk());
+        }
+        return loadedChunks;
     }
 
     @Override
