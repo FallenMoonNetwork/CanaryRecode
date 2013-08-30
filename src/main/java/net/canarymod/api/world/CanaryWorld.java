@@ -2,7 +2,6 @@ package net.canarymod.api.world;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import net.canarymod.WorldCacheTimer;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.GameMode;
@@ -329,7 +328,7 @@ public class CanaryWorld implements World {
 
     @Override
     public boolean isChunkLoaded(int x, int z) {
-        return getChunkProvider().isChunkLoaded(x >> 4, z >> 4);
+        return getChunkProvider().isChunkLoaded(x, z);
     }
 
     @Override
@@ -402,7 +401,7 @@ public class CanaryWorld implements World {
 
     @Override
     public Chunk loadChunk(int x, int z) {
-        return getChunkProvider().loadChunk(x >> 4, z >> 4);
+        return getChunkProvider().loadChunk(x, z);
     }
 
     @Override
@@ -417,11 +416,7 @@ public class CanaryWorld implements World {
 
     @Override
     public Chunk getChunk(int x, int z) {
-        if (isChunkLoaded(x, z)) {
-            return getChunkProvider().provideChunk(x >> 4, z >> 4);
-        } else {
-            return null;
-        }
+        return isChunkLoaded(x, z) ? getChunkProvider().provideChunk(x, z) : null;
     }
 
     @Override

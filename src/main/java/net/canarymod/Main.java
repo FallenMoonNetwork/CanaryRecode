@@ -34,7 +34,7 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println("Starting: " + Canary.getImplementationTitle() + " " + Canary.getImplementationVersion() + " Implementing: " + Canary.getSpecificationTitle() + " " + Canary.getSpecificationVersion());
+        System.out.println("Starting: " + Canary.getImplementationTitle() + " " + Canary.getImplementationVersion() + " Specified By: " + Canary.getSpecificationTitle() + " " + Canary.getSpecificationVersion());
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {} // Need to initialize the SQLite driver for some reason, initialize here for plugin use as well
@@ -46,7 +46,7 @@ public class Main {
                 if (key.equals("nogui") || key.equals("--nogui")) {
                     MinecraftServer.setHeadless(true);
                 } else if (key.equals("--universe") && value != null) {
-                    // Initialize Logging Early, TODO: the new File(".") is a directory setting, the cli arg is --universe
+                    // Initialize Logging to universe argument
                     la = new LogAgent("Minecraft-Server", (String) null, (new File(new File(value), "server.log")).getAbsolutePath());
                 }
             }
