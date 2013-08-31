@@ -192,7 +192,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
     @Override
     public long getTimePlayed() {
         if (getNBT() != null && getNBT().containsKey("TimePlayed")) {
-            return getNBT().getInt("TimePlayed");
+            return getNBT().getLong("TimePlayed");
         }
         return 0;
     }

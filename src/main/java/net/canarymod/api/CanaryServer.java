@@ -52,7 +52,6 @@ public class CanaryServer implements Server {
     private MinecraftServer server;
     private GUIControl currentGUI = null;
     String canaryVersion = null;
-    String mcVersion = null;
     private float tps = 20.0F; // Ticks Per Second Tracker
 
     /**
@@ -62,11 +61,8 @@ public class CanaryServer implements Server {
      *            the MinecraftServer instance
      */
     public CanaryServer(MinecraftServer server) {
-        if (this.server == null) {
-            this.server = server;
-            addSynchronousTask(new TPSTracker(this));
-        }
-        // XXX: throw IllegalStateException ?
+        this.server = server;
+        addSynchronousTask(new TPSTracker(this));
     }
 
     /**
