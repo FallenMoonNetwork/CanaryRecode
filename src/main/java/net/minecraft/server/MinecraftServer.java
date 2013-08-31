@@ -319,7 +319,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 long i0 = aq();
 
                 for (long i1 = 0L; this.u; this.Q = true) {
-                    ServerTaskManager.runTasks(); // CanaryMod: Run tasks
                     long i2 = aq();
                     long i3 = i2 - i0;
 
@@ -344,12 +343,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     }
                     // CanaryMod end
                     if (allSleeping) {
-                        this.s();
+                        this.s(); // Run tick
                         i1 = 0L;
                     } else {
                         while (i1 > 50L) {
                             i1 -= 50L;
-                            this.s();
+                            this.s(); // Run tick
                         }
                     }
 
@@ -401,6 +400,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     protected void r() {}
 
     protected void s() {
+        ServerTaskManager.runTasks(); // CanaryMod: Run tasks
         long i0 = System.nanoTime();
 
         AxisAlignedBB.a().a();
