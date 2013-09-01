@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import java.util.Random;
+import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.RedstoneChangeHook;
 
 public abstract class BlockBasePressurePlate extends Block {
@@ -126,6 +127,13 @@ public abstract class BlockBasePressurePlate extends Block {
     }
 
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
+        // CanaryMod: RedstoneChange; block destructions
+        int oldLvl = this.c(i4);
+        if (oldLvl > 0) {
+            new RedstoneChangeHook(new CanaryBlock((short) this.cF, (short) i3, i0, i1, i2, world.getCanaryWorld()), oldLvl, 0).call();
+        }
+        //
+
         if (this.c(i4) > 0) {
             this.b_(world, i0, i1, i2);
         }

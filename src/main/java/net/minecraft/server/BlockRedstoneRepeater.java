@@ -1,6 +1,9 @@
 package net.minecraft.server;
 
 import java.util.Random;
+import net.canarymod.api.world.blocks.BlockType;
+import net.canarymod.api.world.blocks.CanaryBlock;
+import net.canarymod.hook.world.RedstoneChangeHook;
 
 public class BlockRedstoneRepeater extends BlockRedstoneLogic {
 
@@ -49,6 +52,11 @@ public class BlockRedstoneRepeater extends BlockRedstoneLogic {
     }
 
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
+        // CanaryMod: RedstoneChange
+        if (this.a) {
+            new RedstoneChangeHook(new CanaryBlock(BlockType.RedstoneRepeaterOn.getId(), (short) i3, i0, i1, i2, world.getCanaryWorld()), 15, 0).call();
+        }
+        // CanaryMod: end
         super.a(world, i0, i1, i2, i3, i4);
         this.h_(world, i0, i1, i2);
     }

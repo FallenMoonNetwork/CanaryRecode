@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import net.canarymod.api.world.blocks.BlockType;
+import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.RedstoneChangeHook;
 
 public class BlockLever extends Block {
@@ -196,10 +198,8 @@ public class BlockLever extends Block {
             int i6 = 8 - (i4 & 8);
 
             // CanaryMod: RedstoneChange
-            // Get adjusted levels properly
-            int oldLvl = this.c((IBlockAccess) world, i0, i1, i2, i3);
             int newLvl = i6 == 0 ? 0 : 15; //
-            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), oldLvl, newLvl).call();
+            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), ~newLvl & 15, newLvl).call();
             if (hook.isCanceled()) {
                 return true;
             } // CanaryMod: end
@@ -229,6 +229,10 @@ public class BlockLever extends Block {
 
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         if ((i4 & 8) > 0) {
+            // CanaryMod: RedstoneChange
+            new RedstoneChangeHook(new CanaryBlock(BlockType.Lever.getId(), (short) i4, i0, i1, i2, world.canaryDimension), 15, 0).call();
+            // Not sure if canceling here would be wise
+            // CanaryMod: end
             world.f(i0, i1, i2, this.cF);
             int i5 = i4 & 7;
 
