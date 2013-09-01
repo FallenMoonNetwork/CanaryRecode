@@ -2,35 +2,35 @@ package net.canarymod.serialize;
 
 import net.canarymod.Canary;
 import net.canarymod.CanaryDeserializeException;
-import net.canarymod.api.inventory.CanaryEnchantment;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Enchantment;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.server.ItemStack;
+import net.visualillusionsent.utils.StringUtils;
 
 public class ItemSerializer implements Serializer<CanaryItem> {
 
     @Override
     public CanaryItem deserialize(String data) throws CanaryDeserializeException {
-        int id, meta, amount, slot;
-
         String[] split = data.split("#");
         String[] item = split[0].split(";"); // The serialized item
         String[] enchantments = null;
 
-        if (split.length == 2) {
+        if (split.length >= 2) {
             enchantments = split[1].split(","); // CSV list of serialized enchantments
         }
         if (item.length < 4) {
             throw new CanaryDeserializeException("Could not deserialize Item. Expected fields 4. Found: " + item.length, getVendor());
         }
-        id = parseInt(item[0]);
-        meta = parseInt(item[1]);
-        amount = parseInt(item[2]);
-        slot = parseInt(item[3]);
-        CanaryItem citem = new CanaryItem(new ItemStack(id, amount, meta));
+        CanaryItem citem = new CanaryItem(new ItemStack(parseInt(item[0]), parseInt(item[2]), parseInt(item[1])));
+        if (item.length >= 5) {
+            citem.setDisplayName(item[4]);
+        }
+        if (item.length >= 6) {
+            citem.setLore(item[5].split(","));
+        }
 
-        citem.setSlot(slot);
+        citem.setSlot(parseInt(item[3]));
         if (enchantments != null) {
             EnchantmentSerializer es = new EnchantmentSerializer();
 
@@ -43,23 +43,23 @@ public class ItemSerializer implements Serializer<CanaryItem> {
 
     @Override
     public String serialize(CanaryItem obje) {
-        if (!(obje instanceof CanaryItem)) {
-            Canary.logInfo("Received object type does not match. Expected CanaryItem. Found: " + obje.getClass().getSimpleName());
-            return null;
-        }
         CanaryItem obj = (CanaryItem) obje;
         StringBuilder fieldsItem = new StringBuilder();
         StringBuilder fieldsEnchants = new StringBuilder();
 
         // Process the item data:
         fieldsItem.append(obj.getId()).append(";").append(obj.getDamage()).append(";").append(obj.getAmount()).append(";").append(obj.getSlot());
+        if (obj.hasLore()) {
+            fieldsItem.append(";").append(StringUtils.joinString(obj.getLore(), ",", 0));
+        }
+        if (obj.hasDisplayName()) {
+            fieldsItem.append(";").append(obj.getDisplayName());
+        }
         // Process items enchantments
-        EnchantmentSerializer es = new EnchantmentSerializer();
         Enchantment[] enchs = obj.getEnchantments();
-
         if (enchs != null) {
             for (Enchantment ench : obj.getEnchantments()) {
-                fieldsEnchants.append(es.serialize((CanaryEnchantment) ench)).append(",");
+                fieldsEnchants.append(Canary.serialize(ench)).append(",");
             }
             fieldsItem.append("#").append(fieldsEnchants);
         }
@@ -72,14 +72,11 @@ public class ItemSerializer implements Serializer<CanaryItem> {
     }
 
     private int parseInt(String s) {
-        int ret = -1;
-
         try {
-            ret = Integer.parseInt(s);
+            return Integer.parseInt(s);
         } catch (NumberFormatException e) {
-            ret = -1;
+            return -1;
         }
-        return ret;
     }
 
     @Override
