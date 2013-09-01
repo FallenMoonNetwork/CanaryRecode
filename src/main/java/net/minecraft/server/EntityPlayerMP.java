@@ -234,20 +234,20 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
                     this.bL().a(this.am(), scoreobjective).a(Arrays.asList(new EntityPlayer[]{ this }));
                 }
-                // CanaryMod: ExperienceHook / ExperienceEnabled
-                if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).isExperienceEnabled()) {
-                    this.bI = 0;
-                    this.bH = 0;
-                } else {
-                    ExperienceHook hook = new ExperienceHook(getPlayer(), this.bS, this.bI);
-
-                    if (!hook.isCanceled()) {
-                        this.bS = this.bI;
-                        this.a.b(new Packet43Experience(this.bJ, this.bI, this.bH));
-                    }
-                }
-                //
             }
+            // CanaryMod: ExperienceHook / ExperienceEnabled
+            if (!Configuration.getWorldConfig(getCanaryWorld().getFqName()).isExperienceEnabled()) {
+                this.bI = 0;
+                this.bH = 0;
+            } else if (this.bI != this.bS) {
+                ExperienceHook hook = new ExperienceHook(getPlayer(), this.bS, this.bI);
+
+                if (!hook.isCanceled()) {
+                    this.bS = this.bI;
+                    this.a.b(new Packet43Experience(this.bJ, this.bI, this.bH));
+                }
+            }
+            //
         } catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.a(throwable, "Ticking player");
             CrashReportCategory crashreportcategory = crashreport.a("Player being ticked");

@@ -227,7 +227,7 @@ public class CanaryServer implements Server {
         NBTTagCompound nbttagcompound = ServerConfigurationManager.getPlayerDatByName(player);
         CanaryCompoundTag comp = null;
         if (nbttagcompound != null) {
-            comp = new CanaryCompoundTag(ServerConfigurationManager.getPlayerDatByName(player));
+            comp = new CanaryCompoundTag(nbttagcompound);
         }
         return new CanaryOfflinePlayer(player, comp);
     }
