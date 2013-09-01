@@ -27,23 +27,39 @@ public class CanaryItem implements Item {
      */
     public CanaryItem(ItemStack itemStack) {
         this.type = ItemType.fromIdAndData(itemStack.d, itemStack.k());
+        if (this.type == null) {
+            // Seems to be an unregistered item type, go ahead an pass an new unnamed itemtype
+            this.type = new ItemType(itemStack.d, itemStack.k());
+        }
         this.item = itemStack;
     }
 
     public CanaryItem(int id, int amount) {
         this.type = ItemType.fromId(id);
+        if (this.type == null) {
+            // Seems to be an unregistered item type, go ahead an pass an new unnamed itemtype
+            this.type = new ItemType(id);
+        }
         this.item = new ItemStack(id, amount, 0);
     }
 
     public CanaryItem(int itemId, int amount, int damage) {
         this.item = new ItemStack(itemId, amount, damage);
         this.type = ItemType.fromIdAndData(itemId, damage);
+        if (this.type == null) {
+            // Seems to be an unregistered item type, go ahead an pass an new unnamed itemtype
+            this.type = new ItemType(itemId, damage);
+        }
     }
 
     public CanaryItem(int itemId, int amount, int damage, int slot) {
         this.item = new ItemStack(itemId, amount, damage);
         this.slot = slot;
         this.type = ItemType.fromIdAndData(itemId, damage);
+        if (this.type == null) {
+            // Seems to be an unregistered item type, go ahead an pass an new unnamed itemtype
+            this.type = new ItemType(itemId, damage);
+        }
     }
 
     /**
@@ -59,7 +75,7 @@ public class CanaryItem implements Item {
      */
     @Override
     public void setId(int id) {
-        type = ItemType.fromId(id);
+        type = ItemType.fromIdAndData(id, type.getData());
         item.d = type.getId();
     }
 
