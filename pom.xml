@@ -8,7 +8,7 @@
   <groupId>net.canarymod</groupId>
   <artifactId>CanaryMod</artifactId>
   <packaging>jar</packaging>
-  <version>0.10-SNAPSHOT</version>
+  <version>1.0-RC-2-SNAPSHOT</version>
   <name>CanaryMod</name>
   <url>http://www.canarymod.net</url>
   <inceptionYear>2012</inceptionYear>
@@ -234,7 +234,7 @@
       <dependency>
         <groupId>net.canarymod</groupId>
         <artifactId>CanaryLib</artifactId>
-        <version>0.10-SNAPSHOT</version>
+        <version>1.0-RC-2-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
