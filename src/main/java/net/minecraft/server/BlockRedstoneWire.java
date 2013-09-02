@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import net.canarymod.api.world.blocks.BlockType;
+import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.RedstoneChangeHook;
 
 public class BlockRedstoneWire extends Block {
@@ -181,6 +183,12 @@ public class BlockRedstoneWire extends Block {
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         super.a(world, i0, i1, i2, i3, i4);
         if (!world.I) {
+            // CanaryMod: RedstoneChange (Wire Destroy)
+            int lvl = world.D(i0, i1, i2) - 1; // Subtract 1 from current in
+            if (lvl > 0) {
+                new RedstoneChangeHook(new CanaryBlock(BlockType.RedstoneWire.getId(), (short) i3, i0, i1, i2, world.getCanaryWorld()), lvl, 0).call();
+            }
+            //
             world.f(i0, i1 + 1, i2, this.cF);
             world.f(i0, i1 - 1, i2, this.cF);
             world.f(i0 + 1, i1, i2, this.cF);
