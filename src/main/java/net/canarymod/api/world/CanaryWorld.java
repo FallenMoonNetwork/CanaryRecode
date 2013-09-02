@@ -267,7 +267,7 @@ public class CanaryWorld implements World {
 
     @Override
     public void setBlockAt(Position position, short type) {
-        setBlockAt((int) position.getX(), (int) position.getY(), (int) position.getZ(), (short) type);
+        setBlockAt((int) position.getX(), (int) position.getY(), (int) position.getZ(), type);
     }
 
     @Override
@@ -277,13 +277,12 @@ public class CanaryWorld implements World {
 
     @Override
     public void setBlockAt(int x, int y, int z, short type, short data) {
-        world.c(x, y, z, type);
-        setDataAt(x, y, z, data);
+        world.f(x, y, z, type, data, (0x1 | 0x2));
     }
 
     @Override
     public void setDataAt(int x, int y, int z, short data) {
-        world.b(x, y, z, data, 0x2);
+        world.b(x, y, z, data, (0x1 | 0x2));
     }
 
     @Override
