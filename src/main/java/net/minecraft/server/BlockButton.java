@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import java.util.List;
 import java.util.Random;
+import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.RedstoneChangeHook;
 
 public abstract class BlockButton extends Block {
@@ -141,10 +142,10 @@ public abstract class BlockButton extends Block {
             return true;
         }
 
-        // CanaryMod: RedstoneChange; Button On
+        // CanaryMod: RedstoneChange; Button On via Click
         RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 0, 15).call();
         if (hook.isCanceled()) {
-            return true;
+            return false;
             //
         } else {
             world.b(i0, i1, i2, i5 + i6, 3);
@@ -158,8 +159,10 @@ public abstract class BlockButton extends Block {
 
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         if ((i4 & 8) > 0) {
+            // CanaryMod: RedstoneChangeHook (Button broke)
+            new RedstoneChangeHook(new CanaryBlock((short) this.cF, (short) i3, i0, i1, i2, world.getCanaryWorld()), 15, 0).call();
+            //
             int i5 = i4 & 7;
-
             this.d(world, i0, i1, i2, i5);
         }
 
@@ -194,7 +197,7 @@ public abstract class BlockButton extends Block {
                 if (this.a) {
                     this.n(world, i0, i1, i2);
                 } else {
-                    // CanaryMod: RedstoneChange; Button off
+                    // CanaryMod: RedstoneChange; Stone Button off
                     RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
                     if (hook.isCanceled()) {
                         return;
@@ -240,6 +243,13 @@ public abstract class BlockButton extends Block {
         boolean flag1 = !list.isEmpty();
 
         if (flag1 && !flag0) {
+            // CanaryMod: RedstoneChange; Wood Button on
+            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 0, 15).call();
+            if (hook.isCanceled()) {
+                world.a(i0, i1, i2, this.cF, this.a(world)); // Reschedule
+                return;
+            }
+            //
             world.b(i0, i1, i2, i4 | 8, 3);
             this.d(world, i0, i1, i2, i4);
             world.g(i0, i1, i2, i0, i1, i2);
@@ -247,6 +257,13 @@ public abstract class BlockButton extends Block {
         }
 
         if (!flag1 && flag0) {
+            // CanaryMod: RedstoneChange; Wood Button off
+            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
+            if (hook.isCanceled()) {
+                world.a(i0, i1, i2, this.cF, this.a(world));  // Reschedule
+                return;
+            }
+            //
             world.b(i0, i1, i2, i4, 3);
             this.d(world, i0, i1, i2, i4);
             world.g(i0, i1, i2, i0, i1, i2);
