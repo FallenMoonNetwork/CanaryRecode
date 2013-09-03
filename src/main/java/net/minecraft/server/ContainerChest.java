@@ -7,7 +7,7 @@ public class ContainerChest extends Container {
     private IInventory a;
     private int f;
 
-    public ContainerChest(IInventory iinventory, IInventory iinventory1, Inventory canaryInventory) {
+    public ContainerChest(IInventory iinventory, IInventory iinventory1) {
         this.a = iinventory1;
         this.f = iinventory1.j_() / 9;
         iinventory1.k_();

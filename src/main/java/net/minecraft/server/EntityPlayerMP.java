@@ -487,10 +487,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         }
         // CanaryMod: InventoryHook
         Inventory inventory = null;
-        // Set the thing later, in this case we need to know the type
-        // TODO: This is very hacky whacky, IInventory should have a getCanaryInventory!
-        // However, that will require full implementation of the CanaryInventory abstract class.
-        ContainerChest container = new ContainerChest(this.bn, iinventory, null);
+        ContainerChest container = new ContainerChest(this.bn, iinventory);
 
         if (iinventory instanceof TileEntityChest) {
             inventory = ((TileEntityChest) iinventory).getCanaryChest();

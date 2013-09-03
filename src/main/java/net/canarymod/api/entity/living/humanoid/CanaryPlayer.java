@@ -855,12 +855,15 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         }
         switch (inventory.getInventoryType()) {
             case CHEST:
-                ContainerChest chest = new ContainerChest(getHandle().bn, ((CanaryBlockInventory) inventory).getInventoryHandle(), inventory);
+                ContainerChest chest = new ContainerChest(getHandle().bn, ((CanaryBlockInventory) inventory).getInventoryHandle());
+                chest.setInventory(inventory);
                 getHandle().openContainer(chest, 0, inventory.getSize(), ((CanaryBlockInventory) inventory).getInventoryHandle().c());
                 return;
             case CUSTOM:
             case MINECART_CHEST:
-                getHandle().openContainer(new ContainerChest(getHandle().bn, ((CanaryEntityInventory) inventory).getHandle(), inventory), 0, inventory.getSize(), ((CanaryEntityInventory) inventory).getHandle().c());
+                ContainerChest eChest = new ContainerChest(getHandle().bn, ((CanaryEntityInventory) inventory).getHandle());
+                eChest.setInventory(inventory);
+                getHandle().openContainer(eChest, 0, inventory.getSize(), ((CanaryEntityInventory) inventory).getHandle().c());
                 return;
             case ANVIL:
                 getHandle().openContainer(((CanaryAnvil) inventory).getContainer(), 8, 9);
@@ -902,6 +905,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public void createAndOpenWorkbench() {
+
         Inventory bench_inv = new ContainerWorkbench(getHandle().bn, ((CanaryWorld) getWorld()).getHandle(), -1, -1, -1).getInventory();
         bench_inv.setCanOpenRemote(true);
         openInventory(bench_inv);

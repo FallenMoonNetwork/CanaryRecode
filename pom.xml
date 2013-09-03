@@ -15,7 +15,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <minecraft.server.version>1.6.2</minecraft.server.version>
-    <api.version>0.10</api.version>
+    <api.version>1.0-RC-2-SNAPSHOT</api.version>
   </properties>
   <licenses>
     <license>
@@ -182,7 +182,7 @@
             <addMavenDescriptor>true</addMavenDescriptor>
             <manifest>
               <addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
-              <addDefaultImplementationEntries>false</addDefaultImplementationEntries>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
             <manifestEntries>
               <Implementation-Title>CanaryMod</Implementation-Title>
@@ -234,7 +234,7 @@
       <dependency>
         <groupId>net.canarymod</groupId>
         <artifactId>CanaryLib</artifactId>
-        <version>1.0-RC-2-SNAPSHOT</version>
+        <version>${api.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
