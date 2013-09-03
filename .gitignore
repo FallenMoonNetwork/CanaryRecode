@@ -1,0 +1,13 @@
+*.class
+*.svn
+.svn
+.project
+.classpath
+*.jardesc
+*.jar
+/target/
+*.prefs
+*.sw?
+/bin
+/.idea
+*.iml
