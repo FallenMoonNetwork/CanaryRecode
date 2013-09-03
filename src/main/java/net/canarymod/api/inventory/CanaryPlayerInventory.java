@@ -9,7 +9,7 @@ import net.minecraft.server.ItemStack;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryPlayerInventory extends CanaryContainerEntity implements PlayerInventory {
+public class CanaryPlayerInventory extends CanaryEntityInventory implements PlayerInventory {
 
     public CanaryPlayerInventory(InventoryPlayer playerInventory) {
         super(playerInventory);

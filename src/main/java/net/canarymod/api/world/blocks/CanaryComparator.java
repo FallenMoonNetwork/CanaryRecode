@@ -7,7 +7,7 @@ import net.minecraft.server.TileEntityComparator;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryComparator extends CanaryComplexBlock implements Comparator {
+public class CanaryComparator extends CanaryTileEntity implements Comparator {
 
     /**
      * Constructs a new wrapper for TileEntityComparator

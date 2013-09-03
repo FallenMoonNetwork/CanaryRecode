@@ -1,21 +1,24 @@
 package net.canarymod.api.inventory;
 
+import net.canarymod.api.inventory.Inventory;
+import net.canarymod.api.inventory.Item;
+import net.canarymod.api.inventory.ItemType;
 import net.canarymod.api.nbt.CanaryCompoundTag;
+import net.canarymod.api.world.blocks.CanaryTileEntity;
 import net.canarymod.config.Configuration;
 import net.minecraft.server.IInventory;
 import net.minecraft.server.ItemStack;
 
 /**
- * Inventory implementation
+ * ContainerBlock buffer between TileEntity and those with Inventories
  * 
  * @author Jason (darkdiplomat)
  */
-public abstract class CanaryContainerEntity implements Inventory {
-    protected IInventory inventory;
-    private boolean openRemote = false;
+public abstract class CanaryBlockInventory extends CanaryTileEntity implements Inventory {
+    private boolean openRemote;
 
-    public CanaryContainerEntity(IInventory inventory) {
-        this.inventory = inventory;
+    public CanaryBlockInventory(IInventory inventory) {
+        super(inventory);
     }
 
     /**
@@ -186,7 +189,6 @@ public abstract class CanaryContainerEntity implements Inventory {
             Item toCheck = getSlot(index);
 
             if (toCheck != null && toCheck.getId() == id) {
-                toCheck.setSlot(index);
                 return toCheck;
             }
         }
@@ -210,7 +212,6 @@ public abstract class CanaryContainerEntity implements Inventory {
             Item toCheck = getSlot(index);
 
             if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount) {
-                toCheck.setSlot(index);
                 return toCheck;
             }
         }
@@ -226,7 +227,6 @@ public abstract class CanaryContainerEntity implements Inventory {
             Item toCheck = getSlot(index);
 
             if (toCheck != null && toCheck.getId() == id && toCheck.getAmount() == amount && toCheck.getDamage() == damage) {
-                toCheck.setSlot(index);
                 return toCheck;
             }
         }
@@ -255,7 +255,6 @@ public abstract class CanaryContainerEntity implements Inventory {
     @Override
     public Item getSlot(int index) {
         ItemStack stack = inventory.a(index);
-
         if (stack != null) {
             Item slot_item = stack.getCanaryItem();
             slot_item.setSlot(index);
@@ -382,15 +381,15 @@ public abstract class CanaryContainerEntity implements Inventory {
                 continue;
             }
             // We still have slots, but no stack, create a new stack.
-            int eslot = getEmptySlot();
+            int eslot = this.getEmptySlot();
 
             if (eslot != -1) {
                 CanaryCompoundTag nbt = new CanaryCompoundTag("");
 
                 ((CanaryItem) item).getHandle().b(nbt.getHandle());
-                CanaryItem tempItem = new CanaryItem(item.getId(), amount, -1, item.getDamage());
+                Item tempItem = new CanaryItem(item.getId(), amount, -1, item.getDamage());
 
-                tempItem.getHandle().c(nbt.getHandle());
+                ((CanaryItem) tempItem).getHandle().c(nbt.getHandle());
                 this.setSlot(eslot, tempItem);
                 amount = 0;
                 continue;
@@ -452,11 +451,7 @@ public abstract class CanaryContainerEntity implements Inventory {
      */
     @Override
     public void setSlot(int index, Item value) {
-        if (value == null) {
-            inventory.a(index, null);
-        } else {
-            inventory.a(index, ((CanaryItem) value).getHandle());
-        }
+        inventory.a(index, value != null ? ((CanaryItem) value).getHandle() : null);
     }
 
     /**
@@ -523,5 +518,12 @@ public abstract class CanaryContainerEntity implements Inventory {
         openRemote = remote;
     }
 
-    public abstract IInventory getHandle();
+    /**
+     * Gets the inventory handle of this ContainerBlock
+     * 
+     * @return native Inventory interface
+     */
+    public IInventory getInventoryHandle() {
+        return inventory;
+    }
 }

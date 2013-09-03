@@ -3,7 +3,7 @@ package net.canarymod.api.inventory;
 import java.util.Arrays;
 import net.minecraft.server.ItemStack;
 
-public class CanaryCustomStorageInventory extends CanaryContainerEntity implements CustomStorageInventory {
+public class CanaryCustomStorageInventory extends CanaryEntityInventory implements CustomStorageInventory {
 
     public CanaryCustomStorageInventory(NativeCustomStorageInventory inventory) {
         super(inventory);

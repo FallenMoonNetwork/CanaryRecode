@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryNetServerHandler;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
@@ -486,7 +487,10 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         }
         // CanaryMod: InventoryHook
         Inventory inventory = null;
-        ContainerChest container = new ContainerChest(this.bn, iinventory);
+        // Set the thing later, in this case we need to know the type
+        // TODO: This is very hacky whacky, IInventory should have a getCanaryInventory!
+        // However, that will require full implementation of the CanaryInventory abstract class.
+        ContainerChest container = new ContainerChest(this.bn, iinventory, null);
 
         if (iinventory instanceof TileEntityChest) {
             inventory = ((TileEntityChest) iinventory).getCanaryChest();
@@ -888,7 +892,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     //
     /**
      * Get the CanaryEntity as CanaryPlayer
-     * 
+     *
      * @return
      */
     public CanaryPlayer getPlayer() {

@@ -1,7 +1,9 @@
 package net.canarymod.api.world.blocks;
 
 import java.util.Arrays;
+
 import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.inventory.CanaryBlockInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
@@ -16,7 +18,7 @@ import net.minecraft.server.ItemStack;
  * 
  * @author Somners
  */
-public class CanaryAnvil extends CanaryContainerBlock implements Anvil {
+public class CanaryAnvil extends CanaryBlockInventory implements Anvil {
 
     private ContainerRepair container = null;
 

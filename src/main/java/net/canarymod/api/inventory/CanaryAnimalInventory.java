@@ -10,7 +10,7 @@ import net.minecraft.server.ItemStack;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryAnimalInventory extends CanaryContainerEntity implements AnimalInventory {
+public class CanaryAnimalInventory extends CanaryEntityInventory implements AnimalInventory {
     private final EntityAnimal owner;
 
     public CanaryAnimalInventory(AnimalChest animalChest, EntityAnimal owner) {

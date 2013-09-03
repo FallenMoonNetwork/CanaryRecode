@@ -11,7 +11,7 @@ import net.minecraft.server.NBTTagCompound;
  * 
  * @author Jason (darkdiplomat)
  */
-public abstract class CanaryComplexBlock implements TileEntity {
+public abstract class CanaryTileEntity implements TileEntity {
 
     protected net.minecraft.server.TileEntity tileentity;
     protected IInventory inventory;
@@ -22,11 +22,11 @@ public abstract class CanaryComplexBlock implements TileEntity {
      * @param tileentity
      *            the TileEntityChest to be wrapped
      */
-    public CanaryComplexBlock(net.minecraft.server.TileEntity tileentity) {
+    public CanaryTileEntity(net.minecraft.server.TileEntity tileentity) {
         this.tileentity = tileentity;
     }
 
-    public CanaryComplexBlock(IInventory inventory) {
+    public CanaryTileEntity(IInventory inventory) {
         this.inventory = inventory;
         if (inventory instanceof net.minecraft.server.TileEntity) {
             this.tileentity = (net.minecraft.server.TileEntity) inventory;

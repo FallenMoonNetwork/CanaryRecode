@@ -1,6 +1,8 @@
 package net.canarymod.api.world.blocks;
 
 import java.util.Arrays;
+
+import net.canarymod.api.inventory.CanaryBlockInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
@@ -12,7 +14,7 @@ import net.minecraft.server.TileEntityBrewingStand;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryBrewingStand extends CanaryContainerBlock implements BrewingStand {
+public class CanaryBrewingStand extends CanaryBlockInventory implements BrewingStand {
 
     /**
      * Constructs a new wrapper for TileEntityBrewingStand

@@ -11,7 +11,7 @@ import net.minecraft.server.TileEntitySign;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanarySign extends CanaryComplexBlock implements Sign {
+public class CanarySign extends CanaryTileEntity implements Sign {
 
     /**
      * Constructs a new wrapper for TileEntitySign

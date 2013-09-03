@@ -10,7 +10,7 @@ import net.minecraft.server.ItemStack;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryEnderChestInventory extends CanaryContainerEntity implements EnderChestInventory {
+public class CanaryEnderChestInventory extends CanaryEntityInventory implements EnderChestInventory {
     private Human human;
 
     public CanaryEnderChestInventory(InventoryEnderChest echest, Human human) {

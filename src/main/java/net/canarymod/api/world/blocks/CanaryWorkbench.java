@@ -1,6 +1,8 @@
 package net.canarymod.api.world.blocks;
 
 import java.util.Arrays;
+
+import net.canarymod.api.inventory.CanaryBlockInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
@@ -15,7 +17,7 @@ import net.minecraft.server.TileEntity;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryWorkbench extends CanaryContainerBlock implements Workbench {
+public class CanaryWorkbench extends CanaryBlockInventory implements Workbench {
     private ContainerWorkbench container;
 
     /**

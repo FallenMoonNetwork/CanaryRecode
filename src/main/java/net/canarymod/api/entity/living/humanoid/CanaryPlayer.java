@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import net.canarymod.Canary;
 import net.canarymod.MathHelp;
 import net.canarymod.ToolBox;
@@ -17,7 +18,8 @@ import net.canarymod.api.PlayerListEntry;
 import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.entity.living.animal.CanaryHorse;
 import net.canarymod.api.inventory.CanaryAnimalInventory;
-import net.canarymod.api.inventory.CanaryContainerEntity;
+import net.canarymod.api.inventory.CanaryBlockInventory;
+import net.canarymod.api.inventory.CanaryEntityInventory;
 import net.canarymod.api.inventory.EnderChestInventory;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.world.CanaryWorld;
@@ -25,7 +27,6 @@ import net.canarymod.api.world.World;
 import net.canarymod.api.world.blocks.CanaryAnvil;
 import net.canarymod.api.world.blocks.CanaryBeacon;
 import net.canarymod.api.world.blocks.CanaryBrewingStand;
-import net.canarymod.api.world.blocks.CanaryContainerBlock;
 import net.canarymod.api.world.blocks.CanaryDispenser;
 import net.canarymod.api.world.blocks.CanaryDropper;
 import net.canarymod.api.world.blocks.CanaryEnchantmentTable;
@@ -67,7 +68,7 @@ import net.visualillusionsent.utils.StringUtils;
 
 /**
  * Canary Player wrapper.
- * 
+ *
  * @author Chris (damagefilter)
  * @author Jason (darkdiplomat)
  */
@@ -854,38 +855,39 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         }
         switch (inventory.getInventoryType()) {
             case CHEST:
-                getHandle().openContainer(new ContainerChest(getHandle().bn, ((CanaryContainerBlock) inventory).getInventoryHandle()), 0, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
+                ContainerChest chest = new ContainerChest(getHandle().bn, ((CanaryBlockInventory) inventory).getInventoryHandle(), inventory);
+                getHandle().openContainer(chest, 0, inventory.getSize(), ((CanaryBlockInventory) inventory).getInventoryHandle().c());
                 return;
             case CUSTOM:
             case MINECART_CHEST:
-                getHandle().openContainer(new ContainerChest(getHandle().bn, ((CanaryContainerEntity) inventory).getHandle()), 0, inventory.getSize(), ((CanaryContainerEntity) inventory).getHandle().c());
+                getHandle().openContainer(new ContainerChest(getHandle().bn, ((CanaryEntityInventory) inventory).getHandle(), inventory), 0, inventory.getSize(), ((CanaryEntityInventory) inventory).getHandle().c());
                 return;
             case ANVIL:
                 getHandle().openContainer(((CanaryAnvil) inventory).getContainer(), 8, 9);
                 return;
             case ANIMAL:
-                getHandle().openContainer(new ContainerHorseInventory(getHandle().bn, ((CanaryAnimalInventory) inventory).getHandle(), ((CanaryHorse) ((CanaryAnimalInventory) inventory).getOwner()).getHandle()), 11, inventory.getSize(), ((CanaryContainerEntity) inventory).getHandle().c());
+                getHandle().openContainer(new ContainerHorseInventory(getHandle().bn, ((CanaryAnimalInventory) inventory).getHandle(), ((CanaryHorse) ((CanaryAnimalInventory) inventory).getOwner()).getHandle()), 11, inventory.getSize(), ((CanaryEntityInventory) inventory).getHandle().c());
                 return;
             case BEACON:
-                getHandle().openContainer(new ContainerBeacon(getHandle().bn, ((CanaryBeacon) inventory).getTileEntity()), 7, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
+                getHandle().openContainer(new ContainerBeacon(getHandle().bn, ((CanaryBeacon) inventory).getTileEntity()), 7, inventory.getSize(), ((CanaryBlockInventory) inventory).getInventoryHandle().c());
                 return;
             case BREWING:
-                getHandle().openContainer(new ContainerBrewingStand(getHandle().bn, ((CanaryBrewingStand) inventory).getTileEntity()), 5, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
+                getHandle().openContainer(new ContainerBrewingStand(getHandle().bn, ((CanaryBrewingStand) inventory).getTileEntity()), 5, inventory.getSize(), ((CanaryBlockInventory) inventory).getInventoryHandle().c());
                 return;
             case DISPENSER:
-                getHandle().openContainer(new ContainerDispenser(getHandle().bn, ((CanaryDispenser) inventory).getTileEntity()), inventory instanceof CanaryDropper ? 10 : 3, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
+                getHandle().openContainer(new ContainerDispenser(getHandle().bn, ((CanaryDispenser) inventory).getTileEntity()), inventory instanceof CanaryDropper ? 10 : 3, inventory.getSize(), ((CanaryBlockInventory) inventory).getInventoryHandle().c());
                 return;
             case ENCHANTMENT:
                 getHandle().openContainer(((CanaryEnchantmentTable) inventory).getContainer(), 4, inventory.getSize());
                 return;
             case FURNACE:
-                getHandle().openContainer(new ContainerFurnace(getHandle().bn, ((CanaryFurnace) inventory).getTileEntity()), 2, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
+                getHandle().openContainer(new ContainerFurnace(getHandle().bn, ((CanaryFurnace) inventory).getTileEntity()), 2, inventory.getSize(), ((CanaryBlockInventory) inventory).getInventoryHandle().c());
                 return;
             case HOPPER:
-                getHandle().openContainer(new ContainerHopper(getHandle().bn, ((CanaryHopperBlock) inventory).getTileEntity()), 9, inventory.getSize(), ((CanaryContainerBlock) inventory).getInventoryHandle().c());
+                getHandle().openContainer(new ContainerHopper(getHandle().bn, ((CanaryHopperBlock) inventory).getTileEntity()), 9, inventory.getSize(), ((CanaryBlockInventory) inventory).getInventoryHandle().c());
                 return;
             case MINECART_HOPPER:
-                getHandle().openContainer(new ContainerHopper(getHandle().bn, ((CanaryContainerEntity) inventory).getHandle()), 9, inventory.getSize(), ((CanaryContainerEntity) inventory).getHandle().c());
+                getHandle().openContainer(new ContainerHopper(getHandle().bn, ((CanaryEntityInventory) inventory).getHandle()), 9, inventory.getSize(), ((CanaryEntityInventory) inventory).getHandle().c());
                 return;
             case WORKBENCH:
                 getHandle().openContainer(((CanaryWorkbench) inventory).getContainer(), 1, 9);

@@ -1,6 +1,8 @@
 package net.canarymod.api.world.blocks;
 
 import java.util.Arrays;
+
+import net.canarymod.api.inventory.CanaryBlockInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Inventory;
 import net.canarymod.api.inventory.InventoryType;
@@ -15,7 +17,7 @@ import net.minecraft.server.TileEntityHopper;
 /**
  * @author Somners
  */
-public class CanaryHopperBlock extends CanaryContainerBlock implements HopperBlock {
+public class CanaryHopperBlock extends CanaryBlockInventory implements HopperBlock {
 
     public CanaryHopperBlock(TileEntityHopper hopper) {
         super(hopper);

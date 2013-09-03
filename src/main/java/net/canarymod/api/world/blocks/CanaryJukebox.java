@@ -9,7 +9,7 @@ import net.minecraft.server.TileEntityRecordPlayer;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryJukebox extends CanaryComplexBlock implements Jukebox {
+public class CanaryJukebox extends CanaryTileEntity implements Jukebox {
 
     /**
      * Constructs a new wrapper for TileEntityRecordPlayer

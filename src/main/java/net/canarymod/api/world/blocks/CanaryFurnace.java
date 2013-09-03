@@ -1,6 +1,8 @@
 package net.canarymod.api.world.blocks;
 
 import java.util.Arrays;
+
+import net.canarymod.api.inventory.CanaryBlockInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
@@ -12,7 +14,7 @@ import net.minecraft.server.TileEntityFurnace;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryFurnace extends CanaryContainerBlock implements Furnace {
+public class CanaryFurnace extends CanaryBlockInventory implements Furnace {
 
     /**
      * Constructs a new wrapper for TileEntityFurnace

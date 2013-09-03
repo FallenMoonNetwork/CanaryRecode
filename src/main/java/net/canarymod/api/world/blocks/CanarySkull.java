@@ -7,7 +7,7 @@ import net.minecraft.server.TileEntitySkull;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanarySkull extends CanaryComplexBlock implements Skull {
+public class CanarySkull extends CanaryTileEntity implements Skull {
 
     /**
      * Constructs a new wrapper for TileEntitySkull

@@ -12,7 +12,7 @@ import net.minecraft.server.TileEntityCommandBlock;
  *
  * @author Jason (darkdiplomat)
  */
-public class CanaryCommandBlock extends CanaryComplexBlock implements CommandBlock {
+public class CanaryCommandBlock extends CanaryTileEntity implements CommandBlock {
 
     Group group; // The group for permission checking
 

@@ -7,7 +7,7 @@ import net.minecraft.server.TileEntityDaylightDetector;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryDaylightDetector extends CanaryComplexBlock implements DaylightDetector {
+public class CanaryDaylightDetector extends CanaryTileEntity implements DaylightDetector {
 
     /**
      * Constructs a new wrapper for TileEntityDaylightDetector

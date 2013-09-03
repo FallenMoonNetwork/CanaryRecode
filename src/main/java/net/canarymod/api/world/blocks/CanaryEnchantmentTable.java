@@ -2,8 +2,10 @@ package net.canarymod.api.world.blocks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.inventory.CanaryBlockInventory;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.InventoryType;
 import net.canarymod.api.inventory.Item;
@@ -18,7 +20,7 @@ import net.minecraft.server.TileEntityEnchantmentTable;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryEnchantmentTable extends CanaryContainerBlock implements EnchantmentTable {
+public class CanaryEnchantmentTable extends CanaryBlockInventory implements EnchantmentTable {
     private ContainerEnchantment container;
     public int fakeCaseCount = -1;
 

@@ -8,7 +8,7 @@ import net.minecraft.server.TileEntityNote;
  * 
  * @author Jason (darkdiplomat)
  */
-public class CanaryNoteBlock extends CanaryComplexBlock implements NoteBlock {
+public class CanaryNoteBlock extends CanaryTileEntity implements NoteBlock {
 
     /**
      * Constructs a new wrapper for TileEntityChest

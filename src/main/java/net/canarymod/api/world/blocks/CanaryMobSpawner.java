@@ -4,7 +4,7 @@ import net.canarymod.api.MobSpawnerLogic;
 import net.minecraft.server.TileEntity;
 import net.minecraft.server.TileEntityMobSpawner;
 
-public class CanaryMobSpawner extends CanaryComplexBlock implements MobSpawner {
+public class CanaryMobSpawner extends CanaryTileEntity implements MobSpawner {
 
     private MobSpawnerLogic logic = ((TileEntityMobSpawner) this.tileentity).a().logic;
 
