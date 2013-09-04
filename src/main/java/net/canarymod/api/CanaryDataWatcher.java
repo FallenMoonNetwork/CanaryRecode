@@ -40,4 +40,7 @@ public class CanaryDataWatcher implements DataWatcher {
         return dataWatcher.e(index);
     }
 
+    public net.minecraft.server.DataWatcher getHandle() {
+        return dataWatcher;
+    }
 }
