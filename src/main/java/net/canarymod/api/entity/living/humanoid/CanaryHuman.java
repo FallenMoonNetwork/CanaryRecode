@@ -46,8 +46,8 @@ public abstract class CanaryHuman extends CanaryLivingBase implements Human {
      */
     @Override
     public void kill() {
+        this.getCapabilities().setInvulnerable(false); // FORCE DEATH!
         super.kill();
-        dropInventory();
     }
 
     /**
@@ -90,10 +90,10 @@ public abstract class CanaryHuman extends CanaryLivingBase implements Human {
      */
     @Override
     public Item getItemHeld() {
-        Item item = ((CanaryPlayerInventory) getInventory()).getItemInHand();
+        Item item = getInventory().getItemInHand();
 
         if (item != null) {
-            item.setSlot(((CanaryPlayerInventory) getInventory()).getSelectedHotbarSlotId());
+            item.setSlot(getInventory().getSelectedHotbarSlotId());
             return item;
         }
         return null;

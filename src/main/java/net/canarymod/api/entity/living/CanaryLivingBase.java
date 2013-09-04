@@ -112,7 +112,7 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
      */
     @Override
     public void kill() {
-        setHealth(0);
+        this.dealDamage(DamageType.GENERIC, 10000.0F); //overkill?
     }
 
     /**

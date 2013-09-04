@@ -3,6 +3,7 @@ package net.canarymod.api;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
+import net.minecraft.server.Explosion;
 
 public class CanaryDamageSource implements DamageSource {
     net.minecraft.server.DamageSource handle;
@@ -80,7 +81,7 @@ public class CanaryDamageSource implements DamageSource {
      * Gets a damage source from a damage type<br>
      * Note: This will not work with Entity Damage Sources due to
      * the extra Entity Arguments.
-     * 
+     *
      * @param type
      */
     public static DamageSource getDamageSourceFromType(DamageType type) {
@@ -92,7 +93,7 @@ public class CanaryDamageSource implements DamageSource {
                 return new CanaryDamageSource(net.minecraft.server.DamageSource.g);
 
             case EXPLOSION:
-                return new CanaryDamageSource(net.minecraft.server.DamageSource.j); // XXX incorrect, needs further review
+                return new CanaryDamageSource(net.minecraft.server.DamageSource.a((Explosion) null));
 
             case FALL:
                 return new CanaryDamageSource(net.minecraft.server.DamageSource.h);
