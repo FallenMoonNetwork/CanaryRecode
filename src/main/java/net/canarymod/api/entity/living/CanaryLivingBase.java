@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import net.canarymod.Canary;
 import net.canarymod.api.CanaryDamageSource;
-import net.canarymod.api.CanaryPacket;
+import net.canarymod.api.packet.CanaryPacket;
 import net.canarymod.api.DamageSource;
 import net.canarymod.api.DamageType;
 import net.canarymod.api.entity.CanaryEntity;

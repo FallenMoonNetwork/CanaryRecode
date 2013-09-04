@@ -1,7 +1,7 @@
 package net.canarymod;
 
 import java.util.ArrayList;
-import net.canarymod.api.CanaryPacket;
+import net.canarymod.api.packet.CanaryPacket;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;

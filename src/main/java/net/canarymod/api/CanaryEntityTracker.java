@@ -5,6 +5,8 @@ import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.packet.CanaryPacket;
+import net.canarymod.api.packet.Packet;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 

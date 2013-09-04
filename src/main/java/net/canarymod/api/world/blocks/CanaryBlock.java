@@ -3,6 +3,8 @@ package net.canarymod.api.world.blocks;
 import java.util.Random;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.packet.BlockChangePacket;
+import net.canarymod.api.packet.CanaryBlockChangePacket;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
 import net.canarymod.api.world.position.Location;
@@ -212,6 +214,17 @@ public class CanaryBlock implements Block {
     @Override
     public boolean rightClick(Player player) {
         return net.minecraft.server.Block.s[getTypeId()].a(((CanaryWorld) getWorld()).getHandle(), getX(), getY(), getZ(), player != null ? ((CanaryPlayer) player).getHandle() : null, 0, 0, 0, 0); // last four parameters aren't even used by lever or button
+    }
+
+    public void sendUpdateToPlayers(Player... players){
+        for(Player player : players){
+            player.sendPacket(getBlockPacket());
+        }
+    }
+
+    @Override
+    public BlockChangePacket getBlockPacket() {
+        return new CanaryBlockChangePacket(this);
     }
 
     @Override

@@ -15,7 +15,7 @@ import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.Translator;
 import net.canarymod.api.CanaryConfigurationManager;
-import net.canarymod.api.CanaryPacket;
+import net.canarymod.api.packet.CanaryPacket;
 import net.canarymod.api.PlayerListEntry;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
 import net.canarymod.api.world.CanaryWorld;

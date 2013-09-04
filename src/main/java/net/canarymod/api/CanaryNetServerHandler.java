@@ -1,6 +1,8 @@
 package net.canarymod.api;
 
 import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.api.packet.CanaryPacket;
+import net.canarymod.api.packet.Packet;
 import net.canarymod.chat.TextFormat;
 import net.minecraft.server.ChatMessageComponent;
 import net.minecraft.server.Packet3Chat;
