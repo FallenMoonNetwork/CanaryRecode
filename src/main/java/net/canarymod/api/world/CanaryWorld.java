@@ -2,6 +2,8 @@ package net.canarymod.api.world;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.canarymod.ToolBox;
 import net.canarymod.WorldCacheTimer;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.GameMode;
@@ -236,12 +238,12 @@ public class CanaryWorld implements World {
 
     @Override
     public short getDataAt(Position position) {
-        return getDataAt((int) position.getX(), (int) position.getY(), (int) position.getZ());
+        return getDataAt(position.getBlockX(), position.getBlockY(), position.getBlockZ());
     }
 
     @Override
     public Block getBlockAt(Position position) {
-        return getBlockAt((int) position.getX(), (int) position.getY(), (int) position.getZ());
+        return getBlockAt(position.getBlockX(), position.getBlockY(), position.getBlockZ());
     }
 
     @Override
@@ -256,7 +258,7 @@ public class CanaryWorld implements World {
 
     @Override
     public void setBlockAt(Position vector, Block block) {
-        setBlockAt((int) vector.getX(), (int) vector.getY(), (int) vector.getZ(), block.getTypeId(), block.getData());
+        setBlockAt(vector.getBlockX(), vector.getBlockY(), vector.getBlockZ(), block.getTypeId(), block.getData());
     }
 
     @Override
@@ -267,12 +269,12 @@ public class CanaryWorld implements World {
 
     @Override
     public void setBlockAt(Position position, short type) {
-        setBlockAt((int) position.getX(), (int) position.getY(), (int) position.getZ(), type);
+        setBlockAt(position.getBlockX(), position.getBlockY(), position.getBlockZ(), type);
     }
 
     @Override
     public void setBlockAt(Position position, short type, short data) {
-        setBlockAt((int) position.getX(), (int) position.getY(), (int) position.getZ(), type, data);
+        setBlockAt(position.getBlockX(), position.getBlockY(), position.getBlockZ(), type, data);
     }
 
     @Override
@@ -460,7 +462,7 @@ public class CanaryWorld implements World {
 
     @Override
     public boolean isBlockPowered(Position position) {
-        return isBlockPowered((int) position.getX(), (int) position.getY(), (int) position.getZ());
+        return isBlockPowered(position.getBlockX(), position.getBlockY(), position.getBlockZ());
     }
 
     @Override
@@ -475,7 +477,7 @@ public class CanaryWorld implements World {
 
     @Override
     public boolean isBlockIndirectlyPowered(Position position) {
-        return isBlockIndirectlyPowered((int) position.getX(), (int) position.getY(), (int) position.getZ());
+        return isBlockIndirectlyPowered(position.getBlockX(), position.getBlockY(), position.getBlockZ());
     }
 
     @Override
@@ -547,7 +549,7 @@ public class CanaryWorld implements World {
 
     @Override
     public void makeLightningBolt(Position position) {
-        world.c(new EntityLightningBolt(world, (int) position.getX(), (int) position.getY(), (int) position.getZ()));
+        world.c(new EntityLightningBolt(world, position.getX(), position.getY(), position.getZ()));
     }
 
     @Override
@@ -567,13 +569,13 @@ public class CanaryWorld implements World {
 
     @Override
     public void removePlayerFromWorld(Player player) {
-        world.f((net.minecraft.server.Entity) ((CanaryPlayer) player).getHandle());
+        world.f(((CanaryPlayer) player).getHandle());
 
     }
 
     @Override
     public void addPlayerToWorld(Player player) {
-        world.d((net.minecraft.server.Entity) ((CanaryPlayer) player).getHandle());
+        world.d(((CanaryPlayer) player).getHandle());
     }
 
     @Override
