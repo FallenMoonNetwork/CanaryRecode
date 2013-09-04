@@ -57,6 +57,12 @@ public class NetLoginHandler extends NetHandler {
     }
 
     public void a(Packet2ClientProtocol packet2clientprotocol) {
+        // CanaryMod: fix security issue
+        if (this.g != null) {
+            this.a("I'm sorry... I can't let you do that, Dave");
+            return;
+        }
+        //
         this.g = packet2clientprotocol.f();
         if (!this.g.equals(StringUtils.a(this.g))) {
             this.a("Invalid username!");
