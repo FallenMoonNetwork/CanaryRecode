@@ -868,7 +868,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         super.setDisplayName(name);
         Packet20NamedEntitySpawn pkt = new Packet20NamedEntitySpawn(this);
         for (Player p : Canary.getServer().getPlayerList()) {
-            if (!p.getName().equals(this.bS)) {
+            if (!p.getName().equals(this.c_())) {
                 ((CanaryPlayer) p).getHandle().a.b(pkt);
             }
         }

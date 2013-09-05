@@ -2,6 +2,7 @@ package net.canarymod.api;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.nbt.CanaryBaseTag;
 import net.canarymod.api.nbt.CanaryCompoundTag;
@@ -20,7 +21,7 @@ import net.minecraft.server.SaveHandler;
 
 /**
  * Offline Player implementation
- * 
+ *
  * @author Chris (damagefilter)
  * @author Jason (darkdiplomat)
  */
@@ -174,7 +175,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
      */
     @Override
     public Group[] getPlayerGroups() {
-        return groups.toArray(new Group[0]);
+        return groups.toArray(new Group[groups.size()]);
     }
 
     /**
@@ -274,8 +275,7 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
             if (handler instanceof SaveHandler) {
                 SaveHandler shandler = (SaveHandler) handler;
                 shandler.writePlayerNbt(getName(), (CanaryCompoundTag) getNBT());
-            }
-            else {
+            } else {
                 Canary.logServerMessage(getName() + "'s OfflinePlayer could not be saved! Unsupported SaveHandler!");
             }
         }

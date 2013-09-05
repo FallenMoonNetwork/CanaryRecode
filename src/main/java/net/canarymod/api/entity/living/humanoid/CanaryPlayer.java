@@ -283,7 +283,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public Group[] getPlayerGroups() {
-        return groups.toArray(new Group[0]);
+        return groups.toArray(new Group[groups.size()]);
     }
 
     /**

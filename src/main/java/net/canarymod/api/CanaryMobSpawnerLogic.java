@@ -3,6 +3,7 @@ package net.canarymod.api;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import net.canarymod.Canary;
 import net.canarymod.api.entity.CanaryEntity;
 import net.canarymod.api.nbt.BaseTag;
@@ -14,7 +15,7 @@ import net.minecraft.server.NBTTagCompound;
 
 /**
  * Implementation of MobSpawnerLogic
- * 
+ *
  * @author Somners
  */
 public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
@@ -35,7 +36,7 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
         ListTag list = tag.getListTag("SpawnPotentials");
 
         if (list.isEmpty()) {
-            return new String[]{ logic.e() };
+            return new String[]{logic.e()};
         }
 
         for (int i = 0; i < list.size(); i++) {
@@ -128,7 +129,7 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
         List<MobSpawnerEntry> list = new ArrayList<MobSpawnerEntry>();
         list.addAll(Arrays.asList(array));
         list.addAll(Arrays.asList(entries));
-        this.setSpawnedEntities((MobSpawnerEntry[]) list.toArray(new MobSpawnerEntry[]{}));
+        this.setSpawnedEntities((MobSpawnerEntry[]) list.toArray(new MobSpawnerEntry[list.size()]));
     }
 
     @Override
@@ -147,6 +148,6 @@ public class CanaryMobSpawnerLogic implements MobSpawnerLogic {
                 array.add(new CanaryMobSpawnerEntry(ent.getCanaryEntity()));
             }
         }
-        return (MobSpawnerEntry[]) array.toArray(new MobSpawnerEntry[]{});
+        return array.toArray(new MobSpawnerEntry[array.size()]);
     }
 }

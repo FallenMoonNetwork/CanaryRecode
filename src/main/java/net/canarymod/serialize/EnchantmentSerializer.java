@@ -15,20 +15,17 @@ public class EnchantmentSerializer implements Serializer<CanaryEnchantment> {
                 throw new CanaryDeserializeException("Could not deserialize Enchantment: Number of fields do not match expected fields (" + fields.length + "/2)", getVendor());
             }
             Enchantment.Type type = Enchantment.Type.fromId(Integer.parseInt(fields[0]));
-            CanaryEnchantment ench = new CanaryEnchantment(type, Short.parseShort(fields[1]));
-
-            return ench;
+            return new CanaryEnchantment(type, Short.parseShort(fields[1]));
         } catch (NumberFormatException e) {
             throw new CanaryDeserializeException("Could not deserialize Enchantment: " + e.getMessage(), getVendor());
         }
     }
 
     @Override
-    public String serialize(CanaryEnchantment obje) {
-        if (!(obje instanceof CanaryEnchantment)) {
+    public String serialize(CanaryEnchantment obj) {
+        if (obj == null) {
             return null;
         }
-        CanaryEnchantment obj = (CanaryEnchantment) obje;
         StringBuilder fields = new StringBuilder();
 
         fields.append(obj.getType().getId()).append(";").append(obj.getLevel());

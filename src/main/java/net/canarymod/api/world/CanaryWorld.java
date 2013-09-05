@@ -643,10 +643,10 @@ public class CanaryWorld implements World {
                 return ((TileEntityComparator) tileentity).getCanaryComparator();
             } else if (tileentity instanceof TileEntityDaylightDetector) {
                 return ((TileEntityDaylightDetector) tileentity).getCanaryDaylightDetector();
+            } else if (tileentity instanceof TileEntityDropper) { // Should come before Dispenser since its an instance of Dispenser too
+                return ((TileEntityDropper) tileentity).getCanaryDropper();
             } else if (tileentity instanceof TileEntityDispenser) {
                 return ((TileEntityDispenser) tileentity).getCanaryDispenser();
-            } else if (tileentity instanceof TileEntityDropper) {
-                return ((TileEntityDropper) tileentity).getCanaryDropper();
             } else if (tileentity instanceof TileEntityFurnace) {
                 return ((TileEntityFurnace) tileentity).getCanaryFurnace();
             } else if (tileentity instanceof TileEntityHopper) {

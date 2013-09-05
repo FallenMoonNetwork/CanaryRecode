@@ -59,12 +59,12 @@ public class CanaryDamageSource implements DamageSource {
 
     @Override
     public void setHungerDamage(float value) {
-        setHungerDamage(value);
+        handle.setHungerDamage(value);
     }
 
     @Override
     public void setUnblockable(boolean set) {
-        setUnblockable(set);
+        handle.setUnblockable(set);
     }
 
     @Override

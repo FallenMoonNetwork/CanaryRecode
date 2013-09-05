@@ -83,17 +83,15 @@ public class EntityPig extends EntityAnimal {
             return true;
         } else if (this.bT() && !this.q.I && (this.n == null || this.n == entityplayer)) {
             // CanaryMod: VehicleEnter/VehicleExit
-            CancelableHook hook = null;
+            CancelableHook hook;
             if (this.n == null) {
                 hook = new VehicleEnterHook((Vehicle) this.entity, entityplayer.getCanaryHuman());
-            } else if (this.n == entityplayer) {
+            } else {
                 hook = new VehicleExitHook((Vehicle) this.entity, entityplayer.getCanaryHuman());
             }
-            if (hook != null) {
-                hook.call();
-                if (!hook.isCanceled()) {
-                    entityplayer.a((Entity) this);
-                }
+            hook.call();
+            if (!hook.isCanceled()) {
+                entityplayer.a((Entity) this);
             }
             //
             return true;
