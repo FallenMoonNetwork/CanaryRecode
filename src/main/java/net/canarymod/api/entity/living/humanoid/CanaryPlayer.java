@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 import net.canarymod.Canary;
 import net.canarymod.MathHelp;
 import net.canarymod.ToolBox;
-import net.canarymod.api.packet.CanaryPacket;
 import net.canarymod.api.GameMode;
 import net.canarymod.api.NetServerHandler;
 import net.canarymod.api.PlayerListEntry;
@@ -21,6 +20,7 @@ import net.canarymod.api.inventory.CanaryBlockInventory;
 import net.canarymod.api.inventory.CanaryEntityInventory;
 import net.canarymod.api.inventory.EnderChestInventory;
 import net.canarymod.api.inventory.Inventory;
+import net.canarymod.api.packet.CanaryPacket;
 import net.canarymod.api.packet.Packet;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
@@ -79,6 +79,8 @@ public class CanaryPlayer extends CanaryHuman implements Player {
     private boolean muted;
     private String[] allowedIPs;
     private HashMap<String, String> defaultChatpattern = new HashMap<String, String>();
+    //Global chat format setting
+    private static String chatFormat = Configuration.getServerConfig().getChatFormat().replace("&", Colors.MARKER);
 
     public CanaryPlayer(EntityPlayerMP entity) {
         super(entity);
@@ -126,7 +128,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
                 // This is a copy of the real player list already, no need to copy again (re: Collections.copy())
                 ArrayList<Player> receivers = Canary.getServer().getPlayerList();
                 defaultChatpattern.put("%message", out);
-                ChatHook hook = (ChatHook) new ChatHook(this, "<%prefix%name" + Colors.WHITE + "> %message", receivers, defaultChatpattern).call();
+                ChatHook hook = (ChatHook) new ChatHook(this, chatFormat, receivers, defaultChatpattern).call();
                 if (hook.isCanceled()) {
                     return;
                 }
@@ -437,7 +439,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public EnderChestInventory getEnderChestInventory() {
-        return (EnderChestInventory) ((EntityPlayerMP) entity).getEnderChestInventory();
+        return ((EntityPlayerMP) entity).getEnderChestInventory();
     }
 
     /**
