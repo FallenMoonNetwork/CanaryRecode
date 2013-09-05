@@ -450,17 +450,31 @@ public class CanaryPacketFactory implements PacketFactory {
 //          case 0xC6: // There is currently no Packet 198
 //          case 0xC7: // There is currently no Packet 199
             case 0xC8:
+                if (args.length < 2) {
+                    throw new IllegalArgumentException(String.format(toofewargs, 2, args.length));
+                }
+                return new CanaryPacket(new Packet200Statistic((Integer)args[0], (Integer)args[1]));
             case 0xC9:
-                throw new IllegalArgumentException("Unimplemented Packet ID");
+                if (args.length < 3) {
+                    throw new IllegalArgumentException(String.format(toofewargs, 3, args.length));
+                }
+                return new CanaryPacket(new Packet201PlayerInfo((String)args[0], (Boolean)args[1], (Integer)args[2]));
+            case 0xCA:
+                throw new InvalidPacketConstructionException(202, "0xCA", "Player Abilities", "Use Player#updateCapabilities instead.");
+            case 0xCB:
+                throw new InvalidPacketConstructionException(203, "0xCB", "AutoComplete", "No effect outside intended use in command system.");
             case 0xCC:
                 throw new InvalidPacketConstructionException(204, "0xCC", "Client Settings", "Client to Server only.");
             case 0xCD:
                 throw new InvalidPacketConstructionException(205, "0xCD", "Client Statuses", "Client to Server only.");
             case 0xCE:
+                throw new InvalidPacketConstructionException(206, "0xCE", "Scoreboard Objective", "Use the Scoreboard API instead.");
             case 0xCF:
+                throw new InvalidPacketConstructionException(207, "0xCF", "Update Score", "Use the Scoreboard API instead.");
             case 0xD0:
+                throw new InvalidPacketConstructionException(208, "0xD0", "Display Scoreboard", "Use the Scoreboard API instead.");
             case 0xD1:
-                throw new IllegalArgumentException("Unimplemented Packet ID");
+                throw new InvalidPacketConstructionException(209, "0xD1", "Teams", "Use the Scoreboard API instead.");
 //          case 0xD2: // There is currently no Packet 210
 //          case 0xD3: // There is currently no Packet 211
 //          case 0xD4: // There is currently no Packet 212
@@ -672,7 +686,7 @@ public class CanaryPacketFactory implements PacketFactory {
         try {
             return createPacket(29, ids);
         } catch (Exception ex) {
-            Canary.logDebug("Failed to construct a DestoryEntity packet", ex);
+            Canary.logDebug("Failed to construct a DestroyEntity packet", ex);
             return null;
         }
     }
@@ -983,6 +997,26 @@ public class CanaryPacketFactory implements PacketFactory {
             return createPacket(133, id, x, y, z);
         } catch (Exception ex) {
             Canary.logDebug("Failed to construct a TileEditorOpen packet", ex);
+            return null;
+        }
+    }
+
+    @Override
+    public Packet incrementStatistic(int statId, int amount) {
+        try {
+            return createPacket(200, statId, amount);
+        } catch (Exception ex) {
+            Canary.logDebug("Failed to construct a IncrementStatistic packet", ex);
+            return null;
+        }
+    }
+
+    @Override
+    public Packet playerInfo(String name, boolean connected, int ping) {
+        try {
+            return createPacket(201, name, connected, ping);
+        } catch (Exception ex) {
+            Canary.logDebug("Failed to construct a PlayerInfo packet", ex);
             return null;
         }
     }
