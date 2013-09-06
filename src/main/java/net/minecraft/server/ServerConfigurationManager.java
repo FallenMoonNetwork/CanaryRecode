@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
 import net.canarymod.Canary;
 import net.canarymod.ToolBox;
 import net.canarymod.Translator;
 import net.canarymod.api.CanaryConfigurationManager;
-import net.canarymod.api.packet.CanaryPacket;
 import net.canarymod.api.PlayerListEntry;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
+import net.canarymod.api.packet.CanaryPacket;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.bansystem.Ban;
@@ -25,7 +26,8 @@ import net.canarymod.config.Configuration;
 import net.canarymod.config.ServerConfiguration;
 import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.hook.player.PlayerListEntryHook;
-import net.canarymod.hook.player.PlayerRespawnHook;
+import net.canarymod.hook.player.PlayerRespawnedHook;
+import net.canarymod.hook.player.PlayerRespawningHook;
 import net.canarymod.hook.player.PreConnectionHook;
 import net.canarymod.hook.player.TeleportHook;
 import net.canarymod.hook.system.ServerShutdownHook;
@@ -420,7 +422,7 @@ public abstract class ServerConfigurationManager {
         String name = entityplayermp.getCanaryWorld().getName();
         net.canarymod.api.world.DimensionType type = net.canarymod.api.world.DimensionType.fromId(i0);
         // CanaryMod: PlayerRespawn
-        PlayerRespawnHook hook = (PlayerRespawnHook) new PlayerRespawnHook(entityplayermp.getPlayer(), loc, isBedSpawn).call();
+        PlayerRespawningHook hook = (PlayerRespawningHook) new PlayerRespawningHook(entityplayermp.getPlayer(), loc, isBedSpawn).call();
         loc = hook.getRespawnLocation();
         WorldServer worldserver = (WorldServer) (loc == null ? (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(name, type, true)).getHandle() : ((CanaryWorld) loc.getWorld()).getHandle());
 
@@ -487,6 +489,11 @@ public abstract class ServerConfigurationManager {
         this.a.add(entityplayermp1);
         entityplayermp1.d();
         entityplayermp1.g(entityplayermp1.aM());
+        new PlayerRespawnedHook(entityplayermp1.getPlayer(), new Location(
+                        entityplayermp1.getPlayer().getWorld(),
+                        entityplayermp1.u,
+                        entityplayermp1.v,
+                        entityplayermp1.w, 0, 0)).call();
         //
         return entityplayermp1;
     }
@@ -953,7 +960,7 @@ public abstract class ServerConfigurationManager {
 
     /**
      * Get the configuration management wrapper
-     * 
+     *
      * @return the canary configuration manager
      */
     public CanaryConfigurationManager getConfigurationManager() {
@@ -963,7 +970,7 @@ public abstract class ServerConfigurationManager {
     // This is a CanaryMod method
     /**
      * Send a packet to a specified player.
-     * 
+     *
      * @param player
      * @param packet
      */
