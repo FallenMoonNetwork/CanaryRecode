@@ -265,6 +265,14 @@ public class CanaryItem implements Item {
      * {@inheritDoc}
      */
     @Override
+    public boolean isEnchantable() {
+        return item.x();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Enchantment getEnchantment() {
         return getEnchantment(0);
     }
