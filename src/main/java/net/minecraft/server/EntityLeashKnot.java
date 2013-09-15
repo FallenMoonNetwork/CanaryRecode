@@ -2,7 +2,13 @@ package net.minecraft.server;
 
 import java.util.Iterator;
 import java.util.List;
+
+import net.canarymod.api.CanaryDamageSource;
+import net.canarymod.api.DamageType;
 import net.canarymod.api.entity.hanging.CanaryLeashKnot;
+import net.canarymod.api.entity.hanging.HangingEntity;
+import net.canarymod.api.entity.living.humanoid.Player;
+import net.canarymod.hook.entity.HangingEntityDestroyHook;
 
 public class EntityLeashKnot extends EntityHanging {
 
@@ -31,7 +37,18 @@ public class EntityLeashKnot extends EntityHanging {
         return 9;
     }
 
-    public void b(Entity entity) {}
+    //CanaryMod added logic to notify plugins of leash knots being destroyed
+    public void b(Entity entity) {
+      //CanaryMod start
+        HangingEntityDestroyHook hook = null;
+        if(entity instanceof EntityPlayer) {
+            hook = (HangingEntityDestroyHook) new HangingEntityDestroyHook((HangingEntity) this.getCanaryEntity(), (Player)entity.getCanaryEntity(), CanaryDamageSource.getDamageSourceFromType(DamageType.GENERIC)).call();
+        }
+        else {
+            hook = (HangingEntityDestroyHook) new HangingEntityDestroyHook((HangingEntity) this.getCanaryEntity(), null, CanaryDamageSource.getDamageSourceFromType(DamageType.GENERIC)).call();
+        }
+        //CanaryMod end
+    }
 
     public boolean d(NBTTagCompound nbttagcompound) {
         return false;

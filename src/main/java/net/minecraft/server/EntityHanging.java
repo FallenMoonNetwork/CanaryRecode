@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import net.canarymod.api.entity.hanging.HangingEntity;
 import net.canarymod.hook.entity.HangingEntityDestroyHook;
+import net.canarymod.logger.Logman;
 
 public abstract class EntityHanging extends Entity {
 
