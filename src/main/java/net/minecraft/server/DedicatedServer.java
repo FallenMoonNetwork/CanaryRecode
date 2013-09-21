@@ -58,6 +58,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         // CanaryMod: Removed world-dependent settings
         this.n(cfg.getMotd());
         this.m(cfg.getTexturePack());
+        super.e(cfg.getPlayerIdleTimeout());
         InetAddress inetaddress = null;
 
         if (this.n().length() > 0) {
@@ -338,6 +339,8 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     public void e(int i0) { //TODO: cfg.setPlayerIdleTimeout(int);
         super.e(i0);
+        ServerConfiguration cfg = Configuration.getServerConfig();
+        cfg.setPlayerIdleTimeout(i0);
         //this.p.a("player-idle-timeout", Integer.valueOf(i0));
         //this.a();
     }
