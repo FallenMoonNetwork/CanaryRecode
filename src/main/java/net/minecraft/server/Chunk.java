@@ -613,7 +613,7 @@ public class Chunk {
         if (i0 != this.g || i1 != this.h) {
             this.e.Y().c("Wrong location! " + entity);
             // Thread.dumpStack();
-            entity.x(); // TODO: Verify for 1.6.4
+            entity.x();
             return;
         }
 
