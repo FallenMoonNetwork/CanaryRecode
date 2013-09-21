@@ -39,7 +39,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
         dedicatedservercommandthread.setDaemon(true);
         dedicatedservercommandthread.start();
-        this.an().a("Starting minecraft server version 1.6.2");
+        this.an().a("Starting minecraft server version "+this.z()); // CanaryMod: don't hardcode version
         if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
             this.an().b("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
         }
