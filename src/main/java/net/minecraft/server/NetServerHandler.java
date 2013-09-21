@@ -335,6 +335,7 @@ public class NetServerHandler extends NetHandler {
     public void a(Packet14BlockDig packet14blockdig) {
         WorldServer worldserver = (WorldServer)this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
 
+        this.c.u();
         if (packet14blockdig.e == 4) {
             // TODO: crash from rapid item drop prevention
             this.c.a(false);
@@ -560,6 +561,7 @@ public class NetServerHandler extends NetHandler {
     public void a(Packet16BlockItemSwitch packet16blockitemswitch) {
         if (packet16blockitemswitch.a >= 0 && packet16blockitemswitch.a < InventoryPlayer.i()) {
             this.c.bn.c = packet16blockitemswitch.a;
+            this.c.u();
         }
         else {
             this.d.an().b(this.c.c_() + " tried to set an invalid carried item");
@@ -608,6 +610,7 @@ public class NetServerHandler extends NetHandler {
             }
         }*/
         // CanaryMod: Re-route to Player chat
+        this.c.u(); //Not Idle
         this.c.getPlayer().chat(packet3chat.a);
     }
 
@@ -617,6 +620,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet18Animation packet18animation) {
+        this.c.u();
         if (packet18animation.b == 1) {
             // CanaryMod: PlayerLeftClick
             new PlayerArmSwingHook(this.c.getPlayer()).call();
@@ -626,6 +630,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet19EntityAction packet19entityaction) {
+        this.c.u();
         if (packet19entityaction.b == 1) {
             this.c.b(true);
         }
@@ -666,6 +671,7 @@ public class NetServerHandler extends NetHandler {
         WorldServer worldserver = (WorldServer)this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
         Entity entity = worldserver.a(packet7useentity.b);
 
+        this.c.u();
         if (entity != null) {
             boolean flag0 = this.c.o(entity);
             double d0 = 36.0D;
@@ -679,6 +685,12 @@ public class NetServerHandler extends NetHandler {
                     this.c.p(entity);
                 }
                 else if (packet7useentity.c == 1) {
+                    if (entity instanceof EntityItem || entity instanceof EntityXPOrb || entity instanceof EntityArrow || entity == this.c) {
+                        this.c("Attempting to attack an invalid entity");
+                        this.d.f("Player " + this.c.c_() + " tried to attack an invalid entity");
+                        return;
+                    }
+
                     this.c.q(entity);
                 }
             }
@@ -687,6 +699,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet205ClientCommand packet205clientcommand) {
+        this.c.u();
         if (packet205clientcommand.a == 1) {
             if (this.c.j) {
                 this.c = this.d.af().a(this.c, 0, true);
@@ -728,6 +741,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet102WindowClick packet102windowclick) {
+        this.c.u();
         if (this.c.bp.d == packet102windowclick.a && this.c.bp.c(this.c)) {
 
             // CanaryMod: SlotClick
@@ -783,6 +797,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet108EnchantItem packet108enchantitem) {
+        this.c.u();
         if (this.c.bp.d == packet108enchantitem.a && this.c.bp.c(this.c)) {
             this.c.bp.a((EntityPlayer)this.c, packet108enchantitem.b);
             this.c.bp.b();
@@ -830,6 +845,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet130UpdateSign packet130updatesign) {
+        this.c.u();
         WorldServer worldserver = (WorldServer)this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
 
         if (worldserver.f(packet130updatesign.a, packet130updatesign.b, packet130updatesign.c)) {
