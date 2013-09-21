@@ -22,7 +22,7 @@ public abstract class BlockFluid extends Block {
             i0 = 0;
         }
 
-        return (float) (i0 + 1) / 9.0F;
+        return (float)(i0 + 1) / 9.0F;
     }
 
     protected int l_(World world, int i0, int i1, int i2) {
@@ -32,7 +32,8 @@ public abstract class BlockFluid extends Block {
     protected int d(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         if (iblockaccess.g(i0, i1, i2) != this.cU) {
             return -1;
-        } else {
+        }
+        else {
             int i3 = iblockaccess.h(i0, i1, i2);
 
             if (i3 >= 8) {
@@ -109,12 +110,13 @@ public abstract class BlockFluid extends Block {
                     i7 = this.d(iblockaccess, i5, i1 - 1, i6);
                     if (i7 >= 0) {
                         i8 = i7 - (i3 - 8);
-                        vec3 = vec3.c((double) ((i5 - i0) * i8), (double) ((i1 - i1) * i8), (double) ((i6 - i2) * i8));
+                        vec3 = vec3.c((double)((i5 - i0) * i8), (double)((i1 - i1) * i8), (double)((i6 - i2) * i8));
                     }
                 }
-            } else if (i7 >= 0) {
+            }
+            else if (i7 >= 0) {
                 i8 = i7 - i3;
-                vec3 = vec3.c((double) ((i5 - i0) * i8), (double) ((i1 - i1) * i8), (double) ((i6 - i2) * i8));
+                vec3 = vec3.c((double)((i5 - i0) * i8), (double)((i1 - i1) * i8), (double)((i6 - i2) * i8));
             }
         }
 
@@ -163,7 +165,7 @@ public abstract class BlockFluid extends Block {
     }
 
     public void a(World world, int i0, int i1, int i2, Entity entity, Vec3 vec3) {
-        Vec3 vec31 = this.g((IBlockAccess) world, i0, i1, i2); // CanaryMod: Cast World to IBlockAccess for method g
+        Vec3 vec31 = this.g((IBlockAccess)world, i0, i1, i2); // CanaryMod: Cast World to IBlockAccess for method g
 
         vec3.c += vec31.c;
         vec3.d += vec31.d;
@@ -212,7 +214,8 @@ public abstract class BlockFluid extends Block {
 
                     if (i3 == 0) {
                         world.c(i0, i1, i2, Block.au.cF);
-                    } else if (i3 <= 4) {
+                    }
+                    else if (i3 <= 4) {
                         world.c(i0, i1, i2, Block.B.cF);
                     }
 
@@ -223,10 +226,10 @@ public abstract class BlockFluid extends Block {
     }
 
     protected void j(World world, int i0, int i1, int i2) {
-        world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
+        world.a((double)((float)i0 + 0.5F), (double)((float)i1 + 0.5F), (double)((float)i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
 
         for (int i3 = 0; i3 < 8; ++i3) {
-            world.a("largesmoke", (double) i0 + Math.random(), (double) i1 + 1.2D, (double) i2 + Math.random(), 0.0D, 0.0D, 0.0D);
+            world.a("largesmoke", (double)i0 + Math.random(), (double)i1 + 1.2D, (double)i2 + Math.random(), 0.0D, 0.0D, 0.0D);
         }
     }
 }

@@ -41,9 +41,10 @@ public class SlotFurnace extends Slot {
 
             if (f0 == 0.0F) {
                 i0 = 0;
-            } else if (f0 < 1.0F) {
-                i1 = MathHelper.d((float) i0 * f0);
-                if (i1 < MathHelper.f((float) i0 * f0) && (float) Math.random() < (float) i0 * f0 - (float) i1) {
+            }
+            else if (f0 < 1.0F) {
+                i1 = MathHelper.d((float)i0 * f0);
+                if (i1 < MathHelper.f((float)i0 * f0) && (float)Math.random() < (float)i0 * f0 - (float)i1) {
                     ++i1;
                 }
 
@@ -53,17 +54,17 @@ public class SlotFurnace extends Slot {
             while (i0 > 0) {
                 i1 = EntityXPOrb.a(i0);
                 i0 -= i1;
-                this.a.q.d((Entity) (new EntityXPOrb(this.a.q, this.a.u, this.a.v + 0.5D, this.a.w + 0.5D, i1)));
+                this.a.q.d((Entity)(new EntityXPOrb(this.a.q, this.a.u, this.a.v + 0.5D, this.a.w + 0.5D, i1)));
             }
         }
 
         this.b = 0;
         if (itemstack.d == Item.q.cv) {
-            this.a.a((StatBase) AchievementList.k, 1);
+            this.a.a((StatBase)AchievementList.k, 1);
         }
 
         if (itemstack.d == Item.aX.cv) {
-            this.a.a((StatBase) AchievementList.p, 1);
+            this.a.a((StatBase)AchievementList.p, 1);
         }
     }
 }

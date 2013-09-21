@@ -32,13 +32,13 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
                     }
 
                     itemstack.b -= i1;
-                    EntityItem entityitem = new EntityItem(this.q, this.u + (double) f0, this.v + (double) f1, this.w + (double) f2, new ItemStack(itemstack.d, i1, itemstack.k()));
+                    EntityItem entityitem = new EntityItem(this.q, this.u + (double)f0, this.v + (double)f1, this.w + (double)f2, new ItemStack(itemstack.d, i1, itemstack.k()));
                     float f3 = 0.05F;
 
-                    entityitem.x = (double) ((float) this.ab.nextGaussian() * f3);
-                    entityitem.y = (double) ((float) this.ab.nextGaussian() * f3 + 0.2F);
-                    entityitem.z = (double) ((float) this.ab.nextGaussian() * f3);
-                    this.q.d((Entity) entityitem);
+                    entityitem.x = (double)((float)this.ab.nextGaussian() * f3);
+                    entityitem.y = (double)((float)this.ab.nextGaussian() * f3 + 0.2F);
+                    entityitem.z = (double)((float)this.ab.nextGaussian() * f3);
+                    this.q.d((Entity)entityitem);
                 }
             }
         }
@@ -56,7 +56,8 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
                 itemstack = this.a[i0];
                 this.a[i0] = null;
                 return itemstack;
-            } else {
+            }
+            else {
                 itemstack = this.a[i0].a(i1);
                 if (this.a[i0].b == 0) {
                     this.a[i0] = null;
@@ -64,7 +65,8 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
 
                 return itemstack;
             }
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -75,7 +77,8 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
 
             this.a[i0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -87,15 +90,18 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
         }
     }
 
-    public void e() {}
+    public void e() {
+    }
 
     public boolean a(EntityPlayer entityplayer) {
         return this.M ? false : entityplayer.e(this) <= 64.0D;
     }
 
-    public void k_() {}
+    public void k_() {
+    }
 
-    public void g() {}
+    public void g() {
+    }
 
     public boolean b(int i0, ItemStack itemstack) {
         return true;
@@ -114,7 +120,7 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
         super.b(i0);
     }
 
-    public void w() {
+    public void x() {
         if (this.b) {
             for (int i0 = 0; i0 < this.j_(); ++i0) {
                 ItemStack itemstack = this.a(i0);
@@ -132,24 +138,24 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
                         }
 
                         itemstack.b -= i1;
-                        EntityItem entityitem = new EntityItem(this.q, this.u + (double) f0, this.v + (double) f1, this.w + (double) f2, new ItemStack(itemstack.d, i1, itemstack.k()));
+                        EntityItem entityitem = new EntityItem(this.q, this.u + (double)f0, this.v + (double)f1, this.w + (double)f2, new ItemStack(itemstack.d, i1, itemstack.k()));
 
                         if (itemstack.p()) {
-                            entityitem.d().d((NBTTagCompound) itemstack.q().b());
+                            entityitem.d().d((NBTTagCompound)itemstack.q().b());
                         }
 
                         float f3 = 0.05F;
 
-                        entityitem.x = (double) ((float) this.ab.nextGaussian() * f3);
-                        entityitem.y = (double) ((float) this.ab.nextGaussian() * f3 + 0.2F);
-                        entityitem.z = (double) ((float) this.ab.nextGaussian() * f3);
-                        this.q.d((Entity) entityitem);
+                        entityitem.x = (double)((float)this.ab.nextGaussian() * f3);
+                        entityitem.y = (double)((float)this.ab.nextGaussian() * f3 + 0.2F);
+                        entityitem.z = (double)((float)this.ab.nextGaussian() * f3);
+                        this.q.d((Entity)entityitem);
                     }
                 }
             }
         }
 
-        super.w();
+        super.x();
     }
 
     protected void b(NBTTagCompound nbttagcompound) {
@@ -160,13 +166,13 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
             if (this.a[i0] != null) {
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 
-                nbttagcompound1.a("Slot", (byte) i0);
+                nbttagcompound1.a("Slot", (byte)i0);
                 this.a[i0].b(nbttagcompound1);
-                nbttaglist.a((NBTBase) nbttagcompound1);
+                nbttaglist.a((NBTBase)nbttagcompound1);
             }
         }
 
-        nbttagcompound.a("Items", (NBTBase) nbttaglist);
+        nbttagcompound.a("Items", (NBTBase)nbttaglist);
     }
 
     protected void a(NBTTagCompound nbttagcompound) {
@@ -176,7 +182,7 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
         this.a = new ItemStack[this.j_()];
 
         for (int i0 = 0; i0 < nbttaglist.c(); ++i0) {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.b(i0);
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.b(i0);
             int i1 = nbttagcompound1.c("Slot") & 255;
 
             if (i1 >= 0 && i1 < this.a.length) {
@@ -187,18 +193,18 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
 
     public boolean c(EntityPlayer entityplayer) {
         if (!this.q.I) {
-            entityplayer.a((IInventory) this);
+            entityplayer.a((IInventory)this);
         }
 
         return true;
     }
 
     protected void h() {
-        int i0 = 15 - Container.b((IInventory) this);
-        float f0 = 0.98F + (float) i0 * 0.001F;
+        int i0 = 15 - Container.b((IInventory)this);
+        float f0 = 0.98F + (float)i0 * 0.001F;
 
-        this.x *= (double) f0;
+        this.x *= (double)f0;
         this.y *= 0.0D;
-        this.z *= (double) f0;
+        this.z *= (double)f0;
     }
 }

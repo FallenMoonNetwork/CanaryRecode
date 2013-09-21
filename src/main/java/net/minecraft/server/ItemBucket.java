@@ -22,7 +22,8 @@ public class ItemBucket extends Item {
 
         if (movingobjectposition == null) {
             return itemstack;
-        } else {
+        }
+        else {
             if (movingobjectposition.a == EnumMovingObjectType.a) {
                 int i0 = movingobjectposition.b;
                 int i1 = movingobjectposition.c;
@@ -33,8 +34,8 @@ public class ItemBucket extends Item {
                 }
 
                 // CanaryMod: BlockDestoryHook
-                CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
-                BlockDestroyHook hook = new BlockDestroyHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked);
+                CanaryBlock clicked = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
+                BlockDestroyHook hook = new BlockDestroyHook(((EntityPlayerMP)entityplayer).getPlayer(), clicked);
                 //
 
                 if (this.a == 0) {
@@ -89,7 +90,8 @@ public class ItemBucket extends Item {
 
                         return itemstack;
                     }
-                } else {
+                }
+                else {
                     if (this.a < 0) {
                         return new ItemStack(Item.ay);
                     }
@@ -140,29 +142,32 @@ public class ItemBucket extends Item {
     public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {
         if (this.a <= 0) {
             return false;
-        } else {
+        }
+        else {
             boolean flag0 = !world.g(i0, i1, i2).a();
 
             if (!world.c(i0, i1, i2) && !flag0) {
                 return false;
-            } else {
+            }
+            else {
                 if (!world.I && flag0) {
                     world.a(i0, i1, i2, true);
                 }
 
                 if (world.t.f && this.a == Block.F.cF) {
-                    world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
+                    world.a((double)((float)i0 + 0.5F), (double)((float)i1 + 0.5F), (double)((float)i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
 
                     for (int i3 = 0; i3 < 8; ++i3) {
-                        world.a("largesmoke", (double) i0 + Math.random(), (double) i1 + Math.random(), (double) i2 + Math.random(), 0.0D, 0.0D, 0.0D);
+                        world.a("largesmoke", (double)i0 + Math.random(), (double)i1 + Math.random(), (double)i2 + Math.random(), 0.0D, 0.0D, 0.0D);
                     }
-                } else {
+                }
+                else {
                     // CanaryMod: BlockPlaceHook water/lava bucket
                     if (entityplayer != null) {
-                        CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
-                        CanaryBlock placed = new CanaryBlock((short) this.a, (short) 0, i0, i1, i2, world.getCanaryWorld());
-                        Player player = ((EntityPlayerMP) entityplayer).getPlayer();
-                        BlockPlaceHook hook = (BlockPlaceHook) new BlockPlaceHook(player, clicked, placed).call();
+                        CanaryBlock clicked = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
+                        CanaryBlock placed = new CanaryBlock((short)this.a, (short)0, i0, i1, i2, world.getCanaryWorld());
+                        Player player = ((EntityPlayerMP)entityplayer).getPlayer();
+                        BlockPlaceHook hook = (BlockPlaceHook)new BlockPlaceHook(player, clicked, placed).call();
                         if (hook.isCanceled()) {
                             return false;
                         }

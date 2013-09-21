@@ -12,7 +12,7 @@ public class ContainerMerchant extends Container {
         this.f = new InventoryMerchant(inventoryplayer.d, imerchant);
         this.a(new Slot(this.f, 0, 36, 53));
         this.a(new Slot(this.f, 1, 62, 53));
-        this.a((Slot) (new SlotMerchantResult(inventoryplayer.d, imerchant, this.f, 2, 120, 53)));
+        this.a((Slot)(new SlotMerchantResult(inventoryplayer.d, imerchant, this.f, 2, 120, 53)));
 
         int i0;
 
@@ -54,7 +54,7 @@ public class ContainerMerchant extends Container {
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
-        Slot slot = (Slot) this.c.get(i0);
+        Slot slot = (Slot)this.c.get(i0);
 
         if (slot != null && slot.e()) {
             ItemStack itemstack1 = slot.d();
@@ -66,21 +66,25 @@ public class ContainerMerchant extends Container {
                 }
 
                 slot.a(itemstack1, itemstack);
-            } else if (i0 != 0 && i0 != 1) {
+            }
+            else if (i0 != 0 && i0 != 1) {
                 if (i0 >= 3 && i0 < 30) {
                     if (!this.a(itemstack1, 30, 39, false)) {
                         return null;
                     }
-                } else if (i0 >= 30 && i0 < 39 && !this.a(itemstack1, 3, 30, false)) {
+                }
+                else if (i0 >= 30 && i0 < 39 && !this.a(itemstack1, 3, 30, false)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 3, 39, false)) {
+            }
+            else if (!this.a(itemstack1, 3, 39, false)) {
                 return null;
             }
 
             if (itemstack1.b == 0) {
-                slot.c((ItemStack) null);
-            } else {
+                slot.c((ItemStack)null);
+            }
+            else {
                 slot.f();
             }
 
@@ -96,7 +100,7 @@ public class ContainerMerchant extends Container {
 
     public void b(EntityPlayer entityplayer) {
         super.b(entityplayer);
-        this.a.a_((EntityPlayer) null);
+        this.a.a_((EntityPlayer)null);
         super.b(entityplayer);
         if (!this.g.I) {
             ItemStack itemstack = this.f.a_(0);

@@ -22,8 +22,9 @@ public class NBTTagList extends NBTBase {
 
     void a(DataOutput dataoutput) throws IOException {
         if (!this.a.isEmpty()) {
-            this.c = ((NBTBase) this.a.get(0)).a();
-        } else {
+            this.c = ((NBTBase)this.a.get(0)).a();
+        }
+        else {
             this.c = 1;
         }
 
@@ -31,21 +32,22 @@ public class NBTTagList extends NBTBase {
         dataoutput.writeInt(this.a.size());
 
         for (int i0 = 0; i0 < this.a.size(); ++i0) {
-            ((NBTBase) this.a.get(i0)).a(dataoutput);
+            ((NBTBase)this.a.get(i0)).a(dataoutput);
         }
     }
 
     void a(DataInput datainput, int i0) throws IOException {
         if (i0 > 512) {
             throw new RuntimeException("Tried to read NBT tag with too high complexity, depth > 512");
-        } else {
+        }
+        else {
             this.c = datainput.readByte();
             int i1 = datainput.readInt();
 
             this.a = new ArrayList();
 
             for (int i2 = 0; i2 < i1; ++i2) {
-                NBTBase nbtbase = NBTBase.a(this.c, (String) null);
+                NBTBase nbtbase = NBTBase.a(this.c, (String)null);
 
                 nbtbase.a(datainput, i0 + 1);
                 this.a.add(nbtbase);
@@ -54,7 +56,7 @@ public class NBTTagList extends NBTBase {
     }
 
     public byte a() {
-        return (byte) 9;
+        return (byte)9;
     }
 
     public String toString() {
@@ -67,7 +69,7 @@ public class NBTTagList extends NBTBase {
     }
 
     public NBTBase b(int i0) {
-        return (NBTBase) this.a.get(i0);
+        return (NBTBase)this.a.get(i0);
     }
 
     public int c() {
@@ -81,7 +83,7 @@ public class NBTTagList extends NBTBase {
         Iterator iterator = this.a.iterator();
 
         while (iterator.hasNext()) {
-            NBTBase nbtbase = (NBTBase) iterator.next();
+            NBTBase nbtbase = (NBTBase)iterator.next();
             NBTBase nbtbase1 = nbtbase.b();
 
             nbttaglist.a.add(nbtbase1);
@@ -92,7 +94,7 @@ public class NBTTagList extends NBTBase {
 
     public boolean equals(Object object) {
         if (super.equals(object)) {
-            NBTTagList nbttaglist = (NBTTagList) object;
+            NBTTagList nbttaglist = (NBTTagList)object;
 
             if (this.c == nbttaglist.c) {
                 return this.a.equals(nbttaglist.a);

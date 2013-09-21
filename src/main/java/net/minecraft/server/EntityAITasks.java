@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
+import net.canarymod.api.ai.CanaryAIManager;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import net.canarymod.api.ai.CanaryAIManager;
 
 public class EntityAITasks {
 
@@ -27,7 +28,7 @@ public class EntityAITasks {
         Iterator iterator = this.a.iterator();
 
         while (iterator.hasNext()) {
-            EntityAITaskEntry entityaitaskentry = (EntityAITaskEntry) iterator.next();
+            EntityAITaskEntry entityaitaskentry = (EntityAITaskEntry)iterator.next();
             EntityAIBase entityaibase1 = entityaitaskentry.a;
 
             if (entityaibase1 == entityaibase) {
@@ -50,7 +51,7 @@ public class EntityAITasks {
             iterator = this.a.iterator();
 
             while (iterator.hasNext()) {
-                entityaitaskentry = (EntityAITaskEntry) iterator.next();
+                entityaitaskentry = (EntityAITaskEntry)iterator.next();
                 boolean flag0 = this.b.contains(entityaitaskentry);
 
                 if (flag0) {
@@ -67,11 +68,12 @@ public class EntityAITasks {
                     this.b.add(entityaitaskentry);
                 }
             }
-        } else {
+        }
+        else {
             iterator = this.b.iterator();
 
             while (iterator.hasNext()) {
-                entityaitaskentry = (EntityAITaskEntry) iterator.next();
+                entityaitaskentry = (EntityAITaskEntry)iterator.next();
                 if (!entityaitaskentry.a.b()) {
                     entityaitaskentry.a.d();
                     iterator.remove();
@@ -83,7 +85,7 @@ public class EntityAITasks {
         iterator = arraylist.iterator();
 
         while (iterator.hasNext()) {
-            entityaitaskentry = (EntityAITaskEntry) iterator.next();
+            entityaitaskentry = (EntityAITaskEntry)iterator.next();
             this.c.a(entityaitaskentry.a.getClass().getSimpleName());
             entityaitaskentry.a.c();
             this.c.b();
@@ -94,7 +96,7 @@ public class EntityAITasks {
         iterator = this.b.iterator();
 
         while (iterator.hasNext()) {
-            entityaitaskentry = (EntityAITaskEntry) iterator.next();
+            entityaitaskentry = (EntityAITaskEntry)iterator.next();
             entityaitaskentry.a.e();
         }
 
@@ -114,7 +116,7 @@ public class EntityAITasks {
         Iterator iterator = this.a.iterator();
 
         while (iterator.hasNext()) {
-            EntityAITaskEntry entityaitaskentry1 = (EntityAITaskEntry) iterator.next();
+            EntityAITaskEntry entityaitaskentry1 = (EntityAITaskEntry)iterator.next();
 
             if (entityaitaskentry1 != entityaitaskentry) {
                 if (entityaitaskentry.b >= entityaitaskentry1.b) {
@@ -122,7 +124,8 @@ public class EntityAITasks {
                         this.c.b();
                         return false;
                     }
-                } else if (this.b.contains(entityaitaskentry1) && !entityaitaskentry1.a.i()) {
+                }
+                else if (this.b.contains(entityaitaskentry1) && !entityaitaskentry1.a.i()) {
                     this.c.b();
                     return false;
                 }

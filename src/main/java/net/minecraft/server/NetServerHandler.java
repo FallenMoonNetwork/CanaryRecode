@@ -1,14 +1,5 @@
 package net.minecraft.server;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.Callable;
 import net.canarymod.AutocompleteUtils;
 import net.canarymod.Canary;
 import net.canarymod.LineTracer;
@@ -33,6 +24,17 @@ import net.canarymod.hook.player.PlayerMoveHook;
 import net.canarymod.hook.player.SignChangeHook;
 import net.canarymod.hook.player.SlotClickHook;
 import net.canarymod.hook.player.TeleportHook;
+
+import java.io.ByteArrayInputStream;
+import java.io.DataInput;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.Callable;
 
 public class NetServerHandler extends NetHandler {
 
@@ -63,7 +65,7 @@ public class NetServerHandler extends NetHandler {
     public NetServerHandler(MinecraftServer minecraftserver, INetworkManager inetworkmanager, EntityPlayerMP entityplayermp) {
         this.d = minecraftserver;
         this.a = inetworkmanager;
-        inetworkmanager.a((NetHandler) this);
+        inetworkmanager.a((NetHandler)this);
         this.c = entityplayermp;
         entityplayermp.a = this;
         serverHandler = new CanaryNetServerHandler(this);
@@ -75,8 +77,8 @@ public class NetServerHandler extends NetHandler {
         this.d.a.a("packetflow");
         this.a.b();
         this.d.a.c("keepAlive");
-        if ((long) this.e - this.k > 20L) {
-            this.k = (long) this.e;
+        if ((long)this.e - this.k > 20L) {
+            this.k = (long)this.e;
             this.i = System.nanoTime() / 1000000L;
             this.h = j.nextInt();
             this.b(new Packet0KeepAlive(this.h));
@@ -96,14 +98,14 @@ public class NetServerHandler extends NetHandler {
 
     public void c(String s0) {
         // CanaryMod disconnect hook
-        DisconnectionHook hook = (DisconnectionHook) new DisconnectionHook(serverHandler.getUser(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.c_() }).a(EnumChatFormatting.o).toString()).call();
+        DisconnectionHook hook = (DisconnectionHook)new DisconnectionHook(serverHandler.getUser(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{this.c.ay()}).a(EnumChatFormatting.o).toString()).call();
         if (!this.b) {
             this.c.l();
             this.b(new Packet255KickDisconnect(s0));
             this.a.d();
             // CanaryMod hook data
             if (!hook.isHidden()) {
-                this.d.af().a((Packet) (new Packet3Chat(ChatMessageComponent.d(hook.getLeaveMessage()))));
+                this.d.af().a((Packet)(new Packet3Chat(ChatMessageComponent.d(hook.getLeaveMessage()))));
             }
             // //
             this.d.af().e(this.c);
@@ -120,7 +122,7 @@ public class NetServerHandler extends NetHandler {
     }
 
     public void a(Packet10Flying packet10flying) {
-        WorldServer worldserver = (WorldServer) this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
+        WorldServer worldserver = (WorldServer)this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
 
         this.g = true;
         if (!this.c.j) {
@@ -136,7 +138,7 @@ public class NetServerHandler extends NetHandler {
             // CanaryMod: PlayerMoveHook
             if (Math.floor(n) != Math.floor(c.getPlayer().getX()) || Math.floor(o) != Math.floor(c.getPlayer().getY()) || Math.floor(p) != Math.floor(c.getPlayer().getZ())) {
                 Location from = new Location(c.getPlayer().getWorld(), n, o, p, c.getPlayer().getPitch(), c.getPlayer().getRotation());// Remember rotation and pitch are swapped in Location constructor...
-                PlayerMoveHook hook = (PlayerMoveHook) new PlayerMoveHook(c.getPlayer(), from, c.getPlayer().getLocation()).call();
+                PlayerMoveHook hook = (PlayerMoveHook)new PlayerMoveHook(c.getPlayer(), from, c.getPlayer().getLocation()).call();
                 if (hook.isCanceled()) {
                     // Return the player to their previous position gracefully, hopefully bypassing the TeleportHook and not going derp.
                     this.c.a.b(new Packet13PlayerLookMove(from.getX(), from.getY() + 1.6200000047683716D, from.getY(), from.getZ(), from.getRotation(), from.getPitch(), this.c.F));
@@ -155,7 +157,7 @@ public class NetServerHandler extends NetHandler {
                     float f0 = this.c.A;
                     float f1 = this.c.B;
 
-                    this.c.o.V();
+                    this.c.o.W();
                     d1 = this.c.u;
                     d2 = this.c.v;
                     d3 = this.c.w;
@@ -169,7 +171,7 @@ public class NetServerHandler extends NetHandler {
                     this.c.X = 0.0F;
                     this.c.a(d1, d2, d3, f0, f1);
                     if (this.c.o != null) {
-                        this.c.o.V();
+                        this.c.o.W();
                     }
 
                     this.d.af().d(this.c);
@@ -183,7 +185,7 @@ public class NetServerHandler extends NetHandler {
                     return;
                 }
 
-                if (this.c.bg()) {
+                if (this.c.bh()) {
                     this.c.h();
                     this.c.a(this.n, this.o, this.p, this.c.A, this.c.B);
                     worldserver.g(this.c);
@@ -211,7 +213,7 @@ public class NetServerHandler extends NetHandler {
                     d2 = packet10flying.b;
                     d3 = packet10flying.c;
                     d4 = packet10flying.d - packet10flying.b;
-                    if (!this.c.bg() && (d4 > 1.65D || d4 < 0.1D)) {
+                    if (!this.c.bh() && (d4 > 1.65D || d4 < 0.1D)) {
                         this.c("Illegal stance");
                         this.d.an().b(this.c.c_() + " had an illegal stance: " + d4);
                         return;
@@ -250,7 +252,7 @@ public class NetServerHandler extends NetHandler {
                 }
 
                 float f4 = 0.0625F;
-                boolean flag0 = worldserver.a(this.c, this.c.E.c().e((double) f4, (double) f4, (double) f4)).isEmpty();
+                boolean flag0 = worldserver.a(this.c, this.c.E.c().e((double)f4, (double)f4, (double)f4)).isEmpty();
 
                 if (this.c.F && !packet10flying.g && d5 > 0.0D) {
                     this.c.a(0.2F);
@@ -271,20 +273,20 @@ public class NetServerHandler extends NetHandler {
                 d10 = d4 * d4 + d5 * d5 + d6 * d6;
                 boolean flag1 = false;
 
-                if (d10 > 0.0625D && !this.c.bg() && !this.c.c.d()) {
+                if (d10 > 0.0625D && !this.c.bh() && !this.c.c.d()) {
                     flag1 = true;
                     this.d.an().b(this.c.c_() + " moved wrongly!");
                 }
 
                 this.c.a(d1, d2, d3, f2, f3);
-                boolean flag2 = worldserver.a(this.c, this.c.E.c().e((double) f4, (double) f4, (double) f4)).isEmpty();
+                boolean flag2 = worldserver.a(this.c, this.c.E.c().e((double)f4, (double)f4, (double)f4)).isEmpty();
 
-                if (flag0 && (flag1 || !flag2) && !this.c.bg()) {
+                if (flag0 && (flag1 || !flag2) && !this.c.bh()) {
                     this.a(this.n, this.o, this.p, f2, f3, c.getCanaryWorld().getType().getId(), c.getCanaryWorld().getName(), TeleportHook.TeleportCause.MOVEMENT);
                     return;
                 }
 
-                AxisAlignedBB axisalignedbb = this.c.E.c().b((double) f4, (double) f4, (double) f4).a(0.0D, -0.55D, 0.0D);
+                AxisAlignedBB axisalignedbb = this.c.E.c().b((double)f4, (double)f4, (double)f4).a(0.0D, -0.55D, 0.0D);
 
                 // CanaryMod: check on flying capability instead of mode
                 // moved allow-flight to per-world config
@@ -297,14 +299,16 @@ public class NetServerHandler extends NetHandler {
                             return;
                         }
                     }
-                } else {
+                }
+                else {
                     this.f = 0;
                 }
 
                 this.c.F = packet10flying.g;
                 this.d.af().d(this.c);
                 this.c.b(this.c.v - d0, packet10flying.g);
-            } else if (this.e % 20 == 0) {
+            }
+            else if (this.e % 20 == 0) {
                 this.a(this.n, this.o, this.p, this.c.A, this.c.B, this.c.q.getCanaryWorld().getType().getId(), this.c.q.getCanaryWorld().getName(), TeleportHook.TeleportCause.MOVEMENT);
             }
         }
@@ -314,7 +318,7 @@ public class NetServerHandler extends NetHandler {
         // CanaryMod: TeleportHook
         net.canarymod.api.world.World dim = Canary.getServer().getWorldManager().getWorld(world, net.canarymod.api.world.DimensionType.fromId(dimension), true);
         Location location = new Location(dim, d0, d1, d2, f1, f0); // Remember rotation and pitch are swapped in Location constructor...
-        TeleportHook hook = (TeleportHook) new TeleportHook(c.getPlayer(), location, cause).call();
+        TeleportHook hook = (TeleportHook)new TeleportHook(c.getPlayer(), location, cause).call();
         if (hook.isCanceled()) {
             return;
         }
@@ -324,21 +328,24 @@ public class NetServerHandler extends NetHandler {
         this.o = d1;
         this.p = d2;
         this.c.a(d0, d1, d2, f0, f1);
-        this.c.a.b(new Packet13PlayerLookMove(d0, d1 + 1.6200000047683716D, d1, d2, f0, f1, this.c.F));
+        this.c.a.b(new Packet13PlayerLookMove(d0, d1 + 1.6200000047683716D, d1, d2, f0, f1, false));
     }
 
     @Override
     public void a(Packet14BlockDig packet14blockdig) {
-        WorldServer worldserver = (WorldServer) this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
+        WorldServer worldserver = (WorldServer)this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
 
         if (packet14blockdig.e == 4) {
             // TODO: crash from rapid item drop prevention
             this.c.a(false);
-        } else if (packet14blockdig.e == 3) {
+        }
+        else if (packet14blockdig.e == 3) {
             this.c.a(true);
-        } else if (packet14blockdig.e == 5) {
-            this.c.bs();
-        } else {
+        }
+        else if (packet14blockdig.e == 5) {
+            this.c.bt();
+        }
+        else {
             boolean flag0 = false;
 
             if (packet14blockdig.e == 0) {
@@ -358,9 +365,9 @@ public class NetServerHandler extends NetHandler {
             int i2 = packet14blockdig.c;
 
             if (flag0) {
-                double d0 = this.c.u - ((double) i0 + 0.5D);
-                double d1 = this.c.v - ((double) i1 + 0.5D) + 1.5D;
-                double d2 = this.c.w - ((double) i2 + 0.5D);
+                double d0 = this.c.u - ((double)i0 + 0.5D);
+                double d1 = this.c.v - ((double)i1 + 0.5D) + 1.5D;
+                double d2 = this.c.w - ((double)i2 + 0.5D);
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
 
                 if (d3 > 36.0D) {
@@ -378,23 +385,26 @@ public class NetServerHandler extends NetHandler {
 
             if (packet14blockdig.e == 0) {
                 if ((!this.d.a(worldserver, i0, i1, i2, this.c) || c.getPlayer().hasPermission("canary.world.spawnbuild")) && c.getPlayer().canBuild()) {
-                    block.setStatus((byte) 0); // Set Status
+                    block.setStatus((byte)0); // Set Status
                     hook.call(); // Call Hook
                     if (!hook.isCanceled()) {
                         this.c.c.a(i0, i1, i2, packet14blockdig.d);
-                    } else {
+                    }
+                    else {
                         this.c.a.b(new Packet53BlockChange(i0, i1, i2, worldserver));
                     }
                 }
-            } else if (packet14blockdig.e == 2) {
-                block.setStatus((byte) 2); // Set Status
+            }
+            else if (packet14blockdig.e == 2) {
+                block.setStatus((byte)2); // Set Status
                 hook.call(); // Call Hook
                 this.c.c.a(i0, i1, i2);
                 if (worldserver.a(i0, i1, i2) != 0) {
                     this.c.a.b(new Packet53BlockChange(i0, i1, i2, worldserver));
                 }
-            } else if (packet14blockdig.e == 1) {
-                block.setStatus((byte) 1); // Set Status
+            }
+            else if (packet14blockdig.e == 1) {
+                block.setStatus((byte)1); // Set Status
                 hook.call(); // And, Call Hook
                 this.c.c.c(i0, i1, i2);
                 if (worldserver.a(i0, i1, i2) != 0) {
@@ -407,7 +417,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet15Place packet15place) {
-        WorldServer worldserver = (WorldServer) this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
+        WorldServer worldserver = (WorldServer)this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
         ItemStack itemstack = this.c.bn.h();
         boolean flag0 = false;
         int i0 = packet15place.d();
@@ -415,10 +425,11 @@ public class NetServerHandler extends NetHandler {
         int i2 = packet15place.g();
         int i3 = packet15place.h();
 
-        // CanaryMod: BlockRightClick/ItemUse
-        CanaryBlock blockClicked = (CanaryBlock) worldserver.getCanaryWorld().getBlockAt(i0, i1, i2);
+        this.c.u();
 
-        blockClicked.setFaceClicked(BlockFace.fromByte((byte) i3));
+        // CanaryMod: BlockRightClick/ItemUse
+        CanaryBlock blockClicked = (CanaryBlock)worldserver.getCanaryWorld().getBlockAt(i0, i1, i2);
+        blockClicked.setFaceClicked(BlockFace.fromByte((byte)i3));
 
         if (packet15place.h() == 255) {
             if (itemstack == null) {
@@ -427,17 +438,19 @@ public class NetServerHandler extends NetHandler {
             // Correct coordinates on block
             LineTracer trace = new LineTracer(this.c.getPlayer(), 6, 0.2);
 
-            blockClicked = (CanaryBlock) trace.getTargetBlock();
-            blockClicked = blockClicked != null ? blockClicked : new CanaryBlock((short) 0, (short) 0, ToolBox.floorToBlock(this.n), ToolBox.floorToBlock(this.o), ToolBox.floorToBlock(this.p), this.c.getCanaryWorld());
+            blockClicked = (CanaryBlock)trace.getTargetBlock();
+            blockClicked = blockClicked != null ? blockClicked : new CanaryBlock((short)0, (short)0, ToolBox.floorToBlock(this.n), ToolBox.floorToBlock(this.o), ToolBox.floorToBlock(this.p), this.c.getCanaryWorld());
             //
             this.c.c.itemUsed(this.c.getPlayer(), worldserver, itemstack, blockClicked); // CanaryMod: Redirect through ItemInWorldManager.itemUsed
-        } else if (packet15place.f() >= this.d.ad() - 1 && (packet15place.h() == 1 || packet15place.f() >= this.d.ad())) {
-            this.c.a.b(new Packet3Chat(ChatMessageComponent.b("build.tooHigh", new Object[]{ Integer.valueOf(this.d.ad()) }).a(EnumChatFormatting.m)));
+        }
+        else if (packet15place.f() >= this.d.ad() - 1 && (packet15place.h() == 1 || packet15place.f() >= this.d.ad())) {
+            this.c.a.b(new Packet3Chat(ChatMessageComponent.b("build.tooHigh", new Object[]{Integer.valueOf(this.d.ad())}).a(EnumChatFormatting.m)));
             flag0 = true;
-        } else {
-            if (this.q && this.c.e((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D) < 64.0D && (!this.d.a(worldserver, i0, i1, i2, this.c) || c.getPlayer().hasPermission("canary.world.spawnbuild")) && c.getPlayer().canBuild()) {
+        }
+        else {
+            if (this.q && this.c.e((double)i0 + 0.5D, (double)i1 + 0.5D, (double)i2 + 0.5D) < 64.0D && (!this.d.a(worldserver, i0, i1, i2, this.c) || c.getPlayer().hasPermission("canary.world.spawnbuild")) && c.getPlayer().canBuild()) {
                 // CanaryMod: BlockRightClicked
-                BlockRightClickHook hook = (BlockRightClickHook) new BlockRightClickHook(c.getPlayer(), blockClicked).call();
+                BlockRightClickHook hook = (BlockRightClickHook)new BlockRightClickHook(c.getPlayer(), blockClicked).call();
                 if (!hook.isCanceled()) {
                     this.c.c.a(this.c, worldserver, itemstack, i0, i1, i2, i3, packet15place.j(), packet15place.k(), packet15place.l());
                 }
@@ -486,7 +499,7 @@ public class NetServerHandler extends NetHandler {
         if (itemstack == null || itemstack.n() == 0) {
             this.c.h = true;
             this.c.bn.a[this.c.bn.c] = ItemStack.b(this.c.bn.a[this.c.bn.c]);
-            Slot slot = this.c.bp.a((IInventory) this.c.bn, this.c.bn.c);
+            Slot slot = this.c.bp.a((IInventory)this.c.bn, this.c.bn.c);
 
             this.c.bp.b();
             this.c.h = false;
@@ -499,9 +512,9 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void a(String s0, Object[] aobject) {
         // CanaryMod: DisconnectionHook
-        DisconnectionHook hook = (DisconnectionHook) new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{ this.c.c_() }).a(EnumChatFormatting.o).toString()).call();
+        DisconnectionHook hook = (DisconnectionHook)new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{this.c.ay()}).a(EnumChatFormatting.o).toString()).call();
         this.d.an().a(this.c.c_() + " lost connection: " + s0);
-        this.d.af().a((Packet) (new Packet3Chat(ChatMessageComponent.e(hook.getLeaveMessage()))));
+        this.d.af().a((Packet)(new Packet3Chat(ChatMessageComponent.e(hook.getLeaveMessage()))));
         this.d.af().e(this.c);
         this.b = true;
         if (this.d.K() && this.c.c_().equals(this.d.J())) {
@@ -518,7 +531,7 @@ public class NetServerHandler extends NetHandler {
 
     public void b(Packet packet) {
         if (packet instanceof Packet3Chat) {
-            Packet3Chat packet3chat = (Packet3Chat) packet;
+            Packet3Chat packet3chat = (Packet3Chat)packet;
             int i0 = this.c.t();
 
             if (i0 == 2) {
@@ -532,12 +545,13 @@ public class NetServerHandler extends NetHandler {
 
         try {
             this.a.a(packet);
-        } catch (Throwable throwable) {
+        }
+        catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.a(throwable, "Sending packet");
             CrashReportCategory crashreportcategory = crashreport.a("Packet being sent");
 
-            crashreportcategory.a("Packet ID", (Callable) (new CallablePacketID(this, packet)));
-            crashreportcategory.a("Packet class", (Callable) (new CallablePacketClass(this, packet)));
+            crashreportcategory.a("Packet ID", (Callable)(new CallablePacketID(this, packet)));
+            crashreportcategory.a("Packet class", (Callable)(new CallablePacketClass(this, packet)));
             throw new ReportedException(crashreport);
         }
     }
@@ -546,7 +560,8 @@ public class NetServerHandler extends NetHandler {
     public void a(Packet16BlockItemSwitch packet16blockitemswitch) {
         if (packet16blockitemswitch.a >= 0 && packet16blockitemswitch.a < InventoryPlayer.i()) {
             this.c.bn.c = packet16blockitemswitch.a;
-        } else {
+        }
+        else {
             this.d.an().b(this.c.c_() + " tried to set an invalid carried item");
         }
     }
@@ -556,7 +571,9 @@ public class NetServerHandler extends NetHandler {
         /* Diff visibility funkyness
         if (this.c.t() == 2) {
             this.b(new Packet3Chat(ChatMessageComponent.e("chat.cannotSend").a(EnumChatFormatting.m)));
-        } else {
+        }
+        else {
+            this.c.u();
             String s0 = packet3chat.a;
 
             if (s0.length() > 100) {
@@ -579,7 +596,7 @@ public class NetServerHandler extends NetHandler {
                         return;
                     }
 
-                    ChatMessageComponent chatmessagecomponent = ChatMessageComponent.b("chat.type.text", new Object[] { this.c.ax(), s0});
+                    ChatMessageComponent chatmessagecomponent = ChatMessageComponent.b("chat.type.text", new Object[] { this.c.ay(), s0});
 
                     this.d.af().a(chatmessagecomponent, false);
                 }
@@ -603,7 +620,7 @@ public class NetServerHandler extends NetHandler {
         if (packet18animation.b == 1) {
             // CanaryMod: PlayerLeftClick
             new PlayerArmSwingHook(this.c.getPlayer()).call();
-            this.c.aU();
+            this.c.aV();
         }
     }
 
@@ -611,21 +628,27 @@ public class NetServerHandler extends NetHandler {
     public void a(Packet19EntityAction packet19entityaction) {
         if (packet19entityaction.b == 1) {
             this.c.b(true);
-        } else if (packet19entityaction.b == 2) {
+        }
+        else if (packet19entityaction.b == 2) {
             this.c.b(false);
-        } else if (packet19entityaction.b == 4) {
+        }
+        else if (packet19entityaction.b == 4) {
             this.c.c(true);
-        } else if (packet19entityaction.b == 5) {
+        }
+        else if (packet19entityaction.b == 5) {
             this.c.c(false);
-        } else if (packet19entityaction.b == 3) {
+        }
+        else if (packet19entityaction.b == 3) {
             this.c.a(false, true, true);
             this.q = false;
-        } else if (packet19entityaction.b == 6) {
+        }
+        else if (packet19entityaction.b == 6) {
             if (this.c.o != null && this.c.o instanceof EntityHorse) {
-                ((EntityHorse) this.c.o).u(packet19entityaction.c);
+                ((EntityHorse)this.c.o).u(packet19entityaction.c);
             }
-        } else if (packet19entityaction.b == 7 && this.c.o != null && this.c.o instanceof EntityHorse) {
-            ((EntityHorse) this.c.o).f(this.c);
+        }
+        else if (packet19entityaction.b == 7 && this.c.o != null && this.c.o instanceof EntityHorse) {
+            ((EntityHorse)this.c.o).f(this.c);
         }
     }
 
@@ -640,7 +663,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet7UseEntity packet7useentity) {
-        WorldServer worldserver = (WorldServer) this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
+        WorldServer worldserver = (WorldServer)this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
         Entity entity = worldserver.a(packet7useentity.b);
 
         if (entity != null) {
@@ -654,7 +677,8 @@ public class NetServerHandler extends NetHandler {
             if (this.c.e(entity) < d0) {
                 if (packet7useentity.c == 0) {
                     this.c.p(entity);
-                } else if (packet7useentity.c == 1) {
+                }
+                else if (packet7useentity.c == 1) {
                     this.c.q(entity);
                 }
             }
@@ -666,17 +690,20 @@ public class NetServerHandler extends NetHandler {
         if (packet205clientcommand.a == 1) {
             if (this.c.j) {
                 this.c = this.d.af().a(this.c, 0, true);
-            } else if (this.c.p().N().t()) {
+            }
+            else if (this.c.p().N().t()) {
                 if (this.d.K() && this.c.c_().equals(this.d.J())) {
                     this.c.a.c("You have died. Game over, man, it\'s game over!");
                     this.d.R();
-                } else {
+                }
+                else {
                     // CanaryMod use our Ban System instead
                     Canary.bans().issueBan(this.c.getPlayer(), "Death in Hardcore");
                     this.c.a.c("You have died. Game over, man, it\'s game over!");
                 }
-            } else {
-                if (this.c.aM() > 0.0F) {
+            }
+            else {
+                if (this.c.aN() > 0.0F) {
                     return;
                 }
 
@@ -691,7 +718,8 @@ public class NetServerHandler extends NetHandler {
     }
 
     @Override
-    public void a(Packet9Respawn packet9respawn) {}
+    public void a(Packet9Respawn packet9respawn) {
+    }
 
     @Override
     public void a(Packet101CloseWindow packet101closewindow) {
@@ -708,17 +736,18 @@ public class NetServerHandler extends NetHandler {
             SecondarySlotType finer_slot = SlotHelper.getSpecificSlotType(this.c.bp, packet102windowclick.b);
             GrabMode grab_mode = GrabMode.fromInt(packet102windowclick.f);
             ButtonPress mouse_click = ButtonPress.matchButton(grab_mode, packet102windowclick.c, packet102windowclick.b);
-            SlotClickHook sch = (SlotClickHook) new SlotClickHook(this.c.getPlayer(), this.c.bp.getInventory(), itemstack != null ? itemstack.getCanaryItem() : null, slot_type, finer_slot, grab_mode, mouse_click, (short) packet102windowclick.b, packet102windowclick.d).call();
+            SlotClickHook sch = (SlotClickHook)new SlotClickHook(this.c.getPlayer(), this.c.bp.getInventory(), itemstack != null ? itemstack.getCanaryItem() : null, slot_type, finer_slot, grab_mode, mouse_click, (short)packet102windowclick.b, packet102windowclick.d).call();
             if (sch.isCanceled()) {
                 if (sch.doUpdate()) {
                     if (packet102windowclick.f == 0) {
                         this.c.bp.updateSlot(packet102windowclick.b);
                         this.c.updateSlot(-1, -1, this.c.bn.o());
-                    } else {
+                    }
+                    else {
                         ArrayList arraylist = new ArrayList();
 
                         for (int i = 0; i < this.c.bp.c.size(); ++i) {
-                            arraylist.add(((Slot) this.c.bp.c.get(i)).d());
+                            arraylist.add(((Slot)this.c.bp.c.get(i)).d());
                         }
 
                         this.c.a(this.c.bp, arraylist);
@@ -736,17 +765,18 @@ public class NetServerHandler extends NetHandler {
                 this.c.bp.b();
                 this.c.j();
                 this.c.h = false;
-            } else {
+            }
+            else {
                 this.r.a(this.c.bp.d, Short.valueOf(packet102windowclick.d));
                 this.c.a.b(new Packet106Transaction(packet102windowclick.a, packet102windowclick.d, false));
                 this.c.bp.a(this.c, false);
                 ArrayList arraylist = new ArrayList();
 
                 for (int i0 = 0; i0 < this.c.bp.c.size(); ++i0) {
-                    arraylist.add(((Slot) this.c.bp.c.get(i0)).d());
+                    arraylist.add(((Slot)this.c.bp.c.get(i0)).d());
                 }
 
-                this.c.a(this.c.bp, (List) arraylist);
+                this.c.a(this.c.bp, (List)arraylist);
             }
         }
     }
@@ -754,7 +784,7 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void a(Packet108EnchantItem packet108enchantitem) {
         if (this.c.bp.d == packet108enchantitem.a && this.c.bp.c(this.c)) {
-            this.c.bp.a((EntityPlayer) this.c, packet108enchantitem.b);
+            this.c.bp.a((EntityPlayer)this.c, packet108enchantitem.b);
             this.c.bp.b();
         }
     }
@@ -770,13 +800,15 @@ public class NetServerHandler extends NetHandler {
 
             if (flag1 && flag2 && flag3) {
                 if (itemstack == null) {
-                    this.c.bo.a(packet107creativesetslot.a, (ItemStack) null);
-                } else {
+                    this.c.bo.a(packet107creativesetslot.a, (ItemStack)null);
+                }
+                else {
                     this.c.bo.a(packet107creativesetslot.a, itemstack);
                 }
 
                 this.c.bo.a(this.c, true);
-            } else if (flag0 && flag2 && flag3 && this.m < 200) {
+            }
+            else if (flag0 && flag2 && flag3 && this.m < 200) {
                 this.m += 20;
                 EntityItem entityitem = this.c.b(itemstack);
 
@@ -789,7 +821,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet106Transaction packet106transaction) {
-        Short oshort = (Short) this.r.a(this.c.bp.d);
+        Short oshort = (Short)this.r.a(this.c.bp.d);
 
         if (oshort != null && packet106transaction.b == oshort.shortValue() && this.c.bp.d == packet106transaction.a && !this.c.bp.c(this.c)) {
             this.c.bp.a(this.c, true);
@@ -798,13 +830,13 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(Packet130UpdateSign packet130updatesign) {
-        WorldServer worldserver = (WorldServer) this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
+        WorldServer worldserver = (WorldServer)this.c.getCanaryWorld().getHandle(); // this.d.a(this.c.ar);
 
         if (worldserver.f(packet130updatesign.a, packet130updatesign.b, packet130updatesign.c)) {
             TileEntity tileentity = worldserver.r(packet130updatesign.a, packet130updatesign.b, packet130updatesign.c);
 
             if (tileentity instanceof TileEntitySign) {
-                TileEntitySign tileentitysign = (TileEntitySign) tileentity;
+                TileEntitySign tileentitysign = (TileEntitySign)tileentity;
 
                 if (!tileentitysign.a() || tileentitysign.b() != this.c) {
                     this.d.f("Player " + this.c.c_() + " just tried to change non-editable sign");
@@ -820,7 +852,8 @@ public class NetServerHandler extends NetHandler {
 
                 if (packet130updatesign.d[i1].length() > 15) {
                     flag0 = false;
-                } else if (Configuration.getServerConfig().getStrictSignCharacterChecks()) { // CanaryMod: Check if we use strict characters on signs
+                }
+                else if (Configuration.getServerConfig().getStrictSignCharacterChecks()) { // CanaryMod: Check if we use strict characters on signs
                     for (i0 = 0; i0 < packet130updatesign.d[i1].length(); ++i0) {
                         if (ChatAllowedCharacters.a.indexOf(packet130updatesign.d[i1].charAt(i0)) < 0) {
                             if (packet130updatesign.d[i1].charAt(i0) != '\u00A7') { // CanaryMod: Ignore Color Char
@@ -840,14 +873,14 @@ public class NetServerHandler extends NetHandler {
                 int i2 = packet130updatesign.b;
 
                 i0 = packet130updatesign.c;
-                TileEntitySign tileentitysign1 = (TileEntitySign) tileentity;
+                TileEntitySign tileentitysign1 = (TileEntitySign)tileentity;
 
                 // CanaryMod: Copy the old line text
                 String[] old = Arrays.copyOf(tileentitysign1.a, tileentitysign1.a.length);
                 //
                 System.arraycopy(packet130updatesign.d, 0, tileentitysign1.a, 0, 4);
                 // CanaryMod: SignChange Hook
-                SignChangeHook hook = (SignChangeHook) new SignChangeHook(c.getPlayer(), tileentitysign1.getCanarySign()).call();
+                SignChangeHook hook = (SignChangeHook)new SignChangeHook(c.getPlayer(), tileentitysign1.getCanarySign()).call();
                 if (hook.isCanceled()) {
                     System.arraycopy(old, 0, tileentitysign1.a, 0, 4); // Restore old text
                 }
@@ -862,7 +895,7 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void a(Packet0KeepAlive packet0keepalive) {
         if (packet0keepalive.a == this.h) {
-            int i0 = (int) (System.nanoTime() / 1000000L - this.i);
+            int i0 = (int)(System.nanoTime() / 1000000L - this.i);
 
             this.c.i = (this.c.i * 3 + i0) / 4;
         }
@@ -918,12 +951,14 @@ public class NetServerHandler extends NetHandler {
 
                 itemstack1 = this.c.bn.h();
                 if (itemstack != null && itemstack.d == Item.bH.cv && itemstack.d == itemstack1.d) {
-                    itemstack1.a("pages", (NBTBase) itemstack.q().m("pages"));
+                    itemstack1.a("pages", (NBTBase)itemstack.q().m("pages"));
                 }
-            } catch (Exception exception) {
+            }
+            catch (Exception exception) {
                 exception.printStackTrace();
             }
-        } else if ("MC|BSign".equals(packet250custompayload.a)) {
+        }
+        else if ("MC|BSign".equals(packet250custompayload.a)) {
             try {
                 datainputstream = new DataInputStream(new ByteArrayInputStream(packet250custompayload.c));
                 itemstack = Packet.c(datainputstream);
@@ -933,15 +968,17 @@ public class NetServerHandler extends NetHandler {
 
                 itemstack1 = this.c.bn.h();
                 if (itemstack != null && itemstack.d == Item.bI.cv && itemstack1.d == Item.bH.cv) {
-                    itemstack1.a("author", (NBTBase) (new NBTTagString("author", this.c.c_())));
-                    itemstack1.a("title", (NBTBase) (new NBTTagString("title", itemstack.q().i("title"))));
-                    itemstack1.a("pages", (NBTBase) itemstack.q().m("pages"));
+                    itemstack1.a("author", (NBTBase)(new NBTTagString("author", this.c.c_())));
+                    itemstack1.a("title", (NBTBase)(new NBTTagString("title", itemstack.q().i("title"))));
+                    itemstack1.a("pages", (NBTBase)itemstack.q().m("pages"));
                     itemstack1.d = Item.bI.cv;
                 }
-            } catch (Exception exception1) {
+            }
+            catch (Exception exception1) {
                 exception1.printStackTrace();
             }
-        } else {
+        }
+        else {
             int i0;
 
             if ("MC|TrSel".equals(packet250custompayload.a)) {
@@ -951,48 +988,55 @@ public class NetServerHandler extends NetHandler {
                     Container container = this.c.bp;
 
                     if (container instanceof ContainerMerchant) {
-                        ((ContainerMerchant) container).e(i0);
+                        ((ContainerMerchant)container).e(i0);
                     }
-                } catch (Exception exception2) {
+                }
+                catch (Exception exception2) {
                     exception2.printStackTrace();
                 }
-            } else {
+            }
+            else {
                 int i1;
 
                 if ("MC|AdvCdm".equals(packet250custompayload.a)) {
                     if (!this.d.ab()) {
                         this.c.a(ChatMessageComponent.e("advMode.notEnabled"));
-                    } else if (this.c.a(2, "") && this.c.bG.d) {
+                    }
+                    else if (this.c.a(2, "") && this.c.bG.d) {
                         try {
                             datainputstream = new DataInputStream(new ByteArrayInputStream(packet250custompayload.c));
                             i0 = datainputstream.readInt();
                             i1 = datainputstream.readInt();
                             int i2 = datainputstream.readInt();
-                            String s0 = Packet.a(datainputstream, 256);
+                            String s0 = Packet.a((DataInput)datainputstream, 256);
                             TileEntity tileentity = this.c.q.r(i0, i1, i2);
 
                             if (tileentity != null && tileentity instanceof TileEntityCommandBlock) {
                                 if (this.c.a(0, s0)) { // CanaryMod: Check for Command Permission
-                                    ((TileEntityCommandBlock) tileentity).a(s0);
+                                    ((TileEntityCommandBlock)tileentity).a(s0);
                                     this.c.q.j(i0, i1, i2);
-                                    this.c.a(ChatMessageComponent.b("advMode.setCommand.success", new Object[]{ s0 }));
-                                } else {
+                                    this.c.a(ChatMessageComponent.b("advMode.setCommand.success", new Object[]{s0}));
+                                }
+                                else {
                                     this.c.a("No Permission to Command: " + s0); // CanaryMod: No Permission (locale?)
                                 }
                             }
-                        } catch (Exception exception3) {
+                        }
+                        catch (Exception exception3) {
                             exception3.printStackTrace();
                         }
-                    } else {
+                    }
+                    else {
                         this.c.a(ChatMessageComponent.e("advMode.notAllowed"));
                     }
-                } else if ("MC|Beacon".equals(packet250custompayload.a)) {
+                }
+                else if ("MC|Beacon".equals(packet250custompayload.a)) {
                     if (this.c.bp instanceof ContainerBeacon) {
                         try {
                             datainputstream = new DataInputStream(new ByteArrayInputStream(packet250custompayload.c));
                             i0 = datainputstream.readInt();
                             i1 = datainputstream.readInt();
-                            ContainerBeacon containerbeacon = (ContainerBeacon) this.c.bp;
+                            ContainerBeacon containerbeacon = (ContainerBeacon)this.c.bp;
                             Slot slot = containerbeacon.a(0);
 
                             if (slot.e()) {
@@ -1003,12 +1047,14 @@ public class NetServerHandler extends NetHandler {
                                 tileentitybeacon.e(i1);
                                 tileentitybeacon.e();
                             }
-                        } catch (Exception exception4) {
+                        }
+                        catch (Exception exception4) {
                             exception4.printStackTrace();
                         }
                     }
-                } else if ("MC|ItemName".equals(packet250custompayload.a) && this.c.bp instanceof ContainerRepair) {
-                    ContainerRepair containerrepair = (ContainerRepair) this.c.bp;
+                }
+                else if ("MC|ItemName".equals(packet250custompayload.a) && this.c.bp instanceof ContainerRepair) {
+                    ContainerRepair containerrepair = (ContainerRepair)this.c.bp;
 
                     if (packet250custompayload.c != null && packet250custompayload.c.length >= 1) {
                         String s1 = ChatAllowedCharacters.a(new String(packet250custompayload.c));
@@ -1016,7 +1062,8 @@ public class NetServerHandler extends NetHandler {
                         if (s1.length() <= 30) {
                             containerrepair.a(s1);
                         }
-                    } else {
+                    }
+                    else {
                         containerrepair.a("");
                     }
                 }
@@ -1031,32 +1078,40 @@ public class NetServerHandler extends NetHandler {
                     Canary.channels().registerClient(chan, this.serverHandler);
                 }
                 Canary.logInfo(String.format("Player '%s' registered Custom Payload on channel(s) '%s'", this.c.getPlayer().getName(), Arrays.toString(channel.split("\0"))));
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 try {
                     throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());
-                } catch (CustomPayloadChannelException ex1) {
+                }
+                catch (CustomPayloadChannelException ex1) {
                     Canary.logStacktrace(ex1.getMessage(), ex);
                 }
             }
-        } else if ("UNREGISTER".equals(packet250custompayload.a)) {
+        }
+        else if ("UNREGISTER".equals(packet250custompayload.a)) {
             try {
                 String channel = new String(packet250custompayload.c, "UTF-8");
                 Canary.channels().unregisterClient(channel, this.serverHandler);
                 Canary.logInfo(String.format("Player '%s' unregistered Custom Payload on channel '%s'", this.c.getPlayer().getName(), channel));
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 try {
                     throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());
-                } catch (CustomPayloadChannelException ex1) {
+                }
+                catch (CustomPayloadChannelException ex1) {
                     Canary.logStacktrace(ex1.getMessage(), ex);
                 }
             }
-        } else {
+        }
+        else {
             try {
                 Canary.channels().sendCustomPayloadToListeners(packet250custompayload.a, packet250custompayload.c, this.c.getPlayer());
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 try {
                     throw new CustomPayloadChannelException("Error receiving 'Packet250CustomPayload': " + ex.getMessage());
-                } catch (CustomPayloadChannelException ex1) {
+                }
+                catch (CustomPayloadChannelException ex1) {
                     Canary.logStacktrace(ex1.getMessage(), ex);
                 }
             }
@@ -1070,7 +1125,7 @@ public class NetServerHandler extends NetHandler {
 
     /**
      * gets the CanaryNetServerHandler wrapper
-     * 
+     *
      * @return
      */
     public CanaryNetServerHandler getCanaryServerHandler() {

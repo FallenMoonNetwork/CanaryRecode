@@ -1,10 +1,10 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.List;
 import net.canarymod.api.entity.hanging.HangingEntity;
 import net.canarymod.hook.entity.HangingEntityDestroyHook;
-import net.canarymod.logger.Logman;
+
+import java.util.Iterator;
+import java.util.List;
 
 public abstract class EntityHanging extends Entity {
 
@@ -27,28 +27,30 @@ public abstract class EntityHanging extends Entity {
         this.d = i2;
     }
 
-    protected void a() {}
+    protected void a() {
+    }
 
     public void a(int i0) {
         this.a = i0;
-        this.C = this.A = (float) (i0 * 90);
-        float f0 = (float) this.d();
-        float f1 = (float) this.e();
-        float f2 = (float) this.d();
+        this.C = this.A = (float)(i0 * 90);
+        float f0 = (float)this.d();
+        float f1 = (float)this.e();
+        float f2 = (float)this.d();
 
         if (i0 != 2 && i0 != 0) {
             f0 = 0.5F;
-        } else {
+        }
+        else {
             f2 = 0.5F;
-            this.A = this.C = (float) (Direction.f[i0] * 90);
+            this.A = this.C = (float)(Direction.f[i0] * 90);
         }
 
         f0 /= 32.0F;
         f1 /= 32.0F;
         f2 /= 32.0F;
-        float f3 = (float) this.b + 0.5F;
-        float f4 = (float) this.c + 0.5F;
-        float f5 = (float) this.d + 0.5F;
+        float f3 = (float)this.b + 0.5F;
+        float f4 = (float)this.c + 0.5F;
+        float f5 = (float)this.d + 0.5F;
         float f6 = 0.5625F;
 
         if (i0 == 2) {
@@ -84,10 +86,10 @@ public abstract class EntityHanging extends Entity {
         }
 
         f4 += this.c(this.e());
-        this.b((double) f3, (double) f4, (double) f5);
+        this.b((double)f3, (double)f4, (double)f5);
         float f7 = -0.03125F;
 
-        this.E.b((double) (f3 - f0 - f7), (double) (f4 - f1 - f7), (double) (f5 - f2 - f7), (double) (f3 + f0 + f7), (double) (f4 + f1 + f7), (double) (f5 + f2 + f7));
+        this.E.b((double)(f3 - f0 - f7), (double)(f4 - f1 - f7), (double)(f5 - f2 - f7), (double)(f3 + f0 + f7), (double)(f4 + f1 + f7), (double)(f5 + f2 + f7));
     }
 
     private float c(int i0) {
@@ -101,16 +103,17 @@ public abstract class EntityHanging extends Entity {
         if (this.e++ == 100 && !this.q.I) {
             this.e = 0;
             if (!this.M && !this.c()) {
-                this.w();
-                this.b((Entity) null);
+                this.x();
+                this.b((Entity)null);
             }
         }
     }
 
     public boolean c() {
-        if (!this.q.a((Entity) this, this.E).isEmpty()) {
+        if (!this.q.a((Entity)this, this.E).isEmpty()) {
             return false;
-        } else {
+        }
+        else {
             int i0 = Math.max(1, this.d() / 16);
             int i1 = Math.max(1, this.e() / 16);
             int i2 = this.b;
@@ -118,22 +121,22 @@ public abstract class EntityHanging extends Entity {
             int i4 = this.d;
 
             if (this.a == 2) {
-                i2 = MathHelper.c(this.u - (double) ((float) this.d() / 32.0F));
+                i2 = MathHelper.c(this.u - (double)((float)this.d() / 32.0F));
             }
 
             if (this.a == 1) {
-                i4 = MathHelper.c(this.w - (double) ((float) this.d() / 32.0F));
+                i4 = MathHelper.c(this.w - (double)((float)this.d() / 32.0F));
             }
 
             if (this.a == 0) {
-                i2 = MathHelper.c(this.u - (double) ((float) this.d() / 32.0F));
+                i2 = MathHelper.c(this.u - (double)((float)this.d() / 32.0F));
             }
 
             if (this.a == 3) {
-                i4 = MathHelper.c(this.w - (double) ((float) this.d() / 32.0F));
+                i4 = MathHelper.c(this.w - (double)((float)this.d() / 32.0F));
             }
 
-            i3 = MathHelper.c(this.v - (double) ((float) this.e() / 32.0F));
+            i3 = MathHelper.c(this.v - (double)((float)this.e() / 32.0F));
 
             for (int i5 = 0; i5 < i0; ++i5) {
                 for (int i6 = 0; i6 < i1; ++i6) {
@@ -141,7 +144,8 @@ public abstract class EntityHanging extends Entity {
 
                     if (this.a != 2 && this.a != 0) {
                         material = this.q.g(this.b, i3 + i6, i4 + i5);
-                    } else {
+                    }
+                    else {
                         material = this.q.g(i2 + i5, i3 + i6, this.d);
                     }
 
@@ -151,7 +155,7 @@ public abstract class EntityHanging extends Entity {
                 }
             }
 
-            List list = this.q.b((Entity) this, this.E);
+            List list = this.q.b((Entity)this, this.E);
             Iterator iterator = list.iterator();
 
             Entity entity;
@@ -161,7 +165,7 @@ public abstract class EntityHanging extends Entity {
                     return true;
                 }
 
-                entity = (Entity) iterator.next();
+                entity = (Entity)iterator.next();
             }
             while (!(entity instanceof EntityHanging));
 
@@ -169,36 +173,37 @@ public abstract class EntityHanging extends Entity {
         }
     }
 
-    public boolean K() {
+    public boolean L() {
         return true;
     }
 
     public boolean i(Entity entity) {
-        return entity instanceof EntityPlayer ? this.a(DamageSource.a((EntityPlayer) entity), 0.0F) : false;
+        return entity instanceof EntityPlayer ? this.a(DamageSource.a((EntityPlayer)entity), 0.0F) : false;
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.aq()) {
+        if (this.ar()) {
             return false;
-        } else {
+        }
+        else {
             if (!this.M && !this.q.I) {
                 EntityPlayer entityplayer = null;
 
                 if (damagesource.i() instanceof EntityPlayer) {
-                    entityplayer = (EntityPlayer) damagesource.i();
+                    entityplayer = (EntityPlayer)damagesource.i();
                 }
 
                 if (entityplayer != null) {
                     // CanaryMod: HangingEntityDestory
-                    HangingEntityDestroyHook hook = (HangingEntityDestroyHook) new HangingEntityDestroyHook((HangingEntity) this.entity, ((EntityPlayerMP) entityplayer).getPlayer(), damagesource.damageSource).call();
+                    HangingEntityDestroyHook hook = (HangingEntityDestroyHook)new HangingEntityDestroyHook((HangingEntity)this.entity, ((EntityPlayerMP)entityplayer).getPlayer(), damagesource.damageSource).call();
                     if (hook.isCanceled()) {
                         return false;
                     }
                     //
                 }
 
-                this.w();
-                this.J();
+                this.x();
+                this.K();
                 this.b(damagesource.i());
             }
 
@@ -208,45 +213,46 @@ public abstract class EntityHanging extends Entity {
 
     public void d(double d0, double d1, double d2) {
         if (!this.q.I && !this.M && d0 * d0 + d1 * d1 + d2 * d2 > 0.0D) {
-            this.w();
-            this.b((Entity) null);
+            this.x();
+            this.b((Entity)null);
         }
     }
 
     public void g(double d0, double d1, double d2) {
         if (!this.q.I && !this.M && d0 * d0 + d1 * d1 + d2 * d2 > 0.0D) {
-            this.w();
-            this.b((Entity) null);
+            this.x();
+            this.b((Entity)null);
         }
     }
 
     public void b(NBTTagCompound nbttagcompound) {
-        nbttagcompound.a("Direction", (byte) this.a);
+        nbttagcompound.a("Direction", (byte)this.a);
         nbttagcompound.a("TileX", this.b);
         nbttagcompound.a("TileY", this.c);
         nbttagcompound.a("TileZ", this.d);
         switch (this.a) {
             case 0:
-                nbttagcompound.a("Dir", (byte) 2);
+                nbttagcompound.a("Dir", (byte)2);
                 break;
 
             case 1:
-                nbttagcompound.a("Dir", (byte) 1);
+                nbttagcompound.a("Dir", (byte)1);
                 break;
 
             case 2:
-                nbttagcompound.a("Dir", (byte) 0);
+                nbttagcompound.a("Dir", (byte)0);
                 break;
 
             case 3:
-                nbttagcompound.a("Dir", (byte) 3);
+                nbttagcompound.a("Dir", (byte)3);
         }
     }
 
     public void a(NBTTagCompound nbttagcompound) {
         if (nbttagcompound.b("Direction")) {
             this.a = nbttagcompound.c("Direction");
-        } else {
+        }
+        else {
             switch (nbttagcompound.c("Dir")) {
                 case 0:
                     this.a = 2;
@@ -277,7 +283,7 @@ public abstract class EntityHanging extends Entity {
 
     public abstract void b(Entity entity);
 
-    protected boolean O() {
+    protected boolean P() {
         return false;
     }
 

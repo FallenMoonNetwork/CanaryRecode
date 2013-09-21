@@ -18,7 +18,8 @@ public class Packet20NamedEntitySpawn extends Packet {
     private DataWatcher i;
     private List j;
 
-    public Packet20NamedEntitySpawn() {}
+    public Packet20NamedEntitySpawn() {
+    }
 
     public Packet20NamedEntitySpawn(EntityPlayer entityplayer) {
         this.a = entityplayer.k;
@@ -26,12 +27,12 @@ public class Packet20NamedEntitySpawn extends Packet {
         this.c = MathHelper.c(entityplayer.u * 32.0D);
         this.d = MathHelper.c(entityplayer.v * 32.0D);
         this.e = MathHelper.c(entityplayer.w * 32.0D);
-        this.f = (byte) ((int) (entityplayer.A * 256.0F / 360.0F));
-        this.g = (byte) ((int) (entityplayer.B * 256.0F / 360.0F));
+        this.f = (byte)((int)(entityplayer.A * 256.0F / 360.0F));
+        this.g = (byte)((int)(entityplayer.B * 256.0F / 360.0F));
         ItemStack itemstack = entityplayer.bn.h();
 
         this.h = itemstack == null ? 0 : itemstack.d;
-        this.i = entityplayer.u();
+        this.i = entityplayer.v();
     }
 
     public void a(DataInput datainput) throws IOException {

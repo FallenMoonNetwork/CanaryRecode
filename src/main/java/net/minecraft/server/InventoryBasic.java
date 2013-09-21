@@ -43,7 +43,8 @@ public class InventoryBasic implements IInventory {
                 this.c[i0] = null;
                 this.e();
                 return itemstack;
-            } else {
+            }
+            else {
                 itemstack = this.c[i0].a(i1);
                 if (this.c[i0].b == 0) {
                     this.c[i0] = null;
@@ -52,7 +53,8 @@ public class InventoryBasic implements IInventory {
                 this.e();
                 return itemstack;
             }
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -63,7 +65,8 @@ public class InventoryBasic implements IInventory {
 
             this.c[i0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -101,7 +104,7 @@ public class InventoryBasic implements IInventory {
     public void e() {
         if (this.d != null) {
             for (int i0 = 0; i0 < this.d.size(); ++i0) {
-                ((IInvBasic) this.d.get(i0)).a(this);
+                ((IInvBasic)this.d.get(i0)).a(this);
             }
         }
     }
@@ -110,9 +113,11 @@ public class InventoryBasic implements IInventory {
         return true;
     }
 
-    public void k_() {}
+    public void k_() {
+    }
 
-    public void g() {}
+    public void g() {
+    }
 
     public boolean b(int i0, ItemStack itemstack) {
         return true;

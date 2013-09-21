@@ -27,7 +27,7 @@ public class ContainerHopper extends Container {
             this.a(new Slot(inventoryplayer, i0, 8 + i0 * 18, 58 + b0));
         }
 
-        this.inventory = (this.a instanceof TileEntityHopper ? ((TileEntityHopper) this.a).getCanaryHopper() : (CanaryHopperMinecart) ((EntityMinecartHopper) this.a).getCanaryEntity()); // CanaryMod: Set inventory instance
+        this.inventory = (this.a instanceof TileEntityHopper ? ((TileEntityHopper)this.a).getCanaryHopper() : (CanaryHopperMinecart)((EntityMinecartHopper)this.a).getCanaryEntity()); // CanaryMod: Set inventory instance
     }
 
     public boolean a(EntityPlayer entityplayer) {
@@ -36,7 +36,7 @@ public class ContainerHopper extends Container {
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
-        Slot slot = (Slot) this.c.get(i0);
+        Slot slot = (Slot)this.c.get(i0);
 
         if (slot != null && slot.e()) {
             ItemStack itemstack1 = slot.d();
@@ -46,13 +46,15 @@ public class ContainerHopper extends Container {
                 if (!this.a(itemstack1, this.a.j_(), this.c.size(), true)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 0, this.a.j_(), false)) {
+            }
+            else if (!this.a(itemstack1, 0, this.a.j_(), false)) {
                 return null;
             }
 
             if (itemstack1.b == 0) {
-                slot.c((ItemStack) null);
-            } else {
+                slot.c((ItemStack)null);
+            }
+            else {
                 slot.f();
             }
         }

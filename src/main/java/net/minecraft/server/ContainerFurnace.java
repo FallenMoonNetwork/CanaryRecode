@@ -11,7 +11,7 @@ public class ContainerFurnace extends Container {
         this.a = tileentityfurnace;
         this.a(new Slot(tileentityfurnace, 0, 56, 17));
         this.a(new Slot(tileentityfurnace, 1, 56, 53));
-        this.a((Slot) (new SlotFurnace(inventoryplayer.d, tileentityfurnace, 2, 116, 35)));
+        this.a((Slot)(new SlotFurnace(inventoryplayer.d, tileentityfurnace, 2, 116, 35)));
 
         int i0;
 
@@ -39,7 +39,7 @@ public class ContainerFurnace extends Container {
         super.b();
 
         for (int i0 = 0; i0 < this.e.size(); ++i0) {
-            ICrafting icrafting = (ICrafting) this.e.get(i0);
+            ICrafting icrafting = (ICrafting)this.e.get(i0);
 
             if (this.f != this.a.c) {
                 icrafting.a(this, 0, this.a.c);
@@ -65,7 +65,7 @@ public class ContainerFurnace extends Container {
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
-        Slot slot = (Slot) this.c.get(i0);
+        Slot slot = (Slot)this.c.get(i0);
 
         if (slot != null && slot.e()) {
             ItemStack itemstack1 = slot.d();
@@ -77,29 +77,35 @@ public class ContainerFurnace extends Container {
                 }
 
                 slot.a(itemstack1, itemstack);
-            } else if (i0 != 1 && i0 != 0) {
+            }
+            else if (i0 != 1 && i0 != 0) {
                 if (FurnaceRecipes.a().b(itemstack1.b().cv) != null) {
                     if (!this.a(itemstack1, 0, 1, false)) {
                         return null;
                     }
-                } else if (TileEntityFurnace.b(itemstack1)) {
+                }
+                else if (TileEntityFurnace.b(itemstack1)) {
                     if (!this.a(itemstack1, 1, 2, false)) {
                         return null;
                     }
-                } else if (i0 >= 3 && i0 < 30) {
+                }
+                else if (i0 >= 3 && i0 < 30) {
                     if (!this.a(itemstack1, 30, 39, false)) {
                         return null;
                     }
-                } else if (i0 >= 30 && i0 < 39 && !this.a(itemstack1, 3, 30, false)) {
+                }
+                else if (i0 >= 30 && i0 < 39 && !this.a(itemstack1, 3, 30, false)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 3, 39, false)) {
+            }
+            else if (!this.a(itemstack1, 3, 39, false)) {
                 return null;
             }
 
             if (itemstack1.b == 0) {
-                slot.c((ItemStack) null);
-            } else {
+                slot.c((ItemStack)null);
+            }
+            else {
                 slot.f();
             }
 

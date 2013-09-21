@@ -98,9 +98,9 @@ public class CanaryChunk implements Chunk {
         if (data.length != 256) {
             return;
         }
-        for (byte check : data) {
-            if (check < 0 || check > 22) {
-                check = (byte) 0;
+        for (int index = 0; index < data.length; index++) {
+            if (data[index] < 0 || data[index] > BiomeType.count()) { //Use BiomeType.count() so we don't forget to adjust this here
+                data[index] = 0;
             }
         }
         handle.a(data);

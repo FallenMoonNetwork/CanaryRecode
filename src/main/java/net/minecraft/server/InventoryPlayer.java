@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import java.util.concurrent.Callable;
 import net.canarymod.hook.player.ItemPickupHook;
+
+import java.util.concurrent.Callable;
 
 public class InventoryPlayer implements IInventory {
 
@@ -87,7 +88,7 @@ public class InventoryPlayer implements IInventory {
             }
 
             i2 += this.g.b;
-            this.b((ItemStack) null);
+            this.b((ItemStack)null);
         }
 
         return i2;
@@ -102,14 +103,16 @@ public class InventoryPlayer implements IInventory {
             i2 = this.j();
             if (i2 < 0) {
                 return i1;
-            } else {
+            }
+            else {
                 if (this.a[i2] == null) {
                     this.a[i2] = ItemStack.b(itemstack);
                 }
 
                 return 0;
             }
-        } else {
+        }
+        else {
             i2 = this.d(itemstack);
             if (i2 < 0) {
                 i2 = this.j();
@@ -117,11 +120,12 @@ public class InventoryPlayer implements IInventory {
 
             if (i2 < 0) {
                 return i1;
-            } else {
+            }
+            else {
                 if (this.a[i2] == null) {
                     this.a[i2] = new ItemStack(i0, 0, itemstack.k());
                     if (itemstack.p()) {
-                        this.a[i2].d((NBTTagCompound) itemstack.q().b());
+                        this.a[i2].d((NBTTagCompound)itemstack.q().b());
                     }
                 }
 
@@ -137,7 +141,8 @@ public class InventoryPlayer implements IInventory {
 
                 if (i3 == 0) {
                     return i1;
-                } else {
+                }
+                else {
                     i1 -= i3;
                     this.a[i2].b += i3;
                     this.a[i2].c = 5;
@@ -160,7 +165,8 @@ public class InventoryPlayer implements IInventory {
 
         if (i1 < 0) {
             return false;
-        } else {
+        }
+        else {
             if (--this.a[i1].b <= 0) {
                 this.a[i1] = null;
             }
@@ -184,15 +190,18 @@ public class InventoryPlayer implements IInventory {
             i = InventoryPlayer.i();
             if (i >= 0) {
                 // CanaryMod: ItemPickUp
-                ItemPickupHook hook = (ItemPickupHook) new ItemPickupHook(((EntityPlayerMP) this.d).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity()).call();
+                ItemPickupHook hook = (ItemPickupHook)new ItemPickupHook(((EntityPlayerMP)this.d).getPlayer(), (net.canarymod.api.entity.EntityItem)entityitem.getCanaryEntity()).call();
                 return !hook.isCanceled();
                 //
-            } else if (this.d.bG.d) {
+            }
+            else if (this.d.bG.d) {
                 return true;
-            } else {
+            }
+            else {
                 return false;
             }
-        } else {
+        }
+        else {
             int slot = 0;
             int left = itemstack.b;
 
@@ -202,7 +211,8 @@ public class InventoryPlayer implements IInventory {
 
                 if (itemstack1 == null) {
                     delta = Math.min(64, left);
-                } else if (itemstack1.b < 64 && itemstack.c == itemstack1.c && itemstack.e() == itemstack1.e()) {
+                }
+                else if (itemstack1.b < 64 && itemstack.c == itemstack1.c && itemstack.e() == itemstack1.e()) {
                     delta = Math.min(64 - itemstack.b, left);
                 }
                 left -= delta;
@@ -211,10 +221,11 @@ public class InventoryPlayer implements IInventory {
             while (left > 0 && slot < 36);
             if (itemstack.b - left > 0) {
                 // CanaryMod: ItemPickUp
-                ItemPickupHook hook = (ItemPickupHook) new ItemPickupHook(((EntityPlayerMP) this.d).getPlayer(), (net.canarymod.api.entity.EntityItem) entityitem.getCanaryEntity()).call();
+                ItemPickupHook hook = (ItemPickupHook)new ItemPickupHook(((EntityPlayerMP)this.d).getPlayer(), (net.canarymod.api.entity.EntityItem)entityitem.getCanaryEntity()).call();
                 return !hook.isCanceled();
                 //
-            } else {
+            }
+            else {
                 return false;
             }
         }
@@ -223,9 +234,11 @@ public class InventoryPlayer implements IInventory {
     public boolean a(ItemStack itemstack) {
         if (itemstack == null) {
             return false;
-        } else if (itemstack.b == 0) {
+        }
+        else if (itemstack.b == 0) {
             return false;
-        } else {
+        }
+        else {
             try {
                 int i0;
 
@@ -236,13 +249,16 @@ public class InventoryPlayer implements IInventory {
                         this.a[i0].c = 5;
                         itemstack.b = 0;
                         return true;
-                    } else if (this.d.bG.d) {
+                    }
+                    else if (this.d.bG.d) {
                         itemstack.b = 0;
                         return true;
-                    } else {
+                    }
+                    else {
                         return false;
                     }
-                } else {
+                }
+                else {
                     do {
                         i0 = itemstack.b;
                         itemstack.b = this.e(itemstack);
@@ -252,17 +268,19 @@ public class InventoryPlayer implements IInventory {
                     if (itemstack.b == i0 && this.d.bG.d) {
                         itemstack.b = 0;
                         return true;
-                    } else {
+                    }
+                    else {
                         return itemstack.b < i0;
                     }
                 }
-            } catch (Throwable throwable) {
+            }
+            catch (Throwable throwable) {
                 CrashReport crashreport = CrashReport.a(throwable, "Adding item to inventory");
                 CrashReportCategory crashreportcategory = crashreport.a("Item being added");
 
                 crashreportcategory.a("Item ID", Integer.valueOf(itemstack.d));
                 crashreportcategory.a("Item data", Integer.valueOf(itemstack.k()));
-                crashreportcategory.a("Item name", (Callable) (new CallableItemName(this, itemstack)));
+                crashreportcategory.a("Item name", (Callable)(new CallableItemName(this, itemstack)));
                 throw new ReportedException(crashreport);
             }
         }
@@ -283,7 +301,8 @@ public class InventoryPlayer implements IInventory {
                 itemstack = aitemstack[i0];
                 aitemstack[i0] = null;
                 return itemstack;
-            } else {
+            }
+            else {
                 itemstack = aitemstack[i0].a(i1);
                 if (aitemstack[i0].b == 0) {
                     aitemstack[i0] = null;
@@ -291,7 +310,8 @@ public class InventoryPlayer implements IInventory {
 
                 return itemstack;
             }
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -309,7 +329,8 @@ public class InventoryPlayer implements IInventory {
 
             aitemstack[i0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -342,18 +363,18 @@ public class InventoryPlayer implements IInventory {
         for (i0 = 0; i0 < this.a.length; ++i0) {
             if (this.a[i0] != null) {
                 nbttagcompound = new NBTTagCompound();
-                nbttagcompound.a("Slot", (byte) i0);
+                nbttagcompound.a("Slot", (byte)i0);
                 this.a[i0].b(nbttagcompound);
-                nbttaglist.a((NBTBase) nbttagcompound);
+                nbttaglist.a((NBTBase)nbttagcompound);
             }
         }
 
         for (i0 = 0; i0 < this.b.length; ++i0) {
             if (this.b[i0] != null) {
                 nbttagcompound = new NBTTagCompound();
-                nbttagcompound.a("Slot", (byte) (i0 + 100));
+                nbttagcompound.a("Slot", (byte)(i0 + 100));
                 this.b[i0].b(nbttagcompound);
-                nbttaglist.a((NBTBase) nbttagcompound);
+                nbttaglist.a((NBTBase)nbttagcompound);
             }
         }
 
@@ -365,7 +386,7 @@ public class InventoryPlayer implements IInventory {
         this.b = new ItemStack[4];
 
         for (int i0 = 0; i0 < nbttaglist.c(); ++i0) {
-            NBTTagCompound nbttagcompound = (NBTTagCompound) nbttaglist.b(i0);
+            NBTTagCompound nbttagcompound = (NBTTagCompound)nbttaglist.b(i0);
             int i1 = nbttagcompound.c("Slot") & 255;
             ItemStack itemstack = ItemStack.a(nbttagcompound);
 
@@ -411,7 +432,8 @@ public class InventoryPlayer implements IInventory {
     public boolean b(Block block) {
         if (block.cU.l()) {
             return true;
-        } else {
+        }
+        else {
             ItemStack itemstack = this.a(this.c);
 
             return itemstack != null ? itemstack.b(block) : false;
@@ -427,7 +449,7 @@ public class InventoryPlayer implements IInventory {
 
         for (int i1 = 0; i1 < this.b.length; ++i1) {
             if (this.b[i1] != null && this.b[i1].b() instanceof ItemArmor) {
-                int i2 = ((ItemArmor) this.b[i1].b()).c;
+                int i2 = ((ItemArmor)this.b[i1].b()).c;
 
                 i0 += i2;
             }
@@ -444,7 +466,7 @@ public class InventoryPlayer implements IInventory {
 
         for (int i0 = 0; i0 < this.b.length; ++i0) {
             if (this.b[i0] != null && this.b[i0].b() instanceof ItemArmor) {
-                this.b[i0].a((int) f0, (EntityLivingBase) this.d);
+                this.b[i0].a((int)f0, (EntityLivingBase)this.d);
                 if (this.b[i0].b == 0) {
                     this.b[i0] = null;
                 }
@@ -504,9 +526,11 @@ public class InventoryPlayer implements IInventory {
         return false;
     }
 
-    public void k_() {}
+    public void k_() {
+    }
 
-    public void g() {}
+    public void g() {
+    }
 
     public boolean b(int i0, ItemStack itemstack) {
         return true;

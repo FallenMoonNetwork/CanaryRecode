@@ -22,7 +22,7 @@ public class MerchantRecipe {
     }
 
     public MerchantRecipe(ItemStack itemstack, ItemStack itemstack1) {
-        this(itemstack, (ItemStack) null, itemstack1);
+        this(itemstack, (ItemStack)null, itemstack1);
     }
 
     public MerchantRecipe(ItemStack itemstack, Item item) {
@@ -82,7 +82,8 @@ public class MerchantRecipe {
 
         if (nbttagcompound.b("maxUses")) {
             this.e = nbttagcompound.e("maxUses");
-        } else {
+        }
+        else {
             this.e = 7;
         }
     }

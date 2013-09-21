@@ -24,14 +24,17 @@ public abstract class Packet {
     public static long r;
     public boolean s;
 
-    public Packet() {}
+    public Packet() {
+    }
 
     static void a(int i0, boolean flag0, boolean flag1, Class oclass0) {
         if (l.b(i0)) {
             throw new IllegalArgumentException("Duplicate packet id:" + i0);
-        } else if (a.containsKey(oclass0)) {
+        }
+        else if (a.containsKey(oclass0)) {
             throw new IllegalArgumentException("Duplicate packet class:" + oclass0);
-        } else {
+        }
+        else {
             l.a(i0, oclass0);
             a.put(oclass0, Integer.valueOf(i0));
             if (flag0) {
@@ -46,10 +49,11 @@ public abstract class Packet {
 
     public static Packet a(ILogAgent ilogagent, int i0) {
         try {
-            Class oclass0 = (Class) l.a(i0);
+            Class oclass0 = (Class)l.a(i0);
 
-            return oclass0 == null ? null : (Packet) oclass0.newInstance();
-        } catch (Exception exception) {
+            return oclass0 == null ? null : (Packet)oclass0.newInstance();
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
             ilogagent.c("Skipping packet with id " + i0);
             return null;
@@ -66,7 +70,8 @@ public abstract class Packet {
 
         if (short1 < 0) {
             throw new IOException("Key was smaller than nothing!  Weird key!");
-        } else {
+        }
+        else {
             byte[] abyte = new byte[short1];
 
             datainput.readFully(abyte);
@@ -75,7 +80,7 @@ public abstract class Packet {
     }
 
     public final int n() {
-        return ((Integer) a.get(this.getClass())).intValue();
+        return ((Integer)a.get(this.getClass())).intValue();
     }
 
     public static Packet a(ILogAgent ilogagent, DataInput datainput, boolean flag0, Socket socket) throws IOException {
@@ -101,15 +106,16 @@ public abstract class Packet {
 
             packet.a(datainput);
             ++o;
-            p += (long) packet.a();
-        } catch (EOFException eofexception) {
+            p += (long)packet.a();
+        }
+        catch (EOFException eofexception) {
             ilogagent.c("Reached end of stream for " + socket.getInetAddress());
             return null;
         }
 
-        PacketCount.a(i1, (long) packet.a());
+        PacketCount.a(i1, (long)packet.a());
         ++o;
-        p += (long) packet.a();
+        p += (long)packet.a();
         socket.setSoTimeout(i0);
         return packet;
     }
@@ -118,13 +124,14 @@ public abstract class Packet {
         dataoutput.write(packet.n());
         packet.a(dataoutput);
         ++q;
-        r += (long) packet.a();
+        r += (long)packet.a();
     }
 
     public static void a(String s0, DataOutput dataoutput) throws IOException {
         if (s0.length() > 32767) {
             throw new IOException("String too big");
-        } else {
+        }
+        else {
             dataoutput.writeShort(s0.length());
             dataoutput.writeChars(s0);
         }
@@ -135,9 +142,11 @@ public abstract class Packet {
 
         if (short1 > i0) {
             throw new IOException("Received string length longer than maximum allowed (" + short1 + " > " + i0 + ")");
-        } else if (short1 < 0) {
+        }
+        else if (short1 < 0) {
             throw new IOException("Received string length is less than zero! Weird string!");
-        } else {
+        }
+        else {
             StringBuilder stringbuilder = new StringBuilder();
 
             for (int i1 = 0; i1 < short1; ++i1) {
@@ -192,7 +201,8 @@ public abstract class Packet {
     public static void a(ItemStack itemstack, DataOutput dataoutput) throws IOException {
         if (itemstack == null) {
             dataoutput.writeShort(-1);
-        } else {
+        }
+        else {
             dataoutput.writeShort(itemstack.d);
             dataoutput.writeByte(itemstack.b);
             dataoutput.writeShort(itemstack.k());
@@ -211,7 +221,8 @@ public abstract class Packet {
 
         if (short1 < 0) {
             return null;
-        } else {
+        }
+        else {
             byte[] abyte = new byte[short1];
 
             datainput.readFully(abyte);
@@ -222,10 +233,11 @@ public abstract class Packet {
     protected static void a(NBTTagCompound nbttagcompound, DataOutput dataoutput) throws IOException {
         if (nbttagcompound == null) {
             dataoutput.writeShort(-1);
-        } else {
+        }
+        else {
             byte[] abyte = CompressedStreamTools.a(nbttagcompound);
 
-            dataoutput.writeShort((short) abyte.length);
+            dataoutput.writeShort((short)abyte.length);
             dataoutput.write(abyte);
         }
     }

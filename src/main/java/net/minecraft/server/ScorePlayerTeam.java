@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
+import net.canarymod.api.scoreboard.CanaryTeam;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import net.canarymod.api.scoreboard.CanaryTeam;
 
 public class ScorePlayerTeam extends Team {
 
@@ -35,7 +36,8 @@ public class ScorePlayerTeam extends Team {
     public void a(String s0) {
         if (s0 == null) {
             throw new IllegalArgumentException("Name cannot be null");
-        } else {
+        }
+        else {
             this.d = s0;
             this.a.b(this);
         }
@@ -52,7 +54,8 @@ public class ScorePlayerTeam extends Team {
     public void b(String s0) {
         if (s0 == null) {
             throw new IllegalArgumentException("Prefix cannot be null");
-        } else {
+        }
+        else {
             this.e = s0;
             this.a.b(this);
         }
@@ -65,7 +68,8 @@ public class ScorePlayerTeam extends Team {
     public void c(String s0) {
         if (s0 == null) {
             throw new IllegalArgumentException("Suffix cannot be null");
-        } else {
+        }
+        else {
             this.f = s0;
             this.a.b(this);
         }

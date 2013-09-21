@@ -1,13 +1,14 @@
 package net.minecraft.server;
 
+import net.canarymod.api.world.blocks.BlockType;
+import net.canarymod.api.world.blocks.CanaryBlock;
+import net.canarymod.hook.world.RedstoneChangeHook;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import net.canarymod.api.world.blocks.BlockType;
-import net.canarymod.api.world.blocks.CanaryBlock;
-import net.canarymod.hook.world.RedstoneChangeHook;
 
 public class BlockRedstoneTorch extends BlockTorch {
 
@@ -19,7 +20,7 @@ public class BlockRedstoneTorch extends BlockTorch {
             b.put(world, new ArrayList());
         }
 
-        List list = (List) b.get(world);
+        List list = (List)b.get(world);
 
         if (flag0) {
             list.add(new RedstoneUpdateInfo(i0, i1, i2, world.I()));
@@ -28,7 +29,7 @@ public class BlockRedstoneTorch extends BlockTorch {
         int i3 = 0;
 
         for (int i4 = 0; i4 < list.size(); ++i4) {
-            RedstoneUpdateInfo redstoneupdateinfo = (RedstoneUpdateInfo) list.get(i4);
+            RedstoneUpdateInfo redstoneupdateinfo = (RedstoneUpdateInfo)list.get(i4);
 
             if (redstoneupdateinfo.a == i0 && redstoneupdateinfo.b == i1 && redstoneupdateinfo.c == i2) {
                 ++i3;
@@ -45,7 +46,7 @@ public class BlockRedstoneTorch extends BlockTorch {
         super(i0);
         this.a = flag0;
         this.b(true);
-        this.a((CreativeTabs) null);
+        this.a((CreativeTabs)null);
     }
 
     public int a(World world) {
@@ -59,7 +60,7 @@ public class BlockRedstoneTorch extends BlockTorch {
 
         if (this.a) {
             // CanaryMod: RedstoneChange; Torch put in
-            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 0, 15).call();
+            RedstoneChangeHook hook = (RedstoneChangeHook)new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 0, 15).call();
             if (hook.isCanceled()) {
                 this.a = false;
                 return;
@@ -77,7 +78,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
         if (this.a) {
             // CanaryMod: RedstoneChange; Torch broke
-            new RedstoneChangeHook(new CanaryBlock(BlockType.RedstoneLampOn.getId(), (short) 2, i0, i1, i2, world.getCanaryWorld()), 15, 0).call();
+            new RedstoneChangeHook(new CanaryBlock(BlockType.RedstoneLampOn.getId(), (short)2, i0, i1, i2, world.getCanaryWorld()), 15, 0).call();
             //
             world.f(i0, i1 - 1, i2, this.cF);
             world.f(i0, i1 + 1, i2, this.cF);
@@ -91,7 +92,8 @@ public class BlockRedstoneTorch extends BlockTorch {
     public int b(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
         if (!this.a) {
             return 0;
-        } else {
+        }
+        else {
             int i4 = iblockaccess.h(i0, i1, i2);
 
             return i4 == 5 && i3 == 1 ? 0 : (i4 == 3 && i3 == 3 ? 0 : (i4 == 4 && i3 == 2 ? 0 : (i4 == 1 && i3 == 5 ? 0 : (i4 == 2 && i3 == 4 ? 0 : 15))));
@@ -106,36 +108,37 @@ public class BlockRedstoneTorch extends BlockTorch {
 
     public void a(World world, int i0, int i1, int i2, Random random) {
         boolean flag0 = this.m(world, i0, i1, i2);
-        List list = (List) b.get(world);
+        List list = (List)b.get(world);
 
-        while (list != null && !list.isEmpty() && world.I() - ((RedstoneUpdateInfo) list.get(0)).d > 60L) {
+        while (list != null && !list.isEmpty() && world.I() - ((RedstoneUpdateInfo)list.get(0)).d > 60L) {
             list.remove(0);
         }
 
         if (this.a) {
             if (flag0) {
                 // CanaryMod: RedstoneChange; Torch off
-                RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
+                RedstoneChangeHook hook = (RedstoneChangeHook)new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
                 if (hook.isCanceled()) {
                     return;
                 }
                 //
                 world.f(i0, i1, i2, Block.aU.cF, world.h(i0, i1, i2), 3);
                 if (this.a(world, i0, i1, i2, true)) {
-                    world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
+                    world.a((double)((float)i0 + 0.5F), (double)((float)i1 + 0.5F), (double)((float)i2 + 0.5F), "random.fizz", 0.5F, 2.6F + (world.s.nextFloat() - world.s.nextFloat()) * 0.8F);
 
                     for (int i3 = 0; i3 < 5; ++i3) {
-                        double d0 = (double) i0 + random.nextDouble() * 0.6D + 0.2D;
-                        double d1 = (double) i1 + random.nextDouble() * 0.6D + 0.2D;
-                        double d2 = (double) i2 + random.nextDouble() * 0.6D + 0.2D;
+                        double d0 = (double)i0 + random.nextDouble() * 0.6D + 0.2D;
+                        double d1 = (double)i1 + random.nextDouble() * 0.6D + 0.2D;
+                        double d2 = (double)i2 + random.nextDouble() * 0.6D + 0.2D;
 
                         world.a("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
                     }
                 }
             }
-        } else if (!flag0 && !this.a(world, i0, i1, i2, false)) {
+        }
+        else if (!flag0 && !this.a(world, i0, i1, i2, false)) {
             // CanaryMod: RedstoneChange; Torch on
-            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
+            RedstoneChangeHook hook = (RedstoneChangeHook)new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
             if (hook.isCanceled()) {
                 return;
             }

@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.config.Configuration;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import net.canarymod.Canary;
-import net.canarymod.config.Configuration;
 
 public class WorldChunkManager {
 
@@ -56,7 +57,7 @@ public class WorldChunkManager {
         int[] aint = this.e.a(i0, i1, i2, i3);
 
         for (int i4 = 0; i4 < i2 * i3; ++i4) {
-            float f0 = (float) BiomeGenBase.a[aint[i4]].g() / 65536.0F;
+            float f0 = (float)BiomeGenBase.a[aint[i4]].g() / 65536.0F;
 
             if (f0 > 1.0F) {
                 f0 = 1.0F;
@@ -77,7 +78,7 @@ public class WorldChunkManager {
         int[] aint = this.e.a(i0, i1, i2, i3);
 
         for (int i4 = 0; i4 < i2 * i3; ++i4) {
-            float f0 = (float) BiomeGenBase.a[aint[i4]].h() / 65536.0F;
+            float f0 = (float)BiomeGenBase.a[aint[i4]].h() / 65536.0F;
 
             if (f0 > 1.0F) {
                 f0 = 1.0F;
@@ -127,7 +128,8 @@ public class WorldChunkManager {
 
             System.arraycopy(abiomegenbase1, 0, abiomegenbase, 0, i2 * i3);
             return abiomegenbase;
-        } else {
+        }
+        else {
             int[] aint = this.e.a(i0, i1, i2, i3);
 
             for (int i4 = 0; i4 < i2 * i3; ++i4) {

@@ -1,12 +1,13 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.hook.world.TreeGrowHook;
+
+import java.util.Random;
 
 public class BlockSapling extends BlockFlower {
 
-    public static final String[] a = new String[]{ "oak", "spruce", "birch", "jungle" };
-    private static final String[] b = new String[]{ "sapling", "sapling_spruce", "sapling_birch", "sapling_jungle" };
+    public static final String[] a = new String[]{"oak", "spruce", "birch", "jungle"};
+    private static final String[] b = new String[]{"sapling", "sapling_spruce", "sapling_birch", "sapling_jungle"};
 
     protected BlockSapling(int i0) {
         super(i0);
@@ -30,9 +31,10 @@ public class BlockSapling extends BlockFlower {
 
         if ((i3 & 8) == 0) {
             world.b(i0, i1, i2, i3 | 8, 4);
-        } else {
+        }
+        else {
             // CanaryMod: TreeGrow; If someone figures out how to get more information into this, let me know - darkdiplomat;
-            TreeGrowHook hook = (TreeGrowHook) new TreeGrowHook(world.getCanaryWorld().getBlockAt(i0, i1, i2)).call();
+            TreeGrowHook hook = (TreeGrowHook)new TreeGrowHook(world.getCanaryWorld().getBlockAt(i0, i1, i2)).call();
             if (!hook.isCanceled()) {
                 this.d(world, i0, i1, i2, random);
             }
@@ -49,9 +51,11 @@ public class BlockSapling extends BlockFlower {
 
         if (i3 == 1) {
             object = new WorldGenTaiga2(true);
-        } else if (i3 == 2) {
+        }
+        else if (i3 == 2) {
             object = new WorldGenForest(true);
-        } else if (i3 == 3) {
+        }
+        else if (i3 == 3) {
             for (i4 = 0; i4 >= -1; --i4) {
                 for (i5 = 0; i5 >= -1; --i5) {
                     if (this.d(world, i0 + i4, i1, i2 + i5, 3) && this.d(world, i0 + i4 + 1, i1, i2 + i5, 3) && this.d(world, i0 + i4, i1, i2 + i5 + 1, 3) && this.d(world, i0 + i4 + 1, i1, i2 + i5 + 1, 3)) {
@@ -71,7 +75,8 @@ public class BlockSapling extends BlockFlower {
                 i4 = 0;
                 object = new WorldGenTrees(true, 4 + random.nextInt(7), 3, 3, false);
             }
-        } else {
+        }
+        else {
             object = new WorldGenTrees(true);
             if (random.nextInt(10) == 0) {
                 object = new WorldGenBigTree(true);
@@ -83,17 +88,19 @@ public class BlockSapling extends BlockFlower {
             world.f(i0 + i4 + 1, i1, i2 + i5, 0, 0, 4);
             world.f(i0 + i4, i1, i2 + i5 + 1, 0, 0, 4);
             world.f(i0 + i4 + 1, i1, i2 + i5 + 1, 0, 0, 4);
-        } else {
+        }
+        else {
             world.f(i0, i1, i2, 0, 0, 4);
         }
 
-        if (!((WorldGenerator) object).a(world, random, i0 + i4, i1, i2 + i5)) {
+        if (!((WorldGenerator)object).a(world, random, i0 + i4, i1, i2 + i5)) {
             if (flag0) {
                 world.f(i0 + i4, i1, i2 + i5, this.cF, i3, 4);
                 world.f(i0 + i4 + 1, i1, i2 + i5, this.cF, i3, 4);
                 world.f(i0 + i4, i1, i2 + i5 + 1, this.cF, i3, 4);
                 world.f(i0 + i4 + 1, i1, i2 + i5 + 1, this.cF, i3, 4);
-            } else {
+            }
+            else {
                 world.f(i0, i1, i2, this.cF, i3, 4);
             }
         }

@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.throwable.CanaryEntityPotion;
+
 import java.util.Iterator;
 import java.util.List;
-import net.canarymod.api.entity.throwable.CanaryEntityPotion;
 
 public class EntityPotion extends EntityThrowable {
 
@@ -80,7 +81,7 @@ public class EntityPotion extends EntityThrowable {
                     Iterator iterator = list1.iterator();
 
                     while (iterator.hasNext()) {
-                        EntityLivingBase entitylivingbase = (EntityLivingBase) iterator.next();
+                        EntityLivingBase entitylivingbase = (EntityLivingBase)iterator.next();
                         double d0 = this.e(entitylivingbase);
 
                         if (d0 < 16.0D) {
@@ -93,13 +94,14 @@ public class EntityPotion extends EntityThrowable {
                             Iterator iterator1 = list.iterator();
 
                             while (iterator1.hasNext()) {
-                                PotionEffect potioneffect = (PotionEffect) iterator1.next();
+                                PotionEffect potioneffect = (PotionEffect)iterator1.next();
                                 int i0 = potioneffect.a();
 
                                 if (Potion.a[i0].b()) {
                                     Potion.a[i0].a(this.h(), entitylivingbase, potioneffect.c(), d1);
-                                } else {
-                                    int i1 = (int) (d1 * (double) potioneffect.b() + 0.5D);
+                                }
+                                else {
+                                    int i1 = (int)(d1 * (double)potioneffect.b() + 0.5D);
 
                                     if (i1 > 20) {
                                         entitylivingbase.c(new PotionEffect(i0, i1, potioneffect.c()));
@@ -111,8 +113,8 @@ public class EntityPotion extends EntityThrowable {
                 }
             }
 
-            this.q.e(2002, (int) Math.round(this.u), (int) Math.round(this.v), (int) Math.round(this.w), this.i());
-            this.w();
+            this.q.e(2002, (int)Math.round(this.u), (int)Math.round(this.v), (int)Math.round(this.w), this.i());
+            this.x();
         }
     }
 
@@ -120,12 +122,13 @@ public class EntityPotion extends EntityThrowable {
         super.a(nbttagcompound);
         if (nbttagcompound.b("Potion")) {
             this.c = ItemStack.a(nbttagcompound.l("Potion"));
-        } else {
+        }
+        else {
             this.a(nbttagcompound.e("potionValue"));
         }
 
         if (this.c == null) {
-            this.w();
+            this.x();
         }
     }
 

@@ -7,15 +7,29 @@ import java.util.Random;
 
 public class StructureStrongholdPieces {
 
-    private static final StructureStrongholdPieceWeight[] b = new StructureStrongholdPieceWeight[]{ new StructureStrongholdPieceWeight(ComponentStrongholdStraight.class, 40, 0), new StructureStrongholdPieceWeight(ComponentStrongholdPrison.class, 5, 5), new StructureStrongholdPieceWeight(ComponentStrongholdLeftTurn.class, 20, 0),
-            new StructureStrongholdPieceWeight(ComponentStrongholdRightTurn.class, 20, 0), new StructureStrongholdPieceWeight(ComponentStrongholdRoomCrossing.class, 10, 6), new StructureStrongholdPieceWeight(ComponentStrongholdStairsStraight.class, 5, 5), new StructureStrongholdPieceWeight(ComponentStrongholdStairs.class, 5, 5),
-            new StructureStrongholdPieceWeight(ComponentStrongholdCrossing.class, 5, 4), new StructureStrongholdPieceWeight(ComponentStrongholdChestCorridor.class, 5, 4), new StructureStrongholdPieceWeight2(ComponentStrongholdLibrary.class, 10, 2), new StructureStrongholdPieceWeight3(ComponentStrongholdPortalRoom.class, 20, 1) };
+    private static final StructureStrongholdPieceWeight[] b = new StructureStrongholdPieceWeight[]{new StructureStrongholdPieceWeight(ComponentStrongholdStraight.class, 40, 0), new StructureStrongholdPieceWeight(ComponentStrongholdPrison.class, 5, 5), new StructureStrongholdPieceWeight(ComponentStrongholdLeftTurn.class, 20, 0), new StructureStrongholdPieceWeight(ComponentStrongholdRightTurn.class, 20, 0), new StructureStrongholdPieceWeight(ComponentStrongholdRoomCrossing.class, 10, 6), new StructureStrongholdPieceWeight(ComponentStrongholdStairsStraight.class, 5, 5), new StructureStrongholdPieceWeight(ComponentStrongholdStairs.class, 5, 5), new StructureStrongholdPieceWeight(ComponentStrongholdCrossing.class, 5, 4), new StructureStrongholdPieceWeight(ComponentStrongholdChestCorridor.class, 5, 4), new StructureStrongholdPieceWeight2(ComponentStrongholdLibrary.class, 10, 2), new StructureStrongholdPieceWeight3(ComponentStrongholdPortalRoom.class, 20, 1)};
     private static List c;
     private static Class d;
-    static int a = 0;
-    private static final StructureStrongholdStones e = new StructureStrongholdStones((StructureStrongholdPieceWeight2) null);
+    static int a;
+    private static final StructureStrongholdStones e = new StructureStrongholdStones((StructureStrongholdPieceWeight2)null);
 
     public static void a() {
+        MapGenStructureIO.a(ComponentStrongholdChestCorridor.class, "SHCC");
+        MapGenStructureIO.a(ComponentStrongholdCorridor.class, "SHFC");
+        MapGenStructureIO.a(ComponentStrongholdCrossing.class, "SH5C");
+        MapGenStructureIO.a(ComponentStrongholdLeftTurn.class, "SHLT");
+        MapGenStructureIO.a(ComponentStrongholdLibrary.class, "SHLi");
+        MapGenStructureIO.a(ComponentStrongholdPortalRoom.class, "SHPR");
+        MapGenStructureIO.a(ComponentStrongholdPrison.class, "SHPH");
+        MapGenStructureIO.a(ComponentStrongholdRightTurn.class, "SHRT");
+        MapGenStructureIO.a(ComponentStrongholdRoomCrossing.class, "SHRC");
+        MapGenStructureIO.a(ComponentStrongholdStairs.class, "SHSD");
+        MapGenStructureIO.a(ComponentStrongholdStairs2.class, "SHStart");
+        MapGenStructureIO.a(ComponentStrongholdStraight.class, "SHS");
+        MapGenStructureIO.a(ComponentStrongholdStairsStraight.class, "SHSSD");
+    }
+
+    public static void b() {
         c = new ArrayList();
         StructureStrongholdPieceWeight[] astructurestrongholdpieceweight = b;
         int i0 = astructurestrongholdpieceweight.length;
@@ -30,7 +44,7 @@ public class StructureStrongholdPieces {
         d = null;
     }
 
-    private static boolean c() {
+    private static boolean d() {
         boolean flag0 = false;
 
         a = 0;
@@ -38,7 +52,7 @@ public class StructureStrongholdPieces {
         StructureStrongholdPieceWeight structurestrongholdpieceweight;
 
         for (Iterator iterator = c.iterator(); iterator.hasNext(); a += structurestrongholdpieceweight.b) {
-            structurestrongholdpieceweight = (StructureStrongholdPieceWeight) iterator.next();
+            structurestrongholdpieceweight = (StructureStrongholdPieceWeight)iterator.next();
             if (structurestrongholdpieceweight.d > 0 && structurestrongholdpieceweight.c < structurestrongholdpieceweight.d) {
                 flag0 = true;
             }
@@ -52,35 +66,46 @@ public class StructureStrongholdPieces {
 
         if (oclass0 == ComponentStrongholdStraight.class) {
             object = ComponentStrongholdStraight.a(list, random, i0, i1, i2, i3, i4);
-        } else if (oclass0 == ComponentStrongholdPrison.class) {
+        }
+        else if (oclass0 == ComponentStrongholdPrison.class) {
             object = ComponentStrongholdPrison.a(list, random, i0, i1, i2, i3, i4);
-        } else if (oclass0 == ComponentStrongholdLeftTurn.class) {
+        }
+        else if (oclass0 == ComponentStrongholdLeftTurn.class) {
             object = ComponentStrongholdLeftTurn.a(list, random, i0, i1, i2, i3, i4);
-        } else if (oclass0 == ComponentStrongholdRightTurn.class) {
+        }
+        else if (oclass0 == ComponentStrongholdRightTurn.class) {
             object = ComponentStrongholdRightTurn.a(list, random, i0, i1, i2, i3, i4);
-        } else if (oclass0 == ComponentStrongholdRoomCrossing.class) {
+        }
+        else if (oclass0 == ComponentStrongholdRoomCrossing.class) {
             object = ComponentStrongholdRoomCrossing.a(list, random, i0, i1, i2, i3, i4);
-        } else if (oclass0 == ComponentStrongholdStairsStraight.class) {
+        }
+        else if (oclass0 == ComponentStrongholdStairsStraight.class) {
             object = ComponentStrongholdStairsStraight.a(list, random, i0, i1, i2, i3, i4);
-        } else if (oclass0 == ComponentStrongholdStairs.class) {
+        }
+        else if (oclass0 == ComponentStrongholdStairs.class) {
             object = ComponentStrongholdStairs.a(list, random, i0, i1, i2, i3, i4);
-        } else if (oclass0 == ComponentStrongholdCrossing.class) {
+        }
+        else if (oclass0 == ComponentStrongholdCrossing.class) {
             object = ComponentStrongholdCrossing.a(list, random, i0, i1, i2, i3, i4);
-        } else if (oclass0 == ComponentStrongholdChestCorridor.class) {
+        }
+        else if (oclass0 == ComponentStrongholdChestCorridor.class) {
             object = ComponentStrongholdChestCorridor.a(list, random, i0, i1, i2, i3, i4);
-        } else if (oclass0 == ComponentStrongholdLibrary.class) {
+        }
+        else if (oclass0 == ComponentStrongholdLibrary.class) {
             object = ComponentStrongholdLibrary.a(list, random, i0, i1, i2, i3, i4);
-        } else if (oclass0 == ComponentStrongholdPortalRoom.class) {
+        }
+        else if (oclass0 == ComponentStrongholdPortalRoom.class) {
             object = ComponentStrongholdPortalRoom.a(list, random, i0, i1, i2, i3, i4);
         }
 
-        return (ComponentStronghold) object;
+        return (ComponentStronghold)object;
     }
 
     private static ComponentStronghold b(ComponentStrongholdStairs2 componentstrongholdstairs2, List list, Random random, int i0, int i1, int i2, int i3, int i4) {
-        if (!c()) {
+        if (!d()) {
             return null;
-        } else {
+        }
+        else {
             if (d != null) {
                 ComponentStronghold componentstronghold = a(d, list, random, i0, i1, i2, i3, i4);
 
@@ -98,7 +123,7 @@ public class StructureStrongholdPieces {
                 Iterator iterator = c.iterator();
 
                 while (iterator.hasNext()) {
-                    StructureStrongholdPieceWeight structurestrongholdpieceweight = (StructureStrongholdPieceWeight) iterator.next();
+                    StructureStrongholdPieceWeight structurestrongholdpieceweight = (StructureStrongholdPieceWeight)iterator.next();
 
                     i6 -= structurestrongholdpieceweight.b;
                     if (i6 < 0) {
@@ -125,7 +150,8 @@ public class StructureStrongholdPieces {
 
             if (structureboundingbox != null && structureboundingbox.b > 1) {
                 return new ComponentStrongholdCorridor(i4, random, structureboundingbox, i3);
-            } else {
+            }
+            else {
                 return null;
             }
         }
@@ -134,7 +160,8 @@ public class StructureStrongholdPieces {
     private static StructureComponent c(ComponentStrongholdStairs2 componentstrongholdstairs2, List list, Random random, int i0, int i1, int i2, int i3, int i4) {
         if (i4 > 50) {
             return null;
-        } else if (Math.abs(i0 - componentstrongholdstairs2.b().a) <= 112 && Math.abs(i2 - componentstrongholdstairs2.b().c) <= 112) {
+        }
+        else if (Math.abs(i0 - componentstrongholdstairs2.c().a) <= 112 && Math.abs(i2 - componentstrongholdstairs2.c().c) <= 112) {
             ComponentStronghold componentstronghold = b(componentstrongholdstairs2, list, random, i0, i1, i2, i3, i4 + 1);
 
             if (componentstronghold != null) {
@@ -143,7 +170,8 @@ public class StructureStrongholdPieces {
             }
 
             return componentstronghold;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -157,7 +185,7 @@ public class StructureStrongholdPieces {
         return oclass0;
     }
 
-    static StructureStrongholdStones b() {
+    static StructureStrongholdStones c() {
         return e;
     }
 }

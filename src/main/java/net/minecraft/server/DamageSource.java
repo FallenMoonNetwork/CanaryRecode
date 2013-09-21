@@ -123,11 +123,11 @@ public class DamageSource {
     }
 
     public ChatMessageComponent b(EntityLivingBase entitylivingbase) {
-        EntityLivingBase entitylivingbase1 = entitylivingbase.aR();
+        EntityLivingBase entitylivingbase1 = entitylivingbase.aS();
         String s0 = "death.attack." + this.o;
         String s1 = s0 + ".player";
 
-        return entitylivingbase1 != null && StatCollector.b(s1) ? ChatMessageComponent.b(s1, new Object[]{ entitylivingbase.ax(), entitylivingbase1.ax() }) : ChatMessageComponent.b(s0, new Object[]{ entitylivingbase.ax() });
+        return entitylivingbase1 != null && StatCollector.b(s1) ? ChatMessageComponent.b(s1, new Object[]{entitylivingbase.ay(), entitylivingbase1.ay()}) : ChatMessageComponent.b(s0, new Object[]{entitylivingbase.ay()});
     }
 
     public boolean m() {
@@ -158,7 +158,7 @@ public class DamageSource {
 
     /**
      * Gets the CanaryMod damagesource wrapper
-     * 
+     *
      * @return
      */
     public CanaryDamageSource getCanaryDamageSource() {
@@ -167,7 +167,7 @@ public class DamageSource {
 
     /**
      * Set hunger damage
-     * 
+     *
      * @param f
      */
     public void setHungerDamage(float f) {
@@ -176,7 +176,7 @@ public class DamageSource {
 
     /**
      * Set unblockable
-     * 
+     *
      * @param b
      */
     public void setUnblockable(boolean b) {

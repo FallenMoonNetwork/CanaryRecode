@@ -14,8 +14,8 @@ public class TileEntitySkull extends TileEntity {
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("SkullType", (byte) (this.a & 255));
-        nbttagcompound.a("Rot", (byte) (this.b & 255));
+        nbttagcompound.a("SkullType", (byte)(this.a & 255));
+        nbttagcompound.a("Rot", (byte)(this.b & 255));
         nbttagcompound.a("ExtraType", this.c);
     }
 
@@ -58,6 +58,6 @@ public class TileEntitySkull extends TileEntity {
     }
 
     public CanarySkull getCanarySkull() {
-        return (CanarySkull) complexBlock;
+        return (CanarySkull)complexBlock;
     }
 }

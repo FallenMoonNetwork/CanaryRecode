@@ -11,5 +11,6 @@ class MinecraftServerGuiINNER3 extends FocusAdapter {
         this.a = minecraftservergui;
     }
 
-    public void focusGained(FocusEvent focusevent) {}
+    public void focusGained(FocusEvent focusevent) {
+    }
 }

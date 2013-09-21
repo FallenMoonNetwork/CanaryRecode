@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.IgnitionHook;
 import net.canarymod.hook.world.IgnitionHook.IgnitionCause;
+
+import java.util.Random;
 
 public class BlockFire extends Block {
 
@@ -78,7 +79,8 @@ public class BlockFire extends Block {
 
             if (!flag0 && world.Q() && (world.F(i0, i1, i2) || world.F(i0 - 1, i1, i2) || world.F(i0 + 1, i1, i2) || world.F(i0, i1, i2 - 1) || world.F(i0, i1, i2 + 1))) {
                 world.i(i0, i1, i2);
-            } else {
+            }
+            else {
                 int i3 = world.h(i0, i1, i2);
 
                 if (i3 < 15) {
@@ -90,9 +92,11 @@ public class BlockFire extends Block {
                     if (!world.w(i0, i1 - 1, i2) || i3 > 3) {
                         world.i(i0, i1, i2);
                     }
-                } else if (!flag0 && !this.d(world, i0, i1 - 1, i2) && i3 == 15 && random.nextInt(4) == 0) {
+                }
+                else if (!flag0 && !this.d(world, i0, i1 - 1, i2) && i3 == 15 && random.nextInt(4) == 0) {
                     world.i(i0, i1, i2);
-                } else {
+                }
+                else {
                     boolean flag1 = world.G(i0, i1, i2);
                     byte b0 = 0;
 
@@ -134,10 +138,10 @@ public class BlockFire extends Block {
                                             }
 
                                             // CanaryMod: Ignition
-                                            CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+                                            CanaryBlock ignited = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
-                                            ignited.setStatus((byte) 3); // Spread Status 3
-                                            IgnitionHook hook = (IgnitionHook) new IgnitionHook(ignited, null, null, IgnitionCause.FIRE_SPREAD).call();
+                                            ignited.setStatus((byte)3); // Spread Status 3
+                                            IgnitionHook hook = (IgnitionHook)new IgnitionHook(ignited, null, null, IgnitionCause.FIRE_SPREAD).call();
                                             if (!hook.isCanceled()) {
                                                 world.f(i4, i6, i5, this.cF, i10, 3);
                                             }
@@ -170,20 +174,21 @@ public class BlockFire extends Block {
                     i6 = 15;
                 }
                 // CanaryMod: Ignition
-                CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+                CanaryBlock ignited = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
-                ignited.setStatus((byte) 3); // Spread Status 3
-                IgnitionHook hook = (IgnitionHook) new IgnitionHook(ignited, null, null, IgnitionCause.FIRE_SPREAD).call();
+                ignited.setStatus((byte)3); // Spread Status 3
+                IgnitionHook hook = (IgnitionHook)new IgnitionHook(ignited, null, null, IgnitionCause.FIRE_SPREAD).call();
                 if (!hook.isCanceled()) {
                     world.f(i0, i1, i2, this.cF, i6, 3);
                 }
                 //
-            } else {
+            }
+            else {
                 // CanaryMod: Ignition
-                CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+                CanaryBlock ignited = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
-                ignited.setStatus((byte) 4); // Burned Up Status 4
-                IgnitionHook hook = (IgnitionHook) new IgnitionHook(ignited, null, null, IgnitionCause.BURNT).call();
+                ignited.setStatus((byte)4); // Burned Up Status 4
+                IgnitionHook hook = (IgnitionHook)new IgnitionHook(ignited, null, null, IgnitionCause.BURNT).call();
                 if (!hook.isCanceled()) {
                     world.i(i0, i1, i2);
                 }
@@ -205,7 +210,8 @@ public class BlockFire extends Block {
 
         if (!world.c(i0, i1, i2)) {
             return 0;
-        } else {
+        }
+        else {
             int i3 = this.d(world, i0 + 1, i1, i2, b0);
 
             i3 = this.d(world, i0 - 1, i1, i2, i3);
@@ -245,7 +251,8 @@ public class BlockFire extends Block {
         if (world.t.i > 0 || world.a(i0, i1 - 1, i2) != Block.au.cF || !Block.bj.o_(world, i0, i1, i2)) {
             if (!world.w(i0, i1 - 1, i2) && !this.k(world, i0, i1, i2)) {
                 world.i(i0, i1, i2);
-            } else {
+            }
+            else {
                 world.a(i0, i1, i2, this.cF, this.a(world) + world.s.nextInt(10));
             }
         }

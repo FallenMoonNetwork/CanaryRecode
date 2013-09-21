@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.hook.world.BlockPhysicsHook;
+
+import java.util.Random;
 
 public class BlockSand extends Block {
 
@@ -19,7 +20,7 @@ public class BlockSand extends Block {
     public void a(World world, int i0, int i1, int i2) {
         // CanaryMod: BlockPhysics
         if (world.getCanaryWorld() != null) {
-            BlockPhysicsHook hook = (BlockPhysicsHook) new BlockPhysicsHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), true).call();
+            BlockPhysicsHook hook = (BlockPhysicsHook)new BlockPhysicsHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), true).call();
             if (hook.isCanceled()) {
                 return;
             }
@@ -30,7 +31,7 @@ public class BlockSand extends Block {
 
     public void a(World world, int i0, int i1, int i2, int i3) {
         // CanaryMod: BlockPhysics
-        BlockPhysicsHook hook = (BlockPhysicsHook) new BlockPhysicsHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), false).call();
+        BlockPhysicsHook hook = (BlockPhysicsHook)new BlockPhysicsHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), false).call();
         if (hook.isCanceled()) {
             return;
         }
@@ -51,15 +52,16 @@ public class BlockSand extends Block {
             if (!c && world.e(i0 - b0, i1 - b0, i2 - b0, i0 + b0, i1 + b0, i2 + b0)) {
                 if (!world.I) {
                     EntityFallingSand entityfallingsand = new EntityFallingSand(
-                            world, (double) ((float) i0 + 0.5F),
-                            (double) ((float) i1 + 0.5F),
-                            (double) ((float) i2 + 0.5F), this.cF, world.h(i0,
-                                    i1, i2));
+                            world, (double)((float)i0 + 0.5F),
+                            (double)((float)i1 + 0.5F),
+                            (double)((float)i2 + 0.5F), this.cF, world.h(i0,
+                            i1, i2));
 
                     this.a(entityfallingsand);
-                    world.d((Entity) entityfallingsand);
+                    world.d((Entity)entityfallingsand);
                 }
-            } else {
+            }
+            else {
                 world.i(i0, i1, i2);
 
                 while (a_(world, i0, i1 - 1, i2) && i1 > 0) {
@@ -73,7 +75,8 @@ public class BlockSand extends Block {
         }
     }
 
-    protected void a(EntityFallingSand entityfallingsand) {}
+    protected void a(EntityFallingSand entityfallingsand) {
+    }
 
     public int a(World world) {
         return 2;
@@ -84,14 +87,17 @@ public class BlockSand extends Block {
 
         if (i3 == 0) {
             return true;
-        } else if (i3 == Block.aw.cF) {
+        }
+        else if (i3 == Block.aw.cF) {
             return true;
-        } else {
+        }
+        else {
             Material material = Block.s[i3].cU;
 
             return material == Material.h ? true : material == Material.i;
         }
     }
 
-    public void a_(World world, int i0, int i1, int i2, int i3) {}
+    public void a_(World world, int i0, int i1, int i2, int i3) {
+    }
 }

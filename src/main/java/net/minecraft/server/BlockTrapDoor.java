@@ -28,7 +28,7 @@ public class BlockTrapDoor extends Block {
     }
 
     public AxisAlignedBB b(World world, int i0, int i1, int i2) {
-        this.a((IBlockAccess) world, i0, i1, i2); // CanaryMod Cast to IBlockAccess
+        this.a((IBlockAccess)world, i0, i1, i2); // CanaryMod Cast to IBlockAccess
         return super.b(world, i0, i1, i2);
     }
 
@@ -47,7 +47,8 @@ public class BlockTrapDoor extends Block {
 
         if ((i0 & 8) != 0) {
             this.a(0.0F, 1.0F - f0, 0.0F, 1.0F, 1.0F, 1.0F);
-        } else {
+        }
+        else {
             this.a(0.0F, 0.0F, 0.0F, 1.0F, f0, 1.0F);
         }
 
@@ -70,12 +71,14 @@ public class BlockTrapDoor extends Block {
         }
     }
 
-    public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {}
+    public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {
+    }
 
     public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer, int i3, float f0, float f1, float f2) {
         if (this.cU == Material.f) {
             return true;
-        } else {
+        }
+        else {
             int i4 = world.h(i0, i1, i2);
 
             world.b(i0, i1, i2, i4 ^ 4, 2);
@@ -90,7 +93,7 @@ public class BlockTrapDoor extends Block {
 
         if (flag1 != flag0) {
             world.b(i0, i1, i2, i3 ^ 4, 2);
-            world.a((EntityPlayer) null, 1003, i0, i1, i2, 0);
+            world.a((EntityPlayer)null, 1003, i0, i1, i2, 0);
         }
     }
 
@@ -163,9 +166,11 @@ public class BlockTrapDoor extends Block {
     public boolean c(World world, int i0, int i1, int i2, int i3) {
         if (i3 == 0) {
             return false;
-        } else if (i3 == 1) {
+        }
+        else if (i3 == 1) {
             return false;
-        } else {
+        }
+        else {
             if (i3 == 2) {
                 ++i2;
             }
@@ -193,7 +198,8 @@ public class BlockTrapDoor extends Block {
     private static boolean g(int i0) {
         if (i0 <= 0) {
             return false;
-        } else {
+        }
+        else {
             Block block = Block.s[i0];
 
             return block != null && block.cU.k() && block.b()

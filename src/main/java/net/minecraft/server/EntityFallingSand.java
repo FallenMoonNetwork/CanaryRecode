@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.CanaryFallingBlock;
 import net.canarymod.hook.entity.DamageHook;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class EntityFallingSand extends Entity {
 
@@ -54,16 +55,18 @@ public class EntityFallingSand extends Entity {
         return false;
     }
 
-    protected void a() {}
+    protected void a() {
+    }
 
-    public boolean K() {
+    public boolean L() {
         return !this.M;
     }
 
     public void l_() {
         if (this.a == 0) {
-            this.w();
-        } else {
+            this.x();
+        }
+        else {
             this.r = this.u;
             this.s = this.v;
             this.t = this.w;
@@ -80,7 +83,7 @@ public class EntityFallingSand extends Entity {
 
                 if (this.c == 1) {
                     if (this.q.a(i0, i1, i2) != this.a) {
-                        this.w();
+                        this.x();
                         return;
                     }
 
@@ -92,10 +95,10 @@ public class EntityFallingSand extends Entity {
                     this.z *= 0.699999988079071D;
                     this.y *= -0.5D;
                     if (this.q.a(i0, i1, i2) != Block.ah.cF) {
-                        this.w();
-                        if (!this.f && this.q.a(this.a, i0, i1, i2, true, 1, (Entity) null, (ItemStack) null) && !BlockSand.a_(this.q, i0, i1 - 1, i2) && this.q.f(i0, i1, i2, this.a, this.b, 3)) {
+                        this.x();
+                        if (!this.f && this.q.a(this.a, i0, i1, i2, true, 1, (Entity)null, (ItemStack)null) && !BlockSand.a_(this.q, i0, i1 - 1, i2) && this.q.f(i0, i1, i2, this.a, this.b, 3)) {
                             if (Block.s[this.a] instanceof BlockSand) {
-                                ((BlockSand) Block.s[this.a]).a_(this.q, i0, i1, i2, this.b);
+                                ((BlockSand)Block.s[this.a]).a_(this.q, i0, i1, i2, this.b);
                             }
 
                             if (this.e != null && Block.s[this.a] instanceof ITileEntityProvider) {
@@ -108,7 +111,7 @@ public class EntityFallingSand extends Entity {
                                     Iterator iterator = this.e.c().iterator();
 
                                     while (iterator.hasNext()) {
-                                        NBTBase nbtbase = (NBTBase) iterator.next();
+                                        NBTBase nbtbase = (NBTBase)iterator.next();
 
                                         if (!nbtbase.e().equals("x") && !nbtbase.e().equals("y") && !nbtbase.e().equals("z")) {
                                             nbttagcompound.a(nbtbase.e(), nbtbase.b());
@@ -119,16 +122,18 @@ public class EntityFallingSand extends Entity {
                                     tileentity.e();
                                 }
                             }
-                        } else if (this.d && !this.f) {
+                        }
+                        else if (this.d && !this.f) {
                             this.a(new ItemStack(this.a, 1, Block.s[this.a].a(this.b)), 0.0F);
                         }
                     }
-                } else if (this.c > 100 && !this.q.I && (i1 < 1 || i1 > 256) || this.c > 600) {
+                }
+                else if (this.c > 100 && !this.q.I && (i1 < 1 || i1 > 256) || this.c > 600) {
                     if (this.d) {
                         this.a(new ItemStack(this.a, 1, Block.s[this.a].a(this.b)), 0.0F);
                     }
 
-                    this.w();
+                    this.x();
                 }
             }
         }
@@ -139,28 +144,29 @@ public class EntityFallingSand extends Entity {
             int i0 = MathHelper.f(f0 - 1.0F);
 
             if (i0 > 0) {
-                ArrayList arraylist = new ArrayList(this.q.b((Entity) this, this.E));
+                ArrayList arraylist = new ArrayList(this.q.b((Entity)this, this.E));
                 DamageSource damagesource = this.a == Block.cm.cF ? DamageSource.m : DamageSource.n;
                 Iterator iterator = arraylist.iterator();
 
                 while (iterator.hasNext()) {
-                    Entity entity = (Entity) iterator.next();
+                    Entity entity = (Entity)iterator.next();
                     // CanaryMod: DamageHook (FallingBlock/Anvil)
-                    DamageHook hook = (DamageHook) new DamageHook(null, entity.getCanaryEntity(), new CanaryDamageSource(damagesource), Math.min(MathHelper.d((float) i0 * this.i), this.h)).call();
+                    DamageHook hook = (DamageHook)new DamageHook(null, entity.getCanaryEntity(), new CanaryDamageSource(damagesource), Math.min(MathHelper.d((float)i0 * this.i), this.h)).call();
                     if (!hook.isCanceled()) {
-                        entity.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), Math.min(hook.getDamageDealt(), this.h));
+                        entity.a((((CanaryDamageSource)hook.getDamageSource()).getHandle()), Math.min(hook.getDamageDealt(), this.h));
                     }
                     //
                 }
 
-                if (this.a == Block.cm.cF && (double) this.ab.nextFloat() < 0.05000000074505806D + (double) i0 * 0.05D) {
+                if (this.a == Block.cm.cF && (double)this.ab.nextFloat() < 0.05000000074505806D + (double)i0 * 0.05D) {
                     int i1 = this.b >> 2;
                     int i2 = this.b & 3;
 
                     ++i1;
                     if (i1 > 2) {
                         this.f = true;
-                    } else {
+                    }
+                    else {
                         this.b = i2 | i1 << 2;
                     }
                 }
@@ -169,10 +175,10 @@ public class EntityFallingSand extends Entity {
     }
 
     protected void b(NBTTagCompound nbttagcompound) {
-        nbttagcompound.a("Tile", (byte) this.a);
+        nbttagcompound.a("Tile", (byte)this.a);
         nbttagcompound.a("TileID", this.a);
-        nbttagcompound.a("Data", (byte) this.b);
-        nbttagcompound.a("Time", (byte) this.c);
+        nbttagcompound.a("Data", (byte)this.b);
+        nbttagcompound.a("Time", (byte)this.c);
         nbttagcompound.a("DropItem", this.d);
         nbttagcompound.a("HurtEntities", this.g);
         nbttagcompound.a("FallHurtAmount", this.i);
@@ -185,7 +191,8 @@ public class EntityFallingSand extends Entity {
     protected void a(NBTTagCompound nbttagcompound) {
         if (nbttagcompound.b("TileID")) {
             this.a = nbttagcompound.e("TileID");
-        } else {
+        }
+        else {
             this.a = nbttagcompound.c("Tile") & 255;
         }
 
@@ -195,7 +202,8 @@ public class EntityFallingSand extends Entity {
             this.g = nbttagcompound.n("HurtEntities");
             this.i = nbttagcompound.g("FallHurtAmount");
             this.h = nbttagcompound.e("FallHurtMax");
-        } else if (this.a == Block.cm.cF) {
+        }
+        else if (this.a == Block.cm.cF) {
             this.g = true;
         }
 

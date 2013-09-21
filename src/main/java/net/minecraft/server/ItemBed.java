@@ -15,17 +15,19 @@ public class ItemBed extends Item {
     public boolean a(ItemStack itemstack, EntityPlayer entityplayer, World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2) {
         if (world.I) {
             return true;
-        } else if (i3 != 1) {
+        }
+        else if (i3 != 1) {
             return false;
-        } else {
+        }
+        else {
             // CanaryMod: ItemUseHook
-            CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2); // Store Clicked
+            CanaryBlock clicked = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2); // Store Clicked
 
-            clicked.setFaceClicked(BlockFace.fromByte((byte) i3)); // Set face clicked
+            clicked.setFaceClicked(BlockFace.fromByte((byte)i3)); // Set face clicked
 
             ++i1;
-            BlockBed blockbed = (BlockBed) Block.X;
-            int i4 = MathHelper.c((double) (entityplayer.A * 4.0F / 360.0F) + 0.5D) & 3;
+            BlockBed blockbed = (BlockBed)Block.X;
+            int i4 = MathHelper.c((double)(entityplayer.A * 4.0F / 360.0F) + 0.5D) & 3;
             byte b0 = 0;
             byte b1 = 0;
 
@@ -47,9 +49,9 @@ public class ItemBed extends Item {
 
             if (entityplayer.a(i0, i1, i2, i3, itemstack) && entityplayer.a(i0 + b0, i1, i2 + b1, i3, itemstack)) {
                 if (world.c(i0, i1, i2) && world.c(i0 + b0, i1, i2 + b1) && world.w(i0, i1 - 1, i2) && world.w(i0 + b0, i1 - 1, i2 + b1)) {
-                    CanaryBlock placed = new CanaryBlock((short) ItemType.Bed.getId(), (short) 0, i0, i1, i2, world.getCanaryWorld());
+                    CanaryBlock placed = new CanaryBlock((short)ItemType.Bed.getId(), (short)0, i0, i1, i2, world.getCanaryWorld());
                     // Create Hook and call it
-                    BlockPlaceHook hook = (BlockPlaceHook) new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed).call();
+                    BlockPlaceHook hook = (BlockPlaceHook)new BlockPlaceHook(((EntityPlayerMP)entityplayer).getPlayer(), clicked, placed).call();
                     if (hook.isCanceled()) {
                         return false;
                     }
@@ -61,10 +63,12 @@ public class ItemBed extends Item {
 
                     --itemstack.b;
                     return true;
-                } else {
+                }
+                else {
                     return false;
                 }
-            } else {
+            }
+            else {
                 return false;
             }
         }

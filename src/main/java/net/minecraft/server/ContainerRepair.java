@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.Map;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.world.blocks.CanaryAnvil;
 import net.canarymod.hook.player.AnvilUseHook;
+
+import java.util.Iterator;
+import java.util.Map;
 
 public class ContainerRepair extends Container {
 
@@ -27,7 +28,7 @@ public class ContainerRepair extends Container {
         this.n = entityplayer;
         this.a(new Slot(this.g, 0, 27, 47));
         this.a(new Slot(this.g, 1, 76, 47));
-        this.a((Slot) (new ContainerRepairINNER2(this, this.f, 2, 134, 47, world, i0, i1, i2)));
+        this.a((Slot)(new ContainerRepairINNER2(this, this.f, 2, 134, 47, world, i0, i1, i2)));
 
         int i3;
 
@@ -60,9 +61,10 @@ public class ContainerRepair extends Container {
         int i1 = 0;
 
         if (itemstack == null) {
-            this.f.a(0, (ItemStack) null);
+            this.f.a(0, (ItemStack)null);
             this.a = 0;
-        } else {
+        }
+        else {
             ItemStack itemstack1 = itemstack.m();
             ItemStack itemstack2 = this.g.a(1);
             Map map = EnchantmentHelper.a(itemstack1);
@@ -83,7 +85,7 @@ public class ContainerRepair extends Container {
                 if (itemstack1.g() && Item.g[itemstack1.d].a(itemstack, itemstack2)) {
                     i3 = Math.min(itemstack1.j(), itemstack1.l() / 4);
                     if (i3 <= 0) {
-                        this.f.a(0, (ItemStack) null);
+                        this.f.a(0, (ItemStack)null);
                         this.a = 0;
                         return;
                     }
@@ -96,9 +98,10 @@ public class ContainerRepair extends Container {
                     }
 
                     this.l = i4;
-                } else {
+                }
+                else {
                     if (!flag0 && (itemstack1.d != itemstack2.d || !itemstack1.g())) {
-                        this.f.a(0, (ItemStack) null);
+                        this.f.a(0, (ItemStack)null);
                         this.a = 0;
                         return;
                     }
@@ -125,16 +128,17 @@ public class ContainerRepair extends Container {
                     iterator = map1.keySet().iterator();
 
                     while (iterator.hasNext()) {
-                        i5 = ((Integer) iterator.next()).intValue();
+                        i5 = ((Integer)iterator.next()).intValue();
                         enchantment = Enchantment.b[i5];
-                        i6 = map.containsKey(Integer.valueOf(i5)) ? ((Integer) map.get(Integer.valueOf(i5))).intValue() : 0;
-                        i7 = ((Integer) map1.get(Integer.valueOf(i5))).intValue();
+                        i6 = map.containsKey(Integer.valueOf(i5)) ? ((Integer)map.get(Integer.valueOf(i5))).intValue() : 0;
+                        i7 = ((Integer)map1.get(Integer.valueOf(i5))).intValue();
                         int i9;
 
                         if (i6 == i7) {
                             ++i7;
                             i9 = i7;
-                        } else {
+                        }
+                        else {
                             i9 = Math.max(i7, i6);
                         }
 
@@ -149,7 +153,7 @@ public class ContainerRepair extends Container {
                         Iterator iterator1 = map.keySet().iterator();
 
                         while (iterator1.hasNext()) {
-                            int i11 = ((Integer) iterator1.next()).intValue();
+                            int i11 = ((Integer)iterator1.next()).intValue();
 
                             if (i11 != i5 && !enchantment.a(Enchantment.b[i11])) {
                                 flag1 = false;
@@ -206,7 +210,8 @@ public class ContainerRepair extends Container {
                     i0 += i1;
                     itemstack1.t();
                 }
-            } else if (!this.m.equals(itemstack.s())) {
+            }
+            else if (!this.m.equals(itemstack.s())) {
                 i1 = itemstack.g() ? 7 : itemstack.b * 5;
                 i0 += i1;
                 if (itemstack.u()) {
@@ -219,9 +224,9 @@ public class ContainerRepair extends Container {
             i3 = 0;
 
             for (iterator = map.keySet().iterator(); iterator.hasNext(); i2 += i3 + i6 * i7) {
-                i5 = ((Integer) iterator.next()).intValue();
+                i5 = ((Integer)iterator.next()).intValue();
                 enchantment = Enchantment.b[i5];
-                i6 = ((Integer) map.get(Integer.valueOf(i5))).intValue();
+                i6 = ((Integer)map.get(Integer.valueOf(i5))).intValue();
                 i7 = 0;
                 ++i3;
                 switch (enchantment.c()) {
@@ -322,12 +327,12 @@ public class ContainerRepair extends Container {
             return true;
         }
         //
-        return this.h.a(this.i, this.j, this.k) != Block.cm.cF ? false : entityplayer.e((double) this.i + 0.5D, (double) this.j + 0.5D, (double) this.k + 0.5D) <= 64.0D;
+        return this.h.a(this.i, this.j, this.k) != Block.cm.cF ? false : entityplayer.e((double)this.i + 0.5D, (double)this.j + 0.5D, (double)this.k + 0.5D) <= 64.0D;
     }
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
-        Slot slot = (Slot) this.c.get(i0);
+        Slot slot = (Slot)this.c.get(i0);
 
         if (slot != null && slot.e()) {
             ItemStack itemstack1 = slot.d();
@@ -339,17 +344,20 @@ public class ContainerRepair extends Container {
                 }
 
                 slot.a(itemstack1, itemstack);
-            } else if (i0 != 0 && i0 != 1) {
+            }
+            else if (i0 != 0 && i0 != 1) {
                 if (i0 >= 3 && i0 < 39 && !this.a(itemstack1, 0, 2, false)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 3, 39, false)) {
+            }
+            else if (!this.a(itemstack1, 3, 39, false)) {
                 return null;
             }
 
             if (itemstack1.b == 0) {
-                slot.c((ItemStack) null);
-            } else {
+                slot.c((ItemStack)null);
+            }
+            else {
                 slot.f();
             }
 
@@ -370,7 +378,8 @@ public class ContainerRepair extends Container {
 
             if (org.apache.commons.lang3.StringUtils.isBlank(s0)) {
                 itemstack.t();
-            } else {
+            }
+            else {
                 itemstack.c(this.m);
             }
         }
@@ -392,7 +401,7 @@ public class ContainerRepair extends Container {
     }
 
     public Player getPlayer() {
-        return ((EntityPlayerMP) this.n).getPlayer();
+        return ((EntityPlayerMP)this.n).getPlayer();
     }
     // CanaryMod end
 }

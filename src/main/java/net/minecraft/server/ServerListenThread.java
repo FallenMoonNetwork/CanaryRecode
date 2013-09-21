@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -8,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import net.canarymod.Canary;
 
 public class ServerListenThread extends Thread {
 
@@ -34,13 +35,14 @@ public class ServerListenThread extends Thread {
 
         synchronized (this.a) {
             for (int i0 = 0; i0 < this.a.size(); ++i0) {
-                NetLoginHandler netloginhandler = (NetLoginHandler) this.a.get(i0);
+                NetLoginHandler netloginhandler = (NetLoginHandler)this.a.get(i0);
 
                 try {
                     netloginhandler.d();
-                } catch (Exception exception) {
+                }
+                catch (Exception exception) {
                     netloginhandler.a("Internal server error");
-                    this.e.d().an().b("Failed to handle packet for " + netloginhandler.f() + ": " + exception, (Throwable) exception);
+                    this.e.d().an().b("Failed to handle packet for " + netloginhandler.f() + ": " + exception, (Throwable)exception);
                 }
 
                 if (netloginhandler.b) {
@@ -59,7 +61,8 @@ public class ServerListenThread extends Thread {
                 NetLoginHandler netloginhandler = new NetLoginHandler(this.e.d(), socket, "Connection #" + this.c++);
 
                 this.a(netloginhandler);
-            } catch (IOException ioexception) {
+            }
+            catch (IOException ioexception) {
                 // ioexception.printStackTrace(); // CanaryMod: Don't stacktrace
                 Canary.logWarning("Server Listening Thread inturrupted");
             }
@@ -71,7 +74,8 @@ public class ServerListenThread extends Thread {
     private void a(NetLoginHandler netloginhandler) {
         if (netloginhandler == null) {
             throw new IllegalArgumentException("Got null pendingconnection!");
-        } else {
+        }
+        else {
             List list = this.a;
 
             synchronized (this.a) {
@@ -93,7 +97,8 @@ public class ServerListenThread extends Thread {
     public void b() {
         try {
             this.d.close();
-        } catch (Throwable throwable) {
+        }
+        catch (Throwable throwable) {
             ;
         }
     }

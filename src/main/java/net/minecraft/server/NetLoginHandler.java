@@ -1,5 +1,8 @@
 package net.minecraft.server;
 
+import net.canarymod.hook.system.ServerListPingHook;
+
+import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.InetAddress;
@@ -10,8 +13,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import javax.crypto.SecretKey;
-import net.canarymod.hook.system.ServerListPingHook;
 
 public class NetLoginHandler extends NetHandler {
 
@@ -40,7 +41,8 @@ public class NetLoginHandler extends NetHandler {
 
         if (this.f++ == 600) {
             this.a("Took too long to log in");
-        } else {
+        }
+        else {
             this.a.b();
         }
     }
@@ -48,38 +50,41 @@ public class NetLoginHandler extends NetHandler {
     public void a(String s0) {
         try {
             this.e.an().a("Disconnecting " + this.f() + ": " + s0);
-            this.a.a((Packet) (new Packet255KickDisconnect(s0)));
+            this.a.a((Packet)(new Packet255KickDisconnect(s0)));
             this.a.d();
             this.b = true;
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
         }
     }
 
     public void a(Packet2ClientProtocol packet2clientprotocol) {
-        // CanaryMod: fix security issue
         if (this.g != null) {
-            this.a("I'm sorry... I can't let you do that, Dave");
-            return;
+            this.a("I'm sorry... I can't let you do that, Dave"); // CanaryMod: Better message
         }
-        //
-        this.g = packet2clientprotocol.f();
-        if (!this.g.equals(StringUtils.a(this.g))) {
-            this.a("Invalid username!");
-        } else {
-            PublicKey publickey = this.e.H().getPublic();
+        else {
+            this.g = packet2clientprotocol.f();
+            if (!this.g.equals(StringUtils.a(this.g))) {
+                this.a("Invalid username!");
+            }
+            else {
+                PublicKey publickey = this.e.H().getPublic();
 
-            if (packet2clientprotocol.d() != 74) {
-                if (packet2clientprotocol.d() > 74) {
-                    this.a("Outdated server!");
-                } else {
-                    this.a("Outdated client!");
+                if (packet2clientprotocol.d() != 78) {
+                    if (packet2clientprotocol.d() > 78) {
+                        this.a("Outdated server!");
+                    }
+                    else {
+                        this.a("Outdated client!");
+                    }
                 }
-            } else {
-                this.i = this.e.W() ? Long.toString(c.nextLong(), 16) : "-";
-                this.d = new byte[4];
-                c.nextBytes(this.d);
-                this.a.a((Packet) (new Packet253ServerAuthData(this.i, publickey, this.d)));
+                else {
+                    this.i = this.e.W() ? Long.toString(c.nextLong(), 16) : "-";
+                    this.d = new byte[4];
+                    c.nextBytes(this.d);
+                    this.a.a((Packet)(new Packet253ServerAuthData(this.i, publickey, this.d)));
+                }
             }
         }
     }
@@ -92,7 +97,7 @@ public class NetLoginHandler extends NetHandler {
             this.a("Invalid client reply");
         }
 
-        this.a.a((Packet) (new Packet252SharedKey()));
+        this.a.a((Packet)(new Packet252SharedKey()));
     }
 
     public void a(Packet205ClientCommand packet205clientcommand) {
@@ -105,24 +110,27 @@ public class NetLoginHandler extends NetHandler {
             this.j = true;
             if (this.e.W()) {
                 (new ThreadLoginVerifier(this)).start();
-            } else {
+            }
+            else {
                 this.h = true;
             }
         }
     }
 
-    public void a(Packet1Login packet1login) {}
+    public void a(Packet1Login packet1login) {
+    }
 
     public void e() {
         String s0 = this.e.af().a(this.a.c(), this.g);
 
         if (s0 != null) {
             this.a(s0);
-        } else {
+        }
+        else {
             EntityPlayerMP entityplayermp = this.e.af().a(this.g);
 
             if (entityplayermp != null) {
-                this.e.af().a((INetworkManager) this.a, entityplayermp);
+                this.e.af().a((INetworkManager)this.a, entityplayermp);
             }
         }
 
@@ -141,13 +149,14 @@ public class NetLoginHandler extends NetHandler {
 
             if (packet254serverping.d()) {
                 s0 = this.e.ac() + "\u00a7" + serverconfigurationmanager.k() + "\u00a7" + serverconfigurationmanager.l();
-            } else {
+            }
+            else {
                 // CanaryMod: ServerListPingHook
-                ServerListPingHook hook = (ServerListPingHook) new ServerListPingHook(this.e.ac(), Integer.valueOf(serverconfigurationmanager.k()), Integer.valueOf(serverconfigurationmanager.l())).call();
+                ServerListPingHook hook = (ServerListPingHook)new ServerListPingHook(this.e.ac(), Integer.valueOf(serverconfigurationmanager.k()), Integer.valueOf(serverconfigurationmanager.l())).call();
                 if (hook.isCanceled()) {
                     return;
                 }
-                List list = Arrays.asList(new Serializable[]{ Integer.valueOf(1), Integer.valueOf(74), this.e.z(), hook.getMotd(), hook.getCurrentPlayers(), hook.getMaxPlayers() });
+                List list = Arrays.asList(new Serializable[]{Integer.valueOf(1), Integer.valueOf(78), this.e.z(), hook.getMotd(), hook.getCurrentPlayers(), hook.getMaxPlayers()});
                 //
                 Object object;
 
@@ -155,7 +164,8 @@ public class NetLoginHandler extends NetHandler {
                     object = iterator.next();
                     if (s0 == null) {
                         s0 = "\u00a7";
-                    } else {
+                    }
+                    else {
                         s0 = s0 + "\u0000";
                     }
                 }
@@ -167,14 +177,15 @@ public class NetLoginHandler extends NetHandler {
                 inetaddress = this.a.g().getInetAddress();
             }
 
-            this.a.a((Packet) (new Packet255KickDisconnect(s0)));
+            this.a.a((Packet)(new Packet255KickDisconnect(s0)));
             this.a.d();
             if (inetaddress != null && this.e.ag() instanceof DedicatedServerListenThread) {
-                ((DedicatedServerListenThread) this.e.ag()).a(inetaddress);
+                ((DedicatedServerListenThread)this.e.ag()).a(inetaddress);
             }
 
             this.b = true;
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
         }
     }

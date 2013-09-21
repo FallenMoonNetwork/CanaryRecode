@@ -1,15 +1,13 @@
 package net.minecraft.server;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.text.DecimalFormat;
-import java.util.Collection;
-import javax.swing.JComponent;
-import javax.swing.Timer;
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.World;
+
+import javax.swing.*;
+import java.awt.*;
+import java.text.DecimalFormat;
+import java.util.Collection;
 
 public class StatsComponent extends JComponent {
 
@@ -35,15 +33,15 @@ public class StatsComponent extends JComponent {
         this.d[0] = "Memory use: " + i0 / 1024L / 1024L + " mb (" + Runtime.getRuntime().freeMemory() * 100L / Runtime.getRuntime().maxMemory() + "% free)";
         this.d[1] = "Threads: " + TcpConnection.a.get() + " + " + TcpConnection.b.get();
         this.d[2] = "Avg tick: " + a.format(this.a(this.e.j) * 1.0E-6D) + " ms";
-        this.d[3] = "Avg sent: " + (int) this.a(this.e.f) + ", Avg size: " + (int) this.a(this.e.g);
-        this.d[4] = "Avg rec: " + (int) this.a(this.e.h) + ", Avg size: " + (int) this.a(this.e.i);
+        this.d[3] = "Avg sent: " + (int)this.a(this.e.f) + ", Avg size: " + (int)this.a(this.e.g);
+        this.d[4] = "Avg rec: " + (int)this.a(this.e.h) + ", Avg size: " + (int)this.a(this.e.i);
 
         // CanaryMod: Multiworld
         Collection<World> worlds = Canary.getServer().getWorldManager().getAllWorlds();
         if (worlds != null) {
             int i = 0;
             for (World world : worlds) {
-                WorldServer level = (WorldServer) (((CanaryWorld) world).getHandle());
+                WorldServer level = (WorldServer)(((CanaryWorld)world).getHandle());
                 this.d[5 + i] = "World " + world.getName() + " lvl " + i + " tick " + a.format(world.getNanoTick(i) * 1.0E-6D) + " ms";
                 if (world != null && level.b != null) {
                     this.d[5 + i] += ", " + level.b.d();
@@ -55,7 +53,7 @@ public class StatsComponent extends JComponent {
 
         double d0 = 12500.0D;
 
-        this.b[this.c++ & 255] = (int) (this.a(this.e.g) * 100.0D / 12500.0D);
+        this.b[this.c++ & 255] = (int)(this.a(this.e.g) * 100.0D / 12500.0D);
         this.repaint();
     }
 
@@ -66,7 +64,7 @@ public class StatsComponent extends JComponent {
             i0 += along[i1];
         }
 
-        return (double) i0 / (double) along.length;
+        return (double)i0 / (double)along.length;
     }
 
     public void paint(Graphics graphics) {

@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
+import net.canarymod.api.world.CanaryBiome;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import net.canarymod.api.world.CanaryBiome;
 
 public abstract class BiomeGenBase {
 
@@ -57,8 +58,8 @@ public abstract class BiomeGenBase {
     private CanaryBiome biome = new CanaryBiome(this); //
 
     protected BiomeGenBase(int i0) {
-        this.A = (byte) Block.z.cF;
-        this.B = (byte) Block.A.cF;
+        this.A = (byte)Block.z.cF;
+        this.B = (byte)Block.A.cF;
         this.C = 5169201;
         this.D = 0.1F;
         this.E = 0.3F;
@@ -98,7 +99,8 @@ public abstract class BiomeGenBase {
     private BiomeGenBase a(float f0, float f1) {
         if (f0 > 0.1F && f0 < 0.2F) {
             throw new IllegalArgumentException("Please avoid temperatures in the range 0.1 - 0.2 because of snow");
-        } else {
+        }
+        else {
             this.F = f0;
             this.G = f1;
             return this;
@@ -117,7 +119,7 @@ public abstract class BiomeGenBase {
     }
 
     public WorldGenerator a(Random random) {
-        return (WorldGenerator) (random.nextInt(10) == 0 ? this.P : this.O);
+        return (WorldGenerator)(random.nextInt(10) == 0 ? this.P : this.O);
     }
 
     public WorldGenerator b(Random random) {
@@ -165,11 +167,11 @@ public abstract class BiomeGenBase {
     }
 
     public final int g() {
-        return (int) (this.G * 65536.0F);
+        return (int)(this.G * 65536.0F);
     }
 
     public final int h() {
-        return (int) (this.F * 65536.0F);
+        return (int)(this.F * 65536.0F);
     }
 
     public final float j() {

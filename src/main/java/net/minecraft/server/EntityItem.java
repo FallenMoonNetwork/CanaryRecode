@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
 import net.canarymod.api.entity.CanaryEntityItem;
 import net.canarymod.hook.entity.EntityDespawnHook;
 import net.canarymod.hook.entity.ItemTouchGroundHook;
+
+import java.util.Iterator;
 
 public class EntityItem extends Entity {
 
@@ -15,14 +16,14 @@ public class EntityItem extends Entity {
     public EntityItem(World world, double d0, double d1, double d2) {
         super(world);
         this.d = 5;
-        this.c = (float) (Math.random() * 3.141592653589793D * 2.0D);
+        this.c = (float)(Math.random() * 3.141592653589793D * 2.0D);
         this.a(0.25F, 0.25F);
         this.N = this.P / 2.0F;
         this.b(d0, d1, d2);
-        this.A = (float) (Math.random() * 360.0D);
-        this.x = (double) ((float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D));
+        this.A = (float)(Math.random() * 360.0D);
+        this.x = (double)((float)(Math.random() * 0.20000000298023224D - 0.10000000149011612D));
         this.y = 0.20000000298023224D;
-        this.z = (double) ((float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D));
+        this.z = (double)((float)(Math.random() * 0.20000000298023224D - 0.10000000149011612D));
         this.entity = new CanaryEntityItem(this); // CanaryMod: Wrap Entity
     }
 
@@ -38,14 +39,14 @@ public class EntityItem extends Entity {
     public EntityItem(World world) {
         super(world);
         this.d = 5;
-        this.c = (float) (Math.random() * 3.141592653589793D * 2.0D);
+        this.c = (float)(Math.random() * 3.141592653589793D * 2.0D);
         this.a(0.25F, 0.25F);
         this.N = this.P / 2.0F;
         this.entity = new CanaryEntityItem(this); // CanaryMod: Wrap Entity
     }
 
     protected void a() {
-        this.u().a(10, 5);
+        this.v().a(10, 5);
     }
 
     public void l_() {
@@ -62,13 +63,13 @@ public class EntityItem extends Entity {
         this.y -= 0.03999999910593033D;
         this.Z = this.i(this.u, (this.E.b + this.E.e) / 2.0D, this.w);
         this.d(this.x, this.y, this.z);
-        boolean flag0 = (int) this.r != (int) this.u || (int) this.s != (int) this.v || (int) this.t != (int) this.w;
+        boolean flag0 = (int)this.r != (int)this.u || (int)this.s != (int)this.v || (int)this.t != (int)this.w;
 
         if (flag0 || this.ac % 25 == 0) {
             if (this.q.g(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w)) == Material.i) {
                 this.y = 0.20000000298023224D;
-                this.x = (double) ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F);
-                this.z = (double) ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F);
+                this.x = (double)((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F);
+                this.z = (double)((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F);
                 this.a("random.fizz", 0.4F, 2.0F + this.ab.nextFloat() * 0.4F);
             }
 
@@ -90,17 +91,17 @@ public class EntityItem extends Entity {
             // CanaryMod: ItemTouchGround
             // It does touch the ground now, but didn't in last tick
             if (!tmpTouch) {
-                ItemTouchGroundHook hook = (ItemTouchGroundHook) new ItemTouchGroundHook((net.canarymod.api.entity.EntityItem) getCanaryEntity()).call();
+                ItemTouchGroundHook hook = (ItemTouchGroundHook)new ItemTouchGroundHook((net.canarymod.api.entity.EntityItem)getCanaryEntity()).call();
                 if (hook.isCanceled()) {
-                    this.w(); // kill the item
+                    this.x(); // kill the item
                 }
             }
             //
         }
 
-        this.x *= (double) f0;
+        this.x *= (double)f0;
         this.y *= 0.9800000190734863D;
-        this.z *= (double) f0;
+        this.z *= (double)f0;
         if (this.F) {
             this.y *= -0.5D;
         }
@@ -108,10 +109,11 @@ public class EntityItem extends Entity {
         ++this.a;
         if (!this.q.I && this.a >= 6000) {
             // CanaryMod: EntityDespawn
-            EntityDespawnHook hook = (EntityDespawnHook) new EntityDespawnHook(getCanaryEntity()).call();
+            EntityDespawnHook hook = (EntityDespawnHook)new EntityDespawnHook(getCanaryEntity()).call();
             if (!hook.isCanceled()) {
-                this.w();
-            } else {
+                this.x();
+            }
+            else {
                 this.a = 0; // Reset Age
             }
             //
@@ -122,7 +124,7 @@ public class EntityItem extends Entity {
         Iterator iterator = this.q.a(EntityItem.class, this.E.b(0.5D, 0.0D, 0.5D)).iterator();
 
         while (iterator.hasNext()) {
-            EntityItem entityitem = (EntityItem) iterator.next();
+            EntityItem entityitem = (EntityItem)iterator.next();
 
             this.a(entityitem);
         }
@@ -131,31 +133,39 @@ public class EntityItem extends Entity {
     public boolean a(EntityItem entityitem) {
         if (entityitem == this) {
             return false;
-        } else if (entityitem.S() && this.S()) {
+        }
+        else if (entityitem.T() && this.T()) {
             ItemStack itemstack = this.d();
             ItemStack itemstack1 = entityitem.d();
 
             if (itemstack1.b() != itemstack.b()) {
                 return false;
-            } else if (itemstack1.p() ^ itemstack.p()) {
+            }
+            else if (itemstack1.p() ^ itemstack.p()) {
                 return false;
-            } else if (itemstack1.p() && !itemstack1.q().equals(itemstack.q())) {
+            }
+            else if (itemstack1.p() && !itemstack1.q().equals(itemstack.q())) {
                 return false;
-            } else if (itemstack1.b().n() && itemstack1.k() != itemstack.k()) {
+            }
+            else if (itemstack1.b().n() && itemstack1.k() != itemstack.k()) {
                 return false;
-            } else if (itemstack1.b < itemstack.b) {
+            }
+            else if (itemstack1.b < itemstack.b) {
                 return entityitem.a(this);
-            } else if (itemstack1.b + itemstack.b > itemstack1.e()) {
+            }
+            else if (itemstack1.b + itemstack.b > itemstack1.e()) {
                 return false;
-            } else {
+            }
+            else {
                 itemstack1.b += itemstack.b;
                 entityitem.b = Math.max(entityitem.b, this.b);
                 entityitem.a = Math.min(entityitem.a, this.a);
                 entityitem.a(itemstack1);
-                this.w();
+                this.x();
                 return true;
             }
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -164,24 +174,26 @@ public class EntityItem extends Entity {
         this.a = 4800;
     }
 
-    public boolean H() {
-        return this.q.a(this.E, Material.h, (Entity) this);
+    public boolean I() {
+        return this.q.a(this.E, Material.h, (Entity)this);
     }
 
     protected void e(int i0) {
-        this.a(DamageSource.a, (float) i0);
+        this.a(DamageSource.a, (float)i0);
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.aq()) {
+        if (this.ar()) {
             return false;
-        } else if (this.d() != null && this.d().d == Item.bU.cv && damagesource.c()) {
+        }
+        else if (this.d() != null && this.d().d == Item.bU.cv && damagesource.c()) {
             return false;
-        } else {
-            this.J();
-            this.d = (int) ((float) this.d - f0);
+        }
+        else {
+            this.K();
+            this.d = (int)((float)this.d - f0);
             if (this.d <= 0) {
-                this.w();
+                this.x();
             }
 
             return false;
@@ -189,8 +201,8 @@ public class EntityItem extends Entity {
     }
 
     public void b(NBTTagCompound nbttagcompound) {
-        nbttagcompound.a("Health", (short) ((byte) this.d));
-        nbttagcompound.a("Age", (short) this.a);
+        nbttagcompound.a("Health", (short)((byte)this.d));
+        nbttagcompound.a("Age", (short)this.a);
         if (this.d() != null) {
             nbttagcompound.a("Item", this.d().b(new NBTTagCompound()));
         }
@@ -203,7 +215,7 @@ public class EntityItem extends Entity {
 
         this.a(ItemStack.a(nbttagcompound1));
         if (this.d() == null) {
-            this.w();
+            this.x();
         }
     }
 
@@ -215,36 +227,36 @@ public class EntityItem extends Entity {
             if (this.b == 0 && entityplayer.bn.canPickup(this)) { // CanaryMod: simulate pickup first
                 if (entityplayer.bn.a(itemstack)) {
                     if (itemstack.d == Block.O.cF) {
-                        entityplayer.a((StatBase) AchievementList.g);
+                        entityplayer.a((StatBase)AchievementList.g);
                     }
 
                     if (itemstack.d == Item.aH.cv) {
-                        entityplayer.a((StatBase) AchievementList.t);
+                        entityplayer.a((StatBase)AchievementList.t);
                     }
 
                     if (itemstack.d == Item.p.cv) {
-                        entityplayer.a((StatBase) AchievementList.w);
+                        entityplayer.a((StatBase)AchievementList.w);
                     }
 
                     if (itemstack.d == Item.bq.cv) {
-                        entityplayer.a((StatBase) AchievementList.z);
+                        entityplayer.a((StatBase)AchievementList.z);
                     }
 
                     this.a("random.pop", 0.2F, ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-                    entityplayer.a((Entity) this, i0);
+                    entityplayer.a((Entity)this, i0);
                     if (itemstack.b <= 0) {
-                        this.w();
+                        this.x();
                     }
                 }
             }
         }
     }
 
-    public String am() {
+    public String an() {
         return StatCollector.a("item." + this.d().a());
     }
 
-    public boolean ap() {
+    public boolean aq() {
         return false;
     }
 
@@ -256,7 +268,7 @@ public class EntityItem extends Entity {
     }
 
     public ItemStack d() {
-        ItemStack itemstack = this.u().f(10);
+        ItemStack itemstack = this.v().f(10);
 
         if (itemstack == null) {
             if (this.q != null) {
@@ -264,17 +276,18 @@ public class EntityItem extends Entity {
             }
 
             return new ItemStack(Block.y);
-        } else {
+        }
+        else {
             return itemstack;
         }
     }
 
     public void a(ItemStack itemstack) {
-        this.u().b(10, itemstack);
-        this.u().h(10);
+        this.v().b(10, itemstack);
+        this.v().h(10);
     }
 
     public CanaryEntityItem getEntityItem() {
-        return (CanaryEntityItem) entity;
+        return (CanaryEntityItem)entity;
     }
 }

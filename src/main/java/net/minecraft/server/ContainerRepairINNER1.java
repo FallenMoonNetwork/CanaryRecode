@@ -11,7 +11,7 @@ class ContainerRepairINNER1 extends InventoryBasic {
 
     public void e() {
         super.e();
-        this.a.a((IInventory) this);
+        this.a.a((IInventory)this);
     }
 
     public boolean b(int i0, ItemStack itemstack) {

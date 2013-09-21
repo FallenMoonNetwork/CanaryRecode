@@ -1,17 +1,17 @@
 package net.minecraft.server;
 
+import net.canarymod.api.world.CanaryChunkProviderServer;
+import net.canarymod.hook.world.ChunkCreatedHook;
+import net.canarymod.hook.world.ChunkCreationHook;
+import net.canarymod.hook.world.ChunkLoadedHook;
+import net.canarymod.hook.world.ChunkUnloadHook;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import net.canarymod.api.world.CanaryChunkProviderServer;
-import net.canarymod.hook.world.ChunkCreatedHook;
-import net.canarymod.hook.world.ChunkCreationHook;
-import net.canarymod.hook.world.ChunkLoadedHook;
-import net.canarymod.hook.world.ChunkUnloadHook;
 
 public class ChunkProviderServer implements IChunkProvider {
 
@@ -57,7 +57,8 @@ public class ChunkProviderServer implements IChunkProvider {
             if (i2 < -short1 || i2 > short1 || i3 < -short1 || i3 > short1) {
                 this.b.add(Long.valueOf(ChunkCoordIntPair.a(i0, i1)));
             }
-        } else {
+        }
+        else {
             this.b.add(Long.valueOf(ChunkCoordIntPair.a(i0, i1)));
         }
     }
@@ -66,7 +67,7 @@ public class ChunkProviderServer implements IChunkProvider {
         Iterator iterator = this.g.iterator();
 
         while (iterator.hasNext()) {
-            Chunk chunk = (Chunk) iterator.next();
+            Chunk chunk = (Chunk)iterator.next();
 
             this.b(chunk.g, chunk.h);
         }
@@ -76,13 +77,13 @@ public class ChunkProviderServer implements IChunkProvider {
         long i2 = ChunkCoordIntPair.a(i0, i1);
 
         this.b.remove(Long.valueOf(i2));
-        Chunk chunk = (Chunk) this.f.a(i2);
+        Chunk chunk = (Chunk)this.f.a(i2);
 
         if (chunk == null) {
             chunk = this.f(i0, i1);
             if (chunk == null) {
                 // CanaryMod: ChunkCreation
-                ChunkCreationHook hook = (ChunkCreationHook) new ChunkCreationHook(i0, i1, h.getCanaryWorld()).call();
+                ChunkCreationHook hook = (ChunkCreationHook)new ChunkCreationHook(i0, i1, h.getCanaryWorld()).call();
                 byte[] blocks = hook.getBlockData();
                 if (blocks != null) {
                     chunk = new Chunk(h, blocks, i0, i1);
@@ -95,14 +96,16 @@ public class ChunkProviderServer implements IChunkProvider {
                 //
                 else if (this.d == null) {
                     chunk = this.c;
-                } else {
+                }
+                else {
                     try {
                         chunk = this.d.d(i0, i1);
-                    } catch (Throwable throwable) {
+                    }
+                    catch (Throwable throwable) {
                         CrashReport crashreport = CrashReport.a(throwable, "Exception generating new chunk");
                         CrashReportCategory crashreportcategory = crashreport.a("Chunk to be generated");
 
-                        crashreportcategory.a("Location", String.format("%d,%d", new Object[]{ Integer.valueOf(i0), Integer.valueOf(i1) }));
+                        crashreportcategory.a("Location", String.format("%d,%d", new Object[]{Integer.valueOf(i0), Integer.valueOf(i1)}));
                         crashreportcategory.a("Position hash", Long.valueOf(i2));
                         crashreportcategory.a("Generator", this.d.e());
                         throw new ReportedException(crashreport);
@@ -132,7 +135,7 @@ public class ChunkProviderServer implements IChunkProvider {
     }
 
     public Chunk d(int i0, int i1) {
-        Chunk chunk = (Chunk) this.f.a(ChunkCoordIntPair.a(i0, i1));
+        Chunk chunk = (Chunk)this.f.a(ChunkCoordIntPair.a(i0, i1));
 
         return chunk == null ? (!this.h.y && !this.a ? this.c : this.c(i0, i1)) : chunk;
     }
@@ -140,7 +143,8 @@ public class ChunkProviderServer implements IChunkProvider {
     private Chunk f(int i0, int i1) {
         if (this.e == null) {
             return null;
-        } else {
+        }
+        else {
             try {
                 Chunk chunk = this.e.a(this.h, i0, i1);
 
@@ -152,7 +156,8 @@ public class ChunkProviderServer implements IChunkProvider {
                 }
 
                 return chunk;
-            } catch (Exception exception) {
+            }
+            catch (Exception exception) {
                 exception.printStackTrace();
                 return null;
             }
@@ -164,7 +169,8 @@ public class ChunkProviderServer implements IChunkProvider {
         if (this.e != null) {
             try {
                 this.e.b(this.h, chunk);
-            } catch (Exception exception) {
+            }
+            catch (Exception exception) {
                 exception.printStackTrace();
             }
         }
@@ -176,9 +182,11 @@ public class ChunkProviderServer implements IChunkProvider {
             try {
                 chunk.n = this.h.I();
                 this.e.a(this.h, chunk);
-            } catch (IOException ioexception) {
+            }
+            catch (IOException ioexception) {
                 ioexception.printStackTrace();
-            } catch (MinecraftException minecraftexception) {
+            }
+            catch (MinecraftException minecraftexception) {
                 minecraftexception.printStackTrace();
             }
         }
@@ -200,7 +208,7 @@ public class ChunkProviderServer implements IChunkProvider {
         int i0 = 0;
 
         for (int i1 = 0; i1 < this.g.size(); ++i1) {
-            Chunk chunk = (Chunk) this.g.get(i1);
+            Chunk chunk = (Chunk)this.g.get(i1);
 
             if (flag0) {
                 this.a(chunk);
@@ -229,12 +237,12 @@ public class ChunkProviderServer implements IChunkProvider {
         if (!this.h.c) {
             for (int i0 = 0; i0 < 100; ++i0) {
                 if (!this.b.isEmpty()) {
-                    Long olong = (Long) this.b.iterator().next();
-                    Chunk chunk = (Chunk) this.f.a(olong.longValue());
+                    Long olong = (Long)this.b.iterator().next();
+                    Chunk chunk = (Chunk)this.f.a(olong.longValue());
 
                     if (chunk != null) {
                         // CanaryMod: ChunkUnload
-                        ChunkUnloadHook hook = (ChunkUnloadHook) new ChunkUnloadHook(chunk.getCanaryChunk(), h.getCanaryWorld()).call();
+                        ChunkUnloadHook hook = (ChunkUnloadHook)new ChunkUnloadHook(chunk.getCanaryChunk(), h.getCanaryWorld()).call();
                         if (hook.isCanceled()) {
                             // TODO: Might need to return false instead ... unsure
                             return true;
@@ -277,5 +285,6 @@ public class ChunkProviderServer implements IChunkProvider {
         return this.f.a();
     }
 
-    public void e(int i0, int i1) {}
+    public void e(int i0, int i1) {
+    }
 }

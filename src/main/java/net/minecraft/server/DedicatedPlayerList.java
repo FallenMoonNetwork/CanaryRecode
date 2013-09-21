@@ -116,7 +116,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     }
 
     public DedicatedServer s() {
-        return (DedicatedServer) super.p();
+        return (DedicatedServer)super.p();
     }
 
     public MinecraftServer p() {

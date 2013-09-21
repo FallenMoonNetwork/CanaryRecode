@@ -1,5 +1,12 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+import net.canarymod.api.CanaryServer;
+import net.canarymod.config.Configuration;
+import net.canarymod.config.ServerConfiguration;
+import net.canarymod.config.WorldConfiguration;
+import net.canarymod.hook.system.ServerGuiStartHook;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -8,12 +15,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
-import net.canarymod.Canary;
-import net.canarymod.api.CanaryServer;
-import net.canarymod.config.Configuration;
-import net.canarymod.config.ServerConfiguration;
-import net.canarymod.config.WorldConfiguration;
-import net.canarymod.hook.system.ServerGuiStartHook;
 
 public class DedicatedServer extends MinecraftServer implements IServer {
 
@@ -49,7 +50,8 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         ServerConfiguration cfg = Configuration.getServerConfig();
         if (this.K()) {
             this.c("127.0.0.1");
-        } else {
+        }
+        else {
             this.d(cfg.isOnlineMode());
             this.c(cfg.getBindIp());
         }
@@ -72,9 +74,10 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
         try {
             this.s = new DedicatedServerListenThread(this, inetaddress, this.I());
-        } catch (IOException ioexception) {
+        }
+        catch (IOException ioexception) {
             this.an().b("**** FAILED TO BIND TO PORT!");
-            this.an().b("The exception was: {0}", new Object[]{ ioexception.toString() });
+            this.an().b("The exception was: {0}", new Object[]{ioexception.toString()});
             this.an().b("Perhaps a server is already running on that port?");
             return false;
         }
@@ -86,7 +89,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             this.an().b("To change this, set \"online-mode\" to \"true\" in the server.properties file.");
         }
 
-        this.a((ServerConfigurationManager) (new DedicatedPlayerList(this)));
+        this.a((ServerConfigurationManager)(new DedicatedPlayerList(this)));
         long i1 = System.nanoTime();
 
         if (this.L() == null) {
@@ -107,8 +110,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
                 if (i3 != 0L) {
                     i2 = i3;
                 }
-            } catch (NumberFormatException numberformatexception) {
-                i2 = (long) s0.hashCode();
+            }
+            catch (NumberFormatException numberformatexception) {
+                i2 = (long)s0.hashCode();
             }
         }
 
@@ -128,7 +132,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
         if (!MinecraftServer.isHeadless()) {
             // CanaryMod moved GUI start to after plugins enable
-            at();
+            au();
         }
 
         this.an().a("Preparing level \"" + this.L() + "\"");
@@ -138,7 +142,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.initWorld(this.L(), i2, worldtype, wt, s2);
         //
         long i4 = System.nanoTime() - i1;
-        String s3 = String.format("%.3fs", new Object[]{ Double.valueOf((double) i4 / 1.0E9D) });
+        String s3 = String.format("%.3fs", new Object[]{Double.valueOf((double)i4 / 1.0E9D)});
 
         this.an().a("Done (" + s3 + ")! For help, type \"help\" or \"?\"");
         if (cfg.isQueryEnabled()) {
@@ -173,11 +177,12 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     protected void a(CrashReport crashreport) {
         while (this.o()) {
-            this.ar();
+            this.as();
 
             try {
                 Thread.sleep(10L);
-            } catch (InterruptedException interruptedexception) {
+            }
+            catch (InterruptedException interruptedexception) {
                 interruptedexception.printStackTrace();
             }
         }
@@ -185,8 +190,8 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     public CrashReport b(CrashReport crashreport) {
         crashreport = super.b(crashreport);
-        crashreport.g().a("Is Modded", (Callable) (new CallableType(this)));
-        crashreport.g().a("Type", (Callable) (new CallableServerType(this)));
+        crashreport.g().a("Is Modded", (Callable)(new CallableType(this)));
+        crashreport.g().a("Type", (Callable)(new CallableServerType(this)));
         return crashreport;
     }
 
@@ -196,7 +201,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     public void t() { // CanaryMod: protected => public
         super.t();
-        this.ar();
+        this.as();
     }
 
     public boolean u() {
@@ -222,9 +227,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.l.add(new ServerCommand(s0, icommandsender));
     }
 
-    public void ar() {
+    public void as() {
         while (!this.l.isEmpty()) {
-            ServerCommand servercommand = (ServerCommand) this.l.remove(0);
+            ServerCommand servercommand = (ServerCommand)this.l.remove(0);
             // CanaryMod intercept command queue for our own commands
             if (!Canary.getServer().consoleCommand(servercommand.a)) {
                 this.G().a(servercommand.b, servercommand.a);
@@ -236,8 +241,8 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         return true;
     }
 
-    public DedicatedPlayerList as() {
-        return (DedicatedPlayerList) super.af();
+    public DedicatedPlayerList at() {
+        return (DedicatedPlayerList)super.af();
     }
 
     public NetworkListenThread ag() {
@@ -268,14 +273,15 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         throw new UnsupportedOperationException("Cannot finish this request. DdedicatedServer.b_() is deprecated");
     }
 
-    public void at() {
-        ServerGuiStartHook guiHook = (ServerGuiStartHook) new ServerGuiStartHook(MinecraftServerGui.preInit(this)).call(); // CanaryMod: PreInitialize the GUI without starting it
+    public void au() {
+        ServerGuiStartHook guiHook = (ServerGuiStartHook)new ServerGuiStartHook(MinecraftServerGui.preInit(this)).call(); // CanaryMod: PreInitialize the GUI without starting it
         if (guiHook.getGui() != null) {
-            ((CanaryServer) Canary.getServer()).setCurrentGUI(guiHook.getGui());
-        } else {
-            ((CanaryServer) Canary.getServer()).setCurrentGUI(MinecraftServerGui.a(this));
+            ((CanaryServer)Canary.getServer()).setCurrentGUI(guiHook.getGui());
         }
-        ((CanaryServer) Canary.getServer()).getCurrentGUI().start();
+        else {
+            ((CanaryServer)Canary.getServer()).setCurrentGUI(MinecraftServerGui.a(this));
+        }
+        ((CanaryServer)Canary.getServer()).getCurrentGUI().start();
         this.t = true;
         MinecraftServer.setHeadless(false);
     }
@@ -301,13 +307,16 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         WorldConfiguration cfg = Configuration.getWorldConfig(world.getCanaryWorld().getFqName());
         if (world.t.i != 0) {
             return false;
-            // } else if (this.as().i().isEmpty()) { // CanaryMod: Empty Ops list shouldn't break spawn protections...
+            // } else if (this.at().i().isEmpty()) { // CanaryMod: Empty Ops list shouldn't break spawn protections...
             // return false;
-        } else if (this.as().e(entityplayer.c_())) {
+        }
+        else if (this.at().e(entityplayer.c_())) {
             return false;
-        } else if (cfg.getSpawnProtectionSize() <= 0) {
+        }
+        else if (cfg.getSpawnProtectionSize() <= 0) {
             return false;
-        } else {
+        }
+        else {
             ChunkCoordinates chunkcoordinates = world.K();
             int i3 = MathHelper.a(i0 - chunkcoordinates.a);
             int i4 = MathHelper.a(i2 - chunkcoordinates.c);
@@ -327,8 +336,14 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         return 4;
     }
 
+    public void e(int i0) { //TODO: cfg.setPlayerIdleTimeout(int);
+        super.e(i0);
+        //this.p.a("player-idle-timeout", Integer.valueOf(i0));
+        //this.a();
+    }
+
     public ServerConfigurationManager af() {
-        return this.as();
+        return this.at();
     }
 
     @Override
@@ -345,5 +360,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
                           * this.t = defWorld.getMaxBuildHeight();
                           * this.t = (this.t + 8) / 16 * 16;
                           * this.t = OMathHelper.a(this.t, 64, 256);
-                          * // TODO Update worlds (??) */}
+                          * // TODO Update worlds (??) */
+    }
 }

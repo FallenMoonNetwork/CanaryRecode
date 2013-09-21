@@ -47,12 +47,13 @@ public class SlotMerchantResult extends Slot {
     public void a(EntityPlayer entityplayer, ItemStack itemstack, boolean heldShift) {
         MerchantRecipe merchantrecipe = this.a.i();
         // CanaryMod: VillagerTradeHook
-        VillagerTradeHook hook = (VillagerTradeHook) new VillagerTradeHook(((EntityPlayerMP) entityplayer).getPlayer(), (Villager) ((EntityVillager) this.d).getCanaryEntity(), new CanaryVillagerTrade(merchantrecipe)).call();
+        VillagerTradeHook hook = (VillagerTradeHook)new VillagerTradeHook(((EntityPlayerMP)entityplayer).getPlayer(), (Villager)((EntityVillager)this.d).getCanaryEntity(), new CanaryVillagerTrade(merchantrecipe)).call();
         if (hook.isCanceled()) {
             if (heldShift) {
-                ((EntityPlayerMP) entityplayer).getPlayer().getInventory().decreaseItemStackSize(merchantrecipe.d().getCanaryItem());
-            } else {
-                entityplayer.bn.b((ItemStack) null);
+                ((EntityPlayerMP)entityplayer).getPlayer().getInventory().decreaseItemStackSize(merchantrecipe.d().getCanaryItem());
+            }
+            else {
+                entityplayer.bn.b((ItemStack)null);
             }
         }
         //

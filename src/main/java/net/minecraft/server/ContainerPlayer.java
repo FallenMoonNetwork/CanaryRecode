@@ -15,7 +15,7 @@ public class ContainerPlayer extends Container {
     public ContainerPlayer(InventoryPlayer inventoryplayer, boolean flag0, EntityPlayer entityplayer) {
         this.g = flag0;
         this.h = entityplayer;
-        this.a((Slot) (new SlotCrafting(inventoryplayer.d, this.a, this.f, 0, 144, 36)));
+        this.a((Slot)(new SlotCrafting(inventoryplayer.d, this.a, this.f, 0, 144, 36)));
 
         int i0;
         int i1;
@@ -27,7 +27,7 @@ public class ContainerPlayer extends Container {
         }
 
         for (i0 = 0; i0 < 4; ++i0) {
-            this.a((Slot) (new SlotArmor(this, inventoryplayer, inventoryplayer.j_() - 1 - i0, 8, 8 + i0 * 18, i0)));
+            this.a((Slot)(new SlotArmor(this, inventoryplayer, inventoryplayer.j_() - 1 - i0, 8, 8 + i0 * 18, i0)));
         }
 
         for (i0 = 0; i0 < 3; ++i0) {
@@ -42,7 +42,7 @@ public class ContainerPlayer extends Container {
 
         this.inventory = this.h.getPlayerInventory(); // CanaryMod: Set inventory instance
 
-        this.a((IInventory) this.a);
+        this.a((IInventory)this.a);
     }
 
     public void a(IInventory iinventory) {
@@ -50,17 +50,17 @@ public class ContainerPlayer extends Container {
 
         // CanaryMod: Send custom recipe results to client
         if (this.h.getCanaryEntity() instanceof CanaryPlayer) {
-            CraftHook hook = (CraftHook) new CraftHook(((EntityPlayerMP) this.h).getPlayer(), new CanaryPlayerCraftingMatrix(this.a), result == null ? null : result.getCanaryItem()).call();
+            CraftHook hook = (CraftHook)new CraftHook(((EntityPlayerMP)this.h).getPlayer(), new CanaryPlayerCraftingMatrix(this.a), result == null ? null : result.getCanaryItem()).call();
             if (hook.isCanceled()) {
                 result = null;
             }
             else {
-                result = hook.getRecipeResult() == null ? null : ((CanaryItem) hook.getRecipeResult()).getHandle();
+                result = hook.getRecipeResult() == null ? null : ((CanaryItem)hook.getRecipeResult()).getHandle();
             }
             // Set custom result
             this.f.a(0, result);
             // And send player custom result
-            ((EntityPlayerMP) this.h).a.b(new Packet103SetSlot(this.d, 0, result));
+            ((EntityPlayerMP)this.h).a.b(new Packet103SetSlot(this.d, 0, result));
             //
         }
     }
@@ -76,7 +76,7 @@ public class ContainerPlayer extends Container {
             }
         }
 
-        this.f.a(0, (ItemStack) null);
+        this.f.a(0, (ItemStack)null);
     }
 
     public boolean a(EntityPlayer entityplayer) {
@@ -85,7 +85,7 @@ public class ContainerPlayer extends Container {
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
-        Slot slot = (Slot) this.c.get(i0);
+        Slot slot = (Slot)this.c.get(i0);
 
         if (slot != null && slot.e()) {
             ItemStack itemstack1 = slot.d();
@@ -97,36 +97,43 @@ public class ContainerPlayer extends Container {
                 }
 
                 slot.a(itemstack1, itemstack);
-            } else if (i0 >= 1 && i0 < 5) {
+            }
+            else if (i0 >= 1 && i0 < 5) {
                 if (!this.a(itemstack1, 9, 45, false)) {
                     return null;
                 }
-            } else if (i0 >= 5 && i0 < 9) {
+            }
+            else if (i0 >= 5 && i0 < 9) {
                 if (!this.a(itemstack1, 9, 45, false)) {
                     return null;
                 }
-            } else if (itemstack.b() instanceof ItemArmor
-                    && !((Slot) this.c.get(5 + ((ItemArmor) itemstack.b()).b)).e()) {
-                int i1 = 5 + ((ItemArmor) itemstack.b()).b;
+            }
+            else if (itemstack.b() instanceof ItemArmor
+                    && !((Slot)this.c.get(5 + ((ItemArmor)itemstack.b()).b)).e()) {
+                int i1 = 5 + ((ItemArmor)itemstack.b()).b;
 
                 if (!this.a(itemstack1, i1, i1 + 1, false)) {
                     return null;
                 }
-            } else if (i0 >= 9 && i0 < 36) {
+            }
+            else if (i0 >= 9 && i0 < 36) {
                 if (!this.a(itemstack1, 36, 45, false)) {
                     return null;
                 }
-            } else if (i0 >= 36 && i0 < 45) {
+            }
+            else if (i0 >= 36 && i0 < 45) {
                 if (!this.a(itemstack1, 9, 36, false)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 9, 45, false)) {
+            }
+            else if (!this.a(itemstack1, 9, 45, false)) {
                 return null;
             }
 
             if (itemstack1.b == 0) {
-                slot.c((ItemStack) null);
-            } else {
+                slot.c((ItemStack)null);
+            }
+            else {
                 slot.f();
             }
 

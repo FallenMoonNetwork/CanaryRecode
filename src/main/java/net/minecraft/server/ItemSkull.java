@@ -6,8 +6,8 @@ import net.canarymod.hook.player.BlockPlaceHook;
 
 public class ItemSkull extends Item {
 
-    private static final String[] b = new String[]{ "skeleton", "wither", "zombie", "char", "creeper" };
-    public static final String[] a = new String[]{ "skeleton", "wither", "zombie", "steve", "creeper" };
+    private static final String[] b = new String[]{"skeleton", "wither", "zombie", "char", "creeper"};
+    public static final String[] a = new String[]{"skeleton", "wither", "zombie", "steve", "creeper"};
 
     public ItemSkull(int i0) {
         super(i0);
@@ -19,13 +19,15 @@ public class ItemSkull extends Item {
     public boolean a(ItemStack itemstack, EntityPlayer entityplayer, World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2) {
         if (i3 == 0) {
             return false;
-        } else if (!world.g(i0, i1, i2).a()) {
+        }
+        else if (!world.g(i0, i1, i2).a()) {
             return false;
-        } else {
+        }
+        else {
             // CanaryMod: BlockPlaceHook
-            CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+            CanaryBlock clicked = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
-            clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
+            clicked.setFaceClicked(BlockFace.fromByte((byte)i3));
 
             if (i3 == 1) {
                 ++i1;
@@ -49,12 +51,14 @@ public class ItemSkull extends Item {
 
             if (!entityplayer.a(i0, i1, i2, i3, itemstack)) {
                 return false;
-            } else if (!Block.cl.c(world, i0, i1, i2)) {
+            }
+            else if (!Block.cl.c(world, i0, i1, i2)) {
                 return false;
-            } else {
+            }
+            else {
                 // Create and call
-                CanaryBlock placed = new CanaryBlock((short) 144, (short) itemstack.getCanaryItem().getDamage(), i0, i1, i2, world.getCanaryWorld());
-                BlockPlaceHook hook = (BlockPlaceHook) new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed).call();
+                CanaryBlock placed = new CanaryBlock((short)144, (short)itemstack.getCanaryItem().getDamage(), i0, i1, i2, world.getCanaryWorld());
+                BlockPlaceHook hook = (BlockPlaceHook)new BlockPlaceHook(((EntityPlayerMP)entityplayer).getPlayer(), clicked, placed).call();
                 if (hook.isCanceled()) {
                     return false;
                 }
@@ -64,7 +68,7 @@ public class ItemSkull extends Item {
                 int i4 = 0;
 
                 if (i3 == 1) {
-                    i4 = MathHelper.c((double) (entityplayer.A * 16.0F / 360.0F) + 0.5D) & 15;
+                    i4 = MathHelper.c((double)(entityplayer.A * 16.0F / 360.0F) + 0.5D) & 15;
                 }
 
                 TileEntity tileentity = world.r(i0, i1, i2);
@@ -76,9 +80,9 @@ public class ItemSkull extends Item {
                         s0 = itemstack.q().i("SkullOwner");
                     }
 
-                    ((TileEntitySkull) tileentity).a(itemstack.k(), s0);
-                    ((TileEntitySkull) tileentity).a(i4);
-                    ((BlockSkull) Block.cl).a(world, i0, i1, i2, (TileEntitySkull) tileentity);
+                    ((TileEntitySkull)tileentity).a(itemstack.k(), s0);
+                    ((TileEntitySkull)tileentity).a(i4);
+                    ((BlockSkull)Block.cl).a(world, i0, i1, i2, (TileEntitySkull)tileentity);
                 }
 
                 --itemstack.b;
@@ -102,6 +106,6 @@ public class ItemSkull extends Item {
     }
 
     public String l(ItemStack itemstack) {
-        return itemstack.k() == 3 && itemstack.p() && itemstack.q().b("SkullOwner") ? StatCollector.a("item.skull.player.name", new Object[]{ itemstack.q().i("SkullOwner") }) : super.l(itemstack);
+        return itemstack.k() == 3 && itemstack.p() && itemstack.q().b("SkullOwner") ? StatCollector.a("item.skull.player.name", new Object[]{itemstack.q().i("SkullOwner")}) : super.l(itemstack);
     }
 }

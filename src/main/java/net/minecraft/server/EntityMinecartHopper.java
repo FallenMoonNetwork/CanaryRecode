@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import java.util.List;
 import net.canarymod.api.entity.vehicle.CanaryHopperMinecart;
+
+import java.util.List;
 
 public class EntityMinecartHopper extends EntityMinecartContainer implements Hopper {
 
@@ -45,12 +46,12 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
     public void a(int i0, int i1, int i2, boolean flag0) {
         boolean flag1 = !flag0;
 
-        if (flag1 != this.ay()) {
+        if (flag1 != this.u()) {
             this.f(flag1);
         }
     }
 
-    public boolean ay() {
+    public boolean u() {
         return this.a;
     }
 
@@ -76,7 +77,7 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
 
     public void l_() {
         super.l_();
-        if (!this.q.I && this.S() && this.ay()) {
+        if (!this.q.I && this.T() && this.u()) {
             --this.b;
             if (!this.aE()) {
                 this.l(0);
@@ -89,13 +90,14 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
     }
 
     public boolean aD() {
-        if (TileEntityHopper.a((Hopper) this)) {
+        if (TileEntityHopper.a((Hopper)this)) {
             return true;
-        } else {
+        }
+        else {
             List list = this.q.a(EntityItem.class, this.E.b(0.25D, 0.0D, 0.25D), IEntitySelector.a);
 
             if (list.size() > 0) {
-                TileEntityHopper.a((IInventory) this, (EntityItem) list.get(0));
+                TileEntityHopper.a((IInventory)this, (EntityItem)list.get(0));
             }
 
             return false;

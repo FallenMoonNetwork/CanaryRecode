@@ -18,7 +18,7 @@ public class ContainerWorkbench extends Container {
         this.h = i0;
         this.i = i1;
         this.j = i2;
-        this.a((Slot) (new SlotCrafting(inventoryplayer.d, this.a, this.f, 0, 124, 35)));
+        this.a((Slot)(new SlotCrafting(inventoryplayer.d, this.a, this.f, 0, 124, 35)));
 
         int i3;
         int i4;
@@ -40,7 +40,7 @@ public class ContainerWorkbench extends Container {
         }
 
         this.inventory = new CanaryWorkbench(this); // CanaryMod: Set inventory instance
-        this.a((IInventory) this.a);
+        this.a((IInventory)this.a);
     }
 
     public void a(IInventory iinventory) {
@@ -52,15 +52,15 @@ public class ContainerWorkbench extends Container {
         }
 
         // CanaryMod: Send custom recipe results to client
-        EntityPlayerMP player = (EntityPlayerMP) this.e.get(0);
+        EntityPlayerMP player = (EntityPlayerMP)this.e.get(0);
 
         // call CraftHook
-        CraftHook hook = (CraftHook) new CraftHook(player.getPlayer(), (CanaryWorkbench) inventory, result == null ? null : result.getCanaryItem()).call();
+        CraftHook hook = (CraftHook)new CraftHook(player.getPlayer(), (CanaryWorkbench)inventory, result == null ? null : result.getCanaryItem()).call();
         if (hook.isCanceled()) {
             result = null;
         }
         else {
-            result = hook.getRecipeResult() == null ? null : ((CanaryItem) hook.getRecipeResult()).getHandle();
+            result = hook.getRecipeResult() == null ? null : ((CanaryItem)hook.getRecipeResult()).getHandle();
         }
 
         // Set custom result
@@ -89,12 +89,12 @@ public class ContainerWorkbench extends Container {
             return true;
         }
         //
-        return this.g.a(this.h, this.i, this.j) != Block.aD.cF ? false : entityplayer.e((double) this.h + 0.5D, (double) this.i + 0.5D, (double) this.j + 0.5D) <= 64.0D;
+        return this.g.a(this.h, this.i, this.j) != Block.aD.cF ? false : entityplayer.e((double)this.h + 0.5D, (double)this.i + 0.5D, (double)this.j + 0.5D) <= 64.0D;
     }
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
-        Slot slot = (Slot) this.c.get(i0);
+        Slot slot = (Slot)this.c.get(i0);
 
         if (slot != null && slot.e()) {
             ItemStack itemstack1 = slot.d();
@@ -106,21 +106,25 @@ public class ContainerWorkbench extends Container {
                 }
 
                 slot.a(itemstack1, itemstack);
-            } else if (i0 >= 10 && i0 < 37) {
+            }
+            else if (i0 >= 10 && i0 < 37) {
                 if (!this.a(itemstack1, 37, 46, false)) {
                     return null;
                 }
-            } else if (i0 >= 37 && i0 < 46) {
+            }
+            else if (i0 >= 37 && i0 < 46) {
                 if (!this.a(itemstack1, 10, 37, false)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 10, 46, false)) {
+            }
+            else if (!this.a(itemstack1, 10, 46, false)) {
                 return null;
             }
 
             if (itemstack1.b == 0) {
-                slot.c((ItemStack) null);
-            } else {
+                slot.c((ItemStack)null);
+            }
+            else {
                 slot.f();
             }
 

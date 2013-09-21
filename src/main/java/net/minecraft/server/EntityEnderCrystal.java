@@ -40,30 +40,34 @@ public class EntityEnderCrystal extends Entity {
         }
     }
 
-    protected void b(NBTTagCompound nbttagcompound) {}
+    protected void b(NBTTagCompound nbttagcompound) {
+    }
 
-    protected void a(NBTTagCompound nbttagcompound) {}
+    protected void a(NBTTagCompound nbttagcompound) {
+    }
 
-    public boolean K() {
+    public boolean L() {
         return true;
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.aq()) {
+        if (this.ar()) {
             return false;
-        } else {
+        }
+        else {
             if (!this.M && !this.q.I) {
                 // CanaryMod: Check if one hit can kill this entity
-                if (((CanaryEnderCrystal) entity).isOneHitDetonate()) {
+                if (((CanaryEnderCrystal)entity).isOneHitDetonate()) {
                     this.b = 0;
-                } else {
+                }
+                else {
                     this.b -= f0;
                 }
                 //
                 if (this.b <= 0) {
-                    this.w();
+                    this.x();
                     if (!this.q.I) {
-                        this.q.a(this, this.u, this.v, this.w, ((CanaryEnderCrystal) entity).getPower(), true); // CanaryMod: configure Explosion power and set the entity properly
+                        this.q.a(this, this.u, this.v, this.w, ((CanaryEnderCrystal)entity).getPower(), true); // CanaryMod: configure Explosion power and set the entity properly
                     }
                 }
             }

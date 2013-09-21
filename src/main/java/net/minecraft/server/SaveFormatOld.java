@@ -20,24 +20,27 @@ public class SaveFormatOld implements ISaveFormat {
     }
 
     @Override
-    public void d() {}
+    public void d() {
+    }
 
     public WorldInfo c(String s0) {
         File file1 = new File(this.a, s0);
 
         if (!file1.exists()) {
             return null;
-        } else {
+        }
+        else {
             File file2 = new File(file1, "level.dat");
             NBTTagCompound nbttagcompound;
             NBTTagCompound nbttagcompound1;
 
             if (file2.exists()) {
                 try {
-                    nbttagcompound = CompressedStreamTools.a((InputStream) (new FileInputStream(file2)));
+                    nbttagcompound = CompressedStreamTools.a((InputStream)(new FileInputStream(file2)));
                     nbttagcompound1 = nbttagcompound.l("Data");
                     return new WorldInfo(nbttagcompound1);
-                } catch (Exception exception) {
+                }
+                catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }
@@ -45,10 +48,11 @@ public class SaveFormatOld implements ISaveFormat {
             file2 = new File(file1, "level.dat_old");
             if (file2.exists()) {
                 try {
-                    nbttagcompound = CompressedStreamTools.a((InputStream) (new FileInputStream(file2)));
+                    nbttagcompound = CompressedStreamTools.a((InputStream)(new FileInputStream(file2)));
                     nbttagcompound1 = nbttagcompound.l("Data");
                     return new WorldInfo(nbttagcompound1);
-                } catch (Exception exception1) {
+                }
+                catch (Exception exception1) {
                     exception1.printStackTrace();
                 }
             }
@@ -63,7 +67,8 @@ public class SaveFormatOld implements ISaveFormat {
 
         if (!file1.exists()) {
             return true;
-        } else {
+        }
+        else {
             System.out.println("Deleting level " + s0);
 
             for (int i0 = 1; i0 <= 5; ++i0) {
@@ -76,7 +81,8 @@ public class SaveFormatOld implements ISaveFormat {
                 if (i0 < 5) {
                     try {
                         Thread.sleep(500L);
-                    } catch (InterruptedException interruptedexception) {
+                    }
+                    catch (InterruptedException interruptedexception) {
                         ;
                     }
                 }

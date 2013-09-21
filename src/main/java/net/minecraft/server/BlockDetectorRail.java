@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.hook.world.RedstoneChangeHook;
+
 import java.util.List;
 import java.util.Random;
-import net.canarymod.hook.world.RedstoneChangeHook;
 
 public class BlockDetectorRail extends BlockRailBase {
 
@@ -51,7 +52,7 @@ public class BlockDetectorRail extends BlockRailBase {
         boolean flag0 = (i3 & 8) != 0;
         boolean flag1 = false;
         float f0 = 0.125F;
-        List list = world.a(EntityMinecart.class, AxisAlignedBB.a().a((double) ((float) i0 + f0), (double) i1, (double) ((float) i2 + f0), (double) ((float) (i0 + 1) - f0), (double) ((float) (i1 + 1) - f0), (double) ((float) (i2 + 1) - f0)));
+        List list = world.a(EntityMinecart.class, AxisAlignedBB.a().a((double)((float)i0 + f0), (double)i1, (double)((float)i2 + f0), (double)((float)(i0 + 1) - f0), (double)((float)(i1 + 1) - f0), (double)((float)(i2 + 1) - f0)));
 
         if (!list.isEmpty()) {
             flag1 = true;
@@ -59,7 +60,7 @@ public class BlockDetectorRail extends BlockRailBase {
 
         if (flag1 && !flag0) {
             // CanaryMod: RedstoneChange; Rails on
-            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 0, 15).call();
+            RedstoneChangeHook hook = (RedstoneChangeHook)new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 0, 15).call();
             if (hook.isCanceled()) {
                 return;
             }
@@ -72,7 +73,7 @@ public class BlockDetectorRail extends BlockRailBase {
 
         if (!flag1 && flag0) {
             // CanaryMod: RedstoneChange; Rails off
-            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
+            RedstoneChangeHook hook = (RedstoneChangeHook)new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
             if (hook.isCanceled()) {
                 return;
             }
@@ -102,10 +103,10 @@ public class BlockDetectorRail extends BlockRailBase {
     public int b_(World world, int i0, int i1, int i2, int i3) {
         if ((world.h(i0, i1, i2) & 8) > 0) {
             float f0 = 0.125F;
-            List list = world.a(EntityMinecart.class, AxisAlignedBB.a().a((double) ((float) i0 + f0), (double) i1, (double) ((float) i2 + f0), (double) ((float) (i0 + 1) - f0), (double) ((float) (i1 + 1) - f0), (double) ((float) (i2 + 1) - f0)), IEntitySelector.b);
+            List list = world.a(EntityMinecart.class, AxisAlignedBB.a().a((double)((float)i0 + f0), (double)i1, (double)((float)i2 + f0), (double)((float)(i0 + 1) - f0), (double)((float)(i1 + 1) - f0), (double)((float)(i2 + 1) - f0)), IEntitySelector.b);
 
             if (list.size() > 0) {
-                return Container.b((IInventory) list.get(0));
+                return Container.b((IInventory)list.get(0));
             }
         }
 

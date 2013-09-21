@@ -59,15 +59,15 @@ public class PathNavigate {
     }
 
     public float d() {
-        return (float) this.e.e();
+        return (float)this.e.e();
     }
 
     public PathEntity a(double d0, double d1, double d2) {
-        return !this.l() ? null : this.b.a(this.a, MathHelper.c(d0), (int) d1, MathHelper.c(d2), this.d(), this.j, this.k, this.l, this.m);
+        return !this.l() ? null : this.b.a(this.a, MathHelper.c(d0), (int)d1, MathHelper.c(d2), this.d(), this.j, this.k, this.l, this.m);
     }
 
     public boolean a(double d0, double d1, double d2, double d3) {
-        PathEntity pathentity = this.a((double) MathHelper.c(d0), (double) ((int) d1), (double) MathHelper.c(d2));
+        PathEntity pathentity = this.a((double)MathHelper.c(d0), (double)((int)d1), (double)MathHelper.c(d2));
 
         return this.a(pathentity, d3);
     }
@@ -87,7 +87,8 @@ public class PathNavigate {
             this.c = null;
             // Canary.logInfo("path was null");
             return false;
-        } else {
+        }
+        else {
             if (!pathentity.a(this.c)) {
                 this.c = pathentity;
             }
@@ -99,7 +100,8 @@ public class PathNavigate {
             if (this.c.d() == 0) {
                 // Canary.logInfo("path was of length 0");
                 return false;
-            } else {
+            }
+            else {
                 this.d = d0;
                 Vec3 vec3 = this.j();
 
@@ -124,7 +126,7 @@ public class PathNavigate {
             }
 
             if (!this.g()) {
-                Vec3 vec3 = this.c.a((Entity) this.a);
+                Vec3 vec3 = this.c.a((Entity)this.a);
 
                 if (vec3 != null) {
                     this.a.i().a(vec3.c, vec3.d, vec3.e, this.d);
@@ -138,7 +140,7 @@ public class PathNavigate {
         int i0 = this.c.d();
 
         for (int i1 = this.c.e(); i1 < this.c.d(); ++i1) {
-            if (this.c.a(i1).b != (int) vec3.d) {
+            if (this.c.a(i1).b != (int)vec3.d) {
                 i0 = i1;
                 break;
             }
@@ -149,13 +151,13 @@ public class PathNavigate {
         int i2;
 
         for (i2 = this.c.e(); i2 < i0; ++i2) {
-            if (vec3.e(this.c.a(this.a, i2)) < (double) f0) {
+            if (vec3.e(this.c.a(this.a, i2)) < (double)f0) {
                 this.c.c(i2 + 1);
             }
         }
 
         i2 = MathHelper.f(this.a.O);
-        int i3 = (int) this.a.P + 1;
+        int i3 = (int)this.a.P + 1;
         int i4 = i2;
 
         for (int i5 = i0 - 1; i5 >= this.c.e(); --i5) {
@@ -186,12 +188,12 @@ public class PathNavigate {
     }
 
     private Vec3 j() {
-        return this.b.V().a(this.a.u, (double) this.k(), this.a.w);
+        return this.b.V().a(this.a.u, (double)this.k(), this.a.w);
     }
 
     private int k() {
-        if (this.a.G() && this.m) {
-            int i0 = (int) this.a.E.b;
+        if (this.a.H() && this.m) {
+            int i0 = (int)this.a.E.b;
             int i1 = this.b.a(MathHelper.c(this.a.u), i0, MathHelper.c(this.a.w));
             int i2 = 0;
 
@@ -206,9 +208,10 @@ public class PathNavigate {
             }
             while (i2 <= 16);
 
-            return (int) this.a.E.b;
-        } else {
-            return (int) (this.a.E.b + 0.5D);
+            return (int)this.a.E.b;
+        }
+        else {
+            return (int)(this.a.E.b + 0.5D);
         }
     }
 
@@ -217,11 +220,11 @@ public class PathNavigate {
     }
 
     private boolean m() {
-        return this.a.G() || this.a.I();
+        return this.a.H() || this.a.J();
     }
 
     private void n() {
-        if (!this.b.l(MathHelper.c(this.a.u), (int) (this.a.E.b + 0.5D), MathHelper.c(this.a.w))) {
+        if (!this.b.l(MathHelper.c(this.a.u), (int)(this.a.E.b + 0.5D), MathHelper.c(this.a.w))) {
             for (int i0 = 0; i0 < this.c.d(); ++i0) {
                 PathPoint pathpoint = this.c.a(i0);
 
@@ -242,22 +245,24 @@ public class PathNavigate {
 
         if (d2 < 1.0E-8D) {
             return false;
-        } else {
+        }
+        else {
             double d3 = 1.0D / Math.sqrt(d2);
 
             d0 *= d3;
             d1 *= d3;
             i0 += 2;
             i2 += 2;
-            if (!this.a(i3, (int) vec3.d, i4, i0, i1, i2, vec3, d0, d1)) {
+            if (!this.a(i3, (int)vec3.d, i4, i0, i1, i2, vec3, d0, d1)) {
                 return false;
-            } else {
+            }
+            else {
                 i0 -= 2;
                 i2 -= 2;
                 double d4 = 1.0D / Math.abs(d0);
                 double d5 = 1.0D / Math.abs(d1);
-                double d6 = (double) (i3 * 1) - vec3.c;
-                double d7 = (double) (i4 * 1) - vec3.e;
+                double d6 = (double)(i3 * 1) - vec3.c;
+                double d7 = (double)(i4 * 1) - vec3.e;
 
                 if (d0 >= 0.0D) {
                     ++d6;
@@ -285,13 +290,14 @@ public class PathNavigate {
                         d6 += d4;
                         i3 += i5;
                         i9 = i7 - i3;
-                    } else {
+                    }
+                    else {
                         d7 += d5;
                         i4 += i6;
                         i10 = i8 - i4;
                     }
                 }
-                while (this.a(i3, (int) vec3.d, i4, i0, i1, i2, vec3, d0, d1));
+                while (this.a(i3, (int)vec3.d, i4, i0, i1, i2, vec3, d0, d1));
 
                 return false;
             }
@@ -304,11 +310,12 @@ public class PathNavigate {
 
         if (!this.b(i6, i1, i7, i3, i4, i5, vec3, d0, d1)) {
             return false;
-        } else {
+        }
+        else {
             for (int i8 = i6; i8 < i6 + i3; ++i8) {
                 for (int i9 = i7; i9 < i7 + i5; ++i9) {
-                    double d2 = (double) i8 + 0.5D - vec3.c;
-                    double d3 = (double) i9 + 0.5D - vec3.e;
+                    double d2 = (double)i8 + 0.5D - vec3.c;
+                    double d3 = (double)i9 + 0.5D - vec3.e;
 
                     if (d2 * d0 + d3 * d1 >= 0.0D) {
                         int i10 = this.b.a(i8, i1 - 1, i9);
@@ -319,7 +326,7 @@ public class PathNavigate {
 
                         Material material = Block.s[i10].cU;
 
-                        if (material == Material.h && !this.a.G()) {
+                        if (material == Material.h && !this.a.H()) {
                             return false;
                         }
 
@@ -338,13 +345,13 @@ public class PathNavigate {
         for (int i6 = i0; i6 < i0 + i3; ++i6) {
             for (int i7 = i1; i7 < i1 + i4; ++i7) {
                 for (int i8 = i2; i8 < i2 + i5; ++i8) {
-                    double d2 = (double) i6 + 0.5D - vec3.c;
-                    double d3 = (double) i8 + 0.5D - vec3.e;
+                    double d2 = (double)i6 + 0.5D - vec3.c;
+                    double d3 = (double)i8 + 0.5D - vec3.e;
 
                     if (d2 * d0 + d3 * d1 >= 0.0D) {
                         int i9 = this.b.a(i6, i7, i8);
 
-                        if (i9 > 0 && !Block.s[i9].b((IBlockAccess) this.b, i6, i7, i8)) {
+                        if (i9 > 0 && !Block.s[i9].b((IBlockAccess)this.b, i6, i7, i8)) {
                             return false;
                         }
                     }

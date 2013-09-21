@@ -10,7 +10,7 @@ public abstract class EntityMob extends EntityCreature implements IMob {
     }
 
     public void c() {
-        this.aV();
+        this.aW();
         float f0 = this.d(1.0F);
 
         if (f0 > 0.5F) {
@@ -23,7 +23,7 @@ public abstract class EntityMob extends EntityCreature implements IMob {
     public void l_() {
         super.l_();
         if (!this.q.I && this.q.r == 0) {
-            this.w();
+            this.x();
         }
     }
 
@@ -34,20 +34,22 @@ public abstract class EntityMob extends EntityCreature implements IMob {
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.aq()) {
+        if (this.ar()) {
             return false;
-        } else if (super.a(damagesource, f0)) {
+        }
+        else if (super.a(damagesource, f0)) {
             Entity entity = damagesource.i();
 
             if (this.n != entity && this.o != entity) {
                 if (entity != this) {
                     // CanaryMod: MobTarget
                     if (entity instanceof net.minecraft.server.EntityLiving) {
-                        MobTargetHook hook = (MobTargetHook) new MobTargetHook((net.canarymod.api.entity.living.EntityLiving) this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving) entity.getCanaryEntity()).call();
+                        MobTargetHook hook = (MobTargetHook)new MobTargetHook((net.canarymod.api.entity.living.EntityLiving)this.getCanaryEntity(), (net.canarymod.api.entity.living.EntityLiving)entity.getCanaryEntity()).call();
                         if (!hook.isCanceled()) {
                             this.j = entity;
                         }
-                    } else {
+                    }
+                    else {
                         this.j = entity;
                     }
 
@@ -55,40 +57,42 @@ public abstract class EntityMob extends EntityCreature implements IMob {
                 }
 
                 return true;
-            } else {
+            }
+            else {
                 return true;
             }
-        } else {
+        }
+        else {
             return false;
         }
     }
 
     public boolean m(Entity entity) {
-        float f0 = (float) this.a(SharedMonsterAttributes.e).e();
+        float f0 = (float)this.a(SharedMonsterAttributes.e).e();
         int i0 = 0;
 
         if (entity instanceof EntityLivingBase) {
-            f0 += EnchantmentHelper.a((EntityLivingBase) this, (EntityLivingBase) entity);
-            i0 += EnchantmentHelper.b(this, (EntityLivingBase) entity);
+            f0 += EnchantmentHelper.a((EntityLivingBase)this, (EntityLivingBase)entity);
+            i0 += EnchantmentHelper.b(this, (EntityLivingBase)entity);
         }
 
-        boolean flag0 = entity.a(DamageSource.a((EntityLivingBase) this), f0);
+        boolean flag0 = entity.a(DamageSource.a((EntityLivingBase)this), f0);
 
         if (flag0) {
             if (i0 > 0) {
-                entity.g((double) (-MathHelper.a(this.A * 3.1415927F / 180.0F) * (float) i0 * 0.5F), 0.1D, (double) (MathHelper.b(this.A * 3.1415927F / 180.0F) * (float) i0 * 0.5F));
+                entity.g((double)(-MathHelper.a(this.A * 3.1415927F / 180.0F) * (float)i0 * 0.5F), 0.1D, (double)(MathHelper.b(this.A * 3.1415927F / 180.0F) * (float)i0 * 0.5F));
                 this.x *= 0.6D;
                 this.z *= 0.6D;
             }
 
-            int i1 = EnchantmentHelper.a((EntityLivingBase) this);
+            int i1 = EnchantmentHelper.a((EntityLivingBase)this);
 
             if (i1 > 0) {
                 entity.d(i1 * 4);
             }
 
             if (entity instanceof EntityLivingBase) {
-                EnchantmentThorns.a(this, (EntityLivingBase) entity, this.ab);
+                EnchantmentThorns.a(this, (EntityLivingBase)entity, this.ab);
             }
         }
 
@@ -113,7 +117,8 @@ public abstract class EntityMob extends EntityCreature implements IMob {
 
         if (this.q.b(EnumSkyBlock.a, i0, i1, i2) > this.ab.nextInt(32)) {
             return false;
-        } else {
+        }
+        else {
             int i3 = this.q.n(i0, i1, i2);
 
             if (this.q.P()) {
@@ -132,8 +137,8 @@ public abstract class EntityMob extends EntityCreature implements IMob {
         return this.q.r > 0 && this.i_() && super.bs();
     }
 
-    protected void ay() {
-        super.ay();
-        this.aW().b(SharedMonsterAttributes.e);
+    protected void az() {
+        super.az();
+        this.aX().b(SharedMonsterAttributes.e);
     }
 }

@@ -33,25 +33,34 @@ public class SlotCrafting extends Slot {
         itemstack.a(this.b.q, this.b, this.c);
         this.c = 0;
         if (itemstack.d == Block.aD.cF) {
-            this.b.a((StatBase) AchievementList.h, 1);
-        } else if (itemstack.d == Item.v.cv) {
-            this.b.a((StatBase) AchievementList.i, 1);
-        } else if (itemstack.d == Block.aG.cF) {
-            this.b.a((StatBase) AchievementList.j, 1);
-        } else if (itemstack.d == Item.P.cv) {
-            this.b.a((StatBase) AchievementList.l, 1);
-        } else if (itemstack.d == Item.W.cv) {
-            this.b.a((StatBase) AchievementList.m, 1);
-        } else if (itemstack.d == Item.bb.cv) {
-            this.b.a((StatBase) AchievementList.n, 1);
-        } else if (itemstack.d == Item.z.cv) {
-            this.b.a((StatBase) AchievementList.o, 1);
-        } else if (itemstack.d == Item.t.cv) {
-            this.b.a((StatBase) AchievementList.r, 1);
-        } else if (itemstack.d == Block.bJ.cF) {
-            this.b.a((StatBase) AchievementList.D, 1);
-        } else if (itemstack.d == Block.as.cF) {
-            this.b.a((StatBase) AchievementList.F, 1);
+            this.b.a((StatBase)AchievementList.h, 1);
+        }
+        else if (itemstack.d == Item.v.cv) {
+            this.b.a((StatBase)AchievementList.i, 1);
+        }
+        else if (itemstack.d == Block.aG.cF) {
+            this.b.a((StatBase)AchievementList.j, 1);
+        }
+        else if (itemstack.d == Item.P.cv) {
+            this.b.a((StatBase)AchievementList.l, 1);
+        }
+        else if (itemstack.d == Item.W.cv) {
+            this.b.a((StatBase)AchievementList.m, 1);
+        }
+        else if (itemstack.d == Item.bb.cv) {
+            this.b.a((StatBase)AchievementList.n, 1);
+        }
+        else if (itemstack.d == Item.z.cv) {
+            this.b.a((StatBase)AchievementList.o, 1);
+        }
+        else if (itemstack.d == Item.t.cv) {
+            this.b.a((StatBase)AchievementList.r, 1);
+        }
+        else if (itemstack.d == Block.bJ.cF) {
+            this.b.a((StatBase)AchievementList.D, 1);
+        }
+        else if (itemstack.d == Block.as.cF) {
+            this.b.a((StatBase)AchievementList.F, 1);
         }
     }
 
@@ -69,7 +78,8 @@ public class SlotCrafting extends Slot {
                     if (!itemstack1.b().j(itemstack1) || !this.b.bn.a(itemstack2)) {
                         if (this.a.a(i0) == null) {
                             this.a.a(i0, itemstack2);
-                        } else {
+                        }
+                        else {
                             this.b.b(itemstack2);
                         }
                     }

@@ -26,8 +26,8 @@ public class EntitySquid extends EntityWaterMob {
         this.entity = new CanarySquid(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(10.0D);
     }
 
@@ -35,15 +35,15 @@ public class EntitySquid extends EntityWaterMob {
         return null;
     }
 
-    protected String aN() {
-        return null;
-    }
-
     protected String aO() {
         return null;
     }
 
-    protected float aZ() {
+    protected String aP() {
+        return null;
+    }
+
+    protected float ba() {
         return 0.4F;
     }
 
@@ -63,8 +63,8 @@ public class EntitySquid extends EntityWaterMob {
         }
     }
 
-    public boolean G() {
-        return this.q.a(this.E.b(0.0D, -0.6000000238418579D, 0.0D), Material.h, (Entity) this);
+    public boolean H() {
+        return this.q.a(this.E.b(0.0D, -0.6000000238418579D, 0.0D), Material.h, (Entity)this);
     }
 
     public void c() {
@@ -81,36 +81,39 @@ public class EntitySquid extends EntityWaterMob {
             }
         }
 
-        if (this.G()) {
+        if (this.H()) {
             float f0;
 
             if (this.bt < 3.1415927F) {
                 f0 = this.bt / 3.1415927F;
                 this.bv = MathHelper.a(f0 * f0 * 3.1415927F) * 3.1415927F * 0.25F;
-                if ((double) f0 > 0.75D) {
+                if ((double)f0 > 0.75D) {
                     this.bx = 1.0F;
                     this.bz = 1.0F;
-                } else {
+                }
+                else {
                     this.bz *= 0.8F;
                 }
-            } else {
+            }
+            else {
                 this.bv = 0.0F;
                 this.bx *= 0.9F;
                 this.bz *= 0.99F;
             }
 
             if (!this.q.I) {
-                this.x = (double) (this.bA * this.bx);
-                this.y = (double) (this.bB * this.bx);
-                this.z = (double) (this.bC * this.bx);
+                this.x = (double)(this.bA * this.bx);
+                this.y = (double)(this.bB * this.bx);
+                this.z = (double)(this.bC * this.bx);
             }
 
             f0 = MathHelper.a(this.x * this.x + this.z * this.z);
-            this.aN += (-((float) Math.atan2(this.x, this.z)) * 180.0F / 3.1415927F - this.aN) * 0.1F;
+            this.aN += (-((float)Math.atan2(this.x, this.z)) * 180.0F / 3.1415927F - this.aN) * 0.1F;
             this.A = this.aN;
             this.br += 3.1415927F * this.bz * 1.5F;
-            this.bp += (-((float) Math.atan2((double) f0, this.y)) * 180.0F / 3.1415927F - this.bp) * 0.1F;
-        } else {
+            this.bp += (-((float)Math.atan2((double)f0, this.y)) * 180.0F / 3.1415927F - this.bp) * 0.1F;
+        }
+        else {
             this.bv = MathHelper.e(MathHelper.a(this.bt)) * 3.1415927F * 0.25F;
             if (!this.q.I) {
                 this.x = 0.0D;
@@ -119,7 +122,7 @@ public class EntitySquid extends EntityWaterMob {
                 this.z = 0.0D;
             }
 
-            this.bp = (float) ((double) this.bp + (double) (-90.0F - this.bp) * 0.02D);
+            this.bp = (float)((double)this.bp + (double)(-90.0F - this.bp) * 0.02D);
         }
     }
 
@@ -127,11 +130,12 @@ public class EntitySquid extends EntityWaterMob {
         this.d(this.x, this.y, this.z);
     }
 
-    protected void bk() {
+    protected void bl() {
         ++this.aV;
         if (this.aV > 100) {
             this.bA = this.bB = this.bC = 0.0F;
-        } else if (this.ab.nextInt(50) == 0 || !this.ae || this.bA == 0.0F && this.bB == 0.0F && this.bC == 0.0F) {
+        }
+        else if (this.ab.nextInt(50) == 0 || !this.ae || this.bA == 0.0F && this.bB == 0.0F && this.bC == 0.0F) {
             float f0 = this.ab.nextFloat() * 3.1415927F * 2.0F;
 
             this.bA = MathHelper.b(f0) * 0.2F;
@@ -139,7 +143,7 @@ public class EntitySquid extends EntityWaterMob {
             this.bC = MathHelper.a(f0) * 0.2F;
         }
 
-        this.bo();
+        this.u();
     }
 
     public boolean bs() {

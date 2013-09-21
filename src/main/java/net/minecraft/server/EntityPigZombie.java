@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import java.util.List;
-import java.util.UUID;
 import net.canarymod.api.entity.living.monster.CanaryPigZombie;
 import net.canarymod.hook.entity.MobTargetHook;
+
+import java.util.List;
+import java.util.UUID;
 
 public class EntityPigZombie extends EntityZombie {
 
@@ -19,14 +20,14 @@ public class EntityPigZombie extends EntityZombie {
         this.entity = new CanaryPigZombie(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(bp).a(0.0D);
         this.a(SharedMonsterAttributes.d).a(0.5D);
         this.a(SharedMonsterAttributes.e).a(5.0D);
     }
 
-    protected boolean be() {
+    protected boolean bf() {
         return false;
     }
 
@@ -42,19 +43,19 @@ public class EntityPigZombie extends EntityZombie {
 
         this.bu = this.j;
         if (this.bt > 0 && --this.bt == 0) {
-            this.a("mob.zombiepig.zpigangry", this.aZ() * 2.0F, ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F) * 1.8F);
+            this.a("mob.zombiepig.zpigangry", this.ba() * 2.0F, ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F) * 1.8F);
         }
 
         super.l_();
     }
 
     public boolean bs() {
-        return this.q.r > 0 && this.q.b(this.E) && this.q.a((Entity) this, this.E).isEmpty() && !this.q.d(this.E);
+        return this.q.r > 0 && this.q.b(this.E) && this.q.a((Entity)this, this.E).isEmpty() && !this.q.d(this.E);
     }
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("Anger", (short) this.bs);
+        nbttagcompound.a("Anger", (short)this.bs);
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -67,23 +68,24 @@ public class EntityPigZombie extends EntityZombie {
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.aq()) {
+        if (this.ar()) {
             return false;
-        } else {
+        }
+        else {
             Entity entity = damagesource.i();
 
             if (entity instanceof EntityPlayer) {
                 // CanaryMod: MobTarget
-                MobTargetHook hook = (MobTargetHook) new MobTargetHook((net.canarymod.api.entity.living.LivingBase) this.getCanaryEntity(), (net.canarymod.api.entity.living.LivingBase) entity.getCanaryEntity()).call();
+                MobTargetHook hook = (MobTargetHook)new MobTargetHook((net.canarymod.api.entity.living.LivingBase)this.getCanaryEntity(), (net.canarymod.api.entity.living.LivingBase)entity.getCanaryEntity()).call();
                 if (!hook.isCanceled()) {
 
-                    List list = this.q.b((Entity) this, this.E.b(32.0D, 32.0D, 32.0D));
+                    List list = this.q.b((Entity)this, this.E.b(32.0D, 32.0D, 32.0D));
 
                     for (int i1 = 0; i1 < list.size(); ++i1) {
-                        Entity entity1 = (Entity) list.get(i1);
+                        Entity entity1 = (Entity)list.get(i1);
 
                         if (entity1 instanceof EntityPigZombie) {
-                            EntityPigZombie entitypigzombie = (EntityPigZombie) entity1;
+                            EntityPigZombie entitypigzombie = (EntityPigZombie)entity1;
                             entitypigzombie.c(entity);
                         }
                     }
@@ -106,11 +108,11 @@ public class EntityPigZombie extends EntityZombie {
         return "mob.zombiepig.zpig";
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.zombiepig.zpighurt";
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.zombiepig.zpigdeath";
     }
 

@@ -12,7 +12,7 @@ public class EntitySpider extends EntityMob {
 
     protected void a() {
         super.a();
-        this.ah.a(16, new Byte((byte) 0));
+        this.ah.a(16, new Byte((byte)0));
     }
 
     public void l_() {
@@ -22,8 +22,8 @@ public class EntitySpider extends EntityMob {
         }
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(16.0D);
         this.a(SharedMonsterAttributes.d).a(0.800000011920929D);
     }
@@ -35,7 +35,8 @@ public class EntitySpider extends EntityMob {
             double d0 = 16.0D;
 
             return this.q.b(this, d0);
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -44,11 +45,11 @@ public class EntitySpider extends EntityMob {
         return "mob.spider.say";
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.spider.say";
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.spider.death";
     }
 
@@ -61,18 +62,20 @@ public class EntitySpider extends EntityMob {
 
         if (f1 > 0.5F && this.ab.nextInt(100) == 0) {
             this.j = null;
-        } else {
+        }
+        else {
             if (f0 > 2.0F && f0 < 6.0F && this.ab.nextInt(10) == 0) {
                 if (this.F) {
                     double d0 = entity.u - this.u;
                     double d1 = entity.w - this.w;
                     float f2 = MathHelper.a(d0 * d0 + d1 * d1);
 
-                    this.x = d0 / (double) f2 * 0.5D * 0.800000011920929D + this.x * 0.20000000298023224D;
-                    this.z = d1 / (double) f2 * 0.5D * 0.800000011920929D + this.z * 0.20000000298023224D;
+                    this.x = d0 / (double)f2 * 0.5D * 0.800000011920929D + this.x * 0.20000000298023224D;
+                    this.z = d1 / (double)f2 * 0.5D * 0.800000011920929D + this.z * 0.20000000298023224D;
                     this.y = 0.4000000059604645D;
                 }
-            } else {
+            }
+            else {
                 super.a(entity, f0);
             }
         }
@@ -93,9 +96,10 @@ public class EntitySpider extends EntityMob {
         return this.bT();
     }
 
-    public void al() {}
+    public void am() {
+    }
 
-    public EnumCreatureAttribute aX() {
+    public EnumCreatureAttribute aY() {
         return EnumCreatureAttribute.c;
     }
 
@@ -111,8 +115,9 @@ public class EntitySpider extends EntityMob {
         byte b0 = this.ah.a(16);
 
         if (flag0) {
-            b0 = (byte) (b0 | 1);
-        } else {
+            b0 = (byte)(b0 | 1);
+        }
+        else {
             b0 &= -2;
         }
 
@@ -126,26 +131,26 @@ public class EntitySpider extends EntityMob {
             EntitySkeleton entityskeleton = new EntitySkeleton(this.q);
 
             entityskeleton.b(this.u, this.v, this.w, this.A, 0.0F);
-            entityskeleton.a((EntityLivingData) null);
-            this.q.d((Entity) entityskeleton);
-            entityskeleton.a((Entity) this);
+            entityskeleton.a((EntityLivingData)null);
+            this.q.d((Entity)entityskeleton);
+            entityskeleton.a((Entity)this);
         }
 
         if (object == null) {
             object = new SpiderEffectsGroupData();
             if (this.q.r > 2 && this.q.s.nextFloat() < 0.1F * this.q.b(this.u, this.v, this.w)) {
-                ((SpiderEffectsGroupData) object).a(this.q.s);
+                ((SpiderEffectsGroupData)object).a(this.q.s);
             }
         }
 
         if (object instanceof SpiderEffectsGroupData) {
-            int i0 = ((SpiderEffectsGroupData) object).a;
+            int i0 = ((SpiderEffectsGroupData)object).a;
 
             if (i0 > 0 && Potion.a[i0] != null) {
                 this.c(new PotionEffect(i0, Integer.MAX_VALUE));
             }
         }
 
-        return (EntityLivingData) object;
+        return (EntityLivingData)object;
     }
 }

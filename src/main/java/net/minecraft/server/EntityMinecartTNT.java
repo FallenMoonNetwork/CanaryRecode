@@ -29,7 +29,8 @@ public class EntityMinecartTNT extends EntityMinecart {
         if (this.a > 0) {
             --this.a;
             this.q.a("smoke", this.u, this.v + 0.5D, this.w, 0.0D, 0.0D, 0.0D);
-        } else if (this.a == 0) {
+        }
+        else if (this.a == 0) {
             this.c(this.x * this.x + this.z * this.z);
         }
 
@@ -63,8 +64,8 @@ public class EntityMinecartTNT extends EntityMinecart {
                 d1 = 5.0D;
             }
 
-            this.q.a(this, this.u, this.v, this.w, (float) (4.0D + this.ab.nextDouble() * 1.5D * d1), true);
-            this.w();
+            this.q.a(this, this.u, this.v, this.w, (float)(4.0D + this.ab.nextDouble() * 1.5D * d1), true);
+            this.x();
         }
     }
 
@@ -72,7 +73,7 @@ public class EntityMinecartTNT extends EntityMinecart {
         if (f0 >= 3.0F) {
             float f1 = f0 / 10.0F;
 
-            this.c((double) (f1 * f1));
+            this.c((double)(f1 * f1));
         }
 
         super.b(f0);
@@ -87,21 +88,21 @@ public class EntityMinecartTNT extends EntityMinecart {
     public void d() {
         this.a = 80;
         if (!this.q.I) {
-            this.q.a((Entity) this, (byte) 10);
-            this.q.a((Entity) this, "random.fuse", 1.0F, 1.0F);
+            this.q.a((Entity)this, (byte)10);
+            this.q.a((Entity)this, "random.fuse", 1.0F, 1.0F);
         }
     }
 
-    public boolean ay() {
+    public boolean u() {
         return this.a > -1;
     }
 
     public float a(Explosion explosion, World world, int i0, int i1, int i2, Block block) {
-        return this.ay() && (BlockRailBase.e_(block.cF) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? 0.0F : super.a(explosion, world, i0, i1, i2, block);
+        return this.u() && (BlockRailBase.e_(block.cF) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? 0.0F : super.a(explosion, world, i0, i1, i2, block);
     }
 
     public boolean a(Explosion explosion, World world, int i0, int i1, int i2, int i3, float f0) {
-        return this.ay() && (BlockRailBase.e_(i3) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? false : super.a(explosion, world, i0, i1, i2, i3, f0);
+        return this.u() && (BlockRailBase.e_(i3) || BlockRailBase.d_(world, i0, i1 + 1, i2)) ? false : super.a(explosion, world, i0, i1, i2, i3, f0);
     }
 
     protected void a(NBTTagCompound nbttagcompound) {

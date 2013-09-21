@@ -1,12 +1,13 @@
 package net.minecraft.server;
 
+import net.canarymod.api.world.blocks.CanaryBeacon;
+
 import java.util.Iterator;
 import java.util.List;
-import net.canarymod.api.world.blocks.CanaryBeacon;
 
 public class TileEntityBeacon extends TileEntity implements IInventory {
 
-    public static final Potion[][] a = new Potion[][]{ { Potion.c, Potion.e }, { Potion.m, Potion.j }, { Potion.g }, { Potion.l } };
+    public static final Potion[][] a = new Potion[][]{{Potion.c, Potion.e}, {Potion.m, Potion.j}, {Potion.g}, {Potion.l}};
     private boolean d;
     private int e = -1;
     private int f;
@@ -27,23 +28,23 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
 
     private void u() {
         if (this.d && this.e > 0 && !this.k.I && this.f > 0) {
-            double d0 = (double) (this.e * 10 + 10);
+            double d0 = (double)(this.e * 10 + 10);
             byte b0 = 0;
 
             if (this.e >= 4 && this.f == this.g) {
                 b0 = 1;
             }
 
-            AxisAlignedBB axisalignedbb = AxisAlignedBB.a().a((double) this.l, (double) this.m, (double) this.n, (double) (this.l + 1), (double) (this.m + 1), (double) (this.n + 1)).b(d0, d0, d0);
+            AxisAlignedBB axisalignedbb = AxisAlignedBB.a().a((double)this.l, (double)this.m, (double)this.n, (double)(this.l + 1), (double)(this.m + 1), (double)(this.n + 1)).b(d0, d0, d0);
 
-            axisalignedbb.e = (double) this.k.R();
+            axisalignedbb.e = (double)this.k.R();
             List list = this.k.a(EntityPlayer.class, axisalignedbb);
             Iterator iterator = list.iterator();
 
             EntityPlayer entityplayer;
 
             while (iterator.hasNext()) {
-                entityplayer = (EntityPlayer) iterator.next();
+                entityplayer = (EntityPlayer)iterator.next();
                 entityplayer.c(new PotionEffect(this.f, 180, b0, true));
             }
 
@@ -51,7 +52,7 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
                 iterator = list.iterator();
 
                 while (iterator.hasNext()) {
-                    entityplayer = (EntityPlayer) iterator.next();
+                    entityplayer = (EntityPlayer)iterator.next();
                     entityplayer.c(new PotionEffect(this.g, 180, 0, true));
                 }
             }
@@ -62,7 +63,8 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
         if (!this.k.l(this.l, this.m + 1, this.n)) {
             this.d = false;
             this.e = 0;
-        } else {
+        }
+        else {
             this.d = true;
             this.e = 0;
 
@@ -182,11 +184,13 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
 
                 this.h = null;
                 return itemstack;
-            } else {
+            }
+            else {
                 this.h.b -= i1;
                 return new ItemStack(this.h.d, i1, this.h.k());
             }
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -197,7 +201,8 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
 
             this.h = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -225,12 +230,14 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
     }
 
     public boolean a(EntityPlayer entityplayer) {
-        return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
+        return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double)this.l + 0.5D, (double)this.m + 0.5D, (double)this.n + 0.5D) <= 64.0D;
     }
 
-    public void k_() {}
+    public void k_() {
+    }
 
-    public void g() {}
+    public void g() {
+    }
 
     public boolean b(int i0, ItemStack itemstack) {
         return itemstack.d == Item.bJ.cv || itemstack.d == Item.p.cv || itemstack.d == Item.r.cv || itemstack.d == Item.q.cv;
@@ -250,7 +257,7 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
     }
 
     public CanaryBeacon getCanaryBeacon() {
-        return (CanaryBeacon) complexBlock;
+        return (CanaryBeacon)complexBlock;
     }
     //
 }

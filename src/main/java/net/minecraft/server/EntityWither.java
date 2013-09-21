@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import java.util.List;
 import net.canarymod.api.entity.living.monster.CanaryWither;
+
+import java.util.List;
 
 public class EntityWither extends EntityMob implements IRangedAttackMob {
 
@@ -16,7 +17,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
 
     public EntityWither(World world) {
         super(world);
-        this.g(this.aS());
+        this.g(this.aT());
         this.a(0.9F, 4.0F);
         this.ag = true;
         this.k().e(true);
@@ -53,11 +54,11 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
         return "mob.wither.idle";
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.wither.hurt";
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.wither.death";
     }
 
@@ -84,7 +85,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
                 d0 = entity.w - this.w;
                 d1 = d3 * d3 + d0 * d0;
                 if (d1 > 9.0D) {
-                    d2 = (double) MathHelper.a(d1);
+                    d2 = (double)MathHelper.a(d1);
                     this.x += (d3 / d2 * 0.5D - this.x) * 0.6000000238418579D;
                     this.z += (d0 / d2 * 0.5D - this.z) * 0.6000000238418579D;
                 }
@@ -92,7 +93,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
         }
 
         if (this.x * this.x + this.z * this.z > 0.05000000074505806D) {
-            this.A = (float) Math.atan2(this.z, this.x) * 57.295776F - 90.0F;
+            this.A = (float)Math.atan2(this.z, this.x) * 57.295776F - 90.0F;
         }
 
         super.c();
@@ -119,15 +120,16 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
                 d1 = this.s(i0 + 1);
                 d2 = this.t(i0 + 1);
                 double d4 = entity1.u - d0;
-                double d5 = entity1.v + (double) entity1.f() - d1;
+                double d5 = entity1.v + (double)entity1.f() - d1;
                 double d6 = entity1.w - d2;
-                double d7 = (double) MathHelper.a(d4 * d4 + d6 * d6);
-                float f0 = (float) (Math.atan2(d6, d4) * 180.0D / 3.1415927410125732D) - 90.0F;
-                float f1 = (float) (-(Math.atan2(d5, d7) * 180.0D / 3.1415927410125732D));
+                double d7 = (double)MathHelper.a(d4 * d4 + d6 * d6);
+                float f0 = (float)(Math.atan2(d6, d4) * 180.0D / 3.1415927410125732D) - 90.0F;
+                float f1 = (float)(-(Math.atan2(d5, d7) * 180.0D / 3.1415927410125732D));
 
                 this.bp[i0] = this.b(this.bp[i0], f1, 40.0F);
                 this.bq[i0] = this.b(this.bq[i0], f0, 10.0F);
-            } else {
+            }
+            else {
                 this.bq[i0] = this.b(this.bq[i0], this.aN, 10.0F);
             }
         }
@@ -147,27 +149,28 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
 
         if (this.bU() > 0) {
             for (i1 = 0; i1 < 3; ++i1) {
-                this.q.a("mobSpell", this.u + this.ab.nextGaussian() * 1.0D, this.v + (double) (this.ab.nextFloat() * 3.3F), this.w + this.ab.nextGaussian() * 1.0D, 0.699999988079071D, 0.699999988079071D, 0.8999999761581421D);
+                this.q.a("mobSpell", this.u + this.ab.nextGaussian() * 1.0D, this.v + (double)(this.ab.nextFloat() * 3.3F), this.w + this.ab.nextGaussian() * 1.0D, 0.699999988079071D, 0.699999988079071D, 0.8999999761581421D);
             }
         }
     }
 
-    protected void bh() {
+    protected void bi() {
         int i0;
 
         if (this.bU() > 0) {
             i0 = this.bU() - 1;
             if (i0 <= 0) {
-                this.q.a(this, this.u, this.v + (double) this.f(), this.w, 7.0F, false, this.q.O().b("mobGriefing"));
-                this.q.d(1013, (int) this.u, (int) this.v, (int) this.w, 0);
+                this.q.a(this, this.u, this.v + (double)this.f(), this.w, 7.0F, false, this.q.O().b("mobGriefing"));
+                this.q.d(1013, (int)this.u, (int)this.v, (int)this.w, 0);
             }
 
             this.p(i0);
             if (this.ac % 10 == 0) {
                 this.f(10.0F);
             }
-        } else {
-            super.bh();
+        }
+        else {
+            super.bi();
 
             int i1;
 
@@ -182,9 +185,9 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
                         if (i4003 > 15) {
                             float f0 = 10.0F;
                             float f1 = 5.0F;
-                            double d0 = MathHelper.a(this.ab, this.u - (double) f0, this.u + (double) f0);
-                            double d1 = MathHelper.a(this.ab, this.v - (double) f1, this.v + (double) f1);
-                            double d2 = MathHelper.a(this.ab, this.w - (double) f0, this.w + (double) f0);
+                            double d0 = MathHelper.a(this.ab, this.u - (double)f0, this.u + (double)f0);
+                            double d1 = MathHelper.a(this.ab, this.v - (double)f1, this.v + (double)f1);
+                            double d2 = MathHelper.a(this.ab, this.w - (double)f0, this.w + (double)f0);
 
                             this.a(i0 + 1, d0, d1, d2, true);
                             this.bu[i0 - 1] = 0;
@@ -195,25 +198,28 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
                     if (i1 > 0) {
                         Entity entity = this.q.a(i1);
 
-                        if (entity != null && entity.S() && this.e(entity) <= 900.0D && this.o(entity)) {
-                            this.a(i0 + 1, (EntityLivingBase) entity);
+                        if (entity != null && entity.T() && this.e(entity) <= 900.0D && this.o(entity)) {
+                            this.a(i0 + 1, (EntityLivingBase)entity);
                             this.bt[i0 - 1] = this.ac + 40 + this.ab.nextInt(20);
                             this.bu[i0 - 1] = 0;
-                        } else {
+                        }
+                        else {
                             this.c(i0, 0);
                         }
-                    } else {
+                    }
+                    else {
                         List list = this.q.a(EntityLivingBase.class, this.E.b(20.0D, 8.0D, 20.0D), bw);
 
                         for (int i4 = 0; i4 < 10 && !list.isEmpty(); ++i4) {
-                            EntityLivingBase entitylivingbase = (EntityLivingBase) list.get(this.ab.nextInt(list.size()));
+                            EntityLivingBase entitylivingbase = (EntityLivingBase)list.get(this.ab.nextInt(list.size()));
 
-                            if (entitylivingbase != this && entitylivingbase.S() && this.o(entitylivingbase)) {
+                            if (entitylivingbase != this && entitylivingbase.T() && this.o(entitylivingbase)) {
                                 if (entitylivingbase instanceof EntityPlayer) {
-                                    if (!((EntityPlayer) entitylivingbase).bG.a) {
+                                    if (!((EntityPlayer)entitylivingbase).bG.a) {
                                         this.c(i0, entitylivingbase.k);
                                     }
-                                } else {
+                                }
+                                else {
                                     this.c(i0, entitylivingbase.k);
                                 }
                                 break;
@@ -227,7 +233,8 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
 
             if (this.m() != null) {
                 this.c(0, this.m().k);
-            } else {
+            }
+            else {
                 this.c(0, 0);
             }
 
@@ -255,7 +262,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
                     }
 
                     if (flag0) {
-                        this.q.a((EntityPlayer) null, 1012, (int) this.u, (int) this.v, (int) this.w, 0);
+                        this.q.a((EntityPlayer)null, 1012, (int)this.u, (int)this.v, (int)this.w, 0);
                     }
                 }
             }
@@ -268,23 +275,25 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
 
     public void bT() {
         this.p(220);
-        this.g(this.aS() / 3.0F);
+        this.g(this.aT() / 3.0F);
     }
 
-    public void al() {}
+    public void am() {
+    }
 
-    public int aP() {
+    public int aQ() {
         return 4;
     }
 
     private double r(int i0) {
         if (i0 <= 0) {
             return this.u;
-        } else {
-            float f0 = (this.aN + (float) (180 * (i0 - 1))) / 180.0F * 3.1415927F;
+        }
+        else {
+            float f0 = (this.aN + (float)(180 * (i0 - 1))) / 180.0F * 3.1415927F;
             float f1 = MathHelper.b(f0);
 
-            return this.u + (double) f1 * 1.3D;
+            return this.u + (double)f1 * 1.3D;
         }
     }
 
@@ -295,11 +304,12 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
     private double t(int i0) {
         if (i0 <= 0) {
             return this.w;
-        } else {
-            float f0 = (this.aN + (float) (180 * (i0 - 1))) / 180.0F * 3.1415927F;
+        }
+        else {
+            float f0 = (this.aN + (float)(180 * (i0 - 1))) / 180.0F * 3.1415927F;
             float f1 = MathHelper.a(f0);
 
-            return this.w + (double) f1 * 1.3D;
+            return this.w + (double)f1 * 1.3D;
         }
     }
 
@@ -318,11 +328,11 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
     }
 
     private void a(int i0, EntityLivingBase entitylivingbase) {
-        this.a(i0, entitylivingbase.u, entitylivingbase.v + (double) entitylivingbase.f() * 0.5D, entitylivingbase.w, i0 == 0 && this.ab.nextFloat() < 0.001F);
+        this.a(i0, entitylivingbase.u, entitylivingbase.v + (double)entitylivingbase.f() * 0.5D, entitylivingbase.w, i0 == 0 && this.ab.nextFloat() < 0.001F);
     }
 
     private void a(int i0, double d0, double d1, double d2, boolean flag0) {
-        this.q.a((EntityPlayer) null, 1014, (int) this.u, (int) this.v, (int) this.w, 0);
+        this.q.a((EntityPlayer)null, 1014, (int)this.u, (int)this.v, (int)this.w, 0);
         double d3 = this.r(i0);
         double d4 = this.s(i0);
         double d5 = this.t(i0);
@@ -338,7 +348,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
         entitywitherskull.v = d4;
         entitywitherskull.u = d3;
         entitywitherskull.w = d5;
-        this.q.d((Entity) entitywitherskull);
+        this.q.d((Entity)entitywitherskull);
     }
 
     public void a(EntityLivingBase entitylivingbase, float f0) {
@@ -346,13 +356,16 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.aq()) {
+        if (this.ar()) {
             return false;
-        } else if (damagesource == DamageSource.e) {
+        }
+        else if (damagesource == DamageSource.e) {
             return false;
-        } else if (this.bU() > 0) {
+        }
+        else if (this.bU() > 0) {
             return false;
-        } else {
+        }
+        else {
             Entity entity;
 
             if (this.bV()) {
@@ -363,9 +376,10 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
             }
 
             entity = damagesource.i();
-            if (entity != null && !(entity instanceof EntityPlayer) && entity instanceof EntityLivingBase && ((EntityLivingBase) entity).aX() == this.aX()) {
+            if (entity != null && !(entity instanceof EntityPlayer) && entity instanceof EntityLivingBase && ((EntityLivingBase)entity).aY() == this.aY()) {
                 return false;
-            } else {
+            }
+            else {
                 if (this.bv <= 0) {
                     this.bv = 20;
                 }
@@ -383,24 +397,26 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
         this.b(Item.bU.cv, 1);
     }
 
-    protected void bo() {
+    protected void u() {
         this.aV = 0;
     }
 
-    public boolean K() {
+    public boolean L() {
         return !this.M;
     }
 
-    protected void b(float f0) {}
+    protected void b(float f0) {
+    }
 
-    public void c(PotionEffect potioneffect) {}
+    public void c(PotionEffect potioneffect) {
+    }
 
-    protected boolean be() {
+    protected boolean bf() {
         return true;
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(300.0D);
         this.a(SharedMonsterAttributes.d).a(0.6000000238418579D);
         this.a(SharedMonsterAttributes.b).a(40.0D);
@@ -423,10 +439,10 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
     }
 
     public boolean bV() {
-        return this.aM() <= this.aS() / 2.0F;
+        return this.aN() <= this.aT() / 2.0F;
     }
 
-    public EnumCreatureAttribute aX() {
+    public EnumCreatureAttribute aY() {
         return EnumCreatureAttribute.b;
     }
 

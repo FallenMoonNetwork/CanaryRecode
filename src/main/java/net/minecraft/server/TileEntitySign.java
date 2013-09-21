@@ -4,7 +4,7 @@ import net.canarymod.api.world.blocks.CanarySign;
 
 public class TileEntitySign extends TileEntity {
 
-    public String[] a = new String[]{ "", "", "", "" };
+    public String[] a = new String[]{"", "", "", ""};
     public int b = -1;
     public boolean c = true; // CanaryMod: private => public; editable
     private EntityPlayer d;
@@ -65,7 +65,7 @@ public class TileEntitySign extends TileEntity {
 
     // CanaryMod
     public CanarySign getCanarySign() {
-        return (CanarySign) complexBlock;
+        return (CanarySign)complexBlock;
     }
 
     public String getOwnerName() {

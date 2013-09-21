@@ -6,14 +6,15 @@ final class BehaviorDispenseMinecart extends BehaviorDefaultDispenseItem {
 
     private final BehaviorDefaultDispenseItem b = new BehaviorDefaultDispenseItem();
 
-    BehaviorDispenseMinecart() {}
+    BehaviorDispenseMinecart() {
+    }
 
     public ItemStack b(IBlockSource iblocksource, ItemStack itemstack) {
         EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
         World world = iblocksource.k();
-        double d0 = iblocksource.a() + (double) ((float) enumfacing.c() * 1.125F);
-        double d1 = iblocksource.b() + (double) ((float) enumfacing.d() * 1.125F);
-        double d2 = iblocksource.c() + (double) ((float) enumfacing.e() * 1.125F);
+        double d0 = iblocksource.a() + (double)((float)enumfacing.c() * 1.125F);
+        double d1 = iblocksource.b() + (double)((float)enumfacing.d() * 1.125F);
+        double d2 = iblocksource.c() + (double)((float)enumfacing.e() * 1.125F);
         int i0 = iblocksource.d() + enumfacing.c();
         int i1 = iblocksource.e() + enumfacing.d();
         int i2 = iblocksource.f() + enumfacing.e();
@@ -22,7 +23,8 @@ final class BehaviorDispenseMinecart extends BehaviorDefaultDispenseItem {
 
         if (BlockRailBase.e_(i3)) {
             d3 = 0.0D;
-        } else {
+        }
+        else {
             if (i3 != 0 || !BlockRailBase.e_(world.a(i0, i1 - 1, i2))) {
                 return this.b.a(iblocksource, itemstack);
             }
@@ -30,14 +32,14 @@ final class BehaviorDispenseMinecart extends BehaviorDefaultDispenseItem {
             d3 = -1.0D;
         }
 
-        EntityMinecart entityminecart = EntityMinecart.a(world, d0, d1 + d3, d2, ((ItemMinecart) itemstack.b()).a);
+        EntityMinecart entityminecart = EntityMinecart.a(world, d0, d1 + d3, d2, ((ItemMinecart)itemstack.b()).a);
         if (itemstack.u()) {
             entityminecart.a(itemstack.s());
         }
         // CanaryMod: Dispense
-        DispenseHook hook = (DispenseHook) new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), entityminecart.getCanaryEntity()).call();
+        DispenseHook hook = (DispenseHook)new DispenseHook(((TileEntityDispenser)iblocksource.j()).getCanaryDispenser(), entityminecart.getCanaryEntity()).call();
         if (!hook.isCanceled()) {
-            world.d((Entity) entityminecart);
+            world.d((Entity)entityminecart);
             itemstack.a(1);
         }
         //

@@ -1,13 +1,14 @@
 package net.minecraft.server;
 
+import net.canarymod.api.potion.CanaryPotionEffect;
+import net.canarymod.hook.player.EatHook;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import net.canarymod.api.potion.CanaryPotionEffect;
-import net.canarymod.hook.player.EatHook;
 
 public class ItemPotion extends Item {
 
@@ -28,14 +29,15 @@ public class ItemPotion extends Item {
             NBTTagList nbttaglist = itemstack.q().m("CustomPotionEffects");
 
             for (int i0 = 0; i0 < nbttaglist.c(); ++i0) {
-                NBTTagCompound nbttagcompound = (NBTTagCompound) nbttaglist.b(i0);
+                NBTTagCompound nbttagcompound = (NBTTagCompound)nbttaglist.b(i0);
 
                 arraylist.add(PotionEffect.b(nbttagcompound));
             }
 
             return arraylist;
-        } else {
-            List list = (List) this.a.get(Integer.valueOf(itemstack.k()));
+        }
+        else {
+            List list = (List)this.a.get(Integer.valueOf(itemstack.k()));
 
             if (list == null) {
                 list = PotionHelper.b(itemstack.k(), false);
@@ -47,7 +49,7 @@ public class ItemPotion extends Item {
     }
 
     public List c(int i0) {
-        List list = (List) this.a.get(Integer.valueOf(i0));
+        List list = (List)this.a.get(Integer.valueOf(i0));
 
         if (list == null) {
             list = PotionHelper.b(i0, false);
@@ -71,7 +73,7 @@ public class ItemPotion extends Item {
                 int index = 0;
 
                 while (iterator.hasNext()) {
-                    PotionEffect potioneffect = (PotionEffect) iterator.next();
+                    PotionEffect potioneffect = (PotionEffect)iterator.next();
 
                     // entityplayer.c(new PotionEffect(potioneffect));
                     // add to the array first
@@ -83,17 +85,17 @@ public class ItemPotion extends Item {
         }
 
         // Call Hook
-        EatHook hook = (EatHook) new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), 0, 0, effects).call();
+        EatHook hook = (EatHook)new EatHook(((EntityPlayerMP)entityplayer).getPlayer(), itemstack.getCanaryItem(), 0, 0, effects).call();
         if (hook.isCanceled()) {
             return itemstack;
         }
         // Apply food changes
-        entityplayer.bH().a(hook.getLevelGain(), hook.getSaturationGain());
+        entityplayer.bI().a(hook.getLevelGain(), hook.getSaturationGain());
         // And finally add the effects
         if (hook.getPotionEffects() != null) {
             for (net.canarymod.api.potion.PotionEffect effect : hook.getPotionEffects()) {
                 if (effect != null) {
-                    entityplayer.c(((CanaryPotionEffect) effect).getHandle());
+                    entityplayer.c(((CanaryPotionEffect)effect).getHandle());
                 }
             }
         }
@@ -128,13 +130,14 @@ public class ItemPotion extends Item {
                 --itemstack.b;
             }
 
-            world.a((Entity) entityplayer, "random.bow", 0.5F, 0.4F / (f.nextFloat() * 0.4F + 0.8F));
+            world.a((Entity)entityplayer, "random.bow", 0.5F, 0.4F / (f.nextFloat() * 0.4F + 0.8F));
             if (!world.I) {
-                world.d((Entity) (new EntityPotion(world, entityplayer, itemstack)));
+                world.d((Entity)(new EntityPotion(world, entityplayer, itemstack)));
             }
 
             return itemstack;
-        } else {
+        }
+        else {
             entityplayer.a(itemstack, this.d_(itemstack));
             return itemstack;
         }
@@ -151,7 +154,8 @@ public class ItemPotion extends Item {
     public String l(ItemStack itemstack) {
         if (itemstack.k() == 0) {
             return StatCollector.a("item.emptyPotion.name").trim();
-        } else {
+        }
+        else {
             String s0 = "";
 
             if (f(itemstack.k())) {
@@ -162,10 +166,11 @@ public class ItemPotion extends Item {
             String s1;
 
             if (list != null && !list.isEmpty()) {
-                s1 = ((PotionEffect) list.get(0)).f();
+                s1 = ((PotionEffect)list.get(0)).f();
                 s1 = s1 + ".postfix";
                 return s0 + StatCollector.a(s1).trim();
-            } else {
+            }
+            else {
                 s1 = PotionHelper.c(itemstack.k());
                 return StatCollector.a(s1).trim() + " " + super.l(itemstack);
             }

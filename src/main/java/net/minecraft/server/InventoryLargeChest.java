@@ -51,7 +51,8 @@ public class InventoryLargeChest implements IInventory {
     public void a(int i0, ItemStack itemstack) {
         if (i0 >= this.b.j_()) {
             this.c.a(i0 - this.b.j_(), itemstack);
-        } else {
+        }
+        else {
             this.b.a(i0, itemstack);
         }
     }

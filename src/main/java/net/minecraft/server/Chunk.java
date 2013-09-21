@@ -1,13 +1,5 @@
 package net.minecraft.server;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import net.canarymod.Canary;
 import net.canarymod.PortalReconstructJob;
 import net.canarymod.api.world.CanaryChunk;
@@ -15,6 +7,14 @@ import net.canarymod.api.world.blocks.BlockType;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.PortalDestroyHook;
 import net.canarymod.tasks.ServerTaskManager;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class Chunk {
 
@@ -61,7 +61,7 @@ public class Chunk {
         }
 
         Arrays.fill(this.b, -999);
-        Arrays.fill(this.s, (byte) -1);
+        Arrays.fill(this.s, (byte)-1);
     }
 
     public Chunk(World world, byte[] abyte, int i0, int i1) {
@@ -224,7 +224,8 @@ public class Chunk {
 
         if (i3 > i2) {
             this.d(i0, i1, i2, i3 + 1);
-        } else if (i3 < i2) {
+        }
+        else if (i3 < i2) {
             this.d(i0, i1, i3, i2 + 1);
         }
     }
@@ -271,7 +272,8 @@ public class Chunk {
                             this.e.p((this.g << 4) + i0, i7, (this.h << 4) + i2);
                         }
                     }
-                } else {
+                }
+                else {
                     for (i7 = i3; i7 < i4; ++i7) {
                         // CanaryMod start: Catch corrupt index info
                         if (i7 >> 4 < 0 || i7 >> 4 >= 16) {
@@ -343,7 +345,8 @@ public class Chunk {
     public int a(int i0, int i1, int i2) {
         if (i1 >> 4 >= this.r.length) {
             return 0;
-        } else {
+        }
+        else {
             ExtendedBlockStorage extendedblockstorage = this.r[i1 >> 4];
 
             return extendedblockstorage != null ? extendedblockstorage.a(i0, i1 & 15, i2) : 0;
@@ -353,7 +356,8 @@ public class Chunk {
     public int c(int i0, int i1, int i2) {
         if (i1 >> 4 >= this.r.length) {
             return 0;
-        } else {
+        }
+        else {
             ExtendedBlockStorage extendedblockstorage = this.r[i1 >> 4];
 
             return extendedblockstorage != null ? extendedblockstorage.b(i0, i1 & 15, i2) : 0;
@@ -377,7 +381,8 @@ public class Chunk {
 
         if (i7 == i3 && i8 == i4) {
             return false;
-        } else {
+        }
+        else {
             // CanaryMod: Start - check if removed block is portal block
             int portalPointX = this.g * 16 + i0;
             int portalPointZ = this.h * 16 + i2;
@@ -409,7 +414,7 @@ public class Chunk {
 
                         for (int i9001 = 0; i9001 < 3 && completePortal; i9001 += 1) {
                             for (int i9002 = 0; i9002 < 2 && completePortal; i9002 += 1) {
-                                portalBlocks[i9001][i9002] = (CanaryBlock) canaryChunk.getDimension().getBlockAt(portalX + i9002 * portalXOffset, portalY - i9001, portalZ + i9002 * portalZOffset);
+                                portalBlocks[i9001][i9002] = (CanaryBlock)canaryChunk.getDimension().getBlockAt(portalX + i9002 * portalXOffset, portalY - i9001, portalZ + i9002 * portalZOffset);
                                 if (portalBlocks[i9001][i9002].getTypeId() != portalId) {
                                     completePortal = false;
                                 }
@@ -417,7 +422,7 @@ public class Chunk {
                         }
                         if (completePortal == true) {
                             // CanaryMod: PortalDestroy
-                            PortalDestroyHook hook = (PortalDestroyHook) new PortalDestroyHook(portalBlocks).call();
+                            PortalDestroyHook hook = (PortalDestroyHook)new PortalDestroyHook(portalBlocks).call();
                             if (hook.isCanceled()) {// Hook canceled = don't destroy the portal.
                                 // in that case we need to reconstruct the portal's frame to make the portal valid.
                                 // Problem is we don't want to reconstruct it right away because more blocks might be deleted (for example on explosion).
@@ -453,23 +458,27 @@ public class Chunk {
             if (i7 != 0) {
                 if (!this.e.I) {
                     Block.s[i7].a(this.e, i9, i1, i10, i7, i8);
-                } else if (Block.s[i7] instanceof ITileEntityProvider && i7 != i3) {
+                }
+                else if (Block.s[i7] instanceof ITileEntityProvider && i7 != i3) {
                     this.e.s(i9, i1, i10);
                 }
             }
 
             if (extendedblockstorage.a(i0, i1 & 15, i2) != i3) {
                 return false;
-            } else {
+            }
+            else {
                 extendedblockstorage.b(i0, i1 & 15, i2, i4);
                 if (flag0) {
                     this.b();
-                } else {
+                }
+                else {
                     if (Block.u[i3 & 4095] > 0) {
                         if (i1 >= i6) {
                             this.h(i0, i1 + 1, i2);
                         }
-                    } else if (i1 == i6 - 1) {
+                    }
+                    else if (i1 == i6 - 1) {
                         this.h(i0, i1, i2);
                     }
 
@@ -486,7 +495,7 @@ public class Chunk {
                     if (Block.s[i3] instanceof ITileEntityProvider) {
                         tileentity = this.e(i0, i1, i2);
                         if (tileentity == null) {
-                            tileentity = ((ITileEntityProvider) Block.s[i3])
+                            tileentity = ((ITileEntityProvider)Block.s[i3])
                                     .b(this.e);
                             this.e.a(i9, i1, i10, tileentity);
                         }
@@ -495,7 +504,8 @@ public class Chunk {
                             tileentity.i();
                         }
                     }
-                } else if (i7 > 0 && Block.s[i7] instanceof ITileEntityProvider) {
+                }
+                else if (i7 > 0 && Block.s[i7] instanceof ITileEntityProvider) {
                     tileentity = this.e(i0, i1, i2);
                     if (tileentity != null) {
                         tileentity.i();
@@ -517,26 +527,27 @@ public class Chunk {
             extendedblockstorage = this.r[i1 >> 4];
 //            return false;
         } //else {
-            int i4 = extendedblockstorage.b(i0, i1 & 15, i2);
+        int i4 = extendedblockstorage.b(i0, i1 & 15, i2);
 
-            if (i4 == i3) {
-                return false;
-            } else {
-                this.l = true;
-                extendedblockstorage.b(i0, i1 & 15, i2, i3);
-                int i5 = extendedblockstorage.a(i0, i1 & 15, i2);
+        if (i4 == i3) {
+            return false;
+        }
+        else {
+            this.l = true;
+            extendedblockstorage.b(i0, i1 & 15, i2, i3);
+            int i5 = extendedblockstorage.a(i0, i1 & 15, i2);
 
-                if (i5 > 0 && Block.s[i5] instanceof ITileEntityProvider) {
-                    TileEntity tileentity = this.e(i0, i1, i2);
+            if (i5 > 0 && Block.s[i5] instanceof ITileEntityProvider) {
+                TileEntity tileentity = this.e(i0, i1, i2);
 
-                    if (tileentity != null) {
-                        tileentity.i();
-                        tileentity.p = i3;
-                    }
+                if (tileentity != null) {
+                    tileentity.i();
+                    tileentity.p = i3;
                 }
-
-                return true;
             }
+
+            return true;
+        }
 //        }
     }
 
@@ -546,9 +557,9 @@ public class Chunk {
         return extendedblockstorage == null ? (this.d(i0, i1, i2) ? enumskyblock.c
                 : 0)
                 : (enumskyblock == EnumSkyBlock.a ? (this.e.t.g ? 0
-                        : extendedblockstorage.c(i0, i1 & 15, i2))
-                        : (enumskyblock == EnumSkyBlock.b ? extendedblockstorage
-                                .d(i0, i1 & 15, i2) : enumskyblock.c));
+                : extendedblockstorage.c(i0, i1 & 15, i2))
+                : (enumskyblock == EnumSkyBlock.b ? extendedblockstorage
+                .d(i0, i1 & 15, i2) : enumskyblock.c));
     }
 
     public void a(EnumSkyBlock enumskyblock, int i0, int i1, int i2, int i3) {
@@ -564,7 +575,8 @@ public class Chunk {
             if (!this.e.t.g) {
                 extendedblockstorage.c(i0, i1 & 15, i2, i3);
             }
-        } else if (enumskyblock == EnumSkyBlock.b) {
+        }
+        else if (enumskyblock == EnumSkyBlock.b) {
             extendedblockstorage.d(i0, i1 & 15, i2, i3);
         }
     }
@@ -574,7 +586,8 @@ public class Chunk {
 
         if (extendedblockstorage == null) {
             return !this.e.t.g && i3 < EnumSkyBlock.a.c ? EnumSkyBlock.a.c - i3 : 0;
-        } else {
+        }
+        else {
             int i4 = this.e.t.g ? 0 : extendedblockstorage.c(i0, i1 & 15, i2);
 
             if (i4 > 0) {
@@ -600,7 +613,7 @@ public class Chunk {
         if (i0 != this.g || i1 != this.h) {
             this.e.Y().c("Wrong location! " + entity);
             // Thread.dumpStack();
-            entity.w();
+            entity.x(); // TODO: Verify for 1.6.4
             return;
         }
 
@@ -643,7 +656,7 @@ public class Chunk {
 
     public TileEntity e(int i0, int i1, int i2) {
         ChunkPosition chunkposition = new ChunkPosition(i0, i1, i2);
-        TileEntity tileentity = (TileEntity) this.i.get(chunkposition);
+        TileEntity tileentity = (TileEntity)this.i.get(chunkposition);
 
         if (tileentity == null) {
             int i3 = this.a(i0, i1, i2);
@@ -653,17 +666,18 @@ public class Chunk {
             }
 
             if (tileentity == null) {
-                tileentity = ((ITileEntityProvider) Block.s[i3]).b(this.e);
+                tileentity = ((ITileEntityProvider)Block.s[i3]).b(this.e);
                 this.e.a(this.g * 16 + i0, i1, this.h * 16 + i2, tileentity);
             }
 
-            tileentity = (TileEntity) this.i.get(chunkposition);
+            tileentity = (TileEntity)this.i.get(chunkposition);
         }
 
         if (tileentity != null && tileentity.r()) {
             this.i.remove(chunkposition);
             return null;
-        } else {
+        }
+        else {
             return tileentity;
         }
     }
@@ -688,7 +702,7 @@ public class Chunk {
         tileentity.n = this.h * 16 + i2;
         if (this.a(i0, i1, i2) != 0 && Block.s[this.a(i0, i1, i2)] instanceof ITileEntityProvider) {
             if (this.i.containsKey(chunkposition)) {
-                ((TileEntity) this.i.get(chunkposition)).w_();
+                ((TileEntity)this.i.get(chunkposition)).w_();
             }
 
             tileentity.s();
@@ -700,7 +714,7 @@ public class Chunk {
         ChunkPosition chunkposition = new ChunkPosition(i0, i1, i2);
 
         if (this.d) {
-            TileEntity tileentity = (TileEntity) this.i.remove(chunkposition);
+            TileEntity tileentity = (TileEntity)this.i.remove(chunkposition);
 
             if (tileentity != null) {
                 tileentity.w_();
@@ -716,9 +730,9 @@ public class Chunk {
             Iterator iterator = this.j[i0].iterator();
 
             while (iterator.hasNext()) {
-                Entity entity = (Entity) iterator.next();
+                Entity entity = (Entity)iterator.next();
 
-                entity.Q();
+                entity.R();
             }
 
             this.e.a(this.j[i0]);
@@ -730,7 +744,7 @@ public class Chunk {
         Iterator iterator = this.i.values().iterator();
 
         while (iterator.hasNext()) {
-            TileEntity tileentity = (TileEntity) iterator.next();
+            TileEntity tileentity = (TileEntity)iterator.next();
 
             this.e.a(tileentity);
         }
@@ -762,11 +776,11 @@ public class Chunk {
             List list1 = this.j[i2];
 
             for (int i3 = 0; i3 < list1.size(); ++i3) {
-                Entity entity1 = (Entity) list1.get(i3);
+                Entity entity1 = (Entity)list1.get(i3);
 
                 if (entity1 != entity && entity1.E.b(axisalignedbb) && (ientityselector == null || ientityselector.a(entity1))) {
                     list.add(entity1);
-                    Entity[] aentity = entity1.an();
+                    Entity[] aentity = entity1.ao();
 
                     if (aentity != null) {
                         for (int i4 = 0; i4 < aentity.length; ++i4) {
@@ -787,13 +801,15 @@ public class Chunk {
 
         if (i0 < 0) {
             i0 = 0;
-        } else if (i0 >= this.j.length) {
+        }
+        else if (i0 >= this.j.length) {
             i0 = this.j.length - 1;
         }
 
         if (i1 >= this.j.length) {
             i1 = this.j.length - 1;
-        } else if (i1 < 0) {
+        }
+        else if (i1 < 0) {
             i1 = 0;
         }
 
@@ -801,7 +817,7 @@ public class Chunk {
             List list1 = this.j[i2];
 
             for (int i3 = 0; i3 < list1.size(); ++i3) {
-                Entity entity = (Entity) list1.get(i3);
+                Entity entity = (Entity)list1.get(i3);
 
                 if (oclass0.isAssignableFrom(entity.getClass()) && entity.E.b(axisalignedbb) && (ientityselector == null || ientityselector.a(entity))) {
                     list.add(entity);
@@ -815,7 +831,8 @@ public class Chunk {
             if (this.m && this.e.I() != this.n || this.l) {
                 return true;
             }
-        } else if (this.m && this.e.I() >= this.n + 600L) {
+        }
+        else if (this.m && this.e.I() >= this.n + 600L) {
             return true;
         }
 
@@ -823,7 +840,7 @@ public class Chunk {
     }
 
     public Random a(long i0) {
-        return new Random(this.e.H() + (long) (this.g * this.g * 4987142) + (long) (this.g * 5947611) + (long) (this.h * this.h) * 4392871L + (long) (this.h * 389711) ^ i0);
+        return new Random(this.e.H() + (long)(this.g * this.g * 4987142) + (long)(this.g * 5947611) + (long)(this.h * this.h) * 4392871L + (long)(this.h * 389711) ^ i0);
     }
 
     public boolean g() {
@@ -863,7 +880,8 @@ public class Chunk {
 
                 if (!material.c() && !material.d()) {
                     --i4;
-                } else {
+                }
+                else {
                     i3 = i4 + 1;
                 }
             }
@@ -915,7 +933,7 @@ public class Chunk {
             BiomeGenBase biomegenbase = worldchunkmanager.a((this.g << 4) + i0, (this.h << 4) + i1);
 
             i2 = biomegenbase.N;
-            this.s[i1 << 4 | i0] = (byte) (i2 & 255);
+            this.s[i1 << 4 | i0] = (byte)(i2 & 255);
         }
 
         return BiomeGenBase.a[i2] == null ? BiomeGenBase.c : BiomeGenBase.a[i2];

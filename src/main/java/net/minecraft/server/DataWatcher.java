@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import net.canarymod.api.CanaryDataWatcher;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
@@ -10,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import net.canarymod.api.CanaryDataWatcher;
 
 public class DataWatcher {
 
@@ -30,15 +31,18 @@ public class DataWatcher {
     }
 
     public void a(int i0, Object object) {
-        Integer integer = (Integer) b.get(object.getClass());
+        Integer integer = (Integer)b.get(object.getClass());
 
         if (integer == null) {
             throw new IllegalArgumentException("Unknown data type: " + object.getClass());
-        } else if (i0 > 31) {
+        }
+        else if (i0 > 31) {
             throw new IllegalArgumentException("Data value id is too big with " + i0 + "! (Max is " + 31 + ")");
-        } else if (this.c.containsKey(Integer.valueOf(i0))) {
+        }
+        else if (this.c.containsKey(Integer.valueOf(i0))) {
             throw new IllegalArgumentException("Duplicate id value for " + i0 + "!");
-        } else {
+        }
+        else {
             WatchableObject watchableobject = new WatchableObject(integer.intValue(), i0, object);
 
             this.e.writeLock().lock();
@@ -58,27 +62,27 @@ public class DataWatcher {
     }
 
     public byte a(int i0) {
-        return ((Byte) this.i(i0).b()).byteValue();
+        return ((Byte)this.i(i0).b()).byteValue();
     }
 
     public short b(int i0) {
-        return ((Short) this.i(i0).b()).shortValue();
+        return ((Short)this.i(i0).b()).shortValue();
     }
 
     public int c(int i0) {
-        return ((Integer) this.i(i0).b()).intValue();
+        return ((Integer)this.i(i0).b()).intValue();
     }
 
     public float d(int i0) {
-        return ((Float) this.i(i0).b()).floatValue();
+        return ((Float)this.i(i0).b()).floatValue();
     }
 
     public String e(int i0) {
-        return (String) this.i(i0).b();
+        return (String)this.i(i0).b();
     }
 
     public ItemStack f(int i0) {
-        return (ItemStack) this.i(i0).b();
+        return (ItemStack)this.i(i0).b();
     }
 
     private WatchableObject i(int i0) {
@@ -87,8 +91,9 @@ public class DataWatcher {
         WatchableObject watchableobject;
 
         try {
-            watchableobject = (WatchableObject) this.c.get(Integer.valueOf(i0));
-        } catch (Throwable throwable) {
+            watchableobject = (WatchableObject)this.c.get(Integer.valueOf(i0));
+        }
+        catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.a(throwable, "Getting synched entity data");
             CrashReportCategory crashreportcategory = crashreport.a("Synched entity data");
 
@@ -124,7 +129,7 @@ public class DataWatcher {
             Iterator iterator = list.iterator();
 
             while (iterator.hasNext()) {
-                WatchableObject watchableobject = (WatchableObject) iterator.next();
+                WatchableObject watchableobject = (WatchableObject)iterator.next();
 
                 a(dataoutput, watchableobject);
             }
@@ -141,7 +146,7 @@ public class DataWatcher {
             Iterator iterator = this.c.values().iterator();
 
             while (iterator.hasNext()) {
-                WatchableObject watchableobject = (WatchableObject) iterator.next();
+                WatchableObject watchableobject = (WatchableObject)iterator.next();
 
                 if (watchableobject.d()) {
                     watchableobject.a(false);
@@ -165,7 +170,7 @@ public class DataWatcher {
         Iterator iterator = this.c.values().iterator();
 
         while (iterator.hasNext()) {
-            WatchableObject watchableobject = (WatchableObject) iterator.next();
+            WatchableObject watchableobject = (WatchableObject)iterator.next();
 
             a(dataoutput, watchableobject);
         }
@@ -182,7 +187,7 @@ public class DataWatcher {
         WatchableObject watchableobject;
 
         for (Iterator iterator = this.c.values().iterator(); iterator.hasNext(); arraylist.add(watchableobject)) {
-            watchableobject = (WatchableObject) iterator.next();
+            watchableobject = (WatchableObject)iterator.next();
             if (arraylist == null) {
                 arraylist = new ArrayList();
             }
@@ -198,33 +203,33 @@ public class DataWatcher {
         dataoutput.writeByte(i0);
         switch (watchableobject.c()) {
             case 0:
-                dataoutput.writeByte(((Byte) watchableobject.b()).byteValue());
+                dataoutput.writeByte(((Byte)watchableobject.b()).byteValue());
                 break;
 
             case 1:
-                dataoutput.writeShort(((Short) watchableobject.b()).shortValue());
+                dataoutput.writeShort(((Short)watchableobject.b()).shortValue());
                 break;
 
             case 2:
-                dataoutput.writeInt(((Integer) watchableobject.b()).intValue());
+                dataoutput.writeInt(((Integer)watchableobject.b()).intValue());
                 break;
 
             case 3:
-                dataoutput.writeFloat(((Float) watchableobject.b()).floatValue());
+                dataoutput.writeFloat(((Float)watchableobject.b()).floatValue());
                 break;
 
             case 4:
-                Packet.a((String) watchableobject.b(), dataoutput);
+                Packet.a((String)watchableobject.b(), dataoutput);
                 break;
 
             case 5:
-                ItemStack itemstack = (ItemStack) watchableobject.b();
+                ItemStack itemstack = (ItemStack)watchableobject.b();
 
                 Packet.a(itemstack, dataoutput);
                 break;
 
             case 6:
-                ChunkCoordinates chunkcoordinates = (ChunkCoordinates) watchableobject.b();
+                ChunkCoordinates chunkcoordinates = (ChunkCoordinates)watchableobject.b();
 
                 dataoutput.writeInt(chunkcoordinates.a);
                 dataoutput.writeInt(chunkcoordinates.b);
@@ -303,7 +308,7 @@ public class DataWatcher {
 
     /**
      * get the CanaryMod DataWatcher wrapper
-     * 
+     *
      * @return
      */
     public CanaryDataWatcher getCanaryDataWatcher() {

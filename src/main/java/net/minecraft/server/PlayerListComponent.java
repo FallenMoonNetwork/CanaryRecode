@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
+import javax.swing.*;
 import java.util.Vector;
-import javax.swing.JList;
 
 public class PlayerListComponent extends JList implements IUpdatePlayerListBox {
 
@@ -10,7 +10,7 @@ public class PlayerListComponent extends JList implements IUpdatePlayerListBox {
 
     public PlayerListComponent(MinecraftServer minecraftserver) {
         this.a = minecraftserver;
-        minecraftserver.a((IUpdatePlayerListBox) this);
+        minecraftserver.a((IUpdatePlayerListBox)this);
     }
 
     public void a() {
@@ -18,7 +18,7 @@ public class PlayerListComponent extends JList implements IUpdatePlayerListBox {
             Vector vector = new Vector();
 
             for (int i0 = 0; i0 < this.a.af().a.size(); ++i0) {
-                vector.add(((EntityPlayerMP) this.a.af().a.get(i0)).c_());
+                vector.add(((EntityPlayerMP)this.a.af().a.get(i0)).c_());
             }
 
             this.setListData(vector);

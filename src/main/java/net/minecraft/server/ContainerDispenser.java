@@ -35,7 +35,7 @@ public class ContainerDispenser extends Container {
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
-        Slot slot = (Slot) this.c.get(i0);
+        Slot slot = (Slot)this.c.get(i0);
 
         if (slot != null && slot.e()) {
             ItemStack itemstack1 = slot.d();
@@ -45,13 +45,15 @@ public class ContainerDispenser extends Container {
                 if (!this.a(itemstack1, 9, 45, true)) {
                     return null;
                 }
-            } else if (!this.a(itemstack1, 0, 9, false)) {
+            }
+            else if (!this.a(itemstack1, 0, 9, false)) {
                 return null;
             }
 
             if (itemstack1.b == 0) {
-                slot.c((ItemStack) null);
-            } else {
+                slot.c((ItemStack)null);
+            }
+            else {
                 slot.f();
             }
 

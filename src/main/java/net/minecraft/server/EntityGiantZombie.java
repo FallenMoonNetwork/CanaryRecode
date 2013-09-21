@@ -11,8 +11,8 @@ public class EntityGiantZombie extends EntityMob {
         this.entity = new CanaryGiantZombie(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(100.0D);
         this.a(SharedMonsterAttributes.d).a(0.5D);
         this.a(SharedMonsterAttributes.e).a(50.0D);

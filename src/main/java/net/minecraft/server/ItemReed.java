@@ -17,13 +17,14 @@ public class ItemReed extends Item {
         int i4 = world.a(i0, i1, i2);
 
         // CanaryMod: BlockPlaceHook
-        CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+        CanaryBlock clicked = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
-        clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
+        clicked.setFaceClicked(BlockFace.fromByte((byte)i3));
 
         if (i4 == Block.aX.cF && (world.h(i0, i1, i2) & 7) < 1) {
             i3 = 1;
-        } else if (i4 != Block.bz.cF && i4 != Block.ac.cF && i4 != Block.ad.cF) {
+        }
+        else if (i4 != Block.bz.cF && i4 != Block.ac.cF && i4 != Block.ad.cF) {
             if (i3 == 0) {
                 --i1;
             }
@@ -51,28 +52,30 @@ public class ItemReed extends Item {
 
         if (!entityplayer.a(i0, i1, i2, i3, itemstack)) {
             return false;
-        } else if (itemstack.b == 0) {
+        }
+        else if (itemstack.b == 0) {
             return false;
-        } else {
-            if (world.a(this.a, i0, i1, i2, false, i3, (Entity) null, itemstack)) {
+        }
+        else {
+            if (world.a(this.a, i0, i1, i2, false, i3, (Entity)null, itemstack)) {
                 Block block = Block.s[this.a];
                 int i5 = block.a(world, i0, i1, i2, i3, f0, f1, f2, 0);
 
                 if (world.f(i0, i1, i2, this.a, i5, 3)) {
                     // set placed
-                    CanaryBlock placed = new CanaryBlock((short) this.a, (short) 0, i0, i1, i2, world.getCanaryWorld());
+                    CanaryBlock placed = new CanaryBlock((short)this.a, (short)0, i0, i1, i2, world.getCanaryWorld());
                     // Create and Call
-                    BlockPlaceHook hook = (BlockPlaceHook) new BlockPlaceHook(((EntityPlayerMP) entityplayer).getPlayer(), clicked, placed).call();
+                    BlockPlaceHook hook = (BlockPlaceHook)new BlockPlaceHook(((EntityPlayerMP)entityplayer).getPlayer(), clicked, placed).call();
                     if (hook.isCanceled()) {
                         return false;
                     }
                     //
                     if (world.a(i0, i1, i2) == this.a) {
-                        Block.s[this.a].a(world, i0, i1, i2, (EntityLivingBase) entityplayer, itemstack);
+                        Block.s[this.a].a(world, i0, i1, i2, (EntityLivingBase)entityplayer, itemstack);
                         Block.s[this.a].k(world, i0, i1, i2, i5);
                     }
 
-                    world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), block.cS.b(), (block.cS.c() + 1.0F) / 2.0F, block.cS.d() * 0.8F);
+                    world.a((double)((float)i0 + 0.5F), (double)((float)i1 + 0.5F), (double)((float)i2 + 0.5F), block.cS.b(), (block.cS.c() + 1.0F) / 2.0F, block.cS.d() * 0.8F);
                     --itemstack.b;
                 }
             }

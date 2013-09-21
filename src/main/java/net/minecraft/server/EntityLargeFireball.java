@@ -20,14 +20,14 @@ public class EntityLargeFireball extends EntityFireball {
     protected void a(MovingObjectPosition movingobjectposition) {
         if (!this.q.I) {
             // CanaryMod: ProjectileHitHook
-            ProjectileHitHook hook = (ProjectileHitHook) new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
+            ProjectileHitHook hook = (ProjectileHitHook)new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
             if (!hook.isCanceled()) { //
                 if (movingobjectposition.g != null) {
-                    movingobjectposition.g.a(DamageSource.a((EntityFireball) this, this.a), 6);
+                    movingobjectposition.g.a(DamageSource.a((EntityFireball)this, this.a), 6);
                 }
 
-                this.q.a((Entity) null, this.u, this.v, this.w, (float) this.e, true, this.q.O().b("mobGriefing"));
-                this.w();
+                this.q.a((Entity)null, this.u, this.v, this.w, (float)this.e, true, this.q.O().b("mobGriefing"));
+                this.x();
             }
         }
     }

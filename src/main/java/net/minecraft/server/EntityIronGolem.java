@@ -29,31 +29,32 @@ public class EntityIronGolem extends EntityGolem {
 
     protected void a() {
         super.a();
-        this.ah.a(16, Byte.valueOf((byte) 0));
+        this.ah.a(16, Byte.valueOf((byte)0));
     }
 
-    public boolean be() {
+    public boolean bf() {
         return true;
     }
 
-    protected void bj() {
+    protected void bk() {
         if (--this.bq <= 0) {
             this.bq = 70 + this.ab.nextInt(50);
             this.bp = this.q.A.a(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w), 32);
             if (this.bp == null) {
                 this.bR();
-            } else {
+            }
+            else {
                 ChunkCoordinates chunkcoordinates = this.bp.a();
 
-                this.b(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c, (int) ((float) this.bp.b() * 0.6F));
+                this.b(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c, (int)((float)this.bp.b() * 0.6F));
             }
         }
 
-        super.bj();
+        super.bk();
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(100.0D);
         this.a(SharedMonsterAttributes.d).a(0.25D);
     }
@@ -63,8 +64,8 @@ public class EntityIronGolem extends EntityGolem {
     }
 
     protected void n(Entity entity) {
-        if (entity instanceof IMob && this.aC().nextInt(20) == 0) {
-            this.d((EntityLivingBase) entity);
+        if (entity instanceof IMob && this.aD().nextInt(20) == 0) {
+            this.d((EntityLivingBase)entity);
         }
 
         super.n(entity);
@@ -82,12 +83,12 @@ public class EntityIronGolem extends EntityGolem {
 
         if (this.x * this.x + this.z * this.z > 2.500000277905201E-7D && this.ab.nextInt(5) == 0) {
             int i0 = MathHelper.c(this.u);
-            int i1 = MathHelper.c(this.v - 0.20000000298023224D - (double) this.N);
+            int i1 = MathHelper.c(this.v - 0.20000000298023224D - (double)this.N);
             int i2 = MathHelper.c(this.w);
             int i3 = this.q.a(i0, i1, i2);
 
             if (i3 > 0) {
-                this.q.a("tilecrack_" + i3 + "_" + this.q.h(i0, i1, i2), this.u + ((double) this.ab.nextFloat() - 0.5D) * (double) this.O, this.E.b + 0.1D, this.w + ((double) this.ab.nextFloat() - 0.5D) * (double) this.O, 4.0D * ((double) this.ab.nextFloat() - 0.5D), 0.5D, ((double) this.ab.nextFloat() - 0.5D) * 4.0D);
+                this.q.a("tilecrack_" + i3 + "_" + this.q.h(i0, i1, i2), this.u + ((double)this.ab.nextFloat() - 0.5D) * (double)this.O, this.E.b + 0.1D, this.w + ((double)this.ab.nextFloat() - 0.5D) * (double)this.O, 4.0D * ((double)this.ab.nextFloat() - 0.5D), 0.5D, ((double)this.ab.nextFloat() - 0.5D) * 4.0D);
             }
         }
     }
@@ -108,8 +109,8 @@ public class EntityIronGolem extends EntityGolem {
 
     public boolean m(Entity entity) {
         this.br = 10;
-        this.q.a((Entity) this, (byte) 4);
-        boolean flag0 = entity.a(DamageSource.a((EntityLivingBase) this), (float) (7 + this.ab.nextInt(15)));
+        this.q.a((Entity)this, (byte)4);
+        boolean flag0 = entity.a(DamageSource.a((EntityLivingBase)this), (float)(7 + this.ab.nextInt(15)));
 
         if (flag0) {
             entity.y += 0.4000000059604645D;
@@ -125,18 +126,18 @@ public class EntityIronGolem extends EntityGolem {
 
     public void a(boolean flag0) {
         this.bs = flag0 ? 400 : 0;
-        this.q.a((Entity) this, (byte) 11);
+        this.q.a((Entity)this, (byte)11);
     }
 
     protected String r() {
         return "none";
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.irongolem.hit";
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.irongolem.death";
     }
 
@@ -172,9 +173,10 @@ public class EntityIronGolem extends EntityGolem {
         byte b0 = this.ah.a(16);
 
         if (flag0) {
-            this.ah.b(16, Byte.valueOf((byte) (b0 | 1)));
-        } else {
-            this.ah.b(16, Byte.valueOf((byte) (b0 & -2)));
+            this.ah.b(16, Byte.valueOf((byte)(b0 | 1)));
+        }
+        else {
+            this.ah.b(16, Byte.valueOf((byte)(b0 & -2)));
         }
     }
 

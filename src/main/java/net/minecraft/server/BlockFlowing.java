@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.FlowHook;
 import net.canarymod.hook.world.LiquidDestroyHook;
+
+import java.util.Random;
 
 public class BlockFlowing extends BlockFluid {
 
@@ -28,7 +29,7 @@ public class BlockFlowing extends BlockFluid {
     public void a(World world, int i0, int i1, int i2, Random random) {
 
         // CanaryMod: Flow from
-        CanaryBlock from = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+        CanaryBlock from = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
         //
 
         int i3 = this.l_(world, i0, i1, i2);
@@ -61,7 +62,8 @@ public class BlockFlowing extends BlockFluid {
 
                 if (i7 >= 8) {
                     i5 = i7;
-                } else {
+                }
+                else {
                     i5 = i7 + 8;
                 }
             }
@@ -69,7 +71,8 @@ public class BlockFlowing extends BlockFluid {
             if (this.a >= 2 && this.cU == Material.h) {
                 if (world.g(i0, i1 - 1, i2).a()) {
                     i5 = 0;
-                } else if (world.g(i0, i1 - 1, i2) == this.cU && world.h(i0, i1 - 1, i2) == 0) {
+                }
+                else if (world.g(i0, i1 - 1, i2) == this.cU && world.h(i0, i1 - 1, i2) == 0) {
                     i5 = 0;
                 }
             }
@@ -82,17 +85,20 @@ public class BlockFlowing extends BlockFluid {
                 if (flag0) {
                     this.k(world, i0, i1, i2);
                 }
-            } else {
+            }
+            else {
                 i3 = i5;
                 if (i5 < 0) {
                     world.i(i0, i1, i2);
-                } else {
+                }
+                else {
                     world.b(i0, i1, i2, i5, 2);
                     world.a(i0, i1, i2, this.cF, i4);
                     world.f(i0, i1, i2, this.cF);
                 }
             }
-        } else {
+        }
+        else {
             this.k(world, i0, i1, i2);
         }
 
@@ -104,17 +110,19 @@ public class BlockFlowing extends BlockFluid {
             }
 
             // CanaryMod: Flow (down)
-            CanaryBlock to = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1 - 1, i2);
-            FlowHook hook = (FlowHook) new FlowHook(from, to).call();
+            CanaryBlock to = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1 - 1, i2);
+            FlowHook hook = (FlowHook)new FlowHook(from, to).call();
             if (!hook.isCanceled()) {
                 if (i3 >= 8) {
                     this.e(world, i0, i1 - 1, i2, i3);
-                } else {
+                }
+                else {
                     this.e(world, i0, i1 - 1, i2, i3 + 8);
                 }
             }
             //
-        } else if (i3 >= 0 && (i3 == 0 || this.n(world, i0, i1 - 1, i2))) {
+        }
+        else if (i3 >= 0 && (i3 == 0 || this.n(world, i0, i1 - 1, i2))) {
             boolean[] aboolean = this.m(world, i0, i1, i2);
 
             i5 = i3 + b0;
@@ -128,8 +136,8 @@ public class BlockFlowing extends BlockFluid {
 
             if (aboolean[0]) {
                 // CanaryMod: Flow
-                CanaryBlock to = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0 - 1, i1, i2);
-                FlowHook hook = (FlowHook) new FlowHook(from, to).call();
+                CanaryBlock to = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0 - 1, i1, i2);
+                FlowHook hook = (FlowHook)new FlowHook(from, to).call();
                 if (!hook.isCanceled()) {
                     this.e(world, i0 - 1, i1, i2, i5);
                 }
@@ -138,8 +146,8 @@ public class BlockFlowing extends BlockFluid {
 
             if (aboolean[1]) {
                 // CanaryMod: Flow
-                CanaryBlock to = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0 + 1, i1, i2);
-                FlowHook hook = (FlowHook) new FlowHook(from, to).call();
+                CanaryBlock to = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0 + 1, i1, i2);
+                FlowHook hook = (FlowHook)new FlowHook(from, to).call();
                 if (!hook.isCanceled()) {
                     this.e(world, i0 + 1, i1, i2, i5);
                 }
@@ -148,8 +156,8 @@ public class BlockFlowing extends BlockFluid {
 
             if (aboolean[2]) {
                 // CanaryMod: Flow
-                CanaryBlock to = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2 - 1);
-                FlowHook hook = (FlowHook) new FlowHook(from, to).call();
+                CanaryBlock to = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2 - 1);
+                FlowHook hook = (FlowHook)new FlowHook(from, to).call();
                 if (!hook.isCanceled()) {
                     this.e(world, i0, i1, i2 - 1, i5);
                 }
@@ -158,8 +166,8 @@ public class BlockFlowing extends BlockFluid {
 
             if (aboolean[3]) {
                 // CanaryMod: Flow
-                CanaryBlock to = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2 + 1);
-                FlowHook hook = (FlowHook) new FlowHook(from, to).call();
+                CanaryBlock to = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2 + 1);
+                FlowHook hook = (FlowHook)new FlowHook(from, to).call();
                 if (!hook.isCanceled()) {
                     this.e(world, i0, i1, i2 + 1, i5);
                 }
@@ -175,7 +183,8 @@ public class BlockFlowing extends BlockFluid {
             if (i4 > 0) {
                 if (this.cU == Material.i) {
                     this.j(world, i0, i1, i2);
-                } else {
+                }
+                else {
                     Block.s[i4].c(world, i0, i1, i2, world.h(i0, i1, i2), 0);
                 }
             }
@@ -255,7 +264,8 @@ public class BlockFlowing extends BlockFluid {
             if (!this.n(world, i4, i1, i5) && (world.g(i4, i1, i5) != this.cU || world.h(i4, i1, i5) != 0)) {
                 if (this.n(world, i4, i1 - 1, i5)) {
                     this.c[i3] = this.d(world, i4, i1, i5, 1, i3);
-                } else {
+                }
+                else {
                     this.c[i3] = 0;
                 }
             }
@@ -282,12 +292,14 @@ public class BlockFlowing extends BlockFluid {
         if (i3 != Block.aJ.cF && i3 != Block.aQ.cF && i3 != Block.aI.cF && i3 != Block.aK.cF && i3 != Block.bc.cF) {
             if (i3 == 0) {
                 return false;
-            } else {
+            }
+            else {
                 Material material = Block.s[i3].cU;
 
                 return material == Material.D ? true : material.c();
             }
-        } else {
+        }
+        else {
             return true;
         }
     }
@@ -297,7 +309,8 @@ public class BlockFlowing extends BlockFluid {
 
         if (i4 < 0) {
             return i3;
-        } else {
+        }
+        else {
             if (i4 == 0) {
                 ++this.a;
             }
@@ -312,11 +325,12 @@ public class BlockFlowing extends BlockFluid {
 
     private boolean o(World world, int i0, int i1, int i2) {
         // CanaryMod: LiquidDestroy
-        CanaryBlock dest = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
-        LiquidDestroyHook hook = (LiquidDestroyHook) new LiquidDestroyHook(dest).call();
+        CanaryBlock dest = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
+        LiquidDestroyHook hook = (LiquidDestroyHook)new LiquidDestroyHook(dest).call();
         if (hook.isForceDestroy()) {
             return true;
-        } else if (hook.isCanceled()) {
+        }
+        else if (hook.isCanceled()) {
             return false;
         }
         //

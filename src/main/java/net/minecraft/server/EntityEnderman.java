@@ -1,12 +1,12 @@
 package net.minecraft.server;
 
-import java.util.Arrays;
-import java.util.UUID;
-import net.canarymod.Canary;
 import net.canarymod.api.entity.living.monster.CanaryEnderman;
 import net.canarymod.config.Configuration;
 import net.canarymod.hook.entity.EndermanDropBlockHook;
 import net.canarymod.hook.entity.EndermanPickupBlockHook;
+
+import java.util.Arrays;
+import java.util.UUID;
 
 public class EntityEnderman extends EntityMob {
 
@@ -25,8 +25,8 @@ public class EntityEnderman extends EntityMob {
         this.entity = new CanaryEnderman(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(40.0D);
         this.a(SharedMonsterAttributes.d).a(0.30000001192092896D);
         this.a(SharedMonsterAttributes.e).a(7.0D);
@@ -34,15 +34,15 @@ public class EntityEnderman extends EntityMob {
 
     protected void a() {
         super.a();
-        this.ah.a(16, new Byte((byte) 0));
-        this.ah.a(17, new Byte((byte) 0));
-        this.ah.a(18, new Byte((byte) 0));
+        this.ah.a(16, new Byte((byte)0));
+        this.ah.a(17, new Byte((byte)0));
+        this.ah.a(18, new Byte((byte)0));
     }
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("carried", (short) this.bV());
-        nbttagcompound.a("carriedData", (short) this.bW());
+        nbttagcompound.a("carried", (short)this.bV());
+        nbttagcompound.a("carriedData", (short)this.bW());
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -58,7 +58,7 @@ public class EntityEnderman extends EntityMob {
             if (this.f(entityplayer)) {
                 this.bv = true;
                 if (this.bt == 0) {
-                    this.q.a((Entity) entityplayer, "mob.endermen.stare", 1.0F, 1.0F);
+                    this.q.a((Entity)entityplayer, "mob.endermen.stare", 1.0F, 1.0F);
                 }
 
                 if (this.bt++ == 5) {
@@ -66,7 +66,8 @@ public class EntityEnderman extends EntityMob {
                     this.a(true);
                     return entityplayer;
                 }
-            } else {
+            }
+            else {
                 this.bt = 0;
             }
         }
@@ -79,9 +80,10 @@ public class EntityEnderman extends EntityMob {
 
         if (itemstack != null && itemstack.d == Block.bf.cF) {
             return false;
-        } else {
+        }
+        else {
             Vec3 vec3 = entityplayer.j(1.0F).a();
-            Vec3 vec31 = this.q.V().a(this.u - entityplayer.u, this.E.b + (double) (this.P / 2.0F) - (entityplayer.v + (double) entityplayer.f()), this.w - entityplayer.w);
+            Vec3 vec31 = this.q.V().a(this.u - entityplayer.u, this.E.b + (double)(this.P / 2.0F) - (entityplayer.v + (double)entityplayer.f()), this.w - entityplayer.w);
             double d0 = vec31.b();
 
             vec31 = vec31.a();
@@ -92,7 +94,7 @@ public class EntityEnderman extends EntityMob {
     }
 
     public void c() {
-        if (this.F()) {
+        if (this.G()) {
             this.a(DamageSource.e, 1.0F);
         }
 
@@ -119,10 +121,10 @@ public class EntityEnderman extends EntityMob {
                     i1 = MathHelper.c(this.v + this.ab.nextDouble() * 3.0D);
                     i2 = MathHelper.c(this.w - 2.0D + this.ab.nextDouble() * 4.0D);
                     i3 = this.q.a(i0, i1, i2);
-                    // CanaryMod: Replace checking static array with checking the world config list or Ender Blocks
+                    // CanaryMod: Replace checking static array with checking the world config list for Ender Blocks
                     if (Arrays.asList(Configuration.getWorldConfig(getCanaryWorld().getFqName()).getEnderBlocks()).contains(i3)) {
                         // CanaryMod: call EndermanPickupBlockHook
-                        EndermanPickupBlockHook hook = (EndermanPickupBlockHook) new EndermanPickupBlockHook((CanaryEnderman) entity, ((CanaryEnderman) entity).getWorld().getBlockAt(i0, i1, i2)).call();
+                        EndermanPickupBlockHook hook = (EndermanPickupBlockHook)new EndermanPickupBlockHook((CanaryEnderman)entity, entity.getWorld().getBlockAt(i0, i1, i2)).call();
                         if (!hook.isCanceled()) {
                             this.a(this.q.a(i0, i1, i2));
                             this.c(this.q.h(i0, i1, i2));
@@ -131,7 +133,8 @@ public class EntityEnderman extends EntityMob {
                         //
                     }
                 }
-            } else if (this.ab.nextInt(2000) == 0) {
+            }
+            else if (this.ab.nextInt(2000) == 0) {
                 i0 = MathHelper.c(this.u - 1.0D + this.ab.nextDouble() * 2.0D);
                 i1 = MathHelper.c(this.v + this.ab.nextDouble() * 2.0D);
                 i2 = MathHelper.c(this.w - 1.0D + this.ab.nextDouble() * 2.0D);
@@ -140,9 +143,7 @@ public class EntityEnderman extends EntityMob {
 
                 if (i3 == 0 && i4 > 0 && Block.s[i4].b()) {
                     // CanaryMod: call EndermanDropBlockHook
-                    EndermanDropBlockHook hook = new EndermanDropBlockHook((CanaryEnderman) entity, ((CanaryEnderman) entity).getWorld().getBlockAt(i0, i1, i2));
-
-                    Canary.hooks().callHook(hook);
+                    EndermanDropBlockHook hook = (EndermanDropBlockHook)new EndermanDropBlockHook((CanaryEnderman)entity, entity.getWorld().getBlockAt(i0, i1, i2)).call();
                     if (!hook.isCanceled()) {
                         this.q.f(i0, i1, i2, this.bV(), this.bW(), 3);
                         this.a(0);
@@ -153,7 +154,7 @@ public class EntityEnderman extends EntityMob {
         }
 
         for (i0 = 0; i0 < 2; ++i0) {
-            this.q.a("portal", this.u + (this.ab.nextDouble() - 0.5D) * (double) this.O, this.v + this.ab.nextDouble() * (double) this.P - 0.25D, this.w + (this.ab.nextDouble() - 0.5D) * (double) this.O, (this.ab.nextDouble() - 0.5D) * 2.0D, -this.ab.nextDouble(), (this.ab.nextDouble() - 0.5D) * 2.0D);
+            this.q.a("portal", this.u + (this.ab.nextDouble() - 0.5D) * (double)this.O, this.v + this.ab.nextDouble() * (double)this.P - 0.25D, this.w + (this.ab.nextDouble() - 0.5D) * (double)this.O, (this.ab.nextDouble() - 0.5D) * 2.0D, -this.ab.nextDouble(), (this.ab.nextDouble() - 0.5D) * 2.0D);
         }
 
         if (this.q.v() && !this.q.I) {
@@ -167,7 +168,7 @@ public class EntityEnderman extends EntityMob {
             }
         }
 
-        if (this.F() || this.ae()) {
+        if (this.G() || this.af()) {
             this.j = null;
             this.a(false);
             this.bv = false;
@@ -183,18 +184,20 @@ public class EntityEnderman extends EntityMob {
             this.a(this.j, 100.0F, 100.0F);
         }
 
-        if (!this.q.I && this.S()) {
+        if (!this.q.I && this.T()) {
             if (this.j != null) {
-                if (this.j instanceof EntityPlayer && this.f((EntityPlayer) this.j)) {
-                    if (this.j.e((Entity) this) < 16.0D) {
+                if (this.j instanceof EntityPlayer && this.f((EntityPlayer)this.j)) {
+                    if (this.j.e((Entity)this) < 16.0D) {
                         this.bT();
                     }
 
                     this.bs = 0;
-                } else if (this.j.e((Entity) this) > 256.0D && this.bs++ >= 30 && this.c(this.j)) {
+                }
+                else if (this.j.e((Entity)this) > 256.0D && this.bs++ >= 30 && this.c(this.j)) {
                     this.bs = 0;
                 }
-            } else {
+            }
+            else {
                 this.a(false);
                 this.bs = 0;
             }
@@ -205,19 +208,19 @@ public class EntityEnderman extends EntityMob {
 
     public boolean bT() { // CanaryMod: protected -> public
         double d0 = this.u + (this.ab.nextDouble() - 0.5D) * 64.0D;
-        double d1 = this.v + (double) (this.ab.nextInt(64) - 32);
+        double d1 = this.v + (double)(this.ab.nextInt(64) - 32);
         double d2 = this.w + (this.ab.nextDouble() - 0.5D) * 64.0D;
 
         return this.j(d0, d1, d2);
     }
 
     protected boolean c(Entity entity) {
-        Vec3 vec3 = this.q.V().a(this.u - entity.u, this.E.b + (double) (this.P / 2.0F) - entity.v + (double) entity.f(), this.w - entity.w);
+        Vec3 vec3 = this.q.V().a(this.u - entity.u, this.E.b + (double)(this.P / 2.0F) - entity.v + (double)entity.f(), this.w - entity.w);
 
         vec3 = vec3.a();
         double d0 = 16.0D;
         double d1 = this.u + (this.ab.nextDouble() - 0.5D) * 8.0D - vec3.c * d0;
-        double d2 = this.v + (double) (this.ab.nextInt(16) - 8) - vec3.d * d0;
+        double d2 = this.v + (double)(this.ab.nextInt(16) - 8) - vec3.d * d0;
         double d3 = this.w + (this.ab.nextDouble() - 0.5D) * 8.0D - vec3.e * d0;
 
         return this.j(d1, d2, d3);
@@ -244,7 +247,8 @@ public class EntityEnderman extends EntityMob {
                 i3 = this.q.a(i0, i1 - 1, i2);
                 if (i3 != 0 && Block.s[i3].cU.c()) {
                     flag1 = true;
-                } else {
+                }
+                else {
                     --this.v;
                     --i1;
                 }
@@ -252,7 +256,7 @@ public class EntityEnderman extends EntityMob {
 
             if (flag1) {
                 this.b(this.u, this.v, this.w);
-                if (this.q.a((Entity) this, this.E).isEmpty() && !this.q.d(this.E)) {
+                if (this.q.a((Entity)this, this.E).isEmpty() && !this.q.d(this.E)) {
                     flag0 = true;
                 }
             }
@@ -261,19 +265,20 @@ public class EntityEnderman extends EntityMob {
         if (!flag0) {
             this.b(d3, d4, d5);
             return false;
-        } else {
+        }
+        else {
             short short1 = 128;
 
             for (i3 = 0; i3 < short1; ++i3) {
-                double d6 = (double) i3 / ((double) short1 - 1.0D);
+                double d6 = (double)i3 / ((double)short1 - 1.0D);
                 float f0 = (this.ab.nextFloat() - 0.5F) * 0.2F;
                 float f1 = (this.ab.nextFloat() - 0.5F) * 0.2F;
                 float f2 = (this.ab.nextFloat() - 0.5F) * 0.2F;
-                double d7 = d3 + (this.u - d3) * d6 + (this.ab.nextDouble() - 0.5D) * (double) this.O * 2.0D;
-                double d8 = d4 + (this.v - d4) * d6 + this.ab.nextDouble() * (double) this.P;
-                double d9 = d5 + (this.w - d5) * d6 + (this.ab.nextDouble() - 0.5D) * (double) this.O * 2.0D;
+                double d7 = d3 + (this.u - d3) * d6 + (this.ab.nextDouble() - 0.5D) * (double)this.O * 2.0D;
+                double d8 = d4 + (this.v - d4) * d6 + this.ab.nextDouble() * (double)this.P;
+                double d9 = d5 + (this.w - d5) * d6 + (this.ab.nextDouble() - 0.5D) * (double)this.O * 2.0D;
 
-                this.q.a("portal", d7, d8, d9, (double) f0, (double) f1, (double) f2);
+                this.q.a("portal", d7, d8, d9, (double)f0, (double)f1, (double)f2);
             }
 
             this.q.a(d3, d4, d5, "mob.endermen.portal", 1.0F, 1.0F);
@@ -286,11 +291,11 @@ public class EntityEnderman extends EntityMob {
         return this.bX() ? "mob.endermen.scream" : "mob.endermen.idle";
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.endermen.hit";
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.endermen.death";
     }
 
@@ -311,7 +316,7 @@ public class EntityEnderman extends EntityMob {
     }
 
     public void a(int i0) {
-        this.ah.b(16, Byte.valueOf((byte) (i0 & 255)));
+        this.ah.b(16, Byte.valueOf((byte)(i0 & 255)));
     }
 
     public int bV() {
@@ -319,7 +324,7 @@ public class EntityEnderman extends EntityMob {
     }
 
     public void c(int i0) {
-        this.ah.b(17, Byte.valueOf((byte) (i0 & 255)));
+        this.ah.b(17, Byte.valueOf((byte)(i0 & 255)));
     }
 
     public int bW() {
@@ -327,9 +332,10 @@ public class EntityEnderman extends EntityMob {
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.aq()) {
+        if (this.ar()) {
             return false;
-        } else {
+        }
+        else {
             this.a(true);
             if (damagesource instanceof EntityDamageSource && damagesource.i() instanceof EntityPlayer) {
                 this.bv = true;
@@ -345,7 +351,8 @@ public class EntityEnderman extends EntityMob {
                 }
 
                 return false;
-            } else {
+            }
+            else {
                 return super.a(damagesource, f0);
             }
         }
@@ -356,7 +363,7 @@ public class EntityEnderman extends EntityMob {
     }
 
     public void a(boolean flag0) {
-        this.ah.b(18, Byte.valueOf((byte) (flag0 ? 1 : 0)));
+        this.ah.b(18, Byte.valueOf((byte)(flag0 ? 1 : 0)));
     }
 
     /* CanaryMod: Disable all default allowed pick ups

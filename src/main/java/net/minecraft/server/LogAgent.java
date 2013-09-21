@@ -32,7 +32,7 @@ public class LogAgent implements ILogAgent {
             this.a.removeHandler(handler);
         }
 
-        LogFormatter logformatter = new LogFormatter(this, (LogAgentEmptyAnon) null);
+        LogFormatter logformatter = new LogFormatter(this, (LogAgentEmptyAnon)null);
         ConsoleHandler consolehandler = new ConsoleHandler();
 
         consolehandler.setFormatter(logformatter);
@@ -44,7 +44,8 @@ public class LogAgent implements ILogAgent {
 
             filehandler.setFormatter(logformatter);
             this.a.addHandler(filehandler);
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             this.a.log(Level.WARNING, "Failed to log " + this.c + " to " + this.b, exception);
         }
     }

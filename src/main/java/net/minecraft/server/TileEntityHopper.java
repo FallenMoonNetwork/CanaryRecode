@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
-import java.util.List;
 import net.canarymod.api.world.blocks.CanaryHopperBlock;
 import net.canarymod.hook.world.HopperTransferHook;
+
+import java.util.List;
 
 public class TileEntityHopper extends TileEntity implements Hopper {
 
@@ -26,7 +27,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
         this.c = nbttagcompound.e("TransferCooldown");
 
         for (int i0 = 0; i0 < nbttaglist.c(); ++i0) {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.b(i0);
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.b(i0);
             byte b0 = nbttagcompound1.c("Slot");
 
             if (b0 >= 0 && b0 < this.a.length) {
@@ -43,13 +44,13 @@ public class TileEntityHopper extends TileEntity implements Hopper {
             if (this.a[i0] != null) {
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 
-                nbttagcompound1.a("Slot", (byte) i0);
+                nbttagcompound1.a("Slot", (byte)i0);
                 this.a[i0].b(nbttagcompound1);
-                nbttaglist.a((NBTBase) nbttagcompound1);
+                nbttaglist.a((NBTBase)nbttagcompound1);
             }
         }
 
-        nbttagcompound.a("Items", (NBTBase) nbttaglist);
+        nbttagcompound.a("Items", (NBTBase)nbttaglist);
         nbttagcompound.a("TransferCooldown", this.c);
         if (this.c()) {
             nbttagcompound.a("CustomName", this.b);
@@ -76,7 +77,8 @@ public class TileEntityHopper extends TileEntity implements Hopper {
                 itemstack = this.a[i0];
                 this.a[i0] = null;
                 return itemstack;
-            } else {
+            }
+            else {
                 itemstack = this.a[i0].a(i1);
                 if (this.a[i0].b == 0) {
                     this.a[i0] = null;
@@ -84,7 +86,8 @@ public class TileEntityHopper extends TileEntity implements Hopper {
 
                 return itemstack;
             }
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -95,7 +98,8 @@ public class TileEntityHopper extends TileEntity implements Hopper {
 
             this.a[i0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -129,12 +133,14 @@ public class TileEntityHopper extends TileEntity implements Hopper {
             return true;
         }
         //
-        return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
+        return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double)this.l + 0.5D, (double)this.m + 0.5D, (double)this.n + 0.5D) <= 64.0D;
     }
 
-    public void k_() {}
+    public void k_() {
+    }
 
-    public void g() {}
+    public void g() {
+    }
 
     public boolean b(int i0, ItemStack itemstack) {
         return true;
@@ -155,7 +161,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
             if (!this.l() && BlockHopper.d(this.p())) {
                 boolean flag0 = this.u();
 
-                flag0 = a((Hopper) this) || flag0;
+                flag0 = a((Hopper)this) || flag0;
                 if (flag0) {
                     this.c(8);
                     this.e();
@@ -164,7 +170,8 @@ public class TileEntityHopper extends TileEntity implements Hopper {
             }
 
             return false;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -174,12 +181,13 @@ public class TileEntityHopper extends TileEntity implements Hopper {
 
         if (iinventory == null) {
             return false;
-        } else {
+        }
+        else {
             for (int i0 = 0; i0 < this.j_(); ++i0) {
                 if (this.a(i0) != null) {
                     ItemStack itemstack = this.a(i0).m();
                     // CanaryMod: Hopper Transfer hook
-                    HopperTransferHook hook = (HopperTransferHook) new HopperTransferHook(getCanaryHopper(), new net.canarymod.api.inventory.CanaryItem(itemstack), false).call();
+                    HopperTransferHook hook = (HopperTransferHook)new HopperTransferHook(getCanaryHopper(), new net.canarymod.api.inventory.CanaryItem(itemstack), false).call();
                     if (hook.isCanceled()) {
                         return false;
                     }// CanaryMod: End
@@ -206,7 +214,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
             byte b0 = 0;
 
             if (iinventory instanceof ISidedInventory && b0 > -1) {
-                ISidedInventory isidedinventory = (ISidedInventory) iinventory;
+                ISidedInventory isidedinventory = (ISidedInventory)iinventory;
                 int[] aint = isidedinventory.c(b0);
 
                 for (int i0 = 0; i0 < aint.length; ++i0) {
@@ -214,7 +222,8 @@ public class TileEntityHopper extends TileEntity implements Hopper {
                         return true;
                     }
                 }
-            } else {
+            }
+            else {
                 int i1 = iinventory.j_();
 
                 for (int i2 = 0; i2 < i1; ++i2) {
@@ -223,11 +232,12 @@ public class TileEntityHopper extends TileEntity implements Hopper {
                     }
                 }
             }
-        } else {
+        }
+        else {
             EntityItem entityitem = a(hopper.az(), hopper.aA(), hopper.aB() + 1.0D, hopper.aC());
 
             if (entityitem != null) {
-                return a((IInventory) hopper, entityitem);
+                return a((IInventory)hopper, entityitem);
             }
         }
 
@@ -243,11 +253,12 @@ public class TileEntityHopper extends TileEntity implements Hopper {
             net.canarymod.api.inventory.Hopper hookHopper = null;
 
             if (hopper instanceof TileEntityHopper) {
-                hookHopper = (net.canarymod.api.inventory.Hopper) ((TileEntityHopper) hopper).getCanaryHopper();
-            } else if (hopper instanceof EntityMinecartHopper) {
-                hookHopper = (net.canarymod.api.inventory.Hopper) ((EntityMinecartHopper) hopper).entity;
+                hookHopper = (net.canarymod.api.inventory.Hopper)((TileEntityHopper)hopper).getCanaryHopper();
             }
-            HopperTransferHook hook = (HopperTransferHook) new HopperTransferHook(hookHopper, new net.canarymod.api.inventory.CanaryItem(itemstack), true).call();
+            else if (hopper instanceof EntityMinecartHopper) {
+                hookHopper = (net.canarymod.api.inventory.Hopper)((EntityMinecartHopper)hopper).entity;
+            }
+            HopperTransferHook hook = (HopperTransferHook)new HopperTransferHook(hookHopper, new net.canarymod.api.inventory.CanaryItem(itemstack), true).call();
             if (hook.isCanceled()) {
                 return false;
             }// CanaryMod: End
@@ -270,15 +281,17 @@ public class TileEntityHopper extends TileEntity implements Hopper {
 
         if (entityitem == null) {
             return false;
-        } else {
+        }
+        else {
             ItemStack itemstack = entityitem.d().m();
             ItemStack itemstack1 = a(iinventory, itemstack, -1);
 
             if (itemstack1 != null && itemstack1.b != 0) {
                 entityitem.a(itemstack1);
-            } else {
+            }
+            else {
                 flag0 = true;
-                entityitem.w();
+                entityitem.x();
             }
 
             return flag0;
@@ -287,13 +300,14 @@ public class TileEntityHopper extends TileEntity implements Hopper {
 
     public static ItemStack a(IInventory iinventory, ItemStack itemstack, int i0) {
         if (iinventory instanceof ISidedInventory && i0 > -1) {
-            ISidedInventory isidedinventory = (ISidedInventory) iinventory;
+            ISidedInventory isidedinventory = (ISidedInventory)iinventory;
             int[] aint = isidedinventory.c(i0);
 
             for (int i1 = 0; i1 < aint.length && itemstack != null && itemstack.b > 0; ++i1) {
                 itemstack = c(iinventory, itemstack, aint[i1], i0);
             }
-        } else {
+        }
+        else {
             int i2 = iinventory.j_();
 
             for (int i3 = 0; i3 < i2 && itemstack != null && itemstack.b > 0; ++i3) {
@@ -309,11 +323,11 @@ public class TileEntityHopper extends TileEntity implements Hopper {
     }
 
     private static boolean a(IInventory iinventory, ItemStack itemstack, int i0, int i1) {
-        return !iinventory.b(i0, itemstack) ? false : !(iinventory instanceof ISidedInventory) || ((ISidedInventory) iinventory).a(i0, itemstack, i1);
+        return !iinventory.b(i0, itemstack) ? false : !(iinventory instanceof ISidedInventory) || ((ISidedInventory)iinventory).a(i0, itemstack, i1);
     }
 
     private static boolean b(IInventory iinventory, ItemStack itemstack, int i0, int i1) {
-        return !(iinventory instanceof ISidedInventory) || ((ISidedInventory) iinventory).b(i0, itemstack, i1);
+        return !(iinventory instanceof ISidedInventory) || ((ISidedInventory)iinventory).b(i0, itemstack, i1);
     }
 
     private static ItemStack c(IInventory iinventory, ItemStack itemstack, int i0, int i1) {
@@ -326,7 +340,8 @@ public class TileEntityHopper extends TileEntity implements Hopper {
                 iinventory.a(i0, itemstack);
                 itemstack = null;
                 flag0 = true;
-            } else if (a(itemstack1, itemstack)) {
+            }
+            else if (a(itemstack1, itemstack)) {
                 int i2 = itemstack.e() - itemstack1.b;
                 int i3 = Math.min(itemstack.b, i2);
 
@@ -337,7 +352,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
 
             if (flag0) {
                 if (iinventory instanceof TileEntityHopper) {
-                    ((TileEntityHopper) iinventory).c(8);
+                    ((TileEntityHopper)iinventory).c(8);
                     iinventory.e();
                 }
 
@@ -351,7 +366,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
     private IInventory v() {
         int i0 = BlockHopper.c(this.p());
 
-        return b(this.az(), (double) (this.l + Facing.b[i0]), (double) (this.m + Facing.c[i0]), (double) (this.n + Facing.d[i0]));
+        return b(this.az(), (double)(this.l + Facing.b[i0]), (double)(this.m + Facing.c[i0]), (double)(this.n + Facing.d[i0]));
     }
 
     public static IInventory b(Hopper hopper) {
@@ -361,7 +376,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
     public static EntityItem a(World world, double d0, double d1, double d2) {
         List list = world.a(EntityItem.class, AxisAlignedBB.a().a(d0, d1, d2, d0 + 1.0D, d1 + 1.0D, d2 + 1.0D), IEntitySelector.a);
 
-        return list.size() > 0 ? (EntityItem) list.get(0) : null;
+        return list.size() > 0 ? (EntityItem)list.get(0) : null;
     }
 
     public static IInventory b(World world, double d0, double d1, double d2) {
@@ -372,22 +387,22 @@ public class TileEntityHopper extends TileEntity implements Hopper {
         TileEntity tileentity = world.r(i0, i1, i2);
 
         if (tileentity != null && tileentity instanceof IInventory) {
-            iinventory = (IInventory) tileentity;
+            iinventory = (IInventory)tileentity;
             if (iinventory instanceof TileEntityChest) {
                 int i3 = world.a(i0, i1, i2);
                 Block block = Block.s[i3];
 
                 if (block instanceof BlockChest) {
-                    iinventory = ((BlockChest) block).g_(world, i0, i1, i2);
+                    iinventory = ((BlockChest)block).g_(world, i0, i1, i2);
                 }
             }
         }
 
         if (iinventory == null) {
-            List list = world.a((Entity) null, AxisAlignedBB.a().a(d0, d1, d2, d0 + 1.0D, d1 + 1.0D, d2 + 1.0D), IEntitySelector.b);
+            List list = world.a((Entity)null, AxisAlignedBB.a().a(d0, d1, d2, d0 + 1.0D, d1 + 1.0D, d2 + 1.0D), IEntitySelector.b);
 
             if (list != null && list.size() > 0) {
-                iinventory = (IInventory) list.get(world.s.nextInt(list.size()));
+                iinventory = (IInventory)list.get(world.s.nextInt(list.size()));
             }
         }
 
@@ -399,15 +414,15 @@ public class TileEntityHopper extends TileEntity implements Hopper {
     }
 
     public double aA() {
-        return (double) this.l;
+        return (double)this.l;
     }
 
     public double aB() {
-        return (double) this.m;
+        return (double)this.m;
     }
 
     public double aC() {
-        return (double) this.n;
+        return (double)this.n;
     }
 
     public void c(int i0) {
@@ -420,7 +435,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
 
     // CanaryMod
     public CanaryHopperBlock getCanaryHopper() {
-        return (CanaryHopperBlock) complexBlock;
+        return (CanaryHopperBlock)complexBlock;
     }
 
     public IInventory getInputInventory() {

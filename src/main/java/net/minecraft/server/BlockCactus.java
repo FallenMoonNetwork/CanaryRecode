@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.hook.entity.DamageHook;
+
+import java.util.Random;
 
 public class BlockCactus extends Block {
 
@@ -27,7 +28,8 @@ public class BlockCactus extends Block {
                     world.c(i0, i1 + 1, i2, this.cF);
                     world.b(i0, i1, i2, 0, 4);
                     this.a(world, i0, i1 + 1, i2, this.cF);
-                } else {
+                }
+                else {
                     world.b(i0, i1, i2, i4 + 1, 4);
                 }
             }
@@ -37,7 +39,7 @@ public class BlockCactus extends Block {
     public AxisAlignedBB b(World world, int i0, int i1, int i2) {
         float f0 = 0.0625F;
 
-        return AxisAlignedBB.a().a((double) ((float) i0 + f0), (double) i1, (double) ((float) i2 + f0), (double) ((float) (i0 + 1) - f0), (double) ((float) (i1 + 1) - f0), (double) ((float) (i2 + 1) - f0));
+        return AxisAlignedBB.a().a((double)((float)i0 + f0), (double)i1, (double)((float)i2 + f0), (double)((float)(i0 + 1) - f0), (double)((float)(i1 + 1) - f0), (double)((float)(i2 + 1) - f0));
     }
 
     public boolean b() {
@@ -65,13 +67,17 @@ public class BlockCactus extends Block {
     public boolean f(World world, int i0, int i1, int i2) {
         if (world.g(i0 - 1, i1, i2).a()) {
             return false;
-        } else if (world.g(i0 + 1, i1, i2).a()) {
+        }
+        else if (world.g(i0 + 1, i1, i2).a()) {
             return false;
-        } else if (world.g(i0, i1, i2 - 1).a()) {
+        }
+        else if (world.g(i0, i1, i2 - 1).a()) {
             return false;
-        } else if (world.g(i0, i1, i2 + 1).a()) {
+        }
+        else if (world.g(i0, i1, i2 + 1).a()) {
             return false;
-        } else {
+        }
+        else {
             int i3 = world.a(i0, i1 - 1, i2);
 
             return i3 == Block.ba.cF || i3 == Block.J.cF;
@@ -80,9 +86,9 @@ public class BlockCactus extends Block {
 
     public void a(World world, int i0, int i1, int i2, Entity entity) {
         // CanaryMod: Damage (Craptus)
-        DamageHook hook = (DamageHook) new DamageHook(null, entity.getCanaryEntity(), new CanaryDamageSource(DamageSource.g), 1).call();
+        DamageHook hook = (DamageHook)new DamageHook(null, entity.getCanaryEntity(), new CanaryDamageSource(DamageSource.g), 1).call();
         if (!hook.isCanceled()) {
-            entity.a((((CanaryDamageSource) hook.getDamageSource()).getHandle()), hook.getDamageDealt());
+            entity.a((((CanaryDamageSource)hook.getDamageSource()).getHandle()), hook.getDamageDealt());
         }
         //
     }

@@ -26,23 +26,24 @@ public class EntityMooshroom extends EntityCow {
         }
 
         if (itemstack != null && itemstack.d == Item.bg.cv && this.b() >= 0) {
-            this.w();
-            this.q.a("largeexplode", this.u, this.v + (double) (this.P / 2.0F), this.w, 0.0D, 0.0D, 0.0D);
+            this.x();
+            this.q.a("largeexplode", this.u, this.v + (double)(this.P / 2.0F), this.w, 0.0D, 0.0D, 0.0D);
             if (!this.q.I) {
                 EntityCow entitycow = new EntityCow(this.q);
 
                 entitycow.b(this.u, this.v, this.w, this.A, this.B);
-                entitycow.g(this.aM());
+                entitycow.g(this.aN());
                 entitycow.aN = this.aN;
-                this.q.d((Entity) entitycow);
+                this.q.d((Entity)entitycow);
 
                 for (int i0 = 0; i0 < 5; ++i0) {
-                    this.q.d((Entity) (new EntityItem(this.q, this.u, this.v + (double) this.P, this.w, new ItemStack(Block.al))));
+                    this.q.d((Entity)(new EntityItem(this.q, this.u, this.v + (double)this.P, this.w, new ItemStack(Block.al))));
                 }
             }
 
             return true;
-        } else {
+        }
+        else {
             return super.a(entityplayer);
         }
     }

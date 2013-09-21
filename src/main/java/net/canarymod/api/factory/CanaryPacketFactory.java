@@ -684,7 +684,7 @@ public class CanaryPacketFactory implements PacketFactory {
     @Override
     public Packet destroyEntity(int... ids) {
         try {
-            return createPacket(29, ids);
+            return createPacket(29, new Object[]{ ids });
         } catch (Exception ex) {
             Canary.logDebug("Failed to construct a DestroyEntity packet", ex);
             return null;

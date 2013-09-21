@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
+import net.canarymod.api.world.effects.Particle;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-import net.canarymod.api.world.effects.Particle;
 
 public class Packet63WorldParticles extends Packet {
 
@@ -17,17 +18,18 @@ public class Packet63WorldParticles extends Packet {
     private float h;
     private int i;
 
-    public Packet63WorldParticles() {}
+    public Packet63WorldParticles() {
+    }
 
     // CanaryMod: our special constructor
     public Packet63WorldParticles(Particle particle) {
         this.a = particle.type.getMcName();
-        this.b = (float) particle.x;
-        this.c = (float) particle.y;
-        this.d = (float) particle.z;
-        this.e = (float) particle.velocityX;
-        this.f = (float) particle.velocityY;
-        this.g = (float) particle.velocityZ;
+        this.b = (float)particle.x;
+        this.c = (float)particle.y;
+        this.d = (float)particle.z;
+        this.e = (float)particle.velocityX;
+        this.f = (float)particle.velocityY;
+        this.g = (float)particle.velocityZ;
         this.h = particle.speed;
         this.i = particle.quantity;
     }//

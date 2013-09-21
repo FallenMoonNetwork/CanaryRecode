@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import java.util.List;
 import net.canarymod.api.scoreboard.CanaryScoreDummyCriteria;
+
+import java.util.List;
 
 public class ScoreDummyCriteria implements ScoreObjectiveCriteria {
 
@@ -15,7 +16,7 @@ public class ScoreDummyCriteria implements ScoreObjectiveCriteria {
         if (!ScoreObjectiveCriteria.a.containsKey(s0)) {
             ScoreObjectiveCriteria.a.put(s0, this);
         }//
-         // CanaryMod: Set Variable
+        // CanaryMod: Set Variable
         if (!(this instanceof ScoreHealthCriteria)) {
             criteria = new CanaryScoreDummyCriteria(this);
         }//

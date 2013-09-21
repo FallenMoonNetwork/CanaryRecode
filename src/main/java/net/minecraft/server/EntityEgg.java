@@ -22,10 +22,10 @@ public class EntityEgg extends EntityThrowable {
 
     protected void a(MovingObjectPosition movingobjectposition) {
         // CanaryMod: ProjectileHit
-        ProjectileHitHook hook = (ProjectileHitHook) new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
+        ProjectileHitHook hook = (ProjectileHitHook)new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
         if (!hook.isCanceled()) { //
             if (movingobjectposition.g != null) {
-                movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), 0.0F);
+                movingobjectposition.g.a(DamageSource.a((Entity)this, this.h()), 0.0F);
             }
 
             if (!this.q.I && this.ab.nextInt(8) == 0) {
@@ -40,7 +40,7 @@ public class EntityEgg extends EntityThrowable {
 
                     entitychicken.c(-24000);
                     entitychicken.b(this.u, this.v, this.w, this.A, 0.0F);
-                    this.q.d((Entity) entitychicken);
+                    this.q.d((Entity)entitychicken);
                 }
             }
 
@@ -49,7 +49,7 @@ public class EntityEgg extends EntityThrowable {
             }
 
             if (!this.q.I) {
-                this.w();
+                this.x();
             }
         }
     }

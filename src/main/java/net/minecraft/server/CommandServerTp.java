@@ -1,11 +1,13 @@
 package net.minecraft.server;
 
-import java.util.List;
 import net.canarymod.hook.player.TeleportHook;
+
+import java.util.List;
 
 public class CommandServerTp extends CommandBase {
 
-    public CommandServerTp() {}
+    public CommandServerTp() {
+    }
 
     public String c() {
         return "tp";
@@ -22,12 +24,14 @@ public class CommandServerTp extends CommandBase {
     public void b(ICommandSender icommandsender, String[] astring) {
         if (astring.length < 1) {
             throw new WrongUsageException("commands.tp.usage", new Object[0]);
-        } else {
+        }
+        else {
             EntityPlayerMP entityplayermp;
 
             if (astring.length != 2 && astring.length != 4) {
                 entityplayermp = b(icommandsender);
-            } else {
+            }
+            else {
                 entityplayermp = d(icommandsender, astring[0]);
                 if (entityplayermp == null) {
                     throw new PlayerNotFoundException();
@@ -47,20 +51,21 @@ public class CommandServerTp extends CommandBase {
                         return;
                     }
 
-                    entityplayermp.a((Entity) null);
+                    entityplayermp.a((Entity)null);
                     // CanaryMod: DERP (MultiWorld fix)
                     entityplayermp.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName(), TeleportHook.TeleportCause.COMMAND);
-                    a(icommandsender, "commands.tp.success", new Object[]{ entityplayermp.am(), entityplayermp1.am() });
+                    a(icommandsender, "commands.tp.success", new Object[]{entityplayermp.an(), entityplayermp1.an()});
                 }
-            } else if (entityplayermp.q != null) {
+            }
+            else if (entityplayermp.q != null) {
                 int i0 = astring.length - 3;
                 double d0 = a(icommandsender, entityplayermp.u, astring[i0++]);
                 double d1 = a(icommandsender, entityplayermp.v, astring[i0++], 0, 0);
                 double d2 = a(icommandsender, entityplayermp.w, astring[i0++]);
 
-                entityplayermp.a((Entity) null);
+                entityplayermp.a((Entity)null);
                 entityplayermp.a(d0, d1, d2);
-                a(icommandsender, "commands.tp.success.coordinates", new Object[]{ entityplayermp.am(), Double.valueOf(d0), Double.valueOf(d1), Double.valueOf(d2) });
+                a(icommandsender, "commands.tp.success.coordinates", new Object[]{entityplayermp.an(), Double.valueOf(d0), Double.valueOf(d1), Double.valueOf(d2)});
             }
         }
     }

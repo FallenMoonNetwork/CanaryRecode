@@ -2,7 +2,7 @@ package net.minecraft.server;
 
 public class BlockWall extends Block {
 
-    public static final String[] a = new String[]{ "normal", "mossy" };
+    public static final String[] a = new String[]{"normal", "mossy"};
 
     public BlockWall(int i0, Block block) {
         super(i0, block.cU);
@@ -59,7 +59,8 @@ public class BlockWall extends Block {
             f4 = 0.8125F;
             f0 = 0.3125F;
             f1 = 0.6875F;
-        } else if (!flag0 && !flag1 && flag2 && flag3) {
+        }
+        else if (!flag0 && !flag1 && flag2 && flag3) {
             f4 = 0.8125F;
             f2 = 0.3125F;
             f3 = 0.6875F;
@@ -69,7 +70,7 @@ public class BlockWall extends Block {
     }
 
     public AxisAlignedBB b(World world, int i0, int i1, int i2) {
-        this.a((IBlockAccess) world, i0, i1, i2); // CanaryMod Cast to IBlockAccess
+        this.a((IBlockAccess)world, i0, i1, i2); // CanaryMod Cast to IBlockAccess
         this.cQ = 1.5D;
         return super.b(world, i0, i1, i2);
     }
@@ -81,7 +82,8 @@ public class BlockWall extends Block {
             Block block = Block.s[i3];
 
             return block != null && block.cU.k() && block.b() ? block.cU != Material.B : false;
-        } else {
+        }
+        else {
             return true;
         }
     }

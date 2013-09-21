@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
+import net.canarymod.api.inventory.recipes.CanaryShapelessRecipe;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import net.canarymod.api.inventory.recipes.CanaryShapelessRecipe;
 
 public class ShapelessRecipes implements IRecipe {
 
@@ -33,7 +34,7 @@ public class ShapelessRecipes implements IRecipe {
                     Iterator iterator = arraylist.iterator();
 
                     while (iterator.hasNext()) {
-                        ItemStack itemstack1 = (ItemStack) iterator.next();
+                        ItemStack itemstack1 = (ItemStack)iterator.next();
 
                         if (itemstack.d == itemstack1.d && (itemstack1.k() == 32767 || itemstack.k() == itemstack1.k())) {
                             flag0 = true;

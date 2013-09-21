@@ -14,7 +14,7 @@
   <inceptionYear>2012</inceptionYear>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <minecraft.server.version>1.6.2</minecraft.server.version>
+    <minecraft.server.version>1.6.4</minecraft.server.version>
     <api.version>1.0-RC-2-SNAPSHOT</api.version>
     <maven.build.timestamp.format>dd MMMM yyyy HH:mm z</maven.build.timestamp.format>
   </properties>
@@ -47,10 +47,10 @@
         ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
         (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
         SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-    
+
         Any code in src/main/java/net/minecraft is not owned by FallenMoonNetwork/CanaryMod
         Team and is not covered by above license.
-        FallenMoonNetwork, CanaryMod Team, CanaryLib, and CanaryMod are NOT affiliated with, endorsed, 
+        FallenMoonNetwork, CanaryMod Team, CanaryLib, and CanaryMod are NOT affiliated with, endorsed,
         or sponsored by Mojang AB, makers of Minecraft.
         "Minecraft" is a trademark of Notch Development AB
       </comments>

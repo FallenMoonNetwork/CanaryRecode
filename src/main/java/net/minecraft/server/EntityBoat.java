@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import java.util.List;
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.entity.living.LivingBase;
 import net.canarymod.api.entity.vehicle.CanaryBoat;
@@ -13,6 +12,8 @@ import net.canarymod.hook.entity.VehicleDestroyHook;
 import net.canarymod.hook.entity.VehicleEnterHook;
 import net.canarymod.hook.entity.VehicleExitHook;
 import net.canarymod.hook.entity.VehicleMoveHook;
+
+import java.util.List;
 
 public class EntityBoat extends Entity {
 
@@ -49,17 +50,17 @@ public class EntityBoat extends Entity {
         return entity.E;
     }
 
-    public AxisAlignedBB D() {
+    public AxisAlignedBB E() {
         return this.E;
     }
 
-    public boolean L() {
+    public boolean M() {
         return true;
     }
 
     public EntityBoat(World world, double d0, double d1, double d2) {
         this(world);
-        this.b(d0, d1 + (double) this.N, d2);
+        this.b(d0, d1 + (double)this.N, d2);
         this.x = 0.0D;
         this.y = 0.0D;
         this.z = 0.0D;
@@ -69,21 +70,22 @@ public class EntityBoat extends Entity {
         this.entity = new CanaryBoat(this); // CanaryMod: Wrap Entity
     }
 
-    public double X() {
-        return (double) this.P * 0.0D - 0.30000001192092896D;
+    public double Y() {
+        return (double)this.P * 0.0D - 0.30000001192092896D;
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.aq()) {
+        if (this.ar()) {
             return false;
-        } else if (!this.q.I && !this.M) {
+        }
+        else if (!this.q.I && !this.M) {
             // CanaryMod: VehicleDamage
             net.canarymod.api.entity.Entity attk = null;
 
             if (damagesource.h() != null) {
                 attk = damagesource.h().getCanaryEntity();
             }
-            VehicleDamageHook hook = (VehicleDamageHook) new VehicleDamageHook((CanaryBoat) this.entity, attk, new CanaryDamageSource(damagesource), (int) f0).call();
+            VehicleDamageHook hook = (VehicleDamageHook)new VehicleDamageHook((CanaryBoat)this.entity, attk, new CanaryDamageSource(damagesource), (int)f0).call();
             if (hook.isCanceled()) {
                 return false;
             }
@@ -93,30 +95,31 @@ public class EntityBoat extends Entity {
             this.c(-this.h());
             this.a(10);
             this.a(this.d() + f0 * 10.0F);
-            this.J();
-            boolean flag0 = damagesource.i() instanceof EntityPlayer && ((EntityPlayer) damagesource.i()).bG.d;
+            this.K();
+            boolean flag0 = damagesource.i() instanceof EntityPlayer && ((EntityPlayer)damagesource.i()).bG.d;
 
             if (flag0 || this.d() > 40.0F) {
                 if (this.n != null) {
-                    this.n.a((Entity) this);
+                    this.n.a((Entity)this);
                 }
 
                 if (!flag0) {
                     this.a(Item.aG.cv, 1, 0.0F);
                 }
                 // CanaryMod: VehicleDestroy
-                new VehicleDestroyHook((Vehicle) this.entity).call();
+                new VehicleDestroyHook((Vehicle)this.entity).call();
                 //
-                this.w();
+                this.x();
             }
 
             return true;
-        } else {
+        }
+        else {
             return true;
         }
     }
 
-    public boolean K() {
+    public boolean L() {
         return !this.M;
     }
 
@@ -141,12 +144,12 @@ public class EntityBoat extends Entity {
         double d0 = 0.0D;
 
         for (int i0 = 0; i0 < b0; ++i0) {
-            double d1 = this.E.b + (this.E.e - this.E.b) * (double) (i0 + 0) / (double) b0 - 0.125D;
-            double d2 = this.E.b + (this.E.e - this.E.b) * (double) (i0 + 1) / (double) b0 - 0.125D;
+            double d1 = this.E.b + (this.E.e - this.E.b) * (double)(i0 + 0) / (double)b0 - 0.125D;
+            double d2 = this.E.b + (this.E.e - this.E.b) * (double)(i0 + 1) / (double)b0 - 0.125D;
             AxisAlignedBB axisalignedbb = AxisAlignedBB.a().a(this.E.a, d1, this.E.c, this.E.d, d2, this.E.f);
 
             if (this.q.b(axisalignedbb, Material.h)) {
-                d0 += 1.0D / (double) b0;
+                d0 += 1.0D / (double)b0;
             }
         }
 
@@ -155,12 +158,12 @@ public class EntityBoat extends Entity {
         double d5;
 
         if (d3 > 0.26249999999999996D) {
-            d4 = Math.cos((double) this.A * 3.141592653589793D / 180.0D);
-            d5 = Math.sin((double) this.A * 3.141592653589793D / 180.0D);
+            d4 = Math.cos((double)this.A * 3.141592653589793D / 180.0D);
+            d5 = Math.sin((double)this.A * 3.141592653589793D / 180.0D);
 
-            for (int i1 = 0; (double) i1 < 1.0D + d3 * 60.0D; ++i1) {
-                double d6 = (double) (this.ab.nextFloat() * 2.0F - 1.0F);
-                double d7 = (double) (this.ab.nextInt(2) * 2 - 1) * 0.7D;
+            for (int i1 = 0; (double)i1 < 1.0D + d3 * 60.0D; ++i1) {
+                double d6 = (double)(this.ab.nextFloat() * 2.0F - 1.0F);
+                double d7 = (double)(this.ab.nextInt(2) * 2 - 1) * 0.7D;
                 double d8;
                 double d9;
 
@@ -168,7 +171,8 @@ public class EntityBoat extends Entity {
                     d8 = this.u - d4 * d6 * 0.8D + d5 * d7;
                     d9 = this.w - d5 * d6 * 0.8D - d4 * d7;
                     this.q.a("splash", d8, this.v - 0.125D, d9, this.x, this.y, this.z);
-                } else {
+                }
+                else {
                     d8 = this.u + d4 + d5 * d6 * 0.7D;
                     d9 = this.w + d5 - d4 * d6 * 0.7D;
                     this.q.a("splash", d8, this.v - 0.125D, d9, this.x, this.y, this.z);
@@ -181,16 +185,17 @@ public class EntityBoat extends Entity {
 
         if (this.q.I && this.a) {
             if (this.c > 0) {
-                d4 = this.u + (this.d - this.u) / (double) this.c;
-                d5 = this.v + (this.e - this.v) / (double) this.c;
-                d10 = this.w + (this.f - this.w) / (double) this.c;
-                d11 = MathHelper.g(this.g - (double) this.A);
-                this.A = (float) ((double) this.A + d11 / (double) this.c);
-                this.B = (float) ((double) this.B + (this.h - (double) this.B) / (double) this.c);
+                d4 = this.u + (this.d - this.u) / (double)this.c;
+                d5 = this.v + (this.e - this.v) / (double)this.c;
+                d10 = this.w + (this.f - this.w) / (double)this.c;
+                d11 = MathHelper.g(this.g - (double)this.A);
+                this.A = (float)((double)this.A + d11 / (double)this.c);
+                this.B = (float)((double)this.B + (this.h - (double)this.B) / (double)this.c);
                 --this.c;
                 this.b(d4, d5, d10);
                 this.b(this.A, this.B);
-            } else {
+            }
+            else {
                 d4 = this.u + this.x;
                 d5 = this.v + this.y;
                 d10 = this.w + this.z;
@@ -205,11 +210,13 @@ public class EntityBoat extends Entity {
                 this.y *= 0.949999988079071D;
                 this.z *= 0.9900000095367432D;
             }
-        } else {
+        }
+        else {
             if (d0 < 1.0D) {
                 d4 = d0 * 2.0D - 1.0D;
                 this.y += 0.03999999910593033D * d4;
-            } else {
+            }
+            else {
                 if (this.y < 0.0D) {
                     this.y /= 2.0D;
                 }
@@ -218,10 +225,10 @@ public class EntityBoat extends Entity {
             }
 
             if (this.n != null && this.n instanceof EntityLivingBase) {
-                d4 = (double) ((EntityLivingBase) this.n).bf;
+                d4 = (double)((EntityLivingBase)this.n).bf;
                 if (d4 > 0.0D) {
-                    d5 = -Math.sin((double) (this.n.A * 3.1415927F / 180.0F));
-                    d10 = Math.cos((double) (this.n.A * 3.1415927F / 180.0F));
+                    d5 = -Math.sin((double)(this.n.A * 3.1415927F / 180.0F));
+                    d10 = Math.cos((double)(this.n.A * 3.1415927F / 180.0F));
                     this.x += d5 * this.b * 0.05000000074505806D;
                     this.z += d10 * this.b * 0.05000000074505806D;
                 }
@@ -240,7 +247,8 @@ public class EntityBoat extends Entity {
                 if (this.b > 0.35D) {
                     this.b = 0.35D;
                 }
-            } else {
+            }
+            else {
                 this.b -= (this.b - 0.07D) / 35.0D;
                 if (this.b < 0.07D) {
                     this.b = 0.07D;
@@ -256,7 +264,7 @@ public class EntityBoat extends Entity {
             this.d(this.x, this.y, this.z);
             if (this.G && d3 > 0.2D) {
                 if (!this.q.I && !this.M) {
-                    this.w();
+                    this.x();
 
                     int i2;
 
@@ -268,21 +276,22 @@ public class EntityBoat extends Entity {
                         this.a(Item.F.cv, 1, 0.0F);
                     }
                 }
-            } else {
+            }
+            else {
                 this.x *= 0.9900000095367432D;
                 this.y *= 0.949999988079071D;
                 this.z *= 0.9900000095367432D;
             }
 
             this.B = 0.0F;
-            d5 = (double) this.A;
+            d5 = (double)this.A;
             d10 = this.r - this.u;
             d11 = this.t - this.w;
             if (d10 * d10 + d11 * d11 > 0.001D) {
-                d5 = (double) ((float) (Math.atan2(d11, d10) * 180.0D / 3.141592653589793D));
+                d5 = (double)((float)(Math.atan2(d11, d10) * 180.0D / 3.141592653589793D));
             }
 
-            double d12 = MathHelper.g(d5 - (double) this.A);
+            double d12 = MathHelper.g(d5 - (double)this.A);
 
             if (d12 > 20.0D) {
                 d12 = 20.0D;
@@ -292,13 +301,13 @@ public class EntityBoat extends Entity {
                 d12 = -20.0D;
             }
 
-            this.A = (float) ((double) this.A + d12);
+            this.A = (float)((double)this.A + d12);
             this.b(this.A, this.B);
             // CanaryMod: VehicleMove
             if (Math.floor(this.r) != Math.floor(this.u) || Math.floor(this.s) != Math.floor(this.v) || Math.floor(this.t) != Math.floor(this.w)) {
                 Vector3D from = new Vector3D(this.r, this.s, this.t);
                 Vector3D to = new Vector3D(this.u, this.v, this.w);
-                VehicleMoveHook vmh = (VehicleMoveHook) new VehicleMoveHook((Vehicle) this.entity, from, to).call();
+                VehicleMoveHook vmh = (VehicleMoveHook)new VehicleMoveHook((Vehicle)this.entity, from, to).call();
                 if (vmh.isCanceled()) {
                     this.x = 0.0D;
                     this.y = 0.0D;
@@ -309,9 +318,9 @@ public class EntityBoat extends Entity {
                     this.t = ppZ;
                     this.V(); // Update rider
                     if (this.n != null && this.n instanceof EntityPlayerMP) {
-                        double ox = Math.cos((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
-                        double oz = Math.sin((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
-                        ((EntityPlayerMP) this.n).a.b(new Packet13PlayerLookMove(this.u + ox, this.v + this.X() + this.n.W(), this.v + this.X(), this.w + oz, this.n.A, this.n.B, this.F));
+                        double ox = Math.cos((double)this.A * 3.141592653589793D / 180.0D) * 0.4D;
+                        double oz = Math.sin((double)this.A * 3.141592653589793D / 180.0D) * 0.4D;
+                        ((EntityPlayerMP)this.n).a.b(new Packet13PlayerLookMove(this.u + ox, this.v + this.Y() + this.n.X(), this.v + this.Y(), this.w + oz, this.n.A, this.n.B, this.F));
                         this.n.x = 0.0D;
                         this.n.y = 0.0D;
                         this.n.z = 0.0D;
@@ -320,18 +329,18 @@ public class EntityBoat extends Entity {
             }
             //
             if (!this.q.I) {
-                List list = this.q.b((Entity) this, this.E.b(0.20000000298023224D, 0.0D, 0.20000000298023224D));
+                List list = this.q.b((Entity)this, this.E.b(0.20000000298023224D, 0.0D, 0.20000000298023224D));
                 int i3;
 
                 if (list != null && !list.isEmpty()) {
                     for (i3 = 0; i3 < list.size(); ++i3) {
-                        Entity entity = (Entity) list.get(i3);
+                        Entity entity = (Entity)list.get(i3);
 
-                        if (entity != this.n && entity.L() && entity instanceof EntityBoat) {
+                        if (entity != this.n && entity.M() && entity instanceof EntityBoat) {
                             // CanaryMod: VehicleCollision
-                            VehicleCollisionHook vch = (VehicleCollisionHook) new VehicleCollisionHook((Vehicle) this.entity, entity.getCanaryEntity()).call();
+                            VehicleCollisionHook vch = (VehicleCollisionHook)new VehicleCollisionHook((Vehicle)this.entity, entity.getCanaryEntity()).call();
                             if (!vch.isCanceled()) {
-                                entity.f((Entity) this);
+                                entity.f((Entity)this);
                             }
                             //
                         }
@@ -339,8 +348,8 @@ public class EntityBoat extends Entity {
                 }
 
                 for (i3 = 0; i3 < 4; ++i3) {
-                    int i4 = MathHelper.c(this.u + ((double) (i3 % 2) - 0.5D) * 0.8D);
-                    int i5 = MathHelper.c(this.w + ((double) (i3 / 2) - 0.5D) * 0.8D);
+                    int i4 = MathHelper.c(this.u + ((double)(i3 % 2) - 0.5D) * 0.8D);
+                    int i5 = MathHelper.c(this.w + ((double)(i3 / 2) - 0.5D) * 0.8D);
 
                     for (int i6 = 0; i6 < 2; ++i6) {
                         int i7 = MathHelper.c(this.v) + i6;
@@ -348,7 +357,8 @@ public class EntityBoat extends Entity {
 
                         if (i8 == Block.aX.cF) {
                             this.q.i(i4, i7, i5);
-                        } else if (i8 == Block.bE.cF) {
+                        }
+                        else if (i8 == Block.bE.cF) {
                             this.q.a(i4, i7, i5, true);
                         }
                     }
@@ -363,34 +373,38 @@ public class EntityBoat extends Entity {
 
     public void V() {
         if (this.n != null) {
-            double d0 = Math.cos((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
-            double d1 = Math.sin((double) this.A * 3.141592653589793D / 180.0D) * 0.4D;
+            double d0 = Math.cos((double)this.A * 3.141592653589793D / 180.0D) * 0.4D;
+            double d1 = Math.sin((double)this.A * 3.141592653589793D / 180.0D) * 0.4D;
 
-            this.n.b(this.u + d0, this.v + this.X() + this.n.W(), this.w + d1);
+            this.n.b(this.u + d0, this.v + this.Y() + this.n.X(), this.w + d1);
         }
     }
 
-    protected void b(NBTTagCompound nbttagcompound) {}
+    protected void b(NBTTagCompound nbttagcompound) {
+    }
 
-    protected void a(NBTTagCompound nbttagcompound) {}
+    protected void a(NBTTagCompound nbttagcompound) {
+    }
 
     public boolean c(EntityPlayer entityplayer) {
         if (this.n != null && this.n instanceof EntityPlayer && this.n != entityplayer) {
             return true;
-        } else {
+        }
+        else {
             if (!this.q.I) {
                 // CanaryMod: VehicleEnter/VehicleExit
                 CancelableHook hook = null;
 
                 if (this.n == null) {
-                    hook = new VehicleEnterHook((Vehicle) this.entity, (LivingBase) entityplayer.getCanaryEntity());
-                } else if (this.n == entityplayer) {
-                    hook = new VehicleExitHook((Vehicle) this.entity, (LivingBase) entityplayer.getCanaryEntity());
+                    hook = new VehicleEnterHook((Vehicle)this.entity, (LivingBase)entityplayer.getCanaryEntity());
+                }
+                else if (this.n == entityplayer) {
+                    hook = new VehicleExitHook((Vehicle)this.entity, (LivingBase)entityplayer.getCanaryEntity());
                 }
                 if (hook != null) {
                     hook.call();
                     if (!hook.isCanceled()) {
-                        entityplayer.a((Entity) this);
+                        entityplayer.a((Entity)this);
                     }
                 }
                 //

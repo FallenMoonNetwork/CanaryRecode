@@ -10,8 +10,8 @@ public class EntityCaveSpider extends EntitySpider {
         this.entity = new CanaryCaveSpider(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(12.0D);
     }
 
@@ -23,18 +23,20 @@ public class EntityCaveSpider extends EntitySpider {
                 if (this.q.r > 1) {
                     if (this.q.r == 2) {
                         b0 = 7;
-                    } else if (this.q.r == 3) {
+                    }
+                    else if (this.q.r == 3) {
                         b0 = 15;
                     }
                 }
 
                 if (b0 > 0) {
-                    ((EntityLivingBase) entity).c(new PotionEffect(Potion.u.H, b0 * 20, 0));
+                    ((EntityLivingBase)entity).c(new PotionEffect(Potion.u.H, b0 * 20, 0));
                 }
             }
 
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }

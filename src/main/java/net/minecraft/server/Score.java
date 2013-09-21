@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.api.scoreboard.CanaryScore;
+
 import java.util.Comparator;
 import java.util.List;
-import net.canarymod.api.scoreboard.CanaryScore;
 
 public class Score {
 
@@ -23,7 +24,8 @@ public class Score {
     public void a(int i0) {
         if (this.c.c().b()) {
             throw new IllegalStateException("Cannot modify read-only score");
-        } else {
+        }
+        else {
             this.c(this.c() + i0);
         }
     }
@@ -31,7 +33,8 @@ public class Score {
     public void b(int i0) {
         if (this.c.c().b()) {
             throw new IllegalStateException("Cannot modify read-only score");
-        } else {
+        }
+        else {
             this.c(this.c() - i0);
         }
     }
@@ -39,7 +42,8 @@ public class Score {
     public void a() {
         if (this.c.c().b()) {
             throw new IllegalStateException("Cannot modify read-only score");
-        } else {
+        }
+        else {
             this.a(1);
         }
     }

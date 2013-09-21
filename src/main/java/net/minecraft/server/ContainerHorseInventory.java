@@ -40,12 +40,12 @@ public class ContainerHorseInventory extends Container {
     }
 
     public boolean a(EntityPlayer entityplayer) {
-        return this.a.a(entityplayer) && this.f.S() && this.f.d((Entity) entityplayer) < 8.0F;
+        return this.a.a(entityplayer) && this.f.T() && this.f.d((Entity)entityplayer) < 8.0F;
     }
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
-        Slot slot = (Slot) this.c.get(i0);
+        Slot slot = (Slot)this.c.get(i0);
 
         if (slot != null && slot.e()) {
             ItemStack itemstack1 = slot.d();
@@ -55,21 +55,25 @@ public class ContainerHorseInventory extends Container {
                 if (!this.a(itemstack1, this.a.j_(), this.c.size(), true)) {
                     return null;
                 }
-            } else if (this.a(1).a(itemstack1) && !this.a(1).e()) {
+            }
+            else if (this.a(1).a(itemstack1) && !this.a(1).e()) {
                 if (!this.a(itemstack1, 1, 2, false)) {
                     return null;
                 }
-            } else if (this.a(0).a(itemstack1)) {
+            }
+            else if (this.a(0).a(itemstack1)) {
                 if (!this.a(itemstack1, 0, 1, false)) {
                     return null;
                 }
-            } else if (this.a.j_() <= 2 || !this.a(itemstack1, 2, this.a.j_(), false)) {
+            }
+            else if (this.a.j_() <= 2 || !this.a(itemstack1, 2, this.a.j_(), false)) {
                 return null;
             }
 
             if (itemstack1.b == 0) {
-                slot.c((ItemStack) null);
-            } else {
+                slot.c((ItemStack)null);
+            }
+            else {
                 slot.f();
             }
         }

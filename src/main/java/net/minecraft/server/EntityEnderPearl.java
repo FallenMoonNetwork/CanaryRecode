@@ -16,7 +16,7 @@ public class EntityEnderPearl extends EntityThrowable {
 
     protected void a(MovingObjectPosition movingobjectposition) {
         if (movingobjectposition.g != null) {
-            movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), 0.0F);
+            movingobjectposition.g.a(DamageSource.a((Entity)this, this.h()), 0.0F);
         }
 
         for (int i0 = 0; i0 < 32; ++i0) {
@@ -25,11 +25,11 @@ public class EntityEnderPearl extends EntityThrowable {
 
         if (!this.q.I) {
             if (this.h() != null && this.h() instanceof EntityPlayerMP) {
-                EntityPlayerMP entityplayermp = (EntityPlayerMP) this.h();
+                EntityPlayerMP entityplayermp = (EntityPlayerMP)this.h();
 
                 if (!entityplayermp.a.b && entityplayermp.q == this.q) {
-                    if (this.h().af()) {
-                        this.h().a((Entity) null);
+                    if (this.h().ag()) {
+                        this.h().a((Entity)null);
                     }
 
                     this.h().a(this.u, this.v, this.w);
@@ -38,7 +38,7 @@ public class EntityEnderPearl extends EntityThrowable {
                 }
             }
 
-            this.w();
+            this.x();
         }
     }
 }

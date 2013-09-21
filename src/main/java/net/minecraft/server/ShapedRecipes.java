@@ -51,7 +51,8 @@ public class ShapedRecipes implements IRecipe {
                 if (i4 >= 0 && i5 >= 0 && i4 < this.b && i5 < this.c) {
                     if (flag0) {
                         itemstack = this.d[this.b - i4 - 1 + i5 * this.b];
-                    } else {
+                    }
+                    else {
                         itemstack = this.d[i4 + i5 * this.b];
                     }
                 }
@@ -85,7 +86,7 @@ public class ShapedRecipes implements IRecipe {
                 ItemStack itemstack1 = inventorycrafting.a(i0);
 
                 if (itemstack1 != null && itemstack1.p()) {
-                    itemstack.d((NBTTagCompound) itemstack1.e.b());
+                    itemstack.d((NBTTagCompound)itemstack1.e.b());
                 }
             }
         }

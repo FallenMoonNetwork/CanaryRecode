@@ -8,10 +8,10 @@ public class ContainerBrewingStand extends Container {
 
     public ContainerBrewingStand(InventoryPlayer inventoryplayer, TileEntityBrewingStand tileentitybrewingstand) {
         this.a = tileentitybrewingstand;
-        this.a((Slot) (new SlotBrewingStandPotion(inventoryplayer.d, tileentitybrewingstand, 0, 56, 46)));
-        this.a((Slot) (new SlotBrewingStandPotion(inventoryplayer.d, tileentitybrewingstand, 1, 79, 53)));
-        this.a((Slot) (new SlotBrewingStandPotion(inventoryplayer.d, tileentitybrewingstand, 2, 102, 46)));
-        this.f = this.a((Slot) (new SlotBrewingStandIngredient(this, tileentitybrewingstand, 3, 79, 17)));
+        this.a((Slot)(new SlotBrewingStandPotion(inventoryplayer.d, tileentitybrewingstand, 0, 56, 46)));
+        this.a((Slot)(new SlotBrewingStandPotion(inventoryplayer.d, tileentitybrewingstand, 1, 79, 53)));
+        this.a((Slot)(new SlotBrewingStandPotion(inventoryplayer.d, tileentitybrewingstand, 2, 102, 46)));
+        this.f = this.a((Slot)(new SlotBrewingStandIngredient(this, tileentitybrewingstand, 3, 79, 17)));
 
         int i0;
 
@@ -37,7 +37,7 @@ public class ContainerBrewingStand extends Container {
         super.b();
 
         for (int i0 = 0; i0 < this.e.size(); ++i0) {
-            ICrafting icrafting = (ICrafting) this.e.get(i0);
+            ICrafting icrafting = (ICrafting)this.e.get(i0);
 
             if (this.g != this.a.x_()) {
                 icrafting.a(this, 0, this.a.x_());
@@ -53,7 +53,7 @@ public class ContainerBrewingStand extends Container {
 
     public ItemStack b(EntityPlayer entityplayer, int i0) {
         ItemStack itemstack = null;
-        Slot slot = (Slot) this.c.get(i0);
+        Slot slot = (Slot)this.c.get(i0);
 
         if (slot != null && slot.e()) {
             ItemStack itemstack1 = slot.d();
@@ -64,22 +64,27 @@ public class ContainerBrewingStand extends Container {
                     if (!this.a(itemstack1, 3, 4, false)) {
                         return null;
                     }
-                } else if (SlotBrewingStandPotion.b_(itemstack)) {
+                }
+                else if (SlotBrewingStandPotion.b_(itemstack)) {
                     if (!this.a(itemstack1, 0, 3, false)) {
                         return null;
                     }
-                } else if (i0 >= 4 && i0 < 31) {
+                }
+                else if (i0 >= 4 && i0 < 31) {
                     if (!this.a(itemstack1, 31, 40, false)) {
                         return null;
                     }
-                } else if (i0 >= 31 && i0 < 40) {
+                }
+                else if (i0 >= 31 && i0 < 40) {
                     if (!this.a(itemstack1, 4, 31, false)) {
                         return null;
                     }
-                } else if (!this.a(itemstack1, 4, 40, false)) {
+                }
+                else if (!this.a(itemstack1, 4, 40, false)) {
                     return null;
                 }
-            } else {
+            }
+            else {
                 if (!this.a(itemstack1, 4, 40, true)) {
                     return null;
                 }
@@ -88,8 +93,9 @@ public class ContainerBrewingStand extends Container {
             }
 
             if (itemstack1.b == 0) {
-                slot.c((ItemStack) null);
-            } else {
+                slot.c((ItemStack)null);
+            }
+            else {
                 slot.f();
             }
 

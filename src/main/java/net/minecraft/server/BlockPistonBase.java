@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import java.util.List;
 import net.canarymod.api.world.blocks.BlockType;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.PistonExtendHook;
 import net.canarymod.hook.world.PistonRetractHook;
+
+import java.util.List;
 
 public class BlockPistonBase extends Block {
 
@@ -60,24 +61,25 @@ public class BlockPistonBase extends Block {
             boolean flag0 = this.d(world, i0, i1, i2, i4);
 
             // CanaryMod: Get Blocks
-            CanaryBlock piston = new CanaryBlock((this.a ? BlockType.Piston.getId() : BlockType.StickyPiston.getId()), (byte) 0, i0, i1, i2, world.getCanaryWorld());
-            CanaryBlock moving = new CanaryBlock((short) world.a(i0 + Facing.b[i4], i1 + Facing.c[i4], i2 + Facing.d[i4]), (byte) 0, (i0 + Facing.b[i4]), (i1 + Facing.c[i4]), (i2 + Facing.d[i4]), world.getCanaryWorld());
+            CanaryBlock piston = new CanaryBlock((this.a ? BlockType.Piston.getId() : BlockType.StickyPiston.getId()), (byte)0, i0, i1, i2, world.getCanaryWorld());
+            CanaryBlock moving = new CanaryBlock((short)world.a(i0 + Facing.b[i4], i1 + Facing.c[i4], i2 + Facing.d[i4]), (byte)0, (i0 + Facing.b[i4]), (i1 + Facing.c[i4]), (i2 + Facing.d[i4]), world.getCanaryWorld());
 
             //
 
             if (flag0 && !e(i3)) {
                 if (e(world, i0, i1, i2, i4)) {
                     // CanaryMod: PistonExtend
-                    PistonExtendHook hook = (PistonExtendHook) new PistonExtendHook(piston, moving).call();
+                    PistonExtendHook hook = (PistonExtendHook)new PistonExtendHook(piston, moving).call();
                     if (!hook.isCanceled()) {
                         world.d(i0, i1, i2, this.cF, 0, i4);
                     }
                     //
                 }
-            } else if (!flag0 && e(i3)) {
+            }
+            else if (!flag0 && e(i3)) {
                 // CanaryMod: PistonRetract
-                moving = new CanaryBlock((short) world.a(i0 + Facing.b[i4] * 2, i1 + Facing.c[i4] * 2, i2 + Facing.d[i4] * 2), (byte) 0, (i0 + Facing.b[i4]), (i1 + Facing.c[i4]), (i2 + Facing.d[i4]), world.getCanaryWorld());
-                PistonRetractHook hook = (PistonRetractHook) new PistonRetractHook(piston, moving).call();
+                moving = new CanaryBlock((short)world.a(i0 + Facing.b[i4] * 2, i1 + Facing.c[i4] * 2, i2 + Facing.d[i4] * 2), (byte)0, (i0 + Facing.b[i4]), (i1 + Facing.c[i4]), (i2 + Facing.d[i4]), world.getCanaryWorld());
+                PistonRetractHook hook = (PistonRetractHook)new PistonRetractHook(piston, moving).call();
                 attemptRetract = !hook.isCanceled();
                 //
                 world.b(i0, i1, i2, i4, 2);
@@ -111,12 +113,13 @@ public class BlockPistonBase extends Block {
             }
 
             world.b(i0, i1, i2, i4 | 8, 2);
-            world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D, "tile.piston.out", 0.5F, world.s.nextFloat() * 0.25F + 0.6F);
-        } else if (i3 == 1) {
+            world.a((double)i0 + 0.5D, (double)i1 + 0.5D, (double)i2 + 0.5D, "tile.piston.out", 0.5F, world.s.nextFloat() * 0.25F + 0.6F);
+        }
+        else if (i3 == 1) {
             TileEntity tileentity = world.r(i0 + Facing.b[i4], i1 + Facing.c[i4], i2 + Facing.d[i4]);
 
             if (tileentity instanceof TileEntityPiston) {
-                ((TileEntityPiston) tileentity).f();
+                ((TileEntityPiston)tileentity).f();
             }
 
             world.f(i0, i1, i2, Block.ah.cF, i4, 3);
@@ -133,7 +136,7 @@ public class BlockPistonBase extends Block {
                     TileEntity tileentity1 = world.r(i5, i6, i7);
 
                     if (tileentity1 instanceof TileEntityPiston) {
-                        TileEntityPiston tileentitypiston = (TileEntityPiston) tileentity1;
+                        TileEntityPiston tileentitypiston = (TileEntityPiston)tileentity1;
 
                         if (tileentitypiston.c() == i4 && tileentitypiston.b()) {
                             tileentitypiston.f();
@@ -157,14 +160,16 @@ public class BlockPistonBase extends Block {
                     world.a(i0, i1, i2,
                             BlockPistonMoving.a(i8, i9, i4, false, false));
                     world.i(i5, i6, i7);
-                } else if (!flag1) {
+                }
+                else if (!flag1) {
                     world.i(i0 + Facing.b[i4], i1 + Facing.c[i4], i2 + Facing.d[i4]);
                 }
-            } else {
+            }
+            else {
                 world.i(i0 + Facing.b[i4], i1 + Facing.c[i4], i2 + Facing.d[i4]);
             }
 
-            world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D, "tile.piston.in", 0.5F, world.s.nextFloat() * 0.15F + 0.6F);
+            world.a((double)i0 + 0.5D, (double)i1 + 0.5D, (double)i2 + 0.5D, "tile.piston.in", 0.5F, world.s.nextFloat() * 0.15F + 0.6F);
         }
 
         return true;
@@ -200,7 +205,8 @@ public class BlockPistonBase extends Block {
                 case 5:
                     this.a(0.0F, 0.0F, 0.0F, 0.75F, 1.0F, 1.0F);
             }
-        } else {
+        }
+        else {
             this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         }
     }
@@ -215,7 +221,7 @@ public class BlockPistonBase extends Block {
     }
 
     public AxisAlignedBB b(World world, int i0, int i1, int i2) {
-        this.a((IBlockAccess) world, i0, i1, i2);
+        this.a((IBlockAccess)world, i0, i1, i2);
         return super.b(world, i0, i1, i2);
     }
 
@@ -232,19 +238,19 @@ public class BlockPistonBase extends Block {
     }
 
     public static int a(World world, int i0, int i1, int i2, EntityLivingBase entitylivingbase) {
-        if (MathHelper.e((float) entitylivingbase.u - (float) i0) < 2.0F && MathHelper.e((float) entitylivingbase.w - (float) i2) < 2.0F) {
-            double d0 = entitylivingbase.v + 1.82D - (double) entitylivingbase.N;
+        if (MathHelper.e((float)entitylivingbase.u - (float)i0) < 2.0F && MathHelper.e((float)entitylivingbase.w - (float)i2) < 2.0F) {
+            double d0 = entitylivingbase.v + 1.82D - (double)entitylivingbase.N;
 
-            if (d0 - (double) i1 > 2.0D) {
+            if (d0 - (double)i1 > 2.0D) {
                 return 1;
             }
 
-            if ((double) i1 - d0 > 0.0D) {
+            if ((double)i1 - d0 > 0.0D) {
                 return 0;
             }
         }
 
-        int i3 = MathHelper.c((double) (entitylivingbase.A * 4.0F / 360.0F) + 0.5D) & 3;
+        int i3 = MathHelper.c((double)(entitylivingbase.A * 4.0F / 360.0F) + 0.5D) & 3;
 
         return i3 == 0 ? 2 : (i3 == 1 ? 5 : (i3 == 2 ? 3 : (i3 == 3 ? 4 : 0)));
     }
@@ -252,7 +258,8 @@ public class BlockPistonBase extends Block {
     private static boolean a(int i0, World world, int i1, int i2, int i3, boolean flag0) {
         if (i0 == Block.au.cF) {
             return false;
-        } else {
+        }
+        else {
             if (i0 != Block.ae.cF && i0 != Block.aa.cF) {
                 if (Block.s[i0].l(world, i1, i2, i3) == -1.0F) {
                     return false;
@@ -269,7 +276,8 @@ public class BlockPistonBase extends Block {
 
                     return true;
                 }
-            } else if (e(world.h(i1, i2, i3))) {
+            }
+            else if (e(world.h(i1, i2, i3))) {
                 return false;
             }
 
@@ -371,7 +379,8 @@ public class BlockPistonBase extends Block {
                 if (i14 == this.cF && i11 == i0 && i12 == i1 && i13 == i2) {
                     world.f(i4, i5, i6, Block.ah.cF, i3 | (this.a ? 8 : 0), 4);
                     world.a(i4, i5, i6, BlockPistonMoving.a(Block.af.cF, i3 | (this.a ? 8 : 0), i3, true, false));
-                } else {
+                }
+                else {
                     world.f(i4, i5, i6, Block.ah.cF, i15, 4);
                     world.a(i4, i5, i6, BlockPistonMoving.a(i14, i15, i3, true, false));
                 }

@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import java.util.UUID;
 import net.canarymod.hook.entity.MobTargetHook;
+
+import java.util.UUID;
 
 public abstract class EntityCreature extends EntityLiving {
 
@@ -24,7 +25,7 @@ public abstract class EntityCreature extends EntityLiving {
         return false;
     }
 
-    protected void bk() {
+    protected void bl() {
         this.q.C.a("ai");
         if (this.bo > 0 && --this.bo == 0) {
             AttributeInstance attributeinstance = this.a(SharedMonsterAttributes.d);
@@ -39,7 +40,7 @@ public abstract class EntityCreature extends EntityLiving {
             // CanaryMod: MobTarget
             Entity entity = this.bL();
             if (entity != null && entity instanceof EntityLivingBase) {
-                MobTargetHook hook = (MobTargetHook) new MobTargetHook((net.canarymod.api.entity.living.LivingBase) this.getCanaryEntity(), (net.canarymod.api.entity.living.LivingBase) entity.getCanaryEntity()).call();
+                MobTargetHook hook = (MobTargetHook)new MobTargetHook((net.canarymod.api.entity.living.LivingBase)this.getCanaryEntity(), (net.canarymod.api.entity.living.LivingBase)entity.getCanaryEntity()).call();
                 if (!hook.isCanceled()) {
                     this.j = entity;
                 }
@@ -49,40 +50,44 @@ public abstract class EntityCreature extends EntityLiving {
             if (this.j != null) {
                 this.bp = this.q.a(this, this.j, f11, true, false, false, true);
             }
-        } else if (this.j.S()) {
-            float f1 = this.j.d((Entity) this);
+        }
+        else if (this.j.T()) {
+            float f1 = this.j.d((Entity)this);
 
             if (this.o(this.j)) {
                 this.a(this.j, f1);
             }
-        } else {
+        }
+        else {
             this.j = null;
         }
 
         this.q.C.b();
         if (!this.bn && this.j != null && (this.bp == null || this.ab.nextInt(20) == 0)) {
             this.bp = this.q.a(this, this.j, f11, true, false, false, true);
-        } else if (!this.bn && (this.bp == null && this.ab.nextInt(180) == 0 || this.ab.nextInt(120) == 0 || this.bo > 0) && this.aV < 100) {
+        }
+        else if (!this.bn && (this.bp == null && this.ab.nextInt(180) == 0 || this.ab.nextInt(120) == 0 || this.bo > 0) && this.aV < 100) {
             this.bK();
         }
 
         int i0 = MathHelper.c(this.E.b + 0.5D);
-        boolean flag0 = this.G();
-        boolean flag1 = this.I();
+        boolean flag0 = this.H();
+        boolean flag1 = this.J();
 
         this.B = 0.0F;
         if (this.bp != null && this.ab.nextInt(100) != 0) {
             this.q.C.a("followpath");
-            Vec3 vec3 = this.bp.a((Entity) this);
-            double d0 = (double) (this.O * 2.0F);
+            Vec3 vec3 = this.bp.a((Entity)this);
+            double d0 = (double)(this.O * 2.0F);
 
             while (vec3 != null && vec3.d(this.u, vec3.d, this.w) < d0 * d0) {
                 this.bp.a();
                 if (this.bp.b()) {
                     vec3 = null;
                     this.bp = null;
-                } else {
-                    vec3 = this.bp.a((Entity) this);
+                }
+                else {
+                    vec3 = this.bp.a((Entity)this);
                 }
             }
 
@@ -90,11 +95,11 @@ public abstract class EntityCreature extends EntityLiving {
             if (vec3 != null) {
                 double d1 = vec3.c - this.u;
                 double d2 = vec3.e - this.w;
-                double d3 = vec3.d - (double) i0;
-                float f2 = (float) (Math.atan2(d2, d1) * 180.0D / 3.1415927410125732D) - 90.0F;
+                double d3 = vec3.d - (double)i0;
+                float f2 = (float)(Math.atan2(d2, d1) * 180.0D / 3.1415927410125732D) - 90.0F;
                 float f3 = MathHelper.g(f2 - this.A);
 
-                this.bf = (float) this.a(SharedMonsterAttributes.d).e();
+                this.bf = (float)this.a(SharedMonsterAttributes.d).e();
                 if (f3 > 30.0F) {
                     f3 = 30.0F;
                 }
@@ -109,7 +114,7 @@ public abstract class EntityCreature extends EntityLiving {
                     double d5 = this.j.w - this.w;
                     float f4 = this.A;
 
-                    this.A = (float) (Math.atan2(d5, d4) * 180.0D / 3.1415927410125732D) - 90.0F;
+                    this.A = (float)(Math.atan2(d5, d4) * 180.0D / 3.1415927410125732D) - 90.0F;
                     f3 = (f4 - this.A + 90.0F) * 3.1415927F / 180.0F;
                     this.be = -MathHelper.a(f3) * this.bf * 1.0F;
                     this.bf = MathHelper.b(f3) * this.bf * 1.0F;
@@ -133,7 +138,8 @@ public abstract class EntityCreature extends EntityLiving {
             }
 
             this.q.C.b();
-        } else {
+        }
+        else {
             super.bk();
             this.bp = null;
         }
@@ -148,9 +154,9 @@ public abstract class EntityCreature extends EntityLiving {
         float f0 = -99999.0F;
 
         for (int i3 = 0; i3 < 10; ++i3) {
-            int i4 = MathHelper.c(this.u + (double) this.ab.nextInt(13) - 6.0D);
-            int i5 = MathHelper.c(this.v + (double) this.ab.nextInt(7) - 3.0D);
-            int i6 = MathHelper.c(this.w + (double) this.ab.nextInt(13) - 6.0D);
+            int i4 = MathHelper.c(this.u + (double)this.ab.nextInt(13) - 6.0D);
+            int i5 = MathHelper.c(this.v + (double)this.ab.nextInt(7) - 3.0D);
+            int i6 = MathHelper.c(this.w + (double)this.ab.nextInt(13) - 6.0D);
             float f1 = this.a(i4, i5, i6);
 
             if (f1 > f0) {
@@ -169,7 +175,8 @@ public abstract class EntityCreature extends EntityLiving {
         this.q.C.b();
     }
 
-    protected void a(Entity entity, float f0) {}
+    protected void a(Entity entity, float f0) {
+    }
 
     public float a(int i0, int i1, int i2) {
         return 0.0F;
@@ -213,7 +220,7 @@ public abstract class EntityCreature extends EntityLiving {
 
     public void b(int i0, int i1, int i2, int i3) {
         this.bq.b(i0, i1, i2);
-        this.br = (float) i3;
+        this.br = (float)i3;
     }
 
     public ChunkCoordinates bP() {
@@ -237,10 +244,10 @@ public abstract class EntityCreature extends EntityLiving {
         if (this.bH() && this.bI() != null && this.bI().q == this.q) {
             Entity entity = this.bI();
 
-            this.b((int) entity.u, (int) entity.v, (int) entity.w, 5);
+            this.b((int)entity.u, (int)entity.v, (int)entity.w, 5);
             float f0 = this.d(entity);
 
-            if (this instanceof EntityTameable && ((EntityTameable) this).bU()) {
+            if (this instanceof EntityTameable && ((EntityTameable)this).bU()) {
                 if (f0 > 10.0F) {
                     this.a(true, true);
                 }
@@ -260,9 +267,9 @@ public abstract class EntityCreature extends EntityLiving {
             }
 
             if (f0 > 6.0F) {
-                double d0 = (entity.u - this.u) / (double) f0;
-                double d1 = (entity.v - this.v) / (double) f0;
-                double d2 = (entity.w - this.w) / (double) f0;
+                double d0 = (entity.u - this.u) / (double)f0;
+                double d1 = (entity.v - this.v) / (double)f0;
+                double d2 = (entity.w - this.w) / (double)f0;
 
                 this.x += d0 * Math.abs(d0) * 0.4D;
                 this.y += d1 * Math.abs(d1) * 0.4D;
@@ -272,7 +279,8 @@ public abstract class EntityCreature extends EntityLiving {
             if (f0 > 10.0F) {
                 this.a(true, true);
             }
-        } else if (!this.bH() && this.bt) {
+        }
+        else if (!this.bH() && this.bt) {
             this.bt = false;
             this.c.a(this.bs);
             this.k().a(true);
@@ -280,5 +288,6 @@ public abstract class EntityCreature extends EntityLiving {
         }
     }
 
-    protected void o(float f0) {}
+    protected void o(float f0) {
+    }
 }

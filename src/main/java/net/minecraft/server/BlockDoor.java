@@ -31,7 +31,7 @@ public class BlockDoor extends Block {
     }
 
     public AxisAlignedBB b(World world, int i0, int i1, int i2) {
-        this.a((IBlockAccess) world, i0, i1, i2); // CanaryMod: casting fix
+        this.a((IBlockAccess)world, i0, i1, i2); // CanaryMod: casting fix
         return super.b(world, i0, i1, i2);
     }
 
@@ -59,51 +59,64 @@ public class BlockDoor extends Block {
             if (flag0) {
                 if (!flag1) {
                     this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f0);
-                } else {
+                }
+                else {
                     this.a(0.0F, 0.0F, 1.0F - f0, 1.0F, 1.0F, 1.0F);
                 }
-            } else {
+            }
+            else {
                 this.a(0.0F, 0.0F, 0.0F, f0, 1.0F, 1.0F);
             }
-        } else if (i1 == 1) {
+        }
+        else if (i1 == 1) {
             if (flag0) {
                 if (!flag1) {
                     this.a(1.0F - f0, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-                } else {
+                }
+                else {
                     this.a(0.0F, 0.0F, 0.0F, f0, 1.0F, 1.0F);
                 }
-            } else {
+            }
+            else {
                 this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f0);
             }
-        } else if (i1 == 2) {
+        }
+        else if (i1 == 2) {
             if (flag0) {
                 if (!flag1) {
                     this.a(0.0F, 0.0F, 1.0F - f0, 1.0F, 1.0F, 1.0F);
-                } else {
+                }
+                else {
                     this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f0);
                 }
-            } else {
+            }
+            else {
                 this.a(1.0F - f0, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             }
-        } else if (i1 == 3) {
+        }
+        else if (i1 == 3) {
             if (flag0) {
                 if (!flag1) {
                     this.a(0.0F, 0.0F, 0.0F, f0, 1.0F, 1.0F);
-                } else {
+                }
+                else {
                     this.a(1.0F - f0, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
                 }
-            } else {
+            }
+            else {
                 this.a(0.0F, 0.0F, 1.0F - f0, 1.0F, 1.0F, 1.0F);
             }
         }
     }
 
-    public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {}
+    public void a(World world, int i0, int i1, int i2, EntityPlayer entityplayer) {
+    }
 
     public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer, int i3, float f0, float f1, float f2) {
         if (this.cU == Material.f) {
             return true;
-        } else {
+        }
+        else {
             int i4 = this.c_(world, i0, i1, i2);
             int i5 = i4 & 7;
 
@@ -111,7 +124,8 @@ public class BlockDoor extends Block {
             if ((i4 & 8) == 0) {
                 world.b(i0, i1, i2, i5, 2);
                 world.g(i0, i1, i2, i0, i1, i2);
-            } else {
+            }
+            else {
                 world.b(i0, i1 - 1, i2, i5, 2);
                 world.g(i0, i1 - 1, i2, i0, i1, i2);
             }
@@ -132,12 +146,13 @@ public class BlockDoor extends Block {
             if ((i3 & 8) == 0) {
                 world.b(i0, i1, i2, i4, 2);
                 world.g(i0, i1, i2, i0, i1, i2);
-            } else {
+            }
+            else {
                 world.b(i0, i1 - 1, i2, i4, 2);
                 world.g(i0, i1 - 1, i2, i0, i1, i2);
             }
 
-            world.a((EntityPlayer) null, 1003, i0, i1, i2, 0);
+            world.a((EntityPlayer)null, 1003, i0, i1, i2, 0);
         }
     }
 
@@ -164,14 +179,16 @@ public class BlockDoor extends Block {
                 if (!world.I) {
                     this.c(world, i0, i1, i2, i4, 0);
                 }
-            } else {
+            }
+            else {
                 boolean flag1 = world.C(i0, i1, i2) || world.C(i0, i1 + 1, i2);
 
                 if ((flag1 || i3 > 0 && Block.s[i3].f()) && i3 != this.cF) {
                     this.a(world, i0, i1, i2, flag1);
                 }
             }
-        } else {
+        }
+        else {
             if (world.a(i0, i1 - 1, i2) != this.cF) {
                 world.i(i0, i1, i2);
             }
@@ -208,7 +225,8 @@ public class BlockDoor extends Block {
         if (flag0) {
             i4 = iblockaccess.h(i0, i1 - 1, i2);
             i5 = i3;
-        } else {
+        }
+        else {
             i4 = i3;
             i5 = iblockaccess.h(i0, i1 + 1, i2);
         }

@@ -4,7 +4,8 @@ import net.canarymod.api.world.CanaryWorld;
 
 public class CommandServerSaveOn extends CommandBase {
 
-    public CommandServerSaveOn() {}
+    public CommandServerSaveOn() {
+    }
 
     public String c() {
         return "save-on";
@@ -24,7 +25,7 @@ public class CommandServerSaveOn extends CommandBase {
 
         // CanaryMod: Fix for MultiWorld
         for (net.canarymod.api.world.World w : minecraftserver.worldManager.getAllWorlds()) {
-            WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+            WorldServer worldserver = (WorldServer)((CanaryWorld)w).getHandle();
 
             if (worldserver != null) {
                 worldserver.c = false;
@@ -34,7 +35,8 @@ public class CommandServerSaveOn extends CommandBase {
 
         if (flag0) {
             a(icommandsender, "commands.save.enabled", new Object[0]);
-        } else {
+        }
+        else {
             throw new CommandException("commands.save-on.alreadyOn",
                     new Object[0]);
         }

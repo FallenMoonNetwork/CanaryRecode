@@ -30,6 +30,6 @@ public class TileEntityComparator extends TileEntity {
 
     // CanaryMod
     public CanaryComparator getCanaryComparator() {
-        return (CanaryComparator) complexBlock;
+        return (CanaryComparator)complexBlock;
     }
 }

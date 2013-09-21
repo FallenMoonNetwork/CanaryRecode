@@ -6,14 +6,15 @@ final class DispenserBehaviorBoat extends BehaviorDefaultDispenseItem {
 
     private final BehaviorDefaultDispenseItem b = new BehaviorDefaultDispenseItem();
 
-    DispenserBehaviorBoat() {}
+    DispenserBehaviorBoat() {
+    }
 
     public ItemStack b(IBlockSource iblocksource, ItemStack itemstack) {
         EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
         World world = iblocksource.k();
-        double d0 = iblocksource.a() + (double) ((float) enumfacing.c() * 1.125F);
-        double d1 = iblocksource.b() + (double) ((float) enumfacing.d() * 1.125F);
-        double d2 = iblocksource.c() + (double) ((float) enumfacing.e() * 1.125F);
+        double d0 = iblocksource.a() + (double)((float)enumfacing.c() * 1.125F);
+        double d1 = iblocksource.b() + (double)((float)enumfacing.d() * 1.125F);
+        double d2 = iblocksource.c() + (double)((float)enumfacing.e() * 1.125F);
         int i0 = iblocksource.d() + enumfacing.c();
         int i1 = iblocksource.e() + enumfacing.d();
         int i2 = iblocksource.f() + enumfacing.e();
@@ -22,7 +23,8 @@ final class DispenserBehaviorBoat extends BehaviorDefaultDispenseItem {
 
         if (Material.h.equals(material)) {
             d3 = 1.0D;
-        } else {
+        }
+        else {
             if (!Material.a.equals(material) || !Material.h.equals(world.g(i0, i1 - 1, i2))) {
                 return this.b.a(iblocksource, itemstack);
             }
@@ -32,9 +34,9 @@ final class DispenserBehaviorBoat extends BehaviorDefaultDispenseItem {
 
         EntityBoat entityboat = new EntityBoat(world, d0, d1 + d3, d2);
         // CanaryMod: Dispense
-        DispenseHook hook = (DispenseHook) new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), entityboat.getCanaryEntity()).call();
+        DispenseHook hook = (DispenseHook)new DispenseHook(((TileEntityDispenser)iblocksource.j()).getCanaryDispenser(), entityboat.getCanaryEntity()).call();
         if (!hook.isCanceled()) {
-            world.d((Entity) entityboat);
+            world.d((Entity)entityboat);
             itemstack.a(1);
         }
         //

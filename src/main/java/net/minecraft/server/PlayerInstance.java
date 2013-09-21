@@ -25,7 +25,8 @@ class PlayerInstance {
     public void a(EntityPlayerMP entityplayermp) {
         if (this.b.contains(entityplayermp)) {
             throw new IllegalStateException("Failed to add player. " + entityplayermp + " already is in chunk " + this.c.a + ", " + this.c.b);
-        } else {
+        }
+        else {
             if (this.b.isEmpty()) {
                 this.g = PlayerManager.a(this.a).I();
             }
@@ -43,7 +44,7 @@ class PlayerInstance {
             this.b.remove(entityplayermp);
             entityplayermp.f.remove(this.c);
             if (this.b.isEmpty()) {
-                long i0 = (long) this.c.a + 2147483647L | (long) this.c.b + 2147483647L << 32;
+                long i0 = (long)this.c.a + 2147483647L | (long)this.c.b + 2147483647L << 32;
 
                 this.a(chunk);
                 PlayerManager.b(this.a).d(i0);
@@ -73,7 +74,7 @@ class PlayerInstance {
 
         this.f |= 1 << (i1 >> 4);
         if (this.e < 64) {
-            short short1 = (short) (i0 << 12 | i2 << 8 | i1);
+            short short1 = (short)(i0 << 12 | i2 << 8 | i1);
 
             for (int i3 = 0; i3 < this.e; ++i3) {
                 if (this.d[i3] == short1) {
@@ -87,7 +88,7 @@ class PlayerInstance {
 
     public void a(Packet packet) {
         for (int i0 = 0; i0 < this.b.size(); ++i0) {
-            EntityPlayerMP entityplayermp = (EntityPlayerMP) this.b.get(i0);
+            EntityPlayerMP entityplayermp = (EntityPlayerMP)this.b.get(i0);
 
             if (!entityplayermp.f.contains(this.c)) {
                 entityplayermp.a.b(packet);
@@ -105,17 +106,18 @@ class PlayerInstance {
                 i0 = this.c.a * 16 + (this.d[0] >> 12 & 15);
                 i1 = this.d[0] & 255;
                 i2 = this.c.b * 16 + (this.d[0] >> 8 & 15);
-                this.a((Packet) (new Packet53BlockChange(i0, i1, i2, PlayerManager.a(this.a))));
+                this.a((Packet)(new Packet53BlockChange(i0, i1, i2, PlayerManager.a(this.a))));
                 if (PlayerManager.a(this.a).d(i0, i1, i2)) {
                     this.a(PlayerManager.a(this.a).r(i0, i1, i2));
                 }
-            } else {
+            }
+            else {
                 int i3;
 
                 if (this.e == 64) {
                     i0 = this.c.a * 16;
                     i1 = this.c.b * 16;
-                    this.a((Packet) (new Packet51MapChunk(PlayerManager.a(this.a).e(this.c.a, this.c.b), false, this.f)));
+                    this.a((Packet)(new Packet51MapChunk(PlayerManager.a(this.a).e(this.c.a, this.c.b), false, this.f)));
 
                     for (i2 = 0; i2 < 16; ++i2) {
                         if ((this.f & 1 << i2) != 0) {
@@ -123,12 +125,13 @@ class PlayerInstance {
                             List list = PlayerManager.a(this.a).c(i0, i3, i1, i0 + 16, i3 + 16, i1 + 16);
 
                             for (int i4 = 0; i4 < list.size(); ++i4) {
-                                this.a((TileEntity) list.get(i4));
+                                this.a((TileEntity)list.get(i4));
                             }
                         }
                     }
-                } else {
-                    this.a((Packet) (new Packet52MultiBlockChange(this.c.a, this.c.b, this.d, this.e, PlayerManager.a(this.a))));
+                }
+                else {
+                    this.a((Packet)(new Packet52MultiBlockChange(this.c.a, this.c.b, this.d, this.e, PlayerManager.a(this.a))));
 
                     for (i0 = 0; i0 < this.e; ++i0) {
                         i1 = this.c.a * 16 + (this.d[i0] >> 12 & 15);

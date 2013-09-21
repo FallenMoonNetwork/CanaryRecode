@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
+import net.canarymod.Canary;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JTextField;
-import net.canarymod.Canary;
 
 class MinecraftServerGuiINNER2 implements ActionListener {
 

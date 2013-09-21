@@ -18,10 +18,10 @@ public class ItemFlintAndSteel extends Item {
 
     public boolean a(ItemStack itemstack, EntityPlayer entityplayer, World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2) {
         // CanaryMod: get clicked
-        CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+        CanaryBlock clicked = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
-        clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
-        clicked.setStatus((byte) 2); // Flint&Steel Status 2
+        clicked.setFaceClicked(BlockFace.fromByte((byte)i3));
+        clicked.setStatus((byte)2); // Flint&Steel Status 2
         //
 
         if (i3 == 0) {
@@ -50,15 +50,16 @@ public class ItemFlintAndSteel extends Item {
 
         if (!entityplayer.a(i0, i1, i2, i3, itemstack)) {
             return false;
-        } else {
+        }
+        else {
             int i4 = world.a(i0, i1, i2);
 
             // CanaryMod: ItemUse/Ignition
             // Create & Call ItemUseHook
-            ItemUseHook iuh = (ItemUseHook) new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked).call();
+            ItemUseHook iuh = (ItemUseHook)new ItemUseHook(((EntityPlayerMP)entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked).call();
             // Create & Call IgnitionHook
-            CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
-            IgnitionHook ih = new IgnitionHook(ignited, ((EntityPlayerMP) entityplayer).getPlayer(), clicked, IgnitionCause.FLINT_AND_STEEL);
+            CanaryBlock ignited = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
+            IgnitionHook ih = new IgnitionHook(ignited, ((EntityPlayerMP)entityplayer).getPlayer(), clicked, IgnitionCause.FLINT_AND_STEEL);
             Canary.hooks().callHook(ih);
 
             // If either hook is canceled, return
@@ -68,11 +69,11 @@ public class ItemFlintAndSteel extends Item {
             //
 
             if (i4 == 0) {
-                world.a((double) i0 + 0.5D, (double) i1 + 0.5D, (double) i2 + 0.5D, "fire.ignite", 1.0F, f.nextFloat() * 0.4F + 0.8F);
+                world.a((double)i0 + 0.5D, (double)i1 + 0.5D, (double)i2 + 0.5D, "fire.ignite", 1.0F, f.nextFloat() * 0.4F + 0.8F);
                 world.c(i0, i1, i2, Block.aw.cF);
             }
 
-            itemstack.a(1, (EntityLivingBase) entityplayer);
+            itemstack.a(1, (EntityLivingBase)entityplayer);
             return true;
         }
     }

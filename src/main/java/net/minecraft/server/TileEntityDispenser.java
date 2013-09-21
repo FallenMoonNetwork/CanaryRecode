@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.api.world.blocks.CanaryDispenser;
+
+import java.util.Random;
 
 public class TileEntityDispenser extends TileEntity implements IInventory {
 
@@ -30,7 +31,8 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
                 this.b[i0] = null;
                 this.e();
                 return itemstack;
-            } else {
+            }
+            else {
                 itemstack = this.b[i0].a(i1);
                 if (this.b[i0].b == 0) {
                     this.b[i0] = null;
@@ -39,7 +41,8 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
                 this.e();
                 return itemstack;
             }
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -50,7 +53,8 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
 
             this.b[i0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -107,7 +111,7 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
         this.b = new ItemStack[this.j_()];
 
         for (int i0 = 0; i0 < nbttaglist.c(); ++i0) {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.b(i0);
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.b(i0);
             int i1 = nbttagcompound1.c("Slot") & 255;
 
             if (i1 >= 0 && i1 < this.b.length) {
@@ -128,13 +132,13 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
             if (this.b[i0] != null) {
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 
-                nbttagcompound1.a("Slot", (byte) i0);
+                nbttagcompound1.a("Slot", (byte)i0);
                 this.b[i0].b(nbttagcompound1);
-                nbttaglist.a((NBTBase) nbttagcompound1);
+                nbttaglist.a((NBTBase)nbttagcompound1);
             }
         }
 
-        nbttagcompound.a("Items", (NBTBase) nbttaglist);
+        nbttagcompound.a("Items", (NBTBase)nbttaglist);
         if (this.c()) {
             nbttagcompound.a("CustomName", this.a);
         }
@@ -150,12 +154,14 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
             return true;
         }
         //
-        return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
+        return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double)this.l + 0.5D, (double)this.m + 0.5D, (double)this.n + 0.5D) <= 64.0D;
     }
 
-    public void k_() {}
+    public void k_() {
+    }
 
-    public void g() {}
+    public void g() {
+    }
 
     public boolean b(int i0, ItemStack itemstack) {
         return true;
@@ -163,7 +169,7 @@ public class TileEntityDispenser extends TileEntity implements IInventory {
 
     // CanaryMod
     public CanaryDispenser getCanaryDispenser() {
-        return (CanaryDispenser) complexBlock;
+        return (CanaryDispenser)complexBlock;
     }
     //
 }

@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import net.canarymod.api.scoreboard.CanaryScoreboard;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -7,7 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import net.canarymod.api.scoreboard.CanaryScoreboard;
 
 public class Scoreboard {
 
@@ -20,10 +21,11 @@ public class Scoreboard {
 
     private CanaryScoreboard scoreboard = new CanaryScoreboard(this);
 
-    public Scoreboard() {}
+    public Scoreboard() {
+    }
 
     public ScoreObjective b(String s0) {
-        return (ScoreObjective) this.a.get(s0);
+        return (ScoreObjective)this.a.get(s0);
     }
 
     public ScoreObjective a(String s0, ScoreObjectiveCriteria scoreobjectivecriteria) {
@@ -31,16 +33,17 @@ public class Scoreboard {
 
         if (scoreobjective != null) {
             throw new IllegalArgumentException("An objective with the name \'" + s0 + "\' already exists!");
-        } else {
+        }
+        else {
             scoreobjective = new ScoreObjective(this, s0, scoreobjectivecriteria);
-            Object object = (List) this.b.get(scoreobjectivecriteria);
+            Object object = (List)this.b.get(scoreobjectivecriteria);
 
             if (object == null) {
                 object = new ArrayList();
                 this.b.put(scoreobjectivecriteria, object);
             }
 
-            ((List) object).add(scoreobjective);
+            ((List)object).add(scoreobjective);
             this.a.put(s0, scoreobjective);
             this.a(scoreobjective);
             return scoreobjective;
@@ -48,24 +51,24 @@ public class Scoreboard {
     }
 
     public Collection a(ScoreObjectiveCriteria scoreobjectivecriteria) {
-        Collection collection = (Collection) this.b.get(scoreobjectivecriteria);
+        Collection collection = (Collection)this.b.get(scoreobjectivecriteria);
 
         return collection == null ? new ArrayList() : new ArrayList(collection);
     }
 
     public Score a(String s0, ScoreObjective scoreobjective) {
-        Object object = (Map) this.c.get(s0);
+        Object object = (Map)this.c.get(s0);
 
         if (object == null) {
             object = new HashMap();
             this.c.put(s0, object);
         }
 
-        Score score = (Score) ((Map) object).get(scoreobjective);
+        Score score = (Score)((Map)object).get(scoreobjective);
 
         if (score == null) {
             score = new Score(this, scoreobjective, s0);
-            ((Map) object).put(scoreobjective, score);
+            ((Map)object).put(scoreobjective, score);
         }
 
         return score;
@@ -76,8 +79,8 @@ public class Scoreboard {
         Iterator iterator = this.c.values().iterator();
 
         while (iterator.hasNext()) {
-            Map map = (Map) iterator.next();
-            Score score = (Score) map.get(scoreobjective);
+            Map map = (Map)iterator.next();
+            Score score = (Score)map.get(scoreobjective);
 
             if (score != null) {
                 arraylist.add(score);
@@ -97,7 +100,7 @@ public class Scoreboard {
     }
 
     public void c(String s0) {
-        Map map = (Map) this.c.remove(s0);
+        Map map = (Map)this.c.remove(s0);
 
         if (map != null) {
             this.a(s0);
@@ -110,7 +113,7 @@ public class Scoreboard {
         Iterator iterator = collection.iterator();
 
         while (iterator.hasNext()) {
-            Map map = (Map) iterator.next();
+            Map map = (Map)iterator.next();
 
             arraylist.addAll(map.values());
         }
@@ -119,13 +122,13 @@ public class Scoreboard {
     }
 
     public Map d(String s0) {
-        Object object = (Map) this.c.get(s0);
+        Object object = (Map)this.c.get(s0);
 
         if (object == null) {
             object = new HashMap();
         }
 
-        return (Map) object;
+        return (Map)object;
     }
 
     public void k(ScoreObjective scoreobjective) {
@@ -133,11 +136,11 @@ public class Scoreboard {
 
         for (int i0 = 0; i0 < 3; ++i0) {
             if (this.a(i0) == scoreobjective) {
-                this.a(i0, (ScoreObjective) null);
+                this.a(i0, (ScoreObjective)null);
             }
         }
 
-        List list = (List) this.b.get(scoreobjective.c());
+        List list = (List)this.b.get(scoreobjective.c());
 
         if (list != null) {
             list.remove(scoreobjective);
@@ -146,7 +149,7 @@ public class Scoreboard {
         Iterator iterator = this.c.values().iterator();
 
         while (iterator.hasNext()) {
-            Map map = (Map) iterator.next();
+            Map map = (Map)iterator.next();
 
             map.remove(scoreobjective);
         }
@@ -163,7 +166,7 @@ public class Scoreboard {
     }
 
     public ScorePlayerTeam e(String s0) {
-        return (ScorePlayerTeam) this.e.get(s0);
+        return (ScorePlayerTeam)this.e.get(s0);
     }
 
     public ScorePlayerTeam f(String s0) {
@@ -171,7 +174,8 @@ public class Scoreboard {
 
         if (scoreplayerteam != null) {
             throw new IllegalArgumentException("An objective with the name \'" + s0 + "\' already exists!");
-        } else {
+        }
+        else {
             scoreplayerteam = new ScorePlayerTeam(this, s0);
             this.e.put(s0, scoreplayerteam);
             this.a(scoreplayerteam);
@@ -184,7 +188,7 @@ public class Scoreboard {
         Iterator iterator = scoreplayerteam.d().iterator();
 
         while (iterator.hasNext()) {
-            String s0 = (String) iterator.next();
+            String s0 = (String)iterator.next();
 
             this.f.remove(s0);
         }
@@ -207,7 +211,8 @@ public class Scoreboard {
         if (scoreplayerteam != null) {
             this.b(s0, scoreplayerteam);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -215,7 +220,8 @@ public class Scoreboard {
     public void b(String s0, ScorePlayerTeam scoreplayerteam) {
         if (this.i(s0) != scoreplayerteam) {
             throw new IllegalStateException("Player is either on another team or not on any team. Cannot remove from team \'" + scoreplayerteam.b() + "\'.");
-        } else {
+        }
+        else {
             this.f.remove(s0);
             scoreplayerteam.d().remove(s0);
         }
@@ -230,24 +236,32 @@ public class Scoreboard {
     }
 
     public ScorePlayerTeam i(String s0) {
-        return (ScorePlayerTeam) this.f.get(s0);
+        return (ScorePlayerTeam)this.f.get(s0);
     }
 
-    public void a(ScoreObjective scoreobjective) {}
+    public void a(ScoreObjective scoreobjective) {
+    }
 
-    public void b(ScoreObjective scoreobjective) {}
+    public void b(ScoreObjective scoreobjective) {
+    }
 
-    public void c(ScoreObjective scoreobjective) {}
+    public void c(ScoreObjective scoreobjective) {
+    }
 
-    public void a(Score score) {}
+    public void a(Score score) {
+    }
 
-    public void a(String s0) {}
+    public void a(String s0) {
+    }
 
-    public void a(ScorePlayerTeam scoreplayerteam) {}
+    public void a(ScorePlayerTeam scoreplayerteam) {
+    }
 
-    public void b(ScorePlayerTeam scoreplayerteam) {}
+    public void b(ScorePlayerTeam scoreplayerteam) {
+    }
 
-    public void c(ScorePlayerTeam scoreplayerteam) {}
+    public void c(ScorePlayerTeam scoreplayerteam) {
+    }
 
     public static String b(int i0) {
         switch (i0) {
@@ -275,7 +289,7 @@ public class Scoreboard {
     }
 
     public ScoreObjective getScoreObjective(String name) {
-        return (ScoreObjective) this.a.get(name);
+        return (ScoreObjective)this.a.get(name);
     }
 
     public Collection getAllScoreObjective() {

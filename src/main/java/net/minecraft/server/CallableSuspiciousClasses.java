@@ -21,7 +21,7 @@ class CallableSuspiciousClasses implements Callable {
         Field field = ClassLoader.class.getDeclaredField("classes");
 
         field.setAccessible(true);
-        ArrayList arraylist = new ArrayList((Vector) field.get(CrashReport.class.getClassLoader()));
+        ArrayList arraylist = new ArrayList((Vector)field.get(CrashReport.class.getClassLoader()));
         boolean flag0 = true;
         boolean flag1 = !CrashReport.class.getCanonicalName().equals("net.minecraft.CrashReport");
         HashMap hashmap = new HashMap();
@@ -31,7 +31,7 @@ class CallableSuspiciousClasses implements Callable {
         Iterator iterator = arraylist.iterator();
 
         while (iterator.hasNext()) {
-            Class oclass0 = (Class) iterator.next();
+            Class oclass0 = (Class)iterator.next();
 
             if (oclass0 != null) {
                 String s1 = oclass0.getCanonicalName();
@@ -41,7 +41,8 @@ class CallableSuspiciousClasses implements Callable {
                         if (s1.length() <= 3 || s1.equals("net.minecraft.client.main.Main") || s1.equals("net.minecraft.client.Minecraft") || s1.equals("net.minecraft.client.ClientBrandRetriever") || s1.equals("net.minecraft.server.MinecraftServer")) {
                             continue;
                         }
-                    } else if (s1.startsWith("net.minecraft")) {
+                    }
+                    else if (s1.startsWith("net.minecraft")) {
                         continue;
                     }
 
@@ -52,7 +53,7 @@ class CallableSuspiciousClasses implements Callable {
                     //
 
                     if (hashmap.containsKey(s2)) {
-                        int i0 = ((Integer) hashmap.get(s2)).intValue();
+                        int i0 = ((Integer)hashmap.get(s2)).intValue();
 
                         hashmap.put(s2, Integer.valueOf(i0 + 1));
                         if (i0 == 3) {
@@ -68,7 +69,8 @@ class CallableSuspiciousClasses implements Callable {
                         if (i0 > 3) {
                             continue;
                         }
-                    } else {
+                    }
+                    else {
                         hashmap.put(s2, Integer.valueOf(1));
                     }
 
@@ -95,7 +97,8 @@ class CallableSuspiciousClasses implements Callable {
 
         if (flag0) {
             stringbuilder.append("No suspicious classes found.");
-        } else {
+        }
+        else {
             stringbuilder.append("]");
         }
 
@@ -105,7 +108,8 @@ class CallableSuspiciousClasses implements Callable {
     public Object call() {
         try {
             return this.a();
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             return null;
         }
     }

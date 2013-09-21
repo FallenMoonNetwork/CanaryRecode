@@ -1,13 +1,13 @@
 package net.minecraft.server;
 
-import java.util.ArrayList;
-
 import net.canarymod.api.CanaryDamageSource;
 import net.canarymod.api.DamageType;
 import net.canarymod.api.entity.hanging.CanaryPainting;
 import net.canarymod.api.entity.hanging.HangingEntity;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.hook.entity.HangingEntityDestroyHook;
+
+import java.util.ArrayList;
 
 public class EntityPainting extends EntityHanging {
 
@@ -35,7 +35,7 @@ public class EntityPainting extends EntityHanging {
         }
 
         if (!arraylist.isEmpty()) {
-            this.e = (EnumArt) arraylist.get(this.ab.nextInt(arraylist.size()));
+            this.e = (EnumArt)arraylist.get(this.ab.nextInt(arraylist.size()));
         }
 
         this.a(i3);
@@ -76,24 +76,24 @@ public class EntityPainting extends EntityHanging {
     }
 
     public void b(Entity entity) {
-      //CanaryMod start
+        //CanaryMod start
         HangingEntityDestroyHook hook = null;
         boolean isPlayer = false;
-        if(entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayer) {
             isPlayer = true;
-            hook = (HangingEntityDestroyHook) new HangingEntityDestroyHook((HangingEntity) this.getCanaryEntity(), (Player)entity.getCanaryEntity(), CanaryDamageSource.getDamageSourceFromType(DamageType.GENERIC)).call();
+            hook = (HangingEntityDestroyHook)new HangingEntityDestroyHook((HangingEntity)this.getCanaryEntity(), (Player)entity.getCanaryEntity(), CanaryDamageSource.getDamageSourceFromType(DamageType.GENERIC)).call();
         }
         else {
-            hook = (HangingEntityDestroyHook) new HangingEntityDestroyHook((HangingEntity) this.getCanaryEntity(), null, CanaryDamageSource.getDamageSourceFromType(DamageType.GENERIC)).call();
+            hook = (HangingEntityDestroyHook)new HangingEntityDestroyHook((HangingEntity)this.getCanaryEntity(), null, CanaryDamageSource.getDamageSourceFromType(DamageType.GENERIC)).call();
         }
-        if(hook.isCanceled()) {
+        if (hook.isCanceled()) {
             return;
         }
         //CanaryMod end
-        
+
         //CanaryMod changed to spare an instanceof
         if (isPlayer) {
-            EntityPlayer entityplayer = (EntityPlayer) entity;
+            EntityPlayer entityplayer = (EntityPlayer)entity;
 
             if (entityplayer.bG.d) {
                 return;

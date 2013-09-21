@@ -11,16 +11,16 @@ public class EntityMagmaCube extends EntitySlime {
         this.entity = new CanaryMagmaCube(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.d).a(0.20000000298023224D);
     }
 
     public boolean bs() {
-        return this.q.r > 0 && this.q.b(this.E) && this.q.a((Entity) this, this.E).isEmpty() && !this.q.d(this.E);
+        return this.q.r > 0 && this.q.b(this.E) && this.q.a((Entity)this, this.E).isEmpty() && !this.q.d(this.E);
     }
 
-    public int aP() {
+    public int aQ() {
         return this.bR() * 3;
     }
 
@@ -56,7 +56,7 @@ public class EntityMagmaCube extends EntitySlime {
         }
     }
 
-    public boolean ae() {
+    public boolean af() {
         return false;
     }
 
@@ -68,12 +68,13 @@ public class EntityMagmaCube extends EntitySlime {
         this.h *= 0.9F;
     }
 
-    protected void bd() {
-        this.y = (double) (0.42F + (float) this.bR() * 0.1F);
+    protected void be() {
+        this.y = (double)(0.42F + (float)this.bR() * 0.1F);
         this.an = true;
     }
 
-    protected void b(float f0) {}
+    protected void b(float f0) {
+    }
 
     protected boolean bN() {
         return true;
@@ -83,11 +84,11 @@ public class EntityMagmaCube extends EntitySlime {
         return super.bO() + 2;
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.slime." + (this.bR() > 1 ? "big" : "small");
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.slime." + (this.bR() > 1 ? "big" : "small");
     }
 
@@ -95,7 +96,7 @@ public class EntityMagmaCube extends EntitySlime {
         return this.bR() > 1 ? "mob.magmacube.big" : "mob.magmacube.small";
     }
 
-    public boolean I() {
+    public boolean J() {
         return false;
     }
 

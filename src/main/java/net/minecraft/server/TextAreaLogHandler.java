@@ -1,10 +1,10 @@
 package net.minecraft.server;
 
+import javax.swing.*;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-import javax.swing.JTextArea;
 
 public class TextAreaLogHandler extends Handler {
 
@@ -26,9 +26,11 @@ public class TextAreaLogHandler extends Handler {
         this.d = jtextarea;
     }
 
-    public void close() {}
+    public void close() {
+    }
 
-    public void flush() {}
+    public void flush() {
+    }
 
     public void publish(LogRecord logrecord) {
         int i0 = this.d.getDocument().getLength();
@@ -47,7 +49,7 @@ public class TextAreaLogHandler extends Handler {
 
     /**
      * Gets the textarea used by the handler
-     * 
+     *
      * @return used JTextArea
      */
     public JTextArea getJTextArea() {
@@ -56,7 +58,7 @@ public class TextAreaLogHandler extends Handler {
 
     /**
      * Gets the Contents of the log up to this point
-     * 
+     *
      * @return current log
      */
     public String getLog() {
@@ -66,11 +68,12 @@ public class TextAreaLogHandler extends Handler {
     /**
      * Does nothing but makes sure that the LogHandler is handling Logs
      */
-    public void poke() {}
+    public void poke() {
+    }
 
     /**
      * Gets the LogHandler
-     * 
+     *
      * @return the LogHandler
      */
     static public TextAreaLogHandler getLogHandler() {

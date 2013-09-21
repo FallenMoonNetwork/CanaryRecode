@@ -63,11 +63,12 @@ public class ItemInWorldManager {
 
             if (i2 == 0) {
                 this.j = false;
-            } else {
+            }
+            else {
                 Block block = Block.s[i2];
 
-                f0 = block.a(this.b, this.b.q, this.k, this.l, this.m) * (float) (i0 + 1);
-                i1 = (int) (f0 * 10.0F);
+                f0 = block.a(this.b, this.b.q, this.k, this.l, this.m) * (float)(i0 + 1);
+                i1 = (int)(f0 * 10.0F);
                 if (i1 != this.o) {
                     this.a.f(this.b.k, this.k, this.l, this.m, i1);
                     this.o = i1;
@@ -78,7 +79,8 @@ public class ItemInWorldManager {
                     this.b(this.k, this.l, this.m);
                 }
             }
-        } else if (this.d) {
+        }
+        else if (this.d) {
             i0 = this.a.a(this.f, this.g, this.h);
             Block block1 = Block.s[i0];
 
@@ -86,11 +88,12 @@ public class ItemInWorldManager {
                 this.a.f(this.b.k, this.f, this.g, this.h, -1);
                 this.o = -1;
                 this.d = false;
-            } else {
+            }
+            else {
                 int i3 = this.i - this.e;
 
-                f0 = block1.a(this.b, this.b.q, this.f, this.g, this.h) * (float) (i3 + 1);
-                i1 = (int) (f0 * 10.0F);
+                f0 = block1.a(this.b, this.b.q, this.f, this.g, this.h) * (float)(i3 + 1);
+                i1 = (int)(f0 * 10.0F);
                 if (i1 != this.o) {
                     this.a.f(this.b.k, this.f, this.g, this.h, i1);
                     this.o = i1;
@@ -102,28 +105,30 @@ public class ItemInWorldManager {
     public void a(int i0, int i1, int i2, int i3) {
         if (!this.c.c() || this.b.d(i0, i1, i2)) {
             if (this.d()) {
-                if (!this.a.a((EntityPlayer) null, i0, i1, i2, i3)) {
+                if (!this.a.a((EntityPlayer)null, i0, i1, i2, i3)) {
                     this.b(i0, i1, i2);
                 }
-            } else {
-                this.a.a((EntityPlayer) null, i0, i1, i2, i3);
+            }
+            else {
+                this.a.a((EntityPlayer)null, i0, i1, i2, i3);
                 this.e = this.i;
                 float f0 = 1.0F;
                 int i4 = this.a.a(i0, i1, i2);
 
                 if (i4 > 0) {
-                    Block.s[i4].a(this.a, i0, i1, i2, (EntityPlayer) this.b);
+                    Block.s[i4].a(this.a, i0, i1, i2, (EntityPlayer)this.b);
                     f0 = Block.s[i4].a(this.b, this.b.q, i0, i1, i2);
                 }
 
                 if (i4 > 0 && f0 >= 1.0F) {
                     this.b(i0, i1, i2);
-                } else {
+                }
+                else {
                     this.d = true;
                     this.f = i0;
                     this.g = i1;
                     this.h = i2;
-                    int i5 = (int) (f0 * 10.0F);
+                    int i5 = (int)(f0 * 10.0F);
 
                     this.a.f(this.b.k, i0, i1, i2, i5);
                     this.o = i5;
@@ -139,13 +144,14 @@ public class ItemInWorldManager {
 
             if (i4 != 0) {
                 Block block = Block.s[i4];
-                float f0 = block.a(this.b, this.b.q, i0, i1, i2) * (float) (i3 + 1);
+                float f0 = block.a(this.b, this.b.q, i0, i1, i2) * (float)(i3 + 1);
 
                 if (f0 >= 0.7F) {
                     this.d = false;
                     this.a.f(this.b.k, i0, i1, i2, -1);
                     this.b(i0, i1, i2);
-                } else if (!this.j) {
+                }
+                else if (!this.j) {
                     this.d = false;
                     this.j = true;
                     this.k = i0;
@@ -167,7 +173,7 @@ public class ItemInWorldManager {
         int i3 = this.a.h(i0, i1, i2);
 
         if (block != null) {
-            block.a(this.a, i0, i1, i2, i3, (EntityPlayer) this.b);
+            block.a(this.a, i0, i1, i2, i3, (EntityPlayer)this.b);
         }
 
         boolean flag0 = this.a.i(i0, i1, i2);
@@ -182,13 +188,15 @@ public class ItemInWorldManager {
     public boolean b(int i0, int i1, int i2) {
         if (this.c.c() && !this.b.d(i0, i1, i2)) {
             return false;
-        } else if (this.c.d() && this.b.aY() != null && this.b.aY().b() instanceof ItemSword) {
+        }
+        else if (this.c.d() && this.b.aZ() != null && this.b.aZ().b() instanceof ItemSword) {
             return false;
-        } else {
+        }
+        else {
             // CanaryMod: BlockDestroyHook
-            net.canarymod.api.world.blocks.Block block = ((EntityPlayerMP) b).getCanaryWorld().getBlockAt(i0, i1, i2);
-            block.setStatus((byte) 1); // Block break status.
-            BlockDestroyHook hook = (BlockDestroyHook) new BlockDestroyHook(((EntityPlayerMP) b).getPlayer(), block).call();
+            net.canarymod.api.world.blocks.Block block = ((EntityPlayerMP)b).getCanaryWorld().getBlockAt(i0, i1, i2);
+            block.setStatus((byte)1); // Block break status.
+            BlockDestroyHook hook = (BlockDestroyHook)new BlockDestroyHook(((EntityPlayerMP)b).getPlayer(), block).call();
             if (hook.isCanceled()) {
                 this.b.a.b(new Packet53BlockChange(i0, i1, i2, this.a)); // For some reason, the client thinks things worked without this
                 return false;
@@ -203,14 +211,15 @@ public class ItemInWorldManager {
 
             if (this.d()) {
                 this.b.a.b(new Packet53BlockChange(i0, i1, i2, this.a));
-            } else {
-                ItemStack itemstack = this.b.bx();
+            }
+            else {
+                ItemStack itemstack = this.b.by();
                 boolean flag1 = this.b.a(Block.s[i3]);
 
                 if (itemstack != null) {
                     itemstack.a(this.a, i3, i0, i1, i2, this.b);
                     if (itemstack.b == 0) {
-                        this.b.by();
+                        this.b.bz();
                     }
                 }
 
@@ -225,7 +234,7 @@ public class ItemInWorldManager {
 
     // CanaryMod: ItemUseHook
     public boolean itemUsed(CanaryPlayer player, World world, ItemStack itemstack, CanaryBlock clicked) {
-        ItemUseHook hook = (ItemUseHook) new ItemUseHook(player, itemstack.getCanaryItem(), clicked).call();
+        ItemUseHook hook = (ItemUseHook)new ItemUseHook(player, itemstack.getCanaryItem(), clicked).call();
         if (hook.isCanceled()) {
             return false;
         }
@@ -241,7 +250,8 @@ public class ItemInWorldManager {
 
         if (itemstack1 == itemstack && (itemstack1 == null || itemstack1.b == i0 && itemstack1.n() <= 0 && itemstack1.k() == i1)) {
             return false;
-        } else {
+        }
+        else {
             entityplayer.bn.a[entityplayer.bn.c] = itemstack1;
             if (this.d()) {
                 itemstack1.b = i0;
@@ -254,8 +264,8 @@ public class ItemInWorldManager {
                 entityplayer.bn.a[entityplayer.bn.c] = null;
             }
 
-            if (!entityplayer.bq()) {
-                ((EntityPlayerMP) entityplayer).a(entityplayer.bo);
+            if (!entityplayer.br()) {
+                ((EntityPlayerMP)entityplayer).a(entityplayer.bo);
             }
 
             return true;
@@ -265,7 +275,7 @@ public class ItemInWorldManager {
     public boolean a(EntityPlayer entityplayer, World world, ItemStack itemstack, int i0, int i1, int i2, int i3, float f0, float f1, float f2) {
         int i4;
 
-        if (!entityplayer.ag() || entityplayer.aY() == null) {
+        if (!entityplayer.ah() || entityplayer.aZ() == null) {
             i4 = world.a(i0, i1, i2);
             if (i4 > 0 && Block.s[i4].a(world, i0, i1, i2, entityplayer, i3, f0, f1, f2)) {
                 return true;
@@ -274,7 +284,8 @@ public class ItemInWorldManager {
 
         if (itemstack == null) {
             return false;
-        } else if (this.d()) {
+        }
+        else if (this.d()) {
             i4 = itemstack.k();
             int i5 = itemstack.b;
             boolean flag0 = itemstack.a(entityplayer, world, i0, i1, i2, i3, f0, f1, f2);
@@ -282,7 +293,8 @@ public class ItemInWorldManager {
             itemstack.b(i4);
             itemstack.b = i5;
             return flag0;
-        } else {
+        }
+        else {
             return itemstack.a(entityplayer, world, i0, i1, i2, i3, f0, f1, f2);
         }
     }

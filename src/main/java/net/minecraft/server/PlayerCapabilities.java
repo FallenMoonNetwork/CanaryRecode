@@ -27,7 +27,7 @@ public class PlayerCapabilities {
         nbttagcompound1.a("mayBuild", this.e);
         nbttagcompound1.a("flySpeed", this.f);
         nbttagcompound1.a("walkSpeed", this.g);
-        nbttagcompound.a("abilities", (NBTBase) nbttagcompound1);
+        nbttagcompound.a("abilities", (NBTBase)nbttagcompound1);
     }
 
     public void b(NBTTagCompound nbttagcompound) {

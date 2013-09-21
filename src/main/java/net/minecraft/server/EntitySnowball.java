@@ -22,7 +22,7 @@ public class EntitySnowball extends EntityThrowable {
 
     protected void a(MovingObjectPosition movingobjectposition) {
         // CanaryMod: ProjectileHit
-        ProjectileHitHook hook = (ProjectileHitHook) new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
+        ProjectileHitHook hook = (ProjectileHitHook)new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
         if (!hook.isCanceled()) { //
             if (movingobjectposition.g != null) {
                 byte b0 = 0;
@@ -31,7 +31,7 @@ public class EntitySnowball extends EntityThrowable {
                     b0 = 3;
                 }
 
-                movingobjectposition.g.a(DamageSource.a((Entity) this, this.h()), (float) b0);
+                movingobjectposition.g.a(DamageSource.a((Entity)this, this.h()), (float)b0);
             }
 
             for (int i0 = 0; i0 < 8; ++i0) {
@@ -39,7 +39,7 @@ public class EntitySnowball extends EntityThrowable {
             }
 
             if (!this.q.I) {
-                this.w();
+                this.x();
             }
         }
     }

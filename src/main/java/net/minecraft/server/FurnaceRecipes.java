@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
+import net.canarymod.api.inventory.recipes.SmeltRecipe;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import net.canarymod.api.inventory.recipes.SmeltRecipe;
 
 public class FurnaceRecipes {
 
@@ -45,7 +46,7 @@ public class FurnaceRecipes {
     }
 
     public ItemStack b(int i0) {
-        return (ItemStack) this.b.get(Integer.valueOf(i0));
+        return (ItemStack)this.b.get(Integer.valueOf(i0));
     }
 
     public Map b() {
@@ -53,15 +54,15 @@ public class FurnaceRecipes {
     }
 
     public float c(int i0) {
-        return this.c.containsKey(Integer.valueOf(i0)) ? ((Float) this.c.get(Integer.valueOf(i0))).floatValue() : 0.0F;
+        return this.c.containsKey(Integer.valueOf(i0)) ? ((Float)this.c.get(Integer.valueOf(i0))).floatValue() : 0.0F;
     }
 
     // CanaryMod
     public List<SmeltRecipe> getSmeltingRecipes() {
         List<SmeltRecipe> smelting_recipes = new ArrayList<SmeltRecipe>();
         for (Object key : this.b.keySet()) {
-            int fromId = ((Integer) key).intValue();
-            net.canarymod.api.inventory.Item result = ((ItemStack) this.b.get(key)).getCanaryItem();
+            int fromId = ((Integer)key).intValue();
+            net.canarymod.api.inventory.Item result = ((ItemStack)this.b.get(key)).getCanaryItem();
             float xp = this.c(result.getId());
             smelting_recipes.add(new SmeltRecipe(fromId, result, xp));
         }

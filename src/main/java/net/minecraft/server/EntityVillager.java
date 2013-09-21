@@ -1,14 +1,15 @@
 package net.minecraft.server;
 
+import net.canarymod.api.CanaryVillagerTrade;
+import net.canarymod.api.entity.living.humanoid.CanaryVillager;
+import net.canarymod.api.entity.living.humanoid.Villager;
+import net.canarymod.hook.entity.VillagerTradeUnlockHook;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
-import net.canarymod.api.CanaryVillagerTrade;
-import net.canarymod.api.entity.living.humanoid.CanaryVillager;
-import net.canarymod.api.entity.living.humanoid.Villager;
-import net.canarymod.hook.entity.VillagerTradeUnlockHook;
 
 public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
 
@@ -55,26 +56,27 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         this.entity = new CanaryVillager(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.d).a(0.5D);
     }
 
-    public boolean be() {
+    public boolean bf() {
         return true;
     }
 
-    protected void bj() {
+    protected void bk() {
         if (--this.bq <= 0) {
             this.q.A.a(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w));
             this.bq = 70 + this.ab.nextInt(50);
             this.bp = this.q.A.a(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w), 32);
             if (this.bp == null) {
                 this.bR();
-            } else {
+            }
+            else {
                 ChunkCoordinates chunkcoordinates = this.bp.a();
 
-                this.b(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c, (int) ((float) this.bp.b() * 0.6F));
+                this.b(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c, (int)((float)this.bp.b() * 0.6F));
                 if (this.bz) {
                     this.bz = false;
                     this.bp.b(5);
@@ -90,7 +92,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
                         Iterator iterator = this.bu.iterator();
 
                         while (iterator.hasNext()) {
-                            MerchantRecipe merchantrecipe = (MerchantRecipe) iterator.next();
+                            MerchantRecipe merchantrecipe = (MerchantRecipe)iterator.next();
 
                             if (merchantrecipe.g()) {
                                 merchantrecipe.a(this.ab.nextInt(6) + this.ab.nextInt(6) + 2);
@@ -101,7 +103,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
                     this.q(1);
                     this.bw = false;
                     if (this.bp != null && this.by != null) {
-                        this.q.a((Entity) this, (byte) 14);
+                        this.q.a((Entity)this, (byte)14);
                         this.bp.a(this.by, 1);
                     }
                 }
@@ -110,21 +112,22 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
             }
         }
 
-        super.bj();
+        super.bk();
     }
 
     public boolean a(EntityPlayer entityplayer) {
         ItemStack itemstack = entityplayer.bn.h();
         boolean flag0 = itemstack != null && itemstack.d == Item.bE.cv;
 
-        if (!flag0 && this.S() && !this.bW() && !this.g_()) {
+        if (!flag0 && this.T() && !this.bW() && !this.g_()) {
             if (!this.q.I) {
                 this.a_(entityplayer);
-                entityplayer.a((IMerchant) this, this.bA());
+                entityplayer.a((IMerchant)this, this.bA());
             }
 
             return true;
-        } else {
+        }
+        else {
             return super.a(entityplayer);
         }
     }
@@ -162,11 +165,11 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         return this.bW() ? "mob.villager.haggle" : "mob.villager.idle";
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.villager.hit";
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.villager.death";
     }
 
@@ -205,9 +208,9 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
                     b0 = -3;
                 }
 
-                this.bp.a(((EntityPlayer) entitylivingbase).c_(), b0);
-                if (this.S()) {
-                    this.q.a((Entity) this, (byte) 13);
+                this.bp.a(((EntityPlayer)entitylivingbase).c_(), b0);
+                if (this.T()) {
+                    this.q.a((Entity)this, (byte)13);
                 }
             }
         }
@@ -219,11 +222,13 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
 
             if (entity != null) {
                 if (entity instanceof EntityPlayer) {
-                    this.bp.a(((EntityPlayer) entity).c_(), -2);
-                } else if (entity instanceof IMob) {
+                    this.bp.a(((EntityPlayer)entity).c_(), -2);
+                }
+                else if (entity instanceof IMob) {
                     this.bp.h();
                 }
-            } else if (entity == null) {
+            }
+            else if (entity == null) {
                 EntityPlayer entityplayer = this.q.a(this, 16.0D);
 
                 if (entityplayer != null) {
@@ -250,13 +255,14 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
     public void a(MerchantRecipe merchantrecipe) {
         merchantrecipe.f();
         this.a_ = -this.o();
-        this.a("mob.villager.yes", this.aZ(), this.ba());
-        if (merchantrecipe.a((MerchantRecipe) this.bu.get(this.bu.size() - 1))) {
+        this.a("mob.villager.yes", this.ba(), this.bb());
+        if (merchantrecipe.a((MerchantRecipe)this.bu.get(this.bu.size() - 1))) {
             this.bv = 40;
             this.bw = true;
             if (this.bt != null) {
                 this.by = this.bt.c_();
-            } else {
+            }
+            else {
                 this.by = null;
             }
         }
@@ -270,9 +276,10 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         if (!this.q.I && this.a_ > -this.o() + 20) {
             this.a_ = -this.o();
             if (itemstack != null) {
-                this.a("mob.villager.yes", this.aZ(), this.ba());
-            } else {
-                this.a("mob.villager.no", this.aZ(), this.ba());
+                this.a("mob.villager.yes", this.ba(), this.bb());
+            }
+            else {
+                this.a("mob.villager.no", this.ba(), this.bb());
             }
         }
     }
@@ -293,8 +300,9 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
 
     private void q(int i0) {
         if (this.bu != null) {
-            this.bA = MathHelper.c((float) this.bu.size()) * 0.2F;
-        } else {
+            this.bA = MathHelper.c((float)this.bu.size()) * 0.2F;
+        }
+        else {
             this.bA = 0.0F;
         }
 
@@ -303,7 +311,8 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         merchantrecipelist = new MerchantRecipeList();
         int i1;
 
-        label50: switch (this.bT()) {
+        label50:
+        switch (this.bT()) {
             case 0:
                 a(merchantrecipelist, Item.V.cv, this.ab, this.p(0.9F));
                 a(merchantrecipelist, Block.ag.cF, this.ab, this.p(0.5F));
@@ -345,7 +354,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
                 b(merchantrecipelist, Item.bF.cv, this.ab, this.p(0.2F));
                 b(merchantrecipelist, Item.aE.cv, this.ab, this.p(0.4F));
                 b(merchantrecipelist, Block.bi.cF, this.ab, this.p(0.3F));
-                int[] aint = new int[]{ Item.s.cv, Item.B.cv, Item.ag.cv, Item.ak.cv, Item.j.cv, Item.E.cv, Item.i.cv, Item.D.cv };
+                int[] aint = new int[]{Item.s.cv, Item.B.cv, Item.ag.cv, Item.ak.cv, Item.j.cv, Item.E.cv, Item.i.cv, Item.D.cv};
                 int[] aint1 = aint;
                 int i3 = aint.length;
 
@@ -417,9 +426,9 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         }
 
         for (int i5 = 0; i5 < i0 && i5 < merchantrecipelist.size(); ++i5) {
-            MerchantRecipe recipe = (MerchantRecipe) merchantrecipelist.get(i5);
+            MerchantRecipe recipe = (MerchantRecipe)merchantrecipelist.get(i5);
             // CanaryMod: VillagerTradeUnlock
-            VillagerTradeUnlockHook hook = (VillagerTradeUnlockHook) new VillagerTradeUnlockHook((Villager) getCanaryEntity(), new CanaryVillagerTrade(recipe)).call();
+            VillagerTradeUnlockHook hook = (VillagerTradeUnlockHook)new VillagerTradeUnlockHook((Villager)getCanaryEntity(), new CanaryVillagerTrade(recipe)).call();
             if (!hook.isCanceled()) {
                 this.bu.a(recipe);
             }
@@ -438,9 +447,9 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
     }
 
     private static int b(int i0, Random random) {
-        Tuple tuple = (Tuple) bB.get(Integer.valueOf(i0));
+        Tuple tuple = (Tuple)bB.get(Integer.valueOf(i0));
 
-        return tuple == null ? 1 : (((Integer) tuple.a()).intValue() >= ((Integer) tuple.b()).intValue() ? ((Integer) tuple.a()).intValue() : ((Integer) tuple.a()).intValue() + random.nextInt(((Integer) tuple.b()).intValue() - ((Integer) tuple.a()).intValue()));
+        return tuple == null ? 1 : (((Integer)tuple.a()).intValue() >= ((Integer)tuple.b()).intValue() ? ((Integer)tuple.a()).intValue() : ((Integer)tuple.a()).intValue() + random.nextInt(((Integer)tuple.b()).intValue() - ((Integer)tuple.a()).intValue()));
     }
 
     private static void b(MerchantRecipeList merchantrecipelist, int i0, Random random, float f0) {
@@ -452,7 +461,8 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
             if (i1 < 0) {
                 itemstack = new ItemStack(Item.bJ.cv, 1, 0);
                 itemstack1 = new ItemStack(i0, -i1, 0);
-            } else {
+            }
+            else {
                 itemstack = new ItemStack(Item.bJ.cv, i1, 0);
                 itemstack1 = new ItemStack(i0, 1, 0);
             }
@@ -462,9 +472,9 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
     }
 
     private static int c(int i0, Random random) {
-        Tuple tuple = (Tuple) bC.get(Integer.valueOf(i0));
+        Tuple tuple = (Tuple)bC.get(Integer.valueOf(i0));
 
-        return tuple == null ? 1 : (((Integer) tuple.a()).intValue() >= ((Integer) tuple.b()).intValue() ? ((Integer) tuple.a()).intValue() : ((Integer) tuple.a()).intValue() + random.nextInt(((Integer) tuple.b()).intValue() - ((Integer) tuple.a()).intValue()));
+        return tuple == null ? 1 : (((Integer)tuple.a()).intValue() >= ((Integer)tuple.b()).intValue() ? ((Integer)tuple.a()).intValue() : ((Integer)tuple.a()).intValue() + random.nextInt(((Integer)tuple.b()).intValue() - ((Integer)tuple.a()).intValue()));
     }
 
     public EntityLivingData a(EntityLivingData entitylivingdata) {
@@ -480,7 +490,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
     public EntityVillager b(EntityAgeable entityageable) {
         EntityVillager entityvillager = new EntityVillager(this.q);
 
-        entityvillager.a((EntityLivingData) null);
+        entityvillager.a((EntityLivingData)null);
         return entityvillager;
     }
 

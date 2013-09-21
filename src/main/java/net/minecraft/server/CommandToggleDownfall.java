@@ -5,7 +5,8 @@ import net.canarymod.api.world.DimensionType;
 
 public class CommandToggleDownfall extends CommandBase {
 
-    public CommandToggleDownfall() {}
+    public CommandToggleDownfall() {
+    }
 
     public String c() {
         return "toggledownfall";
@@ -26,7 +27,7 @@ public class CommandToggleDownfall extends CommandBase {
 
     protected void d() {
         for (net.canarymod.api.world.World w : MinecraftServer.F().worldManager.getAllWorlds()) {
-            WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+            WorldServer worldserver = (WorldServer)((CanaryWorld)w).getHandle();
 
             if (worldserver != null && worldserver.getCanaryWorld().getType() == DimensionType.fromId(0)) {
                 worldserver.B();

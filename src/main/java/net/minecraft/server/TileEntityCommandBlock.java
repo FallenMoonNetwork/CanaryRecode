@@ -22,17 +22,18 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     public int a(World world) {
         if (world.I) {
             return 0;
-        } else {
+        }
+        else {
             MinecraftServer minecraftserver = MinecraftServer.F();
 
             if (minecraftserver != null && minecraftserver.ab()) {
                 // CanaryMod: CommandBlockCommand
-                // ICommandManager icommandmanager = minecraftserver.G();
+                ICommandManager icommandmanager = minecraftserver.G();
                 new CommandBlockCommandHook(getCanaryCommandBlock(), this.b.split(" ")).call();
                 if (Canary.getServer().consoleCommand(this.b, this.getCanaryCommandBlock())) { // Redirect for Canary Console Commands too
                     return 1;
                 }
-                // return icommandmanager.a(this, this.b);
+                return icommandmanager.a(this, this.b);
                 //
             }
             return 0;
@@ -47,7 +48,8 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         this.c = s0;
     }
 
-    public void a(ChatMessageComponent chatmessagecomponent) {}
+    public void a(ChatMessageComponent chatmessagecomponent) {
+    }
 
     public boolean a(int i0, String s0) {
         return i0 <= 2;
@@ -98,6 +100,6 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
 
     // CanaryMod
     public CanaryCommandBlock getCanaryCommandBlock() {
-        return (CanaryCommandBlock) complexBlock;
+        return (CanaryCommandBlock)complexBlock;
     }
 }

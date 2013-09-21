@@ -55,9 +55,9 @@ public class EntityFireworkRocket extends Entity {
         this.d(this.x, this.y, this.z);
         float f0 = MathHelper.a(this.x * this.x + this.z * this.z);
 
-        this.A = (float) (Math.atan2(this.x, this.z) * 180.0D / 3.1415927410125732D);
+        this.A = (float)(Math.atan2(this.x, this.z) * 180.0D / 3.1415927410125732D);
 
-        for (this.B = (float) (Math.atan2(this.y, (double) f0) * 180.0D / 3.1415927410125732D); this.B - this.D < -180.0F; this.D -= 360.0F) {
+        for (this.B = (float)(Math.atan2(this.y, (double)f0) * 180.0D / 3.1415927410125732D); this.B - this.D < -180.0F; this.D -= 360.0F) {
             ;
         }
 
@@ -76,7 +76,7 @@ public class EntityFireworkRocket extends Entity {
         this.B = this.D + (this.B - this.D) * 0.2F;
         this.A = this.C + (this.A - this.C) * 0.2F;
         if (this.a == 0) {
-            this.q.a((Entity) this, "fireworks.launch", 3.0F, 1.0F);
+            this.q.a((Entity)this, "fireworks.launch", 3.0F, 1.0F);
         }
 
         ++this.a;
@@ -86,10 +86,10 @@ public class EntityFireworkRocket extends Entity {
 
         if (!this.q.I && this.a > this.b) {
             // CanaryMod: FireworkExplode
-            FireworkExplodeHook hook = (FireworkExplodeHook) new FireworkExplodeHook((FireworkRocket) this.getCanaryEntity()).call();
+            FireworkExplodeHook hook = (FireworkExplodeHook)new FireworkExplodeHook((FireworkRocket)this.getCanaryEntity()).call();
             if (!hook.isCanceled()) {
-                this.q.a((Entity) this, (byte) 17);
-                this.w();
+                this.q.a((Entity)this, (byte)17);
+                this.x();
             }
             //
         }
@@ -126,7 +126,7 @@ public class EntityFireworkRocket extends Entity {
         return super.d(f0);
     }
 
-    public boolean ap() {
+    public boolean aq() {
         return false;
     }
 

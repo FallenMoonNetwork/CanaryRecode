@@ -18,7 +18,7 @@ public enum EnumChatFormatting {
     private final String B;
     private final String D; // CanaryMod: Track Name
 
-    private static final EnumChatFormatting[] C = new EnumChatFormatting[]{ a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v };
+    private static final EnumChatFormatting[] C = new EnumChatFormatting[]{a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v};
 
     private EnumChatFormatting(String s0, int i0, char c0) {
         this(s0, i0, c0, false);
@@ -53,7 +53,7 @@ public enum EnumChatFormatting {
     }
 
     public static EnumChatFormatting b(String s0) {
-        return s0 == null ? null : (EnumChatFormatting) x.get(s0.toLowerCase());
+        return s0 == null ? null : (EnumChatFormatting)x.get(s0.toLowerCase());
     }
 
     public static Collection a(boolean flag0, boolean flag1) {

@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.api.scoreboard.CanaryScoreHealthCriteria;
+
 import java.util.Iterator;
 import java.util.List;
-import net.canarymod.api.scoreboard.CanaryScoreHealthCriteria;
 
 public class ScoreHealthCriteria extends ScoreDummyCriteria {
 
@@ -17,12 +18,12 @@ public class ScoreHealthCriteria extends ScoreDummyCriteria {
 
         EntityPlayer entityplayer;
 
-        for (Iterator iterator = list.iterator(); iterator.hasNext(); f0 += entityplayer.aM() + entityplayer.bm()) {
-            entityplayer = (EntityPlayer) iterator.next();
+        for (Iterator iterator = list.iterator(); iterator.hasNext(); f0 += entityplayer.aN() + entityplayer.bn()) {
+            entityplayer = (EntityPlayer)iterator.next();
         }
 
         if (list.size() > 0) {
-            f0 /= (float) list.size();
+            f0 /= (float)list.size();
         }
 
         return MathHelper.f(f0);

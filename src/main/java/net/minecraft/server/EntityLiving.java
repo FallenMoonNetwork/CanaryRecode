@@ -44,9 +44,9 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
     }
 
-    protected void ay() {
-        super.ay();
-        this.aW().b(SharedMonsterAttributes.b).a(16.0D);
+    protected void az() {
+        super.az();
+        this.aX().b(SharedMonsterAttributes.b).a(16.0D);
     }
 
     public EntityLookHelper h() {
@@ -81,11 +81,12 @@ public abstract class EntityLiving extends EntityLivingBase {
         return EntityCreeper.class != oclass0 && EntityGhast.class != oclass0;
     }
 
-    public void n() {}
+    public void n() {
+    }
 
     protected void a() {
         super.a();
-        this.ah.a(11, Byte.valueOf((byte) 0));
+        this.ah.a(11, Byte.valueOf((byte)0));
         this.ah.a(10, "");
     }
 
@@ -97,14 +98,14 @@ public abstract class EntityLiving extends EntityLivingBase {
         String s0 = this.r();
 
         if (s0 != null) {
-            this.a(s0, this.aZ(), this.ba());
+            this.a(s0, this.ba(), this.bb());
         }
     }
 
-    public void x() {
-        super.x();
+    public void y() {
+        super.y();
         this.q.C.a("mobBaseTick");
-        if (this.S() && this.ab.nextInt(1000) < this.a_++) {
+        if (this.T() && this.ab.nextInt(1000) < this.a_++) {
             this.a_ = -this.o();
             this.p();
         }
@@ -115,7 +116,7 @@ public abstract class EntityLiving extends EntityLivingBase {
     protected int e(EntityPlayer entityplayer) {
         if (this.b > 0) {
             int i0 = this.b;
-            ItemStack[] aitemstack = this.ad();
+            ItemStack[] aitemstack = this.ae();
 
             for (int i1 = 0; i1 < aitemstack.length; ++i1) {
                 if (aitemstack[i1] != null && this.e[i1] <= 1.0F) {
@@ -124,7 +125,8 @@ public abstract class EntityLiving extends EntityLivingBase {
             }
 
             return i0;
-        } else {
+        }
+        else {
             return this.b;
         }
     }
@@ -136,7 +138,7 @@ public abstract class EntityLiving extends EntityLivingBase {
             double d2 = this.ab.nextGaussian() * 0.02D;
             double d3 = 10.0D;
 
-            this.q.a("explode", this.u + (double) (this.ab.nextFloat() * this.O * 2.0F) - (double) this.O - d0 * d3, this.v + (double) (this.ab.nextFloat() * this.P) - d1 * d3, this.w + (double) (this.ab.nextFloat() * this.O * 2.0F) - (double) this.O - d2 * d3, d0, d1, d2);
+            this.q.a("explode", this.u + (double)(this.ab.nextFloat() * this.O * 2.0F) - (double)this.O - d0 * d3, this.v + (double)(this.ab.nextFloat() * this.P) - d1 * d3, this.w + (double)(this.ab.nextFloat() * this.O * 2.0F) - (double)this.O - d2 * d3, d0, d1, d2);
         }
     }
 
@@ -148,10 +150,11 @@ public abstract class EntityLiving extends EntityLivingBase {
     }
 
     protected float f(float f0, float f1) {
-        if (this.be()) {
+        if (this.bf()) {
             this.bn.a();
             return f1;
-        } else {
+        }
+        else {
             return super.f(f0, f1);
         }
     }
@@ -194,34 +197,35 @@ public abstract class EntityLiving extends EntityLivingBase {
                 this.br[i0].b(nbttagcompound1);
             }
 
-            nbttaglist.a((NBTBase) nbttagcompound1);
+            nbttaglist.a((NBTBase)nbttagcompound1);
         }
 
-        nbttagcompound.a("Equipment", (NBTBase) nbttaglist);
+        nbttagcompound.a("Equipment", (NBTBase)nbttaglist);
         NBTTagList nbttaglist1 = new NBTTagList();
 
         for (int i1 = 0; i1 < this.e.length; ++i1) {
-            nbttaglist1.a((NBTBase) (new NBTTagFloat(i1 + "", this.e[i1])));
+            nbttaglist1.a((NBTBase)(new NBTTagFloat(i1 + "", this.e[i1])));
         }
 
-        nbttagcompound.a("DropChances", (NBTBase) nbttaglist1);
+        nbttagcompound.a("DropChances", (NBTBase)nbttaglist1);
         nbttagcompound.a("CustomName", this.bA());
         nbttagcompound.a("CustomNameVisible", this.bC());
         nbttagcompound.a("Leashed", this.bv);
         if (this.bw != null) {
             nbttagcompound1 = new NBTTagCompound("Leash");
             if (this.bw instanceof EntityLivingBase) {
-                nbttagcompound1.a("UUIDMost", this.bw.av().getMostSignificantBits());
-                nbttagcompound1.a("UUIDLeast", this.bw.av().getLeastSignificantBits());
-            } else if (this.bw instanceof EntityHanging) {
-                EntityHanging entityhanging = (EntityHanging) this.bw;
+                nbttagcompound1.a("UUIDMost", this.bw.aw().getMostSignificantBits());
+                nbttagcompound1.a("UUIDLeast", this.bw.aw().getLeastSignificantBits());
+            }
+            else if (this.bw instanceof EntityHanging) {
+                EntityHanging entityhanging = (EntityHanging)this.bw;
 
                 nbttagcompound1.a("X", entityhanging.b);
                 nbttagcompound1.a("Y", entityhanging.c);
                 nbttagcompound1.a("Z", entityhanging.d);
             }
 
-            nbttagcompound.a("Leash", (NBTBase) nbttagcompound1);
+            nbttagcompound.a("Leash", (NBTBase)nbttagcompound1);
         }
     }
 
@@ -241,7 +245,7 @@ public abstract class EntityLiving extends EntityLivingBase {
             nbttaglist = nbttagcompound.m("Equipment");
 
             for (i0 = 0; i0 < this.br.length; ++i0) {
-                this.br[i0] = ItemStack.a((NBTTagCompound) nbttaglist.b(i0));
+                this.br[i0] = ItemStack.a((NBTTagCompound)nbttaglist.b(i0));
             }
         }
 
@@ -249,7 +253,7 @@ public abstract class EntityLiving extends EntityLivingBase {
             nbttaglist = nbttagcompound.m("DropChances");
 
             for (i0 = 0; i0 < nbttaglist.c(); ++i0) {
-                this.e[i0] = ((NBTTagFloat) nbttaglist.b(i0)).a;
+                this.e[i0] = ((NBTTagFloat)nbttaglist.b(i0)).a;
             }
         }
 
@@ -276,7 +280,7 @@ public abstract class EntityLiving extends EntityLivingBase {
             Iterator iterator = list.iterator();
 
             while (iterator.hasNext()) {
-                EntityItem entityitem = (EntityItem) iterator.next();
+                EntityItem entityitem = (EntityItem)iterator.next();
 
                 if (!entityitem.M && entityitem.d() != null) {
                     ItemStack itemstack = entityitem.d();
@@ -290,30 +294,37 @@ public abstract class EntityLiving extends EntityLivingBase {
                             if (i0 == 0) {
                                 if (itemstack.b() instanceof ItemSword && !(itemstack1.b() instanceof ItemSword)) {
                                     flag0 = true;
-                                } else if (itemstack.b() instanceof ItemSword && itemstack1.b() instanceof ItemSword) {
-                                    ItemSword itemsword = (ItemSword) itemstack.b();
-                                    ItemSword itemsword1 = (ItemSword) itemstack1.b();
+                                }
+                                else if (itemstack.b() instanceof ItemSword && itemstack1.b() instanceof ItemSword) {
+                                    ItemSword itemsword = (ItemSword)itemstack.b();
+                                    ItemSword itemsword1 = (ItemSword)itemstack1.b();
 
                                     if (itemsword.g() == itemsword1.g()) {
                                         flag0 = itemstack.k() > itemstack1.k() || itemstack.p() && !itemstack1.p();
-                                    } else {
+                                    }
+                                    else {
                                         flag0 = itemsword.g() > itemsword1.g();
                                     }
-                                } else {
+                                }
+                                else {
                                     flag0 = false;
                                 }
-                            } else if (itemstack.b() instanceof ItemArmor && !(itemstack1.b() instanceof ItemArmor)) {
+                            }
+                            else if (itemstack.b() instanceof ItemArmor && !(itemstack1.b() instanceof ItemArmor)) {
                                 flag0 = true;
-                            } else if (itemstack.b() instanceof ItemArmor && itemstack1.b() instanceof ItemArmor) {
-                                ItemArmor itemarmor = (ItemArmor) itemstack.b();
-                                ItemArmor itemarmor1 = (ItemArmor) itemstack1.b();
+                            }
+                            else if (itemstack.b() instanceof ItemArmor && itemstack1.b() instanceof ItemArmor) {
+                                ItemArmor itemarmor = (ItemArmor)itemstack.b();
+                                ItemArmor itemarmor1 = (ItemArmor)itemstack1.b();
 
                                 if (itemarmor.c == itemarmor1.c) {
                                     flag0 = itemstack.k() > itemstack1.k() || itemstack.p() && !itemstack1.p();
-                                } else {
+                                }
+                                else {
                                     flag0 = itemarmor.c > itemarmor1.c;
                                 }
-                            } else {
+                            }
+                            else {
                                 flag0 = false;
                             }
                         }
@@ -327,7 +338,7 @@ public abstract class EntityLiving extends EntityLivingBase {
                             this.e[i0] = 2.0F;
                             this.bt = true;
                             this.a(entityitem, 1);
-                            entityitem.w();
+                            entityitem.x();
                         }
                     }
                 }
@@ -337,7 +348,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.q.C.b();
     }
 
-    protected boolean be() {
+    protected boolean bf() {
         return false;
     }
 
@@ -345,10 +356,11 @@ public abstract class EntityLiving extends EntityLivingBase {
         return true;
     }
 
-    protected void bo() {
+    protected void u() {
         if (this.bt) {
             this.aV = 0;
-        } else {
+        }
+        else {
             EntityPlayer entityplayer = this.q.a(this, -1.0D);
 
             if (entityplayer != null) {
@@ -358,22 +370,23 @@ public abstract class EntityLiving extends EntityLivingBase {
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
 
                 if (this.t() && d3 > 16384.0D) {
-                    this.w();
+                    this.x();
                 }
 
                 if (this.aV > 600 && this.ab.nextInt(800) == 0 && d3 > 1024.0D && this.t()) {
-                    this.w();
-                } else if (d3 < 1024.0D) {
+                    this.x();
+                }
+                else if (d3 < 1024.0D) {
                     this.aV = 0;
                 }
             }
         }
     }
 
-    protected void bh() {
+    protected void bi() {
         ++this.aV;
         this.q.C.a("checkDespawn");
-        this.bo();
+        this.u();
         this.q.C.b();
         this.q.C.a("sensing");
         this.bq.a();
@@ -388,7 +401,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.bo.f();
         this.q.C.b();
         this.q.C.a("mob tick");
-        this.bj();
+        this.bk();
         this.q.C.b();
         this.q.C.a("controls");
         this.q.C.a("move");
@@ -401,30 +414,32 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.q.C.b();
     }
 
-    protected void bk() {
-        super.bk();
+    protected void bl() {
+        super.bl();
         this.be = 0.0F;
         this.bf = 0.0F;
-        this.bo();
+        this.u();
         float f0 = 8.0F;
 
         if (this.ab.nextFloat() < 0.02F) {
-            EntityPlayer entityplayer = this.q.a(this, (double) f0);
+            EntityPlayer entityplayer = this.q.a(this, (double)f0);
 
             if (entityplayer != null) {
                 this.bu = entityplayer;
                 this.g = 10 + this.ab.nextInt(20);
-            } else {
+            }
+            else {
                 this.bg = (this.ab.nextFloat() - 0.5F) * 20.0F;
             }
         }
 
         if (this.bu != null) {
-            this.a(this.bu, 10.0F, (float) this.bp());
-            if (this.g-- <= 0 || this.bu.M || this.bu.e((Entity) this) > (double) (f0 * f0)) {
+            this.a(this.bu, 10.0F, (float)this.bp());
+            if (this.g-- <= 0 || this.bu.M || this.bu.e((Entity)this) > (double)(f0 * f0)) {
                 this.bu = null;
             }
-        } else {
+        }
+        else {
             if (this.ab.nextFloat() < 0.05F) {
                 this.bg = (this.ab.nextFloat() - 0.5F) * 20.0F;
             }
@@ -433,8 +448,8 @@ public abstract class EntityLiving extends EntityLivingBase {
             this.B = this.f;
         }
 
-        boolean flag0 = this.G();
-        boolean flag1 = this.I();
+        boolean flag0 = this.H();
+        boolean flag1 = this.J();
 
         if (flag0 || flag1) {
             this.bd = this.ab.nextFloat() < 0.8F;
@@ -451,16 +466,17 @@ public abstract class EntityLiving extends EntityLivingBase {
         double d2;
 
         if (entity instanceof EntityLivingBase) {
-            EntityLivingBase entitylivingbase = (EntityLivingBase) entity;
+            EntityLivingBase entitylivingbase = (EntityLivingBase)entity;
 
-            d2 = entitylivingbase.v + (double) entitylivingbase.f() - (this.v + (double) this.f());
-        } else {
-            d2 = (entity.E.b + entity.E.e) / 2.0D - (this.v + (double) this.f());
+            d2 = entitylivingbase.v + (double)entitylivingbase.f() - (this.v + (double)this.f());
+        }
+        else {
+            d2 = (entity.E.b + entity.E.e) / 2.0D - (this.v + (double)this.f());
         }
 
-        double d3 = (double) MathHelper.a(d0 * d0 + d1 * d1);
-        float f2 = (float) (Math.atan2(d1, d0) * 180.0D / 3.1415927410125732D) - 90.0F;
-        float f3 = (float) (-(Math.atan2(d2, d3) * 180.0D / 3.1415927410125732D));
+        double d3 = (double)MathHelper.a(d0 * d0 + d1 * d1);
+        float f2 = (float)(Math.atan2(d1, d0) * 180.0D / 3.1415927410125732D) - 90.0F;
+        float f3 = (float)(-(Math.atan2(d2, d3) * 180.0D / 3.1415927410125732D));
 
         this.B = this.b(this.B, f3, f1);
         this.A = this.b(this.A, f2, f0);
@@ -481,18 +497,19 @@ public abstract class EntityLiving extends EntityLivingBase {
     }
 
     public boolean bs() {
-        return this.q.b(this.E) && this.q.a((Entity) this, this.E).isEmpty() && !this.q.d(this.E);
+        return this.q.b(this.E) && this.q.a((Entity)this, this.E).isEmpty() && !this.q.d(this.E);
     }
 
     public int bv() {
         return 4;
     }
 
-    public int ar() {
+    public int as() {
         if (this.m() == null) {
             return 3;
-        } else {
-            int i0 = (int) (this.aM() - this.aS() * 0.33F);
+        }
+        else {
+            int i0 = (int)(this.aN() - this.aT() * 0.33F);
 
             i0 -= (3 - this.q.r) * 4;
             if (i0 < 0) {
@@ -503,7 +520,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
     }
 
-    public ItemStack aY() {
+    public ItemStack aZ() {
         return this.br[0];
     }
 
@@ -519,16 +536,16 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.br[i0] = itemstack;
     }
 
-    public ItemStack[] ad() {
+    public ItemStack[] ae() {
         return this.br;
     }
 
     protected void a(boolean flag0, int i0) {
-        for (int i1 = 0; i1 < this.ad().length; ++i1) {
+        for (int i1 = 0; i1 < this.ae().length; ++i1) {
             ItemStack itemstack = this.n(i1);
             boolean flag1 = this.e[i1] > 1.0F;
 
-            if (itemstack != null && (flag0 || flag1) && this.ab.nextFloat() - (float) i0 * 0.01F < this.e[i1]) {
+            if (itemstack != null && (flag0 || flag1) && this.ab.nextFloat() - (float)i0 * 0.01F < this.e[i1]) {
                 if (!flag1 && itemstack.g()) {
                     int i2 = Math.max(itemstack.l() - 25, 1);
                     int i3 = itemstack.l() - this.ab.nextInt(this.ab.nextInt(i2) + 1);
@@ -587,7 +604,7 @@ public abstract class EntityLiving extends EntityLivingBase {
     public static int b(ItemStack itemstack) {
         if (itemstack.d != Block.bf.cF && itemstack.d != Item.bS.cv) {
             if (itemstack.b() instanceof ItemArmor) {
-                switch (((ItemArmor) itemstack.b()).b) {
+                switch (((ItemArmor)itemstack.b()).b) {
                     case 0:
                         return 4;
 
@@ -603,7 +620,8 @@ public abstract class EntityLiving extends EntityLivingBase {
             }
 
             return 0;
-        } else {
+        }
+        else {
             return 4;
         }
     }
@@ -613,52 +631,68 @@ public abstract class EntityLiving extends EntityLivingBase {
             case 4:
                 if (i1 == 0) {
                     return Item.X;
-                } else if (i1 == 1) {
+                }
+                else if (i1 == 1) {
                     return Item.an;
-                } else if (i1 == 2) {
+                }
+                else if (i1 == 2) {
                     return Item.ab;
-                } else if (i1 == 3) {
+                }
+                else if (i1 == 3) {
                     return Item.af;
-                } else if (i1 == 4) {
+                }
+                else if (i1 == 4) {
                     return Item.aj;
                 }
 
             case 3:
                 if (i1 == 0) {
                     return Item.Y;
-                } else if (i1 == 1) {
+                }
+                else if (i1 == 1) {
                     return Item.ao;
-                } else if (i1 == 2) {
+                }
+                else if (i1 == 2) {
                     return Item.ac;
-                } else if (i1 == 3) {
+                }
+                else if (i1 == 3) {
                     return Item.ag;
-                } else if (i1 == 4) {
+                }
+                else if (i1 == 4) {
                     return Item.ak;
                 }
 
             case 2:
                 if (i1 == 0) {
                     return Item.Z;
-                } else if (i1 == 1) {
+                }
+                else if (i1 == 1) {
                     return Item.ap;
-                } else if (i1 == 2) {
+                }
+                else if (i1 == 2) {
                     return Item.ad;
-                } else if (i1 == 3) {
+                }
+                else if (i1 == 3) {
                     return Item.ah;
-                } else if (i1 == 4) {
+                }
+                else if (i1 == 4) {
                     return Item.al;
                 }
 
             case 1:
                 if (i1 == 0) {
                     return Item.aa;
-                } else if (i1 == 1) {
+                }
+                else if (i1 == 1) {
                     return Item.aq;
-                } else if (i1 == 2) {
+                }
+                else if (i1 == 2) {
                     return Item.ae;
-                } else if (i1 == 3) {
+                }
+                else if (i1 == 3) {
                     return Item.ai;
-                } else if (i1 == 4) {
+                }
+                else if (i1 == 4) {
                     return Item.am;
                 }
 
@@ -670,15 +704,15 @@ public abstract class EntityLiving extends EntityLivingBase {
     protected void bx() {
         float f0 = this.q.b(this.u, this.v, this.w);
 
-        if (this.aY() != null && this.ab.nextFloat() < 0.25F * f0) {
-            EnchantmentHelper.a(this.ab, this.aY(), (int) (5.0F + f0 * (float) this.ab.nextInt(18)));
+        if (this.aZ() != null && this.ab.nextFloat() < 0.25F * f0) {
+            EnchantmentHelper.a(this.ab, this.aZ(), (int)(5.0F + f0 * (float)this.ab.nextInt(18)));
         }
 
         for (int i0 = 0; i0 < 4; ++i0) {
             ItemStack itemstack = this.o(i0);
 
             if (itemstack != null && this.ab.nextFloat() < 0.5F * f0) {
-                EnchantmentHelper.a(this.ab, itemstack, (int) (5.0F + f0 * (float) this.ab.nextInt(18)));
+                EnchantmentHelper.a(this.ab, itemstack, (int)(5.0F + f0 * (float)this.ab.nextInt(18)));
             }
         }
     }
@@ -692,8 +726,8 @@ public abstract class EntityLiving extends EntityLivingBase {
         return false;
     }
 
-    public String am() {
-        return this.bB() ? this.bA() : super.am();
+    public String an() {
+        return this.bB() ? this.bA() : super.an();
     }
 
     public void bz() {
@@ -713,7 +747,7 @@ public abstract class EntityLiving extends EntityLivingBase {
     }
 
     public void g(boolean flag0) {
-        this.ah.b(11, Byte.valueOf((byte) (flag0 ? 1 : 0)));
+        this.ah.b(11, Byte.valueOf((byte)(flag0 ? 1 : 0)));
     }
 
     public boolean bC() {
@@ -740,17 +774,18 @@ public abstract class EntityLiving extends EntityLivingBase {
         if (this.bH() && this.bI() == entityplayer) {
             this.a(true, !entityplayer.bG.d);
             return true;
-        } else {
+        }
+        else {
             ItemStack itemstack = entityplayer.bn.h();
 
             if (itemstack != null && itemstack.d == Item.ch.cv && this.bG()) {
-                if (!(this instanceof EntityTameable) || !((EntityTameable) this).bT()) {
+                if (!(this instanceof EntityTameable) || !((EntityTameable)this).bT()) {
                     this.b(entityplayer, true);
                     --itemstack.b;
                     return true;
                 }
 
-                if (entityplayer.c_().equalsIgnoreCase(((EntityTameable) this).h_())) {
+                if (entityplayer.c_().equalsIgnoreCase(((EntityTameable)this).h_())) {
                     this.b(entityplayer, true);
                     --itemstack.b;
                     return true;
@@ -786,7 +821,7 @@ public abstract class EntityLiving extends EntityLivingBase {
             }
 
             if (!this.q.I && flag0 && this.q instanceof WorldServer) {
-                ((WorldServer) this.q).q().a((Entity) this, (Packet) (new Packet39AttachEntity(1, this, (Entity) null)));
+                ((WorldServer)this.q).q().a((Entity)this, (Packet)(new Packet39AttachEntity(1, this, (Entity)null)));
             }
         }
     }
@@ -807,7 +842,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         this.bv = true;
         this.bw = entity;
         if (!this.q.I && flag0 && this.q instanceof WorldServer) {
-            ((WorldServer) this.q).q().a((Entity) this, (Packet) (new Packet39AttachEntity(1, this, this.bw)));
+            ((WorldServer)this.q).q().a((Entity)this, (Packet)(new Packet39AttachEntity(1, this, this.bw)));
         }
     }
 
@@ -819,14 +854,15 @@ public abstract class EntityLiving extends EntityLivingBase {
                 Iterator iterator = list.iterator();
 
                 while (iterator.hasNext()) {
-                    EntityLivingBase entitylivingbase = (EntityLivingBase) iterator.next();
+                    EntityLivingBase entitylivingbase = (EntityLivingBase)iterator.next();
 
-                    if (entitylivingbase.av().equals(uuid)) {
+                    if (entitylivingbase.aw().equals(uuid)) {
                         this.bw = entitylivingbase;
                         break;
                     }
                 }
-            } else if (this.bx.b("X") && this.bx.b("Y") && this.bx.b("Z")) {
+            }
+            else if (this.bx.b("X") && this.bx.b("Y") && this.bx.b("Z")) {
                 int i0 = this.bx.e("X");
                 int i1 = this.bx.e("Y");
                 int i2 = this.bx.e("Z");
@@ -837,7 +873,8 @@ public abstract class EntityLiving extends EntityLivingBase {
                 }
 
                 this.bw = entityleashknot;
-            } else {
+            }
+            else {
                 this.a(false, true);
             }
         }

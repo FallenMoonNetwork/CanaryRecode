@@ -1,12 +1,13 @@
 package net.minecraft.server;
 
-import java.util.List;
 import net.canarymod.api.world.blocks.CanaryBrewingStand;
+
+import java.util.List;
 
 public class TileEntityBrewingStand extends TileEntity implements ISidedInventory {
 
-    private static final int[] a = new int[]{ 3 };
-    private static final int[] b = new int[]{ 0, 1, 2 };
+    private static final int[] a = new int[]{3};
+    private static final int[] b = new int[]{0, 1, 2};
     public ItemStack[] c = new ItemStack[4]; // CanaryMod: private => public
     private int d;
     private int e;
@@ -39,14 +40,17 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
             if (this.d == 0) {
                 this.u();
                 this.e();
-            } else if (!this.l()) {
-                this.d = 0;
-                this.e();
-            } else if (this.f != this.c[3].d) {
+            }
+            else if (!this.l()) {
                 this.d = 0;
                 this.e();
             }
-        } else if (this.l()) {
+            else if (this.f != this.c[3].d) {
+                this.d = 0;
+                this.e();
+            }
+        }
+        else if (this.l()) {
             this.d = 400;
             this.f = this.c[3].d;
         }
@@ -71,7 +75,8 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
 
             if (!Item.g[itemstack.d].x()) {
                 return false;
-            } else {
+            }
+            else {
                 boolean flag0 = false;
 
                 for (int i0 = 0; i0 < 3; ++i0) {
@@ -96,7 +101,8 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
 
                 return flag0;
             }
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -116,7 +122,8 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
                         if (i1 != i2) {
                             this.c[i0].b(i2);
                         }
-                    } else if (!ItemPotion.f(i1) && ItemPotion.f(i2)) {
+                    }
+                    else if (!ItemPotion.f(i1) && ItemPotion.f(i2)) {
                         this.c[i0].b(i2);
                     }
                 }
@@ -124,7 +131,8 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
 
             if (Item.g[itemstack.d].u()) {
                 this.c[3] = new ItemStack(Item.g[itemstack.d].t());
-            } else {
+            }
+            else {
                 --this.c[3].b;
                 if (this.c[3].b <= 0) {
                     this.c[3] = null;
@@ -144,7 +152,7 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
         this.c = new ItemStack[this.j_()];
 
         for (int i0 = 0; i0 < nbttaglist.c(); ++i0) {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.b(i0);
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.b(i0);
             byte b0 = nbttagcompound1.c("Slot");
 
             if (b0 >= 0 && b0 < this.c.length) {
@@ -160,20 +168,20 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
-        nbttagcompound.a("BrewTime", (short) this.d);
+        nbttagcompound.a("BrewTime", (short)this.d);
         NBTTagList nbttaglist = new NBTTagList();
 
         for (int i0 = 0; i0 < this.c.length; ++i0) {
             if (this.c[i0] != null) {
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 
-                nbttagcompound1.a("Slot", (byte) i0);
+                nbttagcompound1.a("Slot", (byte)i0);
                 this.c[i0].b(nbttagcompound1);
-                nbttaglist.a((NBTBase) nbttagcompound1);
+                nbttaglist.a((NBTBase)nbttagcompound1);
             }
         }
 
-        nbttagcompound.a("Items", (NBTBase) nbttaglist);
+        nbttagcompound.a("Items", (NBTBase)nbttaglist);
         if (this.c()) {
             nbttagcompound.a("CustomName", this.g);
         }
@@ -189,7 +197,8 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
 
             this.c[i0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -200,7 +209,8 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
 
             this.c[i0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -216,12 +226,14 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
     }
 
     public boolean a(EntityPlayer entityplayer) {
-        return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
+        return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double)this.l + 0.5D, (double)this.m + 0.5D, (double)this.n + 0.5D) <= 64.0D;
     }
 
-    public void k_() {}
+    public void k_() {
+    }
 
-    public void g() {}
+    public void g() {
+    }
 
     public boolean b(int i0, ItemStack itemstack) {
         return i0 == 3 ? Item.g[itemstack.d].x() : itemstack.d == Item.bu.cv || itemstack.d == Item.bv.cv;
@@ -253,6 +265,6 @@ public class TileEntityBrewingStand extends TileEntity implements ISidedInventor
 
     // CanaryMod
     public CanaryBrewingStand getCanaryBrewingStand() {
-        return (CanaryBrewingStand) complexBlock;
+        return (CanaryBrewingStand)complexBlock;
     }
 }

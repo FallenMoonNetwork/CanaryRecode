@@ -5,7 +5,8 @@ public class InventoryCraftResult implements IInventory {
     public ItemStack[] a = new ItemStack[1]; // CanaryMod: private -> public
     private String name = "Result"; // CanaryMod: changeable name
 
-    public InventoryCraftResult() {}
+    public InventoryCraftResult() {
+    }
 
     public int j_() {
         return 1;
@@ -29,7 +30,8 @@ public class InventoryCraftResult implements IInventory {
 
             this.a[0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -40,7 +42,8 @@ public class InventoryCraftResult implements IInventory {
 
             this.a[0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -53,15 +56,18 @@ public class InventoryCraftResult implements IInventory {
         return 64;
     }
 
-    public void e() {}
+    public void e() {
+    }
 
     public boolean a(EntityPlayer entityplayer) {
         return true;
     }
 
-    public void k_() {}
+    public void k_() {
+    }
 
-    public void g() {}
+    public void g() {
+    }
 
     public boolean b(int i0, ItemStack itemstack) {
         return true;

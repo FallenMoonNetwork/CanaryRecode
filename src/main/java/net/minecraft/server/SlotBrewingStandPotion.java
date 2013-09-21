@@ -19,7 +19,7 @@ public class SlotBrewingStandPotion extends Slot { // CanaryMod: package => publ
 
     public void a(EntityPlayer entityplayer, ItemStack itemstack) {
         if (itemstack.d == Item.bu.cv && itemstack.k() > 0) {
-            this.a.a((StatBase) AchievementList.A, 1);
+            this.a.a((StatBase)AchievementList.A, 1);
         }
 
         super.a(entityplayer, itemstack);

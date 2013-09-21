@@ -29,7 +29,7 @@ public class TileEntityNote extends TileEntity {
     }
 
     public void a() {
-        this.a = (byte) ((this.a + 1) % 25);
+        this.a = (byte)((this.a + 1) % 25);
         this.e();
     }
 
@@ -60,6 +60,6 @@ public class TileEntityNote extends TileEntity {
 
     // CanaryMod
     public CanaryNoteBlock getCanaryNoteBlock() {
-        return (CanaryNoteBlock) complexBlock;
+        return (CanaryNoteBlock)complexBlock;
     }
 }

@@ -43,6 +43,6 @@ public class TileEntityMobSpawner extends TileEntity {
 
     // CanaryMod
     public CanaryMobSpawner getCanaryMobSpawner() {
-        return (CanaryMobSpawner) complexBlock;
+        return (CanaryMobSpawner)complexBlock;
     }
 }

@@ -28,7 +28,8 @@ public class InventoryCrafting implements IInventory {
             int i2 = i0 + i1 * this.b;
 
             return this.a(i2);
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -47,7 +48,8 @@ public class InventoryCrafting implements IInventory {
 
             this.a[i0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -59,40 +61,45 @@ public class InventoryCrafting implements IInventory {
             if (this.a[i0].b <= i1) {
                 itemstack = this.a[i0];
                 this.a[i0] = null;
-                this.c.a((IInventory) this);
+                this.c.a((IInventory)this);
                 return itemstack;
-            } else {
+            }
+            else {
                 itemstack = this.a[i0].a(i1);
                 if (this.a[i0].b == 0) {
                     this.a[i0] = null;
                 }
 
-                this.c.a((IInventory) this);
+                this.c.a((IInventory)this);
                 return itemstack;
             }
-        } else {
+        }
+        else {
             return null;
         }
     }
 
     public void a(int i0, ItemStack itemstack) {
         this.a[i0] = itemstack;
-        this.c.a((IInventory) this);
+        this.c.a((IInventory)this);
     }
 
     public int d() {
         return 64;
     }
 
-    public void e() {}
+    public void e() {
+    }
 
     public boolean a(EntityPlayer entityplayer) {
         return true;
     }
 
-    public void k_() {}
+    public void k_() {
+    }
 
-    public void g() {}
+    public void g() {
+    }
 
     public boolean b(int i0, ItemStack itemstack) {
         return true;

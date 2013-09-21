@@ -37,9 +37,11 @@ public class PotionEffect {
         if (potioneffect.c > this.c) {
             this.c = potioneffect.c;
             this.b = potioneffect.b;
-        } else if (potioneffect.c == this.c && this.b < potioneffect.b) {
+        }
+        else if (potioneffect.c == this.c && this.b < potioneffect.b) {
             this.b = potioneffect.b;
-        } else if (!potioneffect.e && this.e) {
+        }
+        else if (!potioneffect.e && this.e) {
             this.e = potioneffect.e;
         }
     }
@@ -99,7 +101,8 @@ public class PotionEffect {
 
         if (this.c() > 0) {
             s0 = this.f() + " x " + (this.c() + 1) + ", Duration: " + this.b();
-        } else {
+        }
+        else {
             s0 = this.f() + ", Duration: " + this.b();
         }
 
@@ -113,16 +116,17 @@ public class PotionEffect {
     public boolean equals(Object object) {
         if (!(object instanceof PotionEffect)) {
             return false;
-        } else {
-            PotionEffect potioneffect = (PotionEffect) object;
+        }
+        else {
+            PotionEffect potioneffect = (PotionEffect)object;
 
             return this.a == potioneffect.a && this.c == potioneffect.c && this.b == potioneffect.b && this.d == potioneffect.d && this.e == potioneffect.e;
         }
     }
 
     public NBTTagCompound a(NBTTagCompound nbttagcompound) {
-        nbttagcompound.a("Id", (byte) this.a());
-        nbttagcompound.a("Amplifier", (byte) this.c());
+        nbttagcompound.a("Id", (byte)this.a());
+        nbttagcompound.a("Amplifier", (byte)this.c());
         nbttagcompound.a("Duration", this.b());
         nbttagcompound.a("Ambient", this.e());
         return nbttagcompound;

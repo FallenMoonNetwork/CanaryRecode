@@ -19,18 +19,20 @@ public class ItemHoe extends Item {
     public boolean a(ItemStack itemstack, EntityPlayer entityplayer, World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2) {
         if (!entityplayer.a(i0, i1, i2, i3, itemstack)) {
             return false;
-        } else {
+        }
+        else {
             int i4 = world.a(i0, i1, i2);
             int i5 = world.a(i0, i1 + 1, i2);
 
             if ((i3 == 0 || i5 != 0 || i4 != Block.z.cF) && i4 != Block.A.cF) {
                 return false;
-            } else {
+            }
+            else {
                 // CanaryMod: ItemUse
-                CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+                CanaryBlock clicked = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
-                clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
-                ItemUseHook hook = (ItemUseHook) new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked).call();
+                clicked.setFaceClicked(BlockFace.fromByte((byte)i3));
+                ItemUseHook hook = (ItemUseHook)new ItemUseHook(((EntityPlayerMP)entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked).call();
                 if (hook.isCanceled()) {
                     return false;
                 }
@@ -38,12 +40,13 @@ public class ItemHoe extends Item {
 
                 Block block = Block.aF;
 
-                world.a((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.5F), (double) ((float) i2 + 0.5F), block.cS.e(), (block.cS.c() + 1.0F) / 2.0F, block.cS.d() * 0.8F);
+                world.a((double)((float)i0 + 0.5F), (double)((float)i1 + 0.5F), (double)((float)i2 + 0.5F), block.cS.e(), (block.cS.c() + 1.0F) / 2.0F, block.cS.d() * 0.8F);
                 if (world.I) {
                     return true;
-                } else {
+                }
+                else {
                     world.c(i0, i1, i2, block.cF);
-                    itemstack.a(1, (EntityLivingBase) entityplayer);
+                    itemstack.a(1, (EntityLivingBase)entityplayer);
                     return true;
                 }
             }

@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.hook.world.RedstoneChangeHook;
+
 import java.util.Iterator;
 import java.util.Random;
-import net.canarymod.hook.world.RedstoneChangeHook;
 
 public class BlockChest extends BlockContainer {
 
@@ -32,13 +33,17 @@ public class BlockChest extends BlockContainer {
     public void a(IBlockAccess iblockaccess, int i0, int i1, int i2) {
         if (iblockaccess.a(i0, i1, i2 - 1) == this.cF) {
             this.a(0.0625F, 0.0F, 0.0F, 0.9375F, 0.875F, 0.9375F);
-        } else if (iblockaccess.a(i0, i1, i2 + 1) == this.cF) {
+        }
+        else if (iblockaccess.a(i0, i1, i2 + 1) == this.cF) {
             this.a(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 1.0F);
-        } else if (iblockaccess.a(i0 - 1, i1, i2) == this.cF) {
+        }
+        else if (iblockaccess.a(i0 - 1, i1, i2) == this.cF) {
             this.a(0.0F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
-        } else if (iblockaccess.a(i0 + 1, i1, i2) == this.cF) {
+        }
+        else if (iblockaccess.a(i0 + 1, i1, i2) == this.cF) {
             this.a(0.0625F, 0.0F, 0.0625F, 1.0F, 0.875F, 0.9375F);
-        } else {
+        }
+        else {
             this.a(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
         }
     }
@@ -74,7 +79,7 @@ public class BlockChest extends BlockContainer {
         int i5 = world.a(i0 - 1, i1, i2);
         int i6 = world.a(i0 + 1, i1, i2);
         byte b0 = 0;
-        int i7 = MathHelper.c((double) (entitylivingbase.A * 4.0F / 360.0F) + 0.5D) & 3;
+        int i7 = MathHelper.c((double)(entitylivingbase.A * 4.0F / 360.0F) + 0.5D) & 3;
 
         if (i7 == 0) {
             b0 = 2;
@@ -94,11 +99,13 @@ public class BlockChest extends BlockContainer {
 
         if (i3 != this.cF && i4 != this.cF && i5 != this.cF && i6 != this.cF) {
             world.b(i0, i1, i2, b0, 3);
-        } else {
+        }
+        else {
             if ((i3 == this.cF || i4 == this.cF) && (b0 == 4 || b0 == 5)) {
                 if (i3 == this.cF) {
                     world.b(i0, i1, i2 - 1, b0, 3);
-                } else {
+                }
+                else {
                     world.b(i0, i1, i2 + 1, b0, 3);
                 }
 
@@ -108,7 +115,8 @@ public class BlockChest extends BlockContainer {
             if ((i5 == this.cF || i6 == this.cF) && (b0 == 2 || b0 == 3)) {
                 if (i5 == this.cF) {
                     world.b(i0 - 1, i1, i2, b0, 3);
-                } else {
+                }
+                else {
                     world.b(i0 + 1, i1, i2, b0, 3);
                 }
 
@@ -117,7 +125,7 @@ public class BlockChest extends BlockContainer {
         }
 
         if (itemstack.u()) {
-            ((TileEntityChest) world.r(i0, i1, i2)).a(itemstack.s());
+            ((TileEntityChest)world.r(i0, i1, i2)).a(itemstack.s());
         }
     }
 
@@ -152,14 +160,16 @@ public class BlockChest extends BlockContainer {
                     if (Block.t[i6] && !Block.t[i5]) {
                         b0 = 4;
                     }
-                } else {
+                }
+                else {
                     i7 = world.a(i5 == this.cF ? i0 - 1 : i0 + 1, i1, i2 - 1);
                     i8 = world.a(i5 == this.cF ? i0 - 1 : i0 + 1, i1, i2 + 1);
                     b0 = 3;
                     flag1 = true;
                     if (i5 == this.cF) {
                         i9 = world.h(i0 - 1, i1, i2);
-                    } else {
+                    }
+                    else {
                         i9 = world.h(i0 + 1, i1, i2);
                     }
 
@@ -175,14 +185,16 @@ public class BlockChest extends BlockContainer {
                         b0 = 2;
                     }
                 }
-            } else {
+            }
+            else {
                 i7 = world.a(i0 - 1, i1, i3 == this.cF ? i2 - 1 : i2 + 1);
                 i8 = world.a(i0 + 1, i1, i3 == this.cF ? i2 - 1 : i2 + 1);
                 b0 = 5;
                 flag1 = true;
                 if (i3 == this.cF) {
                     i9 = world.h(i0, i1, i2 - 1);
-                } else {
+                }
+                else {
                     i9 = world.h(i0, i1, i2 + 1);
                 }
 
@@ -231,7 +243,7 @@ public class BlockChest extends BlockContainer {
 
     public void a(World world, int i0, int i1, int i2, int i3) {
         super.a(world, i0, i1, i2, i3);
-        TileEntityChest tileentitychest = (TileEntityChest) world.r(i0, i1, i2);
+        TileEntityChest tileentitychest = (TileEntityChest)world.r(i0, i1, i2);
 
         if (tileentitychest != null) {
             tileentitychest.i();
@@ -239,7 +251,7 @@ public class BlockChest extends BlockContainer {
     }
 
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
-        TileEntityChest tileentitychest = (TileEntityChest) world.r(i0, i1, i2);
+        TileEntityChest tileentitychest = (TileEntityChest)world.r(i0, i1, i2);
 
         if (tileentitychest != null) {
             for (int i5 = 0; i5 < tileentitychest.j_(); ++i5) {
@@ -251,7 +263,7 @@ public class BlockChest extends BlockContainer {
 
                     EntityItem entityitem;
 
-                    for (float f2 = this.b.nextFloat() * 0.8F + 0.1F; itemstack.b > 0; world.d((Entity) entityitem)) {
+                    for (float f2 = this.b.nextFloat() * 0.8F + 0.1F; itemstack.b > 0; world.d((Entity)entityitem)) {
                         int i6 = this.b.nextInt(21) + 10;
 
                         if (i6 > itemstack.b) {
@@ -259,14 +271,14 @@ public class BlockChest extends BlockContainer {
                         }
 
                         itemstack.b -= i6;
-                        entityitem = new EntityItem(world, (double) ((float) i0 + f0), (double) ((float) i1 + f1), (double) ((float) i2 + f2), new ItemStack(itemstack.d, i6, itemstack.k()));
+                        entityitem = new EntityItem(world, (double)((float)i0 + f0), (double)((float)i1 + f1), (double)((float)i2 + f2), new ItemStack(itemstack.d, i6, itemstack.k()));
                         float f3 = 0.05F;
 
-                        entityitem.x = (double) ((float) this.b.nextGaussian() * f3);
-                        entityitem.y = (double) ((float) this.b.nextGaussian() * f3 + 0.2F);
-                        entityitem.z = (double) ((float) this.b.nextGaussian() * f3);
+                        entityitem.x = (double)((float)this.b.nextGaussian() * f3);
+                        entityitem.y = (double)((float)this.b.nextGaussian() * f3 + 0.2F);
+                        entityitem.z = (double)((float)this.b.nextGaussian() * f3);
                         if (itemstack.p()) {
-                            entityitem.d().d((NBTTagCompound) itemstack.q().b());
+                            entityitem.d().d((NBTTagCompound)itemstack.q().b());
                         }
                     }
                 }
@@ -281,7 +293,8 @@ public class BlockChest extends BlockContainer {
     public boolean a(World world, int i0, int i1, int i2, EntityPlayer entityplayer, int i3, float f0, float f1, float f2) {
         if (world.I) {
             return true;
-        } else {
+        }
+        else {
             IInventory iinventory = this.g_(world, i0, i1, i2);
 
             if (iinventory != null) {
@@ -293,40 +306,47 @@ public class BlockChest extends BlockContainer {
     }
 
     public IInventory g_(World world, int i0, int i1, int i2) {
-        Object object = (TileEntityChest) world.r(i0, i1, i2);
+        Object object = (TileEntityChest)world.r(i0, i1, i2);
 
         if (object == null) {
             return null;
-        } else if (world.u(i0, i1 + 1, i2)) {
+        }
+        else if (world.u(i0, i1 + 1, i2)) {
             return null;
-        } else if (m(world, i0, i1, i2)) {
+        }
+        else if (m(world, i0, i1, i2)) {
             return null;
-        } else if (world.a(i0 - 1, i1, i2) == this.cF && (world.u(i0 - 1, i1 + 1, i2) || m(world, i0 - 1, i1, i2))) {
+        }
+        else if (world.a(i0 - 1, i1, i2) == this.cF && (world.u(i0 - 1, i1 + 1, i2) || m(world, i0 - 1, i1, i2))) {
             return null;
-        } else if (world.a(i0 + 1, i1, i2) == this.cF && (world.u(i0 + 1, i1 + 1, i2) || m(world, i0 + 1, i1, i2))) {
+        }
+        else if (world.a(i0 + 1, i1, i2) == this.cF && (world.u(i0 + 1, i1 + 1, i2) || m(world, i0 + 1, i1, i2))) {
             return null;
-        } else if (world.a(i0, i1, i2 - 1) == this.cF && (world.u(i0, i1 + 1, i2 - 1) || m(world, i0, i1, i2 - 1))) {
+        }
+        else if (world.a(i0, i1, i2 - 1) == this.cF && (world.u(i0, i1 + 1, i2 - 1) || m(world, i0, i1, i2 - 1))) {
             return null;
-        } else if (world.a(i0, i1, i2 + 1) == this.cF && (world.u(i0, i1 + 1, i2 + 1) || m(world, i0, i1, i2 + 1))) {
+        }
+        else if (world.a(i0, i1, i2 + 1) == this.cF && (world.u(i0, i1 + 1, i2 + 1) || m(world, i0, i1, i2 + 1))) {
             return null;
-        } else {
+        }
+        else {
             if (world.a(i0 - 1, i1, i2) == this.cF) {
-                object = new InventoryLargeChest("container.chestDouble", (TileEntityChest) world.r(i0 - 1, i1, i2), (IInventory) object);
+                object = new InventoryLargeChest("container.chestDouble", (TileEntityChest)world.r(i0 - 1, i1, i2), (IInventory)object);
             }
 
             if (world.a(i0 + 1, i1, i2) == this.cF) {
-                object = new InventoryLargeChest("container.chestDouble", (IInventory) object, (TileEntityChest) world.r(i0 + 1, i1, i2));
+                object = new InventoryLargeChest("container.chestDouble", (IInventory)object, (TileEntityChest)world.r(i0 + 1, i1, i2));
             }
 
             if (world.a(i0, i1, i2 - 1) == this.cF) {
-                object = new InventoryLargeChest("container.chestDouble", (TileEntityChest) world.r(i0, i1, i2 - 1), (IInventory) object);
+                object = new InventoryLargeChest("container.chestDouble", (TileEntityChest)world.r(i0, i1, i2 - 1), (IInventory)object);
             }
 
             if (world.a(i0, i1, i2 + 1) == this.cF) {
-                object = new InventoryLargeChest("container.chestDouble", (IInventory) object, (TileEntityChest) world.r(i0, i1, i2 + 1));
+                object = new InventoryLargeChest("container.chestDouble", (IInventory)object, (TileEntityChest)world.r(i0, i1, i2 + 1));
             }
 
-            return (IInventory) object;
+            return (IInventory)object;
         }
     }
 
@@ -343,12 +363,13 @@ public class BlockChest extends BlockContainer {
     public int b(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
         if (!this.f()) {
             return 0;
-        } else {
-            int i4 = ((TileEntityChest) iblockaccess.r(i0, i1, i2)).h;
+        }
+        else {
+            int i4 = ((TileEntityChest)iblockaccess.r(i0, i1, i2)).h;
             // CanaryMod: RedstoneChange
             int newLvl = MathHelper.a(i4, 0, 15);
             if (newLvl != oldLvl) {
-                RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(((World) iblockaccess).getCanaryWorld().getBlockAt(i0, i1, i2), oldLvl, newLvl).call();
+                RedstoneChangeHook hook = (RedstoneChangeHook)new RedstoneChangeHook(((World)iblockaccess).getCanaryWorld().getBlockAt(i0, i1, i2), oldLvl, newLvl).call();
                 if (hook.isCanceled()) {
                     return oldLvl;
                 }
@@ -363,7 +384,7 @@ public class BlockChest extends BlockContainer {
     }
 
     private static boolean m(World world, int i0, int i1, int i2) {
-        Iterator iterator = world.a(EntityOcelot.class, AxisAlignedBB.a().a((double) i0, (double) (i1 + 1), (double) i2, (double) (i0 + 1), (double) (i1 + 2), (double) (i2 + 1))).iterator();
+        Iterator iterator = world.a(EntityOcelot.class, AxisAlignedBB.a().a((double)i0, (double)(i1 + 1), (double)i2, (double)(i0 + 1), (double)(i1 + 2), (double)(i2 + 1))).iterator();
 
         EntityOcelot entityocelot;
 
@@ -372,9 +393,9 @@ public class BlockChest extends BlockContainer {
                 return false;
             }
 
-            EntityOcelot entityocelot1 = (EntityOcelot) iterator.next();
+            EntityOcelot entityocelot1 = (EntityOcelot)iterator.next();
 
-            entityocelot = (EntityOcelot) entityocelot1;
+            entityocelot = (EntityOcelot)entityocelot1;
         }
         while (!entityocelot.bU());
 

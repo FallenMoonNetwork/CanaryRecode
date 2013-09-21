@@ -26,12 +26,13 @@ public class ItemMonsterPlacer extends Item {
     public boolean a(ItemStack itemstack, EntityPlayer entityplayer, World world, int i0, int i1, int i2, int i3, float f0, float f1, float f2) {
         if (world.I) {
             return true;
-        } else {
+        }
+        else {
             // CanaryMod: ItemUse
-            CanaryBlock clicked = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+            CanaryBlock clicked = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
-            clicked.setFaceClicked(BlockFace.fromByte((byte) i3));
-            ItemUseHook hook = (ItemUseHook) new ItemUseHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked).call();
+            clicked.setFaceClicked(BlockFace.fromByte((byte)i3));
+            ItemUseHook hook = (ItemUseHook)new ItemUseHook(((EntityPlayerMP)entityplayer).getPlayer(), itemstack.getCanaryItem(), clicked).call();
             if (hook.isCanceled()) {
                 return false;
             }
@@ -48,11 +49,11 @@ public class ItemMonsterPlacer extends Item {
                 d0 = 0.5D;
             }
 
-            Entity entity = a(world, itemstack.k(), (double) i0 + 0.5D, (double) i1 + d0, (double) i2 + 0.5D);
+            Entity entity = a(world, itemstack.k(), (double)i0 + 0.5D, (double)i1 + d0, (double)i2 + 0.5D);
 
             if (entity != null) {
                 if (entity instanceof EntityLivingBase && itemstack.u()) {
-                    ((EntityLiving) entity).a(itemstack.s());
+                    ((EntityLiving)entity).a(itemstack.s());
                 }
 
                 if (!entityplayer.bG.d) {
@@ -67,12 +68,14 @@ public class ItemMonsterPlacer extends Item {
     public ItemStack a(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if (world.I) {
             return itemstack;
-        } else {
+        }
+        else {
             MovingObjectPosition movingobjectposition = this.a(world, entityplayer, true);
 
             if (movingobjectposition == null) {
                 return itemstack;
-            } else {
+            }
+            else {
                 if (movingobjectposition.a == EnumMovingObjectType.a) {
                     int i0 = movingobjectposition.b;
                     int i1 = movingobjectposition.c;
@@ -87,11 +90,11 @@ public class ItemMonsterPlacer extends Item {
                     }
 
                     if (world.g(i0, i1, i2) == Material.h) {
-                        Entity entity = a(world, itemstack.k(), (double) i0, (double) i1, (double) i2);
+                        Entity entity = a(world, itemstack.k(), (double)i0, (double)i1, (double)i2);
 
                         if (entity != null) {
                             if (entity instanceof EntityLivingBase && itemstack.u()) {
-                                ((EntityLiving) entity).a(itemstack.s());
+                                ((EntityLiving)entity).a(itemstack.s());
                             }
 
                             if (!entityplayer.bG.d) {
@@ -113,18 +116,19 @@ public class ItemMonsterPlacer extends Item {
     public static Entity a(World world, int i0, double d0, double d1, double d2, boolean spawn) { // CanaryMod: check spawning
         if (!EntityList.a.containsKey(Integer.valueOf(i0))) {
             return null;
-        } else {
+        }
+        else {
             Entity entity = null;
 
             for (int i1 = 0; i1 < 1; ++i1) {
                 entity = EntityList.a(i0, world);
                 if (entity != null && entity instanceof EntityLivingBase) {
-                    EntityLiving entityliving = (EntityLiving) entity;
+                    EntityLiving entityliving = (EntityLiving)entity;
 
                     entity.b(d0, d1, d2, MathHelper.g(world.s.nextFloat() * 360.0F), 0.0F);
                     entityliving.aP = entityliving.A;
                     entityliving.aN = entityliving.A;
-                    entityliving.a((EntityLivingData) null);
+                    entityliving.a((EntityLivingData)null);
                     if (spawn) { // CanaryMod check if spawn is allowed
                         world.d(entity);
                     }

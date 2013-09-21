@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.PortalCreateHook;
+
+import java.util.Random;
 
 public class BlockPortal extends BlockBreakable {
 
@@ -21,10 +22,10 @@ public class BlockPortal extends BlockBreakable {
             }
 
             if (i3 > 0 && !world.u(i0, i3 + 1, i2)) {
-                Entity entity = ItemMonsterPlacer.a(world, 57, (double) i0 + 0.5D, (double) i3 + 1.1D, (double) i2 + 0.5D);
+                Entity entity = ItemMonsterPlacer.a(world, 57, (double)i0 + 0.5D, (double)i3 + 1.1D, (double)i2 + 0.5D);
 
                 if (entity != null) {
-                    entity.ao = entity.ab();
+                    entity.ao = entity.ac();
                 }
             }
         }
@@ -42,7 +43,8 @@ public class BlockPortal extends BlockBreakable {
             f0 = 0.125F;
             f1 = 0.5F;
             this.a(0.5F - f0, 0.0F, 0.5F - f1, 0.5F + f0, 1.0F, 0.5F + f1);
-        } else {
+        }
+        else {
             f0 = 0.5F;
             f1 = 0.125F;
             this.a(0.5F - f0, 0.0F, 0.5F - f1, 0.5F + f0, 1.0F, 0.5F + f1);
@@ -71,7 +73,8 @@ public class BlockPortal extends BlockBreakable {
 
         if (b0 == b1) {
             return false;
-        } else {
+        }
+        else {
             if (world.a(i0 - b0, i1, i2 - b1) == 0) {
                 i0 -= b0;
                 i2 -= b1;
@@ -91,7 +94,8 @@ public class BlockPortal extends BlockBreakable {
                             if (i5 != Block.au.cF) {
                                 return false;
                             }
-                        } else if (i5 != 0 && i5 != Block.aw.cF) {
+                        }
+                        else if (i5 != 0 && i5 != Block.aw.cF) {
                             return false;
                         }
                     }
@@ -102,10 +106,10 @@ public class BlockPortal extends BlockBreakable {
             CanaryBlock[][] portalBlocks = new CanaryBlock[3][2];
             for (i3 = 0; i3 < 2; ++i3) {
                 for (i4 = 0; i4 < 3; ++i4) {
-                    portalBlocks[i4][i3] = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0 + b0 * i3, i1 + i4, i2 + b1 * i3);
+                    portalBlocks[i4][i3] = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0 + b0 * i3, i1 + i4, i2 + b1 * i3);
                 }
             }
-            PortalCreateHook hook = (PortalCreateHook) new PortalCreateHook(portalBlocks).call();
+            PortalCreateHook hook = (PortalCreateHook)new PortalCreateHook(portalBlocks).call();
             if (!hook.isCanceled()) {
                 for (i3 = 0; i3 < 2; ++i3) {
                     for (i4 = 0; i4 < 3; ++i4) {
@@ -136,7 +140,8 @@ public class BlockPortal extends BlockBreakable {
 
         if (world.a(i0, i4 - 1, i2) != Block.au.cF) {
             world.i(i0, i1, i2);
-        } else {
+        }
+        else {
             int i5;
 
             for (i5 = 1; i5 < 4 && world.a(i0, i4 + i5, i2) == this.cF; ++i5) {
@@ -149,13 +154,15 @@ public class BlockPortal extends BlockBreakable {
 
                 if (flag0 && flag1) {
                     world.i(i0, i1, i2);
-                } else {
+                }
+                else {
                     if ((world.a(i0 + b0, i1, i2 + b1) != Block.au.cF || world.a(i0 - b0, i1, i2 - b1) != this.cF)
                             && (world.a(i0 - b0, i1, i2 - b1) != Block.au.cF || world.a(i0 + b0, i1, i2 + b1) != this.cF)) {
                         world.i(i0, i1, i2);
                     }
                 }
-            } else {
+            }
+            else {
                 world.i(i0, i1, i2);
             }
         }
@@ -167,7 +174,7 @@ public class BlockPortal extends BlockBreakable {
 
     public void a(World world, int i0, int i1, int i2, Entity entity) {
         if (entity.o == null && entity.n == null) {
-            entity.aa();
+            entity.ab();
         }
     }
 }

@@ -1,11 +1,12 @@
 package net.minecraft.server;
 
+import net.canarymod.api.CanaryMobSpawnerLogic;
+import net.canarymod.api.MobSpawnerLogic;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import net.canarymod.api.CanaryMobSpawnerLogic;
-import net.canarymod.api.MobSpawnerLogic;
 
 public abstract class MobSpawnerBaseLogic {
 
@@ -24,11 +25,12 @@ public abstract class MobSpawnerBaseLogic {
     public int m = 4; // CanaryMod: private >> public
 
     // CanaryMod: Variable Declaration
-    public MobSpawnerLogic logic = (MobSpawnerLogic) new CanaryMobSpawnerLogic(this);
+    public MobSpawnerLogic logic = (MobSpawnerLogic)new CanaryMobSpawnerLogic(this);
 
     // CanaryMod: End
 
-    public MobSpawnerBaseLogic() {}
+    public MobSpawnerBaseLogic() {
+    }
 
     public String e() {
         if (this.i() == null) {
@@ -37,7 +39,8 @@ public abstract class MobSpawnerBaseLogic {
             }
 
             return this.a;
-        } else {
+        }
+        else {
             return this.i().c;
         }
     }
@@ -47,7 +50,7 @@ public abstract class MobSpawnerBaseLogic {
     }
 
     public boolean f() {
-        return this.a().a((double) this.b() + 0.5D, (double) this.c() + 0.5D, (double) this.d() + 0.5D, (double) this.l) != null;
+        return this.a().a((double)this.b() + 0.5D, (double)this.c() + 0.5D, (double)this.d() + 0.5D, (double)this.l) != null;
     }
 
     public void g() {
@@ -55,10 +58,10 @@ public abstract class MobSpawnerBaseLogic {
             double d0;
 
             if (this.a().I) {
-                double d1 = (double) ((float) this.b() + this.a().s.nextFloat());
-                double d2 = (double) ((float) this.c() + this.a().s.nextFloat());
+                double d1 = (double)((float)this.b() + this.a().s.nextFloat());
+                double d2 = (double)((float)this.c() + this.a().s.nextFloat());
 
-                d0 = (double) ((float) this.d() + this.a().s.nextFloat());
+                d0 = (double)((float)this.d() + this.a().s.nextFloat());
                 this.a().a("smoke", d1, d2, d0, 0.0D, 0.0D, 0.0D);
                 this.a().a("flame", d1, d2, d0, 0.0D, 0.0D, 0.0D);
                 if (this.b > 0) {
@@ -66,8 +69,9 @@ public abstract class MobSpawnerBaseLogic {
                 }
 
                 this.d = this.c;
-                this.c = (this.c + (double) (1000.0F / ((float) this.b + 200.0F))) % 360.0D;
-            } else {
+                this.c = (this.c + (double)(1000.0F / ((float)this.b + 200.0F))) % 360.0D;
+            }
+            else {
                 if (this.b == -1) {
                     this.j();
                 }
@@ -86,17 +90,17 @@ public abstract class MobSpawnerBaseLogic {
                         return;
                     }
 
-                    int i1 = this.a().a(entity.getClass(), AxisAlignedBB.a().a((double) this.b(), (double) this.c(), (double) this.d(), (double) (this.b() + 1), (double) (this.c() + 1), (double) (this.d() + 1)).b((double) (this.m * 2), 4.0D, (double) (this.m * 2))).size();
+                    int i1 = this.a().a(entity.getClass(), AxisAlignedBB.a().a((double)this.b(), (double)this.c(), (double)this.d(), (double)(this.b() + 1), (double)(this.c() + 1), (double)(this.d() + 1)).b((double)(this.m * 2), 4.0D, (double)(this.m * 2))).size();
 
                     if (i1 >= this.k) {
                         this.j();
                         return;
                     }
 
-                    d0 = (double) this.b() + (this.a().s.nextDouble() - this.a().s.nextDouble()) * (double) this.m;
-                    double d3 = (double) (this.c() + this.a().s.nextInt(3) - 1);
-                    double d4 = (double) this.d() + (this.a().s.nextDouble() - this.a().s.nextDouble()) * (double) this.m;
-                    EntityLiving entityliving = entity instanceof EntityLiving ? (EntityLiving) entity : null;
+                    d0 = (double)this.b() + (this.a().s.nextDouble() - this.a().s.nextDouble()) * (double)this.m;
+                    double d3 = (double)(this.c() + this.a().s.nextInt(3) - 1);
+                    double d4 = (double)this.d() + (this.a().s.nextDouble() - this.a().s.nextDouble()) * (double)this.m;
+                    EntityLiving entityliving = entity instanceof EntityLiving ? (EntityLiving)entity : null;
 
                     entity.b(d0, d3, d4, this.a().s.nextFloat() * 360.0F, 0.0F);
                     if (entityliving == null || entityliving.bs()) {
@@ -125,7 +129,7 @@ public abstract class MobSpawnerBaseLogic {
             Iterator iterator = this.i().b.c().iterator();
 
             while (iterator.hasNext()) {
-                NBTBase nbtbase = (NBTBase) iterator.next();
+                NBTBase nbtbase = (NBTBase)iterator.next();
 
                 nbttagcompound.a(nbtbase.e(), nbtbase.b());
             }
@@ -148,7 +152,7 @@ public abstract class MobSpawnerBaseLogic {
                     Iterator iterator1 = nbttagcompound1.c().iterator();
 
                     while (iterator1.hasNext()) {
-                        NBTBase nbtbase1 = (NBTBase) iterator1.next();
+                        NBTBase nbtbase1 = (NBTBase)iterator1.next();
 
                         nbttagcompound2.a(nbtbase1.e(), nbtbase1.b());
                     }
@@ -164,8 +168,9 @@ public abstract class MobSpawnerBaseLogic {
 
                 entity1 = entity2;
             }
-        } else if (entity instanceof EntityLivingBase && entity.q != null) {
-            ((EntityLiving) entity).a((EntityLivingData) null);
+        }
+        else if (entity instanceof EntityLivingBase && entity.q != null) {
+            ((EntityLiving)entity).a((EntityLivingData)null);
             this.a().d(entity);
         }
 
@@ -175,14 +180,15 @@ public abstract class MobSpawnerBaseLogic {
     private void j() {
         if (this.h <= this.g) {
             this.b = this.g;
-        } else {
+        }
+        else {
             int i0 = this.h - this.g;
 
             this.b = this.g + this.a().s.nextInt(i0);
         }
 
         if (this.e != null && this.e.size() > 0) {
-            this.a((WeightedRandomMinecart) WeightedRandom.a(this.a().s, (Collection) this.e));
+            this.a((WeightedRandomMinecart)WeightedRandom.a(this.a().s, (Collection)this.e));
         }
 
         this.a(1);
@@ -196,16 +202,18 @@ public abstract class MobSpawnerBaseLogic {
             NBTTagList nbttaglist = nbttagcompound.m("SpawnPotentials");
 
             for (int i0 = 0; i0 < nbttaglist.c(); ++i0) {
-                this.e.add(new WeightedRandomMinecart(this, (NBTTagCompound) nbttaglist.b(i0)));
+                this.e.add(new WeightedRandomMinecart(this, (NBTTagCompound)nbttaglist.b(i0)));
             }
-        } else {
+        }
+        else {
             this.e = null;
         }
 
         if (nbttagcompound.b("SpawnData")) {
             this.a(new WeightedRandomMinecart(this, nbttagcompound.l("SpawnData"), this.a));
-        } else {
-            this.a((WeightedRandomMinecart) null);
+        }
+        else {
+            this.a((WeightedRandomMinecart)null);
         }
 
         if (nbttagcompound.b("MinSpawnDelay")) {
@@ -230,15 +238,15 @@ public abstract class MobSpawnerBaseLogic {
 
     public void b(NBTTagCompound nbttagcompound) {
         nbttagcompound.a("EntityId", this.e());
-        nbttagcompound.a("Delay", (short) this.b);
-        nbttagcompound.a("MinSpawnDelay", (short) this.g);
-        nbttagcompound.a("MaxSpawnDelay", (short) this.h);
-        nbttagcompound.a("SpawnCount", (short) this.i);
-        nbttagcompound.a("MaxNearbyEntities", (short) this.k);
-        nbttagcompound.a("RequiredPlayerRange", (short) this.l);
-        nbttagcompound.a("SpawnRange", (short) this.m);
+        nbttagcompound.a("Delay", (short)this.b);
+        nbttagcompound.a("MinSpawnDelay", (short)this.g);
+        nbttagcompound.a("MaxSpawnDelay", (short)this.h);
+        nbttagcompound.a("SpawnCount", (short)this.i);
+        nbttagcompound.a("MaxNearbyEntities", (short)this.k);
+        nbttagcompound.a("RequiredPlayerRange", (short)this.l);
+        nbttagcompound.a("SpawnRange", (short)this.m);
         if (this.i() != null) {
-            nbttagcompound.a("SpawnData", (NBTTagCompound) this.i().b.b());
+            nbttagcompound.a("SpawnData", (NBTTagCompound)this.i().b.b());
         }
 
         if (this.i() != null || this.e != null && this.e.size() > 0) {
@@ -248,15 +256,16 @@ public abstract class MobSpawnerBaseLogic {
                 Iterator iterator = this.e.iterator();
 
                 while (iterator.hasNext()) {
-                    WeightedRandomMinecart weightedrandomminecart = (WeightedRandomMinecart) iterator.next();
+                    WeightedRandomMinecart weightedrandomminecart = (WeightedRandomMinecart)iterator.next();
 
-                    nbttaglist.a((NBTBase) weightedrandomminecart.a());
+                    nbttaglist.a((NBTBase)weightedrandomminecart.a());
                 }
-            } else {
-                nbttaglist.a((NBTBase) this.i().a());
+            }
+            else {
+                nbttaglist.a((NBTBase)this.i().a());
             }
 
-            nbttagcompound.a("SpawnPotentials", (NBTBase) nbttaglist);
+            nbttagcompound.a("SpawnPotentials", (NBTBase)nbttaglist);
         }
     }
 
@@ -264,7 +273,8 @@ public abstract class MobSpawnerBaseLogic {
         if (i0 == 1 && this.a().I) {
             this.b = this.g;
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }

@@ -16,19 +16,19 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob {
         this.entity = new CanarySnowman(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean be() {
+    public boolean bf() {
         return true;
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(4.0D);
         this.a(SharedMonsterAttributes.d).a(0.20000000298023224D);
     }
 
     public void c() {
         super.c();
-        if (this.F()) {
+        if (this.G()) {
             this.a(DamageSource.e, 1.0F);
         }
 
@@ -40,9 +40,9 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob {
         }
 
         for (i0 = 0; i0 < 4; ++i0) {
-            i1 = MathHelper.c(this.u + (double) ((float) (i0 % 2 * 2 - 1) * 0.25F));
+            i1 = MathHelper.c(this.u + (double)((float)(i0 % 2 * 2 - 1) * 0.25F));
             int i2 = MathHelper.c(this.v);
-            int i3 = MathHelper.c(this.w + (double) ((float) (i0 / 2 % 2 * 2 - 1) * 0.25F));
+            int i3 = MathHelper.c(this.w + (double)((float)(i0 / 2 % 2 * 2 - 1) * 0.25F));
 
             if (this.q.a(i1, i2, i3) == 0 && this.q.a(i1, i3).j() < 0.8F && Block.aX.c(this.q, i1, i2, i3)) {
                 this.q.c(i1, i2, i3, Block.aX.cF);
@@ -65,12 +65,12 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob {
     public void a(EntityLivingBase entitylivingbase, float f0) {
         EntitySnowball entitysnowball = new EntitySnowball(this.q, this);
         double d0 = entitylivingbase.u - this.u;
-        double d1 = entitylivingbase.v + (double) entitylivingbase.f() - 1.100000023841858D - entitysnowball.v;
+        double d1 = entitylivingbase.v + (double)entitylivingbase.f() - 1.100000023841858D - entitysnowball.v;
         double d2 = entitylivingbase.w - this.w;
         float f1 = MathHelper.a(d0 * d0 + d2 * d2) * 0.2F;
 
-        entitysnowball.c(d0, d1 + (double) f1, d2, 1.6F, 12.0F);
-        this.a("random.bow", 1.0F, 1.0F / (this.aC().nextFloat() * 0.4F + 0.8F));
-        this.q.d((Entity) entitysnowball);
+        entitysnowball.c(d0, d1 + (double)f1, d2, 1.6F, 12.0F);
+        this.a("random.bow", 1.0F, 1.0F / (this.aD().nextFloat() * 0.4F + 0.8F));
+        this.q.d((Entity)entitysnowball);
     }
 }

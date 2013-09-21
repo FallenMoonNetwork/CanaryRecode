@@ -4,7 +4,8 @@ import net.canarymod.hook.world.DispenseHook;
 
 public abstract class BehaviorProjectileDispense extends BehaviorDefaultDispenseItem {
 
-    public BehaviorProjectileDispense() {}
+    public BehaviorProjectileDispense() {
+    }
 
     public ItemStack b(IBlockSource iblocksource, ItemStack itemstack) {
         World world = iblocksource.k();
@@ -12,11 +13,11 @@ public abstract class BehaviorProjectileDispense extends BehaviorDefaultDispense
         EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
         IProjectile iprojectile = this.a(world, iposition);
 
-        iprojectile.c((double) enumfacing.c(), (double) ((float) enumfacing.d() + 0.1F), (double) enumfacing.e(), this.b(), this.a());
+        iprojectile.c((double)enumfacing.c(), (double)((float)enumfacing.d() + 0.1F), (double)enumfacing.e(), this.b(), this.a());
         // CanaryMod: Dispense
-        DispenseHook hook = (DispenseHook) new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), ((Entity) iprojectile).getCanaryEntity()).call();
+        DispenseHook hook = (DispenseHook)new DispenseHook(((TileEntityDispenser)iblocksource.j()).getCanaryDispenser(), ((Entity)iprojectile).getCanaryEntity()).call();
         if (!hook.isCanceled()) {
-            world.d((Entity) iprojectile);
+            world.d((Entity)iprojectile);
             itemstack.a(1);
         }
         //

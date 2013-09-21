@@ -22,17 +22,20 @@ public class EntityMinecartEmpty extends EntityMinecart {
     public boolean c(EntityPlayer entityplayer) {
         if (this.n != null && this.n instanceof EntityPlayer && this.n != entityplayer) {
             return true;
-        } else if (this.n != null && this.n != entityplayer) {
+        }
+        else if (this.n != null && this.n != entityplayer) {
             return false;
-        } else {
+        }
+        else {
             if (!this.q.I) {
                 // CanaryMod: VehicleEnter/VehicleExit
                 CancelableHook hook;
 
                 if (this.n == null) {
-                    hook = new VehicleEnterHook((Vehicle) this.entity, (LivingBase) entityplayer.getCanaryEntity());
-                } else {
-                    hook = new VehicleExitHook((Vehicle) this.entity, (LivingBase) entityplayer.getCanaryEntity());
+                    hook = new VehicleEnterHook((Vehicle)this.entity, (LivingBase)entityplayer.getCanaryEntity());
+                }
+                else {
+                    hook = new VehicleExitHook((Vehicle)this.entity, (LivingBase)entityplayer.getCanaryEntity());
                 }
                 hook.call();
                 if (!hook.isCanceled()) {

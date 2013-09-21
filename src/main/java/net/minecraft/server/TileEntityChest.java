@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.api.world.blocks.CanaryChest;
+
 import java.util.Iterator;
 import java.util.List;
-import net.canarymod.api.world.blocks.CanaryChest;
 
 public class TileEntityChest extends TileEntity implements IInventory {
 
@@ -40,7 +41,8 @@ public class TileEntityChest extends TileEntity implements IInventory {
                 this.i[i0] = null;
                 this.e();
                 return itemstack;
-            } else {
+            }
+            else {
                 itemstack = this.i[i0].a(i1);
                 if (this.i[i0].b == 0) {
                     this.i[i0] = null;
@@ -49,7 +51,8 @@ public class TileEntityChest extends TileEntity implements IInventory {
                 this.e();
                 return itemstack;
             }
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -60,7 +63,8 @@ public class TileEntityChest extends TileEntity implements IInventory {
 
             this.i[i0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -96,7 +100,7 @@ public class TileEntityChest extends TileEntity implements IInventory {
         }
 
         for (int i0 = 0; i0 < nbttaglist.c(); ++i0) {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.b(i0);
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.b(i0);
             int i1 = nbttagcompound1.c("Slot") & 255;
 
             if (i1 >= 0 && i1 < this.i.length) {
@@ -113,13 +117,13 @@ public class TileEntityChest extends TileEntity implements IInventory {
             if (this.i[i0] != null) {
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 
-                nbttagcompound1.a("Slot", (byte) i0);
+                nbttagcompound1.a("Slot", (byte)i0);
                 this.i[i0].b(nbttagcompound1);
-                nbttaglist.a((NBTBase) nbttagcompound1);
+                nbttaglist.a((NBTBase)nbttagcompound1);
             }
         }
 
-        nbttagcompound.a("Items", (NBTBase) nbttaglist);
+        nbttagcompound.a("Items", (NBTBase)nbttaglist);
         if (this.c()) {
             nbttagcompound.a("CustomName", this.s);
         }
@@ -130,7 +134,7 @@ public class TileEntityChest extends TileEntity implements IInventory {
     }
 
     public boolean a(EntityPlayer entityplayer) {
-        return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double) this.l + 0.5D, (double) this.m + 0.5D, (double) this.n + 0.5D) <= 64.0D;
+        return this.k.r(this.l, this.m, this.n) != this ? false : entityplayer.e((double)this.l + 0.5D, (double)this.m + 0.5D, (double)this.n + 0.5D) <= 64.0D;
     }
 
     public void i() {
@@ -141,7 +145,8 @@ public class TileEntityChest extends TileEntity implements IInventory {
     private void a(TileEntityChest tileentitychest, int i0) {
         if (tileentitychest.r()) {
             this.a = false;
-        } else if (this.a) {
+        }
+        else if (this.a) {
             switch (i0) {
                 case 0:
                     if (this.e != tileentitychest) {
@@ -177,19 +182,19 @@ public class TileEntityChest extends TileEntity implements IInventory {
             this.d = null;
             this.e = null;
             if (this.a(this.l - 1, this.m, this.n)) {
-                this.d = (TileEntityChest) this.k.r(this.l - 1, this.m, this.n);
+                this.d = (TileEntityChest)this.k.r(this.l - 1, this.m, this.n);
             }
 
             if (this.a(this.l + 1, this.m, this.n)) {
-                this.c = (TileEntityChest) this.k.r(this.l + 1, this.m, this.n);
+                this.c = (TileEntityChest)this.k.r(this.l + 1, this.m, this.n);
             }
 
             if (this.a(this.l, this.m, this.n - 1)) {
-                this.b = (TileEntityChest) this.k.r(this.l, this.m, this.n - 1);
+                this.b = (TileEntityChest)this.k.r(this.l, this.m, this.n - 1);
             }
 
             if (this.a(this.l, this.m, this.n + 1)) {
-                this.e = (TileEntityChest) this.k.r(this.l, this.m, this.n + 1);
+                this.e = (TileEntityChest)this.k.r(this.l, this.m, this.n + 1);
             }
 
             if (this.b != null) {
@@ -213,7 +218,7 @@ public class TileEntityChest extends TileEntity implements IInventory {
     private boolean a(int i0, int i1, int i2) {
         Block block = Block.s[this.k.a(i0, i1, i2)];
 
-        return block != null && block instanceof BlockChest ? ((BlockChest) block).a == this.l() : false;
+        return block != null && block instanceof BlockChest ? ((BlockChest)block).a == this.l() : false;
     }
 
     public void h() {
@@ -225,16 +230,16 @@ public class TileEntityChest extends TileEntity implements IInventory {
         if (!this.k.I && this.h != 0 && (this.j + this.l + this.m + this.n) % 200 == 0) {
             this.h = 0;
             f0 = 5.0F;
-            List list = this.k.a(EntityPlayer.class, AxisAlignedBB.a().a((double) ((float) this.l - f0), (double) ((float) this.m - f0), (double) ((float) this.n - f0), (double) ((float) (this.l + 1) + f0), (double) ((float) (this.m + 1) + f0), (double) ((float) (this.n + 1) + f0)));
+            List list = this.k.a(EntityPlayer.class, AxisAlignedBB.a().a((double)((float)this.l - f0), (double)((float)this.m - f0), (double)((float)this.n - f0), (double)((float)(this.l + 1) + f0), (double)((float)(this.m + 1) + f0), (double)((float)(this.n + 1) + f0)));
             Iterator iterator = list.iterator();
 
             while (iterator.hasNext()) {
-                EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+                EntityPlayer entityplayer = (EntityPlayer)iterator.next();
 
                 if (entityplayer.bp instanceof ContainerChest) {
-                    IInventory iinventory = ((ContainerChest) entityplayer.bp).e();
+                    IInventory iinventory = ((ContainerChest)entityplayer.bp).e();
 
-                    if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest) iinventory).a((IInventory) this)) {
+                    if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest)iinventory).a((IInventory)this)) {
                         ++this.h;
                     }
                 }
@@ -246,9 +251,9 @@ public class TileEntityChest extends TileEntity implements IInventory {
         double d0;
 
         if (this.h > 0 && this.f == 0.0F && this.b == null && this.d == null) {
-            double d1 = (double) this.l + 0.5D;
+            double d1 = (double)this.l + 0.5D;
 
-            d0 = (double) this.n + 0.5D;
+            d0 = (double)this.n + 0.5D;
             if (this.e != null) {
                 d0 += 0.5D;
             }
@@ -257,7 +262,7 @@ public class TileEntityChest extends TileEntity implements IInventory {
                 d1 += 0.5D;
             }
 
-            this.k.a(d1, (double) this.m + 0.5D, d0, "random.chestopen", 0.5F, this.k.s.nextFloat() * 0.1F + 0.9F);
+            this.k.a(d1, (double)this.m + 0.5D, d0, "random.chestopen", 0.5F, this.k.s.nextFloat() * 0.1F + 0.9F);
         }
 
         if (this.h == 0 && this.f > 0.0F || this.h > 0 && this.f < 1.0F) {
@@ -265,7 +270,8 @@ public class TileEntityChest extends TileEntity implements IInventory {
 
             if (this.h > 0) {
                 this.f += f0;
-            } else {
+            }
+            else {
                 this.f -= f0;
             }
 
@@ -276,8 +282,8 @@ public class TileEntityChest extends TileEntity implements IInventory {
             float f2 = 0.5F;
 
             if (this.f < f2 && f1 >= f2 && this.b == null && this.d == null) {
-                d0 = (double) this.l + 0.5D;
-                double d2 = (double) this.n + 0.5D;
+                d0 = (double)this.l + 0.5D;
+                double d2 = (double)this.n + 0.5D;
 
                 if (this.e != null) {
                     d2 += 0.5D;
@@ -287,7 +293,7 @@ public class TileEntityChest extends TileEntity implements IInventory {
                     d0 += 0.5D;
                 }
 
-                this.k.a(d0, (double) this.m + 0.5D, d2, "random.chestclosed", 0.5F, this.k.s.nextFloat() * 0.1F + 0.9F);
+                this.k.a(d0, (double)this.m + 0.5D, d2, "random.chestclosed", 0.5F, this.k.s.nextFloat() * 0.1F + 0.9F);
             }
 
             if (this.f < 0.0F) {
@@ -300,7 +306,8 @@ public class TileEntityChest extends TileEntity implements IInventory {
         if (i0 == 1) {
             this.h = i1;
             return true;
-        } else {
+        }
+        else {
             return super.b(i0, i1);
         }
     }
@@ -341,7 +348,7 @@ public class TileEntityChest extends TileEntity implements IInventory {
                 return 0;
             }
 
-            this.r = ((BlockChest) this.q()).a;
+            this.r = ((BlockChest)this.q()).a;
         }
 
         return this.r;
@@ -349,6 +356,6 @@ public class TileEntityChest extends TileEntity implements IInventory {
 
     // CanaryMod
     public CanaryChest getCanaryChest() {
-        return (CanaryChest) complexBlock;
+        return (CanaryChest)complexBlock;
     }
 }

@@ -14,7 +14,8 @@ public class TileEntityRecordPlayer extends TileEntity {
         super.a(nbttagcompound);
         if (nbttagcompound.b("RecordItem")) {
             this.a(ItemStack.a(nbttagcompound.l("RecordItem")));
-        } else if (nbttagcompound.e("Record") > 0) {
+        }
+        else if (nbttagcompound.e("Record") > 0) {
             this.a(new ItemStack(nbttagcompound.e("Record"), 1, 0));
         }
     }
@@ -38,6 +39,6 @@ public class TileEntityRecordPlayer extends TileEntity {
 
     // CanaryMod
     public CanaryJukebox getCanaryJukebox() {
-        return (CanaryJukebox) complexBlock;
+        return (CanaryJukebox)complexBlock;
     }
 }

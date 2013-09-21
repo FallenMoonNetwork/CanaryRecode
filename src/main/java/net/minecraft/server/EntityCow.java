@@ -19,12 +19,12 @@ public class EntityCow extends EntityAnimal {
         this.entity = new CanaryCow(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean be() {
+    public boolean bf() {
         return true;
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(10.0D);
         this.a(SharedMonsterAttributes.d).a(0.20000000298023224D);
     }
@@ -33,11 +33,11 @@ public class EntityCow extends EntityAnimal {
         return "mob.cow.say";
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.cow.hurt";
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.cow.hurt";
     }
 
@@ -45,7 +45,7 @@ public class EntityCow extends EntityAnimal {
         this.a("mob.cow.step", 0.15F, 1.0F);
     }
 
-    protected float aZ() {
+    protected float ba() {
         return 0.4F;
     }
 
@@ -65,9 +65,10 @@ public class EntityCow extends EntityAnimal {
         i1 = this.ab.nextInt(3) + 1 + this.ab.nextInt(1 + i0);
 
         for (i2 = 0; i2 < i1; ++i2) {
-            if (this.ae()) {
+            if (this.af()) {
                 this.b(Item.bl.cv, 1);
-            } else {
+            }
+            else {
                 this.b(Item.bk.cv, 1);
             }
         }
@@ -79,12 +80,14 @@ public class EntityCow extends EntityAnimal {
         if (itemstack != null && itemstack.d == Item.ay.cv && !entityplayer.bG.d) {
             if (itemstack.b-- == 1) {
                 entityplayer.bn.a(entityplayer.bn.c, new ItemStack(Item.aI));
-            } else if (!entityplayer.bn.a(new ItemStack(Item.aI))) {
+            }
+            else if (!entityplayer.bn.a(new ItemStack(Item.aI))) {
                 entityplayer.b(new ItemStack(Item.aI.cv, 1, 0));
             }
 
             return true;
-        } else {
+        }
+        else {
             return super.a(entityplayer);
         }
     }

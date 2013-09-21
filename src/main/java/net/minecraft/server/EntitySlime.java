@@ -21,15 +21,15 @@ public class EntitySlime extends EntityLiving implements IMob {
 
     protected void a() {
         super.a();
-        this.ah.a(16, new Byte((byte) 1));
+        this.ah.a(16, new Byte((byte)1));
     }
 
     public void a(int i0) { // CanaryMod: protected => public
-        this.ah.b(16, new Byte((byte) i0));
-        this.a(0.6F * (float) i0, 0.6F * (float) i0);
+        this.ah.b(16, new Byte((byte)i0));
+        this.a(0.6F * (float)i0, 0.6F * (float)i0);
         this.b(this.u, this.v, this.w);
-        this.a(SharedMonsterAttributes.a).a((double) (i0 * i0));
-        this.g(this.aS());
+        this.a(SharedMonsterAttributes.a).a((double)(i0 * i0));
+        this.g(this.aT());
         this.b = i0;
     }
 
@@ -73,30 +73,31 @@ public class EntitySlime extends EntityLiving implements IMob {
             for (int i1 = 0; i1 < i0 * 8; ++i1) {
                 float f0 = this.ab.nextFloat() * 3.1415927F * 2.0F;
                 float f1 = this.ab.nextFloat() * 0.5F + 0.5F;
-                float f2 = MathHelper.a(f0) * (float) i0 * 0.5F * f1;
-                float f3 = MathHelper.b(f0) * (float) i0 * 0.5F * f1;
+                float f2 = MathHelper.a(f0) * (float)i0 * 0.5F * f1;
+                float f3 = MathHelper.b(f0) * (float)i0 * 0.5F * f1;
 
-                this.q.a(this.bJ(), this.u + (double) f2, this.E.b, this.w + (double) f3, 0.0D, 0.0D, 0.0D);
+                this.q.a(this.bJ(), this.u + (double)f2, this.E.b, this.w + (double)f3, 0.0D, 0.0D, 0.0D);
             }
 
             if (this.bQ()) {
-                this.a(this.bP(), this.aZ(), ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F) / 0.8F);
+                this.a(this.bP(), this.ba(), ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F) / 0.8F);
             }
 
             this.h = -0.5F;
-        } else if (!this.F && flag0) {
+        }
+        else if (!this.F && flag0) {
             this.h = 1.0F;
         }
 
         this.bM();
         if (this.q.I) {
             i0 = this.bR();
-            this.a(0.6F * (float) i0, 0.6F * (float) i0);
+            this.a(0.6F * (float)i0, 0.6F * (float)i0);
         }
     }
 
-    protected void bk() {
-        this.bo();
+    protected void bl() {
+        this.u();
         EntityPlayer entityplayer = this.q.b(this, 16.0D);
 
         if (entityplayer != null) {
@@ -111,12 +112,13 @@ public class EntitySlime extends EntityLiving implements IMob {
 
             this.bd = true;
             if (this.bS()) {
-                this.a(this.bP(), this.aZ(), ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F) * 0.8F);
+                this.a(this.bP(), this.ba(), ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F) * 0.8F);
             }
 
             this.be = 1.0F - this.ab.nextFloat() * 2.0F;
-            this.bf = (float) (1 * this.bR());
-        } else {
+            this.bf = (float)(1 * this.bR());
+        }
+        else {
             this.bd = false;
             if (this.F) {
                 this.be = this.bf = 0.0F;
@@ -136,31 +138,31 @@ public class EntitySlime extends EntityLiving implements IMob {
         return new EntitySlime(this.q);
     }
 
-    public void w() {
+    public void x() {
         int i0 = this.bR();
 
-        if (!this.q.I && i0 > 1 && this.aM() <= 0.0F) {
+        if (!this.q.I && i0 > 1 && this.aN() <= 0.0F) {
             int i1 = 2 + this.ab.nextInt(3);
 
             for (int i2 = 0; i2 < i1; ++i2) {
-                float f0 = ((float) (i2 % 2) - 0.5F) * (float) i0 / 4.0F;
-                float f1 = ((float) (i2 / 2) - 0.5F) * (float) i0 / 4.0F;
+                float f0 = ((float)(i2 % 2) - 0.5F) * (float)i0 / 4.0F;
+                float f1 = ((float)(i2 / 2) - 0.5F) * (float)i0 / 4.0F;
                 EntitySlime entityslime = this.bK();
 
                 entityslime.a(i0 / 2);
-                entityslime.b(this.u + (double) f0, this.v + 0.5D, this.w + (double) f1, this.ab.nextFloat() * 360.0F, 0.0F);
-                this.q.d((Entity) entityslime);
+                entityslime.b(this.u + (double)f0, this.v + 0.5D, this.w + (double)f1, this.ab.nextFloat() * 360.0F, 0.0F);
+                this.q.d((Entity)entityslime);
             }
         }
 
-        super.w();
+        super.x();
     }
 
     public void b_(EntityPlayer entityplayer) {
         if (this.bN()) {
             int i0 = this.bR();
 
-            if (this.o(entityplayer) && this.e(entityplayer) < 0.6D * (double) i0 * 0.6D * (double) i0 && entityplayer.a(DamageSource.a((EntityLivingBase) this), (float) this.bO())) {
+            if (this.o(entityplayer) && this.e(entityplayer) < 0.6D * (double)i0 * 0.6D * (double)i0 && entityplayer.a(DamageSource.a((EntityLivingBase)this), (float)this.bO())) {
                 this.a("mob.attack", 1.0F, (this.ab.nextFloat() - this.ab.nextFloat()) * 0.2F + 1.0F);
             }
         }
@@ -174,11 +176,11 @@ public class EntitySlime extends EntityLiving implements IMob {
         return this.bR();
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.slime." + (this.bR() > 1 ? "big" : "small");
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.slime." + (this.bR() > 1 ? "big" : "small");
     }
 
@@ -191,7 +193,8 @@ public class EntitySlime extends EntityLiving implements IMob {
 
         if (this.q.N().u() == WorldType.c && this.ab.nextInt(4) != 1) {
             return false;
-        } else {
+        }
+        else {
             if (this.bR() == 1 || this.q.r > 0) {
                 BiomeGenBase biomegenbase = this.q.a(MathHelper.c(this.u), MathHelper.c(this.w));
 
@@ -208,8 +211,8 @@ public class EntitySlime extends EntityLiving implements IMob {
         }
     }
 
-    protected float aZ() {
-        return 0.4F * (float) this.bR();
+    protected float ba() {
+        return 0.4F * (float)this.bR();
     }
 
     public int bp() {

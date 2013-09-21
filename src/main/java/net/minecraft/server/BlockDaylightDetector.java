@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.api.world.blocks.BlockType;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.RedstoneChangeHook;
+
+import java.util.Random;
 
 public class BlockDaylightDetector extends BlockContainer {
 
@@ -23,11 +24,14 @@ public class BlockDaylightDetector extends BlockContainer {
         return iblockaccess.h(i0, i1, i2);
     }
 
-    public void a(World world, int i0, int i1, int i2, Random random) {}
+    public void a(World world, int i0, int i1, int i2, Random random) {
+    }
 
-    public void a(World world, int i0, int i1, int i2, int i3) {}
+    public void a(World world, int i0, int i1, int i2, int i3) {
+    }
 
-    public void a(World world, int i0, int i1, int i2) {}
+    public void a(World world, int i0, int i1, int i2) {
+    }
 
     // CanaryMod: include break method so we can do a redstone change on destruction
     public void a(World world, int i0, int i1, int i2, int i3, int i4) {
@@ -36,10 +40,11 @@ public class BlockDaylightDetector extends BlockContainer {
         float f0 = world.d(1.0F);
         if (f0 < 3.1415927F) {
             f0 += (0.0F - f0) * 0.2F;
-        } else {
+        }
+        else {
             f0 += (6.2831855F - f0) * 0.2F;
         }
-        oldLvl = Math.round((float) i4 * MathHelper.b(f0));
+        oldLvl = Math.round((float)oldLvl * MathHelper.b(f0));
         if (oldLvl < 0) {
             oldLvl = 0;
         }
@@ -47,7 +52,7 @@ public class BlockDaylightDetector extends BlockContainer {
             oldLvl = 15;
         }
         if (oldLvl != 0) {
-            new RedstoneChangeHook(new CanaryBlock(BlockType.DaylightSensor.getId(), (short) 2, i0, i1, i2, world.getCanaryWorld()), oldLvl, 0).call();
+            new RedstoneChangeHook(new CanaryBlock(BlockType.DaylightSensor.getId(), (short)2, i0, i1, i2, world.getCanaryWorld()), oldLvl, 0).call();
         }
         //
         super.a(world, i0, i1, i2, i3, i4); // CanaryMod: call super
@@ -61,11 +66,12 @@ public class BlockDaylightDetector extends BlockContainer {
 
             if (f0 < 3.1415927F) {
                 f0 += (0.0F - f0) * 0.2F;
-            } else {
+            }
+            else {
                 f0 += (6.2831855F - f0) * 0.2F;
             }
 
-            i4 = Math.round((float) i4 * MathHelper.b(f0));
+            i4 = Math.round((float)i4 * MathHelper.b(f0));
             if (i4 < 0) {
                 i4 = 0;
             }
@@ -76,7 +82,7 @@ public class BlockDaylightDetector extends BlockContainer {
 
             if (i3 != i4) {
                 // CanaryMod: RedstoneChange; Comparator change
-                RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i3, i4).call();
+                RedstoneChangeHook hook = (RedstoneChangeHook)new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i3, i4).call();
                 if (hook.isCanceled()) {
                     return;
                 }

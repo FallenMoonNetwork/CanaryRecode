@@ -4,18 +4,19 @@ import net.canarymod.hook.world.DispenseHook;
 
 final class DispenserBehaviorFireworks extends BehaviorDefaultDispenseItem {
 
-    DispenserBehaviorFireworks() {}
+    DispenserBehaviorFireworks() {
+    }
 
     public ItemStack b(IBlockSource iblocksource, ItemStack itemstack) {
         EnumFacing enumfacing = BlockDispenser.l_(iblocksource.h());
-        double d0 = iblocksource.a() + (double) enumfacing.c();
-        double d1 = (double) ((float) iblocksource.e() + 0.2F);
-        double d2 = iblocksource.c() + (double) enumfacing.e();
+        double d0 = iblocksource.a() + (double)enumfacing.c();
+        double d1 = (double)((float)iblocksource.e() + 0.2F);
+        double d2 = iblocksource.c() + (double)enumfacing.e();
         EntityFireworkRocket entityfireworkrocket = new EntityFireworkRocket(iblocksource.k(), d0, d1, d2, itemstack);
         // CanaryMod: Dispense
-        DispenseHook hook = (DispenseHook) new DispenseHook(((TileEntityDispenser) iblocksource.j()).getCanaryDispenser(), entityfireworkrocket.getCanaryEntity()).call();
+        DispenseHook hook = (DispenseHook)new DispenseHook(((TileEntityDispenser)iblocksource.j()).getCanaryDispenser(), entityfireworkrocket.getCanaryEntity()).call();
         if (!hook.isCanceled()) {
-            iblocksource.k().d((Entity) entityfireworkrocket);
+            iblocksource.k().d((Entity)entityfireworkrocket);
             itemstack.a(1);
         }
         //

@@ -252,11 +252,6 @@ public class CanaryNonPlayableCharacter extends CanaryHuman implements NonPlayab
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return obj == this;
-    }
-
-    @Override
     public int hashCode() {
         int hash = 7;
         hash = 89 * hash + this.getID();

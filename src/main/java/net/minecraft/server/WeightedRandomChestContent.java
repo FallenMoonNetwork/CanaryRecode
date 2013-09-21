@@ -24,7 +24,7 @@ public class WeightedRandomChestContent extends WeightedRandomItem {
 
     public static void a(Random random, WeightedRandomChestContent[] aweightedrandomchestcontent, IInventory iinventory, int i0) {
         for (int i1 = 0; i1 < i0; ++i1) {
-            WeightedRandomChestContent weightedrandomchestcontent = (WeightedRandomChestContent) WeightedRandom.a(random, (WeightedRandomItem[]) aweightedrandomchestcontent);
+            WeightedRandomChestContent weightedrandomchestcontent = (WeightedRandomChestContent)WeightedRandom.a(random, (WeightedRandomItem[])aweightedrandomchestcontent);
             int i2 = weightedrandomchestcontent.c + random.nextInt(weightedrandomchestcontent.d - weightedrandomchestcontent.c + 1);
 
             if (weightedrandomchestcontent.b.e() >= i2) {
@@ -32,7 +32,8 @@ public class WeightedRandomChestContent extends WeightedRandomItem {
 
                 itemstack.b = i2;
                 iinventory.a(random.nextInt(iinventory.j_()), itemstack);
-            } else {
+            }
+            else {
                 for (int i3 = 0; i3 < i2; ++i3) {
                     ItemStack itemstack1 = weightedrandomchestcontent.b.m();
 
@@ -45,7 +46,7 @@ public class WeightedRandomChestContent extends WeightedRandomItem {
 
     public static void a(Random random, WeightedRandomChestContent[] aweightedrandomchestcontent, TileEntityDispenser tileentitydispenser, int i0) {
         for (int i1 = 0; i1 < i0; ++i1) {
-            WeightedRandomChestContent weightedrandomchestcontent = (WeightedRandomChestContent) WeightedRandom.a(random, (WeightedRandomItem[]) aweightedrandomchestcontent);
+            WeightedRandomChestContent weightedrandomchestcontent = (WeightedRandomChestContent)WeightedRandom.a(random, (WeightedRandomItem[])aweightedrandomchestcontent);
             int i2 = weightedrandomchestcontent.c + random.nextInt(weightedrandomchestcontent.d - weightedrandomchestcontent.c + 1);
 
             if (weightedrandomchestcontent.b.e() >= i2) {
@@ -53,7 +54,8 @@ public class WeightedRandomChestContent extends WeightedRandomItem {
 
                 itemstack.b = i2;
                 tileentitydispenser.a(random.nextInt(tileentitydispenser.j_()), itemstack);
-            } else {
+            }
+            else {
                 for (int i3 = 0; i3 < i2; ++i3) {
                     ItemStack itemstack1 = weightedrandomchestcontent.b.m();
 

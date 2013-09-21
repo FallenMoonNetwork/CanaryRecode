@@ -20,7 +20,7 @@ public class EntityWitherSkull extends EntityFireball {
         return /* this.d() ? 0.73F  : */super.c(); // CanaryMod: Motion Factor was made configurable
     }
 
-    public boolean ae() {
+    public boolean af() {
         return false;
     }
 
@@ -38,10 +38,11 @@ public class EntityWitherSkull extends EntityFireball {
         if (!this.q.I) {
             if (movingobjectposition.g != null) {
                 if (this.a != null) {
-                    if (movingobjectposition.g.a(DamageSource.a(this.a), 8.0F) && !movingobjectposition.g.S()) {
+                    if (movingobjectposition.g.a(DamageSource.a(this.a), 8.0F) && !movingobjectposition.g.T()) {
                         this.a.f(5.0F);
                     }
-                } else {
+                }
+                else {
                     movingobjectposition.g.a(DamageSource.k, 5.0F);
                 }
 
@@ -51,23 +52,24 @@ public class EntityWitherSkull extends EntityFireball {
                     if (this.q.r > 1) {
                         if (this.q.r == 2) {
                             b0 = 10;
-                        } else if (this.q.r == 3) {
+                        }
+                        else if (this.q.r == 3) {
                             b0 = 40;
                         }
                     }
 
                     if (b0 > 0) {
-                        ((EntityLivingBase) movingobjectposition.g).c(new PotionEffect(Potion.v.H, 20 * b0, 1));
+                        ((EntityLivingBase)movingobjectposition.g).c(new PotionEffect(Potion.v.H, 20 * b0, 1));
                     }
                 }
             }
 
             this.q.a(this, this.u, this.v, this.w, 1.0F, false, this.q.O().b("mobGriefing"));
-            this.w();
+            this.x();
         }
     }
 
-    public boolean K() {
+    public boolean L() {
         return false;
     }
 
@@ -76,7 +78,7 @@ public class EntityWitherSkull extends EntityFireball {
     }
 
     protected void a() {
-        this.ah.a(10, Byte.valueOf((byte) 0));
+        this.ah.a(10, Byte.valueOf((byte)0));
     }
 
     public boolean d() {
@@ -84,6 +86,6 @@ public class EntityWitherSkull extends EntityFireball {
     }
 
     public void a(boolean flag0) {
-        this.ah.b(10, Byte.valueOf((byte) (flag0 ? 1 : 0)));
+        this.ah.b(10, Byte.valueOf((byte)(flag0 ? 1 : 0)));
     }
 }

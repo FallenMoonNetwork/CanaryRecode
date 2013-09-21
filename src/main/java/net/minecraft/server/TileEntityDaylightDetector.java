@@ -12,13 +12,13 @@ public class TileEntityDaylightDetector extends TileEntity {
         if (this.k != null && !this.k.I && this.k.I() % 20L == 0L) {
             this.q = this.q();
             if (this.q != null && this.q instanceof BlockDaylightDetector) {
-                ((BlockDaylightDetector) this.q).i_(this.k, this.l, this.m, this.n);
+                ((BlockDaylightDetector)this.q).i_(this.k, this.l, this.m, this.n);
             }
         }
     }
 
     // CanaryMod
     public CanaryDaylightDetector getCanaryDaylightDetector() {
-        return (CanaryDaylightDetector) complexBlock;
+        return (CanaryDaylightDetector)complexBlock;
     }
 }

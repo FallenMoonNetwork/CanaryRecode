@@ -24,7 +24,7 @@ public class EntityMinecartFurnace extends EntityMinecart {
 
     protected void a() {
         super.a();
-        this.ah.a(16, new Byte((byte) 0));
+        this.ah.a(16, new Byte((byte)0));
     }
 
     public void l_() {
@@ -55,13 +55,14 @@ public class EntityMinecartFurnace extends EntityMinecart {
         double d2 = this.a * this.a + this.b * this.b;
 
         if (d2 > 1.0E-4D && this.x * this.x + this.z * this.z > 0.001D) {
-            d2 = (double) MathHelper.a(d2);
+            d2 = (double)MathHelper.a(d2);
             this.a /= d2;
             this.b /= d2;
             if (this.a * this.x + this.b * this.z < 0.0D) {
                 this.a = 0.0D;
                 this.b = 0.0D;
-            } else {
+            }
+            else {
                 this.a = this.x;
                 this.b = this.z;
             }
@@ -72,7 +73,7 @@ public class EntityMinecartFurnace extends EntityMinecart {
         double d0 = this.a * this.a + this.b * this.b;
 
         if (d0 > 1.0E-4D) {
-            d0 = (double) MathHelper.a(d0);
+            d0 = (double)MathHelper.a(d0);
             this.a /= d0;
             this.b /= d0;
             double d1 = 0.05D;
@@ -82,7 +83,8 @@ public class EntityMinecartFurnace extends EntityMinecart {
             this.z *= 0.800000011920929D;
             this.x += this.a * d1;
             this.z += this.b * d1;
-        } else {
+        }
+        else {
             this.x *= 0.9800000190734863D;
             this.y *= 0.0D;
             this.z *= 0.9800000190734863D;
@@ -96,7 +98,7 @@ public class EntityMinecartFurnace extends EntityMinecart {
 
         if (itemstack != null && itemstack.d == Item.o.cv) {
             if (!entityplayer.bG.d && --itemstack.b == 0) {
-                entityplayer.bn.a(entityplayer.bn.c, (ItemStack) null);
+                entityplayer.bn.a(entityplayer.bn.c, (ItemStack)null);
             }
 
             this.c += 3600;
@@ -111,7 +113,7 @@ public class EntityMinecartFurnace extends EntityMinecart {
         super.b(nbttagcompound);
         nbttagcompound.a("PushX", this.a);
         nbttagcompound.a("PushZ", this.b);
-        nbttagcompound.a("Fuel", (short) this.c);
+        nbttagcompound.a("Fuel", (short)this.c);
     }
 
     protected void a(NBTTagCompound nbttagcompound) {
@@ -127,9 +129,10 @@ public class EntityMinecartFurnace extends EntityMinecart {
 
     protected void f(boolean flag0) {
         if (flag0) {
-            this.ah.b(16, Byte.valueOf((byte) (this.ah.a(16) | 1)));
-        } else {
-            this.ah.b(16, Byte.valueOf((byte) (this.ah.a(16) & -2)));
+            this.ah.b(16, Byte.valueOf((byte)(this.ah.a(16) | 1)));
+        }
+        else {
+            this.ah.b(16, Byte.valueOf((byte)(this.ah.a(16) & -2)));
         }
     }
 

@@ -39,21 +39,22 @@ public class ItemFood extends Item {
                 };
             }
             else {
-                effects = new net.canarymod.api.potion.PotionEffect[]{ new CanaryPotionEffect(new PotionEffect(Potion.x.H, 2400, 0)) };
+                effects = new net.canarymod.api.potion.PotionEffect[]{new CanaryPotionEffect(new PotionEffect(Potion.x.H, 2400, 0))};
             }
-        } else if (!world.I && this.cv > 0 && world.s.nextFloat() < this.cF) {
-            effects = new net.canarymod.api.potion.PotionEffect[]{ new CanaryPotionEffect(new PotionEffect(this.cC, this.cD * 20, this.cE)) };
         }
-        EatHook hook = (EatHook) new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), this.g(), this.i(), effects).call();
+        else if (!world.I && this.cv > 0 && world.s.nextFloat() < this.cF) {
+            effects = new net.canarymod.api.potion.PotionEffect[]{new CanaryPotionEffect(new PotionEffect(this.cC, this.cD * 20, this.cE))};
+        }
+        EatHook hook = (EatHook)new EatHook(((EntityPlayerMP)entityplayer).getPlayer(), itemstack.getCanaryItem(), this.g(), this.i(), effects).call();
         if (!hook.isCanceled()) {
             --itemstack.b;
-            entityplayer.bH().a(hook.getLevelGain(), hook.getSaturationGain());
-            world.a((Entity) entityplayer, "random.burp", 0.5F, world.s.nextFloat() * 0.1F + 0.9F);
+            entityplayer.bI().a(hook.getLevelGain(), hook.getSaturationGain());
+            world.a((Entity)entityplayer, "random.burp", 0.5F, world.s.nextFloat() * 0.1F + 0.9F);
             // this.c(itemstack, world, entityplayer); moved above and below
             if (hook.getPotionEffects() != null) {
                 for (net.canarymod.api.potion.PotionEffect effect : hook.getPotionEffects()) {
                     if (effect != null) {
-                        entityplayer.c(((CanaryPotionEffect) effect).getHandle());
+                        entityplayer.c(((CanaryPotionEffect)effect).getHandle());
                     }
                 }
             }

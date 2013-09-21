@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import net.canarymod.api.nbt.CanaryCompoundTag;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -8,7 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import net.canarymod.api.nbt.CanaryCompoundTag;
 
 public class SaveHandler implements ISaveHandler, IPlayerFileData {
 
@@ -39,9 +40,10 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
     }
 
     // CanaryMod added getname
+
     /**
      * get the base name of this world saver (only world name, without dimension appendix)
-     * 
+     *
      * @return
      */
     public String getBaseName() {
@@ -49,9 +51,10 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
     }
 
     // CanaryMod
+
     /**
      * get the dir folder (worlds/)
-     * 
+     *
      * @return
      */
     public File getWorldBaseDir() {
@@ -69,7 +72,8 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
             finally {
                 dataoutputstream.close();
             }
-        } catch (IOException ioexception) {
+        }
+        catch (IOException ioexception) {
             ioexception.printStackTrace();
             throw new RuntimeException("Failed to check session lock, aborting");
         }
@@ -93,7 +97,8 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
             finally {
                 datainputstream.close();
             }
-        } catch (IOException ioexception) {
+        }
+        catch (IOException ioexception) {
             throw new MinecraftException("Failed to check session lock, aborting");
         }
     }
@@ -111,10 +116,11 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
 
         if (file1.exists()) {
             try {
-                nbttagcompound = CompressedStreamTools.a((InputStream) (new FileInputStream(file1)));
+                nbttagcompound = CompressedStreamTools.a((InputStream)(new FileInputStream(file1)));
                 nbttagcompound1 = nbttagcompound.l("Data");
                 return new WorldInfo(nbttagcompound1);
-            } catch (Exception exception) {
+            }
+            catch (Exception exception) {
                 exception.printStackTrace();
             }
         }
@@ -122,10 +128,11 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
         file1 = new File(this.a, "level.dat_old");
         if (file1.exists()) {
             try {
-                nbttagcompound = CompressedStreamTools.a((InputStream) (new FileInputStream(file1)));
+                nbttagcompound = CompressedStreamTools.a((InputStream)(new FileInputStream(file1)));
                 nbttagcompound1 = nbttagcompound.l("Data");
                 return new WorldInfo(nbttagcompound1);
-            } catch (Exception exception1) {
+            }
+            catch (Exception exception1) {
                 exception1.printStackTrace();
             }
         }
@@ -138,14 +145,14 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
         NBTTagCompound nbttagcompound1 = worldinfo.a(nbttagcompound);
         NBTTagCompound nbttagcompound2 = new NBTTagCompound();
 
-        nbttagcompound2.a("Data", (NBTBase) nbttagcompound1);
+        nbttagcompound2.a("Data", (NBTBase)nbttagcompound1);
 
         try {
             File file1 = new File(this.a, "level.dat_new");
             File file2 = new File(this.a, "level.dat_old");
             File file3 = new File(this.a, "level.dat");
 
-            CompressedStreamTools.a(nbttagcompound2, (OutputStream) (new FileOutputStream(file1)));
+            CompressedStreamTools.a(nbttagcompound2, (OutputStream)(new FileOutputStream(file1)));
             if (file2.exists()) {
                 file2.delete();
             }
@@ -159,7 +166,8 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
             if (file1.exists()) {
                 file1.delete();
             }
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
         }
 
@@ -170,14 +178,14 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
         NBTTagCompound nbttagcompound = worldinfo.a();
         NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 
-        nbttagcompound1.a("Data", (NBTBase) nbttagcompound);
+        nbttagcompound1.a("Data", (NBTBase)nbttagcompound);
 
         try {
             File file1 = new File(this.a, "level.dat_new");
             File file2 = new File(this.a, "level.dat_old");
             File file3 = new File(this.a, "level.dat");
 
-            CompressedStreamTools.a(nbttagcompound1, (OutputStream) (new FileOutputStream(file1)));
+            CompressedStreamTools.a(nbttagcompound1, (OutputStream)(new FileOutputStream(file1)));
             if (file2.exists()) {
                 file2.delete();
             }
@@ -191,7 +199,8 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
             if (file1.exists()) {
                 file1.delete();
             }
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
         }
 
@@ -206,13 +215,14 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
             File file1 = new File(this.b, entityplayer.c_() + ".dat.tmp");
             File file2 = new File(this.b, entityplayer.c_() + ".dat");
 
-            CompressedStreamTools.a(nbttagcompound, (OutputStream) (new FileOutputStream(file1)));
+            CompressedStreamTools.a(nbttagcompound, (OutputStream)(new FileOutputStream(file1)));
             if (file2.exists()) {
                 file2.delete();
             }
 
             file1.renameTo(file2);
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             MinecraftServer.F().an().b("Failed to save player data for " + entityplayer.c_());
         }
     }
@@ -233,9 +243,10 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
             File file1 = new File(this.b, s0 + ".dat");
 
             if (file1.exists()) {
-                return CompressedStreamTools.a((InputStream) (new FileInputStream(file1)));
+                return CompressedStreamTools.a((InputStream)(new FileInputStream(file1)));
             }
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             MinecraftServer.F().an().b("Failed to load player data for " + s0);
         }
 
@@ -261,7 +272,8 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
     }
 
     @Override
-    public void a() {}
+    public void a() {
+    }
 
     @Override
     public File b(String s0) {
@@ -282,12 +294,13 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
             File file1 = new File(this.b, player + ".dat.tmp");
             File file2 = new File(this.b, player + ".dat");
 
-            CompressedStreamTools.a(nbttagcompound, (OutputStream) (new FileOutputStream(file1)));
+            CompressedStreamTools.a(nbttagcompound, (OutputStream)(new FileOutputStream(file1)));
             if (file2.exists()) {
                 file2.delete();
             }
             file1.renameTo(file2);
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             MinecraftServer.F().an().b("Failed to save player data for " + player);
         }
     }

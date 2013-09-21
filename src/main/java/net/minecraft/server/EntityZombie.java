@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.api.entity.living.monster.CanaryZombie;
+
 import java.util.Calendar;
 import java.util.UUID;
-import net.canarymod.api.entity.living.monster.CanaryZombie;
 
 public class EntityZombie extends EntityMob {
 
@@ -29,23 +30,23 @@ public class EntityZombie extends EntityMob {
         this.entity = new CanaryZombie(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.b).a(40.0D);
         this.a(SharedMonsterAttributes.d).a(0.23000000417232513D);
         this.a(SharedMonsterAttributes.e).a(3.0D);
-        this.aW().b(bp).a(this.ab.nextDouble() * 0.10000000149011612D);
+        this.aX().b(bp).a(this.ab.nextDouble() * 0.10000000149011612D);
     }
 
     protected void a() {
         super.a();
-        this.u().a(12, Byte.valueOf((byte) 0));
-        this.u().a(13, Byte.valueOf((byte) 0));
-        this.u().a(14, Byte.valueOf((byte) 0));
+        this.v().a(12, Byte.valueOf((byte)0));
+        this.v().a(13, Byte.valueOf((byte)0));
+        this.v().a(14, Byte.valueOf((byte)0));
     }
 
-    public int aP() {
-        int i0 = super.aP() + 2;
+    public int aQ() {
+        int i0 = super.aQ() + 2;
 
         if (i0 > 20) {
             i0 = 20;
@@ -54,16 +55,16 @@ public class EntityZombie extends EntityMob {
         return i0;
     }
 
-    protected boolean be() {
+    protected boolean bf() {
         return true;
     }
 
     public boolean g_() {
-        return this.u().a(12) == 1;
+        return this.v().a(12) == 1;
     }
 
     public void a(boolean flag0) {
-        this.u().b(12, Byte.valueOf((byte) (flag0 ? 1 : 0)));
+        this.v().b(12, Byte.valueOf((byte)(flag0 ? 1 : 0)));
         if (this.q != null && !this.q.I) {
             AttributeInstance attributeinstance = this.a(SharedMonsterAttributes.d);
 
@@ -75,11 +76,11 @@ public class EntityZombie extends EntityMob {
     }
 
     public boolean bT() {
-        return this.u().a(13) == 1;
+        return this.v().a(13) == 1;
     }
 
     public void i(boolean flag0) {
-        this.u().b(13, Byte.valueOf((byte) (flag0 ? 1 : 0)));
+        this.v().b(13, Byte.valueOf((byte)(flag0 ? 1 : 0)));
     }
 
     public void c() {
@@ -95,7 +96,7 @@ public class EntityZombie extends EntityMob {
                         itemstack.b(itemstack.j() + this.ab.nextInt(2));
                         if (itemstack.j() >= itemstack.l()) {
                             this.a(itemstack);
-                            this.c(4, (ItemStack) null);
+                            this.c(4, (ItemStack)null);
                         }
                     }
 
@@ -114,18 +115,19 @@ public class EntityZombie extends EntityMob {
     public boolean a(DamageSource damagesource, float f0) {
         if (!super.a(damagesource, f0)) {
             return false;
-        } else {
+        }
+        else {
             EntityLivingBase entitylivingbase = this.m();
 
             if (entitylivingbase == null && this.bN() instanceof EntityLivingBase) {
-                entitylivingbase = (EntityLivingBase) this.bN();
+                entitylivingbase = (EntityLivingBase)this.bN();
             }
 
             if (entitylivingbase == null && damagesource.i() instanceof EntityLivingBase) {
-                entitylivingbase = (EntityLivingBase) damagesource.i();
+                entitylivingbase = (EntityLivingBase)damagesource.i();
             }
 
-            if (entitylivingbase != null && this.q.r >= 3 && (double) this.ab.nextFloat() < this.a(bp).e()) {
+            if (entitylivingbase != null && this.q.r >= 3 && (double)this.ab.nextFloat() < this.a(bp).e()) {
                 int i0 = MathHelper.c(this.u);
                 int i1 = MathHelper.c(this.v);
                 int i2 = MathHelper.c(this.w);
@@ -137,11 +139,11 @@ public class EntityZombie extends EntityMob {
                     int i6 = i2 + MathHelper.a(this.ab, 7, 40) * MathHelper.a(this.ab, -1, 1);
 
                     if (this.q.w(i4, i5 - 1, i6) && this.q.n(i4, i5, i6) < 10) {
-                        entityzombie.b((double) i4, (double) i5, (double) i6);
-                        if (this.q.b(entityzombie.E) && this.q.a((Entity) entityzombie, entityzombie.E).isEmpty() && !this.q.d(entityzombie.E)) {
-                            this.q.d((Entity) entityzombie);
+                        entityzombie.b((double)i4, (double)i5, (double)i6);
+                        if (this.q.b(entityzombie.E) && this.q.a((Entity)entityzombie, entityzombie.E).isEmpty() && !this.q.d(entityzombie.E)) {
+                            this.q.d((Entity)entityzombie);
                             entityzombie.d(entitylivingbase);
-                            entityzombie.a((EntityLivingData) null);
+                            entityzombie.a((EntityLivingData)null);
                             this.a(bp).a(new AttributeModifier("Zombie reinforcement caller charge", -0.05000000074505806D, 0));
                             entityzombie.a(bp).a(new AttributeModifier("Zombie reinforcement callee charge", -0.05000000074505806D, 0));
                             break;
@@ -170,7 +172,7 @@ public class EntityZombie extends EntityMob {
     public boolean m(Entity entity) {
         boolean flag0 = super.m(entity);
 
-        if (flag0 && this.aY() == null && this.ae() && this.ab.nextFloat() < (float) this.q.r * 0.3F) {
+        if (flag0 && this.aZ() == null && this.af() && this.ab.nextFloat() < (float)this.q.r * 0.3F) {
             entity.d(2 * this.q.r);
         }
 
@@ -181,11 +183,11 @@ public class EntityZombie extends EntityMob {
         return "mob.zombie.say";
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.zombie.hurt";
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.zombie.death";
     }
 
@@ -197,7 +199,7 @@ public class EntityZombie extends EntityMob {
         return Item.bo.cv;
     }
 
-    public EnumCreatureAttribute aX() {
+    public EnumCreatureAttribute aY() {
         return EnumCreatureAttribute.b;
     }
 
@@ -223,7 +225,8 @@ public class EntityZombie extends EntityMob {
 
             if (i0 == 0) {
                 this.c(0, new ItemStack(Item.s));
-            } else {
+            }
+            else {
                 this.c(0, new ItemStack(Item.h));
             }
         }
@@ -267,15 +270,15 @@ public class EntityZombie extends EntityMob {
             EntityZombie entityzombie = new EntityZombie(this.q);
 
             entityzombie.j(entitylivingbase);
-            this.q.e((Entity) entitylivingbase);
-            entityzombie.a((EntityLivingData) null);
+            this.q.e((Entity)entitylivingbase);
+            entityzombie.a((EntityLivingData)null);
             entityzombie.i(true);
             if (entitylivingbase.g_()) {
                 entityzombie.a(true);
             }
 
-            this.q.d((Entity) entityzombie);
-            this.q.a((EntityPlayer) null, 1016, (int) this.u, (int) this.v, (int) this.w, 0);
+            this.q.d((Entity)entityzombie);
+            this.q.a((EntityPlayer)null, 1016, (int)this.u, (int)this.v, (int)this.w, 0);
         }
     }
 
@@ -285,11 +288,11 @@ public class EntityZombie extends EntityMob {
 
         this.h(this.ab.nextFloat() < 0.55F * f0);
         if (object == null) {
-            object = new EntityZombieGroupData(this, this.q.s.nextFloat() < 0.05F, this.q.s.nextFloat() < 0.05F, (EntityZombieINNER1) null);
+            object = new EntityZombieGroupData(this, this.q.s.nextFloat() < 0.05F, this.q.s.nextFloat() < 0.05F, (EntityZombieINNER1)null);
         }
 
         if (object instanceof EntityZombieGroupData) {
-            EntityZombieGroupData entityzombiegroupdata = (EntityZombieGroupData) object;
+            EntityZombieGroupData entityzombiegroupdata = (EntityZombieGroupData)object;
 
             if (entityzombiegroupdata.b) {
                 this.i(true);
@@ -318,11 +321,11 @@ public class EntityZombie extends EntityMob {
             this.a(SharedMonsterAttributes.a).a(new AttributeModifier("Leader zombie bonus", this.ab.nextDouble() * 3.0D + 1.0D, 2));
         }
 
-        return (EntityLivingData) object;
+        return (EntityLivingData)object;
     }
 
     public boolean a(EntityPlayer entityplayer) {
-        ItemStack itemstack = entityplayer.bx();
+        ItemStack itemstack = entityplayer.by();
 
         if (itemstack != null && itemstack.b() == Item.av && itemstack.k() == 0 && this.bT() && this.a(Potion.t)) {
             if (!entityplayer.bG.d) {
@@ -330,7 +333,7 @@ public class EntityZombie extends EntityMob {
             }
 
             if (itemstack.b <= 0) {
-                entityplayer.bn.a(entityplayer.bn.c, (ItemStack) null);
+                entityplayer.bn.a(entityplayer.bn.c, (ItemStack)null);
             }
 
             if (!this.q.I) {
@@ -338,17 +341,18 @@ public class EntityZombie extends EntityMob {
             }
 
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
 
     protected void a(int i0) {
         this.bs = i0;
-        this.u().b(14, Byte.valueOf((byte) 1));
+        this.v().b(14, Byte.valueOf((byte)1));
         this.k(Potion.t.H);
         this.c(new PotionEffect(Potion.g.H, i0, Math.min(this.q.r - 1, 0)));
-        this.q.a((Entity) this, (byte) 16);
+        this.q.a((Entity)this, (byte)16);
     }
 
     protected boolean t() {
@@ -356,23 +360,23 @@ public class EntityZombie extends EntityMob {
     }
 
     public boolean bV() {
-        return this.u().a(14) == 1;
+        return this.v().a(14) == 1;
     }
 
     public void bW() { // CanaryMod: protected => public
         EntityVillager entityvillager = new EntityVillager(this.q);
 
         entityvillager.j(this);
-        entityvillager.a((EntityLivingData) null);
+        entityvillager.a((EntityLivingData)null);
         entityvillager.bX();
         if (this.g_()) {
             entityvillager.c(-24000);
         }
 
-        this.q.e((Entity) this);
-        this.q.d((Entity) entityvillager);
+        this.q.e((Entity)this);
+        this.q.d((Entity)entityvillager);
         entityvillager.c(new PotionEffect(Potion.k.H, 200, 0));
-        this.q.a((EntityPlayer) null, 1017, (int) this.u, (int) this.v, (int) this.w, 0);
+        this.q.a((EntityPlayer)null, 1017, (int)this.u, (int)this.v, (int)this.w, 0);
     }
 
     protected int bX() {
@@ -381,9 +385,9 @@ public class EntityZombie extends EntityMob {
         if (this.ab.nextFloat() < 0.01F) {
             int i1 = 0;
 
-            for (int i2 = (int) this.u - 4; i2 < (int) this.u + 4 && i1 < 14; ++i2) {
-                for (int i3 = (int) this.v - 4; i3 < (int) this.v + 4 && i1 < 14; ++i3) {
-                    for (int i4 = (int) this.w - 4; i4 < (int) this.w + 4 && i1 < 14; ++i4) {
+            for (int i2 = (int)this.u - 4; i2 < (int)this.u + 4 && i1 < 14; ++i2) {
+                for (int i3 = (int)this.v - 4; i3 < (int)this.v + 4 && i1 < 14; ++i3) {
+                    for (int i4 = (int)this.w - 4; i4 < (int)this.w + 4 && i1 < 14; ++i4) {
                         int i5 = this.q.a(i2, i3, i4);
 
                         if (i5 == Block.bu.cF || i5 == Block.X.cF) {
@@ -407,7 +411,7 @@ public class EntityZombie extends EntityMob {
     }
 
     public void stopConversion() {
-        this.u().b(12, Byte.valueOf((byte) 0));
+        this.v().b(12, Byte.valueOf((byte)0));
         this.bs = -1;
     }
     //

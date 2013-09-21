@@ -5,9 +5,7 @@ import net.canarymod.api.DamageType;
 import net.canarymod.api.entity.hanging.CanaryItemFrame;
 import net.canarymod.api.entity.hanging.HangingEntity;
 import net.canarymod.api.entity.living.humanoid.Player;
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.entity.HangingEntityDestroyHook;
-import net.canarymod.logger.Logman;
 
 public class EntityItemFrame extends EntityHanging {
 
@@ -25,8 +23,8 @@ public class EntityItemFrame extends EntityHanging {
     }
 
     protected void a() {
-        this.u().a(2, 5);
-        this.u().a(3, Byte.valueOf((byte) 0));
+        this.v().a(2, 5);
+        this.v().a(3, Byte.valueOf((byte)0));
     }
 
     public int d() {
@@ -41,22 +39,22 @@ public class EntityItemFrame extends EntityHanging {
         //CanaryMod start
         HangingEntityDestroyHook hook = null;
         boolean isPlayer = false;
-        if(entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayer) {
             isPlayer = true;
-            hook = (HangingEntityDestroyHook) new HangingEntityDestroyHook((HangingEntity) this.getCanaryEntity(), (Player)entity.getCanaryEntity(), CanaryDamageSource.getDamageSourceFromType(DamageType.GENERIC)).call();
+            hook = (HangingEntityDestroyHook)new HangingEntityDestroyHook((HangingEntity)this.getCanaryEntity(), (Player)entity.getCanaryEntity(), CanaryDamageSource.getDamageSourceFromType(DamageType.GENERIC)).call();
         }
         else {
-            hook = (HangingEntityDestroyHook) new HangingEntityDestroyHook((HangingEntity) this.getCanaryEntity(), null, CanaryDamageSource.getDamageSourceFromType(DamageType.GENERIC)).call();
+            hook = (HangingEntityDestroyHook)new HangingEntityDestroyHook((HangingEntity)this.getCanaryEntity(), null, CanaryDamageSource.getDamageSourceFromType(DamageType.GENERIC)).call();
         }
-        if(hook.isCanceled()) {
+        if (hook.isCanceled()) {
             return;
         }
         //CanaryMod end
-        
+
         ItemStack itemstack = this.h();
         //CanaryMod: Changed to spare an instanceof
         if (isPlayer) {
-            EntityPlayer entityplayer = (EntityPlayer) entity;
+            EntityPlayer entityplayer = (EntityPlayer)entity;
 
             if (entityplayer.bG.d) {
                 this.b(itemstack);
@@ -75,39 +73,39 @@ public class EntityItemFrame extends EntityHanging {
     private void b(ItemStack itemstack) {
         if (itemstack != null) {
             if (itemstack.d == Item.bf.cv) {
-                MapData mapdata = ((ItemMap) itemstack.b()).a(itemstack, this.q);
+                MapData mapdata = ((ItemMap)itemstack.b()).a(itemstack, this.q);
 
                 mapdata.g.remove("frame-" + this.k);
             }
 
-            itemstack.a((EntityItemFrame) null);
+            itemstack.a((EntityItemFrame)null);
         }
     }
 
     public ItemStack h() {
-        return this.u().f(2);
+        return this.v().f(2);
     }
 
     public void a(ItemStack itemstack) {
         itemstack = itemstack.m();
         itemstack.b = 1;
         itemstack.a(this);
-        this.u().b(2, itemstack);
-        this.u().h(2);
+        this.v().b(2, itemstack);
+        this.v().h(2);
     }
 
     public int i() {
-        return this.u().a(3);
+        return this.v().a(3);
     }
 
     public void c(int i0) {
-        this.u().b(3, Byte.valueOf((byte) (i0 % 4)));
+        this.v().b(3, Byte.valueOf((byte)(i0 % 4)));
     }
 
     public void b(NBTTagCompound nbttagcompound) {
         if (this.h() != null) {
             nbttagcompound.a("Item", this.h().b(new NBTTagCompound()));
-            nbttagcompound.a("ItemRotation", (byte) this.i());
+            nbttagcompound.a("ItemRotation", (byte)this.i());
             nbttagcompound.a("ItemDropChance", this.e);
         }
 
@@ -130,15 +128,16 @@ public class EntityItemFrame extends EntityHanging {
 
     public boolean c(EntityPlayer entityplayer) {
         if (this.h() == null) {
-            ItemStack itemstack = entityplayer.aY();
+            ItemStack itemstack = entityplayer.aZ();
 
             if (itemstack != null && !this.q.I) {
                 this.a(itemstack);
                 if (!entityplayer.bG.d && --itemstack.b <= 0) {
-                    entityplayer.bn.a(entityplayer.bn.c, (ItemStack) null);
+                    entityplayer.bn.a(entityplayer.bn.c, (ItemStack)null);
                 }
             }
-        } else if (!this.q.I) {
+        }
+        else if (!this.q.I) {
             this.c(this.i() + 1);
         }
 

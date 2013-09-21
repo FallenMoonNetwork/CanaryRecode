@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
 import net.canarymod.Canary;
 import net.canarymod.api.world.CanaryWorld;
+
+import java.util.Iterator;
 
 public class ServerCommandManager extends CommandHandler implements IAdminCommand {
 
@@ -48,22 +49,23 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
             this.a(new CommandServerKick());
             this.a(new CommandServerList());
             this.a(new CommandServerWhitelist());
-        } else {
+        }
+        else {
             this.a(new CommandServerPublishLocal());
         }
 
-        CommandBase.a((IAdminCommand) this);
+        CommandBase.a((IAdminCommand)this);
     }
 
     public void a(ICommandSender icommandsender, int i0, String s0, Object... aobject) {
         boolean flag0 = true;
 
         // CanaryMod: Fix for MultiWorld
-        if (icommandsender instanceof TileEntityCommandBlock && !((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().O().b("commandBlockOutput")) {
+        if (icommandsender instanceof TileEntityCommandBlock && !((CanaryWorld)Canary.getServer().getDefaultWorld()).getHandle().O().b("commandBlockOutput")) {
             flag0 = false;
         }
 
-        ChatMessageComponent chatmessagecomponent = ChatMessageComponent.b("chat.type.admin", new Object[]{ icommandsender.c_(), ChatMessageComponent.b(s0, aobject) });
+        ChatMessageComponent chatmessagecomponent = ChatMessageComponent.b("chat.type.admin", new Object[]{icommandsender.c_(), ChatMessageComponent.b(s0, aobject)});
 
         chatmessagecomponent.a(EnumChatFormatting.h);
         chatmessagecomponent.b(Boolean.valueOf(true));
@@ -71,7 +73,7 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
             Iterator iterator = MinecraftServer.F().af().a.iterator();
 
             while (iterator.hasNext()) {
-                EntityPlayerMP entityplayermp = (EntityPlayerMP) iterator.next();
+                EntityPlayerMP entityplayermp = (EntityPlayerMP)iterator.next();
 
                 if (entityplayermp != icommandsender && MinecraftServer.F().af().e(entityplayermp.c_())) {
                     entityplayermp.a(chatmessagecomponent);

@@ -28,24 +28,27 @@ public class EntityOcelot extends EntityTameable {
 
     protected void a() {
         super.a();
-        this.ah.a(18, Byte.valueOf((byte) 0));
+        this.ah.a(18, Byte.valueOf((byte)0));
     }
 
-    public void bj() {
+    public void bk() {
         if (this.i().a()) {
             double d0 = this.i().b();
 
             if (d0 == 0.6D) {
                 this.b(true);
                 this.c(false);
-            } else if (d0 == 1.33D) {
+            }
+            else if (d0 == 1.33D) {
                 this.b(false);
                 this.c(true);
-            } else {
+            }
+            else {
                 this.b(false);
                 this.c(false);
             }
-        } else {
+        }
+        else {
             this.b(false);
             this.c(false);
         }
@@ -55,17 +58,18 @@ public class EntityOcelot extends EntityTameable {
         return !this.bT() && this.ac > 2400;
     }
 
-    public boolean be() {
+    public boolean bf() {
         return true;
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(10.0D);
         this.a(SharedMonsterAttributes.d).a(0.30000001192092896D);
     }
 
-    protected void b(float f0) {}
+    protected void b(float f0) {
+    }
 
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
@@ -81,15 +85,15 @@ public class EntityOcelot extends EntityTameable {
         return this.bT() ? (this.bY() ? "mob.cat.purr" : (this.ab.nextInt(4) == 0 ? "mob.cat.purreow" : "mob.cat.meow")) : "";
     }
 
-    protected String aN() {
-        return "mob.cat.hitt";
-    }
-
     protected String aO() {
         return "mob.cat.hitt";
     }
 
-    protected float aZ() {
+    protected String aP() {
+        return "mob.cat.hitt";
+    }
+
+    protected float ba() {
         return 0.4F;
     }
 
@@ -98,19 +102,21 @@ public class EntityOcelot extends EntityTameable {
     }
 
     public boolean m(Entity entity) {
-        return entity.a(DamageSource.a((EntityLivingBase) this), 3.0F);
+        return entity.a(DamageSource.a((EntityLivingBase)this), 3.0F);
     }
 
     public boolean a(DamageSource damagesource, float f0) {
-        if (this.aq()) {
+        if (this.ar()) {
             return false;
-        } else {
+        }
+        else {
             this.bp.a(false);
             return super.a(damagesource, f0);
         }
     }
 
-    protected void b(boolean flag0, int i0) {}
+    protected void b(boolean flag0, int i0) {
+    }
 
     public boolean a(EntityPlayer entityplayer) {
         ItemStack itemstack = entityplayer.bn.h();
@@ -119,18 +125,19 @@ public class EntityOcelot extends EntityTameable {
             if (entityplayer.c_().equalsIgnoreCase(this.h_()) && !this.q.I && !this.c(itemstack)) {
                 this.bp.a(!this.bU());
             }
-        } else if (this.bq.f() && itemstack != null && itemstack.d == Item.aW.cv && entityplayer.e(this) < 9.0D) {
+        }
+        else if (this.bq.f() && itemstack != null && itemstack.d == Item.aW.cv && entityplayer.e(this) < 9.0D) {
             if (!entityplayer.bG.d) {
                 --itemstack.b;
             }
 
             if (itemstack.b <= 0) {
-                entityplayer.bn.a(entityplayer.bn.c, (ItemStack) null);
+                entityplayer.bn.a(entityplayer.bn.c, (ItemStack)null);
             }
 
             if (!this.q.I) {
                 // CanaryMod: EntityTame
-                EntityTameHook hook = new EntityTameHook((net.canarymod.api.entity.living.animal.EntityAnimal) this.getCanaryEntity(), ((EntityPlayerMP) entityplayer).getPlayer(), this.ab.nextInt(3) == 0);
+                EntityTameHook hook = new EntityTameHook((net.canarymod.api.entity.living.animal.EntityAnimal)this.getCanaryEntity(), ((EntityPlayerMP)entityplayer).getPlayer(), this.ab.nextInt(3) == 0);
 
                 if (hook.isTamed() && !hook.isCanceled()) {
                     //
@@ -139,10 +146,11 @@ public class EntityOcelot extends EntityTameable {
                     this.b(entityplayer.c_());
                     this.i(true);
                     this.bp.a(true);
-                    this.q.a((Entity) this, (byte) 7);
-                } else {
+                    this.q.a((Entity)this, (byte)7);
+                }
+                else {
                     this.i(false);
-                    this.q.a((Entity) this, (byte) 6);
+                    this.q.a((Entity)this, (byte)6);
                 }
             }
 
@@ -171,12 +179,15 @@ public class EntityOcelot extends EntityTameable {
     public boolean a(EntityAnimal entityanimal) {
         if (entityanimal == this) {
             return false;
-        } else if (!this.bT()) {
+        }
+        else if (!this.bT()) {
             return false;
-        } else if (!(entityanimal instanceof EntityOcelot)) {
+        }
+        else if (!(entityanimal instanceof EntityOcelot)) {
             return false;
-        } else {
-            EntityOcelot entityocelot = (EntityOcelot) entityanimal;
+        }
+        else {
+            EntityOcelot entityocelot = (EntityOcelot)entityanimal;
 
             return !entityocelot.bT() ? false : this.bY() && entityocelot.bY();
         }
@@ -187,14 +198,15 @@ public class EntityOcelot extends EntityTameable {
     }
 
     public void p(int i0) {
-        this.ah.b(18, Byte.valueOf((byte) i0));
+        this.ah.b(18, Byte.valueOf((byte)i0));
     }
 
     public boolean bs() {
         if (this.q.s.nextInt(3) == 0) {
             return false;
-        } else {
-            if (this.q.b(this.E) && this.q.a((Entity) this, this.E).isEmpty() && !this.q.d(this.E)) {
+        }
+        else {
+            if (this.q.b(this.E) && this.q.a((Entity)this, this.E).isEmpty() && !this.q.d(this.E)) {
                 int i0 = MathHelper.c(this.u);
                 int i1 = MathHelper.c(this.E.b);
                 int i2 = MathHelper.c(this.w);
@@ -214,8 +226,8 @@ public class EntityOcelot extends EntityTameable {
         }
     }
 
-    public String am() {
-        return this.bB() ? this.bA() : (this.bT() ? "entity.Cat.name" : super.am());
+    public String an() {
+        return this.bB() ? this.bA() : (this.bT() ? "entity.Cat.name" : super.an());
     }
 
     public EntityLivingData a(EntityLivingData entitylivingdata) {
@@ -226,7 +238,7 @@ public class EntityOcelot extends EntityTameable {
 
                 entityocelot.b(this.u, this.v, this.w, this.A, 0.0F);
                 entityocelot.c(-24000);
-                this.q.d((Entity) entityocelot);
+                this.q.d((Entity)entityocelot);
             }
         }
 

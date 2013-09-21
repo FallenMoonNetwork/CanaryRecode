@@ -12,7 +12,7 @@ public class ItemBucketMilk extends Item {
 
     public ItemStack b(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         // CanaryMod: Eat
-        EatHook hook = (EatHook) new EatHook(((EntityPlayerMP) entityplayer).getPlayer(), itemstack.getCanaryItem(), 0, 0, null).call();
+        EatHook hook = (EatHook)new EatHook(((EntityPlayerMP)entityplayer).getPlayer(), itemstack.getCanaryItem(), 0, 0, null).call();
         if (hook.isCanceled()) {
             return itemstack;
         }
@@ -25,7 +25,7 @@ public class ItemBucketMilk extends Item {
         }
 
         if (!world.I) {
-            entityplayer.aJ();
+            entityplayer.aK();
         }
 
         return itemstack.b <= 0 ? new ItemStack(Item.ay) : itemstack;

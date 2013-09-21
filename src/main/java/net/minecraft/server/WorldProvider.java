@@ -6,7 +6,7 @@ import net.canarymod.api.world.DimensionType;
 
 public abstract class WorldProvider {
 
-    public static final float[] a = new float[] { 1.0F, 0.75F, 0.5F, 0.25F, 0.0F, 0.25F, 0.5F, 0.75F};
+    public static final float[] a = new float[]{1.0F, 0.75F, 0.5F, 0.25F, 0.0F, 0.25F, 0.5F, 0.75F};
     public World b;
     public WorldType c;
     public String d;
@@ -18,13 +18,16 @@ public abstract class WorldProvider {
     private float[] j = new float[4];
     //CanaryMod adds DimensionType
     protected DimensionType canaryDimensionType;
+
     //
-    public WorldProvider() {}
+    public WorldProvider() {
+    }
 
     //CanaryMod enable setting of dimensiontype
     public void setCanaryDimensionType(DimensionType t) {
         this.canaryDimensionType = t;
     }
+
     //
     public final void a(World world) {
         this.b = world;
@@ -38,7 +41,7 @@ public abstract class WorldProvider {
         float f0 = 0.0F;
 
         for (int i0 = 0; i0 <= 15; ++i0) {
-            float f1 = 1.0F - (float) i0 / 15.0F;
+            float f1 = 1.0F - (float)i0 / 15.0F;
 
             this.h[i0] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f0) + f0;
         }
@@ -49,21 +52,22 @@ public abstract class WorldProvider {
             FlatGeneratorInfo flatgeneratorinfo = FlatGeneratorInfo.a(this.b.N().y());
 
             this.e = new WorldChunkManagerHell(BiomeGenBase.a[flatgeneratorinfo.a()], 0.5F, 0.5F);
-        } else {
+        }
+        else {
             this.e = new WorldChunkManager(this.b);
         }
     }
 
     public IChunkProvider c() {
         //CanaryMod changed that to load custom generators from dim types
-        if(this.canaryDimensionType.hasChunkProvider()) {
-            IChunkProvider nmsProvider = (IChunkProvider) (this.c == WorldType.c ? new ChunkProviderFlat(this.b, this.b.H(), this.b.N().s(), this.d) : new ChunkProviderGenerate(this.b, this.b.H(), this.b.N().s()));
+        if (this.canaryDimensionType.hasChunkProvider()) {
+            IChunkProvider nmsProvider = (IChunkProvider)(this.c == WorldType.c ? new ChunkProviderFlat(this.b, this.b.H(), this.b.N().s(), this.d) : new ChunkProviderGenerate(this.b, this.b.H(), this.b.N().s()));
             ChunkProviderCustom dimProvider = canaryDimensionType.getChunkProvider();
             dimProvider.setWorld(this.b.getCanaryWorld());
             return new CanaryChunkProviderCustom(dimProvider, nmsProvider);
         }
         else {
-            return (IChunkProvider) (this.c == WorldType.c ? new ChunkProviderFlat(this.b, this.b.H(), this.b.N().s(), this.d) : new ChunkProviderGenerate(this.b, this.b.H(), this.b.N().s()));
+            return (IChunkProvider)(this.c == WorldType.c ? new ChunkProviderFlat(this.b, this.b.H(), this.b.N().s(), this.d) : new ChunkProviderGenerate(this.b, this.b.H(), this.b.N().s()));
         }
         //
 //        return (IChunkProvider) (this.c == WorldType.c ? new ChunkProviderFlat(this.b, this.b.H(), this.b.N().s(), this.d) : new ChunkProviderGenerate(this.b, this.b.H(), this.b.N().s()));
@@ -76,8 +80,8 @@ public abstract class WorldProvider {
     }
 
     public float a(long i0, float f0) {
-        int i1 = (int) (i0 % 24000L);
-        float f1 = ((float) i1 + f0) / 24000.0F - 0.25F;
+        int i1 = (int)(i0 % 24000L);
+        float f1 = ((float)i1 + f0) / 24000.0F - 0.25F;
 
         if (f1 < 0.0F) {
             ++f1;
@@ -89,13 +93,13 @@ public abstract class WorldProvider {
 
         float f2 = f1;
 
-        f1 = 1.0F - (float) ((Math.cos((double) f1 * 3.141592653589793D) + 1.0D) / 2.0D);
+        f1 = 1.0F - (float)((Math.cos((double)f1 * 3.141592653589793D) + 1.0D) / 2.0D);
         f1 = f2 + (f1 - f2) / 3.0F;
         return f1;
     }
 
     public int a(long i0) {
-        return (int) (i0 / 24000L) % 8;
+        return (int)(i0 / 24000L) % 8;
     }
 
     public boolean d() {
@@ -107,7 +111,7 @@ public abstract class WorldProvider {
     }
 
     public static WorldProvider a(int i0) {
-        return (WorldProvider) (i0 == -1 ? new WorldProviderHell() : (i0 == 0 ? new WorldProviderSurface() : (i0 == 1 ? new WorldProviderEnd() : null)));
+        return (WorldProvider)(i0 == -1 ? new WorldProviderHell() : (i0 == 0 ? new WorldProviderSurface() : (i0 == 1 ? new WorldProviderEnd() : null)));
     }
 
     public ChunkCoordinates h() {

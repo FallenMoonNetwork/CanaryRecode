@@ -1,12 +1,13 @@
 package net.minecraft.server;
 
+import net.canarymod.api.world.blocks.BlockType;
+import net.canarymod.api.world.blocks.CanaryBlock;
+import net.canarymod.hook.world.RedstoneChangeHook;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import net.canarymod.api.world.blocks.BlockType;
-import net.canarymod.api.world.blocks.CanaryBlock;
-import net.canarymod.hook.world.RedstoneChangeHook;
 
 public class BlockRedstoneWire extends Block {
 
@@ -45,7 +46,7 @@ public class BlockRedstoneWire extends Block {
         this.b.clear();
 
         for (int i3 = 0; i3 < arraylist.size(); ++i3) {
-            ChunkPosition chunkposition = (ChunkPosition) arraylist.get(i3);
+            ChunkPosition chunkposition = (ChunkPosition)arraylist.get(i3);
 
             world.f(chunkposition.a, chunkposition.b, chunkposition.c, this.cF);
         }
@@ -94,16 +95,19 @@ public class BlockRedstoneWire extends Block {
                 if ((i11 != i3 || i12 != i5) && i1 >= i4) {
                     i9 = this.d(world, i11, i1 + 1, i12, i9);
                 }
-            } else if (!world.u(i11, i1, i12) && (i11 != i3 || i12 != i5) && i1 <= i4) {
+            }
+            else if (!world.u(i11, i1, i12) && (i11 != i3 || i12 != i5) && i1 <= i4) {
                 i9 = this.d(world, i11, i1 - 1, i12, i9);
             }
         }
 
         if (i9 > i7) {
             i7 = i9 - 1;
-        } else if (i7 > 0) {
+        }
+        else if (i7 > 0) {
             --i7;
-        } else {
+        }
+        else {
             i7 = 0;
         }
 
@@ -113,7 +117,7 @@ public class BlockRedstoneWire extends Block {
 
         // CanaryMod: RedstoneChange
         if (i6 != i7) {
-            RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i6, i7).call();
+            RedstoneChangeHook hook = (RedstoneChangeHook)new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), i6, i7).call();
             if (hook.isCanceled()) {
                 return;
             }
@@ -156,25 +160,29 @@ public class BlockRedstoneWire extends Block {
             this.m(world, i0, i1, i2 + 1);
             if (world.u(i0 - 1, i1, i2)) {
                 this.m(world, i0 - 1, i1 + 1, i2);
-            } else {
+            }
+            else {
                 this.m(world, i0 - 1, i1 - 1, i2);
             }
 
             if (world.u(i0 + 1, i1, i2)) {
                 this.m(world, i0 + 1, i1 + 1, i2);
-            } else {
+            }
+            else {
                 this.m(world, i0 + 1, i1 - 1, i2);
             }
 
             if (world.u(i0, i1, i2 - 1)) {
                 this.m(world, i0, i1 + 1, i2 - 1);
-            } else {
+            }
+            else {
                 this.m(world, i0, i1 - 1, i2 - 1);
             }
 
             if (world.u(i0, i1, i2 + 1)) {
                 this.m(world, i0, i1 + 1, i2 + 1);
-            } else {
+            }
+            else {
                 this.m(world, i0, i1 - 1, i2 + 1);
             }
         }
@@ -186,7 +194,7 @@ public class BlockRedstoneWire extends Block {
             // CanaryMod: RedstoneChange (Wire Destroy)
             int lvl = world.D(i0, i1, i2) - 1; // Subtract 1 from current in
             if (lvl > 0) {
-                new RedstoneChangeHook(new CanaryBlock(BlockType.RedstoneWire.getId(), (short) i3, i0, i1, i2, world.getCanaryWorld()), lvl, 0).call();
+                new RedstoneChangeHook(new CanaryBlock(BlockType.RedstoneWire.getId(), (short)i3, i0, i1, i2, world.getCanaryWorld()), lvl, 0).call();
             }
             //
             world.f(i0, i1 + 1, i2, this.cF);
@@ -202,25 +210,29 @@ public class BlockRedstoneWire extends Block {
             this.m(world, i0, i1, i2 + 1);
             if (world.u(i0 - 1, i1, i2)) {
                 this.m(world, i0 - 1, i1 + 1, i2);
-            } else {
+            }
+            else {
                 this.m(world, i0 - 1, i1 - 1, i2);
             }
 
             if (world.u(i0 + 1, i1, i2)) {
                 this.m(world, i0 + 1, i1 + 1, i2);
-            } else {
+            }
+            else {
                 this.m(world, i0 + 1, i1 - 1, i2);
             }
 
             if (world.u(i0, i1, i2 - 1)) {
                 this.m(world, i0, i1 + 1, i2 - 1);
-            } else {
+            }
+            else {
                 this.m(world, i0, i1 - 1, i2 - 1);
             }
 
             if (world.u(i0, i1, i2 + 1)) {
                 this.m(world, i0, i1 + 1, i2 + 1);
-            } else {
+            }
+            else {
                 this.m(world, i0, i1 - 1, i2 + 1);
             }
         }
@@ -229,7 +241,8 @@ public class BlockRedstoneWire extends Block {
     private int d(World world, int i0, int i1, int i2, int i3) {
         if (world.a(i0, i1, i2) != this.cF) {
             return i3;
-        } else {
+        }
+        else {
             int i4 = world.h(i0, i1, i2);
 
             return i4 > i3 ? i4 : i3;
@@ -242,7 +255,8 @@ public class BlockRedstoneWire extends Block {
 
             if (flag0) {
                 this.k(world, i0, i1, i2);
-            } else {
+            }
+            else {
                 this.c(world, i0, i1, i2, 0, 0);
                 world.i(i0, i1, i2);
             }
@@ -262,14 +276,17 @@ public class BlockRedstoneWire extends Block {
     public int b(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
         if (!this.a) {
             return 0;
-        } else {
+        }
+        else {
             int i4 = iblockaccess.h(i0, i1, i2);
 
             if (i4 == 0) {
                 return 0;
-            } else if (i3 == 1) {
+            }
+            else if (i3 == 1) {
                 return i4;
-            } else {
+            }
+            else {
                 boolean flag0 = g(iblockaccess, i0 - 1, i1, i2, 1) || !iblockaccess.u(i0 - 1, i1, i2) && g(iblockaccess, i0 - 1, i1 - 1, i2, -1);
                 boolean flag1 = g(iblockaccess, i0 + 1, i1, i2, 3) || !iblockaccess.u(i0 + 1, i1, i2) && g(iblockaccess, i0 + 1, i1 - 1, i2, -1);
                 boolean flag2 = g(iblockaccess, i0, i1, i2 - 1, 2) || !iblockaccess.u(i0, i1, i2 - 1) && g(iblockaccess, i0, i1 - 1, i2 - 1, -1);
@@ -307,11 +324,14 @@ public class BlockRedstoneWire extends Block {
 
         if (i4 == Block.aA.cF) {
             return true;
-        } else if (i4 == 0) {
+        }
+        else if (i4 == 0) {
             return false;
-        } else if (!Block.bm.g(i4)) {
+        }
+        else if (!Block.bm.g(i4)) {
             return Block.s[i4].f() && i3 != -1;
-        } else {
+        }
+        else {
             int i5 = iblockaccess.h(i0, i1, i2);
 
             return i3 == (i5 & 3) || i3 == Direction.f[i5 & 3];
@@ -321,14 +341,16 @@ public class BlockRedstoneWire extends Block {
     public static boolean g(IBlockAccess iblockaccess, int i0, int i1, int i2, int i3) {
         if (f(iblockaccess, i0, i1, i2, i3)) {
             return true;
-        } else {
+        }
+        else {
             int i4 = iblockaccess.a(i0, i1, i2);
 
             if (i4 == Block.bn.cF) {
                 int i5 = iblockaccess.h(i0, i1, i2);
 
                 return i3 == (i5 & 3);
-            } else {
+            }
+            else {
                 return false;
             }
         }

@@ -14,6 +14,6 @@ public class TileEntityDropper extends TileEntityDispenser {
 
     // CanaryMod
     public CanaryDropper getCanaryDropper() {
-        return (CanaryDropper) complexBlock;
+        return (CanaryDropper)complexBlock;
     }
 }

@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import java.util.Random;
-import java.util.UUID;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.canarymod.api.inventory.CanaryBaseItem;
+
+import java.util.Random;
+import java.util.UUID;
 
 public class Item {
 
@@ -17,7 +18,7 @@ public class Item {
     public static Item j = (new ItemAxe(2, EnumToolMaterial.c)).b("hatchetIron").d("iron_axe");
     public static Item k = (new ItemFlintAndSteel(3)).b("flintAndSteel").d("flint_and_steel");
     public static Item l = (new ItemFood(4, 4, 0.3F, false)).b("apple").d("apple");
-    public static ItemBow m = (ItemBow) (new ItemBow(5)).b("bow").d("bow");
+    public static ItemBow m = (ItemBow)(new ItemBow(5)).b("bow").d("bow");
     public static Item n = (new Item(6)).b("arrow").a(CreativeTabs.j).d("arrow");
     public static Item o = (new ItemCoal(7)).b("coal").d("coal");
     public static Item p = (new Item(8)).b("diamond").a(CreativeTabs.l).d("diamond");
@@ -54,26 +55,26 @@ public class Item {
     public static Item U = (new ItemSeeds(39, Block.aE.cF, Block.aF.cF)).b("seeds").d("seeds_wheat");
     public static Item V = (new Item(40)).b("wheat").a(CreativeTabs.l).d("wheat");
     public static Item W = (new ItemFood(41, 5, 0.6F, false)).b("bread").d("bread");
-    public static ItemArmor X = (ItemArmor) (new ItemArmor(42, EnumArmorMaterial.a, 0, 0)).b("helmetCloth").d("leather_helmet");
-    public static ItemArmor Y = (ItemArmor) (new ItemArmor(43, EnumArmorMaterial.a, 0, 1)).b("chestplateCloth").d("leather_chestplate");
-    public static ItemArmor Z = (ItemArmor) (new ItemArmor(44, EnumArmorMaterial.a, 0, 2)).b("leggingsCloth").d("leather_leggings");
-    public static ItemArmor aa = (ItemArmor) (new ItemArmor(45, EnumArmorMaterial.a, 0, 3)).b("bootsCloth").d("leather_boots");
-    public static ItemArmor ab = (ItemArmor) (new ItemArmor(46, EnumArmorMaterial.b, 1, 0)).b("helmetChain").d("chainmail_helmet");
-    public static ItemArmor ac = (ItemArmor) (new ItemArmor(47, EnumArmorMaterial.b, 1, 1)).b("chestplateChain").d("chainmail_chestplate");
-    public static ItemArmor ad = (ItemArmor) (new ItemArmor(48, EnumArmorMaterial.b, 1, 2)).b("leggingsChain").d("chainmail_leggings");
-    public static ItemArmor ae = (ItemArmor) (new ItemArmor(49, EnumArmorMaterial.b, 1, 3)).b("bootsChain").d("chainmail_boots");
-    public static ItemArmor af = (ItemArmor) (new ItemArmor(50, EnumArmorMaterial.c, 2, 0)).b("helmetIron").d("iron_helmet");
-    public static ItemArmor ag = (ItemArmor) (new ItemArmor(51, EnumArmorMaterial.c, 2, 1)).b("chestplateIron").d("iron_chestplate");
-    public static ItemArmor ah = (ItemArmor) (new ItemArmor(52, EnumArmorMaterial.c, 2, 2)).b("leggingsIron").d("iron_leggings");
-    public static ItemArmor ai = (ItemArmor) (new ItemArmor(53, EnumArmorMaterial.c, 2, 3)).b("bootsIron").d("iron_boots");
-    public static ItemArmor aj = (ItemArmor) (new ItemArmor(54, EnumArmorMaterial.e, 3, 0)).b("helmetDiamond").d("diamond_helmet");
-    public static ItemArmor ak = (ItemArmor) (new ItemArmor(55, EnumArmorMaterial.e, 3, 1)).b("chestplateDiamond").d("diamond_chestplate");
-    public static ItemArmor al = (ItemArmor) (new ItemArmor(56, EnumArmorMaterial.e, 3, 2)).b("leggingsDiamond").d("diamond_leggings");
-    public static ItemArmor am = (ItemArmor) (new ItemArmor(57, EnumArmorMaterial.e, 3, 3)).b("bootsDiamond").d("diamond_boots");
-    public static ItemArmor an = (ItemArmor) (new ItemArmor(58, EnumArmorMaterial.d, 4, 0)).b("helmetGold").d("gold_helmet");
-    public static ItemArmor ao = (ItemArmor) (new ItemArmor(59, EnumArmorMaterial.d, 4, 1)).b("chestplateGold").d("gold_chestplate");
-    public static ItemArmor ap = (ItemArmor) (new ItemArmor(60, EnumArmorMaterial.d, 4, 2)).b("leggingsGold").d("gold_leggings");
-    public static ItemArmor aq = (ItemArmor) (new ItemArmor(61, EnumArmorMaterial.d, 4, 3)).b("bootsGold").d("gold_boots");
+    public static ItemArmor X = (ItemArmor)(new ItemArmor(42, EnumArmorMaterial.a, 0, 0)).b("helmetCloth").d("leather_helmet");
+    public static ItemArmor Y = (ItemArmor)(new ItemArmor(43, EnumArmorMaterial.a, 0, 1)).b("chestplateCloth").d("leather_chestplate");
+    public static ItemArmor Z = (ItemArmor)(new ItemArmor(44, EnumArmorMaterial.a, 0, 2)).b("leggingsCloth").d("leather_leggings");
+    public static ItemArmor aa = (ItemArmor)(new ItemArmor(45, EnumArmorMaterial.a, 0, 3)).b("bootsCloth").d("leather_boots");
+    public static ItemArmor ab = (ItemArmor)(new ItemArmor(46, EnumArmorMaterial.b, 1, 0)).b("helmetChain").d("chainmail_helmet");
+    public static ItemArmor ac = (ItemArmor)(new ItemArmor(47, EnumArmorMaterial.b, 1, 1)).b("chestplateChain").d("chainmail_chestplate");
+    public static ItemArmor ad = (ItemArmor)(new ItemArmor(48, EnumArmorMaterial.b, 1, 2)).b("leggingsChain").d("chainmail_leggings");
+    public static ItemArmor ae = (ItemArmor)(new ItemArmor(49, EnumArmorMaterial.b, 1, 3)).b("bootsChain").d("chainmail_boots");
+    public static ItemArmor af = (ItemArmor)(new ItemArmor(50, EnumArmorMaterial.c, 2, 0)).b("helmetIron").d("iron_helmet");
+    public static ItemArmor ag = (ItemArmor)(new ItemArmor(51, EnumArmorMaterial.c, 2, 1)).b("chestplateIron").d("iron_chestplate");
+    public static ItemArmor ah = (ItemArmor)(new ItemArmor(52, EnumArmorMaterial.c, 2, 2)).b("leggingsIron").d("iron_leggings");
+    public static ItemArmor ai = (ItemArmor)(new ItemArmor(53, EnumArmorMaterial.c, 2, 3)).b("bootsIron").d("iron_boots");
+    public static ItemArmor aj = (ItemArmor)(new ItemArmor(54, EnumArmorMaterial.e, 3, 0)).b("helmetDiamond").d("diamond_helmet");
+    public static ItemArmor ak = (ItemArmor)(new ItemArmor(55, EnumArmorMaterial.e, 3, 1)).b("chestplateDiamond").d("diamond_chestplate");
+    public static ItemArmor al = (ItemArmor)(new ItemArmor(56, EnumArmorMaterial.e, 3, 2)).b("leggingsDiamond").d("diamond_leggings");
+    public static ItemArmor am = (ItemArmor)(new ItemArmor(57, EnumArmorMaterial.e, 3, 3)).b("bootsDiamond").d("diamond_boots");
+    public static ItemArmor an = (ItemArmor)(new ItemArmor(58, EnumArmorMaterial.d, 4, 0)).b("helmetGold").d("gold_helmet");
+    public static ItemArmor ao = (ItemArmor)(new ItemArmor(59, EnumArmorMaterial.d, 4, 1)).b("chestplateGold").d("gold_chestplate");
+    public static ItemArmor ap = (ItemArmor)(new ItemArmor(60, EnumArmorMaterial.d, 4, 2)).b("leggingsGold").d("gold_leggings");
+    public static ItemArmor aq = (ItemArmor)(new ItemArmor(61, EnumArmorMaterial.d, 4, 3)).b("bootsGold").d("gold_boots");
     public static Item ar = (new Item(62)).b("flint").a(CreativeTabs.l).d("flint");
     public static Item as = (new ItemFood(63, 3, 0.3F, true)).b("porkchopRaw").d("porkchop_raw");
     public static Item at = (new ItemFood(64, 8, 0.8F, true)).b("porkchopCooked").d("porkchop_cooked");
@@ -102,7 +103,7 @@ public class Item {
     public static Item aQ = (new ItemMinecart(87, 2)).b("minecartFurnace").d("minecart_furnace");
     public static Item aR = (new ItemEgg(88)).b("egg").d("egg");
     public static Item aS = (new Item(89)).b("compass").a(CreativeTabs.i).d("compass");
-    public static ItemFishingRod aT = (ItemFishingRod) (new ItemFishingRod(90)).b("fishingRod").d("fishing_rod");
+    public static ItemFishingRod aT = (ItemFishingRod)(new ItemFishingRod(90)).b("fishingRod").d("fishing_rod");
     public static Item aU = (new Item(91)).b("clock").a(CreativeTabs.i).d("clock");
     public static Item aV = (new Item(92)).b("yellowDust").c(PotionHelper.j).a(CreativeTabs.l).d("glowstone_dust");
     public static Item aW = (new ItemFood(93, 2, 0.3F, false)).b("fishRaw").d("fish_raw");
@@ -114,8 +115,8 @@ public class Item {
     public static Item bc = (new ItemBed(99)).d(1).b("bed").d("bed");
     public static Item bd = (new ItemReed(100, Block.bm)).b("diode").a(CreativeTabs.d).d("repeater");
     public static Item be = (new ItemFood(101, 2, 0.1F, false)).b("cookie").d("cookie");
-    public static ItemMap bf = (ItemMap) (new ItemMap(102)).b("map").d("map_filled");
-    public static ItemShears bg = (ItemShears) (new ItemShears(103)).b("shears").d("shears");
+    public static ItemMap bf = (ItemMap)(new ItemMap(102)).b("map").d("map_filled");
+    public static ItemShears bg = (ItemShears)(new ItemShears(103)).b("shears").d("shears");
     public static Item bh = (new ItemFood(104, 2, 0.3F, false)).b("melon").d("melon");
     public static Item bi = (new ItemSeeds(105, Block.bx.cF, Block.aF.cF)).b("seeds_pumpkin").d("seeds_pumpkin");
     public static Item bj = (new ItemSeeds(106, Block.by.cF, Block.aF.cF)).b("seeds_melon").d("seeds_melon");
@@ -129,7 +130,7 @@ public class Item {
     public static Item br = (new Item(114)).b("ghastTear").c(PotionHelper.c).a(CreativeTabs.k).d("ghast_tear");
     public static Item bs = (new Item(115)).b("goldNugget").a(CreativeTabs.l).d("gold_nugget");
     public static Item bt = (new ItemSeeds(116, Block.bI.cF, Block.bh.cF)).b("netherStalkSeeds").c("+4").d("nether_wart");
-    public static ItemPotion bu = (ItemPotion) (new ItemPotion(117)).b("potion").d("potion");
+    public static ItemPotion bu = (ItemPotion)(new ItemPotion(117)).b("potion").d("potion");
     public static Item bv = (new ItemGlassBottle(118)).b("glassBottle").d("potion_bottle_empty");
     public static Item bw = (new ItemFood(119, 2, 0.8F, false)).a(Potion.u.H, 5, 0, 1.0F).b("spiderEye").c(PotionHelper.d).d("spider_eye");
     public static Item bx = (new Item(120)).b("fermentedSpiderEye").c(PotionHelper.e).a(CreativeTabs.k).d("spider_eye_fermented");
@@ -151,7 +152,7 @@ public class Item {
     public static Item bN = (new ItemSeedFood(136, 1, 0.3F, Block.cj.cF, Block.aF.cF)).b("potato").d("potato");
     public static Item bO = (new ItemFood(137, 6, 0.6F, false)).b("potatoBaked").d("potato_baked");
     public static Item bP = (new ItemFood(138, 2, 0.3F, false)).a(Potion.u.H, 5, 0, 0.6F).b("potatoPoisonous").d("potato_poisonous");
-    public static ItemEmptyMap bQ = (ItemEmptyMap) (new ItemEmptyMap(139)).b("emptyMap").d("map_empty");
+    public static ItemEmptyMap bQ = (ItemEmptyMap)(new ItemEmptyMap(139)).b("emptyMap").d("map_empty");
     public static Item bR = (new ItemFood(140, 6, 1.2F, false)).b("carrotGolden").c(PotionHelper.l).d("carrot_golden");
     public static Item bS = (new ItemSkull(141)).b("skull").d("skull");
     public static Item bT = (new ItemCarrotOnAStick(142)).b("carrotOnAStick").d("carrot_on_a_stick");
@@ -159,7 +160,7 @@ public class Item {
     public static Item bV = (new ItemFood(144, 8, 0.3F, false)).b("pumpkinPie").a(CreativeTabs.h).d("pumpkin_pie");
     public static Item bW = (new ItemFirework(145)).b("fireworks").d("fireworks");
     public static Item bX = (new ItemFireworkCharge(146)).b("fireworksCharge").a(CreativeTabs.f).d("fireworks_charge");
-    public static ItemEnchantedBook bY = (ItemEnchantedBook) (new ItemEnchantedBook(147)).d(1).b("enchantedBook").d("book_enchanted");
+    public static ItemEnchantedBook bY = (ItemEnchantedBook)(new ItemEnchantedBook(147)).d(1).b("enchantedBook").d("book_enchanted");
     public static Item bZ = (new ItemReed(148, Block.cq)).b("comparator").a(CreativeTabs.d).d("comparator");
     public static Item ca = (new Item(149)).b("netherbrick").a(CreativeTabs.l).d("netherbrick");
     public static Item cb = (new Item(150)).b("netherquartz").a(CreativeTabs.l).d("quartz");
@@ -324,9 +325,11 @@ public class Item {
         return StatCollector.a(this.d(itemstack) + ".name");
     }
 
-    public void a(ItemStack itemstack, World world, Entity entity, int i0, boolean flag0) {}
+    public void a(ItemStack itemstack, World world, Entity entity, int i0, boolean flag0) {
+    }
 
-    public void d(ItemStack itemstack, World world, EntityPlayer entityplayer) {}
+    public void d(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+    }
 
     public boolean f() {
         return false;
@@ -340,7 +343,8 @@ public class Item {
         return 0;
     }
 
-    public void a(ItemStack itemstack, World world, EntityPlayer entityplayer, int i0) {}
+    public void a(ItemStack itemstack, World world, EntityPlayer entityplayer, int i0) {
+    }
 
     protected Item c(String s0) {
         this.d = s0;
@@ -367,9 +371,9 @@ public class Item {
         float f0 = 1.0F;
         float f1 = entityplayer.D + (entityplayer.B - entityplayer.D) * f0;
         float f2 = entityplayer.C + (entityplayer.A - entityplayer.C) * f0;
-        double d0 = entityplayer.r + (entityplayer.u - entityplayer.r) * (double) f0;
-        double d1 = entityplayer.s + (entityplayer.v - entityplayer.s) * (double) f0 + 1.62D - (double) entityplayer.N;
-        double d2 = entityplayer.t + (entityplayer.w - entityplayer.t) * (double) f0;
+        double d0 = entityplayer.r + (entityplayer.u - entityplayer.r) * (double)f0;
+        double d1 = entityplayer.s + (entityplayer.v - entityplayer.s) * (double)f0 + 1.62D - (double)entityplayer.N;
+        double d2 = entityplayer.t + (entityplayer.w - entityplayer.t) * (double)f0;
         Vec3 vec3 = world.V().a(d0, d1, d2);
         float f3 = MathHelper.b(-f2 * 0.017453292F - 3.1415927F);
         float f4 = MathHelper.a(-f2 * 0.017453292F - 3.1415927F);
@@ -378,7 +382,7 @@ public class Item {
         float f7 = f4 * f5;
         float f8 = f3 * f5;
         double d3 = 5.0D;
-        Vec3 vec31 = vec3.c((double) f7 * d3, (double) f6 * d3, (double) f8 * d3);
+        Vec3 vec31 = vec3.c((double)f7 * d3, (double)f6 * d3, (double)f8 * d3);
 
         return world.a(vec3, vec31, flag0, !flag0);
     }

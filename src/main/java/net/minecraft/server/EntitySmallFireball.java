@@ -29,13 +29,14 @@ public class EntitySmallFireball extends EntityFireball {
     protected void a(MovingObjectPosition movingobjectposition) {
         if (!this.q.I) {
             // CanaryMod: ProjectileHit
-            ProjectileHitHook hook = (ProjectileHitHook) new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
+            ProjectileHitHook hook = (ProjectileHitHook)new ProjectileHitHook(this.getCanaryEntity(), movingobjectposition == null || movingobjectposition.g == null ? null : movingobjectposition.g.getCanaryEntity()).call();
             if (!hook.isCanceled()) { //
                 if (movingobjectposition.g != null) {
-                    if (!movingobjectposition.g.E() && movingobjectposition.g.a(DamageSource.a((EntityFireball) this, this.a), 5)) {
+                    if (!movingobjectposition.g.F() && movingobjectposition.g.a(DamageSource.a((EntityFireball)this, this.a), 5)) {
                         movingobjectposition.g.d(5);
                     }
-                } else {
+                }
+                else {
                     int i0 = movingobjectposition.b;
                     int i1 = movingobjectposition.c;
                     int i2 = movingobjectposition.d;
@@ -67,9 +68,9 @@ public class EntitySmallFireball extends EntityFireball {
 
                     if (this.q.c(i0, i1, i2)) {
                         // CanaryMod: IgnitionHook
-                        CanaryBlock block = (CanaryBlock) this.q.getCanaryWorld().getBlockAt(i0, i1 - 1, i2);
-                        block.setStatus((byte) 7); // 7 fireball hit
-                        IgnitionHook ignitionHook = (IgnitionHook) new IgnitionHook(block, null, null, IgnitionCause.FIREBALL_HIT).call();
+                        CanaryBlock block = (CanaryBlock)this.q.getCanaryWorld().getBlockAt(i0, i1 - 1, i2);
+                        block.setStatus((byte)7); // 7 fireball hit
+                        IgnitionHook ignitionHook = (IgnitionHook)new IgnitionHook(block, null, null, IgnitionCause.FIREBALL_HIT).call();
                         if (!ignitionHook.isCanceled()) {
                             this.q.c(i0, i1, i2, Block.aw.cF);
                         }
@@ -77,12 +78,12 @@ public class EntitySmallFireball extends EntityFireball {
                     }
                 }
 
-                this.w();
+                this.x();
             }
         }
     }
 
-    public boolean K() {
+    public boolean L() {
         return false;
     }
 

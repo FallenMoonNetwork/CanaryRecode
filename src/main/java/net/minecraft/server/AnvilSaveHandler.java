@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import java.io.File;
 import net.canarymod.api.world.DimensionType;
+
+import java.io.File;
 
 public class AnvilSaveHandler extends SaveHandler {
 
@@ -24,7 +25,8 @@ public class AnvilSaveHandler extends SaveHandler {
     public void a() {
         try {
             ThreadedFileIOBase.a.a();
-        } catch (InterruptedException interruptedexception) {
+        }
+        catch (InterruptedException interruptedexception) {
             interruptedexception.printStackTrace();
         }
 

@@ -1,18 +1,11 @@
 package net.minecraft.server;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
+import net.canarymod.api.gui.GUIControl;
+
+import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import net.canarymod.api.gui.GUIControl;
+import java.awt.*;
 
 public class MinecraftServerGui extends JComponent implements GUIControl {
 
@@ -26,7 +19,8 @@ public class MinecraftServerGui extends JComponent implements GUIControl {
         // CanaryMod Sets LookAndFeel
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             ;
         }
         //
@@ -36,7 +30,7 @@ public class MinecraftServerGui extends JComponent implements GUIControl {
 
         jframe.add(minecraftservergui);
         jframe.pack();
-        jframe.setLocationRelativeTo((Component) null);
+        jframe.setLocationRelativeTo((Component)null);
         jframe.setVisible(true);
         jframe.addWindowListener(new MinecraftServerGuiINNER1(dedicatedserver));
         return minecraftservergui;
@@ -46,7 +40,8 @@ public class MinecraftServerGui extends JComponent implements GUIControl {
         // CanaryMod: Rearrangement
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             ;
         }
         this.b = dedicatedserver;
@@ -56,7 +51,8 @@ public class MinecraftServerGui extends JComponent implements GUIControl {
         try {
             this.add(this.d(), "Center");
             this.add(this.b(), "West");
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
         }
         minecraftservergui = this;
@@ -105,7 +101,7 @@ public class MinecraftServerGui extends JComponent implements GUIControl {
 
     @Override
     public void start() {
-        a((DedicatedServer) MinecraftServer.F());
+        a((DedicatedServer)MinecraftServer.F());
     }
 
     @Override

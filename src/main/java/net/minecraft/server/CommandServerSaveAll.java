@@ -4,7 +4,8 @@ import net.canarymod.api.world.CanaryWorld;
 
 public class CommandServerSaveAll extends CommandBase {
 
-    public CommandServerSaveAll() {}
+    public CommandServerSaveAll() {
+    }
 
     public String c() {
         return "save-all";
@@ -30,13 +31,13 @@ public class CommandServerSaveAll extends CommandBase {
             int i0;
             // CanaryMod: Fix for MultiWorld
             for (net.canarymod.api.world.World w : minecraftserver.worldManager.getAllWorlds()) {
-                WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+                WorldServer worldserver = (WorldServer)((CanaryWorld)w).getHandle();
 
                 if (worldserver != null) {
                     boolean flag0 = worldserver.c;
 
                     worldserver.c = false;
-                    worldserver.a(true, (IProgressUpdate) null);
+                    worldserver.a(true, (IProgressUpdate)null);
                     worldserver.c = flag0;
                 }
             }
@@ -45,7 +46,7 @@ public class CommandServerSaveAll extends CommandBase {
                 icommandsender.a(ChatMessageComponent.e("commands.save.flushStart"));
 
                 for (net.canarymod.api.world.World w : minecraftserver.worldManager.getAllWorlds()) {
-                    WorldServer worldserver = (WorldServer) ((CanaryWorld) w).getHandle();
+                    WorldServer worldserver = (WorldServer)((CanaryWorld)w).getHandle();
 
                     if (worldserver != null) {
                         boolean flag0 = worldserver.c;
@@ -57,8 +58,9 @@ public class CommandServerSaveAll extends CommandBase {
 
                 icommandsender.a(ChatMessageComponent.e("commands.save.flushEnd"));
             }
-        } catch (MinecraftException minecraftexception) {
-            a(icommandsender, "commands.save.failed", new Object[]{ minecraftexception.getMessage() });
+        }
+        catch (MinecraftException minecraftexception) {
+            a(icommandsender, "commands.save.failed", new Object[]{minecraftexception.getMessage()});
             return;
         }
 

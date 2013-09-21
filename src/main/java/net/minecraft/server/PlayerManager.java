@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
+import net.canarymod.api.CanaryPlayerManager;
+
 import java.util.ArrayList;
 import java.util.List;
-import net.canarymod.api.CanaryPlayerManager;
 
 public class PlayerManager {
 
@@ -13,7 +14,7 @@ public class PlayerManager {
     private final List e = new ArrayList();
     private final int f;
     private long g;
-    private final int[][] h = new int[][]{ { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
+    private final int[][] h = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
     // CanaryMod
     private CanaryPlayerManager playerManager;
@@ -22,9 +23,11 @@ public class PlayerManager {
     public PlayerManager(WorldServer worldserver, int i0) {
         if (i0 > 15) {
             throw new IllegalArgumentException("Too big view radius!");
-        } else if (i0 < 3) {
+        }
+        else if (i0 < 3) {
             throw new IllegalArgumentException("Too small view radius!");
-        } else {
+        }
+        else {
             this.f = i0;
             this.a = worldserver;
         }
@@ -44,13 +47,14 @@ public class PlayerManager {
             this.g = i0;
 
             for (i1 = 0; i1 < this.e.size(); ++i1) {
-                playerinstance = (PlayerInstance) this.e.get(i1);
+                playerinstance = (PlayerInstance)this.e.get(i1);
                 playerinstance.b();
                 playerinstance.a();
             }
-        } else {
+        }
+        else {
             for (i1 = 0; i1 < this.d.size(); ++i1) {
-                playerinstance = (PlayerInstance) this.d.get(i1);
+                playerinstance = (PlayerInstance)this.d.get(i1);
                 playerinstance.b();
             }
         }
@@ -66,8 +70,8 @@ public class PlayerManager {
     }
 
     private PlayerInstance a(int i0, int i1, boolean flag0) {
-        long i2 = (long) i0 + 2147483647L | (long) i1 + 2147483647L << 32;
-        PlayerInstance playerinstance = (PlayerInstance) this.c.a(i2);
+        long i2 = (long)i0 + 2147483647L | (long)i1 + 2147483647L << 32;
+        PlayerInstance playerinstance = (PlayerInstance)this.c.a(i2);
 
         if (playerinstance == null && flag0) {
             playerinstance = new PlayerInstance(this, i0, i1);
@@ -89,8 +93,8 @@ public class PlayerManager {
     }
 
     public void a(EntityPlayerMP entityplayermp) {
-        int i0 = (int) entityplayermp.u >> 4;
-        int i1 = (int) entityplayermp.w >> 4;
+        int i0 = (int)entityplayermp.u >> 4;
+        int i1 = (int)entityplayermp.w >> 4;
 
         entityplayermp.d = entityplayermp.u;
         entityplayermp.e = entityplayermp.w;
@@ -109,8 +113,8 @@ public class PlayerManager {
         ArrayList arraylist = new ArrayList(entityplayermp.f);
         int i0 = 0;
         int i1 = this.f;
-        int i2 = (int) entityplayermp.u >> 4;
-        int i3 = (int) entityplayermp.w >> 4;
+        int i2 = (int)entityplayermp.u >> 4;
+        int i3 = (int)entityplayermp.w >> 4;
         int i4 = 0;
         int i5 = 0;
         ChunkCoordIntPair chunkcoordintpair = PlayerInstance.a(this.a(i2, i3, true));
@@ -150,8 +154,8 @@ public class PlayerManager {
     }
 
     public void c(EntityPlayerMP entityplayermp) {
-        int i0 = (int) entityplayermp.d >> 4;
-        int i1 = (int) entityplayermp.e >> 4;
+        int i0 = (int)entityplayermp.d >> 4;
+        int i1 = (int)entityplayermp.e >> 4;
 
         for (int i2 = i0 - this.f; i2 <= i0 + this.f; ++i2) {
             for (int i3 = i1 - this.f; i3 <= i1 + this.f; ++i3) {
@@ -174,15 +178,15 @@ public class PlayerManager {
     }
 
     public void d(EntityPlayerMP entityplayermp) {
-        int i0 = (int) entityplayermp.u >> 4;
-        int i1 = (int) entityplayermp.w >> 4;
+        int i0 = (int)entityplayermp.u >> 4;
+        int i1 = (int)entityplayermp.w >> 4;
         double d0 = entityplayermp.d - entityplayermp.u;
         double d1 = entityplayermp.e - entityplayermp.w;
         double d2 = d0 * d0 + d1 * d1;
 
         if (d2 >= 64.0D) {
-            int i2 = (int) entityplayermp.d >> 4;
-            int i3 = (int) entityplayermp.e >> 4;
+            int i2 = (int)entityplayermp.d >> 4;
+            int i3 = (int)entityplayermp.e >> 4;
             int i4 = this.f;
             int i5 = i0 - i2;
             int i6 = i1 - i3;
@@ -239,7 +243,7 @@ public class PlayerManager {
 
     /**
      * Get the canary player manager
-     * 
+     *
      * @return
      */
     public CanaryPlayerManager getPlayerManager() {

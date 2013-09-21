@@ -1,13 +1,14 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import com.google.common.collect.Maps;
 import net.canarymod.Canary;
 import net.canarymod.api.potion.CanaryPotion;
 import net.canarymod.hook.entity.PotionEffectAppliedHook;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 public class Potion {
 
@@ -60,7 +61,8 @@ public class Potion {
         this.J = flag0;
         if (flag0) {
             this.N = 0.5D;
-        } else {
+        }
+        else {
             this.N = 1.0D;
         }
 
@@ -80,33 +82,39 @@ public class Potion {
 
     public void a(EntityLivingBase entitylivingbase, int i0) {
         if (this.H == l.H) {
-            if (entitylivingbase.aM() < entitylivingbase.aS()) {
+            if (entitylivingbase.aN() < entitylivingbase.aT()) {
                 entitylivingbase.f(1.0F);
             }
-        } else if (this.H == u.H) {
-            if (entitylivingbase.aM() > 1.0F) {
+        }
+        else if (this.H == u.H) {
+            if (entitylivingbase.aN() > 1.0F) {
                 entitylivingbase.a(DamageSource.k, 1.0F);
             }
-        } else if (this.H == v.H) {
+        }
+        else if (this.H == v.H) {
             entitylivingbase.a(DamageSource.l, 1.0F);
-        } else if (this.H == s.H && entitylivingbase instanceof EntityPlayer) {
-            ((EntityPlayer) entitylivingbase).a(0.025F * (float) (i0 + 1));
-        } else if (this.H == y.H && entitylivingbase instanceof EntityPlayer) {
+        }
+        else if (this.H == s.H && entitylivingbase instanceof EntityPlayer) {
+            ((EntityPlayer)entitylivingbase).a(0.025F * (float)(i0 + 1));
+        }
+        else if (this.H == y.H && entitylivingbase instanceof EntityPlayer) {
             if (!entitylivingbase.q.I) {
-                ((EntityPlayer) entitylivingbase).bH().a(i0 + 1, 1.0F);
+                ((EntityPlayer)entitylivingbase).bI().a(i0 + 1, 1.0F);
             }
-        } else if ((this.H != h.H || entitylivingbase.aL()) && (this.H != i.H || !entitylivingbase.aL())) {
-            if (this.H == i.H && !entitylivingbase.aL() || this.H == h.H && entitylivingbase.aL()) {
-                entitylivingbase.a(DamageSource.k, (float) (6 << i0));
+        }
+        else if ((this.H != h.H || entitylivingbase.aM()) && (this.H != i.H || !entitylivingbase.aM())) {
+            if (this.H == i.H && !entitylivingbase.aM() || this.H == h.H && entitylivingbase.aM()) {
+                entitylivingbase.a(DamageSource.k, (float)(6 << i0));
             }
-        } else {
-            entitylivingbase.f((float) Math.max(4 << i0, 0));
+        }
+        else {
+            entitylivingbase.f((float)Math.max(4 << i0, 0));
         }
     }
 
     public void a(EntityLivingBase entitylivingbase, EntityLivingBase entitylivingbase1, int i0, double d0) {
         // CanaryMod: PotionEffectApplied
-        PotionEffectAppliedHook hook = (PotionEffectAppliedHook) new PotionEffectAppliedHook((net.canarymod.api.entity.living.CanaryLivingBase) entitylivingbase1.getCanaryEntity(), Canary.factory().getPotionFactory().newPotionEffect(this.H, 0, i0)).call();
+        PotionEffectAppliedHook hook = (PotionEffectAppliedHook)new PotionEffectAppliedHook((net.canarymod.api.entity.living.CanaryLivingBase)entitylivingbase1.getCanaryEntity(), Canary.factory().getPotionFactory().newPotionEffect(this.H, 0, i0)).call();
         if (hook.getPotionEffect() == null) {
             return;
         }
@@ -114,18 +122,20 @@ public class Potion {
         //
         int i1;
 
-        if ((this.H != h.H || entitylivingbase1.aL()) && (this.H != i.H || !entitylivingbase1.aL())) {
-            if (this.H == i.H && !entitylivingbase1.aL() || this.H == h.H && entitylivingbase1.aL()) {
-                i1 = (int) (d0 * (double) (6 << i0) + 0.5D);
+        if ((this.H != h.H || entitylivingbase1.aM()) && (this.H != i.H || !entitylivingbase1.aM())) {
+            if (this.H == i.H && !entitylivingbase1.aM() || this.H == h.H && entitylivingbase1.aM()) {
+                i1 = (int)(d0 * (double)(6 << i0) + 0.5D);
                 if (entitylivingbase == null) {
-                    entitylivingbase1.a(DamageSource.k, (float) i1);
-                } else {
-                    entitylivingbase1.a(DamageSource.b(entitylivingbase1, entitylivingbase), (float) i1);
+                    entitylivingbase1.a(DamageSource.k, (float)i1);
+                }
+                else {
+                    entitylivingbase1.a(DamageSource.b(entitylivingbase1, entitylivingbase), (float)i1);
                 }
             }
-        } else {
-            i1 = (int) (d0 * (double) (4 << i0) + 0.5D);
-            entitylivingbase1.f((float) i1);
+        }
+        else {
+            i1 = (int)(d0 * (double)(4 << i0) + 0.5D);
+            entitylivingbase1.f((float)i1);
         }
     }
 
@@ -139,13 +149,16 @@ public class Potion {
         if (this.H == l.H) {
             i2 = 50 >> i1;
             return i2 > 0 ? i0 % i2 == 0 : true;
-        } else if (this.H == u.H) {
+        }
+        else if (this.H == u.H) {
             i2 = 25 >> i1;
             return i2 > 0 ? i0 % i2 == 0 : true;
-        } else if (this.H == v.H) {
+        }
+        else if (this.H == v.H) {
             i2 = 40 >> i1;
             return i2 > 0 ? i0 % i2 == 0 : true;
-        } else {
+        }
+        else {
             return this.H == s.H;
         }
     }
@@ -187,11 +200,11 @@ public class Potion {
         Iterator iterator = this.I.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Entry entry = (Entry) iterator.next();
-            AttributeInstance attributeinstance = baseattributemap.a((Attribute) entry.getKey());
+            Entry entry = (Entry)iterator.next();
+            AttributeInstance attributeinstance = baseattributemap.a((Attribute)entry.getKey());
 
             if (attributeinstance != null) {
-                attributeinstance.b((AttributeModifier) entry.getValue());
+                attributeinstance.b((AttributeModifier)entry.getValue());
             }
         }
     }
@@ -200,11 +213,11 @@ public class Potion {
         Iterator iterator = this.I.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Entry entry = (Entry) iterator.next();
-            AttributeInstance attributeinstance = baseattributemap.a((Attribute) entry.getKey());
+            Entry entry = (Entry)iterator.next();
+            AttributeInstance attributeinstance = baseattributemap.a((Attribute)entry.getKey());
 
             if (attributeinstance != null) {
-                AttributeModifier attributemodifier = (AttributeModifier) entry.getValue();
+                AttributeModifier attributemodifier = (AttributeModifier)entry.getValue();
 
                 attributeinstance.b(attributemodifier);
                 attributeinstance.a(new AttributeModifier(attributemodifier.a(), this.a() + " " + i0, this.a(i0, attributemodifier), attributemodifier.c()));
@@ -213,7 +226,7 @@ public class Potion {
     }
 
     public double a(int i0, AttributeModifier attributemodifier) {
-        return attributemodifier.d() * (double) (i0 + 1);
+        return attributemodifier.d() * (double)(i0 + 1);
     }
 
     // CanaryMod

@@ -30,7 +30,8 @@ public class InventoryMerchant implements IInventory {
                 itemstack = this.b[i0];
                 this.b[i0] = null;
                 return itemstack;
-            } else if (this.b[i0].b <= i1) {
+            }
+            else if (this.b[i0].b <= i1) {
                 itemstack = this.b[i0];
                 this.b[i0] = null;
                 if (this.d(i0)) {
@@ -38,7 +39,8 @@ public class InventoryMerchant implements IInventory {
                 }
 
                 return itemstack;
-            } else {
+            }
+            else {
                 itemstack = this.b[i0].a(i1);
                 if (this.b[i0].b == 0) {
                     this.b[i0] = null;
@@ -50,7 +52,8 @@ public class InventoryMerchant implements IInventory {
 
                 return itemstack;
             }
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -65,7 +68,8 @@ public class InventoryMerchant implements IInventory {
 
             this.b[i0] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -97,9 +101,11 @@ public class InventoryMerchant implements IInventory {
         return this.a.m_() == entityplayer;
     }
 
-    public void k_() {}
+    public void k_() {
+    }
 
-    public void g() {}
+    public void g() {
+    }
 
     public boolean b(int i0, ItemStack itemstack) {
         return true;
@@ -120,8 +126,9 @@ public class InventoryMerchant implements IInventory {
         }
 
         if (itemstack == null) {
-            this.a(2, (ItemStack) null);
-        } else {
+            this.a(2, (ItemStack)null);
+        }
+        else {
             MerchantRecipeList merchantrecipelist = this.a.b(this.c);
 
             if (merchantrecipelist != null) {
@@ -130,16 +137,19 @@ public class InventoryMerchant implements IInventory {
                 if (merchantrecipe != null && !merchantrecipe.g()) {
                     this.d = merchantrecipe;
                     this.a(2, merchantrecipe.d().m());
-                } else if (itemstack1 != null) {
+                }
+                else if (itemstack1 != null) {
                     merchantrecipe = merchantrecipelist.a(itemstack1, itemstack, this.e);
                     if (merchantrecipe != null && !merchantrecipe.g()) {
                         this.d = merchantrecipe;
                         this.a(2, merchantrecipe.d().m());
-                    } else {
-                        this.a(2, (ItemStack) null);
                     }
-                } else {
-                    this.a(2, (ItemStack) null);
+                    else {
+                        this.a(2, (ItemStack)null);
+                    }
+                }
+                else {
+                    this.a(2, (ItemStack)null);
                 }
             }
         }

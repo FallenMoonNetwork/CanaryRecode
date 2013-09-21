@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.IgnitionHook;
 import net.canarymod.hook.world.IgnitionHook.IgnitionCause;
+
+import java.util.Random;
 
 public class BlockStationary extends BlockFluid {
 
@@ -38,10 +39,10 @@ public class BlockStationary extends BlockFluid {
             int i3 = random.nextInt(3);
 
             // CanaryMod: Ignition
-            CanaryBlock ignited = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
+            CanaryBlock ignited = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
 
-            ignited.setStatus((byte) 1); // Lava Status 1
-            IgnitionHook hook = (IgnitionHook) new IgnitionHook(ignited, null, null, IgnitionCause.LAVA).call();
+            ignited.setStatus((byte)1); // Lava Status 1
+            IgnitionHook hook = (IgnitionHook)new IgnitionHook(ignited, null, null, IgnitionCause.LAVA).call();
             if (hook.isCanceled()) {
                 return;
             }
@@ -65,7 +66,8 @@ public class BlockStationary extends BlockFluid {
                         world.c(i0, i1, i2, Block.aw.cF);
                         return;
                     }
-                } else if (Block.s[i5].cU.c()) {
+                }
+                else if (Block.s[i5].cU.c()) {
                     return;
                 }
             }

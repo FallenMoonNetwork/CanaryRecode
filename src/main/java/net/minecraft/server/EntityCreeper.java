@@ -23,22 +23,22 @@ public class EntityCreeper extends EntityMob {
         this.entity = new CanaryCreeper(this); // CanaryMod: Wrap Entity
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.d).a(0.25D);
     }
 
-    public boolean be() {
+    public boolean bf() {
         return true;
     }
 
-    public int ar() {
-        return this.m() == null ? 3 : 3 + (int) (this.aM() - 1.0F);
+    public int as() {
+        return this.m() == null ? 3 : 3 + (int)(this.aN() - 1.0F);
     }
 
     protected void b(float f0) {
         super.b(f0);
-        this.bq = (int) ((float) this.bq + f0 * 1.5F);
+        this.bq = (int)((float)this.bq + f0 * 1.5F);
         if (this.bq > this.br - 5) {
             this.bq = this.br - 5;
         }
@@ -46,8 +46,8 @@ public class EntityCreeper extends EntityMob {
 
     protected void a() {
         super.a();
-        this.ah.a(16, Byte.valueOf((byte) -1));
-        this.ah.a(17, Byte.valueOf((byte) 0));
+        this.ah.a(16, Byte.valueOf((byte)-1));
+        this.ah.a(17, Byte.valueOf((byte)0));
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -56,13 +56,13 @@ public class EntityCreeper extends EntityMob {
             nbttagcompound.a("powered", true);
         }
 
-        nbttagcompound.a("Fuse", (short) this.br);
-        nbttagcompound.a("ExplosionRadius", (byte) this.bs);
+        nbttagcompound.a("Fuse", (short)this.br);
+        nbttagcompound.a("ExplosionRadius", (byte)this.bs);
     }
 
     public void a(NBTTagCompound nbttagcompound) {
         super.a(nbttagcompound);
-        this.ah.b(17, Byte.valueOf((byte) (nbttagcompound.n("powered") ? 1 : 0)));
+        this.ah.b(17, Byte.valueOf((byte)(nbttagcompound.n("powered") ? 1 : 0)));
         if (nbttagcompound.b("Fuse")) {
             this.br = nbttagcompound.d("Fuse");
         }
@@ -73,7 +73,7 @@ public class EntityCreeper extends EntityMob {
     }
 
     public void l_() {
-        if (this.S()) {
+        if (this.T()) {
             this.bp = this.bq;
             int i0 = this.bV();
 
@@ -92,12 +92,13 @@ public class EntityCreeper extends EntityMob {
                     boolean flag0 = this.q.O().b("mobGriefing");
 
                     if (this.bT()) {
-                        this.q.a(this, this.u, this.v, this.w, (float) (this.bs * 2), flag0);
-                    } else {
-                        this.q.a(this, this.u, this.v, this.w, (float) this.bs, flag0);
+                        this.q.a(this, this.u, this.v, this.w, (float)(this.bs * 2), flag0);
+                    }
+                    else {
+                        this.q.a(this, this.u, this.v, this.w, (float)this.bs, flag0);
                     }
 
-                    this.w();
+                    this.x();
                 }
             }
         }
@@ -105,11 +106,11 @@ public class EntityCreeper extends EntityMob {
         super.l_();
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.creeper.say";
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.creeper.death";
     }
 
@@ -139,16 +140,16 @@ public class EntityCreeper extends EntityMob {
     }
 
     public void a(int i0) {
-        this.ah.b(16, Byte.valueOf((byte) i0));
+        this.ah.b(16, Byte.valueOf((byte)i0));
     }
 
     public void a(EntityLightningBolt entitylightningbolt) {
         super.a(entitylightningbolt);
-        this.ah.b(17, Byte.valueOf((byte) 1));
+        this.ah.b(17, Byte.valueOf((byte)1));
     }
 
     // CanaryMod: Set Charge to Creeper
     public void setCharged(boolean charged) {
-        this.ah.b(17, Byte.valueOf(charged ? (byte) 1 : (byte) 0));
+        this.ah.b(17, Byte.valueOf(charged ? (byte)1 : (byte)0));
     }
 }

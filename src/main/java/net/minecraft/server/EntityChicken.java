@@ -26,12 +26,12 @@ public class EntityChicken extends EntityAnimal {
         this.entity = new CanaryChicken(this); // CanaryMod: Wrap Entity
     }
 
-    public boolean be() {
+    public boolean bf() {
         return true;
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(4.0D);
         this.a(SharedMonsterAttributes.d).a(0.25D);
     }
@@ -40,7 +40,7 @@ public class EntityChicken extends EntityAnimal {
         super.c();
         this.bs = this.bp;
         this.br = this.bq;
-        this.bq = (float) ((double) this.bq + (double) (this.F ? -1 : 4) * 0.3D);
+        this.bq = (float)((double)this.bq + (double)(this.F ? -1 : 4) * 0.3D);
         if (this.bq < 0.0F) {
             this.bq = 0.0F;
         }
@@ -53,7 +53,7 @@ public class EntityChicken extends EntityAnimal {
             this.bt = 1.0F;
         }
 
-        this.bt = (float) ((double) this.bt * 0.9D);
+        this.bt = (float)((double)this.bt * 0.9D);
         if (!this.F && this.y < 0.0D) {
             this.y *= 0.6D;
         }
@@ -66,17 +66,18 @@ public class EntityChicken extends EntityAnimal {
         }
     }
 
-    protected void b(float f0) {}
+    protected void b(float f0) {
+    }
 
     protected String r() {
         return "mob.chicken.say";
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.chicken.hurt";
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.chicken.hurt";
     }
 
@@ -95,9 +96,10 @@ public class EntityChicken extends EntityAnimal {
             this.b(Item.N.cv, 1);
         }
 
-        if (this.ae()) {
+        if (this.af()) {
             this.b(Item.bn.cv, 1);
-        } else {
+        }
+        else {
             this.b(Item.bm.cv, 1);
         }
     }

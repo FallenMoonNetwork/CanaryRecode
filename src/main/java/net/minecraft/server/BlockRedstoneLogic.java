@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.hook.world.RedstoneChangeHook;
+
+import java.util.Random;
 
 public abstract class BlockRedstoneLogic extends BlockDirectional {
 
@@ -28,20 +29,21 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     public void a(World world, int i0, int i1, int i2, Random random) {
         int i3 = world.h(i0, i1, i2);
 
-        if (!this.e((IBlockAccess) world, i0, i1, i2, i3)) {
+        if (!this.e((IBlockAccess)world, i0, i1, i2, i3)) {
             boolean flag0 = this.d(world, i0, i1, i2, i3);
 
             if (this.a && !flag0) {
                 // CanaryMod: RedstoneChange; turning off
-                RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
+                RedstoneChangeHook hook = (RedstoneChangeHook)new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 15, 0).call();
                 if (hook.isCanceled()) {
                     return;
                 }
                 //
                 world.f(i0, i1, i2, this.j().cF, i3, 2);
-            } else if (!this.a) {
+            }
+            else if (!this.a) {
                 // CanaryMod: RedstoneChange; turning on
-                RedstoneChangeHook hook = (RedstoneChangeHook) new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 0, 15).call();
+                RedstoneChangeHook hook = (RedstoneChangeHook)new RedstoneChangeHook(world.getCanaryWorld().getBlockAt(i0, i1, i2), 0, 15).call();
                 if (hook.isCanceled()) {
                     return;
                 }
@@ -71,7 +73,8 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
 
         if (!this.c(i4)) {
             return 0;
-        } else {
+        }
+        else {
             int i5 = j(i4);
 
             return i5 == 0 && i3 == 3 ? this.d(iblockaccess, i0, i1, i2, i4) : (i5 == 1 && i3 == 4 ? this.d(iblockaccess, i0, i1, i2, i4) : (i5 == 2 && i3 == 2 ? this.d(iblockaccess, i0, i1, i2, i4) : (i5 == 3 && i3 == 5 ? this.d(iblockaccess, i0, i1, i2, i4) : 0)));
@@ -88,7 +91,8 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
             world.f(i0, i1, i2 - 1, this.cF);
             world.f(i0, i1 - 1, i2, this.cF);
             world.f(i0, i1 + 1, i2, this.cF);
-        } else {
+        }
+        else {
             this.f(world, i0, i1, i2, i3);
         }
     }
@@ -96,7 +100,7 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     protected void f(World world, int i0, int i1, int i2, int i3) {
         int i4 = world.h(i0, i1, i2);
 
-        if (!this.e((IBlockAccess) world, i0, i1, i2, i4)) {
+        if (!this.e((IBlockAccess)world, i0, i1, i2, i4)) {
             boolean flag0 = this.d(world, i0, i1, i2, i4);
 
             if ((this.a && !flag0 || !this.a && flag0) && !world.a(i0, i1, i2, this.cF)) {
@@ -104,7 +108,8 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
 
                 if (this.h(world, i0, i1, i2, i4)) {
                     b0 = -3;
-                } else if (this.a) {
+                }
+                else if (this.a) {
                     b0 = -2;
                 }
 
@@ -158,7 +163,7 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     }
 
     public void a(World world, int i0, int i1, int i2, EntityLivingBase entitylivingbase, ItemStack itemstack) {
-        int i3 = ((MathHelper.c((double) (entitylivingbase.A * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
+        int i3 = ((MathHelper.c((double)(entitylivingbase.A * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
 
         world.b(i0, i1, i2, i3, 3);
         boolean flag0 = this.d(world, i0, i1, i2, i3);
@@ -239,7 +244,8 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
             int i6 = j(i5);
 
             return i6 != i4;
-        } else {
+        }
+        else {
             return false;
         }
     }

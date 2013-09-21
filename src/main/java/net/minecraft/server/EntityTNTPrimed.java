@@ -19,11 +19,11 @@ public class EntityTNTPrimed extends Entity {
     public EntityTNTPrimed(World world, double d0, double d1, double d2, EntityLivingBase entitylivingbase) {
         this(world);
         this.b(d0, d1, d2);
-        float f0 = (float) (Math.random() * 3.1415927410125732D * 2.0D);
+        float f0 = (float)(Math.random() * 3.1415927410125732D * 2.0D);
 
-        this.x = (double) (-((float) Math.sin((double) f0)) * 0.02F);
+        this.x = (double)(-((float)Math.sin((double)f0)) * 0.02F);
         this.y = 0.20000000298023224D;
-        this.z = (double) (-((float) Math.cos((double) f0)) * 0.02F);
+        this.z = (double)(-((float)Math.cos((double)f0)) * 0.02F);
         this.a = 80;
         this.r = d0;
         this.s = d1;
@@ -31,13 +31,14 @@ public class EntityTNTPrimed extends Entity {
         this.b = entitylivingbase;
     }
 
-    protected void a() {}
+    protected void a() {
+    }
 
     protected boolean e_() {
         return false;
     }
 
-    public boolean K() {
+    public boolean L() {
         return !this.M;
     }
 
@@ -57,11 +58,12 @@ public class EntityTNTPrimed extends Entity {
         }
 
         if (this.a-- <= 0) {
-            this.w();
+            this.x();
             if (!this.q.I) {
                 this.d();
             }
-        } else {
+        }
+        else {
             this.q.a("smoke", this.u, this.v + 0.5D, this.w, 0.0D, 0.0D, 0.0D);
         }
     }
@@ -69,11 +71,11 @@ public class EntityTNTPrimed extends Entity {
     private void d() {
         // float f0 = 4.0F;
 
-        this.q.a(this, this.u, this.v, this.w, ((CanaryTNTPrimed) entity).getPower(), true); // CanaryMod: get power level
+        this.q.a(this, this.u, this.v, this.w, ((CanaryTNTPrimed)entity).getPower(), true); // CanaryMod: get power level
     }
 
     protected void b(NBTTagCompound nbttagcompound) {
-        nbttagcompound.a("Fuse", (byte) this.a);
+        nbttagcompound.a("Fuse", (byte)this.a);
     }
 
     protected void a(NBTTagCompound nbttagcompound) {

@@ -1,13 +1,13 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.api.entity.living.animal.CanarySheep;
+
+import java.util.Random;
 
 public class EntitySheep extends EntityAnimal {
 
     private final InventoryCrafting bq = new InventoryCrafting(new ContainerSheep(this), 2, 1);
-    public static final float[][] bp = new float[][]{ { 1.0F, 1.0F, 1.0F }, { 0.85F, 0.5F, 0.2F }, { 0.7F, 0.3F, 0.85F }, { 0.4F, 0.6F, 0.85F }, { 0.9F, 0.9F, 0.2F }, { 0.5F, 0.8F, 0.1F }, { 0.95F, 0.5F, 0.65F }, { 0.3F, 0.3F, 0.3F }, { 0.6F, 0.6F, 0.6F }, { 0.3F, 0.5F, 0.6F }, { 0.5F, 0.25F, 0.7F }, { 0.2F, 0.3F, 0.7F }, { 0.4F, 0.3F, 0.2F },
-            { 0.4F, 0.5F, 0.2F }, { 0.6F, 0.2F, 0.2F }, { 0.1F, 0.1F, 0.1F } };
+    public static final float[][] bp = new float[][]{{1.0F, 1.0F, 1.0F}, {0.85F, 0.5F, 0.2F}, {0.7F, 0.3F, 0.85F}, {0.4F, 0.6F, 0.85F}, {0.9F, 0.9F, 0.2F}, {0.5F, 0.8F, 0.1F}, {0.95F, 0.5F, 0.65F}, {0.3F, 0.3F, 0.3F}, {0.6F, 0.6F, 0.6F}, {0.3F, 0.5F, 0.6F}, {0.5F, 0.25F, 0.7F}, {0.2F, 0.3F, 0.7F}, {0.4F, 0.3F, 0.2F}, {0.4F, 0.5F, 0.2F}, {0.6F, 0.2F, 0.2F}, {0.1F, 0.1F, 0.1F}};
     private int br;
     private EntityAIEatGrass bs = new EntityAIEatGrass(this);
 
@@ -29,13 +29,13 @@ public class EntitySheep extends EntityAnimal {
         this.entity = new CanarySheep(this); // CanaryMod: Wrap Entity
     }
 
-    protected boolean be() {
+    protected boolean bf() {
         return true;
     }
 
-    protected void bh() {
+    protected void bi() {
         this.br = this.bs.f();
-        super.bh();
+        super.bi();
     }
 
     public void c() {
@@ -46,15 +46,15 @@ public class EntitySheep extends EntityAnimal {
         super.c();
     }
 
-    protected void ay() {
-        super.ay();
+    protected void az() {
+        super.az();
         this.a(SharedMonsterAttributes.a).a(8.0D);
         this.a(SharedMonsterAttributes.d).a(0.23000000417232513D);
     }
 
     protected void a() {
         super.a();
-        this.ah.a(16, new Byte((byte) 0));
+        this.ah.a(16, new Byte((byte)0));
     }
 
     protected void b(boolean flag0, int i0) {
@@ -78,13 +78,13 @@ public class EntitySheep extends EntityAnimal {
                 for (int i1 = 0; i1 < i0; ++i1) {
                     EntityItem entityitem = this.a(new ItemStack(Block.ag.cF, 1, this.bT()), 1.0F);
 
-                    entityitem.y += (double) (this.ab.nextFloat() * 0.05F);
-                    entityitem.x += (double) ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.1F);
-                    entityitem.z += (double) ((this.ab.nextFloat() - this.ab.nextFloat()) * 0.1F);
+                    entityitem.y += (double)(this.ab.nextFloat() * 0.05F);
+                    entityitem.x += (double)((this.ab.nextFloat() - this.ab.nextFloat()) * 0.1F);
+                    entityitem.z += (double)((this.ab.nextFloat() - this.ab.nextFloat()) * 0.1F);
                 }
             }
 
-            itemstack.a(1, (EntityLivingBase) entityplayer);
+            itemstack.a(1, (EntityLivingBase)entityplayer);
             this.a("mob.sheep.shear", 1.0F, 1.0F);
         }
 
@@ -94,7 +94,7 @@ public class EntitySheep extends EntityAnimal {
     public void b(NBTTagCompound nbttagcompound) {
         super.b(nbttagcompound);
         nbttagcompound.a("Sheared", this.bU());
-        nbttagcompound.a("Color", (byte) this.bT());
+        nbttagcompound.a("Color", (byte)this.bT());
     }
 
     public void a(NBTTagCompound nbttagcompound) {
@@ -107,11 +107,11 @@ public class EntitySheep extends EntityAnimal {
         return "mob.sheep.say";
     }
 
-    protected String aN() {
+    protected String aO() {
         return "mob.sheep.say";
     }
 
-    protected String aO() {
+    protected String aP() {
         return "mob.sheep.say";
     }
 
@@ -126,7 +126,7 @@ public class EntitySheep extends EntityAnimal {
     public void p(int i0) {
         byte b0 = this.ah.a(16);
 
-        this.ah.b(16, Byte.valueOf((byte) (b0 & 240 | i0 & 15)));
+        this.ah.b(16, Byte.valueOf((byte)(b0 & 240 | i0 & 15)));
     }
 
     public boolean bU() {
@@ -137,9 +137,10 @@ public class EntitySheep extends EntityAnimal {
         byte b0 = this.ah.a(16);
 
         if (flag0) {
-            this.ah.b(16, Byte.valueOf((byte) (b0 | 16)));
-        } else {
-            this.ah.b(16, Byte.valueOf((byte) (b0 & -17)));
+            this.ah.b(16, Byte.valueOf((byte)(b0 | 16)));
+        }
+        else {
+            this.ah.b(16, Byte.valueOf((byte)(b0 & -17)));
         }
     }
 
@@ -150,7 +151,7 @@ public class EntitySheep extends EntityAnimal {
     }
 
     public EntitySheep b(EntityAgeable entityageable) {
-        EntitySheep entitysheep = (EntitySheep) entityageable;
+        EntitySheep entitysheep = (EntitySheep)entityageable;
         EntitySheep entitysheep1 = new EntitySheep(this.q);
         int i0 = this.a(this, entitysheep);
 
@@ -177,12 +178,13 @@ public class EntitySheep extends EntityAnimal {
 
         this.bq.a(0).b(i0);
         this.bq.a(1).b(i1);
-        ItemStack itemstack = CraftingManager.a().a(this.bq, ((EntitySheep) entityanimal).q);
+        ItemStack itemstack = CraftingManager.a().a(this.bq, ((EntitySheep)entityanimal).q);
         int i2;
 
         if (itemstack != null && itemstack.b().cv == Item.aY.cv) {
             i2 = itemstack.k();
-        } else {
+        }
+        else {
             i2 = this.q.s.nextBoolean() ? i0 : i1;
         }
 
@@ -190,7 +192,7 @@ public class EntitySheep extends EntityAnimal {
     }
 
     private int b(EntityAnimal entityanimal) {
-        return 15 - ((EntitySheep) entityanimal).bT();
+        return 15 - ((EntitySheep)entityanimal).bT();
     }
 
     public EntityAgeable a(EntityAgeable entityageable) {

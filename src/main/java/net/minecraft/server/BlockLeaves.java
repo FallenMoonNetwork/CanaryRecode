@@ -1,13 +1,14 @@
 package net.minecraft.server;
 
-import java.util.Random;
 import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.hook.world.LeafDecayHook;
 
+import java.util.Random;
+
 public class BlockLeaves extends BlockLeavesBase {
 
-    public static final String[] a = new String[]{ "oak", "spruce", "birch", "jungle" };
-    public static final String[][] b = new String[][]{ { "leaves_oak", "leaves_spruce", "leaves_birch", "leaves_jungle" }, { "leaves_oak_opaque", "leaves_spruce_opaque", "leaves_birch_opaque", "leaves_jungle_opaque" } };
+    public static final String[] a = new String[]{"oak", "spruce", "birch", "jungle"};
+    public static final String[][] b = new String[][]{{"leaves_oak", "leaves_spruce", "leaves_birch", "leaves_jungle"}, {"leaves_oak_opaque", "leaves_spruce_opaque", "leaves_birch_opaque", "leaves_jungle_opaque"}};
     private Icon[][] cX = new Icon[2][];
     int[] c;
 
@@ -66,9 +67,11 @@ public class BlockLeaves extends BlockLeavesBase {
                                 i10 = world.a(i0 + i7, i1 + i8, i2 + i9);
                                 if (i10 == Block.O.cF) {
                                     this.c[(i7 + i6) * i5 + (i8 + i6) * b1 + i9 + i6] = 0;
-                                } else if (i10 == Block.P.cF) {
+                                }
+                                else if (i10 == Block.P.cF) {
                                     this.c[(i7 + i6) * i5 + (i8 + i6) * b1 + i9 + i6] = -2;
-                                } else {
+                                }
+                                else {
                                     this.c[(i7 + i6) * i5 + (i8 + i6) * b1 + i9 + i6] = -1;
                                 }
                             }
@@ -113,7 +116,8 @@ public class BlockLeaves extends BlockLeavesBase {
                 i7 = this.c[i6 * i5 + i6 * b1 + i6];
                 if (i7 >= 0) {
                     world.b(i0, i1, i2, i3 & -9, 4);
-                } else {
+                }
+                else {
                     this.k(world, i0, i1, i2);
                 }
             }
@@ -122,8 +126,8 @@ public class BlockLeaves extends BlockLeavesBase {
 
     private void k(World world, int i0, int i1, int i2) {
         // CanaryMod: LeafDecay
-        CanaryBlock leaves = (CanaryBlock) world.getCanaryWorld().getBlockAt(i0, i1, i2);
-        LeafDecayHook hook = (LeafDecayHook) new LeafDecayHook(leaves).call();
+        CanaryBlock leaves = (CanaryBlock)world.getCanaryWorld().getBlockAt(i0, i1, i2);
+        LeafDecayHook hook = (LeafDecayHook)new LeafDecayHook(leaves).call();
         if (!hook.isCanceled()) {
             this.c(world, i0, i1, i2, world.h(i0, i1, i2), 0);
             world.i(i0, i1, i2);
@@ -175,10 +179,11 @@ public class BlockLeaves extends BlockLeavesBase {
     }
 
     public void a(World world, EntityPlayer entityplayer, int i0, int i1, int i2, int i3) {
-        if (!world.I && entityplayer.bx() != null && entityplayer.bx().d == Item.bg.cv) {
+        if (!world.I && entityplayer.by() != null && entityplayer.by().d == Item.bg.cv) {
             entityplayer.a(StatList.C[this.cF], 1);
             this.b(world, i0, i1, i2, new ItemStack(Block.P.cF, 1, i3 & 3));
-        } else {
+        }
+        else {
             super.a(world, entityplayer, i0, i1, i2, i3);
         }
     }

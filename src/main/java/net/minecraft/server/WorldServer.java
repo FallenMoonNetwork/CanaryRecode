@@ -1,5 +1,11 @@
 package net.minecraft.server;
 
+import net.canarymod.api.CanaryEntityTracker;
+import net.canarymod.api.CanaryPlayerManager;
+import net.canarymod.config.Configuration;
+import net.canarymod.hook.world.TimeChangeHook;
+import net.canarymod.hook.world.WeatherChangeHook;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -8,12 +14,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
-
-import net.canarymod.api.CanaryEntityTracker;
-import net.canarymod.api.CanaryPlayerManager;
-import net.canarymod.config.Configuration;
-import net.canarymod.hook.world.TimeChangeHook;
-import net.canarymod.hook.world.WeatherChangeHook;
 
 public class WorldServer extends World {
 
@@ -28,10 +28,10 @@ public class WorldServer extends World {
     private int O = 0;
     private final Teleporter P;
     private final SpawnerAnimals Q = new SpawnerAnimals();
-    private ServerBlockEventList[] R = new ServerBlockEventList[]{ new ServerBlockEventList((ServerBlockEvent) null), new ServerBlockEventList((ServerBlockEvent) null) };
+    private ServerBlockEventList[] R = new ServerBlockEventList[]{new ServerBlockEventList((ServerBlockEvent)null), new ServerBlockEventList((ServerBlockEvent)null)};
     private int S;
-    private static final WeightedRandomChestContent[] T = new WeightedRandomChestContent[]{ new WeightedRandomChestContent(Item.F.cv, 0, 1, 3, 10), new WeightedRandomChestContent(Block.C.cF, 0, 1, 3, 10), new WeightedRandomChestContent(Block.O.cF, 0, 1, 3, 10), new WeightedRandomChestContent(Item.A.cv, 0, 1, 1, 3),
-            new WeightedRandomChestContent(Item.w.cv, 0, 1, 1, 5), new WeightedRandomChestContent(Item.z.cv, 0, 1, 1, 3), new WeightedRandomChestContent(Item.v.cv, 0, 1, 1, 5), new WeightedRandomChestContent(Item.l.cv, 0, 2, 3, 5), new WeightedRandomChestContent(Item.W.cv, 0, 2, 3, 3) };
+    private static final WeightedRandomChestContent[] T = new WeightedRandomChestContent[]{new WeightedRandomChestContent(Item.F.cv, 0, 1, 3, 10), new WeightedRandomChestContent(Block.C.cF, 0, 1, 3, 10), new WeightedRandomChestContent(Block.O.cF, 0, 1, 3, 10), new WeightedRandomChestContent(Item.A.cv, 0, 1, 1, 3),
+            new WeightedRandomChestContent(Item.w.cv, 0, 1, 1, 5), new WeightedRandomChestContent(Item.z.cv, 0, 1, 1, 3), new WeightedRandomChestContent(Item.v.cv, 0, 1, 1, 5), new WeightedRandomChestContent(Item.l.cv, 0, 2, 3, 5), new WeightedRandomChestContent(Item.W.cv, 0, 2, 3, 3)};
     private List U = new ArrayList();
     private IntHashMap V;
 
@@ -56,15 +56,15 @@ public class WorldServer extends World {
 
         this.P = new Teleporter(this);
         this.D = new ServerScoreboard(minecraftserver);
-        ScoreboardSaveData scoreboardsavedata = (ScoreboardSaveData) this.z.a(ScoreboardSaveData.class, "scoreboard");
+        ScoreboardSaveData scoreboardsavedata = (ScoreboardSaveData)this.z.a(ScoreboardSaveData.class, "scoreboard");
 
         if (scoreboardsavedata == null) {
             scoreboardsavedata = new ScoreboardSaveData();
-            this.z.a("scoreboard", (WorldSavedData) scoreboardsavedata);
+            this.z.a("scoreboard", (WorldSavedData)scoreboardsavedata);
         }
 
         scoreboardsavedata.a(this.D);
-        ((ServerScoreboard) this.D).a(scoreboardsavedata);
+        ((ServerScoreboard)this.D).a(scoreboardsavedata);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class WorldServer extends World {
                 long i0 = this.x.g() + 24000L;
 
                 // CanaryMod: TimeChangeHook
-                TimeChangeHook hook = (TimeChangeHook) new TimeChangeHook(getCanaryWorld(), i0 - i0 % 24000L).call();
+                TimeChangeHook hook = (TimeChangeHook)new TimeChangeHook(getCanaryWorld(), i0 - i0 % 24000L).call();
                 if (!hook.isCanceled()) {
                     this.x.c(i0 - i0 % 24000L);
                 }
@@ -105,7 +105,7 @@ public class WorldServer extends World {
         this.x.b(this.x.f() + 1L);
         if (this.O().b("doDaylightCycle")) {
             // CanaryMod: TimeChangeHook
-            TimeChangeHook hook = (TimeChangeHook) new TimeChangeHook(getCanaryWorld(), this.x.g() + 1L).call();
+            TimeChangeHook hook = (TimeChangeHook)new TimeChangeHook(getCanaryWorld(), this.x.g() + 1L).call();
             if (!hook.isCanceled()) {
                 this.x.c(this.x.g() + 1L);
             }
@@ -129,7 +129,7 @@ public class WorldServer extends World {
     public SpawnListEntry a(EnumCreatureType enumcreaturetype, int i0, int i1, int i2) {
         List list = this.L().a(enumcreaturetype, i0, i1, i2);
 
-        return list != null && !list.isEmpty() ? (SpawnListEntry) WeightedRandom.a(this.s, (Collection) list) : null;
+        return list != null && !list.isEmpty() ? (SpawnListEntry)WeightedRandom.a(this.s, (Collection)list) : null;
     }
 
     public void c() {
@@ -137,9 +137,9 @@ public class WorldServer extends World {
         Iterator iterator = this.h.iterator();
 
         while (iterator.hasNext()) {
-            EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+            EntityPlayer entityplayer = (EntityPlayer)iterator.next();
 
-            if (!entityplayer.bg()) {
+            if (!entityplayer.bh()) {
                 this.N = false;
                 break;
             }
@@ -151,9 +151,9 @@ public class WorldServer extends World {
         Iterator iterator = this.h.iterator();
 
         while (iterator.hasNext()) {
-            EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+            EntityPlayer entityplayer = (EntityPlayer)iterator.next();
 
-            if (entityplayer.bg()) {
+            if (entityplayer.bh()) {
                 entityplayer.a(false, false, true);
             }
         }
@@ -163,12 +163,12 @@ public class WorldServer extends World {
 
     private void Z() {
         // CanaryMod: WeatherChange
-        WeatherChangeHook hook = (WeatherChangeHook) new WeatherChangeHook(getCanaryWorld(), false, false).call();
+        WeatherChangeHook hook = (WeatherChangeHook)new WeatherChangeHook(getCanaryWorld(), false, false).call();
         if (!hook.isCanceled()) {
             this.x.g(0);
             this.x.b(false);
         }
-        hook = (WeatherChangeHook) new WeatherChangeHook(getCanaryWorld(), false, true).call();
+        hook = (WeatherChangeHook)new WeatherChangeHook(getCanaryWorld(), false, true).call();
         if (!hook.isCanceled()) {
             this.x.f(0);
             this.x.a(false);
@@ -187,12 +187,12 @@ public class WorldServer extends World {
                     return true;
                 }
 
-                entityplayer = (EntityPlayer) iterator.next();
-            }
-            while (entityplayer.bC());
+                entityplayer = (EntityPlayer)iterator.next();
+            } while (entityplayer.bD());
 
             return false;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -204,7 +204,7 @@ public class WorldServer extends World {
         Iterator iterator = this.G.iterator();
 
         while (iterator.hasNext()) {
-            ChunkCoordIntPair chunkcoordintpair = (ChunkCoordIntPair) iterator.next();
+            ChunkCoordIntPair chunkcoordintpair = (ChunkCoordIntPair)iterator.next();
             int i2 = chunkcoordintpair.a * 16;
             int i3 = chunkcoordintpair.b * 16;
 
@@ -227,7 +227,7 @@ public class WorldServer extends World {
                 i6 = i3 + (i4 >> 8 & 15);
                 i7 = this.h(i5, i6);
                 if (this.F(i5, i7, i6)) {
-                    this.c(new EntityLightningBolt(this, (double) i5, (double) i7, (double) i6));
+                    this.c(new EntityLightningBolt(this, (double)i5, (double)i7, (double)i6));
                 }
             }
 
@@ -325,7 +325,7 @@ public class WorldServer extends World {
 
         if (this.e(i0 - b0, i1 - b0, i2 - b0, i0 + b0, i1 + b0, i2 + b0)) {
             if (i3 > 0) {
-                nextticklistentry.a((long) i4 + this.x.f());
+                nextticklistentry.a((long)i4 + this.x.f());
                 nextticklistentry.a(i5);
             }
 
@@ -341,7 +341,7 @@ public class WorldServer extends World {
 
         nextticklistentry.a(i5);
         if (i3 > 0) {
-            nextticklistentry.a((long) i4 + this.x.f());
+            nextticklistentry.a((long)i4 + this.x.f());
         }
 
         if (!this.L.contains(nextticklistentry)) {
@@ -355,7 +355,8 @@ public class WorldServer extends World {
             if (this.O++ >= 1200) {
                 return;
             }
-        } else {
+        }
+        else {
             this.i();
         }
 
@@ -371,7 +372,8 @@ public class WorldServer extends World {
 
         if (i0 != this.L.size()) {
             throw new IllegalStateException("TickNextTick list out of synch");
-        } else {
+        }
+        else {
             if (i0 > 1000) {
                 i0 = 1000;
             }
@@ -381,7 +383,7 @@ public class WorldServer extends World {
             NextTickListEntry nextticklistentry;
 
             for (int i1 = 0; i1 < i0; ++i1) {
-                nextticklistentry = (NextTickListEntry) this.M.first();
+                nextticklistentry = (NextTickListEntry)this.M.first();
                 if (!flag0 && nextticklistentry.e > this.x.f()) {
                     break;
                 }
@@ -396,7 +398,7 @@ public class WorldServer extends World {
             Iterator iterator = this.U.iterator();
 
             while (iterator.hasNext()) {
-                nextticklistentry = (NextTickListEntry) iterator.next();
+                nextticklistentry = (NextTickListEntry)iterator.next();
                 iterator.remove();
                 byte b0 = 0;
 
@@ -406,7 +408,8 @@ public class WorldServer extends World {
                     if (i2 > 0 && Block.b(i2, nextticklistentry.d)) {
                         try {
                             Block.s[i2].a(this, nextticklistentry.a, nextticklistentry.b, nextticklistentry.c, this.s);
-                        } catch (Throwable throwable) {
+                        }
+                        catch (Throwable throwable) {
                             CrashReport crashreport = CrashReport.a(throwable, "Exception while ticking a block");
                             CrashReportCategory crashreportcategory = crashreport.a("Block being ticked");
 
@@ -414,7 +417,8 @@ public class WorldServer extends World {
 
                             try {
                                 i3 = this.h(nextticklistentry.a, nextticklistentry.b, nextticklistentry.c);
-                            } catch (Throwable throwable1) {
+                            }
+                            catch (Throwable throwable1) {
                                 i3 = -1;
                             }
 
@@ -422,7 +426,8 @@ public class WorldServer extends World {
                             throw new ReportedException(crashreport);
                         }
                     }
-                } else {
+                }
+                else {
                     this.a(nextticklistentry.a, nextticklistentry.b, nextticklistentry.c, nextticklistentry.d, 0);
                 }
             }
@@ -446,7 +451,8 @@ public class WorldServer extends World {
 
             if (i4 == 0) {
                 iterator = this.M.iterator();
-            } else {
+            }
+            else {
                 iterator = this.U.iterator();
                 if (!this.U.isEmpty()) {
                     System.out.println(this.U.size());
@@ -454,7 +460,7 @@ public class WorldServer extends World {
             }
 
             while (iterator.hasNext()) {
-                NextTickListEntry nextticklistentry = (NextTickListEntry) iterator.next();
+                NextTickListEntry nextticklistentry = (NextTickListEntry)iterator.next();
 
                 if (nextticklistentry.a >= i0 && nextticklistentry.a < i1 && nextticklistentry.c >= i2 && nextticklistentry.c < i3) {
                     if (flag0) {
@@ -477,11 +483,11 @@ public class WorldServer extends World {
     public void a(Entity entity, boolean flag0) {
         /* CanaryMod: Spawning checks per world, see World#canSpawn */
         if (!canSpawn(entity)) {
-            entity.w();
+            entity.x();
         }
 
         // if (!this.a.Y() && entity instanceof INpc) { // CanaryMod: Remove this check for NPC Spawn as its handled as part of the above
-        // entity.w();
+        // entity.x();
         // }
 
         super.a(entity, flag0);
@@ -498,7 +504,7 @@ public class WorldServer extends World {
         ArrayList arraylist = new ArrayList();
 
         for (int i6 = 0; i6 < this.g.size(); ++i6) {
-            TileEntity tileentity = (TileEntity) this.g.get(i6);
+            TileEntity tileentity = (TileEntity)this.g.get(i6);
 
             if (tileentity.l >= i0 && tileentity.m >= i1 && tileentity.n >= i2 && tileentity.l < i3 && tileentity.m < i4 && tileentity.n < i5) {
                 arraylist.add(tileentity);
@@ -532,7 +538,8 @@ public class WorldServer extends World {
     protected void b(WorldSettings worldsettings) {
         if (!this.t.e()) {
             this.x.a(0, this.t.i(), 0);
-        } else {
+        }
+        else {
             this.y = true;
             WorldChunkManager worldchunkmanager = this.t.e;
             List list = worldchunkmanager.a();
@@ -545,7 +552,8 @@ public class WorldServer extends World {
             if (chunkposition != null) {
                 i0 = chunkposition.a;
                 i2 = chunkposition.c;
-            } else {
+            }
+            else {
                 this.Y().b("Unable to find spawn biome");
             }
 
@@ -617,7 +625,7 @@ public class WorldServer extends World {
     protected void a(Entity entity) {
         super.a(entity);
         this.V.a(entity.k, entity);
-        Entity[] aentity = entity.an();
+        Entity[] aentity = entity.ao();
 
         if (aentity != null) {
             for (int i0 = 0; i0 < aentity.length; ++i0) {
@@ -629,7 +637,7 @@ public class WorldServer extends World {
     protected void b(Entity entity) {
         super.b(entity);
         this.V.d(entity.k);
-        Entity[] aentity = entity.an();
+        Entity[] aentity = entity.ao();
 
         if (aentity != null) {
             for (int i0 = 0; i0 < aentity.length; ++i0) {
@@ -639,14 +647,15 @@ public class WorldServer extends World {
     }
 
     public Entity a(int i0) {
-        return (Entity) this.V.a(i0);
+        return (Entity)this.V.a(i0);
     }
 
     public boolean c(Entity entity) {
         if (super.c(entity)) {
             this.a.af().a(entity.u, entity.v, entity.w, 512.0D, this.t.i, new Packet71Weather(entity));
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -671,10 +680,10 @@ public class WorldServer extends World {
         Iterator iterator = this.h.iterator();
 
         while (iterator.hasNext()) {
-            EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+            EntityPlayer entityplayer = (EntityPlayer)iterator.next();
 
             if (entityplayer.e(d0, d1, d2) < 4096.0D) {
-                ((EntityPlayerMP) entityplayer).a.b(new Packet60Explosion(d0, d1, d2, f0, explosion.h, (Vec3) explosion.b().get(entityplayer)));
+                ((EntityPlayerMP)entityplayer).a.b(new Packet60Explosion(d0, d1, d2, f0, explosion.h, (Vec3)explosion.b().get(entityplayer)));
             }
         }
 
@@ -693,7 +702,7 @@ public class WorldServer extends World {
                 return;
             }
 
-            blockeventdata1 = (BlockEventData) iterator.next();
+            blockeventdata1 = (BlockEventData)iterator.next();
         }
         while (!blockeventdata1.equals(blockeventdata));
 
@@ -707,10 +716,10 @@ public class WorldServer extends World {
             Iterator iterator = this.R[i0].iterator();
 
             while (iterator.hasNext()) {
-                BlockEventData blockeventdata = (BlockEventData) iterator.next();
+                BlockEventData blockeventdata = (BlockEventData)iterator.next();
 
                 if (this.a(blockeventdata)) {
-                    this.a.af().a((double) blockeventdata.a(), (double) blockeventdata.b(), (double) blockeventdata.c(), 64.0D, this.t.i, new Packet54PlayNoteBlock(blockeventdata.a(), blockeventdata.b(), blockeventdata.c(), blockeventdata.f(), blockeventdata.d(), blockeventdata.e()));
+                    this.a.af().a((double)blockeventdata.a(), (double)blockeventdata.b(), (double)blockeventdata.c(), 64.0D, this.t.i, new Packet54PlayNoteBlock(blockeventdata.a(), blockeventdata.b(), blockeventdata.c(), blockeventdata.f(), blockeventdata.d(), blockeventdata.e()));
                 }
             }
 
@@ -734,9 +743,10 @@ public class WorldServer extends World {
         super.o();
         if (flag0 != this.Q()) {
             if (flag0) {
-                this.a.af().a((Packet) (new Packet70GameEvent(2, 0)));
-            } else {
-                this.a.af().a((Packet) (new Packet70GameEvent(1, 0)));
+                this.a.af().a((Packet)(new Packet70GameEvent(2, 0)));
+            }
+            else {
+                this.a.af().a((Packet)(new Packet70GameEvent(1, 0)));
             }
         }
     }
