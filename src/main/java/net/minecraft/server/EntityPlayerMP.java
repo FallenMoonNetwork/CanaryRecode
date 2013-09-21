@@ -187,6 +187,10 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                 }
             }
         }
+
+        if (this.bX > 0L && this.b.ar() > 0 && MinecraftServer.aq() - this.bX > (long)(this.b.ar() * 1000 * 60)) {
+            this.a.c("You have been idle for too long!");
+        }
     }
 
     public void h() {
