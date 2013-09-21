@@ -12,7 +12,7 @@ import net.minecraft.server.ItemStack;
 
 /**
  * Living Entity wrapper implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryEntityLiving extends CanaryLivingBase implements EntityLiving {
@@ -92,7 +92,7 @@ public abstract class CanaryEntityLiving extends CanaryLivingBase implements Ent
      */
     @Override
     public Item getItemInHand() {
-        return getHandle().aY().getCanaryItem();
+        return getHandle().aZ().getCanaryItem();
     }
 
     /**
@@ -100,7 +100,7 @@ public abstract class CanaryEntityLiving extends CanaryLivingBase implements Ent
      */
     @Override
     public Item[] getEquipment() {
-        return CanaryItem.stackArrayToItemArray(getHandle().ad());
+        return CanaryItem.stackArrayToItemArray(getHandle().ae());
     }
 
     /**

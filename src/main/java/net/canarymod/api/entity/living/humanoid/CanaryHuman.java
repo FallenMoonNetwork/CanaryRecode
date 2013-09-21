@@ -9,7 +9,7 @@ import net.minecraft.server.EntityPlayer;
 
 /**
  * Human implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryHuman extends CanaryLivingBase implements Human {
@@ -74,7 +74,7 @@ public abstract class CanaryHuman extends CanaryLivingBase implements Human {
      */
     @Override
     public boolean isBlocking() {
-        return getHandle().bq();
+        return getHandle().br();
     }
 
     /**

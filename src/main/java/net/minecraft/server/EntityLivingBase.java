@@ -1433,7 +1433,7 @@ public abstract class EntityLivingBase extends Entity {
         // CanaryMod: NPC Addition, this is vital for pathfinding
         // Just call the "newAi" method up there ^^
         if (this instanceof EntityNonPlayableCharacter) {
-            this.bh();
+            this.bi();
         }// END
         this.q.C.b();
         this.q.C.a("jump");

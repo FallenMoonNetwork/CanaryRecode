@@ -16,7 +16,7 @@ import net.minecraft.server.World;
 
 /**
  * NonPlayableCharacter (NPC) Entity class
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public final class EntityNonPlayableCharacter extends EntityPlayer {
@@ -92,12 +92,12 @@ public final class EntityNonPlayableCharacter extends EntityPlayer {
     }
 
     @Override
-    public void w() {
-        super.w();
+    public void x() {
+        super.x();
         getNPC().destroyed();
     }
 
-    protected void bh() {
+    protected void bi() {
         this.move_helper.c();
     }
 

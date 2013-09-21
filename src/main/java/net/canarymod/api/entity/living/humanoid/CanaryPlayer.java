@@ -166,7 +166,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
     @Override
     public Location getSpawnPosition() {
         Location spawn = Canary.getServer().getDefaultWorld().getSpawnLocation();
-        ChunkCoordinates loc = ((EntityPlayerMP) entity).bE();
+        ChunkCoordinates loc = ((EntityPlayerMP) entity).bF();
 
         if (loc != null) {
             spawn = new Location(Canary.getServer().getDefaultWorld(), loc.a, loc.b, loc.c, 0.0F, 0.0F);
@@ -626,7 +626,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public void addExhaustion(float exhaustion) {
-        getHandle().bH().a(exhaustion);
+        getHandle().bI().a(exhaustion);
     }
 
     /**
@@ -634,7 +634,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public void setExhaustion(float exhaustion) {
-        getHandle().bH().setExhaustionLevel(exhaustion);
+        getHandle().bI().setExhaustionLevel(exhaustion);
     }
 
     /**
@@ -642,7 +642,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public float getExhaustionLevel() {
-        return getHandle().bH().getExhaustionLevel();
+        return getHandle().bI().getExhaustionLevel();
     }
 
     /**
@@ -650,7 +650,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public void setHunger(int hunger) {
-        getHandle().bH().setFoodLevel(hunger);
+        getHandle().bI().setFoodLevel(hunger);
     }
 
     /**
@@ -658,7 +658,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public int getHunger() {
-        return getHandle().bH().a();
+        return getHandle().bI().a();
     }
 
     /**
@@ -709,7 +709,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public boolean isSleeping() {
-        return getHandle().bg();
+        return getHandle().bh();
     }
 
     /**
@@ -717,7 +717,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public boolean isDeeplySleeping() {
-        return getHandle().bC();
+        return getHandle().bD();
     }
 
     /**

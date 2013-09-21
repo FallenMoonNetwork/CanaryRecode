@@ -20,7 +20,7 @@ import net.minecraft.server.NBTTagCompound;
 
 /**
  * Entity Wrapper
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryEntity implements Entity {
@@ -259,7 +259,7 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public String getName() {
-        return entity.am();
+        return entity.an();
     }
 
     @Override
@@ -279,7 +279,7 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public UUID getUUID() {
-        return entity.av();
+        return entity.aw();
     }
 
     @Override
@@ -309,7 +309,7 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public boolean isRiding() {
-        return entity.ae();
+        return entity.af();
     }
 
     @Override
@@ -338,7 +338,7 @@ public abstract class CanaryEntity implements Entity {
      */
     @Override
     public void destroy() {
-        entity.w();
+        entity.x();
     }
 
     @Override
@@ -395,7 +395,7 @@ public abstract class CanaryEntity implements Entity {
 
     /**
      * Gets the Minecraft entity being wrapped
-     * 
+     *
      * @return entity
      */
     public abstract net.minecraft.server.Entity getHandle();
