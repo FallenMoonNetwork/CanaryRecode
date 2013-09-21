@@ -221,11 +221,11 @@ public abstract class ServerConfigurationManager {
     }
 
     public void c(EntityPlayerMP entityplayermp) {
-        // CanaryMod: PlayerListEntry
+        // CanaryMod: PlayerListEntry  (online players receiving connecting player's info for first time)
         if (Configuration.getServerConfig().isPlayerListEnabled()) {
-            // Get PlayerListEntry
             PlayerListEntry plentry = entityplayermp.getPlayer().getPlayerListEntry(true);
             plentry.setPing(1000); // Set the ping for the initial connection
+            // Get PlayerListEntry
             for (int i0 = 0; i0 < this.a.size(); ++i0) {
                 EntityPlayerMP entityplayermp1 = (EntityPlayerMP)this.a.get(i0);
                 // Clone the entry so that each receiver will start with the given data
@@ -233,11 +233,12 @@ public abstract class ServerConfigurationManager {
                 // Call PlayerListEntryHook
                 new PlayerListEntryHook(clone, entityplayermp1.getPlayer()).call();
                 // Send Packet
-                entityplayermp1.a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), 1000)); // Ping ignored
+                Canary.logDebug("Entry Sending: "+clone.toString());
+                entityplayermp1.a.b(new Packet201PlayerInfo(clone.getName(), clone.isShown(), 1000)); //Ping Ignored
+                Canary.logDebug("Entry Sent");
             }
         }
         //
-
         this.a.add(entityplayermp);
 
         // CanaryMod: Directly use playerworld instead
@@ -245,16 +246,18 @@ public abstract class ServerConfigurationManager {
         worldserver.d(entityplayermp);
         this.a(entityplayermp, (WorldServer)null);
 
-        // CanaryMod: PlayerListEntry
+        // CanaryMod: PlayerListEntry (Connecting player receiving online players)
         if (Configuration.getServerConfig().isPlayerListEnabled()) {
+            // Get PlayerListEntry
             for (int i0 = 0; i0 < this.a.size(); ++i0) {
                 EntityPlayerMP entityplayermp1 = (EntityPlayerMP)this.a.get(i0);
-                // Get the PlayerListEntry
                 PlayerListEntry plentry = entityplayermp1.getPlayer().getPlayerListEntry(true);
                 // Call PlayerListEntryHook
                 new PlayerListEntryHook(plentry, entityplayermp.getPlayer()).call();
                 // Send Packet
+                Canary.logDebug("Entry Sending: "+plentry.toString());
                 entityplayermp.a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), plentry.getPing()));
+                Canary.logDebug("Entry Sent");
             }
         }
         //
@@ -279,16 +282,16 @@ public abstract class ServerConfigurationManager {
 
         // CanaryMod: PlayerListEntry
         if (Configuration.getServerConfig().isPlayerListEnabled()) {
-            // Get PlayerListEntry
             PlayerListEntry plentry = entityplayermp.getPlayer().getPlayerListEntry(false);
+            plentry.setPing(9999); // Set the ping for the initial connection
             for (int i0 = 0; i0 < this.a.size(); ++i0) {
                 EntityPlayerMP entityplayermp1 = (EntityPlayerMP)this.a.get(i0);
-                // Clone the entry so that each receiver will start with the given data
+                // Get the PlayerListEntry
                 PlayerListEntry clone = plentry.clone();
                 // Call PlayerListEntryHook
                 new PlayerListEntryHook(clone, entityplayermp1.getPlayer()).call();
                 // Send Packet
-                entityplayermp1.a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), plentry.getPing()));
+                entityplayermp1.a.b(new Packet201PlayerInfo(clone.getName(), clone.isShown(), clone.getPing()));
             }
         }
         //
@@ -609,27 +612,29 @@ public abstract class ServerConfigurationManager {
     }
 
     public void b() {
-        if (++this.n > Configuration.getServerConfig().getPlayerlistTicks()) {
-            this.n = 0;
-        }
-
-        // CanaryMod: PlayerListEntry
-        if (Configuration.getServerConfig().isPlayerListEnabled() && this.n < this.a.size()) {
-            EntityPlayerMP entityplayermp = (EntityPlayerMP)this.a.get(this.n);
-
-            // Get PlayerListEntry
-            PlayerListEntry plentry = entityplayermp.getPlayer().getPlayerListEntry(true);
-            for (int i0 = 0; i0 < this.a.size(); ++i0) {
-                EntityPlayerMP entityplayermp1 = (EntityPlayerMP)this.a.get(i0);
-                // Clone the entry so that each receiver will start with the given data
-                PlayerListEntry clone = plentry.clone();
-                // Call PlayerListEntryHook
-                new PlayerListEntryHook(clone, entityplayermp1.getPlayer()).call();
-                // Send Packet
-                entityplayermp1.a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), plentry.getPing()));
+        if(Configuration.getServerConfig().getPlayerlistAutoUpdate()){
+            if (++this.n > Configuration.getServerConfig().getPlayerlistTicks()) {
+                this.n = 0;
             }
+
+            // CanaryMod: PlayerListEntry
+            if (Configuration.getServerConfig().isPlayerListEnabled() && this.n < this.a.size()) {
+                EntityPlayerMP entityplayermp = (EntityPlayerMP)this.a.get(this.n);
+
+                // Get PlayerListEntry
+                PlayerListEntry plentry = entityplayermp.getPlayer().getPlayerListEntry(true);
+                for (int i0 = 0; i0 < this.a.size(); ++i0) {
+                    EntityPlayerMP entityplayermp1 = (EntityPlayerMP)this.a.get(i0);
+                    // Clone the entry so that each receiver will start with the given data
+                    PlayerListEntry clone = plentry.clone();
+                    // Call PlayerListEntryHook
+                    new PlayerListEntryHook(clone, entityplayermp1.getPlayer()).call();
+                    // Send Packet
+                    entityplayermp1.a.b(new Packet201PlayerInfo(clone.getName(), clone.isShown(), clone.getPing()));
+                }
+            }
+            //
         }
-        //
     }
 
     public void a(Packet packet) {
