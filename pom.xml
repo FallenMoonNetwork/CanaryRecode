@@ -8,14 +8,14 @@
   <groupId>net.canarymod</groupId>
   <artifactId>CanaryMod</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-RC-2</version>
+  <version>1.0-RC-3-SNAPSHOT</version>
   <name>CanaryMod</name>
   <url>http://www.canarymod.net</url>
   <inceptionYear>2012</inceptionYear>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <minecraft.server.version>1.6.4</minecraft.server.version>
-    <api.version>1.0-RC-2-SNAPSHOT</api.version>
+    <api.version>1.0-RC-3-SNAPSHOT</api.version>
     <maven.build.timestamp.format>dd MMMM yyyy HH:mm z</maven.build.timestamp.format>
   </properties>
   <licenses>
