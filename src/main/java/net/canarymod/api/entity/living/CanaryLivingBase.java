@@ -20,6 +20,8 @@ import net.canarymod.api.world.position.Location;
 import net.minecraft.server.EntityLivingBase;
 import net.minecraft.server.Packet12PlayerLook;
 import net.minecraft.server.Packet32EntityLook;
+import net.minecraft.server.RangedAttribute;
+import net.minecraft.server.SharedMonsterAttributes;
 
 public abstract class CanaryLivingBase extends CanaryEntity implements LivingBase {
 
@@ -49,6 +51,22 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
     @Override
     public void increaseHealth(float increase) {
         getHandle().f(increase);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMaxHealth(){
+        return getHandle().aX().a(SharedMonsterAttributes.a).b();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMaxHealth(double maxHealth){
+        getHandle().a(SharedMonsterAttributes.a).a(maxHealth);
     }
 
     /**

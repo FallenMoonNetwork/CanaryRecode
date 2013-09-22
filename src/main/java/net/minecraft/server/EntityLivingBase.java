@@ -83,9 +83,6 @@ public abstract class EntityLivingBase extends Entity {
     private int bq;
     private float br;
 
-    // CanaryMod: Custom MaxHealth
-    protected int maxHealth;
-
     public EntityLivingBase(World world) {
         super(world);
         this.az();
