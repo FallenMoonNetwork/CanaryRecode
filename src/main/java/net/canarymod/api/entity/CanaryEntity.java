@@ -229,7 +229,7 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public boolean isSprinting() { // 3
-        return entity.ag();
+        return entity.ai();
     }
 
     @Override
@@ -309,7 +309,7 @@ public abstract class CanaryEntity implements Entity {
 
     @Override
     public boolean isRiding() {
-        return entity.af();
+        return entity.ag();
     }
 
     @Override
