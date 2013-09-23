@@ -6,10 +6,14 @@ import net.canarymod.api.entity.CanaryEntityItem;
 import net.canarymod.api.entity.Entity;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Item;
-import net.canarymod.api.nbt.BaseTag;
 import net.canarymod.api.nbt.CanaryCompoundTag;
+import net.canarymod.api.nbt.CanaryIntTag;
+import net.canarymod.api.nbt.CanaryStringTag;
+import net.canarymod.api.nbt.CompoundTag;
 import net.minecraft.server.EntityItem;
 import net.minecraft.server.NBTTagCompound;
+import net.minecraft.server.NBTTagInt;
+import net.minecraft.server.NBTTagString;
 
 /**
  * MobSpawnerEntry wrapper implementation
@@ -86,7 +90,7 @@ public class CanaryMobSpawnerEntry implements MobSpawnerEntry {
      * {@inheritDoc}
      */
     @Override
-    public BaseTag getSpawnPotentialsTag() {
+    public CompoundTag getSpawnPotentialsTag() {
         if (!this.isValid()) {
             return null;
         }
@@ -99,8 +103,8 @@ public class CanaryMobSpawnerEntry implements MobSpawnerEntry {
         // sets the entity and weight for this spawn
         CanaryCompoundTag entry = new CanaryCompoundTag(new NBTTagCompound());
 
-        entry.put("Type", id.getString("id"));
-        entry.put("Weight", this.getWeight());
+        entry.put("Type", new CanaryStringTag(new NBTTagString("Type", id.getString("id"))));
+        entry.put("Weight", new CanaryIntTag(new NBTTagInt("Weight", this.getWeight())));
 
         // sets the properties of this spawn.
         CanaryCompoundTag properties = new CanaryCompoundTag(new NBTTagCompound());
