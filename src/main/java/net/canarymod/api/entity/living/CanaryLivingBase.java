@@ -174,6 +174,20 @@ public abstract class CanaryLivingBase extends CanaryEntity implements LivingBas
     /**
      * {@inheritDoc}
      */
+    public void removePotionEffect(PotionEffectType type) {
+        getHandle().k(type.getID());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void removeAllPotionEffects() {
+        getHandle().removeAllPotionEffects();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isPotionActive(Potion potion) {
         if (potion == null) {

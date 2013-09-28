@@ -614,8 +614,8 @@ public abstract class EntityLivingBase extends Entity {
                 // CanaryMod: call DamageHook (Entity)
                 CanaryEntityLiving attacker = null;
 
-                if (damagesource instanceof EntityDamageSource && ((EntityDamageSource)damagesource).h() instanceof EntityLiving) {
-                    attacker = (CanaryEntityLiving)((EntityDamageSource)damagesource).h().getCanaryEntity();
+                if (damagesource instanceof EntityDamageSource && (damagesource).h() instanceof EntityLiving) {
+                    attacker = (CanaryEntityLiving)(damagesource).h().getCanaryEntity();
                 }
                 DamageHook hook = new DamageHook(attacker, entity, new CanaryDamageSource(damagesource), (int)f0);
 
@@ -1653,5 +1653,14 @@ public abstract class EntityLivingBase extends Entity {
     // CanaryMod
     public void setAge(int age) {
         this.aV = age;
+    }
+
+    //CanaryMod
+    public void removeAllPotionEffects() {
+        Iterator iterator = this.f.values().iterator();
+        while (iterator.hasNext()) {
+            PotionEffect potioneffect = (PotionEffect)iterator.next();
+            this.b(potioneffect);
+        }
     }
 }
