@@ -261,6 +261,10 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
         return data;
     }
 
+    public CompoundTag getMetaData() {
+        return data.containsKey("Canary") ? data.getCompoundTag("Canary") : null;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -286,8 +290,8 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
      */
     @Override
     public String getFirstJoined() {
-        if (getNBT() != null && getNBT().containsKey("FirstJoin")) {
-            return getNBT().getString("FirstJoin");
+        if (getMetaData() != null && getMetaData().containsKey("FirstJoin")) {
+            return getMetaData().getString("FirstJoin");
         }
         return "NEVER";
     }
@@ -297,8 +301,8 @@ public class CanaryOfflinePlayer implements OfflinePlayer {
      */
     @Override
     public long getTimePlayed() {
-        if (getNBT() != null && getNBT().containsKey("TimePlayed")) {
-            return getNBT().getLong("TimePlayed");
+        if (getMetaData() != null && getMetaData().containsKey("TimePlayed")) {
+            return getMetaData().getLong("TimePlayed");
         }
         return 0;
     }

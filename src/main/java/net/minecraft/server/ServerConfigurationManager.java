@@ -69,14 +69,13 @@ public abstract class ServerConfigurationManager {
         CanaryWorld w;
         boolean firstTime = true;
         if (nbttagcompound != null) {
-            w = (CanaryWorld)Canary.getServer().getWorldManager().getWorld(nbttagcompound.i("LevelName"), net.canarymod.api.world.DimensionType.fromId(nbttagcompound.e("Dimension")), true);
+            w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(nbttagcompound.i("LevelName"), net.canarymod.api.world.DimensionType.fromId(nbttagcompound.e("Dimension")), true);
             firstTime = false;
-        }
-        else {
-            w = (CanaryWorld)Canary.getServer().getDefaultWorld();
+        } else {
+            w = (CanaryWorld) Canary.getServer().getDefaultWorld();
         }
         entityplayermp.a(w.getHandle());
-        entityplayermp.c.a((WorldServer)entityplayermp.q);
+        entityplayermp.c.a((WorldServer) entityplayermp.q);
         String s0 = "local";
 
         if (inetworkmanager.c() != null) {
@@ -85,10 +84,10 @@ public abstract class ServerConfigurationManager {
 
         this.e.an().a(entityplayermp.c_() + "[" + s0 + "] logged in with entity id " + entityplayermp.k + " at (" + entityplayermp.u + ", " + entityplayermp.v + ", " + entityplayermp.w + ")");
         // CanaryMod: Use world we got from players NBT data
-        WorldServer worldserver = (WorldServer)w.getHandle();
+        WorldServer worldserver = (WorldServer) w.getHandle();
         ChunkCoordinates chunkcoordinates = worldserver.K();
 
-        this.a(entityplayermp, (EntityPlayerMP)null, worldserver);
+        this.a(entityplayermp, (EntityPlayerMP) null, worldserver);
         NetServerHandler netserverhandler = new NetServerHandler(this.e, inetworkmanager, entityplayermp);
 
         netserverhandler.b(new Packet1Login(entityplayermp.k, worldserver.N().u(), entityplayermp.c.b(), worldserver.N().t(), worldserver.t.i, worldserver.r, worldserver.R(), this.l()));
@@ -96,12 +95,12 @@ public abstract class ServerConfigurationManager {
         netserverhandler.b(new Packet6SpawnPosition(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c));
         netserverhandler.b(new Packet202PlayerAbilities(entityplayermp.bG));
         netserverhandler.b(new Packet16BlockItemSwitch(entityplayermp.bn.c));
-        this.a((ServerScoreboard)worldserver.X(), entityplayermp);
+        this.a((ServerScoreboard) worldserver.X(), entityplayermp);
         this.b(entityplayermp, worldserver);
         // CanaryMod Connection hook
-        ConnectionHook hook = (ConnectionHook)new ConnectionHook(entityplayermp.getPlayer(), ChatMessageComponent.b("multiplayer.player.joined", new Object[]{entityplayermp.ay()}).a(EnumChatFormatting.o).toString(), firstTime).call();
+        ConnectionHook hook = (ConnectionHook) new ConnectionHook(entityplayermp.getPlayer(), ChatMessageComponent.b("multiplayer.player.joined", new Object[]{entityplayermp.ay()}).a(EnumChatFormatting.o).toString(), firstTime).call();
         if (!hook.isHidden()) {
-            this.a((Packet)(new Packet3Chat(ChatMessageComponent.e(hook.getMessage()))));
+            this.a((Packet) (new Packet3Chat(ChatMessageComponent.e(hook.getMessage()))));
         }
         // CanaryMod end
         this.c(entityplayermp);
@@ -115,7 +114,7 @@ public abstract class ServerConfigurationManager {
         Iterator iterator = entityplayermp.aL().iterator();
 
         while (iterator.hasNext()) {
-            PotionEffect potioneffect = (PotionEffect)iterator.next();
+            PotionEffect potioneffect = (PotionEffect) iterator.next();
 
             netserverhandler.b(new Packet41EntityEffect(entityplayermp.k, potioneffect));
         }
@@ -138,7 +137,7 @@ public abstract class ServerConfigurationManager {
         Iterator iterator = serverscoreboard.g().iterator();
 
         while (iterator.hasNext()) {
-            ScorePlayerTeam scoreplayerteam = (ScorePlayerTeam)iterator.next();
+            ScorePlayerTeam scoreplayerteam = (ScorePlayerTeam) iterator.next();
 
             entityplayermp.a.b(new Packet209SetPlayerTeam(scoreplayerteam, 0));
         }
@@ -151,7 +150,7 @@ public abstract class ServerConfigurationManager {
                 Iterator iterator1 = list.iterator();
 
                 while (iterator1.hasNext()) {
-                    Packet packet = (Packet)iterator1.next();
+                    Packet packet = (Packet) iterator1.next();
 
                     entityplayermp.a.b(packet);
                 }
@@ -175,7 +174,7 @@ public abstract class ServerConfigurationManager {
         }
 
         worldserver1.s().a(entityplayermp);
-        worldserver1.b.c((int)entityplayermp.u >> 4, (int)entityplayermp.w >> 4);
+        worldserver1.b.c((int) entityplayermp.u >> 4, (int) entityplayermp.w >> 4);
     }
 
     public int a() {
@@ -190,8 +189,7 @@ public abstract class ServerConfigurationManager {
             entityplayermp.f(nbttagcompound);
             nbttagcompound1 = nbttagcompound;
             System.out.println("loading single player");
-        }
-        else {
+        } else {
             // CanaryMod Multiworld
             nbttagcompound1 = playerFileData.get(entityplayermp.getCanaryWorld().getName()).b(entityplayermp);
             //
@@ -202,14 +200,13 @@ public abstract class ServerConfigurationManager {
 
     // CanaryMod: get player data for name
     public static NBTTagCompound getPlayerDatByName(String name) {
-        ISaveHandler handler = ((CanaryWorld)Canary.getServer().getDefaultWorld()).getHandle().M();
+        ISaveHandler handler = ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle().M();
 
         if (handler instanceof SaveHandler) {
-            SaveHandler saves = (SaveHandler)handler;
+            SaveHandler saves = (SaveHandler) handler;
 
             return saves.a(name);
-        }
-        else {
+        } else {
             throw new RuntimeException("ISaveHandler is not of type SaveHandler! Failing to laod playerdata");
         }
     }
@@ -227,13 +224,13 @@ public abstract class ServerConfigurationManager {
             plentry.setPing(1000); // Set the ping for the initial connection
             // Get PlayerListEntry
             for (int i0 = 0; i0 < this.a.size(); ++i0) {
-                EntityPlayerMP entityplayermp1 = (EntityPlayerMP)this.a.get(i0);
+                EntityPlayerMP entityplayermp1 = (EntityPlayerMP) this.a.get(i0);
                 // Clone the entry so that each receiver will start with the given data
                 PlayerListEntry clone = plentry.clone();
                 // Call PlayerListEntryHook
                 new PlayerListEntryHook(clone, entityplayermp1.getPlayer()).call();
                 // Send Packet
-                Canary.logDebug("Entry Sending: "+clone.toString());
+                Canary.logDebug("Entry Sending: " + clone.toString());
                 entityplayermp1.a.b(new Packet201PlayerInfo(clone.getName(), clone.isShown(), 1000)); //Ping Ignored
                 Canary.logDebug("Entry Sent");
             }
@@ -242,20 +239,20 @@ public abstract class ServerConfigurationManager {
         this.a.add(entityplayermp);
 
         // CanaryMod: Directly use playerworld instead
-        WorldServer worldserver = (WorldServer)entityplayermp.getCanaryWorld().getHandle(); // this.e.a(entityplayermp.ar);
+        WorldServer worldserver = (WorldServer) entityplayermp.getCanaryWorld().getHandle(); // this.e.a(entityplayermp.ar);
         worldserver.d(entityplayermp);
-        this.a(entityplayermp, (WorldServer)null);
+        this.a(entityplayermp, (WorldServer) null);
 
         // CanaryMod: PlayerListEntry (Connecting player receiving online players)
         if (Configuration.getServerConfig().isPlayerListEnabled()) {
             // Get PlayerListEntry
             for (int i0 = 0; i0 < this.a.size(); ++i0) {
-                EntityPlayerMP entityplayermp1 = (EntityPlayerMP)this.a.get(i0);
+                EntityPlayerMP entityplayermp1 = (EntityPlayerMP) this.a.get(i0);
                 PlayerListEntry plentry = entityplayermp1.getPlayer().getPlayerListEntry(true);
                 // Call PlayerListEntryHook
                 new PlayerListEntryHook(plentry, entityplayermp.getPlayer()).call();
                 // Send Packet
-                Canary.logDebug("Entry Sending: "+plentry.toString());
+                Canary.logDebug("Entry Sending: " + plentry.toString());
                 entityplayermp.a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), plentry.getPing()));
                 Canary.logDebug("Entry Sent");
             }
@@ -285,7 +282,7 @@ public abstract class ServerConfigurationManager {
             PlayerListEntry plentry = entityplayermp.getPlayer().getPlayerListEntry(false);
             plentry.setPing(9999); // Set the ping for the initial connection
             for (int i0 = 0; i0 < this.a.size(); ++i0) {
-                EntityPlayerMP entityplayermp1 = (EntityPlayerMP)this.a.get(i0);
+                EntityPlayerMP entityplayermp1 = (EntityPlayerMP) this.a.get(i0);
                 // Get the PlayerListEntry
                 PlayerListEntry clone = plentry.clone();
                 // Call PlayerListEntryHook
@@ -305,7 +302,7 @@ public abstract class ServerConfigurationManager {
         s2 = s2.substring(s2.indexOf("/") + 1);
         s2 = s2.substring(0, s2.indexOf(":"));
 
-        PreConnectionHook hook = (PreConnectionHook)new PreConnectionHook(s2, s0, net.canarymod.api.world.DimensionType.fromId(0), Canary.getServer().getDefaultWorldName()).call();
+        PreConnectionHook hook = (PreConnectionHook) new PreConnectionHook(s2, s0, net.canarymod.api.world.DimensionType.fromId(0), Canary.getServer().getDefaultWorldName()).call();
 
         if (hook.getKickReason() != null) {
             return hook.getKickReason();
@@ -370,7 +367,7 @@ public abstract class ServerConfigurationManager {
         EntityPlayerMP entityplayermp;
 
         for (int i0 = 0; i0 < this.a.size(); ++i0) {
-            entityplayermp = (EntityPlayerMP)this.a.get(i0);
+            entityplayermp = (EntityPlayerMP) this.a.get(i0);
             if (entityplayermp.c_().equalsIgnoreCase(playername)) {
                 arraylist.add(entityplayermp);
             }
@@ -379,7 +376,7 @@ public abstract class ServerConfigurationManager {
         Iterator iterator = arraylist.iterator();
 
         while (iterator.hasNext()) {
-            entityplayermp = (EntityPlayerMP)iterator.next();
+            entityplayermp = (EntityPlayerMP) iterator.next();
             entityplayermp.a.c("You logged in from another location");
         }
 
@@ -398,17 +395,16 @@ public abstract class ServerConfigurationManager {
             worldtype = net.canarymod.api.world.DimensionType.fromId(canarycompound.getInt("Dimension"));
         }
 
-        WorldServer world = (WorldServer)((CanaryWorld)Canary.getServer().getWorldManager().getWorld(worldName, worldtype, true)).getHandle();
+        WorldServer world = (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(worldName, worldtype, true)).getHandle();
         Object object;
 
         if (this.e.O()) {
             object = new DemoWorldManager(world);
-        }
-        else {
+        } else {
             object = new ItemInWorldManager(world);
         }
 
-        return new EntityPlayerMP(this.e, world, playername, (ItemInWorldManager)object);
+        return new EntityPlayerMP(this.e, world, playername, (ItemInWorldManager) object);
     }
 
     public EntityPlayerMP a(EntityPlayerMP entityplayermp, int i, boolean flag) {
@@ -431,60 +427,64 @@ public abstract class ServerConfigurationManager {
         String name = entityplayermp.getCanaryWorld().getName();
         net.canarymod.api.world.DimensionType type = net.canarymod.api.world.DimensionType.fromId(i0);
         // CanaryMod: PlayerRespawn
-        PlayerRespawningHook hook = (PlayerRespawningHook)new PlayerRespawningHook(entityplayermp.getPlayer(), loc, isBedSpawn).call();
+        PlayerRespawningHook hook = (PlayerRespawningHook) new PlayerRespawningHook(entityplayermp.getPlayer(), loc, isBedSpawn).call();
         loc = hook.getRespawnLocation();
-        WorldServer worldserver = (WorldServer)(loc == null ? (WorldServer)((CanaryWorld)Canary.getServer().getWorldManager().getWorld(name, type, true)).getHandle() : ((CanaryWorld)loc.getWorld()).getHandle());
+        WorldServer worldserver = (WorldServer) (loc == null ? (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(name, type, true)).getHandle() : ((CanaryWorld) loc.getWorld()).getHandle());
 
         // CanaryMod changes to accommodate multiworld bed spawns
         ChunkCoordinates chunkcoordinates = null;
         if (respawnLocation != null) {
             chunkcoordinates = new ChunkCoordinates(respawnLocation.getBlockX(), respawnLocation.getBlockY(), respawnLocation.getBlockZ());
             // Check if the spawn world differs from the expected one and adjust
-            if (!worldserver.equals(((CanaryWorld)respawnLocation.getWorld()).getHandle())) {
-                worldserver = (WorldServer)((CanaryWorld)respawnLocation.getWorld()).getHandle();
+            if (!worldserver.equals(((CanaryWorld) respawnLocation.getWorld()).getHandle())) {
+                worldserver = (WorldServer) ((CanaryWorld) respawnLocation.getWorld()).getHandle();
             }
         }
         if (loc != null) {
             chunkcoordinates = new ChunkCoordinates(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
             // Check if the spawn world differs from the expected one and adjust
-            if (!worldserver.equals(((CanaryWorld)loc.getWorld()).getHandle())) {
-                worldserver = (WorldServer)((CanaryWorld)loc.getWorld()).getHandle();
+            if (!worldserver.equals(((CanaryWorld) loc.getWorld()).getHandle())) {
+                worldserver = (WorldServer) ((CanaryWorld) loc.getWorld()).getHandle();
             }
             respawnLocation = loc;
         }
         //
         if (this.e.O()) {
             object = new DemoWorldManager(worldserver);
-        }
-        else {
+        } else {
             object = new ItemInWorldManager(worldserver);
         }
-        EntityPlayerMP entityplayermp1 = new EntityPlayerMP(this.e, worldserver, entityplayermp.c_(), (ItemInWorldManager)object);
+        EntityPlayerMP entityplayermp1 = new EntityPlayerMP(this.e, worldserver, entityplayermp.c_(), (ItemInWorldManager) object);
         // Copy netserverhandler as the connection is still the same
         entityplayermp1.a = entityplayermp.a;
         entityplayermp1.a(entityplayermp, flag0);
         entityplayermp1.k = entityplayermp.k;
 
         entityplayermp1.a.c = entityplayermp1;
+
+        // CanaryMod: metadata persistance
+        entityplayermp.saveMeta();
+        entityplayermp1.metadata = entityplayermp.metadata;
+        //
+
         this.a(entityplayermp1, entityplayermp, worldserver); // XXX
         ChunkCoordinates chunkcoordinates1;
         if (chunkcoordinates != null) {
             chunkcoordinates1 = EntityPlayer.a(worldserver, chunkcoordinates, flag1);
             if (chunkcoordinates1 != null) {
-                entityplayermp1.b((double)((float)chunkcoordinates1.a + 0.5F), (double)((float)chunkcoordinates1.b + 0.1F), (double)((float)chunkcoordinates1.c + 0.5F), 0.0F, 0.0F);
+                entityplayermp1.b((double) ((float) chunkcoordinates1.a + 0.5F), (double) ((float) chunkcoordinates1.b + 0.1F), (double) ((float) chunkcoordinates1.c + 0.5F), 0.0F, 0.0F);
                 entityplayermp1.a(chunkcoordinates, flag1);
-            }
-            else {
+            } else {
                 if (isBedSpawn) {
                     entityplayermp1.a.b(new Packet70GameEvent(0, 0));
                 }
             }
         }
 
-        worldserver.b.c((int)entityplayermp1.u >> 4, (int)entityplayermp1.w >> 4);
+        worldserver.b.c((int) entityplayermp1.u >> 4, (int) entityplayermp1.w >> 4);
 
-        entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar, (byte)entityplayermp1.q.r, entityplayermp1.q.N().u(), entityplayermp1.q.R(), entityplayermp1.c.b()));
-        entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar, (byte)entityplayermp1.q.r, entityplayermp1.q.N().u(), entityplayermp1.q.R(), entityplayermp1.c.b()));
+        entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar, (byte) entityplayermp1.q.r, entityplayermp1.q.N().u(), entityplayermp1.q.R(), entityplayermp1.c.b()));
+        entityplayermp1.a.b(new Packet9Respawn(entityplayermp1.ar, (byte) entityplayermp1.q.r, entityplayermp1.q.N().u(), entityplayermp1.q.R(), entityplayermp1.c.b()));
         // CanaryMod: Adjust the data for the respawn packet by using player coordinates instead!
         chunkcoordinates1 = worldserver.K();
         // CanaryMod changed old logic with this one, this suffices and is, for some reason, more reliable
@@ -492,7 +492,7 @@ public abstract class ServerConfigurationManager {
             entityplayermp1.v = entityplayermp1.v + 1D;
         }
         entityplayermp1.a.a(entityplayermp1.u, entityplayermp1.v, entityplayermp1.w, entityplayermp1.A, entityplayermp1.B, entityplayermp1.getCanaryWorld().getType().getId(), entityplayermp1.getCanaryWorld().getName(), TeleportHook.TeleportCause.RESPAWN);
-        entityplayermp1.a.b(new Packet6SpawnPosition((int)entityplayermp1.u, (int)entityplayermp1.v, (int)entityplayermp1.w)); // CanaryMod changed used data to player coords
+        entityplayermp1.a.b(new Packet6SpawnPosition((int) entityplayermp1.u, (int) entityplayermp1.v, (int) entityplayermp1.w)); // CanaryMod changed used data to player coords
         entityplayermp1.a.b(new Packet43Experience(entityplayermp1.bJ, entityplayermp1.bI, entityplayermp1.bH));
         this.b(entityplayermp1, worldserver);
         worldserver.s().a(entityplayermp1);
@@ -517,16 +517,16 @@ public abstract class ServerConfigurationManager {
     // XXX IMPORTANT, HERE IS DIMENSION SWITCHING GOING ON!
     public void a(EntityPlayerMP entityplayermp, String worldName, int i0) {
         int i1 = entityplayermp.ar;
-        WorldServer worldserver = (WorldServer)entityplayermp.getCanaryWorld().getHandle();
+        WorldServer worldserver = (WorldServer) entityplayermp.getCanaryWorld().getHandle();
 
         entityplayermp.ar = i0;
         net.canarymod.api.world.DimensionType type = net.canarymod.api.world.DimensionType.fromId(i0);
-        WorldServer worldserver1 = (WorldServer)((CanaryWorld)Canary.getServer().getWorldManager().getWorld(worldName, type, true)).getHandle();
+        WorldServer worldserver1 = (WorldServer) ((CanaryWorld) Canary.getServer().getWorldManager().getWorld(worldName, type, true)).getHandle();
 
         // Pre-load a chunk in the new world, makes spawning there a little faster
-        worldserver1.b.c((int)entityplayermp.u >> 4, (int)entityplayermp.w >> 4);
+        worldserver1.b.c((int) entityplayermp.u >> 4, (int) entityplayermp.w >> 4);
 
-        entityplayermp.a.b(new Packet9Respawn(i0, (byte)entityplayermp.q.r, worldserver1.N().u(), worldserver1.R(), entityplayermp.c.b()));
+        entityplayermp.a.b(new Packet9Respawn(i0, (byte) entityplayermp.q.r, worldserver1.N().u(), worldserver1.R(), entityplayermp.c.b()));
         worldserver.f(entityplayermp);
         entityplayermp.M = false;
         this.a(entityplayermp, i1, worldserver, worldserver1); // i1
@@ -539,7 +539,7 @@ public abstract class ServerConfigurationManager {
         Iterator iterator = entityplayermp.aL().iterator();
 
         while (iterator.hasNext()) {
-            PotionEffect potioneffect = (PotionEffect)iterator.next();
+            PotionEffect potioneffect = (PotionEffect) iterator.next();
 
             entityplayermp.a.b(new Packet41EntityEffect(entityplayermp.k, potioneffect));
         }
@@ -562,30 +562,27 @@ public abstract class ServerConfigurationManager {
             if (entity.T()) {
                 worldserver.a(entity, false);
             }
-        }
-        else if (entity.ar == 0) {
+        } else if (entity.ar == 0) {
             d0 *= d2;
             d1 *= d2;
             entity.b(d0, entity.v, d1, entity.A, entity.B);
             if (entity.T()) {
                 worldserver.a(entity, false);
             }
-        }
-        else {
+        } else {
             ChunkCoordinates chunkcoordinates;
 
             if (i0 == 1) {
                 chunkcoordinates = worldserver1.K();
-            }
-            else {
+            } else {
                 chunkcoordinates = worldserver1.l();
             }
 
             // CanaryMod: fix for an Entity trying to go to an unloaded world via a portal
             if (chunkcoordinates != null) {
-                d0 = (double)chunkcoordinates.a;
-                entity.v = (double)chunkcoordinates.b;
-                d1 = (double)chunkcoordinates.c;
+                d0 = (double) chunkcoordinates.a;
+                entity.v = (double) chunkcoordinates.b;
+                d1 = (double) chunkcoordinates.c;
                 entity.b(d0, entity.v, d1, 90.0F, 0.0F);
                 if (entity.T()) {
                     worldserver.a(entity, false);
@@ -596,8 +593,8 @@ public abstract class ServerConfigurationManager {
         worldserver.C.b();
         if (i0 != 1) {
             worldserver.C.a("placing");
-            d0 = (double)MathHelper.a((int)d0, -29999872, 29999872);
-            d1 = (double)MathHelper.a((int)d1, -29999872, 29999872);
+            d0 = (double) MathHelper.a((int) d0, -29999872, 29999872);
+            d1 = (double) MathHelper.a((int) d1, -29999872, 29999872);
             if (entity.T()) {
                 worldserver1.d(entity);
                 entity.b(d0, entity.v, d1, entity.A, entity.B);
@@ -608,23 +605,23 @@ public abstract class ServerConfigurationManager {
             worldserver.C.b();
         }
 
-        entity.a((World)worldserver1);
+        entity.a((World) worldserver1);
     }
 
     public void b() {
-        if(Configuration.getServerConfig().getPlayerlistAutoUpdate()){
+        if (Configuration.getServerConfig().getPlayerlistAutoUpdate()) {
             if (++this.n > Configuration.getServerConfig().getPlayerlistTicks()) {
                 this.n = 0;
             }
 
             // CanaryMod: PlayerListEntry
             if (Configuration.getServerConfig().isPlayerListEnabled() && this.n < this.a.size()) {
-                EntityPlayerMP entityplayermp = (EntityPlayerMP)this.a.get(this.n);
+                EntityPlayerMP entityplayermp = (EntityPlayerMP) this.a.get(this.n);
 
                 // Get PlayerListEntry
                 PlayerListEntry plentry = entityplayermp.getPlayer().getPlayerListEntry(true);
                 for (int i0 = 0; i0 < this.a.size(); ++i0) {
-                    EntityPlayerMP entityplayermp1 = (EntityPlayerMP)this.a.get(i0);
+                    EntityPlayerMP entityplayermp1 = (EntityPlayerMP) this.a.get(i0);
                     // Clone the entry so that each receiver will start with the given data
                     PlayerListEntry clone = plentry.clone();
                     // Call PlayerListEntryHook
@@ -639,14 +636,14 @@ public abstract class ServerConfigurationManager {
 
     public void a(Packet packet) {
         for (int i0 = 0; i0 < this.a.size(); ++i0) {
-            ((EntityPlayerMP)this.a.get(i0)).a.b(packet);
+            ((EntityPlayerMP) this.a.get(i0)).a.b(packet);
         }
     }
 
     // CanaryMod re-route packets properly
     public void sendPacketToDimension(Packet packet, String world, int i) {
         for (int j = 0; j < this.a.size(); ++j) {
-            EntityPlayerMP entityplayermp = (EntityPlayerMP)this.a.get(j);
+            EntityPlayerMP entityplayermp = (EntityPlayerMP) this.a.get(j);
 
             if (world.equals(entityplayermp.getCanaryWorld().getName()) && entityplayermp.ar == i) {
                 // TODO check: CanaryMod re-route time updates to world-specific entity trackers
@@ -670,7 +667,7 @@ public abstract class ServerConfigurationManager {
                 s0 = s0 + ", ";
             }
 
-            s0 = s0 + ((EntityPlayerMP)this.a.get(i0)).c_();
+            s0 = s0 + ((EntityPlayerMP) this.a.get(i0)).c_();
         }
 
         return s0;
@@ -680,7 +677,7 @@ public abstract class ServerConfigurationManager {
         String[] astring = new String[this.a.size()];
 
         for (int i0 = 0; i0 < this.a.size(); ++i0) {
-            astring[i0] = ((EntityPlayerMP)this.a.get(i0)).c_();
+            astring[i0] = ((EntityPlayerMP) this.a.get(i0)).c_();
         }
 
         return astring;
@@ -709,7 +706,7 @@ public abstract class ServerConfigurationManager {
     }
 
     public boolean e(String s0) {
-        WorldServer srv = (WorldServer)((CanaryWorld)Canary.getServer().getDefaultWorld()).getHandle();
+        WorldServer srv = (WorldServer) ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle();
 
         // CanaryMod: Added Re-route to our Ops listing
         return Canary.ops().isOpped(s0) || this.e.K() && srv.N().v() && this.e.J().equalsIgnoreCase(s0) || this.m;
@@ -725,7 +722,7 @@ public abstract class ServerConfigurationManager {
                 return null;
             }
 
-            entityplayermp = (EntityPlayerMP)iterator.next();
+            entityplayermp = (EntityPlayerMP) iterator.next();
         }
         while (!entityplayermp.c_().equalsIgnoreCase(s0));
 
@@ -735,8 +732,7 @@ public abstract class ServerConfigurationManager {
     public List a(ChunkCoordinates chunkcoordinates, int i0, int i1, int i2, int i3, int i4, int i5, Map map, String s0, String s1, World world) {
         if (this.a.isEmpty()) {
             return null;
-        }
-        else {
+        } else {
             Object object = new ArrayList();
             boolean flag0 = i2 < 0;
             boolean flag1 = s0 != null && s0.startsWith("!");
@@ -754,7 +750,7 @@ public abstract class ServerConfigurationManager {
             }
 
             for (int i8 = 0; i8 < this.a.size(); ++i8) {
-                EntityPlayerMP entityplayermp = (EntityPlayerMP)this.a.get(i8);
+                EntityPlayerMP entityplayermp = (EntityPlayerMP) this.a.get(i8);
 
                 if ((world == null || entityplayermp.q == world) && (s0 == null || flag1 != s0.equalsIgnoreCase(entityplayermp.an()))) {
                     if (s1 != null) {
@@ -769,30 +765,30 @@ public abstract class ServerConfigurationManager {
                     if (chunkcoordinates != null && (i0 > 0 || i1 > 0)) {
                         float f0 = chunkcoordinates.e(entityplayermp.b());
 
-                        if (i0 > 0 && f0 < (float)i6 || i1 > 0 && f0 > (float)i7) {
+                        if (i0 > 0 && f0 < (float) i6 || i1 > 0 && f0 > (float) i7) {
                             continue;
                         }
                     }
 
-                    if (this.a((EntityPlayer)entityplayermp, map) && (i3 == EnumGameType.a.a() || i3 == entityplayermp.c.b().a()) && (i4 <= 0 || entityplayermp.bH >= i4) && entityplayermp.bH <= i5) {
-                        ((List)object).add(entityplayermp);
+                    if (this.a((EntityPlayer) entityplayermp, map) && (i3 == EnumGameType.a.a() || i3 == entityplayermp.c.b().a()) && (i4 <= 0 || entityplayermp.bH >= i4) && entityplayermp.bH <= i5) {
+                        ((List) object).add(entityplayermp);
                     }
                 }
             }
 
             if (chunkcoordinates != null) {
-                Collections.sort((List)object, new PlayerPositionComparator(chunkcoordinates));
+                Collections.sort((List) object, new PlayerPositionComparator(chunkcoordinates));
             }
 
             if (flag0) {
-                Collections.reverse((List)object);
+                Collections.reverse((List) object);
             }
 
             if (i2 > 0) {
-                object = ((List)object).subList(0, Math.min(i2, ((List)object).size()));
+                object = ((List) object).subList(0, Math.min(i2, ((List) object).size()));
             }
 
-            return (List)object;
+            return (List) object;
         }
     }
 
@@ -809,8 +805,8 @@ public abstract class ServerConfigurationManager {
                     return true;
                 }
 
-                entry = (Entry)iterator.next();
-                String s0 = (String)entry.getKey();
+                entry = (Entry) iterator.next();
+                String s0 = (String) entry.getKey();
 
                 flag0 = false;
                 if (s0.endsWith("_min") && s0.length() > 4) {
@@ -828,25 +824,24 @@ public abstract class ServerConfigurationManager {
                 Score score = entityplayer.bM().a(entityplayer.an(), scoreobjective);
 
                 i0 = score.c();
-                if (i0 < ((Integer)entry.getValue()).intValue() && flag0) {
+                if (i0 < ((Integer) entry.getValue()).intValue() && flag0) {
                     return false;
                 }
-            } while (i0 <= ((Integer)entry.getValue()).intValue() || flag0);
+            } while (i0 <= ((Integer) entry.getValue()).intValue() || flag0);
 
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
 
     public void a(double d0, double d1, double d2, double d3, int i0, Packet packet) {
-        this.a((EntityPlayer)null, d0, d1, d2, d3, i0, packet);
+        this.a((EntityPlayer) null, d0, d1, d2, d3, i0, packet);
     }
 
     public void a(EntityPlayer entityplayer, double d0, double d1, double d2, double d3, int i0, Packet packet) {
         for (int i1 = 0; i1 < this.a.size(); ++i1) {
-            EntityPlayerMP entityplayermp = (EntityPlayerMP)this.a.get(i1);
+            EntityPlayerMP entityplayermp = (EntityPlayerMP) this.a.get(i1);
 
             if (entityplayermp != entityplayer && entityplayermp.ar == i0) {
                 double d4 = d0 - entityplayermp.u;
@@ -862,7 +857,7 @@ public abstract class ServerConfigurationManager {
 
     public void g() {
         for (int i0 = 0; i0 < this.a.size(); ++i0) {
-            this.b((EntityPlayerMP)this.a.get(i0));
+            this.b((EntityPlayerMP) this.a.get(i0));
         }
     }
 
@@ -907,7 +902,7 @@ public abstract class ServerConfigurationManager {
     }
 
     public String[] m() {
-        WorldServer srv = (WorldServer)((CanaryWorld)Canary.getServer().getDefaultWorld()).getHandle();
+        WorldServer srv = (WorldServer) ((CanaryWorld) Canary.getServer().getDefaultWorld()).getHandle();
 
         return srv.M().e().f();
     }
@@ -925,7 +920,7 @@ public abstract class ServerConfigurationManager {
         Iterator iterator = this.a.iterator();
 
         while (iterator.hasNext()) {
-            EntityPlayerMP entityplayermp = (EntityPlayerMP)iterator.next();
+            EntityPlayerMP entityplayermp = (EntityPlayerMP) iterator.next();
 
             if (entityplayermp.q().equals(s0)) {
                 arraylist.add(entityplayermp);
@@ -960,10 +955,10 @@ public abstract class ServerConfigurationManager {
 
     public void r() {
         // CanaryMod shutdown hook
-        ServerShutdownHook hook = (ServerShutdownHook)new ServerShutdownHook("Server closed").call();
+        ServerShutdownHook hook = (ServerShutdownHook) new ServerShutdownHook("Server closed").call();
         //
         while (!this.a.isEmpty()) {
-            ((EntityPlayerMP)this.a.get(0)).a.c(hook.getReason());
+            ((EntityPlayerMP) this.a.get(0)).a.c(hook.getReason());
         }
     }
 
@@ -973,7 +968,7 @@ public abstract class ServerConfigurationManager {
 
     public void a(ChatMessageComponent chatmessagecomponent, boolean flag0) {
         this.e.a(chatmessagecomponent);
-        this.a((Packet)(new Packet3Chat(chatmessagecomponent, flag0)));
+        this.a((Packet) (new Packet3Chat(chatmessagecomponent, flag0)));
     }
 
     /**
