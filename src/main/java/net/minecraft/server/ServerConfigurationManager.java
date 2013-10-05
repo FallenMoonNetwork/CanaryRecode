@@ -130,6 +130,9 @@ public abstract class ServerConfigurationManager {
                 entity.p = false;
             }
         }
+        // CanaryMod: Send Message of the Day
+        Canary.motd().sendMOTD(entityplayermp.getPlayer());
+        //
     }
 
     protected void a(ServerScoreboard serverscoreboard, EntityPlayerMP entityplayermp) {

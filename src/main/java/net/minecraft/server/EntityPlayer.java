@@ -57,7 +57,6 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     private int h;
     public EntityFishHook bM;
     private String respawnWorld; // CanaryMod: Respawn world (for bed spawns)
-    protected String dispName = ""; // CanaryMod: Mojang screwed us from using the methods in EntityLiving...
     private long currentSessionStart; // CanaryMod: current session tracking.
     //Darkdiplomat Note: Fields are non-persistant between respawns and world switching. Use the Meta tag for persistance.
 
@@ -1562,7 +1561,6 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     }
 
     protected void saveMeta() {
-        metadata.put("CustomName", dispName == null ? "" : dispName);
         metadata.put("TimePlayed", metadata.getLong("TimePlayed") + ((System.currentTimeMillis() / 1000) - currentSessionStart));
         currentSessionStart = System.currentTimeMillis(); // When saving, reset the start time so there isnt a duplicate addition of time stored
     }

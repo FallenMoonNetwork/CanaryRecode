@@ -127,6 +127,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
             } else {
                 // This is a copy of the real player list already, no need to copy again (re: Collections.copy())
                 ArrayList<Player> receivers = Canary.getServer().getPlayerList();
+                defaultChatpattern.put("%name", getDisplayName()); // Safe to get name now
                 defaultChatpattern.put("%message", out);
                 ChatHook hook = (ChatHook) new ChatHook(this, chatFormat, receivers, defaultChatpattern).call();
                 if (hook.isCanceled()) {
@@ -137,7 +138,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
                 for (Player player : receivers) {
                     player.message(formattedMessage);
                 }
-                Canary.logInfo("[" + getName() + "] " + TextFormat.removeFormatting(formattedMessage));
+                Canary.logChat(TextFormat.removeFormatting(formattedMessage));
             }
         }
 
@@ -564,7 +565,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         if (data[2] != null && !data[2].isEmpty()) {
             muted = Boolean.valueOf(data[2]);
         }
-        defaultChatpattern.put("%name", getDisplayName());
+        //defaultChatpattern.put("%name", getDisplayName()); // Display name not initialized at this time
         defaultChatpattern.put("%prefix", getPrefix());
     }
 

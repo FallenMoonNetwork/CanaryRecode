@@ -23,7 +23,7 @@ import net.canarymod.warp.WarpProvider;
 
 /**
  * The implementation of Canary, the new catch-all etc replacement, only much better :P
- * 
+ *
  * @author Chris Ksoll
  * @author Jos Kuijpers
  * @author Brian McCarthy
@@ -40,6 +40,7 @@ public class CanaryMod extends Canary {
         DatabaseLoader.load();
 
         this.config = new Configuration();
+        this.motd = new MessageOfTheDay();
         // Initialize the subsystems that do not rely on others
         this.commandManager = new CommandManager();
         // this.permissionManager = new PermissionManager();
