@@ -178,8 +178,6 @@ public class CanaryWorldManager implements WorldManager {
 
     /**
      * This'll actually remove all marked worlds from the system so that they may get GC'd soon after
-     *
-     * @param world
      */
     private void removeWorlds() {
         Iterator<String> iter = markedForUnload.keySet().iterator();
@@ -214,6 +212,11 @@ public class CanaryWorldManager implements WorldManager {
     }
 
     @Override
+    public boolean worldIsLoaded(String name, DimensionType type) {
+        return loadedWorlds.containsKey(name.concat("_").concat(type.getName()));
+    }
+
+    @Override
     public boolean worldExists(String name) {
         return new File("worlds/" + name.split("_")[0] + "/" + name).isDirectory();
     }
@@ -221,10 +224,5 @@ public class CanaryWorldManager implements WorldManager {
     @Override
     public ArrayList<String> getExistingWorlds() {
         return existingWorlds; // TODO: This only reads base folders not the real dimension folders!
-    }
-
-    // Implementation specific shortcuts
-    public WorldServer getWorldServer(String name, int id) {
-        return (WorldServer) ((CanaryWorld) loadedWorlds.get(name)).getHandle();
     }
 }
