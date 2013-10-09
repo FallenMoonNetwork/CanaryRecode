@@ -709,6 +709,30 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      * {@inheritDoc}
      */
     @Override
+    public void setLevel(int level) {
+        this.setExperience(ToolBox.levelToExperience(level));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addLevel(int level) {
+        this.addExperience(ToolBox.levelToExperience(level));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeLevel(int level) {
+        this.removeExperience(ToolBox.levelToExperience(level));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isSleeping() {
         return getHandle().bh();
     }
