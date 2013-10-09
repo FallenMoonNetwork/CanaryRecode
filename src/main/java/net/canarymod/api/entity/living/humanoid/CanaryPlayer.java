@@ -772,13 +772,6 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDimension(World world) {
-        Canary.getServer().getConfigurationManager().switchDimension(this, world, false);
-    }
 
     /**
      * {@inheritDoc}
@@ -809,8 +802,8 @@ public class CanaryPlayer extends CanaryHuman implements Player {
         if (isRiding()) {
             getHandle().h(getHandle().o);
         }
-        if (world != this.getWorld()) {
-            this.setDimension(world);
+        if (!world.equals(this.getWorld())) {
+            Canary.getServer().getConfigurationManager().switchDimension(this, world, false);
         }
 
         getHandle().a.a(x, y, z, rotation, pitch, getWorld().getType().getId(), getWorld().getName(), cause);

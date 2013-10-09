@@ -716,13 +716,11 @@ public class CanaryWorld implements World {
 
     @Override
     public boolean equals(Object ob) {
-
         if (!(ob instanceof CanaryWorld)) {
             return false;
         }
         CanaryWorld test = (CanaryWorld) ob;
-
-        return test == this;
+        return test.fqName.equals(this.fqName);
     }
 
     @Override
