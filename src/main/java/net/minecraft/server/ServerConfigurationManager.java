@@ -98,7 +98,7 @@ public abstract class ServerConfigurationManager {
         this.a((ServerScoreboard) worldserver.X(), entityplayermp);
         this.b(entityplayermp, worldserver);
         // CanaryMod Connection hook
-        ConnectionHook hook = (ConnectionHook) new ConnectionHook(entityplayermp.getPlayer(), ChatMessageComponent.b("multiplayer.player.joined", new Object[]{entityplayermp.ay()}).a(EnumChatFormatting.o).toString(), firstTime).call();
+        ConnectionHook hook = (ConnectionHook) new ConnectionHook(entityplayermp.getPlayer(), ChatMessageComponent.b("multiplayer.player.joined", new Object[]{entityplayermp.ay()}).a(EnumChatFormatting.o).a(true), firstTime).call();
         if (!hook.isHidden()) {
             this.a((Packet) (new Packet3Chat(ChatMessageComponent.e(hook.getMessage()))));
         }

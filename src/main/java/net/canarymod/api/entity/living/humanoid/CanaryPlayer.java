@@ -138,7 +138,7 @@ public class CanaryPlayer extends CanaryHuman implements Player {
                 for (Player player : receivers) {
                     player.message(formattedMessage);
                 }
-                Canary.logChat(TextFormat.removeFormatting(formattedMessage));
+                Canary.logChat(TextFormat.consoleFormat(formattedMessage));
             }
         }
 
@@ -469,6 +469,10 @@ public class CanaryPlayer extends CanaryHuman implements Player {
     @Override
     public void kick(String reason) {
         ((EntityPlayerMP) entity).a.c(reason);
+    }
+
+    public void kickNoHook(String reason) {
+        ((EntityPlayerMP) entity).a.kickNoHook(reason);
     }
 
     /**

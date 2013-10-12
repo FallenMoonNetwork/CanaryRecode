@@ -16,14 +16,7 @@ import net.canarymod.api.world.blocks.CanaryBlock;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.channels.CustomPayloadChannelException;
 import net.canarymod.config.Configuration;
-import net.canarymod.hook.player.BlockLeftClickHook;
-import net.canarymod.hook.player.BlockRightClickHook;
-import net.canarymod.hook.player.DisconnectionHook;
-import net.canarymod.hook.player.PlayerArmSwingHook;
-import net.canarymod.hook.player.PlayerMoveHook;
-import net.canarymod.hook.player.SignChangeHook;
-import net.canarymod.hook.player.SlotClickHook;
-import net.canarymod.hook.player.TeleportHook;
+import net.canarymod.hook.player.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInput;
@@ -97,17 +90,39 @@ public class NetServerHandler extends NetHandler {
     }
 
     public void c(String s0) {
-        // CanaryMod disconnect hook
-        DisconnectionHook hook = (DisconnectionHook) new DisconnectionHook(serverHandler.getUser(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{this.c.ay()}).a(EnumChatFormatting.o).toString()).call();
+        if (!this.b) {
+            // CanaryMod: KickHook
+            new KickHook(serverHandler.getUser(), Canary.getServer(), s0).call();
+            //
+            this.c.l();
+            this.b(new Packet255KickDisconnect(s0));
+            this.a.d();
+            // CanaryMod: DisconnectionHook
+            DisconnectionHook disconHook = (DisconnectionHook) new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{this.c.ay()}).a(EnumChatFormatting.o).a(true)).call();
+            if (!disconHook.isHidden()) {
+                this.d.af().a(ChatMessageComponent.d(disconHook.getLeaveMessage()));
+            }
+            //
+            this.d.af().e(this.c);
+            this.b = true;
+
+            // CanaryMod unregester Custom Payload registrations
+            Canary.channels().unregisterClientAll(serverHandler);
+            // End
+        }
+    }
+
+    public void kickNoHook(String s0) {
         if (!this.b) {
             this.c.l();
             this.b(new Packet255KickDisconnect(s0));
             this.a.d();
-            // CanaryMod hook data
-            if (!hook.isHidden()) {
-                this.d.af().a((Packet) (new Packet3Chat(ChatMessageComponent.d(hook.getLeaveMessage()))));
+            // CanaryMod: DisconnectionHook
+            DisconnectionHook disconHook = (DisconnectionHook) new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{this.c.ay()}).a(EnumChatFormatting.o).a(true)).call();
+            if (!disconHook.isHidden()) {
+                this.d.af().a(ChatMessageComponent.d(disconHook.getLeaveMessage()));
             }
-            // //
+            //
             this.d.af().e(this.c);
             this.b = true;
 
@@ -502,12 +517,18 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void a(String s0, Object[] aobject) {
-        // CanaryMod: DisconnectionHook
-        DisconnectionHook hook = (DisconnectionHook) new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{this.c.ay()}).a(EnumChatFormatting.o).toString()).call();
         this.d.an().a(this.c.c_() + " lost connection: " + s0);
-        this.d.af().a((Packet) (new Packet3Chat(ChatMessageComponent.e(hook.getLeaveMessage()))));
+        // CanaryMod: DisconnectionHook
+        DisconnectionHook hook = (DisconnectionHook) new DisconnectionHook(this.c.getPlayer(), s0, ChatMessageComponent.b("multiplayer.player.left", new Object[]{this.c.ay()}).a(EnumChatFormatting.o).a(true)).call();
+        if (!hook.isHidden()) {
+            this.d.af().a((Packet) (new Packet3Chat(ChatMessageComponent.d(hook.getLeaveMessage()))));
+        }
+        //
         this.d.af().e(this.c);
         this.b = true;
+        // CanaryMod unregester Custom Payload registrations
+        Canary.channels().unregisterClientAll(serverHandler);
+        // End
         if (this.d.K() && this.c.c_().equals(this.d.J())) {
             this.d.an().a("Stopping singleplayer server as player logged out");
             this.d.p();
