@@ -607,6 +607,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.bq.b(nbttagcompound);
         this.bG.a(nbttagcompound);
         nbttagcompound.a("EnderItems", (NBTBase) this.a.h());
+        //Make sure meta is saved right
+        metadata.put("TimePlayed", metadata.getLong("TimePlayed") + ((System.currentTimeMillis() / 1000) - currentSessionStart));
     }
 
     public void a(IInventory iinventory) {

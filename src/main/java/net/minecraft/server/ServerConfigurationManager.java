@@ -210,7 +210,7 @@ public abstract class ServerConfigurationManager {
 
             return saves.a(name);
         } else {
-            throw new RuntimeException("ISaveHandler is not of type SaveHandler! Failing to laod playerdata");
+            throw new RuntimeException("ISaveHandler is not of type SaveHandler! Failing to load playerdata");
         }
     }
 
