@@ -93,7 +93,7 @@ public class CanaryMod extends Canary {
     }
 
     public void initMOTDListener() {
-        this.motd.registerMOTDListener(new CanaryMessageOfTheDayListener(), Canary.getServer());
+        new CanaryMessageOfTheDayListener(getServer());
     }
 
     @Override
