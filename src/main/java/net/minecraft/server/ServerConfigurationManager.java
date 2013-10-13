@@ -233,9 +233,7 @@ public abstract class ServerConfigurationManager {
                 // Call PlayerListEntryHook
                 new PlayerListEntryHook(clone, entityplayermp1.getPlayer()).call();
                 // Send Packet
-                Canary.logDebug("Entry Sending: " + clone.toString());
                 entityplayermp1.a.b(new Packet201PlayerInfo(clone.getName(), clone.isShown(), 1000)); //Ping Ignored
-                Canary.logDebug("Entry Sent");
             }
         }
         //
@@ -255,9 +253,7 @@ public abstract class ServerConfigurationManager {
                 // Call PlayerListEntryHook
                 new PlayerListEntryHook(plentry, entityplayermp.getPlayer()).call();
                 // Send Packet
-                Canary.logDebug("Entry Sending: " + plentry.toString());
                 entityplayermp.a.b(new Packet201PlayerInfo(plentry.getName(), plentry.isShown(), plentry.getPing()));
-                Canary.logDebug("Entry Sent");
             }
         }
         //

@@ -13,6 +13,8 @@ import net.canarymod.database.DatabaseLoader;
 import net.canarymod.help.HelpManager;
 import net.canarymod.hook.HookExecutor;
 import net.canarymod.kit.KitProvider;
+import net.canarymod.motd.CanaryMessageOfTheDayListener;
+import net.canarymod.motd.MessageOfTheDay;
 import net.canarymod.permissionsystem.PermissionManager;
 import net.canarymod.plugin.PluginLoader;
 import net.canarymod.user.OperatorsProvider;
@@ -24,9 +26,10 @@ import net.canarymod.warp.WarpProvider;
 /**
  * The implementation of Canary, the new catch-all etc replacement, only much better :P
  *
- * @author Chris Ksoll
+ * @author Chris (damagefilter)
  * @author Jos Kuijpers
- * @author Brian McCarthy
+ * @author Brian (WWOL)
+ * @author Jason (darkdiplomat)
  */
 public class CanaryMod extends Canary {
 
@@ -87,6 +90,10 @@ public class CanaryMod extends Canary {
 
     public void initPermissions() {
         this.permissionManager = new PermissionManager();
+    }
+
+    public void initMOTDListener() {
+        this.motd.registerMOTDListener(new CanaryMessageOfTheDayListener(), Canary.getServer());
     }
 
     @Override

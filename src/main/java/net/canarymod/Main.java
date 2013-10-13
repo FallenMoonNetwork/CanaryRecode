@@ -3,6 +3,7 @@ package net.canarymod;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.util.logging.Level;
+
 import net.canarymod.api.inventory.CanaryEnchantment;
 import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.Enchantment;
@@ -30,14 +31,15 @@ public class Main {
 
     /**
      * The canary Bootstrap process
-     * 
+     *
      * @param args
      */
     public static void main(String[] args) {
         System.out.println("Starting: " + Canary.getImplementationTitle() + " " + Canary.getImplementationVersion() + " Specified By: " + Canary.getSpecificationTitle() + " " + Canary.getSpecificationVersion());
         try {
             Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException e) {} // Need to initialize the SQLite driver for some reason, initialize here for plugin use as well
+        } catch (ClassNotFoundException e) {
+        } // Need to initialize the SQLite driver for some reason, initialize here for plugin use as well
         try {
             MinecraftServer.setHeadless(GraphicsEnvironment.isHeadless());
             for (int index = 0; index < args.length; ++index) {
@@ -73,6 +75,8 @@ public class Main {
             // commands require a valid commandOwner which is the server.
             // That means for commands to work, we gotta load Minecraft first
             mod.initCommands();
+            // and finally throw in the MOTDListner
+            mod.initMOTDListener();
         } catch (Throwable t) {
             Canary.logStacktrace("Exception while starting the server: ", t);
         }
@@ -80,7 +84,7 @@ public class Main {
 
     /**
      * Restart the server without killing the JVM
-     * 
+     *
      * @param reloadCanary
      */
     public static void restart(boolean reloadCanary) {
