@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import net.canarymod.Canary;
+import net.canarymod.ToolBox;
 import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.entity.living.humanoid.CanaryHuman;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
@@ -57,7 +58,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     private int h;
     public EntityFishHook bM;
     private String respawnWorld; // CanaryMod: Respawn world (for bed spawns)
-    private long currentSessionStart; // CanaryMod: current session tracking.
+    private long currentSessionStart = ToolBox.getUnixTimestamp(); // CanaryMod: current session tracking.
     //Darkdiplomat Note: Fields are non-persistant between respawns and world switching. Use the Meta tag for persistance.
 
     public EntityPlayer(World world, String s0) {
@@ -71,7 +72,6 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.b((double) chunkcoordinates.a + 0.5D, (double) (chunkcoordinates.b + 1), (double) chunkcoordinates.c + 0.5D, 0.0F, 0.0F);
         this.ba = 180.0F;
         this.ad = 20;
-        this.currentSessionStart = System.currentTimeMillis() / 1000;
         this.entity = new CanaryHuman(this) { // CanaryMod: Special Case wrap
             @Override
             public String getFqName() {
@@ -133,7 +133,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
                 if (--this.g == 0 && !this.q.I) {
                     this.n();
                 }
-            } else {
+            }
+            else {
                 this.bu();
             }
         }
@@ -151,11 +152,13 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             if (!this.q.I) {
                 if (!this.h()) {
                     this.a(true, true, false);
-                } else if (this.q.v()) {
+                }
+                else if (this.q.v()) {
                     this.a(false, true, true);
                 }
             }
-        } else if (this.b > 0) {
+        }
+        else if (this.b > 0) {
             ++this.b;
             if (this.b >= 110) {
                 this.b = 0;
@@ -288,7 +291,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             }
 
             this.o = null;
-        } else {
+        }
+        else {
             super.a(entity);
         }
     }
@@ -297,7 +301,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         if (!this.q.I && this.ah()) {
             this.a((Entity) null);
             this.b(false);
-        } else {
+        }
+        else {
             double d0 = this.u;
             double d1 = this.v;
             double d2 = this.w;
@@ -367,7 +372,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
             if (this.o != null && !this.o.M) {
                 axisalignedbb = this.E.a(this.o.E).b(1.0D, 0.0D, 1.0D);
-            } else {
+            }
+            else {
                 axisalignedbb = this.E.b(1.0D, 0.5D, 1.0D);
             }
 
@@ -419,7 +425,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         if (damagesource != null) {
             this.x = (double) (-MathHelper.b((this.aA + this.A) * 3.1415927F / 180.0F) * 0.1F);
             this.z = (double) (-MathHelper.a((this.aA + this.A) * 3.1415927F / 180.0F) * 0.1F);
-        } else {
+        }
+        else {
             this.x = this.z = 0.0D;
         }
 
@@ -434,7 +441,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         if (entity instanceof EntityPlayer) {
             this.a(StatList.A, 1);
             collection.addAll(this.bM().a(ScoreObjectiveCriteria.d));
-        } else {
+        }
+        else {
             this.a(StatList.z, 1);
         }
 
@@ -459,9 +467,11 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     public EntityItem a(ItemStack itemstack, boolean flag0) {
         if (itemstack == null) {
             return null;
-        } else if (itemstack.b == 0) {
+        }
+        else if (itemstack.b == 0) {
             return null;
-        } else {
+        }
+        else {
             EntityItem entityitem = new EntityItem(this.q, this.u, this.v - 0.30000001192092896D + (double) this.f(), this.w, itemstack);
 
             entityitem.b = 40;
@@ -475,7 +485,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
                 entityitem.x = (double) (-MathHelper.a(f2) * f1);
                 entityitem.z = (double) (MathHelper.b(f2) * f1);
                 entityitem.y = 0.20000000298023224D;
-            } else {
+            }
+            else {
                 f0 = 0.3F;
                 entityitem.x = (double) (-MathHelper.a(this.A / 180.0F * 3.1415927F) * MathHelper.b(this.B / 180.0F * 3.1415927F) * f0);
                 entityitem.z = (double) (MathHelper.b(this.A / 180.0F * 3.1415927F) * MathHelper.b(this.B / 180.0F * 3.1415927F) * f0);
@@ -523,7 +534,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
                 if (!itemstack.b(block) && f0 <= 1.0F) {
                     f0 += f1 * 0.08F;
-                } else {
+                }
+                else {
                     f0 += f1;
                 }
             }
@@ -583,6 +595,12 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
             this.a.a(nbttaglist1);
         }
+
+        // CanaryMod: Check if this is the player's first time and if the date/time needs saved
+        if (!metadata.containsKey("FirstJoin")) {
+            metadata.put("FirstJoin", DateUtils.longToDateTime(System.currentTimeMillis()));
+        }
+        //
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -608,7 +626,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.bG.a(nbttagcompound);
         nbttagcompound.a("EnderItems", (NBTBase) this.a.h());
         //Make sure meta is saved right
-        metadata.put("TimePlayed", metadata.getLong("TimePlayed") + ((System.currentTimeMillis() / 1000) - currentSessionStart));
+        saveMeta();
     }
 
     public void a(IInventory iinventory) {
@@ -643,13 +661,16 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     public boolean a(DamageSource damagesource, float f0) {
         if (this.ar()) {
             return false;
-        } else if (this.bG.a && !damagesource.g()) {
+        }
+        else if (this.bG.a && !damagesource.g()) {
             return false;
-        } else {
+        }
+        else {
             this.aV = 0;
             if (this.aN() <= 0.0F) {
                 return false;
-            } else {
+            }
+            else {
                 if (this.bh() && !this.q.I) {
                     this.a(true, true, false);
                 }
@@ -670,7 +691,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
                 if (f0 == 0.0F) {
                     return false;
-                } else {
+                }
+                else {
                     Entity entity = damagesource.i();
 
                     if (entity instanceof EntityArrow && ((EntityArrow) entity).c != null) {
@@ -763,7 +785,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         ItemStack itemstack1 = itemstack != null ? itemstack.m() : null;
         if (entity.c(this)) {
             return true;
-        } else {
+        }
+        else {
             // CanaryMod: EntityRightClickHook
             EntityRightClickHook hook = (EntityRightClickHook) new EntityRightClickHook(entity.getCanaryEntity(), ((EntityPlayerMP) this).getPlayer()).call();
             if (hook.isCanceled()) {
@@ -786,7 +809,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             if (itemstack != null && itemstack == this.by()) {
                 if (itemstack.b <= 0 && !this.bG.d) {
                     this.bz();
-                } else if (itemstack.b < itemstack1.b && this.bG.d) {
+                }
+                else if (itemstack.b < itemstack1.b && this.bG.d) {
                     itemstack.b = itemstack1.b;
                 }
             }
@@ -889,7 +913,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
                         this.a(StatList.w, Math.round(f0 * 10.0F));
                         if (i1 > 0 && flag2) {
                             entity.d(i1 * 4);
-                        } else if (flag1) {
+                        }
+                        else if (flag1) {
                             entity.B();
                         }
                     }
@@ -976,7 +1001,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
             this.t(i4);
             this.b((double) ((float) i0 + f0), (double) ((float) i1 + 0.9375F), (double) ((float) i2 + f1));
-        } else {
+        }
+        else {
             this.b((double) ((float) i0 + 0.5F), (double) ((float) i1 + 0.9375F), (double) ((float) i2 + 0.5F));
         }
 
@@ -1035,7 +1061,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
         if (flag0) {
             this.b = 0;
-        } else {
+        }
+        else {
             this.b = 100;
         }
 
@@ -1059,7 +1086,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             ChunkCoordinates chunkcoordinates1 = BlockBed.b(world, chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c, 0);
 
             return chunkcoordinates1;
-        } else { // World spawn
+        }
+        else { // World spawn
             Material material = world.g(chunkcoordinates.a, chunkcoordinates.b, chunkcoordinates.c);
             Material material1 = world.g(chunkcoordinates.a, chunkcoordinates.b + 1, chunkcoordinates.c);
             boolean flag1 = !material.a() && !material.d();
@@ -1082,7 +1110,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
         if (flag0) {
             this.ah.b(16, Byte.valueOf((byte) (b0 | 1 << i0)));
-        } else {
+        }
+        else {
             this.ah.b(16, Byte.valueOf((byte) (b0 & ~(1 << i0))));
         }
     }
@@ -1102,7 +1131,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         if (chunkcoordinates != null) {
             this.c = new ChunkCoordinates(chunkcoordinates);
             this.d = flag0;
-        } else {
+        }
+        else {
             this.c = null;
             this.d = false;
         }
@@ -1120,7 +1150,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.a(StatList.u, 1);
         if (this.ai()) {
             this.a(0.8F);
-        } else {
+        }
+        else {
             this.a(0.2F);
         }
     }
@@ -1138,7 +1169,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             super.e(f0, f1);
             this.y = d3 * 0.6D;
             this.aR = f2;
-        } else {
+        }
+        else {
             super.e(f0, f1);
         }
 
@@ -1159,27 +1191,32 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
                     this.a(StatList.q, i0);
                     this.a(0.015F * (float) i0 * 0.01F);
                 }
-            } else if (this.H()) {
+            }
+            else if (this.H()) {
                 i0 = Math.round(MathHelper.a(d0 * d0 + d2 * d2) * 100.0F);
                 if (i0 > 0) {
                     this.a(StatList.m, i0);
                     this.a(0.015F * (float) i0 * 0.01F);
                 }
-            } else if (this.e()) {
+            }
+            else if (this.e()) {
                 if (d1 > 0.0D) {
                     this.a(StatList.o, (int) Math.round(d1 * 100.0D));
                 }
-            } else if (this.F) {
+            }
+            else if (this.F) {
                 i0 = Math.round(MathHelper.a(d0 * d0 + d2 * d2) * 100.0F);
                 if (i0 > 0) {
                     this.a(StatList.l, i0);
                     if (this.ai()) {
                         this.a(0.099999994F * (float) i0 * 0.01F);
-                    } else {
+                    }
+                    else {
                         this.a(0.01F * (float) i0 * 0.01F);
                     }
                 }
-            } else {
+            }
+            else {
                 i0 = Math.round(MathHelper.a(d0 * d0 + d2 * d2) * 100.0F);
                 if (i0 > 25) {
                     this.a(StatList.p, i0);
@@ -1197,12 +1234,15 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
                     this.a(StatList.r, i0);
                     if (this.e == null) {
                         this.e = new ChunkCoordinates(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w));
-                    } else if ((double) this.e.e(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w)) >= 1000000.0D) {
+                    }
+                    else if ((double) this.e.e(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w)) >= 1000000.0D) {
                         this.a((StatBase) AchievementList.q, 1);
                     }
-                } else if (this.o instanceof EntityBoat) {
+                }
+                else if (this.o instanceof EntityBoat) {
                     this.a(StatList.s, i0);
-                } else if (this.o instanceof EntityPig) {
+                }
+                else if (this.o instanceof EntityPig) {
                     this.a(StatList.t, i0);
                 }
             }
@@ -1307,7 +1347,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     public boolean d(int i0, int i1, int i2) {
         if (this.bG.e) {
             return true;
-        } else {
+        }
+        else {
             int i3 = this.q.a(i0, i1, i2);
 
             if (i3 > 0) {
@@ -1337,7 +1378,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     protected int e(EntityPlayer entityplayer) {
         if (this.q.O().b("keepInventory")) {
             return 0;
-        } else {
+        }
+        else {
             int i0 = this.bH * 7;
 
             return i0 > 100 ? 100 : i0;
@@ -1362,7 +1404,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             this.bJ = entityplayer.bJ;
             this.c(entityplayer.bw());
             this.as = entityplayer.as;
-        } else if (this.q.O().b("keepInventory")) {
+        }
+        else if (this.q.O().b("keepInventory")) {
             this.bn.b(entityplayer.bn);
             this.bH = entityplayer.bH;
             this.bI = entityplayer.bI;
@@ -1464,7 +1507,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     public void setXP(int i) {
         if (i < this.bH) {
             this.removeXP(this.bH - i);
-        } else {
+        }
+        else {
             this.t(i - this.bH);
         }
         updateXP();
@@ -1559,12 +1603,12 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     }
 
     public long getTimePlayed() {
-        return metadata.getLong("TimePlayed") + ((System.currentTimeMillis() / 1000) - currentSessionStart);
+        return metadata.getLong("TimePlayed") + (ToolBox.getUnixTimestamp() - currentSessionStart);
     }
 
     protected void saveMeta() {
-        metadata.put("TimePlayed", metadata.getLong("TimePlayed") + ((System.currentTimeMillis() / 1000) - currentSessionStart));
-        currentSessionStart = System.currentTimeMillis(); // When saving, reset the start time so there isnt a duplicate addition of time stored
+        metadata.put("TimePlayed", metadata.getLong("TimePlayed") + (ToolBox.getUnixTimestamp() - currentSessionStart));
+        currentSessionStart = ToolBox.getUnixTimestamp(); // When saving, reset the start time so there isnt a duplicate addition of time stored
     }
 
     public CanaryHuman getCanaryHuman() {
