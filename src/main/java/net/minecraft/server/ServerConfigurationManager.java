@@ -7,6 +7,7 @@ import net.canarymod.Translator;
 import net.canarymod.api.CanaryConfigurationManager;
 import net.canarymod.api.PlayerListEntry;
 import net.canarymod.api.entity.living.humanoid.CanaryPlayer;
+import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.packet.CanaryPacket;
 import net.canarymod.api.world.CanaryWorld;
 import net.canarymod.api.world.position.Location;
@@ -20,6 +21,7 @@ import net.canarymod.hook.player.PlayerRespawningHook;
 import net.canarymod.hook.player.PreConnectionHook;
 import net.canarymod.hook.player.TeleportHook;
 import net.canarymod.hook.system.ServerShutdownHook;
+import net.visualillusionsent.utils.DateUtils;
 
 import java.net.SocketAddress;
 import java.text.SimpleDateFormat;
@@ -71,7 +73,8 @@ public abstract class ServerConfigurationManager {
         if (nbttagcompound != null) {
             w = (CanaryWorld) Canary.getServer().getWorldManager().getWorld(nbttagcompound.i("LevelName"), net.canarymod.api.world.DimensionType.fromId(nbttagcompound.e("Dimension")), true);
             firstTime = false;
-        } else {
+        }
+        else {
             w = (CanaryWorld) Canary.getServer().getDefaultWorld();
         }
         entityplayermp.a(w.getHandle());
@@ -98,7 +101,7 @@ public abstract class ServerConfigurationManager {
         this.a((ServerScoreboard) worldserver.X(), entityplayermp);
         this.b(entityplayermp, worldserver);
         // CanaryMod Connection hook
-        ConnectionHook hook = (ConnectionHook) new ConnectionHook(entityplayermp.getPlayer(), ChatMessageComponent.b("multiplayer.player.joined", new Object[]{entityplayermp.ay()}).a(EnumChatFormatting.o).a(true), firstTime).call();
+        ConnectionHook hook = (ConnectionHook) new ConnectionHook(entityplayermp.getPlayer(), ChatMessageComponent.b("multiplayer.player.joined", new Object[]{ entityplayermp.ay() }).a(EnumChatFormatting.o).a(true), firstTime).call();
         if (!hook.isHidden()) {
             this.a((Packet) (new Packet3Chat(ChatMessageComponent.e(hook.getMessage()))));
         }
@@ -129,6 +132,14 @@ public abstract class ServerConfigurationManager {
                 entityplayermp.a(entity);
                 entity.p = false;
             }
+        }
+
+        // Making sure some stuff is there before attempting to read it (if the player has no nbt, then the usual route is skipped)
+        if (nbttagcompound != null && nbttagcompound.b("Canary")) {
+            entityplayermp.metadata = new CanaryCompoundTag((NBTTagCompound) nbttagcompound.a("Canary"));
+        }
+        else {
+            entityplayermp.initializeNewMeta();
         }
         // CanaryMod: Send Message of the Day
         Canary.motd().sendMOTD(entityplayermp.getPlayer());
@@ -192,7 +203,8 @@ public abstract class ServerConfigurationManager {
             entityplayermp.f(nbttagcompound);
             nbttagcompound1 = nbttagcompound;
             System.out.println("loading single player");
-        } else {
+        }
+        else {
             // CanaryMod Multiworld
             nbttagcompound1 = playerFileData.get(entityplayermp.getCanaryWorld().getName()).b(entityplayermp);
             //
@@ -209,7 +221,8 @@ public abstract class ServerConfigurationManager {
             SaveHandler saves = (SaveHandler) handler;
 
             return saves.a(name);
-        } else {
+        }
+        else {
             throw new RuntimeException("ISaveHandler is not of type SaveHandler! Failing to load playerdata");
         }
     }
@@ -399,7 +412,8 @@ public abstract class ServerConfigurationManager {
 
         if (this.e.O()) {
             object = new DemoWorldManager(world);
-        } else {
+        }
+        else {
             object = new ItemInWorldManager(world);
         }
 
@@ -450,7 +464,8 @@ public abstract class ServerConfigurationManager {
         //
         if (this.e.O()) {
             object = new DemoWorldManager(worldserver);
-        } else {
+        }
+        else {
             object = new ItemInWorldManager(worldserver);
         }
         EntityPlayerMP entityplayermp1 = new EntityPlayerMP(this.e, worldserver, entityplayermp.c_(), (ItemInWorldManager) object);
@@ -473,7 +488,8 @@ public abstract class ServerConfigurationManager {
             if (chunkcoordinates1 != null) {
                 entityplayermp1.b((double) ((float) chunkcoordinates1.a + 0.5F), (double) ((float) chunkcoordinates1.b + 0.1F), (double) ((float) chunkcoordinates1.c + 0.5F), 0.0F, 0.0F);
                 entityplayermp1.a(chunkcoordinates, flag1);
-            } else {
+            }
+            else {
                 if (isBedSpawn) {
                     entityplayermp1.a.b(new Packet70GameEvent(0, 0));
                 }
@@ -561,19 +577,22 @@ public abstract class ServerConfigurationManager {
             if (entity.T()) {
                 worldserver.a(entity, false);
             }
-        } else if (entity.ar == 0) {
+        }
+        else if (entity.ar == 0) {
             d0 *= d2;
             d1 *= d2;
             entity.b(d0, entity.v, d1, entity.A, entity.B);
             if (entity.T()) {
                 worldserver.a(entity, false);
             }
-        } else {
+        }
+        else {
             ChunkCoordinates chunkcoordinates;
 
             if (i0 == 1) {
                 chunkcoordinates = worldserver1.K();
-            } else {
+            }
+            else {
                 chunkcoordinates = worldserver1.l();
             }
 
@@ -731,7 +750,8 @@ public abstract class ServerConfigurationManager {
     public List a(ChunkCoordinates chunkcoordinates, int i0, int i1, int i2, int i3, int i4, int i5, Map map, String s0, String s1, World world) {
         if (this.a.isEmpty()) {
             return null;
-        } else {
+        }
+        else {
             Object object = new ArrayList();
             boolean flag0 = i2 < 0;
             boolean flag1 = s0 != null && s0.startsWith("!");
@@ -829,7 +849,8 @@ public abstract class ServerConfigurationManager {
             } while (i0 <= ((Integer) entry.getValue()).intValue() || flag0);
 
             return false;
-        } else {
+        }
+        else {
             return true;
         }
     }

@@ -10,6 +10,7 @@ import net.canarymod.api.inventory.CanaryItem;
 import net.canarymod.api.inventory.CanaryPlayerInventory;
 import net.canarymod.api.inventory.EnderChestInventory;
 import net.canarymod.api.inventory.PlayerInventory;
+import net.canarymod.api.nbt.CanaryCompoundTag;
 import net.canarymod.api.packet.CanaryPacket;
 import net.canarymod.api.world.position.Location;
 import net.canarymod.hook.player.EntityRightClickHook;
@@ -595,12 +596,6 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
             this.a.a(nbttaglist1);
         }
-
-        // CanaryMod: Check if this is the player's first time and if the date/time needs saved
-        if (!metadata.containsKey("FirstJoin")) {
-            metadata.put("FirstJoin", DateUtils.longToDateTime(System.currentTimeMillis()));
-        }
-        //
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -1614,5 +1609,12 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     public CanaryHuman getCanaryHuman() {
         return (CanaryHuman) entity;
     }
-    //
+
+    protected void initializeNewMeta() {
+        if (metadata == null) {
+            metadata = new CanaryCompoundTag("Canary");
+            metadata.put("FirstJoin", DateUtils.longToDateTime(System.currentTimeMillis()));
+            metadata.put("TimePlayed", 1L); // Initialize to 1
+        }
+    }
 }
