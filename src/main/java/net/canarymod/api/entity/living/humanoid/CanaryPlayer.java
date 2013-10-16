@@ -353,6 +353,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public boolean safeHasPermission(String permission) {
+        if(Canary.ops().isOpped(getName())) {
+            return true;
+        }
         // If player has the permission set, use its personal permissions
         if (permissions.pathExists(permission)) {
             return permissions.queryPermission(permission);
