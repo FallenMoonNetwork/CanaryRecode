@@ -1,12 +1,5 @@
 package net.canarymod.api.entity.living.humanoid;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import net.canarymod.Canary;
 import net.canarymod.MathHelp;
 import net.canarymod.ToolBox;
@@ -65,6 +58,13 @@ import net.minecraft.server.Packet201PlayerInfo;
 import net.minecraft.server.Packet202PlayerAbilities;
 import net.minecraft.server.WorldSettings;
 import net.visualillusionsent.utils.StringUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Canary Player wrapper.
@@ -315,6 +315,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public boolean hasPermission(String permission) {
+        if(Canary.ops().isOpped(getName())) {
+            return true;
+        }
         PermissionCheckHook hook = new PermissionCheckHook(permission, this, false);
         // If player has the permission set, use its personal permissions
         if (permissions.pathExists(permission)) {
@@ -350,6 +353,9 @@ public class CanaryPlayer extends CanaryHuman implements Player {
      */
     @Override
     public boolean safeHasPermission(String permission) {
+        if(Canary.ops().isOpped(getName())) {
+            return true;
+        }
         // If player has the permission set, use its personal permissions
         if (permissions.pathExists(permission)) {
             return permissions.queryPermission(permission);
