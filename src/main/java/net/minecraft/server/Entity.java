@@ -46,7 +46,7 @@ public abstract class Entity {
     public boolean G;
     public boolean H;
     public boolean I;
-    public boolean J;
+    public boolean J; // Motion Changed
     protected boolean K;
     public boolean L;
     public boolean M;
@@ -175,15 +175,20 @@ public abstract class Entity {
         f2 = f0 % 2.0F;
         if ((double) f2 < 0.375D) {
             this.at = EnumEntitySize.a;
-        } else if ((double) f2 < 0.75D) {
+        }
+        else if ((double) f2 < 0.75D) {
             this.at = EnumEntitySize.b;
-        } else if ((double) f2 < 1.0D) {
+        }
+        else if ((double) f2 < 1.0D) {
             this.at = EnumEntitySize.c;
-        } else if ((double) f2 < 1.375D) {
+        }
+        else if ((double) f2 < 1.375D) {
             this.at = EnumEntitySize.d;
-        } else if ((double) f2 < 1.75D) {
+        }
+        else if ((double) f2 < 1.75D) {
             this.at = EnumEntitySize.e;
-        } else {
+        }
+        else {
             this.at = EnumEntitySize.f;
         }
     }
@@ -235,7 +240,8 @@ public abstract class Entity {
 
                         if (this.q.t.i == -1) {
                             b0 = 0;
-                        } else {
+                        }
+                        else {
                             b0 = -1;
                         }
 
@@ -244,7 +250,8 @@ public abstract class Entity {
 
                     this.ap = false;
                 }
-            } else {
+            }
+            else {
                 if (this.aq > 0) {
                     this.aq -= 4;
                 }
@@ -276,13 +283,15 @@ public abstract class Entity {
         this.I();
         if (this.q.I) {
             this.d = 0;
-        } else if (this.d > 0) {
+        }
+        else if (this.d > 0) {
             if (this.ag) {
                 this.d -= 4;
                 if (this.d < 0) {
                     this.d = 0;
                 }
-            } else {
+            }
+            else {
                 if (this.d % 20 == 0) {
                     // CanaryMod: call DamageHook (FireTick)
                     DamageHook hook = (DamageHook) new DamageHook(null, entity, new CanaryDamageSource(DamageSource.b), 1.0F).call();
@@ -359,7 +368,8 @@ public abstract class Entity {
             this.u = (this.E.a + this.E.d) / 2.0D;
             this.v = this.E.b + (double) this.N - (double) this.X;
             this.w = (this.E.c + this.E.f) / 2.0D;
-        } else {
+        }
+        else {
             this.q.C.a("move");
             this.X *= 0.4F;
             double d3 = this.u;
@@ -388,9 +398,11 @@ public abstract class Entity {
                 for (d9 = 0.05D; d0 != 0.0D && this.q.a(this, this.E.c(d0, -1.0D, 0.0D)).isEmpty(); d6 = d0) {
                     if (d0 < d9 && d0 >= -d9) {
                         d0 = 0.0D;
-                    } else if (d0 > 0.0D) {
+                    }
+                    else if (d0 > 0.0D) {
                         d0 -= d9;
-                    } else {
+                    }
+                    else {
                         d0 += d9;
                     }
                 }
@@ -398,9 +410,11 @@ public abstract class Entity {
                 for (; d2 != 0.0D && this.q.a(this, this.E.c(0.0D, -1.0D, d2)).isEmpty(); d8 = d2) {
                     if (d2 < d9 && d2 >= -d9) {
                         d2 = 0.0D;
-                    } else if (d2 > 0.0D) {
+                    }
+                    else if (d2 > 0.0D) {
                         d2 -= d9;
-                    } else {
+                    }
+                    else {
                         d2 += d9;
                     }
                 }
@@ -408,17 +422,21 @@ public abstract class Entity {
                 while (d0 != 0.0D && d2 != 0.0D && this.q.a(this, this.E.c(d0, -1.0D, d2)).isEmpty()) {
                     if (d0 < d9 && d0 >= -d9) {
                         d0 = 0.0D;
-                    } else if (d0 > 0.0D) {
+                    }
+                    else if (d0 > 0.0D) {
                         d0 -= d9;
-                    } else {
+                    }
+                    else {
                         d0 += d9;
                     }
 
                     if (d2 < d9 && d2 >= -d9) {
                         d2 = 0.0D;
-                    } else if (d2 > 0.0D) {
+                    }
+                    else if (d2 > 0.0D) {
                         d2 -= d9;
-                    } else {
+                    }
+                    else {
                         d2 += d9;
                     }
 
@@ -520,7 +538,8 @@ public abstract class Entity {
                     d2 = 0.0D;
                     d1 = 0.0D;
                     d0 = 0.0D;
-                } else {
+                }
+                else {
                     d1 = (double) (-this.Y);
 
                     for (i2 = 0; i2 < list.size(); ++i2) {
@@ -603,7 +622,8 @@ public abstract class Entity {
 
             try {
                 this.D();
-            } catch (Throwable throwable) {
+            }
+            catch (Throwable throwable) {
                 CrashReport crashreport = CrashReport.a(throwable, "Checking entity tile collision");
                 CrashReportCategory crashreportcategory = crashreport.a("Entity being checked for collision");
 
@@ -621,7 +641,8 @@ public abstract class Entity {
                         this.d(8);
                     }
                 }
-            } else if (this.d <= 0) {
+            }
+            else if (this.d <= 0) {
                 this.d = -this.ad;
             }
 
@@ -651,7 +672,8 @@ public abstract class Entity {
                         if (i9 > 0) {
                             try {
                                 Block.s[i9].a(this.q, i6, i7, i8, this);
-                            } catch (Throwable throwable) {
+                            }
+                            catch (Throwable throwable) {
                                 CrashReport crashreport = CrashReport.a(throwable, "Colliding entity with tile");
                                 CrashReportCategory crashreportcategory = crashreport.a("Tile being collided with");
 
@@ -671,7 +693,8 @@ public abstract class Entity {
         if (this.q.a(i0, i1 + 1, i2) == Block.aX.cF) {
             stepsound = Block.aX.cS;
             this.a(stepsound.e(), stepsound.c() * 0.15F, stepsound.d());
-        } else if (!Block.s[i3].cU.d()) {
+        }
+        else if (!Block.s[i3].cU.d()) {
             this.a(stepsound.e(), stepsound.c() * 0.15F, stepsound.d());
         }
     }
@@ -690,7 +713,8 @@ public abstract class Entity {
                 this.b(this.T);
                 this.T = 0.0F;
             }
-        } else if (d0 < 0.0D) {
+        }
+        else if (d0 < 0.0D) {
             this.T = (float) ((double) this.T - d0);
         }
     }
@@ -760,7 +784,8 @@ public abstract class Entity {
             this.T = 0.0F;
             this.ae = true;
             this.d = 0;
-        } else {
+        }
+        else {
             this.ae = false;
         }
 
@@ -779,7 +804,8 @@ public abstract class Entity {
             float f1 = (float) (i1 + 1) - f0;
 
             return d0 < (double) f1;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -821,7 +847,8 @@ public abstract class Entity {
             int i2 = MathHelper.c(this.v - (double) this.N + d0);
 
             return this.q.q(i0, i2, i1);
-        } else {
+        }
+        else {
             return 0.0F;
         }
     }
@@ -937,7 +964,8 @@ public abstract class Entity {
     public boolean a(DamageSource damagesource, float f0) {
         if (this.ar()) {
             return false;
-        } else {
+        }
+        else {
             this.K();
             return false;
         }
@@ -961,7 +989,8 @@ public abstract class Entity {
             nbttagcompound.a("id", s0);
             this.e(nbttagcompound);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -973,16 +1002,17 @@ public abstract class Entity {
             nbttagcompound.a("id", s0);
             this.e(nbttagcompound);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
 
     public void e(NBTTagCompound nbttagcompound) {
         try {
-            nbttagcompound.a("Pos", (NBTBase) this.a(new double[]{this.u, this.v + (double) this.X, this.w}));
-            nbttagcompound.a("Motion", (NBTBase) this.a(new double[]{this.x, this.y, this.z}));
-            nbttagcompound.a("Rotation", (NBTBase) this.a(new float[]{this.A, this.B}));
+            nbttagcompound.a("Pos", (NBTBase) this.a(new double[]{ this.u, this.v + (double) this.X, this.w }));
+            nbttagcompound.a("Motion", (NBTBase) this.a(new double[]{ this.x, this.y, this.z }));
+            nbttagcompound.a("Rotation", (NBTBase) this.a(new float[]{ this.A, this.B }));
             nbttagcompound.a("FallDistance", this.T);
             nbttagcompound.a("Fire", (short) this.d);
             nbttagcompound.a("Air", (short) this.al());
@@ -1006,7 +1036,8 @@ public abstract class Entity {
                     nbttagcompound.a("Riding", (NBTBase) nbttagcompound1);
                 }
             }
-        } catch (Throwable throwable) {
+        }
+        catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.a(throwable, "Saving entity NBT");
             CrashReportCategory crashreportcategory = crashreport.a("Entity being saved");
 
@@ -1061,7 +1092,8 @@ public abstract class Entity {
             if (this.P()) {
                 this.b(this.u, this.v, this.w);
             }
-        } catch (Throwable throwable) {
+        }
+        catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.a(throwable, "Loading entity NBT");
             CrashReportCategory crashreportcategory = crashreport.a("Entity being loaded");
 
@@ -1124,7 +1156,8 @@ public abstract class Entity {
     public EntityItem a(ItemStack itemstack, float f0) {
         if (itemstack.b == 0) {
             return null;
-        } else {
+        }
+        else {
             EntityItem entityitem = new EntityItem(this.q, this.u, this.v + (double) f0, this.w, itemstack);
 
             entityitem.b = 10;
@@ -1165,7 +1198,8 @@ public abstract class Entity {
     public void V() {
         if (this.o.M) {
             this.o = null;
-        } else {
+        }
+        else {
             this.x = 0.0D;
             this.y = 0.0D;
             this.z = 0.0D;
@@ -1240,7 +1274,8 @@ public abstract class Entity {
             }
 
             this.o = null;
-        } else {
+        }
+        else {
             if (this.o != null) {
                 this.o.n = null;
             }
@@ -1269,7 +1304,8 @@ public abstract class Entity {
     public void ab() {
         if (this.ao > 0) {
             this.ao = this.ac();
-        } else {
+        }
+        else {
             double d0 = this.r - this.u;
             double d1 = this.t - this.w;
 
@@ -1337,7 +1373,8 @@ public abstract class Entity {
 
         if (flag0) {
             this.ah.b(0, Byte.valueOf((byte) (b0 | 1 << i0)));
-        } else {
+        }
+        else {
             this.ah.b(0, Byte.valueOf((byte) (b0 & ~(1 << i0))));
         }
     }
@@ -1372,7 +1409,8 @@ public abstract class Entity {
 
         if (list.isEmpty() && !this.q.v(i0, i1, i2)) {
             return false;
-        } else {
+        }
+        else {
             boolean flag0 = !this.q.v(i0 - 1, i1, i2);
             boolean flag1 = !this.q.v(i0 + 1, i1, i2);
             boolean flag2 = !this.q.v(i0, i1 - 1, i2);
@@ -1473,7 +1511,7 @@ public abstract class Entity {
     }
 
     public String toString() {
-        return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", new Object[]{this.getClass().getSimpleName(), this.an(), Integer.valueOf(this.k), this.q == null ? "~NULL~" : this.q.N().k(), Double.valueOf(this.u), Double.valueOf(this.v), Double.valueOf(this.w)});
+        return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", new Object[]{ this.getClass().getSimpleName(), this.an(), Integer.valueOf(this.k), this.q == null ? "~NULL~" : this.q.N().k(), Double.valueOf(this.u), Double.valueOf(this.v), Double.valueOf(this.w) });
     }
 
     public boolean ar() {
@@ -1560,9 +1598,9 @@ public abstract class Entity {
         crashreportcategory.a("Entity Type", (Callable) (new CallableEntityType(this)));
         crashreportcategory.a("Entity ID", Integer.valueOf(this.k));
         crashreportcategory.a("Entity Name", (Callable) (new CallableEntityName(this)));
-        crashreportcategory.a("Entity\'s Exact location", String.format("%.2f, %.2f, %.2f", new Object[]{Double.valueOf(this.u), Double.valueOf(this.v), Double.valueOf(this.w)}));
+        crashreportcategory.a("Entity\'s Exact location", String.format("%.2f, %.2f, %.2f", new Object[]{ Double.valueOf(this.u), Double.valueOf(this.v), Double.valueOf(this.w) }));
         crashreportcategory.a("Entity\'s Block location", CrashReportCategory.a(MathHelper.c(this.u), MathHelper.c(this.v), MathHelper.c(this.w)));
-        crashreportcategory.a("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", new Object[]{Double.valueOf(this.x), Double.valueOf(this.y), Double.valueOf(this.z)}));
+        crashreportcategory.a("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", new Object[]{ Double.valueOf(this.x), Double.valueOf(this.y), Double.valueOf(this.z) }));
     }
 
     public UUID aw() {
@@ -1581,7 +1619,8 @@ public abstract class Entity {
      * Applies this Entities Properties to an NBT Tag. Initially implemented for
      * getting properties for MobSpawnerEntry.
      *
-     * @param tag tag to apply this entities properties to.
+     * @param tag
+     *         tag to apply this entities properties to.
      */
     public void getNBTProperties(NBTTagCompound tag) {
         this.b(tag);
@@ -1620,15 +1659,18 @@ public abstract class Entity {
         if (dimensionTo == -1) {
             x /= adjust;
             z /= adjust;
-        } else if (dimensionTo == 0) {
+        }
+        else if (dimensionTo == 0) {
             x *= adjust;
             z *= adjust;
-        } else {
+        }
+        else {
             ChunkCoordinates ochunkcoordinates;
 
             if (dimensionTo == 1) {
                 ochunkcoordinates = oworldserverTo.K(); // XXX
-            } else {
+            }
+            else {
                 ochunkcoordinates = oworldserverTo.l();
             }
             x = (double) ochunkcoordinates.a;

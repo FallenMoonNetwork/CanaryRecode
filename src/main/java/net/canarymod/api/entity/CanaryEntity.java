@@ -1,6 +1,5 @@
 package net.canarymod.api.entity;
 
-import java.util.UUID;
 import net.canarymod.api.entity.living.Golem;
 import net.canarymod.api.entity.living.LivingBase;
 import net.canarymod.api.entity.living.animal.EntityAnimal;
@@ -17,6 +16,8 @@ import net.canarymod.api.world.position.Location;
 import net.canarymod.api.world.position.Position;
 import net.canarymod.api.world.position.Vector3D;
 import net.minecraft.server.NBTTagCompound;
+
+import java.util.UUID;
 
 /**
  * Entity Wrapper
@@ -107,19 +108,32 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public void setMotionX(double motionX) {
         entity.x = motionX;
-        entity.I = true;
+        entity.J = true;
     }
 
     @Override
     public void setMotionY(double motionY) {
         entity.y = motionY;
-        entity.I = true;
+        entity.J = true;
     }
 
     @Override
     public void setMotionZ(double motionZ) {
         entity.z = motionZ;
-        entity.I = true;
+        entity.J = true;
+    }
+
+    @Override
+    public Vector3D getMotion() {
+        return new Vector3D(getMotionX(), getMotionY(), getMotionZ());
+    }
+
+    @Override
+    public void moveEntity(double motionX, double motionY, double motionZ) {
+        entity.x = motionX;
+        entity.y = motionY;
+        entity.z = motionZ;
+        entity.J = true;
     }
 
     @Override
@@ -278,11 +292,6 @@ public abstract class CanaryEntity implements Entity {
     }
 
     @Override
-    public Vector3D getMotion() {
-        return new Vector3D(getMotionX(), getMotionY(), getMotionZ());
-    }
-
-    @Override
     public Vector3D getForwardVector() {
         return Vector3D.forward;
     }
@@ -328,9 +337,7 @@ public abstract class CanaryEntity implements Entity {
         return null;
     }
 
-    /**
-     * Destroys this entity
-     */
+    /** Destroys this entity */
     @Override
     public void destroy() {
         entity.x();
@@ -381,11 +388,6 @@ public abstract class CanaryEntity implements Entity {
     @Override
     public CompoundTag getMetaData() {
         return entity.getMetaData();
-    }
-
-    @Override
-    public void moveEntity(double motionX, double motionY, double motionZ) {
-        entity.d(motionX, motionY, motionZ);
     }
 
     /**
