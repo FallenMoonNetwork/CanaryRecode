@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import net.canarymod.api.nbt.CanaryCompoundTag;
+import net.canarymod.api.nbt.CompoundTag;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,7 +60,7 @@ public class TileEntity {
     }
 
     public void b(NBTTagCompound nbttagcompound) {
-        String s0 = (String)b.get(this.getClass());
+        String s0 = (String) b.get(this.getClass());
 
         if (s0 == null) {
             throw new RuntimeException(this.getClass() + " is missing a mapping! This is a bug!");
@@ -82,10 +83,10 @@ public class TileEntity {
         TileEntity tileentity = null;
 
         try {
-            Class oclass0 = (Class)a.get(nbttagcompound.i("id"));
+            Class oclass0 = (Class) a.get(nbttagcompound.i("id"));
 
             if (oclass0 != null) {
-                tileentity = (TileEntity)oclass0.newInstance();
+                tileentity = (TileEntity) oclass0.newInstance();
             }
         }
         catch (Exception exception) {
@@ -154,11 +155,17 @@ public class TileEntity {
     }
 
     public void a(CrashReportCategory crashreportcategory) {
-        crashreportcategory.a("Name", (Callable)(new CallableTileEntityName(this)));
+        crashreportcategory.a("Name", (Callable) (new CallableTileEntityName(this)));
         CrashReportCategory.a(crashreportcategory, this.l, this.m, this.n, this.q().cF, this.p());
-        crashreportcategory.a("Actual block type", (Callable)(new CallableTileEntityID(this)));
-        crashreportcategory.a("Actual block data value", (Callable)(new CallableTileEntityData(this)));
+        crashreportcategory.a("Actual block type", (Callable) (new CallableTileEntityID(this)));
+        crashreportcategory.a("Actual block data value", (Callable) (new CallableTileEntityData(this)));
     }
+
+    // CanaryMod:
+    public CompoundTag getMetaTag() {
+        return meta;
+    }
+    //
 
     static Map t() {
         return b;
