@@ -1,9 +1,5 @@
 package net.canarymod.api.world;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.canarymod.ToolBox;
 import net.canarymod.WorldCacheTimer;
 import net.canarymod.api.CanaryEntityTracker;
 import net.canarymod.api.GameMode;
@@ -57,14 +53,15 @@ import net.minecraft.server.WorldInfo;
 import net.minecraft.server.WorldServer;
 import net.visualillusionsent.utils.TaskManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CanaryWorld implements World {
     private WorldServer world;
     private DimensionType type;
     public long[] nanoTicks;
     private WorldConfiguration wrld_cfg;
-    /**
-     * The world name
-     */
+    /** The world name */
     private String name, fqName;
 
     public CanaryWorld(String name, WorldServer dimension, DimensionType type) {
@@ -493,7 +490,8 @@ public class CanaryWorld implements World {
         // Thanks to Bukkit for figuring out these numbers
         if (thundering) {
             setThunderTime(world.s.nextInt(12000) + 3600);
-        } else {
+        }
+        else {
             setThunderTime(world.s.nextInt(168000) + 12000);
         }
 
@@ -512,7 +510,8 @@ public class CanaryWorld implements World {
         // Thanks to Bukkit for figuring out these numbers
         if (downfall) {
             setRainTime(world.s.nextInt(12000) + 3600);
-        } else {
+        }
+        else {
             setRainTime(world.s.nextInt(168000) + 12000);
         }
     }
@@ -553,13 +552,18 @@ public class CanaryWorld implements World {
     }
 
     @Override
-    public void makeExplosion(Entity exploder, double x, double y, double z, float power, boolean damageBlocks) {
-        world.a(((CanaryEntity) exploder).getHandle(), x, y, z, power, damageBlocks);
+    public void makeExplosion(Entity exploder, double x, double y, double z, float power, boolean smoke) {
+        if (exploder == null) {
+            world.a((net.minecraft.server.Entity) null, x, y, z, power, smoke);
+        }
+        else {
+            world.a(((CanaryEntity) exploder).getHandle(), x, y, z, power, smoke);
+        }
     }
 
     @Override
-    public void makeExplosion(Entity exploder, Position position, float power, boolean damageBlocks) {
-        world.a(((CanaryEntity) exploder).getHandle(), position.getX(), position.getY(), position.getZ(), power, damageBlocks);
+    public void makeExplosion(Entity exploder, Position position, float power, boolean smoke) {
+        makeExplosion(exploder, position.getX(), position.getY(), position.getZ(), power, smoke);
     }
 
     @Override
@@ -633,33 +637,47 @@ public class CanaryWorld implements World {
         if (tileentity != null) {
             if (tileentity instanceof TileEntityBrewingStand) {
                 return ((TileEntityBrewingStand) tileentity).getCanaryBrewingStand();
-            } else if (tileentity instanceof TileEntityBeacon) {
+            }
+            else if (tileentity instanceof TileEntityBeacon) {
                 return ((TileEntityBeacon) tileentity).getCanaryBeacon();
-            } else if (tileentity instanceof TileEntityChest) {
+            }
+            else if (tileentity instanceof TileEntityChest) {
                 return ((TileEntityChest) tileentity).getCanaryChest();
-            } else if (tileentity instanceof TileEntityCommandBlock) {
+            }
+            else if (tileentity instanceof TileEntityCommandBlock) {
                 return ((TileEntityCommandBlock) tileentity).getCanaryCommandBlock();
-            } else if (tileentity instanceof TileEntityComparator) {
+            }
+            else if (tileentity instanceof TileEntityComparator) {
                 return ((TileEntityComparator) tileentity).getCanaryComparator();
-            } else if (tileentity instanceof TileEntityDaylightDetector) {
+            }
+            else if (tileentity instanceof TileEntityDaylightDetector) {
                 return ((TileEntityDaylightDetector) tileentity).getCanaryDaylightDetector();
-            } else if (tileentity instanceof TileEntityDropper) { // Should come before Dispenser since its an instance of Dispenser too
+            }
+            else if (tileentity instanceof TileEntityDropper) { // Should come before Dispenser since its an instance of Dispenser too
                 return ((TileEntityDropper) tileentity).getCanaryDropper();
-            } else if (tileentity instanceof TileEntityDispenser) {
+            }
+            else if (tileentity instanceof TileEntityDispenser) {
                 return ((TileEntityDispenser) tileentity).getCanaryDispenser();
-            } else if (tileentity instanceof TileEntityFurnace) {
+            }
+            else if (tileentity instanceof TileEntityFurnace) {
                 return ((TileEntityFurnace) tileentity).getCanaryFurnace();
-            } else if (tileentity instanceof TileEntityHopper) {
+            }
+            else if (tileentity instanceof TileEntityHopper) {
                 return ((TileEntityHopper) tileentity).getCanaryHopper();
-            } else if (tileentity instanceof TileEntityMobSpawner) {
+            }
+            else if (tileentity instanceof TileEntityMobSpawner) {
                 return ((TileEntityMobSpawner) tileentity).getCanaryMobSpawner();
-            } else if (tileentity instanceof TileEntityNote) {
+            }
+            else if (tileentity instanceof TileEntityNote) {
                 return ((TileEntityNote) tileentity).getCanaryNoteBlock();
-            } else if (tileentity instanceof TileEntityRecordPlayer) {
+            }
+            else if (tileentity instanceof TileEntityRecordPlayer) {
                 return ((TileEntityRecordPlayer) tileentity).getCanaryJukebox();
-            } else if (tileentity instanceof TileEntitySign) {
+            }
+            else if (tileentity instanceof TileEntitySign) {
                 return ((TileEntitySign) tileentity).getCanarySign();
-            } else if (tileentity instanceof TileEntitySkull) {
+            }
+            else if (tileentity instanceof TileEntitySkull) {
                 return ((TileEntitySkull) tileentity).getCanarySkull();
             }
         }
