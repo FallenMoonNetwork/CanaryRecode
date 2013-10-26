@@ -7,7 +7,7 @@ import net.minecraft.server.ItemStack;
 
 /**
  * Inventory implementation
- * 
+ *
  * @author Jason (darkdiplomat)
  */
 public abstract class CanaryEntityInventory implements Inventory {
@@ -365,19 +365,24 @@ public abstract class CanaryEntityInventory implements Inventory {
     @Override
     public boolean insertItem(Item item) {
         int amount = item.getAmount();
-        Item itemExisting;
+        Item itemExisting = null;
         int maxAmount = item.getMaxAmount();
 
         while (amount > 0) {
+
             // Get an existing item with at least 1 spot free
-            itemExisting = this.getItem(item.getId(), maxAmount - 1, (short) item.getDamage());
+            for (Item i : getContents()) {
+                if (i != null && item.getId() == i.getId() && item.getDamage() == i.getDamage()
+                        &&  i.getAmount() < i.getMaxAmount()) {
+                    itemExisting = i;
+                }
+            }
 
             // Add the items to the existing stack of items
             if (itemExisting != null && (!item.isEnchanted() || Configuration.getServerConfig().allowEnchantmentStacking())) {
                 // Add as much items as possible to the stack
                 int k = Math.min(maxAmount - itemExisting.getAmount(), item.getAmount());
-
-                this.setSlot(item.getId(), itemExisting.getAmount() + k, (short) item.getDamage(), itemExisting.getSlot());
+                itemExisting.setAmount(itemExisting.getAmount() + k);
                 amount -= k;
                 continue;
             }
@@ -388,7 +393,7 @@ public abstract class CanaryEntityInventory implements Inventory {
                 CanaryCompoundTag nbt = new CanaryCompoundTag("");
 
                 ((CanaryItem) item).getHandle().b(nbt.getHandle());
-                CanaryItem tempItem = new CanaryItem(item.getId(), amount, -1, item.getDamage());
+                CanaryItem tempItem = new CanaryItem(item.getId(), amount, item.getDamage(), -1);
 
                 tempItem.getHandle().c(nbt.getHandle());
                 this.setSlot(eslot, tempItem);
