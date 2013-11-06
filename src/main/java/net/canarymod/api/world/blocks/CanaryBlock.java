@@ -134,7 +134,11 @@ public class CanaryBlock implements Block {
 
     @Override
     public BlockMaterial getBlockMaterial() {
-        return net.minecraft.server.Block.s[type].cU.getCanaryBlockMaterial();
+        if (net.minecraft.server.Block.s[type] != null ) {
+          return net.minecraft.server.Block.s[type].cU.getCanaryBlockMaterial();
+        } else {
+          return null;
+        }
     }
 
     @Override
